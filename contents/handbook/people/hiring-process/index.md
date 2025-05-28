@@ -198,15 +198,15 @@ Candidates who are unsuccessful at this stage should receive a short personalize
 
 ### 2. Technical interview with the Hiring Manager
 
-In this round, the candidate will meet a future team members. This round is usually 45-60 minutes and will focus on a mix of experience and technical skills. Please check the specific hiring process for each team for more details.  
+In this round, the candidate will meet a future team member. This round is usually 45-60 minutes and will focus on a mix of experience and technical skills. Please check the specific hiring process for each team for more details.  
 
 As a rule of thumb, everyone interviewing must feel a genuine sense of excitement about working with the candidate. Again - if it is not a _definite yes_, then it's a _no_. Ask yourself - does this candidate raise the bar?
 
-### 3. Small Team interview with James or Tim
+### 3. Small Team interview with an Exec Team Member
 
-This is a call with either James or Tim, depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
+This is a call with either James, Tim, Raquel, or Charles depending on which Small Team they are being hired into. They will probe further on the candidate's motivation, as well as checking for alignment with PostHog's values. 
 
-Candidates who are unsuccessful at this stage should receive a short personalized email with feedback. 
+Candidates who are unsuccessful at this stage should receive a short email with feedback. 
 
 ### 4. PostHog SuperDay
 
@@ -234,7 +234,7 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 *   (One day before the SuperDay) For Product Engineer SuperDays, upload the zip file by going into the the [Git SuperDay task](https://github.com/PostHog/superday-interview-test/blob/main/.github/workflows/generate-full-stack-package.yml) then hover over the "Actions" tab and click on "Generate Full Stack Package" and click on "Run Workflow" then name the file under the candidate's first name. Once the zip file has completed, click into the file and hit the download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone. 
 *           * For the Clickhouse Engineer task, please follow this [task](https://github.com/PostHog/clickhouse-superday) and click on the "Code" button and hit download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone. 
 *   (One day before the SuperDay) For non-technical roles, invite the candidate to a kickoff meeting with the hiring manager at the start of the day and send the candidate the task - aim to send this before the kick-off session so if the candidate has any questions they are able to go through them during the kick-off session. We encourage the candidate to ask questions throughout their SuperDay, but sometimes it is nice to have any questions answered in advance so they can kick off their task appropriately.
-*   It is important for product engineer candidates to be prepped for their check-in call to do some pair-programming with their SuperDay buddy while other non-technical roles in Sales, Onboarding, and Customer Success, the candidates will be running a demo mid-point of their SuperDay. 
+*   It is important for product engineer candidates to be prepped for their check-in call to do a deep dive of their progress so far with their SuperDay buddy while other non-technical roles in Sales, Onboarding, and Customer Success, the candidates will be running a demo mid-point of their SuperDay. 
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 
 > For some roles, we may occasionally set a task that goes over multiple days. For example, we have set Content Marketer tasks that last 3 days in order to create a piece of content. 
