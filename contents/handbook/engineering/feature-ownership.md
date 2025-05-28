@@ -66,7 +66,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Session Analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
-| Settings (personal & project) | Shared Responsibility |  <span class="lemon-tag gh-tag">feature/settings</span> |
+| Settings (personal & project) | Shared responsibility |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SQL Editor | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/sql-editor</span> |
 | SSO | [Team Billing][Team Billing]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
 | Surveys | [Team Surveys][Team Surveys] | <span class="lemon-tag gh-tag">feature/surveys</span> |
