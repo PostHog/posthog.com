@@ -34,8 +34,8 @@ We aim to have a named individual for most areas of the docs. If one doesn't exi
 | &nbsp                                   | **Individual owner** |
 |-----------------------------------------|----------------------|
 | **Integration (SDKs, frameworks, API)** | Ian                  |
-| **Winning with PostHog**                | Danilo               |
-| **PostHog explained (data, tools)**     | Danilo               |
+| **Winning with PostHog**                | Ian                  |
+| **PostHog explained (data, tools)**     | Lior                 |
 | **Resources (migrate, reverse proxy)**  | Ian                  |
 
 #### Products
@@ -43,12 +43,12 @@ We aim to have a named individual for most areas of the docs. If one doesn't exi
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
 | **Product analytics**           | Vincent              |
-| **Web analytics**               | Andy                 |
+| **Web analytics**               | Edwin                 |
 | **Session replay**              | Lior                 |
 | **Feature flags**               | Edwin                |
 | **Experiments**                 | Edwin                 |
 | **Error tracking**              | Ian                  |
-| **Surveys**                     | Andy                 |
+| **Surveys**                     | Lior                 |
 | **LLM observability**           | Ian                  |
 | **Data pipelines**              | Lior                 |
 | **Data warehouse**              | Vincent               |
