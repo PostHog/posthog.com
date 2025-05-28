@@ -1,34 +1,28 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconBolt,
-    IconGraph,
-    IconFlask,
-    IconToggle,
     IconPieChart,
-    IconPeople,
-    IconNotification,
+    IconTarget,
+    IconMouseScrollDown,
+    IconArrowUpLeftDiagonal,
+    IconClock,
+    IconGraph,
+    IconMessage,
     IconRewindPlay,
-    IconAI,
 } from '@posthog/icons'
-import { SQL } from 'components/ProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
 import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
+import { Marquee } from 'components/Products/Marquee'
 import { graphql, useStaticQuery } from 'gatsby'
-import ContentViewer from 'components/ContentViewer'
-import ProductAnalytics from 'components/Home/CodeBlocks/ProductAnalytics'
 import { docsMenu } from '../../../navs'
 import TeamRoadmap from 'components/TeamRoadmap'
 import RecentChange from '../RecentChange'
-import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
-import { Marquee } from 'components/Products/Marquee'
 import CTA from 'components/Home/CTA'
 import Comparison from '../Comparison'
 import { PairsWith } from 'components/Products/PairsWith'
@@ -38,65 +32,84 @@ import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import { FAQ } from 'components/Products/FAQ'
-import Install from '../Install'
-import Slider from 'components/Products/Slider'
-import MobileSlides from 'components/Products/MobileSlides'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
-import Plans from 'components/Pricing/Plans'
-import SideModal from '../../Modal/SideModal'
+import SideModal from 'components/Modal/SideModal'
 import Profile from '../../Team/Profile'
+import TeamMembers from '../TeamMembers'
 
 const product = {
-    slug: 'product-analytics',
-    lowercase: 'product analytics',
-    capitalized: 'Product analytics',
+    slug: 'revenue-analytics',
+    lowercase: 'revenue analytics',
+    capitalized: 'Revenue analytics',
     freeTier: '1,000,000 events',
 }
 
-const team = 'Product Analytics'
-const teamSlug = '/teams/product-analytics'
+const team = 'Revenue Analytics'
+const teamSlug = '/teams/revenue-analytics'
+
+
+// //notes:
+// Create custom revenue funnels
+// Analyze user journeys that lead to purchases
+// Segment users by revenue contribution
+
+const featuresPerRow = 3
+const features = [
+    {
+        title: 'Revenue',
+        description: 'Track revenue for any given period',
+        image: <img src="/images/products/revenue-analytics/revenue-by-period.png" width={420} />,
+        border: true,
+    },
+    {
+        title: 'Paying customers',
+        description: 'See how many paying customers you have',
+        image: <img src="/images/products/revenue-analytics/paying-customers.png" width={420} />,
+        border: true,
+    },
+    {
+        title: 'Revenue per customer',
+        description: 'Keep track of how much each customer is spending on average',
+        image: <img src="/images/products/revenue-analytics/avg-revenue-per-customer.png" width={420} />,
+        border: true,
+    },
+    {
+        title: 'Set revenue goals',
+        description: 'Set revenue goals and see how you\'re doing',
+        image: <img src="/images/products/revenue-analytics/revenue-goals.png" width={420} />,
+        border: true,
+    },
+    
+]
 
 const subfeaturesItemCount = 4
 const subfeatures = [
     {
-        icon: <IconBolt />,
-        title: 'Autocapture',
-        description:
-            'Add PostHog.js to your website or web app to track all event data and retroactively define events',
+        title: 'Revenue funnels',
+        description: 'Create custom revenue funnels',
+        icon: <IconTarget />,
     },
     {
-        icon: <IconPieChart />,
-        title: 'Data visualization',
-        description: 'Filter data by person property, group data, and use formulas in queries',
+        title: 'Journey analysis',
+        description: 'Analyze user journeys that lead to purchases',
+        icon: <IconMouseScrollDown />,
     },
     {
-        icon: <SQL />,
-        title: 'SQL',
-        description: 'Use PostHog’s filtering interface or switch into SQL mode for more powerful querying',
+        title: 'Segment users',
+        description: 'Segment users by revenue contribution',
+        icon: <IconArrowUpLeftDiagonal />,
     },
     {
-        icon: <IconNotification />,
-        title: 'Dashboards and insight subscriptions',
-        description: 'Share insights with teams, and get updates when results change',
-    },
-    {
-        icon: <IconPeople />,
-        title: 'Group analytics',
-        description: 'Analyze how any group of people (like an organization) use your product',
-    },
-    {
-        icon: <IconAI />,
-        title: 'LLM observability',
-        description: 'Integrate with existing monitoring tools and track latency, cost, and model performance',
+        title: 'Need or delete?',
+        description: 'Need or delete?',
+        icon: <IconClock />,
     },
 ]
 
 const questions = [
     {
-        question: 'How do I calculate new vs returning users?',
-        url: '/tutorials/track-new-returning-users',
+        question: 'What is my ARR, and how is it changing?',
     },
     {
         question: 'What’s my churn rate? / How can I lower my churn rate?',
@@ -111,596 +124,142 @@ const questions = [
         url: '/tutorials/feature-retention',
     },
     {
-        question: 'How do I track ad conversion?',
-        url: '/tutorials/performance-marketing#tracking-conversion-from-traffic-to-signups',
+        question: 'What is my net revenue retention, or gross customer churn? How is it when I break down by larger vs smaller ticket sizes, or by sector?',
     },
     {
-        question: 'How can I find my power users? / What are my power users doing differently?',
-        url: '/tutorials/power-users#identifying-your-power-user',
+        question: 'What are the biggest gainers and losers in the last month?',
     },
     {
-        question: 'Where do my users spend the most time on?',
-        url: '/tutorials/session-metrics',
+        question: 'Who’s likely to churn next month and needs to be contacted?',
     },
     {
-        question: 'How do I get insights about my data using regex?',
-        url: '/tutorials/regex-basics',
-    },
-    {
-        question: 'How are my metrics changing over time?',
-    },
-    {
-        question: 'How does the usage of two feature compare?',
-    },
-    {
-        question: "How does last week's release affect engagement?",
-    },
-    {
-        question: 'Which step(s) have the highest friction or time to convert?',
-    },
-    {
-        question: 'What long-term patterns are we seeing?',
-    },
-    {
-        question: 'Which cohorts can we find from usage patterns?',
-    },
-    {
-        question: 'How are changes improving my activation flow?',
-        url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
-    },
-    {
-        question: 'How do event properties change over time?',
-    },
-    {
-        question: 'How is seasonality affecting conversion?',
-    },
-    {
-        question: 'How do far are my users scrolling down my app?',
-        url: '/tutorials/scroll-depth',
-    },
-    {
-        question: 'How to I track performance marketing?',
-        url: '/tutorials/performance-marketing',
-    },
-    {
-        question: 'How are my ads converting to paying customers?',
-    },
-    {
-        question: 'Which parts of our product are people using?',
-    },
-    {
-        question: 'Where are users getting stuck?',
-    },
-    {
-        question: 'How do I measure growth loops?',
-        url: '/blog/growth-loops#measuring-your-growth-loop',
-    },
-    {
-        question: 'What events correlate to success in my product?',
-    },
-    {
-        question: 'What properties correlate to success in my product?',
-    },
-    {
-        question: 'How many users return to use my product each day?',
-        url: '/tutorials/track-new-returning-users#calculating-returning-users',
-    },
-    {
-        question: 'How many users return to use my product each week?',
-        url: '/tutorials/track-new-returning-users',
-    },
-    {
-        question: 'What features do users come back to use?',
+        question: 'How does our growth compare to others?',
     },
 ]
+
 
 const faqs = [
     {
-        question: 'How do I know what my event volume is?',
+        question: 'Add questions HERE',
         children:
-            "The easiest way is to sign up for the Free plan - no credit card required. You'll get an accurate volume projection after just a few days.",
+            "add answers here",
     },
-    {
-        question: 'Do I pay anything for stored events?',
-        children:
-            'No, you only pay the fee per captured event in a given month (i.e. you only pay when each event is first received). There are no additional costs or fees.',
-    },
-    {
-        question: 'How long do you retain event data?',
-        children:
-            'Data is guaranteed to be retained for 7 years on any paid plan and 1 year on a free plan. After 1 year, data may be moved into cold storage so queries may run more slowly.',
-    },
-    {
-        question: 'Is there a free trial on paid plans?',
-        children:
-            'We have a generous free tier on every paid plan so you can try out the features before paying any money. (You\'ll need to enter your credit card info, but you can set a billing limit). If you have additional needs, such as enterprise features, please <a href="/talk-to-a-human">get in touch</a>.',
-    },
-    {
-        question: 'What currency are your prices in?',
-        children: 'All prices are in US Dollars (USD), excluding taxes.',
-    },
-    {
-        question: 'Do you offer a discount for non-profits?',
-        children:
-            'Yes in most cases - 25% off any plan. Create your account, then email <a href="mailto:sales@posthog.com?subject=Non-profit%20discount">sales@posthog.com</a> from the same email address with some basic details on your organization. We will then apply a discount.',
-    },
-    {
-        question: 'Are there any minimums or annual commitments?',
-        children:
-            'Nope. We can, however, offer annual commitments (for example, to maintain pricing) if you need them as part of an enterprise agreement.',
-    },
+  
 ]
 
-const comparisonColumnCount = 6
+const comparisonColumnCount = 4
 const comparison = [
     {
-        feature: '<strong>Funnels</strong>',
+        feature: 'Pre-configured dashboards',
         companies: {
-            Amplitude: '',
-            Mixpanel: '',
-            Heap: '',
-            Pendo: '',
-            PostHog: '',
-        },
-    },
-    {
-        feature: 'Conversion funnels',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Historical trends',
+        feature: 'Visitor and view tracking',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: false,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Time to convert insights',
+        feature: 'Session and duration tracking',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Sequential step order',
+        feature: 'Bounce rate tracking',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Strict step order',
+        feature: 'Breakdown by GeoIP',
         companies: {
-            Amplitude: true,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Any step order',
+        feature: 'Breakdown by device and browser',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Exclusion events',
+        feature: 'Web Vitals reporting',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
+            Matomo: '<a href="https://matomo.org/guide/reports/seo-web-vitals/">On-Premise only</a>',
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Conversion windows',
+        feature: 'Revenue tracking',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
+            Matomo: true,
+            GA4: true,
+            PostHog:
+                '<span className="text-xs font-semibold text-opacity-60 bg-yellow px-1 py-0.5 rounded-sm uppercase text-primary">Beta</span>',
         },
     },
     {
-        feature: 'Reveal user paths between steps',
+        feature: 'Real-time reporting',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Anomaly detection',
-        companies: {
-            Amplitude: true,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Filter internal and test users',
-        companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Filter by cohort',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Filter by person property',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Breakdown by person property',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Correlation analysis',
-        companies: {
-            Amplitude: true,
-            Mixpanel: false,
-            Heap: true,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: '<strong>Path analysis</strong>',
-        companies: {
-            Amplitude: '',
-            Mixpanel: '',
-            Heap: '',
-            Pendo: '',
-            PostHog: '',
-        },
-    },
-    {
-        feature: 'Reveal paths from a start point',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Reveal paths from an end point',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Reveal paths between points',
-        companies: {
-            Amplitude: false,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Reveal paths within funnels',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Zoom in/out',
-        companies: {
-            Amplitude: true,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
+            Matomo: true,
+            GA4: true,
             PostHog: false,
         },
     },
     {
-        feature: 'Define number of users on path',
+        feature: 'Open source',
         companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
+            Matomo: true,
+            GA4: false,
             PostHog: true,
         },
     },
     {
-        feature: 'Track pageviews',
+        feature: '1st party cookies',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Track custom events',
+        feature: 'Cookieless tracking',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
+            Matomo: true,
+            GA4: true,
             PostHog: true,
         },
     },
     {
-        feature: 'Filter internal and test users',
+        feature: 'HIPAA compliance',
         companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
+            Matomo: true,
+            GA4: false,
             PostHog: true,
         },
     },
     {
-        feature: 'Filter by cohort',
+        feature: 'GDPR compliance',
         companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
+            Matomo: true,
+            GA4: false,
             PostHog: true,
-        },
-    },
-    {
-        feature: 'Filter by events or person property',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Include and exclude Wildcards',
-        companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Exclusion events',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Hide repeating steps',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Regex for path cleaning',
-        companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Max number of steps',
-        companies: {
-            Amplitude: '50',
-            Mixpanel: '120+',
-            Heap: '10',
-            Pendo: '20',
-            PostHog: '20',
-        },
-    },
-    {
-        feature: '<strong>Dashboards</strong>',
-        companies: {
-            Amplitude: '',
-            Mixpanel: '',
-            Heap: '',
-            Pendo: '',
-            PostHog: '',
-        },
-    },
-    {
-        feature: 'User-level permissions',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Project-level permissions',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Dashboard-level permissions',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Share dashboards externally',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Embed dashboards anywhere',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Subscribe to dashboards',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Pinned dashboards',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: '',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Dashboard & insight tags',
-        companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Webhooks',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Annotations',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Private insights',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: false,
-        },
-    },
-    {
-        feature: 'Apps / integrations',
-        companies: {
-            Amplitude: '70+',
-            Mixpanel: '50+',
-            Heap: '40+',
-            Pendo: '40+',
-            PostHog: '50+',
         },
     },
 ]
@@ -708,32 +267,32 @@ const comparison = [
 const pairsWithItemCount = 3
 const PairsWithArray = [
     {
+        icon: <IconGraph />,
+        color: 'blue',
+        product: 'Product analytics',
+        description: 'Need to go deeper than a dashboard? Building your own insights and SQL queries from scratch!',
+        url: '/product-analytics',
+    },
+    {
         icon: <IconRewindPlay />,
-        product: 'Session replay',
         color: 'yellow',
+        product: 'Session replay',
         description:
-            'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
-        url: '/session-replay',
+            "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
+        url: '/session-replays',
     },
     {
-        icon: <IconToggle />,
-        color: 'seagreen',
-        product: 'Feature flags',
-        description: 'See which feature flags were enabled for a user during a session',
-        url: '/feature-flags',
-    },
-    {
-        icon: <IconFlask />,
-        color: 'purple',
-        product: 'Experiments',
+        icon: <IconMessage />,
+        color: 'salmon',
+        product: 'Surveys',
         description:
-            'Filter data down to users within an active experiment, whether part of a control group or a test variant',
-        url: '/experiments',
+            'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
+        url: '/surveys',
     },
 ]
 
-export const ProductProductAnalytics = () => {
-    const { ycombinator, contra, hasura, speakeasy } = useStaticQuery(graphql`
+export const ProductRevenueAnalytics = (): JSX.Element => {
+    const { ycombinator, significa, creatify } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -751,88 +310,73 @@ export const ProductProductAnalytics = () => {
             ycombinator: mdx(slug: { eq: "customers/ycombinator" }) {
                 ...ProductCustomerFragment
             }
-            contra: mdx(slug: { eq: "customers/contra" }) {
+            significa: mdx(slug: { eq: "customers/significa" }) {
                 ...ProductCustomerFragment
             }
-            hasura: mdx(slug: { eq: "customers/hasura" }) {
-                ...ProductCustomerFragment
-            }
-            speakeasy: mdx(slug: { eq: "customers/speakeasy" }) {
+            creatify: mdx(slug: { eq: "customers/creatify" }) {
                 ...ProductCustomerFragment
             }
         }
     `)
+
     const { fullWidthContent } = useLayoutData()
     const [activeProfile, setActiveProfile] = useState(false)
+
     return (
         <>
             <SEO
-                title="Product Analytics - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
-                image={`/images/og/product-analytics.jpg`}
+                title="Revenue Analytics - PostHog"
+                description="PostHog revenue analytics lets you track revenue alongside product analytics. Connect Stripe and instantly see daashboards with automatic currency conversion."
+                image={`/images/og/web-analytics.jpg`}
             />
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 {activeProfile && <Profile profile={{ ...activeProfile }} />}
             </SideModal>
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
                 <Hero
-                    color="blue"
-                    icon={<IconGraph />}
+                    color="[#36C46F]"
+                    icon={<IconPieChart />}
                     product={product.capitalized}
-                    title="Product analytics with autocapture"
-                    description="PostHog is the only product analytics platform built to natively work with <a href='/session-replay'>session replay</a>, <a href='/feature-flags'>feature flags</a>, <a href='/experiments'>experiments</a>, and <a href='/surveys'>surveys</a>."
+                    title="Track money coming in with no effort"
+                    description="Get answers to your burning finance acronym questions. ARR, MRR, Growth, Churn, Expansion, and more..."
                 />
 
                 <div className="text-center">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
-                        alt="Screenshot of PostHog Product Analytics"
-                        className="w-full max-w-[1360px]]"
-                        placeholder="none"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_2a101a8558.png"
+                        alt="Screenshot of web analytics in PostHog"
+                        className="w-full max-w-[1360.5px]"
                     />
                 </div>
 
-                <section id="customers" className="-mt-36 pt-36">
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20">
+                <section id="customers" className="-mt-56 pt-36">
+                    <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="gathers 30% more data than with Google Analytics"
-                            quote="We could autocapture... events using the JS snippet and... configure custom events."
+                            outcome="headline stat"
+                            quote="Short sentence detail"
                             customer={ycombinator}
                         />
-                        <CustomerCard
-                            outcome="improved conversion rates by 10-20%"
-                            quote="we observed drop-offs at very particular stages of our onboarding flow."
-                            customer={hasura}
-                        />
-                        <CustomerCard
-                            outcome="increased registrations by 30%"
-                            quote="From [funnels], we could easily jump to session replays to see the drop-off point."
-                            customer={contra}
-                        />
-                        <CustomerCard
-                            outcome="manages features and developer relations"
-                            quote="...top-to-bottom view of conversion rates and user paths, without... extra setup time."
-                            customer={speakeasy}
-                        />
+                       
                     </ul>
                 </section>
             </div>
 
-            <SmoothScroll />
+            <SmoothScroll exclude={['Installation']} />
+
             <div id="features">
-                <section className="mx-auto px-5 mb-10 md:mb-20">
+                <section className="max-w-7xl mx-auto px-5 mb-10 md:mb-20">
                     <h3 className="text-3xl text-center mb-8">Features</h3>
+                    <ul className={`list-none p-0 grid md:grid-cols-${featuresPerRow} gap-12 mb-8`}>
+                        {features.map((feature, index) => {
+                            return <Feature {...feature} key={index} />
+                        })}
+                    </ul>
 
-                    <Slider />
-                    <MobileSlides />
-
-                    <div className="max-w-7xl mx-auto">
-                        <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
-                            {subfeatures.map((subfeature, index) => {
-                                return <Subfeature {...subfeature} key={index} />
-                            })}
-                        </ul>
-                    </div>
+                    <ul className={`list-none p-0 grid grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                        {subfeatures.map((subfeature, index) => {
+                            return <Subfeature {...subfeature} key={index} />
+                        })}
+                    </ul>
                 </section>
 
                 <section className="bg-accent dark:bg-accent-dark">
@@ -845,45 +389,34 @@ export const ProductProductAnalytics = () => {
             </div>
             <section
                 id="pricing"
-                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
+                className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
             >
-                <div className="flex flex-col-reverse md:flex-row md:gap-12">
-                    <div className="flex-1">
-                        <h2 className="text-4xl md:text-5xl">Usage-based pricing</h2>
-                        <p className="">
-                            Use {product.lowercase} free. Or enter a credit card for advanced features.{' '}
-                            <br className="hidden lg:block" />
-                            Either way, your first {product.freeTier} are free – every month.
-                        </p>
-                    </div>
-                    <div className="md:w-96">
-                        <CloudinaryImage
-                            placeholder="none"
-                            quality={100}
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/product-analytics-hog.png"
-                            alt=""
-                        />
-                    </div>
-                </div>
-
-                <div className="lg:flex justify-between items-start gap-12 -mx-5 md:mx-0">
-                    <div className="flex-grow overflow-auto px-5 md:px-0">
-                        <Plans showHeaders={false} showCTA={false} groupsToShow={['product_analytics']} />
-                    </div>
-                    <div className="px-5 md:px-0 lg:w-96 lg:mt-4">
-                        <h4 className="text-3xl">FAQs</h4>
-                        {faqs.map((faq, index) => {
-                            return <FAQ {...faq} key={index} />
-                        })}
-                    </div>
+                <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
+                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
+                    <p className="mb-2">
+                        Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
+                    </p>
+                    <ul className="mb-2">
+                        <li>
+                            <strong>First 1 million events every month:</strong> Free (get access to both products)
+                        </li>
+                        <li>
+                            <strong>After 1 million events/mo:</strong> Usage is billed through product analytics. Get
+                            access to web analytics at no additional cost.
+                        </li>
+                    </ul>
+                    <p className="mb-2">
+                        Web analytics is designed to work well with{' '}
+                        <Link to={'/blog/analytics-pricing'}>anonymous events</Link>.
+                    </p>
                 </div>
             </section>
 
-            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-0 md:px-8' : 'max-w-7xl'} mx-auto mt-12 `}>
                 <div id="posthog-vs">
                     <section>
                         <h2 className="text-center text-3xl lg:text-4xl">PostHog vs...</h2>
-                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} truncate />
+                        <Comparison comparison={comparison} columnCount={comparisonColumnCount} />
                     </section>
 
                     <section className="mb-20">
@@ -893,35 +426,26 @@ export const ProductProductAnalytics = () => {
                                 title="Reasons a competitor may be best for you (for now...)"
                                 image={
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-pa.png"
-                                        className="max-w-[171px]"
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/competitors-sr.png"
+                                        className="max-w-[167px]"
                                     />
                                 }
                             >
                                 <ul>
                                     <li>
-                                        Time-based analysis for web analytics (e.g. time on page)
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                (We're <Link to="/teams/web-analytics">working on this</Link>!)
-                                            </li>
-                                        </ul>
+                                        You <em>only</em> need web analytics, nothing else
                                     </li>
-                                    <li>Natural language processing for creating insights</li>
-                                    <li>Predictive analytics for extrapolating events into the future</li>
-                                    <li>Alerting for when events move beyond set thresholds</li>
+                                    <li>You don’t need any integrations other than with Google</li>
+                                    <li>You need to migrate data from GA4</li>
+                                    <li>You actually really like GA4 😱</li>
                                 </ul>
                             </VsCompetitor>
                             <VsPostHog>
                                 <ul>
-                                    <li>
-                                        Linking between analytics and other features, so you can jump from a graph to a
-                                        relevant recording
-                                    </li>
-                                    <li>Wide range of insight types for analyzing data</li>
-                                    <li>Formula mode and SQL access to enable deeper analysis</li>
-                                    <li>Automatic correlation analysis to find significant events</li>
-                                    <li>Group analytics for teams with B2B customers</li>
+                                    <li>You want to do more than just web analytics</li>
+                                    <li>You don't want to spend weeks setting up dashboards</li>
+                                    <li>You need to comply with HIPAA</li>
+                                    <li>It's not GA4</li>
                                 </ul>
                             </VsPostHog>
                         </div>
@@ -940,49 +464,28 @@ export const ProductProductAnalytics = () => {
                         Visit the <Link to="/tutorials">tutorials</Link> section for more.
                     </p>
 
-                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20 mx-5 md:mx-0">
+                    <ul className="list-none p-0 grid md:grid-cols-4 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to calculate and lower churn rate"
-                            description="In this tutorial, we will calculate and visualize the churn rate then use PostHog’s features of session recordings, cohorts, and actions to lower it."
-                            url="/tutorials/churn-rate"
+                            title="How to create a broken link (404) checker"
+                            description="This tutorial shows you how to create a broken link checker for a Next.js app that sends a notification in Slack when a user visits a page that doesn’t exist."
+                            url="/tutorials/broken-link-checker"
                         />
                         <TutorialCard
-                            title="How to filter and breakdown arrays with SQL"
-                            description="Arrays (AKA lists) are a useful way to store multiple values related to each other under the same key. PostHog's SQL expressions unlock the ability to make full use of them."
-                            url="/tutorials/array-filter-breakdown"
+                            title="How to use PostHog without cookie banners"
+                            description="Normally, PostHog collects information about your users and stores it in a cookie in the users’ browser. This tutorial explains how to use page memory instead."
+                            url="/tutorials/cookieless-tracking"
                         />
                         <TutorialCard
-                            title="Calculate bounce rate"
-                            description="Bounce rate is the percentage of users who leave your page immediately after visiting. It is a popular marketing metric showing the relevance and engagement of content for site visitors."
-                            url="/tutorials/bounce-rate"
+                            title="An introduction to identifying users"
+                            description="Many of the most valuable insights require an accurate understanding of the user using your product. This tutorial goes over the different ways to identify users and recommendations on how to do it better."
+                            url="/tutorials/identifying-users-guide"
                         />
                         <TutorialCard
-                            title="How to calculate DAU/MAU ratio"
-                            description="The ratio of daily active users over monthly active users shows what percentage of your users are active and use your product every day."
-                            url="/tutorials/dau-mau-ratio"
+                            title="A non-technical guide to PostHog data"
+                            description="You don’t need to be an engineer, but knowing the formatting and structure of your data, for example, is key to getting the most out of PostHog as a non-technical user."
+                            url="/tutorials/non-technical-guide-to-data"
                         />
-                        {/*
-                        <TutorialCard
-                            title="Set up customer-facing analytics using Posthog, Next.js, and Tremor"
-                            description="If you run a B2B2C product (like web hosting or a content platform), your users might want to know the usage metrics of their end users."
-                            url="/tutorials/customer-facing-analytics"
-                        />
-                        <TutorialCard
-                            title="Get insight and person info with the PostHog API"
-                            description="This tutorial uses <code>GET</code> requests to retrieve information on insights and persons from your project."
-                            url="/tutorials/api-get-insights-persons"
-                        />
-                        */}
                     </ul>
-                </section>
-
-                <section id="installation" className="mb-20 px-5 md:px-0">
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Install &amp; customize</h3>
-                    <p className="mt-0 opacity-50 text-center mb-12">
-                        Here are some ways you can fine tune how you implement {product.lowercase}.
-                    </p>
-
-                    <ContentViewer sticky={false} scrollToTop={false} content={[Install, ...ProductAnalytics]} />
                 </section>
 
                 <section id="docs" className="mb-20 px-5 md:px-0">
@@ -991,7 +494,7 @@ export const ProductProductAnalytics = () => {
                         Get a more technical overview of how everything works <Link to="/docs">in our docs</Link>.
                     </p>
                     <DocLinks
-                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'product analytics').children}
+                        menu={docsMenu.children.find(({ name }) => name.toLowerCase() === 'web analytics')?.children}
                     />
                 </section>
 
@@ -1033,7 +536,7 @@ export const ProductProductAnalytics = () => {
                         </CallToAction>
                     </div>
 
-                    <Questions topicIds={[349]} />
+                    <Questions topicIds={[348]} />
                 </section>
 
                 <PairsWith items={pairsWithItemCount}>
@@ -1051,4 +554,4 @@ export const ProductProductAnalytics = () => {
     )
 }
 
-export default ProductProductAnalytics
+export default ProductRevenueAnalytics
