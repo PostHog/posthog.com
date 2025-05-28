@@ -109,7 +109,7 @@ In Vitally, you can often easily identify which products are underutilized or no
 
 Check Active Conversations in Vitally, support ticketing, Slack channels, CRM history.  
 
-VIII. Open requests and feedback
+### VIII. Open requests and feedback
 
 Has the customer submitted any feature requests or other relevant feedback?
 
