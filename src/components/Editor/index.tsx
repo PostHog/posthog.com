@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import * as Icons from '@posthog/icons'
@@ -94,6 +94,7 @@ export function Editor({
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
     // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
+    const { search } = useLocation()
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -265,6 +266,23 @@ export function Editor({
         const filteredData = filterData(dataToFilter, newFilters)
         onFilterChange?.(filteredData)
     }
+
+    useEffect(() => {
+        if (availableFilters && availableFilters.length > 0) {
+            const searchParams = new URLSearchParams(search)
+            const newFilters = {}
+
+            searchParams.forEach((value, key) => {
+                const filter = availableFilters.find((f) => f.label.toLowerCase() === key.toLowerCase())
+                if (filter) {
+                    newFilters[key] = { value, filter: filter.filter }
+                }
+            })
+            setFilters(newFilters)
+            const filteredData = filterData(dataToFilter, newFilters)
+            onFilterChange?.(filteredData)
+        }
+    }, [availableFilters])
 
     return (
         <SearchProvider onSearchChange={onSearchChange}>
