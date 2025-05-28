@@ -1763,7 +1763,7 @@ li.squeak-left-border {
     }
 
     .question-content a:is(.dark *) {
-        color: #f54e00 !important;
+        color: rgba(245, 78, 0, 1) !important;
     }
 }
 
