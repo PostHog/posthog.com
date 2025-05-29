@@ -182,9 +182,7 @@ This should get you 90% of the way there. The final 10% is polishing your UI and
 
 ## Step 4: Ship it and iterate
 
-Ship early. Ship even if it's rough. Just **ship**.
-
-Real users will teach you more in one session than any internal review or gut check ever will
+Ship early. Ship even if it's rough. Just **ship**. Real users will teach you more in one session than any internal review or gut check ever will/
 
 - If you're nervous, ship behind a [feature flag](/newsletter/feature-flag-mistakes) to a handful of friendly users.
 - Use [session replay](/session-replay) to see where people hesitate, rage click, or get stuck.
