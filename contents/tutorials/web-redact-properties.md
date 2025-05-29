@@ -10,12 +10,12 @@ tags:
   - product os
 ---
 
-When collecting data to better understand your customers, it's important to comply with [privacy regulations](https://posthog.com/docs/privacy) that apply. 
+When collecting data to better understand your customers, it's important to comply with [privacy regulations](https://posthog.com/docs/privacy). 
 
 Sometimes, this means certain information should **never** make it to PostHog servers. This tutorial shows you how to hide or redact information on the [PostHog JavaScript Web SDK](https://posthog.com/docs/libraries/js), before they're sent to PostHog.
 
 ## Redacting information with the Web SDK
-You can selectively remove properties from the events sent to initializing PostHog with a [`before_send`](https://posthog.com/docs/libraries/js/features#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
+You can selectively remove properties from events before they're sent by initializing PostHog with a [`before_send`](https://posthog.com/docs/libraries/js/features#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
 
 For example, you can create a `beforeSend.js` file and define your redaction logic there.
 
@@ -84,7 +84,7 @@ export const beforeSend = (event) => {
 };
 ```
 
-If you require your customer's IP address to be completely obfuscated from PostHog servers, consider [hosting a reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy).
+If you require your customers' IP addresses to be completely obfuscated from PostHog servers, consider [hosting a reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy).
 
 ## Opting out of automatic collection
 If you want more control over what events are captured, you can opt out of automatic collection completely. You can do this at two different levels:
@@ -108,6 +108,7 @@ posthog.opt_in_capturing()
 ```
 
 Before capturing events manually, you can check if the user has opted out like this:
+
 ```js
 posthog.has_opted_out_capturing()
 ```
@@ -118,7 +119,7 @@ To opt out of automatic collection entirely, you can navigate to your PostHog da
 ## More privacy controls
 PostHog offers a wide range of controls to limit data collection at different levels.
 
-You can use [the Property Filter transformation](/tutorials/property-filter) to filter out captured event properties **before ingestion**. This means the event properties will still reach PostHog, but the filtered properties will not be stored.
+You can use [the Property Filter transformation](/tutorials/property-filter) to filter out captured event properties **before ingestion**. This means the full events will still reach PostHog, but the filtered properties will not be stored
 
 You can also disable capturing for specific UI elements for [Product analytics](https://posthog.com/docs/product-analytics/privacy) and [Session replay](https://posthog.com/docs/session-replay/privacy).
 
