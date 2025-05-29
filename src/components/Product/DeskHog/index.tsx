@@ -326,7 +326,7 @@ export const ProductDeskHog = () => {
     return (
         <>
             <SEO
-                title="DeskHog - PostHog"
+                title="DeskHog - A developer toy from PostHog"
                 description="It's a developer toy that brings developers joy. Open-source. 3D-printed. Palm-sized."
                 image={`/images/og/deskhog.jpg`}
             />
