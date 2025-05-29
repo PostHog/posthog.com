@@ -33,9 +33,7 @@ This newsletter is your shortcut to becoming a vibe design master. I'll break do
 
 ## Step 1: Understand basic UI principles
 
-Design isn't magic. 
-
-It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
+Design isn't magic. It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
 
 Start with these seven foundational principles:
 
@@ -63,6 +61,7 @@ Place related elements close together. Labels should hug their inputs. Actions s
 Every element on the screen has visual weight. If there's too much weight on one side,it feels lopsided. Distribute your text, imagery, and whitespace so the layout feels stable  
 > 💡 **Tip**: Try the squint test—blur your eyes and see where the visual “weight” lands. If it clumps in one spot, rebalance.
 
+![Design principles for software engineers](https://res.cloudinary.com/dmukukwp6/image/upload/ui_1dffe05d0e.png)
 
 ## Step 2: Build strong opinions
 
