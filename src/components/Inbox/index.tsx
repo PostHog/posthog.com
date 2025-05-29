@@ -170,280 +170,260 @@ export default function Inbox(props) {
         }
     }, [sideBySide])
 
-    return (
-        ready && (
-            <div className="@container w-full h-full flex flex-col">
-                <HeaderBar showHome showBack showForward showSearch />
-                <div data-scheme="secondary" className="flex flex-grow border-t border-primary min-h-0">
-                    <aside
-                        data-scheme="secondary"
-                        className="w-64 bg-primary border-r border-primary h-full p-2 flex-shrink-0"
-                    >
-                        <Menu />
-                    </aside>
-                    <main data-scheme="primary" className="flex-1 bg-primary">
-                        <div
-                            ref={containerRef}
-                            className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}
-                        >
-                            <div className={`flex-1 min-h-0 ${sideBySide ? 'w-0' : 'w-full'}`}>
-                                <ScrollArea className="h-full">
-                                    <div className="flex items-center px-3.5 py-2 border-b border-primary font-medium bg-secondary text-sm bg-accent-2 sticky top-0">
-                                        <div className="flex-1">Subject</div>
-                                        <div className="w-24 text-center">Replies</div>
-                                        <div className="w-36 text-center">Last updated</div>
-                                        <div className="w-32 text-center">Latest activity</div>
-                                    </div>
-                                    <div className="px-2 py-1">
-                                        {questions.data?.map((question) => {
-                                            const {
-                                                attributes: {
-                                                    subject,
-                                                    numReplies,
-                                                    activeAt,
-                                                    replies,
-                                                    profile,
-                                                    permalink,
-                                                },
-                                            } = question
-                                            const latestAuthor =
-                                                replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
-                                            const active = `/questions/${permalink}` === pathname
-                                            return (
-                                                <span key={question.id} ref={lastQuestionRef}>
-                                                    <OSButton
-                                                        asLink
-                                                        to={`/questions/${permalink}`}
-                                                        variant="ghost"
-                                                        align="left"
-                                                        width="full"
-                                                        key={question.id}
-                                                        className={`!text-inherit font-normal ${
-                                                            active ? 'bg-accent' : ''
-                                                        }`}
-                                                        onClick={() => {
-                                                            if (!containerRef.current) return
-                                                            if (bottomHeight <= 57) {
-                                                                setBottomHeight(
-                                                                    containerRef.current.getBoundingClientRect()
-                                                                        .height * 0.8
-                                                                )
-                                                            }
-                                                        }}
-                                                    >
-                                                        <div className="flex-1 font-medium">{subject}</div>
-                                                        <div className="w-24 text-center">{numReplies}</div>
-                                                        <div className="w-36 text-center">
-                                                            {dayjs(activeAt).fromNow()}
-                                                        </div>
-                                                        <div className="w-32 text-center">
-                                                            {latestAuthor?.data.attributes.firstName}
-                                                        </div>
-                                                    </OSButton>
-                                                </span>
+    return ready ? (
+        <div className="@container w-full h-full flex flex-col">
+            <HeaderBar
+                showHome
+                showBack
+                showForward
+                showSearch
+                rightActionButtons={
+                    <>
+                        <Tooltip content={`${sideBySide ? 'Switch to stacked view' : 'Switch to side-by-side view'}`}>
+                            <span>
+                                <OSButton
+                                    active={!sideBySide}
+                                    variant="ghost"
+                                    size="sm"
+                                    icon={<IconBottomPanel />}
+                                    onClick={() => handleSideBySide(false)}
+                                />
+                            </span>
+                        </Tooltip>
+                        <Tooltip content={`Side-by-side view`}>
+                            <span>
+                                <OSButton
+                                    active={sideBySide}
+                                    className={`${
+                                        sideBySide ? '!skin-classic:bg-red-500 !skin-modern:bg-red-500' : ''
+                                    }`}
+                                    variant="ghost"
+                                    size="sm"
+                                    icon={<IconSidePanel />}
+                                    onClick={() => handleSideBySide(true)}
+                                />
+                            </span>
+                        </Tooltip>
+                    </>
+                }
+            />
+            <div data-scheme="secondary" className="flex flex-grow border-t border-primary min-h-0">
+                <aside
+                    data-scheme="secondary"
+                    className="w-64 bg-primary border-r border-primary h-full p-2 flex-shrink-0"
+                >
+                    <Menu />
+                </aside>
+                <main data-scheme="primary" className="flex-1 bg-primary">
+                    <div ref={containerRef} className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}>
+                        <div className={`flex-1 min-h-0 ${sideBySide ? 'w-0' : 'w-full'}`}>
+                            <ScrollArea className="h-full">
+                                <div className="flex items-center px-3.5 py-2 border-b border-primary font-medium bg-secondary text-sm bg-accent-2 sticky top-0">
+                                    <div className="flex-1">Subject</div>
+                                    <div className="w-24 text-center">Replies</div>
+                                    <div className="w-36 text-center">Last updated</div>
+                                    <div className="w-32 text-center">Latest activity</div>
+                                </div>
+                                <div className="px-2 py-1">
+                                    {questions.data?.map((question) => {
+                                        const {
+                                            attributes: { subject, numReplies, activeAt, replies, profile, permalink },
+                                        } = question
+                                        const latestAuthor =
+                                            replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
+                                        const active = `/questions/${permalink}` === pathname
+                                        return (
+                                            <span key={question.id} ref={lastQuestionRef}>
+                                                <OSButton
+                                                    asLink
+                                                    to={`/questions/${permalink}`}
+                                                    variant="ghost"
+                                                    align="left"
+                                                    width="full"
+                                                    key={question.id}
+                                                    className={`!text-inherit font-normal ${active ? 'bg-accent' : ''}`}
+                                                    onClick={() => {
+                                                        if (!containerRef.current) return
+                                                        if (bottomHeight <= 57) {
+                                                            setBottomHeight(
+                                                                containerRef.current.getBoundingClientRect().height *
+                                                                    0.8
+                                                            )
+                                                        }
+                                                    }}
+                                                >
+                                                    <div className="flex-1 font-medium">{subject}</div>
+                                                    <div className="w-24 text-center">{numReplies}</div>
+                                                    <div className="w-36 text-center">{dayjs(activeAt).fromNow()}</div>
+                                                    <div className="w-32 text-center">
+                                                        {latestAuthor?.data.attributes.firstName}
+                                                    </div>
+                                                </OSButton>
+                                            </span>
+                                        )
+                                    })}
+                                    {isLoading && (
+                                        <div className="flex items-center justify-center py-8 h-full">
+                                            <Lottie
+                                                animationData={hourglassAnimation}
+                                                className="size-6 opacity-75"
+                                                title="Loading questions..."
+                                            />
+                                        </div>
+                                    )}
+                                </div>
+                            </ScrollArea>
+                        </div>
+                        {permalink && (
+                            <div
+                                ref={bottomContainerRef}
+                                className={`flex-none relative min-h-0 min-w-0 ${
+                                    !isDragging ? 'transition-all duration-200 ease-out' : ''
+                                } ${sideBySide ? 'border-l border-border' : ''}`}
+                                style={{
+                                    height: sideBySide ? '100%' : bottomHeight,
+                                    width: sideBySide ? sideWidth : '100%',
+                                }}
+                            >
+                                {sideBySide ? (
+                                    <motion.div
+                                        data-scheme="tertiary"
+                                        className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent"
+                                        drag="x"
+                                        dragMomentum={false}
+                                        dragConstraints={{ left: 0, right: 0 }}
+                                        onDragStart={() => setIsDragging(true)}
+                                        onDragEnd={() => setIsDragging(false)}
+                                        onDrag={(_event, info) => {
+                                            if (!containerRef.current) return
+                                            const containerWidth = containerRef.current.getBoundingClientRect().width
+                                            const newSideWidth = Math.min(
+                                                Math.max(sideWidth - info.delta.x, containerWidth / 3),
+                                                containerWidth
                                             )
-                                        })}
-                                        {isLoading && (
-                                            <div className="flex items-center justify-center py-8 h-full">
-                                                <Lottie
-                                                    animationData={hourglassAnimation}
-                                                    className="size-6 opacity-75"
-                                                    title="Loading questions..."
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
-                                </ScrollArea>
-                            </div>
-                            {permalink && (
-                                <div
-                                    ref={bottomContainerRef}
-                                    className={`flex-none relative min-h-0 min-w-0 ${
-                                        !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                    } ${sideBySide ? 'border-l border-border' : ''}`}
-                                    style={{
-                                        height: sideBySide ? '100%' : bottomHeight,
-                                        width: sideBySide ? sideWidth : '100%',
-                                    }}
-                                >
-                                    {sideBySide ? (
-                                        <motion.div
-                                            data-scheme="tertiary"
-                                            className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent"
-                                            drag="x"
-                                            dragMomentum={false}
-                                            dragConstraints={{ left: 0, right: 0 }}
-                                            onDragStart={() => setIsDragging(true)}
-                                            onDragEnd={() => setIsDragging(false)}
-                                            onDrag={(_event, info) => {
-                                                if (!containerRef.current) return
-                                                const containerWidth =
-                                                    containerRef.current.getBoundingClientRect().width
-                                                const newSideWidth = Math.min(
-                                                    Math.max(sideWidth - info.delta.x, containerWidth / 3),
-                                                    containerWidth
-                                                )
 
-                                                setSideWidth(newSideWidth)
-                                            }}
-                                            onDoubleClick={expandOrCollapse}
-                                        />
-                                    ) : (
-                                        <motion.div
-                                            data-scheme="tertiary"
-                                            className="h-1.5 cursor-ns-resize top-0 left-0 !transform-none absolute z-20 w-full hover:bg-accent active:bg-accent"
-                                            drag="y"
-                                            dragMomentum={false}
-                                            dragConstraints={{ top: 0, bottom: 0 }}
-                                            onDragStart={() => setIsDragging(true)}
-                                            onDragEnd={() => setIsDragging(false)}
-                                            onDrag={(_event, info) => {
+                                            setSideWidth(newSideWidth)
+                                        }}
+                                        onDoubleClick={expandOrCollapse}
+                                    />
+                                ) : (
+                                    <motion.div
+                                        data-scheme="tertiary"
+                                        className="h-1.5 cursor-ns-resize top-0 left-0 !transform-none absolute z-20 w-full hover:bg-accent active:bg-accent"
+                                        drag="y"
+                                        dragMomentum={false}
+                                        dragConstraints={{ top: 0, bottom: 0 }}
+                                        onDragStart={() => setIsDragging(true)}
+                                        onDragEnd={() => setIsDragging(false)}
+                                        onDrag={(_event, info) => {
+                                            if (!containerRef.current) return
+                                            const containerHeight = containerRef.current.getBoundingClientRect().height
+                                            const newBottomHeight = Math.min(
+                                                Math.max(bottomHeight - info.delta.y, 57),
+                                                containerHeight
+                                            )
+                                            setBottomHeight(newBottomHeight)
+                                        }}
+                                        onDoubleClick={expandOrCollapse}
+                                    />
+                                )}
+                                <ScrollArea className="h-full">
+                                    <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
+                                        <OSButton
+                                            variant="secondary"
+                                            size="sm"
+                                            icon={<IconCornerDownRight className="scale-x-[-1]" />}
+                                            onClick={() => {
                                                 if (!containerRef.current) return
                                                 const containerHeight =
                                                     containerRef.current.getBoundingClientRect().height
-                                                const newBottomHeight = Math.min(
-                                                    Math.max(bottomHeight - info.delta.y, 57),
-                                                    containerHeight
-                                                )
-                                                setBottomHeight(newBottomHeight)
+                                                setBottomHeight(containerHeight)
+                                                document.getElementById('question-form-button')?.click()
+                                                setTimeout(() => {
+                                                    const viewport = bottomContainerRef.current?.querySelector(
+                                                        '[data-radix-scroll-area-viewport]'
+                                                    )
+                                                    viewport?.scrollTo({
+                                                        top: viewport.scrollHeight,
+                                                        behavior: 'smooth',
+                                                    })
+                                                }, 300)
                                             }}
-                                            onDoubleClick={expandOrCollapse}
-                                        />
-                                    )}
-                                    <ScrollArea className="h-full">
-                                        <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
-                                            <OSButton
-                                                variant="secondary"
-                                                size="sm"
-                                                icon={<IconCornerDownRight className="scale-x-[-1]" />}
-                                                onClick={() => {
-                                                    if (!containerRef.current) return
-                                                    const containerHeight =
-                                                        containerRef.current.getBoundingClientRect().height
-                                                    setBottomHeight(containerHeight)
-                                                    document.getElementById('question-form-button')?.click()
-                                                    setTimeout(() => {
-                                                        const viewport = bottomContainerRef.current?.querySelector(
-                                                            '[data-radix-scroll-area-viewport]'
-                                                        )
-                                                        viewport?.scrollTo({
-                                                            top: viewport.scrollHeight,
-                                                            behavior: 'smooth',
+                                        >
+                                            Reply
+                                        </OSButton>
+                                        <div className="ml-auto flex space-x-4">
+                                            {question?.id && user && (
+                                                <Switch
+                                                    checked={notificationsEnabled}
+                                                    onChange={(checked) => {
+                                                        setNotificationsEnabled(checked)
+                                                        setSubscription({
+                                                            contentType: 'question',
+                                                            id: question.id,
+                                                            subscribe: checked,
                                                         })
-                                                    }, 300)
-                                                }}
-                                            >
-                                                Reply
-                                            </OSButton>
-                                            <div className="ml-auto flex space-x-4">
-                                                {question?.id && user && (
-                                                    <Switch
-                                                        checked={notificationsEnabled}
-                                                        onChange={(checked) => {
-                                                            setNotificationsEnabled(checked)
-                                                            setSubscription({
-                                                                contentType: 'question',
-                                                                id: question.id,
-                                                                subscribe: checked,
-                                                            })
-                                                            addToast({
-                                                                description: checked
-                                                                    ? "You'll be notified of replies by email."
-                                                                    : "You won't receive notifications for this thread.",
-                                                                title: checked
-                                                                    ? 'Thread notifications enabled'
-                                                                    : 'Thread notifications disabled',
-                                                                onUndo: () => {
-                                                                    setNotificationsEnabled(!checked)
-                                                                    setSubscription({
-                                                                        contentType: 'question',
-                                                                        id: question.id,
-                                                                        subscribe: !checked,
-                                                                    })
-                                                                },
-                                                            })
-                                                        }}
-                                                        label="Thread notifications"
-                                                    />
-                                                )}
-                                                <div className="flex items-center">
-                                                    <div>
-                                                        <Tooltip
-                                                            content={`${
-                                                                sideBySide
-                                                                    ? 'Switch to stacked view'
-                                                                    : 'Switch to side-by-side view'
-                                                            }`}
-                                                        >
-                                                            <span>
-                                                                <OSButton
-                                                                    active={!sideBySide}
-                                                                    variant="ghost"
-                                                                    size="sm"
-                                                                    icon={<IconBottomPanel />}
-                                                                    onClick={() => handleSideBySide(false)}
-                                                                />
-                                                            </span>
-                                                        </Tooltip>
-                                                        <Tooltip content={`Side-by-side view`}>
-                                                            <span>
-                                                                <OSButton
-                                                                    active={sideBySide}
-                                                                    className={`${
+                                                        addToast({
+                                                            description: checked
+                                                                ? "You'll be notified of replies by email."
+                                                                : "You won't receive notifications for this thread.",
+                                                            title: checked
+                                                                ? 'Thread notifications enabled'
+                                                                : 'Thread notifications disabled',
+                                                            onUndo: () => {
+                                                                setNotificationsEnabled(!checked)
+                                                                setSubscription({
+                                                                    contentType: 'question',
+                                                                    id: question.id,
+                                                                    subscribe: !checked,
+                                                                })
+                                                            },
+                                                        })
+                                                    }}
+                                                    label="Thread notifications"
+                                                />
+                                            )}
+
+                                            <div className="ml-1 pl-1 border-l border-border">
+                                                <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
+                                                    <span>
+                                                        <OSButton
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            className="relative"
+                                                            icon={
+                                                                <IconChevronDown
+                                                                    className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
                                                                         sideBySide
-                                                                            ? '!skin-classic:bg-red-500 !skin-modern:bg-red-500'
+                                                                            ? expandable
+                                                                                ? 'rotate-90'
+                                                                                : '-rotate-90'
+                                                                            : expandable
+                                                                            ? 'rotate-180'
                                                                             : ''
                                                                     }`}
-                                                                    variant="ghost"
-                                                                    size="sm"
-                                                                    icon={<IconSidePanel />}
-                                                                    onClick={() => handleSideBySide(true)}
                                                                 />
-                                                            </span>
-                                                        </Tooltip>
-                                                    </div>
-                                                    <div className="ml-1 pl-1 border-l border-border">
-                                                        <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
-                                                            <span>
-                                                                <OSButton
-                                                                    variant="ghost"
-                                                                    size="sm"
-                                                                    className="relative"
-                                                                    icon={
-                                                                        <IconChevronDown
-                                                                            className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                                sideBySide
-                                                                                    ? expandable
-                                                                                        ? 'rotate-90'
-                                                                                        : '-rotate-90'
-                                                                                    : expandable
-                                                                                    ? 'rotate-180'
-                                                                                    : ''
-                                                                            }`}
-                                                                        />
-                                                                    }
-                                                                    onClick={expandOrCollapse}
-                                                                />
-                                                            </span>
-                                                        </Tooltip>
-                                                    </div>
-                                                </div>
+                                                            }
+                                                            onClick={expandOrCollapse}
+                                                        />
+                                                    </span>
+                                                </Tooltip>
                                             </div>
                                         </div>
-                                        <div className="p-5">
-                                            <Question
-                                                id={permalink}
-                                                onQuestionReady={(question) => setQuestion(question)}
-                                                subscribeButton={false}
-                                            />
-                                        </div>
-                                    </ScrollArea>
-                                </div>
-                            )}
-                        </div>
-                    </main>
-                </div>
+                                    </div>
+                                    <div className="p-5">
+                                        <Question
+                                            id={permalink}
+                                            onQuestionReady={(question) => setQuestion(question)}
+                                            subscribeButton={false}
+                                        />
+                                    </div>
+                                </ScrollArea>
+                            </div>
+                        )}
+                    </div>
+                </main>
             </div>
-        )
-    )
+        </div>
+    ) : null
 }

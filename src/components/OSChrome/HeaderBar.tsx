@@ -24,6 +24,7 @@ interface HeaderBarProps {
     showBookmark?: boolean
     showToc?: boolean
     showSidebar?: boolean
+    rightActionButtons?: React.ReactNode
 }
 
 export default function HeaderBar({
@@ -38,6 +39,7 @@ export default function HeaderBar({
     showBookmark = false,
     showToc = false,
     showSidebar = false,
+    rightActionButtons,
 }: HeaderBarProps) {
     const { goBack, goForward, canGoBack, canGoForward } = useWindow()
     return (
@@ -76,6 +78,7 @@ export default function HeaderBar({
                     )}
                 </div>
                 <div className="flex items-center gap-px">
+                    {rightActionButtons}
                     {showSearch && <OSButton variant="ghost" icon={<IconSearch />} />}
                     {showBookmark && <OSButton variant="ghost" icon={<IconBook />} />}
                 </div>
