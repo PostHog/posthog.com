@@ -615,7 +615,89 @@ export const handbookSidebar = [
         url: '/handbook/team-structure',
     },
     {
-        name: 'Content & Docs',
+        name: 'Brand & vibes',
+        url: '',
+        children: [
+            {
+                name: 'Design',
+                url: '',
+                children: [
+                    {
+                        name: 'Art requests',
+                        url: '/handbook/brand/art-requests',
+                    },
+                    {
+                        name: 'Logos, brand, and hedgehogs',
+                        url: '/handbook/company/brand-assets',
+                    },
+                    {
+                        name: 'Our design philosophy',
+                        url: '/handbook/brand/philosophy',
+                    },
+                    {
+                        name: 'Product design for engineers',
+                        url: '/handbook/engineering/product-design',
+                    },
+                    {
+                        name: 'Product design process',
+                        url: '/handbook/brand/process',
+                    },
+                ],
+            },
+            {
+                name: 'Product marketing',
+                url: '',
+                children: [
+                    {
+                        name: 'Email marketing',
+                        url: '/handbook/brand/email-comms',
+                    },
+                    {
+                        name: 'In-app messaging',
+                        url: '/handbook/brand/in-app',
+                    },
+                    {
+                        name: 'Partnerships',
+                        url: '/handbook/brand/partners',
+                    },
+                    {
+                        name: 'Press & PR',
+                        url: '/handbook/brand/press',
+                    },
+                    {
+                        name: 'Product launches',
+                        url: '/handbook/brand/product-announcements',
+                    },
+                    {
+                        name: 'Startups & YC Programs',
+                        url: '/handbook/brand/startups',
+                    },
+                    {
+                        name: 'Testimonials & G2',
+                        url: '/handbook/brand/testimonials',
+                    },
+                ],
+            },
+            {
+                name: 'Brand strategy',
+                url: '/handbook/strategy/brand',
+            },
+            {
+                name: 'Events',
+                url: '/handbook/brand/events',
+            },
+            {
+                name: 'Paid ads',
+                url: '/handbook/brand/paid',
+            },
+            {
+                name: 'Product positioning',
+                url: '/handbook/brand/positioning',
+            },
+        ],
+    },
+    {
+        name: 'Content',
         url: '',
         children: [
             {
@@ -705,36 +787,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Design',
-        url: '',
-        children: [
-            {
-                name: 'Our philosophy',
-                url: '/handbook/design/philosophy',
-            },
-            {
-                name: 'Product design process',
-                url: '/handbook/design/process',
-            },
-            {
-                name: 'Product design for engineers',
-                url: '/handbook/engineering/product-design',
-            },
-            {
-                name: 'Logos, brand, hedgehogs',
-                url: '/handbook/company/brand-assets',
-            },
-            {
-                name: 'Brand strategy',
-                url: '/handbook/strategy/brand',
-            },
-            {
-                name: 'Product positioning',
-                url: '/handbook/design/positioning',
-            },
-        ],
-    },
-    {
         name: 'Engineering',
         url: '',
         children: [
@@ -764,10 +816,6 @@ export const handbookSidebar = [
                     {
                         name: 'How to do product, as an engineer',
                         url: '/handbook/engineering/product-engineering',
-                    },
-                    {
-                        name: 'How to write docs (for engineers)',
-                        url: '/handbook/engineering/writing-docs',
                     },
                 ],
             },
@@ -1175,10 +1223,6 @@ export const handbookSidebar = [
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
-                        {
-                name: 'Account Planning',
-                url: '/handbook/growth/sales/account-planning',
-            },
             {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
@@ -1258,56 +1302,6 @@ export const handbookSidebar = [
             {
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
-            },
-        ],
-    },
-    {
-        name: 'Comms',
-        url: '',
-        children: [
-            {
-                name: 'Overview',
-                url: '/handbook/words-and-pictures/words-and-pictures',
-            },
-            {
-                name: 'Art requests',
-                url: '/handbook/words-and-pictures/art-requests',
-            },
-            {
-                name: 'Email marketing',
-                url: '/handbook/words-and-pictures/email-comms',
-            },
-            {
-                name: 'In-app messaging',
-                url: '/handbook/words-and-pictures/in-app',
-            },
-            {
-                name: 'Events',
-                url: '/handbook/words-and-pictures/events',
-            },
-            {
-                name: 'Partnerships',
-                url: '/handbook/words-and-pictures/partners',
-            },
-            {
-                name: 'Paid ads',
-                url: '/handbook/words-and-pictures/paid',
-            },
-            {
-                name: 'Press & PR',
-                url: '/handbook/words-and-pictures/press',
-            },
-            {
-                name: 'Product launches',
-                url: '/handbook/words-and-pictures/product-announcements',
-            },
-            {
-                name: 'Startups & YC Programs',
-                url: '/handbook/words-and-pictures/startups',
-            },
-            {
-                name: 'Testimonials & G2',
-                url: '/handbook/words-and-pictures/testimonials',
             },
         ],
     },
@@ -1432,6 +1426,12 @@ export const communityMenu = {
             icon: 'IconMagic',
             color: 'orange',
             url: '/templates',
+        },
+        {
+            name: 'DeskHog',
+            icon: 'IconDeskHog',
+            color: 'blue',
+            url: '/deskhog',
         },
         {
             name: 'Cool tech jobs',

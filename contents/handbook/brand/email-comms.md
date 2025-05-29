@@ -17,7 +17,7 @@ We regularly send two email broadcasts.
 Occasionally we send other, ad-hoc email broadcasts for specific activities such as outages, reminders, announcements, or deprecations. 
 
 ### Changelog
-The changelog email is part of [the new release process](/handbook/words-and-pictures/product-announcements) and is used for [product announcements](/handbook/words-and-pictures/product-announcements).
+The changelog email is part of [the new release process](/handbook/brand/product-announcements) and is used for [product announcements](/handbook/brand/product-announcements).
 
 Every month, we use Customer.io to share a broadcast which summarizes the highlights from [the weekly changelog](/changelog) over the last month. We use our discretion to choose which updates to highlight, usually showcasing three or four of the most impactful changes. We usually reserve the top spot for making users aware of new beta features. A test is shared with the team ahead before we send to users. 
 
@@ -31,7 +31,7 @@ The email is usually comprised of three sections, which inform users of new guid
 We categorize these emails as `Actually useful marketing emails` in Customer.io, so users can unsubscribe if they wish. This email usually comes directly from Joe. 
 
 ### Other broadcasts
-Any ad-hoc customer email broadcasts are owned by the Comms team, and are usually sent via Customer.io. These can include product updates, outage alerts, or other PostHog news if needed.
+Any ad-hoc customer email broadcasts are owned by the Brand team, and are usually sent via Customer.io. These can include product updates, outage alerts, or other PostHog news if needed.
 
 These emails are usually tagged as `Service updates` in Customer.io when they include important account or product information. These emails are given a dedicated unsubscribe option in the footer, making it clear that we do not recommend users unsubscribe to these emails. 
 
@@ -41,7 +41,7 @@ Important service updates are the _only_ type of email we may send to unsubscrib
 
 Whenever we need to send an email broadcast like this we begin by creating an issue in [the Meta repo](https://github.com/PostHog/meta/), unless it involves discussion of personal information - in which case it is discussed in [Company Internal](https://github.com/PostHog/company-internal). This enables us to summarize information and seek approval from teams while also keeping our work open source, and without requiring everyone log in to Customer.io. Issues are closed when an email is sent. 
 
-If you'd like to work with Comms on an email activity, please begin by opening an issue in the `meta` [repo](https://github.com/PostHog/meta/issues)https://github.com/PostHog/meta/issues. 
+If you'd like to work with Brand on an email activity, please begin by opening an issue in the `meta` [repo](https://github.com/PostHog/meta/issues).
 
 ## Email campaigns
 We maintain many email campaigns to help users get the most out of the product. The most developed and documented of these are our four onboarding campaigns.  
@@ -72,21 +72,21 @@ This flow currently comprises a single, personal email from either Joe or the te
 
 When responses come in, Joe generally triages replies and directs feedback to the relevant team, as well as rewarding users with merch as thanks for their feedback. 
 
-> **Launching a beta?** It helps to let the Comms team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed. 
+> **Launching a beta?** It helps to let the Brand team know in [the team Slack](https://posthog.slack.com/archives/C083V7C6GKE). The team can then add your beta to the beta onboarding flow, and plan ahead for marketing announcements as needed. 
 
 #### Onboarding - new hires
 This is an internal email flow for new hires, which triggers whenever a new user signs up with a PostHog email address. We currently exclude most old-time hires from this flow, to avoid blocking their inboxes. 
 
 This campaign runs for a new hire's first 30 days and sends them 7 emails with information to help them get setup at PostHog. 
 
-There's no way to unsubscribe from these emails, but if you're triggering them with test accounts then let the Comms team know and they can exclude you from the campaign. 
+There's no way to unsubscribe from these emails, but if you're triggering them with test accounts then let the Brand team know and they can exclude you from the campaign. 
 
 ### Other email campaigns
 We run a series of other, small campaigns with smaller volumes. These include:
 
 - **The replay recommender** is a campaign which encourages users who have ingested a large number of unwatched replays to watch some of the recordings. 
-- **Teams upsells & cancellations** are two separate campaigns. The first triggers when a team invites their sixth and ninth team member, suggesting the platform add-ons to boost collaboration. The second triggers when the add-on is disabled, comes from Zach, and requests feedback. 
-- **G2 review Requester** is described in [Testimonials & G2](/handbook/words-and-pictures/testimonials)
+- **Teams upsells & cancellations** are two separate campaigns. The first triggers when a team invites their sixth and ninth team member, suggesting the Teams add-on to boost collaboration. The second triggers when the add-on is disabled, comes from Zach, and requests feedback. 
+- **G2 review Requester** is described in [Testimonials & G2](/handbook/brand/testimonials)
 - **Startup & YC updates** is a series of campaigns for the startups and YC programs. These broadly notify users when they join the program, and use 50%, 75% and 100% of their available credit. 
 
 ## API triggered emails
