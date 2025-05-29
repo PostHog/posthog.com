@@ -138,7 +138,7 @@ const subfeatures = [
     {
         title: 'Open-source',
         description:
-            "We're open-source, which means DeskHog is yours to hack. Build your own games and tools with AI editors (or C++ if you're a masochist).",
+            "We're open-source, and so is DeskHog. It's yours to hack. Build your own games and tools with AI editors (or C++ if you're a masochist).",
         icon: <IconCode2 />,
     },
     {
@@ -206,40 +206,44 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                 <span className="text-red dark:text-yellow">joy</span>
             </h1>
             <p className="text-lg font-semibold text-center text-opacity-75 mb-5">
-                Pre-built kits coming soon. DIY version available now.
+                Full kits coming soon. DIY version available now.
             </p>
             <div className="flex justify-center gap-2 mb-12">
                 <CallToAction href="https://github.com/PostHog/DeskHog" type="primary" externalNoIcon>
                     <>
-                        Get the DIY kit
+                        Get the DIY version
                         <IconExternal className="size-4 inline-block ml-1" />
                     </>
+                </CallToAction>
+                <CallToAction href="https://posthog.com/merch" type="secondary" externalNoIcon>
+                    <>Join the kit waitlist</>
                 </CallToAction>
             </div>
         </section>
     )
 }
 
-const VideoDeskHog = () => (
-    <section id="demo-video" className={`overflow-hidden h-auto max-h-[90vh] mb-8 pt-10`}>
-        <div className="inline-flex mx-auto relative overflow-hidden w-full aspect-video">
-            <iframe
-                src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
-                className="rounded aspect-video m-0 shadow-xl"
-                allow="autoplay"
-            />
-            <div className="absolute top-10 -right-10 md:top-10 md:-right-14">
-                <a
-                    href="https://github.com/PostHog/DeskHog"
-                    className="inline-block bg-yellow text-black hover:text-black px-8 py-1 md:px-12 md:py-2 text-sm md:text-base font-semibold shadow-lg transform rotate-45"
-                >
-                    <span className="text-black">Build it yourself</span>
-                    <IconExternal className="size-4 inline-block ml-1 relative -top-0.5" />
-                </a>
-            </div>
-        </div>
-    </section>
-)
+// Working video section - currently using Cloudinary video embed
+// const VideoDeskHog = () => (
+//     <section id="demo-video" className={`overflow-hidden h-auto max-h-[90vh] mb-8 pt-10`}>
+//         <div className="inline-flex mx-auto relative overflow-hidden w-full aspect-video">
+//             <iframe
+//                 src="https://res.cloudinary.com/dmukukwp6/video/upload/Termagotchi_084775b39f.mp4"
+//                 className="rounded aspect-video m-0 shadow-xl"
+//                 allow="autoplay"
+//             />
+//             <div className="absolute top-10 -right-10 md:top-10 md:-right-14">
+//                 <a
+//                     href="https://github.com/PostHog/DeskHog"
+//                     className="inline-block bg-yellow text-black hover:text-black px-8 py-1 md:px-12 md:py-2 text-sm md:text-base font-semibold shadow-lg transform rotate-45"
+//                 >
+//                     <span className="text-black">Build it yourself</span>
+//                     <IconExternal className="size-4 inline-block ml-1 relative -top-0.5" />
+//                 </a>
+//             </div>
+//         </div>
+//     </section>
+// )
 
 // Define DeskHogCTA component
 const DeskHogCTA = () => {
@@ -253,16 +257,16 @@ const DeskHogCTA = () => {
             <div className="relative z-10 bg-white dark:bg-accent-dark p-8 rounded-lg mx-auto max-w-xl border border-light dark:border-dark shadow-xl">
                 <h2 className={headingClasses}>3D print it yourself now</h2>
                 <h3 className={`${subheadingClasses} mb-0`}>
-                    DeskHog kits are coming soon but you can 3D print it yourself right now. Just add components!
+                    DeskHog kits coming soon but you can 3D print it yourself now. Just add components!
                 </h3>
                 <div className="flex justify-center my-6">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/435072519_6e5d1fe6_1887_4d66_8497_4b582eb0391a_2cb01d1ae9.png"
-                        alt="DeskHog marketing accent image"
-                        width={300}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_smiling_36bb2647ff.png"
+                        alt="DeskHog marketing image"
+                        width={350}
                     />
                 </div>
-                <div className="flex justify-center">
+                <div className="flex justify-center gap-2">
                     <CallToAction
                         href="https://github.com/PostHog/DeskHog"
                         type="primary"
@@ -272,6 +276,18 @@ const DeskHogCTA = () => {
                     >
                         <>
                             Make your own
+                            <IconExternal className="size-4 inline-block ml-1" />
+                        </>
+                    </CallToAction>
+                    <CallToAction
+                        href="https://posthog.com/merch"
+                        type="secondary"
+                        size="lg"
+                        className="w-full sm:w-auto"
+                        externalNoIcon
+                    >
+                        <>
+                            Join the kit waitlist
                             <IconExternal className="size-4 inline-block ml-1" />
                         </>
                     </CallToAction>
@@ -322,7 +338,18 @@ export const ProductDeskHog = () => {
                     title="It's a developer toy that <br /> <span className='text-red dark:text-yellow'>brings developers joy</span>"
                     description="Pre-built kits coming soon. DIY version available now."
                 />
-                <VideoDeskHog />
+                {/* <VideoDeskHog /> */}
+                <section id="demo-image" className="mb-0 pt-0">
+                    <div className="flex justify-center">
+                        <div className="w-full max-w-[400px]">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_smiling_36bb2647ff.png"
+                                alt="DeskHog in action"
+                                className="w-full"
+                            />
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <div id="features">
@@ -381,17 +408,17 @@ export const ProductDeskHog = () => {
                             />
                         </aside>
                     </div>
-                    <h2 className="text-5xl text-center mb-2">Of course we made some games for it</h2>
+                    <h2 className="text-5xl text-center mb-2">Of course, we're making some games for it too</h2>
                     <h3 className="text-xl text-center font-medium mb-12">
-                        (And you can{' '}
+                        We're still nailing down the launch lineup, but you can{' '}
                         <Link
                             to="https://github.com/PostHog/DeskHog"
                             externalNoIcon
                             className="text-red dark:text-yellow"
                         >
-                            make your own
-                        </Link>
-                        , too!)
+                            build your own
+                        </Link>{' '}
+                        while you wait
                     </h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
@@ -464,8 +491,10 @@ export const ProductDeskHog = () => {
 
             <section className="py-10">
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
-                    <h2 className="text-4xl lg:text-5xl text-center mb-2">It also has important business tools</h2>
-                    <h4 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h4>
+                    <h2 className="text-4xl lg:text-5xl text-center mb-2">
+                        It will also have important business tools
+                    </h2>
+                    <h3 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h3>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                         <App
@@ -497,16 +526,16 @@ export const ProductDeskHog = () => {
                 <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-8">
                     <div className="flex-1">
                         <h2 className="text-4xl lg:text-5xl text-center md:text-left">
-                            Your phone is <span className="text-red dark:text-yellow">DeskHog's best friend</span>
+                            Your phone and data are{' '}
+                            <span className="text-red dark:text-yellow">DeskHog's best friends</span>
                         </h2>
                         <p>
-                            Scan the QR code with your phone to access a portal where you can configure your DeskHog,
-                            connect to WiFi, and link data from your PostHog instance to the Insight Keeper-upper.
+                            DeskHog can get online via a captive portal and pull insights from your PostHog projects.
+                            Scan the QR code with your phone to connect and link data to the Insight Keeper-upper.
                         </p>
                         <p>
-                            You can also use the mobile app to add new cards to your DeskHog. Cards are the building
-                            block of the DeskHog UI, and they include all the standard tools and games. Rearrange them
-                            as you like, or build new ones, to make DeskHog your own.
+                            The DIY version of DeskHog already supports simple insights, like big numbers and trends
+                            (squinting required), but we're working on more. And we're open source, so you can help!
                         </p>
                     </div>
                     <aside className="shrink-0 md:basis-[500px] flex justify-center">
