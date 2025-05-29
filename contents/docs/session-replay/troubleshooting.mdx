@@ -79,7 +79,7 @@ For apps with SSR enabled you should set `relative` to `false` in the [`paths` o
 
 ## Internal users filtering or cohorts-based filters don't work
 
-If you use cohorts to filter sessions, or add cohort condition into the "Filter out internal and test users" setting - it can work incorrectly (or not work at all) while cohorts are calculating (to properly decide what people are in).
+If you use cohorts to filter sessions, or add a cohort condition into the "Filter out internal and test users" setting - it can work incorrectly (or not work at all) while cohorts are calculating.
 
 To check, you can go to "People > Cohorts" and see if any of them are in "calculating" status. 99% of the time they will be available in a couple of minutes, and if not (got stuck) - you can ask PostHog support to recalculate them for you manually.
 
