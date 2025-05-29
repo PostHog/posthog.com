@@ -59,6 +59,7 @@ export const beforeSend = (event) => {
 ```
 
 Then, you can initialize PostHog with your `before_send` function.
+
 ```js
 import { beforeSend } from './beforeSend'
 
@@ -74,6 +75,7 @@ posthog.init('<ph_project_api_key>', {
 PostHog will use the client IP address found during an event capture request if an `$ip` isn't passed through `event.properties`. This means you can't simply redact the `$ip` property like other properties. Instead, enable the [**Discard client IP data**](https://us.posthog.com/settings/environment#datacapture) toggle. When this is enabled, PostHog will drop any IP information related to an event.
 
 ## More privacy controls
+
 PostHog offers a wide range of controls to limit data collection at different levels.
 
 You can use [the property filter transformation](/tutorials/property-filter) to filter out captured event properties **before ingestion**. This means the full events will still reach PostHog, but the filtered properties will not be stored.
@@ -81,6 +83,7 @@ You can use [the property filter transformation](/tutorials/property-filter) to 
 You can also disable capturing for specific UI elements for [product analytics](/docs/product-analytics/privacy) and [session replay](/docs/session-replay/privacy).
 
 ## Further reading
+
 - [Product analytics privacy controls](/docs/product-analytics/privacy)
 - [Product analytics autocapture controls](/docs/product-analytics/autocapture#configuring-autocapture)
 - [Session replay privacy controls](/docs/session-replay/privacy)
