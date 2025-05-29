@@ -307,7 +307,7 @@ const ExpandableCallout = () => {
                     alt="DeskHog Pro"
                     className="w-full max-w-[224px] mx-auto mb-4"
                 />
-                <h5 className="text-center">Coming soon: DeskHog Pro & Friends</h5>
+                <h5 className="text-center">Coming soon: DeskHog Pro & Friends?</h5>
                 <p>This is just the beginning of the DeskHog adventure. If you like it we'll make more, maybe.</p>
                 <p>
                     DeskHog Pro will connect via the I²C port, adding more buttons, and a huge dial so you can crank up
