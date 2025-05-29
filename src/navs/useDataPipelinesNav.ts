@@ -14,17 +14,24 @@ export default function useDataPipelinesNav({ type }: { type?: string }): { slug
         }
     `)
 
-    return allPostHogPipeline.nodes
+    const nodes = allPostHogPipeline.nodes
         .filter((node: any) => (type ? node.type === type : true))
         .sort((a: any, b: any) => a.name.localeCompare(b.name))
-        .map((node: any) => ({
-            url: `/docs/cdp/${type}s/${node.slug}`,
-            name: node.name,
-            ...(node.status === 'coming_soon' && {
-                badge: {
-                    title: 'Coming soon',
-                    className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                },
-            }),
-        }))
+    return [
+        ...nodes
+            .filter((node: any) => node.status !== 'coming_soon')
+            .map((node: any) => ({
+                url: `/docs/cdp/${type}s/${node.slug}`,
+                name: node.name,
+            })),
+        {
+            name: 'Roadmap',
+        },
+        ...nodes
+            .filter((node: any) => node.status === 'coming_soon')
+            .map((node: any) => ({
+                url: `/docs/cdp/${type}s/${node.slug}`,
+                name: node.name,
+            })),
+    ]
 }

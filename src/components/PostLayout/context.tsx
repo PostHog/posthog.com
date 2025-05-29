@@ -37,22 +37,34 @@ export const PostProvider: React.FC<ProviderProps> = ({
 
     const menu = useMemo(() => {
         const menu = other.menu || activeInternalMenu?.children
+        const isLabel = (item: any) => !item?.url && item?.name
         return menu?.map((item) => {
             if (item.dynamicChildren && dynamicMenus[item.dynamicChildren]) {
-                return {
-                    ...item,
-                    children: item.dynamicChildren
-                        ? [
-                              ...(item.children || []),
-                              ...dynamicMenus[item.dynamicChildren]?.filter(
-                                  (menuItem) => !item.children?.some((child) => child.name === menuItem.name)
-                              ),
-                          ].sort((a, b) => {
-                              if (!a.url || !b.url) return 0
-                              return a.name.localeCompare(b.name)
-                          })
-                        : item.children,
+                const newChildren = []
+                for (const child of [...item.children, ...dynamicMenus[item.dynamicChildren]]) {
+                    if (isLabel(child)) {
+                        newChildren.push([child])
+                    } else {
+                        const lastMenuItem = newChildren[newChildren.length - 1]
+                        if (!lastMenuItem) {
+                            newChildren.push([child])
+                        } else {
+                            const lastChild = lastMenuItem[lastMenuItem.length - 1]
+                            if (isLabel(lastChild)) {
+                                newChildren.push([child])
+                            } else {
+                                lastMenuItem.push(child)
+                            }
+                        }
+                    }
                 }
+                newChildren.forEach((child) => {
+                    child.sort((a, b) => {
+                        if (!a.url || !b.url) return 0
+                        return a.name.localeCompare(b.name)
+                    })
+                })
+                return { ...item, children: newChildren.flat() }
             }
             return item
         })
