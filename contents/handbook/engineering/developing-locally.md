@@ -526,6 +526,37 @@ While developing, there are times you may want to connect to the database to que
 
 If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
 
+## Extra: Sending emails
+
+To test email functionality during local development, we use Maildev, a lightweight SMTP server with a web interface to inspect sent emails.
+
+Add the following environment variables to your `.env` file:
+
+```.env
+EMAIL_HOST=127.0.0.1
+EMAIL_PORT=1025
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+EMAIL_USE_TLS=false
+EMAIL_USE_SSL=false
+EMAIL_ENABLED=true
+```
+
+With the default `docker-compose.dev.yml` setup, you can view emails in your browser at [http://localhost:1080](http://localhost:1080).
+
+This lets you easily confirm that emails are being sent and formatted correctly - without actually sending anything externally.
+
+#### Production usage
+This setup is only intended for local development.
+
+For production, you'll need to:
+
+- Set `EMAIL_HOST`, `EMAIL_PORT`, and `EMAIL_ENABLED` appropriately
+
+- Enable TLS or SSL if required (`EMAIL_USE_TLS=true` or `EMAIL_USE_SSL=true`)
+
+- Provide valid credentials for your email provider using `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD`
+
 ## Extra: Developing paid features (PostHog employees only)
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
