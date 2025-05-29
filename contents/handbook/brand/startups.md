@@ -44,7 +44,7 @@ In case of any issues with merch, founders can reach out to merch@posthog.com.
 We encourage members of the PostHog for Startups program to inform us when they have an upcoming launch, or other announcement. We may then share that announcement with other members of the program (via the newsletter), or share it more widely on our socials and other channels. We don't make guarantees about how we'll or if we'll share announcements, and do so only at our own discretion. 
 
 ### Monthly newsletter
-Once a month, we send a short newsletter to all users in the program. We send the email as a Customer.io broadcast and there is a template set up in Customer.io. [This email is covered on the email comms page.](/handbook/words-and-pictures/email-comms)
+Once a month, we send a short newsletter to all users in the program. We send the email as a Customer.io broadcast and there is a template set up in Customer.io. [This email is covered on the email comms page.](/handbook/brand/email-comms)
 
 ### Credit usage
 Teams in the startup plan can use their credit for any PostHog product or add-on, including the [platform add-ons](/platform-addons). Teams within PostHog for Startups cannot use credits toward a BAA however due to the legal risk to PostHog. If a startup requires a BAA, they should speak to the CS & Sales team to find a solution. 

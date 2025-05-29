@@ -80,7 +80,7 @@ These aren’t rules, just things that have worked well in the past. They provid
 
 ## Publishing details
 
-- Having a good post preview image is important. Either create one using hedgehogs from the [Hoggies file in Figma](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=1-196&t=UZQMXMddH0DMLxqX-0) or [open an art request](/handbook/words-and-pictures/art-requests) to have Lottie make one for you (give her at least 1 week to do so). This needs to be 1200x630 px for the `posthog.com` OG image and 1456x1048 px for the Substack preview image.
+- Having a good post preview image is important. Either create one using hedgehogs from the [Hoggies file in Figma](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=1-196&t=UZQMXMddH0DMLxqX-0) or [open an art request](/handbook/brand/art-requests) to have Lottie make one for you (give her at least 1 week to do so). This needs to be 1200x630 px for the `posthog.com` OG image and 1456x1048 px for the Substack preview image.
 
 - We publish the newsletter on Substack and then add it to `posthog.com/newsletter` via GitHub. 
 
