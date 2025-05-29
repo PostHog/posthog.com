@@ -248,8 +248,8 @@ const linklist: IProps[] = [
                 url: '/handbook/engineering/developing-locally',
             },
             {
-                title: 'Design',
-                url: '/handbook/design/philosophy',
+                title: 'Brand',
+                url: '/handbook/brand/philosophy',
             },
             {
                 title: 'Marketing',

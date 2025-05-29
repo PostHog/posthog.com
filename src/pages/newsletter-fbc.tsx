@@ -129,7 +129,10 @@ function NewsletterFBC() {
                         <div className="flex justify-center items-center gap-1">
                             <span className="opacity-75">or</span>
                             <button
-                                onClick={() => setShowContent(true)}
+                                onClick={() => {
+                                    posthog?.capture('newsletter_read_first_clicked')
+                                    setShowContent(true)
+                                }}
                                 className="text-red dark:text-yellow font-semibold"
                             >
                                 read it first
