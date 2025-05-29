@@ -10,7 +10,7 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconCheck, IconCornerDownRight, IconSidePanel, IconBottomPanel } from '@posthog/icons'
+import { IconCheck, IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
@@ -47,6 +47,9 @@ const Menu = () => {
     )
 }
 
+const SIDE_WIDTH_DEFAULT = 600
+const BOTTOM_HEIGHT_DEFAULT = 300
+
 export default function Inbox(props) {
     const { data, params } = props
     const initialTopicID = data?.topic?.squeakId
@@ -75,8 +78,8 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
-    const [bottomHeight, setBottomHeight] = useState(300)
-    const [sideWidth, setSideWidth] = useState(600)
+    const [bottomHeight, setBottomHeight] = useState(BOTTOM_HEIGHT_DEFAULT)
+    const [sideWidth, setSideWidth] = useState(SIDE_WIDTH_DEFAULT)
     const [notificationsEnabled, setNotificationsEnabled] = useState(false)
     const [question, setQuestion] = useState<StrapiRecord<QuestionData>>()
     const containerRef = useRef<HTMLDivElement>(null)
@@ -84,10 +87,24 @@ export default function Inbox(props) {
     const [isDragging, setIsDragging] = useState(false)
     const [lastQuestionRef, inView] = useInView({ threshold: 0.1 })
     const [sideBySide, setSideBySide] = useState(false)
+    const [expandable, setExpandable] = useState(true)
 
     const handleSideBySide = (sideBySide: boolean) => {
         setSideBySide(sideBySide)
         localStorage.setItem('sideBySide', sideBySide.toString())
+    }
+
+    const expandOrCollapse = () => {
+        if (!containerRef.current) return
+        if (sideBySide) {
+            const containerWidth = containerRef.current.getBoundingClientRect().width
+            const minWidth = containerWidth / 3
+            setSideWidth(expandable ? containerWidth : minWidth)
+        } else {
+            const containerHeight = containerRef.current.getBoundingClientRect().height
+            const minHeight = 57
+            setBottomHeight(expandable ? containerHeight : minHeight)
+        }
     }
 
     useEffect(() => {
@@ -130,6 +147,28 @@ export default function Inbox(props) {
             setSideBySide(sideBySide === 'true')
         }
     }, [])
+
+    useEffect(() => {
+        if (containerRef.current) {
+            const containerRect = containerRef.current.getBoundingClientRect()
+            if (sideBySide) {
+                setExpandable(sideWidth <= containerRect.width / 3)
+            } else {
+                setExpandable(bottomHeight <= containerRect.height / 2)
+            }
+        }
+    }, [bottomHeight, sideWidth, sideBySide, containerRef.current])
+
+    useEffect(() => {
+        if (!containerRef.current) return
+        const containerRect = containerRef.current.getBoundingClientRect()
+
+        if (sideBySide) {
+            setSideWidth(Math.max(containerRect.width / 3, SIDE_WIDTH_DEFAULT))
+        } else {
+            setBottomHeight(Math.max(containerRect.height / 2, BOTTOM_HEIGHT_DEFAULT))
+        }
+    }, [sideBySide])
 
     return (
         ready && (
@@ -219,7 +258,7 @@ export default function Inbox(props) {
                             {permalink && (
                                 <div
                                     ref={bottomContainerRef}
-                                    className={`flex-none relative min-h-0 min-w-[600px] ${
+                                    className={`flex-none relative min-h-0 min-w-0 ${
                                         !isDragging ? 'transition-all duration-200 ease-out' : ''
                                     } ${sideBySide ? 'border-l border-border' : ''}`}
                                     style={{
@@ -241,21 +280,13 @@ export default function Inbox(props) {
                                                 const containerWidth =
                                                     containerRef.current.getBoundingClientRect().width
                                                 const newSideWidth = Math.min(
-                                                    Math.max(sideWidth - info.delta.x, 300),
+                                                    Math.max(sideWidth - info.delta.x, containerWidth / 3),
                                                     containerWidth
                                                 )
+
                                                 setSideWidth(newSideWidth)
                                             }}
-                                            onDoubleClick={() => {
-                                                if (!containerRef.current) return
-                                                const containerWidth =
-                                                    containerRef.current.getBoundingClientRect().width
-                                                setSideWidth(
-                                                    sideWidth <= containerWidth / 3
-                                                        ? containerWidth
-                                                        : containerWidth / 3
-                                                )
-                                            }}
+                                            onDoubleClick={expandOrCollapse}
                                         />
                                     ) : (
                                         <motion.div
@@ -276,16 +307,7 @@ export default function Inbox(props) {
                                                 )
                                                 setBottomHeight(newBottomHeight)
                                             }}
-                                            onDoubleClick={() => {
-                                                if (!containerRef.current) return
-                                                const containerHeight =
-                                                    containerRef.current.getBoundingClientRect().height
-                                                setBottomHeight(
-                                                    bottomHeight <= containerHeight / 1.5
-                                                        ? containerHeight
-                                                        : containerHeight / 1.5
-                                                )
-                                            }}
+                                            onDoubleClick={expandOrCollapse}
                                         />
                                     )}
                                     <ScrollArea className="h-full">
@@ -344,40 +366,67 @@ export default function Inbox(props) {
                                                         label="Thread notifications"
                                                     />
                                                 )}
-                                                <div>
-                                                    <Tooltip
-                                                        content={`${
-                                                            sideBySide
-                                                                ? 'Switch to stacked view'
-                                                                : 'Switch to side-by-side view'
-                                                        }`}
-                                                    >
-                                                        <span>
-                                                            <OSButton
-                                                                active={!sideBySide}
-                                                                variant="ghost"
-                                                                size="sm"
-                                                                icon={<IconBottomPanel />}
-                                                                onClick={() => handleSideBySide(false)}
-                                                            />
-                                                        </span>
-                                                    </Tooltip>
-                                                    <Tooltip content={`Side-by-side view`}>
-                                                        <span>
-                                                            <OSButton
-                                                                active={sideBySide}
-                                                                className={`${
-                                                                    sideBySide
-                                                                        ? '!skin-classic:bg-red-500 !skin-modern:bg-red-500'
-                                                                        : ''
-                                                                }`}
-                                                                variant="ghost"
-                                                                size="sm"
-                                                                icon={<IconSidePanel />}
-                                                                onClick={() => handleSideBySide(true)}
-                                                            />
-                                                        </span>
-                                                    </Tooltip>
+                                                <div className="flex items-center">
+                                                    <div>
+                                                        <Tooltip
+                                                            content={`${
+                                                                sideBySide
+                                                                    ? 'Switch to stacked view'
+                                                                    : 'Switch to side-by-side view'
+                                                            }`}
+                                                        >
+                                                            <span>
+                                                                <OSButton
+                                                                    active={!sideBySide}
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    icon={<IconBottomPanel />}
+                                                                    onClick={() => handleSideBySide(false)}
+                                                                />
+                                                            </span>
+                                                        </Tooltip>
+                                                        <Tooltip content={`Side-by-side view`}>
+                                                            <span>
+                                                                <OSButton
+                                                                    active={sideBySide}
+                                                                    className={`${
+                                                                        sideBySide
+                                                                            ? '!skin-classic:bg-red-500 !skin-modern:bg-red-500'
+                                                                            : ''
+                                                                    }`}
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    icon={<IconSidePanel />}
+                                                                    onClick={() => handleSideBySide(true)}
+                                                                />
+                                                            </span>
+                                                        </Tooltip>
+                                                    </div>
+                                                    <div className="ml-1 pl-1 border-l border-border">
+                                                        <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
+                                                            <span>
+                                                                <OSButton
+                                                                    variant="ghost"
+                                                                    size="sm"
+                                                                    className="relative"
+                                                                    icon={
+                                                                        <IconChevronDown
+                                                                            className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                                                sideBySide
+                                                                                    ? expandable
+                                                                                        ? 'rotate-90'
+                                                                                        : '-rotate-90'
+                                                                                    : expandable
+                                                                                    ? 'rotate-180'
+                                                                                    : ''
+                                                                            }`}
+                                                                        />
+                                                                    }
+                                                                    onClick={expandOrCollapse}
+                                                                />
+                                                            </span>
+                                                        </Tooltip>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
