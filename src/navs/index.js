@@ -1428,6 +1428,12 @@ export const communityMenu = {
             url: '/templates',
         },
         {
+            name: 'DeskHog',
+            icon: 'IconDeskHog',
+            color: 'blue',
+            url: '/deskhog',
+        },
+        {
             name: 'Cool tech jobs',
             icon: 'IconLaptop',
             color: 'purple',
