@@ -1,13 +1,12 @@
 ---
-title: Vibe design for product engineers 
-Alt: (or The product engineer's guide to vibe designing)
-Alt2: Vibe-Driven Development: How to Design Without a Designer
-
+title: The product engineer's guide to vibe designing
+# Alt: Vibe design for product engineers
+# Alt2: Vibe-Driven Development: How to Design Without a Designer
 date: 2025-05-22
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/opensource_de4421575a.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/9uxiql_4b939c46fd.jpg
 featuredImageType: full
 tags:
   - Product engineers
@@ -16,101 +15,102 @@ crosspost:
   - Blog
 ---
 
-Header Image: Hedgehog version of this meme - https://imgflip.com/i/9uxiql
+Header image (to hedgehogify): https://res.cloudinary.com/dmukukwp6/image/upload/9uxiql_4b939c46fd.jpg
 
-Subheading for email: Engineers Move Fast. Your Design Should, Too.
+Subheading for email: Engineers move fast. Your design should too.
 
-## Intro: 
+------
 
-LLMs have supercharged the speed at which engineers ship code. But great products aren’t just built on shipping velocity—they’re built on experience. And experience is where design comes in.
+In the past, engineers had to wait on designers to make things usable or to even start building.
 
-Historically, engineers relied on product designers to make things feel right. Now, with tools like ChatGPT, v0.dev, and Lovable, you can go from idea to production-ready interface—without waiting on a Figma file.
+Design was a dependency. If the Figma wasn't ready, neither were you.
 
-This newsletter is your shortcut to becoming a “vibe master.” We’ll break down the essentials of designing fast, intuitive, and good-looking UIs without needing a full-time designer in the loop.
+Enter vibe designing.
 
+With tools like [Lovable](https://lovable.dev/), [v0.dev](https://v0.dev/), and [Bolt](https://bolt.new/), you can ship polished interfaces without waiting on anyone else.
 
-
-
-
-<!-- Something about how vibe coding makes you code fast, so now design is the skill you need to move fast and build the best products.
-Perhaps also something on how this newsletter will help you build good taste for vibes/ become a vibe master
-
-perhaps some bits on how removing the need for a designer removes a person from the loop, effectively make you faster -->
-
-The rise of LLMs mean that engineers code superfast now. LLMs also have another under utilized skill that can help engineers ship fast and not be blocked by a designer: design skills.
-
-In this newsletter we dive into how exactly you can vibe design your way to shipping great products.
-
+This newsletter is your shortcut to becoming a vibe design master. I'll break down the essentials of designing fast, intuitive, and good-looking UIs without needing a full-time designer in the loop.
 
 ## Step 1: Understand basic UI principles
 
-Design isn’t magic – it’s a set of rules you can learn. And applying them correctly means you don’t need to guess what looks good.
+Design isn't magic. 
+
+It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
 
 Start with these seven foundational principles:
 
-1. **Hierarchy**  
-  → Make the most important thing on the screen visually dominant. Use larger font sizes, bold weights, and more prominent positioning.  
-  💡 **Tip**: Ask yourself *"What do I want the user to notice first?"*
+**1. Hierarchy**  
+Make the most important thing on the screen visually dominant. Use larger font sizes, bold weights, and more prominent positioning.  
+> 💡 **Tip**: Ask yourself *"What do I want the user to notice first?"*
 
-2. **Contrast**  
-  → Use color, size, and shape to differentiate elements. Ensure buttons and interactive elements stand out from the background. 
-  💡 **Tip**: Test your layout in grayscale – if it still works, your contrast is good.  
+**2. Contrast**  
+Use color, size, and shape to differentiate elements. Ensure buttons and interactive elements stand out from the background.  
+> 💡 **Tip**: Test your layout in grayscale – if it still works, your contrast is good.  
 
-3. **Consistency**  
-  → The more often a user sees the same layout, color, or interaction pattern, the less they have to think. Familiarity speeds them up. Inconsistent UI, on the other hand, makes every screen feel like a new puzzle. 
-  💡 **Tip**: Treat every design decision as a chance to remove a micro-decision for the user.  
+**3. Consistency**  
+The more often a user sees the same layout, color, or interaction pattern, the less they have to think. Familiarity speeds them up. Inconsistent UI, on the other hand, makes every screen feel like a new puzzle.  
+> 💡 **Tip**: Treat every design decision as a chance to remove a micro-decision for the user.  
 
-4. **Alignment**  
-   → A clean visual structure helps users process content faster. When elements snap to a grid, the eye flows naturally. When they don’t, the brain hesitates.
-  💡 **Tip**: Use a consistent grid system and check your edges. If one button is 3px off, fix it – it’s breaking the vibe.
+**4. Alignment**  
+A clean visual structure helps users process content faster. When elements snap to a grid, the eye flows naturally. When they don't, the brain hesitates.  
+>  💡 **Tip**: Use a consistent grid system and check your edges. If one button is 3px off, fix it – it's breaking the vibe.
 
-5. **Proximity**  
-   → Place related elements close together. Labels should hug their inputs. Actions should live near their targets.
-  💡 **Tip**: If two elements are related but far apart, group them or your user will miss the connection.
+**5. Proximity**  
+Place related elements close together. Labels should hug their inputs. Actions should live near their targets.  
+>  💡 **Tip**: If two elements are related but far apart, group them or your user will miss the connection.
 
-6. **Balance**  
-   → Every element on the screen has visual weight. If there's too much weight on one side,it feels lopsided. Distribute your text, imagery, and whitespace so the layout feels stable
-  💡 **Tip**: Try the squint test—blur your eyes and see where the visual “weight” lands. If it clumps in one spot, rebalance.
+**6. Balance**  
+Every element on the screen has visual weight. If there's too much weight on one side,it feels lopsided. Distribute your text, imagery, and whitespace so the layout feels stable  
+> 💡 **Tip**: Try the squint test—blur your eyes and see where the visual “weight” lands. If it clumps in one spot, rebalance.
 
-Want to polish even further? Browse Laws of UX or dip into basic color theory to elevate your layouts without overthinking it.
 
 ## Step 2: Build strong opinions
 
-Great design isn’t neutral – it’s opinionated. It removes the irrelevant and emphasizes what matters. 
+Great design isn't neutral – it's opinionated. It removes the irrelevant and emphasizes what matters. 
 
-Every choice you leave to the user is a chance to make them hesitate. Every dropdown is a question. Every "optional" setting is a delay. Every unclear label is a moment of cognitive load.
+Every choice you leave to the user is a chance to make them hesitate. Every dropdown is a question. Every optional setting is a delay. Every unclear label is a moment of cognitive load.
 
-You're making your user work. And your user? They have a job to be done. They just want to click and move on.
+Your user has a job to be done. They just want to click and move on.
 
-Don't get me wrong, asking the user to make a decision in itself isn't a bad thing. Joel Spolsky, founder of Stack Overflow summarized it perfectly in his [post on UI design](https://www.joelonsoftware.com/2001/10/24/user-interface-design-for-programmers/):
+Don't get me wrong, asking the user to make a decision in itself isn't a bad thing. Joel Spolsky, founder of Stack Overflow, summarized it perfectly in his [post on UI design](https://www.joelonsoftware.com/2001/10/24/user-interface-design-for-programmers/):
 
->  "Freedom of choice can be wonderful. The problem comes when you ask them to make a choice that they don’t care about."
+------
 
-So how do you know what your users actually care about? [You ask them](https://newsletter.posthog.com/p/talk-to-users).
+<Quote
+    imageSource="https://res.cloudinary.com/dmukukwp6/image/upload/so_logo_7473d02d0f.png"
+    size="sm"
+    name="Joel Spolsky"
+    title="Founder, Stack Overflow"
+    quote={`“Freedom of choice can be wonderful. The problem comes when you ask them to make a choice that they don't care about.”`}
+/>
 
-But even before that, you can ask yourself the following questions when building a feature:
+------
+
+So how do you know what your users actually care about? [You ask them](/newsletter/talk-to-users).
+
+But even before that, you can ask yourself these questions when building a feature:
 
 - What's the core job the user is trying to complete?
 - What's the fastest, clearest way to help them succeed?
 - What can I remove without breaking the experience?
 - What decision am I forcing the user to make that I could just make for them?
-- Would this make sense to someone who’s tired, distracted, or seeing it for the first time?
+- Would this make sense to someone who's tired, distracted, or seeing it for the first time?
 
-## Step 3. Build your prompt
+## Step 3. Craft the perfect prompt
 
 Armed with your UI and UX principles from step 1 and step 2, you can use tools like [v0](https://v0.dev/), [Lovable](https://lovable.dev/), or [Bolt](https://bolt.new/) to craft your designs. The key is to build a great prompt.
 
-Start by researching 2-3 products that solve the same or similar problem. Click around and pay attention to how the interface looks and feels. A few things to think about:
+Start by researching 2-3 products that solve the same or similar problem. Play around with them and pay attention to how the interface looks and feels. A few things to think about:
 
-- Where does your eyes go first, and is that intentional?
+- Where do your eyes go first?
 - How many steps does it take to complete a core action?
-- Does the layout make me feel calm and in control or overwhelmed and unsure?
-- Are empty states or error states handled thoughtfully?
+- Does the layout make me feel calm or overwhelming?
 - Do the patterns, styles, and flows feel unified across the experience?
+- Are empty states or error states handled thoughtfully?
 
 Take notes and screenshots on what you like and dislike about each product. You'll use this in your prompt.
 
-Once you’ve done that, it’s time to feed the model real context. LLMs can generate much better UI when they understand your app’s existing design system. That means attaching actual files from your codebase. Good context includes:
+Next, gather the files that you'll attach to your prompt. LLMs can generate much better UI when they understand your app's existing design system and context. Good files to include are:
 
 - **UI components** – e.g. `components/ui/button`, `input`, `card` , custom [shadcn/ui](https://ui.shadcn.com/) components 
   Defines your core visual and interaction patterns.
@@ -123,7 +123,7 @@ Once you’ve done that, it’s time to feed the model real context. LLMs can ge
 - **Real screens** – e.g. `pages/settings`, `user-profile`  
   Demonstrates how everything comes together in practice.
 
-Now pull it all together with a focused, detailed prompt. Here’s a simple template you can adapt:
+Now pull it all together with a focused, detailed prompt. Here's a simple template you can adapt:
 
 ```md
 # Feature Brief
@@ -163,7 +163,9 @@ Prioritize: <clarity, speed, minimal steps, mobile-first, etc.>
 **What doesn't:**
 - <list of things to avoid>
 
-Refer to the attached screenshots for additional context.
+Refer to the attached screenshots for additional context:
+- <competitor_image_1.png>
+- <competitor_image_2.png>
 
 ## Visual Principles  
 
@@ -177,33 +179,28 @@ Use these as a foundation for layout and structure:
 - **Balance** – Distribute visual weight evenly across the layout
 ```
 
-This should get you 90% of the way there. The next 10% is polishing your UI and interactions.
+This should get you 90% of the way there. The final 10% is polishing your UI and interactions.
 
 ## Step 4: Ship it and iterate
 
-Ship early. Ship messy if you have to. Just **ship**.
+Ship early. Ship even if it's rough. Just **ship**.
 
 Real users will teach you more in one session than any internal review or gut check ever will
 
-- Ship behind a [feature flag](https://posthog.com/newsletter/feature-flag-mistakes) if you’re nervous.
-- Use [session replay](https://posthog.com/session-replay) to see where people hesitate, rage click, or get stuck.
-- Track funnels to know whether your actually UX works – not just if it looks clean.
-- Talk to real users.  Ask what felt slow, confusing, or unnecessary.
+- If you're nervous, ship behind a [feature flag](/newsletter/feature-flag-mistakes) to a handful of friendly users.
+- Use [session replay](/session-replay) to see where people hesitate, rage click, or get stuck.
+- Track funnels to know whether your UX is actually working.
+- Talk to real users. Ask what felt slow, confusing, or unnecessary.
 - Keep iterating. One small fix at a time compounds fast.
  
 ## TL;DR
+ 
+You don't need a designer to build great UI. You need:
 
-You don’t need a designer to build great UI. You need good taste, strong opinions, and the right prompt.
+- Good taste
+- Strong opinions
+- A great prompt
 
-- Great design isn’t about looking pretty. It's about reducing friction and helping users get things done.
-- Learn a few core design principles and you can get 80% of the way there.
-- A great prompt and real code context give LLMs everything they need to generate good UI.
-- The final 10%: Ship it, watch users struggle, and make it better.
-
-
-## Further reading 
-
-https://www.joelonsoftware.com/2001/10/24/user-interface-design-for-programmers/
-https://lawsofux.com/?__readwiseLocation=
+![Guy looking into mirror meme with caption "No Designer No Problem"](https://i.imgflip.com/9vjk4x.jpg)
 
 Word by Lior Neu-ner, who is always down for a good vibe.
