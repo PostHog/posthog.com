@@ -1430,7 +1430,7 @@ export const communityMenu = {
         {
             name: 'DeskHog',
             icon: 'IconDeskHog',
-            color: 'blue',
+            color: 'seagreen',
             url: '/deskhog',
         },
         {
