@@ -77,6 +77,12 @@ By default, `base` and `assets` imported from `$app/paths` in Svelte use relativ
 
 For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
 
+## Internal users filtering or cohorts-based filters don't work
+
+If you use cohorts to filter sessions, or add cohort condition into the "Filter out internal and test users" setting - it can work incorrectly (or not work at all) while cohorts are calculating (to properly decide what people are in).
+
+To check, you can go to "People > Cohorts" and see if any of them are in "calculating" status. 99% of the time they will be available in a couple of minutes, and if not (got stuck) - you can ask PostHog support to recalculate them for you manually.
+
 ## Filtering can't find my custom events
 
 The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.
