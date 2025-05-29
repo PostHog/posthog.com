@@ -124,7 +124,7 @@ If you see that a customer is spending more than ~$1,667 monthly, conduct a disc
 
 We typically hand the account over to Sales when a customer is interested in the annual plan or requires additional contractual or legal support.
 
-If you come across an account with growth potential or stable high-level spend that might benefit from an annual plan but has been unresponsive after this option was suggested, you can add them to the “Create AE lead” segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic. Historically, AEs have been successful in reaching out and securing long-term commitments.
+If you come across an account with growth potential or stable high-level spend that might benefit from an annual plan or general sales engagement, but has been unresponsive after this option was suggested, you can add them to the “Create AE lead” segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic. Historically, AEs have been successful in reaching out and securing long-term commitments.
 
 If the account has engaged with the Sales team at some point and it's unclear where the conversation stands, ping your fellow AE to make sure you’re not overlapping efforts. If it’s clear there’s a duplication issue and we shouldn’t be involved, ping Mine to double-check the logic.
 
