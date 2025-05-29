@@ -52,6 +52,10 @@ export const quickLinks: QuickLinks = [
         to: '/docs/libraries/google-tag-manager',
     },
     {
+        name: 'Hono',
+        to: '/docs/libraries/hono',
+    },
+    {
         name: 'Laravel',
         to: '/docs/libraries/laravel',
     },

@@ -300,7 +300,9 @@ const Roadmap = () => {
                                             <h4 className="text-lg font-bold mb-1 leading-tight">
                                                 {roadmap.attributes.title}
                                             </h4>
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                            <Markdown className="dark:text-primary">
+                                                {roadmap.attributes.description}
+                                            </Markdown>
                                             <div className="mt-4 flex gap-2">
                                                 <CallToAction
                                                     size="sm"
@@ -362,7 +364,9 @@ const Roadmap = () => {
                                                     {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
                                                 </p>
                                             )}
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                            <Markdown className="dark:text-primary">
+                                                {roadmap.attributes.description}
+                                            </Markdown>
                                         </div>
                                     </div>
                                 </div>
@@ -610,7 +614,11 @@ export const ProductMax = () => {
                             <img src={headlineImg} alt="Max AI" className="w-full max-w-[604px]" />
 
                             <div>
-                                <img src={betaMobileImg} alt="Max AI" className="w-full mdlg:hidden max-w-[222px] mx-auto" />
+                                <img
+                                    src={betaMobileImg}
+                                    alt="Max AI"
+                                    className="w-full mdlg:hidden max-w-[222px] mx-auto"
+                                />
                                 <img
                                     src={betaDesktopImg}
                                     alt="Max AI"
@@ -637,7 +645,7 @@ export const ProductMax = () => {
                                                 <input
                                                     type="email"
                                                     placeholder="Enter your email"
-                                                    className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg"
+                                                    className="flex-1 border border-light rounded-l-full rounded-r-none px-4 py-2 bg-[#E5E7E0] text-lg w-full"
                                                     value={email}
                                                     onChange={(e) => setEmail(e.target.value)}
                                                     required
@@ -647,7 +655,7 @@ export const ProductMax = () => {
                                                         type="primary"
                                                         size="lg"
                                                         className="rounded-r-full rounded-l-none"
-                                                        childClassName="rounded-l-none rounded-r-full"
+                                                        childClassName="rounded-l-none rounded-r-full whitespace-nowrap"
                                                     >
                                                         Join the list
                                                     </CallToAction>

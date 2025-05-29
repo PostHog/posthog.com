@@ -20,6 +20,7 @@ import posthog from "posthog-js";
 const app = createApp(App);
 posthog.init("<ph_project_api_key>", {
   api_host: "<ph_client_api_host>",
+  capture_pageview: 'history_change'
 });
 app.provide("posthog", posthog);
 ```
