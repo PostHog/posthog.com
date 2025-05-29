@@ -40,16 +40,16 @@ export default function DataPipeline({
                 </div>
                 <div className="article-content">
                     <p>{description}</p>
-                    {status !== 'coming-soon' && inputs_schema?.length > 0 && (
+                    {status !== 'coming_soon' && inputs_schema?.length > 0 && (
                         <>
                             <h2>Configuration</h2>
                             <Configuration inputs_schema={inputs_schema} />
                         </>
                     )}
-                    {status !== 'coming-soon' && (
+                    {status !== 'coming_soon' && (
                         <APIExamples initialOpen id={id} name={name} inputs_schema={inputs_schema} type={type} />
                     )}
-                    {status === 'coming-soon' && <NotifyMe pipeline={{ name, type }} />}
+                    {status === 'coming_soon' && <NotifyMe pipeline={{ name, type }} />}
                 </div>
             </PostLayout>
         </Layout>
