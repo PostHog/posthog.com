@@ -1,5 +1,5 @@
 ---
-title: How to redact sensitive information before they're sent to PostHog
+title: How to redact event data before it is sent to PostHog
 date: 2025-05-29
 showTitle: true
 author:
