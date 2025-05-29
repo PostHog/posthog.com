@@ -132,7 +132,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 </>
             </CallToAction>
 
-            {!loading && outOfStock && <BackInStockForm variant={variantForCart} />}
+            {!loading && outOfStock && <BackInStockForm variant={variantForCart} product={product} />}
 
             {product.description && (
                 <div className="border-t border-light dark:border-dark pt-4">
@@ -148,7 +148,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                     </p>
                     <ul className="list-none m-0 p-0 grid grid-cols-2 gap-x-2">
                         {product.imageProducts?.map((product) => {
-                            const { handle, featuredImage } = product
+                            const { handle } = product
+                            const featuredImage = (product as any).featuredImage
                             return (
                                 <li key={handle}>
                                     <a href={`?product=${handle}`}>
