@@ -110,6 +110,8 @@ dateDiff(
 ) <= 3
 ```
 
+<MaxCTA question="Filter users whose trial ends in 3 days, using only their trial_started property." />
+
 A use case for this is creating an action for `pricing pageviews` during the last days of the trial, then posting to a [webhook](/docs/webhooks) to notify your team to reach out to the user.
 
 ![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/SQL-date-time-filters/action.png)

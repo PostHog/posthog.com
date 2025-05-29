@@ -56,6 +56,8 @@ In PostHog, [create an insight](https://app.posthog.com/insights/new) with two s
 > - **`dau` aka "unique users":** count of unique users in the interval, which defaults to daily. Despite the name, if you select the `interval` to be weekly or monthly, this will show weekly or monthly active users respectively.
 > - **`monthly_active`:** rolling average of users who sent events in the last month.
 
+<MaxCTA question="What's my DAU/MAU ratio?" />
+
 ## Customizing your DAU/MAU ratio
 
 There are many ways to customize your DAU/MAU ratio to fit your needs. The easiest way is to use a filter on your insight.
