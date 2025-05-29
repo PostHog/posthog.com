@@ -8,6 +8,7 @@ export default function useDataPipelinesNav({ type }: { type?: string }): { slug
                     slug
                     name
                     type
+                    status
                 }
             }
         }
@@ -19,5 +20,11 @@ export default function useDataPipelinesNav({ type }: { type?: string }): { slug
         .map((node: any) => ({
             url: `/docs/cdp/${type}s/${node.slug}`,
             name: node.name,
+            ...(node.status === 'coming-soon' && {
+                badge: {
+                    title: 'Coming soon',
+                    className: '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                },
+            }),
         }))
 }
