@@ -12,11 +12,11 @@ tags:
 
 When collecting data to better understand your customers, it's important to comply with [privacy regulations](/docs/privacy). 
 
-Sometimes, this means certain information should **never** make it to PostHog servers. This tutorial shows you how to hide or redact information on the [PostHog JavaScript Web SDK](https://posthog.com/docs/libraries/js), before it's sent to PostHog.
+Sometimes, this means certain information should **never** make it to PostHog servers. This tutorial shows you how to hide or redact information on the [PostHog JavaScript Web SDK](/docs/libraries/js), before it's sent to PostHog.
 
 ## Redacting information with the Web SDK
 
-You can selectively remove properties from events before they're sent by initializing PostHog with a [`before_send`](https://posthog.com/docs/libraries/js/features#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
+You can selectively remove properties from events before they're sent by initializing PostHog with a [`before_send`](/docs/libraries/js/features#redacting-information-in-events) hook. PostHog will pass the event object to the `before_send` function, where you can redact any information.
 
 For example, you can create a `beforeSend.js` file and define your redaction logic there like this:
 
@@ -71,66 +71,19 @@ posthog.init('<ph_project_api_key>', {
 
 ## Hiding customer IP address
 
-PostHog will use the client IP address found during an event capture request if an `$ip` isn't passed through `event.properties`. To hide your customer's IP address, you can override the `$ip` property with a sample address like `192.0.2.0`.
-
-```js file=beforeSend.js
-export const beforeSend = (event) => {
-  if (!event) {
-    return null;
-  }
-
-  event.properties['$ip'] = '192.0.2.0';
-
-  return event;
-};
-```
-
-If you require your customers' IP addresses to be completely obfuscated from PostHog servers, consider [hosting a reverse proxy](/docs/advanced/proxy#deploying-a-reverse-proxy).
-
-## Opting out of automatic collection
-
-If you want more control over what events are captured, you can opt out of automatic collection completely. You can do this at two different levels:
-1. Per-user opt out
-2. Opt out for all users
-
-### Per-user opt out
-
-Start by opting out each user by default when you initialize PostHog.
-
-```js
-posthog.init('<ph_project_api_key>', {
-    opt_out_capturing_by_default: true,
-});
-```
-
-Then, you can prompt users to opt in or opt out:
-
-```js
-// opt out
-posthog.opt_out_capturing()
-// opt in
-posthog.opt_in_capturing()
-```
-
-Before capturing events manually, you can check if the user has opted out like this:
-
-```js
-posthog.has_opted_out_capturing()
-```
-
-### Opt out for all users
-
-To opt out of automatic collection entirely, you can navigate to your PostHog dashboard > **Settings** > **Project** > [**Autocapture & heatmaps**](https://us.posthog.com/settings/project-autocapture#autocapture) and toggle to disable different types of autocapturing. 
+PostHog will use the client IP address found during an event capture request if an `$ip` isn't passed through `event.properties`. This means you can't simply redact the `$ip` property like other properties. Instead, enable the [**Discard client IP data**](https://us.posthog.com/settings/environment#datacapture) toggle. When this is enabled, PostHog will drop any IP information related to an event.
 
 ## More privacy controls
 PostHog offers a wide range of controls to limit data collection at different levels.
 
-You can use [the property filter transformation](/tutorials/property-filter) to filter out captured event properties **before ingestion**. This means the full events will still reach PostHog, but the filtered properties will not be stored
+You can use [the property filter transformation](/tutorials/property-filter) to filter out captured event properties **before ingestion**. This means the full events will still reach PostHog, but the filtered properties will not be stored.
 
-You can also disable capturing for specific UI elements for [product analytics](https://posthog.com/docs/product-analytics/privacy) and [session replay](https://posthog.com/docs/session-replay/privacy).
+You can also disable capturing for specific UI elements for [product analytics](/docs/product-analytics/privacy) and [session replay](/docs/session-replay/privacy).
 
 ## Further reading
-- [Product analytics privacy controls](https://posthog.com/docs/product-analytics/privacy)
-- [Session replay privacy controls](https://posthog.com/docs/session-replay/privacy)
-- [Privacy compliance](https://posthog.com/docs/privacy)
+- [Product analytics privacy controls](/docs/product-analytics/privacy)
+- [Product analytics autocapture controls](/docs/product-analytics/autocapture#configuring-autocapture)
+- [Session replay privacy controls](/docs/session-replay/privacy)
+- [LLM observability](/docs/ai-engineering/observability#privacy-mode)
+- [Privacy compliance](/docs/privacy)
 - [Property Filter app](/tutorials/property-filter)
