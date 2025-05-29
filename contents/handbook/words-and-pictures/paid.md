@@ -39,6 +39,16 @@ We may consider other paid platforms such as Facebook and Stack Overflow in the 
 
 We usually focus campaigns on users in the US, Canada, UK, Germany and France, as these tend to lead to the most high quality signups. For any GDPR-specific campaigns, we target all EU countries. 
 
+## Meta Ads
+
+In Q2 2025, we're testing Meta ads as a way to increase newsletter subscribers. You can view our ads in [Ads Manager](https://adsmanager.facebook.com/adsmanager/manage/campaigns?nav_entry_point=lep_237&nav_source=unknown&global_scope_id=643559792019437&business_id=643559792019437&act=1028028472241792&redirect_session_id=0302e4c2-f5ff-4150-92af-95821305a344&ads_manager_read_regions=true#).
+
+For access to the Ads Manager, please contact <TeamMember name="Lior Neu-ner" /> or <TeamMember name="Brian Young" />.
+
+For tracking conversions, we use Meta's Conversions API via the [PostHog destination](https://us.posthog.com/project/2/functions/0196edd0-6d74-0000-636b-5f69c8e7e9f5). **Important**: We must be extremely careful not to include any personally identifiable information. We should only include the `fbclid` parameter and the `client_user_agent`.
+
+Note that we do not have Meta's pixel installed, as we do not allow any third-party cookies on our site.
+
 ## Tracking conversion
 
 We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. 
