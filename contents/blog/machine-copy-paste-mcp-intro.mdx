@@ -41,7 +41,7 @@ Next, let’s understand the protocol’s features.
 
 **What they do**: resources dump information into the context. This could be an API key, a JSON body to help write parsing logic, or a list of established values that code must incorporate.
 
-**How they save labor**: imagine implementing [feature flags](/docs/feature-flags/adding-feature-flag-code) in some new code. We *really* don’t want the model to invent new names for this stuff. But we also don’t want the developer to log into their account and start copying and pasting flag names. So instead, we pipe a list directly into the agent session.
+**How they save labor**: imagine implementing [feature flags](/docs/feature-flags/adding-feature-flag-code) in some new code. We *really* don’t want the model to invent new names for this stuff. But we also don’t want the developer to log into their account and start copying and pasting flag names. So instead, we could use MCP to pipe a list of flags and descriptions directly into the agent session.
 
 ### Tools
 
