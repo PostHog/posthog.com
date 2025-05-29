@@ -107,21 +107,24 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 - If the issue requires in-depth troubleshooting, you can direct the user to create a ticket from the app, or you can do so on their behalf. Just remember to let them know before you do, so they’re not surprised when they see it in the UI!
 - Before escalating the issue to Support, gather as much information and context as possible so your handover is informative and thorough. You can also share a recording of the call with the team, highlighting the relevant timestamp.
 
-**How to deepen product knowledge**
-
-- Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
-- Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) BuildBetter folder.
-- Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh).
-
 **Teach how to fish**
 
 Ideally, after the meeting with the user, they should know how to seek further help. That includes using Max, consulting the docs, and reaching out to our Support team.
 
+### How to deepen product knowledge
+
+- Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
+- Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) BuildBetter folder.
+- Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh).
+- Go through the [PostHog curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). 
+
 ### Handover to the Sales team
 
-If you see that the customer spends more than ~$1667 monthly, do the discovery for their high spend level. If they’re happy with PostHog moving forward, you can casually mention our annual plan to them, which helps them save 20%. However, if they’re happy paying monthly, they’re more than welcome to do so! 
+If you see that a customer is spending more than ~$1,667 monthly, conduct a discovery to understand the reason behind their high spend and assess whether there's potential for stable spend or usage moving forward. If they’re happy continuing with PostHog, you can mention our annual plan, which helps them save 20%. However, if they prefer paying monthly, they are more than welcome to do so!
 
-We can hand the account over to Sales when someone is interested in the annual plan or requires some additional contractual or legal work. 
+We typically hand the account over to Sales when a customer is interested in the annual plan or requires additional contractual or legal support.
 
-If you see accounts where there were some previous conversations with Sales, ping your fellow AE to make sure you’re not stepping on their toes. If there’s clearly a problem with duplication, and we shouldn’t be involved, ping Mine to double-check the logic. 
+If you come across an account with growth potential or stable high-level spend that might benefit from an annual plan but has been unresponsive after this option was suggested, you can add them to the “Create AE lead” segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic. Historically, AEs have been successful in reaching out and securing long-term commitments.
+
+If the account has engaged with the Sales team at some point and it's unclear where the conversation stands, ping your fellow AE to make sure you’re not overlapping efforts. If it’s clear there’s a duplication issue and we shouldn’t be involved, ping Mine to double-check the logic.
 
