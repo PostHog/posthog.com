@@ -517,13 +517,13 @@ const PipelinePreview = ({ pipeline }) => {
                 ) : (
                     <p>{pipeline.description}</p>
                 )}
-                {pipeline.status !== 'coming-soon' && pipeline.inputs_schema?.length > 0 && (
+                {pipeline.status !== 'coming_soon' && pipeline.inputs_schema?.length > 0 && (
                     <>
                         <h2 className="!mt-2">Configuration</h2>
                         <Configuration inputs_schema={pipeline.inputs_schema} />
                     </>
                 )}
-                {pipeline.status !== 'coming-soon' && (
+                {pipeline.status !== 'coming_soon' && (
                     <APIExamples
                         name={pipeline.name}
                         inputs_schema={pipeline.inputs_schema}
@@ -535,7 +535,7 @@ const PipelinePreview = ({ pipeline }) => {
             </div>
 
             <div className="border-t border-border dark:border-dark pt-4">
-                {pipeline.status === 'coming-soon' ? (
+                {pipeline.status === 'coming_soon' ? (
                     <NotifyMe pipeline={pipeline} />
                 ) : (
                     <CallToAction
@@ -618,7 +618,7 @@ function PipelinesPage({ location }) {
                                         .slice(0, -1)}
                                 </span>
                             </p>
-                            {selectedDestination.status === 'coming-soon' && (
+                            {selectedDestination.status === 'coming_soon' && (
                                 <p
                                     className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ml-1`}
                                 >
@@ -803,7 +803,7 @@ function PipelinesPage({ location }) {
                                                                 </span>
                                                             </p>
                                                         )}
-                                                        {destination.status === 'coming-soon' && (
+                                                        {destination.status === 'coming_soon' && (
                                                             <p
                                                                 className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs font-medium rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ${
                                                                     selectedType === 'All' ? '!ml-1' : ''
