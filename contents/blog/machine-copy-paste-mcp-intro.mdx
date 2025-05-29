@@ -39,13 +39,13 @@ Next, let’s understand the protocol’s features.
 
 ### Resources
 
-**What they do**: resources dump information into the context. This could be an API key, a JSON body to help write parsing logic, or a list of established values that code must incorporate.
+**What they do**: resources dump information into the context. This could be an API key, a JSON body to help write parsing logic, or a list of established values that code must incorporate. An MCP server could get this stuff from your existing APIs and services.
 
 **How they save labor**: imagine implementing [feature flags](/docs/feature-flags/adding-feature-flag-code) in some new code. We *really* don’t want the model to invent new names for this stuff. But we also don’t want the developer to log into their account and start copying and pasting flag names. So instead, we could use MCP to pipe a list of flags and descriptions directly into the agent session.
 
 ### Tools
 
-**What they do**: tools trigger actions on behalf of the user, based on the goals and information already in the context. This means you can automate complex workflows to make sure no steps are skipped, and no transcription errors happen.
+**What they do**: tools trigger actions on behalf of the user, based on the goals and information already in the context. This means you can automate complex workflows to make sure no steps are skipped, and no transcription errors happen. Like resources, your MCP server could wrap your APIs to deliver this power.
 
 **How they save labor**: back to the feature flags example. If you’re in a *brand new app* and there are no feature flag names already established, a tool could save the user lots of clicking and typing. Within seconds, the new configuration can be written to a project, creating, naming and describing all the new flags.
 
