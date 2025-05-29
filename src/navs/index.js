@@ -1504,6 +1504,10 @@ export const companyMenu = {
                     name: 'Engineering',
                 },
                 {
+                    name: 'Billing',
+                    url: '/teams/billing',
+                },
+                {
                     name: 'CDP',
                     url: '/teams/cdp',
                 },
@@ -1554,6 +1558,10 @@ export const companyMenu = {
                 {
                     name: 'Messaging',
                     url: '/teams/messaging',
+                },
+                {
+                    name: 'Platform',
+                    url: '/teams/platform',
                 },
                 {
                     name: 'Product Analytics',
