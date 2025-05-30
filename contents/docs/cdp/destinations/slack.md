@@ -24,7 +24,7 @@ You'll also need access to the relevant Slack account.
 
 2. Click the **Destinations** tab.
 
-3. Search for **Slack** and select the destination.
+3. Search for **Slack** and click **+ Create**.
 <img alt="Creating a Slack destination" src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_create_8b55d6d50f.png"/>
 
 4. Choose an existing Slack connection or click **Connect to Slack**. You will be redirected to Slack to install the PostHog app.

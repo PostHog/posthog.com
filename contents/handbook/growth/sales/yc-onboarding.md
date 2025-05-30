@@ -12,14 +12,12 @@ We want to support other YC companies using PostHog because:
 
 ## The YC deal
 
-For startups in the current batch:
+For startups in the current/upcoming batch:
 
 - Get $50k of credit for PostHog Cloud for 12 months
 - _All founders_ get a Timbuk2 backpack
 - A private YC Slack channel for priority support
 - Get the batphone - CEO on whatsapp/text
-
-If a founder refers us to another YC company, both founders get an additional $5k of credit for PostHog Cloud plus a copy of the PMF guide. 
 
 For previous batches:
 
@@ -29,34 +27,26 @@ For previous batches:
 
 ## Our process
 
-We want to make this feel as personalized as possible - there is an outsized impact in giving YC companies personal attention to ensure they are successful with PostHog. 
+We want to make this feel as smooth as possible - there is an outsized impact in giving YC companies a great experience to ensure they are successful with PostHog. 
 
-- Kendal maintains a sheet with the details for all companies in the current batch as they launch (since the list isn't available anywhere)
-- James H messages every single one of them individually so that a) they have his number, and b) to tell them about the YC deal on Bookface
-- YC companies check out the deal and then book in for an onboarding call (see detailed section below)
-- Once companies are set up with us, we ask them to mark themselves as 'using' PostHog in Bookface
-- Add them to the `#posthog-founders-club` channel in Slack - this is where they can get priority support
-
-## Setting up billing
-
-To get them set up for the YC Deal there are various options in the [Zapier table](https://tables.zapier.com/app/tables/t/01H2896A4Y47C650WK0ZKX9FPE).
-
-There are three Approve buttons for each row in the table corresponding to the different YC deals.  There's also a handy link in the table to the YC Search for their company name so you can click through to validate them.
-
-**Note that the Approve buttons require the following fields to be populated, or the automation will fail silently:**
-* Stripe Customer ID (for Stripe credit)
-* Company Name (for Zendesk tagging)
-* Domain (for Zendesk tagging)
-* Email (for confirmation and to share Brilliant giveaway links)
-
-If the Stripe Customer ID is set to `unknown` it's because we couldn't automatically find a Stripe subscription for the email they used.  You need to populate it yourself or ask the customer to subscribe if they've not yet set up billing.  There's a handy *Subscribe Please* button in each table row which will email them asking to subscribe.
-
-Once you click the correct Approve button the [Zap](https://zapier.com/editor/196025535/published/196317316) will automatically do the following:
-
-1. Apply the correct credit amount to their Stripe customer object, and also update the plan expiry data metadata
-2. Set up their org on Zendesk and tag them as on the startup plan (meaning their tickets will be tagged with Normal priority)
-3. (Current batch only) Generate a Brilliant giveaway link
-4. Email the details of the plan and giveaway link to the customer (from Cameron)
+- YC companies check out the [deal on Bookface](https://bookface.ycombinator.com/deals/687)
+- Founders first need to [sign up](https://app.posthog.com/) for PostHog Cloud
+- After logging in and completing onboarding, they can submit their [application form](https://app.posthog.com/startups/yc)
+  - We check if they have added their billing details (needed to ensure they have a Stripe customer so we can add credits there) and prompt them to do so on the same page otherwise
+  - We ask for their YC batch (this determines their deal variant), a screenshot showing them on Bookface, and a number of merch packs for them and their co-founders
+- Valid applications are added to the [Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB) and approved automatically, which means that founders get their credits almost instantly
+- A brief confirmation email from [Scott](https://posthog.com/community/profiles/32112) is sent right away
+- Shortly after, they receive automated emails containing:
+  - An invite to the `#posthog-founders-club` channel in Slack - this is where they can get priority support
+  - Links to order merch (multiple emails with unique links, if more than 1 merch pack was requested)
+- After ~12h they receive a welcome email from [Joe](https://posthog.com/community/profiles/29070) with some additional information and access to perks
+  - Following the welcome email, they will get an additional email when they use 50%, 75%, and 100% of their credit, or when their credits fully expire - whichever comes first
+- We review submitted applications in the background
+  - We automatically check their batch membership based on their company name and domain (using APIs like these: [1](https://api.ycombinator.com/v0.1/docs), [2](https://github.com/yc-oss/api) - they only include publicly launched companies)
+  - We manually review the rest of the details, especially the submitted screenshot (you can use the `Under Review` view for that - it filters out `Reviewed` applications and hides some fields)
+- If there are some details missing or we believe they might not qualify for the YC deal, we can request additional information via the `Criteria Check` button in the table, which will trigger an email, which allows them to respond within a week
+- If we know they don't qualify for the deal or if we didn't hear back within a week, we can remove their Stripe credits using the `Reject after approval` button in the table, which will also trigger an email informing them about this (they can still reply later and if we find they do qualify for the deal, we can onboard them to it again using the `Approve` button in the table - you might need to right click on the button first to re-enable it)
+- After completing the review process, we mark them in the table as `Reviewed`
 
 ### If we need to send giveaways outside of the Zapier automation
 

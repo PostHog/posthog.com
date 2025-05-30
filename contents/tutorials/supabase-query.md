@@ -13,6 +13,8 @@ Because Supabase is built on Postgres, we can link and query it in PostHog using
 
 ## Linking Supabase data to PostHog
 
+> **Note:** We currently don't support connections using IPv6, therefore, you will need to enable IPv4 connections to your database. You can find information on how to do this in the [Supabase docs](https://supabase.com/docs/guides/database/connecting-to-postgres#direct-connection).
+
 To start, you need both a Supabase and PostHog account. Once you have those, head to PostHog's [data pipeline sources tab](https://us.posthog.com/pipeline/sources) and:
 
 1. Click **New source**

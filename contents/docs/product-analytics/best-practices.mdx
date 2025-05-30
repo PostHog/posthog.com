@@ -12,16 +12,15 @@ See our docs on [how to set up a reverse proxy](/docs/advanced/proxy) for more d
 
 ## 2. Capture pageviews and pageleaves in single-page apps
 
-PostHog automatically sends `$pageview` events whenever it gets loaded and `$pageleave` when they leaves. If you have a [single-page app](/tutorials/single-page-app-pageviews), that means it only sends pageview and pageleave once (when your app loads and when they leave).
+PostHog automatically sends `$pageview` events whenever it gets loaded and `$pageleave` when they leaves. If you have a [single-page app](/tutorials/single-page-app-pageviews), that means it only sends pageview and pageleave once by default (when your app loads and when they leave).
 
-To make sure any navigating a user does within your app gets captured, you can capture pageviews and pageleaves manually.
+To fix this, you can set the `capture_pageview` configuration option to `history_change`. This uses the history API to capture pageviews and pageleaves whenever the user navigates within your app.
 
-```js-web
-// Capture pageview
-posthog.capture('$pageview')
-
-// Capture pageleave
-posthog.capture('$pageleave')
+```js
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  capture_pageview: "history_change",
+})
 ```
 
 ## 3. Implement a naming convention

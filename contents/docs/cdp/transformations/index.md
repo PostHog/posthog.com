@@ -8,7 +8,7 @@ As PostHog data arrives, you can transform it *immediately* before ingestion. Yo
 - Anonymizing sensitive data
 - Enriching events with geo information
 - Dropping unnecessary properties
-- Writing custom transformations using our Hog programming language
+<!-- - Writing custom transformations using our Hog programming language -->
 - Filtering out bot traffic
 - Much more.. 
 

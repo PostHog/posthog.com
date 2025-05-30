@@ -32,7 +32,7 @@ interface PlanData {
 
 const planSummary = [
     {
-        title: 'Totally free',
+        title: 'Free',
         price: 'Free',
         priceSubtitle: '- no credit card required',
         features: [
@@ -44,7 +44,7 @@ const planSummary = [
         ],
     },
     {
-        title: 'Ridiculously cheap',
+        title: 'Pay-as-you-go',
         price: '$0',
         features: [
             'Generous free tier on all products',
@@ -100,7 +100,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
                 </ul>
                 <div className="mt-auto">
                     <PlanCTA
-                        type={planData.title === 'Ridiculously cheap' ? 'primary' : 'secondary'}
+                        type={planData.title === 'Pay-as-you-go' ? 'primary' : 'secondary'}
                         ctaText={planData.CTAText}
                         ctaLink={planData.CTALink}
                     />
@@ -293,10 +293,17 @@ export const allProductsData = graphql`
                         name
                         type
                         unit
+                        legacy_product
                         features {
-                            category
+                            key
                             name
                             description
+                            category
+                            limit
+                            note
+                            entitlement_only
+                            is_plan_default
+                            unit
                         }
                         plans {
                             description
@@ -309,9 +316,15 @@ export const allProductsData = graphql`
                             flat_rate
                             unit_amount_usd
                             features {
-                                description
                                 key
                                 name
+                                description
+                                category
+                                limit
+                                note
+                                entitlement_only
+                                is_plan_default
+                                unit
                             }
                             tiers {
                                 current_amount_usd
@@ -326,15 +339,19 @@ export const allProductsData = graphql`
                     type
                     unit
                     usage_key
+                    legacy_product
                     plans {
                         description
                         docs_url
                         features {
-                            description
                             key
-                            limit
                             name
+                            description
+                            category
+                            limit
                             note
+                            entitlement_only
+                            is_plan_default
                             unit
                         }
                         free_allocation
@@ -551,7 +568,7 @@ const ProductTabs = () => {
 
 const plans = [
     {
-        name: 'Totally free',
+        name: 'Free',
         description: <span className="font-normal">No credit card required</span>,
         html: (
             <>
@@ -559,12 +576,12 @@ const plans = [
                 <div className="grid grid-cols-3 @xl:grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
                     <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
                     <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
-                        <strong>Totally free</strong>
+                        <strong>Free</strong>
                         <br />
                         <span className="text-green font-semibold text-sm">(This plan)</span>
                     </div>
                     <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
-                        <strong>Ridiculously cheap</strong>
+                        <strong>Pay-as-you-go</strong>
                     </div>
                 </div>
                 <div className="grid grid-cols-3 @xl:grid-cols-5 gap-x-4 gap-y-2 text-[15px] [&>*:nth-child(3n+1)]:opacity-70 [&>*:nth-child(3n+3)]:opacity-70">
@@ -600,8 +617,8 @@ const plans = [
                                     </p>
                                     <p className="mb-0 text-sm">
                                         For full functionality, just enter a credit card and you'll be on the{' '}
-                                        <em>Ridiculously cheap</em> plan. PostHog is still free up to the monthly free
-                                        tier limits, and you can set a billing limit as low as $0.
+                                        <em>Pay-as-you-go</em> plan. PostHog is still free up to the monthly free tier
+                                        limits, and you can set a billing limit as low as $0.
                                     </p>
                                 </div>
                             )}
@@ -642,11 +659,11 @@ const plans = [
         ),
     },
     {
-        name: 'Ridiculously cheap',
+        name: 'Pay-as-you-go',
         description: <span className="font-normal">Starts at $0/mo</span>,
         html: (
             <>
-                <h4 className="mb-0">The "ridiculously cheap" plan</h4>
+                <h4 className="mb-0">The "pay-as-you-go" plan</h4>
                 <p className="text-sm inline-flex rounded-sm bg-yellow/25 py-0.5 px-1">
                     86% of customers use this plan
                 </p>
@@ -672,7 +689,7 @@ const plans = [
                     <div>
                         <div className="mb-2">
                             <strong>
-                                Everything in <em>Ridiculously cheap</em> plus:
+                                Everything in <em>Pay-as-you-go</em> plus:
                             </strong>
                         </div>
                         <ul className="tw-check-bullets">

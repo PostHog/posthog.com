@@ -105,11 +105,24 @@ Additional notes on self-serve discounts:
 
 We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
 
+## Uptime SLA
+
+Customers only get an uptime SLA if:
+
+1. They have subscribed to the Enterprise add-on; or
+2. You agree it with them as a special term as part of their annual contract if they are spending $100k+
+
+An uptime SLA are not available to customers outside of these cases. You should certainly not agree to an SLA for customers on regular monthly contracts, and even for annual contracts it is not a given - it's one of multiple pieces you may have in play as you negotiate terms (much like a case study). 
+
+More details on how exactly the uptime SLA works can be found in our [terms](/terms). 
+
 ## Payment method
 
 Our strong preference is for customers to pay by credit card, as this is easier to manage in Stripe and has a lower risk of the customer forgetting to make the payment (which means we have to spend more time chasing).
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
+
+For customers in an annual contract but paying monthly we require them to pay via credit card for monthly payments below $2500.  For payment above we do allow ACH or bank transfer, but with Net14 terms.
 
 ## Contract buyouts
 
@@ -131,22 +144,23 @@ Some rules:
 An Order Form is a lightweight document that captures the customer details, credit amount, discount, term, and signatures from both
 PostHog and the Customer.  They are either governed by our standard terms or a custom MSA (see below).
 
-You will likely need to use the [Pricing Calculator](https://docs.google.com/spreadsheets/d/1QsDV2ECtMwM9IfC_D7Embmpu7K7q6qbq60t8ARglQaI/edit#gid=358353731) to get the correct credit amount to be included in the order form.
+You will likely need to use [QuoteHog](https://quote.posthog.com/) to get the correct credit amount to be included in the order form.
 
 ### Creating an Order Form
 
-We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature.  Ask Cameron or Simon for access if you don't have it.
+We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, routing and signature.  Ask Mine or Simon for access if you don't have it.
 
 1. The [order form template](https://app.pandadoc.com/a/#/templates/87jsEEeg8rvYYri9Y8gK5B) to use is titled `[Client.Company] PostHog Cloud Order Form - <MMM YYYY>`
 2. When looking at the template, click the link to **Use this template** in the top bar.
 3. In the Add recipients box which pops up:
     1. Replace `<MMM YYYY>` with the month and year the contract starts (e.g. March 2023)
     2. Add the Client email, first and last name
-    3. Add the PostHog Signer email - normally Cameron or Simon
+    3. Add the PostHog Signer email - normally the team member who is responsible for the customer (AE or CSM).
     4. Click continue
 4. In the pricing table, set the total amount of credit in the Amount box next to **PostHog Cloud Credit**
-5. At the bottom of the pricing table, set the **Discount %** just above the Total
-6. On the right of the screen there is a sidebar, select the **Variables** tab and populate them as follows:
+5. Remove the Enterprise Plan line item if not needed.
+6. At the bottom of the pricing table, set the **Discount %** just above the Total
+7. On the right of the screen there is a sidebar, select the **Variables** tab and populate them as follows:
     * **Client Address Information** - Needs to be their legal correspondence address (check with your customer contact)
     * **Client.Company** - The legal company name
     * **Contract.Discount** - The discount % (appears in the Additional credit purchase section)
@@ -161,14 +175,21 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
 
     * **Contract.Term** - The term in months of the contract (12 months by default)
-7. If an MSA is being used rather than the standard terms you will need to replace the following text:
+8. If they are paying monthly:
+   * For payments equal to or above $2500/month, change the **Payment Terms** section to read 
+     > 12 equal monthly payments (Net 14) from Contract start date
+   * For payments below $2500 then we _require credit card payment_.  Change the **Payment Terms** section to read
+     >  12 equal monthly payments from Contract start date
+     
+     The *Payment Method* should also be updated to `Credit Card`.
+9. If an MSA is being used rather than the standard terms you will need to replace the following text:
    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
 
    with
 
    > PostHog Cloud License Terms executed by and between PostHog, Inc. and CUSTOMER LEGAL NAME (the “Agreement”)
 
-8. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
+10. You should link the order form to the opportunity record in Salesforce using the `Contract Link` field in the "Opportunity Closure Details" so that we have a reference to the completed paperwork from our CRM.
 
 ### Routing an Order Form for review and signature
 
@@ -216,15 +237,15 @@ Sometimes large customers will ask for changes to our MSA. We have a list of the
 
 ## Business Associate Agreement (BAA)
 
-We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to the Teams plan which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
+We offer HIPAA Compliance on PostHog Cloud and as such health companies will require us to sign a Business Associate Agreement with them. As this means we take on increased financial risk in case of a breach we ask them as a minimum to subscribe to one of the platform add-ons which is a guaranteed monthly payment. A maximum of one BAA per organization will be signed. Under most circumstances, it should be the company that owns the org/pays us.
 
-1. Ask the customer to subscribe to the Teams plan (as well as any other paid plans they wish to use).  You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
+1. Ask the customer to subscribe to the platform add-on (as well as any other paid plans they wish to use).  You can verify this in Vitally by ensuring that they are in the `Teams Plan` segment.
 2. Create a new document from the [PandaDoc Template](https://app.pandadoc.com/a/#/templates/4psCXzU527sNE6WEbFBg3a).
 3. All you need to do it set the `Client.Company` variable and then send it to them for review and signature.
 4. It has been pre-signed by Fraser and will automatically add today's date as the date of signature for PostHog.
 5. You'll get a notification when everybody has signed it - we have automation in place to ensure that the `HIPAA BAA Signed Date` property on the customer's Salesforce Account record is updated.
 
-> We only provide our default BAA for Teams plan subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to Teams - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a Teams trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the Teams subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
+> We only provide our default BAA for platform add-on subscribers - customization requires >$20k annual spend. The BAA only remains active for as long as the customer is subscribed to a platform add-on - if they unsubscribe, we send them a message that their BAA will become inactive at the end of the month in which they cancelled. A customer who is on a platform add-on trial (with a credit card in PostHog) is eligible to sign a default BAA, but you should make it clear to them that the default BAA will be voided if/when the platform add-on subscription lapses. If the lead is not sure whether they will need a custom BAA and their usage wouldn't put them at $20K, then it is worth pushing them to get legal feedback by sending them our BAA before moving forward, else you risk spending a lot of time on an evaluation that ends up at $450/month.
 
 ## Non-PostHog contracts
 

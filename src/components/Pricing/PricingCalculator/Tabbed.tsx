@@ -241,7 +241,6 @@ export default function Tabbed() {
             nodes: [{ products: billingProducts }],
         },
     } = useStaticQuery(allProductsData)
-    const { user } = useUser()
     const [analyticsData, setAnalyticsData] = useState(
         analyticsSliders.reduce((acc, slider) => {
             slider.types.forEach(({ type, enhanced }) => {
@@ -276,6 +275,7 @@ export default function Tabbed() {
                 type: addon.type,
                 checked: false,
                 price: Number(addon.plans[addon.plans.length - 1].unit_amount_usd.split('.')[0]),
+                legacy_product: addon.legacy_product,
             })
         })
         return initialAddons
@@ -406,48 +406,56 @@ export default function Tabbed() {
                 <div className="md:col-span-8 lg:col-span-9 py-2 md:border-t border-light dark:border-dark">
                     <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform add-ons</h4>
 
-                    {platform.addons.map(({ type, name, description, plans }) => {
-                        const platformAddon = platformAddons.find((addon) => addon.type === type)
-                        const checked = platformAddon?.checked
-                        return (
-                            <div key={type} className="grid grid-cols-6 gap-8 items-center">
-                                <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
-                                    <div className="flex space-x-1 items-center">
-                                        <p className="m-0 text-sm font-bold">{name}</p>
-                                        <Tooltip content={description} tooltipClassName="max-w-[250px]" placement="top">
-                                            <span className="relative">
-                                                <IconInfo className="size-5 opacity-70" />
-                                            </span>
-                                        </Tooltip>
+                    {platform.addons
+                        .filter((a) => !a.legacy_product)
+                        .map(({ type, name, description }) => {
+                            const platformAddon = platformAddons.find((addon) => addon.type === type)
+                            const checked = platformAddon?.checked
+                            return (
+                                <div key={type} className="grid grid-cols-6 gap-8 items-center">
+                                    <div className="col-span-3 sm:col-span-4 flex items-center justify-between">
+                                        <div className="flex space-x-1 items-center">
+                                            <p className="m-0 text-sm font-bold">{name}</p>
+                                            <Tooltip
+                                                content={description}
+                                                tooltipClassName="max-w-[250px]"
+                                                placement="top"
+                                            >
+                                                <span className="relative">
+                                                    <IconInfo className="size-5 opacity-70" />
+                                                </span>
+                                            </Tooltip>
+                                        </div>
+                                        <Toggle
+                                            checked={checked}
+                                            onChange={(checked) =>
+                                                setPlatformAddons(
+                                                    platformAddons.map((addon) => {
+                                                        if (addon.type === type) {
+                                                            return { ...addon, checked }
+                                                        }
+                                                        return addon
+                                                    })
+                                                )
+                                            }
+                                        />
                                     </div>
-                                    <Toggle
-                                        checked={checked}
-                                        onChange={(checked) =>
-                                            setPlatformAddons(
-                                                platformAddons.map((addon) => {
-                                                    if (addon.type === type) {
-                                                        return { ...addon, checked }
-                                                    }
-                                                    return addon
-                                                })
-                                            )
-                                        }
-                                    />
+                                    <div className="col-span-3 sm:col-span-2 flex justify-between">
+                                        <div>
+                                            <strong className="text-[15px] md:text-base">
+                                                ${platformAddon.price.toLocaleString()}
+                                            </strong>
+                                            <span className="text-sm opacity-70">/mo</span>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
+                                                ${checked ? platformAddon?.price : 0}
+                                            </p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="col-span-3 sm:col-span-2 flex justify-between">
-                                    <div>
-                                        <strong className="text-[15px] md:text-base">$450</strong>
-                                        <span className="text-sm opacity-70">/mo</span>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className={`font-semibold m-0 pr-3 ${checked ? '' : 'opacity-50'}`}>
-                                            ${checked ? platformAddon?.price : 0}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
+                            )
+                        })}
                 </div>
             </div>
             <div className="flex items-center justify-between p-3 bg-accent dark:bg-accent-dark rounded relative">

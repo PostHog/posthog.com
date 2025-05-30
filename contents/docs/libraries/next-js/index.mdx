@@ -31,15 +31,9 @@ To follow this guide along, you need:
 1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
 2. A Next.js application
 
-## Alpha: integration via LLM
+import AgentIntegrationSection from "../../components/AgentIntegrationSection.mdx"
 
-Try our prompt-based integration for Next.js using Cursor, Bolt, and other agent-like tools that can run terminal commands. Paste this into your chat:
-
-import AgentPrompt from "../_snippets/agent-prompt.mdx"
-
-<AgentPrompt />
-
-Or, to integrate manually, continue with the rest of this guide.
+<AgentIntegrationSection framework="Next.js" />
 
 ## Client-side setup
 
@@ -159,9 +153,9 @@ export function PHProvider({
 
 The problem with this is that it can cause a [hydration and/or mismatch error](https://nextjs.org/docs/messages/react-hydration-error) like `Warning: Prop dangerouslySetInnerHTML did not match.`.
 
-### Why does the pageview component need a `useEffect`? 
+### Why did the pageview component need a `useEffect`? 
 
-Using a `useEffect` hook is the simplest way to accurately capture pageviews. Other approaches include:
+Before changing to using `history_change` to capture pageviews, we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
 
 1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation. 
 2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers. 

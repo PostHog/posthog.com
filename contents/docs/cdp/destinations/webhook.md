@@ -14,11 +14,11 @@ Send event data from PostHog into an HTTP Webhook.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
-2. Click the 'Destinations' tab.
-3. Search for 'Webhook' and select the destination.
+1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+3. Search for 'Webhook' and click **+ Create**.
 4. Add your Webhook URL at the configuration step.
-5. Press 'Create & Enable' and watch your 'Events' get sent to the Webhook!
+5. Press **Create & Enable** and watch your 'Events' get sent to the Webhook!
 
 <HideOnCDPIndex>
 

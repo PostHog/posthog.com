@@ -5,6 +5,7 @@ showTitle: true
 availability:
     free: none
     selfServe: none
+    teams: partial
     enterprise: full
 ---
 export const rbacSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/access_control_organization_light_5774d4da82.png"
@@ -46,8 +47,6 @@ Access levels can be viewed and changed in the [Members section](https://app.pos
 
 ### 2. Project level
 
-> This feature is currently being rolled out to all users, so you may not see this experience yet. If you're interested in trying it out, please email zach@posthog.com with "Access control beta" in the subject line.
-
 At the project level, there are two access levels: member and admin.
 
 Each project has a default access level that applies to all organization members:
@@ -78,8 +77,6 @@ See the table below for a summary of project-level permissions:
 | View/edit all resources (regardless of resource-level access controls)            | <span className="text-red text-lg">✖</span>      | <span className="text-green text-lg">✔</span>    |
 
 ### 3. Resource level
-
-> This feature is currently being rolled out to all users, so you may not see this experience yet. If you're interested in trying it out, please email zach@posthog.com with "Access control beta" in the subject line.
 
 Resource access controls allow you to control who can view and edit specific resource objects. These can be accessed in the "Access control" sidebar when viewing a supported resource.
 
@@ -135,7 +132,7 @@ You cannot set project-wide access controls for project admins, as they always h
 
 ## Feature availability
 
-### Free / Ridiculously cheap
+### Free / Pay-as-you-go
 
 These plans do not currently offer any access control features. All projects are open to all members and all resources are open to all members with "Edit" access.
 

@@ -93,6 +93,17 @@ If they're eligible for the [Startup Plan](/startups), route them to the applica
 
 You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
 
+#### Requests for Demo from Leads Below Sales Assist Threshold (Less than $20K)
+We often get requests for demos from leads or existing customers who are below our sales assist threshold, and who don't have a defined use case for PostHog. It usually comes in the form of "show me all the features" or "I need someone to demo to me." These can be large time sinks because they are non-technical, don't have a clear idea of what they want, and are unlikely to ever grow into a sales-assist level customer.
+
+*We also want to be helpful to our current or potential customers, regardless of spend.* Time permitting, we can offer a demo if they are willing to give us the information we need to put something together:
+
+- What tech stack are you on?
+- What features / products are you interested in?
+- What questions do you have?
+
+This has a dual effect. First it makes the the demo actually valuable and can be an opportunity for technical account executives to learn more and get further demo practice under their belt. The other effect is 90% of these requesters never respond because they are either unable or unwilling to engage the questions, which allows us to avoid the biggest time sinks.
+
 ### 3. Initial demo
 
 This is basically a combo of discovery and demo call - your objectives here are to:
@@ -133,9 +144,9 @@ If you realize that they will be too small (<$20k) to go through our sales-led p
 
 ### 4. Product evaluation
 
-If you think they are a good prospect for our sales-led process, your first priority is to try and get them into a shared Slack channel as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread.
+If you think they are a good prospect for our sales-led process, your first priority is to try and get them into [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. 
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams)) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up [a Slack channel](/handbook/growth/sales/slack-channels). Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
 
 You should then follow up with a standard email/Slack message that:
 

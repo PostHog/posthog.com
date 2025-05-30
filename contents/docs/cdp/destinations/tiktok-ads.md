@@ -10,7 +10,7 @@ import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 <Requirements />
 
-You'll also need access to the relevant TikTok Ads account.
+You should be aware that this destination relies on creating third-party cookies. You'll also need access to the relevant TikTok Ads account.
 
 ## Installation
 
@@ -18,7 +18,7 @@ You'll also need access to the relevant TikTok Ads account.
 
 2. Click the **Destinations** tab.
 
-3. Search for **TikTok Ads Conversions** and select the destination.
+3. Search for **TikTok Ads Conversions** and click **+ Create**.
 
 4. Visit the [TikTok Events Manager](https://ads.tiktok.com/i18n/events_manager/home).
    1. If you’ve already set up a Pixel for your website, we recommend that you use the same Pixel for your browser and server events.

@@ -10,7 +10,7 @@ import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
 <Requirements />
 
-You'll also need access to the relevant Reddit Ads account.
+You should be aware that this destination relies on creating third-party cookies. You'll also need access to the relevant Reddit Ads account.
 
 ## Installation
 
@@ -18,7 +18,7 @@ You'll also need access to the relevant Reddit Ads account.
 
 2. Click the **Destinations** tab.
 
-3. Search for **Reddit Pixel** and select the destination.
+3. Search for **Reddit Pixel** and click **+ Create**.
 
 4. Find your Pixel ID in the Reddit [Events manager](https://ads.reddit.com/events-manager). Make sure that the intended business is selected.
 
