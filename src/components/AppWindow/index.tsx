@@ -71,10 +71,17 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }, [windowRef.current])
 
+    const beyondViewport = (sizeConstraints: { width: number; height: number }) => {
+        return sizeConstraints.width > window.innerWidth || sizeConstraints.height > window.innerHeight - taskbarHeight
+    }
+
     const handleDoubleClick = () => {
+        const newSize = beyondViewport(sizeConstraints.max)
+            ? { width: window.innerWidth, height: window.innerHeight - taskbarHeight }
+            : sizeConstraints.max
         updateWindow(item, {
-            size: sizeConstraints.max,
-            position: getDesktopCenterPosition(sizeConstraints.max),
+            size: newSize,
+            position: getDesktopCenterPosition(newSize),
         })
     }
 
@@ -88,9 +95,13 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }
 
     const collapseWindow = () => {
+        const isBeyondViewport = beyondViewport(previousSize)
+        const newSize = isBeyondViewport
+            ? { width: window.innerWidth - 40, height: window.innerHeight - 40 - taskbarHeight }
+            : previousSize
         updateWindow(item, {
-            size: previousSize,
-            position: previousPosition,
+            size: newSize,
+            position: isBeyondViewport ? getDesktopCenterPosition(newSize) : previousPosition,
         })
     }
 
