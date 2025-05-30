@@ -42,6 +42,18 @@ import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 
+const DestinationsLibraryCallout = () => {
+    return (
+        <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-4">
+            <h2 className="font-bold leading-tight !m-0">Did somebody say destinations?</h2>
+            <p className="m-0 !mb-3 !mt-1.5">
+                We're building new destinations and want your input on what to build next.
+            </p>
+            <CallToAction to="/cdp#library">Browse the library</CallToAction>
+        </div>
+    )
+}
+
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
         case 'full':
@@ -103,17 +115,18 @@ const Contributors = (props) => {
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
-            {location.pathname === '/docs/cdp/destinations' && (
-                <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
-                    <h5 className="text-lg font-bold leading-tight m-0">Did somebody say destinations?</h5>
-                    <p className="text-sm m-0 mb-3 mt-1.5">
-                        We're building more destinations and prioritzing what we build next based on popularity.
-                    </p>
-                    <CallToAction size="sm" to="/cdp#library">
-                        Browse the library
-                    </CallToAction>
-                </div>
-            )}
+            {location.pathname.startsWith('/docs/cdp/destinations') &&
+                location.pathname !== '/docs/cdp/destinations' && (
+                    <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
+                        <h5 className="text-lg font-bold leading-tight m-0">Did somebody say destinations?</h5>
+                        <p className="text-sm m-0 mb-3 mt-1.5">
+                            We're building more destinations and prioritzing what we build next based on popularity.
+                        </p>
+                        <CallToAction size="sm" to="/cdp#library">
+                            Browse the library
+                        </CallToAction>
+                    </div>
+                )}
             {contributors && (
                 <SidebarSection title="Contributors">
                     <Contributors contributors={contributors} />
@@ -344,6 +357,7 @@ export default function Handbook({
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
+        DestinationsLibraryCallout,
         table: (props) => (
             <OverflowXSection>
                 <table {...props} />
