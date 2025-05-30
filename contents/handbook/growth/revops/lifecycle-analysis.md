@@ -65,7 +65,7 @@ SUM(CASE WHEN growth_lifecycle_stage = 'SHRINKING' THEN mrr - prev_month_mrr ELS
 ## Rate Calculations
 
 ### At risk revenue
-The foundation for our rate calculations is "at risk revenue" which is the total monthly revenue at the end of previous month that was vulnerable to churn or contraction:
+This the total monthly revenue at the end of previous month which is the denominator for our rate calculations:
 
 ### Key Rates
 
