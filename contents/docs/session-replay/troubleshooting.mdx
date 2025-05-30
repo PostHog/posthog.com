@@ -79,8 +79,7 @@ For apps with SSR enabled you should set `relative` to `false` in the [`paths` o
 
 Some of the filtering options in session replays depend on [product analytics](/docs/product-analytics) events. 
 
-To enable all filtering options, we recommend at the very least:
-- Capturing at least one event per session... most commonly identifying users via `identify()` - to allow filtering by person properties and page properties
+To enable all filtering options, we recommend capturing at least one event per session. Most commonly identifying users via `identify()`. This makes sure you can use all of the power of filtering by person and event properties
 
 Since these events contribute to the product analytics usage and [billing limits](/docs/billing/limits-alerts), if you exceed your product analytics monthly limit, the recordings captured after that (until new billing period starts or limit is increased) won't be possible to filter by these properties.
 
