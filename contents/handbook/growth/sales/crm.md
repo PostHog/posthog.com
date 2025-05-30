@@ -221,7 +221,7 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 
 **Pipeline:** Buyer is actively evaluating PostHog or intends to evaluate PostHog within the Close Date quarter and early volume/discussion indicates an annual contract could be justified.
 
-**Ommitted:** Use this for new Opportunities that have have not met the criteria above
+**Ommitted:** Not used. You can omit from Forecast by moving the Opportunity to a new quarter or closing it.
 
 Forecast categories should be re-evaluated on an ongoing basis. While it is not ideal for Opportunities to move to an earlier category, we should do so if this reflects reality, especially as quarter end approaches.  In addition, we should think about what we can do differently in future to make the forecast more accurate.
 
