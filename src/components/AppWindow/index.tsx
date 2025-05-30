@@ -384,8 +384,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                     type: 'item',
                                                     label: 'Close',
                                                     onClick: () => {
-                                                        minimizeWindow(item)
-                                                        setTimeout(() => closeWindow(item), 250)
+                                                        closeWindow(item)
                                                     },
                                                 },
                                             ],
@@ -504,12 +503,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     <OSButton
                                         variant="ghost"
                                         size="xs"
-                                        onClick={() => {
-                                            // Set minimized first to trigger exit animation
-                                            minimizeWindow(item)
-                                            // Then close after animation duration
-                                            setTimeout(() => closeWindow(item), 250)
-                                        }}
+                                        onClick={() => closeWindow(item)}
                                         className="!px-1.5"
                                     >
                                         <IconX className="size-4" />
