@@ -40,6 +40,7 @@ export function PHProvider({ children }) {
       defaults: '<ph_posthog_js_defaults>',
     })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -272,6 +273,7 @@ export function PHProvider({ children }) {
       persistence: cookieConsentGiven() === 'yes' ? 'localStorage+cookie' : 'memory'
     })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```

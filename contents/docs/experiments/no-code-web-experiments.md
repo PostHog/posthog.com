@@ -43,8 +43,6 @@ After enabling the **No Code Web experiments** feature preview, go to the [exper
 >
 > ```js-web
 > posthog.init('<ph_project_api_key>', {
->   api_host: '<ph_client_api_host>',
->   defaults: '<ph_posthog_js_defaults>',
 >   disable_web_experiments: false,
 > })
 > ```

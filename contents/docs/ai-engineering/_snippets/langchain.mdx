@@ -43,7 +43,7 @@ import { ChatPromptTemplate } from '@langchain/core/prompts';
 
 const phClient = new PostHog(
   '<ph_project_api_key>',
-  { host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' }
+  { host: '<ph_client_api_host>' }
 );
 
 const callbackHandler = new LangChainCallbackHandler({

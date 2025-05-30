@@ -20,8 +20,6 @@ To bootstrap PostHog with feature flags, use the `bootstrap` key in the initiali
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>',
     bootstrap: {
         featureFlags: {
             'flag-1': true,
@@ -88,8 +86,6 @@ The `bootstrap` object has four optional arguments: `distinctID`, `isIdentifiedI
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>',
     bootstrap: {
         distinctID: 'distinct_id_of_your_user',
         isIdentifiedID: true,

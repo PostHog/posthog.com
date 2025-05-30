@@ -60,6 +60,7 @@ export default function PHProvider({ children }) {
       defaults: '<ph_posthog_js_defaults>',
     })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```

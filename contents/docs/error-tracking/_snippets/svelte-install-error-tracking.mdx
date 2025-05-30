@@ -34,7 +34,7 @@ import { PostHog } from 'posthog-node';
 
 const client = new PostHog(
     '<ph_project_api_key>',
-    { host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' }
+    { host: '<ph_client_api_host>' }
 )
 
 export const handleError = async ({ error, status }: HandleServerError) => {

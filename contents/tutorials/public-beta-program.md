@@ -47,6 +47,7 @@ export function PHProvider({ children }) {
       opt_in_site_apps: true
     })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
