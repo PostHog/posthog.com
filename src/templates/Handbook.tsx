@@ -117,7 +117,7 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
         <>
             {location.pathname.startsWith('/docs/cdp/destinations') &&
                 location.pathname !== '/docs/cdp/destinations' && (
-                    <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
+                    <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-8">
                         <h5 className="text-lg font-bold leading-tight m-0">Did somebody say destinations?</h5>
                         <p className="text-sm m-0 mb-3 mt-1.5">
                             We're building more destinations and prioritzing them based on your feedback.
