@@ -556,7 +556,7 @@ We send our PostHog Cloud emails via Customer.io using their HTTP API. If Custom
 
 #### Setting up Customer.io emails
 
-To start sending via Customer.io, all you need to do is add the `CUSTOMER_IO_API_KEY` variable. Please be careful—this is only intended for testing emails and should not be used otherwise.
+To start sending via Customer.io, all you need to do is add the `CUSTOMER_IO_API_KEY` variable. Please be careful when using locally, this is only intended for testing emails and should not be used otherwise.
 
 #### Setting up SMTP emails
 
