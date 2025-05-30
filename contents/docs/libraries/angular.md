@@ -22,7 +22,7 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 
 ## Tracking pageviews
 
-PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API.
+PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API as long as you initialize PostHog with the `defaults` config option set after `2025-05-24`.
 
 ## Capture custom events
 

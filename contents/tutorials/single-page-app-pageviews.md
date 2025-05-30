@@ -19,9 +19,8 @@ PostHog's JavaScript Web SDK automatically captures pageview events on page load
 
 Luckily, you can opt-in to tracking this behavior using one of 2 options:
 
-1. Recommended: set `defaults: '<ph_posthog_js_defaults>'` when initing PostHog to use the most recent defaults
-2. Manually set `capture_pageview: 'history_change'`
-
+1. **Recommended:** set `defaults: '<ph_posthog_js_defaults>'` when initializing PostHog to use the most recent defaults.
+2. Manually set `capture_pageview: 'history_change'`.
 
 This tutorial shows you how to follow the recommended approach for the most popular SPA frameworks like [Next.js](#tracking-pageviews-in-nextjs-app-router), [Vue](#tracking-pageviews-in-vue), [Svelte](#tracking-pageviews-in-svelte), and [Angular](#tracking-pageviews-in-angular). 
 
@@ -37,7 +36,7 @@ This tutorial shows you how to follow the recommended approach for the most popu
 
 ## Tracking pageviews in Next.js (app router)
 
-To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture pageviews, we create a `PostHogProvider` component in the `app` folder, initialize PostHog with our project API key and host (from your [project settings](https://us.posthog.com/project/settings)). PostHog will automatically capture pageviews if initialized in this manner.
+To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture pageviews, we create a `PostHogProvider` component in the `app` folder, initialize PostHog with our project API key and host (from your [project settings](https://us.posthog.com/project/settings)). PostHog will automatically capture pageviews if initialized with updated defaults.
 
 ```js
 // app/providers.js
@@ -93,7 +92,7 @@ export default defineConfig({
 });
 ```
 
-Next, create a `providers.tsx` file in the `app` folder. PostHog will automatically track pageviews if initialized in this manner.
+Next, create a `providers.tsx` file in the `app` folder. PostHog will automatically track pageviews if initialized with updated defaults.
 
 ```ts
 // app/providers.tsx
@@ -186,7 +185,7 @@ function App() {
 
 ## Tracking pageviews in Vue
 
-After creating a [Vue app](/docs/libraries/vue-js) and setting up the `vue-router`, create a new folder in the `src/components` named `plugins`. In this folder, create a file named `posthog.js`. If PostHog is initialized in this manner, we'll automatically track pageviews.
+After creating a [Vue app](/docs/libraries/vue-js) and setting up the `vue-router`, create a new folder in the `src/components` named `plugins`. In this folder, create a file named `posthog.js`. If PostHog is initialized with updated defaults, it automatically tracks pageviews.
 
 ```js
 // src/plugins/posthog.js
@@ -217,7 +216,7 @@ app.use(posthogPlugin).use(router).mount('#app');
 
 ## Tracking pageviews in Svelte
 
-If you haven't already, start by creating a `+layout.js` file for [your Svelte app](/docs/libraries/svelte) in your `src/routes` folder. PostHog will automatically track your pageviews.
+If you haven't already, start by creating a `+layout.js` file for [your Svelte app](/docs/libraries/svelte) in your `src/routes` folder. PostHog automatically tracks your pageviews once initialized with updated defaults.
 
 ```js
 // src/routes/+layout.js
@@ -238,7 +237,7 @@ export const load = async () => {
 
 ## Tracking pageviews in Angular
 
-To start tracking pageviews in [Angular](/docs/libraries/angular), begin by initializing PostHog in `src/main.ts`. PostHog will automatically track your pageviews.
+To start tracking pageviews in [Angular](/docs/libraries/angular), begin by initializing PostHog in `src/main.ts`. PostHog automatically tracks your pageviews when initialized with updated defaults.
 
 ```js
 import { bootstrapApplication } from '@angular/platform-browser';
