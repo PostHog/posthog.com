@@ -14,7 +14,7 @@ export interface ViewedStories {
 }
 
 export const storiesLogic = kea<storiesLogicType>([
-    path(['layout', 'navigation', 'PosthogStories', 'storiesLogic']),
+    path(['components', 'PosthogStories', 'storiesLogic']),
     actions({
         setActiveGroupIndex: (groupIndex: number) => ({ groupIndex }),
         setActiveStoryIndex: (storyIndex: number) => ({ storyIndex }),

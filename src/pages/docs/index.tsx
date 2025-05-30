@@ -11,7 +11,7 @@ import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import AskMax from 'components/AskMax'
-import { PosthogStoriesContainer } from './PosthogStories/PosthogStoriesContainer'
+import { PosthogStoriesContainer } from 'components/PosthogStories/PosthogStoriesContainer'
 import posthog from 'posthog-js'
 
 const ProductLink = ({ icon, name, url, color }) => {
