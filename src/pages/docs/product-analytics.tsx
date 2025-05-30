@@ -5,17 +5,13 @@ import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { CallToAction } from 'components/CallToAction'
 import ResourceItem from 'components/Docs/ResourceItem'
-import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
-import { useChat } from 'hooks/useChat'
 import { useStaticQuery } from 'gatsby'
 import { graphql } from 'gatsby'
-import { IconLightBulb, IconSidebarOpen } from '@posthog/icons'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
-import { PosthogStoriesContainer } from './PosthogStories/PosthogStoriesContainer'
 
 type ProductAnalyticsProps = {
     data: {
@@ -59,8 +55,6 @@ export const Content = ({ quickLinks = false }) => {
                     'What are person profiles and how are they billed?',
                 ]}
             />
-
-            <PosthogStoriesContainer groupId="product-analytics" />
 
             {(quickLinks || compact) && (
                 <QuickLinks

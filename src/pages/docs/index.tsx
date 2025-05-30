@@ -4,7 +4,6 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
 import { IconLightBulb } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -12,7 +11,8 @@ import { docsMenu } from '../../navs'
 import * as Icons from '@posthog/icons'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import AskMax from 'components/AskMax'
-import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
+import { PosthogStoriesContainer } from './PosthogStories/PosthogStoriesContainer'
+import posthog from 'posthog-js'
 
 const ProductLink = ({ icon, name, url, color }) => {
     const Icon = Icons[icon]
@@ -75,7 +75,7 @@ const ProductList = () => {
     )
 }
 
-export const DocsIndex = () => {
+export const DocsIndex = (): JSX.Element => {
     return (
         <Layout>
             <SEO title="Documentation - PostHog" />
@@ -126,6 +126,8 @@ export const DocsIndex = () => {
                         </figure>
                     </aside>
                 </section>
+
+                {posthog?.isFeatureEnabled('posthog-stories') && <PosthogStoriesContainer />}
 
                 <section className="@container">
                     <h4 className="mb-2">Product documentation</h4>

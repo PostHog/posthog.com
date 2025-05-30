@@ -1,9 +1,21 @@
 .PosthogStoriesContainer {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-    padding: 10px;
     overflow-x: auto;
-    white-space: nowrap;
     scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.video-icon {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+        opacity: 1;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
 }
