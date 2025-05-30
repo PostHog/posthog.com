@@ -35,7 +35,7 @@ Browser extensions can block your imports. If your extension throws errors when 
 
 ## Using product analytics
 
-If you have [autocapture enabled](/docs/product-analytics/autocapture), PostHog will automatically capture events such as pageviews, page leaves, and clicks.
+If you have [autocapture enabled](/docs/product-analytics/autocapture), PostHog will automatically capture events when the extension interface is opened, closed, and clicked.
 
 If you'd like to instrument your own custom events, use the `posthog.capture()` function:
 
@@ -43,7 +43,7 @@ If you'd like to instrument your own custom events, use the `posthog.capture()` 
 posthog.capture('custom_event_name', {})
 ```
 
-[See our browser JS library guide for](/docs/integrate/client/js) more details.
+See our [JavaScript web SDK docs](/docs/integrate/client/js) for more details.
 
 ## Using other PostHog products
 
