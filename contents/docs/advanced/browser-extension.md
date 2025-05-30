@@ -8,7 +8,7 @@ Do you have a Firefox or Chrome browser extension with a user interface and want
 
 ## Setup for Firefox & Chrome extension
 
-Start by installing the PostHog [JavaScript Web SDK](/docs/libraries/js).
+Start by installing the PostHog [JavaScript web SDK](/docs/libraries/js).
 ```shell
 npm install --save posthog-js
 ```
@@ -29,7 +29,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Bundling">
 
-Browser extensions can block your imports. If your extension throws errors when trying to import PostHog, use a bundler like [Rollup](https://rollupjs.org/) to bundle your JavaScript, and importing in a single `<script type="module" src="dist/bundle.js"/>` tag.
+Browser extensions can block your imports. If your extension throws errors when trying to import PostHog, use a bundler like [Rollup](https://rollupjs.org/) to bundle your JavaScript, and import it in a single `<script type="module" src="dist/bundle.js"/>` tag.
 
 </CalloutBox>
 
@@ -47,7 +47,8 @@ posthog.capture('custom_event_name', {})
 
 ## Using other PostHog products
 
-Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/improve-security) in Manifest v3 about unsafe-eval and remote code execution.
+Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/
+improve-security) in Manifest v3 about unsafe-eval and remote code execution, you need to import bundles directly to use other PostHog products.
 
 To use [session replay](/docs/session-replay), [surveys](/docs/surveys), [error tracking](/docs/error-tracking), and [web analytics](/docs/web-analytics), import their bundles directly:
 
@@ -56,5 +57,5 @@ import "posthog-js/dist/recorder" // For session replay
 import "posthog-js/dist/surveys" // For surveys
 import "posthog-js/dist/exception-autocapture" // For error tracking
 import "posthog-js/dist/tracing-headers" // Tracking across client and server
-import "posthog-js/dist/web-vitals" // Web analytics
+import "posthog-js/dist/web-vitals" // web analytics
 ```
