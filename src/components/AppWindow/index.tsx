@@ -523,10 +523,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     onDrag={(_event, info) => {
                                         updateWindow(item, {
                                             size: {
-                                                width: Math.min(
-                                                    Math.max(size.width + info.delta.x, sizeConstraints.min.width),
-                                                    sizeConstraints.max.width
-                                                ),
+                                                width: Math.max(size.width + info.delta.x, sizeConstraints.min.width),
                                             },
                                         })
                                     }}
@@ -547,9 +544,9 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     onDrag={(_event, info) => {
                                         updateWindow(item, {
                                             size: {
-                                                height: Math.min(
-                                                    Math.max(size.height + info.delta.y, sizeConstraints.min.height),
-                                                    sizeConstraints.max.height
+                                                height: Math.max(
+                                                    size.height + info.delta.y,
+                                                    sizeConstraints.min.height
                                                 ),
                                             },
                                         })
@@ -570,13 +567,11 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     onDrag={(_event, info) => {
                                         updateWindow(item, {
                                             size: {
-                                                width: Math.min(
-                                                    Math.max(size.width + info.delta.x, sizeConstraints.min.width),
-                                                    sizeConstraints.max.width
-                                                ),
-                                                height: Math.min(
-                                                    Math.max(size.height + info.delta.y, sizeConstraints.min.height),
-                                                    sizeConstraints.max.height
+                                                width: Math.max(size.width + info.delta.x, sizeConstraints.min.width),
+
+                                                height: Math.max(
+                                                    size.height + info.delta.y,
+                                                    sizeConstraints.min.height
                                                 ),
                                             },
                                         })
