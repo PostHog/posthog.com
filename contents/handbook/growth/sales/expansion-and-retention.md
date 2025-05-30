@@ -40,7 +40,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
-Ideally you want to get multiple people into a [shared Slack channel[(/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
+Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
 
 ### 2. Get a longer term commitment (maybe!)
 

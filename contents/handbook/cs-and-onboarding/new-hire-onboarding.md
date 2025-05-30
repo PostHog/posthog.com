@@ -103,52 +103,52 @@ Add and modify this list as you work through it.
 
 #### Product analytics
 [Quick primer on Product analytics](https://www.loom.com/share/645de3987e4947ba8164b4d7b7cc719b?sid=ae5f8a50-dc56-4cc4-93d5-d398b398d5a0)
-1. Creating insights: everything in Trends, Funnels, User paths
+1. [Creating insights](/docs/product-analytics/insights): everything in Trends, Funnels, User paths
    - Retention, Stickiness, Lifecycle
-   - How to filter out test users?
+   - How to [filter out test users](/docs/product-analytics/trends/filters#filtering-internal-and-test-users)?
 2. Persons
-   - What are persons and how are they created?
-   - Identify()
-   - identified vs anonymous events
+   - What are [persons](/docs/data/persons) and how are they created?
+   - [Identify()](/docs/product-analytics/identify)
+   - [identified vs anonymous events](/docs/data/anonymous-vs-identified-events)
    - Pricing
 3. Session replay – masking, cutting costs, filtering
-4. Toolbar – heatmaps, actions
-5. Groups – what is it? what is the use case? how is it charged?
+4. [Toolbar](/docs/toolbar) – [heatmaps](/docs/toolbar/heatmaps), [actions](/docs/toolbar/create-toolbar-actions)
+5. [Groups](/docs/product-analytics/group-analytics) – what is it? what is the use case? how is it charged?
 
 #### Implementation
 1. How is PostHog implemented?
-2. Autocapture – how do you customize autocapture? How do you leverage autocapture?
-3. What are custom events? How do you set custom properties?
-4. What is identify? How do you set custom person properties? How do you merge users? What is alias?
+2. [Autocapture](/docs/product-analytics/autocapture) – how do you customize autocapture? How do you leverage autocapture?
+3. What are [custom events](/tutorials/event-tracking-guide#setting-up-custom-events)? How do you set [custom properties](/tutorials/event-tracking-guide#2-properties)?
+4. What is identify? How do you set custom [person properties](/docs/product-analytics/person-properties)? How do you [merge users](/docs/product-analytics/identify#how-to-merge-users)? What is alias?
 5. What are groups? How do you set group properties?
-6. Projects, Cross-domain tracking, reverse proxy, cookie consent (EU)
+6. Projects, [Cross-domain tracking](/tutorials/cross-domain-tracking), [reverse proxy](/docs/advanced/proxy), cookie consent (EU)
 
 ### Intermediate
 
 #### Feature flags
-1. Creating and using them in code
+1. [Creating](/docs/feature-flags/creating-feature-flags) and using them in code
     - How do I ensure flags are loaded before capturing any events?
     - Can you evaluate feature flags using properties that haven't been ingested yet?
-2. Locally testing feature flags using toolbar
+2. Locally testing feature flags [using toolbar](/docs/feature-flags/testing#method-3-use-the-posthog-toolbar)
 3. Insights based on feature flags:
     - Some users have access to a beta feature. How do I filter insights for these users?
-4. Local evaluation
+4. [Local evaluation](/docs/feature-flags/local-evaluation)
 5. Client-side bootstrapping
-6. Troubleshooting
+6. [Troubleshooting](/docs/feature-flags/common-questions)
 
 #### Experiments
-1. Creating an experiment from PostHog UI
+1. [Creating an experiment](/docs/experiments/creating-an-experiment) from PostHog UI
 2. Understanding MDE, primary metrics, secondary metrics, interpreting results
-3. Traffic allocation - configuring it and validating it. What are some reasons why 80/20 split may not be an 80/20 split?
+3. [Traffic allocation](/docs/experiments/traffic-allocation) - configuring it and validating it. What are some reasons why 80/20 split may not be an 80/20 split?
 4. Returning users: user sees variant A in session 1, does not convert; user sees variant B in session 2, does convert
     - Does this happen? Can the same user see different variants in different sessions? If so, how does this affect the results?
-5. No-code web experiments
+5. [No-code web experiments](/docs/experiments/no-code-web-experiments)
     - Implementation requirements
     - Landing page experiments – how to deal with flickering of content when page is first loaded?
 
 #### Others
-1. Creating cohorts – static vs dynamic
-2. RBAC, Teams add-on
+1. [Creating cohorts](/docs/data/cohorts#how-to-create-a-cohort) – [static vs dynamic](/docs/data/cohorts#static-and-dynamic-cohorts)
+2. RBAC, Platform add-ons
 3. Data pipelines
 
 ### Advanced

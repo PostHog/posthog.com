@@ -65,7 +65,7 @@ My wife isn't a huge fan of them so, nearly every time we meet, I jump at the ch
 
 At one point, I was getting the individual contributor (IC) work done, but not prioritizing things like company vision/OKRs. Knowing when to do this is a real skill. Too much of it and you're setting a silly culture of planning over trying stuff out; too little, and you don't have a clear direction. 
 
-Tim suggested I hire [Kendal](/community/profiles/721) (Exec Assistant) to help solve this. I felt really silly hiring someone to manage my time and to keep me organized, but the reality is that I can now give more value to the company, which helps everyone. Having a nudge from someone else was what I needed to commit.
+Tim suggested I hire [Kendal](/kendal) (Exec Assistant) to help solve this. I felt really silly hiring someone to manage my time and to keep me organized, but the reality is that I can now give more value to the company, which helps everyone. Having a nudge from someone else was what I needed to commit.
 
 ### A crappy family situation got much better
 

@@ -148,7 +148,7 @@ If you receive a lead for a self-serve customer who has used the Sales Contact F
 - Set the 'Disqualification reason' to 'Support Request'
 - Update the lead status to 'Unqualified'
 
-This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Comms team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
+This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Brand team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
 
 ### Lead Qualification Criteria
 - Do they match our ideal customer profile?
