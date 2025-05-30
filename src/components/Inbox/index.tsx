@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { motion } from 'framer-motion'
+import React, { useEffect, useRef, useState, useMemo } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -81,7 +81,16 @@ export default function Inbox(props) {
     const [isDragging, setIsDragging] = useState(false)
     const [lastQuestionRef, inView] = useInView({ threshold: 0.1 })
     const [sideBySide, setSideBySide] = useState(false)
-    const [expandable, setExpandable] = useState(true)
+
+    const expandable = useMemo(() => {
+        if (!containerRef.current) return true
+        const containerRect = containerRef.current.getBoundingClientRect()
+        if (sideBySide) {
+            return sideWidth <= 400
+        } else {
+            return bottomHeight <= containerRect.height / 2
+        }
+    }, [bottomHeight, sideWidth, sideBySide, containerRef.current])
 
     const handleSideBySide = (sideBySide: boolean) => {
         setSideBySide(sideBySide)
@@ -92,7 +101,7 @@ export default function Inbox(props) {
         if (!containerRef.current) return
         if (sideBySide) {
             const containerWidth = containerRef.current.getBoundingClientRect().width
-            const minWidth = containerWidth / 3
+            const minWidth = 400
             setSideWidth(expandable ? containerWidth : minWidth)
         } else {
             const containerHeight = containerRef.current.getBoundingClientRect().height
@@ -143,22 +152,11 @@ export default function Inbox(props) {
     }, [])
 
     useEffect(() => {
-        if (containerRef.current) {
-            const containerRect = containerRef.current.getBoundingClientRect()
-            if (sideBySide) {
-                setExpandable(sideWidth <= containerRect.width / 3)
-            } else {
-                setExpandable(bottomHeight <= containerRect.height / 2)
-            }
-        }
-    }, [bottomHeight, sideWidth, sideBySide, containerRef.current])
-
-    useEffect(() => {
         if (!containerRef.current) return
         const containerRect = containerRef.current.getBoundingClientRect()
 
         if (sideBySide) {
-            setSideWidth(Math.max(containerRect.width / 3, SIDE_WIDTH_DEFAULT))
+            setSideWidth(Math.max(400, SIDE_WIDTH_DEFAULT))
         } else {
             setBottomHeight(Math.max(containerRect.height / 2, BOTTOM_HEIGHT_DEFAULT))
         }
@@ -296,7 +294,7 @@ export default function Inbox(props) {
                                             if (!containerRef.current) return
                                             const containerWidth = containerRef.current.getBoundingClientRect().width
                                             const newSideWidth = Math.min(
-                                                Math.max(sideWidth - info.delta.x, containerWidth / 3),
+                                                Math.max(sideWidth - info.delta.x, 400),
                                                 containerWidth
                                             )
 

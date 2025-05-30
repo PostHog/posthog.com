@@ -476,7 +476,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                                     } mt-1 pt-1 pb-2`}
                                 >
                                     <div
-                                        className={`inline-flex space-x-1 ${
+                                        className={`inline-flex space-x-1 flex-wrap ${
                                             isModerator ? `bg-primary px-1 mr-4 -mt-5` : ''
                                         }`}
                                     >
