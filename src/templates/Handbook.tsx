@@ -45,7 +45,7 @@ import Configuration from 'components/Product/Pipelines/Configuration'
 const DestinationsLibraryCallout = () => {
     return (
         <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-4">
-            <h2 className="font-bold leading-tight !m-0">Did somebody say destinations?</h2>
+            <h2 className="font-bold text-lg leading-tight !m-0">Did somebody say destinations?</h2>
             <p className="m-0 !mb-3 !mt-1.5">
                 We're building new destinations and want your input on what to build next.
             </p>
