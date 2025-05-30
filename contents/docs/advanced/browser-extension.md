@@ -47,8 +47,7 @@ posthog.capture('custom_event_name', {})
 
 ## Using other PostHog products
 
-Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/
-improve-security) in Manifest v3 about unsafe-eval and remote code execution, you need to import bundles directly to use other PostHog products.
+Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/improve-security) in Manifest v3 about unsafe-eval and remote code execution, you need to import bundles directly to use other PostHog products.
 
 To use [session replay](/docs/session-replay), [surveys](/docs/surveys), [error tracking](/docs/error-tracking), and [web analytics](/docs/web-analytics), import their bundles directly:
 
