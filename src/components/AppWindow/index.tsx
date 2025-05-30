@@ -63,6 +63,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     const [activeHistoryIndex, setActiveHistoryIndex] = useState(0)
     const windowRef = useRef<HTMLDivElement>(null)
     const [rendered, setRendered] = useState(false)
+    const [dragging, setDragging] = useState(false)
 
     useEffect(() => {
         if (windowRef.current) {
@@ -114,6 +115,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }
 
     const handleDrag = (_event: any, info: any) => {
+        if (!dragging) setDragging(true)
         if (item.fixedSize) return
         if (!constraintsRef.current) return
 
@@ -130,6 +132,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }
 
     const handleDragEnd = (_event: any, info: any) => {
+        if (!dragging) setDragging(false)
         if (!item.fixedSize && snapIndicator !== null) {
             handleSnapToSide(snapIndicator)
             setSnapIndicator(null)
@@ -150,6 +153,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
     }
 
     const handleDragTransitionEnd = () => {
+        if (!dragging) setDragging(false)
         if (!constraintsRef.current || !item.ref?.current) return
 
         const containerBounds = constraintsRef.current.getBoundingClientRect()
@@ -258,7 +262,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                 focusedWindow === item
                                     ? 'shadow-2xl border-light-7 dark:border-dark-7'
                                     : 'shadow-lg border-light-4 dark:border-dark-4'
-                            }`}
+                            } ${dragging ? '[&_*]:select-none' : ''}`}
                             style={{
                                 width: size.width,
                                 height: size.height,
