@@ -107,7 +107,7 @@ cd plugins
 touch posthog.client.js
 ```
 
-Add the code initialize PostHog to your `posthog.client.js` file. Make sure to set `capture_pageview` to `history_change` because Nuxt acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+Add the code initialize PostHog to your `posthog.client.js` file.
 
 ```js file=plugins/posthog.client.js
 import { defineNuxtPlugin } from '#app'

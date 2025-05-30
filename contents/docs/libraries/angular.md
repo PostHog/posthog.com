@@ -22,25 +22,7 @@ import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 
 ## Tracking pageviews
 
-PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Angular creates a single-page app, this only happens once, and the Angular router handles subsequent page changes.
-
-If we want to capture every route change, we need to set `capture_pageview` to `history_change` in the PostHog initialization.
-
-
-```ts file=main.ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
-import posthog from 'posthog-js'
-
-posthog.init('<ph_project_api_key>', {
-  api_host:'<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>'
-})
-
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
-```
+PostHog automatically tracks your pageviews by hooking up to the browser's `navigator` API.
 
 ## Capture custom events
 
@@ -131,9 +113,9 @@ export class PosthogService {
     this.ngZone.runOutsideAngular(() => {
       posthog.init(environment.posthogKey, {
         api_host: environment.posthogHost,
+        defaults: '<ph_posthog_js_defaults>'
         debug: false,
         cross_subdomain_cookie: true,
-        capture_pageview: 'history_change',
       });
     });
   }

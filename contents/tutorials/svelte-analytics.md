@@ -210,7 +210,7 @@ Next, install `posthog-js`.
 npm i posthog-js
 ```
 
-In the `src/routes` folder, create a `+layout.js` (different from the `+layout.server.js` file you created earlier). In this file, check the environment is the browser, and initialize PostHog with your project API key and host. You can find these in [your project settings](https://us.posthog.com/settings/project). Also, make sure to set `capture_pageview` to `history_change` because Svelte acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+In the `src/routes` folder, create a `+layout.js` (different from the `+layout.server.js` file you created earlier). In this file, check the environment is the browser, and initialize PostHog with your project API key and host. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
 ```js
 // src/routes/+layout.js

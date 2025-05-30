@@ -1,4 +1,4 @@
-Start by creating a `plugins` folder and adding a `posthog.js` file to that folder. In `posthog.js`, initialize PostHog using the `install` method with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings). Also, make sure to set `capture_pageview` to `history_change` because Vue acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+Start by creating a `plugins` folder and adding a `posthog.js` file to that folder. In `posthog.js`, initialize PostHog using the `install` method with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings).
 
 ```js
 // src/plugins/posthog.js

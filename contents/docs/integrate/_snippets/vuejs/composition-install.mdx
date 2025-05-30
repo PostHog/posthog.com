@@ -1,6 +1,6 @@
 We use the Composition API as it provides better accessibility, maintainability, and type safety.
 
-Start by creating a `composables` folder as well as a `usePosthog.js` file to that folder. In `usePosthog.js`, initialize PostHog as a composable with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings). Also, make sure to set `capture_pageview` to `history_change` because Vue acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+Start by creating a `composables` folder as well as a `usePosthog.js` file to that folder. In `usePosthog.js`, initialize PostHog as a composable with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings).
 
 ```js
 // src/composables/usePostHog.ts

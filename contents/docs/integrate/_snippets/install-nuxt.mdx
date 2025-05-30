@@ -22,7 +22,7 @@ export default defineNuxtConfig({
 })
 ```
 
-3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins). Make sure to set `capture_pageview` to `history_change` because Nuxt acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins).
 
 ```js file=plugins/posthog.client.js
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'

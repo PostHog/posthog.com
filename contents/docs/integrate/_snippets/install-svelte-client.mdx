@@ -6,7 +6,7 @@ yarn add posthog-js
 npm install --save posthog-js
 ```
 
-Then, if you haven't created a root [layout](https://kit.svelte.dev/docs/routing#layout) already, create a new file called `+layout.js` in your `src/routes` folder In this file, check the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings). Also, make sure to set `capture_pageview` to `history_change` because Svelte acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+Then, if you haven't created a root [layout](https://kit.svelte.dev/docs/routing#layout) already, create a new file called `+layout.js` in your `src/routes` folder In this file, check the environment is the browser, and initialize PostHog if so. You can get both your API key and instance address in your [project settings](https://us.posthog.com/project/settings).
 
 ```js file=routes/+layout.js
 import posthog from 'posthog-js'
