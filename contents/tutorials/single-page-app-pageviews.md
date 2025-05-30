@@ -44,6 +44,7 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
       capture_pageview: false
     })
   }, []);
@@ -127,6 +128,7 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     capture_pageview: false
   })
 }
@@ -239,15 +241,12 @@ import posthog from 'posthog-js'
 import { browser } from '$app/environment';
 
 export const load = async () => {
-
   if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host: '<ph_client_api_host>',
-        capture_pageview: false
-      }
-    )
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
+      capture_pageview: false
+    })
   }
   return
 };
@@ -280,12 +279,11 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js';
 
-posthog.init('<ph_project_api_key>',
-  {
-    api_host: '<ph_client_api_host>',
-    capture_pageview: false
-  }
-);
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  capture_pageview: false
+});
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

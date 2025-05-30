@@ -116,6 +116,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -193,6 +194,7 @@ Lastly, go back to `src/main.jsx` and make sure to set `capture_pageview` in the
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
   capture_pageview: false,
 })
 
@@ -208,6 +210,7 @@ Once you disable automatic `$pageview` captures when calling `posthog.init`, you
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
   capture_pageview: false,
   capture_pageleave: true, // Opt back in because disabling $pageview capture disables $pageleave events
 })

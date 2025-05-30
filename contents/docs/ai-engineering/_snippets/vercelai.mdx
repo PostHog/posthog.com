@@ -14,7 +14,7 @@ import { createOpenAI } from "@ai-sdk/openai"
 
 const phClient = new PostHog(
   '<ph_project_api_key>',
-  { host: '<ph_client_api_host>' }
+  { host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' }
 );
 
 const openaiClient = createOpenAI({

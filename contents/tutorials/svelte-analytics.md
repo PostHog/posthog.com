@@ -218,15 +218,13 @@ import posthog from 'posthog-js'
 import { browser } from '$app/environment';
 
 export const load = async () => {
-
   if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host: '<ph_client_api_host>',
-      }
-    )
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
+    })
   }
+
   return
 };
 ```
@@ -264,17 +262,15 @@ import posthog from 'posthog-js'
 import { browser } from '$app/environment';
 
 export const load = async () => {
-
   if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host:'<ph_client_api_host>',
-        capture_pageview: false,
-        capture_pageleave: false
-      }
-    )
+    posthog.init('<ph_project_api_key>', {
+      api_host:'<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
+      capture_pageview: false,
+      capture_pageleave: false
+    })
   }
+
   return
 };
 ```

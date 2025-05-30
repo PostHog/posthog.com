@@ -55,13 +55,11 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js'
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>',
-    capture_pageview: false
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  capture_pageview: false
+})
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
@@ -146,14 +144,12 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js'
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>',
-    capture_pageview: false,
-    capture_pageleave: true
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  capture_pageview: false,
+  capture_pageleave: true
+})
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

@@ -27,6 +27,7 @@ You can sanitize properties on the client side by setting the `before_send` [con
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     before_send: function(event) {
         if (event.properties['$ip']) {
             event.properties['$ip'] = null;

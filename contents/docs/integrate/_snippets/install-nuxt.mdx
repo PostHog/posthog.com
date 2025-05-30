@@ -16,6 +16,7 @@ export default defineNuxtConfig({
         public: {
             posthogPublicKey: process.env.NUXT_PUBLIC_POSTHOG_KEY || '<ph_project_api_key>',
             posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
+            posthogDefaults: '<ph_posthog_js_defaults>',
         },
     }
 })
@@ -31,6 +32,7 @@ export default defineNuxtPlugin(() => {
     const runtimeConfig = useRuntimeConfig()
     const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
         api_host: runtimeConfig.public.posthogHost,
+        defaults: runtimeConfig.public.posthogDefaults,
         capture_pageview: false, // we add manual pageview capturing below
         capture_pageleave: true, // automatically capture a pageleave event when the user leaves the site or closes the tab
         loaded: (posthog) => {

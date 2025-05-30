@@ -107,12 +107,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import posthog from 'posthog-js'
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>'
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>'
+})
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));
@@ -154,13 +152,11 @@ Now, every time a user moves between pages, PostHog captures a `$pageview` event
 Lastly, go back to `main.ts` and make sure to set `capture_pageview` in the PostHog initialization config to `false`. This turns off autocaptured pageviews and ensures you won’t double-capture pageviews on the first load.
 
 ```js
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>',
-    capture_pageview: false
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  capture_pageview: false
+})
 ```
 
 ## Capturing custom events
