@@ -119,11 +119,20 @@ const Roadmap = () => {
     const { roadmaps, isLoading, mutate } = useRoadmaps({
         params: {
             filters: {
-                topic: {
-                    id: {
-                        $eq: '391',
+                $or: [
+                    {
+                        teams: {
+                            name: {
+                                $eq: 'Max AI',
+                            },
+                        },
                     },
-                },
+                    {
+                        topic: {
+                            id: { $eq: 391 },
+                        },
+                    },
+                ],
             },
         },
         limit: 100,
