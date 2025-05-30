@@ -110,9 +110,9 @@ dateDiff(
 ) <= 3
 ```
 
-A use case for this is creating an action for `pricing pageviews` during the last days of the trial, then posting to a [webhook](/docs/webhooks) to notify your team to reach out to the user.
+<MaxCTA question="Filter users whose trial ends in 3 days, using only their trial_started property." />
 
-![Action](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/SQL-date-time-filters/action.png)
+A use case for this is creating an action for `pricing pageviews` during the last days of the trial, then posting to a [webhook](/docs/webhooks) to notify your team to reach out to the user.
 
 Another similar example is using SQL to understand usage in the first two weeks after subscribing. To do this, use `dateDiff()` again but with `'week'`, your signed up property, and `now()` like this:
 
