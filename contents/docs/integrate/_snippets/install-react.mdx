@@ -15,7 +15,7 @@ VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 VITE_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
 
-3. Integrate PostHog at the root of your app (such as `main.jsx` if you are using Vite).
+3. Integrate PostHog at the root of your app (such as `main.jsx` if you are using Vite). Setting `capture_pageview` to `history_change` is recommended as React *usually* acts as a single-page app and doesn't fire page load events on route changes.
 
 ```react
 // src/main.jsx
@@ -27,6 +27,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  capture_pageview: 'history_change'
 }
 
 createRoot(document.getElementById('root')).render(
@@ -37,3 +38,22 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
 ```
+
+<details>
+  <summary>Using React Router v7?</summary>
+
+  You need to set `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
+
+  ```ts file=vite.config.ts
+  // ... imports
+
+  export default defineConfig({
+    plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+    ssr: {
+      noExternal: ['posthog-js', 'posthog-js/react']
+    }
+  });
+  ``` 
+
+  See our [Remix docs](/docs/libraries/remix) for more details.
+</details>

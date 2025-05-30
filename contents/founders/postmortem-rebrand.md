@@ -22,7 +22,7 @@ When I started at PostHog, our primary focus was selling PostHog Cloud, our host
 
 As a designer, my task is to package our unique product suite into something visitors can quickly understand in a quick glimpse of the homepage.
 
-But being new to the team, I felt it wasn't in my best interest to propose massive design changes on day one. PostHog already had a [Graphic Designer](/community/profiles/227) and a defined visual style. Instead of making waves, I decided the best route would be to take time to understand who I would be working with and what was important to them. Reading the dynamic of the team is far more important than flexing a design muscle in the first week.
+But being new to the team, I felt it wasn't in my best interest to propose massive design changes on day one. PostHog already had a [Graphic Designer](/lottie) and a defined visual style. Instead of making waves, I decided the best route would be to take time to understand who I would be working with and what was important to them. Reading the dynamic of the team is far more important than flexing a design muscle in the first week.
 
 ## The pixel art and space era
 When I joined, PostHog's visual style involved pixel art that was reminiscent of 8-bit videogames. I opted to keep the existing visual concept, and instead focused my efforts on communicating our new value propositions while _slowly_ evolving the brand.
@@ -61,7 +61,7 @@ If you look at any successful later-stage startup (especially in B2B SaaS), thei
 Settling into the role of guiding the roadmap for our website and docs has opened up a whole new world to me. Our product design team has alleviated the need for me to be involved in the day-to-day of product design, which has freed me up to focus on the bigger picture - and how people interact with our brand.
 
 ## Leading up to the rebrand
-There were several factors that led to our rebrand. Our [Graphic Designer, Lottie](/community/profiles/227), was really honing in on a consistent style for blog artwork as we began focusing on having [unique blog art for every post](https://posthog.com/blog). She was tired of designing for the space theme, the 8-bit style felt a little dated, and she was absolutely killing it with [hedgehog-themed art](https://posthog.com/media).
+There were several factors that led to our rebrand. Our [Graphic Designer, Lottie](/lottie), was really honing in on a consistent style for blog artwork as we began focusing on having [unique blog art for every post](https://posthog.com/blog). She was tired of designing for the space theme, the 8-bit style felt a little dated, and she was absolutely killing it with [hedgehog-themed art](https://posthog.com/media).
 
 This is also where refocusing on self-hosted customers came into play. In a 1:1 with James, he explained what was resonating with prospective customers. I took notes ferociously and created [a wireframe](https://balsamiq.cloud/sd0i9zq/pxvojo4/r0A75).
 
@@ -75,7 +75,7 @@ After a lot of thought (and the "space" to explore ideas), I settled on an early
 
 ## Finally, the rebrand
 
-Not too long before this, we hired an incredible Front End Developer. ("Incredible" is actually an understatement - the word “no” doesn't exist in his vocabulary.) After a few weeks of working with [Eli](/community/profiles/3) and seeing the pace at which he could crank through complex tasks, I had the confidence to know that we could build out a new website experience quickly.
+Not too long before this, we hired an incredible Front End Developer. ("Incredible" is actually an understatement - the word “no” doesn't exist in his vocabulary.) After a few weeks of working with [Eli](/elik) and seeing the pace at which he could crank through complex tasks, I had the confidence to know that we could build out a new website experience quickly.
 
 _A team with a can-do attitude can do anything._
 

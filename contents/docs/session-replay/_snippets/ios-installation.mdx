@@ -85,3 +85,10 @@ config.sessionReplayConfig.throttleDelay = 1.0
 - Custom views are partly supported, and only fully supported if `screenshotMode`  is enabled.
 - WebView is only supported if `screenshotMode` is enabled. A placeholder will be shown as a fallback.
 - Currently only available on iOS.
+
+## Troubleshooting
+
+- Update your SDK.
+- If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug [here](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request [here](https://github.com/PostHog/posthog-android/issues/250).
