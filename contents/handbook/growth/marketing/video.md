@@ -22,7 +22,7 @@ We're still figuring this out, but the first few videos we've made have been:
 
 ## How to work with the video team
 
-- Know what type of video you want to make. Try to fit it into one of the above categories (and remember, we're up for doing a "one-off" film that is totally different to what we've done before) and <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C08Q5BPT48J">tell us in the video channel</PrivateLink>.
+- Know what type of video you want to make. Try to fit it into one of the above categories (and remember, we're up for doing a "one-off" film that is totally different to what we've done before) and <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6">tell us in the content channel</PrivateLink>.
 
 - Suggest when it would make sense to shoot it. London is our main base, but we're flexible to travel and can potentially guide you to capture footage as part of a remote shoot. The further out you can suggest the better because there is a lot more logistical planning involved in shooting a video than writing code. We can feedback on how realistic your timelines are.
 
