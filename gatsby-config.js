@@ -19,6 +19,11 @@ const getQuestionPages = async (base) => {
         for (let attempt = 1; attempt <= 3; attempt++) {
             try {
                 const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}, Text: ${await response.text()}`)
+                }
+
                 return response.json()
             } catch (error) {
                 if (attempt === 3) {
