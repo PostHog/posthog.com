@@ -103,6 +103,17 @@ const Contributors = (props) => {
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
+            {location.pathname === '/docs/cdp/destinations' && (
+                <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
+                    <h5 className="text-lg font-bold leading-tight m-0">Did somebody say destinations?</h5>
+                    <p className="text-sm m-0 mb-3 mt-1.5">
+                        We're building more destinations and prioritzing what we build next based on popularity.
+                    </p>
+                    <CallToAction size="sm" to="/cdp#library">
+                        Browse the library
+                    </CallToAction>
+                </div>
+            )}
             {contributors && (
                 <SidebarSection title="Contributors">
                     <Contributors contributors={contributors} />
