@@ -9,7 +9,7 @@ type MaxCTAProps = {
 
 export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX.Element => {
     const encodedQuestion = encodeURIComponent(question)
-    const maxUrl = `https://app.posthog.com/#panel=max:${encodedQuestion}`
+    const maxUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
 
     return (
         <div
