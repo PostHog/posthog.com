@@ -270,6 +270,7 @@ export function Editor({
     useEffect(() => {
         if (availableFilters && availableFilters.length > 0) {
             const searchParams = new URLSearchParams(search)
+            if (searchParams.size <= 0) return
             const newFilters = {}
 
             searchParams.forEach((value, key) => {
