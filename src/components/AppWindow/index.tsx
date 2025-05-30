@@ -71,8 +71,16 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }, [windowRef.current])
 
-    const beyondViewport = (sizeConstraints: { width: number; height: number }) => {
-        return sizeConstraints.width > window.innerWidth || sizeConstraints.height > window.innerHeight - taskbarHeight
+    const beyondViewport = (windowSize: { width: number; height: number }) => {
+        const rightEdge = position.x + windowSize.width
+        const bottomEdge = position.y + windowSize.height
+
+        return (
+            rightEdge > window.innerWidth ||
+            bottomEdge > window.innerHeight - taskbarHeight ||
+            position.x < 0 ||
+            position.y < 0
+        )
     }
 
     const handleDoubleClick = () => {
@@ -232,6 +240,29 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
             })
         }
     }
+
+    useEffect(() => {
+        const handleResize = () => {
+            if (beyondViewport(size)) {
+                const newSize = {
+                    width: Math.min(size.width, window.innerWidth),
+                    height: Math.min(size.height, window.innerHeight - taskbarHeight),
+                }
+
+                const newPosition = {
+                    x: Math.min(Math.max(0, position.x), window.innerWidth - newSize.width),
+                    y: Math.min(Math.max(0, position.y), window.innerHeight - taskbarHeight - newSize.height),
+                }
+
+                updateWindow(item, {
+                    size: newSize,
+                    position: newPosition,
+                })
+            }
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [item])
 
     useEffect(() => {
         setRendered(true)
