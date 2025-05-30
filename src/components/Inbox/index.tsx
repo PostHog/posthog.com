@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState, useMemo } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useQuestions } from 'hooks/useQuestions'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -323,90 +323,89 @@ export default function Inbox(props) {
                                         onDoubleClick={expandOrCollapse}
                                     />
                                 )}
-                                <ScrollArea className="h-full">
-                                    <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
-                                        <OSButton
-                                            variant="secondary"
-                                            size="sm"
-                                            icon={<IconCornerDownRight className="scale-x-[-1]" />}
-                                            onClick={() => {
-                                                if (!containerRef.current) return
-                                                const containerHeight =
-                                                    containerRef.current.getBoundingClientRect().height
-                                                setBottomHeight(containerHeight)
-                                                document.getElementById('question-form-button')?.click()
-                                                setTimeout(() => {
-                                                    const viewport = bottomContainerRef.current?.querySelector(
-                                                        '[data-radix-scroll-area-viewport]'
-                                                    )
-                                                    viewport?.scrollTo({
-                                                        top: viewport.scrollHeight,
-                                                        behavior: 'smooth',
+                                <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
+                                    <OSButton
+                                        variant="secondary"
+                                        size="sm"
+                                        icon={<IconCornerDownRight className="scale-x-[-1]" />}
+                                        onClick={() => {
+                                            if (!containerRef.current) return
+                                            const containerHeight = containerRef.current.getBoundingClientRect().height
+                                            setBottomHeight(containerHeight)
+                                            document.getElementById('question-form-button')?.click()
+                                            setTimeout(() => {
+                                                const viewport = bottomContainerRef.current?.querySelector(
+                                                    '[data-radix-scroll-area-viewport]'
+                                                )
+                                                viewport?.scrollTo({
+                                                    top: viewport.scrollHeight,
+                                                    behavior: 'smooth',
+                                                })
+                                            }, 300)
+                                        }}
+                                    >
+                                        Reply
+                                    </OSButton>
+                                    <div className="ml-auto flex space-x-4">
+                                        {question?.id && user && (
+                                            <Switch
+                                                checked={notificationsEnabled}
+                                                onChange={(checked) => {
+                                                    setNotificationsEnabled(checked)
+                                                    setSubscription({
+                                                        contentType: 'question',
+                                                        id: question.id,
+                                                        subscribe: checked,
                                                     })
-                                                }, 300)
-                                            }}
-                                        >
-                                            Reply
-                                        </OSButton>
-                                        <div className="ml-auto flex space-x-4">
-                                            {question?.id && user && (
-                                                <Switch
-                                                    checked={notificationsEnabled}
-                                                    onChange={(checked) => {
-                                                        setNotificationsEnabled(checked)
-                                                        setSubscription({
-                                                            contentType: 'question',
-                                                            id: question.id,
-                                                            subscribe: checked,
-                                                        })
-                                                        addToast({
-                                                            description: checked
-                                                                ? "You'll be notified of replies by email."
-                                                                : "You won't receive notifications for this thread.",
-                                                            title: checked
-                                                                ? 'Thread notifications enabled'
-                                                                : 'Thread notifications disabled',
-                                                            onUndo: () => {
-                                                                setNotificationsEnabled(!checked)
-                                                                setSubscription({
-                                                                    contentType: 'question',
-                                                                    id: question.id,
-                                                                    subscribe: !checked,
-                                                                })
-                                                            },
-                                                        })
-                                                    }}
-                                                    label="Thread notifications"
-                                                />
-                                            )}
+                                                    addToast({
+                                                        description: checked
+                                                            ? "You'll be notified of replies by email."
+                                                            : "You won't receive notifications for this thread.",
+                                                        title: checked
+                                                            ? 'Thread notifications enabled'
+                                                            : 'Thread notifications disabled',
+                                                        onUndo: () => {
+                                                            setNotificationsEnabled(!checked)
+                                                            setSubscription({
+                                                                contentType: 'question',
+                                                                id: question.id,
+                                                                subscribe: !checked,
+                                                            })
+                                                        },
+                                                    })
+                                                }}
+                                                label="Thread notifications"
+                                            />
+                                        )}
 
-                                            <div className="ml-1 pl-1 border-l border-border">
-                                                <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
-                                                    <span>
-                                                        <OSButton
-                                                            variant="ghost"
-                                                            size="sm"
-                                                            className="relative"
-                                                            icon={
-                                                                <IconChevronDown
-                                                                    className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                        sideBySide
-                                                                            ? expandable
-                                                                                ? 'rotate-90'
-                                                                                : '-rotate-90'
-                                                                            : expandable
-                                                                            ? 'rotate-180'
-                                                                            : ''
-                                                                    }`}
-                                                                />
-                                                            }
-                                                            onClick={expandOrCollapse}
-                                                        />
-                                                    </span>
-                                                </Tooltip>
-                                            </div>
+                                        <div className="ml-1 pl-1 border-l border-border">
+                                            <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
+                                                <span>
+                                                    <OSButton
+                                                        variant="ghost"
+                                                        size="sm"
+                                                        className="relative"
+                                                        icon={
+                                                            <IconChevronDown
+                                                                className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                                    sideBySide
+                                                                        ? expandable
+                                                                            ? 'rotate-90'
+                                                                            : '-rotate-90'
+                                                                        : expandable
+                                                                        ? 'rotate-180'
+                                                                        : ''
+                                                                }`}
+                                                            />
+                                                        }
+                                                        onClick={expandOrCollapse}
+                                                    />
+                                                </span>
+                                            </Tooltip>
                                         </div>
                                     </div>
+                                </div>
+                                <ScrollArea>
                                     <div className="p-5">
                                         <Question
                                             id={permalink}
