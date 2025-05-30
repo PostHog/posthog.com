@@ -10,6 +10,7 @@ interface MenuItem {
     name: string
     url?: string
     children?: MenuItem[]
+    icon?: React.ReactNode
 }
 
 interface TreeMenuProps {
@@ -40,6 +41,7 @@ const TreeLink = ({
             to={menuItem.url}
             className={index === 0 ? '' : index === 1 ? 'pl-7' : 'pl-11'}
             onClick={() => onClick(menuItem)}
+            icon={typeof menuItem.icon !== 'string' && menuItem.icon}
         >
             {menuItem.name}
         </OSButton>

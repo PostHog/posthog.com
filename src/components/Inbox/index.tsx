@@ -4,13 +4,12 @@ import { useQuestions } from 'hooks/useQuestions'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { TreeMenu } from 'components/TreeMenu'
-import useProduct from 'hooks/useProduct'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Question } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import { IconCheck, IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown } from '@posthog/icons'
+import { IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
 import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
@@ -20,30 +19,25 @@ import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
 import { useInView } from 'react-intersection-observer'
 import Tooltip from 'components/Tooltip'
+import useTopicsNav from '../../navs/useTopicsNav'
 
 dayjs.extend(relativeTime)
 
 const Menu = () => {
-    const products = useProduct()
-    const { user } = useUser()
+    const topicsNav = useTopicsNav()
     return (
-        <TreeMenu
-            items={[
-                {
-                    name: 'My subscriptions',
-                    url: '/questions/subscriptions',
-                },
-                {
-                    name: 'Products',
-                    children: products.map((product) => {
-                        return {
-                            name: product.name,
-                            url: `/questions/topic${product.slug}`,
-                        }
-                    }),
-                },
-            ]}
-        />
+        <ScrollArea>
+            <TreeMenu
+                items={[
+                    {
+                        name: 'My subscriptions',
+                        url: '/questions/subscriptions',
+                        icon: <IconNotification />,
+                    },
+                    ...topicsNav,
+                ]}
+            />
+        </ScrollArea>
     )
 }
 
@@ -178,33 +172,37 @@ export default function Inbox(props) {
                 showForward
                 showSearch
                 rightActionButtons={
-                    <>
-                        <Tooltip content={`${sideBySide ? 'Switch to stacked view' : 'Switch to side-by-side view'}`}>
-                            <span>
-                                <OSButton
-                                    active={!sideBySide}
-                                    variant="ghost"
-                                    size="sm"
-                                    icon={<IconBottomPanel />}
-                                    onClick={() => handleSideBySide(false)}
-                                />
-                            </span>
-                        </Tooltip>
-                        <Tooltip content={`Side-by-side view`}>
-                            <span>
-                                <OSButton
-                                    active={sideBySide}
-                                    className={`${
-                                        sideBySide ? '!skin-classic:bg-red-500 !skin-modern:bg-red-500' : ''
-                                    }`}
-                                    variant="ghost"
-                                    size="sm"
-                                    icon={<IconSidePanel />}
-                                    onClick={() => handleSideBySide(true)}
-                                />
-                            </span>
-                        </Tooltip>
-                    </>
+                    permalink ? (
+                        <>
+                            <Tooltip
+                                content={`${sideBySide ? 'Switch to stacked view' : 'Switch to side-by-side view'}`}
+                            >
+                                <span>
+                                    <OSButton
+                                        active={!sideBySide}
+                                        variant="ghost"
+                                        size="sm"
+                                        icon={<IconBottomPanel />}
+                                        onClick={() => handleSideBySide(false)}
+                                    />
+                                </span>
+                            </Tooltip>
+                            <Tooltip content={`Side-by-side view`}>
+                                <span>
+                                    <OSButton
+                                        active={sideBySide}
+                                        className={`${
+                                            sideBySide ? '!skin-classic:bg-red-500 !skin-modern:bg-red-500' : ''
+                                        }`}
+                                        variant="ghost"
+                                        size="sm"
+                                        icon={<IconSidePanel />}
+                                        onClick={() => handleSideBySide(true)}
+                                    />
+                                </span>
+                            </Tooltip>
+                        </>
+                    ) : null
                 }
             />
             <div data-scheme="secondary" className="flex flex-grow border-t border-primary min-h-0">
