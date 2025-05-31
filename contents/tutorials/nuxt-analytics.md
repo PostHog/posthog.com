@@ -92,7 +92,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
@@ -106,7 +107,7 @@ cd plugins
 touch posthog.client.js
 ```
 
-Add the code initialize PostHog to your `posthog.client.js` file. Make sure to set `capture_pageview` to `history_change` because Nuxt acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+Add the code initialize PostHog to your `posthog.client.js` file.
 
 ```js file=plugins/posthog.client.js
 import { defineNuxtPlugin } from '#app'
@@ -116,7 +117,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
-    capture_pageview: 'history_change',
+    defaults: runtimeConfig.public.posthogDefaults,
   })
   
   return {

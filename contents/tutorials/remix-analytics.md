@@ -159,7 +159,7 @@ npm i posthog-js
 
 Once done, you need your project API key and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
 
-With these, create a `provider.tsx` file in the `app` folder. In it, set up the PostHog provider to initialize after hydration with `capture_pageview` set to `'history_change'`. This ensures that pageviews are captured when the user navigates between pages.
+With these, create a `provider.tsx` file in the `app` folder. In it, set up the PostHog provider to initialize after hydration.
 
 ```tsx
 // app/provider.tsx
@@ -173,9 +173,10 @@ export function PHProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     posthog.init("<ph_project_api_key>", {
       api_host: "<ph_client_api_host>",
-      capture_pageview: "history_change",
+      defaults: "<ph_posthog_js_defaults>",
       debug: true,
     });
+
     setHydrated(true);
   }, []);
 

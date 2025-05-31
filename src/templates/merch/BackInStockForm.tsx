@@ -23,19 +23,19 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
     const posthog = usePostHog()
-    
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        
+
         // Extract title with fallbacks: variant title -> variant.product title -> product title
         const title = variant?.title || variant?.product?.title || product?.title
-        
+
         // Extract shopifyId with fallback: variant shopifyId -> product shopifyId
         const shopifyId = variant?.shopifyId || product?.shopifyId
-        
+
         const size = variant?.selectedOptions?.find((o: any) => o.name === 'Size')?.value || 'N/A'
         const productData = { title, size, shopifyId }
-        
+
         posthog?.capture('back_in_stock_form_submitted', { email, product: productData })
         setSubmitted(true)
     }

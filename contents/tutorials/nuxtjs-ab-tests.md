@@ -57,7 +57,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
@@ -72,7 +73,8 @@ import posthog from 'posthog-js'
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-    api_host: runtimeConfig.public.posthogHost || '<ph_client_api_host>',
+    api_host: runtimeConfig.public.posthogHost,
+    defaults: runtimeConfig.public.defaults,
   })
 
   // Make sure that pageviews are captured with each route change
