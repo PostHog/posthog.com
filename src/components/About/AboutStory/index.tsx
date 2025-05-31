@@ -50,7 +50,7 @@ export const AboutStory = () => {
                         height={397.5}
                         alt="PostHog launches on HackerNews"
                         objectFit="contain"
-                        className="rotate-2 -mb-8 md:-mb-4 md:-right-4 lg:right-0 -mx-4 md:mx-0 box-border md:w-[500px] lg:w-auto md:h-full lg:h-auto"
+                        className="rotate-2 -mb-8 md:-mb-4 md:-right-4 lg:right-0 -mx-2 md:mx-0 box-border md:w-[500px] lg:w-auto md:h-full lg:h-auto"
                     />
                     <div className="bg-gradient-to-b from-transparent to-tan dark:to-dark absolute w-full h-[60%] md:h-full md:top-12 lg:top-[initial] lg:h-[60%] bottom-0" />
                 </div>
@@ -72,7 +72,7 @@ export const AboutStory = () => {
                     <strong>James Hawkins</strong>
                     <span className="block text-sm">Co-CEO</span>
                 </div>
-                <div className="absolute bottom-0 lg:-bottom-2 right-0 sm:right-12 lg:right-8">
+                <div className="absolute bottom-0 lg:-bottom-2 right-2 sm:right-12 lg:right-8">
                     <CloudinaryImage
                         breakpoints={[750, 1080, 1366, 1920]}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/About/AboutStory/images/tim.png"
