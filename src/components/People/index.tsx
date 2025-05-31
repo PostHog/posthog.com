@@ -129,7 +129,7 @@ export default function People() {
                             width="250"
                             height="250"
                             placeholder="blurred"
-                            className="w-[200px] sm:w-64 md:w-72 lg:w-auto lg:max-w-auto -mr-8 md:mr-0 -mt-4 md:mt-0"
+                            className="w-[200px] sm:w-64 md:w-72 lg:w-auto lg:max-w-auto -mr-4 md:mr-0 -mt-4 md:mt-0"
                         />
                     </div>
 
