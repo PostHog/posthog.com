@@ -622,7 +622,7 @@ function PipelinesPage({ location }) {
                                 <p
                                     className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ml-1`}
                                 >
-                                    Coming soon
+                                    Roadmap
                                 </p>
                             )}
                         </div>
@@ -809,7 +809,7 @@ function PipelinesPage({ location }) {
                                                                     selectedType === 'All' ? '!ml-1' : ''
                                                                 }`}
                                                             >
-                                                                Coming soon
+                                                                Roadmap
                                                             </p>
                                                         )}
                                                     </div>

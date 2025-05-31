@@ -12,6 +12,8 @@ type ProviderProps = {
 
 export const defaultMenuWidth = { left: 265, right: 265 }
 
+const isLabel = (item: any) => !item?.url && item?.name
+
 export const PostProvider: React.FC<ProviderProps> = ({
     value: {
         menuWidth = defaultMenuWidth,
@@ -39,20 +41,28 @@ export const PostProvider: React.FC<ProviderProps> = ({
         const menu = other.menu || activeInternalMenu?.children
         return menu?.map((item) => {
             if (item.dynamicChildren && dynamicMenus[item.dynamicChildren]) {
-                return {
-                    ...item,
-                    children: item.dynamicChildren
-                        ? [
-                              ...(item.children || []),
-                              ...dynamicMenus[item.dynamicChildren]?.filter(
-                                  (menuItem) => !item.children?.some((child) => child.name === menuItem.name)
-                              ),
-                          ].sort((a, b) => {
-                              if (!a.url || !b.url) return 0
-                              return a.name.localeCompare(b.name)
-                          })
-                        : item.children,
-                }
+                const newChildren = [...item.children, ...dynamicMenus[item.dynamicChildren]].reduce((acc, child) => {
+                    if (isLabel(child)) {
+                        acc.push([child])
+                    } else {
+                        const lastGroup = acc[acc.length - 1]
+                        if (!lastGroup || isLabel(lastGroup[lastGroup.length - 1])) {
+                            acc.push([child])
+                        } else {
+                            lastGroup.push(child)
+                        }
+                    }
+                    return acc
+                }, [])
+
+                newChildren.forEach((group) => {
+                    group.sort((a, b) => {
+                        if (!a.url || !b.url) return 0
+                        return a.name.localeCompare(b.name)
+                    })
+                })
+
+                return { ...item, children: newChildren.flat() }
             }
             return item
         })
