@@ -14,6 +14,7 @@ import { Contributor } from 'components/PostLayout/Contributors'
 import { productMenu } from '../navs'
 import RoadmapPreview from 'components/RoadmapPreview'
 import { PRODUCT_COUNT } from '../constants'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const Teams: React.FC = () => {
     const { james, supportTeam } = useStaticQuery(graphql`
@@ -138,11 +139,71 @@ const Teams: React.FC = () => {
                     },
                 ]}
             >
+                <style dangerouslySetInnerHTML={{
+                    __html: `
+                        .announcement-bar {
+                            display: none;
+                        }
+
+                        .active-tab {
+                            background: #B8DBF3;
+                        }
+
+                        .active-tab .absolute {
+                            border-color: #B8DBF3;
+                        }
+
+                        #content-menu-wrapper {
+                            max-width: 100% !important;
+                        }
+
+                        #content-menu-wrapper section.mx-auto {
+                            max-width: 48rem;
+                        }
+                    `
+                }} />
+                <div className="bg-[#B8DBF3] -mx-5 lg:-mx-6 xl:-mx-12 -mt-10 mb-4 2xl:mb-8 leading-[0]">
+                    <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/spaghetti_ddfd1b4f45.jpg" alt="Data spaghetti" className="w-full" />
+                    <div className="sr-only">"Tastes better than data spaghetti!" All your customer data lives in one place when you PostHog.</div>
+                </div>
+                
                 <section className="mx-auto">
                     <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                         <div className="md:flex-1">
                             <div className="@container article-content">
                                 <div className="opacity-70 text-[15px] font-medium">Why PostHog?</div>
+
+                                <h2 id="all-your-user-context-in-one-place">All your user context in one place</h2>
+
+                                <p>
+                                    We put all the context you need in one place, so you can focus on your users instead
+                                    of fixing endless data integrations.
+                                </p>
+                                <p>
+                                    <strong>We have {PRODUCT_COUNT}+ products today,</strong> but even if we don't offer
+                                    it <em>yet</em>, we will eventually.
+                                </p>
+                                <p>
+                                    We're going to build every piece of SaaS you need to make your product successful.
+                                    You read that right. We've already got the world's best track record at delivering
+                                    them by being the widest with so many customers.
+                                </p>
+                                <p>
+                                    You've probably already seen the products we do have. For the stuff we don't, you
+                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
+                                    need.
+                                </p>
+
+                                <RoadmapPreview />
+
+                                <div className="text-center mb-8">
+                                    <Link
+                                        href="/roadmap"
+                                        className="border border-b-3 border-light dark:border-dark p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
+                                    >
+                                        Explore the roadmap
+                                    </Link>
+                                </div>
 
                                 <h2 id="posthog-has-the-lowest-pricing-for-every-product">
                                     We have the lowest pricing for every product
@@ -192,33 +253,33 @@ const Teams: React.FC = () => {
                                         <em>there's a reason other companies don't list their pricing!</em>
                                     </li>
                                     <li>
-                                        We don’t sell products at a loss - we run the company default alive. This means
-                                        we’ve never had layoffs, and we don’t take huge risks that could result in the
+                                        We don't sell products at a loss - we run the company default alive. This means
+                                        we've never had layoffs, and we don't take huge risks that could result in the
                                         company disappearing overnight.
                                     </li>
-                                    <li>We don’t screw you on contract terms like auto-renewal.</li>
+                                    <li>We don't screw you on contract terms like auto-renewal.</li>
                                     <li>
                                         You can use all our stuff monthly until you want to lock things in with us. We
-                                        don’t pressure people.
+                                        don't pressure people.
                                     </li>
                                     <li>
-                                        The way we write our content. <Link href="/posts">Just read it</Link> and you’ll
-                                        get what we mean. It’s more honest and not like marketing-speak you've come to
+                                        The way we write our content. <Link href="/posts">Just read it</Link> and you'll
+                                        get what we mean. It's more honest and not like marketing-speak you've come to
                                         expect from other companies - it actively helps developers build successful
-                                        products. That’s our mission.
+                                        products. That's our mission.
                                     </li>
                                     <li>
                                         PostHog has zero intention of selling our business. We want to see just how
                                         crazy huge this gigantic software stack can get - and we think that it will
-                                        reach at least $100bn in value. We’ll be around and fighting for a long, long
-                                        time. It’s our life’s work.
+                                        reach at least $100bn in value. We'll be around and fighting for a long, long
+                                        time. It's our life's work.
                                     </li>
                                     <li>
                                         You can also see how our entire company operates - our{' '}
                                         <Link href="/handbook/growth/sales/overview">manual for our salespeople</Link>,{' '}
                                         <Link href="/handbook/growth/marketing">marketing team</Link>, and so on. You
-                                        can even <Link href="/handbook/people/compensation">see what they’re paid</Link>{' '}
-                                        - it’s all in our public handbook. You won't get this level of transparency from
+                                        can even <Link href="/handbook/people/compensation">see what they're paid</Link>{' '}
+                                        - it's all in our public handbook. You won't get this level of transparency from
                                         most companies!
                                     </li>
                                     <li>
@@ -310,9 +371,9 @@ const Teams: React.FC = () => {
                                 </div>
 
                                 <p>
-                                    We’ve also got dedicated support people - they’ve all got engineering backgrounds
-                                    too. If they can’t answer, you get the OG engineers mentioned above. Frankly our
-                                    support engineers answer most stuff when it gets deep. We don’t want you waiting on
+                                    We've also got dedicated support people - they've all got engineering backgrounds
+                                    too. If they can't answer, you get the OG engineers mentioned above. Frankly our
+                                    support engineers answer most stuff when it gets deep. We don't want you waiting on
                                     our triage.
                                 </p>
 
@@ -322,7 +383,7 @@ const Teams: React.FC = () => {
                                 </p>
 
                                 <p>
-                                    <em>“Everybody codes”</em> has made it to{' '}
+                                    <em>"Everybody codes"</em> has made it to{' '}
                                     <Link href="/handbook/values">our list of values</Link>.
                                 </p>
 
@@ -342,38 +403,6 @@ const Teams: React.FC = () => {
                                     65% of every Y Combinator batch (the world's best accelerator for startups) use our
                                     products.
                                 </p>
-
-                                <h2 id="all-your-user-context-in-one-place">All your user context in one place</h2>
-
-                                <p>
-                                    We put all the context you need in one place, so you can focus on your users instead
-                                    of fixing endless data integrations.
-                                </p>
-                                <p>
-                                    <strong>We have {PRODUCT_COUNT}+ products today,</strong> but even if we don't offer
-                                    it <em>yet</em>, we will eventually.
-                                </p>
-                                <p>
-                                    We're going to build every piece of SaaS you need to make your product successful.
-                                    You read that right. We've already got the world's best track record at delivering
-                                    them by being the widest with so many customers.
-                                </p>
-                                <p>
-                                    You've probably already seen the products we do have. For the stuff we don't, you
-                                    can <Link to="/roadmap">see our entire public roadmap</Link> and ask for what you
-                                    need.
-                                </p>
-
-                                <RoadmapPreview />
-
-                                <div className="text-center mb-8">
-                                    <Link
-                                        href="/roadmap"
-                                        className="border border-b-3 border-light dark:border-dark p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
-                                    >
-                                        Explore the roadmap
-                                    </Link>
-                                </div>
 
                                 <h2 id="who-doesnt-posthog-work-well-for">Who doesn't PostHog work well for?</h2>
                                 <p>
