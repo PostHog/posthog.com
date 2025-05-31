@@ -2,7 +2,7 @@ import React from 'react'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Link from 'components/Link'
 
-export default function ProductManagerNewsletterContent() {
+export default function ProductManagerNewsletterContent(): JSX.Element {
     return (
         <div className="max-w-3xl py-8">
             <div className="mb-8">
