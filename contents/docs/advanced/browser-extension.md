@@ -35,7 +35,7 @@ Browser extensions can block your imports. If your extension throws errors when 
 
 ## Using product analytics
 
-If you have [autocapture enabled](/docs/product-analytics/autocapture), PostHog will automatically capture events when the extension interface is opened, closed, and clicked.
+If you have [autocapture enabled](/docs/product-analytics/autocapture), PostHog will automatically track when you open, close, or click the extension interface.
 
 If you'd like to instrument your own custom events, use the `posthog.capture()` function:
 
@@ -56,5 +56,5 @@ import "posthog-js/dist/recorder" // For session replay
 import "posthog-js/dist/surveys" // For surveys
 import "posthog-js/dist/exception-autocapture" // For error tracking
 import "posthog-js/dist/tracing-headers" // Tracking across client and server
-import "posthog-js/dist/web-vitals" // web analytics
+import "posthog-js/dist/web-vitals" // Tracking web vitals
 ```
