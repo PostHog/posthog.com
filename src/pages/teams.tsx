@@ -14,7 +14,7 @@ const Teams: React.FC = () => {
     const { isModerator } = useUser()
     const { allTeams } = useStaticQuery(graphql`
         {
-            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" } }) {
                 nodes {
                     id
                     name
@@ -96,8 +96,19 @@ const Teams: React.FC = () => {
                                             <div className="">
                                                 <TeamPatch
                                                     name={name}
-                                                    imageUrl={crest?.data?.attributes?.url}
-                                                    {...crestOptions}
+                                                    imageUrl={crest?.data?.attributes?.url || 'https://res.cloudinary.com/dmukukwp6/image/upload/crest_default_0c2e43f05c.png'}
+                                                    {...(crestOptions || {
+                                                        fontSize: 'base',
+                                                        textColor: 'black',
+                                                        textShadow: 'light',
+                                                        frameColor: 'gold',
+                                                        plaqueColor: 'pale-blue',
+                                                        plaque: 'downward-curve',
+                                                        frame: 'half-round',
+                                                        imageScale: '50',
+                                                        imageXOffset: '0',
+                                                        imageYOffset: '0',
+                                                    })}
                                                     className="w-full"
                                                 />
                                             </div>
