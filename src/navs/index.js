@@ -1311,6 +1311,10 @@ export const handbookSidebar = [
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
+                        {
+                name: 'Lifecycle Analysis',
+                url: '/handbook/growth/revops/lifecycle-analysis',
+            },
         ],
     },
 ]
