@@ -62,36 +62,36 @@ SUM(CASE WHEN growth_lifecycle_stage = 'SHRINKING' THEN mrr - prev_month_mrr ELS
 -SUM(prev_mrr) WHERE prev_mrr > 0 AND curr_mrr = 0
 ```
 
-## Rate Calculations
+## Rate calculations
 
-### At risk revenue
+### Baseline revenue
 This the total monthly revenue at the end of previous month which is the denominator for our rate calculations:
 
-### Key Rates
+### Key rates
 
-**New rate**: How much new revenue we acquired relative to our at risk base
+**New rate**: How much new revenue we acquired relative to our at baseline revenue
 ```sql
-new_rate = (new_revenue / at_risk_revenue) × 100
+new_rate = (new_revenue / baseline_revenue) × 100
 ```
-*Example*: 10% new rate means we acquired new revenue equal to 10% of our at risk base
+*Example*: 10% new rate means we acquired new revenue equal to 10% of our at baseline revenue
 
-**Expansion Rate**: Growth from existing customers as a percentage of base
+**Expansion rate**: Growth from existing customers as a percentage of base
 ```sql
-expansion_rate = (expansion_revenue / at_risk_revenue) × 100
+expansion_rate = (expansion_revenue / baseline_revenue) × 100
 ```
 *Example*: 5% expansion rate means existing customers increased their spend by 5% on average
 
-**Contraction Rate**: Revenue decrease from existing customers due to lower usage
+**Contraction rate**: Revenue decrease from existing customers due to lower usage
 ```sql
-contraction_rate = (contraction_revenue / at_risk_revenue) × 100
+contraction_rate = (contraction_revenue / baseline_revenue) × 100
 ```
 *Example*: -3% contraction rate means we lost 3% of revenue from reduced customer usage
 
-**Churn Rate**: Percentage of at risk revenue that was completely lost
+**Churn rate**: Percentage of at baseline revenue that was completely lost
 ```sql
-churn_rate = (churned_revenue / at_risk_revenue) × 100
+churn_rate = (churned_revenue / baseline_revenue) × 100
 ```
-*Example*: 2% churn rate means 2% of our at risk revenue base churned completely
+*Example*: 2% churn rate means 2% of our baseline revenue base churned completely
 
 
 ## Notes on data
