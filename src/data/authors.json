@@ -389,5 +389,13 @@
         "link_type": "github",
         "link_url": "https://github.com/gewenyu99",
         "profile_id": 34100
+    },
+    {
+        "handle": "edwin-lim",
+        "name": "Edwin Lim",
+        "role": "Technical Content Marketer",
+        "link_type": "github",
+        "link_url": "https://github.com/edwinyjlim",
+        "profile_id": 33938
     }
 ]
