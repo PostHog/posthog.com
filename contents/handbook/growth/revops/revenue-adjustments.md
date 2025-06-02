@@ -58,7 +58,7 @@ How:
 - combine revenue and usage from different teams under the same organization that may exist as separate PostHog accounts
 
 ### 5. One time credit / refund adjustments
-Revenue credits that temporarily drop a customer’s billed MRR to zero (e.g., promo credit, SLA‐outage credit, billing correction, etc.)
+Revenue credits that temporarily drop a customer’s billed MRR to zero (e.g., one time promo credit, incident credit etc.)
 
 Why: If we count one time large credits as churn in our retention math we’ll understate our true net revenue trends. Excluding these prevents misleading dips and spikes in monthly growth patterns.
 
