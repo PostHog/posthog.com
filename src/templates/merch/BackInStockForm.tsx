@@ -28,7 +28,7 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
         e.preventDefault()
 
         // Extract title with fallbacks: variant title -> variant.product title -> product title
-        const title = variant?.title || variant?.product?.title || product?.title
+        const title = variant?.title?.replace('Default Title', '') || variant?.product?.title || product?.title
 
         // Extract shopifyId with fallback: variant shopifyId -> product shopifyId
         const shopifyId = variant?.shopifyId || product?.shopifyId
