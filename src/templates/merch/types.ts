@@ -56,6 +56,7 @@ export type ShopifyMedia = ShopifyMediaItem[]
 
 export type ShopifyProduct = {
     description: string
+    descriptionHtml: string
     featuredMedia: ShopifyMediaImage
     handle: string
     id: string

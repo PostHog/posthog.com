@@ -14,8 +14,10 @@ export const delaySurveyLight = "https://res.cloudinary.com/dmukukwp6/image/uplo
 export const delaySurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png"
 export const displayConditionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png"
 export const displayConditionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png"
-export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_11_35_29_2x_cc089a2cd1.jpg"
-export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_11_37_57_2x_0aa568d0d2.jpg"
+export const surveyTriggeredByEventLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg"
+export const surveyTriggeredByEventDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg"
+export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg"
+export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -104,7 +106,7 @@ You can display your survey to specific users based on:
 
 - **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
-- **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
+- **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey are never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
 
 - **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
 
@@ -123,7 +125,30 @@ This enables you to stop your survey once you receive a specific number of respo
 
 ## Repeating surveys
 
-By default, surveys are shown once to each user until they either dismiss it or complete it. After that, they won't see the survey again.
+By default, surveys are shown once to each user until they either dismiss it or complete it. After that, they won't see the survey again. However, there are a few exceptions.
+
+### Event-triggered surveys
+
+For surveys triggered by a specific event, you can configure the survey to repeat if the event is sent again. If you select the option `Every time the event is sent`, the survey is shown again for each event.
+
+If you want to trigger a survey on a specific event, but only show it once per user, select the `Just once` option.
+
+<ProductScreenshot
+    imageLight={surveyTriggeredByEventLight}
+    imageDark={surveyTriggeredByEventDark}
+    alt="Survey triggered by events under display conditions"
+    classes="rounded"
+/>
+
+
+### Complete conditions
+
+Under complete conditions, there's two options that can be configured so the survey is shown again:
+
+- `Repeat on a schedule`
+- `Every time the display conditions are met`
+
+#### Repeat on a schedule
 
 You can also configure surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
 
@@ -151,6 +176,14 @@ For example, you can configure settings like:
 A survey is considered "shown" when a user either completes or dismisses it. The repeat interval timer starts from that moment. For example, if you set a survey to repeat every 90 days and a user completes it on January 1st, they won't see it again until April 1st, regardless of how many times they visit your site in between.
 
 > **Note:** Users must still match any display conditions you've set each time the survey becomes eligible to show again.
+
+#### Every time the display conditions are met
+
+For this option, the survey is shown again every time the display conditions are met.
+
+The main use case for this is for `Feedback button` surveys. This enables the survey to show up every time the user clicks the feedback button.
+
+This can also be combined with the `Wait time` option. If you select this option and set a `Wait time` of 30 days, the survey is only shown again if they haven't seen any surveys in the last 30 days. This useful for getting feature regular feedback or asking about an error. 
 
 ## Launching your survey
 

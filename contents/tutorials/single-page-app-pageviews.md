@@ -17,7 +17,12 @@ A single-page application (or SPA) dynamically loads content for new pages using
 
 PostHog's JavaScript Web SDK automatically captures pageview events on page load. The problem with SPAs is that **page loads don't happen beyond the initial one**. This means user navigation in your SPA isn't tracked.
 
-To fix this, we have the ability to capture pageviews using the history API by setting the `capture_pageview` config option to `history_change`. This tutorial shows you how to do this for the most popular SPA frameworks like [Next.js](#tracking-pageviews-in-nextjs-app-router), [Vue](#tracking-pageviews-in-vue), [Svelte](#tracking-pageviews-in-svelte), and [Angular](#tracking-pageviews-in-angular). 
+Luckily, you can opt-in to tracking this behavior using one of 2 options:
+
+1. **Recommended:** set `defaults: '<ph_posthog_js_defaults>'` when initializing PostHog to use the most recent defaults.
+2. Manually set `capture_pageview: 'history_change'`.
+
+This tutorial shows you how to follow the recommended approach for the most popular SPA frameworks like [Next.js](#tracking-pageviews-in-nextjs-app-router), [Vue](#tracking-pageviews-in-vue), [Svelte](#tracking-pageviews-in-svelte), and [Angular](#tracking-pageviews-in-angular). 
 
 > **Prerequisite:** Each of these requires you to have an app created and PostHog installed. To install the [PostHog JavaScript Web SDK](/docs/libraries/js), run the following command for the package manager of your choice:
 >
@@ -31,7 +36,7 @@ To fix this, we have the ability to capture pageviews using the history API by s
 
 ## Tracking pageviews in Next.js (app router)
 
-To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture pageviews, we create a `PostHogProvider` component in the `app` folder, initialize PostHog with our project API key and host (from your [project settings](https://us.posthog.com/project/settings)), and set `capture_pageview` to `history_change`.
+To add PostHog to your [Next.js app](/docs/libraries/next-js) use it to capture pageviews, we create a `PostHogProvider` component in the `app` folder, initialize PostHog with our project API key and host (from your [project settings](https://us.posthog.com/project/settings)). PostHog will automatically capture pageviews if initialized with updated defaults.
 
 ```js
 // app/providers.js
@@ -44,7 +49,7 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      capture_pageview: 'history_change'
+      defaults: '<ph_posthog_js_defaults>',
     })
   }, []);
   
@@ -87,7 +92,7 @@ export default defineConfig({
 });
 ```
 
-Next, create a `providers.tsx` file in the `app` folder. In it, initialize the PostHog provider with `capture_pageview` set to `'history_change'`.
+Next, create a `providers.tsx` file in the `app` folder. PostHog will automatically track pageviews if initialized with updated defaults.
 
 ```ts
 // app/providers.tsx
@@ -97,7 +102,7 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
-    capture_pageview: 'history_change',
+    defaults: "<ph_posthog_js_defaults>",
   })
 }
 
@@ -139,7 +144,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
 
 ## Tracking pageviews in React Router (v6 or below)
 
-If you are using React Router v6 or below AKA `react-router-dom`, start by adding the `PostHogProvider` component in the `app` folder. Make sure to set `capture_pageview: false` because we will manually capture pageviews.
+If you are using React Router v6 or below AKA `react-router-dom`, start by adding the `PostHogProvider` component in the `app` folder.
 
 ```js
 // app/providers.js
@@ -150,7 +155,7 @@ import { PostHogProvider } from 'posthog-js/react'
 if (typeof window !== 'undefined') {
   posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
-    capture_pageview: 'history_change'
+    defaults: '<ph_posthog_js_defaults>',
   })
 }
 
@@ -180,7 +185,7 @@ function App() {
 
 ## Tracking pageviews in Vue
 
-After creating a [Vue app](/docs/libraries/vue-js) and setting up the `vue-router`, create a new folder in the `src/components` named `plugins`. In this folder, create a file named `posthog.js`. This is where we initialize PostHog with `capture_pageview` set to `history_change`.
+After creating a [Vue app](/docs/libraries/vue-js) and setting up the `vue-router`, create a new folder in the `src/components` named `plugins`. In this folder, create a file named `posthog.js`. If PostHog is initialized with updated defaults, it automatically tracks pageviews.
 
 ```js
 // src/plugins/posthog.js
@@ -188,13 +193,10 @@ import posthog from "posthog-js";
 
 export default {
   install(app) {
-    app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
-      {
-        api_host: "<ph_client_api_host>",
-        capture_pageview: 'history_change'
-      }
-    );
+    app.config.globalProperties.$posthog = posthog.init("<ph_project_api_key>", {
+      api_host: "<ph_client_api_host>",
+      defaults: "<ph_posthog_js_defaults>",
+    });
   },
 };
 ```
@@ -214,7 +216,7 @@ app.use(posthogPlugin).use(router).mount('#app');
 
 ## Tracking pageviews in Svelte
 
-If you haven't already, start by creating a `+layout.js` file for [your Svelte app](/docs/libraries/svelte) in your `src/routes` folder. In it, add the code to initialize PostHog with `capture_pageview` set to `history_change`.
+If you haven't already, start by creating a `+layout.js` file for [your Svelte app](/docs/libraries/svelte) in your `src/routes` folder. PostHog automatically tracks your pageviews once initialized with updated defaults.
 
 ```js
 // src/routes/+layout.js
@@ -222,23 +224,20 @@ import posthog from 'posthog-js'
 import { browser } from '$app/environment';
 
 export const load = async () => {
-
   if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host: '<ph_client_api_host>',
-        capture_pageview: 'history_change'
-      }
-    )
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
+    })
   }
+
   return
 };
 ```
 
 ## Tracking pageviews in Angular
 
-To start tracking pageviews in [Angular](/docs/libraries/angular), begin by initializing PostHog in `src/main.ts` with `capture_pageview` set to `history_change`.
+To start tracking pageviews in [Angular](/docs/libraries/angular), begin by initializing PostHog in `src/main.ts`. PostHog automatically tracks your pageviews when initialized with updated defaults.
 
 ```js
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -246,12 +245,10 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js';
 
-posthog.init('<ph_project_api_key>',
-  {
-    api_host: '<ph_client_api_host>',
-    capture_pageview: 'history_change'
-  }
-);
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  defaults: "<ph_posthog_js_defaults>",
+});
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

@@ -23,7 +23,8 @@ There are several ways to control which sessions you record:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
     disable_session_recording: true,
     // ... other options
 })

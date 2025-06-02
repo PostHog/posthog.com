@@ -40,7 +40,7 @@ There are also some best practices which all betas should follow in order to pro
 - Betas in the feature preview menu should have documentation (marked as beta) linked to them
 - Betas should have a [feature owner](/handbook/engineering/feature-ownership)
 
-The [Content team](/teams/content) can help build out any documentation, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
+Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), the [Content team](/teams/content) can help, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
 
 > **Launching a new beta?** It's helpful to let  know when it launches. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the team Slack channel](https://posthog.slack.com/archives/C083V7C6GKE).
 

@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Each feature at PostHog has an Engineering owner. This owner is responsible for maintaining the feature (keep the lights on) and championing any efforts to improve it (e.g. by bringing up improvements in sprint planning).
+Each feature at PostHog has an Engineering owner. This owner is responsible for maintaining the feature (keep the lights on), championing any efforts to improve it (e.g. by bringing up improvements in sprint planning), [planning launches](/handbook/words-and-pictures/product-announcements) for new parts of it, and making sure it is well documented.
 
 When a bug or feature request comes in, we tag it with the relevant label (see labels below). The owner is responsible for then prioritizing any bug/request that comes in for each feature. This does not mean working on every bug/request, an owner can make the deliberate decision that working on something is not the best thing to work on, but every request should be looked at.
 
@@ -45,12 +45,12 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Ingestion | [Team Ingestion][Team Ingestion]  | <span class="lemon-tag gh-tag">feature/team-ingestion</span> |
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
 | SQL Insights | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/sql-insights</span> |
-| Internal Messaging (Email, Notifications) | [Team Billing][Team Billing]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
+| Internal Messaging (Email, Notifications) | [Team Platform][Team Platform]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
-| Permissions and access control | [Team Billing][Team Billing]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
+| Permissions and access control | [Team Platform][Team Platform]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
 | Persons | [Team Ingestion][Team Ingestion]  | <span class="lemon-tag gh-tag">feature/persons</span>  |
 | Pipeline Transformations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 | Pipeline Destinations | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/cdp</span> |
@@ -59,19 +59,19 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Project Home Page | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property Filters | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
-| Quota limiting | [Team Billing][Team Billing]  | <span class="lemon-tag gh-tag">feature/quota-limiting</span>  |
+| Quota limiting | [Team Billing][Team Billing] / [Team Platform][Team Platform]  | <span class="lemon-tag gh-tag">feature/quota-limiting</span>  |
 | Revenue Analytics | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-analytics</span>  |
 | Revenue Data Management | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-data-management</span>  |
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Session Analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/sessions</span> |
-| Settings (personal & project) | [@benjackwhite][@benjackwhite]   |  <span class="lemon-tag gh-tag">feature/settings</span> |
+| Settings (personal & project) | Shared responsibility |  <span class="lemon-tag gh-tag">feature/settings</span> |
 | SQL Editor | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/sql-editor</span> |
-| SSO | [Team Billing][Team Billing]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
+| SSO | [Team Platform][Team Platform]  | <span class="lemon-tag gh-tag">feature/sso</span>  |
 | Surveys | [Team Surveys][Team Surveys] | <span class="lemon-tag gh-tag">feature/surveys</span> |
 | Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
-| Usage reports | [Team Billing][Team Billing]  | <span class="lemon-tag gh-tag">feature/usage-reports</span>  |
+| Usage reports | [Team Billing][Team Billing] / [Team Platform][Team Platform] | <span class="lemon-tag gh-tag">feature/usage-reports</span>  |
 | Web Analytics  | [Team Web Analytics][Team Web Analytics]  | <span class="lemon-tag gh-tag">feature/web-analytics</span>  |
 | Webhook delivery service | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 
@@ -94,6 +94,7 @@ Some of the features we are building may exist in other products already. It is 
 [Team CRM]: /teams/crm
 [Team Data Warehouse]: /teams/data-warehouse
 [Team Billing]: /teams/billing
+[Team Platform]: /teams/platform
 [Team Feature Flags]: /teams/feature-flags
 [Team Growth]: /teams/growth
 [Team Infrastructure]: /teams/infrastructure

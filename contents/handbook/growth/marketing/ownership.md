@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-## Owned by Content & Docs
+## Owned by Content
 
 | &nbsp                           | **Individual owner** |
 |---------------------------------|----------------------|
@@ -19,9 +19,10 @@ showTitle: true
 | **SEO landing pages**           | Andy                 |
 | **Social media**                | Andy                 |
 | **Product comparisons**         | Andy                 |
+| **Video**         | Alex                 |
 | **Where people hear about us**  | Andy                 |
 
-## Owned by Comms
+## Owned by Brand & Vibes
 
 | &nbsp                                   | **Individual owner** |
 |-----------------------------------------|----------------------|
@@ -29,24 +30,14 @@ showTitle: true
 | **Changelog**                           | Joe                  |
 | **Emailing customers**                  | Joe                  |
 | **Events**                              | Daniel               |
-| **Growth review**                       | Brian                |
 | **Incident response**                   | Joe                  |
 | **In-app notifications**                | Joe                  |
 | **Onboarding emails**                   | Joe                  |
-| **Paid ads strategy and messaging**     | Brian                |
-| **Paid ads design**                     | Brian                |
-| **Paid ads operations**                 | Brian                |
-| **Paid ads performance**                | Brian                |
 | **Partnerships**                        | Joe                  |
 | **Product announcements**               | Joe                  |
 | **Reward packages**                     | Joe                  |
 | **Startup program**                     | Joe                  |
 | **YC batch engagement**                 | Joe                  |
-
-## Owned by Website & Vibes
-
-| &nbsp                                   | **Individual owner** |
-|-----------------------------------------|----------------------|
 | **Art requests / hedgehogs**            | Lottie               |
 | **Community features**                  | Cory & Eli           |
 | **Docs layout and navigation**          | Cory & Eli           |
@@ -62,6 +53,16 @@ showTitle: true
 | **Team member profile pics**            | Lottie               |
 | **Website backend**                     | Eli                  |
 | **Website search**                      | Eli                  |
+
+
+## Owned by other teams (who help marketing out)
+
+| &nbsp                                   | **Individual owner** |
+| **Growth review**                       | Brian                |
+| **Paid ads strategy and messaging**     | Brian                |
+| **Paid ads design**                     | Brian                |
+| **Paid ads operations**                 | Brian                |
+| **Paid ads performance**                | Brian                |
 
 
  

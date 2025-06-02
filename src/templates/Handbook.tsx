@@ -24,6 +24,137 @@ import Configuration from 'components/Product/Pipelines/Configuration'
 import Link from 'components/Link'
 import SEO from 'components/seo'
 
+const DestinationsLibraryCallout = () => {
+    return (
+        <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-4">
+            <h2 className="font-bold text-lg leading-tight !m-0">Did somebody say destinations?</h2>
+            <p className="m-0 !mb-3 !mt-1.5">
+                We're building new destinations and want your input on what to build next.
+            </p>
+            <CallToAction to="/cdp#library" size="sm">Browse the library</CallToAction>
+        </div>
+    )
+}
+
+const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
+    switch (availability) {
+        case 'full':
+            return (
+                <Tooltip content="This plan has full access to this feature">
+                    <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
+            )
+        case 'partial':
+            return (
+                <Tooltip content="Some parts of this feature are not available on this plan">
+                    <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
+            )
+        case 'none':
+            return (
+                <Tooltip content="This feature is not available on this plan">
+                    <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+                </Tooltip>
+            )
+    }
+}
+
+const MDX = ({ body }) => (
+    <MDXProvider components={{}}>
+        <MDXRenderer>{body}</MDXRenderer>
+    </MDXProvider>
+)
+
+const Contributors = (props) => {
+    const [expanded, setExpanded] = useState(false)
+    const contributors = expanded ? props.contributors : props.contributors.slice(0, 3)
+    const more = props.contributors.length - 3
+    return (
+        <div className={`mb-4 flex flex-col gap-2 -mx-4`}>
+            {contributors.map(({ avatar, username, profile, url }) => {
+                return (
+                    <Contributor
+                        url={profile?.squeakId ? `/community/profiles/${profile.squeakId}` : url}
+                        image={profile?.avatar?.url || avatar}
+                        name={profile ? [profile.firstName, profile.lastName].filter(Boolean).join(' ') : username}
+                        key={username}
+                        role={profile?.companyRole || 'Contributor'}
+                        text
+                        compact
+                        roundedImage={!profile}
+                    />
+                )
+            })}
+            {more > 0 && !expanded && (
+                <button onClick={() => setExpanded(true)} className="mx-4 flex space-x-2 items-center">
+                    <span className="text-sm text-red font-bold text-left flex-shrink-0">+{more} more</span>
+                </button>
+            )}
+        </div>
+    )
+}
+
+export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
+    return (
+        <>
+            {location.pathname.startsWith('/docs/cdp/destinations') &&
+                location.pathname !== '/docs/cdp/destinations' && (
+                    <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-8">
+                        <h5 className="text-lg font-bold leading-tight m-0">Did somebody say destinations?</h5>
+                        <p className="text-sm m-0 mb-3 mt-1.5">
+                            We're building more destinations and prioritzing them based on your feedback.
+                        </p>
+                        <CallToAction size="sm" to="/cdp#library">
+                            Browse the library
+                        </CallToAction>
+                    </div>
+                )}
+            {contributors && (
+                <SidebarSection title="Contributors">
+                    <Contributors contributors={contributors} />
+                </SidebarSection>
+            )}
+
+            {availability && (
+                <SidebarSection title="Feature availability" className="space-y-1.5">
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Free / Open-source</span>
+                        {renderAvailabilityIcon(availability.free)}
+                    </div>
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Self-serve</span>
+                        {renderAvailabilityIcon(availability.selfServe)}
+                    </div>
+                    {availability.teams && (
+                        <div className="flex items-center justify-between font-bold">
+                            <span>Teams</span>
+                            {renderAvailabilityIcon(availability.teams)}
+                        </div>
+                    )}
+                    <div className="flex items-center justify-between font-bold">
+                        <span>Enterprise</span>
+                        {renderAvailabilityIcon(availability.enterprise)}
+                    </div>
+                </SidebarSection>
+            )}
+
+            {related && (
+                <SidebarSection title="Related articles">
+                    <ul className="p-0 space-y-1.5">
+                        {related.map(({ childMdx }) => (
+                            <li key={childMdx.fields.slug} className="list-none">
+                                <Link to={childMdx.fields.slug} className="text-sm block">
+                                    {childMdx.frontmatter.title}
+                                </Link>
+                            </li>
+                        ))}
+                    </ul>
+                </SidebarSection>
+            )}
+        </>
+    )
+}
+
 type AppParametersProps = {
     config:
         | {
@@ -178,6 +309,7 @@ export default function Handbook({
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
+        DestinationsLibraryCallout,
         table: (props) => (
             <OverflowXSection>
                 <table {...props} />
