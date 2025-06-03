@@ -18,7 +18,7 @@ growth.
 We continue to report unadjusted revenue for our top line reporting and overall growth metrics. We use adjusted revenue for retention metrics (NDR/GDR) and other business lifecycle analysis to get a clearer picture of our growth. This way we maintain standard financial reporting (unadjusted revenue) while getting a better understanding of our performance (via adjusted revenue).
 
 ## Adjustments
-We make three primary adjustments to our revenue data:
+We make the following primary adjustments to our revenue data:
 
 ### 1. Trial adjustments
 Revenue from customers who are testing our platform with the intention of potentially moving to self hosted or 
@@ -56,3 +56,15 @@ Why: Organizations sometimes have multiple accounts that should be viewed as a s
 How: 
 - identify and consolidate accounts when customers move from EU to US instances
 - combine revenue and usage from different teams under the same organization that may exist as separate PostHog accounts
+
+### 5. One time credit / refund adjustments
+Revenue credits that temporarily drop a customer’s billed MRR to zero (e.g., one time promo credit, incident credit etc.)
+
+Why: If we count one time large credits as churn in our retention math we’ll understate our true net revenue trends. Excluding these prevents misleading dips and spikes in monthly growth patterns.
+
+How: check for following criteria:
+- credit is issued for a promo, outage, or a billing correction AND
+- total credit amount ≥ 0.5 * prior month revenue AND
+- next month revenue is >= previous 2 month avg revenue
+
+if all three are satisfied we override that month’s revenue to equal prior month’s revenue.

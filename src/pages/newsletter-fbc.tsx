@@ -5,12 +5,11 @@ import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
-import { Info } from 'components/Icons/Icons'
 import { container, child } from 'components/CallToAction'
-import ProductManagerNewsletterContent from 'components/ProductManagerNewsletterContent'
+import NewsletterContentForFBAds from 'components/FBAds/NewsletterContentForFBAds'
 import { IconInfo } from '@posthog/icons'
 
-function NewsletterFBC() {
+function NewsletterFBC(): JSX.Element {
     const { user } = useUser()
     const posthog = usePostHog()
     const [email, setEmail] = useState('')
@@ -42,7 +41,7 @@ function NewsletterFBC() {
             <SEO title="Newsletter" description="Subscribe to our newsletter" />
             <div className="mx-auto px-4 pt-2">
                 <div className="flex flex-col items-center min-h-[60vh]">
-                    {showContent && <ProductManagerNewsletterContent />}
+                    {showContent && <NewsletterContentForFBAds />}
                     {!showContent && (
                         <div className="w-full max-w-[250px]">
                             <CloudinaryImage
@@ -129,7 +128,10 @@ function NewsletterFBC() {
                         <div className="flex justify-center items-center gap-1">
                             <span className="opacity-75">or</span>
                             <button
-                                onClick={() => setShowContent(true)}
+                                onClick={() => {
+                                    posthog?.capture('newsletter_read_first_clicked')
+                                    setShowContent(true)
+                                }}
                                 className="text-red dark:text-yellow font-semibold"
                             >
                                 read it first

@@ -285,7 +285,7 @@ Next, install [posthog-js](https://github.com/posthog/posthog-js):
 npm install --save posthog-js
 ```
 
-Now we will set up the `PostHogProvider` for our app. This initializes PostHog and enables you to access it from anywhere in your app. We set `capture_pageview` to `history_change` because Next.js acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+Now we will set up the `PostHogProvider` for our app. This initializes PostHog and enables you to access it from anywhere in your app.
 
 ```js
 // pages/_app.js
@@ -301,7 +301,7 @@ export default function App(
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
-      capture_pageview: 'history_change',
+      defaults: '<ph_posthog_js_defaults>',
       // Enable debug mode in development
       loaded: (posthog) => {
         if (process.env.NODE_ENV === 'development') posthog.debug()

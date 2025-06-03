@@ -32,6 +32,9 @@ List of ingestion warnings:
 - [An event was sent more than 23 hours in the future](#an-event-was-sent-more-than-23-hours-in-the-future)
 - [Discarded event exceeding 1MB limit](#discarded-event-exceeding-1mb-limit)
 - [Event ingestion has overflowed capacity](#event-ingestion-has-overflowed-capacity)
+- [Replay event timestamp is invalid](#replay-event-timestamp-is-invalid)
+- [Replay event timestamp was too far in the future](#replay-event-timestamp-was-too-far-in-the-future)
+- [$set or $set_once is ignored on exception events and should not be sent](#set-or-set_once-is-ignored-on-exception-events-and-should-not-be-sent)
 
 ## Refused to merge with an illegal distinct ID
 
@@ -70,3 +73,15 @@ PostHog discards events exceeding 1 megabyte in size after processing. The two c
 ## Event ingestion has overflowed capacity
 
 This warning indicates PostHog is receiving more events for a single `distinct_id` than it can process in the main [ingestion pipeline](/docs/how-posthog-works/ingestion-pipeline). These events are still safe and ingested but through a slower overflow pipeline. This is often a sign of an instrumentation bug such as a loop sending the same event.
+
+## Replay event timestamp is invalid
+
+The replay event timestamp is not valid and the session replay event is dropped.
+
+## Replay event timestamp was too far in the future
+
+The replay event timestamp is more than 7 days in the future and the session replay event is dropped.
+
+## Invalid set operations on exception events
+
+The `$set` or `$set_once` properties are ignored on exception events and should not be sent.

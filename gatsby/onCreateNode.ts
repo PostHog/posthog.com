@@ -222,7 +222,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             try {
                 const templateConfigs: { templateId: string; inputs_schema: any; name: string; type: string }[] = []
                 for (const templateId of templateIds) {
-                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
+                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates?limit=350/`)
 
                     if (res.status !== 200) {
                         throw `Got status code ${res.status}`

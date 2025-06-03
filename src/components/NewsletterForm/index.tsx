@@ -107,7 +107,9 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                                 <em>Product for Engineers</em>
                             </strong>{' '}
                             from Substack in your inbox. Until then,{' '}
-                            <Link href="https://newsletter.posthog.com/" external>check out our previous editions.</Link>
+                            <Link href="https://newsletter.posthog.com/" external>
+                                check out our previous editions.
+                            </Link>
                         </p>
                     </div>
                 )}

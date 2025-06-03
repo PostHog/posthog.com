@@ -119,11 +119,20 @@ const Roadmap = () => {
     const { roadmaps, isLoading, mutate } = useRoadmaps({
         params: {
             filters: {
-                topic: {
-                    id: {
-                        $eq: '391',
+                $or: [
+                    {
+                        teams: {
+                            name: {
+                                $eq: 'Max AI',
+                            },
+                        },
                     },
-                },
+                    {
+                        topic: {
+                            id: { $eq: 391 },
+                        },
+                    },
+                ],
             },
         },
         limit: 100,
@@ -300,7 +309,9 @@ const Roadmap = () => {
                                             <h4 className="text-lg font-bold mb-1 leading-tight">
                                                 {roadmap.attributes.title}
                                             </h4>
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                            <Markdown className="dark:text-primary">
+                                                {roadmap.attributes.description}
+                                            </Markdown>
                                             <div className="mt-4 flex gap-2">
                                                 <CallToAction
                                                     size="sm"
@@ -362,7 +373,9 @@ const Roadmap = () => {
                                                     {new Date(roadmap.attributes.dateCompleted).toLocaleDateString()}
                                                 </p>
                                             )}
-                                            <Markdown>{roadmap.attributes.description}</Markdown>
+                                            <Markdown className="dark:text-primary">
+                                                {roadmap.attributes.description}
+                                            </Markdown>
                                         </div>
                                     </div>
                                 </div>
@@ -803,6 +816,13 @@ export const ProductMax = () => {
                                 and we'll add new ideas to our roadmap when we're considering Max's future superpowers.
                             </p>
                         </div>
+                    </div>
+
+                    <div className="mb-12">
+                        <MaxQuestionInput
+                            className="bg-[#f5e2b1] border-[#F5E2B2] shadow-xl"
+                            placeholder="Ask Max anything about your product data..."
+                        />
                     </div>
 
                     <section className="mt-20 dark:text-primary">
