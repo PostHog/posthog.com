@@ -4,13 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-* you're the driver
-* do more weird
-* we haven't built our defining feature
-* why not now
-* make it public
-* optimistic by default
-
 These are the principles for the behavior we care about.
 
 ## You're the driver
