@@ -121,7 +121,7 @@ const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
                 )}
                 <p className="text-sm font-medium leading-tight">
                     <span className="bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] rounded-[2px] px-0.5">
-                        {label}
+                        <span className="skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px]">{label}</span>
                     </span>
                 </p>
             </Link>
