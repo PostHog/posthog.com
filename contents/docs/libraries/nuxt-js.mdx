@@ -49,13 +49,14 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
 ```
 
-3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in [`useAsyncData(https://nuxt.com/docs/api/composables/use-async-data)]`:
+3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in [`useAsyncData`](https://nuxt.com/docs/api/composables/use-async-data):
 
 ```vue file=app.vue
 <!-- ...rest of code -->
@@ -68,7 +69,7 @@ const { data: someData, error } = await useAsyncData('ctaText', async () => {
   const runtimeConfig = useRuntimeConfig();
   const posthog = new PostHog(
     runtimeConfig.public.posthogPublicKey,
-    { host: runtimeConfig.public.posthogHost }
+    { host: runtimeConfig.public.posthogHost, defaults: runtimeConfig.public.posthogDefaults }
   );
 
   const cookies = useCookie(`ph_${runtimeConfig.public.posthogPublicKey}_posthog`);
@@ -124,6 +125,7 @@ export default function({ app: { router } }, inject) {
   // Init PostHog
   posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     capture_pageview: false,
     loaded: () => posthog.identify('unique_id') // If you can already identify your user
   })

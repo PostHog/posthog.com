@@ -1,14 +1,11 @@
-The recommended way to set person properties is to send a `$set` event with a `$set` property:
+The recommended way to set person properties is to send a `$set` event with a `$set` property. For SDKs that provide helper methods (such as `posthog.setPersonProperties`), we recommend using them, as they handle important side effects like switching the user to identified mode.
 
 <MultiLanguage selector="tabs">
 
 ```js-web
-posthog.capture(
-    '$set', 
-    { 
-        $set: { name: 'Max Hedgehog'  },
-        $set_once: { initial_url: '/blog' },
-    }
+posthog.setPersonProperties(
+    { name: 'Max Hedgehog' }, // $set properties
+    { initial_url: '/blog' }  // $set_once properties
 )
 ```
 

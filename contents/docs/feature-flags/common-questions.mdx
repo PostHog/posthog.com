@@ -136,7 +136,7 @@ If your flag is returning false and you expect it to return another value, check
 
 ## If a user matches multiple release conditions, which one is used?
 
-During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used.
+During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
 ## Why does it take so long for flag properties to appear in filters and breakdowns?
 

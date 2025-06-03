@@ -83,7 +83,8 @@ import { PostHogProvider as PHProvider } from 'posthog-js/react';
 export function PostHogProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_client_api_host>'    
+      api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
     });
   }, []);
 

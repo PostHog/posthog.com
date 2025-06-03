@@ -86,7 +86,7 @@ Best of all, though, because it was personalized and came from me directly, it a
 
 In [3.3](https://github.com/PostHog/meta/issues/140), we started running a series of tests and experiments. We removed the `founder` targeted email, which invited teams to join [PostHog for Startups](/startups), because it was _too_ successful and cannibalised revenue.
 
-Most of the tests we ran proved inconclusive, or outright failed. Subtle changes to subject lines or body copy had no noticeable impact. We learned that users did _slightly_ prefer [Lottie’s](https://posthog.com/community/profiles/227) hedgehog art over screenshots of the app, but the difference was a negligible 1-2% in CTR. 
+Most of the tests we ran proved inconclusive, or outright failed. Subtle changes to subject lines or body copy had no noticeable impact. We learned that users did _slightly_ prefer [Lottie’s](/lottie) hedgehog art over screenshots of the app, but the difference was a negligible 1-2% in CTR. 
 
 One successful experiment we did roll out was adding more personalized emails for non-technical users. If `role_at_organization` = `marketing`, `sales` or `product` _and_ a user had not created an [action](/docs/data/actions) within 12 hours, I’d send them another personal tip. These emails averaged a steady 6% CTR and 54% open rate, so we kept them in, but interestingly I didn't see many replies on these messages.
 
@@ -187,7 +187,7 @@ We think the reason for this is...
 ### Users prefer fun visual art to screenshots
 I mean, who _wouldn't_ want to look at a cute hedgehog instead of a graph? 
 
-We've run tests on this several times and [Lottie's](https://posthog.com/community/profiles/227) art is victorious by a small margin every time. 
+We've run tests on this several times and [Lottie's](/lottie) art is victorious by a small margin every time. 
 
 ### Personalization matters
 Personalization doesn't mean calling users by their first name using a [liquid](https://customer.io/docs/journeys/using-liquid/) tag and pretending to be best buds. It means providing the right content, at the right time, in the right way. 

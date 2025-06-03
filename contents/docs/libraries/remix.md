@@ -10,46 +10,101 @@ This guide walks you through integrating PostHog into your Remix app using the [
 
 ## Installation
 
-Install `posthog-js` using your package manager:
+Install `posthog-js`:
 
 ```bash
-yarn add posthog-js
-# or
 npm install --save posthog-js
 ```
 
-Then, go to `app/entry.client.tsx` and initialize PostHog as a component. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
+Start by setting `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file.
 
-```ts file=entry.client.tsx
-import { RemixBrowser } from "@remix-run/react";
-import { startTransition, StrictMode, useEffect } from "react";
-import { hydrateRoot } from "react-dom/client";
-import posthog from "posthog-js";
+```ts
+// vite.config.ts
+// ... imports and rest of config
 
-function PosthogInit() {
-  useEffect(() => {
-    posthog.init('<ph_project_api_key>', {
-      api_host: '<ph_client_api_host>',
-    });
-  }, []);
-
-  return null;
-}
-
-startTransition(() => {
-  hydrateRoot(
-    document,
-    <StrictMode>
-        <RemixBrowser />
-        <PosthogInit/>
-    </StrictMode>
-  );
+export default defineConfig({
+  plugins: [
+    remix({
+      future: {
+        v3_fetcherPersist: true,
+        v3_relativeSplatPath: true,
+        v3_throwAbortReason: true,
+        v3_singleFetch: true,
+        v3_lazyRouteDiscovery: true,
+      },
+    }),
+    tsconfigPaths(),
+  ],
+  ssr: {
+    noExternal: ["posthog-js", "posthog-js/react"],
+  },
 });
 ```
 
+Next, create a `provider.tsx` file in the `app` folder. In it, set up the PostHog provider to initialize after hydration. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
+
+```ts
+// app/provider.tsx
+import { useEffect, useState } from "react";
+import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
+
+export function PHProvider({ children }: { children: React.ReactNode }) {
+  const [hydrated, setHydrated] = useState(false);
+
+  useEffect(() => {
+    posthog.init("<ph_project_api_key>", {
+      api_host: "<ph_client_api_host>",
+      defaults: "<ph_posthog_js_defaults>",
+    });
+
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return <>{children}</>;
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
+}
+```
+
+Finally, import the `PHProvider` component in your `app/root.tsx` file and use it to wrap your app.
+
+```ts
+// app/root.tsx
+// ... imports
+import { PHProvider } from "./provider";
+
+// ... links, meta, etc.
+
+export function Layout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <PHProvider>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </PHProvider>
+      </body>
+    </html>
+  );
+}
+
+export default function App() {
+  return <Outlet />;
+}
+```
+
+When you run your app now, PostHog will automatically capture events and pageviews. You can also use the other features of PostHog by importing and using the `usePostHog` hook in your components.
+
 ## Next steps
 
-For any technical questions for how to integrate specific PostHog features into Remix (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features).
+For any technical questions for how to integrate specific PostHog features into Remix (such as analytics, feature flags, A/B testing, surveys, etc.), have a look at our [JavaScript Web SDK docs](/docs/libraries/js/features) and [React](/docs/libraries/react) docs.
 
 Alternatively, the following tutorials can help you get started:
 

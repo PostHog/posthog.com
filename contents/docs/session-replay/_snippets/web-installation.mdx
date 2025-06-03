@@ -73,14 +73,13 @@ import { useSearchParams } from 'next/navigation'
 
 export function PHProvider({ children }) {
   const searchParams = useSearchParams()
-  const sessionId = searchParams.get('session_id')
+  const sessionID = searchParams.get('session_id')
 
   if (typeof window !== 'undefined') {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      bootstrap: {
-        sessionID: sessionId
-      }
+      defaults: '<ph_posthog_js_defaults>',
+      bootstrap: { sessionID }
     })
   }
 

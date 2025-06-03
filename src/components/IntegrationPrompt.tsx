@@ -24,12 +24,15 @@ npx --yes @posthog/wizard@latest --default --region <ph_region>`
 
     return (
         <div className="md:block">
-            <div className="rounded border border-border dark:border-border-dark px-5 py-4 max-w-[700px] w-full mx-auto bg-white dark:bg-accent-dark">
-                <div className="flex items-center gap-2 mb-1">
-                    <h4 className="text-lg font-bold m-0">Integrate PostHog in 90 seconds with this prompt</h4>
-                    <span className="bg-orange/10 !text-orange px-1 py-0.5 rounded text-sm font-semibold flex-shrink-0 border border-orange">
+            <div className="rounded border border-border dark:border-border-dark px-5 py-4 bg-white dark:bg-accent-dark">
+                <div className=" items-center gap-2 mb-1">
+                    <h4 className="text-lg font-bold m-0">
+                        <span className=" mr-1">Integrate PostHog in 90 seconds with this prompt</span>
+                        <span className="bg-orange/10 !text-orange px-1 rounded-sm text-[13px] font-semibold flex-shrink-0 border border-orange">
                         BETA
-                    </span>
+                        </span>
+                    </h4>
+                    
                 </div>
                 <p className="text-[15px] text-primary dark:text-primary-dark mb-4">
                     Works with agent-based coding tools like Cursor and Bolt.
@@ -41,7 +44,7 @@ npx --yes @posthog/wizard@latest --default --region <ph_region>`
                     Supports Next.js, React, React Native, Svelte, and Astro.{' '}
                     <Link
                         to="/docs/getting-started/install?tab=wizard"
-                        className="text-yellow dark:text-red hover:text-yellow dark:hover:text-red"
+                        className="text-red dark:text-yellow hover:text-red dark:hover:text-yellow font-semibold"
                     >
                         More on the way!
                     </Link>

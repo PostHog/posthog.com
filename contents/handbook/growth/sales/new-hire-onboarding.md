@@ -19,7 +19,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Wait til you're ready to talk to customers. Jump in sooner than you feel comfortable - it is by far the fastest way to learn. A great, low-risk way to practise is chat to inbound leads who you think aren't going to be high paying customers - the cost of doing badly is very low!
 - Lazily forward customer questions to engineering teams without any context. That's super annoying. Instead:
   - Try to solve the problem yourself, read the Docs etc.
-  - Try asking #max-ai in Slack
+  - Try asking in #ask-max Slack channel
   - Ask the rest of the Sales team
   - _Then_ forward to the relevant engineering team _and add context_ - are they a huge oppo, evaluating or already paying, technical/non-technical etc.? Help them help you
     - Bonus points for: 'I think [this] is the answer, am I on the right track?'
@@ -134,7 +134,7 @@ In addition to following the guidance in the [spending money](/handbook/people/s
 
 ### How does support work at PostHog?
 
-- Generally, you're expected to be able to be the first line of support for customers at PostHog. You should be able to answer _most_ yourself - that's why we hire _Technical_ AEs and CSMs after all! #max-ai in Slack can often help too. 
+- Generally, you're expected to be able to be the first line of support for customers at PostHog. You should be able to answer _most_ yourself - that's why we hire _Technical_ AEs and CSMs after all! #ask-max in Slack can often help too. 
 - If you can't solve a customer's problem (it happens) then follow our [standard support process](/handbook/support/customer-support).
 
 ### Can I login as a customer?

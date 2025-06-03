@@ -17,6 +17,7 @@ PostHog can capture frontend events automatically using autocapture. This captur
 This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
 
 Autocapture is available in the following SDKs:  
+
 - [JavaScript Web](/docs/libraries/js) - enabled by default
 - [React](/docs/libraries/react) - enabled by default
 - [React Native](/docs/libraries/react-native) - disabled by default
@@ -25,6 +26,17 @@ Autocapture is available in the following SDKs:
 ## Configuring autocapture
 
 > This covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
+
+### Capturing pageviews in single-page apps
+
+Because PostHog hooks to the `navigator` API, we'll automatically capture pageviews and pageleaves. Make sure you've set `defaults: '<ph_posthog_js_defaults>'` in your `posthog.init` call to opt-in to this behavior.
+
+```js-web
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  defaults: '<ph_posthog_js_defaults>',
+})
+```
 
 ### Reducing events with an allow and ignorelist
 
@@ -37,6 +49,7 @@ For example, to only capture clicks on buttons on the docs section of the websit
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     autocapture: {
         dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
         url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
@@ -254,6 +267,7 @@ You can configure `posthog-js` to autocapture information that users copy or cut
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     autocapture: {
         capture_copied_text: true,
         // any other autocapture config
@@ -287,6 +301,7 @@ Or by setting your config:
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     capture_dead_clicks: true,
     // any other config
 })

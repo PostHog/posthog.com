@@ -1,5 +1,8 @@
 import React from 'react'
 import Link from 'components/Link'
+import CalloutBox from 'components/Docs/CalloutBox'
+import { CallToAction } from 'components/CallToAction'
+import { IconOpenSidebar, IconMagicWand } from '@posthog/icons'
 
 type MaxCTAProps = {
     className?: string
@@ -9,38 +12,36 @@ type MaxCTAProps = {
 
 export const MaxCTA = ({ className = '', children, question }: MaxCTAProps): JSX.Element => {
     const encodedQuestion = encodeURIComponent(question)
-    const maxUrl = `https://app.posthog.com/#panel=max:${encodedQuestion}`
+    const maxUrl = `https://app.posthog.com/#panel=max:!${encodedQuestion}`
 
     return (
         <div
-            className={`bg-[#e5e7e0] dark:bg-[#242529] border border-border dark:border-border-dark text-[15px] rounded-md p-4 my-4 ${className}`}
+            className={`ph-callout flex flex-col md:flex-row gap-2 md:gap-4 mt-4 mb-6 p-4 border rounded bg-gray/10 border-gray`}
         >
-            <div className="flex items-start space-x-3">
-                <span className="text-xl leading-none mt-0.5">🦔</span>
-                <div className="space-y-1">
-                    <div className="font-bold text-primary dark:text-primary-dark">Do this faster with Max AI</div>
-                    <p className="text-muted dark:text-muted-dark m-0">
-                        If you're opted in to{' '}
-                        <Link
-                            href="https://us.posthog.com/#panel=feature-previews%3Aartificial-hog"
-                            externalNoIcon
-                            className="text-red-600 dark:text-yellow-400 hover:underline"
-                        >
-                            our free PostHog AI beta
-                        </Link>
-                        , you can{' '}
-                        <Link
-                            href={maxUrl}
-                            externalNoIcon
-                            className="text-red-600 dark:text-yellow-400 hover:underline"
-                        >
-                            ask Max, our AI, to do this for you
-                        </Link>
-                        .
-                    </p>
-                    {children}
+            <div className="flex-1">
+                <div className="flex items-center gap-2 mb-0.5">
+                    <div className="shrink-0 opacity-75">
+                        <IconMagicWand className="size-6" />
+                    </div>
+                    <strong className="text-lg">Run this faster with Max AI</strong>
+                </div>
+                <div className="ph-text pl-8 text-[15px] [&_p]:text-[15px] [&_*]:text-[15px] [&>*:last-child]:mb-0 !leading-relaxed">
+                    Already using PostHog? <Link href="/docs/max-ai">Max</Link> can run this query for you.
                 </div>
             </div>
+            <aside className="pt-1 pl-8 md:pl-0">
+                <CallToAction
+                    type="secondary"
+                    size="sm"
+                    className="group [&>span]:flex [&>span]:items-center [&>span]:gap-1.5 [&>span]:px-3"
+                    childClassName="whitespace-nowrap"
+                    href={maxUrl}
+                    externalNoIcon
+                >
+                    Ask with Max
+                    <IconOpenSidebar className="size-6 inline-block opacity-75 group-hover:opacity-100" />
+                </CallToAction>
+            </aside>
         </div>
     )
 }

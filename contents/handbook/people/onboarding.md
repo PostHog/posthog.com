@@ -215,3 +215,47 @@ Feedback is a really important part of the onboarding process and as a manager i
 These check-ins are designed to ensure every new starter is set up for success. Every manager will deal with these slightly differently, but it will hopefully be clear to everybody by around the 60 day mark how things are going and what needs to be worked on, if anything. It is important for a manager to ensure that they do not wait for one of these check-ins to communicate with an exec team member that there could be issues with the team member passing probation. They should let them know immediately, so that a fair and reasonable plan can be put in action ASAP. 
 
 If you have any issues or any feedback on how to improve a specific intro just post in the #team-people-and-ops slack channel and tag the relevant people
+
+## Slack Channels
+
+Below are a list of Slack channels you may find helpful:
+
+### Work-related channels
+
+- `#content-docs-ideas` - for suggesting ideas for the newsletter, tutorials, and docs to be written by the content and docs team
+- `#brand-mentions`
+- `#do-more-weird`
+- `#newsletters`
+- `#team-exec`
+- `#dev`
+- `#general`
+- `#alerts`
+- `#industry-news`
+
+### Social channels
+
+- `#food` 
+- `#parenting`
+- `#no-context-posthog` 
+- `#random` 
+- `#whereintheworld`
+- `#devel-random`
+- `#books-and-films`
+- `#climbing`
+- `#coffee-snobs`
+- `#dad-jokes`
+- `#fitness`
+- `#hoglife`
+- `#rockets`
+- `#stonks`
+- `#cycling`
+- `#devel-random`
+- `#listening-to`
+- `#design-inspiration`
+
+### Location specific channels
+
+- `#london`
+- `#germany`
+- `#sf-bay-area`
+etc.

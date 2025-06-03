@@ -13,7 +13,7 @@ tags:
 
 To demonstrate the basics of PostHog analytics, we'll create a simple app with two pages and a link to navigate between them.
 
-First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer). Then create a new React app with Vite:
+First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 20.0 or newer). Then create a new React app with Vite:
 
 ```bash
 npm create vite@latest react-analytics -- --template react
@@ -116,6 +116,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -127,97 +128,18 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Once you've done this, reload your app and click the links a few times. You should see events appearing in PostHog's [activity tab](https://us.posthog.com/activity/explore).
+Once you've done this, reload your app and click the links a few times. You should see pageviews and events appearing in PostHog's [activity tab](https://us.posthog.com/activity/explore).
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_10_06_20_2x_137eda97bf.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_07_at_10_06_04_2x_33875800da.png" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_12_52_46_2x_7224c6ef4d.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_12_52_58_2x_672876af4d.png" 
   alt="Events in PostHog" 
   classes="rounded"
 />
 
-## Capturing pageviews
-
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since React creates a single-page app, this only happens once and the React router handles subsequent page changes.
-
-If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
-
-To do this, we create a new component `PostHogPageviewTracker`. This component combines `useLocation` with `useEffect` to capture a pageview whenever the location changes.
-
-First, create a `PostHogPageviewTracker.jsx` file in your `src` directory. Then add the following code to it:
-
-```jsx file=src/PostHogPageviewTracker.jsx
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
-import { usePostHog } from 'posthog-js/react'
-
-const PostHogPageviewTracker = () => {
-  const location = useLocation();
-  const posthog = usePostHog()
-  useEffect(() => {
-    if (posthog) {
-      posthog.capture('$pageview')
-    }
-  }, [location, posthog])
-
-  return null;
-};
-
-export default PostHogPageviewTracker;
-```
-
-Then include this new component in your `Router` in `App.jsx`:
-
-```jsx file=App.jsx 
-// your existing imports
-import PostHogPageviewTracker from './PostHogPageviewTracker';
-
-function App() {
-  return (
-    <Router>
-      <PostHogPageviewTracker/>
-      {/* rest of your components */}
-    </Router>
-  );
-}
-
-export default App;
-```
-
-Now, every time a user moves between pages, PostHog captures a `$pageview` event, not just on the first page load.
-
-Lastly, go back to `src/main.jsx` and make sure to set `capture_pageview` in the PostHog initialization config to `false`. This turns off autocaptured pageviews and ensures you won't double-capture pageviews on the first load.
-
-```jsx file=src/main.jsx
-// your existing imports
-
-posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_client_api_host>',
-  capture_pageview: false,
-})
-
-// rest of your code
-```
-
-### Capturing pageleaves (optional)
-
-Once you disable automatic `$pageview` captures when calling `posthog.init`, you'll be disabling automatic `$pageleave` capture as well. If you want to continue capturing `$pageleave`s automatically, you can re-enable it.
-
-```jsx file=src/main.jsx
-// your existing imports
-
-posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_client_api_host>',
-  capture_pageview: false,
-  capture_pageleave: true, // Opt back in because disabling $pageview capture disables $pageleave events
-})
-
-// rest of your code
-```
-
 ## Capturing custom events
 
-Beyond pageviews, there might be more events you want to capture. To do this, you can [capture custom events](/docs/product-analytics/capture-events) with PostHog. 
+Beyond pageviews and autocaptured events, there might be more events you want to capture. To do this, you can [capture custom events](/docs/product-analytics/capture-events) with PostHog. 
 
 To showcase this, update the code in `HomePage.jsx` to include a button that uses PostHog to capture a `home_button_clicked` event:
 

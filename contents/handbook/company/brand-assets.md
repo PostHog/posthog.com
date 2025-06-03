@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
-> Want to add the [PostHog badge](/docs/contribute/badge) to your website? (Did we mention free merch?)
+> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
 
 ## Logo
 
@@ -131,6 +131,6 @@ Here's how:
 2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
 3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
-If you can't find a suitable hog, you can [request one from the design team](/handbook/words-and-pictures/art-requests). 
+If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests). 
 
 > Non-team members can find some of the most-used hogs to download on [our press page](/media).
