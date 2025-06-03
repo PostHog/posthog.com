@@ -30,7 +30,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [Feature Flags](/teams/feature-flags)
 - [Experiments](/teams/experiments)
 
-**Cory**
+<TeamMember name="Cory Slater" />
 - [Error Tracking](/teams/error-tracking)
 - [Surveys](/teams/surveys)
 
