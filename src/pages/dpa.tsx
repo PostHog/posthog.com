@@ -6,7 +6,7 @@ import { heading, section } from 'components/Home/classes'
 import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconInfo, IconRevert } from '@posthog/icons'
+import { IconInfo, IconRevert, IconSend } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import subprocessors from '../data/subprocessors.json'
 import { sexyLegalMenu } from '../navs'
@@ -388,48 +388,26 @@ function DpaGenerator() {
                     id="page"
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
                                 <div className="max-w-xs md:max-w-sm print:hidden">
                                     {isFormComplete ? (
                                         <>
-                                            <h4 className="mb-1">Important instructions</h4>
-                                            <ol className="mb-3">
-                                                <li>
-                                                    <p className="text-[15px] mb-0">
-                                                        Open your browser's print dialog
-                                                    </p>
-                                                </li>
-                                                <li>
-                                                    <p className="text-[15px] mb-0">
-                                                        Use the Export to PDF option in your browser or system's
-                                                        print menu
-                                                    </p>
-                                                </li>
-                                                <li>
-                                                    <p className="text-[15px] mb-0">
-                                                        Sign and send to privacy@posthog.com for counter-signature
-                                                    </p>
-                                                </li>
-                                            </ol>
-                                            <p className="mb-0 text-[15px] border-t border-light pt-4 mt-2">
-                                                <strong>Tip:</strong> Disable these options in Chrome's print
-                                                settings to ditch the page title, URL, and highlighted fields from
-                                                your printed copy. 👇
-                                            </p>
-
-                                            <div className="my-2 border border-light dark:border-dark rounded overflow-hidden">
-                                                <CloudinaryImage
-                                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/print-settings.png"
-                                                    alt="Print settings"
-                                                    placeholder="blurred"
-                                                    className="dark:rounded"
-                                                    width={362}
-                                                    height={92}
-                                                />
-                                            </div>
+                                        {mode === 'pretty' || mode === 'lawyer' ? (
+                                            <>
+                                            <h4 className="text-base mb-1">Ready to send?</h4>
+                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information to PandaDoc where we'll countersign and return the executed copy by email.</p>
+                                            
+                                            </>
+                                        ) : (
+                                            <>
+                                            <h4 className="text-base mb-1">Try another version</h4>
+                                            <p className="text-sm mb-0 text-[15px]">Sorry, our lawyers won't sign the fairy tale or Taylor Swift versions for some reason!</p>
+                                            </>
+                                        )}
+                                            
                                         </>
                                     ) : (
                                         <>
@@ -443,17 +421,15 @@ function DpaGenerator() {
                         >
                             <span className="relative">
                                 <TrackedCTA
-                                    event={{ name: 'clicked Print DPA' }}
+                                    event={{ name: 'clicked Request DPA' }}
                                     type="primary"
                                     size="sm"
-                                    disabled={!isFormComplete}
+                                    disabled={!isFormComplete || !(mode === 'pretty' || mode === 'lawyer')}
                                     onClick={handleButtonClick}
-                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-1 relative md:left-4"
+                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
                                 >
-                                    <>
-                                        <IconPrint className="size-5" />
-                                        <span>Submit for countersignature</span>
-                                    </>
+                                    <IconSend className="size-5" />
+                                    <span>Send for countersignature</span>
                                 </TrackedCTA>
                             </span>
                         </Tooltip>
