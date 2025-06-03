@@ -279,6 +279,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
             goForward={goForward}
             canGoBack={canGoBack}
             canGoForward={canGoForward}
+            dragControls={controls}
         >
             <AnimatePresence>
                 {!item.minimized && (
@@ -300,11 +301,13 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                         <motion.div
                             ref={windowRef}
                             data-app="AppWindow"
-                            className={`@container absolute flex flex-col border rounded overflow-hidden !select-auto  ${
+                            className={`@container absolute overflow-hidden !select-auto  ${
                                 focusedWindow === item
                                     ? 'shadow-2xl border-light-7 dark:border-dark-7'
                                     : 'shadow-lg border-light-4 dark:border-dark-4'
-                            } ${dragging ? '[&_*]:select-none' : ''}`}
+                            } ${dragging ? '[&_*]:select-none' : ''} ${
+                                item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
+                            }`}
                             style={{
                                 width: size.width,
                                 height: size.height,
@@ -356,206 +359,216 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             onDragTransitionEnd={handleDragTransitionEnd}
                             onMouseDown={() => bringToFront(item)}
                         >
-                            <div
-                                data-scheme="tertiary"
-                                onDoubleClick={handleDoubleClick}
-                                className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-border cursor-move"
-                                onPointerDown={(e) => controls.start(e)}
-                            >
-                                <MenuBar
-                                    menus={[
-                                        {
-                                            trigger: (
-                                                <>
-                                                    <IconDocument className="size-5" />
-                                                    <IconChevronDown className="size-6 -mx-1.5 text-muted group-hover:text-primary data-[state=open]:text-primary" />
-                                                </>
-                                            ),
-                                            items: [
-                                                {
-                                                    type: 'submenu',
-                                                    label: 'Ask Max about this page',
-                                                    items: [
-                                                        {
-                                                            type: 'item',
-                                                            label: 'New Max chat',
-                                                            onClick() {
-                                                                addWindow(
-                                                                    <ChatProvider
-                                                                        location={{
-                                                                            pathname: `ask-max-${item.path}`,
-                                                                        }}
-                                                                        key={`ask-max-${item.path}`}
-                                                                        newWindow
-                                                                        context={[
-                                                                            {
-                                                                                type: 'page',
-                                                                                value: {
-                                                                                    path: item.path,
-                                                                                    label: item.meta?.title,
+                            {!item.minimal && (
+                                <div
+                                    data-scheme="tertiary"
+                                    onDoubleClick={handleDoubleClick}
+                                    className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-border cursor-move"
+                                    onPointerDown={(e) => controls.start(e)}
+                                >
+                                    <MenuBar
+                                        menus={[
+                                            {
+                                                trigger: (
+                                                    <>
+                                                        <IconDocument className="size-5" />
+                                                        <IconChevronDown className="size-6 -mx-1.5 text-muted group-hover:text-primary data-[state=open]:text-primary" />
+                                                    </>
+                                                ),
+                                                items: [
+                                                    {
+                                                        type: 'submenu',
+                                                        label: 'Ask Max about this page',
+                                                        items: [
+                                                            {
+                                                                type: 'item',
+                                                                label: 'New Max chat',
+                                                                onClick() {
+                                                                    addWindow(
+                                                                        <ChatProvider
+                                                                            location={{
+                                                                                pathname: `ask-max-${item.path}`,
+                                                                            }}
+                                                                            key={`ask-max-${item.path}`}
+                                                                            newWindow
+                                                                            context={[
+                                                                                {
+                                                                                    type: 'page',
+                                                                                    value: {
+                                                                                        path: item.path,
+                                                                                        label: item.meta?.title,
+                                                                                    },
                                                                                 },
-                                                                            },
-                                                                        ]}
-                                                                    />
-                                                                )
+                                                                            ]}
+                                                                        />
+                                                                    )
+                                                                },
                                                             },
-                                                        },
 
-                                                        ...(chatWindows.length > 0
-                                                            ? [
-                                                                  {
-                                                                      type: 'separator',
-                                                                  },
-                                                                  ...chatWindows.map((window, index) => ({
-                                                                      type: 'item',
-                                                                      label: window.meta?.title || `Chat ${index + 1}`,
-                                                                      onClick: () => bringToFront(window),
-                                                                  })),
-                                                              ]
-                                                            : []),
-                                                    ],
-                                                },
-                                                {
-                                                    type: 'item',
-                                                    label: 'Bookmark',
-                                                },
-                                                {
-                                                    type: 'separator',
-                                                },
-                                                {
-                                                    type: 'item',
-                                                    label: 'Close',
-                                                    onClick: () => {
-                                                        closeWindow(item)
+                                                            ...(chatWindows.length > 0
+                                                                ? [
+                                                                      {
+                                                                          type: 'separator',
+                                                                      },
+                                                                      ...chatWindows.map((window, index) => ({
+                                                                          type: 'item',
+                                                                          label:
+                                                                              window.meta?.title || `Chat ${index + 1}`,
+                                                                          onClick: () => bringToFront(window),
+                                                                      })),
+                                                                  ]
+                                                                : []),
+                                                        ],
                                                     },
-                                                },
-                                            ],
-                                        },
-                                    ]}
-                                />
+                                                    {
+                                                        type: 'item',
+                                                        label: 'Bookmark',
+                                                    },
+                                                    {
+                                                        type: 'separator',
+                                                    },
+                                                    {
+                                                        type: 'item',
+                                                        label: 'Close',
+                                                        onClick: () => {
+                                                            closeWindow(item)
+                                                        },
+                                                    },
+                                                ],
+                                            },
+                                        ]}
+                                    />
 
-                                <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
-                                    {menu && menu.length > 0 ? (
-                                        <Popover
-                                            trigger={
-                                                <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                    {item.meta?.title && item.meta.title}
-                                                    <IconChevronDown className="size-6 -m-1" />
-                                                </button>
-                                            }
-                                            dataScheme="primary"
-                                            contentClassName="w-auto p-0 border border-border dark:border-border-dark"
-                                            header={false}
-                                        >
-                                            <FileMenu menu={menu} />
-                                        </Popover>
-                                    ) : (
-                                        <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                            {item.meta?.title && item.meta.title}
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="flex justify-end">
-                                    <OSButton variant="ghost" size="xs" onClick={handleMinimize} className="!px-1.5">
-                                        <IconMinus className="size-4 relative top-1" />
-                                    </OSButton>
-
-                                    <ContextMenu.Root onOpenChange={() => setWindowOptionsTooltipVisible(false)}>
-                                        <ContextMenu.Trigger
-                                            className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
-                                            asChild
-                                        >
-                                            {!item.fixedSize && (
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="xs"
-                                                    onClick={
-                                                        size.width >= window?.innerWidth ? collapseWindow : expandWindow
-                                                    }
-                                                    onMouseEnter={() => {
-                                                        setWindowOptionsTooltipVisible(true)
-                                                    }}
-                                                    onMouseLeave={() => {
-                                                        setWindowOptionsTooltipVisible(false)
-                                                    }}
-                                                    className="!px-1.5 group"
-                                                >
-                                                    <Tooltip
-                                                        trigger={
-                                                            <span>
-                                                                <IconSquare className="size-5 group-hover:hidden" />
-                                                                {size.width >= window?.innerWidth ? (
-                                                                    <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                ) : (
-                                                                    <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                )}
-                                                            </span>
-                                                        }
-                                                        open={windowOptionsTooltipVisible}
-                                                    >
-                                                        Right click for more options
-                                                    </Tooltip>
-                                                </OSButton>
-                                            )}
-                                        </ContextMenu.Trigger>
-                                        <ContextMenu.Portal>
-                                            <ContextMenu.Content
-                                                className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
-                                                data-scheme="primary"
+                                    <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
+                                        {menu && menu.length > 0 ? (
+                                            <Popover
+                                                trigger={
+                                                    <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
+                                                        {item.meta?.title && item.meta.title}
+                                                        <IconChevronDown className="size-6 -m-1" />
+                                                    </button>
+                                                }
+                                                dataScheme="primary"
+                                                contentClassName="w-auto p-0 border border-border dark:border-border-dark"
+                                                header={false}
                                             >
-                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                    Snap to...
-                                                </ContextMenu.Label>
-                                                <ContextMenu.Item
-                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                    onClick={() => handleSnapToSide('left')}
-                                                >
-                                                    Left half
-                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        Shift+←
-                                                    </div>
-                                                </ContextMenu.Item>
-                                                <ContextMenu.Item
-                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                    onClick={() => handleSnapToSide('right')}
-                                                >
-                                                    Right half
-                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        Shift+→
-                                                    </div>
-                                                </ContextMenu.Item>
-                                                <ContextMenu.Separator className="m-[5px] h-px bg-border" />
-                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                    Resize
-                                                </ContextMenu.Label>
-                                                <ContextMenu.Item
-                                                    disabled={size.width === window?.innerWidth}
-                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                    onClick={expandWindow}
-                                                >
-                                                    Maximize
-                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                        Shift+↑
-                                                    </div>
-                                                </ContextMenu.Item>
-                                            </ContextMenu.Content>
-                                        </ContextMenu.Portal>
-                                    </ContextMenu.Root>
+                                                <FileMenu menu={menu} />
+                                            </Popover>
+                                        ) : (
+                                            <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
+                                                {item.meta?.title && item.meta.title}
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="flex justify-end">
+                                        <OSButton
+                                            variant="ghost"
+                                            size="xs"
+                                            onClick={handleMinimize}
+                                            className="!px-1.5"
+                                        >
+                                            <IconMinus className="size-4 relative top-1" />
+                                        </OSButton>
 
-                                    <OSButton
-                                        variant="ghost"
-                                        size="xs"
-                                        onClick={() => closeWindow(item)}
-                                        className="!px-1.5"
-                                    >
-                                        <IconX className="size-4" />
-                                    </OSButton>
+                                        <ContextMenu.Root onOpenChange={() => setWindowOptionsTooltipVisible(false)}>
+                                            <ContextMenu.Trigger
+                                                className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
+                                                asChild
+                                            >
+                                                {!item.fixedSize && (
+                                                    <OSButton
+                                                        variant="ghost"
+                                                        size="xs"
+                                                        onClick={
+                                                            size.width >= window?.innerWidth
+                                                                ? collapseWindow
+                                                                : expandWindow
+                                                        }
+                                                        onMouseEnter={() => {
+                                                            setWindowOptionsTooltipVisible(true)
+                                                        }}
+                                                        onMouseLeave={() => {
+                                                            setWindowOptionsTooltipVisible(false)
+                                                        }}
+                                                        className="!px-1.5 group"
+                                                    >
+                                                        <Tooltip
+                                                            trigger={
+                                                                <span>
+                                                                    <IconSquare className="size-5 group-hover:hidden" />
+                                                                    {size.width >= window?.innerWidth ? (
+                                                                        <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                    ) : (
+                                                                        <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                    )}
+                                                                </span>
+                                                            }
+                                                            open={windowOptionsTooltipVisible}
+                                                        >
+                                                            Right click for more options
+                                                        </Tooltip>
+                                                    </OSButton>
+                                                )}
+                                            </ContextMenu.Trigger>
+                                            <ContextMenu.Portal>
+                                                <ContextMenu.Content
+                                                    className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
+                                                    data-scheme="primary"
+                                                >
+                                                    <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                        Snap to...
+                                                    </ContextMenu.Label>
+                                                    <ContextMenu.Item
+                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                        onClick={() => handleSnapToSide('left')}
+                                                    >
+                                                        Left half
+                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                            Shift+←
+                                                        </div>
+                                                    </ContextMenu.Item>
+                                                    <ContextMenu.Item
+                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                        onClick={() => handleSnapToSide('right')}
+                                                    >
+                                                        Right half
+                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                            Shift+→
+                                                        </div>
+                                                    </ContextMenu.Item>
+                                                    <ContextMenu.Separator className="m-[5px] h-px bg-border" />
+                                                    <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                        Resize
+                                                    </ContextMenu.Label>
+                                                    <ContextMenu.Item
+                                                        disabled={size.width === window?.innerWidth}
+                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                        onClick={expandWindow}
+                                                    >
+                                                        Maximize
+                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                            Shift+↑
+                                                        </div>
+                                                    </ContextMenu.Item>
+                                                </ContextMenu.Content>
+                                            </ContextMenu.Portal>
+                                        </ContextMenu.Root>
+
+                                        <OSButton
+                                            variant="ghost"
+                                            size="xs"
+                                            onClick={() => closeWindow(item)}
+                                            className="!px-1.5"
+                                        >
+                                            <IconX className="size-4" />
+                                        </OSButton>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="w-full flex-grow overflow-hidden">
+                            )}
+                            <div className="size-full flex-grow overflow-hidden">
                                 <Router {...item.props}>{item.element}</Router>
                             </div>
-                            {!item.fixedSize && (
+                            {!item.fixedSize && !item.minimal && (
                                 <motion.div
                                     data-scheme="tertiary"
                                     className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
@@ -576,7 +589,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     </div>
                                 </motion.div>
                             )}
-                            {!item.fixedSize && (
+                            {!item.fixedSize && !item.minimal && (
                                 <motion.div
                                     data-scheme="tertiary"
                                     className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
@@ -600,7 +613,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                     </div>
                                 </motion.div>
                             )}
-                            {!item.fixedSize && (
+                            {!item.fixedSize && !item.minimal && (
                                 <motion.div
                                     className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
                                     drag

@@ -20,7 +20,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ChatProvider } from 'hooks/useChat'
 
 export default function TaskBarMenu() {
-    const { windows, bringToFront, focusedWindow, addWindow, closeWindow } = useApp()
+    const { windows, bringToFront, focusedWindow, addWindow, closeWindow, openSearch } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
@@ -198,7 +198,7 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     />
-                    <OSButton variant="ghost" size="md">
+                    <OSButton onClick={openSearch} variant="ghost" size="md">
                         <IconSearch className="size-5" />
                     </OSButton>
                     <OSButton

@@ -44,6 +44,7 @@ export interface AppWindow {
         x: number
         y: number
     }
+    minimal: boolean
 }
 
 interface WindowProviderProps {
@@ -55,6 +56,7 @@ interface WindowProviderProps {
     goForward: () => void
     canGoBack: boolean
     canGoForward: boolean
+    dragControls?: any
 }
 
 interface WindowContextType {
@@ -65,6 +67,7 @@ interface WindowContextType {
     goForward: () => void
     canGoBack: boolean
     canGoForward: boolean
+    dragControls?: any
 }
 
 export const Context = createContext<WindowContextType>({})
@@ -78,9 +81,12 @@ export const Provider = ({
     goForward,
     canGoBack,
     canGoForward,
+    dragControls,
 }: WindowProviderProps) => {
     return (
-        <Context.Provider value={{ appWindow, menu, setMenu, goBack, goForward, canGoBack, canGoForward }}>
+        <Context.Provider
+            value={{ appWindow, menu, setMenu, goBack, goForward, canGoBack, canGoForward, dragControls }}
+        >
             {children}
         </Context.Provider>
     )

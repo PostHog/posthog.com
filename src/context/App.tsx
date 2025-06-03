@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
 import { AppWindow } from './Window'
+import SearchUI from 'components/SearchUI'
 
 type WindowElement = React.ReactNode & {
     key: string
@@ -12,6 +13,7 @@ type WindowElement = React.ReactNode & {
         params: any
         path: string
         newWindow: boolean
+        minimal: boolean
     }
 }
 
@@ -36,6 +38,7 @@ interface AppContextType {
         windows: AppWindow[]
     ) => { x: number; y: number }
     getDesktopCenterPosition: (size: { width: number; height: number }) => { x: number; y: number }
+    openSearch: () => void
 }
 
 interface AppProviderProps {
@@ -70,6 +73,7 @@ export const Context = createContext<AppContextType>({
     updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
+    openSearch: () => {},
 })
 
 const appSettings = {
@@ -172,6 +176,19 @@ const appSettings = {
             },
             max: {
                 width: 400,
+                height: 369,
+            },
+            fixed: true,
+        },
+    },
+    search: {
+        size: {
+            min: {
+                width: 550,
+                height: 369,
+            },
+            max: {
+                width: 550,
                 height: 369,
             },
             fixed: true,
@@ -333,6 +350,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                       y: lastClickedElementRect.y - taskbarHeight - size.height / 2,
                   }
                 : undefined,
+            minimal: element.props.minimal ?? false,
         }
 
         // Adjust width if window extends beyond right edge
@@ -388,6 +406,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
+    const openSearch = () => {
+        addWindow(<SearchUI location={{ pathname: `search` }} key={`search`} newWindow minimal />)
+    }
+
     useEffect(() => {
         updatePages(element)
     }, [element])
@@ -437,6 +459,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 getPositionDefaults,
                 updateWindow,
                 getDesktopCenterPosition,
+                openSearch,
             }}
         >
             {children}
