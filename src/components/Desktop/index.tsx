@@ -120,7 +120,7 @@ const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
                     <Icon className={`size-7 text-${color} ${className}`} />
                 )}
                 <p className="text-sm font-medium leading-tight">
-                    <span className="bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] rounded-[2px] px-0.5">
+                    <span className="bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] dark:bg-[rgba(1,1,1,0.75)] dark:group-hover:bg-[rgba(1,1,1,1)] rounded-[2px] px-0.5">
                         <span className="skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px]">{label}</span>
                     </span>
                 </p>
