@@ -194,7 +194,7 @@ export default function Product({
                         width="full"
                         size="xl"
                         icon={<IconGanttChart className="text-seagreen" />}
-                        to={`/roadmap?product=${name}`}
+                        to={`/roadmap?team=${name}`}
                         className="text-primary hover:text-primary"
                     >
                         Roadmap

@@ -24,6 +24,20 @@ export const BaseIcon: IconComponent<BaseIconProps> = forwardRef(function BaseIc
     )
 })
 
+export interface IconImageProps extends IconProps {
+    url: string
+}
+
+export const IconImage = ({ url, ...props }: IconImageProps) => (
+    <BaseIcon viewBox="0 0 64 64" width="100%" height="100%" className="!size-9 -mt-1 -mb-1">
+        <image
+            width="64"
+            height="64"
+            href={url}
+        />
+    </BaseIcon>
+)
+
 export const IconBold = (props: IconProps) => (
     <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
         <path
