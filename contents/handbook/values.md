@@ -4,56 +4,69 @@ sidebar: Handbook
 showTitle: true
 ---
 
+* you're the driver
+* do more weird
+* we haven't built our defining feature
+* why not now
+* make it public
+* optimistic by default
+
 These are the principles for the behavior we care about.
 
-## 1. We are open source
+## You're the driver
 
-Building a huge community around a free-for-life product is key to [PostHog's strategy](/handbook/why-does-posthog-exist).
+We hire people that are really great at their jobs, and get out of their way. There are no deadlines, very minimal coordination and you won't have us breathing down your neck.
+
+In return, we ask for extraordinarily high ownership. To succeed you need to be intrinsically motivated.
+
+Great people at PostHog can take very high level direction, and ship quickly to find out as quickly as possible if our plans can survive contact with customers!
+
+Being the driver means getting stuff done _yourself_. We've had non technical people create hardware products, coding in C++, we've got designers that will ship the CSS not just create the file in Figma. Our salespeople are told that it's key if they can't answer more technical questions, they should educate themselves more deeply for next time. We like people to go full stack instead to reduce the number of dependencies.
+
+## Make it public
+
+We're very transparent for so many reasons. 
+
+Internally, a culture of transparency looks like managers telling you to raise feedback directly with the person it concerns instead of solving problems for you, it means changing teams around in public slack channels
+
+Being transparent externally helps us achieve our mission - we write about what we're working on so the world can take advantage of the lessons we're learning, and so they know how to work with us better. Knowing that thousands of people will read our handbook pages forces clearer thinking. And, for free, we can build trust in a way other vendors just choose not to.
+
+## Do more weird
+
+So much about how we work is different.
+
+Weirdness can just be the absurd lengths we are willing to go to. It can mean redesigning an already world-class website, for the 5th time. It can mean shipping _literally_ every product that relates to customer data, with teams of just one to five people competing with $200bn+ companies, successfully.
+
+We aren't weird for the sake of it. We want the company perfectly optimized for our strategy. We have small teams, very few others do - because we are going to build 50+ products. We post billboards of our founders' face because no one else is brave enough thus it stands out. Even the little things - like having _pricing_ on our pricing page!
+
+## We haven't built our defining feature yet
+
+A concept in improv-compedy is "yes, and" - where people build on top of each other's ideas. We ask the same thing at PostHog.
+
+The biggest and boldest ideas _are also_ the easiest to criticize. If we make it painful to raise ideas for how we can innovate, by responding to every idea with 25 reasons why it won't work, then ideas will simply stop coming. And that's the opening for someone else to come and disrupt our mission.
+
+We should never stop iterating. You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
+
+## Why not now
+
+Why not now means getting things done _proactively_, _today_. You do not need consensus to do things – focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others. You certainly shouldn't wait until next quarter if your new idea makes more sense to work on that your previous goal.
+
+We have learned the clearest lessons at PostHog by doing things, not from hypothesizing about them. If we're debating doing something, just trying it is the best way to learn. Doing more planning is rarely the right way to figure out if something will work, doing the thing is the answer by default here.
+
+Sometimes this approach might mean you ship something that others don't agree with. You will need to be willing to throw away work sometimes, because the upside – not needing to get lots of approval to do stuff and being able to take more bets – means we all move so much faster that mistakes are a lot less costly.
+
+Why not now doesn't just mean shipping huge product features. It may mean diving into a small customer support issue quickly to delight them – this is one of the main reasons people recommend us to others.
+
+## Make it public
 
 We default to transparency with everything we work on. That means we make a lot of things public: our handbook, [our roadmap](/handbook/strategy/roadmap), [how we pay](/handbook/people/compensation) (or even [let go of](/handbook/people/offboarding)) people, [what our strategy is](/handbook/why-does-posthog-exist), and [who we have raised money from](/handbook/strategy/investors). Internally, we go even further – providing financial information, live updates on fundraising, and board slide access.
 
 This enables the strongest community growth possible. It causes the core team to raise the bar on their work, it provides the context needed for people to work across multiple timezones, and it enables a deep work-heavy and meeting-light culture. It creates trust.
 
-## 2. We haven't built our defining feature yet
+## Optimistic by default
 
-Ideas are fragile. Be direct but encouraging when you encounter new ideas. If we default to providing negative criticism of new ideas, then they'll simply stop coming. Instead, default to "yes and" rather than "no, but", before rejecting an idea.
+We have a lot of control over our direction, and we've been very well served by shooting for the best case scenario every time we make a decision. You'll hear us say things like "play offense, not defense", "how do we 10x this", "how do we win in 10 years' time". Aiming for the best possible upside and sometimes missing is much better than never trying.
 
-We should never stop iterating. You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
+At a simple level, we want to be surrounded by people that are enthusiastic, passionate and happy. PostHog is a group of people working together with a shared goal. A positive, encouraging atmosphere simply means everyone is going to have a lot more fun and will be able to stick around for the full adventure here.
 
-## 3. Everyone codes
-
-... although this doesn't mean everyone has to be a software developer, and not everyone needs experience in this before they join. Our platform's adoption starts with developers using our open-source project, so we use GitHub to share most of our work publicly and to build a large community of technical users.
-
-No matter your role, being able to use the basics of GitHub helps you understand our audience. Beyond that, we'll encourage you to build your technical skill, rather than delegating more challenging tasks to others, so you become a more effective contributor.
-
-## 4. Trust and feedback over process
-
-There are two ways to scale – trust and feedback, or process. We choose the former because we're building a wide platform with many products, so autonomy is more important than control. We hire people that work well with high level direction and will step on toes if needed to get things done.
-
-When giving or receiving feedback, we assume positive intentions and focus on giving specific examples. Many of our team's peak experiences at PostHog have been receiving direct feedback. Feedback should be acknowledged, but what you do with it is up to you - no one built anything great by committee.
-
-We expect you to pick out the very most important thing you can think of and work on that. Discard plans as you see fit.
-
-We judge your performance based on the impact you deliver overall, no matter what your role.
-
-> Not all process is bad. There are processes like our [issue templates for new teams](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/new-small-team.md) or our [quarterly planning process](/handbook/company/goal-setting) that, without being defined, would leave things in a confusing mess. Processes that speed us up are great. Processes that slow us down or act like gates should be avoided.
-
-## 5. Bias for action
-
-We have learned the clearest lessons at PostHog by doing things, not from hypothesizing about them. If we're debating doing something, just trying it is the best way to learn.
-
-Bias for action means getting things done _proactively_. You do not need consensus to do things – focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others.
-
-Sometimes this approach might mean you ship something that others don't agree with. You will need to be willing to throw away work sometimes, because the upside – not needing to get lots of approval to do stuff and being able to take more bets – means we all move so much faster that mistakes are a lot less costly.
-
-Bias for action doesn't just mean shipping huge product features. It may mean diving into a small customer support issue quickly to delight them – this is one of the main reasons people recommend us to others.
-
-## 6. Talent compounds
-
-Getting into PostHog is a huge challenge. Once you're here, it stays that way. We are *extremely* demanding of performance.
-
-In return, you get to work with others producing the best work of their careers.
-
-We are a team, not a family. This means we have very ambitious goals, [compensate](/handbook/people/compensation#how-it-works) generously and transparently, offer [exceptional benefits](/handbook/people/benefits), and do everything we can to provide an environment for you to do your best work.
-
-Often this means everyone, [especially managers](/handbook/company/management), getting out of your way. It's also [not okay to let your teammates fail](/handbook/company/culture/#dont-let-others-fail). We expect everyone to provide direct feedback to help everyone perform at their best. We pay [generous severance](/handbook/people/compensation#severance) if things aren't working out.
+Put more grandiosely, PostHog is wildly ambitious, and with that, a level of optimism is _required_. You cannot change the world without first _believing_ you can change the world. People not believing is probably a bigger deal than people not being able to.
