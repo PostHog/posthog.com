@@ -33,9 +33,6 @@ Here is a overview that shows which of our PMs currently works with which team:
 **Abheek**
 - [Messaging](/teams/messaging)
 - [CDP](/teams/cdp)
-
-**Cory**
-- [Surveys](/teams/surveys)
   
 **Teams with no PM currently**
 
