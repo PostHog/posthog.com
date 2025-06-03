@@ -34,25 +34,25 @@ interface Product {
 const productLinks: AppItem[] = [
     {
         label: 'home.mdx',
-        Icon: IconDocument,
+        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/Docs_ed01f08328.png',
         color: 'salmon',
         url: '/',
     },
     {
         label: 'Products',
-        Icon: IconStack,
+        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
         color: 'blue',
         url: '/products',
     },
     {
         label: 'Pricing',
-        Icon: IconPiggyBank,
+        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/pricing_b461c2e5dd.png',
         color: 'green',
         url: '/pricing',
     },
     {
         label: 'notable customers.mdx',
-        Icon: IconDocument,
+        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/Docs_ed01f08328.png',
         color: 'salmon',
         url: '/customers',
     },
@@ -65,7 +65,7 @@ const productLinks: AppItem[] = [
     },
     {
         label: 'Docs',
-        Icon: IconDocument,
+        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
         color: 'salmon',
         url: '/docs',
     },
