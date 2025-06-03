@@ -43,6 +43,12 @@ import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import { IconCheck } from '@posthog/icons'
 
+type Snippet = {
+    component: string
+    path: string
+    snippet: string | undefined
+}
+
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
         case 'full':
@@ -267,7 +273,7 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
 }
 
 export default function Handbook({
-    data: { post, nextPost, glossary },
+    data: { post, nextPost, glossary, allFile },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
@@ -311,9 +317,42 @@ export default function Handbook({
         />
     )
 
+    const stripFrontmatter = (body: string) => {
+        return body.replace(/^---[\s\S]*?---\n*/m, '')
+    }
+
+    const resolveSnippetImports = (body: string): Snippet[] => {
+        const regex = /import\s+(.*?)\s+from\s+['"](.*?\/_snippets\/.*?)['"]/g
+        const imports: Snippet[] = []
+        let match
+        while ((match = regex.exec(body)) !== null) {
+            const snippetPath = match[2]
+            const cleanPath = snippetPath.replace(/^[./]+/, '')
+            const snippet = allFile.nodes.find((node) => {
+                return node.relativePath.includes(cleanPath)
+            })?.childMdx?.rawBody
+            imports.push({ component: match[1], path: match[2], snippet })
+        }
+        return imports
+    }
+
+    const replaceSnippetImports = (body: string, imports: Snippet[]): string => {
+        let result = body
+        imports.forEach(({ component, snippet }) => {
+            if (snippet) {
+                const componentRegex = new RegExp(`<${component}\\s*/>`, 'g')
+                result = result.replace(componentRegex, snippet)
+                console.log(result)
+            }
+        })
+        return result
+    }
+
     const handleCopyMarkdown = () => {
-        const contentWithoutFrontmatter = rawBody.replace(/^---[\s\S]*?---\n*/m, '')
-        navigator.clipboard.writeText(contentWithoutFrontmatter)
+        const contentWithoutFrontmatter = stripFrontmatter(rawBody)
+        const imports = resolveSnippetImports(contentWithoutFrontmatter)
+        const contentWithSnippets = replaceSnippetImports(contentWithoutFrontmatter, imports)
+        navigator.clipboard.writeText(contentWithSnippets)
         setCopied(true)
         setTimeout(() => {
             setCopied(false)
@@ -480,6 +519,15 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
+        allFile {
+            nodes {
+                relativePath
+                sourceInstanceName
+                childMdx {
+                    rawBody
+                }
+            }
+        }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {
