@@ -284,8 +284,16 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const previousWindow = sortedWindows[0]
 
         if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
+            const potentialX = previousWindow.position.x + 10
+
+            const wouldBeOnRightSide = potentialX + size.width / 2 > window.innerWidth / 2
+
+            if (wouldBeOnRightSide) {
+                return getDesktopCenterPosition(size)
+            }
+
             return {
-                x: previousWindow.position.x + 10,
+                x: potentialX,
                 y: previousWindow.position.y + 10,
             }
         }
