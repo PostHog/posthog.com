@@ -818,6 +818,13 @@ export const ProductMax = () => {
                         </div>
                     </div>
 
+                    <div className="mb-12">
+                        <MaxQuestionInput
+                            className="bg-[#f5e2b1] border-[#F5E2B2] shadow-xl"
+                            placeholder="Ask Max anything about your product data..."
+                        />
+                    </div>
+
                     <section className="mt-20 dark:text-primary">
                         <Roadmap />
                     </section>
