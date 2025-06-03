@@ -41,7 +41,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [LLM Observability](/teams/llm-observability)
 - [Max AI](/teams/max-ai)
 - [Revenue Analytics](/teams/revenue-analytics)
-
+- [Surveys](/teams/surveys)
 
 ## Product goals
 
