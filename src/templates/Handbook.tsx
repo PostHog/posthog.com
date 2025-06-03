@@ -342,7 +342,6 @@ export default function Handbook({
             if (snippet) {
                 const componentRegex = new RegExp(`<${component}\\s*/>`, 'g')
                 result = result.replace(componentRegex, snippet)
-                console.log(result)
             }
         })
         return result
