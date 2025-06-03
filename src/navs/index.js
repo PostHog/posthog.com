@@ -1089,7 +1089,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Designing PostHog.com',
-                url: '/handbook/design/designing-posthog-website',
+                url: '/handbook/brand/designing-posthog-website',
             },
             {
                 name: 'Developing PostHog.com',
@@ -1311,7 +1311,7 @@ export const handbookSidebar = [
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
-                        {
+            {
                 name: 'Lifecycle Analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
