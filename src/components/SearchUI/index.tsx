@@ -102,7 +102,7 @@ const Search = () => {
                     </div>
                     {showFilters && <Filters />}
 
-                    {hits.length > 0 && (
+                    {hits.length > 0 && query && (
                         <Combobox.Options
                             static
                             hold
