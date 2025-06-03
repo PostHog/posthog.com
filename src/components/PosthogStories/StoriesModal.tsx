@@ -3,13 +3,13 @@ import './StoriesModal.scss'
 import React, { useCallback, useEffect, useMemo, useRef } from 'react'
 import { useActions, useValues } from 'kea'
 import { useWindowSize } from 'hooks/useWindowSize'
-import posthog from 'posthog-js'
 import Modal from 'components/Modal'
 import Stories from 'react-insta-stories'
 import { Story } from 'react-insta-stories/dist/interfaces'
 
 import { storiesLogic } from './storiesLogic'
 import type { story } from './storiesMap'
+import usePostHog from 'hooks/usePostHog'
 
 const IMAGE_STORY_INTERVAL = 3000
 const CRAZY_VIDEO_DURATION = 1000000 // this is a hack to make the video play for as long as a video would pla
@@ -38,6 +38,7 @@ interface StoryEndEventPropsExtraProps {
 
 export const StoriesModal = (): JSX.Element | null => {
     const { windowSize } = useWindowSize()
+    const posthog = usePostHog()
     const {
         openStoriesModal,
         stories: storyGroups,
@@ -96,7 +97,7 @@ export const StoriesModal = (): JSX.Element | null => {
     const handleClose = useCallback(
         (forceClose: boolean) => {
             const timeSpentMs = Date.now() - storyStartTimeRef.current
-            posthog.capture('posthog_story_closed', {
+            posthog?.capture('posthog_story_closed', {
                 reason: forceClose ? 'force_close' : 'natural_close',
                 story_id: activeGroup?.stories[activeStoryIndex].id,
                 story_title: activeGroup?.stories[activeStoryIndex].title,
@@ -141,7 +142,7 @@ export const StoriesModal = (): JSX.Element | null => {
     const handleStoryStart = useCallback(
         (index: number) => {
             storyStartTimeRef.current = Date.now()
-            posthog.capture('posthog_story_started', {
+            posthog?.capture('posthog_story_started', {
                 event: 'started',
                 story_id: activeGroup?.stories[index].id,
                 story_title: activeGroup?.stories[index].title,
@@ -172,7 +173,7 @@ export const StoriesModal = (): JSX.Element | null => {
                         : undefined,
                 ...(extraProps || {}),
             }
-            posthog.capture('posthog_story_ended', props)
+            posthog?.capture('posthog_story_ended', props)
         },
         [activeGroup, activeStoryIndex]
     )

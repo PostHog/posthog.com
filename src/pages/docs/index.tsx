@@ -12,7 +12,7 @@ import * as Icons from '@posthog/icons'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import AskMax from 'components/AskMax'
 import { PosthogStoriesContainer } from 'components/PosthogStories/PosthogStoriesContainer'
-import posthog from 'posthog-js'
+import usePostHog from 'hooks/usePostHog'
 
 const ProductLink = ({ icon, name, url, color }) => {
     const Icon = Icons[icon]
@@ -76,6 +76,7 @@ const ProductList = () => {
 }
 
 export const DocsIndex = (): JSX.Element => {
+    const posthog = usePostHog()
     return (
         <Layout>
             <SEO title="Documentation - PostHog" />

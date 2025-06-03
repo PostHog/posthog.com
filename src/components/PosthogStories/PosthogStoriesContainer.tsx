@@ -1,12 +1,13 @@
 import React from 'react'
 import { useActions, useValues } from 'kea'
-import posthog from 'posthog-js'
+import usePostHog from 'hooks/usePostHog'
 
 import { storiesLogic } from './storiesLogic'
 import type { storyGroup } from './storiesMap'
 import { StoriesModal } from './StoriesModal'
 
 export const PosthogStoriesContainer = (): JSX.Element => {
+    const posthog = usePostHog()
     const { stories, isStoryViewed } = useValues(storiesLogic)
     const { setActiveGroupIndex, setOpenStoriesModal, setActiveStoryIndex } = useActions(storiesLogic)
 
@@ -26,7 +27,7 @@ export const PosthogStoriesContainer = (): JSX.Element => {
                                 hasViewedEntireGroup ? 'opacity-60' : ''
                             }`}
                             onClick={() => {
-                                posthog.capture('posthog_story_group_clicked', {
+                                posthog?.capture('posthog_story_group_clicked', {
                                     story_group_id: storyGroup.id,
                                     group_title: storyGroup.title,
                                     group_thumbnail_url: nextStory.thumbnailUrl,
