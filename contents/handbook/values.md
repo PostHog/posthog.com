@@ -40,7 +40,7 @@ The biggest and boldest ideas _are also_ the easiest to criticize. If we make it
 
 We should never stop iterating. You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
 
-## Why not now
+## Why not now
 
 Why not now means getting things done _proactively_, _today_. You do not need consensus to do things – focus your energy on shipping what's most valuable for our customers and the company, then take ownership of making it happen, not on getting buy in from others. You certainly shouldn't wait until next quarter if your new idea makes more sense to work on that your previous goal.
 
