@@ -95,8 +95,7 @@ function BAAGenerator() {
                         Once the form is completed, you can ship it off to us for counter-signature.
                     </p>
                     <p className="text-sm">
-                        Important! You'll need to be subscribed to our <Link to="/addons#teams">Teams Plan</Link> to get
-                        a BAA.
+                        Important: you'll need to be subscribed to our <Link to="/platform-addons#scale-add-on">Scale</Link> or <Link to="/platform-addons#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
                     </p>
 
                     {submitted ? (
