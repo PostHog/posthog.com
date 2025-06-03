@@ -148,7 +148,7 @@ Add and modify this list as you work through it.
 
 #### Others
 1. [Creating cohorts](/docs/data/cohorts#how-to-create-a-cohort) – [static vs dynamic](/docs/data/cohorts#static-and-dynamic-cohorts)
-2. RBAC, Teams add-on
+2. RBAC, Platform add-ons
 3. Data pipelines
 
 ### Advanced

@@ -2082,6 +2082,11 @@ li.squeak-left-border {
         opacity: 0.5;
     }
 
+    .dark\:text-primary-dark\/75:is(.dark *) {
+        color: #151515 !important;
+        opacity: 0.75;
+    }
+
     .dark\:text-primary-dark\/70:is(.dark *) {
         color: #151515 !important;
         opacity: 0.7;
@@ -2089,6 +2094,14 @@ li.squeak-left-border {
 
     .dark\:border-white:is(.dark *) {
         border-color: #151515 !important;
+    }
+
+    button span.dark\:bg-dark:is(.dark *) {
+        background: #fff6de !important;
+    }
+
+    .question-content a:is(.dark *) {
+        color: rgba(245, 78, 0, 1) !important;
     }
 }
 

@@ -83,7 +83,7 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 
 Using the Next.js app router requires us to initialize PostHog differently than with the [pages router](/tutorials/nextjs-analytics). Specifically, the app router server-side renders components by default, and the `posthog-js` library is a client-side library.
 
-To make these work together, create a `providers.js` file and set up the `PostHogProvider` with the `'use client'`  directive. Make sure to set `capture_pageview` to `history_change` because Next.js acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+To make these work together, create a `providers.js` file and set up the `PostHogProvider` with the `'use client'`  directive.
 
 ```js file=app/providers.js
 // app/providers.js
@@ -96,7 +96,7 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      capture_pageview: 'history_change',
+      defaults: '<ph_posthog_js_defaults>',
     })
   }, []);
 

@@ -44,10 +44,10 @@ In case of any issues with merch, founders can reach out to merch@posthog.com.
 We encourage members of the PostHog for Startups program to inform us when they have an upcoming launch, or other announcement. We may then share that announcement with other members of the program (via the newsletter), or share it more widely on our socials and other channels. We don't make guarantees about how we'll or if we'll share announcements, and do so only at our own discretion. 
 
 ### Monthly newsletter
-Once a month, we send a short newsletter to all users in the program. We send the email as a Customer.io broadcast and there is a template set up in Customer.io. [This email is covered on the email comms page.](/handbook/words-and-pictures/email-comms)
+Once a month, we send a short newsletter to all users in the program. We send the email as a Customer.io broadcast and there is a template set up in Customer.io. [This email is covered on the email comms page.](/handbook/brand/email-comms)
 
 ### Credit usage
-Teams in the startup plan can use their credit for any PostHog product or add-on, including the Teams plan. Teams within PostHog for Startups cannot use credits toward a BAA however due to the legal risk to PostHog. If a startup requires a BAA, they should speak to the CS & Sales team to find a solution. 
+Teams in the startup plan can use their credit for any PostHog product or add-on, including the [platform add-ons](/platform-addons). Teams within PostHog for Startups cannot use credits toward a BAA however due to the legal risk to PostHog. If a startup requires a BAA, they should speak to the CS & Sales team to find a solution. 
 
 Unused credits do not carry over past 12 months and cannot be converted into cash or other rewards. If credits are used up then the team will automatically trigger email warnings and move to a standard, paid plan. 
 
@@ -67,7 +67,7 @@ In addition to [our startups](/startups) program, we also run a similar program 
 - We offer teams in YC an enhanced package of merch, including their co-founders
 - We offer teams in YC a variable amount of credit based on which batch they are in ($50,000 for 12 months for the current/upcoming and previous 4 batches, $25,000 for 12 months for older batches)
 - We invite founders for these teams into [our private Founder community](https://posthog.slack.com/archives/C04J1TJ11UZ)
-- Teams in YC can use credits toward a BAA via the Teams add-on
+- Teams in YC can use credits toward a BAA via the platform add-ons
 
 Teams in the YC program also have a different application process. They must apply via [our secret YC page](https://app.posthog.com/startups/yc) and provide a screenshot of Bookface to prove they are part of the YC community. 
 

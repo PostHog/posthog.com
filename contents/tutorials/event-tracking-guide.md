@@ -21,7 +21,7 @@ The fastest way to set up autocapture is to copy the snippet below and paste it 
 ```html
 <script>
   !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
-  posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>',})
+  posthog.init('<ph_project_api_key>',{api_host:'<ph_client_api_host>', defaults:'<ph_posthog_js_defaults>'})
 </script>
 ```
 
@@ -41,7 +41,7 @@ Although autocapture is a great way to get started, it can be limiting for more 
 
 3. **Customization**. Although it is possible to [add properties to autocapture](/docs/product-analytics/autocapture#capturing-additional-properties-in-autocapture-events), getting exactly the data you want at the exact moment you want requires customization.
 
-4. **Pageviews rely on page loads**. Pageview captures rely on page load events. This means they don't work well with [single-page apps (SPAs)](/tutorials/single-page-app-pageviews). To fix this, you can rely on the [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to capture pageviews by setting the `capture_pageview` configuration option to `history_change`.
+4. **Pageviews rely on page loads**. Pageview captures rely on page load events. This means they don't work well with [single-page apps (SPAs)](/tutorials/single-page-app-pageviews). To fix this, you can rely on the [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) to capture pageviews by setting the `capture_pageview` configuration option to `history_change` or by using the most recent `defaults: '<ph_posthog_js_defaults>'`.
 
 ## Setting up custom events
 

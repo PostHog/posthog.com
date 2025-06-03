@@ -1,4 +1,4 @@
-If your Next.js app uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/app/getting-started/server-and-client-components). Make sure to set `capture_pageview` to `history_change` because Next.js acts as a single-page app and doesn't fire page load events on route changes.
+If your Next.js app uses the [app router](https://nextjs.org/docs/app), you can integrate PostHog by creating a `providers` file in your app folder. This is because the `posthog-js` library needs to be initialized on the client-side using the Next.js [`'use client'` directive](https://nextjs.org/docs/app/getting-started/server-and-client-components).
 
 <MultiLanguage>
 
@@ -14,7 +14,7 @@ export function PostHogProvider({ children }) {
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-      capture_pageview: 'history_change'
+      defaults: '<ph_posthog_js_defaults>',
     })
   }, [])
 
@@ -38,7 +38,7 @@ export function PostHogProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
         api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-        capture_pageview: 'history_change'
+        defaults: '<ph_posthog_js_defaults>',
       })
   }, [])
 

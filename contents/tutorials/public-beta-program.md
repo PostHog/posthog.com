@@ -43,9 +43,11 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
       opt_in_site_apps: true
     })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```

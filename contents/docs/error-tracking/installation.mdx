@@ -16,6 +16,7 @@ import AngularErrorTracking from './_snippets/angular-install-error-tracking.mdx
 import NextJSErrorTracking from './_snippets/nextjs-install-error-tracking.mdx'
 import NuxtErrorTracking from './_snippets/nuxt-install-error-tracking.mdx'
 import SvelteErrorTracking from './_snippets/svelte-install-error-tracking.mdx'
+import HonoErrorTracking from './_snippets/hono-install-error-tracking.mdx'
 import ManualErrorTracking from './_snippets/manual-error-tracking.mdx'
 import CustomErrorBoundary from './_snippets/custom-error-boundary.mdx'
 import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
@@ -34,6 +35,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
       <Tab>SvelteKit</Tab>
       <Tab>Angular</Tab>
       <Tab>Sentry</Tab>
+      <Tab>Hono</Tab>
       <Tab>Manual/API</Tab>
     </Tab.List>
     <Tab.Panels>
@@ -74,6 +76,9 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
         </Tab.Panel>
         <Tab.Panel>
           <SentryInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+          <HonoErrorTracking />
         </Tab.Panel>
         <Tab.Panel>
           <ManualErrorTracking />

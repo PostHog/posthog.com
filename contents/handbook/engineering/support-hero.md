@@ -58,6 +58,8 @@ There are three sources of tickets:
 
 Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-are-building-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
 
+Sometimes a feature already exists, but a user doesn't know about it or how to use it. In this case, you should either send them a link to the relevant docs page or [update the docs](/handbook/engineering/writing-docs) to make it clearer.
+
 ### Fixing bugs
 
 Others tickets report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.

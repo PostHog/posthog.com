@@ -623,9 +623,9 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         type: 'transformation' | 'destination',
         generateSlug: (pipeline: any) => string
     ) => {
-        const { results } = await fetch(`https://us.posthog.com/api/public_hog_function_templates?type=${type}`).then(
-            (res) => res.json()
-        )
+        const { results } = await fetch(
+            `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
+        ).then((res) => res.json())
         results.forEach((pipeline) => {
             const slug = generateSlug(pipeline)
             const node = {

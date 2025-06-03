@@ -47,13 +47,10 @@ With an initialized client instance:
 import posthog from 'posthog-js';
 import { PostHogProvider} from 'posthog-js/react'
 
-posthog.init(
-  process.env.REACT_APP_PUBLIC_POSTHOG_KEY,
-  {
-    api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
-    capture_pageview: 'history_change'
-  }
-);
+posthog.init(process.env.REACT_APP_PUBLIC_POSTHOG_KEY, {
+  api_host: process.env.REACT_APP_PUBLIC_POSTHOG_HOST,
+  defaults: '<ph_posthog_js_defaults>',
+});
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

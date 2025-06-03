@@ -33,7 +33,7 @@ const CompanyHandbook: React.FC = () => {
           {chapters.map((category) => {
             return (
               <div key={category.name} className="">
-                <ol className="p-0 -ml-3 -mr-2">
+                <ol className="p-0 -ml-4 -mr-4">
                   {category.links.map((link) => {
                     return (
                       <li key={link.to} className="list-none">
