@@ -6,17 +6,21 @@ showTitle: true
 
 ## What is an issue?
 
-Exception events are grouped into issues, based on the information on the event, such as the exception type, message, and stack trace. What's used for grouping depends on what information is available, and will change as we try to improve our grouping algorithm - if you spot two issues that you think should have been one, or one issue that you think should have been split into two, please let us know!
+Exception events are grouped into issues based on event information, such as the exception type, message, and stack trace. The data used for grouping depends on what is available. 
+
+We're working on improving our group algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
 ## Finding specific issues
 
-You can use the search bar at the top of the issue page to filter issues based on the properties of the exceptions in that issue. This means, for example, if you search for "TypeError", we'll show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you might see search results that seem unrelated to your search term, but that match it due to at least one exception in the issue group matching your search.
+You can use the search bar at the top of the [issue page](https://us.posthog.com/error_tracking) to filter issues based on the properties of the exceptions in that issue.
+
+For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you might see seemingly unrelated search results that  match due to one exception in the issue group matching your search.
 
 The search bar provides two modes of filtering:
 
-- Exact property filtering, which operates like property filters elsewhere in PostHog, allowing you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
+- Exact property filtering, which operates like property filters elsewhere in PostHog, enabling you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
 
-- Freeform text search, which does text matching for a subset of the error-tracking specific properties of the exception event.
+- Freeform text search, which does text matching for a subset of the error tracking specific properties of the exception event.
 
 You add a property filter by clicking the property name shown here:
 
@@ -27,7 +31,7 @@ You add a property filter by clicking the property name shown here:
   classes="rounded"
 />
 
-and added property filters look like this:
+Added property filters look like this:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/added_property_filter_1e823a16e9.png"
@@ -40,7 +44,7 @@ The results of both of these filter types (property filters and freeform search)
 
 ## Freeform text search
 
-The freeform search splits the text you give it into tokens, and matches an exception even if *each* of the tokens in your search term appear in at least one of the following:
+The freeform search splits the text you give it into tokens. The search matches an exception if *each* of the tokens in your search term appear in one of the following:
 - The exception type
 - The exception message
 - The function names in the exception stack trace (if known)
@@ -61,15 +65,25 @@ TypeError: Cannot read property 'name' of undefined
     at bootstrap_node.js:625:3
 ```
 
-and you search for the term `TypeError myfile.js`. The exception matches this search, as it contains `TypeError` (as the exception type) and `myfile.js` (as a file path in the stack trace). If you searched for `TypeError myfile.js abc`, the exception would not match, as the token `abc` does not appear anywhere in freeform search properties. If you want to search for longer exact strings, e.g. a particular exception message, you can group tokens into a single term using quotes, e.g. `"Cannot read property 'name' of undefined" myfile.js` would match, and `"Cannot read property of myfile.js"` would not. Note, perhaps unintuitively, `Cannot read property of myfile.js` would match, because the tokens are ungrouped, and all of them appear *somewhere* in the exception search properties.
+If you search for the term `TypeError myfile.js`, the exception matches this search, as it contains `TypeError` (as the exception type) and `myfile.js` (as a file path in the stack trace). 
 
-Keep in mind that exception events can have more than one exception in them, due to language features like exception chaining. For freeform search, we put the types, messages, functions and file paths of all exceptions into one list, and match if the token appears in any of them. For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read name` would match the exception, because it matches *one* of the exception messages (`name` appears in the "root" one).
+If you search for `TypeError myfile.js abc`, the exception would not match, as the token `abc` does not appear anywhere in freeform search properties. 
+
+If you want to search for longer exact strings, e.g. a particular exception message, you can group tokens into a single term using quotes, e.g. `"Cannot read property 'name' of undefined" myfile.js` would match, and `"Cannot read property of myfile.js"` would not. 
+
+Note, perhaps unintuitively, `Cannot read property of myfile.js` would match, because the tokens are ungrouped, and all of them appear *somewhere* in the exception search properties.
+
+### Searching chained exceptions
+
+Exception events can have more than one exception in them, due to language features like exception chaining. For freeform search, we put the types, messages, functions and file paths of all exceptions into one list, and match if the token appears in any of them. 
+
+For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read name` would match the exception, because it matches *one* of the exception messages (`name` appears in the "root" one).
 
 ## Filtering exception occurrences within an issue
 
-Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list (pictured here, below the issue details), in order to e.g. search for a particular instance of the issue that you want to investigate further. This is particularly useful in cases where, for example, some exceptions in the issue have information others don't, and you want to use that information for debugging.
+Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list for a particular instance of the issue. This is particularly useful in cases where some exceptions in the issue have information others don't and you want to use that information for debugging.
 
-Here's an example from our own systems. As you can see, I've selected a recent occurrence of this issue, to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
+Here's an example from our own systems. We select a recent occurrence of this issue to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/unfiltered_exception_list_8cdbf735c0.png"
@@ -78,7 +92,7 @@ Here's an example from our own systems. As you can see, I've selected a recent o
   classes="rounded"
 />
 
-Here, I've added a property filter for a property I think will be useful for my debugging, and can then easily select an occurrence that has that property set:
+Here, we've added a property filter for a property we think will be useful for our debugging and can then easily select an occurrence that has that property set:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filtered_exception_list_7b51efa94f.png"
@@ -91,7 +105,8 @@ Here, I've added a property filter for a property I think will be useful for my 
 
 We try to return results to you within a second, but sometimes if you're querying over large amounts of data, it may take longer. The following can improve the search performance:
 
-- Limit the time range you're searching over - 7 days is usually enough to get a sense for the trends of an issue over time.
-- Use freeform search rather than property filters - our freeform searches are generally faster than property filters, as the total amount of data processed is smaller.
+- **Limit the time range you're searching over:** 7 days is usually enough to get a sense for the trends of an issue over time.
 
-If you find your queries timing out or taking more than 30 seconds, please let us know! We're always looking for benchmarks to improve against.
+- **Use freeform search rather than property filters:** Our freeform searches are generally faster than property filters, as the total amount of data processed is smaller.
+
+If you find your queries timing out or taking more than 30 seconds, please [let us know in-app](https://us.posthog.com/#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue)! We're always looking for benchmarks to improve against.
