@@ -2,12 +2,6 @@
 title: How to filter and search error tracking issues in PostHog
 sidebar: Docs
 showTitle: true
-author:
-  - olly-browne
-date: 2024-06-04
-tags:
-  - error tracking
-  - debugging
 ---
 
 ## What is an issue?
@@ -19,8 +13,10 @@ Exception events are grouped into issues, based on the information on the event,
 You can use the search bar at the top of the issue page to filter issues based on the properties of the exceptions in that issue. This means, for example, if you search for "TypeError", we'll show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you might see search results that seem unrelated to your search term, but that match it due to at least one exception in the issue group matching your search.
 
 The search bar provides two modes of filtering:
+
 - Exact property filtering, which operates like property filters elsewhere in PostHog, allowing you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
-- Freeform text search, which does text matching for a subset of the error-tracking specific properties of the exception event
+
+- Freeform text search, which does text matching for a subset of the error-tracking specific properties of the exception event.
 
 You add a property filter by clicking the property name shown here:
 
@@ -99,5 +95,3 @@ We try to return results to you within a second, but sometimes if you're queryin
 - Use freeform search rather than property filters - our freeform searches are generally faster than property filters, as the total amount of data processed is smaller.
 
 If you find your queries timing out or taking more than 30 seconds, please let us know! We're always looking for benchmarks to improve against.
-
-<NewsletterForm />

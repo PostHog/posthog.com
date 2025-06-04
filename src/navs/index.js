@@ -3370,7 +3370,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Filter and search',
-                    url: '/tutorials/filter-and-search-error-tracking-issues',
+                    url: '/docs/error-tracking/filter-and-search-issues',
                     icon: 'IconSearch',
                     color: 'green',
                 },
