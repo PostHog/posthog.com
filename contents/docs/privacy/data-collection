@@ -1,0 +1,15 @@
+- Asking for consent
+
+- Client side collection controls
+    - events
+    - PA
+        - Disable sensitive information with autocapture
+    - Session replay
+        - masking replays
+        - blocking replays
+        - ignoring replays
+        - network capture
+
+- Cookieless tracking
+
+- 
