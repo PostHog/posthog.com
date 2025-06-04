@@ -146,7 +146,7 @@ On top of this, we need to do extra processing for new properties which can take
 
 ## Billing & usage
 
-Feature flags are charged based requests made to our `/decide` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
+Feature flags are charged based on requests made to our `/decide` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
 
 ### How can I estimate the number of feature flag requests I'll be charged for?
 
