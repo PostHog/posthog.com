@@ -6,7 +6,7 @@ showTitle: true
 
 Results sampling can significantly speed up loading if you have a large amount of data or are running complex queries in your [insights](/docs/product-analytics/insights).
 
-Processing a lot of data can take some time, so we can offer faster results by sampling a portion of the data and extrapolating the results. The results will be less accurate, but remain statistically significant if your sample pool of events is large enough.
+Processing a lot of data can take some time, so we can offer faster results by sampling a portion of the data and extrapolating the results. The results will be less precise, but remain accurate and statistically significant if your sample pool of events is large enough.
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
@@ -37,7 +37,7 @@ If you do not send new data, yes. For a given sampling rate, the analysis will a
 
 ### Does sampling work when calculating conversions?
 
-Yes. Our sampling doesn't just take a random set of events, it takes a sample based on a [sampling variable](#what-variable-do-you-sample-by). Currently, we use a user's [distinct IDs](/docs/getting-started/identify-users) for. All events are attached to distinct IDs, so you don't run the risk of an event at the first step of your funnel being in the sample while the subsequent related events aren't.
+Yes. Our sampling doesn't take a random set of events, it takes a sample based on a [sampling variable](#what-variable-do-you-sample-by). Currently, we use a user's [distinct IDs](/docs/getting-started/identify-users) for. All events are attached to distinct IDs, so you don't run the risk of an event at the first step of your funnel being in the sample while the subsequent related events aren't.
 
 ### What sampling mechanism do you use under the hood?
 
