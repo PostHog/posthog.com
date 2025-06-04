@@ -75,16 +75,15 @@ We may occasionally pause this rotation if we have a big initiative that needs m
 
 ### Nailing a zero day
 
-Customers are our number one priority! But, Support Zero days are our opportunity to continue building a better support experience away from directly solving customer problems. It's inevitable that on a zero day, there'll be some tickets that we've been working on that would breach their SLAs during the day. But we want to try and give as much space as possible to focus on zero day work, so here's a summary of how our team approaches and prepares for a zero day:
+Customers are our number one priority! But, Support Zero days are our opportunity to continue building a better support experience away from directly solving customer problems. It's inevitable that on a zero day there'll be some tickets that you've been working on that need attention, but we want to try and create as much space as possible for you to focus on zero day work. Here's a summary of how to approach and prepares for a zero day:
 
 - In advance - say for half a day before - and if the ticket queue allows it, we avoid taking on higher priority work or in-depth investigations. Consider shifting focus to 'quick win' tickets, or tickets where some initial information gathering from the customer is needed which another support engineer can then progress.
 - At the beginning of the day, triage any open tickets that are assigned to you. Internal ticket notes really help here! In roughly this order:
-  - likely you can delay any work on tickets that won't breach their SLA until the next day
-respond to any 'quick wins' - tickets that take under a few minutes to resolve
-  - consider un-assigning any tickets that will breach but need low enough context that another support engineer could reasonably continue with them (share context in an internal note if it helps!)
-  - use the 'Zero Day' Zendesk macro to send a holding response in cases where the customer can reasonably wait a day for a response - our customers are generally lovely and very understanding provided we keep them updated!
-  - respond to any remaining tickets because what's left is likely to be the stuff that really needs looking at!
-- During a zero day, check every few hours for any of your assigned tickets reopening, and which could need a fresh triage. Consider some notifications to alert you when your assigned tickets reopen??
+  1. Things that won't breach: tickets that won't breach their SLA until the next day can remain assigned to you.
+  2. Things that are quick to respond to: respond to any tickets that will only take a few minutes to resolve.
+  3. Things that require low context: Un-assign tickets which are assigned to you that will breach during the next 24 calendar hours. You should only do this for tickets that another support engineer could reasonably pick up with low context (consider sharing context in an internal note!).
+  4. Larger investigations and long-running tickets: use the 'Zero Day' Zendesk macro to send a holding response in cases where the customer can reasonably wait a day for a response - our customers are generally lovely and very understanding provided we keep them updated!
+- During a zero day, check every few hours for any of your assigned tickets reopening, and which could need a fresh triage.
 
 At the end of a zero day, we generally take a bit of time to think about what's next. This might mean making some notes so the work can be quickly picked up on your next zero day, or planning to present your work in the PostHog weekly all hands. Engineers at PostHog move fast and support zero days should be no exception - try to stay focused on how you can ship your work as soon as possible!
 
