@@ -4,7 +4,7 @@ import { heading } from 'components/Home/classes'
 import { SEO } from 'components/seo'
 import { sexyLegalMenu } from '../navs'
 import Tooltip from 'components/Tooltip'
-import { IconInfo, IconRevert } from '@posthog/icons'
+import { IconInfo, IconRevert, IconSend } from '@posthog/icons'
 import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
 import Confetti from 'react-confetti'
@@ -92,7 +92,7 @@ function BAAGenerator() {
                     </div>
                     <p className="text-sm mb-2">We'll populate your BAA with this information.</p>
                     <p className="text-sm">
-                        Once the form is completed, you can ship it off to us for counter-signature.
+                        After completing this form, we'll prep it in PandaDoc where we'll sign and send a copy by email for counter-signature.
                     </p>
                     <p className="text-sm">
                         Important: you'll need to be subscribed to our <Link to="/platform-addons#scale-add-on">Scale</Link> or <Link to="/platform-addons#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
@@ -123,11 +123,12 @@ function BAAGenerator() {
                         <form onSubmit={handleBaaSubmit}>
                             <div className="grid grid-cols-5 gap-2 items-center mt-4">
                                 <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
-                                    Company Name
+                                    Company name
                                 </label>
                                 <input
                                     id="companyName"
                                     type="text"
+                                    placeholder="Company name"
                                     value={companyName}
                                     onChange={(e) => setCompanyName(e.target.value)}
                                     className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
@@ -135,11 +136,12 @@ function BAAGenerator() {
                                 />
 
                                 <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourName">
-                                    Your Full Name
+                                    Representative name
                                 </label>
                                 <input
                                     id="yourName"
                                     type="text"
+                                    placeholder="Representative name"
                                     value={yourName}
                                     onChange={(e) => setYourName(e.target.value)}
                                     className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
@@ -147,11 +149,12 @@ function BAAGenerator() {
                                 />
 
                                 <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourTitle">
-                                    Title
+                                    Representative title
                                 </label>
                                 <input
                                     id="yourTitle"
                                     type="text"
+                                    placeholder="Representative title"
                                     value={yourTitle}
                                     onChange={(e) => setYourTitle(e.target.value)}
                                     className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
@@ -159,45 +162,134 @@ function BAAGenerator() {
                                 />
 
                                 <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="email">
-                                    Email
+                                    Representative email
                                 </label>
                                 <input
                                     id="email"
                                     type="email"
+                                    placeholder="Representative email"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="col-span-5 @sm:col-span-3 mb-2 bg-accent rounded border border-light hover:border-black/50 text-black"
                                     required
                                 />
                             </div>
-
-                            <TrackedCTA
-                                type="primary"
-                                size="sm"
-                                disabled={!isFormComplete}
-                                event={{ name: 'submitted BAA' }}
-                                className="mt-4"
-                                onClick={handleBaaSubmit}
-                            >
-                                Submit
-                            </TrackedCTA>
                         </form>
                     )}
                 </div>
 
                 <div className="md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 pb-24 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl rounded relative">
-                    <div className="text-lg font-bold mb-4">Preview</div>
-                    <div>
-                        <h2 className="text-2xl font-bold mb-4">Business Associate Agreement Preview</h2>
+                <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
+                        <div className="text-lg font-bold">Business Associate Agreement Preview</div>
+                        <Tooltip
+                            content={() => (
+                                <div className="max-w-xs md:max-w-sm print:hidden">
+                                    {isFormComplete ? (
+                                        <>
+                                            <h4 className="text-base mb-1">Ready to send?</h4>
+                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information to PandaDoc where we'll sign and email to you for counter-signature.</p>
+                                        </>
+                                    ) : (
+                                        <>
+                                            Fill out all the fields <br className="md:hidden" />
+                                            to send for signature.
+                                        </>
+                                    )}
+                                </div>
+                            )}
+                            placement="left"
+                        >
+                            <span className="relative">
+                                <TrackedCTA
+                                    event={{ name: 'submitted BAA' }}
+                                    type="primary"
+                                    size="sm"
+                                    disabled={!isFormComplete}
+                                    onClick={handleBaaSubmit}
+                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
+                                >
+                                    <IconSend className="size-5" />
+                                    <span>Send for signature</span>
+                                </TrackedCTA>
+                            </span>
+                        </Tooltip>
+                    </div>
+                    <div className="pt-8">
                         <p>
                             This Business Associate Agreement ("Agreement") is entered into by and between
-                            <strong> {companyName || ' [Company Name]'} </strong>
+                            <strong>{' '}
+                            <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate
+                                            these fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="companyName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {companyName ? companyName : '[COMPANY NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip>
+                            </strong>{' '}
                             ("Covered Entity") and <strong>PostHog, Inc.</strong> ("Business Associate").
                         </p>
                         <p>
-                            This Agreement is effective as of the date signed by Covered Entity’s representative,
-                            <strong> {yourName || ' [Representative Name]'} </strong>, titled
-                            <strong> {yourTitle || ' [Title]'} </strong>.
+                            This Agreement is effective as of the date signed by Covered Entity’s representative,{' '}
+                            <Tooltip
+                                content={() => (
+                                    <>
+                                        Fill out the form <span className="md:hidden">at the top</span>
+                                        <span className="hidden md:inline-block">to the left</span> populate
+                                        these fields
+                                    </>
+                                )}
+                                placement="top"
+                                className="[&_button]:cursor-auto"
+                            >
+                                <span className="relative">
+                                    <button type="button">
+                                        <label
+                                            htmlFor="yourName"
+                                            className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                        >
+                                            {yourName ? yourName : '[REPRESENTATIVE NAME]'}
+                                        </label>
+                                    </button>
+                                </span>
+                            </Tooltip>, titled
+                            <strong>{' '}
+                            <Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate
+                                            these fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="yourTitle"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip></strong>.
                         </p>
                         <p>
                             This Agreement is entered into for the purpose of ensuring that Business Associate will
@@ -208,7 +300,7 @@ function BAAGenerator() {
                             Capitalized terms used in this Agreement and not otherwise defined shall have the meanings
                             ascribed to them in HIPAA.
                         </p>
-                        <p>Business Associate Agreement — PostHog Inc.</p>
+                        <p><strong>Business Associate Agreement — PostHog Inc.</strong></p>
                         <p>
                             This Business Associate Amendment (this “BAA”), effective as of the date electronically
                             agreed and excepted by you (the “BAA Effective Date”), is entered into by and between
@@ -218,7 +310,7 @@ function BAAGenerator() {
                         <p>
                             You have entered into one or more agreements with us (each, as amended from time to time, an
                             “Agreement”) governing the provision of our real-time error tracking, crash reporting, and
-                            visibility service more fully described at www.posthog.com (the “Service”). This BAA will
+                            visibility service more fully described at posthog.com (the “Service”). This BAA will
                             amend the terms of the Agreement to reflect the parties’ rights and responsibilities with
                             respect to the processing and security of your Protected Health Information (defined below)
                             under the Agreement. If you are accepting this BAA in your capacity as an employee,
@@ -268,7 +360,8 @@ function BAAGenerator() {
                             “Teams Plan”shall mean the plan that The Customer must be paying for to receive coverage
                             with a BAA.
                         </p>
-                        <p>Customer Assurances.Customer represents and warrants as follows:</p>
+                        <p><strong>Customer Assurances.</strong></p>
+                        <p>Customer represents and warrants as follows:</p>
                         <p>That it is a “Covered Entity” or a “Business Associate” as defined by HIPAA;</p>
                         <p>
                             That it shall comply with HIPAA in its use of the Service, including utilizing tools made
@@ -283,7 +376,7 @@ function BAAGenerator() {
                             That it will not request PostHog to use or disclose PHI in any manner that would violate
                             applicable federal or state laws if such use or disclosure were made by Customer.
                         </p>
-                        <p>PostHog’s Assurances.</p>
+                        <p><strong>PostHog's Assurances.</strong></p>
                         <p>
                             PostHog (1) shall not use or disclose PHI, other than as permitted or required by this BAA
                             and Agreement, or as required by law; (2) shall not use or disclose PHI in any manner that
@@ -359,7 +452,7 @@ function BAAGenerator() {
                             as provided for by this BAA and to comply with the HIPAA Security Rule (Subpart C of 45 CFR
                             Part 164).
                         </p>
-                        <p>Privacy Rule</p>
+                        <p><strong>Privacy Rule.</strong></p>
                         <p>
                             Both Parties are committed to complying with all federal and state laws governing the
                             confidentiality and privacy of health information, including, but not limited to, the
@@ -386,7 +479,7 @@ function BAAGenerator() {
                             performance under this BAA or the Agreement; or (iii) fails to meets its obligations under
                             HIPAA. The Parties may also terminate this BAA upon mutual consent.
                         </p>
-                        <p>Reporting Disclosures of PHI and Security Incidents.</p>
+                        <p><strong>Reporting Disclosures of PHI and Security Incidents.</strong></p>
                         <p>
                             Business Associate will report to Covered Entity in writing any use or disclosure of PHI not
                             provided for by this BAA of which it becomes aware and Business Associate agrees to report
@@ -423,21 +516,102 @@ function BAAGenerator() {
                             that renders this BAA inconsistent therewith, the parties shall cooperate in good faith to
                             amend this BAA to the extent necessary to comply with such amendments or interpretations.
                         </p>
-                        <p>Customer:PostHog:</p>
-                        <p>[Client.Company]</p>
-                        <p>By:By:</p>
-                        <p>Name:Name:</p>
-                        <p>Title:Title:</p>
-                        <p>Date:Date:</p>
-                        <div className="mt-8">
-                            <p className="mb-2 font-semibold">Signed by Covered Entity:</p>
-                            <p className="border-b border-black w-2/3 mb-1">{yourName || '[Representative Name]'}</p>
-                            <p className="border-b border-black w-2/3 mb-1">{yourTitle || '[Title]'}</p>
-                            <p className="border-b border-black w-2/3">{email || '[Email Address]'}</p>
 
-                            <p className="mt-6 mb-2 font-semibold">Signed by Business Associate:</p>
-                            <p className="border-b border-black w-2/3 mb-1">Hector Rodriguez</p>
-                            <p className="border-b border-black w-2/3">Legal & Compliance Manager</p>
+                        <div className="mt-8">
+
+
+                            <div className="grid grid-cols-[minmax(100px,200px)_1fr] items-baseline max-w-xl space-y-4 [&>p]:!mb-0">
+                                <p className="mb-2 font-semibold col-span-full"><strong>Customer</strong></p>
+
+                                <p>Signature</p>
+                                <p className="border-b border-black w-full">&nbsp;</p>
+
+                                <p>Representative Name</p>
+                                <p className="border-b border-black"><Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate
+                                            these fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="yourName"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {yourName ? yourName : '[REPRESENTATIVE NAME]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip></p>
+
+                                <p>Title</p>
+                                <p className="border-b border-black"><Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate
+                                            these fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="yourTitle"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {yourTitle ? yourTitle : '[REPRESENTATIVE TITLE]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip></p>
+
+                                <p>Email</p>
+                                <p className="border-b border-black"><Tooltip
+                                    content={() => (
+                                        <>
+                                            Fill out the form <span className="md:hidden">at the top</span>
+                                            <span className="hidden md:inline-block">to the left</span> populate
+                                            these fields
+                                        </>
+                                    )}
+                                    placement="top"
+                                    className="[&_button]:cursor-auto"
+                                >
+                                    <span className="relative">
+                                        <button type="button">
+                                            <label
+                                                htmlFor="email"
+                                                className="bg-yellow/40 font-bold px-0.5 py-0.5"
+                                            >
+                                                {email ? email : '[REPRESENTATIVE EMAIL]'}
+                                            </label>
+                                        </button>
+                                    </span>
+                                </Tooltip></p>
+                            </div>
+
+
+                            <div className="grid grid-cols-[minmax(100px,200px)_1fr] items-baseline max-w-xl space-y-4 [&>p]:!mb-0">
+                                <p className="mt-6 mb-2 font-semibold col-span-full"><strong>PostHog</strong></p>
+
+                                <p>Signature</p>
+                                <p className="border-b border-black">&nbsp;</p>
+
+                                <p>Representative Name</p>
+                                <p className="border-b border-black">Charles Cook</p>
+
+                                <p>Title</p>
+                                <p className="border-b border-black">VP Operations</p>
+                            </div>
                         </div>
                     </div>
                 </div>

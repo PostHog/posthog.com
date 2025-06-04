@@ -145,10 +145,10 @@ function DpaGenerator() {
                 <p className="border-b border-black w-full">&nbsp;</p>
 
                 <p>Name</p>
-                <p className="border-b border-black w-full">Hector Rodriguez</p>
+                <p className="border-b border-black w-full">Charles Cook</p>
 
                 <p>Title</p>
-                <p className="border-b border-black w-full">Legal & Compliance Manager</p>
+                <p className="border-b border-black w-full">VP Operations</p>
             </div>
         </>
     )
@@ -239,7 +239,7 @@ function DpaGenerator() {
                         </Tooltip>
                     </div>
                     <p className="text-sm">
-                        After completing this form, we'll send it to PandaDoc where we'll countersign and return the executed copy by email.
+                        After completing this form, we'll prep it in PandaDoc where we'll sign and send a copy by email for counter-signature.
                     </p>
                     <p className="text-sm">
                         Need changes to this DPA? <Link to="/talk-to-a-human">Contact us</Link> first.
@@ -247,65 +247,65 @@ function DpaGenerator() {
                     <form>
                         <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
-                                Company Name
+                                Company name
                             </label>
                             <input
                                 type="text"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
-                                placeholder="Company Name"
+                                placeholder="Company name"
                                 id="companyName"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyAddress">
-                                Company Address
+                                Company address
                             </label>
                             <input
                                 type="text"
                                 value={companyAddress}
                                 onChange={(e) => setCompanyAddress(e.target.value)}
-                                placeholder="Company Address"
+                                placeholder="Company address"
                                 id="companyAddress"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourName">
-                                Representative Name
+                                Representative name
                             </label>
                             <input
                                 type="text"
                                 value={yourName}
                                 onChange={(e) => setYourName(e.target.value)}
-                                placeholder="Representative Name"
+                                placeholder="Representative name"
                                 id="yourName"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="representativeEmail">
-                                Representative Email
+                                Representative email
                             </label>
                             <input
                                 type="email"
                                 value={representativeEmail}
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
-                                placeholder="Representative Email"
+                                placeholder="Representative email"
                                 id="representativeEmail"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourTitle">
-                                Representative Title
+                                Representative title
                             </label>
                             <input
                                 type="text"
                                 value={yourTitle}
                                 onChange={(e) => setYourTitle(e.target.value)}
-                                placeholder="Representative Title"
+                                placeholder="Representative title"
                                 id="yourTitle"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
@@ -398,13 +398,13 @@ function DpaGenerator() {
                                         {mode === 'pretty' || mode === 'lawyer' ? (
                                             <>
                                             <h4 className="text-base mb-1">Ready to send?</h4>
-                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information to PandaDoc where we'll countersign and return the executed copy by email.</p>
+                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information to PandaDoc where we'll sign and email to you for counter-signature.</p>
                                             
                                             </>
                                         ) : (
                                             <>
                                             <h4 className="text-base mb-1">Try another version</h4>
-                                            <p className="text-sm mb-0 text-[15px]">Sorry, our lawyers won't sign the fairy tale or Taylor Swift versions for some reason!</p>
+                                            <p className="text-sm mb-0 text-[15px]">Sorry, our lawyers refuse to recognize this version as a binding legal document.</p>
                                             </>
                                         )}
                                             
@@ -412,7 +412,7 @@ function DpaGenerator() {
                                     ) : (
                                         <>
                                             Fill out all the fields <br className="md:hidden" />
-                                            to export to PDF
+                                            to send for signature.
                                         </>
                                     )}
                                 </div>
@@ -429,7 +429,7 @@ function DpaGenerator() {
                                     className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
                                 >
                                     <IconSend className="size-5" />
-                                    <span>Send for countersignature</span>
+                                    <span>Send for signature</span>
                                 </TrackedCTA>
                             </span>
                         </Tooltip>
@@ -1408,12 +1408,10 @@ function DpaGenerator() {
                                     <span className="relative">
                                         <button type="button">
                                             <label
-                                                htmlFor="representativeEmail"
+                                                htmlFor="yourName"
                                                 className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                             >
-                                                {representativeEmail
-                                                    ? representativeEmail
-                                                    : '[REPRESENTATIVE EMAIL]'}
+                                                {yourName ? yourName : '[REPRESENTATIVE NAME]'}
                                             </label>
                                         </button>
                                     </span>
