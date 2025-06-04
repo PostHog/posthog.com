@@ -1474,6 +1474,7 @@ export const sexyLegalMenu = {
         { name: 'Terms', icon: 'IconDocument', url: '/terms', color: 'blue' },
         { name: 'Privacy', icon: 'IconShield', url: '/privacy', color: 'seagreen' },
         { name: 'DPA generator', icon: 'IconPencil', url: '/dpa', color: 'red' },
+        { name: 'BAA generator', icon: 'IconTie', url: '/baa', color: 'purple' },
     ],
 }
 
