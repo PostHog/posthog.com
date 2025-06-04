@@ -22,6 +22,20 @@ The search bar provides two modes of filtering:
 - Exact property filtering, which operates like property filters elsewhere in PostHog, allowing you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
 - Freeform text search, which does text matching for a subset of the error-tracking specific properties of the exception event
 
+You add a property filter by clicking the property name shown here:
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_1d7490b403.png"
+  alt="Adding a property to the property filter
+  classes="rounded"
+/>
+
+and added property filters look like this:
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/added_property_filter_1e823a16e9.png"
+  alt="Search bar with property filter"
+  classes="rounded"
+/>
+
 The results of both of these filter types (property filters and freeform search) are ANDed together, such that only exceptions that match all filters are included in the search results.
 
 ## Freeform text search
