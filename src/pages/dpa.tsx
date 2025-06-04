@@ -425,7 +425,7 @@ function DpaGenerator() {
                     id="page"
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky reasonable:top-[57px] md:top-0 reasonable:md:top-[108px] z-10">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
@@ -1184,7 +1184,7 @@ function DpaGenerator() {
                     </p>
                     <div className="pl-8 pb-2">
                         <p>
-                            9.1. At the end of the Services, upon the Company’s request, Processor shall securely return the Company Personal Data or provide a self-service functionality allowing Company to do the same or delete or procure the deletion of all copies of the Company Personal Data unless applicable laws require storage of such Company or is required to resolve a dispute between the parties or the retention of the Company Personal Data is necessary to combat harmful use of the Services.
+                            9.1. At the end of the Services, upon the Company's request, Processor shall securely return the Company Personal Data or provide a self-service functionality allowing Company to do the same or delete or procure the deletion of all copies of the Company Personal Data unless applicable laws require storage of such Company or is required to resolve a dispute between the parties or the retention of the Company Personal Data is necessary to combat harmful use of the Services.
                         </p>
                     </div>
 
@@ -1234,7 +1234,7 @@ function DpaGenerator() {
                                 10.5.3. for the purposes of clause 18, the courts of Ireland shall have jurisdiction; and 
                             </p>
                             <p>
-                                10.5.4. for the purposes of clause 13 and Annex I.C, the competent supervisory authority shall be determined in accordance with the GDPR, based on the data exporter’s establishment or representative within the EEA.
+                                10.5.4. for the purposes of clause 13 and Annex I.C, the competent supervisory authority shall be determined in accordance with the GDPR, based on the data exporter's establishment or representative within the EEA.
                             </p>
                         </div>
                         <p>
@@ -1560,9 +1560,9 @@ function DpaGenerator() {
                         mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
                     }`}
                 >
-                    <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
-                        <div className="col-span-full bg-accent font-bold p-1 text-center">PostHog EU Cloud and PostHog US Cloud Subprocessor(s)</div>
-                        {subprocessors.map((subprocessor, index) => (
+                    <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm pb-8">
+                        <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">PostHog EU Cloud and PostHog US Cloud Subprocessor(s)</div>
+                        {subprocessors.filter(subprocessor => subprocessor.type === 'cloud').map((subprocessor, index) => (
                             <React.Fragment key={index}>
                                 <div className="col-span-3 @xl:!-mb-6">
                                     <h3 className="!my-0 text-xl">
@@ -1617,7 +1617,7 @@ function DpaGenerator() {
                                         Type of personal data processed
                                     </strong>
                                     <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
-                                        {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
+                                        {Object.entries(subprocessor.dataTypes).map(([typeName, typeValues]) => (
                                             <React.Fragment key={typeName}>
                                                 <div>
                                                     <strong className="block pb-1">{typeName}</strong>
@@ -1638,20 +1638,83 @@ function DpaGenerator() {
                                 </div>
                             </React.Fragment>
                         ))}
-                        <div className="col-span-full bg-accent font-bold p-1 text-center">Only if AI features are enabled</div>
-
-                    </div>
-
-                    <div
-                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
-                            mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
-                        }`}
-                    >
-                        <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
-                            {subprocessors.map((subprocessor, index) => (
-                                <React.Fragment key={index}>{/* ...subprocessor content... */}</React.Fragment>
-                            ))}
-                        </div>
+                        <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">Only if AI features are enabled</div>
+                        {subprocessors.filter(subprocessor => subprocessor.type === 'ai').map((subprocessor, index) => (
+                            <React.Fragment key={index}>
+                                <div className="col-span-3 md:@xl:!-mb-6">
+                                    <h3 className="!my-0 text-xl">
+                                        <strong>{subprocessor.name}</strong>
+                                    </h3>
+                                </div>
+                                <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
+                                    <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
+                                    <div className="pt-2">
+                                        <strong>Details</strong>
+                                        <br />
+                                        <a
+                                            href={subprocessor.details}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="[word-break:break-word]"
+                                        >
+                                            {subprocessor.details}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                    <div>
+                                        <strong className="block">Categories of data subject</strong>
+                                        <div>{subprocessor.categories}</div>
+                                    </div>
+                                    <div>
+                                        <strong className="block">Duration of the processing</strong>
+                                        <div>{subprocessor.duration}</div>
+                                    </div>
+                                    <div>
+                                        <strong className="block">Geographical location of the processing</strong>
+                                        <div>{subprocessor.location}</div>
+                                    </div>
+                                </div>
+                                <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                    <div>
+                                        <div>
+                                            <strong>Subject matter of the processing</strong>
+                                        </div>
+                                        <div>{subprocessor.subject}</div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <strong>Nature and purpose of the processing</strong>
+                                        </div>
+                                        <div>{subprocessor.reason}</div>
+                                    </div>
+                                </div>
+                                <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
+                                    <strong className="block mb-2 text-base">
+                                        Type of personal data processed
+                                    </strong>
+                                    <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
+                                        {Object.entries(subprocessor.dataTypes).map(([typeName, typeValues]) => (
+                                            <React.Fragment key={typeName}>
+                                                <div>
+                                                    <strong className="block pb-1">{typeName}</strong>
+                                                    <ul className="pl-4 !mb-1">
+                                                        {typeValues.map((typeValue, index) => (
+                                                            <li
+                                                                key={index}
+                                                                className="!mb-0 !leading-normal !text-sm"
+                                                            >
+                                                                {typeValue}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        ))}
                     </div>
                 </div>
                 </div>
