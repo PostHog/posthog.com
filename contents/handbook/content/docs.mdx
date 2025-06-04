@@ -1,0 +1,320 @@
+---
+title: Docs
+sidebar: Handbook
+showTitle: true
+---
+
+## Docs
+
+We aspire to make our documentation the best in the business – technically robust, consistent, and a joy to read. 
+
+## Our documentation values 
+
+1. Show real code in context
+2. Treat docs like a product
+3. Embrace the craft of writing
+4. Help developers win 
+
+### 1. Show real code in context
+
+Developers don't want oversimplified examples and isolated code snippets. They want to solve real problems and use cases. 
+
+We want to showcase code that's runnable, practical, and immediately useful.
+
+As a rule of thumb, our docs should show code in as much real-world context as possible. The examples we provide should reflect how PostHog is actually used in production, in the wild. If a code snippet in docs has zero application context, we can improve it.
+
+**Isolated example:**
+```js
+posthog.capture('user_signed_up', {
+    login_type: "email",
+    is_free_trial: true
+})
+```
+**In-context example:**
+```js
+const posthog = require('posthog-node') // TIP: Importing PostHog into the app
+
+app.post('/api/signup', async (req, res) => {
+    const { email, password } = req.body
+
+    try {
+        const user = await createUser({ email, password })
+        posthog.capture({ // TIP: Calling PostHog inside business logic
+            distinctId: user.id, 
+            event: 'user_signed_up',
+            properties: {
+                is_free_trial: true,
+            },
+        })
+        res.status(201).json({ message: 'Signup successful', userId: user.id })
+    } catch (error) {
+        res.status(500).json({ error: 'Signup failed' })
+    }
+})
+```
+
+[prompt for LLM generated template]
+
+### 2. Treat docs like a product 
+
+We treat our docs like a product, because it is one. We have customers (i.e., readers), use cases (i.e., onboarding, education, implementation, troubleshooting, etc.), and success metrics (more on this later). PostHog's goal is to help you build successful products, and docs is a part of that.
+
+(Having docs isn't enough of the point -> value success metrics like a product of )
+
+- internal customers in our product teams that needs to create docs vs external customers that read docs
+
+That being said, docs does present unique challenges:
+- 
+- Developer tool documentation is both technical specification and marketing material.
+- They rely on them to learn, evaluate, adopt, and succeed with PostHog
+- Docuemntation is both a knowledge base and a code base. 
+
+Developer tool documentation is both technical specification and marketing material. As both a knowledge base and a code base. Developers don't just read our docs, they rely on them to learn, evaluate, adopt, and succeed with PostHog
+
+
+The experience of reading our docs should delight. Keep a low mental burden for developers.   - Sprinkle in cool moments through out with interactivity, humor / style, and good taste
+
+
+We prioritize usable docs first, then cool docs. 
+
+At their best, docs improves product activation by providing the right information at the right stage on a developer's journey [need examples and some action items]
+
+On metrics, etrics BUT only if also goood vibbeee? :kek:
+
+
+won't include this
+Top of funnel:
+- traffic
+- SEO 
+- GEO 
+
+Mid funnel:
+- Time to X
+- Reduction / deflection in support tickets
+
+
+
+
+
+### 3. Embrace the craft of writing 
+
+NIT PICKING IS A PART OF THE FUN! 
+  - Developer tool documentation is both technical specification and marketing material
+  - Be precise and consistent with language 
+  - Incorporate the PostHog voice and style, which are core strengths of PostHog writing
+  - should be scannable
+
+add examples
+
+(+ examples of why some of this nit-picky-ness matter a lot for docs :D)
+
+### 4. Help customers win
+  - Don't assume prerequisite knowledge the user may not have
+  - Communicate product features and capabilities directly and transparently
+  - Be opinionated and proactively make strong recommendation on how to use PostHog/integrate code (also helps with LLMs, suggest impelementation paths maybe?)
+  - Our customers are smart, discerning, and ambitious. They want to 10x their own products, and we're here to help
+
+[Examples :D - Avoid "it depends" more try this first and if not work try others ([anonym event docs?](https://posthog.com/docs/data/anonymous-vs-identified-events))]
+
+## How we prioritize problems
+Anything that could result in debt and slow down velocity is urgent
+Anything that unblocks better LLM assisted coding
+We should prioritize for usable docs > cool docs
+"Cool" docs are a long(er)-term goal
+For example, making our docs more app-like with interactive elements like embedded code editors
+We have some really cool ideas with runnable, interactive, LLM enabled docs. Potential cool factor is ++++
+But we shouldn't chase after these "cool" projects before having improved API references, some bar of consistency and "" for all products, etc.
+
+## Roadmap [link it out to different page]
+
+### Write human and machine friendly documentation
+Documenion is consumed differently when you code with LLM-powered tools like Cursor and GitHub Copilot. This means:
+- Humans care about problems to be solved
+- LLMs care about details like syntax and types
+
+We can ensure both humans and LLMs succeed with our docs by giving them what they need:
+- Documentation with structure and real opinions
+- Give the LLMs up-to-date, consistent, and complete SDK/API references
+- Example apps with lots of comments to fill in the missing context
+
+### Answer the right questions for the right reader
+Readers have different goals at different stages of their learning journey. Here are some common stages in learning and their different goals:
+- Before they commit to PostHog: What is this product, does it solve my problem, and how does it compare to alternatives.
+- As they learn PostHog: How can I make something happen?
+- As they build with PostHog: How can I make this exact thing happen?
+- As they master PostHog: Where are the technical specifications? What are the edge cases and limitations.
+
+We want to answer the right questions for each reader. Showing a new PostHog user full specifications and a veteran user a hand-holding tutorial both lead to aweful experiences. This means organizing information into a consistent heirarchy, so readers know what to expect from each page.
+
+We can do this by:
+- Building templates for core types of pages
+- Being consistent about the scope of information in each page type
+- Organizing these pages in order of simple to complex, linear to comprehensive, opinionated to open.
+- Use examples and LLM prompts to help anyone write these pages, _fast_.
+
+We think all great docs require these types of pages and are presented in this order. Use your judgement on what makes sense, but 
+- Overviews: High-level pages that introduce products or features.
+- Quickstarts: Make something happen fast, avoid presenting readers with choices (which they're not ready to make).
+- Concepts: Information to help readers decide which problems they can and need to solve.
+- Guides: How to solve specific problems and do jobs-to-be-done.
+- References: Full specifications for API and SDKs to explore everything action available.
+
+You can find prompts and templates for these pages here: // TODO.
+
+### Build the best demo apps
+Talk is cheap, we can show them real code. Static documentation is great, but LLMs let us create interactive learning experiences.
+
+Limitations of static documentation:
+- You can't run the code
+- There is never enough context
+- If you 
+
+Annotated code [like this example from Stripe](https://docs.stripe.com/payments) that are runnable, clone-able, and integrated with LLMs to answer questions and help you modify code. That's our vision for the next generation of developer documentation.
+
+
+
+### The best references
+
+### The best getting started experience
+
+### The best example apps 
+
+### The best navigation and components
+
+
+
+
+
+
+
+
+
+
+
+
+---
+title: Overview
+sidebar: Handbook
+showTitle: true
+---
+
+## How marketing works
+
+Marketing at PostHog is a collaborative effort dispersed across four teams:
+
+- **Content & Docs:** Responsible for content marketing, SEO, and maintaining documentation.
+- **Comms:** Responsible for product marketing, artwork, events, special programs, cross-sell and email marketing.
+- **Video:** Responsible for video ideation, production, editing, and publishing.
+- **Website & Vibes:** Responsible for website design, community, and backend.
+
+See [Marketing ownership](/handbook/growth/marketing/ownership) for more.
+
+## Marketing values
+
+1. Be opinionated
+2. Pull, don’t push
+3. No sneaky shit
+
+### 1. Be opinionated
+
+PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. 
+
+We need to reflect this vision in our marketing and content, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
+ 
+We communicate clearly, directly, and honestly.
+ 
+It's ok to have a sense of humor. We are more likely to die because we are forgettable, not because we made a lame joke once. We have a very distinctive and weird company culture, and we should share that with customers instead of putting on a fake corporate persona when we talk to them. PostHog should not look like a generic software company.
+ 
+(Sometimes we use terminology like 'value propositions' because that is the standard marketing term for a well-understood concept. That's allowed.)
+
+### 2. Pull, don't push
+
+_We focus on word of mouth by default._ We believe customers will judge us first and foremost on our product (i.e. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
+ 
+If a customer doesn't choose PostHog, that means either:
+ 
+1. The product isn't good enough
+2. The product isn't the right solution for them
+3. We didn't communicate the product and its benefits well enough
+ 
+We don't believe companies will be long-term customers of a competitor because they did a better job of spamming them with generic content. We know this because we frequently have customers switching from a competitor to us – they are not afraid to do this.
+ 
+Tackling (1) is the responsibility of everyone at PostHog. The marketing team's specific job is to avoid spending time advertising to people in group (2), and making sure we do a great job avoiding (3). 
+
+This means:
+ 
+- Making sure our comms are extremely high quality
+- Sharing our messages in the right places, where relevant users can see them
+- Spending enough time and/or money in those places so that our messages get through
+
+### 3. No sneaky shit
+
+Our [target users](/handbook/growth/marketing/customer-personas) are technical and acutely aware of the tedious, clickbaity, hyperbolic marketing tactics that software companies use to try and entice them. Stop. It's patronizing to them and the marketing people creating the content. 
+ 
+For these reasons, we:
+ 
+- Don't use any analytics except PostHog. No Google Analytics, Facebook Pixel etc. Customer trust is more important than making our marketing team's lives easier. 
+
+- Don't make claims about our product that are not 100% genuine and verifiable. And we don't make promises for future functionality either beyond what's already in GitHub. 
+
+- Don't unfairly criticize or make false claims about our competitors. We will compare ourselves to them to help customers make a decision, and occasionally they will be a better solution for what a customer needs. And it's ok to have a sense of humor about this. 
+ 
+- Don't bombard customers with 'deals', pop-ups, and other dark patterns. These devalue our product in the long term.
+ 
+- Don't pretend our customers are different from us – i.e. more gullible, more susceptible to marketing. We are an engineering-led team building products for other engineers. If you wouldn't like it, assume our customers wouldn't either. 
+
+- Don't do cold email marketing to acquire new customers. When was the last time you read the 8th email a company sent you and thought 'ok yes, I now want to use this product'?
+
+## Marketing vision
+
+Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist), we have some marketing-specific areas we want to focus on.
+
+### Things we want to be brilliant at
+ 
+- **Word of mouth mindset:** We want to build a hugely successful company driven primarily by word of mouth, rather than paid ads or PR. This means being known for quality in all things we do.
+
+- **Helping our ideal customers be successful:** Through our docs, tutorials, [newsletter](/handbook/content-and-docs/newsletter), emails, video, and beyond, we help our [ideal customers](/handbook/who-we-are-building-for) be more successful, both generally in their goals as founders and engineers, and as users of PostHog.
+
+- **Launches:** Our team ships a lot of products and features. We need launches to break through the noise and get noticed. This helps create the momentum products need to succeed.
+
+- **World-class documentation:** We work with product teams to maintain up-to-date, high quality docs. We work with Website & Docs to ensure users can discover them. Doing this enables users to "self-serve," discover what they need, and get the most out of PostHog.
+
+- **Supporting YC founders:** Lots of PostHog's DNA comes from Y Combinator. Their companies and founders are our ideal customers. We've done a great job being valuable to them (50%+ of batches using us) and want to continue to do so.
+
+- **Merch:** We make the coolest tech company merch. Let's keep it this way. 
+ 
+### Things we want to be good at
+
+- **Social media:** Specifically Twitter, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
+
+- **Paid ads:** We run a lot of paid ads on Google and others. It is fuel for everything else we are doing. We want to be good at this, but do it in a way unique to PostHog. We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit.
+
+- **Graphics:** We're not the most visually focused team, but creating visuals and animations is a great way to communicate complex ideas. They also make for excellent content. Create a basic version and get the design pros (Cory, Lottie) to help.
+
+- **Developer influencers:** We sponsor creators like Theo and Fireship to drive awareness and signups to PostHog. Many of the influencers we sponsor don't work out, but the ones that work drive great results. 
+
+- **Billboards:** Billboards are a way to get our brand in front of a lot of people.
+
+- **Doing sales without salespeople:** Rather than care a lot about "capturing every lead" or "marketing qualified leads," we'd rather work with sales to create content that helps potential customers, ideally without a salesperson.
+
+### Things we might want to be good at but haven't tested yet
+
+- **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
+
+- **Broader partnerships:** PostHog is a complement to a bunch of types of companies, from vibe coding tools to infrastructure platforms. Our data warehouse and CDP are built to enable integrations. How can we leverage this?
+
+- **Video essays:** Video essay style content is a natural extension of what we are doing in our newsletter. When done well, it is what "great video content" looks like.
+ 
+### Things we don't want to spend time on
+
+- **Optimizing marketing spend:** We're more concerned about growing fast than being the most efficient marketing team. Go fast, run experiments, look for upside.
+
+- **Big, highly coordinated marketing campaigns:** We can do them, but our reactive, short turnaround campaigns have been far more successful. 
+
+- **PR:** If we do word of mouth well, our community will be far more valuable/credible than an appearance in TechCrunch.
+
+- **Being cool and interesting people in online communities:** There are a bunch of communities we *could* be more active in like Reddit and Discord, but we'd prefer to focus on our own community first.
+
+- **Conferences.** We're not a natural fit for conferences and being a small fish in a big pond isn't really our style. 
+
+- **Short-form video.** We tried it, but it didn't work. Our audience *might* be there, but we're not flashy or dedicated enough to reach them. 
