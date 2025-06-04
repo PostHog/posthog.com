@@ -23,14 +23,16 @@ The search bar provides two modes of filtering:
 - Freeform text search, which does text matching for a subset of the error-tracking specific properties of the exception event
 
 You add a property filter by clicking the property name shown here:
+
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_1d7490b403.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_dark_dd03d08aa5.png"
-  alt="Adding a property to the property filter
+  alt="Adding a property to the property filter"
   classes="rounded"
 />
 
 and added property filters look like this:
+
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/added_property_filter_1e823a16e9.png"
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/property_filter_added_dark_2d4c065baa.png"
