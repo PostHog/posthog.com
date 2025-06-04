@@ -1841,9 +1841,6 @@ export const docsMenu = {
                         {
                             name: 'Rust',
                             url: '/docs/libraries/rust',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -1891,9 +1888,6 @@ export const docsMenu = {
                         {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Google Tag Manager',
@@ -1946,9 +1940,6 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Svelte',
