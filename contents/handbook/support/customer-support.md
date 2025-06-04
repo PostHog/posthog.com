@@ -86,7 +86,7 @@ respond to any 'quick wins' - tickets that take under a few minutes to resolve
   - respond to any remaining tickets because what's left is likely to be the stuff that really needs looking at!
 - During a zero day, check every few hours for any of your assigned tickets reopening, and which could need a fresh triage. Consider some notifications to alert you when your assigned tickets reopen??
 
-At the end of a zero day, we generally take a bit of time to think about what's next. This might mean making some notes so the work can be quickly picked up on your next zero day, or planning to present your work in the PostHog weekly all hands. Engineers at PostHog move fast and support zero days should be no exception - try to stay focussed on how you can ship your work as soon as possible!
+At the end of a zero day, we generally take a bit of time to think about what's next. This might mean making some notes so the work can be quickly picked up on your next zero day, or planning to present your work in the PostHog weekly all hands. Engineers at PostHog move fast and support zero days should be no exception - try to stay focused on how you can ship your work as soon as possible!
 
 ## Response targets, SLAs, and CSAT surveys
 
