@@ -1311,7 +1311,7 @@ export const handbookSidebar = [
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
-                        {
+            {
                 name: 'Lifecycle Analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
@@ -3367,6 +3367,12 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Filter and search',
+                    url: '/tutorials/filter-and-search-error-tracking-issues',
+                    icon: 'IconSearch',
+                    color: 'green',
                 },
                 {
                     name: 'Alerts',
