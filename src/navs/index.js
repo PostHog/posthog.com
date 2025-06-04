@@ -3369,6 +3369,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Filter and search',
+                    url: '/docs/error-tracking/filter-and-search-issues',
+                    icon: 'IconSearch',
+                    color: 'green',
+                },
+                {
                     name: 'Alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
