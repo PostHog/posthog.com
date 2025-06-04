@@ -12,12 +12,12 @@ import {
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
-import { IconDice, IconDemoThumb, IconMessages, IconDesktopRoadmap, IconImage } from 'components/OSIcons/Icons'
+import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons/Icons'
 import ZoomHover from 'components/ZoomHover'
 
 interface AppItem {
     label: string
-    Icon: React.ComponentType<any> | string
+    Icon: React.ComponentType<any> | string | React.ReactElement
     color: string
     url: string
     type?: string
@@ -34,25 +34,25 @@ interface Product {
 const productLinks: AppItem[] = [
     {
         label: 'home.mdx',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/Docs_ed01f08328.png',
+        Icon: <AppIcon name="doc" />,
         color: 'salmon',
         url: '/',
     },
     {
         label: 'Products',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
+        Icon: <AppIcon name="product" />,
         color: 'blue',
         url: '/products',
     },
     {
         label: 'Pricing',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/pricing_b461c2e5dd.png',
+        Icon: <AppIcon name="pricing" />,
         color: 'green',
         url: '/pricing',
     },
     {
         label: 'notable customers.mdx',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/Docs_ed01f08328.png',
+        Icon: <AppIcon name="doc" />,
         color: 'salmon',
         url: '/customers',
     },
@@ -65,7 +65,7 @@ const productLinks: AppItem[] = [
     },
     {
         label: 'Docs',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
+        Icon: <AppIcon name="doc" />,
         color: 'salmon',
         url: '/docs',
     },
@@ -74,31 +74,31 @@ const productLinks: AppItem[] = [
 const apps: AppItem[] = [
     {
         label: 'Why PostHog?',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_8ae29710fc.png',
+        Icon: <AppIcon name="tour" />,
         color: 'orange',
         url: '/why',
     },
     {
         label: 'Roadmap',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/roadmap_3691544cec.png',
+        Icon: <AppIcon name="roadmap" />,
         color: 'purple',
         url: '/roadmap',
     },
     {
         label: 'Forums',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/forums_a48a37683e.png',
+        Icon: <AppIcon name="forums" />,
         color: 'blue',
         url: '/questions',
     },
     {
         label: 'Games',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/games_6931a0e3a5.png',
+        Icon: <AppIcon name="games" />,
         color: 'green',
         url: '/games',
     },
     {
         label: 'Photo booth',
-        Icon: 'https://res.cloudinary.com/dmukukwp6/image/upload/photobooth_db172dc28e.png',
+        Icon: <AppIcon name="photobooth" />,
         color: 'orange',
         url: '/photobooth',
     },
@@ -107,6 +107,22 @@ const apps: AppItem[] = [
 const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
     
+    const renderIcon = () => {
+        if (typeof Icon === 'string') {
+            return <IconImage url={Icon} className={`size-7 text-${color} ${className}`} />
+        }
+        
+        if (React.isValidElement(Icon)) {
+            return React.cloneElement(Icon as React.ReactElement<any>, { 
+                className: `size-7 text-${color} ${className}` 
+            })
+        }
+        
+        // Icon is a ComponentType
+        const IconComponent = Icon as React.ComponentType<any>
+        return <IconComponent className={`size-7 text-${color} ${className}`} />
+    }
+    
     return (
         <span ref={ref}>
             <Link
@@ -114,11 +130,7 @@ const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
                 state={{ newWindow: true }}
                 className="group inline-flex flex-col justify-center items-center space-y-1 w-auto max-w-28 text-center select-none"
             >
-                {typeof Icon === 'string' ? (
-                    <IconImage url={Icon} className={`size-7 text-${color} ${className}`} />
-                ) : (
-                    <Icon className={`size-7 text-${color} ${className}`} />
-                )}
+                {renderIcon()}
                 <p className="text-sm font-medium leading-tight">
                     <span className="bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] dark:bg-[rgba(1,1,1,0.75)] dark:group-hover:bg-[rgba(1,1,1,1)] rounded-[2px] px-0.5">
                         <span className="skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px]">{label}</span>
@@ -149,7 +161,7 @@ export default function Desktop() {
                 }}
                 className="overflow-hidden flex justify-between"
             >
-                <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-4">
+                <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
                     {productLinks.map((app, index) => (
                         <li key={app.label + index} className="w-[110px] flex justify-center">
                             <ZoomHover>
@@ -173,7 +185,7 @@ export default function Desktop() {
                     ))}
                      */}
                 </ul>
-                <ul className="p-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
+                <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
                     {apps.map((app, index) => (
                         <li key={app.label + index} className="w-[110px] flex justify-center">
                             <ZoomHover>

@@ -24,6 +24,85 @@ export const BaseIcon: IconComponent<BaseIconProps> = forwardRef(function BaseIc
     )
 })
 
+// App icon mapping for different skins
+type AppIconVariants = {
+    classic?: string
+    modern?: string
+    default: string
+}
+
+type AppIconName = 'doc' | 'pricing' | 'product' | 'tour' | 'roadmap' | 'forums' | 'games' | 'photobooth'
+
+const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
+    doc: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Docs_ed01f08328.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Docs_f752a9ef9c.png'
+    },
+    pricing: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/pricing_b461c2e5dd.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/pricing_14fb927a14.png'
+    },
+    product: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_001e7ec29a.png'
+    },
+    tour: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_8ae29710fc.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_ef3460d614.png'
+    },
+    roadmap: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/roadmap_3691544cec.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/roadmap_ac25f48fe0.png'
+    },
+    forums: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/forums_a48a37683e.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/forums_1937500564.png'
+    },
+    games: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/games_6931a0e3a5.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/games_43517d2a64.png'
+    },
+    photobooth: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/photobooth_db172dc28e.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/photobooth_16255818f6.png'
+    }
+}
+
+export interface AppIconProps extends IconProps {
+    name: AppIconName
+}
+
+export const AppIcon = ({ name, ...props }: AppIconProps) => {
+    const getCurrentSkin = (): string => {
+        if (typeof localStorage !== 'undefined') {
+            return localStorage.getItem('skin') || 'modern'
+        }
+        return 'modern'
+    }
+
+    const getIconUrl = (iconName: AppIconName): string => {
+        const iconVariants = PRODUCT_ICON_MAP[iconName]
+        if (!iconVariants) {
+            console.warn(`AppIcon: Unknown icon name "${iconName}"`)
+            return ''
+        }
+
+        const currentSkin = getCurrentSkin()
+        
+        // Check if the current skin has a specific variant
+        if (currentSkin in iconVariants) {
+            return iconVariants[currentSkin as keyof AppIconVariants] || iconVariants.default
+        }
+        
+        // Fall back to default
+        return iconVariants.default
+    }
+
+    const iconUrl = getIconUrl(name)
+    
+    return <IconImage url={iconUrl} {...props} />
+}
+
 export interface IconImageProps extends IconProps {
     url: string
 }
