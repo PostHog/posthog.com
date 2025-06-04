@@ -9,6 +9,7 @@ import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
 import Confetti from 'react-confetti'
 import usePostHog from 'hooks/usePostHog'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 function BAAGenerator() {
     const [companyName, setCompanyName] = useState('')
@@ -17,9 +18,12 @@ function BAAGenerator() {
     const [email, setEmail] = useState('')
     const [isFormComplete, setIsFormComplete] = useState(false)
     const [submitted, setSubmitted] = useState(false)
-    const [confetti, setConfetti] = useState(true)
+    const [showConfetti, setShowConfetti] = useState(false)
+    
+    const posthog = usePostHog()
 
     const handleBaaSubmit = (e: React.FormEvent) => {
+        e.preventDefault()
         if (typeof posthog === 'undefined') return
         if (posthog === null) return
         if (typeof posthog.capture !== 'function') return
@@ -39,6 +43,36 @@ function BAAGenerator() {
             // fail silently
         }
         setSubmitted(true)
+        setShowConfetti(true)
+        // Hide confetti after 5 seconds
+        setTimeout(() => setShowConfetti(false), 5000)
+    }
+
+    const handleButtonClick = () => {
+        if (typeof posthog === 'undefined') return
+        if (posthog === null) return
+        if (typeof posthog.capture !== 'function') return
+        try {
+            fetch('/api/baa-export-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    companyName,
+                    yourName,
+                    yourTitle,
+                    email,
+                    distinctId: posthog?.get_distinct_id?.() || undefined,
+                }),
+            })
+        } catch (e) {
+            // fail silently
+        }
+        setSubmitted(true)
+        setShowConfetti(true)
+        // Hide confetti after 5 seconds
+        setTimeout(() => setShowConfetti(false), 5000)
+        // Smooth scroll to top of page
+        window.scrollTo({ top: 0, behavior: 'smooth' })
     }
 
     const handleReset = () => {
@@ -47,6 +81,7 @@ function BAAGenerator() {
         setYourTitle('')
         setEmail('')
         setSubmitted(false)
+        setShowConfetti(false)
     }
 
     useEffect(() => {
@@ -59,10 +94,11 @@ function BAAGenerator() {
             parent={sexyLegalMenu}
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase().includes('baa'))}
         >
+            {showConfetti && <Confetti recycle={false} numberOfPieces={1000} />}
             <SEO
                 title="BAA Generator"
-                description="PostHog's Business Associate Agreement (BAA) generator."
-                image={`/images/og/dpa.png`}
+                description="PostHog's Business Associate Agreement (BAA) generator"
+                image={`/images/og/baa.png`}
             />
 
             <header className="print:hidden text-center mt-8">
@@ -74,7 +110,25 @@ function BAAGenerator() {
                 </h2>
             </header>
 
-            <section className="grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 gap-4">
+            <section className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent dark:bg-accent-dark rounded px-8 pb-8 border border-light dark:border-dark mb-24 ${submitted ? 'block' : 'hidden'}`}>
+
+                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_f7fd07d80b.png" alt="Legal hog" className="w-64" />
+                
+                <h1 className="text-3xl font-bold text-green">BAA request received</h1>
+                <p className="text-center">
+                Thanks for submitting your information. If you subscribe to our Scale or Enterprise add-on, we'll get back
+                to you soon to finalize the agreement.
+                </p>
+                <p className="text-center mb-0">
+                    If you have any questions (or don't hear back), please contact{' '}
+                    <a href="mailto:privacy@posthog.com" className="text-primary underline">
+                        privacy@posthog.com
+                    </a>
+                    .
+                </p>
+            </section>
+
+            <section className={`grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 gap-4 ${submitted ? 'hidden' : 'block'}`}>
                 <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:overflow-auto md:sticky top-0">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
@@ -92,35 +146,14 @@ function BAAGenerator() {
                     </div>
                     <p className="text-sm mb-2">We'll populate your BAA with this information.</p>
                     <p className="text-sm">
-                        After completing this form, we'll prep it in PandaDoc where we'll sign and send a copy by email for counter-signature.
+                        After completing this form, we'll be in touch to finalize the details.
                     </p>
                     <p className="text-sm">
-                        Important: you'll need to be subscribed to our <Link to="/platform-addons#scale-add-on">Scale</Link> or <Link to="/platform-addons#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
+                        Important: You'll need to be subscribed to our <Link to="/platform-addons#scale-add-on">Scale</Link> or <Link to="/platform-addons#enterprise-add-on">Enterprise</Link> add-on to get a BAA.
                     </p>
 
-                    {submitted ? (
-                        <>
-                            {confetti && (
-                                <div className="fixed inset-0 z-50 pointer-events-none">
-                                    <Confetti
-                                        onConfettiComplete={() => setConfetti(false)}
-                                        recycle={false}
-                                        numberOfPieces={800}
-                                    />
-                                </div>
-                            )}
-                            <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-6 rounded-md mt-4">
-                                <h4>
-                                    ✅ <strong>BAA request received!</strong>
-                                </h4>
-                                <p className="mb-0">
-                                    Thanks for submitting your information. If you're on our Teams Plan, we'll get back
-                                    to you soon to finalize the agreement.
-                                </p>
-                            </div>
-                        </>
-                    ) : (
-                        <form onSubmit={handleBaaSubmit}>
+                    {!submitted && (
+                        <form>
                             <div className="grid grid-cols-5 gap-2 items-center mt-4">
                                 <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
                                     Company name
@@ -187,7 +220,7 @@ function BAAGenerator() {
                                     {isFormComplete ? (
                                         <>
                                             <h4 className="text-base mb-1">Ready to send?</h4>
-                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information to PandaDoc where we'll sign and email to you for counter-signature.</p>
+                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information and we'll get in touch to finalize the details.</p>
                                         </>
                                     ) : (
                                         <>
@@ -205,11 +238,13 @@ function BAAGenerator() {
                                     type="primary"
                                     size="sm"
                                     disabled={!isFormComplete}
-                                    onClick={handleBaaSubmit}
+                                    onClick={handleButtonClick}
                                     className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
                                 >
-                                    <IconSend className="size-5" />
-                                    <span>Send for signature</span>
+                                    <span className="flex items-center gap-2">
+                                        <IconSend className="size-5" />
+                                        <span>Send for signature</span>
+                                    </span>
                                 </TrackedCTA>
                             </span>
                         </Tooltip>
@@ -244,7 +279,7 @@ function BAAGenerator() {
                             ("Covered Entity") and <strong>PostHog, Inc.</strong> ("Business Associate").
                         </p>
                         <p>
-                            This Agreement is effective as of the date signed by Covered Entity’s representative,{' '}
+                            This Agreement is effective as of the date signed by Covered Entity's representative,{' '}
                             <Tooltip
                                 content={() => (
                                     <>
@@ -302,23 +337,23 @@ function BAAGenerator() {
                         </p>
                         <p><strong>Business Associate Agreement — PostHog Inc.</strong></p>
                         <p>
-                            This Business Associate Amendment (this “BAA”), effective as of the date electronically
-                            agreed and excepted by you (the “BAA Effective Date”), is entered into by and between
-                            Posthog Inc (“PostHog”, “we”, or “us”) and the party that electronically accepts or
-                            otherwise agrees or opts-in to this BAA (“Customer”, or “you”).
+                            This Business Associate Amendment (this "BAA"), effective as of the date electronically
+                            agreed and excepted by you (the "BAA Effective Date"), is entered into by and between
+                            Posthog Inc (""PostHog", ""we"", or ""us"") and the party that electronically accepts or
+                            otherwise agrees or opts-in to this BAA (""Customer"", or ""you"").
                         </p>
                         <p>
                             You have entered into one or more agreements with us (each, as amended from time to time, an
-                            “Agreement”) governing the provision of our real-time error tracking, crash reporting, and
-                            visibility service more fully described at posthog.com (the “Service”). This BAA will
-                            amend the terms of the Agreement to reflect the parties’ rights and responsibilities with
+                            "Agreement") governing the provision of our real-time error tracking, crash reporting, and
+                            visibility service more fully described at posthog.com (the "Service"). This BAA will
+                            amend the terms of the Agreement to reflect the parties' rights and responsibilities with
                             respect to the processing and security of your Protected Health Information (defined below)
                             under the Agreement. If you are accepting this BAA in your capacity as an employee,
                             consultant or agent of Customer, you represent that you are an employee, consultant or agent
                             of Customer, and that you have the authority to bind Customer to this BAA.
                         </p>
                         <p>
-                            This BAA applies only to PostHog’s processing of PHI for Customer in Customer’s capacity as
+                            This BAA applies only to PostHog's processing of PHI for Customer in Customer's capacity as
                             a Covered Entity or Business Associate.
                         </p>
                         <p>
@@ -331,41 +366,41 @@ function BAAGenerator() {
                             meaning ascribed to them by HIPAA.
                         </p>
                         <p>
-                            “HIPAA” means the Health Insurance Portability and Accountability Act of 1996 and
+                            "HIPAA" means the Health Insurance Portability and Accountability Act of 1996 and
                             regulations promulgated thereunder, and the HITECH Act;
                         </p>
                         <p>
-                            “HITECH Act” means the security provisions of the American Recovery and Reinvestment Act of
+                            "HITECH Act" means the security provisions of the American Recovery and Reinvestment Act of
                             2009, also known as the Health Information Technology for Economic and Clinical Health Act;
                         </p>
                         <p>
-                            “Protected Health Information” or “PHI” is any information, whether oral or recorded in any
+                            "Protected Health Information" or "PHI" is any information, whether oral or recorded in any
                             form or medium that is created, received, maintained, or transmitted by PostHog for or on
                             behalf of Customer pursuant to this BAA, that identifies an individual or might reasonably
-                            be used to identify an individual and relates to: (i) the individual’s past, present or
+                            be used to identify an individual and relates to: (i) the individual's past, present or
                             future physical or mental health; (ii) the provision of health care to the individual; or
                             (iii) the past, present or future payment for health care;
                         </p>
                         <p>
-                            “Secretary” shall refer to the Secretary of the U.S. Department of Health and Human
+                            "Secretary" shall refer to the Secretary of the U.S. Department of Health and Human
                             Services;
                         </p>
                         <p>
-                            “Unsecured PHI” shall mean PHI that is not rendered unusable, unreadable, or indecipherable
+                            "Unsecured PHI" shall mean PHI that is not rendered unusable, unreadable, or indecipherable
                             to unauthorized individuals through the use of a technology or methodology specified by the
                             Secretary (e.g., encryption). This definition applies to both hard copy PHI and electronic
                             PHI.
                         </p>
                         <p>
-                            “Teams Plan”shall mean the plan that The Customer must be paying for to receive coverage
+                            "Teams Plan"shall mean the plan that The Customer must be paying for to receive coverage
                             with a BAA.
                         </p>
                         <p><strong>Customer Assurances.</strong></p>
                         <p>Customer represents and warrants as follows:</p>
-                        <p>That it is a “Covered Entity” or a “Business Associate” as defined by HIPAA;</p>
+                        <p>That it is a "Covered Entity" or a "Business Associate" as defined by HIPAA;</p>
                         <p>
                             That it shall comply with HIPAA in its use of the Service, including utilizing tools made
-                            available in the Service to facilitate Customer’s compliance with HIPAA’s minimum necessary
+                            available in the Service to facilitate Customer's compliance with HIPAA's minimum necessary
                             requirement;
                         </p>
                         <p>
@@ -382,7 +417,7 @@ function BAAGenerator() {
                             and Agreement, or as required by law; (2) shall not use or disclose PHI in any manner that
                             violates applicable federal or state laws or would violate such laws if used or disclosed in
                             such manner by Customer; and (3) shall only use and disclose the minimum necessary PHI for
-                            its specific purposes. Customer agrees that PostHog may rely on Customer’s instructions to
+                            its specific purposes. Customer agrees that PostHog may rely on Customer's instructions to
                             determine if uses and disclosures meet this minimum necessary requirement.
                         </p>
                         <p>
@@ -414,12 +449,12 @@ function BAAGenerator() {
                         </p>
                         <p>
                             PostHog will ensure that any subcontractors that create, receive, maintain, or transmit PHI
-                            on PostHog’s behalf agree to the same restrictions and conditions that apply to PostHog with
+                            on PostHog's behalf agree to the same restrictions and conditions that apply to PostHog with
                             respect to such PHI.
                         </p>
                         <p>
                             Upon request of Customer or an individual, PostHog will promptly provide information to
-                            Customer as may be reasonably necessary to facilitate Customer’s compliance with its
+                            Customer as may be reasonably necessary to facilitate Customer's compliance with its
                             obligation to: (i) make available to requesting individuals a copy of any PHI about such
                             individuals held by PostHog in a designated record set, in accordance with 45 CFR 164.524;
                             (ii) amend PHI or records about the requesting individual held by PostHog in a designated
@@ -430,7 +465,7 @@ function BAAGenerator() {
                         <p>
                             In the event that any individual requests from PostHog access, amendment, or an accounting
                             of PHI, PostHog shall forward such request to Customer within five (5) business days.
-                            Customer shall be responsible for responding to the individual’s request and Customer agrees
+                            Customer shall be responsible for responding to the individual's request and Customer agrees
                             that PostHog may respond to the individual directing them to make such request to Customer.
                         </p>
                         <p>
@@ -440,10 +475,10 @@ function BAAGenerator() {
                         <p>
                             PostHog will make its internal practices, books, and records relating to the use and
                             disclosure of PHI received from, or created or received by PostHog on behalf of, Customer
-                            available to the Secretary for the purpose of determining Customer’s compliance with HIPAA.
+                            available to the Secretary for the purpose of determining Customer's compliance with HIPAA.
                         </p>
                         <p>
-                            To the extent that PostHog carries out Customer’s obligations under HIPAA regulations,
+                            To the extent that PostHog carries out Customer's obligations under HIPAA regulations,
                             PostHog will comply with the requirements of this Section 3 that apply to Customer in the
                             performance of such obligations.
                         </p>
@@ -457,7 +492,7 @@ function BAAGenerator() {
                             Both Parties are committed to complying with all federal and state laws governing the
                             confidentiality and privacy of health information, including, but not limited to, the
                             Standards for Privacy of Individually Identifiable Health Information found at 45 CFR Part
-                            160 and Part 164, Subparts A and E (collectively, the “Privacy Rule”); and
+                            160 and Part 164, Subparts A and E (collectively, the "Privacy Rule"); and
                         </p>
                         <p>
                             Both Parties intend to protect the privacy and provide for the security of Protected Health
@@ -474,8 +509,8 @@ function BAAGenerator() {
                             Termination.Customer may terminate this BAA upon written notice if PostHog materially
                             breaches a term of this BAA, and fails to cure the breach within thirty (30) days of
                             receiving written notice of it. PostHog may terminate this BAA upon written notice if
-                            Customer either: (i) agrees to restrictions that impact PostHog’s ability to perform its
-                            obligations under the Agreement; (ii) agrees to restrictions that increase PostHog’s cost of
+                            Customer either: (i) agrees to restrictions that impact PostHog's ability to perform its
+                            obligations under the Agreement; (ii) agrees to restrictions that increase PostHog's cost of
                             performance under this BAA or the Agreement; or (iii) fails to meets its obligations under
                             HIPAA. The Parties may also terminate this BAA upon mutual consent.
                         </p>

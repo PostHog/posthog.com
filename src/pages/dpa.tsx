@@ -11,6 +11,7 @@ import Tooltip from 'components/Tooltip'
 import subprocessors from '../data/subprocessors.json'
 import { sexyLegalMenu } from '../navs'
 import usePostHog from 'hooks/usePostHog'
+import Confetti from 'react-confetti'
 
 const IconPrint = ({ className = '' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
@@ -39,6 +40,8 @@ function DpaGenerator() {
     const [representativeEmail, setRepresentativeEmail] = useState('')
     const [mode, setMode] = useState('pretty')
     const [isFormComplete, setIsFormComplete] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [showConfetti, setShowConfetti] = useState(false)
     const divRef = useRef(null)
     const posthog = usePostHog()
 
@@ -177,25 +180,34 @@ function DpaGenerator() {
         setYourName('')
         setYourTitle('')
         setRepresentativeEmail('')
+        setIsSubmitted(false)
+        setShowConfetti(false)
     }
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMode(e.target.value)
+        const pageElement = document.querySelector('#page')
+        const headerElement = document.querySelector('header')
         const top =
             window.scrollY +
-            document.querySelector('#page')?.getBoundingClientRect().top -
-            document.querySelector('header')?.getBoundingClientRect().height
+            (pageElement?.getBoundingClientRect().top || 0) -
+            (headerElement?.getBoundingClientRect().height || 0)
         window.scrollTo({ top, behavior: 'smooth' })
     }
 
     // Determine if the current mode is a request mode
     const isRequestMode = mode === 'pretty' || mode === 'lawyer'
 
-    // Only use handleDpaSubmit for non PDF export modes
+    // Modified handleButtonClick to show confirmation instead of redirecting
     const handleButtonClick = () => {
         if (isRequestMode) {
             handleDpaSubmit()
-            window.location.href = '/legal-request'
+            setIsSubmitted(true)
+            setShowConfetti(true)
+            // Hide confetti after 5 seconds
+            setTimeout(() => setShowConfetti(false), 5000)
+            // Smooth scroll to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' })
         } else {
             handlePrint()
         }
@@ -207,6 +219,7 @@ function DpaGenerator() {
             parent={sexyLegalMenu}
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'dpa generator')}
         >
+            {showConfetti && <Confetti recycle={false} numberOfPieces={1000} />}
             <SEO
                 title="DPA generator"
                 description="PostHog's cutting-edge data processing agreement (DPA) generator"
@@ -228,7 +241,25 @@ function DpaGenerator() {
                 </h2>
             </header>
 
-            <section className="grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
+            <section className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent dark:bg-accent-dark rounded px-8 pb-8 border border-light dark:border-dark ${isSubmitted ? 'block' : 'hidden'}`}>
+
+                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_f7fd07d80b.png" alt="Legal hog" className="w-64" />
+                
+                <h1 className="text-3xl font-bold text-green">DPA request received</h1>
+                <p className="text-center">
+                    Our legal hogs are working on generating a legal document for you. You should receive an email from
+                    PandaDoc in the next 24 hours.
+                </p>
+                <p className="text-center mb-0">
+                    If you have any questions (or don't hear back), please contact{' '}
+                    <a href="mailto:privacy@posthog.com" className="text-primary underline">
+                        privacy@posthog.com
+                    </a>
+                    .
+                </p>
+            </section>
+
+            <section className={`grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4 ${isSubmitted ? 'hidden' : 'block'}`}>
                 <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-108px)] md:overflow-auto md:sticky top-0 reasonable:top-[108px] print:hidden">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
@@ -404,7 +435,7 @@ function DpaGenerator() {
                                         {mode === 'pretty' || mode === 'lawyer' ? (
                                             <>
                                             <h4 className="text-base mb-1">Ready to send?</h4>
-                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information to PandaDoc where we'll sign and email to you for counter-signature.</p>
+                                            <p className="mb-0 text-[15px]">Clicking this button will submit your information to PandaDoc where we'll sign it and email it to you for a counter-signature.</p>
                                             
                                             </>
                                         ) : (
@@ -434,8 +465,10 @@ function DpaGenerator() {
                                     onClick={handleButtonClick}
                                     className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
                                 >
-                                    <IconSend className="size-5" />
-                                    <span>Send for signature</span>
+                                    <span className="flex items-center gap-2">
+                                        <IconSend className="size-5" />
+                                        <span>Send for signature</span>
+                                    </span>
                                 </TrackedCTA>
                             </span>
                         </Tooltip>
@@ -1212,7 +1245,7 @@ function DpaGenerator() {
                         </div>
                         <p>
                             10.4.4. for the purposes of clause 13 and Annex I.C, the competent supervisory authority
-                            shall be determined in accordance with the GDPR, based on the data exporter’s
+                            shall be determined in accordance with the GDPR, based on the data exporter's
                             establishment or representative within the EEA.
                         </p>
                         <p>
@@ -1521,9 +1554,9 @@ function DpaGenerator() {
                     </p>
                     <p>
                         See{' '}
-                        <Link href="https://posthog.com/handbook/company/security">
+                        <a href="https://posthog.com/handbook/company/security" target="_blank" rel="noopener noreferrer">
                             https://posthog.com/handbook/company/security
-                        </Link>
+                        </a>
                     </p>
 
                     <p className="text-center mt-12 !mb-0 !pb-0 [page-break-before:always]">
@@ -1552,13 +1585,14 @@ function DpaGenerator() {
                                     <div className="pt-2">
                                         <strong>Details</strong>
                                         <br />
-                                        <Link
+                                        <a
                                             href={subprocessor.details}
-                                            externalNoIcon
+                                            target="_blank"
+                                            rel="noopener noreferrer"
                                             className="[word-break:break-word]"
                                         >
                                             {subprocessor.details}
-                                        </Link>
+                                        </a>
                                     </div>
                                 </div>
                                 <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
