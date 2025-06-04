@@ -34,7 +34,7 @@ posthog.capture('user_signed_up', {
 **In-context example:**
 ```js
 // Importing PostHog into the app
-const posthog = require('posthog-node') // TIP: 
+const posthog = require('posthog-node')
 
 app.post('/api/signup', async (req, res) => {
   const { email, password } = req.body
@@ -42,7 +42,7 @@ app.post('/api/signup', async (req, res) => {
   try {
     const user = await createUser({ email, password })
     // Calling PostHog inside business logic
-    posthog.capture({ // TIP: 
+    posthog.capture({ 
         distinctId: user.id, 
         event: 'user_signed_up',
         properties: {
@@ -56,7 +56,7 @@ app.post('/api/signup', async (req, res) => {
 })
 ```
 
-The in-context example is longer but more useful. It shows how PostHog fits into application logic, which helps developers understand *when* and *how* to use it. Concerns about length can be addressed with UI features like syntax highlighting, collapsible code blocks, and inline comments to keep code scannable.
+The in-context example is more verbose but more useful. It shows how PostHog fits into application logic, which helps developers understand *when* and *how* to use it. Concerns about length can be addressed with UI features like syntax highlighting, collapsible code blocks, and inline comments to keep code scannable.
 
 ### 2. Treat docs like a product 
 
