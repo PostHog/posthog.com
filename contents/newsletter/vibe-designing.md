@@ -225,7 +225,6 @@ The wireframe looks great. Now translate it into production-ready UI that blends
 - No inline styles; stick to Tailwind utility classes already in the codebase.
 ```
 
---- FROM HERE
 ### b. Building a brand newIf you're designing a new app
 
 With no legacy design language, we need to create just enough scaffolding to keep the LLM from wandering into neon gradients and Comic Sans. 
@@ -400,7 +399,7 @@ Ship early. Ship even if it's rough. Just **ship**. Real users will teach you mo
  
 ## TL;DR
  
- TODO 
+TODO: redo this section
 
 You don't need a designer to build great UI. You need:
 
