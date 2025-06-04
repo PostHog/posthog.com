@@ -8,12 +8,14 @@ import {
     IconPiggyBank,
     IconStack,
     IconVideoCamera,
+    IconRewindPlay,
 } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
 import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons/Icons'
 import ZoomHover from 'components/ZoomHover'
+import Screenshot from 'components/Screenshot'
 
 interface AppItem {
     label: string
@@ -154,6 +156,17 @@ export default function Desktop() {
                         "url('https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png')",
                 }}
             />
+
+            <div className="hidden">
+                <Screenshot 
+                    product="Session replay"
+                    slug="session-replay" 
+                    icon={<IconRewindPlay />} 
+                    order={1}
+                    className={``} 
+                />
+            </div>
+            
             <nav
                 style={{
                     // paddingTop: `${taskbarHeight}px`,
