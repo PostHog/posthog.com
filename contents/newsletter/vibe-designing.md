@@ -74,7 +74,7 @@ In the case of BugSplat, here's what I found when I researched similar products:
 | GitHub Projects | • xyz                | • xyz                  |
 | Height          | • xyz            | • xyz          |
 
-## Step 3. Wireframe the vibe
+## Step 3. Wireframe the vibe (alt: Create a wireframe)
 
 You should now have a strong opinion of how you want your app to look and feel. The next step is wireframe it to see how the UX holds together.
 
@@ -106,7 +106,7 @@ Prioritize: <clarity, speed, minimal steps, mobile-first, etc.>
 
 ## Tech stack
 
-<Your preferred tech stack>
+<Your preferred tech stack, component libraries, etc.>
 
 ## Inspiration from Competitors
 
@@ -163,6 +163,7 @@ Prioritize: speed, clarity, zero-fat UX
 
 Next.js
 Tailwind
+Shadcn
 
 ## Inspiration from Competitors
 
@@ -190,102 +191,56 @@ Tailwind
 
 ![https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_03_at_11_55_51_AM_39f58a4ef2.png](Wireframe of BugSplat)
 
-## Step 4. Add your existing code context (Optional)
+## Step 4. Add in the details (need better title)
 
-Once you're happy with the wireframes, the next step is to
+Once you're happy with the wireframes, the next step is to make it look and feel like a real product. How you approach this depends on whether you're adding a feature to an existing app or building something completely new.
 
-If you're designing a feature that you're adding to an existing app, 
+### a. Slotting into an existing app:
 
+When you’re starting from nothing, the trick is to give the LLM just enough direction so it can’t wander off into neon gradients and Comic Sans
 
-Next, gather the files that you'll attach to your prompt. LLMs can generate much better UI when they understand your app's existing design system and context. Good files to include are:
+Prompt the LLM that has your wireframe to add in the UI details of your app. They can generate much better UI's when they understand your app's existing design system and context, so you need to include the following types of files in your prompt:
 
+- **UI components** e.g `components/ui/button`, `input`, `card` – for core interaction patterns.
+- **Layout primitives** e.g. `layout/containr`, `grid` – to show how you handle spacing and structure.
+- **Design tokens** e.g.  `tailwind.config.js`, `theme.js` – for colors, typography, and spacing.
+- **Page layouts** e.g. `layouts/app-layout`, `dashboard-layout` - shows how full pages are composed with header, sidebar, content, etc.
+- **Real screens** e.g. `pages/settings`, `user-profile` – demonstrates how it all comes together in practice.
+
+And here's a prompt you can use: 
+
+```md
+The wireframe looks great. Now translate it into production-ready UI that blends seamlessly with our existing app.
+
+### Attachments
+- tailwind.config.js – design tokens  
+- components/ui/* – buttons, inputs, cards  
+- layout/* – containers, grids  
+- layouts/* – page shells  
+- pages/settings.tsx, user-profile.tsx – density, tone, & copy reference  
+
+### Constraints
+- Re-use existing components where possible  
+- No new colors, fonts, or spacing values outside `tailwind.config.js`.  
+- No inline styles; stick to Tailwind utility classes already in the codebase.
+```
+
+--- FROM HERE
+### b. Building a brand new app
+
+With no legacy design language, we need to create just enough scaffolding to keep the LLM from wandering into circus‑poster aesthetics.
+
+How to pick. 
 Color theme:
 Colors you want: Primary button, secondary button, primary text, secondary
 
-- **UI components** – e.g. `components/ui/button`, `input`, `card` , custom [shadcn/ui](https://ui.shadcn.com/) components 
-  Defines your core visual and interaction patterns.
-- **Layout primitives** – e.g. `layout/container`, `grid`, `flex-wrapper`  
-  Shows how you handle spacing and structure.
-- **Design tokens** – e.g. `tailwind.config.js`, `theme.js`  
-  Sets your colors, typography, and spacing scale.
-- **Page layouts** – e.g. `layouts/app-layout`, `dashboard-layout`  
-  Shows how full pages are composed—header, sidebar, content.
-- **Real screens** – e.g. `pages/settings`, `user-profile`  
-  Demonstrates how everything comes together in practice.
-
-Now pull it all together with a focused, detailed prompt. Here's a simple template you can adapt:
-
-```md
-The wireframe looks good. Now match the look and feel of my existing product. 
-
-I've included:  
-
-- `tailwind.config.js` – for design tokens (colors, spacing, typography)  
-- `components/ui/button`, `input`, `card` – core reusable components  
-- `layout/container`, `grid`, `flex-wrapper` – layout primitives  
-- `layouts/app-layout`, `dashboard-layout` – page structure  
-- `pages/settings`, `user-profile` – real examples of how everything comes together  
-
-Use these files as references for styling, structure, and component reuse.
-```
-
-Now pull it all together with a focused, detailed prompt. Here's a simple template you can adapt:
-
-```md
-## Existing System  
-Match the look and feel of my existing product. I've included:  
-
-- `tailwind.config.js` – for design tokens (colors, spacing, typography)  
-- `components/ui/button`, `input`, `card` – core reusable components  
-- `layout/container`, `grid`, `flex-wrapper` – layout primitives  
-- `layouts/app-layout`, `dashboard-layout` – page structure  
-- `pages/settings`, `user-profile` – real examples of how everything comes together  
-
-Use these files as references for styling, structure, and component reuse.
-```
-
-Now pull it all together with a focused, detailed prompt. Here's a simple template you can adapt:
-
-```md
-## Existing System  
-Match the look and feel of my existing product. I've included:  
-
-- `tailwind.config.js` – for design tokens (colors, spacing, typography)  
-- `components/ui/button`, `input`, `card` – core reusable components  
-- `layout/container`, `grid`, `flex-wrapper` – layout primitives  
-- `layouts/app-layout`, `dashboard-layout` – page structure  
-- `pages/settings`, `user-profile` – real examples of how everything comes together  
-
-Use these files as references for styling, structure, and component reuse.
-```
-
-Now pull it all together with a focused, detailed prompt. Here's a simple template you can adapt:
-
-```md
-## Existing System  
-Match the look and feel of my existing product. I've included:  
-
-- `tailwind.config.js` – for design tokens (colors, spacing, typography)  
-- `components/ui/button`, `input`, `card` – core reusable components  
-- `layout/container`, `grid`, `flex-wrapper` – layout primitives  
-- `layouts/app-layout`, `dashboard-layout` – page structure  
-- `pages/settings`, `user-profile` – real examples of how everything comes together  
-
-Use these files as references for styling, structure, and component reuse.
-```
-
-This should get you 90% of the way there. The final 10% is polishing your UI and interactions.
+What else to include for new apps?
 
 
 
+## Step 5. Polish the UI 
 
-
-
-
-
-## Step 4. Add your code context
-
-Once you approve the wireframes, layer in colour, motion, and micro-interactions. There are a few ways to do this:
+You should now be 90% of the way there. The final 10% is polishing your UI and interactions.
 
 Polished design isn't magic. It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
 
@@ -325,19 +280,11 @@ Every element on the screen has visual weight. If there's too much weight on one
 
 ![Design principles for software engineers](https://res.cloudinary.com/dmukukwp6/image/upload/ui_1dffe05d0e.png)
 
-## Step 5. Polish the UI 
-
-## Step 6 Tweak your colors 
-### 5.1 A note on colors: If you're building a new app, here are the colors you need. You can start with a template
-
-### 4.2 Run a context-rich prompt
 
 
 
 
-
-
-## Step 5: Ship it and iterate
+## Step 6: Ship it and iterate
 
 Ship early. Ship even if it's rough. Just **ship**. Real users will teach you more in one session than any internal review or gut check ever will/
 
