@@ -25,6 +25,7 @@ The search bar provides two modes of filtering:
 You add a property filter by clicking the property name shown here:
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_1d7490b403.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_dark_dd03d08aa5.png"
   alt="Adding a property to the property filter
   classes="rounded"
 />
@@ -32,6 +33,7 @@ You add a property filter by clicking the property name shown here:
 and added property filters look like this:
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/added_property_filter_1e823a16e9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/property_filter_added_dark_2d4c065baa.png"
   alt="Search bar with property filter"
   classes="rounded"
 />
@@ -73,6 +75,7 @@ Here's an example from our own systems. As you can see, I've selected a recent o
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/unfiltered_exception_list_8cdbf735c0.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/exception_list_unfiltered_dark_200b8be303.png"
   alt="An issue, with an unfiltered exception list"
   classes="rounded"
 />
@@ -81,6 +84,7 @@ Here, I've added a property filter for a property I think will be useful for my 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filtered_exception_list_7b51efa94f.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/exception_list_filtered_dark_70a70d9ce9.png"
   alt="An issue, with a filtered exception list"
   classes="rounded"
 />
