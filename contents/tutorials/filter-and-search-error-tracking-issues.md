@@ -12,11 +12,11 @@ tags:
 
 ## What is an issue?
 
-In the error tracking tool, exception events are grouped into issues, based on the information in the exception, such as the exception type, message, and stack trace. Which information is used for this grouping depends on what information is available, and is subject to change as we try to improve our grouping algorithm - if you spot two issues that you think should have been one, or one issue that you think should have been split into two, please let us know!
+Exception events are grouped into issues, based on the information on the event, such as the exception type, message, and stack trace. What's used for grouping depends on what information is available, and will change as we try to improve our grouping algorithm - if you spot two issues that you think should have been one, or one issue that you think should have been split into two, please let us know!
 
-## Finding specific issues with the search bar
+## Finding specific issues
 
-When looking for a particular issue, you can use the search bar at the top of the issue page to filter issues based on the properties of the exceptions in that issue. This means, for example, if you search for "TypeError", we'll show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you may see search results that seem unrelated to your search term, but it's due to at least one exception in the issue group matching your search.
+You can use the search bar at the top of the issue page to filter issues based on the properties of the exceptions in that issue. This means, for example, if you search for "TypeError", we'll show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you might see search results that seem unrelated to your search term, but that match it due to at least one exception in the issue group matching your search.
 
 The search bar provides two modes of filtering:
 - Exact property filtering, which operates like property filters elsewhere in PostHog, allowing you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
@@ -61,16 +61,15 @@ TypeError: Cannot read property 'name' of undefined
     at bootstrap_node.js:625:3
 ```
 
-and you search for the term `TypeError myfile.js`. The exception will match this search, as it contains `TypeError` (as the exception type) and `myfile.js` (as a file path in the stack trace). If you searched for `TypeError myfile.js abc`, the exception would not match, as the token `abc` does not appear anywhere in freeform search properties. If you want to search for longer strings, e.g. a particular exception message, you can group tokens into a single term using quotes, e.g. `"Cannot read property 'name' of undefined" myfile.js` would match, and `"Cannot read property of myfile.js"` would not, but `Cannot read property of myfile.js` would (because the tokens are ungrouped, and all of them appear *somewhere* in the exception search properties).
+and you search for the term `TypeError myfile.js`. The exception matches this search, as it contains `TypeError` (as the exception type) and `myfile.js` (as a file path in the stack trace). If you searched for `TypeError myfile.js abc`, the exception would not match, as the token `abc` does not appear anywhere in freeform search properties. If you want to search for longer exact strings, e.g. a particular exception message, you can group tokens into a single term using quotes, e.g. `"Cannot read property 'name' of undefined" myfile.js` would match, and `"Cannot read property of myfile.js"` would not. Note, perhaps unintuitively, `Cannot read property of myfile.js` would match, because the tokens are ungrouped, and all of them appear *somewhere* in the exception search properties.
 
-Keep in mind that exception events can have more than one exception in them, due to exception chaining or similar language features, and for the purpose of search, we put the types, messages, functions and file paths of all exceptions into one list, and match if the token appears in any of them. For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read name` would match the exception, because it matches *one* of the exception messages (the "root" one).
+Keep in mind that exception events can have more than one exception in them, due to language features like exception chaining. For freeform search, we put the types, messages, functions and file paths of all exceptions into one list, and match if the token appears in any of them. For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read name` would match the exception, because it matches *one* of the exception messages (`name` appears in the "root" one).
 
-## Filtering exception occurrences within an issues
+## Filtering exception occurances within an issue
 
 Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list (pictured here, below the issue details), in order to e.g. search for a particular instance of the issue that you want to investigate further. This is particularly useful in cases where, for example, some exceptions in the issue have information others don't, and you want to use that information for debugging.
 
-
-Here's an example from our own systems. As you can see, I've selected a recent occurrence of this issue, to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
+Here's an example from our own systems. As you can see, I've selected a recent occurence of this issue, to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/unfiltered_exception_list_8cdbf735c0.png"
