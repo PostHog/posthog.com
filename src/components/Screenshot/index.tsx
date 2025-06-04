@@ -8,10 +8,11 @@ interface ScreenshotProps {
   product: string
   slug: string
   order: number
+  src: string
   className?: string
 }
 
-export const Screenshot = ({ icon, product, slug, order, className = '' }: ScreenshotProps): JSX.Element => {
+export const Screenshot = ({ icon, product, slug, order, src, className = '' }: ScreenshotProps): JSX.Element => {
   const posthog = usePostHog()
   const region = posthog?.getFeatureFlag?.('are-you-in-the-eu') ? 'eu' : 'us'
 
@@ -273,7 +274,7 @@ export const Screenshot = ({ icon, product, slug, order, className = '' }: Scree
           <use xlinkHref="#n" transform="matrix(.00833 0 0 .01286 0 -.079)" />
         </pattern>
         {/* product screenshot */}
-        <image xlinkHref={`/images/products/${slug}/screenshot.png`} id="n" width="120" height="90" />
+        <image xlinkHref={src} id="n" width="120" height="90" />
       </defs>
     </svg>
   )

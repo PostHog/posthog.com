@@ -108,23 +108,23 @@ const apps: AppItem[] = [
 
 const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
-    
+
     const renderIcon = () => {
         if (typeof Icon === 'string') {
             return <IconImage url={Icon} className={`size-7 text-${color} ${className}`} />
         }
-        
+
         if (React.isValidElement(Icon)) {
-            return React.cloneElement(Icon as React.ReactElement<any>, { 
-                className: `size-7 text-${color} ${className}` 
+            return React.cloneElement(Icon as React.ReactElement<any>, {
+                className: `size-7 text-${color} ${className}`
             })
         }
-        
+
         // Icon is a ComponentType
         const IconComponent = Icon as React.ComponentType<any>
         return <IconComponent className={`size-7 text-${color} ${className}`} />
     }
-    
+
     return (
         <span ref={ref}>
             <Link
@@ -158,15 +158,15 @@ export default function Desktop() {
             />
 
             <div className="hidden">
-                <Screenshot 
+                <Screenshot
                     product="Session replay"
-                    slug="session-replay" 
-                    icon={<IconRewindPlay />} 
+                    slug="session-replay"
+                    icon={<IconRewindPlay />}
                     order={1}
-                    className={``} 
+                    className={``}
                 />
             </div>
-            
+
             <nav
                 style={{
                     // paddingTop: `${taskbarHeight}px`,

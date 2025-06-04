@@ -40,9 +40,10 @@ export default function SessionReplay(): JSX.Element {
                 <Screenshot
                     product="Session replay"
                     slug="session-replay"
-                    icon={<IconRewindPlay />}
+                    icon={<IconRewindPlay className="text-yellow" />}
                     order={1}
                     className={``}
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
                 />
 
                 <Product
