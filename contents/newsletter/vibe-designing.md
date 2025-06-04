@@ -76,6 +76,8 @@ In the case of BugSplat, here's what I found when I researched similar products:
 
 ## Step 3. Wireframe the vibe (alt: Create a wireframe)
 
+![wireframe comic](https://res.cloudinary.com/dmukukwp6/image/upload/450722371_e3385ec7_3daa_4499_a356_8e4486a1a69a_087c55fabb.png)
+
 You should now have a strong opinion of how you want your app to look and feel. The next step is wireframe it to see how the UX holds together.
 
 Tools like Lovable can get you to a working wireframe fast. All you need is right prompt. Here's a template of what I like to use:
@@ -197,8 +199,6 @@ Once you're happy with the wireframes, the next step is to make it look and feel
 
 ### a. Slotting into an existing app:
 
-When you’re starting from nothing, the trick is to give the LLM just enough direction so it can’t wander off into neon gradients and Comic Sans
-
 Prompt the LLM that has your wireframe to add in the UI details of your app. They can generate much better UI's when they understand your app's existing design system and context, so you need to include the following types of files in your prompt:
 
 - **UI components** e.g `components/ui/button`, `input`, `card` – for core interaction patterns.
@@ -226,63 +226,167 @@ The wireframe looks great. Now translate it into production-ready UI that blends
 ```
 
 --- FROM HERE
-### b. Building a brand new app
+### b. Building a brand newIf you're designing a new app
 
-With no legacy design language, we need to create just enough scaffolding to keep the LLM from wandering into circus‑poster aesthetics.
+With no legacy design language, we need to create just enough scaffolding to keep the LLM from wandering into neon gradients and Comic Sans. 
 
-How to pick. 
-Color theme:
-Colors you want: Primary button, secondary button, primary text, secondary
+To start, you need to generate your app's core color palette. I like using [Coolors](https://coolors.co/) or [Figma's palette generator](https://www.figma.com/color-palette-generator/) for this. Once you have your core 4-6 colors, use an LLM to generate your core component colors e.g. button, primary text etc. Here's a prompt to do that for you:
 
-What else to include for new apps?
+```
+SYSTEM
+You are a senior design-system engineer whose job is to turn a raw color palette into a set of design-token “color roles” for a multiplatform app.  
+• Always meet WCAG 2.2 contrast (AA for body text, AAA for error text, 3 : 1 for icons ≥ 24 px).  
+• Never invent new hues outside the supplied palette unless asked. When tints/shades are needed, adjust L* in OKLCH (or HSL if OKLCH unavailable) while keeping hue & chroma stable.  
+• Output **pure JSON**, no comments, no Markdown.
+
+USER  
+Here is the brand palette you must work with (**coreColors**).  
+Generate the token set described under **tokenSpec** and return exactly the JSON structure shown under **schema**.
+
+coreColors <Replace with your own>:
+  seashell:        #EEE2DF
+  champagnePink:   #EED7C5
+  rosyBrown:       #C89F9C
+  burntSienna:     #C97C5D
+  redwood:         #B36A5E
+
+tokenSpec:
+  # Neutrals & text
+  - background
+  - textPrimary
+  - textSecondary
+
+  # Brand / accent
+  - accent
+  - accentPressed
+
+  # Secondary actions
+  - buttonSecondary
+  - buttonSecondaryPressed
+  - onButtonSecondary
+
+  # Interaction states
+  - focusRing
+  - border
+  - disabledControl
+  - onDisabled
+
+  # Links
+  - link
+
+  # System feedback
+  - error
+
+schema:
+{
+  "roleName": {
+    "hex": "<hex>",
+    "contrastTarget": "<role it must be readable against>"
+  },
+  ...
+}
+
+INSTRUCTIONS
+1. Map each role in **tokenSpec** to a hex from **coreSwatches** or a tint/shade derived from it.  
+2. Ensure every `text*` and `link` role meets at least **AA** contrast on its intended background (`background` for text, `buttonSecondary` for `onButtonSecondary`, etc.).  
+3. `error` must meet **AAA** contrast on `background`.  
+4. `accentPressed` and `buttonSecondaryPressed` should be ±6–12 % lighter/darker than their base roles.  
+5. `focusRing` must meet ≥ 3 : 1 contrast against whatever element it appears on.  
+6. Validate all contrast requirements and return **only** the JSON matching **schema**—no extra keys or explanatory text.
+```
 
 
+Then, take your generated color JSON and feed it back to Lovable along with 
 
-## Step 5. Polish the UI 
+```md
+The wireframe looks great. Now translate it into production-ready UI using the following design system:
+
+
+**Typography:** The font should be <clean/friendly/modern/warm/fun/neutral>  
+How should the type feel and function? Pick one:  
+- [ ] Clean and modern with clear hierarchy (e.g. Inter, SF Pro, Helvetica Neue)  
+- [ ] Friendly and warm with rounded edges (e.g. Nunito, Poppins, Quicksand)  
+- [ ] Tech-forward and utilitarian (e.g. Roboto, IBM Plex Sans, JetBrains Mono)  
+- [ ] Editorial and expressive (e.g. Georgia, Playfair, DM Serif)  
+- [ ] Highly legible for small UIs (e.g. Source Sans, Lato)  
+- [ ] [Custom]: `<insert font and tone>`  
+
+### Spacing scale  
+<How sharp or soft should components feel? Pick one:>  
+
+- [ ] Tight spacing (good for for dense UIs like tables, admin panels)  
+- [ ] Loose spacing (good for calm UIs)  
+- [ ] Standard/Neutral
+
+### Elevation / Shadows  
+<How sharp or soft should components feel? Pick one:>  
+
+- Minimal shadows, soft elevation (e.g. `shadow-sm`, light Material)  
+- Medium elevation with defined depth cues (e.g. hover cards, dialogs)  
+- Strong shadows for drama and hierarchy (e.g. dashboards, modals)  
+- No shadows – use outlines, contrast, or borders only  
+- Glassmorphism (blur + subtle shadows for futuristic feel)  
+
+### Borders & Radius  
+<How sharp or soft should components feel? Pick one:>  
+- [ ] Soft and approachable (rounded-xl, 12–16px)  
+- [ ] Lightly rounded (rounded-md, ~6px) for subtle friendliness  
+- [ ] Sharp and modern (0–2px radius)  
+- [ ] Card-like with border + radius + light shadow  
+- [ ] Neobrutalist: hard edges, visible outlines, minimal styling  
+
+### Sizing  
+What’s the ideal scale for your components and layout? Choose one:  
+- [ ] Touch-friendly (44px+ targets, comfortable paddings)  
+- [ ] Compact (tight controls, for expert users and data-dense screens)  
+- [ ] Big type and buttons (for mobile-first or accessibility-first design)  
+
+### Colors
+
+<The outputted json from your color palette prompt>
+```
+
+## Step 5. Final Polish 💅🏼
 
 You should now be 90% of the way there. The final 10% is polishing your UI and interactions.
 
 Polished design isn't magic. It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
 
-Here are seven foundational principles every engineer should know:
+Below are seven foundational principles every engineer should know. Go over your UI ensure your design adheres to it:
 
-1. **Hierarchy** – make what matters most impossible to miss.  
-2. **Contrast** – use size, weight, and colour to separate action from background.  
-3. **Consistency** – repeat patterns to remove micro-decisions.  
-4. **Alignment** – snap to a grid so the eye can glide, not stumble.  
-5. **Proximity** – group related things; separation is a hint they're unrelated.  
-6. **Balance** – distribute visual weight so the layout feels stable.  
-7. **Feedback** – every action should whisper *“yep, that worked.”*
-
-**1. Hierarchy**  
-Make the most important thing on the screen visually dominant. Use larger font sizes, bold weights, and more prominent positioning.  
+1. **Hierarchy** – make what matters most impossible to miss. 
+TODO add image explaining this with the tip 
 > 💡 **Tip**: Ask yourself *"What do I want the user to notice first?"*
 
-**2. Contrast**  
-Use color, size, and shape to differentiate elements. Ensure buttons and interactive elements stand out from the background.  
-> 💡 **Tip**: Test your layout in grayscale – if it still works, your contrast is good.  
+2. **Contrast** – use size, weight, and colour to separate action from background.
 
-**3. Consistency**  
-The more often a user sees the same layout, color, or interaction pattern, the less they have to think. Familiarity speeds them up. Inconsistent UI, on the other hand, makes every screen feel like a new puzzle.  
+TODO add image explaining this with the tip
+> 💡 **Tip**: Test your layout in grayscale – if it still works, your contrast is good.  
+  
+3. **Consistency** – repeat patterns to remove micro-decisions.  
+
+TODO add image explaining this with the tip
 > 💡 **Tip**: Treat every design decision as a chance to remove a micro-decision for the user.  
 
-**4. Alignment**  
-A clean visual structure helps users process content faster. When elements snap to a grid, the eye flows naturally. When they don't, the brain hesitates.  
+4. **Alignment** – snap to a grid so the eye can glide, not stumble.  
+
+TODO add image explaining this with the tip
 >  💡 **Tip**: Use a consistent grid system and check your edges. If one button is 3px off, fix it – it's breaking the vibe.
 
-**5. Proximity**  
-Place related elements close together. Labels should hug their inputs. Actions should live near their targets.  
->  💡 **Tip**: If two elements are related but far apart, group them or your user will miss the connection.
+5. **Proximity** – group related things; separation is a hint they're unrelated. 
 
-**6. Balance**  
-Every element on the screen has visual weight. If there's too much weight on one side,it feels lopsided. Distribute your text, imagery, and whitespace so the layout feels stable  
+TODO add image explaining this with the tip
+>  💡 **Tip**: If two elements are related but far apart, group them or your user will miss the connection.
+ 
+6. **Balance** – distribute visual weight so the layout feels stable.  
+
+TODO add image explaining this with the tip
 > 💡 **Tip**: Try the squint test—blur your eyes and see where the visual “weight” lands. If it clumps in one spot, rebalance.
 
+7. **Feedback** – every action should whisper *“yep, that worked.”*
+TODO add image explaining this with the tip
+
 ![Design principles for software engineers](https://res.cloudinary.com/dmukukwp6/image/upload/ui_1dffe05d0e.png)
-
-
-
-
 
 ## Step 6: Ship it and iterate
 
