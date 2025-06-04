@@ -59,17 +59,34 @@ One person on each product team takes on the **[Support Hero](/handbook/engineer
 
 ## Support isn't just about tickets
 
-Supporting our customers isn't just about solving tickets, and we don't judge the success of support engineers solely by how many tickets solve. Instead, we free up support engineers to spend at least one day a week as a _Support Zero_, when they can work on other tasks which help users. These tasks can include working on their quarterly goals, analyzing team performance, building new support features, tasks from our Big Ideas list, or whatever else they think will help us move faster. 
+Supporting our customers isn't just about solving tickets, and we don't judge the success of support engineers solely by how many tickets solve. Instead, we free up support engineers to spend at least one day a week as a _Support Zero_, when they can work on other tasks which help users. These tasks can include working on their quarterly goals, analyzing team performance, building new support features, tasks from our Big Ideas list, or whatever else they think will help us move faster.
+
+### Zero day rotation
 
 The current rotation for Support Zero is: 
 
-**Monday:** Nobody 
-**Tuesday:** <TeamMember name="Steven Shults" photo /> (NA) & <TeamMember name="Luke Belton" photo /> (EU)
-**Wednesday:** <TeamMember name="Joshua Ordehi" photo /> (NA)
-**Thursday:** <TeamMember name="Ben Haynes" photo /> (NA)
+**Monday:** Nobody <br>
+**Tuesday:** <TeamMember name="Steven Shults" photo /> (NA) & <TeamMember name="Luke Belton" photo /> (EU) <br>
+**Wednesday:** <TeamMember name="Joshua Ordehi" photo /> (NA) <br>
+**Thursday:** <TeamMember name="Ben Haynes" photo /> (NA) <br>
 **Friday:** <TeamMember name="Ben Lea" photo /> (EU)
 
-We may occasionally pause this rotation if we have a big initiative that needs more attention from one person, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to. 
+We may occasionally pause this rotation if we have a big initiative that needs more attention from one person, or if we need to focus on clearing a backlog of tickets. When you are Support Zero you should continue working on tickets that you're currently assigned to (or escalate/reassign as needed) but shouldn't take on new tickets unless you want to.
+
+### Nailing a zero day
+
+Customers are our number one priority! But, Support Zero days are our opportunity to continue building a better support experience away from directly solving customer problems. It's inevitable that on a zero day, there'll be some tickets that we've been working on that would breach their SLAs during the day. But we want to try and give as much space as possible to focus on zero day work, so here's a summary of how our team approaches and prepares for a zero day:
+
+- In advance - say for half a day before - and if the ticket queue allows it, we avoid taking on higher priority work or in-depth investigations. Consider shifting focus to 'quick win' tickets, or tickets where some initial information gathering from the customer is needed which another support engineer can then progress.
+- At the beginning of the day, triage any open tickets that are assigned to you. Internal ticket notes really help here! In roughly this order:
+  - likely you can delay any work on tickets that won't breach their SLA until the next day
+respond to any 'quick wins' - tickets that take under a few minutes to resolve
+  - consider un-assigning any tickets that will breach but need low enough context that another support engineer could reasonably continue with them (share context in an internal note if it helps!)
+  - use the 'Zero Day' Zendesk macro to send a holding response in cases where the customer can reasonably wait a day for a response - our customers are generally lovely and very understanding provided we keep them updated!
+  - respond to any remaining tickets because what's left is likely to be the stuff that really needs looking at!
+- During a zero day, check every few hours for any of your assigned tickets reopening, and which could need a fresh triage. Consider some notifications to alert you when your assigned tickets reopen??
+
+At the end of a zero day, we generally take a bit of time to think about what's next. This might mean making some notes so the work can be quickly picked up on your next zero day, or planning to present your work in the PostHog weekly all hands. Engineers at PostHog move fast and support zero days should be no exception - try to stay focussed on how you can ship your work as soon as possible!
 
 ## Response targets, SLAs, and CSAT surveys
 
