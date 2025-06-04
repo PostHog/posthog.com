@@ -67,11 +67,11 @@ and you search for the term `TypeError myfile.js`. The exception matches this se
 
 Keep in mind that exception events can have more than one exception in them, due to language features like exception chaining. For freeform search, we put the types, messages, functions and file paths of all exceptions into one list, and match if the token appears in any of them. For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read name` would match the exception, because it matches *one* of the exception messages (`name` appears in the "root" one).
 
-## Filtering exception occurances within an issue
+## Filtering exception occurrences within an issue
 
 Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list (pictured here, below the issue details), in order to e.g. search for a particular instance of the issue that you want to investigate further. This is particularly useful in cases where, for example, some exceptions in the issue have information others don't, and you want to use that information for debugging.
 
-Here's an example from our own systems. As you can see, I've selected a recent occurence of this issue, to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
+Here's an example from our own systems. As you can see, I've selected a recent occurrence of this issue, to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/unfiltered_exception_list_8cdbf735c0.png"
