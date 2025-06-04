@@ -597,6 +597,10 @@ function BAAGenerator() {
                                         </button>
                                     </span>
                                 </Tooltip></p>
+
+                                <p>Date</p>
+                                <p className="border-b border-black">&nbsp;</p>
+
                             </div>
 
 
@@ -611,6 +615,9 @@ function BAAGenerator() {
 
                                 <p>Title</p>
                                 <p className="border-b border-black">VP Operations</p>
+
+                                <p>Date</p>
+                                <p className="border-b border-black"><code>[Document.CreatedDate]</code></p>
                             </div>
                         </div>
                     </div>

@@ -137,6 +137,9 @@ function DpaGenerator() {
                     </Tooltip>
                 </p>
 
+                <p>Date</p>
+                <p className="border-b border-black">&nbsp;</p>
+
                 <p className="col-span-2 !mt-8">
                     <strong>PostHog, Inc.</strong>
                 </p>
@@ -149,6 +152,9 @@ function DpaGenerator() {
 
                 <p>Title</p>
                 <p className="border-b border-black w-full">VP Operations</p>
+
+                <p>Date</p>
+                <p className="border-b border-black"><code>[Document.CreatedDate]</code></p>
             </div>
         </>
     )
