@@ -75,7 +75,7 @@ We may occasionally pause this rotation if we have a big initiative that needs m
 
 ### Nailing a zero day
 
-Customers are our number one priority! But, Support Zero days are our opportunity to continue building a better support experience away from directly solving customer problems. It's inevitable that on a zero day there'll be some tickets that you've been working on that need attention, but we want to try and create as much space as possible for you to focus on zero day work. Here's a summary of how to approach and prepares for a zero day:
+Customers are our number one priority! But, Support Zero days are our opportunity to continue building a better support experience away from directly solving customer problems. It's inevitable that on a zero day there'll be some tickets that you've been working on that need attention, but we want to try and create as much space as possible for you to focus on zero day work. Here's a summary of how to approach and prepare for a zero day:
 
 - In advance - say for half a day before - and if the ticket queue allows it, we avoid taking on higher priority work or in-depth investigations. Consider shifting focus to 'quick win' tickets, or tickets where some initial information gathering from the customer is needed which another support engineer can then progress.
 - At the beginning of the day, triage any open tickets that are assigned to you. Internal ticket notes really help here! In roughly this order:
