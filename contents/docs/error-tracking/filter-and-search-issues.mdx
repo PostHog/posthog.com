@@ -8,19 +8,19 @@ showTitle: true
 
 Exception events are grouped into issues based on event information, such as the exception type, message, and stack trace. The data used for grouping depends on what is available. 
 
-We're working on improving our group algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue). Bear in mind that you can also combine two issues by [merging them](/docs/error-tracking/monitoring#merging-issues).
 
 ## Finding specific issues
 
 You can use the search bar at the top of the [issue page](https://us.posthog.com/error_tracking) to filter issues based on the properties of the exceptions in that issue.
 
-For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you might see seemingly unrelated search results that  match due to one exception in the issue group matching your search.
+For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you might see seemingly unrelated search results that match due to one exception in the issue group matching your search.
 
 The search bar provides two modes of filtering:
 
 - Exact property filtering, which operates like property filters elsewhere in PostHog, enabling you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
 
-- Freeform text search, which does text matching for a subset of the error tracking specific properties of the exception event.
+- [Freeform text search](#freeform-text-search), which does text matching for a subset of the error tracking specific properties of the exception event.
 
 You add a property filter by clicking the property name shown here:
 
@@ -77,7 +77,7 @@ Note, perhaps unintuitively, `Cannot read property of myfile.js` would match, be
 
 Exception events can have more than one exception in them, due to language features like exception chaining. For freeform search, we put the types, messages, functions and file paths of all exceptions into one list, and match if the token appears in any of them. 
 
-For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read name` would match the exception, because it matches *one* of the exception messages (`name` appears in the "root" one).
+For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read property` would match the exception, because it matches *one* of the exception messages (`property` appears in the "root" one).
 
 ## Filtering exception occurrences within an issue
 
@@ -92,7 +92,7 @@ Here's an example from our own systems. We select a recent occurrence of this is
   classes="rounded"
 />
 
-Here, we've added a property filter for a property we think will be useful for our debugging and can then easily select an occurrence that has that property set:
+Here, we've added a property filter on `http_referer`, which we think will be useful for our debugging and can then easily select an occurrence where that property is set:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filtered_exception_list_7b51efa94f.png"
