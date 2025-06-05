@@ -23,7 +23,7 @@ import { useLocation } from '@reach/router'
 import qs from 'qs'
 import Breadcrumbs from 'components/Edition/Breadcrumbs'
 import { CallToAction } from 'components/CallToAction'
-import { IconFilter, IconSort } from '@posthog/icons'
+import { IconFilter, IconSort, IconSpinner } from '@posthog/icons'
 import { NewsletterForm } from 'components/NewsletterForm'
 import BuiltBy from '../components/BuiltBy'
 import TeamMember from 'components/TeamMember'
@@ -392,6 +392,11 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                                 }
                             })}
                         />
+                        {hasMore && (
+                            <CallToAction size="sm" width="full" className="mt-2" onClick={() => fetchMore()}>
+                                {isValidating ? <IconSpinner className="size-4 mx-auto animate-spin" /> : 'Load more'}
+                            </CallToAction>
+                        )}
                     </>
                 }
                 body={{ type: 'mdx', content: body }}
