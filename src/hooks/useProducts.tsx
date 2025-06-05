@@ -40,6 +40,24 @@ const initialProducts = [
         },
         volume: 5000,
         slug: '/session-replay',
+        customers: {
+            hasura: {
+                headline: 'improved conversion rates by 10-20%',
+                description: 'We wouldn\'t have noticed that needed fixing without PostHog\'s session replays.'
+            },
+            elevenlabs: {
+                headline: 'uses replays and surveys when testing ideas',
+                description: 'We watch lots of replays when testing a feature, and love how easy it is to launch surveys'
+            },
+            netdata: {
+                headline: 'reduced back-and-forth in community support',
+                description: 'Session replay in PostHog is so much better than Smartlook, which we used to use.'
+            },
+            pry: {
+                headline: 'improved registrations by 20-30%',
+                description: 'We\'ve improved our whole onboarding flow by about 5% too, which is great.'
+            },
+        },
     },
     {
         Icon: IconToggle,
