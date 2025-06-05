@@ -340,7 +340,7 @@ You should now be 90% of the way there. The final 10% is polishing your UI and i
 
 Great design isn't magic. It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
 
-Below are seven foundational principles every engineer should know. Treat them like a vibe check – your UI should pass each one.
+Below are seven foundational principles every engineer should know. Your UI should pass each one.
 
 ![hiearrhy](https://res.cloudinary.com/dmukukwp6/image/upload/hierarchy_small_7b6410b9a6.png)
 
@@ -358,25 +358,24 @@ TODO images for:
 
 ## Step 6: Ship it and iterate
 
-Ship early. Ship even if it's rough. Just **ship**. Real users will teach you more in one session than any internal review or gut check ever will/
+Once your UI is in decent shape, get it in front of real users as soon as possible. You'll learn more from watching someone use it than from any internal review.
 
-- If you're nervous, ship behind a [feature flag](/newsletter/feature-flag-mistakes) to a handful of friendly users.
-- Use [session replay](/session-replay) to see where people hesitate, rage click, or get stuck.
-- Track funnels to know whether your UX is actually working.
-- Talk to real users. Ask what felt slow, confusing, or unnecessary.
-- Keep iterating. One small fix at a time compounds fast.
+Here’s how to ship safely and learn fast:
+
+- **Use a [feature flag](https://newsletter.posthog.com/p/dont-make-these-classic-feature-flag)** to launch to a small group of trusted users first. It lowers the stakes and buys you space to improve.
+- **Watch [session replays](https://posthog.com/session-replay)** to spot where people hesitate, rage click, or bounce.
+- **Track key funnels** so you know if users are actually completing the job to be done and not just poking around.
+- **[Talk to real humans](https://newsletter.posthog.com/p/talk-to-users).** Ask what felt slow, confusing, or unnecessary. You'll be surprised what they struggle with.
+- **Iterate quickly.** One small fix at a time adds up fast.
  
 ## TL;DR
  
-TODO: redo this section
-
 You don't need a designer to build great UI. You need:
-
 - Good taste
 - Strong opinions
-- A great prompt
+- The right prompts
 
-![Guy looking into mirror meme with caption "No Designer No Problem"](https://i.imgflip.com/9vjk4x.jpg)
+![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
 
 Word by Lior Neu-ner, who is always down for a good vibe.
 
