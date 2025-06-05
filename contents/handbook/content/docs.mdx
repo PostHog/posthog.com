@@ -24,18 +24,28 @@ We want to showcase code that's runnable, practical, and immediately useful.
 
 **Isolated example:**
 ```js
-posthog.capture('user_signed_up', {
-    login_type: "email",
-    is_free_trial: true
+posthog.capture({
+  distinctId: 'distinct_id_of_the_user',
+  event: 'user_signed_up',
+  properties: {
+    login_type: 'email',
+    is_free_trial: true,
+  },
 })
 ```
 
 If a code snippet has missing application context or business logic, it can be improved.
 
 **In-context example:**
-```js focusOnLines=6-14
+```js focusOnLines=12-24
 // Importing PostHog into the app
-const posthog = require('posthog-node')
+import { PostHog } from 'posthog-node'
+
+// Initializing PostHog client
+const posthog = new PostHog(
+  '<ph_project_api_key>',
+  { host: 'https://us.i.posthog.com' }
+)
 
 app.post('/api/signup', async (req, res) => {
   const { email, password } = req.body
@@ -43,11 +53,15 @@ app.post('/api/signup', async (req, res) => {
   try {
     const user = await createUser({ email, password })
     // Calling PostHog inside business logic // HIGHLIGHT
-    posthog.capture('user_signed_up', { // HIGHLIGHT
+    posthog.capture({ // HIGHLIGHT
+      distinctId: user.id, // HIGHLIGHT
+      event: 'user_signed_up', // HIGHLIGHT
+      properties: { // HIGHLIGHT
         login_type: 'email', // HIGHLIGHT
         is_free_trial: true // HIGHLIGHT
+      }, // HIGHLIGHT
     }) // HIGHLIGHT
-    res.status(201).json({ message: 'Signup successful', userId: email})
+    res.status(201).json({ message: 'Signup successful', userId: user.id})
   } catch (error) {
     res.status(500).json({ error: 'Signup failed' })
   }
