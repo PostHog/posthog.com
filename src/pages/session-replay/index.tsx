@@ -14,31 +14,47 @@ import { useCustomers } from 'hooks/useCustomers'
 
 const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
+// Component for individual slide thumbnail with proper scaling
+const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
+    return (
+        <div
+            data-scheme="primary"
+            className="bg-primary border border-input rounded-md p-2 cursor-pointer hover:border-primary"
+            onClick={() => {
+                // Scroll to slide
+                const slideElement = document.querySelector(`[data-slide="${index}"]`)
+                slideElement?.scrollIntoView({ behavior: 'smooth' })
+            }}
+        >
+            <div className="aspect-video bg-accent rounded overflow-hidden relative">
+                <div
+                    style={{
+                        transform: 'scale(0.25)',
+                        transformOrigin: 'top left',
+                        width: '400%',
+                        height: '400%',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                    }}
+                >
+                    {slide.content}
+                </div>
+            </div>
+            <div className="text-xs text-secondary mt-1 text-center">
+                {slide.name}
+            </div>
+        </div>
+    )
+}
+
 // Component for rendering slide thumbnails
 const SlideThumbnails = ({ slides }: { slides: any[] }) => {
     return (
         <div className="space-y-2 p-4">
             <h3 className="text-sm font-semibold text-secondary mb-3">Slides</h3>
             {slides.map((slide, index) => (
-                <div
-                    key={index}
-                    data-scheme="primary"
-                    className="bg-primary border border-input rounded-md p-2 cursor-pointer hover:border-primary"
-                    onClick={() => {
-                        // Scroll to slide
-                        const slideElement = document.querySelector(`[data-slide="${index}"]`)
-                        slideElement?.scrollIntoView({ behavior: 'smooth' })
-                    }}
-                >
-                    <div className="aspect-video bg-accent rounded text-xs overflow-hidden">
-                        <div className="p-2 scale-50 origin-top-left w-[200%] h-[200%]">
-                            {slide.content}
-                        </div>
-                    </div>
-                    <div className="text-xs text-secondary mt-1 text-center">
-                        {slide.name}
-                    </div>
-                </div>
+                <SlideThumb key={index} slide={slide} index={index} />
             ))}
         </div>
     )
@@ -59,8 +75,8 @@ export default function SessionReplay(): JSX.Element {
             name: "Overview",
             content: (
                 <>
-                    <div className="grid grid-cols-12 grid-rows-8 gap-y-4 h-full">
-                        <div className="col-span-8 row-span-5">
+                    <div className="grid grid-cols-12 grid-rows-8 h-full">
+                        <div className="col-span-8 row-span-5 mb-4">
                             <Screenshot
                                 product="Session replay"
                                 slug="session-replay"
@@ -70,8 +86,8 @@ export default function SessionReplay(): JSX.Element {
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
                             />
                         </div>
-                        <div className="col-span-4 row-span-5 col-start-9 p-6">
-                            <div className="flex items-center gap-1 mb-4">
+                        <div className="col-span-4 row-span-5 col-start-9 p-6 mb-4">
+                            <div className="flex items-center mb-4" style={{ gap: '0.25rem' }}>
                                 <IconRewindPlay className="text-yellow size-6" />
                                 <strong className="font-semibold">Session replay</strong>
                             </div>
