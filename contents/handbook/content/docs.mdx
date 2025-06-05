@@ -3,7 +3,8 @@ title: Docs
 sidebar: Handbook
 showTitle: true
 ---
- 
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 At PostHog, we want our docs to win over developers and to give us a competitive edge. That means delivering a world-class developer experience, maintaining a well-organized knowledge base, and writing documentation that is a genuine pleasure to read.
 
 ## Our documentation values 
@@ -56,9 +57,14 @@ app.post('/api/signup', async (req, res) => {
 })
 ```
 
-The in-context example is more verbose, but much more useful. It shows how PostHog fits into application logic, which helps developers understand *when* and *where* to use it. 
+The in-context example is more verbose, but much more useful. It shows how PostHog fits into applications, which helps developers understand *when* and *where* to use it. 
 
-Inline comments and UI enhancements like syntax highlighting and collapsible sections will keep the code scannable.
+<CalloutBox icon="IconInfo" title="Scannable code" type="fyi">
+
+Inline comments and UI enhancements like syntax highlighting and collapsible sections will keep code scannable. We’re also working on new docs components – coming soon!
+
+</CalloutBox>
+
 
 ### 2. Treat docs like a product
 
@@ -73,7 +79,7 @@ This blend of roles presents unique challenges and opportunities. But ultimately
 
 This could mean helping developers set up their very first PostHog event in a new framework. This could also mean helping existing customers with complex configurations and custom properties smoothly integrate their third or fourth PostHog product. It's a wide spectrum, but the goal is the same: to help developers self-serve and succeed with PostHog.
 
-So when working on the docs, which are a critical part of the product experience, take some time to ask yourself:
+Docs are a *core* part of the product experience. So when you're working on them, take some time to ask:
 - Where is the reader on their PostHog developer journey? 
 - Where do they need to go next? 
 - How does this help them get there?
