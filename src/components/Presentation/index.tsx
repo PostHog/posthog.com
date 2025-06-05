@@ -80,7 +80,7 @@ export default function Presentation({
         <main
           data-app="Presentation"
           data-scheme="secondary"
-          className="@container flex-1 bg-primary relative h-full"
+          className="@container flex-1 flex flex-col bg-primary relative h-full"
         >
           {!fullScreen && (
             <>
@@ -90,8 +90,8 @@ export default function Presentation({
           {fullScreen ? (
             children
           ) : (
-            <div className="flex h-full">
-              <ScrollArea className="flex-1 border-t border-r border-primary">
+            <div className="flex h-full flex-1">
+              <ScrollArea className="h-full flex-1 border-t border-r border-primary">
                 {/* <DebugContainerQuery /> */}
                 {accentImage && (
                   <div className="absolute right-0 top-6">
