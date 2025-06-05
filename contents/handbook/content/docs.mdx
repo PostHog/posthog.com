@@ -4,24 +4,22 @@ sidebar: Handbook
 showTitle: true
 ---
  
-At PostHog, we aspire to make our developer docs the best in the business – clear, consistent, and a joy to read.
+At PostHog, we want our docs to win over developers and to give us a competitive edge. That means delivering a world-class developer experience, maintaining a well-organized knowledge base, and writing documentation that is a genuine pleasure to read.
 
 ## Our documentation values 
 
 1. Show real code in context
 2. Treat docs like a product
 3. Embrace the craft of writing
-4. Help customers win 
+4. Help our customers win
 
 ### 1. Show real code in context
 
-Developers don't want oversimplified examples and isolated code snippets. They want to solve real problems and use cases. 
+Developers don't want oversimplified examples or out-of-context code snippets. They want to solve real problems and use cases.
 
 We want to showcase code that's runnable, practical, and immediately useful.
 
-*As a rule of thumb*, our docs should show code in real-world context whenever it makes sense. The examples we provide should reflect how PostHog is actually used in production, in the wild. 
-
-If a code snippet in docs has missing application or business logic context, we can make it better. And with LLMs, it's quick to generate boilerplate, contextual examples.
+*As a rule of thumb*, our docs should show code within application context whenever possible. The examples we provide should reflect how PostHog is actually used in production, in the wild. 
 
 **Isolated example:**
 ```js
@@ -30,6 +28,8 @@ posthog.capture('user_signed_up', {
     is_free_trial: true
 })
 ```
+
+If a code snippet has missing application context or business logic, it can be improved.
 
 **In-context example:**
 ```js
@@ -56,121 +56,48 @@ app.post('/api/signup', async (req, res) => {
 })
 ```
 
-The in-context example is more verbose but more useful. It shows how PostHog fits into application logic, which helps developers understand *when* and *how* to use it. Concerns about length can be addressed with UI features like syntax highlighting, collapsible code blocks, and inline comments to keep code scannable.
+The in-context example is more verbose, but much more useful. It shows how PostHog fits into application logic, which helps developers understand *when* and *where* to use it. 
 
-### 2. Treat docs like a product 
+Inline comments and UI features like syntax highlighting and collapsible sections will keep the code scannable.
 
-We treat our docs like a product, because it is one. We have customers (i.e., readers), use cases (i.e., onboarding, education, implementation, troubleshooting, etc.), and success metrics (more on this later). PostHog's goal is to help you build successful products, and docs is a part of that.
+### 2. Treat docs like a product
 
-(Having docs isn't enough of the point -> value success metrics like a product of )
+We treat our docs like a product, because they are. They have users (readers), use cases (implementation, product education, troubleshooting, etc.), and success metrics. PostHog's goal is to help customers build successful products, and docs play a huge part in that.
 
-- internal customers in our product teams that needs to create docs vs external customers that read docs
+Developer docs cross several product boundaries:
+- They're a knowledge base and a codebase
+- They're a technical spec and a marketing surface
+- They're a support resource and an activation funnel
 
-That being said, docs does present unique challenges:
-- 
-- Developer tool documentation is both technical specification and marketing material.
-- They rely on them to learn, evaluate, adopt, and succeed with PostHog
-- Docuemntation is both a knowledge base and a code base. 
+This blend of roles presents unique challenges and opportunities. But ultimately, great docs can drive product activation by providing the *right* information, in the *right* way, at the *right* stage in a [developer's journey](https://res.cloudinary.com/dmukukwp6/image/upload/dev_journey_9ed427d2c5.webp). 
 
-Developer tool documentation is both technical specification and marketing material. As both a knowledge base and a code base. Developers don't just read our docs, they rely on them to learn, evaluate, adopt, and succeed with PostHog
+This could mean helping developers set up their very first PostHog event in a new framework. This could also mean helping existing customers with complex configurations and custom properties smoothly integrate their third or fourth PostHog product. It's a wide spectrum, but the goal is the same: to help developers self-serve and succeed with PostHog.
 
+So when working on the docs, take some time to ask yourself:
+- Where is the reader on their PostHog developer journey? 
+- Where do they need to go next? 
+- How does this help them get there?
 
-The experience of reading our docs should delight. Keep a low mental burden for developers.   - Sprinkle in cool moments through out with interactivity, humor / style, and good taste
+### 3. Embrace the craft of writing
 
+Writing is something we love to do here at PostHog. The principles of PostHog [writing](/handbook/content/writing-for-posthog) and [marketing](/handbook/growth/marketing#marketing-values) all apply to docs. 
 
-We prioritize usable docs first, then cool docs. 
+For documentation writing especially, we prioritize clarity, precision, and consistency because they contribute to a smoother reading experience. Nitpicking isn't just allowed, it's encouraged! Nits, semantics, formatting – they're all part of the fun (and challenge) of technical writing. Attention to detail is what turns good docs into great ones, so don't shy away from it.
 
-At their best, docs improves product activation by providing the right information at the right stage on a developer's journey [need examples and some action items]
+This does *not* mean our docs have to be dry or academic. In fact, they should be opinionated and have a natural flow that makes them easy to read. Be open, direct, and conversational. Don't be afraid to add humor and style when there's opportunity.
 
-On metrics, etrics BUT only if also goood vibbeee? :kek:
+PostHog's writing voice is one of the key things that sets us apart from a sea of generic SaaS platforms. It's important that this voice comes through in our docs.
 
+### 4. Help our customers win 
 
-won't include this
-Top of funnel:
-- traffic
-- SEO 
-- GEO 
+Our customers are smart, discerning, and ambitious. They're here to build. They want to 10x their own products. 
 
-Mid funnel:
-- Time to X
-- Reduction / deflection in support tickets
+Our docs exist to help them win.
 
+## How we prioritize
 
-
-
-
-### 3. Embrace the craft of writing 
-
-NIT PICKING IS A PART OF THE FUN! 
-  - Developer tool documentation is both technical specification and marketing material
-  - Be precise and consistent with language 
-  - Incorporate the PostHog voice and style, which are core strengths of PostHog writing
-  - should be scannable
-
-add examples
-
-(+ examples of why some of this nit-picky-ness matter a lot for docs :D)
-
-### 4. Help customers win
-  - Don't assume prerequisite knowledge the user may not have
-  - Communicate product features and capabilities directly and transparently
-  - Be opinionated and proactively make strong recommendation on how to use PostHog/integrate code (also helps with LLMs, suggest impelementation paths maybe?)
-  - Our customers are smart, discerning, and ambitious. They want to 10x their own products, and we're here to help
-
-[Examples :D - Avoid "it depends" more try this first and if not work try others ([anonym event docs?](https://posthog.com/docs/data/anonymous-vs-identified-events))]
-
-## How we prioritize problems
-Anything that could result in debt and slow down velocity is urgent
-Anything that unblocks better LLM assisted coding
-We should prioritize for usable docs > cool docs
-"Cool" docs are a long(er)-term goal
-For example, making our docs more app-like with interactive elements like embedded code editors
-We have some really cool ideas with runnable, interactive, LLM enabled docs. Potential cool factor is ++++
-But we shouldn't chase after these "cool" projects before having improved API references, some bar of consistency and "" for all products, etc.
-
-## Roadmap [link it out to different page]
-
-### Write human and machine friendly documentation
-Documenion is consumed differently when you code with LLM-powered tools like Cursor and GitHub Copilot. This means:
-- Humans care about problems to be solved
-- LLMs care about details like syntax and types
-
-We can ensure both humans and LLMs succeed with our docs by giving them what they need:
-- Documentation with structure and real opinions
-- Give the LLMs up-to-date, consistent, and complete SDK/API references
-- Example apps with lots of comments to fill in the missing context
-
-### Answer the right questions for the right reader
-Readers have different goals at different stages of their learning journey. Here are some common stages in learning and their different goals:
-- Before they commit to PostHog: What is this product, does it solve my problem, and how does it compare to alternatives.
-- As they learn PostHog: How can I make something happen?
-- As they build with PostHog: How can I make this exact thing happen?
-- As they master PostHog: Where are the technical specifications? What are the edge cases and limitations.
-
-We want to answer the right questions for each reader. Showing a new PostHog user full specifications and a veteran user a hand-holding tutorial both lead to aweful experiences. This means organizing information into a consistent heirarchy, so readers know what to expect from each page.
-
-We can do this by:
-- Building templates for core types of pages
-- Being consistent about the scope of information in each page type
-- Organizing these pages in order of simple to complex, linear to comprehensive, opinionated to open.
-- Use examples and LLM prompts to help anyone write these pages, _fast_.
-
-We think all great docs require these types of pages and are presented in this order. Use your judgement on what makes sense, but 
-- Overviews: High-level pages that introduce products or features.
-- Quickstarts: Make something happen fast, avoid presenting readers with choices (which they're not ready to make).
-- Concepts: Information to help readers decide which problems they can and need to solve.
-- Guides: How to solve specific problems and do jobs-to-be-done.
-- References: Full specifications for API and SDKs to explore everything action available.
-
-You can find prompts and templates for these pages here: // TODO.
-
-### Build the best demo apps
-Talk is cheap, we can show them real code. Static documentation is great, but LLMs let us create interactive learning experiences.
-
-Limitations of static documentation:
-- You can't run the code
-- There is never enough context
-- If you 
-
-Annotated code [like this example from Stripe](https://docs.stripe.com/payments) that are runnable, clone-able, and integrated with LLMs to answer questions and help you modify code. That's our vision for the next generation of developer documentation.
-
+Here's how we loosely define high-priority docs work:
+- Anything that blocks product adoption or severely impacts the product experience  
+- Anything that speeds up new content velocity or improves overall quality
+- Anything that unblocks better LLM-assisted workflows
+- *Usable* docs (e.g., improve SDK references) come first, *cool* docs (e.g., interactive code editor) come after
