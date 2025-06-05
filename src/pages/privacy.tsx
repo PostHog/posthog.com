@@ -781,7 +781,7 @@ function Privacy() {
                             PostHog might have to share your information outside of the country you are in. PostHog is
                             part of the{' '}
                             <Link href="https://www.dataprivacyframework.gov/" externalNoIcon>
-                                EU-US Data Privacy Framework
+                                Data Privacy Framework
                             </Link>
                             , so we rely on various mechanisms that this provides to do so.
                         </p>
