@@ -20,7 +20,7 @@ import Screenshot from 'components/Screenshot'
 interface AppItem {
     label: string
     Icon: React.ComponentType<any> | string | React.ReactElement
-    color: string
+    color?: string
     url: string
     type?: string
     className?: string
@@ -30,45 +30,39 @@ interface Product {
     name: string
     slug: string
     Icon: React.ComponentType<any>
-    color: string
+    color?: string
 }
 
 const productLinks: AppItem[] = [
     {
         label: 'home.mdx',
         Icon: <AppIcon name="doc" />,
-        color: 'salmon',
         url: '/',
     },
     {
         label: 'Products',
-        Icon: <AppIcon name="product" />,
-        color: 'blue',
+        Icon: <AppIcon name="folder" />,
         url: '/products',
     },
     {
         label: 'Pricing',
         Icon: <AppIcon name="pricing" />,
-        color: 'green',
         url: '/pricing',
     },
     {
         label: 'notable customers.mdx',
-        Icon: <AppIcon name="doc" />,
-        color: 'salmon',
+        Icon: <AppIcon name="spreadsheet" />,
         url: '/customers',
     },
     {
         label: 'demo.mov',
         Icon: IconDemoThumb,
-        color: 'blue',
         url: '/demo',
         className: '!size-14 -mt-4 -mb-3',
     },
     {
         label: 'Docs',
-        Icon: <AppIcon name="doc" />,
-        color: 'salmon',
+        Icon: <AppIcon name="notebook" />,
         url: '/docs',
     },
 ]
@@ -77,32 +71,37 @@ const apps: AppItem[] = [
     {
         label: 'Why PostHog?',
         Icon: <AppIcon name="tour" />,
-        color: 'orange',
         url: '/why',
     },
     {
+        label: 'Company',
+        Icon: <AppIcon name="posthog" />,
+        url: '/about',
+    },
+    {
         label: 'Roadmap',
-        Icon: <AppIcon name="roadmap" />,
-        color: 'purple',
+        Icon: <AppIcon name="map" />,
         url: '/roadmap',
     },
     {
         label: 'Forums',
         Icon: <AppIcon name="forums" />,
-        color: 'blue',
         url: '/questions',
     },
     {
         label: 'Games',
         Icon: <AppIcon name="games" />,
-        color: 'green',
         url: '/games',
     },
     {
         label: 'Photo booth',
         Icon: <AppIcon name="photobooth" />,
-        color: 'orange',
         url: '/photobooth',
+    },
+    {
+        label: 'Talk to a human',
+        Icon: <AppIcon name="contact" />,
+        url: '/talk-to-a-human',
     },
 ]
 
