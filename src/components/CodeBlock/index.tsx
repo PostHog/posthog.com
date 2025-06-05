@@ -114,12 +114,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
 
     const [currentLanguage, setCurrentLanguage] = React.useState<LanguageOption>(languages[0])
     return (
-        <CodeBlock
-            currentLanguage={currentLanguage}
-            onChange={setCurrentLanguage}
-            focusOnLines={languages.find((language) => language.language === currentLanguage.language)?.focusOnLines}
-            {...props}
-        >
+        <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage} {...props}>
             {languages}
         </CodeBlock>
     )
@@ -167,7 +162,6 @@ export const CodeBlock = ({
     currentLanguage,
     onChange,
     lineNumberStart = 1,
-    focusOnLines,
     tooltips,
 }: CodeBlockProps) => {
     if (languages.length < 0 || !currentLanguage) {
@@ -189,7 +183,7 @@ export const CodeBlock = ({
     const { websiteTheme } = useValues(layoutLogic)
 
     const [expanded, setExpanded] = React.useState(false)
-    const linesToShow = focusOnLines ? getLinesToShow(focusOnLines) : []
+    const linesToShow = currentLanguage.focusOnLines ? getLinesToShow(currentLanguage.focusOnLines) : []
 
     React.useEffect(() => {
         // Browser check - no cookies on the server
@@ -385,31 +379,51 @@ export const CodeBlock = ({
                             showLabel ? 'border-t' : ''
                         }`}
                     >
-                        <div className="flex whitespace-pre-wrap relative" id={codeBlockId}>
+                        <div className="flex whitespace-pre min-w-fit relative" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
                                     <span
                                         className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
                                         aria-hidden="true"
                                     >
-                                        {tokens.map((_, i) => {
-                                            return (
-                                                <span
-                                                    className={`inline-block text-right align-middle 
-                                                ${diffAddLineNumbers.includes(i) ? 'text-red/30' : ''}
-                                                ${diffRemoveLineNumbers.includes(i) ? 'text-green/30' : ''}`}
-                                                    key={i}
+                                        {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
+                                            <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">
+                                                <button
+                                                    onClick={() => setExpanded(!expanded)}
+                                                    className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                                 >
-                                                    <span>{i + lineNumberStart}</span>
-                                                </span>
-                                            )
+                                                    ...
+                                                </button>
+                                            </div>
+                                        )}
+                                        {tokens.map((_, i) => {
+                                            if (!linesToShow.length || linesToShow.includes(i) || expanded) {
+                                                return (
+                                                    <span className={`inline-block text-right align-middle`} key={i}>
+                                                        <span>{i + lineNumberStart}</span>
+                                                    </span>
+                                                )
+                                            }
+                                            return
                                         })}
+                                        {!expanded &&
+                                            linesToShow.length > 0 &&
+                                            linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
+                                                <div className="flex border-t border-dashed border-light dark:border-dark w-full mt-2 -mb-2">
+                                                    <button
+                                                        onClick={() => setExpanded(!expanded)}
+                                                        className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                    >
+                                                        ...
+                                                    </button>
+                                                </div>
+                                            )}
                                     </span>
                                 </pre>
                             )}
 
                             <code
-                                className={`${className} block rounded-none !m-0 p-4 shrink-0 font-code font-medium text-sm article-content-ignore w-full`}
+                                className={`${className} block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm article-content-ignore`}
                             >
                                 {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
                                     <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">
@@ -417,7 +431,7 @@ export const CodeBlock = ({
                                             onClick={() => setExpanded(!expanded)}
                                             className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                         >
-                                            ... Show full example
+                                            Show full example
                                         </button>
                                     </div>
                                 )}
@@ -498,7 +512,7 @@ export const CodeBlock = ({
                                                 onClick={() => setExpanded(!expanded)}
                                                 className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                             >
-                                                ... Show full example
+                                                Show full example
                                             </button>
                                         </div>
                                     )}
