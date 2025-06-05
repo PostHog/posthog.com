@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { navigate } from 'gatsby'
@@ -7,6 +7,9 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { IconInfo, IconGear } from '@posthog/icons'
+import ProductSidebar from 'components/Explorer/ProductSidebar'
 
 interface AccordionItem {
   title: string
@@ -23,28 +26,46 @@ interface PresentationProps {
   fullScreen?: boolean
 }
 
-const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }) => {
+const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): React.ReactElement | null => {
   if (!content) return null
 
   if (Array.isArray(content)) {
-    return content.map((item, index) => (
-      <Accordion
-        key={index}
-        data-scheme="primary"
-        className=""
-        defaultValue="item-0"
-        items={[
-          {
-            trigger: item.title,
-            content: item.content,
-          },
-        ]}
-      />
-    ))
+    return (
+      <>
+        {content.map((item, index) => (
+          <Accordion
+            key={index}
+            data-scheme="primary"
+            className=""
+            defaultValue="item-0"
+            items={[
+              {
+                trigger: item.title,
+                content: item.content,
+              },
+            ]}
+          />
+        ))}
+      </>
+    )
   }
 
-  return content
+  return <>{content}</>
 }
+
+const sidebarTabOptions: ToggleOption[] = [
+  {
+    label: 'Info',
+    value: 'info',
+    icon: <IconInfo className="size-5" />,
+    default: true,
+  },
+  {
+    label: 'Settings',
+    value: 'settings',
+    icon: <IconGear className="size-5" />,
+  },
+]
 
 export default function Presentation({
   template,
@@ -57,9 +78,14 @@ export default function Presentation({
 }: PresentationProps) {
   const location = useLocation()
   const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
+  const [sidebarTab, setSidebarTab] = useState<string>('info')
 
   const handleValueChange = (value: string) => {
     navigate(`/${value}`)
+  }
+
+  const handleSidebarTabChange = (value: string) => {
+    setSidebarTab(value)
   }
 
   return (
@@ -106,8 +132,28 @@ export default function Presentation({
                   {children}
                 </div>
               </ScrollArea>
-              <aside data-scheme="secondary" className="bg-primary p-4 w-80">
-                hello world!
+              <aside data-scheme="secondary" className="bg-primary px-4 w-80 space-y-4">
+
+                <div className="flex justify-center">
+                  <ToggleGroup
+                    title="Sidebar"
+                    hideTitle
+                    options={sidebarTabOptions}
+                    onValueChange={handleSidebarTabChange}
+                    value={sidebarTab}
+                  />
+                </div>
+
+                {sidebarTab === 'info' && (
+                  <ProductSidebar type="session_replay" />
+                )}
+
+                {sidebarTab === 'settings' && (
+                  <div>
+                    settings
+                  </div>
+                )}
+
               </aside>
             </div>
           )}

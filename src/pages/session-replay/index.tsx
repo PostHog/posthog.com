@@ -86,15 +86,23 @@ export default function SessionReplay(): JSX.Element {
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
                             />
                         </div>
-                        <div className="col-span-4 row-span-5 col-start-9 p-6 mb-4">
+                        <div className="@container col-span-4 row-span-5 col-start-9 p-6 mb-4">
                             <div className="flex items-center mb-4" style={{ gap: '0.25rem' }}>
                                 <IconRewindPlay className="text-yellow size-6" />
                                 <strong className="font-semibold">Session replay</strong>
                             </div>
                             <h1 className="">Watch people use your product</h1>
-                            <p className=" max-w-lg mx-auto">
+                            <p className="max-w-lg mx-auto">
                                 Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
                             </p>
+                            <div className="flex flex-col @sm:flex-row justify-center gap-2 mb-12">
+                                <CallToAction href="https://app.posthog.com/signup" type="primary">
+                                    Get started - free
+                                </CallToAction>
+                                <CallToAction href="/talk-to-a-human" type="secondary">
+                                    Talk to a human
+                                </CallToAction>
+                            </div>
                         </div>
                         {customers.slice(0, 4).map((customer, index) => {
                             const customerData = sessionReplayProduct?.customers?.[customer.slug]

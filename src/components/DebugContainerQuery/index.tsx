@@ -3,6 +3,7 @@ import React from 'react'
 export const DebugContainerQuery = () => {
     return (
         <div data-scheme="primary" className="bg-white text-xs border border-red text-center rounded">
+            <div className="@xs:hidden @sm:hidden bg-red/10 p-2">Size: &lt;@xs (&lt;320px)</div>
             <div className="hidden @xs:block @sm:hidden bg-red/10 p-2">Size: @xs (320px+)</div>
             <div className="hidden @sm:block @md:hidden bg-red/10 p-2">Size: @sm (384px+)</div>
             <div className="hidden @md:block @lg:hidden bg-red/10 p-2">Size: @md (448px+)</div>
