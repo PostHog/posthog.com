@@ -17,7 +17,7 @@ You'll also need access to the relevant Zendesk account.
 ## Installation
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=zendesk) tab.
 3. Search for 'Zendesk' and click **+ Create**.
 4. Add your Zendesk subdomain, user email, and API token at the configuration step.
 5. Press **Create & Enable** and watch your 'Customer' list get populated in Zendesk!
