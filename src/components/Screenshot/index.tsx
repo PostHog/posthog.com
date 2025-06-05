@@ -36,19 +36,19 @@ export const Screenshot = ({ icon, product, slug, order, src, className = '' }: 
           <path fill="#ED6A5E" fillRule="evenodd" d="M19 28a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"
             clipRule="evenodd" />
         </g>
-        <path stroke="#CE5347" stroke-width=".5"
+        <path stroke="#CE5347" strokeWidth=".5"
           d="M24.75 22a5.75 5.75 0 1 1-11.5 0 5.75 5.75 0 0 1 11.5 0Z" />
         <g filter="url(#d)">
           <path fill="#F6BE4F" fillRule="evenodd" d="M39 28a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"
             clipRule="evenodd" />
         </g>
-        <path stroke="#D6A243" stroke-width=".5"
+        <path stroke="#D6A243" strokeWidth=".5"
           d="M44.75 22a5.75 5.75 0 1 1-11.5 0 5.75 5.75 0 0 1 11.5 0Z" />
         <g filter="url(#e)">
           <path fill="#62C554" fillRule="evenodd" d="M59 28a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z"
             clipRule="evenodd" />
         </g>
-        <path stroke="#58A942" stroke-width=".5"
+        <path stroke="#58A942" strokeWidth=".5"
           d="M64.75 22a5.75 5.75 0 1 1-11.5 0 5.75 5.75 0 0 1 11.5 0Z" />
 
         {/* active browser tab background */}
@@ -167,11 +167,11 @@ export const Screenshot = ({ icon, product, slug, order, src, className = '' }: 
         <rect width="121" height="28" x="8" y="532" className="fill-border dark:fill-border-dark" rx="4" />
 
         {/* active button shadow */}
-        <rect width="192.5" height="10" x="8.75" y={301.5 + navOrderOffset} className="fill-[#E0DDDD] dark:fill-[#2E2F36] stroke-[#ccc] dark:stroke-[#464A55]" stroke-width="1.5" rx="5.25" />
+        <rect width="192.5" height="10" x="8.75" y={301.5 + navOrderOffset} className="fill-[#E0DDDD] dark:fill-[#2E2F36] stroke-[#ccc] dark:stroke-[#464A55]" strokeWidth="1.5" rx="5.25" />
 
         {/* active button background */}
         <rect width="192.5" height="31.5" x="8.75" y={275.75 + navOrderOffset}
-          stroke-width="1.5" rx="5.25" className="fill-white dark:fill-accent-dark stroke-border dark:stroke-border-dark" />
+          strokeWidth="1.5" rx="5.25" className="fill-white dark:fill-accent-dark stroke-border dark:stroke-border-dark" />
 
         {/* active product icon */}
         <g transform={`translate(8, ${280 + navOrderOffset})`}>

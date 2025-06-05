@@ -30,24 +30,6 @@ export default function useProduct({ type } = {}) {
             type: 'product_analytics',
             name: 'Product analytics',
             slug: '/product-analytics',
-            customers: {
-                ycombinator: {
-                    headline: 'gathers 30% more data than with Google Analytics',
-                    description: 'We could autocapture... events using the JS snippet and... configure custom events.'
-                },
-                hasura: {
-                    headline: 'improved conversion rates by 10-20%',
-                    description: 'we observed drop-offs at very particular stages of our onboarding flow.'
-                },
-                contra: {
-                    headline: 'increased registrations by 30%',
-                    description: 'From [funnels], we could easily jump to session replays to see the drop-off point.'
-                },
-                speakeasy: {
-                    headline: 'manages features and developer relations',
-                    description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.'
-                },
-            },
         },
         {
             name: 'Broadcasts',
