@@ -18,7 +18,7 @@ type LanguageOption = {
     language: string
     file?: string
     code: string
-    onlyShowLines?: string
+    focusOnLines?: string
 }
 
 type CodeBlockProps = {
@@ -27,7 +27,7 @@ type CodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
-    onlyShowLines?: string
+    focusOnLines?: string
     tooltips?: { lineNumber: number; content: string }[]
 
     onChange?: (language: LanguageOption) => void
@@ -41,7 +41,6 @@ type SingleCodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
-
     language: string
     children: string
 }
@@ -60,7 +59,7 @@ type MetaStringProps = {
     showLineNumbers?: boolean
     label?: string
     unavailable?: boolean
-    onlyShowLines?: string
+    focusOnLines?: string
 }
 
 type MdxCodeBlockChildren = {
@@ -93,7 +92,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
                 label,
                 file,
                 children,
-                onlyShowLines,
+                focusOnLines,
             } = child.props.mdxType === 'code' ? child.props : child.props.children.props
 
             const matches = className.match(/language-(?<lang>.*)/)
@@ -104,7 +103,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
                 language: language.toLowerCase(),
                 file,
                 code: children as string,
-                onlyShowLines,
+                focusOnLines,
             }
         })
 
@@ -118,7 +117,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
         <CodeBlock
             currentLanguage={currentLanguage}
             onChange={setCurrentLanguage}
-            onlyShowLines={languages[0]?.onlyShowLines}
+            focusOnLines={languages.find((language) => language.language === currentLanguage.language)?.focusOnLines}
             {...props}
         >
             {languages}
@@ -168,7 +167,8 @@ export const CodeBlock = ({
     currentLanguage,
     onChange,
     lineNumberStart = 1,
-    onlyShowLines,
+    focusOnLines,
+    tooltips,
 }: CodeBlockProps) => {
     if (languages.length < 0 || !currentLanguage) {
         return null
@@ -188,10 +188,8 @@ export const CodeBlock = ({
 
     const { websiteTheme } = useValues(layoutLogic)
 
-    const [expandedAbove, setExpandedAbove] = React.useState(false)
-    const [expandedBelow, setExpandedBelow] = React.useState(false)
-    const linesToShow = onlyShowLines ? getLinesToShow(onlyShowLines) : []
-    console.log(linesToShow)
+    const [expanded, setExpanded] = React.useState(false)
+    const linesToShow = focusOnLines ? getLinesToShow(focusOnLines) : []
 
     React.useEffect(() => {
         // Browser check - no cookies on the server
@@ -219,7 +217,16 @@ export const CodeBlock = ({
     }
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(replaceProjectInfo(currentLanguage.code.replace(tooltipKey, '//').trim()))
+        navigator.clipboard.writeText(
+            replaceProjectInfo(
+                currentLanguage.code
+                    .replace(tooltipKey, '//')
+                    .replace(highlightKey, '')
+                    .replace(diffAddKey, '')
+                    .replace(diffRemoveKey, '')
+                    .trim()
+            )
+        )
 
         setTooltipVisible(true)
         setTimeout(() => {
@@ -230,6 +237,19 @@ export const CodeBlock = ({
     const highlightLineNumbers: number[] = []
     const diffAddLineNumbers: number[] = []
     const diffRemoveLineNumbers: number[] = []
+
+    const codeLines = currentLanguage.code.split('\n')
+    codeLines.forEach((line, index) => {
+        if (line.includes(highlightKey)) {
+            highlightLineNumbers.push(index)
+        }
+        if (line.includes(diffAddKey)) {
+            diffAddLineNumbers.push(index)
+        }
+        if (line.includes(diffRemoveKey)) {
+            diffRemoveLineNumbers.push(index)
+        }
+    })
 
     return (
         <div className="code-block relative mt-2 mb-4 border border-light dark:border-dark rounded">
@@ -374,7 +394,12 @@ export const CodeBlock = ({
                                     >
                                         {tokens.map((_, i) => {
                                             return (
-                                                <span className="inline-block text-right align-middle" key={i}>
+                                                <span
+                                                    className={`inline-block text-right align-middle 
+                                                ${diffAddLineNumbers.includes(i) ? 'text-red/30' : ''}
+                                                ${diffRemoveLineNumbers.includes(i) ? 'text-green/30' : ''}`}
+                                                    key={i}
+                                                >
                                                     <span>{i + lineNumberStart}</span>
                                                 </span>
                                             )
@@ -386,85 +411,48 @@ export const CodeBlock = ({
                             <code
                                 className={`${className} block rounded-none !m-0 p-4 shrink-0 font-code font-medium text-sm article-content-ignore w-full`}
                             >
+                                {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
+                                    <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">
+                                        <button
+                                            onClick={() => setExpanded(!expanded)}
+                                            className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                        >
+                                            ... Show full example
+                                        </button>
+                                    </div>
+                                )}
                                 {tokens.map((line, i) => {
-                                    const shouldShow =
-                                        !onlyShowLines ||
-                                        linesToShow.includes(i) ||
-                                        (i < linesToShow[0] && expandedAbove) ||
-                                        (i > linesToShow[linesToShow.length - 1] && expandedBelow)
-                                    if (!shouldShow) {
-                                        if (i === linesToShow[0] - 1) {
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className="flex border-t border-dashed border-light dark:border-dark bg-blue/20 w-full"
-                                                >
-                                                    <button
-                                                        onClick={() => setExpandedAbove(!expandedAbove)}
-                                                        className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1"
-                                                    >
-                                                        {expandedAbove ? '... Show less' : '... Show more'}
-                                                    </button>
-                                                </div>
-                                            )
-                                        }
-                                        if (i === linesToShow[linesToShow.length - 1] + 1) {
-                                            return (
-                                                <div
-                                                    key={i}
-                                                    className="flex border-t border-dashed border-light dark:border-dark bg-blue/20 w-full"
-                                                >
-                                                    <button
-                                                        onClick={() => setExpandedBelow(!expandedBelow)}
-                                                        className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1"
-                                                    >
-                                                        {expandedBelow ? '... Show less' : '... Show more'}
-                                                    </button>
-                                                </div>
-                                            )
-                                        }
-                                        return null
+                                    if (linesToShow.length > 0 && !linesToShow.includes(i) && !expanded) {
+                                        return
                                     }
                                     const { className, ...props } = getLineProps({ line, key: i })
-                                    const tooltip = line
-                                        .find((token) => token.content.startsWith(tooltipKey))
-                                        ?.content.replace(tooltipKey, '')
-                                    if (line.some((token) => token.content.startsWith(highlightKey))) {
-                                        highlightLineNumbers.push(i)
-                                        line.forEach((token) => {
-                                            if (token.content.startsWith(highlightKey)) {
-                                                token.content = token.content.replace(highlightKey, '')
-                                            }
-                                        })
-                                    }
-                                    if (line.some((token) => token.content.startsWith(diffAddKey))) {
-                                        diffAddLineNumbers.push(i)
-                                        line.forEach((token) => {
-                                            if (token.content.startsWith(diffAddKey)) {
-                                                token.content = token.content.replace(diffAddKey, '')
-                                            }
-                                        })
-                                    }
-                                    if (line.some((token) => token.content.startsWith(diffRemoveKey))) {
-                                        diffRemoveLineNumbers.push(i)
-                                        line.forEach((token) => {
-                                            if (token.content.startsWith(diffRemoveKey)) {
-                                                token.content = token.content.replace(diffRemoveKey, '')
-                                            }
-                                        })
-                                    }
+                                    const tooltipContent =
+                                        tooltips?.find((tooltip) => tooltip.lineNumber === i + lineNumberStart)
+                                            ?.content ||
+                                        line
+                                            .find((token) => token.content.startsWith(tooltipKey))
+                                            ?.content.replace(tooltipKey, '')
+                                    line.forEach((token) => {
+                                        if (token.content.includes(highlightKey)) {
+                                            token.content = token.content.replace(highlightKey, '')
+                                        }
+                                        if (token.content.includes(diffAddKey)) {
+                                            token.content = token.content.replace(diffAddKey, '')
+                                        }
+                                        if (token.content.includes(diffRemoveKey)) {
+                                            token.content = token.content.replace(diffRemoveKey, '')
+                                        }
+                                    })
+
                                     const firstContentIndex = line.findIndex((token) => !!token.content.trim())
                                     return (
                                         <div
                                             key={i}
-                                            className={`
-                                                ${className} 
-                                                relative 
-                                                w-full
-                                                ${highlightLineNumbers.includes(i) ? 'bg-yellow/20' : ''}
-                                                ${diffAddLineNumbers.includes(i) ? 'bg-green/20' : ''}
-                                                ${diffRemoveLineNumbers.includes(i) ? 'bg-red/20' : ''}
-                                            `}
+                                            className={`${className} relative
+                                        ${highlightLineNumbers.includes(i) ? 'bg-yellow/10' : ''}
+                                        ${diffAddLineNumbers.includes(i) ? 'bg-green/10' : ''}
+                                        ${diffRemoveLineNumbers.includes(i) ? 'bg-red/10' : ''}
+                                        `}
                                             {...props}
                                         >
                                             {line
@@ -476,31 +464,23 @@ export const CodeBlock = ({
                                                     })
                                                     return (
                                                         <span className="relative" key={key}>
-                                                            {firstContentIndex === key && (
-                                                                <>
-                                                                    {tooltip && (
-                                                                        <Tooltip
-                                                                            content={() => (
-                                                                                <div className="text-center max-w-[200px]">
-                                                                                    {tooltip.trim()}
-                                                                                </div>
-                                                                            )}
-                                                                        >
-                                                                            <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
-                                                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
-                                                                                <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
-                                                                            </span>
-                                                                        </Tooltip>
+                                                            {firstContentIndex === key && tooltipContent && (
+                                                                <Tooltip
+                                                                    content={() => (
+                                                                        <div className="text-center max-w-[200px]">
+                                                                            {tooltipContent.trim()}
+                                                                        </div>
                                                                     )}
-                                                                </>
+                                                                >
+                                                                    <span className="absolute -left-1 -translate-x-full top-1/2 -translate-y-1/2 flex h-3 w-3">
+                                                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue/80 opacity-75"></span>
+                                                                        <span className="relative inline-flex rounded-full h-3 w-3 bg-blue"></span>
+                                                                    </span>
+                                                                </Tooltip>
                                                             )}
                                                             <span
-                                                                className={`
-                                                                    ${className}
-                                                                    text-shadow-none
-                                                                `}
+                                                                className={`${className} text-shadow-none `}
                                                                 {...props}
-                                                                {...onlyShowLines}
                                                             >
                                                                 {children}
                                                             </span>
@@ -510,6 +490,18 @@ export const CodeBlock = ({
                                         </div>
                                     )
                                 })}
+                                {!expanded &&
+                                    linesToShow.length > 0 &&
+                                    linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
+                                        <div className="flex border-t border-dashed border-light dark:border-dark w-full mt-2 -mb-2">
+                                            <button
+                                                onClick={() => setExpanded(!expanded)}
+                                                className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                            >
+                                                ... Show full example
+                                            </button>
+                                        </div>
+                                    )}
                             </code>
                         </div>
                     </pre>
