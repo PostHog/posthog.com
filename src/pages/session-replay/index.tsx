@@ -220,10 +220,28 @@ export default function SessionReplay(): JSX.Element {
             )
         },
         {
+            name: "Answers",
+            content: (
+                <div className="text-center">
+                    <h3>What can I discover with session replay?</h3>
+                    <p>Content for slide 3</p>
+                </div>
+            )
+        },
+        {
+            name: "Pricing",
+            content: (
+                <div className="text-center">
+                    <h3>Pricing</h3>
+                    <p>Content for slide 3</p>
+                </div>
+            )
+        },
+        {
             name: "Getting started",
             content: (
                 <div className="text-center">
-                    <h3>Slide 3</h3>
+                    <h3>Get started</h3>
                     <p>Content for slide 3</p>
                 </div>
             )
