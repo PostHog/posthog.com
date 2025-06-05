@@ -41,6 +41,7 @@ interface ReaderViewProps {
     commits?: any[]
     filePath?: string
     children?: React.ReactNode
+    leftSidebar?: React.ReactNode
 }
 
 interface BackgroundImageOption {
@@ -209,6 +210,7 @@ export default function ReaderView({
     commits,
     filePath,
     children,
+    leftSidebar,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -219,6 +221,7 @@ export default function ReaderView({
                 mdxComponents={mdxComponents}
                 commits={commits}
                 filePath={filePath}
+                leftSidebar={leftSidebar}
             >
                 {children}
             </ReaderViewContent>
@@ -226,22 +229,91 @@ export default function ReaderView({
     )
 }
 
-function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commits, filePath, children }) {
+const Menu = () => {
+    const { parent, activeInternalMenu, setActiveInternalMenu } = useReaderView()
+
+    return (
+        <>
+            <Select
+                groups={[
+                    {
+                        label: null,
+                        items: parent.children?.map((menuItem) => {
+                            return {
+                                value: menuItem.url || menuItem.name,
+                                label: menuItem.name,
+                                icon: menuItem.icon,
+                                color: menuItem.color,
+                            }
+                        }),
+                    },
+                ]}
+                placeholder="Select..."
+                ariaLabel="Products"
+                className="w-full mb-2"
+                value={activeInternalMenu?.url || activeInternalMenu?.name}
+                onValueChange={(value) => {
+                    const selectedMenu = parent.children?.find(
+                        (menuItem) => menuItem.url === value || menuItem.name === value
+                    )
+                    setActiveInternalMenu(selectedMenu)
+                }}
+            />
+            <TreeMenu items={activeInternalMenu?.children} />
+        </>
+    )
+}
+
+const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
+    const { isNavVisible } = useReaderView()
+    return (
+        <AnimatePresence>
+            {isNavVisible && (
+                <motion.div
+                    id="nav"
+                    className="hidden @2xl:block flex-shrink-0 overflow-hidden mb-[-47px]"
+                    initial={{ width: '250px' }}
+                    animate={{
+                        width: '250px',
+                        transition: { duration: 0.2 },
+                    }}
+                    exit={{
+                        width: 0,
+                        transition: { duration: 0.25, delay: 0.05 },
+                    }}
+                >
+                    <motion.div
+                        className="h-full"
+                        initial={{ opacity: 1 }}
+                        animate={{
+                            opacity: 1,
+                            transition: { duration: 0.5, delay: 1 },
+                        }}
+                        exit={{
+                            opacity: 0,
+                            transition: { duration: 0.05 },
+                        }}
+                    >
+                        <ScrollArea className="px-4">{children}</ScrollArea>
+                    </motion.div>
+                </motion.div>
+            )}
+        </AnimatePresence>
+    )
+}
+
+function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commits, filePath, children, leftSidebar }) {
     const contentRef = useRef(null)
     const {
         isNavVisible,
         isTocVisible,
         lineHeightMultiplier,
         fullWidthContent,
-        parent,
-        activeInternalMenu,
         backgroundImage,
         toggleNav,
         toggleToc,
         handleLineHeightChange,
-        setActiveInternalMenu,
         setFullWidthContent,
-        setBackgroundImage,
     } = useReaderView()
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0
@@ -275,65 +347,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
             />
             {/* Second row - Main Content */}
             <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
-                <AnimatePresence>
-                    {isNavVisible && (
-                        <motion.div
-                            id="nav"
-                            className="hidden @2xl:block flex-shrink-0 overflow-hidden mb-[-47px]"
-                            initial={{ width: '250px' }}
-                            animate={{
-                                width: '250px',
-                                transition: { duration: 0.2 },
-                            }}
-                            exit={{
-                                width: 0,
-                                transition: { duration: 0.25, delay: 0.05 },
-                            }}
-                        >
-                            <motion.div
-                                className="h-full"
-                                initial={{ opacity: 1 }}
-                                animate={{
-                                    opacity: 1,
-                                    transition: { duration: 0.5, delay: 1 },
-                                }}
-                                exit={{
-                                    opacity: 0,
-                                    transition: { duration: 0.05 },
-                                }}
-                            >
-                                <ScrollArea className="px-4">
-                                    <Select
-                                        groups={[
-                                            {
-                                                label: null,
-                                                items: parent.children?.map((menuItem) => {
-                                                    return {
-                                                        value: menuItem.url || menuItem.name,
-                                                        label: menuItem.name,
-                                                        icon: menuItem.icon,
-                                                        color: menuItem.color,
-                                                    }
-                                                }),
-                                            },
-                                        ]}
-                                        placeholder="Select..."
-                                        ariaLabel="Products"
-                                        className="w-full mb-2"
-                                        value={activeInternalMenu?.url || activeInternalMenu?.name}
-                                        onValueChange={(value) => {
-                                            const selectedMenu = parent.children?.find(
-                                                (menuItem) => menuItem.url === value || menuItem.name === value
-                                            )
-                                            setActiveInternalMenu(selectedMenu)
-                                        }}
-                                    />
-                                    <TreeMenu items={activeInternalMenu.children} />
-                                </ScrollArea>
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                <LeftSidebar>{leftSidebar || <Menu />}</LeftSidebar>
                 <ScrollArea
                     dataScheme="primary"
                     className={`bg-primary border border-primary flex-grow rounded ${

@@ -23,6 +23,7 @@ import { navigate } from 'gatsby'
 import { ChatProvider } from '../../hooks/useChat'
 import Inbox from 'components/Inbox'
 import Handbook from '../../templates/Handbook'
+import BlogPost from '../../templates/BlogPost'
 
 const snapThreshold = -50
 
@@ -33,6 +34,9 @@ const Router = (props) => {
     }
     if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
         return <Handbook {...props} />
+    }
+    if (props.pageContext?.post || /^posts|^changelog\/(.*?)\//.test(path)) {
+        return <BlogPost {...props} />
     }
     return children
 }

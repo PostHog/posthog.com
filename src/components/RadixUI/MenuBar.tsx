@@ -16,6 +16,7 @@ export type MenuItemType = {
     onClick?: () => void
     node?: React.ReactNode // Allow embedding a React node
     external?: boolean // Whether the link should open in a new window with external styling
+    active?: boolean
 }
 
 export type MenuType = {
@@ -106,7 +107,11 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
     }
 
     return (
-        <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
+        <RadixMenubar.Item
+            className={`${ItemClasses} ${item.active ? 'bg-accent' : ''}`}
+            disabled={item.disabled}
+            onClick={item.onClick}
+        >
             {item.link ? (
                 <Link
                     to={item.link}

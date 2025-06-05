@@ -9,7 +9,7 @@ const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
-    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
+    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
     const BlogTagTemplate = path.resolve(`src/templates/BlogTag.tsx`)
