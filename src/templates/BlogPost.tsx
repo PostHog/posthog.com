@@ -397,7 +397,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                                 disabled={isValidating}
                                 size="sm"
                                 width="full"
-                                className="mt-2"
+                                className="my-2"
                                 onClick={() => fetchMore()}
                             >
                                 {isValidating ? <IconSpinner className="size-4 mx-auto animate-spin" /> : 'Load more'}
