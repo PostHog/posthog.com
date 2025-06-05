@@ -393,7 +393,13 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                             })}
                         />
                         {hasMore && (
-                            <CallToAction size="sm" width="full" className="mt-2" onClick={() => fetchMore()}>
+                            <CallToAction
+                                disabled={isValidating}
+                                size="sm"
+                                width="full"
+                                className="my-2"
+                                onClick={() => fetchMore()}
+                            >
                                 {isValidating ? <IconSpinner className="size-4 mx-auto animate-spin" /> : 'Load more'}
                             </CallToAction>
                         )}
