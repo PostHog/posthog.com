@@ -72,8 +72,8 @@ export default function SessionReplay(): JSX.Element {
         {
             name: "Features",
             content: (
-                <div className="text-center">
-                    <h2>Slide 2</h2>
+                <div className="text-center h-full" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                    <h3>Slide 2</h3>
                     <p>Content for slide 2</p>
                 </div>
             )
@@ -82,7 +82,7 @@ export default function SessionReplay(): JSX.Element {
             name: "Getting started",
             content: (
                 <div className="text-center">
-                    <h2>Slide 3</h2>
+                    <h3>Slide 3</h3>
                     <p>Content for slide 3</p>
                 </div>
             )
