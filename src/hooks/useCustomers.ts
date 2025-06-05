@@ -12,6 +12,8 @@ import StartEngineLogo from '../images/customers/startengine-light.svg'
 import TrustWalletLogo from '../images/customers/trustwallet-light.svg'
 import PostHogLogo from '../images/customers/posthog-light.svg'
 import SupabaseLogo from '../images/customers/supabase-light.svg'
+import NetdataLogo from '../images/customers/netdata-light.svg'
+import PryLogo from '../images/customers/pry-light.svg'
 
 import MistralLogoDark from '../images/customers/mistralai-dark.svg'
 import RaycastLogoDark from '../images/customers/raycast-dark.svg'
@@ -22,6 +24,8 @@ import StartEngineLogoDark from '../images/customers/startengine-dark.svg'
 import TrustWalletLogoDark from '../images/customers/trustwallet-dark.svg'
 import PostHogLogoDark from '../images/customers/posthog-dark.svg'
 import SupabaseLogoDark from '../images/customers/supabase-dark.svg'
+import NetdataLogoDark from '../images/customers/netdata-dark.svg'
+import PryLogoDark from '../images/customers/pry-dark.svg'
 
 export interface Customer {
     slug: string
@@ -111,6 +115,24 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: {
             light: MistralLogo,
             dark: MistralLogoDark,
+        },
+    },
+    netdata: {
+        name: 'Netdata',
+        toolsUsed: [],
+        notes: '',
+        logo: {
+            light: NetdataLogo,
+            dark: NetdataLogoDark,
+        },
+    },
+    pry: {
+        name: 'Pry',
+        toolsUsed: [],
+        notes: '',
+        logo: {
+            light: PryLogo,
+            dark: PryLogoDark,
         },
     },
     posthog: {

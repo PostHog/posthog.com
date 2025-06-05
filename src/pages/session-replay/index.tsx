@@ -9,8 +9,10 @@ import Product from 'components/Explorer/Product'
 import Screenshot from 'components/Screenshot'
 import { IconRewindPlay } from '@posthog/icons'
 import Presentation from 'components/Presentation'
+import useProduct from 'hooks/useProduct'
+import { useCustomers } from 'hooks/useCustomers'
 
-const slideClasses = 'bg-primary aspect-video p-6 relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
+const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
 // Component for rendering slide thumbnails
 const SlideThumbnails = ({ slides }: { slides: any[] }) => {
@@ -43,29 +45,73 @@ const SlideThumbnails = ({ slides }: { slides: any[] }) => {
 }
 
 export default function SessionReplay(): JSX.Element {
+    // Get session replay product data and customers
+    const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
+    const { getCustomers } = useCustomers()
+
+    // Get customer slugs from session replay product and retrieve customer data
+    const customerSlugs = sessionReplayProduct?.customers ? Object.keys(sessionReplayProduct.customers) : []
+    const customers = getCustomers(customerSlugs)
+
     // Define slides as data
     const slides = [
         {
             name: "Overview",
             content: (
                 <>
-                    <div className="flex items-center justify-center gap-1 mb-4">
-                        <IconRewindPlay className="text-yellow size-6" />
-                        <strong className="font-semibold">Session replay</strong>
+                    <div className="grid grid-cols-12 grid-rows-8 gap-y-4 h-full">
+                        <div className="col-span-8 row-span-5">
+                            <Screenshot
+                                product="Session replay"
+                                slug="session-replay"
+                                icon={<IconRewindPlay className="text-yellow" />}
+                                order={1}
+                                className={``}
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
+                            />
+                        </div>
+                        <div className="col-span-4 row-span-5 col-start-9 p-6">
+                            <div className="flex items-center gap-1 mb-4">
+                                <IconRewindPlay className="text-yellow size-6" />
+                                <strong className="font-semibold">Session replay</strong>
+                            </div>
+                            <h1 className="">Watch people use your product</h1>
+                            <p className=" max-w-lg mx-auto">
+                                Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
+                            </p>
+                        </div>
+                        {customers.slice(0, 4).map((customer, index) => {
+                            const customerData = sessionReplayProduct?.customers?.[customer.slug]
+                            return (
+                                <div key={customer.slug} className={`col-span-3 row-span-3 ${index === 0 ? 'row-start-6' : index === 1 ? 'col-start-4 row-start-6' : index === 2 ? 'col-start-7 row-start-6' : 'col-start-10 row-start-6'} flex flex-col p-4`}>
+                                    <div className="mb-3 flex">
+                                        {customer.logo ? (
+                                            <>
+                                                <img
+                                                    src={customer.logo.light}
+                                                    alt={customer.name}
+                                                    className="h-6 w-auto object-contain dark:hidden"
+                                                />
+                                                <img
+                                                    src={customer.logo.dark}
+                                                    alt={customer.name}
+                                                    className="h-6 w-auto object-contain hidden dark:block"
+                                                />
+                                            </>
+                                        ) : (
+                                            <span className="text-sm font-semibold">{customer.name}</span>
+                                        )}
+                                    </div>
+                                    {customerData && (
+                                        <>
+                                            <h3 className="text-sm font-semibold mb-2">{customerData.headline}</h3>
+                                            <p className="text-xs text-secondary">{customerData.description}</p>
+                                        </>
+                                    )}
+                                </div>
+                            )
+                        })}
                     </div>
-                    <h1 className="text-center">Watch people use your product</h1>
-                    <p className="text-center max-w-lg mx-auto">
-                        Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
-                    </p>
-
-                    <Screenshot
-                        product="Session replay"
-                        slug="session-replay"
-                        icon={<IconRewindPlay className="text-yellow" />}
-                        order={1}
-                        className={``}
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
-                    />
                 </>
             )
         },
