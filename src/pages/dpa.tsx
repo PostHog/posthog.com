@@ -425,7 +425,7 @@ function DpaGenerator() {
                     id="page"
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky reasonable:top-[57px] md:top-0 reasonable:md:top-[108px] z-10">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
@@ -850,7 +850,7 @@ function DpaGenerator() {
                         including the Principal Agreement, the terms of this Agreement shall prevail.
                     </p>
                     <p>WHEREAS</p>
-                    <p>(A) The Company acts as a Data Controller.</p>
+                    <p>(A) The Company acts as a Controller.</p>
                     <p>
                         (B) The Company wishes to subcontract certain Services, which imply the processing of
                         personal data, to the Processor.
@@ -871,45 +871,45 @@ function DpaGenerator() {
                             Agreement shall have the following meaning:
                         </p>
                         <div className="pl-8 pb-2">
-                            <p>1.1.1. "Agreement" means this Data Processing Agreement and all Annexes;</p>
+                            <p>1.1.1. "<strong>Agreement</strong>" means this Data Processing Agreement and all Annexes;</p>
                             <p>
-                                1.1.2. "Company Personal Data" means any Personal Data relating to Company's end
+                                1.1.2. "<strong>Company Personal Data</strong>" means any Personal Data relating to Company's end
                                 users provided to or Processed by the Processor on behalf of the Company pursuant to
                                 or in connection with the Principal Agreement;
                             </p>
                             <p>
-                                1.1.3. "Data Protection Laws" means all applicable laws relating to Processing of
+                                1.1.3. "<strong>Data Protection Laws</strong>" means all applicable laws relating to Processing of
                                 Personal Data and privacy that may exist in any relevant jurisdiction, including
                                 European Data Protection Laws and US Data Protection Laws;
                             </p>
-                            <p>1.1.4. "EEA" means the European Economic Area;</p>
+                            <p>1.1.4. "<strong>EEA</strong>" means the European Economic Area;</p>
                             <p>
-                                1.1.5. "EU Personal Data" means the Processing of Personal Data by the Processor to
+                                1.1.5. "<strong>EU Personal Data</strong>" means the Processing of Personal Data by the Processor to
                                 which data protection legislation of the European Union, or of a Member State of the
                                 European Union or EEA, applies;
                             </p>
                             <p>
-                                1.1.6. "European Data Protection Laws" means the GDPR, UK Data Protection Act 2018,
+                                1.1.6. "<strong>European Data Protection Laws</strong>" means the GDPR, UK Data Protection Act 2018,
                                 the UK GDPR, ePrivacy Directive 2002/58/EC, FADP, and any associated or additional
                                 legislation in force in the EU, EEA, Member States and the United Kingdom as
                                 amended, replaced or superseded from time to time;
                             </p>
                             <p>
-                                1.1.7. "FADP" means the Swiss Federal Act on Data Protection and its Ordinances, as
+                                1.1.7. "<strong>FADP</strong>" means the Swiss Federal Act on Data Protection and its Ordinances, as
                                 amended from time to time;
                             </p>
                             <p>
-                                1.1.8. "FDPIC" means the Swiss Federal Data Protection and Information Commissioner;
+                                1.1.8. "<strong>FDPIC</strong>" means the Swiss Federal Data Protection and Information Commissioner;
                             </p>
-                            <p>1.1.9. "GDPR" General Data Protection Regulation EU2016/679;</p>
+                            <p>1.1.9. "<strong>GDPR</strong>" General Data Protection Regulation EU2016/679;</p>
                             <p>
-                                1.1.10. "UK GDPR" means General Data Protection Regulation (EU) 2016/679 as
+                                1.1.10. "<strong>UK GDPR</strong>" means General Data Protection Regulation (EU) 2016/679 as
                                 applicable as part of UK domestic law by virtue of section 3 of the European Union
                                 (Withdrawal) Act 2018 and as amended by the Data Protection, Privacy and Electronic
                                 Communications (Amendments etc) (EU Exit) Regulations 2019 (as amended);
                             </p>
                             <p>
-                                1.1.11. "US Data Protection Laws" means all data privacy, data protection, and
+                                1.1.11. "<strong>US Data Protection Laws</strong>" means all data privacy, data protection, and
                                 cybersecurity laws, rules, and regulations of the United States applicable to the
                                 Processing of Personal Data under the Principal Agreement. "US Data Protection Laws"
                                 may include, but is not limited to, the California Consumer Privacy Act of 2018, as
@@ -921,9 +921,9 @@ function DpaGenerator() {
                                 amended or updated from time to time;
                             </p>
                             <p>
-                                1.1.12. "Protected Area" means (i) in the case of EU Personal Data, the member
+                                1.1.12. "<strong>Protected Area</strong>" means (i) in the case of EU Personal Data, the member
                                 states of the European Union and the EEA and any country, territory, sector or
-                                international organization in respect of which an adequacy decision under Art 45
+                                international organization in respect of which an adequacy decision under Article 45
                                 GDPR is in force or (ii) in the case of UK Personal Data, the United Kingdom and any
                                 country, territory, sector or international organization in respect of which an
                                 adequacy decision under UK adequacy regulations is in force; or (iii) in the case of
@@ -932,41 +932,40 @@ function DpaGenerator() {
                                 case may be);
                             </p>
                             <p>
-                                1.1.13. "Personal Data" means any information provided by Company to Processor that
+                                1.1.13. "<strong>Personal Data</strong>" means any information provided by Company to Processor that
                                 is protected as "personal data," "personal information," "personally identifiable
                                 information," or similar terms defined in Data Protection Laws;
                             </p>
                             <p>
-                                1.1.14. "Services" means the product and data analytics services the Processor
+                                1.1.14. "<strong>Services</strong>" means the product and data analytics services the Processor
                                 provides pursuant to the Principal Agreement , including but not limited to the
                                 provision of testing, support, product development, service improvement,
-                                benchmarking and troubleshooting activities on behalf of the Data Controller.
+                                benchmarking and troubleshooting and security activities on behalf of the Data Controller, and which may include AI and machine learning tools ("<strong>AI Features</strong>") if enabled for the Company depending on their use of the services; 
+
                             </p>
                             <p>
-                                1.1.15. "Subprocessor" means any person appointed by or on behalf of Processor to
+                                1.1.15. "<strong>Subprocessor</strong>" means any person appointed by or on behalf of Processor to
                                 Process Personal Data on behalf of the Company in connection with the Agreement.
                             </p>
                             <p>
-                                1.1.16. "Standard Contractual Clauses" means (i) in respect of UK Personal Data, the
-                                International Data Transfer Addendum to the EU Standard Contractual Clauses, issued
-                                by the Information Commissioner and laid before Parliament in accordance with s.119A
-                                of the Data Protection Act 2018 on 2 February 2022 ("UK Standard Contractual
-                                Clauses"); (ii) in respect of EU Personal Data, the standard contractual clauses for
-                                the transfer of personal data to third countries pursuant to the GDPR, adopted by
-                                the European Commission under Commission Implementing Decision (EU) 2021/914
-                                including the text from module 2 and no other modules and not including any clauses
-                                marked as optional, ("EU Standard Contractual Clauses"); and (iii) in respect of
-                                Swiss Personal Data, the EU Standard Contractual Clauses with the necessary
-                                adaptations and amendments for the purposes of the FADP as required by the FDPIC in
-                                its Statement of 27 August 2021;
+                                1.1.16. "<strong>Standard Contractual Clauses</strong>" means:
+                            </p>
+                            <div className="pl-8 pb-2">
+                                <p>
+                                    1.1.16.1 in respect of UK Personal Data, the International Data Transfer Addendum to the EU Standard Contractual Clauses, issued by the Information Commissioner and laid before Parliament in accordance with s.119A of the Data Protection Act 2018 on 2 February 2022 ("<strong>UK Standard Contractual Clauses</strong>"):
+                                </p>
+                                <p>
+                                    1.1.16.2 in respect of EU Personal Data, the standard contractual clauses for the transfer of personal data to third countries pursuant to the GDPR, adopted by the European Commission under Commission Implementing Decision (EU) 2021/914 including the text from module 2 and no other modules and not including any clauses marked as optional, ("<strong>EU Standard Contractual Clauses</strong>");
+                                </p>
+                                <p>
+                                    1.1.16.3 in respect of Swiss Personal Data, the EU Standard Contractual Clauses with the necessary adaptations and amendments for the purposes of the FADP as required by the FDPIC in its Statement of 27 August 2021;
+                                </p>
+                            </div>
+                            <p>
+                                1.1.17. "<strong>Swiss Personal Data</strong>" means the Processing of Personal Data by the Processor to which the FADP applies;
                             </p>
                             <p>
-                                1.1.17. "Swiss Personal Data" means personal data to which the FADP was applicable
-                                prior to its Processing by Processor;
-                            </p>
-                            <p>
-                                1.1.18. "UK Personal Data" means the Processing of Personal Data by the Processor to
-                                which the laws of the United Kingdom apply
+                                1.1.18. "<strong>UK Personal Data</strong>" means the Processing of Personal Data by the Processor to which the laws of the United Kingdom apply;
                             </p>
                         </div>
                         <p>
@@ -1000,7 +999,7 @@ function DpaGenerator() {
                             </p>
                             <p>
                                 2.1.3. instruct the Processor to process Company Personal Data to provide the
-                                Services.
+                                Services. The Company acknowledges that if AI Features are enabled as part of the Services, such AI Features may use rely on AI functionality (based on OpenAI's model or similar LLMs). Note that the Processor does not use any AI input or output data (including Company Personal Data) to fine tune, train or develop its AI functionality or models for its own purposes nor does the Company allow any third parties (including its Subprocessors) to do this.
                             </p>
                         </div>
                         <p>2.2. Processor shall:</p>
@@ -1185,11 +1184,7 @@ function DpaGenerator() {
                     </p>
                     <div className="pl-8 pb-2">
                         <p>
-                            9.1. Following a request from the Company, Processor shall promptly and in any event
-                            within 10 business days of the date of cessation of any Services involving the
-                            Processing of Company Personal Data, return or delete and procure the deletion of all
-                            copies of the Company Personal Data unless applicable laws require storage of such
-                            Company Personal Data.
+                            9.1. At the end of the Services, upon the Company's request, Processor shall securely return the Company Personal Data or provide a self-service functionality allowing Company to do the same or delete or procure the deletion of all copies of the Company Personal Data unless applicable laws require storage of such Company or is required to resolve a dispute between the parties or the retention of the Company Personal Data is necessary to combat harmful use of the Services.
                         </p>
                     </div>
 
@@ -1203,14 +1198,11 @@ function DpaGenerator() {
                             unless the parties otherwise expressly agree in writing.
                         </p>
                         <p>
-                            10.2. <strong>Transfers.</strong> The Company acknowledges that the Processor will
-                            Process the Company Personal Data outside of the Protected Area including in the US to
-                            provide the Services.
+                            10.2. <strong>Transfers.</strong> The Company acknowledges that the Processor will Process the Company Personal Data outside of the Protected Area including in the US and elsewhere as identified in Annex III to provide the Services. Company agrees to authorize the transfers to these countries.
                         </p>
                         <p>
                             10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
-                            in the EU-US Data Privacy Framework and the UK Extension to this Framework (together,
-                            the "DPF"). The Supplier undertakes to maintain its self-certification to the DPF; to
+                            in the EU-US Data Privacy Framework and the UK Extension to this Framework and the Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Supplier undertakes to maintain its self-certification to the DPF; to
                             notify Company without undue delay if Processor determines that it will cease to
                             self-certify to the DPF; and to notify Company immediately if Processor's participation
                             in the DPF is otherwise terminated. [In respect of UK Personal Data, Company hereby
@@ -1228,46 +1220,43 @@ function DpaGenerator() {
                             Appendices to the UK Standard Contractual Clauses being as set out in Annex I and II of
                             this Agreement
                         </p>
-                        <p className="pl-8 pb-2">
-                            In relation to the EU Standard Contractual Clauses, the Parties agree that:
+                        <p>
+                            10.5. In relation to the EU Standard Contractual Clauses, the Parties agree that:
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
-                                10.4.1. for the purposes of clause 9, option 2 (general written authorization for
-                                subprocessors) shall apply and the Parties agree that the time period for notifying
-                                changes to the list shall be in accordance with Clause 5.3 above;
+                                10.5.1. for the purposes of clause 9, option 2 (general written authorization for subprocessors) shall apply and the Parties agree that the time period for notifying changes to the list shall be in accordance with Clause 5.3 above;
                             </p>
                             <p>
-                                10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of
-                                Ireland
+                                10.5.2. for the purposes of clause 17, the clauses shall be governed by the laws of Ireland;
                             </p>
-                            <p>10.4.3. for the purposes of clause 18, the courts of Ireland shall have jurisdiction; and</p>
+                            <p>
+                                10.5.3. for the purposes of clause 18, the courts of Ireland shall have jurisdiction; and 
+                            </p>
+                            <p>
+                                10.5.4. for the purposes of clause 13 and Annex I.C, the competent supervisory authority shall be determined in accordance with the GDPR, based on the data exporter's establishment or representative within the EEA.
+                            </p>
                         </div>
                         <p>
-                            10.4.4. for the purposes of clause 13 and Annex I.C, the competent supervisory authority
-                            shall be determined in accordance with the GDPR, based on the data exporter's
-                            establishment or representative within the EEA.
-                        </p>
-                        <p>
-                            10.5. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
+                            10.6. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
                             such Addendum, the Parties agree to change the format of the information set out in Part
                             1 of the Addendum so that:
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
-                                10.5.1. the details of the parties in table 1 shall be as set out in Annex I (with
+                                10.6.1. the details of the parties in table 1 shall be as set out in Annex I (with
                                 no requirement for signature);
                             </p>
                             <p>
-                                10.5.2. for the purposes of table 2, the Addendum shall be appended to the EU
+                                10.6.2. for the purposes of table 2, the Addendum shall be appended to the EU
                                 Standard Contractual Clauses as defined above (including the selection of modules
                                 and options and the disapplication of optional clauses as noted in the definition
                                 above); and
                             </p>
-                            <p>10.5.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
+                            <p>10.6.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
                         </div>
                         <p>
-                            10.6. In relation to Swiss Personal Data that is transferred outside of the Protected
+                            10.7. In relation to Swiss Personal Data that is transferred outside of the Protected
                             Area, the Parties agree that such transfers shall be subject to the EU Standard
                             Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
                             following amendments: (a) any references to the GDPR shall be interpreted as references
@@ -1283,11 +1272,11 @@ function DpaGenerator() {
                             Clauses as natural persons.
                         </p>
                         <p>
-                            10.7. In the event of any conflict between this Agreement and the Standard Contractual
+                            10.8. In the event of any conflict between this Agreement and the Standard Contractual
                             Clauses, the Standard Contractual Clauses shall prevail.
                         </p>
                         <p>
-                            10.8. In the event that a relevant European Commission decision or other valid adequacy
+                            10.9. In the event that a relevant European Commission decision or other valid adequacy
                             method under applicable Data Protection Legislation on which the Company has relied in
                             authorising the data transfer is held to be invalid, or that any supervisory authority
                             requires transfers of personal data made pursuant to such decision to be suspended, or
@@ -1303,7 +1292,7 @@ function DpaGenerator() {
                         <p>
                             11.1. <em>Confidentiality.</em> Each Party must keep this Agreement and information it
                             receives about the other Party and its business in connection with this Agreement
-                            ("Confidential Information") confidential and must not use or disclose that Confidential
+                            ("<strong>Confidential Information</strong>") confidential and must not use or disclose that Confidential
                             Information without the prior written consent of the other Party except to the extent
                             that:
                         </p>
@@ -1319,7 +1308,7 @@ function DpaGenerator() {
                         </p>
                         <p>
                             11.3. <em>Governing Law and Jurisdiction.</em> This Agreement is governed by the laws
-                            and choice of jurisdiction stipulated in the Agreement.
+                            and choice of jurisdiction stipulated in the Principal Agreement.
                         </p>
                     </div>
                     <p className="[page-break-before:always] print:pt-12">
@@ -1357,8 +1346,7 @@ function DpaGenerator() {
 
                     <p>
                         Product analytics, including insights, heatmaps, session recording and feature flags.
-                        Troubleshooting, benchmarking, product development and service improvement activities to
-                        ensure the continuing provision of the Services.
+                        Troubleshooting, benchmarking, product development, security activities, and service improvement activities to ensure the continuing provision of the Services. These Services may, if AI Features are enabled, use machine learning tools to support these purposes.
                     </p>
 
                     <p>
@@ -1572,8 +1560,9 @@ function DpaGenerator() {
                         mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
                     }`}
                 >
-                    <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
-                        {subprocessors.map((subprocessor, index) => (
+                    <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm pb-8">
+                        <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">PostHog EU Cloud and PostHog US Cloud Subprocessor(s)</div>
+                        {subprocessors.filter(subprocessor => subprocessor.type === 'cloud').map((subprocessor, index) => (
                             <React.Fragment key={index}>
                                 <div className="col-span-3 @xl:!-mb-6">
                                     <h3 className="!my-0 text-xl">
@@ -1628,7 +1617,7 @@ function DpaGenerator() {
                                         Type of personal data processed
                                     </strong>
                                     <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
-                                        {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
+                                        {Object.entries(subprocessor.dataTypes).map(([typeName, typeValues]) => (
                                             <React.Fragment key={typeName}>
                                                 <div>
                                                     <strong className="block pb-1">{typeName}</strong>
@@ -1649,18 +1638,83 @@ function DpaGenerator() {
                                 </div>
                             </React.Fragment>
                         ))}
-                    </div>
-
-                    <div
-                        className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
-                            mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
-                        }`}
-                    >
-                        <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
-                            {subprocessors.map((subprocessor, index) => (
-                                <React.Fragment key={index}>{/* ...subprocessor content... */}</React.Fragment>
-                            ))}
-                        </div>
+                        <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">Only if AI features are enabled</div>
+                        {subprocessors.filter(subprocessor => subprocessor.type === 'ai').map((subprocessor, index) => (
+                            <React.Fragment key={index}>
+                                <div className="col-span-3 md:@xl:!-mb-6">
+                                    <h3 className="!my-0 text-xl">
+                                        <strong>{subprocessor.name}</strong>
+                                    </h3>
+                                </div>
+                                <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
+                                    <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
+                                    <div className="pt-2">
+                                        <strong>Details</strong>
+                                        <br />
+                                        <a
+                                            href={subprocessor.details}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="[word-break:break-word]"
+                                        >
+                                            {subprocessor.details}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                    <div>
+                                        <strong className="block">Categories of data subject</strong>
+                                        <div>{subprocessor.categories}</div>
+                                    </div>
+                                    <div>
+                                        <strong className="block">Duration of the processing</strong>
+                                        <div>{subprocessor.duration}</div>
+                                    </div>
+                                    <div>
+                                        <strong className="block">Geographical location of the processing</strong>
+                                        <div>{subprocessor.location}</div>
+                                    </div>
+                                </div>
+                                <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                    <div>
+                                        <div>
+                                            <strong>Subject matter of the processing</strong>
+                                        </div>
+                                        <div>{subprocessor.subject}</div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <strong>Nature and purpose of the processing</strong>
+                                        </div>
+                                        <div>{subprocessor.reason}</div>
+                                    </div>
+                                </div>
+                                <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
+                                    <strong className="block mb-2 text-base">
+                                        Type of personal data processed
+                                    </strong>
+                                    <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
+                                        {Object.entries(subprocessor.dataTypes).map(([typeName, typeValues]) => (
+                                            <React.Fragment key={typeName}>
+                                                <div>
+                                                    <strong className="block pb-1">{typeName}</strong>
+                                                    <ul className="pl-4 !mb-1">
+                                                        {typeValues.map((typeValue, index) => (
+                                                            <li
+                                                                key={index}
+                                                                className="!mb-0 !leading-normal !text-sm"
+                                                            >
+                                                                {typeValue}
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
+                                </div>
+                            </React.Fragment>
+                        ))}
                     </div>
                 </div>
                 </div>
