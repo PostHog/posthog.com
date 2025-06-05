@@ -1,6 +1,5 @@
 import React from 'react'
 import Layout from 'components/Layout'
-import Explorer from 'components/Explorer'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -9,6 +8,9 @@ import ProductSidebar from 'components/Explorer/ProductSidebar'
 import Product from 'components/Explorer/Product'
 import Screenshot from 'components/Screenshot'
 import { IconRewindPlay } from '@posthog/icons'
+import Presentation from 'components/Presentation'
+
+const slideClasses = 'bg-primary aspect-video p-6 relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
 export default function SessionReplay(): JSX.Element {
     return (
@@ -18,15 +20,36 @@ export default function SessionReplay(): JSX.Element {
                 description="Watch people use your product to diagnose issues and understand user behavior"
                 image={`/images/og/session-replay.jpg`}
             />
-            <Explorer
-                template="product"
+            <Presentation
+                template="generic"
                 slug="session-replay"
-                title="Watch people use your product"
+                title=""
                 sidebarContent={<ProductSidebar type="session_replay" />}
             >
-                <p className="max-w-lg">
-                    Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
-                </p>
+                <div className="bg-accent grid grid-cols-1 gap-4">
+                    <div className={slideClasses}>
+                        <h1 className="text-center">Watch people use your product</h1>
+                        <p className="text-center max-w-lg mx-auto">
+                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
+                        </p>
+
+                        <Screenshot
+                            product="Session replay"
+                            slug="session-replay"
+                            icon={<IconRewindPlay className="text-yellow" />}
+                            order={1}
+                            className={``}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
+                        />
+
+                    </div>
+                    <div className={slideClasses}>
+                        slide 2
+                    </div>
+                    <div className={slideClasses}>
+                        slide 3
+                    </div>
+                </div>
 
                 <p className="flex gap-2">
                     <CallToAction href="/signup" type="primary" size="md">
@@ -36,15 +59,6 @@ export default function SessionReplay(): JSX.Element {
                         Talk to a human
                     </CallToAction>
                 </p>
-
-                <Screenshot
-                    product="Session replay"
-                    slug="session-replay"
-                    icon={<IconRewindPlay className="text-yellow" />}
-                    order={1}
-                    className={``}
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
-                />
 
                 <Product
                     type="session_replay"
@@ -61,7 +75,7 @@ export default function SessionReplay(): JSX.Element {
                         'changelog',
                     ]}
                 />
-            </Explorer>
+            </Presentation>
         </>
     )
 }
