@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Layout from 'components/Layout'
 import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
@@ -11,6 +11,9 @@ import { IconRewindPlay } from '@posthog/icons'
 import Presentation from 'components/Presentation'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
+import useProducts from 'hooks/useProducts'
+import { Tabs } from 'radix-ui'
+import ImageSlider from 'components/Pricing/Test/ImageSlider'
 
 const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
@@ -57,6 +60,75 @@ const SlideThumbnails = ({ slides }: { slides: any[] }) => {
                 <SlideThumb key={index} slide={slide} index={index} />
             ))}
         </div>
+    )
+}
+
+// Features component using tab UI
+const FeaturesTab = () => {
+    const { products } = useProducts()
+    const sessionReplayProduct = products.find(product => product.type === 'session_replay')
+    const featuresContent = sessionReplayProduct?.features || []
+    const [currentTab, setCurrentTab] = useState(0)
+
+    if (featuresContent.length === 0) {
+        return <div className="p-4">No features available</div>
+    }
+
+    return (
+        <Tabs.Root
+            className="flex w-full h-full items-start bg-accent"
+            defaultValue={`tab-${currentTab}`}
+            value={`tab-${currentTab}`}
+            onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
+            orientation="horizontal"
+        >
+            <Tabs.List className="flex flex-col p-1 gap-0.5 w-sm" aria-label="Features">
+                {featuresContent.map((item, index) => (
+                    <Tabs.Trigger
+                        className={`flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group ${item.icon ? `p-1` : 'px-3 py-2'
+                            }`}
+                        key={index}
+                        value={`tab-${index}`}
+                    >
+                        {item.icon && (
+                            <span
+                                className={`bg-${item.color}/10 p-1 rounded size-7 text-${item.color} group-hover:bg-${item.color}/25 group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}
+                            >
+                                {item.icon}
+                            </span>
+                        )}
+                        {item.title}
+                    </Tabs.Trigger>
+                ))}
+            </Tabs.List>
+            {featuresContent.map((item, index) => (
+                <Tabs.Content
+                    className="flex-1 bg-primary border-l border-primary grow rounded px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full"
+                    key={index}
+                    value={`tab-${index}`}
+                >
+                    <div className="pb-4">
+                        <h2 className="text-xl mb-0">{item.headline} | {item.title}</h2>
+                        <p className="text-sm">{item.description}</p>
+                    </div>
+
+                    <div className="order-2 @3xl:order-1">
+                        {item.features &&
+                            item.features.map((feature, index) => (
+                                <div key={index}>
+                                    <h3 className="text-base mb-1">{feature.title}</h3>
+                                    <p className="text-sm">{feature.description}</p>
+                                </div>
+                            ))}
+                    </div>
+                    {item.images && item.images.length > 0 && (
+                        <div className="order-1 @3xl:order-2">
+                            <ImageSlider images={item.images} id={`feature-${index}`} />
+                        </div>
+                    )}
+                </Tabs.Content>
+            ))}
+        </Tabs.Root>
     )
 }
 
@@ -142,9 +214,8 @@ export default function SessionReplay(): JSX.Element {
         {
             name: "Features",
             content: (
-                <div className="text-center h-full" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-                    <h3>Slide 2</h3>
-                    <p>Content for slide 2</p>
+                <div className="h-full" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                    <FeaturesTab />
                 </div>
             )
         },
@@ -172,12 +243,12 @@ export default function SessionReplay(): JSX.Element {
                 title=""
                 sidebarContent={<SlideThumbnails slides={slides} />}
             >
-                <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&_div:first-child_h2]:hidden [&_div:first-child_div]:border-t-0">
+                <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&_div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0">
                     {slides.map((slide, index) => (
                         <div key={index} className="flex flex-col justify-center">
-                            <h2 data-scheme="secondary" className="inline-flex mx-auto bg-accent rounded-sm px-2 py-0.5 text-sm font-semibold text-primary my-2">
+                            <span data-scheme="secondary" className="slideName inline-flex mx-auto bg-accent rounded-sm px-2 py-0.5 text-sm font-semibold text-primary my-2">
                                 {slide.name}
-                            </h2>
+                            </span>
                             <div
                                 className={slideClasses}
                                 data-slide={index}

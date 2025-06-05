@@ -16,6 +16,7 @@ import {
     IconStickiness,
     IconDashboard,
     IconHogQL,
+    IconGanttChart,
 } from '@posthog/icons'
 import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
@@ -384,6 +385,73 @@ const initialProducts = [
                 description: 'We\'ve improved our whole onboarding flow by about 5% too, which is great.'
             },
         },
+        features: [
+            {
+                title: 'Event timeline',
+                headline: 'Event timeline',
+                description: 'See the history of everything that happened in a user\'s session, including clicks, scrolls, and more.',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png',
+                        alt: 'Basic funnel visualization',
+                    },
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png',
+                        alt: 'Grouped funnel visualization',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Filtering',
+                        description:
+                            'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
+                    },
+                    {
+                        title: 'Graph types',
+                        description:
+                            "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time",
+                    },
+                    {
+                        title: 'Step ordering',
+                        description:
+                            'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
+                    },
+                    {
+                        title: 'Granular controls',
+                        description:
+                            'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
+                    },
+                ],
+                icon: <IconGanttChart />,
+                color: 'blue',
+            },
+            {
+                title: 'Console logs',
+                headline: 'Console logs',
+                description: "Debug issues faster by browsing the user's console",
+                icon: <IconDashboard />,
+                color: 'green',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/console.png',
+                        alt: 'Console logs',
+                    },
+                ],
+            },
+            {
+                title: 'Network monitor',
+                headline: 'Network monitor',
+                description: "Analyze performance and network calls",
+                icon: <IconDashboard />,
+                color: 'green',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+                        alt: 'Network monitor',
+                    },
+                ],
+            }
+        ]
     },
     {
         Icon: IconToggle,
