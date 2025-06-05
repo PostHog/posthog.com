@@ -73,6 +73,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/bigquery',
                 },
                 {
+                    name: 'Google Ads',
+                    url: '/docs/cdp/sources/google-ads',
+                },
+                {
                     name: 'Self-managed',
                 },
                 {
