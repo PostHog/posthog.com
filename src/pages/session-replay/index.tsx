@@ -19,14 +19,14 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
     return (
         <div
             data-scheme="primary"
-            className="bg-primary border border-input rounded-md p-2 cursor-pointer hover:border-primary"
+            className="group cursor-pointer"
             onClick={() => {
                 // Scroll to slide
                 const slideElement = document.querySelector(`[data-slide="${index}"]`)
                 slideElement?.scrollIntoView({ behavior: 'smooth' })
             }}
         >
-            <div className="aspect-video bg-accent rounded overflow-hidden relative">
+            <div className="aspect-video bg-primary border border-primary group-hover:border-primary rounded-sm overflow-hidden relative">
                 <div
                     style={{
                         transform: 'scale(0.25)',
@@ -41,7 +41,7 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
                     {slide.content}
                 </div>
             </div>
-            <div className="text-xs text-secondary mt-1 text-center">
+            <div className="text-xs text-secondary mt-1 text-center font-medium">
                 {slide.name}
             </div>
         </div>
@@ -51,8 +51,8 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
 // Component for rendering slide thumbnails
 const SlideThumbnails = ({ slides }: { slides: any[] }) => {
     return (
-        <div className="space-y-2 p-4">
-            <h3 className="text-sm font-semibold text-secondary mb-3">Slides</h3>
+        <div className="space-y-3 p-1">
+            <h3 className="text-sm text-center font-semibold text-secondary mb-3">Slides</h3>
             {slides.map((slide, index) => (
                 <SlideThumb key={index} slide={slide} index={index} />
             ))}
