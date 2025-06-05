@@ -33,7 +33,7 @@ posthog.capture('user_signed_up', {
 If a code snippet has missing application context or business logic, it can be improved.
 
 **In-context example:**
-```js
+```js focusOnLines=6-14
 // Importing PostHog into the app
 const posthog = require('posthog-node')
 
@@ -42,15 +42,12 @@ app.post('/api/signup', async (req, res) => {
 
   try {
     const user = await createUser({ email, password })
-    // Calling PostHog inside business logic
-    posthog.capture({ 
-        distinctId: user.id, 
-        event: 'user_signed_up',
-        properties: {
-            is_free_trial: true,
-        },
-    })
-    res.status(201).json({ message: 'Signup successful', userId: user.id })
+    // Calling PostHog inside business logic // HIGHLIGHT
+    posthog.capture('user_signed_up', { // HIGHLIGHT
+        login_type: 'email', // HIGHLIGHT
+        is_free_trial: true // HIGHLIGHT
+    }) // HIGHLIGHT
+    res.status(201).json({ message: 'Signup successful', userId: email})
   } catch (error) {
     res.status(500).json({ error: 'Signup failed' })
   }
@@ -104,9 +101,9 @@ Under ~~**User** in your **Settings**~~ **Settings** > **User**, click the butto
 
 Nits and semantics and formatting (oh my!) – they're all part of the fun of technical writing. Attention to detail is what turns good docs into great ones, so don't shy away from it.
 
-This does *not* mean our docs have to be dry or academic. In fact, they should have a natural flow that makes them easy to read. Be open, direct, and opinionated. Don't be afraid to add humor and style when there's opportunity.
+This does *not* mean our docs have to be dry or academic. In fact, they should have a natural flow that makes them easy to read. Be open, direct, and opinionated. Don't be afraid to add humor and personality when there's opportunity.
 
-PostHog's writing voice is one of the key things that sets us apart from a sea of generic SaaS platforms. It's important that this voice comes through in our docs.
+PostHog's writing voice is one of the key things that sets us apart from a sea of generic SaaS platforms. It's important that this voice can come through in our docs.
 
 The [docs style guide](/handbook/content/docs-style-guide) is a key reference we'll continue to update with examples and best practices.
 
@@ -122,7 +119,7 @@ Here's how we loosely define high-priority docs work:
 - Anything that blocks product adoption or severely impacts the product experience  
 - Anything that speeds up new content velocity or improves overall quality
 - Anything that unblocks better LLM-assisted workflows
-- *Usable* docs (e.g., improve SDK references) come first, *cool* docs (e.g., interactive code editor) come after
+- *Usable* docs (e.g., SDK references) come first, *cool* docs (e.g., interactive code editor) come after
 
 ## Measuring success
 
