@@ -399,7 +399,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         )}
                     </>
                 }
-                body={{ type: 'mdx', content: body }}
+                body={{ type: 'mdx', content: body, featuredImage, contributors }}
                 title={title}
                 tableOfContents={tableOfContents}
                 mdxComponents={components}
