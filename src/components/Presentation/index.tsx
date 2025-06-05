@@ -79,7 +79,7 @@ export default function Presentation({
         )}
         <main
           data-app="Presentation"
-          data-scheme="primary"
+          data-scheme="secondary"
           className="@container flex-1 bg-primary relative h-full"
         >
           {!fullScreen && (
