@@ -7,6 +7,8 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import ProductSidebar from 'components/Explorer/ProductSidebar'
 import Product from 'components/Explorer/Product'
+import Screenshot from 'components/Screenshot'
+import { IconRewindPlay } from '@posthog/icons'
 
 export default function SessionReplay(): JSX.Element {
     return (
@@ -34,6 +36,16 @@ export default function SessionReplay(): JSX.Element {
                         Talk to a human
                     </CallToAction>
                 </p>
+
+                <Screenshot
+                    product="Session replay"
+                    slug="session-replay"
+                    icon={<IconRewindPlay className="text-yellow" />}
+                    order={1}
+                    className={``}
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
+                />
+
                 <Product
                     type="session_replay"
                     indexLinks={[
