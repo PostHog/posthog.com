@@ -33,19 +33,19 @@ This will allow us to better manage the ClickHouse load
 
 Each query send to ClickHouse must have the following tags:
 
-    * org_id => organization id
-    * team_id => team id
-    * user_id => query run initiated by a user
-    * access_method => `personal_api_key` (or `app`?)
-    * product => PostHog product name
-    
-    * route_id => route_id in `api`
-    * workload => online / offline
-    * dashboard_id => if part of dashboard
-    * insight_id => if query is run to show insight
-    * kind => it used to have
-    * id => it used to have a id of a workload (e.g. celery job name, function calling it)
-    
-    * name => you can name your query
-    * http_request_id => HTTP request that initiated a query
-    * http_correlation_id => correlation id from HTTP request
+  * org_id => organization id
+  * team_id => team id
+  * user_id => query run initiated by a user
+  * access_method => `personal_api_key` (or `app`?)
+  * product => PostHog product name
+
+  * route_id => route_id in `api`
+  * workload => online / offline
+  * dashboard_id => if part of dashboard
+  * insight_id => if query is run to show insight
+  * kind => it used to have
+  * id => it used to have a id of a workload (e.g. celery job name, function calling it)
+
+  * name => you can name your query
+  * http_request_id => HTTP request that initiated a query
+  * http_correlation_id => correlation id from HTTP request
