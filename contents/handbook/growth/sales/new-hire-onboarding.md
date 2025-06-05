@@ -48,6 +48,8 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
 - Any additional [tools you may find useful](#tools-that-you-may-find-useful)!
 
+*Note: You'll be added to group emails sent to sales@posthog.com or cs-onboarding@posthog.com. It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
+
 ## Technical Account Executive ramp
 
 ### Day 1
