@@ -1,5 +1,5 @@
 ---
-title: The product engineer's guide to vibe designing
+title: The engineer's guide to vibe designing
 # Alt: Vibe design for product engineers
 # Alt2: Vibe-Driven Development: How to Design Without a Designer
 date: 2025-05-22
@@ -376,6 +376,7 @@ You don't need a designer to build great UI. You need:
 - The right prompts
 
 ![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
+<Caption>You, probably.</Caption>
 
 Word by Lior Neu-ner, who is always down for a good vibe.
 
