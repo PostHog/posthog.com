@@ -25,7 +25,7 @@ npm install --save posthog-node
 
 Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to **export** your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
 
-```js file=index.js
+```js file=index.ts
 import { env } from 'hono/adapter'
 import { createMiddleware } from 'hono/factory'
 import { PostHog } from 'posthog-node'
@@ -35,10 +35,10 @@ const posthogServerMiddleware = createMiddleware(async (c, next) => {
   const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
 
   posthog.capture({
-      distinctId: 'distinct_id_of_user',
+      distinctId: 'distinct_id_of_user', // Their user id or email
       event: 'user_did_something',
   })
-  await posthog.shutdown()
+  await posthog.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
   await next()
 })
 ```
