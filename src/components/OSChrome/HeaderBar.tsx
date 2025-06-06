@@ -10,6 +10,7 @@ import {
     IconSearch,
     IconBook,
     IconTableOfContents,
+    IconPlay,
 } from '@posthog/icons'
 import { useWindow } from '../../context/Window'
 interface HeaderBarProps {
@@ -24,6 +25,7 @@ interface HeaderBarProps {
     showBookmark?: boolean
     showToc?: boolean
     showSidebar?: boolean
+    showFullScreen?: boolean
     rightActionButtons?: React.ReactNode
 }
 
@@ -39,6 +41,7 @@ export default function HeaderBar({
     showBookmark = false,
     showToc = false,
     showSidebar = false,
+    showFullScreen = false,
     rightActionButtons,
 }: HeaderBarProps) {
     const { goBack, goForward, canGoBack, canGoForward } = useWindow()
@@ -46,9 +49,8 @@ export default function HeaderBar({
         <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
             <div>
                 <motion.div
-                    className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${
-                        isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
-                    }`}
+                    className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                        }`}
                 >
                     {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
                     <div className="hidden @2xl:block">
@@ -85,9 +87,8 @@ export default function HeaderBar({
             </div>
             {showSidebar && (
                 <motion.div
-                    className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
-                        isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
-                    }`}
+                    className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                        }`}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
                     {showToc && (
@@ -101,6 +102,15 @@ export default function HeaderBar({
                         </div>
                     )}
                 </motion.div>
+            )}
+            {showFullScreen && (
+                <OSButton
+                    // onClick={ }
+                    variant="primary"
+                    size="sm"
+                    // active={ }
+                    icon={<IconPlay />}
+                />
             )}
         </div>
     )

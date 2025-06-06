@@ -120,6 +120,7 @@ export default function Presentation({
                 showSearch
                 isNavVisible={isNavVisible}
                 onToggleNav={toggleNav}
+                showFullScreen
               />
             </>
           )}
