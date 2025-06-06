@@ -153,7 +153,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
     >
       <div
         ref={contentRef}
-        className="absolute top-1/2 left-1/2 origin-center"
+        className="absolute top-1/2 left-1/2 origin-center shadow-2xl rounded border border-primary bg-primary"
         style={{
           width: baseWidth,
           height: baseHeight,

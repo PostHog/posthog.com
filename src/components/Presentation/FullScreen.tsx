@@ -143,8 +143,8 @@ const PresentationMode = ({
       </div>
 
       {/* Current slide */}
-      <div className="w-full h-full flex items-center justify-center p-4">
-        <div className="aspect-video max-w-full max-h-full w-full bg-primary rounded overflow-hidden shadow-2xl">
+      <div className="w-full h-full flex items-center justify-center p-4 bg-accent">
+        <div className="aspect-video max-w-full max-h-full w-full overflow-hidden">
           <ScalableSlide mode="presentation" baseWidth={1280} baseHeight={720}>
             {slideContent}
           </ScalableSlide>

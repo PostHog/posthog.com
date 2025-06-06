@@ -31,7 +31,7 @@ const SlideThumb = ({ slide, index, isActive }: { slide: any; index: number; isA
                 slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             }}
         >
-            <div className="aspect-video bg-primary border border-primary group-hover:border-primary rounded-sm overflow-hidden relative">
+            <div className={`aspect-video bg-primary border rounded-sm overflow-hidden relative ${isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'}`}>
                 <ScalableSlide mode="thumbnail" baseWidth={1280} baseHeight={720}>
                     {slide.thumbnailContent || slide.rawContent || slide.content}
                 </ScalableSlide>
@@ -145,17 +145,27 @@ export default function SessionReplay(): JSX.Element {
         {
             name: "Overview",
             content: (
-                <div className="h-full p-12 flex flex-col justify-center" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-                    <div className="max-w-2xl">
+                <div className="h-full p-12 flex flex-col relative">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg"
+                        alt="Session replay"
+                        className="absolute bottom-0 left-0 max-w-[525px] shadow-xl rounded-tr"
+                    />
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png"
+                        alt="Session replay"
+                        className="absolute bottom-0 right-0 max-w-[698px]"
+                    />
+                    <div className="pt-12 pr-12 pb-1/2 pl-1/2">
                         <div className="inline-flex items-center gap-3 text-primary mb-4">
-                            <IconRewindPlay className="w-8 h-8 text-yellow" />
-                            <span className="text-2xl font-bold">Session replay</span>
+                            <IconRewindPlay className="size-7 text-yellow" />
+                            <span className="text-xl font-bold">Session replay</span>
                         </div>
-                        <h1 className="text-5xl font-bold text-primary mb-6">
+                        <h1 className="text-5xl font-bold text-primary mb-4 leading-tight">
                             Watch people use your product
                         </h1>
                         <p className="text-xl text-secondary mb-8 leading-relaxed">
-                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
+                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.
                         </p>
                         {/* 
 
@@ -192,23 +202,6 @@ export default function SessionReplay(): JSX.Element {
                         })}
 
                          */}
-                    </div>
-                </div>
-            ),
-            // Simplified version for thumbnails (avoid complex components)
-            thumbnailContent: (
-                <div className="h-full p-12 flex flex-col justify-center" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-                    <div className="max-w-2xl">
-                        <div className="inline-flex items-center gap-3 text-primary mb-4">
-                            <IconRewindPlay className="w-8 h-8 text-yellow" />
-                            <span className="text-2xl font-bold">Session replay</span>
-                        </div>
-                        <h1 className="text-5xl font-bold text-primary mb-6">
-                            Watch people use your product
-                        </h1>
-                        <p className="text-xl text-secondary mb-8 leading-relaxed">
-                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
-                        </p>
                     </div>
                 </div>
             )
