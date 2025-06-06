@@ -6,7 +6,6 @@ import usePostHog from 'hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 import { container, child } from 'components/CallToAction'
-import NewsletterContentForFBAds from 'components/FBAds/NewsletterContentForFBAds'
 import { IconInfo } from '@posthog/icons'
 import Link from 'components/Link'
 import { useRef } from 'react'
@@ -79,12 +78,11 @@ const HogZilla = () => {
     )
 }
 
-function NewsletterFBC(): JSX.Element {
+function NewsletterSubscribeForm() {
     const { user } = useUser()
     const posthog = usePostHog()
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
-    const [showContent, setShowContent] = useState(false)
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -107,115 +105,104 @@ function NewsletterFBC(): JSX.Element {
     }, [user])
 
     return (
+        <div className="max-w-lg flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 !mb-4 xs:!my-4 !py-4 w-full border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark mx-auto">
+            <div className="w-full">
+                {!submitted ? (
+                    <>
+                        <p className="!text-[15px] opacity-50 !mb-2 text-center">Subscribe to our newsletter</p>
+                        <h4 className="relative !text-2xl !m-0 !leading-tight text-center">Product for Engineers</h4>
+                        <p className="!m-0 !text-sm md:!text-base !leading-normal !opacity-75 !pt-1 text-center">
+                            Read by 60,000+ founders and builders
+                        </p>
+                        <div className="">
+                            <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2 my-4 lg:my-2">
+                                <input
+                                    required
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    type="email"
+                                    placeholder="Email address"
+                                    className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1 max-w-xs"
+                                    value={email}
+                                />
+                                <button className={`${container(undefined, 'md')} -mt-px w-full max-w-xs`}>
+                                    <span className={child(undefined, undefined, undefined, 'md')}>
+                                        Subscribe for free
+                                    </span>
+                                </button>
+                            </form>
+                            <div className="flex flex-col items-center gap-4 lg:pt-2">
+                                <p className="!text-sm opacity-50 text-center md:text-left !mb-0">
+                                    We'll share your email with{' '}
+                                    <span className="whitespace-nowrap inline-flex">
+                                        Substack{' '}
+                                        <Tooltip
+                                            content="Substack's embed form isn't very pretty, so we made our own. But we need to let you know we'll subscribe you on your behalf. Thanks in advance!"
+                                            tooltipClassName="max-w-md"
+                                        >
+                                            <span>
+                                                <IconInfo className="w-4 h-4 inline-block ml-0.5 relative -top-px" />
+                                            </span>
+                                        </Tooltip>
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </>
+                ) : (
+                    <div className="px-4 pb-2">
+                        <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
+                        <p className="m-0 opacity-75 !leading-normal !text-[15px]">
+                            Keep an eye out for our next edition of{' '}
+                            <strong>
+                                <em>Product for Engineers</em>
+                            </strong>{' '}
+                            from Substack in your inbox.
+                        </p>
+                    </div>
+                )}
+            </div>
+        </div>
+    )
+}
+
+function NewsletterFBC(): JSX.Element {
+    return (
         <Layout>
             <SEO title="Newsletter" description="Subscribe to our newsletter" />
             <div className="mx-auto px-4 pt-2">
                 <div className="flex flex-col items-center min-h-[60vh]">
-                    {showContent && <NewsletterContentForFBAds />}
-                    {!showContent && (
-                        <div className="w-full max-w-[250px]">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
-                                className="w-full h-full"
-                            />
-                        </div>
-                    )}
-                    <div className="max-w-lg flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 !mb-4 xs:!my-4 !py-4 w-full border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark">
-                        <div className="w-full">
-                            {!submitted ? (
-                                <>
-                                    <p className="!text-[15px] opacity-50 !mb-2 text-center">
-                                        Subscribe to our newsletter
-                                    </p>
-                                    <h4 className="relative !text-2xl !m-0 !leading-tight text-center">
-                                        Product for Engineers
-                                    </h4>
-                                    <p className="!m-0 !text-sm md:!text-base !leading-normal !opacity-75 !pt-1 text-center">
-                                        Read by 60,000+ founders and builders
-                                    </p>
-                                    <div className="">
-                                        <form
-                                            onSubmit={handleSubmit}
-                                            className="flex flex-col items-center gap-2 my-4 lg:my-2"
-                                        >
-                                            <input
-                                                required
-                                                onChange={(e) => setEmail(e.target.value)}
-                                                type="email"
-                                                placeholder="Email address"
-                                                className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1 max-w-xs"
-                                                value={email}
-                                            />
-                                            <button className={`${container(undefined, 'md')} -mt-px w-full max-w-xs`}>
-                                                <span className={child(undefined, undefined, undefined, 'md')}>
-                                                    Subscribe for free
-                                                </span>
-                                            </button>
-                                        </form>
-                                        <div className="flex flex-col items-center gap-4 lg:pt-2">
-                                            <p className="!text-sm opacity-50 text-center md:text-left !mb-0">
-                                                We'll share your email with{' '}
-                                                <span className="whitespace-nowrap inline-flex">
-                                                    Substack{' '}
-                                                    <Tooltip
-                                                        content="Substack's embed form isn't very pretty, so we made our own. But we need to let you know we'll subscribe you on your behalf. Thanks in advance!"
-                                                        tooltipClassName="max-w-md"
-                                                    >
-                                                        <span>
-                                                            <IconInfo className="w-4 h-4 inline-block ml-0.5 relative -top-px" />
-                                                        </span>
-                                                    </Tooltip>
-                                                </span>
-                                            </p>
-                                        </div>
+                    <div className="w-full max-w-[150px]">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
+                            className="w-full h-full"
+                        />
+                    </div>
+                    <NewsletterSubscribeForm />
+                    <div className="w-full max-w-3xl">
+                        <h3 className="text-xl font-bold mb-4 text-center">Top issues</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {topIssues.map((issue) => (
+                                <Link
+                                    key={issue.url}
+                                    to={issue.url}
+                                    state={{ isComingFromAd: true }}
+                                    className="group flex flex-col items-center text-center hover:opacity-75 transition-opacity border border-light rounded-lg"
+                                >
+                                    <div className="w-full mb-1 overflow-hidden rounded-lg">
+                                        <CloudinaryImage src={issue.image} className="rounded-none" />
                                     </div>
-                                </>
-                            ) : (
-                                <div className="px-4 pb-2">
-                                    <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
-                                    <p className="m-0 opacity-75 !leading-normal !text-[15px]">
-                                        Keep an eye out for our next edition of{' '}
-                                        <strong>
-                                            <em>Product for Engineers</em>
-                                        </strong>{' '}
-                                        from Substack in your inbox.
-                                    </p>
-                                </div>
-                            )}
+                                    <h4 className="text-xl font-bold mt-0">{issue.title}</h4>
+                                </Link>
+                            ))}
+                        </div>
+                        <h2 className="text-2xl font-bold text-black text-center my-8">
+                            Not convinced? Perhaps Hogzilla will convince you
+                        </h2>
+                        <HogZilla />
+                        <div className="mt-8">
+                            <NewsletterSubscribeForm />
                         </div>
                     </div>
-                    {!showContent && !submitted && (
-                        <div className="w-full max-w-3xl">
-                            <h3 className="text-xl font-bold mb-4 text-center">Top issues</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                {topIssues.map((issue) => (
-                                    <Link
-                                        key={issue.url}
-                                        to={issue.url}
-                                        state={{ isComingFromAd: true }}
-                                        className="group flex flex-col items-center text-center hover:opacity-75 transition-opacity border border-light rounded-lg"
-                                    >
-                                        <div className="w-full mb-1 overflow-hidden rounded-lg">
-                                            <CloudinaryImage src={issue.image} className="rounded-none" />
-                                        </div>
-                                        <h4 className="text-xl font-bold mt-0">{issue.title}</h4>
-                                    </Link>
-                                ))}
-                            </div>
-                            <h2 className="text-2xl font-bold text-black text-center my-8">
-                                Not convinced? Perhaps Hogzilla will convince you
-                            </h2>
-                            <HogZilla />
-                        </div>
-                    )}
-                    {showContent && (
-                        <div className="w-full max-w-[250px]">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/engineer_47d6638eae.png"
-                                className="w-full h-full"
-                            />
-                        </div>
-                    )}
                 </div>
             </div>
         </Layout>
