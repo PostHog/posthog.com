@@ -176,6 +176,14 @@ function NewsletterSubscribeForm({
 function NewsletterFBC(): JSX.Element {
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
+    const posthog = usePostHog()
+
+    const handleNewsletterClick = (title: string) => {
+        posthog?.capture('clicked_newsletter_from_newsletter_ad_landing_page', {
+            newsletter_name: title,
+        })
+    }
+
     return (
         <Layout>
             <SEO title="Newsletter" description="Subscribe to our newsletter" />
@@ -201,6 +209,7 @@ function NewsletterFBC(): JSX.Element {
                                     key={issue.url}
                                     to={issue.url}
                                     state={{ isComingFromAd: true }}
+                                    onClick={() => handleNewsletterClick(issue.title)}
                                     className="group flex flex-col items-center text-center hover:opacity-75 transition-opacity border border-light rounded-lg"
                                 >
                                     <div className="w-full mb-1 overflow-hidden rounded-lg">
