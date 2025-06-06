@@ -25,7 +25,7 @@ Classes should use:
 - text-muted
 - text-input
 
-Any custom CSS should be added to [global.css](mdc:src/styles/global.css) and use @apply where possible. Then use JIT classes, then regular css but nested where possible.
+Use inline Tailwind classes wherever possible. Any custom CSS should be added to [global.css](mdc:src/styles/global.css) and use @apply where possible. Then use JIT classes, then regular css but nested where possible.
 
 Links are styled with font-semibold and use different colors for light and dark mode:
 

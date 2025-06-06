@@ -31,7 +31,7 @@ type AppIconVariants = {
     default: string
 }
 
-type AppIconName = 'doc' | 'pricing' | 'notebook' | 'tour' | 'map' | 'spreadsheet' | 'forums' | 'games' | 'photobooth' | 'contact' | 'posthog' | 'folder'
+type AppIconName = 'doc' | 'pricing' | 'notebook' | 'tour' | 'map' | 'spreadsheet' | 'forums' | 'games' | 'photobooth' | 'contact' | 'posthog' | 'folder' | 'presentation'
 
 const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     doc: {
@@ -41,6 +41,9 @@ const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     folder: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/folder_classic_d2fdf96f82.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/folder_af7d0524aa.png'
+    },
+    presentation: {
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/presentation_f329e94fe5.png'
     },
     pricing: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/pricing_b461c2e5dd.png',
@@ -86,9 +89,10 @@ const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
 
 export interface AppIconProps extends IconProps {
     name: AppIconName
+    className?: string
 }
 
-export const AppIcon = ({ name, ...props }: AppIconProps) => {
+export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
     const getCurrentSkin = (): string => {
         if (typeof localStorage !== 'undefined') {
             return localStorage.getItem('skin') || 'modern'
@@ -116,15 +120,16 @@ export const AppIcon = ({ name, ...props }: AppIconProps) => {
 
     const iconUrl = getIconUrl(name)
 
-    return <IconImage url={iconUrl} {...props} />
+    return <IconImage url={iconUrl} className={className} {...props} />
 }
 
 export interface IconImageProps extends IconProps {
     url: string
+    className?: string
 }
 
-export const IconImage = ({ url, ...props }: IconImageProps) => (
-    <BaseIcon viewBox="0 0 64 64" width="100%" height="100%" className="!size-9 -mt-1 -mb-1">
+export const IconImage = ({ url, className, ...props }: IconImageProps) => (
+    <BaseIcon viewBox="0 0 64 64" width="100%" height="100%" className={`${className ? className : '!size-9 -mt-1 -mb-1'}`}>
         <image
             width="64"
             height="64"

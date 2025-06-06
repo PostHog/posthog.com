@@ -2,11 +2,15 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
 // Import SVG logos
+import AssemblyAILogo from '../images/customers/assemblyai-light.svg'
 import MistralLogo from '../images/customers/mistralai-light.svg'
 import RaycastLogo from '../images/customers/raycast-light.svg'
 import AirbusLogo from '../images/customers/airbus-light.svg'
 import ContraLogo from '../images/customers/contra-light.svg'
 import DhlLogo from '../images/customers/dhl-light.svg'
+import ElevenlabsLogo from '../images/customers/elevenlabs-light.svg'
+import HasuraLogo from '../images/customers/hasura-light.svg'
+import ResearchGateLogo from '../images/customers/researchgate-light.svg'
 import SpeakeasyLogo from '../images/customers/speakeasy-light.svg'
 import StartEngineLogo from '../images/customers/startengine-light.svg'
 import TrustWalletLogo from '../images/customers/trustwallet-light.svg'
@@ -15,11 +19,15 @@ import SupabaseLogo from '../images/customers/supabase-light.svg'
 import NetdataLogo from '../images/customers/netdata-light.svg'
 import PryLogo from '../images/customers/pry-light.svg'
 
+import AssemblyAILogoDark from '../images/customers/assemblyai-dark.svg'
 import MistralLogoDark from '../images/customers/mistralai-dark.svg'
 import RaycastLogoDark from '../images/customers/raycast-dark.svg'
 import AirbusLogoDark from '../images/customers/airbus-dark.svg'
 import ContraLogoDark from '../images/customers/contra-dark.svg'
 import DhlLogoDark from '../images/customers/dhl-dark.svg'
+import ElevenlabsLogoDark from '../images/customers/elevenlabs-dark.svg'
+import HasuraLogoDark from '../images/customers/hasura-dark.svg'
+import ResearchGateLogoDark from '../images/customers/researchgate-dark.svg'
 import StartEngineLogoDark from '../images/customers/startengine-dark.svg'
 import TrustWalletLogoDark from '../images/customers/trustwallet-dark.svg'
 import PostHogLogoDark from '../images/customers/posthog-dark.svg'
@@ -67,8 +75,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: '',
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/assemblyai_dark.svg',
+            light: AssemblyAILogo,
+            dark: AssemblyAILogoDark,
         },
     },
     contra: {
@@ -94,8 +102,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: '',
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/elevenlabs_dark.svg',
+            light: ElevenlabsLogo,
+            dark: ElevenlabsLogoDark,
         },
         height: 18,
     },
@@ -104,8 +112,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: '',
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/hasura_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/hasura_dark.svg',
+            light: HasuraLogo,
+            dark: HasuraLogoDark,
         },
     },
     mistralai: {
@@ -158,8 +166,8 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: '',
         logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_light.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/researchgate_dark.svg',
+            light: ResearchGateLogo,
+            dark: ResearchGateLogoDark,
         },
         height: 20,
     },
@@ -257,12 +265,14 @@ export const useCustomers = () => {
                     name: markdownData.frontmatter.customer || customer.name,
                     toolsUsed: markdownData.frontmatter.toolsUsed || customer.toolsUsed,
                     notes: markdownData.frontmatter.notes || customer.notes,
-                    logo: markdownData.frontmatter.logo?.publicURL
-                        ? {
-                              light: markdownData.frontmatter.logo.publicURL,
-                              dark: markdownData.frontmatter.logoDark.publicURL,
-                          }
-                        : customer.logo,
+                    logo:
+                        customer.logo ||
+                        (markdownData.frontmatter.logo?.publicURL
+                            ? {
+                                  light: markdownData.frontmatter.logo.publicURL,
+                                  dark: markdownData.frontmatter.logoDark.publicURL,
+                              }
+                            : undefined),
                 },
             }
         }

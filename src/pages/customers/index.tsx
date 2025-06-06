@@ -81,7 +81,7 @@ export default function Customers(): JSX.Element {
         { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const },
     ]
 
-    const rows = (filteredCustomers || customers).map((customer, index) => {
+    const rows = (filteredCustomers || customers).map((customer: any, index: number) => {
         return Customer({
             number: index + 1,
             customer,
