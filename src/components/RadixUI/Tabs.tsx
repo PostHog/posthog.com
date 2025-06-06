@@ -1,12 +1,15 @@
 import * as React from 'react'
 import { Tabs as RadixTabs } from 'radix-ui'
 
+type TabSize = 'sm' | 'md' | 'lg' | 'xl'
+
 interface TabsRootProps {
   className?: string
   defaultValue?: string
   value?: string
   onValueChange?: (value: string) => void
   orientation?: 'horizontal' | 'vertical'
+  size?: TabSize
   children: React.ReactNode
 }
 
@@ -30,24 +33,30 @@ interface TabsContentProps {
   children: React.ReactNode
 }
 
+// Create context for size
+const TabsContext = React.createContext<TabSize>('sm')
+
 const TabsRoot = ({
   className = "flex items-start w-full",
   defaultValue,
   value,
   onValueChange,
   orientation = "vertical",
+  size = "sm",
   children
 }: TabsRootProps): JSX.Element => {
   return (
-    <RadixTabs.Root
-      className={className}
-      defaultValue={defaultValue}
-      value={value}
-      onValueChange={onValueChange}
-      orientation={orientation}
-    >
-      {children}
-    </RadixTabs.Root>
+    <TabsContext.Provider value={size}>
+      <RadixTabs.Root
+        className={className}
+        defaultValue={defaultValue}
+        value={value}
+        onValueChange={onValueChange}
+        orientation={orientation}
+      >
+        {children}
+      </RadixTabs.Root>
+    </TabsContext.Provider>
   )
 }
 
@@ -70,9 +79,35 @@ const TabsTrigger = ({
   icon,
   color
 }: TabsTriggerProps): JSX.Element => {
-  const baseClassName = "flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group"
-  const paddingClassName = icon ? "p-1" : "px-3 py-2"
-  const finalClassName = className || `${baseClassName} ${paddingClassName}`
+  const size = React.useContext(TabsContext)
+
+  // Size-based styling
+  const sizeStyles = {
+    sm: {
+      height: 'h-[45px]',
+      fontSize: 'text-[15px]',
+      padding: icon ? 'p-1' : 'px-3 py-2'
+    },
+    md: {
+      height: 'h-[50px]',
+      fontSize: 'text-base',
+      padding: icon ? 'p-1.5' : 'px-4 py-2.5'
+    },
+    lg: {
+      height: 'h-[55px]',
+      fontSize: 'text-lg',
+      padding: icon ? 'p-2' : 'px-5 py-3'
+    },
+    xl: {
+      height: 'h-[60px]',
+      fontSize: 'text-xl',
+      padding: icon ? 'p-2.5' : 'px-6 py-3.5'
+    }
+  }
+
+  const currentSize = sizeStyles[size]
+  const baseClassName = `flex ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center bg-white ${currentSize.fontSize} leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group`
+  const finalClassName = className || `${baseClassName} ${currentSize.padding}`
 
   return (
     <RadixTabs.Trigger className={finalClassName} value={value}>
@@ -89,12 +124,24 @@ const TabsTrigger = ({
 }
 
 const TabsContent = ({
-  className = "grow rounded bg-white px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black",
+  className,
   value,
   children
 }: TabsContentProps): JSX.Element => {
+  const size = React.useContext(TabsContext)
+
+  // Size-based styling for content
+  const sizeStyles = {
+    sm: 'grow rounded bg-white px-5 py-2 text-[15px] outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black',
+    md: 'grow rounded bg-white px-6 py-3 text-base outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black',
+    lg: 'grow rounded bg-white px-7 py-4 text-lg outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black',
+    xl: 'grow rounded bg-white px-8 py-5 text-xl outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black'
+  }
+
+  const finalClassName = className || sizeStyles[size]
+
   return (
-    <RadixTabs.Content className={className} value={value}>
+    <RadixTabs.Content className={finalClassName} value={value}>
       {children}
     </RadixTabs.Content>
   )

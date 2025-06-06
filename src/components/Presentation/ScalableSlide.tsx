@@ -10,7 +10,7 @@ interface ScalableSlideProps {
 
 const ScalableSlide: React.FC<ScalableSlideProps> = ({
   children,
-  baseWidth = 1080,
+  baseWidth = 1280,
   baseHeight = 720,
   className = '',
   mode = 'editor',

@@ -81,6 +81,7 @@ const FeaturesTab = () => {
             value={`tab-${currentTab}`}
             onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
             orientation="horizontal"
+            size="lg"
         >
             <Tabs.List className="flex flex-col p-1 gap-0.5 w-64" aria-label="Features">
                 {featuresContent.map((item, index) => (
