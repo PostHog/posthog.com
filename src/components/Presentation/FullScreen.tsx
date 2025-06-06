@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { IconX } from '@posthog/icons'
 import ScalableSlide from './ScalableSlide'
+import { PresentationModeContext } from '../RadixUI/Tabs'
 
 interface PresentationModeProps {
   slides: Array<{
@@ -146,7 +147,9 @@ const PresentationMode = ({
       <div className="w-full h-full flex items-center justify-center p-4 bg-accent">
         <div className="aspect-video max-w-full max-h-full w-full overflow-hidden">
           <ScalableSlide mode="presentation" baseWidth={1280} baseHeight={720}>
-            {slideContent}
+            <PresentationModeContext.Provider value={true}>
+              {slideContent}
+            </PresentationModeContext.Provider>
           </ScalableSlide>
         </div>
       </div>
@@ -177,7 +180,9 @@ const PresentationMode = ({
               >
                 <div className="w-20 h-12 aspect-video bg-primary border border-white/20 group-hover:border-white/40 rounded overflow-hidden relative">
                   <ScalableSlide mode="thumbnail" baseWidth={1280} baseHeight={720}>
-                    {thumbnailContent}
+                    <PresentationModeContext.Provider value={true}>
+                      {thumbnailContent}
+                    </PresentationModeContext.Provider>
                   </ScalableSlide>
                   {/* Transparent overlay to capture clicks and prevent interaction with thumbnail content */}
                   <div className="absolute inset-0 z-10" />

@@ -36,6 +36,12 @@ interface TabsContentProps {
 // Create context for size
 const TabsContext = React.createContext<TabSize>('sm')
 
+// Create context for presentation mode detection
+const PresentationModeContext = React.createContext<boolean>(false)
+
+// Export the presentation mode context for use in other components
+export { PresentationModeContext }
+
 const TabsRoot = ({
   className = "flex items-start w-full",
   defaultValue,
@@ -45,8 +51,13 @@ const TabsRoot = ({
   size = "sm",
   children
 }: TabsRootProps): JSX.Element => {
+  const isInPresentationMode = React.useContext(PresentationModeContext)
+
+  // If in presentation mode and size is lg, downgrade to sm
+  const effectiveSize = isInPresentationMode && size === 'lg' ? 'sm' : size
+
   return (
-    <TabsContext.Provider value={size}>
+    <TabsContext.Provider value={effectiveSize}>
       <RadixTabs.Root
         className={className}
         defaultValue={defaultValue}
