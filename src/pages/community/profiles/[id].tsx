@@ -349,7 +349,7 @@ export default function ProfilePage({ params }: PageProps) {
                                         color={profile.color}
                                     />
                                     <div className="flex items-center space-x-2 my-2">
-                                        <h2 className="text-xl font-bold text-primary m-0">{name}</h2>
+                                        <h2 className="text-xl font-bold m-0">{name}</h2>
                                         {profile.country && (
                                             <Flag
                                                 style={{ width: '1.5rem', height: '1.5rem' }}
