@@ -79,6 +79,7 @@ export default function Presentation({
   const location = useLocation()
   const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
   const [sidebarTab, setSidebarTab] = useState<string>('info')
+  const [isNavVisible, setIsNavVisible] = useState<boolean>(true)
 
   const handleValueChange = (value: string) => {
     navigate(`/${value}`)
@@ -88,6 +89,10 @@ export default function Presentation({
     setSidebarTab(value)
   }
 
+  const toggleNav = () => {
+    setIsNavVisible(!isNavVisible)
+  }
+
   return (
     <div className="@container w-full h-full flex flex-col min-h-1">
       <div
@@ -95,7 +100,7 @@ export default function Presentation({
         className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
       >
         {sidebarContent && (
-          <aside data-scheme="secondary" className="w-48 transition-all duration-300 bg-primary border-r border-primary h-full">
+          <aside data-scheme="secondary" className={`${isNavVisible ? 'w-48' : 'w-0'} transition-all duration-300 bg-primary border-r border-primary h-full overflow-hidden`}>
             <ScrollArea className="p-2">
               <div className="space-y-3">
                 <SidebarContent content={sidebarContent} />
@@ -110,7 +115,12 @@ export default function Presentation({
         >
           {!fullScreen && (
             <>
-              <HeaderBar showSidebar showSearch />
+              <HeaderBar
+                showSidebar
+                showSearch
+                isNavVisible={isNavVisible}
+                onToggleNav={toggleNav}
+              />
             </>
           )}
           {fullScreen ? (
