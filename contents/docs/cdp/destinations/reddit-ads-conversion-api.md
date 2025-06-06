@@ -16,7 +16,7 @@ You'll also need access to the relevant Reddit Ads account.
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=reddit) tab.
 
 3. Search for **Reddit Conversions API** and click **+ Create**.
 

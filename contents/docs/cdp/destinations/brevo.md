@@ -19,7 +19,7 @@ First, [create](https://app.brevo.com/settings/keys/api) a new **API key** in Br
 ## Configuring PostHog’s Brevo destination
 
 1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=brevo) tab.
 3. Click **New destination** and choose Brevo's **Create** button.
 
 Paste your API key and then add any other values you want to pipe from PostHog person properties into Brevo, using the **attributes** fields.

@@ -23,7 +23,7 @@ Close the scopes section and copy your new access token for the next step.
 ## Configuring PostHog’s Attio destination
 
 1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=attio) tab.
 3. Click **New destination** and choose Attio's **Create** button.
 
 Paste in your access token and then add any other values you want to pipe from PostHog person properties into Attio, using **additional person attributes**.

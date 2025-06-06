@@ -15,7 +15,7 @@ You'll also need access to the relevant Google Cloud account.
 ## Installation
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=google) tab.
 3. Search for 'Google Cloud Storage' and click **+ Create**.
 4. Connect your Google Cloud account at the configuration step.
 5. Press **Create & Enable** and watch your 'events' get populated in Google Cloud Storage!

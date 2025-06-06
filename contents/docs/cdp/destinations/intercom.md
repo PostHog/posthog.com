@@ -16,7 +16,7 @@ You'll also need access to the relevant Intercom account.
 ## Setting up Intercom as a PostHog destination
 
 1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=intercom) tab.
 3. Search for **Intercom** and click the **Create** button for either **Contacts** or **Events**.
 4. In the destination editor, click **Select Intercom connection** to log into your Intercom account.
 5. You can test your destination by sending a test event with **Test function**.
