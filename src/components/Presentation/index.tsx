@@ -236,6 +236,7 @@ export default function Presentation({
 
                   {sidebarTab === 'info' && (
                     <>
+                      {/* 
                       <div className="flex flex-col @sm:flex-row justify-center gap-2 mb-4">
                         <CallToAction href="https://app.posthog.com/signup" size="sm" type="primary">
                           Get started - free
@@ -244,7 +245,23 @@ export default function Presentation({
                           Talk to a human
                         </CallToAction>
                       </div>
-                      <ProductSidebar type="session_replay" />
+                      <ProductSidebar type="session_replay" /> */}
+                      <div>
+                        <h6 className="font-medium mb-1 text-sm">Notes</h6>
+                        <div data-scheme="primary" className="bg-primary border border-input py-2 px-3 rounded text-sm">
+                          <div className="font-semibold border-b border-primary pb-1 mb-2">Pricing</div>
+                          <p>
+                            <span>Monthly free tier</span><br />
+                            <strong className="text-green">5,000</strong> recordings/mo
+                          </p>
+                          <p>
+                            <span>Then starts at</span><br />
+                            <strong>$0.005</strong>/recordings
+                          </p>
+                          <p>Pricing decreases with volume</p>
+                        </div>
+                      </div>
+
                     </>
                   )}
 
