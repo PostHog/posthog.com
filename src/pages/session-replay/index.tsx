@@ -103,18 +103,17 @@ const FeaturesTab = () => {
                     key={index}
                     value={`tab-${index}`}
                 >
-                    <div className="p-4">
-
-                        <h2 className="text-3xl text-center mb-0">{item.headline}</h2>
-                        {item.description && <p className="mt-1 text-center text-xl">{item.description}</p>}
+                    <div className="px-8 pt-12 pb-8">
+                        <h2 className="text-5xl text-center mb-0">{item.headline}</h2>
+                        {item.description && <p className="mt-4 text-center text-xl">{item.description}</p>}
                     </div>
 
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-2 gap-4 px-8">
                         {item.features &&
                             item.features.map((feature, index) => (
                                 <div key={index}>
-                                    <h3 className="text-base mb-1">{feature.title}</h3>
-                                    <p className="text-sm">{feature.description}</p>
+                                    <h3 className="text-2xl mb-1">{feature.title}</h3>
+                                    <p className="text-lg">{feature.description}</p>
                                 </div>
                             ))}
                     </div>

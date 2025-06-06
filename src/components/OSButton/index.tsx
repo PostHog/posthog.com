@@ -84,11 +84,11 @@ export default function OSButton({
     }
 
     const iconSizeClasses = {
-        xs: 'w-3 h-3',
-        sm: 'w-4 h-4',
-        md: 'w-5 h-5',
-        lg: 'w-6 h-6',
-        xl: 'w-8 h-8',
+        xs: 'size-3',
+        sm: 'size-4',
+        md: 'size-5',
+        lg: 'size-6',
+        xl: 'size-8',
     }
 
     const variantClasses = {
@@ -102,11 +102,10 @@ export default function OSButton({
             child: 'relative flex items-center justify-center w-auto bg-white text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark border-button dark:border-orange dark:bg-dark rounded-[6px] text-[14px] font-bold px-4 py-1.5 translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px] block active:transition-all active:duration-100 select-none',
         },
         underline: 'hover:underline border-transparent',
-        ghost: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${
-            active
+        ghost: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${active
                 ? 'font-bold skin-modern:bg-accent skin-modern:hover:border-light skin-classic:border-primary skin-classic:bg-primary'
                 : 'hover:bg-accent hover:skin-classic:bg-primary skin-classic:hover:border-primary skin-classic:border-transparent'
-        } active:bg-accent-2/80 focus:border-light`,
+            } active:bg-accent-2/80 focus:border-light`,
     }
 
     const buttonContent = (
@@ -152,13 +151,11 @@ export default function OSButton({
     )
 
     const commonProps = {
-        className: `${baseClasses} ${
-            variant === 'primary' || variant === 'secondary'
+        className: `${baseClasses} ${variant === 'primary' || variant === 'secondary'
                 ? variantClasses[variant].parent
                 : `${sizeClasses[size]} ${variantClasses[variant]}`
-        } ${align === 'center' ? 'justify-center' : 'justify-start text-left'} ${
-            !children ? '' : width === 'full' ? 'w-full' : 'w-auto'
-        } ${className}`,
+            } ${align === 'center' ? 'justify-center' : 'justify-start text-left'} ${!children ? '' : width === 'full' ? 'w-full' : 'w-auto'
+            } ${className}`,
         onClick,
         disabled,
         state,
