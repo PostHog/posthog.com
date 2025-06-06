@@ -79,7 +79,7 @@ Some dos and don'ts to make sure demand gen doesn't wreck the brand:
 
 ## How we work
 
-- Re-use assets. Start with copy that comes from the product or what's already been written - this get's you about 75% of the way there (obviously there are lots of restrictions around character limits, needing multiple variations etc.)
+- Re-use assets. Start with copy that comes from the product or what's already been written - this gets you about 75% of the way there (obviously there are lots of restrictions around character limits, needing multiple variations etc.)
 - We don’t build design-heavy campaigns from scratch – we ask the design team for help only when it’s essential, but otherwise use our existing library of content.
 - Generally don't outsource the creative thinking to the agency, use them more for execution and channel management. 
 - Brian does the stuff, in collaboration with the agency, Charles acts as editor for now and/or vibe checks our approach. 
