@@ -11,6 +11,7 @@ import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconInfo, IconGear } from '@posthog/icons'
 import ProductSidebar from 'components/Explorer/ProductSidebar'
 import PresentationMode from './FullScreen'
+import { CallToAction } from 'components/CallToAction'
 
 interface AccordionItem {
   title: string
@@ -166,7 +167,7 @@ export default function Presentation({
                     {children}
                   </div>
                 </ScrollArea>
-                <aside data-scheme="secondary" className="bg-primary px-4 w-80 space-y-4">
+                <aside data-scheme="secondary" className="@container bg-primary px-4 w-80 space-y-4">
 
                   <div className="flex justify-center">
                     <ToggleGroup
@@ -179,7 +180,17 @@ export default function Presentation({
                   </div>
 
                   {sidebarTab === 'info' && (
-                    <ProductSidebar type="session_replay" />
+                    <>
+                      <div className="flex flex-col @sm:flex-row justify-center gap-2 mb-4">
+                        <CallToAction href="https://app.posthog.com/signup" size="sm" type="primary">
+                          Get started - free
+                        </CallToAction>
+                        <CallToAction href="/talk-to-a-human" size="sm" type="secondary">
+                          Talk to a human
+                        </CallToAction>
+                      </div>
+                      <ProductSidebar type="session_replay" />
+                    </>
                   )}
 
                   {sidebarTab === 'settings' && (

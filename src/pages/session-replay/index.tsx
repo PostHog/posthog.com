@@ -14,8 +14,9 @@ import { useCustomers } from 'hooks/useCustomers'
 import useProducts from 'hooks/useProducts'
 import { Tabs } from 'radix-ui'
 import ImageSlider from 'components/Pricing/Test/ImageSlider'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
-const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
+const slideClasses = 'bg-primary aspect-video overflow-hidden relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
 // Component for individual slide thumbnail with proper scaling
 const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
@@ -157,8 +158,9 @@ export default function SessionReplay(): JSX.Element {
             name: "Overview",
             content: (
                 <>
-                    <div className="grid grid-cols-12 grid-rows-8 h-full">
-                        <div className="col-span-8 row-span-5 mb-4">
+                    <DebugContainerQuery />
+                    <div className="@container grid grid-cols-12 grid-rows-8 h-full">
+                        <div className="col-span-7 @7xl:col-span-8 row-span-5 row-start-1 mb-4">
                             <Screenshot
                                 product="Session replay"
                                 slug="session-replay"
@@ -168,7 +170,7 @@ export default function SessionReplay(): JSX.Element {
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
                             />
                         </div>
-                        <div className="@container col-span-4 row-span-5 col-start-9 p-6 mb-4">
+                        <div className="col-span-5 row-span-5 col-start-8 @7xl:col-span-4 @7xl:row-span-5 @7xl:col-start-9 @container p-6 mb-4">
                             <div className="flex items-center mb-4" style={{ gap: '0.25rem' }}>
                                 <IconRewindPlay className="text-yellow size-6" />
                                 <strong className="font-semibold">Session replay</strong>
@@ -177,14 +179,6 @@ export default function SessionReplay(): JSX.Element {
                             <p className="max-w-lg mx-auto">
                                 Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
                             </p>
-                            <div className="flex flex-col @sm:flex-row justify-center gap-2 mb-12">
-                                <CallToAction href="https://app.posthog.com/signup" type="primary">
-                                    Get started - free
-                                </CallToAction>
-                                <CallToAction href="/talk-to-a-human" type="secondary">
-                                    Talk to a human
-                                </CallToAction>
-                            </div>
                         </div>
                         {customers.slice(0, 4).map((customer, index) => {
                             const customerData = sessionReplayProduct?.customers?.[customer.slug]
