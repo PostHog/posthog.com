@@ -10,8 +10,8 @@ interface ScalableSlideProps {
 
 const ScalableSlide: React.FC<ScalableSlideProps> = ({
   children,
-  baseWidth = 1920,
-  baseHeight = 1080,
+  baseWidth = 1080,
+  baseHeight = 720,
   className = '',
   mode = 'editor',
 }) => {
@@ -20,6 +20,8 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
   const [scale, setScale] = useState(1)
   const [isInitialized, setIsInitialized] = useState(false)
   const retryCountRef = useRef(0)
+  const lastDimensionsRef = useRef({ width: 0, height: 0 })
+  const dimensionStabilityCountRef = useRef(0)
 
   const updateScale = useCallback(() => {
     if (!containerRef.current) {
@@ -47,10 +49,10 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
       if (mode === 'thumbnail') {
         console.log(`📏 ScalableSlide thumbnail: Zero dimensions, retrying...`)
       }
-      // Retry up to 10 times with increasing delays
-      if (retryCountRef.current < 10) {
+      // Retry up to 15 times with exponential backoff
+      if (retryCountRef.current < 15) {
         retryCountRef.current++
-        const delay = Math.min(100 * retryCountRef.current, 1000) // Max 1 second delay
+        const delay = Math.min(50 * Math.pow(1.5, retryCountRef.current), 2000) // Up to 2 second delay
         setTimeout(updateScale, delay)
       }
       return
@@ -62,11 +64,38 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
       if (mode === 'thumbnail') {
         console.log(`📏 ScalableSlide thumbnail: Container too small (animation?), retrying...`)
       }
-      // Retry after AppWindow animation should be complete (400ms to be safe)
-      if (retryCountRef.current < 5) {
+      // Retry after AppWindow animation should be complete (500ms to be safe)
+      if (retryCountRef.current < 8) {
         retryCountRef.current++
-        setTimeout(updateScale, 400)
+        setTimeout(updateScale, 500)
       }
+      return
+    }
+
+    // Check for dimension stability - wait for dimensions to be stable across multiple frames
+    const currentDimensions = { width: containerRect.width, height: containerRect.height }
+    const lastDimensions = lastDimensionsRef.current
+
+    if (Math.abs(currentDimensions.width - lastDimensions.width) < 1 &&
+      Math.abs(currentDimensions.height - lastDimensions.height) < 1) {
+      dimensionStabilityCountRef.current++
+    } else {
+      dimensionStabilityCountRef.current = 0
+      lastDimensionsRef.current = currentDimensions
+
+      // If dimensions are still changing, wait a bit more
+      if (retryCountRef.current < 10) {
+        retryCountRef.current++
+        requestAnimationFrame(() => {
+          setTimeout(updateScale, 50)
+        })
+      }
+      return
+    }
+
+    // Require at least 2 stable measurements before proceeding
+    if (dimensionStabilityCountRef.current < 2) {
+      requestAnimationFrame(updateScale)
       return
     }
 
@@ -92,28 +121,37 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
       newScale = Math.min(newScale, 2)    // Maximum 200% scale
     }
 
-    // Reset retry counter on successful calculation
+    // Reset counters on successful calculation
     retryCountRef.current = 0
+    dimensionStabilityCountRef.current = 0
     setScale(newScale)
     setIsInitialized(true)
   }, [baseWidth, baseHeight, mode])
 
   useEffect(() => {
-    // Wait for AppWindow animation to complete (300ms) + buffer
+    // More robust initialization that waits for layout to be complete
     const initializeScale = () => {
-      // Initial delay to wait for AppWindow animation
-      setTimeout(() => {
+      // Use multiple requestAnimationFrame calls to ensure layout is complete
+      requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          updateScale()
+          requestAnimationFrame(() => {
+            // Additional delay for any animations to complete
+            setTimeout(() => {
+              updateScale()
+            }, 100)
+          })
         })
-      }, 400) // 300ms AppWindow animation + 100ms buffer
+      })
     }
 
-    // Initial scale calculation with proper delay
+    // Initial scale calculation with better timing
     initializeScale()
 
     // Set up resize observer
     const resizeObserver = new ResizeObserver(() => {
+      // Reset stability tracking when container resizes
+      dimensionStabilityCountRef.current = 0
+      retryCountRef.current = 0
       // Small debounce to avoid too frequent updates
       setTimeout(updateScale, 10)
     })
@@ -123,12 +161,17 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
     }
 
     // Also listen for window resize
-    window.addEventListener('resize', updateScale)
+    const handleResize = () => {
+      dimensionStabilityCountRef.current = 0
+      retryCountRef.current = 0
+      updateScale()
+    }
+    window.addEventListener('resize', handleResize)
 
     // Cleanup
     return () => {
       resizeObserver.disconnect()
-      window.removeEventListener('resize', updateScale)
+      window.removeEventListener('resize', handleResize)
     }
   }, [updateScale])
 
