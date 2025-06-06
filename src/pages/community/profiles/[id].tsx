@@ -155,26 +155,6 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
                   },
               ]
             : []),
-        ...(profile.amaEnabled
-            ? [
-                  {
-                      value: 'ama',
-                      label: 'Ask me anything',
-                      content: (
-                          <>
-                              <h4 className="text-lg font-bold mb-4">Ask {firstName} anything</h4>
-                              <Questions
-                                  initialView={'question-form'}
-                                  slug={window?.location?.pathname}
-                                  profileId={undefined}
-                                  showForm
-                                  disclaimer={false}
-                              />
-                          </>
-                      ),
-                  },
-              ]
-            : []),
         ...(user?.profile?.id === id
             ? [
                   {
@@ -567,6 +547,20 @@ export default function ProfilePage({ params }: PageProps) {
                                             </div>
                                         )}
                                 </div>
+                                {profile.amaEnabled && (
+                                    <div className="mt-6">
+                                        <Block title="Comments">
+                                            <Questions
+                                                initialView={'question-form'}
+                                                slug={window?.location?.pathname}
+                                                profileId={undefined}
+                                                showForm
+                                                disclaimer={false}
+                                                autoFocus={false}
+                                            />
+                                        </Block>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>

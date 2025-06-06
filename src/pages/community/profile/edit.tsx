@@ -373,9 +373,9 @@ const formSections = [
                     return (
                         <div className="flex space-x-2 space-between w-full">
                             <div className="flex-grow">
-                                <p className="font-bold m-0">Show an AMA</p>
+                                <p className="font-bold m-0">Show comments</p>
                                 <p className="m-0">
-                                    Let visitors ask you questions. You'll get question notifications via email.
+                                    Let visitors comment on your profile. You'll get comment notifications via email.
                                 </p>
                             </div>
                             <Switch
