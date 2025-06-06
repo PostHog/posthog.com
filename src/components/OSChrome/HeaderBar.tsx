@@ -26,6 +26,7 @@ interface HeaderBarProps {
     showToc?: boolean
     showSidebar?: boolean
     showFullScreen?: boolean
+    onFullScreenClick?: () => void
     rightActionButtons?: React.ReactNode
 }
 
@@ -42,6 +43,7 @@ export default function HeaderBar({
     showToc = false,
     showSidebar = false,
     showFullScreen = false,
+    onFullScreenClick,
     rightActionButtons,
 }: HeaderBarProps) {
     const { goBack, goForward, canGoBack, canGoForward } = useWindow()
@@ -105,10 +107,10 @@ export default function HeaderBar({
             )}
             {showFullScreen && (
                 <OSButton
-                    // onClick={ }
+                    onClick={onFullScreenClick}
                     variant="primary"
                     size="sm"
-                    // active={ }
+                    disabled={!onFullScreenClick}
                     icon={<IconPlay />}
                 />
             )}

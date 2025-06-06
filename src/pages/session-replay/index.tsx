@@ -270,6 +270,7 @@ export default function SessionReplay(): JSX.Element {
                 slug="session-replay"
                 title=""
                 sidebarContent={<SlideThumbnails slides={slides} />}
+                slides={slides}
             >
                 <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&_div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4">
                     {slides.map((slide, index) => (
