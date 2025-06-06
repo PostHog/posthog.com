@@ -17,20 +17,27 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 
 These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.
 
-## Router-specific instructions
+## Integration
 
 import Tab from "components/Tab"
 import AppRouterSetup from "./app-router-setup.mdx"
 import PagesRouterSetup from "./pages-router-setup.mdx"
+import InstrumentationClientSetup from "./instrumentation-client-setup.mdx"
 
 <Tab.Group tabs={[
+    'instrumentation-client',
     'App router', 
-    'Pages router']}>
+    'Pages router'
+]}>
     <Tab.List>
-        <Tab>App router</Tab>
-        <Tab>Pages router</Tab>
+        <Tab>Next.js 15.3+</Tab>
+        <Tab>App router - legacy</Tab>
+        <Tab>Pages router - legacy</Tab>
     </Tab.List>
     <Tab.Panels>
+        <Tab.Panel>
+            <InstrumentationClientSetup />
+        </Tab.Panel>
         <Tab.Panel>
             <AppRouterSetup />
         </Tab.Panel>
