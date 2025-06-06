@@ -2,7 +2,7 @@ Make sure you're using both PostHog and Sentry as JS modules. You'll need to rep
 
 - `'your organization'`: will be in the URL when you go to your Sentry instance, like so: `https://sentry.io/organizations/your-organization/projects/`
 - `project-id`: will be the last few digits in your Sentry DSN, such as `https://adf90sdc09asfd3@9ads0fue.ingest.sentry.io/project-id`
-- `prefix`: Optional: Url of a self-hosted sentry instance (default: https://sentry.io/organizations/)
+- `prefix`: Optional. The base URL of your Sentry instance. Defaults to `https://sentry.io/organizations/`. If you're using a self-hosted or subdomain setup, make sure it includes the `/organizations/` path (e.g. `https://company.sentry.io/organizations/`) to avoid malformed `sentry_url` values.
 - `severityAllowList`: Optional: by default this is `['error']`, you can provide more Sentry severity levels (e.g. `['error', 'info']`) or '*' to capture any severity. Only available from posthog-js version 1.118.0 forward
 
 ```js-web
