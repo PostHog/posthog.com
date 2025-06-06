@@ -20,10 +20,11 @@ function NewsletterFBC(): JSX.Element {
         e.preventDefault()
         const urlParams = new URLSearchParams(window.location.search)
         const fbclid = urlParams.get('fbclid')
+        const utmSource = urlParams.get('utm_source')
 
         posthog?.capture('newsletter_subscribed', { email })
         posthog?.capture('user_signed_up_to_newsletter_from_ad', {
-            ad_source: 'meta',
+            ad_source: utmSource || 'undefined',
             email: email,
             fbclid: fbclid || undefined,
         })

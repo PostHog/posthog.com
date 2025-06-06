@@ -73,6 +73,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/bigquery',
                 },
                 {
+                    name: 'Google Ads',
+                    url: '/docs/cdp/sources/google-ads',
+                },
+                {
                     name: 'Self-managed',
                 },
                 {
@@ -1089,7 +1093,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Designing PostHog.com',
-                url: '/handbook/design/designing-posthog-website',
+                url: '/handbook/brand/designing-posthog-website',
             },
             {
                 name: 'Developing PostHog.com',
@@ -1311,7 +1315,7 @@ export const handbookSidebar = [
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
-                        {
+            {
                 name: 'Lifecycle Analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
@@ -1841,9 +1845,6 @@ export const docsMenu = {
                         {
                             name: 'Rust',
                             url: '/docs/libraries/rust',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -1891,9 +1892,6 @@ export const docsMenu = {
                         {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Google Tag Manager',
@@ -1946,9 +1944,6 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Svelte',
@@ -3367,6 +3362,12 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Filter and search',
+                    url: '/docs/error-tracking/filter-and-search-issues',
+                    icon: 'IconSearch',
+                    color: 'green',
                 },
                 {
                     name: 'Alerts',

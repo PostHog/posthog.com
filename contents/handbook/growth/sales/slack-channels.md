@@ -20,7 +20,7 @@ We use [Slack Connect](https://slack.com/resources/using-slack/getting-started-w
 To get a shared Slack channel going, follow these steps:
 
 1. Create a new Slack channel - the expected syntax for the name is `posthog-[customername]`.
-2. When determining the `[customername]`, make sure make it searchable (avoid acronyms, if possible).
+2. When determining the `[customername]`, make sure to make it searchable (avoid acronyms, if possible).
 3. Obviously, invite the relevant customer folks! Be sure that you're inviting them to the *channel* you've created and not our Slack workspace. 
 4. Invite certain leaders who want to help monitor the channel, including: Tim, Charles, Abigail, Simon and anyone else internal who may be connected to the customer. PostHog folks will sometimes join the channel if they're interested in the customer or the use-case
 5. Invite [Pylon](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) to ensure those from PostHog and the customer can create support tickets from Slack threads - Use the a slash command in Slack to invite Pylon `/invite @pylon` . Pylon will join and prompt you with some questions. Note that this is a `customer channel`, and select yourself as the channel owner. You can check to see if the connection is established in the ["Account Mapping" section in Pylon](https://app.usepylon.com/apps/530aefd1-b625-4e7d-91c0-320c2ede2b51?tab=account-mapping). 
@@ -33,7 +33,12 @@ If you have any questions as you go, ping your colleagues for support in your te
 
 ## Using MS Teams via Pylon
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up a Slack channel according to the instructions above. Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up a Slack channel according to the instructions above. Then, follow these steps:
+
+1. In Teams go to "See all your teams" and then "Create team". When naming the team the expected syntax is `[CustomerName-PostHog]. Make sure to set the team type to Public and name the first channel "Shared" then finish creating the team.
+2. Now, go to the team you created and go to the Apps tab. Click "Get more apps" and open the Posthog Team app that's under "Built for your org". Select the Shared channel from your newly created team.
+3. On [this page in Pylon](https://app.usepylon.com/apps/8e33c7e9-28e9-4fd5-8e15-7ebe90ec24ae) you should see your new team listed, using the search dropdown to connect it to the Pylon account associated with the customer.
+4. Before adding the customer into the Teams, remember to test it on both sides to ensure the integration is working correctly. After you test it, invite the relevant customer folks by adding them as members to the team!
 
 ## Onboard Your Customer to Slack Support
 
