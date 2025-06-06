@@ -13,7 +13,7 @@ import ScalableSlide from 'components/Presentation/ScalableSlide'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import useProducts from 'hooks/useProducts'
-import { Tabs } from 'radix-ui'
+import Tabs from 'components/RadixUI/Tabs'
 import ImageSlider from 'components/Pricing/Test/ImageSlider'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import OSTable from 'components/OSTable'
@@ -82,21 +82,14 @@ const FeaturesTab = () => {
             onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
             orientation="horizontal"
         >
-            <Tabs.List className="flex flex-col p-1 gap-0.5 w-sm" aria-label="Features">
+            <Tabs.List className="flex flex-col p-1 gap-0.5 w-64" aria-label="Features">
                 {featuresContent.map((item, index) => (
                     <Tabs.Trigger
-                        className={`flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group ${item.icon ? `p-1` : 'px-3 py-2'
-                            }`}
                         key={index}
                         value={`tab-${index}`}
+                        icon={(item as any).icon}
+                        color={(item as any).color}
                     >
-                        {item.icon && (
-                            <span
-                                className={`bg-${item.color}/10 p-1 rounded size-7 text-${item.color} group-hover:bg-${item.color}/25 group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}
-                            >
-                                {item.icon}
-                            </span>
-                        )}
                         {item.title}
                     </Tabs.Trigger>
                 ))}
@@ -107,9 +100,10 @@ const FeaturesTab = () => {
                     key={index}
                     value={`tab-${index}`}
                 >
-                    <div className="pb-4">
-                        <h2 className="text-xl mb-0">{item.title}</h2>
-                        <p className="text-sm">{item.description}</p>
+                    <div className="p-4">
+
+                        <h2 className="text-3xl text-center mb-0">{item.headline}</h2>
+                        {item.description && <p className="mt-1 text-center text-xl">{item.description}</p>}
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
@@ -124,6 +118,11 @@ const FeaturesTab = () => {
                     {item.images && item.images.length > 0 && (
                         <div className="max-w-lg mx-auto">
                             <ImageSlider images={item.images} id={`feature-${index}`} />
+                        </div>
+                    )}
+                    {(item as any).children && (
+                        <div className="p-4">
+                            {(item as any).children}
                         </div>
                     )}
                 </Tabs.Content>
@@ -271,7 +270,7 @@ export default function SessionReplay(): JSX.Element {
         {
             name: "Features",
             content: (
-                <div className="h-full p-12" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                <div className="h-full">
                     <FeaturesTab />
                 </div>
             ),

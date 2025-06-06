@@ -4,7 +4,7 @@ import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
 import SEO from 'components/seo'
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from 'components/RadixUI/Accordion'
-import { Tabs } from 'radix-ui'
+import Tabs from 'components/RadixUI/Tabs'
 import {
     IconTrends,
     IconFunnels,
@@ -37,6 +37,10 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
 
     const handlePrevious = () => {
         setCurrentTab((prev) => (prev - 1 + totalTabs) % totalTabs)
+    }
+
+    const handleChange = (value: string) => {
+        setCurrentTab(parseInt(value.split('-')[1]))
     }
 
     return (
@@ -100,35 +104,21 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                             Next
                         </OSButton>
                     </div>
-                    <Tabs.Root
-                        className="flex items-start w-full"
-                        defaultValue={`tab-${currentTab}`}
-                        value={`tab-${currentTab}`}
-                        onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
-                        orientation="vertical"
-                    >
-                        <Tabs.List className="flex flex-col shrink-0 p-1 gap-0.5 min-w-52" aria-label="Features">
+                    <Tabs.Root value={`tab-${currentTab}`} onValueChange={handleChange}>
+                        <Tabs.List aria-label="Features">
                             {featuresContent.map((item, index) => (
                                 <Tabs.Trigger
-                                    className={`flex h-[45px] flex-1 gap-2 cursor-default select-none items-center bg-white text-[15px] leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group ${item.icon ? `p-1 bg-${item.icon}` : 'px-3 py-2'
-                                        }`}
                                     key={index}
                                     value={`tab-${index}`}
+                                    icon={(item as any).icon}
+                                    color={(item as any).color}
                                 >
-                                    {item.icon && (
-                                        <span
-                                            className={`bg-${item.color}/10 p-1 rounded size-7 text-${item.color} group-hover:bg-${item.color}/25 group-data-[state=active]:bg-${item.color} group-data-[state=active]:text-white`}
-                                        >
-                                            {item.icon}
-                                        </span>
-                                    )}
                                     {item.title}
                                 </Tabs.Trigger>
                             ))}
                         </Tabs.List>
                         {featuresContent.map((item, index) => (
                             <Tabs.Content
-                                className="grow rounded bg-white px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black"
                                 key={index}
                                 value={`tab-${index}`}
                             >
