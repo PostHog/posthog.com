@@ -1,0 +1,23 @@
+From Next.js 15.3 up, you can use `instrumentation-client.ts|js` for a quick, lightweight setup.
+
+Add this file to the root of your Next.js app if you don't have one already.
+
+```js
+// instrumentation-client.js
+import posthog from 'posthog-js'
+
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: 'history_change'
+});
+```
+
+```ts
+// instrumentation-client.ts
+import posthog from 'posthog-js'
+
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+    api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+    capture_pageview: 'history_change'
+});
+```
