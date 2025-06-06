@@ -48,9 +48,11 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
                   TO MODIFY: Add new breakpoint like @[300px]:scale-[0.35] @[300px]:w-[285.71%] @[300px]:h-[285.71%]
                   Calculate width/height: Math.round((100 / scale_factor) * 100) / 100
                 */}
-                <div className="absolute inset-0 origin-top-left scale-[0.15] w-[666.67%] h-[666.67%] @[150px]:scale-[0.2] @[150px]:w-[500%] @[150px]:h-[500%] @[200px]:scale-[0.25] @[200px]:w-[400%] @[200px]:h-[400%] @2xs:scale-[0.3] @2xs:w-[333.33%] @2xs:h-[333.33%]">
+                <div className="absolute inset-0 origin-top-left scale-[0.15] w-[666.67%] h-[666.67%] @[150px]:scale-[0.2] @[150px]:w-[500%] @[150px]:h-[500%] @[200px]:scale-[0.25] @[200px]:w-[400%] @[200px]:h-[400%] @2xs:scale-[0.3] @2xs:w-[333.33%] @2xs:h-[333.33%] pointer-events-none">
                     {slide.content}
                 </div>
+                {/* Transparent overlay to capture clicks and prevent interaction with thumbnail content */}
+                <div className="absolute inset-0 z-10" />
             </div>
             <div className="text-xs text-secondary mt-1 text-center font-medium">
                 {slide.name}
@@ -269,10 +271,10 @@ export default function SessionReplay(): JSX.Element {
                 title=""
                 sidebarContent={<SlideThumbnails slides={slides} />}
             >
-                <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&_div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0">
+                <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&_div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4">
                     {slides.map((slide, index) => (
-                        <div key={index} className="flex flex-col justify-center">
-                            <span data-scheme="secondary" className="slideName inline-flex mx-auto bg-accent rounded-sm px-2 py-0.5 text-sm font-semibold text-primary my-2">
+                        <div key={index} className="flex flex-col justify-center bg-accent">
+                            <span data-scheme="secondary" className="slideName inline-flex mx-auto bg-accent rounded-sm px-4 py-0.5 text-sm font-semibold text-primary my-2">
                                 {slide.name}
                             </span>
                             <div
