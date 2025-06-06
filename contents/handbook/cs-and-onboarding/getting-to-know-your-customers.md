@@ -2,11 +2,11 @@
 
 As CSM, it is your responsibility to be the expert on each of your customers, whether or not they choose to engage with you. Obviously you’ll learn more about customers that you actually talk to, but there’s still plenty of ways to get to know an account, learn their use cases, and track their journey from all of the data available. 
 
-## Discovery Call
+## Discovery call
 
 A traditional “discovery call” is one of the most effective ways to learn what you need to learn about a customer because you can ask direct questions and should spend a LOT of time listening to their responses. 
 
-Typically this is a 15-30 minute conversation with the aim of establishing rapport, understanding pain points, and beginning to formulate how you can best help them. See [this page](https://posthog.com/handbook/cs-and-onboarding/saying-hi-to-your-customers#mission-start) for more on having a first call with a champion. 
+Typically this is a 15-30 minute conversation with the aim of establishing rapport, understanding pain points, and beginning to formulate how you can best help them. See [this page](/handbook/cs-and-onboarding/saying-hi-to-your-customers#mission-start) for more on having a first call with a champion. 
 
 
 Additionally, here are some recommended questions you could use. 
@@ -20,9 +20,9 @@ Note: Please do not simply interrogate a customer with each of these questions, 
 - For your team, what does success look like after implementing a new analytics solution?
 - Are you more comfortable with direct SQL or do you prefer visual dashboards?
 - How do you make decisions about scaling, feature adoption, and pricing flexibility?
-- Have you run into objections or blockers from your team with introducing new analytics tools?
 - Who will be the main users of PostHog on your side?
 - Do you have any concerns about compatibility or integration with your current stack?
+- Anything weird happening in PostHog?
 
 ## Past conversations, tickets, and Slack channels
 
@@ -34,7 +34,7 @@ The key places to look for this information:
 - **Pylon**: will contain the Slack channel history. You can view the "account" page, which is linked to Salesforce accounts for any of your accounts that have a Slack channel. You can filter on "Owner" which should also be mapped to the account owner from Salesforce, which lets you view all Slack or Teams interactions from accounts you own. 
 - **Vitally**: will contain Zendesk and email conversations under the “Active Conversations” section. This will let you see who the key contacts were, which support, sales, or CS individuals have worked with them in the past, and so on. It's also really helpful to see how frequently they raise tickets and what issues they have faced.
 
-## Product Usage
+## Analyzing product usage
 
 While PostHog itself is (obviously) the gold standard for understanding how customers are using our product, we also make it very easy to view this information within the account context in Vitally and in Metabase. 
 
@@ -43,5 +43,5 @@ We can see more specifics in the Metabase dashboard, as well.
 
 These sources will both help you identify potential cross-sell and upsell opportunities, in the name of helping customers maximize their value in the product.
 
-## Recommended Path
+## Recommended approach
 The best recommendation is to find your own rhythm for how you, as an individual, prefer to learn your customers. There's not a strict playbook. This is simply a collection of the best sources of knowledge to use for researching an account. 
