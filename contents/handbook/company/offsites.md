@@ -98,7 +98,7 @@ If your travel plans are affected due to a flight delay or an airline-induced mi
 
 ## How to plan an offsite in 8 weeks - a checklist
 
-Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. To use any of the templates, create a copy to your own drive and edit as you see fit.
+Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. Here's a [spreadsheet template](https://docs.google.com/spreadsheets/d/1aeRGN8DWqMQbQ9duSMCqCO2JJbPkQuSDt_Jz2jx10UI/edit?usp=sharing) you can use with your team to democratically vote for the meetup location, and in other tabs, include travel information (in case someone's flight gets delayed/cancelled), schedule, project ideas, team activities, etc. To use any of the templates, create a copy to your own drive and edit as you see fit.
 
 **8 weeks out**
 
