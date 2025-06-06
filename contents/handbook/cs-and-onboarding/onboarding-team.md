@@ -95,7 +95,7 @@ A supplementary view that’s great for getting a general overview of progress.
 ### Account analysis
 
 - Take a look at the [Metabase primer](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) and follow the tips included there.
-- Check and get familiar with the [Account health check](https://posthog.com/handbook/growth/sales/health-checks) page.
+- Check and get familiar with the [Account health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking) page.
 
 ### How to deal with complex technical issues
 
