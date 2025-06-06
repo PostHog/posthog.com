@@ -156,7 +156,7 @@ export default function Presentation({
             {fullScreen ? (
               children
             ) : (
-              <div className="flex h-full flex-1">
+              <div className="flex flex-1 min-h-0">
                 <ScrollArea className="h-full flex-1 border-t border-r border-primary">
                   {/* <DebugContainerQuery /> */}
                   {accentImage && (
