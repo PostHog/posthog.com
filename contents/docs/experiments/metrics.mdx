@@ -3,6 +3,7 @@ title: Experiment metrics
 sidebar: Docs
 showTitle: true
 ---
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 Once you've created your experiment, you can assign metrics to let you evaluate your experiment's impact and determine if the observed results are [statistically significant](/docs/experiments/significance).
 
@@ -54,6 +55,10 @@ The control (baseline) is always shown in gray. Other bars will be green or redâ
 Create a shared metric to easily reuse a funnel or a trend metric across experiments. This is ideal for key company metrics like conversion, revenue, churn, and more.
 
 To create one, go to the [shared metrics tab](https://us.posthog.com/experiments/shared-metrics) and click **New shared metric**. From here, they are created the same way as single-use metrics.
+
+<CalloutBox icon="IconInfo" title="New feature" type="fyi">
+    You can now duplicate shared metrics by clicking the copy icon next to any metric. This action will pre-populate the save form with your metric information, allowing you to change or accept the existing values.
+</CalloutBox>
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_14_at_11_02_56_2x_1a7cf4bd0e.png"
