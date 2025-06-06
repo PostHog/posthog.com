@@ -2120,3 +2120,10 @@ body.dark .max-ai-body {
 ._strikethrough_1tncs_34 {
     @apply !line-through;
 }
+
+/* Add a smaller container query breakpoint for very small thumbnails */
+@media (min-width: 1px) {
+    .container-queries {
+        --breakpoint-xs: 9.375rem; /* 150px */
+    }
+}

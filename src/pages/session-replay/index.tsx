@@ -29,18 +29,26 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
                 slideElement?.scrollIntoView({ behavior: 'smooth' })
             }}
         >
-            <div className="aspect-video bg-primary border border-primary group-hover:border-primary rounded-sm overflow-hidden relative">
-                <div
-                    style={{
-                        transform: 'scale(0.25)',
-                        transformOrigin: 'top left',
-                        width: '400%',
-                        height: '400%',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                    }}
-                >
+            <div className="aspect-video bg-primary border border-primary group-hover:border-primary rounded-sm overflow-hidden relative @container">
+                {/* 
+                  Responsive thumbnail scaling using container queries:
+                  
+                  MATH: width/height = (100 / scale) to ensure content fits exactly
+                  - scale-[0.15] needs w-[666.67%] h-[666.67%] (100/0.15 = 666.67)
+                  - scale-[0.2]  needs w-[500%]    h-[500%]    (100/0.2  = 500)
+                  - scale-[0.25] needs w-[400%]    h-[400%]    (100/0.25 = 400)
+                  - scale-[0.3]  needs w-[333.33%] h-[333.33%] (100/0.3  = 333.33)
+                  
+                  BREAKPOINTS:
+                  - Default (< 150px): 15% scale - very small thumbnails
+                  - @[150px] (≥ 150px): 20% scale - small thumbnails  
+                  - @[200px] (≥ 200px): 25% scale - medium thumbnails
+                  - @2xs (≥ 256px): 30% scale - large thumbnails
+                  
+                  TO MODIFY: Add new breakpoint like @[300px]:scale-[0.35] @[300px]:w-[285.71%] @[300px]:h-[285.71%]
+                  Calculate width/height: Math.round((100 / scale_factor) * 100) / 100
+                */}
+                <div className="absolute inset-0 origin-top-left scale-[0.15] w-[666.67%] h-[666.67%] @[150px]:scale-[0.2] @[150px]:w-[500%] @[150px]:h-[500%] @[200px]:scale-[0.25] @[200px]:w-[400%] @[200px]:h-[400%] @2xs:scale-[0.3] @2xs:w-[333.33%] @2xs:h-[333.33%]">
                     {slide.content}
                 </div>
             </div>
@@ -108,11 +116,11 @@ const FeaturesTab = () => {
                     value={`tab-${index}`}
                 >
                     <div className="pb-4">
-                        <h2 className="text-xl mb-0">{item.headline} | {item.title}</h2>
+                        <h2 className="text-xl mb-0">{item.title}</h2>
                         <p className="text-sm">{item.description}</p>
                     </div>
 
-                    <div className="order-2 @3xl:order-1">
+                    <div className="grid grid-cols-2 gap-4">
                         {item.features &&
                             item.features.map((feature, index) => (
                                 <div key={index}>
@@ -122,7 +130,7 @@ const FeaturesTab = () => {
                             ))}
                     </div>
                     {item.images && item.images.length > 0 && (
-                        <div className="order-1 @3xl:order-2">
+                        <div className="max-w-lg mx-auto">
                             <ImageSlider images={item.images} id={`feature-${index}`} />
                         </div>
                     )}

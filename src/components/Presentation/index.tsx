@@ -95,7 +95,7 @@ export default function Presentation({
         className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
       >
         {sidebarContent && (
-          <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+          <aside data-scheme="secondary" className="w-48 transition-all duration-300 bg-primary border-r border-primary h-full">
             <ScrollArea className="p-2">
               <div className="space-y-3">
                 <SidebarContent content={sidebarContent} />
@@ -110,7 +110,7 @@ export default function Presentation({
         >
           {!fullScreen && (
             <>
-              <HeaderBar showHome showBack showForward showSearch />
+              <HeaderBar showSidebar showSearch />
             </>
           )}
           {fullScreen ? (

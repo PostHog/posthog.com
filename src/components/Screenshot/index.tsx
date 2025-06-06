@@ -25,7 +25,7 @@ export const Screenshot = ({ icon, product, slug, order, src, className = '' }: 
   const isDark = websiteTheme === 'dark'
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} shadow-xl rounded-md reasonable:max-h-full border border-transparent dark:border-dark/50`}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 1280 736" className={`${className} rounded-md reasonable:max-h-full border border-transparent dark:border-dark/50`}>
       <g clipPath="url(#a)">
         {/* content frame */}
         <path className="fill-light dark:fill-dark" d="M0 0h1280v736H0z" />
