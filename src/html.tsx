@@ -16,7 +16,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 <meta charSet="utf-8" />
                 <meta httpEquiv="x-ua-compatible" content="ie=edge" />
                 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-                
+
                 <link
                     rel="preload"
                     as="font"
@@ -73,6 +73,11 @@ export default function HTML(props: HTMLProps): JSX.Element {
                         }}
                     />
                 )}
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `!function(e,o){let t=0,n=!1;e.__default__={form_id:509041,team_id:482},function e(){const c=o.createElement("script");c.async=!0,c.src="https://import-cdn.default.com/v2/index.js",c.onload=()=>{n=!0,console.info("[Default.com] Powered by Default.com")},c.onerror=()=>{++t<=3&&(setTimeout(e,1e3*t),Z)},o.head.appendChild(c)}()}(window,document);`,
+                    }}
+                />
 
                 {props.headComponents}
             </head>
