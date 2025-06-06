@@ -202,11 +202,7 @@ module.exports = {
                     'Segoe UI Symbol',
                 ],
             },
-            fontSize: {
-                '4xl': '1.875rem',
-                '3xl': '1.5rem',
-                '6xl': '3.5rem',
-            },
+            fontSize: {},
             gridTemplateColumns: {
                 16: 'repeat(16, minmax(0, 1fr))',
             },
