@@ -78,11 +78,19 @@ const HogZilla = () => {
     )
 }
 
-function NewsletterSubscribeForm() {
+function NewsletterSubscribeForm({
+    email,
+    setEmail,
+    submitted,
+    setSubmitted,
+}: {
+    email: string
+    setEmail: (email: string) => void
+    submitted: boolean
+    setSubmitted: (submitted: boolean) => void
+}) {
     const { user } = useUser()
     const posthog = usePostHog()
-    const [email, setEmail] = useState('')
-    const [submitted, setSubmitted] = useState(false)
 
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -99,7 +107,7 @@ function NewsletterSubscribeForm() {
     }
 
     useEffect(() => {
-        if (user?.email) {
+        if (user?.email && !email) {
             setEmail(user.email)
         }
     }, [user])
@@ -166,6 +174,8 @@ function NewsletterSubscribeForm() {
 }
 
 function NewsletterFBC(): JSX.Element {
+    const [email, setEmail] = useState('')
+    const [submitted, setSubmitted] = useState(false)
     return (
         <Layout>
             <SEO title="Newsletter" description="Subscribe to our newsletter" />
@@ -177,7 +187,12 @@ function NewsletterFBC(): JSX.Element {
                             className="w-full h-full"
                         />
                     </div>
-                    <NewsletterSubscribeForm />
+                    <NewsletterSubscribeForm
+                        email={email}
+                        setEmail={setEmail}
+                        submitted={submitted}
+                        setSubmitted={setSubmitted}
+                    />
                     <div className="w-full max-w-3xl">
                         <h3 className="text-xl font-bold mb-4 text-center">Top issues</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -196,11 +211,16 @@ function NewsletterFBC(): JSX.Element {
                             ))}
                         </div>
                         <h2 className="text-2xl font-bold text-black text-center my-8">
-                            Not convinced? Perhaps Hogzilla will convince you
+                            Not convinced? Hogzilla might change your mind
                         </h2>
                         <HogZilla />
                         <div className="mt-8">
-                            <NewsletterSubscribeForm />
+                            <NewsletterSubscribeForm
+                                email={email}
+                                setEmail={setEmail}
+                                submitted={submitted}
+                                setSubmitted={setSubmitted}
+                            />
                         </div>
                     </div>
                 </div>
