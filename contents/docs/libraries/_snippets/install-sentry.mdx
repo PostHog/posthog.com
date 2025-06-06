@@ -5,6 +5,9 @@ Make sure you're using both PostHog and Sentry as JS modules. You'll need to rep
 - `prefix`: Optional: Url of a self-hosted sentry instance (default: https://sentry.io/organizations/)
 - `severityAllowList`: Optional: by default this is `['error']`, you can provide more Sentry severity levels (e.g. `['error', 'info']`) or '*' to capture any severity. Only available from posthog-js version 1.118.0 forward
 
+> **Note:** If your Sentry instance uses a custom subdomain (e.g. `https://company.sentry.io`), make sure your `prefix` includes the `/organizations/` path to avoid malformed `sentry_url` values — e.g.  
+> `prefix: 'https://company.sentry.io/organizations/'`
+
 ```js-web
 import posthog from 'posthog-js'
 import * as Sentry from '@sentry/browser'
