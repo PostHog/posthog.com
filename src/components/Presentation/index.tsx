@@ -26,7 +26,12 @@ interface PresentationProps {
   sidebarContent?: React.ReactNode | AccordionItem[]
   children?: React.ReactNode
   fullScreen?: boolean
-  slides?: Array<{ name: string; content: React.ReactNode }>
+  slides?: Array<{
+    name: string;
+    content: React.ReactNode;
+    rawContent?: React.ReactNode;
+    thumbnailContent?: React.ReactNode;
+  }>
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): React.ReactElement | null => {

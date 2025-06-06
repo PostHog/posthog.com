@@ -9,6 +9,7 @@ import Product from 'components/Explorer/Product'
 import Screenshot from 'components/Screenshot'
 import { IconRewindPlay } from '@posthog/icons'
 import Presentation from 'components/Presentation'
+import ScalableSlide from 'components/Presentation/ScalableSlide'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import useProducts from 'hooks/useProducts'
@@ -16,7 +17,7 @@ import { Tabs } from 'radix-ui'
 import ImageSlider from 'components/Pricing/Test/ImageSlider'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
-const slideClasses = 'bg-primary aspect-video overflow-hidden relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
+const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
 // Component for individual slide thumbnail with proper scaling
 const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
@@ -30,28 +31,10 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
                 slideElement?.scrollIntoView({ behavior: 'smooth' })
             }}
         >
-            <div className="aspect-video bg-primary border border-primary group-hover:border-primary rounded-sm overflow-hidden relative @container">
-                {/* 
-                  Responsive thumbnail scaling using container queries:
-                  
-                  MATH: width/height = (100 / scale) to ensure content fits exactly
-                  - scale-[0.15] needs w-[666.67%] h-[666.67%] (100/0.15 = 666.67)
-                  - scale-[0.2]  needs w-[500%]    h-[500%]    (100/0.2  = 500)
-                  - scale-[0.25] needs w-[400%]    h-[400%]    (100/0.25 = 400)
-                  - scale-[0.3]  needs w-[333.33%] h-[333.33%] (100/0.3  = 333.33)
-                  
-                  BREAKPOINTS:
-                  - Default (< 150px): 15% scale - very small thumbnails
-                  - @[150px] (≥ 150px): 20% scale - small thumbnails  
-                  - @[200px] (≥ 200px): 25% scale - medium thumbnails
-                  - @2xs (≥ 256px): 30% scale - large thumbnails
-                  
-                  TO MODIFY: Add new breakpoint like @[300px]:scale-[0.35] @[300px]:w-[285.71%] @[300px]:h-[285.71%]
-                  Calculate width/height: Math.round((100 / scale_factor) * 100) / 100
-                */}
-                <div className="absolute inset-0 origin-top-left scale-[0.15] w-[666.67%] h-[666.67%] @[150px]:scale-[0.2] @[150px]:w-[500%] @[150px]:h-[500%] @[200px]:scale-[0.25] @[200px]:w-[400%] @[200px]:h-[400%] @2xs:scale-[0.3] @2xs:w-[333.33%] @2xs:h-[333.33%] pointer-events-none">
-                    {slide.content}
-                </div>
+            <div className="aspect-video bg-primary border border-primary group-hover:border-primary rounded-sm overflow-hidden relative">
+                <ScalableSlide mode="thumbnail" baseWidth={1280} baseHeight={720}>
+                    {slide.thumbnailContent || slide.rawContent || slide.content}
+                </ScalableSlide>
                 {/* Transparent overlay to capture clicks and prevent interaction with thumbnail content */}
                 <div className="absolute inset-0 z-10" />
             </div>
@@ -152,34 +135,25 @@ export default function SessionReplay(): JSX.Element {
     const customerSlugs = sessionReplayProduct?.customers ? Object.keys(sessionReplayProduct.customers) : []
     const customers = getCustomers(customerSlugs)
 
-    // Define slides as data
-    const slides = [
+    // Define raw slide content
+    const rawSlides = [
         {
             name: "Overview",
             content: (
-                <>
-                    <DebugContainerQuery />
-                    <div className="@container grid grid-cols-12 grid-rows-8 h-full">
-                        <div className="col-span-7 @7xl:col-span-8 row-span-5 row-start-1 mb-4">
-                            <Screenshot
-                                product="Session replay"
-                                slug="session-replay"
-                                icon={<IconRewindPlay className="text-yellow" />}
-                                order={1}
-                                className={``}
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_d838142e05.png"
-                            />
+                <div className="h-full p-12 flex flex-col justify-center" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                    <div className="max-w-2xl">
+                        <div className="inline-flex items-center gap-3 text-primary mb-4">
+                            <IconRewindPlay className="w-8 h-8 text-yellow" />
+                            <span className="text-2xl font-bold">Session replay</span>
                         </div>
-                        <div className="col-span-5 row-span-5 col-start-8 @7xl:col-span-4 @7xl:row-span-5 @7xl:col-start-9 @container p-6 mb-4">
-                            <div className="flex items-center mb-4" style={{ gap: '0.25rem' }}>
-                                <IconRewindPlay className="text-yellow size-6" />
-                                <strong className="font-semibold">Session replay</strong>
-                            </div>
-                            <h1 className="">Watch people use your product</h1>
-                            <p className="max-w-lg mx-auto">
-                                Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
-                            </p>
-                        </div>
+                        <h1 className="text-5xl font-bold text-primary mb-6">
+                            Watch people use your product
+                        </h1>
+                        <p className="text-xl text-secondary mb-8 leading-relaxed">
+                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
+                        </p>
+                        {/* 
+
                         {customers.slice(0, 4).map((customer, index) => {
                             const customerData = sessionReplayProduct?.customers?.[customer.slug]
                             return (
@@ -211,46 +185,105 @@ export default function SessionReplay(): JSX.Element {
                                 </div>
                             )
                         })}
+
+                         */}
                     </div>
-                </>
+                </div>
+            ),
+            // Simplified version for thumbnails (avoid complex components)
+            thumbnailContent: (
+                <div className="h-full p-12 flex flex-col justify-center" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                    <div className="max-w-2xl">
+                        <div className="inline-flex items-center gap-3 text-primary mb-4">
+                            <IconRewindPlay className="w-8 h-8 text-yellow" />
+                            <span className="text-2xl font-bold">Session replay</span>
+                        </div>
+                        <h1 className="text-5xl font-bold text-primary mb-6">
+                            Watch people use your product
+                        </h1>
+                        <p className="text-xl text-secondary mb-8 leading-relaxed">
+                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior.
+                        </p>
+                    </div>
+                </div>
             )
         },
         {
             name: "Features",
             content: (
-                <div className="h-full" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                <div className="h-full p-12" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
                     <FeaturesTab />
+                </div>
+            ),
+            // Simplified version for thumbnails (avoid FeaturesTab which has ImageSlider)
+            thumbnailContent: (
+                <div className="h-full p-12 flex flex-col justify-center" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                    <div className="max-w-2xl">
+                        <h2 className="text-4xl font-bold text-primary mb-6">Features</h2>
+                        <p className="text-xl text-secondary">
+                            Event timeline, Console logs, Network monitoring and more
+                        </p>
+                    </div>
                 </div>
             )
         },
         {
             name: "Answers",
             content: (
-                <div className="text-center">
-                    <h3>What can I discover with session replay?</h3>
-                    <p>Content for slide 3</p>
+                <div className="h-full p-12 flex flex-col justify-center text-center">
+                    <h2 className="text-4xl font-bold text-primary mb-6">What can I discover with session replay?</h2>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto">
+                        Understand user behavior, identify friction points, and improve your product experience
+                    </p>
                 </div>
             )
         },
         {
             name: "Pricing",
             content: (
-                <div className="text-center">
-                    <h3>Pricing</h3>
-                    <p>Content for slide 3</p>
+                <div className="h-full p-12 flex flex-col justify-center text-center">
+                    <h2 className="text-4xl font-bold text-primary mb-6">Pricing</h2>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto">
+                        Start free, pay as you scale
+                    </p>
                 </div>
             )
         },
         {
             name: "Getting started",
             content: (
-                <div className="text-center">
-                    <h3>Get started</h3>
-                    <p>Content for slide 3</p>
+                <div className="h-full p-12 flex flex-col justify-center text-center">
+                    <h2 className="text-4xl font-bold text-primary mb-6">Get started</h2>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto mb-8">
+                        Ready to see how users interact with your product?
+                    </p>
+                    <div className="flex gap-4 justify-center">
+                        <CallToAction href="/signup" type="primary" size="lg">
+                            Get started - free
+                        </CallToAction>
+                        <CallToAction href="/talk-to-a-human" type="secondary" size="lg">
+                            Talk to a human
+                        </CallToAction>
+                    </div>
                 </div>
             )
         }
     ]
+
+    // Create slides with both raw content and wrapped content for different contexts
+    const slides = rawSlides.map(slide => ({
+        ...slide,
+        // Wrapped content for editor view
+        content: (
+            <ScalableSlide mode="editor" baseWidth={1280} baseHeight={720}>
+                {slide.content}
+            </ScalableSlide>
+        ),
+        // Raw content for presentation mode
+        rawContent: slide.content,
+        // Simplified content for thumbnails (avoids complex components)
+        thumbnailContent: slide.thumbnailContent || slide.content
+    }))
 
     return (
         <>
@@ -266,7 +299,7 @@ export default function SessionReplay(): JSX.Element {
                 sidebarContent={<SlideThumbnails slides={slides} />}
                 slides={slides}
             >
-                <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&_div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4">
+                <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4">
                     {slides.map((slide, index) => (
                         <div key={index} className="flex flex-col justify-center bg-accent">
                             <span data-scheme="secondary" className="slideName inline-flex mx-auto bg-accent rounded-sm px-4 py-0.5 text-sm font-semibold text-primary my-2">
@@ -281,31 +314,6 @@ export default function SessionReplay(): JSX.Element {
                         </div>
                     ))}
                 </div>
-
-                <p className="flex gap-2">
-                    <CallToAction href="/signup" type="primary" size="md">
-                        Get started
-                    </CallToAction>
-                    <CallToAction href="/talk-to-a-human" type="secondary" size="md">
-                        Talk to a human
-                    </CallToAction>
-                </p>
-
-                <Product
-                    type="session_replay"
-                    indexLinks={[
-                        'features',
-                        'pricing',
-                        'customers',
-                        'comparison',
-                        'docs',
-                        'tutorials',
-                        'questions',
-                        'team',
-                        'roadmap',
-                        'changelog',
-                    ]}
-                />
             </Presentation>
         </>
     )

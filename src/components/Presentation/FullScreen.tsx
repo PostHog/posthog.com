@@ -1,9 +1,15 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect, useCallback, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { IconX } from '@posthog/icons'
+import ScalableSlide from './ScalableSlide'
 
 interface PresentationModeProps {
-  slides: Array<{ name: string; content: React.ReactNode }>
+  slides: Array<{
+    name: string;
+    content: React.ReactNode;
+    rawContent?: React.ReactNode;
+    thumbnailContent?: React.ReactNode;
+  }>
   onExit: () => void
   initialSlideIndex?: number
 }
@@ -16,7 +22,7 @@ const PresentationMode = ({
 }: PresentationModeProps) => {
   const [currentSlide, setCurrentSlide] = useState(initialSlideIndex)
   const [showControls, setShowControls] = useState(true)
-  const [mouseTimer, setMouseTimer] = useState<NodeJS.Timeout | null>(null)
+  const mouseTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length)
@@ -28,14 +34,13 @@ const PresentationMode = ({
 
   const handleMouseMove = useCallback(() => {
     setShowControls(true)
-    if (mouseTimer) {
-      clearTimeout(mouseTimer)
+    if (mouseTimerRef.current) {
+      clearTimeout(mouseTimerRef.current)
     }
-    const timer = setTimeout(() => {
+    mouseTimerRef.current = setTimeout(() => {
       setShowControls(false)
     }, 3000)
-    setMouseTimer(timer)
-  }, [mouseTimer])
+  }, [])
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -70,10 +75,9 @@ const PresentationMode = ({
     document.addEventListener('mousemove', handleMouseMove)
 
     // Initial timer for hiding controls
-    const timer = setTimeout(() => {
+    const initialTimer = setTimeout(() => {
       setShowControls(false)
     }, 3000)
-    setMouseTimer(timer)
 
     // Prevent scrolling on the body when in presentation mode
     document.body.style.overflow = 'hidden'
@@ -81,14 +85,18 @@ const PresentationMode = ({
     return () => {
       document.removeEventListener('keydown', handleKeyDown)
       document.removeEventListener('mousemove', handleMouseMove)
-      if (mouseTimer) {
-        clearTimeout(mouseTimer)
+      if (mouseTimerRef.current) {
+        clearTimeout(mouseTimerRef.current)
       }
-      clearTimeout(timer)
+      clearTimeout(initialTimer)
       // Restore body scrolling
       document.body.style.overflow = ''
     }
-  }, [nextSlide, prevSlide, onExit, handleMouseMove, mouseTimer])
+  }, [nextSlide, prevSlide, onExit, handleMouseMove])
+
+  const currentSlideData = slides[currentSlide]
+  // Use rawContent for presentation to avoid double-scaling, fallback to content
+  const slideContent = currentSlideData?.rawContent || currentSlideData?.content
 
   const presentationContent = (
     <div data-scheme="secondary" className="fixed inset-0 bg-primary z-[9999] flex items-center justify-center">
@@ -135,28 +143,55 @@ const PresentationMode = ({
       </div>
 
       {/* Current slide */}
-      <div data-scheme="primary" className="w-full h-full max-w-7xl max-h-[90vh] mx-auto flex items-center justify-center p-8">
-        <div className="aspect-video w-full h-full bg-primary rounded overflow-hidden shadow-2xl">
-          {slides[currentSlide]?.content}
+      <div className="w-full h-full flex items-center justify-center p-4">
+        <div className="aspect-video max-w-full max-h-full w-full bg-primary rounded overflow-hidden shadow-2xl">
+          <ScalableSlide mode="presentation" baseWidth={1280} baseHeight={720}>
+            {slideContent}
+          </ScalableSlide>
         </div>
       </div>
 
       {/* Slide thumbnails at bottom */}
       <div className={`absolute bottom-4 left-1/2 -translate-x-1/2 z-10 transition-opacity duration-300 ${showControls ? 'opacity-100' : 'opacity-0'}`}>
-        <div className="flex space-x-2 bg-black/50 p-2 rounded-lg">
-          {slides.map((slide, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-12 h-7 rounded border-2 transition-colors ${index === currentSlide
-                ? 'border-white bg-white/20'
-                : 'border-white/30 bg-white/10 hover:bg-white/20'
-                }`}
-              title={slide.name}
-            >
-              <div className="w-full h-full rounded-sm bg-white/10"></div>
-            </button>
-          ))}
+        <div className="flex space-x-3 bg-black/50 p-3 rounded-lg">
+          {slides.map((slide, index) => {
+            const thumbnailContent = slide.thumbnailContent || slide.rawContent || slide.content
+            console.log(`🖼️ FullScreen thumbnail ${index}:`, {
+              slideName: slide.name,
+              hasThumbnailContent: !!slide.thumbnailContent,
+              hasRawContent: !!slide.rawContent,
+              hasContent: !!slide.content,
+              contentType: typeof thumbnailContent,
+              isReactElement: React.isValidElement(thumbnailContent)
+            })
+
+            return (
+              <button
+                key={index}
+                onClick={() => setCurrentSlide(index)}
+                className={`group cursor-pointer ${index === currentSlide
+                  ? 'ring-2 ring-white'
+                  : 'hover:ring-1 hover:ring-white/50'
+                  } rounded`}
+                title={slide.name}
+              >
+                <div className="w-20 h-12 aspect-video bg-primary border border-white/20 group-hover:border-white/40 rounded overflow-hidden relative">
+                  <ScalableSlide mode="thumbnail" baseWidth={1280} baseHeight={720}>
+                    {thumbnailContent}
+                  </ScalableSlide>
+                  {/* Transparent overlay to capture clicks and prevent interaction with thumbnail content */}
+                  <div className="absolute inset-0 z-10" />
+                  {/* Debug info overlay */}
+                  <div className="absolute top-0 right-0 bg-red-500 text-white text-[8px] px-1 opacity-50 z-20">
+                    {index}
+                  </div>
+                </div>
+                <div className="text-xs text-white/80 mt-1 text-center font-medium truncate max-w-20">
+                  {slide.name}
+                </div>
+              </button>
+            )
+          })}
         </div>
       </div>
     </div>
