@@ -93,7 +93,7 @@ const HappyHog = () => {
         <img
             src="https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png"
             alt="happy hog"
-            className="float-right max-w-[400px] max-h-36 -mt-4 -mr-2"
+            className="float-right max-w-[400px] max-h-48 -mt-2 -mr-2"
         />
     )
 }
@@ -165,7 +165,7 @@ const Products = () => {
             <p className="mt-2 inline-flex items-center">
                 <span>using these tools, you can track your findings with</span>
                 <ProductButtons productTypes={['Dashboards']} />
-                    
+
                 <span>or create</span>
                 <ProductButtons productTypes={['Notebooks']} />
             </p>
@@ -415,12 +415,12 @@ export default function Home({
                                 alignment === 1
                                     ? 'left'
                                     : alignment === 2
-                                    ? 'center'
-                                    : alignment === 3
-                                    ? 'right'
-                                    : alignment === 4
-                                    ? 'justify'
-                                    : 'left'
+                                        ? 'center'
+                                        : alignment === 3
+                                            ? 'right'
+                                            : alignment === 4
+                                                ? 'justify'
+                                                : 'left'
                             )
                         }
                     }
