@@ -117,7 +117,7 @@ const TabsTrigger = ({
   }
 
   const currentSize = sizeStyles[size]
-  const baseClassName = `flex ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center bg-white ${currentSize.fontSize} leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group`
+  const baseClassName = `flex ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center ${currentSize.fontSize} leading-none text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group`
   const finalClassName = className || `${baseClassName} ${currentSize.padding}`
 
   return (

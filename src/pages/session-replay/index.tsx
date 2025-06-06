@@ -83,18 +83,20 @@ const FeaturesTab = () => {
             orientation="horizontal"
             size="lg"
         >
-            <Tabs.List className="flex flex-col p-1 gap-0.5 w-64" aria-label="Features">
-                {featuresContent.map((item, index) => (
-                    <Tabs.Trigger
-                        key={index}
-                        value={`tab-${index}`}
-                        icon={(item as any).icon}
-                        color={(item as any).color}
-                    >
-                        {item.title}
-                    </Tabs.Trigger>
-                ))}
-            </Tabs.List>
+            <div data-scheme="secondary" className="w-64 h-full bg-primary">
+                <Tabs.List className="flex flex-col p-1 gap-0.5" aria-label="Features">
+                    {featuresContent.map((item, index) => (
+                        <Tabs.Trigger
+                            key={index}
+                            value={`tab-${index}`}
+                            icon={(item as any).icon}
+                            color={(item as any).color}
+                        >
+                            {item.title}
+                        </Tabs.Trigger>
+                    ))}
+                </Tabs.List>
+            </div>
             {featuresContent.map((item, index) => (
                 <Tabs.Content
                     className="flex-1 bg-primary border-l border-primary grow rounded px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full"

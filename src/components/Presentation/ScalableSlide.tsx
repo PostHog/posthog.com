@@ -196,6 +196,7 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
     >
       <div
         ref={contentRef}
+        data-scheme="primary"
         className="absolute top-1/2 left-1/2 origin-center shadow-2xl rounded border border-primary bg-primary"
         style={{
           width: baseWidth,
