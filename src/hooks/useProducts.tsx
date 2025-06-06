@@ -295,8 +295,6 @@ const initialProducts = [
                 title: 'Dashboards',
                 headline: 'Create custom analytics dashboards',
                 description: 'Build and customize dashboards to monitor key metrics and share insights with your team.',
-                icon: <IconDashboard />,
-                color: 'green',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png',
@@ -422,15 +420,11 @@ const initialProducts = [
                             'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
                     },
                 ],
-                icon: <IconGanttChart />,
-                color: 'blue',
             },
             {
                 title: 'Console logs',
                 headline: 'Console logs',
                 description: "Debug issues faster by browsing the user's console",
-                icon: <IconDashboard />,
-                color: 'green',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/console.png',
@@ -442,14 +436,72 @@ const initialProducts = [
                 title: 'Network monitor',
                 headline: 'Network monitor',
                 description: "Analyze performance and network calls",
-                icon: <IconDashboard />,
-                color: 'green',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
                         alt: 'Network monitor',
                     },
                 ],
+            },
+            {
+                title: 'Autocapture',
+                headline: 'Autocapture',
+                description: "Capture sessions without extra code. If you're already using PostHog.js for analytics, there's nothing else to install.",
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+                        alt: 'Autocapture',
+                    },
+                ],
+            },
+            {
+                title: 'Playlist',
+                headline: 'Playlist',
+                description: "Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort",
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+                        alt: 'Playlist',
+                    },
+                ],
+            },
+            {
+                title: 'DOM explorer',
+                headline: 'DOM explorer',
+                description: "Inspect the DOM as it was at this moment in the session. Analyze the structure and elements captured during the recording.",
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+                        alt: 'DOM explorer',
+                    },
+                ],
+            },
+            {
+                title: 'Record by feature flag',
+                headline: 'Record by feature flag',
+                description: "Record sessions for users who have a specific feature flag enabled.",
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+                        alt: 'Record by feature flag',
+                    },
+                ],
+            },
+            {
+                title: 'Supported platforms',
+                headline: 'Supported platforms',
+                description: "Web or mobile.",
+                children: (
+                    <>
+                        <p>Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.</p>
+                        <p>Works with our mobile SDKs for iOS and Android.</p>
+                    </>
+                )
+            },
+            {
+                title: 'More features',
+                headline: 'More features',
+                description: "Web or mobile.",
             }
         ]
     },
