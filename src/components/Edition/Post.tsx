@@ -41,10 +41,7 @@ export default function Post({
     const defaultImage = post_category?.data?.attributes?.defaultImage?.data?.attributes?.url
 
     return (
-        <li
-            ref={containerRef}
-            className={`snap-start md:last:pb-24 ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}
-        >
+        <li ref={containerRef} className={`snap-start ${!articleView ? 'grid grid-cols-[35px_1fr] items-center' : ''}`}>
             {!articleView && <LikeButton slug={slug} postID={id} />}
             <span className={`flex items-center ${articleView ? 'py-px' : ''}`}>
                 <Link
