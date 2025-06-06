@@ -20,15 +20,15 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
 // Component for individual slide thumbnail with proper scaling
-const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
+const SlideThumb = ({ slide, index, isActive }: { slide: any; index: number; isActive: boolean }) => {
     return (
         <div
             data-scheme="primary"
             className="group cursor-pointer"
             onClick={() => {
-                // Scroll to slide
+                // Scroll to slide container (includes title and content)
                 const slideElement = document.querySelector(`[data-slide="${index}"]`)
-                slideElement?.scrollIntoView({ behavior: 'smooth' })
+                slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             }}
         >
             <div className="aspect-video bg-primary border border-primary group-hover:border-primary rounded-sm overflow-hidden relative">
@@ -38,7 +38,7 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
                 {/* Transparent overlay to capture clicks and prevent interaction with thumbnail content */}
                 <div className="absolute inset-0 z-10" />
             </div>
-            <div className="text-xs text-secondary mt-1 text-center font-medium">
+            <div className={`text-xs text-secondary mt-1 text-center ${isActive ? 'font-bold' : 'font-medium'}`}>
                 {slide.name}
             </div>
         </div>
@@ -46,12 +46,17 @@ const SlideThumb = ({ slide, index }: { slide: any; index: number }) => {
 }
 
 // Component for rendering slide thumbnails
-const SlideThumbnails = ({ slides }: { slides: any[] }) => {
+const SlideThumbnails = ({ slides, activeSlideIndex }: { slides: any[]; activeSlideIndex: number }) => {
     return (
         <div className="space-y-3 p-1">
             <h3 className="text-sm text-center font-semibold text-secondary mb-3">Slides</h3>
             {slides.map((slide, index) => (
-                <SlideThumb key={index} slide={slide} index={index} />
+                <SlideThumb
+                    key={index}
+                    slide={slide}
+                    index={index}
+                    isActive={index === activeSlideIndex}
+                />
             ))}
         </div>
     )
@@ -296,19 +301,20 @@ export default function SessionReplay(): JSX.Element {
                 template="generic"
                 slug="session-replay"
                 title=""
-                sidebarContent={<SlideThumbnails slides={slides} />}
+                sidebarContent={(activeSlideIndex) => <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} />}
                 slides={slides}
             >
                 <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4">
                     {slides.map((slide, index) => (
-                        <div key={index} className="flex flex-col justify-center bg-accent">
+                        <div
+                            key={index}
+                            className="flex flex-col justify-center bg-accent"
+                            data-slide={index}
+                        >
                             <span data-scheme="secondary" className="slideName inline-flex mx-auto bg-accent rounded-sm px-4 py-0.5 text-sm font-semibold text-primary my-2">
                                 {slide.name}
                             </span>
-                            <div
-                                className={slideClasses}
-                                data-slide={index}
-                            >
+                            <div className={slideClasses}>
                                 {slide.content}
                             </div>
                         </div>

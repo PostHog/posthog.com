@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { navigate } from 'gatsby'
@@ -23,7 +23,7 @@ interface PresentationProps {
   slug: string
   title: string
   accentImage?: React.ReactNode
-  sidebarContent?: React.ReactNode | AccordionItem[]
+  sidebarContent?: React.ReactNode | AccordionItem[] | ((activeSlideIndex: number) => React.ReactNode)
   children?: React.ReactNode
   fullScreen?: boolean
   slides?: Array<{
@@ -34,8 +34,12 @@ interface PresentationProps {
   }>
 }
 
-const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): React.ReactElement | null => {
+const SidebarContent = ({ content, activeSlideIndex }: { content: React.ReactNode | AccordionItem[] | ((activeSlideIndex: number) => React.ReactNode); activeSlideIndex: number }): React.ReactElement | null => {
   if (!content) return null
+
+  if (typeof content === 'function') {
+    return <>{content(activeSlideIndex)}</>
+  }
 
   if (Array.isArray(content)) {
     return (
@@ -91,6 +95,8 @@ export default function Presentation({
   const [isNavVisible, setIsNavVisible] = useState<boolean>(true)
   const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
+  const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
   const handleValueChange = (value: string) => {
     navigate(`/${value}`)
@@ -104,14 +110,58 @@ export default function Presentation({
     setIsNavVisible(!isNavVisible)
   }
 
+  // Set up scroll-based detection to track active slide
+  useEffect(() => {
+    if (slides.length === 0) return
+
+    const scrollContainer = document.querySelector('[data-app="Presentation"] [data-radix-scroll-area-viewport]')
+    if (!scrollContainer) return
+
+    const handleScroll = () => {
+      const containerRect = scrollContainer.getBoundingClientRect()
+      const containerTop = containerRect.top
+      const containerBottom = containerRect.bottom
+      const containerHeight = containerRect.height
+
+      let bestSlideIndex = 0
+      let maxVisibleArea = 0
+
+      // Check each slide to find which has the most visible area
+      const slideElements = document.querySelectorAll('[data-slide]')
+      slideElements.forEach((slideElement, index) => {
+        const slideRect = slideElement.getBoundingClientRect()
+
+        // Calculate visible area of this slide
+        const visibleTop = Math.max(slideRect.top, containerTop)
+        const visibleBottom = Math.min(slideRect.bottom, containerBottom)
+        const visibleHeight = Math.max(0, visibleBottom - visibleTop)
+        const visibleArea = visibleHeight * slideRect.width
+
+        // If this slide has more visible area, it should be active
+        if (visibleArea > maxVisibleArea) {
+          maxVisibleArea = visibleArea
+          bestSlideIndex = index
+        }
+      })
+
+      setActiveSlideIndex(bestSlideIndex)
+    }
+
+    // Initial check
+    handleScroll()
+
+    // Listen for scroll events
+    scrollContainer.addEventListener('scroll', handleScroll, { passive: true })
+
+    return () => {
+      scrollContainer.removeEventListener('scroll', handleScroll)
+    }
+  }, [slides.length])
+
   const enterPresentationMode = () => {
-    // Find current visible slide if slides exist
+    // Use the currently active slide index instead of searching for visible slide
     if (slides.length > 0) {
-      const visibleSlide = document.querySelector('[data-slide]')
-      if (visibleSlide) {
-        const slideIndex = parseInt(visibleSlide.getAttribute('data-slide') || '0')
-        setCurrentSlideIndex(slideIndex)
-      }
+      setCurrentSlideIndex(activeSlideIndex)
     }
     setIsPresentationMode(true)
   }
@@ -131,7 +181,7 @@ export default function Presentation({
             <aside data-scheme="secondary" className={`${isNavVisible ? 'w-48' : 'w-0'} transition-all duration-300 bg-primary border-r border-primary h-full overflow-hidden`}>
               <ScrollArea className="p-2">
                 <div className="space-y-3">
-                  <SidebarContent content={sidebarContent} />
+                  <SidebarContent content={sidebarContent} activeSlideIndex={activeSlideIndex} />
                 </div>
               </ScrollArea>
             </aside>
