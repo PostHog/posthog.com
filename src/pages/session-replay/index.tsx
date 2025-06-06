@@ -16,6 +16,7 @@ import useProducts from 'hooks/useProducts'
 import { Tabs } from 'radix-ui'
 import ImageSlider from 'components/Pricing/Test/ImageSlider'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import OSTable from 'components/OSTable'
 
 const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
@@ -134,11 +135,63 @@ const FeaturesTab = () => {
 export default function SessionReplay(): JSX.Element {
     // Get session replay product data and customers
     const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
-    const { getCustomers } = useCustomers()
+    const { getCustomers, hasCaseStudy } = useCustomers()
 
     // Get customer slugs from session replay product and retrieve customer data
     const customerSlugs = sessionReplayProduct?.customers ? Object.keys(sessionReplayProduct.customers) : []
     const customers = getCustomers(customerSlugs)
+
+    // Create table structure for customers
+    const customerTableColumns = [
+        { name: '', width: 'minmax(auto,100px)', align: 'center' as const },
+        { name: 'Company', width: 'minmax(150px,300px)', align: 'center' as const },
+        { name: '', width: 'minmax(auto,1fr)', align: 'left' as const },
+        { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const }
+    ]
+
+    const customerTableRows = customers.filter(customer => {
+        return sessionReplayProduct?.customers?.[customer.slug]
+    }).map((customer, index) => {
+        const customerData = sessionReplayProduct?.customers?.[customer.slug]
+
+        return {
+            cells: [
+                { content: index + 1 },
+                {
+                    content: customer.logo ? (
+                        <>
+                            <img
+                                src={customer.logo.light}
+                                alt={customer.name}
+                                className="w-auto object-contain dark:hidden"
+                            />
+                            <img
+                                src={customer.logo.dark}
+                                alt={customer.name}
+                                className="w-auto object-contain hidden dark:block"
+                            />
+                        </>
+                    ) : (
+                        <span>{customer.name}</span>
+                    ),
+                    className: '!p-4'
+                },
+                {
+                    content: (
+                        <>
+                            <strong>...{customerData.headline}</strong>
+                            <span className="text-lg italic">"{customerData.description}"</span>
+                        </>
+                    ),
+                    className: 'text-xl !px-8 !py-4'
+                },
+                {
+                    content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`} state={{ newWindow: true }}>Link</Link> : null,
+                    className: 'text-lg'
+                }
+            ]
+        }
+    })
 
     // Define raw slide content
     const rawSlides = [
@@ -205,6 +258,15 @@ export default function SessionReplay(): JSX.Element {
                     </div>
                 </div>
             )
+        },
+        {
+            name: "Customers",
+            content: (
+                <div className="h-full p-12">
+                    <h2 className="text-4xl font-bold text-primary mb-6 text-center">Customers who love session replay</h2>
+                    <OSTable columns={customerTableColumns} rows={customerTableRows} />
+                </div>
+            ),
         },
         {
             name: "Features",
