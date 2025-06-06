@@ -14,6 +14,7 @@ import { useToast } from '../../../context/Toast'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import { flattenStrapiResponse } from '../../../utils'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -372,9 +373,9 @@ const formSections = [
                     return (
                         <div className="flex space-x-2 space-between w-full">
                             <div className="flex-grow">
-                                <p className="font-bold m-0">Show an AMA</p>
+                                <p className="font-bold m-0">Show comments</p>
                                 <p className="m-0">
-                                    Let visitors ask you questions. You'll get question notifications via email.
+                                    Let visitors comment on your profile. You'll get comment notifications via email.
                                 </p>
                             </div>
                             <Switch
@@ -521,52 +522,54 @@ function EditProfile({ profile, mutate }) {
     })
 
     return (
-        <Layout parent={communityMenu}>
-            <SEO noindex title="Edit Profile - PostHog" />
-            <section className="max-w-2xl mx-auto py-12 px-4">
-                <form className="m-0 space-y-6" onSubmit={handleSubmit}>
-                    {formSections.map((section, index) => {
-                        if (section.modOnly && user?.role?.type !== 'moderator') return null
-                        return (
-                            <div key={index}>
-                                <h2>{section.title}</h2>
-                                {section.subtitle && <p className="opacity-70 -mt-4 mb-4">{section.subtitle}</p>}
-                                <div className="flex flex-wrap items-center">
-                                    {Object.keys(section.fields).map((key) => {
-                                        const field = section.fields[key]
-                                        const error = errors[key]
-                                        return (
-                                            <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
-                                                {(field.component &&
-                                                    field.component({ values, setFieldValue, error })) || (
-                                                    <Input
-                                                        type={field.type}
-                                                        name={key}
-                                                        placeholder={field.placeholder}
-                                                        label={field.label}
-                                                        value={values[key]}
-                                                        onChange={handleChange}
-                                                        error={!!error}
-                                                    />
-                                                )}
-                                                {error && (
-                                                    <p className="absolute text-red bottom-1.5 text-xs m-0 translate-y-full left-2 font-bold">
-                                                        {error}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        )
-                                    })}
+        <ScrollArea>
+            <div data-scheme="primary" className="bg-primary">
+                <SEO noindex title="Edit Profile - PostHog" />
+                <section className="max-w-2xl mx-auto py-12 px-4">
+                    <form className="m-0 space-y-6" onSubmit={handleSubmit}>
+                        {formSections.map((section, index) => {
+                            if (section.modOnly && user?.role?.type !== 'moderator') return null
+                            return (
+                                <div key={index}>
+                                    <h2>{section.title}</h2>
+                                    {section.subtitle && <p className="opacity-70 -mt-4 mb-4">{section.subtitle}</p>}
+                                    <div className="flex flex-wrap items-center">
+                                        {Object.keys(section.fields).map((key) => {
+                                            const field = section.fields[key]
+                                            const error = errors[key]
+                                            return (
+                                                <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
+                                                    {(field.component &&
+                                                        field.component({ values, setFieldValue, error })) || (
+                                                        <Input
+                                                            type={field.type}
+                                                            name={key}
+                                                            placeholder={field.placeholder}
+                                                            label={field.label}
+                                                            value={values[key]}
+                                                            onChange={handleChange}
+                                                            error={!!error}
+                                                        />
+                                                    )}
+                                                    {error && (
+                                                        <p className="absolute text-red bottom-1.5 text-xs m-0 translate-y-full left-2 font-bold">
+                                                            {error}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                    <CallToAction onClick={submitForm} className="mt-6" disabled={isSubmitting}>
-                        Update
-                    </CallToAction>
-                </form>
-            </section>
-        </Layout>
+                            )
+                        })}
+                        <CallToAction onClick={submitForm} className="mt-6" disabled={isSubmitting}>
+                            Update
+                        </CallToAction>
+                    </form>
+                </section>
+            </div>
+        </ScrollArea>
     )
 }
 

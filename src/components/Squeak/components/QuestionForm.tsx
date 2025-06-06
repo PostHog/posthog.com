@@ -42,6 +42,7 @@ type QuestionFormMainProps = {
     formType?: 'question' | 'reply'
     showTopicSelector?: boolean
     disclaimer?: boolean
+    autoFocus?: boolean
 }
 
 export const Select = ({
@@ -129,6 +130,7 @@ function QuestionFormMain({
     showTopicSelector,
     disclaimer = true,
     formType,
+    autoFocus = true,
 }: QuestionFormMainProps) {
     const posthog = usePostHog()
     const { user, logout } = useUser()
@@ -199,7 +201,7 @@ function QuestionFormMain({
                                 {subject && (
                                     <>
                                         <Field
-                                            autoFocus
+                                            autoFocus={autoFocus}
                                             className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-light dark:border-dark text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
@@ -269,6 +271,7 @@ type QuestionFormProps = {
     buttonText?: React.ReactNode | string
     subject?: boolean
     disclaimer?: boolean
+    autoFocus?: boolean
 }
 
 export const QuestionForm = ({
@@ -283,6 +286,7 @@ export const QuestionForm = ({
     parentName,
     subject,
     disclaimer,
+    autoFocus,
     ...other
 }: QuestionFormProps) => {
     const { user, getJwt, logout } = useUser()
@@ -435,6 +439,7 @@ export const QuestionForm = ({
                             onSubmit={handleMessageSubmit}
                             showTopicSelector={showTopicSelector}
                             formType={formType}
+                            autoFocus={autoFocus}
                         />
                     ),
                     auth: (
