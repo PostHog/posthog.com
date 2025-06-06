@@ -72,6 +72,52 @@ interface TeamProps {
     slug: string
 }
 
+export const TeamMemberCard = ({
+    name,
+    companyRole,
+    country,
+    location,
+    isTeamLead,
+    pineappleOnPizza,
+    handleTeamLead,
+    editing,
+    id,
+    avatar,
+}) => {
+    return (
+        <div className="text-left w-full border border-border dark:border-border-dark rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64">
+            <div className="mb-auto">
+                <h3 className="mb-0 text-base leading-tight" id={kebabCase(name) + '-' + kebabCase(companyRole)}>
+                    {name}
+                </h3>
+                <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{companyRole}</p>
+
+                <div className="mt-1 flex space-x-1 items-center">
+                    <Stickers
+                        country={country}
+                        location={location}
+                        isTeamLead={isTeamLead}
+                        pineappleOnPizza={pineappleOnPizza}
+                        handleTeamLead={handleTeamLead}
+                        editing={editing}
+                        id={id}
+                    />
+                </div>
+            </div>
+            <div className="ml-auto -mb-4 -mr-4 mt-2">
+                <img
+                    src={
+                        avatar?.data?.attributes?.url ||
+                        avatar?.url ||
+                        'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
+                    }
+                    className="w-[165px]"
+                />
+            </div>
+        </div>
+    )
+}
+
 export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug }: TeamProps): JSX.Element {
     const [saving, setSaving] = useState(false)
     const [editing, setEditing] = useState(newTeam || false)
@@ -327,6 +373,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                               return (
                                                   <li key={id} className="rounded-md relative">
                                                       <button
+                                                          className="size-full"
                                                           onClick={() =>
                                                               setActiveProfile({
                                                                   ...profile.attributes,
@@ -334,41 +381,19 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                                                   id,
                                                               })
                                                           }
-                                                          className="text-left w-full border border-border dark:border-border-dark rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64"
                                                       >
-                                                          <div className="mb-auto">
-                                                              <h3
-                                                                  className="mb-0 text-base leading-tight"
-                                                                  id={kebabCase(name) + '-' + kebabCase(companyRole)}
-                                                              >
-                                                                  {name}
-                                                              </h3>
-                                                              <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">
-                                                                  {companyRole}
-                                                              </p>
-
-                                                              <div className="mt-1 flex space-x-1 items-center">
-                                                                  <Stickers
-                                                                      country={country}
-                                                                      location={location}
-                                                                      isTeamLead={isTeamLead(id)}
-                                                                      pineappleOnPizza={pineappleOnPizza}
-                                                                      handleTeamLead={handleTeamLead}
-                                                                      editing={editing}
-                                                                      id={id}
-                                                                  />
-                                                              </div>
-                                                          </div>
-                                                          <div className="ml-auto -mb-4 -mr-4 mt-2">
-                                                              <img
-                                                                  src={
-                                                                      avatar?.data?.attributes?.url ||
-                                                                      avatar?.url ||
-                                                                      'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
-                                                                  }
-                                                                  className="w-[165px]"
-                                                              />
-                                                          </div>
+                                                          <TeamMemberCard
+                                                              name={name}
+                                                              companyRole={companyRole}
+                                                              country={country}
+                                                              location={location}
+                                                              isTeamLead={isTeamLead}
+                                                              pineappleOnPizza={pineappleOnPizza}
+                                                              handleTeamLead={handleTeamLead}
+                                                              editing={editing}
+                                                              id={id}
+                                                              avatar={avatar}
+                                                          />
                                                       </button>
                                                       {editing && (
                                                           <button

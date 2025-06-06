@@ -28,12 +28,21 @@ import { sortOptions } from 'components/Edition/Posts'
 import { AnimatePresence, motion } from 'framer-motion'
 import Tooltip from 'components/Tooltip'
 import NotFoundPage from 'components/NotFoundPage'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import Flag from 'react-country-flag'
+import CloudinaryImage from 'components/CloudinaryImage'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import { formatDistanceToNow } from 'date-fns'
+import OSTabs from 'components/OSTabs'
+import { TeamMemberCard } from 'components/Team'
+import { IconThumbsUpFilled, IconThumbsDownFilled } from '@posthog/icons'
+import { CallToAction } from 'components/CallToAction'
+dayjs.extend(relativeTime)
 
-const Avatar = (props: { className?: string; src?: string }) => {
+const Avatar = (props: { className?: string; src?: string; color?: string }) => {
     return (
-        <div
-            className={`overflow-hidden aspect-square rounded-full border border-light dark:border-dark ${props.className}`}
-        >
+        <div className={`overflow-hidden aspect-square bg-${props.color} ${props.className}`}>
             {props.src ? (
                 <img className="w-full object-fill" alt="" src={props.src} />
             ) : (
@@ -76,60 +85,117 @@ const Bio = ({ biography, readme }) => {
     const [activeTab, setActiveTab] = useState('biography')
     const tabbable = biography && readme
     const Container = tabbable ? 'button' : 'span'
+
+    const tabs = [
+        {
+            value: 'biography',
+            label: 'Biography',
+            content: <Markdown>{biography}</Markdown>,
+        },
+        {
+            value: 'readme',
+            label: 'README',
+            content: <Markdown>{readme}</Markdown>,
+        },
+    ]
+
     return (
         <section className="article-content">
-            {biography && (
-                <>
-                    <div className="flex items-end space-x-4 border-b border-border dark:border-dark mb-4">
-                        {biography && (
-                            <Container {...(tabbable ? { onClick: () => setActiveTab('biography') } : null)}>
-                                <h3
-                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
-                                        activeTab === 'biography'
-                                            ? readme
-                                                ? 'border-red'
-                                                : 'border-transparent pl-0'
-                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                    }`}
-                                >
-                                    Biography
-                                </h3>
-                            </Container>
-                        )}
-                        {readme && (
-                            <Container {...(tabbable ? { onClick: () => setActiveTab('readme') } : null)}>
-                                <h3
-                                    className={`!m-0 px-2 pb-2 text-[17px] font-semibold border-b-2 relative top-px ${
-                                        activeTab === 'readme'
-                                            ? 'border-red'
-                                            : 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                    }`}
-                                >
-                                    README
-                                </h3>
-                            </Container>
-                        )}
-                    </div>
-                    <Markdown>{activeTab === 'biography' ? biography : readme}</Markdown>
-                    {activeTab === 'biography' && readme && (
-                        <>
-                            <button
-                                className="text-red dark:text-yellow font-semibold cursor-pointer"
-                                onClick={() => setActiveTab('readme')}
-                            >
-                                See my README for tips on how to work with me
-                            </button>
-                        </>
-                    )}
-                </>
-            )}
+            <OSTabs tabs={tabs} defaultValue={tabs[0].value} />
         </section>
     )
 }
 
+const Block = ({ title, children, url }) => {
+    const Container = url ? Link : 'div'
+    return (
+        <div className="border border-primary rounded-md p-4 mb-6 bg-primary">
+            <Container {...(url ? { to: url, className: 'text-red' } : {})}>
+                <h3 className="text-lg font-bold text-inherit border-b border-primary pb-2 leading-tight m-0 mb-4">
+                    {title}
+                </h3>
+            </Container>
+            <div>{children}</div>
+        </div>
+    )
+}
+
+const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
+    const { user } = useUser()
+
+    const tabs = [
+        {
+            value: 'bio',
+            label: 'Bio',
+            content: <Markdown>{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>,
+        },
+        ...(profile.readme
+            ? [
+                  {
+                      value: 'readme',
+                      label: 'README',
+                      content: <Markdown>{profile.readme}</Markdown>,
+                  },
+              ]
+            : []),
+        ...(posts.length > 0
+            ? [
+                  {
+                      value: 'discussions',
+                      label: 'Blog Posts',
+                      content: (
+                          <>
+                              <div className="flex justify-between items-center mb-4">
+                                  <h4 className="text-lg font-bold m-0">Blog Posts</h4>
+                                  <SortDropdown value={sort} onChange={setSort} options={sortOptions} />
+                              </div>
+                              <PostsTable {...posts} />
+                          </>
+                      ),
+                  },
+              ]
+            : []),
+        ...(profile.amaEnabled
+            ? [
+                  {
+                      value: 'ama',
+                      label: 'Ask me anything',
+                      content: (
+                          <>
+                              <h4 className="text-lg font-bold mb-4">Ask {firstName} anything</h4>
+                              <Questions
+                                  initialView={'question-form'}
+                                  slug={window?.location?.pathname}
+                                  profileId={undefined}
+                                  showForm
+                                  disclaimer={false}
+                              />
+                          </>
+                      ),
+                  },
+              ]
+            : []),
+        ...(user?.profile?.id === id
+            ? [
+                  {
+                      value: 'likes',
+                      label: 'Liked posts',
+                      content: (
+                          <>
+                              <h4 className="text-lg font-bold mb-4">Your liked posts</h4>
+                              <LikedPosts profileID={id} />
+                          </>
+                      ),
+                  },
+              ]
+            : []),
+    ]
+
+    return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" />
+}
+
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
-    const [view, setView] = useState('discussions')
     const posthog = usePostHog()
     const nav = useTopicsNav()
     const { user, getJwt } = useUser()
@@ -177,6 +243,7 @@ export default function ProfilePage({ params }: PageProps) {
                 },
                 teams: {
                     populate: {
+                        leadProfiles: true,
                         profiles: {
                             populate: ['avatar', 'teams', 'pronouns'],
                         },
@@ -220,15 +287,45 @@ export default function ProfilePage({ params }: PageProps) {
         })
     }
 
+    const handleBlock = async (blockUser: boolean) => {
+        if (blockUser) {
+            if (confirm('Are you sure you want to block this user and remove all of their posts and replies?')) {
+                try {
+                    const jwt = await getJwt()
+                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${profile.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            Authorization: `Bearer ${jwt}`,
+                        },
+                    })
+                } catch (err) {
+                    console.error(err)
+                }
+            } else {
+                return
+            }
+        } else {
+            try {
+                const jwt = await getJwt()
+                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${profile.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        Authorization: `Bearer ${jwt}`,
+                    },
+                })
+            } catch (err) {
+                console.error(err)
+            }
+        }
+        window.location.reload()
+    }
+
     const { attributes: profile } = data || {}
     const { firstName, lastName } = profile || {}
 
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const isTeamMember = profile?.teams?.data?.length > 0
-
-    useEffect(() => {
-        if (!profile?.amaEnabled) setView('discussions')
-    }, [profile])
+    const team = profile?.teams?.data[0]
 
     if (!profile && isLoading) {
         return null
@@ -239,146 +336,244 @@ export default function ProfilePage({ params }: PageProps) {
 
     return (
         <>
-            <SEO title={`Community Profile - PostHog`} />
-            <Layout parent={communityMenu}>
-                <PostLayout
-                    title="Profile"
-                    breadcrumb={[{ name: 'Community', url: '/questions' }]}
-                    menu={nav}
-                    sidebar={<ProfileSidebar profile={{ ...profile, id }} mutate={mutate} />}
-                    hideSurvey
-                >
-                    {profile ? (
-                        <>
-                            <div className="space-y-8 my-8">
-                                <section className="">
-                                    <div className="relative w-48 h-48 float-right -mt-12">
-                                        <Avatar
-                                            className={`${
-                                                profile.color
-                                                    ? `bg-${profile.color}`
-                                                    : 'bg-gray-accent dark:gray-accent-dark'
-                                            }`}
-                                            src={getAvatarURL(profile)}
-                                        />
-                                        {isTeamMember && (
-                                            <span className="absolute right-1 bottom-1 h-12 w-12 flex items-center justify-center rounded-full bg-white dark:bg-gray-accent-dark text-primary dark:text-primary-dark border border-light dark:border-dark">
-                                                <Logomark className="w-8" />
-                                            </span>
+            <SEO title={`${name}'s profile - PostHog`} />
+            <ScrollArea>
+                <div data-scheme="secondary" className="bg-primary">
+                    <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 ">
+                        <div className="flex flex-col md:flex-row gap-6 p-6">
+                            <div className="max-w-xs flex-shrink-0">
+                                <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
+                                    <Avatar
+                                        className="w-full border-b border-primary"
+                                        src={profile.avatar?.data?.attributes?.url}
+                                        color={profile.color}
+                                    />
+                                    <div className="flex items-center space-x-2 my-2">
+                                        <h2 className="text-xl font-bold text-primary m-0">{name}</h2>
+                                        {profile.country && (
+                                            <Flag
+                                                style={{ width: '1.5rem', height: '1.5rem' }}
+                                                countryCode={profile.country}
+                                                svg
+                                            />
                                         )}
                                     </div>
+                                    {profile.companyRole && (
+                                        <p className="text-secondary text-sm m-0 mb-2 -mt-2">{profile.companyRole}</p>
+                                    )}
+                                </div>
 
-                                    <div className="space-y-1 mb-8">
-                                        <div className="flex gap-x-2 items-baseline">
-                                            <h1 className="m-0 text-5xl">{name || 'Anonymous'}</h1>
+                                {(profile.pineappleOnPizza !== null || profile.pronouns || profile.location) && (
+                                    <Block title="Details">
+                                        <div className="text-sm space-y-1">
+                                            <p className="flex justify-between m-0">
+                                                {isTeamMember ? (
+                                                    <>
+                                                        <span className="font-semibold">Joined PostHog</span>
+                                                        <span>{dayjs(profile.startDate).fromNow()}</span>
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <span className="font-semibold">Community member since</span>
+                                                        <span>{dayjs(profile.createdAt).format('MMMM D, YYYY')}</span>
+                                                    </>
+                                                )}
+                                            </p>
+                                            {profile.pineappleOnPizza !== null && (
+                                                <p className="flex justify-between m-0">
+                                                    <span className="font-semibold">Pineapple on pizza:</span>
+                                                    <span>
+                                                        {profile.pineappleOnPizza ? (
+                                                            <IconThumbsUpFilled className="size-4 text-green" />
+                                                        ) : (
+                                                            <IconThumbsDownFilled className="size-4 text-red" />
+                                                        )}
+                                                    </span>
+                                                </p>
+                                            )}
                                             {profile.pronouns && (
-                                                <div className="opacity-50 text-sm">{profile.pronouns}</div>
+                                                <p className="flex justify-between m-0">
+                                                    <span className="font-semibold">Pronouns:</span>
+                                                    <span>{profile.pronouns}</span>
+                                                </p>
+                                            )}
+                                            {profile.location && (
+                                                <p className="flex justify-between m-0">
+                                                    <span className="font-semibold">Location:</span>
+                                                    <span>{profile.location}</span>
+                                                </p>
                                             )}
                                         </div>
-                                        {isTeamMember && profile.companyRole && (
-                                            <p className="text-primary/50 dark:text-primary-dark/50">
-                                                {profile?.companyRole}, PostHog
-                                            </p>
-                                        )}
-                                    </div>
-                                    {(profile?.biography || profile?.readme) && (
-                                        <Bio biography={profile.biography} readme={profile.readme} />
-                                    )}
-                                </section>
+                                    </Block>
+                                )}
+
+                                {(profile.github || profile.twitter || profile.linkedin || profile.website) && (
+                                    <Block title="Links">
+                                        <ul className="flex space-x-3 m-0 p-0 list-none">
+                                            {profile.github && (
+                                                <li>
+                                                    <Link to={profile.github} externalNoIcon>
+                                                        <GitHub className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
+                                                    </Link>
+                                                </li>
+                                            )}
+                                            {profile.twitter && (
+                                                <li>
+                                                    <Link to={profile.twitter} externalNoIcon>
+                                                        <Twitter className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
+                                                    </Link>
+                                                </li>
+                                            )}
+                                            {profile.linkedin && (
+                                                <li>
+                                                    <Link to={profile.linkedin} externalNoIcon>
+                                                        <LinkedIn className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
+                                                    </Link>
+                                                </li>
+                                            )}
+                                            {profile.website && (
+                                                <li>
+                                                    <Link to={profile.website} externalNoIcon>
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            strokeWidth={1.5}
+                                                            stroke="currentColor"
+                                                            className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+                                                            />
+                                                        </svg>
+                                                    </Link>
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </Block>
+                                )}
+
+                                {profile.achievements?.length > 0 && (
+                                    <Block title="Achievements">
+                                        <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
+                                            {profile.achievements.map(({ achievement, hidden, id }) => (
+                                                <li key={id} className="flex justify-center">
+                                                    <Achievement
+                                                        {...achievement.data.attributes}
+                                                        id={id}
+                                                        hidden={hidden}
+                                                        profile={profile}
+                                                        mutate={mutate}
+                                                    />
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </Block>
+                                )}
+                                {(isCurrentUser || isModerator) && (
+                                    <Block title="Profile Settings">
+                                        <div className="flex flex-col space-y-2">
+                                            {(user?.profile?.id === profile.id ||
+                                                (user?.role?.type === 'moderator' && user?.webmaster)) && (
+                                                <CallToAction
+                                                    size="sm"
+                                                    to="/community/profile/edit"
+                                                    type="secondary"
+                                                    state={{ profileID: profile.id }}
+                                                >
+                                                    Edit Profile
+                                                </CallToAction>
+                                            )}
+                                            {user?.role?.type === 'moderator' && (
+                                                <>
+                                                    <CallToAction
+                                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
+                                                        size="sm"
+                                                        type="secondary"
+                                                    >
+                                                        View in Strapi
+                                                    </CallToAction>
+                                                    <CallToAction
+                                                        size="sm"
+                                                        type="primary"
+                                                        onClick={() =>
+                                                            handleBlock(!profile.user?.data.attributes.blocked)
+                                                        }
+                                                    >
+                                                        {profile.user?.data.attributes.blocked
+                                                            ? 'Unblock User'
+                                                            : 'Block User'}
+                                                    </CallToAction>
+                                                </>
+                                            )}
+                                        </div>
+                                    </Block>
+                                )}
                             </div>
 
-                            <div className="mt-12">
-                                <div className="flex items-center relative mb-4 font-semibold border-b border-border dark:border-dark text-base whitespace-nowrap">
-                                    <button
-                                        className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                            view !== 'discussions'
-                                                ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                : 'border-red'
-                                        } p-4 transition-opacity`}
-                                        onClick={() => setView('discussions')}
-                                    >
-                                        Discussions
-                                    </button>
-                                    {profile?.amaEnabled && (
-                                        <button
-                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                                view !== 'ama'
-                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                    : 'border-red'
-                                            } p-4 transition-opacity`}
-                                            onClick={() => setView('ama')}
-                                        >
-                                            Ask me anything
-                                        </button>
-                                    )}
-                                    {user?.profile?.id === id && (
-                                        <button
-                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                                view !== 'liked-posts'
-                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                    : 'border-red'
-                                            } p-4 transition-opacity`}
-                                            onClick={() => setView('liked-posts')}
-                                        >
-                                            Upvoted posts
-                                        </button>
-                                    )}
-                                    <div className="flex items-center">
-                                        <button
-                                            className={`px-3 pb-2 text-base font-semibold border-b-2 relative top-px ${
-                                                view !== 'user-posts'
-                                                    ? 'border-transparent hover:border-light dark:hover:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 transition-opacity'
-                                                    : 'border-red pr-12'
-                                            } p-4 transition-opacity`}
-                                            onClick={() => setView('user-posts')}
-                                        >
-                                            Posts
-                                        </button>
-                                        <AnimatePresence>
-                                            {view === 'user-posts' && (
-                                                <motion.div
-                                                    initial={{ opacity: 0, translateY: '100%' }}
-                                                    animate={{ opacity: 1, translateY: 0 }}
-                                                    exit={{ opacity: 0, transition: { duration: 0.2 } }}
-                                                    className={`relative -left-12 top-1 z-[50]`}
-                                                >
-                                                    <SortDropdown
-                                                        sort={sort}
-                                                        setSort={setSort}
-                                                        className="hover:!border-transparent hover:!bg-transparent"
-                                                    />
-                                                </motion.div>
-                                            )}
-                                        </AnimatePresence>
-                                    </div>
+                            <div className="flex-grow">
+                                <ProfileTabs
+                                    profile={profile}
+                                    firstName={firstName}
+                                    id={id}
+                                    sort={sort}
+                                    setSort={setSort}
+                                    posts={posts}
+                                />
+                                <div className="mt-6">
+                                    {profile.teams?.data?.length > 0 &&
+                                        profile.teams.data[0].attributes.profiles?.data?.length > 0 && (
+                                            <div className="border border-primary rounded-md p-4 mb-6 bg-primary">
+                                                <div className="flex justify-between items-center border-b border-primary mb-4 pb-2">
+                                                    <h3 className="text-lg font-bold text-inherit leading-tight m-0">
+                                                        {team.attributes.name} team
+                                                    </h3>
+                                                    <Link
+                                                        to={`/teams/${team.attributes.slug}`}
+                                                        className="text-sm text-red dark:text-yellow font-semibold"
+                                                    >
+                                                        View team
+                                                    </Link>
+                                                </div>
+                                                <div className="grid grid-cols-4 gap-3">
+                                                    {team.attributes.profiles.data
+                                                        .filter((teammate) => teammate.id !== data?.id)
+                                                        .map((teammate) => {
+                                                            return (
+                                                                <Link
+                                                                    key={teammate.id}
+                                                                    to={`/community/profiles/${teammate.id}`}
+                                                                >
+                                                                    <TeamMemberCard
+                                                                        name={teammate.attributes.firstName}
+                                                                        companyRole={teammate.attributes.companyRole}
+                                                                        country={teammate.attributes.country}
+                                                                        location={teammate.attributes.location}
+                                                                        isTeamLead={team.attributes?.leadProfiles?.data?.some(
+                                                                            ({ id: leadID }) => leadID === teammate.id
+                                                                        )}
+                                                                        pineappleOnPizza={
+                                                                            teammate.attributes.pineappleOnPizza
+                                                                        }
+                                                                        avatar={teammate.attributes.avatar}
+                                                                        id={teammate.id}
+                                                                    />
+                                                                </Link>
+                                                            )
+                                                        })}
+                                                </div>
+                                            </div>
+                                        )}
                                 </div>
-                                {(view === 'discussions' || view === 'ama') && (
-                                    <Questions
-                                        initialView={view === 'ama' ? 'question-form' : undefined}
-                                        slug={view === 'ama' ? window?.location?.pathname : undefined}
-                                        profileId={view === 'discussions' ? id : undefined}
-                                        showForm={view === 'ama'}
-                                        disclaimer={false}
-                                    />
-                                )}
-                                {view === 'liked-posts' && user?.profile?.id === id && <LikedPosts profileID={id} />}
-                                {view === 'user-posts' && (
-                                    <ul className="list-none m-0 p-0">
-                                        <PostsTable {...posts} />
-                                    </ul>
-                                )}
                             </div>
-                        </>
-                    ) : null}
-                </PostLayout>
-            </Layout>
+                        </div>
+                    </div>
+                </div>
+            </ScrollArea>
         </>
     )
-}
-
-type ProfileSidebarProps = {
-    profile: ProfileData
-    mutate: () => void
 }
 
 const Achievement = ({ title, description, image, icon, id, mutate, profile, ...other }) => {
@@ -431,7 +626,7 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
             tooltipClassName="!rounded-none"
             placement="bottom-start"
             content={() => (
-                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-border dark:border-dark bg-light dark:bg-dark">
+                <div className="max-w-[250px] text-left px-2 rounded-sm overflow-hidden border border-primary bg-light dark:bg-dark">
                     <div className="mb-4 -mx-4 -mt-2">
                         <img src={image?.data?.attributes?.url} />
                     </div>
@@ -450,195 +645,5 @@ const Achievement = ({ title, description, image, icon, id, mutate, profile, ...
                 <img className="w-full" src={icon?.data?.attributes?.url} />
             </ImageContainer>
         </Tooltip>
-    )
-}
-
-const ProfileSidebar: React.FC<ProfileSidebarProps> = ({ profile, mutate }) => {
-    const { user, getJwt } = useUser()
-
-    const handleBlock = async (blockUser: boolean) => {
-        if (blockUser) {
-            if (confirm('Are you sure you want to block this user and remove all of their posts and replies?')) {
-                try {
-                    const jwt = await getJwt()
-                    await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/block/${profile.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            Authorization: `Bearer ${jwt}`,
-                        },
-                    })
-                } catch (err) {
-                    console.error(err)
-                }
-            } else {
-                return
-            }
-        } else {
-            try {
-                const jwt = await getJwt()
-                await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profile/unblock/${profile.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        Authorization: `Bearer ${jwt}`,
-                    },
-                })
-            } catch (err) {
-                console.error(err)
-            }
-        }
-        window.location.reload()
-    }
-
-    return (
-        profile && (
-            <>
-                {profile.github || profile.twitter || profile.linkedin || profile.website ? (
-                    <SidebarSection title="Links">
-                        <ul className="p-0 flex space-x-2 items-center list-none m-0">
-                            {profile.website && (
-                                <li>
-                                    <Link to={profile.website} externalNoIcon>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            fill="none"
-                                            viewBox="0 0 24 24"
-                                            strokeWidth={1.5}
-                                            stroke="currentColor"
-                                            className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover"
-                                        >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-                                            />
-                                        </svg>
-                                    </Link>
-                                </li>
-                            )}
-
-                            {profile.github && (
-                                <li>
-                                    <Link to={profile.github} externalNoIcon>
-                                        <GitHub className="w-6 h-6 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                    </Link>
-                                </li>
-                            )}
-
-                            {profile.twitter && (
-                                <li>
-                                    <Link to={profile.twitter} externalNoIcon>
-                                        <Twitter className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                    </Link>
-                                </li>
-                            )}
-
-                            {profile.linkedin && (
-                                <li>
-                                    <Link to={profile.linkedin} externalNoIcon>
-                                        <LinkedIn className="w-5 h-5 text-black dark:text-white opacity-60 hover:opacity-100 transition-hover" />
-                                    </Link>
-                                </li>
-                            )}
-                        </ul>
-                    </SidebarSection>
-                ) : null}
-
-                {profile.achievements?.length > 0 && (
-                    <SidebarSection title="Achievements">
-                        <ul className="list-none m-0 p-0 grid grid-cols-5 gap-2">
-                            {profile.achievements
-                                .sort((a, b) => a.id - b.id)
-                                .map(({ achievement, hidden, id }) => {
-                                    return (
-                                        <li key={id}>
-                                            <Achievement
-                                                {...achievement.data.attributes}
-                                                id={id}
-                                                hidden={hidden}
-                                                profile={profile}
-                                                mutate={mutate}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                        </ul>
-                    </SidebarSection>
-                )}
-
-                {profile.teams
-                    ? profile.teams?.data?.map(({ attributes: { name, profiles } }) => {
-                          return (
-                              <>
-                                  <SidebarSection title="Team">
-                                      <span className="text-xl font-bold">{name}</span>
-                                  </SidebarSection>
-
-                                  {profiles?.data?.length > 0 ? (
-                                      <SidebarSection title="Teammates">
-                                          <ul className="p-0 grid gap-y-2">
-                                              {profiles.data
-                                                  .filter(
-                                                      ({ id, attributes }) =>
-                                                          id !== profile.id &&
-                                                          new Date(attributes.startDate) <= new Date()
-                                                  )
-                                                  .map((profile) => {
-                                                      return (
-                                                          <li key={profile.id} className="flex items-center space-x-2">
-                                                              <Avatar
-                                                                  className={`w-8 h-8 bg-${
-                                                                      profile.attributes.color ?? 'white'
-                                                                  }`}
-                                                                  src={getAvatarURL(profile)}
-                                                              />
-                                                              <a href={`/community/profiles/${profile.id}`}>
-                                                                  {profile.attributes?.firstName}{' '}
-                                                                  {profile.attributes?.lastName}
-                                                              </a>
-                                                          </li>
-                                                      )
-                                                  })}
-                                          </ul>
-                                      </SidebarSection>
-                                  ) : null}
-                              </>
-                          )
-                      })
-                    : null}
-
-                {(user?.profile?.id === profile.id || (user?.role?.type === 'moderator' && user?.webmaster)) && (
-                    <SidebarSection>
-                        <Link
-                            to="/community/profile/edit"
-                            className="text-base text-red dark:text-yellow font-semibold"
-                            state={{ profileID: profile.id }}
-                        >
-                            Edit profile
-                        </Link>
-                    </SidebarSection>
-                )}
-                {user?.role?.type === 'moderator' && (
-                    <>
-                        <SidebarSection>
-                            <Link
-                                external
-                                to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
-                                className="text-base text-red dark:text-yellow font-semibold"
-                            >
-                                View in Strapi
-                            </Link>
-                        </SidebarSection>
-                        <SidebarSection>
-                            <button
-                                onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
-                                className="text-red font-bold text-base"
-                            >
-                                {profile.user?.data.attributes.blocked ? 'Unblock user' : 'Block user'}
-                            </button>
-                        </SidebarSection>
-                    </>
-                )}
-            </>
-        )
     )
 }
