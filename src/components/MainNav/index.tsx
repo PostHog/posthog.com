@@ -438,12 +438,17 @@ export const Main = () => {
         setHedgehogModeEnabled,
         compact,
     } = useLayoutData()
-    const { pathname } = useLocation()
+    const { pathname, state } = useLocation()
     const { websiteTheme } = useValues(layoutLogic)
     const [posthogInstance, setPosthogInstance] = useState<string>()
     const [mediaModalOpen, setMediaModalOpen] = useState(false)
     const [authModalOpen, setAuthModalOpen] = useState(false)
     const posthog = usePostHog()
+
+    // Hide nav if we're on newsletter-fbc or coming from it
+    if (pathname === '/newsletter-fbc' || (state as { isComingFromAd?: boolean })?.isComingFromAd) {
+        return <></>
+    }
 
     useEffect(() => {
         if (window) {

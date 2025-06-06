@@ -8,6 +8,76 @@ import Tooltip from 'components/Tooltip'
 import { container, child } from 'components/CallToAction'
 import NewsletterContentForFBAds from 'components/FBAds/NewsletterContentForFBAds'
 import { IconInfo } from '@posthog/icons'
+import Link from 'components/Link'
+import { useRef } from 'react'
+import { useInView } from 'react-intersection-observer'
+
+const topIssues = [
+    {
+        title: 'What engineers get wrong about communication',
+        url: '/newsletter/communication-mistakes',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/image_1_2594402957.png' as `https://res.cloudinary.com/${string}`,
+    },
+    {
+        title: 'Product management is broken. Engineers can fix it',
+        url: '/newsletter/product-management-is-broken',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/390823720_35b0d6be_f823_4c45_8e80_cfc0727e8827_128b8bbd57.jpg' as `https://res.cloudinary.com/${string}`,
+    },
+    {
+        title: 'The magic of small engineering teams',
+        url: '/newsletter/small-teams',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/345390691_746f2b83_6290_4d68_b612_dd9360b43515_20e0f385a7.jpg' as `https://res.cloudinary.com/${string}`,
+    },
+    {
+        title: 'How we choose technologies',
+        url: '/newsletter/choosing-technologies',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/choosetech_c01bfb0582.png' as `https://res.cloudinary.com/${string}`,
+    },
+    {
+        title: "50 things we've learned about building successful products",
+        url: '/newsletter/50-product-learnings',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/50jhog_5aef8ff9ff.png' as `https://res.cloudinary.com/${string}`,
+    },
+]
+
+const HogZilla = () => {
+    const [ready, setReady] = useState(false)
+    const [containerRef, inView] = useInView({ threshold: 0 })
+    const videoRef = useRef<HTMLVideoElement>(null)
+
+    useEffect(() => {
+        if (inView) {
+            videoRef?.current?.play()
+        } else {
+            videoRef?.current?.pause()
+        }
+    }, [inView, ready])
+
+    return (
+        <div ref={containerRef}>
+            <video
+                ref={videoRef}
+                onCanPlay={() => {
+                    setReady(true)
+                }}
+                onEnded={() => {
+                    if (videoRef?.current) {
+                        videoRef.current.currentTime = 3
+                        videoRef?.current?.play()
+                    }
+                }}
+                playsInline
+                muted
+                className="w-full"
+                poster="/images/hogzilla.jpg"
+                preload="none"
+            >
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/hogzilla.webm`} type="video/webm" />
+                <source src={`${process.env.GATSBY_CLOUDFRONT_URL}/hogzilla.mp4`} type="video/mp4" />
+            </video>
+        </div>
+    )
+}
 
 function NewsletterFBC(): JSX.Element {
     const { user } = useUser()
@@ -110,32 +180,32 @@ function NewsletterFBC(): JSX.Element {
                                         </strong>{' '}
                                         from Substack in your inbox.
                                     </p>
-                                    {!showContent && (
-                                        <button
-                                            onClick={() => setShowContent(true)}
-                                            className={`${container(undefined, 'md')} mt-4 w-full`}
-                                        >
-                                            <span className={child(undefined, undefined, undefined, 'md')}>
-                                                Read the newsletter
-                                            </span>
-                                        </button>
-                                    )}
                                 </div>
                             )}
                         </div>
                     </div>
                     {!showContent && !submitted && (
-                        <div className="flex justify-center items-center gap-1">
-                            <span className="opacity-75">or</span>
-                            <button
-                                onClick={() => {
-                                    posthog?.capture('newsletter_read_first_clicked')
-                                    setShowContent(true)
-                                }}
-                                className="text-red dark:text-yellow font-semibold"
-                            >
-                                read it first
-                            </button>
+                        <div className="w-full max-w-3xl">
+                            <h3 className="text-xl font-bold mb-4 text-center">Top issues</h3>
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                {topIssues.map((issue) => (
+                                    <Link
+                                        key={issue.url}
+                                        to={issue.url}
+                                        state={{ isComingFromAd: true }}
+                                        className="group flex flex-col items-center text-center hover:opacity-75 transition-opacity border border-light rounded-lg"
+                                    >
+                                        <div className="w-full mb-1 overflow-hidden rounded-lg">
+                                            <CloudinaryImage src={issue.image} className="rounded-none" />
+                                        </div>
+                                        <h4 className="text-xl font-bold mt-0">{issue.title}</h4>
+                                    </Link>
+                                ))}
+                            </div>
+                            <h2 className="text-2xl font-bold text-black text-center my-8">
+                                Not convinced? Perhaps Hogzilla will convince you
+                            </h2>
+                            <HogZilla />
                         </div>
                     )}
                     {showContent && (
