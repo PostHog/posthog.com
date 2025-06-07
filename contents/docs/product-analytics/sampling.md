@@ -14,7 +14,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 A conversion funnel for `$pageview` events leading to `user_signed_up` events over 180 days on a popular website could require aggregating billions of events to compute a result. This could take a while.
 
-If we were to turn on sampling at a `1%`, we would aggregate over only 10 million events, and then multiply the result by 100. This results in a much faster time load times.
+If we were to turn on sampling at a `1%`, we would aggregate over only 10 million events, and then multiply the result by 100. This results in much faster load times.
 
 </CalloutBox>
 
