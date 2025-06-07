@@ -49,3 +49,69 @@ Each query send to ClickHouse must have the following tags:
   * name => you can name your query
   * http_request_id => HTTP request that initiated a query
   * http_correlation_id => correlation id from HTTP request
+
+### Current state of log_comment
+
+We use at least 42 unique tags:
+
+| Tag Key | Occurrences |
+|---------|-------------|
+| query_settings | 1,826,072 |
+| workload | 1,826,072 |
+| kind | 1,788,761 |
+| id | 1,788,745 |
+| team_id | 1,667,247 |
+| user_id | 1,479,256 |
+| http_request_id | 1,441,577 |
+| container_hostname | 1,441,577 |
+| route_id | 1,441,577 |
+| http_user_agent | 1,433,807 |
+| http_referer | 1,127,494 |
+| query_type | 809,331 |
+| has_joins | 694,281 |
+| has_json_operations | 694,281 |
+| person_on_events_mode | 456,285 |
+| modifiers | 439,930 |
+| timings | 439,930 |
+| cache_key | 394,951 |
+| sentry_trace | 394,951 |
+| query | 374,767 |
+| client_query_id | 324,355 |
+| access_method | 322,253 |
+| feature | 297,173 |
+| insight_id | 157,439 |
+| entity_math | 133,956 |
+| filter | 133,956 |
+| filter_by_type | 133,956 |
+| number_of_entities | 133,956 |
+| query_time_range_days | 133,956 |
+| dashboard_id | 102,664 |
+| session_id | 62,901 |
+| user_email | 45,918 |
+| trigger | 33,422 |
+| chargeable | 26,807 |
+| $process_person_profile | 1,856 |
+| experiment_name | 1,697 |
+| experiment_id | 1,697 |
+| experiment_feature_flag_key | 1,697 |
+| experiment_is_data_warehouse_query | 770 |
+| clickhouse_exception_type | 556 |
+| usage_report | 25 |
+| batch_export_id | 16 |
+
+
+#### Queries to dive into `log_comment`
+
+```SQL
+SELECT
+    arrayJoin(JSONExtractKeys(log_comment)) AS tag_key,
+    count() AS occurrences
+FROM clusterAllReplicas(posthog, system.query_log)
+WHERE 
+    event_date >= '2025-06-06' AND event_time >= '2025-06-06 00:00:00'
+    AND is_initial_query
+    AND type = 'QueryStart'
+    AND log_comment != ''
+GROUP BY tag_key
+ORDER BY occurrences DESC;
+```
