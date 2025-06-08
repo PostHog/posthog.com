@@ -8,6 +8,8 @@ module.exports = {
     darkMode: 'class', // or 'media' or 'class'
     theme: {
         screens: {
+            'mobile-xs': { max: '390px' },
+
             '2xs': '400px',
             xs: '482px',
             sm: '640px',
