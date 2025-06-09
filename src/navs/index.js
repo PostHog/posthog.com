@@ -954,6 +954,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/clickhouse/working-with-json',
                     },
                     {
+                        name: 'Query attribution',
+                        url: '/handbook/engineering/clickhouse/query-attribution',
+                    },
+                    {
                         name: 'Query performance',
                         url: '/handbook/engineering/clickhouse/performance',
                     },
