@@ -37,9 +37,7 @@ This means sending emails when customers abandon their basket. Triggering survey
 
 ### 3. Wrapping this all with AI
 
-By having all the tools and data together in one platform, we can help automate a lot of the manual work needed to build products people love, and run your business more successfully. 
-
-The more products we build, the better this gets. We're at ~14 products right now (we sometimes disagree on the number!), and we have no plans to stop.
+By having all the tools and data together in one platform, we can use AI to help automate a lot of the manual work needed to build products people love, and run your business more successfully. The more products we build, the better this gets.
 
 You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, data warehouse, and so on. We also have great coverage for product, engineering, and growth use cases.
 
