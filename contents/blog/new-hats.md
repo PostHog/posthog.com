@@ -1,5 +1,5 @@
 ---
-title: 'We have some lovely new hats in the merch store'
+title: 'PostHog raises a series D (and a small C)'
 date: 2025-06-09
 author:
   - james-hawkins
@@ -14,17 +14,19 @@ Hello everyone!
 
 We've raised $70m in primary capital at a "unicorn adjacent" valuation of $920M, led by Stripe, with YC, GV, and Formus Capital all participating.
 
-We also made a hedgehog puppet, who is my cohost for today:
-
-[VIDEO HERE]
+We also made a hedgehog puppet, who is my cohost in the video above.
 
 ## Your customer data + business logic = customer infrastructure
 
 We already offer [everything developers need to build successful products](/why). 
 
-This started with product analytics five years ago, and expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a customer data platform (CDP), too.
+This started with product analytics five years ago, and expanded to include web analytics, session replay, experiments, feature flags, and surveys. 
 
-We've had a clear vision for what we're building for a long time, but until recently we've struggled to describe this vision in a simple way. The answer came when Tim (my co-founder) and I went for a long walk around London. We decided to call it "customer infrastructure". 
+More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a customer data platform (CDP), too.
+
+We've had a clear vision for what we're building for a long time, but until recently we've struggled to describe this vision in a simple way. 
+
+The answer came when Tim (my co-founder) and I went for a long walk around London. We decided to call it "customer infrastructure". 
 
 For us, customer infrastructure means:
 
@@ -39,6 +41,8 @@ This means sending emails when customers abandon their basket. Triggering survey
 ### 3. Wrapping this all with AI
 
 This means making AI the default UI of your business. By having all the tools and data together in one platform, we can help automate a lot of the manual work needed to build products people love, and run your business more successfully.
+
+### Building more products
 
 The more products we build, the better this gets. We're at ~14 products right now (we sometimes disagree on the number!), and we have no plans to stop.
 
@@ -89,7 +93,7 @@ We've also learned a lot from working with Patrick and John over the years, like
 
 And, for the sake of the story, we think the butterfly effect moment was [Patrick thinking our website was cool](https://x.com/patrickc/status/1728009393118032343). This is a great reminder that the best way to meet interesting people is to consistently do cool stuff.
 
-## Wait, this is a Series D, you never announced the Series C?
+## What about the Series C?
 
 We aren’t just trying to collect the entire alphabet, we raised a Series C for two simple reasons:
 
