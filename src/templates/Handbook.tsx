@@ -43,12 +43,6 @@ import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import { IconCheck } from '@posthog/icons'
 
-type Snippet = {
-    component: string
-    path: string
-    snippet: string | undefined
-}
-
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
         case 'full':
@@ -281,7 +275,7 @@ export default function Handbook({
         body,
         rawBody,
         frontmatter,
-        fields: { slug, contributors, appConfig, templateConfigs },
+        fields: { slug, contributors, appConfig, templateConfigs, contentWithSnippets },
     } = post
     const {
         title,
@@ -317,40 +311,7 @@ export default function Handbook({
         />
     )
 
-    const stripFrontmatter = (body: string) => {
-        return body.replace(/^---[\s\S]*?---\n*/m, '')
-    }
-
-    const resolveSnippetImports = (body: string): Snippet[] => {
-        const regex = /import\s+(.*?)\s+from\s+['"](.*?\/_snippets\/.*?)['"]/g
-        const imports: Snippet[] = []
-        let match
-        while ((match = regex.exec(body)) !== null) {
-            const snippetPath = match[2]
-            const cleanPath = snippetPath.replace(/^[./]+/, '')
-            const snippet = allFile.nodes.find((node) => {
-                return node.relativePath.includes(cleanPath)
-            })?.childMdx?.rawBody
-            imports.push({ component: match[1], path: match[2], snippet })
-        }
-        return imports
-    }
-
-    const replaceSnippetImports = (body: string, imports: Snippet[]): string => {
-        let result = body
-        imports.forEach(({ component, snippet }) => {
-            if (snippet) {
-                const componentRegex = new RegExp(`<${component}\\s*/>`, 'g')
-                result = result.replace(componentRegex, snippet)
-            }
-        })
-        return result
-    }
-
     const handleCopyMarkdown = () => {
-        const contentWithoutFrontmatter = stripFrontmatter(rawBody)
-        const imports = resolveSnippetImports(contentWithoutFrontmatter)
-        const contentWithSnippets = replaceSnippetImports(contentWithoutFrontmatter, imports)
         navigator.clipboard.writeText(contentWithSnippets)
         setCopied(true)
         setTimeout(() => {
@@ -593,6 +554,7 @@ export const query = graphql`
                         description
                     }
                 }
+                contentWithSnippets
             }
             frontmatter {
                 title
