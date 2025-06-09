@@ -38,6 +38,7 @@ import OSTabs from 'components/OSTabs'
 import { TeamMemberCard } from 'components/Team'
 import { IconThumbsUpFilled, IconThumbsDownFilled } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
+import { Fieldset } from 'components/OSFieldset'
 dayjs.extend(relativeTime)
 
 const Avatar = (props: { className?: string; src?: string; color?: string }) => {
@@ -107,16 +108,20 @@ const Bio = ({ biography, readme }) => {
 }
 
 const Block = ({ title, children, url }) => {
-    const Container = url ? Link : 'div'
     return (
-        <div className="border border-primary rounded-md p-4 mb-6 bg-primary last:mb-0">
-            <Container {...(url ? { to: url, className: 'text-red' } : {})}>
-                <h3 className="text-lg font-bold text-inherit border-b border-primary pb-2 leading-tight m-0 mb-4">
-                    {title}
-                </h3>
-            </Container>
+        <Fieldset
+            legend={
+                url ? (
+                    <Link className="text-red dark:text-yellow font-semibold" to={url}>
+                        {title}
+                    </Link>
+                ) : (
+                    title
+                )
+            }
+        >
             <div>{children}</div>
-        </div>
+        </Fieldset>
     )
 }
 
@@ -505,18 +510,10 @@ export default function ProfilePage({ params }: PageProps) {
                                 <div className="mt-6">
                                     {profile.teams?.data?.length > 0 &&
                                         profile.teams.data[0].attributes.profiles?.data?.length > 0 && (
-                                            <div className="border border-primary rounded-md p-4 mb-6 bg-primary">
-                                                <div className="flex justify-between items-center border-b border-primary mb-4 pb-2">
-                                                    <h3 className="text-lg font-bold text-inherit leading-tight m-0">
-                                                        {team.attributes.name} team
-                                                    </h3>
-                                                    <Link
-                                                        to={`/teams/${team.attributes.slug}`}
-                                                        className="text-sm text-red dark:text-yellow font-semibold"
-                                                    >
-                                                        View team
-                                                    </Link>
-                                                </div>
+                                            <Block
+                                                title={`${team.attributes.name} team`}
+                                                url={`/teams/${team.attributes.slug}`}
+                                            >
                                                 <div className="grid grid-cols-2 gap-3 @xl:grid-cols-4">
                                                     {team.attributes.profiles.data
                                                         .filter((teammate) => teammate.id !== data?.id)
@@ -544,7 +541,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                             )
                                                         })}
                                                 </div>
-                                            </div>
+                                            </Block>
                                         )}
                                 </div>
                                 {profile.amaEnabled && (
