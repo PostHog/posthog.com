@@ -48,7 +48,7 @@ This funding round means we can build more products for support, sales, and mark
 
 ## Making AI the default interface of your business 
 
-Watching AI come crashing into the world of tech has been really exhilarating.
+Watching AI come crashing into the world of tech has been exhilarating.
 
 We've long believed software was becoming commoditized. More open-source libraries, better tooling, more abstraction, and just more people in software engineering. These things were already speeding up development and gave us the confidence that we could build many products in one.
 
