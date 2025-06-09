@@ -45,7 +45,12 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
 ### With instrumentation-client (15.3+) 
 
-Import `posthog` from `posthog-js` and call whatever you need on the `posthog` object.
+Once initialized in `instrumentation-client.js|ts`, import `posthog` from `posthog-js` anywhere and call whatever you need on the `posthog` object.
+
+```js
+import posthog from 'posthog-js'
+posthog.capture('user_signed_up')
+```
 
 ### With PostHog provider (legacy)
 
