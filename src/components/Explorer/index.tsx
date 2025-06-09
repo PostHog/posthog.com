@@ -57,7 +57,7 @@ export default function Explorer({
     fullScreen = false,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
-    const currentPath = appWindow?.props?.path?.replace(/^\//, '') // Remove leading slash
+    const currentPath = appWindow?.path?.replace(/^\//, '') // Remove leading slash
 
     // Get the base product slug (everything before the first slash)
     const baseSlug = slug.split('/')[0]

@@ -245,6 +245,11 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         }
     }
 
+    const handleMouseDown = () => {
+        if (focusedWindow === item) return
+        navigate(item.path, { state: { newWindow: true } })
+    }
+
     useEffect(() => {
         const handleResize = () => {
             if (beyondViewport(size)) {
@@ -361,7 +366,7 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                             onDrag={handleDrag}
                             onDragEnd={handleDragEnd}
                             onDragTransitionEnd={handleDragTransitionEnd}
-                            onMouseDown={() => bringToFront(item)}
+                            onMouseDown={handleMouseDown}
                         >
                             {!item.minimal && (
                                 <div
