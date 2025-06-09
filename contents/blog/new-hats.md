@@ -17,17 +17,13 @@ We've raised $70m in primary capital at a "unicorn adjacent" valuation of $920M,
 
 We also made a hedgehog puppet, who is my cohost in the video above.
 
-## Your customer data + business logic = customer infrastructure
+## The future of PostHog
 
 We already offer [everything developers need to build successful products](/why). 
 
-This started with product analytics five years ago, and expanded to include web analytics, session replay, experiments, feature flags, and surveys. 
+This started with product analytics five years ago, and expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a customer data platform (CDP), too.
 
-More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a customer data platform (CDP), too.
-
-We've had a clear vision for what we're building for a long time, but until recently we've struggled to describe this vision in a simple way. 
-
-The answer came when Tim (my co-founder) and I went for a long walk around London. We decided to call it "customer infrastructure". 
+We've had a clear vision for what we're building for a long time, but until recently we've struggled to describe this vision in a simple way. The answer came when Tim (my co-founder) and I went for a long walk around London. We decided to call it "customer infrastructure". 
 
 For us, customer infrastructure means:
 
@@ -43,15 +39,13 @@ This means sending emails when customers abandon their basket. Triggering survey
 
 This means making AI the default UI of your business. By having all the tools and data together in one platform, we can help automate a lot of the manual work needed to build products people love, and run your business more successfully.
 
-### Building more products
-
 The more products we build, the better this gets. We're at ~14 products right now (we sometimes disagree on the number!), and we have no plans to stop.
 
 You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, data warehouse, and so on. We also have great coverage for product, engineering, and growth use cases.
 
 This funding round means we can build more products for support, sales, and marketing use cases, keep up with demand for our existing products, and ultimately automate the entire chain of tools that businesses use to grow by creating a perfect customer record.
 
-## Making AI the default interface of your business 
+## Making AI the default interface
 
 Watching AI come crashing into the world of tech has been exhilarating.
 
@@ -80,7 +74,7 @@ Below is a sneak peek at the direction of travel, a conceptual demo of a "deep r
 
 Please bear in mind this was a hackathon project. It's a **proof of concept** that shows the kind of experience we want to build, **not a representative demo** using production data – watch closely and you'll see Max AI makes an obvious mistake with the data, for example.
 
-[INSERT DEMO VIDEO OF THE DEEP RESEARCH MODE]
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/UFUlCp-HAzo?si=2GJe5ms63VOvnkhY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 Imagine the above, across every customer product in your company. We think that’s worth building. 
 
