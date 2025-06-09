@@ -20,12 +20,14 @@ Each PM belongs to a small number of our small engineering teams, so that all te
 
 Here is a overview that shows which of our PMs currently works with which team:
 
-**Anna**
+<TeamMember name="Anna Szell" />
+
 - [Data Warehouse](/teams/data-warehouse)
 - [Product Analytics](/teams/product-analytics)
 - [Web Analytics](web-analytics)
 
-**Annika**
+<TeamMember name="Annika Schmid" />
+
 - [Session Replay](/teams/session-replay)
 - [Feature Flags](/teams/feature-flags)
 - [Experiments](/teams/experiments)
@@ -35,7 +37,8 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [Error Tracking](/teams/error-tracking)
 - [Surveys](/teams/surveys)
 
-**Abheek**
+<TeamMember name="Abe Basu" />
+
 - [Messaging](/teams/messaging)
 - [CDP](/teams/cdp)
   
