@@ -79,6 +79,8 @@ export default function Inbox(props) {
     const containerRef = useRef<HTMLDivElement>(null)
     const bottomContainerRef = useRef<HTMLDivElement>(null)
     const [isDragging, setIsDragging] = useState(false)
+    const [dragStartHeight, setDragStartHeight] = useState(0)
+    const [dragStartWidth, setDragStartWidth] = useState(0)
     const [lastQuestionRef, inView] = useInView({ threshold: 0.1 })
     const [sideBySide, setSideBySide] = useState(false)
 
@@ -108,6 +110,20 @@ export default function Inbox(props) {
             const minHeight = 57
             setBottomHeight(expandable ? containerHeight : minHeight)
         }
+    }
+
+    const handleVerticalDrag = (_event, info) => {
+        if (!containerRef.current) return
+        const containerHeight = containerRef.current.getBoundingClientRect().height
+        const newBottomHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 57), containerHeight)
+        setBottomHeight(newBottomHeight)
+    }
+
+    const handleHorizontalDrag = (_event, info) => {
+        if (!containerRef.current) return
+        const containerWidth = containerRef.current.getBoundingClientRect().width
+        const newSideWidth = Math.min(Math.max(dragStartWidth - info.offset.x, 400), containerWidth)
+        setSideWidth(newSideWidth)
     }
 
     useEffect(() => {
@@ -288,18 +304,12 @@ export default function Inbox(props) {
                                         drag="x"
                                         dragMomentum={false}
                                         dragConstraints={{ left: 0, right: 0 }}
-                                        onDragStart={() => setIsDragging(true)}
-                                        onDragEnd={() => setIsDragging(false)}
-                                        onDrag={(_event, info) => {
-                                            if (!containerRef.current) return
-                                            const containerWidth = containerRef.current.getBoundingClientRect().width
-                                            const newSideWidth = Math.min(
-                                                Math.max(sideWidth - info.delta.x, 400),
-                                                containerWidth
-                                            )
-
-                                            setSideWidth(newSideWidth)
+                                        onDragStart={() => {
+                                            setIsDragging(true)
+                                            setDragStartWidth(sideWidth)
                                         }}
+                                        onDragEnd={() => setIsDragging(false)}
+                                        onDrag={handleHorizontalDrag}
                                         onDoubleClick={expandOrCollapse}
                                     />
                                 ) : (
@@ -309,17 +319,12 @@ export default function Inbox(props) {
                                         drag="y"
                                         dragMomentum={false}
                                         dragConstraints={{ top: 0, bottom: 0 }}
-                                        onDragStart={() => setIsDragging(true)}
-                                        onDragEnd={() => setIsDragging(false)}
-                                        onDrag={(_event, info) => {
-                                            if (!containerRef.current) return
-                                            const containerHeight = containerRef.current.getBoundingClientRect().height
-                                            const newBottomHeight = Math.min(
-                                                Math.max(bottomHeight - info.delta.y, 57),
-                                                containerHeight
-                                            )
-                                            setBottomHeight(newBottomHeight)
+                                        onDragStart={() => {
+                                            setIsDragging(true)
+                                            setDragStartHeight(bottomHeight)
                                         }}
+                                        onDragEnd={() => setIsDragging(false)}
+                                        onDrag={handleVerticalDrag}
                                         onDoubleClick={expandOrCollapse}
                                     />
                                 )}
