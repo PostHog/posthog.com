@@ -320,250 +320,246 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <>
+        <div data-scheme="secondary" className="h-full bg-primary">
             <SEO title={`${name}'s profile - PostHog`} />
             <ScrollArea>
-                <div data-scheme="secondary" className="bg-primary">
-                    <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
-                        <div className="flex flex-col @2xl:flex-row gap-6 p-6">
-                            <div className="@2xl:max-w-xs flex-shrink-0">
-                                <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
-                                    <Avatar
-                                        className="w-full border-b border-primary"
-                                        src={profile.avatar?.data?.attributes?.url}
-                                        color={profile.color}
-                                    />
-                                    <div className="flex items-center space-x-2 my-2">
-                                        <h2 className="text-xl font-bold m-0">{name}</h2>
-                                        {profile.country && (
-                                            <Flag
-                                                style={{ width: '1.5rem', height: '1.5rem' }}
-                                                countryCode={profile.country}
-                                                svg
-                                            />
-                                        )}
-                                    </div>
-                                    {profile.companyRole && (
-                                        <p className="text-secondary text-sm m-0 mb-2 -mt-2">{profile.companyRole}</p>
+                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
+                    <div className="flex flex-col @2xl:flex-row gap-6 p-6">
+                        <div className="@2xl:max-w-xs flex-shrink-0">
+                            <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
+                                <Avatar
+                                    className="w-full border-b border-primary"
+                                    src={profile.avatar?.data?.attributes?.url}
+                                    color={profile.color}
+                                />
+                                <div className="flex items-center space-x-2 my-2">
+                                    <h2 className="text-xl font-bold m-0">{name}</h2>
+                                    {profile.country && (
+                                        <Flag
+                                            style={{ width: '1.5rem', height: '1.5rem' }}
+                                            countryCode={profile.country}
+                                            svg
+                                        />
                                     )}
                                 </div>
-
-                                {(profile.pineappleOnPizza !== null || profile.pronouns || profile.location) && (
-                                    <Block title="Details">
-                                        <div className="text-sm space-y-1">
-                                            <p className="flex justify-between m-0">
-                                                {isTeamMember ? (
-                                                    <>
-                                                        <span className="font-semibold">Joined PostHog</span>
-                                                        <span>{dayjs(profile.startDate).fromNow()}</span>
-                                                    </>
-                                                ) : (
-                                                    <>
-                                                        <span className="font-semibold">Community member since</span>
-                                                        <span>{dayjs(profile.createdAt).format('MMMM D, YYYY')}</span>
-                                                    </>
-                                                )}
-                                            </p>
-                                            {profile.pineappleOnPizza !== null && (
-                                                <p className="flex justify-between m-0">
-                                                    <span className="font-semibold">Pineapple on pizza:</span>
-                                                    <span>
-                                                        {profile.pineappleOnPizza ? (
-                                                            <IconThumbsUpFilled className="size-4 text-green" />
-                                                        ) : (
-                                                            <IconThumbsDownFilled className="size-4 text-red" />
-                                                        )}
-                                                    </span>
-                                                </p>
-                                            )}
-                                            {profile.pronouns && (
-                                                <p className="flex justify-between m-0">
-                                                    <span className="font-semibold">Pronouns:</span>
-                                                    <span>{profile.pronouns}</span>
-                                                </p>
-                                            )}
-                                            {profile.location && (
-                                                <p className="flex justify-between m-0">
-                                                    <span className="font-semibold">Location:</span>
-                                                    <span>{profile.location}</span>
-                                                </p>
-                                            )}
-                                        </div>
-                                    </Block>
+                                {profile.companyRole && (
+                                    <p className="text-secondary text-sm m-0 mb-2 -mt-2">{profile.companyRole}</p>
                                 )}
+                            </div>
 
-                                {(profile.github || profile.twitter || profile.linkedin || profile.website) && (
-                                    <Block title="Links">
-                                        <ul className="flex space-x-3 m-0 p-0 list-none">
-                                            {profile.github && (
-                                                <li>
-                                                    <Link to={profile.github} externalNoIcon>
-                                                        <GitHub className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {profile.twitter && (
-                                                <li>
-                                                    <Link to={profile.twitter} externalNoIcon>
-                                                        <Twitter className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {profile.linkedin && (
-                                                <li>
-                                                    <Link to={profile.linkedin} externalNoIcon>
-                                                        <LinkedIn className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
-                                                    </Link>
-                                                </li>
-                                            )}
-                                            {profile.website && (
-                                                <li>
-                                                    <Link to={profile.website} externalNoIcon>
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth={1.5}
-                                                            stroke="currentColor"
-                                                            className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-                                                            />
-                                                        </svg>
-                                                    </Link>
-                                                </li>
-                                            )}
-                                        </ul>
-                                    </Block>
-                                )}
-
-                                {profile.achievements?.length > 0 && (
-                                    <Block title="Achievements">
-                                        <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
-                                            {profile.achievements.map(({ achievement, hidden, id }) => (
-                                                <li key={id} className="flex justify-center">
-                                                    <Achievement
-                                                        {...achievement.data.attributes}
-                                                        id={id}
-                                                        hidden={hidden}
-                                                        profile={profile}
-                                                        mutate={mutate}
-                                                    />
-                                                </li>
-                                            ))}
-                                        </ul>
-                                    </Block>
-                                )}
-                                {(isCurrentUser || isModerator) && (
-                                    <Block title="Profile Settings">
-                                        <div className="flex flex-col space-y-2">
-                                            {(user?.profile?.id === profile.id ||
-                                                (user?.role?.type === 'moderator' && user?.webmaster)) && (
-                                                <CallToAction
-                                                    size="sm"
-                                                    to="/community/profile/edit"
-                                                    type="secondary"
-                                                    state={{ profileID: profile.id }}
-                                                >
-                                                    Edit Profile
-                                                </CallToAction>
-                                            )}
-                                            {user?.role?.type === 'moderator' && (
+                            {(profile.pineappleOnPizza !== null || profile.pronouns || profile.location) && (
+                                <Block title="Details">
+                                    <div className="text-sm space-y-1">
+                                        <p className="flex justify-between m-0">
+                                            {isTeamMember ? (
                                                 <>
-                                                    <CallToAction
-                                                        to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
-                                                        size="sm"
-                                                        type="secondary"
-                                                    >
-                                                        View in Strapi
-                                                    </CallToAction>
-                                                    <CallToAction
-                                                        size="sm"
-                                                        type="primary"
-                                                        onClick={() =>
-                                                            handleBlock(!profile.user?.data.attributes.blocked)
-                                                        }
-                                                    >
-                                                        {profile.user?.data.attributes.blocked
-                                                            ? 'Unblock User'
-                                                            : 'Block User'}
-                                                    </CallToAction>
+                                                    <span className="font-semibold">Joined PostHog</span>
+                                                    <span>{dayjs(profile.startDate).fromNow()}</span>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <span className="font-semibold">Community member since</span>
+                                                    <span>{dayjs(profile.createdAt).format('MMMM D, YYYY')}</span>
                                                 </>
                                             )}
-                                        </div>
-                                    </Block>
-                                )}
-                            </div>
-
-                            <div className="flex-grow @container">
-                                <ProfileTabs
-                                    profile={profile}
-                                    firstName={firstName}
-                                    id={id}
-                                    sort={sort}
-                                    setSort={setSort}
-                                    posts={posts}
-                                />
-                                <div className="mt-6">
-                                    {profile.teams?.data?.length > 0 &&
-                                        profile.teams.data[0].attributes.profiles?.data?.length > 0 && (
-                                            <Block
-                                                title={`${team.attributes.name} team`}
-                                                url={`/teams/${team.attributes.slug}`}
-                                            >
-                                                <div className="grid grid-cols-2 gap-3 @xl:grid-cols-4">
-                                                    {team.attributes.profiles.data
-                                                        .filter((teammate) => teammate.id !== data?.id)
-                                                        .map((teammate) => {
-                                                            return (
-                                                                <Link
-                                                                    key={teammate.id}
-                                                                    to={`/community/profiles/${teammate.id}`}
-                                                                >
-                                                                    <TeamMemberCard
-                                                                        name={teammate.attributes.firstName}
-                                                                        companyRole={teammate.attributes.companyRole}
-                                                                        country={teammate.attributes.country}
-                                                                        location={teammate.attributes.location}
-                                                                        isTeamLead={team.attributes?.leadProfiles?.data?.some(
-                                                                            ({ id: leadID }) => leadID === teammate.id
-                                                                        )}
-                                                                        pineappleOnPizza={
-                                                                            teammate.attributes.pineappleOnPizza
-                                                                        }
-                                                                        avatar={teammate.attributes.avatar}
-                                                                        id={teammate.id}
-                                                                    />
-                                                                </Link>
-                                                            )
-                                                        })}
-                                                </div>
-                                            </Block>
+                                        </p>
+                                        {profile.pineappleOnPizza !== null && (
+                                            <p className="flex justify-between m-0">
+                                                <span className="font-semibold">Pineapple on pizza:</span>
+                                                <span>
+                                                    {profile.pineappleOnPizza ? (
+                                                        <IconThumbsUpFilled className="size-4 text-green" />
+                                                    ) : (
+                                                        <IconThumbsDownFilled className="size-4 text-red" />
+                                                    )}
+                                                </span>
+                                            </p>
                                         )}
-                                </div>
-                                {profile.amaEnabled && (
-                                    <div className="mt-6">
-                                        <Block title="Comments">
-                                            <Questions
-                                                initialView={'question-form'}
-                                                slug={window?.location?.pathname}
-                                                profileId={undefined}
-                                                showForm
-                                                disclaimer={false}
-                                                autoFocus={false}
-                                            />
-                                        </Block>
+                                        {profile.pronouns && (
+                                            <p className="flex justify-between m-0">
+                                                <span className="font-semibold">Pronouns:</span>
+                                                <span>{profile.pronouns}</span>
+                                            </p>
+                                        )}
+                                        {profile.location && (
+                                            <p className="flex justify-between m-0">
+                                                <span className="font-semibold">Location:</span>
+                                                <span>{profile.location}</span>
+                                            </p>
+                                        )}
                                     </div>
-                                )}
+                                </Block>
+                            )}
+
+                            {(profile.github || profile.twitter || profile.linkedin || profile.website) && (
+                                <Block title="Links">
+                                    <ul className="flex space-x-3 m-0 p-0 list-none">
+                                        {profile.github && (
+                                            <li>
+                                                <Link to={profile.github} externalNoIcon>
+                                                    <GitHub className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
+                                                </Link>
+                                            </li>
+                                        )}
+                                        {profile.twitter && (
+                                            <li>
+                                                <Link to={profile.twitter} externalNoIcon>
+                                                    <Twitter className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
+                                                </Link>
+                                            </li>
+                                        )}
+                                        {profile.linkedin && (
+                                            <li>
+                                                <Link to={profile.linkedin} externalNoIcon>
+                                                    <LinkedIn className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
+                                                </Link>
+                                            </li>
+                                        )}
+                                        {profile.website && (
+                                            <li>
+                                                <Link to={profile.website} externalNoIcon>
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        strokeWidth={1.5}
+                                                        stroke="currentColor"
+                                                        className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+                                                        />
+                                                    </svg>
+                                                </Link>
+                                            </li>
+                                        )}
+                                    </ul>
+                                </Block>
+                            )}
+
+                            {profile.achievements?.length > 0 && (
+                                <Block title="Achievements">
+                                    <ul className="grid grid-cols-7 gap-2 m-0 p-0 list-none">
+                                        {profile.achievements.map(({ achievement, hidden, id }) => (
+                                            <li key={id} className="flex justify-center">
+                                                <Achievement
+                                                    {...achievement.data.attributes}
+                                                    id={id}
+                                                    hidden={hidden}
+                                                    profile={profile}
+                                                    mutate={mutate}
+                                                />
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Block>
+                            )}
+                            {(isCurrentUser || isModerator) && (
+                                <Block title="Profile Settings">
+                                    <div className="flex flex-col space-y-2">
+                                        {(user?.profile?.id === profile.id ||
+                                            (user?.role?.type === 'moderator' && user?.webmaster)) && (
+                                            <CallToAction
+                                                size="sm"
+                                                to="/community/profile/edit"
+                                                type="secondary"
+                                                state={{ profileID: profile.id }}
+                                            >
+                                                Edit Profile
+                                            </CallToAction>
+                                        )}
+                                        {user?.role?.type === 'moderator' && (
+                                            <>
+                                                <CallToAction
+                                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
+                                                    size="sm"
+                                                    type="secondary"
+                                                >
+                                                    View in Strapi
+                                                </CallToAction>
+                                                <CallToAction
+                                                    size="sm"
+                                                    type="primary"
+                                                    onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
+                                                >
+                                                    {profile.user?.data.attributes.blocked
+                                                        ? 'Unblock User'
+                                                        : 'Block User'}
+                                                </CallToAction>
+                                            </>
+                                        )}
+                                    </div>
+                                </Block>
+                            )}
+                        </div>
+
+                        <div className="flex-grow @container">
+                            <ProfileTabs
+                                profile={profile}
+                                firstName={firstName}
+                                id={id}
+                                sort={sort}
+                                setSort={setSort}
+                                posts={posts}
+                            />
+                            <div className="mt-6">
+                                {profile.teams?.data?.length > 0 &&
+                                    profile.teams.data[0].attributes.profiles?.data?.length > 0 && (
+                                        <Block
+                                            title={`${team.attributes.name} team`}
+                                            url={`/teams/${team.attributes.slug}`}
+                                        >
+                                            <div className="grid grid-cols-2 gap-3 @xl:grid-cols-4">
+                                                {team.attributes.profiles.data
+                                                    .filter((teammate) => teammate.id !== data?.id)
+                                                    .map((teammate) => {
+                                                        return (
+                                                            <Link
+                                                                key={teammate.id}
+                                                                to={`/community/profiles/${teammate.id}`}
+                                                            >
+                                                                <TeamMemberCard
+                                                                    name={teammate.attributes.firstName}
+                                                                    companyRole={teammate.attributes.companyRole}
+                                                                    country={teammate.attributes.country}
+                                                                    location={teammate.attributes.location}
+                                                                    isTeamLead={team.attributes?.leadProfiles?.data?.some(
+                                                                        ({ id: leadID }) => leadID === teammate.id
+                                                                    )}
+                                                                    pineappleOnPizza={
+                                                                        teammate.attributes.pineappleOnPizza
+                                                                    }
+                                                                    avatar={teammate.attributes.avatar}
+                                                                    id={teammate.id}
+                                                                />
+                                                            </Link>
+                                                        )
+                                                    })}
+                                            </div>
+                                        </Block>
+                                    )}
                             </div>
+                            {profile.amaEnabled && (
+                                <div className="mt-6">
+                                    <Block title="Comments">
+                                        <Questions
+                                            initialView={'question-form'}
+                                            slug={window?.location?.pathname}
+                                            profileId={undefined}
+                                            showForm
+                                            disclaimer={false}
+                                            autoFocus={false}
+                                        />
+                                    </Block>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
             </ScrollArea>
-        </>
+        </div>
     )
 }
 
