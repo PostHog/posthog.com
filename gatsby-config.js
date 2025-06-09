@@ -161,6 +161,14 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `sdkReferences`,
+                path: `${__dirname}/src/data/sdkReferences`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+            },
+        },
+        {
             resolve: `gatsby-source-strapi-pages`,
             options: {
                 strapiURL: process.env.STRAPI_URL,
@@ -383,6 +391,9 @@ module.exports = {
         },
         {
             resolve: 'gatsby-plugin-no-sourcemaps',
+        },
+        {
+            resolve: require.resolve('./plugins/gatsby-transformer-sdk-references'),
         },
         ...(!process.env.GATSBY_ALGOLIA_APP_ID || !process.env.ALGOLIA_API_KEY || !process.env.GATSBY_ALGOLIA_INDEX_NAME
             ? []
