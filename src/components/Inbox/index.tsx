@@ -20,7 +20,7 @@ import hourglassAnimation from 'images/icons8-hourglass.json'
 import { useInView } from 'react-intersection-observer'
 import Tooltip from 'components/Tooltip'
 import useTopicsNav from '../../navs/useTopicsNav'
-
+import { useWindow } from '../../context/Window'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
@@ -42,7 +42,6 @@ const Menu = () => {
 }
 
 const SIDE_WIDTH_DEFAULT = 600
-const BOTTOM_HEIGHT_DEFAULT = 300
 
 export default function Inbox(props) {
     const { data, params } = props
@@ -72,7 +71,9 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
-    const [bottomHeight, setBottomHeight] = useState(BOTTOM_HEIGHT_DEFAULT)
+    const { appWindow } = useWindow()
+    const bottomHeightDefault = useMemo(() => (appWindow?.size.height * 3) / 4, [appWindow?.size.height])
+    const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
     const [sideWidth, setSideWidth] = useState(SIDE_WIDTH_DEFAULT)
     const [notificationsEnabled, setNotificationsEnabled] = useState(false)
     const [question, setQuestion] = useState<StrapiRecord<QuestionData>>()
@@ -174,7 +175,7 @@ export default function Inbox(props) {
         if (sideBySide) {
             setSideWidth(Math.max(400, SIDE_WIDTH_DEFAULT))
         } else {
-            setBottomHeight(Math.max(containerRect.height / 2, BOTTOM_HEIGHT_DEFAULT))
+            setBottomHeight(Math.max(containerRect.height / 2, bottomHeightDefault))
         }
     }, [sideBySide])
 
