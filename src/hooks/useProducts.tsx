@@ -26,6 +26,7 @@ import { useStaticQuery } from 'gatsby'
 import { useMemo, useState } from 'react'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
+import Snippet from '../../contents/docs/integrate/snippet.mdx'
 
 const initialProducts = [
     {
@@ -44,19 +45,19 @@ const initialProducts = [
         customers: {
             ycombinator: {
                 headline: 'gathers 30% more data than with Google Analytics',
-                description: 'We could autocapture... events using the JS snippet and... configure custom events.'
+                description: 'We could autocapture... events using the JS snippet and... configure custom events.',
             },
             hasura: {
                 headline: 'improved conversion rates by 10-20%',
-                description: 'we observed drop-offs at very particular stages of our onboarding flow.'
+                description: 'we observed drop-offs at very particular stages of our onboarding flow.',
             },
             contra: {
                 headline: 'increased registrations by 30%',
-                description: 'From [funnels], we could easily jump to session replays to see the drop-off point.'
+                description: 'From [funnels], we could easily jump to session replays to see the drop-off point.',
             },
             speakeasy: {
                 headline: 'manages features and developer relations',
-                description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.'
+                description: '...top-to-bottom view of conversion rates and user paths, without... extra setup time.',
             },
         },
         features: [
@@ -150,7 +151,8 @@ const initialProducts = [
                 features: [
                     {
                         title: 'User categories',
-                        description: 'Track new, returning, resurrecting, and dormant users to understand engagement patterns',
+                        description:
+                            'Track new, returning, resurrecting, and dormant users to understand engagement patterns',
                     },
                     {
                         title: 'Time-based analysis',
@@ -164,7 +166,8 @@ const initialProducts = [
                     },
                     {
                         title: 'Integration',
-                        description: 'Works with cohorts, feature flags, and other PostHog features for comprehensive analysis',
+                        description:
+                            'Works with cohorts, feature flags, and other PostHog features for comprehensive analysis',
                     },
                 ],
             },
@@ -203,7 +206,8 @@ const initialProducts = [
             {
                 title: 'Correlation Analysis',
                 headline: 'Discover factors affecting conversion',
-                description: 'Automatically identify significant factors that impact user behavior and conversion rates.',
+                description:
+                    'Automatically identify significant factors that impact user behavior and conversion rates.',
                 icon: <IconCorrelationAnalysis />,
                 color: 'red',
                 images: [
@@ -266,7 +270,8 @@ const initialProducts = [
             {
                 title: 'Stickiness',
                 headline: 'Measure user engagement depth',
-                description: 'Track how frequently users engage with your product and identify your most engaged users.',
+                description:
+                    'Track how frequently users engage with your product and identify your most engaged users.',
                 icon: <IconStickiness />,
                 color: 'yellow',
                 images: [
@@ -326,7 +331,8 @@ const initialProducts = [
             {
                 title: 'SQL',
                 headline: 'Write custom SQL queries',
-                description: 'Create custom insights using SQL to analyze your data in ways that go beyond standard insights.',
+                description:
+                    'Create custom insights using SQL to analyze your data in ways that go beyond standard insights.',
                 icon: <IconHogQL />,
                 color: 'purple',
                 images: [
@@ -354,7 +360,7 @@ const initialProducts = [
                     },
                 ],
             },
-        ]
+        ],
     },
     {
         Icon: IconRewindPlay,
@@ -371,58 +377,57 @@ const initialProducts = [
         customers: {
             hasura: {
                 headline: 'improved conversion rates by 10-20%',
-                description: 'We wouldn\'t have noticed that needed fixing without PostHog\'s session replays.'
+                description: "We wouldn't have noticed that needed fixing without PostHog's session replays.",
             },
             elevenlabs: {
                 headline: 'uses replays and surveys when testing ideas',
-                description: 'We watch lots of replays when testing a feature, and love how easy it is to launch surveys'
+                description:
+                    'We watch lots of replays when testing a feature, and love how easy it is to launch surveys',
             },
             netdata: {
                 headline: 'reduced back-and-forth in community support',
-                description: 'Session replay in PostHog is so much better than Smartlook, which we used to use.'
+                description: 'Session replay in PostHog is so much better than Smartlook, which we used to use.',
             },
             pry: {
                 headline: 'improved registrations by 20-30%',
-                description: 'We\'ve improved our whole onboarding flow by about 5% too, which is great.'
+                description: "We've improved our whole onboarding flow by about 5% too, which is great.",
             },
         },
         features: [
             {
                 title: 'Event timeline',
                 headline: 'Event timeline',
-                description: 'See the history of everything that happened in a user\'s session, including clicks, scrolls, and more.',
+                description:
+                    "See the history of everything that happened in a user's session, including clicks, scrolls, and more.",
                 images: [
                     {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-basic.png',
-                        alt: 'Basic funnel visualization',
-                    },
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Products/Slider/images/funnel-grouped.png',
-                        alt: 'Grouped funnel visualization',
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/timeline.png',
+                        alt: 'Timeline',
                     },
                 ],
-                features: [
-                    {
-                        title: 'Filtering',
-                        description:
-                            'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
-                    },
-                    {
-                        title: 'Graph types',
-                        description:
-                            "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time",
-                    },
-                    {
-                        title: 'Step ordering',
-                        description:
-                            'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
-                    },
-                    {
-                        title: 'Granular controls',
-                        description:
-                            'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
-                    },
-                ],
+
+                // features: [
+                //     {
+                //         title: 'Filtering',
+                //         description:
+                //             'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
+                //     },
+                //     {
+                //         title: 'Graph types',
+                //         description:
+                //             "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time",
+                //     },
+                //     {
+                //         title: 'Step ordering',
+                //         description:
+                //             'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
+                //     },
+                //     {
+                //         title: 'Granular controls',
+                //         description:
+                //             'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
+                //     },
+                // ],
             },
             {
                 title: 'Console logs',
@@ -438,7 +443,7 @@ const initialProducts = [
             {
                 title: 'Network monitor',
                 headline: 'Network monitor',
-                description: "Analyze performance and network calls",
+                description: 'Analyze performance and network calls',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
@@ -449,18 +454,19 @@ const initialProducts = [
             {
                 title: 'Autocapture',
                 headline: 'Autocapture',
-                description: "Capture sessions without extra code. If you're already using PostHog.js for analytics, there's nothing else to install.",
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
-                        alt: 'Autocapture',
-                    },
-                ],
+                description:
+                    "Capture sessions without extra code. If you're already using PostHog.js for analytics, there's nothing else to install.",
+                children: (
+                    <div className="max-w-4xl mx-auto overflow-x-auto overflow-y-hidden bg-accent">
+                        <Snippet />
+                    </div>
+                ),
             },
             {
-                title: 'Playlist',
-                headline: 'Playlist',
-                description: "Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort",
+                title: 'Collections',
+                headline: 'Collections',
+                description:
+                    'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
@@ -471,7 +477,8 @@ const initialProducts = [
             {
                 title: 'DOM explorer',
                 headline: 'DOM explorer',
-                description: "Inspect the DOM as it was at this moment in the session. Analyze the structure and elements captured during the recording.",
+                description:
+                    'Inspect the DOM as it was at this moment in the session. Analyze the structure and elements captured during the recording.',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
@@ -482,7 +489,7 @@ const initialProducts = [
             {
                 title: 'Record by feature flag',
                 headline: 'Record by feature flag',
-                description: "Record sessions for users who have a specific feature flag enabled.",
+                description: 'Record sessions for users who have a specific feature flag enabled.',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
@@ -493,7 +500,8 @@ const initialProducts = [
             {
                 title: 'Supported platforms',
                 headline: 'Supported platforms',
-                description: "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
+                description:
+                    "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
                 children: (
                     <div className="max-w-xl mx-auto">
                         <fieldset>
@@ -570,9 +578,15 @@ const initialProducts = [
                                 <span>Flutter</span>
                             </OSButton>
                         </fieldset>
-                        <p className="">*Mobile and cross-platform libraries available as an <Link href="/addons" state={{ newWindow: true }}>add-on</Link>.</p>
+                        <p className="">
+                            *Mobile and cross-platform libraries available as an{' '}
+                            <Link href="/addons" state={{ newWindow: true }}>
+                                add-on
+                            </Link>
+                            .
+                        </p>
                     </div>
-                )
+                ),
             },
             {
                 title: 'More features',
@@ -580,13 +594,11 @@ const initialProducts = [
                 features: [
                     {
                         title: 'Filter by event',
-                        description:
-                            'Filter by events to quickly find relevant recordings',
+                        description: 'Filter by events to quickly find relevant recordings',
                     },
                     {
                         title: 'Filter by people',
-                        description:
-                            "Filter by person properties to quickly find relevant recordings",
+                        description: 'Filter by person properties to quickly find relevant recordings',
                     },
                     {
                         title: 'Block sensitive data',
@@ -595,22 +607,65 @@ const initialProducts = [
                     },
                     {
                         title: 'Share & embed',
-                        description:
-                            'Share recordings directly by URL or embed via iframe',
+                        description: 'Share recordings directly by URL or embed via iframe',
                     },
                     {
                         title: 'Minimum duration filter',
-                        description:
-                            'Only record sessions longer than a specified duration',
+                        description: 'Only record sessions longer than a specified duration',
                     },
                     {
                         title: 'Sample recorded sessions',
-                        description:
-                            'Restrict the percentage of sessions that will be recorded',
+                        description: 'Restrict the percentage of sessions that will be recorded',
                     },
                 ],
-            }
-        ]
+            },
+        ],
+        questions: [
+            {
+                question: "How do I understand my users' behavior in funnels?",
+                url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
+            },
+            {
+                question: 'How do I understand my user journeys?',
+                url: '/tutorials/explore-insights-session-recordings#watching-journeys-from-user-paths',
+            },
+            {
+                question: 'How can I understand what my power users are doing?',
+                url: '/tutorials/explore-insights-session-recordings#find-and-analyze-outliers-in-trend-graphs',
+            },
+            { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
+            { question: 'How do I improve my support experience?', url: '/tutorials/session-recordings-for-support' },
+            { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
+            {
+                question: 'Why are users dropping off in my funnel?',
+                url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
+            },
+            { question: 'What’s making my users angry or frustrated?', url: '/tutorials/toolbar' },
+            { question: 'Which screens are loading slowly?', url: '/tutorials/performance-metrics' },
+            {
+                question: 'How can I improve customer support with screen recordings?',
+                url: '/tutorials/session-recordings-for-support',
+            },
+            {
+                question: 'How do I understand sources of friction in my app?',
+                url: '/tutorials/filter-session-recordings',
+            },
+            { question: 'What errors are being logged to the console?' },
+            { question: 'What warnings are being logged to the console?' },
+            {
+                question: 'What is a user’s First Contentful Paint time',
+                url: '/tutorials/performance-metrics#1-first-contentful-paint',
+            },
+            {
+                question: 'What is a user’s Dom Interactive time',
+                url: '/tutorials/performance-metrics#2-dom-interactive',
+            },
+            { question: 'What is a user’s Page Loaded time', url: '/tutorials/performance-metrics#3-page-loaded' },
+            {
+                question: 'How do I optimize site performance?',
+                url: '/tutorials/performance-metrics#optimization-cheat-sheet',
+            },
+        ],
     },
     {
         Icon: IconToggle,

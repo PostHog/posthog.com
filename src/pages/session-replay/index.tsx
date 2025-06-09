@@ -17,8 +17,11 @@ import Tabs from 'components/RadixUI/Tabs'
 import ImageSlider from 'components/Pricing/Test/ImageSlider'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import OSTable from 'components/OSTable'
+import { Accordion } from 'components/RadixUI/Accordion'
+import { useStaticQuery, graphql } from 'gatsby'
 
-const slideClasses = 'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
+const slideClasses =
+    'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
 
 // Component for individual slide thumbnail with proper scaling
 const SlideThumb = ({ slide, index, isActive }: { slide: any; index: number; isActive: boolean }) => {
@@ -32,7 +35,11 @@ const SlideThumb = ({ slide, index, isActive }: { slide: any; index: number; isA
                 slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             }}
         >
-            <div className={`aspect-video bg-primary border rounded-sm overflow-hidden relative ${isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'}`}>
+            <div
+                className={`aspect-video bg-primary border rounded-sm overflow-hidden relative ${
+                    isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'
+                }`}
+            >
                 <ScalableSlide mode="thumbnail" baseWidth={1280} baseHeight={720}>
                     {slide.thumbnailContent || slide.rawContent || slide.content}
                 </ScalableSlide>
@@ -52,12 +59,7 @@ const SlideThumbnails = ({ slides, activeSlideIndex }: { slides: any[]; activeSl
         <div className="space-y-3 p-1">
             <h3 className="text-sm text-center font-semibold text-secondary mb-3">Slides</h3>
             {slides.map((slide, index) => (
-                <SlideThumb
-                    key={index}
-                    slide={slide}
-                    index={index}
-                    isActive={index === activeSlideIndex}
-                />
+                <SlideThumb key={index} slide={slide} index={index} isActive={index === activeSlideIndex} />
             ))}
         </div>
     )
@@ -66,7 +68,7 @@ const SlideThumbnails = ({ slides, activeSlideIndex }: { slides: any[]; activeSl
 // Features component using tab UI
 const FeaturesTab = () => {
     const { products } = useProducts()
-    const sessionReplayProduct = products.find(product => product.type === 'session_replay')
+    const sessionReplayProduct = products.find((product) => product.type === 'session_replay')
     const featuresContent = sessionReplayProduct?.features || []
     const [currentTab, setCurrentTab] = useState(0)
 
@@ -118,18 +120,64 @@ const FeaturesTab = () => {
                             ))}
                     </div>
                     {item.images && item.images.length > 0 && (
-                        <div className="max-w-lg mx-auto">
+                        <div className="max-w-3xl mx-auto">
                             <ImageSlider images={item.images} id={`feature-${index}`} />
                         </div>
                     )}
-                    {(item as any).children && (
-                        <div className="p-4">
-                            {(item as any).children}
-                        </div>
-                    )}
+                    {(item as any).children && <div className="p-4">{(item as any).children}</div>}
                 </Tabs.Content>
             ))}
         </Tabs.Root>
+    )
+}
+
+// Questions accordion component sourcing data from useProducts
+const QuestionsAccordion = () => {
+    const { products } = useProducts()
+    const sessionReplayProduct = products.find((product) => product.type === 'session_replay')
+    const questions = sessionReplayProduct?.questions || []
+
+    // GraphQL query to fetch tutorial content from URLs
+    const tutorialData = useStaticQuery(graphql`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    excerpt(pruneLength: 500)
+                    frontmatter {
+                        title
+                    }
+                }
+            }
+        }
+    `)
+
+    // Helper function to get content for a question URL
+    const getContentForUrl = (url?: string) => {
+        if (!url) return 'No additional content available.'
+
+        // Extract slug from URL (remove hash fragments)
+        const slug = url.split('#')[0]
+        const tutorialNode = tutorialData.allMdx.nodes.find((node: any) => node.fields.slug === slug)
+
+        return tutorialNode ? tutorialNode.excerpt : 'Content not found.'
+    }
+
+    if (questions.length === 0) {
+        return <div className="p-4">No questions available</div>
+    }
+
+    return (
+        <Accordion
+            items={questions.map((question, index) => ({
+                trigger: question.question,
+                content: getContentForUrl(question.url),
+                value: `item-${index}`,
+            }))}
+            defaultValue="item-0"
+        />
     )
 }
 
@@ -147,57 +195,63 @@ export default function SessionReplay(): JSX.Element {
         { name: '', width: 'minmax(auto,100px)', align: 'center' as const },
         { name: 'Company', width: 'minmax(150px,300px)', align: 'center' as const },
         { name: '', width: 'minmax(auto,1fr)', align: 'left' as const },
-        { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const }
+        { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
     ]
 
-    const customerTableRows = customers.filter(customer => {
-        return sessionReplayProduct?.customers?.[customer.slug]
-    }).map((customer, index) => {
-        const customerData = sessionReplayProduct?.customers?.[customer.slug]
+    const customerTableRows = customers
+        .filter((customer) => {
+            return sessionReplayProduct?.customers?.[customer.slug]
+        })
+        .map((customer, index) => {
+            const customerData = sessionReplayProduct?.customers?.[customer.slug]
 
-        return {
-            cells: [
-                { content: index + 1 },
-                {
-                    content: customer.logo ? (
-                        <>
-                            <img
-                                src={customer.logo.light}
-                                alt={customer.name}
-                                className="w-auto object-contain dark:hidden"
-                            />
-                            <img
-                                src={customer.logo.dark}
-                                alt={customer.name}
-                                className="w-auto object-contain hidden dark:block"
-                            />
-                        </>
-                    ) : (
-                        <span>{customer.name}</span>
-                    ),
-                    className: '!p-4'
-                },
-                {
-                    content: (
-                        <>
-                            <strong>...{customerData.headline}</strong>
-                            <span className="text-lg italic">"{customerData.description}"</span>
-                        </>
-                    ),
-                    className: 'text-xl !px-8 !py-4'
-                },
-                {
-                    content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`} state={{ newWindow: true }}>Link</Link> : null,
-                    className: 'text-lg'
-                }
-            ]
-        }
-    })
+            return {
+                cells: [
+                    { content: index + 1 },
+                    {
+                        content: customer.logo ? (
+                            <>
+                                <img
+                                    src={customer.logo.light}
+                                    alt={customer.name}
+                                    className="w-auto object-contain dark:hidden"
+                                />
+                                <img
+                                    src={customer.logo.dark}
+                                    alt={customer.name}
+                                    className="w-auto object-contain hidden dark:block"
+                                />
+                            </>
+                        ) : (
+                            <span>{customer.name}</span>
+                        ),
+                        className: '!p-4',
+                    },
+                    {
+                        content: (
+                            <>
+                                <strong>...{customerData.headline}</strong>
+                                <span className="text-lg italic">"{customerData.description}"</span>
+                            </>
+                        ),
+                        className: 'text-xl !px-8 !py-4',
+                    },
+                    {
+                        content: hasCaseStudy(customer.slug) ? (
+                            <Link to={`/customers/${customer.slug}`} state={{ newWindow: true }}>
+                                Link
+                            </Link>
+                        ) : null,
+                        className: 'text-lg',
+                    },
+                ],
+            }
+        })
 
     // Define raw slide content
     const rawSlides = [
         {
-            name: "Overview",
+            name: 'Overview',
             content: (
                 <div className="h-full p-12 flex flex-col relative">
                     <CloudinaryImage
@@ -219,58 +273,26 @@ export default function SessionReplay(): JSX.Element {
                             Watch people use your product
                         </h1>
                         <p className="text-xl text-secondary mb-8 leading-relaxed">
-                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.
+                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user
+                            behavior in your product, website, or mobile app.
                         </p>
-                        {/* 
-
-                        {customers.slice(0, 4).map((customer, index) => {
-                            const customerData = sessionReplayProduct?.customers?.[customer.slug]
-                            return (
-                                <div key={customer.slug} className={`col-span-3 row-span-3 ${index === 0 ? 'row-start-6' : index === 1 ? 'col-start-4 row-start-6' : index === 2 ? 'col-start-7 row-start-6' : 'col-start-10 row-start-6'} flex flex-col p-4`}>
-                                    <div className="mb-3 flex">
-                                        {customer.logo ? (
-                                            <>
-                                                <img
-                                                    src={customer.logo.light}
-                                                    alt={customer.name}
-                                                    className="h-6 w-auto object-contain dark:hidden"
-                                                />
-                                                <img
-                                                    src={customer.logo.dark}
-                                                    alt={customer.name}
-                                                    className="h-6 w-auto object-contain hidden dark:block"
-                                                />
-                                            </>
-                                        ) : (
-                                            <span className="text-sm font-semibold">{customer.name}</span>
-                                        )}
-                                    </div>
-                                    {customerData && (
-                                        <>
-                                            <h3 className="text-sm font-semibold mb-2">{customerData.headline}</h3>
-                                            <p className="text-xs text-secondary">{customerData.description}</p>
-                                        </>
-                                    )}
-                                </div>
-                            )
-                        })}
-
-                         */}
                     </div>
                 </div>
-            )
+            ),
         },
         {
-            name: "Customers",
+            name: 'Customers',
             content: (
                 <div className="h-full p-12">
-                    <h2 className="text-4xl font-bold text-primary mb-6 text-center">Customers who love session replay</h2>
+                    <h2 className="text-4xl font-bold text-primary mb-6 text-center">
+                        Customers who love session replay
+                    </h2>
                     <OSTable columns={customerTableColumns} rows={customerTableRows} />
                 </div>
             ),
         },
         {
-            name: "Features",
+            name: 'Features',
             content: (
                 <div className="h-full">
                     <FeaturesTab />
@@ -278,7 +300,16 @@ export default function SessionReplay(): JSX.Element {
             ),
             // Simplified version for thumbnails (avoid FeaturesTab which has ImageSlider)
             thumbnailContent: (
-                <div className="h-full p-12 flex flex-col justify-center" style={{ backgroundImage: 'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+                <div
+                    className="h-full p-12 flex flex-col justify-center"
+                    style={{
+                        backgroundImage:
+                            'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                    }}
+                >
                     <div className="max-w-2xl">
                         <h2 className="text-4xl font-bold text-primary mb-6">Features</h2>
                         <p className="text-xl text-secondary">
@@ -286,32 +317,31 @@ export default function SessionReplay(): JSX.Element {
                         </p>
                     </div>
                 </div>
-            )
+            ),
         },
         {
-            name: "Answers",
+            name: 'Answers',
             content: (
                 <div className="h-full p-12 flex flex-col justify-center text-center">
                     <h2 className="text-4xl font-bold text-primary mb-6">What can I discover with session replay?</h2>
-                    <p className="text-xl text-secondary max-w-4xl mx-auto">
+                    <p className="text-xl text-secondary max-w-4xl mx-auto mb-8">
                         Understand user behavior, identify friction points, and improve your product experience
                     </p>
+                    <QuestionsAccordion />
                 </div>
-            )
+            ),
         },
         {
-            name: "Pricing",
+            name: 'Pricing',
             content: (
                 <div className="h-full p-12 flex flex-col justify-center text-center">
                     <h2 className="text-4xl font-bold text-primary mb-6">Pricing</h2>
-                    <p className="text-xl text-secondary max-w-4xl mx-auto">
-                        Start free, pay as you scale
-                    </p>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto">Start free, pay as you scale</p>
                 </div>
-            )
+            ),
         },
         {
-            name: "Getting started",
+            name: 'Getting started',
             content: (
                 <div className="h-full p-12 flex flex-col justify-center text-center">
                     <h2 className="text-4xl font-bold text-primary mb-6">Get started</h2>
@@ -327,12 +357,12 @@ export default function SessionReplay(): JSX.Element {
                         </CallToAction>
                     </div>
                 </div>
-            )
-        }
+            ),
+        },
     ]
 
     // Create slides with both raw content and wrapped content for different contexts
-    const slides = rawSlides.map(slide => ({
+    const slides = rawSlides.map((slide) => ({
         ...slide,
         // Wrapped content for editor view
         content: (
@@ -343,7 +373,7 @@ export default function SessionReplay(): JSX.Element {
         // Raw content for presentation mode
         rawContent: slide.content,
         // Simplified content for thumbnails (avoids complex components)
-        thumbnailContent: slide.thumbnailContent || slide.content
+        thumbnailContent: slide.thumbnailContent || slide.content,
     }))
 
     return (
@@ -357,22 +387,24 @@ export default function SessionReplay(): JSX.Element {
                 template="generic"
                 slug="session-replay"
                 title=""
-                sidebarContent={(activeSlideIndex) => <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} />}
+                sidebarContent={(activeSlideIndex) => (
+                    <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} />
+                )}
                 slides={slides}
             >
-                <div data-scheme="primary" className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4">
+                <div
+                    data-scheme="primary"
+                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4"
+                >
                     {slides.map((slide, index) => (
-                        <div
-                            key={index}
-                            className="flex flex-col justify-center bg-accent"
-                            data-slide={index}
-                        >
-                            <span data-scheme="secondary" className="slideName inline-flex mx-auto bg-accent rounded-sm px-4 py-0.5 text-sm font-semibold text-primary my-2">
+                        <div key={index} className="flex flex-col justify-center bg-accent" data-slide={index}>
+                            <span
+                                data-scheme="secondary"
+                                className="slideName inline-flex mx-auto bg-accent rounded-sm px-4 py-0.5 text-sm font-semibold text-primary my-2"
+                            >
                                 {slide.name}
                             </span>
-                            <div className={slideClasses}>
-                                {slide.content}
-                            </div>
+                            <div className={slideClasses}>{slide.content}</div>
                         </div>
                     ))}
                 </div>
