@@ -267,7 +267,7 @@ export const TemplateParametersFactory: (params: TemplateParametersProps) => Rea
 }
 
 export default function Handbook({
-    data: { post, nextPost, glossary, allFile },
+    data: { post, nextPost, glossary },
     pageContext: { menu, breadcrumb = [], breadcrumbBase, tableOfContents, searchFilter },
     location,
 }) {
@@ -479,15 +479,6 @@ export default function Handbook({
 
 export const query = graphql`
     query HandbookQuery($id: String!, $nextURL: String!, $links: [String!]!) {
-        allFile {
-            nodes {
-                relativePath
-                sourceInstanceName
-                childMdx {
-                    rawBody
-                }
-            }
-        }
         glossary: allMdx(filter: { fields: { slug: { in: $links } } }) {
             nodes {
                 fields {
