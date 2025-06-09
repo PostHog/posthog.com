@@ -19,9 +19,9 @@ We also made a hedgehog puppet, who is my cohost in the video above.
 
 ## The future of PostHog
 
-We already offer [everything developers need to build successful products](/why). 
+We already offer [everything developers need to build successful products](/why) in one platform.
 
-This started with product analytics five years ago, and expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a customer data platform (CDP), too.
+Five years ago we were just product analytics, but we expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a customer data platform (CDP), too.
 
 We've had a clear vision for what we're building for a long time, but until recently we've struggled to describe this vision in a simple way. The answer came when Tim (my co-founder) and I went for a long walk around London. We decided to call it "customer infrastructure". 
 
@@ -37,7 +37,9 @@ This means sending emails when customers abandon their basket. Triggering survey
 
 ### 3. Wrapping this all with AI
 
-By having all the tools and data together in one platform, we can help automate a lot of the manual work needed to build products people love, and run your business more successfully. The more products we build, the better this gets. We're at ~14 products right now (we sometimes disagree on the number!), and we have no plans to stop.
+By having all the tools and data together in one platform, we can help automate a lot of the manual work needed to build products people love, and run your business more successfully. 
+
+The more products we build, the better this gets. We're at ~14 products right now (we sometimes disagree on the number!), and we have no plans to stop.
 
 You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, data warehouse, and so on. We also have great coverage for product, engineering, and growth use cases.
 
