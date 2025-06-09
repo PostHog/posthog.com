@@ -75,7 +75,7 @@ export default function HTML(props: HTMLProps): JSX.Element {
                 )}
                 <script
                     dangerouslySetInnerHTML={{
-                        __html: `!function(e,o){let t=0,n=!1;e.__default__={form_id:509041,team_id:482},function e(){const c=o.createElement("script");c.async=!0,c.src="https://import-cdn.default.com/v2/index.js",c.onload=()=>{n=!0,console.info("[Default.com] Powered by Default.com")},c.onerror=()=>{++t<=3&&(setTimeout(e,1e3*t),Z)},o.head.appendChild(c)}()}(window,document);`,
+                        __html: `!function(t,e){const o=509041,n=482;let a=0,i=!1;t.__default__={form_id:o,team_id:n},function t(){const r=e.createElement("script");r.async=!0,r.src="https://import-cdn.default.com/v2/index.js",r.onload=()=>{i=!0,console.info("[Default.com] Powered by Default.com")},r.onerror=()=>{!function(t,e){try{fetch("https://nucleus.default.com/import/error",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({errorMessage:t,payload:{attempt:e,form_id:o,team_id:n,location:window.location.href,userAgent:navigator.userAgent,timestamp:Date.now()}})})}catch(t){}}("Script failed to load",a),++a<=3&&setTimeout(t,1e3*a)},e.head.appendChild(r)}()}(window,document);`,
                     }}
                 />
 
