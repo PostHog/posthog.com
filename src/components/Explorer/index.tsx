@@ -7,6 +7,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
+import { useWindow } from '../../context/Window'
 
 interface AccordionItem {
     title: string
@@ -55,8 +56,8 @@ export default function Explorer({
     children,
     fullScreen = false,
 }: ExplorerProps) {
-    const location = useLocation()
-    const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
+    const { appWindow } = useWindow()
+    const currentPath = appWindow?.props?.path?.replace(/^\//, '') // Remove leading slash
 
     // Get the base product slug (everything before the first slash)
     const baseSlug = slug.split('/')[0]
