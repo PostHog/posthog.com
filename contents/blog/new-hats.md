@@ -16,7 +16,7 @@ We've raised $70m in primary capital at a "unicorn adjacent" valuation of $920M,
 
 We also made a hedgehog puppet, who is my cohost for today:
 
-<VIDEO HERE>
+[VIDEO HERE]
 
 ## Your customer data + business logic = customer infrastructure
 
@@ -75,7 +75,7 @@ Below is a sneak peek at the direction of travel, a conceptual demo of a "deep r
 
 Please bear in mind this was a hackathon project. It's a **proof of concept** that shows the kind of experience we want to build, **not a representative demo** using production data – watch closely and you'll see Max AI makes an obvious mistake with the data, for example.
 
-<INSERT DEMO VIDEO OF THE DEEP RESEARCH MODE>
+[INSERT DEMO VIDEO OF THE DEEP RESEARCH MODE]
 
 Imagine the above, across every customer product in your company. We think that’s worth building. 
 
