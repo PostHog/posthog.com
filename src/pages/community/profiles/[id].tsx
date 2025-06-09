@@ -109,7 +109,7 @@ const Bio = ({ biography, readme }) => {
 const Block = ({ title, children, url }) => {
     const Container = url ? Link : 'div'
     return (
-        <div className="border border-primary rounded-md p-4 mb-6 bg-primary">
+        <div className="border border-primary rounded-md p-4 mb-6 bg-primary last:mb-0">
             <Container {...(url ? { to: url, className: 'text-red' } : {})}>
                 <h3 className="text-lg font-bold text-inherit border-b border-primary pb-2 leading-tight m-0 mb-4">
                     {title}
@@ -319,9 +319,9 @@ export default function ProfilePage({ params }: PageProps) {
             <SEO title={`${name}'s profile - PostHog`} />
             <ScrollArea>
                 <div data-scheme="secondary" className="bg-primary">
-                    <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 ">
-                        <div className="flex flex-col md:flex-row gap-6 p-6">
-                            <div className="max-w-xs flex-shrink-0">
+                    <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
+                        <div className="flex flex-col @2xl:flex-row gap-6 p-6">
+                            <div className="@2xl:max-w-xs flex-shrink-0">
                                 <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
                                     <Avatar
                                         className="w-full border-b border-primary"
@@ -493,7 +493,7 @@ export default function ProfilePage({ params }: PageProps) {
                                 )}
                             </div>
 
-                            <div className="flex-grow">
+                            <div className="flex-grow @container">
                                 <ProfileTabs
                                     profile={profile}
                                     firstName={firstName}
@@ -517,7 +517,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                         View team
                                                     </Link>
                                                 </div>
-                                                <div className="grid grid-cols-4 gap-3">
+                                                <div className="grid grid-cols-2 gap-3 @xl:grid-cols-4">
                                                     {team.attributes.profiles.data
                                                         .filter((teammate) => teammate.id !== data?.id)
                                                         .map((teammate) => {
