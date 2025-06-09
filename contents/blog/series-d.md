@@ -31,7 +31,7 @@ For us, customer infrastructure means:
 
 We want to capture every interaction they have with your business. Every bug. Every feature used. Every sales conversation. Every support ticket. Every time they rage click a button that doesn't work. Every dollar of revenue.
 
-### 2. Powering the business logic of your company.
+### 2. Powering the business logic of your company
 
 This means sending emails when customers abandon their basket. Triggering surveys when they churn. Automating a support response when they encounter a critical error. We want to put the tools to do this and data needed to power it in one place. [No more data spaghetti](/blog/modern-data-stack-sucks).
 
