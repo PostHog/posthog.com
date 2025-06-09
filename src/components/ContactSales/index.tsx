@@ -128,10 +128,90 @@ export default function ContactSales({ location }) {
                             })}
                         </ul>
                     </div>
-                    <div className="">
+                    <div className="" data-default-form-id="509041">
                         <h3 className="mb-3">Contact us</h3>
-
-                        <div data-default-form-id="509041" />
+                        <SalesforceForm
+                            type="lead"
+                            buttonOptions={{
+                                size: 'lg',
+                            }}
+                            form={{
+                                fields: [
+                                    {
+                                        label: 'Email',
+                                        type: 'string',
+                                        name: 'email',
+                                        required: true,
+                                        fieldType: 'email',
+                                    },
+                                    {
+                                        label: 'Company',
+                                        type: 'string',
+                                        name: 'company',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Role',
+                                        name: 'role',
+                                        type: 'enumeration',
+                                        options: [
+                                            {
+                                                label: 'Engineering',
+                                                value: 'Engineering',
+                                            },
+                                            {
+                                                label: 'Founder',
+                                                value: 'Founder',
+                                            },
+                                            {
+                                                label: 'Leadership',
+                                                value: 'Leadership',
+                                            },
+                                            {
+                                                label: 'Marketing',
+                                                value: 'Marketing',
+                                            },
+                                            {
+                                                label: 'Product',
+                                                value: 'Product',
+                                            },
+                                            {
+                                                label: 'Sales',
+                                                value: 'Sales',
+                                            },
+                                            {
+                                                label: 'Other',
+                                                value: 'Other',
+                                            },
+                                        ],
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'Monthly active users',
+                                        name: 'monthly_active_users',
+                                        type: 'string',
+                                        fieldType: 'number',
+                                        required: true,
+                                    },
+                                    {
+                                        label: 'What do you want to talk about on the call?',
+                                        name: 'talk_about',
+                                        type: 'string',
+                                        required: true,
+                                        fieldType: 'textarea',
+                                    },
+                                    {
+                                        label: 'Where did you hear about us?',
+                                        type: 'string',
+                                        name: 'where_did_you_hear_about_us',
+                                        required: false,
+                                    },
+                                ],
+                                buttonText: 'Submit',
+                                message: "Message received. We'll be in touch!",
+                                name: 'Contact sales',
+                            }}
+                        />
                     </div>
                 </section>
             </div>
