@@ -6,6 +6,7 @@ author:
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/big_d_1a54aa7012.png
 featuredImageType: full
+featuredVideo: 'https://www.youtube-nocookie.com/embed/EXisgy6eWJ0'
 tags:
     - PostHog news
 ---
