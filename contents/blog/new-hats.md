@@ -29,7 +29,7 @@ For us, customer infrastructure means:
 
 ### 1. One source of truth for your customers 
 
-This means capturing every interaction they have with your business. Every bug. Every feature used. Every sales conversation. Every support ticket. Every time they rage click a button that doesn't work. Every dollar of revenue.
+We want to capture every interaction they have with your business. Every bug. Every feature used. Every sales conversation. Every support ticket. Every time they rage click a button that doesn't work. Every dollar of revenue.
 
 ### 2. Powering the business logic of your company.
 
@@ -37,9 +37,7 @@ This means sending emails when customers abandon their basket. Triggering survey
 
 ### 3. Wrapping this all with AI
 
-This means making AI the default UI of your business. By having all the tools and data together in one platform, we can help automate a lot of the manual work needed to build products people love, and run your business more successfully.
-
-The more products we build, the better this gets. We're at ~14 products right now (we sometimes disagree on the number!), and we have no plans to stop.
+By having all the tools and data together in one platform, we can help automate a lot of the manual work needed to build products people love, and run your business more successfully. The more products we build, the better this gets. We're at ~14 products right now (we sometimes disagree on the number!), and we have no plans to stop.
 
 You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, data warehouse, and so on. We also have great coverage for product, engineering, and growth use cases.
 
