@@ -110,5 +110,3 @@ And our users have been really great to us, too. Cheering us on, using new thing
 When you can get into a cycle like this, fundraising becomes a million times easier. What a ride!
 
 Oh, and if you want to join us on that ride, [we're always hiring](/careers).
-
-<NewsletterForm />
