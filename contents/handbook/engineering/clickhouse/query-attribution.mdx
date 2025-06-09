@@ -35,10 +35,10 @@ how one request to an API may end up multiple queries to ClickHouse.
 
 ### Tags
 
-In python, there is a (`tag_queries`)[https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L25] helper function one may use,
+In python, there is a [`tag_queries`](https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L25) helper function one may use,
 be aware that it tags **all queries** issued from within a Python thread (it uses thread local memory).
 
-Alternatively, you may consider (`tags_context`)[https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L64]
+Alternatively, you may consider [`tags_context`](https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L64)
 for localized tags.
 
 Each query send to ClickHouse must have the following tags:
