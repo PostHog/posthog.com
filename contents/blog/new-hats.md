@@ -99,7 +99,7 @@ We aren’t just trying to collect the entire alphabet, we raised a Series C for
 
 I had intended on writing a big blog post about our philosophy here and the practical side of pulling this off, but got distracted. I will cover this topic at some stage in future as it’s interesting!
 
-## Acknowledgments
+## Acknowledgmentskjbkjg
 
 Tim and I used to feel in awe when reading announcements like this from other companies. They seemed glitzy and kind of implausible back when we were pivoting five times in a few months.
 
