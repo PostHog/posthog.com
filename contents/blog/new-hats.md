@@ -45,7 +45,7 @@ You can already replace an entire stack of legacy data tools with PostHog – an
 
 This funding round means we can build more products for support, sales, and marketing use cases, keep up with demand for our existing products, and ultimately automate the entire chain of tools that businesses use to grow by creating a perfect customer record.
 
-## Making AI the default interface
+## Making AI the default interface of your business
 
 Watching AI come crashing into the world of tech has been exhilarating.
 
