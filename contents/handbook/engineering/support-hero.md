@@ -279,7 +279,7 @@ When you see a user assigned to a free email org on a ticket, and it is not a 'c
 3. Click anywhere outside the field to save the change
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. After 20 days, responses will create a follow-up ticket with a link to the original ticket.
 
-Tickets that have been `Solved` will receive a CSAT survey after 3 days.
+Tickets that have been `Solved` will receive a CSAT survey the next day.
 
 #### Content Warnings
 

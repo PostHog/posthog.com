@@ -14,7 +14,7 @@ export const SettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/S
 PostHog enables you to link your most important data from sources like your CRM, payment processor, or database. Once linked, you can combine this data with the product analytics data already in PostHog and query across all of it.
 
 To link a source, go to the Integrations tab, and click the **Sources** tab. On that page, you have an option to create a managed source such as:
- 
+
 - [Stripe](/docs/cdp/sources/stripe)
 - [Hubspot](/docs/cdp/sources/hubspot)
 - [Zendesk](/docs/cdp/sources/zendesk)
@@ -25,8 +25,9 @@ To link a source, go to the Integrations tab, and click the **Sources** tab. On 
 - [Vitally](/docs/cdp/sources/vitally)
 - [Chargebee](/docs/cdp/sources/chargebee)
 - [BigQuery](/docs/cdp/sources/bigquery)
+- [Google Ads](/docs/cdp/sources/google-ads)
 
-The other option is a self-managed source, which include: 
+The other option is a self-managed source, which include:
 
 - [S3](/docs/cdp/sources/s3)
 - [R2](/docs/cdp/sources/r2)
@@ -52,7 +53,7 @@ See an example in our [S3 setup docs](/docs/cdp/sources/s3).
 
 ## Incremental vs full table
 
-On some sources and tables, you can choose the sync method. The options are incremental replication or full table replication. 
+On some sources and tables, you can choose the sync method. The options are incremental replication or full table replication.
 
 ### Incremental
 
@@ -83,8 +84,8 @@ When you expand each source, you can see:
 - Time the table was last synced
 
 <ProductScreenshot
-    imageLight={SettingsLight} 
-    imageDark={SettingsDark} 
-    alt="Source settings in PostHog" 
+    imageLight={SettingsLight}
+    imageDark={SettingsDark}
+    alt="Source settings in PostHog"
     classes="rounded"
   />
