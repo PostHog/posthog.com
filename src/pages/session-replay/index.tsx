@@ -19,6 +19,9 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import OSTable from 'components/OSTable'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { useStaticQuery, graphql } from 'gatsby'
+import { Markdown } from 'components/Squeak/components/Markdown'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSButton from 'components/OSButton'
 
 const slideClasses =
     'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
@@ -131,11 +134,12 @@ const FeaturesTab = () => {
     )
 }
 
-// Questions accordion component sourcing data from useProducts
-const QuestionsAccordion = () => {
+// Questions tabs component sourcing data from useProducts
+const QuestionsTabs = () => {
     const { products } = useProducts()
     const sessionReplayProduct = products.find((product) => product.type === 'session_replay')
     const questions = sessionReplayProduct?.questions || []
+    const [currentTab, setCurrentTab] = useState(0)
 
     // GraphQL query to fetch tutorial content from URLs
     const tutorialData = useStaticQuery(graphql`
@@ -145,7 +149,7 @@ const QuestionsAccordion = () => {
                     fields {
                         slug
                     }
-                    excerpt(pruneLength: 500)
+                    excerpt(pruneLength: 1000)
                     frontmatter {
                         title
                     }
@@ -170,14 +174,53 @@ const QuestionsAccordion = () => {
     }
 
     return (
-        <Accordion
-            items={questions.map((question, index) => ({
-                trigger: question.question,
-                content: getContentForUrl(question.url),
-                value: `item-${index}`,
-            }))}
-            defaultValue="item-0"
-        />
+        <Tabs.Root
+            className="flex-1 flex w-full min-h-0 items-start bg-accent rounded"
+            defaultValue={`tab-${currentTab}`}
+            value={`tab-${currentTab}`}
+            onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
+            orientation="horizontal"
+            size="md"
+        >
+            <div data-scheme="secondary" className="w-96 h-full bg-primary rounded">
+                <ScrollArea className="h-full">
+                    <Tabs.List className="flex flex-col p-1 gap-0.5" aria-label="Questions">
+                        {questions.map((question, index) => (
+                            <Tabs.Trigger key={index} value={`tab-${index}`} className="text-left">
+                                {question.question}
+                            </Tabs.Trigger>
+                        ))}
+                    </Tabs.List>
+                </ScrollArea>
+            </div>
+            {questions.map((question, index) => (
+                <Tabs.Content
+                    className="flex-1 bg-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full"
+                    key={index}
+                    value={`tab-${index}`}
+                >
+                    <div className="px-4">
+                        <h2 className="text-3xl mb-4">{question.question}</h2>
+                        <div className="prose max-w-none [&_p]:!text-lg">
+                            <Markdown>{getContentForUrl(question.url)}</Markdown>
+                        </div>
+                        {question.url && (
+                            <div className="mt-6">
+                                <OSButton
+                                    to={question.url}
+                                    variant="secondary"
+                                    size="lg"
+                                    asLink
+                                    state={{ newWindow: true }}
+                                >
+                                    Read full tutorial →
+                                </OSButton>
+                            </div>
+                        )}
+                    </div>
+                </Tabs.Content>
+            ))}
+        </Tabs.Root>
     )
 }
 
@@ -298,36 +341,41 @@ export default function SessionReplay(): JSX.Element {
                     <FeaturesTab />
                 </div>
             ),
-            // Simplified version for thumbnails (avoid FeaturesTab which has ImageSlider)
-            thumbnailContent: (
-                <div
-                    className="h-full p-12 flex flex-col justify-center"
-                    style={{
-                        backgroundImage:
-                            'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)',
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                    }}
-                >
-                    <div className="max-w-2xl">
-                        <h2 className="text-4xl font-bold text-primary mb-6">Features</h2>
-                        <p className="text-xl text-secondary">
-                            Event timeline, Console logs, Network monitoring and more
-                        </p>
-                    </div>
-                </div>
-            ),
+
+            //     // Simplified version for thumbnails (avoid FeaturesTab which has ImageSlider)
+            //     thumbnailContent: (
+            //         <div
+            //             className="h-full p-12 flex flex-col justify-center"
+            //             style={{
+            //                 backgroundImage:
+            //                     'url(https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png)',
+            //                 backgroundSize: 'cover',
+            //                 backgroundPosition: 'center',
+            //                 backgroundRepeat: 'no-repeat',
+            //             }}
+            //         >
+            //             <div className="max-w-2xl">
+            //                 <h2 className="text-4xl font-bold text-primary mb-6">Features</h2>
+            //                 <p className="text-xl text-secondary">
+            //                     Event timeline, Console logs, Network monitoring and more
+            //                 </p>
+            //             </div>
+            //         </div>
+            //     ),
         },
         {
             name: 'Answers',
             content: (
-                <div className="h-full p-12 flex flex-col justify-center text-center">
-                    <h2 className="text-4xl font-bold text-primary mb-6">What can I discover with session replay?</h2>
-                    <p className="text-xl text-secondary max-w-4xl mx-auto mb-8">
-                        Understand user behavior, identify friction points, and improve your product experience
-                    </p>
-                    <QuestionsAccordion />
+                <div className="h-full flex flex-col p-4">
+                    <div className="flex-0">
+                        <h2 className="text-4xl font-bold text-primary my-2 text-center">
+                            What can I discover with session replay?
+                        </h2>
+                        <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
+                            Understand user behavior, identify friction points, and improve your product experience
+                        </p>
+                    </div>
+                    <QuestionsTabs />
                 </div>
             ),
         },

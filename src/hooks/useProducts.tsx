@@ -622,24 +622,11 @@ const initialProducts = [
         ],
         questions: [
             {
-                question: "How do I understand my users' behavior in funnels?",
-                url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
-            },
-            {
-                question: 'How do I understand my user journeys?',
-                url: '/tutorials/explore-insights-session-recordings#watching-journeys-from-user-paths',
-            },
-            {
-                question: 'How can I understand what my power users are doing?',
-                url: '/tutorials/explore-insights-session-recordings#find-and-analyze-outliers-in-trend-graphs',
-            },
-            { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
-            { question: 'How do I improve my support experience?', url: '/tutorials/session-recordings-for-support' },
-            { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
-            {
                 question: 'Why are users dropping off in my funnel?',
                 url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
             },
+            { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
+            { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
             { question: 'What’s making my users angry or frustrated?', url: '/tutorials/toolbar' },
             { question: 'Which screens are loading slowly?', url: '/tutorials/performance-metrics' },
             {
@@ -650,17 +637,10 @@ const initialProducts = [
                 question: 'How do I understand sources of friction in my app?',
                 url: '/tutorials/filter-session-recordings',
             },
-            { question: 'What errors are being logged to the console?' },
-            { question: 'What warnings are being logged to the console?' },
             {
                 question: 'What is a user’s First Contentful Paint time',
                 url: '/tutorials/performance-metrics#1-first-contentful-paint',
             },
-            {
-                question: 'What is a user’s Dom Interactive time',
-                url: '/tutorials/performance-metrics#2-dom-interactive',
-            },
-            { question: 'What is a user’s Page Loaded time', url: '/tutorials/performance-metrics#3-page-loaded' },
             {
                 question: 'How do I optimize site performance?',
                 url: '/tutorials/performance-metrics#optimization-cheat-sheet',
