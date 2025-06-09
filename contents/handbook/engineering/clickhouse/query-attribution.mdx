@@ -21,6 +21,9 @@ We've managed to separate `batch_export`, `app` and `api` traffic to use separat
 users and tune the settings to not fully starve any of those use cases of capacity.
 
 Most ClickHouse queries made as a result of HTTP request to Django app contains the proper
+http_request_id, route_id and id.
+
+This allow us to do basic analysis.
 
 ## Where we want to be
 
