@@ -33,6 +33,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const HandbookTemplate = path.resolve(`src/templates/Handbook.tsx`)
 
     const DataPipeline = path.resolve(`src/templates/DataPipeline.tsx`)
+    const SdkReferenceTemplate = path.resolve(`src/templates/SdkReference.tsx`)
 
     const result = (await graphql(`
         {
@@ -323,6 +324,13 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     name
                     slug
                     type
+                }
+            }
+            allSdkReferences {
+                nodes {
+                    description
+                    name
+                    version
                 }
             }
         }
@@ -662,6 +670,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
 
     result.data.cdp.nodes.forEach((node) => {
+        console.log('creating page for', node.fields.slug)
         const { slug } = node.fields
         const { documentation } = node.frontmatter
         createPage({
@@ -742,6 +751,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             path: `/docs/cdp/${node.type}s/${node.slug}`,
             component: DataPipeline,
             context: { id: node.id, ignoreWrapper: true },
+        })
+    })
+    console.log('result.data.allSdkReference', result.data.allSdkReference)
+    result.data.allSdkReference.nodes.forEach((node) => {
+        createPage({
+            path: `/docs/references/${node.name}`,
+            component: SdkReferenceTemplate,
+            context: { id: node.id, name: node.name, description: node.description },
         })
     })
 }
