@@ -89,7 +89,7 @@ The response times listed below are targets for an initial response, and it's po
 | Scale | 24 hours  |
 | Enterprise | 8 hours | 
 
-Within Zendesk, we will further prioritize tickets based on their selected severty. If you come across a ticket that doesn't have the severity set appropriately [according to our severity level guidelines](/docs/support-options#severity-levels), then you should update the ticket with the appropriate severity level.
+Within Zendesk, we will further prioritize tickets based on their selected severity. If you come across a ticket that doesn't have the severity set appropriately [according to our severity level guidelines](/docs/support-options#severity-levels), then you should update the ticket with the appropriate severity level.
 
 Overall, we aim for users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience.
 
