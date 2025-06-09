@@ -29,26 +29,39 @@ We want to know:
  * what/who initiated the query,
  * how much resources it consumed.
 
-This will allow us to better manage the ClickHouse load
+This will allow us to better manage the ClickHouse load and understand which products
+and features require the most compute resources and how they are correlated. Especially,
+how one request to an API may end up multiple queries to ClickHouse.
+
+### Tags
+
+In python, there is a (`tag_queries`)[https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L25] helper function one may use,
+be aware that it tags **all queries** issued from within a Python thread (it uses thread local memory).
+
+Alternatively, you may consider (`tags_context`)[https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L64]
+for localized tags.
 
 Each query send to ClickHouse must have the following tags:
 
-  * org_id => organization id
-  * team_id => team id
-  * user_id => query run initiated by a user
-  * access_method => `personal_api_key` (or `app`?)
-  * product => PostHog product name
+  * team_id: ?Int64 - team id,
+  * user_id: ?Int64 - query run initiated by a user,
+  * access_method: ?String - the only value we use is: `personal_api_key`,
+  * product - **NEW** PostHog product name,
+  * org_id - **NEW** organization id - we don't have it now, but it may make analyzing data a easier,
+  * kind: ?String - detect kind of query, almost all queries have it, only 4 values seen: `["celery", "cohort_calculation", "batch_export", "request"]`,
+  * id - it used to have a id of a workload (e.g. celery job name: `posthog.tasks.calculate_cohort.calculate_cohort_ch`, or exact path of request: `/api/projects/2/insights/trend`),
+  * query: JSON - contains a query object that QueryRunner run, literally the whole query object.
 
-  * route_id => route_id in `api`
-  * workload => online / offline
-  * dashboard_id => if part of dashboard
-  * insight_id => if query is run to show insight
-  * kind => it used to have
-  * id => it used to have a id of a workload (e.g. celery job name, function calling it)
+  * route_id: ?String - route_id in `api` (e.g. `api/projects/(?P<parent_lookup_team_id>[^/.]+)/insights/trend/?$`),
+  * workload: ?String - for now only: ONLINE / OFFLINE are used, it suppose to designate whether a query is part of ONLINE workload,
+  * dashboard_id: ?Int64 - if query executes to render part of dashboard,
+  * insight_id: ?Int64 - if query is run to show insight,
+  * chargeable: ?byte - set to `1` for queries we intend to charge,
 
-  * name => you can name your query
-  * http_request_id => HTTP request that initiated a query
-  * http_correlation_id => correlation id from HTTP request
+  * name: ?String - you can name your queries,
+  * http_request_id: ?String - HTTP request that initiated a query, set only if is a proper UUID.
+
+Types were reverse engineered from our ClickHouse `system.query_log.log_comment` column.
 
 ### Current state of log_comment
 
@@ -102,16 +115,95 @@ We use at least 42 unique tags:
 
 #### Queries to dive into `log_comment`
 
+**Get tag frequency**
+
 ```SQL
 SELECT
     arrayJoin(JSONExtractKeys(log_comment)) AS tag_key,
     count() AS occurrences
 FROM clusterAllReplicas(posthog, system.query_log)
 WHERE 
-    event_date >= '2025-06-06' AND event_time >= '2025-06-06 00:00:00'
+    event_date = '2025-06-06'
     AND is_initial_query
     AND type = 'QueryStart'
     AND log_comment != ''
 GROUP BY tag_key
 ORDER BY occurrences DESC;
+```
+
+**Get tag type, number of occurrences and values**
+
+```SQL
+SELECT
+    {{tag_name}} AS tag_name,
+    JSONType(log_comment, {{tag_name}}) AS value_type,
+    count() AS occurrences,
+    count(distinct JSONExtractRaw(log_comment, {{tag_name}})) AS distinct_values,
+    groupUniqArray(20)(JSONExtractRaw(log_comment, {{tag_name}})) AS example_value -- Get an example
+FROM clusterAllReplicas(posthog, system.query_log)
+WHERE 
+    event_date >= '2025-06-06'
+    AND is_initial_query
+    AND type = 'QueryStart'
+    AND JSONHas(log_comment, {{tag_name}})
+GROUP BY value_type
+ORDER BY occurrences DESC;
+```
+
+#### Example values of `query` tag
+
+```
+{
+  "kind": "DataVisualizationNode",
+  "source": {
+    "kind": "HogQLQuery",
+    "query": "SELECT\n round(avg($is_bounce), 1) AS bounce_rate\nFROM\n sessions\n INNER JOIN events ON sessions.id = events.properties.$session_id\nWHERE\n event = '$pageview'\n AND properties.$current_url LIKE '%forum.%'\n",
+    "variables": {}
+  },
+  "display": "BoldNumber",
+  "chartSettings": {
+    "yAxis": [
+      {
+        "column": "bounce_rate",
+        "settings": {
+          "display": {
+            "color": "#1d4aff",
+            "label": "",
+            "trendLine": false,
+            "displayType": "auto",
+            "yAxisPosition": "left"
+          },
+          "formatting": {
+            "style": "percent",
+            "prefix": "",
+            "suffix": ""
+          }
+        }
+      }
+    ],
+    "seriesBreakdownColumn": null
+  },
+  "tableSettings": {
+    "columns": [
+      {
+        "column": "bounce_rate",
+        "settings": {
+          "display": {
+            "color": "#1d4aff",
+            "label": "",
+            "trendLine": false,
+            "displayType": "auto",
+            "yAxisPosition": "left"
+          },
+          "formatting": {
+            "style": "percent",
+            "prefix": "",
+            "suffix": ""
+          }
+        }
+      }
+    ],
+    "conditionalFormatting": []
+  }
+}
 ```
