@@ -1,0 +1,7 @@
+By default, PostHog will only collect the `name`, `id`, and `class` attributes from `<input>` tags.
+
+If there are other HTML elements that you don't want to be captured, you can add the `ph-no-capture` class to the element.
+
+```js-web
+<button class='ph-no-capture'>Sensitive information here</button>
+``` 

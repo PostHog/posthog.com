@@ -1,7 +1,34 @@
-import React, { useEffect, useState } from 'react'
+import React, { ReactNode, useEffect, useState } from 'react'
 import { Tab as HeadlessTab } from '@headlessui/react'
 import { classNames } from 'lib/utils'
 import Slider from 'components/Slider'
+import { MDXProvider } from '@mdx-js/react'
+import { shortcodes } from '../../mdxGlobalComponents'
+import { BorderWrapper } from 'components/BorderWrapper'
+import { Caption } from 'components/Caption'
+import { FloatedImage } from 'components/FloatedImage'
+import { ImageBlock } from 'components/ImageBlock'
+import { InlineCode } from 'components/InlineCode'
+import { Blockquote } from 'components/BlockQuote'
+import { MdxCodeBlock } from 'components/CodeBlock'
+import { ZoomImage } from 'components/ZoomImage'
+import Link from 'components/Link'
+
+const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+
+const components = {
+    ...shortcodes,
+    BorderWrapper,
+    Caption,
+    ImageBlock,
+    FloatedImage,
+    a: A,
+    inlineCode: InlineCode,
+    blockquote: Blockquote,
+    pre: MdxCodeBlock,
+    MultiLanguage: MdxCodeBlock,
+    img: ZoomImage,
+}
 
 export const Tab: React.FC & {
     Group: typeof HeadlessTab.Group
