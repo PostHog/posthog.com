@@ -243,7 +243,98 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     )
 }
 
+// Function to generate markdown files for LLMs
+const generateMarkdownFiles = async (docs) => {
+    console.log('Generating markdown files for LLMs...')
+
+    // Filter for the specific docs we want to generate
+    const targetPaths = ['/docs/product-analytics/installation', '/docs/product-analytics/capture-events']
+
+    const filteredDocs = docs.filter((doc) => targetPaths.includes(doc.fields.slug))
+
+    console.log(`Found ${filteredDocs.length} docs to generate markdown for`)
+
+    for (const doc of filteredDocs) {
+        try {
+            const { slug } = doc.fields
+            const { title, ...otherFrontmatter } = doc.frontmatter
+            const rawBody = doc.rawBody || doc.body
+
+            // Create the markdown content
+            let markdownContent = '# Generated for LLMs\n\n'
+
+            // Add the content
+            if (rawBody) {
+                // Process internal links to point to .md equivalents
+                let processedBody = rawBody.replace(/\[([^\]]+)\]\(\/docs\/([^)]+)\)/g, (match, text, path) => {
+                    // Only convert if the path doesn't already end with .md
+                    if (!path.endsWith('.md')) {
+                        return `[${text}](/docs/${path}.md)`
+                    }
+                    return match
+                })
+
+                markdownContent += processedBody
+            }
+
+            // Create the directory structure
+            const publicPath = path.resolve(__dirname, '../public')
+            const filePath = path.join(publicPath, `${slug}.md`)
+            const dirPath = path.dirname(filePath)
+
+            // Ensure directory exists
+            if (!fs.existsSync(dirPath)) {
+                fs.mkdirSync(dirPath, { recursive: true })
+            }
+
+            // Write the file
+            fs.writeFileSync(filePath, markdownContent, 'utf8')
+            console.log(`Generated: ${slug}.md`)
+        } catch (error) {
+            console.error(`Error generating markdown for ${doc.fields.slug}:`, error)
+        }
+    }
+}
+
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+    // Always generate markdown files for LLMs, regardless of environment
+    console.log('Generating markdown files for LLMs...')
+    const markdownQuery = await graphql(`
+        query {
+            docsForMarkdown: allMdx(
+                filter: {
+                    fields: {
+                        slug: { in: ["/docs/product-analytics/installation", "/docs/product-analytics/capture-events"] }
+                    }
+                }
+            ) {
+                nodes {
+                    rawBody
+                    body
+                    fields {
+                        slug
+                    }
+                    frontmatter {
+                        title
+                        description
+                        showTitle
+                        hideAnchor
+                        hideLastUpdated
+                        availability {
+                            free
+                            selfServe
+                            enterprise
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    if (markdownQuery.data?.docsForMarkdown?.nodes) {
+        await generateMarkdownFiles(markdownQuery.data.docsForMarkdown.nodes)
+    }
+
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
         return
@@ -339,6 +430,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
             docsHandbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook|^/docs/" } } }) {
                 nodes {
+                    rawBody
+                    body
                     fields {
                         slug
                         contributors {
@@ -348,6 +441,15 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         title
+                        description
+                        showTitle
+                        hideAnchor
+                        hideLastUpdated
+                        availability {
+                            free
+                            selfServe
+                            enterprise
+                        }
                     }
                     parent {
                         ... on File {
