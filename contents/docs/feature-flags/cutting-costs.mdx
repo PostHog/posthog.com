@@ -52,7 +52,7 @@ This ensures that your application continues to function even when feature flag 
 
 ## Audit environments to catch unexpected `/decide` calls
 
-Forgotten environments, like old demos, test apps, or staging servers, can silently rack up costs. Even if they don’t send events, they may still be polling and making `/decide` calls for feature flags, session replay, and surveys.
+Forgotten environments, like old demos, test apps, or staging servers, and other PostHog SDKs, can silently rack up costs. Even if they don’t send events, they may still be polling and making `/decide` calls for feature flags, session replay, and surveys.
 
 These environments often get overlooked, especially if they're not part of your main deployment flow.
 
