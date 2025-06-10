@@ -1,8 +1,8 @@
 There are 3 steps to implement feature flags using the PostHog API:
 
-### Step 1: Evaluate the feature flag value using `decide`
+### Step 1: Evaluate the feature flag value using `flags`
 
-`decide` is the endpoint used to determine if a given flag is enabled for a certain user or not.
+`flags` is the endpoint used to determine if a given flag is enabled for a certain user or not.
 
 #### Request
 
@@ -15,14 +15,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     "groups" : {
         "group_type": "group_id"
     }
-}' "<ph_client_api_host>/decide?v=4"
+}' "<ph_client_api_host>/flags?v=2"
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/decide?v=4"
+url = "<ph_client_api_host>/flags?v=2"
 headers = {
     "Content-Type": "application/json"
 }
@@ -40,8 +40,8 @@ print(response.json())
 ```node
 import fetch from "node-fetch";
 
-async function sendDecideRequest() {
-    const url = "<ph_client_api_host>/decide?v=4";
+async function sendFlagsRequest() {
+    const url = "<ph_client_api_host>/flags?v=2";
     const headers = {
         "Content-Type": "application/json",
     };
@@ -62,7 +62,7 @@ async function sendDecideRequest() {
     console.log(data);
 }
 
-sendDecideRequest();
+sendFlagsRequest();
 ```
 
 </MultiLanguage>
@@ -71,7 +71,7 @@ sendDecideRequest();
 
 #### Response
 
-When called, `decide` returns the flag values and payloads, along with more information.
+When called, `flags` returns the flag values and payloads, along with more information.
 
 ```json
 {
@@ -137,7 +137,7 @@ When called, `decide` returns the flag values and payloads, along with more info
 
 #### Quota limiting
 
-If your organization exceeds its feature flag quota, the `/decide` endpoint will return a modified response with `quotaLimited`:
+If your organization exceeds its feature flag quota, the `/flags` endpoint will return a modified response with `quotaLimited`:
 
 ```json
 {

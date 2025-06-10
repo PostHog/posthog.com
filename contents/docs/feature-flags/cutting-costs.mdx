@@ -33,7 +33,7 @@ The drawback of this approach is that whenever you make an update to a feature f
 
 ## Quota limiting
 
-Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for feature flags. When a project exceeds this limit, the `/decide` endpoint will return a `quota_limited` response like this:
+Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for feature flags. When a project exceeds this limit, the `/flags` endpoint will return a `quota_limited` response like this:
 
 ```json
 {

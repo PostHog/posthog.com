@@ -2002,8 +2002,8 @@ export const docsMenu = {
                             url: '/docs/api/capture',
                         },
                         {
-                            name: 'Decide',
-                            url: '/docs/api/decide',
+                            name: 'Flags',
+                            url: '/docs/api/flags',
                         },
                         {
                             name: 'Queries',
