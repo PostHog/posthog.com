@@ -1,30 +1,12 @@
 import React, { useRef } from 'react'
-import {
-    IconGraph,
-    IconPieChart,
-    IconDocument,
-    IconQuestion,
-    IconMap,
-    IconPiggyBank,
-    IconStack,
-    IconVideoCamera,
-    IconRewindPlay,
-} from '@posthog/icons'
+import { IconRewindPlay } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
 import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons'
 import ZoomHover from 'components/ZoomHover'
 import Screenshot from 'components/Screenshot'
-
-interface AppItem {
-    label: string
-    Icon: React.ComponentType<any> | string | React.ReactElement
-    color?: string
-    url: string
-    type?: string
-    className?: string
-}
+import { AppLink, AppItem } from 'components/OSIcons/AppIcon'
 
 interface Product {
     name: string
@@ -104,45 +86,6 @@ const apps: AppItem[] = [
         url: '/talk-to-a-human',
     },
 ]
-
-const AppLink = ({ Icon, type, color, label, url, className }: AppItem) => {
-    const ref = useRef<HTMLSpanElement>(null)
-
-    const renderIcon = () => {
-        if (typeof Icon === 'string') {
-            return <IconImage url={Icon} className={`text-${color} ${className}`} />
-        }
-
-        if (React.isValidElement(Icon)) {
-            return React.cloneElement(Icon as React.ReactElement<any>, {
-                className: `text-${color} ${className}`,
-            })
-        }
-
-        // Icon is a ComponentType
-        const IconComponent = Icon as React.ComponentType<any>
-        return <IconComponent className={`text-${color} ${className}`} />
-    }
-
-    return (
-        <figure ref={ref}>
-            <Link
-                to={url}
-                state={{ newWindow: true }}
-                className="group inline-flex flex-col justify-center items-center w-auto max-w-40 text-center select-none space-y-1"
-            >
-                {renderIcon()}
-                <figcaption className="text-sm font-medium leading-tight">
-                    <span className="inline-block bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] dark:bg-[rgba(1,1,1,0.75)] dark:group-hover:bg-[rgba(1,1,1,1)] rounded-[2px] px-0.5 py-0 leading-tight">
-                        <span className="skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px]">
-                            {label}
-                        </span>
-                    </span>
-                </figcaption>
-            </Link>
-        </figure>
-    )
-}
 
 export default function Desktop() {
     const { taskbarHeight } = useApp()

@@ -1,5 +1,7 @@
 import React from 'react'
 import { BaseIcon, type IconProps } from './Icons'
+import { Link } from 'gatsby'
+import { useRef } from 'react'
 
 // App icon mapping for different skins
 type AppIconVariants = {
@@ -125,3 +127,64 @@ export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
 }
 
 export type { AppIconName }
+
+export interface AppItem {
+    Icon: React.ElementType | React.ReactElement | string
+    type?: string
+    color?: string
+    background?: string
+    label: string
+    url: string
+    className?: string
+    extension?: string
+    children?: React.ReactNode
+}
+
+export const AppLink = ({ Icon, type, color, background, label, url, className, extension, children }: AppItem) => {
+    const ref = useRef<HTMLSpanElement>(null)
+
+    const renderIcon = () => {
+        if (typeof Icon === 'string') {
+            return <IconImage url={Icon} className={`text-${color} ${className}`} />
+        }
+
+        if (React.isValidElement(Icon)) {
+            return React.cloneElement(Icon as React.ReactElement<any>, {
+                className: `text-${color} ${className}`,
+            })
+        }
+
+        // Icon is a ComponentType
+        const IconComponent = Icon as React.ComponentType<any>
+        return <IconComponent className={`text-${color} ${className}`} />
+    }
+
+    return (
+        <figure ref={ref}>
+            <Link
+                to={url}
+                state={{ newWindow: true }}
+                className="group inline-flex flex-col justify-center items-center w-auto max-w-28 text-center select-none space-y-1 text-primary"
+            >
+                <span className="relative">
+                    {renderIcon()}
+                    {children}
+                </span>
+                <figcaption className="text-sm font-medium leading-tight">
+                    <span
+                        className={`inline-block ${
+                            background
+                                ? background
+                                : 'bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] dark:bg-[rgba(1,1,1,0.75)] dark:group-hover:bg-[rgba(1,1,1,1)]'
+                        }  rounded-[2px] px-0.5 py-0 leading-tight`}
+                    >
+                        <span className="skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px]">
+                            {label}
+                            {extension && <span className="opacity-75">.{extension}</span>}
+                        </span>
+                    </span>
+                </figcaption>
+            </Link>
+        </figure>
+    )
+}

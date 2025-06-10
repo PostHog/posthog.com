@@ -9,8 +9,10 @@ import SEO from 'components/seo'
 import { productMenu } from '../../navs'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
-import { AppIcon } from 'components/OSIcons'
+import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
+import ZoomHover from 'components/ZoomHover'
+
 export default function Products(): JSX.Element {
     return (
         <>
@@ -35,7 +37,7 @@ export default function Products(): JSX.Element {
                         content: (
                             <>
                                 <p className="text-sm mb-2">
-                                    <strong>We have 10+ products today</strong> – but even if we don’t have it yet, we
+                                    <strong>We have 10+ products today</strong> – but even if we don't have it yet, we
                                     will eventually. We are going to build every piece of SaaS you need to make your
                                     product successful.
                                 </p>
@@ -123,20 +125,6 @@ export default function Products(): JSX.Element {
                     },
                 ]}
             >
-                <Link
-                    to="/session-replay"
-                    className="inline-flex flex-col items-center w-32 justify-center text-primary hover:text-primary"
-                    state={{ newWindow: true }}
-                >
-                    <span className="relative inline-block -mt-1 size-16">
-                        <AppIcon name="presentation" className="size-16" />
-                        <Icons.IconRewindPlay className="-mt-1 size-5 text-yellow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
-                    </span>
-                    <div className="text-center font-medium text-sm leading-tight">
-                        Session replay<span className="opacity-75">.pslides</span>
-                    </div>
-                </Link>
-
                 {(() => {
                     // Group products by category
                     const categoryOrder = ['analytics', 'behavior', 'features', 'tools']
@@ -176,28 +164,28 @@ export default function Products(): JSX.Element {
                                                     </span>
                                                 ),
                                                 content: (
-                                                    <div className="grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-4 gap-2 relative">
+                                                    <div className="pl-1 grid grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-6 gap-2 relative [&>div]:mx-auto [&_figure]:text-center">
                                                         {products.map((product) => (
-                                                            <OSButton
-                                                                key={product.slug}
-                                                                variant="underline"
-                                                                asLink
-                                                                align="left"
-                                                                width="full"
-                                                                size="xl"
-                                                                icon={React.createElement(
-                                                                    Icons[product.icon as keyof typeof Icons],
-                                                                    { className: `text-${product.color}` }
-                                                                )}
-                                                                to={`/${product.slug}`}
-                                                                className="text-primary hover:text-primary flex-col"
-                                                                state={{ newWindow: true }}
-                                                            >
-                                                                <span>
-                                                                    {product.name}
-                                                                    <span className="opacity-75">.pslides</span>
-                                                                </span>
-                                                            </OSButton>
+                                                            <ZoomHover key={product.slug}>
+                                                                <AppLink
+                                                                    label={product.name}
+                                                                    url={product.url}
+                                                                    Icon={
+                                                                        <AppIcon
+                                                                            name="presentation"
+                                                                            className={`text-${product.color}`}
+                                                                        />
+                                                                    }
+                                                                    background="bg-primary"
+                                                                >
+                                                                    {React.createElement(
+                                                                        Icons[product.icon as keyof typeof Icons],
+                                                                        {
+                                                                            className: `size-3.5 text-${product.color} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -mt-0.5`,
+                                                                        }
+                                                                    )}
+                                                                </AppLink>
+                                                            </ZoomHover>
                                                         ))}
                                                     </div>
                                                 ),
