@@ -30,6 +30,7 @@ import TooltipDemo from 'components/RadixUI/Tooltip'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
+import SearchProvider from 'components/Editor/SearchProvider'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -368,210 +369,220 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
     }
 
     return (
-        <div className="@container w-full h-full flex flex-col">
-            {/* <DebugContainerQuery /> */}
-            {/* First row - Header */}
-            <HeaderBar
-                isNavVisible={isNavVisible}
-                isTocVisible={isTocVisible}
-                onToggleNav={toggleNav}
-                onToggleToc={toggleToc}
-                showHome
-                showBack
-                showForward
-                showSearch
-                showBookmark
-                showToc
-                showSidebar={showSidebar}
-            />
-            {/* Second row - Main Content */}
-            <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
-                <LeftSidebar>{leftSidebar || <Menu />}</LeftSidebar>
-                <ScrollArea
-                    dataScheme="primary"
-                    className={`bg-primary border border-primary flex-grow rounded ${
-                        selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
-                            ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
-                            : ''
-                    }`}
-                    style={
-                        selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
-                            ? {
-                                  backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
-                                  backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
-                                  backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
-                                  backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
-                              }
-                            : undefined
-                    }
-                >
-                    <div className="relative">
-                        <div
-                            ref={contentRef}
-                            className={`relative p-4 mx-auto transition-all ${
-                                fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-xl'
-                            }`}
-                        >
-                            {body.featuredImage && (
-                                <div className="mb-4">
-                                    <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
-                                </div>
-                            )}
-                            {title && <h2>{title}</h2>}
-                            {body.contributors && <ContributorsSmall contributors={body.contributors} />}
+        <SearchProvider>
+            <div className="@container w-full h-full flex flex-col">
+                {/* <DebugContainerQuery /> */}
+                {/* First row - Header */}
+                <HeaderBar
+                    isNavVisible={isNavVisible}
+                    isTocVisible={isTocVisible}
+                    onToggleNav={toggleNav}
+                    onToggleToc={toggleToc}
+                    showHome
+                    showBack
+                    showForward
+                    showSearch
+                    showBookmark
+                    showToc
+                    showSidebar={showSidebar}
+                    searchContentRef={contentRef}
+                />
+                {/* Second row - Main Content */}
+                <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
+                    <LeftSidebar>{leftSidebar || <Menu />}</LeftSidebar>
+                    <ScrollArea
+                        dataScheme="primary"
+                        className={`bg-primary border border-primary flex-grow rounded ${
+                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                                ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
+                                : ''
+                        }`}
+                        style={
+                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                                ? {
+                                      backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
+                                      backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
+                                      backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
+                                      backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
+                                  }
+                                : undefined
+                        }
+                    >
+                        <div className="relative">
                             <div
-                                data-scheme="secondary"
-                                className="@4xl:hidden p-4 mb-4 bg-primary rounded border border-primary"
+                                ref={contentRef}
+                                className={`relative p-4 mx-auto transition-all ${
+                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-xl'
+                                }`}
                             >
-                                inline table of contents
-                            </div>
-                            {body.type === 'mdx' ? (
-                                <div className={'article-content'}>
-                                    <MDXProvider components={mdxComponents}>
-                                        <MDXRenderer>{body.content}</MDXRenderer>
-                                    </MDXProvider>
+                                {body.featuredImage && (
+                                    <div className="mb-4">
+                                        <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
+                                    </div>
+                                )}
+                                {title && <h2>{title}</h2>}
+                                {body.contributors && <ContributorsSmall contributors={body.contributors} />}
+                                <div
+                                    data-scheme="secondary"
+                                    className="@4xl:hidden p-4 mb-4 bg-primary rounded border border-primary"
+                                >
+                                    inline table of contents
                                 </div>
-                            ) : (
-                                children
-                            )}
+                                {body.type === 'mdx' ? (
+                                    <div className={'article-content'}>
+                                        <MDXProvider components={mdxComponents}>
+                                            <MDXRenderer>{body.content}</MDXRenderer>
+                                        </MDXProvider>
+                                    </div>
+                                ) : (
+                                    children
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </ScrollArea>
-                <AnimatePresence>
-                    {showSidebar && isTocVisible && (
-                        <motion.div
-                            id="toc"
-                            className="hidden @4xl:block flex-shrink-0 overflow-hidden"
-                            initial={{ width: '300px' }}
-                            animate={{
-                                width: '300px',
-                                transition: { duration: 0.2 },
-                            }}
-                            exit={{
-                                width: 0,
-                                transition: { duration: 0.2, delay: 0.05 },
-                            }}
-                        >
+                    </ScrollArea>
+                    <AnimatePresence>
+                        {showSidebar && isTocVisible && (
                             <motion.div
-                                className="h-full"
-                                initial={{ opacity: 1 }}
+                                id="toc"
+                                className="hidden @4xl:block flex-shrink-0 overflow-hidden"
+                                initial={{ width: '300px' }}
                                 animate={{
-                                    opacity: 1,
-                                    transition: { duration: 0.05, delay: 0.2 },
+                                    width: '300px',
+                                    transition: { duration: 0.2 },
                                 }}
                                 exit={{
-                                    opacity: 0,
-                                    transition: { duration: 0.05 },
+                                    width: 0,
+                                    transition: { duration: 0.2, delay: 0.05 },
                                 }}
                             >
-                                <ScrollArea className="px-4" fadeOverflow>
-                                    {tableOfContents && tableOfContents?.length > 0 && (
-                                        <ScrollSpyProvider>
-                                            <div>
-                                                <h4 className="font-semibold text-muted m-0 mb-1 text-sm">Jump to:</h4>
-                                                <ul className="list-none m-0 p-0 flex flex-col">
-                                                    {tableOfContents.map((navItem) => {
-                                                        return (
-                                                            <li className="relative leading-none m-0" key={navItem.url}>
-                                                                <ElementScrollLink
-                                                                    id={navItem.url}
-                                                                    label={navItem.value}
-                                                                    className={`text-sm text-muted hover:text-primary py-1 block relative active:top-px active:scale-[.99]`}
-                                                                    element={contentRef}
-                                                                    style={{
-                                                                        paddingLeft: `${navItem.depth || 0}rem`,
-                                                                    }}
-                                                                />
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                            </div>
-                                        </ScrollSpyProvider>
-                                    )}
-                                </ScrollArea>
-                            </motion.div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
-
-            {/* Third row - Footer */}
-            <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
-                <motion.div
-                    className={`flex-shrink-0 transition-all min-w-0 ${isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'}`}
-                >
-                    {/* this space intentionally left blank */}
-                </motion.div>
-                <div className="flex-grow flex justify-between items-center">
-                    <div>Questions?</div>
-                    {body?.type === 'mdx' && (
-                        <div>
-                            <AppOptionsButton
-                                lineHeightMultiplier={lineHeightMultiplier}
-                                handleLineHeightChange={handleLineHeightChange}
-                            />
-                        </div>
-                    )}
-                </div>
-                <motion.div
-                    className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
-                        showSidebar && isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
-                    }`}
-                    animate={showSidebar && isTocVisible ? 'open' : 'closed'}
-                >
-                    {filePath && (
-                        <OSButton
-                            asLink
-                            to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                            variant="ghost"
-                            icon={<IconPencil />}
-                        />
-                    )}
-
-                    {commits?.length && commits.length > 0 && (
-                        <Popover
-                            trigger={
-                                <span>
-                                    <OSButton variant="ghost" icon={<IconClockRewind />} />
-                                </span>
-                            }
-                            title="Edit history"
-                            dataScheme="secondary"
-                            contentClassName="w-[260px]"
-                        >
-                            <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
-                                {commits.map((commit) => (
-                                    <li key={commit.url} className="flex gap-2 justify-between items-center">
-                                        <Link
-                                            to={commit.author.html_url}
-                                            className="flex items-center gap-2"
-                                            externalNoIcon
-                                        >
-                                            <div>
-                                                <div className="size-7 bg-accent rounded-full relative">
-                                                    <img
-                                                        src={commit.author.avatar_url}
-                                                        alt={commit.author.login}
-                                                        className="size-full rounded-full object-cover"
-                                                    />
+                                <motion.div
+                                    className="h-full"
+                                    initial={{ opacity: 1 }}
+                                    animate={{
+                                        opacity: 1,
+                                        transition: { duration: 0.05, delay: 0.2 },
+                                    }}
+                                    exit={{
+                                        opacity: 0,
+                                        transition: { duration: 0.05 },
+                                    }}
+                                >
+                                    <ScrollArea className="px-4" fadeOverflow>
+                                        {tableOfContents && tableOfContents?.length > 0 && (
+                                            <ScrollSpyProvider>
+                                                <div>
+                                                    <h4 className="font-semibold text-muted m-0 mb-1 text-sm">
+                                                        Jump to:
+                                                    </h4>
+                                                    <ul className="list-none m-0 p-0 flex flex-col">
+                                                        {tableOfContents.map((navItem) => {
+                                                            return (
+                                                                <li
+                                                                    className="relative leading-none m-0"
+                                                                    key={navItem.url}
+                                                                >
+                                                                    <ElementScrollLink
+                                                                        id={navItem.url}
+                                                                        label={navItem.value}
+                                                                        className={`text-sm text-muted hover:text-primary py-1 block relative active:top-px active:scale-[.99]`}
+                                                                        element={contentRef}
+                                                                        style={{
+                                                                            paddingLeft: `${navItem.depth || 0}rem`,
+                                                                        }}
+                                                                    />
+                                                                </li>
+                                                            )
+                                                        })}
+                                                    </ul>
                                                 </div>
-                                            </div>
-                                            <p className="text-sm m-0">{commit.author.login}</p>
-                                        </Link>
-                                        <div className="flex items-center gap-2">
-                                            <p className="text-xs opacity-60 m-0">{dayjs(commit.date).fromNow()}</p>
-                                            <Link to={commit.url} externalNoIcon>
-                                                <IconPullRequest className="size-4" />
+                                            </ScrollSpyProvider>
+                                        )}
+                                    </ScrollArea>
+                                </motion.div>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+
+                {/* Third row - Footer */}
+                <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
+                    <motion.div
+                        className={`flex-shrink-0 transition-all min-w-0 ${
+                            isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                        }`}
+                    >
+                        {/* this space intentionally left blank */}
+                    </motion.div>
+                    <div className="flex-grow flex justify-between items-center">
+                        <div>Questions?</div>
+                        {body?.type === 'mdx' && (
+                            <div>
+                                <AppOptionsButton
+                                    lineHeightMultiplier={lineHeightMultiplier}
+                                    handleLineHeightChange={handleLineHeightChange}
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <motion.div
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
+                            showSidebar && isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                        }`}
+                        animate={showSidebar && isTocVisible ? 'open' : 'closed'}
+                    >
+                        {filePath && (
+                            <OSButton
+                                asLink
+                                to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
+                                variant="ghost"
+                                icon={<IconPencil />}
+                            />
+                        )}
+
+                        {commits?.length && commits.length > 0 && (
+                            <Popover
+                                trigger={
+                                    <span>
+                                        <OSButton variant="ghost" icon={<IconClockRewind />} />
+                                    </span>
+                                }
+                                title="Edit history"
+                                dataScheme="secondary"
+                                contentClassName="w-[260px]"
+                            >
+                                <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
+                                    {commits.map((commit) => (
+                                        <li key={commit.url} className="flex gap-2 justify-between items-center">
+                                            <Link
+                                                to={commit.author.html_url}
+                                                className="flex items-center gap-2"
+                                                externalNoIcon
+                                            >
+                                                <div>
+                                                    <div className="size-7 bg-accent rounded-full relative">
+                                                        <img
+                                                            src={commit.author.avatar_url}
+                                                            alt={commit.author.login}
+                                                            className="size-full rounded-full object-cover"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <p className="text-sm m-0">{commit.author.login}</p>
                                             </Link>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </Popover>
-                    )}
-                </motion.div>
+                                            <div className="flex items-center gap-2">
+                                                <p className="text-xs opacity-60 m-0">{dayjs(commit.date).fromNow()}</p>
+                                                <Link to={commit.url} externalNoIcon>
+                                                    <IconPullRequest className="size-4" />
+                                                </Link>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </Popover>
+                        )}
+                    </motion.div>
+                </div>
             </div>
-        </div>
+        </SearchProvider>
     )
 }

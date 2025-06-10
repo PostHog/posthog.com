@@ -8,10 +8,11 @@ import debounce from 'lodash/debounce'
 interface SearchBarProps {
     visible: boolean
     onClose: () => void
-    contentRef: React.RefObject<HTMLDivElement>
+    contentRef: React.RefObject<HTMLElement>
+    className?: string
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose, contentRef }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose, contentRef, className }) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
     const markedRef = useRef(null)
@@ -101,7 +102,9 @@ export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose, contentR
     if (!visible) return null
 
     return (
-        <div className="-top-px right-8 absolute bg-accent w-64 p-1.5 rounded-b border border-primary border-t-0 z-10 flex items-center gap-1">
+        <div
+            className={`absolute bg-accent w-64 p-1.5 rounded-b border border-primary border-t-0 z-10 flex items-center gap-1 ${className}`}
+        >
             <input
                 placeholder="Search this page..."
                 className="w-full p-1 rounded border border-input text-primary text-sm"

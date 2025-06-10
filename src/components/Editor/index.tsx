@@ -297,7 +297,12 @@ export function Editor({
                         data-scheme="primary"
                         className="@container flex-1 bg-primary relative h-full"
                     >
-                        <SearchBar visible={showSearch} onClose={closeSearch} contentRef={searchContentRef} />
+                        <SearchBar
+                            visible={showSearch}
+                            onClose={closeSearch}
+                            contentRef={searchContentRef}
+                            className="-top-px right-8"
+                        />
                         {showFilters && availableFilters && availableFilters.length > 0 && (
                             <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark flex gap-1">
                                 {availableFilters?.map((filter, index) => {
