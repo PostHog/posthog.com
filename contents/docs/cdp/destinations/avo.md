@@ -15,7 +15,7 @@ You'll also need access to the relevant Avo account.
 ## Installation
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=avo) tab.
 3. Search for 'Avo' and click **+ Create**.
 4. Add your Avo access token at the configuration step.
 5. Press **Create & Enable** and watch your 'Events' list get populated in Avo!
