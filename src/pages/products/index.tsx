@@ -26,104 +26,108 @@ export default function Products(): JSX.Element {
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
-                accentImage={<CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
-                    alt="Screenshot of PostHog Product Analytics"
-                    className="w-full"
-                    placeholder="none"
-                />}
+                accentImage={
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
+                        alt="Screenshot of PostHog Product Analytics"
+                        className="w-full"
+                        placeholder="none"
+                    />
+                }
                 sidebarContent={[
                     {
-                        title: "About PostHog",
-                        content: <>
-                            <p className="text-sm mb-2">
-                                <strong>We have 10+ products today</strong> – but even if we don’t have it yet, we will
-                                eventually. We are going to build every piece of SaaS you need to make your product
-                                successful.
-                            </p>
-                            <p className="text-sm mb-2">
-                                Why picking PostHog is a no-brainer?
-                            </p>
-                            <p className="text-sm mb-0">
+                        title: 'About PostHog',
+                        content: (
+                            <>
+                                <p className="text-sm mb-2">
+                                    <strong>We have 10+ products today</strong> – but even if we don’t have it yet, we
+                                    will eventually. We are going to build every piece of SaaS you need to make your
+                                    product successful.
+                                </p>
+                                <p className="text-sm mb-2">Why picking PostHog is a no-brainer?</p>
+                                <p className="text-sm mb-0">
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="md"
+                                        to="/why"
+                                        icon={<Icons.IconArrowRight className="text-salmon" />}
+                                        iconPosition="right"
+                                        className="font-semibold !px-0"
+                                    >
+                                        Read about it
+                                    </OSButton>
+                                </p>
+                            </>
+                        ),
+                    },
+                    {
+                        title: 'Product OS',
+                        content: (
+                            <>
+                                <p className="text-sm mb-2">
+                                    Build and scale your product with our complete open source product operating system.
+                                </p>
+                                <p className="text-sm mb-2">
+                                    All our products are built on it, and it offers many features available to all of
+                                    our products, like:
+                                </p>
+                                <ul className="pl-4 mb-4 [&_li]:text-sm">
+                                    <li>Autocapture</li>
+                                    <li>Webhooks</li>
+                                    <li>Reverse proxy</li>
+                                    <li>API</li>
+                                    <li>SQL access</li>
+                                </ul>
                                 <OSButton
                                     variant="underline"
                                     asLink
                                     align="left"
                                     width="full"
                                     size="md"
-                                    to="/why"
-                                    icon={<Icons.IconArrowRight className="text-salmon" />}
-                                    iconPosition="right"
-                                    className="font-semibold !px-0"
+                                    to="/product-os"
+                                    icon={<Icons.IconStack className="text-salmon" />}
                                 >
-                                    Read about it
+                                    Learn about Product OS
                                 </OSButton>
-                            </p>
-
-                        </>
+                            </>
+                        ),
                     },
                     {
-                        title: "Product OS",
-                        content: <>
-                            <p className="text-sm mb-2">
-                                Build and scale your product with our complete open source product operating system.
-                            </p>
-                            <p className="text-sm mb-2">
-                                All our products are built on it, and it offers many features available to all of our
-                                products, like:
-                            </p>
-                            <ul className="pl-4 mb-4 [&_li]:text-sm">
-                                <li>Autocapture</li>
-                                <li>Webhooks</li>
-                                <li>Reverse proxy</li>
-                                <li>API</li>
-                                <li>SQL access</li>
-                            </ul>
-                            <OSButton
-                                variant="underline"
-                                asLink
-                                align="left"
-                                width="full"
-                                size="md"
-                                to="/product-os"
-                                icon={<Icons.IconStack className="text-salmon" />}
-                            >
-                                Learn about Product OS
-                            </OSButton>
-                        </>
+                        title: 'Add-ons',
+                        content: (
+                            <>
+                                <p className="text-sm mb-2">
+                                    Our a-la-carte model means you can pick and choose the features you need without
+                                    paying for anything you don't.
+                                </p>
+                                <p className="mb-2">
+                                    <strong>Available add-ons:</strong>
+                                </p>
+                                <ul className="pl-4 mb-4 [&_li]:text-sm">
+                                    <li>Teams features</li>
+                                    <li>Person profiles (identify users)</li>
+                                    <li>Group analytics</li>
+                                    <li>Data pipelines</li>
+                                </ul>
+                                <OSButton
+                                    variant="underline"
+                                    asLink
+                                    align="left"
+                                    width="full"
+                                    size="md"
+                                    to="/addons"
+                                    icon={<Icons.IconPuzzle className="text-purple" />}
+                                >
+                                    Learn about add-ons
+                                </OSButton>
+                            </>
+                        ),
                     },
-                    {
-                        title: "Add-ons",
-                        content: <>
-                            <p className="text-sm mb-2">
-                                Our a-la-carte model means you can pick and choose the features you need without paying
-                                for anything you don't.
-                            </p>
-                            <p className="mb-2">
-                                <strong>Available add-ons:</strong>
-                            </p>
-                            <ul className="pl-4 mb-4 [&_li]:text-sm">
-                                <li>Teams features</li>
-                                <li>Person profiles (identify users)</li>
-                                <li>Group analytics</li>
-                                <li>Data pipelines</li>
-                            </ul>
-                            <OSButton
-                                variant="underline"
-                                asLink
-                                align="left"
-                                width="full"
-                                size="md"
-                                to="/addons"
-                                icon={<Icons.IconPuzzle className="text-purple" />}
-                            >
-                                Learn about add-ons
-                            </OSButton>
-                        </>
-                    }
                 ]}
             >
-
                 <p className="max-w-lg">
                     PostHog is an entire suite of products you can use to make your software successful.
                 </p>
@@ -137,28 +141,67 @@ export default function Products(): JSX.Element {
                         <AppIcon name="presentation" className="size-16" />
                         <Icons.IconRewindPlay className="-mt-1 size-5 text-yellow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                     </span>
-                    <div className="text-center font-medium text-sm leading-tight">Session replay<span className="opacity-75">.pslides</span></div>
-
+                    <div className="text-center font-medium text-sm leading-tight">
+                        Session replay<span className="opacity-75">.pslides</span>
+                    </div>
                 </Link>
 
-                <div className="grid grid-cols-2 @sm:grid-cols-3 gap-2 p-2 relative max-w-3xl">
-                    {productMenu.children.map((product) => (
-                        <OSButton
-                            key={product.slug}
-                            variant="underline"
-                            asLink
-                            align="left"
-                            width="full"
-                            size="xl"
-                            icon={React.createElement(Icons[product.icon as keyof typeof Icons], { className: `text-${product.color}` })}
-                            to={`/${product.slug}`}
-                            className="text-primary hover:text-primary flex-col"
-                            state={{ newWindow: true }}
-                        >
-                            <span>{product.name}<span className="opacity-75">.pslides</span></span>
-                        </OSButton>
-                    ))}
-                </div>
+                {(() => {
+                    // Group products by category
+                    const categoryOrder = ['analytics', 'behavior', 'features', 'tools']
+                    const groupedProducts = productMenu.children.reduce((acc, product) => {
+                        const category = product.category || 'tools' // default to tools if no category
+                        if (!acc[category]) {
+                            acc[category] = []
+                        }
+                        acc[category].push(product)
+                        return acc
+                    }, {} as Record<string, typeof productMenu.children>)
+
+                    // Sort products alphabetically within each category
+                    Object.keys(groupedProducts).forEach((category) => {
+                        groupedProducts[category].sort((a, b) => a.name.localeCompare(b.name))
+                    })
+
+                    return (
+                        <div className="space-y-8 max-w-3xl">
+                            {categoryOrder.map((category) => {
+                                const products = groupedProducts[category]
+                                if (!products || products.length === 0) return null
+
+                                return (
+                                    <div key={category}>
+                                        <h3 className="text-xl font-semibold mb-4 capitalize">{category}</h3>
+                                        <div className="grid grid-cols-2 @sm:grid-cols-3 gap-2 p-2 relative">
+                                            {products.map((product) => (
+                                                <OSButton
+                                                    key={product.slug}
+                                                    variant="underline"
+                                                    asLink
+                                                    align="left"
+                                                    width="full"
+                                                    size="xl"
+                                                    icon={React.createElement(
+                                                        Icons[product.icon as keyof typeof Icons],
+                                                        { className: `text-${product.color}` }
+                                                    )}
+                                                    to={`/${product.slug}`}
+                                                    className="text-primary hover:text-primary flex-col"
+                                                    state={{ newWindow: true }}
+                                                >
+                                                    <span>
+                                                        {product.name}
+                                                        <span className="opacity-75">.pslides</span>
+                                                    </span>
+                                                </OSButton>
+                                            ))}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )
+                })()}
             </Explorer>
         </>
     )
