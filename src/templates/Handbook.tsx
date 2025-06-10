@@ -275,7 +275,7 @@ export default function Handbook({
         body,
         rawBody,
         frontmatter,
-        fields: { slug, contributors, appConfig, templateConfigs },
+        fields: { slug, contributors, appConfig, templateConfigs, contentWithSnippets },
     } = post
     const {
         title,
@@ -312,8 +312,7 @@ export default function Handbook({
     )
 
     const handleCopyMarkdown = () => {
-        const contentWithoutFrontmatter = rawBody.replace(/^---[\s\S]*?---\n*/m, '')
-        navigator.clipboard.writeText(contentWithoutFrontmatter)
+        navigator.clipboard.writeText(contentWithSnippets)
         setCopied(true)
         setTimeout(() => {
             setCopied(false)
@@ -546,6 +545,7 @@ export const query = graphql`
                         description
                     }
                 }
+                contentWithSnippets
             }
             frontmatter {
                 title
