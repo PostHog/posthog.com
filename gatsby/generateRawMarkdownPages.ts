@@ -1,12 +1,131 @@
 import path from 'path'
 import fs from 'fs'
 
+// Function to generate llms.txt file according to spec
+const generateLlmsTxt = (pages) => {
+    console.log('Generating llms.txt file...')
+
+    // Group pages by their first URL segment
+    const pagesBySection = {}
+
+    for (const doc of pages) {
+        const { slug } = doc.fields
+        const { title } = doc.frontmatter
+
+        // Extract section from slug with special handling for docs subsections
+        const segments = slug.split('/').filter(Boolean)
+        let section = segments.length > 0 ? segments[0] : 'root'
+
+        // Special handling for docs subsections - split by second parameter
+        if (section === 'docs' && segments.length > 1) {
+            section = `docs-${segments[1]}`
+        }
+
+        if (!pagesBySection[section]) {
+            pagesBySection[section] = []
+        }
+
+        pagesBySection[section].push({
+            title,
+            slug,
+            url: `https://posthog.com${slug}.md`,
+        })
+    }
+
+    // Sort sections with docs subsections first, then tutorials, then alphabetical
+    const sections = Object.keys(pagesBySection).sort((a, b) => {
+        // All docs sections come first
+        const aIsDocs = a.startsWith('docs')
+        const bIsDocs = b.startsWith('docs')
+
+        if (aIsDocs && !bIsDocs) return -1
+        if (!aIsDocs && bIsDocs) return 1
+
+        // Among docs sections, prioritize libraries and api first
+        if (aIsDocs && bIsDocs) {
+            if (a === 'docs-libraries') return -1
+            if (b === 'docs-libraries') return 1
+            if (a === 'docs-api') return -1
+            if (b === 'docs-api') return 1
+            return a.localeCompare(b)
+        }
+
+        // Tutorials come next
+        if (a === 'tutorials') return -1
+        if (b === 'tutorials') return 1
+
+        // Everything else alphabetically
+        return a.localeCompare(b)
+    })
+
+    // Build llms.txt content according to spec
+    let llmsTxtContent = `# PostHog
+
+> PostHog is an open-source platform for customer infrastructure. We provide developers with everything they need to build successful products –  product analytics, web analytics, feature flags, session replay, A/B testing, error tracking, surveys, LLM observability, data warehousing, and more.
+
+`
+
+    // Add sections with file lists
+    for (const section of sections) {
+        let sectionTitle = section.charAt(0).toUpperCase() + section.slice(1)
+
+        // Special handling for docs subsection titles
+        if (section.startsWith('docs-')) {
+            const subsection = section.replace('docs-', '')
+            const formattedSubsection = subsection
+                .split('-')
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(' ')
+            sectionTitle = `Docs - ${formattedSubsection}`
+        }
+
+        llmsTxtContent += `## ${sectionTitle}\n\n`
+
+        // Sort pages within section by title
+        const sortedPages = pagesBySection[section].sort((a, b) => a.title.localeCompare(b.title))
+
+        for (const page of sortedPages) {
+            llmsTxtContent += `- [${page.title}](${page.url})\n`
+            console.log('llms.txt entry...', page.title, page.url)
+        }
+
+        llmsTxtContent += '\n'
+    }
+
+    // Write llms.txt to public directory
+    const publicPath = path.resolve(__dirname, '../public')
+    const llmsTxtPath = path.join(publicPath, 'llms.txt')
+
+    // Ensure public directory exists
+    if (!fs.existsSync(publicPath)) {
+        fs.mkdirSync(publicPath, { recursive: true })
+    }
+
+    fs.writeFileSync(llmsTxtPath, llmsTxtContent, 'utf8')
+    console.log('Generated: llms.txt')
+}
+
 // Function to generate markdown files for LLMs
 export const generateRawMarkdownPages = async (pages) => {
     console.log('Generating markdown files for LLMs and llms.txt...')
 
-    // Filter out any pages with slugs containing "_snippets"
-    const filteredPages = pages.filter((doc) => !doc.fields.slug.includes('_snippets'))
+    // Filter out any pages with certain slugs
+    const excludeTerms = [
+        '_snippets',
+        '/snippets/',
+        '_includes',
+        '/thanks/',
+        '/notes/test-note',
+        '/service-error',
+        '/service-message',
+        '/services',
+        '/request-received',
+        '/application-received',
+        '/teams/',
+        '/hosthog',
+        '/startups',
+    ]
+    const filteredPages = pages.filter((doc) => !excludeTerms.some((term) => doc.fields.slug.includes(term)))
 
     console.log(`Found ${filteredPages.length} docs to generate markdown for (filtered from ${pages.length} total)`)
 
@@ -50,4 +169,7 @@ export const generateRawMarkdownPages = async (pages) => {
             console.error(`Error generating markdown for ${doc.fields.slug}:`, error)
         }
     }
+
+    // Generate llms.txt file
+    generateLlmsTxt(filteredPages)
 }
