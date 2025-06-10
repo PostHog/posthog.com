@@ -6,22 +6,15 @@ A guideline for making the ClickHouse queries attribute correctly.
 
 ## Current state
 
-We don't fully understand why our ClickHouse get sometimes overloaded.
-We extensively use query's `SETTING`: `log_comment` to put JSON with bunch
-of metadata inside it. 
+We don't fully understand why our ClickHouse get sometimes overloaded. We extensively use query's `SETTING`: `log_comment` to put JSON with bunch of metadata inside it. 
 
 ### A bit more background 
 
-We process thousands queries per second, historically it used to be mostly the traffic from
-our application us.posthog.com / eu.posthog.com and using only one `default` ClickHouse user.
-Recently, it has been a mix of different query issuers (Temporal, Celery, and services cut
-out from Django), with most of the queries still using `default` user.
+We process thousands queries per second, historically it used to be mostly the traffic from our application us.posthog.com / eu.posthog.com and using only one `default` ClickHouse user. Recently, it has been a mix of different query issuers (Temporal, Celery, and services cut out from Django), with most of the queries still using `default` user.
 
-We've managed to separate `batch_export`, `app` and `api` traffic to use separate ClickHouse
-users and tune the settings to not fully starve any of those use cases of capacity.
+We've managed to separate `batch_export`, `app` and `api` traffic to use separate ClickHouse users and tune the settings to not fully starve any of those use cases of capacity.
 
-Most ClickHouse queries made as a result of HTTP request to Django app contains the proper
-http_request_id, route_id and id.
+Most ClickHouse queries made as a result of HTTP request to Django app contains the proper http_request_id, route_id and id.
 
 This allow us to do basic analysis.
 
@@ -32,17 +25,13 @@ We want to know:
  * what/who initiated the query,
  * how much resources it consumed.
 
-This will allow us to better manage the ClickHouse load and understand which products
-and features require the most compute resources and how they are correlated. Especially,
-how one request to an API may end up multiple queries to ClickHouse.
+This will allow us to better manage the ClickHouse load and understand which products and features require the most compute resources and how they are correlated. Especially, how one request to an API may end up multiple queries to ClickHouse.
 
 ### Tags
 
-In python, there is a [`tag_queries`](https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L25) helper function one may use,
-be aware that it tags **all queries** issued from within a Python thread (it uses thread local memory).
+In Python, there is a [`tag_queries`](https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L25) helper function one may use, be aware that it tags **all queries** issued from within a Python thread (it uses thread local memory).
 
-Alternatively, you may consider [`tags_context`](https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L64)
-for localized tags.
+Alternatively, you may consider [`tags_context`](https://github.com/PostHog/posthog/blob/53b5f6e84cfa824516dc451c4dcd7c8e1539c9e5/posthog/clickhouse/query_tagging.py#L64) for localized tags.
 
 Each query send to ClickHouse must have the following tags:
 
