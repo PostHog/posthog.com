@@ -201,8 +201,8 @@ function NewsletterFBC(): JSX.Element {
                         submitted={submitted}
                         setSubmitted={setSubmitted}
                     />
-                    <div className="w-full max-w-3xl">
-                        <h3 className="text-xl font-bold mb-4 text-center">Top posts</h3>
+                    <div className="w-full max-w-5xl">
+                        <h3 className="text-xl font-bold my-4 text-center">Top posts</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {topIssues.map((issue) => (
                                 <Link
@@ -210,20 +210,16 @@ function NewsletterFBC(): JSX.Element {
                                     to={issue.url}
                                     state={{ isComingFromAd: true }}
                                     onClick={() => handleNewsletterClick(issue.title)}
-                                    className="group flex flex-col items-center text-center hover:opacity-75 transition-opacity border border-light rounded-lg"
+                                    className="group flex flex-col items-center text-center transition-opacity border border-light dark:border-dark rounded bg-white dark:bg-dark relative hover:top-[-1px] hover:scale-[1.005] active:top-[1px] active:scale-[.995]"
                                 >
-                                    <div className="w-full mb-1 overflow-hidden rounded-lg">
+                                    <div className="w-full mb-1 overflow-hidden rounded-t">
                                         <CloudinaryImage src={issue.image} className="rounded-none" />
                                     </div>
-                                    <h4 className="text-xl font-bold mt-0">{issue.title}</h4>
+                                    <h4 className="text-xl font-bold mt-0 px-2 leading-tight">{issue.title}</h4>
                                 </Link>
                             ))}
                         </div>
-                        <h2 className="text-2xl font-bold text-black text-center my-8">
-                            Not convinced? Hogzilla might change your mind
-                        </h2>
-                        <HogZilla />
-                        <div className="mt-8">
+                        <div className="mt-16">
                             <NewsletterSubscribeForm
                                 email={email}
                                 setEmail={setEmail}
