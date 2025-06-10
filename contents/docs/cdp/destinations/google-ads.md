@@ -18,7 +18,7 @@ You'll also need access to the relevant Google Ads account.
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=google) tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=googleads) tab.
 
 3. Search for **Google Ads Conversions** and click **+ Create**.
 
