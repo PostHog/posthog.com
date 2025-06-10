@@ -104,7 +104,7 @@ First install `posthog-js`:
 npm install posthog-js
 ```
 
-Next, import PostHog into `src/main.jsx` and set up it up using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then we wrap our app with `PostHogProvider` to access PostHog in any component. We set `capture_pageview` to `history_change` because React Router acts as a single-page app and doesn't fire page load events on route changes.
+Next, import PostHog into `src/main.jsx` and set up it up using your project API key and host from [your project settings](https://us.posthog.com/settings/project). Then we wrap our app with `PostHogProvider` to access PostHog in any component.
 
 ```jsx file=src/main.jsx
 import React from 'react'
@@ -116,7 +116,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 posthog.init('<ph_project_api_key>', {
   api_host: '<ph_client_api_host>',
-  capture_pageview: 'history_change'
+  defaults: '<ph_posthog_js_defaults>',
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(

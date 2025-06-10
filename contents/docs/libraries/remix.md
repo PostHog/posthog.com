@@ -41,7 +41,7 @@ export default defineConfig({
 });
 ```
 
-Next, create a `provider.tsx` file in the `app` folder. In it, set up the PostHog provider to initialize after hydration with `capture_pageview` set to `'history_change'`. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
+Next, create a `provider.tsx` file in the `app` folder. In it, set up the PostHog provider to initialize after hydration. You'll need both your API key and instance address (you can find these in your [project settings](https://us.posthog.com/project/settings)).
 
 ```ts
 // app/provider.tsx
@@ -55,8 +55,9 @@ export function PHProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     posthog.init("<ph_project_api_key>", {
       api_host: "<ph_client_api_host>",
-      capture_pageview: "history_change"
+      defaults: "<ph_posthog_js_defaults>",
     });
+
     setHydrated(true);
   }, []);
 

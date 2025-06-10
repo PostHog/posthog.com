@@ -73,6 +73,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/bigquery',
                 },
                 {
+                    name: 'Google Ads',
+                    url: '/docs/cdp/sources/google-ads',
+                },
+                {
                     name: 'Self-managed',
                 },
                 {
@@ -787,6 +791,16 @@ export const handbookSidebar = [
         ],
     },
     {
+        name: 'Demand gen',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/demand/overview',
+            },
+        ],
+    },
+    {
         name: 'Engineering',
         url: '',
         children: [
@@ -816,6 +830,10 @@ export const handbookSidebar = [
                     {
                         name: 'How to do product, as an engineer',
                         url: '/handbook/engineering/product-engineering',
+                    },
+                    {
+                        name: 'Writing docs (as an engineer)',
+                        url: '/handbook/engineering/writing-docs',
                     },
                 ],
             },
@@ -936,6 +954,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/clickhouse/working-with-json',
                     },
                     {
+                        name: 'Query attribution',
+                        url: '/handbook/engineering/clickhouse/query-attribution',
+                    },
+                    {
                         name: 'Query performance',
                         url: '/handbook/engineering/clickhouse/performance',
                     },
@@ -1030,6 +1052,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/ownership',
             },
             {
+                name: 'How we do video at PostHog',
+                url: '/handbook/growth/marketing/video',
+            },
+            {
                 name: 'Sponsorships',
                 url: '/handbook/growth/marketing/open-source-sponsorship',
             },
@@ -1081,7 +1107,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Designing PostHog.com',
-                url: '/handbook/design/designing-posthog-website',
+                url: '/handbook/brand/designing-posthog-website',
             },
             {
                 name: 'Developing PostHog.com',
@@ -1307,6 +1333,10 @@ export const handbookSidebar = [
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
+            {
+                name: 'Lifecycle Analysis',
+                url: '/handbook/growth/revops/lifecycle-analysis',
+            },
         ],
     },
 ]
@@ -1434,7 +1464,7 @@ export const communityMenu = {
         {
             name: 'DeskHog',
             icon: 'IconDeskHog',
-            color: 'blue',
+            color: 'seagreen',
             url: '/deskhog',
         },
         {
@@ -1466,6 +1496,7 @@ export const sexyLegalMenu = {
         { name: 'Terms', icon: 'IconDocument', url: '/terms', color: 'blue' },
         { name: 'Privacy', icon: 'IconShield', url: '/privacy', color: 'seagreen' },
         { name: 'DPA generator', icon: 'IconPencil', url: '/dpa', color: 'red' },
+        { name: 'BAA generator', icon: 'IconTie', url: '/baa', color: 'purple' },
     ],
 }
 
@@ -1506,6 +1537,10 @@ export const companyMenu = {
                 },
                 {
                     name: 'Engineering',
+                },
+                {
+                    name: 'Billing',
+                    url: '/teams/billing',
                 },
                 {
                     name: 'CDP',
@@ -1558,6 +1593,10 @@ export const companyMenu = {
                 {
                     name: 'Messaging',
                     url: '/teams/messaging',
+                },
+                {
+                    name: 'Platform',
+                    url: '/teams/platform',
                 },
                 {
                     name: 'Product Analytics',
@@ -1824,9 +1863,6 @@ export const docsMenu = {
                         {
                             name: 'Rust',
                             url: '/docs/libraries/rust',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -1874,9 +1910,6 @@ export const docsMenu = {
                         {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Google Tag Manager',
@@ -1929,9 +1962,6 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Svelte',
@@ -3350,6 +3380,12 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Filter and search',
+                    url: '/docs/error-tracking/filter-and-search-issues',
+                    icon: 'IconSearch',
+                    color: 'green',
                 },
                 {
                     name: 'Alerts',

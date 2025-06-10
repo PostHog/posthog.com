@@ -88,6 +88,18 @@ tags:
 ---
 ```
 
+> **Note:** Each handle in the `author` field must match a handle in the `authors.json` file. If you're a first-time author, add yourself to `authors.json` [here](https://github.com/PostHog/posthog.com/blob/master/src/data/authors.json) using this format:
+> ```json
+> {
+>   "handle": "your-handle", // This is what you'll use in the author field
+>   "name": "Your name",
+>   "role": "Your role at PostHog",
+>   "link_type": "linkedin", // Or "twitter", "github", etc.
+>   "link_url": "https://www.linkedin.com/in/yourprofile",
+>   "profile_id": 12345 // Your community profile ID from posthog.com/community/profiles/[ID]
+> }
+> ```
+
 ### Folders and URLs
 
 The URL is defined by the `folder` it's placed in and the `filename.md` of the markdown file - e.g. a post in the `founders` folder with the filename `i-love-hedgehogs.md` would have the URL `/founders/i-love-hedgehogs`.

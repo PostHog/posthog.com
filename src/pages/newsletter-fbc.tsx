@@ -5,12 +5,11 @@ import { useUser } from 'hooks/useUser'
 import usePostHog from 'hooks/usePostHog'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
-import { Info } from 'components/Icons/Icons'
 import { container, child } from 'components/CallToAction'
-import ProductManagerNewsletterContent from 'components/ProductManagerNewsletterContent'
+import NewsletterContentForFBAds from 'components/FBAds/NewsletterContentForFBAds'
 import { IconInfo } from '@posthog/icons'
 
-function NewsletterFBC() {
+function NewsletterFBC(): JSX.Element {
     const { user } = useUser()
     const posthog = usePostHog()
     const [email, setEmail] = useState('')
@@ -21,10 +20,11 @@ function NewsletterFBC() {
         e.preventDefault()
         const urlParams = new URLSearchParams(window.location.search)
         const fbclid = urlParams.get('fbclid')
+        const utmSource = urlParams.get('utm_source')
 
         posthog?.capture('newsletter_subscribed', { email })
         posthog?.capture('user_signed_up_to_newsletter_from_ad', {
-            ad_source: 'meta',
+            ad_source: utmSource || 'undefined',
             email: email,
             fbclid: fbclid || undefined,
         })
@@ -42,7 +42,7 @@ function NewsletterFBC() {
             <SEO title="Newsletter" description="Subscribe to our newsletter" />
             <div className="mx-auto px-4 pt-2">
                 <div className="flex flex-col items-center min-h-[60vh]">
-                    {showContent && <ProductManagerNewsletterContent />}
+                    {showContent && <NewsletterContentForFBAds />}
                     {!showContent && (
                         <div className="w-full max-w-[250px]">
                             <CloudinaryImage

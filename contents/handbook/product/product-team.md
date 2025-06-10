@@ -29,16 +29,22 @@ Here is a overview that shows which of our PMs currently works with which team:
 - [Session Replay](/teams/session-replay)
 - [Feature Flags](/teams/feature-flags)
 - [Experiments](/teams/experiments)
+
+<TeamMember name="Cory Slater" />
+
+- [Error Tracking](/teams/error-tracking)
+- [Surveys](/teams/surveys)
+
+**Abheek**
+- [Messaging](/teams/messaging)
+- [CDP](/teams/cdp)
   
 **Teams with no PM currently**
-- [CDP](/teams/cdp)
+
 - [CRM](/teams/crm)
-- [Error Tracking](/teams/error-tracking)
 - [LLM Observability](/teams/llm-observability)
 - [Max AI](/teams/max-ai)
-- [Messaging](/teams/messaging)
 - [Revenue Analytics](/teams/revenue-analytics)
-- [Surveys](/teams/surveys)
 
 ## Product goals
 

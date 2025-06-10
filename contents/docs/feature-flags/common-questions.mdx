@@ -136,13 +136,23 @@ If your flag is returning false and you expect it to return another value, check
 
 ## If a user matches multiple release conditions, which one is used?
 
-During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used.
+During feature flag evaluation, condition sets are evaluated from top to bottom as seen in your flag configuration. The first condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
 ## Why does it take so long for flag properties to appear in filters and breakdowns?
 
 There can be ingestion latency for all events and properties, including ones related to flags. See our [status page](https://status.posthog.com/) for ingestion latency times.
 
 On top of this, we need to do extra processing for new properties which can take longer than just ingesting an event.
+
+#### What happens when I change a roll out percentage?
+
+PostHog uses a deterministic hashing strategy to assign users. We hash the user's `distinct_id` to a number between 0 and 1 (0-100%), and compare it against the roll out percentage.
+
+- If you **increase** the percentage, users who already matched will continue to match, and more users may now qualify.
+
+- If you **decrease** the percentage, some users who previously matched may fall outside the new threshold and stop qualifying.
+
+This applies to both boolean and multivariate flags. Multivariate flags assign users to specific variants based on the rollout split. If you want to roll out one variant to everyone, set it to 100% and the others to 0%.
 
 ## Billing & usage
 

@@ -152,20 +152,17 @@ cd plugins
 touch posthog.js
 ```
 
-In `posthog.js`, initialize PostHog with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings). Also, make sure to set `capture_pageview` to `history_change` because Vue acts as a single-page app and doesn't fire the page load events PostHog usually relies to capture pageviews.
+In `posthog.js`, initialize PostHog with your project API key and host. You can find these in your [project settings](https://us.posthog.com/project/settings).
 
 ```js file=plugins/posthog.js
 import posthog from "posthog-js";
 
 export default {
   install(app) {
-    app.config.globalProperties.$posthog = posthog.init(
-      "<ph_project_api_key>",
-      {
-        api_host: "<ph_client_api_host>",
-        capture_pageview: 'history_change',
-      }
-    );
+    app.config.globalProperties.$posthog = posthog.init("<ph_project_api_key>", {
+      api_host: "<ph_client_api_host>",
+      defaults: "<ph_posthog_js_defaults>",
+    });
   },
 };
 ```

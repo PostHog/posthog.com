@@ -16,8 +16,25 @@ const getQuestionPages = async (base) => {
             },
         })
 
-        const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
-        return response.json()
+        for (let attempt = 1; attempt <= 3; attempt++) {
+            try {
+                const response = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/questions?${questionQuery}`)
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}, Text: ${await response.text()}`)
+                }
+
+                return response.json()
+            } catch (error) {
+                if (attempt === 3) {
+                    console.error(`Failed to fetch questions after 3 attempts: ${error.message}`)
+                    throw error
+                }
+                console.log(`Attempt ${attempt} failed: ${error.message}. Retrying...`)
+                // Simple delay between retries (1 second)
+                await new Promise((resolve) => setTimeout(resolve, 1000))
+            }
+        }
     }
 
     const initialResponse = await fetchQuestions(1)

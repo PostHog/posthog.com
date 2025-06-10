@@ -106,7 +106,7 @@ npm install @rrweb/types@2.0.0-alpha.17 rrweb-snapshot@2.0.0-alpha.17
 npm cache clean --force
 ```
 
-Next, in `main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://app.posthog.com/project/settings). We set `capture_pageview` to `history_change` because Angular usually acts as a single-page app and doesn't fire page load events on route changes.
+Next, in `main.ts`, initialize PostHog using your project API key and instance address. You can get both in your [project settings](https://app.posthog.com/project/settings).
 
 ```js
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -114,13 +114,10 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import posthog from 'posthog-js'
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>',
-    capture_pageview: 'history_change'
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: "<ph_posthog_js_defaults>",
+})
 
 platformBrowserDynamic().bootstrapModule(AppModule)
   .catch(err => console.error(err));

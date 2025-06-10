@@ -326,8 +326,8 @@ export const ProductDeskHog = () => {
     return (
         <>
             <SEO
-                title="DeskHog - PostHog"
-                description="Manage your desk setup like never before with DeskHog, the ultimate desk optimization tool."
+                title="DeskHog - A developer toy from PostHog"
+                description="It's a developer toy that brings developers joy. Open-source. 3D-printed. Palm-sized."
                 image={`/images/og/deskhog.jpg`}
             />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-10 pb-10`}>

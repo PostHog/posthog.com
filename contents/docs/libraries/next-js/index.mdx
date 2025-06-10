@@ -41,9 +41,24 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
 <NextJSInstall />
 
-### Accessing PostHog using the provider
+## Accessing PostHog
 
-PostHog can then be accessed throughout your Next.js app by using the `usePostHog` hook. See the [React SDK docs](/docs/libraries/react) for examples of how to use:
+### With instrumentation-client (15.3+) 
+
+Once initialized in `instrumentation-client.js|ts`, import `posthog` from `posthog-js` anywhere and call whatever you need on the `posthog` object.
+
+```js
+import posthog from 'posthog-js'
+posthog.capture('user_signed_up')
+```
+
+### With PostHog provider
+
+PostHog can be accessed throughout your Next.js app by using the `usePostHog` hook.
+
+### Usage
+
+See the [React SDK docs](/docs/libraries/react) for examples of how to use:
 
 - [`posthog-js` functions like custom event capture, user identification, and more.](/docs/libraries/react#using-posthog-js-functions)
 - [Feature flags including variants and payloads.](/docs/libraries/react#feature-flags)
@@ -155,7 +170,7 @@ The problem with this is that it can cause a [hydration and/or mismatch error](h
 
 ### Why did the pageview component need a `useEffect`? 
 
-Before changing to using `history_change` to capture pageviews, we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
+Before updating the JavaScript Web SDK's default behavior when capturing pageviews (`'2025-05-24'`), we suggested using a `useEffect` hook to capture pageviews. This is because it's the simplest way to accurately capture pageviews. Other approaches include:
 
 1. Not using a `useEffect` hook, but this might lead to duplicate page views being tracked if the component re-renders for reasons other than navigation. It might work depending on your implementation. 
 2. Using `window.navigation` to track pageviews, but this approach is more complex and is [not supported](https://developer.mozilla.org/en-US/docs/Web/API/Window/navigation) in all browsers. 
