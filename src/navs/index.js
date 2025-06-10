@@ -718,7 +718,7 @@ export const handbookSidebar = [
                     },
                     {
                         name: 'Docs ownership',
-                        url: '/handbook/content/docs-owernship',
+                        url: '/handbook/content/docs-ownership',
                     },
                     {
                         name: 'Docs style guide',
