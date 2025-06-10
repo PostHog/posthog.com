@@ -245,28 +245,23 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 
 // Function to generate markdown files for LLMs
 const generateMarkdownFiles = async (docs) => {
-    console.log('Generating markdown files for LLMs...')
+    console.log('Generating markdown files for LLMs and llms.txt...')
 
-    // Filter for the specific docs we want to generate
-    const targetPaths = ['/docs/product-analytics/installation', '/docs/product-analytics/capture-events']
+    console.log(`Found ${docs.length} docs to generate markdown for`)
 
-    const filteredDocs = docs.filter((doc) => targetPaths.includes(doc.fields.slug))
-
-    console.log(`Found ${filteredDocs.length} docs to generate markdown for`)
-
-    for (const doc of filteredDocs) {
+    for (const doc of docs) {
         try {
-            const { slug } = doc.fields
-            const { title, ...otherFrontmatter } = doc.frontmatter
-            const rawBody = doc.rawBody || doc.body
+            const { slug, contentWithSnippets } = doc.fields
+            const { title } = doc.frontmatter
+            const body = contentWithSnippets || doc.rawBody
 
             // Create the markdown content
-            let markdownContent = '# Generated for LLMs\n\n'
+            let markdownContent = `---\ntitle: ${title}\nslug: ${slug}\n---\n`
 
             // Add the content
-            if (rawBody) {
+            if (body) {
                 // Process internal links to point to .md equivalents
-                let processedBody = rawBody.replace(/\[([^\]]+)\]\(\/docs\/([^)]+)\)/g, (match, text, path) => {
+                let processedBody = body.replace(/\[([^\]]+)\]\(\/docs\/([^)]+)\)/g, (match, text, path) => {
                     // Only convert if the path doesn't already end with .md
                     if (!path.endsWith('.md')) {
                         return `[${text}](/docs/${path}.md)`
@@ -297,42 +292,28 @@ const generateMarkdownFiles = async (docs) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
-    // Always generate markdown files for LLMs, regardless of environment
+    // Generate markdown files for llms.txt file and LLM ingestion
     console.log('Generating markdown files for LLMs...')
     const markdownQuery = await graphql(`
-        query {
-            docsForMarkdown: allMdx(
-                filter: {
-                    fields: {
-                        slug: { in: ["/docs/product-analytics/installation", "/docs/product-analytics/capture-events"] }
-                    }
-                }
-            ) {
+        query pagesForMarkdown {
+            allMdx {
                 nodes {
-                    rawBody
-                    body
-                    fields {
-                        slug
-                    }
                     frontmatter {
                         title
-                        description
-                        showTitle
-                        hideAnchor
-                        hideLastUpdated
-                        availability {
-                            free
-                            selfServe
-                            enterprise
-                        }
+                        date
+                    }
+                    rawBody
+                    fields {
+                        slug
+                        contentWithSnippets
                     }
                 }
             }
         }
     `)
 
-    if (markdownQuery.data?.docsForMarkdown?.nodes) {
-        await generateMarkdownFiles(markdownQuery.data.docsForMarkdown.nodes)
+    if (markdownQuery.data?.allMdx?.nodes) {
+        await generateMarkdownFiles(markdownQuery.data.allMdx.nodes)
     }
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
