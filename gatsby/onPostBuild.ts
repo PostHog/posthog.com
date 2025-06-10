@@ -14,6 +14,7 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
+import { generateRawMarkdownPages } from './generateRawMarkdownPages'
 
 const limit = pLimit(10)
 
@@ -243,57 +244,8 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
     )
 }
 
-// Function to generate markdown files for LLMs
-const generateMarkdownFiles = async (docs) => {
-    console.log('Generating markdown files for LLMs and llms.txt...')
-
-    console.log(`Found ${docs.length} docs to generate markdown for`)
-
-    for (const doc of docs) {
-        try {
-            const { slug, contentWithSnippets } = doc.fields
-            const { title } = doc.frontmatter
-            const body = contentWithSnippets || doc.rawBody
-
-            // Create the markdown content
-            let markdownContent = `---\ntitle: ${title}\nslug: ${slug}\n---\n`
-
-            // Add the content
-            if (body) {
-                // Process internal links to point to .md equivalents
-                let processedBody = body.replace(/\[([^\]]+)\]\(\/docs\/([^)]+)\)/g, (match, text, path) => {
-                    // Only convert if the path doesn't already end with .md
-                    if (!path.endsWith('.md')) {
-                        return `[${text}](/docs/${path}.md)`
-                    }
-                    return match
-                })
-
-                markdownContent += processedBody
-            }
-
-            // Create the directory structure
-            const publicPath = path.resolve(__dirname, '../public')
-            const filePath = path.join(publicPath, `${slug}.md`)
-            const dirPath = path.dirname(filePath)
-
-            // Ensure directory exists
-            if (!fs.existsSync(dirPath)) {
-                fs.mkdirSync(dirPath, { recursive: true })
-            }
-
-            // Write the file
-            fs.writeFileSync(filePath, markdownContent, 'utf8')
-            console.log(`Generated: ${slug}.md`)
-        } catch (error) {
-            console.error(`Error generating markdown for ${doc.fields.slug}:`, error)
-        }
-    }
-}
-
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     // Generate markdown files for llms.txt file and LLM ingestion
-    console.log('Generating markdown files for LLMs...')
     const markdownQuery = await graphql(`
         query pagesForMarkdown {
             allMdx {
@@ -313,7 +265,7 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
     `)
 
     if (markdownQuery.data?.allMdx?.nodes) {
-        await generateMarkdownFiles(markdownQuery.data.allMdx.nodes)
+        await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
     }
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {
