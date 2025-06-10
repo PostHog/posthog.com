@@ -1311,7 +1311,7 @@ export const handbookSidebar = [
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
-                        {
+            {
                 name: 'Lifecycle Analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
@@ -3714,6 +3714,7 @@ export const productMenu = {
             freeTier: 1000000,
             sharesFreeTier: 'web-analytics',
             worksWith: ['session-replay', 'experiments', 'surveys'],
+            category: 'analytics',
         },
         {
             name: 'Web analytics',
@@ -3727,6 +3728,7 @@ export const productMenu = {
             freeTier: 1000000,
             sharesFreeTier: 'product-analytics',
             worksWith: ['product-analytics', 'session-replay', 'surveys'],
+            category: 'analytics',
         },
         {
             name: 'Session replay',
@@ -3734,6 +3736,7 @@ export const productMenu = {
             color: 'yellow',
             url: '/session-replay',
             slug: 'session-replay',
+            category: 'behavior',
         },
         {
             name: 'Feature flags',
@@ -3741,6 +3744,7 @@ export const productMenu = {
             color: 'seagreen',
             url: '/feature-flags',
             slug: 'feature-flags',
+            category: 'features',
         },
         {
             name: 'Experiments',
@@ -3748,6 +3752,7 @@ export const productMenu = {
             color: 'purple',
             url: '/experiments',
             slug: 'experiments',
+            category: 'features',
         },
         {
             name: 'Error tracking',
@@ -3755,6 +3760,7 @@ export const productMenu = {
             color: 'orange',
             url: '/error-tracking',
             slug: 'error-tracking',
+            category: 'behavior',
         },
         {
             name: 'Surveys',
@@ -3762,6 +3768,7 @@ export const productMenu = {
             color: 'salmon',
             url: '/surveys',
             slug: 'surveys',
+            category: 'behavior',
         },
         {
             name: 'Data pipelines',
@@ -3769,6 +3776,7 @@ export const productMenu = {
             color: 'sky-blue',
             url: '/cdp',
             slug: 'cdp',
+            category: 'tools',
         },
         {
             name: 'Data warehouse',
@@ -3776,12 +3784,14 @@ export const productMenu = {
             color: 'lilac',
             url: '/data-warehouse',
             slug: 'data-warehouse',
+            category: 'tools',
         },
         {
             name: 'Max AI',
             icon: 'IconMagicWand',
             color: 'purple',
             url: '/max',
+            category: 'tools',
         },
         {
             name: 'Product OS',
@@ -3789,6 +3799,7 @@ export const productMenu = {
             color: 'salmon',
             url: '/product-os',
             slug: 'product-os',
+            category: 'tools',
         },
     ],
 }

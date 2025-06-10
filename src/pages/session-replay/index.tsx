@@ -296,11 +296,11 @@ export default function SessionReplay(): JSX.Element {
         {
             name: 'Overview',
             content: (
-                <div className="h-full p-12 flex flex-col relative">
+                <div className="h-full p-12 flex flex-col relative bg-yellow text-white">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg"
                         alt="Session replay"
-                        className="absolute bottom-0 left-0 max-w-[525px] shadow-xl rounded-tr"
+                        className="absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl"
                     />
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png"
@@ -309,13 +309,13 @@ export default function SessionReplay(): JSX.Element {
                     />
                     <div className="pt-12 pr-12 pb-1/2 pl-1/2">
                         <div className="inline-flex items-center gap-3 text-primary mb-4">
-                            <IconRewindPlay className="size-7 text-yellow" />
-                            <span className="text-xl font-bold">Session replay</span>
+                            <IconRewindPlay className="size-7 text-black" />
+                            <span className="text-xl font-bold text-black">Session replay</span>
                         </div>
-                        <h1 className="text-5xl font-bold text-primary mb-4 leading-tight">
+                        <h1 className="text-5xl font-bold text-black mb-4 leading-tight">
                             Watch people use your product
                         </h1>
-                        <p className="text-xl text-secondary mb-8 leading-relaxed">
+                        <p className="text-xl text-black mb-8 leading-relaxed">
                             Play back sessions to diagnose UI issues, improve support, and get context on nuanced user
                             behavior in your product, website, or mobile app.
                         </p>
