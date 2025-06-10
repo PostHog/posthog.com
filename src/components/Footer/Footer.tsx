@@ -358,8 +358,8 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 }
 
 export function Footer(): JSX.Element {
-    const { pathname } = useLocation()
-    if (pathname === '/newsletter-fbc') {
+    const { pathname, state } = useLocation()
+    if (pathname === '/newsletter-fbc' || (state as { isComingFromAd?: boolean })?.isComingFromAd) {
         return <></>
     }
 
