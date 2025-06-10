@@ -1,0 +1,27 @@
+```react-native
+<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
+    captureTouches: true, // HIGHLIGHT
+    captureLifecycleEvents: true, // HIGHLIGHT
+    captureScreens: true, // HIGHLIGHT
+    ignoreLabels: [], // Any labels here will be ignored from the stack in touch events // HIGHLIGHT
+    customLabelProp: "ph-label", // HIGHLIGHT
+    noCaptureProp: "ph-no-capture", // HIGHLIGHT
+    propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured. // HIGHLIGHT
+
+    navigation: {
+        // By default, only the screen name is tracked but it is possible to track the
+        // params or modify the name by intercepting the autocapture like so
+        routeToName: (name, params) => {
+            if (params.id) return `${name}/${params.id}` // HIGHLIGHT
+            return name
+        },
+        // Optionally, you can skip capturing sensitive screens by name
+        routeToProperties: (name, params) => {
+            if (name === "SensitiveScreen") return undefined // HIGHLIGHT
+            return params
+        },
+    }
+}}>
+    ...
+</PostHogProvider> 
+```

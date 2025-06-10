@@ -2565,9 +2565,18 @@ export const docsMenu = {
                             url: '/docs/privacy',
                         },
                         {
-                            name: 'GDPR guidance',
+                            name: 'Data collection',
+                            url: '/docs/privacy/data-collection',
+                        },
+                        {
+                            name: 'Data storage',
+                            url: '/docs/privacy/data-storage',
+                        },
+                        {
+                            name: 'GDPR compliance',
                             url: '/docs/privacy/gdpr-compliance',
                         },
+
                         {
                             name: 'HIPAA guidance',
                             url: '/docs/privacy/hipaa-compliance',
