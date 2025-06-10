@@ -50,7 +50,7 @@ In this case, SDKs will:
 
 This ensures that your application continues to function even when feature flag quotas are exceeded, falling back to default behavior rather than failing.
 
-## Audit environments to catch hidden `/decide` calls
+## Audit environments to catch unexpected `/decide` calls
 
 Forgotten environments, like old demos, test apps, or staging servers, can silently rack up costs. Even if they don’t send events, they may still be polling and making `/decide` calls for feature flags, session replay, and surveys.
 
