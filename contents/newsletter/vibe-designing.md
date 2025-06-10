@@ -29,22 +29,22 @@ People don't care about your product. They care about getting their job done.
 
 Your first step is to define that job in a single sentence. This isn't just a nice-to-have. Nail it and every design decision gets easier; skip it and you'll polish pixels that don't matter.
 
-A good statement is anchored in real user context and focuses on their desired outcome, not just the steps they need to take. A practical to do define it is with this formula:
+A good statement is anchored in real user context and focuses on their desired outcome, not just the steps they need to take. A practical way to define it is:
 
 > **When** [trigger] happens, [user persona] **wants to** [action], **so that** they can [desired outcome].
 
 Here are some examples:
 
 **Example 1: Incident management tool e.g. incident.io**
-- ❌ "Engineer wants to send incident updates."
-- ✅ "When an incident impacts customers, an engineer wants to communicate status updates quickly and clearly, so that customers and internal stakeholders stay informed and trust is maintained."
+- ❌ "Engineers need to send incident updates."
+- ✅ "When an incident occurs, engineers want to communicate status updates quickly and clearly, so that customers and internal stakeholders stay informed and trust is maintained."
 
 **Example 2: Team wiki product e.g. Notion**  
-- ❌ "Users want a company handbook."
-- ✅ "When a new teammate has a question, they want to find the relevant answer quickly, so that they can stay productive without asking someone."
+- ❌ "Employees want a company handbook."
+- ✅ "When an employee has a question, they want to find the relevant answer quickly, so that they can stay productive without asking someone."
 
 **Example 3: Issue tracker e.g. Linear**  
-- ❌ "Users want to manage bugs."
+- ❌ "Developers want to track bugs."
 - ✅ "When a developer hits an error, they want to log a bug quickly and hand it off, so that they can get back into their flow."
 
 Throughout the rest of this post, we'll use the issue tracker example and create a tiny bug tracker called BugSplat 🐞💥
@@ -53,7 +53,7 @@ Throughout the rest of this post, we'll use the issue tracker example and create
 
 ![Steve Hogs quote](https://res.cloudinary.com/dmukukwp6/image/upload/452952205_79c1f405_fa54_44ad_b0c3_14a25e86b62f_fc5067e6bc.jpg)
 
-With your job to be done in mind, gather inspiration by spending 30 minutes inside two or three products that solve a similar problem. Play around with them and pay attention to how they look and feel. A few things to think about:
+With your job to be done in mind, spark inspiration by spending 30 minutes inside two or three products that solve a similar problem. Play around with them and pay attention to how they look and feel. A few things to think about:
 
 - **First impressions:** Where do your eyes go first?
 - **Flow:** How many steps or clicks to achieve the job?
@@ -117,7 +117,7 @@ Prioritize: <clarity, speed, minimal steps, mobile-first, etc.>
 - <competitor_image_2.png>
 ```
 
-Keep tweaking the prompt until it the wireframe feels right. Here's the full prompt I used for BugSplat along with the wireframe it generated:
+Keep prompting until it the wireframe feels right. Here's the full prompt I used for BugSplat:
 
 ```llm
 # Goal
@@ -180,6 +180,8 @@ Prioritize: speed, clarity, zero-fat UX
 - github_issue_form.png
 ```
 
+And the wireframe is generated: 
+
 ![Wireframe of BugSplat](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_09_at_12_10_24_PM_342900f8ed.png)
 
 ## Step 4. Bring it to life
@@ -203,7 +205,7 @@ Prompt the LLM that has your wireframe to flesh out the UI with your app's desig
   e.g. `pages/settings`, `user-profile`
 
 
-And here's a prompt you can use: 
+Here's a prompt you can use: 
 
 ```llm
 The wireframe looks great. Now translate it into production-ready UI that blends seamlessly with our existing app.
@@ -225,11 +227,11 @@ The wireframe looks great. Now translate it into production-ready UI that blends
 
 With no legacy design language, you need to create enough scaffolding to keep the LLM from wandering into neon gradients and Comic Sans. 
 
-To start, you need to generate your app's core color palette. I like using [Coolors](https://coolors.co/) or [Figma's palette generator](https://www.figma.com/color-palette-generator/) for this. 
+To start, generate your app's core color palette. I like using [Coolors](https://coolors.co/) or [Figma's palette generator](https://www.figma.com/color-palette-generator/) for this. 
 
-> **💡 Tip:** If you're having difficulty deciding on a color palette, look at your favorite apps for inspiration.
+> **💡 Tip:** If you're stuck on deciding on a color palette, draw inspiration from your favorite apps.
 
-Once you have 4-6 foundational colors, use an LLM to map them to key roles in your UI e.g., buttons, text, backgrounds, and so on. Here's a prompt to do that for you:
+Once you have 4-6 foundational colors, use an LLM to map them to key roles in your UI (e.g., buttons, text, backgrounds, and so on). Here's a prompt to do that for you:
 
 ```llm
 # SYSTEM
@@ -349,11 +351,11 @@ The wireframe looks great. Now translate it into production-ready UI using the f
 
 I opted to create a modern and minimalist dark mode feel for BugSplat. Here's what it looked like after creating my design system:
 
-![BugSplat after adding design system](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_10_at_10_36_45_AM_3db582ed37.png)
+![BugSplat after adding design system](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_10_at_1_18_29_PM_31966b0b77.png)
 
 ## Step 5. Final polish 💅🏼
 
-You should now be 90% of the way there. The final 10% is polishing your UI and interactions.
+You should now be 90% of the way there. The final 10% is polish.
 
 Great design isn't magic. It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
 
@@ -364,26 +366,25 @@ Here are six foundational principles every engineer should know. Your UI should 
 Applying the rules to BugSplat, I noticed a few things:
 
 **Hierarchy:** 
-
- ❌ The "Bug Tracker" headline is the largest but least important. It should be smaller
- ❌ The time a ticket was last updated is more important than the description, it should appear above it.
+❌ The "Bug Tracker" headline is large but not actually important. It should be smaller.
+❌ The time a ticket was last updated is more important than the description, so it should appear above it.
+❌ The filter button text is too small.
 
 **Contrast:** 
-
-❌ The "filter" button background is the same as the tickets, making it hard to notice.
-❌ The purple text which shows the total number of open tickets is hard to read against a purple background.
+❌ The filter button background is the same as the tickets, making it hard to notice.
+❌ The purple text which shows the total number of open tickets is hard to read.
 
 **Balance:** 
-
-❌ The tickets currently skew components heavily to the left. To fix it, we should move the title to the right on the status.
+❌ The tickets currently skew components heavily to the left.
 
 **Consistency** 
-
-❌ Both the create new bug button and the number of open tickets component use a purple background, which makes it seems both are buttons.
+❌ The number of open tickets component looks like a button but isn't.
+❌ The new bug and filter buttons have different heights.
 
 **Proximity and alignment** 
-
 ✅ Everything looks good
+
+![Before and after of BugSplat](https://res.cloudinary.com/dmukukwp6/image/upload/beforeafter_d7fdfb2aff.png)
 
 ## Step 6: Ship it and iterate
 
@@ -397,10 +398,12 @@ Here's how to ship safely and learn fast:
 - **[Talk to real humans](https://newsletter.posthog.com/p/talk-to-users).** Ask what felt slow, confusing, or unnecessary. You'll be surprised what they struggle with.
 - **Iterate quickly.** One small fix at a time adds up fast.
  
-Sentence to conclude...
+## TL;DR
+
+You can be a designer too. The process is learnable and can get you shipping in hours instead of weeks.
 
 ![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
-<Caption>You after reading this newsletter, probably.</Caption>
+<Caption>You to your team now, probably.</Caption>
 
 Word by Lior Neu-ner, who is always down for a good vibe.
 
