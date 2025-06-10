@@ -1,12 +1,10 @@
 ---
-title: The engineer's guide to vibe designing
-# Alt: Vibe design for product engineers
-# Alt2: Vibe-Driven Development: How to Design Without a Designer
-date: 2025-05-22
+title: An engineer's guide to vibe design (with prompts)
+date: 2025-06-09
 author:
   - lior-neu-ner
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/9uxiql_4b939c46fd.jpg
+  https://res.cloudinary.com/dmukukwp6/image/upload/452937392_94602ee7_0b56_43cc_9bca_4df2b125229e_a5ecb1a164.jpg
 featuredImageType: full
 tags:
   - Product engineers
@@ -14,8 +12,6 @@ crosspost:
   - Founders
   - Blog
 ---
-<!-- Subheading for email: Engineers move fast. Your design should too. -->
-
 Design used to be a dependency. If the Figma wasn't ready, neither were you.
 
 Enter vibe designing.
@@ -24,10 +20,6 @@ With tools like [Lovable](https://lovable.dev/), [v0.dev](https://v0.dev/), and 
 
 This post shows the full process – start to finish – by actually designing a tiny app while we go. No designer in the loop, just vibes, taste, and a few rounds with an LLM.
 
-## The demo project: BugSplat 🐞💥
-
-A lightweight bug-tracker that lets anyone create a new bug, assign it to a teammate, and update its status. We'll use BugSplat to walk through each step.
-
 ## Step 1: Define your job to done
 
 ![Super mario example of what your app does](https://res.cloudinary.com/dmukukwp6/image/upload/mario_e44054d515.png)
@@ -35,15 +27,31 @@ A lightweight bug-tracker that lets anyone create a new bug, assign it to a team
 
 People don't care about your product. They care about getting their job done.
 
-Your first step is to define that job in a single sentence. This isn't just a nice-to-have. It's your design compass. It makes priorities obvious and tradeoffs easier to navigate. Without it, it's easy to fall into the trap of designing what looks good instead of what actually works.
+Your first step is to define that job in a single sentence. This isn't just a nice-to-have. Nail it and every design decision gets easier; skip it and you'll polish pixels that don't matter.
 
-For BugSplat, that sentence is:
+A good statement is anchored in real user context and focuses on their desired outcome, not just the steps they need to take. A practical to do define it is with this formula:
 
-> Log a bug and assign it in under 30 seconds.
+> **When** [trigger] happens, [user persona] **wants to** [action], **so that** they can [desired outcome].
+
+Here are some examples:
+
+**Example 1: Incident management tool e.g. incident.io**
+- ❌ "Engineer wants to send incident updates."
+- ✅ "When an incident impacts customers, an engineer wants to communicate status updates quickly and clearly, so that customers and internal stakeholders stay informed and trust is maintained."
+
+**Example 2: Team wiki product e.g. Notion**  
+- ❌ "Users want a company handbook."
+- ✅ "When a new teammate has a question, they want to find the relevant answer quickly, so that they can stay productive without asking someone."
+
+**Example 3: Issue tracker e.g. Linear**  
+- ❌ "Users want to manage bugs."
+- ✅ "When a developer hits an error, they want to log a bug quickly and hand it off, so that they can get back into their flow."
+
+Throughout the rest of this post, we'll use the issue tracker example and create a tiny bug tracker called BugSplat 🐞💥
 
 ## Step 2: Steal like a product engineer
 
-![HedgeHog version of this quote attributed to Steve Hogs](https://res.cloudinary.com/dmukukwp6/image/upload/download_e0e3dc0822.jpeg)
+![Steve Hogs quote](https://res.cloudinary.com/dmukukwp6/image/upload/452952205_79c1f405_fa54_44ad_b0c3_14a25e86b62f_fc5067e6bc.jpg)
 
 With your job to be done in mind, gather inspiration by spending 30 minutes inside two or three products that solve a similar problem. Play around with them and pay attention to how they look and feel. A few things to think about:
 
@@ -65,8 +73,7 @@ In the case of BugSplat, here's what I found when I researched similar apps:
 
 ## Step 3. Wireframe with an LLM
 
-TODO make image smaller
-![wireframe comic](https://res.cloudinary.com/dmukukwp6/image/upload/450722371_e3385ec7_3daa_4499_a356_8e4486a1a69a_087c55fabb.png)
+![Comic of hedgehog stealing AI's design](https://res.cloudinary.com/dmukukwp6/image/upload/452937409_07082e67_dd9c_4e5f_9ed2_43d2423ed64a_01b19d9feb.png)
 
 You should now have a strong opinion of how you want your app to look and feel. The next step is wireframe it to see how the UX holds together.
 
@@ -173,7 +180,7 @@ Prioritize: speed, clarity, zero-fat UX
 - github_issue_form.png
 ```
 
-![Wireframe of BugSplat](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_03_at_11_55_51_AM_39f58a4ef2.png)
+![Wireframe of BugSplat](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_09_at_12_10_24_PM_342900f8ed.png)
 
 ## Step 4. Bring it to life
 
@@ -218,9 +225,11 @@ The wireframe looks great. Now translate it into production-ready UI that blends
 
 With no legacy design language, you need to create enough scaffolding to keep the LLM from wandering into neon gradients and Comic Sans. 
 
-To start, generate your app's core color palette. I like using [Coolors](https://coolors.co/) or [Figma's palette generator](https://www.figma.com/color-palette-generator/) for this. Once you have 4-6 foundational colors, use an LLM to map them to key roles in your UI – buttons, text, backgrounds, and so on. 
+To start, you need to generate your app's core color palette. I like using [Coolors](https://coolors.co/) or [Figma's palette generator](https://www.figma.com/color-palette-generator/) for this. 
 
-Here's a prompt to do that for you:
+> **💡 Tip:** If you're having difficulty deciding on a color palette, look at your favorite apps for inspiration.
+
+Once you have 4-6 foundational colors, use an LLM to map them to key roles in your UI e.g., buttons, text, backgrounds, and so on. Here's a prompt to do that for you:
 
 ```llm
 # SYSTEM
@@ -239,6 +248,9 @@ coreColors <Replace with your own>:
   rosyBrown:       #C89F9C
   burntSienna:     #C97C5D
   redwood:         #B36A5E
+
+preferences <optional>:
+  My preferences are for <color_name> to be used as the background color, <color_name_2> to be used for the buttons, <color_name_3> for text, etc.
 
 tokenSpec:
   # Neutrals & text
@@ -285,30 +297,29 @@ INSTRUCTIONS
 6. Validate all contrast requirements and return **only** the JSON matching **schema**—no extra keys or explanatory text.
 ```
 
-
-Then, take your generated color JSON and feed it back to Lovable/v0/Bolt along with the below prompt. Customize it based on your preferences.
+Then, take your generated color JSON and feed it back to Lovable/v0/Bolt along with the below prompt to create your design system. You'll probably need to prompt it further to tweak the output to your liking.
 
 ```llm
 The wireframe looks great. Now translate it into production-ready UI using the following design system:
 
-
 **Typography:** 
-<How should the font feel and function? Pick one:>
-- [ ] Clean and modern with clear hierarchy (e.g. Inter, SF Pro, Helvetica Neue)  
-- [ ] Friendly and warm with rounded edges (e.g. Nunito, Poppins, Quicksand)  
-- [ ] Tech-forward and utilitarian (e.g. Roboto, IBM Plex Sans, JetBrains Mono)  
-- [ ] Editorial and expressive (e.g. Georgia, Playfair, DM Serif)  
-- [ ] Highly legible for small UIs (e.g. Source Sans, Lato)  
+< How should the font feel and function? Pick one: >
+
+- Clean and modern with clear hierarchy (e.g. Inter, SF Pro, Helvetica Neue)  
+- Friendly and warm with rounded edges (e.g. Nunito, Poppins, Quicksand)  
+- Tech-forward and utilitarian (e.g. Roboto, IBM Plex Sans, JetBrains Mono)  
+- Editorial and expressive (e.g. Georgia, Playfair, DM Serif)  
+- Highly legible for small UIs (e.g. Source Sans, Lato)  
 
 ### Spacing scale  
-<How sharp or soft should components feel? Pick one:>  
+< How sharp or soft should components feel? Pick one: >  
 
-- [ ] Tight spacing (good for for dense UIs like tables, admin panels)  
-- [ ] Loose spacing (good for calm UIs)  
-- [ ] Standard/neutral
+- Tight spacing (good for for dense UIs like tables, admin panels)  
+- Loose spacing (good for calm UIs)  
+- Standard/neutral
 
 ### Elevation / Shadows  
-<How sharp or soft should components feel? Pick one:>  
+< How sharp or soft should components feel? Pick one: > 
 
 - Minimal shadows, soft elevation (e.g. `shadow-sm`, light Material)  
 - Medium elevation with defined depth cues (e.g. hover cards, dialogs)  
@@ -317,22 +328,28 @@ The wireframe looks great. Now translate it into production-ready UI using the f
 - Glassmorphism (blur + subtle shadows for futuristic feel)  
 
 ### Borders & Radius  
-<How sharp or soft should components feel? Pick one:>  
-- [ ] Soft and approachable (rounded-xl, 12–16px)  
-- [ ] Lightly rounded (rounded-md, ~6px) for subtle friendliness  
-- [ ] Sharp and modern (0–2px radius)  
-- [ ] Card-like with border + radius + light shadow  
-- [ ] Neobrutalist: hard edges, visible outlines, minimal styling  
+< How sharp or soft should components feel? Pick one: >  
+
+- Soft and approachable (rounded-xl, 12–16px)  
+- Lightly rounded (rounded-md, ~6px) for subtle friendliness  
+- Sharp and modern (0–2px radius)  
+- Card-like with border + radius + light shadow  
+- Neobrutalist: hard edges, visible outlines, minimal styling  
 
 ### Sizing  
-What's the ideal scale for your components and layout? Choose one:  
-- [ ] Touch-friendly (44px+ targets, comfortable paddings)  
-- [ ] Compact (tight controls, for expert users and data-dense screens)  
-- [ ] Big type and buttons (for mobile-first or accessibility-first design)  
+< What's the ideal scale for your components and layout? Pick one: >
+
+- Touch-friendly (44px+ targets, comfortable paddings)  
+- Compact (tight controls, for expert users and data-dense screens)  
+- Big type and buttons (for mobile-first or accessibility-first design)  
 
 ### Colors
 <The outputted json from your color palette prompt>
 ```
+
+I opted to create a modern and minimalist dark mode feel for BugSplat. Here's what it looked like after creating my design system:
+
+![BugSplat after adding design system](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_10_at_10_36_45_AM_3db582ed37.png)
 
 ## Step 5. Final polish 💅🏼
 
@@ -340,27 +357,39 @@ You should now be 90% of the way there. The final 10% is polishing your UI and i
 
 Great design isn't magic. It's a set of rules you can learn. And applying them correctly means you don't need to guess what looks good.
 
-Below are seven foundational principles every engineer should know. Your UI should pass each one.
+Here are six foundational principles every engineer should know. Your UI should pass each one.
 
-![hiearrhy](https://res.cloudinary.com/dmukukwp6/image/upload/hierarchy_small_7b6410b9a6.png)
+![Design principles every engineer should know](https://res.cloudinary.com/dmukukwp6/image/upload/design_principles_bd0483d9c7.png)
 
+Applying the rules to BugSplat, I noticed a few things:
 
-![contrast](https://res.cloudinary.com/dmukukwp6/image/upload/contrast_f96e0df3b9.png)
+**Hierarchy:** 
 
-![consistency](https://res.cloudinary.com/dmukukwp6/image/upload/consistency_44634045fc.png)
+ ❌ The "Bug Tracker" headline is the largest but least important. It should be smaller
+ ❌ The time a ticket was last updated is more important than the description, it should appear above it.
 
-TODO images for: 
+**Contrast:** 
 
-**4. Alignment** – snap to a grid so the eye can glide, not stumble.  
-**5. Proximity** – group related things; separation is a hint they're unrelated.  
-**6. Balance** – distribute visual weight so the layout feels stable.  
-**7. Feedback** – every action should whisper *“yep, that worked.”*
+❌ The "filter" button background is the same as the tickets, making it hard to notice.
+❌ The purple text which shows the total number of open tickets is hard to read against a purple background.
+
+**Balance:** 
+
+❌ The tickets currently skew components heavily to the left. To fix it, we should move the title to the right on the status.
+
+**Consistency** 
+
+❌ Both the create new bug button and the number of open tickets component use a purple background, which makes it seems both are buttons.
+
+**Proximity and alignment** 
+
+✅ Everything looks good
 
 ## Step 6: Ship it and iterate
 
 Once your UI is in decent shape, get it in front of real users as soon as possible. You'll learn more from watching someone use it than from any internal review.
 
-Here’s how to ship safely and learn fast:
+Here's how to ship safely and learn fast:
 
 - **Use a [feature flag](https://newsletter.posthog.com/p/dont-make-these-classic-feature-flag)** to launch to a small group of trusted users first. It lowers the stakes and buys you space to improve.
 - **Watch [session replays](https://posthog.com/session-replay)** to spot where people hesitate, rage click, or bounce.
@@ -368,15 +397,10 @@ Here’s how to ship safely and learn fast:
 - **[Talk to real humans](https://newsletter.posthog.com/p/talk-to-users).** Ask what felt slow, confusing, or unnecessary. You'll be surprised what they struggle with.
 - **Iterate quickly.** One small fix at a time adds up fast.
  
-## TL;DR
- 
-You don't need a designer to build great UI. You need:
-- Good taste
-- Strong opinions
-- The right prompts
+Sentence to conclude...
 
 ![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
-<Caption>You, probably.</Caption>
+<Caption>You after reading this newsletter, probably.</Caption>
 
 Word by Lior Neu-ner, who is always down for a good vibe.
 
