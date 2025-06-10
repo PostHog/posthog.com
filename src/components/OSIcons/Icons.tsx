@@ -24,123 +24,6 @@ export const BaseIcon: IconComponent<BaseIconProps> = forwardRef(function BaseIc
     )
 })
 
-// App icon mapping for different skins
-type AppIconVariants = {
-    classic?: string
-    modern?: string
-    default: string
-}
-
-type AppIconName =
-    | 'doc'
-    | 'pricing'
-    | 'notebook'
-    | 'tour'
-    | 'map'
-    | 'spreadsheet'
-    | 'forums'
-    | 'games'
-    | 'photobooth'
-    | 'contact'
-    | 'posthog'
-    | 'folder'
-    | 'presentation'
-
-const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
-    doc: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/doc_classic_7f14381c43.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/doc_2fa451a8e4.png',
-    },
-    folder: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/folder_classic_d2fdf96f82.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/folder_af7d0524aa.png',
-    },
-    presentation: {
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/presentation_f329e94fe5.png',
-    },
-    pricing: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/pricing_b461c2e5dd.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/pricing_04a97aa301.png',
-    },
-    notebook: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_bb8267664e.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/document_001e7ec29a.png',
-    },
-    tour: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_8ae29710fc.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/tour_2994e40ea9.png',
-    },
-    map: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/roadmap_3691544cec.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/roadmap_ac25f48fe0.png',
-    },
-    spreadsheet: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/spreadsheet_classic_8ea2ebdb10.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/spreadsheet_2d556ac08a.png',
-    },
-    forums: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/forums_a48a37683e.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/forums_b1926ec5fa.png',
-    },
-    games: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/games_6931a0e3a5.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/games_96649d6774.png',
-    },
-    photobooth: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/photobooth_db172dc28e.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/photobooth_f46836ce68.png',
-    },
-    contact: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/contact_4af3eed18f.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/contact_5331716a3a.png',
-    },
-    posthog: {
-        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_95648ff771.png',
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_bdd451f4e8.png',
-    },
-}
-
-export interface AppIconProps extends IconProps {
-    name: AppIconName
-    className?: string
-}
-
-export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
-    const getCurrentSkin = (): string => {
-        if (typeof localStorage !== 'undefined') {
-            return localStorage.getItem('skin') || 'modern'
-        }
-        return 'modern'
-    }
-
-    const getIconUrl = (iconName: AppIconName): string => {
-        const iconVariants = PRODUCT_ICON_MAP[iconName]
-        if (!iconVariants) {
-            console.warn(`AppIcon: Unknown icon name "${iconName}"`)
-            return ''
-        }
-
-        const currentSkin = getCurrentSkin()
-
-        // Check if the current skin has a specific variant
-        if (currentSkin in iconVariants) {
-            return iconVariants[currentSkin as keyof AppIconVariants] || iconVariants.default
-        }
-
-        // Fall back to default
-        return iconVariants.default
-    }
-
-    const iconUrl = getIconUrl(name)
-
-    return <IconImage url={iconUrl} className={className} {...props} />
-}
-
-export interface IconImageProps extends IconProps {
-    url: string
-    className?: string
-}
-
 export const IconAndroid = (props: IconProps) => (
     <BaseIcon viewBox="0 0 24 14" width="100%" height="100%" {...props}>
         <path
@@ -156,12 +39,6 @@ export const IconApple = (props: IconProps) => (
             fill="currentColor"
             d="M16.844 23.016c-1.3 1.262-2.736 1.066-4.104.47-1.454-.607-2.784-.645-4.32 0-1.913.826-2.928.586-4.08-.47C-2.164 16.32-1.204 6.12 6.188 5.736c1.793.096 3.048.991 4.104 1.066 1.57-.32 3.072-1.234 4.752-1.114 2.018.163 3.528.96 4.536 2.393-4.152 2.496-3.168 7.968.646 9.504-.764 2.004-1.743 3.984-3.384 5.448l.002-.017zM10.148 5.664C9.954 2.688 12.366.24 15.14 0c.382 3.432-3.12 6-4.992 5.664z"
         />
-    </BaseIcon>
-)
-
-export const IconImage = ({ url, className, ...props }: IconImageProps) => (
-    <BaseIcon viewBox="0 0 40 40" width="100%" height="100%" className={`size-10 ${className ? className : ''}`}>
-        <image width="40" height="40" href={url} />
     </BaseIcon>
 )
 

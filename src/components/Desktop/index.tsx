@@ -13,7 +13,7 @@ import {
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
-import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons/Icons'
+import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons'
 import ZoomHover from 'components/ZoomHover'
 import Screenshot from 'components/Screenshot'
 
