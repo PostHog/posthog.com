@@ -10,6 +10,7 @@ import { productMenu } from '../../navs'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
 import { AppIcon } from 'components/OSIcons'
+import { Accordion } from 'components/RadixUI/Accordion'
 export default function Products(): JSX.Element {
     return (
         <>
@@ -22,18 +23,12 @@ export default function Products(): JSX.Element {
                 template="generic"
                 slug="products"
                 title="Products"
+                showTitle={false}
                 // options below only needed to override matching the slug
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
-                accentImage={
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png"
-                        alt="Screenshot of PostHog Product Analytics"
-                        className="w-full"
-                        placeholder="none"
-                    />
-                }
+
                 sidebarContent={[
                     {
                         title: 'About PostHog',
@@ -128,10 +123,6 @@ export default function Products(): JSX.Element {
                     },
                 ]}
             >
-                <p className="max-w-lg">
-                    PostHog is an entire suite of products you can use to make your software successful.
-                </p>
-
                 <Link
                     to="/session-replay"
                     className="inline-flex flex-col items-center w-32 justify-center text-primary hover:text-primary"
@@ -164,39 +155,56 @@ export default function Products(): JSX.Element {
                     })
 
                     return (
-                        <div className="space-y-8 max-w-3xl">
+                        <div className="@container space-y-2">
                             {categoryOrder.map((category) => {
                                 const products = groupedProducts[category]
                                 if (!products || products.length === 0) return null
 
+                                const count = products.length
+
                                 return (
-                                    <div key={category}>
-                                        <h3 className="text-xl font-semibold mb-4 capitalize">{category}</h3>
-                                        <div className="grid grid-cols-2 @sm:grid-cols-3 gap-2 p-2 relative">
-                                            {products.map((product) => (
-                                                <OSButton
-                                                    key={product.slug}
-                                                    variant="underline"
-                                                    asLink
-                                                    align="left"
-                                                    width="full"
-                                                    size="xl"
-                                                    icon={React.createElement(
-                                                        Icons[product.icon as keyof typeof Icons],
-                                                        { className: `text-${product.color}` }
-                                                    )}
-                                                    to={`/${product.slug}`}
-                                                    className="text-primary hover:text-primary flex-col"
-                                                    state={{ newWindow: true }}
-                                                >
-                                                    <span>
-                                                        {product.name}
-                                                        <span className="opacity-75">.pslides</span>
+                                    <Accordion
+                                        skin={false}
+                                        key={category}
+                                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                        items={[
+                                            {
+                                                value: category,
+                                                trigger: (
+                                                    <span className="bg-primary pr-2 relative z-10">
+                                                        {category.charAt(0).toUpperCase() + category.slice(1)} ({count})
                                                     </span>
-                                                </OSButton>
-                                            ))}
-                                        </div>
-                                    </div>
+                                                ),
+                                                content: (
+                                                    <div className="grid grid-cols-2 @sm:grid-cols-3 @lg:grid-cols-4 gap-2 relative">
+                                                        {products.map((product) => (
+                                                            <OSButton
+                                                                key={product.slug}
+                                                                variant="underline"
+                                                                asLink
+                                                                align="left"
+                                                                width="full"
+                                                                size="xl"
+                                                                icon={React.createElement(
+                                                                    Icons[product.icon as keyof typeof Icons],
+                                                                    { className: `text-${product.color}` }
+                                                                )}
+                                                                to={`/${product.slug}`}
+                                                                className="text-primary hover:text-primary flex-col"
+                                                                state={{ newWindow: true }}
+                                                            >
+                                                                <span>
+                                                                    {product.name}
+                                                                    <span className="opacity-75">.pslides</span>
+                                                                </span>
+                                                            </OSButton>
+                                                        ))}
+                                                    </div>
+                                                ),
+                                            },
+                                        ]}
+                                        defaultValue={category}
+                                    />
                                 )
                             })}
                         </div>

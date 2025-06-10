@@ -5,14 +5,17 @@ import * as Icons from '@posthog/icons'
 interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof RadixAccordion.Item> {
     children: React.ReactNode
     className?: string
+    skin?: boolean
 }
 
 // border-primary border-x overflow-hidden first:mt-0 first:rounded-t last:rounded-b
 
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
-    ({ children, className, ...props }, forwardedRef) => (
+    ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Item
-            className={`not-prose border-t border-primary first:border-t-0 [&_h3]:mb-0 focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border ${className}`}
+            className={`not-prose border-t border-primary first:border-t-0 [&_h3]:mb-0 focus-within:relative focus-within:z-10 ${
+                skin ? 'focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border' : ''
+            } ${className}`}
             {...props}
             ref={forwardedRef}
         >
@@ -25,15 +28,18 @@ AccordionItem.displayName = 'AccordionItem'
 interface AccordionTriggerProps extends React.ComponentPropsWithoutRef<typeof RadixAccordion.Trigger> {
     children: React.ReactNode
     className?: string
+    skin?: boolean
 }
 
 // border-b border-primary
 
 const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
-    ({ children, className, ...props }, forwardedRef) => (
+    ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Header className="flex">
             <RadixAccordion.Trigger
-                className={`group flex flex-1 items-center justify-between px-2 py-1 text-sm leading-none first:rounded-t last:rounded-b text-primary bg-accent outline-none hover:bg-accent ${className}`}
+                className={`group flex flex-1 items-center justify-between px-2 py-1 text-sm leading-none ${
+                    skin ? 'first:rounded-t last:rounded-b bg-accent hover:bg-accent' : ''
+                } text-primary outline-none ${className}`}
                 {...props}
                 ref={forwardedRef}
             >
@@ -51,14 +57,17 @@ AccordionTrigger.displayName = 'AccordionTrigger'
 interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof RadixAccordion.Content> {
     children: React.ReactNode
     className?: string
+    skin?: boolean
 }
 
 // data-[state=open]:border-b
 
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
-    ({ children, className, ...props }, forwardedRef) => (
+    ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Content
-            className={`overflow-hidden bg-primary text-primary data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown border-primary border-t p-2 last:rounded-b [&>p:last-child]:mb-0 ${className}`}
+            className={`overflow-hidden ${
+                skin ? 'bg-primary text-primary border-primary border-t' : ''
+            } data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown p-2 last:rounded-b [&>p:last-child]:mb-0 ${className}`}
             {...props}
             ref={forwardedRef}
             asChild
@@ -83,6 +92,8 @@ interface AccordionRootProps
     defaultValue?: string
     onValueChange?: (value: string) => void
     contentClassName?: string
+    triggerClassName?: string
+    skin?: boolean
 }
 
 export const Accordion = ({
@@ -91,11 +102,13 @@ export const Accordion = ({
     defaultValue,
     onValueChange,
     contentClassName,
+    triggerClassName,
+    skin = true,
     ...props
 }: AccordionRootProps) => {
     return (
         <RadixAccordion.Root
-            className={`rounded border border-primary ${className}`}
+            className={`${skin ? 'rounded border border-primary' : ''} ${className}`}
             type="single"
             collapsible
             defaultValue={defaultValue}
@@ -104,8 +117,12 @@ export const Accordion = ({
         >
             {items.map(({ value, trigger, content }, index) => (
                 <AccordionItem key={value || `item-${index}`} value={value || `item-${index}`}>
-                    <AccordionTrigger>{trigger}</AccordionTrigger>
-                    <AccordionContent className={contentClassName}>{content}</AccordionContent>
+                    <AccordionTrigger className={triggerClassName} skin={skin}>
+                        {trigger}
+                    </AccordionTrigger>
+                    <AccordionContent className={contentClassName} skin={skin}>
+                        {content}
+                    </AccordionContent>
                 </AccordionItem>
             ))}
         </RadixAccordion.Root>

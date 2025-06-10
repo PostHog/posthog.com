@@ -22,6 +22,7 @@ interface ExplorerProps {
     sidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
     fullScreen?: boolean
+    showTitle?: boolean
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }) => {
@@ -55,6 +56,7 @@ export default function Explorer({
     sidebarContent,
     children,
     fullScreen = false,
+    showTitle = true,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') // Remove leading slash
@@ -137,7 +139,7 @@ export default function Explorer({
                     {fullScreen ? (
                         children
                     ) : (
-                        <ScrollArea className="px-4">
+                        <ScrollArea>
                             {/* <DebugContainerQuery /> */}
                             {accentImage && (
                                 <div className="absolute right-0 top-6">
@@ -148,8 +150,8 @@ export default function Explorer({
                                     </div>
                                 </div>
                             )}
-                            <div className="relative p-6">
-                                {!fullScreen && <h1>{title}</h1>}
+                            <div className="relative p-4">
+                                {!fullScreen && showTitle && <h1>{title}</h1>}
                                 {children}
                             </div>
                         </ScrollArea>
