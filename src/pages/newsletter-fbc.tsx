@@ -202,7 +202,7 @@ function NewsletterFBC(): JSX.Element {
                         setSubmitted={setSubmitted}
                     />
                     <div className="w-full max-w-3xl">
-                        <h3 className="text-xl font-bold mb-4 text-center">Top issues</h3>
+                        <h3 className="text-xl font-bold mb-4 text-center">Top posts</h3>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             {topIssues.map((issue) => (
                                 <Link
