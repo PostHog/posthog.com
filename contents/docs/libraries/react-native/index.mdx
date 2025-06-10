@@ -369,7 +369,7 @@ const MyComponent = () => {
 }
 ```
 
-## Upgrading from V1 or V2 to V3
+## Upgrading from V1, V2 to V3 or V3 to V4
 
 V1 of this library utilised the underlying `posthog-ios` and `posthog-android` SDKs to do most of the work. Since the new version is written entirely in JS, using only Expo supported libraries, there are some changes to the way PostHog is configured as well as actually calling PostHog.
 
@@ -422,4 +422,18 @@ const posthog = new PostHog('<ph_project_api_key>', {
 
 // Use created instance rather than the PostHog class
 posthog.capture("foo")
+
+// V4 Setup difference
+import PostHog from 'posthog-react-native'
+
+const posthog = new PostHog('<ph_project_api_key>', {
+    // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+    host: '<ph_client_api_host>',
+    captureAppLifecycleEvents: true, // instead of `captureNativeAppLifecycleEvents` or `autocapture={{ captureLifecycleEvents: true }}`,
+    // captureMode: 'json', // No longer supported
+    // maskPhotoLibraryImages: true, // No longer supported
+})
+
+posthog.setPersonPropertiesForFlags(...) // instead of `personProperties`
+posthog.setGroupPropertiesForFlags(...) // instead of `groupProperties`
 ```
