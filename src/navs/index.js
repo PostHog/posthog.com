@@ -773,6 +773,10 @@ export const handbookSidebar = [
                 url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
             },
             {
+                name: 'Getting to know your customers',
+                url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
+            },
+            {
                 name: 'Health tracking',
                 url: '/handbook/cs-and-onboarding/health-tracking',
             },
