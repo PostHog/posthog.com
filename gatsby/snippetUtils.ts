@@ -6,6 +6,20 @@ type Snippet = {
     snippet: string | undefined
 }
 
+export const resolveSnippets = (body: string, filePath: string, depth: number = 0): string => {
+    const imports: Snippet[] = resolveSnippetImports(body, filePath)
+    imports.forEach((snippet) => {
+        if (snippet && snippet.snippet) {
+            // Recursively resolve nested imports using the snippet's own file path
+            const cleanPath = path.resolve(path.dirname(filePath), snippet.path)
+            const resolvedSnippet = resolveSnippets(snippet.snippet, cleanPath, depth + 1)
+            snippet.snippet = resolvedSnippet
+        }
+    })
+
+    return replaceSnippetImports(body, imports)
+}
+
 export const resolveSnippetImports = (body: string, filePath: string): Snippet[] => {
     const regex = /import\s+(.*?)\s+from\s+['"](.*?\.(md|mdx))['"]/g
     const imports: Snippet[] = []
