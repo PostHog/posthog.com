@@ -21,6 +21,9 @@ import ZoomHover from 'components/ZoomHover'
 import CTA from 'components/Home/CTA'
 import PlanComparison from 'components/Products/Slides/PlanComparison'
 
+// Product configuration - change this to adapt for different products
+const PRODUCT_TYPE = 'session_replay'
+
 // Component for individual slide thumbnail with proper scaling
 const SlideThumb = ({ slide, index, isActive }: { slide: any; index: number; isActive: boolean }) => {
     return (
@@ -64,9 +67,8 @@ const SlideThumbnails = ({ slides, activeSlideIndex }: { slides: any[]; activeSl
 }
 
 // Features component using tab UI
-const FeaturesTab = () => {
-    const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
-    const featuresContent = sessionReplayProduct?.features || []
+const FeaturesTab = ({ productHandle }: { productHandle: any }) => {
+    const featuresContent = productHandle?.features || []
     const [currentTab, setCurrentTab] = useState(0)
 
     if (featuresContent.length === 0) {
@@ -131,9 +133,8 @@ const FeaturesTab = () => {
 }
 
 // Questions tabs component sourcing data from useProduct
-const QuestionsTabs = ({ tutorialData }: { tutorialData: any }) => {
-    const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
-    const questions = sessionReplayProduct?.questions || []
+const QuestionsTabs = ({ tutorialData, productHandle }: { tutorialData: any; productHandle: any }) => {
+    const questions = productHandle?.questions || []
     const [currentTab, setCurrentTab] = useState(0)
 
     // Helper function to get content for a question URL
@@ -345,15 +346,15 @@ export default function SessionReplay(): JSX.Element {
     // Extract products data for the pricing component
     const products = data.allProductData.nodes[0].products
 
-    // Get session replay product data and customers
-    const sessionReplayFromProducts = useProduct({ type: 'session_replay' }) as any
+    // Get product data and customers using abstracted product type
+    const productHandle = useProduct({ type: PRODUCT_TYPE }) as any
     const { getCustomers, hasCaseStudy } = useCustomers()
 
     // Get all products for pairsWith lookup
     const allProducts = useProduct() as any[]
 
-    // Get customer slugs from session replay product and retrieve customer data
-    const customerSlugs = sessionReplayFromProducts?.customers ? Object.keys(sessionReplayFromProducts.customers) : []
+    // Get customer slugs from product and retrieve customer data
+    const customerSlugs = productHandle?.customers ? Object.keys(productHandle.customers) : []
     const customers = getCustomers(customerSlugs)
 
     // Create table structure for customers
@@ -366,10 +367,10 @@ export default function SessionReplay(): JSX.Element {
 
     const customerTableRows = customers
         .filter((customer) => {
-            return sessionReplayFromProducts?.customers?.[customer.slug]
+            return productHandle?.customers?.[customer.slug]
         })
         .map((customer, index) => {
-            const customerData = sessionReplayFromProducts?.customers?.[customer.slug]
+            const customerData = productHandle?.customers?.[customer.slug]
 
             return {
                 cells: [
@@ -425,34 +426,29 @@ export default function SessionReplay(): JSX.Element {
                 <div className="h-full p-12 flex flex-col relative bg-yellow text-white">
                     <CloudinaryImage
                         src={
-                            (sessionReplayFromProducts?.screenshots?.[0]
-                                ?.src as `https://res.cloudinary.com/${string}`) ||
+                            (productHandle?.screenshots?.[0]?.src as `https://res.cloudinary.com/${string}`) ||
                             'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg'
                         }
-                        alt={sessionReplayFromProducts?.screenshots?.[0]?.alt || 'Product screenshot'}
+                        alt={productHandle?.screenshots?.[0]?.alt || 'Product screenshot'}
                         className={screenshotClasses}
                     />
                     <CloudinaryImage
                         src={
-                            (sessionReplayFromProducts?.hog?.src as `https://res.cloudinary.com/${string}`) ||
+                            (productHandle?.hog?.src as `https://res.cloudinary.com/${string}`) ||
                             'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png'
                         }
-                        alt={sessionReplayFromProducts?.hog?.alt || 'Hedgehog'}
+                        alt={productHandle?.hog?.alt || 'Hedgehog'}
                         className={hogClasses}
                     />
                     <div className="pt-12 pr-12 pb-1/2 pl-1/2">
                         <div className="inline-flex items-center gap-3 text-primary mb-4">
-                            {sessionReplayFromProducts?.Icon && (
-                                <sessionReplayFromProducts.Icon className="size-7 text-black" />
-                            )}
-                            <span className="text-xl font-bold text-black">{sessionReplayFromProducts?.name}</span>
+                            {productHandle?.Icon && <productHandle.Icon className="size-7 text-black" />}
+                            <span className="text-xl font-bold text-black">{productHandle?.name}</span>
                         </div>
                         <h1 className="text-5xl font-bold text-black mb-4 leading-tight">
-                            {sessionReplayFromProducts?.title || sessionReplayFromProducts?.name}
+                            {productHandle?.title || productHandle?.name}
                         </h1>
-                        <p className="text-xl text-black mb-8 leading-relaxed">
-                            {sessionReplayFromProducts?.description}
-                        </p>
+                        <p className="text-xl text-black mb-8 leading-relaxed">{productHandle?.description}</p>
                     </div>
                 </div>
             ),
@@ -464,7 +460,7 @@ export default function SessionReplay(): JSX.Element {
                     <h2 className="text-4xl font-bold text-primary mb-6 text-center">
                         Customers who love{' '}
                         <Logo noText color="primary" className="h-14 inline-block relative -top-1 mx-1" />{' '}
-                        {sessionReplayFromProducts?.name}
+                        {productHandle?.name}
                     </h2>
                     <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" />
                 </div>
@@ -474,7 +470,7 @@ export default function SessionReplay(): JSX.Element {
             name: 'Features',
             content: (
                 <div className="h-full">
-                    <FeaturesTab />
+                    <FeaturesTab productHandle={productHandle} />
                 </div>
             ),
 
@@ -505,13 +501,13 @@ export default function SessionReplay(): JSX.Element {
                 <div className="h-full flex flex-col p-4">
                     <div className="flex-0">
                         <h2 className="text-4xl font-bold text-primary my-2 text-center">
-                            What can I discover with {sessionReplayFromProducts?.name}?
+                            What can I discover with {productHandle?.name}?
                         </h2>
                         <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
-                            {sessionReplayFromProducts?.answersDescription}
+                            {productHandle?.answersDescription}
                         </p>
                     </div>
-                    <QuestionsTabs tutorialData={data} />
+                    <QuestionsTabs tutorialData={data} productHandle={productHandle} />
                 </div>
             ),
         },
@@ -558,30 +554,28 @@ export default function SessionReplay(): JSX.Element {
                                 Reasons a competitor might suit you better<sup>*</sup>
                             </h3>
                             <ul className="p-0 mb-2 list-none">
-                                {sessionReplayFromProducts?.comparison?.summary?.them?.map(
-                                    (item: any, index: number) => (
-                                        <li key={index} className="border-b-2 border-primary py-2">
-                                            <span className="font-semibold text-lg">{item.title}</span>
-                                            {item.subtitle && (
-                                                <span className="text-secondary ml-2 italic">
-                                                    Update:{' '}
-                                                    {item.subtitleUrl ? (
-                                                        <a
-                                                            href={item.subtitleUrl}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="underline"
-                                                        >
-                                                            {item.subtitle}
-                                                        </a>
-                                                    ) : (
-                                                        item.subtitle
-                                                    )}
-                                                </span>
-                                            )}
-                                        </li>
-                                    )
-                                )}
+                                {productHandle?.comparison?.summary?.them?.map((item: any, index: number) => (
+                                    <li key={index} className="border-b-2 border-primary py-2">
+                                        <span className="font-semibold text-lg">{item.title}</span>
+                                        {item.subtitle && (
+                                            <span className="text-secondary ml-2 italic">
+                                                Update:{' '}
+                                                {item.subtitleUrl ? (
+                                                    <a
+                                                        href={item.subtitleUrl}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                        className="underline"
+                                                    >
+                                                        {item.subtitle}
+                                                    </a>
+                                                ) : (
+                                                    item.subtitle
+                                                )}
+                                            </span>
+                                        )}
+                                    </li>
+                                ))}
                             </ul>
                             <strong className="text-secondary italic">*for now!</strong>
                         </div>
@@ -592,7 +586,7 @@ export default function SessionReplay(): JSX.Element {
                                 PostHog if you want:
                             </h3>
                             <ul className="p-0 mb-2 list-none">
-                                {sessionReplayFromProducts?.comparison?.summary?.us?.map((item: any, index: number) => (
+                                {productHandle?.comparison?.summary?.us?.map((item: any, index: number) => (
                                     <li key={index} className="border-b-2 border-primary py-2">
                                         <span className="font-semibold text-lg">{item.title}</span>
                                         {item.subtitle && <span className="text-secondary ml-1">{item.subtitle}</span>}
@@ -618,48 +612,46 @@ export default function SessionReplay(): JSX.Element {
                                         <th className="border border-primary px-2 py-1.5 text-left font-semibold">
                                             Feature
                                         </th>
-                                        {Object.keys(
-                                            sessionReplayFromProducts?.comparison?.features?.[0]?.companies || {}
-                                        ).map((company: string) => (
-                                            <th
-                                                key={company}
-                                                className="border border-primary px-2 py-1.5 text-center font-semibold min-w-[100px]"
-                                            >
-                                                {company}
-                                            </th>
-                                        ))}
+                                        {Object.keys(productHandle?.comparison?.features?.[0]?.companies || {}).map(
+                                            (company: string) => (
+                                                <th
+                                                    key={company}
+                                                    className="border border-primary px-2 py-1.5 text-center font-semibold min-w-[100px]"
+                                                >
+                                                    {company}
+                                                </th>
+                                            )
+                                        )}
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {sessionReplayFromProducts?.comparison?.features?.map(
-                                        (feature: any, index: number) => (
-                                            <tr key={index} className={index % 2 === 0 ? 'bg-primary' : 'bg-accent'}>
-                                                <td className="border border-primary px-2 py-1.5 font-medium">
-                                                    {feature.feature}
-                                                </td>
-                                                {Object.entries(feature.companies).map(([company, supported]) => (
-                                                    <td
-                                                        key={company}
-                                                        className="border border-primary px-2 py-1.5 text-center"
-                                                    >
-                                                        {typeof supported === 'boolean' ? (
-                                                            supported ? (
-                                                                <span className="text-green font-bold">✓</span>
-                                                            ) : (
-                                                                <span className="text-red font-bold">✗</span>
-                                                            )
+                                    {productHandle?.comparison?.features?.map((feature: any, index: number) => (
+                                        <tr key={index} className={index % 2 === 0 ? 'bg-primary' : 'bg-accent'}>
+                                            <td className="border border-primary px-2 py-1.5 font-medium">
+                                                {feature.feature}
+                                            </td>
+                                            {Object.entries(feature.companies).map(([company, supported]) => (
+                                                <td
+                                                    key={company}
+                                                    className="border border-primary px-2 py-1.5 text-center"
+                                                >
+                                                    {typeof supported === 'boolean' ? (
+                                                        supported ? (
+                                                            <span className="text-green font-bold">✓</span>
                                                         ) : (
-                                                            <span
-                                                                dangerouslySetInnerHTML={{
-                                                                    __html: supported as string,
-                                                                }}
-                                                            />
-                                                        )}
-                                                    </td>
-                                                ))}
-                                            </tr>
-                                        )
-                                    )}
+                                                            <span className="text-red font-bold">✗</span>
+                                                        )
+                                                    ) : (
+                                                        <span
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: supported as string,
+                                                            }}
+                                                        />
+                                                    )}
+                                                </td>
+                                            ))}
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </table>
                         </div>
@@ -674,15 +666,16 @@ export default function SessionReplay(): JSX.Element {
                     <h2 className="text-4xl font-bold text-primary mb-2 text-center">Explore the docs</h2>
                     <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
                         Get a more technical overview of how everything works{' '}
-                        <Link to="/docs/session-replay" state={{ newWindow: true }}>
+                        <Link to={`/docs/${productHandle?.slug}`} state={{ newWindow: true }}>
                             in our docs
                         </Link>
                         .
                     </p>
                     <DocLinks
                         menu={
-                            docsMenu.children.find(({ name }) => name.toLowerCase() === 'session replay')?.children ||
-                            []
+                            docsMenu.children.find(
+                                ({ name }) => name.toLowerCase() === productHandle?.name.toLowerCase()
+                            )?.children || []
                         }
                     />
                 </div>
@@ -694,11 +687,10 @@ export default function SessionReplay(): JSX.Element {
                 <div className="h-full p-12 flex flex-col justify-center text-center bg-light dark:bg-dark">
                     <h2 className="text-4xl font-bold text-primary mb-2">Pairs with...</h2>
                     <p className="text-xl text-secondary max-w-4xl mx-auto mb-12">
-                        {sessionReplayFromProducts?.name} pairs with other products to give you a complete picture of
-                        your product.
+                        {productHandle?.name} pairs with other products to give you a complete picture of your product.
                     </p>
                     <div className="grid grid-cols-3 gap-4">
-                        {sessionReplayFromProducts?.pairsWith?.map((pair: any) => {
+                        {productHandle?.pairsWith?.map((pair: any) => {
                             // Find the product details by slug
                             const productDetails = allProducts.find((product: any) => product.slug === pair.slug)
                             if (!productDetails) return null

@@ -211,7 +211,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({ products, productType, 
     return (
         <div className="h-full grid grid-cols-5">
             {/* Left side - Pricing */}
-            <div className="p-12 bg-accent col-span-2 flex flex-col justify-between">
+            <div className="p-12 bg-tan dark:bg-dark col-span-2 flex flex-col justify-between">
                 <div>
                     <h2 className="text-4xl font-bold text-primary mb-6">Pricing</h2>
 
