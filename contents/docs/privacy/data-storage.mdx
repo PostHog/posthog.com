@@ -19,6 +19,7 @@ This guide covers the following features:
 | [Data access control](#data-access-control) | Manage who can access what data in PostHog | 
 
 ## Data storage location
+
 If you require GDPR compliance, there are [specific guidelines](docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
 
 ## Processing data before storage
@@ -96,7 +97,9 @@ You can remove unwanted data from PostHog by deleting groups and persons.
 ### Right to be forgotten
 
 <CalloutBox icon="IconWarning" title="Note" type="caution">
+
   Reusing `distinct_id` values after deletion is not supported. If you wish to delete bad data on some `distinct_id` values but keep that person's other `distinct_id` active, you should first split that person with the **Split IDs** button.
+
 </CalloutBox>
 
 Persons and events can be deleted using our API endpoints. This action requires a [personal API key](https://us.posthog.com/settings/user-api-keys).
@@ -172,6 +175,15 @@ print(response.json())
 
 </MultiLanguage>
 
+### Manual data deletion
+
+You can manually delete persons and their events in the PostHog UI:
+
+- Select **Persons** from the left-hand menu
+- Search for the person via their `distinct_id` or a property like email.
+- Click **view** next to the person within the search results
+- Click **Delete person** to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
+
 ### Asynchronous data deletion
 
 While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
@@ -185,5 +197,7 @@ A important part of protecting your users' privacy is to control who can access 
 1. [Organization level](/docs/settings/access-control#1-organization-level)
 2. [Project level](/docs/settings/access-control#2-project-level)
 3. [Resource level](/docs/settings/access-control#3-resource-level)
+
+It's up to you to use these access control features to grant access to only the people who need to access the data.
 
 You can follow this comprehensive guide to [access control](/docs/settings/access-control) to learn more.

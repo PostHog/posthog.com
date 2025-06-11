@@ -2406,6 +2406,10 @@ export const docsMenu = {
                                     name: 'Configuring Slack',
                                     url: '/docs/self-host/configure/slack',
                                 },
+                                {
+                                    name: 'Data egress',
+                                    url: '/docs/self-host/configure/data-egress',
+                                },
                             ],
                         },
                         {
@@ -2588,14 +2592,6 @@ export const docsMenu = {
                         {
                             name: 'SOC 2',
                             url: '/handbook/company/security#soc-2',
-                        },
-                        {
-                            name: 'Data egress & compliance',
-                            url: '/docs/privacy/egress',
-                        },
-                        {
-                            name: 'Data deletion',
-                            url: '/docs/privacy/data-deletion',
                         },
                         {
                             name: 'Ad blockers',
