@@ -195,5 +195,7 @@ export default function TeamMember({
                 <TeamMemberLink {...person} photo={photo} className={className} showOnlyFirstName={showOnlyFirstName} />
             )}
         </>
-    ) : null
+    ) : (
+        name
+    )
 }

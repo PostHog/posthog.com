@@ -35,7 +35,7 @@ const Router = (props) => {
     if (/^\/handbook|^\/docs\/(?!api)|^\/manual/.test(path) && props.data?.post) {
         return <Handbook {...props} />
     }
-    if (props.pageContext?.post || /^posts|^changelog\/(.*?)\//.test(path)) {
+    if ((props.pageContext?.post || /^posts|^changelog\/(.*?)\//.test(path)) && props.data) {
         return <BlogPost {...props} />
     }
     return children
