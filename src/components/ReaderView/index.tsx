@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import {
@@ -31,6 +31,7 @@ import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SearchProvider from 'components/Editor/SearchProvider'
+import { useLocation } from '@reach/router'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -343,6 +344,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
 }
 
 function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commits, filePath, children, leftSidebar }) {
+    const { hash } = useLocation()
     const contentRef = useRef(null)
     const {
         isNavVisible,
@@ -367,6 +369,18 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
         setFullWidthContent(isFullWidth)
         localStorage.setItem('full-width-content', isFullWidth.toString())
     }
+
+    useEffect(() => {
+        if (hash) {
+            const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]')
+            if (scrollElement) {
+                scrollElement.scrollTo({
+                    top: document.getElementById(CSS.escape(hash.replace('#', '')))?.offsetTop,
+                    behavior: 'smooth',
+                })
+            }
+        }
+    }, [hash])
 
     return (
         <SearchProvider>
