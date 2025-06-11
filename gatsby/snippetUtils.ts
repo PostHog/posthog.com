@@ -6,14 +6,8 @@ type Snippet = {
     snippet: string | undefined
 }
 
-export const resolveSnippetImports = (
-    body: string,
-    filePath: string,
-    restrictToOnlySnippetsDir: boolean = true
-): Snippet[] => {
-    const regex = restrictToOnlySnippetsDir
-        ? /import\s+(.*?)\s+from\s+['"](.*?\/_snippets\/.*?)['"]/g
-        : /import\s+(.*?)\s+from\s+['"](.*?\.(md|mdx))['"]/g
+export const resolveSnippetImports = (body: string, filePath: string): Snippet[] => {
+    const regex = /import\s+(.*?)\s+from\s+['"](.*?\.(md|mdx))['"]/g
     const imports: Snippet[] = []
     let match
     while ((match = regex.exec(body)) !== null) {
@@ -23,7 +17,7 @@ export const resolveSnippetImports = (
             let snippet = fs.readFileSync(cleanPath, 'utf8').trimEnd()
 
             // Recursively resolve nested imports using the snippet's own file path (for relative imports)
-            const nestedImports = resolveSnippetImports(snippet, cleanPath, false)
+            const nestedImports = resolveSnippetImports(snippet, cleanPath)
             if (nestedImports.length > 0) {
                 snippet = replaceSnippetImports(snippet, nestedImports)
             }
