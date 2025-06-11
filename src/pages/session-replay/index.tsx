@@ -26,6 +26,7 @@ import Logo from 'components/Logo'
 import { docsMenu } from '../../navs'
 import { DocLinks } from 'components/Products/DocsLinks'
 import ZoomHover from 'components/ZoomHover'
+import CTA from 'components/Home/CTA'
 
 const slideClasses =
     'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
@@ -416,11 +417,11 @@ export default function SessionReplay(): JSX.Element {
         {
             name: 'Customers',
             content: (
-                <div className="h-full p-12">
+                <div className="h-full p-12 bg-light dark:bg-dark">
                     <h2 className="text-4xl font-bold text-primary mb-6 text-center">
                         Customers who love session replay
                     </h2>
-                    <OSTable columns={customerTableColumns} rows={customerTableRows} />
+                    <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" />
                 </div>
             ),
         },
@@ -673,8 +674,9 @@ export default function SessionReplay(): JSX.Element {
         {
             name: 'Getting started',
             content: (
-                <div className="h-full p-12 flex flex-col justify-center text-center">
-                    <h2 className="text-4xl font-bold text-primary mb-6">Get started</h2>
+                <div className="h-full p-12 flex flex-col justify-center bg-light/50 dark:bg-dark/50">
+                    {/*                     
+                    <h2 className="text-4xl font-bold text-primary mb-2">Get started</h2>
                     <p className="text-xl text-secondary max-w-4xl mx-auto mb-8">
                         Ready to see how users interact with your product?
                     </p>
@@ -686,6 +688,12 @@ export default function SessionReplay(): JSX.Element {
                             Talk to a human
                         </CallToAction>
                     </div>
+
+                    <p className="text-xl text-secondary max-w-4xl mx-auto mt-8">
+                        You can also ask a question <Link to="/questions/topic/session-replay" state={{ newWindow: true }}>in our community forums</Link>.
+                    </p> */}
+
+                    <CTA />
                 </div>
             ),
         },
