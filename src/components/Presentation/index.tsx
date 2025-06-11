@@ -104,14 +104,6 @@ export default function Presentation({
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
     const observerRef = useRef<IntersectionObserver | null>(null)
 
-    const handleValueChange = (value: string) => {
-        navigate(`/${value}`)
-    }
-
-    const handleSidebarTabChange = (value: string) => {
-        setSidebarTab(value)
-    }
-
     const toggleNav = () => {
         setIsNavVisible(!isNavVisible)
     }
@@ -127,7 +119,6 @@ export default function Presentation({
             const containerRect = scrollContainer.getBoundingClientRect()
             const containerTop = containerRect.top
             const containerBottom = containerRect.bottom
-            const containerHeight = containerRect.height
 
             let bestSlideIndex = 0
             let maxVisibleArea = 0
