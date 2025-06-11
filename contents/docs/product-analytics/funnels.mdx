@@ -83,6 +83,12 @@ Select the steps to include in your funnel, ideally starting with the first even
     alt="Funnel steps"
 />
 
+By default, funnel steps must be completed sequentially, however you are able to change this behavior by selecting one of three different step orders:
+
+1. **Sequential** – Step B must happen after Step A, but any number events can happen between A and B.
+2. **Strict order** – Step B must happen directly after Step A without any events in between.
+3. **Any order** – Steps can be completed in any sequence.
+
 ### Filtering steps
 
 To refine your steps, you can filter out events using event, person, or group properties, autocapture elements, or SQL. To do this, click the **filter icon**  next to the step, choose your property, and fill in the details. You can also set a global filter in the **Filters** section in the bottom.
@@ -172,7 +178,7 @@ In the last touchpoint mode, one person will always only have one value.
 
 ##### 3. All steps
 
-In this case, all events completed sequentially will be included in the funnel.
+In this case, all events completed in your selected step order will be included in the funnel.
 
 Consider the following entirely possible example of events from a single person:
 
