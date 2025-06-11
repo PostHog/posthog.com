@@ -35,13 +35,15 @@ interface EditorProps {
     children?: React.ReactNode
     availableFilters?: {
         label: string
+        value?: string
         options: {
             label: string
             value: any
         }[]
         onChange?: (value: string) => void
         operator: string
-        filter: (obj: any, key: string, value: any) => boolean
+        filter?: (obj: any, key: string, value: any) => boolean
+        initialValue?: string
     }[]
     onSearchChange?: (query: string) => void
     showFilters?: boolean
@@ -49,6 +51,7 @@ interface EditorProps {
     dataToFilter?: any
     onFilterChange?: (data: any) => void
     actionButtons?: EditorActionButtons
+    handleFilterChange?: (filters: any) => void
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -85,6 +88,7 @@ export function Editor({
     dataToFilter,
     onFilterChange,
     actionButtons,
+    ...other
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
@@ -263,8 +267,12 @@ export function Editor({
     const handleFilterChange = (key: string, value: any, filter: (obj: any, value: any) => boolean) => {
         const newFilters = { ...filters, [key]: { value, filter } }
         setFilters(newFilters)
-        const filteredData = filterData(dataToFilter, newFilters)
-        onFilterChange?.(filteredData)
+        if (other.handleFilterChange) {
+            other.handleFilterChange(newFilters)
+        } else {
+            const filteredData = filterData(dataToFilter, newFilters)
+            onFilterChange?.(filteredData)
+        }
     }
 
     useEffect(() => {
@@ -274,14 +282,18 @@ export function Editor({
             const newFilters = {}
 
             searchParams.forEach((value, key) => {
-                const filter = availableFilters.find((f) => f.label.toLowerCase() === key.toLowerCase())
+                const filter = availableFilters.find((f) => (f.value || f.label).toLowerCase() === key.toLowerCase())
                 if (filter) {
-                    newFilters[key] = { value, filter: filter.filter }
+                    newFilters[filter.value || filter.label] = { value, filter: filter.filter }
                 }
             })
             setFilters(newFilters)
-            const filteredData = filterData(dataToFilter, newFilters)
-            onFilterChange?.(filteredData)
+            if (other.handleFilterChange) {
+                other.handleFilterChange(newFilters)
+            } else {
+                const filteredData = filterData(dataToFilter, newFilters)
+                onFilterChange?.(filteredData)
+            }
         }
     }, [availableFilters])
 
@@ -314,7 +326,7 @@ export function Editor({
                                             <Select
                                                 disabled={disableFilterChange}
                                                 placeholder={filter.label}
-                                                defaultValue={filter.options[0].value}
+                                                defaultValue={filter.initialValue || filter.options[0].value}
                                                 key={filter.label}
                                                 groups={[
                                                     {
@@ -326,7 +338,11 @@ export function Editor({
                                                     },
                                                 ]}
                                                 onValueChange={(value) =>
-                                                    handleFilterChange(filter.label, value, filter.filter)
+                                                    handleFilterChange(
+                                                        filter.value || filter.label,
+                                                        value,
+                                                        filter.filter
+                                                    )
                                                 }
                                             />
                                         </div>

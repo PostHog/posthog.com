@@ -228,7 +228,7 @@ export const getParams = (root, tag, sort) => {
     }
 }
 
-const getSortOption = (root?: string) =>
+export const getSortOption = (root?: string) =>
     sortOptions[['blog', 'changelog', 'newsletter', 'spotlight'].includes(root) ? 1 : 0]
 
 const Filters = ({ tag, setTag, sort, setSort, activeMenu }) => {

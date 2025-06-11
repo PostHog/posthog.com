@@ -540,6 +540,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                         post: true,
                         title: categoryLabel,
                         article: false,
+                        root: categoryFolder,
                     },
                 })
 
@@ -552,6 +553,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             post: true,
                             title: tagLabel,
                             article: false,
+                            root: categoryFolder,
                         },
                     })
                 })
