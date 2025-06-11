@@ -29,12 +29,12 @@ Formatting all this correctly looks like this:
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<PH_PROJECT_API_KEY>",
   "distinct_id": "ian@posthog.com"
-}' "<ph_app_host>/flags/?v=3"
+}' "<ph_app_host>/flags/?v=2"
 ```
 
 ```python
 import requests
-url = "<ph_app_host>/flags/?v=3"
+url = "<ph_app_host>/flags/?v=2"
 
 headers = {
   "Content-Type": "application/json",
@@ -83,7 +83,7 @@ You can use this response with whatever language to control access or usage of f
 
 ```python
 import requests
-url = "<ph_app_host>/flags/?v=3"
+url = "<ph_app_host>/flags/?v=2"
 
 headers = {
   "Content-Type": "application/json",
@@ -291,7 +291,7 @@ body = {
 }
 
 evaluate = requests.post(
-  '<ph_app_host>/flags/?v=3',
+  '<ph_app_host>/flags/?v=2',
   headers=json_headers, 
   json=body
 )
