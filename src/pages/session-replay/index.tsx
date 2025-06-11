@@ -100,7 +100,7 @@ const FeaturesTab = ({ productHandle }: { productHandle: any }) => {
             </div>
             {featuresContent.map((item, index) => (
                 <Tabs.Content
-                    className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 border-l border-primary grow rounded px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative "
+                    className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 border-l border-primary grow rounded px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative"
                     key={index}
                     value={`tab-${index}`}
                 >
@@ -424,22 +424,20 @@ export default function SessionReplay(): JSX.Element {
             name: 'Overview',
             content: (
                 <div className="h-full p-12 flex flex-col relative bg-yellow text-white">
-                    <CloudinaryImage
-                        src={
-                            (productHandle?.screenshots?.[0]?.src as `https://res.cloudinary.com/${string}`) ||
-                            'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg'
-                        }
-                        alt={productHandle?.screenshots?.[0]?.alt || 'Product screenshot'}
-                        className={screenshotClasses}
-                    />
-                    <CloudinaryImage
-                        src={
-                            (productHandle?.hog?.src as `https://res.cloudinary.com/${string}`) ||
-                            'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png'
-                        }
-                        alt={productHandle?.hog?.alt || 'Hedgehog'}
-                        className={hogClasses}
-                    />
+                    {productHandle?.screenshots?.[0]?.src && (
+                        <CloudinaryImage
+                            src={productHandle.screenshots[0].src as `https://res.cloudinary.com/${string}`}
+                            alt={productHandle?.screenshots?.[0]?.alt}
+                            className={screenshotClasses}
+                        />
+                    )}
+                    {productHandle?.hog?.src && (
+                        <CloudinaryImage
+                            src={productHandle.hog.src as `https://res.cloudinary.com/${string}`}
+                            alt={productHandle?.hog?.alt}
+                            className={hogClasses}
+                        />
+                    )}
                     <div className="pt-12 pr-12 pb-1/2 pl-1/2">
                         <div className="inline-flex items-center gap-3 text-primary mb-4">
                             {productHandle?.Icon && <productHandle.Icon className="size-7 text-black" />}
@@ -516,7 +514,7 @@ export default function SessionReplay(): JSX.Element {
             content: (
                 <PlanComparison
                     products={products}
-                    productType="session_replay"
+                    productType={productHandle?.type}
                     onScrollToFeatures={() => {
                         // Find the Features slide dynamically by name
                         const featuresSlideIndex = rawSlides.findIndex((slide) => slide.name === 'Features')
@@ -666,7 +664,7 @@ export default function SessionReplay(): JSX.Element {
                     <h2 className="text-4xl font-bold text-primary mb-2 text-center">Explore the docs</h2>
                     <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
                         Get a more technical overview of how everything works{' '}
-                        <Link to={`/docs/${productHandle?.slug}`} state={{ newWindow: true }}>
+                        <Link to={`/docs/${productHandle?.type}`} state={{ newWindow: true }}>
                             in our docs
                         </Link>
                         .
@@ -763,13 +761,13 @@ export default function SessionReplay(): JSX.Element {
     return (
         <>
             <SEO
-                title="Session Replay - PostHog"
-                description="Watch people use your product to diagnose issues and understand user behavior"
-                image={`/images/og/session-replay.jpg`}
+                title={productHandle?.seo?.title}
+                description={productHandle?.seo?.description}
+                image={`/images/og/${productHandle?.handle}.jpg`}
             />
             <Presentation
                 template="generic"
-                slug="session-replay"
+                slug={productHandle?.handle}
                 title=""
                 sidebarContent={(activeSlideIndex) => (
                     <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} />

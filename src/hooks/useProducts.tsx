@@ -392,11 +392,18 @@ const initialProducts = [
         Icon: IconRewindPlay,
         name: 'Session replay',
         type: 'session_replay',
+        handle: 'session-replay',
+        slug: '/session-replay', // hoping this is old...
         title: 'Watch people use your product',
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
         answersDescription: 'Understand user behavior, identify friction points, and improve your product experience',
         color: 'yellow',
+        seo: {
+            title: 'Session replay - PostHog',
+            description: 'Watch people use your product to diagnose issues and understand user behavior',
+        },
+
         screenshots: [
             {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
@@ -413,7 +420,6 @@ const initialProducts = [
             max: 500000,
         },
         volume: 5000,
-        slug: '/session-replay',
         customers: {
             hasura: {
                 headline: 'improved conversion rates by 10-20%',
