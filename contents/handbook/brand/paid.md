@@ -49,6 +49,8 @@ For tracking conversions, we use Meta's Conversions API via the [PostHog destina
 
 Note that we do not have Meta's pixel installed, as we do not allow any third-party cookies on our site.
 
+Our ad creative can be accessed in <PrivateLink url="https://www.figma.com/design/CLj2U34xpNiHuZRo73GJPm/posthog.com?node-id=17915-50&t=9Wn8U6aWkxf2ZVry-1">Figma</PrivateLink>
+
 ## Tracking conversion
 
 We track conversion in the PostHog app, as using 3rd party trackers like Google Tag Manager is against our brand and values. 
