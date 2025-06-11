@@ -60,9 +60,14 @@ export default function CTA() {
                         transition={{ delay: 1, duration: 0.5 }}
                         initial={{ translateX: '100%', opacity: 0 }}
                         animate={{ translateX: '-2rem', opacity: 1 }}
-                        className="absolute bottom-0 right-0 xl:block hidden -z-10"
+                        className="absolute bottom-0 right-0 xl:block hiddenz-10"
                     >
-                        <CloudinaryImage loading="eager" placeholder="none" width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/conversion-hog.png" />
+                        <CloudinaryImage
+                            loading="eager"
+                            placeholder="none"
+                            width={300}
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/images/conversion-hog.png"
+                        />
                     </motion.div>
                 )}
                 <h2 className={heading('lg')}>
