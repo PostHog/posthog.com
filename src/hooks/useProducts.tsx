@@ -27,6 +27,7 @@ import { useMemo, useState } from 'react'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import CodeBlock from 'components/Home/CodeBlock'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 function SnippetRenderer() {
     const data = useStaticQuery(graphql`
@@ -457,13 +458,35 @@ const initialProducts = [
             {
                 title: 'Console logs',
                 headline: 'Console logs',
-                description: "Debug issues faster by browsing the user's console",
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/console.png',
-                        alt: 'Console logs',
-                    },
-                ],
+                children: (
+                    <>
+                        <p className="leading-tight">
+                            Console logs are useful for debugging and can be enabled by passing{' '}
+                            <code>enable_recording_console_logs: true</code> or in your project's settings.
+                        </p>
+                        <div className="flex lg:flex-row lg:gap-x-6 flex-col">
+                            <div className="shrink">
+                                <h4 className="text-lg">Your code</h4>
+                                <CodeBlock
+                                    code={`posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  enable_recording_console_log: true,
+});`}
+                                    language="js"
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <h4 className="text-lg">Console logs in a session replay</h4>
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/console-logs.png"
+                                    alt="Console logs in PostHog"
+                                    placeholder="blurred"
+                                />
+                            </div>
+                        </div>
+                    </>
+                ),
             },
             {
                 title: 'Network monitor',
@@ -484,17 +507,66 @@ const initialProducts = [
                 children: <SnippetRenderer />,
             },
             {
-                title: 'Collections',
-                headline: 'Collections',
+                title: 'Capture form inputs',
+                headline: 'Capture form inputs',
                 description:
-                    'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
-                        alt: 'Playlist',
-                    },
-                ],
+                    "Capture sessions without extra code. If you're already using PostHog.js for analytics, there's nothing else to install.",
+                children: (
+                    <>
+                        <p className="leading-tight">
+                            <code>input</code> fields are masked by default. But if you'd like to see what users are
+                            typing into a form, set <code>maskAllInputs</code> to <code>false</code>. (Password fields
+                            will still remain masked.)
+                        </p>
+                        <div className="flex flex-col md:flex-row gap-x-6">
+                            <div className="shrink">
+                                <h4 className="text-lg">Your code</h4>
+                                <CodeBlock
+                                    code={`posthog.init('<YourPostHogKey>', {
+    session_recording: {
+        maskAllInputs: false
+    }
+})`}
+                                    language="js"
+                                />
+                                <div className="pt-4">
+                                    <CodeBlock
+                                        code={`<label>Name</label>
+<input type="text" />
+
+<label>Email</label>
+<input type="email" />
+
+<label>Password</label>
+<input type="password" />`}
+                                        language="html"
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex-1">
+                                <h4 className="text-lg">Session replay</h4>
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/CodeBlocks/SessionReplay/session-replay.png"
+                                    alt="A screenshot of a session replay"
+                                    placeholder="blurred"
+                                />
+                            </div>
+                        </div>
+                    </>
+                ),
             },
+            // {
+            //     title: 'Collections',
+            //     headline: 'Collections',
+            //     description:
+            //         'Create a dynamic playlist of sessions to watch based on visitor activity, user properties, or cohort',
+            //     images: [
+            //         {
+            //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+            //             alt: 'Playlist',
+            //         },
+            //     ],
+            // },
             {
                 title: 'DOM explorer',
                 headline: 'DOM explorer',
@@ -510,13 +582,27 @@ const initialProducts = [
             {
                 title: 'Record by feature flag',
                 headline: 'Record by feature flag',
-                description: 'Record sessions for users who have a specific feature flag enabled.',
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
-                        alt: 'Record by feature flag',
-                    },
-                ],
+                description:
+                    "If you don't want to record all user sessions, you can choose to only enable it when a user is opted in to a feature flag. You can also use feature flags to record only a specific volume of randomized traffic.",
+                children: (
+                    <div>
+                        <h4 className="text-lg">Your code</h4>
+                        <CodeBlock
+                            code={`posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>',
+  disable_session_recording: true,
+});
+window.posthog.onFeatureFlags(function () {
+  if (window.posthog.isFeatureEnabled('your-feature-flag')) {
+    window.posthog.startSessionRecording();
+  }
+});
+`}
+                            language="js"
+                        />
+                    </div>
+                ),
             },
             {
                 title: 'Supported platforms',
@@ -647,13 +733,12 @@ const initialProducts = [
                 url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
             },
             { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
-            { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
-            { question: 'What’s making my users angry or frustrated?', url: '/tutorials/toolbar' },
-            { question: 'Which screens are loading slowly?', url: '/tutorials/performance-metrics' },
             {
-                question: 'How can I improve customer support with screen recordings?',
-                url: '/tutorials/session-recordings-for-support',
+                question: 'How can I understand what my power users are doing?',
+                url: '/tutorials/explore-insights-session-recordings#find-and-analyze-outliers-in-trend-graphs',
             },
+            { question: 'How do I see where errors happen?', url: '/tutorials/session-recordings-for-support' },
+            { question: 'Which screens are loading slowly?', url: '/tutorials/performance-metrics' },
             {
                 question: 'How do I understand sources of friction in my app?',
                 url: '/tutorials/filter-session-recordings',
@@ -663,8 +748,17 @@ const initialProducts = [
                 url: '/tutorials/performance-metrics#1-first-contentful-paint',
             },
             {
+                question: 'What is a user’s Dom Interactive time',
+                url: '/tutorials/performance-metrics#2-dom-interactive',
+            },
+            { question: 'What is a user’s Page Loaded time', url: '/tutorials/performance-metrics#3-page-loaded' },
+            {
                 question: 'How do I optimize site performance?',
                 url: '/tutorials/performance-metrics#optimization-cheat-sheet',
+            },
+            {
+                question: 'How can I improve customer support with screen recordings?',
+                url: '/tutorials/session-recordings-for-support',
             },
         ],
         comparison: {

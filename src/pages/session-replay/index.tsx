@@ -104,30 +104,32 @@ const FeaturesTab = () => {
             </div>
             {featuresContent.map((item, index) => (
                 <Tabs.Content
-                    className="flex-1 bg-primary border-l border-primary grow rounded px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full"
+                    className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 border-l border-primary grow rounded px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative "
                     key={index}
                     value={`tab-${index}`}
                 >
-                    <div className="px-8 pt-12 pb-8">
-                        <h2 className="text-5xl text-center mb-0">{item.headline}</h2>
-                        {item.description && <p className="mt-4 text-center text-xl">{item.description}</p>}
-                    </div>
-
-                    <div className="grid grid-cols-2 gap-4 px-8">
-                        {item.features &&
-                            item.features.map((feature, index) => (
-                                <div key={index}>
-                                    <h3 className="text-2xl mb-1">{feature.title}</h3>
-                                    <p className="text-lg">{feature.description}</p>
-                                </div>
-                            ))}
-                    </div>
-                    {item.images && item.images.length > 0 && (
-                        <div className="max-w-3xl mx-auto">
-                            <ImageSlider images={item.images} id={`feature-${index}`} />
+                    <div className="relative">
+                        <div className="px-8 pt-12 pb-8">
+                            <h2 className="text-5xl text-center mb-0">{item.headline}</h2>
+                            {item.description && <p className="mt-4 text-center text-xl">{item.description}</p>}
                         </div>
-                    )}
-                    {(item as any).children && <div className="p-4">{(item as any).children}</div>}
+
+                        <div className="grid grid-cols-2 gap-4 px-8">
+                            {item.features &&
+                                item.features.map((feature, index) => (
+                                    <div key={index}>
+                                        <h3 className="text-2xl mb-1">{feature.title}</h3>
+                                        <p className="text-lg">{feature.description}</p>
+                                    </div>
+                                ))}
+                        </div>
+                        {item.images && item.images.length > 0 && (
+                            <div className="max-w-3xl mx-auto">
+                                <ImageSlider images={item.images} id={`feature-${index}`} />
+                            </div>
+                        )}
+                        {(item as any).children && <div className="p-4">{(item as any).children}</div>}
+                    </div>
                 </Tabs.Content>
             ))}
         </Tabs.Root>
@@ -149,9 +151,10 @@ const QuestionsTabs = () => {
                     fields {
                         slug
                     }
-                    excerpt(pruneLength: 1000)
+                    rawBody
                     frontmatter {
                         title
+                        description
                     }
                 }
             }
@@ -162,11 +165,66 @@ const QuestionsTabs = () => {
     const getContentForUrl = (url?: string) => {
         if (!url) return 'No additional content available.'
 
-        // Extract slug from URL (remove hash fragments)
-        const slug = url.split('#')[0]
+        // Extract slug and hash fragment from URL
+        const [slug, hashFragment] = url.split('#')
         const tutorialNode = tutorialData.allMdx.nodes.find((node: any) => node.fields.slug === slug)
 
-        return tutorialNode ? tutorialNode.excerpt : 'Content not found.'
+        if (!tutorialNode) return 'Content not found.'
+
+        // Use frontmatter description first, if available (only if no hash fragment)
+        if (!hashFragment && tutorialNode.frontmatter?.description) {
+            return tutorialNode.frontmatter.description
+        }
+
+        // Process rawBody to get content
+        if (tutorialNode.rawBody) {
+            let content = tutorialNode.rawBody
+
+            // If there's a hash fragment, find the corresponding header and start from there
+            if (hashFragment) {
+                // Convert hash fragment to potential header formats
+                // e.g., "1-first-contentful-paint" -> "1. First Contentful Paint" or "## 1. First Contentful Paint"
+                const headerText = hashFragment.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
+
+                // Look for the header in the content (try different formats)
+                const headerPatterns = [`## ${headerText}`, `### ${headerText}`, `# ${headerText}`, headerText]
+
+                let startIndex = -1
+                for (const pattern of headerPatterns) {
+                    startIndex = content.indexOf(pattern)
+                    if (startIndex !== -1) break
+                }
+
+                // If we found the header, start content from there
+                if (startIndex !== -1) {
+                    content = content.substring(startIndex)
+                }
+            }
+
+            // Split by double newlines to get paragraphs
+            const paragraphs = content.split('\n\n')
+            // Take first few paragraphs, skip frontmatter, headers, export statements, and images
+            const contentParagraphs = paragraphs
+                .filter(
+                    (p: string) =>
+                        !p.startsWith('---') && !p.startsWith('#') && !p.startsWith('export ') && p.trim().length > 50
+                )
+                .map((p: string) => {
+                    // Remove image references ![alt](url) and standalone image lines
+                    return p
+                        .replace(/!\[.*?\]\(.*?\)/g, '')
+                        .replace(/^\s*<.*?>\s*$/gm, '')
+                        .trim()
+                })
+                .filter((p: string) => p.length > 0) // Remove empty paragraphs after image removal
+                .slice(0, 5)
+                .join('\n\n')
+
+            // Limit to reasonable length
+            return contentParagraphs.length > 900 ? contentParagraphs.substring(0, 900) + '...' : contentParagraphs
+        }
+
+        return 'No preview available.'
     }
 
     if (questions.length === 0) {
@@ -201,7 +259,7 @@ const QuestionsTabs = () => {
                 >
                     <div className="px-4">
                         <h2 className="text-3xl mb-4">{question.question}</h2>
-                        <div className="prose max-w-none [&_p]:!text-lg">
+                        <div className="prose max-w-none [&_p]:!text-lg [&_li]:!text-lg">
                             <Markdown>{getContentForUrl(question.url)}</Markdown>
                         </div>
                         {question.url && (
