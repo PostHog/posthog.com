@@ -709,12 +709,22 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Docs ownership',
+                name: 'Docs',
                 url: '/handbook/content/docs',
-            },
-            {
-                name: 'Docs style guide',
-                url: '/handbook/content/docs-style-guide',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/docs',
+                    },
+                    {
+                        name: 'Docs ownership',
+                        url: '/handbook/content/docs-ownership',
+                    },
+                    {
+                        name: 'Docs style guide',
+                        url: '/handbook/content/docs-style-guide',
+                    },
+                ],
             },
             {
                 name: 'Newsletter',
