@@ -29,25 +29,25 @@ People don't care about your product. They care about getting their job done.
 
 Your first step is to define that job in a single sentence. This isn't just a nice-to-have. Nail it and every design decision gets easier; skip it and you'll polish pixels that don't matter.
 
-A good statement is anchored in real user context and focuses on their desired outcome, not just the steps they need to take. A practical way to define it is:
+A good statement is anchored in real user context and focuses on their desired outcome. A practical way to define it is:
 
 > **When** [trigger] happens, [user persona] **wants to** [action], **so that** they can [desired outcome].
 
 Here are some examples:
 
-**Example 1: Incident management tool e.g. incident.io**
+**Example 1: Incident management tool (e.g. incident.io)**
 - ❌ "Engineers need to send incident updates."
 - ✅ "When an incident occurs, engineers want to communicate status updates quickly and clearly, so that customers and internal stakeholders stay informed and trust is maintained."
 
-**Example 2: Team wiki product e.g. Notion**  
+**Example 2: Team wiki product (e.g. Notion)**  
 - ❌ "Employees want a company handbook."
 - ✅ "When an employee has a question, they want to find the relevant answer quickly, so that they can stay productive without asking someone."
 
-**Example 3: Issue tracker e.g. Linear**  
+**Example 3: Issue tracker (e.g. Linear)**  
 - ❌ "Developers want to track bugs."
 - ✅ "When a developer hits an error, they want to log a bug quickly and hand it off, so that they can get back into their flow."
 
-Throughout the rest of this post, we'll use the issue tracker example and create a tiny bug tracker called BugSplat 🐞💥
+For the rest of this post, we'll use the issue tracker example and create a tiny bug tracker called BugSplat 🐞💥
 
 ## Step 2: Steal like a product engineer
 
@@ -65,7 +65,7 @@ Take screenshots and scribble notes. You now have a taste bar for yourself and r
 
 In the case of BugSplat, here's what I found when I researched similar apps:
 
-| Product           | What I Love                                                                                   | What I'll Avoid                                                           |
+| Product           | What I love                                                                                   | What I'll avoid                                                           |
 |-------------------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
 | **Linear**         | Clean, minimal layout<br/> Fast modal-based bug creation<br/> Keyboard shortcuts for power users      | Abstract language <br/> Intimidating for non-technical users                   |
 | **GitHub Projects** | Familiar issue structure<br/> Good activity history         | Too many fields upfront <br/> Slow to create quick entries             |
@@ -77,7 +77,7 @@ In the case of BugSplat, here's what I found when I researched similar apps:
 
 You should now have a strong opinion of how you want your app to look and feel. The next step is wireframe it to see how the UX holds together.
 
-[Lovable](https://lovable.dev/), [v0.dev](https://v0.dev/), or [Bolt](https://bolt.new/) can get you to a working wireframe fast. All you need is right prompt. Here's a template of what I like to use:
+[Lovable](https://lovable.dev/), [v0.dev](https://v0.dev/), or [Bolt](https://bolt.new/) can get you to a working wireframe fast. All you need is right prompt. Here's the template I use:
 
 ```llm
 # Goal
@@ -97,14 +97,15 @@ You're helping me design a wireframe for an app/feature that <your single senten
 - <What your app *must* do>
 - <What your app *must not* do>
 
-## Design Intent
+## Design intent
 The UI should feel: <clean, fast, minimal, playful, etc.>  
 Prioritize: <clarity, speed, minimal steps, mobile-first, etc.>
 
 ## Tech stack
 <Your preferred tech stack, component libraries, etc.>
 
-## Inspiration from Competitors
+## Inspiration from competitors
+
 ### <Competitor Name>
 **What works well:**
 - <list of patterns or layouts you like>
@@ -113,11 +114,11 @@ Prioritize: <clarity, speed, minimal steps, mobile-first, etc.>
 - <list of things to avoid>
 
 **Competitor screenshots**
-- <competitor_image_1.png>
-- <competitor_image_2.png>
+- <description of first competitor screenshot>
+- <description of second competitor screenshot>
 ```
 
-Keep prompting until it the wireframe feels right. Here's the full prompt I used for BugSplat:
+Keep prompting until the wireframe feels right. Here's the full prompt I used for BugSplat:
 
 ```llm
 # Goal
@@ -146,7 +147,7 @@ All of this must be done within 30 seconds and 3–4 clicks.
 - Must not require account switching, complex onboarding, or configuration before logging
 - Should be desktop-first
 
-## Design Intent
+## Design intent
 The UI should feel: fast, minimal, focused  
 Prioritize: speed, clarity, zero-fat UX
 
@@ -155,7 +156,7 @@ Prioritize: speed, clarity, zero-fat UX
 - Tailwind
 - Shadcn
 
-## Inspiration from Competitors
+## Inspiration from competitors
 ### Linear
 **What works well:**
 - Clean, minimal layout
@@ -190,7 +191,8 @@ Once you're happy with the wireframes, the next step is to make it look and feel
 
 ### a. Slotting into an existing app:
 
-Prompt the LLM that has your wireframe to flesh out the UI with your app's design system. The more context you provide, the closer the output will match your actual product. Useful inputs to include are:
+Prompt the LLM that has your wireframe to flesh out the UI with your app's design system. The more context you provide, the closer the output will match your actual product. Useful inputs include:
+
 
 
 - **UI components** for core interaction patterns  
@@ -290,7 +292,7 @@ schema:
   ...
 }
 
-INSTRUCTIONS
+# INSTRUCTIONS
 1. Map each role in **tokenSpec** to a hex from **coreSwatches** or a tint/shade derived from it.  
 2. Ensure every `text` and `link` role meets at least **AA** contrast on its intended background (`background` for text, `buttonSecondary` for `onButtonSecondary`, etc.).  
 3. `error` must meet **AAA** contrast on `background`.  
@@ -349,7 +351,7 @@ The wireframe looks great. Now translate it into production-ready UI using the f
 <The outputted json from your color palette prompt>
 ```
 
-I opted to create a modern and minimalist dark mode feel for BugSplat. Here's what it looked like after creating my design system:
+I opted to create a modern and minimalist dark mode feel for BugSplat. Here's what it looked like after creating and applying my design system:
 
 ![BugSplat after adding design system](https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_10_at_1_18_29_PM_31966b0b77.png)
 
@@ -367,7 +369,7 @@ Applying the rules to BugSplat, I noticed a few things:
 
 **Hierarchy:** 
 ❌ The "Bug Tracker" headline is large but not actually important. It should be smaller.
-❌ The time a ticket was last updated is more important than the description, so it should appear above it.
+❌ The ticket's last updated time is more important than the description, so it should appear above it.
 ❌ The filter button text is too small.
 
 **Contrast:** 
@@ -405,7 +407,7 @@ You can be a designer too. The process is learnable and can get you shipping in 
 ![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
 <Caption>You to your team now, probably.</Caption>
 
-Word by Lior Neu-ner, who is always down for a good vibe.
+*Word by Lior Neu-ner, who is always down for a good vibe.*
 
 ## Further reading
 
