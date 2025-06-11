@@ -7,7 +7,7 @@ alwaysApply: true
 # Syntax rules
 
 - Always use double quotes (unless something different is necessated by content)
-- Always use sentence casing
+- Always use sentence casing, even when writing internal documentation in Markdown
 
 # General AI rules
 
