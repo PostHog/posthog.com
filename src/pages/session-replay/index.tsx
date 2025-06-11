@@ -29,9 +29,6 @@ import ZoomHover from 'components/ZoomHover'
 import CTA from 'components/Home/CTA'
 import PlanComparison from 'components/Products/PlanComparison'
 
-const slideClasses =
-    'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
-
 // Component for individual slide thumbnail with proper scaling
 const SlideThumb = ({ slide, index, isActive }: { slide: any; index: number; isActive: boolean }) => {
     return (
@@ -797,7 +794,9 @@ export default function SessionReplay(): JSX.Element {
                             >
                                 {slide.name}
                             </span>
-                            <div className={slideClasses}>{slide.content}</div>
+                            <div className="bg-primary aspect-video relative rounded-md shadow-lg overflow-hidden">
+                                {slide.content}
+                            </div>
                         </div>
                     ))}
                 </div>
