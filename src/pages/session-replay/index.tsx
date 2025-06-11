@@ -22,6 +22,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { Markdown } from 'components/Squeak/components/Markdown'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
+import Logo from 'components/Logo'
 
 const slideClasses =
     'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
@@ -472,10 +473,82 @@ export default function SessionReplay(): JSX.Element {
             ),
         },
         {
-            name: 'PostHog vs...',
+            name: 'PostHog vs... (tl;dr)',
             content: (
                 <div className="h-full p-8">
-                    <h2 className="text-4xl font-bold text-primary mb-10 text-center">PostHog vs...</h2>
+                    <div className="rounded-lg shadow-2xl flex flex-col justify-between items-center relative overflow-hidden min-h-96 mb-6 before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/compare_bg_0ffcd7a4d0.jpg')] before:bg-cover before:bg-center before:bg-no-repeat after:absolute after:inset-0 after:bg-gradient-to-b after:from-[rgba(0,0,0,.5)] after:via-[rgba(0,0,0,.2)] after:to-[rgba(0,0,0,0)]">
+                        <div className="relative z-20 pt-8">
+                            <h2 className="text-4xl font-bold text-white mb-2 text-center">PostHog vs...</h2>
+                            <p className="text-xl text-white max-w-4xl mx-auto mb-8 text-center">
+                                An honest comparison tl;dr:
+                            </p>
+                        </div>
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/mascots_e1d975b193.png"
+                            alt="Mascots"
+                            className="relative z-10"
+                            imgClassName="max-h-[218px]"
+                        />
+                    </div>
+
+                    {/* Comparison Summary */}
+                    <div className="grid md:grid-cols-2 gap-8 mb-8">
+                        <div className="">
+                            <h3 className="text-2xl font-bold text-primary mb-4">
+                                Reasons a competitor might suit you better<sup>*</sup>
+                            </h3>
+                            <ul className="p-0 mb-2 list-none">
+                                {sessionReplayFromProducts?.comparison?.summary?.them?.map(
+                                    (item: any, index: number) => (
+                                        <li key={index} className="border-b-2 border-primary py-2">
+                                            <span className="font-semibold text-lg">{item.title}</span>
+                                            {item.subtitle && (
+                                                <span className="text-secondary ml-2 italic">
+                                                    Update:{' '}
+                                                    {item.subtitleUrl ? (
+                                                        <a
+                                                            href={item.subtitleUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="underline"
+                                                        >
+                                                            {item.subtitle}
+                                                        </a>
+                                                    ) : (
+                                                        item.subtitle
+                                                    )}
+                                                </span>
+                                            )}
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                            <strong className="text-secondary italic">*for now!</strong>
+                        </div>
+
+                        <div className="">
+                            <h3 className="text-2xl font-bold text-primary mb-4">
+                                Choose <Logo noText className="h-12 inline-block -mt-5 mx-1 -mb-2" /> PostHog if you
+                                want:
+                            </h3>
+                            <ul className="p-0 mb-2 list-none">
+                                {sessionReplayFromProducts?.comparison?.summary?.us?.map((item: any, index: number) => (
+                                    <li key={index} className="border-b-2 border-primary py-2">
+                                        <span className="font-semibold text-lg">{item.title}</span>
+                                        {item.subtitle && <span className="text-secondary ml-1">{item.subtitle}</span>}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            ),
+        },
+        {
+            name: 'Comparison',
+            content: (
+                <div className="h-full p-8">
+                    <h2 className="text-4xl font-bold text-primary mb-10 text-center">Feature comparison</h2>
 
                     <div className="max-w-6xl mx-auto">
                         <div className="overflow-x-auto">
@@ -529,61 +602,6 @@ export default function SessionReplay(): JSX.Element {
                                     )}
                                 </tbody>
                             </table>
-                        </div>
-                    </div>
-                </div>
-            ),
-        },
-        {
-            name: 'Who should you choose?',
-            content: (
-                <div className="h-full p-8">
-                    <h2 className="text-4xl font-bold text-primary mb-6 text-center">PostHog vs competitors</h2>
-                    <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
-                        How PostHog session replay compares to other tools
-                    </p>
-
-                    {/* Comparison Summary */}
-                    <div className="grid md:grid-cols-2 gap-8 mb-8 max-w-6xl mx-auto">
-                        <div className="bg-accent rounded-lg p-6">
-                            <h3 className="text-2xl font-bold text-primary mb-4">Why competitors might be better</h3>
-                            <ul className="space-y-3">
-                                {sessionReplayFromProducts?.comparison?.summary?.them?.map(
-                                    (item: any, index: number) => (
-                                        <li key={index} className="flex flex-col">
-                                            <span className="font-semibold text-lg">{item.title}</span>
-                                            {item.subtitle && (
-                                                <span className="text-secondary">
-                                                    {item.subtitleUrl ? (
-                                                        <a
-                                                            href={item.subtitleUrl}
-                                                            target="_blank"
-                                                            rel="noopener noreferrer"
-                                                            className="underline"
-                                                        >
-                                                            {item.subtitle}
-                                                        </a>
-                                                    ) : (
-                                                        item.subtitle
-                                                    )}
-                                                </span>
-                                            )}
-                                        </li>
-                                    )
-                                )}
-                            </ul>
-                        </div>
-
-                        <div className="bg-accent rounded-lg p-6">
-                            <h3 className="text-2xl font-bold text-primary mb-4">Why PostHog is better</h3>
-                            <ul className="space-y-3">
-                                {sessionReplayFromProducts?.comparison?.summary?.us?.map((item: any, index: number) => (
-                                    <li key={index} className="flex flex-col">
-                                        <span className="font-semibold text-lg">{item.title}</span>
-                                        {item.subtitle && <span className="text-secondary">{item.subtitle}</span>}
-                                    </li>
-                                ))}
-                            </ul>
                         </div>
                     </div>
                 </div>

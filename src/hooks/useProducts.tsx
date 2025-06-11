@@ -611,7 +611,7 @@ window.posthog.onFeatureFlags(function () {
                     "Works with PostHog.js on the web. If you're already using product analytics, there's no separate installation.",
                 children: (
                     <div className="max-w-xl mx-auto">
-                        <fieldset>
+                        <fieldset className="bg-primary">
                             <legend className="text-lg font-semibold">Web</legend>
                             <OSButton
                                 asLink
@@ -627,7 +627,7 @@ window.posthog.onFeatureFlags(function () {
                                 <span>JavaScript</span>
                             </OSButton>
                         </fieldset>
-                        <fieldset>
+                        <fieldset className="bg-primary">
                             <legend className="text-lg font-semibold">Mobile</legend>
                             <OSButton
                                 asLink
@@ -656,7 +656,7 @@ window.posthog.onFeatureFlags(function () {
                                 <span>Android</span>
                             </OSButton>
                         </fieldset>
-                        <fieldset>
+                        <fieldset className="bg-primary">
                             <legend className="text-lg font-semibold">Cross-platform</legend>
                             <OSButton
                                 asLink
