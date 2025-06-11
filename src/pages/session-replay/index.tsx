@@ -23,6 +23,9 @@ import { Markdown } from 'components/Squeak/components/Markdown'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
 import Logo from 'components/Logo'
+import { docsMenu } from '../../navs'
+import { DocLinks } from 'components/Products/DocsLinks'
+import ZoomHover from 'components/ZoomHover'
 
 const slideClasses =
     'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
@@ -313,6 +316,9 @@ export default function SessionReplay(): JSX.Element {
     const sessionReplayFromProducts = products.find((product: any) => product.type === 'session_replay')
     const { getCustomers, hasCaseStudy } = useCustomers()
 
+    // Get all products for pairsWith lookup
+    const allProducts = useProduct() as any[]
+
     // Get customer slugs from session replay product and retrieve customer data
     const customerSlugs = sessionReplayProduct?.customers ? Object.keys(sessionReplayProduct.customers) : []
     const customers = getCustomers(customerSlugs)
@@ -473,7 +479,7 @@ export default function SessionReplay(): JSX.Element {
             ),
         },
         {
-            name: 'PostHog vs... (tl;dr)',
+            name: 'PostHog vs... (the tl;dr)',
             content: (
                 <div className="h-full p-8">
                     <div className="rounded-lg shadow-2xl flex flex-col justify-between items-center relative overflow-hidden min-h-96 mb-6 before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/compare_bg_0ffcd7a4d0.jpg')] before:bg-cover before:bg-center before:bg-no-repeat after:absolute after:inset-0 after:bg-gradient-to-b after:from-[rgba(0,0,0,.5)] after:via-[rgba(0,0,0,.2)] after:to-[rgba(0,0,0,0)]">
@@ -528,8 +534,8 @@ export default function SessionReplay(): JSX.Element {
 
                         <div className="">
                             <h3 className="text-2xl font-bold text-primary mb-4">
-                                Choose <Logo noText className="h-12 inline-block -mt-5 mx-1 -mb-2" /> PostHog if you
-                                want:
+                                Choose <Logo noText color="primary" className="h-12 inline-block -mt-5 mx-1 -mb-2" />{' '}
+                                PostHog if you want:
                             </h3>
                             <ul className="p-0 mb-2 list-none">
                                 {sessionReplayFromProducts?.comparison?.summary?.us?.map((item: any, index: number) => (
@@ -545,7 +551,7 @@ export default function SessionReplay(): JSX.Element {
             ),
         },
         {
-            name: 'Comparison',
+            name: 'Feature comparison',
             content: (
                 <div className="h-full p-8">
                     <h2 className="text-4xl font-bold text-primary mb-10 text-center">Feature comparison</h2>
@@ -608,31 +614,58 @@ export default function SessionReplay(): JSX.Element {
             ),
         },
         {
-            name: 'Installation',
+            name: 'Docs',
             content: (
                 <div className="h-full p-8">
-                    <h2 className="text-4xl font-bold text-primary mb-6 text-center">Install &amp; customize</h2>
+                    <h2 className="text-4xl font-bold text-primary mb-2 text-center">Explore the docs</h2>
                     <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
-                        Here are some ways you can fine tune how you implement session replay.
+                        Get a more technical overview of how everything works{' '}
+                        <Link to="/docs/session-replay" state={{ newWindow: true }}>
+                            in our docs
+                        </Link>
+                        .
                     </p>
+                    <DocLinks
+                        menu={
+                            docsMenu.children.find(({ name }) => name.toLowerCase() === 'session replay')?.children ||
+                            []
+                        }
+                    />
                 </div>
             ),
         },
         {
-            name: 'Pairs with',
+            name: 'Pairs with...',
             content: (
-                <div className="h-full p-12 flex flex-col justify-center text-center">
-                    <h2 className="text-4xl font-bold text-primary mb-6">Pairs with</h2>
-                    <p className="text-xl text-secondary max-w-4xl mx-auto">
+                <div className="h-full p-12 flex flex-col justify-center text-center bg-light dark:bg-dark">
+                    <h2 className="text-4xl font-bold text-primary mb-2">Pairs with...</h2>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto mb-12">
                         Session replay pairs with other products to give you a complete picture of your product.
                     </p>
                     <div className="grid grid-cols-3 gap-4">
-                        {sessionReplayFromProducts?.pairsWith?.map((pair: any) => (
-                            <div key={pair.product}>
-                                <h3 className="text-2xl font-bold text-primary mb-2">{pair.product}</h3>
-                                <p className="text-lg text-secondary">{pair.description}</p>
-                            </div>
-                        ))}
+                        {sessionReplayFromProducts?.pairsWith?.map((pair: any) => {
+                            // Find the product details by slug
+                            const productDetails = allProducts.find((product: any) => product.slug === pair.slug)
+                            if (!productDetails) return null
+
+                            return (
+                                <ZoomHover key={productDetails.name}>
+                                    <div className="flex flex-col items-center border border-primary rounded p-4 bg-primary">
+                                        <span
+                                            className={`inline-block size-8 my-4 ${
+                                                productDetails.color
+                                                    ? 'text-' + productDetails.color
+                                                    : 'text-primary dark:text-primary-dark opacity-50'
+                                            }`}
+                                        >
+                                            {productDetails.Icon && <productDetails.Icon />}
+                                        </span>
+                                        <h3 className="text-2xl font-bold text-primary mb-2">{productDetails.name}</h3>
+                                        <p className="text-lg text-secondary">{pair.description}</p>
+                                    </div>
+                                </ZoomHover>
+                            )
+                        })}
                     </div>
                 </div>
             ),
