@@ -2,9 +2,69 @@
 
 This directory contains reusable slide components for PostHog product pages. These components were extracted from the session-replay page to enable easy replication for other PostHog products.
 
+## Quick Start
+
+### Simple Product Page (Recommended)
+
+The easiest way to create a new product page is using the `SlidesTemplate` component:
+
+```tsx
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import { SlidesTemplate } from 'components/Products/Slides'
+
+const PRODUCT_TYPE = 'your_product_type'
+
+export default function YourProductPage(): JSX.Element {
+    const data = useStaticQuery(/* your GraphQL query */)
+    
+    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} />
+}
+```
+
+### Customizing Slides
+
+You can customize which slides to include and their order:
+
+```tsx
+import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+
+// Only include specific slides
+const slides = createSlideConfig({
+    include: ['overview', 'features', 'pricing', 'getting-started']
+})
+
+// Or exclude certain slides
+const slides = createSlideConfig({
+    exclude: ['comparison-summary', 'feature-comparison']
+})
+
+// Custom order
+const slides = createSlideConfig({
+    order: ['overview', 'pricing', 'features', 'customers']
+})
+
+// Override slide names and properties
+const slides = createSlideConfig({
+    overrides: {
+        pricing: { name: 'Plans & Pricing' },
+        features: { props: { customProp: 'value' } }
+    }
+})
+
+return <SlidesTemplate productType={PRODUCT_TYPE} data={data} slideConfig={slides} />
+```
+
 ## Available Components
 
-### Core Slides
+### Main Component
+- `SlidesTemplate` - Complete product page with all common logic
+
+### Slide Configuration
+- `createSlideConfig` - Helper to customize slide configuration
+- `defaultSlides` - Default slide configuration object
+
+### Individual Slides
 - `OverviewSlide` - Product introduction with screenshot and hog image
 - `CustomersSlide` - Customer testimonials and case studies table
 - `FeaturesSlide` - Tabbed features display with images
@@ -19,49 +79,47 @@ This directory contains reusable slide components for PostHog product pages. The
 - `SlideThumbnails` - Slide navigation thumbnails
 - `PlanComparison` - Pricing comparison (already existed)
 
-## Usage
+## Advanced Usage
 
-### 1. Import Components
+### Custom Components
+
+You can add custom slides or override default ones:
+
+```tsx
+import { MyCustomSlide } from './MyCustomSlide'
+
+const slides = createSlideConfig({
+    custom: [
+        { 
+            handle: 'custom-demo', 
+            name: 'Product Demo', 
+            component: MyCustomSlide,
+            props: { customProp: 'value' }
+        }
+    ]
+})
+```
+
+### Manual Slide Creation (Advanced)
+
+If you need more control, you can still use individual slide components:
 
 ```tsx
 import {
-    SlideThumbnails,
     OverviewSlide,
-    CustomersSlide,
     FeaturesSlide,
-    QuestionsSlide,
-    PlanComparison,
-    ComparisonSummarySlide,
-    FeatureComparisonSlide,
-    DocsSlide,
-    PairsWithSlide,
-    GettingStartedSlide,
+    // ... other components
 } from 'components/Products/Slides'
-```
 
-### 2. Set Product Configuration
-
-```tsx
-// Change this for each product
-const PRODUCT_TYPE = 'your_product_type'
-```
-
-### 3. Create Raw Slides Array
-
-```tsx
+// Create your own slide configuration
 const rawSlides = [
     {
+        handle: 'overview',
         name: 'Overview',
         content: (
             <OverviewSlide
                 productName={productHandle?.name}
-                productTitle={productHandle?.title}
-                productDescription={productHandle?.description}
-                Icon={productHandle?.Icon}
-                screenshotSrc={productHandle?.screenshots?.[0]?.src}
-                screenshotAlt={productHandle?.screenshots?.[0]?.alt}
-                hogSrc={productHandle?.hog?.src}
-                hogAlt={productHandle?.hog?.alt}
+                // ... other props
             />
         ),
     },
@@ -116,17 +174,60 @@ interface ProductHandle {
 }
 ```
 
-### 5. GraphQL Query
-
-Use the same GraphQL query as session-replay/index.tsx to fetch tutorial and product data.
-
 ## Creating a New Product Page
 
-1. Copy `src/pages/session-replay/index.tsx` to your new product directory
-2. Update the `PRODUCT_TYPE` constant
-3. Modify the `rawSlides` array as needed for your product
-4. Update SEO metadata and any product-specific customizations
+### Method 1: Using SlidesTemplate (Recommended)
+
+1. Create a new file in `src/pages/[product-name]/index.tsx`
+2. Set up the basic structure:
+
+```tsx
+import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
+import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
+
+const PRODUCT_TYPE = 'your_product_type' // Change this
+
+export default function YourProductPage(): JSX.Element {
+    const data = useStaticQuery(graphql`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields { slug }
+                    rawBody
+                    frontmatter { title description }
+                }
+            }
+            allProductData {
+                nodes {
+                    products {
+                        name type unit
+                        addons { name type unit plans { name plan_key included_if features { key name description limit note } } }
+                        plans { name plan_key free_allocation included_if features { key name description limit note } tiers { unit_amount_usd up_to } }
+                    }
+                }
+            }
+        }
+    `)
+
+    // Optional: Customize slides
+    const slides = createSlideConfig({
+        // exclude: ['comparison-summary', 'feature-comparison'],
+        // order: ['overview', 'pricing', 'features'],
+        // overrides: { pricing: { name: 'Plans & Pricing' } }
+    })
+
+    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} slideConfig={slides} />
+}
+```
+
+3. Update the `PRODUCT_TYPE` constant
+4. Optionally customize the slide configuration
 5. Ensure your product data follows the expected structure
+
+### Method 2: Manual Setup (Advanced)
+
+If you need more control, you can still copy the original session-replay structure and modify it.
 
 ## Customization
 
