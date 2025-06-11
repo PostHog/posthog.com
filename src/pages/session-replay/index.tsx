@@ -183,16 +183,34 @@ const QuestionsTabs = () => {
             // If there's a hash fragment, find the corresponding header and start from there
             if (hashFragment) {
                 // Convert hash fragment to potential header formats
-                // e.g., "1-first-contentful-paint" -> "1. First Contentful Paint" or "## 1. First Contentful Paint"
-                const headerText = hashFragment.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
+                // e.g., "1-first-contentful-paint" -> "1. First Contentful Paint"
+                let headerText = hashFragment.replace(/-/g, ' ').replace(/\b\w/g, (l) => l.toUpperCase())
 
-                // Look for the header in the content (try different formats)
-                const headerPatterns = [`## ${headerText}`, `### ${headerText}`, `# ${headerText}`, headerText]
+                // Handle numbered sections by adding period after number
+                headerText = headerText.replace(/^(\d+)\s/, '$1. ')
+
+                // Look for the header in the content (try different formats and case variations)
+                const headerPatterns = [
+                    `## ${headerText}`,
+                    `### ${headerText}`,
+                    `# ${headerText}`,
+                    headerText,
+                    // Try lowercase variations for case-insensitive matching
+                    `## ${headerText.toLowerCase()}`,
+                    `### ${headerText.toLowerCase()}`,
+                    `# ${headerText.toLowerCase()}`,
+                ]
 
                 let startIndex = -1
                 for (const pattern of headerPatterns) {
-                    startIndex = content.indexOf(pattern)
-                    if (startIndex !== -1) break
+                    // Case-insensitive search
+                    const lowerContent = content.toLowerCase()
+                    const lowerPattern = pattern.toLowerCase()
+                    const index = lowerContent.indexOf(lowerPattern)
+                    if (index !== -1) {
+                        startIndex = index
+                        break
+                    }
                 }
 
                 // If we found the header, start content from there
@@ -203,13 +221,18 @@ const QuestionsTabs = () => {
 
             // Split by double newlines to get paragraphs
             const paragraphs = content.split('\n\n')
-            // Take first few paragraphs, skip frontmatter, headers, export statements, and images
+            // Take first few paragraphs, skip frontmatter, export statements, and images
             const contentParagraphs = paragraphs
-                .filter(
-                    (p: string) =>
-                        !p.startsWith('---') && !p.startsWith('#') && !p.startsWith('export ') && p.trim().length > 50
-                )
+                .filter((p: string) => !p.startsWith('---') && !p.startsWith('export ') && p.trim().length > 50)
                 .map((p: string) => {
+                    // If paragraph starts with a header, remove just the header line but keep the rest
+                    if (p.startsWith('#')) {
+                        const lines = p.split('\n')
+                        // Remove the first line (header) but keep the rest
+                        const contentLines = lines.slice(1).join('\n').trim()
+                        return contentLines
+                    }
+
                     // Remove image references ![alt](url) and standalone image lines
                     return p
                         .replace(/!\[.*?\]\(.*?\)/g, '')
