@@ -13,7 +13,7 @@ export const resolveSnippetImports = (
 ): Snippet[] => {
     const regex = restrictToOnlySnippetsDir
         ? /import\s+(.*?)\s+from\s+['"](.*?\/_snippets\/.*?)['"]/g
-        : /import\s+(.*?)\s+from\s+['"](.*?\.mdx)['"]/g
+        : /import\s+(.*?)\s+from\s+['"](.*?\.(md|mdx))['"]/g
     const imports: Snippet[] = []
     let match
     while ((match = regex.exec(body)) !== null) {
