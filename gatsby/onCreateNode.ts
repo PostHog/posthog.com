@@ -6,7 +6,7 @@ import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
-import { resolveSnippetImports, replaceSnippetImports } from './snippetUtils'
+import { resolveSnippets } from './snippetUtils'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -251,8 +251,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
         }
 
         const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
-        const imports = resolveSnippetImports(contentWithoutFrontmatter, node.fileAbsolutePath)
-        const contentWithSnippets = replaceSnippetImports(contentWithoutFrontmatter, imports)
+        const contentWithSnippets = resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
         createNodeField({
             node,
             name: `contentWithSnippets`,
