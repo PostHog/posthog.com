@@ -75,7 +75,7 @@ We may occasionally pause this rotation if we have a big initiative that needs m
 
 ### Response Targets
 
-We have a high volume of tickets and we're a small team, so we're not able to respond to all issues equally. For this reason we prioritize tickets by plan level. We set a response target for each so that we can be sure that tickets are being handled effectively. 
+We have a high volume of tickets and we're a small team, so we're not able to respond to all issues equally. For this reason we prioritize tickets according to the customer's plan. We set a response target for each plan so that we can be sure that tickets are being handled effectively. 
 
 Note that tickets are automatically prioritized in Zendesk and users are updated with information about response targets to set appropriate expectations. In all cases, tickets are routed to the appropriate team and that team is responsible for meeting the response target.
 
