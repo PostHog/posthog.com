@@ -2,13 +2,14 @@ import React from 'react'
 
 interface PlanComparisonProps {
     products: any[]
-    productType: string
+    productHandle: string
     onScrollToFeatures?: () => void
 }
 
-const PlanComparison: React.FC<PlanComparisonProps> = ({ products, productType, onScrollToFeatures }) => {
-    // Find the specific product data
-    const productData = products.find((product: any) => product.type === productType)
+const PlanComparison: React.FC<PlanComparisonProps> = ({ products, productHandle, onScrollToFeatures }) => {
+    // Find the specific product data - GraphQL products use 'type' field, but we receive handle
+    // For session_replay handle, we need to match against 'session_replay' type in GraphQL
+    const productData = products.find((product: any) => product.type === productHandle)
 
     if (!productData) {
         return <div className="h-full p-12 flex items-center justify-center">Loading pricing data...</div>

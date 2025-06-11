@@ -13,12 +13,13 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate } from 'components/Products/Slides'
 
-const PRODUCT_TYPE = 'your_product_type'
+// Product configuration - change this to adapt for different products
+const PRODUCT_HANDLE = 'your_product_handle'
 
 export default function YourProductPage(): JSX.Element {
     const data = useStaticQuery(/* your GraphQL query */)
     
-    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
 }
 ```
 
@@ -52,7 +53,7 @@ const slides = createSlideConfig({
     }
 })
 
-return <SlidesTemplate productType={PRODUCT_TYPE} data={data} slideConfig={slides} />
+return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 ```
 
 ## Available Components
@@ -91,7 +92,7 @@ import { MyCustomSlide } from './MyCustomSlide'
 const slides = createSlideConfig({
     custom: [
         { 
-            handle: 'custom-demo', 
+            slug: 'custom-demo', 
             name: 'Product Demo', 
             component: MyCustomSlide,
             props: { customProp: 'value' }
@@ -114,7 +115,7 @@ import {
 // Create your own slide configuration
 const rawSlides = [
     {
-        handle: 'overview',
+        slug: 'overview',
         name: 'Overview',
         content: (
             <OverviewSlide
@@ -129,15 +130,16 @@ const rawSlides = [
 
 ### 4. Required Data Structure
 
-The components expect data from `useProduct({ type: PRODUCT_TYPE })` with the following structure:
+The components expect data from `useProduct({ handle: PRODUCT_HANDLE })` with the following structure:
 
 ```tsx
-interface ProductHandle {
+interface ProductData {
     name: string
     title?: string
     description: string
     Icon?: React.ComponentType
-    type: string
+    handle: string
+    slug: string
     screenshots?: Array<{ src: string; alt: string }>
     hog?: { src: string; alt: string }
     features?: Array<{
@@ -170,7 +172,6 @@ interface ProductHandle {
         title: string
         description: string
     }
-    handle: string
 }
 ```
 
@@ -186,7 +187,8 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 
-const PRODUCT_TYPE = 'your_product_type' // Change this
+// Product configuration - change this to adapt for different products
+const PRODUCT_HANDLE = 'your_product_handle'
 
 export default function YourProductPage(): JSX.Element {
     const data = useStaticQuery(graphql`
@@ -217,11 +219,11 @@ export default function YourProductPage(): JSX.Element {
         // overrides: { pricing: { name: 'Plans & Pricing' } }
     })
 
-    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} slideConfig={slides} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 }
 ```
 
-3. Update the `PRODUCT_TYPE` constant
+3. Update the `PRODUCT_HANDLE` constant
 4. Optionally customize the slide configuration
 5. Ensure your product data follows the expected structure
 

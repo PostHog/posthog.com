@@ -10,13 +10,13 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate } from 'components/Products/Slides'
 
-const PRODUCT_TYPE = 'analytics'
+const PRODUCT_HANDLE = 'analytics'
 
 export default function AnalyticsPage(): JSX.Element {
     const data = useStaticQuery(/* standard GraphQL query */)
     
     // Use all default slides
-    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
 }
 ```
 
@@ -28,7 +28,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 
-const PRODUCT_TYPE = 'feature_flags'
+const PRODUCT_HANDLE = 'feature_flags'
 
 export default function FeatureFlagsPage(): JSX.Element {
     const data = useStaticQuery(/* standard GraphQL query */)
@@ -38,7 +38,7 @@ export default function FeatureFlagsPage(): JSX.Element {
         include: ['overview', 'features', 'pricing', 'docs', 'getting-started']
     })
     
-    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} slideConfig={slides} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 }
 ```
 
@@ -50,7 +50,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 
-const PRODUCT_TYPE = 'ab_testing'
+const PRODUCT_HANDLE = 'ab_testing'
 
 export default function ABTestingPage(): JSX.Element {
     const data = useStaticQuery(/* standard GraphQL query */)
@@ -64,7 +64,7 @@ export default function ABTestingPage(): JSX.Element {
         }
     })
     
-    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} slideConfig={slides} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 }
 ```
 
@@ -78,7 +78,7 @@ import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 import { DataSourcesSlide } from './DataSourcesSlide'
 import { IntegrationsSlide } from './IntegrationsSlide'
 
-const PRODUCT_TYPE = 'data_warehouse'
+const PRODUCT_HANDLE = 'data_warehouse'
 
 export default function DataWarehousePage(): JSX.Element {
     const data = useStaticQuery(/* standard GraphQL query */)
@@ -89,20 +89,19 @@ export default function DataWarehousePage(): JSX.Element {
         exclude: ['customers', 'pairs-with'],
         custom: [
             { 
-                handle: 'data-sources', 
+                slug: 'data-sources', 
                 name: 'Data Sources', 
                 component: DataSourcesSlide 
             },
             { 
-                handle: 'integrations', 
+                slug: 'integrations', 
                 name: 'Integrations', 
-                component: IntegrationsSlide,
-                props: { showAdvanced: true }
+                component: IntegrationsSlide 
             }
         ]
     })
     
-    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} slideConfig={slides} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 }
 ```
 
@@ -114,7 +113,7 @@ import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate, createSlideConfig } from 'components/Products/Slides'
 
-const PRODUCT_TYPE = 'enterprise'
+const PRODUCT_HANDLE = 'enterprise'
 
 export default function EnterprisePage(): JSX.Element {
     const data = useStaticQuery(/* standard GraphQL query */)
@@ -144,7 +143,7 @@ export default function EnterprisePage(): JSX.Element {
     
     return (
         <SlidesTemplate 
-            productType={PRODUCT_TYPE} 
+            productHandle={PRODUCT_HANDLE} 
             data={data} 
             slideConfig={slides}
             seoOverrides={{

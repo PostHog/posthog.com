@@ -58,7 +58,7 @@ const initialProducts = [
     {
         Icon: IconGraph,
         name: 'Analytics',
-        type: 'product_analytics',
+        handle: 'product_analytics',
         color: 'blue',
         slider: {
             marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
@@ -391,9 +391,8 @@ const initialProducts = [
     {
         Icon: IconRewindPlay,
         name: 'Session replay',
-        type: 'session_replay',
-        handle: 'session-replay',
-        slug: '/session-replay', // hoping this is old...
+        handle: 'session_replay',
+        slug: 'session-replay',
         title: 'Watch people use your product',
         description:
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
@@ -764,14 +763,17 @@ window.posthog.onFeatureFlags(function () {
                 url: '/tutorials/filter-session-recordings',
             },
             {
-                question: 'What is a user’s First Contentful Paint time',
+                question: "What is a user's First Contentful Paint time",
                 url: '/tutorials/performance-metrics#1-first-contentful-paint',
             },
             {
-                question: 'What is a user’s Dom Interactive time',
+                question: "What is a user's Dom Interactive time",
                 url: '/tutorials/performance-metrics#2-dom-interactive',
             },
-            { question: 'What is a user’s Page Loaded time', url: '/tutorials/performance-metrics#3-page-loaded' },
+            {
+                question: "What is a user's Page Loaded time",
+                url: '/tutorials/performance - metrics#3 - page - loaded',
+            },
             {
                 question: 'How do I optimize site performance?',
                 url: '/tutorials/performance-metrics#optimization-cheat-sheet',
@@ -960,7 +962,7 @@ window.posthog.onFeatureFlags(function () {
     {
         Icon: IconToggle,
         name: 'Feature flags',
-        type: 'feature_flags',
+        handle: 'feature_flags',
         color: 'green',
         slider: {
             marks: [1000000, 10000000, 100000000, 1000000000],
@@ -973,7 +975,7 @@ window.posthog.onFeatureFlags(function () {
     {
         Icon: IconFlask,
         name: 'Experiments',
-        type: 'feature_flags',
+        handle: 'feature_flags',
         color: 'purple',
         billedWith: 'Feature flags',
         slug: '/experiments',
@@ -981,7 +983,7 @@ window.posthog.onFeatureFlags(function () {
     {
         Icon: IconMessage,
         name: 'Surveys',
-        type: 'surveys',
+        handle: 'surveys',
         color: 'red',
         slider: {
             marks: [250, 2000, 15000, 100000],
@@ -994,7 +996,7 @@ window.posthog.onFeatureFlags(function () {
     {
         Icon: IconDatabase,
         name: 'Data warehouse',
-        type: 'data_warehouse',
+        handle: 'data_warehouse',
         color: 'purple',
         slider: {
             marks: [1000000, 10000000, 100000000, 1000000000],
@@ -1007,7 +1009,7 @@ window.posthog.onFeatureFlags(function () {
     {
         Icon: IconWarning,
         name: 'Error tracking',
-        type: 'error_tracking',
+        handle: 'error_tracking',
         color: 'orange',
         slider: {
             marks: [100000, 1000000, 10000000, 50000000],
@@ -1028,7 +1030,7 @@ export default function useProducts() {
 
     const [products, setProducts] = useState(
         initialProducts.map((product) => {
-            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.type)
+            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
             const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
             const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
             const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
@@ -1047,10 +1049,10 @@ export default function useProducts() {
 
     const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + product.cost, 0), [products])
 
-    const setProduct = (type: string, data: any) => {
+    const setProduct = (handle: string, data: any) => {
         setProducts((products) =>
             products.map((product) => {
-                if (product.type === type && !product.billedWith) {
+                if (product.handle === handle && !product.billedWith) {
                     return {
                         ...product,
                         ...data,
@@ -1061,14 +1063,14 @@ export default function useProducts() {
         )
     }
 
-    const setVolume = (type: string, volume: number) => {
+    const setVolume = (handle: string, volume: number) => {
         const rounded = Math.round(volume)
-        const product = products.find((product) => product.type === type)
+        const product = products.find((product) => product.handle === handle)
         const { total, costByTier } = calculatePrice(
             rounded,
             product?.billingData.plans.find((plan: any) => plan.tiers)?.tiers
         )
-        setProduct(type, {
+        setProduct(handle, {
             volume: rounded,
             cost: total,
             costByTier,

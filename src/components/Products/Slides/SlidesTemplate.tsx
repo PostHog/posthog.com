@@ -19,7 +19,7 @@ import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, defaultSlides } from './createSlideConfig'
 
 interface SlidesTemplateProps {
-    productType: string
+    productHandle: string
     data: any // GraphQL data
     slideConfig?: SlideConfig[]
     seoOverrides?: {
@@ -30,7 +30,7 @@ interface SlidesTemplateProps {
 }
 
 export default function SlidesTemplate({
-    productType,
+    productHandle,
     data,
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
@@ -38,33 +38,42 @@ export default function SlidesTemplate({
     // Extract products data for the pricing component
     const products = data.allProductData.nodes[0].products
 
-    // Get product data and customers using abstracted product type
-    const productHandle = useProduct({ type: productType }) as any
+    // Get product data and customers using abstracted product handle
+    const productData = useProduct({ handle: productHandle }) as any
     const { getCustomers, hasCaseStudy } = useCustomers()
 
     // Get all products for pairsWith lookup
     const allProducts = useProduct() as any[]
 
     // Get customer slugs from product and retrieve customer data
-    const customerSlugs = productHandle?.customers ? Object.keys(productHandle.customers) : []
+    const customerSlugs = productData?.customers ? Object.keys(productData.customers) : []
     const customers = getCustomers(customerSlugs)
 
-    // Create slide content based on handle
-    const createSlideContent = (handle: string, customProps?: Record<string, any>) => {
+    // Handle loading state
+    if (!productData) {
+        return (
+            <div className="h-full flex items-center justify-center">
+                <div className="text-primary">Loading product data...</div>
+            </div>
+        )
+    }
+
+    // Create slide content based on slug
+    const createSlideContent = (slug: string, customProps?: Record<string, any>) => {
         const props = { ...customProps }
 
-        switch (handle) {
+        switch (slug) {
             case 'overview':
                 return (
                     <OverviewSlide
-                        productName={productHandle?.name}
-                        productTitle={productHandle?.title}
-                        productDescription={productHandle?.description}
-                        Icon={productHandle?.Icon}
-                        screenshotSrc={productHandle?.screenshots?.[0]?.src}
-                        screenshotAlt={productHandle?.screenshots?.[0]?.alt}
-                        hogSrc={productHandle?.hog?.src}
-                        hogAlt={productHandle?.hog?.alt}
+                        productName={productData?.name}
+                        productTitle={productData?.title}
+                        productDescription={productData?.description}
+                        Icon={productData?.Icon}
+                        screenshotSrc={productData?.screenshots?.[0]?.src}
+                        screenshotAlt={productData?.screenshots?.[0]?.alt}
+                        hogSrc={productData?.hog?.src}
+                        hogAlt={productData?.hog?.alt}
                         {...props}
                     />
                 )
@@ -72,23 +81,23 @@ export default function SlidesTemplate({
             case 'customers':
                 return (
                     <CustomersSlide
-                        productName={productHandle?.name}
+                        productName={productData?.name}
                         customers={customers}
-                        customerData={productHandle?.customers}
+                        customerData={productData?.customers}
                         hasCaseStudy={hasCaseStudy}
                         {...props}
                     />
                 )
 
             case 'features':
-                return <FeaturesSlide features={productHandle?.features || []} {...props} />
+                return <FeaturesSlide features={productData?.features || []} {...props} />
 
             case 'answers':
                 return (
                     <QuestionsSlide
-                        productName={productHandle?.name}
-                        answersDescription={productHandle?.answersDescription}
-                        questions={productHandle?.questions || []}
+                        productName={productData?.name}
+                        answersDescription={productData?.answersDescription}
+                        questions={productData?.questions || []}
                         tutorialData={data}
                         {...props}
                     />
@@ -98,10 +107,10 @@ export default function SlidesTemplate({
                 return (
                     <PlanComparison
                         products={products}
-                        productType={productHandle?.type}
+                        productHandle={productData?.handle}
                         onScrollToFeatures={() => {
-                            // Find the Features slide dynamically by handle
-                            const featuresSlideIndex = slideConfig.findIndex((slide) => slide.handle === 'features')
+                            // Find the Features slide dynamically by slug
+                            const featuresSlideIndex = slideConfig.findIndex((slide) => slide.slug === 'features')
                             if (featuresSlideIndex !== -1) {
                                 const featuresSlide = document.querySelector(`[data-slide="${featuresSlideIndex}"]`)
                                 featuresSlide?.scrollIntoView({ behavior: 'smooth', block: 'start' })
@@ -114,22 +123,22 @@ export default function SlidesTemplate({
             case 'comparison-summary':
                 return (
                     <ComparisonSummarySlide
-                        them={productHandle?.comparison?.summary?.them || []}
-                        us={productHandle?.comparison?.summary?.us || []}
+                        them={productData?.comparison?.summary?.them || []}
+                        us={productData?.comparison?.summary?.us || []}
                         {...props}
                     />
                 )
 
             case 'feature-comparison':
-                return <FeatureComparisonSlide features={productHandle?.comparison?.features || []} {...props} />
+                return <FeatureComparisonSlide features={productData?.comparison?.features || []} {...props} />
 
             case 'docs':
                 return (
                     <DocsSlide
-                        productType={productHandle?.type}
+                        productHandle={productData?.slug}
                         docsMenu={
                             docsMenu.children.find(
-                                ({ name }) => name.toLowerCase() === productHandle?.name.toLowerCase()
+                                ({ name }) => productData?.name && name.toLowerCase() === productData.name.toLowerCase()
                             )?.children || []
                         }
                         {...props}
@@ -139,8 +148,8 @@ export default function SlidesTemplate({
             case 'pairs-with':
                 return (
                     <PairsWithSlide
-                        productName={productHandle?.name}
-                        pairsWith={productHandle?.pairsWith || []}
+                        productName={productData?.name}
+                        pairsWith={productData?.pairsWith || []}
                         allProducts={allProducts}
                         {...props}
                     />
@@ -150,15 +159,15 @@ export default function SlidesTemplate({
                 return <GettingStartedSlide {...props} />
 
             default:
-                return <div>Slide not found: {handle}</div>
+                return <div>Slide not found: {slug}</div>
         }
     }
 
     // Create raw slides from configuration
-    const rawSlides = slideConfig.map(({ handle, name, component: CustomComponent, props }) => ({
+    const rawSlides = slideConfig.map(({ slug, name, component: CustomComponent, props }) => ({
         name,
-        handle,
-        content: CustomComponent ? <CustomComponent {...props} /> : createSlideContent(handle, props),
+        slug,
+        content: CustomComponent ? <CustomComponent {...props} /> : createSlideContent(slug, props),
     }))
 
     // Create slides with both raw content and wrapped content for different contexts
@@ -179,13 +188,13 @@ export default function SlidesTemplate({
     return (
         <>
             <SEO
-                title={seoOverrides?.title || productHandle?.seo?.title}
-                description={seoOverrides?.description || productHandle?.seo?.description}
-                image={seoOverrides?.image || `/images/og/${productHandle?.handle}.jpg`}
+                title={seoOverrides?.title || productData?.seo?.title}
+                description={seoOverrides?.description || productData?.seo?.description}
+                image={seoOverrides?.image || `/images/og/${productData?.slug}.jpg`}
             />
             <Presentation
                 template="generic"
-                slug={productHandle?.handle}
+                slug={productData?.slug}
                 title=""
                 sidebarContent={(activeSlideIndex) => (
                     <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} />
@@ -197,7 +206,7 @@ export default function SlidesTemplate({
                     className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4"
                 >
                     {slides.map((slide, index) => (
-                        <div key={slide.handle} className="flex flex-col justify-center bg-accent" data-slide={index}>
+                        <div key={slide.slug} className="flex flex-col justify-center bg-accent" data-slide={index}>
                             <span
                                 data-scheme="secondary"
                                 className="slideName inline-flex mx-auto bg-accent rounded-sm px-4 py-0.5 text-sm font-semibold text-primary my-2"

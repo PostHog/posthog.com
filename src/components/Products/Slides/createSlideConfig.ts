@@ -1,7 +1,7 @@
 import React from 'react'
 
 export interface SlideConfig {
-    handle: string
+    slug: string
     name: string
     component?: React.ComponentType<any>
     props?: Record<string, any>
@@ -17,99 +17,106 @@ export interface SlideConfigOptions {
 
 // Default slide configuration
 export const defaultSlides: Record<string, SlideConfig> = {
-    overview: { handle: 'overview', name: 'Overview' },
-    customers: { handle: 'customers', name: 'Customers' },
-    features: { handle: 'features', name: 'Features' },
-    answers: { handle: 'answers', name: 'Answers' },
-    pricing: { handle: 'pricing', name: 'Pricing' },
-    'comparison-summary': { handle: 'comparison-summary', name: 'PostHog vs... (the tl;dr)' },
-    'feature-comparison': { handle: 'feature-comparison', name: 'Feature comparison' },
-    docs: { handle: 'docs', name: 'Docs' },
-    'pairs-with': { handle: 'pairs-with', name: 'Pairs with...' },
-    'getting-started': { handle: 'getting-started', name: 'Getting started' },
+    overview: { slug: 'overview', name: 'Overview' },
+    customers: { slug: 'customers', name: 'Customers' },
+    features: { slug: 'features', name: 'Features' },
+    answers: { slug: 'answers', name: 'Answers' },
+    pricing: { slug: 'pricing', name: 'Pricing' },
+    'comparison-summary': { slug: 'comparison-summary', name: 'PostHog vs... (the tl;dr)' },
+    'feature-comparison': { slug: 'feature-comparison', name: 'Feature comparison' },
+    docs: { slug: 'docs', name: 'Docs' },
+    'pairs-with': { slug: 'pairs-with', name: 'Pairs with...' },
+    'getting-started': { slug: 'getting-started', name: 'Getting started' },
 }
 
 /**
- * Create a custom slide configuration
+ * Create a customized slide configuration for a product page
  *
  * @param options Configuration options
- * @returns Array of slide configurations
+ * @param options.include - Array of slide slugs to include (if provided, only these will be included)
+ * @param options.exclude - Array of slide slugs to exclude
+ * @param options.order - Custom order for slides (remaining slides will be appended in default order)
+ * @param options.overrides - Override properties for specific slides
+ * @param options.custom - Array of custom slides to add
+ *
+ * @returns Array of SlideConfig objects
  *
  * @example
- * // Include only specific slides
+ * ```tsx
+ * // Only include specific slides
  * const slides = createSlideConfig({
- *   include: ['overview', 'features', 'pricing']
+ *     include: ['overview', 'features', 'pricing']
  * })
  *
- * @example
- * // Exclude specific slides
+ * // Exclude certain slides
  * const slides = createSlideConfig({
- *   exclude: ['comparison-summary', 'feature-comparison']
+ *     exclude: ['comparison-summary', 'feature-comparison']
  * })
  *
- * @example
- * // Custom order
+ * // Custom order with overrides
  * const slides = createSlideConfig({
- *   order: ['overview', 'pricing', 'features', 'customers']
+ *     order: ['overview', 'pricing', 'features'],
+ *     overrides: {
+ *         pricing: { name: 'Plans & Pricing' }
+ *     }
  * })
  *
- * @example
- * // Override slide properties
- * const slides = createSlideConfig({
- *   overrides: {
- *     pricing: { name: 'Plans & Pricing' },
- *     features: { props: { customProp: 'value' } }
- *   }
- * })
- *
- * @example
  * // Add custom slides
  * const slides = createSlideConfig({
- *   custom: [
- *     { handle: 'custom-slide', name: 'My Custom Slide', component: MyCustomComponent }
- *   ]
+ *     custom: [
+ *         { slug: 'custom-slide', name: 'My Custom Slide', component: MyCustomComponent }
+ *     ]
  * })
+ * ```
  */
-export function createSlideConfig(options: SlideConfigOptions = {}): SlideConfig[] {
-    const { include, exclude, order, overrides = {}, custom = [] } = options
+export function createSlideConfig({
+    include,
+    exclude = [],
+    order = [],
+    overrides = {},
+    custom = [],
+}: {
+    include?: string[]
+    exclude?: string[]
+    order?: string[]
+    overrides?: Record<string, Partial<SlideConfig>>
+    custom?: SlideConfig[]
+} = {}): SlideConfig[] {
+    // Get all available slide slugs
+    const slideSlugs = Object.keys(defaultSlides)
 
-    let slides: SlideConfig[] = []
+    // Filter slides based on include/exclude
+    let filteredSlugs = include ? slideSlugs.filter((slug) => include.includes(slug)) : slideSlugs
 
-    // Start with default slides
-    const slideHandles = Object.keys(defaultSlides)
-
-    // Apply include filter
-    let filteredHandles = include ? slideHandles.filter((handle) => include.includes(handle)) : slideHandles
-
-    // Apply exclude filter
-    if (exclude) {
-        filteredHandles = filteredHandles.filter((handle) => !exclude.includes(handle))
+    // Remove excluded slides
+    if (exclude.length > 0) {
+        filteredSlugs = filteredSlugs.filter((slug) => !exclude.includes(slug))
     }
 
-    // Apply custom order if specified
-    if (order) {
-        const orderedHandles = order.filter((handle) => filteredHandles.includes(handle))
-        const remainingHandles = filteredHandles.filter((handle) => !order.includes(handle))
-        filteredHandles = [...orderedHandles, ...remainingHandles]
+    // Apply custom order
+    if (order.length > 0) {
+        const orderedSlugs = order.filter((slug) => filteredSlugs.includes(slug))
+        const remainingSlugs = filteredSlugs.filter((slug) => !order.includes(slug))
+        filteredSlugs = [...orderedSlugs, ...remainingSlugs]
     }
 
-    // Create slide configs with overrides
-    slides = filteredHandles.map((handle) => {
-        const defaultSlide = defaultSlides[handle]
-        const override = overrides[handle] || {}
+    // Create final slide configuration
+    let slides = filteredSlugs.map((slug) => {
+        const defaultSlide = defaultSlides[slug]
+        const override = overrides[slug] || {}
 
         return {
             ...defaultSlide,
             ...override,
-            props: {
-                ...defaultSlide.props,
-                ...override.props,
-            },
+            // Ensure slug is preserved
+            slug: defaultSlide.slug,
         }
     })
 
     // Add custom slides
-    slides.push(...custom)
+    if (custom.length > 0) {
+        slides = [...slides, ...custom]
+    }
 
     return slides
 }

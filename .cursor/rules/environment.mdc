@@ -4,3 +4,4 @@ globs:
 alwaysApply: true
 ---
 - Use yarn instead of npm
+- The site runs on port 8001. If you need to test something, no need to boot up a new server, just check on port 8001 as it's likely already running.

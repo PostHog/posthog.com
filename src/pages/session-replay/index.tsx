@@ -3,7 +3,7 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 
 // Product configuration - change this to adapt for different products
-const PRODUCT_TYPE = 'session_replay'
+const PRODUCT_HANDLE = 'session_replay'
 
 export default function SessionReplay(): JSX.Element {
     // Combined GraphQL query for both tutorial data and product data
@@ -74,5 +74,5 @@ export default function SessionReplay(): JSX.Element {
     //     order: ['overview', 'pricing', 'features']
     // })
 
-    return <SlidesTemplate productType={PRODUCT_TYPE} data={data} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
 }
