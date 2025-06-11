@@ -5,19 +5,17 @@ import ScalableSlide from 'components/Presentation/ScalableSlide'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
 import { docsMenu } from '../../../navs'
-import {
-    SlideThumbnails,
-    OverviewSlide,
-    CustomersSlide,
-    FeaturesSlide,
-    QuestionsSlide,
-    PlanComparison,
-    ComparisonSummarySlide,
-    FeatureComparisonSlide,
-    DocsSlide,
-    PairsWithSlide,
-    GettingStartedSlide,
-} from './index'
+import SlideThumbnails from './SlideThumbnails'
+import OverviewSlide from './OverviewSlide'
+import CustomersSlide from './CustomersSlide'
+import FeaturesSlide from './FeaturesSlide'
+import QuestionsSlide from './QuestionsSlide'
+import PlanComparison from './PlanComparison'
+import ComparisonSummarySlide from './ComparisonSummarySlide'
+import FeatureComparisonSlide from './FeatureComparisonSlide'
+import DocsSlide from './DocsSlide'
+import PairsWithSlide from './PairsWithSlide'
+import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, defaultSlides } from './createSlideConfig'
 
 interface SlidesTemplateProps {
