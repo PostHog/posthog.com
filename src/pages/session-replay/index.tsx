@@ -7,7 +7,6 @@ import Presentation from 'components/Presentation'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
 import useProduct from 'hooks/useProduct'
 import { useCustomers } from 'hooks/useCustomers'
-import useProducts from 'hooks/useProducts'
 import Tabs from 'components/RadixUI/Tabs'
 import ImageSlider from 'components/Pricing/Test/ImageSlider'
 import OSTable from 'components/OSTable'
@@ -66,8 +65,7 @@ const SlideThumbnails = ({ slides, activeSlideIndex }: { slides: any[]; activeSl
 
 // Features component using tab UI
 const FeaturesTab = () => {
-    const { products } = useProducts()
-    const sessionReplayProduct = products.find((product) => product.type === 'session_replay')
+    const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
     const featuresContent = sessionReplayProduct?.features || []
     const [currentTab, setCurrentTab] = useState(0)
 
@@ -132,10 +130,9 @@ const FeaturesTab = () => {
     )
 }
 
-// Questions tabs component sourcing data from useProducts
+// Questions tabs component sourcing data from useProduct
 const QuestionsTabs = ({ tutorialData }: { tutorialData: any }) => {
-    const { products } = useProducts()
-    const sessionReplayProduct = products.find((product) => product.type === 'session_replay')
+    const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
     const questions = sessionReplayProduct?.questions || []
     const [currentTab, setCurrentTab] = useState(0)
 
@@ -349,16 +346,14 @@ export default function SessionReplay(): JSX.Element {
     const products = data.allProductData.nodes[0].products
 
     // Get session replay product data and customers
-    const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
-    const { products: useProductsData } = useProducts()
-    const sessionReplayFromProducts = useProductsData.find((product: any) => product.type === 'session_replay')
+    const sessionReplayFromProducts = useProduct({ type: 'session_replay' }) as any
     const { getCustomers, hasCaseStudy } = useCustomers()
 
     // Get all products for pairsWith lookup
     const allProducts = useProduct() as any[]
 
     // Get customer slugs from session replay product and retrieve customer data
-    const customerSlugs = sessionReplayProduct?.customers ? Object.keys(sessionReplayProduct.customers) : []
+    const customerSlugs = sessionReplayFromProducts?.customers ? Object.keys(sessionReplayFromProducts.customers) : []
     const customers = getCustomers(customerSlugs)
 
     // Create table structure for customers
@@ -371,10 +366,10 @@ export default function SessionReplay(): JSX.Element {
 
     const customerTableRows = customers
         .filter((customer) => {
-            return sessionReplayProduct?.customers?.[customer.slug]
+            return sessionReplayFromProducts?.customers?.[customer.slug]
         })
         .map((customer, index) => {
-            const customerData = sessionReplayProduct?.customers?.[customer.slug]
+            const customerData = sessionReplayFromProducts?.customers?.[customer.slug]
 
             return {
                 cells: [
