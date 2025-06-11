@@ -27,6 +27,7 @@ import { docsMenu } from '../../navs'
 import { DocLinks } from 'components/Products/DocsLinks'
 import ZoomHover from 'components/ZoomHover'
 import CTA from 'components/Home/CTA'
+import PlanComparison from 'components/Products/PlanComparison'
 
 const slideClasses =
     'bg-primary aspect-video relative border-y first:border-t-0 last:border-b-0 border-primary shadow-lg'
@@ -142,29 +143,11 @@ const FeaturesTab = () => {
 }
 
 // Questions tabs component sourcing data from useProducts
-const QuestionsTabs = () => {
+const QuestionsTabs = ({ tutorialData }: { tutorialData: any }) => {
     const { products } = useProducts()
     const sessionReplayProduct = products.find((product) => product.type === 'session_replay')
     const questions = sessionReplayProduct?.questions || []
     const [currentTab, setCurrentTab] = useState(0)
-
-    // GraphQL query to fetch tutorial content from URLs
-    const tutorialData = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
-        }
-    `)
 
     // Helper function to get content for a question URL
     const getContentForUrl = (url?: string) => {
@@ -311,10 +294,74 @@ const QuestionsTabs = () => {
 }
 
 export default function SessionReplay(): JSX.Element {
+    // Combined GraphQL query for both tutorial data and product data
+    const data = useStaticQuery(graphql`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    rawBody
+                    frontmatter {
+                        title
+                        description
+                    }
+                }
+            }
+            allProductData {
+                nodes {
+                    products {
+                        name
+                        type
+                        unit
+                        addons {
+                            name
+                            type
+                            unit
+                            plans {
+                                name
+                                plan_key
+                                included_if
+                                features {
+                                    key
+                                    name
+                                    description
+                                    limit
+                                    note
+                                }
+                            }
+                        }
+                        plans {
+                            name
+                            plan_key
+                            free_allocation
+                            included_if
+                            features {
+                                key
+                                name
+                                description
+                                limit
+                                note
+                            }
+                            tiers {
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
+
+    // Extract products data for the pricing component
+    const products = data.allProductData.nodes[0].products
+
     // Get session replay product data and customers
     const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
-    const { products } = useProducts()
-    const sessionReplayFromProducts = products.find((product: any) => product.type === 'session_replay')
+    const { products: useProductsData } = useProducts()
+    const sessionReplayFromProducts = useProductsData.find((product: any) => product.type === 'session_replay')
     const { getCustomers, hasCaseStudy } = useCustomers()
 
     // Get all products for pairsWith lookup
@@ -466,17 +513,25 @@ export default function SessionReplay(): JSX.Element {
                             Understand user behavior, identify friction points, and improve your product experience
                         </p>
                     </div>
-                    <QuestionsTabs />
+                    <QuestionsTabs tutorialData={data} />
                 </div>
             ),
         },
         {
             name: 'Pricing',
             content: (
-                <div className="h-full p-12 flex flex-col justify-center text-center">
-                    <h2 className="text-4xl font-bold text-primary mb-6">Pricing</h2>
-                    <p className="text-xl text-secondary max-w-4xl mx-auto">Start free, pay as you scale</p>
-                </div>
+                <PlanComparison
+                    products={products}
+                    productType="session_replay"
+                    onScrollToFeatures={() => {
+                        // Find the Features slide dynamically by name
+                        const featuresSlideIndex = rawSlides.findIndex((slide) => slide.name === 'Features')
+                        if (featuresSlideIndex !== -1) {
+                            const featuresSlide = document.querySelector(`[data-slide="${featuresSlideIndex}"]`)
+                            featuresSlide?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        }
+                    }}
+                />
             ),
         },
         {
