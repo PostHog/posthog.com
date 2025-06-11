@@ -710,7 +710,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Docs',
-                url: '',
+                url: '/handbook/content/docs',
                 children: [
                     {
                         name: 'Overview',
