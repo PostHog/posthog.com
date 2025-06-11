@@ -9,6 +9,8 @@ import type {
     MetaobjectsResponseData,
 } from '../src/templates/merch/types'
 import dayjs from 'dayjs'
+import fs from 'fs'
+import path from 'path'
 
 export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createContentDigest, createNodeId }) => {
     const { createNode } = actions
@@ -19,6 +21,25 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             Accept: 'application/json',
         },
     }).then((res) => res.json())
+
+    // Write OpenAPI spec as markdown file to static directory
+    const markdownContent = `# PostHog API Specification
+
+This is the complete OpenAPI specification for the PostHog API.
+
+\`\`\`yaml
+${JSON.stringify(spec, null, 2)}
+\`\`\`
+`
+
+    const staticDir = path.join(process.cwd(), 'static')
+    if (!fs.existsSync(staticDir)) {
+        fs.mkdirSync(staticDir, { recursive: true })
+    }
+
+    const specFilePath = path.join(staticDir, 'api-spec.md')
+    fs.writeFileSync(specFilePath, markdownContent, 'utf8')
+    console.log('✅ Generated API spec markdown file at /api-spec.md')
 
     const parser = new OpenAPIParser(spec)
     const menu = MenuBuilder.buildStructure(parser, {} as any)
