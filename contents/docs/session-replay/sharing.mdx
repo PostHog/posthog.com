@@ -5,9 +5,9 @@ import {ProductVideo} from'components/ProductVideo'
 export const shareReplayLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/share-replay-light-mode.mp4"
 export const shareReplayDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/share-replay-dark-mode.mp4"
 
-Replays are typically viewed in **[Session Replay](https://app.posthog.com/replay)** part of PostHog. However, you may want to share specific recordings with people outside of your PostHog organization. You can share them directly using a URL, or embed them in a webpage using an iframe:
+Replays are typically viewed in **[Session Replay](https://us.posthog.com/replay)** part of PostHog. However, you may want to share specific recordings with people outside of your PostHog organization. You can share them directly using a URL, or embed them in a webpage using an iframe:
 
-<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://app.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://us.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
 
 > Above is an embedded recording of posthog.com… on posthog.com – very meta.
 
@@ -43,9 +43,9 @@ uploadSessionIDToBackend(sessionID)
 
 ```node
 // Node.JS backend example
-const projectID = 123 // Found in [Project Settings](https://app.posthog.com/project/settings)
+const projectID = 123 // Found in [Project Settings](https://us.posthog.com/project/settings)
 const sessionID = '{FROM_STEP_1}'
-const url = `https://app.posthog.com/api/projects/${projectID}/session_recordings/${sessionID}/sharing?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
+const url = `https://us.posthog.com/api/projects/${projectID}/session_recordings/${sessionID}/sharing?personal_api_key=${POSTHOG_PERSONAL_API_KEY}`
 
 const response = await fetch(url, {
   method: 'PATCH',

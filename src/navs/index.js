@@ -773,6 +773,10 @@ export const handbookSidebar = [
                 url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
             },
             {
+                name: 'Getting to know your customers',
+                url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
+            },
+            {
                 name: 'Health tracking',
                 url: '/handbook/cs-and-onboarding/health-tracking',
             },
@@ -952,6 +956,10 @@ export const handbookSidebar = [
                     {
                         name: 'Working with JSON',
                         url: '/handbook/engineering/clickhouse/working-with-json',
+                    },
+                    {
+                        name: 'Query attribution',
+                        url: '/handbook/engineering/clickhouse/query-attribution',
                     },
                     {
                         name: 'Query performance',
@@ -1244,6 +1252,10 @@ export const handbookSidebar = [
             {
                 name: 'Expansion & Retention',
                 url: '/handbook/growth/sales/expansion-and-retention',
+            },
+            {
+                name: 'Account planning',
+                url: '/handbook/growth/sales/account-planning',
             },
             {
                 name: 'How we work',
