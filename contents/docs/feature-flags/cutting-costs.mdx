@@ -9,9 +9,9 @@ We aim to be significantly cheaper than our competitors. In addition to our [pay
 
 ## Understanding your bill
 
-Feature flags are charged based requests made to our `/decide` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
+Feature flags are charged based requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
 
-The number of `/decide` requests and the number of `$feature_flag_called` events are **not** directly related.
+The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 
 ### Creating a billable usage dashboard
 
@@ -55,7 +55,7 @@ The drawback of this approach is that whenever you make an update to a feature f
 
 <CalloutBox icon="IconWarning" title="Edge/Lambda environments" type="caution">
 
-  Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+  Do not use local evaluation in an edge or Lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
 
 </CalloutBox>
 
@@ -82,7 +82,7 @@ This ensures that your application continues to function even when feature flag 
 
 <CalloutBox icon="IconWarning" title="Watch out for forgotten environments" type="caution">
 
-  Forgotten environments, like old demos, test apps, or staging servers, and other PostHog SDKs, can silently rack up costs. Even if they don't send events, they may still be polling and making `/decide` calls for feature flags, session replay, and surveys.
+  Forgotten environments, like old demos, test apps, or staging servers, and other PostHog SDKs, can silently rack up costs. Even if they don't send events, they may still be polling and making `/flags` calls for feature flags, session replay, and surveys.
 
   These environments often get overlooked, especially if they're not part of your main deployment flow.
 
