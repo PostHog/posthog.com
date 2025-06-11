@@ -3,13 +3,33 @@ title: Cutting feature flag costs
 sidebar: Docs
 showTitle: true
 ---
-import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your feature flag costs:
+We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your feature flag costs.
+
+## Understanding your bill
+
+Feature flags are charged based requests made to our `/decide` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
+
+The number of `/decide` requests and the number of `$feature_flag_called` events are **not** directly related.
+
+### Creating a billable usage dashboard
+
+import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
 
 <PostHogBillableUsageTemplate />
 
-## Reduce client-side feature flag requests
+import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
+
+<details>
+  <summary>Estimating your bill manually (with math!)</summary>
+
+  <FlagChargeEstimate />
+
+</details>
+
+
+## Reducing client-side feature flag requests
 
 In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
 
@@ -17,9 +37,13 @@ In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/r
 
 2. Using the the [advanced configuration](/docs/libraries/js/config#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
 
-> **Note:** Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally.
+<CalloutBox icon="IconWarning" title="Note" type="caution">
 
-## Reduce local evaluation costs
+  Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally.
+
+</CalloutBox>
+
+## Reducing local evaluation costs
 
 If you're using [local evaluation](/docs/feature-flags/local-evaluation), your bill may be high because of too many requests to fetch feature flag definitions. By default, PostHog fetches these every 30 seconds.
 
@@ -29,7 +53,11 @@ You can reduce this by increasing the [feature flag polling interval](/docs/feat
 
 The drawback of this approach is that whenever you make an update to a feature flag using the PostHog UI, it takes 5 minutes (instead of 30 seconds) for that change to roll to your server.
 
-> **Note:** Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+<CalloutBox icon="IconWarning" title="Edge/Lambda environments" type="caution">
+
+  Do not use local evaluation in an edge / lambda environment, as this initializes a PostHog instance on every call, which can raise your bill drastically. It's best to use regular flag evaluation instead.
+
+</CalloutBox>
 
 ## Quota limiting
 
@@ -52,9 +80,13 @@ This ensures that your application continues to function even when feature flag 
 
 ## Audit environments to catch unexpected `/decide` calls
 
-Forgotten environments, like old demos, test apps, or staging servers, and other PostHog SDKs, can silently rack up costs. Even if they don’t send events, they may still be polling and making `/decide` calls for feature flags, session replay, and surveys.
+<CalloutBox icon="IconWarning" title="Watch out for forgotten environments" type="caution">
 
-These environments often get overlooked, especially if they're not part of your main deployment flow.
+  Forgotten environments, like old demos, test apps, or staging servers, and other PostHog SDKs, can silently rack up costs. Even if they don't send events, they may still be polling and making `/decide` calls for feature flags, session replay, and surveys.
+
+  These environments often get overlooked, especially if they're not part of your main deployment flow.
+
+</CalloutBox>
 
 To identify where PostHog is still running:
 
