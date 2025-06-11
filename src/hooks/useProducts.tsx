@@ -392,7 +392,21 @@ const initialProducts = [
         Icon: IconRewindPlay,
         name: 'Session replay',
         type: 'session_replay',
+        title: 'Watch people use your product',
+        description:
+            'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
+        answersDescription: 'Understand user behavior, identify friction points, and improve your product experience',
         color: 'yellow',
+        screenshots: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
+                alt: 'Session replay screenshot',
+            },
+        ],
+        hog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
+            alt: 'A hedgehog watching some session recordings',
+        },
         slider: {
             marks: [5000, 25000, 120000, 500000],
             min: 5000,

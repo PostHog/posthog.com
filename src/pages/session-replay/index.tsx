@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import { IconRewindPlay } from '@posthog/icons'
+import * as Icons from '@posthog/icons'
 import Presentation from 'components/Presentation'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
 import useProduct from 'hooks/useProduct'
@@ -419,6 +419,9 @@ export default function SessionReplay(): JSX.Element {
             }
         })
 
+    const screenshotClasses = 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl'
+    const hogClasses = 'absolute bottom-0 right-0 max-w-[698px]'
+
     // Define raw slide content
     const rawSlides = [
         {
@@ -426,26 +429,34 @@ export default function SessionReplay(): JSX.Element {
             content: (
                 <div className="h-full p-12 flex flex-col relative bg-yellow text-white">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg"
-                        alt="Session replay"
-                        className="absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl"
+                        src={
+                            (sessionReplayFromProducts?.screenshots?.[0]
+                                ?.src as `https://res.cloudinary.com/${string}`) ||
+                            'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg'
+                        }
+                        alt={sessionReplayFromProducts?.screenshots?.[0]?.alt || 'Product screenshot'}
+                        className={screenshotClasses}
                     />
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png"
-                        alt="Session replay"
-                        className="absolute bottom-0 right-0 max-w-[698px]"
+                        src={
+                            (sessionReplayFromProducts?.hog?.src as `https://res.cloudinary.com/${string}`) ||
+                            'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png'
+                        }
+                        alt={sessionReplayFromProducts?.hog?.alt || 'Hedgehog'}
+                        className={hogClasses}
                     />
                     <div className="pt-12 pr-12 pb-1/2 pl-1/2">
                         <div className="inline-flex items-center gap-3 text-primary mb-4">
-                            <IconRewindPlay className="size-7 text-black" />
-                            <span className="text-xl font-bold text-black">Session replay</span>
+                            {sessionReplayFromProducts?.Icon && (
+                                <sessionReplayFromProducts.Icon className="size-7 text-black" />
+                            )}
+                            <span className="text-xl font-bold text-black">{sessionReplayFromProducts?.name}</span>
                         </div>
                         <h1 className="text-5xl font-bold text-black mb-4 leading-tight">
-                            Watch people use your product
+                            {sessionReplayFromProducts?.title || sessionReplayFromProducts?.name}
                         </h1>
                         <p className="text-xl text-black mb-8 leading-relaxed">
-                            Play back sessions to diagnose UI issues, improve support, and get context on nuanced user
-                            behavior in your product, website, or mobile app.
+                            {sessionReplayFromProducts?.description}
                         </p>
                     </div>
                 </div>
@@ -456,7 +467,9 @@ export default function SessionReplay(): JSX.Element {
             content: (
                 <div className="h-full p-12 bg-light dark:bg-dark">
                     <h2 className="text-4xl font-bold text-primary mb-6 text-center">
-                        Customers who love session replay
+                        Customers who love{' '}
+                        <Logo noText color="primary" className="h-14 inline-block relative -top-1 mx-1" />{' '}
+                        {sessionReplayFromProducts?.name}
                     </h2>
                     <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" />
                 </div>
@@ -497,10 +510,10 @@ export default function SessionReplay(): JSX.Element {
                 <div className="h-full flex flex-col p-4">
                     <div className="flex-0">
                         <h2 className="text-4xl font-bold text-primary my-2 text-center">
-                            What can I discover with session replay?
+                            What can I discover with {sessionReplayFromProducts?.name}?
                         </h2>
                         <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
-                            Understand user behavior, identify friction points, and improve your product experience
+                            {sessionReplayFromProducts?.answersDescription}
                         </p>
                     </div>
                     <QuestionsTabs tutorialData={data} />
@@ -686,7 +699,8 @@ export default function SessionReplay(): JSX.Element {
                 <div className="h-full p-12 flex flex-col justify-center text-center bg-light dark:bg-dark">
                     <h2 className="text-4xl font-bold text-primary mb-2">Pairs with...</h2>
                     <p className="text-xl text-secondary max-w-4xl mx-auto mb-12">
-                        Session replay pairs with other products to give you a complete picture of your product.
+                        {sessionReplayFromProducts?.name} pairs with other products to give you a complete picture of
+                        your product.
                     </p>
                     <div className="grid grid-cols-3 gap-4">
                         {sessionReplayFromProducts?.pairsWith?.map((pair: any) => {
