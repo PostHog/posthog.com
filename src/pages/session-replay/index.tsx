@@ -227,6 +227,8 @@ const QuestionsTabs = () => {
 export default function SessionReplay(): JSX.Element {
     // Get session replay product data and customers
     const sessionReplayProduct = useProduct({ type: 'session_replay' }) as any
+    const { products } = useProducts()
+    const sessionReplayFromProducts = products.find((product: any) => product.type === 'session_replay')
     const { getCustomers, hasCaseStudy } = useCustomers()
 
     // Get customer slugs from session replay product and retrieve customer data
@@ -389,6 +391,154 @@ export default function SessionReplay(): JSX.Element {
             ),
         },
         {
+            name: 'PostHog vs...',
+            content: (
+                <div className="h-full p-8">
+                    <h2 className="text-4xl font-bold text-primary mb-10 text-center">PostHog vs...</h2>
+
+                    <div className="max-w-6xl mx-auto">
+                        <div className="overflow-x-auto">
+                            <table className="w-full border-collapse border border-primary">
+                                <thead>
+                                    <tr className="bg-accent">
+                                        <th className="border border-primary px-2 py-1.5 text-left font-semibold">
+                                            Feature
+                                        </th>
+                                        {Object.keys(
+                                            sessionReplayFromProducts?.comparison?.features?.[0]?.companies || {}
+                                        ).map((company: string) => (
+                                            <th
+                                                key={company}
+                                                className="border border-primary px-2 py-1.5 text-center font-semibold min-w-[100px]"
+                                            >
+                                                {company}
+                                            </th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {sessionReplayFromProducts?.comparison?.features?.map(
+                                        (feature: any, index: number) => (
+                                            <tr key={index} className={index % 2 === 0 ? 'bg-primary' : 'bg-accent'}>
+                                                <td className="border border-primary px-2 py-1.5 font-medium">
+                                                    {feature.feature}
+                                                </td>
+                                                {Object.entries(feature.companies).map(([company, supported]) => (
+                                                    <td
+                                                        key={company}
+                                                        className="border border-primary px-2 py-1.5 text-center"
+                                                    >
+                                                        {typeof supported === 'boolean' ? (
+                                                            supported ? (
+                                                                <span className="text-green font-bold">✓</span>
+                                                            ) : (
+                                                                <span className="text-red font-bold">✗</span>
+                                                            )
+                                                        ) : (
+                                                            <span
+                                                                dangerouslySetInnerHTML={{
+                                                                    __html: supported as string,
+                                                                }}
+                                                            />
+                                                        )}
+                                                    </td>
+                                                ))}
+                                            </tr>
+                                        )
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            ),
+        },
+        {
+            name: 'Who should you choose?',
+            content: (
+                <div className="h-full p-8">
+                    <h2 className="text-4xl font-bold text-primary mb-6 text-center">PostHog vs competitors</h2>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
+                        How PostHog session replay compares to other tools
+                    </p>
+
+                    {/* Comparison Summary */}
+                    <div className="grid md:grid-cols-2 gap-8 mb-8 max-w-6xl mx-auto">
+                        <div className="bg-accent rounded-lg p-6">
+                            <h3 className="text-2xl font-bold text-primary mb-4">Why competitors might be better</h3>
+                            <ul className="space-y-3">
+                                {sessionReplayFromProducts?.comparison?.summary?.them?.map(
+                                    (item: any, index: number) => (
+                                        <li key={index} className="flex flex-col">
+                                            <span className="font-semibold text-lg">{item.title}</span>
+                                            {item.subtitle && (
+                                                <span className="text-secondary">
+                                                    {item.subtitleUrl ? (
+                                                        <a
+                                                            href={item.subtitleUrl}
+                                                            target="_blank"
+                                                            rel="noopener noreferrer"
+                                                            className="underline"
+                                                        >
+                                                            {item.subtitle}
+                                                        </a>
+                                                    ) : (
+                                                        item.subtitle
+                                                    )}
+                                                </span>
+                                            )}
+                                        </li>
+                                    )
+                                )}
+                            </ul>
+                        </div>
+
+                        <div className="bg-accent rounded-lg p-6">
+                            <h3 className="text-2xl font-bold text-primary mb-4">Why PostHog is better</h3>
+                            <ul className="space-y-3">
+                                {sessionReplayFromProducts?.comparison?.summary?.us?.map((item: any, index: number) => (
+                                    <li key={index} className="flex flex-col">
+                                        <span className="font-semibold text-lg">{item.title}</span>
+                                        {item.subtitle && <span className="text-secondary">{item.subtitle}</span>}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            ),
+        },
+        {
+            name: 'Installation',
+            content: (
+                <div className="h-full p-8">
+                    <h2 className="text-4xl font-bold text-primary mb-6 text-center">Install &amp; customize</h2>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">
+                        Here are some ways you can fine tune how you implement session replay.
+                    </p>
+                </div>
+            ),
+        },
+        {
+            name: 'Pairs with',
+            content: (
+                <div className="h-full p-12 flex flex-col justify-center text-center">
+                    <h2 className="text-4xl font-bold text-primary mb-6">Pairs with</h2>
+                    <p className="text-xl text-secondary max-w-4xl mx-auto">
+                        Session replay pairs with other products to give you a complete picture of your product.
+                    </p>
+                    <div className="grid grid-cols-3 gap-4">
+                        {sessionReplayFromProducts?.pairsWith?.map((pair: any) => (
+                            <div key={pair.product}>
+                                <h3 className="text-2xl font-bold text-primary mb-2">{pair.product}</h3>
+                                <p className="text-lg text-secondary">{pair.description}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            ),
+        },
+        {
             name: 'Getting started',
             content: (
                 <div className="h-full p-12 flex flex-col justify-center text-center">
@@ -421,7 +571,7 @@ export default function SessionReplay(): JSX.Element {
         // Raw content for presentation mode
         rawContent: slide.content,
         // Simplified content for thumbnails (avoids complex components)
-        thumbnailContent: slide.thumbnailContent || slide.content,
+        thumbnailContent: (slide as any).thumbnailContent || slide.content,
     }))
 
     return (

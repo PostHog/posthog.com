@@ -646,6 +646,190 @@ const initialProducts = [
                 url: '/tutorials/performance-metrics#optimization-cheat-sheet',
             },
         ],
+        comparison: {
+            summary: {
+                them: [
+                    {
+                        title: 'Error tracking',
+                        subtitle: 'In progress!',
+                        subtitleUrl: 'https://github.com/PostHog/posthog/issues/23400',
+                    },
+                    {
+                        title: 'Alerting',
+                        subtitle: 'In progress!',
+                        subtitleUrl: 'https://github.com/PostHog/posthog/issues/14331',
+                    },
+                ],
+                us: [
+                    {
+                        title: 'Interlinking with feature flags and insights',
+                        subtitle: 'Jump between them easily',
+                    },
+                    {
+                        title: 'Collaboration, sharing, and embedding exporting recordings',
+                    },
+                    {
+                        title: 'No limits on how many recordings captured',
+                    },
+                ],
+            },
+            features: [
+                {
+                    feature: 'Single-page app support',
+                    companies: {
+                        Hotjar: true,
+                        LogRocket: true,
+                        Matomo: true,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'iOS recordings',
+                    companies: {
+                        Hotjar: false,
+                        LogRocket: true,
+                        Matomo: false,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Android recordings',
+                    companies: {
+                        Hotjar: false,
+                        LogRocket: true,
+                        Matomo: false,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'React Native recordings',
+                    companies: {
+                        Hotjar: false,
+                        LogRocket: true,
+                        Matomo: false,
+                        FullStory: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Flutter recordings',
+                    companies: {
+                        Hotjar: false,
+                        LogRocket: false,
+                        Matomo: false,
+                        FullStory: false,
+                        PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
+                    },
+                },
+                {
+                    feature: 'Identity detection',
+                    companies: {
+                        Hotjar: false,
+                        LogRocket: true,
+                        Matomo: true,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Target recordings by URL',
+                    companies: {
+                        Hotjar: true,
+                        LogRocket: true,
+                        Matomo: true,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Target by sample size',
+                    companies: {
+                        Hotjar: true,
+                        LogRocket: false,
+                        Matomo: true,
+                        FullStory: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Filter recordings by user or event',
+                    companies: {
+                        Hotjar: true,
+                        LogRocket: true,
+                        Matomo: true,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Rage-click detection',
+                    companies: {
+                        Hotjar: true,
+                        LogRocket: true,
+                        Matomo: false,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Privacy masking for sensitive content',
+                    companies: {
+                        Hotjar: true,
+                        LogRocket: true,
+                        Matomo: true,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Export recordings',
+                    companies: {
+                        Hotjar: true,
+                        LogRocket: false,
+                        Matomo: true,
+                        FullStory: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Recording retention policy',
+                    companies: {
+                        Hotjar: '12 months',
+                        LogRocket: '1 month',
+                        Matomo: '24 months',
+                        FullStory: '1 month',
+                        PostHog: 'Up to 3 months',
+                    },
+                },
+            ],
+        },
+        pairsWith: [
+            {
+                icon: <IconGraph />,
+                color: 'blue',
+                product: 'Product analytics',
+                description: 'Jump into a playlist of session recordings directly from any time series in a graph',
+                url: '/product-analytics',
+            },
+            {
+                icon: <IconToggle />,
+                color: 'seagreen',
+                product: 'Feature flags',
+                description: "See which feature flags are enabled for a user's session",
+                url: '/feature-flags',
+            },
+            {
+                icon: <IconFlask />,
+                color: 'purple',
+                product: 'Experiments',
+                description:
+                    'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
+                url: '/experiments',
+            },
+        ],
     },
     {
         Icon: IconToggle,
