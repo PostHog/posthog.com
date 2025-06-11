@@ -203,7 +203,7 @@ export default function SlidesTemplate({
             >
                 <div
                     data-scheme="primary"
-                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden [&_div:first-child_div]:border-t-0 p-4"
+                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden p-4"
                 >
                     {slides.map((slide, index) => (
                         <div key={slide.slug} className="flex flex-col justify-center bg-accent" data-slide={index}>

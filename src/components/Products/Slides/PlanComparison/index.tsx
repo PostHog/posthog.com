@@ -279,7 +279,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({ products, productHandle
             </div>
 
             {/* Right side - Plans */}
-            <div className="p-12 bg-primary col-span-3">
+            <div className="p-12 bg-primary col-span-3 border-l border-primary">
                 <h2 className="text-4xl font-bold text-primary mb-12">Plans</h2>
 
                 {/* Comparison rows */}

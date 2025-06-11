@@ -55,7 +55,7 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                 </div>
                 {features.map((item: FeatureItem, index: number) => (
                     <Tabs.Content
-                        className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 border-l border-primary grow rounded px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative"
+                        className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative"
                         key={index}
                         value={`tab-${index}`}
                     >
