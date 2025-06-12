@@ -81,7 +81,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                                 <span className="line-through">
                                     <Price price={selectedVariant.price.amount} />
                                 </span>{' '}
-                                <span className="text-green">FREE</span>
+                                <span className="text-green font-bold">FREE</span>
                             </>
                         ) : (
                             <Price price={selectedVariant.price.amount} />

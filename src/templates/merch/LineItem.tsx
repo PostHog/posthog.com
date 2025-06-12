@@ -64,7 +64,7 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
                                 <span className="line-through">
                                     <Price price={item.price} />
                                 </span>{' '}
-                                <span className="text-green">FREE</span>
+                                <span className="text-green font-bold">FREE</span>
                             </>
                         ) : (
                             <Price price={item.price} />

@@ -45,7 +45,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                     <span className={`${product.kit ? 'line-through' : ''}`}>
                         ${product.priceRangeV2.minVariantPrice.amount}
                     </span>{' '}
-                    {product.kit ? <span className="text-green">FREE</span> : null}
+                    {product.kit ? <span className="text-green font-bold">FREE</span> : null}
                 </p>
             </div>
         </div>
