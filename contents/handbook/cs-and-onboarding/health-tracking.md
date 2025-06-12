@@ -28,7 +28,7 @@ Health score metrics are divided into two categories: Customer Engagement (20%) 
 |-----------------------------|--------------------------------------------------------------------------------------|--------------|
 | Product Analytics           | Event volume and users analyzing insights                                            | 33%          | 
 | Session replay              | Replay volume and users analyzing replays                                            | 20%          | 
-| Feature flags & Experiments | Decide requests, users creating feature flags, users creating or viewing experiments | 17%          | 
+| Feature flags & Experiments | Flag requests, users creating feature flags, users creating or viewing experiments | 17%          | 
 | Surveys & Data warehouse    | Users creating and viewing surveys, volume of rows synced                            | 5%           | 
 
 ### Customer engagement
