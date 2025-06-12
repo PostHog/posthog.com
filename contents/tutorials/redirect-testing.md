@@ -194,7 +194,7 @@ export async function middleware(request) {
 
 With our distinct ID, we use the PostHog API to check the value of the `main-redirect` feature flag for a user (because [we can’t use PostHog SDKs in Next.js middleware](https://vercel.com/docs/functions/edge-functions/edge-runtime#supported-apis)). This is known as evaluating the feature flag.
 
-Specifically, we evaluate the flag by making a POST request to the [decide](/docs/api/decide) route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
+Specifically, we evaluate the flag by making a POST request to the [flags](/docs/api/flags) route with your project API key and user distinct ID. From the response, we get the value of the `main-redirect` feature flag and use it to redirect to the right page. Altogether, it looks like this:
 
 ```js
 // redirect-test/middleware.js
@@ -213,7 +213,7 @@ Specifically, we evaluate the flag by making a POST request to the [decide](/doc
 
   // Evaluate experiment flag
   const ph_request = await fetch(
-    'https://us.i.posthog.com/decide?v=4', // or eu.i.posthog.com
+    'https://us.i.posthog.com/flags?v=2', // or eu.i.posthog.com
     requestOptions
   );
   const data = await ph_request.json();
@@ -307,7 +307,7 @@ export async function middleware(request) {
   };
 
   const ph_request = await fetch(
-    'https://us.i.posthog.com/decide?v=4', // or eu
+    'https://us.i.posthog.com/flags?v=2', // or eu
     requestOptions
   );
   const data = await ph_request.json();

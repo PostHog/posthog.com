@@ -1458,6 +1458,10 @@
         {
             "source": "/docs/api/user",
             "destination": "/docs/api/users"
+        },
+        {
+            "source": "/docs/api/decide",
+            "destination": "/docs/api/flags"
         }
     ],
     "headers": [
