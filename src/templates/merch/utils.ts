@@ -1,3 +1,4 @@
+import { shopifyHeaders } from '../../lib/shopify'
 import type {
     CartItem,
     CartLineInput,
@@ -48,7 +49,32 @@ export function getProductImages(media: ShopifyMediaItem[]): ShopifyMediaImage[]
 }
 
 export const getAvailableQuantity = async (item: CartItem) => {
-    return Infinity
+    try {
+        if (item.kit) return 100
+        const { data } = await fetch(`https://${process.env.GATSBY_MYSHOPIFY_URL}/api/2023-10/graphql.json`, {
+            method: 'POST',
+            headers: shopifyHeaders,
+            body: JSON.stringify({
+                query: `
+                query GetVariantById($id: ID!) {
+                    node(id: $id) {
+                    ... on ProductVariant {
+                        id
+                        title
+                        quantityAvailable
+                        availableForSale
+                    }
+                    }
+                }`,
+                variables: { id: item.shopifyId },
+            }),
+        }).then((res) => res.json())
+
+        return data.node.quantityAvailable
+    } catch (error) {
+        console.error('Error fetching inventory from Shopify:', error)
+        return 0
+    }
 }
 
 export const itemIsAvailableForSale = async (item: CartItem) => {
