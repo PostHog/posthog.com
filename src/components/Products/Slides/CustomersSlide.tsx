@@ -49,12 +49,12 @@ export default function CustomersSlide({ productName, customers, customerData, h
                                 <img
                                     src={customer.logo.light}
                                     alt={customer.name}
-                                    className="w-auto object-contain dark:hidden"
+                                    className="w-auto object-contain dark:hidden max-h-10"
                                 />
                                 <img
                                     src={customer.logo.dark}
                                     alt={customer.name}
-                                    className="w-auto object-contain hidden dark:block"
+                                    className="w-auto object-contain hidden dark:block max-h-10"
                                 />
                             </>
                         ) : (

@@ -70,6 +70,7 @@ export default function SlidesTemplate({
                         productTitle={productData?.title}
                         productDescription={productData?.description}
                         Icon={productData?.Icon}
+                        color={productData?.color}
                         screenshotSrc={productData?.screenshots?.[0]?.src}
                         screenshotAlt={productData?.screenshots?.[0]?.alt}
                         hogSrc={productData?.hog?.src}

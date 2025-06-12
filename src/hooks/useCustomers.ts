@@ -18,6 +18,8 @@ import PostHogLogo from '../images/customers/posthog-light.svg'
 import SupabaseLogo from '../images/customers/supabase-light.svg'
 import NetdataLogo from '../images/customers/netdata-light.svg'
 import PryLogo from '../images/customers/pry-light.svg'
+import CarVerticalLogo from '../images/customers/carvertical-light.svg'
+import PhantomLogo from '../images/customers/phantom-light.svg'
 
 import AssemblyAILogoDark from '../images/customers/assemblyai-dark.svg'
 import MistralLogoDark from '../images/customers/mistralai-dark.svg'
@@ -34,6 +36,8 @@ import PostHogLogoDark from '../images/customers/posthog-dark.svg'
 import SupabaseLogoDark from '../images/customers/supabase-dark.svg'
 import NetdataLogoDark from '../images/customers/netdata-dark.svg'
 import PryLogoDark from '../images/customers/pry-dark.svg'
+import CarVerticalLogoDark from '../images/customers/carvertical-dark.svg'
+import PhantomLogoDark from '../images/customers/phantom-dark.svg'
 
 export interface Customer {
     slug: string
@@ -77,6 +81,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: {
             light: AssemblyAILogo,
             dark: AssemblyAILogoDark,
+        },
+    },
+    carvertical: {
+        name: 'carVertical',
+        toolsUsed: [],
+        notes: '',
+        logo: {
+            light: CarVerticalLogo,
+            dark: CarVerticalLogoDark,
         },
     },
     contra: {
@@ -132,6 +145,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: {
             light: NetdataLogo,
             dark: NetdataLogoDark,
+        },
+    },
+    phantom: {
+        name: 'Phantom',
+        toolsUsed: [],
+        notes: '',
+        logo: {
+            light: PhantomLogo,
+            dark: PhantomLogoDark,
         },
     },
     pry: {

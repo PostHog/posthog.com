@@ -1,53 +1,78 @@
 import React from 'react'
-import Layout from 'components/Layout'
-import Explorer from 'components/Explorer'
-import { Link } from 'gatsby'
-import { CallToAction } from 'components/CallToAction'
-import CloudinaryImage from 'components/CloudinaryImage'
-import SEO from 'components/seo'
-import ProductSidebar from 'components/Explorer/ProductSidebar'
-import Product from 'components/Explorer/Product'
+import { useStaticQuery, graphql } from 'gatsby'
+import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+
+// Product configuration - change this to adapt for different products
+const PRODUCT_HANDLE = 'feature_flags'
 
 export default function FeatureFlags(): JSX.Element {
-    return (
-        <>
-            <SEO
-                title="Feature Flags - PostHog"
-                description="Release features safely with targeted rollouts"
-                image={`/images/og/feature-flags.jpg`}
-            />
-            <Explorer
-                template="product"
-                slug="feature-flags"
-                title="Release features safely"
-                sidebarContent={<ProductSidebar type="feature_flags" />}
-            >
-                <p className="max-w-lg">Release features safely with targeted rollouts.</p>
+    // Combined GraphQL query for both tutorial data and product data
+    const data = useStaticQuery(graphql`
+        query {
+            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
+                nodes {
+                    fields {
+                        slug
+                    }
+                    rawBody
+                    frontmatter {
+                        title
+                        description
+                    }
+                }
+            }
+            allProductData {
+                nodes {
+                    products {
+                        name
+                        type
+                        unit
+                        addons {
+                            name
+                            type
+                            unit
+                            plans {
+                                name
+                                plan_key
+                                included_if
+                                features {
+                                    key
+                                    name
+                                    description
+                                    limit
+                                    note
+                                }
+                            }
+                        }
+                        plans {
+                            name
+                            plan_key
+                            free_allocation
+                            included_if
+                            features {
+                                key
+                                name
+                                description
+                                limit
+                                note
+                            }
+                            tiers {
+                                unit_amount_usd
+                                up_to
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    `)
 
-                <p className="flex gap-2">
-                    <CallToAction href="/signup" type="primary" size="md">
-                        Get started
-                    </CallToAction>
-                    <CallToAction href="/talk-to-a-human" type="secondary" size="md">
-                        Talk to a human
-                    </CallToAction>
-                </p>
-                <Product
-                    type="feature_flags"
-                    indexLinks={[
-                        'features',
-                        'pricing',
-                        'customers',
-                        'comparison',
-                        'docs',
-                        'tutorials',
-                        'questions',
-                        'team',
-                        'roadmap',
-                        'changelog',
-                    ]}
-                />
-            </Explorer>
-        </>
-    )
+    // Optional: Customize slides
+    // See /components/Products/Slides/README.md for more details
+    // const slides = createSlideConfig({
+    //     exclude: ['comparison-summary'],
+    //     order: ['overview', 'pricing', 'features']
+    // })
+
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
 }

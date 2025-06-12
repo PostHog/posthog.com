@@ -5,6 +5,7 @@ interface OverviewSlideProps {
     productName: string
     productTitle?: string
     productDescription: string
+    color: string
     Icon?: React.ComponentType<any>
     screenshotSrc?: string
     screenshotAlt?: string
@@ -16,6 +17,7 @@ export default function OverviewSlide({
     productName,
     productTitle,
     productDescription,
+    color,
     Icon,
     screenshotSrc,
     screenshotAlt,
@@ -26,7 +28,7 @@ export default function OverviewSlide({
     const hogClasses = 'absolute bottom-0 right-0 max-w-[698px]'
 
     return (
-        <div className="h-full p-12 flex flex-col relative bg-yellow text-white">
+        <div className={`h-full p-12 flex flex-col relative bg-${color} text-white`}>
             {screenshotSrc && (
                 <CloudinaryImage
                     src={screenshotSrc as `https://res.cloudinary.com/${string}`}

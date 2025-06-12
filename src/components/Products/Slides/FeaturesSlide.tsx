@@ -47,6 +47,7 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                                 value={`tab-${index}`}
                                 icon={(item as any).icon}
                                 color={(item as any).color}
+                                className="text-left"
                             >
                                 {item.title}
                             </Tabs.Trigger>
@@ -62,7 +63,12 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                         <div className="relative">
                             <div className="px-8 pt-12 pb-8">
                                 <h2 className="text-5xl text-center mb-0">{item.headline}</h2>
-                                {item.description && <p className="mt-4 text-center text-xl">{item.description}</p>}
+                                {item.description && (
+                                    <p
+                                        className="mt-4 text-center text-xl [&_code]:text-xl"
+                                        dangerouslySetInnerHTML={{ __html: item.description }}
+                                    />
+                                )}
                             </div>
 
                             <div className="grid grid-cols-2 gap-4 px-8">
