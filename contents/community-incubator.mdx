@@ -1,21 +1,22 @@
 ---
-title: PostHog Builder Community Incubator
+title: PostHog community incubator
 showTitle: false
 showSidebar: true
 width: lg
 ---
 
+import CommunityIncubatorForm from 'components/CommunityIncubatorForm'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 <div className="text-center max-w-2xl mx-auto mt-12 mb-16">
-  <h1 className="text-4xl md:text-5xl font-extrabold mb-4">PostHog Builder Community Incubator</h1>
+  <h1 className="text-4xl md:text-5xl font-extrabold mb-4">PostHog community incubator</h1>
   <h2 className="text-xl md:text-2xl font-semibold mb-6">Cash grants and support to help you start a co-working group in your city</h2>
   <a href="#apply" className="inline-block mb-10">
     <CallToAction to="#apply" type="primary">Apply to lead a chapter</CallToAction>
   </a>
 
   <p className="text-lg md:text-xl mt-8">
-    Want to start a co-working community of builders in your city? We're launching a pilot program in innovation centers across the UK, EU, and North America and are looking for builders who want to be the first chapters we invest in.
+    Want to start a co-working community of builders in your city? We're launching a pilot program in emerging tech hubs across the UK, EU, and North America and are looking for builders who want to be the first chapters we invest in.
   </p>
   
 </div>
@@ -36,19 +37,19 @@ import CloudinaryImage from 'components/CloudinaryImage'
         <li className="bg-[#E5E7E0] dark:bg-[#2C2C2C] relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
           <h5 className="text-xl font-extrabold m-0 pb-1 pr-4 text-black dark:text-white">$800 cash grant</h5>
           <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
-            Meant to get you going and to be used at organizer's discretion.
+            Meant to get you going and to be used at organizer's discretion. We'll send PostHog merch, because why not? 
           </p>
         </li>
         <li className="bg-[#E5E7E0] dark:bg-[#2C2C2C] relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
           <h5 className="text-xl font-extrabold m-0 pb-1 pr-4 text-black dark:text-white">Help attracting attendees</h5>
           <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
-            We'll spread the word on your behalf if you need it.
+            The people you gather are the sparks of your community. We'll help you find the builders we'd work alongside any day. 
           </p>
         </li>
         <li className="bg-[#E5E7E0] dark:bg-[#2C2C2C] relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
           <h5 className="text-xl font-extrabold m-0 pb-1 pr-4 text-black dark:text-white">Help finding a venue</h5>
           <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
-            The ideal location is a free space which we can source.
+            We've been remote working in coffee shops and co-working spaces for four years. We can help you find a great spot for your team.
           </p>
         </li>
       </ul>
@@ -60,7 +61,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
   <div>
     <h2 className="text-3xl lg:text-4xl mb-6">What we're asking from you, pilot participants</h2>
     <p>
-      Bring together a group of at least 10 people to co-work and build for 5 straight weeks. The goal is to give you the initial push but let you carry forward afterwards.
+      Bring together a group of at least 6 people to co-work and build for 4 straight weeks. The goal is to give you the initial push but let you carry forward afterwards. If the group continues and grows, we're going to highlight it in our community. 
     </p>
     <p>
       Create a consistent time and structure that works for your group. For times, do evenings or weekends. For format, we suggest two ingredients: building and demo-ing.
@@ -83,28 +84,18 @@ import CloudinaryImage from 'components/CloudinaryImage'
   </div>
 </div>
 
-<section id="apply" class="my-24 px-5">
-<div class="max-w-screen-md mx-auto">
-<h2 class="text-3xl lg:text-4xl text-center mb-8">Apply to lead a chapter</h2>
-<div class="bg-accent dark:bg-accent-dark p-8 rounded-lg">
+<section id="apply" className="my-24 px-5">
+<div className="max-w-screen-md mx-auto">
+<h2 className="text-3xl lg:text-4xl text-center mb-8">Apply to lead a chapter</h2>
+<div className="bg-accent dark:bg-accent-dark p-8 rounded-lg">
 
-<iframe
-  src="https://docs.google.com/forms/d/e/1FAIpQLSc3jbjDuH1iYu0davgukTN3MIEVrfdS7obLmmreEGdVPb4Lrw/viewform?embedded=true"
-  width="100%"
-  height="937"
-  frameBorder="0"
-  marginHeight="0"
-  marginWidth="0"
-  style={{ borderRadius: '12px', width: '100%' }}
->
-  Loading…
-</iframe>
+<CommunityIncubatorForm />
 
 </div>
 </div>
 </section>
 
-<section class="my-24 px-5">
+<section className="my-24 px-5">
 <div className="max-w-screen-md mx-auto space-y-1">
 <details>
 <summary>Who is eligible to lead?</summary>
@@ -122,7 +113,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 </details>
 
 <details>
-<summary>What happens after 6 weeks?</summary>
+<summary>What happens after 4 weeks?</summary>
 <p>You've now bootstrapped a community, keep it going. If you didn't get the traction required to keep it going, we'll mourn then move on.</p>
 </details>
 
