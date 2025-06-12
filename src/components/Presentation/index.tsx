@@ -1,17 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import { navigate } from 'gatsby'
-import { useLocation } from '@reach/router'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
-import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconInfo, IconGear } from '@posthog/icons'
-import ProductSidebar from 'components/Explorer/ProductSidebar'
 import PresentationMode from './FullScreen'
-import { CallToAction } from 'components/CallToAction'
 
 interface AccordionItem {
     title: string
@@ -72,24 +65,7 @@ const SidebarContent = ({
     return <>{content}</>
 }
 
-const sidebarTabOptions: ToggleOption[] = [
-    {
-        label: 'Info',
-        value: 'info',
-        icon: <IconInfo className="size-5" />,
-        default: true,
-    },
-    {
-        label: 'Settings',
-        value: 'settings',
-        icon: <IconGear className="size-5" />,
-    },
-]
-
 export default function Presentation({
-    template,
-    slug,
-    title,
     accentImage,
     sidebarContent,
     children,
@@ -97,14 +73,10 @@ export default function Presentation({
     slides = [],
     slideId,
 }: PresentationProps) {
-    const location = useLocation()
-    const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
-    const [sidebarTab, setSidebarTab] = useState<string>('info')
     const [isNavVisible, setIsNavVisible] = useState<boolean>(true)
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
-    const observerRef = useRef<IntersectionObserver | null>(null)
 
     const toggleNav = () => {
         setIsNavVisible(!isNavVisible)
@@ -217,7 +189,6 @@ export default function Presentation({
                         ) : (
                             <div className="min-h-0">
                                 <ScrollArea className="h-full flex-1 border-t  border-primary">
-                                    {/* <DebugContainerQuery /> */}
                                     {accentImage && (
                                         <div className="absolute right-0 top-6">
                                             <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
