@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
-import { COOKIELESS_SENTINEL_VALUE } from 'posthog-js/dist/src/constants'
+import { COOKIELESS_SENTINEL_VALUE } from 'posthog-js/lib/src/constants'
 
 export type User = {
     id: number
