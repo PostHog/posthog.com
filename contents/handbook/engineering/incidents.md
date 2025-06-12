@@ -8,17 +8,18 @@ Incidents are going to happen.
 
 ## When to raise an incident
 
-**When in doubt, raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong.
+> **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not. 
 
-To declare an incident, type `/incident` anywhere in Slack. This will create a new channel and send updates.
+To declare an incident, type `/incident` anywhere in Slack. This creates a new dedicated channel for the incident and add a few stakeholders. It will  trigger an alert in the #incidents channel so everyone else can be aware. Declaring an incident **doesn't** trigger any external notifications. 
 
-Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
+Once an incident is raised an automatic workflow begins that will help you summarize the issue and escalate it appropriately. 
 
 Some things that should definitely be an incident
 
 - `us.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
 - No insights can be created
 - Feature flags are not being returned at all, or `/decide` is down
+- Any feature is 'down' and users are unable to access their existing data through it
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
 
 Things that _shouldn’t_ be an incident
