@@ -14,7 +14,7 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
-import { generateRawMarkdownPages } from './generateRawMarkdownPages'
+import { generateRawMarkdownPages, generateApiSpecMarkdown } from './rawMarkdownUtils'
 
 const limit = pLimit(10)
 
@@ -266,6 +266,20 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
 
     if (markdownQuery.data?.allMdx?.nodes) {
         await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
+    }
+
+    // Generate API spec markdown file
+    try {
+        const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
+        const spec = await fetch(openApiSpecUrl, {
+            headers: {
+                Accept: 'application/json',
+            },
+        }).then((res) => res.json())
+
+        generateApiSpecMarkdown(spec)
+    } catch (error) {
+        console.error('Failed to generate API spec markdown:', error)
     }
 
     if (process.env.AWS_CODEPIPELINE !== 'true') {

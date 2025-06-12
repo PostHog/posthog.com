@@ -12,8 +12,20 @@ const generateLlmsTxt = (pages) => {
         const { slug } = doc.fields
         const { title } = doc.frontmatter
 
-        // Extract section from slug with special handling for docs subsections
+        // Filter out auto-generated API endpoint pages but allow specific API subdirectories
         const segments = slug.split('/').filter(Boolean)
+        if (segments.length > 2 && segments[0] === 'docs' && segments[1] === 'api') {
+            // Allow specific API subdirectories
+            const allowedApiSubdirs = ['queries', 'flags', 'capture']
+            const apiSubdir = segments[2]
+
+            // If it's not an allowed subdirectory, filter it out
+            if (!allowedApiSubdirs.includes(apiSubdir)) {
+                continue
+            }
+        }
+
+        // Extract section from slug for docs subsections
         let section = segments.length > 0 ? segments[0] : 'root'
 
         // Special handling for docs subsections - split by second parameter
@@ -61,7 +73,7 @@ const generateLlmsTxt = (pages) => {
     // Build llms.txt content according to spec
     let llmsTxtContent = `# PostHog
 
-> PostHog is an open-source platform for customer infrastructure. We provide developers with everything they need to build successful products –  product analytics, web analytics, feature flags, session replay, A/B testing, error tracking, surveys, LLM observability, data warehousing, and more.
+> PostHog is an open-source platform for customer infrastructure. We equip developers with everything they need to build successful products –  product analytics, web analytics, feature flags, session replay, A/B testing, error tracking, surveys, LLM observability, data warehousing, and more.
 
 `
 
@@ -86,7 +98,6 @@ const generateLlmsTxt = (pages) => {
 
         for (const page of sortedPages) {
             llmsTxtContent += `- [${page.title}](${page.url})\n`
-            console.log('llms.txt entry...', page.title, page.url)
         }
 
         llmsTxtContent += '\n'
@@ -172,4 +183,27 @@ export const generateRawMarkdownPages = async (pages) => {
 
     // Generate llms.txt file
     generateLlmsTxt(filteredPages)
+}
+
+// Function to generate API spec markdown file
+export const generateApiSpecMarkdown = (spec: any) => {
+    console.log('Generating API spec markdown file...')
+
+    const markdownContent = `# PostHog API specification
+
+This is the complete OpenAPI specification for the PostHog API.
+
+\`\`\`yaml
+${JSON.stringify(spec, null, 2)}
+\`\`\`
+`
+
+    const staticDir = path.join(process.cwd(), 'static')
+    if (!fs.existsSync(staticDir)) {
+        fs.mkdirSync(staticDir, { recursive: true })
+    }
+
+    const specFilePath = path.join(staticDir, 'api-spec.md')
+    fs.writeFileSync(specFilePath, markdownContent, 'utf8')
+    console.log('✅ Generated API spec markdown file at /api-spec.md')
 }
