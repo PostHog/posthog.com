@@ -85,6 +85,42 @@ function humanReadableName(name) {
     return name.map((word) => word.charAt(0).toUpperCase() + word.substring(1)).join(' ')
 }
 
+const titleMap: Record<string, string> = {
+    actions: 'Actions',
+    activity_log: 'Activity log',
+    annotations: 'Annotations',
+    batch_exports: 'Batch exports',
+    cohorts: 'Cohorts',
+    dashboards: 'Dashboards',
+    dashboard_templates: 'Dashboard templates',
+    early_access_features: 'Early access features',
+    environments: 'Environments',
+    event_definitions: 'Event definitions',
+    events: 'Events',
+    experiments: 'Experiments',
+    feature_flags: 'Feature flags',
+    groups: 'Groups',
+    groups_types: 'Groups types',
+    hog_functions: 'Hog functions',
+    insights: 'Insights',
+    invites: 'Invites',
+    members: 'Members',
+    notebooks: 'Notebooks',
+    organizations: 'Organizations',
+    persons: 'Persons',
+    projects: 'Projects',
+    property_definitions: 'Property definitions',
+    query: 'Query',
+    roles: 'Roles',
+    session_recordings: 'Session recordings',
+    session_recording_playlists: 'Session recording playlists',
+    sessions: 'Sessions',
+    subscriptions: 'Subscriptions',
+    surveys: 'Survey',
+    users: 'Users',
+    data_model: 'Data model',
+}
+
 const verbMap = {
     get: 'Retrieve',
     post: 'Create',
@@ -357,7 +393,11 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
     }
 
     const path: string = item.pathName.replaceAll('{', ':').replaceAll('}', '')
-    const object: string = name.toLowerCase().slice(0, -1)
+
+    // If the object name ends with 's', remove the 's'
+    const object: string = name.charAt(name.length - 1) === 's' ? name.slice(0, -1) : name
+    const object_noun: string = object.replaceAll('_', ' ')
+
     const additionalPathParams =
         item.parameters
             ?.filter((param) => param.in === 'path')
@@ -384,10 +424,10 @@ api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "<ph_app_host>${item.pathName.replace('{id}', `{${object}_id}`)}".format(
-        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="the ${object} id"` : ''}${
+        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${
                 additionalPathParams.length > 0
                     ? additionalPathParams.map(
-                          (param) => `,\n\t\t${param.name}="[the ${param.name.replaceAll('_', ' ')}]"`
+                          (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
                       )
                     : ''
             }
@@ -492,7 +532,8 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
         apiComponents: { components: apiComponents },
         allMdx,
     } = data
-    const name = humanReadableName(data.data.name)
+    const name = data.data.name
+    const title = titleMap[name] || humanReadableName(name)
     const nextURL = data.data.nextURL
     const paths = {}
     const components = {
@@ -526,9 +567,9 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
 
     return (
         <Layout parent={docsMenu} activeInternalMenu={docsMenu.children.find(({ name }) => name === 'Product OS')}>
-            <SEO title={`${name} API Reference - PostHog`} />
+            <SEO title={`${title} API Reference - PostHog`} />
             <PostLayout
-                title={name}
+                title={title}
                 questions={<CommunityQuestions />}
                 menu={menu}
                 tableOfContents={tableOfContents}
@@ -536,7 +577,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 hideSidebar
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
             >
-                <h2 className="!mt-0">{name}</h2>
+                <h2 className="!mt-0">{title}</h2>
                 <blockquote className="p-6 mb-4 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
                     <p>
                         For instructions on how to authenticate to use this endpoint, see{' '}
