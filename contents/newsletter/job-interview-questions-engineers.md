@@ -5,7 +5,7 @@ author:
   - andy-vandervell
   - james-hawkins
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/9122c0d1_a1ca_430f_aca0_c140b0529a24_882x630_61d67351dc.webp
+  https://res.cloudinary.com/dmukukwp6/image/upload/job_interview_questions_35bb07c898.jpg
 featuredImageType: full
 tags:
   - Product engineers
