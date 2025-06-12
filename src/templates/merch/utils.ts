@@ -48,9 +48,8 @@ export function getProductImages(media: ShopifyMediaItem[]): ShopifyMediaImage[]
         })
 }
 
-export const getAvailableQuantity = async (item: CartItem) => {
+export const getAvailableQuantity = async (id: string) => {
     try {
-        if (item.kit) return 100
         const { data } = await fetch(`https://${process.env.GATSBY_MYSHOPIFY_URL}/api/2023-10/graphql.json`, {
             method: 'POST',
             headers: shopifyHeaders,
@@ -66,7 +65,7 @@ export const getAvailableQuantity = async (item: CartItem) => {
                     }
                     }
                 }`,
-                variables: { id: item.shopifyId },
+                variables: { id },
             }),
         }).then((res) => res.json())
 

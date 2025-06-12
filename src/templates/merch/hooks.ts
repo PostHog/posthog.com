@@ -14,6 +14,7 @@ import type {
     StorefrontShopResponse,
     VariantSelectedOption,
 } from './types'
+import { getAvailableQuantity } from './utils'
 
 type getVariantOptionArgs = {
     name: string
@@ -164,6 +165,7 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
 
                 const json = (await response.json()) as StorefrontShopRequestBody
                 const responseData = getProduct(json.data)
+                await assignQuantities(responseData.variants)
                 setProductData(responseData)
                 setLoading(false)
             } catch (err) {
@@ -186,4 +188,16 @@ function getProduct(responseData: StorefrontShopResponse): StorefrontProduct {
 
 function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProductVariantNode[] {
     return variants.edges.map((e: StorefrontProductVariantEdge) => e.node)
+}
+
+async function assignQuantities(variants: StorefrontProductVariantNode[]): Promise<void> {
+    await Promise.all(
+        variants.map((v) => {
+            if (!v.product.tags.includes('digital')) {
+                return getAvailableQuantity(v.id).then((quantity) => {
+                    v.quantityAvailable = quantity
+                })
+            }
+        })
+    )
 }

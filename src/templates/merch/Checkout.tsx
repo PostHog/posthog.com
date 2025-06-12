@@ -75,7 +75,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 }
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
-                const quantityAvailable = await getAvailableQuantity(item)
+                const quantityAvailable = item.kit ? 100 : await getAvailableQuantity(item.shopifyId)
 
                 // if it is available for sale, then check if the quantity available is less than
                 // the quantity in the cart. If so, then add to the list with the new quantity
