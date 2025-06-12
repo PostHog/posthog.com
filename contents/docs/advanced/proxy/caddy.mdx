@@ -6,10 +6,14 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
-
-<RegionWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+    <ol>
+        <li><ProxyWarning /></li>
+        <li><RegionWarning /></li>
+    </ol>
+</CalloutBox>
 
 Caddy makes setting up a [reverse proxy](https://caddyserver.com/docs/quick-starts/reverse-proxy) with TLS simple. For these examples:
 
