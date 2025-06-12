@@ -41,7 +41,12 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                     {product.title}
                 </h3>
                 <p className="text-[15px] leading-tight mb-1">{subtitle}</p>
-                <p className="text-base font-bold mb-0">${product.priceRangeV2.minVariantPrice.amount}</p>
+                <p className="text-base font-bold mb-0">
+                    <span className={`${product.kit ? 'line-through' : ''}`}>
+                        ${product.priceRangeV2.minVariantPrice.amount}
+                    </span>{' '}
+                    {product.kit ? <span className="text-green">FREE</span> : null}
+                </p>
             </div>
         </div>
     )

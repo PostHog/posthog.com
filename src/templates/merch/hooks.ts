@@ -95,7 +95,7 @@ export function useProduct(id: string): {
         })
     }
 
-    const outOfStock = (selectedVariant?.brilliantQuantity || 0) <= 0
+    const outOfStock = product?.tags?.includes('gift') ? false : (selectedVariant?.quantityAvailable || 0) <= 0
 
     return { selectedOptions, setOptionAtIndex, selectedVariant, loading, outOfStock }
 }
@@ -164,7 +164,6 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
 
                 const json = (await response.json()) as StorefrontShopRequestBody
                 const responseData = getProduct(json.data)
-                await assignBrilliantQuantities(responseData.variants)
                 setProductData(responseData)
                 setLoading(false)
             } catch (err) {
@@ -187,28 +186,4 @@ function getProduct(responseData: StorefrontShopResponse): StorefrontProduct {
 
 function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProductVariantNode[] {
     return variants.edges.map((e: StorefrontProductVariantEdge) => e.node)
-}
-
-async function assignBrilliantQuantities(variants: StorefrontProductVariantNode[]): Promise<void> {
-    await Promise.all(
-        variants.map((v) => {
-            if (v.product.tags.includes('digital')) {
-                v.brilliantQuantity = v.quantityAvailable
-            } else {
-                return fetch(
-                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/brilliant/inventory/${
-                        v.id.split('gid://shopify/ProductVariant/')[1]
-                    }`
-                )
-                    .then((res) => res.json())
-                    .then((data) => {
-                        v.brilliantQuantity = data?.quantity || 0
-                    })
-                    .catch((err) => {
-                        console.error('Error fetching quantity:', err)
-                        v.brilliantQuantity = 0
-                    })
-            }
-        })
-    )
 }
