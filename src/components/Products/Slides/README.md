@@ -135,11 +135,20 @@ The components expect data from `useProduct({ handle: PRODUCT_HANDLE })` with th
 ```tsx
 interface ProductData {
     name: string
-    title?: string
-    description: string
     Icon?: React.ComponentType
     handle: string
     slug: string
+    answersDescription: string // needs to be moved
+    color: string
+    seo: {
+        title: string
+        description: string
+    }
+    overview?: {
+        title: string
+        description: string
+        textColor: string // tailwind color value
+    }
     screenshots?: Array<{ src: string; alt: string }>
     hog?: { src: string; alt: string }
     features?: Array<{
