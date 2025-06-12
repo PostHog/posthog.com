@@ -67,14 +67,11 @@ export default function SlidesTemplate({
                 return (
                     <OverviewSlide
                         productName={productData?.name}
-                        productTitle={productData?.title}
-                        productDescription={productData?.description}
+                        overview={productData?.overview}
+                        screenshots={productData?.screenshots}
                         Icon={productData?.Icon}
                         color={productData?.color}
-                        screenshotSrc={productData?.screenshots?.[0]?.src}
-                        screenshotAlt={productData?.screenshots?.[0]?.alt}
-                        hogSrc={productData?.hog?.src}
-                        hogAlt={productData?.hog?.alt}
+                        hog={productData?.hog}
                         {...props}
                     />
                 )

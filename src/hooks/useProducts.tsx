@@ -393,25 +393,29 @@ const initialProducts = [
         name: 'Session replay',
         handle: 'session_replay',
         slug: 'session-replay',
-        title: 'Watch people use your product',
-        description:
-            'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
         answersDescription: 'Understand user behavior, identify friction points, and improve your product experience',
         color: 'yellow',
         seo: {
             title: 'Session replay - PostHog',
             description: 'Watch people use your product to diagnose issues and understand user behavior',
         },
-
+        overview: {
+            title: 'Watch people use your product',
+            description:
+                'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
+            textColor: 'text-black', // tw
+        },
         screenshots: [
             {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
                 alt: 'Session replay screenshot',
+                classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
             },
         ],
         hog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
             alt: 'A hedgehog watching some session recordings',
+            classes: 'absolute bottom-0 right-0 max-w-[698px]',
         },
         slider: {
             marks: [5000, 25000, 120000, 500000],
@@ -964,24 +968,29 @@ window.posthog.onFeatureFlags(function () {
         name: 'Feature flags',
         handle: 'feature_flags',
         slug: 'feature-flags',
-        title: 'Safely roll out features to specific users or groups',
-        description:
-            'Test changes with small groups of users before rolling out wider. Then analyze usage with product analytics and session replay.',
         color: 'green',
         seo: {
             title: 'Feature flags - PostHog',
             description: 'Safely roll out features to specific users or groups',
         },
-
+        answersDescription: 'Control the release of new features to your users',
+        overview: {
+            title: 'Safely roll out features to specific users or groups',
+            description:
+                'Test changes with small groups of users before rolling out wider. Then analyze usage with product analytics and session replay.',
+            textColor: 'text-white', // tw
+        },
         screenshots: [
             {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png',
                 alt: 'Feature flags screenshot',
+                classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
             },
         ],
         hog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/q_100/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
             alt: 'A hedgehog toggling a feature flag',
+            classes: 'absolute bottom-0 right-0 max-w-[698px]',
         },
         slider: {
             marks: [1000000, 10000000, 100000000, 1000000000],
