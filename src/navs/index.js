@@ -1296,7 +1296,11 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
-                        name: 'Contracts',
+                        name: 'Contract Rules',
+                        url: '/handbook/growth/sales/contract-rules',
+                    },
+                    {
+                        name: 'Creating Contracts',
                         url: '/handbook/growth/sales/contracts',
                     },
                     {
