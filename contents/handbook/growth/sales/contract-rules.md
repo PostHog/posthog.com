@@ -12,7 +12,7 @@ We get it, nobody likes rules.  As we scale the Sales and CS teams we need to be
 > customers who have a 30% B2C discount.  This is a relic from when all of our pricing was bundled and we should look to migrate them to our standard pricing if 
 > at all possible.
 
-Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practise when negotiating software contracts for the customer (and their procurement team) to ask for a discount.  We can be super transparent about the levers we have in discounting PostHog:
+Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount.  We can be super transparent about the levers we have in discounting PostHog:
 
 1. In our consumption-based pricing model, the easiest way to reduce spend is to ensure that the customer is only sending data to us which is valuable to them.  There is [different guidance here](/docs/billing/estimating-usage-costs) depending on which product(s) they are looking at.
 2. **Annual Plan:** We offer a 20% discount on an annual paid-up-front plan, because it's beneficial to PostHog to have a customer committed for a year.
