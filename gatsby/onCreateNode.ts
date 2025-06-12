@@ -1,4 +1,4 @@
-import { replacePath } from './utils'
+import { replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
 import fetch from 'node-fetch'
 import GitUrlParse from 'git-url-parse'
@@ -6,6 +6,7 @@ import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
+import { resolveSnippets } from './snippetUtils'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -248,6 +249,14 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 console.error(`Error fetching input_schema for ${templateIds}: ${error}`)
             }
         }
+
+        const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
+        const contentWithSnippets = resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
+        createNodeField({
+            node,
+            name: `contentWithSnippets`,
+            value: contentWithSnippets,
+        })
     }
 
     if (node.internal.type === 'Plugin' && node.url.includes('github.com') && process.env.GITHUB_API_KEY) {
