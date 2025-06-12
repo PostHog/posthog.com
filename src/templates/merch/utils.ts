@@ -58,10 +58,7 @@ export const getAvailableQuantity = async (id: string) => {
                 query GetVariantById($id: ID!) {
                     node(id: $id) {
                     ... on ProductVariant {
-                        id
-                        title
                         quantityAvailable
-                        availableForSale
                     }
                     }
                 }`,
