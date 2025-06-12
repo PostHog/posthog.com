@@ -93,7 +93,7 @@ const titleMap: Record<string, string> = {
     cohorts: 'Cohorts',
     dashboards: 'Dashboards',
     dashboard_templates: 'Dashboard templates',
-    early_access_features: 'Early access features',
+    early_access_feature: 'Early access features',
     environments: 'Environments',
     event_definitions: 'Event definitions',
     events: 'Events',
