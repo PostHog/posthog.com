@@ -185,25 +185,107 @@ export const generateRawMarkdownPages = async (pages) => {
     generateLlmsTxt(filteredPages)
 }
 
-// Function to generate API spec markdown file
+// Function to generate individual API endpoint markdown files
 export const generateApiSpecMarkdown = (spec: any) => {
-    console.log('Generating API spec markdown file...')
+    console.log('Generating API endpoint markdown files...')
 
-    const markdownContent = `# PostHog API specification
+    const apiSpecDir = path.join(process.cwd(), 'public', 'docs', 'api-spec')
+    if (!fs.existsSync(apiSpecDir)) {
+        fs.mkdirSync(apiSpecDir, { recursive: true })
+    }
 
-This is the complete OpenAPI specification for the PostHog API.
+    let totalEndpoints = 0
 
-\`\`\`yaml
-${JSON.stringify(spec, null, 2)}
+    // Iterate through all paths in the OpenAPI spec
+    Object.entries(spec.paths || {}).forEach(([pathName, pathData]: [string, any]) => {
+        // Iterate through all HTTP methods for this path
+        Object.entries(pathData).forEach(([method, operation]: [string, any]) => {
+            if (typeof operation === 'object' && operation.operationId) {
+                totalEndpoints++
+
+                // Create a safe filename from the operation ID
+                const filename = `${operation.operationId}.md`
+                const filePath = path.join(apiSpecDir, filename)
+
+                // Find all component references in this operation
+                const referencedComponents = new Set<string>()
+                const findRefs = (obj: any) => {
+                    if (typeof obj === 'object' && obj !== null) {
+                        if (obj['$ref'] && typeof obj['$ref'] === 'string') {
+                            const ref = obj['$ref']
+                            if (ref.startsWith('#/components/schemas/')) {
+                                const schemaName = ref.replace('#/components/schemas/', '')
+                                referencedComponents.add(schemaName)
+                            }
+                        }
+                        Object.values(obj).forEach(findRefs)
+                    }
+                }
+                findRefs(operation)
+
+                // Recursively find nested component references
+                const findNestedRefs = (schemaName: string, visited = new Set<string>()) => {
+                    if (visited.has(schemaName) || !spec.components?.schemas?.[schemaName]) {
+                        return
+                    }
+                    visited.add(schemaName)
+
+                    const schema = spec.components.schemas[schemaName]
+                    findRefs(schema)
+
+                    // Find any new references that were added and recursively process them
+                    const newRefs = Array.from(referencedComponents).filter((ref) => !visited.has(ref))
+                    newRefs.forEach((ref) => findNestedRefs(ref, visited))
+                }
+
+                // Process all initially found references to find their nested references
+                const initialRefs = Array.from(referencedComponents)
+                initialRefs.forEach((ref) => findNestedRefs(ref))
+
+                // Build components object with only referenced schemas
+                const components: any = {}
+                if (referencedComponents.size > 0 && spec.components?.schemas) {
+                    components.schemas = {}
+                    referencedComponents.forEach((schemaName) => {
+                        if (spec.components.schemas[schemaName]) {
+                            components.schemas[schemaName] = spec.components.schemas[schemaName]
+                        }
+                    })
+                }
+
+                // Create the path structure for this endpoint
+                const pathSpec: any = {
+                    paths: {
+                        [pathName]: {
+                            [method]: operation,
+                        },
+                    },
+                }
+
+                // Add components if we have any
+                if (Object.keys(components).length > 0) {
+                    pathSpec.components = components
+                }
+
+                // Convert to formatted JSON
+                const jsonContent = JSON.stringify(pathSpec, null, 2)
+
+                // Generate markdown content for this endpoint
+                const markdownContent = `# ${operation.operationId}
+
+## OpenAPI
+
+\`\`\`json ${method.toUpperCase()} ${pathName}
+${jsonContent}
 \`\`\`
 `
 
-    const staticDir = path.join(process.cwd(), 'static')
-    if (!fs.existsSync(staticDir)) {
-        fs.mkdirSync(staticDir, { recursive: true })
-    }
+                // Write the file
+                fs.writeFileSync(filePath, markdownContent, 'utf8')
+                console.log(`Generated: api-spec/${filename}`)
+            }
+        })
+    })
 
-    const specFilePath = path.join(staticDir, 'api-spec.md')
-    fs.writeFileSync(specFilePath, markdownContent, 'utf8')
-    console.log('✅ Generated API spec markdown file at /api-spec.md')
+    console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/api-spec/`)
 }
