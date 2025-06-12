@@ -20704,10 +20704,10 @@ postcss@^8.4.31, postcss@^8.4.48:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.251.1:
-  version "1.251.1"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.251.1.tgz#f0fe1a43a1cb3b147d231af7bc55c063a40540ca"
-  integrity sha512-ts084tN/00j2vGzgxSc87deTuG1XuqgIC5uqoBgoVQQVnM0iO64dDCYYMZxY82L3EDVo4ovOpTPdO0czFYN3QQ==
+posthog-js@1.252.0:
+  version "1.252.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.252.0.tgz#4155e32c2c57905b74e786ad3a6f23aae1d8208e"
+  integrity sha512-Mm72gKYYYaQGilxLPPH+KXF8TcveloOvsMemEz0jna0tV0O++n9SJ/dko+U2ePb+FajZ4vqVvfmkHSIILXdgKg==
   dependencies:
     core-js "^3.38.1"
     fflate "^0.4.8"
