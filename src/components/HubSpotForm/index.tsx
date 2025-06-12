@@ -414,8 +414,7 @@ export default function HubSpotForm({
     const [validationSchema, setValidationSchema] = useState(other.validationSchema)
 
     const handleSubmit = async (values) => {
-        const distinctId = posthog?.get_distinct_id?.()
-        posthog?.identify?.(distinctId, {
+        posthog?.setPersonProperties?.({
             email: values.email,
         })
         posthog?.capture?.('form submission', {
@@ -525,6 +524,7 @@ export default function HubSpotForm({
                                 if (type === 'enumeration')
                                     return (
                                         <RadioGroup
+                                            key={`${name}-${index}`}
                                             type={fieldType}
                                             options={options}
                                             name={name}
