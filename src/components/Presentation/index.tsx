@@ -32,6 +32,7 @@ interface PresentationProps {
         rawContent?: React.ReactNode
         thumbnailContent?: React.ReactNode
     }>
+    slideId?: string
 }
 
 const SidebarContent = ({
@@ -94,6 +95,7 @@ export default function Presentation({
     children,
     fullScreen = false,
     slides = [],
+    slideId,
 }: PresentationProps) {
     const location = useLocation()
     const currentPath = location.pathname.replace(/^\//, '') // Remove leading slash
@@ -112,7 +114,10 @@ export default function Presentation({
     useEffect(() => {
         if (slides.length === 0) return
 
-        const scrollContainer = document.querySelector('[data-app="Presentation"] [data-radix-scroll-area-viewport]')
+        const scrollContainerSelector = slideId
+            ? `[data-presentation-id="${slideId}"] [data-radix-scroll-area-viewport]`
+            : '[data-app="Presentation"] [data-radix-scroll-area-viewport]'
+        const scrollContainer = document.querySelector(scrollContainerSelector)
         if (!scrollContainer) return
 
         const handleScroll = () => {
@@ -124,7 +129,8 @@ export default function Presentation({
             let maxVisibleArea = 0
 
             // Check each slide to find which has the most visible area
-            const slideElements = document.querySelectorAll('[data-slide]')
+            const slideSelector = slideId ? `[data-slide-id="${slideId}"][data-slide]` : '[data-slide]'
+            const slideElements = document.querySelectorAll(slideSelector)
             slideElements.forEach((slideElement, index) => {
                 const slideRect = slideElement.getBoundingClientRect()
 
@@ -153,7 +159,7 @@ export default function Presentation({
         return () => {
             scrollContainer.removeEventListener('scroll', handleScroll)
         }
-    }, [slides.length])
+    }, [slides.length, slideId])
 
     const enterPresentationMode = () => {
         // Use the currently active slide index instead of searching for visible slide
@@ -190,6 +196,7 @@ export default function Presentation({
                     )}
                     <main
                         data-app="Presentation"
+                        data-presentation-id={slideId}
                         data-scheme="secondary"
                         className="@container flex-1 flex flex-col bg-primary relative h-full"
                     >

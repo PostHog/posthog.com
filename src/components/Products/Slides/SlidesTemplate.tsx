@@ -110,7 +110,9 @@ export default function SlidesTemplate({
                             // Find the Features slide dynamically by slug
                             const featuresSlideIndex = slideConfig.findIndex((slide) => slide.slug === 'features')
                             if (featuresSlideIndex !== -1) {
-                                const featuresSlide = document.querySelector(`[data-slide="${featuresSlideIndex}"]`)
+                                const featuresSlide = document.querySelector(
+                                    `[data-slide-id="${productData?.slug}"][data-slide="${featuresSlideIndex}"]`
+                                )
                                 featuresSlide?.scrollIntoView({ behavior: 'smooth', block: 'start' })
                             }
                         }}
@@ -194,8 +196,9 @@ export default function SlidesTemplate({
                 template="generic"
                 slug={productData?.slug}
                 title=""
+                slideId={productData?.slug}
                 sidebarContent={(activeSlideIndex) => (
-                    <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} />
+                    <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} slideId={productData?.slug} />
                 )}
                 slides={slides}
             >
@@ -204,7 +207,12 @@ export default function SlidesTemplate({
                     className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden p-4"
                 >
                     {slides.map((slide, index) => (
-                        <div key={slide.slug} className="flex flex-col justify-center bg-accent" data-slide={index}>
+                        <div
+                            key={slide.slug}
+                            className="flex flex-col justify-center bg-accent"
+                            data-slide={index}
+                            data-slide-id={productData?.slug}
+                        >
                             <span
                                 data-scheme="secondary"
                                 className="slideName inline-flex mx-auto bg-accent rounded-sm px-4 py-0.5 text-sm font-semibold text-primary my-2"

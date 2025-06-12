@@ -12,17 +12,21 @@ interface SlideThumbProps {
     slide: Slide
     index: number
     isActive: boolean
+    slideId?: string
 }
 
 // Component for individual slide thumbnail with proper scaling
-const SlideThumb = ({ slide, index, isActive }: SlideThumbProps) => {
+const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
     return (
         <div
             data-scheme="primary"
             className="group cursor-pointer"
             onClick={() => {
                 // Scroll to slide container (includes title and content)
-                const slideElement = document.querySelector(`[data-slide="${index}"]`)
+                const selector = slideId
+                    ? `[data-slide-id="${slideId}"][data-slide="${index}"]`
+                    : `[data-slide="${index}"]`
+                const slideElement = document.querySelector(selector)
                 slideElement?.scrollIntoView({ behavior: 'smooth', block: 'start' })
             }}
         >
@@ -47,15 +51,22 @@ const SlideThumb = ({ slide, index, isActive }: SlideThumbProps) => {
 interface SlideThumbnailsProps {
     slides: Slide[]
     activeSlideIndex: number
+    slideId?: string
 }
 
 // Component for rendering slide thumbnails
-export default function SlideThumbnails({ slides, activeSlideIndex }: SlideThumbnailsProps) {
+export default function SlideThumbnails({ slides, activeSlideIndex, slideId }: SlideThumbnailsProps) {
     return (
         <div className="space-y-3 p-1">
             <h3 className="text-sm text-center font-semibold text-secondary mb-3">Slides</h3>
             {slides.map((slide, index) => (
-                <SlideThumb key={index} slide={slide} index={index} isActive={index === activeSlideIndex} />
+                <SlideThumb
+                    key={index}
+                    slide={slide}
+                    index={index}
+                    isActive={index === activeSlideIndex}
+                    slideId={slideId}
+                />
             ))}
         </div>
     )
