@@ -10,11 +10,11 @@ import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Warning" type="fyi">
-    <ol>
-        <li><ProxyWarning /></li>
-        <li><RegionWarning /></li>
-        <li><ProxyPathNamesWarning /></li>
-    </ol>
+
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
 </CalloutBox>
 
 For SvelteKit, you can use [server hooks](https://svelte.dev/docs/kit/hooks#Server-hooks) to proxy requests to PostHog. We've tested this (and it works) with Cloudflare Workers. 

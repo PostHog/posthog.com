@@ -10,11 +10,11 @@ import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Warning" type="fyi">
-    <ol>
-        <li><ProxyWarning /></li>
-        <li><RegionWarning /></li>
-        <li><ProxyPathNamesWarning /></li>
-    </ol>
+
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
 </CalloutBox>
 
 Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-configuration#rewrites) which we can use as a reverse proxy. Create a `vercel.json` file and add a `rewrites` object from a custom route.

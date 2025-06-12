@@ -9,10 +9,10 @@ import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Warning" type="fyi">
-    <ol>
-        <li><ProxyWarning /></li>
-        <li><RegionWarning /></li>
-    </ol>
+
+  1. <ProxyWarning />
+  2. <RegionWarning />
+
 </CalloutBox>
 
 You can use nginx as a reverse proxy. To do this, first create a `Dockerfile` to build a nginx container:

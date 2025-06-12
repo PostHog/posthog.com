@@ -10,11 +10,11 @@ import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconWarning" title="Warning" type="fyi">
-    <ol>
-        <li><ProxyWarning /></li>
-        <li><RegionWarning /></li>
-        <li><ProxyPathNamesWarning /></li>
-    </ol>
+
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
 </CalloutBox>
 
 Nuxt 3 uses [Nitro](https://nuxt.com/docs/guide/concepts/server-engine) under the hood, which provides the [routeRules](https://nitro.unjs.io/config#routerules) config that can be used to proxy requests from one route to another. 
