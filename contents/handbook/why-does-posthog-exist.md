@@ -10,7 +10,7 @@ Equip every developer to build successful products.
 
 ## A few words
 
-As you know, the initial products of PostHog are a bunch of different SaaS tools, which work together better than everyone else’s. However, what most people may not know, is that our long term plan is to automate how entire businesses operate built around the unit they operate on - their customer data record.
+As you know, the initial products of PostHog are a bunch of different SaaS tools, which work together better than everyone else’s. However, what most people may not know, is that our long term plan is to automate how entire businesses operate built around the unit they operate on - their customer data.
 
 Critical to making this happen is to deliver each tool without compromises. The way to achieve this is very simple - shipping every product that teams use, from day one when there are just two technical cofounders. This is because if we get in with these developers, we’re upstream of every need they’ll have. The end result is that we can offer all the products in one place, with no need to charge as much as everyone else for each one, and most importantly with perfect quality customer data. An actual perfect 360 customer view.
 
