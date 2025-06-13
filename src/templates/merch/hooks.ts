@@ -15,6 +15,7 @@ import type {
     VariantSelectedOption,
 } from './types'
 import { getAvailableQuantity } from './utils'
+import { useStaticQuery, graphql } from 'gatsby'
 
 type getVariantOptionArgs = {
     name: string
@@ -114,6 +115,18 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
     const [productData, setProductData] = useState<StorefrontProduct | null>(null)
     const [loading, setLoading] = useState<boolean>(true)
     const [error, setError] = useState<unknown>()
+    const { allProducts } = useStaticQuery(graphql`
+        {
+            allProducts: allShopifyProduct {
+                nodes {
+                    variants {
+                        shopifyId
+                        inventoryPolicy
+                    }
+                }
+            }
+        }
+    `)
 
     useEffect(() => {
         const fetchProduct = async () => {
@@ -165,7 +178,7 @@ function useFetchProductOptions(id: string): { product: StorefrontProduct | null
 
                 const json = (await response.json()) as StorefrontShopRequestBody
                 const responseData = getProduct(json.data)
-                await assignQuantities(responseData.variants)
+                await assignQuantities(responseData.variants, allProducts.nodes)
                 setProductData(responseData)
                 setLoading(false)
             } catch (err) {
@@ -190,14 +203,15 @@ function getVariants(variants: StorefrontProductVariantsEdges): StorefrontProduc
     return variants.edges.map((e: StorefrontProductVariantEdge) => e.node)
 }
 
-async function assignQuantities(variants: StorefrontProductVariantNode[]): Promise<void> {
-    await Promise.all(
-        variants.map((v) => {
-            if (!v.product.tags.includes('digital')) {
-                return getAvailableQuantity(v.id).then((quantity) => {
-                    v.quantityAvailable = quantity
-                })
-            }
-        })
-    )
+async function assignQuantities(variants: StorefrontProductVariantNode[], allProducts: any): Promise<void> {
+    variants.map((v) => {
+        if (!v.product.tags.includes('digital')) {
+            const continueSelling = allProducts.some((p: any) =>
+                p.variants.some(
+                    (variant: any) => variant.shopifyId === v.id && variant.inventoryPolicy.toLowerCase() === 'continue'
+                )
+            )
+            v.quantityAvailable = continueSelling ? 100 : v.quantityAvailable
+        }
+    })
 }

@@ -479,6 +479,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                                     endCursor
                                 }
                                 nodes {
+                                    inventoryPolicy
                                     availableForSale
                                     media(first: 250) {
                                         nodes {
