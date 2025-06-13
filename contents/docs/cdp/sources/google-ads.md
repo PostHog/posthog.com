@@ -11,7 +11,7 @@ beta: true
 
 You can sync data from all your Google Ads resources by configuring it as a source.
 
-> This source is still in development and currently not available.
+> This source is still under development and is not yet available.
 
 ## Requirements
 - The [Google Ads customer ID](https://support.google.com/google-ads/answer/1704344) of the account you are trying to sync to Posthog.
