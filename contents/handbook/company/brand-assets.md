@@ -102,9 +102,11 @@ We use two other fonts for special purposes. Please adhere to their usage guidel
 
 #### Usage guidelines
 
-- Only use the `Bold` variant
+- When used for headlines or at larger sizes, use the `Bold` variant
+- Only for small (description) text, use the `Normal` variant in regular casing. Never use for more than a couple lines of text in a row.
 - Always use uppercase letters
 - Letter spacing: -2%
+- Line height: 100% (generally)
 
 #### Examples
 
