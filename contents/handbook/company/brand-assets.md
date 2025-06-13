@@ -133,6 +133,10 @@ Loud Noises is used in the sign the hedgehog is holding:
 
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/loud_noises_5919818659.png)
 
+---
+
+If you have questions about which font to use, please ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-brand-and-vibes</PrivateLink> - don't just do what feels right to you!
+
 ## Colors
 
 We have two color schemes (light and dark mode), but primarily use light mode.
