@@ -8,9 +8,7 @@ We get it, nobody likes rules.  As we scale the Sales and CS teams we need to be
 
 ## Discounts
 
-> We don't offer discounts to customers paying monthly with no commitment aside from non-profit orgs (see below).  You might see some 
-> customers who have a 30% B2C discount.  This is a relic from when all of our pricing was bundled and we should look to migrate them to our standard pricing if 
-> at all possible.
+> We don't offer discounts to customers paying monthly with no commitment aside from non-profit orgs (see below). 
 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount.  We can be super transparent about the levers we have in discounting PostHog:
 
@@ -114,6 +112,10 @@ Additional notes on self-serve discounts:
 We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
 
 > Nonprofit discounts don't stack with annual discounts.  It's either/or, not both.
+
+### Legacy discounts
+
+You might see some customers with a 30% discount on their monthly Stripe subscription.  These were added when the only way we billed for PostHog was through event pricing.  This was originally designed to offset the cost versus competitors who had unbundled Group Analytics or Data Pipelines.  These customers will typically be on a higher per-event price plan, so we should look to get them migrated to standard pricing as soon as possible.
 
 ## Additional credit purchase
 
