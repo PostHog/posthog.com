@@ -447,7 +447,6 @@ export default function Handbook({
                                                     {contentWithSnippets && (
                                                         <CopyMarkdownActionsDropdown
                                                             markdownContent={contentWithSnippets}
-                                                            pageTitle={title}
                                                             pageUrl={
                                                                 typeof window !== 'undefined'
                                                                     ? window.location.href
