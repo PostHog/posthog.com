@@ -32,7 +32,7 @@ export default function CommunityIncubatorForm(): JSX.Element {
 
     return (
         <form ref={formRef} onSubmit={handleSubmit}>
-            <div className="bg-white shadow-2xl rounded-2xl p-6 space-y-4 transition-all max-w-[700px] mx-auto">
+            <div className="bg-white shadow-2xl rounded-md p-6 space-y-4 transition-all max-w-[700px] mx-auto">
                 {!submitted ? (
                     <>
                         <input
@@ -63,12 +63,20 @@ export default function CommunityIncubatorForm(): JSX.Element {
                             rows={4}
                             required
                         />
-                        <CallToAction type="primary" size="lg" className="w-full">
+                        <CallToAction
+                            type="primary"
+                            size="lg"
+                            className="w-full"
+                            to="#"
+                            onClick={() => {
+                                formRef.current?.requestSubmit()
+                            }}
+                        >
                             Submit application
                         </CallToAction>
                     </>
                 ) : (
-                    <div className="bg-green text-white p-3 rounded-full flex items-center space-x-2">
+                    <div className="bg-green text-white p-3 rounded-full flex items-center justify-center space-x-2">
                         <IconCheck className="size-6" />
                         <span>Thanks! We got your application.</span>
                     </div>
