@@ -23,7 +23,7 @@ Tracks the value of the metric per user (e.g. revenue, session duration, number 
 ## How the Frequentist engine works
 > To verify how the statistical calculations are implemented, [see the code in our GitHub repo](https://github.com/PostHog/posthog/tree/master/products/experiments/stats/frequentist).
 
-We use a two-sided **Welch’s t-test**, a statistical method that works well even when sample sizes and variances differ between the test and control groups.
+We use **Welch’s t-test** with a two-sided alternative. Welch’s method is robust when sample sizes or variances differ between control and test groups.
 
 Here's how the analysis works behind the scenes:
 
