@@ -1,23 +1,26 @@
 import { Menu } from '@headlessui/react'
-import { IconCheck, IconCopy, IconEye, IconExternal } from '@posthog/icons'
+import { IconCopy, IconEye, IconExternal } from '@posthog/icons'
 import { Chevron } from 'components/Icons'
+import CheckIcon from '../../images/check.svg'
 import React, { useState } from 'react'
 
 interface CopyMarkdownActionsDropdownProps {
     /** The markdown content to work with */
     markdownContent: string
-    /** Optional page URL for context */
-    pageUrl?: string
-    /** Custom className for styling */
-    className?: string
+    /** Page URL for context */
+    pageUrl: string
 }
 
 export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownProps> = ({
     markdownContent,
     pageUrl,
-    className = '',
 }) => {
     const [copiedState, setCopiedState] = useState<string | null>(null)
+
+    // Consolidated styles
+    const menuItemButtonStyles =
+        '!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center'
+    const menuItemIconStyles = 'w-4 h-4 mr-3'
 
     // Helper function to strip query parameters from URL
     const getCleanPath = (url: string) => {
@@ -31,14 +34,13 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     }
 
     const handleViewAsMarkdown = () => {
-        const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
-        const cleanPath = getCleanPath(currentPath)
+        const cleanPath = getCleanPath(pageUrl)
         const markdownUrl = `${cleanPath}.md`
         window.open(markdownUrl, '_blank')
     }
 
     const handleOpenInChatGPT = () => {
-        const cleanPath = pageUrl ? getCleanPath(pageUrl) : ''
+        const cleanPath = getCleanPath(pageUrl)
         const markdownUrl = `${cleanPath}.md`
         const prompt = `Read from ${markdownUrl} so I can ask questions about it`
         const encodedPrompt = encodeURIComponent(prompt)
@@ -46,7 +48,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     }
 
     const handleOpenInClaude = () => {
-        const cleanPath = pageUrl ? getCleanPath(pageUrl) : ''
+        const cleanPath = getCleanPath(pageUrl)
         const markdownUrl = `${cleanPath}.md`
         const prompt = `Read from ${markdownUrl} so I can ask questions about it`
         const encodedPrompt = encodeURIComponent(prompt)
@@ -54,68 +56,58 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     }
 
     return (
-        <div className={`relative ${className}`}>
+        <div className={`relative`}>
             <Menu>
                 {({ open }) => (
                     <>
-                        <Menu.Button className="flex items-center space-x-1 text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow font-semibold">
-                            <IconCopy className="w-4 h-4" />
-                            <span>Copy page</span>
+                        <Menu.Button
+                            className={`flex items-center space-x-1 font-semibold text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow py-1 px-1 rounded-sm border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                                open
+                                    ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
+                                    : 'border-transparent hover:bg-accent dark:hover:bg-accent-dark hover:border-light dark:hover:border-dark'
+                            }`}
+                        >
+                            {copiedState === 'markdown' ? (
+                                <>
+                                    <img src={CheckIcon} alt="Copied" className="w-4 h-4 text-green" />
+                                    <span className="text-primary/70 dark:text-primary-dark/70">Copied</span>
+                                </>
+                            ) : (
+                                <>
+                                    <IconCopy className="w-4 h-4" />
+                                    <span>Copy page</span>
+                                </>
+                            )}
                             <Chevron className="w-2.5 opacity-70 group-hover:opacity-70" />
                         </Menu.Button>
 
                         <Menu.Items className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
                             <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={handleCopyMarkdown}
-                                        className={`!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center justify-between ${
-                                            copiedState === 'markdown' ? 'font-bold' : ''
-                                        }`}
-                                    >
-                                        <div className="flex items-center">
-                                            <IconCopy className="w-4 h-4 mr-3" />
-                                            <span>Copy as Markdown</span>
-                                        </div>
-                                        {copiedState === 'markdown' && <IconCheck className="w-4 h-4 text-green" />}
-                                    </button>
-                                )}
+                                <button onClick={handleCopyMarkdown} className={menuItemButtonStyles}>
+                                    <IconCopy className={menuItemIconStyles} />
+                                    <span>Copy as Markdown</span>
+                                </button>
                             </Menu.Item>
 
                             <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={handleViewAsMarkdown}
-                                        className="!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center"
-                                    >
-                                        <IconEye className="w-4 h-4 mr-3" />
-                                        <span>View as Markdown</span>
-                                    </button>
-                                )}
+                                <button onClick={handleViewAsMarkdown} className={menuItemButtonStyles}>
+                                    <IconEye className={menuItemIconStyles} />
+                                    <span>View as Markdown</span>
+                                </button>
                             </Menu.Item>
 
                             <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={handleOpenInChatGPT}
-                                        className="!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center"
-                                    >
-                                        <IconExternal className="w-4 h-4 mr-3" />
-                                        <span>Open in ChatGPT</span>
-                                    </button>
-                                )}
+                                <button onClick={handleOpenInChatGPT} className={menuItemButtonStyles}>
+                                    <IconExternal className={menuItemIconStyles} />
+                                    <span>Open in ChatGPT</span>
+                                </button>
                             </Menu.Item>
 
                             <Menu.Item>
-                                {({ active }) => (
-                                    <button
-                                        onClick={handleOpenInClaude}
-                                        className="!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center"
-                                    >
-                                        <IconExternal className="w-4 h-4 mr-3" />
-                                        <span>Open in Claude</span>
-                                    </button>
-                                )}
+                                <button onClick={handleOpenInClaude} className={menuItemButtonStyles}>
+                                    <IconExternal className={menuItemIconStyles} />
+                                    <span>Open in Claude</span>
+                                </button>
                             </Menu.Item>
                         </Menu.Items>
                     </>
