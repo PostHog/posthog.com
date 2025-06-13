@@ -56,7 +56,7 @@ This type of goal better aligns with our overall goal of shipping a great produc
 
 ## 3. Letting others own your plan
 
-Early in PostHog's life, an engineer wanted to build session replay. Our co-founder James, thought it was a terrible idea. The engineer built it anyway and it ended up being wildly successful and led to our multi-product strategy.
+Early in PostHog's life, an engineer wanted to build session replay. Our co-founder James thought it was a terrible idea. The engineer built it anyway and it ended up being wildly successful and led to our multi-product strategy.
 
 Since then, engineers are in charge of figuring out what to build. Neither execs nor product managers tell engineers what to build. It's up to engineers to decide, but this means they need to form a strong opinion of what they want to build.
 
@@ -121,14 +121,14 @@ Honestly, we think checking in is as important as quarterly planning itself.
 
 ## 6. Planning the whole quarter in advance
 
-A quarterly plan is not a week by week guide to what we will ship. It is not some elaborate waterfall, list of issues, or agile plan. It is a set of goals that guide what a team will work on over the quarter.
+A quarterly plan is not a week-by-week guide to what we will ship. It is not some elaborate waterfall, list of issues, or agile plan. It is a set of goals that guide what a team will work on over the quarter.
 
 Detailed plans fail due to unknown complexities and changing requirements. We've found that a week-by-week plan of what you are going to ship can create multiple issues like:
 
 1. Wasted time from making inaccurate future plans.
 2. Missed deadlines demotivate the team.
 3. Lack of flexibility means not being able to spend time on more important work as it arises.
-4. Cutting corners, creating tech debt, and burning out trying to hit deadlines. 
+4. The deadline doomloop. Trying to hit a deadline leads to cut corners, tech debt, and burn out. 
 
 The pressure to create a detailed plan often comes from a need for control. We find that relying on trust and feedback over process lessens this need for control. We empower people to make their own decisions, but that requires having a high bar for ourselves and our teammates, whether that is in hiring or day-to-day work.
 
@@ -136,7 +136,7 @@ The pressure to create a detailed plan often comes from a need for control. We f
 
 1. **Not taking hiring into account.** Hiring and onboarding new team members is a lot of work and is often underestimated. Our teams often include hiring-related goals in their quarterly plan to keep this in mind.
 
-2. **Being opaque**. You should encourage other teams and execs to be transparent. You can lead by example by posting updates yourself. Without this information, teams don't have everything they need to plan successfully.
+2. **Being opaque.** You should encourage other teams and execs to be transparent. You can lead by example by posting updates yourself. Without this information, teams don't have everything they need to plan successfully.
 
 3. **Not having anti-goals.** When there is so much to build, it is often useful to write down what you *aren't* going to build. This improves focus on what really matters.
 
