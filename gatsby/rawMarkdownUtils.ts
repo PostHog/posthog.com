@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs'
 
 // Function to generate llms.txt file according to spec
-const generateLlmsTxt = (pages) => {
+export const generateLlmsTxt = (pages) => {
     console.log('Generating llms.txt file...')
 
     // Group pages by their first URL segment
@@ -44,6 +44,23 @@ const generateLlmsTxt = (pages) => {
         })
     }
 
+    // Add API spec files to docs-api-reference section
+    const apiSpecDir = path.join(process.cwd(), 'public', 'docs', 'open-api-spec')
+
+    if (fs.existsSync(apiSpecDir)) {
+        pagesBySection['docs-api-reference'] = []
+
+        const apiSpecFiles = fs.readdirSync(apiSpecDir).filter((file) => file.endsWith('.md'))
+        for (const file of apiSpecFiles) {
+            const operationId = file.replace('.md', '')
+            pagesBySection['docs-api-reference'].push({
+                title: `${operationId}`,
+                slug: `/docs/open-api-spec/${operationId}`,
+                url: `https://posthog.com/docs/open-api-spec/${operationId}.md`,
+            })
+        }
+    }
+
     // Sort sections with docs subsections first, then tutorials, then alphabetical
     const sections = Object.keys(pagesBySection).sort((a, b) => {
         // All docs sections come first
@@ -59,6 +76,8 @@ const generateLlmsTxt = (pages) => {
             if (b === 'docs-libraries') return 1
             if (a === 'docs-api') return -1
             if (b === 'docs-api') return 1
+            if (a === 'docs-api-reference') return -1
+            if (b === 'docs-api-reference') return 1
             return a.localeCompare(b)
         }
 
@@ -73,7 +92,7 @@ const generateLlmsTxt = (pages) => {
     // Build llms.txt content according to spec
     let llmsTxtContent = `# PostHog
 
-> PostHog is an open-source platform for customer infrastructure. We equip developers with everything they need to build successful products –  product analytics, web analytics, feature flags, session replay, A/B testing, error tracking, surveys, LLM observability, data warehousing, and more.
+> PostHog is an open-source platform for customer infrastructure. We equip developers with everything they need to build successful products – product analytics, web analytics, feature flags, session replay, A/B testing, error tracking, surveys, LLM observability, data warehousing, and more.
 
 `
 
@@ -116,16 +135,16 @@ const generateLlmsTxt = (pages) => {
     console.log('Generated: llms.txt')
 }
 
-// Function to generate markdown files for LLMs
+// Function to generate raw markdown files
 export const generateRawMarkdownPages = async (pages) => {
-    console.log('Generating markdown files for LLMs and llms.txt...')
+    console.log('Generating markdown files for LLMs...')
 
     // Filter out any pages with certain slugs
     const excludeTerms = [
-        '_snippets',
+        '/_snippets',
         '/snippets/',
-        '_includes',
-        '/thanks/',
+        '/_includes',
+        '/thanks',
         '/notes/test-note',
         '/service-error',
         '/service-message',
@@ -135,6 +154,7 @@ export const generateRawMarkdownPages = async (pages) => {
         '/teams/',
         '/hosthog',
         '/startups',
+        '/example-components',
     ]
     const filteredPages = pages.filter((doc) => !excludeTerms.some((term) => doc.fields.slug.includes(term)))
 
@@ -181,15 +201,15 @@ export const generateRawMarkdownPages = async (pages) => {
         }
     }
 
-    // Generate llms.txt file
-    generateLlmsTxt(filteredPages)
+    // Return filtered pages for use in generateLlmsTxt
+    return filteredPages
 }
 
-// Function to generate individual API endpoint markdown files
+// Function to generate individual API endpoint markdown files from the OpenAPI spec
 export const generateApiSpecMarkdown = (spec: any) => {
     console.log('Generating API endpoint markdown files...')
 
-    const apiSpecDir = path.join(process.cwd(), 'public', 'docs', 'api-spec')
+    const apiSpecDir = path.join(process.cwd(), 'public', 'docs', 'open-api-spec')
     if (!fs.existsSync(apiSpecDir)) {
         fs.mkdirSync(apiSpecDir, { recursive: true })
     }
@@ -282,10 +302,10 @@ ${jsonContent}
 
                 // Write the file
                 fs.writeFileSync(filePath, markdownContent, 'utf8')
-                console.log(`Generated: api-spec/${filename}`)
+                console.log(`Generated: open-api-spec/${filename}`)
             }
         })
     })
 
-    console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/api-spec/`)
+    console.log(`✅ Generated ${totalEndpoints} API endpoint markdown files in /docs/open-api-spec/`)
 }
