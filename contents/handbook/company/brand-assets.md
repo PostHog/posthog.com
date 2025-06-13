@@ -4,6 +4,7 @@ sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
+
 > **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
 
 ## Logo
@@ -38,7 +39,9 @@ If you have any questions or need clarification about which version to use, ask 
 
 ## Typography
 
-We use Displaay's typeface called *Matter SQ*. (SQ = square dots)
+We use Displaay's typeface called *Matter SQ*. (SQ = square dots.)
+
+On the website, we use this for all text. In-product, we only use for titles and buttons.
 
 ### Building for web
 
@@ -88,6 +91,47 @@ We have a handful of licenses for desktop use of Matter. Contact Cory if you nee
 | Paragraphs accompanying large headers | Semibold | 20px       | -1%            | 125%        |
 | p                                     | Regular  | 17px       |                | 175%        |
 | p (small)                             | Regular  | 15px       |                | 150%        |
+
+## Other fonts
+
+We use two other fonts for special purposes. Please adhere to their usage guidelines listed below.
+
+### Squeak
+
+<PrivateLink url="https://github.com/PostHog/company-internal/blob/master/Squeak_OTF.zip">Squeak</PrivateLink> is used in informal settings, generally accompanied by hedgehog artwork.
+
+#### Usage guidelines
+
+- Only use the `Bold` variant
+- Always use uppercase letters
+- Letter spacing: -2%
+
+#### Examples
+
+<ImageSlider>
+
+![Squeak font example](https://res.cloudinary.com/dmukukwp6/image/upload/squeak_example_37b83e4cde.jpg)
+
+![Squeak font example](https://res.cloudinary.com/dmukukwp6/image/upload/squeak_example_2_4323797eb0.png)
+
+![Squeak font example](https://res.cloudinary.com/dmukukwp6/image/upload/squeak_example_3_d367809597.png)
+
+</ImageSlider>
+
+### Loud Noises
+
+<PrivateLink url="https://github.com/PostHog/company-internal/blob/master/fonts/LOUD_NOISES.ttf">Loud Noises</PrivateLink> is used for quotes in hedgehog artwork.
+
+#### Usage guidelines
+
+- Only use for quotes in hedgehog artwork or where hedgehogs are otherwise communicating something
+- Only use uppercase
+
+#### Example
+
+Loud Noises is used in the sign the hedgehog is holding:
+
+![](https://res.cloudinary.com/dmukukwp6/image/upload/loud_noises_5919818659.png)
 
 ## Colors
 

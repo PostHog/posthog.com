@@ -25,6 +25,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import Link from './components/Link'
 import { PrivateLink } from './components/PrivateLink'
+import ImageSlider from './components/ImageSlider'
 import { AbTesting } from './components/Product/AbTesting'
 import { FeatureFlags } from './components/Product/FeatureFlags'
 import { ProductAnalytics } from './components/Product/ProductAnalytics'
@@ -64,6 +65,7 @@ export const shortcodes = {
     CallToAction,
     Caption,
     Images,
+    ImageSlider,
     ComparisonTable,
     CompensationCalculator,
     ContentViewer,
