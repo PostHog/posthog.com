@@ -1,13 +1,14 @@
 import * as React from 'react'
-import posthog from 'posthog-js'
-import { CallToAction } from 'components/CallToAction'
+import usePostHog from 'hooks/usePostHog'
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { IconCheck } = require('@posthog/icons') as { IconCheck: React.FC<any> }
 import { useRef, useState } from 'react'
+import { CallToAction } from './CallToAction'
 
 export default function CommunityIncubatorForm(): JSX.Element {
     const formRef = useRef<HTMLFormElement>(null)
     const [submitted, setSubmitted] = useState(false)
+    const posthog = usePostHog()
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -18,7 +19,7 @@ export default function CommunityIncubatorForm(): JSX.Element {
         const motivationInput = form?.elements.namedItem('motivation') as HTMLTextAreaElement | null
 
         if (emailInput && emailInput.value) {
-            posthog.capture('community_incubator_application', {
+            posthog?.capture('community_incubator_application', {
                 name: nameInput?.value,
                 email: emailInput.value,
                 city: cityInput?.value,
