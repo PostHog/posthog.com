@@ -1104,7 +1104,7 @@ export const locationFactor: CompensationCalculatorLocation[] = [
     {
         country: 'Japan',
         area: 'All',
-        locationFactor: 0.6,
+        locationFactor: 0.75,
         currency: 'JPY',
     },
     {

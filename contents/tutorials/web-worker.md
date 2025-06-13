@@ -96,7 +96,7 @@ Our updated `index.html` file will look like this:
     posthog.init('<ph_project_api_key>',  { 
       api_host: '<ph_client_api_host>',
       defaults: '<ph_posthog_js_defaults>',
-      advanced_disable_decide: true
+      advanced_disable_flags: true
     });
   </script>
 </head>
@@ -124,7 +124,7 @@ Our updated `index.html` file will look like this:
 </html>
 ```
 
-> **Note:** We disable `advanced_disable_decide` as it causes a CORS error on our local server. This isn't the case in production so you shouldn't do this for a production-ready app.
+> **Note:** We disable `advanced_disable_flags` as it causes a CORS error on our local server. This isn't the case in production so you shouldn't do this for a production-ready app.
 
 ## Making PostHog work with the web worker
 
