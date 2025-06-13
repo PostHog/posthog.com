@@ -405,10 +405,30 @@ posthog.init('<ph_project_api_key>', {
             return value.replace(/project\/\d+/, 'project/1234567');
         }
 
+        // NB these functions are examples and you should implement something specific to your site
+        // redacting information can impact features that rely on it, e.g. heatmaps are keyed by URL
+        function redactArray(value: any[]) {
+            return value.map(v) => {
+                if (typeof v === 'string') {
+                    return redactUrl(v)
+                } else if (Array.isArray(v) {
+                    return readactArray(v)
+                } else if (typeof v === 'object' && v) {
+                    acc[key] = redactObject(v)
+                } else {
+                    return v
+                }
+            }
+        }
+
+        // NB these functions are examples and you should implement something specific to your site
+        // redacting information can impact features that rely on it, e.g. heatmaps are keyed by URL
         function redactObject(objectToRedact: Record<string, any>): Record<string, any> {
             return Object.entries(objectToRedact).reduce((acc, [key, value]) => {
                 if ((key.includes('url') || key.includes('href')) && typeof value === 'string') {
                     acc[key] = redactUrl(value)
+                } else if (Array.isArray(value) {
+                    acc[key] = readactArray(value)
                 } else if (typeof value === 'object' && value) {
                     acc[key] = redactObject(value)
                 } else {

@@ -20,16 +20,17 @@ If you're looking for the PostHog logo, you came to the right place. Please keep
 | <div style="background:#EEEFE9;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-black.svg)</div>  | Dark logo | <a href="/brand/posthog-logo-black.svg" download>SVG</a> | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a> |
 | <div style="background:#111;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-white.svg)</div>  | Light logo    | <a href="/brand/posthog-logo-white.svg" download>SVG</a> | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a> |
 | <div style="background:#EEEFE9;display:inline-block;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logomark.svg)</div>    | Logomark      | <a href="/brand/posthog-logomark.svg" download>SVG</a> | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a> |
+| <div style="background:#EEEFE9;display:inline-block;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-stacked.svg)</div>    | Logo (stacked)      | <a href="/brand/posthog-logo-stacked.svg" download>SVG</a> | <a href="/brand/posthog-logo-stacked.png" download>PNG</a> \| <a href="/brand/posthog-logo-stacked@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-stacked-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-stacked-padded@2x.png" download>PNG @2x</a> |
 
 </OverflowXSection>
 
 *PNGs with padding are useful when uploading the logo to a third-party service where there is limited control over padding/margin around the logo.
 
-When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's eye color to white when using on a dark background).
+When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's face color to white when using on a dark background).
 
 The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x logo as it will appear crisper on newer devices, tablets and high resolution mobile devices.
 
-> **Important:** We updated our logo in 2021. Please be sure to use the _correct_ version. 👇🏼
+> **Important:** We updated our logo in 2021. (Note the square font and sharp edges on the logomark in the old version.) Please be sure to use the _correct_ version. 👇🏼
 
 ![Logo usage examples](/brand/logo-usage.png)
 

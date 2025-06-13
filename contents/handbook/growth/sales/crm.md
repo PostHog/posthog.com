@@ -150,6 +150,10 @@ If you receive a lead for a self-serve customer who has used the Sales Contact F
 
 This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Brand team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
 
+### Spam
+
+These mostly come into the sales inbox rather than the contact form.  Whilst there is a `Spam` disqualification reason in Salesforce we can also prevent users from emailing the group again by banning them in the [Sales Google Group](https://groups.google.com/a/posthog.com/g/sales/banned-users).  If you do ban someone bear in mind they won't be able to email our sales email until the ban is lifted so only use this for genuine spam (e.g. people trying to sell us competitor user lists). 
+
 ### Lead Qualification Criteria
 - Do they match our ideal customer profile?
 - Do they have a need that PostHog can help with?

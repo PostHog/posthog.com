@@ -41,6 +41,7 @@ import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contri
 import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
+import { IconCheck } from '@posthog/icons'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -297,7 +298,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig, templateConfigs },
+        fields: { slug, contributors, appConfig, templateConfigs, contentWithSnippets },
     } = post
     const {
         title,
@@ -323,6 +324,7 @@ export default function Handbook({
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
+    const [copied, setCopied] = React.useState<boolean>(false)
 
     const A = (props) => (
         <Link
@@ -331,6 +333,14 @@ export default function Handbook({
             className="text-red hover:text-red font-semibold"
         />
     )
+
+    const handleCopyMarkdown = () => {
+        navigator.clipboard.writeText(contentWithSnippets)
+        setCopied(true)
+        setTimeout(() => {
+            setCopied(false)
+        }, 3000)
+    }
 
     const components = {
         Team,
@@ -415,7 +425,7 @@ export default function Handbook({
                                                     {description}
                                                 </p>
                                             )}
-                                            {(!hideLastUpdated || filePath) && (
+                                            {(!hideLastUpdated || filePath || contentWithSnippets) && (
                                                 <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
                                                     {!hideLastUpdated && (
                                                         <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
@@ -434,6 +444,27 @@ export default function Handbook({
                                                         >
                                                             Edit this page
                                                         </Link>
+                                                    )}
+                                                    {contentWithSnippets && (!hideLastUpdated || filePath) && (
+                                                        <span className="text-primary/30 dark:text-primary-dark/30">
+                                                            |
+                                                        </span>
+                                                    )}
+                                                    {contentWithSnippets && (
+                                                        <button
+                                                            className={`text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow font-semibold ${
+                                                                copied ? '!text-green' : ''
+                                                            }`}
+                                                            onClick={handleCopyMarkdown}
+                                                        >
+                                                            {copied ? (
+                                                                <span className="flex items-center space-x-2">
+                                                                    <IconCheck className="size-4" /> Copied
+                                                                </span>
+                                                            ) : (
+                                                                'Copy as Markdown'
+                                                            )}
+                                                        </button>
                                                     )}
                                                 </div>
                                             )}
@@ -537,6 +568,7 @@ export const query = graphql`
                         description
                     }
                 }
+                contentWithSnippets
             }
             frontmatter {
                 title

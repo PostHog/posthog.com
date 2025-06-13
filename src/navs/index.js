@@ -73,6 +73,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/bigquery',
                 },
                 {
+                    name: 'Google Ads',
+                    url: '/docs/cdp/sources/google-ads',
+                },
+                {
                     name: 'Self-managed',
                 },
                 {
@@ -705,12 +709,22 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Docs ownership',
+                name: 'Docs',
                 url: '/handbook/content/docs',
-            },
-            {
-                name: 'Docs style guide',
-                url: '/handbook/content/docs-style-guide',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/docs',
+                    },
+                    {
+                        name: 'Docs ownership',
+                        url: '/handbook/content/docs-ownership',
+                    },
+                    {
+                        name: 'Docs style guide',
+                        url: '/handbook/content/docs-style-guide',
+                    },
+                ],
             },
             {
                 name: 'Newsletter',
@@ -769,6 +783,10 @@ export const handbookSidebar = [
                 url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
             },
             {
+                name: 'Getting to know your customers',
+                url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
+            },
+            {
                 name: 'Health tracking',
                 url: '/handbook/cs-and-onboarding/health-tracking',
             },
@@ -783,6 +801,16 @@ export const handbookSidebar = [
             {
                 name: 'Tracking feature requests',
                 url: '/handbook/cs-and-onboarding/feature-requests',
+            },
+        ],
+    },
+    {
+        name: 'Demand gen',
+        url: '',
+        children: [
+            {
+                name: 'Overview',
+                url: '/handbook/demand/overview',
             },
         ],
     },
@@ -940,6 +968,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/clickhouse/working-with-json',
                     },
                     {
+                        name: 'Query attribution',
+                        url: '/handbook/engineering/clickhouse/query-attribution',
+                    },
+                    {
                         name: 'Query performance',
                         url: '/handbook/engineering/clickhouse/performance',
                     },
@@ -1089,7 +1121,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Designing PostHog.com',
-                url: '/handbook/design/designing-posthog-website',
+                url: '/handbook/brand/designing-posthog-website',
             },
             {
                 name: 'Developing PostHog.com',
@@ -1232,6 +1264,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
             {
+                name: 'Account planning',
+                url: '/handbook/growth/sales/account-planning',
+            },
+            {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
             },
@@ -1311,7 +1347,7 @@ export const handbookSidebar = [
                 name: 'Retention Metrics',
                 url: '/handbook/growth/revops/retention-metrics',
             },
-                        {
+            {
                 name: 'Lifecycle Analysis',
                 url: '/handbook/growth/revops/lifecycle-analysis',
             },
@@ -1841,9 +1877,6 @@ export const docsMenu = {
                         {
                             name: 'Rust',
                             url: '/docs/libraries/rust',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'C#/.NET',
@@ -1891,9 +1924,6 @@ export const docsMenu = {
                         {
                             name: 'Gatsby',
                             url: '/docs/libraries/gatsby',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Google Tag Manager',
@@ -1946,9 +1976,6 @@ export const docsMenu = {
                         {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
-                            badge: {
-                                title: '3rd party',
-                            },
                         },
                         {
                             name: 'Svelte',
@@ -3367,6 +3394,12 @@ export const docsMenu = {
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
+                },
+                {
+                    name: 'Filter and search',
+                    url: '/docs/error-tracking/filter-and-search-issues',
+                    icon: 'IconSearch',
+                    color: 'green',
                 },
                 {
                     name: 'Alerts',

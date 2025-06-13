@@ -82,7 +82,7 @@ Finally, deploy your changes to live to begin capturing your custom event.
 
 To enable it, go the [Session replay tab](https://us.posthog.com/replay) in PostHog. Then, click on the **Configure** button in the top right and toggle on **Record user sessions** in the menu that opens up. 
 
-Once enabled, user sessions will begin to appear in the [Recent recordings tab](https://us.posthog.com/replay/recent).
+Once enabled, user sessions will begin to appear in the [Recent recordings tab](https://us.posthog.com/replay).
 
 ![How to enable session replays in PostHog](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/bubble-analytics/bubble-record-sessions.mp4)
 
