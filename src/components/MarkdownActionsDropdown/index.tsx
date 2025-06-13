@@ -19,6 +19,11 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
 }) => {
     const [copiedState, setCopiedState] = useState<string | null>(null)
 
+    // Helper function to strip query parameters from URL
+    const getCleanPath = (url: string) => {
+        return url.split('?')[0]
+    }
+
     const handleCopyMarkdown = () => {
         navigator.clipboard.writeText(markdownContent)
         setCopiedState('markdown')
@@ -27,22 +32,25 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
 
     const handleViewAsMarkdown = () => {
         const currentPath = typeof window !== 'undefined' ? window.location.pathname : ''
-        const markdownUrl = `${currentPath}.md`
+        const cleanPath = getCleanPath(currentPath)
+        const markdownUrl = `${cleanPath}.md`
         window.open(markdownUrl, '_blank')
     }
 
     const handleOpenInChatGPT = () => {
-        const markdownUrl = `${pageUrl}.md`
+        const cleanPath = pageUrl ? getCleanPath(pageUrl) : ''
+        const markdownUrl = `${cleanPath}.md`
         const prompt = `Read from ${markdownUrl} so I can ask questions about it`
         const encodedPrompt = encodeURIComponent(prompt)
         window.open(`https://chat.openai.com/?q=${encodedPrompt}`, '_blank')
     }
 
     const handleOpenInClaude = () => {
-        const markdownUrl = `${pageUrl}.md`
+        const cleanPath = pageUrl ? getCleanPath(pageUrl) : ''
+        const markdownUrl = `${cleanPath}.md`
         const prompt = `Read from ${markdownUrl} so I can ask questions about it`
         const encodedPrompt = encodeURIComponent(prompt)
-        window.open(`https://claude.ai/chat?q=${encodedPrompt}`, '_blank')
+        window.open(`https://claude.ai/new?q=${encodedPrompt}`, '_blank')
     }
 
     return (
