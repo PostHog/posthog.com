@@ -60,21 +60,68 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 
 > If you need to vary these rules to sign a customer up speak to Simon or Charles about it before quoting an additional discount to the customer. We don't want to put a rigorous approval process in place here but equally these rules are in place for a legitimate business reason. If you go outside of these rules without clearing it with one of us first, the deal may not count towards your quota. 
 
-The below table summarizes the discount levels contained in points 2-4:
+The below tables summarize the discount levels contained in points 2-4. Note that the minimum amounts here are after discounts e.g. they will need to purchase a minimum of $25k of credit to get a discount of 20% and contract for $20k.
 
-| Minimum Spend | 1 Year        | 2 Year         | 3 Year        |
-|---------------|---------------|----------------|---------------|
-| $20,000 | 20%  | 25% | 30%  |
-| $60,000 | 25%  | 30%   | 35%           |
-| $100,000 | 35%           | 40%            | 45%           |
-
-Also note that the minimum amounts here are _after_ discounts e.g. they will need to purchase a minimum of $25k of credit to get a discount of 20% and contract for $20k.  The table below will help you with the list price required to enable each discount.
-
-| Segment  | 1 Year   | 2 Year   | 3 Year   |
-|----------|----------|----------|----------|
-| $20,000  | $25,000  | $26,666  | $28,572  |
-| $60,000  | $80,000  | $85,715  | $92,308  |
-| $100,000 | $153,847 | $166,667 | $181,819 |
+<table>
+<thead>
+<tr>
+<th>Total Spend</th>
+<th><strong>Commitment</strong></th>
+<th><strong>Minimum Spend</strong></th>
+<th><strong>Discount</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td rowspan="3">between $25k and $80k</td>
+<td><strong>1 year</strong></td>
+<td>$25,000</td>
+<td>20%</td>
+</tr>
+<tr>
+<td><strong>2 year</strong></td>
+<td>$26,666</td>
+<td>25%</td>
+</tr>
+<tr>
+<td><strong>3 year</strong></td>
+<td>$28,572</td>
+<td>30%</td>
+</tr>
+<tr>
+<td rowspan="3">between $80k and $154k</td>
+<td><strong>1 year</strong></td>
+<td>$80,000</td>
+<td>25%</td>
+</tr>
+<tr>
+<td><strong>2 year</strong></td>
+<td>$85,715</td>
+<td>30%</td>
+</tr>
+<tr>
+<td><strong>3 year</strong></td>
+<td>$92,308</td>
+<td>35%</td>
+</tr>
+<tr>
+<td rowspan="3">more than $154k</td>
+<td><strong>1 year</strong></td>
+<td>$153,847</td>
+<td>35%</td>
+</tr>
+<tr>
+<td><strong>2 year</strong></td>
+<td>$166,667</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>3 year</strong></td>
+<td>$181,819</td>
+<td>45%</td>
+</tr>
+</tbody>
+</table>
 
 If a customer has an annual plan but doesn't _pay_ the whole year up front, we usually halve the discount. Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster.
 
