@@ -161,4 +161,4 @@ The "Cake Layer" system
      - Bonus points if you can combine a QBR or Exec review into an onsite visit!
 
 
-If the Account manager can do all four of the above customer meetings with their entire book, it would have a profound effect on the relationships we have with customers. All of our core metrics would improve as a result. Retention, adoption and revenue would be natural byproducts of this framework.
+If the Account manager does all four of the above customer meetings with their entire book, it will have a profound effect on the relationships we have with customers. All of our core metrics will improve as a result. Retention, adoption and revenue will be natural byproducts of this framework.
