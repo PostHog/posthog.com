@@ -3326,6 +3326,21 @@ export const docsMenu = {
                     name: 'Under the hood',
                 },
                 {
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPeople',
+                    color: 'orange',
+                },
+                {
+                    name: 'Sample size and running time',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconDashboard',
+                    color: 'blue',
+                },
+                {
+                    name: 'Bayesian method',
+                },
+                {
                     name: 'Statistics overview',
                     url: '/docs/experiments/statistics',
                     icon: 'IconBook',
@@ -3350,15 +3365,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Traffic allocation',
-                    url: '/docs/experiments/traffic-allocation',
-                    icon: 'IconPeople',
-                    color: 'orange',
+                    name: 'Frequentist method',
                 },
                 {
-                    name: 'Sample size and running time',
-                    url: '/docs/experiments/sample-size-running-time',
-                    icon: 'IconDashboard',
+                    name: 'Overview',
+                    url: '/docs/experiments/frequentist-method',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
             ],
