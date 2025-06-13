@@ -1,5 +1,5 @@
 ---
-title: API
+title: API overview
 sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
@@ -9,7 +9,7 @@ PostHog has a powerful API that enables you to capture, evaluate, create, update
 
 The API is available for all users and instances. It contains two types of endpoints:
 
-1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture) and [`/decide`](/docs/api/decide) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project API key](https://app.posthog.com/project/settings) to handle the request.
+1. **Public POST-only endpoints** such as [`/i/v0/e`](/docs/api/capture) and [`/flags`](/docs/api/flags) are used for capturing events, batching events, updating person or group information, and evaluating feature flags. These don't require authentication, but use [your project API key](https://app.posthog.com/project/settings) to handle the request.
 
 2. **Private `GET`, `POST`, `PATCH`, `DELETE` endpoints** are used for [querying](/docs/api/queries), creating, updating, or deleting nearly all data in PostHog. They give the same access as if you were logged into your PostHog instance, but require authentication with your personal API key. 
 
@@ -35,7 +35,7 @@ There are separate limits for different kinds of resources.
 
 - For the rest of the create, read, update, and delete endpoints, the rate limits are `480/minute` and `4800/hour`.
 
-- For public POST-only endpoints like event capture (`/i/v0/e`) and feature flag evaluation (`/decide`), there are no rate limits.
+- For public POST-only endpoints like event capture (`/i/v0/e`) and feature flag evaluation (`/flags`), there are no rate limits.
 
 These limits apply to **the entire team** (i.e. all users within your PostHog organization). For example, if a script requesting feature flag metadata hits the rate limit, and another user, using a different personal API key, makes a single request to the persons API, this gets rate limited as well.
 
@@ -49,7 +49,7 @@ These limits apply to **the entire team** (i.e. all users within your PostHog or
 
 ```json
 {
-  "status": 1
+  "status": "Ok"
 }
 ```
 

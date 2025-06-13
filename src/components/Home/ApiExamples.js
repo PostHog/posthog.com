@@ -56,7 +56,7 @@ const examples = [
     },
     {
         title: 'Evaluate feature flags anywhere',
-        endpoint: 'decide',
+        endpoint: 'flags',
         description: (
             <>
                 Even if you don't use one of our <Link to="/docs/getting-started/install?tab=sdks">SDKs</Link>, you can

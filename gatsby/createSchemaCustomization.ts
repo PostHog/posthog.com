@@ -343,6 +343,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               shopifyId: String!
               title: String!
               selectedOptions: [ShopifySelectedOption!]!
+              inventoryPolicy: String
             }
             type ShopifyImage {
               width: Int

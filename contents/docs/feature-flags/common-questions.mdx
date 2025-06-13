@@ -144,9 +144,19 @@ There can be ingestion latency for all events and properties, including ones rel
 
 On top of this, we need to do extra processing for new properties which can take longer than just ingesting an event.
 
+#### What happens when I change a roll out percentage?
+
+PostHog uses a deterministic hashing strategy to assign users. We hash the user's `distinct_id` to a number between 0 and 1 (0-100%), and compare it against the roll out percentage.
+
+- If you **increase** the percentage, users who already matched will continue to match, and more users may now qualify.
+
+- If you **decrease** the percentage, some users who previously matched may fall outside the new threshold and stop qualifying.
+
+This applies to both boolean and multivariate flags. Multivariate flags assign users to specific variants based on the rollout split. If you want to roll out one variant to everyone, set it to 100% and the others to 0%.
+
 ## Billing & usage
 
-Feature flags are charged based requests made to our `/decide` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
+Feature flags are charged based requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
 
 ### How can I estimate the number of feature flag requests I'll be charged for?
 

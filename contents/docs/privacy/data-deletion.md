@@ -22,7 +22,9 @@ When deleting individual persons, you can also choose to delete all of their eve
 
 ## How to delete persons and related events using the API
 
-> **Note:** Reusing `distinct_id` values after deletion is not supported. If you wish to delete bad data on some `distinct_id` values but keep that person's other `distinct_id` active, you should first split that person with the "Split IDs" button.
+> **Note:** You can reuse `distinct_id` values after deletion using the **"Reset deleted person"** tool, available from the dropdown at the top-right of the [**Persons page**](https://app.posthog.com/persons). This tool allows you to reset a deleted `distinct_id` so that future events associated with it will create a new person profile.  
+>
+> If you instead want to split a person with multiple IDs (e.g. to isolate bad data tied to a specific `distinct_id`), use the **"Split IDs"** button on their person profile.
 
 Persons and events can be deleted using our API endpoints. 
 

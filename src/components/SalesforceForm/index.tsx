@@ -368,7 +368,7 @@ export default function SalesforceForm({
 
     const handleSubmit = async (values) => {
         const distinctId = posthog?.get_distinct_id?.()
-        posthog?.identify?.(distinctId, {
+        posthog?.setPersonProperties?.({
             email: values.email,
         })
         await fetch(`/api/contact-event`, {
@@ -439,6 +439,7 @@ export default function SalesforceForm({
                                 if (type === 'enumeration')
                                     return (
                                         <RadioGroup
+                                            key={`${name}-${index}`}
                                             type={fieldType}
                                             options={options}
                                             name={name}

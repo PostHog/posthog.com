@@ -23,7 +23,7 @@ Finally, while logged into Mailchimp, check the subdomain of your account. You'l
 ## Configuring PostHog’s Mailchimp destination
 
 1. In PostHog, click the **[Data pipeline](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=mailchimp) tab.
 3. Click **New destination** and choose Mailchimp's **Create** button.
 
 Insert your API key, audience ID, and datacenter ID. You can also choose a different property to use as the contact's email; PostHog will default to `person.properties.email`.
