@@ -22,7 +22,7 @@ Although our standard monthly [pricing](/pricing) has volume discounts built in,
 
 > We don't offer a discount for signing a contract by some fixed date (e.g so the deal closes in a specific quarter).
 
-> If you need to vary these rules to sign a customer up speak to Dana, Simon or Charles about it before quoting an additional discount to the customer. We don't want to put a rigorous approval process in place here but equally these rules are in place for a legitimate business reason. If you go outside of these rules without clearing it with one of us first, the deal may not count towards your quota.
+> You shouldn't offer discounts above the levels outlined here. If a customer is asking for more and you feel like a genuine exception is justified then speak to Dana, Simon or Charles about it as we may be able to offer additional credit for the first year of a contract. If you go outside of these rules without clearing it with one of us, the deal may not count toward your quota.
 
 The below table summarizes the discount levels contained in points 2-4:
 
@@ -91,9 +91,7 @@ For customers contracting for less than $100k annually if they don't _pay_ the w
 
 For customers contracting for $100k or more we can accept quarterly payments without the need to reduce the discount.
 
-> It's worth being aware that fast growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%.
-
-We shouldn't offer discounts larger than set out above.  In certain circumstances it may be prudent to include additional credit in a contract as a Special Term.  As this would be an exception you need to discuss it with Dana, Simon or Charles beforehand.
+> It's worth being aware that fast-growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%.
 
 ### Self-serve discounts
 
@@ -114,6 +112,8 @@ Additional notes on self-serve discounts:
 ### Nonprofit discounts
 
 We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
+
+> Nonprofit discounts don't stack with annual discounts.  It's either/or, not both.
 
 ## Additional credit purchase
 
