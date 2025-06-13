@@ -26,41 +26,9 @@ Google recently changed its settings for 2FA and Yubikeys and you may struggle t
 > **YubiKey tip:** Avoid spamming OTPs if you accidentally touch your YubiKey by installing the [YubiKey Manager](https://www.yubico.com/support/download/yubikey-manager/) or by running `brew install ykman && ykman config usb --disable OTP`
 
 ## SOC 2
+import SOC2 from './_snippets/soc2.mdx'
 
-PostHog is certified as SOC 2 Type II compliant, following an external audit. 
-
-Our latest [security report](https://drive.google.com/file/d/1uLBE83_pN5q7p7IA-Ut85ArQh9BBzEdw/view?usp=drive_link) is publicly available (covering controls as of May 31st, 2024). Our [bridge letter](https://drive.google.com/file/d/1NYT0MNNDK-RXoQNIY_hqo5eygTTH5on7) is also available until we receive our next report.
-
-### Policies
-
-We have a number of policies in place to support SOC 2 compliance. All team members have been invited to Drata to review these and to complete security training and background checks as part of onboarding.
-
-All of these policies are available for viewing upon request:
-
-- Acceptable Use Policy
-- Application Logging & Monitoring Policy
-- Asset Management Policy
-- Backup Policy
-- Breach Notification Policy
-- Business Associate Policy
-- Business Continuity Plan
-- Code of Conduct
-- Data Classification Policy
-- Data Deletion Policy
-- Data Protection Policy
-- Disaster Recovery Plan
-- Encryption Policy
-- Incident Response Plan
-- Information Security Policy
-- Password Policy
-- Physical Security Policy
-- Privacy, Use, and Disclosure Policy
-- Responsible Disclosure Policy
-- Risk Assessment Policy
-- Software Development Lifecycle Policy
-- System Access Control Policy
-- Vendor Management Policy
-- Vulnerability Management Policy
+<SOC2 />
 
 These policies are also relevant for GDPR (see below). 
 

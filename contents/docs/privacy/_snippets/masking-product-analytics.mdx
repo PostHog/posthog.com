@@ -1,0 +1,25 @@
+PostHog will make a best effort to not capture sensitive information by default. This is not always sufficient, so you can disable autocapture for specific elements.
+
+import Tab from "components/Tab"
+import MaskingInputWeb from "./autocapture-config-web.mdx"
+import MaskingInputIos from "./autocapture-config-ios.mdx"
+import MaskingInputReactNative from "./autocapture-config-react-native.mdx"
+
+<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+    <Tab.List>
+        <Tab>Web</Tab>
+        <Tab>iOS</Tab>
+        <Tab>React Native</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <MaskingInputWeb />
+        </Tab.Panel>
+        <Tab.Panel>
+            <MaskingInputIos />
+        </Tab.Panel>
+        <Tab.Panel>
+            <MaskingInputReactNative />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
