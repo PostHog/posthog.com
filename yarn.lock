@@ -4402,10 +4402,10 @@
     pixi.js "^8.4.0"
     react-shadow "^20.6.0"
 
-"@posthog/icons@0.21.0":
-  version "0.21.0"
-  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.21.0.tgz#0cdb17445b46e08120b8b5672d6e7e772292946a"
-  integrity sha512-dqphAsffj1z479XvJUsFUb80Oi+5vIV39ZDAglkM18kWnWGUV8nRvkDTo6+7Ig96L94z/RKnLcOPP9gxgdzuAQ==
+"@posthog/icons@0.22.0":
+  version "0.22.0"
+  resolved "https://registry.yarnpkg.com/@posthog/icons/-/icons-0.22.0.tgz#9a8edfe22868f7f1e6b58dcf4123686c48a5b0c2"
+  integrity sha512-HOLBtbUatf2ulHDsOWx7SjlCw91ETM95qV/9dCy5BwyUbc7CnA0JaDMW89XT0WbUCL8vTYRucZz7qwlphzeh3g==
 
 "@preact/signals-core@^1.2.3":
   version "1.8.0"
@@ -23608,10 +23608,10 @@ postcss@^8.2.15, postcss@^8.2.9, postcss@^8.3.11, postcss@^8.4.14, postcss@^8.4.
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
-posthog-js@1.249.3:
-  version "1.249.3"
-  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.249.3.tgz#5bb18a2ec21207377b855fa2f00194089fd1839e"
-  integrity sha512-+DMUJYADNakPU05tGdJFoWbpyb5gDwRczT2+gFI72Th3315Wl+k7hKwBpzq2zvH5+jKOHjE0SKD/fzf1AFInkw==
+posthog-js@1.252.0:
+  version "1.252.0"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.252.0.tgz#4155e32c2c57905b74e786ad3a6f23aae1d8208e"
+  integrity sha512-Mm72gKYYYaQGilxLPPH+KXF8TcveloOvsMemEz0jna0tV0O++n9SJ/dko+U2ePb+FajZ4vqVvfmkHSIILXdgKg==
   dependencies:
     core-js "^3.38.1"
     fflate "^0.4.8"
