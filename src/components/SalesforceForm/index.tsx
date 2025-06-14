@@ -41,6 +41,7 @@ interface IProps {
             options?: CustomFieldOption[]
             fieldType?: string
             cols?: 1 | 2
+            validationSchema?: Yup.AnySchema<any>
         }[]
         buttonText?: string
         message?: string
@@ -48,6 +49,7 @@ interface IProps {
     }
     type: 'lead' | 'contact'
     source?: string
+    validationSchema?: Yup.ObjectSchema<any>
 }
 
 export interface Field {
@@ -399,19 +401,23 @@ export default function SalesforceForm({
                 <Formik
                     validationSchema={Yup.object().shape(
                         Object.fromEntries(
-                            form.fields.map((field) => [
-                                field.name,
-                                field.required
-                                    ? field.fieldType === 'checkbox'
-                                        ? Yup.array()
-                                              .of(Yup.string())
-                                              .min(1, `${field.label} is a required field`)
-                                              .required(`${field.label} is a required field`)
-                                        : Yup.string().required(`${field.label} is a required field`)
-                                    : field.fieldType === 'checkbox'
-                                    ? Yup.array().of(Yup.string())
-                                    : Yup.string(),
-                            ])
+                            form.fields.map((field) => {
+                                return [
+                                    field.name,
+                                    field.validationSchema
+                                        ? field.validationSchema
+                                        : field.required
+                                        ? field.fieldType === 'checkbox'
+                                            ? Yup.array()
+                                                  .of(Yup.string())
+                                                  .min(1, `${field.label} is a required field`)
+                                                  .required(`${field.label} is a required field`)
+                                            : Yup.string().required(`${field.label} is a required field`)
+                                        : field.fieldType === 'checkbox'
+                                        ? Yup.array().of(Yup.string())
+                                        : Yup.string(),
+                                ]
+                            })
                         )
                     )}
                     validateOnChange={false}
