@@ -215,6 +215,8 @@ By this point, you may have started running into some objections. These are the 
 
 Hooray! This is defined as when the contract is signed by _everyone_. 'They're about to sign' - NOT CLOSED. 'I've sent a DocuSign' - NOT CLOSED EITHER.
 
+If an op moves forward with PostHog, but is below an annual contract, change the type to "Monthly Contract" and mark it as closed - won in Salesforce.
+
 Once the contract is signed, it lives in PandaDoc. Next step - get them set up with [billing](/handbook/growth/sales/billing).
 
 Now it's time to set up an onboarding plan. We will templatize this, but for now you should send them something in the first week that includes:
@@ -236,6 +238,8 @@ Here is minimum checklist of things that we find customers should know how to do
 Post-onboarding, you'll want to move the customer into our Expansion or Retention flow - this may take you a few months to determine, so by default everyone should go into Expansion unless you have obvious reasons not to:
 - Expansion: multi-product potential, multi-team potential, _or_ same team and product but massively ramping usage next year
 - Retention: everyone else, steady state only
+
+
 
 ### 7. Closed - lost
 
