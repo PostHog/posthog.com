@@ -210,6 +210,8 @@ ORDER BY count(*) DESC
 LIMIT 50 OFFSET 100
 ```
 
+> **Note:** SQL insights default to a `LIMIT 100`. If you're adding the insight to a dashboard or using longer date ranges, consider explicitly increasing the limit to ensure all relevant data is shown.
+
 ### HAVING
 
 Use `HAVING` with the `GROUP BY` command to filter the results based on aggregate function values. While `WHERE` filters rows before grouping, `HAVING` filters grouped results after aggregation.
