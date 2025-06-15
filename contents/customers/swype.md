@@ -36,7 +36,7 @@ Since deploying mobile replays, David watches as many recordings as he can — s
 
 “Maybe I’m a little weird but sometimes I’ll just binge on mobile replays,” says David. “I’ll just put it on like it’s Netflix and I’ll watch them all and take notes as I go. I’ll use filters if I want to see what a specific user is doing, but if someone has paid in our app? I watch their replay from beginning to end and ask myself how I can make everyone else have this experience.”
 
-David’s approach isn’t the only way to watch session recordings — there are saved filters, playlists, and an activity score that helps rank replays by value — but this process works for him. Often it helps him notice surprising details about the user experience. 
+David’s approach isn’t the only way to watch session recordings — there are saved filters, collections, and an activity score that helps rank replays by value — but this process works for him. Often it helps him notice surprising details about the user experience. 
 
 “There’s been a few times when I’ve noticed users have issues with searching or filtering,” says David. “I’ll see things like a user clicking a button that doesn’t work because they think that’s what they’re supposed to do, then clicking it over and over, and I’ll be like: ‘I have to fix that’.”
 
