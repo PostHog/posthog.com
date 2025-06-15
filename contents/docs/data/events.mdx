@@ -119,3 +119,13 @@ Below is a list of some of the properties that PostHog captures by default in cl
 | Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
 | Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
 | IP Address                  | `$ip`                    | `192.168.1.1`                  |
+
+## Managing event definitions
+
+On the [events management page](https://us.posthog.com/data-management/events), you can edit event tags and descriptions. These show up when searching for events throughout PostHog and provide more context about the purpose of the event.
+
+You can also change the event status to:
+
+1. **Verified.** Adds a checkmark next to the event definition wherever it is in PostHog.
+2. **Visible (default).** The standard visibility for events, nothing special.
+3. **Hidden.** Hides an event from being searched for throughout PostHog. Useful as an alternative to deleting events and preventing people from using old events in their analysis. 
