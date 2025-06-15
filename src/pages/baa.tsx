@@ -116,7 +116,7 @@ function BAAGenerator() {
                 
                 <h1 className="text-3xl font-bold text-green">BAA request received</h1>
                 <p className="text-center">
-                Thanks for submitting your information. If you subscribe to our Scale or Enterprise add-on, we'll get back
+                Thanks for submitting your information. If you subscribe to our Boost, Scale, or Enterprise add-on, we'll get back
                 to you soon to finalize the agreement.
                 </p>
                 <p className="text-center mb-0">
