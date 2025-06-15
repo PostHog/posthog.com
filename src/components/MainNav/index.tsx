@@ -222,7 +222,7 @@ function Tooltip({
 const ActiveBackground = ({ mobile = false }) => {
     return (
         <span
-            className={`bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
+            className={`active-tab bg-light dark:bg-dark absolute w-full h-[calc(100%+1px)] left-0 inset-0
                 before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
                 after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark ${
                     mobile
