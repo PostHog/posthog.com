@@ -326,11 +326,43 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     type
                 }
             }
-            allSdkReferences {
+            allSdkReferencesJson {
                 nodes {
-                    description
                     name
                     version
+                    description
+                    classes {
+                        _868 {
+                            extendsClass
+                            name
+                            id
+                            source {
+                                character
+                                fileName
+                                line
+                                url
+                            }
+                            description
+                            classMembers {
+                                description
+                                example
+                                name
+                                type
+                                parameters {
+                                    description
+                                    name
+                                    optional
+                                    type
+                                }
+                                sources {
+                                    character
+                                    fileName
+                                    line
+                                    url
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -753,12 +785,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: { id: node.id, ignoreWrapper: true },
         })
     })
-    console.log('result.data.allSdkReference', result.data.allSdkReference)
-    result.data.allSdkReference.nodes.forEach((node) => {
+    console.log('result.data.allSdkReferencesJson', result.data.allSdkReferencesJson)
+    result.data.allSdkReferencesJson.nodes.forEach((node) => {
         createPage({
             path: `/docs/references/${node.name}`,
             component: SdkReferenceTemplate,
-            context: { id: node.id, name: node.name, description: node.description },
+            context: {
+                name: node.name,
+                description: node.description,
+                version: node.version,
+                fullReference: node,
+                regex: `/docs/references/${node.name}`,
+            },
         })
     })
 }
