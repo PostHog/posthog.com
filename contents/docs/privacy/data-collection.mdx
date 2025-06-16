@@ -202,6 +202,14 @@ const handleCookieConsent = (consent) => {
 };
 ``` 
 
+<CalloutBox type="info" title="Cookieless tracking">
+
+Using `persistence: "memory"` helps comply with cookie and consent requirements. This does **not** affect what data is captured and stored by PostHog.
+
+You still need to configure data collection and [storage](/docs/privacy/data-storage) separately to comply with relevant regulations.
+
+</CalloutBox>
+
 The JavaScript Web SDK has a more detailed guide on [managing persistence and cookies](/docs/libraries/js/persistence).
 
 ## Identifying users

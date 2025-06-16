@@ -30,19 +30,19 @@ If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu
 
 ## What is the impact of GDPR on product analytics?
 
-The number one rule is don’t collect, store or use any personal data without a good reason for it, such as:
+The number one rule is don't collect, store or use any personal data without a good reason for it, such as:
 
-* The person gave you specific, unambiguous consent to process the data (e.g. they’ve opted in to your marketing email list). [Learn more about opt out](/docs/privacy/data-collection#asking-for-opt-out).
+* The person gave you specific, unambiguous consent to process the data (e.g. they've opted in to your marketing email list). [Learn more about opt out](/docs/privacy/data-collection#asking-for-opt-out).
 
 * Processing is necessary to enter into a contract to someone (e.g. you need to do a background check)
 
 * You need to process it to comply with a legal obligation of yours (e.g. you receive an order from the court in your jurisdiction)
 
-* You need to process the data to save somebody’s life (e.g. well, you’ll probably know when this one applies)
+* You need to process the data to save somebody's life (e.g. well, you'll probably know when this one applies)
 
-* Processing is necessary to perform a task in the public interest or to carry out some official function (e.g. you’re a private garbage collection company)
+* Processing is necessary to perform a task in the public interest or to carry out some official function (e.g. you're a private garbage collection company)
 
-* You have a legitimate interest to process someone’s personal data. This is the most flexible lawful basis, though the “fundamental rights and freedoms of the data subject” always override your interests, especially if it’s a minor's data
+* You have a legitimate interest to process someone's personal data. This is the most flexible lawful basis, though the “fundamental rights and freedoms of the data subject” always override your interests, especially if it's a minor's data
 
 ### You must acquire "Unambiguous Consent"
 
@@ -64,7 +64,7 @@ If you use PostHog with cookies on your website (for logged out users), you shou
 
 ### Data must be handled securely
 
-You’re required to handle data securely by implementing “appropriate technical and organizational measures.” [Learn more about access control features in PostHog](docs/privacy/data-storage#data-access-control).
+You're required to handle data securely by implementing “appropriate technical and organizational measures.” [Learn more about access control features in PostHog](docs/privacy/data-storage#data-access-control).
 
 This means both technical measures (like encrypting data) and organizational measures (like staff training and limiting access to personal data).
 
@@ -82,7 +82,7 @@ The PostHog's [realtime transformations](/docs/privacy/data-storage#processing-d
 
 ## How to set PostHog up for GDPR compliance
 
-GDPR requirements differ depending on how your business interacts with personal data. Companies can be data controllers, data processors, or both a controller and a processor. [Data controllers](https://gdpr-info.eu/art-24-gdpr/) collect their end users’ data and decide why and how it is processed. [Data processors](https://gdpr-info.eu/art-28-gdpr/) are businesses instructed to process customer data on behalf of other businesses.
+GDPR requirements differ depending on how your business interacts with personal data. Companies can be data controllers, data processors, or both a controller and a processor. [Data controllers](https://gdpr-info.eu/art-24-gdpr/) collect their end users' data and decide why and how it is processed. [Data processors](https://gdpr-info.eu/art-28-gdpr/) are businesses instructed to process customer data on behalf of other businesses.
 
 You will be using PostHog in one of two ways:
 
@@ -93,21 +93,23 @@ You will be using PostHog in one of two ways:
 
 ### Step 1: Choose a hosting provider
 
-We recommend using [PostHog Cloud EU](/eu) for GDPR compliance, though you can use PostHog Cloud US if you follow additional steps to protect user data. If self-hosting, the steps will depend on where you're hosting your data. 
+We recommend using [PostHog Cloud EU](/eu) for GDPR compliance, though you can use PostHog Cloud US if you follow additional steps to protect user data. 
+
+If self-hosting, the steps will depend on where you're hosting your data. 
 
 ### Step 2: Deploy PostHog
 
-If using PostHog Cloud EU, simply follow the steps in the onboarding process to start sending events. Read our [integration documentation](/docs/integrate) for more information on sending events to PostHog. 
+If using PostHog Cloud EU, simply follow the steps in the onboarding process to start sending events. Read our [getting started guides](/docs/getting-started/install) for more information on sending events to PostHog. 
 
 Deploying PostHog onto your own infrastructure is straightforward but we do not provide support for self-hosted instances. You can follow our [standard deployment guides](/docs/self-host) to get started. 
 
 ### Step 3: Security configuration
 
-When setting up a PostHog instance **we strongly recommend that you use HTTPS** to secure data in transmission, whether or not your instance has access to the wider internet. We also have a [guide for securing PostHog](/docs/self-host/configure/securing-posthog) which you should follow to further protect your instance.
+When using PostHog Cloud, you can manage security and [access control](/docs/privacy/data-storage#data-access-control) at the organization level, project level, and resource level. 
 
-We also strongly recommend that you limit access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links. Although aggregate data in dashboards should not contain personal data, it may be possible for malicious users to infer personal data unless it is evaluated thoroughly via expert determination. [Learn more about access control](/docs/privacy/data-storage#data-access-control).
+When self-hosting, it is up to you to [secure your instance](/docs/self-host/configure/securing-posthog). Minimally, we recommend using HTTPS to secure data in transmission and limiting access to PostHog and the infrastructure it is deployed on only to people who are authorized and need to access the data, including shared dashboard links.
 
-Finally, we advise caution when installing, building, and enabling [plugins](/docs/apps) for your PostHog instance. Apps are a great way to share and augment data from your instance with other systems, but it's essential to ensure you have the proper controls in place when sharing personal data outside of your self-hosted PostHog instance.
+We advise caution when installing, building, and enabling [CDPs](/docs/cdp) for your PostHog instance. CDPs are a great way to share and augment data from your instance with other systems, but it's essential to ensure you have the proper controls in place when sharing personal data outside of your self-hosted PostHog instance.
 
 ### Step 4: Configure consent
 
@@ -120,11 +122,13 @@ Within the consent you should identify the types of personal data that are being
 
 If a user **opts out** then you must stop all **data capturing and processing**. Explore PostHog features to implement [opting out of data collection](/docs/privacy/data-collection#asking-for-opt-out). It is up to you to ensure that your application logic either does not load PostHog SDKs or disables data capturing when a user opts out.
 
-### Step 5: Enable the Property Filter app (optional)
+### Step 5: Control what you collect and store
 
-If you are self-hosting PostHog outside the EU, or are using PostHog Cloud US, and are capturing EU users' data, you should enable the [Property Filter app](/apps/property-filter). This will allow you to anonymize user data. 
+PostHog provides tools to control what data is [collected](/docs/privacy/data-collection) and [stored](/docs/privacy/data-storage). These tools let you redact data before it is sent to PostHog servers and before it is stored by PostHog.
 
-## Complying with 'right to be forgotten' requests
+If you are self-hosting PostHog outside the EU, or are using PostHog Cloud US, and are capturing EU users' data, you should use the before storage [realtime transformations](/docs/privacy/data-storage#processing-data-before-storage) to anonymize user data.
+
+### Step 6: Complying with 'right to be forgotten' requests
 
 A user must be able to request that their data be removed from PostHog. How you facilitate that request is up to you. For example, you could accept requests via email or form submission.
 
