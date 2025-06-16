@@ -42,6 +42,7 @@ import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import { IconCheck } from '@posthog/icons'
+import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -326,7 +327,6 @@ export default function Handbook({
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
     )
-    const [copied, setCopied] = React.useState<boolean>(false)
 
     const A = (props) => (
         <Link
@@ -335,14 +335,6 @@ export default function Handbook({
             className="text-red hover:text-red font-semibold"
         />
     )
-
-    const handleCopyMarkdown = () => {
-        navigator.clipboard.writeText(contentWithSnippets)
-        setCopied(true)
-        setTimeout(() => {
-            setCopied(false)
-        }, 3000)
-    }
 
     const components = {
         Team,
@@ -453,20 +445,14 @@ export default function Handbook({
                                                         </span>
                                                     )}
                                                     {contentWithSnippets && (
-                                                        <button
-                                                            className={`text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow font-semibold ${
-                                                                copied ? '!text-green' : ''
-                                                            }`}
-                                                            onClick={handleCopyMarkdown}
-                                                        >
-                                                            {copied ? (
-                                                                <span className="flex items-center space-x-2">
-                                                                    <IconCheck className="size-4" /> Copied
-                                                                </span>
-                                                            ) : (
-                                                                'Copy as Markdown'
-                                                            )}
-                                                        </button>
+                                                        <CopyMarkdownActionsDropdown
+                                                            markdownContent={contentWithSnippets}
+                                                            pageUrl={
+                                                                typeof window !== 'undefined'
+                                                                    ? window.location.href
+                                                                    : undefined
+                                                            }
+                                                        />
                                                     )}
                                                 </div>
                                             )}
