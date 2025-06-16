@@ -24,19 +24,19 @@ import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Python', 'Node', 'Next.js', 'Nuxt', 'SvelteKit', 'Angular', 'Sentry', 'Manual']}>
+<Tab.Group tabs={['Web', 'Next.js', 'Python', 'Node', 'Sentry', 'Manual', 'React', 'Nuxt', 'SvelteKit', 'Angular', 'Hono']}>
     <Tab.List>
       <Tab>Web</Tab>
-      <Tab>React</Tab>
+      <Tab>Next.js</Tab>
       <Tab>Python</Tab>
       <Tab>Node</Tab>
-      <Tab>Next.js</Tab>
+      <Tab>Sentry</Tab>
+      <Tab>Manual/API</Tab>
+      <Tab>React</Tab>
       <Tab>Nuxt</Tab>
       <Tab>SvelteKit</Tab>
       <Tab>Angular</Tab>
-      <Tab>Sentry</Tab>
       <Tab>Hono</Tab>
-      <Tab>Manual/API</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -45,10 +45,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
-          <ReactInstall />
-          <JSWebErrorTracking />
-          <CustomErrorBoundary />
-          <UploadSourceMaps />
+          <NextJSErrorTracking />
         </Tab.Panel>
         <Tab.Panel>
           <PythonInstall />
@@ -60,7 +57,16 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
-          <NextJSErrorTracking />
+          <SentryInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+          <ManualErrorTracking />
+        </Tab.Panel>
+        <Tab.Panel>
+          <ReactInstall />
+          <JSWebErrorTracking />
+          <CustomErrorBoundary />
+          <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
           <NuxtErrorTracking />
@@ -74,13 +80,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <UploadSourceMaps />
         </Tab.Panel>
         <Tab.Panel>
-          <SentryInstall />
-        </Tab.Panel>
-        <Tab.Panel>
           <HonoErrorTracking />
-        </Tab.Panel>
-        <Tab.Panel>
-          <ManualErrorTracking />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>
