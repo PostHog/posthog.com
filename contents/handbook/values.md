@@ -14,7 +14,7 @@ In return, we ask for extraordinarily high ownership. To succeed you need to be 
 
 Great people at PostHog can take very high level direction, and ship quickly to find out as quickly as possible if our plans can survive contact with customers!
 
-Being the driver means getting stuff done _yourself_. We've had non technical people create hardware products, coding in C++, we've got designers that will ship the CSS not just create the file in Figma. Our salespeople are told that it's key if they can't answer more technical questions, they should educate themselves more deeply for next time. We like people to go full stack instead to reduce the number of dependencies.
+Being the driver means getting stuff done _yourself_. We've had non technical people create hardware products, coding in C++, we've got designers that will ship the CSS not just create the file in Figma. Our salespeople answer technical questions without engineers as backup - and if they don't know the answer, they educate themselves more deeply for next time. We like people to go full stack instead to reduce the number of dependencies.
 
 ## Make it public
 
