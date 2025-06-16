@@ -5,6 +5,7 @@ export interface SlideConfig {
     name: string
     component?: React.ComponentType<any>
     props?: Record<string, any>
+    template?: string
 }
 
 export interface SlideConfigOptions {
@@ -13,6 +14,7 @@ export interface SlideConfigOptions {
     order?: string[]
     overrides?: Record<string, Partial<SlideConfig>>
     custom?: SlideConfig[]
+    templates?: Record<string, string>
 }
 
 // Default slide configuration
@@ -38,6 +40,7 @@ export const defaultSlides: Record<string, SlideConfig> = {
  * @param options.order - Custom order for slides (remaining slides will be appended in default order)
  * @param options.overrides - Override properties for specific slides
  * @param options.custom - Array of custom slides to add
+ * @param options.templates - Specify templates for slides (e.g., overview: 'stacked')
  *
  * @returns Array of SlideConfig objects
  *
@@ -61,6 +64,15 @@ export const defaultSlides: Record<string, SlideConfig> = {
  *     }
  * })
  *
+ * // Use different overview slide templates
+ * const slides = createSlideConfig({
+ *     templates: {
+ *         overview: 'stacked'  // Use OverviewSlideStacked instead of default columns
+ *     }
+ * })
+ *
+ * // Template options: 'columns' (default), 'stacked', 'overlay'
+ *
  * // Add custom slides
  * const slides = createSlideConfig({
  *     custom: [
@@ -75,12 +87,14 @@ export function createSlideConfig({
     order = [],
     overrides = {},
     custom = [],
+    templates = {},
 }: {
     include?: string[]
     exclude?: string[]
     order?: string[]
     overrides?: Record<string, Partial<SlideConfig>>
     custom?: SlideConfig[]
+    templates?: Record<string, string>
 } = {}): SlideConfig[] {
     // Get all available slide slugs
     const slideSlugs = Object.keys(defaultSlides)
@@ -104,12 +118,15 @@ export function createSlideConfig({
     let slides = filteredSlugs.map((slug) => {
         const defaultSlide = defaultSlides[slug]
         const override = overrides[slug] || {}
+        const template = templates[slug]
 
         return {
             ...defaultSlide,
             ...override,
             // Ensure slug is preserved
             slug: defaultSlide.slug,
+            // Add template if specified
+            ...(template && { template }),
         }
     })
 

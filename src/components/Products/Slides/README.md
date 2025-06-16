@@ -260,133 +260,37 @@ Each slide component accepts specific props and can be customized:
 
 Populate data for a product in `src/hooks/useProducts.tsx`. (This will eventually move to the billing API.) If the product isn't fully finished, use @src/hooks/useProduct.tsx, as it gets checked first and can exist without the full data structure needed for the billing API.
 
+### Slide Templates (Overview Slides)
+
+You can use different templates of the overview slide to match your product's visual style:
+
+```tsx
+// Use stacked layout (horizontal split)
+const slides = createSlideConfig({
+    templates: {
+        overview: 'stacked'
+    }
+})
+
+// Use overlay layout (centered with background)
+const slides = createSlideConfig({
+    templates: {
+        overview: 'overlay'
+    }
+})
+
+// Use columns layout (default)
+const slides = createSlideConfig({
+    templates: {
+        overview: 'columns'  // or leave blank for default
+    }
+})
 ```
 
-    {
-        Icon: IconRewindPlay,
-        name: 'Session replay',
-        handle: 'session_replay',
-        slug: 'session-replay',
-        title: 'Watch people use your product',
-        description: '',
-        color: 'yellow',
-        seo: {
-            title: 'Session replay - PostHog',
-            description: 'Watch people use your product to diagnose issues and understand user behavior',
-        },
+#### Available Overview Slide Templates:
 
-        screenshots: [
-            {
-                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
-                alt: 'Session replay screenshot',
-            },
-        ],
-        hog: {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
-            alt: 'A hedgehog watching some session recordings',
-        },
-        slider: {
-            marks: [5000, 25000, 120000, 500000],
-            min: 5000,
-            max: 500000,
-        },
-        volume: 5000,
-        customers: {
-            hasura: {
-                headline: 'improved conversion rates by 10-20%',
-                description: "We wouldn't have noticed that needed fixing without PostHog's session replays.",
-            },
-            elevenlabs: {
-                headline: 'uses replays and surveys when testing ideas',
-                description:
-                    'We watch lots of replays when testing a feature, and love how easy it is to launch surveys',
-            },
-        },
-        features: [
-            {
-                title: 'Event timeline',
-                headline: 'Event timeline',
-                description:
-                    "See the history of everything that happened in a user's session, including clicks, scrolls, and more.",
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/timeline.png',
-                        alt: 'Timeline',
-                    },
-                ],
-            },
-            {
-                title: 'More features',
-                headline: 'More features',
-                features: [
-                    {
-                        title: 'Filter by event',
-                        description: 'Filter by events to quickly find relevant recordings',
-                    },
-                ],
-            },
-        ],
-        questions: [
-            {
-                question: 'Why are users dropping off in my funnel?',
-                url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
-            },
-            { question: 'How do I figure out how to lower churn?', url: '/tutorials/churn-rate#session-recordings' },
-        ],
-        comparison: {
-            summary: {
-                them: [
-                    {
-                        title: 'Error tracking',
-                        subtitle: 'In progress!',
-                        subtitleUrl: 'https://github.com/PostHog/posthog/issues/23400',
-                    },
-                    {
-                        title: 'Alerting',
-                        subtitle: 'In progress!',
-                        subtitleUrl: 'https://github.com/PostHog/posthog/issues/14331',
-                    },
-                ],
-                us: [
-                    {
-                        title: 'Interlinking with feature flags and insights',
-                        subtitle: 'Jump between them easily',
-                    },
-                    {
-                        title: 'Collaboration, sharing, and embedding exporting recordings',
-                    },
-                    {
-                        title: 'No limits on how many recordings captured',
-                    },
-                ],
-            },
-            features: [
-                {
-                    feature: 'Flutter recordings',
-                    companies: {
-                        Hotjar: false,
-                        LogRocket: false,
-                        Matomo: false,
-                        FullStory: false,
-                        PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
-                    },
-                },
-            ],
-        },
-        pairsWith: [
-            {
-                slug: '/product-analytics',
-                description: 'Jump into a playlist of session recordings directly from any time series in a graph',
-            },
-            {
-                slug: '/feature-flags',
-                description: "See which feature flags are enabled for a user's session",
-            },
-            {
-                slug: '/experiments',
-                description:
-                    'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
-            },
-        ],
-    },
-    ```
+- **Columns (Default)**: Traditional layout with content in left column and images/hog on the right
+- **Stacked**: Horizontal split layout with larger icon and side-by-side content and images  
+- **Overlay**: Centered vertical layout with background image and prominent centered content
+
+All templates accept the same props and work with existing product data structure.

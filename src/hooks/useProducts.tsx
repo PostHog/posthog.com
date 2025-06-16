@@ -990,7 +990,7 @@ window.posthog.onFeatureFlags(function () {
             {
                 src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png',
                 alt: 'Feature flags screenshot',
-                classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
+                classes: '',
             },
         ],
         hog: {

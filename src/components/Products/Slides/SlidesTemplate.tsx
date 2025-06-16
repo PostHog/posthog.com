@@ -7,6 +7,9 @@ import { useCustomers } from 'hooks/useCustomers'
 import { docsMenu } from '../../../navs'
 import SlideThumbnails from './SlideThumbnails'
 import OverviewSlide from './OverviewSlide'
+import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
+import OverviewSlideStacked from './OverviewSlide/OverviewSlideStacked'
+import OverviewSlideOverlay from './OverviewSlide/OverviewSlideOverlay'
 import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
 import QuestionsSlide from './QuestionsSlide'
@@ -58,14 +61,29 @@ export default function SlidesTemplate({
         )
     }
 
-    // Create slide content based on slug
-    const createSlideContent = (slug: string, customProps?: Record<string, any>) => {
+    // Create slide content based on slug and version
+    const createSlideContent = (slug: string, customProps?: Record<string, any>, template?: string | number) => {
         const props = { ...customProps }
 
         switch (slug) {
-            case 'overview':
+            case 'overview': {
+                // Get the appropriate overview slide component based on template
+                const getOverviewComponent = (template?: string | number) => {
+                    switch (template) {
+                        case 'stacked':
+                            return OverviewSlideStacked
+                        case 'overlay':
+                            return OverviewSlideOverlay
+                        case 'columns':
+                        default:
+                            return OverviewSlideColumns
+                    }
+                }
+
+                const OverviewComponent = getOverviewComponent(template)
+
                 return (
-                    <OverviewSlide
+                    <OverviewComponent
                         productName={productData?.name}
                         overview={productData?.overview}
                         screenshots={productData?.screenshots}
@@ -75,6 +93,7 @@ export default function SlidesTemplate({
                         {...props}
                     />
                 )
+            }
 
             case 'customers':
                 return (
@@ -164,10 +183,10 @@ export default function SlidesTemplate({
     }
 
     // Create raw slides from configuration
-    const rawSlides = slideConfig.map(({ slug, name, component: CustomComponent, props }) => ({
+    const rawSlides = slideConfig.map(({ slug, name, component: CustomComponent, props, template }) => ({
         name,
         slug,
-        content: CustomComponent ? <CustomComponent {...props} /> : createSlideContent(slug, props),
+        content: CustomComponent ? <CustomComponent {...props} /> : createSlideContent(slug, props, template),
     }))
 
     // Create slides with both raw content and wrapped content for different contexts
