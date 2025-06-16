@@ -11,16 +11,17 @@ You should consider the following tools to help you manage data collection:
 
 | Feature | Description |
 |---------|-------------|
-| [Asking for opt out](#asking-for-opt-out) | A top level opt out of all data collection |
+| [Asking for opt out](#asking-for-opt-out) | A top-level opt out of all data collection |
 | [Autocapture behavior](#autocapture) | Configure what elements and interactions are automatically captured |
 | [Masking sensitive information](#masking-sensitive-information) | Prevent specific sensitive data from being collected |
 | [Overriding captured events](#overriding-captured-events) | Modify or filter event data before it's sent to PostHog |
 | [Cookieless tracking](#cookieless-tracking) | Track users without using browser cookies |
 | [Identifying users](#identifying-users) | Set up user identification and manage user properties |
 
-If you require that certain data never reaches PostHog servers, you can use one of the tools below to block data from being captured.
+If you require that certain data never reaches PostHog servers, you can use one of the tools below to prevent data from being captured.
 
 ## Asking for opt out
+
 Before capturing data, you may need to ask your users for consent. PostHog provides a top level switch to control data collection. 
 
 Opting out on a PostHog client will prevent **all data** from being captured and sent to PostHog. This includes any autocaptures, manual captures, and session replays.
@@ -129,7 +130,7 @@ The following masking techniques are available:
 
 ### Private by default 
 
-If you have data that should never be captured, a safe way to start with PostHog is to mask all input and text, only selectively unmasking elements that you need to capture.
+If you have data that should never be captured, a safe way to start with PostHog is to mask all inputs and text, only selectively unmasking elements that you need to capture.
 
 You can set specific [data attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/How_to/Use_data_attributes) on elements to control whether they are captured or not:
 
@@ -139,7 +140,7 @@ You can set specific [data attributes](https://developer.mozilla.org/en-US/docs/
     maskAllInputs: true,
     maskTextSelector: "*",
     maskTextFn: (text, element) => {
-        // only `<element data-capture="true">` will be captured
+        // only elements with `data-capture="true"` will be captured
         if (element?.dataset['capture'] === 'true') {
             return text
         }
@@ -156,16 +157,13 @@ Selectively unmasking elements is not currently available for mobile session rep
 
 </CalloutBox>
 
-
-Defaulting to not capture in session replay makes unmasking elements a conscious choice and keeps you in control of what's captured.
+Masking all inputs and text by default in session replay ensures that data is only captured when explicitly unmasked, putting you in control of what's captured.
 
 ## Overriding captured events
 
 Before an event is sent to PostHog, you have a final chance to modify it to remove sensitive information. You can do this by using the `before_send` hook. This hook is **only available for the JavaScript Web SDK**.
 
-```js-web focusOnLines=2-11
-import { beforeSend } from './beforeSend'
-
+```js-web
 posthog.init('<ph_project_api_key>', {
   api_host: 'https://us.i.posthog.com',  // usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
   capture_pageview: 'history_change',
