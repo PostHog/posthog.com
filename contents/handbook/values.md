@@ -18,9 +18,9 @@ Being the driver means getting stuff done _yourself_. We've had non technical pe
 
 ## Make it public
 
-We're very transparent for so many reasons. 
+We default to transparency with everything we work on. That means we make a lot of things public: [our code](https://github.com/posthog/posthog), our handbook, [our roadmap](/handbook/strategy/roadmap), [how we pay](/handbook/people/compensation) (or even [let go of](/handbook/people/offboarding)) people, [what our strategy is](/handbook/why-does-posthog-exist), and [who we have raised money from](/handbook/strategy/investors).
 
-Internally, a culture of transparency looks like managers telling you to raise feedback directly with the person it concerns instead of solving problems for you, it means changing teams around in public slack channels
+Internally, a culture of transparency looks like managers telling you to raise feedback directly with the person it concerns instead of solving problems for you, it means changing teams around in public slack channels, it means detailed financial information, live updates on fundraising and board slide access.
 
 Being transparent externally helps us achieve our mission - we write about what we're working on so the world can take advantage of the lessons we're learning, and so they know how to work with us better. Knowing that thousands of people will read our handbook pages forces clearer thinking. And, for free, we can build trust in a way other vendors just choose not to.
 
@@ -49,12 +49,6 @@ We have learned the clearest lessons at PostHog by doing things, not from hypoth
 Sometimes this approach might mean you ship something that others don't agree with. You will need to be willing to throw away work sometimes, because the upside – not needing to get lots of approval to do stuff and being able to take more bets – means we all move so much faster that mistakes are a lot less costly.
 
 Why not now doesn't just mean shipping huge product features. It may mean diving into a small customer support issue quickly to delight them – this is one of the main reasons people recommend us to others.
-
-## Make it public
-
-We default to transparency with everything we work on. That means we make a lot of things public: our handbook, [our roadmap](/handbook/strategy/roadmap), [how we pay](/handbook/people/compensation) (or even [let go of](/handbook/people/offboarding)) people, [what our strategy is](/handbook/why-does-posthog-exist), and [who we have raised money from](/handbook/strategy/investors). Internally, we go even further – providing financial information, live updates on fundraising, and board slide access.
-
-This enables the strongest community growth possible. It causes the core team to raise the bar on their work, it provides the context needed for people to work across multiple timezones, and it enables a deep work-heavy and meeting-light culture. It creates trust.
 
 ## Optimistic by default
 
