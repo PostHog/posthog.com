@@ -45,7 +45,7 @@ First, create your feature flag in PostHog:
 
 ### Step 2: Capture person properties on evaluation
 
-When evaluating the flag in your code, capture the result as a person property. Here's an example using the JavaScript SDK:
+When evaluating the flag in your code, capture the result as a [person property](/docs/product-analytics/person-properties). Here's an example using the JavaScript SDK:
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
