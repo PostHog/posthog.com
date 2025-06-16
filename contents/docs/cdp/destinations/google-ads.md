@@ -8,7 +8,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-> **IMPORTANT:** Check [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for details on installing the integration.
+> **IMPORTANT:** This is an experimental destination that we do not provide offical support for. Check out [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for more details on installing the integration.
 
 <Requirements />
 
