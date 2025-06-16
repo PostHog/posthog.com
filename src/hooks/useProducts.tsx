@@ -412,6 +412,64 @@ const initialProducts = [
                 ],
             },
         ],
+        questions: [
+            {
+                question: 'How do I calculate new vs returning users?',
+                url: '/tutorials/track-new-returning-users',
+            },
+            {
+                question: 'What’s my churn rate? / How can I lower my churn rate?',
+                url: '/tutorials/churn-rate',
+            },
+            {
+                question: 'What features have the highest churn?',
+                url: '/tutorials/churn-rate#lifecycle-charts',
+            },
+            {
+                question: 'Which of my features increase user retention?',
+                url: '/tutorials/feature-retention',
+            },
+            {
+                question: 'How do I track ad conversion?',
+                url: '/tutorials/performance-marketing#tracking-conversion-from-traffic-to-signups',
+            },
+            {
+                question: 'How can I find my power users? / What are my power users doing differently?',
+                url: '/tutorials/power-users#identifying-your-power-user',
+            },
+            {
+                question: 'Where do my users spend the most time on?',
+                url: '/tutorials/session-metrics',
+            },
+            {
+                question: 'How do I get insights about my data using regex?',
+                url: '/tutorials/regex-basics',
+            },
+            {
+                question: 'How are changes improving my activation flow?',
+                url: '/tutorials/explore-insights-session-recordings#watching-users-through-funnels',
+            },
+            {
+                question: 'How do far are my users scrolling down my app?',
+                url: '/tutorials/scroll-depth',
+            },
+            {
+                question: 'How to I track performance marketing?',
+                url: '/tutorials/performance-marketing',
+            },
+            {
+                question: 'How do I measure growth loops?',
+                url: '/blog/growth-loops#measuring-your-growth-loop',
+            },
+            {
+                question: 'How many users return to use my product each day?',
+                url: '/tutorials/track-new-returning-users#calculating-returning-users',
+            },
+            {
+                question: 'How many users return to use my product each week?',
+                url: '/tutorials/track-new-returning-users',
+            },
+        ],
         comparison: {
             summary: {
                 them: [
