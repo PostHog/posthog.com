@@ -79,7 +79,7 @@ if (flagValue === 'test') {
 }
 ```
 
-### Step 2: Add override conditions to your flag
+### Step 3: Add override conditions to your flag
 
 Now update your feature flag to check for existing assignments:
 
