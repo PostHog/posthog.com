@@ -183,58 +183,14 @@ import SDKMigration from "../../migrate/_snippets/sdk-migration.mdx"
 
 ## Serverless environments (Render/Lambda/...)
 
-By default, the library buffers events before sending them to the capture endpoint, for better performance. This can
-lead to lost events in serverless environments, if the python process is terminated by the platform before the buffer
-is fully flushed. To avoid this, you can either:
+By default, the library buffers events before sending them to the capture endpoint, for better performance. This can lead to lost events in serverless environments, if the Python process is terminated by the platform before the buffer is fully flushed. To avoid this, you can either:
 
-- ensure that `posthog.flush()` is called after processing every request, by adding a middleware to your server: this allows `posthog.capture()` to remain asynchronous for better performance.
-- enable the `sync_mode` option when initializing the client, so that all calls to `posthog.capture()` become synchronous.
+- Ensure that `posthog.flush()` is called after processing every request by adding a middleware to your server. This allows `posthog.capture()` to remain asynchronous for better performance. `posthog.flush()` is blocking.
+- Enable the `sync_mode` option when initializing the client, so that all calls to `posthog.capture()` become synchronous.
 
 ## Django
 
 See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django.
-
-## Sentry integration
-
-When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
-
-### Example implementation
-
-See the [`sentry_django_example`](https://github.com/PostHog/posthog-python/tree/master/sentry_django_example) project for a complete example.
-
-```python
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-from posthog.sentry.posthog_integration import PostHogIntegration
-
-PostHogIntegration.organization = "orgname"
-
-sentry_sdk.init(
-    dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
-    integrations=[DjangoIntegration(), PostHogIntegration()],
-)
-
-# Also set `posthog_distinct_id` tag
-from sentry_sdk import configure_scope
-
-with configure_scope() as scope:
-    scope.set_tag('posthog_distinct_id', 'some distinct id')
-```
-
-#### Example implementation with Django
-
-This can be made automatic in Django, by adding the following middleware and settings to `settings.py`:
-
-```python
-
-MIDDLEWARE = [
-    "posthog.sentry.django.PosthogDistinctIdMiddleware"
-]
-
-POSTHOG_DJANGO = {
-    "distinct_id": lambda request: request.user and request.user.distinct_id
-}
-```
 
 ## Alternative name
 
