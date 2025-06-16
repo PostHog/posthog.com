@@ -38,7 +38,7 @@ There's an entire internet of writing on [how to find product-market fit](/found
 
 This is sometimes referred to as the product-market fit trifecta.
 
-[pmf trifecta](https://res.cloudinary.com/dmukukwp6/image/upload/pmf_trifecta_e7740d6e5c.png)
+![pmf trifecta](https://res.cloudinary.com/dmukukwp6/image/upload/pmf_trifecta_e7740d6e5c.png)
 
 Don’t just ask "Do you have product-market fit?" Probe the theme.
 
@@ -152,7 +152,7 @@ Avoid founders who instantly talk about the big companies their team came from, 
 
 1. The founders are blinded by sparkly CVs full of big names and titles.
 
-2. They've probably hired a whole bunch of mid-tier people on huge wages.[1](#footnotes)
+2. They've probably hired a whole bunch of mid-tier people on huge wages.[^1]
 
 Neither are a strong sign of success for a startup.
 
@@ -227,6 +227,6 @@ Finally, early-stage companies often fall apart because the founders break up, s
 
 ## Footnotes
 
-[1] Obviously there are lots of very talented people at these companies. The point here isn’t “hiring from MAANG companies is bad” but that startups shouldn’t hire people based mainly on where they worked before. 
+[^1]: Obviously there are lots of very talented people at these companies. The point here isn’t “hiring from MAANG companies is bad” but that startups shouldn’t hire people based mainly on where they worked before. 
 
 
