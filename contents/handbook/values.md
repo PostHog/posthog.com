@@ -30,15 +30,7 @@ So much about how we work is different.
 
 Weirdness can just be the absurd lengths we are willing to go to. It can mean redesigning an already world-class website, for the 5th time. It can mean shipping _literally_ every product that relates to customer data, with teams of just one to five people competing with $200bn+ companies, successfully.
 
-We aren't weird for the sake of it. We want the company perfectly optimized for our strategy. We have small teams when very few others do, because we are going to build 50+ products. We post billboards of our founders' face because no one else is brave enough thus it stands out. Even the little things - like having _pricing_ on our pricing page!
-
-## We haven't built our defining feature yet
-
-A concept in improv-compedy is "yes, and" - where people build on top of each other's ideas. We ask the same thing at PostHog.
-
-The biggest and boldest ideas _are also_ the easiest to criticize. If we make it painful to raise ideas for how we can innovate, by responding to every idea with 25 reasons why it won't work, then ideas will simply stop coming. And that's the opening for someone else to come and disrupt our mission.
-
-We should never stop iterating. You learn faster and help PostHog perform better by getting what you're working on into the real world. We expect you to ship new designs, features, or whatever is needed for your role in tiny chunks, frequently, and often before you feel ready.
+We aren't weird for the sake of it. We want the company perfectly optimized for our strategy. We have small teams when very few others do, because we are going to build 50+ products. We post billboards of our founders' faces because no one else is brave enough thus it stands out. Even the little things - like having _pricing_ on our pricing page!
 
 ## Why not now?
 
@@ -53,6 +45,8 @@ _Why not now?_ doesn't just mean shipping huge product features. It may mean div
 ## Optimistic by default
 
 We have a lot of control over our direction, and we've been very well served by shooting for the best case scenario every time we make a decision. You'll hear us say things like "play offense, not defense", "how do we 10x this", "how do we win in 10 years' time". Aiming for the best possible upside and sometimes missing is much better than never trying.
+
+This is especially true when we think of new ideas - any big new thing can sound pretty silly at first, almost by definition. You'll hear PostHog war cries like "we haven't built our defining feature yet, maybe this". It never is, but that's _exactly_ the point. What we've already done is less important than what we do next. If we make new ideas painful to share with others, they'll eventually stop coming.
 
 At a simple level, we want to be surrounded by people that are enthusiastic, passionate and happy. PostHog is a group of people working together with a shared goal. A positive, encouraging atmosphere simply means everyone is going to have a lot more fun and will be able to stick around for the full adventure here.
 
