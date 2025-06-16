@@ -709,12 +709,22 @@ export const handbookSidebar = [
                 url: '/handbook/content',
             },
             {
-                name: 'Docs ownership',
+                name: 'Docs',
                 url: '/handbook/content/docs',
-            },
-            {
-                name: 'Docs style guide',
-                url: '/handbook/content/docs-style-guide',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/docs',
+                    },
+                    {
+                        name: 'Docs ownership',
+                        url: '/handbook/content/docs-ownership',
+                    },
+                    {
+                        name: 'Docs style guide',
+                        url: '/handbook/content/docs-style-guide',
+                    },
+                ],
             },
             {
                 name: 'Newsletter',
@@ -1286,7 +1296,11 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
-                        name: 'Contracts',
+                        name: 'Contract Rules',
+                        url: '/handbook/growth/sales/contract-rules',
+                    },
+                    {
+                        name: 'Creating Contracts',
                         url: '/handbook/growth/sales/contracts',
                     },
                     {
@@ -2006,8 +2020,8 @@ export const docsMenu = {
                             url: '/docs/api/capture',
                         },
                         {
-                            name: 'Decide',
-                            url: '/docs/api/decide',
+                            name: 'Flags',
+                            url: '/docs/api/flags',
                         },
                         {
                             name: 'Queries',
@@ -3317,6 +3331,21 @@ export const docsMenu = {
                     name: 'Under the hood',
                 },
                 {
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPeople',
+                    color: 'orange',
+                },
+                {
+                    name: 'Sample size and running time',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconDashboard',
+                    color: 'blue',
+                },
+                {
+                    name: 'Bayesian method',
+                },
+                {
                     name: 'Statistics overview',
                     url: '/docs/experiments/statistics',
                     icon: 'IconBook',
@@ -3341,15 +3370,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Traffic allocation',
-                    url: '/docs/experiments/traffic-allocation',
-                    icon: 'IconPeople',
-                    color: 'orange',
+                    name: 'Frequentist method',
                 },
                 {
-                    name: 'Sample size and running time',
-                    url: '/docs/experiments/sample-size-running-time',
-                    icon: 'IconDashboard',
+                    name: 'Overview',
+                    url: '/docs/experiments/frequentist-method',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
             ],
