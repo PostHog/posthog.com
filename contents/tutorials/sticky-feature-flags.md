@@ -38,7 +38,7 @@ Sticky flags solve this by:
 
 First, create your feature flag normally in PostHog:
 
-1. Go to [Feature Flags](https://app.posthog.com/feature_flags) and click "New feature flag"
+1. Go to [Feature Flags](https://app.posthog.com/feature_flags) and click **New feature flag**
 2. Set your flag key (e.g., `sticky-experiment`)
 3. Configure your initial rollout conditions
 4. Save the flag
