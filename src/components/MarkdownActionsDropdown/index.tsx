@@ -20,35 +20,13 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
 
     // Consolidated styles
     const menuItemButtonStyles =
-        '!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center'
+        '!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center !text-primary dark:!text-primary-dark hover:!text-primary dark:hover:!text-primary-dark'
     const menuItemIconStyles = 'w-4 h-4 mr-3'
 
     const handleCopyMarkdown = () => {
         navigator.clipboard.writeText(markdownContent)
         setCopiedState('markdown')
         setTimeout(() => setCopiedState(null), 2000)
-    }
-
-    const handleViewAsMarkdown = () => {
-        const url = new URL(pageUrl)
-        const markdownUrl = `${url.origin}${url.pathname}.md`
-        window.open(markdownUrl, '_blank')
-    }
-
-    const handleOpenInChatGPT = () => {
-        const url = new URL(pageUrl)
-        const markdownUrl = `${url.origin}${url.pathname}.md`
-        const prompt = `Read from ${markdownUrl} so I can ask questions about it`
-        const encodedPrompt = encodeURIComponent(prompt)
-        window.open(`https://chat.openai.com/?q=${encodedPrompt}`, '_blank')
-    }
-
-    const handleOpenInClaude = () => {
-        const url = new URL(pageUrl)
-        const markdownUrl = `${url.origin}${url.pathname}.md`
-        const prompt = `Read from ${markdownUrl} so I can ask questions about it`
-        const encodedPrompt = encodeURIComponent(prompt)
-        window.open(`https://claude.ai/new?q=${encodedPrompt}`, '_blank')
     }
 
     return (
@@ -86,24 +64,44 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             </Menu.Item>
 
                             <Menu.Item>
-                                <button onClick={handleViewAsMarkdown} className={menuItemButtonStyles}>
+                                <Link
+                                    to={`${new URL(pageUrl).origin}${new URL(pageUrl).pathname}.md`}
+                                    externalNoIcon
+                                    className={menuItemButtonStyles}
+                                >
                                     <IconEye className={menuItemIconStyles} />
                                     <span>View as Markdown</span>
-                                </button>
+                                </Link>
                             </Menu.Item>
 
                             <Menu.Item>
-                                <button onClick={handleOpenInChatGPT} className={menuItemButtonStyles}>
+                                <Link
+                                    to={`https://chat.openai.com/?q=${encodeURIComponent(
+                                        `Read from ${new URL(pageUrl).origin}${
+                                            new URL(pageUrl).pathname
+                                        }.md so I can ask questions about it`
+                                    )}`}
+                                    externalNoIcon
+                                    className={menuItemButtonStyles}
+                                >
                                     <IconExternal className={menuItemIconStyles} />
                                     <span>Open in ChatGPT</span>
-                                </button>
+                                </Link>
                             </Menu.Item>
 
                             <Menu.Item>
-                                <button onClick={handleOpenInClaude} className={menuItemButtonStyles}>
+                                <Link
+                                    to={`https://claude.ai/new?q=${encodeURIComponent(
+                                        `Read from ${new URL(pageUrl).origin}${
+                                            new URL(pageUrl).pathname
+                                        }.md so I can ask questions about it`
+                                    )}`}
+                                    externalNoIcon
+                                    className={menuItemButtonStyles}
+                                >
                                     <IconExternal className={menuItemIconStyles} />
                                     <span>Open in Claude</span>
-                                </button>
+                                </Link>
                             </Menu.Item>
                         </Menu.Items>
                     </>
