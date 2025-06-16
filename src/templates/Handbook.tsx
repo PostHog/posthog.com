@@ -50,7 +50,9 @@ const DestinationsLibraryCallout = () => {
             <p className="m-0 !mb-3 !mt-1.5">
                 We're building new destinations and want your input on what to build next.
             </p>
-            <CallToAction to="/cdp#library" size="sm">Browse the library</CallToAction>
+            <CallToAction to="/cdp#library" size="sm">
+                Browse the library
+            </CallToAction>
         </div>
     )
 }
