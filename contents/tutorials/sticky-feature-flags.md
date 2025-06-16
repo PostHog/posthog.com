@@ -106,8 +106,8 @@ The flag will now:
 - If no assignment exists, evaluate using your original rollout conditions
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_16_at_11_36_19_2b45a91b15.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_16_at_11_36_48_5e788cd57c.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_16_at_13_26_20_1248617250.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_16_at_13_26_39_6370387c98.png"
   alt="Flag with property-based variant overrides"
   classes="rounded"
 />
