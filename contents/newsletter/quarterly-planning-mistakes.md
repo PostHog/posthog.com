@@ -32,7 +32,7 @@ Many engineers get stuck trying to make their goals perfect. They fail to realiz
 
 There are two lessons to take from this.
 
-The first is to **not spend too much time planning**. Our quarterly planning meeting takes 1-1.5 hours max. 20% is reviewing the past and 80% is talking about goals for next quarter. It isn't days of prep and hours of meetings.
+The first is to **not spend too much time planning**. Our quarterly planning meetings take 1-1.5 hours max. 20% is reviewing the past and 80% is talking about goals for next quarter. Prep takes about an hour and is entirely async. This means less time spent in meetings 🥳.
 
 The second lesson is **not being afraid to change goals** midway through the quarter. Sometimes we get our goals wrong and that's ok. Circumstances change, delays happen, engineers need the freedom to adjust.
 
@@ -40,15 +40,15 @@ The second lesson is **not being afraid to change goals** midway through the qua
 
 We are big fans of making important changes as quickly as possible. Team changes are announced in Slack, we test in production, we get MVPs in the hands of users. When a team realizes they need a different goal, they have the autonomy to change it themselves and immediately start working on it. No elaborate “change of goals” meeting or processes.
 
-Again, it's not about perfectly matching the original goals set, but building a great product. It's better to change a goal to something useful than be stuck working on something useless because you said you would do it 2 months ago.
+Again, it's not about perfectly matching the original goals set, but building a great product. It's better to change a goal to something useful than be stuck working on something useless because you said you would 2 months ago.
 
 ## 2. Obsessing over metric-based OKRs
 
 In 2022, we required “OKRs” as part of quarterly planning, but eventually walked it back. We found engineers were agonizing over finding the right metrics while also feeling like metrics didn't accurately reflect their subjective view of progress.
 
-We also realized that after setting OKRs, engineers would go off and figure out what to build. They needed to translate an OKR into a plan they could work on. It's a lot clearer and faster to just write that down instead. Even if you are forced to use OKRs, it can be useful to write down a plan that you can use to guide your work.
+We also realized that after setting OKRs, engineers would go off and figure out what to build. They needed to translate an OKR into a plan they could work on. It's a lot clearer and faster to just write that down instead. Even if you are forced to use OKRs, writing down a plan is still useful for guiding your work.
 
-We learned that following conventional wisdom just because “Google does it” doesn't necessarily mean it's the right thing to do. Our engineering teams have evolved and are free to set goals and measurement methods, including using precise metrics (even OKRs) where appropriate. This has resulted in team goals like this:
+We learned that setting OKRs just because “Google does it” doesn't mean it's the right thing to do. We evolved and teams are now free to set goals and measurement methods, including using precise metrics (even OKRs) where appropriate. This has resulted in team goals like this:
 
 ![OKRs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/mistakes/okrs.png)
 
@@ -60,7 +60,7 @@ Early in PostHog's life, an engineer wanted to build session replay. Our co-foun
 
 Since then, engineers are in charge of figuring out what to build. Neither execs nor product managers tell engineers what to build. It's up to engineers to decide, but this means they need to form a strong opinion of what they want to build.
 
-When it comes to quarterly planning, our process looks like the “[W framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite/)” created by Lenny Rachitsky and Nels Gilbreth. The following pieces are passed between execs and teams:
+When it comes to quarterly planning, our process looks like the “[W framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite/)” created by Lenny Rachitsky and Nels Gilbreth. This process encourages teams and execs to work together in planning like this:
 
 1. **Context**: Execs share direction, overall objectives, strategy, mission, ICP, and more with teams. At PostHog, this is done through our weekly all-hands, 1:1s, [company handbook](https://posthog.com/handbook), `#tell-posthog-anything` messages, comments on RFCs, and more.
 
@@ -68,7 +68,7 @@ When it comes to quarterly planning, our process looks like the “[W framework]
 
 3. **Integration**: Execs add context from other teams, customers, and future plans. They make sure the plan is both realistic and ambitious enough. This usually happens just before or during the quarterly planning meeting.
 
-4. **Buy-in**: Engineers make final tweaks, confirm buy-in, and get rolling. The last step of quarterly planning at PostHog is a pull request to add the goals to the website which gets approved by the exec team.
+4. **Buy-in**: Engineers make final tweaks, confirm buy-in, and get rolling. The last step of quarterly planning at PostHog is always a pull request to add the goals to the website which gets approved by the exec team.
 
 ![W framework](https://res.cloudinary.com/dmukukwp6/image/upload/w_d7da48e563.png)
 
@@ -76,7 +76,7 @@ This process creates enough direction to make both the company and the small tea
 
 ## 4. Being unclear about what success looks like
 
-Quarterly planning aims to help you figure out what's important and increase your chances of accomplishing it next quarter. Neither can happen if you're not being clear about what the goal is.
+Quarterly planning aims to help you figure out what's important and increase your chances of achieving it next quarter. Neither can happen if you're not being clear about what the goal is.
 
 There are a lot of traps to fall into when setting goals such as:
 
@@ -117,7 +117,7 @@ Regularly checking quarterly goals provides benefits like:
 - Better understanding of capacity teams have for the next round of quarterly planning.
 - Public accountability for goals.
 
-Honestly, we think checking in is as important as quarterly planning itself.
+Honestly, we find checking in is as important as quarterly planning itself.
 
 ## 6. Planning the whole quarter in advance
 
@@ -130,7 +130,7 @@ Detailed plans fail due to unknown complexities and changing requirements. We've
 3. Lack of flexibility means not being able to spend time on more important work as it arises.
 4. The deadline doomloop. Trying to hit a deadline leads to cut corners, tech debt, and burn out. 
 
-The pressure to create a detailed plan often comes from a need for control. We find that relying on trust and feedback over process lessens this need for control. We empower people to make their own decisions, but that requires having a high bar for ourselves and our teammates, whether that is in hiring or day-to-day work.
+The pressure to create a detailed plan often comes from a need for control. Relying on trust and feedback over process lessens this need for control. We empower people to make their own decisions, but that requires having a high bar for ourselves and our teammates, whether that is in hiring or day-to-day work.
 
 ## More mistakes to watch out for:
 
@@ -140,6 +140,6 @@ The pressure to create a detailed plan often comes from a need for control. We f
 
 3. **Not having anti-goals.** When there is so much to build, it is often useful to write down what you *aren't* going to build. This improves focus on what really matters.
 
-4. **Lacking vision.** Although we are planning quarterly, you should have a vision for what the product should look like in the long run and be able to explain it. This isn't just for execs. This long-term vision should tie to your quarterly goals as well as align with broader company strategy and goals.
+4. **Lacking vision.** Although you plan quarterly, you should have a longer-term product vision too (and be able to explain it). This isn't just for execs. Engineers should be able to explain how the long-term vision ties to their quarterly goals and aligns with broader company strategy and goals.
 
 5. **Being dependent on other teams.** I've found that almost every time a goal is dependent on another team, it gets delayed or doesn't get done. The beauty of small teams is that they are autonomous. Dependency breaks this. Flag these in your plans before they become a problem.
