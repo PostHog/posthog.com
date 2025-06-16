@@ -69,10 +69,13 @@ export default function SessionReplay(): JSX.Element {
 
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
-    // const slides = createSlideConfig({
-    //     exclude: ['comparison-summary'],
-    //     order: ['overview', 'pricing', 'features']
-    // })
+    const slides = createSlideConfig({
+        // exclude: ['comparison-summary'],
+        // order: ['overview', 'pricing', 'features'],
+        templates: {
+            overview: 'columns', // Use the horizontal split layout
+        },
+    })
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 }
