@@ -50,18 +50,23 @@ When evaluating the flag in your code, capture the result as a person property. 
 **Important:** Use `$set_once` instead of `$set` to ensure the property is only set on the first evaluation and never overwritten.
 
 ```js
-// Check the feature flag
-const flagValue = posthog.isFeatureEnabled('sticky-experiment')
+// Check the multivariate feature flag for the variant value
+const flagValue = posthog.getFeatureFlag('sticky-experiment')
 
-// Capture the assignment as a person property
+// Option 1: Capture the assignment as a person property via event
 posthog.capture('sticky_flag_evaluated', {
   $set_once: { 
-    sticky_experiment_variant: flagValue ? 'test' : 'control' 
+    sticky_experiment_variant: flagValue 
   }
 })
 
+// Option 2: Set person property via identify
+posthog.identify('distinct_id', {
+  sticky_experiment_variant: flagValue ? 'test' : 'control'
+})
+
 // Use the flag value in your code
-if (flagValue) {
+if (flagValue === 'test') {
   // Show test variant
 } else {
   // Show control variant  
@@ -118,12 +123,12 @@ export default function StickyExperiment() {
     const flagValue = posthog.isFeatureEnabled('sticky-experiment')
     
     // Set the variant state
-    setVariant(flagValue ? 'test' : 'control')
+    setVariant(flagValue)
     
     // Capture the assignment (only sets on first evaluation)
     posthog.capture('sticky_flag_evaluated', {
       $set_once: { 
-        sticky_experiment_variant: flagValue ? 'test' : 'control' 
+        sticky_experiment_variant: flagValue
       }
     })
   }, [posthog])
@@ -154,19 +159,22 @@ app.get('/sticky-feature', async (req, res) => {
   
   // Evaluate the flag
   const flagValue = await posthog.isFeatureEnabled('sticky-experiment', userId)
-  const variant = flagValue ? 'test' : 'control'
   
   // Set the person property
   posthog.capture({
     distinctId: userId,
     event: 'sticky_flag_evaluated',
     properties: {
-      $set_once: { sticky_experiment_variant: variant }
+      $set_once: { sticky_experiment_variant: flagalue }
     }
   })
   
-  // Return appropriate response based on variant
-  res.json({ variant, feature: variant === 'test' ? 'new_feature' : 'old_feature' })
+  // Use the flag value in your code
+  if (flagValue === 'test') {
+    // Trigger test behavior
+  } else {
+    // Trigger control behavior
+  }
 })
 ```
 
