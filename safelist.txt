@@ -1,3 +1,16 @@
+[&_.bg-front]:fill-yellow
+[&_.bg-front]:fill-blue
+[&_.bg-front]:fill-salmon
+[&_.bg-front]:fill-red
+[&_.bg-front]:fill-green
+[&_.bg-front]:fill-green-2
+[&_.bg-front]:fill-purple
+[&_.bg-front]:fill-seagreen
+[&_.bg-front]:fill-sky-blue
+[&_.bg-front]:fill-lilac
+[&_.bg-front]:fill-lime-green
+[&_.bg-front]:fill-orange
+[&_.bg-secondary]:fill-[#B56C00]
 !pb-8
 !-mb-12
 -mb-12

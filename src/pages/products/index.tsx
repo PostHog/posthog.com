@@ -6,14 +6,17 @@ import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import { productMenu } from '../../navs'
+import useProduct from '../../hooks/useProduct'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
 import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
+import { IconPresentation } from 'components/OSIcons'
 
 export default function Products(): JSX.Element {
+    const allProducts = useProduct() as any[]
+
     return (
         <>
             <SEO
@@ -126,20 +129,21 @@ export default function Products(): JSX.Element {
                 ]}
             >
                 {(() => {
-                    // Group products by category
+                    // Filter out products without a category, then group by category
                     const categoryOrder = ['analytics', 'behavior', 'features', 'tools']
-                    const groupedProducts = productMenu.children.reduce((acc, product) => {
-                        const category = product.category || 'tools' // default to tools if no category
+                    const productsWithCategory = allProducts.filter((product: any) => product.category)
+                    const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {
+                        const category = product.category
                         if (!acc[category]) {
                             acc[category] = []
                         }
                         acc[category].push(product)
                         return acc
-                    }, {} as Record<string, typeof productMenu.children>)
+                    }, {} as Record<string, any[]>)
 
                     // Sort products alphabetically within each category
                     Object.keys(groupedProducts).forEach((category) => {
-                        groupedProducts[category].sort((a, b) => a.name.localeCompare(b.name))
+                        groupedProducts[category].sort((a: any, b: any) => a.name.localeCompare(b.name))
                     })
 
                     return (
@@ -169,21 +173,15 @@ export default function Products(): JSX.Element {
                                                             <ZoomHover key={product.slug}>
                                                                 <AppLink
                                                                     label={product.name}
-                                                                    url={product.url}
-                                                                    Icon={
-                                                                        <AppIcon
-                                                                            name="presentation"
-                                                                            className={`text-${product.color}`}
-                                                                        />
-                                                                    }
+                                                                    url={`/` + product.slug}
+                                                                    Icon={<IconPresentation />}
                                                                     background="bg-primary"
+                                                                    className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
                                                                 >
-                                                                    {React.createElement(
-                                                                        Icons[product.icon as keyof typeof Icons],
-                                                                        {
-                                                                            className: `size-3.5 text-${product.color} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -mt-0.5`,
-                                                                        }
-                                                                    )}
+                                                                    {product.Icon &&
+                                                                        React.createElement(product.Icon, {
+                                                                            className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
+                                                                        })}
                                                                 </AppLink>
                                                             </ZoomHover>
                                                         ))}

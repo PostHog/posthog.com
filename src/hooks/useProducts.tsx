@@ -60,6 +60,8 @@ const initialProducts = [
         name: 'Analytics',
         handle: 'product_analytics',
         color: 'blue',
+        colorSecondary: 'sky-blue',
+        category: 'analytics',
         slider: {
             marks: [0, MILLION, TEN_MILLION, FIFTY_MILLION, MAX_PRODUCT_ANALYTICS],
             min: 0,
@@ -395,6 +397,8 @@ const initialProducts = [
         slug: 'session-replay',
         answersDescription: 'Understand user behavior, identify friction points, and improve your product experience',
         color: 'yellow',
+        colorSecondary: '[#B56C00]',
+        category: 'behavior',
         seo: {
             title: 'Session replay - PostHog',
             description: 'Watch people use your product to diagnose issues and understand user behavior',
@@ -969,6 +973,8 @@ window.posthog.onFeatureFlags(function () {
         handle: 'feature_flags',
         slug: 'feature-flags',
         color: 'green',
+        colorSecondary: 'seagreen',
+        category: 'features',
         seo: {
             title: 'Feature flags - PostHog',
             description: 'Safely roll out features to specific users or groups',
@@ -1451,6 +1457,8 @@ window.posthog.onFeatureFlags(function () {
         name: 'Experiments',
         handle: 'feature_flags',
         color: 'purple',
+        colorSecondary: 'lilac',
+        category: 'features',
         billedWith: 'Feature flags',
         slug: '/experiments',
     },
@@ -1459,6 +1467,8 @@ window.posthog.onFeatureFlags(function () {
         name: 'Surveys',
         handle: 'surveys',
         color: 'red',
+        colorSecondary: 'salmon',
+        category: 'behavior',
         slider: {
             marks: [250, 2000, 15000, 100000],
             min: 250,
@@ -1472,6 +1482,8 @@ window.posthog.onFeatureFlags(function () {
         name: 'Data warehouse',
         handle: 'data_warehouse',
         color: 'purple',
+        colorSecondary: 'lilac',
+        category: 'tools',
         slider: {
             marks: [1000000, 10000000, 100000000, 1000000000],
             min: 1000000,
@@ -1485,6 +1497,8 @@ window.posthog.onFeatureFlags(function () {
         name: 'Error tracking',
         handle: 'error_tracking',
         color: 'orange',
+        colorSecondary: 'red',
+        category: 'behavior',
         slider: {
             marks: [100000, 1000000, 10000000, 50000000],
             min: 100000,

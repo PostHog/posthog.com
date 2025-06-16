@@ -168,6 +168,37 @@ export const IconPlayhead = (props: IconProps) => (
     </BaseIcon>
 )
 
+export const IconPresentation = (props: IconProps) => (
+    <BaseIcon viewBox="0 0 48 48" width="100%" height="100%" {...props}>
+        {/* rear slide bg */}
+        <rect className="bg-rear" x="10.0929" y="13.2957" width="34.9371" height="24.0678" />
+        {/* slide bg */}
+        <rect className="bg-front" x="6.21104" y="9.41382" width="34.1607" height="24.0678" />
+        {/* top bar */}
+        <rect x="3.10553" y="6.30823" width="38.819" height="3.10552" fill="#92A4AA" />
+        <rect x="13.9748" y="37.3634" width="27.1733" height="5.88107" fill="url(#pattern_legs)" />
+        <rect y="4.75549" width="48" height="34.9261" fill="url(#pattern_frame)" />
+        <image
+            id="image_legs"
+            preserveAspectRatio="none"
+            href="https://res.cloudinary.com/dmukukwp6/image/upload/easel_legs_96d248d629.png"
+            width="24"
+            height="6"
+            x="16.5"
+            y="39"
+        />
+        <image
+            id="image_frame"
+            preserveAspectRatio="none"
+            href="https://res.cloudinary.com/dmukukwp6/image/upload/slide_outline_390780551f.png"
+            width="48"
+            height="36"
+            x="0"
+            y="4"
+        />
+    </BaseIcon>
+)
+
 export const IconReactNative = (props: IconProps) => (
     <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
         <path fill="#58C4DC" d="M12.035 10.067a1.916 1.916 0 1 0 0 3.83 1.916 1.916 0 0 0 0-3.83Z" />
