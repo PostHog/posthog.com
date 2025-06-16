@@ -112,7 +112,7 @@ The flag will now:
   classes="rounded"
 />
 
-## Example implementation
+#### Example implementation
 
 Here's a complete example using React:
 
