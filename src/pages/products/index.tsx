@@ -168,9 +168,12 @@ export default function Products(): JSX.Element {
                                                     </span>
                                                 ),
                                                 content: (
-                                                    <div className="pl-1 grid grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-6 gap-2 relative [&>div]:mx-auto [&_figure]:text-center">
+                                                    <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-4 relative [&>div]:mx-auto [&_figure]:text-center">
                                                         {products.map((product) => (
-                                                            <ZoomHover key={product.slug}>
+                                                            <ZoomHover
+                                                                key={product.slug}
+                                                                className="w-28 justify-center"
+                                                            >
                                                                 <AppLink
                                                                     label={product.name}
                                                                     url={`/` + product.slug}
