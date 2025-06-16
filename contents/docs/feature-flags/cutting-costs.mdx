@@ -33,13 +33,17 @@ import FlagChargeEstimate from "./snippets/flag-charge-estimate.mdx"
 
 In our [JavaScript Web](/docs/libraries/js) and [React Native](/docs/libraries/react-native) SDKs, you can reduce the cost of feature flags by reducing the number of requests your client makes to fetch feature flag values for your users.
 
-1. Using the the [advanced configuration](/docs/libraries/js/config#advanced-configuration), set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+You can do the following using the [advanced configuration](/docs/libraries/js/config#advanced-configuration):
 
-2. Using the the [advanced configuration](/docs/libraries/js/config#advanced-configuration), set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
+1. Set `advanced_disable_feature_flags_on_first_load` to `true`. This stops automatically requesting feature flags whenever a page loads. This is useful when you're immediately calling `posthog.identify()` anyway, which requests flags again.
+
+2. Set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
+
+3. Set `advanced_only_evaluate_survey_feature_flags` to `true`. When enabled, only survey feature flags are evaluated. This disables frontend evaluation of feature flags but still allows you to use them in surveys.
 
 <CalloutBox icon="IconWarning" title="Note" type="caution">
 
-  Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally.
+  Use of `advanced_disable_feature_flags` will disable surveys for all users, as surveys rely on feature flags internally. You should use `advanced_only_evaluate_survey_feature_flags` instead if you use surveys.
 
 </CalloutBox>
 
