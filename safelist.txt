@@ -10,7 +10,7 @@
 [&_.bg-front]:fill-lilac
 [&_.bg-front]:fill-lime-green
 [&_.bg-front]:fill-orange
-[&_.bg-secondary]:fill-[#B56C00]
+[&_.bg-rear]:fill-[#B56C00]
 !pb-8
 !-mb-12
 -mb-12

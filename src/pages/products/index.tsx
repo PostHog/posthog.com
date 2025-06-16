@@ -130,7 +130,16 @@ export default function Products(): JSX.Element {
             >
                 {(() => {
                     // Filter out products without a category, then group by category
-                    const categoryOrder = ['analytics', 'behavior', 'features', 'tools']
+                    const categoryOrder = ['analytics', 'behavior', 'features', 'data', 'tools']
+
+                    // Custom product order by category - if not specified, products will be sorted alphabetically
+                    const productOrder: Record<string, string[]> = {
+                        analytics: ['web-analytics', 'product-analytics', 'revenue-analytics', 'llm-analytics'],
+                        behavior: ['session-replay', 'surveys', 'error-tracking', 'heatmaps'],
+                        features: ['feature-flags', 'experiments'],
+                        data: [],
+                        tools: [],
+                    }
                     const productsWithCategory = allProducts.filter((product: any) => product.category)
                     const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {
                         const category = product.category
@@ -141,9 +150,28 @@ export default function Products(): JSX.Element {
                         return acc
                     }, {} as Record<string, any[]>)
 
-                    // Sort products alphabetically within each category
+                    // Sort products by custom order if specified, otherwise alphabetically
                     Object.keys(groupedProducts).forEach((category) => {
-                        groupedProducts[category].sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        const customOrder = productOrder[category]
+                        if (customOrder && customOrder.length > 0) {
+                            groupedProducts[category].sort((a: any, b: any) => {
+                                const aIndex = customOrder.indexOf(a.slug)
+                                const bIndex = customOrder.indexOf(b.slug)
+
+                                // If both products are in custom order, sort by that order
+                                if (aIndex !== -1 && bIndex !== -1) {
+                                    return aIndex - bIndex
+                                }
+                                // If only one is in custom order, prioritize it
+                                if (aIndex !== -1) return -1
+                                if (bIndex !== -1) return 1
+                                // If neither is in custom order, sort alphabetically
+                                return a.name.localeCompare(b.name)
+                            })
+                        } else {
+                            // Fall back to alphabetical sorting
+                            groupedProducts[category].sort((a: any, b: any) => a.name.localeCompare(b.name))
+                        }
                     })
 
                     return (
