@@ -32,6 +32,12 @@ The schedules consist of contiguous blocks, but that definitely doesn't mean wor
 
 Swap with a teammate in advance! Find a volunteer by asking in Slack, then use PagerDuty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
 
+## I cant assign tickets or make public replies
+
+The HogHero app in the right sidebar should allow you to upgrade your user for your support week by clicking Full⬆️
+![image](https://github.com/user-attachments/assets/94b8b14c-0b82-4c56-9fce-cb056672936c)
+
+
 ## What do I do as Support Hero?
 
 Each engineering team has its own list of tickets in Zendesk:
