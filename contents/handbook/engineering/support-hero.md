@@ -34,8 +34,8 @@ Swap with a teammate in advance! Find a volunteer by asking in Slack, then use P
 
 ## I can't assign tickets or make public replies
 
-The HogHero app in the right sidebar should allow you to upgrade your user for your support week by clicking Full⬆️
-![image](https://github.com/user-attachments/assets/94b8b14c-0b82-4c56-9fce-cb056672936c)
+Everyone has access to view tickets in Zendesk however if you do not reply to tickets often you may find you currently have [Light agent](https://support.zendesk.com/hc/en-us/articles/4408846501402-Understanding-and-setting-light-agent-permissions) permissions. The HogHero app in the right sidebar should allow you to upgrade your user for your support week by clicking Full⬆️
+![image](https://github.com/user-attachments/assets/94b8b14c-0b82-4c56-9fce-cb056672936c) 
 
 
 ## What do I do as Support Hero?
