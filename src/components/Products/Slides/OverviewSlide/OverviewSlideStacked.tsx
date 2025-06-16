@@ -12,25 +12,35 @@ export default function OverviewSlideStacked({
 }: OverviewSlideProps) {
     return (
         <div className={`h-full p-12 flex flex-col items-center relative bg-${color} text-white`}>
-            {/* Left side - Content */}
-            <div className="space-y-6">
-                <div className="flex items-center gap-4 mb-6">
-                    {Icon && <Icon className={`size-12 ${overview?.textColor || 'text-black'}`} />}
-                    <div>
-                        <span className={`text-lg font-medium ${overview?.textColor || 'text-black'} opacity-80`}>
-                            {productName}
-                        </span>
-                        <h1 className={`text-4xl font-bold leading-tight ${overview?.textColor || 'text-black'}`}>
-                            {overview?.title}
-                        </h1>
-                    </div>
+            <div className="mb-4 w-full flex flex-col">
+                <div className="flex justify-center items-center gap-2 mb-2">
+                    {Icon && <Icon className={`size-12 drop-shadow-xl ${overview?.textColor || 'text-black'}`} />}
+                    <span
+                        className={`text-xl font-medium drop-shadow-xl ${
+                            overview?.textColor || 'text-black'
+                        } opacity-80`}
+                    >
+                        {productName}
+                    </span>
                 </div>
-                <p className={`text-lg leading-relaxed ${overview?.textColor || 'text-black'} max-w-2xl`}>
+                <div>
+                    <h1
+                        className={`text-5xl font-bold text-center leading-tight drop-shadow-2xl ${
+                            overview?.textColor || 'text-black'
+                        }`}
+                    >
+                        {overview?.title}
+                    </h1>
+                </div>
+                <p
+                    className={`text-xl text-center leading-snug drop-shadow max-w-2xl mx-auto ${
+                        overview?.textColor || 'text-black'
+                    }`}
+                >
                     {overview?.description}
                 </p>
             </div>
 
-            {/* Right side - Images */}
             <div className="relative flex-1">
                 {screenshots?.[0] && (
                     <CloudinaryImage
@@ -39,16 +49,16 @@ export default function OverviewSlideStacked({
                         imgClassName={screenshots[0].classes}
                     />
                 )}
-                {hog?.src && (
-                    <div className="absolute -bottom-4 -right-4">
-                        <CloudinaryImage
-                            src={hog.src as `https://res.cloudinary.com/${string}`}
-                            alt={hog.alt}
-                            imgClassName={hog.classes || 'w-24 h-24'}
-                        />
-                    </div>
-                )}
             </div>
+            {hog?.src && (
+                <div className="absolute -bottom-4 -right-4">
+                    <CloudinaryImage
+                        src={hog.src as `https://res.cloudinary.com/${string}`}
+                        alt={hog.alt}
+                        imgClassName={hog.classes || 'w-24 h-24'}
+                    />
+                </div>
+            )}
         </div>
     )
 }

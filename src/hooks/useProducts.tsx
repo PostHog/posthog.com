@@ -996,7 +996,7 @@ window.posthog.onFeatureFlags(function () {
         hog: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
             alt: 'A hedgehog toggling a feature flag',
-            classes: 'absolute bottom-0 right-0 max-w-[698px]',
+            classes: 'absolute bottom-0 right-0 max-w-md',
         },
         slider: {
             marks: [1000000, 10000000, 100000000, 1000000000],
