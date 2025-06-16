@@ -47,7 +47,13 @@ First, create your feature flag normally in PostHog:
 
 When evaluating the flag in your code, capture the result as a person property. Here's an example using the JavaScript SDK:
 
-**Important:** Use `$set_once` instead of `$set` to ensure the property is only set on the first evaluation and never overwritten.
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Important" type="fyi">
+  
+Use `$set_once` instead of `$set` to ensure the property is only set on the first evaluation and never overwritten.
+
+</CalloutBox>
 
 ```js
 // Check the multivariate feature flag for the variant value
