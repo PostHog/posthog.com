@@ -185,6 +185,11 @@ export default function Products(): JSX.Element {
                                                                         React.createElement(product.Icon, {
                                                                             className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
                                                                         })}
+                                                                    {product.status == 'beta' && (
+                                                                        <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                                                            Beta
+                                                                        </span>
+                                                                    )}
                                                                 </AppLink>
                                                             </ZoomHover>
                                                         ))}

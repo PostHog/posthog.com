@@ -1,4 +1,14 @@
-import { IconPieChart, IconThoughtBubble, IconPlug, IconMessage, IconDashboard, IconNotebook } from '@posthog/icons'
+import {
+    IconPieChart,
+    IconThoughtBubble,
+    IconPlug,
+    IconMessage,
+    IconDashboard,
+    IconNotebook,
+    IconAI,
+    IconMagicWand,
+    IconPiggyBank,
+} from '@posthog/icons'
 import useProducts from './useProducts'
 
 const dedupe = (products) => {
@@ -21,18 +31,21 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             description: 'Monitor your website traffic. Built for people who really liked GA3...',
             handle: 'web_analytics',
             color: 'green-2',
-            colorSecondary: 'secondary',
+            colorSecondary: 'red',
             category: 'analytics',
             sharesFreeTier: 'product_analytics',
             worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: '/web-analytics',
         },
-        {
-            ...products.find((product) => product.handle === 'product_analytics'),
-            handle: 'product_analytics',
-            name: 'Product analytics',
-            slug: '/product-analytics',
-        },
+
+        // if we want to override props on something that exists in useProducts.tsx (since it will ultimately move to the billing API...)
+        // {
+        //     ...products.find((product) => product.handle === 'product_analytics'),
+        //     handle: 'product_analytics',
+        //     name: 'Product analytics',
+        //     slug: '/product-analytics',
+        // },
+
         {
             name: 'Broadcasts',
             Icon: IconMessage,
@@ -69,13 +82,25 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             slug: '/cdp',
         },
         {
+            name: 'Revenue analytics',
+            Icon: IconPiggyBank,
+            description: 'Track your money',
+            handle: 'data_pipelines',
+            color: 'green',
+            colorSecondary: 'green-2',
+            category: 'analytics',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: 'revenue-analytics',
+            status: 'beta',
+        },
+        {
             name: 'Dashboards',
             Icon: IconDashboard,
             description: 'Get data into PostHog and send it where it needs to go.',
             handle: 'dashboards',
             color: 'blue',
             colorSecondary: 'sky-blue',
-            category: 'analytics',
+            category: 'tools',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: '/dashboards',
         },
@@ -84,11 +109,22 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             Icon: IconNotebook,
             description: 'Get data into PostHog and send it where it needs to go.',
             handle: 'notebooks',
-            color: 'purple',
+            color: 'teal',
             colorSecondary: 'lilac',
             category: 'tools',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: '/notebooks',
+        },
+        {
+            name: 'Max',
+            Icon: IconMagicWand,
+            description: 'AI-powered product analyst and assistant.',
+            handle: 'max_ai',
+            color: 'purple',
+            colorSecondary: 'lilac',
+            category: 'tools',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/max',
         },
         ...products,
     ]

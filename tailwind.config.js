@@ -202,7 +202,9 @@ module.exports = {
                     'Segoe UI Symbol',
                 ],
             },
-            fontSize: {},
+            fontSize: {
+                '2xs': '.625rem',
+            },
             gridTemplateColumns: {
                 16: 'repeat(16, minmax(0, 1fr))',
             },
@@ -224,6 +226,7 @@ module.exports = {
                 'button-secondary-dark': '#C78617',
             },
             borderRadius: {
+                xs: '2px',
                 sm: '4px',
                 lg: '20px',
             },

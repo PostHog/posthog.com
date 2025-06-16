@@ -3833,14 +3833,12 @@ export const productMenu = {
             color: 'lilac',
             url: '/data-warehouse',
             slug: 'data-warehouse',
-            category: 'tools',
         },
         {
             name: 'Max AI',
             icon: 'IconMagicWand',
             color: 'purple',
             url: '/max',
-            category: 'tools',
         },
         {
             name: 'Product OS',
@@ -3848,7 +3846,6 @@ export const productMenu = {
             color: 'salmon',
             url: '/product-os',
             slug: 'product-os',
-            category: 'tools',
         },
     ],
 }

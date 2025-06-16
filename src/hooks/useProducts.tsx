@@ -57,7 +57,8 @@ function SnippetRenderer() {
 const initialProducts = [
     {
         Icon: IconGraph,
-        name: 'Analytics',
+        name: 'Product analytics',
+        slug: 'product-analytics',
         handle: 'product_analytics',
         color: 'blue',
         colorSecondary: 'sky-blue',
@@ -69,7 +70,6 @@ const initialProducts = [
         },
         sharesFreeTier: 'web_analytics',
         worksWith: ['session_replay', 'feature_flags', 'surveys'],
-        slug: '/product-analytics',
         customers: {
             ycombinator: {
                 headline: 'gathers 30% more data than with Google Analytics',
