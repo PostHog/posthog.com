@@ -308,7 +308,7 @@ PostHog uses source maps to show unminified code in your stack traces (so you ca
 To enable this, we set a environment variable to control this so we only generate source maps when building locally (or if you are running a build in CI).
 
 ```file=.env.local
-NEXT_PUBLIC_POSTHOG_SOURCE_MAPS=true
+GENERATE_SOURCEMAPS=true
 ```
 
 Once we have the environment variable set, we can configure Next.js to generate source maps.

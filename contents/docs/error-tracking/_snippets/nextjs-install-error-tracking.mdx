@@ -140,10 +140,10 @@ If your source maps are not publicly hosted, you will need to upload them during
 
 Next.js disables source maps by default during production builds to prevent you from leaking your source on the client. You can opt-in with the `productionBrowserSourceMaps` configuration flag.
 
-We will set a environment variable to control this so we only generate source maps when building locally (or if you are running a build in CI).
+Set a environment variable to control this so we only generate source maps when building locally (or if you are running a build in CI).
 
 ```file=.env.local
-NEXT_PUBLIC_POSTHOG_SOURCE_MAPS=true
+GENERATE_SOURCEMAPS=true
 ```
 
 Once we have the environment variable set, we can configure Next.js to generate source maps.
