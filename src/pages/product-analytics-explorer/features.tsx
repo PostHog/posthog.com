@@ -25,7 +25,7 @@ import useProducts from 'hooks/useProducts'
 
 export default function ProductAnalyticsFeatures(): JSX.Element {
     const { products } = useProducts()
-    const productAnalytics = products.find(product => product.type === 'product_analytics')
+    const productAnalytics = products.find((product) => product.type === 'product_analytics')
     const featuresContent = productAnalytics?.features || []
 
     const [currentTab, setCurrentTab] = useState(0)
@@ -118,10 +118,7 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                             ))}
                         </Tabs.List>
                         {featuresContent.map((item, index) => (
-                            <Tabs.Content
-                                key={index}
-                                value={`tab-${index}`}
-                            >
+                            <Tabs.Content key={index} value={`tab-${index}`}>
                                 <div className="pb-4">
                                     <h2 className="text-xl mb-0">{item.headline}</h2>
                                     {item.description && <p className="mt-1">{item.description}</p>}

@@ -55,9 +55,9 @@ export default function ProductAnalyticsPricing(): JSX.Element {
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
-            <Explorer 
-                template="product" 
-                slug={slug} 
+            <Explorer
+                template="product"
+                slug={slug}
                 title="Usage-based pricing"
                 sidebarContent={<ProductSidebar type="product_analytics" />}
             >
