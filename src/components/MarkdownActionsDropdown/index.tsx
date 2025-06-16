@@ -2,6 +2,7 @@ import { Menu } from '@headlessui/react'
 import { IconCopy, IconEye, IconExternal } from '@posthog/icons'
 import { Chevron } from 'components/Icons'
 import CheckIcon from '../../images/check.svg'
+import Link from 'components/Link'
 import React, { useState } from 'react'
 
 interface CopyMarkdownActionsDropdownProps {
@@ -22,11 +23,6 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
         '!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center'
     const menuItemIconStyles = 'w-4 h-4 mr-3'
 
-    // Helper function to strip query parameters from URL
-    const getCleanPath = (url: string) => {
-        return url.split('?')[0]
-    }
-
     const handleCopyMarkdown = () => {
         navigator.clipboard.writeText(markdownContent)
         setCopiedState('markdown')
@@ -34,22 +30,22 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
     }
 
     const handleViewAsMarkdown = () => {
-        const cleanPath = getCleanPath(pageUrl)
-        const markdownUrl = `${cleanPath}.md`
+        const url = new URL(pageUrl)
+        const markdownUrl = `${url.origin}${url.pathname}.md`
         window.open(markdownUrl, '_blank')
     }
 
     const handleOpenInChatGPT = () => {
-        const cleanPath = getCleanPath(pageUrl)
-        const markdownUrl = `${cleanPath}.md`
+        const url = new URL(pageUrl)
+        const markdownUrl = `${url.origin}${url.pathname}.md`
         const prompt = `Read from ${markdownUrl} so I can ask questions about it`
         const encodedPrompt = encodeURIComponent(prompt)
         window.open(`https://chat.openai.com/?q=${encodedPrompt}`, '_blank')
     }
 
     const handleOpenInClaude = () => {
-        const cleanPath = getCleanPath(pageUrl)
-        const markdownUrl = `${cleanPath}.md`
+        const url = new URL(pageUrl)
+        const markdownUrl = `${url.origin}${url.pathname}.md`
         const prompt = `Read from ${markdownUrl} so I can ask questions about it`
         const encodedPrompt = encodeURIComponent(prompt)
         window.open(`https://claude.ai/new?q=${encodedPrompt}`, '_blank')
