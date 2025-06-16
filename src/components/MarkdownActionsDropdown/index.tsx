@@ -60,7 +60,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             ) : (
                                 <>
                                     <IconCopy className="w-4 h-4" />
-                                    <span>Copy pagezz</span>
+                                    <span>Copy page</span>
                                 </>
                             )}
                             <Chevron className="w-2.5 opacity-70 group-hover:opacity-70" />
