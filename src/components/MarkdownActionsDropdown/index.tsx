@@ -23,6 +23,17 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
         '!m-0 py-1.5 px-3 !text-sm cursor-pointer rounded-sm hover:bg-light active:bg-accent dark:hover:bg-light/10 dark:active:bg-light/5 transition-colors hover:transition-none whitespace-nowrap w-full text-left flex items-center !text-primary dark:!text-primary-dark hover:!text-primary dark:hover:!text-primary-dark'
     const menuItemIconStyles = 'w-4 h-4 mr-3'
 
+    // Helper function to safely create markdown URL
+    const getMarkdownUrl = (url: string) => {
+        try {
+            // Try to parse as absolute URL first
+            const urlObj = new URL(url)
+            return `${urlObj.origin}${urlObj.pathname}.md`
+        } catch {
+            return `${url}.md`
+        }
+    }
+
     const handleCopyMarkdown = () => {
         navigator.clipboard.writeText(markdownContent)
         setCopiedState('markdown')
@@ -49,7 +60,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             ) : (
                                 <>
                                     <IconCopy className="w-4 h-4" />
-                                    <span>Copy page</span>
+                                    <span>Copy pagezz</span>
                                 </>
                             )}
                             <Chevron className="w-2.5 opacity-70 group-hover:opacity-70" />
@@ -64,11 +75,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             </Menu.Item>
 
                             <Menu.Item>
-                                <Link
-                                    to={`${new URL(pageUrl).origin}${new URL(pageUrl).pathname}.md`}
-                                    externalNoIcon
-                                    className={menuItemButtonStyles}
-                                >
+                                <Link to={`${getMarkdownUrl(pageUrl)}`} externalNoIcon className={menuItemButtonStyles}>
                                     <IconEye className={menuItemIconStyles} />
                                     <span>View as Markdown</span>
                                 </Link>
@@ -77,9 +84,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             <Menu.Item>
                                 <Link
                                     to={`https://chat.openai.com/?q=${encodeURIComponent(
-                                        `Read from ${new URL(pageUrl).origin}${
-                                            new URL(pageUrl).pathname
-                                        }.md so I can ask questions about it`
+                                        `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
                                     )}`}
                                     externalNoIcon
                                     className={menuItemButtonStyles}
@@ -92,9 +97,7 @@ export const CopyMarkdownActionsDropdown: React.FC<CopyMarkdownActionsDropdownPr
                             <Menu.Item>
                                 <Link
                                     to={`https://claude.ai/new?q=${encodeURIComponent(
-                                        `Read from ${new URL(pageUrl).origin}${
-                                            new URL(pageUrl).pathname
-                                        }.md so I can ask questions about it`
+                                        `Read from ${getMarkdownUrl(pageUrl)} so I can ask questions about it`
                                     )}`}
                                     externalNoIcon
                                     className={menuItemButtonStyles}
