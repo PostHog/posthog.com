@@ -23,7 +23,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | API Structure | Shared responsibility. Features owned by the relevant Small Team. | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Async migrations | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Authentication | [Team Infrastructure][Team Infrastructure]  | <span class="lemon-tag gh-tag">feature/authentication</span> |
-| Batch exports | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
+| Batch exports | Team Batch Exports  | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | Billing | [Team Billing][Team Billing]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Cohorts | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
