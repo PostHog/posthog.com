@@ -27,7 +27,7 @@ const categories = [
     },
 ]
 
-const FeaturedImage = ({ url }: { url: string }) => {
+export const FeaturedImage = ({ url }: { url: string }) => {
     const [isZoomed, setIsZoomed] = useState(false)
     return (
         <div
