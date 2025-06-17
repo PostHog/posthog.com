@@ -121,50 +121,50 @@ export default function Explorer({
                 </>
             )}
             <DebugContainerQuery />
-            {/* <ScrollArea className="scroll-test h-full"> */}
-            <div
-                data-scheme="secondary"
-                className={`flex flex-col-reverse @3xl:flex-row flex-grow min-h-0 ${
-                    fullScreen ? 'border-t border-primary' : ''
-                }`}
-            >
-                {sidebarContent && (
-                    <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
-                        <ScrollArea className="p-2">
-                            <div className="space-y-3">
-                                <SidebarContent content={sidebarContent} />
-                            </div>
-                        </ScrollArea>
-                    </aside>
-                )}
-                <main
-                    data-app="Explorer"
-                    data-scheme="primary"
-                    className="@container flex-1 bg-primary relative h-full"
+            <ScrollArea className="h-full">
+                <div
+                    data-scheme="secondary"
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
+                        fullScreen ? 'border-t border-primary' : ''
+                    }`}
                 >
-                    {fullScreen ? (
-                        children
-                    ) : (
-                        <ScrollArea className="h-full">
-                            {/* <DebugContainerQuery /> */}
-                            {accentImage && (
-                                <div className="absolute right-0 top-6">
-                                    <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
-                                        {accentImage}
-                                        <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
-                                        <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
+                    <main
+                        data-app="Explorer"
+                        data-scheme="primary"
+                        className="@container flex-1 bg-primary relative h-full"
+                    >
+                        {fullScreen ? (
+                            children
+                        ) : (
+                            <ScrollArea className="h-full">
+                                {/* <DebugContainerQuery /> */}
+                                {accentImage && (
+                                    <div className="absolute right-0 top-6">
+                                        <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
+                                            {accentImage}
+                                            <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
+                                            <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
+                                        </div>
                                     </div>
+                                )}
+                                <div className={`h-full ${padding ? 'relative p-4' : ''}`}>
+                                    {!fullScreen && showTitle && <h1>{title}</h1>}
+                                    {children}
                                 </div>
-                            )}
-                            <div className={`h-full ${padding ? 'relative p-4' : ''}`}>
-                                {!fullScreen && showTitle && <h1>{title}</h1>}
-                                {children}
-                            </div>
-                        </ScrollArea>
+                            </ScrollArea>
+                        )}
+                    </main>
+                    {sidebarContent && (
+                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+                            <ScrollArea className="p-2">
+                                <div className="space-y-3">
+                                    <SidebarContent content={sidebarContent} />
+                                </div>
+                            </ScrollArea>
+                        </aside>
                     )}
-                </main>
-            </div>
-            {/* </ScrollArea> */}
+                </div>
+            </ScrollArea>
         </div>
     )
 }
