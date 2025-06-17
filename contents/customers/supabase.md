@@ -40,7 +40,6 @@ Data wasn’t just fragmented — it was also incomplete due to the limitations 
 />
 </BorderWrapper>
 
-
 ## Using product analytics and Max AI to get insights, fast
 
 Before switching to PostHog, which it deployed server-side via the Node SDK, Supabase’s team struggled to do even basic analytics due to the inconsistencies in their data and the reliance on complex BigQuery tables.
