@@ -7,6 +7,7 @@ interface Column {
     name: string
     align?: 'left' | 'center' | 'right'
     width?: string
+    className?: string
 }
 
 interface Row {
@@ -70,7 +71,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                 key={index}
                                 className={`text-sm border-l border-t border-border bg-input font-bold ${
                                     column.align === 'center' ? 'text-center' : ''
-                                }`}
+                                } ${column.className || ''}`}
                             >
                                 {column.name}
                             </div>

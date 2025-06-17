@@ -120,9 +120,13 @@ export default function Explorer({
                     </div>
                 </>
             )}
+            <DebugContainerQuery />
+            {/* <ScrollArea className="scroll-test h-full"> */}
             <div
                 data-scheme="secondary"
-                className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
+                className={`flex flex-col-reverse @3xl:flex-row flex-grow min-h-0 ${
+                    fullScreen ? 'border-t border-primary' : ''
+                }`}
             >
                 {sidebarContent && (
                     <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
@@ -160,6 +164,7 @@ export default function Explorer({
                     )}
                 </main>
             </div>
+            {/* </ScrollArea> */}
         </div>
     )
 }
