@@ -20,7 +20,7 @@ Your intro message should:
 Take a look at your customer's account in Vitally and Metabase to identify ways you can be helpful. Some examples include:
 - Increase / decrease in events: make sure this is expected and things are implemented correctly
 - Recently opened a support ticket: follow up to make sure their issue is resolved
-- Concrete ways a customer can [optimize their spending](/health-checks#are-they-paying-for-things-they-dont-need) or [improve their implementation](/health-checks#have-they-implemented-tracking-incorrectly) 
+- Concrete ways a customer can [optimize their spending](health-checks#are-they-paying-for-things-they-dont-need) or [improve their implementation](health-checks#have-they-implemented-tracking-incorrectly) 
 - Invitation to a shared Slack channel so it's easier to connect with our team.
 - Lots of new users or low user engagement: offer a training session on how to use PostHog effectively
 - On a legacy pricing plan: "we've moved off legacy plan for more than a year and I'd like to transition you to standard pricing. Happy to discuss the changes"
