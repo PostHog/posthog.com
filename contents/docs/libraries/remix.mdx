@@ -4,6 +4,9 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/remix.svg
 ---
 
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 PostHog makes it easy to get data about traffic and usage of your [Remix](https://remix.run/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your Remix app using the [JavaScript Web SDK](/docs/libraries/js).
@@ -101,6 +104,10 @@ export default function App() {
 ```
 
 When you run your app now, PostHog will automatically capture events and pageviews. You can also use the other features of PostHog by importing and using the `usePostHog` hook in your components.
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
 
 ## Next steps
 
