@@ -128,18 +128,22 @@ export const Skeleton = () => {
     )
 }
 
-const Description = ({ description, title }) => {
-    const [open, setOpen] = useState(false)
+const Description = ({ description, title, expandAll }) => {
+    const [localOpen, setLocalOpen] = useState(false)
+    const isOpen = expandAll !== null ? expandAll : localOpen
+
     return (
-        <button onClick={() => setOpen(!open)}>
+        <button onClick={() => setLocalOpen(!localOpen)}>
             <div className="flex justify-start items-start text-left">
-                <IconChevronDown className={`size-6 ${open ? '' : '-rotate-90'} flex-shrink-0 transition-transform`} />
+                <IconChevronDown
+                    className={`size-6 ${isOpen ? '' : '-rotate-90'} flex-shrink-0 transition-transform`}
+                />
                 <strong className="font-semibold">{title}</strong>
             </div>
             <motion.div
                 className={`text-left overflow-hidden ml-6`}
                 initial={{ height: 0 }}
-                animate={{ height: open ? 'auto' : 0 }}
+                animate={{ height: isOpen ? 'auto' : 0 }}
                 transition={{ duration: 0.2 }}
             >
                 <div className="mt-2">
@@ -317,6 +321,7 @@ export default function Changelog({ pageContext }) {
     const [strapiFilters, setStrapiFilters] = useState(getStrapiFilters({ year: { value: pageContext.year } }))
     const [teams, setTeams] = useState([])
     const [topics, setTopics] = useState([])
+    const [expandAll, setExpandAll] = useState(null) // null = individual control, true = all expanded, false = all collapsed
     const { roadmaps, isValidating, mutate, hasMore, fetchMore } = useRoadmaps({
         limit: 100,
         params: {
@@ -424,6 +429,14 @@ export default function Changelog({ pageContext }) {
                         : []),
                 ]}
             >
+                <div className="absolute right-0 -top-10">
+                    <button
+                        onClick={() => setExpandAll(expandAll === true ? false : true)}
+                        className="text-sm font-semibold text-red dark:text-yellow hover:text-red/80 dark:hover:text-yellow/80 mb-4"
+                    >
+                        {expandAll === true ? 'Collapse all' : 'Expand all'}
+                    </button>
+                </div>
                 <ScrollArea>
                     {roadmaps.length > 0 && (
                         <OSTable
@@ -480,6 +493,7 @@ export default function Changelog({ pageContext }) {
                                                     <Description
                                                         title={roadmap.attributes.title}
                                                         description={roadmap.attributes.description}
+                                                        expandAll={expandAll}
                                                     />
                                                     {imageURL ? (
                                                         <div className="[&_div]:max-h-8 [&_div]:max-w-48">
