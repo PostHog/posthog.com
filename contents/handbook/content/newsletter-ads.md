@@ -8,7 +8,7 @@ We promote our newsletter across a variety of different channels. This page cove
 
 ## Budget
 
-Budget plans can be viewed in this <PrivateLink url="https://docs.google.com/spreadsheets/d/1MmNUd9fFlZM3-SDk-HQ9cOmBY8XtqT7F97JFOAehxh8/edit?gid=860081018#gid=860081018">spreedsheet</PrivateLink>.
+Budget plans can be viewed in this <PrivateLink url="https://docs.google.com/spreadsheets/d/1MmNUd9fFlZM3-SDk-HQ9cOmBY8XtqT7F97JFOAehxh8/edit?gid=860081018#gid=860081018">spreadsheet</PrivateLink>.
 
 ## Uploading emails to Substack
 
