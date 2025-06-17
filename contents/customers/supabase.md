@@ -52,6 +52,9 @@ Max AI, PostHog’s built-in AI assistant, is especially useful for complex inve
 
 “I like Max as an AI helper because I don’t want to spend my energy going into specifics of SQL,” says Aleksi. “Instead, I just write something quick and explain what I want, and I know that it’s going to help. I can ask it to correct SQL queries, or even help me understand the correlation between events. It makes everything a lot easier, and faster.”
 
+![supabase growth chart](https://res.cloudinary.com/dmukukwp6/image/upload/Supabase_growth_chart_603d22cf6b.png)
+<Caption>Supabase's growth in user sign-ups over time. Can you tell when data started helping them grow?</Caption>
+
 ## How PostHog helped Supabase 10X weekly sign-ups
 
 PostHog has unlocked many other advantages for Supabase, says Aleksi, including the ability to more quickly run A/B tests and experiment with new designs. However, the biggest win has been the ability to identify new growth opportunities and double down on them early.
