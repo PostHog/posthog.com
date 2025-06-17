@@ -12,7 +12,7 @@ import { Heading } from 'components/Heading'
 import { ZoomImage } from 'components/ZoomImage'
 import { companyMenu } from '../navs'
 import dayjs from 'dayjs'
-import { navigate } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import UpdateWrapper from 'components/Roadmap/UpdateWrapper'
 import { Video } from 'cloudinary-react'
 import RoadmapForm from 'components/RoadmapForm'
@@ -132,7 +132,7 @@ const Description = ({ description, title }) => {
     const [open, setOpen] = useState(false)
     return (
         <button onClick={() => setOpen(!open)}>
-            <div className="flex justify-start items-start">
+            <div className="flex justify-start items-start text-left">
                 <IconChevronDown className={`size-6 ${open ? '' : '-rotate-90'} flex-shrink-0 transition-transform`} />
                 <strong className="font-semibold">{title}</strong>
             </div>
@@ -167,9 +167,13 @@ export const Topic = ({ topic }: TopicProps) => {
             <p className="m-0 flex items-center space-x-1 font-semibold text-sm">
                 {ProductIcon && <ProductIcon className={`size-5 text-${color}`} />}
                 <span>
-                    <a href={`/${matchingProduct.slug}`} className="text-red dark:text-yellow font-semibold">
+                    <Link
+                        to={`/${matchingProduct.slug}`}
+                        className="text-red dark:text-yellow font-semibold"
+                        state={{ newWindow: true }}
+                    >
                         {topic}
-                    </a>
+                    </Link>
                 </span>
             </p>
         )
@@ -185,9 +189,9 @@ export const Topic = ({ topic }: TopicProps) => {
     )
 }
 
-const Authors = ({ authors }) => {
+const Authors = ({ authors, className }) => {
     return (
-        <ul className="list-none m-0 p-0 flex flex-wrap gap-1">
+        <ul className={`list-none m-0 p-0 flex flex-wrap gap-1 ${className}`}>
             {authors.map((author) => {
                 const name = [author.attributes.firstName, author.attributes.lastName].filter(Boolean).join(' ')
                 return (
@@ -258,9 +262,9 @@ const TeamLink = ({
     )
 }
 
-const Teams = ({ teams }) => {
+const Teams = ({ teams, className }) => {
     return (
-        <ul className="list-none m-0 p-0 flex flex-wrap gap-1">
+        <ul className={`list-none m-0 p-0 flex flex-wrap gap-1 ${className}`}>
             {teams.map((team) => {
                 return (
                     <li key={team.id}>
@@ -440,11 +444,6 @@ export default function Changelog({ pageContext }) {
                                     align: 'left',
                                 },
                                 {
-                                    name: '',
-                                    align: 'left',
-                                    width: '120px',
-                                },
-                                {
                                     name: 'Description',
                                     align: 'left',
                                     width: '1fr',
@@ -454,6 +453,7 @@ export default function Changelog({ pageContext }) {
                                     align: 'left',
                                 },
                             ]}
+                            rowAlignment="top"
                             rows={roadmaps.map((roadmap) => {
                                 const teams = roadmap.attributes.teams?.data
                                 const imageURL = roadmap.attributes.image?.data?.attributes?.url
@@ -468,27 +468,34 @@ export default function Changelog({ pageContext }) {
                                                     {dayjs(roadmap.attributes.dateCompleted).format('MMM D, YYYY')}
                                                 </span>
                                             ) : null,
+                                            className: '!pt-[10px]',
                                         },
                                         {
                                             content: topic ? <Topic topic={topic} /> : null,
-                                        },
-                                        {
-                                            content: imageURL ? <FeaturedImage url={imageURL} /> : null,
+                                            className: '!pt-[10px]',
                                         },
                                         {
                                             content: (
-                                                <Description
-                                                    title={roadmap.attributes.title}
-                                                    description={roadmap.attributes.description}
-                                                />
+                                                <>
+                                                    <Description
+                                                        title={roadmap.attributes.title}
+                                                        description={roadmap.attributes.description}
+                                                    />
+                                                    {imageURL ? (
+                                                        <div className="[&_div]:max-h-8 [&_div]:max-w-48">
+                                                            <FeaturedImage url={imageURL} />
+                                                        </div>
+                                                    ) : null}
+                                                </>
                                             ),
+                                            className: '!flex-row !pl-[.3rem]',
                                         },
                                         {
                                             content:
                                                 authors?.length > 0 ? (
-                                                    <Authors authors={authors} />
+                                                    <Authors authors={authors} className="-my-1" />
                                                 ) : (
-                                                    <Teams teams={teams} />
+                                                    <Teams teams={teams} className="-my-1" />
                                                 ),
                                         },
                                     ],
