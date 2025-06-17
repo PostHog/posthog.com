@@ -1,18 +1,54 @@
 import React from 'react'
+import { useLocation } from '@reach/router'
 import Explorer from 'components/Explorer'
 import Link from 'components/Link'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import { IconDice, IconDictator } from 'components/OSIcons/Icons'
+
 import { Accordion } from 'components/RadixUI/Accordion'
 import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
-import YCombinatorDark from '../../images/customers/ycombinator-dark.svg'
-import Logo from 'components/Logo'
+import StripeLogo from '../../images/stripe.svg'
+
+// Partner configurations
+const partnerConfigs = [
+    {
+        slug: 'stripe',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1" />
+                <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
+            </>
+        ),
+        value: '$50,000',
+    },
+    {
+        slug: 'stripe-atlas',
+        title: (
+            <>
+                <IconX className="size-8 text-white inline-block relative top-1" />
+                <img src={StripeLogo} alt="Stripe" className="inline-block h-9 relative top-[.2rem]" />
+                <span>Atlas</span>
+            </>
+        ),
+        value: '$50,000',
+    },
+]
 
 export default function Startups(): JSX.Element {
+    const location = useLocation()
+
+    // Extract partner slug from pathname
+    const pathSegments = location.pathname.split('/').filter(Boolean)
+    const partnerSlug = pathSegments.length > 1 ? pathSegments[1] : null
+    const partnerConfig = partnerSlug ? partnerConfigs.find((config) => config.slug === partnerSlug) : null
+
+    // Use partner config if available, otherwise use defaults
+    const titleContent = partnerConfig ? partnerConfig.title : <span>for startups</span>
+    const creditValue = partnerConfig ? partnerConfig.value : '$50,000'
+
     return (
         <>
             <SEO
@@ -117,14 +153,16 @@ export default function Startups(): JSX.Element {
                 showTitle={false}
                 padding={false}
             >
-                <div className="@container h-full bg-[#EFF0EA] dark:bg-dark">
+                <div className="@container h-full bg-primary dark:bg-dark">
                     <div className="bg-[#122030] bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png)] bg-cover bg-top-left aspect-[1549/638] text-white p-8 relative min-h-96 flex flex-col justify-center">
                         <div className="absolute inset-0 bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/stars_24a6a0b509.png)] bg-cover" />
 
                         <div className="relative pb-32">
-                            <h1>PostHog for startups</h1>
+                            <h1 className="flex items-start gap-2.5">
+                                <span>PostHog</span> {titleContent}
+                            </h1>
                             <ul className="pl-4 mb-4">
-                                <li>$50,000 in PostHog credits</li>
+                                <li>{creditValue} in PostHog credits</li>
                                 <li>Exclusive founder merch</li>
                                 <li>Partner benefits</li>
                             </ul>
@@ -140,7 +178,7 @@ export default function Startups(): JSX.Element {
                     <div className="grid grid-cols-2 @2xl:grid-cols-4 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
                         <div className="bg-[#FFD254] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_credits_a8487ef646.png" />
-                            <h3 className="text-base my-1 leading-tight">$50,000 in PostHog credits</h3>
+                            <h3 className="text-base my-1 leading-tight">{creditValue} in PostHog credits</h3>
                             <p className="text-sm mb-0">
                                 That's a lot of events, replays, API calls, and survey responses.
                             </p>
@@ -217,12 +255,7 @@ export default function Startups(): JSX.Element {
                                     { name: 'Amplitude', width: 'minmax(150px, 200px)', align: 'left' },
                                     { name: 'Mixpanel', width: 'minmax(150px, 200px)', align: 'left' },
                                     {
-                                        name: (
-                                            <>
-                                                <Logo className="h-5 w-auto dark:hidden" />{' '}
-                                                <Logo color="#fff" className="h-5 w-auto hidden dark:block" />
-                                            </>
-                                        ),
+                                        name: 'PostHog',
                                         width: 'minmax(150px, 200px)',
                                         align: 'left',
                                         className: '!bg-white dark:!bg-dark',
@@ -277,8 +310,8 @@ export default function Startups(): JSX.Element {
                                             { content: 'None' },
                                             { content: 'None' },
                                             { content: '200,000 MTUs' },
-                                            { content: '$50,000 credit' },
-                                            { content: '$50,000 credit', className: 'bg-white dark:bg-dark' },
+                                            { content: `${creditValue} credit` },
+                                            { content: `${creditValue} credit`, className: 'bg-white dark:bg-dark' },
                                         ],
                                     },
                                     {
