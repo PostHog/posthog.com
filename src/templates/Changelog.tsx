@@ -283,10 +283,10 @@ const getStrapiFilters = (filters) => {
     return strapiFilters
 }
 export default function Changelog({ pageContext }) {
-    const [strapiFilters, setStrapiFilters] = useState(getStrapiFilters({ year: pageContext.year }))
+    const [strapiFilters, setStrapiFilters] = useState(getStrapiFilters({ year: { value: pageContext.year } }))
     const [teams, setTeams] = useState([])
     const [topics, setTopics] = useState([])
-    const { roadmaps, isLoading, mutate, hasMore, fetchMore } = useRoadmaps({
+    const { roadmaps, isValidating, mutate, hasMore, fetchMore } = useRoadmaps({
         limit: 100,
         params: {
             sort: ['dateCompleted:desc'],
@@ -340,14 +340,13 @@ export default function Changelog({ pageContext }) {
                 maxWidth="screen-2xl"
                 dataToFilter={roadmaps}
                 handleFilterChange={handleFilterChange}
-                showFilters
+                showFilters={false}
                 availableFilters={[
                     {
                         label: 'year',
                         operator: 'eq',
                         initialValue: pageContext.year,
                         options: [
-                            { label: 'All', value: null },
                             { label: '2025', value: 2025 },
                             { label: '2024', value: 2024 },
                             { label: '2023', value: 2023 },
@@ -397,6 +396,12 @@ export default function Changelog({ pageContext }) {
                 <ScrollArea>
                     {roadmaps.length > 0 && (
                         <OSTable
+                            loading={isValidating}
+                            onLastRowInView={() => {
+                                if (hasMore && !isValidating) {
+                                    fetchMore()
+                                }
+                            }}
                             columns={[
                                 {
                                     name: '',

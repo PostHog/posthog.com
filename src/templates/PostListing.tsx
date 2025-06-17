@@ -183,6 +183,12 @@ export default function Posts({ pageContext }) {
                 <ScrollArea>
                     {posts.length > 0 && (
                         <OSTable
+                            loading={isValidating}
+                            onLastRowInView={() => {
+                                if (hasMore && !isValidating) {
+                                    fetchMore()
+                                }
+                            }}
                             columns={[
                                 {
                                     name: '',
