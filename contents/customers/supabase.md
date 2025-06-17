@@ -20,15 +20,15 @@ toolsUsed:
 date: 2025-06-15
 ---
 
-When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](https://posthog.com/blog/posthog-vs-plausible) to track website traffic, for example, but had also built a bunch of their own internal tools — including one, called Logflare, for event tracking. 
+When he joined Supabase’s marketing team, Aleksi Immonen says most of the data he needed was fragmented across a handful of different tools and point solutions. The team used [Plausible](https://posthog.com/blog/posthog-vs-plausible) to track website traffic, for example, and internal tools for some of the event tracking. 
 
-“The result was that it was quite frustrating to do anything with the data,” says Aleksi. “We were self-hosting Plausible and we had some data there, but it was limited and the UI was just so slow it was almost unusable.”
+“The result was that it was quite challenging to do even basic attribution or usage-pattern analysis with the data,” says Aleksi. “We were self-hosting Plausible, and we had some data there, but it was quite limited, and the UI was just a little too slow for people to want to use it. So we did basically everything through BigQuery.”
 
-“And our A/B testing process! It was so tedious. It took at least a month to do even a simple test because so many teams needed to be involved and it was such a specialized task.”
+“And our A/B testing process! It had a lot of friction. We had a velocity of 1–2 experiments per month because multiple people needed to be involved, and it was such a specialized task.”
 
-Data wasn’t just fragmented — it was also incomplete due to the limitations of each individual platform and differences in their interoperability. Events tracked in Logflare, for example, didn’t always match 1:1 with data from Plausible, and no individual team had ownership of it all — until Aleksi got involved, that is. 
+Data wasn’t just fragmented—it was also incomplete due to the limitations of each individual platform and differences in their interoperability. Events tracked in internal tools, for example, didn’t always match 1:1 with data from Plausible, and no individual team had ownership of it all—until Aleksi got involved, that is.
 
-“Nobody really knew what product data we were tracking, and what data we did have was just a mess of BigQuery tables,” he explains. “But I’d used PostHog at my last company, really liked it, and knew that it could replace all the other things we had in one. Plus, we wouldn’t have to self-host it either.” 
+“None of us really had a full view of what event data we were tracking or the event definitions,” he explains. “But I’d used PostHog at my last company at [Twice Commerce](https://www.twicecommerce.com/), really liked it, and knew it could help us a lot with attribution, funnel analysis, and A/B testing. PostHog’s open-source nature was also a plus.” 
 
 <BorderWrapper>
 <Quote
@@ -36,30 +36,34 @@ Data wasn’t just fragmented — it was also incomplete due to the limitations 
     size="md"
     name="Aleksi Immonen"
     title="Growth Marketer, Supabase"
-    quote={`“I think PostHog is just super. It’s great for data collection, A/B testing, and web analytics. Plus, I also just really love how James’ communicates on Twitter through memes.`}
+    quote={`“I think PostHog is just super. It’s great for data collection, A/B testing, and web analytics. Plus, I also just really love James’ meme game.`}
 />
 </BorderWrapper>
 
 ## Using product analytics and Max AI to get insights, fast
 
-Before switching to PostHog, which it deployed server-side via the Node SDK, Supabase’s team struggled to do even basic analytics due to the inconsistencies in their data and the reliance on complex BigQuery tables.
+Before switching to PostHog, which they deployed server-side via the Node SDK, Supabase’s team struggled to produce quick analysis of attribution and product usage patterns.
 
 Now, every Supabase team can use the same set of data and interact with it effortlessly — either by using existing insight types, writing their own SQL, or using [Max AI](/max) to generate SQL queries for them.
 
-“Just doing anything with the product data was so hard before,” explains Aleksi. “Like, even basic product analytics was difficult and we didn’t really have web analytics capabilities at all because we couldn’t combine Google Analytics sessions with other data. Now, we’ve got things like stickiness analysis right there in PostHog — and I can do most things without needing complex SQL. It saves us so much time and energy.”
+"PostHog has proven to be easy to use and adopt for product engineers. It’s also very easy to slice and dice data and to trace back events to a user, project, or an organization. PostHog has also bunch of built in tools that help in the analysis."
 
 Max AI, PostHog’s built-in AI assistant, is especially useful for complex investigations. Not only can Max easily write SQL queries on your behalf (or fix errors if you want to work alongside it), but it can be given access to your product data to help you find what you need. 
 
-“I like Max as an AI helper because I don’t want to spend my energy going into specifics of SQL,” says Aleksi. “Instead, I just write something quick and explain what I want, and I know that it’s going to help. I can ask it to correct SQL queries, or even help me understand the correlation between events. It makes everything a lot easier, and faster.”
+“I like Max as an AI helper because it knows PostHog terminology, data model, and schemas, and it can fix my mistakes. It makes everything a lot easier and faster.”
 
-## How PostHog helped Supabase 10X weekly sign-ups
+## How PostHog helped Supabase 10X weekly new user acquisition
 
-PostHog has unlocked many other advantages for Supabase, says Aleksi, including the ability to more quickly run A/B tests and experiment with new designs. However, the biggest win has been the ability to identify new growth opportunities and double down on them early.
+PostHog has unlocked many other advantages for Supabase, says Aleksi. However, the biggest win has been the ability to identify new growth opportunities and double down on them early.
 
-“Like PostHog itself, most of our growth comes from word of mouth,” explains Aleksi. “We don’t run any ads and we think they’re a pretty inefficient way to acquire new users compared to our community — but with PostHog we noticed that integrations with AI builders are also _really_ important for our growth.”
+“Like PostHog itself, most of our growth comes from word of mouth,” explains Aleksi. “We don’t run any ads;the growth comes from many small sources: recommendations, videos, tutorials, viral memes". It’s instrumental for us to be sensitive to what’s going on and to really be in tune with the developer community.
 
-As soon as the team spotted this trend and the early trickle of sign-ups from AI builders, the next move was obviously to build partnerships with them. Fast forward to now, and not only does Supabase have a clear view on how AI builders contribute to growth, but the team also regularly spots new builders appearing in its web analytics dashboard.
+In late 2024, we noticed signals of a whole new category of acquisition source: AI builder tools.
 
-“Once I see a new one has appeared and I can see how many sign-ups it brings, I can then look at all the stats and make decisions about how to partner with them,” says Aleksi. “Now, as a result, we’re getting more users every week and we have 10Xed our user acquisition.”
+As soon as the team spotted the early trickle of sign-ups generated by AI builder tools, the obvious next move was to build partnerships with them. Fast forward to now, and not only does Supabase have a clear view on how AI builders contribute to growth, but the team also regularly spots new builders appearing in its analytics.
 
-“That’s not a figure of speech, by the way. PostHog has literally helped us get 10X more weekly sign-ups than we did a year ago. It’s changed everything.”
+"We’ve been very lucky to be the backend of choice for AI developer tools. PostHog helped us recognize these tools early on and act quickly to help them succeed with us."
+
+"Once we see a new one has appeared (weekly occurence), we can then look at all the other stats and make decisions about how to partner with them,” says Aleksi. “Now, as a result, we’re getting more users every week and we have 10Xed our weekly user acquisition.”
+
+“That’s not a figure of speech, by the way. PostHog has literally helped us get 10X more weekly new users than we did a year ago. It’s changed everything.”
