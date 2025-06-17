@@ -26,12 +26,13 @@ import PagesRouterSetup from "./pages-router-setup.mdx"
 Next.js 15.3+ provides the `instrumentation-client.ts|js` file for a quick, lightweight setup. Add it to the root of your Next.js app (for both app and pages router) and initialize PostHog in it like this:
 
 <MultiLanguage>
+
 ```js file=instrumentation-client.js
 import posthog from 'posthog-js'
 
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
   api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
-    defaults: '<ph_posthog_js_defaults>'
+  defaults: '<ph_posthog_js_defaults>'
 });
 ```
 
@@ -43,6 +44,7 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
   defaults: '<ph_posthog_js_defaults>'
 });
 ```
+
 </MultiLanguage>
 
 <details>
@@ -51,21 +53,21 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
 Older versions of Next.js don't support the `instrumentation-client.ts|js` file. You can use the following setup instead:
 
 <Tab.Group tabs={[
-    'App router', 
-    'Pages router'
+  'App router', 
+  'Pages router'
 ]}>
-    <Tab.List>
-        <Tab>App router</Tab>
-        <Tab>Pages router</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <AppRouterSetup />
-        </Tab.Panel>
-        <Tab.Panel>
-            <PagesRouterSetup />
-        </Tab.Panel>
-    </Tab.Panels>
+  <Tab.List>
+    <Tab>App router</Tab>
+    <Tab>Pages router</Tab>
+  </Tab.List>
+  <Tab.Panels>
+      <Tab.Panel>
+        <AppRouterSetup />
+      </Tab.Panel>
+      <Tab.Panel>
+        <PagesRouterSetup />
+      </Tab.Panel>
+  </Tab.Panels>
 </Tab.Group>
 
 </details>
