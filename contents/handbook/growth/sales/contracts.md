@@ -108,7 +108,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
 We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer to sign a PDF copy. One way to minimize this is to send contracts for initial review via PandaDoc when possible. It is ok to have multiple drafts in PandaDoc as long as we have the final signed copy in there as well. When a client signs an order form outside of PandaDoc, please follow these steps to complete the process:
 
-1. If you have previously created a draft, find the document in PandaDoc.
+1. If you have previously created a draft, find the document from the [Documents page in PandaDoc](https://app.pandadoc.com/a/#/documents-next?displayMode=folders_first&mainFilter=my_documents&sortBy=date_modified&customDate=date_modified&direction=desc) (note: you cannot change the status from Home or inside a document).
     - Select "Change Status" from the three-dot menu on the right.
     - Upload the signed PDF of the document.
     - Mark the status as completed.
