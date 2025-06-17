@@ -46,3 +46,7 @@ Meta has something called InstantForm ads, which enable users to sign up to our 
 Our preference is to avoid using paid "placements" as these are hard to track conversions with Substack, which means we rely on cost per click. Instead, we prefer to use a pay-per-sub model, which perform better and are easier to track
 
 This <PrivateLink url="https://github.com/issues/assigned?issue=PostHog%7Ccompany-internal%7C2017">issue</PrivateLink> outlines our current partnerships with other newsletter as of June 2025.
+
+## Reddit Ads
+
+We have also started trialing Reddit ads as of June 2025. You can view the campaign dashboard <PrivateLink url="https://ads.reddit.com/account/gm6wfjb5i3tt/dashboard?attributionSettings=%5B%5D&breakdowns=&customizedGraphMetrics=spend&customizedGraphMetrics=impressions&customizedGraphMetrics=clicks&customizedGraphMetrics=ecpm&customizedGraphMetrics=cpc&customizedGraphMetrics=ctr&end=2025-06-13&fields=conversionGoalType%2Ckey_conversion_total_result%2Ckey_conversion_ecpa%2Cimpressions%2Cecpm%2Cclicks%2Ccpc%2Cctr%2Cspend&filters=%5B%7B%22field%22%3A%22entity+status%22%2C%22operator%22%3A%22EQUALS%22%2C%22value%22%3A%22Active%2CInactive%22%7D%5D&graphMetrics=spend&pageIndex=0&pageSize=10&selectedCustomColumnIds=&selectedIds=campaigns%3A2228747327678795712%3Badgroups%3A2228747327674925867%3Bads%3A2231624428765860877&sort=%7B%22field%22%3A%22campaignCreatedAt%22%2C%22direction%22%3A2%7D&start=2025-06-07&view=None">here</PrivateLink>.
