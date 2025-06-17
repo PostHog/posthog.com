@@ -20,7 +20,9 @@ Engineers often dread the end of the quarter because it means one thing: **quart
 
 If you're doing it wrong, this can mean weeks of prep and countless meetings, all of which distract from the actual work of shipping a product. 
 
-With 26 small teams (and counting), we end up running quarterly planning a lot. We have had many opportunities to make mistakes and learn from them. We're sharing these lessons here (so you can learn faster than we did).
+With 26 small teams (and counting), we end up running quarterly planning a lot. We have had many opportunities to make mistakes and learn from them. 
+
+We're sharing these lessons here so you can learn faster than we did. They apply to any team doing planning across any time period, whether it's quarterly, monthly, or weekly.
 
 ## 1. Thinking you need the perfect plan
 
@@ -38,11 +40,31 @@ The second lesson is **not being afraid to change goals** midway through the qua
 
 ![Changing goals](https://res.cloudinary.com/dmukukwp6/image/upload/2025_06_13_13_13_42_6834ffc060.jpg)
 
-We are big fans of making important changes as quickly as possible. Team changes are announced in Slack, we test in production, we get MVPs in the hands of users. When a team realizes they need a different goal, they have the autonomy to change it themselves and immediately start working on it. No elaborate “change of goals” meeting or processes.
+We are big fans of making important changes as quickly as possible. Team changes are announced in Slack, we test in production, we get MVPs in the hands of users. When a team realizes they need a different goal, they have the autonomy to change it themselves and immediately start working on it without an elaborate “change of goals” process.
 
 Again, it's not about perfectly matching the original goals set, but building a great product. It's better to change a goal to something useful than be stuck working on something useless because you said you would 2 months ago.
 
-## 2. Obsessing over metric-based OKRs
+## 2. Doing it all live
+
+Live meetings are a trap. They can cause planning to spiral out of control for two reasons:
+
+1. They can take up a lot of time, especially if there are multiple long ones.
+2. They are often ineffective because attendees are not prepared. Time is used for thinking that should have been done in advance and you end up rushing the important bits.
+
+![It's a trap](https://res.cloudinary.com/dmukukwp6/image/upload/planningtrap_d095b6005d.png)
+
+To prevent both these issues, we keep live meetings to a minimum. Every team only does one and everyone is expected to complete the prep work ahead of time.
+
+What does this prep work look like? Our own version of SWOT, called HOGS, which covers:
+
+1. **Hopes:** What are you most excited about this quarter?
+2. **Obstructions:** Is there anything embarrassing about your product?
+3. **Growth:** What single thing would move the needle the most this quarter?
+4. **Sneak attack:** Say a competitor beats your team’s product, what would that product do differently?
+
+By having everyone complete this and review it before the meeting, our team's synchronous time is used on their goals and plans for the next quarter. These meetings become less about individual thinking, and more about discussing the thinking that's already been done.
+
+## 3. Obsessing over metric-based OKRs
 
 In 2022, we required “OKRs” as part of quarterly planning, but eventually walked it back. We found engineers were agonizing over finding the right metrics while also feeling like metrics didn't accurately reflect their subjective view of progress.
 
@@ -53,26 +75,6 @@ We learned that setting OKRs just because “Google does it” doesn't mean it's
 ![OKRs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/mistakes/okrs.png)
 
 This type of goal better aligns with our overall goal of shipping a great product that equips every developer to build successful products, not just making a number on a graph go up.
-
-## 3. Letting others own your plan
-
-Early in PostHog's life, an engineer wanted to build session replay. Our co-founder James thought it was a terrible idea. The engineer built it anyway and it ended up being wildly successful and led to our multi-product strategy.
-
-Since then, engineers are in charge of figuring out what to build. Neither execs nor product managers tell engineers what to build. It's up to engineers to decide, but this means they need to form a strong opinion of what they want to build.
-
-When it comes to quarterly planning, our process looks like the “[W framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite/)” created by Lenny Rachitsky and Nels Gilbreth. This process encourages teams and execs to work together in planning like this:
-
-1. **Context**: Execs share direction, overall objectives, strategy, mission, ICP, and more with teams. At PostHog, this is done through our weekly all-hands, 1:1s, [company handbook](https://posthog.com/handbook), `#tell-posthog-anything` messages, comments on RFCs, and more.
-
-2. **Plans**: Engineers decide what they want to build, how, and for whom. Throughout the quarter, engineers get feedback from customers, add items to [the roadmap](https://posthog.com/roadmap), and write RFCs for important product decisions. This means when it is time for quarterly planning, they already have a strong sense of what they want to build.
-
-3. **Integration**: Execs add context from other teams, customers, and future plans. They make sure the plan is both realistic and ambitious enough. This usually happens just before or during the quarterly planning meeting.
-
-4. **Buy-in**: Engineers make final tweaks, confirm buy-in, and get rolling. The last step of quarterly planning at PostHog is always a pull request to add the goals to the website which gets approved by the exec team.
-
-![W framework](https://res.cloudinary.com/dmukukwp6/image/upload/w_d7da48e563.png)
-
-This process creates enough direction to make both the company and the small team successful, while also giving teams the ownership and autonomy to make product decisions for themselves.
 
 ## 4. Being unclear about what success looks like
 
@@ -119,18 +121,25 @@ Regularly checking quarterly goals provides benefits like:
 
 Honestly, we find checking in is as important as quarterly planning itself.
 
-## 6. Planning the whole quarter in advance
+## 6. Letting others own your plan
 
-A quarterly plan is not a week-by-week guide to what we will ship. It is not some elaborate waterfall, list of issues, or agile plan. It is a set of goals that guide what a team will work on over the quarter.
+Early in PostHog's life, an engineer wanted to build session replay. Our co-founder James thought it was a terrible idea. The engineer built it anyway and it ended up being wildly successful and changed the direction of the company.
 
-Detailed plans fail due to unknown complexities and changing requirements. We've found that a week-by-week plan of what you are going to ship can create multiple issues like:
+Since then, engineers are in charge of figuring out what to build. Neither execs nor product managers tell engineers what to build. It's up to engineers to decide, but this means they need to form a strong opinion of what they want to build.
 
-1. Wasted time from making inaccurate future plans.
-2. Missed deadlines demotivate the team.
-3. Lack of flexibility means not being able to spend time on more important work as it arises.
-4. The deadline doomloop. Trying to hit a deadline leads to cut corners, tech debt, and burn out. 
+When it comes to quarterly planning, our process looks like the “[W framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite/)” created by Lenny Rachitsky and Nels Gilbreth. This process encourages teams and execs to work together in planning like this:
 
-The pressure to create a detailed plan often comes from a need for control. Relying on trust and feedback over process lessens this need for control. We empower people to make their own decisions, but that requires having a high bar for ourselves and our teammates, whether that is in hiring or day-to-day work.
+1. **Context**: Execs share direction, overall objectives, strategy, mission, ICP, and more with teams. At PostHog, this is done through our weekly all-hands, 1:1s, [company handbook](https://posthog.com/handbook), `#tell-posthog-anything` messages, comments on RFCs, and more.
+
+2. **Plans**: Engineers decide what they want to build, how, and for whom. Throughout the quarter, engineers get feedback from customers, add items to [the roadmap](https://posthog.com/roadmap), and write RFCs for important product decisions. This means when it is time for quarterly planning, they already have a strong sense of what they want to build.
+
+3. **Integration**: Execs add context from other teams, customers, and future plans. They make sure the plan is both realistic and ambitious enough. This usually happens just before or during the quarterly planning meeting.
+
+4. **Buy-in**: Engineers make final tweaks, confirm buy-in, and get rolling. The last step of quarterly planning at PostHog is always a pull request to add the goals to the website which gets approved by the exec team.
+
+![W framework](https://res.cloudinary.com/dmukukwp6/image/upload/w_d7da48e563.png)
+
+This process creates enough direction to make both the company and the small team successful, while also giving teams the ownership and autonomy to make product decisions for themselves.
 
 ## More mistakes to watch out for:
 
