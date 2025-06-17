@@ -17,7 +17,7 @@ With the development of [web analytics](/docs/web-analytics), we began autocaptu
 
 ## Calculating average time on page
 
-Before we dive into creating insights we need to first create a quick [action](https://posthog.com/docs/data/actions) to combine your pageview and pageleave events.
+Before we dive into creating an insight we need to create an [action](https://posthog.com/docs/data/actions) to combine your `$pageview` and `$pageleave` events.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/light_14c56d1a2b.png"
@@ -26,7 +26,7 @@ Before we dive into creating insights we need to first create a quick [action](h
     classes="rounded"
 />
 
-From there we can calculate average time on page by creating a [new trend insight](https://us.posthog.com/insights/new), select your new action, aggregate by average property value, and select **Previous pageview duration**. In the visualization below, change the y-axis unit to **Duration (s)** and you get a graph of the average time on page over time.
+From there, we can calculate average time on page by creating a [new trend insight](https://us.posthog.com/insights/new), selecting your new action, aggregate by average property value, and select **Previous pageview duration**. In the visualization below, change the y-axis unit to **Duration (s)** and you get a graph of the average time on page over time.
 
 <ProductScreenshot
     imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/light_6352f386d8.png"
