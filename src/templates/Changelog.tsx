@@ -29,7 +29,7 @@ import OSTable from 'components/OSTable'
 import TeamMember from 'components/TeamMember'
 import { FeaturedImage } from './PostListing'
 import { motion } from 'framer-motion'
-
+import qs from 'qs'
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
     return (
@@ -152,7 +152,7 @@ export const Topic = ({ topic }) => {
     const Icon = topicIcons[topic?.toLowerCase()]
     return (
         <p className="m-0 flex items-center space-x-1 font-bold">
-            <Icon className="size-4" />
+            {Icon && <Icon className="size-4" />}
             <span>{topic}</span>
         </p>
     )
@@ -245,35 +245,90 @@ const Teams = ({ teams }) => {
     )
 }
 
+const getStrapiFilters = (filters) => {
+    const strapiFilters = {}
+    if (filters.team?.value) {
+        strapiFilters.teams = {
+            id: {
+                $eq: filters.team.value,
+            },
+        }
+    }
+    if (filters.topic?.value) {
+        strapiFilters.topic = {
+            id: {
+                $eq: filters.topic.value,
+            },
+        }
+    }
+    if (filters.year?.value) {
+        strapiFilters.$and = [
+            {
+                dateCompleted: {
+                    $gte: `${filters.year.value}-01-01`,
+                },
+            },
+            {
+                dateCompleted: {
+                    $lt: `${filters.year.value + 1}-01-01`,
+                },
+            },
+            {
+                complete: {
+                    $eq: true,
+                },
+            },
+        ]
+    }
+    return strapiFilters
+}
 export default function Changelog({ pageContext }) {
+    const [strapiFilters, setStrapiFilters] = useState(getStrapiFilters({ year: pageContext.year }))
+    const [teams, setTeams] = useState([])
+    const [topics, setTopics] = useState([])
     const { roadmaps, isLoading, mutate, hasMore, fetchMore } = useRoadmaps({
         limit: 100,
         params: {
-            sort: 'dateCompleted:desc',
-            filters: {
-                $and: [
-                    {
-                        dateCompleted: {
-                            $gte: `${pageContext.year}-01-01`,
-                        },
-                    },
-                    {
-                        dateCompleted: {
-                            $lt: `${pageContext.year + 1}-01-01`,
-                        },
-                    },
-                    {
-                        complete: {
-                            $eq: true,
-                        },
-                    },
-                ],
-            },
+            sort: ['dateCompleted:desc'],
+            filters: { dateCompleted: { $notNull: true }, ...strapiFilters },
         },
     })
 
+    useEffect(() => {
+        const query = qs.stringify({
+            sort: 'name:asc',
+            pagination: {
+                pageSize: 100,
+            },
+        })
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/teams?${query}`)
+            .then((res) => res.json())
+            .then(({ data }) => {
+                setTeams(data)
+            })
+    }, [])
+
+    useEffect(() => {
+        const query = qs.stringify({
+            sort: 'label:asc',
+            pagination: {
+                pageSize: 100,
+            },
+            filters: {
+                label: {
+                    $notContains: '#',
+                },
+            },
+        })
+        fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/topics?${query}`)
+            .then((res) => res.json())
+            .then(({ data }) => {
+                setTopics(data)
+            })
+    }, [])
+
     const handleFilterChange = (filters) => {
-        console.log(filters)
+        setStrapiFilters(getStrapiFilters(filters))
     }
 
     return (
@@ -286,7 +341,58 @@ export default function Changelog({ pageContext }) {
                 dataToFilter={roadmaps}
                 handleFilterChange={handleFilterChange}
                 showFilters
-                availableFilters={[]}
+                availableFilters={[
+                    {
+                        label: 'year',
+                        operator: 'eq',
+                        initialValue: pageContext.year,
+                        options: [
+                            { label: 'All', value: null },
+                            { label: '2025', value: 2025 },
+                            { label: '2024', value: 2024 },
+                            { label: '2023', value: 2023 },
+                            { label: '2022', value: 2022 },
+                            { label: '2021', value: 2021 },
+                            { label: '2020', value: 2020 },
+                        ],
+                    },
+                    ...(topics.length > 0
+                        ? [
+                              {
+                                  label: 'topic',
+                                  operator: 'eq',
+                                  options: [
+                                      {
+                                          label: 'All',
+                                          value: null,
+                                      },
+                                      ...topics.map((topic) => ({
+                                          label: topic.attributes.label,
+                                          value: topic.id,
+                                      })),
+                                  ],
+                              },
+                          ]
+                        : []),
+                    ...(teams.length > 0
+                        ? [
+                              {
+                                  label: 'team',
+                                  operator: 'includes',
+                                  options: [
+                                      {
+                                          label: 'All',
+                                          value: null,
+                                      },
+                                      ...teams.map((team) => ({
+                                          label: team.attributes.name,
+                                          value: team.id,
+                                      })),
+                                  ],
+                              },
+                          ]
+                        : []),
+                ]}
             >
                 <ScrollArea>
                     {roadmaps.length > 0 && (
@@ -298,7 +404,7 @@ export default function Changelog({ pageContext }) {
                                     width: '120px',
                                 },
                                 {
-                                    name: 'Product',
+                                    name: 'Topic',
                                     align: 'left',
                                 },
                                 {
@@ -315,6 +421,7 @@ export default function Changelog({ pageContext }) {
                                 const imageURL = roadmap.attributes.image?.data?.attributes?.url
                                 const authors = roadmap.attributes.profiles?.data
                                 const teams = roadmap.attributes.teams?.data
+                                const topic = roadmap.attributes.topic?.data?.attributes?.label
 
                                 return {
                                     cells: [
@@ -322,9 +429,7 @@ export default function Changelog({ pageContext }) {
                                             content: imageURL ? <FeaturedImage url={imageURL} /> : null,
                                         },
                                         {
-                                            content: (
-                                                <Topic topic={roadmap.attributes.topic?.data?.attributes?.label} />
-                                            ),
+                                            content: topic ? <Topic topic={topic} /> : null,
                                         },
                                         {
                                             content:
