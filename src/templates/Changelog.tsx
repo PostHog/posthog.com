@@ -30,6 +30,8 @@ import TeamMember from 'components/TeamMember'
 import { FeaturedImage } from './PostListing'
 import { motion } from 'framer-motion'
 import qs from 'qs'
+import useProduct from 'hooks/useProduct'
+
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
     return (
@@ -132,7 +134,7 @@ const Description = ({ description, title }) => {
         <button onClick={() => setOpen(!open)}>
             <div className="flex justify-start items-start">
                 <IconChevronDown className={`size-6 ${open ? '' : '-rotate-90'} flex-shrink-0 transition-transform`} />
-                <strong>{title}</strong>
+                <strong className="font-semibold">{title}</strong>
             </div>
             <motion.div
                 className={`text-left overflow-hidden ml-6`}
@@ -148,11 +150,36 @@ const Description = ({ description, title }) => {
     )
 }
 
-export const Topic = ({ topic }) => {
+interface TopicProps {
+    topic: string
+}
+
+export const Topic = ({ topic }: TopicProps) => {
+    const products = useProduct() // This returns all products when no handle is provided
+
+    // Try to find a matching product by name
+    const matchingProduct = products?.find((product) => product.name?.toLowerCase() === topic?.toLowerCase())
+
+    if (matchingProduct) {
+        const ProductIcon = matchingProduct.Icon
+        const color = matchingProduct.color
+        return (
+            <p className="m-0 flex items-center space-x-1 font-semibold text-sm">
+                {ProductIcon && <ProductIcon className={`size-5 text-${color}`} />}
+                <span>
+                    <a href={`/${matchingProduct.slug}`} className="text-red dark:text-yellow font-semibold">
+                        {topic}
+                    </a>
+                </span>
+            </p>
+        )
+    }
+
+    // Fall back to existing topicIcons logic
     const Icon = topicIcons[topic?.toLowerCase()]
     return (
-        <p className="m-0 flex items-center space-x-1 font-bold">
-            {Icon && <Icon className="size-4" />}
+        <p className="m-0 flex items-center space-x-1 font-semibold text-sm">
+            {Icon && <Icon className="size-5 opacity-75" />}
             <span>{topic}</span>
         </p>
     )
@@ -404,7 +431,7 @@ export default function Changelog({ pageContext }) {
                             }}
                             columns={[
                                 {
-                                    name: '',
+                                    name: 'Date',
                                     align: 'left',
                                     width: '120px',
                                 },
@@ -413,36 +440,40 @@ export default function Changelog({ pageContext }) {
                                     align: 'left',
                                 },
                                 {
-                                    name: 'Author',
+                                    name: '',
                                     align: 'left',
+                                    width: '120px',
                                 },
                                 {
                                     name: 'Description',
                                     align: 'left',
                                     width: '1fr',
                                 },
+                                {
+                                    name: 'Author',
+                                    align: 'left',
+                                },
                             ]}
                             rows={roadmaps.map((roadmap) => {
-                                const imageURL = roadmap.attributes.image?.data?.attributes?.url
-                                const authors = roadmap.attributes.profiles?.data
                                 const teams = roadmap.attributes.teams?.data
+                                const imageURL = roadmap.attributes.image?.data?.attributes?.url
                                 const topic = roadmap.attributes.topic?.data?.attributes?.label
+                                const authors = roadmap.attributes.profiles?.data
 
                                 return {
                                     cells: [
                                         {
-                                            content: imageURL ? <FeaturedImage url={imageURL} /> : null,
+                                            content: roadmap.attributes.dateCompleted ? (
+                                                <span className="text-sm text-primary/75 dark:text-primary-dark/75">
+                                                    {dayjs(roadmap.attributes.dateCompleted).format('MMM D, YYYY')}
+                                                </span>
+                                            ) : null,
                                         },
                                         {
                                             content: topic ? <Topic topic={topic} /> : null,
                                         },
                                         {
-                                            content:
-                                                authors?.length > 0 ? (
-                                                    <Authors authors={authors} />
-                                                ) : (
-                                                    <Teams teams={teams} />
-                                                ),
+                                            content: imageURL ? <FeaturedImage url={imageURL} /> : null,
                                         },
                                         {
                                             content: (
@@ -451,6 +482,14 @@ export default function Changelog({ pageContext }) {
                                                     description={roadmap.attributes.description}
                                                 />
                                             ),
+                                        },
+                                        {
+                                            content:
+                                                authors?.length > 0 ? (
+                                                    <Authors authors={authors} />
+                                                ) : (
+                                                    <Teams teams={teams} />
+                                                ),
                                         },
                                     ],
                                 }
