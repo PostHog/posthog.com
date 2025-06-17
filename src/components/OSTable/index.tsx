@@ -5,6 +5,7 @@ interface Column {
     name: string
     align?: 'left' | 'center' | 'right'
     width?: string
+    className?: string
 }
 
 interface Row {
@@ -35,8 +36,9 @@ const OSTable: React.FC<OSTableProps> = ({
 
     return (
         <div
-            className={`grid divide-x divide-y divide-border border-r border-b border-primary text-[15px] [&>div]:px-2 ${size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
-                } ${className}`}
+            className={`grid divide-x divide-y divide-border border-r border-b border-primary text-[15px] [&>div]:px-2 ${
+                size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
+            } ${className}`}
             style={{ gridTemplateColumns: gridClass }}
         >
             {/* Header Row */}
@@ -45,8 +47,9 @@ const OSTable: React.FC<OSTableProps> = ({
                     {columns.map((column, index) => (
                         <div
                             key={index}
-                            className={`text-sm border-l border-t border-border bg-input font-bold ${column.align === 'center' ? 'text-center' : ''
-                                }`}
+                            className={`text-sm border-l border-t border-border bg-input font-bold ${
+                                column.align === 'center' ? 'text-center' : ''
+                            } ${column.className || ''}`}
                         >
                             {column.name}
                         </div>
@@ -63,9 +66,10 @@ const OSTable: React.FC<OSTableProps> = ({
                             className={`
                                 flex flex-col 
                                 ${rowAlignment === 'top' ? 'justify-start' : 'justify-center'} 
-                                ${columns?.[cellIndex]?.align === 'left'
-                                    ? 'items-start'
-                                    : columns?.[cellIndex]?.align === 'right'
+                                ${
+                                    columns?.[cellIndex]?.align === 'left'
+                                        ? 'items-start'
+                                        : columns?.[cellIndex]?.align === 'right'
                                         ? 'justify-end'
                                         : 'items-center'
                                 } ${cell.className || ''}`}
