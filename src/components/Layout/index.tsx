@@ -16,6 +16,7 @@ import Toggle from 'components/Toggle'
 import Tooltip from 'components/Tooltip'
 import Banner from 'components/Banner'
 import HedgeHogModeEmbed from 'components/HedgehogMode'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 const TheoToggle = () => {
     const { theoMode, setTheoMode } = useLayoutData()
@@ -88,13 +89,11 @@ const Layout = ({
     }, [])
 
     return (
-        <SearchProvider>
-            <LayoutProvider parent={parent} activeInternalMenu={activeInternalMenu}>
-                <Article className={className} headerBlur={headerBlur}>
-                    {children}
-                </Article>
-            </LayoutProvider>
-        </SearchProvider>
+        <ScrollArea>
+            <div data-scheme="secondary" className="bg-primary">
+                {children}
+            </div>
+        </ScrollArea>
     )
 }
 

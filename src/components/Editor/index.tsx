@@ -315,42 +315,43 @@ export function Editor({
                             contentRef={searchContentRef}
                             className="-top-px right-8"
                         />
-                        {showFilters && availableFilters && availableFilters.length > 0 && (
-                            <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark flex gap-1">
-                                {availableFilters?.map((filter, index) => {
-                                    return (
-                                        <div key={filter.label} className="flex items-center gap-1">
-                                            <span>{index === 0 ? 'where' : 'and'}</span>
-                                            <span className="text-sm font-bold">{filter.label}</span>
-                                            <span className="italic">{filter.operator}</span>
-                                            <Select
-                                                disabled={disableFilterChange}
-                                                placeholder={filter.label}
-                                                defaultValue={filter.initialValue || filter.options[0].value}
-                                                key={filter.label}
-                                                groups={[
-                                                    {
-                                                        label: filter.label,
-                                                        items: filter.options.map((option) => ({
-                                                            label: option.label,
-                                                            value: option.value,
-                                                        })),
-                                                    },
-                                                ]}
-                                                onValueChange={(value) =>
-                                                    handleFilterChange(
-                                                        filter.value || filter.label,
-                                                        value,
-                                                        filter.filter
-                                                    )
-                                                }
-                                            />
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                        )}
+
                         <ScrollArea>
+                            {showFilters && availableFilters && availableFilters.length > 0 && (
+                                <div className="bg-accent dark:bg-accent-dark p-2 text-sm border-b border-border dark:border-border-dark flex gap-1 sticky top-0 z-10">
+                                    {availableFilters?.map((filter, index) => {
+                                        return (
+                                            <div key={filter.label} className="flex items-center gap-1">
+                                                <span>{index === 0 ? 'where' : 'and'}</span>
+                                                <span className="text-sm font-bold">{filter.label}</span>
+                                                <span className="italic">{filter.operator}</span>
+                                                <Select
+                                                    disabled={disableFilterChange}
+                                                    placeholder={filter.label}
+                                                    defaultValue={filter.initialValue || filter.options[0].value}
+                                                    key={filter.label}
+                                                    groups={[
+                                                        {
+                                                            label: filter.label,
+                                                            items: filter.options.map((option) => ({
+                                                                label: option.label,
+                                                                value: option.value,
+                                                            })),
+                                                        },
+                                                    ]}
+                                                    onValueChange={(value) =>
+                                                        handleFilterChange(
+                                                            filter.value || filter.label,
+                                                            value,
+                                                            filter.filter
+                                                        )
+                                                    }
+                                                />
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            )}
                             <div className={`prose p-4 mx-auto max-w-${maxWidth}`}>
                                 {title && (
                                     <h1 className="text-2xl font-bold">

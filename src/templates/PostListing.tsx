@@ -11,6 +11,8 @@ import { getSortOption } from './BlogPost'
 import Link from 'components/Link'
 import TeamMember from 'components/TeamMember'
 import qs from 'qs'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 
 dayjs.extend(relativeTime)
 
@@ -24,6 +26,20 @@ const categories = [
         root: 'blog',
     },
 ]
+
+const FeaturedImage = ({ url }: { url: string }) => {
+    const [isZoomed, setIsZoomed] = useState(false)
+    return (
+        <div
+            data-scheme="secondary"
+            className="flex items-center justify-center bg-primary rounded border border-border overflow-hidden"
+        >
+            <ControlledZoom isZoomed={isZoomed} onZoomChange={setIsZoomed}>
+                <CloudinaryImage src={url} width={isZoomed ? undefined : 200} />
+            </ControlledZoom>
+        </div>
+    )
+}
 
 export default function Posts({ pageContext }) {
     const [tags, setTags] = useState([])
@@ -169,6 +185,11 @@ export default function Posts({ pageContext }) {
                         <OSTable
                             columns={[
                                 {
+                                    name: '',
+                                    align: 'left',
+                                    width: '120px',
+                                },
+                                {
                                     name: 'Date',
                                     align: 'left',
                                     width: '120px',
@@ -189,54 +210,60 @@ export default function Posts({ pageContext }) {
                                     width: '1fr',
                                 },
                             ]}
-                            rows={posts.map((post, index) => ({
-                                cells: [
-                                    {
-                                        content: (
-                                            <span className="text-muted font-semibold">
-                                                {dayjs(post.attributes.date).format('MMM D, YYYY')}
-                                            </span>
-                                        ),
-                                    },
-                                    {
-                                        content: (
-                                            <Link className="font-semibold" to={post.attributes.slug}>
-                                                {post.attributes.title}
-                                            </Link>
-                                        ),
-                                    },
-                                    {
-                                        content: (
-                                            <ul className="list-none m-0 p-0">
-                                                <li className="text-sm">
-                                                    {post.attributes.post_tags.data
-                                                        .map((tag) => tag.attributes.label)
-                                                        .join(', ')}
-                                                </li>
-                                            </ul>
-                                        ),
-                                    },
-                                    {
-                                        content: (
-                                            <ul className="list-none m-0 p-0 flex flex-wrap gap-1">
-                                                {post.attributes.authors.data.map((author) => {
-                                                    const name = [
-                                                        author.attributes.firstName,
-                                                        author.attributes.lastName,
-                                                    ]
-                                                        .filter(Boolean)
-                                                        .join(' ')
-                                                    return (
-                                                        <li key={author.id}>
-                                                            <TeamMember name={name} photo />
-                                                        </li>
-                                                    )
-                                                })}
-                                            </ul>
-                                        ),
-                                    },
-                                ],
-                            }))}
+                            rows={posts.map((post, index) => {
+                                const featuredImageURL = post.attributes?.featuredImage?.url
+                                return {
+                                    cells: [
+                                        {
+                                            content: featuredImageURL ? <FeaturedImage url={featuredImageURL} /> : null,
+                                        },
+                                        {
+                                            content: (
+                                                <span className="text-muted font-semibold">
+                                                    {dayjs(post.attributes.date).format('MMM D, YYYY')}
+                                                </span>
+                                            ),
+                                        },
+                                        {
+                                            content: (
+                                                <Link className="font-semibold" to={post.attributes.slug}>
+                                                    {post.attributes.title}
+                                                </Link>
+                                            ),
+                                        },
+                                        {
+                                            content: (
+                                                <ul className="list-none m-0 p-0">
+                                                    <li className="text-sm">
+                                                        {post.attributes.post_tags.data
+                                                            .map((tag) => tag.attributes.label)
+                                                            .join(', ')}
+                                                    </li>
+                                                </ul>
+                                            ),
+                                        },
+                                        {
+                                            content: (
+                                                <ul className="list-none m-0 p-0 flex flex-wrap gap-1">
+                                                    {post.attributes.authors.data.map((author) => {
+                                                        const name = [
+                                                            author.attributes.firstName,
+                                                            author.attributes.lastName,
+                                                        ]
+                                                            .filter(Boolean)
+                                                            .join(' ')
+                                                        return (
+                                                            <li key={author.id}>
+                                                                <TeamMember name={name} photo />
+                                                            </li>
+                                                        )
+                                                    })}
+                                                </ul>
+                                            ),
+                                        },
+                                    ],
+                                }
+                            })}
                         />
                     )}
                 </ScrollArea>

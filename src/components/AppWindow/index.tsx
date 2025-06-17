@@ -24,6 +24,7 @@ import { ChatProvider } from '../../hooks/useChat'
 import Inbox from 'components/Inbox'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
+import Legal from 'components/Legal'
 
 const snapThreshold = -50
 
@@ -37,6 +38,9 @@ const Router = (props) => {
     }
     if ((props.pageContext?.post || /^posts|^changelog\/(.*?)\//.test(path)) && props.data) {
         return <BlogPost {...props} />
+    }
+    if (['/terms', '/privacy', '/dpa', '/baa'].includes(path)) {
+        return <Legal defaultTab={path}>{children}</Legal>
     }
     return children
 }

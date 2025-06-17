@@ -17,6 +17,7 @@ interface OSTabsProps {
     fullScreen?: boolean
     className?: string
     triggerDataScheme?: string
+    onValueChange?: (value: string) => void
 }
 
 export default function OSTabs({
@@ -26,10 +27,12 @@ export default function OSTabs({
     frame = true,
     className,
     triggerDataScheme = 'secondary',
+    onValueChange,
 }: OSTabsProps) {
     return (
         <>
             <Tabs.Root
+                onValueChange={onValueChange}
                 defaultValue={defaultValue || tabs[0]?.value}
                 className={className ?? 'relative flex flex-col pt-2 px-4 pb-4 h-full min-h-0 bg-primary'}
             >
