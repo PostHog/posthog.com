@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { Tooltip as RadixTooltip } from 'radix-ui'
 
-export interface TooltipDemoProps {
+export interface TooltipProps {
     trigger: React.ReactNode
     children: React.ReactNode
     open?: boolean
     onOpenChange?: (open: boolean) => void
 }
 
-const TooltipDemo = ({ trigger, children, open, onOpenChange }: TooltipDemoProps) => {
+const Tooltip = ({ trigger, children, open, onOpenChange }: TooltipProps) => {
     return (
         <RadixTooltip.Provider delayDuration={0}>
             <RadixTooltip.Root open={open} onOpenChange={onOpenChange}>
@@ -31,4 +31,4 @@ const TooltipDemo = ({ trigger, children, open, onOpenChange }: TooltipDemoProps
     )
 }
 
-export default TooltipDemo
+export default Tooltip

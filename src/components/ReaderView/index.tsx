@@ -26,7 +26,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { Fieldset } from 'components/OSFieldset'
 import Slider from 'components/RadixUI/Slider'
-import TooltipDemo from 'components/RadixUI/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { ReaderViewProvider, useReaderView } from './context/ReaderViewContext'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -221,7 +221,7 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
                     Toggle light/dark mode in{' '}
                     <span className="inline-flex items-center gap-0.5">
                         <button className="font-semibold underline">desktop settings</button>
-                        <TooltipDemo trigger={<IconInfo className="size-4" />}>Lower right!</TooltipDemo>
+                        <Tooltip trigger={<IconInfo className="size-4" />}>Lower right!</Tooltip>
                     </span>
                 </p>
             </div>

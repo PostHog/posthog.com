@@ -13,7 +13,7 @@ import TeamMember from 'components/TeamMember'
 import qs from 'qs'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
-import TooltipDemo from 'components/RadixUI/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
 
 dayjs.extend(relativeTime)
@@ -34,7 +34,7 @@ export const FeaturedImage = ({ url }: { url: string }) => {
     const [isLargeImageLoaded, setIsLargeImageLoaded] = useState(false)
 
     return (
-        <TooltipDemo
+        <Tooltip
             trigger={
                 <div className="max-h-8 max-w-48">
                     <CloudinaryImage
@@ -61,7 +61,7 @@ export const FeaturedImage = ({ url }: { url: string }) => {
                     className={!isLargeImageLoaded ? 'hidden' : ''}
                 />
             </div>
-        </TooltipDemo>
+        </Tooltip>
     )
 }
 
