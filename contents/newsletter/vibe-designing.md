@@ -1,6 +1,6 @@
 ---
 title: An engineer's guide to vibe design (with prompts)
-date: 2025-06-09
+date: 2025-06-16
 author:
   - lior-neu-ner
 featuredImage: >-
@@ -12,26 +12,29 @@ crosspost:
   - Founders
   - Blog
 ---
+
+![Matrix meme with title "What if I told you engineers can be designers"](https://res.cloudinary.com/dmukukwp6/image/upload/452937392_94602ee7_0b56_43cc_9bca_4df2b125229e_a5ecb1a164.jpg)
+
 Design used to be a dependency. If the Figma wasn't ready, neither were you.
 
 Enter vibe designing.
 
-With tools like [Lovable](https://lovable.dev/), [v0.dev](https://v0.dev/), and [Bolt](https://bolt.new/), you can ship polished apps without waiting on anyone else.
+With tools like [Lovable](https://lovable.dev/?utm_source=posthog&utm_campaign=posthog), [v0.dev](https://v0.dev/?utm_source=posthog&utm_campaign=posthog), and [Bolt](https://bolt.new/?utm_source=posthog&utm_campaign=posthog), you can ship polished apps without waiting on anyone else.
 
 This post shows the full process – start to finish – by actually designing a tiny app while we go. No designer in the loop, just vibes, taste, and a few rounds with an LLM.
 
 ## Step 1: Define your job to done
 
-![Super mario example of what your app does](https://res.cloudinary.com/dmukukwp6/image/upload/mario_e44054d515.png)
-<Caption>credit: <a href="https://www.useronboard.com/features-vs-benefits/">Samuel Hulick</a></Caption>
-
 People don't care about your product. They care about getting their job done.
 
-Your first step is to define that job in a single sentence. This isn't just a nice-to-have. Nail it and every design decision gets easier; skip it and you'll polish pixels that don't matter.
+Your first step is to define that job in a single sentence. This isn't just a nice-to-have, it's your design compass. It makes priorities obvious and tradeoffs easier to navigate.
 
 A good statement is anchored in real user context and focuses on their desired outcome. A practical way to define it is:
 
-> **When** [trigger] happens, [user persona] **wants to** [action], **so that** they can [desired outcome].
+>  **When** [trigger] happens, [user persona] **wants to** [action], **so that** they can [desired outcome].
+
+![Super mario example of what your app does](https://res.cloudinary.com/dmukukwp6/image/upload/mario_final_c14208d29c.png)
+<Caption>credit: <a href="https://www.useronboard.com/features-vs-benefits/">Samuel Hulick</a></Caption>
 
 Here are some examples:
 
@@ -39,13 +42,14 @@ Here are some examples:
 - ❌ "Engineers need to send incident updates."
 - ✅ "When an incident occurs, engineers want to communicate status updates quickly and clearly, so that customers and internal stakeholders stay informed and trust is maintained."
 
-**Example 2: Team wiki product (e.g. Notion)**  
+**Example 2: Team wiki product (e.g. Notion)**
 - ❌ "Employees want a company handbook."
 - ✅ "When an employee has a question, they want to find the relevant answer quickly, so that they can stay productive without asking someone."
 
-**Example 3: Issue tracker (e.g. Linear)**  
+**Example 3: Issue tracker (e.g. Linear)**
 - ❌ "Developers want to track bugs."
 - ✅ "When a developer hits an error, they want to log a bug quickly and hand it off, so that they can get back into their flow."
+
 
 For the rest of this post, we'll use the issue tracker example and create a tiny bug tracker called BugSplat 🐞💥
 
@@ -53,7 +57,7 @@ For the rest of this post, we'll use the issue tracker example and create a tiny
 
 ![Steve Hogs quote](https://res.cloudinary.com/dmukukwp6/image/upload/452952205_79c1f405_fa54_44ad_b0c3_14a25e86b62f_fc5067e6bc.jpg)
 
-With your job to be done in mind, spark inspiration by spending 30 minutes inside two or three products that solve a similar problem. Play around with them and pay attention to how they look and feel. A few things to think about:
+With your job to be done in mind, steal inspiration from existing products by playing with them. Pay attention to how they look and feel. A few things to think about:
 
 - **First impressions:** Where do your eyes go first?
 - **Flow:** How many steps or clicks to achieve the job?
@@ -65,19 +69,17 @@ Take screenshots and scribble notes. You now have a taste bar for yourself and r
 
 In the case of BugSplat, here's what I found when I researched similar apps:
 
-| Product           | What I love                                                                                   | What I'll avoid                                                           |
-|-------------------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------|
-| **Linear**         | Clean, minimal layout<br/> Fast modal-based bug creation<br/> Keyboard shortcuts for power users      | Abstract language <br/> Intimidating for non-technical users                   |
-| **GitHub Projects** | Familiar issue structure<br/> Good activity history         | Too many fields upfront <br/> Slow to create quick entries             |
-
+![analysis of what I like and dislike in different task tracking apps](https://res.cloudinary.com/dmukukwp6/image/upload/table_814e289eaf.png)
 
 ## Step 3. Wireframe with an LLM
 
 ![Comic of hedgehog stealing AI's design](https://res.cloudinary.com/dmukukwp6/image/upload/452937409_07082e67_dd9c_4e5f_9ed2_43d2423ed64a_01b19d9feb.png)
 
-You should now have a strong opinion of how you want your app to look and feel. The next step is wireframe it to see how the UX holds together.
+You should now have a strong opinion of how you want your app to look and feel. The next step is to wireframe it and see how the UX holds together.
 
-[Lovable](https://lovable.dev/), [v0.dev](https://v0.dev/), or [Bolt](https://bolt.new/) can get you to a working wireframe fast. All you need is right prompt. Here's the template I use:
+[Lovable](https://lovable.dev/?utm_source=newsletter.posthog.com), [v0.dev](https://v0.dev/?utm_source=newsletter.posthog.com), or [Bolt](https://bolt.new/?utm_source=newsletter.posthog.com) can get you to a working wireframe fast. The key is to give them enough context on what the app should do, who it’s for, and how it should feel. Don’t forget to include your notes and screenshots from your competitor research.
+
+Here's the template I use:
 
 ```llm
 # Goal
@@ -167,6 +169,15 @@ Prioritize: speed, clarity, zero-fat UX
 - Abstract language
 - Intimidating for non-technical users
 
+## Jira
+**What works well:**
+- Customizable workflows
+
+**What doesn't**
+- Overly complex
+- Too many clicks and screens
+- Slow performance
+
 ### GitHub Issues
 **What works well:**
 - Familiar issue structure
@@ -177,8 +188,9 @@ Prioritize: speed, clarity, zero-fat UX
 - Slow to create quick entries
 
 **Competitor screenshots**
-- linear_bug_list.png
-- github_issue_form.png
+- linear_bug_list.png - shows simple bug creation 
+- jira.png - shows cluttered UI
+- github_issue_form - show too many fields in bug creation
 ```
 
 And the wireframe is generated: 
@@ -187,13 +199,11 @@ And the wireframe is generated:
 
 ## Step 4. Bring it to life
 
-Once you're happy with the wireframes, the next step is to make it look and feel like a real product. How you approach this depends on whether you're adding a feature to an existing app or building something completely new.
+Once you're happy with the wireframes, the next step is to make it look and feel like a real product. How you approach this depends on whether you're adding a feature to an existing app, or building something completely new.
 
 ### a. Slotting into an existing app:
 
 Prompt the LLM that has your wireframe to flesh out the UI with your app's design system. The more context you provide, the closer the output will match your actual product. Useful inputs include:
-
-
 
 - **UI components** for core interaction patterns  
   e.g. `components/ui/button`, `input`, `card`
@@ -205,7 +215,6 @@ Prompt the LLM that has your wireframe to flesh out the UI with your app's desig
   e.g. `layouts/app-layout`, `dashboard-layout`
 - **Real screens** to show how everything comes together in context  
   e.g. `pages/settings`, `user-profile`
-
 
 Here's a prompt you can use: 
 
@@ -229,7 +238,7 @@ The wireframe looks great. Now translate it into production-ready UI that blends
 
 With no legacy design language, you need to create enough scaffolding to keep the LLM from wandering into neon gradients and Comic Sans. 
 
-To start, generate your app's core color palette. I like using [Coolors](https://coolors.co/) or [Figma's palette generator](https://www.figma.com/color-palette-generator/) for this. 
+To start, generate your app's core color palette. I like using [Coolors](https://coolors.co/?utm_source=newsletter.posthog.com) or [Figma's palette generator](https://www.figma.com/color-palette-generator?utm_source=newsletter.posthog.com) for this. If you're stuck on deciding on a color palette, draw inspiration from your favorite apps.
 
 > **💡 Tip:** If you're stuck on deciding on a color palette, draw inspiration from your favorite apps.
 
@@ -301,7 +310,7 @@ schema:
 6. Validate all contrast requirements and return **only** the JSON matching **schema**—no extra keys or explanatory text.
 ```
 
-Then, take your generated color JSON and feed it back to Lovable/v0/Bolt along with the below prompt to create your design system. You'll probably need to prompt it further to tweak the output to your liking.
+Next, take your generated color JSON and feed it back to Lovable/v0/Bolt along with the prompt below. You’re giving it the building blocks (colors, typography, spacing, shadow, etc.) to generate a cohesive design system. You'll probably need to prompt it further to tweak the output to your liking.
 
 ```llm
 The wireframe looks great. Now translate it into production-ready UI using the following design system:
@@ -363,30 +372,36 @@ Great design isn't magic. It's a set of rules you can learn. And applying them c
 
 Here are six foundational principles every engineer should know. Your UI should pass each one.
 
-![Design principles every engineer should know](https://res.cloudinary.com/dmukukwp6/image/upload/design_principles_bd0483d9c7.png)
+![Design principles every engineer should know](https://res.cloudinary.com/dmukukwp6/image/upload/design_princoiple_a2051c488e.png)
 
 Applying the rules to BugSplat, I noticed a few things:
 
-**Hierarchy:** 
-❌ The "Bug Tracker" headline is large but not actually important. It should be smaller.
-❌ The ticket's last updated time is more important than the description, so it should appear above it.
-❌ The filter button text is too small.
 
-**Contrast:** 
-❌ The filter button background is the same as the tickets, making it hard to notice.
-❌ The purple text which shows the total number of open tickets is hard to read.
+**Hierarchy:**
+- ❌ The "Bug Tracker" headline is large, but not actually important. Should be smaller.
+- ❌ The ticket's last updated time is more important than the description, so it should appear above it. 
+- ❌ The filter button text is too small.
 
-**Balance:** 
-❌ The tickets currently skew components heavily to the left.
+**Contrast:**
+- ❌ The filter button background is the same as the tickets, making it hard to notice. 
+- ❌ The purple text which shows the total number of open tickets is hard to read.
 
-**Consistency** 
-❌ The number of open tickets component looks like a button but isn't.
-❌ The new bug and filter buttons have different heights.
+**Balance:**
+- ❌ The tickets currently skew components heavily to the left.
 
-**Proximity and alignment** 
-✅ Everything looks good
+**Consistency**
+- ❌ The number of open tickets component looks like a button but isn't. 
+- ❌ The new bug and filter buttons have different heights.
 
-![Before and after of BugSplat](https://res.cloudinary.com/dmukukwp6/image/upload/beforeafter_d7fdfb2aff.png)
+**Alignment**
+- ❌ The white circles on the tickets representing the user’s profile pictures are not left-aligned, making it look awkward.
+
+**Proximity:**
+- ✅ Everything looks good
+
+![Before and after of BugSplat](https://res.cloudinary.com/dmukukwp6/image/upload/before_and_after_4699f48565.png)
+
+Ah, much better. Which brings us to the final step.
 
 ## Step 6: Ship it and iterate
 
@@ -394,10 +409,10 @@ Once your UI is in decent shape, get it in front of real users as soon as possib
 
 Here's how to ship safely and learn fast:
 
-- **Use a [feature flag](https://newsletter.posthog.com/p/dont-make-these-classic-feature-flag)** to launch to a small group of trusted users first. It lowers the stakes and buys you space to improve.
-- **Watch [session replays](https://posthog.com/session-replay)** to spot where people hesitate, rage click, or bounce.
+- **Use a [feature flag](/newsletter/feature-flag-mistakes)** to launch to a small group of trusted users first. It lowers the stakes and buys you space to improve.
+- **Watch [session replays](/session-replay)** to spot where people hesitate, rage click, or bounce.
 - **Track key funnels** so you know if users are actually completing the job to be done and not just poking around.
-- **[Talk to real humans](https://newsletter.posthog.com/p/talk-to-users).** Ask what felt slow, confusing, or unnecessary. You'll be surprised what they struggle with.
+- **[Talk to real humans](/newsletter/talk-to-users).** Ask what felt slow, confusing, or unnecessary. You'll be surprised what they struggle with.
 - **Iterate quickly.** One small fix at a time adds up fast.
  
 ## TL;DR
@@ -407,9 +422,8 @@ You can be a designer too. The process is learnable and can get you shipping in 
 ![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
 <Caption>You to your team now, probably.</Caption>
 
-*Word by Lior Neu-ner, who is always down for a good vibe.*
-
-## Further reading
-
-https://www.joelonsoftware.com/2001/10/24/user-interface-design-for-programmers/
-https://lawsofux.com/
+## 😎 Vibe-driven development reads:
+- **[Laws of UX](https://lawsofux.com?utm_source=newsletter.posthog.com) – Jon Yablonski**
+- **[Family Values](https://benji.org/family-values) – Benji Taylor**
+- **[User Interface Design For Programmers](https://www.joelonsoftware.com/2001/10/24/user-interface-design-for-programmers/?utm_source=newsletter.posthog.com) – Joel Spolsky**
+-  **[The invisible details of interaction design](https://rauno.me/craft/interaction-design) – Rauno**
