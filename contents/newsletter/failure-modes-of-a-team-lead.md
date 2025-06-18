@@ -42,7 +42,7 @@ A lead being the bottleneck or central figure can slow down progress.
 
 ## 2. You stopped writing code
 
-Coding should still be ~80-90% of your time. Leadership is an overlay, not a new job description. Your job isnt to run meetings and manage sprints
+Coding should still be ~80-90% of your time. Leadership is an overlay, not a new job description. Your job isn't to run meetings and manage sprints
 
 Prioritize shipping and impact over unnecessary meta-work. (maybe this is a separate point)
 
@@ -50,7 +50,7 @@ Prioritize shipping and impact over unnecessary meta-work. (maybe this is a sepa
 
 You forget about the _real_ goal
 
-The real goal isnt activation rates, sign up rates, funnels, etc. Its revenue (and usage and quality?)
+The real goal isn't activation rates, sign up rates, funnels, etc. Its revenue (and usage and quality?)
 
 Success looks like usages from real users who are actually getting value from your product
  
@@ -76,4 +76,4 @@ Giving regular, hard feedback
 
 you're responsible for the performance of the team and making sure things are getting, not necessarily doing it all yourself
 
-David's failure mode on not reaching out for a PM/ Was hard to dig into onboarding and activation metrics but didnt have time to dig into the data and why (speaking to customers etc), ultimately affecting growth of the product.
+David's failure mode on not reaching out for a PM/ Was hard to dig into onboarding and activation metrics but didn't have time to dig into the data and why (speaking to customers etc), ultimately affecting growth of the product.
