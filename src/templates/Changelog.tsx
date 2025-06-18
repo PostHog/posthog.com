@@ -531,14 +531,12 @@ export default function Changelog({ pageContext }) {
                                         },
                                         {
                                             content: (
-                                                <>
-                                                    <DescriptionWithImage
-                                                        title={roadmap.attributes.title}
-                                                        description={roadmap.attributes.description}
-                                                        expandAll={expandAll}
-                                                        imageURL={imageURL}
-                                                    />
-                                                </>
+                                                <DescriptionWithImage
+                                                    title={roadmap.attributes.title}
+                                                    description={roadmap.attributes.description}
+                                                    expandAll={expandAll}
+                                                    imageURL={imageURL}
+                                                />
                                             ),
                                             className: '!flex-row !pl-[.3rem] gap-2',
                                         },

@@ -58,7 +58,7 @@ export const TeamMemberLink = ({
                                 />
                             )}
                         </span>
-                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
+                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-block truncate">
                             {children ? children : displayName}
                         </span>
                     </span>
@@ -84,7 +84,7 @@ export const TeamMemberLink = ({
                                     />
                                 )}
                             </span>
-                            <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
+                            <span className="!text-sm text-red dark:text-yellow font-semibold inline-block truncate">
                                 {children ? children : displayName}
                             </span>
                         </>

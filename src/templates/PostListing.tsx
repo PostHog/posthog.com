@@ -215,11 +215,6 @@ export default function Posts({ pageContext }) {
                             }}
                             columns={[
                                 {
-                                    name: '',
-                                    align: 'left',
-                                    width: '120px',
-                                },
-                                {
                                     name: 'Date',
                                     align: 'left',
                                     width: '120px',
@@ -230,12 +225,12 @@ export default function Posts({ pageContext }) {
                                     width: '3fr',
                                 },
                                 {
-                                    name: 'Tags',
+                                    name: 'Author(s)',
                                     align: 'left',
                                     width: '1fr',
                                 },
                                 {
-                                    name: 'Author(s)',
+                                    name: 'Tags',
                                     align: 'left',
                                     width: '1fr',
                                 },
@@ -245,9 +240,6 @@ export default function Posts({ pageContext }) {
                                 return {
                                     cells: [
                                         {
-                                            content: featuredImageURL ? <FeaturedImage url={featuredImageURL} /> : null,
-                                        },
-                                        {
                                             content: (
                                                 <span className="text-muted font-semibold">
                                                     {dayjs(post.attributes.date).format('MMM D, YYYY')}
@@ -256,10 +248,18 @@ export default function Posts({ pageContext }) {
                                         },
                                         {
                                             content: (
-                                                <Link className="font-semibold" to={post.attributes.slug}>
-                                                    {post.attributes.title}
-                                                </Link>
+                                                <>
+                                                    <Link className="font-semibold flex-1" to={post.attributes.slug}>
+                                                        {post.attributes.title}
+                                                    </Link>
+                                                    {featuredImageURL ? (
+                                                        <Link to={post.attributes.slug}>
+                                                            <FeaturedImage url={featuredImageURL} />
+                                                        </Link>
+                                                    ) : null}
+                                                </>
                                             ),
+                                            className: '!flex-row !pl-[.3rem] gap-2 text-left',
                                         },
                                         {
                                             content: (
