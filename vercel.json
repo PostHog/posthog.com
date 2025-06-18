@@ -1462,6 +1462,10 @@
         {
             "source": "/docs/api/decide",
             "destination": "/docs/api/flags"
+        },
+        {
+            "source": "/docs/privacy/data-deletion",
+            "destination": "/docs/privacy/data-storage#data-deletion"
         }
     ],
     "headers": [
