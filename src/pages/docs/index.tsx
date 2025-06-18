@@ -18,8 +18,8 @@ import ZoomHover from 'components/ZoomHover'
 import { AppLink, IconPresentation } from 'components/OSIcons'
 import { Accordion } from 'components/RadixUI/Accordion'
 
-const ProductLink = ({ icon, name, url, color }) => {
-    const Icon = Icons[icon]
+const ProductLink = ({ icon, name, url, color }: { icon: string; name: string; url: string; color: string }) => {
+    const Icon = Icons[icon as keyof typeof Icons] as any
     return (
         <Link
             to={url}
@@ -31,8 +31,8 @@ const ProductLink = ({ icon, name, url, color }) => {
     )
 }
 
-const ProductItem = ({ product }) => {
-    const Icon = Icons[product.icon]
+const ProductItem = ({ product }: { product: any }) => {
+    const Icon = Icons[product.icon as keyof typeof Icons] as any
     return (
         <li className="flex flex-col @lg:flex-row justify-between gap-4 py-5">
             <div className="flex gap-2">
@@ -41,7 +41,7 @@ const ProductItem = ({ product }) => {
                 </div>
                 <div className="flex-1">
                     <Link
-                        href={product.url}
+                        to={product.url}
                         className="text-primary dark:text-primary-dark hover:underline hover:text-primary dark:hover:text-primary-dark"
                     >
                         <strong>{product.name}</strong>
@@ -49,8 +49,8 @@ const ProductItem = ({ product }) => {
                     <p className="mb-0 text-[15px] opacity-75">{product.description}</p>
                     <div className="flex flex-wrap gap-2 pt-2">
                         {product.children
-                            .filter((child) => child.featured)
-                            .map((child, index) => (
+                            ?.filter((child: any) => child.featured)
+                            ?.map((child: any, index: number) => (
                                 <ProductLink key={index} {...child} />
                             ))}
                     </div>
@@ -68,7 +68,8 @@ const ProductItem = ({ product }) => {
 const ProductList = () => {
     const products = docsMenu.children
         .filter((item) => item.name !== 'Product OS')
-        .concat(docsMenu.children.find((item) => item.name === 'Product OS'))
+        .concat(docsMenu.children.find((item) => item.name === 'Product OS') || [])
+        .filter(Boolean)
 
     return (
         <ul className="list-none p-0 m-0 max-w-4xl divide-y divide-light dark:divide-dark">
@@ -79,7 +80,209 @@ const ProductList = () => {
     )
 }
 
+// Process docsMenu to extract structure
+const processDocsMenu = () => {
+    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
+    const productSections = docsMenu.children.filter((item) => item.name !== 'Product OS')
+
+    // Items to filter out completely
+    const skipItems = [
+        'Docs',
+        'Overview',
+        'PostHog explained',
+        'Resources',
+        'Privacy',
+        'How PostHog works',
+        'Self-host',
+        'Billing',
+    ]
+
+    // Group Product OS children by section headers
+    const topLevelSections: any[] = []
+
+    if (productOSSection?.children) {
+        let currentSection: any = null
+        let inSkippedSection = false
+
+        for (const child of productOSSection.children) {
+            // Skip filtered items
+            if (!child.name) {
+                continue
+            }
+
+            // Items with just a name (no URL) are section headers
+            if (!child.url && child.name) {
+                // Check if this section header should be skipped
+                if (skipItems.includes(child.name)) {
+                    inSkippedSection = true
+                    continue
+                } else {
+                    inSkippedSection = false
+                    // Save the previous section if it has children
+                    if (currentSection && currentSection.children.length > 0) {
+                        topLevelSections.push(currentSection)
+                    }
+
+                    // Start a new section
+                    currentSection = {
+                        name: child.name,
+                        icon: getIconForSection(child.name),
+                        color: getColorForSection(child.name),
+                        children: [],
+                    }
+                }
+            } else if (!inSkippedSection && currentSection && child.name && (child.url || (child as any).children)) {
+                // Only add items to the current section if we're not in a skipped section
+                currentSection.children.push(child)
+            }
+        }
+
+        // Don't forget the last section
+        if (currentSection && currentSection.children.length > 0) {
+            topLevelSections.push(currentSection)
+        }
+    }
+
+    return {
+        topLevelSections,
+        productSections,
+    }
+}
+
+// Helper functions to assign icons and colors to sections from original data
+const getIconForSection = (sectionName: string) => {
+    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
+
+    if (!productOSSection?.children) return 'IconBook'
+
+    // Find the section in the original data
+    const sectionIndex = productOSSection.children.findIndex((child) => child.name === sectionName)
+
+    if (sectionIndex === -1) return 'IconBook'
+
+    // Look for an item with an icon in this section
+    for (let i = sectionIndex; i < productOSSection.children.length; i++) {
+        const item = productOSSection.children[i]
+
+        // Stop at the next section header
+        if (!item.url && item.name && i > sectionIndex) break
+
+        // If this item has an icon, use it
+        if (item.icon) return item.icon
+    }
+
+    return 'IconBook'
+}
+
+const getColorForSection = (sectionName: string) => {
+    const productOSSection = docsMenu.children.find((item) => item.name === 'Product OS')
+
+    if (!productOSSection?.children) return 'primary'
+
+    // Find the section in the original data
+    const sectionIndex = productOSSection.children.findIndex((child) => child.name === sectionName)
+
+    if (sectionIndex === -1) return 'primary'
+
+    // Look for an item with a color in this section
+    for (let i = sectionIndex; i < productOSSection.children.length; i++) {
+        const item = productOSSection.children[i]
+
+        // Stop at the next section header
+        if (!item.url && item.name && i > sectionIndex) break
+
+        // If this item has a color, use it
+        if ((item as any).color) return (item as any).color
+    }
+
+    // Default colors for sections that don't have explicit colors
+    const defaultColors: { [key: string]: string } = {
+        Integration: 'blue',
+        'Winning with PostHog': 'yellow',
+        'Tools and features': 'purple',
+    }
+
+    return defaultColors[sectionName] || 'primary'
+}
+
+const renderSectionContent = (children: any[]) => {
+    return (
+        <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,10rem))] gap-4 relative">
+            {children
+                .filter((child) => child.url && child.name)
+                .slice(0, 8) // Limit to 8 items for better layout
+                .map((child, index) => {
+                    const Icon = child.icon ? (Icons[child.icon as keyof typeof Icons] as any) : Icons.IconBook
+                    return (
+                        <ZoomHover key={index} className="items-center text-center">
+                            <Link
+                                to={child.url}
+                                className="bg-accent p-4 rounded flex flex-col justify-center items-center gap-2 w-full"
+                            >
+                                <div>
+                                    <Icon className={`size-6 text-${child.color || 'primary'}`} />
+                                </div>
+                                <div className="text-sm">{child.name}</div>
+                            </Link>
+                        </ZoomHover>
+                    )
+                })}
+        </div>
+    )
+}
+
 export const DocsIndex = () => {
+    const { topLevelSections, productSections } = processDocsMenu()
+
+    // Create accordion items
+    const accordionItems = [
+        // Top level sections from Product OS
+        ...topLevelSections.map((section: any) => ({
+            value: section.name?.toLowerCase()?.replace(/\s+/g, '-') || 'section',
+            trigger: (
+                <span className="bg-primary pr-2 relative z-10 flex items-center gap-2">
+                    {section.icon &&
+                        (() => {
+                            const Icon = Icons[section.icon as keyof typeof Icons] as any
+                            return <Icon className={`size-4 text-${(section as any).color || 'primary'}`} />
+                        })()}
+                    {section.name}
+                </span>
+            ),
+            content: renderSectionContent(section.children || []),
+        })),
+        // Products section
+        {
+            value: 'products',
+            trigger: (
+                <span className="bg-primary pr-2 relative z-10 flex items-center gap-2">
+                    <Icons.IconApps className="size-4 text-salmon" />
+                    Products
+                </span>
+            ),
+            content: (
+                <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,10rem))] gap-4 relative">
+                    {productSections.map((product: any, index: number) => {
+                        const Icon = product.icon ? (Icons[product.icon as keyof typeof Icons] as any) : Icons.IconApps
+                        return (
+                            <ZoomHover key={index} className="items-center text-center">
+                                <Link
+                                    to={product.url}
+                                    className="bg-accent p-4 rounded flex flex-col justify-center items-center gap-2 w-full"
+                                >
+                                    <div>
+                                        <Icon className={`size-6 text-${product.color || 'primary'}`} />
+                                    </div>
+                                    <div className="text-sm">{product.name}</div>
+                                </Link>
+                            </ZoomHover>
+                        )
+                    })}
+                </div>
+            ),
+        },
+    ]
+
     return (
         <ReaderView>
             <SEO title="Documentation - PostHog" />
@@ -88,33 +291,15 @@ export const DocsIndex = () => {
                 <section className="flex-1">
                     <h2>Docs</h2>
 
-                    <Accordion
-                        skin={false}
-                        key="test"
-                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                        defaultValue="test"
-                        items={[
-                            {
-                                value: 'test',
-                                trigger: <span className="bg-primary pr-2 relative z-10">Test</span>,
-                                content: (
-                                    <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,10rem))] gap-4 relative">
-                                        <ZoomHover className="items-center text-center">
-                                            <Link
-                                                to="#"
-                                                className="bg-accent p-4 rounded flex flex-col justify-center items-center gap-2 w-full"
-                                            >
-                                                <div>
-                                                    <Icons.IconAI className="size-6 text-primary" />
-                                                </div>
-                                                <div>Getting started</div>
-                                            </Link>
-                                        </ZoomHover>
-                                    </div>
-                                ),
-                            },
-                        ]}
-                    />
+                    {accordionItems.map((item, index) => (
+                        <Accordion
+                            key={index}
+                            skin={false}
+                            triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                            defaultValue={item.value}
+                            items={[item]}
+                        />
+                    ))}
                 </section>
 
                 <aside className="max-w-xs text-sm">
@@ -184,7 +369,6 @@ export const DocsIndex = () => {
                 <aside>
                     <figure className="m-0">
                         <CloudinaryImage
-                            objectFit="contain"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
                             alt="This hog knows where he's headed"
                             width={342}
