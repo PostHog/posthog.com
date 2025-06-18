@@ -21,3 +21,7 @@ export function flattenMenu(items, breadcrumb = []) {
         return acc
     }, [])
 }
+
+export const stripFrontmatter = (body: string) => {
+    return body.replace(/^---[\s\S]*?---\n*/m, '')
+}
