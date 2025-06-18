@@ -1,5 +1,6 @@
 ---
-title: Failure modes of an engineering team lead
+title: Failure modes of an engineering team lead 
+# alt: 7 Failure modes an engineering team lead
 date: 2025-06-18
 author:
   - lior-neu-ner
@@ -13,6 +14,7 @@ crosspost:
   - Founders
   - Blog
 ---
+Subheading for email: "Congratulations, you're the bottleneck"
 
 Cover image: Hedge version of this  
 ![](https://res.cloudinary.com/dmukukwp6/image/upload/cec9bd6f50e59b2250958054823e5ce7_c967d62274.jpg)
