@@ -117,6 +117,9 @@ We do offer additional discounts to nonprofits - these are entirely at your disc
 
 You might see some customers with a 30% discount on their monthly Stripe subscription.  These were added when the only way we billed for PostHog was through event pricing.  This was originally designed to offset the cost versus competitors who had unbundled Group Analytics or Data Pipelines.  These customers will typically be on a higher per-event price plan, so we should look to get them migrated to standard pricing as soon as possible.
 
+### Startup plan discounts
+For customers on our [startup plan](https://posthog.com/startups), we offer two months free when signing an annual deal. This encourages startups to use their credits to understand usage, and then commit to a long term plan with PostHog. 
+
 ## Additional credit purchase
 
 As it's often difficult to right-size the credit needed for the term of the annual plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan).  Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not.  There are also alerts set up in #sales-alerts to help notify account owners about this.
