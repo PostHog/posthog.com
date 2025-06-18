@@ -120,7 +120,7 @@ export default function Explorer({
                     </div>
                 </>
             )}
-            <DebugContainerQuery />
+            {/* <DebugContainerQuery /> */}
             <ScrollArea className="h-full">
                 <div
                     data-scheme="secondary"

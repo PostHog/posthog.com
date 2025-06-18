@@ -986,7 +986,7 @@ const initialProducts = [
         answersDescription: 'Understand user behavior, identify friction points, and improve your product experience',
         color: 'yellow',
         colorSecondary: '[#B56C00]',
-        category: 'behavior',
+        category: 'product',
         seo: {
             title: 'Session replay - PostHog',
             description: 'Watch people use your product to diagnose issues and understand user behavior',
@@ -1562,7 +1562,7 @@ window.posthog.onFeatureFlags(function () {
         slug: 'feature-flags',
         color: 'green',
         colorSecondary: 'seagreen',
-        category: 'features',
+        category: 'engineering',
         seo: {
             title: 'Feature flags - PostHog',
             description: 'Safely roll out features to specific users or groups',
@@ -2046,7 +2046,7 @@ window.posthog.onFeatureFlags(function () {
         handle: 'feature_flags',
         color: 'purple',
         colorSecondary: 'lilac',
-        category: 'features',
+        category: 'product',
         billedWith: 'Feature flags',
         slug: '/experiments',
     },
@@ -2055,9 +2055,9 @@ window.posthog.onFeatureFlags(function () {
         name: 'Surveys',
         handle: 'surveys',
         slug: 'surveys',
-        color: 'sky-blue',
-        colorSecondary: 'blue',
-        category: 'behavior',
+        color: 'salmon',
+        colorSecondary: 'red',
+        category: 'product',
         slider: {
             marks: [250, 2000, 15000, 100000],
             min: 250,
@@ -2087,7 +2087,7 @@ window.posthog.onFeatureFlags(function () {
         handle: 'error_tracking',
         color: 'orange',
         colorSecondary: 'red',
-        category: 'behavior',
+        category: 'engineering',
         slider: {
             marks: [100000, 1000000, 10000000, 50000000],
             min: 100000,

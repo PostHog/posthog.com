@@ -130,15 +130,26 @@ export default function Products(): JSX.Element {
             >
                 {(() => {
                     // Filter out products without a category, then group by category
-                    const categoryOrder = ['analytics', 'behavior', 'features', 'data', 'tools']
+                    const categoryOrder = ['analytics', 'product', 'data', 'engineering', 'marketing', 'product_os']
+
+                    // Category display names
+                    const categoryDisplayNames: Record<string, string> = {
+                        analytics: 'Analytics',
+                        product: 'Product',
+                        data: 'Data',
+                        engineering: 'Engineering',
+                        marketing: 'Marketing',
+                        product_os: 'Product OS',
+                    }
 
                     // Custom product order by category - if not specified, products will be sorted alphabetically
                     const productOrder: Record<string, string[]> = {
                         analytics: ['web-analytics', 'product-analytics', 'revenue-analytics', 'llm-analytics'],
-                        behavior: ['session-replay', 'surveys', 'error-tracking', 'heatmaps'],
-                        features: ['feature-flags', 'experiments'],
-                        data: [],
-                        tools: [],
+                        product: ['session-replay', 'experiments', 'surveys', 'user-interviews'],
+                        data: ['data-warehouse', 'cdp', 'sql', 'api', 'webhooks'],
+                        engineering: ['feature-flags', 'error-tracking'],
+                        marketing: ['heatmaps', 'broadcasts'],
+                        product_os: ['max', 'dashboards', 'notebooks'],
                     }
                     const productsWithCategory = allProducts.filter((product: any) => product.category)
                     const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {
@@ -192,7 +203,9 @@ export default function Products(): JSX.Element {
                                                 value: category,
                                                 trigger: (
                                                     <span className="bg-primary pr-2 relative z-10">
-                                                        {category.charAt(0).toUpperCase() + category.slice(1)} ({count})
+                                                        {categoryDisplayNames[category] ||
+                                                            category.charAt(0).toUpperCase() + category.slice(1)}{' '}
+                                                        ({count})
                                                     </span>
                                                 ),
                                                 content: (
