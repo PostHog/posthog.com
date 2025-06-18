@@ -98,7 +98,7 @@ If your travel plans are affected due to a flight delay or an airline-induced mi
 
 ### Partners / family joining offsites
 
-Sometimes at PostHog you will be asked to travel to places you've never been before and it could be a good opportunity to travel with your partner / family. At PostHog, we do infrequent in-person work that we want to maximise this time in person and your focus to be on PostHog, without distraction. This is why we don't allow partners or family to join you for the dates that the offsite / onbaording take place. If timing allows it, you are able to tack holiday onto either side and for your partner/family to join you for those dates. However, for the dates of the offsite, you should be staying alone and focusing on your time with your teammates. 
+Sometimes at PostHog you will be asked to travel to places you've never been before and it could be a good opportunity to travel with your partner / family. At PostHog, we do infrequent in-person work that we want to maximise this time in person and your focus to be on PostHog, without distraction. This is why we don't allow partners or family to join you for the dates that the offsite / onboarding takes place. If timing allows it, you are able to tack holiday onto either side and for your partner/family to join you for those dates. However, for the dates of the offsite, you should be staying alone and focusing on your time with your teammates. 
 
 ## How to plan an offsite in 8 weeks - a checklist
 
