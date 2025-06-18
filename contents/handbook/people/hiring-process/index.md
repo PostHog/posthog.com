@@ -39,7 +39,7 @@ All of our recruiting is done in-house, and we do not work with external agencie
 
 ### Deciding to hire
 
-[‘Talent Compounds’](/handbook/company/values#talent-compounds) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
+[‘You're the driver’](/handbook/company/values#youre-the-driver) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
 
 We use Pry to plan our hiring. We use the hiring forecast as a guide, but iterate on this pretty much every month, so we can stay super responsive to changes PostHog's needs. Typically we know:
 
