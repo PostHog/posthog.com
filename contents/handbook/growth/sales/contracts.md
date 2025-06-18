@@ -76,13 +76,9 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
 
     * **Contract.Term** - The term in months of the contract (12 months by default)
-8. If they are paying monthly:
-   * For payments equal to or above $2500/month, change the **Payment Terms** section to read 
-     > 12 equal monthly payments (Net 14) from Contract start date
-   * For payments below $2500 then we _require credit card payment_.  Change the **Payment Terms** section to read
-     >  12 equal monthly payments from Contract start date
-     
-     The *Payment Method* should also be updated to `Credit Card`.
+8. If they are paying monthly change:
+     - Payment Terms to `12 equal monthly payments from Contract start date`.
+     - Payment Method to `Credit Card`.
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
 
