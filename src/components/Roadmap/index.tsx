@@ -664,7 +664,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                         />
                     </SideModal>
                     {isLoading ? (
-                        <ProgressBar />
+                        <ProgressBar title="roadmap" />
                     ) : (
                         <>
                             <p className="my-0 text-sm -mt-2 mb-4">
