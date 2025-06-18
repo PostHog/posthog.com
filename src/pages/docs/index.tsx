@@ -14,6 +14,9 @@ import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import AskMax from 'components/AskMax'
 import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
 import ReaderView from 'components/ReaderView'
+import ZoomHover from 'components/ZoomHover'
+import { AppLink, IconPresentation } from 'components/OSIcons'
+import { Accordion } from 'components/RadixUI/Accordion'
 
 const ProductLink = ({ icon, name, url, color }) => {
     const Icon = Icons[icon]
@@ -80,6 +83,72 @@ export const DocsIndex = () => {
     return (
         <ReaderView>
             <SEO title="Documentation - PostHog" />
+
+            <div className="flex gap-8">
+                <section className="flex-1">
+                    <h2>Docs</h2>
+
+                    <Accordion
+                        skin={false}
+                        key="test"
+                        triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                        defaultValue="test"
+                        items={[
+                            {
+                                value: 'test',
+                                trigger: <span className="bg-primary pr-2 relative z-10">Test</span>,
+                                content: (
+                                    <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,10rem))] gap-4 relative">
+                                        <ZoomHover className="items-center text-center">
+                                            <Link
+                                                to="#"
+                                                className="bg-accent p-4 rounded flex flex-col justify-center items-center gap-2 w-full"
+                                            >
+                                                <div>
+                                                    <Icons.IconAI className="size-6 text-primary" />
+                                                </div>
+                                                <div>Getting started</div>
+                                            </Link>
+                                        </ZoomHover>
+                                    </div>
+                                ),
+                            },
+                        ]}
+                    />
+                </section>
+
+                <aside className="max-w-xs text-sm">
+                    <h6>About our docs</h6>
+                    <p>There are a few ways to explore our docs:</p>
+                    <p>
+                        <strong>On our website</strong> (You are here)
+                    </p>
+                    <ul>
+                        <li>
+                            <Link to="#" state={{ newWindow: true }}>
+                                Ask Max
+                            </Link>
+                            , our trusty AI chatbot. Start a chat on any docs page and Max will have the relevant
+                            context.
+                        </li>
+                        <li>Search with the icon at the top right</li>
+                    </ul>
+                    <p>
+                        You can also ask a question at the end of each docs article. They get cross-posted to our{' '}
+                        <Link to="#" state={{ newWindow: true }}>
+                            community forums
+                        </Link>
+                        .
+                    </p>
+                    <p>
+                        <strong>In the product</strong>
+                    </p>
+                    <ul>
+                        <li>Look for tooltips that link to docs - they open right inside the product</li>
+                        <li>Ask Max in the product</li>
+                    </ul>
+                </aside>
+            </div>
 
             <section className="mb-8 flex flex-col-reverse lg:flex-row bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:p-8 lg:pr-0 shadow-xl">
                 <div className="@container flex-1 text-center sm:text-left">
