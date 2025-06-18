@@ -52,6 +52,11 @@ interface EditorProps {
     onFilterChange?: (data: any) => void
     actionButtons?: EditorActionButtons
     handleFilterChange?: (filters: any) => void
+    availableGroups?: {
+        label: string
+        value: string
+    }[]
+    onGroupChange?: (group: string) => void
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -88,6 +93,8 @@ export function Editor({
     dataToFilter,
     onFilterChange,
     actionButtons,
+    availableGroups,
+    onGroupChange,
     ...other
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
@@ -350,6 +357,28 @@ export function Editor({
                                             </div>
                                         )
                                     })}
+                                    {availableGroups && availableGroups.length > 0 && (
+                                        <div className="ml-auto flex items-center space-x-1">
+                                            <span className="text-sm font-bold">Group by</span>
+                                            <Select
+                                                placeholder="Group by"
+                                                defaultValue="none"
+                                                groups={[
+                                                    {
+                                                        label: '',
+                                                        items: [
+                                                            { label: 'None', value: 'none' },
+                                                            ...availableGroups.map((group) => ({
+                                                                label: group.label,
+                                                                value: group.value,
+                                                            })),
+                                                        ],
+                                                    },
+                                                ]}
+                                                onValueChange={(value) => onGroupChange?.(value)}
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             )}
                             <div className={`prose p-4 mx-auto max-w-${maxWidth}`}>
