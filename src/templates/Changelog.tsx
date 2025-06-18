@@ -3,7 +3,7 @@ import { topicIcons } from 'components/Questions/TopicsTable'
 import React, { useEffect, useMemo, useState } from 'react'
 import Markdown from 'components/Squeak/components/Markdown'
 import { CallToAction } from 'components/CallToAction'
-import groupBy from 'lodash.groupby'
+import lodashGroupBy from 'lodash.groupby'
 import get from 'lodash.get'
 import slugify from 'slugify'
 import { Listbox } from '@headlessui/react'
@@ -281,6 +281,94 @@ const Teams = ({ teams, className }) => {
     )
 }
 
+const RoadmapTable = ({
+    roadmaps,
+    loading,
+    onLastRowInView,
+    expandAll,
+}: {
+    roadmaps: any[]
+    loading?: boolean
+    onLastRowInView?: () => void
+    expandAll?: boolean
+}) => {
+    return (
+        <OSTable
+            loading={loading}
+            onLastRowInView={onLastRowInView}
+            columns={[
+                {
+                    name: 'Date',
+                    align: 'left',
+                    width: '120px',
+                },
+                {
+                    name: 'Topic',
+                    align: 'left',
+                },
+                {
+                    name: 'Description',
+                    align: 'left',
+                    width: '1fr',
+                },
+                {
+                    name: 'Author',
+                    align: 'left',
+                },
+            ]}
+            rowAlignment="top"
+            rows={roadmaps.map((roadmap) => {
+                const teams = roadmap.attributes.teams?.data
+                const imageURL = roadmap.attributes.image?.data?.attributes?.url
+                const topic = roadmap.attributes.topic?.data?.attributes?.label
+                const authors = roadmap.attributes.profiles?.data
+
+                return {
+                    cells: [
+                        {
+                            content: roadmap.attributes.dateCompleted ? (
+                                <span className="text-sm text-primary/75 dark:text-primary-dark/75">
+                                    {dayjs(roadmap.attributes.dateCompleted).format('MMM D, YYYY')}
+                                </span>
+                            ) : null,
+                            className: '!pt-[10px]',
+                        },
+                        {
+                            content: topic ? <Topic topic={topic} /> : null,
+                            className: '!pt-[10px]',
+                        },
+                        {
+                            content: (
+                                <>
+                                    <Description
+                                        title={roadmap.attributes.title}
+                                        description={roadmap.attributes.description}
+                                        expandAll={expandAll}
+                                    />
+                                    {imageURL ? (
+                                        <div className="[&_div]:max-h-8 [&_div]:max-w-48">
+                                            <FeaturedImage url={imageURL} />
+                                        </div>
+                                    ) : null}
+                                </>
+                            ),
+                            className: '!flex-row !pl-[.3rem]',
+                        },
+                        {
+                            content:
+                                authors?.length > 0 ? (
+                                    <Authors authors={authors} className="-my-1" />
+                                ) : (
+                                    <Teams teams={teams} className="-my-1" />
+                                ),
+                        },
+                    ],
+                }
+            })}
+        />
+    )
+}
+
 const getStrapiFilters = (filters) => {
     const strapiFilters = {}
     if (filters.team?.value) {
@@ -323,6 +411,7 @@ export default function Changelog({ pageContext }) {
     const [teams, setTeams] = useState([])
     const [topics, setTopics] = useState([])
     const [expandAll, setExpandAll] = useState(false)
+    const [groupBy, setGroupBy] = useState<string>()
     const { roadmaps, isValidating, mutate, hasMore, fetchMore } = useRoadmaps({
         limit: 100,
         params: {
@@ -368,6 +457,8 @@ export default function Changelog({ pageContext }) {
         setStrapiFilters(getStrapiFilters(filters))
     }
 
+    const groupedRoadmaps = lodashGroupBy(roadmaps, groupBy)
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
@@ -378,6 +469,15 @@ export default function Changelog({ pageContext }) {
                 dataToFilter={roadmaps}
                 handleFilterChange={handleFilterChange}
                 showFilters={false}
+                availableGroups={[
+                    {
+                        label: 'Topic',
+                        value: 'attributes.topic.data.attributes.label',
+                    },
+                ]}
+                onGroupChange={(group) => {
+                    setGroupBy(group === 'none' ? undefined : group)
+                }}
                 availableFilters={[
                     {
                         label: 'year',
@@ -439,85 +539,34 @@ export default function Changelog({ pageContext }) {
                     </button>
                 </div>
                 <ScrollArea>
-                    {roadmaps.length > 0 && (
-                        <OSTable
-                            loading={isValidating}
-                            onLastRowInView={() => {
-                                if (hasMore && !isValidating) {
-                                    fetchMore()
-                                }
-                            }}
-                            columns={[
-                                {
-                                    name: 'Date',
-                                    align: 'left',
-                                    width: '120px',
-                                },
-                                {
-                                    name: 'Topic',
-                                    align: 'left',
-                                },
-                                {
-                                    name: 'Description',
-                                    align: 'left',
-                                    width: '1fr',
-                                },
-                                {
-                                    name: 'Author',
-                                    align: 'left',
-                                },
-                            ]}
-                            rowAlignment="top"
-                            rows={roadmaps.map((roadmap) => {
-                                const teams = roadmap.attributes.teams?.data
-                                const imageURL = roadmap.attributes.image?.data?.attributes?.url
-                                const topic = roadmap.attributes.topic?.data?.attributes?.label
-                                const authors = roadmap.attributes.profiles?.data
-
-                                return {
-                                    cells: [
-                                        {
-                                            content: roadmap.attributes.dateCompleted ? (
-                                                <span className="text-sm text-primary/75 dark:text-primary-dark/75">
-                                                    {dayjs(roadmap.attributes.dateCompleted).format('MMM D, YYYY')}
-                                                </span>
-                                            ) : null,
-                                            className: '!pt-[10px]',
-                                        },
-                                        {
-                                            content: topic ? <Topic topic={topic} /> : null,
-                                            className: '!pt-[10px]',
-                                        },
-                                        {
-                                            content: (
-                                                <>
-                                                    <Description
-                                                        title={roadmap.attributes.title}
-                                                        description={roadmap.attributes.description}
-                                                        expandAll={expandAll}
-                                                    />
-                                                    {imageURL ? (
-                                                        <div className="[&_div]:max-h-8 [&_div]:max-w-48">
-                                                            <FeaturedImage url={imageURL} />
-                                                        </div>
-                                                    ) : null}
-                                                </>
-                                            ),
-                                            className: '!flex-row !pl-[.3rem]',
-                                        },
-                                        {
-                                            content:
-                                                authors?.length > 0 ? (
-                                                    <Authors authors={authors} className="-my-1" />
-                                                ) : (
-                                                    <Teams teams={teams} className="-my-1" />
-                                                ),
-                                        },
-                                    ],
-                                }
-                            })}
-                        />
-                    )}
+                    {roadmaps.length > 0 &&
+                        (groupBy ? (
+                            <ul className="list-none m-0 p-0 space-y-4">
+                                {Object.keys(groupedRoadmaps).map((key) => {
+                                    return (
+                                        <li key={key}>
+                                            <h3 className="text-lg font-semibold mb-2">{key}</h3>
+                                            <RoadmapTable
+                                                key={key}
+                                                roadmaps={groupedRoadmaps[key]}
+                                                expandAll={expandAll}
+                                            />
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        ) : (
+                            <RoadmapTable
+                                roadmaps={roadmaps}
+                                loading={isValidating}
+                                onLastRowInView={() => {
+                                    if (hasMore && !isValidating) {
+                                        fetchMore()
+                                    }
+                                }}
+                                expandAll={expandAll}
+                            />
+                        ))}
                 </ScrollArea>
             </Editor>
         </>
