@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
 import { AppWindow } from './Window'
 import SearchUI from 'components/SearchUI'
+import { navigate } from 'gatsby'
 
 type WindowElement = React.ReactNode & {
     key: string
@@ -207,9 +208,20 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }, [windows])
 
-    const closeWindow = useCallback((item: AppWindow) => {
-        setWindows((windows) => windows.filter((el) => el.key !== item.key))
-    }, [])
+    const closeWindow = useCallback(
+        (item: AppWindow) => {
+            const windowsFiltered = windows.filter((el) => el.key !== item.key)
+            const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
+                (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                undefined
+            )
+            if (nextFocusedWindow) {
+                navigate(nextFocusedWindow.path)
+            }
+            setWindows(windowsFiltered)
+        },
+        [windows]
+    )
 
     const bringToFront = useCallback((item: AppWindow) => {
         setWindows((windows) =>
