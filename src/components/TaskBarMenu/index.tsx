@@ -198,7 +198,7 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     />
-                    <OSButton onClick={openSearch} variant="ghost" size="md">
+                    <OSButton onClick={() => openSearch()} variant="ghost" size="md">
                         <IconSearch className="size-5" />
                     </OSButton>
                     <OSButton

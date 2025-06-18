@@ -17,6 +17,8 @@ import ReaderView from 'components/ReaderView'
 import ZoomHover from 'components/ZoomHover'
 import { AppLink, IconPresentation } from 'components/OSIcons'
 import { Accordion } from 'components/RadixUI/Accordion'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { useApp } from '../../context/App'
 
 const ProductLink = ({ icon, name, url, color }: { icon: string; name: string; url: string; color: string }) => {
     const Icon = Icons[icon as keyof typeof Icons] as any
@@ -232,6 +234,7 @@ const renderSectionContent = (children: any[]) => {
 }
 
 export const DocsIndex = () => {
+    const { openSearch } = useApp()
     const { topLevelSections, productSections } = processDocsMenu()
 
     // Create accordion items
@@ -284,143 +287,151 @@ export const DocsIndex = () => {
     ]
 
     return (
-        <ReaderView>
-            <SEO title="Documentation - PostHog" />
+        <ScrollArea>
+            <div data-scheme="secondary" className="p-5 bg-primary">
+                <SEO title="Documentation - PostHog" />
 
-            <div className="flex gap-8">
-                <section className="flex-1">
-                    <h2>Docs</h2>
+                <div className="flex gap-8">
+                    <section className="flex-1">
+                        <h2>Docs</h2>
+                        <button
+                            onClick={() => openSearch('docs')}
+                            className="px-4 py-2 bg-white rounded-md border border-border w-full text-left hover:scale-[1.002] active:scale-[1] transition-transform mb-2"
+                        >
+                            <span className="opacity-50">Search...</span>
+                        </button>
+                        {accordionItems.map((item, index) => (
+                            <Accordion
+                                key={index}
+                                skin={false}
+                                triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                defaultValue={item.value}
+                                items={[item]}
+                            />
+                        ))}
+                    </section>
 
-                    {accordionItems.map((item, index) => (
-                        <Accordion
-                            key={index}
-                            skin={false}
-                            triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                            defaultValue={item.value}
-                            items={[item]}
-                        />
-                    ))}
+                    <aside className="max-w-xs text-sm">
+                        <h6>About our docs</h6>
+                        <p>There are a few ways to explore our docs:</p>
+                        <p>
+                            <strong>On our website</strong> (You are here)
+                        </p>
+                        <ul>
+                            <li>
+                                <Link to="#" state={{ newWindow: true }}>
+                                    Ask Max
+                                </Link>
+                                , our trusty AI chatbot. Start a chat on any docs page and Max will have the relevant
+                                context.
+                            </li>
+                            <li>Search with the icon at the top right</li>
+                        </ul>
+                        <p>
+                            You can also ask a question at the end of each docs article. They get cross-posted to our{' '}
+                            <Link to="#" state={{ newWindow: true }}>
+                                community forums
+                            </Link>
+                            .
+                        </p>
+                        <p>
+                            <strong>In the product</strong>
+                        </p>
+                        <ul>
+                            <li>Look for tooltips that link to docs - they open right inside the product</li>
+                            <li>Ask Max in the product</li>
+                        </ul>
+                    </aside>
+                </div>
+
+                <section className="mb-8 flex flex-col-reverse lg:flex-row bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:p-8 lg:pr-0 shadow-xl">
+                    <div className="@container flex-1 text-center sm:text-left">
+                        <h2>New to PostHog?</h2>
+                        <p className="text-[15px] md:pr-4">
+                            The getting started guide covers adding PostHog to your app or site, sending events,
+                            identifying users, creating actions and insights, and assigning properties to users and
+                            users to groups.
+                        </p>
+                        <CallToAction
+                            to="/docs/getting-started/install"
+                            type="primary"
+                            size="md"
+                            className="!w-full sm:!w-auto"
+                        >
+                            Get started
+                        </CallToAction>
+
+                        <div className="flex gap-2 justify-center @md:justify-start lg:justify-start @sm:items-center mt-6">
+                            <IconLightBulb className="size-8 flex-[0_0_2rem] @md:flex-[0_0_auto] @md:size-10 text-primary dark:text-primary-dark opacity-50 bg-accent dark:bg-accent-dark rounded-sm p-2" />
+                            <p className="text-sm m-0 text-left leading-relaxed">
+                                <strong>Tip:</strong>{' '}
+                                <AskMax linkOnly className="text-red dark:text-yellow font-semibold">
+                                    Chat with Max AI
+                                </AskMax>{' '}
+                                for quick answers to questions.{' '}
+                                <span className="@md:inline-block">
+                                    Open by typing <KeyboardShortcut text="?" /> or search with{' '}
+                                    <KeyboardShortcut text="/" />.
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                    <aside>
+                        <figure className="m-0">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
+                                alt="This hog knows where he's headed"
+                                width={342}
+                                placeholder="blurred"
+                                className="w-full sm:w-[345px]"
+                            />
+                        </figure>
+                    </aside>
                 </section>
 
-                <aside className="max-w-xs text-sm">
-                    <h6>About our docs</h6>
-                    <p>There are a few ways to explore our docs:</p>
-                    <p>
-                        <strong>On our website</strong> (You are here)
-                    </p>
-                    <ul>
-                        <li>
-                            <Link to="#" state={{ newWindow: true }}>
-                                Ask Max
-                            </Link>
-                            , our trusty AI chatbot. Start a chat on any docs page and Max will have the relevant
-                            context.
-                        </li>
-                        <li>Search with the icon at the top right</li>
-                    </ul>
-                    <p>
-                        You can also ask a question at the end of each docs article. They get cross-posted to our{' '}
-                        <Link to="#" state={{ newWindow: true }}>
-                            community forums
-                        </Link>
-                        .
-                    </p>
-                    <p>
-                        <strong>In the product</strong>
-                    </p>
-                    <ul>
-                        <li>Look for tooltips that link to docs - they open right inside the product</li>
-                        <li>Ask Max in the product</li>
-                    </ul>
-                </aside>
-            </div>
-
-            <section className="mb-8 flex flex-col-reverse lg:flex-row bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:p-8 lg:pr-0 shadow-xl">
-                <div className="@container flex-1 text-center sm:text-left">
-                    <h2>New to PostHog?</h2>
-                    <p className="text-[15px] md:pr-4">
-                        The getting started guide covers adding PostHog to your app or site, sending events, identifying
-                        users, creating actions and insights, and assigning properties to users and users to groups.
-                    </p>
-                    <CallToAction
-                        to="/docs/getting-started/install"
-                        type="primary"
-                        size="md"
-                        className="!w-full sm:!w-auto"
-                    >
-                        Get started
-                    </CallToAction>
-
-                    <div className="flex gap-2 justify-center @md:justify-start lg:justify-start @sm:items-center mt-6">
-                        <IconLightBulb className="size-8 flex-[0_0_2rem] @md:flex-[0_0_auto] @md:size-10 text-primary dark:text-primary-dark opacity-50 bg-accent dark:bg-accent-dark rounded-sm p-2" />
-                        <p className="text-sm m-0 text-left leading-relaxed">
-                            <strong>Tip:</strong>{' '}
-                            <AskMax linkOnly className="text-red dark:text-yellow font-semibold">
-                                Chat with Max AI
-                            </AskMax>{' '}
-                            for quick answers to questions.{' '}
-                            <span className="@md:inline-block">
-                                Open by typing <KeyboardShortcut text="?" /> or search with{' '}
-                                <KeyboardShortcut text="/" />.
-                            </span>
-                        </p>
+                <section className="@container">
+                    <h4 className="mb-2">Product documentation</h4>
+                    <div className="max-w-4xl">
+                        <SidebarSearchBox filter="docs" />
                     </div>
-                </div>
-                <aside>
-                    <figure className="m-0">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
-                            alt="This hog knows where he's headed"
-                            width={342}
-                            placeholder="blurred"
-                            className="w-full sm:w-[345px]"
-                        />
-                    </figure>
-                </aside>
-            </section>
 
-            <section className="@container">
-                <h4 className="mb-2">Product documentation</h4>
-                <div className="max-w-4xl">
-                    <SidebarSearchBox filter="docs" />
-                </div>
+                    <ProductList />
 
-                <ProductList />
-
-                <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mt-8">
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                        <h3 className="text-xl mb-2">Data</h3>
-                        <p className="text-[15px]">
-                            Learn how to manage events and customer data for use with all PostHog products.
-                        </p>
-                        <CallToAction to="/docs/data" type="outline" size="md" className="!w-full sm:!w-auto">
-                            Explore
-                        </CallToAction>
-                    </div>
-                    <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                        <h3 className="text-xl mb-2">Templates</h3>
-                        <p className="text-[15px]">
-                            Instantly analyze data and collect feedback with dashboard and survey templates.
-                        </p>
-                        <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
-                            <CallToAction to="/templates" type="outline" size="md" className="!w-full sm:!w-auto">
-                                Browse templates
+                    <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mt-8">
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                            <h3 className="text-xl mb-2">Data</h3>
+                            <p className="text-[15px]">
+                                Learn how to manage events and customer data for use with all PostHog products.
+                            </p>
+                            <CallToAction to="/docs/data" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Explore
+                            </CallToAction>
+                        </div>
+                        <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                            <h3 className="text-xl mb-2">Templates</h3>
+                            <p className="text-[15px]">
+                                Instantly analyze data and collect feedback with dashboard and survey templates.
+                            </p>
+                            <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
+                                <CallToAction to="/templates" type="outline" size="md" className="!w-full sm:!w-auto">
+                                    Browse templates
+                                </CallToAction>
+                            </div>
+                        </div>
+                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
+                            <h3 className="text-xl mb-2">API</h3>
+                            <p className="text-[15px]">
+                                Push or pull data to build custom functionality or create bespoke views for your
+                                business needs.
+                            </p>
+                            <CallToAction to="/docs/api" type="outline" size="md" className="!w-full sm:!w-auto">
+                                Explore
                             </CallToAction>
                         </div>
                     </div>
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                        <h3 className="text-xl mb-2">API</h3>
-                        <p className="text-[15px]">
-                            Push or pull data to build custom functionality or create bespoke views for your business
-                            needs.
-                        </p>
-                        <CallToAction to="/docs/api" type="outline" size="md" className="!w-full sm:!w-auto">
-                            Explore
-                        </CallToAction>
-                    </div>
-                </div>
-            </section>
-        </ReaderView>
+                </section>
+            </div>
+        </ScrollArea>
     )
 }
 

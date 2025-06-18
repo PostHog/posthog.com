@@ -38,7 +38,7 @@ interface AppContextType {
         windows: AppWindow[]
     ) => { x: number; y: number }
     getDesktopCenterPosition: (size: { width: number; height: number }) => { x: number; y: number }
-    openSearch: () => void
+    openSearch: (initialFilter?: string) => void
 }
 
 interface AppProviderProps {
@@ -61,19 +61,19 @@ interface AppProviderProps {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => { },
-    bringToFront: () => { },
+    closeWindow: () => {},
+    bringToFront: () => {},
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => { },
+    minimizeWindow: () => {},
     taskbarHeight: 0,
-    addWindow: () => { },
-    updateWindowRef: () => { },
-    updateWindow: () => { },
+    addWindow: () => {},
+    updateWindowRef: () => {},
+    updateWindow: () => {},
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => { },
+    openSearch: () => {},
 })
 
 const appSettings = {
@@ -228,12 +228,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                ...w,
-                                element: newWindow.element,
-                                path: newWindow.path,
-                                fromHistory: newWindow.fromHistory,
-                                props: newWindow.props,
-                            }
+                                  ...w,
+                                  element: newWindow.element,
+                                  path: newWindow.path,
+                                  fromHistory: newWindow.fromHistory,
+                                  props: newWindow.props,
+                              }
                             : w
                     )
                 )
@@ -280,6 +280,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             }
         }
 
+        if (key === 'search') {
+            return getDesktopCenterPosition(size)
+        }
+
         const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
         const previousWindow = sortedWindows[0]
 
@@ -310,9 +314,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                    width: window.innerWidth * 0.9,
-                    height: window.innerHeight * 0.9,
-                })
+                      width: window.innerWidth * 0.9,
+                      height: window.innerHeight * 0.9,
+                  })
         return {
             width: Math.min(defaultSize.width, window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, window.innerHeight * 0.9),
@@ -357,9 +361,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                    x: lastClickedElementRect.x - size.width / 2,
-                    y: lastClickedElementRect.y - taskbarHeight - size.height / 2,
-                }
+                      x: lastClickedElementRect.x - size.width / 2,
+                      y: lastClickedElementRect.y - taskbarHeight - size.height / 2,
+                  }
                 : undefined,
             minimal: element.props.minimal ?? false,
         }
@@ -402,23 +406,31 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             windows.map((w) =>
                 w === appWindow
                     ? {
-                        ...appWindow,
-                        position: {
-                            ...appWindow.position,
-                            ...(updates.position || {}),
-                        },
-                        size: {
-                            ...appWindow.size,
-                            ...(updates.size || {}),
-                        },
-                    }
+                          ...appWindow,
+                          position: {
+                              ...appWindow.position,
+                              ...(updates.position || {}),
+                          },
+                          size: {
+                              ...appWindow.size,
+                              ...(updates.size || {}),
+                          },
+                      }
                     : w
             )
         )
     }
 
-    const openSearch = () => {
-        addWindow(<SearchUI location={{ pathname: `search` }} key={`search`} newWindow minimal />)
+    const openSearch = (initialFilter?: string) => {
+        addWindow(
+            <SearchUI
+                location={{ pathname: `search` }}
+                key={`search`}
+                newWindow
+                minimal
+                initialFilter={initialFilter}
+            />
+        )
     }
 
     useEffect(() => {

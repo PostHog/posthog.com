@@ -39,14 +39,15 @@ const Filters = () => {
     )
 }
 
-const Search = () => {
+const Search = ({ initialFilter }: { initialFilter?: string }) => {
     const [query, setQuery] = useState('')
     const { dragControls, appWindow } = useWindow()
     const { setWindowTitle, closeWindow } = useApp()
     const { refine } = useSearchBox()
     const { hits } = useHits()
-    const [showFilters, setShowFilters] = useState(false)
+    const [showFilters, setShowFilters] = useState(!!initialFilter)
     const ref = useRef<HTMLDivElement>(null)
+    const { refine: filterRefine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
 
     const handleChange = (hit: Hit) => {
         if (!hit) return
@@ -71,6 +72,12 @@ const Search = () => {
         document.addEventListener('mousedown', handleClickOutside)
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [])
+
+    useEffect(() => {
+        if (initialFilter) {
+            filterRefine(initialFilter)
+        }
+    }, [initialFilter])
 
     return (
         <div
@@ -138,14 +145,14 @@ const Search = () => {
     )
 }
 
-export default function SearchUI() {
+export default function SearchUI({ initialFilter }: { initialFilter?: string }) {
     return (
         <InstantSearch
             searchClient={searchClient}
             indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
             stalledSearchDelay={750}
         >
-            <Search />
+            <Search initialFilter={initialFilter} />
         </InstantSearch>
     )
 }
