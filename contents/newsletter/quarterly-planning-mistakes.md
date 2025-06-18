@@ -1,5 +1,5 @@
 ---
-title: Quarterly planning mistakes for engineers to avoid
+title: You're doing quarterly planning wrong
 date: 2025-06-13
 author:
  - ian-vanagas
@@ -14,7 +14,7 @@ crosspost:
   - Blog
 ---
 
-### Unconventional advice from what we've learned at PostHog
+### Unconventional advice for engineers from what we've learned at PostHog
 
 Engineers often dread the end of the quarter because it means one thing: **quarterly planning**. 
 
@@ -44,35 +44,37 @@ We are big fans of making important changes as quickly as possible. Team changes
 
 Again, it's not about perfectly matching the original goals set, but building a great product. It's better to change a goal to something useful than be stuck working on something useless because you said you would 2 months ago.
 
-## 2. Doing it all live
+## 2. You fail to prep properly
 
-Live meetings are a trap. They can cause planning to spiral out of control for two reasons:
+Live meetings are where quarterly planning can really go off the rails. These meetings can take up a lot of time, especially if there are multiple of them. 
 
-1. They can take up a lot of time, especially if there are multiple long ones.
-2. They are often ineffective because attendees are not prepared. Time is used for thinking that should have been done in advance and you end up rushing the important bits.
+Worse, they can be ineffective if attendees aren't prepared. Time is used for thinking that should have been done in advance and you end up rushing the important bits.
 
-![It's a trap](https://res.cloudinary.com/dmukukwp6/image/upload/planningtrap_d095b6005d.png)
+![Don't be like Max](https://res.cloudinary.com/dmukukwp6/image/upload/dontbelikemax_bb5e2db363.png)
 
-To prevent both these issues, we keep live meetings to a minimum. Every team only does one and everyone is expected to complete the prep work ahead of time.
+We try to keep live meetings to a minimum (only one per quarter), but this requires everyone to prep properly.
 
-What does this prep work look like? Our own version of SWOT, called HOGS, which covers:
+At PostHog, this means:
 
-1. **Hopes:** What are you most excited about this quarter?
-2. **Obstructions:** Is there anything embarrassing about your product?
-3. **Growth:** What single thing would move the needle the most this quarter?
-4. **Sneak attack:** Say a competitor beats your team’s product, what would that product do differently?
+1. **Reflecting on the past quarter.** The person responsible for each goal writes a reflection on how it went. 
+2. **HOGS.** Our version of SWOT, which covers:
+  - **Hopes:** What are you most excited about this quarter?
+  - **Obstructions:** Is there anything embarrassing about your product?
+  - **Growth:** What single thing would move the needle the most this quarter?
+  - **Sneak attack:** Say a competitor beats your team's product, what would that product do differently?
+3. **Potential goals.** Based on the previous two sections, the team writes potential goals for next quarter, along with the motivation for it, and what they'll ship to achieve it.
 
-By having everyone complete this and review it before the meeting, our team's synchronous time is used on their goals and plans for the next quarter. These meetings become less about individual thinking, and more about discussing the thinking that's already been done.
+By having everyone complete these and review them before the meeting, our quarterly planning meetings become less about individual thinking, and more about discussing the thinking that's already been done. This ensures they are both efficient and effective.
 
-## 3. Obsessing over metric-based OKRs
+## 3. Obsessing over metrics
 
 In 2022, we required “OKRs” as part of quarterly planning, but eventually walked it back. We found engineers were agonizing over finding the right metrics while also feeling like metrics didn't accurately reflect their subjective view of progress.
 
 We also realized that after setting OKRs, engineers would go off and figure out what to build. They needed to translate an OKR into a plan they could work on. It's a lot clearer and faster to just write that down instead. Even if you are forced to use OKRs, writing down a plan is still useful for guiding your work.
 
-We learned that setting OKRs just because “Google does it” doesn't mean it's the right thing to do. We evolved and teams are now free to set goals and measurement methods, including using precise metrics (even OKRs) where appropriate. This has resulted in team goals like this:
+We learned that setting OKRs just because “Google does it” doesn't mean it's the right thing to do. We evolved and teams are now free to set goals and measurement methods, including using precise metrics (even OKRs) where appropriate. This has resulted in team goals that focus more on "what we'll ship" like this:
 
-![OKRs](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/mistakes/okrs.png)
+![OKRs](https://res.cloudinary.com/dmukukwp6/image/upload/badradgoals_5546d5f8f6.png)
 
 This type of goal better aligns with our overall goal of shipping a great product that equips every developer to build successful products, not just making a number on a graph go up.
 
@@ -93,11 +95,11 @@ Some examples of goals from Q2 2025 include:
 
 - **😱 OMG so many destinations ([Team CDP](/teams/cdp#goals)):** We want to have so many destinations that we cover all the CDP cases people could dream of and, most importantly, the tooling and product to scale this automatically using AI, community templates, etc.
 
-- **🧙 Automate the setup of 50% of PostHog installations ([Team Growth](/teams/growth#goals)):** More integrations and workflows with setup wizard. Be the default analytics provider for vibe coders. Be the default option in boilerplates for Next.js, React, and React Native. Improve the onboarding experience for self-hosted users.
+- **🧙 Automate the setup of 50% of PostHog installations ([Team Growth](/teams/growth#goals)):** More integrations and workflows with setup wizard. Be the default analytics provider for vibe coders. Be the default option in boilerplates for Next.js, React, and React Native. Improve the onboarding experience for self-hosted users.
 
-- 🏃 **Improve build times for PostHog apps ([Team Infrastructure](/teams/infrastructure#goals)):** Make deployments great, fast, and more reliable. Use Argo UI extensions wherever it makes sense.
+- 🏃 **Improve build times for PostHog apps ([Team Infrastructure](/teams/infrastructure#goals)):** Make deployments great, fast, and more reliable. Use Argo UI extensions wherever it makes sense.
 
-- **👩‍🔬 Find the needle in the haystack** **([Team Replay](/teams/replay#goals)):** Many of our customers have lots of recordings, but struggle to find the "useful" ones. We want to test and iterate on a bunch of different ideas to get customers to value faster.
+- **👩‍🔬 Find the needle in the haystack** **([Team Replay](/teams/replay#goals)):** Many of our customers have lots of recordings, but struggle to find the "useful" ones. We want to test and iterate on a bunch of different ideas to get customers to value faster.
 
 Some might say these goals are "too vague" or "don't count as OKRs." Our response is that they work for us 🤷‍♂️ and that's what really matters. These goals support our focus on shipping things and getting feedback from users rather than obsessing over wording or arbitrary metrics.
 
@@ -127,7 +129,7 @@ Early in PostHog's life, an engineer wanted to build session replay. Our co-foun
 
 Since then, engineers are in charge of figuring out what to build. Neither execs nor product managers tell engineers what to build. It's up to engineers to decide, but this means they need to form a strong opinion of what they want to build.
 
-When it comes to quarterly planning, our process looks like the “[W framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite/)” created by Lenny Rachitsky and Nels Gilbreth. This process encourages teams and execs to work together in planning like this:
+When it comes to quarterly planning, our process looks like the “[W framework](https://review.firstround.com/the-secret-to-a-great-planning-process-lessons-from-airbnb-and-eventbrite/)” created by Lenny Rachitsky and Nels Gilbreth. This process encourages teams and execs to work together in planning like this:
 
 1. **Context**: Execs share direction, overall objectives, strategy, mission, ICP, and more with teams. At PostHog, this is done through our weekly all-hands, 1:1s, [company handbook](https://posthog.com/handbook), `#tell-posthog-anything` messages, comments on RFCs, and more.
 
@@ -149,6 +151,6 @@ This process creates enough direction to make both the company and the small tea
 
 3. **Not having anti-goals.** When there is so much to build, it is often useful to write down what you *aren't* going to build. This improves focus on what really matters.
 
-4. **Lacking vision.** Although you plan quarterly, you should have a longer-term product vision too (and be able to explain it). This isn't just for execs. Engineers should be able to explain how the long-term vision ties to their quarterly goals and aligns with broader company strategy and goals.
+4. **Short-term thinking.** Although you plan quarterly, you should have a longer-term product vision too (and be able to explain it). This isn't just for execs. Engineers should be able to explain how the long-term vision ties to their quarterly goals and aligns with broader company strategy and goals.
 
 5. **Being dependent on other teams.** I've found that almost every time a goal is dependent on another team, it gets delayed or doesn't get done. The beauty of small teams is that they are autonomous. Dependency breaks this. Flag these in your plans before they become a problem.
