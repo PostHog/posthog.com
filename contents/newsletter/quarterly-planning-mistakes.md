@@ -34,7 +34,7 @@ Many engineers get stuck trying to make their goals perfect. They fail to realiz
 
 There are two lessons to take from this.
 
-The first is to **not spend too much time planning**. Our quarterly planning meetings take 1-1.5 hours max. 20% is reviewing the past and 80% is talking about goals for next quarter. Prep takes about an hour and is entirely async. This means less time spent in meetings 🥳.
+The first is to **not spend too much time planning**. Our quarterly planning meetings take 60 to 90 mins max. About 20% is reviewing the past and 80% is talking about goals for next quarter. Prep takes about an hour and is entirely async. This means less time spent in meetings 🥳.
 
 The second lesson is **not being afraid to change goals** midway through the quarter. Sometimes we get our goals wrong and that's ok. Circumstances change, delays happen, engineers need the freedom to adjust.
 
