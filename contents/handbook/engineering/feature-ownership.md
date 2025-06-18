@@ -48,6 +48,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Internal Messaging (Email, Notifications) | [Team Platform][Team Platform]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
+| Table exports | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/table-exports</span> |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
 | Onboarding | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/onboarding</span>  |
 | Permissions and access control | [Team Platform][Team Platform]  | <span class="lemon-tag gh-tag">feature/permissions</span>  |
