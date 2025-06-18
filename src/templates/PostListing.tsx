@@ -13,6 +13,8 @@ import TeamMember from 'components/TeamMember'
 import qs from 'qs'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
+import Tooltip from 'components/RadixUI/Tooltip'
+import ProgressBar from 'components/ProgressBar'
 
 dayjs.extend(relativeTime)
 
@@ -28,16 +30,38 @@ const categories = [
 ]
 
 export const FeaturedImage = ({ url }: { url: string }) => {
-    const [isZoomed, setIsZoomed] = useState(false)
+    const [isSmallImageLoaded, setIsSmallImageLoaded] = useState(false)
+    const [isLargeImageLoaded, setIsLargeImageLoaded] = useState(false)
+
     return (
-        <div
-            data-scheme="secondary"
-            className="flex items-center justify-center bg-primary rounded border border-border overflow-hidden"
+        <Tooltip
+            trigger={
+                <div className="max-h-8 max-w-48">
+                    <CloudinaryImage
+                        src={url as `https://res.cloudinary.com/${string}`}
+                        imgClassName={`max-h-8 max-w-48 ${!isSmallImageLoaded ? 'hidden' : ''}`}
+                        width={200}
+                        onLoad={() => setIsSmallImageLoaded(true)}
+                    />
+                </div>
+            }
         >
-            <ControlledZoom isZoomed={isZoomed} onZoomChange={setIsZoomed}>
-                <CloudinaryImage src={url} width={isZoomed ? undefined : 200} />
-            </ControlledZoom>
-        </div>
+            <div className="relative min-h-4 min-w-12 max-h-72 max-w-72 transition-all bg-accent">
+                {!isLargeImageLoaded && (
+                    <div className="flex items-center justify-center">
+                        <div className="w-full">
+                            <ProgressBar title="image" chrome={false} />
+                        </div>
+                    </div>
+                )}
+                <CloudinaryImage
+                    src={url as `https://res.cloudinary.com/${string}`}
+                    width={400}
+                    onLoad={() => setIsLargeImageLoaded(true)}
+                    className={!isLargeImageLoaded ? 'hidden' : ''}
+                />
+            </div>
+        </Tooltip>
     )
 }
 

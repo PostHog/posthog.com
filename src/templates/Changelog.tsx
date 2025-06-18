@@ -31,6 +31,7 @@ import { FeaturedImage } from './PostListing'
 import { motion } from 'framer-motion'
 import qs from 'qs'
 import useProduct from 'hooks/useProduct'
+import ProgressBar from 'components/ProgressBar'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -152,6 +153,44 @@ const Description = ({ description, title, expandAll }) => {
                 </div>
             </motion.div>
         </button>
+    )
+}
+
+const DescriptionWithImage = ({ description, title, expandAll, imageURL }) => {
+    const [open, setOpen] = useState(false)
+
+    useEffect(() => {
+        setOpen(expandAll)
+    }, [expandAll])
+
+    const handleToggle = () => setOpen(!open)
+
+    return (
+        <>
+            <button onClick={handleToggle}>
+                <div className="flex justify-start items-start text-left">
+                    <IconChevronDown
+                        className={`size-6 ${open ? '' : '-rotate-90'} flex-shrink-0 transition-transform`}
+                    />
+                    <strong className="font-semibold">{title}</strong>
+                </div>
+                <motion.div
+                    className={`text-left overflow-hidden ml-6`}
+                    initial={{ height: 0 }}
+                    animate={{ height: open ? 'auto' : 0 }}
+                    transition={{ duration: 0.2 }}
+                >
+                    <div className="mt-2">
+                        <Markdown>{description}</Markdown>
+                    </div>
+                </motion.div>
+            </button>
+            {imageURL ? (
+                <button onClick={handleToggle}>
+                    <FeaturedImage url={imageURL} />
+                </button>
+            ) : null}
+        </>
     )
 }
 
@@ -539,8 +578,10 @@ export default function Changelog({ pageContext }) {
                     </button>
                 </div>
                 <ScrollArea>
-                    {roadmaps.length > 0 &&
-                        (groupBy ? (
+                    {isValidating && roadmaps.length === 0 ? (
+                        <ProgressBar title="changelog" />
+                    ) : roadmaps.length > 0 ? (
+                        groupBy ? (
                             <ul className="list-none m-0 p-0 space-y-4">
                                 {Object.keys(groupedRoadmaps).map((key) => {
                                     return (
@@ -566,7 +607,8 @@ export default function Changelog({ pageContext }) {
                                 }}
                                 expandAll={expandAll}
                             />
-                        ))}
+                        )
+                    ) : null}
                 </ScrollArea>
             </Editor>
         </>
