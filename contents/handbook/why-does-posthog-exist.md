@@ -57,7 +57,7 @@ We can then get our AI to work across all of them together, whilst making every 
 
 ### 3. Get in first
 
-Since developers exist first in a startup, by getting in with them early, we are upstream naturally of every single tool they would have otherwise used. Although anyone can pick up our products, this means we can best deliver customer infrastructure to early stage companies so should focus there by default.
+Since developers exist first in a startup, by getting in with them early, we are naturally upstream of every other tool they might have considered using. Although anyone can pick up our products (and lots of mature companies certainly do), this means we can best deliver customer infrastructure to early stage companies, and so should focus there by default.
 
 _Once_ we land a customer, we then let them pull _us_ upmarket as they grow. But not before. We don't want to hire a big enterprise sales team and go upmarket before our existing customers are there. This keeps us efficient and able to stay focused on product.
 
