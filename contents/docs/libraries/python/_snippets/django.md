@@ -42,7 +42,7 @@ def add_user_tags(request):
     tags = {}
     if hasattr(request, 'user') and request.user.is_authenticated:
         tags['user_id'] = request.user.id
-        tags['user_email'] = request.user.email
+        tags['email'] = request.user.email
     return tags
 
 POSTHOG_MW_EXTRA_TAGS = add_user_tags
