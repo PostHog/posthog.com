@@ -13,7 +13,6 @@ crosspost:
   - Blog
 ---
 
-![Matrix meme with title "What if I told you engineers can be designers"](https://res.cloudinary.com/dmukukwp6/image/upload/452937392_94602ee7_0b56_43cc_9bca_4df2b125229e_a5ecb1a164.jpg)
 
 Design used to be a dependency. If the Figma wasn't ready, neither were you.
 
