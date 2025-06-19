@@ -183,12 +183,12 @@ const appSettings = {
     'community-auth': {
         size: {
             min: {
-                width: 850,
-                height: 580,
+                width: 400,
+                height: 400,
             },
             max: {
-                width: 850,
-                height: 580,
+                width: 400,
+                height: 400,
             },
             fixed: true,
         },

@@ -10,7 +10,6 @@ import OSButton from 'components/OSButton'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
-import { Authentication } from 'components/Squeak'
 import Link from 'components/Link'
 import Orders from 'components/MainNav'
 import { StrapiRecord, ProfileData } from 'lib/strapi'
@@ -18,6 +17,7 @@ import { Avatar as MainNavAvatar } from 'components/MainNav'
 import Wizard from 'components/Wizard'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ChatProvider } from 'hooks/useChat'
+import SignIn from 'components/Squeak/components/Classic/SignIn'
 
 export default function TaskBarMenu() {
     const { windows, bringToFront, focusedWindow, addWindow, closeWindow, openSearch } = useApp()
@@ -63,12 +63,7 @@ export default function TaskBarMenu() {
         }
         addWindow(
             <ScrollArea location={{ pathname: `community-auth` }} key="community-auth">
-                <Authentication
-                    initialView="sign-in"
-                    showBanner={false}
-                    showProfile={false}
-                    onAuth={() => closeWindow({ key: 'community-auth' })}
-                />
+                <SignIn />
             </ScrollArea>
         )
     }
