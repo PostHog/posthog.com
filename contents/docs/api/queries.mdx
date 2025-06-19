@@ -28,7 +28,6 @@ For example, to create a query that gets events where the `$current_url` contain
 
 <MultiLanguage>
 
-
 ```bash
 curl \
   -H 'Content-Type: application/json' \
@@ -162,6 +161,228 @@ createQuery()
 </MultiLanguage>
 
 Every query you run is logged in the `query_log` table along with details like duration, read bytes, read rows, and more.
+
+## Writing performant queries
+
+Since the query endpoint accesses PostHog's data warehouse directly, it's important to write performant queries. We aren't able to optimize these queries for you like we would with other products. Here is some advice:
+
+### 1. Use shorter time ranges
+
+You should almost always include a time range in your queries, and the shorter the better. There are a variety of SQL features to help you do this including `now()`, `INTERVAL`, and `dateDiff`. See more about these in our [SQL docs](/docs/product-analytics/sql#date-and-time).
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "SELECT count() FROM events WHERE timestamp >= now() - INTERVAL 7 DAY"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": """
+          SELECT count()
+          FROM events
+          WHERE timestamp >= now() - INTERVAL 7 DAY
+          LIMIT 100
+        """
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": `
+        SELECT count()
+        FROM events
+        WHERE timestamp >= now() - INTERVAL 7 DAY
+        LIMIT 100
+      `
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+### 2. Materialize a view for the data you need
+
+The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views#materializing-and-scheduling-a-view) of your data. This means that the view is precomputed, which can significantly improve query performance.
+
+To do this, write your query in the [SQL editor](https://us.posthog.com/sql), click **Materialize**, then **Save and materialize**, and give it a name without spaces (I choose `mat_event_count`). You can also schedule to update the view at a specific interval.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_28_2x_db1e37a5cf.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_44_2x_90bd8f28ca.png"
+  alt="Materialize view"
+  classes="rounded"
+/>
+
+Once done, you can query the view like any other table.
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "SELECT * FROM mat_event_count"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": """
+          SELECT *
+          FROM mat_event_count
+        """
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": `
+        SELECT *
+        FROM mat_event_count
+      `
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+### 3. Don't scan the same table multiple times
+
+Reading a large table like `events` or `persons` more than once in the same query multiplies the work ClickHouse has to do (more I/O, more CPU, more memory). For example, this query is inefficient:
+
+```sql
+WITH us_events AS (
+    SELECT *
+    FROM events
+    WHERE properties.$geoip_country_code = 'US'
+),
+ca_events AS (
+    SELECT *
+    FROM events
+    WHERE properties.$geoip_country_code = 'CA'
+)
+SELECT *
+FROM us_events
+UNION ALL
+SELECT *
+FROM ca_events
+```
+
+Instead, pull the rows you need once, typically in a first CTE, and have every later step reference that CTE like this:
+
+```sql
+WITH base_events AS (              -- one read only
+    SELECT event, properties.$geoip_country_code as country
+    FROM events
+    WHERE properties.$geoip_country_code IN ('US', 'CA')
+),
+us_events AS (
+    SELECT event
+    FROM base_events
+    WHERE country = 'US'
+),
+ca_events AS (
+    SELECT event
+    FROM base_events
+    WHERE country = 'CA'
+)
+SELECT *
+FROM us_events
+UNION ALL
+SELECT *
+FROM ca_events
+```
+
+### 4. Other SQL optimizations
+
+Option 1 and 2 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
 
 ## Query parameters
 

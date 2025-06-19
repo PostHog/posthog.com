@@ -24,10 +24,16 @@ For a query to be a valid view, all fields being accessed must be aliased (with 
 
 Views can be materialized and stored in the PostHog data warehouse. This means that the view is precomputed, which can significantly improve query performance.
 
-After you create a view, you can also schedule it to be updated at a specific interval. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. For example, a materialized view can be scheduled for an expensive query that is used in multiple dashboards.
+To materialize a view, go to the [SQL editor](https://us.posthog.com/sql), select the **Materialize** option or the lighting bolt tab, click **Save and materialize**, and give it a name without spaces. You can then query the view like any other table.
 
-To materialize a view, go to the [SQL editor](https://us.posthog.com/sql), select the **Materialize** option or the lighting bolt tab, and click **Save and materialize**. Materialized views are reversible, so you can revert back to a normal view at any time.
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_28_2x_db1e37a5cf.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_44_2x_90bd8f28ca.png"
+  alt="Materialize view"
+  classes="rounded"
+/>
 
+After you create a view, you can also schedule it to be updated at a specific interval. This is useful when you have a view that is used frequently, and you want to ensure that the data synced at a specified cadence. For example, a materialized view can be scheduled for an expensive query that is used in multiple dashboards (like with [API queries](/docs/api/queries)).
 
 ![materialized view](https://res.cloudinary.com/dmukukwp6/image/upload/ph_materialization_a3dd7dfb0b.png)
 
