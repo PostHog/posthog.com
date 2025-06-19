@@ -492,11 +492,14 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                     <OSButton
                                                         variant="ghost"
                                                         size="xs"
-                                                        onClick={
-                                                            size.width >= window?.innerWidth
-                                                                ? collapseWindow
-                                                                : expandWindow
-                                                        }
+                                                        onClick={() => {
+                                                            setWindowOptionsTooltipVisible(false)
+                                                            if (size.width >= window?.innerWidth) {
+                                                                collapseWindow()
+                                                            } else {
+                                                                expandWindow()
+                                                            }
+                                                        }}
                                                         onMouseEnter={() => {
                                                             setWindowOptionsTooltipVisible(true)
                                                         }}
