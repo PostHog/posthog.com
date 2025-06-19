@@ -48,18 +48,27 @@ import NextJSInstall from "../../integrate/_snippets/nextjs/install-nextjs.mdx"
 
 ## Accessing PostHog
 
-### With instrumentation-client (15.3+) 
+import Tab from "components/Tab"
+import InstrumentationClientSetup from "./_snippets/instrumentation-client-access.mdx"
+import ProviderAccess from "./_snippets/provider-access.mdx"
 
-Once initialized in `instrumentation-client.js|ts`, import `posthog` from `posthog-js` anywhere and call whatever you need on the `posthog` object.
-
-```js
-import posthog from 'posthog-js'
-posthog.capture('user_signed_up')
-```
-
-### With PostHog provider
-
-PostHog can be accessed throughout your Next.js app by using the `usePostHog` hook.
+<Tab.Group tabs={[
+    'Instrumentation client', 
+    'PostHog provider'
+]}>
+    <Tab.List>
+        <Tab>Instrumentation client</Tab>
+        <Tab>PostHog provider</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <InstrumentationClientSetup />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ProviderAccess />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
 
 ### Usage
 
@@ -119,7 +128,7 @@ On top of the standard features like autocapture, custom events, session recordi
 
 See the [React SDK docs](/docs/libraries/react) for more details.
 
-### Why use a `useEffect` hook to initialize PostHog?
+### Why use a `useEffect` hook to initialize PostHog in the provider?
 
 We want to initialize PostHog when the app is loaded. The [React docs](https://react.dev/learn/synchronizing-with-effects) recommend using a `useEffect` hook to do this:
 
