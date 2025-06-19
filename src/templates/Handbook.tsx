@@ -174,11 +174,11 @@ export default function Handbook({
         TeamMembers: (props) => TeamMembers({ team: title?.replace(/team/gi, '').trim(), ...props }),
         CategoryData,
         TutorialTags,
-        Emoji,
+        // Emoji,
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
-        DestinationsLibraryCallout,
+        // DestinationsLibraryCallout,
         table: (props) => (
             <OverflowXSection>
                 <table {...props} />
