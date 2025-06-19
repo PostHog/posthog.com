@@ -1,5 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import React from 'react'
+import React, { useEffect } from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
@@ -19,6 +19,10 @@ import { AppLink, IconPresentation } from 'components/OSIcons'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useApp } from '../../context/App'
+import { Search, CmdK, Ctrl, K } from 'components/Icons/Icons'
+
+const keyboardShortcut =
+    'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40'
 
 const ProductLink = ({ icon, name, url, color }: { icon: string; name: string; url: string; color: string }) => {
     const Icon = Icons[icon as keyof typeof Icons] as any
@@ -209,7 +213,7 @@ const getColorForSection = (sectionName: string) => {
 
 const renderSectionContent = (children: any[]) => {
     return (
-        <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,10rem))] gap-4 relative">
+        <div data-scheme="primary" className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative">
             {children
                 .filter((child) => child.url && child.name)
                 .slice(0, 8) // Limit to 8 items for better layout
@@ -219,12 +223,12 @@ const renderSectionContent = (children: any[]) => {
                         <ZoomHover key={index} className="items-center text-center">
                             <Link
                                 to={child.url}
-                                className="bg-accent p-4 rounded flex flex-col justify-center items-center gap-2 w-full"
+                                className="bg-accent border border-transparent hover:border-primary px-2 py-4 rounded flex flex-col h-full justify-start items-center gap-2 w-full font-medium"
                             >
                                 <div>
                                     <Icon className={`size-6 text-${child.color || 'primary'}`} />
                                 </div>
-                                <div className="text-sm">{child.name}</div>
+                                <div className="text-sm leading-tight">{child.name}</div>
                             </Link>
                         </ZoomHover>
                     )
@@ -236,47 +240,40 @@ const renderSectionContent = (children: any[]) => {
 export const DocsIndex = () => {
     const { openSearch } = useApp()
     const { topLevelSections, productSections } = processDocsMenu()
+    const [isMac, setIsMac] = React.useState<boolean | undefined>(undefined)
+    useEffect(() => {
+        setIsMac(typeof window !== 'undefined' && window.navigator.userAgent.toLowerCase().includes('macintosh'))
+    }, [])
 
     // Create accordion items
     const accordionItems = [
         // Top level sections from Product OS
         ...topLevelSections.map((section: any) => ({
             value: section.name?.toLowerCase()?.replace(/\s+/g, '-') || 'section',
-            trigger: (
-                <span className="bg-primary pr-2 relative z-10 flex items-center gap-2">
-                    {section.icon &&
-                        (() => {
-                            const Icon = Icons[section.icon as keyof typeof Icons] as any
-                            return <Icon className={`size-4 text-${(section as any).color || 'primary'}`} />
-                        })()}
-                    {section.name}
-                </span>
-            ),
+            trigger: <span className="bg-primary pr-2 relative z-10">{section.name}</span>,
             content: renderSectionContent(section.children || []),
         })),
         // Products section
         {
             value: 'products',
-            trigger: (
-                <span className="bg-primary pr-2 relative z-10 flex items-center gap-2">
-                    <Icons.IconApps className="size-4 text-salmon" />
-                    Products
-                </span>
-            ),
+            trigger: <span className="bg-primary pr-2 relative z-10">Products</span>,
             content: (
-                <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,10rem))] gap-4 relative">
+                <div
+                    data-scheme="primary"
+                    className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative"
+                >
                     {productSections.map((product: any, index: number) => {
                         const Icon = product.icon ? (Icons[product.icon as keyof typeof Icons] as any) : Icons.IconApps
                         return (
                             <ZoomHover key={index} className="items-center text-center">
                                 <Link
                                     to={product.url}
-                                    className="bg-accent p-4 rounded flex flex-col justify-center items-center gap-2 w-full"
+                                    className="bg-accent border border-transparent hover:border-primary px-2 py-4 rounded flex flex-col h-full justify-start items-center gap-2 w-full font-medium"
                                 >
                                     <div>
                                         <Icon className={`size-6 text-${product.color || 'primary'}`} />
                                     </div>
-                                    <div className="text-sm">{product.name}</div>
+                                    <div className="text-sm leading-tight">{product.name}</div>
                                 </Link>
                             </ZoomHover>
                         )
@@ -287,19 +284,33 @@ export const DocsIndex = () => {
     ]
 
     return (
-        <ScrollArea>
-            <div data-scheme="secondary" className="p-5 bg-primary">
-                <SEO title="Documentation - PostHog" />
+        <div data-scheme="secondary" className="p-5 bg-primary h-full">
+            <SEO title="Documentation - PostHog" />
 
-                <div className="flex gap-8">
-                    <section className="flex-1">
-                        <h2>Docs</h2>
-                        <button
-                            onClick={() => openSearch('docs')}
-                            className="px-4 py-2 bg-white rounded-md border border-border w-full text-left hover:scale-[1.002] active:scale-[1] transition-transform mb-2"
-                        >
-                            <span className="opacity-50">Search...</span>
-                        </button>
+            <div className="flex gap-8 h-full">
+                <section className="flex-1">
+                    <h2>Docs</h2>
+                    <button
+                        onClick={() => openSearch('docs')}
+                        className="px-4 py-2 bg-white rounded-md border border-border w-full text-left hover:scale-[1.002] active:scale-[1] transition-transform mb-2 flex justify-between items-center"
+                    >
+                        <span className="opacity-50">Search...</span>
+                        {isMac !== undefined && (
+                            <span className="hidden md:block">
+                                {isMac ? (
+                                    <kbd className="">
+                                        <CmdK className={keyboardShortcut} />
+                                    </kbd>
+                                ) : (
+                                    <kbd className="space-x-1">
+                                        <Ctrl className={keyboardShortcut} />
+                                        <K className={keyboardShortcut} />
+                                    </kbd>
+                                )}
+                            </span>
+                        )}
+                    </button>
+                    <ScrollArea>
                         {accordionItems.map((item, index) => (
                             <Accordion
                                 key={index}
@@ -309,9 +320,11 @@ export const DocsIndex = () => {
                                 items={[item]}
                             />
                         ))}
-                    </section>
+                    </ScrollArea>
+                </section>
 
-                    <aside className="max-w-xs text-sm">
+                <aside className="max-w-xs text-sm">
+                    <ScrollArea>
                         <h6>About our docs</h6>
                         <p>There are a few ways to explore our docs:</p>
                         <p>
@@ -319,9 +332,9 @@ export const DocsIndex = () => {
                         </p>
                         <ul>
                             <li>
-                                <Link to="#" state={{ newWindow: true }}>
+                                <AskMax linkOnly className="underline font-medium">
                                     Ask Max
-                                </Link>
+                                </AskMax>
                                 , our trusty AI chatbot. Start a chat on any docs page and Max will have the relevant
                                 context.
                             </li>
@@ -329,7 +342,7 @@ export const DocsIndex = () => {
                         </ul>
                         <p>
                             You can also ask a question at the end of each docs article. They get cross-posted to our{' '}
-                            <Link to="#" state={{ newWindow: true }}>
+                            <Link to="/questions" className="underline font-medium" state={{ newWindow: true }}>
                                 community forums
                             </Link>
                             .
@@ -341,97 +354,23 @@ export const DocsIndex = () => {
                             <li>Look for tooltips that link to docs - they open right inside the product</li>
                             <li>Ask Max in the product</li>
                         </ul>
-                    </aside>
-                </div>
 
-                <section className="mb-8 flex flex-col-reverse lg:flex-row bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 md:p-8 lg:pr-0 shadow-xl">
-                    <div className="@container flex-1 text-center sm:text-left">
-                        <h2>New to PostHog?</h2>
-                        <p className="text-[15px] md:pr-4">
-                            The getting started guide covers adding PostHog to your app or site, sending events,
-                            identifying users, creating actions and insights, and assigning properties to users and
-                            users to groups.
+                        <hr className="my-4" />
+
+                        <h6>Feedback</h6>
+
+                        <p>
+                            Our docs are perpetually a work in progress. The{' '}
+                            <Link to="/teams/content" className="underline font-medium" state={{ newWindow: true }}>
+                                Content team
+                            </Link>{' '}
+                            is responsible for what you see here. At the end of each page, you can provide feedback
+                            about what was (or wasn't) helpful. We read all feedback.
                         </p>
-                        <CallToAction
-                            to="/docs/getting-started/install"
-                            type="primary"
-                            size="md"
-                            className="!w-full sm:!w-auto"
-                        >
-                            Get started
-                        </CallToAction>
-
-                        <div className="flex gap-2 justify-center @md:justify-start lg:justify-start @sm:items-center mt-6">
-                            <IconLightBulb className="size-8 flex-[0_0_2rem] @md:flex-[0_0_auto] @md:size-10 text-primary dark:text-primary-dark opacity-50 bg-accent dark:bg-accent-dark rounded-sm p-2" />
-                            <p className="text-sm m-0 text-left leading-relaxed">
-                                <strong>Tip:</strong>{' '}
-                                <AskMax linkOnly className="text-red dark:text-yellow font-semibold">
-                                    Chat with Max AI
-                                </AskMax>{' '}
-                                for quick answers to questions.{' '}
-                                <span className="@md:inline-block">
-                                    Open by typing <KeyboardShortcut text="?" /> or search with{' '}
-                                    <KeyboardShortcut text="/" />.
-                                </span>
-                            </p>
-                        </div>
-                    </div>
-                    <aside>
-                        <figure className="m-0">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/adventure-hog.png"
-                                alt="This hog knows where he's headed"
-                                width={342}
-                                placeholder="blurred"
-                                className="w-full sm:w-[345px]"
-                            />
-                        </figure>
-                    </aside>
-                </section>
-
-                <section className="@container">
-                    <h4 className="mb-2">Product documentation</h4>
-                    <div className="max-w-4xl">
-                        <SidebarSearchBox filter="docs" />
-                    </div>
-
-                    <ProductList />
-
-                    <div className="flex flex-col @3xl:grid md:grid-cols-3 gap-4 mt-8">
-                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                            <h3 className="text-xl mb-2">Data</h3>
-                            <p className="text-[15px]">
-                                Learn how to manage events and customer data for use with all PostHog products.
-                            </p>
-                            <CallToAction to="/docs/data" type="outline" size="md" className="!w-full sm:!w-auto">
-                                Explore
-                            </CallToAction>
-                        </div>
-                        <div className="@container border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                            <h3 className="text-xl mb-2">Templates</h3>
-                            <p className="text-[15px]">
-                                Instantly analyze data and collect feedback with dashboard and survey templates.
-                            </p>
-                            <div className="flex flex-col @[14rem]:flex-row  items-start @[14rem]:items-center gap-4">
-                                <CallToAction to="/templates" type="outline" size="md" className="!w-full sm:!w-auto">
-                                    Browse templates
-                                </CallToAction>
-                            </div>
-                        </div>
-                        <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark p-6 xl:p-8 rounded">
-                            <h3 className="text-xl mb-2">API</h3>
-                            <p className="text-[15px]">
-                                Push or pull data to build custom functionality or create bespoke views for your
-                                business needs.
-                            </p>
-                            <CallToAction to="/docs/api" type="outline" size="md" className="!w-full sm:!w-auto">
-                                Explore
-                            </CallToAction>
-                        </div>
-                    </div>
-                </section>
+                    </ScrollArea>
+                </aside>
             </div>
-        </ScrollArea>
+        </div>
     )
 }
 
