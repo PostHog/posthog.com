@@ -35,7 +35,15 @@ export interface AppWindow {
         width: number
         height: number
     }
+    previousSize: {
+        width: number
+        height: number
+    }
     position: {
+        x: number
+        y: number
+    }
+    previousPosition: {
         x: number
         y: number
     }

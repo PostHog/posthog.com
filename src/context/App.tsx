@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useMemo, useState, useCallback } from 'react'
+import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { AppWindow } from './Window'
 import SearchUI from 'components/SearchUI'
 import { navigate } from 'gatsby'
@@ -31,7 +31,12 @@ interface AppContextType {
     updateWindowRef: (appWindow: AppWindow, ref: React.RefObject<HTMLDivElement>) => void
     updateWindow: (
         appWindow: AppWindow,
-        updates: { position?: { x?: number; y?: number }; size?: { width?: number; height?: number } }
+        updates: {
+            position?: { x?: number; y?: number }
+            size?: { width?: number; height?: number }
+            previousPosition?: { x?: number; y?: number }
+            previousSize?: { width?: number; height?: number }
+        }
     ) => void
     getPositionDefaults: (
         key: string,
@@ -40,6 +45,9 @@ interface AppContextType {
     ) => { x: number; y: number }
     getDesktopCenterPosition: (size: { width: number; height: number }) => { x: number; y: number }
     openSearch: (initialFilter?: string) => void
+    handleSnapToSide: (side: 'left' | 'right') => void
+    constraintsRef: React.RefObject<HTMLDivElement>
+    expandWindow: () => void
 }
 
 interface AppProviderProps {
@@ -75,6 +83,9 @@ export const Context = createContext<AppContextType>({
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
     openSearch: () => {},
+    handleSnapToSide: () => {},
+    constraintsRef: { current: null },
+    expandWindow: () => {},
 })
 
 const appSettings = {
@@ -172,12 +183,12 @@ const appSettings = {
     'community-auth': {
         size: {
             min: {
-                width: 850,
-                height: 580,
+                width: 400,
+                height: 400,
             },
             max: {
-                width: 850,
-                height: 580,
+                width: 400,
+                height: 400,
             },
             fixed: true,
         },
@@ -198,6 +209,7 @@ const appSettings = {
 } as const
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
+    const constraintsRef = useRef<HTMLDivElement>(null)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [windows, setWindows] = useState<AppWindow[]>([])
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
@@ -368,7 +380,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 path: element.props.location.pathname,
             },
             size,
+            previousSize: size,
             position,
+            previousPosition: position,
             sizeConstraints: settings?.size?.fixed
                 ? { min: settings.size.min, max: settings.size.max }
                 : getWindowBasedSizeConstraints(),
@@ -414,6 +428,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         updates: {
             position?: { x?: number; y?: number }
             size?: { width?: number; height?: number }
+            previousPosition?: { x?: number; y?: number }
+            previousSize?: { width?: number; height?: number }
         }
     ) => {
         setWindows((windows) =>
@@ -428,6 +444,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                           size: {
                               ...appWindow.size,
                               ...(updates.size || {}),
+                          },
+                          previousPosition: {
+                              ...appWindow.previousPosition,
+                              ...(updates.previousPosition || {}),
+                          },
+                          previousSize: {
+                              ...appWindow.previousSize,
+                              ...(updates.previousSize || {}),
                           },
                       }
                     : w
@@ -445,6 +469,31 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 initialFilter={initialFilter}
             />
         )
+    }
+
+    const handleSnapToSide = (side: 'left' | 'right') => {
+        if (!constraintsRef.current || !focusedWindow) return
+
+        const bounds = constraintsRef.current.getBoundingClientRect()
+        const x = side === 'left' ? 0 : bounds.width / 2
+        const finalWidth = bounds.width / 2
+        const size = { width: finalWidth, height: bounds.height }
+        const position = { x, y: 0 }
+
+        updateWindow(focusedWindow, {
+            position,
+            size,
+        })
+    }
+
+    const expandWindow = () => {
+        if (!focusedWindow) return
+        updateWindow(focusedWindow, {
+            position: { x: 0, y: 0 },
+            size: { width: window.innerWidth, height: window.innerHeight - taskbarHeight },
+            previousSize: focusedWindow.size,
+            previousPosition: focusedWindow.position,
+        })
     }
 
     useEffect(() => {
@@ -480,6 +529,26 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [])
 
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.shiftKey && e.key === 'ArrowLeft') {
+                handleSnapToSide('left')
+            }
+            if (e.shiftKey && e.key === 'ArrowRight') {
+                handleSnapToSide('right')
+            }
+            if (e.shiftKey && e.key === 'ArrowUp') {
+                expandWindow()
+            }
+        }
+
+        document.addEventListener('keydown', handleKeyDown)
+
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown)
+        }
+    }, [handleSnapToSide, expandWindow])
+
     return (
         <Context.Provider
             value={{
@@ -497,6 +566,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 updateWindow,
                 getDesktopCenterPosition,
                 openSearch,
+                handleSnapToSide,
+                constraintsRef,
+                expandWindow,
             }}
         >
             {children}

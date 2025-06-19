@@ -45,7 +45,7 @@ const Router = (props) => {
     return children
 }
 
-export default function AppWindow({ item, constraintsRef }: { item: AppWindowType; constraintsRef: any }) {
+export default function AppWindow({ item }: { item: AppWindowType }) {
     const {
         minimizeWindow,
         bringToFront,
@@ -57,13 +57,16 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         updateWindowRef,
         updateWindow,
         getDesktopCenterPosition,
+        handleSnapToSide,
+        constraintsRef,
+        expandWindow,
     } = useApp()
     const controls = useDragControls()
     const sizeConstraints = item.sizeConstraints
     const size = item.size
-    const [previousSize, setPreviousSize] = useState(item.size)
-    const [previousPosition, setPreviousPosition] = useState({ x: 0, y: 0 })
+    const previousSize = item.previousSize
     const position = item.position
+    const previousPosition = item.previousPosition
     const [snapIndicator, setSnapIndicator] = useState<'left' | 'right' | null>(null)
     const [windowOptionsTooltipVisible, setWindowOptionsTooltipVisible] = useState(false)
     const [menu, setMenu] = useState<IMenu[]>([])
@@ -98,15 +101,6 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
         updateWindow(item, {
             size: newSize,
             position: getDesktopCenterPosition(newSize),
-        })
-    }
-
-    const expandWindow = () => {
-        setPreviousSize(size)
-        setPreviousPosition(position)
-        updateWindow(item, {
-            position: { x: 0, y: 0 },
-            size: { width: window.innerWidth, height: window.innerHeight - taskbarHeight },
         })
     }
 
@@ -204,21 +198,6 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
 
     const canGoBack = history.length > 0 && activeHistoryIndex > 0
     const canGoForward = activeHistoryIndex < history.length - 1
-
-    const handleSnapToSide = (side: 'left' | 'right') => {
-        if (!constraintsRef.current) return
-
-        const bounds = constraintsRef.current.getBoundingClientRect()
-        const x = side === 'left' ? 0 : bounds.width / 2
-        const finalWidth = bounds.width / 2
-        const size = { width: finalWidth, height: bounds.height }
-        const position = { x, y: 0 }
-
-        updateWindow(item, {
-            position,
-            size,
-        })
-    }
 
     useEffect(() => {
         if (!item?.fromHistory) {
@@ -492,11 +471,14 @@ export default function AppWindow({ item, constraintsRef }: { item: AppWindowTyp
                                                     <OSButton
                                                         variant="ghost"
                                                         size="xs"
-                                                        onClick={
-                                                            size.width >= window?.innerWidth
-                                                                ? collapseWindow
-                                                                : expandWindow
-                                                        }
+                                                        onClick={() => {
+                                                            setWindowOptionsTooltipVisible(false)
+                                                            if (size.width >= window?.innerWidth) {
+                                                                collapseWindow()
+                                                            } else {
+                                                                expandWindow()
+                                                            }
+                                                        }}
                                                         onMouseEnter={() => {
                                                             setWindowOptionsTooltipVisible(true)
                                                         }}
