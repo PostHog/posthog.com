@@ -139,17 +139,17 @@ export default function Products(): JSX.Element {
                         data: 'Data',
                         engineering: 'Engineering',
                         marketing: 'Marketing',
-                        product_os: 'Product OS',
+                        product_os: 'Product OS tools',
                     }
 
                     // Custom product order by category - if not specified, products will be sorted alphabetically
                     const productOrder: Record<string, string[]> = {
                         analytics: ['web-analytics', 'product-analytics', 'revenue-analytics', 'llm-analytics'],
-                        product: ['session-replay', 'experiments', 'surveys', 'user-interviews'],
+                        product: ['session-replay', 'experiments', 'surveys', 'user-interviews', 'early_access'],
                         data: ['data-warehouse', 'cdp', 'sql', 'api', 'webhooks'],
                         engineering: ['feature-flags', 'error-tracking'],
                         marketing: ['heatmaps', 'broadcasts'],
-                        product_os: ['max', 'dashboards', 'notebooks'],
+                        product_os: ['max', 'dashboards', 'notebooks', 'activity', 'toolbar'],
                     }
                     const productsWithCategory = allProducts.filter((product: any) => product.category)
                     const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {
@@ -213,7 +213,11 @@ export default function Products(): JSX.Element {
                                                         {products.map((product) => (
                                                             <ZoomHover
                                                                 key={product.slug}
-                                                                className="w-28 justify-center"
+                                                                className={`w-28 justify-center ${
+                                                                    product.status == 'WIP'
+                                                                        ? 'opacity-50 hover:opacity-100'
+                                                                        : ''
+                                                                }`}
                                                             >
                                                                 <AppLink
                                                                     label={product.name}
@@ -229,6 +233,11 @@ export default function Products(): JSX.Element {
                                                                     {product.status == 'beta' && (
                                                                         <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
                                                                             Beta
+                                                                        </span>
+                                                                    )}
+                                                                    {product.status == 'WIP' && (
+                                                                        <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
+                                                                            WIP
                                                                         </span>
                                                                     )}
                                                                 </AppLink>

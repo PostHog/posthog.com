@@ -12,6 +12,8 @@ import {
     IconBrackets,
     IconAsterisk,
     IconWebhooks,
+    IconClockRewind,
+    IconRocket,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -60,7 +62,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'marketing',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: '/broadcasts',
-            beta: true,
+            status: 'WIP',
         },
         {
             name: 'User interviews',
@@ -72,7 +74,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'product',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: '/user-interviews',
-            beta: true,
+            status: 'WIP',
         },
         {
             name: 'Data pipelines',
@@ -185,6 +187,40 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             category: 'product_os',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
             slug: '/max',
+            status: 'beta',
+        },
+        {
+            name: 'User activity',
+            Icon: IconClockRewind,
+            description: 'See what users are doing in your product.',
+            handle: 'activity',
+            color: 'yellow',
+            colorSecondary: 'yellow-2',
+            category: 'product_os',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/activity',
+        },
+        {
+            name: 'Toolbar',
+            Icon: IconToolbar,
+            description: 'Interact with PostHog directly on your site.',
+            handle: 'toolbar',
+            color: 'salmon',
+            colorSecondary: 'red',
+            category: 'product_os',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/toolbar',
+        },
+        {
+            name: 'Early access features',
+            Icon: IconRocket,
+            description: 'Get early access to new features.',
+            handle: 'early_access',
+            color: 'orange',
+            colorSecondary: 'orange-2',
+            category: 'product',
+            // worksWith: ['product_analytics', 'session_replay', 'surveys'],
+            slug: '/early-access-features',
         },
         ...products,
     ]
