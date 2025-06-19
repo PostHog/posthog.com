@@ -46,7 +46,7 @@ Before switching to PostHog, which they deployed server-side via the Node SDK, S
 
 Now, every Supabase team can use the same set of data and interact with it effortlessly — either by using existing insight types, writing their own SQL, or using [Max AI](/max) to generate SQL queries for them.
 
-"PostHog has proven to be easy to use and adopt for product engineers. It’s also very easy to slice and dice data and to trace back events to a user, project, or an organization. PostHog has also bunch of built in tools that help in the analysis."
+"PostHog has proven to be easy to use and adopt for product engineers. It’s also very easy to slice and dice data and to trace events back to a user, project, or an organization. PostHog has also got a bunch of built-in tools that help in the analysis, like web analytics and SQL access."
 
 Max AI, PostHog’s built-in AI assistant, is especially useful for complex investigations. Not only can Max easily write SQL queries on your behalf (or fix errors if you want to work alongside it), but it can be given access to your product data to help you find what you need. 
 
