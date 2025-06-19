@@ -49,7 +49,7 @@ We provide customer infrastructure - by providing _every_ tool related to custom
 
 ### 2. Provide every tool needed to build successful products
 
-We aim to offer every tool software teams need to find, sell to, get users, understand who they are, support them and improve their product experience.
+We aim to offer every tool software teams need to find, acquire, understand, support and sell to users so they can improve their product experience.
 
 By doing this, we wind up with the perfect customer data record. No integrations needed.
 
