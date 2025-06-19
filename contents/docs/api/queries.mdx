@@ -335,7 +335,7 @@ createQuery()
 
 ### 3. Don't scan the same table multiple times
 
-Reading a large table like `events` or `persons` more than once in the same query multiplies the work ClickHouse has to do (more I/O, more CPU, more memory). For example, this query is inefficient:
+Reading a large table like `events` or `persons` more than once in the same query multiplies the work PostHog has to do (more I/O, more CPU, more memory). For example, this query is inefficient:
 
 ```sql
 WITH us_events AS (
@@ -355,7 +355,7 @@ SELECT *
 FROM ca_events
 ```
 
-Instead, pull the rows you need once, typically in a first CTE, and have every later step reference that CTE like this:
+Instead, pull the rows you need **once**, typically in a first CTE, and have every later step reference that CTE like this:
 
 ```sql
 WITH base_events AS (              -- one read only
