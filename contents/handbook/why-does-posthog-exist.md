@@ -12,7 +12,7 @@ Equip every developer to build successful products.
 
 On the surface, PostHog's products are a bunch of different SaaS tools, which work together better than anyone else’s. However, the secret to our success is our long term plan: automate how entire businesses operate by building around the unit they operate on - their customer data.
 
-Critical to making this happen is to deliver each tool without compromises. The way to achieve this is very simple - shipping every product that teams use, from day one when there are just two technical cofounders. This is because if we get in with these developers, we’re upstream of every need they’ll have. The end result is that we can offer all the products in one place, with no need to charge as much as everyone else for each one, and most importantly with perfect quality customer data. An actual perfect 360 customer view.
+Critical to making this happen is to deliver each tool without compromise - better, cheaper and with all the customer context in one place. The way to achieve this is very simple - shipping every product that teams use, from day one when there are just two technical cofounders. This is because if we get in with these developers, we’re upstream of every need they’ll have. The end result is that we can offer all the products in one place, with no need to charge as much as everyone else for each one, and most importantly with perfect quality customer data. An actual perfect 360 customer view.
 
 Even so, it’s right to question whether this actually does any good for the world. Are we really in need of better software? And beyond those in the most competitive industries, will perfect customer data actually make a difference to an everyday person’s ability to build a successful business?
 
