@@ -6,8 +6,7 @@ import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 
 export default function Wrapper() {
-    const constraintsRef = useRef(null)
-    const { windows } = useApp()
+    const { windows, constraintsRef } = useApp()
 
     return (
         <div className="fixed inset-0 size-full flex flex-col">
