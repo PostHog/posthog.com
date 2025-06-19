@@ -26,7 +26,7 @@ When he joined Supabase’s marketing team, Aleksi Immonen says most of the data
 
 “And our A/B testing process! It had a lot of friction. We had a velocity of 1–2 experiments per month because multiple people needed to be involved, and it was such a specialized task.”
 
-Data wasn’t just fragmented—it was also incomplete due to the limitations of each individual platform and differences in their interoperability. Events tracked in internal tools, for example, didn’t always match 1:1 with data from Plausible, and no individual team had ownership of it all—until Aleksi got involved, that is.
+Data wasn’t just fragmented — it was also incomplete due to the limitations of each individual platform and differences in their interoperability. Events tracked in internal tools, for example, didn’t always match 1:1 with data from Plausible, and no individual team had ownership of it all — until Aleksi got involved, that is.
 
 “None of us really had a full view of what event data we were tracking or the event definitions,” he explains. “But I’d used PostHog at my last company at [Twice Commerce](https://www.twicecommerce.com/), really liked it, and knew it could help us a lot with attribution, funnel analysis, and A/B testing. PostHog’s open-source nature was also a plus.” 
 
