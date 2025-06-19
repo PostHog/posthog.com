@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Wizard from 'components/Wizard'
 import { CallToAction } from 'components/CallToAction'
@@ -7,98 +7,7 @@ import * as Icons from '@posthog/icons'
 import Link from 'components/Link'
 import { IconBold, IconLink } from 'components/OSIcons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-
-const marqueeContent = <ProductList />
-
-const slides = [
-    {
-        image: 'placeholder',
-        title: "There are other dev tool companies, but they're not like us",
-        subtitle:
-            "We're building every piece of SaaS you need to make your product successful. A single platform for people who build things.",
-        content: marqueeContent,
-        isFragment: true,
-    },
-    {
-        title: `Why we're different`,
-        subtitle: `We try to treat you how <em>we'd</em> want to be treated`,
-        features: [
-            {
-                icon: <IconBold className="size-6" />, // placeholder
-                title: 'Self-serve',
-                description: '"Jumping on a quick call" is optional',
-            },
-            {
-                icon: <IconLink className="size-6" />, // placeholder
-                title: 'Public roadmap',
-                description: 'Help us decide what to build',
-            },
-            {
-                icon: <IconBold className="size-6" />, // placeholder
-                title: 'Public handbook',
-                description: 'Learn how we operate – no surprises',
-            },
-            {
-                icon: <IconLink className="size-6" />, // placeholder
-                title: '<em>Actually</em> technical support',
-                description: 'Replies from people who code',
-            },
-        ],
-    },
-    {
-        title: 'Lowest prices',
-        subtitle: 'Our pricing is sustainable because most customers use multiple products.',
-        features: [
-            {
-                icon: <IconBold className="size-6" />,
-                title: 'Huuuuge monthly free tier',
-                description: 'Even on paid plans',
-            },
-            {
-                icon: <IconLink className="size-6" />,
-                title: 'Usage-based pricing',
-                description: 'Only pay for what you use',
-            },
-            {
-                icon: <IconBold className="size-6" />,
-                title: 'Proactive price cuts',
-                description: 'When our costs go down, so do yours',
-            },
-            {
-                icon: <IconLink className="size-6" />,
-                title: 'Side project insurance',
-                description: 'Refund if you accidentally go viral',
-            },
-        ],
-    },
-    {
-        title: `We're building our dream company`,
-        subtitle: `We're intentional about building the kind of company we actually enjoy working at.`,
-        features: [
-            {
-                icon: <IconBold className="size-6" />,
-                title: 'Default alive',
-                description: `We'll never run out of money`,
-            },
-            {
-                icon: <IconLink className="size-6" />,
-                title: 'We control our future',
-                description: 'Our co-founders control the board',
-            },
-            {
-                icon: <IconBold className="size-6" />,
-                title: 'For the little guy',
-                description: `We'll never focus on sales in lieu of taking care of our customers`,
-            },
-            {
-                icon: <IconLink className="size-6" />,
-                title: 'Inbound only',
-                description: 'We reinvest as much as possible into our products so they sell themselves',
-            },
-        ],
-        isFinal: true,
-    },
-]
+import { DotLottiePlayer } from '@dotlottie/react-player'
 
 function ProductList() {
     const products = productMenu.children
@@ -108,7 +17,7 @@ function ProductList() {
         <div className="relative overflow-x-hidden w-full" style={{ height: 'auto' }}>
             <div className="marquee flex w-max" tabIndex={0} style={{ animationDuration }}>
                 {marqueeProducts.map((product, idx) => {
-                    const Icon = Icons[product.icon]
+                    const Icon = Icons[product.icon as keyof typeof Icons]
                     return (
                         <Link
                             key={product.slug + '-' + idx}
@@ -144,10 +53,8 @@ function Slide({ slide }: { slide: any }) {
     if (slide.isFragment) {
         return (
             <Fragment>
-                <div className="pt-8 px-8 flex flex-col items-center w-full mb-8">
-                    <div className="bg-accent border border-primary size-40 rounded-full flex items-center justify-center mb-4">
-                        {slide.image}
-                    </div>
+                <div className="pt-4 px-8 flex flex-col items-center w-full mb-8">
+                    {slide.image}
                     <h2 className="text-xl font-bold mb-1" dangerouslySetInnerHTML={{ __html: slide.title }} />
                     <p
                         className="text-[15px] text-secondary text-center text-balance"
@@ -159,10 +66,8 @@ function Slide({ slide }: { slide: any }) {
         )
     }
     return (
-        <div className="pt-8 px-8 pb-4 flex flex-col items-center w-full mb-8">
-            <div className="bg-accent border border-primary size-40 rounded-full flex items-center justify-center mb-4">
-                {slide.image || 'placeholder'}
-            </div>
+        <div className="pt-4 px-8 pb-4 flex flex-col items-center w-full mb-8">
+            {slide.image || 'placeholder'}
             <h2 className="text-xl font-bold mb-1" dangerouslySetInnerHTML={{ __html: slide.title }} />
             <p
                 className="text-[15px] text-secondary text-center mb-10"
@@ -188,6 +93,126 @@ function Slide({ slide }: { slide: any }) {
 
 export default function ProductAnalyticsCustomers(): JSX.Element {
     const [slideIndex, setSlideIndex] = useState(0)
+
+    // Create refs for each slide's lottie animation
+    const lottieRefs = [
+        useRef(null), // Slide 0
+        useRef(null), // Slide 1
+        useRef(null), // Slide 2
+        useRef(null), // Slide 3
+    ]
+
+    const marqueeContent = <ProductList />
+
+    const slides = [
+        {
+            image: (
+                <DotLottiePlayer
+                    lottieRef={lottieRefs[0]}
+                    src="/lotties/kendrick.lottie"
+                    autoplay
+                    className="size-60"
+                />
+            ),
+            title: "There are other dev tool companies, but they're not like us",
+            subtitle:
+                "We're building every piece of SaaS you need to make your product successful. A single platform for people who build things.",
+            content: marqueeContent,
+            isFragment: true,
+        },
+        {
+            image: (
+                <DotLottiePlayer lottieRef={lottieRefs[1]} src="/lotties/rainbow.lottie" autoplay className="size-60" />
+            ),
+            title: `Why we're different`,
+            subtitle: `We try to treat you how <em>we'd</em> want to be treated`,
+            features: [
+                {
+                    icon: <IconBold className="size-6" />, // placeholder
+                    title: 'Self-serve',
+                    description: '"Jumping on a quick call" is optional',
+                },
+                {
+                    icon: <IconLink className="size-6" />, // placeholder
+                    title: 'Public roadmap',
+                    description: 'Help us decide what to build',
+                },
+                {
+                    icon: <IconBold className="size-6" />, // placeholder
+                    title: 'Public handbook',
+                    description: 'Learn how we operate – no surprises',
+                },
+                {
+                    icon: <IconLink className="size-6" />, // placeholder
+                    title: '<em>Actually</em> technical support',
+                    description: 'Replies from people who code',
+                },
+            ],
+        },
+        {
+            image: <DotLottiePlayer lottieRef={lottieRefs[2]} src="/lotties/toy.lottie" autoplay className="size-60" />,
+            title: 'Lowest prices',
+            subtitle: 'Our pricing is sustainable because most customers use multiple products.',
+            features: [
+                {
+                    icon: <IconBold className="size-6" />,
+                    title: 'Huuuuge monthly free tier',
+                    description: 'Even on paid plans',
+                },
+                {
+                    icon: <IconLink className="size-6" />,
+                    title: 'Usage-based pricing',
+                    description: 'Only pay for what you use',
+                },
+                {
+                    icon: <IconBold className="size-6" />,
+                    title: 'Proactive price cuts',
+                    description: 'When our costs go down, so do yours',
+                },
+                {
+                    icon: <IconLink className="size-6" />,
+                    title: 'Side project insurance',
+                    description: 'Refund if you accidentally go viral',
+                },
+            ],
+        },
+        {
+            image: (
+                <DotLottiePlayer
+                    lottieRef={lottieRefs[3]}
+                    src="/lotties/beachhog.lottie"
+                    autoplay
+                    className="size-60"
+                />
+            ),
+            title: `We're building our dream company`,
+            subtitle: `We're intentional about building the kind of company we actually enjoy working at.`,
+            features: [
+                {
+                    icon: <IconBold className="size-6" />,
+                    title: 'Default alive',
+                    description: `We'll never run out of money`,
+                },
+                {
+                    icon: <IconLink className="size-6" />,
+                    title: 'We control our future',
+                    description: 'Our co-founders control the board',
+                },
+                {
+                    icon: <IconBold className="size-6" />,
+                    title: 'For the little guy',
+                    description: `We'll never focus on sales in lieu of taking care of our customers`,
+                },
+                {
+                    icon: <IconLink className="size-6" />,
+                    title: 'Inbound only',
+                    description: 'We reinvest as much as possible into our products so they sell themselves',
+                },
+            ],
+            isFinal: true,
+        },
+    ]
+
     const slide = slides[slideIndex]
     const isFirst = slideIndex === 0
     const isLast = slideIndex === slides.length - 1
