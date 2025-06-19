@@ -17,11 +17,20 @@ With the development of [web analytics](/docs/web-analytics), we began autocaptu
 
 ## Calculating average time on page
 
-The easiest way to calculate average time on page is to create a [new trend insight](https://us.posthog.com/insights/new), aggregate by average property value, and select **Previous pageview duration**. In the visualization below, change the y-axis unit to **Duration (s)** and you get a graph of the average time on page over time.
+Before we dive into creating an insight we need to create an [action](https://posthog.com/docs/data/actions) to combine your `$pageview` and `$pageleave` events.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_26_at_14_50_32_2x_b8bfc10e0f.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_26_at_14_50_16_2x_1aa7e75bb2.png"
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/light_14c56d1a2b.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/dark_29efc71098.png"
+    alt="Action with pageview and pageleave" 
+    classes="rounded"
+/>
+
+From there, we can calculate average time on page by creating a [new trend insight](https://us.posthog.com/insights/new), selecting your new action, aggregate by average property value, and select **Previous pageview duration**. In the visualization below, change the y-axis unit to **Duration (s)** and you get a graph of the average time on page over time.
+
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/light_6352f386d8.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/dark_5f766ce828.png"
     alt="Average time on page trend" 
     classes="rounded"
 />
@@ -33,8 +42,8 @@ The easiest way to calculate average time on page is to create a [new trend insi
 To get the average time on page for specific pages, we can start by breaking down our time on page by the pathname. On the same insight, click **Add breakdown** and select **Previous pageview pathname**. 
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_26_at_15_12_42_2x_5b98a0d8d8.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_26_at_15_12_58_2x_67fd37e316.png"
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/light_b55947d22c.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/dark_1cd8f86201.png"
     alt="Average time on page breakdown" 
     classes="rounded"
 />
@@ -42,8 +51,8 @@ To get the average time on page for specific pages, we can start by breaking dow
 Doing this for your whole site might show many outliers. To limit this, you can add filters for previous pageview pathname or duration. This is also how you narrow in on a specific page to get its trend. For example, to get the average time on page for the homepage, remove the breakdown, and add a filter where **Previous pageview pathname** equals `/`.
 
 <ProductScreenshot
-    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_26_at_15_20_05_2x_7f7a0345a4.png"
-    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2024_11_26_at_15_19_49_2x_76db6982dd.png"
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/light_e872350334.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/dark_5a3d0c03df.png"
     alt="Average time on page filter" 
     classes="rounded"
 />

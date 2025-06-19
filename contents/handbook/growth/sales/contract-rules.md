@@ -117,6 +117,9 @@ We do offer additional discounts to nonprofits - these are entirely at your disc
 
 You might see some customers with a 30% discount on their monthly Stripe subscription.  These were added when the only way we billed for PostHog was through event pricing.  This was originally designed to offset the cost versus competitors who had unbundled Group Analytics or Data Pipelines.  These customers will typically be on a higher per-event price plan, so we should look to get them migrated to standard pricing as soon as possible.
 
+### Startup plan discounts
+For customers on our [startup plan](https://posthog.com/startups), we offer two months free when signing an annual deal. This encourages startups to use their credits to understand usage, and then commit to a long term plan with PostHog. 
+
 ## Additional credit purchase
 
 As it's often difficult to right-size the credit needed for the term of the annual plan as a standard we offer to honor the discount provided in the original purchase for any additional credit purchased in the first half of a contract term (e.g. 6 months for an annual plan).  Within the first 6 months given our billing usage reports we should be able to predict whether the customer is going to run out of credit or not.  There are also alerts set up in #sales-alerts to help notify account owners about this.
@@ -181,7 +184,7 @@ We have CreditBot alerts set up in [#sales-alerts](https://posthog.slack.com/arc
 
 * If they will run out of credit or wish to buy more within the **first 6 months** of the contract term, they can still take advantage of their initial discount.  You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
     * Example: Their original order form was signed on 1st January with a 12-month term.  Their expansion order form could be signed on 1st June with a 7-month term.  Make sure the end date lines up with the end date of the original contract to avoid any issues with the billing server and ARR calculation.
-* If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit.
+* If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit and their new contract amount is equal to or greater than the current contract amount.
 * If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date.  This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     * Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September.  We need a new 12-month order form in place with a Contract Start Date of September 1st.
 

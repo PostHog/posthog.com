@@ -76,13 +76,9 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
         - **Note:** Pay-as-you-go products are charged after the end of the period, while flat-rate subscriptions are charged at the beginning of the period. As a result the first two payments on a monthly schedule may occur within the same billing period as part of the transition. Make sure to send a note to the customer to ensure they're fully informed!
 
     * **Contract.Term** - The term in months of the contract (12 months by default)
-8. If they are paying monthly:
-   * For payments equal to or above $2500/month, change the **Payment Terms** section to read 
-     > 12 equal monthly payments (Net 14) from Contract start date
-   * For payments below $2500 then we _require credit card payment_.  Change the **Payment Terms** section to read
-     >  12 equal monthly payments from Contract start date
-     
-     The *Payment Method* should also be updated to `Credit Card`.
+8. If they are paying monthly change:
+     - Payment Terms to `12 equal monthly payments from Contract start date`.
+     - Payment Method to `Credit Card`.
 9. If an MSA is being used rather than the standard terms you will need to replace the following text:
    > PostHog Cloud License Terms appearing at: https://www.posthog.com/terms and Privacy Policy appearing at: /privacy (collectively the “Agreement”)
 
@@ -108,7 +104,7 @@ We use [PandaDoc](https://app.pandadoc.com/a/#/) to handle document generation, 
 
 We prefer to keep all signatures in PandaDoc, but sometimes clients may prefer to sign a PDF copy. One way to minimize this is to send contracts for initial review via PandaDoc when possible. It is ok to have multiple drafts in PandaDoc as long as we have the final signed copy in there as well. When a client signs an order form outside of PandaDoc, please follow these steps to complete the process:
 
-1. If you have previously created a draft, find the document in PandaDoc.
+1. If you have previously created a draft, find the document from the [Documents page in PandaDoc](https://app.pandadoc.com/a/#/documents-next?displayMode=folders_first&mainFilter=my_documents&sortBy=date_modified&customDate=date_modified&direction=desc) (note: you cannot change the status from Home or inside a document).
     - Select "Change Status" from the three-dot menu on the right.
     - Upload the signed PDF of the document.
     - Mark the status as completed.

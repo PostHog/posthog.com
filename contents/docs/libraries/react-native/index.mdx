@@ -18,11 +18,18 @@ features:
   errorTracking: false
 ---
 
-## Installation
+import DetailSetUpReverseProxy from "../../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../../integrate/_snippets/details/group-products-in-one-project.mdx"
+
+## Installation zz
 
 import ReactNativeInstall from '../../integrate/_snippets/install-react-native.mdx'
 
 <ReactNativeInstall />
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
 
 ### Configuration options
 
@@ -82,33 +89,9 @@ PostHog will try to generate a sensible name for the touched element based on th
 
 ### Autocapture configuration
 
-You can tweak how autocapture works by passing custom options.
+import AutocaptureConfigs from './_snippets/autocapture-config.mdx'
 
-```react-native
-<PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
-    captureTouches: true,
-    captureScreens: true, 
-    ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
-    customLabelProp: "ph-label",
-    noCaptureProp: "ph-no-capture",
-    propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
-
-    navigation: {
-        // By default, only the screen name is tracked but it is possible to track the
-        // params or modify the name by intercepting the autocapture like so
-        routeToName: (name, params) => {
-            if (params.id) return `${name}/${params.id}`
-            return name
-        },
-        routeToProperties: (name, params) => {
-            if (name === "SensitiveScreen") return undefined
-            return params
-        },
-    }
-}}>
-    ...
-</PostHogProvider>
-```
+<AutocaptureConfigs/>
 
 ### Preventing sensitive data capture
 

@@ -2432,6 +2432,10 @@ export const docsMenu = {
                                     name: 'Configuring Slack',
                                     url: '/docs/self-host/configure/slack',
                                 },
+                                {
+                                    name: 'Data egress',
+                                    url: '/docs/self-host/configure/data-egress',
+                                },
                             ],
                         },
                         {
@@ -2591,9 +2595,18 @@ export const docsMenu = {
                             url: '/docs/privacy',
                         },
                         {
-                            name: 'GDPR guidance',
+                            name: 'Data collection',
+                            url: '/docs/privacy/data-collection',
+                        },
+                        {
+                            name: 'Data storage',
+                            url: '/docs/privacy/data-storage',
+                        },
+                        {
+                            name: 'GDPR compliance',
                             url: '/docs/privacy/gdpr-compliance',
                         },
+
                         {
                             name: 'HIPAA guidance',
                             url: '/docs/privacy/hipaa-compliance',
@@ -2605,14 +2618,6 @@ export const docsMenu = {
                         {
                             name: 'SOC 2',
                             url: '/handbook/company/security#soc-2',
-                        },
-                        {
-                            name: 'Data egress & compliance',
-                            url: '/docs/privacy/egress',
-                        },
-                        {
-                            name: 'Data deletion',
-                            url: '/docs/privacy/data-deletion',
                         },
                         {
                             name: 'Ad blockers',
