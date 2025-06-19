@@ -3,6 +3,9 @@ import React from 'react'
 import MDXEditor from 'components/MDXEditor'
 import Logo from 'components/Logo'
 import { JsxComponentDescriptor } from '@mdxeditor/editor'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
+import { companyMenu } from '../navs'
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     {
@@ -25,7 +28,13 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     },
 ]
 export default function About({ data }: { data: { mdx: { rawBody: string } } }) {
-    return <MDXEditor jsxComponentDescriptors={jsxComponentDescriptors} body={data.mdx.rawBody} />
+    return (
+        <ReaderView
+            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+        >
+            <MDXEditor jsxComponentDescriptors={jsxComponentDescriptors} body={data.mdx.rawBody} />
+        </ReaderView>
+    )
 }
 
 export const query = graphql`

@@ -25,7 +25,8 @@ import HeaderBar from 'components/OSChrome/HeaderBar'
 import { Select } from 'components/RadixUI/Select'
 import { productMenu, companyMenu } from '../navs'
 import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
-
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
 const IndexPage = () => {
     const data = useStaticQuery(query)
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
@@ -62,8 +63,6 @@ const IndexPage = () => {
             label: 'Interview process',
             content: <InterviewProcessOverview />,
         },
-        
-        
     ]
 
     const selectOptions = [
@@ -82,7 +81,9 @@ const IndexPage = () => {
     ]
 
     return (
-        <>
+        <ReaderView
+            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+        >
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
@@ -95,20 +96,19 @@ const IndexPage = () => {
 
             <HeaderBar showHome showBack showForward showSearch />
             <div data-scheme="secondary" className="bg-primary px-2">
-            <Select
-                groups={selectOptions}
-                placeholder="Select a page"
-                ariaLabel="Select a page"
-                defaultValue={currentPath}
-                onValueChange={(value) => navigate(`/${value}`)}
-                className="w-full"
-                dataScheme="primary"
-            />
+                <Select
+                    groups={selectOptions}
+                    placeholder="Select a page"
+                    ariaLabel="Select a page"
+                    defaultValue={currentPath}
+                    onValueChange={(value) => navigate(`/${value}`)}
+                    className="w-full"
+                    dataScheme="primary"
+                />
             </div>
 
             <OSTabs tabs={tabs} defaultValue="roles" />
 
-            
             <FounderNote />
             <MegaQuote />
             <CompanyHandbook />
@@ -116,13 +116,12 @@ const IndexPage = () => {
             <IdealEmployeeProfile />
             <BenefitsUnexpected />
             <BenefitsUsual />
-            
+
             <Transparency />
             <FunStuff />
             <TeamQuotes />
-            <OpenRoles /> 
-           
-        </>
+            <OpenRoles />
+        </ReaderView>
     )
 }
 
