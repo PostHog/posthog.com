@@ -38,7 +38,7 @@ Third, we’ve managed this very well so far.
 
 Building a successful product is hard; doing so when you don't understand your customers is even harder. It's wild that no one has already provided a complete customer record. This has happened because the entire industry has focused on integration instead of consolidation.
 
-Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data in them. Every company winds up with a huge mess of data spaghetti, with their business logic still spread across dozens or hundreds of tools.
+Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data they collect, simply because they are misused and divorced from the source of truth. Every company winds up with a huge mess of data spaghetti, with their business logic still spread across dozens or hundreds of tools.
 
 We provide customer infrastructure - by providing _every_ customer data related tool in one place, we can:
 
