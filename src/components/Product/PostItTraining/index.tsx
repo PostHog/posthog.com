@@ -7,6 +7,7 @@ import { Subfeature } from 'components/Products/Subfeature'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import CloudinaryImage from 'components/CloudinaryImage'
+import PostQuote from './PostQuote'
 
 const product = {
     slug: 'postit-training',
@@ -16,21 +17,21 @@ const product = {
 
 const subfeatures = [
     {
-        title: 'Peel',
+        title: 'Step 1: Peel it from the side',
         description:
-            "Learn the ancient art of Post-it folding. From simple corners to complex origami, we'll teach you how to make your notes stand out.",
+            "Don't peel from the bottom. That's wrong. You need to peel from the side, or you'll end up with a curve that minimizes the sticky surface area.",
         icon: <IconNotebook />,
     },
     {
-        title: 'Stick',
+        title: 'Step 2: Press it flat to the wall',
         description:
-            'Not all Post-its are created equal. Discover which colors mean what, and how to use them to create visual hierarchies that make sense.',
+            "Next, you need to press it down firmly, but with respect. You don't want to smudge the ink or damage the wall, do you?",
         icon: <IconLightBulb />,
     },
     {
-        title: 'Stay',
+        title: 'Step 3: Increase shareholder value',
         description:
-            "Tired of your Post-its falling off? We'll teach you the secret techniques to make your notes stick where they belong, even in the most challenging environments.",
+            'Congratulations, you just increased shareholder value while also increasing operational efficiency. Take a moment to pat yourself on the back.',
         icon: <IconHandwave />,
     },
 ]
@@ -61,19 +62,19 @@ const HeroPostIt = ({ color, icon, beta, product, title, description }: HeroPost
                 <span className="text-red dark:text-yellow">revolutionary</span> training program
             </h1>
             <p className="text-lg font-semibold text-center text-opacity-75 mb-5">
-                This training is essential for all Hackathon participants. Yes, really.
+                This training is required for all PostHog staff. Yes, really.
             </p>
             <div className="flex justify-center gap-2 mb-8">
                 <CallToAction href="#demo-video" type="primary">
-                    Enroll now
+                    Get Post-it certified
                 </CallToAction>
             </div>
             <div className="flex justify-center mb-8">
                 <div className="rotate-[-2deg] p-1 max-w-[1120px]">
                     <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/post_it_history_af4a8de842.png"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthead_37b46564aa.png"
                         alt="Post-it note training class"
-                        className="w-full max-w-[1120px]"
+                        className="w-full max-w-[1520px]"
                     />
                 </div>
             </div>
@@ -99,50 +100,89 @@ export const ProductPostItTraining = () => {
                     description="Because sticky notes deserve respect too."
                 />
 
-                <div id="features">
-                    <section className="max-w-7xl mx-auto px-5 pb-6">
-                        <div className="flex flex-col-reverse items-center md:flex-row gap-8 pt-20 mb-20">
-                            <div className="flex-1">
-                                <h2 className="text-4xl lg:text-5xl">
-                                    Why we have Post-it Training?
-                                    <br />
-                                    <span className="text-red dark:text-yellow">Because of Marius says.</span>
+                <div id="features1">
+                    <section className="max-w-7xl mx-auto -mt-4 px-5 pb-6">
+                        <div className="flex flex-col-reverse items-center md:flex-row gap-8 pt-10">
+                            <div
+                                className="bg-[#FFFB7D] shadow-2xl border-none aspect-square w-full max-w-[420px] flex flex-col justify-center p-8 rotate-[-2deg] mx-auto"
+                                style={{
+                                    minHeight: '420px', // Ensures it's always square
+                                    borderRadius: 0,
+                                }}
+                            >
+                                <h2 className="font-extrabold text-4xl text-gray-900">
+                                    Post-its have a <span className="text-[#FF5A1F]">problem</span>...
                                 </h2>
-                                <p>
-                                    Every PostHog hackathon starts with a wall of Post-it notes—each one a new idea
-                                    waiting to be built. Unfortunately, new team members don't always know the ancient
-                                    art of Post-it placement. Most notes fall off within minutes.
+                                <p className="text-gray-900 text-lg mb-2">
+                                    We love Post-its. They're a staple of every PostHog hackathon.
                                 </p>
-                                <p>
-                                    Enter{' '}
-                                    <a
-                                        href="https://posthog.com/community/profiles/30202"
-                                        className="text-red dark:text-yellow font-semibold"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        Marius
-                                    </a>
-                                    : Post-it master and savior of our sticky ideas. He's on a mission to teach proper
-                                    technique and restore order to the wall and has prepared this course to help you
-                                    learn his ways.
+                                <p className="text-gray-900 text-lg mb-2">
+                                    Session replay? Hedgehog mode? DeskHog? They all started as a Post-it.
                                 </p>
-                                <p>That's Marius on the right. He also likes pineapples.</p>
+                                <p className="text-gray-900 text-lg">
+                                    Problem is, most Post-its only stay sticky for a few minutes. We thought: How can we
+                                    stop them littering the floor like a carpet of multi-coloured genius?
+                                </p>
                             </div>
                             <aside className="shrink-0 md:basis-[500px] flex flex-col items-center">
                                 <div className="p-1 max-w-[420px]">
                                     <CloudinaryImage
-                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/Marius_f38a026214.png"
-                                        alt="Marius. Post-it master."
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/postblock_76a0980525.png"
+                                        alt="We love post-its"
+                                        className="w-full max-w-[600px] rounded-[10px]"
+                                    />
+                                </div>
+                            </aside>
+                        </div>
+                    </section>
+                </div>
+
+                <div id="features2">
+                    <section className="max-w-7xl mx-auto -mt-6 px-5 pb-6">
+                        <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                            <div
+                                className="bg-[#ff96c2] shadow-2xl border-none aspect-square w-full max-w-[420px] flex flex-col justify-center p-8 rotate-[1deg] mx-auto"
+                                style={{
+                                    minHeight: '420px', // Ensures it's always square
+                                    borderRadius: 0,
+                                }}
+                            >
+                                <h2 className="font-extrabold text-4xl mb-4 text-gray-900">
+                                    ...And the problem is you
+                                </h2>
+                                <p className="text-gray-900 text-lg mb-2">
+                                    The root of 90% of technology problems is human error, so we developed a training
+                                    program to help our teams learn correct Post-it procedure.
+                                </p>
+                                <p className="text-gray-900 text-lg mb-2">
+                                    It may seem strange, but Post-it training has enabled us to keep our ideas
+                                    front-of-mind and not top-of-carpet for years. Now, we're sharing it with you.
+                                </p>
+                            </div>
+                            <aside className="shrink-0 md:basis-[500px] flex flex-col items-center">
+                                <div className="p-1 max-w-[420px]">
+                                    <CloudinaryImage
+                                        src="https://res.cloudinary.com/dmukukwp6/image/upload/training_63069fae88.png"
+                                        alt="We love post-its"
                                         className="w-full max-w-[400px] rounded-[10px]"
                                     />
                                 </div>
                             </aside>
                         </div>
 
+                        <PostQuote
+                            title="It's time to meet your instructor"
+                            subtitle="His name is Marius and he's really passionate about Post-its."
+                            quote={`It all started at my first PostHog hackathon. So many of our ideas were falling to the floor. I couldn't take it. I had to do something.<br /><br />
+                            <strong>Why? Because an idea on the floor is an idea that gets ignored.</strong><br /><br />
+                            Since then, I've trained over 100 PostHog staff and helped such brilliant ideas as '<i>A PostHog videogame</i>', '<i>Better loading animations</i>', and '<i>A crocheted hedgehog</i>'.<br /><br />
+                            Now, I'm sharing this training for the first time to help you get Post-it certified.`}
+                            authorName="Marius Andra"
+                        />
+
                         <section id="demo-video" className="mb-8 pt-10">
                             <h2 className="text-4xl lg:text-5xl text-center mb-8">
-                                Ready to become a <span className="text-red dark:text-yellow">Post-it</span> master?
+                                Ready to get <span className="text-red dark:text-yellow">Post-it certified?</span>
                             </h2>
                             <div className="inline-flex mx-auto relative overflow-hidden w-full aspect-video">
                                 <iframe
@@ -164,16 +204,32 @@ export const ProductPostItTraining = () => {
                 </div>
             </div>
 
-            <section className="py-10">
+            <section className="py-10 mb-10">
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
                     <h2 className="text-4xl lg:text-5xl text-center mb-2">
-                        Ready to become a <span className="text-red dark:text-yellow">Post-it</span> master?
+                        Congratulations, you are now{' '}
+                        <span className="text-red dark:text-yellow">Post-it certified</span>
                     </h2>
-                    <h3 className="text-2xl text-center mb-12">Enroll now and get your first pack of Post-its free!</h3>
+                    <h3 className="text-2xl text-center mb-12">
+                        Tell the world you're Post-it certified to boost your chances of getting hired here by 20%
+                    </h3>
 
-                    <div className="flex justify-center">
-                        <CallToAction href="#enroll" type="primary" size="lg">
-                            <>Start Your Journey</>
+                    <div className="flex justify-center gap-2">
+                        <CallToAction
+                            href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fposthog.com%2Fpost-it-training"
+                            type="primary"
+                            size="lg"
+                            externalNoIcon
+                        >
+                            <>Share on LinkedIn</>
+                        </CallToAction>
+                        <CallToAction
+                            href="https://twitter.com/intent/tweet?text=I just got Post-it certified by @PostHog 📝 — now my ideas actually stick! https://posthog.com/post-it-training"
+                            type="primary"
+                            size="lg"
+                            externalNoIcon
+                        >
+                            <>Share on Twitter</>
                         </CallToAction>
                     </div>
                 </div>
