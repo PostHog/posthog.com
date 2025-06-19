@@ -217,6 +217,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             )
             if (nextFocusedWindow) {
                 navigate(nextFocusedWindow.path)
+            } else {
+                window.history.pushState({}, '', '/')
             }
             setWindows(windowsFiltered)
         },
