@@ -174,8 +174,8 @@ export const ProductPostItTraining = () => {
                             title="It's time to meet your instructor"
                             subtitle="His name is Marius and he's really passionate about Post-its."
                             quote={`It all started at my first PostHog hackathon. So many of our ideas were falling to the floor. I couldn't take it. I had to do something.<br /><br />
-                            <strong>Why? Because an idea on the floor is an idea that gets ignored.</strong><br /><br />
-                            Since then, I've trained over 100 PostHog staff and helped such brilliant ideas as '<i>A PostHog videogame</i>', '<i>Better loading animations</i>', and '<i>A crocheted hedgehog</i>'.<br /><br />
+                            <strong>Why? Because an idea that's floored is an idea that's ignored.</strong><br /><br />
+                            Since then, I've trained over 100 PostHog staff and helped bring to life ideas as '<i>A PostHog videogame</i>', '<i>Better loading animations</i>', and '<i>A crocheted hedgehog</i>'.<br /><br />
                             Now, I'm sharing this training for the first time to help you get Post-it certified.`}
                             authorName="Marius Andra"
                         />
