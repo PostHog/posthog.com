@@ -1,14 +1,15 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { StaticImage } from 'gatsby-plugin-image'
 import usePostHog from '../../hooks/usePostHog'
 import React, { useEffect, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { useLayoutData } from 'components/Layout/hooks'
+import { useLocation } from '@reach/router'
 
 export default function CookieBanner() {
     const posthog = usePostHog()
     const { internalMenu } = useLayoutData()
     const [consentGiven, setConsentGiven] = useState('')
+    const { pathname, state } = useLocation()
 
     const handleClick = (accept: boolean) => {
         localStorage.setItem('cookie_consent', accept ? 'yes' : 'no')
@@ -30,7 +31,12 @@ export default function CookieBanner() {
         }
     }, [])
 
-    return consentGiven === 'undecided' ? (
+    const showCookieBanner =
+        consentGiven === 'undecided' &&
+        !pathname.includes('/newsletter-fbc') && // we don't show the cookie banner for users coming from paid ads promoting our newsletter
+        !(state as { isComingFromAd?: boolean })?.isComingFromAd
+
+    return showCookieBanner ? (
         <div
             className={`fixed z-[50] left-0 lg:bottom-0 ${
                 internalMenu?.length > 0 ? 'bottom-[122px]' : 'bottom-[75px]'
