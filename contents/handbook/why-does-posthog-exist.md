@@ -16,7 +16,7 @@ Critical to making this happen is to deliver each tool without compromise - bett
 
 Even so, it’s right to question whether this actually does any good for the world. Are we really in need of better software? And beyond those in the most competitive industries, will perfect customer data actually make a difference to an everyday person’s ability to build a successful business?
 
-No and not really. However, that misses the point, unless you understand the secret master plan alluded to above. The strategy of PostHog is to get early stage software teams to use every single customer related product inside our platform, where we can easily generate a perfect customer data record. This means we can learn to configure and automate how all of these tools work. We can simplify the experience of running a business.
+No and not really. However, that misses the point, unless you understand the secret master plan alluded to below. The strategy of PostHog is to get early stage software teams to use every single customer related product inside our platform, where we can easily generate a perfect customer data record. This means we can learn to configure and automate how all of these tools work. We can simplify the experience of running a business.
 
 Then with each successive product, we can reach a wider and wider market and further simplify the experience of running a business until anyone can do it.
 
