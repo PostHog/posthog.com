@@ -50,7 +50,7 @@ Now, every Supabase team can use the same set of data and interact with it effor
 
 Max AI, PostHog’s built-in AI assistant, is especially useful for complex investigations. Not only can Max easily write SQL queries on your behalf (or fix errors if you want to work alongside it), but it can be given access to your product data to help you find what you need. 
 
-“I like Max as an AI helper because it knows PostHog terminology, data model, and schemas, and it can fix my mistakes. It makes everything a lot easier and faster.”
+“I like Max as an AI helper because it knows PostHog terminology, as well as the data model, and schemas. It can fix my mistakes, help me join the right tables, and more. It makes everything a lot easier and faster.”
 
 ![supabase growth chart](https://res.cloudinary.com/dmukukwp6/image/upload/Supabase_growth_chart_603d22cf6b.png)
 <Caption>Supabase's growth in user sign-ups over time. Can you tell when data started helping them grow?</Caption>
