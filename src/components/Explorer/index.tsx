@@ -102,6 +102,8 @@ export default function Explorer({
         navigate(`/${value}`)
     }
 
+    const ContentWrapper = appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment
+
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             {!fullScreen && (
@@ -121,7 +123,7 @@ export default function Explorer({
                 </>
             )}
             {/* <DebugContainerQuery /> */}
-            <ScrollArea className="h-full">
+            <ContentWrapper>
                 <div
                     data-scheme="secondary"
                     className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
@@ -164,7 +166,7 @@ export default function Explorer({
                         </aside>
                     )}
                 </div>
-            </ScrollArea>
+            </ContentWrapper>
         </div>
     )
 }
