@@ -55,10 +55,10 @@ with posthog.new_context(capture_exceptions=False):
 
 ### Decorating functions
 
-The SDK exposes a function decorator. It takes the same arguments as `new_context`, and provides a handy way to mark a whole function as being within a particular context. For example:
+The SDK exposes a function decorator. It takes the same arguments as `new_context`, and provides a handy way to mark a whole function as being in a new context. For example:
 
 ```python
-@posthog.scoped()
+@posthog.scoped(fresh=True)
 def process_order(order_id):
     # This event will be captured with the transaction_id set above
     posthog.capture("order_processed")
