@@ -610,6 +610,26 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
             maxWidth="full"
             dataToFilter={roadmaps}
             onFilterChange={(data) => setFilteredRoadmaps(data)}
+            onSortChange={(sort) => setTableSort(sort)}
+            defaultSortValue="popular"
+            sortOptions={[
+                {
+                    value: 'popular',
+                    label: 'Most popular',
+                    icon: 'IconThumbsUpFilled',
+                    color: 'red dark:text-yellow',
+                },
+                {
+                    value: 'newest',
+                    label: 'Newest date first',
+                    icon: 'IconClock',
+                },
+                {
+                    value: 'oldest',
+                    label: 'Oldest date first',
+                    icon: 'IconCalendar',
+                },
+            ]}
             availableFilters={
                 roadmaps.length > 0
                     ? [
@@ -678,41 +698,6 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                                 <span className="opacity-70">.</span>
                             </p>
                             <div className="flex justify-between items-center space-x-2 mb-4">
-                                <div className="flex items-center gap-2">
-                                    <span className="text-sm font-medium mr-2 text-secondary dark:text-secondary-dark">
-                                        Sort by:
-                                    </span>
-                                    <Select
-                                        value={tableSort}
-                                        onValueChange={setTableSort}
-                                        placeholder="Sort by"
-                                        className="w-[180px] text-sm border-border dark:border-dark hover:border-light dark:hover:border-dark"
-                                        dataScheme="primary"
-                                        groups={[
-                                            {
-                                                label: 'Sort options',
-                                                items: [
-                                                    {
-                                                        value: 'popular',
-                                                        label: 'Most popular',
-                                                        icon: 'IconThumbsUpFilled',
-                                                        color: 'red dark:text-yellow',
-                                                    },
-                                                    {
-                                                        value: 'newest',
-                                                        label: 'Newest date first',
-                                                        icon: 'IconClock',
-                                                    },
-                                                    {
-                                                        value: 'oldest',
-                                                        label: 'Oldest date first',
-                                                        icon: 'IconCalendar',
-                                                    },
-                                                ],
-                                            },
-                                        ]}
-                                    />
-                                </div>
                                 {isModerator && !adding && (
                                     <div className="relative">
                                         <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">

@@ -57,6 +57,14 @@ interface EditorProps {
         value: string
     }[]
     onGroupChange?: (group: string) => void
+    sortOptions?: {
+        label: string
+        value: string
+        icon?: string
+        color?: string
+    }[]
+    onSortChange?: (sort: string) => void
+    defaultSortValue?: string
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -95,6 +103,9 @@ export function Editor({
     actionButtons,
     availableGroups,
     onGroupChange,
+    sortOptions,
+    onSortChange,
+    defaultSortValue,
     ...other
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
@@ -376,6 +387,25 @@ export function Editor({
                                                     },
                                                 ]}
                                                 onValueChange={(value) => onGroupChange?.(value)}
+                                            />
+                                        </div>
+                                    )}
+                                    {sortOptions && sortOptions.length > 0 && (
+                                        <div className="ml-auto flex items-center space-x-2">
+                                            <span className="text-sm font-bold">Sort by:</span>
+                                            <Select
+                                                placeholder="Sort by"
+                                                defaultValue={defaultSortValue}
+                                                groups={[
+                                                    {
+                                                        label: '',
+                                                        items: sortOptions.map((option) => ({
+                                                            label: option.label,
+                                                            value: option.value,
+                                                        })),
+                                                    },
+                                                ]}
+                                                onValueChange={(value) => onSortChange?.(value)}
                                             />
                                         </div>
                                     )}
