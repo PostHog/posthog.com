@@ -420,9 +420,3 @@ You can be a designer too. The process is learnable and can get you shipping in 
 
 ![Look at me. I'm the designer now](https://res.cloudinary.com/dmukukwp6/image/upload/lookatme_d9deaa777f.png)
 <Caption>You to your team now, probably.</Caption>
-
-## 😎 Vibe-driven development reads:
-- **[Laws of UX](https://lawsofux.com?utm_source=newsletter.posthog.com) – Jon Yablonski**
-- **[Family Values](https://benji.org/family-values) – Benji Taylor**
-- **[User Interface Design For Programmers](https://www.joelonsoftware.com/2001/10/24/user-interface-design-for-programmers/?utm_source=newsletter.posthog.com) – Joel Spolsky**
--  **[The invisible details of interaction design](https://rauno.me/craft/interaction-design) – Rauno**
