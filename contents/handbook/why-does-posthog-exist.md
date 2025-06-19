@@ -40,7 +40,7 @@ Building a successful product is hard; doing so when you don't understand your c
 
 Traditionally, as companies scale, their data warehouse becomes the source of truth, and non-warehouse native tools (like product analytics) become less relevant as people lose trust in the data they collect, simply because they are misused and divorced from the source of truth. Every company winds up with a huge mess of data spaghetti, with their business logic still spread across dozens or hundreds of tools.
 
-We provide customer infrastructure - by providing _every_ customer data related tool in one place, we can:
+We provide customer infrastructure - by providing _every_ tool related to customer data in one place, we can:
 
 - Enhance the utility of all the tools when used together
 - Increase trust in data by eliminating complex data stacks
