@@ -110,16 +110,17 @@ export const ProductPostItTraining = () => {
                                     borderRadius: 0,
                                 }}
                             >
-                                <h2 className="font-extrabold text-4xl text-gray-900">
-                                    Post-its have a <span className="text-[#FF5A1F]">problem</span>...
+                                <h2 className="font-extrabold text-4xl text-black dark:text-black">
+                                    Post-its have a <span className="text-[#FF5A1F] dark:text-[#FF5A1F]">problem</span>
+                                    ...
                                 </h2>
-                                <p className="text-gray-900 text-lg mb-2">
+                                <p className="text-black dark:text-black text-lg mb-2">
                                     We love Post-its. They're a staple of every PostHog hackathon.
                                 </p>
-                                <p className="text-gray-900 text-lg mb-2">
+                                <p className="text-black dark:text-black text-lg mb-2">
                                     Session replay? Hedgehog mode? DeskHog? They all started as a Post-it.
                                 </p>
-                                <p className="text-gray-900 text-lg">
+                                <p className="text-black dark:text-black text-lg">
                                     Problem is, most Post-its only stay sticky for a few minutes. We thought: How can we
                                     stop them littering the floor like a carpet of multi-coloured genius?
                                 </p>
@@ -147,14 +148,14 @@ export const ProductPostItTraining = () => {
                                     borderRadius: 0,
                                 }}
                             >
-                                <h2 className="font-extrabold text-4xl mb-4 text-gray-900">
+                                <h2 className="font-extrabold text-4xl mb-4 text-black dark:text-black">
                                     ...And the problem is you
                                 </h2>
-                                <p className="text-gray-900 text-lg mb-2">
+                                <p className="text-black dark:text-black text-lg mb-2">
                                     The root of 90% of technology problems is human error, so we developed a training
                                     program to help our teams learn correct Post-it procedure.
                                 </p>
-                                <p className="text-gray-900 text-lg mb-2">
+                                <p className="text-black dark:text-black text-lg mb-2">
                                     It may seem strange, but Post-it training has enabled us to keep our ideas
                                     front-of-mind and not top-of-carpet for years. Now, we're sharing it with you.
                                 </p>
