@@ -11,6 +11,23 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 With webhook destinations, you can send event data from PostHog to any HTTP endpoint, whether it's to your own backend, an internal system, or a third-party platform.
 
+
+
+<details>
+<summary>Want to send PostHog data to a particular platform like Slack?</summary>
+
+Browse all the **Destinations** listed in the sidenav to integrate with well-known platforms like [Slack](/docs/cdp/destinations/slack), [HubSpot](/docs/cdp/destinations/hubspot), or [Zapier](/docs/cdp/destinations/zapier).
+
+</details>
+
+<details>
+<summary>Want to bring your data into PostHog?</summary>
+
+Check out [Sources](/docs/cdp/sources/overview) to learn how to connect your systems like CRM, payment processor, or database with PostHog data for all-in-one analytics.
+
+</details>
+
+
 <Requirements />
 
 ## Setting up destination webhooks
@@ -36,6 +53,12 @@ Click **Create & Enable**.
   alt="Configure webhook"
   classes="rounded"
 />
+
+<CalloutBox type="fyi" title="Webhook services" icon="IconInfo">
+
+You can use services like  [webhook.site](https://webhook.site/) or [ngrok](https://ngrok.com/) to create **Webhook URLs** for quick testing.
+
+</CalloutBox>
 
 ### 3. Test the webhook
 
