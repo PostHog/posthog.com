@@ -59,7 +59,7 @@ Max AI, PostHog’s built-in AI assistant, is especially useful for complex inve
 
 PostHog has unlocked many other advantages for Supabase, says Aleksi. However, the biggest win has been the ability to identify new growth opportunities and double down on them early.
 
-“Like PostHog itself, most of our growth comes from word of mouth,” explains Aleksi. “We don’t run any ads;the growth comes from many small sources: recommendations, videos, tutorials, viral memes". It’s instrumental for us to be sensitive to what’s going on and to really be in tune with the developer community.
+“Like PostHog itself, most of our growth comes from word of mouth,” explains Aleksi. “We don’t run any ads; the growth comes from many small sources: recommendations, videos, tutorials, viral memes". It’s instrumental for us to be sensitive to what’s going on and to really be in tune with the developer community."
 
 In late 2024, we noticed signals of a whole new category of acquisition source: AI builder tools.
 
