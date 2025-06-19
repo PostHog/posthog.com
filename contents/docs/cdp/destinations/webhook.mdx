@@ -1,5 +1,5 @@
 ---
-title: Send PostHog event data to any webhook
+title: Send PostHog event data using webhooks
 templateId:
     - template-webhook
 ---
@@ -10,8 +10,6 @@ import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 With webhook destinations, you can send event data from PostHog to any HTTP endpoint, whether it's to your own backend, an internal system, or a third-party platform.
-
-
 
 <details>
 <summary>Want to send PostHog data to a particular platform like Slack?</summary>
@@ -44,7 +42,7 @@ In PostHog, navigate to the [data pipelines](https://us.posthog.com/pipeline/ove
 
 ### 2. Configure the webhook
 
-On the configuration page, enter a **Webhook URL**. This is the HTTP endpoint that will receive the event data from PostHog. By default, it sends a `POST` request with a templated JSON body.
+On the configuration page, enter a **Webhook URL**. This is the HTTP endpoint that will receive the event data from PostHog. By default, PostHog sends a `POST` request with a templated JSON body.
 
 Click **Create & Enable**.
 
@@ -56,7 +54,7 @@ Click **Create & Enable**.
 
 <CalloutBox type="fyi" title="Webhook services" icon="IconInfo">
 
-You can use services like  [webhook.site](https://webhook.site/) or [ngrok](https://ngrok.com/) to create **Webhook URLs** for quick testing.
+You can use services like [webhook.site](https://webhook.site/) or [ngrok](https://ngrok.com/) to create **Webhook URLs** for quick testing.
 
 </CalloutBox>
 
@@ -64,7 +62,7 @@ You can use services like  [webhook.site](https://webhook.site/) or [ngrok](http
 
 Now that the webhook is enabled, let's see it in action. In the **Testing** section of the configuration page, click **Start testing** > **Test function** to send an example event. 
 
-You should see event data flow into the webhook URL. 
+You should see the webhook endpoint receive a `POST` request with event data.
 
 <ProductVideo
     videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/webhook_test_01101dbebd.mp4" 
