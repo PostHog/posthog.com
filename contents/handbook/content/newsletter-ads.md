@@ -43,9 +43,48 @@ Meta has something called InstantForm ads, which enable users to sign up to our 
 
 ## Paid placements in other newsletters
 
-Our preference is to avoid using paid "placements" as these are hard to track conversions with Substack, which means we rely on cost per click. Instead, we prefer to use a pay-per-sub model, which perform better and are easier to track
+As mentioned above, Substack's attribution sucks. Historically, we instead create a custom link for each campaign using Dub.co and calculate cost per click to measure success. However, we should now be able to track signups using leaderboard + referral code workaround mentioned above.
 
-This <PrivateLink url="https://github.com/issues/assigned?issue=PostHog%7Ccompany-internal%7C2017">issue</PrivateLink> outlines our current partnerships with other newsletter as of June 2025.
+We generally prefer to use a pay-per-sub model, which perform better and are easier to track. This <PrivateLink url="https://github.com/issues/assigned?issue=PostHog%7Ccompany-internal%7C2017">issue</PrivateLink> outlines our current partnerships with other newsletter as of June 2025.
+
+We look for newsletters that focus on software development and engineering. We don't care about list size or reach as much as we care about clickthrough rate (you can ask for their average CTR). Some we like working with and sponsoring include:
+
+- [Pointer](https://www.pointer.io/)
+- [Bytes](https://bytes.dev/), [React newsletter](https://reactnewsletter.com/) (same publisher for both)
+- [Quastor](https://www.quastor.org/)
+- [Tech Lead Digest](https://techleaddigest.net/), [Programming Digest](https://programmingdigest.net/) (same publisher for both)
+- [Software Lead Weekly](https://softwareleadweekly.com/)
+- [Architecture Notes](https://architecturenotes.co/)
+- [React Status](https://react.statuscode.com/), [Frontend Focus](https://frontendfoc.us/), [Node Weekly](https://nodeweekly.com/) (same publisher)
+- [The .NET Weekly](https://www.milanjovanovic.tech/)
+- [hackernewsletter](https://hackernewsletter.com/)
+- [Unzip](https://unzip.dev/)
+- [Internal Tech Emails](https://www.techemails.com/)
+- [This Week in React](https://thisweekinreact.com/)
+
+Smaller newsletters that we also have supported:
+
+- [Level Up](https://levelup.patkua.com/)
+- [Console](https://console.dev/)
+- [FOSS Weekly](https://fossweekly.beehiiv.com/) (same publisher as Console) 
+- [Fullstack Bulletin](https://fullstackbulletin.com/)
+- [freek.dev](https://freek.dev/)
+
+#### Newsletter sponsorship content
+
+Titles that work well include:
+
+- Product for Engineers: A newsletter helping flex your product muscles
+- Product for Engineers: The first newsletter dedicated to product engineers
+
+The main copy is some variation of:
+
+> Product for Engineers is PostHog's newsletter dedicated to helping engineers improve their product skills. Learn how to talk to users, build new features users love, and find product market fit. Subscribe for free to get curated advice on building great products, lessons (and mistakes) from building PostHog, and deep dives into the strategies of top startups.
+
+We have also found that linking to an article directly converts better than just a generic "subscribe to our newsletter" link.
+
+If you need images, there is a <PrivateLink url="https://www.figma.com/design/HwUmk7WqccLkGgNNGAs4zN/Art-board?node-id=10059-57205">collection of many sizes of them in Figma</PrivateLink>.
+
 
 ## Reddit Ads
 
