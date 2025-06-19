@@ -21,6 +21,26 @@ Cover image: Hedge version of this
 
 another meme idea: hedgehog version of this - https://media.licdn.com/dms/image/v2/D5610AQFPrI1pRqqgFA/image-shrink_800/image-shrink_800/0/1728154838097?e=2147483647&v=beta&t=H6AEd1utCpJBY8lhwhljSyUBW1LVO98uFZaCErRsJx4 
 
+
+
+from dylan:
+Pasting from notes app (I’m on a plane) so forgive formatting
+success stories
+Parallelizing subject matter expertise and shipping twice as fast (more credit to team than me)
+Start new hires off with easier stuff and let them ramp rather than throw them at the biggest problem they want to tackle.  Helps them grow confidence and get better faster.
+Recruiting my friends to join the team
+How it started
+I was a small team of 1 for about 2 months and I still just wrote down a lot of learnings, updates, and external processes in my channel even though no one was really there.  Great for referencing later
+Set up automations etc early when standing up a new team.
+Failure modes
+imposing too much process early, then not being intentional about process later.  Not so failure as optimizing
+Being a knowledge suck and not letting support heroes etc own it.  Too many pings of @dylan and not enough pings of @feature-flags-team.  Let the team shine! 
+Insulating folks from annoying processes rather than letting them tell me when it’s too much. Shoot straight with the team.
+Emblematic
+Andy hiring was really good; watching the team come together to groom backlog and plan things and collectively unpack all of our shared knowledge of the product we own was a great exercise. 
+
+
+
 <intro>
 
 maybe bits on how this is intented for anyone who leads eng teams (ICs) and not just managers
