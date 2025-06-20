@@ -253,11 +253,11 @@ export default function ProductAnalyticsCustomers(): JSX.Element {
                 }
             >
                 {slideIndex === 0 ? (
-                    <div className="flex flex-col flex-1 items-center w-full border-y border-primary">
+                    <div className="flex flex-col flex-1 items-center w-full">
                         <Slide slide={slide} />
                     </div>
                 ) : (
-                    <ScrollArea className="flex-1 w-full border-y border-primary flex flex-col items-center">
+                    <ScrollArea className="flex-1 w-full flex flex-col items-center">
                         <Slide slide={slide} />
                     </ScrollArea>
                 )}

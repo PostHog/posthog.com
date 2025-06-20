@@ -5,10 +5,13 @@ import { useApp } from '../../../../context/App'
 import { useWindow } from '../../../../context/Window'
 import { useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
+import Link from 'components/Link'
+
+import SecurityHog from '../../../../images/security-hog.png'
 
 const Input = ({ label, name, type = 'text' }: { label: string; name: string; type?: string }) => {
     return (
-        <div className="flex items-center">
+        <div className="flex items-center space-x-2">
             <label htmlFor={name} className="w-[90px] font-semibold text-sm">
                 {label}
             </label>
@@ -54,18 +57,33 @@ const SignInForm: React.FC = () => {
 
     return (
         <Wizard
+            leftNavigation={<div className="text-sm">Forgot password?</div>}
             rightNavigation={
                 <CallToAction type="primary" size="sm" onClick={submitForm}>
                     Login
                 </CallToAction>
             }
         >
-            <div data-scheme="primary" className="p-4 bg-primary my-6">
-                <h3 className="text-base font-semibold">Type your email and password to log on to PostHog.com</h3>
-                <form onSubmit={handleSubmit} className="space-y-2">
-                    <Input label="Email" name="email" type="email" />
-                    <Input label="Password" name="password" type="password" />
-                </form>
+            <div className="bg-accent flex gap-6 px-8 py-6">
+                <div className="max-w-20">
+                    <img src={SecurityHog} className="w-20" />
+                </div>
+                <div data-scheme="primary" className="flex-1">
+                    <h3 className="text-base font-semibold leading-tight">
+                        Enter your email and password to log on to PostHog.com
+                    </h3>
+                    <form onSubmit={handleSubmit} className="space-y-2 mb-4">
+                        <Input label="Email" name="email" type="email" />
+                        <Input label="Password" name="password" type="password" />
+                    </form>
+
+                    <div className="text-sm">
+                        No account yet?{' '}
+                        <Link to="/signup" state={{ newWindow: true }}>
+                            Register today
+                        </Link>
+                    </div>
+                </div>
             </div>
         </Wizard>
     )

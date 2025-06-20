@@ -19,10 +19,10 @@ const sizes = {
     `,
     sm: cntl`
     rounded-[6px]
-    text-[13px]
+    text-[14px]
     font-bold
-    px-3.5
-    py-1.5
+    px-3
+    py-1
     translate-y-[-2px]
     hover:translate-y-[-3px]
     active:translate-y-[-1px]
@@ -209,7 +209,11 @@ export interface TrackedCTAPropsType extends CTAPropsType {
     }
 }
 
-export const TrackedCTA = ({ width, event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
+export const TrackedCTA = ({
+    width,
+    event: { name: eventName, ...event },
+    ...props
+}: TrackedCTAPropsType): JSX.Element => {
     const posthog = usePostHog()
 
     return (
