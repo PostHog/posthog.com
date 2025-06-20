@@ -164,7 +164,9 @@ Every query you run is logged in the `query_log` table along with details like d
 
 ## Writing performant queries
 
-Since the query endpoint accesses PostHog's data warehouse directly, it's important to write performant queries. We aren't able to optimize these queries for you like we would with other products. Here is some advice:
+When writing custom queries, the burden of performance falls onto you. PostHog handles performance for queries we own (for example, in product analytics insights and experiments, etc.), but because performance depends on how queries are structured and written, we can't optimize them for you. Large data sets particularly require extra careful attention to performance. 
+
+Here is some advice for making sure your queries are quick and don't read over too much data (which can increase costs):
 
 ### 1. Use shorter time ranges
 
