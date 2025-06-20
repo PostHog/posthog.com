@@ -15,7 +15,7 @@ const searchClient = algoliasearch(
     process.env.GATSBY_ALGOLIA_SEARCH_API_KEY as string
 )
 
-const Filters = () => {
+const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: string }) => {
     const { refine, items } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
     return (
         <ul className="list-none m-0 p-0 flex space-x-2 mt-2 snap-x snap-mandatory overflow-x-auto">
@@ -27,7 +27,7 @@ const Filters = () => {
                             refine(item.value)
                         }}
                         className={`text-sm border border-border rounded-md px-1 flex space-x-1 items-center ${
-                            item.isRefined ? 'bg-primary ' : ''
+                            item.isRefined ? isRefinedClassName : ''
                         }`}
                     >
                         <span className="text-sm">{capitalizeFirstLetter(item.label)}</span>{' '}
@@ -39,39 +39,35 @@ const Filters = () => {
     )
 }
 
-const Search = ({ initialFilter }: { initialFilter?: string }) => {
+const Search = ({
+    initialFilter,
+    className = '',
+    onChange,
+    isRefinedClassName = 'bg-primary',
+    hideFilters = false,
+}: {
+    initialFilter?: string
+    className?: string
+    onChange?: () => void
+    isRefinedClassName?: string
+    hideFilters?: boolean
+}) => {
     const [query, setQuery] = useState('')
-    const { dragControls, appWindow } = useWindow()
-    const { setWindowTitle, closeWindow } = useApp()
+    const { dragControls } = useWindow()
     const { refine } = useSearchBox()
     const { hits } = useHits()
     const [showFilters, setShowFilters] = useState(!!initialFilter)
-    const ref = useRef<HTMLDivElement>(null)
     const { refine: filterRefine } = useRefinementList({ attribute: 'type', sortBy: ['name:asc'] })
 
     const handleChange = (hit: Hit) => {
         if (!hit) return
         navigate(`/${hit.slug}`, { state: { newWindow: true } })
-        closeWindow(appWindow)
+        onChange?.()
     }
 
     useEffect(() => {
         refine(query)
     }, [query])
-
-    useEffect(() => {
-        setWindowTitle(appWindow, 'Search')
-    }, [])
-
-    useEffect(() => {
-        const handleClickOutside = (event: MouseEvent) => {
-            if (ref.current && !ref.current.contains(event.target as Node)) {
-                closeWindow(appWindow)
-            }
-        }
-        document.addEventListener('mousedown', handleClickOutside)
-        return () => document.removeEventListener('mousedown', handleClickOutside)
-    }, [])
 
     useEffect(() => {
         if (initialFilter) {
@@ -80,11 +76,7 @@ const Search = ({ initialFilter }: { initialFilter?: string }) => {
     }, [initialFilter])
 
     return (
-        <div
-            ref={ref}
-            className="flex flex-col max-w-screen-md border border-border p-3 rounded-md bg-white"
-            onMouseDown={(e) => dragControls.start(e)}
-        >
+        <div className={`flex flex-col ${className}`} onMouseDown={(e) => dragControls.start(e)}>
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
                     <div className="bg-white rounded-md border !border-border overflow-hidden relative">
@@ -107,7 +99,7 @@ const Search = ({ initialFilter }: { initialFilter?: string }) => {
                             <IconFilter className="size-4" />
                         </button>
                     </div>
-                    {showFilters && <Filters />}
+                    {!hideFilters && showFilters && <Filters isRefinedClassName={isRefinedClassName} />}
 
                     {hits.length > 0 && query && (
                         <Combobox.Options
@@ -145,14 +137,73 @@ const Search = ({ initialFilter }: { initialFilter?: string }) => {
     )
 }
 
-export default function SearchUI({ initialFilter }: { initialFilter?: string }) {
+export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) => {
+    const { setWindowTitle, closeWindow } = useApp()
+    const { appWindow } = useWindow()
+    const ref = useRef<HTMLDivElement>(null)
+
+    const onChange = () => {
+        if (appWindow) {
+            closeWindow(appWindow)
+        }
+    }
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Search')
+        }
+    }, [])
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (ref.current && !ref.current.contains(event.target as Node) && appWindow) {
+                closeWindow(appWindow)
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside)
+        return () => document.removeEventListener('mousedown', handleClickOutside)
+    }, [])
+
     return (
         <InstantSearch
             searchClient={searchClient}
             indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
             stalledSearchDelay={750}
         >
-            <Search initialFilter={initialFilter} />
+            <div ref={ref}>
+                <Search
+                    initialFilter={initialFilter}
+                    className="p-3 rounded-md bg-white max-w-screen-md border border-border"
+                    onChange={onChange}
+                />
+            </div>
+        </InstantSearch>
+    )
+}
+
+export const SearchUI = ({
+    initialFilter,
+    className = '',
+    isRefinedClassName = 'bg-primary',
+    hideFilters = false,
+}: {
+    initialFilter?: string
+    className?: string
+    isRefinedClassName?: string
+    hideFilters?: boolean
+}) => {
+    return (
+        <InstantSearch
+            searchClient={searchClient}
+            indexName={process.env.GATSBY_ALGOLIA_INDEX_NAME as string}
+            stalledSearchDelay={750}
+        >
+            <Search
+                initialFilter={initialFilter}
+                className={className}
+                isRefinedClassName={isRefinedClassName}
+                hideFilters={hideFilters}
+            />
         </InstantSearch>
     )
 }

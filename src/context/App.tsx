@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useMemo, useState, useCallback, useRef } from 'react'
 import { AppWindow } from './Window'
-import SearchUI from 'components/SearchUI'
+import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
 
 type WindowElement = React.ReactNode & {
@@ -461,7 +461,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const openSearch = (initialFilter?: string) => {
         addWindow(
-            <SearchUI
+            <WindowSearchUI
                 location={{ pathname: `search` }}
                 key={`search`}
                 newWindow

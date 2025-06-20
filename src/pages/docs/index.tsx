@@ -20,6 +20,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useApp } from '../../context/App'
 import { Search, CmdK, Ctrl, K } from 'components/Icons/Icons'
+import { SearchUI } from 'components/SearchUI'
 
 const keyboardShortcut =
     'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40'
@@ -290,26 +291,7 @@ export const DocsIndex = () => {
             <div className="flex gap-8 h-full">
                 <section className="flex-1">
                     <h2>Docs</h2>
-                    <button
-                        onClick={() => openSearch('docs')}
-                        className="px-4 py-2 bg-white rounded-md border border-border w-full text-left hover:scale-[1.002] active:scale-[1] transition-transform mb-2 flex justify-between items-center"
-                    >
-                        <span className="opacity-50">Search...</span>
-                        {isMac !== undefined && (
-                            <span className="hidden md:block">
-                                {isMac ? (
-                                    <kbd className="">
-                                        <CmdK className={keyboardShortcut} />
-                                    </kbd>
-                                ) : (
-                                    <kbd className="space-x-1">
-                                        <Ctrl className={keyboardShortcut} />
-                                        <K className={keyboardShortcut} />
-                                    </kbd>
-                                )}
-                            </span>
-                        )}
-                    </button>
+                    <SearchUI initialFilter="docs" hideFilters isRefinedClassName="bg-white" className="mb-4" />
                     <ScrollArea>
                         {accordionItems.map((item, index) => (
                             <Accordion
