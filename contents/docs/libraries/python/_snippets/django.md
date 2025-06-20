@@ -1,8 +1,8 @@
-### Django Middleware
+### Django middleware
 
 The Python SDK provides Django middleware that automatically wraps all requests with PostHog contexts. This middleware extracts session and user information from request headers and tags all events captured during the request with relevant metadata.
 
-#### Basic Setup
+#### Basic setup
 
 Add the middleware to your Django settings:
 
@@ -15,6 +15,7 @@ MIDDLEWARE = [
 ```
 
 The middleware automatically extracts and uses:
+
 - **Session ID** from the `X-POSTHOG-SESSION-ID` header
 - **Distinct ID** from the `X-POSTHOG-DISTINCT-ID` header
 - **Current URL** as `$current_url`
@@ -22,7 +23,7 @@ The middleware automatically extracts and uses:
 
 All events captured during the request (including exceptions) will include these properties and be associated with the extracted session and distinct ID.
 
-#### Exception Capture
+#### Exception capture
 
 By default, the middleware captures exceptions and sends them to PostHog's error tracking. Disable this by setting:
 
@@ -31,7 +32,7 @@ By default, the middleware captures exceptions and sends them to PostHog's error
 POSTHOG_MW_CAPTURE_EXCEPTIONS = False
 ```
 
-#### Adding Custom Tags
+#### Adding custom tags
 
 Use `POSTHOG_MW_EXTRA_TAGS` to add custom properties to all requests:
 
@@ -48,7 +49,7 @@ def add_user_tags(request):
 POSTHOG_MW_EXTRA_TAGS = add_user_tags
 ```
 
-#### Filtering Requests
+#### Filtering requests
 
 Skip tracking for certain requests using `POSTHOG_MW_REQUEST_FILTER`:
 
@@ -64,7 +65,7 @@ def should_track_request(request):
 POSTHOG_MW_REQUEST_FILTER = should_track_request
 ```
 
-#### Modifying Default Tags
+#### Modifying default tags
 
 Use `POSTHOG_MW_TAG_MAP` to modify or remove default tags:
 
@@ -82,7 +83,7 @@ def customize_tags(tags):
 POSTHOG_MW_TAG_MAP = customize_tags
 ```
 
-#### Complete Configuration Example
+#### Complete configuration example
 
 ```python
 # settings.py
@@ -116,4 +117,4 @@ POSTHOG_MW_TAG_MAP = clean_tags
 POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 ```
 
-All events captured within the request context will automatically include the configured tags and be associated with the session and user identified from the request headers.
+All events captured within the request context automatically include the configured tags and are associated with the session and user identified from the request headers.
