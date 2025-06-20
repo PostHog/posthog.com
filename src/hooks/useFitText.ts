@@ -39,9 +39,29 @@ export const useFitText = (text: string, maxWidth?: number) => {
         setFontSize(newFontSize)
     }, [text, maxWidth])
 
+    const retryFitText = useCallback(() => {
+        // Progressive retry with increasing delays to handle window animations
+        // AppWindow animations can take up to 300ms, so we need to account for that
+        const delays = [50, 150, 350, 600, 1000]
+
+        delays.forEach((delay) => {
+            setTimeout(() => {
+                if (textRef.current) {
+                    const container = textRef.current.parentElement
+                    if (container && container.getBoundingClientRect().width > 0) {
+                        fitText()
+                    }
+                }
+            }, delay)
+        })
+    }, [fitText])
+
     useEffect(() => {
-        // Initial fit
+        // Immediate attempt
         fitText()
+
+        // Retry with progressive delays for window animations
+        retryFitText()
 
         // Refit on window resize
         const handleResize = () => {
@@ -53,8 +73,26 @@ export const useFitText = (text: string, maxWidth?: number) => {
         // Use ResizeObserver if available for container size changes
         let resizeObserver: ResizeObserver | null = null
         if (textRef.current?.parentElement && 'ResizeObserver' in window) {
-            resizeObserver = new ResizeObserver(handleResize)
+            resizeObserver = new ResizeObserver(() => {
+                setTimeout(fitText, 50)
+            })
             resizeObserver.observe(textRef.current.parentElement)
+        }
+
+        // Use IntersectionObserver to detect when element becomes visible
+        let intersectionObserver: IntersectionObserver | null = null
+        if (textRef.current && 'IntersectionObserver' in window) {
+            intersectionObserver = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting && entry.intersectionRatio > 0) {
+                            setTimeout(fitText, 100)
+                        }
+                    })
+                },
+                { threshold: 0.1 }
+            )
+            intersectionObserver.observe(textRef.current)
         }
 
         return () => {
@@ -62,8 +100,19 @@ export const useFitText = (text: string, maxWidth?: number) => {
             if (resizeObserver) {
                 resizeObserver.disconnect()
             }
+            if (intersectionObserver) {
+                intersectionObserver.disconnect()
+            }
         }
-    }, [fitText])
+    }, [fitText, retryFitText])
+
+    // Additional effect to handle when the ref becomes available
+    useEffect(() => {
+        if (textRef.current) {
+            // Element is now mounted, start the retry sequence
+            retryFitText()
+        }
+    }, [textRef.current, retryFitText])
 
     return { fontSize, textRef }
 }

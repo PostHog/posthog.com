@@ -22,7 +22,7 @@ import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { companyMenu } from '../../navs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import Stickers from 'components/Stickers'
+import Stickers from 'components/Stickers/Index'
 
 export const TeamMember = (props: any) => {
     const {
@@ -199,8 +199,8 @@ export default function People() {
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/explorer-hog.png"
                             alt="Hiking hog"
-                            width="250"
-                            height="250"
+                            width={250}
+                            height={250}
                             placeholder="blurred"
                             className="w-[200px] sm:w-64 md:w-72 lg:w-auto lg:max-w-auto -mr-4 md:mr-0 -mt-4 md:mt-0"
                         />
@@ -248,7 +248,7 @@ export default function People() {
                         </div>
                     </aside>
                     <ul className="list-none m-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @7xl:grid-cols-3 gap-x-6 gap-y-12 max-w-screen-2xl">
-                        {teamMembers.map((teamMember, index) => {
+                        {teamMembers.map((teamMember: any, index: number) => {
                             return <TeamMember key={index} {...teamMember} setActiveProfile={setActiveProfile} />
                         })}
                     </ul>
