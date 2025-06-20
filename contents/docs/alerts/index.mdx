@@ -120,11 +120,55 @@ Percentage thresholds are only available for relative alerts (as you need to com
 
 
 ## Notification
-Currently alerts only support email notifications. We will add more notification options like webhooks and Slack soon.
+Alerts support sending email notifications and triggering CDP destinations for when the thresholds are breached.
+
+### CDP destinations
+1. Once you save an alert, you will see the option to create CDP notifications that fire when the alert fires.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_start_7d6ad68f13.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_start_331ef652eb.png"
+    alt="relative alert picker" 
+    classes="rounded"
+/>
+2. When you click 'New notification', it will give you templates to choose from, like sending slack notifications.
+3. Click 'Create' on the destination you want.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_picker_3d34c291f5.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_picker_f0980da598.png"
+    alt="relative alert picker" 
+    classes="rounded"
+/>
+4. You will be brought to the page to configure options for the CDP destination. 
+In case of slack notifications, you just need to select the Slack connection and the channel you want the message to be sent in.
+You can optionally configure the message that's sent in the channel using the 'Blocks' option.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_configure_77171f28da.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_configure_d36720023d.png"
+    alt="relative alert picker" 
+    classes="rounded"
+/>
+5. Once you click 'Create & enable', you notification is set up and when you navigate back to the alert, you will see the newly created destination showing up.
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_light_cdp_saved_94673f216f.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/alerts_dark_cdp_saved_595e519537.png"
+    alt="relative alert picker" 
+    classes="rounded"
+/>
+
+
+## Advanced options
+You can configure alerts to skip checking on weekends. 
+This is useful for daily alerts which would normally trigger on weekends.
+
+### Check ongoing period
+Alerts also enable you to check the current/ongoing period. 
+When enabled, this checks the insight value for the ongoing period (current week/month) that hasn't yet completed. 
+Use this if you want to be alerted right away when the insight value rises/increases above threshold
 
 
 ## Alerts on breakdowns
 When you set an alert on a trend with a breakdown, the alert will be triggered when any of the breakdown values breaches the thresholds set.
+
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/breakdown_alert_7bd87114cb.png" 

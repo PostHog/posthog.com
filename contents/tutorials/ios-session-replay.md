@@ -201,7 +201,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // rest of your existing code
 ```
 
-To check your setup, build and run your app a few times. Enter in any values in the text fields and click the **Log in** button. You should start see recordings in the [session replay tab](https://us.posthog.com/replay/recent) in PostHog 🎉.
+To check your setup, build and run your app a few times. Enter in any values in the text fields and click the **Log in** button. You should start see recordings in the [session replay tab](https://us.posthog.com/replay) in PostHog 🎉.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725526016/posthog.com/contents/Screenshot_2024-09-05_at_9.46.17_AM.png"

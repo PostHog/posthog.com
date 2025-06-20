@@ -20,4 +20,4 @@ In the process of building their own product’s tracking system, James and Tim 
 
 The ‘Post’ in PostHog comes from the concept of ex post facto laws – laws that are applied retroactively. The parallel is by auto-capturing event data, we can help you draw meanings after your users are long gone.
 
-‘Hog’ comes from hedgehogs.  Not only is the collective noun an array (and we’re the most developer-focussed product analytics provider), but they’re friendly whilst being able to protect what matters. In our case, this represents open sourcing parts of our platform and providing our users with control over their user data.
+‘Hog’ comes from hedgehogs.  Not only is the collective noun an array (and we’re the most developer-focused product analytics provider), but they’re friendly whilst being able to protect what matters. In our case, this represents open sourcing parts of our platform and providing our users with control over their user data.

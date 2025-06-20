@@ -82,8 +82,9 @@ These are features for advanced users and may lead to unintended side effects if
 
 | Attribute                                                                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
 | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                      | Will completely disable the `/decide` endpoint request (and features that rely on it). More details below.                                                                                                                                                                                                                                                                                                                             |
-| `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | Will keep `/decide` running, but without any feature flag requests. Important: do not use this argument if using surveys, as display conditions rely on feature flags internally.                                                                                                                                                                                                                                                      |
+| `advanced_disable_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                      | Will completely disable the `/flags` endpoint request (and features that rely on it). More details below.                                                                                                                                                                                                                                                                                                                             |
+| `advanced_disable_decide`<br/><br/>**Type:** Boolean<br/>**Default:** `false`                     | Legacy, prefer `advanced_disable_flags`.  This configuration option behaves like `advanced_disable_flags` but will be deprecated in the future.
+| `advanced_disable_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false`               | Will keep `/flags` running, but without any feature flag requests. Important: do not use this argument if using surveys, as display conditions rely on feature flags internally.                                                                                                                                                                                                                                                      |
 | `advanced_disable_feature_flags_on_first_load`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Stops from firing feature flag requests on first page load. Only requests feature flags when user identity or properties are updated, or you manually request for flags to be loaded.                                                                                                                                                                                                                                                  |
 | `advanced_only_evaluate_survey_feature_flags`<br/><br/>**Type:** Boolean<br/>**Default:** `false` | Determines whether PostHog should only evaluate feature flags for surveys. Useful for when you want to use this library to evaluate feature flags for surveys only but you have additional feature flags that you evaluate on the server side.
 | `feature_flag_request_timeout_ms`<br/><br/>**Type:** Integer<br/>**Default:** `3000`               | Sets timeout for fetching feature flags                                                                                                                                                                                                                                                                                                                                                                                                |
@@ -93,25 +94,25 @@ These are features for advanced users and may lead to unintended side effects if
 | `fetch_options.next_options` <br/><br/>**Type:** Object<br/>**Default:** `undefined`               | Arguments to be passed to the `next` key when calling `fetch` under NextJS. See [companion documentation](https://nextjs.org/docs/app/api-reference/functions/fetch#optionsnextrevalidate).                                                                                                                                                                                                                                            |
 
 
-### Disable `/decide` endpoint
+### Disable `/flags` endpoint
 
-> **Note:** This feature was introduced in `posthog-js` 1.10.0. Previously, disabling autocapture would inherently disable the `/decide` endpoint altogether. This meant that disabling autocapture would inadvertently turn off session recording, feature flags, compression, and the toolbar too.
+> **Note:** This feature was introduced in `posthog-js` 1.10.0. Previously, disabling autocapture would inherently disable the `/flags` endpoint altogether. This meant that disabling autocapture would inadvertently turn off session recording, feature flags, compression, and the toolbar too.
 
-One of the first things the PostHog does after initializing is make a request to [the `/decide` endpoint](/docs/api/decide) on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend and is required to run most features of the library (detailed below).
+One of the first things the PostHog does after initializing is make a request to [the `/flags` endpoint](/docs/api/flags) on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend and is required to run most features of the library (detailed below).
 
 If you're not using any of these features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.
 
-The `/decide` endpoint can be disabled by setting `advanced_disable_decide` to `true`.
+The `/flags` endpoint can be disabled by setting `advanced_disable_flags` to `true`.
 
-#### Resources dependent on `/decide`
+#### Resources dependent on `/flags`
 
-> **Warning:** These are features/resources that are fully disabled when the `/decide` endpoint is disabled.
+> **Warning:** These are features/resources that are fully disabled when the `/flags` endpoint is disabled.
 
--   **Autocapture**. The `/decide` endpoint contains information on whether autocapture should be enabled or not (apart from local configuration).
+-   **Autocapture**. The `/flags` endpoint contains information on whether autocapture should be enabled or not (apart from local configuration).
 -   **Session recording**. The endpoint contains information on where to send relevant session recording events.
 -   **Compression**. The endpoint contains information on what compression methods are supported on the backend (e.g. LZ64, gzip) for event payloads.
 -   **Feature flags**. The endpoint contains the feature flags enabled for the current person.
 -   **Surveys**. The endpoint contains information on whether surveys should be enabled or not.
 -   **Toolbar**. The endpoint contains authentication information and other toolbar capabilities information required to run it.
 
-Any custom event captures (`posthog.capture`), `$identify`, `$set`, `$set_once` and basically any other calls not detailed above will work as expected when `/decide` is disabled.
+Any custom event captures (`posthog.capture`), `$identify`, `$set`, `$set_once` and basically any other calls not detailed above will work as expected when `/flags` is disabled.

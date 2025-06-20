@@ -1,4 +1,4 @@
-> This library was built by the community and is not maintained by the PostHog core team.
+> This library was built by the community but it's being maintained by the PostHog core team since v1.0.0. Thank you to [Nick Kezhaya](https://github.com/nkezhaya) for building it originally.
 
 The package can be installed by adding `posthog` to your list of dependencies in `mix.exs`:
 
@@ -57,9 +57,9 @@ end
 
 ### Development mode
 
-If you are running in development or test mode, you can pass in a `capture_disabled: false` value to the config. This causes events to be dropped instead of sent to PostHog.
+If you are running in development or test mode, you can pass in a `enabled_capture: false` value to the config. This causes events to be dropped instead of sent to PostHog.
 
 ```elixir
 config :posthog,
-  capture_disabled: false
+  enabled_capture: false
 ```
