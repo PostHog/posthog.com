@@ -34,10 +34,26 @@ import {
     StickerPineappleUnknown,
 } from 'components/Stickers/Index'
 
-const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id, handleTeamLead }) => {
+const Stickers = ({
+    location,
+    country,
+    pineappleOnPizza,
+    isTeamLead,
+    editing,
+    id,
+    handleTeamLead,
+}: {
+    location: string
+    country: string
+    pineappleOnPizza: boolean
+    isTeamLead: boolean
+    editing: boolean
+    id: string
+    handleTeamLead: (id: string, isTeamLead: boolean) => void
+}) => {
     const TeamLeadContainer = editing && handleTeamLead ? 'span' : 'button'
 
-    const handleTeamLeadClick = (e) => {
+    const handleTeamLeadClick = (e: React.MouseEvent<HTMLSpanElement>) => {
         e.stopPropagation()
         handleTeamLead(id, isTeamLead)
     }
@@ -101,7 +117,7 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagUnknown className="w-8 h-8" />
                 )}
             </Tooltip>
-            <span>
+            <span className="hidden">
                 {pineappleOnPizza === null ? (
                     <Tooltip content="We're not sure if they like pineapple on pizza (yet)!">
                         <StickerPineappleUnknown className="w-8 h-8" />
