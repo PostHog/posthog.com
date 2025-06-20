@@ -55,7 +55,7 @@ const PricingPhilosophy = (): JSX.Element => {
                     <li>
                         <strong>We closely couple our success with yours.</strong> We make 
                         money when you use more of what PostHog provides, either by growing your usage or using more
-                        of our products. Your willingness to pay is our best indicator of how much you value PostHog.
+                        of our products. Your willingness to pay is our best indicator of how much value you get out of PostHog.
                     </li>
                     <li>
                         The company in general has significant revenue, over 60,000 customers, runs{' '}
