@@ -7,6 +7,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import slugify from 'slugify'
 import { useSmallTeamsMenuItems } from './SmallTeamsMenuItems'
+import Logo from 'components/Logo'
 
 interface ProductMenuItem {
     name: string
@@ -227,7 +228,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: (
                 <>
-                    <IconLogomark className="size-6" />
+                    <Logo noText className="size-6 fill-primary text-primary" color="black" classic />
                 </>
             ),
             items: [
