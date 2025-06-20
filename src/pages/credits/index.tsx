@@ -18,18 +18,20 @@ export default function Credits(): JSX.Element {
     //     { label: "Customers", value: "150,000" }
     //   ]
     // },
-    {
-      legend: "Website",
-      items: [
-        { label: "Framework", value: "Gatsby" },
-        { label: "Hosting", value: "Vercel" },
-        { label: "Assets", value: "Cloudinary" },
-        // { label: "Search", value: "Algolia" },
-        // { label: "AI", value: "Inkeep" },
-        // { label: "CMS", value: "Strapi" },
-        // { label: "Analytics", value: "PostHog" },
-      ]
-    },
+
+    // {
+    //   legend: "Website",
+    //   items: [
+    //     { label: "Framework", value: "Gatsby" },
+    //     { label: "Hosting", value: "Vercel" },
+    //     { label: "Assets", value: "Cloudinary" },
+    //     // { label: "Search", value: "Algolia" },
+    //     // { label: "AI", value: "Inkeep" },
+    //     // { label: "CMS", value: "Strapi" },
+    //     // { label: "Analytics", value: "PostHog" },
+    //   ]
+    // },
+
     {
       legend: "Credits",
       items: [
@@ -49,7 +51,11 @@ export default function Credits(): JSX.Element {
               <TeamMember name="Cory Watilo" />
             </>
           )
-        }
+        },
+        {
+          label: "Inspiration",
+          value: (<>Apple, Inc.<br /> Microsoft, Inc.</>)
+        },
       ]
     }
   ]
@@ -72,7 +78,7 @@ export default function Credits(): JSX.Element {
           </div>
 
           {fieldsets.map((fieldset, index) => (
-            <fieldset className="border-none mb-4 w-full" key={index}>
+            <fieldset className="border-none mb-2 w-full" key={index}>
               <legend className="text-center bg-transparent font-medium text-secondary">{fieldset.legend}</legend>
               <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm pt-2">
                 {fieldset.items.map((item, itemIndex) => (
@@ -88,6 +94,10 @@ export default function Credits(): JSX.Element {
               </dl>
             </fieldset>
           ))}
+
+          <div className="mb-4">
+            <CallToAction type="secondary" size="xs">More info</CallToAction>
+          </div>
 
           <p className="text-sm text-secondary"><Link to="https://github.com/posthog/posthog.com" state={{ newWindow: true }} className="underline">Source code</Link></p>
 

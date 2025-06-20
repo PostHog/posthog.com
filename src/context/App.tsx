@@ -158,11 +158,11 @@ const appSettings = {
         size: {
             min: {
                 width: 300,
-                height: 680,
+                height: 625,
             },
             max: {
                 width: 300,
-                height: 680,
+                height: 625,
             },
             fixed: true,
         },
