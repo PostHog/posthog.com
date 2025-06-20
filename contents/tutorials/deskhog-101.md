@@ -119,5 +119,4 @@ To do this, first _Publish_ your branch, then click _Create Pull Request_ to ope
 
 Congratulations, you can now add ‘Game developer’ to your LinkedIn profile!
 
-
 <NewsletterForm />
