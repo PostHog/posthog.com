@@ -53,7 +53,7 @@ const PricingPhilosophy = (): JSX.Element => {
                         (Note: This doesn't include your buddy's two-person startup.)
                     </li>
                     <li>
-                        <strong>We want to closely couple our success with yours.</strong> We make 
+                        <strong>We closely couple our success with yours.</strong> We make 
                         money when you use more of what PostHog provides, either by growing your usage or using more
                         of our products. Your willingness to pay is our best indicator of how much you value PostHog.
                     </li>
