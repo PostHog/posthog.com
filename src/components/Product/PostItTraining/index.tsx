@@ -217,7 +217,7 @@ export const ProductPostItTraining = () => {
 
                     <div className="flex justify-center gap-2">
                         <CallToAction
-                            href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fposthog.com%2Fpost-it-training"
+                            href="https://www.linkedin.com/in/me/edit/forms/certification/new/"
                             type="primary"
                             size="lg"
                             externalNoIcon
