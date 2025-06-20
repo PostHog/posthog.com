@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. We recommend to do the growth reviews at the start of the month, to review the previous month. Most growth reviews happen asyncronously with the PM reviewing key metrics, analysing anomalies and sharing an overview with the team in Slack.
+For products that have product-market fit and are generating revenue, we are doing monthly **per-product growth reviews**. We recommend to do the growth reviews at the start of the month, to review the previous month. Most growth reviews happen asynchronously with the PM reviewing key metrics, analysing anomalies and sharing an overview with the team in Slack.
 
 ## Objectives
 
