@@ -83,7 +83,7 @@ If you need help updating documentation:
 
 ### Who should review docs updates?
 
-Tag the individual owner from the Contents & Docs team – see [Ownership in Contents & Docs](#ownership-in-content--docs-team) below.
+Tag the `docs reviewers` team on GitHub and someone will come running.
 
 ### How do I add images to my docs?
 
