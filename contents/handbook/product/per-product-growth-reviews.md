@@ -97,7 +97,7 @@ In-sync growth reviews are usually joined by the PM, the team lead and the respo
 
 ## Structure of the async growth reviews
 
-Very similar to the above, except that the metrics walkthrough doesn't happen in a meeting. The PM shares a summary of the full growth review they prepared (key metrics, deep dives, anomalies and follow-ups) in the team's Slack with the team lead and exec tagged. The whole team is encouraged to read up on the full notes & numbers that are linked, and ask follow-up questions.
+Very similar to the above, except that the metrics walkthrough doesn't happen in a meeting. The PM shares a summary of the full growth review they prepared (key metrics, deep dives, anomalies and follow-ups) in the team's Slack with the team lead and responsible exec tagged. The whole team is encouraged to read up on the full notes & numbers that are linked, and ask follow-up questions.
 
 ## Useful material (internal links)
 
