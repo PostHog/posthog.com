@@ -9,9 +9,34 @@ import { IconBold, IconLink } from 'components/OSIcons'
 import TeamMember from 'components/TeamMember'
 import { useApp } from '../../context/App'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { teamQuery } from 'components/People'
+import { graphql, useStaticQuery } from 'gatsby'
+
+type FieldsetItem = {
+    label: string
+    value: string | number | React.ReactNode
+    url?: string
+}
+
+type Fieldset = {
+    legend: string
+    items: FieldsetItem[]
+    showInCondensed: boolean
+    layoutStyle: 'simple' | 'table'
+}
 
 export default function Credits(): JSX.Element {
     const { focusedWindow, updateWindow } = useApp()
+    const [isExpanded, setIsExpanded] = useState(false)
+
+    const {
+        team: { teamMembers },
+        allTeams,
+    } = useStaticQuery(teamQuery)
+
+    const [activeProfile, setActiveProfile] = useState<any>(null)
+
+    const teamSize = teamMembers.length - 1
 
     const handleMoreInfo = () => {
         if (focusedWindow) {
@@ -26,61 +51,46 @@ export default function Credits(): JSX.Element {
             const maxWidth = Math.min(newWidth, window.innerWidth * 0.9)
             const maxHeight = Math.min(newHeight, window.innerHeight * 0.9)
 
-            // Update the window size
+            // Update the window size and expand the view
             updateWindow(focusedWindow, {
                 size: {
                     width: maxWidth,
                     height: maxHeight,
                 },
             })
+
+            setIsExpanded(true)
         }
     }
 
-    const infoCondensed = [
-        {
-            legend: 'Credits',
-            items: [
-                {
-                    label: 'Design',
-                    value: <TeamMember name="Cory Watilo" />,
-                },
-                {
-                    label: 'Graphics',
-                    value: <TeamMember name="Lottie Coxon" />,
-                },
-                {
-                    label: 'Development',
-                    value: (
-                        <>
-                            <TeamMember name="Eli Kinsey" />
-                            <TeamMember name="Cory Watilo" />
-                        </>
-                    ),
-                },
-                {
-                    label: 'Inspiration',
-                    value: (
-                        <>
-                            Apple, Inc.
-                            <br /> Microsoft, Inc.
-                        </>
-                    ),
-                },
-            ],
-        },
-    ]
-
-    const infoExpanded = [
+    const allSections: Fieldset[] = [
         {
             legend: 'Company',
+            showInCondensed: false,
+            layoutStyle: 'table',
             items: [
-                { label: 'Employees', value: '###' },
-                { label: 'Customers', value: '150,000' },
+                { label: 'Established', value: 'January 2020' },
+                { label: 'Employees', value: teamSize },
+                { label: 'Small teams', value: allTeams.nodes.length },
+                { label: 'Customers', value: '190,254' },
+                { label: 'Revenue', value: '--' },
+                { label: 'Funding', value: '$107,000,000' },
+                {
+                    label: 'Locations',
+                    value: (
+                        <>
+                            London, UK
+                            <br />
+                            San Francisco, CA
+                        </>
+                    ),
+                },
             ],
         },
-
         {
             legend: 'Website',
+            showInCondensed: false,
+            layoutStyle: 'table',
             items: [
                 { label: 'Framework', value: 'Gatsby', url: 'https://gatsbyjs.com' },
                 { label: 'Hosting', value: 'Vercel', url: 'https://vercel.com' },
@@ -94,9 +104,10 @@ export default function Credits(): JSX.Element {
                 { label: 'Surveys', value: 'PostHog', url: '/surveys' },
             ],
         },
-
         {
             legend: 'Credits',
+            showInCondensed: true,
+            layoutStyle: isExpanded ? 'table' : 'simple',
             items: [
                 {
                     label: 'Design',
@@ -111,6 +122,7 @@ export default function Credits(): JSX.Element {
                     value: (
                         <>
                             <TeamMember name="Eli Kinsey" />
+                            <br />
                             <TeamMember name="Cory Watilo" />
                         </>
                     ),
@@ -128,80 +140,90 @@ export default function Credits(): JSX.Element {
         },
     ]
 
+    const sectionsToShow = isExpanded ? allSections : allSections.filter((section) => section.showInCondensed)
+
+    const renderFieldset = (fieldset: Fieldset, index: number) => {
+        if (fieldset.layoutStyle === 'simple') {
+            return (
+                <fieldset className="border-none w-full max-w-sm mx-0 mt-4 mb-6 p-0" key={index}>
+                    <legend className="text-center bg-transparent font-medium text-secondary pb-1">
+                        {fieldset.legend}
+                    </legend>
+                    <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm pt-2">
+                        {fieldset.items.map((item, itemIndex) => (
+                            <Fragment key={itemIndex}>
+                                <dt>{item.label}</dt>
+                                <dd className="font-medium">{item.value}</dd>
+                            </Fragment>
+                        ))}
+                    </dl>
+                </fieldset>
+            )
+        } else {
+            return (
+                <fieldset className="border-none mb-2 w-full max-w-md mx-0 py-2 p-0" key={index}>
+                    <legend className="bg-transparent font-bold text-secondary">{fieldset.legend}</legend>
+                    <dl className="grid grid-cols-2 text-sm border border-primary bg-primary rounded">
+                        {fieldset.items.map((item, itemIndex) => (
+                            <Fragment key={itemIndex}>
+                                <dt className="p-2 border-t border-primary first:border-t-0">{item.label}</dt>
+                                <dd className="p-2 border-t border-primary text-right [&:nth-child(2)]:border-t-0 font-medium">
+                                    {item.url ? <Link to={item.url}>{item.value}</Link> : item.value}
+                                </dd>
+                            </Fragment>
+                        ))}
+                    </dl>
+                </fieldset>
+            )
+        }
+    }
+
     return (
         <>
             <SEO
-                title="Credits"
+                title="About this website"
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
             <Wizard>
-                <ScrollArea>
-                    <div className="bg-accent flex flex-col items-center p-6">
-                        <div className="flex flex-col items-center w-full mb-4">
-                            <figure
-                                data-skin="secondary"
-                                className="aspect-video bg-primary w-full border border-primary flex justify-center items-center mb-4 rounded"
-                            >
-                                screenshot
-                            </figure>
-                            <h1 className="text-lg mb-1">PostHog.com</h1>
-                            <p className="text-sm text-secondary">Updated today at 3:23 PM</p>
+                <div className="bg-accent h-full">
+                    <ScrollArea>
+                        <div className="flex flex-col items-center p-6">
+                            <div className="flex flex-col items-center w-full">
+                                <figure
+                                    data-skin="secondary"
+                                    className="aspect-video bg-primary w-full border border-primary flex justify-center items-center mb-4 rounded max-w-md"
+                                >
+                                    screenshot
+                                </figure>
+                                <h1 className="text-lg mb-1">PostHog.com</h1>
+                                <p className="text-sm text-secondary">Updated today at 3:23 PM</p>
+                            </div>
+
+                            {sectionsToShow.map((fieldset, index) => renderFieldset(fieldset, index))}
+
+                            {!isExpanded && (
+                                <div className="mb-4">
+                                    <CallToAction type="secondary" size="xs" onClick={handleMoreInfo}>
+                                        More info
+                                    </CallToAction>
+                                </div>
+                            )}
+
+                            <p className="text-sm text-secondary">
+                                <Link
+                                    to="https://github.com/posthog/posthog.com"
+                                    state={{ newWindow: true }}
+                                    className="underline"
+                                >
+                                    Source code
+                                </Link>
+                            </p>
+
+                            <p className="text-xs text-secondary">&copy;2025 PostHog Incorporated</p>
                         </div>
-
-                        {infoCondensed.map((fieldset, index) => (
-                            <fieldset className="border-none mb-2 w-full max-w-sm" key={index}>
-                                <legend className="text-center bg-transparent font-medium text-secondary">
-                                    {fieldset.legend}
-                                </legend>
-                                <dl className="grid grid-cols-2 gap-x-4 gap-y-2 text-sm pt-2">
-                                    {fieldset.items.map((item, itemIndex) => (
-                                        <Fragment key={itemIndex}>
-                                            <dt>{item.label}</dt>
-                                            <dd className="font-medium">{item.value}</dd>
-                                        </Fragment>
-                                    ))}
-                                </dl>
-                            </fieldset>
-                        ))}
-
-                        {infoExpanded.map((fieldset, index) => (
-                            <fieldset className="border-none mb-2 w-full max-w-lg" key={index}>
-                                <legend className="bg-transparent font-bold text-secondary">{fieldset.legend}</legend>
-                                <dl className="grid grid-cols-2 text-sm border border-primary bg-primary rounded">
-                                    {fieldset.items.map((item, itemIndex) => (
-                                        <Fragment key={itemIndex}>
-                                            <dt className="p-2 border-t border-primary first:border-t-0">
-                                                {item.label}
-                                            </dt>
-                                            <dd className="p-2 border-t border-primary text-right [&:nth-child(2)]:border-t-0 font-medium">
-                                                {item.url ? <Link to={item.url}>{item.value}</Link> : item.value}
-                                            </dd>
-                                        </Fragment>
-                                    ))}
-                                </dl>
-                            </fieldset>
-                        ))}
-
-                        <div className="mb-4">
-                            <CallToAction type="secondary" size="xs" onClick={handleMoreInfo}>
-                                More info
-                            </CallToAction>
-                        </div>
-
-                        <p className="text-sm text-secondary">
-                            <Link
-                                to="https://github.com/posthog/posthog.com"
-                                state={{ newWindow: true }}
-                                className="underline"
-                            >
-                                Source code
-                            </Link>
-                        </p>
-
-                        <p className="text-xs text-secondary">&copy;2025 PostHog Incorporated</p>
-                    </div>
-                </ScrollArea>
+                    </ScrollArea>
+                </div>
             </Wizard>
         </>
     )
