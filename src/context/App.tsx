@@ -154,6 +154,19 @@ const appSettings = {
             fixed: true,
         },
     },
+    '/credits': {
+        size: {
+            min: {
+                width: 300,
+                height: 680,
+            },
+            max: {
+                width: 300,
+                height: 680,
+            },
+            fixed: true,
+        },
+    },
     '/demo': {
         size: {
             min: {

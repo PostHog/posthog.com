@@ -11,10 +11,12 @@ export default function Wizard({ children, leftNavigation, rightNavigation }: Wi
     return (
         <div data-scheme="primary" className="w-full h-full bg-primary flex flex-col">
             {children}
-            <div className="border-t border-primary w-full flex items-center justify-between px-3 py-2 bg-accent gap-2">
-                <span>{leftNavigation}</span>
-                <span>{rightNavigation}</span>
-            </div>
+            {leftNavigation || rightNavigation && (
+                <div className="border-t border-primary w-full flex items-center justify-between px-3 py-2 bg-accent gap-2">
+                    <span>{leftNavigation}</span>
+                    <span>{rightNavigation}</span>
+                </div>
+            )}
         </div>
     )
 }
