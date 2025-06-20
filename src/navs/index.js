@@ -2461,6 +2461,10 @@ export const docsMenu = {
                             url: '/docs/migrate',
                         },
                         {
+                            name: 'Managed migrations',
+                            url: '/docs/migrate/managed-migrations',
+                        },
+                        {
                             name: 'Migrate to PostHog Cloud',
                             url: '/docs/migrate/migrate-to-cloud',
                         },
