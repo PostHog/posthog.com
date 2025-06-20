@@ -37,7 +37,7 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 | | Marketing | 0 |
 | Company type | Private | 3 |
 | Founded year | 2015-2022 | 3 |
-| Country | Not in: Australia, Austria, Belgium, Brazil, Canada,<br>Denmark, Estonia, Finland, France, Germany, Iceland,<br>Ireland, Israel, Italy, Japan, Latvia, Lithuania,<br>Netherlands, New Zealand, Norway, Portugal, Singapore,<br>South Korea, Spain, Sweden, Switzerland, UK, US | -5 |
+| Country | Not in: Australia, Austria, Belgium, Brazil, Canada, Denmark, Estonia, Finland, France, Germany, Iceland, Ireland, Israel, Italy, Japan, Latvia, Lithuania, Netherlands, New Zealand, Norway, Portugal, Singapore, South Korea, Spain, Sweden, Switzerland, UK, US | -5 |
 | Email provider | Non-work email | -10 |
 
 
