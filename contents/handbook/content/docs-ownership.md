@@ -11,7 +11,7 @@ showTitle: true
 - Clarifying documentation where needed based on support tickets
 - Ensuring public betas have docs that are linked to from the feature preview menu
 
-Read [writing docs as an engineer](/handbook/engineering/writing-docs for more on the role of product engineers here – it's really important! 
+Read [writing docs as an engineer](/handbook/engineering/writing-docs) – it's really important! 
 
 **The content team** is responsible for improving the docs. This means:
 
@@ -47,6 +47,8 @@ Some notes and tips:
 - It's up to individuals to decide how to spend their two days. You can spend it shipping one or two things, or shipping a dozen small improvements. The only requirement is you should work on things you can ship in those two days. Work should not carry over into other days, or future docs hero stints.
 
 - Feel free to create issues about problems you find that are too big to deal with in a couple of days, but **most of your time should be spent on shipping** updates, not triaging requests.
+
+- Tutorials count as well.
 
 ### Sources for inspiration
 
