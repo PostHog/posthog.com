@@ -87,17 +87,19 @@ const Search = ({
                             autoFocus
                             value={query}
                         />
-                        <button
-                            className={`absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity ${
-                                showFilters ? 'opacity-100' : 'opacity-70'
-                            }`}
-                            onClick={(e) => {
-                                e.stopPropagation()
-                                setShowFilters(!showFilters)
-                            }}
-                        >
-                            <IconFilter className="size-4" />
-                        </button>
+                        {!hideFilters && (
+                            <button
+                                className={`absolute right-4 top-1/2 -translate-y-1/2 hover:opacity-100 transition-opacity ${
+                                    showFilters ? 'opacity-100' : 'opacity-70'
+                                }`}
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setShowFilters(!showFilters)
+                                }}
+                            >
+                                <IconFilter className="size-4" />
+                            </button>
+                        )}
                     </div>
                     {!hideFilters && showFilters && <Filters isRefinedClassName={isRefinedClassName} />}
 
