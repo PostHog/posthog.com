@@ -27,30 +27,26 @@ We've previously assigned ownership to areas of the product and docs to individu
 
 You can view what we're working on right now by:
 
-1. Reading our goals on the content team page
+1. Reading our goals on the [content team page](/teams/content)
 2. Reading issues on our [team GitHub project board](https://github.com/orgs/PostHog/projects/107/views/1)
 
 You can share ideas / requests for new docs in the #content-docs-ideas Slack channel, or by creating an issue on the posthog.com repo.
 
 As ever, though, PRs > issues. ;) 
 
-
 ## Docs hero
 
 The docs hero role exists to ensure we continue to ship ongoing improvements to the docs outside of specific projects we're working on.
 
-Each week, the assigned docs hero will set aside their two days to ship fixes and improvements to the docs anywhere they can find them.
+Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them.
 
 Some notes and tips: 
 
+- Four people (Edwin, Ian, Lior and Vincent) are currently in the rotation. This means two days in every 20 working days will be dedicated to the docs gardener role – 10% of your time. This will reduce as we add more people to the team.
 
-Four people (Edwin, Ian, Lior and Vincent) are currently in the rotation. This means two days in every 20 working days will be dedicated to the docs gardener role – 10% of your time. This will reduce as we add more people to the team.
+- It's up to individuals to decide how to spend their two days. You can spend it shipping one or two things, or shipping a dozen small improvements. The only requirement is you should work on things you can ship in those two days. Work should not carry over into other days, or future docs hero stints.
 
-
-It's up to individuals to decide how to spend their two days. You can spend it shipping one or two things, or shipping a dozen small improvements. The only requirement is you should work on things you can ship in those two days. Work should not carry over into other days, or future docs hero stints.
-
-
-Feel free to create issues about problems you find that are too big to deal with in a couple of days, but **most of your time should be spent on shipping** updates, not triaging requests.
+- Feel free to create issues about problems you find that are too big to deal with in a couple of days, but **most of your time should be spent on shipping** updates, not triaging requests.
 
 ### Sources for inspiration
 
