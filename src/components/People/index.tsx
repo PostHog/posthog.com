@@ -22,6 +22,8 @@ import { TreeMenu } from 'components/TreeMenu'
 import { companyMenu } from '../../navs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Stickers from 'components/Stickers/Index'
+import { Toolbar } from 'radix-ui'
+import Tooltip from 'components/RadixUI/Tooltip'
 
 export const TeamMember = (props: any) => {
     const {
@@ -37,6 +39,7 @@ export const TeamMember = (props: any) => {
         setActiveProfile,
         teams,
         teamMiniCrestMap,
+        pineappleOnPizza,
     } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const { fontSize, textRef } = useFitText(name)
@@ -69,7 +72,7 @@ export const TeamMember = (props: any) => {
                 </div>
 
                 <div className="pl-2 -mt-5">
-                    <div className="text-sm">
+                    <div className="text-sm pb-2">
                         {teamData.length > 0 ? (
                             <div className="flex flex-wrap gap-2 items-center">
                                 {teamData.map((team: any) => {
@@ -98,9 +101,32 @@ export const TeamMember = (props: any) => {
                             'No team assigned'
                         )}
                     </div>
-                    <div>
-                        <Stickers name="StickerTrophy" label="5" />
-                        <div>Years</div>
+                    <div className="flex gap-1">
+                        <div>
+                            <Tooltip trigger={<Stickers name="StickerTrophy" label="5" />}>Here since 2019</Tooltip>
+                        </div>
+                        <div>
+                            <Tooltip
+                                trigger={
+                                    <Stickers
+                                        name={
+                                            pineappleOnPizza === true
+                                                ? 'StickerPineappleYes'
+                                                : pineappleOnPizza === false
+                                                ? 'StickerPineappleNo'
+                                                : 'StickerPineappleUnknown'
+                                        }
+                                    />
+                                }
+                            >
+                                {pineappleOnPizza === true
+                                    ? 'Loves'
+                                    : pineappleOnPizza === false
+                                    ? 'Hates'
+                                    : 'Is undecided on'}{' '}
+                                pineapple on pizza
+                            </Tooltip>
+                        </div>
                     </div>
                 </div>
 
