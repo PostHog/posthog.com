@@ -885,6 +885,10 @@
         { "source": "/docs/surveys/new", "destination": "/docs/surveys/creating-surveys" },
         { "source": "/docs/surveys/targeting", "destination": "/docs/surveys/creating-surveys" },
         { "source": "/docs/surveys/events", "destination": "/docs/surveys/implementing-custom-surveys" },
+        {
+            "source": "/docs/error-tracking/filter-and-search-issues",
+            "destination": "/docs/error-tracking/managing-issues"
+        },
         { "source": "/blog/how-we-do-hiring-and-hr-at-posthog", "destination": "/handbook/people/hiring-process" },
         { "source": "/api", "destination": "/docs/api" },
         { "source": "/docs/data/subscriptions", "destination": "/docs/product-analytics/subscriptions" },
