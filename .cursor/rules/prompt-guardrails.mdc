@@ -1,0 +1,12 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# AI code editing, prompt guardrails, and syntax
+
+- Always check for any code changes in files you've edited before making further edits. I often make changes to files in between prompts and don't want my changes to get overwritten.
+- Assume user may have manually changed the file mid-flow
+- Always use double quotes (unless something different is necessated by content)
+- Always use sentence casing, even when writing internal documentation in Markdown
+- Add a `README.md` file for large, structural changes or new features
