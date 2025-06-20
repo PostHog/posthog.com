@@ -1,6 +1,4 @@
-### Django middleware
-
-The Python SDK provides Django middleware that automatically wraps all requests with PostHog contexts. This middleware extracts session and user information from request headers and tags all events captured during the request with relevant metadata.
+The Python SDK provides a Django contexts middleware that automatically wraps all requests with [contexts](/docs/libraries/python#contexts). This middleware extracts session and user information from request headers and tags all events captured during the request with relevant metadata.
 
 #### Basic setup
 

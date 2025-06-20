@@ -1,5 +1,3 @@
-### Contexts
-
 The Python SDK exposes nested contexts for managing state that's shared across events. Each context carries tags and can be associated with a [session ID](/docs/data/sessions) and [distinct ID](/docs/getting-started/identify-users). 
 
 When an event (including exceptions) is captured in a context, the event properties include the context tags. If the context has been associated with a session or distinct ID, the event will be too. This is useful for adding properties to multiple events during a single user's interaction with your product.
@@ -45,21 +43,6 @@ with posthog.new_context(fresh=True):
 
 > **Note:** Distinct IDs, session IDs, and properties passed directly to calls to `capture` and related functions override context tags in the final event properties.
 
-### Exception capture
-
-By default exceptions raised within a context are captured   and available in the [error tracking](https://posthog.com/docs/error-tracking) dashboard. You can override this behavior by passing `capture_exceptions=False` to `new_context`:
-
-```python
-with posthog.new_context(capture_exceptions=False):
-    posthog.tag("transaction_id", "abc123")
-    posthog.tag("some_arbitrary_value", {"tags": "can be dicts"})
-
-    # This event will be captured with the tags set above
-    posthog.capture("order_processed")
-    # This exception will not be captured
-    raise Exception("Order processing failed")
-```
-
 ### Decorating functions
 
 The SDK exposes a function decorator. It takes the same arguments as `new_context` and provides a handy way to mark a whole function as being in a new context. For example:
@@ -78,3 +61,18 @@ def process_order(order_id):
 In current versions of the SDK, the module level `capture` and related functions require a `distinct_id` to be passed explicitly, and so will never use the context `distinct_id`. Exception autocapture uses the context `distinct_id` if available, as it does not require a `distinct_id` to be passed explicitly. 
 
 Future versions of the SDK will relax this constraint, and it is recommended to call `posthog.identify_context` as early as possible.
+
+### Exception capture
+
+By default exceptions raised within a context are captured and available in the [error tracking](/docs/error-tracking) dashboard. You can override this behavior by passing `capture_exceptions=False` to `new_context`:
+
+```python
+with posthog.new_context(capture_exceptions=False):
+    posthog.tag("transaction_id", "abc123")
+    posthog.tag("some_arbitrary_value", {"tags": "can be dicts"})
+
+    # This event will be captured with the tags set above
+    posthog.capture("order_processed")
+    # This exception will not be captured
+    raise Exception("Order processing failed")
+```
