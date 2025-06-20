@@ -36,9 +36,9 @@ As ever, though, PRs > issues. ;)
 
 ## Docs hero
 
-The docs hero role exists to ensure we continue to ship ongoing improvements to the docs outside of specific projects we're working on.
-
 Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them.
+
+The docs hero role exists to ensure we continue to ship ongoing improvements to the docs outside of specific projects we're working on.
 
 Some notes and tips: 
 
