@@ -14,7 +14,6 @@ import TeamStat, { pineappleOnPizzaStat } from './TeamStat'
 import { StaticImage } from 'gatsby-plugin-image'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import ReactMarkdown from 'react-markdown'
-import rehypeRaw from 'rehype-raw'
 import SideModal from 'components/Modal/SideModal'
 import Profile from 'components/Team/Profile'
 import ScrollArea from 'components/RadixUI/ScrollArea'
@@ -37,13 +36,13 @@ export const TeamMember = (props: any) => {
         biography,
         setActiveProfile,
         teams,
+        teamMiniCrestMap,
     } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
     const { fontSize, textRef } = useFitText(name)
 
-    // Extract team names
+    // Extract team data
     const teamData = teams?.data || []
-    const teamNames = teamData.map((team: any) => team.attributes.name).join(', ')
 
     return (
         <>
@@ -70,7 +69,35 @@ export const TeamMember = (props: any) => {
                 </div>
 
                 <div className="pl-2 -mt-5">
-                    <div className="text-sm">{teamNames || 'No team assigned'}</div>
+                    <div className="text-sm">
+                        {teamData.length > 0 ? (
+                            <div className="flex flex-wrap gap-2 items-center">
+                                {teamData.map((team: any) => {
+                                    const teamName = team.attributes.name
+                                    const miniCrest = teamMiniCrestMap[teamName]
+                                    const gatsbyImageMiniCrest = getImage(miniCrest)
+                                    return (
+                                        <Link
+                                            key={team.id}
+                                            to={`/teams/${team.attributes.slug}`}
+                                            className="flex items-center gap-1 text-sm hover:text-primary"
+                                        >
+                                            {gatsbyImageMiniCrest && (
+                                                <GatsbyImage
+                                                    image={gatsbyImageMiniCrest}
+                                                    alt={`${teamName} Team`}
+                                                    className="size-5"
+                                                />
+                                            )}
+                                            <span>{teamName}</span>
+                                        </Link>
+                                    )
+                                })}
+                            </div>
+                        ) : (
+                            'No team assigned'
+                        )}
+                    </div>
                     <div>
                         <Stickers name="StickerTrophy" label="5" />
                         <div>Years</div>
@@ -138,9 +165,7 @@ export const TeamMember = (props: any) => {
                             />
                         </figure>
                         <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
-                            <ReactMarkdown rehypePlugins={[rehypeRaw]} className="text-sm bio-preview">
-                                {biography}
-                            </ReactMarkdown>
+                            <ReactMarkdown className="text-sm bio-preview">{biography}</ReactMarkdown>
                             <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
                         </div>
                     </div>
@@ -153,11 +178,18 @@ export const TeamMember = (props: any) => {
 export default function People() {
     const {
         team: { teamMembers },
+        allTeams,
     } = useStaticQuery(teamQuery)
 
-    const [activeProfile, setActiveProfile] = useState(false)
+    const [activeProfile, setActiveProfile] = useState<any>(null)
 
     const teamSize = teamMembers.length - 1
+
+    // Create a map of team names to miniCrest data for quick lookup
+    const teamMiniCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
+        acc[team.name] = team.miniCrest
+        return acc
+    }, {})
 
     // Some Stats were used as fallback until the actual data is added to the GraphQL Server
     const teamStats = [
@@ -189,8 +221,8 @@ export default function People() {
         >
             <div data-scheme="primary" className="bg-primary border-t border-primary h-full">
                 <SEO title="Team - PostHog" />
-                <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
-                    <Profile profile={{ ...activeProfile }} />
+                <SideModal open={!!activeProfile} setOpen={() => setActiveProfile(null)}>
+                    {activeProfile && <Profile profile={activeProfile} />}
                 </SideModal>
                 <ScrollArea className="h-full">
                     <h2 className="text-4xl">People</h2>
@@ -249,7 +281,14 @@ export default function People() {
                     </aside>
                     <ul className="list-none m-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @7xl:grid-cols-3 gap-x-6 gap-y-12 max-w-screen-2xl">
                         {teamMembers.map((teamMember: any, index: number) => {
-                            return <TeamMember key={index} {...teamMember} setActiveProfile={setActiveProfile} />
+                            return (
+                                <TeamMember
+                                    key={index}
+                                    {...teamMember}
+                                    setActiveProfile={setActiveProfile}
+                                    teamMiniCrestMap={teamMiniCrestMap}
+                                />
+                            )
                         })}
                     </ul>
                 </ScrollArea>
@@ -283,8 +322,18 @@ export const teamQuery = graphql`
                         id
                         attributes {
                             name
+                            slug
                         }
                     }
+                }
+            }
+        }
+        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            nodes {
+                id
+                name
+                miniCrest {
+                    gatsbyImageData(width: 20, height: 20)
                 }
             }
         }
