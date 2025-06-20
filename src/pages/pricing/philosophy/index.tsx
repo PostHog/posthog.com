@@ -26,9 +26,6 @@ const PricingPhilosophy = (): JSX.Element => {
                         <strong>Experience the product before paying for it.</strong> 
                     </li>
                     <li>
-                        <strong>Pay us when you are ready, with as few hurdles as possible.</strong> 
-                    </li>
-                    <li>
                         <strong>Transparently, pay for what you use.</strong> This means paying per product, and also 
                         only paying for what you use of each product (<Link href="/templates/posthog-billable-usage">You 
                         can always monitor your usage yourself.</Link>).
