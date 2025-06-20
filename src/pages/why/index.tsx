@@ -54,7 +54,10 @@ function Slide({ slide }: { slide: any }) {
         return (
             <Fragment>
                 <div className="pt-4 px-8 flex flex-col items-center w-full mb-8">
-                    {slide.image}
+                    <div className="relative">
+                        <div className="absolute inset-5 bg-accent rounded-full" />
+                        {slide.image}
+                    </div>
                     <h2 className="text-xl font-bold mb-1" dangerouslySetInnerHTML={{ __html: slide.title }} />
                     <p
                         className="text-[15px] text-secondary text-center text-balance"
@@ -67,7 +70,10 @@ function Slide({ slide }: { slide: any }) {
     }
     return (
         <div className="pt-4 px-8 pb-4 flex flex-col items-center w-full mb-8">
-            {slide.image || 'placeholder'}
+            <div className="relative">
+                <div className="absolute inset-5 bg-accent rounded-full" />
+                {slide.image}
+            </div>
             <h2 className="text-xl font-bold mb-1" dangerouslySetInnerHTML={{ __html: slide.title }} />
             <p
                 className="text-[15px] text-secondary text-center mb-10"
