@@ -3410,16 +3410,16 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Monitor errors',
+                    name: 'Monitor issues',
                     url: '/docs/error-tracking/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'Filter and search',
-                    url: '/docs/error-tracking/filter-and-search-issues',
-                    icon: 'IconSearch',
+                    name: 'Manage issues',
+                    url: '/docs/error-tracking/managing-issues',
+                    icon: 'IconWrench',
                     color: 'green',
                 },
                 {
@@ -3432,7 +3432,7 @@ export const docsMenu = {
                     name: 'Cutting costs',
                     url: '/docs/error-tracking/cutting-costs',
                     icon: 'IconPiggyBank',
-                    color: 'red',
+                    color: 'salmon',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
