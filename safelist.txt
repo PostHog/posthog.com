@@ -370,6 +370,7 @@ stroke-gold-dark
 stroke-gradient-to-tr
 stroke-gray
 stroke-green
+stroke-green-dark
 stroke-green/10
 stroke-fuchsia
 stroke-fuchsia-dark
