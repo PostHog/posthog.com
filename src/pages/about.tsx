@@ -16,6 +16,7 @@ import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { PRODUCT_COUNT } from '../constants/index'
 import { James, Plus, Tim } from 'components/Signatures'
+import SEO from 'components/seo'
 
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 
@@ -38,7 +39,6 @@ export default function About({ data }: { data: { mdx: { body: string } } }) {
         James,
         Tim,
         Plus,
-        Link,
         CloudinaryImage,
         ProductCount,
         inlineCode: InlineCode,
@@ -56,11 +56,14 @@ export default function About({ data }: { data: { mdx: { body: string } } }) {
     }
 
     return (
-        <ReaderView
-            body={{ type: 'mdx', content: data.mdx.body }}
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-            mdxComponents={components}
-        />
+        <>
+            <SEO title="About PostHog" description="All about PostHog" image={`/images/og/product-analytics.jpg`} />
+            <ReaderView
+                body={{ type: 'mdx', content: data.mdx.body }}
+                leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+                mdxComponents={components}
+            />
+        </>
     )
 }
 

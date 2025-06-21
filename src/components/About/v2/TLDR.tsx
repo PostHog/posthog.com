@@ -3,7 +3,7 @@ import Link from 'components/Link'
 
 export const TLDR = ({ children }: { children: React.ReactNode }) => {
     return (
-        <div className="max-w-sm mx-auto border-2 border-primary px-4 py-3 mt-2 mb-6">
+        <div className="max-w-sm mx-auto border-2 border-primary px-4 py-3 mt-4 mb-6">
             <div className="flex gap-2 items-center mb-2">
                 <div className="w-10">
                     <div className="size-10 rounded-full bg-accent" />
@@ -18,7 +18,7 @@ export const TLDR = ({ children }: { children: React.ReactNode }) => {
                 <Link
                     to="https://www.cautiousoptimism.news/p/posthog-vs-the-industry"
                     externalNoIcon
-                    className="!text-primary underline"
+                    className="!text-primary underline !font-bold"
                 >
                     PostHog vs. The Industry
                 </Link>

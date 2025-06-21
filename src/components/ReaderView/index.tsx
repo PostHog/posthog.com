@@ -422,7 +422,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                                 : undefined
                         }
                     >
-                        <div className="relative">
+                        <div className="relative overflow-x-hidden">
                             <div
                                 ref={contentRef}
                                 className={`relative p-4 mx-auto transition-all ${
