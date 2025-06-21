@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik'
 import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../../../context/App'
@@ -8,23 +8,49 @@ import Wizard from 'components/Wizard'
 import Link from 'components/Link'
 
 import SecurityHog from '../../../../images/security-hog.png'
+import { IconSpinner } from '@posthog/icons'
 
-const Input = ({ label, name, type = 'text' }: { label: string; name: string; type?: string }) => {
+const Input = ({
+    label,
+    type = 'text',
+    touched,
+    error,
+    ...props
+}: {
+    label: string
+    type?: string
+    touched: boolean
+    error?: string
+    [key: string]: any
+}) => {
     return (
         <div className="flex items-center space-x-2">
-            <label htmlFor={name} className="w-[90px] font-semibold text-sm">
+            <label htmlFor={props.name} className="w-[90px] font-semibold text-sm">
                 {label}
             </label>
-            <input className="rounded-md border !border-border p-1" type={type} id={name} name={name} />
+            <div>
+                <input
+                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
+                    type={type}
+                    id={props.name}
+                    placeholder={label}
+                    {...props}
+                />
+            </div>
         </div>
     )
 }
 
+const errorMessages: Record<string, string> = {
+    'Invalid identifier or password': 'Invalid email or password',
+}
+
 const SignInForm: React.FC = () => {
     const { login } = useUser()
-    const { setWindowTitle } = useApp()
+    const { setWindowTitle, closeWindow } = useApp()
     const { appWindow } = useWindow()
-    const { handleSubmit, submitForm } = useFormik({
+    const [errorMessage, setErrorMessage] = useState<string | null>(null)
+    const { handleSubmit, submitForm, touched, errors, getFieldProps, isSubmitting } = useFormik({
         initialValues: {
             email: '',
             password: '',
@@ -42,10 +68,18 @@ const SignInForm: React.FC = () => {
             return errors
         },
         onSubmit: async (values) => {
-            await login({
+            setErrorMessage('')
+            const user = await login({
                 email: values.email,
                 password: values.password,
             })
+            if (!user) {
+                setErrorMessage('There was an error signing in. Please try again.')
+            } else if ('error' in user) {
+                setErrorMessage(errorMessages[user?.error] || user?.error)
+            } else {
+                closeWindow(appWindow)
+            }
         },
     })
 
@@ -59,9 +93,19 @@ const SignInForm: React.FC = () => {
         <Wizard
             leftNavigation={<div className="text-sm">Forgot password?</div>}
             rightNavigation={
-                <CallToAction type="primary" size="sm" onClick={submitForm}>
-                    Login
-                </CallToAction>
+                <div className="flex items-center space-x-2">
+                    {errorMessage && <p className="text-red text-sm m-0 font-bold">{errorMessage}</p>}
+
+                    <CallToAction
+                        disabled={isSubmitting}
+                        type="primary"
+                        size="sm"
+                        onClick={submitForm}
+                        className="flex-shrink-0"
+                    >
+                        {isSubmitting ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Login'}
+                    </CallToAction>
+                </div>
             }
         >
             <div className="bg-accent flex gap-6 px-8 py-6">
@@ -73,10 +117,22 @@ const SignInForm: React.FC = () => {
                         Enter your email and password to log on to PostHog.com
                     </h3>
                     <form onSubmit={handleSubmit} className="space-y-2 mb-4">
-                        <Input label="Email" name="email" type="email" />
-                        <Input label="Password" name="password" type="password" />
+                        <Input
+                            label="Email"
+                            type="email"
+                            touched={!!touched.email}
+                            error={errors.email}
+                            {...getFieldProps('email')}
+                        />
+                        <Input
+                            label="Password"
+                            type="password"
+                            touched={!!touched.password}
+                            error={errors.password}
+                            {...getFieldProps('password')}
+                        />
+                        <button type="submit" className="hidden" />
                     </form>
-
                     <div className="text-sm">
                         No account yet?{' '}
                         <Link to="/signup" state={{ newWindow: true }}>
