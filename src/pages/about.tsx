@@ -4,6 +4,7 @@ import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { companyMenu } from '../navs'
 import { YC } from 'components/About/v2/YC'
+import { TLDR } from 'components/About/v2/TLDR'
 import Logo from 'components/Logo'
 import { shortcodes } from '../mdxGlobalComponents'
 import { Blockquote } from 'components/BlockQuote'
@@ -12,6 +13,11 @@ import { Heading } from 'components/Heading'
 import { InlineCode } from 'components/InlineCode'
 import { ZoomImage } from 'components/ZoomImage'
 import Link from 'components/Link'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { PRODUCT_COUNT } from '../constants/index'
+import { James, Plus, Tim } from 'components/Signatures'
+
+const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 
 const HappyHog = () => (
     <img
@@ -28,6 +34,13 @@ export default function About({ data }: { data: { mdx: { body: string } } }) {
         HappyHog,
         Logo: () => <Logo noText className="inline-block" />,
         YC,
+        TLDR,
+        James,
+        Tim,
+        Plus,
+        Link,
+        CloudinaryImage,
+        ProductCount,
         inlineCode: InlineCode,
         blockquote: Blockquote,
         pre: MdxCodeBlock,

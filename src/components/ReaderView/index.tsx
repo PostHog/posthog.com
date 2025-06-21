@@ -158,7 +158,7 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
                     onValueChange={onValueChange}
                 />
             </div>
-            <OSButton onClick={() => onValueChange([1])} variant="ghost" icon={<IconRefresh className="size-5" />} />
+            <OSButton onClick={() => onValueChange([1.3])} variant="ghost" icon={<IconRefresh className="size-5" />} />
         </div>
     )
 }
@@ -426,7 +426,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                             <div
                                 ref={contentRef}
                                 className={`relative p-4 mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-xl'
+                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
                                 }`}
                             >
                                 {body.featuredImage && (
@@ -443,7 +443,8 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                                     inline table of contents
                                 </div>
                                 {body.type === 'mdx' ? (
-                                    <div className={'article-content'}>
+                                    <div className={'@container article-content'}>
+                                        <DebugContainerQuery />
                                         <MDXProvider components={mdxComponents}>
                                             <MDXRenderer>{body.content}</MDXRenderer>
                                         </MDXProvider>
