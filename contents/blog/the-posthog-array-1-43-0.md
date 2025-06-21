@@ -77,8 +77,8 @@ A regular complaint used to be that, if you made a mistake while making an exper
 
 Finally, as a bonus, you can now have up to nine variants in an experiment, instead of the usual three!
 
-### Improved: Browsing recordings and creating playlists
-Following up on our new playlists feature, we've improve the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a playlists of pinned recordings is much faster too!
+### Improved: Browsing recordings and creating collections
+Following up on our new collections feature, we've improve the recordings UX to make browsing and pinning recordings as quick and intuitive as possible. You can now scroll the list of recordings independently of the player and creating a collections of pinned recordings is much faster too!
 
 ### Improved: Recording playback controls 
 We've revamped the recording seekbar to make it easier to find user activity at a glance, to show where tracked events occur and display what time you're scrubbing to.
