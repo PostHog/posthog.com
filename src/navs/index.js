@@ -1801,6 +1801,10 @@ export const docsMenu = {
                                     name: 'Persistence',
                                     url: '/docs/libraries/js/persistence',
                                 },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-js',
+                                },
                             ],
                         },
                         {
