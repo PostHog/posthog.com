@@ -30,7 +30,7 @@ export default function Header({
     loading: boolean
 }): JSX.Element {
     return (
-        <div className="mb-6">
+        <div className="my-6">
             <div className="flex flex-col md:flex-row space-x-4 items-center">
                 {loading ? (
                     <div className="size-[300px] bg-accent dark:bg-accent-dark rounded" />

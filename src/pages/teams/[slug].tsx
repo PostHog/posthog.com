@@ -1,11 +1,10 @@
 import Team from 'components/Team'
 import { companyMenu } from '../../navs'
-import Layout from 'components/Layout'
 import React from 'react'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
-import HeaderBar from 'components/OSChrome/HeaderBar'
-import { Select } from 'components/RadixUI/Select'
 import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
 
 type TeamPageProps = {
     params: {
@@ -106,30 +105,16 @@ export default function TeamPage(props: TeamPageProps) {
     ]
 
     return (
-        <div className="h-full flex flex-col">
-            <div className="flex-shrink-0">
-                <HeaderBar showHome showBack showForward showSearch />
-            </div>
-            <div data-scheme="secondary" className="bg-primary px-2">
-            <Select
-                groups={selectOptions}
-                placeholder="Select a page"
-                ariaLabel="Select a page"
-                defaultValue={currentPath}
-                onValueChange={(value) => navigate(`/${value}`)}
-                className="w-full"
-                dataScheme="primary"
+        <ReaderView
+            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+        >
+            <Team
+                emojis={team?.emojis}
+                roadmaps={team?.roadmaps}
+                objectives={objectives}
+                body={body}
+                slug={slug?.split('/').pop() || ''}
             />
-            </div>
-            <div data-scheme="secondary" className="bg-primary flex-grow min-h-0">
-                <Team
-                    emojis={team?.emojis}
-                    roadmaps={team?.roadmaps}
-                    objectives={objectives}
-                    body={body}
-                    slug={slug?.split('/').pop() || ''}
-                />
-            </div>
-        </div>
+        </ReaderView>
     )
 }

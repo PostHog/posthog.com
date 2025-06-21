@@ -333,17 +333,6 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             label: 'Overview',
             content: (
                 <>
-                    <Header
-                        loading={loading}
-                        teamName={values.name}
-                        description={description}
-                        teamImage={teamImage}
-                        hasInProgress={hasInProgress}
-                        handleChange={handleChange}
-                        values={values}
-                        editing={editing}
-                        setFieldValue={setFieldValue}
-                    />
                     <Fieldset legend="Members">
                         <div className="@container flex-1">
                             <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
@@ -555,9 +544,22 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
                 {activeProfile && <Profile profile={{ ...activeProfile }} />}
             </SideModal>
+
+            <Header
+                loading={loading}
+                teamName={values.name}
+                description={description}
+                teamImage={teamImage}
+                hasInProgress={hasInProgress}
+                handleChange={handleChange}
+                values={values}
+                editing={editing}
+                setFieldValue={setFieldValue}
+            />
+
             <OSTabs tabs={tabs} triggerDataScheme="primary" defaultValue="overview">
                 {isModerator && (
-                    <div className="flex justify-end space-x-2 absolute bottom-4 right-4 z-50">
+                    <div className="flex justify-end space-x-2 absolute top-4 right-4 z-50">
                         <CallToAction
                             disabled={saving || !!errors.name}
                             size="sm"
