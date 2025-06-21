@@ -240,7 +240,7 @@ const comparison = [
             LogRocket: true,
             Matomo: false,
             FullStory: false,
-            PostHog: '<a href="https://github.com/PostHog/posthog/issues/13269">In beta</a>',
+            PostHog: true,
         },
     },
     {
@@ -250,7 +250,7 @@ const comparison = [
             LogRocket: false,
             Matomo: false,
             FullStory: false,
-            PostHog: '<a href="https://github.com/PostHog/posthog-flutter/issues/69">In beta</a>',
+            PostHog: true,
         },
     },
     {

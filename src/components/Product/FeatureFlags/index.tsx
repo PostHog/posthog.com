@@ -264,7 +264,7 @@ const comparison = [
             Optimizely: true,
             Flagsmith: true,
             GrowthBook: true,
-            PostHog: true,
+            PostHog: `Billed separately`,
         },
     },
     {
