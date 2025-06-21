@@ -1,7 +1,6 @@
-import { graphql, useStaticQuery } from "gatsby"
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
-import slugify from "slugify"
-import React from "react"
+import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
+import React from 'react'
 
 export function useSmallTeamsMenuItems() {
     const { allTeams } = useStaticQuery(graphql`
@@ -10,6 +9,7 @@ export function useSmallTeamsMenuItems() {
                 nodes {
                     id
                     name
+                    slug
                     miniCrest {
                         gatsbyImageData(width: 64, height: 64)
                     }
@@ -23,19 +23,21 @@ export function useSmallTeamsMenuItems() {
 
     return [
         {
-            type: "item" as const,
-            label: "All Teams",
-            link: "/teams",
+            type: 'item' as const,
+            label: 'All teams',
+            link: '/teams',
         },
-        { type: "separator" as const },
-        ...sortedTeams.map(({ id, name, miniCrest }: { id: string; name: string; miniCrest: any }) => {
-            const image = getImage(miniCrest)
-            return {
-                type: "item" as const,
-                label: `${name} Team`,
-                link: `/teams/${slugify(name, { lower: true })}`,
-                icon: image ? <GatsbyImage image={image} alt={`${name} Team`} className="size-4" /> : undefined,
+        { type: 'separator' as const },
+        ...sortedTeams.map(
+            ({ id, name, slug, miniCrest }: { id: string; name: string; slug: string; miniCrest: any }) => {
+                const image = getImage(miniCrest)
+                return {
+                    type: 'item' as const,
+                    label: `${name} Team`,
+                    link: `/teams/${slug}`,
+                    icon: image ? <GatsbyImage image={image} alt={`${name} Team`} className="size-4" /> : undefined,
+                }
             }
-        }),
+        ),
     ]
-} 
+}
