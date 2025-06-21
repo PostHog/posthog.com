@@ -5,8 +5,8 @@ export const TLDR = ({ children }: { children: React.ReactNode }) => {
     return (
         <div className="max-w-sm mx-auto border-2 border-primary px-4 py-3 mt-2 mb-6">
             <div className="flex gap-2 items-center mb-2">
-                <div className="w-12">
-                    <div className="size-12 rounded-full bg-accent" />
+                <div className="w-10">
+                    <div className="size-10 rounded-full bg-accent" />
                 </div>
                 <div className="flex-1 text-sm flex flex-col">
                     <strong>TLDR Founders Newsletter</strong>
