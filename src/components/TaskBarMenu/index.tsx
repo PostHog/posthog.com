@@ -62,7 +62,7 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         addWindow(
-            <ScrollArea location={{ pathname: `community-auth` }} key="community-auth">
+            <ScrollArea location={{ pathname: `community-auth` }} key="community-auth" newWindow>
                 <SignIn />
             </ScrollArea>
         )
