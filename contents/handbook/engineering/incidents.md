@@ -8,17 +8,18 @@ Incidents are going to happen.
 
 ## When to raise an incident
 
-**When in doubt, raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong.
+> **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not. 
 
-To declare an incident, type `/incident` anywhere in Slack. This will create a new channel and send updates.
+To declare an incident, type `/incident` anywhere in Slack. This creates a new dedicated channel for the incident and add a few stakeholders. It will  trigger an alert in the #incidents channel so everyone else can be aware. Declaring an incident **doesn't** trigger any external notifications. 
 
-Anyone can declare an incident, including non-engineers. If in doubt, check with your nearest engineer.
+Once an incident is raised an automatic workflow begins that will help you summarize the issue and escalate it appropriately. 
 
 Some things that should definitely be an incident
 
 - `us.posthog.com` (PostHog Cloud US) or `eu.posthog.com` (PostHog Cloud EU) being completely unavailable (not just for you)
 - No insights can be created
 - Feature flags are not being returned at all, or `/flags` is down
+- Any feature is 'down' and users are unable to access their existing data through it (this can be a bug and doesn't have to be an infra incident)
 - Various alerts defined as critical, such as disk space full, OOM or >5 minute ingestion lag
 
 Things that _shouldn’t_ be an incident
@@ -107,7 +108,6 @@ Significant incidents such as the app being partially or fully non-operational, 
 When handling a security incident, please align with the incident responder team in the incident slack channel about public communication of
 security issues. E.g. it could not make sense to immediately communicate an attack publicly, as this could make the attacker aware that we are investigating already. This could it make harder for us to stop this attack for good.
 If an early communication is outweighing those kind of downsides or helps our customers if affected, then do it!
-
 
 Our [status page](https://status.posthog.com/) is the central hub for all incident communication. You can update it easily using the `/incident statuspage` (`/inc sp`) Slack command.
 
