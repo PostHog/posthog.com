@@ -20,7 +20,7 @@ export const TeamMemberLink = ({
     children,
 }: {
     firstName: string
-    lastName: string
+    lastName?: string
     squeakId?: string
     avatar?: { formats: { thumbnail: { url: string } } }
     companyRole?: string
