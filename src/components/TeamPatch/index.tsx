@@ -407,6 +407,7 @@ export default function TeamPatch({
                                 href="curved-name"
                                 startOffset="26%"
                                 name={name}
+                                textSize={fontSize}
                             />
                         </g>
                     )}
@@ -428,7 +429,7 @@ export default function TeamPatch({
                                     textAnchor="middle"
                                     x="138"
                                 >
-                                    <tspan y="261.218">{name}</tspan>
+                                    <tspan y="258.218">{name}</tspan>
                                 </TeamName>
                             </g>
                         </g>
@@ -460,7 +461,7 @@ export default function TeamPatch({
                                 name={name}
                                 fill={textColor}
                                 textColor={textColor}
-                                textSize="[1.65rem]"
+                                textSize={fontSize}
                                 textShadow={textShadow}
                                 href="name-wavy"
                                 startOffset="50%"
@@ -527,6 +528,7 @@ export default function TeamPatch({
                                 textShadow={textShadow}
                                 textAnchor="middle"
                                 x="139.2529"
+                                textSize={fontSize}
                             >
                                 <tspan y="230.463">{name}</tspan>
                             </TeamName>
@@ -560,6 +562,7 @@ export default function TeamPatch({
                                 textAnchor="middle"
                                 href="downward-curve-name"
                                 startOffset="50%"
+                                textSize={fontSize}
                                 name={name}
                             />
                         </>
@@ -590,6 +593,7 @@ export default function TeamPatch({
                                 href="upward-curve-name"
                                 startOffset="50%"
                                 name={name}
+                                textSize={fontSize}
                             />
                         </g>
                     )}

@@ -392,6 +392,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
             title: String!
             description: String!
             image: StrapiImage
+            tagline: String!
             slug: String!
             dateCompleted: Date @dateformat
             projectedCompletion: Date @dateformat

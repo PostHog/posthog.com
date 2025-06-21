@@ -46,6 +46,7 @@ export const query = graphql`
         team: squeakTeam(name: { eq: $teamName }) {
             name
             description
+            tagline
             emojis {
                 name
                 localFile {

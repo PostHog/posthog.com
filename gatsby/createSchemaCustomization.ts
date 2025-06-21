@@ -300,6 +300,11 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
         is_plan_default: Boolean
         unit: String
     }
+    type SqueakTeam implements Node {
+        tagline: String
+        description: String
+        createdAt: Date
+    }
   `)
     createTypes([
         schema.buildObjectType({
