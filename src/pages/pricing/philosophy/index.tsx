@@ -17,8 +17,24 @@ const PricingPhilosophy = (): JSX.Element => {
                     <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
                     <h3>Our pricing is designed to make you happy</h3>
                 </SectionHeader>
-
-                <p className="mt-4">Here's what you should know about our pricing:</p>
+                <p className="mt-4">We price PostHog to allow you to:</p>
+                <ol className="space-y-1 mb-4 [&_li]:leading-7 pl-4 md:pl-8">
+                    <li>
+                        <strong>Use PostHog for free if you are a hobbyist, or don't have users or revenue yet.</strong> 
+                    </li>
+                    <li>
+                        <strong>Experience the product before paying for it.</strong> 
+                    </li>
+                    <li>
+                        <strong>Transparently, pay for what you use.</strong> This means paying per product, and also 
+                        only paying for what you use of each product (<Link href="https://app.posthog.com/organization/billing/usage">You 
+                        can always monitor your usage yourself.</Link>).
+                    </li>
+                    <li>
+                        <strong>Make it a no-brainer to pick PostHog over other competitors</strong> 
+                    </li>
+                </ol>
+                <p className="mt-4">Here's what else you should know about our pricing:</p>
                 <ul className="space-y-1 mb-4 [&_li]:leading-7 pl-4 md:pl-8">
                     <li>
                         <strong>We make a profit with every product.</strong> This means we don’t have loss-leader
@@ -35,6 +51,11 @@ const PricingPhilosophy = (): JSX.Element => {
                             <em>Tell us if we're not!</em>
                         </Link>{' '}
                         (Note: This doesn't include your buddy's two-person startup.)
+                    </li>
+                    <li>
+                        <strong>We closely couple our success with yours.</strong> We make 
+                        money when you use more of what PostHog provides, either by growing your usage or using more
+                        of our products. Your willingness to pay is our best indicator of how much value you get out of PostHog.
                     </li>
                     <li>
                         The company in general has significant revenue, over 60,000 customers, runs{' '}
