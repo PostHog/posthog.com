@@ -1537,6 +1537,12 @@ export const companyMenu = {
             url: '/wip',
         },
         {
+            name: 'Training',
+            icon: 'IconBook',
+            color: 'red',
+            url: '/academy',
+        },
+        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
