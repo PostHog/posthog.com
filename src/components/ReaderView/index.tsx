@@ -252,6 +252,7 @@ export default function ReaderView({
     filePath,
     children,
     leftSidebar,
+    padding = true,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -263,6 +264,7 @@ export default function ReaderView({
                 commits={commits}
                 filePath={filePath}
                 leftSidebar={leftSidebar}
+                padding={padding}
             >
                 {children}
             </ReaderViewContent>
@@ -343,7 +345,17 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
-function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commits, filePath, children, leftSidebar }) {
+function ReaderViewContent({
+    body,
+    title,
+    tableOfContents,
+    mdxComponents,
+    commits,
+    filePath,
+    children,
+    leftSidebar,
+    padding = true,
+}) {
     const { hash } = useLocation()
     const contentRef = useRef(null)
     const {
@@ -425,7 +437,7 @@ function ReaderViewContent({ body, title, tableOfContents, mdxComponents, commit
                         <div className="relative overflow-x-hidden">
                             <div
                                 ref={contentRef}
-                                className={`relative p-4 mx-auto transition-all ${
+                                className={`relative ${padding ? 'p-4' : ''} mx-auto transition-all ${
                                     fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
                                 }`}
                             >

@@ -11,6 +11,8 @@ import { StickerPineapple, StickerPineappleNo, StickerPineappleYes } from 'compo
 import TeamPatch from 'components/TeamPatch'
 import { slugifyTeamName } from 'lib/utils'
 import OSButton from 'components/OSButton'
+import Tabs from 'components/RadixUI/Tabs'
+import OSTabs from 'components/OSTabs'
 
 const query = graphql`
     query CareersHero {
@@ -43,6 +45,7 @@ const query = graphql`
             nodes {
                 id
                 name
+                description
                 crest {
                     data {
                         attributes {
@@ -74,6 +77,8 @@ const query = graphql`
                             country
                             firstName
                             lastName
+                            location
+                            startDate
                             pineappleOnPizza
                             leadTeams {
                                 data {
@@ -116,6 +121,42 @@ const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; 
 
 const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
 
+const getTeamLeadName = (team: any) => {
+    if (!team.leadProfiles?.data?.length) return 'No team lead assigned'
+
+    const leadId = team.leadProfiles.data[0].id
+    const leadProfile = team.profiles?.data?.find((profile: any) => profile.id === leadId)
+
+    if (leadProfile) {
+        return [leadProfile.attributes.firstName, leadProfile.attributes.lastName].filter(Boolean).join(' ')
+    }
+
+    return 'Team lead not found'
+}
+
+const getTeamLeadInfo = (team: any) => {
+    if (!team.leadProfiles?.data?.length) return null
+
+    const leadId = team.leadProfiles.data[0].id
+    const leadProfile = team.profiles?.data?.find((profile: any) => profile.id === leadId)
+
+    if (!leadProfile) return null
+
+    const { firstName, location, country, startDate } = leadProfile.attributes
+
+    if (!firstName || !location || !country || !startDate) return null
+
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString)
+        return date.toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+        })
+    }
+
+    return `${firstName} joined in ${formatDate(startDate)} and lives in ${location}, ${country}.`
+}
+
 export const CareersHero = () => {
     const {
         allAshbyJobPosting: { departments, jobs: originalJobs },
@@ -150,14 +191,15 @@ export const CareersHero = () => {
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
-    const selectedTeam = allTeams.find((team) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
+    const selectedTeam = allTeams.find((team: any) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
     const teamLength = selectedTeam?.profiles?.data?.length
     const teamURL = `/teams/${slugifyTeamName(selectedTeam?.name || '')}`
     const pineapplePercentage =
         teamLength &&
         teamLength > 0 &&
         Math.round(
-            (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }) => pineappleOnPizza).length /
+            (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza)
+                .length /
                 teamLength) *
                 100
         )
@@ -230,34 +272,30 @@ export const CareersHero = () => {
                                         width="full"
                                         zoomHover="md"
                                         active={selectedJob.fields.title === job.fields.title}
-                                        className={` ${
-                                            selectedJob.fields.title === job.fields.title
-                                                ? ''
-                                                : ''
-                                        }`}
+                                        className={` ${selectedJob.fields.title === job.fields.title ? '' : ''}`}
                                         onClick={() => setSelectedJob(job)}
                                     >
                                         <div className="flex flex-col w-full items-start">
-                                        <span
-                                            className={`font-semibold text-[15px] ${
-                                                selectedJob.fields.title === job.fields.title ? '' : ''
-                                            }`}
-                                        >
-                                            {job.fields.title}
-                                        </span>
-                                        {!hideTeamsByJob.includes(job.fields?.title) && (
-                                            <span className="text-[13px] text-secondary !font-normal">
-                                                {(() => {
-                                                    const teamsField = job.parent.customFields.find(
-                                                        (field: { title: string }) => field.title === 'Teams'
-                                                    )
-                                                    const teams = teamsField ? JSON.parse(teamsField.value) : []
-                                                    return teams.length > 1
-                                                        ? 'Multiple teams'
-                                                        : teams.length === 1 && teams[0]
-                                                })()}
+                                            <span
+                                                className={`font-semibold text-[15px] ${
+                                                    selectedJob.fields.title === job.fields.title ? '' : ''
+                                                }`}
+                                            >
+                                                {job.fields.title}
                                             </span>
-                                        )}
+                                            {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                <span className="text-[13px] text-secondary !font-normal">
+                                                    {(() => {
+                                                        const teamsField = job.parent.customFields.find(
+                                                            (field: { title: string }) => field.title === 'Teams'
+                                                        )
+                                                        const teams = teamsField ? JSON.parse(teamsField.value) : []
+                                                        return teams.length > 1
+                                                            ? 'Multiple teams'
+                                                            : teams.length === 1 && teams[0]
+                                                    })()}
+                                                </span>
+                                            )}
                                         </div>
                                     </OSButton>
                                 </li>
@@ -265,9 +303,15 @@ export const CareersHero = () => {
                         })}
                     </ul>
                 </div>
-                <div className="w-full md:w-3/4 bg-white shadow-lg border border-light dark:border-dark dark:bg-accent-dark rounded-bl rounded-br md:rounded flex flex-col lg:flex-row">
+                <div className="w-full bg-primary border border-primary flex flex-col">
                     <div className="p-4 lg:p-6 flex-1">
                         <h2 className="hidden md:block text-2xl font-bold">{selectedJob.fields.title}</h2>
+
+                        {teams.length > 1 && (
+                            <p data-scheme="secondary" className="bg-primary p-2 border border-primary rounded-sm">
+                                <strong>{teams.length} small teams are hiring for this role</strong>
+                            </p>
+                        )}
 
                         <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
                             <Detail
@@ -298,10 +342,158 @@ export const CareersHero = () => {
                                     icon={<Timezone />}
                                 />
                             )}
+                            {selectedJob.parent.customFields.find(
+                                (field: { title: string }) => field.title === 'Role grouping'
+                            )?.value && (
+                                <Detail
+                                    title="Role grouping"
+                                    value={
+                                        selectedJob.parent.customFields.find(
+                                            (field: { title: string }) => field.title === 'Role grouping'
+                                        ).value
+                                    }
+                                    icon={<Timezone />}
+                                />
+                            )}
                         </ul>
 
                         <div className="job-content mt-4">
-                            <h3 className="mb-1 text-[15px]">Summary</h3>
+                            <h3 className="mb-1 text-sm">About the small team{teams.length > 1 ? 's' : ''}</h3>
+
+                            {teams.length > 1 ? (
+                                <OSTabs
+                                    tabs={teams.map((teamName: string) => {
+                                        const team = allTeams.find(
+                                            (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
+                                        )
+                                        const teamLength = team?.profiles?.data?.length
+                                        const teamURL = `/teams/${team?.slug || ''}`
+                                        const pineapplePercentage =
+                                            teamLength &&
+                                            teamLength > 0 &&
+                                            Math.round(
+                                                (team.profiles?.data?.filter(
+                                                    ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
+                                                ).length /
+                                                    teamLength) *
+                                                    100
+                                            )
+
+                                        return {
+                                            value: teamName,
+                                            label: teamName,
+                                            content: (
+                                                <div
+                                                    data-scheme="secondary"
+                                                    className="border border-primary rounded-md p-4 bg-primary flex items-start gap-4"
+                                                >
+                                                    <div className="w-48 flex-shrink-0">
+                                                        <Link to={teamURL}>
+                                                            <TeamPatch
+                                                                name={team.name}
+                                                                imageUrl={team.crest?.data?.attributes?.url}
+                                                                {...team.crestOptions}
+                                                                className="w-full"
+                                                            />
+                                                        </Link>
+                                                    </div>
+                                                    <div>
+                                                        <h3 className="text-sm font-bold mb-2">{team.name} Team</h3>
+                                                        {team.description && (
+                                                            <p className="text-sm text-secondary mb-3">
+                                                                {team.description}
+                                                            </p>
+                                                        )}
+
+                                                        {team.leadProfiles?.data?.length > 0 && (
+                                                            <>
+                                                                <p className="text-sm font-semibold mb-0">Team lead:</p>
+                                                                <div className="flex items-center">
+                                                                    <TeamMembers
+                                                                        profiles={{
+                                                                            data: team.profiles?.data?.filter(
+                                                                                (profile: any) =>
+                                                                                    team.leadProfiles.data.some(
+                                                                                        (lead: any) =>
+                                                                                            lead.id === profile.id
+                                                                                    )
+                                                                            ),
+                                                                        }}
+                                                                    />
+                                                                    <h3 className="mb-0">{getTeamLeadName(team)}</h3>
+                                                                </div>
+                                                                {getTeamLeadInfo(team) && (
+                                                                    <p className="text-sm text-secondary mt-1">
+                                                                        {getTeamLeadInfo(team)}
+                                                                    </p>
+                                                                )}
+                                                            </>
+                                                        )}
+
+                                                        <p className="text-sm font-semibold mb-0">Team members:</p>
+                                                        <div className="flex justify-start">
+                                                            <TeamMembers profiles={team.profiles} />
+                                                        </div>
+                                                        <div className="inline-flex items-center mx-auto gap-2">
+                                                            {pineapplePercentage > 50 ? (
+                                                                <StickerPineappleYes className="size-12" />
+                                                            ) : pineapplePercentage === 50 ? (
+                                                                <StickerPineapple className="size-12" />
+                                                            ) : (
+                                                                <StickerPineappleNo className="size-12" />
+                                                            )}
+                                                            <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">
+                                                                {PineappleText(pineapplePercentage)}
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ),
+                                        }
+                                    })}
+                                    defaultValue={selectedTeamName}
+                                    frame={false}
+                                    onValueChange={(value) => setSelectedTeamName(value)}
+                                    className="px-0 mb-4"
+                                />
+                            ) : (
+                                <div className="flex flex-col items-center gap-4">
+                                    <div className="max-w-48 mx-auto">
+                                        <Link to={teamURL}>
+                                            <TeamPatch
+                                                name={selectedTeam.name}
+                                                imageUrl={selectedTeam.crest?.data?.attributes?.url}
+                                                {...selectedTeam.crestOptions}
+                                                className="w-full -mt-4"
+                                            />
+                                        </Link>
+                                    </div>
+                                    <div className="flex justify-center">
+                                        <TeamMembers profiles={selectedTeam.profiles} />
+                                    </div>
+
+                                    <div className="inline-flex items-center mx-auto gap-2">
+                                        {pineapplePercentage > 50 ? (
+                                            <>
+                                                <StickerPineappleYes className="size-12" />
+                                            </>
+                                        ) : pineapplePercentage === 50 ? (
+                                            <>
+                                                <StickerPineapple className="size-12" />
+                                            </>
+                                        ) : (
+                                            <>
+                                                <StickerPineappleNo className="size-12" />
+                                            </>
+                                        )}
+                                        <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">
+                                            {PineappleText(pineapplePercentage)}
+                                        </p>
+                                    </div>
+                                </div>
+                            )}
+
+                            <h3 className="mb-1 text-sm">Job summary</h3>
 
                             {isLoading ? (
                                 <div className="space-y-1 mb-3">
@@ -349,7 +541,7 @@ export const CareersHero = () => {
                         </div>
                     </div>
                     {selectedTeam && (
-                        <div className="lg:max-w-xs border-t md:border-t-0 md:border-l border-light dark:border-dark p-4 md:p-6 bg-accent/50 dark:bg-accent-dark">
+                        <div className="border-t border-primary bg-accent p-6">
                             {teams.length > 1 && (
                                 <p className="mb-2">
                                     <strong>{teams.length} small teams are hiring for this role</strong>
@@ -365,46 +557,13 @@ export const CareersHero = () => {
                                             setSelectedTeamName(e.target.value)
                                         }}
                                     >
-                                        {teams.map((team) => (
+                                        {teams.map((team: any) => (
                                             <option key={team} value={team}>
                                                 {team}
                                             </option>
                                         ))}
                                     </select>
                                 )}
-                                <p className="text-sm text-center opacity-60 font-medium mb-0">About this team</p>
-                                <div className="max-w-48 mx-auto">
-                                    <Link to={teamURL}>
-                                        <TeamPatch
-                                            name={selectedTeam.name}
-                                            imageUrl={selectedTeam.crest?.data?.attributes?.url}
-                                            {...selectedTeam.crestOptions}
-                                            className="w-full -mt-4"
-                                        />
-                                    </Link>
-                                </div>
-                                <div className="flex justify-center">
-                                    <TeamMembers profiles={selectedTeam.profiles} />
-                                </div>
-
-                                <div className="inline-flex items-center mx-auto gap-2">
-                                    {pineapplePercentage > 50 ? (
-                                        <>
-                                            <StickerPineappleYes className="size-12" />
-                                        </>
-                                    ) : pineapplePercentage === 50 ? (
-                                        <>
-                                            <StickerPineapple className="size-12" />
-                                        </>
-                                    ) : (
-                                        <>
-                                            <StickerPineappleNo className="size-12" />
-                                        </>
-                                    )}
-                                    <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">
-                                        {PineappleText(pineapplePercentage)}
-                                    </p>
-                                </div>
                             </div>
                         </div>
                     )}
