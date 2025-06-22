@@ -13,6 +13,7 @@ import { slugifyTeamName } from 'lib/utils'
 import OSButton from 'components/OSButton'
 import Tabs from 'components/RadixUI/Tabs'
 import OSTabs from 'components/OSTabs'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const query = graphql`
     query CareersHero {
@@ -157,6 +158,82 @@ const getTeamLeadInfo = (team: any) => {
     return `${firstName} joined in ${formatDate(startDate)} and lives in ${location}, ${country}.`
 }
 
+const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: boolean }) => {
+    const teamLength = team?.profiles?.data?.length
+    const teamURL = team?.slug ? `/teams/${team.slug}` : `/teams/${slugifyTeamName(team?.name || '')}`
+    const pineapplePercentage =
+        teamLength &&
+        teamLength > 0 &&
+        Math.round(
+            (team.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza).length /
+                teamLength) *
+                100
+        )
+
+    return (
+        <div
+            data-scheme="secondary"
+            className={`${multipleTeams ? 'border border-primary rounded-md p-4 bg-primary' : ''}`}
+        >
+            <DebugContainerQuery />
+
+            <div className="flex flex-col @lg:grid @lg:grid-cols-6 @lg:grid-rows-3 @3xl:grid-rows-2 gap-4">
+                <div className="order-2 @lg:order-none col-start-1 row-start-2 @lg:col-span-4 @lg:col-start-auto @lg:row-span-2 @lg:row-start-auto @3xl:row-span-1 @lg:self-center">
+                    <h3 className="text-sm font-bold mb-1">{team.name} Team</h3>
+                    {team.description && <p className="text-sm text-secondary !mb-0">{team.description}</p>}
+                </div>
+                <div className="order-1 @lg:order-none col-start-1 row-start-1 @lg:col-span-2 @lg:col-start-5 @lg:row-span-2 @lg:row-start-auto @3xl:row-span-2 @lg:self-center @lg:justify-self-center">
+                    <div className="w-36 @lg:w-full">
+                        <Link to={teamURL}>
+                            <TeamPatch
+                                name={team.name}
+                                imageUrl={team.crest?.data?.attributes?.url}
+                                {...team.crestOptions}
+                                className="w-full"
+                            />
+                        </Link>
+                    </div>
+                </div>
+                <div className="order-3 @lg:order-none col-start-1 row-start-3 @lg:col-span-3 @lg:row-start-3 @3xl:col-span-2 @3xl:row-start-2">
+                    <p className="text-sm font-semibold !mb-1">Team members</p>
+                    <div className="flex justify-start">
+                        <TeamMembers size="!size-16" profiles={team.profiles} />
+                    </div>
+                </div>
+                <div className="order-4 @lg:order-none col-start-1 row-start-4 @lg:col-span-3 @lg:col-start- @lg:row-start-3 @3xl:col-span-2 @3xl:col-start-3 @3xl:row-start-2">
+                    <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
+                    <div className="flex items-center gap-2">
+                        <div className="w-10">
+                            {pineapplePercentage > 50 ? (
+                                <StickerPineappleYes className="size-10" />
+                            ) : pineapplePercentage == 50 ? (
+                                <StickerPineapple className="size-10" />
+                            ) : (
+                                <StickerPineappleNo className="size-10" />
+                            )}
+                        </div>
+                        <div className="flex-1 text-[15px]">
+                            {pineapplePercentage > 50 ? (
+                                <>
+                                    <strong>{pineapplePercentage}%</strong> of this team say{' '}
+                                    <strong className="text-green">YES</strong>!
+                                </>
+                            ) : pineapplePercentage == 50 ? (
+                                <>This team is evenly split. (You could break the tie!)</>
+                            ) : (
+                                <>
+                                    <strong>{100 - pineapplePercentage}%</strong> of this team say{' '}
+                                    <strong className="text-red">NO!</strong>
+                                </>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
 export const CareersHero = () => {
     const {
         allAshbyJobPosting: { departments, jobs: originalJobs },
@@ -190,19 +267,11 @@ export const CareersHero = () => {
     const [websiteDescription, setWebsiteDescription] = useState('')
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField ? JSON.parse(teamsField.value) : []
-    const [selectedTeamName, setSelectedTeamName] = useState(teams[0])
-    const selectedTeam = allTeams.find((team: any) => team.name.toLowerCase() === selectedTeamName.toLowerCase())
-    const teamLength = selectedTeam?.profiles?.data?.length
-    const teamURL = `/teams/${slugifyTeamName(selectedTeam?.name || '')}`
-    const pineapplePercentage =
-        teamLength &&
-        teamLength > 0 &&
-        Math.round(
-            (selectedTeam.profiles?.data?.filter(({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza)
-                .length /
-                teamLength) *
-                100
-        )
+    const [selectedTeamName, setSelectedTeamName] = useState('')
+
+    // Compute the current team name - either the selected one or default to first team
+    const currentTeamName = selectedTeamName || teams[0] || ''
+    const selectedTeam = allTeams.find((team: any) => team.name.toLowerCase() === currentTeamName.toLowerCase())
 
     const [isLoading, setIsLoading] = useState(true)
 
@@ -224,7 +293,7 @@ export const CareersHero = () => {
         }
 
         setProcessedHtml(content)
-        setSelectedTeamName(teams[0])
+        setSelectedTeamName('')
 
         const websiteDescField = selectedJob.parent.customFields.find(
             (field: { title: string }) => field.title === 'Website description'
@@ -358,141 +427,6 @@ export const CareersHero = () => {
                         </ul>
 
                         <div className="job-content mt-4">
-                            <h3 className="mb-1 text-sm">About the small team{teams.length > 1 ? 's' : ''}</h3>
-
-                            {teams.length > 1 ? (
-                                <OSTabs
-                                    tabs={teams.map((teamName: string) => {
-                                        const team = allTeams.find(
-                                            (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
-                                        )
-                                        const teamLength = team?.profiles?.data?.length
-                                        const teamURL = `/teams/${team?.slug || ''}`
-                                        const pineapplePercentage =
-                                            teamLength &&
-                                            teamLength > 0 &&
-                                            Math.round(
-                                                (team.profiles?.data?.filter(
-                                                    ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
-                                                ).length /
-                                                    teamLength) *
-                                                    100
-                                            )
-
-                                        return {
-                                            value: teamName,
-                                            label: teamName,
-                                            content: (
-                                                <div
-                                                    data-scheme="secondary"
-                                                    className="border border-primary rounded-md p-4 bg-primary flex items-start gap-4"
-                                                >
-                                                    <div className="w-48 flex-shrink-0">
-                                                        <Link to={teamURL}>
-                                                            <TeamPatch
-                                                                name={team.name}
-                                                                imageUrl={team.crest?.data?.attributes?.url}
-                                                                {...team.crestOptions}
-                                                                className="w-full"
-                                                            />
-                                                        </Link>
-                                                    </div>
-                                                    <div>
-                                                        <h3 className="text-sm font-bold mb-2">{team.name} Team</h3>
-                                                        {team.description && (
-                                                            <p className="text-sm text-secondary mb-3">
-                                                                {team.description}
-                                                            </p>
-                                                        )}
-
-                                                        {team.leadProfiles?.data?.length > 0 && (
-                                                            <>
-                                                                <p className="text-sm font-semibold mb-0">Team lead:</p>
-                                                                <div className="flex items-center">
-                                                                    <TeamMembers
-                                                                        profiles={{
-                                                                            data: team.profiles?.data?.filter(
-                                                                                (profile: any) =>
-                                                                                    team.leadProfiles.data.some(
-                                                                                        (lead: any) =>
-                                                                                            lead.id === profile.id
-                                                                                    )
-                                                                            ),
-                                                                        }}
-                                                                    />
-                                                                    <h3 className="mb-0">{getTeamLeadName(team)}</h3>
-                                                                </div>
-                                                                {getTeamLeadInfo(team) && (
-                                                                    <p className="text-sm text-secondary mt-1">
-                                                                        {getTeamLeadInfo(team)}
-                                                                    </p>
-                                                                )}
-                                                            </>
-                                                        )}
-
-                                                        <p className="text-sm font-semibold mb-0">Team members:</p>
-                                                        <div className="flex justify-start">
-                                                            <TeamMembers profiles={team.profiles} />
-                                                        </div>
-                                                        <div className="inline-flex items-center mx-auto gap-2">
-                                                            {pineapplePercentage > 50 ? (
-                                                                <StickerPineappleYes className="size-12" />
-                                                            ) : pineapplePercentage === 50 ? (
-                                                                <StickerPineapple className="size-12" />
-                                                            ) : (
-                                                                <StickerPineappleNo className="size-12" />
-                                                            )}
-                                                            <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">
-                                                                {PineappleText(pineapplePercentage)}
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            ),
-                                        }
-                                    })}
-                                    defaultValue={selectedTeamName}
-                                    frame={false}
-                                    onValueChange={(value) => setSelectedTeamName(value)}
-                                    className="px-0 mb-4"
-                                />
-                            ) : (
-                                <div className="flex flex-col items-center gap-4">
-                                    <div className="max-w-48 mx-auto">
-                                        <Link to={teamURL}>
-                                            <TeamPatch
-                                                name={selectedTeam.name}
-                                                imageUrl={selectedTeam.crest?.data?.attributes?.url}
-                                                {...selectedTeam.crestOptions}
-                                                className="w-full -mt-4"
-                                            />
-                                        </Link>
-                                    </div>
-                                    <div className="flex justify-center">
-                                        <TeamMembers profiles={selectedTeam.profiles} />
-                                    </div>
-
-                                    <div className="inline-flex items-center mx-auto gap-2">
-                                        {pineapplePercentage > 50 ? (
-                                            <>
-                                                <StickerPineappleYes className="size-12" />
-                                            </>
-                                        ) : pineapplePercentage === 50 ? (
-                                            <>
-                                                <StickerPineapple className="size-12" />
-                                            </>
-                                        ) : (
-                                            <>
-                                                <StickerPineappleNo className="size-12" />
-                                            </>
-                                        )}
-                                        <p className="text-[13px] mt-2 mb-0 w-auto leading-tight">
-                                            {PineappleText(pineapplePercentage)}
-                                        </p>
-                                    </div>
-                                </div>
-                            )}
-
                             <h3 className="mb-1 text-sm">Job summary</h3>
 
                             {isLoading ? (
@@ -539,6 +473,45 @@ export const CareersHero = () => {
                                 Read more
                             </CallToAction>
                         </div>
+
+                        <div>
+                            <h3 className="mb-1 text-sm">About the small team{teams.length > 1 ? 's' : ''}</h3>
+
+                            {teams.length > 1 ? (
+                                <OSTabs
+                                    key={`${selectedJob.fields.title}-${currentTeamName}`}
+                                    tabs={teams.map((teamName: string) => {
+                                        const team = allTeams.find(
+                                            (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
+                                        )
+                                        const teamLength = team?.profiles?.data?.length
+                                        const teamURL = `/teams/${team?.slug || ''}`
+                                        const pineapplePercentage =
+                                            teamLength &&
+                                            teamLength > 0 &&
+                                            Math.round(
+                                                (team.profiles?.data?.filter(
+                                                    ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
+                                                ).length /
+                                                    teamLength) *
+                                                    100
+                                            )
+
+                                        return {
+                                            value: teamName,
+                                            label: teamName,
+                                            content: <TeamInfoDisplay team={team} multipleTeams={teams.length > 1} />,
+                                        }
+                                    })}
+                                    defaultValue={currentTeamName}
+                                    frame={false}
+                                    onValueChange={(value) => setSelectedTeamName(value)}
+                                    className="px-0 mb-4"
+                                />
+                            ) : (
+                                <TeamInfoDisplay team={selectedTeam} multipleTeams={false} />
+                            )}
+                        </div>
                     </div>
                     {selectedTeam && (
                         <div className="border-t border-primary bg-accent p-6">
@@ -552,7 +525,7 @@ export const CareersHero = () => {
                                 {teams.length > 1 && (
                                     <select
                                         className="w-full p-2 mb-2 border border-b-3 border-light dark:border-dark rounded text-sm font-medium dark:bg-dark"
-                                        value={selectedTeamName}
+                                        value={currentTeamName}
                                         onChange={(e) => {
                                             setSelectedTeamName(e.target.value)
                                         }}
