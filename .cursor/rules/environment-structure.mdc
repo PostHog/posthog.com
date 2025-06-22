@@ -12,7 +12,8 @@ It's a static website built on Gatsby and hosted with Vercel.
 ## Resources and servers
 
 - Use yarn instead of npm
-- The site runs on port 8001. If you need to test something, no need to boot up a new server, just check on port 8001 as it's likely already running.
+- Run the app with `yarn start`. To make sure everything is fresh, run `yarn clean && yarn && yarn start`.
+- The site runs on port `8001`. If you need to test something, check if it's already running on that port – no need to spin up a new server if so.
 
 ## Site features
 
