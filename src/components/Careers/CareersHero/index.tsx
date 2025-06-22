@@ -14,6 +14,7 @@ import OSButton from 'components/OSButton'
 import Tabs from 'components/RadixUI/Tabs'
 import OSTabs from 'components/OSTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 const query = graphql`
     query CareersHero {
@@ -121,6 +122,17 @@ const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; 
 }
 
 const hideTeamsByJob = ['Technical ex-founder', 'Speculative application']
+
+// Add custom ordering for role groupings - modify this array to change the order
+const roleGroupingOrder = [
+    'Engineering',
+    'Product',
+    'Design',
+    'Marketing',
+    'Sales',
+    'Operations',
+    // Add more groupings as needed, or pass this as a prop
+]
 
 const getTeamLeadName = (team: any) => {
     if (!team.leadProfiles?.data?.length) return 'No team lead assigned'
@@ -240,29 +252,94 @@ export const CareersHero = () => {
         allTeams: { nodes: allTeams },
     } = useStaticQuery(query)
 
-    const jobs = useMemo(() => {
-        const sortedJobs = [...originalJobs]
+    const jobGroups = useMemo(() => {
+        // Group jobs by "Role grouping" custom field
+        const groups: { [key: string]: any[] } = {}
 
-        const productEngineerIndex = sortedJobs.findIndex((job) => job.fields.title === 'Product Engineer')
-        if (productEngineerIndex !== -1) {
-            const [productEngineerJob] = sortedJobs.splice(productEngineerIndex, 1)
-            sortedJobs.unshift(productEngineerJob)
-        }
+        originalJobs.forEach((job: any) => {
+            const roleGroupingField = job.parent.customFields.find(
+                (field: { title: string }) => field.title === 'Role grouping'
+            )
+            const groupName = roleGroupingField?.value || 'Other'
 
-        const speculativeIndex = sortedJobs.findIndex((job) => job.fields.title === 'Speculative application')
-        if (speculativeIndex !== -1) {
-            const [speculativeJob] = sortedJobs.splice(speculativeIndex, 1)
-            sortedJobs.push(speculativeJob)
-        }
+            if (!groups[groupName]) {
+                groups[groupName] = []
+            }
+            groups[groupName].push(job)
+        })
 
-        return sortedJobs
+        // Sort groups according to custom order, with "Other" always last
+        const sortedGroupNames = Object.keys(groups).sort((a, b) => {
+            if (a === 'Other') return 1
+            if (b === 'Other') return -1
+
+            const aIndex = roleGroupingOrder.indexOf(a)
+            const bIndex = roleGroupingOrder.indexOf(b)
+
+            // If both are in the custom order, sort by that order
+            if (aIndex !== -1 && bIndex !== -1) {
+                return aIndex - bIndex
+            }
+            // If only one is in the custom order, prioritize it
+            if (aIndex !== -1) return -1
+            if (bIndex !== -1) return 1
+            // If neither is in the custom order, sort alphabetically
+            return a.localeCompare(b)
+        })
+
+        // Apply custom sorting within each group
+        sortedGroupNames.forEach((groupName) => {
+            const groupJobs = groups[groupName]
+
+            // Move Product Engineer to the front of its group
+            const productEngineerIndex = groupJobs.findIndex((job) => job.fields.title === 'Product Engineer')
+            if (productEngineerIndex !== -1) {
+                const [productEngineerJob] = groupJobs.splice(productEngineerIndex, 1)
+                groupJobs.unshift(productEngineerJob)
+            }
+
+            // Move Speculative application to the end of its group
+            const speculativeIndex = groupJobs.findIndex((job) => job.fields.title === 'Speculative application')
+            if (speculativeIndex !== -1) {
+                const [speculativeJob] = groupJobs.splice(speculativeIndex, 1)
+                groupJobs.push(speculativeJob)
+            }
+        })
+
+        return sortedGroupNames.map((groupName) => ({
+            name: groupName,
+            jobs: groups[groupName],
+        }))
     }, [originalJobs])
 
-    if (!jobs?.length) {
+    // Get all jobs in a flat array for compatibility with existing logic
+    const allJobs = useMemo(() => {
+        return jobGroups.flatMap((group) => group.jobs)
+    }, [jobGroups])
+
+    // Calculate the total number of team positions (not just unique roles)
+    const totalPositions = useMemo(() => {
+        const uniqueRoles = new Map()
+
+        allJobs.forEach((job: any) => {
+            const jobTitle = job.fields.title
+            if (!uniqueRoles.has(jobTitle)) {
+                const teamsField = job.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
+                const teams = teamsField ? JSON.parse(teamsField.value) : []
+                // Count the number of teams hiring for this role (minimum 1)
+                uniqueRoles.set(jobTitle, Math.max(teams.length, 1))
+            }
+        })
+
+        // Sum up all the team positions
+        return Array.from(uniqueRoles.values()).reduce((sum, count) => sum + count, 0)
+    }, [allJobs])
+
+    if (!allJobs?.length) {
         return null
     }
 
-    const [selectedJob, setSelectedJob] = useState(jobs[0])
+    const [selectedJob, setSelectedJob] = useState(allJobs[0])
     const [processedHtml, setProcessedHtml] = useState('')
     const [websiteDescription, setWebsiteDescription] = useState('')
     const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
@@ -305,11 +382,25 @@ export const CareersHero = () => {
 
     return (
         <>
-            <h1 className="text-2xl lg:text-3xl font-bold mb-2">Who's hiring?</h1>
-            <p className="mb-4 text-base">
-                Our small teams are looking to add{' '}
-                <strong className="whitespace-nowrap">{jobs.length} team members</strong>.
-            </p>
+            <div className="relative max-h-96 overflow-hidden bg-accent border-b border-primary mb-4">
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/careers_hero_light_946740e5a4.png"
+                    alt="Careers"
+                    width={1948}
+                    height={698}
+                    className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0">
+                    <div className="relative flex flex-col items-center justify-center h-full">
+                        <h1 className="text-2xl lg:text-3xl font-bold mb-2">Who's hiring?</h1>
+                        <p className="text-base mb-4">
+                            Our small teams are looking to add{' '}
+                            <strong className="whitespace-nowrap">{totalPositions} team members</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
             <section className="flex flex-col md:flex-row md:gap-4">
                 <div className="w-full md:w-1/4">
                     <label htmlFor="job-select" className="block md:hidden font-bold mb-1 text-center">
@@ -320,57 +411,75 @@ export const CareersHero = () => {
                         value={selectedJob.fields.title}
                         onChange={(e) => {
                             const selectedJobTitle = e.target.value
-                            const job = jobs.find((job) => job.fields.title === selectedJobTitle)
+                            const job = allJobs.find((job: any) => job.fields.title === selectedJobTitle)
                             setSelectedJob(job)
                         }}
                     >
-                        {jobs.map((job) => (
-                            <option key={job.fields.title} value={job.fields.title}>
-                                {job.fields.title}
-                            </option>
+                        {jobGroups.map((group) => (
+                            <optgroup key={group.name} label={group.name}>
+                                {group.jobs.map((job: any) => (
+                                    <option key={job.fields.title} value={job.fields.title}>
+                                        {job.fields.title}
+                                    </option>
+                                ))}
+                            </optgroup>
                         ))}
                     </select>
-                    <ul data-scheme="primary" className="hidden md:block list-none p-0 m-0 space-y-0.5">
-                        {jobs.map((job) => {
-                            return (
-                                <li key={job.fields.title} className="">
-                                    <OSButton
-                                        variant="ghost"
-                                        size="md"
-                                        align="left"
-                                        width="full"
-                                        zoomHover="md"
-                                        active={selectedJob.fields.title === job.fields.title}
-                                        className={` ${selectedJob.fields.title === job.fields.title ? '' : ''}`}
-                                        onClick={() => setSelectedJob(job)}
-                                    >
-                                        <div className="flex flex-col w-full items-start">
-                                            <span
-                                                className={`font-semibold text-[15px] ${
-                                                    selectedJob.fields.title === job.fields.title ? '' : ''
-                                                }`}
-                                            >
-                                                {job.fields.title}
-                                            </span>
-                                            {!hideTeamsByJob.includes(job.fields?.title) && (
-                                                <span className="text-[13px] text-secondary !font-normal">
-                                                    {(() => {
-                                                        const teamsField = job.parent.customFields.find(
-                                                            (field: { title: string }) => field.title === 'Teams'
-                                                        )
-                                                        const teams = teamsField ? JSON.parse(teamsField.value) : []
-                                                        return teams.length > 1
-                                                            ? 'Multiple teams'
-                                                            : teams.length === 1 && teams[0]
-                                                    })()}
-                                                </span>
-                                            )}
-                                        </div>
-                                    </OSButton>
-                                </li>
-                            )
-                        })}
-                    </ul>
+                    <div data-scheme="primary" className="hidden md:block">
+                        {jobGroups.map((group) => (
+                            <div key={group.name} className="mb-2 last:mb-0">
+                                <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mb-1 border-b border-primary">
+                                    {group.name}
+                                </h3>
+                                <ul className="list-none p-0 m-0 space-y-px">
+                                    {group.jobs.map((job: any) => {
+                                        return (
+                                            <li key={job.fields.title} className="">
+                                                <OSButton
+                                                    variant="ghost"
+                                                    size="md"
+                                                    align="left"
+                                                    width="full"
+                                                    zoomHover="md"
+                                                    active={selectedJob.fields.title === job.fields.title}
+                                                    className={` ${
+                                                        selectedJob.fields.title === job.fields.title ? '' : ''
+                                                    }`}
+                                                    onClick={() => setSelectedJob(job)}
+                                                >
+                                                    <div className="flex flex-col w-full items-start">
+                                                        <span
+                                                            className={`font-semibold text-[15px] ${
+                                                                selectedJob.fields.title === job.fields.title ? '' : ''
+                                                            }`}
+                                                        >
+                                                            {job.fields.title}
+                                                        </span>
+                                                        {!hideTeamsByJob.includes(job.fields?.title) && (
+                                                            <span className="text-[13px] text-secondary !font-normal">
+                                                                {(() => {
+                                                                    const teamsField = job.parent.customFields.find(
+                                                                        (field: { title: string }) =>
+                                                                            field.title === 'Teams'
+                                                                    )
+                                                                    const teams = teamsField
+                                                                        ? JSON.parse(teamsField.value)
+                                                                        : []
+                                                                    return teams.length > 1
+                                                                        ? 'Multiple teams'
+                                                                        : teams.length === 1 && teams[0]
+                                                                })()}
+                                                            </span>
+                                                        )}
+                                                    </div>
+                                                </OSButton>
+                                            </li>
+                                        )
+                                    })}
+                                </ul>
+                            </div>
+                        ))}
+                    </div>
                 </div>
                 <div className="w-full bg-primary border border-primary flex flex-col">
                     <div className="p-4 lg:p-6 flex-1">
@@ -426,91 +535,97 @@ export const CareersHero = () => {
                             )}
                         </ul>
 
-                        <div className="job-content mt-4">
-                            <h3 className="mb-1 text-sm">Job summary</h3>
+                        <div className="@container @7xl:flex gap-4">
+                            <div className="job-content mt-4 @7xl:flex-1">
+                                <h3 className="mb-1 text-sm">Job summary</h3>
 
-                            {isLoading ? (
-                                <div className="space-y-1 mb-3">
-                                    <div className="bg-accent dark:bg-accent-dark h-5 w-full rounded animate-pulse" />
-                                    <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-3rem)] rounded animate-pulse" />
-                                    <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-1rem)] rounded animate-pulse" />
-                                    <div className="bg-accent dark:bg-accent-dark h-5 w-72 max-w-full rounded animate-pulse" />
-                                    <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-60 max-w-full rounded animate-pulse" />
-                                    <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-36 max-w-full rounded animate-pulse" />
-                                </div>
-                            ) : (
-                                <>
-                                    {websiteDescription ? (
-                                        <div className="mb-4">
-                                            <p
-                                                className="text-[15px]"
-                                                dangerouslySetInnerHTML={{ __html: websiteDescription }}
+                                {isLoading ? (
+                                    <div className="space-y-1 mb-3">
+                                        <div className="bg-accent dark:bg-accent-dark h-5 w-full rounded animate-pulse" />
+                                        <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-3rem)] rounded animate-pulse" />
+                                        <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-1rem)] rounded animate-pulse" />
+                                        <div className="bg-accent dark:bg-accent-dark h-5 w-72 max-w-full rounded animate-pulse" />
+                                        <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-60 max-w-full rounded animate-pulse" />
+                                        <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-36 max-w-full rounded animate-pulse" />
+                                    </div>
+                                ) : (
+                                    <>
+                                        {websiteDescription ? (
+                                            <div className="mb-4">
+                                                <p
+                                                    className="text-[15px]"
+                                                    dangerouslySetInnerHTML={{ __html: websiteDescription }}
+                                                />
+                                            </div>
+                                        ) : (
+                                            <div
+                                                dangerouslySetInnerHTML={{ __html: processedHtml }}
+                                                className="[&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
                                             />
-                                        </div>
-                                    ) : (
-                                        <div
-                                            dangerouslySetInnerHTML={{ __html: processedHtml }}
-                                            className="[&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-56 overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
-                                        />
-                                    )}
-                                    {selectedJob.fields.title == 'Speculative application' && (
-                                        <>
-                                            <p className="text-[15px]">
-                                                We take exceptional people when they come along - and we really mean
-                                                that!
-                                            </p>
+                                        )}
+                                        {selectedJob.fields.title == 'Speculative application' && (
+                                            <>
+                                                <p className="text-[15px]">
+                                                    We take exceptional people when they come along - and we really mean
+                                                    that!
+                                                </p>
 
-                                            <p className="text-[15px]">
-                                                Don't see a specific role listed? That doesn't mean we won't have a spot
-                                                for you. Send us a speculative application and let us know how you think
-                                                you could contribute to PostHog.
-                                            </p>
-                                        </>
-                                    )}
-                                </>
-                            )}
-                            <CallToAction to={selectedJob.fields.slug} size="sm">
-                                Read more
-                            </CallToAction>
-                        </div>
+                                                <p className="text-[15px]">
+                                                    Don't see a specific role listed? That doesn't mean we won't have a
+                                                    spot for you. Send us a speculative application and let us know how
+                                                    you think you could contribute to PostHog.
+                                                </p>
+                                            </>
+                                        )}
+                                    </>
+                                )}
+                                <CallToAction to={selectedJob.fields.slug} size="sm">
+                                    Read more
+                                </CallToAction>
+                            </div>
 
-                        <div>
-                            <h3 className="mb-1 text-sm">About the small team{teams.length > 1 ? 's' : ''}</h3>
+                            <div className="@container min-w-96">
+                                <div className="job-content">
+                                    <h3 className="mb-1 text-sm">About the small team{teams.length > 1 ? 's' : ''}</h3>
+                                </div>
 
-                            {teams.length > 1 ? (
-                                <OSTabs
-                                    key={`${selectedJob.fields.title}-${currentTeamName}`}
-                                    tabs={teams.map((teamName: string) => {
-                                        const team = allTeams.find(
-                                            (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
-                                        )
-                                        const teamLength = team?.profiles?.data?.length
-                                        const teamURL = `/teams/${team?.slug || ''}`
-                                        const pineapplePercentage =
-                                            teamLength &&
-                                            teamLength > 0 &&
-                                            Math.round(
-                                                (team.profiles?.data?.filter(
-                                                    ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
-                                                ).length /
-                                                    teamLength) *
-                                                    100
+                                {teams.length > 1 ? (
+                                    <OSTabs
+                                        key={`${selectedJob.fields.title}-${currentTeamName}`}
+                                        tabs={teams.map((teamName: string) => {
+                                            const team = allTeams.find(
+                                                (t: any) => t.name.toLowerCase() === teamName.toLowerCase()
                                             )
+                                            const teamLength = team?.profiles?.data?.length
+                                            const teamURL = `/teams/${team?.slug || ''}`
+                                            const pineapplePercentage =
+                                                teamLength &&
+                                                teamLength > 0 &&
+                                                Math.round(
+                                                    (team.profiles?.data?.filter(
+                                                        ({ attributes: { pineappleOnPizza } }: any) => pineappleOnPizza
+                                                    ).length /
+                                                        teamLength) *
+                                                        100
+                                                )
 
-                                        return {
-                                            value: teamName,
-                                            label: teamName,
-                                            content: <TeamInfoDisplay team={team} multipleTeams={teams.length > 1} />,
-                                        }
-                                    })}
-                                    defaultValue={currentTeamName}
-                                    frame={false}
-                                    onValueChange={(value) => setSelectedTeamName(value)}
-                                    className="px-0 mb-4"
-                                />
-                            ) : (
-                                <TeamInfoDisplay team={selectedTeam} multipleTeams={false} />
-                            )}
+                                            return {
+                                                value: teamName,
+                                                label: teamName,
+                                                content: (
+                                                    <TeamInfoDisplay team={team} multipleTeams={teams.length > 1} />
+                                                ),
+                                            }
+                                        })}
+                                        defaultValue={currentTeamName}
+                                        frame={false}
+                                        onValueChange={(value) => setSelectedTeamName(value)}
+                                        className="px-0 mb-4"
+                                    />
+                                ) : (
+                                    <TeamInfoDisplay team={selectedTeam} multipleTeams={false} />
+                                )}
+                            </div>
                         </div>
                     </div>
                     {selectedTeam && (

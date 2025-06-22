@@ -47,15 +47,6 @@ const IndexPage = () => {
                 }`}
                 imageType="absolute"
             />
-            <div className="relative">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/careers_hero_light_946740e5a4.png"
-                    alt="Careers"
-                    width={1948}
-                    height={698}
-                    className="w-full h-full object-cover"
-                />
-            </div>
             <CareersHero />,
             <SmallTeams />,
             <Pizza />,
