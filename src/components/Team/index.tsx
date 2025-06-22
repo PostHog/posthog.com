@@ -505,7 +505,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                                       companyRole={companyRole}
                                                       country={country}
                                                       location={location}
-                                                      isTeamLead={isTeamLead}
+                                                      isTeamLead={isTeamLead(id)}
                                                       pineappleOnPizza={pineappleOnPizza}
                                                       handleTeamLead={handleTeamLead}
                                                       editing={editing}
