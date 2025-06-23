@@ -19,9 +19,9 @@ Want to assign issues to a **team** rather than an individual teammate? You can 
 
 ### Auto assignment rules
 
-You can also automatically assign new and reopened issues using [auto assignment rules](https://us.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment).
-Assignment conditions are evaluated against the properties of the exception event that created the issue.
-Because assignment rules are evaluated during ingestion the stack trace (if present) will be unminified, which allows for filtering on on exception properties such as function name and source file.
+You can automatically assign new and reopened issues using [auto assignment rules](https://us.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment).
+
+Assignment conditions are evaluated against the properties of the exception event that created the issue. Because assignment rules are evaluated during ingestion, the stack trace (if present) will be unminified which allows for filtering on on exception properties such as function name and source file.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_light_1cf9a2437a.png"
