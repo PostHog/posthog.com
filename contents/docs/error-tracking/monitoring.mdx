@@ -40,7 +40,15 @@ Clicking through to an individual group shows you all the associated exceptions,
 
 You can use the search bar at the top of the [issue page](https://us.posthog.com/error_tracking) to filter issues based on the properties of the exceptions in that issue.
 
-For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError". Keep this in mind, as you might see seemingly unrelated search results that match due to one exception in the issue group matching your search.
+Search results are matched based on properties of exceptions grouped into the issues. For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError".
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Unrelated results type="caution">
+
+You may see seemingly unrelated issues in your search results because your search term matches an exception in the issue group. For example, you may see an issues named `RefreshError" when searching "schema", because a `get_schema` method appears on the exception stack traces.
+
+</CalloutBox>
 
 The search bar provides two modes of filtering:
 
