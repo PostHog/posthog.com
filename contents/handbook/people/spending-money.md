@@ -142,6 +142,8 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
 
+Every person has $100 per month for personal software, this is purely for personal software. Anything that has one other person involved should have it's own shared budget, just request this in Brex. 
+
 ### Optional software
 
 There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
