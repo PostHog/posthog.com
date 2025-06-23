@@ -222,6 +222,7 @@ const appSettings = {
 } as const
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
+    const isSSR = typeof window === 'undefined'
     const constraintsRef = useRef<HTMLDivElement>(null)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [windows, setWindows] = useState<AppWindow[]>([])
@@ -294,28 +295,28 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const getWindowBasedSizeConstraints = () => {
         return {
             min: {
-                width: window.innerWidth * 0.2,
-                height: window.innerHeight * 0.2,
+                width: isSSR ? 0 : window.innerWidth * 0.2,
+                height: isSSR ? 0 : window.innerHeight * 0.2,
             },
             max: {
-                width: window.innerWidth * 0.9,
-                height: window.innerHeight * 0.9,
+                width: isSSR ? 0 : window.innerWidth * 0.9,
+                height: isSSR ? 0 : window.innerHeight * 0.9,
             },
         }
     }
 
     const getDesktopCenterPosition = (size: { width: number; height: number }) => {
         return {
-            x: window.innerWidth / 2 - size.width / 2,
-            y: (window.innerHeight - taskbarHeight) / 2 - size.height / 2,
+            x: isSSR ? 0 : window.innerWidth / 2 - size.width / 2,
+            y: isSSR ? 0 : (window.innerHeight - taskbarHeight) / 2 - size.height / 2,
         }
     }
 
     const getPositionDefaults = (key: string, size: { width: number; height: number }, windows: AppWindow[]) => {
         if (key.startsWith('ask-max')) {
             return {
-                x: window.innerWidth - size.width - 20,
-                y: window.innerHeight - size.height - 20,
+                x: isSSR ? 0 : window.innerWidth - size.width - 20,
+                y: isSSR ? 0 : window.innerHeight - size.height - 20,
             }
         }
 
@@ -329,7 +330,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
             const potentialX = previousWindow.position.x + 10
 
-            const screenMidpoint = window.innerWidth / 2
+            const screenMidpoint = isSSR ? 0 : window.innerWidth / 2
             const windowRightEdge = potentialX + size.width
             const amountOnRight = Math.max(0, windowRightEdge - screenMidpoint)
             const proportionOnRight = amountOnRight / size.width
@@ -353,12 +354,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                      width: window.innerWidth * 0.9,
-                      height: window.innerHeight * 0.9,
+                      width: isSSR ? 0 : window.innerWidth * 0.9,
+                      height: isSSR ? 0 : window.innerHeight * 0.9,
                   })
         return {
-            width: Math.min(defaultSize.width, window.innerWidth * 0.9),
-            height: Math.min(defaultSize.height, window.innerHeight * 0.9),
+            width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
+            height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
         }
     }
 
@@ -411,13 +412,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
 
         // Adjust width if window extends beyond right edge
-        if (newWindow.position.x + newWindow.size.width > window.innerWidth - 20) {
-            newWindow.size.width = window.innerWidth - newWindow.position.x - 20
+        if (newWindow.position.x + newWindow.size.width > (isSSR ? 0 : window.innerWidth) - 20) {
+            newWindow.size.width = isSSR ? 0 : window.innerWidth - newWindow.position.x - 20
         }
 
         // Adjust height if window extends beyond bottom edge
-        if (newWindow.position.y + newWindow.size.height > window.innerHeight - taskbarHeight - 20) {
-            newWindow.size.height = window.innerHeight - newWindow.position.y - taskbarHeight - 20
+        if (newWindow.position.y + newWindow.size.height > (isSSR ? 0 : window.innerHeight) - taskbarHeight - 20) {
+            newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
         if (existingWindow) {
@@ -504,7 +505,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (!focusedWindow) return
         updateWindow(focusedWindow, {
             position: { x: 0, y: 0 },
-            size: { width: window.innerWidth, height: window.innerHeight - taskbarHeight },
+            size: { width: isSSR ? 0 : window.innerWidth, height: isSSR ? 0 : window.innerHeight - taskbarHeight },
             previousSize: focusedWindow.size,
             previousPosition: focusedWindow.position,
         })
@@ -522,8 +523,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
         updateTaskbarHeight()
 
-        window.addEventListener('resize', updateTaskbarHeight)
-        return () => window.removeEventListener('resize', updateTaskbarHeight)
+        if (!isSSR) {
+            window.addEventListener('resize', updateTaskbarHeight)
+            return () => window.removeEventListener('resize', updateTaskbarHeight)
+        }
     }, [])
 
     useEffect(() => {

@@ -61,6 +61,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         constraintsRef,
         expandWindow,
     } = useApp()
+    const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
     const sizeConstraints = item.sizeConstraints
     const size = item.size
@@ -252,8 +253,10 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                 })
             }
         }
-        window.addEventListener('resize', handleResize)
-        return () => window.removeEventListener('resize', handleResize)
+        if (!isSSR) {
+            window.addEventListener('resize', handleResize)
+            return () => window.removeEventListener('resize', handleResize)
+        }
     }, [item])
 
     useEffect(() => {
@@ -491,7 +494,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                             trigger={
                                                                 <span>
                                                                     <IconSquare className="size-5 group-hover:hidden" />
-                                                                    {size.width >= window?.innerWidth ? (
+                                                                    {size.width >= (isSSR ? 0 : window?.innerWidth) ? (
                                                                         <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
                                                                     ) : (
                                                                         <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
@@ -536,7 +539,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                         Resize
                                                     </ContextMenu.Label>
                                                     <ContextMenu.Item
-                                                        disabled={size.width === window?.innerWidth}
+                                                        disabled={size.width === (isSSR ? 0 : window?.innerWidth)}
                                                         className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
                                                         onClick={expandWindow}
                                                     >

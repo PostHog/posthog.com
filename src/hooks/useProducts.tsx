@@ -14,45 +14,19 @@ import {
     IconCorrelationAnalysis,
     IconRetention,
     IconStickiness,
-    IconDashboard,
     IconHogQL,
-    IconGanttChart,
 } from '@posthog/icons'
 import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
 import { allProductsData } from 'components/Pricing/Pricing'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
-import { useStaticQuery, graphql } from 'gatsby'
+import { useStaticQuery } from 'gatsby'
 import { useMemo, useState } from 'react'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
 import CodeBlock from 'components/Home/CodeBlock'
 import CloudinaryImage from 'components/CloudinaryImage'
-
-function SnippetRenderer() {
-    const data = useStaticQuery(graphql`
-        {
-            mdx(slug: { eq: "docs/integrate/snippet" }) {
-                rawBody
-            }
-        }
-    `)
-
-    if (!data?.mdx?.rawBody) {
-        return null
-    }
-
-    // Extract the code from the markdown (removing the ```html and ``` markers)
-    const rawContent = data.mdx.rawBody
-    const codeMatch = rawContent.match(/```html\n([\s\S]*?)\n```/)
-    const snippetCode = codeMatch ? codeMatch[1] : rawContent
-
-    return (
-        <div className="max-w-4xl mx-auto overflow-x-auto overflow-y-hidden">
-            <CodeBlock code={snippetCode} language="html" hideNumbers={false} lineNumberStart={1} tooltips={[]} />
-        </div>
-    )
-}
+import SnippetRenderer from 'components/SnippetRenderer'
 
 const initialProducts = [
     {

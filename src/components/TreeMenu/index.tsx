@@ -84,12 +84,13 @@ export function TreeMenu(props: TreeMenuProps) {
 
     return (
         <div className="space-y-px">
-            {items.map((item) => {
+            {items.map((item, index) => {
+                const key = `${item.name}-${index}-${item.url}`
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (
-                    <TreeMenuItem key={item.name} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
+                    <TreeMenuItem key={key} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
                 ) : (
-                    <TreeLink menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
+                    <TreeLink key={key} menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
                 )
             })}
         </div>
@@ -154,11 +155,12 @@ function TreeMenuItem({
             {hasChildren && (
                 <Collapsible.Content>
                     <div className="space-y-px">
-                        {item.children?.map((child) => {
+                        {item.children?.map((child, index) => {
+                            const key = `${child.name}-${index}-${child.url}`
                             const hasChildren = child.children && child.children.length > 0
                             return hasChildren ? (
                                 <TreeMenuItem
-                                    key={child.name}
+                                    key={key}
                                     item={child}
                                     activeItem={activeItem}
                                     index={index + 1}
@@ -166,6 +168,7 @@ function TreeMenuItem({
                                 />
                             ) : (
                                 <TreeLink
+                                    key={key}
                                     menuItem={child}
                                     index={index + 1}
                                     onClick={onClick}

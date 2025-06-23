@@ -13,9 +13,7 @@ const Tooltip = ({ trigger, children, open, onOpenChange }: TooltipProps) => {
         <RadixTooltip.Provider delayDuration={0}>
             <RadixTooltip.Root open={open} onOpenChange={onOpenChange}>
                 <RadixTooltip.Trigger asChild>
-                    <button className="inline-flex">
-                        <span>{trigger}</span>
-                    </button>
+                    <span>{trigger}</span>
                 </RadixTooltip.Trigger>
                 <RadixTooltip.Portal>
                     <RadixTooltip.Content
