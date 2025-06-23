@@ -731,7 +731,7 @@ export const handbookSidebar = [
                 url: '/handbook/content/newsletter',
             },
             {
-                name: 'Newsletter Ads',
+                name: 'Newsletter ads',
                 url: '/handbook/content/newsletter-ads',
             },
             {

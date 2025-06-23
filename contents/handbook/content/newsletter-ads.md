@@ -1,5 +1,5 @@
 ---
-title: Newsletter Ads
+title: Newsletter ads
 sidebar: Handbook
 showTitle: true
 ---
@@ -12,7 +12,7 @@ Budget plans can be viewed in this <PrivateLink url="https://docs.google.com/spr
 
 ## Uploading emails to Substack
 
-Annoyingly, Substack doesn't have an API, which means that we manually need to upload emails we capture via our website, InstantForm ads, and most other paid marketing channels. This means that we have to manually upload these emails to Substack.  <TeamMember name="Andy Vandervell" photo /> does this once a week.
+Annoyingly, Substack doesn't have an API, which means that we manually need to upload emails we capture via our website, InstantForm ads, and most other paid marketing channels. This means that we have to manually upload these emails to Substack. <TeamMember name="Andy Vandervell" photo /> does this once a week.
 
 The emails are to PostHog via an event called `newsletter_subscribed`, which are sent to the <PrivateLink url="https://posthog.slack.com/archives/C06V4CW0ZC3">#newsletter-sub-alerts</PrivateLink> in Slack.
 
@@ -70,7 +70,7 @@ Smaller newsletters that we also have supported:
 - [Fullstack Bulletin](https://fullstackbulletin.com/)
 - [freek.dev](https://freek.dev/)
 
-#### Newsletter sponsorship content
+### Newsletter sponsorship content
 
 Titles that work well include:
 
