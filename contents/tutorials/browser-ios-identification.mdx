@@ -12,7 +12,9 @@ tags:
 If you use PostHog on both web and iOS apps, you can track user activity across them. When a user is authenticated on both web and mobile, their events are automatically correlated by identifying them by their account. We cover identifying users in-depth in the [identifying users documentation](/docs/product-analytics/identify).
 
 If a user is not authenticated on web or mobile, you can't identify the user by their account. 
-Instead, you can track web to mobile flows using deeplinks. This is useful for use cases like:
+Instead, you can track web to mobile flows using deeplinks. 
+
+This is useful for use cases like:
 
 - Tracking unauthenticated users across web and mobile.
 
@@ -158,9 +160,8 @@ class DeeplinkHandler: ObservableObject {
 }
 ```
 
-After the user has been identified, all captured events will be correlated to the same person.
-
 ## Further reading
+
 - [Identifying users](/docs/product-analytics/identify)
 - [Anonymous vs identified events](/docs/data/anonymous-vs-identified-events)
 - [Complete guide to event tracking](/tutorials/event-tracking-guide)
