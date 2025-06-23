@@ -63,7 +63,7 @@ When using the `captureException` method, you can provide `$exception_fingerprin
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
 ```
 
-Should an exception be autocaptured, you will need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event. You can alter the event as part of this callback to add the property:
+If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
 
 ```javascript
 posthog.init("<ph_project_api_key>", {
