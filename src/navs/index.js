@@ -731,6 +731,10 @@ export const handbookSidebar = [
                 url: '/handbook/content/newsletter',
             },
             {
+                name: 'Newsletter ads',
+                url: '/handbook/content/newsletter-ads',
+            },
+            {
                 name: 'YouTube',
                 url: '/handbook/content/youtube',
             },
