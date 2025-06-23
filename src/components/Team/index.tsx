@@ -33,6 +33,13 @@ import { Tabs } from 'radix-ui'
 import { Fieldset } from 'components/OSFieldset'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSTabs from 'components/OSTabs'
+import TeamImage from './TeamImage'
+import {
+    StickerPineappleYes,
+    StickerPineappleNo,
+    StickerPineappleUnknown,
+    StickerPineapple,
+} from 'components/Stickers/Index'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -44,6 +51,48 @@ const Hedgehog = ({ className = '' }) => {
             className={className}
             src="/images/hedgehog.svg"
         />
+    )
+}
+
+const PineapplePieChart = ({ percentage }: { percentage: number | false }) => {
+    if (!percentage) {
+        return (
+            <div className="flex flex-col items-center space-y-3">
+                <p className="text-sm opacity-75">No data available</p>
+                <div className="w-32 h-32 border-2 border-dashed border-border dark:border-border-dark rounded-full flex items-center justify-center">
+                    <StickerPineappleUnknown className="w-12 h-12 opacity-50" />
+                </div>
+            </div>
+        )
+    }
+
+    return (
+        <div className="w-full flex gap-4">
+            <div className="w-12">
+                {percentage > 50 ? (
+                    <StickerPineappleYes className="w-12 h-12" />
+                ) : percentage == 50 ? (
+                    <StickerPineapple className="w-12 h-12" />
+                ) : (
+                    <StickerPineappleNo className="w-12 h-12" />
+                )}
+            </div>
+            <div className="flex-1">
+                <p className="text-sm text-secondary mb-0">Does pineapple belong on pizza?</p>
+                {percentage > 50 ? (
+                    <>
+                        <strong>{percentage}%</strong> of this team say <strong className="text-green">yes</strong>!
+                    </>
+                ) : percentage == 50 ? (
+                    <>This team is evenly split.</>
+                ) : (
+                    <>
+                        Shockingly, <strong>{100 - percentage}%</strong> of this team say{' '}
+                        <strong className="text-red">no</strong>!
+                    </>
+                )}
+            </div>
+        </div>
     )
 }
 
@@ -327,101 +376,50 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
     const posthog = usePostHog()
 
-    const tabs = [
-        {
-            value: 'overview',
-            label: 'Overview',
-            content: (
-                <>
-                    <Fieldset legend="Members">
-                        <div className="@container flex-1">
-                            <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
-                                {loading
-                                    ? new Array(4).fill(0).map((_, i) => (
-                                          <li key={i}>
-                                              <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                          </li>
-                                      ))
-                                    : profiles?.data || values.teamMembers
-                                    ? [...((editing ? values.teamMembers : profiles?.data) || [])]
-                                          .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
-                                          .map((profile) => {
-                                              const {
-                                                  id,
-                                                  attributes: {
-                                                      avatar,
-                                                      firstName,
-                                                      lastName,
-                                                      country,
-                                                      location,
-                                                      companyRole,
-                                                      pineappleOnPizza,
-                                                  },
-                                              } = profile
-                                              const name = [firstName, lastName].filter(Boolean).join(' ')
-                                              return (
-                                                  <li key={id} className="rounded-md relative">
-                                                      <button
-                                                          className="size-full"
-                                                          onClick={() =>
-                                                              setActiveProfile({
-                                                                  ...profile.attributes,
-                                                                  isTeamLead: isTeamLead(id),
-                                                                  id,
-                                                              })
-                                                          }
-                                                      >
-                                                          <TeamMemberCard
-                                                              name={name}
-                                                              companyRole={companyRole}
-                                                              country={country}
-                                                              location={location}
-                                                              isTeamLead={isTeamLead}
-                                                              pineappleOnPizza={pineappleOnPizza}
-                                                              handleTeamLead={handleTeamLead}
-                                                              editing={editing}
-                                                              id={id}
-                                                              avatar={avatar}
-                                                          />
-                                                      </button>
-                                                      {editing && (
-                                                          <button
-                                                              onClick={() => removeTeamMember(id)}
-                                                              className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
-                                                          >
-                                                              <Tooltip content="Remove team member" placement="top">
-                                                                  <IconX className="w-4 h-4" />
-                                                              </Tooltip>
-                                                          </button>
-                                                      )}
-                                                  </li>
-                                              )
-                                          })
-                                    : new Array(4).fill(0).map((_, i) => (
-                                          <li key={i}>
-                                              <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
-                                          </li>
-                                      ))}
-                            </ul>
-                            {editing && <AddTeamMember handleChange={(user) => addTeamMember(user.profile)} />}
-                        </div>
+    return (
+        <>
+            {name && (
+                <SEO
+                    title={`${name} - PostHog`}
+                    description="We're organized into multi-disciplinary small teams."
+                    image={`/images/small-teams.png`}
+                />
+            )}
+            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
+                {activeProfile && <Profile profile={{ ...activeProfile }} />}
+            </SideModal>
+
+            <Header
+                loading={loading}
+                teamName={values.name}
+                description={description}
+                teamImage={teamImage}
+                hasInProgress={hasInProgress}
+                handleChange={handleChange}
+                values={values}
+                editing={editing}
+                setFieldValue={setFieldValue}
+            />
+
+            <div className="grid grid-cols-2 gap-4">
+                <div>
+                    <Fieldset legend="Pineapple on pizza">
+                        <PineapplePieChart percentage={pineapplePercentage} />
                     </Fieldset>
-                    <div className="grid grid-cols-2 gap-4">
-                        <Fieldset legend="Pineapple on pizza">{PineappleText(pineapplePercentage)}</Fieldset>
-                        {teamEmojis?.length > 0 && (
-                            <Fieldset legend="Custom emojis">
-                                <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
-                                    {teamEmojis?.map(({ name, localFile }) => (
-                                        <li key={name}>
-                                            <Tooltip content={`:${name}:`}>
-                                                <img className="h-8" src={localFile?.publicURL} />
-                                            </Tooltip>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Fieldset>
-                        )}
-                    </div>
+                    {teamEmojis?.length > 0 && (
+                        <Fieldset legend="Custom emojis">
+                            <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
+                                {teamEmojis?.map(({ name, localFile }) => (
+                                    <li key={name}>
+                                        <Tooltip content={`:${name}:`}>
+                                            <img className="h-8" src={localFile?.publicURL} />
+                                        </Tooltip>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Fieldset>
+                    )}
+
                     <Fieldset
                         legend={
                             <span className="flex items-center gap-1">
@@ -455,149 +453,179 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                             )}
                         </ul>
                     </Fieldset>
-                </>
-            ),
-        },
-        {
-            value: 'roadmap',
-            label: 'Roadmap',
-            content: (
-                <>
-                    {hasInProgress && (
-                        <Fieldset legend="What we're building">
-                            <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
-                                <ul className="list-none m-0 p-0 flex flex-col gap-4">
-                                    {inProgress.map((roadmap) => (
-                                        <InProgress key={roadmap.squeakId} {...roadmap} />
-                                    ))}
-                                </ul>
-                                {(updates.length > 0 || isModerator) && (
-                                    <div className="lg:max-w-[340px] w-full flex-shrink-0">
-                                        {isModerator && (
-                                            <div
-                                                className={`${
-                                                    updates.length > 0
-                                                        ? 'mb-8 pb-8 border-border dark:border-dark '
-                                                        : ''
-                                                }`}
-                                            >
-                                                <TeamUpdate teamName={name} hideTeamSelect />
-                                            </div>
-                                        )}
-                                        {updates.length > 0 && (
-                                            <Question key={updates[0].question} id={updates[0].question} />
-                                        )}
+                </div>
+
+                {loading ? (
+                    <div className="max-w-sm w-full aspect-video bg-accent dark:bg-accent-dark rounded rotate-2" />
+                ) : (
+                    <TeamImage values={values} setFieldValue={setFieldValue} teamImage={teamImage} editing={editing} />
+                )}
+            </div>
+
+            <Fieldset legend="Members">
+                <div className="@container flex-1">
+                    <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
+                        {loading
+                            ? new Array(4).fill(0).map((_, i) => (
+                                  <li key={i}>
+                                      <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                  </li>
+                              ))
+                            : profiles?.data || values.teamMembers
+                            ? [...((editing ? values.teamMembers : profiles?.data) || [])]
+                                  .sort((a, b) => isTeamLead(b.id) - isTeamLead(a.id))
+                                  .map((profile) => {
+                                      const {
+                                          id,
+                                          attributes: {
+                                              avatar,
+                                              firstName,
+                                              lastName,
+                                              country,
+                                              location,
+                                              companyRole,
+                                              pineappleOnPizza,
+                                          },
+                                      } = profile
+                                      const name = [firstName, lastName].filter(Boolean).join(' ')
+                                      return (
+                                          <li key={id} className="rounded-md relative">
+                                              <button
+                                                  className="size-full"
+                                                  onClick={() =>
+                                                      setActiveProfile({
+                                                          ...profile.attributes,
+                                                          isTeamLead: isTeamLead(id),
+                                                          id,
+                                                      })
+                                                  }
+                                              >
+                                                  <TeamMemberCard
+                                                      name={name}
+                                                      companyRole={companyRole}
+                                                      country={country}
+                                                      location={location}
+                                                      isTeamLead={isTeamLead(id)}
+                                                      pineappleOnPizza={pineappleOnPizza}
+                                                      handleTeamLead={handleTeamLead}
+                                                      editing={editing}
+                                                      id={id}
+                                                      avatar={avatar}
+                                                  />
+                                              </button>
+                                              {editing && (
+                                                  <button
+                                                      onClick={() => removeTeamMember(id)}
+                                                      className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
+                                                  >
+                                                      <Tooltip content="Remove team member" placement="top">
+                                                          <IconX className="w-4 h-4" />
+                                                      </Tooltip>
+                                                  </button>
+                                              )}
+                                          </li>
+                                      )
+                                  })
+                            : new Array(4).fill(0).map((_, i) => (
+                                  <li key={i}>
+                                      <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                  </li>
+                              ))}
+                    </ul>
+                    {editing && <AddTeamMember handleChange={(user) => addTeamMember(user.profile)} />}
+                </div>
+            </Fieldset>
+
+            <h2>Roadmap</h2>
+
+            {hasInProgress && (
+                <Fieldset legend="What we're building">
+                    <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
+                        <ul className="list-none m-0 p-0 flex flex-col gap-4">
+                            {inProgress.map((roadmap) => (
+                                <InProgress key={roadmap.squeakId} {...roadmap} />
+                            ))}
+                        </ul>
+                        {(updates.length > 0 || isModerator) && (
+                            <div className="lg:max-w-[340px] w-full flex-shrink-0">
+                                {isModerator && (
+                                    <div
+                                        className={`${
+                                            updates.length > 0 ? 'mb-8 pb-8 border-border dark:border-dark ' : ''
+                                        }`}
+                                    >
+                                        <TeamUpdate teamName={name} hideTeamSelect />
                                     </div>
                                 )}
+                                {updates.length > 0 && <Question key={updates[0].question} id={updates[0].question} />}
                             </div>
-                        </Fieldset>
-                    )}
-                    <Roadmap
-                        hasUnderConsideration={hasUnderConsideration}
-                        underConsideration={underConsideration}
-                        recentlyShipped={recentlyShipped}
-                    />
-                </>
-            ),
-        },
-        ...(objectives
-            ? [
-                  {
-                      value: 'goals',
-                      label: 'Goals',
-                      content: (
-                          <div className="article-content team-page-content">
-                              <MDXProvider components={{ TeamMember, FutureTeamMember }}>
-                                  <MDXRenderer>{objectives}</MDXRenderer>
-                              </MDXProvider>
-                          </div>
-                      ),
-                  },
-              ]
-            : []),
-        ...(hasBody
-            ? [
-                  {
-                      value: 'handbook',
-                      label: 'Handbook',
-                      content: (
-                          <div className="article-content team-page-content">
-                              <MDXProvider components={{ PrivateLink }}>
-                                  <MDXRenderer>{body}</MDXRenderer>
-                              </MDXProvider>
-                          </div>
-                      ),
-                  },
-              ]
-            : []),
-    ]
-
-    return (
-        <>
-            {name && (
-                <SEO
-                    title={`${name} - PostHog`}
-                    description="We're organized into multi-disciplinary small teams."
-                    image={`/images/small-teams.png`}
-                />
-            )}
-            <SideModal open={!!activeProfile} setOpen={setActiveProfile}>
-                {activeProfile && <Profile profile={{ ...activeProfile }} />}
-            </SideModal>
-
-            <Header
-                loading={loading}
-                teamName={values.name}
-                description={description}
-                teamImage={teamImage}
-                hasInProgress={hasInProgress}
-                handleChange={handleChange}
-                values={values}
-                editing={editing}
-                setFieldValue={setFieldValue}
-            />
-
-            <OSTabs tabs={tabs} triggerDataScheme="primary" defaultValue="overview">
-                {isModerator && (
-                    <div className="flex justify-end space-x-2 absolute top-4 right-4 z-50">
-                        <CallToAction
-                            disabled={saving || !!errors.name}
-                            size="sm"
-                            onClick={() => {
-                                if (editing) {
-                                    submitForm()
-                                } else {
-                                    setEditing(true)
-                                }
-                            }}
-                        >
-                            {saving ? (
-                                <IconSpinner className="size-5 animate-spin" />
-                            ) : editing ? (
-                                newTeam ? (
-                                    'Save & publish'
-                                ) : (
-                                    'Save'
-                                )
-                            ) : (
-                                'Edit'
-                            )}
-                        </CallToAction>
-                        {!newTeam && editing && (
-                            <CallToAction
-                                type="secondary"
-                                size="sm"
-                                onClick={() => {
-                                    setEditing(false)
-                                    resetForm()
-                                }}
-                            >
-                                Cancel
-                            </CallToAction>
                         )}
                     </div>
+                </Fieldset>
+            )}
+            <Roadmap
+                hasUnderConsideration={hasUnderConsideration}
+                underConsideration={underConsideration}
+                recentlyShipped={recentlyShipped}
+            />
+
+            <h2>Goals</h2>
+
+            <div className="article-content team-page-content">
+                {objectives && (
+                    <MDXProvider components={{ TeamMember, FutureTeamMember }}>
+                        <div dangerouslySetInnerHTML={{ __html: objectives }} />
+                    </MDXProvider>
                 )}
-            </OSTabs>
+            </div>
+
+            <h2>Handbook</h2>
+
+            <div className="article-content team-page-content">
+                <MDXProvider components={{ PrivateLink }}>
+                    <MDXRenderer>{body}</MDXRenderer>
+                </MDXProvider>
+            </div>
+
+            {isModerator && (
+                <div className="flex justify-end space-x-2 absolute top-4 right-4 z-50">
+                    <CallToAction
+                        disabled={saving || !!errors.name}
+                        size="sm"
+                        onClick={() => {
+                            if (editing) {
+                                submitForm()
+                            } else {
+                                setEditing(true)
+                            }
+                        }}
+                    >
+                        {saving ? (
+                            <IconSpinner className="size-5 animate-spin" />
+                        ) : editing ? (
+                            newTeam ? (
+                                'Save & publish'
+                            ) : (
+                                'Save'
+                            )
+                        ) : (
+                            'Edit'
+                        )}
+                    </CallToAction>
+                    {!newTeam && editing && (
+                        <CallToAction
+                            type="secondary"
+                            size="sm"
+                            onClick={() => {
+                                setEditing(false)
+                                resetForm()
+                            }}
+                        >
+                            Cancel
+                        </CallToAction>
+                    )}
+                </div>
+            )}
         </>
     )
 }

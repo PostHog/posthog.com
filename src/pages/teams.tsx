@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useMemo, useRef, useEffect } from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
@@ -16,11 +16,21 @@ import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { IconX } from '@posthog/icons'
 
 const Teams: React.FC = () => {
     const navigate = useNavigate()
     const location = useLocation()
     const currentPath = location.pathname.replace('/', '')
+    const [searchTerm, setSearchTerm] = useState('')
+    const searchInputRef = useRef<HTMLInputElement>(null)
+
+    // Auto-focus the input when component loads
+    useEffect(() => {
+        if (searchInputRef.current) {
+            searchInputRef.current.focus()
+        }
+    }, [])
 
     const selectOptions = [
         {
@@ -93,6 +103,71 @@ const Teams: React.FC = () => {
             }
         }
     `)
+
+    // Filter teams based on search term
+    const filteredTeams = useMemo(() => {
+        if (!searchTerm.trim()) {
+            return allTeams.nodes
+        }
+
+        const searchLower = searchTerm.toLowerCase()
+
+        return allTeams.nodes.filter((team: any) => {
+            // Search in team name
+            if (team.name?.toLowerCase().includes(searchLower)) {
+                return true
+            }
+
+            // Search in team slug
+            if (team.slug?.toLowerCase().includes(searchLower)) {
+                return true
+            }
+
+            // Search in team member names
+            const memberMatch = team.profiles?.data?.some((profile: any) => {
+                const firstName = profile.attributes?.firstName?.toLowerCase() || ''
+                const lastName = profile.attributes?.lastName?.toLowerCase() || ''
+                const fullName = `${firstName} ${lastName}`.trim()
+
+                return (
+                    firstName.includes(searchLower) || lastName.includes(searchLower) || fullName.includes(searchLower)
+                )
+            })
+
+            return memberMatch
+        })
+    }, [allTeams.nodes, searchTerm])
+
+    // Function to highlight matching text in team names
+    const highlightText = (text: string, searchTerm: string) => {
+        if (!searchTerm.trim()) return text
+
+        const regex = new RegExp(`(${searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+        const parts = text.split(regex)
+
+        return parts.map((part, index) =>
+            regex.test(part) ? (
+                <span key={index} className="bg-yellow/30 dark:bg-yellow/20 px-0.5 -mx-0.5 rounded">
+                    {part}
+                </span>
+            ) : (
+                part
+            )
+        )
+    }
+
+    // Function to check if a team member matches the search
+    const isTeamMemberMatch = (profile: any, searchTerm: string) => {
+        if (!searchTerm.trim()) return false
+
+        const searchLower = searchTerm.toLowerCase()
+        const firstName = profile.attributes?.firstName?.toLowerCase() || ''
+        const lastName = profile.attributes?.lastName?.toLowerCase() || ''
+        const fullName = `${firstName} ${lastName}`.trim()
+
+        return firstName.includes(searchLower) || lastName.includes(searchLower) || fullName.includes(searchLower)
+    }
+
     return (
         <ReaderView
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
@@ -119,9 +194,34 @@ const Teams: React.FC = () => {
                             that are multi-disciplinary and as self-sufficient as possible.
                         </p>
 
+                        <div className="relative mb-6">
+                            <input
+                                ref={searchInputRef}
+                                type="text"
+                                placeholder="Search teams"
+                                className="w-full border border-primary text-lg px-4 py-2 pr-10"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Escape') {
+                                        setSearchTerm('')
+                                    }
+                                }}
+                            />
+                            {searchTerm && (
+                                <button
+                                    onClick={() => setSearchTerm('')}
+                                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary hover:text-primary transition-colors"
+                                    aria-label="Clear search"
+                                >
+                                    <IconX className="w-4 h-4" />
+                                </button>
+                            )}
+                        </div>
+
                         <div className="grid @xl:grid-cols-2 @7xl:grid-cols-3 gap-4">
-                            {allTeams.nodes
-                                .sort((a, b) => a.name.localeCompare(b.name))
+                            {filteredTeams
+                                .sort((a: any, b: any) => a.name.localeCompare(b.name))
                                 .map(
                                     ({
                                         id,
@@ -134,7 +234,7 @@ const Teams: React.FC = () => {
                                         crest,
                                         crestOptions,
                                         leadProfiles,
-                                    }) => (
+                                    }: any) => (
                                         <Link
                                             to={`/teams/${slug}`}
                                             key={id}
@@ -151,7 +251,7 @@ const Teams: React.FC = () => {
                                             </div>
 
                                             <div className="flex-1 pt-8">
-                                                <h2 className="text-xl mb-1">{name}</h2>
+                                                <h2 className="text-xl mb-1">{highlightText(name, searchTerm)}</h2>
 
                                                 {(tagline || description) && (
                                                     <p className="text-sm opacity-80 mb-1 line-clamp-3">
@@ -202,7 +302,7 @@ const Teams: React.FC = () => {
                                                                 {
                                                                     id,
                                                                     attributes: { firstName, lastName, avatar, color },
-                                                                },
+                                                                }: any,
                                                                 index: number
                                                             ) => {
                                                                 const name = [firstName, lastName]
@@ -211,10 +311,26 @@ const Teams: React.FC = () => {
                                                                 const isTeamLead = leadProfiles.data.some(
                                                                     ({ id: leadID }: { id: string }) => leadID === id
                                                                 )
+                                                                const isMatchingMember = isTeamMemberMatch(
+                                                                    {
+                                                                        attributes: {
+                                                                            firstName,
+                                                                            lastName,
+                                                                            avatar,
+                                                                            color,
+                                                                        },
+                                                                    },
+                                                                    searchTerm
+                                                                )
+
                                                                 return (
                                                                     <span
                                                                         key={`${name}-${index}`}
-                                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 border-accent`}
+                                                                        className={`cursor-default -ml-3 relative hover:z-10 rounded-full border-1 ${
+                                                                            isMatchingMember
+                                                                                ? 'border-red dark:border-yellow shadow-lg shadow-red/50 z-10'
+                                                                                : 'border-accent'
+                                                                        }`}
                                                                     >
                                                                         <Tooltip
                                                                             content={`${name} ${
@@ -227,7 +343,11 @@ const Teams: React.FC = () => {
                                                                                 className={`size-10 rounded-full bg-${
                                                                                     color ??
                                                                                     'accent dark:bg-accent-dark'
-                                                                                } border border-light dark:border-dark transform scale-100 hover:scale-125 transition-all`}
+                                                                                } border transform ${
+                                                                                    isMatchingMember
+                                                                                        ? 'scale-125 border-red dark:border-yellow'
+                                                                                        : 'scale-100 border-light dark:border-dark'
+                                                                                } hover:scale-125 transition-all`}
                                                                                 alt={name}
                                                                             />
                                                                         </Tooltip>

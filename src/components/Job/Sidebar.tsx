@@ -24,7 +24,7 @@ export const PineappleText = (percentage: number) => {
     )
 }
 
-export const TeamMembers = ({ profiles }) => {
+export const TeamMembers = ({ profiles, size = '!size-10' }) => {
     return (
         <ul className="list-none m-0 p-0 flex flex-wrap">
             {profiles?.data?.map(
@@ -46,7 +46,7 @@ export const TeamMembers = ({ profiles }) => {
                     return (
                         <li
                             key={name}
-                            className="first:-ml-0 -ml-2 transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full
+                            className="first:-ml-0 ml-[-8%] transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full
                     "
                         >
                             <Link to={`/community/profiles/${id}`}>
@@ -66,9 +66,9 @@ export const TeamMembers = ({ profiles }) => {
                                         <ContributorImageSmall
                                             name={name}
                                             image={avatar}
-                                            className={`!w-10 !h-10 border-[2.5px] border-solid border-white dark:border-primary bg-${
+                                            className={`border-[2.5px] border-solid border-white dark:border-primary bg-${
                                                 color ? color : 'accent'
-                                            } dark:bg-${color ? color : 'accent-dark'}`}
+                                            } dark:bg-${color ? color : 'accent-dark'} ${size}`}
                                             imgClassName={``}
                                         />
                                     </span>

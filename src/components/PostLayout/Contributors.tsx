@@ -22,7 +22,7 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
     const cloudinaryPublicId = typeof image === 'string' && isCloudinaryImage(image) && getCloudinaryPublicId(image)
     return (
         <div
-            className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
+            className={`relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
         >
             {typeof image === 'string' ? (
                 cloudinaryPublicId ? (
@@ -31,7 +31,7 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
                         publicId={cloudinaryPublicId}
                         cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                     >
-                        <Transformation width="50" crop="scale" />
+                        <Transformation width="100" crop="scale" />
                     </Image>
                 ) : (
                     <img className={`rounded-full ${imgClassName}`} src={image} />
