@@ -1078,6 +1078,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/open-source-sponsorship',
             },
             {
+                name: 'ICP scoring',
+                url: '/handbook/growth/marketing/icp',
+            },
+            {
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
             },

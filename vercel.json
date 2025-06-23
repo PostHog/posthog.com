@@ -1348,7 +1348,6 @@
             "source": "/handbook/growth/marketing/value-propositions",
             "destination": "/handbook/why-does-posthog-exist"
         },
-        { "source": "/handbook/growth/marketing/icp", "destination": "/handbook/growth/sales/lead-scoring" },
         { "source": "/features/self-hosted", "destination": "/docs/self-host" },
         { "source": "/docs/settings/organizations-and-projects", "destination": "/docs/settings/organizations" },
         { "source": "/docs/settings/role-based-access", "destination": "/docs/settings/access-control" },
