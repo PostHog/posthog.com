@@ -24,14 +24,14 @@ This is useful for use cases like:
 
 ## Understanding cross-platform tracking
 
-When a user is authenticated on both web and mobile, their events are automatically correlated because they are identified by a `distinct_id` correlated to their account. This is why we recommend calling `posthog.identify` on both web and mobile as soon as the user signs up or logs in.
+When a user is authenticated on both web and mobile, their events are automatically correlated because they are identified by a `distinct_id` correlated to their account. This is why we recommend [calling `posthog.identify`](https://posthog.com/docs/product-analytics/identify#1-call-identify-as-soon-as-youre-able-to) on both web and mobile as soon as the user signs up or logs in.
 
-When a user is not authenticated, you can't call `posthog.identify`. Instead, PostHog tracks [anonymous events](/docs/data/anonymous-vs-identified-events) using a randomly generated `distinct_id` that contains no identifiable information.
+When a user is not authenticated, you can't call `posthog.identify`. Instead, PostHog tracks [anonymous events](/docs/data/anonymous-vs-identified-events) using a **randomly generated** `distinct_id` that contains no identifiable information.
 
 To correlate anonymous events from web to mobile, you can use deeplinks:
-- Get a distinct ID from the web app using `posthog.get_distinct_id`
-- Attach the distinct ID and other properties like UTM parameters to the deeplink
-- When the user opens the mobile app, call `posthog.identify` or `posthog.alias` with the distinct ID and other properties
+1. Get a distinct ID from the web app using `posthog.get_distinct_id`
+2. Attach the distinct ID and other properties like UTM parameters to the deeplink
+3. When the user opens the mobile app, call `posthog.identify` or `posthog.alias` with the distinct ID and other properties
 
 Let's go through an example with Next.js and SwiftUI. These principles apply to any other web and mobile app.
 
@@ -93,7 +93,7 @@ export default function Home() {
 
 ## 3. Handle the deeplink in the mobile app
 
-You need to configure your mobile app to handle the deeplink, you can follow the [Support universal links documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/#Support-universal-links). Then, in your mobile app, you have two situations to handle:
+You need to configure your mobile app to handle the deeplink, you can follow the [support universal links documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/#Support-universal-links) from Apple. Then, in your mobile app, you have two situations to handle:
 
 1. The user is not authenticated on the mobile app
 2. The user is already authenticated on the mobile app
@@ -102,7 +102,10 @@ Below is a SwiftUI example of how to handle the deeplink in the mobile app. The 
 
 ### 3.1. The user is not authenticated on the mobile app
 
-If the user is not authenticated on the mobile app, you can call `posthog.identify` directly with the distinct ID and other properties like UTM parameters. This will create a person in PostHog that links the web and mobile events.
+If the user is not authenticated on the mobile app, you can call `posthog.identify` directly with the distinct ID and other properties like UTM parameters. 
+
+- If the web app is also unidentified, this will create a person in PostHog that links the web and mobile events.
+- If the web app is identified, this will create a person in PostHog that links the web and mobile events.
 
 ```swift focusOnLines=13-17
 class DeeplinkHandler: ObservableObject {
