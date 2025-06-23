@@ -43,7 +43,7 @@ export const ViewButton = ({ title, view, setView }) => {
     )
 }
 
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const A = (props) => <Link {...props} />
 
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data

@@ -3,7 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { useFitText } from '../../hooks/useFitText'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
@@ -217,6 +217,20 @@ export default function People() {
         return acc
     }, {})
 
+    // Calculate unique countries represented by all team members
+    const uniqueCountriesCount = useMemo(() => {
+        const countries = new Set<string>()
+
+        teamMembers.forEach((member: any) => {
+            const country = member.country
+            if (country && country.trim() && country !== 'world') {
+                countries.add(country.trim())
+            }
+        })
+
+        return countries.size
+    }, [teamMembers])
+
     // Some Stats were used as fallback until the actual data is added to the GraphQL Server
     const teamStats = [
         {
@@ -243,52 +257,40 @@ export default function People() {
 
     return (
         <ReaderView
+            title="People"
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
         >
-            <div data-scheme="primary" className="bg-primary border-t border-primary h-full">
+            <div data-scheme="primary" className="bg-primary h-full">
                 <SEO title="Team - PostHog" />
                 <SideModal open={!!activeProfile} setOpen={() => setActiveProfile(null)}>
                     {activeProfile && <Profile profile={activeProfile} />}
                 </SideModal>
                 <ScrollArea className="h-full">
-                    <h2 className="text-4xl">People</h2>
+                    <div className="columns-2 gap-4 mb-4">
+                        <p>
+                            We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
+                        </p>
 
-                    <div className="float-right">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/explorer-hog.png"
-                            alt="Hiking hog"
-                            width={250}
-                            height={250}
-                            placeholder="blurred"
-                            className="w-[200px] sm:w-64 md:w-72 lg:w-auto lg:max-w-auto -mr-4 md:mr-0 -mt-4 md:mt-0"
-                        />
+                        <p>Building an unusually great company starts with an unusual team.</p>
+
+                        <p>
+                            We don't care if you haven't finished (or attended) school, if you were super important at a
+                            "Big Tech" company, or if you ran a startup that crashed and burned.
+                        </p>
+
+                        <p>
+                            What we <em>do</em> care about is your ability to learn, iterate, and ship.
+                        </p>
+
+                        <p>
+                            That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the
+                            United Kingdom, Finland, Poland, and Colombia (among other places).
+                        </p>
+
+                        <p>
+                            Interested in a hand-drawn sketch of your face? <Link to={`/careers`}>We're hiring.</Link>
+                        </p>
                     </div>
-
-                    <p>
-                        We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
-                    </p>
-
-                    <p>Building an unusually great company starts with an unusual team.</p>
-
-                    <p>
-                        We don't care if you haven't finished (or attended) school, if you were super important at a
-                        "Big Tech" company, or if you ran a startup that crashed and burned.
-                    </p>
-
-                    <p>
-                        What we <em>do</em> care about is your ability to learn, iterate, and ship.
-                    </p>
-
-                    <p>
-                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the
-                        United Kingdom, Finland, Poland, and Colombia (among other places).
-                    </p>
-
-                    <p>
-                        Interested in a hand-drawn sketch of your face? <Link to={`/careers`}>We're hiring.</Link>
-                    </p>
-
-                    <DebugContainerQuery />
 
                     <aside className="">
                         <h3 className="text-lg mb-2">Team members who... </h3>
@@ -304,8 +306,13 @@ export default function People() {
                                 )
                             })}
                         </div>
+
+                        <dl>
+                            <dt>Countries represented</dt>
+                            <dd>{uniqueCountriesCount}</dd>
+                        </dl>
                     </aside>
-                    <ul className="list-none m-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @7xl:grid-cols-3 gap-x-6 gap-y-12 max-w-screen-2xl">
+                    <ul className="not-prose list-none m-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @7xl:grid-cols-3 gap-x-6 gap-y-12 max-w-screen-2xl">
                         {teamMembers.map((teamMember: any, index: number) => {
                             return (
                                 <TeamMember

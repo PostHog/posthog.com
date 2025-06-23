@@ -187,8 +187,8 @@ const Teams: React.FC = () => {
                 <DebugContainerQuery />
                 <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                     <div className="md:flex-1">
-                        <h1 className="font-bold text-3xl md:text-4xl mb-2">Small teams</h1>
-                        <p className="text-secondary">
+                        <h1>Small teams</h1>
+                        <p>
                             We've organized the company into{' '}
                             <Link
                                 to="/handbook/company/small-teams"
@@ -240,7 +240,7 @@ const Teams: React.FC = () => {
                             )}
                         </div>
 
-                        <div className="grid @xl:grid-cols-2 @7xl:grid-cols-3 gap-4">
+                        <div className="not-prose grid @xl:grid-cols-2 @7xl:grid-cols-3 gap-4">
                             {filteredTeams
                                 .sort((a: any, b: any) => a.name.localeCompare(b.name))
                                 .map(
@@ -263,7 +263,7 @@ const Teams: React.FC = () => {
                                             to={`/teams/${slug}`}
                                             key={id}
                                             className={`group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex ${
-                                                index === selectedIndex
+                                                searchTerm && index === selectedIndex
                                                     ? 'ring-2 ring-blue rounded bg-white dark:bg-dark'
                                                     : ''
                                             }`}

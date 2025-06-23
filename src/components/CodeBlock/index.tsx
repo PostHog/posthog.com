@@ -433,7 +433,7 @@ export const CodeBlock = ({
                                 )}
 
                                 <code
-                                    className={`${className} block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm article-content-ignore`}
+                                    className={`not-prose block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm ${className}`}
                                 >
                                     {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
                                         <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">

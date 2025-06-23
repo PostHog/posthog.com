@@ -32,6 +32,7 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
+import { getProseClasses } from '../../constants'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -48,6 +49,8 @@ interface ReaderViewProps {
     filePath?: string
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
+    padding?: boolean
+    proseSize?: 'sm' | 'base' | 'lg'
 }
 
 interface BackgroundImageOption {
@@ -253,6 +256,7 @@ export default function ReaderView({
     children,
     leftSidebar,
     padding = true,
+    proseSize = 'sm',
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -265,6 +269,7 @@ export default function ReaderView({
                 filePath={filePath}
                 leftSidebar={leftSidebar}
                 padding={padding}
+                proseSize={proseSize}
             >
                 {children}
             </ReaderViewContent>
@@ -355,6 +360,7 @@ function ReaderViewContent({
     children,
     leftSidebar,
     padding = true,
+    proseSize,
 }) {
     const { hash } = useLocation()
     const contentRef = useRef(null)
@@ -434,7 +440,7 @@ function ReaderViewContent({
                                 : undefined
                         }
                     >
-                        <div className="relative overflow-x-hidden">
+                        <article className={`${getProseClasses(proseSize)} relative overflow-x-hidden`}>
                             <div
                                 ref={contentRef}
                                 className={`relative ${padding ? 'p-4' : ''} mx-auto transition-all ${
@@ -446,7 +452,7 @@ function ReaderViewContent({
                                         <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
                                     </div>
                                 )}
-                                {title && <h2>{title}</h2>}
+                                {title && <h1>{title}</h1>}
                                 {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                 <div
                                     data-scheme="secondary"
@@ -455,8 +461,7 @@ function ReaderViewContent({
                                     inline table of contents
                                 </div>
                                 {body.type === 'mdx' ? (
-                                    <div className={'@container article-content'}>
-                                        <DebugContainerQuery />
+                                    <div className={'@container'}>
                                         <MDXProvider components={mdxComponents}>
                                             <MDXRenderer>{body.content}</MDXRenderer>
                                         </MDXProvider>
@@ -465,7 +470,7 @@ function ReaderViewContent({
                                     children
                                 )}
                             </div>
-                        </div>
+                        </article>
                     </ScrollArea>
                     <AnimatePresence>
                         {showSidebar && isTocVisible && (

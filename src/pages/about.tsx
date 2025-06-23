@@ -28,9 +28,9 @@ const HappyHog = () => (
     />
 )
 
-const A = (props: any) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const A = (props: any) => <Link {...props} />
 
-export default function About({ data }: { data: { mdx: { body: string } } }) {
+export default function About({ data }: { data: { mdx: { body: string; frontmatter: { title: string } } } }) {
     const components = {
         HappyHog,
         Logo: () => <Logo noText className="inline-block" />,
@@ -59,9 +59,11 @@ export default function About({ data }: { data: { mdx: { body: string } } }) {
         <>
             <SEO title="About PostHog" description="All about PostHog" image={`/images/og/product-analytics.jpg`} />
             <ReaderView
+                title={data.mdx.frontmatter.title}
                 body={{ type: 'mdx', content: data.mdx.body }}
                 leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
                 mdxComponents={components}
+                proseSize="base"
             />
         </>
     )
@@ -71,6 +73,9 @@ export const query = graphql`
     {
         mdx(fields: { slug: { eq: "/about" } }) {
             body
+            frontmatter {
+                title
+            }
         }
     }
 `

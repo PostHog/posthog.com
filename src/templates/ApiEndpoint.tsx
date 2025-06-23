@@ -581,10 +581,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 <blockquote className="p-6 mb-4 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
                     <p>
                         For instructions on how to authenticate to use this endpoint, see{' '}
-                        <a className="text-red hover:text-red font-semibold" href="/docs/api/overview">
-                            API overview
-                        </a>
-                        .
+                        <a href="/docs/api/overview">API overview</a>.
                     </p>
                 </blockquote>
                 <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>

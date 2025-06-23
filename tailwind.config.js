@@ -335,15 +335,15 @@ module.exports = {
                 '-100': '-1',
             },
         },
-        typography: {
-            DEFAULT: {
-                css: {
-                    h5: {
-                        marginBottom: '.25rem',
-                    },
-                },
-            },
-        },
+        // typography: {
+        //     DEFAULT: {
+        //         css: {
+        //             h5: {
+        //                 marginBottom: '.25rem',
+        //             },
+        //         },
+        //     },
+        // },
     },
     plugins: [
         require('@tailwindcss/forms'),

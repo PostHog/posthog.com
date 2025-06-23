@@ -149,7 +149,7 @@ export default function Explorer({
                                         </div>
                                     </div>
                                 )}
-                                <div className={`h-full ${padding ? 'relative p-4' : ''}`}>
+                                <div className={`content-wrapper h-full ${padding ? 'relative p-4' : ''}`}>
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}
                                 </div>

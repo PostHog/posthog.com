@@ -26,7 +26,7 @@ const articleWidth = {
     full: 'w-full px-0',
 }
 
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const A = (props) => <Link {...props} />
 
 export default function Plain({ data }) {
     const { pageData } = data

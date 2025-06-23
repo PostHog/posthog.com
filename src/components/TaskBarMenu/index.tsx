@@ -232,7 +232,7 @@ export default function TaskBarMenu() {
                                         variant="ghost"
                                         size="md"
                                         data-active-windows
-                                        className="border-1.5 border-t-4 border-[#23251D] !w-6 h-5 bg-primary hover:!bg-primary hover:!border-[#23251D] dark:hover:!border-white"
+                                        className="!border-1.5 !border-t-4 !border-[#23251D] !w-6 h-5 bg-primary hover:!bg-primary hover:!border-[#23251D] dark:hover:!border-white"
                                     >
                                         <span className="text-[13px] font-semibold relative -top-px">
                                             {totalWindows}
