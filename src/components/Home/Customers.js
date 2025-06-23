@@ -124,12 +124,7 @@ export default function Customers() {
                     <Customer className="max-h-[60px]" image={raycast} alt="Raycast" />
                     <Customer className="max-h-[36px]" image={airbus} alt="Airbus" />
                     <Customer className="max-h-[30px]" image={dhl} alt="DHL" />
-                    <Customer
-                        url="/customers/assemblyai"
-                        className="max-h-[45px]"
-                        image={assemblyai}
-                        alt="Assembly AI"
-                    />
+                    <Customer className="max-h-[30px]" image={startengine} alt="startengine" />
                     <Customer url="/customers/supabase" className="max-h-[45px]" image={supabase} alt="Supabase" />
                     <Customer
                         url="/customers/hasura"
