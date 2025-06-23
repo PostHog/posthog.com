@@ -17,12 +17,13 @@ import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconX } from '@posthog/icons'
+import KeyboardShortcut from 'components/KeyboardShortcut'
 
 const Teams: React.FC = () => {
-    const navigate = useNavigate()
     const location = useLocation()
     const currentPath = location.pathname.replace('/', '')
     const [searchTerm, setSearchTerm] = useState('')
+    const [selectedIndex, setSelectedIndex] = useState(0)
     const searchInputRef = useRef<HTMLInputElement>(null)
 
     // Auto-focus the input when component loads
@@ -138,6 +139,11 @@ const Teams: React.FC = () => {
         })
     }, [allTeams.nodes, searchTerm])
 
+    // Reset selection when search results change
+    useEffect(() => {
+        setSelectedIndex(0)
+    }, [filteredTeams.length])
+
     // Function to highlight matching text in team names
     const highlightText = (text: string, searchTerm: string) => {
         if (!searchTerm.trim()) return text
@@ -205,6 +211,15 @@ const Teams: React.FC = () => {
                                 onKeyDown={(e) => {
                                     if (e.key === 'Escape') {
                                         setSearchTerm('')
+                                    } else if (e.key === 'ArrowDown') {
+                                        e.preventDefault()
+                                        setSelectedIndex((prev) => (prev < filteredTeams.length - 1 ? prev + 1 : prev))
+                                    } else if (e.key === 'ArrowUp') {
+                                        e.preventDefault()
+                                        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev))
+                                    } else if (e.key === 'Enter' && filteredTeams[selectedIndex]) {
+                                        e.preventDefault()
+                                        navigate(`/teams/${filteredTeams[selectedIndex].slug}`)
                                     }
                                 }}
                             />
@@ -217,28 +232,41 @@ const Teams: React.FC = () => {
                                     <IconX className="w-4 h-4" />
                                 </button>
                             )}
+                            {searchTerm && (
+                                <p className="text-sm text-secondary mt-2 mb-4">
+                                    Use <KeyboardShortcut text="↑" size="sm" /> /{' '}
+                                    <KeyboardShortcut text="↓" size="sm" /> to navigate between results
+                                </p>
+                            )}
                         </div>
 
                         <div className="grid @xl:grid-cols-2 @7xl:grid-cols-3 gap-4">
                             {filteredTeams
                                 .sort((a: any, b: any) => a.name.localeCompare(b.name))
                                 .map(
-                                    ({
-                                        id,
-                                        name,
-                                        slug,
-                                        createdAt,
-                                        tagline,
-                                        description,
-                                        profiles,
-                                        crest,
-                                        crestOptions,
-                                        leadProfiles,
-                                    }: any) => (
+                                    (
+                                        {
+                                            id,
+                                            name,
+                                            slug,
+                                            createdAt,
+                                            tagline,
+                                            description,
+                                            profiles,
+                                            crest,
+                                            crestOptions,
+                                            leadProfiles,
+                                        }: any,
+                                        index: number
+                                    ) => (
                                         <Link
                                             to={`/teams/${slug}`}
                                             key={id}
-                                            className="group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex"
+                                            className={`group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex ${
+                                                index === selectedIndex
+                                                    ? 'ring-2 ring-blue rounded bg-white dark:bg-dark'
+                                                    : ''
+                                            }`}
                                         >
                                             <div className="w-48">
                                                 <TeamPatch
