@@ -186,9 +186,9 @@ export default function ProductAnalyticsCustomers(): JSX.Element {
             image: (
                 <DotLottiePlayer
                     lottieRef={lottieRefs[3]}
-                    src="/lotties/beachhog.lottie"
+                    src="/lotties/office.lottie"
                     autoplay
-                    className="size-60"
+                    className="size-48 my-4"
                 />
             ),
             title: `We're building our dream company`,
