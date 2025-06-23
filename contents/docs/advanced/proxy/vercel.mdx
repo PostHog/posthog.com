@@ -34,19 +34,19 @@ Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-con
 }
 ```
 
-> **Note:** Some frameworks, like T3 app, don't support Vercel rewrites well. In this scenario we recommend trying another proxy method.
+> **Note:** Some frameworks, like T3 app, don't support Vercel rewrites well. In this scenario, we recommend trying another proxy method.
 
 Once done, set the `/<ph_proxy_path>/` route of your domain as the API host in your PostHog initialization like this:
 
 ```js
 posthog.init('<ph_project_api_key>', {
-  api_host: 'https://www.your-domain.com/<ph_proxy_path>/',
+  api_host: '/<ph_proxy_path>/',
   ui_host: '<ph_app_host>',
   defaults: '<ph_posthog_js_defaults>',
 })
 ```
 
-Once updated, deploy your changes on Vercel and check that PostHog requests are going to `https://www.your-domain.com/<ph_proxy_path>/` by checking the network tab on your domain.
+Once updated, deploy your changes on Vercel and check that PostHog requests are going to `/<ph_proxy_path>/` by checking the network tab on your domain.
 
 ## Setup video
 
