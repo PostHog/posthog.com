@@ -122,8 +122,17 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     const activeInternalMenu = docsMenu.children.find(({ name }) => name === 'Product OS')
     const location = useLocation()
 
-    // Badge styling for deprecated functions
-    const badgeClasses = `bg-red/10 text-red dark:text-red font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
+    // Badge styling based on release tag
+    const getBadgeClasses = (releaseTag: string): string => {
+        switch (releaseTag.toLowerCase()) {
+            case 'public':
+                return `bg-blue/10 text-blue dark:text-blue font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
+            case 'deprecated':
+                return `bg-orange/10 text-orange dark:text-orange font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
+            default:
+                return `bg-red/10 text-red dark:text-red font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
+        }
+    }
 
     return (
         <Layout parent={docsMenu} activeInternalMenu={activeInternalMenu}>
@@ -188,8 +197,12 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                         <h4 className="text-2xl my-0 font-bold">
                                                             <code>{func.title}</code>
                                                             {func.releaseTag && (
-                                                                <span className={`${badgeClasses} ml-2`}>
-                                                                    Deprecated
+                                                                <span
+                                                                    className={`${getBadgeClasses(
+                                                                        func.releaseTag
+                                                                    )} ml-2`}
+                                                                >
+                                                                    {func.releaseTag}
                                                                 </span>
                                                             )}
                                                         </h4>
