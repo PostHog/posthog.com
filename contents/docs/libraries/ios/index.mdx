@@ -182,8 +182,6 @@ config.setBeforeSend { event in
     
     return event
 }
-
-PostHogSDK.shared.setup(config)
 ```
 
 </details>
@@ -228,8 +226,6 @@ config.setBeforeSend { event in
     }
     return event
 }
-
-PostHogSDK.shared.setup(config)
 ```
 
 </details>
@@ -252,8 +248,6 @@ config.setBeforeSend { event in
     }
     return nil
 }
-
-PostHogSDK.shared.setup(config)
 ```
 
 </details>
@@ -286,8 +280,6 @@ config.setBeforeSend(
         return event
     }
 )
-
-PostHogSDK.shared.setup(config)
 ```
 
 **Note:** When chaining beforeSend blocks, order is important. The first block is executed first and the mutated event is passed along to the second block, and so on. If at any point in the chain the event is dropped, any subsequent blocks will not be executed.
