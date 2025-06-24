@@ -204,99 +204,97 @@ export default function Posts({ pageContext }) {
                         : []),
                 ]}
             >
-                <ScrollArea>
-                    {posts.length > 0 && (
-                        <OSTable
-                            loading={isValidating}
-                            onLastRowInView={() => {
-                                if (hasMore && !isValidating) {
-                                    fetchMore()
-                                }
-                            }}
-                            columns={[
-                                {
-                                    name: 'Date',
-                                    align: 'left',
-                                    width: '120px',
-                                },
-                                {
-                                    name: 'Title',
-                                    align: 'left',
-                                    width: '3fr',
-                                },
-                                {
-                                    name: 'Author(s)',
-                                    align: 'left',
-                                    width: '1fr',
-                                },
-                                {
-                                    name: 'Tags',
-                                    align: 'left',
-                                    width: '1fr',
-                                },
-                            ]}
-                            rows={posts.map((post, index) => {
-                                const featuredImageURL = post.attributes?.featuredImage?.url
-                                return {
-                                    cells: [
-                                        {
-                                            content: (
-                                                <span className="text-muted font-semibold">
-                                                    {dayjs(post.attributes.date).format('MMM D, YYYY')}
-                                                </span>
-                                            ),
-                                        },
-                                        {
-                                            content: (
-                                                <>
-                                                    <Link className="font-semibold flex-1" to={post.attributes.slug}>
-                                                        {post.attributes.title}
+                {posts.length > 0 && (
+                    <OSTable
+                        loading={isValidating}
+                        onLastRowInView={() => {
+                            if (hasMore && !isValidating) {
+                                fetchMore()
+                            }
+                        }}
+                        columns={[
+                            {
+                                name: 'Date',
+                                align: 'left',
+                                width: '120px',
+                            },
+                            {
+                                name: 'Title',
+                                align: 'left',
+                                width: '3fr',
+                            },
+                            {
+                                name: 'Author(s)',
+                                align: 'left',
+                                width: '1fr',
+                            },
+                            {
+                                name: 'Tags',
+                                align: 'left',
+                                width: '1fr',
+                            },
+                        ]}
+                        rows={posts.map((post, index) => {
+                            const featuredImageURL = post.attributes?.featuredImage?.url
+                            return {
+                                cells: [
+                                    {
+                                        content: (
+                                            <span className="text-muted font-semibold">
+                                                {dayjs(post.attributes.date).format('MMM D, YYYY')}
+                                            </span>
+                                        ),
+                                    },
+                                    {
+                                        content: (
+                                            <>
+                                                <Link className="font-semibold flex-1" to={post.attributes.slug}>
+                                                    {post.attributes.title}
+                                                </Link>
+                                                {featuredImageURL ? (
+                                                    <Link to={post.attributes.slug}>
+                                                        <FeaturedImage url={featuredImageURL} />
                                                     </Link>
-                                                    {featuredImageURL ? (
-                                                        <Link to={post.attributes.slug}>
-                                                            <FeaturedImage url={featuredImageURL} />
-                                                        </Link>
-                                                    ) : null}
-                                                </>
-                                            ),
-                                            className: '!flex-row !pl-[.3rem] gap-2 text-left',
-                                        },
-                                        {
-                                            content: (
-                                                <ul className="list-none m-0 p-0">
-                                                    <li className="text-sm">
-                                                        {post.attributes.post_tags.data
-                                                            .map((tag) => tag.attributes.label)
-                                                            .join(', ')}
-                                                    </li>
-                                                </ul>
-                                            ),
-                                        },
-                                        {
-                                            content: (
-                                                <ul className="list-none m-0 p-0 flex flex-wrap gap-1">
-                                                    {post.attributes.authors.data.map((author) => {
-                                                        const name = [
-                                                            author.attributes.firstName,
-                                                            author.attributes.lastName,
-                                                        ]
-                                                            .filter(Boolean)
-                                                            .join(' ')
-                                                        return (
-                                                            <li key={author.id}>
-                                                                <TeamMember name={name} photo />
-                                                            </li>
-                                                        )
-                                                    })}
-                                                </ul>
-                                            ),
-                                        },
-                                    ],
-                                }
-                            })}
-                        />
-                    )}
-                </ScrollArea>
+                                                ) : null}
+                                            </>
+                                        ),
+                                        className: '!flex-row !pl-[.3rem] gap-2 text-left',
+                                    },
+                                    {
+                                        content: (
+                                            <ul className="list-none m-0 p-0">
+                                                <li className="text-sm">
+                                                    {post.attributes.post_tags.data
+                                                        .map((tag) => tag.attributes.label)
+                                                        .join(', ')}
+                                                </li>
+                                            </ul>
+                                        ),
+                                    },
+                                    {
+                                        content: (
+                                            <ul className="list-none m-0 p-0 flex flex-wrap gap-1">
+                                                {post.attributes.authors.data.map((author) => {
+                                                    const name = [
+                                                        author.attributes.firstName,
+                                                        author.attributes.lastName,
+                                                    ]
+                                                        .filter(Boolean)
+                                                        .join(' ')
+                                                    return (
+                                                        <li key={author.id}>
+                                                            <TeamMember name={name} photo />
+                                                        </li>
+                                                    )
+                                                })}
+                                            </ul>
+                                        ),
+                                    },
+                                ],
+                            }
+                        })}
+                    />
+                )}
             </Editor>
         </>
     )
