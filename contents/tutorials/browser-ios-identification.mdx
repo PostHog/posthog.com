@@ -24,7 +24,7 @@ This is useful for use cases like:
 
 ## Understanding cross-platform tracking
 
-When a user is authenticated on both web and mobile, their events are automatically correlated because they are identified by a `distinct_id` correlated to their account. This is why we recommend [calling `posthog.identify`](https://posthog.com/docs/product-analytics/identify#1-call-identify-as-soon-as-youre-able-to) on both web and mobile as soon as the user signs up or logs in.
+When a user is authenticated on both web and mobile, their events are automatically linked because they are identified by a shared `distinct_id` associated with their account. This is why we recommend [calling `posthog.identify`](https://posthog.com/docs/product-analytics/identify#1-call-identify-as-soon-as-youre-able-to) on both web and mobile as soon as the user signs up or logs in.
 
 When a user is not authenticated, you can't call `posthog.identify`. Instead, PostHog tracks [anonymous events](/docs/data/anonymous-vs-identified-events) using a **randomly generated** `distinct_id` that contains no identifiable information.
 
