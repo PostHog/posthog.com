@@ -392,7 +392,7 @@ const initialProducts = [
                 url: '/tutorials/track-new-returning-users',
             },
             {
-                question: 'What’s my churn rate? / How can I lower my churn rate?',
+                question: "What's my churn rate? / How can I lower my churn rate ? ",
                 url: '/tutorials/churn-rate',
             },
             {
@@ -1587,7 +1587,7 @@ window.posthog.onFeatureFlags(function () {
             carvertical: {
                 headline: 'switched from in-house tools',
                 description:
-                    'Feature flags immediately bought a lot of value. What’s really elegant is how flags interlink with product analytics.',
+                    "Feature flags immediately bought a lot of value. What's really elegant is how flags interlink with product analytics.",
             },
         },
         features: [
@@ -1619,7 +1619,7 @@ window.posthog.onFeatureFlags(function () {
                         <div className="col-span-12">
                             <h4 className="text-xl mb-1">Feature flag payload</h4>
                             <p className="text-lg">
-                                Enter the payload in the feature flag’s settings (inside PostHog) as a value or an
+                                Enter the payload in the feature flag's settings (inside PostHog) as a value or an
                                 object.
                             </p>
                             <CodeBlock
@@ -1680,7 +1680,7 @@ window.posthog.onFeatureFlags(function () {
                 title: 'Local evaluation ',
                 headline: 'Local evaluation',
                 description:
-                    'Improve speed by caching a flag’s value on initial load. Or use the API to build your own UI. ',
+                    "Improve speed by caching a flag's value on initial load.Or use the API to build your own UI. ",
                 children: (
                     <>
                         <h4 className="text-xl mb-1">
@@ -1742,7 +1742,7 @@ window.posthog.onFeatureFlags(function () {
                     <div className="-mt-5">
                         <h4 className="text-xl mb-1">Local development</h4>
                         <p className="text-lg">
-                            When developing locally, you can set a flag's value in your browser’s console.
+                            When developing locally, you can set a flag's value in your browser's console.
                         </p>
                         <CodeBlock
                             code={`posthog.featureFlags.overrideFeatureFlags({ flags: {"myFlag": "test"}})`}
@@ -1802,7 +1802,7 @@ window.posthog.onFeatureFlags(function () {
                     },
                     {
                         title: 'History & activity feed',
-                        description: 'See who hit a feature flag, the flag’s value, and which page they were on',
+                        description: "See who hit a feature flag, the flag's value, and which page they were on",
                     },
                     {
                         title: 'Instant rollbacks',
@@ -2007,7 +2007,7 @@ window.posthog.onFeatureFlags(function () {
             },
             {
                 slug: '/product-analytics',
-                description: 'User paths: See how a flag’s value influenced an intended outcome',
+                description: "User paths: See how a flag's value influenced an intended outcome",
             },
             {
                 slug: '/session-replay',
@@ -3451,22 +3451,42 @@ export default function useProducts() {
     } = useStaticQuery(allProductsData)
 
     const [products, setProducts] = useState(
-        initialProducts.map((product) => {
-            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
-            const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
-            const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
-            const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
-            const unit = billingData?.unit
-            return {
-                ...product,
-                cost: 0,
-                billingData,
-                costByTier: paidPlan?.tiers ? calculatePrice(product.volume || 0, paidPlan.tiers).costByTier : [],
-                freeLimit,
-                startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
-                unit,
-            }
-        })
+        initialProducts
+            .filter((product, index) => {
+                // Only show products that have direct billing data OR have a billedWith property
+                const hasBillingData = billingProducts.find(
+                    (billingProduct: any) => billingProduct.type === product.handle
+                )
+                const hasBilledWith = product.billedWith
+
+                // Avoid duplicate Experiments entries - keep only the first one
+                if (product.name === 'Experiments' && hasBilledWith) {
+                    const firstExperimentsIndex = initialProducts.findIndex(
+                        (p) => p.name === 'Experiments' && p.billedWith
+                    )
+                    return index === firstExperimentsIndex
+                }
+
+                return hasBillingData || hasBilledWith
+            })
+            .map((product) => {
+                const billingData = billingProducts.find(
+                    (billingProduct: any) => billingProduct.type === product.handle
+                )
+                const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
+                const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
+                const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
+                const unit = billingData?.unit
+                return {
+                    ...product,
+                    cost: 0,
+                    billingData,
+                    costByTier: paidPlan?.tiers ? calculatePrice(product.volume || 0, paidPlan.tiers).costByTier : [],
+                    freeLimit,
+                    startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
+                    unit,
+                }
+            })
     )
 
     const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + product.cost, 0), [products])

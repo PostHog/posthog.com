@@ -11,7 +11,7 @@ export const tiers = [
         startsAt: (
             <>
                 <strong className="text-sm">$0.00031</strong>
-                <span className="opacity-60 text-[13px]">/event</span>
+                <span className="text-secondary text-[13px]">/event</span>
             </>
         ),
         children: <>content</>,
@@ -22,7 +22,7 @@ export const tiers = [
         startsAt: (
             <>
                 <strong className="text-sm">$0.0050</strong>
-                <span className="opacity-60 text-[13px]">/recording</span>
+                <span className="text-secondary text-[13px]">/recording</span>
             </>
         ),
         children: <>content</>,
@@ -33,7 +33,7 @@ export const tiers = [
         startsAt: (
             <>
                 <strong className="text-sm">$0.0001</strong>
-                <span className="opacity-60 text-[13px]">/request</span>
+                <span className="text-secondary text-[13px]">/request</span>
             </>
         ),
         children: <>content</>,
@@ -49,7 +49,7 @@ export const tiers = [
         startsAt: (
             <>
                 <strong className="text-sm">$0.2000</strong>
-                <span className="opacity-60 text-[13px]">/response</span>
+                <span className="text-secondary text-[13px]">/response</span>
             </>
         ),
         children: <>content</>,
@@ -94,17 +94,17 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                     </div>
                     <div className="col-span-5 md:col-span-6">
                         {billedWith ? (
-                            <em className="font-normal opacity-75 text-sm">
+                            <em className="font-normal text-secondary text-sm">
                                 Billed with <span className="lowercase">{billedWith}</span>
                             </em>
                         ) : (
                             startsAt && (
                                 <span>
-                                    <span className="opacity-60 text-[13px]">From</span>{' '}
+                                    <span className="text-secondary text-[13px]">From</span>{' '}
                                     <strong className="text-sm">
                                         ${startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt}
                                     </strong>
-                                    <span className="opacity-60 text-[13px]">/{unit}</span>
+                                    <span className="text-secondary text-[13px]">/{unit}</span>
                                 </span>
                             )
                         )}
