@@ -158,7 +158,7 @@ export default function Job({
                                 />
                                 {timezone && <Detail title="Timezone(s)" value={timezone} icon={<Timezone />} />}
                             </ul>
-                            <div className="job-content mt-12 w-full flex-shrink-0 transition-all">
+                            <div className="mt-12 w-full flex-shrink-0 transition-all">
                                 <div
                                     dangerouslySetInnerHTML={{
                                         __html: html,

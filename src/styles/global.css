@@ -47,17 +47,21 @@
 
     .prose-sm {
         @apply text-[15px];
+
+        li p {
+            @apply mt-2;
+        }
     }
 
     .not-prose {
         h1 {
-            @apply text-2xl;
+            @apply text-3xl;
         }
         h2 {
-            @apply text-xl;
+            @apply text-2xl;
         }
         h3 {
-            @apply text-lg;
+            @apply text-xl;
         }
     }
 
@@ -805,43 +809,9 @@ fieldset {
 }
 
 article .article-content {
-    blockquote:not('.quote') {
+    /* blockquote:not('.quote') {
         @apply text-lg;
-    }
-}
-
-/* this overrides Tailwind's built-in font-weight classes to work with our variable font */
-@layer utilities {
-    .font-thin {
-        font-variation-settings: 'wght' 100;
-    }
-    .font-extralight {
-        font-variation-settings: 'wght' 200;
-    }
-    .font-light {
-        font-variation-settings: 'wght' 300;
-    }
-    .font-lightish {
-        font-variation-settings: 'wght' 400;
-    }
-    .font-normal {
-        font-variation-settings: 'wght' 475;
-    }
-    .font-medium {
-        font-variation-settings: 'wght' 500;
-    }
-    .font-semibold {
-        font-variation-settings: 'wght' 600;
-    }
-    .font-bold {
-        font-variation-settings: 'wght' 800;
-    }
-    .font-extrabold {
-        font-variation-settings: 'wght' 850;
-    }
-    .font-black {
-        font-variation-settings: 'wght' 900;
-    }
+    } */
 }
 
 .quicktime-scrubber {
@@ -1668,54 +1638,6 @@ body.dark {
 iframe[src*='youtube.com'],
 iframe[src*='youtube-nocookie.com'] {
     @apply aspect-video w-full h-auto;
-}
-
-.job-content {
-    details {
-        @apply mb-4;
-
-        &[open] + details {
-            @apply mt-12;
-        }
-
-        summary {
-            @apply select-none;
-        }
-
-        a {
-            u {
-                @apply no-underline;
-            }
-        }
-    }
-    section {
-        @apply mt-8 mb-8;
-
-        details:not([open]):last-child summary {
-            @apply mb-0;
-        }
-    }
-
-    summary {
-        @apply relative mb-4 cursor-pointer flex items-center justify-between pb-4 border-b border-light dark:border-dark outline-none;
-        h2 {
-            @apply m-0;
-        }
-        &::-webkit-details-marker {
-            @apply hidden;
-        }
-    }
-    details[open] > summary:after {
-        @apply rotate-[-45deg];
-    }
-    summary:after {
-        @apply transition-all inline-block absolute right-0 top-1/2 -translate-y-1/2 opacity-50 rotate-[135deg];
-        border-style: solid;
-        border-width: 0.18em 0.18em 0 0;
-        content: '';
-        height: 0.55em;
-        width: 0.55em;
-    }
 }
 
 .about-nav .slick-track,

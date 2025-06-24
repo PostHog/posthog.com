@@ -484,7 +484,7 @@ export const CareersHero = () => {
                 </div>
                 <div className="w-full bg-primary border border-primary flex flex-col">
                     <div className="p-4 lg:p-6 flex-1">
-                        <h2 className="hidden md:block text-2xl font-bold">{selectedJob.fields.title}</h2>
+                        <h2 className="m-0">{selectedJob.fields.title}</h2>
 
                         <div className="grid grid-cols-1 @7xl:grid-cols-2 gap-8">
                             <div>
@@ -528,7 +528,7 @@ export const CareersHero = () => {
                                     )}
                                 </ul>
 
-                                <div className="job-content mt-4 @7xl:flex-1">
+                                <div className="@7xl:flex-1">
                                     <h3 className="mb-1 text-sm">Job summary</h3>
 
                                     {isLoading ? (
@@ -582,9 +582,7 @@ export const CareersHero = () => {
                                     teams.length > 1 ? '' : 'border border-primary rounded-md p-4 bg-primary'
                                 }`}
                             >
-                                <div className="job-content">
-                                    <h3 className="mb-1 text-sm">About the small team{teams.length > 1 ? 's' : ''}</h3>
-                                </div>
+                                <h3 className="">About the small team{teams.length > 1 ? 's' : ''}</h3>
 
                                 {teams.length > 1 ? (
                                     <OSTabs

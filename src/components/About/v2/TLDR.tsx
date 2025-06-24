@@ -23,9 +23,7 @@ export const TLDR = ({ children }: { children: React.ReactNode }) => {
                     PostHog vs. The Industry
                 </Link>
             </p>
-            <div className="[&_p]:mb-0 [&_p]:!text-[15px] [&_p]:!leading-tight [&_ul]:pt-1 [&_ul]:mb-2 [&_li]:!text-[15px] [&_li]:!leading-tight">
-                {children}
-            </div>
+            <div className="prose-sm">{children}</div>
         </div>
     )
 }

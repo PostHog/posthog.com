@@ -279,7 +279,7 @@ const Teams: React.FC = () => {
                                             </div>
 
                                             <div className="flex-1 pt-8">
-                                                <h2 className="text-xl mb-1">{highlightText(name, searchTerm)}</h2>
+                                                <h3 className="mb-1">{highlightText(name, searchTerm)}</h3>
 
                                                 {(tagline || description) && (
                                                     <p className="text-sm opacity-80 mb-1 line-clamp-3">
