@@ -78,7 +78,6 @@
         "gatsby-remark-autolink-headers": "^5.20.0",
         "gatsby-source-ashby": "^1.0.4",
         "gatsby-source-filesystem": "^4.20.0",
-        "gatsby-source-shopify": "^8.12.3",
         "gatsby-transformer-json": "^4.20.0",
         "git-url-parse": "^11.6.0",
         "github-slugger": "^1.4.0",
