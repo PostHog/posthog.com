@@ -144,6 +144,11 @@ module.exports = {
                 'white-dark': '#111', // crest dark border hack
                 yellow: '#F7A501',
 
+                'button-shadow': '#CD8407',
+                'button-border': '#B17816',
+                'button-shadow-dark': '#99660E',
+                'button-secondary-shadow-dark': '#925D05',
+
                 // frame-bg
                 // frame-border
                 // plaque-bg

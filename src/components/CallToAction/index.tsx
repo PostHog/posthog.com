@@ -73,10 +73,10 @@ const sizes = {
 
 const primary = cntl`
     bg-orange
-    text-primary
-    hover:text-primary
-    dark:text-primary
-    dark:hover:text-primary
+    text-black
+    hover:text-black
+    dark:text-black
+    dark:hover:text-black
     border-button
     dark:border-button-dark
     dark:bg-orange
@@ -113,11 +113,13 @@ const containerTypes = {
     primary: cntl`
         bg-button-shadow
         dark:bg-button-shadow-dark
+        !no-underline
     `,
     secondary: cntl`
         bg-orange
         dark:bg-button-secondary-shadow-dark
         dark:border-button-secondary-dark
+        !no-underline
     `,
     outline: cntl`
         bg-yellow/50
