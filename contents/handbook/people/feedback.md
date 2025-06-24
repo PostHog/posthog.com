@@ -8,7 +8,7 @@ showTitle: true
 
 Sharing and receiving feedback openly is _really_ important to us at PostHog. Part of creating a highly autonomous culture where people feel empowered is maintaining the most transparent and open flow of information that we can. 
 
-This includes giving feedback [to each other](/handbook/values#4-trust-and-feedback-over-process), so we know we are working on the right things, in the right way. While giving feedback to a team member can feel awkward, especially if it is not positive or if you are talking to someone with more experience than you, we believe that it is an important part of [not letting others fail](/handbook/company/culture#dont-let-others-fail). 
+This includes giving feedback [to each other](/handbook/values#youre-the-driver), so we know we are working on the right things, in the right way. While giving feedback to a team member can feel awkward, especially if it is not positive or if you are talking to someone with more experience than you, we believe that it is an important part of [not letting others fail](/handbook/company/culture#dont-let-others-fail). 
 
 'Open and honest' doesn't mean 'being an asshole' – we expect feedback to be direct, but shared with good intentions and in the spirit of genuinely helping that person and PostHog as a whole to improve. Please make sure your feedback is constructive and based on observations, not _emotions_. If possible, share examples to help the feedback receiver understand the context of the feedback. 
 
