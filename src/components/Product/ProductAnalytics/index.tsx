@@ -294,7 +294,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Sequential, strict, any any step order',
+        feature: 'Sequential, strict, any step order',
         companies: {
             Amplitude: true,
             Mixpanel: false,
