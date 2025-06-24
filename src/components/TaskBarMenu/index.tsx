@@ -152,13 +152,10 @@ export default function TaskBarMenu() {
 
     return (
         <>
-            <motion.div
+            <div
                 id="taskbar"
                 data-scheme="primary"
-                initial={{ translateY: '100%' }}
-                animate={{ translateY: 0 }}
-                exit={{ translateY: '100%' }}
-                className="w-full bg-accent border-b border-primary z-50 flex justify-between pl-0.5 pr-2"
+                className="w-full bg-accent border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
             >
                 <MenuBar menus={menuData} className="[&_button]:px-2" />
                 <aside className="flex items-center gap-px py-0.5">
@@ -268,7 +265,7 @@ export default function TaskBarMenu() {
                     </PopoverRoot>
                     <MenuBar menus={accountMenu} className="[&_button]:px-2" />
                 </aside>
-            </motion.div>
+            </div>
         </>
     )
 }
