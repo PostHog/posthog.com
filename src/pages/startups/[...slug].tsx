@@ -11,6 +11,7 @@ import { IconCheck, IconX } from '@posthog/icons'
 import OSTable from 'components/OSTable'
 import YCombinatorLight from '../../images/customers/ycombinator-light.svg'
 import StripeLogo from '../../images/stripe.svg'
+import Logo from 'components/Logo'
 
 // Partner configurations
 const partnerConfigs = [
@@ -154,14 +155,14 @@ export default function Startups(): JSX.Element {
                 padding={false}
             >
                 <div className="@container h-full bg-primary dark:bg-dark">
-                    <div className="bg-[#122030] bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png)] bg-cover bg-top-left aspect-[1549/638] text-white p-8 relative min-h-96 flex flex-col justify-center">
+                    <div className="bg-[#122030] bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png)] bg-cover bg-top-left aspect-[1549/638] text-white p-8 relative min-h-96 flex flex-col justify-center overflow-x-hidden">
                         <div className="absolute inset-0 bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/stars_24a6a0b509.png)] bg-cover" />
 
-                        <div className="relative pb-32">
-                            <h1 className="flex items-start gap-2.5">
-                                <span>PostHog</span> {titleContent}
+                        <div className="relative pb-32 prose-invert prose-sm">
+                            <h1 className="flex items-center gap-2.5 mb-0 text-2xl">
+                                <Logo className="h-14 relative -top-px" color="white" noText={false} /> {titleContent}
                             </h1>
-                            <ul className="pl-4 mb-4">
+                            <ul className="not-prose my-2">
                                 <li>{creditValue} in PostHog credits</li>
                                 <li>Exclusive founder merch</li>
                                 <li>Partner benefits</li>
@@ -171,11 +172,11 @@ export default function Startups(): JSX.Element {
                                 Apply now
                             </CallToAction>
 
-                            <p className="text-sm mt-2 italic">You'll need a PostHog account first</p>
+                            <p className="italic">You'll need a PostHog account first</p>
                         </div>
                     </div>
 
-                    <div className="grid grid-cols-2 @2xl:grid-cols-4 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
+                    <div className="not-prose grid grid-cols-2 @2xl:grid-cols-4 gap-8 @2xl:gap-4 @3xl:gap-6 px-4 @3xl:px-8 relative -mt-12 max-w-6xl mb-8 @3xl:mb-12">
                         <div className="bg-[#FFD254] -rotate-1 p-4 text-black @2xl:p-2 @3xl:p-4">
                             <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/perk_credits_a8487ef646.png" />
                             <h3 className="text-base my-1 leading-tight">{creditValue} in PostHog credits</h3>

@@ -8,6 +8,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
+import { getProseClasses } from '../../constants'
 
 interface AccordionItem {
     title: string
@@ -149,7 +150,7 @@ export default function Explorer({
                                         </div>
                                     </div>
                                 )}
-                                <div className={`content-wrapper h-full ${padding ? 'relative p-4' : ''}`}>
+                                <div className={`${getProseClasses()} h-full ${padding ? 'relative p-4' : ''}`}>
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}
                                 </div>

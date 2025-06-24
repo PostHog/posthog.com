@@ -1,7 +1,7 @@
 export const PRODUCT_COUNT = 10
 
 // Base prose classes without size modifiers
-export const PROSE_CORE = `prose 
+export const PROSE_CORE = `prose dark:prose-invert
     prose-a:underline 
     prose-a:font-semibold
     
