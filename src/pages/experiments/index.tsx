@@ -1,11 +1,11 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { SlidesTemplate } from 'components/Products/Slides'
 
 // Product configuration - change this to adapt for different products
-const PRODUCT_HANDLE = 'web_analytics'
+const PRODUCT_HANDLE = 'experiments'
 
-export default function WebAnalytics(): JSX.Element {
+export default function Experiments(): JSX.Element {
     // Combined GraphQL query for both tutorial data and product data
     const data = useStaticQuery(graphql`
         query {

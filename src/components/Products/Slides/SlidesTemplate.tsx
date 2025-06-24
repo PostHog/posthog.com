@@ -125,6 +125,7 @@ export default function SlidesTemplate({
                     <PlanComparison
                         products={products}
                         productHandle={productData?.handle}
+                        productData={productData}
                         onScrollToFeatures={() => {
                             // Find the Features slide dynamically by slug
                             const featuresSlideIndex = slideConfig.findIndex((slide) => slide.slug === 'features')

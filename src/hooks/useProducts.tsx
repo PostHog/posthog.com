@@ -2862,6 +2862,586 @@ window.posthog.onFeatureFlags(function () {
             },
         ],
     },
+    {
+        Icon: IconDatabase, // Note: Should be IconPieChart but using IconDatabase as placeholder
+        name: 'Web analytics',
+        handle: 'web_analytics',
+        type: 'web_analytics',
+        slug: 'web-analytics',
+        color: '[#36C46F]',
+        colorSecondary: 'green',
+        category: 'analytics',
+        seo: {
+            title: 'Web analytics - PostHog',
+            description: "It's like Google Analytics 3, but it still exists...",
+        },
+        answersDescription: 'Monitor your website traffic',
+        sharesFreeTier: 'product_analytics',
+        overview: {
+            title: 'Monitor your website traffic',
+            description: 'Web analytics for people who really liked GA3...',
+            textColor: 'text-white', // tw
+        },
+        screenshots: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_2a101a8558.png',
+                alt: 'Screenshot of web analytics in PostHog',
+                classes: '',
+            },
+        ],
+        customers: {
+            ycombinator: {
+                headline: 'gets 30% more data than with GA4',
+                description: 'Other platforms we looked at dropped data due to adblockers and third-party cookies.',
+            },
+            significa: {
+                headline: 'switched from Plausible',
+                description:
+                    'PostHog is way more powerful and insightful than Plausible. We have more info than we used to have.',
+            },
+            creatify: {
+                headline: 'switched from Google Analytics',
+                description:
+                    'Web analytics gives us all the metrics we really care about. It is so much better than GA4.',
+            },
+        },
+        features: [
+            {
+                title: 'Top paths',
+                headline: 'Top paths',
+                description: 'See the most visited pages on your site',
+                images: [
+                    {
+                        src: '/images/products/web-analytics/top-paths.jpg',
+                        alt: 'Top paths',
+                    },
+                ],
+            },
+            {
+                title: 'Top referrers',
+                headline: 'Top referrers',
+                description: 'Discover where traffic is coming from',
+                images: [
+                    {
+                        src: '/images/products/web-analytics/top-referrers.jpg',
+                        alt: 'Top referrers',
+                    },
+                ],
+            },
+            {
+                title: 'Device types',
+                headline: 'Device types',
+                description: 'Break down traffic by device',
+                images: [
+                    {
+                        src: '/images/products/web-analytics/device-types.jpg',
+                        alt: 'Device types',
+                    },
+                ],
+            },
+            {
+                title: 'World map',
+                headline: 'World map',
+                description: 'Visualize users across planet earth',
+                images: [
+                    {
+                        src: '/images/products/web-analytics/world-map.jpg',
+                        alt: 'World map',
+                    },
+                ],
+            },
+            {
+                title: 'Retention cohorts',
+                headline: 'Retention cohorts',
+                description: 'Analyze retention by week',
+                images: [
+                    {
+                        src: '/images/products/web-analytics/retention-cohorts.jpg',
+                        alt: 'Retention cohorts',
+                    },
+                ],
+            },
+            {
+                title: 'More features',
+                headline: 'More features',
+                features: [
+                    {
+                        title: 'UTM tracking',
+                        description: 'See which campaigns perform best',
+                    },
+                    {
+                        title: 'Scroll tracking',
+                        description: 'Discover how much users actually read',
+                    },
+                    {
+                        title: 'Bounce tracking',
+                        description: 'Find out when users immediately get out of dodge',
+                    },
+                    {
+                        title: 'Duration tracking',
+                        description: 'Monitor how long users are hanging around',
+                    },
+                ],
+            },
+        ],
+        questions: [
+            {
+                question: 'How many visitors have I had this week?',
+            },
+            {
+                question: "What's my average bounce rate?",
+            },
+            {
+                question: 'Where in the world are my visitors coming from?',
+            },
+            {
+                question: 'Are my users mostly on mobile, tablet, or desktop?',
+            },
+            {
+                question: "What's my most popular blog post from the last month?",
+            },
+            {
+                question: 'What other websites are sending me the most traffic?',
+            },
+            {
+                question: 'How many visitors are coming back to my site regularly?',
+            },
+        ],
+        comparison: {
+            summary: {
+                them: [
+                    {
+                        title: 'You only need web analytics, nothing else',
+                    },
+                    {
+                        title: "You don't need any integrations other than with Google",
+                    },
+                    {
+                        title: 'You need to migrate data from GA4',
+                    },
+                    {
+                        title: 'You actually really like GA4 😱',
+                    },
+                ],
+                us: [
+                    {
+                        title: 'You want to do more than just web analytics',
+                    },
+                    {
+                        title: "You don't want to spend weeks setting up dashboards",
+                    },
+                    {
+                        title: 'You need to comply with HIPAA',
+                    },
+                    {
+                        title: "It's not GA4",
+                    },
+                ],
+            },
+            features: [
+                {
+                    feature: 'Pre-configured dashboards',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Visitor and view tracking',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Session and duration tracking',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Bounce rate tracking',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Breakdown by GeoIP',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Breakdown by device and browser',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Web Vitals reporting',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Revenue tracking',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Real-time reporting',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: false,
+                    },
+                },
+                {
+                    feature: 'Open source',
+                    companies: {
+                        Matomo: true,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: '1st party cookies',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Cookieless tracking',
+                    companies: {
+                        Matomo: true,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'HIPAA compliance',
+                    companies: {
+                        Matomo: true,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'GDPR compliance',
+                    companies: {
+                        Matomo: true,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
+            ],
+        },
+        pairsWith: [
+            {
+                slug: '/product-analytics',
+                description:
+                    'Need to go deeper than a dashboard? Building your own insights and SQL queries from scratch!',
+            },
+            {
+                slug: '/session-replay',
+                description:
+                    "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
+            },
+            {
+                slug: '/surveys',
+                description:
+                    'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
+            },
+        ],
+    },
+    {
+        Icon: IconDatabase, // Note: Should be IconFlask but using IconDatabase as placeholder
+        name: 'Experiments',
+        handle: 'experiments',
+        type: 'feature_flags', // Uses feature_flags billing
+        slug: 'experiments',
+        color: 'purple',
+        colorSecondary: 'lilac',
+        category: 'product',
+        billedWith: 'Feature flags',
+        seo: {
+            title: 'Experiments - PostHog',
+            description: 'Run statistically-significant multivariate tests and robust targeting & exclusion rules.',
+        },
+        answersDescription: 'Test changes with statistical significance',
+        sharesFreeTier: 'feature_flags',
+        overview: {
+            title: 'Test changes with statistical significance',
+            description:
+                'A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with product analytics and session replay.',
+            textColor: 'text-white', // tw
+        },
+        screenshots: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Xnapper_2025_01_20_15_25_58_0867c02f69.png',
+                alt: 'Screenshot of managing an A/B test in PostHog',
+                classes: '',
+            },
+        ],
+        hog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
+            alt: 'Hedgehog experimenting',
+            classes: 'absolute bottom-0 right-0 max-w-md',
+        },
+        customers: {
+            ycombinator: {
+                headline: 'boosted community engagement by 40%',
+                description:
+                    "Y Combinator uses PostHog's experiments to try new ideas, which has led to significant improvements.",
+            },
+            researchgate: {
+                headline: 'tests product changes for over 25M users',
+                description:
+                    'Our data scientists are able to rapidly and autonomously iterate on the data models that power our home feed.',
+            },
+            vendasta: {
+                headline: 'increased registrations by 30%',
+                description:
+                    "This experiment cuts drop-off in half – that's a 50% improvement without a single user complaining!",
+            },
+            assemblyai: {
+                headline: 'switched from Mixpanel for a leaner stack',
+                description: 'I feel like, every single week, we discover something new that makes a difference.',
+            },
+        },
+        features: [
+            {
+                title: 'Customizable goals',
+                headline: 'Customizable goals',
+                description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
+                        alt: 'Customizable goals',
+                    },
+                ],
+            },
+            {
+                title: 'Targeting & exclusion rules',
+                headline: 'Targeting & exclusion rules',
+                description: 'Set criteria for user location, person property, cohort, or group',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png',
+                        alt: 'Targeting & exclusion rules',
+                    },
+                ],
+            },
+            {
+                title: 'Recommendations',
+                headline: 'Recommendations',
+                description:
+                    'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png',
+                        alt: 'Recommendations',
+                    },
+                ],
+            },
+            {
+                title: 'More features',
+                headline: 'More features',
+                features: [
+                    {
+                        title: 'Built on Feature Flags',
+                        description:
+                            'All the benefits of feature flags with added functionality around stat-sig experiments',
+                    },
+                    {
+                        title: 'JSON payloads',
+                        description: 'Modify website content per-variant without additional deployments',
+                    },
+                    {
+                        title: 'Split testing',
+                        description: 'Automatically split traffic between variants',
+                    },
+                    {
+                        title: 'Multivariate testing',
+                        description: 'Test up to 9 variants against a control',
+                    },
+                    {
+                        title: 'Dynamic cohort support',
+                        description: 'Add new users to an experiment automatically by setting a person property',
+                    },
+                ],
+            },
+        ],
+        questions: [
+            {
+                question: 'Does this new onboarding flow increase conversion?',
+            },
+            {
+                question: 'How does this affect adoption in Europe?',
+            },
+            {
+                question: 'Will enterprise customers like this new feature?',
+            },
+        ],
+        comparison: {
+            summary: {
+                them: [
+                    {
+                        title: 'No-code experiments or CMS capabilities',
+                        subtitle: "You'll still need a designer/engineer to create experiments",
+                    },
+                    {
+                        title: 'No integration with Google Ads',
+                        subtitle:
+                            "PostHog can't run ad experiments, or target users into an experiment based on an ad variant engagement.",
+                    },
+                ],
+                us: [
+                    {
+                        title: 'Integration with other PostHog products',
+                        subtitle:
+                            'Attach surveys to experiments or view replays for a test group. Analyze results beyond your initial hypothesis or goal metric.',
+                    },
+                    {
+                        title: 'Automated recommendations for sample sizes and runtime',
+                    },
+                    {
+                        title: 'Automatic significance calculator – to help you figure out the winning variant as quickly as possible',
+                    },
+                    {
+                        title: 'Robust targeting and exclusion options, including cohorts and location',
+                        subtitle: 'Anything you monitor in analytics, you can target in an experiment',
+                    },
+                ],
+            },
+            features: [
+                {
+                    feature: 'Unlimited experiments',
+                    companies: {
+                        AmplitudeExperiments: true,
+                        Optimizely: true,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Multivariate experiments',
+                    companies: {
+                        AmplitudeExperiments: true,
+                        Optimizely: true,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Secondary goals',
+                    companies: {
+                        AmplitudeExperiments: true,
+                        Optimizely: true,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Minimum goals',
+                    companies: {
+                        AmplitudeExperiments: true,
+                        Optimizely: true,
+                        VWO: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Duration prediction',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: false,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Cross-domain experiments',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: true,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Traffic allocation',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: true,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Target by location',
+                    companies: {
+                        AmplitudeExperiments: true,
+                        Optimizely: true,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Target by cohort',
+                    companies: {
+                        Pendo: true,
+                        Optimizely: true,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Target by person property',
+                    companies: {
+                        Pendo: true,
+                        Optimizely: true,
+                        VWO: false,
+                        PostHog: true,
+                    },
+                },
+            ],
+        },
+        pairsWith: [
+            {
+                slug: '/product-analytics',
+                description:
+                    'Run analysis based on the value of a test, or build a cohort of users from a test variant',
+            },
+            {
+                slug: '/session-replay',
+                description:
+                    "Watch recordings of users in a variant to discover nuances in why they did or didn't complete the goal",
+            },
+            {
+                slug: '/feature-flags',
+                description:
+                    'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
+            },
+        ],
+    },
 ]
 
 export default function useProducts() {

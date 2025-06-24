@@ -3,13 +3,23 @@ import React from 'react'
 interface PlanComparisonProps {
     products: any[]
     productHandle: string
+    productData?: any // Add productData for accessing sharesFreeTier
     onScrollToFeatures?: () => void
 }
 
-const PlanComparison: React.FC<PlanComparisonProps> = ({ products, productHandle, onScrollToFeatures }) => {
+const PlanComparison: React.FC<PlanComparisonProps> = ({
+    products,
+    productHandle,
+    productData: productInfo,
+    onScrollToFeatures,
+}) => {
+    // Check if this product shares pricing with another product
+    const sharesFreeTierWith = productInfo?.sharesFreeTier
+    const billingProductHandle = sharesFreeTierWith || productHandle
+
     // Find the specific product data - GraphQL products use 'type' field, but we receive handle
     // For session_replay handle, we need to match against 'session_replay' type in GraphQL
-    const productData = products.find((product: any) => product.type === productHandle)
+    const productData = products.find((product: any) => product.type === billingProductHandle)
 
     if (!productData || !productData.plans || productData.plans.length === 0) {
         // Skip rendering if no billing/pricing data is available
@@ -216,6 +226,19 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({ products, productHandle
             <div className="p-12 bg-tan dark:bg-dark col-span-2 flex flex-col justify-between">
                 <div>
                     <h2 className="text-4xl font-bold text-primary mb-6">Pricing</h2>
+
+                    {/* Show shared pricing notice if applicable */}
+                    {sharesFreeTierWith && (
+                        <div className="mb-4 p-3 bg-accent dark:bg-accent-dark border border-primary rounded-md">
+                            <p className="text-sm text-secondary mb-0">
+                                This product shares pricing and allocations with the{' '}
+                                <span className="font-semibold text-primary capitalize">
+                                    {sharesFreeTierWith.replace('_', ' ')}
+                                </span>{' '}
+                                product.
+                            </p>
+                        </div>
+                    )}
 
                     <div className="mb-8">
                         <p className="text-lg mb-1">Monthly free tier</p>
