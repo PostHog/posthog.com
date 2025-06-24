@@ -2383,12 +2383,152 @@ window.posthog.onFeatureFlags(function () {
         color: 'purple',
         colorSecondary: 'lilac',
         category: 'data',
+        seo: {
+            title: 'Data Warehouse - PostHog',
+            description: 'Unify and query data from any source and analyze it alongside your product data.',
+        },
+        answersDescription: 'Unify and query data from any source',
+        overview: {
+            title: 'All your data in one place',
+            description: 'Unify and query data from any source and analyze it alongside your product data.',
+            textColor: 'text-white', // tw
+        },
+        screenshots: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-data-warehouse.png',
+                alt: 'Screenshot of the PostHog data warehouse',
+                classes: '',
+            },
+        ],
+        hog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
+            alt: 'Just another hedgehog',
+            classes: 'absolute bottom-0 right-0 max-w-[140px]',
+        },
         slider: {
             marks: [1000000, 10000000, 100000000, 1000000000],
             min: 1000000,
             max: 1000000000,
         },
         volume: 1000000,
+        customers: {
+            headshotpro: {
+                headline: 'analyzes Google Adwords data in PostHog',
+                description: 'I needed one source of truth for both marketing and developers to share.',
+            },
+            webshare: {
+                headline: 'syncs Intercom messages and customer contacts',
+                description: "PostHog is the single source of truth for us. We've put everything in one place.",
+            },
+        },
+        features: [
+            {
+                title: 'Sync from Stripe',
+                headline: 'Sync from Stripe',
+                description: 'Combine financial and product data to see how usage turns into growth.',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png',
+                        alt: 'Sync from Stripe',
+                    },
+                ],
+            },
+            {
+                title: 'Sync from Hubspot',
+                headline: 'Sync from Hubspot',
+                description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png',
+                        alt: 'Sync from Hubspot',
+                    },
+                ],
+            },
+            {
+                title: 'Sync from Zendesk',
+                headline: 'Sync from Zendesk',
+                description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png',
+                        alt: 'Sync from Zendesk',
+                    },
+                ],
+            },
+            {
+                title: 'Sync from anywhere',
+                headline: 'Sync from anywhere',
+                description: 'Adwords? Salesforce? Grab anything you want using custom sources.',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',
+                        alt: 'Sync from anywhere',
+                    },
+                ],
+            },
+            {
+                title: 'More features',
+                headline: 'More features',
+                features: [
+                    {
+                        title: 'Link multiple sources',
+                        description: 'Add joins to link tables together and connect run advanced queries',
+                    },
+                    {
+                        title: 'Query with SQL',
+                        description: 'Directly access your data, join sources, and build custom queries',
+                    },
+                    {
+                        title: 'Save queries as views',
+                        description: 'Save time by saving visualized data as tables, graphics, and more',
+                    },
+                    {
+                        title: 'Custom sync periods',
+                        description: 'Decide whether to sync data sources daily, weekly, or monthly',
+                    },
+                ],
+            },
+        ],
+        questions: [
+            {
+                question: 'How do specific user behaviours correlate to MRR?',
+                url: '/tutorials/stripe-reports',
+            },
+            {
+                question: 'How is user retention affected by SLA breaches in Zendesk?',
+                url: '/tutorials/zendesk-reports',
+            },
+            {
+                question: 'How are inbound leads using my product?',
+                url: '/tutorials/hubspot-reports#usage-by-lead',
+            },
+            {
+                question: 'How does predicted revenue compare to my actual revenue?',
+                url: '/tutorials/hubspot-reports#getting-revenue-from-closed-deals-by-joining-with-stripe',
+            },
+            {
+                question: 'How much revenue am I churning each month?',
+                url: '/tutorials/stripe-reports#revenue-churn',
+            },
+            {
+                question: 'Who are my power users, and how do they use my product?',
+                url: '/tutorials/stripe-reports#usage-by-top-customers',
+            },
+        ],
+        pairsWith: [
+            {
+                slug: '/product-analytics',
+                description: 'Analyze data from any source independently, or alongside product data.',
+            },
+            {
+                slug: '/feature-flags',
+                description: 'Use synced data to toggle feature flags, trigger A/B experiments, and more.',
+            },
+            {
+                slug: '/docs/sql',
+                description: 'Create entirely custom queries, join sources, and get the answers you need.',
+            },
+        ],
     },
     {
         Icon: IconWarning,
@@ -2399,12 +2539,328 @@ window.posthog.onFeatureFlags(function () {
         color: 'orange',
         colorSecondary: 'red',
         category: 'engineering',
+        seo: {
+            title: 'Error Tracking - PostHog',
+            description: 'Track errors and exceptions in your code, then assign them as issues.',
+        },
+        answersDescription: 'Track and resolve errors and exceptions in your application',
+        overview: {
+            title: 'Track errors and resolve issues',
+            description: 'Take your product from exception to exceptional',
+            textColor: 'text-white', // tw
+        },
+        screenshots: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png',
+                alt: 'Screenshot of the PostHog error tracking',
+                classes: '',
+            },
+        ],
+        hog: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
+            alt: 'Just another hedgehog',
+            classes: 'absolute bottom-0 right-0 max-w-[250px]',
+        },
         slider: {
             marks: [100000, 1000000, 10000000, 50000000],
             min: 100000,
             max: 50000000,
         },
         volume: 100000,
+        customers: {
+            zealot: {
+                headline: 'switched from BugSnag and Amplitude',
+                description:
+                    'In two clicks, I can see who had an error, then their replays. The more of PostHog you use, the more powerful it becomes.',
+            },
+        },
+        features: [
+            {
+                title: 'Alert',
+                headline: 'Alert',
+                description: 'Get notified of new issues by email, Slack, or webhook',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_alerts_00824b03f5.png',
+                        alt: 'Alert',
+                    },
+                ],
+            },
+            {
+                title: 'Triage',
+                headline: 'Triage',
+                description: 'Assign issues to individuals or groups',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png',
+                        alt: 'Triage',
+                    },
+                ],
+            },
+            {
+                title: 'Organize and prioritize',
+                headline: 'Organize and prioritize',
+                description: 'Merge issues, sort by frequency or recency, or use text search to find specific errors',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_organize_94b4d00ea2.png',
+                        alt: 'Organize and prioritize',
+                    },
+                ],
+            },
+            {
+                title: 'Stack traces',
+                headline: 'Stack traces',
+                description:
+                    "Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png',
+                        alt: 'Stack traces',
+                    },
+                ],
+            },
+            {
+                title: 'More features',
+                headline: 'More features',
+                features: [
+                    {
+                        title: 'Session replay',
+                        description:
+                            'Watch session recordings of users who caused exceptions for more context about how to reproduce an issue',
+                    },
+                    {
+                        title: 'Product analytics',
+                        description:
+                            'Graph your $exception events, use filters and breakdowns to determine where errors happen and what to prioritize',
+                    },
+                    {
+                        title: 'Feature flags',
+                        description: 'Test fixes by rolling out code changes only to affected users',
+                    },
+                    {
+                        title: 'User profiles',
+                        description:
+                            'See all $exception events for specific users in their event history log and find which feature flags were enabled at the time an error occurred',
+                    },
+                ],
+            },
+        ],
+        questions: [
+            {
+                question: 'How do I track errors in my application?',
+                url: '/docs/error-tracking/installation',
+            },
+            {
+                question: 'How can I analyze error patterns?',
+                url: '/docs/error-tracking/monitoring',
+            },
+            {
+                question: 'How do I set up error alerts?',
+                url: '/docs/error-tracking/alerts',
+            },
+            {
+                question: 'How can I integrate with existing tools?',
+                url: '/docs/error-tracking/integrations',
+            },
+            {
+                question: 'How do I manage error retention?',
+                url: '/docs/error-tracking/retention',
+            },
+            {
+                question: 'How can I use session replay with errors?',
+                url: '/docs/error-tracking/session-replay',
+            },
+        ],
+        comparison: {
+            summary: {
+                them: [
+                    {
+                        title: 'Uptime monitoring',
+                        subtitle: "We don't have uptime monitoring. Yet.",
+                    },
+                    {
+                        title: 'Advanced alerting',
+                        subtitle: 'We currently only support Slack and email alerts on custom criteria.',
+                    },
+                    {
+                        title: 'Advanced error grouping systems',
+                    },
+                    {
+                        title: 'Better mobile support',
+                        subtitle: 'Even our team thinks Sentry is better if you need mobile support. For now!',
+                    },
+                ],
+                us: [
+                    {
+                        title: 'Integration with other PostHog products',
+                    },
+                    {
+                        title: 'Feature flags for error recovery',
+                        subtitle: 'Quickly roll back features that cause errors.',
+                    },
+                    {
+                        title: 'Simple, transparent pricing',
+                    },
+                ],
+            },
+            features: [
+                {
+                    feature: 'Error alerts',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: true,
+                        BugSnag: true,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Exception capture',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: true,
+                        BugSnag: true,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Issue management',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: false,
+                        BugSnag: true,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Network performance monitoring',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: true,
+                        BugSnag: true,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Error grouping',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: true,
+                        BugSnag: true,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Source map support',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: true,
+                        BugSnag: true,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Stack tracing',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: false,
+                        BugSnag: true,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Integration with product analytics',
+                    companies: {
+                        Sentry: false,
+                        LogRocket: true,
+                        BugSnag: false,
+                        Datadog: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Integration with session replays',
+                    companies: {
+                        Sentry: true,
+                        LogRocket: true,
+                        BugSnag: false,
+                        Datadog: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Integration with A/B experiments',
+                    companies: {
+                        Sentry: false,
+                        LogRocket: false,
+                        BugSnag: true,
+                        Datadog: false,
+                        PostHog: true,
+                    },
+                },
+            ],
+        },
+        pairsWith: [
+            {
+                slug: '/session-replay',
+                description: 'Watch exactly how an error occurred for a specific user',
+            },
+            {
+                slug: '/product-analytics',
+                description: 'Analyze trends over time and get alerts when things go wrong',
+            },
+            {
+                slug: '/feature-flags',
+                description: 'Roll back features that cause errors, or test fixes with slow rollouts',
+            },
+        ],
+    },
+    {
+        Icon: IconDatabase, // Note: Should be IconPlug but using IconDatabase as placeholder
+        name: 'CDP',
+        handle: 'cdp',
+        type: 'cdp',
+        slug: 'cdp',
+        color: 'sky-blue',
+        colorSecondary: 'blue',
+        category: 'data',
+        seo: {
+            title: 'CDP sources & destinations - PostHog',
+            description: 'Get all your data into PostHog with 60+ sources & destinations',
+        },
+        answersDescription: 'Ingest, transform, and send data between 25+ tools',
+        overview: {
+            title: 'Ingest, transform, and send data between 25+ tools',
+            description:
+                "PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack.",
+            textColor: 'text-white', // tw
+        },
+        screenshots: [
+            {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
+                alt: "Screenshot of PostHog's CDP",
+                classes: '',
+            },
+        ],
+        pairsWith: [
+            {
+                slug: '/product-analytics',
+                description:
+                    'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
+            },
+            {
+                slug: '/data-warehouse',
+                description:
+                    'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',
+            },
+        ],
     },
 ]
 
@@ -2426,9 +2882,9 @@ export default function useProducts() {
                 ...product,
                 cost: 0,
                 billingData,
-                costByTier: calculatePrice(product.volume || 0, paidPlan?.tiers).costByTier,
+                costByTier: paidPlan?.tiers ? calculatePrice(product.volume || 0, paidPlan.tiers).costByTier : [],
                 freeLimit,
-                startsAt: startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
+                startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
                 unit,
             }
         })

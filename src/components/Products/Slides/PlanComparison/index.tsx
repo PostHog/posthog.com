@@ -11,8 +11,9 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({ products, productHandle
     // For session_replay handle, we need to match against 'session_replay' type in GraphQL
     const productData = products.find((product: any) => product.type === productHandle)
 
-    if (!productData) {
-        return <div className="h-full p-12 flex items-center justify-center">Loading pricing data...</div>
+    if (!productData || !productData.plans || productData.plans.length === 0) {
+        // Skip rendering if no billing/pricing data is available
+        return null
     }
 
     const plans = productData.plans

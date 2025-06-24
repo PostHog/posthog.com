@@ -3,9 +3,9 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 
 // Product configuration - change this to adapt for different products
-const PRODUCT_HANDLE = 'error_tracking'
+const PRODUCT_HANDLE = 'cdp'
 
-export default function ErrorTracking(): JSX.Element {
+export default function CDP(): JSX.Element {
     // Combined GraphQL query for both tutorial data and product data
     const data = useStaticQuery(graphql`
         query {
