@@ -17,10 +17,9 @@ import { Avatar as MainNavAvatar } from 'components/MainNav'
 import Wizard from 'components/Wizard'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ChatProvider } from 'hooks/useChat'
-import SignIn from 'components/Squeak/components/Classic/SignIn'
 
 export default function TaskBarMenu() {
-    const { windows, bringToFront, focusedWindow, addWindow, closeWindow, openSearch } = useApp()
+    const { windows, bringToFront, focusedWindow, addWindow, openSearch, openSignIn } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
@@ -61,11 +60,7 @@ export default function TaskBarMenu() {
         if (document.activeElement instanceof HTMLElement) {
             document.activeElement.blur()
         }
-        addWindow(
-            <ScrollArea location={{ pathname: `community-auth` }} key="community-auth" newWindow>
-                <SignIn />
-            </ScrollArea>
-        )
+        openSignIn()
     }
 
     const accountMenu: MenuType[] = [

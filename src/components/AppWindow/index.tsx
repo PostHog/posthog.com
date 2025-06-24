@@ -232,7 +232,11 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
 
     const handleMouseDown = () => {
         if (focusedWindow === item) return
-        navigate(item.path, { state: { newWindow: true } })
+        if (item.path.startsWith('/')) {
+            navigate(item.path, { state: { newWindow: true } })
+        } else {
+            bringToFront(item)
+        }
     }
 
     useEffect(() => {
