@@ -1,5 +1,3 @@
-
-
 body {
     font-family: 'IBM Plex Sans', '-apple-system', 'BlinkMacSystemFont', 'avenir next', 'avenir', 'segoe ui',
         'helvetica neue', 'helvetica', 'Ubuntu', 'roboto', 'noto', 'arial', 'sans-serif' !important;
@@ -12,12 +10,4 @@ body.light {
 }
 body.dark {
     background-color: #1d1f27;
-}
-
-#handbook-search-wrapper,
-#docs-search-wrapper {
-    .algolia-autocomplete {
-        height: auto;
-        width: 100%;
-    }
 }
