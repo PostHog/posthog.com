@@ -2,6 +2,10 @@ import React, { createContext, useContext, useEffect, useMemo, useState, useCall
 import { AppWindow } from './Window'
 import { WindowSearchUI } from 'components/SearchUI'
 import { navigate } from 'gatsby'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import SignIn from 'components/Squeak/components/Classic/SignIn'
+import Register from 'components/Squeak/components/Classic/Register'
+import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 
 type WindowElement = React.ReactNode & {
     key: string
@@ -48,6 +52,9 @@ interface AppContextType {
     handleSnapToSide: (side: 'left' | 'right') => void
     constraintsRef: React.RefObject<HTMLDivElement>
     expandWindow: () => void
+    openSignIn: () => void
+    openRegister: () => void
+    openForgotPassword: () => void
 }
 
 interface AppProviderProps {
@@ -86,6 +93,9 @@ export const Context = createContext<AppContextType>({
     handleSnapToSide: () => {},
     constraintsRef: { current: null },
     expandWindow: () => {},
+    openSignIn: () => {},
+    openRegister: () => {},
+    openForgotPassword: () => {},
 })
 
 export interface AppSetting {
@@ -227,7 +237,24 @@ const appSettings: AppSettings = {
             fixed: false,
         },
     },
-    'community-auth': {
+    'community-auth-signin': {
+        size: {
+            min: {
+                width: 470,
+                height: 299,
+            },
+            max: {
+                width: 470,
+                height: 299,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    'community-auth-register': {
         size: {
             min: {
                 width: 470,
@@ -260,6 +287,40 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/reset-password': {
+        size: {
+            min: {
+                width: 470,
+                height: 299,
+            },
+            max: {
+                width: 470,
+                height: 299,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    'community-auth-forgot-password': {
+        size: {
+            min: {
+                width: 470,
+                height: 299,
+            },
+            max: {
+                width: 470,
+                height: 299,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
 } as const
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
@@ -283,7 +344,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 undefined
             )
             if (nextFocusedWindow && !nextFocusedWindow.minimized) {
-                navigate(nextFocusedWindow.path)
+                if (nextFocusedWindow.path.startsWith('/')) {
+                    navigate(nextFocusedWindow.path)
+                } else {
+                    bringToFront(nextFocusedWindow)
+                }
             } else {
                 window.history.pushState({}, '', '/')
             }
@@ -414,7 +479,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const updatePages = (element: WindowElement) => {
-        console.log(element)
         const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
         const size = getInitialSize(element.key)
         const position = getPositionDefaults(element.key, size, windows)
@@ -528,6 +592,34 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
+    const openSignIn = () => {
+        addWindow(
+            <ScrollArea location={{ pathname: `community-auth-signin` }} key="community-auth-signin" newWindow>
+                <SignIn />
+            </ScrollArea>
+        )
+    }
+
+    const openRegister = () => {
+        addWindow(
+            <ScrollArea location={{ pathname: `community-auth-register` }} key="community-auth-register" newWindow>
+                <Register />
+            </ScrollArea>
+        )
+    }
+
+    const openForgotPassword = () => {
+        addWindow(
+            <ScrollArea
+                location={{ pathname: `community-auth-forgot-password` }}
+                key="community-auth-forgot-password"
+                newWindow
+            >
+                <ForgotPassword />
+            </ScrollArea>
+        )
+    }
+
     const handleSnapToSide = (side: 'left' | 'right') => {
         if (!constraintsRef.current || !focusedWindow) return
 
@@ -628,6 +720,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 handleSnapToSide,
                 constraintsRef,
                 expandWindow,
+                openSignIn,
+                openRegister,
+                openForgotPassword,
             }}
         >
             {children}
