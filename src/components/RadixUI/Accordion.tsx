@@ -13,7 +13,7 @@ interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof Radix
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
     ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Item
-            className={`not-prose border-t border-primary first:border-t-0 [&_h3]:mb-0 focus-within:relative focus-within:z-10 ${
+            className={`border-t border-primary first:border-t-0 [&_h3]:mb-0 focus-within:relative focus-within:z-10 ${
                 skin ? 'focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border' : ''
             } ${className}`}
             {...props}

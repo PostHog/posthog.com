@@ -186,7 +186,7 @@ export default function Products(): JSX.Element {
                     })
 
                     return (
-                        <div className="@container space-y-2">
+                        <div className="@container not-prose space-y-2">
                             {categoryOrder.map((category) => {
                                 const products = groupedProducts[category]
                                 if (!products || products.length === 0) return null
