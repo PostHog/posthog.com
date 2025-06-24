@@ -114,36 +114,38 @@ const backgroundImageOptions: (BackgroundImageOption & ToggleOption)[] = [
 
 const ContributorsSmall = ({ contributors }) => {
     return contributors?.[0] ? (
-        <ul className="flex list-none m-0 !p-0 space-x-2 mb-4">
-            {contributors.map(({ profile_id, name, profile, ...other }) => {
-                const image = profile?.avatar?.url || other?.image
-                const url = profile_id && `/community/profiles/${profile_id}`
-                const Container = url ? Link : 'div'
-                const gatsbyImage = image && getImage(image)
-                return (
-                    <li className="!mb-0" key={name}>
-                        <Container className="flex space-x-2 items-center" {...(url ? { to: url } : {})}>
-                            {typeof image === 'string' ? (
-                                <CloudinaryImage
-                                    width={50}
-                                    className="w-6 h-6 border-border border dark:border-dark rounded-full overflow-hidden"
-                                    src={image}
-                                />
-                            ) : gatsbyImage ? (
-                                <GatsbyImage
-                                    image={gatsbyImage}
-                                    alt={name}
-                                    className="w-6 h-6 border-border border dark:border-dark rounded-full overflow-hidden"
-                                />
-                            ) : (
-                                ''
-                            )}
-                            <span className="text-sm font-semibold">{name}</span>
-                        </Container>
-                    </li>
-                )
-            })}
-        </ul>
+        <div className="not-prose">
+            <ul className="flex space-x-2">
+                {contributors.map(({ profile_id, name, profile, ...other }) => {
+                    const image = profile?.avatar?.url || other?.image
+                    const url = profile_id && `/community/profiles/${profile_id}`
+                    const Container = url ? Link : 'div'
+                    const gatsbyImage = image && getImage(image)
+                    return (
+                        <li className="!mb-0" key={name}>
+                            <Container className="flex space-x-2 items-center" {...(url ? { to: url } : {})}>
+                                {typeof image === 'string' ? (
+                                    <CloudinaryImage
+                                        width={50}
+                                        className="w-6 h-6 border-border border dark:border-dark rounded-full overflow-hidden"
+                                        src={image}
+                                    />
+                                ) : gatsbyImage ? (
+                                    <GatsbyImage
+                                        image={gatsbyImage}
+                                        alt={name}
+                                        className="w-6 h-6 border-border border dark:border-dark rounded-full overflow-hidden"
+                                    />
+                                ) : (
+                                    ''
+                                )}
+                                <span className="text-sm font-semibold">{name}</span>
+                            </Container>
+                        </li>
+                    )
+                })}
+            </ul>
+        </div>
     ) : null
 }
 

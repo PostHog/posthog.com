@@ -18,6 +18,8 @@ export const PROSE_CORE = `prose
 
     prose-h3:tracking-tight
 
+    prose-img:m-0
+
     `
 
 export const PROSE = `${PROSE_CORE} `

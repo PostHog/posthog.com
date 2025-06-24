@@ -3,13 +3,6 @@
 @tailwind utilities;
 
 @layer utilities {
-    .light {
-        main a:not(.text-primary),
-        .article-content a:not(.cta) {
-            @apply text-red hover:text-red dark:text-yellow dark:hover:text-yellow font-semibold;
-        }
-    }
-
     .light [data-scheme='primary'] {
         --bg: #fdfdf8;
         --accent: #e5e7e0;
@@ -62,6 +55,15 @@
         }
         h3 {
             @apply text-xl;
+        }
+
+        ul,
+        ol {
+            @apply pl-0;
+
+            li {
+                @apply list-none;
+            }
         }
     }
 
