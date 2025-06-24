@@ -306,7 +306,7 @@ const Teams: React.FC = () => {
                                                                 content={`${profiles.data.length - 5} more`}
                                                                 placement="bottom"
                                                             >
-                                                                <div className="size-10 rounded-full bg-accent dark:bg-accent-dark border border-light dark:border-dark flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
+                                                                <div className="size-10 rounded-full bg-accent border border-primary flex items-center justify-center text-sm font-semibold transform scale-100 hover:scale-125 transition-all">
                                                                     {profiles.data.length - 5}+
                                                                 </div>
                                                             </Tooltip>
@@ -374,7 +374,7 @@ const Teams: React.FC = () => {
                                                                                 } border transform ${
                                                                                     isMatchingMember
                                                                                         ? 'scale-125 border-red dark:border-yellow'
-                                                                                        : 'scale-100 border-light dark:border-dark'
+                                                                                        : 'scale-100 border-primary'
                                                                                 } hover:scale-125 transition-all`}
                                                                                 alt={name}
                                                                             />

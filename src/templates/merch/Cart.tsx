@@ -26,7 +26,7 @@ export function Cart(props: CartProps): React.ReactElement {
         <div className={classes}>
             <h3 className="text-xl font-bold mb-4">Cart</h3>
             {isEmpty && (
-                <div className="border border-light dark:border-dark bg-tan dark:bg-dark rounded p-8 text-center flex flex-col gap-8">
+                <div className="border border-primary bg-tan dark:bg-dark rounded p-8 text-center flex flex-col gap-8">
                     <p className="font-medium mb-0">This cart would look better with something in it.</p>
                     <div className="w-64 mx-auto">
                         <CloudinaryImage
@@ -44,7 +44,7 @@ export function Cart(props: CartProps): React.ReactElement {
                     {cartItems.map((item) => {
                         return (
                             <LineItem
-                                className="py-4 border-light dark:border-dark border-b-0 border-r-0 border-l-0 border-t-1 first:border-t-0"
+                                className="py-4 border-primary border-b-0 border-r-0 border-l-0 border-t-1 first:border-t-0"
                                 key={item.shopifyId}
                                 item={item}
                             />
@@ -54,7 +54,7 @@ export function Cart(props: CartProps): React.ReactElement {
 
                 {!isEmpty && (
                     <>
-                        <div className="flex justify-end gap-3 mt-4 mb-1 pt-4 border-t border-light dark:border-dark">
+                        <div className="flex justify-end gap-3 mt-4 mb-1 pt-4 border-t border-primary">
                             <span className="">Subtotal</span>{' '}
                             <strong>
                                 <Price price={subtotal} />

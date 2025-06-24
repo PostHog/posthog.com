@@ -13,7 +13,7 @@ import { User } from '../../hooks/useUser'
 export const Avatar = (props: { className?: string; src?: string; color?: string }) => {
     return (
         <div
-            className={`overflow-hidden p-px border rounded-full bg-accent dark:bg-accent-dark border-light dark:border-dark ${
+            className={`overflow-hidden p-px border rounded-full bg-accent border-primary ${
                 props.color
                     ? `group-hover:!border-${props.color}`
                     : 'hover:border-[rgba(0,0,0,0.2)] dark:hover:border-[rgba(255,255,255,0.2)]'
@@ -71,7 +71,7 @@ export const Login = ({ onSubmit = () => undefined }: { onSubmit?: () => void })
             <p className="m-0 text-sm dark:text-white">
                 Your PostHog.com community profile lets you ask questions and get early access to beta features.
             </p>
-            <p className="text-[13px] my-2 dark:text-white p-2 bg-gray-accent-light dark:bg-gray-accent-dark rounded">
+            <p className="text-[13px] my-2 dark:text-white p-2 bg-accent rounded">
                 <strong>Tip:</strong> PostHog.com accounts are separate from signing into the PostHog app.
             </p>
             <CallToAction onClick={() => setState('login')} width="full" size="md">
@@ -93,14 +93,12 @@ export const Profile = ({ user }: { user: User }) => {
         <div>
             <Link
                 to={`/community/profiles/${id}`}
-                className="group flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark rounded p-2"
+                className="group flex items-center space-x-2 mt-2 mb-1 -mx-2 relative active:top-[1px] active:scale-[.99] hover:bg-primary hover:bg-accent rounded p-2"
             >
                 <Avatar src={getAvatarURL(user?.profile)} className={`w-[40px] h-[40px]`} color={profile.color} />
                 <div>
                     {name && <p className="m-0 font-bold">{name}</p>}
-                    {email && (
-                        <p className="m-0 font-normal text-sm text-primary/60 dark:text-primary-dark/60">{email}</p>
-                    )}
+                    {email && <p className="m-0 font-normal text-sm text-secondary">{email}</p>}
                 </div>
             </Link>
 

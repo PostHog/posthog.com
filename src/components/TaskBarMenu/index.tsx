@@ -245,7 +245,7 @@ export default function TaskBarMenu() {
                                     <button
                                         key={window.key}
                                         onClick={() => handleWindowClick(window)}
-                                        className="text-left px-2 py-1.5 rounded hover:bg-accent dark:hover:bg-accent-dark text-sm flex items-center gap-2"
+                                        className="text-left px-2 py-1.5 rounded hover:bg-accent text-sm flex items-center gap-2"
                                     >
                                         <span
                                             className={`truncate ${

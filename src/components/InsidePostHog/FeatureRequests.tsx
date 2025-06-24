@@ -6,7 +6,7 @@ import React from 'react'
 
 const Skeleton = () => {
     return new Array(3).fill(0).map((_, index) => {
-        return <div className="h-16 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse mb-2" key={index} />
+        return <div className="h-16 w-full bg-accent rounded-md animate-pulse mb-2" key={index} />
     })
 }
 
@@ -47,7 +47,7 @@ export default function FeatureRequests() {
     })
 
     return (
-        <div className="border-y border-light dark:border-dark pt-4 @lg:border-b-0">
+        <div className="border-y border-primary pt-4 @lg:border-b-0">
             <h3 className="text-lg">Latest feature requests</h3>
             {isLoading ? (
                 <Skeleton />

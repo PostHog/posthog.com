@@ -16,7 +16,7 @@ const FeatureItem = ({ name, description, size }) => (
             <p
                 className={`${
                     size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
-                } text-primary/75 dark:text-primary-dark/75 mb-0`}
+                } text-secondary mb-0`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         </div>
@@ -149,7 +149,7 @@ const Addons = (): JSX.Element => {
                             We've moved specialized functionality into add-ons so you never pay for things you don't
                             need.
                         </p>
-                        <div className="max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-4">
+                        <div className="max-w-sm rounded border border-primary bg-accent p-4">
                             <div className="font-semibold opacity-70 mb-1">Jump to:</div>
                             <ol className="pl-6">
                                 {allAddons.map((addon) => (
@@ -191,7 +191,7 @@ const Addons = (): JSX.Element => {
                             className="grid md:grid-cols-12 gap-x-12 gap-y-4 mt-12"
                             id={name.toLowerCase().replace(/\s+/g, '-')}
                         >
-                            <div className="md:col-span-12 border-b border-light dark:border-dark pb-2">
+                            <div className="md:col-span-12 border-b border-primary pb-2">
                                 <h2 className="mb-1">{name}</h2>
                             </div>
                             <div className="md:col-span-4 md:sticky top-[120px] self-start">
@@ -247,7 +247,7 @@ const Addons = (): JSX.Element => {
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px] mt-8">
                                         <h5 className="mb-2 text-lg">Pricing breakdown</h5>
-                                        <div className="border border-light dark:border-dark rounded divide-y divide-light dark:divide-dark bg-accent/50 dark:bg-accent-dark">
+                                        <div className="border border-primary rounded divide-y divide-light dark:divide-dark bg-accent">
                                             <PricingTiers plans={plans} type={type} unit={unit} test />
                                         </div>
                                     </div>
@@ -256,7 +256,7 @@ const Addons = (): JSX.Element => {
                         </div>
                     )
                 })}
-                <div className="my-12 border-t border-light dark:border-dark pt-6 flex flex-col items-center">
+                <div className="my-12 border-t border-primary pt-6 flex flex-col items-center">
                     <p>Subscribe to add-ons after signing up.</p>
 
                     <CallToAction

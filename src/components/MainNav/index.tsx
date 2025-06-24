@@ -175,10 +175,10 @@ function Tooltip({
                 <button
                     ref={setReferenceElement}
                     onClick={() => setOpen(!open)}
-                    className={`flex items-center rounded-full ml-1 border border-light dark:border-dark relative active:scale-[.99] ${
+                    className={`flex items-center rounded-full ml-1 border border-primary relative active:scale-[.99] ${
                         open
-                            ? 'border-primary/50 dark:border-primary-dark/50'
-                            : 'hover:border-primary/25 hover:dark:border-primary-dark/25 hover:scale-[1.05]'
+                            ? 'border-input-dark/50'
+                            : 'hover:border-input hover:dark:border-primary-dark/25 hover:scale-[1.05]'
                     }`}
                 >
                     {children}
@@ -202,12 +202,8 @@ function Tooltip({
                     style={styles.popper}
                     {...attributes.popper}
                 >
-                    <div
-                        className={`rounded-md border-light dark:border-dark border overflow-hidden ${tooltipClassName}`}
-                    >
-                        <div
-                            className={`bg-accent dark:bg-accent-dark text-primary dark:text-primary-dark text-sm z-20`}
-                        >
+                    <div className={`rounded-md border-primary border overflow-hidden ${tooltipClassName}`}>
+                        <div className={`bg-accent text-primary dark:text-primary-dark text-sm z-20`}>
                             {content && (typeof content === 'string' ? content : content(setOpen))}
                         </div>
                     </div>
@@ -286,13 +282,13 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                         firstInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                    <IconChevronDown className="w-8 h-8 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>
             )}
             <ul
                 style={{ justifyContent: overflowing ? 'start' : 'center' }}
                 ref={ref}
-                className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-light dark:border-dark relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
+                className={`flex space-x-4 list-none m-0 pt-1 px-4 border-b border-primary relative snap-x snap-mandatory overflow-x-auto overflow-y-hidden ${className}`}
             >
                 {menu.map((menuItem, index) => {
                     const { url, color, colorDark, icon, name, onClick } = menuItem
@@ -356,7 +352,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
                         lastInView ? '-z-10' : 'z-10'
                     }`}
                 >
-                    <IconChevronDown className="w-8 h-8 rounded-sm text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent/25 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border hover:border-light dark:hover:border-dark relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
+                    <IconChevronDown className="w-8 h-8 rounded-sm text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100 -rotate-90 hover:bg-accent hover:backdrop-blur-sm active:backdrop-blur-sm border-transparent hover:border relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]" />
                 </button>
             )}
         </div>
@@ -364,7 +360,7 @@ export const InternalMenu = ({ className = '', mobile = false, menu, activeIndex
 }
 
 const keyboardShortcut =
-    'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs'
+    'box-content p-[5px] border border-b-2 border-primary  rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs'
 
 const enterpiseModeNames = {
     Products: 'Solutions',
@@ -492,7 +488,7 @@ export const Main = () => {
                 />
             </SideModal>
             <MediaUploadModal open={mediaModalOpen} setOpen={setMediaModalOpen} />
-            <div className="border-b border-light dark:border-dark bg-accent dark:bg-accent-dark mb-1">
+            <div className="border-b border-primary bg-accent mb-1">
                 <div
                     className={`flex mx-auto px-2 md:px-0 mdlg:px-5 justify-between transition-all ${
                         fullWidthContent ? 'max-w-full' : 'max-w-screen-3xl box-content'
@@ -580,7 +576,7 @@ export const Main = () => {
                             content={() => {
                                 return (
                                     <ul className="list-none text-left m-0 p-0 pb-[3px] space-y-[2px] w-[200px]">
-                                        <li className="bg-border/20 dark:bg-border-dark/20 border-b border-light dark:border-dark text-[13px] px-2 py-1.5 text-primary/50 dark:text-primary-dark/60 z-20 m-0 !mb-[3px] font-semibold">
+                                        <li className="bg-border/20 dark:bg-border-dark/20 border-b border-primary text-[13px] px-2 py-1.5 text-muted z-20 m-0 !mb-[3px] font-semibold">
                                             Go to...
                                         </li>
                                         <li className="px-1">
@@ -592,7 +588,7 @@ export const Main = () => {
                                                 PostHog app
                                             </Link>
                                         </li>
-                                        <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                                        <li className="bg-border/20 dark:bg-border-dark/20 border-y border-primary text-[13px] px-2 py-1.5 !my-1 text-muted z-20 m-0 font-semibold">
                                             Community
                                         </li>
                                         <li className="px-1">
@@ -661,7 +657,7 @@ export const Main = () => {
                                             )}
                                         </li>
 
-                                        <li className="bg-border/20 dark:bg-border-dark/20 border-y border-light dark:border-dark text-[13px] px-2 py-1.5 !my-1 text-primary/50 dark:text-primary-dark/60 z-20 m-0 font-semibold">
+                                        <li className="bg-border/20 dark:bg-border-dark/20 border-y border-primary text-[13px] px-2 py-1.5 !my-1 text-muted z-20 m-0 font-semibold">
                                             Site settings
                                         </li>
                                         <li className="px-1">
@@ -767,7 +763,7 @@ export const Main = () => {
                             }}
                         >
                             {user?.profile ? (
-                                <div className="p-px bg-accent dark:bg-accent-dark rounded-full inline-flex relative">
+                                <div className="p-px bg-accent rounded-full inline-flex relative">
                                     <Avatar
                                         src={getAvatarURL(user?.profile)}
                                         className={`w-9 h-9 inline-block bg-${
@@ -817,7 +813,7 @@ export const Mobile = () => {
                 menu={internalMenu}
                 activeIndex={internalMenu?.findIndex((menu) => menu === activeInternalMenu)}
             />
-            <ul className="grid grid-cols-5 gap-[2px] list-none m-0 px-2 bg-accent dark:bg-accent-dark border-t border-border dark:border-dark">
+            <ul className="grid grid-cols-5 gap-[2px] list-none m-0 px-2 bg-accent border-t border-input">
                 {menu.map((menuItem) => {
                     const active = menuItem.name === parent?.name
                     const { name, url, icon } = menuItem

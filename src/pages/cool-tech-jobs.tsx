@@ -116,7 +116,7 @@ const JobsByDepartment = ({
         <div>
             <button
                 onClick={() => setOpen(!open)}
-                className="w-full text-left flex items-center border-b border-light dark:border-dark pb-2 mb-2"
+                className="w-full text-left flex items-center border-b border-primary pb-2 mb-2"
             >
                 <IconChevronDown className={`size-7 transition-transform opacity-60 ${open ? 'rotate-180' : ''}`} />
                 <span className="flex justify-between items-center flex-grow">
@@ -211,13 +211,13 @@ const Companies = ({
     return companiesLoading ? (
         <ul className="list-none p-0 m-0 space-y-4 py-8">
             {Array.from({ length: 10 }).map((_, index) => (
-                <div key={index} className="h-12 w-full bg-accent dark:bg-accent-dark rounded-md" />
+                <div key={index} className="h-12 w-full bg-accent rounded-md" />
             ))}
         </ul>
     ) : (
         <div>
             <div
-                className={`flex items-center justify-between lg:mt-5 border bg-white dark:bg-accent-dark border-border dark:border-dark rounded mx-auto transition-all ${
+                className={`flex items-center justify-between lg:mt-5 border bg-white dark:bg-accent-dark border-input rounded mx-auto transition-all ${
                     fullWidthContent ? 'max-w-full' : ' max-w-4xl'
                 }`}
             >
@@ -274,7 +274,7 @@ const Companies = ({
                                         </>
                                     )}
                                     {company.attributes.description && (
-                                        <p className="m-0 text-sm font-medium text-primary/75 dark:text-primary-dark/75">
+                                        <p className="m-0 text-sm font-medium text-secondary">
                                             {company.attributes.description}
                                         </p>
                                     )}
@@ -290,7 +290,7 @@ const Companies = ({
                                         </Link>
                                     )}
 
-                                    <h4 className="text-sm font-medium text-primary/50 dark:text-primary-dark/50 border-b border-light dark:border-dark pb-2 mt-4 mb-2">
+                                    <h4 className="text-sm font-medium text-muted border-b border-primary pb-2 mt-4 mb-2">
                                         Unique perks
                                     </h4>
                                     <Perks
@@ -298,16 +298,16 @@ const Companies = ({
                                         company={company}
                                     />
                                     {isModerator && (
-                                        <div className="border-t border-border dark:border-dark pt-2 mt-3 flex justify-end items-center">
+                                        <div className="border-t border-input pt-2 mt-3 flex justify-end items-center">
                                             <button
-                                                className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
+                                                className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent rounded-md px-1.5 py-1 click"
                                                 onClick={() => onEdit(company.id)}
                                             >
                                                 <IconPencil className="size-3" />
                                                 <span>Edit</span>
                                             </button>
                                             <button
-                                                className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent dark:hover:bg-accent-dark rounded-md px-1.5 py-1 click"
+                                                className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent rounded-md px-1.5 py-1 click"
                                                 onClick={() => onDelete(company.id, name)}
                                             >
                                                 <IconTrash className="size-3" />
@@ -411,7 +411,7 @@ const Filters = ({
 
     return (
         <div className="space-y-4 pt-4 !pb-8 lg:py-0">
-            <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary-dark/60 border-b border-light dark:border-dark pb-2 mb-2">
+            <h4 className="text-[15px] font-medium text-secondary border-b border-primary pb-2 mb-2">
                 Typical filters
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-x-12 lg:gap-x-0 gap-y-4 pr-1">
@@ -419,7 +419,7 @@ const Filters = ({
                     const content = (
                         <>
                             {index === 3 && (
-                                <h4 className="text-[15px] font-medium text-primary/60 dark:text-primary-dark/60 border-b border-light dark:border-dark py-2 mb-0 sm:col-span-2 lg:col-span-1">
+                                <h4 className="text-[15px] font-medium text-secondary border-b border-primary py-2 mb-0 sm:col-span-2 lg:col-span-1">
                                     Unique perks
                                 </h4>
                             )}
@@ -511,7 +511,7 @@ const IssueForm = () => {
 
     if (submitted) {
         return (
-            <div className="border border-border dark:border-dark rounded-md p-2 bg-accent dark:bg-accent-dark">
+            <div className="border border-input rounded-md p-2 bg-accent">
                 <h4 className="text-base m-0">Thanks for your report!</h4>
                 <p className="text-sm opacity-70 m-0">We'll look into this issue as soon as possible.</p>
             </div>
@@ -555,7 +555,7 @@ const IssueForm = () => {
                     id="description"
                     rows={4}
                     className={`w-full p-2 border rounded-md bg-transparent ${
-                        touched.description && errors.description ? 'border-red' : 'border-border dark:border-dark'
+                        touched.description && errors.description ? 'border-red' : 'border-input'
                     }`}
                     placeholder="Please provide details about the issue"
                     {...getFieldProps('description')}
@@ -589,7 +589,7 @@ const Input = ({ label, error, touched, multiline, className = '', rows = 4, ...
                 {...props}
                 rows={multiline ? rows : undefined}
                 className={`w-full p-2 border rounded-md bg-white dark:bg-accent-dark ${
-                    touched && error ? 'border-red' : 'border-border dark:border-dark'
+                    touched && error ? 'border-red' : 'border-input'
                 }`}
             />
             {touched && error && <p className="text-red text-sm m-0 mt-1">{error}</p>}
@@ -612,25 +612,25 @@ const supportedJobBoardTypes = [
 const CompanyFormSkeleton = () => {
     return (
         <ul className="list-none p-0 m-0 space-y-3">
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
             <div className="flex items-center space-x-2">
-                <div className="h-10 w-1/2 bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-                <div className="h-10 w-1/2 bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+                <div className="h-10 w-1/2 bg-accent rounded-md animate-pulse" />
+                <div className="h-10 w-1/2 bg-accent rounded-md animate-pulse" />
             </div>
-            <div className="h-40 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-            <div className="h-10 w-full bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+            <div className="h-40 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
+            <div className="h-10 w-full bg-accent rounded-md animate-pulse" />
             <div className="grid grid-cols-3 gap-2">
-                <div className="aspect-square bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-                <div className="aspect-square bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
-                <div className="aspect-square bg-accent dark:bg-accent-dark rounded-md animate-pulse" />
+                <div className="aspect-square bg-accent rounded-md animate-pulse" />
+                <div className="aspect-square bg-accent rounded-md animate-pulse" />
+                <div className="aspect-square bg-accent rounded-md animate-pulse" />
             </div>
         </ul>
     )
@@ -1134,7 +1134,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                             <div className="flex-grow relative">
                                 <input
                                     className={`border rounded-md p-2 text-sm w-full bg-white dark:bg-accent-dark ${
-                                        touched.slug && errors.slug ? 'border-red' : 'border-border dark:border-dark'
+                                        touched.slug && errors.slug ? 'border-red' : 'border-input'
                                     }`}
                                     placeholder="bluth-company"
                                     {...getFieldProps('slug')}
@@ -1219,7 +1219,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
+                            className={`h-auto aspect-square rounded-sm border border-input ${
                                 touched.logoLight && errors.logoLight ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logoLight', file)}
@@ -1232,7 +1232,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logo (dark)</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
+                            className={`h-auto aspect-square rounded-sm border border-input ${
                                 touched.logoDark && errors.logoDark ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logoDark', file)}
@@ -1245,7 +1245,7 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
                     <label className="block">
                         <span className="text-base font-semibold mb-1 block">Logomark</span>
                         <ImageDrop
-                            className={`h-auto aspect-square rounded-sm border border-border dark:border-dark ${
+                            className={`h-auto aspect-square rounded-sm border border-input ${
                                 touched.logomark && errors.logomark ? 'border-red' : ''
                             }`}
                             onDrop={(file) => setFieldValue('logomark', file)}
@@ -1326,7 +1326,7 @@ export default function JobsPage() {
                             Looking to work at PostHog? <Link to="/careers">Visit our careers page.</Link>
                         </p>
 
-                        <p className="mt-4 mb-0 border-t border-light dark:border-dark pt-4 text-[15px]">
+                        <p className="mt-4 mb-0 border-t border-primary pt-4 text-[15px]">
                             Work at a company with great perks?{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
@@ -1357,7 +1357,7 @@ export default function JobsPage() {
                             </CallToAction>
                         )}
                     </div>
-                    <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-light dark:border-dark order-3 lg:order-2">
+                    <div className="w-full flex-grow lg:mr-6 lg:pl-6 lg:pr-6 lg:border-x border-primary order-3 lg:order-2">
                         {sortBy === 'company' ? (
                             <Companies
                                 companiesLoading={companiesLoading}
@@ -1381,7 +1381,7 @@ export default function JobsPage() {
                     <div className="flex-shrink-0 xl:sticky top-0 reasonable:top-[107px] lg:py-4 order-2 pb-4 lg:pb-0 lg:order-3 w-full lg:w-auto">
                         <button
                             onClick={() => setFiltersOpen(!filtersOpen)}
-                            className="text-left inline-flex items-center justify-between border border-light dark:border-dark rounded p-1 pr-3 bg-accent dark:bg-accent-dark lg:hidden w-full"
+                            className="text-left inline-flex items-center justify-between border border-primary rounded p-1 pr-3 bg-accent lg:hidden w-full"
                         >
                             <IconChevronDown
                                 className={`size-7 transition-transform opacity-60 ${filtersOpen ? 'rotate-180' : ''}`}

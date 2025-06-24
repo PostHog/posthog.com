@@ -78,7 +78,7 @@ const planSummary = [
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => (
     <div>
         <h4 className="text-lg mb-2">{planData.title}</h4>
-        <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded">
+        <div className="flex flex-col h-full border border-primary bg-white dark:bg-accent-dark rounded">
             <div className="flex flex-col h-full gap-4 pt-3 px-4 xl:px-4 pb-6">
                 <div>
                     <h4 className="inline text-lg">
@@ -116,9 +116,7 @@ const SectionLayout = ({ id = '', children }) => (
     </section>
 )
 
-const SectionHeader = ({ children }) => (
-    <header className="border-b pb-1 border-light dark:border-dark">{children}</header>
-)
+const SectionHeader = ({ children }) => <header className="border-b pb-1 border-primary">{children}</header>
 
 const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 md:py-4">{children}</div>
 
@@ -126,7 +124,7 @@ const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb-4 md:p
 
 const SectionSidebar = ({ children, className = '' }) => (
     <div
-        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 md:ml-8 ${className}`}
+        className={`col-span-1 flex flex-col gap-4 md:border-l border-primary border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 md:ml-8 ${className}`}
     >
         {children}
     </div>
@@ -503,8 +501,8 @@ const ProductTabs = () => {
 
     return (
         <div>
-            <div className="text-center font-semibold text-[15px] border-t border-light dark:border-dark">
-                <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3 text-primary/75 dark:text-primary-dark/75">
+            <div className="text-center font-semibold text-[15px] border-t border-primary">
+                <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3 text-secondary">
                     Starts at <strong>$0</strong>
                     <span className="font-normal opacity-75">/mo</span> with a{' '}
                     <span className="text-green">generous monthly free tier*</span>
@@ -535,7 +533,7 @@ const ProductTabs = () => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-primary rounded-md p-4 overflow-hidden"
                 >
                     <div key={activeProduct.name}>{tabContent[activeProduct.name]({ ...productData })}</div>
                 </motion.div>
@@ -550,7 +548,7 @@ const ProductTabs = () => {
                 <div
                     className={`text-center font-semibold text-[15px] mt-4 ${
                         activeTab === undefined && 'border-t'
-                    } border-light dark:border-dark`}
+                    } border-primary`}
                 >
                     <div className="relative -top-3 bg-tan dark:bg-dark inline-block px-3">
                         <button
@@ -574,13 +572,13 @@ const plans = [
             <>
                 <h4>Use PostHog free forever, with some limits</h4>
                 <div className="grid grid-cols-3 @xl:grid-cols-5 pb-4 text-[15px] [&>*:nth-child(3)]:opacity-60">
-                    <div className="px-2 pb-2 border-b border-light dark:border-dark">&nbsp;</div>
-                    <div className="@xl:col-span-2 pl-1 pb-2 border-b border-light dark:border-dark">
+                    <div className="px-2 pb-2 border-b border-primary">&nbsp;</div>
+                    <div className="@xl:col-span-2 pl-1 pb-2 border-b border-primary">
                         <strong>Free</strong>
                         <br />
                         <span className="text-green font-semibold text-sm">(This plan)</span>
                     </div>
-                    <div className="@xl:col-span-2 pl-2 pb-2 border-b border-light dark:border-dark text-opacity-70">
+                    <div className="@xl:col-span-2 pl-2 pb-2 border-b border-primary text-opacity-70">
                         <strong>Pay-as-you-go</strong>
                     </div>
                 </div>
@@ -832,7 +830,7 @@ const PlansTabs = () => {
                 <motion.div
                     initial={{ height: 0 }}
                     animate={{ height: 'auto' }}
-                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md p-4 overflow-hidden"
+                    className="@container -mt-[2px] bg-white dark:bg-accent-dark border border-primary rounded-md p-4 overflow-hidden"
                 >
                     {[activePlan.html]}
                 </motion.div>
@@ -882,7 +880,7 @@ const PricingExperiment = ({
             </SectionLayout>
 
             <SectionLayout>
-                <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
+                <div className="bg-accent p-4 pb-6 md:pb-4 rounded border border-primary flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
                     <div>
                         <h3 className="mb-1 text-xl">Give PostHog a try</h3>
                         <p className="mb-0 text-[15px]">
@@ -958,7 +956,7 @@ const PricingExperiment = ({
             >
                 <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                     <div className="grid grid-cols-16 mb-1 min-w-[1000px]">
-                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-1">&nbsp;</div>
+                        <div className="col-span-4 bg-accent px-3 py-1">&nbsp;</div>
                         {platformAndSupportProduct?.plans
                             ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
                             ?.map((plan: BillingV2PlanType) => (
@@ -968,9 +966,9 @@ const PricingExperiment = ({
                             ))}
                     </div>
 
-                    <div className="grid grid-cols-16 mb-2 border-x border-b border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                        <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                            <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
+                    <div className="grid grid-cols-16 mb-2 border-x border-b border-primary bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
+                        <div className="col-span-4 bg-accent px-3 py-2 text-sm">
+                            <strong className="text-secondary">Base price</strong>
                         </div>
                         {platformAndSupportProduct?.plans
                             ?.filter((plan: BillingV2PlanType) => plan.name !== 'Teams') // This is a temporary addition until the teams addon is shipped and the teams plan is removed
@@ -1004,17 +1002,15 @@ const PricingExperiment = ({
                             )
                             .map((feature: BillingV2FeatureType) => (
                                 <>
-                                    <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
+                                    <div className="col-span-4 bg-accent px-3 py-2 text-sm">
                                         {feature.description ? (
                                             <Tooltip content={feature.description}>
-                                                <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                <strong className="border-b border-dashed border-primary cursor-help text-secondary">
                                                     {feature.name}
                                                 </strong>
                                             </Tooltip>
                                         ) : (
-                                            <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                {feature.name}
-                                            </strong>
+                                            <strong className="text-secondary">{feature.name}</strong>
                                         )}
                                     </div>
                                     {platformAndSupportProduct?.plans
@@ -1195,7 +1191,7 @@ const PricingExperiment = ({
             </section>
 
             <section id="faq" className={`${section} mb-20 mt-12 md:px-4`}>
-                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-light dark:border-dark">Pricing FAQ</h2>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>
                 <FAQs />
                 <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
                     Have another pricing-related question?{' '}

@@ -24,7 +24,7 @@ export default function TableOfContents({
             componentTag: 'div',
             offset: -50,
             items: flattenMenu(menu)?.map((navItem: IMenu) => navItem.url),
-            currentClassName: 'bg-gray-accent-light',
+            currentClassName: 'bg-accent-light',
         },
     }[menuType]
 

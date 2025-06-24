@@ -99,23 +99,20 @@ function TextArea(props: React.RefAttributes<HTMLTextAreaElement> & IInputProps)
     return (
         <div>
             <div className="flex flex-col gap-1 justify-between items-start">
-            <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={other.name}>
-                {other.placeholder}
-            </label>
-            {error && <p className="text-red font-medium m-0 pb-1 text-xs">{error}</p>}
-        </div>
+                <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={other.name}>
+                    {other.placeholder}
+                </label>
+                {error && <p className="text-red font-medium m-0 pb-1 text-xs">{error}</p>}
+            </div>
 
             <TextareaAutosize
                 onHeightChange={(height) => setHeight(height + 32)}
                 onBlur={() => validateField(props.name)}
-                className={`outline-none ${
-                    error ? '!border-red' : ''
-                }  `}
+                className={`outline-none ${error ? '!border-red' : ''}  `}
                 id={other.name}
                 {...other}
             />
-            
-        </div> 
+        </div>
     )
 }
 
@@ -134,14 +131,11 @@ function Input(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) {
 
             <input
                 onBlur={() => validateField(props.name)}
-                className={`outline-none ${
-                    error ? '!border-red' : ''
-                } `}
+                className={`outline-none ${error ? '!border-red' : ''} `}
                 id={other.name}
                 {...other}
             />
-            
-            </div>
+        </div>
     )
 }
 
@@ -185,25 +179,23 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
 
     return (
         <div className="flex gap-1 items-center">
-        <input
-            checked={values[other.name] == other.value}
-            className=""
-            {...other}
-            type="radio"
-            value={props.value}
-            onChange={handleChange}
-            id={`${other.name}-${other.value}`}
-            ref={reference || null}
-        />
-        <label
-            onMouseUp={handleClick}
-            className="relative flex-1 cursor-pointer"
-            htmlFor={`${other.name}-${other.value}`}
-        >
-            <span className="text-sm">
-                {label || other.value}
-            </span>
-        </label>
+            <input
+                checked={values[other.name] == other.value}
+                className=""
+                {...other}
+                type="radio"
+                value={props.value}
+                onChange={handleChange}
+                id={`${other.name}-${other.value}`}
+                ref={reference || null}
+            />
+            <label
+                onMouseUp={handleClick}
+                className="relative flex-1 cursor-pointer"
+                htmlFor={`${other.name}-${other.value}`}
+            >
+                <span className="text-sm">{label || other.value}</span>
+            </label>
         </div>
     )
 }
@@ -231,13 +223,9 @@ function RadioGroup(props: InputHTMLAttributes<HTMLInputElement> & IInputProps) 
             className={`${inputContainerClasses} ${error ? '' : ''} cursor-pointer`}
         >
             <fieldset id={`group-${props.name}`}>
-            <legend>{props.placeholder}</legend>
-            {error && <p className="text-red font-medium m-0 text-xs -mt-1 mb-1">{error}</p>}
-                <div
-                    role="radiogroup"
-                    aria-labelledby={`group-${props.name}`}
-                    className="flex flex-col gap-1"
-                >
+                <legend>{props.placeholder}</legend>
+                {error && <p className="text-red font-medium m-0 text-xs -mt-1 mb-1">{error}</p>}
+                <div role="radiogroup" aria-labelledby={`group-${props.name}`} className="flex flex-col gap-1">
                     {options?.map((option, index) => {
                         const { value, hubspotValue, label } = option
                         return (
@@ -355,7 +343,7 @@ export default function ContactForm({
                     <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                 </div>
             )}
-            <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
+            <div className="bg-light dark:bg-dark border border-primary px-6 py-8 rounded-md mt-4">
                 <h4>
                     ✅ <strong>{successMessage}</strong>
                 </h4>

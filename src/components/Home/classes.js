@@ -5,8 +5,7 @@ export const heading = (size = 'lg', color = 'primary', classes = '') => {
     const options = {
         lg: 'text-5xl md:text-7xl',
         md: 'text-4xl lg:text-5xl 2xl:text-5xl',
-        subtitle:
-            'text-xl xl:text-2xl leading-tight font-semibold mt-2 md:mt-3 text-primary/80 dark:text-primary-dark/80',
+        subtitle: 'text-xl xl:text-2xl leading-tight font-semibold mt-2 md:mt-3 text-secondary',
         sm: 'text-[18px] md:text-[20px] leading-tight md:text-xl font-semibold mt-2 md:mt-3 opacity-75',
     }
     return cntl`

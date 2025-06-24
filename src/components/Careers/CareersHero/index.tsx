@@ -408,7 +408,7 @@ export const CareersHero = () => {
                         Select a role
                     </label>
                     <select
-                        className="block md:hidden w-full p-2 border border-b-0 border-light bg-accent dark:bg-accent-dark dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
+                        className="block md:hidden w-full p-2 border border-b-0 border-light bg-accent dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
                         value={selectedJob.fields.title}
                         onChange={(e) => {
                             const selectedJobTitle = e.target.value
@@ -533,12 +533,12 @@ export const CareersHero = () => {
 
                                     {isLoading ? (
                                         <div className="space-y-1 mb-3">
-                                            <div className="bg-accent dark:bg-accent-dark h-5 w-full rounded animate-pulse" />
-                                            <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-3rem)] rounded animate-pulse" />
-                                            <div className="bg-accent dark:bg-accent-dark h-5 w-[calc(100%-1rem)] rounded animate-pulse" />
-                                            <div className="bg-accent dark:bg-accent-dark h-5 w-72 max-w-full rounded animate-pulse" />
-                                            <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-60 max-w-full rounded animate-pulse" />
-                                            <div className="md:hidden bg-accent dark:bg-accent-dark h-5 w-36 max-w-full rounded animate-pulse" />
+                                            <div className="bg-accent h-5 w-full rounded animate-pulse" />
+                                            <div className="bg-accent h-5 w-[calc(100%-3rem)] rounded animate-pulse" />
+                                            <div className="bg-accent h-5 w-[calc(100%-1rem)] rounded animate-pulse" />
+                                            <div className="bg-accent h-5 w-72 max-w-full rounded animate-pulse" />
+                                            <div className="md:hidden bg-accent h-5 w-60 max-w-full rounded animate-pulse" />
+                                            <div className="md:hidden bg-accent h-5 w-36 max-w-full rounded animate-pulse" />
                                         </div>
                                     ) : (
                                         <>
@@ -634,7 +634,7 @@ export const CareersHero = () => {
                             <div className="flex flex-col items-center gap-2">
                                 {teams.length > 1 && (
                                     <select
-                                        className="w-full p-2 mb-2 border border-b-3 border-light dark:border-dark rounded text-sm font-medium dark:bg-dark"
+                                        className="w-full p-2 mb-2 border border-b-3 border-primary rounded text-sm font-medium dark:bg-dark"
                                         value={currentTeamName}
                                         onChange={(e) => {
                                             setSelectedTeamName(e.target.value)

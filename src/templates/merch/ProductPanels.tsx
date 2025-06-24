@@ -23,7 +23,7 @@ export function ProductPanels(props: ProductPanelsProps): React.ReactElement | n
     return (
         <div
             className={cn(
-                'absolute inset-0 bg-light dark:bg-accent-dark border-l border-light dark:border-dark shadow-xl',
+                'absolute inset-0 bg-light dark:bg-accent-dark border-l border-primary shadow-xl',
                 isCart && 'overflow-hidden'
             )}
         >

@@ -69,7 +69,7 @@ export const Select = ({
     }, [])
 
     return (
-        <div className={`relative border-b border-border dark:border-dark ${className}`}>
+        <div className={`relative border-b border-input ${className}`}>
             <Listbox value={value || {}} onChange={handleChange}>
                 <Listbox.Button
                     className={`font-semibold text-black dark:text-primary-dark text-base w-full py-3 px-4 outline-none rounded-none text-left  ${
@@ -83,7 +83,7 @@ export const Select = ({
                     </div>
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (
-                    <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t divide-y border-black/30 dark:border-primary-dark/30 divide-black/30 dark:divide-primary-dark/30">
+                    <Listbox.Options className="list-none p-0 m-0 absolute z-20 bg-white w-full max-h-[247px] overflow-auto shadow-md rounded-br-md rounded-bl-md border-t divide-y border-black/30 dark:border-primary-dark/30 divide-black/30 dark:divide-primary-dark/30">
                         {topicGroups
                             .sort(
                                 (a, b) =>
@@ -93,17 +93,15 @@ export const Select = ({
                             .map(({ attributes: { label, topics } }) => {
                                 return (
                                     <div key={label}>
-                                        <h5 className="m-0 py-2 px-4 sticky top-0 bg-white dark:bg-gray-accent-dark-hover">
-                                            {label}
-                                        </h5>
+                                        <h5 className="m-0 py-2 px-4 sticky top-0 bg-white">{label}</h5>
                                         {topics?.data.map((topic) => (
                                             <Listbox.Option key={topic.id} value={topic}>
                                                 {({ selected }) => (
                                                     <div
                                                         className={`${
                                                             selected
-                                                                ? 'bg-gray-accent-light text-black dark:bg-gray-accent-dark dark:text-primary-dark'
-                                                                : 'bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-gray-accent-dark/30 dark:text-primary-dark'
+                                                                ? 'bg-accent text-primary'
+                                                                : 'prose-invert bg-white text-black hover:bg-accent'
                                                         } py-2 px-4 cursor-pointer transition-all`}
                                                     >
                                                         {topic.attributes.label}
@@ -180,9 +178,9 @@ function QuestionFormMain({
                                 />
                             </div>
 
-                            <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                            <div className="bg-white dark:bg-accent-dark border border-primary rounded-md overflow-hidden mb-4">
                                 {status && status !== 'none' && (
-                                    <div className="p-4 bg-accent dark:bg-dark border-b border-border dark:border-dark">
+                                    <div className="p-4 bg-accent dark:bg-dark border-b border-input">
                                         <h5 className="m-0">Heads up!</h5>
                                         <p className="m-0 text-sm">
                                             We're currently experiencing an incident. Check{' '}
@@ -202,7 +200,7 @@ function QuestionFormMain({
                                     <>
                                         <Field
                                             autoFocus={autoFocus}
-                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-light dark:border-dark text-base w-full py-3 px-4 outline-none rounded-none"
+                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-primary text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"

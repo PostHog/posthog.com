@@ -6,7 +6,7 @@ import { InProgress } from 'components/Roadmap/InProgress'
 import { CallToAction } from 'components/CallToAction'
 import { slugifyTeamName } from 'lib/utils'
 
-const Skeleton = () => <div className="w-full h-96 animate-pulse bg-accent dark:bg-accent-dark rounded-md" />
+const Skeleton = () => <div className="w-full h-96 animate-pulse bg-accent rounded-md" />
 
 const getRecentUpdate = async () => {
     const { data } = await fetch(

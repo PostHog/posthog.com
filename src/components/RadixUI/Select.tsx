@@ -41,7 +41,7 @@ const SelectItem = React.forwardRef(
     ({ children, className, ...props }: React.ComponentPropsWithoutRef<typeof RadixSelect.Item>, forwardedRef) => {
         return (
             <RadixSelect.Item
-                className={`relative flex h-[25px] select-none items-center rounded pl-8 pr-4 text-sm leading-none text-primary/80 hover:text-primary dark:hover:text-primary-dark data-[disabled]:pointer-events-none data-[highlighted]:bg-accent-2 dark:data-[highlighted]:bg-white/5 data-[disabled]:text-primary/50 dark:data-[disabled]:text-primary-dark/50 data-[disabled]:cursor-not-allowed data-[highlighted]:text-primary data-[highlighted]:outline-none data-[state=checked]:font-bold ${className}`}
+                className={`relative flex h-[25px] select-none items-center rounded pl-8 pr-4 text-sm leading-none text-secondary hover:text-primary data-[disabled]:pointer-events-none data-[highlighted]:bg-accent-2 dark:data-[highlighted]:bg-white/5 data-[disabled]:text-muted dark:data-[disabled]:text-primary-dark/50 data-[disabled]:cursor-not-allowed data-[highlighted]:text-primary data-[highlighted]:outline-none data-[state=checked]:font-bold ${className}`}
                 {...props}
                 ref={forwardedRef as React.Ref<HTMLDivElement>}
             >
@@ -90,20 +90,20 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                         data-scheme={dataScheme}
                     >
                         <RadixSelect.Value placeholder={placeholder} />
-                        <RadixSelect.Icon className="text-primary/50 dark:text-primary-dark/50">
+                        <RadixSelect.Icon className="text-muted">
                             <IconChevronDown className="size-6" />
                         </RadixSelect.Icon>
                     </RadixSelect.Trigger>
                     <RadixSelect.Portal>
                         <RadixSelect.Content className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl">
-                            <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-primary/60 dark:text-primary-dark/60">
+                            <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-secondary">
                                 <IconChevronDown className="size-4 rotate-180" />
                             </RadixSelect.ScrollUpButton>
                             <RadixSelect.Viewport className="p-1">
                                 {groups.map((group, index) => (
                                     <React.Fragment key={group.label}>
                                         <RadixSelect.Group>
-                                            <RadixSelect.Label className="px-8 text-sm leading-[25px] text-primary/60 dark:text-primary-dark/60">
+                                            <RadixSelect.Label className="px-8 text-sm leading-[25px] text-secondary">
                                                 {group.label}
                                             </RadixSelect.Label>
                                             {group.items.map((item) => (

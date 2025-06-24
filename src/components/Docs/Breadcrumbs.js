@@ -6,7 +6,7 @@ const Crumb = ({ crumb: { name, url } }) => {
     return (
         <li className="flex items-center text-sm md:text-lg">
             {url ? (
-                <Link className={`${classes} dark:text-[#765494] text-primary/75 hover:text-primary/100 `} to={url}>
+                <Link className={`${classes} dark:text-[#765494] text-secondary hover:text-primary `} to={url}>
                     {name}
                 </Link>
             ) : (

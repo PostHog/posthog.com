@@ -25,7 +25,7 @@ function ProductLink({ link, icon: Icon, productName, color }: ProductLinkProps)
     return (
         <Link
             to={`https://posthog.com/${link}`}
-            className="flex items-center gap-2 border border-light dark:border-dark rounded-sm px-1 py-0.5 font-bold text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark bg-accent/50 dark:bg-accent-dark/50 hover:bg-accent dark:hover:bg-accent-dark hover:border-border dark:hover:border-border-dark"
+            className="flex items-center gap-2 border border-primary rounded-sm px-1 py-0.5 font-bold text-primary hover:text-primary bg-accent hover:bg-accent hover:border-input"
             external
         >
             <span className="flex items-center gap-1">
@@ -68,10 +68,10 @@ function FounderStack() {
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-y-4 md:gap-y-8 pb-8  max-w-5xl mx-auto">
-                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-light dark:border-dark pb-4 md:pb-8 mb-0">
+                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-primary pb-4 md:pb-8 mb-0">
                         1. See how people use your product
                     </h3>
-                    <div className="md:border-b border-light dark:border-dark pb-8">
+                    <div className="md:border-b border-primary pb-8">
                         <strong className="flex items-center gap-1.5 mb-2 text-[17px] md:text-lg">
                             <span>Set up</span>
                             <ProductLink
@@ -90,10 +90,10 @@ function FounderStack() {
                         </p>
                     </div>
 
-                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-light dark:border-dark pb-4 md:pb-8 mb-0">
+                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-primary pb-4 md:pb-8 mb-0">
                         2. Get some user numbers and data
                     </h3>
-                    <div className="md:border-b border-light dark:border-dark pb-8">
+                    <div className="md:border-b border-primary pb-8">
                         <strong className="flex items-center gap-1.5 mb-2 text-[17px] md:text-lg">
                             <span>Activate</span>
                             <ProductLink
@@ -114,10 +114,10 @@ function FounderStack() {
                         </p>
                     </div>
 
-                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-light dark:border-dark pb-4 md:pb-8 mb-0">
+                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-primary pb-4 md:pb-8 mb-0">
                         3. Discover how people find your product
                     </h3>
-                    <div className="md:border-b border-light dark:border-dark pb-8">
+                    <div className="md:border-b border-primary pb-8">
                         <strong className="flex items-center gap-1.5 mb-2 text-[17px] md:text-lg">
                             <span>Enable</span>
                             <ProductLink
@@ -133,10 +133,10 @@ function FounderStack() {
                         </p>
                     </div>
 
-                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-light dark:border-dark pb-4 md:pb-8 mb-0">
+                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-primary pb-4 md:pb-8 mb-0">
                         4. Get feedback
                     </h3>
-                    <div className="md:border-b border-light dark:border-dark pb-8">
+                    <div className="md:border-b border-primary pb-8">
                         <strong className="flex items-center gap-1.5 mb-2 text-[17px] md:text-lg">
                             <span>Add</span>
                             <ProductLink link="/surveys" icon={IconMessage} productName="Surveys" color="salmon" />
@@ -147,10 +147,10 @@ function FounderStack() {
                         </p>
                     </div>
 
-                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-light dark:border-dark pb-4 md:pb-8 mb-0">
+                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-primary pb-4 md:pb-8 mb-0">
                         5. Apply for our startup program
                     </h3>
-                    <div className="md:border-b border-light dark:border-dark pb-8">
+                    <div className="md:border-b border-primary pb-8">
                         <p className="m-0">
                             Now that you're outgrowing our free tier, it's time to{' '}
                             <Link to="/startups">apply for our startup program</Link> that gets you $50k in PostHog
@@ -158,10 +158,10 @@ function FounderStack() {
                         </p>
                     </div>
 
-                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-light dark:border-dark mb-0">
+                    <h3 className="text-xl font-bold mt-0 md:pr-12 border-b border-primary mb-0">
                         6. Learn from our journey
                     </h3>
-                    <div className="md:border-b border-light dark:border-dark pb-8">
+                    <div className="md:border-b border-primary pb-8">
                         <div className="flex flex-col gap-2">
                             <p className="m-0">
                                 Co-founder James Hawkins wrote a book about how to get to product-market fit. (Get a

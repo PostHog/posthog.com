@@ -41,10 +41,8 @@ const Select = ({ onChange, values, ...other }) => {
                 {({ open }) => (
                     <>
                         <Listbox.Button
-                            className={`group py-1 px-2 hover:bg-accent dark:hover:bg-accent-dark rounded-sm text-left border hover:border-light dark:hover:border-dark flex justify-between items-center font-semibold text-sm text-primary/75 hover:text-primary/100 dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
-                                open
-                                    ? 'scale-[1.02] bg-accent dark:bg-accent-dark border-light dark:border-dark text-primary/100 dark:text-primary-dark/100'
-                                    : 'border-transparent'
+                            className={`group py-1 px-2 hover:bg-accent rounded-sm text-left border hover:border flex justify-between items-center font-semibold text-sm text-secondary hover:text-primary dark:text-primary-dark/75 dark:hover:text-primary-dark/100 relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99] ${
+                                open ? 'scale-[1.02] bg-accent border-primary text-primary' : 'border-transparent'
                             }`}
                         >
                             {({ value }) => (
@@ -54,7 +52,7 @@ const Select = ({ onChange, values, ...other }) => {
                                 </>
                             )}
                         </Listbox.Button>
-                        <Listbox.Options className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-light dark:border-dark list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
+                        <Listbox.Options className="absolute right-0 min-w-full shadow-xl bg-white dark:bg-accent-dark border border-primary list-none m-0 p-0.5 rounded-md mt-1 z-20 grid">
                             {values.map((value) => (
                                 <Listbox.Option key={value.label} value={value} as={React.Fragment}>
                                     {({ selected }) => {
@@ -123,8 +121,8 @@ export const Change = ({ title, teamName, media, description, cta }) => {
 export const Skeleton = () => {
     return (
         <div className="space-y-2">
-            <div className="animate-pulse bg-accent dark:bg-accent-dark h-8 w-full rounded-md" />
-            <div className="animate-pulse bg-accent dark:bg-accent-dark h-44 w-full rounded-md" />
+            <div className="animate-pulse bg-accent h-8 w-full rounded-md" />
+            <div className="animate-pulse bg-accent h-44 w-full rounded-md" />
         </div>
     )
 }
@@ -366,7 +364,7 @@ const RoadmapTable = ({
                     cells: [
                         {
                             content: roadmap.attributes.dateCompleted ? (
-                                <span className="text-sm text-primary/75 dark:text-primary-dark/75">
+                                <span className="text-sm text-secondary">
                                     {dayjs(roadmap.attributes.dateCompleted).format('MMM D, YYYY')}
                                 </span>
                             ) : null,

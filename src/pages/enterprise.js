@@ -55,7 +55,7 @@ export default function Enterprise() {
 
                         <div className="flex items-center gap-2 mb-8">
                             <span className="whitespace-nowrap">Flair progress:</span>
-                            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-full h-4 w-full relative">
+                            <div className="bg-accent border border-primary rounded-full h-4 w-full relative">
                                 <div className="bg-red dark:bg-yellow rounded-full w-[26.67%] absolute -top-px -left-px -bottom-px"></div>
                             </div>
                             <div className="flex items-center gap-1">

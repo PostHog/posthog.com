@@ -73,7 +73,6 @@ bg-creamsicle-dark
 bg-gold
 bg-gold-dark
 bg-gradient-to-tr
-bg-gray
 bg-green
 bg-green/10
 bg-light-blue
@@ -91,10 +90,6 @@ bg-pale-blue
 bg-pale-blue-dark
 bg-pink
 bg-pink-dark
-bg-primary
-bg-primary-dark
-bg-primary-dark/10
-bg-primary/10
 bg-purple
 bg-purple-2
 bg-purple-2-dark
@@ -461,6 +456,8 @@ text-purple-2-dark
 text-red
 text-salmon
 text-seagreen
+text-secondary
+text-muted
 text-sky-blue
 text-tan
 text-teal

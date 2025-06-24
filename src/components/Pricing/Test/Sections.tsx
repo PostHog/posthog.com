@@ -15,9 +15,7 @@ export const SectionLayout = ({ id = '', children }) => (
     </section>
 )
 
-export const SectionHeader = ({ children }) => (
-    <header className="border-b pb-1 border-light dark:border-dark">{children}</header>
-)
+export const SectionHeader = ({ children }) => <header className="border-b pb-1 border-primary">{children}</header>
 
 export const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 md:py-4">{children}</div>
 
@@ -25,7 +23,7 @@ export const SectionMainCol = ({ children }) => <div className="md:col-span-2 pb
 
 export const SectionSidebar = ({ children, className = '' }) => (
     <div
-        className={`col-span-1 flex flex-col gap-4 md:border-l border-light dark:border-dark border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 ${className}`}
+        className={`col-span-1 flex flex-col gap-4 md:border-l border-primary border-t md:border-t-0 pt-4 md:pt-0 md:pl-8 ${className}`}
     >
         {children}
     </div>

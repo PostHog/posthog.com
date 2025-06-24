@@ -27,7 +27,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                         New
                     </div>
                 )}
-                <div className="relative h-full bg-white rounded-md border border-light dark:border-dark flex items-center hover:top-[-1px] hover:scale-[1.005] active:top-[2px] active:scale-[.99] hover:transition-all">
+                <div className="relative h-full bg-white rounded-md border border-primary flex items-center hover:top-[-1px] hover:scale-[1.005] active:top-[2px] active:scale-[.99] hover:transition-all">
                     <GatsbyImage
                         className="w-full h-full rounded-md overflow-hidden"
                         image={getShopifyImage({ image: product.featuredMedia.preview.image })}

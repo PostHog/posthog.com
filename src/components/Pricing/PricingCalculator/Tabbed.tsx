@@ -129,7 +129,7 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                     addons,
                 }) ||
                     (activeProduct.name == 'Experiments' ? (
-                        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-md px-4 py-3 mb-2 text-sm">
+                        <div className="bg-accent border border-primary rounded-md px-4 py-3 mb-2 text-sm">
                             Experiments is currently bundled with Feature flags and share a free tier and volume
                             pricing.
                         </div>
@@ -189,7 +189,7 @@ const TabContent = ({ activeProduct, addons, setVolume, setAddons, setProduct, a
                                         </button>
                                     )}
                                     {showBreakdown && (
-                                        <div className="mb-4 p-1 border border-border dark:border-dark rounded-md">
+                                        <div className="mb-4 p-1 border border-input rounded-md">
                                             <PricingTiers
                                                 plans={[{ tiers: costByTier }]}
                                                 unit={billingData.unit}
@@ -359,9 +359,7 @@ export default function Tabbed() {
                                     <button
                                         onClick={() => setActiveTab(index)}
                                         className={`p-2 rounded-md font-semibold text-sm flex flex-col md:flex-row space-x-2 whitespace-nowrap items-start md:items-center justify-between w-full click ${
-                                            active
-                                                ? 'font-bold bg-accent dark:bg-accent-dark'
-                                                : 'hover:bg-accent dark:hover:bg-accent/15'
+                                            active ? 'font-bold bg-accent' : 'hover:bg-accent'
                                         }`}
                                     >
                                         <div className="flex items-center space-x-2">
@@ -458,7 +456,7 @@ export default function Tabbed() {
                         })}
                 </div>
             </div>
-            <div className="flex items-center justify-between p-3 bg-accent dark:bg-accent-dark rounded relative">
+            <div className="flex items-center justify-between p-3 bg-accent rounded relative">
                 <div>
                     <h3 className="m-0 text-[15px]">Estimated total</h3>
                     <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>
@@ -469,7 +467,7 @@ export default function Tabbed() {
                 </div>
             </div>
             <div className="flex justify-end gap-0.5 mt-2 pr-2 md:pr-0">
-                <IconCopy className="size-5 inline-block text-primary/50 dark:text-primary-dark/50 relative -top-px" />
+                <IconCopy className="size-5 inline-block text-muted relative -top-px" />
                 <CopyURLButton onClick={generateURL} />
             </div>
         </div>

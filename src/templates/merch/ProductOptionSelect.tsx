@@ -42,14 +42,17 @@ export function ProductOptionSelect(props: ProductOptionSelectProps): React.Reac
                                 cn(
                                     isColor && colorClasses[optionValue.toLowerCase() as string],
                                     isDisabled ? 'cursor-not-allowed' : 'cursor-pointer',
-                                    'flex-0 group relative border border-b-3 border-light dark:border-dark hover:top-[-1px] hover:scale-[1.005] active:top-[.5px] active:scale-[.99] rounded-md py-2 px-3 flex items-center justify-center text-xs uppercase hover:bg-primary-100 focus:outline-none'
+                                    'flex-0 group relative border border-b-3 border-primary hover:top-[-1px] hover:scale-[1.005] active:top-[.5px] active:scale-[.99] rounded-md py-2 px-3 flex items-center justify-center text-xs uppercase hover:bg-primary-100 focus:outline-none'
                                 )
                             }
                         >
                             {({ active, checked }) => {
                                 return (
                                     <>
-                                        <RadioGroup.Label as="span" className={`z-10 ${checked ? 'font-bold' : 'font-medium'}`}>
+                                        <RadioGroup.Label
+                                            as="span"
+                                            className={`z-10 ${checked ? 'font-bold' : 'font-medium'}`}
+                                        >
                                             {optionValue.replace(/\(.*?\)/g, '')}
                                         </RadioGroup.Label>
                                         {!isDisabled ? (

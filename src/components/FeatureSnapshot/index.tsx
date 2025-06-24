@@ -15,7 +15,7 @@ export function FeatureSnapshot({
                 reverse ? 'lg:flex-row-reverse lg:space-x-reverse' : 'lg:flex-row'
             }`}
         >
-            <div className="relative lg:min-h-[400px] col-span-2 overflow-hidden rounded-[10px] bg-gray-accent-light w-full lg:w-2/3">
+            <div className="relative lg:min-h-[400px] col-span-2 overflow-hidden rounded-[10px] bg-accent-light w-full lg:w-2/3">
                 {image && <img className="object-contain w-full h-full lg:absolute inset-0" alt="" src={image} />}
             </div>
             <div className="w-full lg:w-1/3">

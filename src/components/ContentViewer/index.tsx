@@ -79,9 +79,9 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
                                             e.target.scrollIntoView({ block: 'nearest', inline: 'center' })
                                             scrollToTop && scroll.scrollToTop()
                                         }}
-                                        className={`w-full text-left group items-center relative px-4 pt-2.5 pb-2 rounded border border-b-3 hover:border-light dark:hover:border-dark ${
+                                        className={`w-full text-left group items-center relative px-4 pt-2.5 pb-2 rounded border border-b-3 hover:border ${
                                             active
-                                                ? 'bg-accent dark:bg-accent-dark border-light dark:border-dark hover:top-[0px] hover:scale-[1]'
+                                                ? 'bg-accent border-primary hover:top-[0px] hover:scale-[1]'
                                                 : 'border-transparent hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                                         }`}
                                     >

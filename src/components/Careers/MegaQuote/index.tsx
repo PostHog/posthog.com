@@ -20,10 +20,14 @@ const TeamMemberLink = (person) => {
     const teamURL = `/teams/${slugify(teamName, { lower: true })}`
 
     return (
-        <div className="relative inline-block border-t md:border-t-0 md:border-r border-light dark:border-dark px-4 md:pr-12 pt-8 lg:pt-0">
+        <div className="relative inline-block border-t md:border-t-0 md:border-r border-primary px-4 md:pr-12 pt-8 lg:pt-0">
             <a href={person && `/community/profiles/${squeakId}`} className="flex flex-col gap-2 items-center">
-                <div className="border-2 border-light dark:border-dark p-0.5 bg-white dark:bg-dark rounded-full">
-                    <div className={`size-24 rounded-full overflow-hidden mx-auto ${color ? `bg-${color}` : 'bg-orange'}`}>
+                <div className="border-2 border-primary p-0.5 bg-white dark:bg-dark rounded-full">
+                    <div
+                        className={`size-24 rounded-full overflow-hidden mx-auto ${
+                            color ? `bg-${color}` : 'bg-orange'
+                        }`}
+                    >
                         {person ? (
                             <img
                                 src={avatar?.formats?.thumbnail?.url}

@@ -150,7 +150,7 @@ const FeatureItem = ({ name, description, size }: { name: string; description: s
             <p
                 className={`${
                     size === 'small' ? 'text-sm [&_li]:text-sm' : 'text-[15px] [&_li]:text-[15px]'
-                } text-primary/75 dark:text-primary-dark/75 mb-0`}
+                } text-secondary mb-0`}
                 dangerouslySetInnerHTML={{ __html: description }}
             />
         </div>
@@ -189,7 +189,7 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }: Add
     return (
         <div
             key={name}
-            className="bg-white dark:bg-white/5 border border-light dark:border-dark p-4 rounded max-w-xs w-full flex flex-col relative overflow-hidden"
+            className="bg-white dark:bg-white/5 border border-primary p-4 rounded max-w-xs w-full flex flex-col relative overflow-hidden"
         >
             <div className="flex gap-1 items-center mb-2">
                 <Icon className="w-6 h-6 opacity-75" />
@@ -360,7 +360,7 @@ export const Addons = (props) => {
                         </div>
                     )
                 })}
-                <div className="my-12 border-t border-light dark:border-dark pt-6 flex flex-col items-center">
+                <div className="my-12 border-t border-primary pt-6 flex flex-col items-center">
                     <p>Subscribe to add-ons after signing up.</p>
 
                     <CallToAction

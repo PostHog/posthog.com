@@ -396,7 +396,7 @@ const PhotoStrip = ({
             {Array.from({ length: numImages }).map((_, index) => {
                 const image = images[index]
                 return (
-                    <div key={index} className="relative aspect-[3/4] w-full bg-accent dark:bg-accent-dark">
+                    <div key={index} className="relative aspect-[3/4] w-full bg-accent">
                         {showLivePreview && (
                             <video
                                 ref={(el) => (videoRefs.current[index] = el)}
@@ -529,7 +529,7 @@ const NameInput = ({ onSubmit, onBack }: { onSubmit: (name: string) => void; onB
             <form className="flex flex-col items-center space-y-4" onSubmit={handleSubmit}>
                 <input
                     type="text"
-                    className="bg-white dark:bg-accent-dark rounded border border-light dark:border-dark outline-none focus:ring-0 text-center w-full"
+                    className="bg-white dark:bg-accent-dark rounded border border-primary outline-none focus:ring-0 text-center w-full"
                     placeholder="Enter your name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -677,7 +677,7 @@ const PhotoModal = ({
             {cameraPermission === false ? (
                 <div
                     onClick={(e) => e.stopPropagation()}
-                    className="text-center bg-accent dark:bg-accent-dark p-4 rounded border border-light dark:border-dark max-w-xl"
+                    className="text-center bg-accent p-4 rounded border border-primary max-w-xl"
                 >
                     <h2 className="text-2xl font-bold mb-4">Camera access required</h2>
                     <p className="mb-6">
@@ -730,7 +730,7 @@ const PhotoModal = ({
                     )}
                 </div>
             ) : (
-                <div className="bg-accent dark:bg-accent-dark pt-4 px-8 rounded border border-light dark:border-dark max-w-xl flex flex-col items-center">
+                <div className="bg-accent pt-4 px-8 rounded border border-primary max-w-xl flex flex-col items-center">
                     <h3 className="text-xl font-bold mt-2 mb-0">Is this thing on?!</h3>
                     <p className="text-[15px]">Please enable camera access to continue.</p>
 
@@ -893,7 +893,7 @@ const Card = ({
             </button>
             <div
                 ref={cardRef}
-                className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center border border-light dark:border-dark shadow-xl rounded overflow-hidden"
+                className="relative w-[800px] aspect-video flex-shrink-0 flex snap-center border border-primary shadow-xl rounded overflow-hidden"
             >
                 <div className={`absolute inset-0 bg-accent overflow-hidden ${className}`}>
                     <img
@@ -964,7 +964,6 @@ export default function Photobooth(): JSX.Element {
 
     return (
         <Explorer template="generic" slug="photobooth" title="Photobooth">
-            
             <SEO
                 title="PostHog photo booth"
                 description="A Valentine's Day photo booth"
@@ -983,7 +982,7 @@ export default function Photobooth(): JSX.Element {
                 <AnimatePresence>
                     {mobile ? (
                         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-                            <div className="bg-accent dark:bg-accent-dark p-4 rounded border border-light dark:border-dark max-w-xl mx-auto mt-4">
+                            <div className="bg-accent p-4 rounded border border-primary max-w-xl mx-auto mt-4">
                                 <h1 className="text-3xl font-bold text-center">Mobile devices not supported</h1>
                                 <p className="text-center text-[15px] max-w-md mx-auto mt-4">
                                     Sorry! The PostHog photo booth is designed for desktop use only. Please visit this

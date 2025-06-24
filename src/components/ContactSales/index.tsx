@@ -24,7 +24,7 @@ const features = [
 const VideoSection = () => (
     <section
         id="demo-video"
-        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-light dark:border-dark rounded leading-[0] shadow-xl mb-8`}
+        className={`overflow-hidden transition-all duration-300 h-auto max-h-[90vh] border border-primary rounded leading-[0] shadow-xl mb-8`}
     >
         <iframe
             src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?autoplay=1"
@@ -102,7 +102,7 @@ export default function ContactSales({ location }) {
                             <h3 className="text-lg mb-3 text-center md:text-left">Quick demo first?</h3>
 
                             <button
-                                className="aspect-video cursor-pointer relative hover:-top-0.5 active:top-[2px] hover:scale-[1.005] active:scale-[.995] transition-all hover:duration-100 rounded border border-light dark:border-dark p-1 leading-[0] bg-accent dark:bg-accent-dark shadow-xl !m-0"
+                                className="aspect-video cursor-pointer relative hover:-top-0.5 active:top-[2px] hover:scale-[1.005] active:scale-[.995] transition-all hover:duration-100 rounded border border-primary p-1 leading-[0] bg-accent shadow-xl !m-0"
                                 onClick={handleShowVideo}
                             >
                                 <CloudinaryImage
@@ -112,7 +112,7 @@ export default function ContactSales({ location }) {
                             </button>
                         </div>
                         {isMobile && showVideo && <VideoSection />}
-                        <div className="border border-light dark:border-dark px-4 py-3 mb-6 bg-accent dark:bg-accent-dark rounded">
+                        <div className="border border-primary px-4 py-3 mb-6 bg-accent rounded">
                             <p className="m-0 text-[15px]">
                                 <strong>Need help with your bill?</strong>{' '}
                                 <Link

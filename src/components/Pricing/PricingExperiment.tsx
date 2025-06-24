@@ -184,19 +184,19 @@ const PricingExperiment = ({
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
             <div className="md:grid grid-cols-16 mb-12">
-                <div className="col-span-8 lg:col-span-4 mb-4 md:mb-0 md:border-b border-light dark:border-dark">
+                <div className="col-span-8 lg:col-span-4 mb-4 md:mb-0 md:border-b border-primary">
                     <div className="md:hidden mb-2">
                         <Header />
                     </div>
                     <ImageSlider images={images} showDisclaimer={true} className="aspect-square" id="pricing-slider" />
                 </div>
 
-                <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-light dark:border-dark md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
+                <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-primary md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
                     <PricingHero activePlan={activePlan} setActivePlan={setActivePlan} />
                 </div>
 
                 <aside className="md:col-span-16 lg:col-span-5 lgxl:col-span-4">
-                    <div className="bg-white dark:bg-white/5 rounded-md border border-light dark:border-dark py-4 px-6 h-full">
+                    <div className="bg-white dark:bg-white/5 rounded-md border border-primary py-4 px-6 h-full">
                         <div className="flex flex-col md:grid grid-cols-2 lg:flex justify-between h-full">
                             <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} />
                         </div>
@@ -208,9 +208,8 @@ const PricingExperiment = ({
 
             <PlanColumns billingProducts={billingProducts} highlight="free" />
 
-
             <SectionLayout>
-                <div className="bg-accent dark:bg-accent-dark p-4 pb-6 md:pb-4 rounded border border-light dark:border-dark flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
+                <div className="bg-accent p-4 pb-6 md:pb-4 rounded border border-primary flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
                     <div>
                         <h3 className="mb-1 text-xl">Give PostHog a try</h3>
                         <p className="mb-0 text-[15px]">
@@ -223,7 +222,6 @@ const PricingExperiment = ({
                     </div>
                 </div>
             </SectionLayout>
-
 
             <section className="bg-primary my-12 md:px-4">
                 <Quote
@@ -252,7 +250,7 @@ const PricingExperiment = ({
                     }
                 />
             </section>
-            
+
             <CTA />
         </>
     )

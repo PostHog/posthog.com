@@ -229,7 +229,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
 
                     {/* Show shared pricing notice if applicable */}
                     {sharesFreeTierWith && (
-                        <div className="mb-4 p-3 bg-accent dark:bg-accent-dark border border-primary rounded-md">
+                        <div className="mb-4 p-3 bg-accent border border-primary rounded-md">
                             <p className="text-sm text-secondary mb-0">
                                 This product shares pricing and allocations with the{' '}
                                 <span className="font-semibold text-primary capitalize">

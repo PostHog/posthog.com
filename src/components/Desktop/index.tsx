@@ -92,7 +92,7 @@ export default function Desktop() {
     const products = useProduct() as Product[]
 
     return (
-        <div data-app="Desktop" className="fixed size-full p-4">
+        <div data-scheme="primary" data-app="Desktop" className="fixed size-full p-4">
             <div
                 className="absolute bottom-0 right-0 size-full bg-contain bg-no-repeat bg-right-bottom -z-10"
                 style={{

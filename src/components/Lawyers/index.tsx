@@ -8,9 +8,9 @@ export default function Lawyers() {
     return (
         <>
             <p className="text-sm opacity-60 uppercase mb-4 text-center">Some of our crack team of lawyers:</p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pb-4 mb-4 border-b border-light dark:border-dark">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pb-4 mb-4 border-b border-primary">
                 <div className="flex flex-col items-center gap-1 text-center">
-                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
+                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-primary">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/barry-zuckerkorn.jpg"
                             className="rounded-full "
@@ -29,7 +29,7 @@ export default function Lawyers() {
                     </div>
                 </div>
                 <div className="flex flex-col items-center gap-1 text-center">
-                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
+                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-primary">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/wayne-jarvis.jpg"
                             className="rounded-full "
@@ -48,7 +48,7 @@ export default function Lawyers() {
                     </div>
                 </div>
                 <div className="flex flex-col items-center gap-1 text-center">
-                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
+                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-primary">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/maggie-lizer.jpg"
                             className="rounded-full "
@@ -67,7 +67,7 @@ export default function Lawyers() {
                     </div>
                 </div>
                 <div className="flex flex-col items-center gap-1 text-center">
-                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-light dark:border-dark">
+                    <figure className="size-24 rounded-full overflow-hidden p-0.5 border border-primary">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/lawyers/bob-loblaw.jpg"
                             className="rounded-full "

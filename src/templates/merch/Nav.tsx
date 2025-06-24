@@ -44,7 +44,7 @@ export function Nav(props: NavProps): React.ReactElement {
 
     return (
         <>
-            <div className="mb-6 px-2 sticky top-[57px] md:top-[-1px] md:reasonable:top-[107px] z-[50] bg-accent dark:bg-accent-dark border-b border-light dark:border-dark">
+            <div className="mb-6 px-2 sticky top-[57px] md:top-[-1px] md:reasonable:top-[107px] z-[50] bg-accent border-b border-primary">
                 <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-3 py-1 min-h-[40px]">
                     {/**
                      * If you're on a product page
@@ -63,7 +63,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                             className="group relative inline-flex w-full cursor-pointer rounded-l py-1 pl-2 pr-1 
                             hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99] 
                             [data-headlessui-state='open']:border [data-headlessui-state='open']:border-b-3
-                            rounded-sm text-left border border-transparent border-b-3 hover:border-light dark:hover:border-dark focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+                            rounded-sm text-left border border-transparent border-b-3 hover:border focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
                                         >
                                             <span className="block truncate font-semibold">
                                                 {currentCollection.title}
@@ -86,7 +86,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                                     <Listbox.Option
                                                         key={i}
                                                         className={({ active }) =>
-                                                            `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent dark:hover:bg-accent-dark ${
+                                                            `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent ${
                                                                 active ? 'font-bold' : 'opacity-75'
                                                             }`
                                                         }
@@ -127,7 +127,7 @@ export function Nav(props: NavProps): React.ReactElement {
                         <span className="text-sm font-medium opacity-75">Merch store</span>
                     )}
                     <div className="ml-auto" onClick={() => setCartIsOpen(true)}>
-                        <div className="group flex px-2 py-0.5 items-center gap-1 cursor-pointer relative border border-transparent hover:border-light dark:hover:border-dark hover:border-b-3 rounded-sm hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99]">
+                        <div className="group flex px-2 py-0.5 items-center gap-1 cursor-pointer relative border border-transparent hover:border-b-3 rounded-sm hover:top-[-0.5px] hover:scale-[1.025] active:top-[.5px] active:scale-[.99]">
                             {/* switch to this we merge master and update the icon package: <IconCart className="h-5 w-5" aria-hidden="true" /> */}
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +149,7 @@ export function Nav(props: NavProps): React.ReactElement {
             </div>
 
             <Drawer isOpen={cartIsOpen} onClose={() => setCartIsOpen(false)}>
-                <Cart className="h-full overflow-y-scroll bg-accent dark:bg-accent-dark" />
+                <Cart className="h-full overflow-y-scroll bg-accent" />
             </Drawer>
         </>
     )

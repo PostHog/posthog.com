@@ -50,7 +50,7 @@ export const Icon = ({ color, icon }: { color?: string; icon: string | React.Rea
         </span>
     )
 }
-export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
+export const badgeClasses = `bg-accent text-secondary  text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
 export const MenuItem = ({ icon, color, badge, name }) => {
     return icon ? (
@@ -118,9 +118,9 @@ export default function Menu({
     const [open, setOpen] = useState<boolean | undefined>(false)
     const buttonClasses = `group text-left text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark flex w-full justify-between items-center relative text-[15px] pl-3 py-0.5 rounded border border-b-3 border-transparent cursor-pointer ${
         children || topLevel
-            ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
+            ? 'hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
-    } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
+    } ${children && open ? 'bg-accent font-bold !border-light dark:!border-dark' : ''}`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (

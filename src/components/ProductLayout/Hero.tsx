@@ -67,7 +67,7 @@ export default function Hero({
                                         <Link
                                             state={{ customer }}
                                             to={`/${pathname.split('/')[1]}/customers`}
-                                            className="inline-block hover:bg-accent dark:hover:bg-accent-dark rounded-sm p-1 cursor-pointer relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px]"
+                                            className="inline-block hover:bg-accent rounded-sm p-1 cursor-pointer relative hover:scale-[1.01] hover:top-[-.5px] active:scale-[1] active:top-[.5px]"
                                         >
                                             <img
                                                 alt={customer}

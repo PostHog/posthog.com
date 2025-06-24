@@ -200,7 +200,7 @@ function Radio(props: InputHTMLAttributes<HTMLInputElement> & IInputProps & { la
                 id={`${other.name}-${other.value}`}
                 ref={reference || null}
             />
-            <span className="block py-2 w-full rounded-md border-[2px] peer-focus:border-dashed peer-checked:border-solid border-light dark:border-dark  peer-focus:border-black/40 dark:peer-focus:border-white/75 peer-checked:border-red dark:peer-checked:border-yellow text-sm">
+            <span className="block py-2 w-full rounded-md border-[2px] peer-focus:border-dashed peer-checked:border-solid border-primary  peer-focus:border-black/40 dark:peer-focus:border-white/75 peer-checked:border-red dark:peer-checked:border-yellow text-sm">
                 {label || other.value}
             </span>
         </label>
@@ -342,7 +342,7 @@ export default function Contact({
                     <Confetti onConfettiComplete={() => setConfetti(false)} recycle={false} numberOfPieces={1000} />
                 </div>
             )}
-            <div className="bg-light dark:bg-dark border border-light dark:border-dark px-6 py-8 rounded-md mt-4">
+            <div className="bg-light dark:bg-dark border border-primary px-6 py-8 rounded-md mt-4">
                 <h4>
                     ✅ <strong>Message received!</strong>
                 </h4>
@@ -361,7 +361,7 @@ export default function Contact({
                 <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the form at a
                 breakneck pace!
             </p>
-            <div className="grid border border-light dark:border-dark rounded overflow-hidden">
+            <div className="grid border border-primary rounded overflow-hidden">
                 {fields.map(({ Component, name, placeHolder, type = 'text', options = [] }, index) => {
                     return (
                         <Component

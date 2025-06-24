@@ -59,7 +59,7 @@ const PineapplePieChart = ({ percentage }: { percentage: number | false }) => {
         return (
             <div className="flex flex-col items-center space-y-3">
                 <p className="text-sm opacity-75">No data available</p>
-                <div className="w-32 h-32 border-2 border-dashed border-border dark:border-border-dark rounded-full flex items-center justify-center">
+                <div className="w-32 h-32 border-2 border-dashed border-primary rounded-full flex items-center justify-center">
                     <StickerPineappleUnknown className="w-12 h-12 opacity-50" />
                 </div>
             </div>
@@ -134,12 +134,12 @@ export const TeamMemberCard = ({
     avatar,
 }) => {
     return (
-        <div className="text-left w-full border border-border dark:border-border-dark rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64">
+        <div className="text-left w-full border border-primary rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64">
             <div className="mb-auto">
                 <h3 className="mb-0 text-base leading-tight" id={kebabCase(name) + '-' + kebabCase(companyRole)}>
                     {name}
                 </h3>
-                <p className="text-primary/50 text-sm dark:text-primary-dark/50 m-0">{companyRole}</p>
+                <p className="text-muted text-sm  m-0">{companyRole}</p>
 
                 <div className="mt-1 flex space-x-1 items-center">
                     <Stickers
@@ -456,7 +456,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 </div>
 
                 {loading ? (
-                    <div className="max-w-sm w-full aspect-video bg-accent dark:bg-accent-dark rounded rotate-2" />
+                    <div className="max-w-sm w-full aspect-video bg-accent rounded rotate-2" />
                 ) : (
                     <TeamImage values={values} setFieldValue={setFieldValue} teamImage={teamImage} editing={editing} />
                 )}
@@ -468,7 +468,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                         {loading
                             ? new Array(4).fill(0).map((_, i) => (
                                   <li key={i}>
-                                      <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                      <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
                                   </li>
                               ))
                             : profiles?.data || values.teamMembers
@@ -516,7 +516,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                               {editing && (
                                                   <button
                                                       onClick={() => removeTeamMember(id)}
-                                                      className="w-7 h-7 rounded-full border border-border dark:border-dark absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent dark:bg-accent-dark"
+                                                      className="w-7 h-7 rounded-full border border-input absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent"
                                                   >
                                                       <Tooltip content="Remove team member" placement="top">
                                                           <IconX className="w-4 h-4" />
@@ -528,7 +528,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                   })
                             : new Array(4).fill(0).map((_, i) => (
                                   <li key={i}>
-                                      <div className="w-full border border-border dark:border-border-dark rounded-md bg-accent dark:bg-accent-dark flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
+                                      <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
                                   </li>
                               ))}
                     </ul>
@@ -549,11 +549,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                         {(updates.length > 0 || isModerator) && (
                             <div className="lg:max-w-[340px] w-full flex-shrink-0">
                                 {isModerator && (
-                                    <div
-                                        className={`${
-                                            updates.length > 0 ? 'mb-8 pb-8 border-border dark:border-dark ' : ''
-                                        }`}
-                                    >
+                                    <div className={`${updates.length > 0 ? 'mb-8 pb-8 border-input ' : ''}`}>
                                         <TeamUpdate teamName={name} hideTeamSelect />
                                     </div>
                                 )}

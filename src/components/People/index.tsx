@@ -151,7 +151,7 @@ export const TeamMember = (props: any) => {
                         biography ? 'group-hover:[transform:rotateY(-180deg)]' : ''
                     }`}
                 >
-                    <div className="flex flex-col justify-between px-4 md:px-6 py-4 w-full absolute h-full [backface-visibility:hidden] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                    <div className="flex flex-col justify-between px-4 md:px-6 py-4 w-full absolute h-full [backface-visibility:hidden] bg-accent border border-primary rounded">
                         <div className="mr-32 xl:mr-40">
                             <h3
                                 className="mb-0.5 text-[15px] @sm:text-base @md:text-[17px] leading-tight"
@@ -159,7 +159,7 @@ export const TeamMember = (props: any) => {
                             >
                                 {name}
                             </h3>
-                            <p className="text-primary/50 text-sm @md:text-[15px] @lg:text-base dark:text-primary-dark/50 leading-tight">
+                            <p className="text-muted text-sm @md:text-[15px] @lg:text-base  leading-tight">
                                 {companyRole}
                             </p>
                         </div>
@@ -180,7 +180,7 @@ export const TeamMember = (props: any) => {
                             />
                         </figure>
                     </div>
-                    <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(-180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded">
+                    <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(-180deg)] bg-accent border border-primary rounded">
                         <figure className="m-0 -mt-8 p-0 absolute left-0 bottom-0 [transform:rotateY(-180deg)]">
                             <img
                                 src={
@@ -190,7 +190,7 @@ export const TeamMember = (props: any) => {
                                 className="w-[200px] grayscale brightness-0 opacity-20"
                             />
                         </figure>
-                        <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent dark:bg-accent-dark">
+                        <div className="overflow-hidden absolute h-full w-full inset-0 p-4 bg-accent">
                             <ReactMarkdown className="text-sm bio-preview">{biography}</ReactMarkdown>
                             <div className="bg-gradient-to-t from-accent dark:from-accent-dark to-transparent absolute inset-0 w-full h-full" />
                         </div>

@@ -45,10 +45,7 @@ function Endpoints({ paths }) {
                     {Object.entries(paths).map(([path, value]) => (
                         <React.Fragment key={value}>
                             {Object.keys(value).map((verb) => (
-                                <tr
-                                    key={verb}
-                                    className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0"
-                                >
+                                <tr key={verb} className="border-primary border-b first:border-t-0 last:border-b-0">
                                     <td>
                                         <code className={`method text-${mapVerbsColor[verb]}`}>
                                             {verb.toUpperCase()}
@@ -167,7 +164,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                         {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                             <div
                                                 type="link"
-                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-gray-accent hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-accent hover:bg-primary  hover:bg-accent-hover leading-[8px] text-black dark:text-white"
                                                 onClick={() => {
                                                     setOpenSubParams(
                                                         openSubParams.filter((item) => item !== param.schema.items.$ref)
@@ -189,7 +186,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                             <>
                                                 <div
                                                     type="link"
-                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-tan border-gray-accent-light dark:border-gray-accent-dark border-solid border hover:bg-gray-accent-light-hover dark:bg-gray-accent-dark dark:hover:bg-gray-accent-dark-hover leading-[8px] text-black dark:text-white"
+                                                    className="group cursor-pointer h-[18px] w-[26px] rounded inline-flex justify-center items-center mb-2 bg-tan border-primary border hover:bg-primary hover:bg-accent-hover leading-[8px] text-black dark:text-white"
                                                     onClick={() =>
                                                         setOpenSubParams([...openSubParams, param.schema.items.$ref])
                                                     }
@@ -212,7 +209,7 @@ function Params({ params, objects, object, depth = 0 }) {
                             </div>
                             <div className="">
                                 <div>
-                                    <span className="type bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                    <span className="type bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
                                         {param.schema.type}
                                     </span>
                                 </div>
@@ -249,7 +246,7 @@ function Params({ params, objects, object, depth = 0 }) {
                             <>
                                 {openSubParams.indexOf(param.schema.items.$ref) > -1 ? (
                                     <div>
-                                        <div className="params-wrapper bg-gray-accent-light dark:bg-gray-accent-dark rounded px-4 mr-2 my-1">
+                                        <div className="params-wrapper bg-accent rounded px-4 mr-2 my-1">
                                             <Params
                                                 objects={objects}
                                                 object={objects.schemas[param.schema.items?.$ref.split('/').at(-1)]}
@@ -578,7 +575,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                 breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
             >
                 <h2 className="!mt-0">{title}</h2>
-                <blockquote className="p-6 mb-4 rounded bg-gray-accent-light dark:bg-gray-accent-dark">
+                <blockquote className="p-6 mb-4 rounded bg-accent">
                     <p>
                         For instructions on how to authenticate to use this endpoint, see{' '}
                         <a href="/docs/api/overview">API overview</a>.
@@ -635,7 +632,7 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                                         return (
                                             <div key={statusCode}>
                                                 <h5 className="text-sm font-semibold">
-                                                    <span className="bg-gray-accent-light dark:bg-gray-accent-dark inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                    <span className="bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
                                                         Status {statusCode}
                                                     </span>{' '}
                                                     {response.description}

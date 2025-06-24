@@ -100,7 +100,7 @@ const Team = ({ profiles, leadProfiles, className = '' }) => {
                 <SidebarSection title="Team lead">
                     <Link
                         to={`/community/profiles/${teamLead.id}`}
-                        className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-gray-accent/50 
+                        className="flex space-x-2 items-center rounded p-1 -mx-1 -mt-1 hover:bg-accent 
                     relative
                     active:top-[0.5px]
                     active:scale-[.98]"
@@ -133,7 +133,7 @@ const Team = ({ profiles, leadProfiles, className = '' }) => {
                     )}
                 </div>
                 <p className="text-sm -mt-1 opacity-70 leading-tight mb-3">{PineappleText(pineapplePercentage)}</p>
-                <div className="h-2 w-full bg-white dark:bg-gray-accent-dark rounded-md relative overflow-hidden">
+                <div className="h-2 w-full bg-white  rounded-md relative overflow-hidden">
                     <div
                         style={{ width: `${pineapplePercentage}%` }}
                         className={`${pineapplePercentage >= 50 ? 'bg-[#6AA84F]' : 'bg-red'} absolute inset-0 h-full`}
@@ -162,7 +162,7 @@ export default function Sidebar({ teams }: ISidebarProps) {
                         <h3 className="font-semibold text-sm m-0 mb-2">
                             <Link
                                 to={`/teams/${slugifyTeamName(teams[0].name)}`}
-                                className="flex w-full justify-between items-center group leading-none rounded p-2 -mx-2 -my-1 hover:bg-gray-accent/50 
+                                className="flex w-full justify-between items-center group leading-none rounded p-2 -mx-2 -my-1 hover:bg-accent 
                     relative
                     active:top-[0.5px]
                     active:scale-[.98] -mb-3"

@@ -244,7 +244,7 @@ function DpaGenerator() {
             </header>
 
             <section
-                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent dark:bg-accent-dark rounded px-8 pb-8 border border-light dark:border-dark ${
+                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent rounded px-8 pb-8 border border-primary ${
                     isSubmitted ? 'block' : 'hidden'
                 }`}
             >
@@ -278,11 +278,7 @@ function DpaGenerator() {
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
                         <Tooltip content="Reset form" placement="top">
                             <span className="relative">
-                                <button
-                                    type="button"
-                                    className="bg-accent dark:bg-accent-dark p-1 rounded"
-                                    onClick={handleReset}
-                                >
+                                <button type="button" className="bg-accent p-1 rounded" onClick={handleReset}>
                                     <IconRevert className="size-6" />
                                 </button>
                             </span>
@@ -437,7 +433,7 @@ function DpaGenerator() {
                 <div
                     ref={divRef}
                     id="page"
-                    className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
+                    className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-primary md:shadow-xl print:shadow-none rounded relative"
                 >
                     <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky reasonable:top-[57px] md:top-0 reasonable:md:top-[108px] z-10">
                         <div className="text-lg font-bold">Preview</div>

@@ -8,7 +8,7 @@ export default function Layout({ children, crumbs = [] }) {
         <>
             <main>{children}</main>
             <footer className="px-4 mt-16 md:mt-32 pb-8">
-                <div className="flex items-center justify-between py-3 border-t border-b border-dashed border-gray-accent-light">
+                <div className="flex items-center justify-between py-3 border-t border-b border-dashed border-primary">
                     <Logo color="black" noText className="opacity-20" />
                     <Link to="/questions" className="opacity-50 font-semibold text-black hover:text-black">
                         Questions?

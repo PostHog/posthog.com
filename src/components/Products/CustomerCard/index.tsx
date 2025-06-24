@@ -27,7 +27,7 @@ export const CustomerCard = ({ outcome, quote, customer, colspan }: CustomerCard
     const darkMode = websiteTheme === 'dark'
 
     return (
-        <li className={`bg-accent dark:bg-accent-dark p-6 rounded ${colspan ? 'col-span-' + colspan : ''}`}>
+        <li className={`bg-accent p-6 rounded ${colspan ? 'col-span-' + colspan : ''}`}>
             <img
                 className="mb-4 max-h-8 max-w-[200px] w-full object-contain object-left"
                 src={customer.frontmatter[darkMode ? 'logoDark' : 'logo'].publicURL}

@@ -35,7 +35,7 @@ const GitHubURLs = ({
     placeholder?: string
 }) => {
     return (
-        <div className="p-4 border-t border-border dark:border-dark col-span-2">
+        <div className="p-4 border-t border-input col-span-2">
             <label className="text-sm opacity-60 block mb-2">GitHub URLs</label>
             <ul className="list-none m-0 p-0 grid gap-y-2">
                 {urls.map((url, index) => {
@@ -43,7 +43,7 @@ const GitHubURLs = ({
                         <li key={index} className="flex space-x-1">
                             <input
                                 placeholder={placeholder}
-                                className="px-2 py-1.5 border border-border dark:border-dark rounded-md flex-grow bg-transparent"
+                                className="px-2 py-1.5 border border-input rounded-md flex-grow bg-transparent"
                                 onChange={(e) => {
                                     const value = e.target.value
                                     const newURLs = [...urls]
@@ -57,7 +57,7 @@ const GitHubURLs = ({
                                     <button
                                         type="button"
                                         onClick={() => onChange?.([...urls, ''])}
-                                        className="w-10 p-1 border border-border dark:border-dark hover:border-black dark:hover:border-white/60 transition-colors rounded-md text-black/90 dark:text-border flex justify-center items-center"
+                                        className="w-10 p-1 border border-input hover:border-black dark:hover:border-white/60 transition-colors rounded-md text-black/90 dark:text-border flex justify-center items-center"
                                     >
                                         <IconPlus className="w-5 h-5" />
                                     </button>
@@ -232,7 +232,7 @@ const HogSelector = ({ value, onChange }) => {
             <input
                 value={searchValue}
                 onChange={(e) => setSearchValue(e.target.value)}
-                className="w-full bg-white rounded-md border border-border dark:border-dark mb-2 p-2 text-primary"
+                className="w-full bg-white rounded-md border border-input mb-2 p-2 text-primary"
                 placeholder="Search..."
             />
             <ul className="list-none !-mb-4 p-0 grid grid-cols-4 gap-1 max-h-[400px] overflow-auto">
@@ -244,7 +244,7 @@ const HogSelector = ({ value, onChange }) => {
                         <li key={public_id}>
                             <button
                                 type="button"
-                                className={`rounded-md p-2 click border-border dark:border-dark ${
+                                className={`rounded-md p-2 click border-input ${
                                     selected ? 'border-2 bg-border/50 dark:bg-border-dark/50' : ' hover:border-2'
                                 }`}
                                 onClick={() => onChange(secure_url)}
@@ -410,7 +410,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                 </AnimatePresence>
                             </div>
                         </div>
-                        <div className="mb-2 flex justify-between items-center border-t border-border dark:border-dark pt-4">
+                        <div className="mb-2 flex justify-between items-center border-t border-input pt-4">
                             <label className="text-sm opacity-60">Preview</label>
                             {downloaded ? (
                                 <Icons.IconCheck className="size-4 text-green" />
@@ -632,8 +632,8 @@ export default function RoadmapForm({
     })
 
     return (
-        <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-light dark:border-dark pb-8">
-            <div className="bg-white dark:bg-accent-dark rounded-md border border-border dark:border-dark overflow-hidden grid grid-cols-2 [&>*]:border-border [&>*]:dark:border-dark">
+        <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-primary pb-8">
+            <div className="bg-white dark:bg-accent-dark rounded-md border border-input overflow-hidden grid grid-cols-2 [&>*]:border-border [&>*]:dark:border-dark">
                 {status === 'complete' && (
                     <div className="col-span-2">
                         <ImageDrop

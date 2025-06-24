@@ -371,7 +371,7 @@ export const ProductWebAnalytics = (): JSX.Element => {
                     </ul>
                 </section>
 
-                <section className="bg-accent dark:bg-accent-dark">
+                <section className="bg-accent">
                     <Marquee product={product.capitalized}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />
@@ -384,7 +384,7 @@ export const ProductWebAnalytics = (): JSX.Element => {
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 pt-20 pb-10`}
             >
                 <h2 className="text-3xl md:text-4xl text-center">Usage-based pricing</h2>
-                <div className="max-w-3xl mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-8 mt-1">
+                <div className="max-w-3xl mx-auto bg-accent border border-primary rounded p-8 mt-1">
                     <p className="mb-2">
                         Web analytics is currently bundled with <Link to="/product-analytics">product analytics</Link>.
                     </p>

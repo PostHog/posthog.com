@@ -86,7 +86,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
             <Menu>
                 <Menu.Button
                     onClick={() => setOpen(!open)}
-                    className={`text-left text-sm flex space-x-2 justify-between items-end relative px-4 py-1 rounded border border-b-3 hover:border-light dark:hover:border-dark bg-accent dark:bg-accent-dark border-light dark:border-dark hover:top-[0px] hover:scale-[1]`}
+                    className={`text-left text-sm flex space-x-2 justify-between items-end relative px-4 py-1 rounded border border-b-3 hover:border bg-accent border-primary hover:top-[0px] hover:scale-[1]`}
                 >
                     <span>Categories</span>
                     <IconChevronDown className="w-5 mb-[-1px]" />
@@ -94,7 +94,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                 {open && categories?.length > 0 && (
                     <Menu.Items
                         static
-                        className="absolute grid gap-y-2 right-0 bg-accent dark:bg-accent-dark p-2 border border-border dark:border-dark rounded mt-1"
+                        className="absolute grid gap-y-2 right-0 bg-accent p-2 border border-input rounded mt-1"
                     >
                         {categories.map((category) => {
                             const active = Object.keys(selectedCategories).some(
@@ -109,7 +109,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                                     >
                                         <span
                                             className={`w-4 h-4 rounded-sm border text-white ${
-                                                active ? 'bg-red border-red' : 'border-border dark:border-dark'
+                                                active ? 'bg-red border-red' : 'border-input'
                                             }`}
                                         >
                                             {active && <IconCheck />}
@@ -137,9 +137,7 @@ export default function Categories({ setSelectedCategories, selectedCategories, 
                                                         >
                                                             <span
                                                                 className={`w-4 h-4 rounded-sm border text-white ${
-                                                                    active
-                                                                        ? 'bg-red border-red'
-                                                                        : 'border-border dark:border-dark'
+                                                                    active ? 'bg-red border-red' : 'border-input'
                                                                 }`}
                                                             >
                                                                 {active && <IconCheck />}

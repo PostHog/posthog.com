@@ -13,7 +13,7 @@ const IdealEmployeeProfile: React.FC = () => {
                 <p className="mb-2">
                     <strong>TL;DR:</strong> We don't hire middle management.
                 </p>
-                <p className="text-[15px] max-w-md my-4 py-4 border-y md:border-b-0 md:pb-0 md:mb-0 border-light dark:border-dark">
+                <p className="text-[15px] max-w-md my-4 py-4 border-y md:border-b-0 md:pb-0 md:mb-0 border-primary">
                     <strong>Fun fact:</strong> We have an internal Slack channel called{' '}
                     <span className="whitespace-nowrap">#do-more-weird</span> where we discuss crazy ideas that most
                     companies save for April Fool's Day.
@@ -28,7 +28,7 @@ const IdealEmployeeProfile: React.FC = () => {
                         career.
                     </p>
 
-                    <p className="text-[15px] text-primary/75 dark:text-primary-dark/75 border border-light dark:border-dark p-2 rounded-md bg-accent dark:bg-accent-dark mb-6">
+                    <p className="text-[15px] text-secondary border border-primary p-2 rounded-md bg-accent mb-6">
                         <TeamMember name="Joe Martin" photo className="bg-white/50 dark:bg-dark/50" /> worked as a
                         clown, a morgue cleaner, and a chainsaw salesman before joining the Marketing team. He now leads
                         the <Link href="/teams/brand-vibes">Brand & Vibes Team</Link>.
@@ -42,7 +42,7 @@ const IdealEmployeeProfile: React.FC = () => {
                         context. We're not a fit if management responsibility is what motivates you.
                     </p>
 
-                    <p className="text-[15px] text-primary/75 dark:text-primary-dark/75 border border-light dark:border-dark p-2 rounded-md bg-accent dark:bg-accent-dark mb-6">
+                    <p className="text-[15px] text-secondary border border-primary p-2 rounded-md bg-accent mb-6">
                         <TeamMember name="Thomas Obermüller" photo className="bg-white/50 dark:bg-dark/50" /> was CTO
                         for his previous company of 120 people before joining PostHog as a software engineer on the{' '}
                         <Link href="/teams/product-analytics">Product Analytics team</Link>.
@@ -56,7 +56,7 @@ const IdealEmployeeProfile: React.FC = () => {
                         of work done fast. We're not a fit if you want process.
                     </p>
 
-                    <p className="text-[15px] text-primary/75 dark:text-primary-dark/75 border border-light dark:border-dark p-2 rounded-md bg-accent dark:bg-accent-dark">
+                    <p className="text-[15px] text-secondary border border-primary p-2 rounded-md bg-accent">
                         <TeamMember name="Cameron DeLeone" photo className="bg-white/50 dark:bg-dark/50" /> worked for
                         an $11 billion startup, then was Vice President of a poultry farm before joining PostHog as a
                         CSM.

@@ -17,7 +17,7 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     }
     return (
         <li className="flex space-x-2 items-center">
-            <div className="overflow-hidden size-16 flex flex-shrink-0 justify-center items-center bg-accent dark:bg-accent-dark rounded-sm border border-border dark:border-dark">
+            <div className="overflow-hidden size-16 flex flex-shrink-0 justify-center items-center bg-accent rounded-sm border border-input">
                 <img src={resource_type === 'video' ? previewUrl : mediaURL} />
             </div>
             <div className="flex-grow line-clamp-1">
@@ -66,10 +66,10 @@ export default function MediaUploadModal({ open, setOpen }) {
         <Modal open={open} setOpen={setOpen}>
             {open && (
                 <div className="max-w-6xl w-full mx-auto relative p-5 pt-12">
-                    <div className="bg-white dark:bg-dark p-4 rounded-md border border-border dark:border-dark relative grid grid-cols-2 gap-x-6">
+                    <div className="bg-white dark:bg-dark p-4 rounded-md border border-input relative grid grid-cols-2 gap-x-6">
                         <button
                             onClick={() => setOpen(false)}
-                            className="absolute right-0 top-0 bg-white dark:bg-accent-dark rounded-full p-2 border border-border dark:border-dark translate-x-1/2 -translate-y-1/2"
+                            className="absolute right-0 top-0 bg-white dark:bg-dark rounded-full p-2 border border-input translate-x-1/2 -translate-y-1/2"
                         >
                             <IconX className="size-4 opacity-70 hover:opacity-100 click" />
                         </button>
@@ -80,8 +80,8 @@ export default function MediaUploadModal({ open, setOpen }) {
                             </p>
                             <div
                                 {...getRootProps()}
-                                className={`mt-4 flex-grow w-full rounded-md border border-dashed border-border dark:border-dark ${
-                                    isDragActive ? 'bg-accent/70 dark:bg-accent-dark/70' : ''
+                                className={`mt-4 flex-grow w-full rounded-md border border-dashed border-input ${
+                                    isDragActive ? 'bg-input' : ''
                                 }`}
                             >
                                 <p
@@ -102,7 +102,7 @@ export default function MediaUploadModal({ open, setOpen }) {
                                     Array.from({ length: loading }).map((_, index) => (
                                         <li
                                             key={index}
-                                            className="w-full h-20 bg-accent dark:bg-accent-dark rounded-md animate-pulse mt-2"
+                                            className="w-full h-20 bg-accent rounded-md animate-pulse mt-2"
                                         />
                                     ))}
                                 {images.map((image) => {

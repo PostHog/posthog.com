@@ -299,9 +299,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             data-app="AppWindow"
                             data-scheme="tertiary"
                             className={`@container absolute overflow-hidden !select-auto  ${
-                                focusedWindow === item
-                                    ? 'shadow-2xl border-primary'
-                                    : 'shadow-lg border-input dark:border-primary'
+                                focusedWindow === item ? 'shadow-2xl border-primary' : 'shadow-lg border-input'
                             } ${dragging ? '[&_*]:select-none' : ''} ${
                                 item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
                             }`}
@@ -360,7 +358,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 <div
                                     data-scheme="tertiary"
                                     onDoubleClick={handleDoubleClick}
-                                    className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input dark:border-primary cursor-move"
+                                    className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input cursor-move"
                                     onPointerDown={(e) => controls.start(e)}
                                 >
                                     <MenuBar
@@ -446,7 +444,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                     </button>
                                                 }
                                                 dataScheme="primary"
-                                                contentClassName="w-auto p-0 border border-border dark:border-border-dark"
+                                                contentClassName="w-auto p-0 border border-primary"
                                                 header={false}
                                             >
                                                 <FileMenu menu={menu} />

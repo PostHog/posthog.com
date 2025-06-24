@@ -43,7 +43,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
     return (
         <div
             className={`
-                flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-light dark:border-dark ${placementClasses} ${className}`}
+                flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 border-primary ${placementClasses} ${className}`}
         >
             <div className="text-center hidden md:block">
                 <CloudinaryImage
@@ -77,7 +77,7 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                                     onChange={(e) => setEmail(e.target.value)}
                                     type="email"
                                     placeholder="Email address"
-                                    className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1"
+                                    className="dark:bg-accent-dark border border-primary rounded text-[15px] w-full flex-1"
                                     value={email}
                                 />
                                 <button className={`${container(undefined, 'md')} -mt-px w-full lg:w-auto`}>
@@ -99,9 +99,9 @@ export const NewsletterForm = ({ className = '', placement }: NewsletterFormProp
                         </div>
                     </>
                 ) : (
-                    <div className="bg-accent dark:bg-accent-dark border border-border dark:border-dark px-6 py-4 rounded-md">
+                    <div className="bg-accent border border-input px-6 py-4 rounded-md">
                         <h3 className="text-lg font-bold m-0">Thanks for subscribing!</h3>
-                        <p className="m-0 text-primary/75 !leading-normal !text-[15px]">
+                        <p className="m-0 text-secondary !leading-normal !text-[15px]">
                             Keep an eye out for our next edition of{' '}
                             <strong>
                                 <em>Product for Engineers</em>

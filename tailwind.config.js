@@ -81,7 +81,9 @@ module.exports = {
                 transparent: 'transparent',
                 current: 'currentColor',
 
-                primary: '#151515',
+                primary: 'var(--primary)',
+                secondary: 'var(--text-secondary)',
+                muted: 'var(--muted)',
                 'primary-dark': '#EEEFE9',
                 accent: '#E5E7E0',
                 'accent-2': '#DCDFD3',
@@ -147,16 +149,6 @@ module.exports = {
                 // plaque-bg
                 // plaque-border
                 // plaque-shadow-bg
-
-                'button-shadow': '#CD8407',
-                'button-border': '#B17816',
-                'button-shadow-dark': '#99660E',
-                'button-secondary-shadow-dark': '#925D05',
-                'gray-accent': '#D0D1C9',
-                'gray-accent-dark': '#2C2C2C',
-                'gray-accent-dark-hover': '#3D3D3D',
-                'gray-accent-light': '#E5E7E0',
-                'gray-accent-light-hover': '#C5C6C2',
             },
             fontFamily: {
                 'fairytale-title': ['Fairytale', 'sans-serif'],

@@ -45,7 +45,7 @@ export default function AshbyOpenRoles() {
                                     return (
                                         <li className="" key={title}>
                                             <Link
-                                                className="px-4 py-3 text-base -mb-1 border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] hover:bg-light dark:hover:bg-dark active:translate-y-[1px] active:transition-all rounded font-bold flex justify-between"
+                                                className="px-4 py-3 text-base -mb-1 border border-b-3 border-transparent hover:border hover:translate-y-[-1px] hover:bg-light dark:hover:bg-dark active:translate-y-[1px] active:transition-all rounded font-bold flex justify-between"
                                                 to={slug}
                                             >
                                                 <div>

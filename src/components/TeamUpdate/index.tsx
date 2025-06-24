@@ -140,9 +140,9 @@ export default function TeamUpdate({
             </div>
 
             <div className="ml-[50px]">
-                <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-4">
+                <div className="bg-white dark:bg-accent-dark border border-primary rounded-md overflow-hidden mb-4">
                     {!hideTeamSelect && (
-                        <div className="border-b border-border dark:border-dark">
+                        <div className="border-b border-input">
                             <TeamSelect value={values.team} onChange={(team) => setFieldValue('team', team)} />
                         </div>
                     )}
@@ -180,7 +180,7 @@ export default function TeamUpdate({
                                     label="This is connected to a roadmap item"
                                 />
                                 {values.roadmap && (
-                                    <div className="border border-border dark:border-dark rounded-md mt-4">
+                                    <div className="border border-input rounded-md mt-4">
                                         <RoadmapSelect
                                             teamID={values.team.id}
                                             onChange={(value) => setFieldValue('roadmapID', value)}

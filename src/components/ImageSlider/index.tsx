@@ -22,13 +22,13 @@ export default function ImageSlider({ children, ...other }: { children: JSX.Elem
             </Slider>
             <button
                 onClick={() => ref.current?.slickPrev()}
-                className="absolute top-1/2 left-0 -translate-y-1/2 opacity-75 group-hover:opacity-100 transition-opacity rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-1 border-b-2 hover:-mt-px active:mt-0 active:scale-[.99]"
+                className="absolute top-1/2 left-0 -translate-y-1/2 opacity-75 group-hover:opacity-100 transition-opacity rounded border border-primary bg-accent p-1 border-b-2 hover:-mt-px active:mt-0 active:scale-[.99]"
             >
                 <IconArrowLeft className="size-5 opacity-70" />
             </button>
             <button
                 onClick={() => ref.current?.slickNext()}
-                className="absolute top-1/2 right-0 -translate-y-1/2 opacity-75 group-hover:opacity-100 transition-opacity rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark p-1 border-b-2 hover:-mt-px active:mt-0 active:scale-[.99]"
+                className="absolute top-1/2 right-0 -translate-y-1/2 opacity-75 group-hover:opacity-100 transition-opacity rounded border border-primary bg-accent p-1 border-b-2 hover:-mt-px active:mt-0 active:scale-[.99]"
             >
                 <IconArrowRight className="size-5 opacity-70" />
             </button>

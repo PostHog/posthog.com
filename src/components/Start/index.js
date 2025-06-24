@@ -71,7 +71,7 @@ const AIInstallContent = () => (
                 hideNumbers={false}
             />
         </div>
-        <p className="text-[13px] text-primary/85 dark:text-primary-dark/85 m-0 -mt-0.5">
+        <p className="text-[13px] text-secondary dark:text-primary-dark/85 m-0 -mt-0.5">
             Works with agent-based coding tools like Cursor and Bolt. Supports Next.js, React, React Native, Svelte, and
             Astro.{' '}
             <Link to="/docs/getting-started/install?tab=wizard" className="font-semibold text-right dark:text-yellow">

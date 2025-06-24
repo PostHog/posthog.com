@@ -208,7 +208,7 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
                     Get started - free
                 </TrackedCTA>
                 <p
-                    className={`text-sm text-center mt-4 mb-0 transition-opacity text-primary/75 dark:text-primary-dark/75 ${
+                    className={`text-sm text-center mt-4 mb-0 transition-opacity text-secondary ${
                         signupCoundLoading ? 'opacity-0' : 'opacity-100'
                     }`}
                 >

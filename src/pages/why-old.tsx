@@ -245,7 +245,7 @@ const Teams: React.FC = () => {
                                     our products on our website.
                                 </p>
 
-                                <div className="@lg:float-right ml-2 @lg:ml-8 mb-6 mt-2 @lg:mb-2 px-2 py-4 max-w-sm rounded border border-light dark:border-dark bg-accent dark:bg-accent-dark">
+                                <div className="@lg:float-right ml-2 @lg:ml-8 mb-6 mt-2 @lg:mb-2 px-2 py-4 max-w-sm rounded border border-primary bg-accent">
                                     <div className="grid grid-cols-2 @lg:grid-cols-5 group gap-12">
                                         <div className="max-w-32 mx-auto @lg:col-span-2 scale-150 @lg:scale-[1.65] @lg:hover:scale-[1.68] @lg:active:scale-[1.65] relative hover:-top-0.5 active:top-0.5 transition-all duration-100 ml-2 -mt-2 @lg:mt-0">
                                             <Link to={`/teams/${supportTeam.slug}`}>
@@ -293,7 +293,7 @@ const Teams: React.FC = () => {
                                                                         src={avatar?.data?.attributes?.url}
                                                                         className={`size-10 rounded-full bg-${
                                                                             color ?? 'accent'
-                                                                        } border border-light dark:border-dark`}
+                                                                        } border border-primary`}
                                                                         alt={name}
                                                                     />
                                                                 </Tooltip>
@@ -369,7 +369,7 @@ const Teams: React.FC = () => {
                                 <div className="text-center mb-8">
                                     <Link
                                         href="/roadmap"
-                                        className="border border-b-3 border-light dark:border-dark p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
+                                        className="border border-b-3 border-primary p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
                                     >
                                         Explore the roadmap
                                     </Link>

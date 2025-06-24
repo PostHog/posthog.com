@@ -40,7 +40,7 @@ export default function PurchasedWith() {
                     return (
                         <li
                             key={index}
-                            className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md w-80 p-4"
+                            className="bg-white dark:bg-accent-dark border border-primary rounded-md w-80 p-4"
                         >
                             <div className="flex items-center space-x-2 mb-2">
                                 <div className="size-8 relative">

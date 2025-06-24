@@ -65,7 +65,7 @@ export const Authentication = ({
             )}
             <div style={showProfile ? { marginLeft: 50 } : {}}>
                 {showBanner && (
-                    <div className="bg-[#FFF7E9] dark:bg-accent-dark border border-light dark:border-dark text-primary dark:text-primary-dark border-b-0 py-2 px-4 rounded-tr-0 rounded-tl-0">
+                    <div className="bg-[#FFF7E9] dark:bg-accent-dark border border-primary text-primary dark:text-primary-dark border-b-0 py-2 px-4 rounded-tr-0 rounded-tl-0">
                         <h4 className="m-0 text-base pb-1 text-primary dark:text-primary-dark">
                             Please signup to post.
                         </h4>
@@ -105,7 +105,7 @@ export const Authentication = ({
                                 {message}
                             </p>
                         )}
-                        <div className="pt-4 px-6 bg-accent dark:bg-accent-dark">
+                        <div className="pt-4 px-6 bg-accent">
                             {
                                 {
                                     'sign-in': (

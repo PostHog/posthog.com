@@ -61,7 +61,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     return (
         <div className={classes}>
-            <div className="image-wrapper relative bg-white rounded-md border border-light dark:border-dark">
+            <div className="image-wrapper relative bg-white rounded-md border border-primary">
                 {isNew && (
                     <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                         New
@@ -92,10 +92,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             {loading && (
                 <div role="status" className="max-w-sm animate-pulse">
-                    <div className="h-7 bg-gray-accent rounded-md dark:bg-gray-accent-dark w-32"></div>
-                    {product.variants.length > 1 && (
-                        <div className="h-9 bg-gray-accent rounded-md dark:bg-gray-accent-dark mt-4"></div>
-                    )}
+                    <div className="h-7 bg-accent rounded-md  w-32"></div>
+                    {product.variants.length > 1 && <div className="h-9 bg-accent rounded-md  mt-4"></div>}
                     <span className="sr-only">Loading...</span>
                 </div>
             )}
@@ -148,13 +146,13 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             {!loading && outOfStock && <BackInStockForm variant={variantForCart} product={product} />}
 
             {product.description && (
-                <div className="border-t border-light dark:border-dark pt-4">
+                <div className="border-t border-primary pt-4">
                     <h3 className="text-lg mb-0">Description</h3>
                     <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
                 </div>
             )}
             {product.imageProducts?.length > 0 && (
-                <div className="border-t border-light dark:border-dark pt-4 mt-4">
+                <div className="border-t border-primary pt-4 mt-4">
                     <h3 className="text-lg mb-0">See something else you liked?</h3>
                     <p className="mt-0 opacity-75">
                         You may have spotted these other fine PostHog products in the photos above.

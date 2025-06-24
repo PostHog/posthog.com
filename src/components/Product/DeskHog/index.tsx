@@ -80,10 +80,10 @@ const App = ({ image, title, description, author, authorUrl, isBuildYourOwn }: A
                 )}
             </div>
             {/* Back Face */}
-            <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-6 duration-150 flex flex-col justify-center items-center">
+            <div className="absolute h-full w-full [backface-visibility:hidden] [transform:rotateY(180deg)] bg-accent border border-primary rounded p-6 duration-150 flex flex-col justify-center items-center">
                 <div className="text-center">
                     <h4 className="text-xl font-bold mb-2">{title}</h4>
-                    <p className="text-[15px] text-primary/80 dark:text-primary-dark/80 mb-2">{description}</p>
+                    <p className="text-[15px] text-secondary mb-2">{description}</p>
                     {!isBuildYourOwn ? (
                         <p className="text-sm">
                             <b>Built by:</b> <Link to={authorUrl}>{author}</Link>
@@ -254,7 +254,7 @@ const DeskHogCTA = () => {
     return (
         <section className="relative overflow-hidden">
             {/* Text Content Wrapper with PostHog card style */}
-            <div className="relative z-10 bg-white dark:bg-accent-dark p-8 rounded-lg mx-auto max-w-xl border border-light dark:border-dark shadow-xl">
+            <div className="relative z-10 bg-white dark:bg-accent-dark p-8 rounded-lg mx-auto max-w-xl border border-primary shadow-xl">
                 <h2 className={headingClasses}>3D print it yourself now</h2>
                 <h3 className={`${subheadingClasses} mb-0`}>
                     DeskHog kits coming soon but you can 3D print it yourself now. Just add components!
@@ -300,7 +300,7 @@ const DeskHogCTA = () => {
 // Expandable Callout Component
 const ExpandableCallout = () => {
     return (
-        <div className="col-span-2 bg-accent dark:bg-accent-dark py-4 px-8 rounded-lg w-full max-w-lg mx-auto">
+        <div className="col-span-2 bg-accent py-4 px-8 rounded-lg w-full max-w-lg mx-auto">
             <div className="mt-4 flex flex-col">
                 <CloudinaryImage
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_max_904ca43b3e.png"
@@ -383,17 +383,15 @@ export const ProductDeskHog = () => {
                                 It's a hand-made micro games console. It's a desktop terminal for PostHog data. It's a
                                 friend.
                             </p>
-                            <div className="inline-grid grid-cols-2 [&>*]:p-2 divide-y divide-border dark:divide-border-dark border border-light dark:border-dark text-sm mb-6">
-                                <strong className="border-r border-light dark:border-dark">Can it play Pong?</strong>
+                            <div className="inline-grid grid-cols-2 [&>*]:p-2 divide-y divide-border dark:divide-border-dark border border-primary text-sm mb-6">
+                                <strong className="border-r border-primary">Can it play Pong?</strong>
                                 <span className="!border-t-0">Yes.</span>
-                                <strong className="border-r border-light dark:border-dark">
-                                    Can it play Flappy Bird?
-                                </strong>
+                                <strong className="border-r border-primary">Can it play Flappy Bird?</strong>
                                 <span>Yes.</span>
-                                <strong className="border-r border-light dark:border-dark">Can it play Doom?</strong>
+                                <strong className="border-r border-primary">Can it play Doom?</strong>
                                 <span>...We're working on it.</span>
                             </div>
-                            <p className="text-sm mb-4 border-l-4 border-light dark:border-dark pl-2 py-1">
+                            <p className="text-sm mb-4 border-l-4 border-primary pl-2 py-1">
                                 <strong>
                                     Want <i>more</i> hardware?
                                 </strong>{' '}
@@ -630,11 +628,9 @@ export const ProductDeskHog = () => {
                                     key={index}
                                     className="grid-cols-2 md:grid-cols-1 flex flex-col md:flex-row items-start gap-4"
                                 >
-                                    <span className="text-primary/50 size-8 -mt-1 shrink-0">{spec.icon}</span>
+                                    <span className="text-muted size-8 -mt-1 shrink-0">{spec.icon}</span>
                                     <div>
-                                        <h3 className="text-base font-bold text-primary/80 dark:text-primary-dark/80 mb-1">
-                                            {spec.label}
-                                        </h3>
+                                        <h3 className="text-base font-bold text-secondary mb-1">{spec.label}</h3>
                                         <p
                                             className="text-sm text-primary dark:text-primary-dark whitespace-pre-line"
                                             dangerouslySetInnerHTML={{ __html: spec.details }}

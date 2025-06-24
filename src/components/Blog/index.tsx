@@ -41,7 +41,11 @@ export const Post = ({ featuredImage, slug, title, category, date, authors, imgC
                 {image ? (
                     <GatsbyImage alt={title} className={imgClassName ?? 'w-full'} image={image} />
                 ) : (
-                    <CloudinaryImage className={imgClassName ?? 'w-full'} alt={title} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Blog/images/default.jpg" />
+                    <CloudinaryImage
+                        className={imgClassName ?? 'w-full'}
+                        alt={title}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Blog/images/default.jpg"
+                    />
                 )}
                 <div className="bg-gradient-to-b from-black/50 via-black/20  to-black/50 absolute inset-0 px-4 py-3 md:p-5 flex flex-col h-full w-full">
                     {category && <p className="m-0 text-sm opacity-80">{category}</p>}
@@ -135,7 +139,7 @@ const CategoryPosts = ({ categoryToShow, categories }) => {
             posts={edges}
             action={
                 <Link
-                    className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative active:top-[1px] active:scale-[.99]"
+                    className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-primary hover:bg-accent relative active:top-[1px] active:scale-[.99]"
                     to={url}
                 >
                     View all
@@ -166,7 +170,7 @@ const Blog = ({
                     action={
                         <Link
                             to="/blog/all"
-                            className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-gray-accent-light dark:hover:bg-gray-accent-dark relative active:top-[1px] active:scale-[.99]"
+                            className="-mr-2 px-2 py-1.5 rounded-sm hover:bg-primary hover:bg-accent relative active:top-[1px] active:scale-[.99]"
                         >
                             View all
                         </Link>

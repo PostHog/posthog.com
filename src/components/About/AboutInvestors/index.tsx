@@ -34,7 +34,7 @@ const Investor = ({ logo, logoDark, width, height, photo, large, name, role }: I
             ) : photo ? (
                 <div className="py-4 px-4 flex flex-col justify-center">
                     {/* if a photo instead of a logo (angel)... */}
-                    <figure className="mb-2 mx-auto p-[2px] rounded-full bg-white border border-solid border-gray">
+                    <figure className="mb-2 mx-auto p-[2px] rounded-full bg-white border border-solid border-primary">
                         {large ? (
                             <img src={photo} width={80} height={80} alt={name} className="rounded-full " />
                         ) : (
@@ -98,7 +98,7 @@ export const AboutInvestors = () => {
                 <Investor name="Rujul Zaparde" role="Flightcar Founder" photo="/images/investors/rujul-zaparde.jpg" />
 
                 <div className="py-4 px-4 flex flex-col justify-center">
-                    <figure className="mb-2 mx-auto p-[2px] rounded-full bg-gray-accent-light border border-solid border-gray w-[50px] h-[50px] flex justify-center items-center">
+                    <figure className="mb-2 mx-auto p-[2px] rounded-full bg-accent-light border border-solid border-primary w-[50px] h-[50px] flex justify-center items-center">
                         <span className="inline-block w-8 h-8">
                             <Investors />
                         </span>

@@ -202,7 +202,7 @@ const Sort = ({ sortBy, className = '' }) => {
     return (
         <div className={`md:space-x-2 items-center mb-4 sm:mb-0 ${className}`}>
             <p className="sr-only">Sort by</p>
-            <div className="flex items-center border border-light dark:border-dark md:border-transparent dark:md:border-transparent hover:border-light dark:hover:border-dark p-0.5 rounded gap-x-[3px] transition-all ease-in-out md:delay-500 hover:delay-0 md:duration-500 w-full md:w-auto">
+            <div className="flex items-center border border-primary md:border-transparent dark:md:border-transparent hover:border p-0.5 rounded gap-x-[3px] transition-all ease-in-out md:delay-500 hover:delay-0 md:duration-500 w-full md:w-auto">
                 <SortButton className="" active={sortBy === 'popular'} onClick={() => navigate(`?sort=popular`)}>
                     Popular
                 </SortButton>
@@ -223,8 +223,8 @@ const SortButton = ({ active, onClick, children, className = '' }) => {
             onClick={onClick}
             className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
                 active
-                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
-                    : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
+                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
+                    : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
             } ${className}`}
         >
             {children}

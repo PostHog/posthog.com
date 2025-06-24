@@ -80,7 +80,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
                             <tr key={option.key}>
                                 <td>
                                     <div className="mb-6">
-                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                        <code className=" dark:text-white bg-accent-light text-inherit p-1 rounded">
                                             {option.name}
                                         </code>
                                     </div>

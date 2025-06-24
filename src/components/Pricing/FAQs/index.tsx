@@ -20,7 +20,7 @@ export const FAQs = ({ className = '' }) => {
             <input
                 onChange={handleChange}
                 placeholder="Search questions asked on this page"
-                className="bg-accent dark:bg-accent-dark border border-light dark:border-dark py-3 px-4 rounded-sm text-[15px] font-semibold w-full"
+                className="bg-accent border border-primary py-3 px-4 rounded-sm text-[15px] font-semibold w-full"
             />
             <ul className="list-none m-0 p-0 grid gap-y-6 mt-4">
                 {questions &&
@@ -30,7 +30,7 @@ export const FAQs = ({ className = '' }) => {
                             <li key={index}>
                                 <div className="flex items-center space-x-2 relative">
                                     <span className="flex-shrink-0 relative">
-                                        <span className="absolute w-full h-full left-1/2 translate-y-[55%] border-l border-b border-dashed border-gray-accent-light rounded-sm" />
+                                        <span className="absolute w-full h-full left-1/2 translate-y-[55%] border-l border-b border-dashed border-primary rounded-sm" />
                                         <span>{author.q.image}</span>
                                     </span>
                                     <p className="text-[15px] font-semibold m-0">{q}</p>

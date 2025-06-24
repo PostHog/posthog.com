@@ -19,7 +19,7 @@ export const CloudCalculator = () => {
             </div>
 
             <div className="mb-2 border border-white/10 rounded">
-                <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-gray-accent-light">
+                <div className="flex justify-between items-baseline p-2 rounded mb-1 bg-accent-light">
                     <div className="mb-0 text-sm text-primary font-bold">Event volume</div>
                     <div className="opacity-50 text-2xs text-right font-semibold">Monthly price per event</div>
                 </div>

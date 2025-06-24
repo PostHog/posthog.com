@@ -17,10 +17,7 @@ const crumbText = (classes = '') => cntl`
 const CommunityLink = ({ icon, text, url }) => {
     return (
         <li className="py-2 px-3">
-            <a
-                className={`text-sm text-primary/50 hover:text-primary/75 dark:text-primary/50 dark:hover:text-primary-dark/75 flex items-center font-normal space-x-1`}
-                href={url}
-            >
+            <a className={`text-sm text-muted hover:text-secondary flex items-center font-normal space-x-1`} href={url}>
                 {icon}
                 <span>{text}</span>
             </a>

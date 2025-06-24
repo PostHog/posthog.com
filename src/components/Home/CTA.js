@@ -189,10 +189,10 @@ export default function CTA() {
                         </div>
 
                         <div className="flex items-center gap-3">
-                            <span className="bg-accent dark:bg-accent-dark rounded h-8 w-8 p-1">
+                            <span className="bg-accent rounded h-8 w-8 p-1">
                                 <TrendUp className="opacity-75" />
                             </span>
-                            <p className="text-sm text-primary/50 dark:text-primary-dark/50 leading-tight mb-0">
+                            <p className="text-sm text-muted leading-tight mb-0">
                                 <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
                                 <button
                                     onClick={() => setModalOpen(true)}

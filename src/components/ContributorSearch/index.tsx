@@ -27,7 +27,7 @@ export const ContributorSearch = () => {
                 name="contributor-search"
                 placeholder="Search contributors..."
                 autoFocus={true}
-                className="pl-10 py-3 text-lg bg-white dark:bg-gray-accent-dark rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
+                className="pl-10 py-3 text-lg bg-white  rounded-full w-full ring-red shadow-lg shadow-[0_100px_80px_0_rgba(0,0,0,0.07),0px_14.5036px_24.1177px_rgba(0,0,0,0.0395839),0_6.68266px_10.0172px_rgba(0,0,0,0.0291065),0_4.88627px_3.62304px_rgba(0,0,0,0.0214061)]"
             />
 
             <button className="hidden px-6 py-3 bg-red text-lg shadow-md rounded-sm text-white font-bold">

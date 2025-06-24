@@ -34,7 +34,7 @@ export default function Roadmap({
             {recentlyShipped && (
                 <Fieldset legend="Recently shipped">
                     <div className="max-w-2xl team-page-content">
-                        <div className="border border-light dark:border-dark rounded bg-white dark:bg-accent-dark p-6">
+                        <div className="border border-primary rounded bg-white dark:bg-accent-dark p-6">
                             <Change {...recentlyShipped} />
                         </div>
                     </div>

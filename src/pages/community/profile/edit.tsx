@@ -71,7 +71,7 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
                     <span>{label}</span>
                 </label>
             )}
-            <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
+            <div className="grid grid-cols-2 rounded-md bg-accent relative text-center overflow-hidden mt-1 text-base border border-input">
                 <span
                     className={`bg-red dark:bg-yellow w-1/2 h-full absolute transition-all left-0 ${
                         checked === null ? 'hidden' : checked ? '' : 'translate-x-full'
@@ -113,9 +113,9 @@ function Avatar({ values, setFieldValue, error }) {
             className={`relative w-full aspect-square rounded-full flex justify-center items-center border-[1.5px] ${
                 favoriteColor
                     ? imageURL
-                        ? `bg-${favoriteColor} border-gray-accent-light dark:border-gray-accent-dark`
+                        ? `bg-${favoriteColor} border-primary dark:`
                         : `border-${favoriteColor} dark:border-${favoriteColor}`
-                    : `border-gray-accent-light dark:border-gray-accent-dark`
+                    : `border-primary dark:`
             }  text-black/50 dark:text-white/50 overflow-hidden group ${error ? '' : '-mb-2'}`}
         >
             {imageURL ? (
@@ -160,8 +160,8 @@ const Input = ({ type, name, placeholder, label, value, onChange, error, classNa
         <div>
             <label className="font-bold block">{label}</label>
             <input
-                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent dark:bg-accent-dark border ${
-                    error ? 'border-red' : 'border-border dark:border-dark'
+                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent border ${
+                    error ? 'border-red' : 'border-input'
                 } ${className}`}
                 type={type || 'text'}
                 name={name}
@@ -292,8 +292,8 @@ const formSections = [
                             rows={6}
                             name="biography"
                             placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
-                                error ? 'border-red' : 'border-border dark:border-dark'
+                            className={`py-2 px-4 text-base rounded-md w-full bg-accent mt-1 border ${
+                                error ? 'border-red' : 'border-input'
                             }`}
                         />
                     </>
@@ -406,8 +406,8 @@ const formSections = [
                             rows={6}
                             name="readme"
                             placeholder="I typically work best when..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
-                                error ? 'border-red' : 'border-border dark:border-dark'
+                            className={`py-2 px-4 text-base rounded-md w-full bg-accent mt-1 border ${
+                                error ? 'border-red' : 'border-input'
                             }`}
                         />
                     </>

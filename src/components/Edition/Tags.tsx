@@ -32,7 +32,7 @@ const Tag = ({ name, active, onClick, icon, color }) => {
 export default function Tags() {
     const { activeMenu, tag, setTag, setRoot } = useContext(PostsContext)
     return activeMenu?.children?.length > 0 ? (
-        <div className="-mx-4 pl-2 pr-4 md:-mx-8 md:pl-2 md:pr-4 2xl:-mx-12 2xl:pl-2 2xl:pr-4 border-y my-4 py-2 border-light dark:border-dark">
+        <div className="-mx-4 pl-2 pr-4 md:-mx-8 md:pl-2 md:pr-4 2xl:-mx-12 2xl:pl-2 2xl:pr-4 border-y my-4 py-2 border-primary">
             <Slider>
                 {[
                     {

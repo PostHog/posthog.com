@@ -197,7 +197,7 @@ function Hero(): JSX.Element {
                         </div>
                     </div>
 
-                    <div className="mt-8 p-4 bg-gray-50 dark:bg-gray-800 text-left">
+                    <div className="mt-8 p-4 bg-accent  text-left">
                         {links.length > 0 ? (
                             <ul className="space-y-3 pl-0 list-none">
                                 {links.map((link) => {

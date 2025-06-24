@@ -283,14 +283,15 @@ export const Pizza = () => {
                 </h2>
                 <div className="max-w-2xl mx-auto">
                     <p>
-                        Everyone at PostHog has an opinion about whether pineapple belongs on pizza (no matter how wrong they may be.) Here's how it breaks down for each small team.
+                        Everyone at PostHog has an opinion about whether pineapple belongs on pizza (no matter how wrong
+                        they may be.) Here's how it breaks down for each small team.
                     </p>
                 </div>
             </div>
 
             <div className="grid @4xl:grid-cols-3 gap-10 @4xl:gap-6 @6xl:gap-12 pt-6 pb-12">
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center @4xl:items-start">
+                    <div className="mb-4 border-b border-primary pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleYes className="inline-block size-12" />
                         <div className="flex-1 items-baseline gap-1 @4xl:block">
                             <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
@@ -346,7 +347,7 @@ export const Pizza = () => {
                 </div>
 
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center @4xl:items-start">
+                    <div className="mb-4 border-b border-primary pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleUnknown className="inline-block size-12" />
                         <div className="flex-1 items-baseline gap-1 @4xl:block">
                             <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
@@ -406,7 +407,7 @@ export const Pizza = () => {
                 </div>
 
                 <div>
-                    <div className="mb-4 border-b border-light dark:border-dark pb-2 flex gap-2 items-center @4xl:items-start">
+                    <div className="mb-4 border-b border-primary pb-2 flex gap-2 items-center @4xl:items-start">
                         <StickerPineappleNo className="inline-block size-12" />
                         <div className="flex-1 items-baseline gap-1 @4xl:block">
                             <p className="m-0 text-[15px] @4xl:text-sm @5xl:text-[15px] font-bold @4xl:font-normal">
@@ -473,7 +474,7 @@ export const Pizza = () => {
                         className={`px-1 pt-1 pb-0.5 border-b-2 text-[15px] font-medium ${
                             filter === option
                                 ? 'border-red dark:border-yellow font-bold'
-                                : 'border-transparent hover:border-light dark:hover:border-dark text-primary/60 hover:text-primary/100 dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
+                                : 'border-transparent hover:border text-secondary hover:text-primary dark:text-primary-dark/60 dark:hover:text-primary-dark/100'
                         }`}
                     >
                         {option}
@@ -518,10 +519,10 @@ export const Pizza = () => {
                     </SwiperSlide>
                 ))}
                 <button className="swiper-button-prev absolute left-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] @4xl:z-30 p-2 xl:p-6 box-border peer z-10">
-                    <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-r-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
+                    <IconChevronDown className="hover-invert w-12 h-12 rounded-sm text-primary rotate-90 bg-secondary hover:bg-primary hover:backdrop-blur-sm active:backdrop-blur-sm border border-r-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
                 </button>
                 <button className="swiper-button-next absolute right-0 top-1/2 -translate-y-1/2 -mt-8 hover:scale-[1.01] hover:top-[calc(50%-1px)] active:top-[calc(50%+0.5px)] active:scale-[.99] @4xl:z-30 p-2 xl:p-6 box-border peer z-10">
-                    <IconChevronDown className="w-12 h-12 rounded-sm text-white hover:text-white/100 dark:text-primary-dark dark:hover:text-primary-dark/100 -rotate-90 bg-black/75 hover:bg-black/90 dark:hover:bg-accent-dark/25 hover:backdrop-blur-sm active:backdrop-blur-sm border border-l-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
+                    <IconChevronDown className="hover-invert w-12 h-12 rounded-sm text-primary -rotate-90 bg-secondary hover:bg-primary hover:backdrop-blur-sm active:backdrop-blur-sm border border-l-3 border-black dark:border-dark peer-disabled:bg-transparent peer-disabled:border-transparent" />
                 </button>
             </Swiper>
 

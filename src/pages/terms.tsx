@@ -150,7 +150,7 @@ function Terms() {
                             <Link
                                 href="https://giphy.com/gifs/cat-pizza-crazy-3o7TKJwsoLn5QAmqw8"
                                 externalNoIcon
-                                className="font-normal text-xs text-primary/50 dark:text-primary-dark/50"
+                                className="font-normal text-xs text-muted"
                             >
                                 Thanks, Giphy!
                             </Link>
@@ -205,7 +205,7 @@ function Terms() {
                         <p className="mb-2">
                             For your sanity, we've summarized each paragraph of legalese with plain English.
                         </p>
-                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
+                        <p className="mb-2 text-secondary">
                             (This was inspired by{' '}
                             <Link href="https://500px.com/terms" externalNoIcon>
                                 500px
@@ -227,14 +227,12 @@ function Terms() {
                             </span>
                             <span className="hidden md:inline-block">in the left column</span>.
                         </p>
-                        <p className="mb-2 text-primary/75 dark:text-primary-dark/75">
-                            (Can you believe we actually had to clarify this?)
-                        </p>
+                        <p className="mb-2 text-secondary">(Can you believe we actually had to clarify this?)</p>
                     </div>
                 </div>
 
                 <div className="px-4">
-                    <ol className="table-of-contents max-w-lg mx-auto bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded py-8 list-none flex flex-col gap-1 md:gap-2">
+                    <ol className="table-of-contents max-w-lg mx-auto bg-accent border border-primary rounded py-8 list-none flex flex-col gap-1 md:gap-2">
                         <li className="text-sm opacity-70">Table of contents</li>
                         {headers.map((header, index) => (
                             <li key={index}>

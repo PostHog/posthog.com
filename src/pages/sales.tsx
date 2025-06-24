@@ -59,7 +59,12 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-12">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr.png" width={338} />
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr.png"
+                        width={338}
+                    />
                 </div>
             </>
         ),
@@ -77,7 +82,12 @@ const them = [
                 </div>
 
                 <div className="col-span-4 -mt-4 pb-6 rotate-2">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr-on-zoom.png" width={436} />
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/sdr-on-zoom.png"
+                        width={436}
+                    />
                 </div>
             </>
         ),
@@ -95,7 +105,12 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-6 @3xl:-mt-12 pb-4">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/no-hope.png" width={352} />
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/no-hope.png"
+                        width={352}
+                    />
                 </div>
             </>
         ),
@@ -113,7 +128,12 @@ const them = [
                 </div>
 
                 <div className="col-span-5 text-center -mt-12">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/receipt.png" width={613} />
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/receipt.png"
+                        width={613}
+                    />
                 </div>
             </>
         ),
@@ -208,7 +228,12 @@ const them = [
                 </div>
 
                 <div className="col-span-3 -mt-4 @3xl:-mt-8 @3xl:pb-8 text-center">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png" width={200} />
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/shocked-hog.png"
+                        width={200}
+                    />
                 </div>
             </>
         ),
@@ -281,7 +306,12 @@ const us = [
                 </div>
 
                 <div className="col-span-3 text-center rotate-2 pb-4 pr-2">
-                    <CloudinaryImage quality={90} placeholder="blurred" src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png" width={436} />
+                    <CloudinaryImage
+                        quality={90}
+                        placeholder="blurred"
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/posthog-ae.png"
+                        width={436}
+                    />
                 </div>
             </>
         ),
@@ -329,7 +359,7 @@ const us = [
                         <Link href="/handbook/growth/sales/contracts">from our website</Link>! We believe this should be
                         transparent too.
                     </p>
-                    <p className="text-xs text-primary/75 dark:text-primary-dark/75">
+                    <p className="text-xs text-secondary">
                         P.S. If you ask for free <Link href="/merch">merch</Link>, our team is legally obliged to say
                         yes.
                     </p>
@@ -396,25 +426,28 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t relative ${isOpen
-                    ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden'
-                    : 'inactive border-light dark:border-dark first:border-transparent'
-                }`}
+            className={`border-t relative ${
+                isOpen
+                    ? 'active border-transparent bg-white dark:bg-dark rounded shadow-lg z-10 overflow-hidden'
+                    : 'inactive border-primary first:border-transparent'
+            }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
+                    isOpen
                         ? 'pt-4 pb-2 z-20'
-                        : 'text-primary/60 hover:text-primary/75 dark:text-primary-dark/60 dark:hover:text-primary-dark/75 py-2 hover:bg-accent/80 dark:hover:bg-accent/5 hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                    }`}
+                        : 'text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                }`}
             >
                 <span className="flex gap-2 items-center">
-                    <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent dark:bg-accent/10">
+                    <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent">
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg @3xl:text-2xl' : 'font-semibold text-[17px]'
-                            }`}
+                        className={`transition-all leading-tight ${
+                            isOpen ? 'font-bold text-lg @3xl:text-2xl' : 'font-semibold text-[17px]'
+                        }`}
                     >
                         {title}
                     </span>
@@ -439,8 +472,13 @@ const AccordionItem = ({
 
                         <div className="pb-4 @3xl:pb-0 @3xl:absolute left-9 bottom-6">
                             {hasNext ? (
-                                <CallToAction onClick={onNext} size="sm" type="secondary" className="w-full @3xl:w-auto">
-                                    <span className="mr-2 bg-accent dark:bg-accent-dark border border-light dark:border-dark px-1.5 rounded border-b-2 inline-flex text-sm font-medium font-code">
+                                <CallToAction
+                                    onClick={onNext}
+                                    size="sm"
+                                    type="secondary"
+                                    className="w-full @3xl:w-auto"
+                                >
+                                    <span className="mr-2 bg-accent border border-primary px-1.5 rounded border-b-2 inline-flex text-sm font-medium font-code">
                                         N
                                     </span>
                                     Next step
@@ -599,7 +637,7 @@ function Sales() {
                             *Unless you qualify for a{' '}
                             <Tooltip
                                 content="Discounts available to early-stage startups, non-profits, and customers who pay annually."
-                                className="border-b-2 pb-0.5 border-dashed border-border dark:border-dark"
+                                className="border-b-2 pb-0.5 border-dashed border-input"
                             >
                                 <span className="relative cursor-help">discount</span>
                             </Tooltip>
@@ -639,7 +677,7 @@ function Sales() {
                         <div className="inline-flex flex-col items-center mb-10 mx-auto">
                             <h2 className="mb-1 text-center relative">
                                 How the sales process works at{' '}
-                                <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-0 after:content-['[Typical_bland_enterprise_SaaS_company]'] after:text-xs after:text-primary/60 dark:after:text-primary-dark/60 after:font-normal after:tracking-normal">
+                                <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-0 after:content-['[Typical_bland_enterprise_SaaS_company]'] after:text-xs after:text-secondary after:font-normal after:tracking-normal">
                                     <button
                                         onClick={updateCompanyName}
                                         className="absolute right-0.5 bottom-[.15rem] hover:bottom-[0.2rem] active:bottom-[.1rem] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:scale-[1.02] active:scale-[.99] transition-transform"
@@ -670,7 +708,7 @@ function Sales() {
                 </div>
 
                 <div className="max-w-7xl mx-auto">
-                    <div className="p-4 @3xl:p-8 mb-12 mx-4 @3xl:mx-8 bg-accent dark:bg-accent-dark rounded-md border border-light dark:border-dark">
+                    <div className="p-4 @3xl:p-8 mb-12 mx-4 @3xl:mx-8 bg-accent rounded-md border border-primary">
                         <h3 className="mb-1 text-center @3xl:text-left">Craving more unhinged rants like this?</h3>
                         <div className="flex flex-col @3xl:flex-row @3xl:gap-2 @3xl:items-baseline mb-4">
                             <CallToAction
@@ -694,7 +732,7 @@ function Sales() {
                             </CallToAction>
                         </div>
 
-                        <p className="mb-0 text-sm text-primary/75 dark:text-primary-dark/75 text-balance text-center @3xl:text-left">
+                        <p className="mb-0 text-sm text-secondary text-balance text-center @3xl:text-left">
                             <em>
                                 Brought to you by the team who thought making{' '}
                                 <Link href="/terms">terms and conditions fun</Link> was a good idea

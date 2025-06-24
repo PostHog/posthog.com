@@ -418,10 +418,10 @@ export default function Plans({
         ({ type, plans, unit, addons, name, inclusion_only }: any) => {
             return (
                 <div className="grid gap-y-2 min-w-[450px] mb-20" key={type}>
-                    <div className="border border-light dark:border-dark rounded pb-2">
+                    <div className="border border-primary rounded pb-2">
                         {plans.some(({ free_allocation }) => free_allocation) ? (
                             <div>
-                                <Row className="bg-accent dark:bg-accent-dark mb-2">
+                                <Row className="bg-accent mb-2">
                                     <div className="flex-grow">
                                         {showTitle && <h4 className="text-lg mb-0">{planNames[name] || name}</h4>}
                                     </div>
@@ -464,7 +464,7 @@ export default function Plans({
                             </div>
                         ) : (
                             <div>
-                                <Row className="bg-accent dark:bg-accent-dark mb-2">
+                                <Row className="bg-accent mb-2">
                                     <div className="flex-grow">
                                         {showTitle && <h4 className="text-lg mb-0">{planNames[name] || name}</h4>}
                                     </div>
@@ -472,15 +472,12 @@ export default function Plans({
                             </div>
                         )}
                         <div>
-                            <Row className="bg-accent dark:bg-accent-dark my-2">
+                            <Row className="bg-accent my-2">
                                 <Heading title="Features" />
                             </Row>
                             {plans[plans.length - 1].features.map((feature, index) => {
                                 return (
-                                    <Row
-                                        className="hover:bg-accent/60 dark:hover:bg-accent-dark/70"
-                                        key={`${type}-${feature.key}`}
-                                    >
+                                    <Row className="hover:bg-accent" key={`${type}-${feature.key}`}>
                                         <div className="flex-grow">
                                             <Tooltip
                                                 placement="right"
@@ -493,7 +490,7 @@ export default function Plans({
                                             >
                                                 <span className="relative">
                                                     <Title
-                                                        className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                        className="border-b border-dashed border-input inline-block cursor-default"
                                                         title={feature.name}
                                                     />
                                                 </span>
@@ -514,11 +511,11 @@ export default function Plans({
                             })}
                             {addons.map((addon: BillingProductV2Type) => {
                                 return (
-                                    <Row className="hover:bg-accent/60 dark:hover:bg-accent-dark/70" key={addon.type}>
+                                    <Row className="hover:bg-accent" key={addon.type}>
                                         <div className="flex-grow">
                                             <AddonTooltip addon={addon} parentProductName={name}>
                                                 <Title
-                                                    className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                    className="border-b border-dashed border-input inline-block cursor-default"
                                                     title={addon.name}
                                                 />
                                                 <Label className="ml-2" text="Add-on" />
@@ -537,7 +534,7 @@ export default function Plans({
                                                     ) : (
                                                         <AddonTooltip addon={addon} parentProductName={name}>
                                                             <Title
-                                                                className="border-b border-dashed border-border dark:border-dark inline-block cursor-default"
+                                                                className="border-b border-dashed border-input inline-block cursor-default"
                                                                 title="Available"
                                                             />
                                                         </AddonTooltip>
@@ -550,7 +547,7 @@ export default function Plans({
                             })}
                         </div>
                         <div>
-                            <Row className="bg-accent dark:bg-accent-dark my-2">
+                            <Row className="bg-accent my-2">
                                 <Heading title="Monthly pricing" />
                             </Row>
                             <div>

@@ -56,10 +56,7 @@ export const Intro = ({
 
             {featuredVideo && <iframe src={featuredVideo} />}
             {!featuredVideo && featuredImage && (
-                <GatsbyImage
-                    className={`rounded-sm z-0 bg-accent dark:bg-accent-dark rounded`}
-                    image={getImage(featuredImage)}
-                />
+                <GatsbyImage className={`rounded-sm z-0 bg-accent rounded`} image={getImage(featuredImage)} />
             )}
         </div>
     )

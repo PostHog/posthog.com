@@ -3,7 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 export const Marquee = ({ product, children, shortFade }) => {
     return (
-        <section className="bg-accent dark:bg-accent-dark">
+        <section className="bg-accent">
             <div className="max-w-7xl mx-auto px-5 py-20">
                 <div className="md:grid md:grid-cols-12 md:gap-12">
                     <div className="col-span-5">

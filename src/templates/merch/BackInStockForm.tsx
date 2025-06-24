@@ -41,7 +41,7 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
     }
 
     return (
-        <div className="border-t border border-border dark:border-dark p-4 bg-accent dark:bg-accent-dark rounded-md">
+        <div className="border-t border border-input p-4 bg-accent rounded-md">
             {submitted ? (
                 <p className="m-0 text-sm">Thanks! We'll email you when it's back in stock.</p>
             ) : (
@@ -53,7 +53,7 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
                     <form onSubmit={handleSubmit} className="flex space-x-2 items-center m-0">
                         <input
                             placeholder="Email"
-                            className="bg-white dark:bg-dark rounded-md border border-border dark:border-dark py-1.5 px-2 text-base mt-[2px] w-full"
+                            className="bg-white dark:bg-dark rounded-md border border-input py-1.5 px-2 text-base mt-[2px] w-full"
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}

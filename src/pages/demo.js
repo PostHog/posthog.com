@@ -17,7 +17,7 @@ export default function BookADemo() {
                         <h1 className="text-4xl mt-0 mb-2">Watch a demo</h1>
                     </div>
                 </header>
-                <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
+                <div className="border border-primary bg-accent rounded p-4 flex space-x-4 mb-4 order-3 md:order-2">
                     <span className="bg-blue rounded-full leading-none flex h-12 w-12 overflow-hidden shrink-0 basis-12">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/mine.png"
@@ -46,7 +46,7 @@ export default function BookADemo() {
             </section>
 
             <section className="px-4 lg:pb-12 py-4 max-w-6xl mx-auto flex flex-col">
-                <div className="lg:border border-light dark:border-dark lg:bg-accent dark:lg:bg-accent-dark rounded lg:py-6 lg:px-8 flex items-center mb-12 lg:mb-8">
+                <div className="lg:border border-primary lg:bg-accent dark:lg:bg-accent-dark rounded lg:py-6 lg:px-8 flex items-center mb-12 lg:mb-8">
                     <div className="w-full md:flex items-center md:space-x-4">
                         <div className="flex-1">
                             <h4 className="text-2xl mb-0">PostHog for startups</h4>

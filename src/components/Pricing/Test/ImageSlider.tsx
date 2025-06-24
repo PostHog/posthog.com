@@ -46,16 +46,14 @@ const Slide = ({
         }
     }, [inView])
 
-    const content = (
-        <img src={src} alt={alt} className="w-full h-full object-contain" />
-    )
+    const content = <img src={src} alt={alt} className="w-full h-full object-contain" />
 
     return (
         <button
             ref={ref}
             id={`${sliderId}-${id}`}
             onClick={handleClick}
-            className={`bg-accent dark:bg-accent-dark flex items-center justify-center flex-grow flex-shrink-0 snap-center ${className}`}
+            className={`bg-accent flex items-center justify-center flex-grow flex-shrink-0 snap-center ${className}`}
         >
             {isThumbnail ? content : <ZoomImage>{content}</ZoomImage>}
         </button>
@@ -89,7 +87,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
 
     return (
         <>
-            <div className="relative flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded border border-light dark:border-dark">
+            <div className="relative flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded border border-primary">
                 {images.map((image, index) => (
                     <>
                         <Slide
@@ -115,7 +113,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
                     {images.map((image, index) => (
                         <Slide
                             key={index}
-                            className={`w-1/5 md:w-auto p-1 border border-light hover:border-border dark:border-dark dark:hover:border-border-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
+                            className={`w-1/5 md:w-auto p-1 border border-light hover:border-input dark:hover:border-border-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
                                 index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
                             }`}
                             id={`pricing-slider-nav-${index}`}

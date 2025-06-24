@@ -164,7 +164,7 @@ export const SimilarProducts = () => {
                 <div className="grid grid-cols-7 min-w-[1000px] divide-y divide-light dark:divide-dark">
                     {Object.keys(comparison[0].products).map((product) => (
                         <React.Fragment key={product}>
-                            <div className="col-span-1 flex items-start gap-2 py-2 pl-2 pr-4 first:border-t border-light dark:border-dark">
+                            <div className="col-span-1 flex items-start gap-2 py-2 pl-2 pr-4 first:border-t border-primary">
                                 <strong className="whitespace-nowrap">{product}</strong>
                             </div>
                             {comparison.map((company) => (

@@ -23,14 +23,14 @@ import { Search, CmdK, Ctrl, K } from 'components/Icons/Icons'
 import { SearchUI } from 'components/SearchUI'
 
 const keyboardShortcut =
-    'box-content p-[5px] border border-b-2 border-gray-accent-light dark:border-gray-accent-light/40 rounded-[3px] inline-flex text-black/35 dark:text-white/40'
+    'box-content p-[5px] border border-b-2 border-primary  rounded-[3px] inline-flex text-black/35 dark:text-white/40'
 
 const ProductLink = ({ icon, name, url, color }: { icon: string; name: string; url: string; color: string }) => {
     const Icon = Icons[icon as keyof typeof Icons] as any
     return (
         <Link
             to={url}
-            className="flex items-center border border-light dark:border-dark hover:border-black/50 dark:hover:border-white/50 px-1 py-0.5 rounded-sm text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark relative hover:top-[-.5px] active:top-[.5px] hover:scale-[1.01] active:scale-[.995]"
+            className="flex items-center border border-primary hover:border-black/50 dark:hover:border-white/50 px-1 py-0.5 rounded-sm text-secondary hover:text-primary dark:hover:text-primary-dark relative hover:top-[-.5px] active:top-[.5px] hover:scale-[1.01] active:scale-[.995]"
         >
             <Icon className={`w-4 h-4 mr-1 text-${color}`} />
             <span className="text-sm">{name}</span>

@@ -39,8 +39,8 @@ const TabButton = ({ active, onClick, children, className = '' }) => {
             onClick={onClick}
             className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
                 active
-                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-light dark:border-dark'
-                    : 'border-transparent hover:border-light dark:hover:border-dark hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-primary/75 dark:text-primary-dark/75 hover:text-primary dark:hover:text-primary-dark'
+                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
+                    : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
             } ${className}`}
         >
             {children}
@@ -49,7 +49,7 @@ const TabButton = ({ active, onClick, children, className = '' }) => {
 }
 
 const Skeleton = () => {
-    return <div className="animate-pulse bg-accent dark:bg-accent-dark h-[250px] w-full rounded-md" />
+    return <div className="animate-pulse bg-accent h-[250px] w-full rounded-md" />
 }
 
 const PersonSpotlight = ({ title, content, byline, image, cta }) => {
@@ -212,7 +212,7 @@ const Header = () => {
                         })}
                     </div>
                 </div>
-                <div className="text-center py-2 md:py-1 order-3 md:order-none col-span-2 md:col-span-1  border-t border-light dark:border-dark md:border-t-0 mt-1 md:mt-0">
+                <div className="text-center py-2 md:py-1 order-3 md:order-none col-span-2 md:col-span-1  border-t border-primary md:border-t-0 mt-1 md:mt-0">
                     <CommunityNewsLogo />
                 </div>
                 <div className=" md:block md:pr-2">
@@ -232,7 +232,7 @@ const Main = () => {
                 fullWidthContent ? '' : 'max-w-[1400px] mx-auto'
             }`}
         >
-            <aside className="@container order-3 @sm:flex-[0_0_100%] sm:border-t border-light dark:border-dark lg:border-t-0 sm:pt-8 lg:pt-0 lg:order-none flex flex-col ">
+            <aside className="@container order-3 @sm:flex-[0_0_100%] sm:border-t border-primary lg:border-t-0 sm:pt-8 lg:pt-0 lg:order-none flex flex-col ">
                 <div className="grid @xl:grid-cols-2 gap-4 @xl:gap-x-12 @xl:gap-y-4 divide-y @lg:divide-y-0 divide-border dark:divide-border-dark">
                     <PersonSpotlight
                         title="A note from the editor"
@@ -290,7 +290,7 @@ const Main = () => {
 
                             <div className="flex gap-1 items-center">
                                 <div>
-                                    <IconConfetti className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
+                                    <IconConfetti className="w-8 h-8 text-muted" />
                                 </div>
                                 <h4 className="font-semibold opacity-75 text-[15px] mb-0">Welcome to PostHog!</h4>
                             </div>
@@ -300,7 +300,7 @@ const Main = () => {
                         <div>
                             <div className="flex gap-1 items-center">
                                 <div>
-                                    <IconCake className="w-8 h-8 text-primary/50 dark:text-primary-dark/50" />
+                                    <IconCake className="w-8 h-8 text-muted" />
                                 </div>
                                 <h4 className="font-semibold opacity-75 text-[15px] mb-0">Thanks for being here!</h4>
                             </div>
@@ -310,7 +310,7 @@ const Main = () => {
                     </div>
                 </div>
             </aside>
-            <section className="@container order-1 sm:flex-1 lg:order-none sm:border-r pr-6 lg:px-6 xl:px-8 lg:border-x border-light dark:border-dark">
+            <section className="@container order-1 sm:flex-1 lg:order-none sm:border-r pr-6 lg:px-6 xl:px-8 lg:border-x border-primary">
                 <div
                     className={`divide-y divide-border dark:divide-border-dark flex flex-col gap-4 transition-all ${
                         fullWidthContent ? '' : 'max-w-2xl mx-auto'

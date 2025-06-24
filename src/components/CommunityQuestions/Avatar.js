@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function Avatar({ image, url }) {
     return (
-        <div className="bg-gray-accent-light dark:bg-gray-accent-dark rounded-full w-[30px] h-[30px] overflow-hidden flex-shrink-0">
+        <div className="bg-accent rounded-full w-[30px] h-[30px] overflow-hidden flex-shrink-0">
             {image || url ? (
                 url ? (
                     <CloudinaryImage width={60} src={url} />

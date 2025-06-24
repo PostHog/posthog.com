@@ -37,7 +37,7 @@ export default function TeamImage({
                     onChange={(e) => setFieldValue('teamImageCaption', e.target.value)}
                     value={values.teamImageCaption}
                     placeholder="Caption"
-                    className="p-2 text-[13px] rounded-md bg-white dark:bg-accent-dark border border-border dark:border-dark"
+                    className="p-2 text-[13px] rounded-md bg-white dark:bg-accent-dark border border-input"
                 />
             ) : (
                 <div className="text-right text-[13px] mr-2">{teamImage?.caption}</div>

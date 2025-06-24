@@ -78,7 +78,7 @@ export const Transparency = () => {
             </div>
 
             <div className="w-full max-w-screen-xl md:px-4 md:mx-auto mt-8 mb-16 text-left grid md:grid-cols-3 gap-4">
-                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                <div className="bg-accent mx-4 md:mx-0 px-4 py-8 rounded-lg">
                     <TransparencyFeature title="Board meetings" Image={BoardMeetings} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">
                             We share slides from each board meeting internally. When everyone knows the direction we're
@@ -87,7 +87,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                <div className="bg-accent mx-4 md:mx-0 px-4 py-8 rounded-lg">
                     <TransparencyFeature title="Fundraising & finances" Image={Finances} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">
                             We keep our team informed about fundraising during the process and share a monthly report
@@ -97,7 +97,7 @@ export const Transparency = () => {
                     </TransparencyFeature>
                 </div>
 
-                <div className="bg-accent dark:bg-accent-dark mx-4 md:mx-0 px-4 py-8 rounded-lg">
+                <div className="bg-accent mx-4 md:mx-0 px-4 py-8 rounded-lg">
                     <TransparencyFeature title="Constructive feedback" Image={Feedback} className="max-w-md mx-auto">
                         <p className="mb-0 text-base">
                             Transparency is a two-way street. We encourage individual feedback and run regular
@@ -110,7 +110,7 @@ export const Transparency = () => {
             <h3 className="text-3xl lg:text-4xl mb-4 text-center">Latest monthly financial report</h3>
 
             <div className="flex justify-center max-w-5xl mx-auto">
-                <div className="bg-white aspect-video dark:bg-accent-dark rounded-md p-4 xs:px-6 xl:py-6 xl:px-8 mx-4 xl:mx-8 border border-light dark:border-dark relative w-full">
+                <div className="bg-white aspect-video dark:bg-accent-dark rounded-md p-4 xs:px-6 xl:py-6 xl:px-8 mx-4 xl:mx-8 border border-primary relative w-full">
                     <div className="absolute left-0 top-0 w-full h-full bg-black/40 z-10 rounded-md"></div>
                     <Logo className="h-6 xs:h-8 sm:h-12 -ml-3 xs:ml-0 mb-4 sm:mb-8 md:mb-10" />
                     <div className="text-2xl xs:text-[1.5rem] sm:text-[2rem] md:text-[3rem] lg:text-[4rem] font-extrabold font-['Helvetica','Arial'] mb-1 xs:mb-2 md:mb-4 lg:mb-8">

@@ -21,7 +21,7 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
             className={`tw-tweet max-w-xl bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${className}`}
         >
             <div className="flex items-center space-x-3">
-                <div className="rounded-full border border-light dark:border-dark hover:border-red dark:hover:border-yellow bg-white dark:bg-dark">
+                <div className="rounded-full border border-primary hover:border-red dark:hover:border-yellow bg-white dark:bg-dark">
                     <Link
                         href="https://x.com/james406"
                         externalNoIcon
@@ -40,16 +40,14 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
                         <Link
                             href="https://x.com/james406"
                             externalNoIcon
-                            className="text-primary/70 dark:text-primary-dark/70 hover:text-red dark:hover:text-yellow"
+                            className="text-secondary hover:text-red dark:hover:text-yellow"
                         >
                             @james406
                         </Link>
                     </div>
                 </div>
             </div>
-            <div className="mt-3 [&_*]:!leading-normal">
-                {children}
-            </div>
+            <div className="mt-3 [&_*]:!leading-normal">{children}</div>
             <div className="mt-3 flex justify-between items-center text-gray-500">
                 <div className="flex space-x-4">
                     <DontClickButton alertMessage={alertMessage}>

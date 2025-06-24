@@ -36,7 +36,7 @@ export const MaxQuestionInput = ({
 
     return (
         <div
-            className={`bg-[#f5e2b1] border border-border dark:border-border-dark text-[15px] rounded-lg p-8 my-8 ${className} relative shadow-lg font-serif`}
+            className={`bg-[#f5e2b1] border border-primary text-[15px] rounded-lg p-8 my-8 ${className} relative shadow-lg font-serif`}
         >
             <div className="absolute -top-6 -right-6">
                 <div className="relative">
@@ -85,7 +85,7 @@ export const MaxQuestionInput = ({
                                     }
                                 }}
                                 placeholder={placeholderQuestions[currentPlaceholder]}
-                                className="flex-1 px-4 py-3 rounded-lg border border-border dark:border-border-dark bg-white dark:bg-gray-900 text-primary dark:text-primary-dark text-base focus:ring-2 focus:ring-red dark:focus:ring-yellow focus:border-transparent transition-all font-serif"
+                                className="flex-1 px-4 py-3 rounded-lg border border-primary bg-primary text-primary dark:text-primary-dark text-base focus:ring-2 focus:ring-red dark:focus:ring-yellow focus:border-transparent transition-all font-serif"
                             />
                             <CallToAction
                                 href={maxUrl}

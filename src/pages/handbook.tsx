@@ -47,7 +47,7 @@ export const Handbook: React.FC = () => {
                                         <li key={link.to} className="list-none">
                                             <Link
                                                 to={link.to}
-                                                className="flex justify-between baseline relative bg-bullet-light dark:bg-bullet-dark bg-repeat-x bg-center bg-[length:8px_8px] text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px] py-2"
+                                                className="flex justify-between baseline relative bg-bullet-light dark:bg-bullet-dark bg-repeat-x bg-center bg-[length:8px_8px] text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px] py-2"
                                             >
                                                 <span className="relative inline-block pl-3 pr-2 bg-light dark:bg-dark">
                                                     {link.name}
@@ -71,7 +71,7 @@ export const Handbook: React.FC = () => {
                             return (
                                 <div
                                     key={category.name}
-                                    className="space-y-2 py-4 md:py-6 px-4 md:px-8 bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded"
+                                    className="space-y-2 py-4 md:py-6 px-4 md:px-8 bg-accent border border-primary rounded"
                                 >
                                     <h4 className="mb-0">{category.name}</h4>
                                     <ul className="p-0 space-y-1">

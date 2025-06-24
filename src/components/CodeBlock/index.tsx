@@ -264,7 +264,7 @@ export const CodeBlock = ({
                                             `cursor-pointer text-sm px-3 py-2 rounded-full relative after:h-[2px] after:-bottom-[1px] after:left-0 after:right-0 after:absolute after:content-['']  ${
                                                 selected
                                                     ? 'font-bold text-red hover:text-red dark:text-yellow hover:dark:text-yellow after:bg-red dark:after:bg-yellow'
-                                                    : 'text-primary/50 dark:text-primary-dark/50 hover:after:bg-black/50 dark:hover:after:bg-white/50 hover:text-primary/75 hover:dark:text-primary-dark/75'
+                                                    : 'text-muted hover:after:bg-black/50 dark:hover:after:bg-white/50 hover:text-secondary'
                                             }`
                                         }
                                     >
@@ -317,12 +317,12 @@ export const CodeBlock = ({
                                         <SelectorIcon className="w-4 h-4" />
                                     </Listbox.Button>
 
-                                    <Listbox.Options className="absolute top-full right-0 m-0 p-0 mt-1 bg-black text-white list-none rounded text-xs focus:outline-none z-[50] overflow-hidden border border-border dark:border-border-dark">
+                                    <Listbox.Options className="absolute top-full right-0 m-0 p-0 mt-1 bg-black text-white list-none rounded text-xs focus:outline-none z-[50] overflow-hidden border border-primary">
                                         {languages.map((option) => (
                                             <Listbox.Option
                                                 key={option.language}
                                                 value={option}
-                                                className="cursor-pointer text-sm hover:bg-gray-accent-dark w-full px-3 py-1"
+                                                className="cursor-pointer text-sm hover:bg-accent-dark w-full px-3 py-1"
                                             >
                                                 {option.label || option.language}
                                             </Listbox.Option>
@@ -336,7 +336,7 @@ export const CodeBlock = ({
                             <div className="relative flex items-center justify-center px-1">
                                 <button
                                     onClick={copyToClipboard}
-                                    className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border-light dark:hover:border-dark rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
+                                    className="text-muted hover:text-secondary px-1 py-1 hover:bg-light dark:hover:bg-dark border border-transparent hover:border rounded relative hover:scale-[1.02] active:top-[.5px] active:scale-[.99]"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -388,16 +388,16 @@ export const CodeBlock = ({
                         <ScrollArea>
                             <div className="flex whitespace-pre min-w-fit relative" id={codeBlockId}>
                                 {showLineNumbers && (
-                                    <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
+                                    <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent">
                                         <span
                                             className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
                                             aria-hidden="true"
                                         >
                                             {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
-                                                <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">
+                                                <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
                                                     <button
                                                         onClick={() => setExpanded(!expanded)}
-                                                        className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                        className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                                     >
                                                         ...
                                                     </button>
@@ -419,10 +419,10 @@ export const CodeBlock = ({
                                             {!expanded &&
                                                 linesToShow.length > 0 &&
                                                 linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
-                                                    <div className="flex border-t border-dashed border-light dark:border-dark w-full mt-2 -mb-2">
+                                                    <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
                                                         <button
                                                             onClick={() => setExpanded(!expanded)}
-                                                            className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                            className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                                         >
                                                             ...
                                                         </button>
@@ -436,10 +436,10 @@ export const CodeBlock = ({
                                     className={`not-prose block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm ${className}`}
                                 >
                                     {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
-                                        <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">
+                                        <div className="flex border-b border-dashed border-primary w-full mb-2 -mt-2">
                                             <button
                                                 onClick={() => setExpanded(!expanded)}
-                                                className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                             >
                                                 Show full example
                                             </button>
@@ -517,10 +517,10 @@ export const CodeBlock = ({
                                     {!expanded &&
                                         linesToShow.length > 0 &&
                                         linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
-                                            <div className="flex border-t border-dashed border-light dark:border-dark w-full mt-2 -mb-2">
+                                            <div className="flex border-t border-dashed border-primary w-full mt-2 -mb-2">
                                                 <button
                                                     onClick={() => setExpanded(!expanded)}
-                                                    className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                    className="text-muted hover:text-secondary px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
                                                 >
                                                     Show full example
                                                 </button>

@@ -204,7 +204,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                 </ul>
             </div>
 
-            <div className="border-t border-light dark:border-dark mt-4 pt-4 h-px"></div>
+            <div className="border-t border-primary mt-4 pt-4 h-px"></div>
 
             <div
                 className={`@container transition-all rounded-md border ${

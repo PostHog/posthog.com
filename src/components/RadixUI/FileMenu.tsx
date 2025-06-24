@@ -41,7 +41,7 @@ interface FileColumnProps {
 
 const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) => {
     return (
-        <ScrollArea.Root className="h-full w-64 border-r border-border dark:border-border-dark flex-shrink-0">
+        <ScrollArea.Root className="h-full w-64 border-r border-primary flex-shrink-0">
             <ScrollArea.Viewport className="h-full w-full rounded-lg p-1">
                 <RadioGroup.Root
                     value={selectedId?.toString() ?? ''}
@@ -54,7 +54,7 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
                             <RadioGroup.Item
                                 key={index}
                                 value={index.toString()}
-                                className="group relative flex select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none data-[state=checked]:bg-accent dark:data-[state=checked]:bg-accent-dark hover:bg-accent/50 dark:hover:bg-accent-dark/50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 focus:relative focus:z-10 focus:ring-1 focus:ring-border dark:focus:ring-border-dark"
+                                className="group relative flex select-none items-center justify-between rounded-sm px-2 py-1.5 text-sm outline-none data-[state=checked]:bg-accent dark:data-[state=checked]:bg-accent-dark hover:bg-accent dark:hover:bg-accent-dark/50 data-[disabled]:pointer-events-none data-[disabled]:opacity-50 focus:relative focus:z-10 focus:ring-1 focus:ring-border dark:focus:ring-border-dark"
                             >
                                 <div className="flex items-center space-x-2 truncate">
                                     {/* Using IconCode as folder placeholder due to persistent linter issues with IconFolder */}
@@ -153,7 +153,7 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
     return (
         <div
             data-scheme="primary"
-            className="h-72 w-full border border-border dark:border-border-dark rounded-md overflow-hidden bg-bg-light dark:bg-bg-dark"
+            className="h-72 w-full border border-primary rounded-md overflow-hidden bg-bg-light dark:bg-bg-dark"
         >
             <div className="flex h-full">
                 {columns.map((col, index) => (
@@ -166,7 +166,7 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
                 ))}
                 {/* Optional File Preview Column */}
                 {showPreview && lastSelectedItem && (
-                    <div className="h-full w-64 border-r border-border dark:border-border-dark flex-shrink-0 p-4">
+                    <div className="h-full w-64 border-r border-primary flex-shrink-0 p-4">
                         <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">
                             {lastSelectedItem.name}
                         </h3>

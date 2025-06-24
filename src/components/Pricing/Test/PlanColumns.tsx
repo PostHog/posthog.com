@@ -23,7 +23,7 @@ interface PlanData {
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
     return (
         <>
-            <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded-md relative">
+            <div className="flex flex-col h-full border border-primary bg-white dark:bg-accent-dark rounded-md relative">
                 {planData.title === 'Free' && (
                     <div className="absolute -top-6 right-4 !border-2 border-yellow bg-white dark:bg-dark rounded-sm text-center py-1 px-2">
                         <strong className="block text-yellow text-sm">Just pick this one!</strong>
@@ -245,9 +245,9 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                             ></div>
                         </div>
 
-                        <div className="grid grid-cols-12 sm:grid-cols-16 mb-2 border-l border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                            <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
+                        <div className="grid grid-cols-12 sm:grid-cols-16 mb-2 border-l border-primary bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
+                            <div className="col-span-4 bg-accent px-3 py-2 text-sm">
+                                <strong className="text-secondary">Base price</strong>
                             </div>
                             {/* Header */}
                             {mainPlans.map((plan: BillingV2PlanType, idx: number) => {
@@ -256,7 +256,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 return (
                                     <div
                                         className={`main col-span-4 px-3 py-2 text-sm${
-                                            isLast ? ' border-r border-light dark:border-dark' : ''
+                                            isLast ? ' border-r border-primary' : ''
                                         }`}
                                         key={`${plan.key}-base-price`}
                                     >
@@ -281,22 +281,20 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 <>
                                     {/* Feature names */}
                                     <div
-                                        className={`col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm ${
+                                        className={`col-span-4 bg-accent px-3 py-2 text-sm ${
                                             idx_outer === highestPlanFeatures?.length - 1
-                                                ? 'border-b border-light dark:border-dark'
+                                                ? 'border-b border-primary'
                                                 : ''
                                         }`}
                                     >
                                         {feature.description ? (
                                             <Tooltip content={feature.description}>
-                                                <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                <strong className="border-b border-dashed border-primary cursor-help text-secondary">
                                                     {feature.name}
                                                 </strong>
                                             </Tooltip>
                                         ) : (
-                                            <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                {feature.name}
-                                            </strong>
+                                            <strong className="text-secondary">{feature.name}</strong>
                                         )}
                                     </div>
                                     {/* Feature values */}
@@ -307,8 +305,8 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                         return (
                                             <div
                                                 className={`inside col-span-4 px-3 py-2 text-sm ${
-                                                    isLastColumn ? 'border-r border-light dark:border-dark' : ''
-                                                } ${isLastRow ? 'border-b border-light dark:border-dark' : ''}`}
+                                                    isLastColumn ? 'border-r border-primary' : ''
+                                                } ${isLastRow ? 'border-b border-primary' : ''}`}
                                                 key={`${plan.key}-${feature.key}`}
                                             >
                                                 {planFeature ? (
@@ -338,7 +336,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                             ))}
                         </div>
                     </div>
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mt-2 mb-4 rounded">
+                    <div className="border border-primary bg-accent px-4 py-3 mt-2 mb-4 rounded">
                         <p className="mb-2 text-[15px]">
                             The table above compares <span className="bg-yellow/25 p-0.5">platform features</span>{' '}
                             between plans.

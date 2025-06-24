@@ -36,7 +36,7 @@ const Review = ({
     },
 }) => {
     return (
-        <div className="space-y-4 border-t first:border-t-0 border-light dark:border-dark pt-8 first:pt-0 mb-8">
+        <div className="space-y-4 border-t first:border-t-0 border-primary pt-8 first:pt-0 mb-8">
             <div>
                 <p className="text-lg mb-1">
                     <strong>{title}</strong>
