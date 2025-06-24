@@ -127,7 +127,7 @@ export default function Accordion(): JSX.Element {
     const [activeIndex, setActiveIndex] = useState<number | null>(0)
 
     return (
-        <div className="border-border border dark:border-dark bg-accent mx-5 rounded-sm md:hidden mb-6">
+        <div className="border border-primary bg-accent mx-5 rounded-sm md:hidden mb-6">
             {slideButtons.map((slideButton, index) => (
                 <SlideButton
                     key={index}

@@ -103,7 +103,7 @@ function Privacy() {
                         <span className="text-xl">
                             <strong>Semi-important legal notice</strong> from{' '}
                             <Tooltip content={() => <Lawyers />} placement="bottom" className="[&_button]:cursor-auto">
-                                <span className="border-b border-dashed border-dark/50 dark:border-light/60 dark:hover:border-light/80 inline-block !leading-tight">
+                                <span className="border-b border-dashed border-primary inline-block !leading-tight">
                                     our over-zealous legal team
                                 </span>
                             </Tooltip>

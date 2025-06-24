@@ -26,7 +26,7 @@ const Filters = ({ isRefinedClassName = 'bg-primary' }: { isRefinedClassName?: s
                         onClick={() => {
                             refine(item.value)
                         }}
-                        className={`text-sm border border-border rounded-md px-1 flex space-x-1 items-center ${
+                        className={`text-sm border border-primary rounded-md px-1 flex space-x-1 items-center ${
                             item.isRefined ? isRefinedClassName : ''
                         }`}
                     >
@@ -79,7 +79,7 @@ const Search = ({
         <div className={`flex flex-col ${className}`} onMouseDown={(e) => dragControls.start(e)}>
             <Combobox value={null} onChange={handleChange} nullable>
                 <div className="relative">
-                    <div className="bg-white rounded-md border !border-border overflow-hidden relative">
+                    <div className="bg-white rounded-md border !border-primary overflow-hidden relative">
                         <Combobox.Input
                             className="w-full !border-none !text-lg !px-4 !py-2 "
                             onChange={(e) => setQuery(e.target.value)}
@@ -107,7 +107,7 @@ const Search = ({
                         <Combobox.Options
                             static
                             hold
-                            className="w-full mt-2 border border-border rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-60 h-full bg-white"
+                            className="w-full mt-2 border border-primary rounded-md list-none m-0 p-0 overflow-auto z-10 max-h-60 h-full bg-white"
                         >
                             {hits.length === 0 && query !== '' ? (
                                 <div className="py-2 px-4 text-secondary">No results found</div>
@@ -175,7 +175,7 @@ export const WindowSearchUI = ({ initialFilter }: { initialFilter?: string }) =>
             <div ref={ref}>
                 <Search
                     initialFilter={initialFilter}
-                    className="p-3 rounded-md bg-white max-w-screen-md border border-border"
+                    className="p-3 rounded-md bg-white max-w-screen-md border border-primary"
                     onChange={onChange}
                 />
             </div>

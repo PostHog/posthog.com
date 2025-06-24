@@ -30,7 +30,7 @@ const Input = ({
             </label>
             <div>
                 <input
-                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-border'}`}
+                    className={`rounded-md border p-1 ${touched && error ? '!border-red' : '!border-primary'}`}
                     type={type}
                     id={props.name}
                     placeholder={label}

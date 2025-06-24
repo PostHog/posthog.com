@@ -26,8 +26,8 @@ const Horizontal = ({ tabs, onClick, activeTab, className = '', size = 'lg', act
                                 active
                                     ? activeClass !== undefined
                                         ? activeClass
-                                        : 'font-bold z-[1] relative bg-white dark:bg-accent-dark border border-b-2 border-b-white dark:border-b-[#232429] border-primary rounded-br-none rounded-bl-none'
-                                    : 'rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
+                                        : 'font-bold z-[1] relative bg-primary border border-b-2 border-b-primary rounded-br-none rounded-bl-none'
+                                    : 'rounded hover:bg-primary hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all'
                             }`}
                         >
                             <div className="flex items-start mb-auto space-x-2">

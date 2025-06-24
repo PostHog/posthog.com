@@ -27,7 +27,7 @@ const PriorityDropdown = ({ priority, ticketID, setTicket }) => {
                         <IconChevronDown className="w-5" />
                     </span>
                 </Listbox.Button>
-                <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-border">
+                <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-primary">
                     {priorities.map((priority) => {
                         return (
                             <Listbox.Option key={priority} className="px-2 py-1 text-sm" value={priority}>
@@ -84,7 +84,7 @@ const GroupDropdown = ({ groupID, ticketID, setTicket, disabled }) => {
                         )
                     }}
                 </Listbox.Button>
-                <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-border">
+                <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-primary">
                     {groups.map(({ id, name }) => {
                         return (
                             <Listbox.Option key={id} className="px-2 py-1 text-sm" value={id}>
@@ -118,7 +118,7 @@ const StatusDropdown = ({ status, ticketID, setTicket }) => {
                         <IconChevronDown className="w-5" />
                     </span>
                 </Listbox.Button>
-                <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-border">
+                <Listbox.Options className="absolute z-10 whitespace-nowrap right-0 list-none p-0 m-0 mt-1 rounded-md bg-white text-black text-sm font-semibold divide-y divide-border cursor-pointer border border-primary">
                     <Listbox.Option className="px-2 py-1 text-sm" value={'open'}>
                         Open
                     </Listbox.Option>

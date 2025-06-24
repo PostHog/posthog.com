@@ -431,7 +431,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                 className={`size-[572px] aspect-square p-4 bg-${color} text-primary flex-shrink-0 relative`}
                             >
                                 <div className="bg-light size-full rounded-xl px-8 relative overflow-hidden flex flex-col">
-                                    <div className="flex justify-center gap-2 items-end py-4 border-b border-border">
+                                    <div className="flex justify-center gap-2 items-end py-4 border-b border-primary">
                                         <div>{TopicIcon && <TopicIcon className={`size-6 text-${color}`} />}</div>
                                         <h3 className="text-xl !m-0 font-bold">
                                             {menuItem?.name || values?.topic?.attributes?.label}
@@ -462,7 +462,7 @@ const SocialSharing = ({ values, setFieldValue }) => {
                                         )}
                                         {values?.author && (
                                             <div className="absolute bottom-0 -right-4 flex space-x-2 pb-2 items-center">
-                                                <div className="bg-white p-1 border border-border inline-block rounded-full">
+                                                <div className="bg-white p-1 border border-primary inline-block rounded-full">
                                                     <img
                                                         className="size-16 bg-yellow rounded-full"
                                                         src={values.author.attributes?.avatar?.data?.attributes?.url}
@@ -633,7 +633,7 @@ export default function RoadmapForm({
 
     return (
         <form onSubmit={handleSubmit} className="mt-2 mb-6 border-b border-primary pb-8">
-            <div className="bg-white dark:bg-accent-dark rounded-md border border-input overflow-hidden grid grid-cols-2 [&>*]:border-border [&>*]:dark:border-dark">
+            <div className="bg-white dark:bg-accent-dark rounded-md border border-input overflow-hidden grid grid-cols-2 [&>*]:border-primary [&>*]:dark:border-dark">
                 {status === 'complete' && (
                     <div className="col-span-2">
                         <ImageDrop

@@ -168,7 +168,7 @@ const EscalateButton = ({ escalate, escalated }) => {
                         />
                         {showResponse && (
                             <>
-                                <p className="text-sm p-2 mt-4 mb-3 border border-border dark:border-border text-center rounded-md bg-light dark:bg-dark font-semibold">
+                                <p className="text-sm p-2 mt-4 mb-3 border border-primary dark:border-primary text-center rounded-md bg-light dark:bg-dark font-semibold">
                                     Response will come from Max, the support hog
                                 </p>
                                 <div className="flex space-x-2 items-start mb-6">

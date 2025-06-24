@@ -30,7 +30,7 @@ const slideContents = [
 export default function MobileSlides(): JSX.Element {
     const [activeIndex, setActiveIndex] = useState<number | null>(0)
     return (
-        <div className="border-border border dark:border-dark bg-accent rounded-sm md:hidden mb-6">
+        <div className="border border-primary bg-accent rounded-sm md:hidden mb-6">
             {slideButtons.map(({ Icon, color, title }, index) => {
                 const active = index === activeIndex
                 const Slide = slideContents[index]
