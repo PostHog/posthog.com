@@ -63,7 +63,7 @@ Work in the iteration should:
 * have a clear owner in the team
 * have a clear link to the team or company goals
 
-As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
+As one of our values is [Why not now?](/handbook/company/values#why-not-now), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
 
 ### Evaluate success 
 
