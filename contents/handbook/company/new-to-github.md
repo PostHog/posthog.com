@@ -27,7 +27,7 @@ You can take any task linearly from start to finish using this set of tools, tho
 
 You can use any of these features on their own, or use them together. Primarily, PostHog uses issues, pull requests, and actions. If you’re not super familiar with GitHub, just focus on issues and pull requests, as that’s where the bulk of the interesting work happens.
 
-Note: The PostHog handbook covers GitHub issues and pull requests, and suggests [everything should start with a pull request](/handbook/company/communication#github) because it represents one of our values, "[bias for impact](/handbook/company/values#bias-for-impact)".
+Note: The PostHog handbook covers GitHub issues and pull requests, and suggests [everything should start with a pull request](/handbook/company/communication#github) because it represents one of our values, "[Why not now?](/handbook/company/values#why-not-now)".
 
 ## Notifications
 

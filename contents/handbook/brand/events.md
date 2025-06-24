@@ -21,7 +21,7 @@ Our effort to activate and connect builders around the world by helping them inc
 
 ### Geographies
 
-The [pilot program](community-incubator) is starting in tech hubs in North America, UK, and EU outside major capitals (examples include Detroit, Krakow, Guadalajara, and Manchester). After the pilot group, we'll expand to more cities encompassed by other regions and continents. 
+The [pilot program](/community-incubator) is starting in tech hubs in North America, UK, and EU outside major capitals (examples include Detroit, Krakow, Guadalajara, and Manchester). After the pilot group, we'll expand to more cities encompassed by other regions and continents. 
 
 ### Co-working structure
 

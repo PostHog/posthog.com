@@ -16,6 +16,8 @@ Great people at PostHog can take very high level direction, and ship quickly to 
 
 Being the driver means getting stuff done _yourself_. We've had non technical people create hardware products, coding in C++, we've got designers that will write Tailwind and React - rather than just create the file in Figma. Our salespeople answer technical questions without engineers as backup - and if they don't know the answer, they educate themselves more deeply for next time. We like people to go full stack instead to reduce the number of dependencies.
 
+Building a company isn't a solo sport. We're [Ted Lasso](https://en.wikipedia.org/wiki/Ted_Lasso) (although I've not watched to the end, I hope they win) not [Wolf of Wall Street](https://en.wikipedia.org/wiki/The_Wolf_of_Wall_Street_(2013_film)). We expect you to take high ownership of the _company_ and _your team_ being successful. This means when you see something wrong, you fix it or give direct feedback - it's not ok to watch your colleagues fail.
+
 ## Make it public
 
 We default to transparency with everything we work on. That means we make a lot of things public: [our code](https://github.com/posthog/posthog), our handbook, [our roadmap](/handbook/strategy/roadmap), [how we pay](/handbook/people/compensation) (or even [let go of](/handbook/people/offboarding)) people, [what our strategy is](/handbook/why-does-posthog-exist), and [who we have raised money from](/handbook/strategy/investors).
