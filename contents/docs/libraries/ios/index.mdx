@@ -146,7 +146,7 @@ Since version 3.28.0, you can provide a `BeforeSendBlock` function when initiali
 
 > **⚠️ Note:** This replaces the deprecated `propertiesSanitizer` option and provides more flexibility in modifying events. You can achieve the same functionality as `propertiesSanitizer` by using a `BeforeSendBlock` that mutates the event's properties in place. 
 
-> **🚨 Warning:** Amending and sampling events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
+> **🚨 Warning:** Amending and sampling events is advanced functionality that requires careful implementation. Core PostHog features may require 100% of unmodified events to function properly. We recommend only modifying or sampling your own custom events if possible, and preserving all PostHog internal events in their original form.
 
 ### Redacting information in events
 
