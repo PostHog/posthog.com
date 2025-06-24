@@ -219,7 +219,7 @@ config.setBeforeSend { event in
         if Double.random(in: 0...1) < 0.1 {
             event.properties["$sample_type"] = ["sampleByEvent"]
             event.properties["$sample_threshold"] = 0.1
-            event.properties["$sample_events"] = ["Sampled Event"]
+            event.properties["$sampled_events"] = ["Sampled Event"]
             return event
         }
         return nil
