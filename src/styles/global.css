@@ -71,7 +71,7 @@
     .light[data-skin='classic'] {
         main a,
         .article-content a:not(.cta) {
-            @apply text-[#111] underline;
+            @apply text-[#111];
         }
     }
 
@@ -137,16 +137,16 @@
     }
 
     .dark [data-scheme='primary'] {
-        --bg: #111111;
-        --accent: #65675e;
-        --border: #3a3b37;
-        --input-bg: #1b1c1a;
+        --bg: #1e1f23;
+        --accent: #2d2e37;
+        --border: #3e424f;
+        --input-bg: #25262b;
         --input-bg-hover: #222320;
-        --input-border: #4d4f46;
-        --input-border-hover: #5c5e54;
-        --text-primary: #fdfdf8;
-        --text-secondary: #d2d3cc;
-        --text-muted: #9ea096;
+        --input-border: #32343f;
+        --input-border-hover: #b0b4c4;
+        --text-primary: #b0b4c4;
+        --text-secondary: #7a7e8c;
+        --text-muted: #626674;
 
         .hover-invert:hover,
         .hover-invert[data-state='open'],
@@ -163,14 +163,14 @@
     }
 
     .dark [data-scheme='secondary'] {
-        --bg: #1b1c1a;
-        --accent: #4d4f46;
-        --border: #3a3b37;
-        --input-bg: #111111;
-        --input-border: #2c2d2a;
-        --text-primary: #eeefe9;
-        --text-secondary: #d2d3cc;
-        --text-muted: #9ea096;
+        --bg: #25262b;
+        --accent: #32343f;
+        --border: #4a4e5c;
+        --input-bg: #1e1f24;
+        --input-border: #3e424f;
+        --text-primary: #edeef4;
+        --text-secondary: #b0b4c4;
+        --text-muted: #6e7281;
 
         .hover-invert:hover,
         .hover-invert[data-state='open'],
@@ -187,14 +187,14 @@
     }
 
     .dark [data-scheme='tertiary'] {
-        --bg: #222320;
-        --accent: #5c5e54;
-        --border: #4d4f46;
-        --input-bg: #1b1c1a;
-        --input-border: #3a3b37;
-        --text-primary: #e5e7e0;
-        --text-secondary: #bfc1b7;
-        --text-muted: #8a8c81;
+        --bg: #2d2e37;
+        --accent: #383a47;
+        --border: #626674;
+        --input-bg: #1e1f23;
+        --input-border: #3e424f;
+        --text-primary: #edeef4;
+        --text-secondary: #b0b4c4;
+        --text-muted: #6e7281;
 
         .hover-invert:hover,
         .hover-invert[data-state='open'],

@@ -297,10 +297,11 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                         <motion.div
                             ref={windowRef}
                             data-app="AppWindow"
+                            data-scheme="tertiary"
                             className={`@container absolute overflow-hidden !select-auto  ${
                                 focusedWindow === item
-                                    ? 'shadow-2xl border-light-7 dark:border-dark-7'
-                                    : 'shadow-lg border-light-4 dark:border-dark-4'
+                                    ? 'shadow-2xl border-primary'
+                                    : 'shadow-lg border-input dark:border-primary'
                             } ${dragging ? '[&_*]:select-none' : ''} ${
                                 item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
                             }`}
@@ -359,7 +360,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 <div
                                     data-scheme="tertiary"
                                     onDoubleClick={handleDoubleClick}
-                                    className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-border cursor-move"
+                                    className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input dark:border-primary cursor-move"
                                     onPointerDown={(e) => controls.start(e)}
                                 >
                                     <MenuBar
