@@ -9,7 +9,6 @@ import { IconBold, IconLink } from 'components/OSIcons'
 import TeamMember from 'components/TeamMember'
 import { useApp } from '../../context/App'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { teamQuery } from 'components/People'
 import { graphql, useStaticQuery } from 'gatsby'
 
 type FieldsetItem = {
@@ -228,3 +227,46 @@ export default function Credits(): JSX.Element {
         </>
     )
 }
+
+const teamQuery = graphql`
+    query TeamQuery {
+        team: allSqueakProfile(
+            filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
+            sort: { fields: startDate, order: ASC }
+        ) {
+            teamMembers: nodes {
+                squeakId
+                avatar {
+                    url
+                }
+                biography
+                lastName
+                firstName
+                companyRole
+                country
+                color
+                location
+                pronouns
+                pineappleOnPizza
+                teams {
+                    data {
+                        id
+                        attributes {
+                            name
+                            slug
+                        }
+                    }
+                }
+            }
+        }
+        allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+            nodes {
+                id
+                name
+                miniCrest {
+                    gatsbyImageData(width: 20, height: 20)
+                }
+            }
+        }
+    }
+`

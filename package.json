@@ -79,7 +79,6 @@
         "gatsby-plugin-postcss": "^5.20.0",
         "gatsby-plugin-react-helmet": "^5.20.0",
         "gatsby-plugin-react-svg": "^3.1.0",
-        "gatsby-plugin-sass": "^5.20.0",
         "gatsby-plugin-sitemap": "^5.20.0",
         "gatsby-plugin-smoothscroll": "^1.2.0",
         "gatsby-remark-autolink-headers": "^5.20.0",
@@ -112,6 +111,7 @@
         "node-fetch": "^2.6.1",
         "p-limit": "3.1.0",
         "parse-link-header": "^2.0.0",
+        "patch-package": "^8.0.0",
         "pluralize": "^8.0.0",
         "posthog-js": "1.255.1",
         "posthog-node": "^4.2.0",
@@ -175,8 +175,7 @@
         "typescript": "^4.0.2",
         "unist-util-visit": "^1.4.0",
         "yup": "^0.32.11",
-        "zustand": "^4.4.5",
-        "patch-package": "^8.0.0"
+        "zustand": "^4.4.5"
     },
     "devDependencies": {
         "@babel/core": "^7.15.5",

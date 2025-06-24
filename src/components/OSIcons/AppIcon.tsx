@@ -171,14 +171,14 @@ export const AppLink = ({ Icon, type, color, background, label, url, className, 
                     {children}
                 </span>
                 <figcaption className="text-sm font-medium leading-tight">
-                    <span
-                        className={`inline-block ${
-                            background
-                                ? background
-                                : 'bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] dark:bg-[rgba(1,1,1,0.75)] dark:group-hover:bg-[rgba(1,1,1,1)]'
-                        }  rounded-[2px] px-0.5 py-0 leading-tight`}
-                    >
-                        <span className="skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px]">
+                    <span className={`inline-block leading-tight`}>
+                        <span
+                            className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${
+                                background
+                                    ? background
+                                    : 'bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] dark:bg-[rgba(1,1,1,0.75)] dark:group-hover:bg-[rgba(1,1,1,1)]'
+                            }  rounded-[2px] px-0.5 py-0`}
+                        >
                             {label}
                             {extension && <span className="opacity-75">.{extension}</span>}
                         </span>
