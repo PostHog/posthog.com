@@ -5,19 +5,24 @@ export const PROSE_CORE = `prose
     prose-a:underline 
     prose-a:font-semibold
     
-    prose-p:mt-0 
     prose-p:leading-normal 
-    prose-p:mb-2 
+    prose-p:mt-2
+    prose-p:mb-0
+
+    prose-ul:mt-2
+    prose-ul:mb-0
     prose-li:leading-normal
 
     prose-h1:tracking-tight
-    prose-h2:tracking-tight
-    prose-h3:tracking-tight
-
     prose-h1:mt-0
-    prose-h2:mt-0
+    prose-h1:mb-2
     
-    max-w-none`
+    prose-h2:mt-4
+    prose-h2:mb-0
+    prose-h2:tracking-tight
+
+    prose-h3:tracking-tight
+    `
 
 export const PROSE = `${PROSE_CORE} `
 

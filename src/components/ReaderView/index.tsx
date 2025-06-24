@@ -440,7 +440,7 @@ function ReaderViewContent({
                                 : undefined
                         }
                     >
-                        <article className={`${getProseClasses(proseSize)} relative overflow-x-hidden`}>
+                        <article className={`${getProseClasses(proseSize)} max-w-none relative overflow-x-hidden`}>
                             <div
                                 ref={contentRef}
                                 className={`relative ${padding ? 'p-4' : ''} mx-auto transition-all ${

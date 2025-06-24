@@ -19,7 +19,7 @@ export default function Pricing() {
     const products = initialProducts.filter((product) => productsToShow.includes(product.name.toLowerCase()))
     console.log(products)
     return (
-        <div>
+        <div className="mt-4">
             <OSTable
                 columns={[
                     { name: '', width: '50px', align: 'center' as const },

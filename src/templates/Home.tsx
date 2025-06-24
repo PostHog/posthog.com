@@ -125,7 +125,7 @@ const Products = () => {
     ]
 
     return (
-        <div>
+        <div className="mt-4">
             <OSTable columns={columns} rows={rows} size="sm" />
             <div className="bg-accent p-1 text-right text-xs border-primary border-x border-b">
                 <Link to="/products" state={{ newWindow: true }} className="hover:underline">
@@ -284,7 +284,7 @@ const Customers = () => {
         },
     ]
 
-    return <OSTable columns={columns} rows={rows} size="sm" />
+    return <OSTable columns={columns} rows={rows} size="sm" className="mt-4" />
 }
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
@@ -299,6 +299,16 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <HappyHog />,
+    },
+    {
+        name: 'Headline',
+        kind: 'flow',
+        props: [],
+        Editor: () => (
+            <h1 className="flex items-end gap-1">
+                welcome to <Logo />
+            </h1>
+        ),
     },
     {
         name: 'Products',

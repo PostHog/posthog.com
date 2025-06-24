@@ -213,7 +213,7 @@ export default function Roadmap({ frame }: { frame: boolean }) {
     `)
     return (
         <OSTabs
-            className="relative flex flex-col h-full min-h-0"
+            className="relative flex flex-col h-full min-h-0 mt-4"
             frame={frame}
             tabs={[
                 {

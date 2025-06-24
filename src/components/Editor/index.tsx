@@ -26,6 +26,7 @@ import { IconLink } from '../OSIcons/Icons'
 import useProduct from 'hooks/useProduct'
 import { SearchProvider } from './SearchProvider'
 import { SearchBar } from './SearchBar'
+import { getProseClasses } from '../../constants/index'
 
 interface EditorProps {
     slug?: string
@@ -65,6 +66,7 @@ interface EditorProps {
     }[]
     onSortChange?: (sort: string) => void
     defaultSortValue?: string
+    proseSize?: 'sm' | 'base' | 'lg'
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -106,6 +108,7 @@ export function Editor({
     sortOptions,
     onSortChange,
     defaultSortValue,
+    proseSize = 'sm',
     ...other
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
@@ -411,7 +414,7 @@ export function Editor({
                                     )}
                                 </div>
                             )}
-                            <div className={`prose p-4 mx-auto max-w-${maxWidth}`}>
+                            <article className={`${getProseClasses(proseSize)} p-4 mx-auto max-w-${maxWidth}`}>
                                 {title && (
                                     <h1 className="text-2xl font-bold">
                                         {title}
@@ -421,7 +424,7 @@ export function Editor({
                                 <div className="relative">
                                     <div ref={searchContentRef}>{children}</div>
                                 </div>
-                            </div>
+                            </article>
                         </ScrollArea>
                     </main>
                 </div>
