@@ -1,6 +1,8 @@
 import JSWebErrorTracking from './web-install-error-tracking.mdx'
 import NextJSInstall from '../../integrate/_snippets/nextjs/install-nextjs.mdx'
 import NextJSInstallServer from '../../integrate/_snippets/nextjs/install-nextjs-server.mdx'
+import Tab from 'components/Tab'
+import HostingSourceMaps from './hosting-source-maps.mdx'
 
 ## Client-side installation
 
@@ -119,28 +121,38 @@ export const onRequestError = async (err, request, context) => {
 
 You can find a full example of both this and client-side error tracking in our [Next.js error monitoring tutorial](/tutorials/nextjs-error-monitoring).
 
-## Uploading source maps
+## Stack traces
+
+PostHog needs access to source maps to properly display stack traces. Use the `posthog-cli` to inject and upload your source maps to PostHog.
+
 
 import CLIDownload from "./cli/download.mdx"
 import CLIAuthenticate from "./cli/authenticate.mdx"
 import CLIInject from "./cli/inject.mdx"
 import CLIUpload from "./cli/upload.mdx"
 
-If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. The `posthog-cli` handles this process.
+<details>
+  <summary>Hosting source maps instead of uploading</summary>
 
-### Download the CLI
+  <HostingSourceMaps />
+
+</details>
+
+### 1. Download the CLI
 
 <CLIDownload/>
 
-### Authenticate the CLI
+### 2. Authenticate the CLI
 
 <CLIAuthenticate />
 
-### Generate source maps
+### 3. Generate source maps
 
-Next.js disables source maps by default during production builds to prevent you from leaking your source on the client. You can opt-in with the `productionBrowserSourceMaps` configuration flag.
+Next.js disables source maps by default during production builds to prevent you from leaking your source on the client. 
+You can opt-in with the `productionBrowserSourceMaps` configuration flag.
 
-Set an environment variable to control this so we only generate source maps when building locally (or if you are running a build in CI).
+Set an environment variable to control this so we only generate source maps when building locally 
+(or if you are running a build in CI).
 
 ```file=.env.local
 GENERATE_SOURCEMAPS=true
@@ -151,24 +163,51 @@ Once we have the environment variable set, we can configure Next.js to generate 
 ```js file=next.config.js 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable source maps explicitly
   productionBrowserSourceMaps: process.env.GENERATE_SOURCEMAPS === 'true'
 };
 
 export default nextConfig;
 ```
 
-### Inject
+For server-side code, you need to configure webpack to generate source maps.
 
-Once you've built your application and have bundled assets, inject the context required by PostHog to associate the maps with the served code.
+```ts file=next.config.js
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  // Enable source maps explicitly
+  productionBrowserSourceMaps: process.env.GENERATE_SOURCEMAP !== 'false',
+
+    // Configure webpack for server side source map generation
+    webpack: (config, { dev }) => { // +
+        if (!dev) { // +
+        config.devtool = 'source-map'; // +
+        } // +
+        return config // +
+    }, // +
+};
+```
+
+### 4. Inject the source maps
+
+Once you've built your application and have bundled assets, inject the context required by PostHog 
+to associate the maps with the served code. By default, Next.js will generate the source maps into the `.next` directory.
 
 <CLIInject path="./.next" />
 
-### Upload
+You can confirm that the source maps have been injected by checking for comments like this in your minified code:
+
+```js
+//# sourceMappingURL=page-3719ae17309d681f.js.map
+```
+
+### 5. Upload the source maps
 
 You will then need to upload the modified assets to PostHog.
 
 <CLIUpload path="./.next" />
 
-You must also ensure that the modified asset bundles uploaded to PostHog are the ones your site serves. If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces. 
+You must also ensure that the modified asset bundles uploaded to PostHog are the ones your site serves. If you serve a copy of the bundled assets as they were prior to running `posthog-cli sourcemap inject`, we won't be able to use the uploaded sourcemap to unminify or demangle your stack traces.
 
-Setting up a CI step to build your app and upload the source maps is a good way to ensure this.
+Setting up a CI step to build your app and upload the source maps is a good way to ensure this. 
