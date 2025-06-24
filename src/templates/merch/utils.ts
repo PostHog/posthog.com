@@ -92,7 +92,7 @@ export function urlBuilder({ width, height, baseUrl, format }: IUrlBuilderArgs<u
         format = `auto`
     }
 
-    const [basename, version] = baseUrl.split(`?`)
+    let [basename, version] = baseUrl.split(`?`)
 
     const dot = basename.lastIndexOf(`.`)
     let ext = ``
