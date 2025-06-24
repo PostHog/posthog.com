@@ -1,5 +1,4 @@
 import cntl from 'cntl'
-import { DarkModeToggle } from 'components/DarkModeToggle'
 import { Edit, Issue, MobileMenu } from 'components/Icons/Icons'
 import Link from 'components/Link'
 import React from 'react'
@@ -90,7 +89,7 @@ export default function Navigation({
                         />
                     </ul>
                 )}
-                <DarkModeToggle className="m-0" />
+                toggle removed (scss)
             </div>
         </div>
     )
