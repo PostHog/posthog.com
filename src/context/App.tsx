@@ -264,7 +264,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
                 undefined
             )
-            if (nextFocusedWindow) {
+            if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                 navigate(nextFocusedWindow.path)
             } else {
                 window.history.pushState({}, '', '/')
