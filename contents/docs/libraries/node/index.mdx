@@ -235,11 +235,15 @@ Or you can enable debugging to get verbose logs about all the inner workings of 
 client.debug()
 ```
 
-## Using in a short-lived process like AWS Lambda
+## Short-lived processes like serverless environments
 
-PostHogs's client SDKs are all designed to queue and batch requests in the background to optimise API calls and network time. For lambda environments (or also when shutting down a standard Node.js app) we provide a method `shutdown()` which can be awaited and ensures the queued events are all flushed to the API.
+The Node SDK is designed to queue and batch requests in the background to optimize API calls and network time. As serverless environments like AWS Lambda or [Vercel Functions](/docs/libraries/vercel) are short-lived, we provide a few options to ensure all events are captured.
 
-For example:
+First, we recommend using the `captureImmediate` method instead of `capture` to ensure the event is captured before the function shuts down. It guarantees the HTTP request finishes before your function continues (or shuts downs).
+
+Second, we recommend setting `flushAt` to `1` and `flushInterval` to `0` to ensure the events are sent immediately. These set the queue to flush immediately, both in terms of events and time.
+
+Third, we provide a method `shutdown()` which can be awaited and ensures the queued events are all flushed to the API. For example:
 
 ```node
 export const handler() {
@@ -259,6 +263,8 @@ export const handler() {
   await client.shutdown()
 }
 ```
+
+This is also useful for shutting down a standard Node.js app.
 
 ## LLM observability
 

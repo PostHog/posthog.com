@@ -1998,6 +1998,10 @@ export const docsMenu = {
                             url: '/docs/libraries/vue-js',
                         },
                         {
+                            name: 'Vercel',
+                            url: '/docs/libraries/vercel',
+                        },
+                        {
                             name: 'Webflow',
                             url: '/docs/libraries/webflow',
                         },
