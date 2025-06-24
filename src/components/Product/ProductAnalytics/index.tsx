@@ -234,13 +234,33 @@ const faqs = [
 const comparisonColumnCount = 6
 const comparison = [
     {
-        feature: '<strong>Funnels</strong>',
+        feature: '<strong>Insights</strong>',
         companies: {
             Amplitude: '',
             Mixpanel: '',
             Heap: '',
             Pendo: '',
             PostHog: '',
+        },
+    },
+    {
+        feature: 'Ready-made insight types',
+        companies: {
+            Amplitude: true,
+            Mixpanel: true,
+            Heap: true,
+            Pendo: true,
+            PostHog: true,
+        },
+    },
+    {
+        feature: 'SQL mode',
+        companies: {
+            Amplitude: 'Exports only',
+            Mixpanel: 'JQL only',
+            Heap: 'Exports only',
+            Pendo: 'Exports only',
+            PostHog: true,
         },
     },
     {
@@ -274,30 +294,10 @@ const comparison = [
         },
     },
     {
-        feature: 'Sequential step order',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Strict step order',
+        feature: 'Sequential, strict, any step order',
         companies: {
             Amplitude: true,
             Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Any step order',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
             Heap: false,
             Pendo: false,
             PostHog: true,
@@ -394,7 +394,7 @@ const comparison = [
         },
     },
     {
-        feature: '<strong>Path analysis</strong>',
+        feature: '<strong>Dashboards</strong>',
         companies: {
             Amplitude: '',
             Mixpanel: '',
@@ -441,16 +441,6 @@ const comparison = [
             Heap: true,
             Pendo: false,
             PostHog: true,
-        },
-    },
-    {
-        feature: 'Zoom in/out',
-        companies: {
-            Amplitude: true,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: false,
         },
     },
     {
@@ -514,7 +504,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Include and exclude Wildcards',
+        feature: 'Include and exclude wildcards',
         companies: {
             Amplitude: false,
             Mixpanel: false,
@@ -544,27 +534,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Regex for path cleaning',
-        companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Max number of steps',
-        companies: {
-            Amplitude: '50',
-            Mixpanel: '120+',
-            Heap: '10',
-            Pendo: '20',
-            PostHog: '20',
-        },
-    },
-    {
-        feature: '<strong>Dashboards</strong>',
+        feature: '<strong>User access</strong>',
         companies: {
             Amplitude: '',
             Mixpanel: '',
@@ -624,7 +594,7 @@ const comparison = [
         },
     },
     {
-        feature: 'Subscribe to dashboards',
+        feature: 'Subscriptions',
         companies: {
             Amplitude: true,
             Mixpanel: true,
@@ -634,52 +604,12 @@ const comparison = [
         },
     },
     {
-        feature: 'Pinned dashboards',
+        feature: 'Pinning and tagging',
         companies: {
             Amplitude: true,
             Mixpanel: true,
             Heap: true,
             Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: '',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: true,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Dashboard & insight tags',
-        companies: {
-            Amplitude: false,
-            Mixpanel: false,
-            Heap: false,
-            Pendo: false,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Webhooks',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: true,
-            PostHog: true,
-        },
-    },
-    {
-        feature: 'Annotations',
-        companies: {
-            Amplitude: true,
-            Mixpanel: true,
-            Heap: false,
-            Pendo: false,
             PostHog: true,
         },
     },
@@ -690,7 +620,7 @@ const comparison = [
             Mixpanel: true,
             Heap: true,
             Pendo: true,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {
@@ -700,7 +630,7 @@ const comparison = [
             Mixpanel: '50+',
             Heap: '40+',
             Pendo: '40+',
-            PostHog: '50+',
+            PostHog: 'We have a whole CDP product!',
         },
     },
 ]
