@@ -18,6 +18,7 @@ interface ReaderViewContextType {
     isNavVisible: boolean
     isTocVisible: boolean
     fullWidthContent: boolean
+    setFullWidthContent: (value: boolean) => void
     parent: MenuItem
     internalMenu: MenuItem[]
     activeInternalMenu: MenuItem | undefined
@@ -32,7 +33,7 @@ interface ReaderViewContextType {
 
 const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
     if (!array) return false
-    
+
     for (let i = 0; i < array.length; i++) {
         const element = array[i]
 
@@ -76,7 +77,7 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     const { setMenu } = useWindow()
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(true)
-    const { fullWidthContent } = useLayoutData()
+    const [fullWidthContent, setFullWidthContent] = useState(false)
     const { pathname } = useLocation()
     const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
     const [lineHeightP, setLineHeightP] = useState<number | null>(null)
@@ -163,10 +164,22 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
     }, [])
 
+    useEffect(() => {
+        const storedFullWidthContent = localStorage.getItem('fullWidthContent')
+        if (storedFullWidthContent) {
+            setFullWidthContent(storedFullWidthContent === 'true')
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('fullWidthContent', fullWidthContent.toString())
+    }, [fullWidthContent])
+
     const value = {
         isNavVisible,
         isTocVisible,
         fullWidthContent,
+        setFullWidthContent,
         parent,
         internalMenu,
         activeInternalMenu,
