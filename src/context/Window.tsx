@@ -1,5 +1,6 @@
 import { IMenu } from 'components/PostLayout/types'
 import React, { createContext, useContext } from 'react'
+import { AppSetting } from './App'
 
 export interface AppWindow {
     element: React.ReactNode
@@ -53,6 +54,7 @@ export interface AppWindow {
         y: number
     }
     minimal: boolean
+    appSettings?: AppSetting
 }
 
 interface WindowProviderProps {
@@ -78,7 +80,16 @@ interface WindowContextType {
     dragControls?: any
 }
 
-export const Context = createContext<WindowContextType>({})
+export const Context = createContext<WindowContextType>({
+    goBack: () => {
+        // No-op default implementation
+    },
+    goForward: () => {
+        // No-op default implementation
+    },
+    canGoBack: false,
+    canGoForward: false,
+})
 
 export const Provider = ({
     appWindow,

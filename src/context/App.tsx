@@ -88,7 +88,23 @@ export const Context = createContext<AppContextType>({
     expandWindow: () => {},
 })
 
-const appSettings = {
+export interface AppSetting {
+    size: {
+        min: { width: number; height: number }
+        max: { width: number; height: number }
+        fixed?: boolean
+        autoHeight?: boolean
+    }
+    position?: {
+        center?: boolean
+    }
+}
+
+export interface AppSettings {
+    [key: string]: AppSetting
+}
+
+const appSettings: AppSettings = {
     '/': {
         size: {
             min: {
@@ -204,6 +220,10 @@ const appSettings = {
                 height: 299,
             },
             fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
         },
     },
     search: {
@@ -217,6 +237,9 @@ const appSettings = {
                 height: 369,
             },
             fixed: true,
+        },
+        position: {
+            center: true,
         },
     },
 } as const
@@ -241,7 +264,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
                 undefined
             )
-            if (nextFocusedWindow) {
+            if (nextFocusedWindow && !nextFocusedWindow.minimized) {
                 navigate(nextFocusedWindow.path)
             } else {
                 window.history.pushState({}, '', '/')
@@ -313,15 +336,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     const getPositionDefaults = (key: string, size: { width: number; height: number }, windows: AppWindow[]) => {
+        if (appSettings[key]?.position?.center) {
+            return getDesktopCenterPosition(size)
+        }
+
         if (key.startsWith('ask-max')) {
             return {
                 x: isSSR ? 0 : window.innerWidth - size.width - 20,
                 y: isSSR ? 0 : window.innerHeight - size.height - 20,
             }
-        }
-
-        if (key === 'search') {
-            return getDesktopCenterPosition(size)
         }
 
         const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
@@ -409,6 +432,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                   }
                 : undefined,
             minimal: element.props.minimal ?? false,
+            appSettings: appSettings[element.key],
         }
 
         // Adjust width if window extends beyond right edge

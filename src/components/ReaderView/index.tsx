@@ -364,7 +364,7 @@ function ReaderViewContent({
     padding = true,
     proseSize,
 }) {
-    const { hash } = useLocation()
+    const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
     const {
         isNavVisible,
@@ -391,16 +391,19 @@ function ReaderViewContent({
     }
 
     useEffect(() => {
-        if (hash) {
-            const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]')
-            if (scrollElement) {
-                scrollElement.scrollTo({
-                    top: document.getElementById(CSS.escape(hash.replace('#', '')))?.offsetTop,
-                    behavior: 'smooth',
-                })
-            }
-        }
-    }, [hash])
+        const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]')
+        if (!scrollElement) return
+        scrollElement.scrollTo(
+            hash
+                ? {
+                      top: document.getElementById(CSS.escape(hash.replace('#', '')))?.offsetTop,
+                      behavior: 'smooth',
+                  }
+                : {
+                      top: 0,
+                  }
+        )
+    }, [pathname])
 
     return (
         <SearchProvider>
