@@ -154,13 +154,14 @@ export default function Startups(): JSX.Element {
                 showTitle={false}
                 padding={false}
             >
-                <div className="@container h-full bg-primary dark:bg-dark">
-                    <div className="bg-[#122030] bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png)] bg-cover bg-top-left aspect-[1549/638] text-white p-8 relative min-h-96 flex flex-col justify-center overflow-x-hidden">
+                <div className="@container h-full bg-[#EFF0EB] dark:bg-dark">
+                    <div className="bg-[#122030] bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/startups_rocket_f750a70d99.png)] bg-cover bg-top-left aspect-[1549/638] text-white p-8 relative min-h-96 flex flex-col justify-center w-full">
                         <div className="absolute inset-0 bg-[url(https://res.cloudinary.com/dmukukwp6/image/upload/stars_24a6a0b509.png)] bg-cover" />
+                        <div className="hidden dark:block h-60 bg-gradient-to-b from-[#EFF0EB] to-transparent -bottom-60 left-0 w-full absolute" />
 
                         <div className="relative pb-32 prose-invert prose-sm">
                             <h1 className="flex items-center gap-2.5 mb-0 text-2xl">
-                                <Logo className="h-14 relative -top-px" color="white" noText={false} /> {titleContent}
+                                <Logo className="h-14 relative -top-px" fill="white" /> {titleContent}
                             </h1>
                             <ul className="not-prose my-2">
                                 <li>{creditValue} in PostHog credits</li>

@@ -402,7 +402,7 @@ export function Footer(): JSX.Element {
                     className="left-[calc(50%-40px)] w-20 h-12 inline-flex justify-center items-center absolute z-10 rounded bg-light dark:bg-dark px-2 pt-1.5 pb-1 mb-1 border border-b-3 border-primary hover:bg-accent hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                 >
                     <span className="inline-block">
-                        <Logo noText={true} />
+                        <Logo noText />
                     </span>
                 </Link>
             </div>

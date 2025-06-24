@@ -150,7 +150,11 @@ export default function Explorer({
                                         </div>
                                     </div>
                                 )}
-                                <div className={`${getProseClasses()} h-full ${padding ? 'relative p-4' : ''}`}>
+                                <div
+                                    className={`${getProseClasses()} max-w-none h-full ${
+                                        padding ? 'relative p-4' : ''
+                                    }`}
+                                >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}
                                 </div>

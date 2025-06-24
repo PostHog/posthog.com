@@ -73,7 +73,7 @@ export default function Breadcrumbs({
 }: BreadcrumbsProps): JSX.Element {
     return (
         <ul className={`list-none p-0 m-0 flex ${className}`}>
-            {logo && <Crumb url="/" title={<Logo className="w-5 h-4" color={linkColor} noText />} />}
+            {logo && <Crumb url="/" title={<Logo className="w-5 h-4" fill={linkColor} noText />} />}
             {children ||
                 (crumbs &&
                     crumbs.map((crumb, index) => {

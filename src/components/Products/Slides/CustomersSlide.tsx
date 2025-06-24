@@ -86,7 +86,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
     return (
         <div className="h-full p-12 bg-light dark:bg-dark">
             <h2 className="text-4xl font-bold text-primary mb-6 text-center">
-                Customers who love <Logo noText color="primary" className="h-14 inline-block relative -top-1 mx-1" />{' '}
+                Customers who love <Logo noText fill="primary" className="h-14 inline-block relative -top-1 mx-1" />{' '}
                 {productName}
             </h2>
             <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" />

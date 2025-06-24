@@ -228,7 +228,7 @@ export function useMenuData(): MenuType[] {
         {
             trigger: (
                 <>
-                    <Logo noText className="size-6 fill-primary text-primary" color="black" classic />
+                    <Logo noText className="size-6" fill="primary" classic />
                 </>
             ),
             items: [
@@ -284,14 +284,12 @@ export function useMenuData(): MenuType[] {
                     link: '/pricing?tab=addons',
                 },
                 {
-                    type: 'item',
-                    label: 'Pricing philosophy',
-                    link: '/pricing?tab=philosophy',
+                    type: 'separator',
                 },
                 {
                     type: 'item',
-                    label: 'How we do sales',
-                    link: '/pricing?tab=sales',
+                    label: 'PostHog for...',
+                    disabled: true,
                 },
                 {
                     type: 'item',
@@ -300,8 +298,29 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
+                    label: 'Startups',
+                    link: '/startups',
+                },
+                {
+                    type: 'item',
                     label: 'Enterprise',
                     link: '/enterprise',
+                },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Bedtime reading',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Pricing philosophy',
+                    link: '/pricing?tab=philosophy',
+                },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/pricing?tab=sales',
                 },
             ],
         },

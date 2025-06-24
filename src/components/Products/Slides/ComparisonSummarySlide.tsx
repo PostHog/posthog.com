@@ -64,7 +64,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
 
                 <div className="">
                     <h3 className="text-2xl font-bold text-primary mb-4">
-                        Choose <Logo noText color="primary" className="h-12 inline-block -mt-5 mx-1 -mb-2" /> PostHog if
+                        Choose <Logo noText fill="primary" className="h-12 inline-block -mt-5 mx-1 -mb-2" /> PostHog if
                         you want:
                     </h3>
                     <ul className="p-0 mb-2 list-none">
