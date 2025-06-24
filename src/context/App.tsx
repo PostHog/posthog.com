@@ -117,6 +117,9 @@ const appSettings: AppSettings = {
             },
             fixed: false,
         },
+        position: {
+            center: true,
+        },
     },
     '/start': {
         size: {
@@ -129,6 +132,9 @@ const appSettings: AppSettings = {
                 height: 580,
             },
             fixed: true,
+        },
+        position: {
+            center: true,
         },
     },
     '/signup': {
@@ -156,6 +162,9 @@ const appSettings: AppSettings = {
             },
             fixed: true,
         },
+        position: {
+            center: true,
+        },
     },
     '/why': {
         size: {
@@ -168,6 +177,9 @@ const appSettings: AppSettings = {
                 height: 575,
             },
             fixed: true,
+        },
+        position: {
+            center: true,
         },
     },
     '/credits': {
@@ -182,6 +194,9 @@ const appSettings: AppSettings = {
             },
             fixed: true,
         },
+        position: {
+            center: true,
+        },
     },
     '/demo': {
         size: {
@@ -194,6 +209,9 @@ const appSettings: AppSettings = {
                 height: 682,
             },
             fixed: false,
+        },
+        position: {
+            center: true,
         },
     },
     'ask-max': {
