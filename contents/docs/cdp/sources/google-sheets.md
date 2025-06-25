@@ -13,20 +13,19 @@ The Google Sheets connector can link your spreadsheets in to PostHog to be query
 
 ## Syncing a worksheet
 
-Each Google Sheets source on PostHog will be a single spreadsheet where each worksheet will be represented as a schema.
+Each Google Sheets source in PostHog is a single spreadsheet where each worksheet is represented as a schema.
 
-> Changing the name of a worksheet will require you to setup the schema on PostHog to continue syncing it. We recommend not renaming worksheets.
+> Changing the name of a worksheet will require you to setup the schema in PostHog again to continue syncing it. We recommend not renaming worksheets.
 
-The first row of the spreadsheet will be treated as the column names for the table. 
-
+The first row of the spreadsheet is treated as the column names for the table. 
 
 ### Configure Google Sheets
 
 To connect to your Google Sheet, PostHog uses a Google Cloud service account. Thus, you must grant this service account access to your Google Sheet by following these steps:
 
-1. Open your Google Sheet
+1. Open your Google Sheet.
 2. Navigate to **Share**.
-3. Share the sheet with our service account be entering `google-sheets@posthog-external.iam.gserviceaccount.com` into the **Add people** field (we only require "Viewer" permissions to sync the sheet)
+3. Share the sheet with our service account by entering `google-sheets@posthog-external.iam.gserviceaccount.com` into the **Add people** field. We only require "Viewer" permissions to sync the sheet.
 
 
 ### Configuring PostHog
