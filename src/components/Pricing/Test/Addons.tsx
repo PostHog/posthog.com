@@ -256,9 +256,11 @@ export const Addons = (props) => {
 
     return (
         <section>
+            <SectionHeader>
+                <h2>Add-ons</h2>
+            </SectionHeader>
             <div className="grid @lg:grid-cols-3 gap-8">
                 <div className="@lg:col-span-2">
-                    <h3 className="mb-2">Add-ons</h3>
                     <p className="">
                         Specialized functionality are offered as add-ons so you never pay for things you don't need.
                     </p>

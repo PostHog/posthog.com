@@ -183,15 +183,15 @@ const PricingExperiment = ({
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
 
-            <div className="@xl:grid grid-cols-16 mb-12">
-                <div className="not-prose col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @xl:border-b border-primary">
+            <div className="@xl:grid grid-cols-16 mb-6 @5xl:mb-12">
+                <div className="not-prose col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @5xl:border-b border-primary">
                     <div className="@xl:hidden mb-2">
                         <Header />
                     </div>
                     <ImageSlider images={images} showDisclaimer={true} className="aspect-square" id="pricing-slider" />
                 </div>
 
-                <div className="@container col-span-8 @5xl:col-span-7 @6xl:col-span-8 @xl:border-b border-primary @xl:pl-4 @3xl:pl-6 @4xl:pl-8 @5xl:mr-6 pb-4">
+                <div className="@container col-span-8 @5xl:col-span-7 @6xl:col-span-8 @5xl:border-b border-primary @xl:pl-4 @3xl:pl-6 @4xl:pl-8 @5xl:mr-6 pb-4">
                     <PricingHero activePlan={activePlan} setActivePlan={setActivePlan} />
                 </div>
 
@@ -209,7 +209,10 @@ const PricingExperiment = ({
             <PlanColumns billingProducts={billingProducts} highlight="free" />
 
             <SectionLayout>
-                <div className="bg-accent p-4 @xl:pb-4 rounded border border-primary flex flex-col @xl:flex-row justify-between @xl:items-center gap-8 -mt-4">
+                <div
+                    data-scheme="secondary"
+                    className="bg-primary p-4 @xl:pb-4 rounded border border-primary flex flex-col @xl:flex-row justify-between @xl:items-center gap-8 -mt-4"
+                >
                     <div>
                         <h3 className="m-0">Give PostHog a try</h3>
                         <p className="text-[15px] mb-0">

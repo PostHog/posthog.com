@@ -383,7 +383,7 @@ export default function Tabbed() {
                 </div>
                 <div className="col-span-12 @2xl:col-span-8 md:pl-0">
                     <div className="flex space-x-12 justify-between items-center mb-2">
-                        <h3 className="m-0 text-lg">Estimate your price</h3>
+                        <h3>Estimate your price</h3>
                         {!activeProduct.name == 'Experiments' && (
                             <p className="m-0 opacity-70 text-sm font-bold pr-3">Subtotal</p>
                         )}
@@ -401,7 +401,8 @@ export default function Tabbed() {
                     />
                 </div>
 
-                <div className="col-span-12 py-2 md:border-t border-primary">
+                <div className="hidden @2xl:block col-span-4" />
+                <div className="col-span-12 @2xl:col-span-8 py-2 md:border-t border-primary">
                     <h4 className="mb-0.5 md:mb-1 font-normal text-sm opacity-70">Platform add-ons</h4>
 
                     {platform.addons
@@ -456,7 +457,10 @@ export default function Tabbed() {
                         })}
                 </div>
             </div>
-            <div className="flex items-center justify-between p-3 bg-accent rounded relative">
+            <div
+                data-scheme="secondary"
+                className="flex items-center justify-between p-3 bg-primary rounded relative border border-primary"
+            >
                 <div>
                     <h3 className="m-0 text-[15px]">Estimated total</h3>
                     <p className="text-sm opacity-60 mb-0">for all products & add-ons</p>

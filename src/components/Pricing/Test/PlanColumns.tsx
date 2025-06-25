@@ -174,7 +174,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
         <>
             <section id="plans" className={`${section} mt-8 !mb-12`}>
                 <SectionHeader>
-                    <h3>Compare plans</h3>
+                    <h2>Compare plans</h2>
                 </SectionHeader>
                 <div className="mt-4 -mx-4 @2xl:-mx-6 @5xl:mx-0 px-4 @5xl:px-0 mb-4 @5xl:mb-0">
                     <ScrollArea>
