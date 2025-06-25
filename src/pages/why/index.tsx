@@ -60,7 +60,7 @@ function Slide({ slide }: { slide: any }) {
                     </div>
                     <h2 className="text-xl font-bold mb-1" dangerouslySetInnerHTML={{ __html: slide.title }} />
                     <p
-                        className="text-[15px] text-secondary text-center text-balance"
+                        className="text-[15px] text-secondary text-center text-balance mb-0 leading-normal"
                         dangerouslySetInnerHTML={{ __html: slide.subtitle }}
                     />
                 </div>
@@ -259,11 +259,11 @@ export default function ProductAnalyticsCustomers(): JSX.Element {
                 }
             >
                 {slideIndex === 0 ? (
-                    <div className="flex flex-col flex-1 items-center w-full">
+                    <div className="not-prose flex flex-col flex-1 items-center w-full">
                         <Slide slide={slide} />
                     </div>
                 ) : (
-                    <ScrollArea className="flex-1 w-full flex flex-col items-center">
+                    <ScrollArea className="not-prose flex-1 w-full flex flex-col items-center">
                         <Slide slide={slide} />
                     </ScrollArea>
                 )}

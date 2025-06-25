@@ -11,9 +11,11 @@ import {
     IconBook,
     IconTableOfContents,
     IconPlay,
+    IconBookmark,
 } from '@posthog/icons'
 import { useWindow } from '../../context/Window'
 import SearchBar from 'components/Editor/SearchBar'
+import Tooltip from 'components/RadixUI/Tooltip'
 interface HeaderBarProps {
     isNavVisible?: boolean
     isTocVisible?: boolean
@@ -94,15 +96,22 @@ export default function HeaderBar({
                 <div className="flex items-center gap-px relative">
                     {rightActionButtons}
                     {showSearch && searchContentRef && (
-                        <OSButton variant="ghost" icon={<IconSearch />} onClick={toggleSearch} />
+                        <Tooltip trigger={<OSButton variant="ghost" icon={<IconSearch />} onClick={toggleSearch} />}>
+                            Search this page
+                        </Tooltip>
                     )}
-                    {showBookmark && <OSButton variant="ghost" icon={<IconBook />} />}
+                    {showBookmark && (
+                        <Tooltip trigger={<OSButton variant="ghost" icon={<IconBookmark />} />}>
+                            Bookmark this page
+                        </Tooltip>
+                    )}
                     {showSearch && searchContentRef && (
                         <SearchBar
                             contentRef={searchContentRef}
                             visible={searchOpen}
                             onClose={toggleSearch}
-                            className="bottom-0 right-0 translate-y-full"
+                            dataScheme="secondary"
+                            className="-bottom-2 right-4 translate-y-full bg-primary"
                         />
                     )}
                 </div>

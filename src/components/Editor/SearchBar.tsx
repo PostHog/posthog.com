@@ -10,9 +10,16 @@ interface SearchBarProps {
     onClose: () => void
     contentRef: React.RefObject<HTMLElement>
     className?: string
+    dataScheme?: string
 }
 
-export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose, contentRef, className }) => {
+export const SearchBar: React.FC<SearchBarProps> = ({
+    visible,
+    onClose,
+    contentRef,
+    className,
+    dataScheme = 'primary',
+}) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
     const markedRef = useRef(null)
@@ -103,11 +110,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose, contentR
 
     return (
         <div
-            className={`absolute bg-accent w-64 p-1.5 rounded-b border border-primary border-t-0 z-10 flex items-center gap-1 ${className}`}
+            data-scheme={dataScheme}
+            className={`absolute w-64 p-1.5 border border-t-0 border-primary rounded-b z-10 flex items-center gap-1 ${className}`}
         >
             <input
                 placeholder="Search this page..."
-                className="w-full p-1 rounded border border-input text-primary text-sm"
+                className="w-full p-1 rounded border border-input text-primary text-sm bg-light dark:bg-dark"
                 value={inputValue}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
@@ -119,7 +127,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({ visible, onClose, contentR
                     onClose()
                 }}
             />
-            <OSButton variant="ghost" size="xs" icon={<IconX />} onClick={onClose} />
+            <OSButton variant="ghost" size="xs" icon={<IconX />} onClick={onClose} className="rounded-full !p-1.5" />
         </div>
     )
 }

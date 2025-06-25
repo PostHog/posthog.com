@@ -334,7 +334,8 @@ export function Editor({
                             visible={showSearch}
                             onClose={closeSearch}
                             contentRef={searchContentRef}
-                            className="-top-px right-8"
+                            dataScheme="secondary"
+                            className="bg-primary -top-px right-8"
                         />
 
                         <ScrollArea>
