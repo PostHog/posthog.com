@@ -95,7 +95,7 @@ const unsubCartItemsChange = useCartStore.subscribe(
     (state) => state.cartItems,
     (cartItems) => {
         const subtotal = cartItems?.reduce((prev, curr) => {
-            return prev + curr.price * curr.count
+            return prev + (curr.kit ? 0 : curr.price) * curr.count
         }, 0)
         const cartCount = cartItems?.length
             ? cartItems.map((item) => item.count).reduce((prev, curr) => prev + curr)

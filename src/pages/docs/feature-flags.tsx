@@ -84,7 +84,7 @@ export const Content = ({ quickLinks = false }) => {
                     <ResourceItem
                         type="Guide"
                         title="Feature flags API"
-                        description="Evaluate and update with the /decide/ endpoint"
+                        description="Evaluate and update with the /flags/ endpoint"
                         url="/tutorials/api-feature-flags"
                     />
                     <ResourceItem

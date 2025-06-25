@@ -1,6 +1,7 @@
 import JSWebErrorTracking from './web-install-error-tracking.mdx'
 import NextJSInstall from '../../integrate/_snippets/nextjs/install-nextjs.mdx'
 import NextJSInstallServer from '../../integrate/_snippets/nextjs/install-nextjs-server.mdx'
+import NextJsUploadSourceMaps from './nextjs-upload-source-maps.mdx'
 
 ## Client-side installation
 
@@ -12,7 +13,7 @@ import NextJSInstallServer from '../../integrate/_snippets/nextjs/install-nextjs
 
 Next.js uses [error boundaries](https://nextjs.org/docs/app/building-your-application/routing/error-handling#using-error-boundaries) to handle uncaught exceptions by rendering a fallback UI instead of the crashing components.
 
-To set one up, create a `error.tsx` file in any of your route directories. This triggers when there is an error rendering your component and should look like this: 
+To set one up, create a `error.tsx` file in any of your route directories. This triggers when there is an error rendering your component and should look like this:
 
 ```tsx file=error.tsx
 "use client";  // Error boundaries must be Client Components
@@ -80,7 +81,7 @@ To capture errors that occur in your server-side code, you can set up a [`instru
 Importantly, you need to:
 
 1. Set up a `posthog-node` client in your server-side code. See our doc on [setting up Next.js server-side analytics](/docs/libraries/next-js#server-side-analytics) for more.
-2. Check the request is running in the `nodejs` runtime to ensure PostHog works. 
+2. Check the request is running in the `nodejs` runtime to ensure PostHog works.
 3. Get the `distinct_id` from the cookie to connect the error to a specific user.
 
 This looks like this:
@@ -100,7 +101,7 @@ export const onRequestError = async (err, request, context) => {
     if (request.headers.cookie) {
       const cookieString = request.headers.cookie
       const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
-      
+
       if (postHogCookieMatch && postHogCookieMatch[1]) {
         try {
           const decodedCookie = decodeURIComponent(postHogCookieMatch[1])
@@ -118,3 +119,9 @@ export const onRequestError = async (err, request, context) => {
 ```
 
 You can find a full example of both this and client-side error tracking in our [Next.js error monitoring tutorial](/tutorials/nextjs-error-monitoring).
+
+## Uploading source maps
+
+If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces.
+
+<NextJsUploadSourceMaps/>

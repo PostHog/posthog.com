@@ -731,6 +731,10 @@ export const handbookSidebar = [
                 url: '/handbook/content/newsletter',
             },
             {
+                name: 'Newsletter ads',
+                url: '/handbook/content/newsletter-ads',
+            },
+            {
                 name: 'YouTube',
                 url: '/handbook/content/youtube',
             },
@@ -1074,6 +1078,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing/open-source-sponsorship',
             },
             {
+                name: 'ICP scoring',
+                url: '/handbook/growth/marketing/icp',
+            },
+            {
                 name: 'Dashboard templates',
                 url: '/handbook/growth/marketing/templates',
             },
@@ -1296,7 +1304,11 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/yc-onboarding',
                     },
                     {
-                        name: 'Contracts',
+                        name: 'Contract Rules',
+                        url: '/handbook/growth/sales/contract-rules',
+                    },
+                    {
+                        name: 'Creating Contracts',
                         url: '/handbook/growth/sales/contracts',
                     },
                     {
@@ -2016,8 +2028,8 @@ export const docsMenu = {
                             url: '/docs/api/capture',
                         },
                         {
-                            name: 'Decide',
-                            url: '/docs/api/decide',
+                            name: 'Flags',
+                            url: '/docs/api/flags',
                         },
                         {
                             name: 'Queries',
@@ -2428,6 +2440,10 @@ export const docsMenu = {
                                     name: 'Configuring Slack',
                                     url: '/docs/self-host/configure/slack',
                                 },
+                                {
+                                    name: 'Data egress',
+                                    url: '/docs/self-host/configure/data-egress',
+                                },
                             ],
                         },
                         {
@@ -2451,6 +2467,10 @@ export const docsMenu = {
                         {
                             name: 'Overview',
                             url: '/docs/migrate',
+                        },
+                        {
+                            name: 'Managed migrations',
+                            url: '/docs/migrate/managed-migrations',
                         },
                         {
                             name: 'Migrate to PostHog Cloud',
@@ -2587,9 +2607,18 @@ export const docsMenu = {
                             url: '/docs/privacy',
                         },
                         {
-                            name: 'GDPR guidance',
+                            name: 'Data collection',
+                            url: '/docs/privacy/data-collection',
+                        },
+                        {
+                            name: 'Data storage',
+                            url: '/docs/privacy/data-storage',
+                        },
+                        {
+                            name: 'GDPR compliance',
                             url: '/docs/privacy/gdpr-compliance',
                         },
+
                         {
                             name: 'HIPAA guidance',
                             url: '/docs/privacy/hipaa-compliance',
@@ -2601,14 +2630,6 @@ export const docsMenu = {
                         {
                             name: 'SOC 2',
                             url: '/handbook/company/security#soc-2',
-                        },
-                        {
-                            name: 'Data egress & compliance',
-                            url: '/docs/privacy/egress',
-                        },
-                        {
-                            name: 'Data deletion',
-                            url: '/docs/privacy/data-deletion',
                         },
                         {
                             name: 'Ad blockers',
@@ -3303,10 +3324,6 @@ export const docsMenu = {
                     url: '/docs/experiments/new-experimentation-engine',
                     icon: 'IconTestTube',
                     color: 'green',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Data warehouse',
@@ -3320,6 +3337,21 @@ export const docsMenu = {
                 },
                 {
                     name: 'Under the hood',
+                },
+                {
+                    name: 'Traffic allocation',
+                    url: '/docs/experiments/traffic-allocation',
+                    icon: 'IconPeople',
+                    color: 'orange',
+                },
+                {
+                    name: 'Sample size and running time',
+                    url: '/docs/experiments/sample-size-running-time',
+                    icon: 'IconDashboard',
+                    color: 'blue',
+                },
+                {
+                    name: 'Bayesian method',
                 },
                 {
                     name: 'Statistics overview',
@@ -3346,15 +3378,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Traffic allocation',
-                    url: '/docs/experiments/traffic-allocation',
-                    icon: 'IconPeople',
-                    color: 'orange',
+                    name: 'Frequentist method',
                 },
                 {
-                    name: 'Sample size and running time',
-                    url: '/docs/experiments/sample-size-running-time',
-                    icon: 'IconDashboard',
+                    name: 'Overview',
+                    url: '/docs/experiments/frequentist-method',
+                    icon: 'IconBook',
                     color: 'blue',
                 },
             ],
@@ -3389,16 +3418,16 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Monitor errors',
+                    name: 'Monitor issues',
                     url: '/docs/error-tracking/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'Filter and search',
-                    url: '/docs/error-tracking/filter-and-search-issues',
-                    icon: 'IconSearch',
+                    name: 'Manage issues',
+                    url: '/docs/error-tracking/managing-issues',
+                    icon: 'IconWrench',
                     color: 'green',
                 },
                 {
@@ -3411,7 +3440,7 @@ export const docsMenu = {
                     name: 'Cutting costs',
                     url: '/docs/error-tracking/cutting-costs',
                     icon: 'IconPiggyBank',
-                    color: 'red',
+                    color: 'salmon',
                 },
                 {
                     name: 'Troubleshooting and FAQs',

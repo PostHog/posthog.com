@@ -70,7 +70,7 @@ We talk to a lot of founders these days about hiring, and find ourselves saying 
 
 24. If you tell the world what your [teams](/teams) are working on, you’re more likely to get more relevant applicants who say ‘I’d like to work on this’.
 
-25. We rate candidates 1 (Definite no), 2 (No), 3 (Yes), 4 (Definite yes). A mix of 4s and a 2 is better than 3s across the board. [Be ](/newsletter/hiring-at-posthog-lessons#4-a-soft-yes-is-actually-a-no)_[very](/newsletter/hiring-at-posthog-lessons#4-a-soft-yes-is-actually-a-no)_[wary of 3s](/hiring-at-posthog-lessons#4-a-soft-yes-is-actually-a-no) – most of the time they mean ‘no, but I don’t want to say it’.
+25. We rate candidates 1 (Definite no), 2 (No), 3 (Yes), 4 (Definite yes). A mix of 4s and a 2 is better than 3s across the board. Be _[very wary of 3s](/newsletter/hiring-at-posthog-lessons#4-a-soft-yes-is-actually-a-no)_ – most of the time they mean ‘no, but I don’t want to say it’.
 
 26. 90% of culture is getting hiring right in the [first place](/founders/cracked-manifesto#6-nailing-hiring-and-context). You cannot make an uncracked engineer cracked.
 

@@ -16,11 +16,17 @@ function notNull<TValue>(value: TValue | null | undefined): value is TValue {
     return value !== null && value !== undefined
 }
 
-export function getCheckoutUrl(cart: Cart | null): string | null {
+export function getCheckoutUrl(cart: Cart | null, couponCode: string | null): string | null {
     const checkoutUrl = cart?.checkoutUrl
 
     if (!checkoutUrl) {
         return null
+    }
+
+    if (couponCode) {
+        const url = new URL(checkoutUrl)
+        url.searchParams.set('discount', couponCode)
+        return url.toString()
     }
 
     return checkoutUrl
@@ -69,7 +75,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 }
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
-                const quantityAvailable = await getAvailableQuantity(item)
+                const quantityAvailable = item.kit ? 100 : await getAvailableQuantity(item.shopifyId)
 
                 // if it is available for sale, then check if the quantity available is less than
                 // the quantity in the cart. If so, then add to the list with the new quantity
@@ -119,7 +125,7 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 return
             }
 
-            const checkoutUrl = getCheckoutUrl(cart)
+            const checkoutUrl = getCheckoutUrl(cart, discountCode)
             if (checkoutUrl) {
                 window.location.href = checkoutUrl
             }
