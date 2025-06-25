@@ -731,6 +731,10 @@ export const handbookSidebar = [
                 url: '/handbook/content/newsletter',
             },
             {
+                name: 'Newsletter ads',
+                url: '/handbook/content/newsletter-ads',
+            },
+            {
                 name: 'YouTube',
                 url: '/handbook/content/youtube',
             },
@@ -1072,6 +1076,10 @@ export const handbookSidebar = [
             {
                 name: 'Sponsorships',
                 url: '/handbook/growth/marketing/open-source-sponsorship',
+            },
+            {
+                name: 'ICP scoring',
+                url: '/handbook/growth/marketing/icp',
             },
             {
                 name: 'Dashboard templates',
@@ -2461,6 +2469,10 @@ export const docsMenu = {
                             url: '/docs/migrate',
                         },
                         {
+                            name: 'Managed migrations',
+                            url: '/docs/migrate/managed-migrations',
+                        },
+                        {
                             name: 'Migrate to PostHog Cloud',
                             url: '/docs/migrate/migrate-to-cloud',
                         },
@@ -3312,10 +3324,6 @@ export const docsMenu = {
                     url: '/docs/experiments/new-experimentation-engine',
                     icon: 'IconTestTube',
                     color: 'green',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Data warehouse',
@@ -3410,16 +3418,16 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
-                    name: 'Monitor errors',
+                    name: 'Monitor issues',
                     url: '/docs/error-tracking/monitoring',
                     icon: 'IconGraph',
                     color: 'orange',
                     featured: true,
                 },
                 {
-                    name: 'Filter and search',
-                    url: '/docs/error-tracking/filter-and-search-issues',
-                    icon: 'IconSearch',
+                    name: 'Manage issues',
+                    url: '/docs/error-tracking/managing-issues',
+                    icon: 'IconWrench',
                     color: 'green',
                 },
                 {
@@ -3432,7 +3440,7 @@ export const docsMenu = {
                     name: 'Cutting costs',
                     url: '/docs/error-tracking/cutting-costs',
                     icon: 'IconPiggyBank',
-                    color: 'red',
+                    color: 'salmon',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
