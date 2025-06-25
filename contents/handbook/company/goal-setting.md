@@ -44,7 +44,7 @@ This should be done BEFORE the meeting by everyone, independently. During the me
   - What’s stopping you from shipping 2x what you’re shipping now?
 - Growth
   - What single thing would move the needle the most this quarter?
-  - What are users asking for? Which of these are we’re ignoring?
+  - What are users asking for? Which of these are we ignoring?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
   - What are we not talking about enough?
