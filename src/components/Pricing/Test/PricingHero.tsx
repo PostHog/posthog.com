@@ -6,6 +6,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { Link as ScrollLink } from 'react-scroll'
 import * as Icons from '@posthog/icons'
 import FreeTierItem from './FreeTierItem'
+import PlanContent from './PlanContent'
 
 interface PricingHeroProps {
     activePlan: string
@@ -202,6 +203,10 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                         </button>
                     </li>
                 </ul>
+            </div>
+
+            <div className="@5xl:hidden">
+                <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} />
             </div>
 
             <div className="border-t border-primary pt-4 h-px"></div>

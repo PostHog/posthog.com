@@ -198,8 +198,8 @@ const PricingExperiment = ({
                     <PricingHero activePlan={activePlan} setActivePlan={setActivePlan} />
                 </div>
 
-                <aside className="not-prose @xl:col-span-16 @5xl:col-span-5 @6xl:col-span-4">
-                    <div className="bg-light dark:bg-dark rounded-md border border-primary py-4 px-6 h-full">
+                <aside className="hidden @5xl:block not-prose @5xl:col-span-5 @6xl:col-span-4">
+                    <div className="bg-light dark:bg-accent rounded-md border border-primary py-4 px-6 h-full">
                         <div className="flex flex-col @xl:grid grid-cols-2 @5xl:flex justify-between h-full">
                             <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} />
                         </div>
