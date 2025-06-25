@@ -1,3 +1,3 @@
 import React from 'react'
 
-export const Blockquote = (props) => <blockquote {...props} className="p-6 rounded bg-accent border border-primary" />
+export const Blockquote = (props) => <blockquote {...props} className="px-6 rounded bg-accent border border-primary" />

@@ -248,6 +248,44 @@ const textWidthOptions: ToggleOption[] = [
     },
 ]
 
+interface TableOfContentsProps {
+    tableOfContents: any[]
+    contentRef: React.RefObject<HTMLDivElement>
+    title?: string
+    className?: string
+}
+
+const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', className = '' }: TableOfContentsProps) => {
+    if (!tableOfContents || tableOfContents.length === 0) {
+        return null
+    }
+
+    return (
+        <ScrollSpyProvider>
+            <div className={`not-prose ${className}`}>
+                {title && <h4 className="font-semibold text-muted m-0 mb-1 text-sm">{title}</h4>}
+                <ul className="list-none m-0 p-0 flex flex-col">
+                    {tableOfContents.map((navItem) => {
+                        return (
+                            <li className="relative leading-none m-0" key={navItem.url}>
+                                <ElementScrollLink
+                                    id={navItem.url}
+                                    label={navItem.value}
+                                    className=""
+                                    element={contentRef}
+                                    style={{
+                                        paddingLeft: `${navItem.depth || 0}rem`,
+                                    }}
+                                />
+                            </li>
+                        )
+                    })}
+                </ul>
+            </div>
+        </ScrollSpyProvider>
+    )
+}
+
 export default function ReaderView({
     body = {},
     title,
@@ -467,7 +505,11 @@ function ReaderViewContent({
                                     data-scheme="secondary"
                                     className="@4xl/app-reader:hidden p-4 mb-4 bg-primary rounded border border-primary"
                                 >
-                                    inline table of contents
+                                    <TableOfContents
+                                        tableOfContents={tableOfContents}
+                                        contentRef={contentRef}
+                                        title="Contents"
+                                    />
                                 </div>
                                 {body.type === 'mdx' ? (
                                     <div className={'@container'}>
@@ -510,33 +552,10 @@ function ReaderViewContent({
                                 >
                                     <ScrollArea className="px-4" fadeOverflow>
                                         {tableOfContents && tableOfContents?.length > 0 && (
-                                            <ScrollSpyProvider>
-                                                <div>
-                                                    <h4 className="font-semibold text-muted m-0 mb-1 text-sm">
-                                                        Jump to:
-                                                    </h4>
-                                                    <ul className="list-none m-0 p-0 flex flex-col">
-                                                        {tableOfContents.map((navItem) => {
-                                                            return (
-                                                                <li
-                                                                    className="relative leading-none m-0"
-                                                                    key={navItem.url}
-                                                                >
-                                                                    <ElementScrollLink
-                                                                        id={navItem.url}
-                                                                        label={navItem.value}
-                                                                        className={``}
-                                                                        element={contentRef}
-                                                                        style={{
-                                                                            paddingLeft: `${navItem.depth || 0}rem`,
-                                                                        }}
-                                                                    />
-                                                                </li>
-                                                            )
-                                                        })}
-                                                    </ul>
-                                                </div>
-                                            </ScrollSpyProvider>
+                                            <TableOfContents
+                                                tableOfContents={tableOfContents}
+                                                contentRef={contentRef}
+                                            />
                                         )}
                                     </ScrollArea>
                                 </motion.div>
