@@ -31,7 +31,7 @@ const addons = [
                 group: 'Benefits',
                 items: [
                     {
-                        name: 'Send event data to a data warehouse',
+                        name: 'Send event data to a data warehouse!!',
                         description:
                             'If you have a data lake or data warehouse, you can use destinations to send PostHog event data there, while ensuring you still have that data in PostHog to perform your analytics processes.',
                         icon: IconAdvanced,

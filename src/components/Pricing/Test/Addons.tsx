@@ -13,6 +13,8 @@ import { Link as ScrollLink } from 'react-scroll'
 import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import groupBy from 'lodash.groupby'
+import { Accordion } from 'components/RadixUI/Accordion'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface AddonProps {
     name: string
@@ -164,7 +166,7 @@ const Features = ({ title, addonName, features }: { title: string; addonName: st
                 <legend>{title}</legend>
 
                 <div
-                    className={`grid grid-cols-2 gap-8 ${
+                    className={`grid @xl:grid-cols-2 gap-8 ${
                         addonName === 'Teams' ? '@lg:grid-cols-2' : '@lg:grid-cols-2'
                     }`}
                 >
@@ -207,7 +209,7 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }: Add
                         <>
                             <span className="opacity-70 text-sm">Pricing starts at</span>{' '}
                             <strong>
-                                ${plan?.tiers?.find((tier) => tier.unit_amount_usd !== '0')?.unit_amount_usd}
+                                ${plan?.tiers?.find((tier: Tier) => tier.unit_amount_usd !== '0')?.unit_amount_usd}
                             </strong>
                             <span className="opacity-70 text-sm">/{unit}</span>
                         </>
@@ -249,137 +251,112 @@ const Addon = ({ name, icon_key, description, plans, unit, type, ...other }: Add
     )
 }
 
-export const Addons = (props) => {
+export const Addons = (props: AddonsProps) => {
     const products = useProducts()
     const productAddons = products.flatMap((product) => product.addons)
     const allAddons = productAddons
 
+    const accordionItems = allAddons.map((addon: any) => {
+        const { name, description, plans, unit, type, features } = addon
+        const plan = plans[plans.length - 1]
+        const freeAllocation = plan?.tiers?.find((tier: Tier) => tier.unit_amount_usd === '0')?.up_to
+        const featuresByCategory = groupBy(features, (feature: Feature) => feature.category || 'Features')
+        const customAddon = predefinedAddons.find((a) => a.name === name)
+
+        return {
+            value: name.toLowerCase().replace(/\s+/g, '-'),
+            trigger: name,
+            content: (
+                <div className="grid grid-cols-12 gap-8">
+                    <div className="col-span-12 @4xl:col-span-3">
+                        <p className="text-[15px] mb-4">{description}</p>
+                        {plan?.flat_rate ? (
+                            <div className="flex items-baseline">
+                                <strong className="text-xl">${plan.unit_amount_usd.replace('.00', '')}</strong>
+                                <span className="text-[15px] opacity-60">/mo</span>
+                            </div>
+                        ) : (
+                            <>
+                                <span className="opacity-70 text-sm">Pricing starts at</span>{' '}
+                                <strong>
+                                    ${plan?.tiers?.find((tier: Tier) => tier.unit_amount_usd !== '0')?.unit_amount_usd}
+                                </strong>
+                                <span className="opacity-70 text-sm">/{unit}</span>
+                            </>
+                        )}
+                        {freeAllocation && (
+                            <p className="m-0 text-green text-sm">
+                                First <strong>{freeAllocation?.toLocaleString()}</strong> {unit}s/mo free
+                            </p>
+                        )}
+                    </div>
+                    <div className="col-span-12 @4xl:col-span-9">
+                        <div className={` ${name === 'Teams' ? '' : ''}`}>
+                            {customAddon
+                                ? customAddon.features?.map((feature: Feature) => {
+                                      return (
+                                          <Features
+                                              key={`${name}-${feature.group}`}
+                                              addonName={name}
+                                              features={feature.items || []}
+                                              title={feature.group || ''}
+                                          />
+                                      )
+                                  })
+                                : Object.keys(featuresByCategory)
+                                      .sort((feature) => (feature === 'Features' ? -1 : 1))
+                                      ?.map((category) => {
+                                          const features = featuresByCategory[category]
+                                          return (
+                                              <Features
+                                                  key={`${name}-${category}`}
+                                                  title={category}
+                                                  addonName={name}
+                                                  features={features}
+                                              />
+                                          )
+                                      })}
+                        </div>
+                        {!plan?.flat_rate && (
+                            <div data-scheme="secondary" className="max-w-[400px] mt-4">
+                                <h5 className="mb-2 text-lg">Pricing breakdown</h5>
+                                <div className="border border-primary rounded divide-y divide-primary bg-primary">
+                                    <PricingTiers plans={plans} type={type} unit={unit} test />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            ),
+        }
+    })
+
     return (
-        <section>
+        <section className="not-prose mb-8 @3xl:mb-12">
             <SectionHeader>
                 <h2>Add-ons</h2>
             </SectionHeader>
-            <div className="grid @lg:grid-cols-3 gap-8">
-                <div className="@lg:col-span-2">
-                    <p className="">
-                        Specialized functionality are offered as add-ons so you never pay for things you don't need.
+            <div className="grid @lg:grid-cols-3 gap-x-8">
+                <div className="@lg:col-span-2 @4xl:col-span-full">
+                    <p className="mb-6">
+                        Specialized functionality are offered as add-ons so you never pay for things you don't need. You
+                        can subscribe to them individually inside your PostHog account.
                     </p>
                 </div>
-                <aside className="justify-self-end">
+                <aside className="justify-self-end @4xl:hidden">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/add_ons_a700ab577f.png"
                         alt="Add-ons"
-                        className="object-contain"
+                        className="object-contain -mt-4 @3xl:-mt-8"
                     />
                 </aside>
+                <Accordion
+                    items={accordionItems}
+                    className="@container col-span-full"
+                    triggerClassName="px-2 @xl:px-4"
+                    contentClassName="p-2 @xl:p-4"
+                />
             </div>
-
-            {/*
-            <section className="">
-                <div className="flex flex-col-reverse md:flex-row gap-4">
-                </div>
-                {allAddons.map((addon: any) => {
-                    const { name, description, plans, unit, type, features } = addon
-                    const plan = plans[plans.length - 1]
-                    const freeAllocation = plan?.tiers?.find((tier: Tier) => tier.unit_amount_usd === '0')?.up_to
-                    const featuresByCategory = groupBy(features, (feature: Feature) => feature.category || 'Features')
-                    const customAddon = predefinedAddons.find((a) => a.name === name)
-
-                    return (
-                        <div
-                            key={name}
-                            className="pb-8"
-                            id={name.toLowerCase().replace(/\s+/g, '-')}
-                        >
-                            <div className="sticky top-0 border-b border-primary py-2 mb-2 bg-primary">
-                                <h2 className="mb-0 text-lg">{name}</h2>
-                            </div>
-                            <div className="grid grid-cols-12 gap-8">
-                                <div className="col-span-12 @4xl:col-span-3">
-                                    <p className="text-[15px]">{description}</p>
-                                    {plan?.flat_rate ? (
-                                        <div className="flex items-baseline">
-                                            <strong className="text-xl">${plan.unit_amount_usd.replace('.00', '')}</strong>
-                                            <span className="text-[15px] opacity-60">/mo</span>
-                                        </div>
-                                    ) : (
-                                        <>
-                                            <span className="opacity-70 text-sm">Pricing starts at</span>{' '}
-                                            <strong>
-                                                $
-                                                {plan?.tiers?.find((tier: Tier) => tier.unit_amount_usd !== '0')?.unit_amount_usd}
-                                            </strong>
-                                            <span className="opacity-70 text-sm">/{unit}</span>
-                                        </>
-                                    )}
-                                    {freeAllocation && (
-                                        <p className="m-0 text-green text-sm">
-                                            First <strong>{freeAllocation?.toLocaleString()}</strong> {unit}s/mo free
-                                        </p>
-                                    )}
-                                </div>
-                                <div className="col-span-12 @4xl:col-span-9">
-                                    <div
-                                    className={` ${
-                                        name === 'Teams' ? '' : ''
-                                    }`}
-                                >
-                                    {customAddon
-                                        ? customAddon.features?.map((feature: Feature) => {
-                                              return (
-                                                  <Features
-                                                      key={`${name}-${feature.group}`}
-                                                      addonName={name}
-                                                      features={feature.items || []}
-                                                      title={feature.group || ''}
-                                                  />
-                                              )
-                                          })
-                                        : Object.keys(featuresByCategory)
-                                              .sort((feature) => (feature === 'Features' ? -1 : 1))
-                                              ?.map((category) => {
-                                                  const features = featuresByCategory[category]
-                                                  return (
-                                                      <Features
-                                                          key={`${name}-${category}`}
-                                                          title={category}
-                                                          addonName={name}
-                                                          features={features}
-                                                      />
-                                                  )
-                                              })}
-                                </div>
-                                {!plan?.flat_rate && (
-                                    <div data-scheme="secondary" className="max-w-[400px] mt-4">
-                                        <h5 className="mb-2 text-lg">Pricing breakdown</h5>
-                                        <div className="border border-primary rounded divide-y divide-primary bg-primary">
-                                            <PricingTiers plans={plans} type={type} unit={unit} test />
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
-                            </div>
-                        </div>
-                    )
-                })}
-                <div className="my-12 border-t border-primary pt-6 flex flex-col items-center">
-                    <p>Subscribe to add-ons after signing up.</p>
-
-                    <CallToAction
-                        type="primary"
-                        size="lg"
-                        width="64"
-                        to={`https://app.posthog.com/signup`}
-                        className="animate-grow-sm"
-                    >
-                        Get started
-                    </CallToAction>
-                </div>
-            </section>
-            */}
-            <Link to="/addons" className="font-bold">
-                Explore add-ons
-            </Link>
         </section>
     )
 }

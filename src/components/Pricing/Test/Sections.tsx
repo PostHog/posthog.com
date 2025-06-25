@@ -14,7 +14,7 @@ export const SectionLayout = ({ id = '', children }) => (
 )
 
 export const SectionHeader = ({ children }) => (
-    <header className="not-prose border-b pb-2 mb-6 border-primary">{children}</header>
+    <header className="not-prose border-b pb-2 mb-4 @3xl:mb-6 border-primary">{children}</header>
 )
 
 export const SectionColumns = ({ children }) => <div className="grid md:grid-cols-3 md:py-4">{children}</div>
