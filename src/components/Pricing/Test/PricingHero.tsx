@@ -203,11 +203,11 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                 </ul>
             </div>
 
-            <div className="@5xl/reader:hidden not-prose border border-primary rounded-md p-4 mb-4 bg-light dark:bg-accent">
+            <div className="@5xl/reader-content:hidden not-prose border border-primary rounded-md p-4 mb-4 bg-light dark:bg-accent">
                 <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} isMainColumn />
             </div>
 
-            <div className="hidden @5xl/reader:block border-t border-primary pt-4 h-px"></div>
+            <div className="hidden @5xl/reader-content:block border-t border-primary pt-4 h-px"></div>
 
             <div
                 className={`not-prose @container transition-all rounded-md border ${

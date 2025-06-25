@@ -321,7 +321,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
             {isNavVisible && (
                 <motion.div
                     id="nav"
-                    className="hidden @2xl:block flex-shrink-0 overflow-hidden mb-[-47px]"
+                    className="hidden @2xl/app-reader:block flex-shrink-0 overflow-hidden mb-[-47px]"
                     initial={{ width: '250px' }}
                     animate={{
                         width: '250px',
@@ -407,7 +407,7 @@ function ReaderViewContent({
 
     return (
         <SearchProvider>
-            <div className="@container w-full h-full flex flex-col">
+            <div className="@container/app-reader w-full h-full flex flex-col">
                 {/* <DebugContainerQuery /> */}
                 {/* First row - Header */}
                 <HeaderBar
@@ -450,7 +450,9 @@ function ReaderViewContent({
                         <article className={`${getProseClasses(proseSize)} max-w-none relative overflow-x-hidden`}>
                             <div
                                 ref={contentRef}
-                                className={`@container/reader relative ${padding ? 'p-4' : ''} mx-auto transition-all ${
+                                className={`@container/reader-content relative ${
+                                    padding ? 'p-4' : ''
+                                } mx-auto transition-all ${
                                     fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
                                 }`}
                             >
@@ -463,7 +465,7 @@ function ReaderViewContent({
                                 {body.contributors && <ContributorsSmall contributors={body.contributors} />}
                                 <div
                                     data-scheme="secondary"
-                                    className="@4xl:hidden p-4 mb-4 bg-primary rounded border border-primary"
+                                    className="@4xl/app-reader:hidden p-4 mb-4 bg-primary rounded border border-primary"
                                 >
                                     inline table of contents
                                 </div>
@@ -483,7 +485,7 @@ function ReaderViewContent({
                         {showSidebar && isTocVisible && (
                             <motion.div
                                 id="toc"
-                                className="hidden @4xl:block flex-shrink-0 overflow-hidden"
+                                className="hidden @4xl/app-reader:block flex-shrink-0 overflow-hidden"
                                 initial={{ width: '300px' }}
                                 animate={{
                                     width: '300px',
@@ -547,7 +549,7 @@ function ReaderViewContent({
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
                     <motion.div
                         className={`flex-shrink-0 transition-all min-w-0 ${
-                            isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                            isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
                         }`}
                     >
                         {/* this space intentionally left blank */}
@@ -565,7 +567,7 @@ function ReaderViewContent({
                     </div>
                     <motion.div
                         className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
-                            showSidebar && isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[300px]' : 'w-auto'
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >

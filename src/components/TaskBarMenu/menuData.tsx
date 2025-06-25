@@ -51,14 +51,14 @@ const getProductMenuItems = () => {
 
     // Add separator and "All Products" at the bottom
     return [
-        ...products,
-        { type: 'separator' as const },
         {
             type: 'item' as const,
             label: 'All Products',
             link: '/products',
             icon: <IconApps className="text-red size-4" />,
         },
+        { type: 'separator' as const },
+        ...products,
     ]
 }
 
