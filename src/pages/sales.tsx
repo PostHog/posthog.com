@@ -428,7 +428,7 @@ const AccordionItem = ({
         <li
             className={`border-t relative ${
                 isOpen
-                    ? 'active border-transparent bg-white dark:bg-dark rounded shadow-lg z-10 overflow-hidden'
+                    ? 'active border-transparent bg-light dark:bg-dark rounded shadow-lg z-10 overflow-hidden'
                     : 'inactive border-primary first:border-transparent'
             }`}
         >

@@ -42,6 +42,12 @@ module.exports = {
         },
 
         extend: {
+            backgroundColor: {
+                light: '#fff',
+                'accent-light': 'e5e7e0',
+                dark: '#1e1f23',
+                'accent-dark': '#232429',
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'bullet-light':

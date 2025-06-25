@@ -22,7 +22,7 @@ const TeamMemberLink = (person) => {
     return (
         <div className="relative inline-block border-t md:border-t-0 md:border-r border-primary px-4 md:pr-12 pt-8 lg:pt-0">
             <a href={person && `/community/profiles/${squeakId}`} className="flex flex-col gap-2 items-center">
-                <div className="border-2 border-primary p-0.5 bg-white dark:bg-dark rounded-full">
+                <div className="border-2 border-primary p-0.5 bg-light dark:bg-dark rounded-full">
                     <div
                         className={`size-24 rounded-full overflow-hidden mx-auto ${
                             color ? `bg-${color}` : 'bg-orange'

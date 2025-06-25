@@ -21,7 +21,7 @@ export const Tweet = ({ children, className = '', alertMessage }) => {
             className={`tw-tweet max-w-xl bg-white dark:bg-accent-dark border border-transparent dark:border-dark rounded-md shadow-md p-4 mb-8 relative ${className}`}
         >
             <div className="flex items-center space-x-3">
-                <div className="rounded-full border border-primary hover:border-red dark:hover:border-yellow bg-white dark:bg-dark">
+                <div className="rounded-full border border-primary hover:border-red dark:hover:border-yellow bg-light dark:bg-dark">
                     <Link
                         href="https://x.com/james406"
                         externalNoIcon

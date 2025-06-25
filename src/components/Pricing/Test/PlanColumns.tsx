@@ -25,7 +25,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
         <>
             <div className="flex flex-col h-full border border-primary bg-white dark:bg-accent-dark rounded-md relative">
                 {planData.title === 'Free' && (
-                    <div className="absolute -top-6 right-4 !border-2 border-yellow bg-white dark:bg-dark rounded-sm text-center py-1 px-2">
+                    <div className="absolute -top-6 right-4 !border-2 border-yellow bg-light dark:bg-dark rounded-sm text-center py-1 px-2">
                         <strong className="block text-yellow text-sm">Just pick this one!</strong>
                         <p className="text-xs mb-0 text-opacity-75">You can upgrade later.</p>
                     </div>

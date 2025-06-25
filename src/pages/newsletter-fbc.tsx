@@ -215,7 +215,7 @@ function NewsletterFBC(): JSX.Element {
                                     to={issue.url}
                                     state={{ isComingFromAd: true }}
                                     onClick={() => handleNewsletterClick(issue.title)}
-                                    className="group flex flex-col items-center text-center transition-opacity border border-primary rounded bg-white dark:bg-dark relative hover:top-[-1px] hover:scale-[1.005] active:top-[1px] active:scale-[.995]"
+                                    className="group flex flex-col items-center text-center transition-opacity border border-primary rounded bg-light dark:bg-dark relative hover:top-[-1px] hover:scale-[1.005] active:top-[1px] active:scale-[.995]"
                                 >
                                     <div className="w-full mb-1 overflow-hidden rounded-t">
                                         <CloudinaryImage src={issue.image} className="rounded-none" />

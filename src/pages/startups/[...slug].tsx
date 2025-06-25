@@ -292,7 +292,7 @@ export default function Startups(): JSX.Element {
                                                         <li>&lt;2 years old</li>
                                                     </ul>
                                                 ),
-                                                className: 'bg-white dark:bg-dark',
+                                                className: 'bg-light dark:bg-dark',
                                             },
                                         ],
                                     },
@@ -303,7 +303,7 @@ export default function Startups(): JSX.Element {
                                             { content: '1,000 monthly sessions' },
                                             { content: 'One year duration' },
                                             { content: 'One year duration' },
-                                            { content: 'One year duration', className: 'bg-white dark:bg-dark' },
+                                            { content: 'One year duration', className: 'bg-light dark:bg-dark' },
                                         ],
                                     },
                                     {
@@ -313,7 +313,7 @@ export default function Startups(): JSX.Element {
                                             { content: 'None' },
                                             { content: '200,000 MTUs' },
                                             { content: `${creditValue} credit` },
-                                            { content: `${creditValue} credit`, className: 'bg-white dark:bg-dark' },
+                                            { content: `${creditValue} credit`, className: 'bg-light dark:bg-dark' },
                                         ],
                                     },
                                     {
@@ -325,7 +325,7 @@ export default function Startups(): JSX.Element {
                                             { content: <IconX className="size-5 text-red" /> },
                                             {
                                                 content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-white dark:bg-dark',
+                                                className: 'bg-light dark:bg-dark',
                                             },
                                         ],
                                     },
@@ -338,7 +338,7 @@ export default function Startups(): JSX.Element {
                                             { content: <IconX className="size-5 text-red" /> },
                                             {
                                                 content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-white dark:bg-dark',
+                                                className: 'bg-light dark:bg-dark',
                                             },
                                         ],
                                     },
@@ -351,7 +351,7 @@ export default function Startups(): JSX.Element {
                                             { content: <IconX className="size-5 text-red" /> },
                                             {
                                                 content: <IconCheck className="size-5 text-green" />,
-                                                className: 'bg-white dark:bg-dark',
+                                                className: 'bg-light dark:bg-dark',
                                             },
                                         ],
                                     },

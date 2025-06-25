@@ -39,7 +39,7 @@ const TabButton = ({ active, onClick, children, className = '' }) => {
             onClick={onClick}
             className={`px-3 py-2 md:py-1 rounded flex-1 text-[15px] md:text-sm border relative opacity-75 ${
                 active
-                    ? 'bg-white hover:bg-white dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
+                    ? 'bg-white hover:bg-light dark:bg-dark dark:hover:bg-dark text-primary dark:text-primary-dark font-bold border border-primary'
                     : 'border-transparent hover:border hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold text-secondary hover:text-primary dark:hover:text-primary-dark'
             } ${className}`}
         >

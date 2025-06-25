@@ -53,7 +53,7 @@ export function BackInStockForm({ variant, product }: { variant?: VariantProp; p
                     <form onSubmit={handleSubmit} className="flex space-x-2 items-center m-0">
                         <input
                             placeholder="Email"
-                            className="bg-white dark:bg-dark rounded-md border border-input py-1.5 px-2 text-base mt-[2px] w-full"
+                            className="bg-light dark:bg-dark rounded-md border border-input py-1.5 px-2 text-base mt-[2px] w-full"
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}

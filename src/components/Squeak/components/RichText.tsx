@@ -196,7 +196,7 @@ const MentionProfiles = ({ onSelect, onClose, body, ...other }) => {
         >
             <button
                 type="button"
-                className="p-1 rounded-full bg-white dark:bg-dark border border-input absolute top-0.5 right-0.5 z-20"
+                className="p-1 rounded-full bg-light dark:bg-dark border border-input absolute top-0.5 right-0.5 z-20"
                 onClick={onClose}
             >
                 <IconX className="w-3" />

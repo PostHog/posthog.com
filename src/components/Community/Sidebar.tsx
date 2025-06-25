@@ -22,7 +22,7 @@ export const Avatar = (props: { className?: string; src?: string; color?: string
             {props.src ? (
                 <img
                     className={`inline-flex w-full aspect-cover rounded-full ${
-                        props.color ? `bg-${props.color}` : 'bg-white dark:bg-dark'
+                        props.color ? `bg-${props.color}` : 'bg-light dark:bg-dark'
                     }`}
                     alt=""
                     src={props.src}

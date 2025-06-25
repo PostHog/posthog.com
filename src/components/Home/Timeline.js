@@ -190,7 +190,7 @@ export default function Timeline() {
                         return (
                             <div key={year} className="w-[80vw] md:w-[90vw] max-w-5xl shrink-0 mb-4 snap-center">
                                 <h4 className="text-2xl py-1 font-bold text-center">{year}</h4>
-                                <div className="p-4 bg-white dark:bg-dark border border-primary sm:h-auto h-96 overflow-auto snap-x">
+                                <div className="p-4 bg-light dark:bg-dark border border-primary sm:h-auto h-96 overflow-auto snap-x">
                                     <ul role="list" className="py-1 px-0 grid sm:grid-cols-2 md:grid-cols-4 gap-4">
                                         {months.map((month) => {
                                             const items = pastMonths[month]

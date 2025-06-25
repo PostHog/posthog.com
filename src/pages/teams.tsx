@@ -264,7 +264,7 @@ const Teams: React.FC = () => {
                                             key={id}
                                             className={`group relative mb-6 hover:scale-[1.01] active:scale-[1] hover:top-[-.5px] active:top-px flex ${
                                                 searchTerm && index === selectedIndex
-                                                    ? 'ring-2 ring-blue rounded bg-white dark:bg-dark'
+                                                    ? 'ring-2 ring-blue rounded bg-light dark:bg-dark'
                                                     : ''
                                             }`}
                                         >

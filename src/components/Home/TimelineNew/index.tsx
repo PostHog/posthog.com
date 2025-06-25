@@ -80,7 +80,7 @@ function RoadmapDetail({
                     </span>
                 </CallToAction>
             </div>
-            <div className="p-4 bg-white dark:bg-dark">
+            <div className="p-4 bg-light dark:bg-dark">
                 <h3 className="text-lg font-bold mb-1">{activeRoadmap.title}</h3>
                 <Markdown>{activeRoadmap.description}</Markdown>
             </div>

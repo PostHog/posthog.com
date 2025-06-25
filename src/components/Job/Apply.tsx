@@ -234,7 +234,7 @@ export default function Apply({ id, info }) {
                 </div>
                 <div onClick={() => setModalOpen(false)} className="flex flex-start justify-center absolute w-full p-4">
                     <div
-                        className="max-w-xl bg-white dark:bg-dark rounded-md relative"
+                        className="max-w-xl bg-light dark:bg-dark rounded-md relative"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button

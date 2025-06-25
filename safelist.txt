@@ -143,7 +143,6 @@ dark:hover:border-seagreen
 dark:hover:border-sky-blue
 dark:hover:border-teal
 dark:hover:border-yellow
-
 fill-aqua
 fill-aqua/10
 fill-black

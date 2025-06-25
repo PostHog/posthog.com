@@ -168,7 +168,7 @@ export default function Chat(): JSX.Element | null {
                                                         renderChat('#embedded-chat-target', conversation.id)
                                                         setHistoryOpen(false)
                                                     }}
-                                                    className="bg-white dark:bg-dark font-semibold w-full text-left border border-black/20 dark:border-white/20 hover:border-black/30 dark:hover:border-white/30 transition-colors p-1 px-2 rounded text-sm"
+                                                    className="bg-light dark:bg-dark font-semibold w-full text-left border border-black/20 dark:border-white/20 hover:border-black/30 dark:hover:border-white/30 transition-colors p-1 px-2 rounded text-sm"
                                                 >
                                                     {conversation.question}
                                                 </button>

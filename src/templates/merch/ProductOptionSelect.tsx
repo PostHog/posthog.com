@@ -59,7 +59,7 @@ export function ProductOptionSelect(props: ProductOptionSelectProps): React.Reac
                                             <span
                                                 className={cn(
                                                     active ? 'border' : 'border',
-                                                    checked ? 'bg-white dark:bg-dark' : 'border-transparent',
+                                                    checked ? 'bg-light dark:bg-dark' : 'border-transparent',
                                                     'pointer-events-none absolute -inset-px rounded-md'
                                                 )}
                                                 aria-hidden="true"

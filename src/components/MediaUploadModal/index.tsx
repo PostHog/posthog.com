@@ -66,10 +66,10 @@ export default function MediaUploadModal({ open, setOpen }) {
         <Modal open={open} setOpen={setOpen}>
             {open && (
                 <div className="max-w-6xl w-full mx-auto relative p-5 pt-12">
-                    <div className="bg-white dark:bg-dark p-4 rounded-md border border-input relative grid grid-cols-2 gap-x-6">
+                    <div className="bg-light dark:bg-dark p-4 rounded-md border border-input relative grid grid-cols-2 gap-x-6">
                         <button
                             onClick={() => setOpen(false)}
-                            className="absolute right-0 top-0 bg-white dark:bg-dark rounded-full p-2 border border-input translate-x-1/2 -translate-y-1/2"
+                            className="absolute right-0 top-0 bg-light dark:bg-dark rounded-full p-2 border border-input translate-x-1/2 -translate-y-1/2"
                         >
                             <IconX className="size-4 opacity-70 hover:opacity-100 click" />
                         </button>
