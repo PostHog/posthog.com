@@ -321,6 +321,25 @@ const ExpandableCallout = () => {
     )
 }
 
+// Vibe Coding Boxout Component
+const VibeCodingBoxout = () => {
+    return (
+        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 my-8 max-w-2xl mx-auto">
+            <div className="text-left">
+                <h3 className="text-lg font-bold mb-2">DeskHog is optimized for vibe coding</h3>
+                <p className="text-sm text-primary dark:text-primary-dark mb-2">
+                    Don't want to waste time writing C++ and fixing floating-point errors? We gotchu.
+                </p>
+                <p className="text-sm text-primary dark:text-primary-dark">
+                    DeskHog is built with vibe coding in mind. We've prepared some ready-made files to give AI agents
+                    perfect context about DeskHog, plus{' '}
+                    <a href="/tutorials/deskhog-101">a vibe coding guide to help you get started</a>.
+                </p>
+            </div>
+        </div>
+    )
+}
+
 export const ProductDeskHog = () => {
     const { fullWidthContent } = useLayoutData()
     return (
@@ -418,7 +437,6 @@ export const ProductDeskHog = () => {
                         </Link>{' '}
                         while you wait
                     </h3>
-
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/edcbc25d_262b_4590_936a_552c445a2ccb_1812ec3330.png"
@@ -493,6 +511,8 @@ export const ProductDeskHog = () => {
                     </div>
                 </section>
             </div>
+
+            <VibeCodingBoxout />
 
             <section className="py-10">
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
