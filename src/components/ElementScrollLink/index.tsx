@@ -21,7 +21,7 @@ interface ScrollSpyContextType {
 
 const ScrollSpyContext = createContext<ScrollSpyContextType>({
     sections: {},
-    setSectionData: () => {},
+    setSectionData: () => { },
     activeSection: null,
 })
 
@@ -103,7 +103,7 @@ export default function ElementScrollLink({ id, label, element, className = '', 
             {...buttonProps}
             onClick={handleClick}
             className={`
-                text-left text-sm py-1 block relative active:top-px active:scale-[.99]
+                text-left text-sm py-0.5 block relative active:top-px active:scale-[.99]
                 ${isActive ? 'font-semibold text-primary' : 'text-secondary hover:text-primary '} 
                 ${className}
             `}
