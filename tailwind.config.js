@@ -70,6 +70,28 @@ module.exports = {
                 0: '0',
                 100: '100%',
             },
+            borderColor: {
+                light: '#fff',
+                'accent-light': 'e5e7e0',
+                dark: '#1e1f23',
+                'accent-dark': '#232429',
+                button: '#B17816',
+                'button-dark': '#835C19',
+                'button-secondary-dark': '#C78617',
+            },
+            borderRadius: {
+                xs: '2px',
+                sm: '4px',
+                lg: '20px',
+            },
+            borderWidth: {
+                half: '.5px',
+                1: '1px',
+                3: '3px',
+                8: '8px',
+                12: '12px',
+                16: '16px',
+            },
             colors: {
                 'light-1': '#FDFDF8',
                 'light-2': '#EEEFE9',
@@ -213,24 +235,6 @@ module.exports = {
 
             minHeight: {
                 md: '780px',
-            },
-            borderColor: {
-                button: '#B17816',
-                'button-dark': '#835C19',
-                'button-secondary-dark': '#C78617',
-            },
-            borderRadius: {
-                xs: '2px',
-                sm: '4px',
-                lg: '20px',
-            },
-            borderWidth: {
-                half: '.5px',
-                1: '1px',
-                3: '3px',
-                8: '8px',
-                12: '12px',
-                16: '16px',
             },
             padding: {
                 'fluid-video': '56.25%',

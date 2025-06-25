@@ -114,9 +114,9 @@ export default function Link({
         >
             {external ? (
                 <span className="inline-flex justify-center items-center group">
-                    <span className="font-semibold">{children}</span>
+                    <span className="font-semibold underline">{children}</span>
                     <IconArrowUpRight
-                        className={`size-4 text-primary dark:text-primary-dark opacity-50 group-hover:opacity-90 relative ${iconClasses}`}
+                        className={`size-4 text-muted group-hover:text-secondary relative ${iconClasses}`}
                     />
                 </span>
             ) : (

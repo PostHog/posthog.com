@@ -481,3 +481,4 @@ fill-white
 text-brown
 
 
+skin-classic:!border-b-1.5

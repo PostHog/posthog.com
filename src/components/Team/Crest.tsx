@@ -20,13 +20,12 @@ const ModalViewButton = ({
         <button
             type="button"
             onClick={onClick}
-            className={`p-2 px-6 text-sm relative -bottom-[1px] transition-opacity even:-mx-2 ${
-                active
+            className={`p-2 px-6 text-sm relative -bottom-[1px] transition-opacity even:-mx-2 ${active
                     ? `before:absolute before:border-r before:top-0 before:h-full before:border-light dark:before:border-dark before:w-[10px] before:left-0 before:bg-accent dark:before:bg-accent-dark before:z-10
                 after:absolute after:border-l after:top-0 after:h-full after:border-light dark:after:border-dark after:w-[10px] after:right-0 after:bg-accent dark:after:bg-accent-dark before:rounded-br-lg after:rounded-bl-lg before:border-b after:border-b
-                bg-white dark:bg-dark font-bold`
+                bg-light dark:bg-dark font-bold`
                     : 'opacity-70 hover:opacity-100'
-            }`}
+                }`}
         >
             {children}
         </button>
@@ -76,7 +75,7 @@ export default function Crest({
                                 <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
                             </button>
                         </div>
-                        <div className="bg-white dark:bg-dark p-4">
+                        <div className="bg-light dark:bg-dark p-4">
                             {view === 'main' ? (
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="flex items-center justify-center relative group">

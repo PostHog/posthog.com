@@ -25,7 +25,7 @@ const ScrollSpyContext = createContext<ScrollSpyContextType>({
     activeSection: null,
 })
 
-export function ScrollSpyProvider({ children }) {
+export function ScrollSpyProvider({ children }: { children: React.ReactNode }): JSX.Element {
     const [sections, setSections] = useState<Record<string, SectionData>>({})
 
     const setSectionData = (id: string, data: SectionData) => {
@@ -103,8 +103,8 @@ export default function ElementScrollLink({ id, label, element, className = '', 
             {...buttonProps}
             onClick={handleClick}
             className={`
-                text-left 
-                ${isActive ? 'font-semibold text-primary dark:text-primary-dark' : ''} 
+                text-left text-sm py-1 block relative active:top-px active:scale-[.99]
+                ${isActive ? 'font-semibold text-primary' : 'text-secondary hover:text-primary '} 
                 ${className}
             `}
         >

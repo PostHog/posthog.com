@@ -81,7 +81,7 @@ export default function Startups(): JSX.Element {
                                     ),
                                     content: (
                                         <>
-                                            <ol className="mb-0">
+                                            <ol className="m-0">
                                                 <li>Create a PostHog account and add a credit card</li>
                                                 <li>
                                                     After onboarding,{' '}
@@ -114,7 +114,7 @@ export default function Startups(): JSX.Element {
                                     ),
                                     content: (
                                         <>
-                                            <ul className="mb-0">
+                                            <ul className="m-0">
                                                 <li>Startup under 2 years old</li>
                                                 <li>Less than $5 million in funding</li>
                                             </ul>
@@ -137,7 +137,7 @@ export default function Startups(): JSX.Element {
                                     ),
                                     content: (
                                         <>
-                                            <ul className="mb-0">
+                                            <ul className="m-0">
                                                 <li>Credits expire after 12 months</li>
                                                 <li>This deal is not valid with other discounts or offers</li>
                                                 <li>
