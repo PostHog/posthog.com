@@ -44,7 +44,7 @@ module.exports = {
         extend: {
             backgroundColor: {
                 light: '#fff',
-                'accent-light': 'e5e7e0',
+                'accent-light': '#e5e7e0',
                 dark: '#1e1f23',
                 'accent-dark': '#232429',
             },
@@ -72,7 +72,7 @@ module.exports = {
             },
             borderColor: {
                 light: '#fff',
-                'accent-light': 'e5e7e0',
+                'accent-light': '#e5e7e0',
                 dark: '#1e1f23',
                 'accent-dark': '#232429',
                 button: '#B17816',
@@ -170,6 +170,11 @@ module.exports = {
                 secondary: 'var(--secondary)',
                 accent: 'var(--accent)',
                 border: 'var(--border)',
+
+                light: '#fff',
+                'accent-light': '#e5e7e0',
+                dark: '#1e1f23',
+                'accent-dark': '#232429',
 
                 // frame-bg
                 // frame-border

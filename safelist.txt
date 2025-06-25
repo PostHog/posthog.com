@@ -482,3 +482,8 @@ text-brown
 
 
 skin-classic:!border-b-1.5
+
+hover:bg-secondary
+data-[state=open]:bg-secondary
+data-[highlighted]:data-[state=open]:bg-secondary
+data-[highlighted]:bg-text-secondary
