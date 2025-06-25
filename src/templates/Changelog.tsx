@@ -226,7 +226,7 @@ export default function Changelog({ pageContext }) {
             title="Changelog"
             tableOfContents={tableOfContents}
         >
-            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-3 mb-6 text-center">
+            <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded p-3 mb-6 text-center">
                 <p className="m-0 text-sm text-primary dark:text-primary-dark">
                     Want to stay updated with what's coming soon?{' '}
                     <a
