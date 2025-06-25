@@ -14,7 +14,7 @@ const tooltipLookup: Record<string, JSX.Element> = {
     teams: (
         <>
             <h3 className="mb-1 text-base">Team features</h3>
-            <ul className="list-none p-0 divide-y divide-light dark:divide-dark">
+            <ul className="list-none p-0 divide-y divide-primary">
                 <li className="py-1.5 text-sm">Verified events</li>
                 <li className="py-1.5 text-sm">Comments on dashboards and insights</li>
                 <li className="py-1.5 text-sm">Data taxonomy (tags and descriptions)</li>

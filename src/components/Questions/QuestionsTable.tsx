@@ -254,7 +254,7 @@ export const QuestionsTable = ({
             {questionsFiltered
                 ? questionsFiltered.map((question, index) => {
                       return (
-                          <li key={question.id} className="list-none px-[2px] divide-y divide-light dark:divide-dark">
+                          <li key={question.id} className="list-none px-[2px] divide-y divide-primary">
                               <Row
                                   showStatus={showStatus}
                                   className={className}

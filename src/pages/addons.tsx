@@ -247,7 +247,7 @@ const Addons = (): JSX.Element => {
                                 {!plan?.flat_rate && (
                                     <div className="max-w-[400px] mt-8">
                                         <h5 className="mb-2 text-lg">Pricing breakdown</h5>
-                                        <div className="border border-primary rounded divide-y divide-light dark:divide-dark bg-accent">
+                                        <div className="border border-primary rounded divide-y divide-primary bg-accent">
                                             <PricingTiers plans={plans} type={type} unit={unit} test />
                                         </div>
                                     </div>

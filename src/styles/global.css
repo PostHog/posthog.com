@@ -264,7 +264,8 @@
     .bg-input-hover {
         background-color: var(--input-bg-hover);
     }
-    .border-primary {
+    .border-primary,
+    .divide-primary > :not([hidden]) ~ :not([hidden]) {
         border-color: var(--border);
     }
     .border-input {

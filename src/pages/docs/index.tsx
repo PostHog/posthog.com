@@ -79,7 +79,7 @@ const ProductList = () => {
         .filter(Boolean)
 
     return (
-        <ul className="list-none p-0 m-0 max-w-4xl divide-y divide-light dark:divide-dark">
+        <ul className="list-none p-0 m-0 max-w-4xl divide-y divide-primary">
             {products.map((product, index) => (
                 <ProductItem key={index} product={product} />
             ))}

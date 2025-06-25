@@ -91,7 +91,7 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (
                     <Listbox.Options
-                        className={`list-none p-0 m-0 absolute z-20 bg-white max-h-[500px] overflow-auto shadow-md rounded-md divide-y divide-light dark:divide-dark mt-2`}
+                        className={`list-none p-0 m-0 absolute z-20 bg-white max-h-[500px] overflow-auto shadow-md rounded-md divide-y divide-primary mt-2`}
                     >
                         {topicGroups
                             .sort(

@@ -39,7 +39,7 @@ export const SidebarListItem = ({ children }: { children: React.ReactNode }) => 
 export const Discounts = () => (
     <div className="max-w-sm">
         <h4>Discounts</h4>
-        <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
+        <ul className="list-none m-0 p-0 divide-y divide-primary">
             <li className="relative pl-7">
                 <IconRocket className="size-5 absolute left-0 top-0.5 opacity-50" />
                 <strong>Startups</strong>

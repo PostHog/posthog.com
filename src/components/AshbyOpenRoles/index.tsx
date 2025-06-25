@@ -30,7 +30,7 @@ export default function AshbyOpenRoles() {
                 return (
                     <li key={title}>
                         <h3>{title}</h3>
-                        <ul className="list-none p-0 m-0 mt-4 mb-6 divide divide-y divide-light dark:divide-dark">
+                        <ul className="list-none p-0 m-0 mt-4 mb-6 divide divide-y divide-primary">
                             {jobs
                                 .filter((job: OpenRoleType) => job.departmentName === title)
                                 .map((job: OpenRoleType) => {

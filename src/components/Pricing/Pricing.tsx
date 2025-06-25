@@ -137,7 +137,7 @@ const SidebarListItem = ({ children }) => <li className="leading-snug text-[15px
 const Discounts = () => (
     <div className="max-w-sm">
         <h4>Discounts</h4>
-        <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
+        <ul className="list-none m-0 p-0 divide-y divide-primary">
             <li className="relative pl-7">
                 <IconRocket className="size-5 absolute left-0 top-0.5 opacity-50" />
                 <strong>Startups</strong>
@@ -379,7 +379,7 @@ const Pricing = ({ type, plans, unit, className = '' }) => {
     return (
         <div className={`${className} w-full mx-auto max-w-[500px]`}>
             <h3 className="text-lg mb-3">Monthly pricing</h3>
-            <div className="flex flex-col divide-y divide-light dark:divide-dark gap-0.5">
+            <div className="flex flex-col divide-y divide-primary gap-0.5">
                 <PricingTiers plans={plans} unit={unit} type={type} test={true} />
             </div>
         </div>
@@ -425,7 +425,7 @@ const TabAddons = (props) => {
                         })}
                     />
                 </div>
-                <div className="flex-grow divide-y divide-light dark:divide-dark gap-0.5">
+                <div className="flex-grow divide-y divide-primary gap-0.5">
                     <PricingTiers
                         plans={activeAddon.plans}
                         unit={activeAddon.unit}

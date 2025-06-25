@@ -78,7 +78,7 @@ const BenefitsUnexpected: React.FC = () => {
                     </p>
 
                     <p className="font-bold text-[15px] mb-1">Off-site history:</p>
-                    <div className="grid md:inline-grid grid-cols-2 min-w-72 divide-y divide-light dark:divide-dark text-sm [&_*]:py-1 md[&_*]:py-0.5">
+                    <div className="grid md:inline-grid grid-cols-2 min-w-72 divide-y divide-primary text-sm [&_*]:py-1 md[&_*]:py-0.5">
                         <strong>Year</strong>
                         <strong className="!border-t-0">Location</strong>
                         <div>2020</div>

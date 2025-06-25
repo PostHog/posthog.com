@@ -87,7 +87,7 @@ export const Addons = ({ addons, setAddons, volume, activeProduct, analyticsData
     return activeProduct.billingData.addons.length > 0 ? (
         <div>
             <p className="opacity-70 text-sm m-0">Product add-ons</p>
-            <ul className="list-none m-0 p-0 divide-y divide-light dark:divide-dark">
+            <ul className="list-none m-0 p-0 divide-y divide-primary">
                 {activeProduct.billingData.addons
                     .filter((addon) => !addon.inclusion_only)
                     .map((addon) => {

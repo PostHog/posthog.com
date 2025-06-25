@@ -101,7 +101,7 @@ export const TopicsTable = ({ topics, topicGroup, className = '' }) => {
                 <div className="col-span-8 md:col-span-10">{topicGroup}</div>
                 <div className="col-span-4 md:col-span-2">Last active</div>
             </li>
-            <li className="list-none px-[2px] divide-y divide-light dark:divide-dark">
+            <li className="list-none px-[2px] divide-y divide-primary">
                 {topics?.data?.length > 0 &&
                     topics.data.filter(Boolean).map((topic) => {
                         const {
