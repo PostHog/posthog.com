@@ -239,11 +239,11 @@ client.debug()
 
 The Node SDK is designed to queue and batch requests in the background to optimize API calls and network time. As serverless environments like AWS Lambda or [Vercel Functions](/docs/libraries/vercel) are short-lived, we provide a few options to ensure all events are captured.
 
-First, we recommend using the `captureImmediate` method instead of `capture` to ensure the event is captured before the function shuts down. It guarantees the HTTP request finishes before your function continues (or shuts downs).
+First, we recommend using the `captureImmediate` method instead of `capture` to ensure the event is captured before the function shuts down. It guarantees the HTTP request finishes before your function continues (or shuts down).
 
 Second, we recommend setting `flushAt` to `1` and `flushInterval` to `0` to ensure the events are sent immediately. These set the queue to flush immediately, both in terms of events and time.
 
-Third, we provide a method `shutdown()` which can be awaited and ensures the queued events are all flushed to the API. For example:
+Third, we provide a method `shutdown()` which can be awaited to ensure all queued events are sent to the API. For example:
 
 ```node
 export const handler() {
