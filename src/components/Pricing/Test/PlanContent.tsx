@@ -6,11 +6,15 @@ import usePostHog from 'hooks/usePostHog'
 import Modal from 'components/Modal'
 import Lottie from 'react-lottie'
 
-export const FreePlanContent = ({ onFreeTierClick }) => {
+export const FreePlanContent = ({ onFreeTierClick, isMainColumn = false }) => {
     return (
         <div>
-            <h4 className="text-xl mb-0">Free</h4>
-            <p className="text-sm opacity-75">No credit card required</p>
+            {!isMainColumn && (
+                <>
+                    <h4 className="text-xl mb-0">Free</h4>
+                    <p className="text-sm opacity-75">No credit card required</p>
+                </>
+            )}
 
             <ul className="list-none p-0 mb-4 space-y-1">
                 <li className="flex items-start gap-2 text-sm">
@@ -38,20 +42,25 @@ export const FreePlanContent = ({ onFreeTierClick }) => {
     )
 }
 
-export const PaidPlanContent = ({ onFreeTierClick }) => {
+export const PaidPlanContent = ({ onFreeTierClick, isMainColumn = false }) => {
     return (
         <div>
-            <span className="text-70 text-[15px]">From</span>
-            <div className="flex items-baseline">
-                <h4 className="text-xl mb-0">$0</h4>
-                <span className="opacity-70 text-sm">/mo</span>
-            </div>
+            {!isMainColumn && (
+                <>
+                    <span className="text-70 text-[15px]">From</span>
+                    <div className="flex items-baseline">
+                        <h4 className="text-xl mb-0">$0</h4>
+                        <span className="opacity-70 text-sm">/mo</span>
+                    </div>
+                </>
+            )}
+
             <p className="text-sm mt-2">
                 <ScrollLink
                     to="calculator"
                     offset={-120}
                     smooth
-                    className="text-red dark:text-yellow font-semibold text-[15px] cursor-pointer"
+                    className="font-semibold text-[15px] cursor-pointer underline"
                 >
                     Estimate your price
                 </ScrollLink>
@@ -107,7 +116,7 @@ const RegionButton = ({ active, onClick, children }) => {
     )
 }
 
-export default function PlanContent({ activePlan, onFreeTierClick }) {
+export default function PlanContent({ activePlan, onFreeTierClick, isMainColumn = false }) {
     const posthog = usePostHog()
     const [region, setRegion] = useState('us')
     const [signupCountToday, setSignupCountToday] = useState(0)
@@ -176,9 +185,9 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
                 )}
             </Modal>
             {activePlan === 'free' ? (
-                <FreePlanContent onFreeTierClick={onFreeTierClick} />
+                <FreePlanContent onFreeTierClick={onFreeTierClick} isMainColumn={isMainColumn} />
             ) : (
-                <PaidPlanContent onFreeTierClick={onFreeTierClick} />
+                <PaidPlanContent onFreeTierClick={onFreeTierClick} isMainColumn={isMainColumn} />
             )}
             <div className="mt-auto">
                 <div className="mb-4">

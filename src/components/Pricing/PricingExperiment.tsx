@@ -27,7 +27,7 @@ import { PRODUCT_COUNT } from '../../constants'
 import { Calculator } from './Test/Calculator'
 import PricingHero from './Test/PricingHero'
 import CTA from 'components/Home/CTA.js'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+
 export const SidebarList = ({ children }: { children: React.ReactNode }) => (
     <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 )
@@ -182,9 +182,6 @@ const PricingExperiment = ({
     return (
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
-            <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
-
-            <DebugContainerQuery />
 
             <div className="@xl:grid grid-cols-16 mb-12">
                 <div className="not-prose col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @xl:border-b border-primary">
@@ -253,8 +250,6 @@ const PricingExperiment = ({
                     }
                 />
             </section>
-
-            <CTA />
         </>
     )
 }

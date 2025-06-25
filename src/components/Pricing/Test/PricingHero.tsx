@@ -168,9 +168,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                     </div>
                     <div>
                         <a href="#plans" className="inline-block mb-4">
-                            <button className="text-red dark:text-yellow font-semibold cursor-pointer text-sm">
-                                Compare plans
-                            </button>
+                            <button className="cursor-pointer text-sm font-semibold underline">Compare plans</button>
                         </a>
                     </div>
                 </div>
@@ -205,11 +203,11 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                 </ul>
             </div>
 
-            <div className="@5xl:hidden">
-                <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} />
+            <div className="@5xl/reader:hidden not-prose border border-primary rounded-md p-4 mb-4 bg-light dark:bg-accent">
+                <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} isMainColumn />
             </div>
 
-            <div className="border-t border-primary pt-4 h-px"></div>
+            <div className="hidden @5xl/reader:block border-t border-primary pt-4 h-px"></div>
 
             <div
                 className={`not-prose @container transition-all rounded-md border ${

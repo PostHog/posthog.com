@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import OSTabs from 'components/OSTabs'
 import PricingExperiment from 'components/Pricing/PricingExperiment'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Calculator } from 'components/Pricing/Test/Calculator'
@@ -13,6 +12,10 @@ import CTA from 'components/Home/CTA.js'
 import Philosophy from './philosophy'
 import Sales from '../sales'
 import { useLocation } from '@reach/router'
+import SEO from 'components/seo'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
+import { companyMenu } from '../../navs'
 
 export default function Pricing() {
     const [activePlan, setActivePlan] = useState('free')
@@ -125,77 +128,6 @@ export default function Pricing() {
         }
     }, [])
 
-    const tabs = [
-        {
-            value: 'plans',
-            label: 'Plans',
-            content: (
-                <PricingExperiment
-                    activePlan={activePlan}
-                    setActivePlan={setActivePlan}
-                    animateFreeTiers={animateFreeTiers}
-                    setAnimateFreeTiers={setAnimateFreeTiers}
-                    currentModal={currentModal}
-                    setCurrentModal={setCurrentModal}
-                    billingProducts={billingProducts}
-                />
-            ),
-        },
-        {
-            value: 'calculator',
-            label: 'Calculator',
-            content: (
-                <div className="">
-                    <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
-                </div>
-            ),
-        },
-        {
-            value: 'addons',
-            label: 'Add-ons',
-            content: <Addons />,
-        },
-        {
-            value: 'vs',
-            label: 'PostHog vs...',
-            content: <SimilarProducts />,
-        },
-        {
-            value: 'reviews',
-            label: 'Reviews',
-            content: <Reviews />,
-        },
-        {
-            value: 'philosophy',
-            label: 'Pricing philosophy',
-            content: <Philosophy />,
-        },
-        {
-            value: 'sales',
-            label: 'How we do "sales"',
-            content: <Sales />,
-        },
-        {
-            value: 'faq',
-            label: 'FAQ',
-            content: (
-                <>
-                    <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>
-                    <FAQs />
-                    <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
-                        Have another pricing-related question?{' '}
-                        <Link to="/questions/topic/pricing">Ask in our community forum</Link>
-                    </p>
-                </>
-            ),
-        },
-        {
-            value: 'cta',
-            label: 'Shameless CTA',
-            content: <CTA />,
-        },
-    ]
-
     useEffect(() => {
         const params = new URLSearchParams(search)
         const tab = params.get('tab')
@@ -204,5 +136,46 @@ export default function Pricing() {
         }
     }, [search])
 
-    return <OSTabs key={defaultTab} tabs={tabs} defaultValue={defaultTab} />
+    return (
+        <ReaderView
+            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+        >
+            <SEO title="Pricing - PostHog" description="Find out how much it costs to use PostHog" />
+
+            <PricingExperiment
+                activePlan={activePlan}
+                setActivePlan={setActivePlan}
+                animateFreeTiers={animateFreeTiers}
+                setAnimateFreeTiers={setAnimateFreeTiers}
+                currentModal={currentModal}
+                setCurrentModal={setCurrentModal}
+                billingProducts={billingProducts}
+            />
+
+            <div className="">
+                <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
+            </div>
+
+            <Addons />
+
+            <SimilarProducts />
+
+            <Reviews />
+
+            <Philosophy />
+
+            <Sales />
+
+            <div>
+                <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>
+                <FAQs />
+                <p className="my-6 pt-6 relative before:w-48 before:absolute before:top-0 before:left-0 before:border-t before:border-light before:dark:border-dark before:h-px">
+                    Have another pricing-related question?{' '}
+                    <Link to="/questions/topic/pricing">Ask in our community forum</Link>
+                </p>
+            </div>
+
+            <CTA />
+        </ReaderView>
+    )
 }
