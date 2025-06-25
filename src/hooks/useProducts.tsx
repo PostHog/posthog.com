@@ -19,7 +19,7 @@ import {
 import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
 import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'components/Pricing/pricingLogic'
-import { useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { useMemo, useState } from 'react'
 import OSButton from 'components/OSButton'
 import Link from 'components/Link'
