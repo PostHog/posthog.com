@@ -304,6 +304,20 @@ module.exports = {
                     '0%, 100%': { transform: 'rotate(-2deg) translateX(-5px)' },
                     '50%': { transform: 'rotate(2deg) translateX(5px)' },
                 },
+                hide: {
+                    from: { opacity: '1' },
+                    to: { opacity: '0' },
+                },
+                slideIn: {
+                    from: {
+                        transform: 'translateX(calc(100% + var(--viewport-padding)))',
+                    },
+                    to: { transform: 'translateX(0)' },
+                },
+                swipeOut: {
+                    from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
+                    to: { transform: 'translateX(calc(100% + var(--viewport-padding)))' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -317,6 +331,9 @@ module.exports = {
                 slideUp: 'slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1)',
                 'svg-stroke-dashoffset-around': 'svg-stroke-dashoffset-around 2.5s linear infinite',
                 wobble: 'wobble 3s ease-in-out infinite',
+                hide: 'hide 100ms ease-in',
+                slideIn: 'slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1)',
+                swipeOut: 'swipeOut 100ms ease-out',
             },
             containers: {
                 '2xs': '16rem',

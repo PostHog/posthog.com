@@ -12,10 +12,13 @@ import {
     IconTableOfContents,
     IconPlay,
     IconBookmark,
+    IconBookmarkSolid,
 } from '@posthog/icons'
 import { useWindow } from '../../context/Window'
 import SearchBar from 'components/Editor/SearchBar'
 import Tooltip from 'components/RadixUI/Tooltip'
+import Toast from 'components/RadixUI/Toast'
+
 interface HeaderBarProps {
     isNavVisible?: boolean
     isTocVisible?: boolean
@@ -53,9 +56,18 @@ export default function HeaderBar({
 }: HeaderBarProps) {
     const { goBack, goForward, canGoBack, canGoForward } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
+    const [isBookmarked, setIsBookmarked] = useState(false)
 
     const toggleSearch = () => {
         setSearchOpen(!searchOpen)
+    }
+
+    const handleBookmark = () => {
+        setIsBookmarked(!isBookmarked)
+    }
+
+    const handleUndo = () => {
+        setIsBookmarked(!isBookmarked)
     }
 
     return (
@@ -101,9 +113,26 @@ export default function HeaderBar({
                         </Tooltip>
                     )}
                     {showBookmark && (
-                        <Tooltip trigger={<OSButton variant="ghost" icon={<IconBookmark />} />}>
-                            Bookmark this page
-                        </Tooltip>
+                        <Toast
+                            description={() =>
+                                !isBookmarked
+                                    ? 'This page has been saved to your bookmarks.'
+                                    : 'This page has been removed from your bookmarks.'
+                            }
+                            onUndo={handleUndo}
+                        >
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        variant="ghost"
+                                        icon={isBookmarked ? <IconBookmarkSolid /> : <IconBookmark />}
+                                        onClick={handleBookmark}
+                                    />
+                                }
+                            >
+                                {isBookmarked ? 'Remove from bookmarks' : 'Bookmark this page'}
+                            </Tooltip>
+                        </Toast>
                     )}
                     {showSearch && searchContentRef && (
                         <SearchBar
