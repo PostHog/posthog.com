@@ -226,9 +226,9 @@ const PricingExperiment = ({
                 </div>
             </SectionLayout>
 
-            <section className="not-prose bg-primary my-12 -mx-4 @2xl:-mx-6">
+            <SectionLayout id="quote" className="not-prose">
                 <Quote
-                    className="py-12 px-5 bg-black"
+                    className="py-12 px-8 bg-black dark:bg-accent rounded"
                     name={<span className="text-white">Cat Li</span>}
                     title={<span className="text-white">Product & Engineering Lead, Y Combinator</span>}
                     image={
@@ -252,7 +252,7 @@ const PricingExperiment = ({
                         </span>
                     }
                 />
-            </section>
+            </SectionLayout>
         </>
     )
 }

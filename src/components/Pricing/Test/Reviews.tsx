@@ -3,6 +3,7 @@ import { section, SectionHeader } from './Sections'
 import { IconStarFilled, IconStar } from '@posthog/icons'
 import Link from 'components/Link'
 import { graphql, useStaticQuery } from 'gatsby'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 export const Stars = ({ rating }) => {
     return (
@@ -109,12 +110,12 @@ export const Reviews = () => {
     )
 
     return (
-        <section id="g2-reviews" className={`${section} `}>
+        <section id="g2-reviews" className={`not-prose ${section} `}>
             <SectionHeader>
-                <h3 className="mb-2">Latest reviews</h3>
+                <h2>Latest reviews</h2>
             </SectionHeader>
-            <div className="grid md:grid-cols-12 gap-4 md:gap-12 my-6">
-                <div className="col-span-full md:col-span-3">
+            <div className="grid @xl:grid-cols-12 gap-4 @2xl:gap-8 @3xl:gap-12 my-6">
+                <div className="col-span-full @2xl:col-span-3 border-b border-primary pb-4 @2xl:border-b-0">
                     <label className="block font-semibold opacity-70">Overall rating</label>
                     <div className="flex items-baseline gap-1.5">
                         <h3 className="mb-1">{totalRating}</h3>
@@ -128,7 +129,7 @@ export const Reviews = () => {
                         </Link>
                     </p>
                 </div>
-                <div className="col-span-full md:col-span-9">
+                <div className="col-span-full @2xl:col-span-9">
                     {recentReviews.nodes.map((review) => (
                         <Review key={review.id} {...review.attributes} />
                     ))}

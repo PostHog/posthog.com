@@ -126,6 +126,7 @@ const containerTypes = {
         border-dark/30
         dark:bg-white/10
         dark:border-white/20
+        !no-underline
     `,
     custom: cntl`
         bg-white/20

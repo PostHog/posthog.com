@@ -59,7 +59,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog.png"
                         placeholder="blurred"
                     />
@@ -69,7 +69,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team.png"
                         placeholder="blurred"
                     />
@@ -86,7 +86,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-3.png"
                         placeholder="blurred"
                     />
@@ -96,7 +96,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-3.png"
                         placeholder="blurred"
                     />
@@ -113,7 +113,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-5.png"
                         placeholder="blurred"
                     />
@@ -123,7 +123,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-5.png"
                         placeholder="blurred"
                     />
@@ -140,7 +140,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-6.png"
                         placeholder="blurred"
                     />
@@ -150,7 +150,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-6.png"
                         placeholder="blurred"
                     />
@@ -167,7 +167,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-7.png"
                         placeholder="blurred"
                     />
@@ -177,7 +177,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-7.png"
                         placeholder="blurred"
                     />
@@ -194,7 +194,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-8.png"
                         placeholder="blurred"
                     />
@@ -204,7 +204,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-8.png"
                         placeholder="blurred"
                     />
@@ -221,7 +221,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-9.png"
                         placeholder="blurred"
                     />
@@ -231,7 +231,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-9.png"
                         placeholder="blurred"
                     />
@@ -248,7 +248,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-10.png"
                         placeholder="blurred"
                     />
@@ -258,7 +258,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-10.png"
                         placeholder="blurred"
                     />
@@ -275,7 +275,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={40}
+                        width={80}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/hog-11.png"
                         placeholder="blurred"
                     />
@@ -285,7 +285,7 @@ const faqs = [
                 image: (
                     <CloudinaryImage
                         alt=""
-                        width={25}
+                        width={50}
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/pages-content/images/team-11.png"
                         placeholder="blurred"
                     />

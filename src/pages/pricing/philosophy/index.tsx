@@ -12,7 +12,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 const PricingPhilosophy = (): JSX.Element => {
     return (
         <>
-            <section className="bg-white dark:bg-accent-dark text-primary dark:text-primary-dark shadow-xl rounded pt-6 pb-2 md:py-8 px-8 md:px-12 mx-6 md:mx-auto my-12 w-[calc(100%_-_3rem)] md:w-full max-w-3xl border border-transparent dark:border-dark">
+            <section className="bg-light dark:bg-dark text-primary shadow-xl rounded pt-6 pb-2 @xl:md:py-8 px-4 @xl:px-8 @2xl:px-12 md:mx-auto mt-12 mb-20 w-[calc(100%_-_3rem)] @xl:w-full max-w-3xl border border-primary">
                 <SectionHeader>
                     <p className="opacity-60 text-[15px] mb-2">A note from our co-founder</p>
                     <h3>Our pricing is designed to make you happy</h3>
@@ -92,17 +92,17 @@ const PricingPhilosophy = (): JSX.Element => {
                             alt="James Hawkins, CEO, Co-founder"
                             placeholder="none"
                             objectFit="contain"
-                            className="bg-yellow rounded-full"
+                            className="bg-yellow rounded-full overflow-hidden"
                         />
                     </Link>
                     <p className="leading-tight mb-0">
                         <Link href="/community/profiles/27732" className="flex">
                             <strong>James Hawkins</strong>
                         </Link>
-                        <span className="text-sm opacity-70">Co-founder</span>
+                        <span className="text-sm text-secondary">Co-founder</span>
                     </p>
                 </div>
-                <p className="pl-14 text-sm opacity-75 italic">
+                <p className="pl-14 mt-0 text-sm text-muted italic">
                     When James isn't thinking about how to cut prices (again), you'll likely find him changing a diaper.
                 </p>
             </section>

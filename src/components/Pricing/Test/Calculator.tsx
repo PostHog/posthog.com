@@ -121,7 +121,7 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
     `)
 
     return (
-        <div id="calculator" className="not-prose mb-12">
+        <SectionLayout id="calculator" className="not-prose mb-12">
             <SectionHeader>
                 <h2>Pricing calculator</h2>
             </SectionHeader>
@@ -172,6 +172,6 @@ export const Calculator = ({ SidebarList, SidebarListItem, Discounts }: Calculat
                     </div>
                 </div>
             </div>
-        </div>
+        </SectionLayout>
     )
 }

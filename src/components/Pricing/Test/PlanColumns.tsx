@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import React, { useState } from 'react'
 import { CTA as PlanCTA } from '../Plans'
-import { section, SectionHeader } from './Sections'
+import { section, SectionHeader, SectionLayout } from './Sections'
 import { BillingV2PlanType } from 'types'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 
@@ -133,7 +133,7 @@ const planSummary = [
 
 const AllPlansInclude = () => {
     return (
-        <div className="@container w-full">
+        <div className="@container w-full text-primary">
             <p className="font-bold text-[15px] mb-2">All plans include:</p>
             <ul className="prose grid @xl:grid-cols-2 gap-x-4">
                 <li className="flex gap-1 items-start text-[15px]">
@@ -172,7 +172,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
 
     return (
         <>
-            <section id="plans" className={`${section} mt-8 !mb-12`}>
+            <SectionLayout id="plans" className={`mt-8 !mb-12`}>
                 <SectionHeader>
                     <h2>Compare plans</h2>
                 </SectionHeader>
@@ -205,7 +205,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                 <div className="lg:hidden mb-8">
                     <AllPlansInclude />
                     <div className="md:gap-12 xl:pl-6 mt-6">
-                        <p className="font-bold text-[15px] xl:mt-4 mb-2">Looking for features for larger teams?</p>
+                        <p className="text-[15px] xl:mt-4 mb-2">Looking for features for larger teams?</p>
                         <Link to="/platform-addons">Check out our platform add-ons.</Link>
                     </div>
                 </div>
@@ -346,7 +346,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </SectionLayout>
         </>
     )
 }

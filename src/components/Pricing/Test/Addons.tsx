@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { section, SectionHeader } from './Sections'
+import { SectionHeader, SectionLayout } from './Sections'
 import useProducts from '../Products'
 import * as Icons from '@posthog/icons'
 import { PricingTiers } from '../Plans'
@@ -332,10 +332,11 @@ export const Addons = (props: AddonsProps) => {
     })
 
     return (
-        <section className="not-prose mb-8 @3xl:mb-12">
+        <SectionLayout id="addons" className="not-prose mb-8 @3xl:mb-12">
             <SectionHeader>
                 <h2>Add-ons</h2>
             </SectionHeader>
+
             <div className="grid @lg:grid-cols-3 gap-x-8">
                 <div className="@lg:col-span-2 @4xl:col-span-full">
                     <p className="mb-6">
@@ -357,6 +358,6 @@ export const Addons = (props: AddonsProps) => {
                     contentClassName="p-2 @xl:p-4"
                 />
             </div>
-        </section>
+        </SectionLayout>
     )
 }

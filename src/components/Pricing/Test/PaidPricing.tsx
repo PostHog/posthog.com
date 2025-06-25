@@ -19,7 +19,7 @@ export const PaidPricing = () => {
                             </SectionHeader>
                         </div>
 
-                        <h4 className="hidden @4xl:block text-2xl">Usage-based pricing</h4>
+                        <h3 className="hidden @4xl:block text-2xl font-bold">Usage-based pricing</h3>
                         <p>
                             If your usage goes beyond the free tier limits, we offer{' '}
                             <strong>usage-based pricing.</strong> You can set a billing limit for each product so you

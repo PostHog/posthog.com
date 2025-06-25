@@ -11,6 +11,8 @@ import { CallToAction } from 'components/CallToAction'
 import { useInView } from 'react-intersection-observer'
 import Logo from 'components/Logo'
 import { motion } from 'framer-motion'
+import { SectionHeader, SectionLayout } from 'components/Pricing/Test/Sections'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const them = [
     {
@@ -254,7 +256,7 @@ const us = [
 
         children: (
             <>
-                <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
+                <div className="col-span-6 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
                     <p className="leading-relaxed">
                         <em>“How much does it cost?”</em> <Link href="/pricing">It’s on our website.</Link>
                         <br />
@@ -276,13 +278,14 @@ const us = [
                     </p>
                 </div>
 
-                <div className="col-span-3 -mt-6 pb-8 text-center">
+                <div className="col-span-2 -mt-6 pb-8 text-center">
                     <CloudinaryImage
                         quality={90}
                         placeholder="blurred"
                         loading="eager"
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/drake-hog-yes.png"
                         width={234}
+                        imgClassName="max-w-full"
                     />
                 </div>
             </>
@@ -386,7 +389,7 @@ const us = [
                         initial demo and knows everything about me? And they will be my main point of contact for
                         anything support-related?!
                     </p>
-                    <p>We’re going to be best friends!</p>
+                    <p>This is going to work out well.</p>
 
                     <div className="flex flex-col @3xl:flex-row gap-3 my-4">
                         <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
@@ -426,10 +429,8 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t relative ${
-                isOpen
-                    ? 'active border-transparent bg-light dark:bg-dark rounded shadow-lg z-10 overflow-hidden'
-                    : 'inactive border-primary first:border-transparent'
+            className={`border-t border-primary first:border-transparent first:rounded-t last:rounded-b relative ${
+                isOpen ? 'active bg-light dark:bg-dark shadow-lg z-10 overflow-hidden' : 'inactive '
             }`}
         >
             <button
@@ -446,7 +447,7 @@ const AccordionItem = ({
                     </span>
                     <span
                         className={`transition-all leading-tight ${
-                            isOpen ? 'font-bold text-lg @3xl:text-2xl' : 'font-semibold text-[17px]'
+                            isOpen ? 'font-bold text-lg @3xl:text-xl' : 'font-semibold text-[17px]'
                         }`}
                     >
                         {title}
@@ -467,7 +468,7 @@ const AccordionItem = ({
                 className={isOpen ? '' : 'overflow-hidden'}
             >
                 <div className="px-4">
-                    <div className="flex flex-col @3xl:grid grid-cols-8 gap-2 @3xl:gap-8 justify-between relative">
+                    <div className="flex flex-col @3xl:grid grid-cols-8 gap-2 justify-between relative">
                         {children}
 
                         <div className="pb-4 @3xl:pb-0 @3xl:absolute left-9 bottom-6">
@@ -532,7 +533,7 @@ const Accordion = ({ items, type, keyboardContainerRef }) => {
     }
 
     return (
-        <ol ref={ref} className="space-y-px p-0 list-none">
+        <ol ref={ref} className="space-y-px p-0 list-none border border-primary rounded">
             {items.map((item, index) => (
                 <AccordionItem
                     onAnimationComplete={({ height }) => {
@@ -611,23 +612,21 @@ function Sales() {
     }, [themInView, usInView])
 
     return (
-        <>
-            <SEO
-                title="Sales: [Everyone else] vs. PostHog"
-                description="We actually don't make you get on a call to find out our pricing."
-                image={`/images/og/sales.png`}
-            />
+        <SectionLayout id="sales">
+            <SectionHeader>
+                <h2 className="@md:flex items-center gap-2">
+                    Sales: <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
+                    <span className="inline-flex items-center gap-2 whitespace-nowrap">
+                        <Logo noText className="h-12 inline-block" /> PostHog
+                    </span>
+                </h2>
+            </SectionHeader>
             <div className="overflow-x-hidden">
-                <div className="grid @3xl:grid-cols-2 gap-4 @3xl:gap-0 lg:gap-8 py-6 @3xl:py-12">
-                    <div className="order-2 @3xl:order-1 pl-8">
-                        <div className="text-3xl @3xl:text-4xl font-bold mb-0 opacity-90 uppercase">Sales:</div>
-                        <h1 className="text-[2.25rem] @3xl:text-5xl mb-2 text-red dark:text-yellow">
-                            [Everyone else] vs. PostHog
-                        </h1>
-
-                        <p className="mt-2 text-lg font-semibold mb-2 opacity-60 leading-tight">
+                <div className="grid @3xl:grid-cols-2 gap-4 items-center">
+                    <div className="order-2 @3xl:order-1">
+                        <h3 className="mt-0">
                             Call us unhinged, but we believe pricing pages should have actual, um, <em>pricing?</em>
-                        </p>
+                        </h3>
                         <p className="mb-2">
                             Most SaaS companies want to feel out how much money they can squeeze out of you.{' '}
                             <strong>PostHog operates differently.</strong> We’re more like a utility where you pay for
@@ -643,14 +642,14 @@ function Sales() {
                             </Tooltip>
                         </p>
                     </div>
-                    <div className="relative order-1 @3xl:order-2 pl-8 @3xl:pl-0">
-                        <div className="@3xl:absolute @3xl:top-0 @3xl:left-0 @3xl:bottom-0">
+                    <div className="bg-tan rounded-md relative order-1 @3xl:order-2 pt-4 pl-8">
+                        <div className="">
                             <div className="dark:hidden">
                                 <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
-                                    className="h-48 xs:h-[17rem] @3xl:h-72"
+                                    className=""
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
@@ -661,7 +660,7 @@ function Sales() {
                                     quality={100}
                                     placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
-                                    className="h-48 xs:h-[17rem] @3xl:h-72"
+                                    className=""
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
@@ -672,76 +671,50 @@ function Sales() {
                     </div>
                 </div>
 
-                <div className="@3xl:py-8">
-                    <div className="flex justify-center">
-                        <div className="inline-flex flex-col items-center mb-10 mx-auto">
-                            <h2 className="mb-1 text-center relative">
-                                How the sales process works at{' '}
-                                <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-0 after:content-['[Typical_bland_enterprise_SaaS_company]'] after:text-xs after:text-secondary after:font-normal after:tracking-normal">
-                                    <button
-                                        onClick={updateCompanyName}
-                                        className="absolute right-0.5 bottom-[.15rem] hover:bottom-[0.2rem] active:bottom-[.1rem] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:scale-[1.02] active:scale-[.99] transition-transform"
-                                    >
-                                        <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
-                                    </button>
-                                    <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mr-8 w-[calc(100vw_-_6rem)] xs:max-w-sm inline-flex gap-2 justify-center relative overflow-hidden">
-                                        <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
-                                            <span className="cursor-default">{companyName}</span>
-                                        </CSSTransition>
-                                    </span>
-                                </div>
-                            </h2>
-                        </div>
+                <div className="@3xl:pt-8">
+                    <div className="flex flex-col items-center mb-10 mx-auto">
+                        <h2 className="mb-1 text-center relative">
+                            How the sales process works at{' '}
+                            <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-8 after:content-['[Typical_bland_enterprise_SaaS_company]'] after:text-xs after:text-secondary after:font-normal after:tracking-normal">
+                                <button
+                                    onClick={updateCompanyName}
+                                    className="absolute right-0.5 bottom-[.15rem] hover:bottom-[0.2rem] active:bottom-[.1rem] z-10 bg-red/15 dark:bg-white/20 p-1 rounded inline-flex cursor-pointer group hover:bg-red/20 dark:hover:bg-white/30 hover:scale-[1.02] active:scale-[.99] transition-transform"
+                                >
+                                    <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
+                                </button>
+                                <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mr-8 w-[calc(100vw_-_6rem)] xs:max-w-sm inline-flex gap-2 justify-center relative overflow-hidden">
+                                    <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
+                                        <span className="cursor-default">{companyName}</span>
+                                    </CSSTransition>
+                                </span>
+                            </div>
+                        </h2>
                     </div>
-                    <div ref={themRef}>
+                    <div className="not-prose" ref={themRef}>
                         <Accordion items={them} keyboardContainerRef={keyboardContainerRef} />
                     </div>
 
                     <div className="py-12">
                         <h2 className="flex justify-center items-center mb-6">
-                            How <Logo className="inline-block mt-[-2px] ml-2 mr-1.5" /> does sales
+                            How <Logo noText className="inline-block mt-[-2px] ml-2 mr-1.5" /> PostHog does sales
                         </h2>
                         <div ref={usRef}>
                             <Accordion items={us} keyboardContainerRef={keyboardContainerRef} />
                         </div>
-                    </div>
-                </div>
 
-                <div className="max-w-7xl mx-auto">
-                    <div className="p-4 @3xl:p-8 mb-12 mx-4 @3xl:mx-8 bg-accent rounded-md border border-primary">
-                        <h3 className="mb-1 text-center @3xl:text-left">Craving more unhinged rants like this?</h3>
-                        <div className="flex flex-col @3xl:flex-row @3xl:gap-2 @3xl:items-baseline mb-4">
-                            <CallToAction
-                                href="/newsletter"
-                                type="outline"
-                                size="sm"
-                                className="mt-4"
-                                width="[calc(100%+4px)] @3xl:w-auto"
-                            >
-                                Check out our newsletter
-                            </CallToAction>
-                            <span className="inline-flex mt-2 -mb-1 mt:my-0 self-center">or</span>
-                            <CallToAction
-                                href="/blog"
-                                type="outline"
-                                size="sm"
-                                className="mt-4"
-                                width="[calc(100%+4px)] full @3xl:w-auto"
-                            >
-                                Visit the blog
-                            </CallToAction>
-                        </div>
-
-                        <p className="mb-0 text-sm text-secondary text-balance text-center @3xl:text-left">
+                        <p className="mb-0 text-sm text-secondary text-balance text-center">
                             <em>
-                                Brought to you by the team who thought making{' '}
-                                <Link href="/terms">terms and conditions fun</Link> was a good idea
+                                The above is brought to you by the same people who thought{' '}
+                                <Link href="/terms" state={{ newWindow: true }}>
+                                    making the terms and conditions fun
+                                </Link>{' '}
+                                was a good idea...
                             </em>
                         </p>
                     </div>
                 </div>
             </div>
-        </>
+        </SectionLayout>
     )
 }
 
