@@ -18,17 +18,17 @@ Afterwards, set up your project API key and host in your `wrangler.jsonc` (or `w
 
 ```json
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "my-posthog-worker",
-	"main": "src/index.js",
-	"compatibility_date": "2025-06-20",
-	"observability": {
-		"enabled": true
-	},
-	"vars": { 
-		"POSTHOG_API_KEY": "<ph_project_api_key>",
-		"POSTHOG_HOST": "<ph_client_api_host>",
-	},
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "my-posthog-worker",
+  "main": "src/index.js",
+  "compatibility_date": "2025-06-20",
+  "observability": {
+    "enabled": true
+  },
+  "vars": { 
+    "POSTHOG_API_KEY": "<ph_project_api_key>",
+    "POSTHOG_HOST": "<ph_client_api_host>",
+  },
 }
 ```
 
@@ -58,28 +58,28 @@ With PostHog installed, you can add and use it in your app like this:
 import { createPostHogClient } from './posthog.js';
 
 export default {
-	async fetch(request, env, ctx) {
-		const posthog = createPostHogClient(env);
-		const distinctId = 'ian@posthog.com' // replace with actual user ID
+  async fetch(request, env, ctx) {
+    const posthog = createPostHogClient(env);
+    const distinctId = 'ian@posthog.com' // replace with actual user ID
 
-		ctx.waitUntil(
-			posthog.captureImmediate({
-				distinctId: distinctId,
-				event: 'hello_world_request',
-				properties: {
-					$current_url: request.url
-				}
-			})
-		);
-		
-		const flag = await posthog.isFeatureEnabled('test_flag', distinctId) || false
+    ctx.waitUntil(
+      posthog.captureImmediate({
+        distinctId: distinctId,
+        event: 'hello_world_request',
+        properties: {
+          $current_url: request.url
+        }
+      })
+    );
+    
+    const flag = await posthog.isFeatureEnabled('test_flag', distinctId) || false
 
     ctx.waitUntil(
       posthog.shutdown()
     );
 
-		return new Response('Hello World! ' + flag);
-	},
+    return new Response('Hello World! ' + flag);
+  },
 };
 ```
 
