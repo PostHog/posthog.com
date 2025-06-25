@@ -45,7 +45,7 @@ const Notification = ({ url, title, excerpt, date, count, onDismiss }) => {
                 </Link>
                 <button
                     onClick={onDismiss}
-                    className="flex-shrink-0 absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-7 border border-border bg-white dark:bg-accent-dark dark:border-dark rounded-full group-hover:flex justify-center items-center hidden"
+                    className="flex-shrink-0 absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-7 border border-primary bg-white dark:bg-accent-dark dark:border-dark rounded-full group-hover:flex justify-center items-center hidden"
                 >
                     <Tooltip content="Dismiss" placement="top">
                         <span className="relative">

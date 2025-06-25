@@ -41,9 +41,9 @@ export const SmoothScroll = ({ exclude = [], ...other }: { menuItems: MenuItem[]
                                 <Link
                                     key={id}
                                     offset={-169}
-                                    className={`whitespace-nowrap text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark inline-block text-sm py-2 px-3 border border-transparent border-b-transparent hover:border-light hover:dark:border-dark hover:bg-light hover:dark:bg-dark hover:rounded-tl-sm hover:rounded-tr-md cursor-pointer ${
+                                    className={`whitespace-nowrap text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark inline-block text-sm py-2 px-3 border border-transparent border-b-transparent hover:border-primary hover:bg-primary hover:rounded-tl-sm hover:rounded-tr-md cursor-pointer ${
                                         index === activeTab
-                                            ? '!border-border dark:!border-dark !border-b-bg-light dark:!border-b-bg-dark font-bold bg-light dark:bg-dark rounded-tl-sm rounded-tr-md text-opacity-100'
+                                            ? '!border-primary font-bold bg-primary rounded-tl-sm rounded-tr-md text-opacity-100'
                                             : 'text-opacity-60'
                                     }`}
                                     smooth

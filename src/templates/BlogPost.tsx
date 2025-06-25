@@ -103,14 +103,14 @@ const ContributorsSmall = ({ contributors }) => {
                                         {typeof image === 'string' ? (
                                             <CloudinaryImage
                                                 width={50}
-                                                className="w-6 h-6 border-border border dark:border-dark rounded-full"
+                                                className="w-6 h-6 border border-primary rounded-full"
                                                 src={image}
                                             />
                                         ) : gatsbyImage ? (
                                             <GatsbyImage
                                                 image={gatsbyImage}
                                                 alt={name}
-                                                className="w-6 h-6 border-border border dark:border-dark rounded-full"
+                                                className="w-6 h-6 border border-primary rounded-full"
                                             />
                                         ) : (
                                             ''

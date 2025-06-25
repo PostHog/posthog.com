@@ -292,7 +292,7 @@ export default function Inbox(props) {
                                 ref={bottomContainerRef}
                                 className={`flex-none relative min-h-0 min-w-0 ${
                                     !isDragging ? 'transition-all duration-200 ease-out' : ''
-                                } ${sideBySide ? 'border-l border-border' : ''}`}
+                                } ${sideBySide ? 'border-l border-primary' : ''}`}
                                 style={{
                                     height: sideBySide ? '100%' : bottomHeight,
                                     width: sideBySide ? sideWidth : '100%',
@@ -329,7 +329,7 @@ export default function Inbox(props) {
                                         onDoubleClick={expandOrCollapse}
                                     />
                                 )}
-                                <div className="bg-accent border-y border-border px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
+                                <div className="bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
                                     <OSButton
                                         variant="secondary"
                                         size="sm"
@@ -384,7 +384,7 @@ export default function Inbox(props) {
                                             />
                                         )}
 
-                                        <div className="ml-1 pl-1 border-l border-border">
+                                        <div className="ml-1 pl-1 border-l border-primary">
                                             <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
                                                 <span>
                                                     <OSButton

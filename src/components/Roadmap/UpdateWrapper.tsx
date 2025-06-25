@@ -34,8 +34,8 @@ const ActionButton = ({ onClick, children, roundButton = false }) => {
         <button
             className={`group z-10 font-bold p-2 rounded-full border ${
                 roundButton
-                    ? ' bg-white dark:bg-dark border-primary'
-                    : '-mt-2 opacity-50 hover:bg-white hover:dark:bg-dark border-transparent hover:border-light hover:dark:border-dark'
+                    ? ' bg-primary border-primary'
+                    : '-mt-2 opacity-50 hover:bg-white hover:dark:bg-dark border-transparent hover:border-primary'
             } leading-none hover:scale-[1.02] hover:-translate-y-px active:translate-y-px active:scale-[.98]`}
             onClick={onClick}
         >

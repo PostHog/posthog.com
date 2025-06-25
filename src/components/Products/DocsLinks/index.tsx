@@ -33,7 +33,7 @@ export const DocLinks = ({ menu }: { menu: any[] }) => {
                                     <li key={name + url}>
                                         <Link
                                             to={url}
-                                            className="flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                                            className="flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary  hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                                             state={{ newWindow: true }}
                                         >
                                             <MenuItem badge={badge} color={color} icon={icon} name={name} />

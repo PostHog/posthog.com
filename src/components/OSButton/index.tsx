@@ -73,7 +73,7 @@ export default function OSButton({
     ...props
 }: OSButtonProps) {
     const baseClasses =
-        'inline-flex items-center rounded border transition-colors transition-50 hover:transition-none transition-[font-size,line-height,padding] transition-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary disabled:hover:text-secondary disabled:hover:border-transparent'
+        'inline-flex items-center rounded border text-primary transition-colors transition-[font-size,line-height,padding] transition-50 hover:transition-none disabled:text-muted disabled:cursor-not-allowed disabled:hover:bg-primary disabled:hover:text-muted disabled:hover:border-transparent'
 
     const sizeClasses = {
         xs: 'px-2 py-1 text-xs gap-1',
@@ -104,9 +104,9 @@ export default function OSButton({
         underline: 'hover:underline border-transparent',
         ghost: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${
             active
-                ? 'font-bold skin-modern:bg-accent skin-modern:hover:border-light skin-classic:border-primary skin-classic:bg-primary'
+                ? 'font-bold skin-modern:bg-accent skin-modern:hover:border-primary skin-classic:border-primary skin-classic:bg-primary'
                 : 'hover:bg-accent hover:skin-classic:bg-primary skin-classic:hover:border-primary skin-classic:border-transparent'
-        } active:bg-accent-2/80 focus:border-light`,
+        } active:bg-accent-2/80 focus:border-primary`,
     }
 
     const buttonContent = (

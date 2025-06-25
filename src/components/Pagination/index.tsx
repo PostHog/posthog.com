@@ -43,7 +43,7 @@ export default function Pagination({
                             className={`w-[35px] h-[35px] border border-transparent border-b-3 rounded-sm p-1 flex items-center justify-center ${
                                 label === currentPage
                                     ? 'font-bold text-primary hover:text-primary dark:text-primary-dark hover:dark:text-primary-dark border-transparent'
-                                    : 'font-semibold hover:border-light hover:dark:border-dark text-secondary hover:text-primary relative hover:top-[-.5px] hover:scale-[1.01] active:top-[1px] active:scale-[.99]'
+                                    : 'font-semibold hover:border-primary text-secondary hover:text-primary relative hover:top-[-.5px] hover:scale-[1.01] active:top-[1px] active:scale-[.99]'
                             }`}
                             to={url}
                         >

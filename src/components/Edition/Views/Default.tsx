@@ -99,7 +99,7 @@ export const SortDropdown = ({ sort, setSort, className = '' }) => {
             <div className="relative">
                 <Menu>
                     <Menu.Button
-                        className={`flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all ${className}`}
+                        className={`flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all ${className}`}
                     >
                         <Tooltip content={() => <>Sorting by: {sort}</>} tooltipClassName="md:block hidden">
                             <span className="relative">
@@ -144,7 +144,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
             >
                 <div className="w-full flex-grow">
                     <Menu>
-                        <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
+                        <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
                             <div className="flex items-center space-x-2">
                                 <Icon icon={activeMenu?.icon} color={activeMenu?.color} />
                                 <div className="text-sm flex space-x-1 items-center">
@@ -186,7 +186,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                 {showTags && activeMenu?.children?.length > 0 && (
                     <div className="flex-grow-0 flex items-center justify-center">
                         <Menu>
-                            <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                            <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
                                 <IconFilter className="w-5 h-5" />
                             </Menu.Button>
                             <Menu.Items className="absolute rounded-md border border-input bg-accent text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
@@ -239,7 +239,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                 <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-input -mb-1">
                     <span
                         className="
-                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-border dark:after:border-dark after:rounded-bl after:content-['']
+                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-primary after:rounded-bl after:content-['']
                     "
                     ></span>
                     <div className="pl-[43px] -mt-0.5">

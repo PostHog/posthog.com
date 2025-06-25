@@ -94,7 +94,7 @@
         --input-border: #bfc1b7;
         --text-primary: #23251d;
         --text-secondary: #23251d;
-        --text-muted: #4d4f46;
+        --text-muted: #9ea096;
         --tw-shadow-color: #23251d;
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
@@ -580,14 +580,14 @@ fieldset {
         @apply rounded bg-accent mb-px;
 
         > summary {
-            @apply cursor-pointer text-red dark:text-yellow rounded border border-transparent hover:border-light hover:dark:border-dark font-semibold list-none p-4 pl-8 relative before:absolute before:left-3 before:top-6 before:w-[10px] before:h-[7px];
+            @apply cursor-pointer text-red dark:text-yellow rounded border border-transparent hover:border-primary font-semibold list-none p-4 pl-8 relative before:absolute before:left-3 before:top-6 before:w-[10px] before:h-[7px];
 
             &::-webkit-details-marker {
                 @apply hidden;
             }
 
             &:before {
-                @apply bg-dark dark:bg-accent;
+                @apply bg-accent;
 
                 mask: url("data:image/svg+xml,%3Csvg width='10' height='7' viewBox='0 0 10 7' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%0A%3E%3Cpath d='M8.15448 0.316976L5.00049 3.47201L1.8465 0.316976C1.42387 -0.105659 0.73923 -0.105659 0.316596 0.316976C-0.105532 0.739104 -0.105532 1.42425 0.316596 1.84636L4.23586 5.76563C4.65799 6.18726 5.34211 6.18726 5.76421 5.76563L9.68296 1.84688V1.84637C10.1056 1.42425 10.1056 0.740128 9.68347 0.317507C9.26134 -0.105115 8.57722 -0.105128 8.1546 0.317L8.15448 0.316976Z' /%3E%3C/svg%3E");
                 transform: rotate(-90deg);
@@ -1008,8 +1008,6 @@ body.light {
 }
 
 body.dark {
-    @apply text-primary-dark;
-
     .post-page {
         blockquote {
             background-color: rgba(255, 255, 255, 0.05) !important;
@@ -1027,24 +1025,6 @@ body.dark {
             }
         }
     }
-}
-
-strong {
-    font-variation-settings: 'wght' 700;
-}
-
-ol,
-ul {
-    margin: initial;
-    padding-left: 2em;
-}
-
-ol {
-    list-style: decimal;
-}
-
-ul {
-    list-style: disc;
 }
 
 .contributor-images > .gatsby-image-wrapper {
@@ -1473,26 +1453,26 @@ ul {
         @apply dark:!text-white;
     }
     .nodes .table span {
-        @apply dark:!text-accent;
+        @apply !text-secondary;
     }
     .loopText {
-        @apply dark:!fill-primary !stroke-primary;
+        @apply fill-primary stroke-primary;
     }
     #flowchart-pointStart,
     #flowchart-pointEnd,
     .arrowheadPath {
-        @apply dark:!fill-primary dark:!stroke-primary;
+        @apply fill-primary stroke-primary;
     }
     path.flowchart-link,
     path.path,
     .root .clusters .cluster rect,
     line {
-        @apply dark:!stroke-primary;
+        @apply stroke-primary;
     }
     g rect,
     g polygon,
     g.node path {
-        @apply dark:!fill-accent;
+        @apply fill-accent;
     }
 
     line-height: 1;
@@ -1739,7 +1719,7 @@ iframe[src*='youtube-nocookie.com'] {
 }
 
 .squeak-left-border {
-    @apply before:border-l before:border-b before:border-solid before:border-light dark:before:border-dark before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
+    @apply before:border-l before:border-b before:border-solid before:border-primary before:rounded-bl-md before:h-[20px] before:top-0 before:absolute before:w-[30px] before:left-0;
 }
 
 li.squeak-left-border {
@@ -1879,7 +1859,7 @@ li.squeak-left-border {
 }
 
 .tw-tweet + .tw-tweet {
-    @apply before:absolute before:w-px before:bg-border dark:before:bg-border-dark before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
+    @apply before:absolute before:w-px before:bg-accent before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
 }
 
 .tw-tweet + *:not(.tw-tweet) {

@@ -69,7 +69,7 @@ const OSTable: React.FC<OSTableProps> = ({
                         {columns.map((column, index) => (
                             <div
                                 key={index}
-                                className={`text-sm border-l border-t border-border bg-input font-bold ${
+                                className={`text-sm border-l border-t border-primary bg-input font-bold ${
                                     column.align === 'center' ? 'text-center' : ''
                                 } ${column.className || ''}`}
                             >

@@ -369,7 +369,7 @@ const Teams: React.FC = () => {
                                 <div className="text-center mb-8">
                                     <Link
                                         href="/roadmap"
-                                        className="border border-b-3 border-primary p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-border hover:dark:border-border-dark hover:border-b-3 relative hover:-top-px active:top-px"
+                                        className="border border-b-3 border-primary p-2 rounded text-center text-sm w-full block hover:bg-white hover:dark:bg-accent-dark hover:border-primary hover:dark:border-primary-dark hover:border-b-3 relative hover:-top-px active:top-px"
                                     >
                                         Explore the roadmap
                                     </Link>

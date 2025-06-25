@@ -506,7 +506,7 @@ export default function HubSpotForm({
                     onSubmit={handleSubmit}
                 >
                     <Form className={formOptions?.className}>
-                        <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
+                        <div className="grid divide-y divide-border border border-primary">
                             {form.fields.map(({ name, label, type, required, options, fieldType }, index) => {
                                 if (customFields && customFields[name])
                                     return {

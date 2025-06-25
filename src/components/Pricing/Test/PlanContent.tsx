@@ -99,9 +99,7 @@ const RegionButton = ({ active, onClick, children }) => {
         <button
             onClick={onClick}
             className={`flex-1 flex flex-col items-center py-1.5 px-2 text-sm rounded border ${
-                active
-                    ? 'border-yellow bg-yellow/25 dark:bg-white/5 font-bold'
-                    : 'border-light hover:border-dark/50 dark:border-dark dark:hover:border-light/50 bg-transparent'
+                active ? 'border-yellow bg-yellow/25 dark:bg-white/5 font-bold' : 'border-primary bg-transparent'
             }`}
         >
             {children}

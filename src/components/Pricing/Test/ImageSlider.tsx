@@ -113,7 +113,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
                     {images.map((image, index) => (
                         <Slide
                             key={index}
-                            className={`w-1/5 md:w-auto p-1 border border-light hover:border-input dark:hover:border-border-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
+                            className={`w-1/5 md:w-auto p-1 border border-light hover:border-input dark:hover:border-primary-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
                                 index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
                             }`}
                             id={`pricing-slider-nav-${index}`}

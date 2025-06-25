@@ -81,17 +81,6 @@ module.exports = {
                 transparent: 'transparent',
                 current: 'currentColor',
 
-                primary: 'var(--primary)',
-                secondary: 'var(--text-secondary)',
-                muted: 'var(--muted)',
-                'primary-dark': '#EEEFE9',
-                accent: '#E5E7E0',
-                'accent-2': '#DCDFD3',
-                'accent-dark': '#232429',
-                border: '#D0D1C9',
-                'border-dark': '#4A4C52',
-                light: '#EEEFE9',
-                dark: '#1D1F27',
                 highlight: 'rgba(235,157,42,.2)',
                 footer: '#08042f',
 
@@ -148,6 +137,11 @@ module.exports = {
                 'button-border': '#B17816',
                 'button-shadow-dark': '#99660E',
                 'button-secondary-shadow-dark': '#925D05',
+
+                primary: 'var(--primary)',
+                secondary: 'var(--secondary)',
+                accent: 'var(--accent)',
+                border: 'var(--border)',
 
                 // frame-bg
                 // frame-border
@@ -215,10 +209,6 @@ module.exports = {
                 md: '780px',
             },
             borderColor: {
-                light: '#D0D1C9',
-                dark: '#4A4C52',
-                'bg-light': '#EEEFE9',
-                'bg-dark': '#1D1F27',
                 button: '#B17816',
                 'button-dark': '#835C19',
                 'button-secondary-dark': '#C78617',

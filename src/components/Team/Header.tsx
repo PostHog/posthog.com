@@ -35,7 +35,7 @@ export default function Header({
                 <div className="flex-1">
                     <Link
                         to="/teams"
-                        className="-ml-2 mb-1 inline-flex items-center gap-1 text-sm text-muted hover:text-primary dark:hover:text-primary-dark relative px-2 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                        className="-ml-2 mb-1 inline-flex items-center gap-1 text-sm text-muted hover:text-primary relative px-2 pt-1.5 pb-1 rounded hover:bg-primary border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                     >
                         <IconArrowLeft className="size-5" />
                         <span>Teams</span>

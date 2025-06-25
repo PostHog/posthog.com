@@ -16,6 +16,7 @@ import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import MDXEditor from 'components/MDXEditor'
 import { graphql } from 'gatsby'
+import SEO from 'components/seo'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -358,7 +359,12 @@ export default function Home({ data }: { data: { mdx: { rawBody: string } } }) {
         }
     }, [])
 
-    return <MDXEditor jsxComponentDescriptors={jsxComponentDescriptors} body={data.mdx.rawBody} />
+    return (
+        <>
+            <SEO title="Welcome to PostHog!" description="Home" image="https://posthog.com/og-image.png" />
+            <MDXEditor jsxComponentDescriptors={jsxComponentDescriptors} body={data.mdx.rawBody} />
+        </>
+    )
 }
 
 export const query = graphql`
