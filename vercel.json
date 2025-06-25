@@ -253,6 +253,7 @@
             "source": "/docs/self-host/runbook/clickhouse/vertical_scaling",
             "destination": "/docs/self-host/runbook/clickhouse/vertical-scaling"
         },
+        { "source": "/docs/product-os", "destination": "/docs" },
         { "source": "/docs/privacy/overview", "destination": "/docs/privacy" },
         { "source": "/docs/integrate/gdpr", "destination": "/docs/privacy/gdpr-compliance" },
         { "source": "/blog/hipaa-compliant-analytics", "destination": "/blog/best-hipaa-compliant-analytics-tools" },

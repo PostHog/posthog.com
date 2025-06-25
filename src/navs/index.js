@@ -1735,7 +1735,7 @@ export const docsMenu = {
             name: 'Product OS',
             icon: 'IconStack',
             color: 'salmon',
-            url: '/docs/product-os',
+            url: '/docs',
             description: 'The PostHog platform for building and improving your product',
             children: [
                 {
@@ -2248,11 +2248,6 @@ export const docsMenu = {
                 },
                 {
                     name: 'PostHog explained',
-                },
-                {
-                    name: 'What is Product OS?',
-                    url: '/docs/product-os',
-                    icon: 'IconInfo',
                 },
                 {
                     name: 'Data types',

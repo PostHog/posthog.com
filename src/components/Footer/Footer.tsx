@@ -83,7 +83,7 @@ const linklist: IProps[] = [
     },
     {
         title: 'Product OS',
-        url: '/docs/product-os',
+        url: '/docs',
         items: [
             {
                 title: 'New? Start here.',
