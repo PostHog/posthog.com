@@ -301,7 +301,7 @@ export const CTA = ({
             type={type}
             size={size}
             width={width}
-            className={`shadow-md !w-auto ${className}`}
+            className={`shadow-md !w-auto whitespace-nowrap ${className}`}
             to={
                 ctaLink
                     ? ctaLink

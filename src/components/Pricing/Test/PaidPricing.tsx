@@ -10,7 +10,7 @@ export const PaidPricing = () => {
 
     return (
         <section className={`${section} `}>
-            <div className="grid md:grid-cols-2 gap-12">
+            <div className="grid @4xl:grid-cols-2 gap-12">
                 <div>
                     <div className="max-w-lg">
                         <h4 className="text-2xl">Usage-based pricing</h4>

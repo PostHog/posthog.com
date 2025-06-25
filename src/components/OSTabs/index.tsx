@@ -53,7 +53,7 @@ export default function OSTabs({
                         <ScrollArea
                             className={`@container bg-primary ${frame ? 'border border-primary rounded-md' : ''}`}
                         >
-                            <div className={frame ? 'p-4 @2xl:p-6' : ''}>{tab.content}</div>
+                            <div className={frame ? '@container p-4 @2xl:p-6' : '@container'}>{tab.content}</div>
                         </ScrollArea>
                     </Tabs.Content>
                 ))}

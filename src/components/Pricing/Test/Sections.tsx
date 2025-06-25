@@ -2,15 +2,13 @@ import React from 'react'
 import cntl from 'cntl'
 
 export const section = cntl`
-    mx-auto
-    mb-20
-    px-4
-    xl:px-8
-    2xl:px-12
+@5xl:px-8
+@6xl:px-12
+@7xl:mx-auto
 `
 
 export const SectionLayout = ({ id = '', children }) => (
-    <section id={id} className={`${section} mb-12 mt-8 md:px-4`}>
+    <section id={id} className={`${section} mb-12 mt-8`}>
         {children}
     </section>
 )

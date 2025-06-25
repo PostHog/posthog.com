@@ -27,6 +27,7 @@ import { PRODUCT_COUNT } from '../../constants'
 import { Calculator } from './Test/Calculator'
 import PricingHero from './Test/PricingHero'
 import CTA from 'components/Home/CTA.js'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 export const SidebarList = ({ children }: { children: React.ReactNode }) => (
     <ul className="tw-chevron-bullets flex flex-col gap-1 pl-4">{children}</ul>
 )
@@ -85,7 +86,7 @@ export const gridCellMid = cntl`
 
 export const gridCellBottom = cntl`
     mb-12 
-    lg:mb-0 
+    @5xl:mb-0 
     pb-4
     xl:pb-8
     rounded-b-md
@@ -183,21 +184,23 @@ const PricingExperiment = ({
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
             <SEO title="PostHog pricing" description="Find out how much it costs to use PostHog" />
 
-            <div className="md:grid grid-cols-16 mb-12">
-                <div className="col-span-8 lg:col-span-4 mb-4 md:mb-0 md:border-b border-primary">
-                    <div className="md:hidden mb-2">
+            <DebugContainerQuery />
+
+            <div className="@xl:grid grid-cols-16 mb-12">
+                <div className="col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @xl:border-b border-primary">
+                    <div className="@xl:hidden mb-2">
                         <Header />
                     </div>
                     <ImageSlider images={images} showDisclaimer={true} className="aspect-square" id="pricing-slider" />
                 </div>
 
-                <div className="@container col-span-8 lg:col-span-7 lgxl:col-span-8 md:border-b border-primary md:pl-8 lg:pl-6 xl:pl-10 md:mr-8 lg:mr-6 xl:mr-10 pb-4">
+                <div className="@container col-span-8 @5xl:col-span-7 @6xl:col-span-8 @xl:border-b border-primary @xl:pl-4 @3xl:pl-6 @4xl:pl-8 @5xl:mr-6 pb-4">
                     <PricingHero activePlan={activePlan} setActivePlan={setActivePlan} />
                 </div>
 
-                <aside className="md:col-span-16 lg:col-span-5 lgxl:col-span-4">
-                    <div className="bg-white dark:bg-white/5 rounded-md border border-primary py-4 px-6 h-full">
-                        <div className="flex flex-col md:grid grid-cols-2 lg:flex justify-between h-full">
+                <aside className="not-prose @xl:col-span-16 @5xl:col-span-5 @6xl:col-span-4">
+                    <div className="bg-light dark:bg-dark rounded-md border border-primary py-4 px-6 h-full">
+                        <div className="flex flex-col @xl:grid grid-cols-2 @5xl:flex justify-between h-full">
                             <PlanContent activePlan={activePlan} onFreeTierClick={() => setAnimateFreeTiers(true)} />
                         </div>
                     </div>
@@ -209,10 +212,10 @@ const PricingExperiment = ({
             <PlanColumns billingProducts={billingProducts} highlight="free" />
 
             <SectionLayout>
-                <div className="bg-accent p-4 pb-6 md:pb-4 rounded border border-primary flex flex-col md:flex-row justify-between md:items-center gap-4 -mt-4">
+                <div className="bg-accent p-4 @xl:pb-4 rounded border border-primary flex flex-col @xl:flex-row justify-between @xl:items-center gap-8 -mt-4">
                     <div>
-                        <h3 className="mb-1 text-xl">Give PostHog a try</h3>
-                        <p className="mb-0 text-[15px]">
+                        <h3 className="m-0">Give PostHog a try</h3>
+                        <p className="text-[15px] mb-0">
                             No need to pick a plan - try our free version and decide if you want advanced features
                             later!
                         </p>
@@ -223,9 +226,9 @@ const PricingExperiment = ({
                 </div>
             </SectionLayout>
 
-            <section className="bg-primary my-12 md:px-4">
+            <section className="not-prose bg-primary my-12 -mx-4 @2xl:-mx-6">
                 <Quote
-                    className="py-12 md:py-16 px-5 bg-black"
+                    className="py-12 px-5 bg-black"
                     name={<span className="text-white">Cat Li</span>}
                     title={<span className="text-white">Product & Engineering Lead, Y Combinator</span>}
                     image={
@@ -235,7 +238,7 @@ const PricingExperiment = ({
                             alt="Cat Li, Y Combinator"
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/cat.jpeg"
                             placeholder="none"
-                            className="rounded-full"
+                            className="rounded-full overflow-hidden"
                         />
                     }
                     quote={

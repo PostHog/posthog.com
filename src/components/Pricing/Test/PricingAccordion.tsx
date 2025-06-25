@@ -85,7 +85,7 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                             <div className={isOpen ? 'size-6' : 'size-5'}>{<Icon className={`text-${color}`} />}</div>
                             <span
                                 className={`transition-all leading-tight font-bold ${
-                                    isOpen ? 'text-base md:text-base' : 'text-sm md:text-base'
+                                    isOpen ? 'text-base @5xl:text-base' : 'text-sm @5xl:text-base'
                                 }`}
                             >
                                 {name}
@@ -153,7 +153,7 @@ export const Accordion = ({ allExpanded, setAllExpanded }) => {
     }, [allExpanded])
 
     return (
-        <ol ref={ref} className="space-y-px p-0 list-none">
+        <ol ref={ref} className="not-prose space-y-px p-0 list-none">
             {products.map((item, index) => (
                 <AccordionItem
                     onAnimationComplete={({ height }) => {
