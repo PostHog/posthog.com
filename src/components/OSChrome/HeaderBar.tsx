@@ -124,13 +124,19 @@ export default function HeaderBar({
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
                     {showToc && (
-                        <div className="hidden @4xl:block">
-                            <OSButton
-                                variant="ghost"
-                                active={isTocVisible}
-                                icon={<IconTableOfContents />}
-                                onClick={onToggleToc}
-                            />
+                        <div className="hidden @4xl:block [&>span]:inline-block">
+                            <Tooltip
+                                trigger={
+                                    <OSButton
+                                        variant="ghost"
+                                        icon={<IconTableOfContents />}
+                                        active={isTocVisible}
+                                        onClick={onToggleToc}
+                                    />
+                                }
+                            >
+                                {isTocVisible ? 'Hide' : 'Show'} table of contents
+                            </Tooltip>
                         </div>
                     )}
                 </motion.div>

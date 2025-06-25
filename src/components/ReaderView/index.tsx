@@ -429,7 +429,9 @@ function ReaderViewContent({
                     <LeftSidebar>{leftSidebar || <Menu />}</LeftSidebar>
                     <ScrollArea
                         dataScheme="primary"
-                        className={`bg-primary border border-primary flex-grow rounded ${
+                        className={`bg-primary border border-primary flex-grow  ${
+                            showSidebar && isTocVisible ? 'rounded' : 'rounded-l border-r-0'
+                        } ${
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                                 : ''
