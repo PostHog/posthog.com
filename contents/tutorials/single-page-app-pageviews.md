@@ -17,10 +17,7 @@ A single-page application (or SPA) dynamically loads content for new pages using
 
 PostHog's JavaScript Web SDK automatically captures pageview events on page load. The problem with SPAs is that **page loads don't happen beyond the initial one**. This means user navigation in your SPA isn't tracked.
 
-Luckily, you can opt-in to tracking this behavior using one of 2 options:
-
-1. **Recommended:** set `defaults: '<ph_posthog_js_defaults>'` when initializing PostHog to use the most recent defaults.
-2. Manually set `capture_pageview: 'history_change'`.
+Luckily, you can opt-in to tracking this behavior by setting `defaults: '2025-05-24'` when initializing PostHog to use the most recent defaults. This default uses `capture_pageview: 'history_change'`, which captures SPA navigation using the browser [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API) 
 
 This tutorial shows you how to follow the recommended approach for the most popular SPA frameworks like [Next.js](#tracking-pageviews-in-nextjs-app-router), [Vue](#tracking-pageviews-in-vue), [Svelte](#tracking-pageviews-in-svelte), and [Angular](#tracking-pageviews-in-angular). 
 
