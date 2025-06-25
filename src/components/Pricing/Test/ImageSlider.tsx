@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { ZoomImage } from 'components/ZoomImage'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Image {
     src: string
@@ -101,7 +103,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
                             sliderId={id}
                         />
                         {showDisclaimer && index === 0 && (
-                            <div className="absolute bottom-2 md:bottom-1 xl:bottom-2 left-2 right-2 text-primary text-xs leading-tight opacity-60">
+                            <div className="absolute bottom-2 @4xl:bottom-1 @5xl:bottom-2 left-2 right-2 text-primary text-xs leading-tight opacity-60">
                                 *{disclaimer}
                             </div>
                         )}
@@ -109,21 +111,25 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
                 ))}
             </div>
             {images.length > 1 && (
-                <div className="flex flex-nowrap md:grid grid-cols-5 lg:grid-cols-4 xl:grid-cols-5 overflow-x-auto md:[overflow:unset] -mx-4 px-4 md:mx-0 md:px-0 snap-x snap-mandatory my-2 gap-2">
-                    {images.map((image, index) => (
-                        <Slide
-                            key={index}
-                            className={`w-1/5 md:w-auto p-1 border border-light hover:border-input dark:hover:border-primary-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
-                                index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
-                            }`}
-                            id={`pricing-slider-nav-${index}`}
-                            onClick={() => handleClick(index)}
-                            src={image.thumb || image.src}
-                            alt={image.alt}
-                            isThumbnail={true}
-                            sliderId={id}
-                        />
-                    ))}
+                <div className="-mx-4 @xl:mx-0">
+                    <ScrollArea className="!h-auto">
+                        <div className="flex flex-nowrap @xl:grid grid-cols-4 @3xl:flex @4xl:grid @4xl:grid-cols-4 @7xl:grid-cols-5 @xl:[overflow:unset] px-4 @xl:px-0 snap-x snap-mandatory my-2 gap-2">
+                            {images.map((image, index) => (
+                                <Slide
+                                    key={index}
+                                    className={`w-1/5 @xl:w-auto @3xl:w-1/4 @4xl:w-auto p-1 border border-light hover:border-input dark:hover:border-primary-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
+                                        index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
+                                    }`}
+                                    id={`pricing-slider-nav-${index}`}
+                                    onClick={() => handleClick(index)}
+                                    src={image.thumb || image.src}
+                                    alt={image.alt}
+                                    isThumbnail={true}
+                                    sliderId={id}
+                                />
+                            ))}
+                        </div>
+                    </ScrollArea>
                 </div>
             )}
         </>

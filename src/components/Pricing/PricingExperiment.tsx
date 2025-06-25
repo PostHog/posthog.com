@@ -140,7 +140,7 @@ const images = [
     },
     {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_3c90797dd6.png',
-        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_thumb_b4bc2d6f1.png',
+        thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/feature_flags_thumb_b4bc2d6df1.png',
         alt: 'Feature flags',
     },
     {
@@ -187,7 +187,7 @@ const PricingExperiment = ({
             <DebugContainerQuery />
 
             <div className="@xl:grid grid-cols-16 mb-12">
-                <div className="col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @xl:border-b border-primary">
+                <div className="not-prose col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @xl:border-b border-primary">
                     <div className="@xl:hidden mb-2">
                         <Header />
                     </div>
