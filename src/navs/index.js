@@ -1918,6 +1918,10 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Cloudflare Workers',
+                            url: '/docs/libraries/cloudflare-workers',
+                        },
+                        {
                             name: 'Django',
                             url: '/docs/libraries/django',
                         },
