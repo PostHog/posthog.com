@@ -31,6 +31,7 @@ interface HeaderBarProps {
     showBookmark?: boolean
     showToc?: boolean
     showSidebar?: boolean
+    hasLeftSidebar?: boolean
     showFullScreen?: boolean
     onFullScreenClick?: () => void
     rightActionButtons?: React.ReactNode
@@ -49,6 +50,7 @@ export default function HeaderBar({
     showBookmark = false,
     showToc = false,
     showSidebar = false,
+    hasLeftSidebar = false,
     showFullScreen = false,
     onFullScreenClick,
     rightActionButtons,
@@ -75,12 +77,12 @@ export default function HeaderBar({
             <div>
                 <motion.div
                     className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${
-                        isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                        hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
                     }`}
                 >
                     {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
                     <div className="hidden @2xl:block">
-                        {showSidebar && (
+                        {hasLeftSidebar && (
                             <OSButton
                                 onClick={onToggleNav}
                                 variant="ghost"

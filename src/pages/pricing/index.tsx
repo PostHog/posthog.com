@@ -14,8 +14,7 @@ import Sales from '../sales'
 import { useLocation } from '@reach/router'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
-import { companyMenu } from '../../navs'
+
 import PurchasedWith from 'components/Pricing/Test/PurchasedWith'
 import { SectionLayout } from 'components/Pricing/Test/Sections'
 
@@ -25,6 +24,18 @@ export default function Pricing() {
     const [currentModal, setCurrentModal] = useState<string | boolean>(false)
     const [defaultTab, setDefaultTab] = useState('plans')
     const { search } = useLocation()
+
+    const pricingTableOfContents = [
+        { url: 'cloud', value: 'PostHog Cloud', depth: 0 },
+        { url: 'rates', value: 'Usage-based pricing', depth: 0 },
+        { url: 'plans', value: 'Plans', depth: 0 },
+        { url: 'calculator', value: 'Pricing calculator', depth: 0 },
+        { url: 'addons', value: 'Add-ons', depth: 0 },
+        { url: 'g2-reviews', value: 'Reviews', depth: 0 },
+        { url: 'sales', value: 'How we do "sales"', depth: 0 },
+        { url: 'faq', value: 'FAQ', depth: 0 },
+        { url: 'cta', value: 'Shameless CTA', depth: 0 },
+    ]
 
     const {
         allProductData: {
@@ -139,9 +150,7 @@ export default function Pricing() {
     }, [search])
 
     return (
-        <ReaderView
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-        >
+        <ReaderView hideLeftSidebar tableOfContents={pricingTableOfContents}>
             <SEO title="Pricing - PostHog" description="Find out how much it costs to use PostHog" />
 
             <PricingExperiment
@@ -154,11 +163,9 @@ export default function Pricing() {
                 billingProducts={billingProducts}
             />
 
-            <div className="">
-                <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
-            </div>
+            <Calculator SidebarList={SidebarList} SidebarListItem={SidebarListItem} Discounts={Discounts} />
 
-            <Addons />
+            <Addons addons={billingProducts.flatMap((product: any) => product.addons || [])} />
 
             <SimilarProducts />
 

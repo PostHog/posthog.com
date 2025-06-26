@@ -183,7 +183,7 @@ const PricingExperiment = ({
         <>
             <SelfHostOverlay open={currentModal === 'self host'} setOpen={setCurrentModal} />
 
-            <div className="@xl:grid grid-cols-16 mb-6 @5xl:mb-12">
+            <div id="cloud" className="@xl:grid grid-cols-16 mb-6 @5xl:mb-12">
                 <div className="not-prose col-span-8 @5xl:col-span-4 mb-4 @xl:mb-0 @5xl:border-b border-primary">
                     <div className="@xl:hidden mb-2">
                         <Header />

@@ -49,6 +49,7 @@ interface ReaderViewProps {
     filePath?: string
     children?: React.ReactNode
     leftSidebar?: React.ReactNode
+    hideLeftSidebar?: boolean
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
 }
@@ -295,6 +296,7 @@ export default function ReaderView({
     filePath,
     children,
     leftSidebar,
+    hideLeftSidebar = false,
     padding = true,
     proseSize = 'sm',
 }: ReaderViewProps) {
@@ -308,6 +310,7 @@ export default function ReaderView({
                 commits={commits}
                 filePath={filePath}
                 leftSidebar={leftSidebar}
+                hideLeftSidebar={hideLeftSidebar}
                 padding={padding}
                 proseSize={proseSize}
             >
@@ -399,6 +402,7 @@ function ReaderViewContent({
     filePath,
     children,
     leftSidebar,
+    hideLeftSidebar = false,
     padding = true,
     proseSize,
 }) {
@@ -414,9 +418,14 @@ function ReaderViewContent({
         toggleToc,
         handleLineHeightChange,
         setFullWidthContent,
+        parent,
+        activeInternalMenu,
     } = useReaderView()
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0
+
+    // Determine if we should render the left sidebar at all (separate from animation state)
+    const renderLeftSidebar = !hideLeftSidebar
 
     const selectedBackgroundOption = backgroundImage
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
@@ -434,12 +443,12 @@ function ReaderViewContent({
         scrollElement.scrollTo(
             hash
                 ? {
-                    top: document.getElementById(CSS.escape(hash.replace('#', '')))?.offsetTop,
-                    behavior: 'smooth',
-                }
+                      top: document.getElementById(CSS.escape(hash.replace('#', '')))?.offsetTop,
+                      behavior: 'smooth',
+                  }
                 : {
-                    top: 0,
-                }
+                      top: 0,
+                  }
         )
     }, [pathname])
 
@@ -460,35 +469,40 @@ function ReaderViewContent({
                     showBookmark
                     showToc
                     showSidebar={showSidebar}
+                    hasLeftSidebar={renderLeftSidebar}
                     searchContentRef={contentRef}
                 />
                 {/* Second row - Main Content */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">
-                    <LeftSidebar>{leftSidebar || <Menu />}</LeftSidebar>
+                    {renderLeftSidebar && <LeftSidebar>{leftSidebar || <Menu />}</LeftSidebar>}
                     <ScrollArea
                         dataScheme="primary"
-                        className={`bg-primary border border-primary flex-grow  ${showSidebar && isTocVisible ? 'rounded' : 'rounded-l border-r-0'
-                            } ${selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                        className={`bg-primary border border-primary flex-grow  
+                            ${renderLeftSidebar && isNavVisible ? 'rounded-l' : 'border-l-0'}
+                            ${showSidebar && isTocVisible ? 'rounded-r' : 'border-r-0'} ${
+                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                                 : ''
-                            }`}
+                        }`}
                         style={
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? {
-                                    backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
-                                    backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
-                                    backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
-                                    backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
-                                }
+                                      backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
+                                      backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
+                                      backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
+                                      backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
+                                  }
                                 : undefined
                         }
                     >
                         <article className={`${getProseClasses(proseSize)} max-w-none relative overflow-x-hidden`}>
                             <div
                                 ref={contentRef}
-                                className={`@container/reader-content relative ${padding ? 'p-4' : ''
-                                    } mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
-                                    }`}
+                                className={`@container/reader-content relative ${
+                                    padding ? 'p-4' : ''
+                                } mx-auto transition-all ${
+                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
+                                }`}
                             >
                                 {body.featuredImage && (
                                     <div className="mb-4">
@@ -565,8 +579,9 @@ function ReaderViewContent({
                 {/* Third row - Footer */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
                     <motion.div
-                        className={`flex-shrink-0 transition-all min-w-0 ${isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
-                            }`}
+                        className={`flex-shrink-0 transition-all min-w-0 ${
+                            renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
+                        }`}
                     >
                         {/* this space intentionally left blank */}
                     </motion.div>
@@ -582,8 +597,9 @@ function ReaderViewContent({
                         )}
                     </div>
                     <motion.div
-                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[300px]' : 'w-auto'
-                            }`}
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
+                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[300px]' : 'w-auto'
+                        }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
                         {filePath && (

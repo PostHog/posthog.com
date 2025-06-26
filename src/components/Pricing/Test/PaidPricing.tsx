@@ -9,7 +9,7 @@ export const PaidPricing = () => {
     const [expanded, setExpanded] = useState(false)
 
     return (
-        <section className={`${section} `}>
+        <section id="rates" className={`${section} `}>
             <div className="grid @4xl:grid-cols-2 gap-12">
                 <div>
                     <div className="@4xl:max-w-lg">
