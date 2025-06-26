@@ -219,13 +219,16 @@ export default function Inbox(props) {
                 </aside>
                 <main data-scheme="primary" className="flex-1 bg-primary">
                     <div ref={containerRef} className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}>
-                        <div className={`flex-1 min-h-0 ${sideBySide ? 'w-0' : 'w-full'}`}>
-                            <ScrollArea className="h-full">
-                                <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary">
-                                    <div className="flex-1">Subject</div>
-                                    <div className="w-24 text-center">Replies</div>
-                                    <div className="w-36 text-center">Last updated</div>
-                                    <div className="w-32 text-center">Latest activity</div>
+                        <div className={`@container flex-1 min-h-0 ${sideBySide ? 'w-0' : 'w-full'}`}>
+                            <ScrollArea className=" h-full">
+                                <div className="test flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary">
+                                    <div className="hidden @2xl:block w-48">Author</div>
+                                    <div className="flex-1">
+                                        <span className="@2xl:hidden">Author / Replies</span>
+                                        <span className="hidden @2xl:block">Subject</span>
+                                    </div>
+                                    <div className="hidden @2xl:block w-24 text-center">Replies</div>
+                                    <div className="w-60 text-right @2xl:text-left">Last activity</div>
                                 </div>
                                 <div className="px-1 py-1 space-y-px">
                                     {questions.data?.map((question) => {
@@ -236,7 +239,7 @@ export default function Inbox(props) {
                                             replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
                                         const active = `/questions/${permalink}` === pathname
                                         return (
-                                            <span key={question.id} ref={lastQuestionRef}>
+                                            <div key={question.id} ref={lastQuestionRef}>
                                                 <OSButton
                                                     asLink
                                                     to={`/questions/${permalink}`}
@@ -244,7 +247,10 @@ export default function Inbox(props) {
                                                     align="left"
                                                     width="full"
                                                     key={question.id}
-                                                    className={` ${active ? 'font-bold bg-accent' : ''}`}
+                                                    className={` 
+                                                        flex-wrap @2xl:flex-nowrap gap-0 @2xl:gap-1
+                                                        ${active ? 'font-bold bg-accent' : ''}
+                                                    `}
                                                     onClick={() => {
                                                         if (!containerRef.current) return
                                                         if (bottomHeight <= 57) {
@@ -255,19 +261,35 @@ export default function Inbox(props) {
                                                         }
                                                     }}
                                                 >
-                                                    <div className="flex-1 font-medium">{subject}</div>
-                                                    <div className="w-24 text-center">{numReplies}</div>
-                                                    <div className="w-36 text-center">
+                                                    <div className="basis-9/12 @2xl:basis-auto order-1 @2xl:order-none @2xl:w-48 @2xl:block">
+                                                        {profile?.data.attributes.firstName}{' '}
+                                                        {profile?.data.attributes.lastName}
+                                                        <span className="text-muted text-sm ml-1 @2xl:hidden">
+                                                            {numReplies}
+                                                        </span>
+                                                    </div>
+                                                    <div
+                                                        className={`order-3 @2xl:order-none flex-[1_0_100%] @2xl:flex-1 ${
+                                                            active ? 'font-medium @2xl:font-bold' : 'font-medium'
+                                                        }`}
+                                                    >
+                                                        {subject}
+                                                    </div>
+                                                    <div className="hidden @2xl:block w-24 text-center">
+                                                        {numReplies}
+                                                    </div>
+                                                    <div className="order-2 basis-3/12 text-right @2xl:text-left @2xl:basis-auto @2xl:w-60 ">
                                                         <Tooltip trigger={dayjs(activeAt).fromNow()}>
                                                             {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
                                                             {dayjs(activeAt).format('h:mm A')}
-                                                        </Tooltip>
-                                                    </div>
-                                                    <div className="w-32 text-center">
-                                                        {latestAuthor?.data.attributes.firstName}
+                                                        </Tooltip>{' '}
+                                                        <span className="hidden @2xl:inline-block">
+                                                            by {latestAuthor?.data.attributes.firstName}{' '}
+                                                            {latestAuthor?.data.attributes.lastName}
+                                                        </span>
                                                     </div>
                                                 </OSButton>
-                                            </span>
+                                            </div>
                                         )
                                     })}
                                     {isLoading && (
