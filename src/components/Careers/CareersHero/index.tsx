@@ -382,7 +382,7 @@ export const CareersHero = () => {
     }, [selectedJob])
 
     const imagePositioning =
-        'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @3xl:scale-90 @4xl:scale-100'
+        'absolute top-1/2 left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @3xl:scale-90 @4xl:scale-100'
 
     return (
         <>
@@ -398,45 +398,50 @@ export const CareersHero = () => {
                             alt=""
                             width={588}
                             height={434}
-                            className={`${imagePositioning} -mt-20 -ml-48 w-[294px] h-auto`}
+                            className={`${imagePositioning} translate-x-[calc(-50%-70%)] translate-y-[calc(-50%-60%)] w-[294px] h-auto`}
                         />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/top_right_c86eb1a286.png"
                             alt=""
                             width={551}
                             height={517}
-                            className={`${imagePositioning} -mt-28 ml-20 w-[275px] h-auto`}
+                            className={`${imagePositioning} translate-x-[calc(-50%+55%)] translate-y-[calc(-50%-65%)] w-[275px] h-auto`}
                         />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/right_6de2023571.png"
                             alt=""
                             width={585}
                             height={488}
-                            className={`${imagePositioning} mt-0 ml-72 w-[292.5px] h-[244px] `}
-                            // imgClassName="h-[244px] w-auto"
+                            className={`${imagePositioning} translate-x-[calc(-50%+130%)] translate-y-[calc(-50%-0%)] w-[292.5px] h-[244px] `}
+                        />
+
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/bottom_right_fb4051ba15.png"
+                            alt=""
+                            width={389}
+                            height={333}
+                            className={`${imagePositioning} translate-x-[calc(-50%+70%)] translate-y-[calc(-50%+75%)] w-[194.5px] h-auto `}
+                        />
+
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/bottom_left_19eb019249.png"
+                            alt=""
+                            width={366}
+                            height={338}
+                            className={`${imagePositioning} translate-x-[calc(-50%-70%)] translate-y-[calc(-50%+70%)] w-[183px] h-auto `}
+                        />
+
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/left_00fbb9dca8.png"
+                            alt=""
+                            width={560}
+                            height={483}
+                            className={`${imagePositioning} translate-x-[calc(-50%-150%)] translate-y-[calc(-50%+10%)] w-[280px] h-auto `}
                         />
                     </div>
 
-                    {/* Right section graphics */}
-                    {/* <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/right_6de2023571.png"
-                                alt=""
-                                width={585}
-                                height={488}
-                                className="absolute top-[20%] right-[5%] w-[35%] h-auto @sm:translate-x-4 @md:translate-x-0 transition-transform duration-300"
-                            /> */}
-
-                    {/* Additional floating elements */}
-                    {/* <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/bottom_right_fb4051ba15.png"
-                                alt=""
-                                width={389}
-                                height={333}
-                                className="absolute top-[5%] right-[15%] w-[15%] h-auto @sm:opacity-0 @md:opacity-100 @lg:scale-110 transition-all duration-500"
-                            /> */}
-
                     {/* Text overlay - keeping this as is */}
-                    <div className="hidden absolute inset-0 flex flex-col justify-center items-center">
+                    <div className="absolute inset-0 flex flex-col justify-center items-center">
                         <h1 className="text-2xl lg:text-3xl font-bold mb-2">Who's hiring?</h1>
                         <p className="text-base mb-4">
                             Our small teams are looking to add{' '}
