@@ -158,7 +158,7 @@ export default function OSButton({
                 : `${sizeClasses[size]} ${variantClasses[variant]}`
         } ${align === 'center' ? 'justify-center' : 'justify-start text-left'} ${
             !children ? '' : width === 'full' ? 'w-full' : 'w-auto'
-        } ${className}`,
+        } ${asLink ? '!no-underline' : ''} ${className}`,
         onClick,
         disabled,
         state,

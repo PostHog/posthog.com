@@ -47,8 +47,9 @@ const TreeLink = ({
         </OSButton>
     ) : (
         <div
-            className={`text-muted text-sm py-0.5 ${index === 0 ? 'ml-2' : index === 1 ? 'ml-1' : ''} ${index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'
-                }`}
+            className={`text-muted text-sm py-0.5 !mt-2 ${index === 0 ? 'ml-2' : index === 1 ? 'ml-1' : ''} ${
+                index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'
+            }`}
         >
             {menuItem.name}
         </div>

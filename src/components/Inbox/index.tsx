@@ -11,6 +11,7 @@ import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import { IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification } from '@posthog/icons'
 import Switch from 'components/RadixUI/Switch'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { useToast } from '../../context/Toast'
 import { QuestionData, StrapiRecord } from 'lib/strapi'
 import { useUser } from 'hooks/useUser'
@@ -18,15 +19,15 @@ import { navigate } from 'gatsby'
 import Lottie from 'lottie-react'
 import hourglassAnimation from 'images/icons8-hourglass.json'
 import { useInView } from 'react-intersection-observer'
-import Tooltip from 'components/Tooltip'
 import useTopicsNav from '../../navs/useTopicsNav'
 import { useWindow } from '../../context/Window'
+import Tooltip from 'components/RadixUI/Tooltip'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
     const topicsNav = useTopicsNav()
     return (
-        <ScrollArea>
+        <ScrollArea className="p-2">
             <TreeMenu
                 items={[
                     {
@@ -42,6 +43,19 @@ const Menu = () => {
 }
 
 const SIDE_WIDTH_DEFAULT = 600
+
+const layoutOptions = [
+    {
+        label: 'Stacked view',
+        value: 'stacked',
+        icon: <IconBottomPanel className="size-5" />,
+    },
+    {
+        label: 'Side-by-side view',
+        value: 'side-by-side',
+        icon: <IconSidePanel className="size-5" />,
+    },
+]
 
 export default function Inbox(props) {
     const { data, params } = props
@@ -188,56 +202,32 @@ export default function Inbox(props) {
                 showSearch
                 rightActionButtons={
                     permalink ? (
-                        <>
-                            <Tooltip
-                                content={`${sideBySide ? 'Switch to stacked view' : 'Switch to side-by-side view'}`}
-                            >
-                                <span>
-                                    <OSButton
-                                        active={!sideBySide}
-                                        variant="ghost"
-                                        size="sm"
-                                        icon={<IconBottomPanel />}
-                                        onClick={() => handleSideBySide(false)}
-                                    />
-                                </span>
-                            </Tooltip>
-                            <Tooltip content={`Side-by-side view`}>
-                                <span>
-                                    <OSButton
-                                        active={sideBySide}
-                                        className={`${
-                                            sideBySide ? '!skin-classic:bg-red-500 !skin-modern:bg-red-500' : ''
-                                        }`}
-                                        variant="ghost"
-                                        size="sm"
-                                        icon={<IconSidePanel />}
-                                        onClick={() => handleSideBySide(true)}
-                                    />
-                                </span>
-                            </Tooltip>
-                        </>
+                        <ToggleGroup
+                            title="Layout"
+                            hideTitle={true}
+                            options={layoutOptions}
+                            onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
+                            value={sideBySide ? 'side-by-side' : 'stacked'}
+                            className="-my-1"
+                        />
                     ) : null
                 }
             />
             <div data-scheme="secondary" className="flex flex-grow border-t border-primary min-h-0">
-                <aside
-                    data-scheme="secondary"
-                    className="w-64 bg-primary border-r border-primary h-full p-2 flex-shrink-0"
-                >
+                <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full flex-shrink-0">
                     <Menu />
                 </aside>
                 <main data-scheme="primary" className="flex-1 bg-primary">
                     <div ref={containerRef} className={`flex flex-row h-full ${sideBySide ? 'flex-row' : 'flex-col'}`}>
                         <div className={`flex-1 min-h-0 ${sideBySide ? 'w-0' : 'w-full'}`}>
                             <ScrollArea className="h-full">
-                                <div className="flex items-center px-3.5 py-2 border-b border-primary font-medium bg-secondary text-sm bg-accent-2 sticky top-0">
+                                <div className="flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary">
                                     <div className="flex-1">Subject</div>
                                     <div className="w-24 text-center">Replies</div>
                                     <div className="w-36 text-center">Last updated</div>
                                     <div className="w-32 text-center">Latest activity</div>
                                 </div>
-                                <div className="px-2 py-1">
+                                <div className="px-1 py-1 space-y-px">
                                     {questions.data?.map((question) => {
                                         const {
                                             attributes: { subject, numReplies, activeAt, replies, profile, permalink },
@@ -254,7 +244,7 @@ export default function Inbox(props) {
                                                     align="left"
                                                     width="full"
                                                     key={question.id}
-                                                    className={`!text-inherit font-normal ${active ? 'bg-accent' : ''}`}
+                                                    className={` ${active ? 'font-bold bg-accent' : ''}`}
                                                     onClick={() => {
                                                         if (!containerRef.current) return
                                                         if (bottomHeight <= 57) {
@@ -267,7 +257,12 @@ export default function Inbox(props) {
                                                 >
                                                     <div className="flex-1 font-medium">{subject}</div>
                                                     <div className="w-24 text-center">{numReplies}</div>
-                                                    <div className="w-36 text-center">{dayjs(activeAt).fromNow()}</div>
+                                                    <div className="w-36 text-center">
+                                                        <Tooltip trigger={dayjs(activeAt).fromNow()}>
+                                                            {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
+                                                            {dayjs(activeAt).format('h:mm A')}
+                                                        </Tooltip>
+                                                    </div>
                                                     <div className="w-32 text-center">
                                                         {latestAuthor?.data.attributes.firstName}
                                                     </div>
@@ -332,8 +327,7 @@ export default function Inbox(props) {
                                 <div className="bg-accent border-y border-primary px-4 py-2 flex gap-2 items-center sticky top-0 z-10">
                                     <OSButton
                                         variant="secondary"
-                                        size="sm"
-                                        icon={<IconCornerDownRight className="scale-x-[-1]" />}
+                                        size="xs"
                                         onClick={() => {
                                             if (!containerRef.current) return
                                             const containerHeight = containerRef.current.getBoundingClientRect().height

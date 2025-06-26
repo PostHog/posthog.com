@@ -17,16 +17,24 @@ export interface ToggleGroupProps {
     onValueChange: (value: string) => void
     value: string
     hideTitle?: boolean
+    className?: string
 }
 
-export const ToggleGroup = ({ title, options, onValueChange, value, hideTitle = false }: ToggleGroupProps) => {
+export const ToggleGroup = ({
+    title,
+    options,
+    onValueChange,
+    value,
+    hideTitle = false,
+    className = '',
+}: ToggleGroupProps) => {
     const defaultValue = options.find((option) => option.default)?.value || options[0]?.value
 
     return (
         <>
             {!hideTitle && <label className="pt-1.5 text-sm">{title}</label>}
             <RadixToggleGroup.Root
-                className="flex space-x-px rounded p-1 bg-primary border border-primary"
+                className={`flex space-x-px rounded p-1 bg-primary border border-primary ${className}`}
                 type="single"
                 data-scheme="primary"
                 defaultValue={defaultValue}
