@@ -303,7 +303,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
-                            className={`@container absolute overflow-hidden !select-auto  ${
+                            className={`@container absolute overflow-hidden !select-auto bg-primary ${
                                 focusedWindow === item ? 'shadow-2xl border-primary' : 'shadow-lg border-input'
                             } ${dragging ? '[&_*]:select-none' : ''} ${
                                 item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
