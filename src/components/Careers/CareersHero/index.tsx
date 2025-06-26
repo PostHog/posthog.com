@@ -381,18 +381,62 @@ export const CareersHero = () => {
         setIsLoading(false)
     }, [selectedJob])
 
+    const imagePositioning =
+        'absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @3xl:scale-90 @4xl:scale-100'
+
     return (
         <>
-            <div className="relative max-h-96 overflow-hidden bg-accent border-b border-primary mb-4">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/careers_hero_light_946740e5a4.png"
-                    alt="Careers"
-                    width={1948}
-                    height={698}
-                    className="w-full h-full object-cover"
-                />
-                <div className="absolute inset-0">
-                    <div className="relative flex flex-col items-center justify-center h-full">
+            <DebugContainerQuery />
+            <div className="@container not-prose relative aspect-[3/1] overflow-hidden bg-accent border-b border-primary mb-4">
+                {/* Background container for positioned graphics */}
+                {/* Example of positioned graphics - replace with your actual graphics */}
+                {/* Left section graphics */}
+                <div className="absolute inset-0 flex flex-col justify-center items-center">
+                    <div className="relative">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/top_middle_04506a5dc1.png"
+                            alt=""
+                            width={588}
+                            height={434}
+                            className={`${imagePositioning} -mt-20 -ml-48 w-[294px] h-auto`}
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/top_right_c86eb1a286.png"
+                            alt=""
+                            width={551}
+                            height={517}
+                            className={`${imagePositioning} -mt-28 ml-20 w-[275px] h-auto`}
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/right_6de2023571.png"
+                            alt=""
+                            width={585}
+                            height={488}
+                            className={`${imagePositioning} mt-0 ml-72 w-[292.5px] h-[244px] `}
+                            // imgClassName="h-[244px] w-auto"
+                        />
+                    </div>
+
+                    {/* Right section graphics */}
+                    {/* <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/right_6de2023571.png"
+                                alt=""
+                                width={585}
+                                height={488}
+                                className="absolute top-[20%] right-[5%] w-[35%] h-auto @sm:translate-x-4 @md:translate-x-0 transition-transform duration-300"
+                            /> */}
+
+                    {/* Additional floating elements */}
+                    {/* <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/bottom_right_fb4051ba15.png"
+                                alt=""
+                                width={389}
+                                height={333}
+                                className="absolute top-[5%] right-[15%] w-[15%] h-auto @sm:opacity-0 @md:opacity-100 @lg:scale-110 transition-all duration-500"
+                            /> */}
+
+                    {/* Text overlay - keeping this as is */}
+                    <div className="hidden absolute inset-0 flex flex-col justify-center items-center">
                         <h1 className="text-2xl lg:text-3xl font-bold mb-2">Who's hiring?</h1>
                         <p className="text-base mb-4">
                             Our small teams are looking to add{' '}
