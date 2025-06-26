@@ -10,7 +10,7 @@ export interface TooltipProps {
 
 const Tooltip = ({ trigger, children, open, onOpenChange }: TooltipProps) => {
     return (
-        <RadixTooltip.Provider delayDuration={0}>
+        <RadixTooltip.Provider delayDuration={500}>
             <RadixTooltip.Root open={open} onOpenChange={onOpenChange}>
                 <RadixTooltip.Trigger asChild>
                     <span>{trigger}</span>
