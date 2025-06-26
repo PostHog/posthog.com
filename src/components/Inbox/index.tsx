@@ -86,7 +86,7 @@ export default function Inbox(props) {
         filters,
     })
     const { appWindow } = useWindow()
-    const bottomHeightDefault = useMemo(() => (appWindow?.size.height * 3) / 4, [appWindow?.size.height])
+    const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 4) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
     const [sideWidth, setSideWidth] = useState(SIDE_WIDTH_DEFAULT)
     const [notificationsEnabled, setNotificationsEnabled] = useState(false)
