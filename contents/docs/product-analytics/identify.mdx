@@ -176,8 +176,8 @@ The two IDs are merged with the following rules:
 - If neither the `distinct_id` nor the `alias_id` are associated with a [person](https://posthog.com/docs/data/persons), a new person is created with both IDs.
 - If only one of the IDs is associated with a person, the other ID is added to the existing person.
 - If both IDs are associated with a person:
-  - If the person associated with the `alias_id` has already been identified, the merge is blocked.
-  - If the person associated with the `alias_id` has not been identified, the person associated with the `alias_id` is merged into the person associated with the `distinct_id` parameter.
+  - If the person associated with the `alias_id` has already **been identified**, the merge is blocked.
+  - If the person associated with the `alias_id` has **not been identified**, the person associated with the `alias_id` is merged into the person associated with the `distinct_id` parameter.
 
 You can view whether a user can be merged into another user using `alias` when [viewing their properties](/docs/data/user-properties#how-to-view-user-properties) in the PostHog app: Under their ID, you'll see `Merge restrictions`. This will indicate whether there are merge restrictions or not – i.e., whether you can use their ID as an `alias_id` or not.
 
@@ -202,28 +202,13 @@ When calling either of these with invalid inputs (such as in the examples descri
 
 PostHog also has built-in protections to stop the most common distinct ID mistakes. See the FAQ at the end of this page for more details.
 
-- We do not allow identifying users with empty space strings of any length – e.g.,`' '`, `'       '`, etc.
-- We do not allow identifying users with the following strings (case insensitive):
-    - `anonymous`
-    - `guest`
-    - `distinctid`
-    - `distinct_id`
-    - `id`
-    - `not_authenticated`
-    - `email`
-    - `undefined`
-    - `true`
-    - `false`
+| Type | Invalid distinct IDs |
+|------|---------------------|
+| Empty spaces | Any string containing only spaces (e.g. `' '`, `'       '`) |
+| Case insensitive | `anonymous`<br/>`guest`<br/>`distinctid`<br/>`distinct_id`<br/>`id`<br/>`not_authenticated`<br/>`email`<br/>`undefined`<br/>`true`<br/>`false` |
+| Case sensitive | `[object Object]`<br/>`NaN`<br/>`None`<br/>`none`<br/>`null`<br/>`0` |
 
-- We do not allow identifying users with the following strings (case sensitive):
-  - `[object Object]` 
-  - `NaN`
-  - `None`
-  - `none`
-  - `null`
-  - `0`
-
-- We do not allow identifying a user that has already been identified with a different distinct ID. For example:
+We do not allow identifying a user that has already been identified with a different distinct ID. For example:
 
 <MultiLanguage selector="tabs">
 
