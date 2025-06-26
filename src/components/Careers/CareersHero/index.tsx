@@ -398,21 +398,21 @@ export const CareersHero = () => {
                             alt=""
                             width={588}
                             height={434}
-                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%-65%)] @2xl:translate-y-[calc(-50%-50%)] @3xl:translate-x-[calc(-50%-70%)] @3xl:translate-y-[calc(-50%-50%)] @4xl:translate-x-[calc(-50%-70%)] @4xl:translate-y-[calc(-50%-60%)] w-[294px] h-auto`}
+                            className={`${imagePositioning} translate-x-[calc(-50%-65%)] translate-y-[calc(-50%-60%)] @2xl:translate-x-[calc(-50%-65%)] @2xl:translate-y-[calc(-50%-50%)] @3xl:translate-x-[calc(-50%-70%)] @3xl:translate-y-[calc(-50%-50%)] @4xl:translate-x-[calc(-50%-70%)] @4xl:translate-y-[calc(-50%-60%)] w-[294px] h-auto`}
                         />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/top_right_c86eb1a286.png"
                             alt=""
                             width={551}
                             height={517}
-                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+55%)] @2xl:translate-y-[calc(-50%-50%)] @3xl:translate-x-[calc(-50%+55%)] @3xl:translate-y-[calc(-50%-60%)] @4xl:translate-x-[calc(-50%+55%)] @4xl:translate-y-[calc(-50%-65%)] w-[275px] h-auto`}
+                            className={`${imagePositioning} translate-x-[calc(-50%+25%)] translate-y-[calc(-50%-65%)] @lg:translate-x-[calc(-50%+55%)] @lg:translate-y-[calc(-50%-65%)] @2xl:translate-x-[calc(-50%+55%)] @2xl:translate-y-[calc(-50%-50%)] @3xl:translate-x-[calc(-50%+55%)] @3xl:translate-y-[calc(-50%-60%)] @4xl:translate-x-[calc(-50%+55%)] @4xl:translate-y-[calc(-50%-65%)] w-[275px] h-auto`}
                         />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/right_6de2023571.png"
                             alt=""
                             width={585}
                             height={488}
-                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+110%)] @2xl:translate-y-[calc(-50%-10%)] @3xl:translate-x-[calc(-50%+120%)] @3xl:translate-y-[calc(-50%-20%)] @4xl:translate-x-[calc(-50%+130%)] @4xl:translate-y-[calc(-50%-20%)] w-[292.5px] h-[244px] `}
+                            className={`${imagePositioning} translate-x-[calc(-50%+110%)] translate-y-[calc(-50%-25%)] @lg:translate-x-[calc(-50%+120%)] @lg:translate-y-[calc(-50%-10%)] @2xl:translate-x-[calc(-50%+110%)] @2xl:translate-y-[calc(-50%-10%)] @3xl:translate-x-[calc(-50%+120%)] @3xl:translate-y-[calc(-50%-20%)] @4xl:translate-x-[calc(-50%+130%)] @4xl:translate-y-[calc(-50%-20%)] w-[292.5px] h-[244px] `}
                         />
 
                         <CloudinaryImage
@@ -420,7 +420,7 @@ export const CareersHero = () => {
                             alt=""
                             width={389}
                             height={333}
-                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+110%)] @2xl:translate-y-[calc(-50%+65%)] @3xl:translate-x-[calc(-50%+120%)] @3xl:translate-y-[calc(-50%+65%)] @4xl:translate-x-[calc(-50%+135%)] @4xl:translate-y-[calc(-50%+75%)] w-[194.5px] h-auto `}
+                            className={`${imagePositioning} translate-x-[calc(-50%+70%)] translate-y-[calc(-50%+70%)] @lg:translate-x-[calc(-50%+80%)] @lg:translate-y-[calc(-50%+75%)] @xl:translate-x-[calc(-50%+120%)] @xl:translate-y-[calc(-50%+85%)] @2xl:translate-x-[calc(-50%+110%)] @2xl:translate-y-[calc(-50%+65%)] @3xl:translate-x-[calc(-50%+120%)] @3xl:translate-y-[calc(-50%+65%)] @4xl:translate-x-[calc(-50%+135%)] @4xl:translate-y-[calc(-50%+75%)] w-[194.5px] h-auto `}
                         />
 
                         <CloudinaryImage
@@ -428,7 +428,7 @@ export const CareersHero = () => {
                             alt=""
                             width={551}
                             height={517}
-                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+5%)] @2xl:translate-y-[calc(-50%+55%)] @3xl:translate-x-[calc(-50%+5%)] @3xl:translate-y-[calc(-50%+60%)] @4xl:translate-x-[calc(-50%+5%)] @4xl:translate-y-[calc(-50%+65%)] w-[275px] h-auto`}
+                            className={`${imagePositioning} translate-x-[calc(-50%-5%)] translate-y-[calc(-50%+120%)] @xl:translate-x-[calc(-50%-5%)] @xl:translate-y-[calc(-50%+70%)] @2xl:translate-x-[calc(-50%+5%)] @2xl:translate-y-[calc(-50%+55%)] @3xl:translate-x-[calc(-50%+5%)] @3xl:translate-y-[calc(-50%+60%)] @4xl:translate-x-[calc(-50%+5%)] @4xl:translate-y-[calc(-50%+65%)] w-[275px] h-auto`}
                         />
 
                         <CloudinaryImage
@@ -436,7 +436,7 @@ export const CareersHero = () => {
                             alt=""
                             width={366}
                             height={338}
-                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%-100%)] @2xl:translate-y-[calc(-50%+60%)] @3xl:translate-x-[calc(-50%-115%)] @3xl:translate-y-[calc(-50%+65%)] @4xl:translate-x-[calc(-50%-125%)] @4xl:translate-y-[calc(-50%+70%)] w-[183px] h-auto `}
+                            className={`${imagePositioning} translate-x-[calc(-50%-50%)] translate-y-[calc(-50%+70%)] @xl:translate-x-[calc(-50%-120%)] @xl:translate-y-[calc(-50%+70%)] @2xl:translate-x-[calc(-50%-100%)] @2xl:translate-y-[calc(-50%+60%)] @3xl:translate-x-[calc(-50%-115%)] @3xl:translate-y-[calc(-50%+65%)] @4xl:translate-x-[calc(-50%-125%)] @4xl:translate-y-[calc(-50%+70%)] w-[183px] h-auto `}
                         />
 
                         <CloudinaryImage
@@ -444,7 +444,7 @@ export const CareersHero = () => {
                             alt=""
                             width={560}
                             height={483}
-                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%-120%)] @2xl:translate-y-[calc(-50%+0%)] @3xl:translate-x-[calc(-50%-140%)] @3xl:translate-y-[calc(-50%+0%)] @4xl:translate-x-[calc(-50%-150%)] @4xl:translate-y-[calc(-50%+0%)] w-[280px] h-auto `}
+                            className={`${imagePositioning} translate-x-[calc(-50%-125%)] translate-y-[calc(-50%+20%)] @xl:translate-x-[calc(-50%-140%)] @xl:translate-y-[calc(-50%+0%)] @2xl:translate-x-[calc(-50%-120%)] @2xl:translate-y-[calc(-50%+0%)] @3xl:translate-x-[calc(-50%-140%)] @3xl:translate-y-[calc(-50%+0%)] @4xl:translate-x-[calc(-50%-150%)] @4xl:translate-y-[calc(-50%+0%)] w-[280px] h-auto `}
                         />
                     </div>
 
