@@ -499,7 +499,6 @@ function ReaderViewContent({
                                 : undefined
                         }
                     >
-                        <DebugContainerQuery />
                         <article
                             className={`@container/reader-content-container ${getProseClasses(
                                 proseSize

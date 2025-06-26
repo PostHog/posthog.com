@@ -1,5 +1,10 @@
 import React from 'react'
 
+// how this works:
+// add <DebugContainerQuery /> to check the breakpoint of the closest parent container
+// add <DebugContainerQuery name="my-container" /> to check the breakpoint of the container with the name "my-container" - just add the instance inside the container where you want to check the breakpoint
+// note: because these classNames are assembled on-the-fly, add new container names to the end of safelist.txt
+
 export const DebugContainerQuery = ({ name = '' }: { name?: string }) => {
     return (
         <div data-scheme="primary" className="bg-white text-xs border border-red text-center rounded">
