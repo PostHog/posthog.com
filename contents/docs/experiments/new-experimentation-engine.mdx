@@ -60,7 +60,7 @@ The experiment view shows the unique-user count for each variant at the top.
 
 In practice, some users may see more than one variant. Choose how to handle them:
 
-* **Exclude** (default): Ignore users exposed to multiple variants. This ensures clean results by only analyzing users who had a single, consistent experience. Excluded users are grouped under `$multiple` in the exposure table
+* **Exclude** (default): Exclude users exposed to multiple variants. This ensures clean results by only analyzing users who had a single, consistent experience. Excluded users are grouped under `$multiple` in the exposure table
 
 * **First seen variant**: Include the users and attribute all metric events to the first variant they encountered; later exposures are ignored
 
