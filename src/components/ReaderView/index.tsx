@@ -479,7 +479,11 @@ function ReaderViewContent({
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
                             ${renderLeftSidebar && isNavVisible ? 'rounded-l' : 'border-l-0'}
-                            ${showSidebar && isTocVisible ? 'rounded-r' : 'border-r-0'} ${
+                            ${
+                                showSidebar && isTocVisible
+                                    ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
+                                    : 'border-r-0'
+                            } ${
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                                 : ''
@@ -495,11 +499,18 @@ function ReaderViewContent({
                                 : undefined
                         }
                     >
-                        <article className={`${getProseClasses(proseSize)} max-w-none relative overflow-x-hidden`}>
+                        <DebugContainerQuery />
+                        <article
+                            className={`@container/reader-content-container ${getProseClasses(
+                                proseSize
+                            )} max-w-none relative overflow-x-hidden`}
+                        >
                             <div
                                 ref={contentRef}
                                 className={`@container/reader-content relative ${
-                                    padding ? 'p-4' : ''
+                                    padding
+                                        ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
+                                        : ''
                                 } mx-auto transition-all ${
                                     fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
                                 }`}
@@ -540,9 +551,9 @@ function ReaderViewContent({
                             <motion.div
                                 id="toc"
                                 className="hidden @4xl/app-reader:block flex-shrink-0 overflow-hidden"
-                                initial={{ width: '300px' }}
+                                initial={{ width: '250px' }}
                                 animate={{
-                                    width: '300px',
+                                    width: '250px',
                                     transition: { duration: 0.2 },
                                 }}
                                 exit={{
@@ -562,7 +573,7 @@ function ReaderViewContent({
                                         transition: { duration: 0.05 },
                                     }}
                                 >
-                                    <ScrollArea className="px-4" fadeOverflow>
+                                    <ScrollArea className="px-2" fadeOverflow>
                                         {tableOfContents && tableOfContents?.length > 0 && (
                                             <TableOfContents
                                                 tableOfContents={tableOfContents}
@@ -598,7 +609,7 @@ function ReaderViewContent({
                     </div>
                     <motion.div
                         className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
-                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[300px]' : 'w-auto'
+                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
                         }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >

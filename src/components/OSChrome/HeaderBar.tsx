@@ -150,7 +150,7 @@ export default function HeaderBar({
             {showSidebar && (
                 <motion.div
                     className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
-                        isTocVisible ? '@4xl:min-w-[300px]' : 'w-auto'
+                        isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
                     }`}
                     animate={isTocVisible ? 'open' : 'closed'}
                 >
