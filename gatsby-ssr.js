@@ -52,8 +52,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     })
     try {
         preferredTheme =
-            (localStorage.getItem('theme') || (darkQuery.matches ? 'dark' : 'light')) ||
-            'light'
+            localStorage.getItem('theme') || 'light'
     } catch (err) {}
     window.__setPreferredTheme = function (newTheme) {
         setTheme(newTheme === 'system' ? (darkQuery.matches ? 'dark' : 'light') : newTheme)
