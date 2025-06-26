@@ -315,14 +315,13 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             }}
                             initial={{
                                 scale: 0.005,
-
                                 x: rendered ? windowPosition.x : item.fromOrigin?.x || windowPosition.x,
                                 y: rendered ? windowPosition.y : item.fromOrigin?.y || windowPosition.y,
                             }}
                             animate={{
                                 scale: 1,
-                                x: position.x,
-                                y: position.y,
+                                x: Math.round(position.x),
+                                y: Math.round(position.y),
                                 transition: {
                                     scale: {
                                         duration: 0.3,
