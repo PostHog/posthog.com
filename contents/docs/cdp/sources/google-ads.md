@@ -13,14 +13,14 @@ You can sync data from Google Ads reports by configuring it as a source in PostH
 
 ## Requirements
 - The [Google Ads customer ID](https://support.google.com/google-ads/answer/1704344) of the account you are trying to sync to Posthog.
-- Administrator access to the Google Ads account you want to sync. If you use manager accounts then this is often enough to connect. An manager account is an Ads account type that enables you to manage several Ads accounts under a single login - [see here for more on Google Ads manager accounts](https://support.google.com/google-ads/answer/6139186).
+- Administrator access to the Google Ads account you want to sync. If you use manager accounts then this is often enough to connect. An manager account is an Ads account type that enables you to manage several Ads accounts under a single login – [see here for more on Google Ads manager accounts](https://support.google.com/google-ads/answer/6139186).
 
 ![Location of the Google Ads Customer ID](https://res.cloudinary.com/dmukukwp6/image/upload/2024_10_31_at_15_15_51_a7a003008c.png)
 
 
 ## Configuring PostHog
 
-To connect to your Google Ads account, PostHog uses Google auth, it'll ask you to sign in with you Google account, please make sure this account has administrator access to your Google Ads account.
+Connect PostHog to your Google Ads account using a Google account. The Google account must have administrator access to your Google Ads account.
 
 
 1. In PostHog, go to the **[Data pipelines](https://us.posthog.com/pipeline/sources)** tab.
