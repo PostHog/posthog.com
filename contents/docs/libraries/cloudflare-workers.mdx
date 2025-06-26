@@ -32,7 +32,7 @@ Afterwards, set up your project API key and host in your `wrangler.jsonc` (or `w
 }
 ```
 
-Next, set up the PostHog helper to create a PostHog client. We set `flushAt` to `1` and `flushInterval` to `0` to capture data without batching as this can be delayed and lost when the worker shuts down.
+Next, set up the PostHog helper to create a PostHog client. We set `flushAt` to `1` and `flushInterval` to `0` to send captured data without batching. Batched data is sent asynchronously and Cloudflare Workers can terminate before it's sent causing data loss.
 
 ```jsx
 // src/posthog.js
@@ -86,7 +86,7 @@ export default {
 You'll notice two different usage patterns here:
 
 1. We use `ctx.waitUntil()` with `captureImmediate()` to capture an event. This doesn't block the **response**, but does ensure data is captured before the worker shuts down. 
-2. We `await` flags which blocks the response until we get the flag data we need. 
+2. We `await` flags which blocks the response until we get the [feature flag](/docs/feature-flags) data we need. 
 
 ### Error tracking
 
@@ -96,5 +96,6 @@ For more details and a method for automatically capturing errors, see our [error
 
 ## Further reading
 
+- [Node.js SDK reference](/docs/libraries/node)
 - [Using Cloudflare as a reverse proxy](/docs/advanced/proxy/cloudflare)
 - [Linking Cloudflare R2 as a source](/docs/cdp/sources/r2)
