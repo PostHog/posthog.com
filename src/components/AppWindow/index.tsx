@@ -303,7 +303,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
-                            className={`@container absolute overflow-hidden !select-auto  ${
+                            className={`@container absolute overflow-hidden !select-auto bg-primary ${
                                 focusedWindow === item ? 'shadow-2xl border-primary' : 'shadow-lg border-input'
                             } ${dragging ? '[&_*]:select-none' : ''} ${
                                 item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
@@ -315,14 +315,13 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             }}
                             initial={{
                                 scale: 0.005,
-
                                 x: rendered ? windowPosition.x : item.fromOrigin?.x || windowPosition.x,
                                 y: rendered ? windowPosition.y : item.fromOrigin?.y || windowPosition.y,
                             }}
                             animate={{
                                 scale: 1,
-                                x: position.x,
-                                y: position.y,
+                                x: Math.round(position.x),
+                                y: Math.round(position.y),
                                 transition: {
                                     scale: {
                                         duration: 0.3,
