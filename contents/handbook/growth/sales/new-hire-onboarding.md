@@ -70,7 +70,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
 ### Week 2
 
-- During your first week, Simon will go through the sales preocess with you and answer any questions you may have about the playbook. 
+- During your first week, Simon will go through the sales process with you and answer any questions you may have about the playbook. 
 - Shadow more live calls and listen to more Buildbetter recordings
 - Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
