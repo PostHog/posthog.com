@@ -382,12 +382,12 @@ export const CareersHero = () => {
     }, [selectedJob])
 
     const imagePositioning =
-        'absolute top-1/2 left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @3xl:scale-90 @4xl:scale-100'
+        'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100'
 
     return (
         <>
             <DebugContainerQuery />
-            <div className="@container not-prose relative aspect-[3/1] overflow-hidden bg-accent border-b border-primary mb-4">
+            <div className="@container not-prose relative aspect-[2/1] @2xl:aspect-[3/1] overflow-hidden bg-accent border-b border-primary mb-4">
                 {/* Background container for positioned graphics */}
                 {/* Example of positioned graphics - replace with your actual graphics */}
                 {/* Left section graphics */}
@@ -398,21 +398,21 @@ export const CareersHero = () => {
                             alt=""
                             width={588}
                             height={434}
-                            className={`${imagePositioning} translate-x-[calc(-50%-70%)] translate-y-[calc(-50%-60%)] w-[294px] h-auto`}
+                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%-65%)] @2xl:translate-y-[calc(-50%-50%)] @3xl:translate-x-[calc(-50%-70%)] @3xl:translate-y-[calc(-50%-50%)] @4xl:translate-x-[calc(-50%-70%)] @4xl:translate-y-[calc(-50%-60%)] w-[294px] h-auto`}
                         />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/top_right_c86eb1a286.png"
                             alt=""
                             width={551}
                             height={517}
-                            className={`${imagePositioning} translate-x-[calc(-50%+55%)] translate-y-[calc(-50%-65%)] w-[275px] h-auto`}
+                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+55%)] @2xl:translate-y-[calc(-50%-50%)] @3xl:translate-x-[calc(-50%+55%)] @3xl:translate-y-[calc(-50%-60%)] @4xl:translate-x-[calc(-50%+55%)] @4xl:translate-y-[calc(-50%-65%)] w-[275px] h-auto`}
                         />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/right_6de2023571.png"
                             alt=""
                             width={585}
                             height={488}
-                            className={`${imagePositioning} translate-x-[calc(-50%+130%)] translate-y-[calc(-50%-0%)] w-[292.5px] h-[244px] `}
+                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+110%)] @2xl:translate-y-[calc(-50%-10%)] @3xl:translate-x-[calc(-50%+120%)] @3xl:translate-y-[calc(-50%-20%)] @4xl:translate-x-[calc(-50%+130%)] @4xl:translate-y-[calc(-50%-20%)] w-[292.5px] h-[244px] `}
                         />
 
                         <CloudinaryImage
@@ -420,7 +420,15 @@ export const CareersHero = () => {
                             alt=""
                             width={389}
                             height={333}
-                            className={`${imagePositioning} translate-x-[calc(-50%+70%)] translate-y-[calc(-50%+75%)] w-[194.5px] h-auto `}
+                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+110%)] @2xl:translate-y-[calc(-50%+65%)] @3xl:translate-x-[calc(-50%+120%)] @3xl:translate-y-[calc(-50%+65%)] @4xl:translate-x-[calc(-50%+135%)] @4xl:translate-y-[calc(-50%+75%)] w-[194.5px] h-auto `}
+                        />
+
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/top_right_c86eb1a286.png"
+                            alt=""
+                            width={551}
+                            height={517}
+                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%+5%)] @2xl:translate-y-[calc(-50%+55%)] @3xl:translate-x-[calc(-50%+5%)] @3xl:translate-y-[calc(-50%+60%)] @4xl:translate-x-[calc(-50%+5%)] @4xl:translate-y-[calc(-50%+65%)] w-[275px] h-auto`}
                         />
 
                         <CloudinaryImage
@@ -428,7 +436,7 @@ export const CareersHero = () => {
                             alt=""
                             width={366}
                             height={338}
-                            className={`${imagePositioning} translate-x-[calc(-50%-70%)] translate-y-[calc(-50%+70%)] w-[183px] h-auto `}
+                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%-100%)] @2xl:translate-y-[calc(-50%+60%)] @3xl:translate-x-[calc(-50%-115%)] @3xl:translate-y-[calc(-50%+65%)] @4xl:translate-x-[calc(-50%-125%)] @4xl:translate-y-[calc(-50%+70%)] w-[183px] h-auto `}
                         />
 
                         <CloudinaryImage
@@ -436,13 +444,13 @@ export const CareersHero = () => {
                             alt=""
                             width={560}
                             height={483}
-                            className={`${imagePositioning} translate-x-[calc(-50%-150%)] translate-y-[calc(-50%+10%)] w-[280px] h-auto `}
+                            className={`${imagePositioning} @2xl:translate-x-[calc(-50%-120%)] @2xl:translate-y-[calc(-50%+0%)] @3xl:translate-x-[calc(-50%-140%)] @3xl:translate-y-[calc(-50%+0%)] @4xl:translate-x-[calc(-50%-150%)] @4xl:translate-y-[calc(-50%+0%)] w-[280px] h-auto `}
                         />
                     </div>
 
                     {/* Text overlay - keeping this as is */}
                     <div className="absolute inset-0 flex flex-col justify-center items-center">
-                        <h1 className="text-2xl lg:text-3xl font-bold mb-2">Who's hiring?</h1>
+                        <h1 className="text-2xl lg:text-3xl font-bold mb-1 @3xl:mb-2">Who's hiring?</h1>
                         <p className="text-base mb-4">
                             Our small teams are looking to add{' '}
                             <strong className="whitespace-nowrap">{totalPositions} team members</strong>.
