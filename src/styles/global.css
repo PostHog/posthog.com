@@ -53,6 +53,21 @@
         }
     }
 
+    .prose {
+        code {
+            @apply before:hidden after:hidden; /* hide prose ticks */
+        }
+
+        a:has(> code) {
+            @apply no-underline;
+        }
+    }
+
+    .prose a > code,
+    .dark .prose a > code {
+        @apply text-blue bg-blue/10 border border-blue/50 hover:border-blue no-underline relative pr-4 after:block after:absolute after:right-px after:top-[2px] after:size-4 after:bg-arrow-up-right after:bg-no-repeat after:bg-center after:bg-contain;
+    }
+
     .not-prose {
         h1 {
             @apply text-3xl;
