@@ -4,7 +4,6 @@ import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
 import React, { useState, useMemo } from 'react'
-import { useFitText } from '../../hooks/useFitText'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
@@ -42,105 +41,95 @@ export const TeamMember = (props: any) => {
         pineappleOnPizza,
     } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
-    const { fontSize, textRef } = useFitText(name)
 
     // Extract team data
     const teamData = teams?.data || []
 
     return (
         <>
-            <div className="aspect-[3/4] border border-primary bg-accent inline-block rounded max-w-96 relative">
-                <div className="absolute top-0 right-0">
-                    <Stickers country={country} location={location} />
-                </div>
-                <div className="absolute top-8 right-0 origin-top-left rotate-90 translate-x-full">
-                    <span className="">{location}</span>
+            <div
+                className={`@container not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
+            >
+                <div className="absolute top-2 left-2 flex flex-col gap-1">
+                    <div>
+                        <Tooltip trigger={<Stickers name="StickerTrophy" label="5" />}>Here since 2019</Tooltip>
+                    </div>
+                    <div>
+                        <Tooltip
+                            trigger={
+                                <Stickers
+                                    name={
+                                        pineappleOnPizza === true
+                                            ? 'StickerPineappleYes'
+                                            : pineappleOnPizza === false
+                                            ? 'StickerPineappleNo'
+                                            : 'StickerPineappleUnknown'
+                                    }
+                                />
+                            }
+                        >
+                            {pineappleOnPizza === true
+                                ? 'Loves'
+                                : pineappleOnPizza === false
+                                ? 'Hates'
+                                : 'Is undecided on'}{' '}
+                            pineapple on pizza
+                        </Tooltip>
+                    </div>
                 </div>
 
-                {/* Image container that extends above the card */}
-                <div className="relative w-[calc(100%-4rem)] aspect-square translate-y-[-15%] ml-2 mt-2">
-                    {/* Yellow background */}
-                    <div className={`bg-${color} w-full h-[85%] border-2 border-black absolute bottom-0`} />
+                <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10">
                     <img
                         src={
                             avatar?.url ||
                             'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
                         }
-                        className="w-full h-full object-cover object-bottom z-10 relative top-[-2px]"
+                        className="w-full h-full object-contain pl-4 object-bottom z-10 relative top-[-2px]"
                         alt={name}
                     />
-                </div>
-
-                <div className="pl-2 -mt-5">
-                    <div className="text-sm pb-2">
-                        {teamData.length > 0 ? (
-                            <div className="flex flex-wrap gap-2 items-center">
-                                {teamData.map((team: any) => {
-                                    const teamName = team.attributes.name
-                                    const miniCrest = teamMiniCrestMap[teamName]
-                                    const gatsbyImageMiniCrest = getImage(miniCrest)
-                                    return (
-                                        <Link
-                                            key={team.id}
-                                            to={`/teams/${team.attributes.slug}`}
-                                            className="flex items-center gap-1 text-sm hover:text-primary"
-                                        >
-                                            {gatsbyImageMiniCrest && (
-                                                <GatsbyImage
-                                                    image={gatsbyImageMiniCrest}
-                                                    alt={`${teamName} Team`}
-                                                    className="size-5"
-                                                />
-                                            )}
-                                            <span>{teamName}</span>
-                                        </Link>
-                                    )
-                                })}
+                    <div className="absolute -bottom-20 inset-x-0 overflow-hidden z-10 py-2">
+                        <div className="relative -rotate-3 font-squeak uppercase">
+                            <div className="bg-white border-y-3 border-black relative -mx-1 py-0.5 px-4 flex flex-col items-end text-right">
+                                <h3 className="m-0 !leading-tight !text-xl @[16rem]:!text-2xl -mb-1">{name}</h3>
+                                <h4 className="text-base @[16rem]:!text-lg m-0 !leading-tight text-secondary">
+                                    {companyRole}
+                                </h4>
                             </div>
-                        ) : (
-                            'No team assigned'
-                        )}
-                    </div>
-                    <div className="flex gap-1">
-                        <div>
-                            <Tooltip trigger={<Stickers name="StickerTrophy" label="5" />}>Here since 2019</Tooltip>
-                        </div>
-                        <div>
-                            <Tooltip
-                                trigger={
-                                    <Stickers
-                                        name={
-                                            pineappleOnPizza === true
-                                                ? 'StickerPineappleYes'
-                                                : pineappleOnPizza === false
-                                                ? 'StickerPineappleNo'
-                                                : 'StickerPineappleUnknown'
-                                        }
-                                    />
-                                }
-                            >
-                                {pineappleOnPizza === true
-                                    ? 'Loves'
-                                    : pineappleOnPizza === false
-                                    ? 'Hates'
-                                    : 'Is undecided on'}{' '}
-                                pineapple on pizza
-                            </Tooltip>
+                            <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3">
+                                <Stickers country={country} location={location} />{' '}
+                                {country === 'world' ? 'Planet Earth' : location || country}
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div className="relative">
-                    <h3
-                        ref={textRef as React.RefObject<HTMLHeadingElement>}
-                        className="font-squeak uppercase -rotate-6 absolute top-3/4 left-0 right-0"
-                        style={{ fontSize: `${fontSize}px` }}
-                    >
-                        {name}
-                    </h3>
-                </div>
-                <div className="absolute bottom-4 right-4 text-sm">
-                    <div className="flex justify-end items-end">{companyRole}</div>
+                <div className="absolute bottom-0 left-0 right-0 h-32 bg-white/50 flex items-end">
+                    {teamData.length > 0 ? (
+                        <div className={`bg-${color} flex flex-wrap gap-2 items-center w-full p-2`}>
+                            {teamData.map((team: any) => {
+                                const teamName = team.attributes.name
+                                const miniCrest = teamMiniCrestMap[teamName]
+                                const gatsbyImageMiniCrest = getImage(miniCrest)
+                                return (
+                                    <div
+                                        className="flex items-center gap-1 font-squeak uppercase text-sm text-white"
+                                        key={team.id}
+                                    >
+                                        {gatsbyImageMiniCrest && (
+                                            <GatsbyImage
+                                                image={gatsbyImageMiniCrest}
+                                                alt={`${teamName} Team`}
+                                                className="size-5"
+                                            />
+                                        )}
+                                        <span>{teamName} Team</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    ) : (
+                        'No team assigned'
+                    )}
                 </div>
             </div>
 
@@ -312,7 +301,9 @@ export default function People() {
                             <dd>{uniqueCountriesCount}</dd>
                         </dl>
                     </aside>
-                    <ul className="not-prose list-none m-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @7xl:grid-cols-3 gap-x-6 gap-y-12 max-w-screen-2xl">
+
+                    <DebugContainerQuery />
+                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @4xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl">
                         {teamMembers.map((teamMember: any, index: number) => {
                             return (
                                 <TeamMember
