@@ -52,7 +52,7 @@ Here’s what we’ve learned about marketing for developers.
 
 15. You can’t [80:20 everything](/blog/brand#you-cant-8020-everything). A lot of brand work has an increasing marginal return. This is because a great brand's purpose is that you stand out. You don’t stand out by being average! We have spent a ton of time making our merch world-class (and figuring out a lot of logistics to make it happen). 
 
-16. On merch, it’s cool and people love it, but it does take a lot of work. Fulfilment companies are a pain (we’ve been through 3 in 2 years). Also, don’t expect to make any money from it, we give most of ours away.
+16. On merch, it’s cool and people love it, but it does take a lot of work. Fulfillment companies are a pain (we’ve been through 3 in 2 years). Also, don’t expect to make any money from it, we give most of ours away.
 
 17. Identify [what you want to be great at](/newsletter/b2b-startup-marketing-strategy#1-prioritize-what-you-care-about-) and spend your time there. List the areas you [don’t want to spend time](/handbook/growth/marketing#things-we-dont-want-to-spend-time-on) on too, otherwise you will be distracted by a bunch of random opportunities and never go into the depth you need to succeed in one channel. 
 
