@@ -111,8 +111,7 @@ export const onRequestError = async (err, request, context) => {
 
 You can find a full example of both this and client-side error tracking in our [Next.js error monitoring tutorial](/tutorials/nextjs-error-monitoring).
 
-## Uploading source maps
-
-If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces.
+## Stack traces
+PostHog needs access to source maps to properly display stack traces. Use the `posthog-cli` to inject and upload your source maps to PostHog.
 
 <NextJsUploadSourceMaps/>

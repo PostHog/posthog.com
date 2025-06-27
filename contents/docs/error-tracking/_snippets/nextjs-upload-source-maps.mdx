@@ -30,9 +30,13 @@ export default withPostHogConfig(nextConfig, {
 
 ```
 
-Where:
-- [`POSTHOG_API_KEY`](https://app.posthog.com/settings/user-api-keys#variables): Personal API Key with at least `write` access on `error tracking`.
-- [`POSTHOG_ENV_ID`](https://app.posthog.com/settings/environment#variables): Project ID you can find in your project settings or in the URL of your PostHog instance (54321 in `http://us.posthog.com/project/54321`).
+Where you should set the following environment variables:
+
+| Environment Variable | Description |
+| --- | --- |
+| `POSTHOG_API_KEY` | [Personal API key]((https://app.posthog.com/settings/user-api-keys#variables)) with at least `write` access on `error tracking` |
+| `POSTHOG_ENV_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/environment#variables) |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Your PostHog instance URL. Defaults to `https://us.posthog.com` |
 
 ### That's it!
 
