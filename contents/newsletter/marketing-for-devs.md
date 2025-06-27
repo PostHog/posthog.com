@@ -1,5 +1,5 @@
 ---
-title: What we've learned about marketing for developers
+title: 34 things we’ve learned about marketing for developers
 date: 2025-06-27
 author:
  - ian-vanagas
