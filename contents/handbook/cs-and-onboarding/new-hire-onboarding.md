@@ -83,8 +83,8 @@ By the end of month 3:
 
 #### Onboarding specialist
 By the end of month 1:
- - Be leading customer calls and demos on your own
- - Converting leads from your book to 'onboarded' in Vitally. This means you've spoken with them (call, email, Slack) and have confirmation they will pay, or they have signed an annual contract.
+ - Be leading customer calls on your own
+ - Converting leads from your book to ['Onboarded'](https://posthog.com/handbook/cs-and-onboarding/onboarding-team#onboarding-lifecycle) in Vitally.
  - Passing off large contracts to AEs via Salesforce
 
 By the end of month 2:
