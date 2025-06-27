@@ -468,20 +468,16 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                         type: 'item',
                                                         label: 'Bookmark',
                                                     },
-                                                    ...(siteSettings.experience === 'posthog'
-                                                        ? [
-                                                              {
-                                                                  type: 'separator',
-                                                              },
-                                                              {
-                                                                  type: 'item',
-                                                                  label: 'Close',
-                                                                  onClick: () => {
-                                                                      closeWindow(item)
-                                                                  },
-                                                              },
-                                                          ]
-                                                        : []),
+                                                    {
+                                                        type: 'separator',
+                                                    },
+                                                    {
+                                                        type: 'item',
+                                                        label: 'Close',
+                                                        onClick: () => {
+                                                            closeWindow(item)
+                                                        },
+                                                    },
                                                 ],
                                             },
                                         ]}
@@ -613,17 +609,14 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                 </ContextMenu.Root>
                                             </>
                                         )}
-
-                                        {(siteSettings.experience === 'posthog' || item.appSettings?.size?.fixed) && (
-                                            <OSButton
-                                                variant="ghost"
-                                                size="xs"
-                                                onClick={() => closeWindow(item)}
-                                                className="!px-1.5"
-                                            >
-                                                <IconX className="size-4" />
-                                            </OSButton>
-                                        )}
+                                        <OSButton
+                                            variant="ghost"
+                                            size="xs"
+                                            onClick={() => closeWindow(item)}
+                                            className="!px-1.5"
+                                        >
+                                            <IconX className="size-4" />
+                                        </OSButton>
                                     </div>
                                 </div>
                             )}
