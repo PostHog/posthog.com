@@ -320,7 +320,16 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             body: JSON.stringify({ locationId: id }),
         })
             .then((res) => res.json())
-            .then((data) => data.results.name)
+            .then((data) => {
+                if (!data?.results?.name) {
+                    console.log('No name found for location', data)
+                }
+                return data?.results?.name
+            })
+            .catch((e) => {
+                console.error('Error fetching Ashby location name', e)
+                return null
+            })
 
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')
