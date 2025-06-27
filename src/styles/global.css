@@ -381,6 +381,52 @@
     .text-shadow-none {
         text-shadow: none;
     }
+
+    /* Responsive team font sizing - base styles */
+
+    .person-name {
+        font-size: 8cqh;
+
+        &[data-length='medium'] {
+            font-size: 7cqh;
+        }
+
+        &[data-length='long'] {
+            font-size: 6.5cqh;
+        }
+
+        &[data-length='extra-long'] {
+            font-size: 5.3cqh;
+        }
+    }
+
+    .person-role {
+        font-size: 5.5cqh;
+
+        &[data-length='medium'] {
+            font-size: 5cqh;
+        }
+
+        &[data-length='long'] {
+            font-size: 4.8cqh;
+        }
+
+        &[data-length='extra-long'] {
+            font-size: 4.5cqh;
+        }
+    }
+
+    .team-font-size {
+        font-size: clamp(0.8rem, 10cqw, 1.25rem);
+
+        &[data-length='long'] {
+            font-size: clamp(0.8rem, 8.5cqw, 1.25rem);
+        }
+
+        &[data-length='extra-long'] {
+            font-size: clamp(0.5rem, 6.5cqw, 1.25rem);
+        }
+    }
 }
 
 body {

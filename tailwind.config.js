@@ -371,6 +371,11 @@ module.exports = {
         require('@tailwindcss/forms'),
         require('@headlessui/tailwindcss'),
         require('@tailwindcss/container-queries'),
+        function ({ addUtilities }) {
+            addUtilities({
+                '.container-size': { 'container-type': 'size' },
+            })
+        },
         require('tailwindcss-animated'),
         require('@tailwindcss/typography'),
         function ({ addVariant }) {
