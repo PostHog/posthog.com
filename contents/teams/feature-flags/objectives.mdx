@@ -1,53 +1,28 @@
-## Q2 2025 Objectives
+### Q3 2025 Objectives
 
-### Flag Stability, Consistency, and Resiliency
-*Goal: Create a highly stable, consistent, and resilient feature flag system capable of supporting 10x growth*
+#### Objective 1: Behavioral Cohorts
 
-- Scale `/flags` service
-  - Complete 100% worldwide rollout of `/flags` endpoint to all customers
-  - Measure and validate improved query performance metrics
-  - Document infrastructure cost savings achieved
-  - Stretch: Investigate feasibility of decoupling flag evaluation from Postgres entirely
+Motivation: Move beyond static person properties to enable dynamic behavioral targeting – let customers target users based on what they've done (or haven't done) recently.
 
-- Standardize SDK Error Handling and UX
-  - Move more SDK functionality to the server wherever possible ([reference](https://github.com/PostHog/posthog/issues/30466))
-  - Implement unified error handling framework across all SDKs
-  - Create consistent fallback and default behaviors across platforms
-  - Ensure all SDKs utilize the latest (v2) flags response format
+What we will ship:
+* **Behavioral targeting engine** – Ship the ability to target users based on recent actions, like "users who haven't seen the pricing page in 7 days" or "users who completed onboarding but haven't upgraded" <TeamMember name="Dylan Martin" photo />
+* **Customer validation** – Partner with 5-10 key customers to validate use cases, gather feedback, and measure impact on their conversion and engagement <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Annika Schmid" photo />
+* **Cross-product foundation** – Build this to also power Messaging/CDP use cases, creating a unified behavioral targeting system across PostHog <TeamMember name="Dylan Martin" photo />
 
-- Enhance System Resilience
-  - Decouple flag service from writer database
-  - Deploy flags on differentiated infrastructure aligned with varying scale needs
-  - Implement circuit breakers for graceful degradation during upstream failures
-  - Establish reliability SLAs and monitoring for flag delivery
-  
-### Behavioral Cohort Targeting
-*Goal: Enable customers to target feature flags based on user behaviors*
+#### Objective 2: Flag Management & Advanced Features  
+Motivation: Solve flag management pain points for large customers and add advanced flag capabilities.
 
-- Ship Beta Release
-  - Develop core behavioral targeting functionality
-  - Create intuitive UI for defining behavioral cohorts
-  - Implement backend services to process and apply cohort rules
+What we will ship:
+* **Flag categorization system** – Let customers organize flags into categories and only request the ones they need (addresses ElevenLabs request) <TeamMember name="Phil Haack" photo />
+* **Automatic stale flag pruning** – Identify and help customers clean up unused flags automatically <TeamMember name="Phil Haack" photo />
+* **Flag rollouts based on other flags** – Enable complex rollout strategies where one flag's state determines another's rollout <TeamMember name="Phil Haack" photo />
+* **AI IDE Integration** – Build context-aware SDK snippet generation and IDE plugins for Cursor, Windsurf <TeamMember name="Phil Haack" photo />
 
-- Customer Adoption
-  - Identify and onboard 5-10 key customers for beta testing
-  - Establish success metrics and collect usage data
-  - Document use cases and implementation patterns
-  - Create support resources for customer implementation
+#### Objective 3: Platform Reliability & Scale
+Motivation: Create a highly stable, resilient feature flag system capable of supporting 10x growth with enterprise-grade reliability.
 
-## AI IDE Integration
-*Goal: Streamline developer workflow with AI-powered flag implementation*
-
-- Create Intelligent Code Snippets
-  - Develop context-aware SDK snippet generation system for feature flags
-  - Ensure generated code follows best practices for each language/framework
-
-- IDE Integration
-  - Build plugins/extensions for AI IDEs (Cursor, Windsurf, potentially our own)
-  - Create seamless workflow from flag creation to code implementation
-  - Implement AI-assisted troubleshooting for flag implementation issues
-
-- Developer Experience
-  - Measure time-to-implementation improvements
-  - Collect developer feedback on integration experience
-  - Iterate based on usage patterns and pain points
+What we will ship:
+* **Complete /flags rollout** – Roll everyone onto /flags endpoint and deprecate /decide, measure performance improvements <TeamMember name="Andy Zhao" photo />
+* **Enhanced observability** – Add tracking for big customer experience, implement alerting and internal SLOs/external SLAs <TeamMember name="Andy Zhao" photo />
+* **System resilience** – Decouple flag service from writer database, implement circuit breakers, build remote caches into server-side SDKs <TeamMember name="Dylan Martin" photo />
+* **SDK standardization** – Implement unified error handling framework and ensure all SDKs use latest (v2) flags response format <TeamMember name="Andy Zhao" photo />
