@@ -9,10 +9,10 @@ Since source maps need to be publicly accessible for PostHog to fetch them, they
 
 ### How PostHog fetches source maps
 
-PostHog will try to access source maps in the following order:
-1. PostHog will look for a `SourceMap` and `X-SourceMap` header when fetching your JavaScript bundle.
-2. PostHog will look for a `//# sourceMappingURL=` comment in your JavaScript bundle.
-3. PostHog will try appending a `.map` extension to the URL of your JavaScript bundle.
+PostHog tries to access source maps in the following order:
+1. Look for a `SourceMap` and `X-SourceMap` header when fetching your JavaScript bundle.
+2. Look for a `//# sourceMappingURL=` comment in your JavaScript bundle.
+3. Try appending a `.map` extension to the URL of your JavaScript bundle.
 
 ### Serving source maps with Next.js
 
