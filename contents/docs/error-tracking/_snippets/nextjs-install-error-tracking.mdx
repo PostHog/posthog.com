@@ -2,7 +2,6 @@ import JSWebErrorTracking from './web-install-error-tracking.mdx'
 import NextJSInstall from '../../integrate/_snippets/nextjs/install-nextjs.mdx'
 import NextJSInstallServer from '../../integrate/_snippets/nextjs/install-nextjs-server.mdx'
 import Tab from 'components/Tab'
-import HostingSourceMaps from './hosting-source-maps.mdx'
 import NextJsUploadSourceMaps from './nextjs-upload-source-maps.mdx'
 
 ## Client-side installation
@@ -124,12 +123,5 @@ You can find a full example of both this and client-side error tracking in our [
 
 ## Stack traces
 PostHog needs access to source maps to properly display stack traces. Use the `posthog-cli` to inject and upload your source maps to PostHog.
-
-<details>
-  <summary>Hosting source maps instead of uploading?</summary>
-
-  <HostingSourceMaps />
-
-</details>
 
 <NextJsUploadSourceMaps/>
