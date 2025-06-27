@@ -106,7 +106,8 @@ export default function DataPipeline({
                             <p className="text-sm opacity-70 pt-4">
                                 Parts of this page are sourced from{' '}
                                 <a href="https://github.com/segmentio/segment-docs">segmentio/segment-docs</a> under the
-                                CC Attributions 4.0 license. The content may have been modified according to{' '}
+                                <a href="https://creativecommons.org/licenses/by/4.0/">CC Attributions 4.0 license</a>.
+                                The content may have been modified according to{' '}
                                 <a href="https://github.com/PostHog/posthog.com/blob/master/gatsby/sourceNodes.ts">
                                     this code
                                 </a>
