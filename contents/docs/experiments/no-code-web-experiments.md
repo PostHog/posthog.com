@@ -54,9 +54,9 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 ### 2. Launching the toolbar on your website
 
-<CalloutBox icon="IconInfo" title="Disable web experiments">
+During the beta period, you'll need to add `disable_web_experiments: false` to your PostHog web snippet configuration. Otherwise, experiments configured with the toolbar won't run on your live site.
 
-During the beta period, you'll need to add `disable_web_experiments: false` to your PostHog web snippet configuration like this:
+Add `disable_web_experiments: false` to your PostHog init code like this:
 
 ```js-web
 posthog.init('<ph_project_api_key>', {
@@ -65,10 +65,6 @@ posthog.init('<ph_project_api_key>', {
   disable_web_experiments: false,
 })
 ```
-
-Otherwise, experiments configured with the toolbar won't run on your live site.
-
-</CalloutBox>
 
 Once you've created your no-code web experiment, click **Launch toolbar on your website** under the **Implementation** section.
 
