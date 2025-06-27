@@ -21,7 +21,7 @@ The parameters are appended to a URL using query parameters, for example:
 
 `https://www.example.com/page?utm_source=twitter&utm_medium=social&utm_campaign=twitter-campaign`
 
-### Capturing UTM parameters
+## Capturing UTM parameters
 PostHog automatically captures any UTM parameters that are present when a user visits your website. These parameters are then set as properties in three places in PostHog.
 
 1. As properties on the event
@@ -53,7 +53,7 @@ Here's an example of what an event looks like when all 5 UTM parameters are set.
 > - `$entry_referring_domain`, `$entry_gclid`, `$entry_gad_source` as session properties
 > [Channel type](/docs/data/channel-type) is also calculated based on UTM data.
 
-### Custom UTM parameters
+## Custom UTM parameters
 
 You can configure [`posthog-js`](/docs/libraries/js/config) to capture any custom query parameters that you want to track by adding them to the `custom_campaign_params` array.
 
@@ -65,7 +65,7 @@ posthog.init('<ph_project_api_key>', {
 // Will automatically capture `example.com?my_custom_utm_source=twitter`
 ```
 
-### Filtering based on UTM parameters
+## Filtering based on UTM parameters
 
 One of the most common uses for UTM parameters is to filter down page views to only a single source or campaign. This allows you to then create insights that track and compare the effectiveness of different ad providers or using different content.
 

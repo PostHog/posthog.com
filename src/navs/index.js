@@ -1918,6 +1918,10 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Cloudflare Workers',
+                            url: '/docs/libraries/cloudflare-workers',
+                        },
+                        {
                             name: 'Django',
                             url: '/docs/libraries/django',
                         },
@@ -1996,6 +2000,10 @@ export const docsMenu = {
                         {
                             name: 'Vue.js',
                             url: '/docs/libraries/vue-js',
+                        },
+                        {
+                            name: 'Vercel',
+                            url: '/docs/libraries/vercel',
                         },
                         {
                             name: 'Webflow',
