@@ -38,8 +38,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         {
             allMdx(
                 filter: {
-                    fileAbsolutePath: { regex: "/^((?!contents/teams/).)*$/" }
-                    frontmatter: { title: { nin: ["", "About"] } }
+                    fileAbsolutePath: { regex: "/^((?!contents/teams/|contents/about.mdx).)*$/" }
+                    frontmatter: { title: { nin: [""] } }
                 }
             ) {
                 nodes {

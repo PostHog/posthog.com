@@ -5,7 +5,7 @@ import { James, Tim } from 'components/Signatures'
 
 export const YC = () => {
     return (
-        <aside className="max-w-sm relative @xl:float-right @xl:ml-8 mb-6 @xl:mb-0 inline-block mx-auto">
+        <aside className="max-w-sm relative @xl:float-right @xl:ml-4 mt-4 @2xl/reader-content-container:-mr-4 @3xl/reader-content-container:-mr-16 @4xl/reader-content-container:-mr-28 mb-6 @xl:mb-0 inline-block transition-all">
             {/* <div className="hidden @xl:flex justify-end text-primary dark:text-primary-dark">
         <YCBadge className="w-[95px] h-[63px]" />
       </div> */}
@@ -55,7 +55,7 @@ export const YC = () => {
                         <span className="block text-sm">Co-CEO</span>
                     </div>
                 </div>
-                <p className="!text-xs text-right pt-2 !mb-0">PostHog was hatched in Y Combinator's W20 batch.</p>
+                <p className="!text-xs text-right pt-2 !mt-1 !mb-0">PostHog was hatched in Y Combinator's W20 batch.</p>
             </div>
         </aside>
     )

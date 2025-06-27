@@ -77,7 +77,7 @@ const experienceOptions = [
 
 export default function DisplayOptions() {
     const { siteSettings, updateSiteSettings } = useApp()
-    const [colorMode, setColorMode] = useState('system')
+    const [colorMode, setColorMode] = useState('light')
     const [skinMode, setSkinMode] = useState('modern')
     const [cursor, setCursor] = useState('default')
 
@@ -188,7 +188,7 @@ export default function DisplayOptions() {
     }
 
     useEffect(() => {
-        const colorMode = localStorage.getItem('theme') || 'system'
+        const colorMode = localStorage.getItem('theme') || 'light'
         const savedCursor = localStorage.getItem('cursor') || 'default'
         const savedSkin = localStorage.getItem('skin') || 'modern'
         setColorMode(colorMode)

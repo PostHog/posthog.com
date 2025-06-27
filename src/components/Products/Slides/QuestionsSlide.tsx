@@ -163,7 +163,7 @@ export default function QuestionsSlide({
                 </div>
                 {questions.map((question: Question, index: number) => (
                     <Tabs.Content
-                        className="flex-1 bg-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full"
+                        className="text-primary flex-1 bg-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full"
                         key={index}
                         value={`tab-${index}`}
                     >

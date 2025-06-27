@@ -21,7 +21,7 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
     const companies = Object.keys(features[0]?.companies || {})
 
     return (
-        <div className="h-full p-8">
+        <div className="h-full p-8 text-primary">
             <h2 className="text-4xl font-bold text-primary mb-10 text-center">Feature comparison</h2>
 
             <div className="max-w-6xl mx-auto">

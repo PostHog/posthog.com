@@ -514,6 +514,7 @@ function ReaderViewContent({
                                     fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
                                 }`}
                             >
+                                {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && (
                                     <div className="mb-4">
                                         <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
