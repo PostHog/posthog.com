@@ -55,6 +55,8 @@ interface AppContextType {
     openSignIn: () => void
     openRegister: () => void
     openForgotPassword: () => void
+    siteSettings: SiteSettings
+    updateSiteSettings: (settings: SiteSettings) => void
 }
 
 interface AppProviderProps {
@@ -96,6 +98,10 @@ export const Context = createContext<AppContextType>({
     openSignIn: () => {},
     openRegister: () => {},
     openForgotPassword: () => {},
+    siteSettings: {
+        experience: 'posthog',
+    },
+    updateSiteSettings: () => {},
 })
 
 export interface AppSetting {
@@ -160,7 +166,7 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
-    '/display-options': {
+    '/site-settings': {
         size: {
             min: {
                 width: 600,
@@ -323,6 +329,10 @@ const appSettings: AppSettings = {
     },
 } as const
 
+export interface SiteSettings {
+    experience: 'posthog' | 'boring'
+}
+
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
     const constraintsRef = useRef<HTMLDivElement>(null)
@@ -335,6 +345,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             undefined
         )
     }, [windows])
+    const [siteSettings, setSiteSettings] = useState<SiteSettings>({
+        experience: 'posthog',
+    })
 
     const closeWindow = useCallback(
         (item: AppWindow) => {
@@ -527,6 +540,15 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
 
+        if (siteSettings.experience === 'boring') {
+            if (newWindow.appSettings?.size?.fixed) {
+                setWindows([...windows, newWindow])
+            } else {
+                replaceFocusedWindow(newWindow)
+            }
+            return
+        }
+
         if (existingWindow) {
             bringToFront(existingWindow)
         } else if (element.props.newWindow || location?.state?.newWindow) {
@@ -645,6 +667,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         })
     }
 
+    const updateSiteSettings = (settings: SiteSettings) => {
+        setSiteSettings(settings)
+        localStorage.setItem('siteSettings', JSON.stringify(settings))
+    }
+
     useEffect(() => {
         updatePages(element)
     }, [element])
@@ -700,6 +727,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }, [handleSnapToSide, expandWindow])
 
+    useEffect(() => {
+        const savedSettings = localStorage.getItem('siteSettings')
+        if (savedSettings) {
+            setSiteSettings(JSON.parse(savedSettings))
+        }
+    }, [])
+
     return (
         <Context.Provider
             value={{
@@ -723,6 +757,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 openSignIn,
                 openRegister,
                 openForgotPassword,
+                siteSettings,
+                updateSiteSettings,
             }}
         >
             {children}

@@ -4,6 +4,8 @@ import { Fieldset } from 'components/OSFieldset'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { SEO } from 'components/seo'
+import { useApp } from '../context/App'
+import type { SiteSettings } from '../context/App'
 
 const XL_CURSOR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 28"><g clip-path="url(#a)"><path fill="#000" stroke="#fff" stroke-width="5" d="m44.77 50.196.024.01.025.008c.48.177 1.014.286 1.58.286.665 0 1.28-.147 1.837-.392l.012-.006.013-.006 8.8-3.997.002-.001a4.5 4.5 0 0 0 2.225-5.968v-.001l-10.73-23.395 16.828-1.446.008-.001a4.504 4.504 0 0 0 2.678-7.78L20.073-37.289a4.51 4.51 0 0 0-4.858-.843l-.011.005A4.499 4.499 0 0 0 12.5-34v66a4.503 4.503 0 0 0 2.715 4.133l.01.003a4.505 4.505 0 0 0 4.86-.859L32.01 24.072l10.259 23.717.005.012.005.011a4.527 4.527 0 0 0 2.492 2.384Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h74v28H0z"/></clipPath></defs></svg>`
 
@@ -62,10 +64,26 @@ const cursorOptions: ToggleOption[] = [
     },
 ]
 
+const experienceOptions = [
+    {
+        label: 'Boring',
+        value: 'boring',
+    },
+    {
+        label: 'PostHog',
+        value: 'posthog',
+    },
+] satisfies (ToggleOption & { value: SiteSettings['experience'] })[]
+
 export default function DisplayOptions() {
+    const { siteSettings, updateSiteSettings } = useApp()
     const [colorMode, setColorMode] = useState('system')
     const [skinMode, setSkinMode] = useState('modern')
     const [cursor, setCursor] = useState('default')
+
+    const handleExperienceChange = (value: string) => {
+        updateSiteSettings({ ...siteSettings, experience: value as SiteSettings['experience'] })
+    }
 
     const handleColorModeChange = (value: string) => {
         window.__setPreferredTheme(value)
@@ -181,7 +199,7 @@ export default function DisplayOptions() {
 
     return (
         <>
-            <SEO title="Display options" description="Change the display options for PostHog." />
+            <SEO title="Site settings" description="Personalize your PostHog.com experience" />
             <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-2">
                 <Fieldset legend="Display">
                     <div className="bg-primary grid grid-cols-2 gap-2">
@@ -206,6 +224,16 @@ export default function DisplayOptions() {
                             options={cursorOptions}
                             onValueChange={handleCursorChange}
                             value={cursor}
+                        />
+                    </div>
+                </Fieldset>
+                <Fieldset legend="Navigation">
+                    <div className="bg-primary grid grid-cols-2 gap-2">
+                        <ToggleGroup
+                            title="Experience"
+                            options={experienceOptions}
+                            onValueChange={handleExperienceChange}
+                            value={siteSettings.experience}
                         />
                     </div>
                 </Fieldset>

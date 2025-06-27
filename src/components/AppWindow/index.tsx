@@ -10,8 +10,8 @@ import {
     IconSquare,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
-import { Provider as WindowProvider, AppWindow as AppWindowType } from '../../context/Window'
-import { ContextMenu } from 'radix-ui'
+import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
+import { ContextMenu, Dialog } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
 import OSButton from 'components/OSButton'
 import { Button } from 'components/Squeak/components/SubscribeButton'
@@ -46,6 +46,19 @@ const Router = (props) => {
     return children
 }
 
+const WindowContainer = ({ children }: { children: React.ReactNode }) => {
+    const { siteSettings } = useApp()
+    const { appWindow } = useWindow()
+    return siteSettings.experience === 'boring' && appWindow?.appSettings?.size?.fixed ? (
+        <Dialog.Root open>
+            <Dialog.Overlay className="fixed inset-0 bg-black/50 z-50" />
+            <Dialog.Content className="relative z-50">{children}</Dialog.Content>
+        </Dialog.Root>
+    ) : (
+        <AnimatePresence>{children}</AnimatePresence>
+    )
+}
+
 export default function AppWindow({ item }: { item: AppWindowType }) {
     const {
         minimizeWindow,
@@ -61,6 +74,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         handleSnapToSide,
         constraintsRef,
         expandWindow,
+        siteSettings,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -282,7 +296,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
             canGoForward={canGoForward}
             dragControls={controls}
         >
-            <AnimatePresence>
+            <WindowContainer>
                 {!item.minimized && (
                     <>
                         {snapIndicator && (
@@ -304,27 +318,56 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             data-app="AppWindow"
                             data-scheme="tertiary"
                             className={`@container absolute overflow-hidden !select-auto bg-primary ${
-                                focusedWindow === item ? 'shadow-2xl border-primary' : 'shadow-lg border-input'
-                            } ${dragging ? '[&_*]:select-none' : ''} ${
-                                item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
+                                siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                    ? ''
+                                    : `${
+                                          focusedWindow === item
+                                              ? 'shadow-2xl border-primary'
+                                              : 'shadow-lg border-input'
+                                      } ${dragging ? '[&_*]:select-none' : ''} ${
+                                          item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
+                                      }`
                             }`}
                             style={{
-                                width: size.width,
-                                height: item.appSettings?.size?.autoHeight ? 'auto' : size.height,
+                                width:
+                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? '100%'
+                                        : size.width,
+                                height:
+                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? '100%'
+                                        : item.appSettings?.size?.autoHeight
+                                        ? 'auto'
+                                        : size.height,
                                 zIndex: item.zIndex,
                             }}
                             initial={{
                                 scale: 0.005,
-                                x: rendered ? windowPosition.x : item.fromOrigin?.x || windowPosition.x,
-                                y: rendered ? windowPosition.y : item.fromOrigin?.y || windowPosition.y,
+                                x: rendered
+                                    ? siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? 0
+                                        : windowPosition.x
+                                    : item.fromOrigin?.x || windowPosition.x,
+                                y: rendered
+                                    ? siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? 0
+                                        : windowPosition.y
+                                    : item.fromOrigin?.y || windowPosition.y,
                             }}
                             animate={{
                                 scale: 1,
-                                x: Math.round(position.x),
-                                y: Math.round(position.y),
+                                x:
+                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? 0
+                                        : Math.round(position.x),
+                                y:
+                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? 0
+                                        : Math.round(position.y),
                                 transition: {
+                                    duration: siteSettings.experience === 'boring' ? 0 : 0.3,
                                     scale: {
-                                        duration: 0.3,
+                                        duration: siteSettings.experience === 'boring' ? 0 : 0.3,
                                         ease: [0.2, 0.2, 0.8, 1],
                                     },
                                 },
@@ -348,7 +391,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                     },
                                 },
                             }}
-                            drag
+                            drag={siteSettings.experience === 'posthog'}
                             dragControls={controls}
                             dragListener={false}
                             dragMomentum={false}
@@ -362,7 +405,9 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 <div
                                     data-scheme="tertiary"
                                     onDoubleClick={handleDoubleClick}
-                                    className="flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input cursor-move"
+                                    className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input ${
+                                        siteSettings.experience === 'boring' ? '' : 'cursor-move'
+                                    }`}
                                     onPointerDown={(e) => controls.start(e)}
                                 >
                                     <MenuBar
@@ -423,16 +468,20 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                         type: 'item',
                                                         label: 'Bookmark',
                                                     },
-                                                    {
-                                                        type: 'separator',
-                                                    },
-                                                    {
-                                                        type: 'item',
-                                                        label: 'Close',
-                                                        onClick: () => {
-                                                            closeWindow(item)
-                                                        },
-                                                    },
+                                                    ...(siteSettings.experience === 'posthog'
+                                                        ? [
+                                                              {
+                                                                  type: 'separator',
+                                                              },
+                                                              {
+                                                                  type: 'item',
+                                                                  label: 'Close',
+                                                                  onClick: () => {
+                                                                      closeWindow(item)
+                                                                  },
+                                                              },
+                                                          ]
+                                                        : []),
                                                 ],
                                             },
                                         ]}
@@ -460,110 +509,121 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                         )}
                                     </div>
                                     <div className="flex justify-end">
-                                        <OSButton
-                                            variant="ghost"
-                                            size="xs"
-                                            onClick={handleMinimize}
-                                            className="!px-1.5"
-                                        >
-                                            <IconMinus className="size-4 relative top-1" />
-                                        </OSButton>
-
-                                        <ContextMenu.Root onOpenChange={() => setWindowOptionsTooltipVisible(false)}>
-                                            <ContextMenu.Trigger
-                                                className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
-                                                asChild
-                                            >
-                                                {!item.fixedSize && (
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="xs"
-                                                        onClick={() => {
-                                                            setWindowOptionsTooltipVisible(false)
-                                                            if (size.width >= window?.innerWidth) {
-                                                                collapseWindow()
-                                                            } else {
-                                                                expandWindow()
-                                                            }
-                                                        }}
-                                                        onMouseEnter={() => {
-                                                            setWindowOptionsTooltipVisible(true)
-                                                        }}
-                                                        onMouseLeave={() => {
-                                                            setWindowOptionsTooltipVisible(false)
-                                                        }}
-                                                        className="!px-1.5 group"
-                                                    >
-                                                        <Tooltip
-                                                            trigger={
-                                                                <span>
-                                                                    <IconSquare className="size-5 group-hover:hidden" />
-                                                                    {size.width >= (isSSR ? 0 : window?.innerWidth) ? (
-                                                                        <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                    ) : (
-                                                                        <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                    )}
-                                                                </span>
-                                                            }
-                                                            open={windowOptionsTooltipVisible}
-                                                        >
-                                                            Right click for more options
-                                                        </Tooltip>
-                                                    </OSButton>
-                                                )}
-                                            </ContextMenu.Trigger>
-                                            <ContextMenu.Portal>
-                                                <ContextMenu.Content
-                                                    className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
-                                                    data-scheme="primary"
+                                        {siteSettings.experience !== 'boring' && (
+                                            <>
+                                                <OSButton
+                                                    variant="ghost"
+                                                    size="xs"
+                                                    onClick={handleMinimize}
+                                                    className="!px-1.5"
                                                 >
-                                                    <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                        Snap to...
-                                                    </ContextMenu.Label>
-                                                    <ContextMenu.Item
-                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                        onClick={() => handleSnapToSide('left')}
-                                                    >
-                                                        Left half
-                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                            Shift+←
-                                                        </div>
-                                                    </ContextMenu.Item>
-                                                    <ContextMenu.Item
-                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                        onClick={() => handleSnapToSide('right')}
-                                                    >
-                                                        Right half
-                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                            Shift+→
-                                                        </div>
-                                                    </ContextMenu.Item>
-                                                    <ContextMenu.Separator className="m-[5px] h-px bg-border" />
-                                                    <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                        Resize
-                                                    </ContextMenu.Label>
-                                                    <ContextMenu.Item
-                                                        disabled={size.width === (isSSR ? 0 : window?.innerWidth)}
-                                                        className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                        onClick={expandWindow}
-                                                    >
-                                                        Maximize
-                                                        <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                            Shift+↑
-                                                        </div>
-                                                    </ContextMenu.Item>
-                                                </ContextMenu.Content>
-                                            </ContextMenu.Portal>
-                                        </ContextMenu.Root>
+                                                    <IconMinus className="size-4 relative top-1" />
+                                                </OSButton>
 
-                                        <OSButton
-                                            variant="ghost"
-                                            size="xs"
-                                            onClick={() => closeWindow(item)}
-                                            className="!px-1.5"
-                                        >
-                                            <IconX className="size-4" />
-                                        </OSButton>
+                                                <ContextMenu.Root
+                                                    onOpenChange={() => setWindowOptionsTooltipVisible(false)}
+                                                >
+                                                    <ContextMenu.Trigger
+                                                        className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
+                                                        asChild
+                                                    >
+                                                        {!item.fixedSize && (
+                                                            <OSButton
+                                                                variant="ghost"
+                                                                size="xs"
+                                                                onClick={() => {
+                                                                    setWindowOptionsTooltipVisible(false)
+                                                                    if (size.width >= window?.innerWidth) {
+                                                                        collapseWindow()
+                                                                    } else {
+                                                                        expandWindow()
+                                                                    }
+                                                                }}
+                                                                onMouseEnter={() => {
+                                                                    setWindowOptionsTooltipVisible(true)
+                                                                }}
+                                                                onMouseLeave={() => {
+                                                                    setWindowOptionsTooltipVisible(false)
+                                                                }}
+                                                                className="!px-1.5 group"
+                                                            >
+                                                                <Tooltip
+                                                                    trigger={
+                                                                        <span>
+                                                                            <IconSquare className="size-5 group-hover:hidden" />
+                                                                            {size.width >=
+                                                                            (isSSR ? 0 : window?.innerWidth) ? (
+                                                                                <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                            ) : (
+                                                                                <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                            )}
+                                                                        </span>
+                                                                    }
+                                                                    open={windowOptionsTooltipVisible}
+                                                                >
+                                                                    Right click for more options
+                                                                </Tooltip>
+                                                            </OSButton>
+                                                        )}
+                                                    </ContextMenu.Trigger>
+                                                    <ContextMenu.Portal>
+                                                        <ContextMenu.Content
+                                                            className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
+                                                            data-scheme="primary"
+                                                        >
+                                                            <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                                Snap to...
+                                                            </ContextMenu.Label>
+                                                            <ContextMenu.Item
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                onClick={() => handleSnapToSide('left')}
+                                                            >
+                                                                Left half
+                                                                <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                    Shift+←
+                                                                </div>
+                                                            </ContextMenu.Item>
+                                                            <ContextMenu.Item
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                onClick={() => handleSnapToSide('right')}
+                                                            >
+                                                                Right half
+                                                                <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                    Shift+→
+                                                                </div>
+                                                            </ContextMenu.Item>
+                                                            <ContextMenu.Separator className="m-[5px] h-px bg-border" />
+                                                            <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                                Resize
+                                                            </ContextMenu.Label>
+                                                            <ContextMenu.Item
+                                                                disabled={
+                                                                    size.width === (isSSR ? 0 : window?.innerWidth)
+                                                                }
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                onClick={expandWindow}
+                                                            >
+                                                                Maximize
+                                                                <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                    Shift+↑
+                                                                </div>
+                                                            </ContextMenu.Item>
+                                                        </ContextMenu.Content>
+                                                    </ContextMenu.Portal>
+                                                </ContextMenu.Root>
+                                            </>
+                                        )}
+
+                                        {(siteSettings.experience === 'posthog' || item.appSettings?.size?.fixed) && (
+                                            <OSButton
+                                                variant="ghost"
+                                                size="xs"
+                                                onClick={() => closeWindow(item)}
+                                                className="!px-1.5"
+                                            >
+                                                <IconX className="size-4" />
+                                            </OSButton>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -642,7 +702,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                         </motion.div>
                     </>
                 )}
-            </AnimatePresence>
+            </WindowContainer>
         </WindowProvider>
     )
 }
