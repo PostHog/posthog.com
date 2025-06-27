@@ -187,8 +187,6 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
             data-scheme="secondary"
             className={`${multipleTeams ? 'border border-primary rounded-md p-4 bg-primary' : ''}`}
         >
-            <DebugContainerQuery />
-
             <div className="flex flex-col @md:grid @md:grid-cols-6 @md:grid-rows-3 @3xl:grid-rows-2 gap-4">
                 <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @3xl:row-span-1 @md:self-center">
                     <h3 className="text-sm font-bold mb-1">{team.name} Team</h3>
@@ -386,8 +384,7 @@ export const CareersHero = () => {
 
     return (
         <>
-            <DebugContainerQuery />
-            <div className="@container not-prose relative aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden bg-accent border-b border-primary mb-4">
+            <div className="@container not-prose relative aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden border-b border-primary mb-4 bg-[radial-gradient(circle,_#972B2B_0%,_#7B2929_100%)]">
                 {/* Background container for positioned graphics */}
                 {/* Example of positioned graphics - replace with your actual graphics */}
                 {/* Left section graphics */}
@@ -558,7 +555,7 @@ export const CareersHero = () => {
                     </div>
 
                     {/* Text overlay - keeping this as is */}
-                    <div className="absolute inset-0 flex flex-col justify-center items-center">
+                    <div className="absolute inset-0 flex flex-col justify-center items-center text-white">
                         <h1 className="text-2xl lg:text-3xl font-bold mb-1 @3xl:mb-2">Who's hiring?</h1>
                         <p className="text-base mb-4">
                             Our small teams are looking to add{' '}
