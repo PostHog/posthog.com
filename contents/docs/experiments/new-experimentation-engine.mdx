@@ -45,24 +45,39 @@ The new running time calculator provides a more accurate estimate of how long yo
 
 By default, a user is considered **exposed** when we record the `$feature_flag_called` event — meaning they reached the part of your product where the experiment runs. Only those users are included in the analysis. If the default `$feature_flag_called` event is not suitable for you, you can specify a different exposure event. We will then use the event property `$feature/<flag-key>: <variant-key>` to determine which variant a user is in.
 
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_light_b59c7a8a47.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_dark_73e0a1ae87.png"
+  classes="rounded"
+  alt="Screenshot of edit exposure criteria"
+/>
+
 The experiment view shows the unique-user count for each variant at the top.
 
 <ProductScreenshot
   imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_light_354254b3e7.png"
   imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_dark_7c1c480e54.png"
   classes="rounded"
-  alt="Screenshot of outlier handling"
+  alt="Screenshot of experiment exposures"
 />
 
 **Note:** Metric events are only counted if they occur *after* a user's first exposure.
 
 ### Users exposed to multiple variants
 
-In practice, some users may see more than one variant. Choose how to handle them:
+Sometimes, users may have been expsoed to more than one variant. To ensure robust experiment results, the default behavior is to exclude them from the analysis.
+If you still would like to inlucde them, you can change this behavior under "Edit exposure criteria":
 
 * **Exclude** (default): Exclude users exposed to multiple variants. This ensures clean results by only analyzing users who had a single, consistent experience. Excluded users are grouped under `$multiple` in the exposure table.
 
-* **First seen variant**: Include the users and attribute all metric events to the first variant they encountered; later exposures are ignored.
+* **First seen variant**: Include the users and attribute all metric events to the first variant they encountered. Only choose this option if you know what you are doing.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/multiple_variant_light_af25168c00.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/multiple_variant_dark_eb2a92c5ba.png"
+  classes="rounded"
+  alt="Screenshot of multiple variant handling"
+/>
 
 ---
 
