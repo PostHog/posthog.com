@@ -385,7 +385,7 @@ export default function People() {
                     </aside>
 
                     <DebugContainerQuery />
-                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @4xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl">
+                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                         {teamMembers.map((teamMember: any, index: number) => {
                             return (
                                 <TeamMember
