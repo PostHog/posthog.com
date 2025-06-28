@@ -23,6 +23,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Stickers from 'components/Stickers/Index'
 import { Toolbar } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
+import ZoomHover from 'components/ZoomHover'
 
 export const TeamMember = (props: any) => {
     const {
@@ -57,6 +58,14 @@ export const TeamMember = (props: any) => {
           })
         : null
 
+    // Check role for custom tooltip text (customer-facing roles take priority)
+    const roleToCheck = companyRole?.toLowerCase() || ''
+    const isCustomerFacing =
+        roleToCheck.includes('sales') || roleToCheck.includes('customers') || roleToCheck.includes('support')
+    const isEngineer = roleToCheck.includes('engineer') || roleToCheck.includes('developer')
+
+    const tooltipPrefix = isCustomerFacing ? "Helpin' customers" : isEngineer ? "Slingin' code" : 'Here'
+
     // Extract team data
     const teamData = teams?.data || []
 
@@ -82,8 +91,8 @@ export const TeamMember = (props: any) => {
             <div
                 className={`container-size not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
             >
-                <div className="absolute z-20 top-2 left-2 flex flex-col gap-1">
-                    <div>
+                <div className="absolute z-20 top-2 left-2 flex flex-col gap-2">
+                    <ZoomHover size="lg">
                         <Tooltip
                             trigger={
                                 <Stickers
@@ -104,13 +113,13 @@ export const TeamMember = (props: any) => {
                                 : 'Undecided about'}{' '}
                             pineapple on pizza
                         </Tooltip>
-                    </div>
+                    </ZoomHover>
                     {longEnoughTenure && (
-                        <div>
+                        <ZoomHover size="lg">
                             <Tooltip trigger={<Stickers name="StickerTrophy" label={yearsOfService.toString()} />}>
-                                Here since {formattedStartDate}
+                                {tooltipPrefix} since {formattedStartDate}
                             </Tooltip>
-                        </div>
+                        </ZoomHover>
                     )}
                 </div>
 
