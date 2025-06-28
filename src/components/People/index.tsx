@@ -39,8 +39,23 @@ export const TeamMember = (props: any) => {
         teams,
         teamCrestMap,
         pineappleOnPizza,
+        startDate,
     } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
+
+    // Calculate years of service
+    const yearsOfService = startDate
+        ? Math.floor((Date.now() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24 * 365.25))
+        : 0
+    const longEnoughTenure = yearsOfService >= 1
+
+    // Format start date for tooltip
+    const formattedStartDate = startDate
+        ? new Date(startDate).toLocaleDateString('en-US', {
+              month: 'long',
+              year: 'numeric',
+          })
+        : null
 
     // Extract team data
     const teamData = teams?.data || []
@@ -67,14 +82,7 @@ export const TeamMember = (props: any) => {
             <div
                 className={`container-size not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
             >
-                <div className="absolute -top-8">
-                    <DebugContainerQuery />
-                </div>
-
-                <div className="absolute top-2 left-2 flex flex-col gap-1">
-                    <div>
-                        <Tooltip trigger={<Stickers name="StickerTrophy" label="5" />}>Here since 2019</Tooltip>
-                    </div>
+                <div className="absolute z-20 top-2 left-2 flex flex-col gap-1">
                     <div>
                         <Tooltip
                             trigger={
@@ -93,10 +101,17 @@ export const TeamMember = (props: any) => {
                                 ? 'Loves'
                                 : pineappleOnPizza === false
                                 ? 'Hates'
-                                : 'Is undecided on'}{' '}
+                                : 'Undecided about'}{' '}
                             pineapple on pizza
                         </Tooltip>
                     </div>
+                    {longEnoughTenure && (
+                        <div>
+                            <Tooltip trigger={<Stickers name="StickerTrophy" label={yearsOfService.toString()} />}>
+                                Here since {formattedStartDate}
+                            </Tooltip>
+                        </div>
+                    )}
                 </div>
 
                 <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10">
@@ -408,6 +423,7 @@ export const teamQuery = graphql`
                 location
                 pronouns
                 pineappleOnPizza
+                startDate
                 teams {
                     data {
                         id
