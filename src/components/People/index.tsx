@@ -60,11 +60,11 @@ export const TeamMember = (props: any) => {
 
     // Check role for custom tooltip text (customer-facing roles take priority)
     const roleToCheck = companyRole?.toLowerCase() || ''
-    const isCustomerFacing =
+    const roleType =
         roleToCheck.includes('sales') || roleToCheck.includes('customers') || roleToCheck.includes('support')
     const isEngineer = roleToCheck.includes('engineer') || roleToCheck.includes('developer')
 
-    const tooltipPrefix = isCustomerFacing ? "Helpin' customers" : isEngineer ? "Slingin' code" : 'Here'
+    const tooltipPrefix = roleType ? "Helpin' customers" : isEngineer ? "Slingin' code" : 'Here'
 
     // Extract team data
     const teamData = teams?.data || []
