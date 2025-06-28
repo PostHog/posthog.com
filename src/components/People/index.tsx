@@ -53,7 +53,7 @@ export const TeamMember = (props: any) => {
         const lengthConfig = {
             name: { medium: 16, long: 19 },
             companyRole: { medium: 20, long: 26 },
-            teamText: { medium: 16, long: 22 },
+            teamText: { medium: 15, long: 22 },
         }
 
         const config = lengthConfig[usage]
@@ -136,32 +136,63 @@ export const TeamMember = (props: any) => {
                 <div className="container-size absolute bottom-0 left-0 right-0 h-[calc(50cqh_-_2rem)] bg-white/50 flex items-end">
                     {teamData.length > 0 ? (
                         <div className={`bg-${color} w-full flex flex-col justify-center px-2 min-h-[30cqh]`}>
-                            {teamData.map((team: any) => {
-                                const teamName = team.attributes.name
-                                const crestUrl = teamCrestMap[teamName]
-                                const teamText = `${teamName} Team`
-
-                                return (
-                                    <div key={team.id} className="relative">
-                                        <div className="@container w-full pr-16">
-                                            <div
-                                                className="team-font-size font-squeak uppercase text-white"
-                                                data-length={getTextLength(teamText, 'teamText')}
+                            <div className="relative">
+                                {/* Show first team */}
+                                <div className="@container w-full pr-16">
+                                    <div
+                                        className="team-font-size font-squeak uppercase text-white leading-tight"
+                                        data-length={getTextLength(
+                                            teamData.length > 1
+                                                ? `${teamData[0].attributes.name} Team +${teamData.length - 1}`
+                                                : `${teamData[0].attributes.name} Team`,
+                                            'teamText'
+                                        )}
+                                    >
+                                        {teamData[0].attributes.name} Team
+                                        {teamData.length > 1 && (
+                                            <Tooltip
+                                                trigger={
+                                                    <>
+                                                        {' '}
+                                                        <span className="underline decoration-dotted  decoration-white">
+                                                            +{teamData.length - 1}
+                                                        </span>
+                                                    </>
+                                                }
                                             >
-                                                {teamText}
-                                            </div>
-                                        </div>
+                                                <div className="space-y-2">
+                                                    {teamData.slice(1).map((team: any) => {
+                                                        const teamName = team.attributes.name
+                                                        const crestUrl = teamCrestMap[teamName]
 
-                                        {crestUrl && (
-                                            <img
-                                                src={crestUrl}
-                                                alt={`${teamName} Team`}
-                                                className="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
-                                            />
+                                                        return (
+                                                            <div key={team.id} className="flex items-center gap-2">
+                                                                {crestUrl && (
+                                                                    <img
+                                                                        src={crestUrl}
+                                                                        alt={`${teamName} Team`}
+                                                                        className="size-4 object-contain"
+                                                                    />
+                                                                )}
+                                                                <span className="text-sm">{teamName} Team</span>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </Tooltip>
                                         )}
                                     </div>
-                                )
-                            })}
+                                </div>
+
+                                {/* Show first team's crest */}
+                                {teamCrestMap[teamData[0].attributes.name] && (
+                                    <img
+                                        src={teamCrestMap[teamData[0].attributes.name]}
+                                        alt={`${teamData[0].attributes.name} Team`}
+                                        className="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
+                                    />
+                                )}
+                            </div>
                         </div>
                     ) : (
                         'No team assigned'

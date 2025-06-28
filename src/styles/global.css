@@ -417,7 +417,7 @@
     }
 
     .team-font-size {
-        font-size: clamp(0.8rem, 10cqw, 1.25rem);
+        font-size: clamp(0.8rem, 12cqw, 1.25rem);
 
         &[data-length='long'] {
             font-size: clamp(0.8rem, 8.5cqw, 1.25rem);
