@@ -7,6 +7,14 @@ declare module '*.png' {
     export default content
 }
 
+declare module 'mark.js' {
+    export default class Mark {
+        constructor(element: HTMLElement | HTMLElement[])
+        mark(keyword: string, options?: any): void
+        unmark(options?: any): void
+    }
+}
+
 declare global {
     interface Window {
         __setPreferredTheme: (theme: string) => void
