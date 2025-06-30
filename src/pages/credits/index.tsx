@@ -29,13 +29,13 @@ export default function Credits(): JSX.Element {
     const [isExpanded, setIsExpanded] = useState(false)
 
     const {
-        team: { teamMembers },
+        team: { totalCount },
         allTeams,
     } = useStaticQuery(teamQuery)
 
     const [activeProfile, setActiveProfile] = useState<any>(null)
 
-    const teamSize = teamMembers.length - 1
+    const teamSize = totalCount - 1
 
     const handleMoreInfo = () => {
         if (focusedWindow) {
@@ -229,35 +229,12 @@ export default function Credits(): JSX.Element {
 }
 
 const teamQuery = graphql`
-    query TeamQuery {
+    query CreditsTeamQuery {
         team: allSqueakProfile(
             filter: { teams: { data: { elemMatch: { id: { ne: null } } } } }
             sort: { fields: startDate, order: ASC }
         ) {
-            teamMembers: nodes {
-                squeakId
-                avatar {
-                    url
-                }
-                biography
-                lastName
-                firstName
-                companyRole
-                country
-                color
-                location
-                pronouns
-                pineappleOnPizza
-                teams {
-                    data {
-                        id
-                        attributes {
-                            name
-                            slug
-                        }
-                    }
-                }
-            }
+            totalCount
         }
         allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
             nodes {
