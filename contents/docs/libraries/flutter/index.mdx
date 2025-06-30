@@ -18,7 +18,7 @@ features:
   errorTracking: false
 ---
 
-import FlutterIdentify from './\_snippets/identify.mdx'
+import FlutterIdentify from './_snippets/identify.mdx'
 
 This is an optional library you can install if you're working with Flutter. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
 
@@ -110,7 +110,7 @@ await Posthog().unregister("team_id")
 
 This will remove the Super Property and subsequent events will not include it.
 
-If you are doing this as part of a user logging out you can instead simply use `Posthog().reset` which takes care of clearing all stored Super Properties and more.
+If you are doing this as part of a user logging out you can instead simply use `Posthog().reset()` which takes care of clearing all stored Super Properties and more.
 
 ## Group analytics
 

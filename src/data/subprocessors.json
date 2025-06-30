@@ -1,12 +1,13 @@
 [
     {
         "name": "Amazon Web Services, Inc.",
+        "type": "cloud",
         "contact": "410 Terry Avenue North <br />Seattle, WA 98109-5210, USA<br />aws-EU-privacy@amazon.com",
-        "subject": "Personal data of users of the Controller’s web product(s)",
+        "subject": "Personal data of users of the Controller's web product(s)",
         "duration": "Duration of the agreement",
         "reason": "Cloud storage of PostHog Cloud data",
         "location": "USA (PostHog US Cloud) or Germany (PostHog EU Cloud)",
-        "type": {
+        "dataTypes": {
             "Identifying": ["Name", "Username"],
             "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
             "Contact": ["Email Address"],
@@ -15,5 +16,77 @@
         },
         "categories": "Customer's end users",
         "details": "https://aws.amazon.com/compliance/sub-processors/"
+    },
+    {
+        "name": "OpenAI, L.L.C.",
+        "type": "ai",
+        "contact": "180 18th St.,<br />San Francisco, CA 94110, USA<br />Legalprivacy@openai.com",
+        "subject": "Personal data of users of the Controller's web product(s)",
+        "duration": "Duration of the agreement for so long as AI Features are enabled",
+        "reason": "Service Provider for AI Features",
+        "location": "USA; Location of the sub-sub processors can be found at (https://openai.com/policies/sub-processor-list/)",
+        "dataTypes": {
+            "Identifying": ["Name", "Username"],
+            "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
+            "Contact": ["Email Address"],
+            "Location": ["Country", "Territory", "City"],
+            "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
+        },
+        "categories": "Customer's end users",
+        "details": "https://openai.com/policies/sub-processor-list/"
+    },
+    {
+        "name": "Google LLC",
+        "type": "ai",
+        "contact": "1600 Amphitheatre Parkway,<br />Mountain View,<br />California 94043, USA<br />legal-notices@google.com",
+        "subject": "Personal data of users of the Controller's web product(s)",
+        "duration": "Duration of the agreement for so long as AI Features are enabled",
+        "reason": "Service Provider for AI Features",
+        "location": "USA; Location of the sub-sub processors can be found at (https://business.safety.google/subprocessors/)",
+        "dataTypes": {
+            "Identifying": ["Name", "Username"],
+            "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
+            "Contact": ["Email Address"],
+            "Location": ["Country", "Territory", "City"],
+            "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
+        },
+        "categories": "Customer's end users",
+        "details": "https://business.safety.google/subprocessors/"
+    },
+    {
+        "name": "Anthropic PBC",
+        "type": "ai",
+        "contact": "548 Market Street, PMB 51152<br />San Francisco, CA 94104,<br />legal@anthropic.com;<br />info@anthropic.com;<br />notices@anthropic.com",
+        "subject": "Personal data of users of the Controller's web product(s)",
+        "duration": "Duration of the agreement for so long as AI Features are enabled",
+        "reason": "Service Provider for AI Features",
+        "location": "USA; Location of the sub-sub processors can be found at (https://trust.anthropic.com/subprocessors)",
+        "dataTypes": {
+            "Identifying": ["Name", "Username"],
+            "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
+            "Contact": ["Email Address"],
+            "Location": ["Country", "Territory", "City"],
+            "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
+        },
+        "categories": "Customer's end users",
+        "details": "https://trust.anthropic.com/subprocessors"
+    },
+    {
+        "name": "Microsoft Corporation",
+        "type": "ai",
+        "contact": "One Microsoft Way<br />Redmond, WA 98052-6399<br />USA,<br />privacy@microsoft.com",
+        "subject": "Personal data of users of the Controller's web product(s)",
+        "duration": "Duration of the agreement for so long as AI Features are enabled",
+        "reason": "Service Provider for AI Features",
+        "location": "USA, Germany; Location of the sub-sub processors can be found at (https://servicetrust.microsoft.com/DocumentPage/f2cc90fe-471f-4f07-a9ae-af71ebce8486)",
+        "dataTypes": {
+            "Identifying": ["Name", "Username"],
+            "Computer device": ["IP Address", "MAC Address", "Browser Footprint"],
+            "Contact": ["Email Address"],
+            "Location": ["Country", "Territory", "City"],
+            "Behavioral": ["Product Usage (Page Views, Clicks, Browsing Behavior)"]
+        },
+        "categories": "Customer's end users",
+        "details": "https://servicetrust.microsoft.com/DocumentPage/f2cc90fe-471f-4f07-a9ae-af71ebce8486"
     }
 ]

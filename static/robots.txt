@@ -1,0 +1,10 @@
+User-agent: Googlebot
+Disallow: /*.md$
+
+User-agent: Bingbot
+Disallow: /*.md$
+
+User-agent: DuckDuckBot
+Disallow: /*.md$
+
+Sitemap: https://posthog.com/sitemap/sitemap-index.xml 

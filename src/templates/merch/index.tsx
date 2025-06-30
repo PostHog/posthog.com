@@ -8,7 +8,7 @@ import Pagination from 'components/Pagination'
 import { Cart } from './Cart'
 import { useCartStore } from './store'
 import { AllShopifyProduct, MerchPageContext, ShopifyProduct } from './types'
-import { getShopifyImage } from 'gatsby-source-shopify'
+import { getShopifyImage } from './utils'
 
 type MerchPageProps = {
     pageContext: MerchPageContext

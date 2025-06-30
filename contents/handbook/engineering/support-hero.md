@@ -32,6 +32,12 @@ The schedules consist of contiguous blocks, but that definitely doesn't mean wor
 
 Swap with a teammate in advance! Find a volunteer by asking in Slack, then use PagerDuty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
 
+## I can't assign tickets or make public replies
+
+Everyone has access to view tickets in Zendesk however if you do not reply to tickets often you may find you currently have [Light agent](https://support.zendesk.com/hc/en-us/articles/4408846501402-Understanding-and-setting-light-agent-permissions) permissions. The HogHero app in the right sidebar should allow you to upgrade your user for your support week by clicking Full⬆️
+![image](https://github.com/user-attachments/assets/94b8b14c-0b82-4c56-9fce-cb056672936c) 
+
+
 ## What do I do as Support Hero?
 
 Each engineering team has its own list of tickets in Zendesk:
@@ -279,7 +285,7 @@ When you see a user assigned to a free email org on a ticket, and it is not a 'c
 3. Click anywhere outside the field to save the change
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. After 20 days, responses will create a follow-up ticket with a link to the original ticket.
 
-Tickets that have been `Solved` will receive a CSAT survey after 3 days.
+Tickets that have been `Solved` will receive a CSAT survey the next day.
 
 #### Content Warnings
 

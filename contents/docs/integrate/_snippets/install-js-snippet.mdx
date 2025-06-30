@@ -1,4 +1,6 @@
 import Snippet from "../snippet.mdx"
+import DetailGroupProductsInOneProject from "./details/group-products-in-one-project.mdx"
+import DetailSetUpReverseProxy from "./details/set-up-reverse-proxy.mdx"
 
 This is the simplest way to get PostHog up and running. It only takes a few minutes.
 
@@ -12,23 +14,9 @@ Once the snippet is added, PostHog automatically captures `$pageview` and [other
 
 <br />
 
-<details>
-  <summary>Grouping products in one project (recommended)</summary>
+<DetailSetUpReverseProxy />
 
-  If you have multiple customer-facing products (e.g. a marketing website + iOS app + web app), it's best to install PostHog on them all and [group them in one project](/docs/settings/projects). 
-  
-  This makes it possible to track users across their entire journey (e.g. from visiting your marketing website to signing up for your product), or how they use your product across multiple platforms.
-</details>
-
-<details>
-  <summary>Set up a reverse proxy (recommended)</summary>
-
-  We recommend setting up a reverse proxy, so that events are less likely to be intercepted by tracking blockers. 
-  
-  We have our [own managed reverse proxy service included in the platform add-ons](/docs/advanced/proxy/managed-reverse-proxy), which routes through our infrastructure and makes setting up your proxy easy.
-
-  If you don't want to use our managed service then there are several other [options for creating a reverse proxy](/docs/advanced/proxy), including using [Cloudflare](/docs/advanced/proxy/cloudflare), [AWS Cloudfront](/docs/advanced/proxy/cloudfront), and [Vercel](/docs/advanced/proxy/vercel).
-</details>
+<DetailGroupProductsInOneProject />
 
 <details>
   <summary>Include ES5 support (optional)</summary>

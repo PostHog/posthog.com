@@ -15,8 +15,8 @@ You'll also need access to the relevant Mailgun account.
 ## Installation
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
-3. Search for 'Mailgun' and click **+ Create**.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=mailgun) tab.
+3. Search for **Mailgun** and click **+ Create**.
 4. Add your Mailgun API Key at the configuration step.
 5. Press **Create & Enable** and watch your 'Contacts' list get populated in Mailgun!
 

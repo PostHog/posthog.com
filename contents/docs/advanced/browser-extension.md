@@ -52,7 +52,7 @@ Due to the new [content security policies](https://developer.chrome.com/docs/ext
 To use [session replay](/docs/session-replay), [surveys](/docs/surveys), [error tracking](/docs/error-tracking), and [web analytics](/docs/web-analytics), import their bundles directly:
 
 ```js
-import "posthog-js/dist/recorder" // For session replay
+import "posthog-js/dist/posthog-recorder" // For session replay
 import "posthog-js/dist/surveys" // For surveys
 import "posthog-js/dist/exception-autocapture" // For error tracking
 import "posthog-js/dist/tracing-headers" // Tracking across client and server

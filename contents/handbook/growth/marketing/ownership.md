@@ -10,7 +10,7 @@ showTitle: true
 |---------------------------------|----------------------|
 | **Alternative guides**          | Andy                 |
 | **AI integrations**             | Lior                 |
-| **Docs & tutorials**            | [See docs ownership](/handbook/content/docs)   |
+| **Docs & tutorials**            | [See docs ownership](/handbook/content/docs-ownership)   |
 | **Influencer sponsorships**     | Ian                  |
 | **Marketing dashboards**        | Andy                 |
 | **Newsletter**                  | Ian & Andy           |

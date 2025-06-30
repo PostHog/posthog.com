@@ -6,10 +6,15 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+
+</CalloutBox>
+
 
 [Pomerium](https://www.pomerium.com/) is an identity-aware proxy that can be used to securely proxy traffic to PostHog. This guide will show you how to configure Pomerium as a reverse proxy for PostHog.
 

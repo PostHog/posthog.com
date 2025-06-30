@@ -28,7 +28,7 @@ We are all-remote, but we have a few limitations on the countries we are able to
 
 - We hire within -8 to +2 GMT timezones - beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
 - Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
-- We don't currently employ people via EOR in France, Italy, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. 
+- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. 
 
 ## Hiring Process         
 
@@ -39,7 +39,7 @@ All of our recruiting is done in-house, and we do not work with external agencie
 
 ### Deciding to hire
 
-[‘Talent Compounds’](/handbook/company/values#talent-compounds) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
+[‘You're the driver’](/handbook/company/values#youre-the-driver) is one of our values here at PostHog. We think carefully about each new role and the complexity it introduces to the organization. We also have an extremely high bar for the people we do hire! 
 
 We use Pry to plan our hiring. We use the hiring forecast as a guide, but iterate on this pretty much every month, so we can stay super responsive to changes PostHog's needs. Typically we know:
 
