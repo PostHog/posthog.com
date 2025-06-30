@@ -692,7 +692,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         generateSlug: (pipeline: any) => string
     ) => {
         const { results } = await fetch(
-            `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
+            `http://localhost:8010/api/public_hog_function_templates?type=${type}&limit=350`
         ).then((res) => res.json())
         await Promise.all(
             results.map(async (pipeline) => {
