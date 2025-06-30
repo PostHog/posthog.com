@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-The MongoDB connector can link your mongodb tables to PostHog.
+The MongoDB connector can link your `mongodb` tables to PostHog.
 
 To link MongoDB:
 
