@@ -103,3 +103,23 @@ This is a quarter of caring about the craft of your product:
 Products are not limited to people working on the app – it includes what customer success, marketing, and ops are working on. Everything can be considered a product.
 
 Each team should be aiming to feel proud of what they've built by the end of the quarter.
+
+### Q4 2024 - "Let's commoditize software"
+
+It's getting faster to developer software. Features differentiation is getting less important because it's getting easier to catch up.
+
+Commoditization is good for users - if prices are cheaper, it means developers can be better equipped to build more successful products. Instead of hiding from it by focusing on multi year enterprise contracts, we decided we would embrace it. The company that wins will require a lower cost to acquire customers, and a greater lifetime value. Hint hint: that's us - we are 100% inbound based on reputation alone, and we're by far the broadest company that we compete with, thus can simply sell _more_ products to our customers for a greater lifetime vaue.
+
+So we made some massive pricing changes - up to 90% for our existing and new users for two of our most popular products. It was wildly popular and we grew even faster.
+
+### Q1 2025 - "More products, more AI products"
+
+A year later, we've massively grown our user base and revenue. We also have even more products - we know have error tracking in production, the data warehouse is very popular and becoming the standard for startups to use (although more work needed there), and we've started shipping AI first products. We started by shipping LLM observability, but there are many more we're currently figuring out which to build next.
+
+With our existing products, we've successfully fought off larger competitors and have deepened them meaningfully as a result.
+
+Given the success we've had competing with the data warehouse, we've decided to get more ambitious with our product strategy - instead of "just" shipping the products that naturally sit next door to each other (for example, session replay and product analytics have very similar use cases), we're instead pushing for all the "flagstone" pieces of software that a software team needs. That means we're about to start work on a CRM, a customer support platform and a messaging product, amongst several others.
+
+Since everything is working so plainly well, we've started scaling the business. After not really hiring much, we doubled in the last 6 months to around 80 people. This was a very smooth change so we're looking forward to speeding up further this year. Having a well written out handbook, the strongest developer brand, and being pro remote work means we scan scale completely inbound too - the main issue is filtering through all the applications.
+
+The bigger we get, the bigger we realize we can get.
