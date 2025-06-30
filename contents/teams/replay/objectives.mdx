@@ -1,14 +1,62 @@
-# 🚀 Goal 1: Get Alex 2 rocketing 2
+# 🚀 Goal 1: Keeping momentum on the things that are working
 
-it's great to have Alex 2 on the team... let's make it a success
+* Commenting on recordings (@pauldambra)
+    * Search by comments
+    * Emoji comment
+* Weekly digest (@pauldambra)
+    * Track retention of groups that see it vs don’t
+    * Talk to them and see what led them to click through
+* Playback UI (@veryayskiy)
+    * What to watch
+    * In-page filtering
+    * Mix-max
+    * Cinema mode
 
-# 👩‍🔬 Goal 2: Find the needle in the haystack
+# 👩‍🔬 Goal 2: Add things folk are asking for
 
-Many of our customers have lots of recordings, but struggle to find the "useful" ones. We want to test and iterate  on a bunch of different ideas to get customers to value faster.
+* Longer retention (Tue with Paul supporting)
+    * This comes up often enough that it would be awesome to support it
+    * Plus the existing longer retention implementation is at best O(n)
+    * https://github.com/PostHog/product-internal/pull/766
+    * https://github.com/PostHog/product-internal/pull/738
+    * I think it would be a pretty powerful upsell
+* Conditional recording 3000 (@pauldambra)
+    * We’ve levelled up conditional recording but it could be much more cool
+    * E.g. sample 20% of mobile recordings but 60% of web recordings
+    * Or trigger with flag X at 20% sampling, event Y at 50% sampling, and on URL matching Z at 1% sampling
+* Batch exporting (@veryayskiy)
+    * Folk building on top of us is a new user group for us
+    * Currently they’re using our API which is a poor experience for everyone
+    * We can learn from / work with existing batch exports code
+    * And have a temporal flow to copy recordings to a provided S3 bucket
+    * we need to find out if folk would _pay_ for this though
+    * so good chance we need to validate this before we build it
+    * https://github.com/PostHog/product-internal/pull/767
+    * the solution might actually be "make a different API for this"
 
-* Understand the needles that people are looking for using user interviews, data analysis and more 
-* Better options for users to watch recordings from where they are (e.g. in funnels or experiments) 
-* Some people are scared of filtering, some people have no patience for it - give them ways to avoid it
-* Make it super easy to see what filters have results to watch - "show me, don’t make me figure it out"
+# Goal 3: Make support take less time
 
-see more detail in our mega issue https://github.com/PostHog/posthog/issues/30460
+This will affect us all as we do support rotations, but @pauldambra will lead on this
+
+* Replay debugging / support load (@pauldambra)
+    * One debugger (https://posthog.github.io/rrwebdebug.com/)
+    * Good playgrounds
+* Solidify the incremental rollout flow so it’s safer to release new recording code
+* Recording playback performance problems
+    * A very small number of users hit some pathological case in the playback code
+    * For those users it doesn't matter that it doesn't affect most people since it really affects them
+    * We’ve also got some amazing, patient customers willing to work with us
+    * Added benefit that we can contribute back upstream if the solution is inside rrweb
+
+# Goal 4: Talk to users @veryayskiy
+
+Over recent months we've primarily talked to people for specific reasons mostly session summarization
+Let's talk to some happy users
+
+* Let’s link up with Sales and CS since they’re already talking to users
+* And talk to a bunch of happy users
+    * Have recent changes worked for them?
+    * What keeps them happy that they wouldn’t want us to change
+    * What one thing could we do to take them from happy to ecstatic
+* And keep analysing info from churned users
+    * Should we be prompting folk to turn on conditional recording?
