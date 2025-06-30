@@ -187,13 +187,15 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
             data-scheme="secondary"
             className={`${multipleTeams ? 'border border-primary rounded-md p-4 bg-primary' : ''}`}
         >
-            <div className="flex flex-col @md:grid @md:grid-cols-6 @md:grid-rows-3 @3xl:grid-rows-2 gap-4">
-                <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @3xl:row-span-1 @md:self-center">
-                    <h3 className="text-sm font-bold mb-1">{team.name} Team</h3>
-                    {team.description && <p className="text-sm text-secondary !mb-0">{team.description}</p>}
+            <div className="flex flex-col @md:grid @md:grid-cols-6 @md:grid-rows-[repeat(3,auto)] @lg:grid-rows-[repeat(4,auto)] gap-4 @2xl:gap-y-0">
+                <div className="order-2 @md:order-none col-start-1 row-start-2 @md:col-span-4 @md:col-start-auto @md:row-span-2 @md:row-start-auto @2xl:row-span-1 @md:self-center">
+                    {multipleTeams && <h3 className="text-sm font-bold mt-0 mb-1">{team.name} Team</h3>}
+                    {team.description && (
+                        <p className="text-[15px] @7xl:text-sm text-secondary !my-0">{team.description}</p>
+                    )}
                 </div>
-                <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @3xl:row-span-2 @md:self-center @md:justify-self-center">
-                    <div className="w-36 @md:w-full">
+                <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @xl:row-span-3 @md:self-start @md:justify-self-center @xl:row-start-1 @2xl:self-start">
+                    <div className="w-48 @md:w-full @3xl:max-w-60 mx-auto">
                         <Link to={teamURL}>
                             <TeamPatch
                                 name={team.name}
@@ -204,13 +206,13 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
                         </Link>
                     </div>
                 </div>
-                <div className="order-3 @md:order-none col-start-1 row-start-3 @md:col-span-3 @md:row-start-3 @3xl:col-span-2 @3xl:row-start-2">
-                    <p className="text-sm font-semibold !mb-1">Team members</p>
+                <div className="order-3 @md:order-none col-start-1 row-start-3 @md:row-start-3 @md:col-span-full @xl:row-span-1 @xl:row-start-3 @2xl:row-span-4 @2xl:row-start-2">
+                    <p className="text-sm font-semibold !mb-1 @2xl:pt-2">Team members</p>
                     <div className="flex justify-start">
                         <TeamMembers size="!size-16" profiles={team.profiles} />
                     </div>
                 </div>
-                <div className="order-4 @md:order-none col-start-1 row-start-4 @md:col-span-3 @md:col-start- @md:row-start-3 @3xl:col-span-2 @3xl:col-start-3 @3xl:row-start-2">
+                <div className="order-4 @md:order-none col-start-1 row-start-4 @md:col-start-1 @md:row-start-4 @md:col-span-full @xl:row-span-1 @2xl:col-span-4">
                     <p className="text-sm font-semibold !mb-1">Does pineapple belong on pizza?</p>
                     <div className="flex items-center gap-2">
                         <div className="w-10">
@@ -222,7 +224,7 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
                                 <StickerPineappleNo className="size-10" />
                             )}
                         </div>
-                        <div className="flex-1 text-[15px]">
+                        <div className="flex-1 leading-tight">
                             {pineapplePercentage > 50 ? (
                                 <>
                                     <strong>{pineapplePercentage}%</strong> of this team say{' '}
@@ -565,13 +567,17 @@ export const CareersHero = () => {
                 </div>
             </div>
 
-            <section className="flex flex-col md:flex-row md:gap-4 p-4">
-                <div className="w-full md:w-1/4">
-                    <label htmlFor="job-select" className="block md:hidden font-bold mb-1 text-center">
+            <div className="px-4">
+                <DebugContainerQuery />
+            </div>
+
+            <section className="flex flex-col @2xl:flex-row @2xl:gap-4 p-4">
+                <div className="w-full @2xl:w-1/3 @3xl:w-1/4">
+                    <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
                         Select a role
                     </label>
                     <select
-                        className="block md:hidden w-full p-2 border border-b-0 border-light bg-accent dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
+                        className="block @2xl:hidden w-full p-2 border border-b-0 border-light bg-accent dark:border-dark rounded-tl rounded-tr text-xl font-bold relative z-10"
                         value={selectedJob.fields.title}
                         onChange={(e) => {
                             const selectedJobTitle = e.target.value
@@ -589,16 +595,16 @@ export const CareersHero = () => {
                             </optgroup>
                         ))}
                     </select>
-                    <div data-scheme="primary" className="hidden md:block">
+                    <div data-scheme="primary" className="hidden @2xl:block">
                         {jobGroups.map((group) => (
                             <div key={group.name} className="mb-2 last:mb-0">
-                                <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mb-1 border-b border-primary">
+                                <h3 className="text-sm font-normal px-1.5 text-secondary pb-1 mt-0 mb-1 border-b border-primary">
                                     {group.name}
                                 </h3>
-                                <ul className="list-none p-0 m-0 space-y-px">
+                                <ul className="list-none p-0 space-y-px">
                                     {group.jobs.map((job: any) => {
                                         return (
-                                            <li key={job.fields.title} className="">
+                                            <li key={job.fields.title} className="p-0">
                                                 <OSButton
                                                     variant="ghost"
                                                     size="md"
@@ -645,12 +651,12 @@ export const CareersHero = () => {
                         ))}
                     </div>
                 </div>
-                <div className="w-full bg-primary border border-primary flex flex-col">
+                <div className="flex-1 bg-primary border border-primary flex flex-col">
                     <div className="p-4 lg:p-6 flex-1">
                         <h2 className="m-0">{selectedJob.fields.title}</h2>
 
-                        <div className="grid grid-cols-1 @7xl:grid-cols-2 gap-8">
-                            <div>
+                        <div className="grid grid-cols-1 @7xl:grid-cols-12 gap-8">
+                            <div className="@7xl:col-span-7">
                                 {teams.length > 1 && (
                                     <p
                                         data-scheme="secondary"
@@ -660,7 +666,7 @@ export const CareersHero = () => {
                                     </p>
                                 )}
 
-                                <ul className="list-none m-0 p-0 md:items-center text-black/50 dark:text-white/50 flex md:flex-row flex-col md:space-x-12 md:space-y-0 space-y-6">
+                                <ul className="list-none m-0 p-0 @2xl:items-center text-black/50 dark:text-white/50 flex @2xl:flex-row flex-col @2xl:space-x-12 @2xl:space-y-0 space-y-6">
                                     <Detail
                                         title="Location"
                                         value={`Remote${
@@ -691,8 +697,8 @@ export const CareersHero = () => {
                                     )}
                                 </ul>
 
-                                <div className="@7xl:flex-1">
-                                    <h3 className="mb-1 text-sm">Job summary</h3>
+                                <div className="@7xl:flex-1 [&_h3]:mt-0 mt-4">
+                                    <h3>Job summary</h3>
 
                                     {isLoading ? (
                                         <div className="space-y-1 mb-3">
@@ -715,7 +721,7 @@ export const CareersHero = () => {
                                             ) : (
                                                 <div
                                                     dangerouslySetInnerHTML={{ __html: processedHtml }}
-                                                    className="[&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-full overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
+                                                    className="[&_details]:!border-transparent [&_details_ul]:!pl-4 [&_details_ul]:!pr-0 [&_details]:!p-0 [&_details_p]:!px-0 [&_summary]:hidden [&_p]:text-[15px] [&_p]:mb-2 [&_ul_p]:pb-0 [&_ul_p]:mb-0 relative max-h-full overflow-hidden after:absolute after:inset-x-0 after:bottom-0 after:h-24 after:bg-gradient-to-b after:from-white/0 after:via-white/75 after:to-white dark:after:front-accent-dark/0 dark:after:via-accent-dark/75 dark:after:to-accent-dark"
                                                 />
                                             )}
                                             {selectedJob.fields.title == 'Speculative application' && (
@@ -741,11 +747,13 @@ export const CareersHero = () => {
                             </div>
                             <div
                                 data-scheme="secondary"
-                                className={`@container min-w-96 ${
+                                className={`@container @7xl:col-span-5 ${
                                     teams.length > 1 ? '' : 'border border-primary rounded-md p-4 bg-primary'
                                 }`}
                             >
-                                <h3 className="">About the small team{teams.length > 1 ? 's' : ''}</h3>
+                                <h3 className="mt-0">
+                                    About the {teams.length > 1 ? 'small teams' : currentTeamName + ' Team'}
+                                </h3>
 
                                 {teams.length > 1 ? (
                                     <OSTabs
@@ -786,33 +794,6 @@ export const CareersHero = () => {
                             </div>
                         </div>
                     </div>
-                    {selectedTeam && (
-                        <div className="border-t border-primary bg-accent p-6">
-                            {teams.length > 1 && (
-                                <p className="mb-2">
-                                    <strong>{teams.length} small teams are hiring for this role</strong>
-                                </p>
-                            )}
-
-                            <div className="flex flex-col items-center gap-2">
-                                {teams.length > 1 && (
-                                    <select
-                                        className="w-full p-2 mb-2 border border-b-3 border-primary rounded text-sm font-medium dark:bg-dark"
-                                        value={currentTeamName}
-                                        onChange={(e) => {
-                                            setSelectedTeamName(e.target.value)
-                                        }}
-                                    >
-                                        {teams.map((team: any) => (
-                                            <option key={team} value={team}>
-                                                {team}
-                                            </option>
-                                        ))}
-                                    </select>
-                                )}
-                            </div>
-                        </div>
-                    )}
                 </div>
             </section>
         </>
