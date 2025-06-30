@@ -1292,8 +1292,8 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
                 children: [
                     {
-                    name: 'Account planning',
-                    url: '/handbook/growth/sales/account-planning',
+                        name: 'Account planning',
+                        url: '/handbook/growth/sales/account-planning',
                     },
                 ],
             },
@@ -1303,10 +1303,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/how-we-work',
                 children: [
                     {
-                    name: 'New team member onboarding',
-                    url: '/handbook/growth/sales/new-hire-onboarding',
+                        name: 'New team member onboarding',
+                        url: '/handbook/growth/sales/new-hire-onboarding',
                     },
-                ],  
+                ],
             },
 
             {
@@ -2404,10 +2404,6 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
-                                    name: 'Variables',
-                                    url: '/docs/sql/variables',
-                                },
-                                {
                                     name: 'Tutorials',
                                     url: '/docs/sql/tutorials',
                                 },
@@ -2888,12 +2884,6 @@ export const docsMenu = {
                     url: '/docs/product-analytics/lifecycle',
                     icon: 'IconLifecycle',
                     color: 'yellow',
-                },
-                {
-                    name: 'SQL insights',
-                    url: '/docs/product-analytics/sql',
-                    icon: 'IconHogQL',
-                    color: 'purple',
                 },
                 {
                     name: 'Tools',
@@ -3572,9 +3562,46 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Tutorials and guides',
+                    url: '/docs/data-warehouse/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'SQL editor',
+                },
+                {
+                    name: 'SQL editor',
+                    url: '/docs/data-warehouse/sql',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Accessing data',
+                    url: '/docs/data-warehouse/sql/data-access',
+                    icon: 'IconDatabase',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Useful functions',
+                    url: '/docs/data-warehouse/sql/useful-functions',
+                    icon: 'IconStar',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Variables',
+                    url: '/docs/data-warehouse/sql/variables',
+                    icon: 'IconGear',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Features',
+                },
+                {
                     name: 'Creating insights from sources',
                     url: '/docs/data-warehouse/query',
-                    icon: 'IconHogQL',
+                    icon: 'IconGraph',
                     color: 'purple',
                 },
                 {
@@ -3596,13 +3623,6 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
-                    featured: true,
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/data-warehouse/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
                     featured: true,
                 },
             ],
