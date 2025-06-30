@@ -1233,7 +1233,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Utilization by business type',
-                url: '/handbook/growth/sales/putilization-by-business-type',
+                url: '/handbook/growth/sales/utilization-by-business-type',
             },
             {
                 name: 'How we work',
