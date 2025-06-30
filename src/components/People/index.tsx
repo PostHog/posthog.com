@@ -23,6 +23,7 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Stickers from 'components/Stickers/Index'
 import { Toolbar } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
+import ZoomHover from 'components/ZoomHover'
 
 export const TeamMember = (props: any) => {
     const {
@@ -37,24 +38,61 @@ export const TeamMember = (props: any) => {
         biography,
         setActiveProfile,
         teams,
-        teamMiniCrestMap,
+        teamCrestMap,
         pineappleOnPizza,
+        startDate,
     } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
+
+    // Calculate years of service
+    const yearsOfService = startDate
+        ? Math.floor((Date.now() - new Date(startDate).getTime()) / (1000 * 60 * 60 * 24 * 365.25))
+        : 0
+    const longEnoughTenure = yearsOfService >= 1
+
+    // Format start date for tooltip
+    const formattedStartDate = startDate
+        ? new Date(startDate).toLocaleDateString('en-US', {
+              month: 'long',
+              year: 'numeric',
+          })
+        : null
+
+    // Check role for custom tooltip text (customer-facing roles take priority)
+    const roleToCheck = companyRole?.toLowerCase() || ''
+    const roleType =
+        roleToCheck.includes('sales') || roleToCheck.includes('customers') || roleToCheck.includes('support')
+    const isEngineer = roleToCheck.includes('engineer') || roleToCheck.includes('developer')
+
+    const tooltipPrefix = roleType ? "Helpin' customers" : isEngineer ? "Slingin' code" : 'Here'
 
     // Extract team data
     const teamData = teams?.data || []
 
+    // Determine length category for CSS scaling
+    const getTextLength = (text: string, usage: 'name' | 'companyRole' | 'teamText') => {
+        const length = text.length
+
+        // Configuration for different usage types - same for now, can be customized later
+        const lengthConfig = {
+            name: { medium: 16, long: 19 },
+            companyRole: { medium: 20, long: 26 },
+            teamText: { medium: 15, long: 22 },
+        }
+
+        const config = lengthConfig[usage]
+        if (length <= config.medium) return 'medium'
+        if (length <= config.long) return 'long'
+        return 'extra-long'
+    }
+
     return (
         <>
             <div
-                className={`@container not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
+                className={`container-size not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
             >
-                <div className="absolute top-2 left-2 flex flex-col gap-1">
-                    <div>
-                        <Tooltip trigger={<Stickers name="StickerTrophy" label="5" />}>Here since 2019</Tooltip>
-                    </div>
-                    <div>
+                <div className="absolute z-20 top-2 left-2 flex flex-col gap-2">
+                    <ZoomHover size="lg">
                         <Tooltip
                             trigger={
                                 <Stickers
@@ -72,10 +110,17 @@ export const TeamMember = (props: any) => {
                                 ? 'Loves'
                                 : pineappleOnPizza === false
                                 ? 'Hates'
-                                : 'Is undecided on'}{' '}
+                                : 'Undecided about'}{' '}
                             pineapple on pizza
                         </Tooltip>
-                    </div>
+                    </ZoomHover>
+                    {longEnoughTenure && (
+                        <ZoomHover size="lg">
+                            <Tooltip trigger={<Stickers name="StickerTrophy" label={yearsOfService.toString()} />}>
+                                {tooltipPrefix} since {formattedStartDate}
+                            </Tooltip>
+                        </ZoomHover>
+                    )}
                 </div>
 
                 <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10">
@@ -84,48 +129,94 @@ export const TeamMember = (props: any) => {
                             avatar?.url ||
                             'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
                         }
-                        className="w-full h-full object-contain pl-4 object-bottom z-10 relative top-[-2px]"
+                        className="w-full h-[calc(50cqh_+_3rem)] object-contain object-right-bottom pl-4 z-10 relative top-[-2px]"
                         alt={name}
                     />
-                    <div className="absolute -bottom-20 inset-x-0 overflow-hidden z-10 py-2">
-                        <div className="relative -rotate-3 font-squeak uppercase">
-                            <div className="bg-white border-y-3 border-black relative -mx-1 py-0.5 px-4 flex flex-col items-end text-right">
-                                <h3 className="m-0 !leading-tight !text-xl @[16rem]:!text-2xl -mb-1">{name}</h3>
-                                <h4 className="text-base @[16rem]:!text-lg m-0 !leading-tight text-secondary">
-                                    {companyRole}
-                                </h4>
-                            </div>
-                            <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3">
-                                <Stickers country={country} location={location} />{' '}
-                                {country === 'world' ? 'Planet Earth' : location || country}
-                            </div>
+                </div>
+
+                <div className="absolute bottom-[calc(50cqh_-_2rem)] translate-y-1/2 inset-x-0 overflow-hidden z-10 py-2">
+                    <div className="relative -rotate-3 font-squeak uppercase">
+                        <div className="bg-white border-y-3 border-black relative -mx-1 py-0.5 pl-2 pr-4 flex flex-col items-end text-right">
+                            <h3
+                                className="person-name m-0 leading-tight -mb-0.5"
+                                data-length={getTextLength(name, 'name')}
+                            >
+                                {name}
+                            </h3>
+                            <h4
+                                className="person-role text-base m-0 !leading-tight text-secondary"
+                                data-length={getTextLength(companyRole, 'companyRole')}
+                            >
+                                {companyRole}
+                            </h4>
+                        </div>
+                        <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3">
+                            <Stickers country={country} location={location} />{' '}
+                            {country === 'world' ? 'Planet Earth' : location || country}
                         </div>
                     </div>
                 </div>
 
-                <div className="absolute bottom-0 left-0 right-0 h-32 bg-white/50 flex items-end">
+                <div className="container-size absolute bottom-0 left-0 right-0 h-[calc(50cqh_-_2rem)] bg-white/50 flex items-end">
                     {teamData.length > 0 ? (
-                        <div className={`bg-${color} flex flex-wrap gap-2 items-center w-full p-2`}>
-                            {teamData.map((team: any) => {
-                                const teamName = team.attributes.name
-                                const miniCrest = teamMiniCrestMap[teamName]
-                                const gatsbyImageMiniCrest = getImage(miniCrest)
-                                return (
+                        <div className={`bg-${color} w-full flex flex-col justify-center px-2 min-h-[30cqh]`}>
+                            <div className="relative">
+                                {/* Show first team */}
+                                <div className="@container w-full pr-16">
                                     <div
-                                        className="flex items-center gap-1 font-squeak uppercase text-sm text-white"
-                                        key={team.id}
-                                    >
-                                        {gatsbyImageMiniCrest && (
-                                            <GatsbyImage
-                                                image={gatsbyImageMiniCrest}
-                                                alt={`${teamName} Team`}
-                                                className="size-5"
-                                            />
+                                        className="team-font-size font-squeak uppercase text-white leading-tight"
+                                        data-length={getTextLength(
+                                            teamData.length > 1
+                                                ? `${teamData[0].attributes.name} Team +${teamData.length - 1}`
+                                                : `${teamData[0].attributes.name} Team`,
+                                            'teamText'
                                         )}
-                                        <span>{teamName} Team</span>
+                                    >
+                                        {teamData[0].attributes.name} Team
+                                        {teamData.length > 1 && (
+                                            <Tooltip
+                                                trigger={
+                                                    <>
+                                                        {' '}
+                                                        <span className="underline decoration-dotted  decoration-white">
+                                                            +{teamData.length - 1}
+                                                        </span>
+                                                    </>
+                                                }
+                                            >
+                                                <div className="space-y-2">
+                                                    {teamData.slice(1).map((team: any) => {
+                                                        const teamName = team.attributes.name
+                                                        const crestUrl = teamCrestMap[teamName]
+
+                                                        return (
+                                                            <div key={team.id} className="flex items-center gap-2">
+                                                                {crestUrl && (
+                                                                    <img
+                                                                        src={crestUrl}
+                                                                        alt={`${teamName} Team`}
+                                                                        className="size-4 object-contain"
+                                                                    />
+                                                                )}
+                                                                <span className="text-sm">{teamName} Team</span>
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            </Tooltip>
+                                        )}
                                     </div>
-                                )
-                            })}
+                                </div>
+
+                                {/* Show first team's crest */}
+                                {teamCrestMap[teamData[0].attributes.name] && (
+                                    <img
+                                        src={teamCrestMap[teamData[0].attributes.name]}
+                                        alt={`${teamData[0].attributes.name} Team`}
+                                        className="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
+                                    />
+                                )}
+                            </div>
                         </div>
                     ) : (
                         'No team assigned'
@@ -200,9 +291,9 @@ export default function People() {
 
     const teamSize = teamMembers.length - 1
 
-    // Create a map of team names to miniCrest data for quick lookup
-    const teamMiniCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
-        acc[team.name] = team.miniCrest
+    // Create a map of team names to crest data for quick lookup
+    const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
+        acc[team.name] = team.crest?.data?.attributes?.url
         return acc
     }, {})
 
@@ -303,14 +394,14 @@ export default function People() {
                     </aside>
 
                     <DebugContainerQuery />
-                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @md:grid grid-cols-2 @md:grid-cols-3 @4xl:grid-cols-4 gap-x-6 gap-y-12 max-w-screen-2xl">
+                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                         {teamMembers.map((teamMember: any, index: number) => {
                             return (
                                 <TeamMember
                                     key={index}
                                     {...teamMember}
                                     setActiveProfile={setActiveProfile}
-                                    teamMiniCrestMap={teamMiniCrestMap}
+                                    teamCrestMap={teamCrestMap}
                                 />
                             )
                         })}
@@ -341,6 +432,7 @@ export const teamQuery = graphql`
                 location
                 pronouns
                 pineappleOnPizza
+                startDate
                 teams {
                     data {
                         id
@@ -356,6 +448,13 @@ export const teamQuery = graphql`
             nodes {
                 id
                 name
+                crest {
+                    data {
+                        attributes {
+                            url
+                        }
+                    }
+                }
                 miniCrest {
                     gatsbyImageData(width: 20, height: 20)
                 }

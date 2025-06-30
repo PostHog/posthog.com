@@ -1,6 +1,33 @@
+@layer base, components, not-prose, utilities;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer not-prose {
+    .not-prose h1 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+    .not-prose h2 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .not-prose h3 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+
+    .not-prose ul,
+    .not-prose ol {
+        padding-left: 0;
+    }
+
+    .not-prose ul li,
+    .not-prose ol li {
+        list-style-type: none;
+    }
+}
 
 @layer utilities {
     .light [data-scheme='primary'] {
@@ -138,27 +165,6 @@
     .prose a > code,
     .dark .prose a > code {
         @apply text-blue bg-blue/10 border border-blue/50 hover:border-blue no-underline relative pr-4 after:block after:absolute after:right-px after:top-[2px] after:size-4 after:bg-arrow-up-right after:bg-no-repeat after:bg-center after:bg-contain;
-    }
-
-    .not-prose {
-        h1 {
-            @apply text-3xl;
-        }
-        h2 {
-            @apply text-2xl;
-        }
-        h3 {
-            @apply text-xl;
-        }
-
-        ul,
-        ol {
-            @apply pl-0;
-
-            li {
-                @apply list-none;
-            }
-        }
     }
 
     /* only overrides from modern */
@@ -374,6 +380,52 @@
 
     .text-shadow-none {
         text-shadow: none;
+    }
+
+    /* Responsive team font sizing - base styles */
+
+    .person-name {
+        font-size: 8cqh;
+
+        &[data-length='medium'] {
+            font-size: 7cqh;
+        }
+
+        &[data-length='long'] {
+            font-size: 6.5cqh;
+        }
+
+        &[data-length='extra-long'] {
+            font-size: 5.3cqh;
+        }
+    }
+
+    .person-role {
+        font-size: 5.5cqh;
+
+        &[data-length='medium'] {
+            font-size: 5cqh;
+        }
+
+        &[data-length='long'] {
+            font-size: 4.8cqh;
+        }
+
+        &[data-length='extra-long'] {
+            font-size: 4.5cqh;
+        }
+    }
+
+    .team-font-size {
+        font-size: clamp(0.8rem, 12cqw, 1.25rem);
+
+        &[data-length='long'] {
+            font-size: clamp(0.8rem, 8.5cqw, 1.25rem);
+        }
+
+        &[data-length='extra-long'] {
+            font-size: clamp(0.5rem, 6.5cqw, 1.25rem);
+        }
     }
 }
 
