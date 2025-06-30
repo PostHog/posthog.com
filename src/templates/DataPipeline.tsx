@@ -55,8 +55,8 @@ export default function DataPipeline({
                     <p>{description}</p>
                     {id.startsWith('segment-') && (
                         <>
-                            <ReactMarkdown>{introSnippet}</ReactMarkdown>
-                            <ReactMarkdown>{installationSnippet}</ReactMarkdown>
+                            <ReactMarkdown>{introSnippet || ''}</ReactMarkdown>
+                            <ReactMarkdown>{installationSnippet || ''}</ReactMarkdown>
                         </>
                     )}
                     {status !== 'coming_soon' && inputs_schema?.length > 0 && (
