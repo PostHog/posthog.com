@@ -1299,6 +1299,10 @@ export const handbookSidebar = [
             },
 
             {
+                name: 'Utilization by business type',
+                url: '/handbook/growth/sales/utilization-by-business-type',
+            },
+            {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
                 children: [
