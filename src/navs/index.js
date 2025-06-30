@@ -77,6 +77,18 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'Google Sheets',
+                    url: '/docs/cdp/sources/google-sheets',
+                },
+                {
+                    name: 'Temporal.io',
+                    url: '/docs/cdp/sources/temporal',
+                },
+                {
+                    name: 'DoIt',
+                    url: '/docs/cdp/sources/doit',
+                },
+                {
                     name: 'Self-managed',
                 },
                 {
