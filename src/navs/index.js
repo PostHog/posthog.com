@@ -1232,6 +1232,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
             },
             {
+                name: 'Utilization by business type',
+                url: '/handbook/growth/sales/putilization-by-business-type',
+            },
+            {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
             },
