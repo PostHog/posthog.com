@@ -33,6 +33,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
+import { useWindow } from '../../context/Window'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -406,6 +407,7 @@ function ReaderViewContent({
     padding = true,
     proseSize,
 }) {
+    const { appWindow } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
     const {
@@ -450,7 +452,7 @@ function ReaderViewContent({
                       top: 0,
                   }
         )
-    }, [pathname])
+    }, [appWindow?.path])
 
     return (
         <SearchProvider>
