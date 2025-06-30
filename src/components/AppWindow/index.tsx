@@ -170,7 +170,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     }
 
     const handleDragEnd = (_event: any, info: any) => {
-        if (!dragging) setDragging(false)
+        if (dragging) setDragging(false)
         if (!item.fixedSize && snapIndicator !== null) {
             handleSnapToSide(snapIndicator)
             setSnapIndicator(null)
