@@ -2,13 +2,15 @@
 
 * **Improve the UX around loading and performance**
   * Make refreshing more subtle on dashboards with existing data (just light grey spinner)
-  * Create a metric that tracks how often people are triggering manual refreshes
+  * Create a metric that tracks how often people are triggering manual refreshes (Anirudh)
     * If this is large, attempt to drive it down with improvements to cache warming or UX (while not overly burdening ClickHouse)
+    * Improve cache warming efficiency
 
 * **Infrastructure improvements**
   * Port things that are being affected by Celery unreliability to Temporal
     * Async `/query` calls triggered when the FE blocking queries are backed up
     * Cache warming
+  
 
 * **Feature development**
   * PW-protected shared dashboards (hashed password)
@@ -20,3 +22,14 @@
 
 * **Figure out how to triage feature requests for the team** (Anna)
 
+
+* **AI generated insights** (Anirudh)
+  * Suggested insights section (above all insights maybe)
+    * Once we have the users data, we can figure out what insights to generate (from say signup events,...) maybe even create entire dashboards
+  * Related charts
+
+* **Statistical analysis** (Anirudh working with Anna)
+  * Confidence intervals
+  * Forecasting
+  * Trend lines
+  * Root cause analysis
