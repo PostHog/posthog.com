@@ -13,7 +13,7 @@ The MongoDB connector can link your mongodb tables to PostHog.
 To link MongoDB:
 
 1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
-2. Click **New source** and select Mongodbs
+2. Click **New source** and select MongoDB
 3. Enter your mongodb connection string
 4. Click **Link**
 
