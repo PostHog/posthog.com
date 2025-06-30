@@ -719,7 +719,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                     }
 
                     const response = await fetch(
-                        `https://raw.githubusercontent.com/segmentio/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
+                        `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
                             'segment-',
                             ''
                         )}/index.md`
