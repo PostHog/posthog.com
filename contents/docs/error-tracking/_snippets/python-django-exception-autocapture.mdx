@@ -21,3 +21,5 @@ def custom_not_found_view(*args, **kwargs):
     capture_exception("Page not found!")
     return HttpResponseNotFound("Not found")
 ```
+
+We also recommend setting up and using the [Django contexts middleware](/docs/libraries/django#django-contexts-middleware) so that exceptions automatically include distinct IDs, session IDs, and other properties you can set up with tags.
