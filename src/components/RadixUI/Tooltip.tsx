@@ -6,11 +6,12 @@ export interface TooltipProps {
     children: React.ReactNode
     open?: boolean
     onOpenChange?: (open: boolean) => void
+    delay?: number
 }
 
-const Tooltip = ({ trigger, children, open, onOpenChange }: TooltipProps) => {
+const Tooltip = ({ trigger, children, open, onOpenChange, delay = 500 }: TooltipProps) => {
     return (
-        <RadixTooltip.Provider delayDuration={500}>
+        <RadixTooltip.Provider delayDuration={delay}>
             <RadixTooltip.Root open={open} onOpenChange={onOpenChange}>
                 <RadixTooltip.Trigger asChild>
                     <span>{trigger}</span>

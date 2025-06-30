@@ -79,6 +79,7 @@ const query = graphql`
                             country
                             firstName
                             lastName
+                            companyRole
                             location
                             startDate
                             pineappleOnPizza
@@ -567,11 +568,7 @@ export const CareersHero = () => {
                 </div>
             </div>
 
-            <div className="px-4">
-                <DebugContainerQuery />
-            </div>
-
-            <section className="flex flex-col @2xl:flex-row @2xl:gap-4 p-4">
+            <section className="flex flex-col @2xl:flex-row @2xl:gap-6 p-4">
                 <div className="w-full @2xl:w-1/3 @3xl:w-1/4">
                     <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
                         Select a role
@@ -651,16 +648,16 @@ export const CareersHero = () => {
                         ))}
                     </div>
                 </div>
-                <div className="flex-1 bg-primary border border-primary flex flex-col">
-                    <div className="p-4 lg:p-6 flex-1">
-                        <h2 className="m-0">{selectedJob.fields.title}</h2>
+                <div className="flex-1 bg-primary flex flex-col">
+                    <div className="flex-1">
+                        <h2 className="-mt-1 mb-2">{selectedJob.fields.title}</h2>
 
                         <div className="grid grid-cols-1 @7xl:grid-cols-12 gap-8">
                             <div className="@7xl:col-span-7">
                                 {teams.length > 1 && (
                                     <p
                                         data-scheme="secondary"
-                                        className="bg-primary p-2 border border-primary rounded-sm"
+                                        className="bg-primary p-2 border border-primary rounded-sm mt-0 mb-3"
                                     >
                                         <strong>{teams.length} small teams are hiring for this role</strong>
                                     </p>
@@ -748,7 +745,7 @@ export const CareersHero = () => {
                             <div
                                 data-scheme="secondary"
                                 className={`@container @7xl:col-span-5 ${
-                                    teams.length > 1 ? '' : 'border border-primary rounded-md p-4 bg-primary'
+                                    teams.length > 1 ? '-mt-1' : 'border border-primary rounded-md p-4 bg-primary'
                                 }`}
                             >
                                 <h3 className="mt-0">
