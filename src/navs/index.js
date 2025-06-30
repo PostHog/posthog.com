@@ -1212,10 +1212,6 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
-                name: 'Building new products fast',
-                url: '/handbook/product/building-new-products-fast',
-            },
-            {
                 name: 'Product manager role',
                 url: '/handbook/product/product-manager-role',
             },
@@ -1280,8 +1276,8 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
                 children: [
                     {
-                    name: 'Account planning',
-                    url: '/handbook/growth/sales/account-planning',
+                        name: 'Account planning',
+                        url: '/handbook/growth/sales/account-planning',
                     },
                 ],
             },
@@ -1291,10 +1287,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/how-we-work',
                 children: [
                     {
-                    name: 'New team member onboarding',
-                    url: '/handbook/growth/sales/new-hire-onboarding',
+                        name: 'New team member onboarding',
+                        url: '/handbook/growth/sales/new-hire-onboarding',
                     },
-                ],  
+                ],
             },
 
             {
