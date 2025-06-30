@@ -42,6 +42,6 @@ And, as with so much that we do, we get an _increasing return_ on quality. If we
 
 Most sales teams do a bunch of low quality cold outbound that harm their company's reputation and 99.999% of the time is ignored. And then once they've got you on a call, they pepper you with [MEDDPICC](https://www.getweflow.com/blog/meddpicc) questions before actually letting you see the product. Who knows, maybe 3 meetings later they'll share some pricing too!
 
-We do things [a little bit differently](https://posthog.com/sales) here. Customers _buy_ from us, we don't _sell_ to them. It means we can instead invest our money in shipping more (and better) products, at lower prices than our competitors, to provide a sustainable advantage.
+We do things [a little bit differently](/sales). Customers _buy_ from us, we don't _sell_ to them. It means we can instead invest our money in shipping more (and better) products, at lower prices than our competitors, to provide a sustainable advantage.
 
 Fun fact: the total spend we have on marketing and sales per customer we acquire pays itself off within 3 months of them signing up for a paid plan. "Best in class" is considered to be [one year](https://openviewpartners.com/blog/cac-payback-basics-what-it-is-how-to-calculate-it-and-why-it-matters/)...!
