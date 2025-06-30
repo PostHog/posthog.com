@@ -1,20 +1,21 @@
-## Q2 2025 Goals
+## Q3 2025 Goals
 
-* Make **Cookieless mode** production-ready <TeamMember name="Robbie Coomber" photo />
-  * Add batching to redis calls
-  * Fix associating unidentified users who have allowed cookies
-* **Page reports** <TeamMember name="Lucas Ricoy" photo />
-  * Iterate UX based on feedback after general release
-  * Error tracking cross-sell
-* **Marketing analytics** <TeamMember name="Lucas Ricoy" photo />
-  * Get ad spend data from 2-5 data warehouse connectors (most likely Google Ads and CSV files, then other ad platforms that we can dogfood)
-  * Build out the 80/20 of marketing analytics insights, e.g. total revenue and spending per channel and per campaign
-  * Show GSC data via the API or batching with no filters
-* **Query performance**
-  * Add sampling to web vitals <TeamMember name="Robbie Coomber" photo />
-  * Experiment with pre-aggregating query results <TeamMember name="Lucas Ricoy" photo />
-  * Improve sessions table join <TeamMember name="Robbie Coomber" photo />
-* **HogQL virtual fields** <TeamMember name="Robbie Coomber" photo />
-  * Add support for person initial channel type
-  * Experiment with how to add e.g. CPA (average for channel) as a virtual person property
+* Continue to improve pre-aggregation <TeamMember name="Lucas Ricoy" photo />
+  * Ensure the data is accurate
+  * Make the dagster jobs reliable
+  * Automatically roll this out to customers above a given size (e.g. 500k pageviews a day)
+* Contribute to the B2B2C project team <TeamMember name="Lucas Ricoy" photo /> & <TeamMember name="Robbie Coomber" photo />
+  * Build external web analytics api that can be queried across a very large number of projects
+  * Work closely with a specific customer to ensure we meet their needs
+  * Speak to other tools to see if they would be open to integrating with us <TeamMember name="Anna Szell" photo />
+* Marketing analytics <TeamMember name="Javier Bahamondes" photo />
+  * Finish everything needed for beta readiness, start public beta
+  * Build DWH integrations for our marketing team to dogfood
+* Cookieless mode <TeamMember name="Robbie Coomber" photo />
+  * Support error tracking and heatmaps
+  * Stretch goal: support session replay
+  * Invite beta users and make it generally available
+* Miscellaneous
+  * Update code structure to new product structure
+  * Max AI - Make Max aware of web analytics queries and dashboards
 
