@@ -15,6 +15,7 @@ import Tabs from 'components/RadixUI/Tabs'
 import OSTabs from 'components/OSTabs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import CloudinaryImage from 'components/CloudinaryImage'
+import ContextMenu from 'components/RadixUI/ContextMenu'
 
 const query = graphql`
     query CareersHero {
@@ -197,14 +198,35 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
                 </div>
                 <div className="order-1 @md:order-none col-start-1 row-start-1 @md:col-span-2 @md:col-start-5 @md:row-span-2 @md:row-start-auto @xl:row-span-3 @md:self-start @md:justify-self-center @xl:row-start-1 @2xl:self-start">
                     <div className="w-48 @md:w-full @3xl:max-w-60 mx-auto">
-                        <Link to={teamURL}>
-                            <TeamPatch
-                                name={team.name}
-                                imageUrl={team.crest?.data?.attributes?.url}
-                                {...team.crestOptions}
-                                className="w-full"
-                            />
-                        </Link>
+                        <ContextMenu
+                            menuItems={[
+                                {
+                                    type: 'item',
+                                    children: (
+                                        <Link to={teamURL} state={{ newWindow: true }}>
+                                            Open in new PostHog window
+                                        </Link>
+                                    ),
+                                },
+                                {
+                                    type: 'item',
+                                    children: (
+                                        <a href={teamURL} target="_blank" rel="noreferrer">
+                                            Open in new browser tab
+                                        </a>
+                                    ),
+                                },
+                            ]}
+                        >
+                            <Link to={teamURL} state={{ newWindow: true }}>
+                                <TeamPatch
+                                    name={team.name}
+                                    imageUrl={team.crest?.data?.attributes?.url}
+                                    {...team.crestOptions}
+                                    className="w-full"
+                                />
+                            </Link>
+                        </ContextMenu>
                     </div>
                 </div>
                 <div className="order-3 @md:order-none col-start-1 row-start-3 @md:row-start-3 @md:col-span-full @xl:row-span-1 @xl:row-start-3 @2xl:row-span-4 @2xl:row-start-2">
