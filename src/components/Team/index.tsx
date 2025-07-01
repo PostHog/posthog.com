@@ -12,10 +12,11 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import Tooltip from 'components/Tooltip'
 import SEO from 'components/seo'
 import SideModal from 'components/Modal/SideModal'
-import TeamMember, { FutureTeamMember } from 'components/TeamMember'
+import { TeamMember } from 'components/People'
+import TeamMemberComponent, { FutureTeamMember } from 'components/TeamMember'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconInfo, IconSpinner, IconX } from '@posthog/icons'
+import { IconInfo, IconSpinner, IconX, IconCrown, IconPlus } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
@@ -96,7 +97,15 @@ const PineapplePieChart = ({ percentage }: { percentage: number | false }) => {
     )
 }
 
-const SidebarSection = ({ title, tooltip, children }) => {
+const SidebarSection = ({
+    title,
+    tooltip,
+    children,
+}: {
+    title: React.ReactNode
+    tooltip?: string
+    children: React.ReactNode
+}) => {
     return (
         <div>
             <h5 className="m-0 text-[15px] opacity-75 font-normal mb-2">
@@ -132,6 +141,17 @@ export const TeamMemberCard = ({
     editing,
     id,
     avatar,
+}: {
+    name: string
+    companyRole: string
+    country: string
+    location: string
+    isTeamLead: boolean
+    pineappleOnPizza: boolean | null
+    handleTeamLead?: (id: string, isTeamLead: boolean) => void
+    editing: boolean
+    id: string
+    avatar: any
 }) => {
     return (
         <div className="text-left w-full border border-primary rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64">
@@ -181,10 +201,24 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
     const isModerator = user?.role?.type === 'moderator'
     const {
         allSlackEmoji: { totalCount: totalSlackEmojis },
+        allTeams,
     } = useStaticQuery(graphql`
         {
             allSlackEmoji {
                 totalCount
+            }
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+                nodes {
+                    id
+                    name
+                    crest {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                }
             }
         }
     `)
@@ -374,6 +408,12 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
     const teamEmojis = emojis?.filter((emoji) => !!emoji?.name && !!emoji?.localFile?.publicURL)
 
+    // Create a map of team names to crest data for quick lookup
+    const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
+        acc[team.name] = team.crest?.data?.attributes?.url
+        return acc
+    }, {})
+
     const posthog = usePostHog()
 
     return (
@@ -490,38 +530,42 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                       const name = [firstName, lastName].filter(Boolean).join(' ')
                                       return (
                                           <li key={id} className="rounded-md relative">
-                                              <button
-                                                  className="size-full"
-                                                  onClick={() =>
-                                                      setActiveProfile({
-                                                          ...profile.attributes,
-                                                          isTeamLead: isTeamLead(id),
-                                                          id,
-                                                      })
-                                                  }
-                                              >
-                                                  <TeamMemberCard
-                                                      name={name}
-                                                      companyRole={companyRole}
-                                                      country={country}
-                                                      location={location}
-                                                      isTeamLead={isTeamLead(id)}
-                                                      pineappleOnPizza={pineappleOnPizza}
-                                                      handleTeamLead={handleTeamLead}
-                                                      editing={editing}
-                                                      id={id}
-                                                      avatar={avatar}
-                                                  />
-                                              </button>
+                                              <TeamMember
+                                                  avatar={{
+                                                      url: avatar?.data?.attributes?.url || avatar?.url,
+                                                  }}
+                                                  firstName={firstName}
+                                                  lastName={lastName}
+                                                  companyRole={companyRole}
+                                                  country={country}
+                                                  location={location}
+                                                  squeakId={id}
+                                                  color={profile.attributes.color || 'yellow'}
+                                                  biography={profile.attributes.biography || ''}
+                                                  teamCrestMap={teamCrestMap}
+                                                  pineappleOnPizza={pineappleOnPizza}
+                                                  startDate={profile.attributes.startDate}
+                                                  isTeamLead={isTeamLead(id)}
+                                              />
                                               {editing && (
-                                                  <button
-                                                      onClick={() => removeTeamMember(id)}
-                                                      className="w-7 h-7 rounded-full border border-input absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent"
-                                                  >
-                                                      <Tooltip content="Remove team member" placement="top">
+                                                  <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
+                                                      <button
+                                                          onClick={() => removeTeamMember(id)}
+                                                          className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
+                                                          title="Remove team member"
+                                                      >
                                                           <IconX className="w-4 h-4" />
-                                                      </Tooltip>
-                                                  </button>
+                                                      </button>
+                                                      <button
+                                                          onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                          className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
+                                                              isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                          }`}
+                                                          title={isTeamLead(id) ? 'Remove team lead' : 'Make team lead'}
+                                                      >
+                                                          <IconCrown className="w-4 h-4" />
+                                                      </button>
+                                                  </div>
                                               )}
                                           </li>
                                       )
@@ -569,7 +613,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
             <div className="article-content team-page-content">
                 {objectives && (
-                    <MDXProvider components={{ TeamMember, FutureTeamMember }}>
+                    <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
                         <div dangerouslySetInnerHTML={{ __html: objectives }} />
                     </MDXProvider>
                 )}
