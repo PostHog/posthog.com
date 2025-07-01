@@ -2887,7 +2887,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'SQL',
-                    url: '/docs/data-warehouse/sql',
+                    url: 'https://posthog.com/docs/data-warehouse/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
                 },
