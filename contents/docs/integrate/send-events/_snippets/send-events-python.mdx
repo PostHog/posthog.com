@@ -8,7 +8,7 @@ import Intro from "./intro.mdx"
 # Events captured with no context or explicit distinct_id are marked as personless, and will have an auto-generated distinct_id:
 posthog.capture('some-anon-event')
 
-# It's recommended to use contexts to manage user identification across multiple capture calls
+# Use contexts to manage user identification across multiple capture calls
 with posthog.new_context():
     posthog.identify_context('distinct_id_of_the_user')
     posthog.capture('user_signed_up')
