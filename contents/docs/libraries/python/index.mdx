@@ -53,12 +53,11 @@ with posthog.new_context():
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `False`, and pass an explicit distinct ID:
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `False`. Events captured with no context or explicit distinct_id are marked as personless, and will have an auto-generated distinct_id:
 
 ```python
 posthog.capture(
     event='event_name',
-    distinct_id='distinct_id',
     properties={
         '$process_person_profile': False
     }
