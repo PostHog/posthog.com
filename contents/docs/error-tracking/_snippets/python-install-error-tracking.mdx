@@ -45,7 +45,7 @@ import PythonFastAPIExceptionAutocapture from './python-fastapi-exception-autoca
 For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
 
 ```python
-posthog.capture_exception(e, properties=additional_properties)
+posthog.capture_exception(e, distinct_id="user_distinct_id", properties=additional_properties)
 ```
 
 You can find a full example of all of this in our [Python (and Flask) error tracking tutorial](/tutorials/python-error-tracking).
