@@ -2886,6 +2886,12 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    name: 'SQL',
+                    url: '/docs/data-warehouse/sql',
+                    icon: 'IconHogQL',
+                    color: 'purple',
+                },
+                {
                     name: 'Tools',
                 },
                 {
