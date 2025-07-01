@@ -565,6 +565,9 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
         }
     }, [])
 
+    // Find overview.mdx node for this API entity
+    const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
+
     return (
         <Layout parent={docsMenu} activeInternalMenu={docsMenu.children.find(({ name }) => name === 'Product OS')}>
             <SEO title={`${title} API Reference - PostHog`} />
@@ -587,6 +590,15 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
                         .
                     </p>
                 </blockquote>
+
+                {overviewNode?.body && (
+                    <div className="article-content mt-6">
+                        <MDXProvider components={components}>
+                            <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                )}
+
                 <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
                 <Endpoints paths={paths} />

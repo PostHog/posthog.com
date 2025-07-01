@@ -12,9 +12,9 @@ PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. 
 
 We're very lucky that we have an almost-follow-the-sun rotation for service alerts, so nobody gets woken up in the middle of the night. Every engineer at PostHog is expected to be part of the rotation within one of the three PagerDuty schedules:
 
-- [Europe](https://posthog.pagerduty.com/schedules#PF7ZGBT) (08:00 to 16:00 UTC)
-- [Americas East](https://posthog.pagerduty.com/schedules#PW1E9Y4) (16:00 to 00:00 UTC)
-- [Americas West](https://posthog.pagerduty.com/schedules#P3J10CZ) (00:00 to 08:00 UTC)
+- [Europe](https://posthog.pagerduty.com/schedules#PF7ZGBT) (06:00 to 14:00 UTC)
+- [Americas East](https://posthog.pagerduty.com/schedules#PW1E9Y4) (14:00 to 22:00 UTC)
+- [Americas West](https://posthog.pagerduty.com/schedules#P3J10CZ) (22:00 to 06:00 UTC)
 
 Because the stability of production systems is critical, on-call involves weekends too (unlike Support Hero). More likely than not, nothing will happen over the weekend – but you never know, so the important thing is to keep your laptop at hand.
 
