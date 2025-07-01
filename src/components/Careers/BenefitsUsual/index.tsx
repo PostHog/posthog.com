@@ -62,7 +62,7 @@ const Benefit = ({ icon, title, details, className = '' }: BenefitProps) => {
 
 const BenefitsUsual: React.FC = () => {
     return (
-        <section className="max-w-7xl mx-auto px-4 py-8 grid lg:grid-cols-2 lg:gap-8">
+        <section id="usual-benefits" className="@container px-8 @3xl:px-8">
             <div className="">
                 <h2 className="text-4xl font-bold mb-2">
                     The <em>boring</em> benefits

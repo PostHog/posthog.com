@@ -4,7 +4,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 
 const BenefitsUnexpected: React.FC = () => {
     return (
-        <section className="max-w-7xl mx-auto px-4 pt-8 pb-12 grid gap-12 xl:gap-16">
+        <section id="unexpected-benefits" className="@container px-8 @3xl:px-8">
             <div className="-mb-4">
                 <h2 className="text-center text-5xl mb-2">
                     <em className="text-red dark:text-yellow">Unexpected</em> benefits

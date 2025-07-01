@@ -272,7 +272,7 @@ export const Pizza = () => {
     })
 
     return (
-        <div className="@container">
+        <section id="pizza" className="@container px-8 @3xl:px-8">
             <div className="text-center">
                 <h2 className="text-4xl font-bold mb-2 flex items-center gap-2 justify-center flex-col @4xl:flex-row leading-none">
                     <StickerPineapple className="inline-block size-10" />
@@ -527,6 +527,6 @@ export const Pizza = () => {
             </Swiper>
 
             {activeIndex !== null && <FullscreenModal image={filteredImages[activeIndex]} onClose={closeFullscreen} />}
-        </div>
+        </section>
     )
 }

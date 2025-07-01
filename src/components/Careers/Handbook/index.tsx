@@ -7,7 +7,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 
 const CompanyHandbook: React.FC = () => {
     return (
-        <section className="grid md:grid-cols-2 md:items-center gap-8 max-w-7xl mx-auto px-4 xl:px-8 py-8">
+        <section id="handbook" className="@container px-8 @3xl:px-8">
             <div className="relative pb-[150px] md:pb-[200px]">
                 <h2 className="text-3xl lg:text-4xl font-bold mb-2">Get to know us in our company handbook</h2>
                 <p className="mb-2">

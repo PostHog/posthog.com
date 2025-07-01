@@ -66,7 +66,7 @@ export const Transparency = () => {
     }
 
     return (
-        <div className="careers-transparency py-12">
+        <section id="transparency" className="@container careers-transparency px-8 @3xl:px-8">
             <div className="w-11/12 max-w-4xl mx-auto md:text-center">
                 <h2 className="text-4xl md:text-5xl">
                     The most transparent company, <em className="text-red dark:text-yellow">ever</em>
@@ -142,6 +142,6 @@ export const Transparency = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }

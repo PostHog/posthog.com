@@ -4,7 +4,7 @@ import { Link } from 'gatsby'
 
 const IdealEmployeeProfile: React.FC = () => {
     return (
-        <section className="max-w-7xl mx-auto px-4 py-8 grid md:grid-cols-2 md:gap-8">
+        <section id="iep" className="@container px-8 @3xl:px-8">
             <div className="">
                 <p className="opacity-60 mb-2">Who we look for</p>
                 <h2 className="text-3xl lg:text-4xl font-bold mb-2">

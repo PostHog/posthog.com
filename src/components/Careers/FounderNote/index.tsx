@@ -52,7 +52,7 @@ export const FounderNote = () => {
     }
 
     return (
-        <section className="@container px-4 max-w-7xl mx-auto mb-16">
+        <section id="note" className="@container px-4 max-w-7xl mx-auto mb-16">
             <h2 className="text-center text-4xl mb-8">This message brought to you by our co-founder</h2>
             <div className="grid justify-center">
                 <div className="col-span-3">

@@ -4,7 +4,7 @@ import { Structure } from '../../Structure'
 
 export const OpenRoles = () => {
     return (
-        <div id="open-roles" className="mt-16">
+        <section id="open-roles" className="@container px-8 @3xl:px-8">
             <Structure.Section width="5xl" className="">
                 <h2 className="text-center text-5xl mb-12">Open roles</h2>
 
@@ -30,6 +30,6 @@ export const OpenRoles = () => {
                     </div>
                 </div>
             </Structure.Section>
-        </div>
+        </section>
     )
 }
