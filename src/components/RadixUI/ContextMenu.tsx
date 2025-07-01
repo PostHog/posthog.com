@@ -38,9 +38,26 @@ const ContextMenu = ({ children, menuItems }: ContextMenuProps) => {
                                 key={index}
                                 className={ItemClasses}
                                 disabled={item.disabled}
-                                onClick={item.onClick}
+                                onSelect={(e) => {
+                                    // Execute any onClick handlers
+                                    item.onClick?.()
+                                }}
                             >
-                                {item.children || item.label}
+                                <div
+                                    onClick={(e) => {
+                                        // Force close the context menu by dispatching Escape key
+                                        setTimeout(() => {
+                                            const escapeEvent = new KeyboardEvent('keydown', {
+                                                key: 'Escape',
+                                                bubbles: true,
+                                            })
+                                            document.dispatchEvent(escapeEvent)
+                                        }, 0)
+                                    }}
+                                    className="w-full"
+                                >
+                                    {item.children || item.label}
+                                </div>
                             </RadixContextMenu.Item>
                         )
                     })}

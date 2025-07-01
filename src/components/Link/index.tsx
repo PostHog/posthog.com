@@ -5,6 +5,38 @@ import { Link as GatsbyLink } from 'gatsby'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
+import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
+
+// Helper function to create standard context menu items
+const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
+    const fullUrl = url?.startsWith('/') ? `https://posthog.com${url}` : url
+
+    return [
+        {
+            type: 'item',
+            disabled: isExternal,
+            children: isExternal ? (
+                <span>Open in new PostHog window</span>
+            ) : (
+                <Link to={url} state={{ ...state, newWindow: true }} contextMenu={false}>
+                    Open in new PostHog window
+                </Link>
+            ),
+        },
+        {
+            type: 'item',
+            children: (
+                <a href={url} target="_blank" rel="noreferrer">
+                    Open in new browser tab
+                </a>
+            ),
+        },
+        {
+            type: 'item',
+            children: <span onClick={() => navigator.clipboard.writeText(fullUrl)}>Copy link address</span>,
+        },
+    ]
+}
 
 export interface Props {
     to: string
@@ -21,6 +53,8 @@ export interface Props {
     glossary?: TooltipContentProps[]
     preview?: TooltipContentProps
     disabled?: boolean
+    contextMenu?: boolean
+    customMenuItems?: ContextMenuItemProps[]
 }
 
 export default function Link({
@@ -37,6 +71,8 @@ export default function Link({
     event = '',
     href,
     glossary,
+    contextMenu = true,
+    customMenuItems = [],
     ...other
 }: Props): JSX.Element {
     const { compact } = useLayoutData()
@@ -74,54 +110,77 @@ export default function Link({
         }
     }
 
-    return onClick && !url ? (
-        <button onClick={handleClick} className={className} disabled={disabled}>
-            {children}
-        </button>
-    ) : internal ? (
-        preview ? (
-            <Tooltip
-                tooltipClassName={compact ? 'hidden' : ''}
-                offset={[0, 0]}
-                placement="left-start"
-                content={(setOpen) => (
-                    <TooltipContent
-                        setOpen={setOpen}
-                        title={preview.title}
-                        slug={url}
-                        description={preview.description}
-                        video={preview.video}
-                    />
-                )}
-            >
-                <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
-                    {children}
-                </GatsbyLink>
-            </Tooltip>
-        ) : (
-            <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
-                {children}
-            </GatsbyLink>
-        )
-    ) : (
-        <a
-            rel="noopener noreferrer"
-            onClick={handleClick}
-            {...other}
-            href={url}
-            className={`${className} group`}
-            target={external || externalNoIcon ? '_blank' : ''}
-        >
-            {external ? (
-                <span className="inline-flex justify-center items-center group">
-                    <span className="font-semibold underline">{children}</span>
-                    <IconArrowUpRight
-                        className={`size-4 text-muted group-hover:text-secondary relative ${iconClasses}`}
-                    />
-                </span>
-            ) : (
-                children
-            )}
-        </a>
-    )
+    // Determine if link is external
+    const isExternal =
+        !internal || !!external || !!externalNoIcon || (url && !url.startsWith('/') && !url.includes('posthog.com'))
+
+    // Create context menu items
+    const menuItems =
+        contextMenu && url
+            ? [
+                  ...createStandardMenuItems(url, state, isExternal),
+                  ...(customMenuItems.length > 0 ? [{ type: 'separator' as const }, ...customMenuItems] : []),
+              ]
+            : []
+
+    // Wrapper function to conditionally apply context menu
+    const wrapWithContextMenu = (element: JSX.Element) => {
+        if (!contextMenu || !url) return element
+        return <ContextMenu menuItems={menuItems}>{element}</ContextMenu>
+    }
+
+    return onClick && !url
+        ? wrapWithContextMenu(
+              <button onClick={handleClick} className={className} disabled={disabled}>
+                  {children}
+              </button>
+          )
+        : internal
+        ? preview
+            ? wrapWithContextMenu(
+                  <Tooltip
+                      tooltipClassName={compact ? 'hidden' : ''}
+                      offset={[0, 0]}
+                      placement="left-start"
+                      content={(setOpen) => (
+                          <TooltipContent
+                              setOpen={setOpen}
+                              title={preview.title}
+                              slug={url}
+                              description={preview.description}
+                              video={preview.video}
+                          />
+                      )}
+                  >
+                      <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                          {children}
+                      </GatsbyLink>
+                  </Tooltip>
+              )
+            : wrapWithContextMenu(
+                  <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                      {children}
+                  </GatsbyLink>
+              )
+        : wrapWithContextMenu(
+              <a
+                  rel="noopener noreferrer"
+                  onClick={handleClick}
+                  {...other}
+                  href={url}
+                  className={`${className} group`}
+                  target={external || externalNoIcon ? '_blank' : ''}
+              >
+                  {external ? (
+                      <span className="inline-flex justify-center items-center group">
+                          <span className="font-semibold underline">{children}</span>
+                          <IconArrowUpRight
+                              className={`size-4 text-muted group-hover:text-secondary relative ${iconClasses}`}
+                          />
+                      </span>
+                  ) : (
+                      children
+                  )}
+              </a>
+          )
 }
