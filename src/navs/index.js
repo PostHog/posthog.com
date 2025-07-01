@@ -946,6 +946,10 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Working with Max AI',
+                url: '/handbook/engineering/working-with-max-ai',
+            },
+            {
                 name: 'Deployments',
                 url: '',
                 children: [
