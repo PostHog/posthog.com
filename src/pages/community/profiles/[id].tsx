@@ -132,14 +132,18 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
         {
             value: 'bio',
             label: 'Bio',
-            content: <Markdown>{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>,
+            content: (
+                <Markdown className="prose prose-sm">
+                    {profile.biography || `${firstName} hasn't written a bio yet`}
+                </Markdown>
+            ),
         },
         ...(profile.readme
             ? [
                   {
                       value: 'readme',
                       label: 'README',
-                      content: <Markdown>{profile.readme}</Markdown>,
+                      content: <Markdown className="prose prose-sm">{profile.readme}</Markdown>,
                   },
               ]
             : []),
@@ -151,7 +155,7 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
                       content: (
                           <>
                               <div className="flex justify-between items-center mb-4">
-                                  <h4 className="text-lg font-bold m-0">Blog Posts</h4>
+                                  <h4 className="text-lg font-bold m-0">Blog posts</h4>
                                   <SortDropdown value={sort} onChange={setSort} options={sortOptions} />
                               </div>
                               <PostsTable {...posts} />
@@ -176,7 +180,7 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
             : []),
     ]
 
-    return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" />
+    return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
 }
 
 export default function ProfilePage({ params }: PageProps) {
@@ -333,7 +337,7 @@ export default function ProfilePage({ params }: PageProps) {
                                     color={profile.color}
                                 />
                                 <div className="flex items-center space-x-2 my-2">
-                                    <h2 className="text-xl font-bold m-0">{name}</h2>
+                                    <h2 className="uppercase">{name}</h2>
                                     {profile.country && (
                                         <Flag
                                             style={{ width: '1.5rem', height: '1.5rem' }}
