@@ -35,12 +35,14 @@ import { Fieldset } from 'components/OSFieldset'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSTabs from 'components/OSTabs'
 import TeamImage from './TeamImage'
+import Link from 'components/Link'
 import {
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
     StickerPineapple,
 } from 'components/Stickers/Index'
+import ZoomHover from 'components/ZoomHover'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -187,6 +189,43 @@ export const TeamMemberCard = ({
     )
 }
 
+const JobCard = ({ job }: { job: any }) => {
+    const locationField = job.parent.customFields.find((field: any) => field.title === 'Location(s)')
+    const timezoneField = job.parent.customFields.find((field: any) => field.title === 'Timezone(s)')
+
+    return (
+        <ZoomHover size="lg" className="!flex h-full w-full aspect-[3/4]">
+            <div className="group container-size not-prose aspect-[3/4] border border-primary bg-teal block rounded max-w-96 relative">
+                <Link
+                    to={`${job.fields.slug}`}
+                    state={{ newWindow: true }}
+                    className="h-full w-full p-4 flex flex-col justify-between"
+                >
+                    <div className="flex flex-col h-full">
+                        <div className="mb-auto">
+                            <div className="mb-2">
+                                <span className="inline-block px-2 py-1 text-xs font-semibold bg-black/10 text-black rounded">
+                                    Open role
+                                </span>
+                            </div>
+                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1">
+                                {job.fields.title}
+                            </h3>
+                            <div className="text-black/80 text-sm space-y-1">
+                                {locationField?.value && <p className="m-0">📍 {locationField.value}</p>}
+                                {timezoneField?.value && <p className="m-0">🕒 {timezoneField.value}</p>}
+                            </div>
+                        </div>
+                        <div className="mt-auto">
+                            <span className="text-black font-semibold text-sm">Read description</span>
+                        </div>
+                    </div>
+                </Link>
+            </div>
+        </ZoomHover>
+    )
+}
+
 export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug }: TeamProps): JSX.Element {
     const [saving, setSaving] = useState(false)
     const [editing, setEditing] = useState(newTeam || false)
@@ -202,6 +241,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
     const {
         allSlackEmoji: { totalCount: totalSlackEmojis },
         allTeams,
+        allAshbyJobPosting,
     } = useStaticQuery(graphql`
         {
             allSlackEmoji {
@@ -215,6 +255,22 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                         data {
                             attributes {
                                 url
+                            }
+                        }
+                    }
+                }
+            }
+            allAshbyJobPosting(filter: { isListed: { eq: true } }) {
+                nodes {
+                    fields {
+                        title
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            customFields {
+                                value
+                                title
                             }
                         }
                     }
@@ -414,6 +470,14 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
         return acc
     }, {})
 
+    // Filter jobs that are assigned to this team
+    const teamJobs = allAshbyJobPosting.nodes.filter((job: any) => {
+        const teamsField = job.parent.customFields.find((field: any) => field.title === 'Teams')
+        if (!teamsField) return false
+        const teams = JSON.parse(teamsField.value || '[]')
+        return teams.includes(name)
+    })
+
     const posthog = usePostHog()
 
     return (
@@ -441,7 +505,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 setFieldValue={setFieldValue}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="not-prose grid grid-cols-2 gap-4">
                 <div>
                     <Fieldset legend="Pineapple on pizza">
                         <PineapplePieChart percentage={pineapplePercentage} />
@@ -504,7 +568,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
             <Fieldset legend="Members">
                 <div className="@container flex-1">
-                    <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
+                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                         {loading
                             ? new Array(4).fill(0).map((_, i) => (
                                   <li key={i}>
@@ -575,6 +639,12 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                       <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
                                   </li>
                               ))}
+                        {/* Add job cards for open roles */}
+                        {teamJobs.map((job: any) => (
+                            <li key={job.fields.slug} className="rounded-md relative">
+                                <JobCard job={job} />
+                            </li>
+                        ))}
                     </ul>
                     {editing && <AddTeamMember handleChange={(user) => addTeamMember(user.profile)} />}
                 </div>
