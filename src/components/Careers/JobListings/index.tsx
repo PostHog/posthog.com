@@ -249,7 +249,7 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
     )
 }
 
-export const JobListings = () => {
+export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
     const {
         allAshbyJobPosting: { departments, jobs: originalJobs },
         allTeams: { nodes: allTeams },
@@ -459,7 +459,10 @@ export const JobListings = () => {
         'absolute @3xl:top-1/2 @3xl:left-1/2  opacity-100 @sm:opacity-80 @md:opacity-100 transition-all duration-300 @2xl:scale-75 @3xl:scale-90 @4xl:scale-100 @5xl:scale-110'
 
     return (
-        <section id="roles" className="flex flex-col @2xl:flex-row @2xl:gap-6 p-4">
+        <section
+            id={embedded ? undefined : 'roles'}
+            className={` ${embedded ? '' : 'flex flex-col @2xl:flex-row @2xl:gap-6 p-4'}`}
+        >
             <div className="w-full @2xl:w-1/3 @3xl:w-1/4">
                 <label htmlFor="job-select" className="block @2xl:hidden font-bold mb-1 text-center">
                     Select a role
