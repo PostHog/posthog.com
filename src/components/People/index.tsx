@@ -66,6 +66,13 @@ export const TeamMember = (props: any) => {
 
     const tooltipPrefix = roleType ? "Helpin' customers" : isEngineer ? "Slingin' code" : 'Here'
 
+    // Get bio placeholder text based on role
+    const getBioPlaceholder = () => {
+        if (roleType) return "I've been too busy helping customers to fill out my bio"
+        if (isEngineer) return "I've been too busy shipping features to fill out my bio."
+        return "I haven't had a chance to fill out my bio yet."
+    }
+
     // Extract team data
     const teamData = teams?.data || []
 
@@ -88,8 +95,10 @@ export const TeamMember = (props: any) => {
 
     return (
         <>
-            <div
-                className={`container-size not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
+            <Link
+                to={`/community/profiles/${squeakId}`}
+                className={`group container-size not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
+                state={{ newWindow: true }}
             >
                 <div className="absolute z-20 top-2 left-2 flex flex-col gap-2">
                     <ZoomHover size="lg">
@@ -123,7 +132,7 @@ export const TeamMember = (props: any) => {
                     )}
                 </div>
 
-                <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10">
+                <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10 group-hover:-translate-y-20 transition-all">
                     <img
                         src={
                             avatar?.url ||
@@ -134,7 +143,7 @@ export const TeamMember = (props: any) => {
                     />
                 </div>
 
-                <div className="absolute bottom-[calc(50cqh_-_2rem)] translate-y-1/2 inset-x-0 overflow-hidden z-10 py-2">
+                <div className="absolute bottom-[calc(50cqh_-_2rem)] group-hover:bottom-[calc(50cqh_+_0rem)] translate-y-1/2 inset-x-0 overflow-hidden z-10 py-2 transition-all">
                     <div className="relative -rotate-3 font-squeak uppercase">
                         <div className="bg-white border-y-3 border-black relative -mx-1 py-0.5 pl-2 pr-4 flex flex-col items-end text-right">
                             <h3
@@ -150,16 +159,24 @@ export const TeamMember = (props: any) => {
                                 {companyRole}
                             </h4>
                         </div>
-                        <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3">
+                        <div className="flex justify-end items-center gap-1 text-sm @[16rem]:text-base pt-1 pr-3 relative top-0 group-hover:-top-12 transition-all -z-10">
                             <Stickers country={country} location={location} />{' '}
                             {country === 'world' ? 'Planet Earth' : location || country}
                         </div>
                     </div>
                 </div>
 
-                <div className="container-size absolute bottom-0 left-0 right-0 h-[calc(50cqh_-_2rem)] bg-white/50 flex items-end">
+                <div className="container-size absolute bottom-0 left-0 right-0 h-[calc(50cqh_-_2rem)] group-hover:h-[calc(50cqh_-_0rem)] transition-all bg-white/50 flex items-end overflow-hidden">
+                    <div
+                        className={`absolute left-0 w-full -bottom-24 @[18rem]:-bottom-36 group-hover:bottom-0 z-20 rounded-b bg-gradient-to-b from-transparent to-${color} h-24 @[18rem]:h-36 transition-all`}
+                    ></div>
+                    <div
+                        className={`absolute left-0 w-full -bottom-24 @[18rem]:-bottom-36 group-hover:bottom-0 z-30 rounded-b bg-gradient-to-b from-transparent to-white h-24 @[18rem]:h-36 transition-all opacity-50`}
+                    ></div>
                     {teamData.length > 0 ? (
-                        <div className={`bg-${color} w-full flex flex-col justify-center px-2 min-h-[30cqh]`}>
+                        <div
+                            className={`bg-${color} w-full flex flex-col justify-center px-2 min-h-[30cqh] relative top-[0%] group-hover:top-full transition-all`}
+                        >
                             <div className="relative">
                                 {/* Show first team */}
                                 <div className="@container w-full pr-16">
@@ -221,8 +238,14 @@ export const TeamMember = (props: any) => {
                     ) : (
                         'No team assigned'
                     )}
+
+                    <div className="absolute left-0 w-full top-full pt-8 px-4 group-hover:top-[0%] transition-all">
+                        <ReactMarkdown className="text-sm bio-preview">
+                            {biography || getBioPlaceholder() + ' Ask me if hot dogs are a form of taco!'}
+                        </ReactMarkdown>
+                    </div>
                 </div>
-            </div>
+            </Link>
 
             <li className="hidden h-40 relative @container group click [perspective:1000px]">
                 <button
