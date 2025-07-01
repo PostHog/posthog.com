@@ -82,6 +82,8 @@ with posthog.new_context():
     posthog.capture("order_processed", distinct_id="another-distinct-id") # will be associated with another-distinct-id
 ```
 
+You can read more about identifying users in the [user identification documentation](/docs/product-analytics/identify). If you can, it's recommended to pass the currently active distinct ID from the frontend to the backend, using the `X-POSTHOG-DISTINCT-ID` header. If you're using our Django middleware, this will then be extracted and associated with the request handler context automatically.
+
 ### Contexts and sessions
 
 Contexts can be associated with a session ID by calling `posthog.set_context_session`. Session ID's are UUIDv7 strings. If you're using the posthog JS SDK on your frontend, that SDK will generate a session ID for you, and you can retrieve it by calling `posthog.get_session_id()` there. We recommend passing session ID's to your backend by setting the `X-POSTHOG-SESSION-ID` header, and extracting it in your request handler (if you're using our Django middleware, this will happen automatically).
@@ -94,6 +96,8 @@ with posthog.new_context():
 If you associate a context with a session, you'll be able to do things like:
 - See backend events on the session timeline when viewing session replays
 - View session replays for users that triggered a backend exception in error tracking
+
+You can read more about sessions in the [session tracking](/docs/data/sessions) documentation.
 
 ### Exception capture
 
