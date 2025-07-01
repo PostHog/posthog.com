@@ -1,6 +1,6 @@
 import React from 'react'
 import { BaseIcon, type IconProps } from './Icons'
-import { Link } from 'gatsby'
+import Link from 'components/Link'
 import { useRef } from 'react'
 
 // App icon mapping for different skins

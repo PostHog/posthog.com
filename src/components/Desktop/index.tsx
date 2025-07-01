@@ -7,6 +7,7 @@ import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'compo
 import ZoomHover from 'components/ZoomHover'
 import Screenshot from 'components/Screenshot'
 import { AppLink, AppItem } from 'components/OSIcons/AppIcon'
+import ContextMenu from 'components/RadixUI/ContextMenu'
 
 interface Product {
     name: string
@@ -92,66 +93,87 @@ export default function Desktop() {
     const products = useProduct() as Product[]
 
     return (
-        <div data-scheme="primary" data-app="Desktop" className="fixed size-full p-4">
-            <div
-                className="absolute bottom-0 right-0 size-full bg-contain bg-no-repeat bg-right-bottom -z-10"
-                style={{
-                    backgroundImage:
-                        "url('https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png')",
-                }}
-            />
-
-            <div className="hidden">
-                <Screenshot
-                    product="Session replay"
-                    slug="session-replay"
-                    icon={<IconRewindPlay />}
-                    order={1}
-                    className={``}
+        <ContextMenu
+            menuItems={[
+                {
+                    type: 'item',
+                    children: (
+                        <Link to="/site-settings" state={{ newWindow: true }}>
+                            Display options
+                        </Link>
+                    ),
+                },
+                {
+                    type: 'item',
+                    children: (
+                        <Link to="/about" state={{ newWindow: true }}>
+                            About PostHog
+                        </Link>
+                    ),
+                },
+            ]}
+        >
+            <div data-scheme="primary" data-app="Desktop" className="fixed size-full p-4">
+                <div
+                    className="absolute bottom-0 right-0 size-full bg-contain bg-no-repeat bg-right-bottom -z-10"
+                    style={{
+                        backgroundImage:
+                            "url('https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png')",
+                    }}
                 />
-            </div>
 
-            <nav
-                style={{
-                    // paddingTop: `${taskbarHeight}px`,
-                    height: `calc(100vh - ${taskbarHeight}px - 48px)`,
-                }}
-                className="overflow-hidden flex justify-between"
-            >
-                <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
-                    {productLinks.map((app, index) => (
-                        <li key={app.label + index} className="w-28 flex justify-center">
-                            <ZoomHover>
-                                <AppLink {...app} />
-                            </ZoomHover>
-                        </li>
-                    ))}
-                    {/* 
-                    {products?.map((product, index) => (
-                        <li key={product.name + index} className="w-[110px] flex justify-center">
-                            <ZoomHover>
-                                <AppLink
-                                    label={product.name}
-                                    url={product.slug}
-                                    type="link"
-                                    Icon={product.Icon}
-                                    color={product.color}
-                                />
-                            </ZoomHover>
-                        </li>
-                    ))}
-                     */}
-                </ul>
-                <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
-                    {apps.map((app, index) => (
-                        <li key={app.label + index} className="w-28 flex justify-center">
-                            <ZoomHover>
-                                <AppLink {...app} />
-                            </ZoomHover>
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-        </div>
+                <div className="hidden">
+                    <Screenshot
+                        product="Session replay"
+                        slug="session-replay"
+                        icon={<IconRewindPlay />}
+                        order={1}
+                        className={``}
+                    />
+                </div>
+
+                <nav
+                    style={{
+                        // paddingTop: `${taskbarHeight}px`,
+                        height: `calc(100vh - ${taskbarHeight}px - 48px)`,
+                    }}
+                    className="overflow-hidden flex justify-between"
+                >
+                    <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
+                        {productLinks.map((app, index) => (
+                            <li key={app.label + index} className="w-28 flex justify-center">
+                                <ZoomHover>
+                                    <AppLink {...app} />
+                                </ZoomHover>
+                            </li>
+                        ))}
+                        {/* 
+                        {products?.map((product, index) => (
+                            <li key={product.name + index} className="w-[110px] flex justify-center">
+                                <ZoomHover>
+                                    <AppLink
+                                        label={product.name}
+                                        url={product.slug}
+                                        type="link"
+                                        Icon={product.Icon}
+                                        color={product.color}
+                                    />
+                                </ZoomHover>
+                            </li>
+                        ))}
+                         */}
+                    </ul>
+                    <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
+                        {apps.map((app, index) => (
+                            <li key={app.label + index} className="w-28 flex justify-center">
+                                <ZoomHover>
+                                    <AppLink {...app} />
+                                </ZoomHover>
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+            </div>
+        </ContextMenu>
     )
 }

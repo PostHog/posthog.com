@@ -111,8 +111,9 @@ export default function Link({
     }
 
     // Determine if link is external
-    const isExternal =
+    const isExternal = Boolean(
         !internal || !!external || !!externalNoIcon || (url && !url.startsWith('/') && !url.includes('posthog.com'))
+    )
 
     // Create context menu items
     const menuItems =
