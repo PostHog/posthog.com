@@ -21,7 +21,7 @@ const CompanyHandbook: React.FC = () => {
                     </li>
                     <li>If you join us, you will be expected to take a stance on if pineapple belongs on pizza</li>
                 </ul>
-                <CallToAction href="/handbook" type="secondary" size="sm">
+                <CallToAction href="/handbook" type="secondary" size="sm" state={{ newWindow: true }}>
                     Visit the handbook
                 </CallToAction>
                 <div className="absolute bottom-12 md:bottom-0 -right-8 md:right-0 h-[150px] lg:h-[250px] scale-75 md:scale-100">
