@@ -16,7 +16,7 @@ features:
   errorTracking: true
 ---
 
-This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
+The python SDK provides a way for you to capture events, query feature flags and track errors in your python backends or apps.
 
 ## Installation
 
@@ -32,27 +32,33 @@ import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 ## Person profiles and properties
 
-The Python SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The Python SDK captures identified events if the current context is identified, or if you pass a distinct id explicitly. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```python
+# Passing a distinct id explicitly
 posthog.capture(
-    'distinct_id',
-    event='event_name',
+    'event_name',
+    distinct_id='user-distinct-id',
     properties={
         '$set': {'name': 'Max Hedgehog'},
         '$set_once': {'initial_url': '/blog'}
     }
 )
+
+# Using contexts
+with posthog.new_context():
+    posthog.identify_context('user-distinct-id')
+    posthog.capture('event_name')
 ```
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `False`, and pass an explicit distinct ID:
 
 ```python
 posthog.capture(
-    'distinct_id',
     event='event_name',
+    distinct_id='distinct_id',
     properties={
         '$process_person_profile': False
     }
@@ -61,7 +67,7 @@ posthog.capture(
 
 ## Alias
 
-Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
 
 In this case, you can use `alias` to assign another distinct ID to the same user.
 
@@ -86,7 +92,7 @@ Group analytics allows you to associate an event with a group (e.g. teams, organ
 To capture an event and associate it with a group:
 
 ```python
-posthog.capture('user_distinct_id', 'some_event', groups={'company': 'company_id_in_your_db'})
+posthog.capture('some_event', groups={'company': 'company_id_in_your_db'})
 ```
 
 To update properties on a group:
@@ -129,7 +135,7 @@ if variant == 'variant-name':
     # Do something
 ```
 
-It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ## LLM observability
 
@@ -150,6 +156,8 @@ You can also manually capture exceptions using the `capture_exception` method:
 ```python
 posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
 ```
+
+Contexts will also automatically capture exceptions, unless configured not to.
 
 ## GeoIP properties
 
@@ -176,7 +184,7 @@ The list of properties that this overrides:
 You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 
 ```python
-posthog.capture('test_id', 'test_event', disable_geoip=True|False)
+posthog.capture('test_event', disable_geoip=True|False)
 ```
 
 ## Historical migrations
@@ -199,48 +207,6 @@ is fully flushed. To avoid this, you can either:
 ## Django
 
 See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. Our Django library also includes a [contexts middleware](/docs/libraries/django#django-contexts-middleware) that can automatically capture distinct IDs, session IDs, and other properties you can set up with tags.
-
-## Sentry integration
-
-When using [Sentry in Python](https://docs.sentry.io/platforms/python/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
-
-### Example implementation
-
-See the [`sentry_django_example`](https://github.com/PostHog/posthog-python/tree/master/sentry_django_example) project for a complete example.
-
-```python
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
-from posthog.sentry.posthog_integration import PostHogIntegration
-
-PostHogIntegration.organization = "orgname"
-
-sentry_sdk.init(
-    dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
-    integrations=[DjangoIntegration(), PostHogIntegration()],
-)
-
-# Also set `posthog_distinct_id` tag
-from sentry_sdk import configure_scope
-
-with configure_scope() as scope:
-    scope.set_tag('posthog_distinct_id', 'some distinct id')
-```
-
-#### Example implementation with Django
-
-This can be made automatic in Django, by adding the following middleware and settings to `settings.py`:
-
-```python
-
-MIDDLEWARE = [
-    "posthog.sentry.django.PosthogDistinctIdMiddleware"
-]
-
-POSTHOG_DJANGO = {
-    "distinct_id": lambda request: request.user and request.user.distinct_id
-}
-```
 
 ## Alternative name
 

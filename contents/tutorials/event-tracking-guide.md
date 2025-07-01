@@ -14,7 +14,7 @@ At PostHog, we offer two ways to track events: [autocapture](/docs/product-analy
 
 ## Setting up autocapture
 
-Unlike other tools, PostHog doesn't require you to pre-define or set up events. We can autocapture them for you. This makes it easy to start capturing data like pageviews, clicks, and form submissions. 
+Unlike other tools, PostHog doesn't require you to pre-define or set up events. We can autocapture them for you. This makes it easy to start capturing data like pageviews, clicks, and form submissions.
 
 The fastest way to set up autocapture is to copy the snippet below and paste it into your site’s HTML in the `<head>` tags. This should be an HTML page that acts as a base or template page (with other scripts your page loads) to ensure all possible events are captured.
 
@@ -49,7 +49,7 @@ In addition to autocapture, PostHog enables you to set up custom events in your 
 
 To set up custom events, first you need to install the SDK for the language you are using. We have built SDKs for a range of languages and frameworks including [Node](/docs/libraries/node), [Python](/docs/libraries/python), [iOS](/docs/libraries/ios), [Android](/docs/libraries/android), and more. You can even use our [event capture API](/docs/api/capture) directly.
 
-For example, with Python (and frameworks like [Django](/docs/libraries/django) or [Flask](/docs/libraries/flask)), setting up custom events starts with installing the PostHog with `pip` (or your package manager of choice). 
+For example, with Python (and frameworks like [Django](/docs/libraries/django) or [Flask](/docs/libraries/flask)), setting up custom events starts with installing the PostHog with `pip` (or your package manager of choice).
 
 ```bash
 pip install posthog
@@ -72,8 +72,8 @@ Third, once the SDK is installed and configured, you can capture events by calli
 ```python
 def movie_played(movie):
 	posthog.capture(
-		'distinct_id', 
-		'movie_played', 
+		'distinct_id',
+		'movie_played',
 		{
 			'movie_id': movie.id,
 			'category': movie.category
@@ -88,7 +88,7 @@ Adding more of these capture calls in the right places in your codebase creates 
 Once you send some custom events, it's time to refine those events to capture the data you want. Getting this right requires multiple steps:
 
 1. Start with your product goals, which inform what data is needed about users and their behavior.
- 
+
 2. Ensure data is accessible in the right places in your codebase. This might require writing helper functions for access or formatting the data correctly.
 
 3. Ensure captured data is being captured successfully and in the right format.
@@ -97,7 +97,7 @@ To make sure your data is correct and useful, there are few areas you should pay
 
 ### 1. Identifying users
 
-To best capture data about users, you must understand who they are. 
+To best capture data about users, you must understand who they are.
 
 Every event you capture must have a user distinct ID. Autocapture handles this for you, while custom events require you to do this yourself. Examples of identifiers for users include `UUID` values and emails.
 
@@ -112,11 +112,11 @@ function loginRequest(user) {
 }
 ```
 
-Identifying users enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/person-properties) in your analysis. 
+Identifying users enables you to track users across sessions and devices as well as use [person profiles and properties](/docs/getting-started/person-properties) in your analysis.
 
 ### 2. Properties
 
-Properties are additional data added to events. They are used to segment users, filter events, break down event data, and more. 
+Properties are additional data added to events. They are used to segment users, filter events, break down event data, and more.
 
 Properties are sent along with the distinct ID and event. They can include as much data as you like. Common [data formats](/manual/events#event-filtering) such as booleans, dates, numerics, and more can be handled and utilized within PostHog to filter or adjust data when analyzing.
 
@@ -124,7 +124,7 @@ Properties are sent along with the distinct ID and event. They can include as mu
 
 ```js
 posthog.capture(
-  'event_name', 
+  'event_name',
   { property1: 'value', property2: 'another value' }
 );
 ```
@@ -169,8 +169,8 @@ Properties can also be set for individual users using the `$set` and `$set_once`
 
 ```js
 posthog.capture(
-  'set_some_user_properties', 
-  { 
+  'set_some_user_properties',
+  {
     $set: { location: 'London'  },
     $set_once: { referred_by: 'some ID' },
   }
@@ -181,7 +181,7 @@ posthog.capture(
 posthog.capture(
   'distinct_id',
   event='movie_played',
-  properties={ 
+  properties={
     '$set': { 'location' : 'London' },
     '$set_once': { 'referred_by': 'some ID' }
   }
@@ -233,7 +233,7 @@ client.Enqueue(posthog.Capture{
 
 ### 3. Group event tracking
 
-PostHog provides the ability to aggregate events by groups. [Groups](/docs/product-analytics/group-analytics) enable you to track events and properties at the entity level like a company, organization, or project. This enables you to do analysis like unique organization aggregations. 
+PostHog provides the ability to aggregate events by groups. [Groups](/docs/product-analytics/group-analytics) enable you to track events and properties at the entity level like a company, organization, or project. This enables you to do analysis like unique organization aggregations.
 
 In our JavaScript Web snippet and SDK, you can call the `group` method and all subsequent events will be associated with that group. Other SDKs and the API require you to pass group data with each event.
 
@@ -246,7 +246,7 @@ posthog.capture('some_event')
 ```
 
 ```python
-posthog.capture('distinct_id', 'some_event', groups={'company': 'id:5'})
+posthog.capture('some_event', distinct_id='some-distinct-id', groups={'company': 'id:5'})
 ```
 
 ```go
@@ -282,7 +282,7 @@ analytics.track('event_name', {
 })
 ```
 
-</MultiLanguage> 
+</MultiLanguage>
 
 ## Further reading
 
