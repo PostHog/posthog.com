@@ -120,9 +120,8 @@ The SDK exposes a function decorator. It takes the same arguments as `new_contex
 
 ```python
 @posthog.scoped(fresh=True)
-def process_order(order_id):
-    # This event will be captured with the transaction_id set above
-    posthog.capture("order_processed")
-    # This exception will be captured with the transaction_id set above
-    raise Exception("Order processing failed")
+def process_order(user, order_id):
+    posthog.identify_context(user.distinct_id)
+    posthog.capture("order_processed") # Associated with the user
+    raise Exception("Order processing failed") # This exception will also be captured, and associated with the user
 ```
