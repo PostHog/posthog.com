@@ -709,6 +709,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                             .replaceAll('Connections > Catalog', 'Data pipelines')
                             .replaceAll('Catalog', 'Data pipelines')
                             .replaceAll(' (Actions)', '')
+                            .replaceAll('segmentio', 'posthog')
                             .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
                             .replaceAll(/> \w+ ""/g, '')
                             .replaceAll(
