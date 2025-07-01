@@ -41,6 +41,7 @@ export interface Props {
     to: string
     children: React.ReactNode
     className?: string
+    wrapperClassName?: string
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     disablePrefetch?: boolean
     external?: boolean
@@ -64,6 +65,7 @@ export default function Link({
     to,
     children,
     className = '',
+    wrapperClassName = '',
     disabled,
     onClick,
     disablePrefetch,

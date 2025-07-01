@@ -361,6 +361,9 @@ export const query = graphql`
                             firstName
                             lastName
                             pineappleOnPizza
+                            location
+                            color
+                            companyRole
                             leadTeams {
                                 data {
                                     attributes {

@@ -12,11 +12,12 @@ export interface ContextMenuItemProps {
 export interface ContextMenuProps {
     children: React.ReactNode
     menuItems: ContextMenuItemProps[]
+    className?: string
 }
 
-const ContextMenu = ({ children, menuItems }: ContextMenuProps) => {
+const ContextMenu = ({ children, menuItems, className }: ContextMenuProps) => {
     // Style classes matching MenuBar patterns
-    const TriggerClasses = ''
+    const TriggerClasses = className || ''
     const ContentClasses =
         'bg-primary min-w-[220px] rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity]'
     const ItemClasses =

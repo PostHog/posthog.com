@@ -35,7 +35,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { formatDistanceToNow } from 'date-fns'
 import OSTabs from 'components/OSTabs'
-import { TeamMemberCard } from 'components/Team'
+import { TeamMember } from 'components/People'
 import { IconThumbsUpFilled, IconThumbsDownFilled } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
@@ -132,14 +132,18 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
         {
             value: 'bio',
             label: 'Bio',
-            content: <Markdown>{profile.biography || `${firstName} hasn't written a bio yet`}</Markdown>,
+            content: (
+                <Markdown className="prose prose-sm">
+                    {profile.biography || `${firstName} hasn't written a bio yet`}
+                </Markdown>
+            ),
         },
         ...(profile.readme
             ? [
                   {
                       value: 'readme',
                       label: 'README',
-                      content: <Markdown>{profile.readme}</Markdown>,
+                      content: <Markdown className="prose prose-sm">{profile.readme}</Markdown>,
                   },
               ]
             : []),
@@ -151,7 +155,7 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
                       content: (
                           <>
                               <div className="flex justify-between items-center mb-4">
-                                  <h4 className="text-lg font-bold m-0">Blog Posts</h4>
+                                  <h4 className="text-lg font-bold m-0">Blog posts</h4>
                                   <SortDropdown value={sort} onChange={setSort} options={sortOptions} />
                               </div>
                               <PostsTable {...posts} />
@@ -176,7 +180,7 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
             : []),
     ]
 
-    return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" />
+    return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
 }
 
 export default function ProfilePage({ params }: PageProps) {
@@ -232,6 +236,7 @@ export default function ProfilePage({ params }: PageProps) {
                         profiles: {
                             populate: ['avatar', 'teams', 'pronouns'],
                         },
+                        crest: true,
                     },
                 },
                 ...(isModerator
@@ -312,6 +317,13 @@ export default function ProfilePage({ params }: PageProps) {
     const isTeamMember = profile?.teams?.data?.length > 0
     const team = profile?.teams?.data[0]
 
+    // Create a map of team names to crest data for quick lookup
+    const teamCrestMap = team?.attributes?.crest?.data
+        ? {
+              [team.attributes.name]: team.attributes.crest.data.attributes.url,
+          }
+        : {}
+
     if (!profile && isLoading) {
         return null
     } else if (!profile && !isLoading) {
@@ -333,7 +345,7 @@ export default function ProfilePage({ params }: PageProps) {
                                     color={profile.color}
                                 />
                                 <div className="flex items-center space-x-2 my-2">
-                                    <h2 className="text-xl font-bold m-0">{name}</h2>
+                                    <h2 className="uppercase">{name}</h2>
                                     {profile.country && (
                                         <Flag
                                             style={{ width: '1.5rem', height: '1.5rem' }}
@@ -519,20 +531,31 @@ export default function ProfilePage({ params }: PageProps) {
                                                             <Link
                                                                 key={teammate.id}
                                                                 to={`/community/profiles/${teammate.id}`}
+                                                                state={{ newWindow: true }}
                                                             >
-                                                                <TeamMemberCard
-                                                                    name={teammate.attributes.firstName}
+                                                                <TeamMember
+                                                                    avatar={{
+                                                                        url:
+                                                                            teammate.attributes.avatar?.data?.attributes
+                                                                                ?.url ||
+                                                                            teammate.attributes.avatar?.url,
+                                                                    }}
+                                                                    firstName={teammate.attributes.firstName}
+                                                                    lastName={teammate.attributes.lastName}
                                                                     companyRole={teammate.attributes.companyRole}
                                                                     country={teammate.attributes.country}
                                                                     location={teammate.attributes.location}
-                                                                    isTeamLead={team.attributes?.leadProfiles?.data?.some(
-                                                                        ({ id: leadID }) => leadID === teammate.id
-                                                                    )}
+                                                                    squeakId={teammate.id}
+                                                                    color={teammate.attributes.color || 'yellow'}
+                                                                    biography={teammate.attributes.biography || ''}
+                                                                    teamCrestMap={teamCrestMap}
                                                                     pineappleOnPizza={
                                                                         teammate.attributes.pineappleOnPizza
                                                                     }
-                                                                    avatar={teammate.attributes.avatar}
-                                                                    id={teammate.id}
+                                                                    startDate={teammate.attributes.startDate}
+                                                                    isTeamLead={team.attributes?.leadProfiles?.data?.some(
+                                                                        ({ id: leadID }) => leadID === teammate.id
+                                                                    )}
                                                                 />
                                                             </Link>
                                                         )

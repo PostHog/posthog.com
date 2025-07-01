@@ -212,7 +212,7 @@ const TeamInfoDisplay = ({ team, multipleTeams }: { team: any; multipleTeams: bo
                 <div className="order-3 @md:order-none col-start-1 row-start-3 @md:row-start-3 @md:col-span-full @xl:row-span-1 @xl:row-start-3 @2xl:row-span-4 @2xl:row-start-2">
                     <p className="text-sm font-semibold !mb-1 @2xl:pt-2">Team members</p>
                     <div className="flex justify-start">
-                        <TeamMembers size="!size-16" profiles={team.profiles} />
+                        <TeamMembers size="!size-16" profiles={team.profiles} teamName={team.name} />
                     </div>
                 </div>
                 <div className="order-4 @md:order-none col-start-1 row-start-4 @md:col-start-1 @md:row-start-4 @md:col-span-full @xl:row-span-1 @2xl:col-span-4">

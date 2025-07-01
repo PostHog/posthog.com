@@ -12,10 +12,11 @@ import { SmoothScroll } from 'components/Products/SmoothScroll'
 import Tooltip from 'components/Tooltip'
 import SEO from 'components/seo'
 import SideModal from 'components/Modal/SideModal'
-import TeamMember, { FutureTeamMember } from 'components/TeamMember'
+import { TeamMember } from 'components/People'
+import TeamMemberComponent, { FutureTeamMember } from 'components/TeamMember'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconInfo, IconSpinner, IconX } from '@posthog/icons'
+import { IconInfo, IconSpinner, IconX, IconCrown, IconPlus } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
@@ -34,12 +35,14 @@ import { Fieldset } from 'components/OSFieldset'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSTabs from 'components/OSTabs'
 import TeamImage from './TeamImage'
+import Link from 'components/Link'
 import {
     StickerPineappleYes,
     StickerPineappleNo,
     StickerPineappleUnknown,
     StickerPineapple,
 } from 'components/Stickers/Index'
+import ZoomHover from 'components/ZoomHover'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -96,7 +99,15 @@ const PineapplePieChart = ({ percentage }: { percentage: number | false }) => {
     )
 }
 
-const SidebarSection = ({ title, tooltip, children }) => {
+const SidebarSection = ({
+    title,
+    tooltip,
+    children,
+}: {
+    title: React.ReactNode
+    tooltip?: string
+    children: React.ReactNode
+}) => {
     return (
         <div>
             <h5 className="m-0 text-[15px] opacity-75 font-normal mb-2">
@@ -132,6 +143,17 @@ export const TeamMemberCard = ({
     editing,
     id,
     avatar,
+}: {
+    name: string
+    companyRole: string
+    country: string
+    location: string
+    isTeamLead: boolean
+    pineappleOnPizza: boolean | null
+    handleTeamLead?: (id: string, isTeamLead: boolean) => void
+    editing: boolean
+    id: string
+    avatar: any
 }) => {
     return (
         <div className="text-left w-full border border-primary rounded-md h-full flex flex-col p-4 relative hover:-top-0.5 active:top-[.5px] hover:transition-all z-10 overflow-hidden max-h-64">
@@ -167,6 +189,43 @@ export const TeamMemberCard = ({
     )
 }
 
+const JobCard = ({ job }: { job: any }) => {
+    const locationField = job.parent.customFields.find((field: any) => field.title === 'Location(s)')
+    const timezoneField = job.parent.customFields.find((field: any) => field.title === 'Timezone(s)')
+
+    return (
+        <ZoomHover size="lg" className="!flex h-full w-full aspect-[3/4]">
+            <div className="group container-size not-prose aspect-[3/4] border border-primary bg-teal block rounded max-w-96 relative">
+                <Link
+                    to={`${job.fields.slug}`}
+                    state={{ newWindow: true }}
+                    className="h-full w-full p-4 flex flex-col justify-between"
+                >
+                    <div className="flex flex-col h-full">
+                        <div className="mb-auto">
+                            <div className="mb-2">
+                                <span className="inline-block px-2 py-1 text-xs font-semibold bg-black/10 text-black rounded">
+                                    Open role
+                                </span>
+                            </div>
+                            <h3 className="text-black font-squeak uppercase text-xl leading-tight mb-1">
+                                {job.fields.title}
+                            </h3>
+                            <div className="text-black/80 text-sm space-y-1">
+                                {locationField?.value && <p className="m-0">📍 {locationField.value}</p>}
+                                {timezoneField?.value && <p className="m-0">🕒 {timezoneField.value}</p>}
+                            </div>
+                        </div>
+                        <div className="mt-auto">
+                            <span className="text-black font-semibold text-sm">Read description</span>
+                        </div>
+                    </div>
+                </Link>
+            </div>
+        </ZoomHover>
+    )
+}
+
 export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug }: TeamProps): JSX.Element {
     const [saving, setSaving] = useState(false)
     const [editing, setEditing] = useState(newTeam || false)
@@ -181,10 +240,41 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
     const isModerator = user?.role?.type === 'moderator'
     const {
         allSlackEmoji: { totalCount: totalSlackEmojis },
+        allTeams,
+        allAshbyJobPosting,
     } = useStaticQuery(graphql`
         {
             allSlackEmoji {
                 totalCount
+            }
+            allTeams: allSqueakTeam(filter: { name: { ne: "Hedgehogs" }, crest: { publicId: { ne: null } } }) {
+                nodes {
+                    id
+                    name
+                    crest {
+                        data {
+                            attributes {
+                                url
+                            }
+                        }
+                    }
+                }
+            }
+            allAshbyJobPosting(filter: { isListed: { eq: true } }) {
+                nodes {
+                    fields {
+                        title
+                        slug
+                    }
+                    parent {
+                        ... on AshbyJob {
+                            customFields {
+                                value
+                                title
+                            }
+                        }
+                    }
+                }
             }
         }
     `)
@@ -374,6 +464,20 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
     const teamEmojis = emojis?.filter((emoji) => !!emoji?.name && !!emoji?.localFile?.publicURL)
 
+    // Create a map of team names to crest data for quick lookup
+    const teamCrestMap = allTeams.nodes.reduce((acc: any, team: any) => {
+        acc[team.name] = team.crest?.data?.attributes?.url
+        return acc
+    }, {})
+
+    // Filter jobs that are assigned to this team
+    const teamJobs = allAshbyJobPosting.nodes.filter((job: any) => {
+        const teamsField = job.parent.customFields.find((field: any) => field.title === 'Teams')
+        if (!teamsField) return false
+        const teams = JSON.parse(teamsField.value || '[]')
+        return teams.includes(name)
+    })
+
     const posthog = usePostHog()
 
     return (
@@ -401,7 +505,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 setFieldValue={setFieldValue}
             />
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="not-prose grid grid-cols-2 gap-4">
                 <div>
                     <Fieldset legend="Pineapple on pizza">
                         <PineapplePieChart percentage={pineapplePercentage} />
@@ -464,7 +568,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
             <Fieldset legend="Members">
                 <div className="@container flex-1">
-                    <ul className="list-none p-0 m-0 grid grid-cols-2 @lg:grid-cols-3 @2xl:grid-cols-4 @4xl:grid-cols-5 gap-4">
+                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                         {loading
                             ? new Array(4).fill(0).map((_, i) => (
                                   <li key={i}>
@@ -490,38 +594,42 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                       const name = [firstName, lastName].filter(Boolean).join(' ')
                                       return (
                                           <li key={id} className="rounded-md relative">
-                                              <button
-                                                  className="size-full"
-                                                  onClick={() =>
-                                                      setActiveProfile({
-                                                          ...profile.attributes,
-                                                          isTeamLead: isTeamLead(id),
-                                                          id,
-                                                      })
-                                                  }
-                                              >
-                                                  <TeamMemberCard
-                                                      name={name}
-                                                      companyRole={companyRole}
-                                                      country={country}
-                                                      location={location}
-                                                      isTeamLead={isTeamLead(id)}
-                                                      pineappleOnPizza={pineappleOnPizza}
-                                                      handleTeamLead={handleTeamLead}
-                                                      editing={editing}
-                                                      id={id}
-                                                      avatar={avatar}
-                                                  />
-                                              </button>
+                                              <TeamMember
+                                                  avatar={{
+                                                      url: avatar?.data?.attributes?.url || avatar?.url,
+                                                  }}
+                                                  firstName={firstName}
+                                                  lastName={lastName}
+                                                  companyRole={companyRole}
+                                                  country={country}
+                                                  location={location}
+                                                  squeakId={id}
+                                                  color={profile.attributes.color || 'yellow'}
+                                                  biography={profile.attributes.biography || ''}
+                                                  teamCrestMap={teamCrestMap}
+                                                  pineappleOnPizza={pineappleOnPizza}
+                                                  startDate={profile.attributes.startDate}
+                                                  isTeamLead={isTeamLead(id)}
+                                              />
                                               {editing && (
-                                                  <button
-                                                      onClick={() => removeTeamMember(id)}
-                                                      className="w-7 h-7 rounded-full border border-input absolute -right-2 flex items-center justify-center -top-2 z-10 bg-accent"
-                                                  >
-                                                      <Tooltip content="Remove team member" placement="top">
+                                                  <div className="absolute -top-2 -right-2 z-20 flex flex-col gap-1">
+                                                      <button
+                                                          onClick={() => removeTeamMember(id)}
+                                                          className="w-7 h-7 rounded-full border border-input flex items-center justify-center bg-red-500 text-white hover:bg-red-600"
+                                                          title="Remove team member"
+                                                      >
                                                           <IconX className="w-4 h-4" />
-                                                      </Tooltip>
-                                                  </button>
+                                                      </button>
+                                                      <button
+                                                          onClick={() => handleTeamLead(id, isTeamLead(id))}
+                                                          className={`w-7 h-7 rounded-full border border-input flex items-center justify-center text-white hover:opacity-80 ${
+                                                              isTeamLead(id) ? 'bg-yellow-500' : 'bg-gray-500'
+                                                          }`}
+                                                          title={isTeamLead(id) ? 'Remove team lead' : 'Make team lead'}
+                                                      >
+                                                          <IconCrown className="w-4 h-4" />
+                                                      </button>
+                                                  </div>
                                               )}
                                           </li>
                                       )
@@ -531,6 +639,12 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                                       <div className="w-full border border-primary rounded-md bg-accent flex flex-col p-4 relative overflow-hidden h-64 animate-pulse" />
                                   </li>
                               ))}
+                        {/* Add job cards for open roles */}
+                        {teamJobs.map((job: any) => (
+                            <li key={job.fields.slug} className="rounded-md relative">
+                                <JobCard job={job} />
+                            </li>
+                        ))}
                     </ul>
                     {editing && <AddTeamMember handleChange={(user) => addTeamMember(user.profile)} />}
                 </div>
@@ -569,7 +683,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
 
             <div className="article-content team-page-content">
                 {objectives && (
-                    <MDXProvider components={{ TeamMember, FutureTeamMember }}>
+                    <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
                         <div dangerouslySetInnerHTML={{ __html: objectives }} />
                     </MDXProvider>
                 )}

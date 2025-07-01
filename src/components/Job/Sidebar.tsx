@@ -10,6 +10,7 @@ import { IconPineapple, IconPizza, IconThumbsDown, IconThumbsUp } from '@posthog
 import { Accordion } from 'components/Products/Accordion'
 import slugify from 'slugify'
 import Stickers from 'components/Stickers/Index'
+import { StickerCrown } from 'components/Stickers/Stickers'
 
 interface ISidebarProps {
     teams: any
@@ -25,66 +26,97 @@ export const PineappleText = (percentage: number) => {
     )
 }
 
-export const TeamMembers = ({ profiles, size = '!size-10' }: { profiles: any; size?: string }) => {
+export const TeamMembers = ({
+    profiles,
+    teamName,
+    size = '!size-10',
+}: {
+    profiles: any
+    teamName?: string
+    size?: string
+}) => {
     return (
-        <ul className="list-none m-0 p-0 flex flex-wrap">
-            {profiles?.data?.map((profile: any) => {
-                const {
-                    attributes: {
-                        avatar: {
-                            data: {
-                                attributes: { url: avatar },
+        <ul className="not-prose list-none m-0 pl-6 flex flex-wrap justify-end" dir="rtl">
+            {profiles?.data
+                ?.slice()
+                .reverse()
+                .map((profile: any) => {
+                    const {
+                        attributes: {
+                            avatar: {
+                                data: {
+                                    attributes: { url: avatar },
+                                },
                             },
+                            firstName,
+                            lastName,
+                            country,
+                            location,
+                            color,
+                            companyRole,
+                            leadTeams,
                         },
-                        firstName,
-                        lastName,
-                        country,
-                        location,
-                        color,
-                        companyRole,
-                    },
-                    id,
-                } = profile
-                const name = [firstName, lastName].filter(Boolean).join(' ')
-                return (
-                    <li
-                        key={name}
-                        className="first:-ml-0 ml-[-8%] transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full
+                        id,
+                    } = profile
+                    const name = [firstName, lastName].filter(Boolean).join(' ')
+                    const isTeamLead = leadTeams?.data?.some(
+                        ({ attributes: { name } }: { attributes: { name: string } }) => name === teamName
+                    )
+                    return (
+                        <li
+                            key={name}
+                            className="ml-[-8%] transition-all relative hover:scale-[1.2] active:scale-[1.15] active:top-[.5px] mb-1 hover:z-20 rounded-full
                     "
-                    >
-                        <Link to={`/community/profiles/${id}`} state={{ newWindow: true }}>
-                            <Tooltip
-                                trigger={
-                                    <ContributorImageSmall
-                                        name={name}
-                                        image={avatar}
-                                        className={`border-[2.5px] border-solid border-white dark:border-primary bg-${
-                                            color ? color : 'accent'
-                                        } dark:bg-${color ? color : 'accent-dark'} ${size}`}
-                                        imgClassName={``}
-                                    />
-                                }
-                                delay={0}
-                            >
-                                <div className="">
-                                    <div className="text-[15px] font-semibold mb-1">{name}</div>
-                                    {companyRole && <div className="text-sm text-secondary">{companyRole}</div>}
+                        >
+                            <Link to={`/community/profiles/${id}`} state={{ newWindow: true }}>
+                                <Tooltip
+                                    trigger={
+                                        <ContributorImageSmall
+                                            name={name}
+                                            image={avatar}
+                                            className={`border-[2.5px] border-solid border-white dark:border-primary bg-${
+                                                color ? color : 'accent'
+                                            } dark:bg-${color ? color : 'accent-dark'} ${size}`}
+                                            imgClassName={``}
+                                        />
+                                    }
+                                    delay={0}
+                                >
+                                    <div className="">
+                                        <div className="text-[15px] font-semibold mb-1">{name}</div>
+                                        {companyRole && <div className="text-sm text-secondary">{companyRole}</div>}
 
-                                    <span className="flex items-center gap-1">
-                                        <Stickers country={country} location={location} />
-                                        <span>{location}</span>
-                                    </span>
-                                </div>
-                            </Tooltip>
-                        </Link>
-                    </li>
-                )
-            })}
+                                        <span className="flex items-center mt-1 gap-1">
+                                            <Stickers country={country} location={location} />
+                                            <span>{location}</span>
+                                        </span>
+                                        {isTeamLead && (
+                                            <span className="flex items-center gap-1">
+                                                <StickerCrown className="size-8" />
+                                                <span className="text-sm text-secondary">Team lead</span>
+                                            </span>
+                                        )}
+                                    </div>
+                                </Tooltip>
+                            </Link>
+                        </li>
+                    )
+                })}
         </ul>
     )
 }
 
-const Team = ({ profiles, leadProfiles, className = '' }: { profiles: any; leadProfiles: any; className?: string }) => {
+const Team = ({
+    profiles,
+    leadProfiles,
+    name,
+    className = '',
+}: {
+    profiles: any
+    leadProfiles: any
+    name: string
+    className?: string
+}) => {
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
         teamLength &&
@@ -96,7 +128,7 @@ const Team = ({ profiles, leadProfiles, className = '' }: { profiles: any; leadP
     const teamLeadName = [teamLead?.attributes.firstName, teamLead?.attributes.lastName].filter(Boolean).join(' ')
     return (
         <div className={`${className} my-4`}>
-            <TeamMembers profiles={profiles} />
+            <TeamMembers profiles={profiles} teamName={name} />
             {teamLead && (
                 <SidebarSection title="Team lead">
                     <Link
@@ -155,7 +187,7 @@ export default function Sidebar({ teams }: ISidebarProps) {
                 {multipleTeams ? (
                     teams.map((team: any) => (
                         <Accordion key={team.id} label={team.name}>
-                            <Team {...team} className="space-y-4" />
+                            <Team {...team} name={team.name} className="space-y-4" />
                         </Accordion>
                     ))
                 ) : (
@@ -174,7 +206,7 @@ export default function Sidebar({ teams }: ISidebarProps) {
                                 </span>
                             </Link>
                         </h3>
-                        <Team {...teams[0]} className="space-y-8" />
+                        <Team {...teams[0]} name={teams[0].name} className="space-y-8" />
                     </>
                 )}
             </SidebarSection>
