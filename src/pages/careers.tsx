@@ -27,6 +27,25 @@ import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
+import { JobListings } from 'components/Careers/JobListings'
+
+const careersTableOfContents = [
+    { url: 'hero', value: 'Open roles', depth: 0 },
+    { url: 'small-teams', value: 'Small teams', depth: 0 },
+    { url: 'pizza', value: 'Does pineapple belong on pizza?', depth: 0 },
+    { url: 'compensation', value: 'Compensation', depth: 0 },
+    { url: 'interview-process', value: 'Interview process', depth: 0 },
+    { url: 'note', value: 'Founder note', depth: 0 },
+    { url: 'quote', value: 'A really long quote', depth: 0 },
+    { url: 'handbook', value: 'Company handbook', depth: 0 },
+    { url: 'iep', value: 'IEP (Ideal employee profile)', depth: 0 },
+    { url: 'unexpected-benefits', value: 'Unexpected benefits', depth: 0 },
+    { url: 'benefits', value: 'The normal benefits', depth: 0 },
+    { url: 'transparency', value: 'Transparency', depth: 0 },
+    { url: 'fun-stuff', value: 'Fun stuff', depth: 0 },
+    { url: 'team-quotes', value: 'Team quotes', depth: 0 },
+    { url: 'open-roles', value: 'Open roles', depth: 0 },
+]
 
 const IndexPage = () => {
     const data = useStaticQuery(query)
@@ -34,10 +53,7 @@ const IndexPage = () => {
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
 
     return (
-        <ReaderView
-            padding={false}
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-        >
+        <ReaderView padding={false} hideLeftSidebar tableOfContents={careersTableOfContents}>
             <SEO
                 title="Careers - PostHog"
                 description="We're working to increase the number of successful products in the world.
@@ -47,7 +63,8 @@ const IndexPage = () => {
                 }`}
                 imageType="absolute"
             />
-            <CareersHero />,
+            <CareersHero />
+            <JobListings />
             <SmallTeams />,
             <Pizza />,
             <Compensation />,

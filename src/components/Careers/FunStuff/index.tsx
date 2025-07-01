@@ -1,5 +1,4 @@
 import React from 'react'
-import Masonry from 'react-masonry-css'
 import CloudinaryImage from 'components/CloudinaryImage'
 
 const FunThing: React.FC<{
@@ -10,7 +9,7 @@ const FunThing: React.FC<{
     imagePosition: 'top' | 'bottom'
 }> = ({ image, title, content, link, imagePosition }) => (
     <div
-        className={`bg-white dark:bg-accent-dark rounded-md shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${
+        className={`bg-white dark:bg-dark rounded shadow-lg overflow-hidden mb-4 lg:mb-6 xl:mb-8 flex flex-col ${
             imagePosition === 'top' ? 'flex-col-reverse' : ''
         }`}
     >
@@ -195,26 +194,16 @@ const frameContents = [
 ]
 
 const FunStuff: React.FC = () => {
-    const breakpointColumnsObj = {
-        default: 3,
-        1024: 2,
-        640: 1,
-    }
-
     return (
-        <section id="fun-stuff" className="@container px-8 @3xl:px-8">
+        <section id="fun-stuff" className="@container px-8 @4xl:px-8">
             <h2 className="text-center text-4xl lg:text-5xl text-balance">
                 Live, Laugh, LEquip every developer to build successful products
             </h2>
-            <p className="text-center text-lg mb-8 font-semibold opacity-75">
+            <p className="text-center text-lg mb-8 opacity-75">
                 Our jobs are zero fun. Here are some things that have made it a little less insufferable.
             </p>
 
-            <Masonry
-                breakpointCols={breakpointColumnsObj}
-                className="flex -ml-4 lg:-ml-6 xl:-ml-8 w-auto"
-                columnClassName="pl-4 lg:pl-6 xl:pl-8 bg-clip-padding"
-            >
+            <div className="grid grid-cols-1 @xl:grid-cols-2 @4xl:grid-cols-3 gap-4 lg:gap-6 xl:gap-8">
                 {frameContents.map((frame, index) => (
                     <FunThing
                         key={index}
@@ -222,10 +211,10 @@ const FunStuff: React.FC = () => {
                         content={frame.content}
                         link={frame.link}
                         image={frame.image}
-                        imagePosition={frame.imagePosition}
+                        imagePosition={frame.imagePosition as 'top' | 'bottom'}
                     />
                 ))}
-            </Masonry>
+            </div>
         </section>
     )
 }

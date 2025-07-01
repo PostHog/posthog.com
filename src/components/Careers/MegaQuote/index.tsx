@@ -20,7 +20,7 @@ const TeamMemberLink = (person) => {
     const teamURL = `/teams/${slugify(teamName, { lower: true })}`
 
     return (
-        <div className="relative inline-block border-t md:border-t-0 md:border-r border-primary px-4 md:pr-12 pt-8 lg:pt-0">
+        <div className="relative inline-block border-t @3xl:border-t-0 @3xl:border-r border-primary px-4 @3xl:pr-12 pt-8 lg:pt-0">
             <a href={person && `/community/profiles/${squeakId}`} className="flex flex-col gap-2 items-center">
                 <div className="border-2 border-primary p-0.5 bg-light dark:bg-dark rounded-full">
                     <div
@@ -44,14 +44,16 @@ const TeamMemberLink = (person) => {
                         )}
                     </div>
                 </div>
-                <span>{person ? [firstName, lastName].filter(Boolean).join(' ') : name}</span>
+                <strong>{person ? [firstName, lastName].filter(Boolean).join(' ') : name}</strong>
             </a>
 
             <div className="text-sm">
                 <div>{person.companyRole && `${person.companyRole}`}</div>
                 <div className="text-[13px]">
                     <span className="opacity-75">{isTeamLead ? 'Team lead, ' : ''}</span>
-                    <Link to={teamURL}>{teamName} Team</Link>
+                    <Link to={teamURL} className="font-semibold underline">
+                        {teamName} Team
+                    </Link>
                 </div>
             </div>
 
@@ -122,13 +124,13 @@ const TeamMember: React.FC<{ name: string }> = ({ name }) => {
 const MegaQuote: React.FC = () => {
     return (
         <section id="quote" className="@container px-8 @3xl:px-8 not-prose">
-            <h2 className="text-3xl md:text-4xl text-center mb-1">A really long quote</h2>
-            <p className="text-center text-lg">(It was so good we just couldn't cut it down.)</p>
-            <div className="max-w-7xl mx-auto flex flex-col-reverse gap-8 md:gap-12 items-center md:flex-row p-6 md:p-8 bg-white dark:bg-accent-dark rounded shadow-lg dark:border dark:border-dark">
-                <aside className="w-full md:w-auto min-w-48 max-w-full text-center">
+            <h2 className="text-3xl @3xl:text-4xl text-center mb-1">A really long quote</h2>
+            <p className="text-center text-lg mb-8">(It was so good we just couldn't cut it down.)</p>
+            <div className="max-w-7xl mx-auto flex flex-col-reverse gap-8 @3xl:gap-12 items-center @3xl:flex-row p-6 @3xl:p-8 bg-white dark:bg-dark rounded border border-primary">
+                <aside className="w-full @3xl:w-auto min-w-48 max-w-full text-center">
                     <TeamMember name="Dylan Martin" />
                 </aside>
-                <div className="flex-1 [&_p]:text-lg [&_p]:mb-3 [&_p:last-child]:mb-0 md:columns-2 gap-8">
+                <div className="flex-1 @3xl:columns-2 gap-8">
                     <p>
                         At PostHog I'm given the trust to work on things that I think matter for the business and our
                         customers.

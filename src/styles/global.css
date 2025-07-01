@@ -1935,7 +1935,7 @@ li.squeak-left-border {
 }
 
 .tw-tweet + .tw-tweet {
-    @apply before:absolute before:w-px before:bg-accent before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
+    @apply before:absolute before:w-px before:bg-border before:bottom-[calc(100%_+_1px)] before:-top-8 before:left-10;
 }
 
 .tw-tweet + *:not(.tw-tweet) {

@@ -63,7 +63,7 @@ export default function InterviewProcess({
 }) {
     return (
         <>
-            <ul className="list-none m-0 p-0 grid">
+            <ul className="not-prose list-none m-0 p-0 grid">
                 {((role && roleInterviewProcess[role.trim()]) || defaultInterviewProcess).map(
                     ({ title, description, badge }, index) => {
                         return (
