@@ -1,8 +1,6 @@
-## Contexts
+The Python SDK uses nested contexts for managing state that's shared across events. Contexts are the recommended way to manage things like "which user is taking this action" (through `identify_context`), rather than manually passing user state through your apps stack.
 
-The Python SDK uses nested contexts for managing state that's shared across events. Each context carries tags and can be associated with a [session ID](/docs/data/sessions) and [distinct ID](/docs/getting-started/identify-users). Contexts are the recommended way to manage things like "which user is taking this action" (through `identify_context`), rather than manually passing user state through your apps stack.
-
-When an event (including exceptions) is captured in a context, the event properties include the context tags. If the context has been associated with a session or distinct ID, the event will be too. This is useful for adding properties to multiple events during a single user's interaction with your product.
+When events (including exceptions) are captured in a context, the event uses the user [distinct ID](/docs/getting-started/identify-users), [session ID](/docs/data/sessions), and tags that are (optionally) set in the context. This is useful for adding properties to multiple events during a single user's interaction with your product.
 
 You can enter a context using the `with` statement:
 
@@ -11,22 +9,22 @@ with posthog.new_context():
     posthog.tag("transaction_id", "abc123")
     posthog.tag("some_arbitrary_value", {"tags": "can be dicts"})
 
-    # Posthog sessions are UUIDv7's, used to track a sequence of events that occur within a single user session
+    # Sessions are UUIDv7 values and used to track a sequence of events that occur within a single user session
     # See https://posthog.com/docs/data/sessions
     posthog.set_context_session(session_id)
 
-    # Setting the context-level distinct-id. See below for more details
+    # Setting the context-level distinct ID. See below for more details.
     posthog.identify_context(user_id)
 
-    # This event will be captured with the tags set above, and associated session "test"
+    # This event is captured with the distinct ID, session ID, and tags set above
     posthog.capture("order_processed")
 ```
 
-Contexts are persisted across function calls, so if you enter one and then call a function, and capture an event in the called function, it'll use the context tags and session ID set in the parent context:
+Contexts are persisted across function calls. If you enter one and then call a function and capture an event in the called function, it uses the context tags and session ID set in the parent context:
 
 ```python
 def some_function():
-    # When called from `outer_function`, this event will be captured with the property some-key="value-4"
+    # When called from `outer_function`, this event is captured with the property some-key="value-4"
     posthog.capture("order_processed")
 
 
@@ -37,7 +35,7 @@ def outer_function():
 
 ```
 
-Contexts are nested, so tags added to a parent context are inherited by child contexts. If you set the same tag in both a parent and child context, the child context's value overrides the parent's at event capture (but the parent context won't be affected). This nesting also applies to session ID's and distinct ID's.
+Contexts are nested, so tags added to a parent context are inherited by child contexts. If you set the same tag in both a parent and child context, the child context's value overrides the parent's at event capture (but the parent context won't be affected). This nesting also applies to session IDs and distinct IDs.
 
 ```python
 with posthog.new_context():
@@ -73,7 +71,7 @@ Contexts can be associated with a distinct ID by calling `posthog.identify_conte
 posthog.identify_context("distinct-id")
 ```
 
-Within a context associated with a distinct ID, all events captured will be associated with that user. You can override the distinct ID for a specific event by passing a `distinct_id` argument to `capture`:
+Within a context associated with a distinct ID, all events captured are associated with that user. You can override the distinct ID for a specific event by passing a `distinct_id` argument to `capture`:
 
 ```python
 with posthog.new_context():
@@ -82,11 +80,15 @@ with posthog.new_context():
     posthog.capture("order_processed", distinct_id="another-distinct-id") # will be associated with another-distinct-id
 ```
 
-You can read more about identifying users in the [user identification documentation](/docs/product-analytics/identify). If you can, it's recommended to pass the currently active distinct ID from the frontend to the backend, using the `X-POSTHOG-DISTINCT-ID` header. If you're using our Django middleware, this will then be extracted and associated with the request handler context automatically.
+It's recommended to pass the currently active distinct ID from the frontend to the backend, using the `X-POSTHOG-DISTINCT-ID` header. If you're using our Django middleware, this is extracted and associated with the request handler context automatically.
+
+You can read more about identifying users in the [user identification documentation](/docs/product-analytics/identify). 
 
 ### Contexts and sessions
 
-Contexts can be associated with a session ID by calling `posthog.set_context_session`. Session ID's are UUIDv7 strings. If you're using the posthog JS SDK on your frontend, that SDK will generate a session ID for you, and you can retrieve it by calling `posthog.get_session_id()` there. We recommend passing session ID's to your backend by setting the `X-POSTHOG-SESSION-ID` header, and extracting it in your request handler (if you're using our Django middleware, this will happen automatically).
+Contexts can be associated with a session ID by calling `posthog.set_context_session`. Session IDs must be UUIDv7 strings.
+
+> **Using PostHog on your frontend too?** If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you and you can retrieve it by calling `posthog.get_session_id()` there. We then recommend passing that session ID to your backend by setting the `X-POSTHOG-SESSION-ID` header and extracting it in your request handler (if you're using our Django middleware, this happens automatically).
 
 ```python
 with posthog.new_context():
@@ -123,5 +125,5 @@ The SDK exposes a function decorator. It takes the same arguments as `new_contex
 def process_order(user, order_id):
     posthog.identify_context(user.distinct_id)
     posthog.capture("order_processed") # Associated with the user
-    raise Exception("Order processing failed") # This exception will also be captured, and associated with the user
+    raise Exception("Order processing failed") # This exception is also captured and associated with the user
 ```

@@ -38,5 +38,5 @@ posthog.capture(
 If you're aiming for a backend-only implementation of PostHog and won't be capturing events from your frontend, you can send `pageviews` from your backend like so:
 
 ```python
-posthog.capture('$pageview', properties={'$current_url': 'https://example.com'})
+posthog.capture('$pageview', distinct_id="distinct_id_of_the_user", properties={'$current_url': 'https://example.com'})
 ```
