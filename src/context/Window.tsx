@@ -55,6 +55,7 @@ export interface AppWindow {
     }
     minimal: boolean
     appSettings?: AppSetting
+    shake?: boolean
 }
 
 interface WindowProviderProps {

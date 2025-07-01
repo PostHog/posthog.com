@@ -46,7 +46,7 @@ const errorMessages: Record<string, string> = {
 
 const SignInForm: React.FC = () => {
     const { login } = useUser()
-    const { setWindowTitle, closeWindow, openRegister, openForgotPassword } = useApp()
+    const { setWindowTitle, closeWindow, openRegister, openForgotPassword, shakeWindow } = useApp()
     const { appWindow } = useWindow()
     const [errorMessage, setErrorMessage] = useState<string | null>(null)
     const { handleSubmit, submitForm, touched, errors, getFieldProps, isSubmitting } = useFormik({
@@ -74,10 +74,18 @@ const SignInForm: React.FC = () => {
             })
             if (!user) {
                 setErrorMessage('There was an error signing in. Please try again.')
+                if (appWindow) {
+                    shakeWindow(appWindow)
+                }
             } else if ('error' in user) {
                 setErrorMessage(errorMessages[user?.error] || user?.error)
+                if (appWindow) {
+                    shakeWindow(appWindow)
+                }
             } else {
-                closeWindow(appWindow)
+                if (appWindow) {
+                    closeWindow(appWindow)
+                }
             }
         },
     })
