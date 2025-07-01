@@ -1,6 +1,8 @@
-The Python SDK provides a Django contexts middleware that automatically wraps all requests with [contexts](/docs/libraries/python#contexts). This middleware extracts session and user information from request headers and tags all events captured during the request with relevant metadata.
+## Django Request Middleware
 
-#### Basic setup
+The Python SDK provides a Django middleware that automatically wraps all requests with a [context](/docs/libraries/python#contexts). This middleware extracts session and user information from request headers and tags all events captured during the request with relevant metadata.
+
+### Basic setup
 
 Add the middleware to your Django settings:
 
@@ -14,14 +16,14 @@ MIDDLEWARE = [
 
 The middleware automatically extracts and uses:
 
-- **Session ID** from the `X-POSTHOG-SESSION-ID` header
-- **Distinct ID** from the `X-POSTHOG-DISTINCT-ID` header
+- **Session ID** from the `X-POSTHOG-SESSION-ID` header, if present
+- **Distinct ID** from the `X-POSTHOG-DISTINCT-ID` header, if present
 - **Current URL** as `$current_url`
 - **Request method** as `$request_method`
 
 All events captured during the request (including exceptions) will include these properties and be associated with the extracted session and distinct ID.
 
-#### Exception capture
+### Exception capture
 
 By default, the middleware captures exceptions and sends them to PostHog's error tracking. Disable this by setting:
 
@@ -30,7 +32,7 @@ By default, the middleware captures exceptions and sends them to PostHog's error
 POSTHOG_MW_CAPTURE_EXCEPTIONS = False
 ```
 
-#### Adding custom tags
+### Adding custom tags
 
 Use `POSTHOG_MW_EXTRA_TAGS` to add custom properties to all requests:
 
@@ -63,7 +65,7 @@ def should_track_request(request):
 POSTHOG_MW_REQUEST_FILTER = should_track_request
 ```
 
-#### Modifying default tags
+### Modifying default tags
 
 Use `POSTHOG_MW_TAG_MAP` to modify or remove default tags:
 
@@ -81,7 +83,7 @@ def customize_tags(tags):
 POSTHOG_MW_TAG_MAP = customize_tags
 ```
 
-#### Complete configuration example
+### Complete configuration example
 
 ```python
 # settings.py
