@@ -14,7 +14,7 @@ Max AI enables users to:
 - Navigate PostHog's products using AI assistance
 - Automate common analytics tasks
 
-We want Max to work with _every_ PostHog product, so that we can at some stage make a chat the default experience for people using PostHog, then resorting to clicking the UX as the backup option for _most_ tasks.
+We want Max to work with _every_ PostHog product, so that we can at some stage make a chat (or even complete automation with approval steps as necessary) the default experience for people using PostHog, then resorting to clicking the UX as the backup option for _most_ tasks.
 
 ## How to work with the Max AI team
 
