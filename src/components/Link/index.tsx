@@ -37,7 +37,6 @@ const createStandardMenuItems = (url: string, state?: any, isExternal = false): 
         },
     ]
 }
-
 export interface Props {
     to: string
     children: React.ReactNode
@@ -55,6 +54,10 @@ export interface Props {
     disabled?: boolean
     contextMenu?: boolean
     customMenuItems?: ContextMenuItemProps[]
+}
+
+const MenuWrapper = ({ children, menuItems }: { children: React.ReactNode; menuItems: ContextMenuItemProps[] }) => {
+    return <ContextMenu menuItems={menuItems}>{children}</ContextMenu>
 }
 
 export default function Link({
@@ -124,64 +127,60 @@ export default function Link({
               ]
             : []
 
-    // Wrapper function to conditionally apply context menu
-    const wrapWithContextMenu = (element: JSX.Element) => {
-        if (!contextMenu || !url) return element
-        return <ContextMenu menuItems={menuItems}>{element}</ContextMenu>
-    }
+    const Container = !contextMenu || !url ? React.Fragment : MenuWrapper
 
-    return onClick && !url
-        ? wrapWithContextMenu(
-              <button onClick={handleClick} className={className} disabled={disabled}>
-                  {children}
-              </button>
-          )
-        : internal
-        ? preview
-            ? wrapWithContextMenu(
-                  <Tooltip
-                      tooltipClassName={compact ? 'hidden' : ''}
-                      offset={[0, 0]}
-                      placement="left-start"
-                      content={(setOpen) => (
-                          <TooltipContent
-                              setOpen={setOpen}
-                              title={preview.title}
-                              slug={url}
-                              description={preview.description}
-                              video={preview.video}
-                          />
-                      )}
-                  >
-                      <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
-                          {children}
-                      </GatsbyLink>
-                  </Tooltip>
-              )
-            : wrapWithContextMenu(
-                  <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
-                      {children}
-                  </GatsbyLink>
-              )
-        : wrapWithContextMenu(
-              <a
-                  rel="noopener noreferrer"
-                  onClick={handleClick}
-                  {...other}
-                  href={url}
-                  className={`${className} group`}
-                  target={external || externalNoIcon ? '_blank' : ''}
-              >
-                  {external ? (
-                      <span className="inline-flex justify-center items-center group">
-                          <span className="font-semibold underline">{children}</span>
-                          <IconArrowUpRight
-                              className={`size-4 text-muted group-hover:text-secondary relative ${iconClasses}`}
-                          />
-                      </span>
-                  ) : (
-                      children
-                  )}
-              </a>
-          )
+    return (
+        <Container menuItems={menuItems}>
+            {onClick && !url ? (
+                <button onClick={handleClick} className={className} disabled={disabled}>
+                    {children}
+                </button>
+            ) : internal ? (
+                preview ? (
+                    <Tooltip
+                        tooltipClassName={compact ? 'hidden' : ''}
+                        offset={[0, 0]}
+                        placement="left-start"
+                        content={(setOpen) => (
+                            <TooltipContent
+                                setOpen={setOpen}
+                                title={preview.title}
+                                slug={url}
+                                description={preview.description}
+                                video={preview.video}
+                            />
+                        )}
+                    >
+                        <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                            {children}
+                        </GatsbyLink>
+                    </Tooltip>
+                ) : (
+                    <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                        {children}
+                    </GatsbyLink>
+                )
+            ) : (
+                <a
+                    rel="noopener noreferrer"
+                    onClick={handleClick}
+                    {...other}
+                    href={url}
+                    className={`${className} group`}
+                    target={external || externalNoIcon ? '_blank' : ''}
+                >
+                    {external ? (
+                        <span className="inline-flex justify-center items-center group">
+                            <span className="font-semibold underline">{children}</span>
+                            <IconArrowUpRight
+                                className={`size-4 text-muted group-hover:text-secondary relative ${iconClasses}`}
+                            />
+                        </span>
+                    ) : (
+                        children
+                    )}
+                </a>
+            )}
+        </Container>
+    )
 }
