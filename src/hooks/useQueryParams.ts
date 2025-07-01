@@ -37,7 +37,7 @@ export const useAppendQueryParams = () => {
                 urlObj.search = searchParams.toString()
                 return urlObj.toString()
             } catch (error) {
-                console.error('JFBW: Failed to parse URL, using fallback method:', error)
+                console.error('Failed to parse URL, using fallback method:', error)
             }
         }
 
