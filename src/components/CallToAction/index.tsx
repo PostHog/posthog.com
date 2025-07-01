@@ -2,7 +2,7 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
-import { appendQueryParams } from 'lib/utils'
+import { useAppendQueryParams } from '../../hooks/useQueryParams'
 
 const sizes = {
     xs: cntl`
@@ -245,6 +245,7 @@ export const CallToAction = ({
     event,
     color = true,
 }: CTAPropsType): JSX.Element => {
+    const appendQueryParams = useAppendQueryParams()
     const baseUrl = to || href
     const url = appendQueryParams(baseUrl || '')
 

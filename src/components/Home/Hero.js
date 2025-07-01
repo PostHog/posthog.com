@@ -15,7 +15,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Board from './Board'
 import { useUser } from 'hooks/useUser'
 import IntegrationPrompt from '../IntegrationPrompt'
-import { appendQueryParams } from 'lib/utils'
+import { useAppendQueryParams } from '../../hooks/useQueryParams'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -38,6 +38,7 @@ export const FeatureStrip = ({ className = '' }) => {
 
 const EnterpriseSignupCTA = () => {
     const posthog = usePostHog()
+    const appendQueryParams = useAppendQueryParams()
 
     const handleClick = () => {
         if (window.confirm("Are you sure you don't want to book a demo?")) {
@@ -59,6 +60,7 @@ const EnterpriseSignupCTA = () => {
 }
 
 const Feature = ({ title, icon, url }) => {
+    const appendQueryParams = useAppendQueryParams()
     const baseUrl = appendQueryParams(url)
     return (
         <li className="w-24">
