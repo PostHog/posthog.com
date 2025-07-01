@@ -1,0 +1,76 @@
+---
+title: Managed migrations
+sidebar: Docs
+showTitle: true
+---
+
+import MigrationWarning from "./_snippets/migration-warning.mdx"
+
+<MigrationWarning />
+
+Managed migrations provide an automated way to migrate your historical data into PostHog without writing custom scripts.
+
+With managed migrations, you can import data from multiple sources:
+
+- **Direct imports**: Connect directly to Mixpanel or Amplitude using your API credentials
+- **S3 imports**: Upload your event data to an S3 bucket in JSONL format for automatic ingestion
+
+## Getting started
+
+1. Go to the [managed migrations page](https://app.posthog.com/managed_migrations)
+2. Choose your import method (details about methods below)
+3. Import data
+
+## Direct imports (Mixpanel & Amplitude)
+
+Direct imports enable you to migrate data directly from Mixpanel or Amplitude without any manual data handling. PostHog automatically:
+
+- Connects to your source platform using your API credentials
+- Exports your data for the specified date range
+- Transforms events to match PostHog's event schema
+- Imports the data into your PostHog project
+
+## S3 imports
+
+S3 imports give you full control over your data transformation while still benefiting from automated ingestion. This method is ideal when you need:
+
+- Custom event transformations
+- To handle very large datasets
+- To migrate from platforms not supported by direct imports
+
+### Setting up an S3 import
+
+1. **Prepare your data**: Export your events and format them as JSONL (one JSON object per line)
+2. **Upload to S3**: Place your `.jsonl` files in an S3 bucket
+3. **Start import**: Provide PostHog with:
+  - S3 region
+  - S3 bucket name
+  - AWS access key ID
+  - AWS secret access key
+  - Content Type (the schema of the events that you uploaded to S3)
+
+## When to use each method
+
+### Use direct imports when:
+
+- You have a straightforward migration from Mixpanel or Amplitude
+- Your data volume is moderate
+- You're comfortable with PostHog's default event transformation from your schema
+- You want the simplest setup process
+
+### Use S3 imports when:
+
+- Your data volume is large
+- You need custom event transformations or property mappings
+- You're migrating from a platform not yet supported by direct imports
+- You want to pre-process or clean your data before import
+
+## Monitoring your migration
+
+Once started, you can monitor your migration progress:
+1. **Migration dashboard**: View real-time progress and status of your migration
+2. **Event validation**: Query for your events as they come in to ensure proper transformation and ingestion
+
+## Best practices
+
+- **Test first**: Run a small test migration with a subset of your data against a new project. This ensures events have the desired schema without polluting your main project

@@ -93,6 +93,8 @@ Tickets are considered high priority if they fulfill ANY of the following condit
 
 This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
 
+> **_NOTE:_** If a user has recently upgraded to the Enterprise plan, their tickets may not automatically be tagged as Enterprise in the PostHog Priority field in Zendesk. If this happens, manually set the Priority field to Enterprise to ensure they get in the proper queue.
+
 #### Normal priority
 **Response target: 2 business days**
 

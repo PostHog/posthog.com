@@ -8,7 +8,7 @@ Feature flags are a very powerful piece of functionality that can be used in a w
 
 For us, here are some suggestions of use cases that could fit nicely with feature flags:
 
-### A/B Testing
+## A/B Testing
 
 In simple terms, A/B testing is a method for determining how to provide the best user experience or meet other product goals by testing how different features perform. 
 
@@ -20,13 +20,13 @@ Here's an example view of Trends in PostHog filtering pageview events that conta
 
 ![Trends A/B Testing](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/feature-flags/trends-ab.png)
 
-### Gradual Rollouts
+## Gradual Rollouts
 
 There are many occasions when you might want to roll out a feature to your users slowly. Maybe you only want to enable it for Beta users, or you simply want to give users a transition period.
 
 Whatever the case may be, feature flags let you easily roll out features in an incremental way, increasing the portion of users that have the feature as fast or slow as you wish. 
 
-### "Master Toggles"
+## "Master Toggles"
 
 If you have to ship a big piece of functionality and follow [trunk-based development](/product-engineers/trunk-based-development), chances are that you'll be doing it across multiple PRs.
 
@@ -36,7 +36,7 @@ Better yet, you can then release it slowly to make sure nothing breaks, and, if 
 
 And this brings us to the next example.
 
-### Kill Switches
+## Kill Switches
 
 You don't need feature flags _per se_ to implement kill switches, but having the ability to immediately turn a flag off is a nice add-on to the functionality.
 

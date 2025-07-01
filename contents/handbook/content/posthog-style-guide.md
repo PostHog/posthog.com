@@ -153,4 +153,4 @@ Write "Documentation style guide", not "Documentation Style Guide".
 
 ## Technical writing
 
-See our [docs style guide](/handbook/content-and-docs/docs).
+See our [docs style guide](/handbook/content/docs-style-guide).
