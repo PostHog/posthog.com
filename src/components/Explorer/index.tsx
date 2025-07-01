@@ -109,7 +109,7 @@ export default function Explorer({
         <div className="@container w-full h-full flex flex-col min-h-1">
             {!fullScreen && (
                 <>
-                    <HeaderBar showHome showBack showForward showSearch />
+                    <HeaderBar showBack showForward showSearch />
                     <div data-scheme="secondary" className="bg-primary px-2 pb-2 border-b border-primary">
                         <Select
                             groups={selectOptions}

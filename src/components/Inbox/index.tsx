@@ -196,7 +196,7 @@ export default function Inbox(props) {
     return ready ? (
         <div className="@container w-full h-full flex flex-col">
             <HeaderBar
-                showHome
+                homeURL="/questions"
                 showBack
                 showForward
                 showSearch

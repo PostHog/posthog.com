@@ -24,7 +24,6 @@ interface HeaderBarProps {
     isTocVisible?: boolean
     onToggleNav?: () => void
     onToggleToc?: () => void
-    showHome?: boolean
     showBack?: boolean
     showForward?: boolean
     showSearch?: boolean
@@ -36,6 +35,7 @@ interface HeaderBarProps {
     onFullScreenClick?: () => void
     rightActionButtons?: React.ReactNode
     searchContentRef?: React.RefObject<HTMLElement>
+    homeURL?: string
 }
 
 export default function HeaderBar({
@@ -43,7 +43,6 @@ export default function HeaderBar({
     isTocVisible,
     onToggleNav,
     onToggleToc,
-    showHome = false,
     showBack = false,
     showForward = false,
     showSearch = false,
@@ -55,6 +54,7 @@ export default function HeaderBar({
     onFullScreenClick,
     rightActionButtons,
     searchContentRef,
+    homeURL,
 }: HeaderBarProps) {
     const { goBack, goForward, canGoBack, canGoForward } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
@@ -80,7 +80,7 @@ export default function HeaderBar({
                         hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
                     }`}
                 >
-                    {showHome && <OSButton variant="ghost" icon={<IconHome />} />}
+                    {homeURL && <OSButton variant="ghost" icon={<IconHome />} to={homeURL} asLink />}
                     <div className="hidden @2xl:block">
                         {hasLeftSidebar && (
                             <OSButton

@@ -203,6 +203,7 @@ export default function Handbook({
                 mdxComponents={components}
                 commits={commits}
                 filePath={post.parent?.relativePath}
+                homeURL={breadcrumbBase.url}
             />
         </>
     )
