@@ -97,7 +97,7 @@ export const TeamMember = (props: any) => {
         <>
             <Link
                 to={`/community/profiles/${squeakId}`}
-                className={`group container-size not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
+                wrapperClassName={`group container-size not-prose aspect-[3/4] border border-primary bg-${color} inline-block rounded max-w-96 relative`}
                 state={{ newWindow: true }}
             >
                 <div className="absolute z-20 top-2 left-2 flex flex-col gap-2">

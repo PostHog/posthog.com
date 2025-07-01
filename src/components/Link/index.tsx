@@ -42,6 +42,7 @@ export interface Props {
     to: string
     children: React.ReactNode
     className?: string
+    wrapperClassName?: string
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     disablePrefetch?: boolean
     external?: boolean
@@ -61,6 +62,7 @@ export default function Link({
     to,
     children,
     className = '',
+    wrapperClassName = '',
     disabled,
     onClick,
     disablePrefetch,
@@ -127,7 +129,11 @@ export default function Link({
     // Wrapper function to conditionally apply context menu
     const wrapWithContextMenu = (element: JSX.Element) => {
         if (!contextMenu || !url) return element
-        return <ContextMenu menuItems={menuItems}>{element}</ContextMenu>
+        return (
+            <ContextMenu menuItems={menuItems} className={wrapperClassName}>
+                {element}
+            </ContextMenu>
+        )
     }
 
     return onClick && !url
@@ -153,13 +159,13 @@ export default function Link({
                           />
                       )}
                   >
-                      <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                      <GatsbyLink to={url} className={className} state={state} onClick={handleClick}>
                           {children}
                       </GatsbyLink>
                   </Tooltip>
               )
             : wrapWithContextMenu(
-                  <GatsbyLink {...other} to={url} className={className} state={state} onClick={handleClick}>
+                  <GatsbyLink to={url} className={className} state={state} onClick={handleClick}>
                       {children}
                   </GatsbyLink>
               )
@@ -167,7 +173,6 @@ export default function Link({
               <a
                   rel="noopener noreferrer"
                   onClick={handleClick}
-                  {...other}
                   href={url}
                   className={`${className} group`}
                   target={external || externalNoIcon ? '_blank' : ''}
