@@ -77,7 +77,7 @@ export function TreeMenu(props: TreeMenuProps) {
     )
 
     const handleClick = (item: MenuItem) => {
-        setActiveItem(item)
+        setActiveItem(item.children?.[0]?.url ? item.children[0] : item)
     }
 
     const items = useMemo(() => props.items, [])
@@ -127,7 +127,7 @@ function TreeMenuItem({
     }
 
     useEffect(() => {
-        if (item.children) {
+        if (item.children && !open) {
             setOpen(isOpen(item.children, activeItem))
         }
     }, [pathname])
@@ -141,6 +141,8 @@ function TreeMenuItem({
                     width="full"
                     className={index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'}
                     active={activeItem === item}
+                    to={item.url || item.children?.[0]?.url}
+                    asLink
                     onClick={() => onClick(item)}
                 >
                     {hasChildren && (
