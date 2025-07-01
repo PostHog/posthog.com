@@ -15,6 +15,7 @@ import { StaticImage } from 'gatsby-plugin-image'
 import Board from './Board'
 import { useUser } from 'hooks/useUser'
 import IntegrationPrompt from '../IntegrationPrompt'
+import { appendQueryParams } from 'lib/utils'
 
 export const FeatureStrip = ({ className = '' }) => {
     return (
@@ -40,9 +41,8 @@ const EnterpriseSignupCTA = () => {
 
     const handleClick = () => {
         if (window.confirm("Are you sure you don't want to book a demo?")) {
-            window.location.href = `https://${
-                posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
-            }.posthog.com/signup`
+            const url = `https://${posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'}.posthog.com/signup`
+            window.location.href = appendQueryParams(url)
         }
     }
 
@@ -59,10 +59,11 @@ const EnterpriseSignupCTA = () => {
 }
 
 const Feature = ({ title, icon, url }) => {
+    const baseUrl = appendQueryParams(url)
     return (
         <li className="w-24">
             <a
-                href={url}
+                href={baseUrl}
                 className="flex flex-col py-4 px-6 h-full space-y-1 font-semibold items-center justify-start text-black hover:text-black rounded hover:bg-gray-accent-light"
             >
                 <Icon className="w-5 h-5 mr-1 md:mr-0" name={icon} />

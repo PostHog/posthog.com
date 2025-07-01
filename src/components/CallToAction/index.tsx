@@ -2,6 +2,7 @@ import cntl from 'cntl'
 import Link from 'components/Link'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
+import { appendQueryParams } from 'lib/utils'
 
 const sizes = {
     xs: cntl`
@@ -209,7 +210,11 @@ export interface TrackedCTAPropsType extends CTAPropsType {
     }
 }
 
-export const TrackedCTA = ({ width, event: { name: eventName, ...event }, ...props }: TrackedCTAPropsType): JSX.Element => {
+export const TrackedCTA = ({
+    width,
+    event: { name: eventName, ...event },
+    ...props
+}: TrackedCTAPropsType): JSX.Element => {
     const posthog = usePostHog()
 
     return (
@@ -240,7 +245,8 @@ export const CallToAction = ({
     event,
     color = true,
 }: CTAPropsType): JSX.Element => {
-    const url = to || href
+    const baseUrl = to || href
+    const url = appendQueryParams(baseUrl || '')
 
     const posthog = usePostHog()
     const wrappedOnClick = () => {

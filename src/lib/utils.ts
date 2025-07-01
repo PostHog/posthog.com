@@ -113,3 +113,61 @@ export const slugifyTeamName = (name: string): string => {
         remove: /and/,
     })
 }
+
+/**
+ * Appends query parameters from the current page to a URL
+ * @param url - The base URL
+ * @returns The URL with current page query parameters appended
+ */
+export const appendQueryParams = (url: string): string => {
+    // Check if URL is already absolute (has protocol)
+    const isAbsoluteUrl = /^https?:\/\//.test(url)
+
+    if (isAbsoluteUrl) {
+        // For absolute URLs, use URL constructor for proper parsing
+        try {
+            const urlObj = new URL(url)
+            const searchParams = new URLSearchParams(urlObj.search)
+
+            // Get current page query parameters and add them
+            if (typeof window !== 'undefined') {
+                const currentSearchParams = new URLSearchParams(window.location.search)
+                currentSearchParams.forEach((value, key) => {
+                    // Only add if the parameter doesn't already exist in the target URL
+                    if (!searchParams.has(key)) {
+                        searchParams.set(key, value)
+                    }
+                })
+            }
+
+            urlObj.search = searchParams.toString()
+            return urlObj.toString()
+        } catch (error) {
+            // If URL parsing fails, fall back to simple query string appending
+            if (typeof window !== 'undefined') {
+                console.error('Failed to parse URL, using fallback method:', error)
+            }
+        }
+    }
+
+    // For relative URLs or if absolute URL parsing failed, use fallback method to preserve relative nature
+    if (typeof window === 'undefined') {
+        return url
+    }
+
+    // Handle fragments in fallback method
+    const [urlWithoutFragment, fragment] = url.split('#')
+    const separator = urlWithoutFragment.includes('?') ? '&' : '?'
+    const currentSearchParams = new URLSearchParams(window.location.search)
+    const newParams: string[] = []
+
+    currentSearchParams.forEach((value, key) => {
+        // Only add if the parameter doesn't already exist in the URL
+        if (!url.includes(`${key}=`)) {
+            newParams.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        }
+    })
+
+    const result = newParams.length > 0 ? `${urlWithoutFragment}${separator}${newParams.join('&')}` : urlWithoutFragment
+    return fragment ? `${result}#${fragment}` : result
+}

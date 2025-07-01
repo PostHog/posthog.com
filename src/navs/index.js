@@ -1280,8 +1280,8 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
                 children: [
                     {
-                    name: 'Account planning',
-                    url: '/handbook/growth/sales/account-planning',
+                        name: 'Account planning',
+                        url: '/handbook/growth/sales/account-planning',
                     },
                 ],
             },
@@ -1291,10 +1291,10 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/how-we-work',
                 children: [
                     {
-                    name: 'New team member onboarding',
-                    url: '/handbook/growth/sales/new-hire-onboarding',
+                        name: 'New team member onboarding',
+                        url: '/handbook/growth/sales/new-hire-onboarding',
                     },
-                ],  
+                ],
             },
 
             {
@@ -1692,7 +1692,7 @@ export const companyMenu = {
             name: 'Blog',
             icon: 'IconNewspaper',
             color: 'yellow',
-            url: 'https://posthog.com/blog',
+            url: '/blog',
             children: [
                 {
                     name: 'Blog',

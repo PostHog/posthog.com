@@ -5,6 +5,7 @@ import { Link as GatsbyLink } from 'gatsby'
 import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
+import { appendQueryParams } from 'lib/utils'
 
 export interface Props {
     to: string
@@ -41,7 +42,8 @@ export default function Link({
 }: Props): JSX.Element {
     const { compact } = useLayoutData()
     const posthog = usePostHog()
-    const url = to || href
+    const baseUrl = to || href
+    const url = appendQueryParams(baseUrl || '')
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
     const isPostHogAppUrl = url && /(eu|us|app)\.posthog\.com/.test(url)
     const preview =
