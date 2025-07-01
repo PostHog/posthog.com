@@ -41,6 +41,7 @@ export const TeamMember = (props: any) => {
         teamCrestMap,
         pineappleOnPizza,
         startDate,
+        isTeamLead,
     } = props
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
@@ -101,7 +102,7 @@ export const TeamMember = (props: any) => {
                 state={{ newWindow: true }}
             >
                 <div className="absolute z-20 top-2 left-2 flex flex-col gap-2">
-                    <ZoomHover size="lg">
+                    <ZoomHover size="lg" className="cursor-default">
                         <Tooltip
                             trigger={
                                 <Stickers
@@ -124,9 +125,23 @@ export const TeamMember = (props: any) => {
                         </Tooltip>
                     </ZoomHover>
                     {longEnoughTenure && (
-                        <ZoomHover size="lg">
+                        <ZoomHover size="lg" className="cursor-default">
                             <Tooltip trigger={<Stickers name="StickerTrophy" label={yearsOfService.toString()} />}>
                                 {tooltipPrefix} since {formattedStartDate}
+                            </Tooltip>
+                        </ZoomHover>
+                    )}
+                    {isTeamLead && (
+                        <ZoomHover size="lg" className="cursor-default">
+                            <Tooltip trigger={<Stickers name="StickerCrown" />}>
+                                Leads the{' '}
+                                <Link
+                                    to={`/teams/${teamData[0].attributes.slug}`}
+                                    state={{ newWindow: true }}
+                                    className="font-semibold underline"
+                                >
+                                    {teamData[0].attributes.name} Team
+                                </Link>
                             </Tooltip>
                         </ZoomHover>
                     )}
@@ -364,7 +379,17 @@ export default function People() {
 
                     <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                         {teamMembers.map((teamMember: any, index: number) => {
-                            return <TeamMember key={index} {...teamMember} teamCrestMap={teamCrestMap} />
+                            // Calculate if this person is a team lead of any team
+                            const isTeamLead = teamMember.leadTeams?.data?.length > 0
+
+                            return (
+                                <TeamMember
+                                    key={index}
+                                    {...teamMember}
+                                    isTeamLead={isTeamLead}
+                                    teamCrestMap={teamCrestMap}
+                                />
+                            )
                         })}
                     </ul>
                 </ScrollArea>
@@ -400,6 +425,13 @@ export const teamQuery = graphql`
                         attributes {
                             name
                             slug
+                        }
+                    }
+                }
+                leadTeams {
+                    data {
+                        attributes {
+                            name
                         }
                     }
                 }
