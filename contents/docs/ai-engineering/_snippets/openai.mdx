@@ -17,16 +17,12 @@ In the spot where you initialize the OpenAI SDK, import PostHog and our OpenAI w
 <MultiLanguage>
 
 ```python
-from posthog.ai.openai import OpenAI
-import posthog
+import posthoganalytics
+from posthoganalytics.ai.openai import OpenAI
+from posthoganalytics.client import Client
 
-posthog.project_api_key = "<ph_project_api_key>"
-posthog.host = "<ph_client_api_host>"
-
-client = OpenAI(
-    api_key="your_openai_api_key",
-    posthog_client=posthog
-)
+# Client expects OpenAI key to be provided through `OPENAI_API_KEY` env variabled
+client: Client = OpenAI(posthog_client=posthoganalytics.default_client)
 ```
 
 ```ts
