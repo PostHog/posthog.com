@@ -29,7 +29,7 @@ const handleCookieConsent = (consent) => {
 };
 ```
 
-### Persistence caveats
+## Persistence caveats
 
 - Be aware that `localStorage` and `sessionStorage` can't be used across subdomains. If you have multiple sites on the same domain, you may want to consider a `cookie` option or make sure to set all super properties across each subdomain.
 

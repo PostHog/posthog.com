@@ -77,6 +77,18 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/google-ads',
                 },
                 {
+                    name: 'Google Sheets',
+                    url: '/docs/cdp/sources/google-sheets',
+                },
+                {
+                    name: 'Temporal.io',
+                    url: '/docs/cdp/sources/temporal',
+                },
+                {
+                    name: 'DoIt',
+                    url: '/docs/cdp/sources/doit',
+                },
+                {
                     name: 'Self-managed',
                 },
                 {
@@ -806,6 +818,10 @@ export const handbookSidebar = [
                 name: 'Tracking feature requests',
                 url: '/handbook/cs-and-onboarding/feature-requests',
             },
+            {
+                name: 'YC onboarding',
+                url: '/handbook/growth/sales/yc-onboarding',
+            },
         ],
     },
     {
@@ -1260,7 +1276,7 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/why-buy-posthog',
             },
             {
-                name: 'New sales',
+                name: 'Inbound sales',
                 url: '/handbook/growth/sales/new-sales',
             },
             {
@@ -1268,21 +1284,35 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/product-led-sales',
             },
             {
-                name: 'Expansion & Retention',
-                url: '/handbook/growth/sales/expansion-and-retention',
+                name: 'Outbound sales',
+                url: '/handbook/growth/sales/outbound-sales',
             },
             {
-                name: 'Account planning',
-                url: '/handbook/growth/sales/account-planning',
+                name: 'Expansion, cross-sell & retention',
+                url: '/handbook/growth/sales/expansion-and-retention',
+                children: [
+                    {
+                        name: 'Account planning',
+                        url: '/handbook/growth/sales/account-planning',
+                    },
+                ],
+            },
+
+            {
+                name: 'Utilization by business type',
+                url: '/handbook/growth/sales/utilization-by-business-type',
             },
             {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
+                children: [
+                    {
+                        name: 'New team member onboarding',
+                        url: '/handbook/growth/sales/new-hire-onboarding',
+                    },
+                ],
             },
-            {
-                name: 'New team member onboarding',
-                url: '/handbook/growth/sales/new-hire-onboarding',
-            },
+
             {
                 name: 'Customer FAQs',
                 url: '/handbook/growth/sales/customer-faqs',
@@ -1300,15 +1330,11 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/lead-scoring',
                     },
                     {
-                        name: 'YC onboarding',
-                        url: '/handbook/growth/sales/yc-onboarding',
-                    },
-                    {
-                        name: 'Contract Rules',
+                        name: 'Contract rules',
                         url: '/handbook/growth/sales/contract-rules',
                     },
                     {
-                        name: 'Creating Contracts',
+                        name: 'Creating contracts',
                         url: '/handbook/growth/sales/contracts',
                     },
                     {
@@ -1918,6 +1944,10 @@ export const docsMenu = {
                             url: '/docs/libraries/bubble',
                         },
                         {
+                            name: 'Cloudflare Workers',
+                            url: '/docs/libraries/cloudflare-workers',
+                        },
+                        {
                             name: 'Django',
                             url: '/docs/libraries/django',
                         },
@@ -1996,6 +2026,10 @@ export const docsMenu = {
                         {
                             name: 'Vue.js',
                             url: '/docs/libraries/vue-js',
+                        },
+                        {
+                            name: 'Vercel',
+                            url: '/docs/libraries/vercel',
                         },
                         {
                             name: 'Webflow',
