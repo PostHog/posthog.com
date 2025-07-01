@@ -68,6 +68,7 @@ module.exports = {
 
                 'arrow-up-right':
                     'url(\'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" viewBox="0 0 24 24"><path fill="%232F80FA" fill-rule="evenodd" d="M7.995 5.75a.75.75 0 0 1 .75-.75h8.505c.966 0 1.75.784 1.75 1.75v9.496a.75.75 0 0 1-1.5 0V7.56L7.03 18.03a.75.75 0 0 1-1.06-1.061L16.44 6.5H8.744a.75.75 0 0 1-.75-.75Z" clip-rule="evenodd"/></svg>\')',
+                'red-carpet': "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_8817dd42aa.png')",
             },
             backgroundPosition: {
                 0: '0',

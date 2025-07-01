@@ -460,7 +460,7 @@ export const CareersHero = () => {
 
     return (
         <>
-            <div className="@container not-prose relative aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden border-b border-primary mb-4 bg-[radial-gradient(circle,_#972B2B_0%,_#7B2929_100%)]">
+            <div className="@container not-prose relative aspect-[2/1] @2xl:aspect-[3/1] @6xl:aspect-[4/1] overflow-hidden border-b border-primary mb-4 bg-red-carpet bg-[length:150px_150px]">
                 {/* Background container for positioned graphics */}
                 {/* Example of positioned graphics - replace with your actual graphics */}
                 {/* Left section graphics */}
