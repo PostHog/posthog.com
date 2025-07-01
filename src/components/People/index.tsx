@@ -332,10 +332,14 @@ export default function People() {
                         </p>
 
                         <p>
-                            Interested in a hand-drawn sketch of your face? <Link to={`/careers`}>We're hiring.</Link>
+                            Interested in a hand-drawn sketch of your face?{' '}
+                            <Link to={`/careers`} state={{ newWindow: true }}>
+                                We're hiring.
+                            </Link>
                         </p>
                     </div>
 
+                    {/* 
                     <aside className="">
                         <h3 className="text-lg mb-2">Team members who... </h3>
                         <div className="grid grid-cols-2 @md:grid-cols-4 justify-start @md:justify-center overflow-x-auto">
@@ -355,9 +359,9 @@ export default function People() {
                             <dt>Countries represented</dt>
                             <dd>{uniqueCountriesCount}</dd>
                         </dl>
-                    </aside>
+                    </aside> 
+                    */}
 
-                    <DebugContainerQuery />
                     <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                         {teamMembers.map((teamMember: any, index: number) => {
                             return <TeamMember key={index} {...teamMember} teamCrestMap={teamCrestMap} />

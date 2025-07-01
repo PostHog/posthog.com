@@ -448,6 +448,14 @@ export const CareersHero = () => {
             content = requirements.outerHTML + (niceToHave ? `<h3>Nice to have</h3>${niceToHave.outerHTML}` : '')
         }
 
+        // Filter out unwanted content
+        content = content
+            .replace(
+                "<p><em>If you have a disability, please let us know if there's any way we can make the interview process better for you - we're happy to accommodate! </em></p>",
+                ''
+            )
+            .replace('<p><em>#LI-DNI</em></p>', '')
+
         setProcessedHtml(content)
         setSelectedTeamName('')
 
