@@ -1,15 +1,38 @@
-### Q3 2025 Objectives
+## Q3 2025 Objectives
 
-#### Objective 1: Behavioral Cohorts
+### Objective 1: Behavioral Cohorts Platform & Feature Flag Targeting
 
-Motivation: Move beyond static person properties to enable dynamic behavioral targeting – let customers target users based on what they've done (or haven't done) recently.
+Motivation: Enable dynamic behavioral targeting across PostHog – let customers target users based on what they've done (or haven't done) recently. In other words, enable customers to target feature flags on [behavioral cohorts](/docs/data/cohorts).
+
+This is a BHAG shared across multiple teams ([Messaging](/teams/messaging), [Feature Flags](/teams/feature-flags), [Ingestion](/teams/ingestion), and [Surveys](/teams/surveys)) who all need behavioral targeting to enhance their products. We'll build a platform that integrates with our ingestion pipeline to pre-process event data for targeting, then integrate this service into existing product targeting functionality.
+
+We'll deliver this in 3 stages with Stage 1 well-defined and Stages 2-3 evolving based on how Stage 1 goes.
+
+#### Stage 1: Proof-of-concept
+
+Build a proof of concept behavioral cohort data ingestion service as the foundation. Owned by <TeamMember name ="Ben White" photo /> (CDP/Messaging) and <TeamMember name="Dylan Martin" photo /> (Feature Flags).
 
 What we will ship:
-* **Behavioral targeting engine** – Ship the ability to target users based on recent actions, like "users who haven't seen the pricing page in 7 days" or "users who completed onboarding but haven't upgraded" <TeamMember name="Dylan Martin" photo />
-* **Customer validation** – Partner with 5-10 key customers to validate use cases, gather feedback, and measure impact on their conversion and engagement <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Annika Schmid" photo />
-* **Cross-product foundation** – Build this to also power Messaging/CDP use cases, creating a unified behavioral targeting system across PostHog <TeamMember name="Dylan Martin" photo />
+* **Support behavioral cohort filter as Hog bytecode** – Make cohort filters representable as Hog code for our CDP pipeline <TeamMember name="Dylan Martin" photo />
+* **Build system for loading/matching/saving targeting results** – Create a system that writes matches to a low-latency datastore (not Clickhouse) that other applications can query <TeamMember name="Ben White" photo />
+* **Validate with ingestion team** – Ensure the POC doesn't negatively impact ingestion latency or scale (TBD owner from [Ingestion](/teams/ingestion))
 
-#### Objective 2: Flag Management & Advanced Features  
+#### Stage 2: Make it scale
+
+Implement the scaling solution based on POC learnings and ingestion team collaboration. Specific work TBD based on Stage 1 results.
+
+#### Stage 3: Integrate across PostHog
+
+Add behavioral cohort targeting to existing products using our new low-latency datastore.
+
+What we will ship:
+* **Behavioral Cohort Targeting for Feature Flags** – Add behavioral cohorts to existing feature flag targeting <TeamMember name ="Dylan Martin" photo />
+* **Behavioral Cohort Targeting for Surveys** – Add behavioral cohorts to existing survey targeting (owner TBD)
+* **Behavioral Cohort Targeting for Messaging** – Enable behavioral targeting in messaging (owner TBD)
+
+Finally, partner with 5-10 key customers to validate use cases, gather feedback, and measure impact on conversion and engagement <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Annika Schmid" photo />
+
+### Objective 2: Flag Management & Advanced Features  
 Motivation: Solve flag management pain points for large customers and add advanced flag targeting capabilities.
 
 What we will ship:
@@ -18,11 +41,11 @@ What we will ship:
 * **Flag rollouts based on other flags** – Enable targeting on flags where flag's evaluation result can determine another's rollout <TeamMember name="Phil Haack" photo />
 * **AI IDE Integration** – Build context-aware SDK snippet generation and IDE plugins for Cursor, Windsurf <TeamMember name="Phil Haack" photo />
 
-#### Objective 3: Platform Reliability & Scale
+### Objective 3: Platform Reliability & Scale
 Motivation: Create a highly stable, resilient feature flag system capable of supporting our largest (and soon-to-be largest) customers with enterprise-grade reliability.
 
 What we will ship:
 * **Complete /flags rollout** – Roll everyone onto /flags endpoint and deprecate /decide, measure performance improvements <TeamMember name="Andy Zhao" photo />
 * **Enhanced observability** – Add tracking for big customer experience, implement alerting and internal SLOs/external SLAs <TeamMember name="Andy Zhao" photo />
-* **System resilience** – Decouple flag service from writer database, implement circuit breakers, build remote caches into server-side SDKs <TeamMember name="Dylan Martin" photo />
-* **SDK standardization** – Implement unified error handling framework and ensure all SDKs use latest (v2) flags response format <TeamMember name="Andy Zhao" photo />
+* **System resilience** – Decouple flag service from writer database, implement circuit breakers, build remote caches into server-side SDKs <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Dylan Martin" photo />
+* **SDK standardization** – Implement unified error handling framework and ensure all SDKs use latest (v2) flags response format <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Phil Haack" photo />
