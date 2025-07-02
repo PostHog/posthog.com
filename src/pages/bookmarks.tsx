@@ -52,7 +52,7 @@ const Bookmark = ({ title, description, url }: { title: string; description: str
 
     return (
         <div className="flex flex-col gap-1">
-            {image && !url.includes('/docs/ai-engineering/traces-generations') ? (
+            {image ? (
                 <div className="relative">
                     <Link state={{ newWindow: true }} to={url.replace('https://posthog.com', '')}>
                         <img src={image} alt={title} />
