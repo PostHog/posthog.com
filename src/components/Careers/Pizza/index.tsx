@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
-import slugify from 'slugify'
 import { Link } from 'gatsby'
 import {
     StickerPineapple,
@@ -15,7 +14,6 @@ import 'swiper/css'
 import 'swiper/css/pagination'
 import { IconChevronDown } from '@posthog/icons'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { slugifyTeamName } from 'lib/utils'
 
 interface FullscreenModalProps {
     image: { image: React.ReactNode; pineapple: boolean }
@@ -193,6 +191,28 @@ const PizzaBox = ({ children }: { children: React.ReactNode }) => {
     )
 }
 
+interface TeamData {
+    id: string
+    name: string
+    slug: string
+    miniCrest: {
+        gatsbyImageData: any
+    }
+    profiles: {
+        data: Array<{
+            attributes: {
+                pineappleOnPizza: boolean
+            }
+        }>
+    }
+}
+
+interface TeamWithPercentage {
+    name: string
+    slug: string
+    pineapplePercentage: string
+}
+
 export const Pizza = () => {
     const [activeIndex, setActiveIndex] = useState<number | null>(null)
 
@@ -223,8 +243,9 @@ export const Pizza = () => {
                 nodes {
                     id
                     name
+                    slug
                     miniCrest {
-                        gatsbyImageData(width: 40, height: 40)
+                        gatsbyImageData(width: 80, height: 80)
                     }
                     profiles {
                         data {
@@ -238,24 +259,29 @@ export const Pizza = () => {
         }
     `)
 
-    const teamsWithPineapplePercentage = allTeams.nodes.map((team) => {
+    const teamsWithPineapplePercentage = allTeams.nodes.map((team: TeamData): TeamWithPercentage => {
         const teamLength = team.profiles?.data?.length || 0
         const pineappleLovers = team.profiles?.data?.filter(({ attributes }) => attributes.pineappleOnPizza).length || 0
         const percentage = teamLength > 0 ? (pineappleLovers / teamLength) * 100 : 0
 
         return {
             name: team.name,
+            slug: team.slug,
             pineapplePercentage: percentage.toFixed(1),
         }
     })
 
-    const groupedTeams = {
+    const groupedTeams: {
+        moreThan50: TeamWithPercentage[]
+        exactly50: TeamWithPercentage[]
+        lessThan50: TeamWithPercentage[]
+    } = {
         moreThan50: [],
         exactly50: [],
         lessThan50: [],
     }
 
-    teamsWithPineapplePercentage.forEach((team) => {
+    teamsWithPineapplePercentage.forEach((team: TeamWithPercentage) => {
         const percentage = parseFloat(team.pineapplePercentage)
         if (percentage > 50) {
             groupedTeams.moreThan50.push(team)
@@ -267,7 +293,7 @@ export const Pizza = () => {
     })
 
     // Sort teams within each group by percentage (highest to lowest)
-    Object.keys(groupedTeams).forEach((key) => {
+    ;(Object.keys(groupedTeams) as Array<keyof typeof groupedTeams>).forEach((key) => {
         groupedTeams[key].sort((a, b) => parseFloat(b.pineapplePercentage) - parseFloat(a.pineapplePercentage))
     })
 
@@ -308,8 +334,8 @@ export const Pizza = () => {
 
                     <ul className="list-none p-0 space-y-3">
                         {groupedTeams.moreThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
+                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
+                            const teamMiniCrest = getImage(teamData?.miniCrest)
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
@@ -317,12 +343,13 @@ export const Pizza = () => {
                                             <GatsbyImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
-                                                className="mr-2"
+                                                className="mr-2 size-10"
+                                                objectFit="contain"
                                             />
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugifyTeamName(team.name)}`}
+                                                to={`/teams/${team.slug}`}
                                                 className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
                                             >
                                                 {team.name}
@@ -335,7 +362,7 @@ export const Pizza = () => {
                                                     ></div>
                                                 </div>
                                                 <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
+                                                    {Math.round(parseFloat(team.pineapplePercentage))}%
                                                 </span>
                                             </div>
                                         </div>
@@ -359,7 +386,7 @@ export const Pizza = () => {
                                 </h3>
                                 on whether
                             </div>
-                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] mb-0 font-bold @4xl:font-normal">
+                            <p className="text-[15px] @4xl:text-sm @5xl:text-[15px] my-0 font-bold @4xl:font-normal">
                                 pineapple belongs on pizza
                             </p>
                         </div>
@@ -367,8 +394,8 @@ export const Pizza = () => {
 
                     <ul className="list-none p-0 space-y-3">
                         {groupedTeams.exactly50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
+                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
+                            const teamMiniCrest = getImage(teamData?.miniCrest)
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
@@ -376,12 +403,13 @@ export const Pizza = () => {
                                             <GatsbyImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
-                                                className="mr-2"
+                                                className="mr-2 size-10"
+                                                objectFit="contain"
                                             />
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugifyTeamName(team.name)}`}
+                                                to={`/teams/${team.slug}`}
                                                 className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
                                             >
                                                 {team.name}
@@ -394,7 +422,7 @@ export const Pizza = () => {
                                                     ></div>
                                                 </div>
                                                 <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
+                                                    {Math.round(parseFloat(team.pineapplePercentage))}%
                                                 </span>
                                             </div>
                                         </div>
@@ -424,8 +452,8 @@ export const Pizza = () => {
 
                     <ul className="list-none p-0 space-y-3">
                         {groupedTeams.lessThan50.map((team) => {
-                            const teamData = allTeams.nodes.find((node) => node.name === team.name)
-                            const teamMiniCrest = getImage(teamData.miniCrest)
+                            const teamData = allTeams.nodes.find((node: TeamData) => node.name === team.name)
+                            const teamMiniCrest = getImage(teamData?.miniCrest)
                             return (
                                 <li key={team.name} className="">
                                     <div className="flex gap-2">
@@ -433,12 +461,13 @@ export const Pizza = () => {
                                             <GatsbyImage
                                                 image={teamMiniCrest}
                                                 alt={`${team.name} mini crest`}
-                                                className="mr-2"
+                                                className="mr-2 size-10"
+                                                objectFit="contain"
                                             />
                                         )}
                                         <div className="flex-1">
                                             <Link
-                                                to={`/teams/${slugifyTeamName(team.name)}`}
+                                                to={`/teams/${team.slug}`}
                                                 className="text-[15px] font-semibold text-primary dark:text-primary-dark hover:text-red dark:hover:text-yellow"
                                             >
                                                 {team.name}
@@ -451,7 +480,7 @@ export const Pizza = () => {
                                                     ></div>
                                                 </div>
                                                 <span className="text-sm font-medium">
-                                                    {Math.round(team.pineapplePercentage)}%
+                                                    {Math.round(parseFloat(team.pineapplePercentage))}%
                                                 </span>
                                             </div>
                                         </div>
