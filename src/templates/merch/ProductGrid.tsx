@@ -1,5 +1,5 @@
 import { Drawer } from 'components/Drawer'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { cn } from '../../utils'
 import { ProductCard } from './ProductCard'
 import { ProductPanels } from './ProductPanels'
@@ -12,9 +12,7 @@ type ProductGridProps = {
     selectedProduct?: ShopifyProduct | null
 }
 
-function getProductFromHandle(products: ShopifyProduct[], handle: string) {
-    return products.find((p) => p.handle === handle) || null
-}
+
 
 export default function ProductGrid(props: ProductGridProps): React.ReactElement {
     const { className, products, onProductClick, selectedProduct } = props
@@ -43,20 +41,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
         }
     }
 
-    /**
-     * when landing on or navigating to a collection page with a "product"
-     * param in the URL, get the handle's corresponding product and load
-     * it into the product drawer.
-     */
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const urlParams = new URLSearchParams(window.location.search)
-            const paramName = urlParams.get('product')
-            if (paramName) {
-                setSidePanels({ product: getProductFromHandle(products, paramName), isOpen: true, animateOpen: false })
-            }
-        }
-    }, [])
+    // URL handling is now done in Collection.tsx component
 
     const classes = cn(
         'grid grid-cols-2 @3xl:grid-cols-3 gap-1 p-2',

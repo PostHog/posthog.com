@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { Nav } from './Nav'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
@@ -30,14 +30,76 @@ type CollectionProps = {
     pageContext: CollectionPageContext
 }
 
+// Helper function to get product by handle
+function getProductFromHandle(products: any[], handle: string) {
+    return products.find((p) => p.handle === handle) || null
+}
+
+// Helper function to update URL without triggering navigation
+function updateURL(params: { product?: string; state?: string }) {
+    if (typeof window !== 'undefined') {
+        const url = new URL(window.location.href)
+
+        // Clear existing params
+        url.searchParams.delete('product')
+        url.searchParams.delete('state')
+
+        // Set new params
+        if (params.product) {
+            url.searchParams.set('product', params.product)
+        }
+        if (params.state) {
+            url.searchParams.set('state', params.state)
+        }
+
+        window.history.pushState({}, '', url.toString())
+    }
+}
+
 export default function Collection(props: CollectionProps): React.ReactElement {
     const { pageContext } = props
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
     const [cartIsOpen, setCartIsOpen] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
+    const [hasInitialized, setHasInitialized] = useState(false)
 
     const products = pageContext.productsForCurrentPage
     const transformedProducts = products?.map((p) => getProduct(p))
+
+    // Initialize state from URL parameters on mount only
+    useEffect(() => {
+        if (typeof window !== 'undefined' && transformedProducts && !hasInitialized) {
+            const urlParams = new URLSearchParams(window.location.search)
+            const productHandle = urlParams.get('product')
+            const state = urlParams.get('state')
+
+            if (productHandle) {
+                const product = getProductFromHandle(transformedProducts, productHandle)
+                if (product) {
+                    setSelectedProduct(product)
+                    setCartIsOpen(false)
+                }
+            } else if (state === 'cart') {
+                setCartIsOpen(true)
+                setSelectedProduct(null)
+            }
+
+            setHasInitialized(true)
+        }
+    }, [transformedProducts, hasInitialized])
+
+    // Update URL when selectedProduct or cartIsOpen changes (only after initialization)
+    useEffect(() => {
+        if (typeof window !== 'undefined' && hasInitialized) {
+            if (selectedProduct) {
+                updateURL({ product: selectedProduct.handle })
+            } else if (cartIsOpen) {
+                updateURL({ state: 'cart' })
+            } else {
+                updateURL({})
+            }
+        }
+    }, [selectedProduct, cartIsOpen, hasInitialized])
 
     // Extract unique categories from products and create selectOptions
     const selectOptions = useMemo(() => {
@@ -160,7 +222,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         product={selectedProduct}
                         setIsCart={() => { }} // Not used in sidebar mode
                         onClick={() => { }} // Not used in sidebar mode
-                        updateURL={handleProductSelect} // Allow navigation between products
+                        updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
                         onCartOpen={handleCartOpen} // Allow opening cart from product panel
                         className="!p-4 !pt-4" // Override default padding
                     />
