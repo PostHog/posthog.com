@@ -22,6 +22,7 @@ import { useInView } from 'react-intersection-observer'
 import useTopicsNav from '../../navs/useTopicsNav'
 import { useWindow } from '../../context/Window'
 import Tooltip from 'components/RadixUI/Tooltip'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
@@ -222,15 +223,16 @@ export default function Inbox(props) {
                         <div className={`@container flex-1 min-h-0 ${sideBySide ? 'w-0' : 'w-full'}`}>
                             <ScrollArea className=" h-full">
                                 <div className="test flex items-center pl-2.5 pr-4 py-2 border-b border-primary font-medium bg-accent text-sm bg-accent-2 sticky top-0 text-primary">
-                                    <div className="hidden @2xl:block w-48">Author</div>
+                                    <div className="hidden @3xl:block w-48">Author</div>
                                     <div className="flex-1">
-                                        <span className="@2xl:hidden">Author / Replies</span>
-                                        <span className="hidden @2xl:block">Subject</span>
+                                        <span className="@3xl:hidden">Author / Replies</span>
+                                        <span className="hidden @3xl:block">Subject</span>
                                     </div>
-                                    <div className="hidden @2xl:block w-24 text-center">Replies</div>
-                                    <div className="w-60 text-right @2xl:text-left">Last activity</div>
+                                    <div className="hidden @3xl:block w-24 text-center">Replies</div>
+                                    <div className="w-60 text-right @3xl:text-left">Last activity</div>
                                 </div>
                                 <div className="px-1 py-1 space-y-px">
+                                    <DebugContainerQuery />
                                     {questions.data?.map((question) => {
                                         const {
                                             attributes: { subject, numReplies, activeAt, replies, profile, permalink },
@@ -248,7 +250,7 @@ export default function Inbox(props) {
                                                     width="full"
                                                     key={question.id}
                                                     className={` 
-                                                        flex-wrap @2xl:flex-nowrap gap-0 @2xl:gap-1
+                                                        flex-wrap @3xl:flex-nowrap !gap-0 @3xl:!gap-1 !items-start
                                                         ${active ? 'font-bold bg-accent' : ''}
                                                     `}
                                                     onClick={() => {
@@ -261,29 +263,29 @@ export default function Inbox(props) {
                                                         }
                                                     }}
                                                 >
-                                                    <div className="basis-9/12 @2xl:basis-auto order-1 @2xl:order-none @2xl:w-48 @2xl:block">
+                                                    <div className="basis-9/12 @3xl:basis-auto order-1 @3xl:order-none @3xl:w-48 @3xl:block">
                                                         {profile?.data.attributes.firstName}{' '}
                                                         {profile?.data.attributes.lastName}
-                                                        <span className="text-muted text-sm ml-1 @2xl:hidden">
+                                                        <span className="text-muted text-sm ml-1 @3xl:hidden">
                                                             {numReplies}
                                                         </span>
                                                     </div>
                                                     <div
-                                                        className={`order-3 @2xl:order-none flex-[1_0_100%] @2xl:flex-1 ${
-                                                            active ? 'font-medium @2xl:font-bold' : 'font-medium'
+                                                        className={`order-3 @3xl:order-none flex-[1_0_100%] @3xl:flex-1 ${
+                                                            active ? 'font-medium @3xl:font-bold' : 'font-medium'
                                                         }`}
                                                     >
                                                         {subject}
                                                     </div>
-                                                    <div className="hidden @2xl:block w-24 text-center">
+                                                    <div className="hidden @3xl:block w-24 text-center">
                                                         {numReplies}
                                                     </div>
-                                                    <div className="order-2 basis-3/12 text-right @2xl:text-left @2xl:basis-auto @2xl:w-60 ">
+                                                    <div className="order-2 basis-3/12 text-right @3xl:text-left @3xl:basis-auto @3xl:w-60 ">
                                                         <Tooltip trigger={dayjs(activeAt).fromNow()}>
                                                             {dayjs(activeAt).format('dddd, MMMM D, YYYY')} at{' '}
                                                             {dayjs(activeAt).format('h:mm A')}
                                                         </Tooltip>{' '}
-                                                        <span className="hidden @2xl:inline-block">
+                                                        <span className="hidden @3xl:inline-block">
                                                             by {latestAuthor?.data.attributes.firstName}{' '}
                                                             {latestAuthor?.data.attributes.lastName}
                                                         </span>
