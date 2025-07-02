@@ -191,6 +191,7 @@ export default function Explorer({
                             className="not-prose w-96 bg-primary border-l border-primary h-full"
                         >
                             <div className="h-full flex flex-col">
+                                {/* 
                                 <div className="flex items-center justify-between p-4 border-b border-primary">
                                     <h3 className="font-semibold text-lg">
                                         {productHandlers?.selectedProduct
@@ -208,6 +209,7 @@ export default function Explorer({
                                         ×
                                     </button>
                                 </div>
+                                 */}
                                 <div className="flex-1 overflow-auto">
                                     {productHandlers?.selectedProduct ? productContent : cartContent}
                                 </div>

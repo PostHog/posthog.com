@@ -69,25 +69,9 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 )}
                 <ProductCarousel product={product} />
             </div>
-            <div className="space-y-0.5">
-                <h3 className="text-xl [&_a]:text-primary dark:[&_a]:text-primary-dark leading-snug mb-0">
-                    {product.title}
-                </h3>
+            <div className="space-y-0.5 text-center">
+                <h3 className="text-base leading-snug">{product.title}</h3>
                 <p className="leading-tight">{subtitle}</p>
-                {selectedVariant && (
-                    <p className="text-lg">
-                        {product.kit ? (
-                            <>
-                                <span className="line-through">
-                                    <Price price={selectedVariant.price.amount} />
-                                </span>{' '}
-                                <span className="text-green font-bold">FREE</span>
-                            </>
-                        ) : (
-                            <Price price={selectedVariant.price.amount} />
-                        )}
-                    </p>
-                )}
             </div>
 
             {loading && (
@@ -129,9 +113,27 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         {loading ? (
                             <IconSpinner className="w-5 mx-auto animate-spin" />
                         ) : outOfStock ? (
-                            'Out of Stock'
+                            'Out of stock'
                         ) : (
-                            'Add to Cart'
+                            <>
+                                Add to cart
+                                {selectedVariant && (
+                                    <span className="text-sm">
+                                        {' '}
+                                        –{' '}
+                                        {product.kit ? (
+                                            <>
+                                                <span className="line-through">
+                                                    <Price price={selectedVariant.price.amount} />
+                                                </span>{' '}
+                                                <span className="text-green font-bold">FREE</span>
+                                            </>
+                                        ) : (
+                                            <Price price={selectedVariant.price.amount} />
+                                        )}
+                                    </span>
+                                )}
+                            </>
                         )}
                     </span>
                     <LoaderIcon
@@ -145,12 +147,26 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             {!loading && outOfStock && <BackInStockForm variant={variantForCart} product={product} />}
 
-            {product.description && (
-                <div className="border-t border-primary pt-4">
-                    <h3 className="text-lg mb-0">Description</h3>
-                    <div dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
-                </div>
-            )}
+            <div className="grid grid-cols-4 gap-y-1 gap-x-2 text-sm">
+                <div className="text-secondary">Available</div>
+                <div className="col-span-3">8</div>
+
+                <div className="text-secondary">Brand</div>
+                <div className="col-span-3">Carhartt</div>
+
+                <div className="text-secondary">Quality</div>
+                <div className="col-span-3">Excellent</div>
+
+                <div className="text-secondary">Added on</div>
+                <div className="col-span-3">Date added to store</div>
+                {product.description && (
+                    <>
+                        <div className="text-secondary">Description</div>
+                        <div className="col-span-3" dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} />
+                    </>
+                )}
+            </div>
+
             {product.imageProducts?.length > 0 && (
                 <div className="border-t border-primary pt-4 mt-4">
                     <h3 className="text-lg mb-0">See something else you liked?</h3>
