@@ -189,7 +189,9 @@ export default function Explorer({
                             <div className="h-full flex flex-col">
                                 <div className="flex items-center justify-between p-4 border-b border-primary">
                                     <h3 className="font-semibold text-lg">
-                                        {productHandlers?.selectedProduct ? 'Product Details' : 'Cart'}
+                                        {productHandlers?.selectedProduct
+                                            ? productHandlers.selectedProduct.title
+                                            : 'Cart'}
                                     </h3>
                                     <button
                                         onClick={productHandlers?.selectedProduct ? productHandlers?.onProductClose : cartHandlers?.onCartClose}
@@ -198,8 +200,10 @@ export default function Explorer({
                                         ×
                                     </button>
                                 </div>
-                                <div className="flex-1 overflow-hidden">
+                                <div className="flex-1 min-h-0 w-full">
+                                    {/* <ScrollArea className="h-full overflow-x-hidden min-h-0"> */}
                                     {productHandlers?.selectedProduct ? productContent : cartContent}
+                                    {/* </ScrollArea> */}
                                 </div>
                             </div>
                         </aside>
