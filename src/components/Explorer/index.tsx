@@ -18,36 +18,41 @@ interface AccordionItem {
 interface ExplorerProps {
     template: 'generic' | 'product' | 'feature'
     slug: string
-    title: string
+    title?: string
     accentImage?: React.ReactNode
     sidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
     fullScreen?: boolean
     showTitle?: boolean
     padding?: boolean
+    headerBarOptions?: string[]
 }
 
-const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }) => {
+const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
     if (!content) return null
 
     if (Array.isArray(content)) {
-        return content.map((item, index) => (
-            <Accordion
-                key={index}
-                data-scheme="primary"
-                className=""
-                defaultValue="item-0"
-                items={[
-                    {
-                        trigger: item.title,
-                        content: item.content,
-                    },
-                ]}
-            />
-        ))
+        return (
+            <>
+                {content.map((item, index) => (
+                    <Accordion
+                        key={index}
+                        data-scheme="primary"
+                        className=""
+                        defaultValue="item-0"
+                        items={[
+                            {
+                                trigger: item.title,
+                                content: item.content,
+                            },
+                        ]}
+                    />
+                ))}
+            </>
+        )
     }
 
-    return content
+    return <>{content}</>
 }
 
 export default function Explorer({
@@ -60,6 +65,7 @@ export default function Explorer({
     fullScreen = false,
     showTitle = true,
     padding = true,
+    headerBarOptions,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') // Remove leading slash
@@ -73,6 +79,9 @@ export default function Explorer({
             items: [
                 { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
                 ...productMenu.children.flatMap((item) => {
+                    // Skip items without valid slugs
+                    if (!item.slug) return []
+
                     // Add the base product
                     const options = [
                         {
@@ -84,7 +93,13 @@ export default function Explorer({
                     ]
 
                     // Add subpage option if this is the current product and we're on a subpage
-                    if (template === 'product' && item.slug === baseSlug && title && currentPath !== item.slug) {
+                    if (
+                        template === 'product' &&
+                        item.slug === baseSlug &&
+                        title &&
+                        currentPath !== item.slug &&
+                        currentPath
+                    ) {
                         options.push({
                             value: currentPath,
                             label: `${item.name} → ${title}`,
@@ -103,13 +118,29 @@ export default function Explorer({
         navigate(`/${value}`)
     }
 
+    // Generate dynamic HeaderBar props based on headerBarOptions
+    const getHeaderBarProps = () => {
+        const props: any = {}
+        if (headerBarOptions) {
+            headerBarOptions.forEach((option) => {
+                props[option] = true
+            })
+        } else {
+            // Default props if no options specified
+            props.showBack = true
+            props.showForward = true
+            props.showSearch = true
+        }
+        return props
+    }
+
     const ContentWrapper = appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
             {!fullScreen && (
                 <>
-                    <HeaderBar showBack showForward showSearch />
+                    <HeaderBar {...getHeaderBarProps()} />
                     <div data-scheme="secondary" className="bg-primary px-2 pb-2 border-b border-primary">
                         <Select
                             groups={selectOptions}
