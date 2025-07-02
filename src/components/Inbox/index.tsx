@@ -232,7 +232,6 @@ export default function Inbox(props) {
                                     <div className="w-60 text-right @3xl:text-left">Last activity</div>
                                 </div>
                                 <div className="px-1 py-1 space-y-px">
-                                    <DebugContainerQuery />
                                     {questions.data?.map((question) => {
                                         const {
                                             attributes: { subject, numReplies, activeAt, replies, profile, permalink },
@@ -294,6 +293,16 @@ export default function Inbox(props) {
                                             </div>
                                         )
                                     })}
+                                    {!isLoading && (!questions.data || questions.data.length === 0) && (
+                                        <div className="flex flex-col items-center justify-center py-12 px-4 text-center">
+                                            <div className="text-lg mb-2 font-semibold">No questions found</div>
+                                            <div className="text-secondary text-sm">
+                                                {props.path === '/questions/subscriptions'
+                                                    ? "You haven't subscribed to any questions yet."
+                                                    : 'There are no questions in this topic yet.'}
+                                            </div>
+                                        </div>
+                                    )}
                                     {isLoading && (
                                         <div className="flex items-center justify-center py-8 h-full">
                                             <Lottie
