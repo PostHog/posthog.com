@@ -1,7 +1,7 @@
 import React from 'react'
-import { CodeBlock } from '../CodeBlock'
-import Tab from '../Tab'
+import { SingleCodeBlock } from '../CodeBlock'
 import languageMap from '../CodeBlock/languages'
+import Tab from 'components/Tab'
 
 interface Example {
     id: string
@@ -9,11 +9,17 @@ interface Example {
     code: string
 }
 
-const FunctionExamples = ({ examples, title, language }: { examples: Example[]; title: string; language: string }) => {
+const FunctionExamples = ({ examples, language }: { examples: Example[]; language: string }) => {
     if (!examples || examples.length === 0) return null
 
     // Get language info from the languageMap
     const languageInfo = languageMap[language] || languageMap['js'] // fallback to 'js' if not found
+
+    const renderCodeBlock = (code: string) => (
+        <SingleCodeBlock language={languageInfo.language} showLabel={true} showLineNumbers={false} showCopy={true}>
+            {code}
+        </SingleCodeBlock>
+    )
 
     return (
         <div>
@@ -27,57 +33,13 @@ const FunctionExamples = ({ examples, title, language }: { examples: Example[]; 
                             ))}
                         </Tab.List>
                         <Tab.Panels>
-                            {examples.map((example) => {
-                                return (
-                                    <Tab.Panel key={example.id}>
-                                        <CodeBlock
-                                            selector="dropdown"
-                                            currentLanguage={{
-                                                label: languageInfo.label as string,
-                                                language: languageInfo.language,
-                                                code: example.code,
-                                            }}
-                                            label={
-                                                <div className="code-example flex text-xs space-x-1.5 my-1">
-                                                    <code className="shrink-0 text-blue">{title}</code>
-                                                </div>
-                                            }
-                                        >
-                                            {[
-                                                {
-                                                    label: languageInfo.label as string,
-                                                    language: languageInfo.language,
-                                                    code: example.code,
-                                                },
-                                            ]}
-                                        </CodeBlock>
-                                    </Tab.Panel>
-                                )
-                            })}
+                            {examples.map((example) => (
+                                <Tab.Panel key={example.id}>{renderCodeBlock(example.code)}</Tab.Panel>
+                            ))}
                         </Tab.Panels>
                     </Tab.Group>
                 ) : (
-                    <CodeBlock
-                        selector="dropdown"
-                        currentLanguage={{
-                            label: languageInfo.label as string,
-                            language: languageInfo.language,
-                            code: examples[0].code,
-                        }}
-                        label={
-                            <div className="code-example flex text-xs space-x-1.5 my-1">
-                                <code className="shrink-0 text-blue">{title}</code>
-                            </div>
-                        }
-                    >
-                        {[
-                            {
-                                label: languageInfo.label as string,
-                                language: languageInfo.language,
-                                code: examples[0].code,
-                            },
-                        ]}
-                    </CodeBlock>
+                    renderCodeBlock(examples[0].code)
                 )}
             </div>
         </div>

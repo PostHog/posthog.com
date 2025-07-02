@@ -734,7 +734,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     })
 
     result.data.cdp.nodes.forEach((node) => {
-        console.log('creating page for', node.fields.slug)
         const { slug } = node.fields
         const { documentation } = node.frontmatter
         createPage({
