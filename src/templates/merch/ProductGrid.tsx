@@ -8,6 +8,7 @@ import { ShopifyProduct } from './types'
 type ProductGridProps = {
     className?: string
     products: ShopifyProduct[]
+    onProductClick?: (product: ShopifyProduct) => void
 }
 
 function getProductFromHandle(products: ShopifyProduct[], handle: string) {
@@ -15,7 +16,7 @@ function getProductFromHandle(products: ShopifyProduct[], handle: string) {
 }
 
 export default function ProductGrid(props: ProductGridProps): React.ReactElement {
-    const { className, products } = props
+    const { className, products, onProductClick } = props
     const [sidePanels, setSidePanels] = useState<{
         isOpen: boolean
         product: ShopifyProduct | null
@@ -23,16 +24,22 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
     }>({ isOpen: false, product: null, animateOpen: true })
 
     /**
-     * when clicking a product card, add its handle to the URL and open
-     * the product drawer
+     * when clicking a product card, either use the onProductClick prop
+     * or fall back to the default drawer behavior
      */
     const updateURL = (product: ShopifyProduct) => {
-        if (typeof window !== 'undefined') {
-            const url: URL = new URL(window.location.href)
-            url.searchParams.set('product', product.handle)
-            window.history.pushState({}, '', url)
+        if (onProductClick) {
+            // Use the provided click handler (for sidebar mode)
+            onProductClick(product)
+        } else {
+            // Fall back to original drawer behavior
+            if (typeof window !== 'undefined') {
+                const url: URL = new URL(window.location.href)
+                url.searchParams.set('product', product.handle)
+                window.history.pushState({}, '', url)
+            }
+            setSidePanels({ product, isOpen: true })
         }
-        setSidePanels({ product, isOpen: true })
     }
 
     /**
@@ -51,7 +58,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
     }, [])
 
     const classes = cn(
-        'grid grid-cols-2 lg:grid-cols-[repeat(4,minMax(0,1fr))] gap-x-4 sm:gap-x-10 gap-y-4 sm:gap-y-7',
+        'grid grid-cols-2 @3xl:grid-cols-3 gap-4 @2xl:gap-6',
         className
     )
 
@@ -69,7 +76,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
                     }
                     return (
                         <ProductCard
-                            className={cn(isLarge && 'col-span-2 row-span-2 sm:[&_.image-wrapper]:aspect-square')}
+                            className={cn(isLarge && ' sm:[&_.image-wrapper]:aspect-square')}
                             key={product.shopifyId}
                             product={product}
                             onClick={() => updateURL(product)}
@@ -78,23 +85,25 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
                 })}
             </div>
 
-            <Drawer
-                removeScroll
-                isOpen={sidePanels.isOpen}
-                /**
-                 * for when we have a query param for "product" in the URL, we want it to be
-                 * already open and not animate in
-                 */
-                animateOpen={sidePanels.animateOpen}
-                onClose={() => {
-                    const url: URL = new URL(window.location.href)
-                    url.searchParams.delete('product')
-                    window.history.pushState({}, '', url)
-                    setSidePanels((prev) => ({ ...prev, isOpen: false, animateOpen: true }))
-                }}
-            >
-                <ProductPanels className="" product={sidePanels.product} updateURL={updateURL} />
-            </Drawer>
+            {!onProductClick && (
+                <Drawer
+                    removeScroll
+                    isOpen={sidePanels.isOpen}
+                    /**
+                     * for when we have a query param for "product" in the URL, we want it to be
+                     * already open and not animate in
+                     */
+                    animateOpen={sidePanels.animateOpen}
+                    onClose={() => {
+                        const url: URL = new URL(window.location.href)
+                        url.searchParams.delete('product')
+                        window.history.pushState({}, '', url)
+                        setSidePanels((prev) => ({ ...prev, isOpen: false, animateOpen: true }))
+                    }}
+                >
+                    <ProductPanels className="" product={sidePanels.product} updateURL={updateURL} />
+                </Drawer>
+            )}
         </>
     )
 }

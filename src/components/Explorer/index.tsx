@@ -26,6 +26,12 @@ interface ExplorerProps {
     showTitle?: boolean
     padding?: boolean
     headerBarOptions?: string[]
+    cartHandlers?: {
+        onCartOpen: () => void
+        onCartClose: () => void
+        isCartOpen: boolean
+    }
+    cartContent?: React.ReactNode
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -66,6 +72,8 @@ export default function Explorer({
     showTitle = true,
     padding = true,
     headerBarOptions,
+    cartHandlers,
+    cartContent,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') // Remove leading slash
@@ -131,6 +139,14 @@ export default function Explorer({
             props.showForward = true
             props.showSearch = true
         }
+
+        // Add cart handlers if provided
+        if (cartHandlers) {
+            props.onCartOpen = cartHandlers.onCartOpen
+            props.onCartClose = cartHandlers.onCartClose
+            props.isCartOpen = cartHandlers.isCartOpen
+        }
+
         return props
     }
 
@@ -158,10 +174,27 @@ export default function Explorer({
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
-                        fullScreen ? 'border-t border-primary' : ''
-                    }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''
+                        }`}
                 >
+                    {cartHandlers?.isCartOpen && (
+                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+                            <div className="h-full flex flex-col">
+                                <div className="flex items-center justify-between p-4 border-b border-primary">
+                                    <h3 className="font-semibold text-lg">Shopping Cart</h3>
+                                    <button
+                                        onClick={cartHandlers?.onCartClose}
+                                        className="text-primary hover:text-red transition-colors text-xl"
+                                    >
+                                        ×
+                                    </button>
+                                </div>
+                                <div className="flex-1 overflow-hidden">
+                                    {cartContent}
+                                </div>
+                            </div>
+                        </aside>
+                    )}
                     <main
                         data-app="Explorer"
                         data-scheme="primary"
@@ -182,9 +215,8 @@ export default function Explorer({
                                     </div>
                                 )}
                                 <div
-                                    className={`${getProseClasses()} max-w-none h-full ${
-                                        padding ? 'relative p-4' : ''
-                                    }`}
+                                    className={`${getProseClasses()} max-w-none h-full ${padding ? 'relative p-4' : ''
+                                        }`}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}

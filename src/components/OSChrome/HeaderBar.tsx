@@ -23,8 +23,6 @@ import { useApp } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import Link from 'components/Link'
 import { useCartStore } from '../../templates/merch/store'
-import { Drawer } from 'components/Drawer'
-import { Cart } from '../../templates/merch/Cart'
 
 interface HeaderBarProps {
     isNavVisible?: boolean
@@ -48,6 +46,10 @@ interface HeaderBarProps {
         description: string
     }
     onSearch?: (search: string) => void
+    // Cart handlers (optional for backwards compatibility)
+    onCartOpen?: () => void
+    onCartClose?: () => void
+    isCartOpen?: boolean
 }
 
 export default function HeaderBar({
@@ -69,13 +71,15 @@ export default function HeaderBar({
     homeURL,
     bookmark,
     onSearch,
+    onCartOpen,
+    onCartClose,
+    isCartOpen = false,
 }: HeaderBarProps) {
     const { user, addBookmark, removeBookmark } = useUser()
     const { addToast } = useToast()
     const { openSignIn } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
-    const [cartIsOpen, setCartIsOpen] = useState(false)
     const count = useCartStore((state) => state.count)
     const currentURL = `https://posthog.com${appWindow?.path}`
     const isBookmarked = useMemo(
@@ -127,9 +131,8 @@ export default function HeaderBar({
             <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
                 <div>
                     <motion.div
-                        className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${
-                            hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
+                            }`}
                     >
                         {homeURL && <OSButton variant="ghost" icon={<IconHome />} to={homeURL} asLink />}
                         <div className="hidden @2xl:block">
@@ -175,7 +178,7 @@ export default function HeaderBar({
                         {showCart && (
                             <Tooltip
                                 trigger={
-                                    <OSButton variant="ghost" onClick={() => setCartIsOpen(true)} className="relative">
+                                    <OSButton variant="ghost" onClick={onCartOpen} className="relative">
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -225,9 +228,8 @@ export default function HeaderBar({
                 </div>
                 {showSidebar && (
                     <motion.div
-                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${
-                            isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 flex justify-end transition-all min-w-0 ${isTocVisible ? '@4xl:min-w-[250px]' : 'w-auto'
+                            }`}
                         animate={isTocVisible ? 'open' : 'closed'}
                     >
                         {showToc && (
@@ -259,11 +261,7 @@ export default function HeaderBar({
                 )}
             </div>
 
-            {showCart && (
-                <Drawer isOpen={cartIsOpen} onClose={() => setCartIsOpen(false)}>
-                    <Cart className="h-full overflow-y-scroll bg-accent" />
-                </Drawer>
-            )}
+
         </>
     )
 }
