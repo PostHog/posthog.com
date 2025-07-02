@@ -30,9 +30,9 @@ The ideal activation metric is a combination of a high number of companies going
 2. Has done a key event multiple times (such as analyzed 2 insights)
 3. Has done a combination of key events (such as watched 5 recordings, and set a recording filter)
 
-To pick the best activation definion, it's recommeded to write the activation queries for multiple potential activation defintions (~5-10), and compare the activation and retention numbers. This leads to a much higher confidence in the activation metric than just picking your best guess.
+To pick the best activation definion, it's recommended to write the activation queries for multiple potential activation definitions (~5-10), and compare the activation and retention numbers. This leads to a much higher confidence in the activation metric than just picking your best guess.
 
-Which definition is the best indicator for long term retention? You want to pick a definition that gets a sizable number of organizations to acivate, but and also to retain. But be careful: If you pick a activation definition where only 1% activate, and 100% of those 1% reteain, your activation metric is too narrow!
+Which definition is the best indicator for long term retention? You want to pick a definition that gets a sizable number of organizations to activate, but and also to retain. But be careful: If you pick a activation definition where only 1% activate, and 100% of those 1% reteain, your activation metric is too narrow!
 
 Note on the retention / survived definition: For this, it's recommended you pick whatever tells you they are an active user. It can be the same as your activation definition, or something else. It can be as simple as someone logging in or creating new things in your product.
 
