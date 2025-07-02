@@ -10,7 +10,7 @@ import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
-import { getProductMetafield } from './utils'
+import { getProductMetafield, getProductMetafieldByNamespace } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
@@ -36,6 +36,32 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
     const { selectedOptions, setOptionAtIndex, selectedVariant, loading, outOfStock } = useProduct(product.shopifyId)
 
+    // New metafields (now using non-namespaced lookups)
+    const productName = getProductMetafield(product, 'name')
+    const productExtension = getProductMetafield(product, 'extension')
+    const productBrand = getProductMetafield(product, 'brand')
+    const productModelInfo = getProductMetafield(product, 'model_info')
+    // Kit logic: use product.type === 'Kit' (case-insensitive)
+    const productKit = typeof product.type === 'string' && product.type.toLowerCase() === 'kit'
+
+    // Category breadcrumb
+    function getCategoryBreadcrumb(category?: ShopifyProduct['category']): string {
+        if (!category) return ''
+        // For now, just show the name. You can make this recursive if you add parent info.
+        return category.name
+    }
+
+    // Available quantity
+    let available = 'not tracked'
+    if (selectedVariant && typeof selectedVariant.quantityAvailable === 'number') {
+        available = selectedVariant.quantityAvailable.toString()
+    } else if (typeof product.totalInventory === 'number' && product.totalInventory > 0) {
+        available = product.totalInventory.toString()
+    }
+
+    // Date added
+    const addedOn = product.createdAt ? new Date(product.createdAt).toLocaleDateString() : 'not tracked'
+
     /**
      * The product.variant option from props is a different shape from the
      * selectedVariant (which comes directly from the Storefront API). We
@@ -48,9 +74,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
         setIsAdding(true)
         setTimeout(() => {
             const cartItem = variantForCart || product.variants[0]
-            if (product.kit) {
-                cartItem.kit = true
-            }
             addToCart(cartItem, quantity)
             setIsCart(true)
             setIsAdding(false)
@@ -70,7 +93,19 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 <ProductCarousel product={product} />
             </div>
             <div className="space-y-0.5 text-center">
-                <h3 className="text-base leading-snug">{product.title}</h3>
+                <h3 className="text-base leading-snug">
+                    {product.title}
+                    <br />
+                    Category:
+                    {product.category ? product.category.name : 'No category'} <br />
+                    {product.category && (
+                        <span className="block text-xs text-muted mt-1">{getCategoryBreadcrumb(product.category)}</span>
+                    )}
+                </h3>
+                <p>
+                    {productName}
+                    <span className="text-secondary">.{productExtension}</span>
+                </p>
                 <p className="leading-tight">{subtitle}</p>
             </div>
 
@@ -100,7 +135,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <SizeGuide title={product.title} />
 
-            <Quantity value={quantity} onChange={setQuantity} disabled={product.kit} />
+            <Quantity value={quantity} onChange={setQuantity} disabled={productKit} />
 
             <CallToAction
                 disabled={loading || outOfStock}
@@ -121,7 +156,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                                     <span className="text-sm">
                                         {' '}
                                         –{' '}
-                                        {product.kit ? (
+                                        {productKit ? (
                                             <>
                                                 <span className="line-through">
                                                     <Price price={selectedVariant.price.amount} />
@@ -149,16 +184,23 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <div className="grid grid-cols-4 gap-y-1 gap-x-2 text-sm">
                 <div className="text-secondary">Available</div>
-                <div className="col-span-3">8</div>
+                <div className="col-span-3">{available}</div>
 
                 <div className="text-secondary">Brand</div>
-                <div className="col-span-3">Carhartt</div>
+                <div className="col-span-3">{productBrand}</div>
 
                 <div className="text-secondary">Quality</div>
                 <div className="col-span-3">Excellent</div>
 
+                <div className="text-secondary">Model info</div>
+                <div className="col-span-3">
+                    {typeof productModelInfo === 'string'
+                        ? productModelInfo.split('\n').map((line, i) => <div key={i}>{line}</div>)
+                        : ''}
+                </div>
+
                 <div className="text-secondary">Added on</div>
-                <div className="col-span-3">Date added to store</div>
+                <div className="col-span-3">{addedOn}</div>
                 {product.description && (
                     <>
                         <div className="text-secondary">Description</div>

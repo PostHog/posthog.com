@@ -38,6 +38,15 @@ export function getProductMetafield(product: ShopifyProduct, key: string): Metaf
     return metafield ? metafield.value : undefined
 }
 
+export function getProductMetafieldByNamespace(
+    product: ShopifyProduct,
+    namespace: string,
+    key: string
+): MetafieldValue | undefined {
+    const metafield = product.metafields?.find((m) => m.namespace === namespace && m.key === key)
+    return metafield ? metafield.value : undefined
+}
+
 export function getProductImages(media: ShopifyMediaItem[]): ShopifyMediaImage[] | null {
     if (!media || !Array.isArray(media)) return null
     return media
@@ -88,25 +97,25 @@ const validFormats = new Set([`jpg`, `jpeg`, `png`, `webp`, `auto`])
 
 export function urlBuilder({ width, height, baseUrl, format }: IUrlBuilderArgs<unknown>): string {
     if (!validFormats.has(format)) {
-        console.warn(`${format} is not a valid format. Valid formats are: ${[...validFormats].join(`, `)}`)
+        console.warn(`${format} is not a valid format. Valid formats are: ${Array.from(validFormats).join(`, `)}`)
         format = `auto`
     }
 
-    let [basename, version] = baseUrl.split(`?`)
-
+    let basename,
+        ext = '',
+        suffix = ''
+    const [base, version] = baseUrl.split(`?`)
+    basename = base
     const dot = basename.lastIndexOf(`.`)
-    let ext = ``
     if (dot !== -1) {
         ext = basename.slice(dot + 1)
         basename = basename.slice(0, dot)
     }
-    let suffix = ``
     if (format === ext || format === `auto`) {
         suffix = `.${ext}`
     } else {
         suffix = `.${ext}.${format}`
     }
-
     return `${basename}_${width}x${height}_crop_center${suffix}?${version}`
 }
 
