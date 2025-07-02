@@ -2,11 +2,9 @@
 
 1. Install [`posthog-js`](https://github.com/posthog/posthog-js) using your package manager:
 
-```shell
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
+import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+
+<InstallWebPackageManagers />
 
 2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
 
