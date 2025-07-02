@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { motion, Variants } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import {
@@ -80,6 +80,7 @@ export default function HeaderBar({
     const { openSignIn } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
+    const [animateCartCount, setAnimateCartCount] = useState(false)
     const count = useCartStore((state) => state.count)
     const currentURL = `https://posthog.com${appWindow?.path}`
     const isBookmarked = useMemo(
@@ -87,8 +88,27 @@ export default function HeaderBar({
         [user, appWindow?.path]
     )
 
+    // Animate cart count when it changes
+    useEffect(() => {
+        if (count && count > 0) {
+            setAnimateCartCount(true)
+            const timer = setTimeout(() => {
+                setAnimateCartCount(false)
+            }, 600) // Duration of wiggle animation
+            return () => clearTimeout(timer)
+        }
+    }, [count])
+
     const toggleSearch = () => {
         setSearchOpen(!searchOpen)
+    }
+
+    const handleCartClick = () => {
+        if (isCartOpen) {
+            onCartClose?.()
+        } else {
+            onCartOpen?.()
+        }
     }
 
     const handleBookmark = async (add: boolean) => {
@@ -178,7 +198,12 @@ export default function HeaderBar({
                         {showCart && (
                             <Tooltip
                                 trigger={
-                                    <OSButton variant="ghost" onClick={onCartOpen} className="relative">
+                                    <OSButton
+                                        variant="ghost"
+                                        onClick={handleCartClick}
+                                        className="relative"
+                                        active={isCartOpen}
+                                    >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -191,7 +216,7 @@ export default function HeaderBar({
                                             />
                                         </svg>
                                         {count && count > 0 && (
-                                            <span className="absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold">
+                                            <span className={`absolute -top-1 -right-1 bg-red text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-semibold ${animateCartCount ? 'animate-wiggle' : ''}`}>
                                                 {count}
                                             </span>
                                         )}

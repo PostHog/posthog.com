@@ -3,6 +3,7 @@ import { Select as RadixSelect } from 'radix-ui'
 import { IconCheck, IconChevronDown } from '@posthog/icons'
 import * as NotProductIcons from '../NotProductIcons'
 import * as NewIcons from '@posthog/icons'
+import * as OSIcons from '../OSIcons/Icons'
 
 type SelectItem = {
     value: string
@@ -33,8 +34,8 @@ type SelectProps = {
 
 const Icon = ({ name, className = '', color }: { name?: string; className?: string; color?: string }) => {
     if (!name) return null
-    const Icon = NewIcons[name] || NotProductIcons[name]
-    return Icon ? <Icon className={`${color ? `text-${color}` : ''} ${className}`} /> : null
+    const IconComponent = (NewIcons as any)[name] || (NotProductIcons as any)[name] || (OSIcons as any)[name]
+    return IconComponent ? <IconComponent className={`${color ? `text-${color}` : ''} ${className}`} /> : null
 }
 
 const SelectItem = React.forwardRef(

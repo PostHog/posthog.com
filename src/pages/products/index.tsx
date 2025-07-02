@@ -13,6 +13,31 @@ import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
 import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
 import { IconPresentation } from 'components/OSIcons'
+import { productMenu } from '../../navs'
+
+// Create selectOptions for the address bar
+const selectOptions = [
+    {
+        label: 'Products',
+        items: [
+            { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
+            ...productMenu.children.flatMap((item) => {
+                // Skip items without valid slugs
+                if (!item.slug) return []
+
+                // Add the base product
+                return [
+                    {
+                        value: item.slug,
+                        label: item.name,
+                        icon: item.icon,
+                        color: item.color,
+                    },
+                ]
+            }),
+        ],
+    },
+]
 
 export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
@@ -29,6 +54,7 @@ export default function Products(): JSX.Element {
                 slug="products"
                 title="Products"
                 showTitle={false}
+                selectOptions={selectOptions}
                 // options below only needed to override matching the slug
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
@@ -213,11 +239,10 @@ export default function Products(): JSX.Element {
                                                         {products.map((product) => (
                                                             <ZoomHover
                                                                 key={product.slug}
-                                                                className={`w-28 justify-center ${
-                                                                    product.status == 'WIP'
-                                                                        ? 'opacity-50 hover:opacity-100'
-                                                                        : ''
-                                                                }`}
+                                                                className={`w-28 justify-center ${product.status == 'WIP'
+                                                                    ? 'opacity-50 hover:opacity-100'
+                                                                    : ''
+                                                                    }`}
                                                             >
                                                                 <AppLink
                                                                     label={product.name}

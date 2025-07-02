@@ -1,5 +1,5 @@
 import Layout from 'components/Layout'
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import { Nav } from './Nav'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
@@ -12,7 +12,19 @@ import * as Icons from '@posthog/icons'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
+import { getProductMetafieldByNamespace } from './utils'
+import { IconShop, IconShirt, IconSticker, IconMug, IconCouch } from 'components/OSIcons/Icons'
 
+// Category configuration with icons and display order
+type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
+
+const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number }> = {
+    'all': { label: 'All products', icon: 'IconShop', color: 'blue', order: 1 },
+    'Apparel': { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2 },
+    'Stickers': { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3 },
+    'Goods': { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4 },
+    'Novelty': { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5 },
+}
 
 type CollectionProps = {
     pageContext: CollectionPageContext
@@ -22,9 +34,91 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const { pageContext } = props
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
     const [cartIsOpen, setCartIsOpen] = useState(false)
+    const [selectedCategory, setSelectedCategory] = useState<string>('all')
 
     const products = pageContext.productsForCurrentPage
     const transformedProducts = products?.map((p) => getProduct(p))
+
+    // Extract unique categories from products and create selectOptions
+    const selectOptions = useMemo(() => {
+        const foundCategories = new Set<string>()
+
+        // Always include "all" as the default
+        foundCategories.add('all')
+
+        // Extract categories from products
+        transformedProducts?.forEach((product) => {
+            // Try metafield first (product namespace, category key)
+            const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
+            if (metafieldCategory && typeof metafieldCategory === 'string') {
+                foundCategories.add(metafieldCategory)
+            }
+            // Try the direct search if namespace search fails
+            else {
+                const directCategorySearch = product.metafields?.find(m => m.key === 'category')
+                if (directCategorySearch && typeof directCategorySearch.value === 'string') {
+                    foundCategories.add(directCategorySearch.value)
+                }
+                // Fall back to product.category.name if available
+                else if (product.category?.name) {
+                    foundCategories.add(product.category.name)
+                }
+                // Fall back to product.type if available
+                else if (product.type) {
+                    foundCategories.add(product.type)
+                }
+            }
+        })
+
+        // Filter to only include configured categories and sort by order
+        const categoryList = Array.from(foundCategories)
+            .filter(category => categoryConfig[category as CategoryKey]) // Only include configured categories
+            .sort((a, b) => categoryConfig[a as CategoryKey].order - categoryConfig[b as CategoryKey].order) // Sort by configured order
+
+        return [
+            {
+                label: 'Categories',
+                items: categoryList.map((category) => {
+                    const config = categoryConfig[category as CategoryKey]
+                    return {
+                        value: category,
+                        label: config.label,
+                        icon: config.icon,
+                        color: config.color,
+                    }
+                }),
+            },
+        ]
+    }, [transformedProducts])
+
+    // Filter products based on selected category
+    const filteredProducts = useMemo(() => {
+        if (selectedCategory === 'all') {
+            return transformedProducts
+        }
+
+        return transformedProducts?.filter((product) => {
+            // Try metafield first (product namespace, category key)
+            const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
+            if (metafieldCategory && typeof metafieldCategory === 'string') {
+                return metafieldCategory === selectedCategory
+            }
+            // Try direct search for category key regardless of namespace
+            const directCategorySearch = product.metafields?.find(m => m.key === 'category')
+            if (directCategorySearch && typeof directCategorySearch.value === 'string') {
+                return directCategorySearch.value === selectedCategory
+            }
+            // Fall back to product.category.name
+            if (product.category?.name) {
+                return product.category.name === selectedCategory
+            }
+            // Fall back to product.type
+            if (product.type) {
+                return product.type === selectedCategory
+            }
+            return false
+        })
+    }, [transformedProducts, selectedCategory])
 
     // Product handlers - close cart when product is opened
     const handleProductSelect = (product: any) => {
@@ -48,6 +142,9 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 headerBarOptions={['showBack', 'showForward', 'showSearch', 'showCart']}
                 padding={false}
                 showTitle={false}
+                selectOptions={selectOptions}
+                onCategoryChange={setSelectedCategory}
+                selectedCategory={selectedCategory}
                 cartHandlers={{
                     onCartOpen: handleCartOpen,
                     onCartClose: handleCartClose,
@@ -64,6 +161,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         setIsCart={() => { }} // Not used in sidebar mode
                         onClick={() => { }} // Not used in sidebar mode
                         updateURL={handleProductSelect} // Allow navigation between products
+                        onCartOpen={handleCartOpen} // Allow opening cart from product panel
                         className="!p-4 !pt-4" // Override default padding
                     />
                 )}
@@ -124,7 +222,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                     <div className="@container flex-1 not-prose">
                         <DebugContainerQuery />
                         <ProductGrid
-                            products={transformedProducts}
+                            products={filteredProducts}
                             onProductClick={handleProductSelect}
                             selectedProduct={selectedProduct}
                         />

@@ -73,15 +73,14 @@ function updateCart(variant: ShopifyProductVariant, quantity: number, cartItems:
 
     const productOnCart = cartItems.map((item) => item.shopifyId).includes(cartItem.shopifyId)
 
-    if (!productOnCart) cartItems.push(cartItem)
-    else {
+    if (!productOnCart) {
+        return [...cartItems, cartItem]
+    } else {
         return cartItems.map((item) => {
             if (item.shopifyId === cartItem.shopifyId) return { ...item, count: quantity } as CartItem
             return item
         })
     }
-
-    return cartItems
 }
 
 function removeCart(variantId: string, cartItems: CartItem[]): CartItem[] {

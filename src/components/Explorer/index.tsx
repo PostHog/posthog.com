@@ -9,6 +9,7 @@ import { productMenu } from '../../navs'
 import { Accordion } from '../RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
+import AddressBar from 'components/OSChrome/AddressBar'
 
 interface AccordionItem {
     title: string
@@ -26,6 +27,9 @@ interface ExplorerProps {
     showTitle?: boolean
     padding?: boolean
     headerBarOptions?: string[]
+    selectOptions?: any[]
+    onCategoryChange?: (category: string) => void
+    selectedCategory?: string
     cartHandlers?: {
         onCartOpen: () => void
         onCartClose: () => void
@@ -77,60 +81,26 @@ export default function Explorer({
     showTitle = true,
     padding = true,
     headerBarOptions,
+    selectOptions = [],
+    onCategoryChange,
+    selectedCategory,
     cartHandlers,
     cartContent,
     productHandlers,
     productContent,
 }: ExplorerProps) {
+
     const { appWindow } = useWindow()
-    const currentPath = appWindow?.path?.replace(/^\//, '') // Remove leading slash
-
-    // Get the base product slug (everything before the first slash)
-    const baseSlug = slug.split('/')[0]
-
-    const selectOptions = [
-        {
-            label: 'Products',
-            items: [
-                { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
-                ...productMenu.children.flatMap((item) => {
-                    // Skip items without valid slugs
-                    if (!item.slug) return []
-
-                    // Add the base product
-                    const options = [
-                        {
-                            value: item.slug,
-                            label: item.name,
-                            icon: item.icon,
-                            color: item.color,
-                        },
-                    ]
-
-                    // Add subpage option if this is the current product and we're on a subpage
-                    if (
-                        template === 'product' &&
-                        item.slug === baseSlug &&
-                        title &&
-                        currentPath !== item.slug &&
-                        currentPath
-                    ) {
-                        options.push({
-                            value: currentPath,
-                            label: `${item.name} → ${title}`,
-                            icon: item.icon,
-                            color: item.color,
-                        })
-                    }
-
-                    return options
-                }),
-            ],
-        },
-    ]
+    const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
 
     const handleValueChange = (value: string) => {
-        navigate(`/${value}`)
+        if (onCategoryChange) {
+            // Use custom category change handler for filtering
+            onCategoryChange(value)
+        } else {
+            // Fall back to navigation for regular cases
+            navigate(`/${value}`)
+        }
     }
 
     // Generate dynamic HeaderBar props based on headerBarOptions
@@ -164,26 +134,15 @@ export default function Explorer({
             {!fullScreen && (
                 <>
                     <HeaderBar {...getHeaderBarProps()} />
-                    <div data-scheme="secondary" className="bg-primary px-2 pb-2 border-b border-primary">
-                        <Select
-                            groups={selectOptions}
-                            placeholder="Select..."
-                            ariaLabel="Products"
-                            defaultValue={currentPath}
-                            onValueChange={handleValueChange}
-                            className="w-full"
-                            dataScheme="primary"
-                        />
-                    </div>
+                    <AddressBar selectOptions={selectOptions} currentPath={currentPath} handleValueChange={handleValueChange} selectedCategory={selectedCategory} />
                 </>
             )}
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
-                        fullScreen ? 'border-t border-primary' : ''
-                    }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''
+                        }`}
                 >
                     {(productHandlers?.selectedProduct || cartHandlers?.isCartOpen) && (
                         <aside
@@ -236,9 +195,8 @@ export default function Explorer({
                                     </div>
                                 )}
                                 <div
-                                    className={`${getProseClasses()} max-w-none h-full ${
-                                        padding ? 'relative p-4' : ''
-                                    }`}
+                                    className={`${getProseClasses()} max-w-none h-full ${padding ? 'relative p-4' : ''
+                                        }`}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}

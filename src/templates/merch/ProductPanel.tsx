@@ -22,12 +22,14 @@ type ProductPanelProps = {
     setIsCart: React.Dispatch<React.SetStateAction<boolean>>
     onClick: () => void
     updateURL: (product: ShopifyProduct) => void
+    onCartOpen?: () => void
 }
 
 export function ProductPanel(props: ProductPanelProps): React.ReactElement {
-    const { className, product, setIsCart, updateURL } = props
+    const { className, product, setIsCart, updateURL, onCartOpen } = props
 
     const [isAdding, setIsAdding] = useState<boolean>(false)
+    const [justAdded, setJustAdded] = useState<boolean>(false)
     const [quantity, setQuantity] = useState<number>(1)
     const addToCart = useCartStore((state) => state.update)
 
@@ -77,7 +79,17 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             addToCart(cartItem, quantity)
             setIsCart(true)
             setIsAdding(false)
+            setJustAdded(true)
+            // Hide the message after 5 seconds
+            setTimeout(() => {
+                setJustAdded(false)
+            }, 5000)
         }, 500)
+    }
+
+    const handleGoToCart = () => {
+        onCartOpen?.()
+        setJustAdded(false)
     }
 
     const classes = cn('p-8 pt-20 relative space-y-4 overflow-y-auto', className)
@@ -181,6 +193,17 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             </CallToAction>
 
             {!loading && outOfStock && <BackInStockForm variant={variantForCart} product={product} />}
+
+            {justAdded && !outOfStock && (
+                <div className="text-center py-2">
+                    <button
+                        onClick={handleGoToCart}
+                        className="text-red dark:text-yellow font-semibold hover:underline text-sm"
+                    >
+                        Go to cart →
+                    </button>
+                </div>
+            )}
 
             <div className="grid grid-cols-4 gap-y-1 gap-x-2 text-sm">
                 <div className="text-secondary">Available</div>
