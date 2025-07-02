@@ -18,12 +18,12 @@ import { IconShop, IconShirt, IconSticker, IconMug, IconCouch } from 'components
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
 
-const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number }> = {
-    'all': { label: 'All products', icon: 'IconShop', color: 'blue', order: 1 },
-    'Apparel': { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2 },
-    'Stickers': { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3 },
-    'Goods': { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4 },
-    'Novelty': { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5 },
+const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number; slug: string }> = {
+    'all': { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
+    'Apparel': { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
+    'Stickers': { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
+    'Goods': { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
+    'Novelty': { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
 }
 
 type CollectionProps = {
@@ -35,14 +35,17 @@ function getProductFromHandle(products: any[], handle: string) {
     return products.find((p) => p.handle === handle) || null
 }
 
+
+
 // Helper function to update URL without triggering navigation
-function updateURL(params: { product?: string; state?: string }) {
+function updateURL(params: { product?: string; state?: string; category?: string }) {
     if (typeof window !== 'undefined') {
         const url = new URL(window.location.href)
 
         // Clear existing params
         url.searchParams.delete('product')
         url.searchParams.delete('state')
+        url.searchParams.delete('category')
 
         // Set new params
         if (params.product) {
@@ -50,6 +53,9 @@ function updateURL(params: { product?: string; state?: string }) {
         }
         if (params.state) {
             url.searchParams.set('state', params.state)
+        }
+        if (params.category && params.category !== 'all') {
+            url.searchParams.set('category', categoryConfig[params.category as CategoryKey]?.slug || params.category.toLowerCase())
         }
 
         window.history.pushState({}, '', url.toString())
@@ -72,6 +78,18 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             const urlParams = new URLSearchParams(window.location.search)
             const productHandle = urlParams.get('product')
             const state = urlParams.get('state')
+            const category = urlParams.get('category')
+
+            // Handle category parameter
+            if (category) {
+                // Find the category key that matches the slug
+                const properCategory = Object.entries(categoryConfig).find(([key, config]) =>
+                    config.slug === category.toLowerCase()
+                )?.[0]
+                if (properCategory && categoryConfig[properCategory as CategoryKey]) {
+                    setSelectedCategory(properCategory)
+                }
+            }
 
             if (productHandle) {
                 const product = getProductFromHandle(transformedProducts, productHandle)
@@ -88,18 +106,18 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         }
     }, [transformedProducts, hasInitialized])
 
-    // Update URL when selectedProduct or cartIsOpen changes (only after initialization)
+    // Update URL when selectedProduct, cartIsOpen, or selectedCategory changes (only after initialization)
     useEffect(() => {
         if (typeof window !== 'undefined' && hasInitialized) {
             if (selectedProduct) {
-                updateURL({ product: selectedProduct.handle })
+                updateURL({ product: selectedProduct.handle, category: selectedCategory })
             } else if (cartIsOpen) {
-                updateURL({ state: 'cart' })
+                updateURL({ state: 'cart', category: selectedCategory })
             } else {
-                updateURL({})
+                updateURL({ category: selectedCategory })
             }
         }
-    }, [selectedProduct, cartIsOpen, hasInitialized])
+    }, [selectedProduct, cartIsOpen, selectedCategory, hasInitialized])
 
     // Extract unique categories from products and create selectOptions
     const selectOptions = useMemo(() => {
