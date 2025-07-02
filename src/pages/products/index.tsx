@@ -60,7 +60,7 @@ export default function Products(): JSX.Element {
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
 
-                sidebarContent={[
+                leftSidebarContent={[
                     {
                         title: 'About PostHog',
                         content: (
@@ -239,10 +239,11 @@ export default function Products(): JSX.Element {
                                                         {products.map((product) => (
                                                             <ZoomHover
                                                                 key={product.slug}
-                                                                className={`w-28 justify-center ${product.status == 'WIP'
-                                                                    ? 'opacity-50 hover:opacity-100'
-                                                                    : ''
-                                                                    }`}
+                                                                className={`w-28 justify-center ${
+                                                                    product.status == 'WIP'
+                                                                        ? 'opacity-50 hover:opacity-100'
+                                                                        : ''
+                                                                }`}
                                                             >
                                                                 <AppLink
                                                                     label={product.name}

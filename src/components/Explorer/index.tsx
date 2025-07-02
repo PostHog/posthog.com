@@ -21,7 +21,8 @@ interface ExplorerProps {
     slug: string
     title?: string
     accentImage?: React.ReactNode
-    sidebarContent?: React.ReactNode | AccordionItem[]
+    leftSidebarContent?: React.ReactNode | AccordionItem[]
+    rightSidebarContent?: React.ReactNode | AccordionItem[]
     children?: React.ReactNode
     fullScreen?: boolean
     showTitle?: boolean
@@ -35,12 +36,6 @@ interface ExplorerProps {
         onCartClose: () => void
         isCartOpen: boolean
     }
-    cartContent?: React.ReactNode
-    productHandlers?: {
-        onProductClose: () => void
-        selectedProduct: any
-    }
-    productContent?: React.ReactNode
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -75,7 +70,8 @@ export default function Explorer({
     slug,
     title,
     accentImage,
-    sidebarContent,
+    leftSidebarContent,
+    rightSidebarContent,
     children,
     fullScreen = false,
     showTitle = true,
@@ -85,11 +81,7 @@ export default function Explorer({
     onCategoryChange,
     selectedCategory,
     cartHandlers,
-    cartContent,
-    productHandlers,
-    productContent,
 }: ExplorerProps) {
-
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
 
@@ -134,43 +126,30 @@ export default function Explorer({
             {!fullScreen && (
                 <>
                     <HeaderBar {...getHeaderBarProps()} />
-                    <AddressBar selectOptions={selectOptions} currentPath={currentPath} handleValueChange={handleValueChange} selectedCategory={selectedCategory} />
+                    <AddressBar
+                        selectOptions={selectOptions}
+                        currentPath={currentPath}
+                        handleValueChange={handleValueChange}
+                        selectedCategory={selectedCategory}
+                    />
                 </>
             )}
             {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
-                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''
-                        }`}
+                    className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${
+                        fullScreen ? 'border-t border-primary' : ''
+                    }`}
                 >
-                    {(productHandlers?.selectedProduct || cartHandlers?.isCartOpen) && (
+                    {rightSidebarContent && (
                         <aside
                             data-scheme="secondary"
                             className="not-prose w-96 bg-primary border-l border-primary h-full text-primary"
                         >
                             <div className="h-full flex flex-col">
-                                {/* 
-                                <div className="flex items-center justify-between p-4 border-b border-primary">
-                                    <h3 className="font-semibold text-lg">
-                                        {productHandlers?.selectedProduct
-                                            ? productHandlers.selectedProduct.title
-                                            : 'Cart'}
-                                    </h3>
-                                    <button
-                                        onClick={
-                                            productHandlers?.selectedProduct
-                                                ? productHandlers?.onProductClose
-                                                : cartHandlers?.onCartClose
-                                        }
-                                        className="text-primary hover:text-red transition-colors text-xl"
-                                    >
-                                        ×
-                                    </button>
-                                </div>
-                                 */}
                                 <div className="flex-1 overflow-auto">
-                                    {productHandlers?.selectedProduct ? productContent : cartContent}
+                                    <SidebarContent content={rightSidebarContent} />
                                 </div>
                             </div>
                         </aside>
@@ -195,8 +174,9 @@ export default function Explorer({
                                     </div>
                                 )}
                                 <div
-                                    className={`${getProseClasses()} max-w-none h-full ${padding ? 'relative p-4' : ''
-                                        }`}
+                                    className={`${getProseClasses()} max-w-none h-full ${
+                                        padding ? 'relative p-4' : ''
+                                    }`}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
                                     {children}
@@ -204,11 +184,11 @@ export default function Explorer({
                             </ScrollArea>
                         )}
                     </main>
-                    {sidebarContent && (
+                    {leftSidebarContent && (
                         <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
-                                    <SidebarContent content={sidebarContent} />
+                                    <SidebarContent content={leftSidebarContent} />
                                 </div>
                             </ScrollArea>
                         </aside>

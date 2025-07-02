@@ -45,7 +45,7 @@ export default function ProductAnalytics(): JSX.Element {
                     'roadmap',
                     'changelog',
                 ]}
-                sidebarContent={<ProductSidebar type="product_analytics" />}
+                leftSidebarContent={<ProductSidebar type="product_analytics" />}
             >
                 <p className="max-w-lg">
                     PostHog is the only product analytics platform built to natively work with{' '}
