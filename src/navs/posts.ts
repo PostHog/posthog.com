@@ -128,7 +128,7 @@ export const postsMenu: IMenu[] = [
     },
     {
         name: 'Blog',
-        url: '/blog',
+        url: 'https://posthog.com/blog',
         icon: 'IconNewspaper',
         color: 'teal',
         children: [
