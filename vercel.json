@@ -630,6 +630,8 @@
         { "source": "/docs/product-analytics/hogql", "destination": "/docs/hogql" },
         { "source": "/docs/hogql/guide", "destination": "/docs/product-analytics/sql" },
         { "source": "/docs/hogql/:path*", "destination": "/docs/sql/:path*" },
+        { "source": "/docs/product-analytics/sql", "destination": "/docs/data-warehouse/sql" },
+        { "source": "/docs/sql/variables", "destination": "/docs/data-warehouse/sql/variables" },
         { "source": "/manual/toolbar", "destination": "/docs/toolbar" },
         { "source": "/docs/product-analytics/toolbar", "destination": "/docs/toolbar" },
         { "source": "/manual/application-settings", "destination": "/docs/data/application-settings" },

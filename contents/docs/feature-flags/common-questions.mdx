@@ -156,7 +156,7 @@ This applies to both boolean and multivariate flags. Multivariate flags assign u
 
 ## How are feature flags billed?
 
-Feature flags are charged based requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
+Feature flags are charged based on requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation.
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
 

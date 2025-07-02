@@ -53,6 +53,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/mysql',
                 },
                 {
+                    name: 'MongoDB',
+                    url: '/docs/cdp/sources/mongodb',
+                },
+                {
                     name: 'Azure SQL Server',
                     url: '/docs/cdp/sources/azure-db',
                 },
@@ -75,6 +79,18 @@ export const dataPipelines = {
                 {
                     name: 'Google Ads',
                     url: '/docs/cdp/sources/google-ads',
+                },
+                {
+                    name: 'Google Sheets',
+                    url: '/docs/cdp/sources/google-sheets',
+                },
+                {
+                    name: 'Temporal.io',
+                    url: '/docs/cdp/sources/temporal',
+                },
+                {
+                    name: 'DoIt',
+                    url: '/docs/cdp/sources/doit',
                 },
                 {
                     name: 'Self-managed',
@@ -1212,10 +1228,6 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
-                name: 'Building new products fast',
-                url: '/handbook/product/building-new-products-fast',
-            },
-            {
                 name: 'Product manager role',
                 url: '/handbook/product/product-manager-role',
             },
@@ -1280,21 +1292,25 @@ export const handbookSidebar = [
                 url: '/handbook/growth/sales/expansion-and-retention',
                 children: [
                     {
-                    name: 'Account planning',
-                    url: '/handbook/growth/sales/account-planning',
+                        name: 'Account planning',
+                        url: '/handbook/growth/sales/account-planning',
                     },
                 ],
             },
 
             {
+                name: 'Utilization by business type',
+                url: '/handbook/growth/sales/utilization-by-business-type',
+            },
+            {
                 name: 'How we work',
                 url: '/handbook/growth/sales/how-we-work',
                 children: [
                     {
-                    name: 'New team member onboarding',
-                    url: '/handbook/growth/sales/new-hire-onboarding',
+                        name: 'New team member onboarding',
+                        url: '/handbook/growth/sales/new-hire-onboarding',
                     },
-                ],  
+                ],
             },
 
             {
@@ -2392,10 +2408,6 @@ export const docsMenu = {
                                     url: '/docs/sql/aggregations',
                                 },
                                 {
-                                    name: 'Variables',
-                                    url: '/docs/sql/variables',
-                                },
-                                {
                                     name: 'Tutorials',
                                     url: '/docs/sql/tutorials',
                                 },
@@ -2878,8 +2890,8 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
-                    name: 'SQL insights',
-                    url: '/docs/product-analytics/sql',
+                    name: 'SQL',
+                    url: 'https://posthog.com/docs/data-warehouse/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
                 },
@@ -3560,9 +3572,46 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Tutorials and guides',
+                    url: '/docs/data-warehouse/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
+                },
+                {
+                    name: 'SQL editor',
+                },
+                {
+                    name: 'SQL editor',
+                    url: '/docs/data-warehouse/sql',
+                    icon: 'IconCode',
+                    color: 'purple',
+                },
+                {
+                    name: 'Accessing data',
+                    url: '/docs/data-warehouse/sql/data-access',
+                    icon: 'IconDatabase',
+                    color: 'salmon',
+                },
+                {
+                    name: 'Useful functions',
+                    url: '/docs/data-warehouse/sql/useful-functions',
+                    icon: 'IconStar',
+                    color: 'yellow',
+                },
+                {
+                    name: 'Variables',
+                    url: '/docs/data-warehouse/sql/variables',
+                    icon: 'IconGear',
+                    color: 'seagreen',
+                },
+                {
+                    name: 'Features',
+                },
+                {
                     name: 'Creating insights from sources',
                     url: '/docs/data-warehouse/query',
-                    icon: 'IconHogQL',
+                    icon: 'IconGraph',
                     color: 'purple',
                 },
                 {
@@ -3584,13 +3633,6 @@ export const docsMenu = {
                     url: '/docs/data-warehouse/under-the-hood',
                     icon: 'IconMagicWand',
                     color: 'seagreen',
-                    featured: true,
-                },
-                {
-                    name: 'Tutorials and guides',
-                    url: '/docs/data-warehouse/tutorials',
-                    icon: 'IconGraduationCap',
-                    color: 'blue',
                     featured: true,
                 },
             ],
