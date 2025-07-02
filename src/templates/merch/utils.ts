@@ -131,3 +131,10 @@ export function getShopifyImage({ image, ...args }: any): IGatsbyImageData {
         formats: [`auto`],
     })
 }
+
+export function getDisplayTitle(product: ShopifyProduct): string {
+    const productName = getProductMetafield(product, 'name')
+    const productExtension = getProductMetafield(product, 'extension')
+
+    return productName && productExtension ? `${productName}.${productExtension}` : product.title
+}

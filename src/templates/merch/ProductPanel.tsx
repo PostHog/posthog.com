@@ -10,7 +10,7 @@ import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
-import { getProductMetafield, getProductMetafieldByNamespace } from './utils'
+import { getProductMetafield, getProductMetafieldByNamespace, getDisplayTitle } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
@@ -105,14 +105,8 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                 <ProductCarousel product={product} />
             </div>
             <div className="space-y-0.5 text-center">
-                <h3 className="text-base leading-snug">
-                    {product.title}
-                </h3>
-                <p>
-                    {productName}
-                    <span className="text-secondary">.{productExtension}</span>
-                </p>
-                <p className="leading-tight">{subtitle}</p>
+                <h3 className="text-base leading-snug">{getDisplayTitle(product)}</h3>
+                <p className="leading-tight text-sm">{subtitle}</p>
             </div>
 
             {loading && (
@@ -141,7 +135,9 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
 
             <SizeGuide title={product.title} />
 
-            <Quantity value={quantity} onChange={setQuantity} disabled={productKit} />
+            <div className="hidden">
+                <Quantity value={quantity} onChange={setQuantity} disabled={productKit} />
+            </div>
 
             <CallToAction
                 disabled={loading || outOfStock}

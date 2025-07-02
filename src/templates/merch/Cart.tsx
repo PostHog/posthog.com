@@ -25,14 +25,14 @@ export function Cart(props: CartProps): React.ReactElement {
     return (
         <div className={classes}>
             {isEmpty && (
-                <div className="border border-primary bg-tan dark:bg-dark rounded p-2 text-center flex flex-col gap-8">
-                    <p className="font-medium mb-0">This cart would look better with something in it.</p>
+                <div className="border border-primary bg-tan dark:bg-dark rounded p-4 text-center flex flex-col gap-2">
                     <div className="w-48 mx-auto">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/shopahogic.png"
                             alt="Empty cart"
                         />
                     </div>
+                    <p className="font-medium mb-0 text-balance">This cart would look better with something in it...</p>
                 </div>
             )}
 
