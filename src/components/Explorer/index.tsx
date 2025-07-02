@@ -32,6 +32,11 @@ interface ExplorerProps {
         isCartOpen: boolean
     }
     cartContent?: React.ReactNode
+    productHandlers?: {
+        onProductClose: () => void
+        selectedProduct: any
+    }
+    productContent?: React.ReactNode
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -74,6 +79,8 @@ export default function Explorer({
     headerBarOptions,
     cartHandlers,
     cartContent,
+    productHandlers,
+    productContent,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') // Remove leading slash
@@ -177,20 +184,22 @@ export default function Explorer({
                     className={`flex flex-col @3xl:flex-row-reverse flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''
                         }`}
                 >
-                    {cartHandlers?.isCartOpen && (
+                    {(productHandlers?.selectedProduct || cartHandlers?.isCartOpen) && (
                         <aside data-scheme="secondary" className="not-prose w-96 bg-primary border-l border-primary h-full">
                             <div className="h-full flex flex-col">
                                 <div className="flex items-center justify-between p-4 border-b border-primary">
-                                    <h3 className="font-semibold text-lg">Cart</h3>
+                                    <h3 className="font-semibold text-lg">
+                                        {productHandlers?.selectedProduct ? 'Product Details' : 'Cart'}
+                                    </h3>
                                     <button
-                                        onClick={cartHandlers?.onCartClose}
+                                        onClick={productHandlers?.selectedProduct ? productHandlers?.onProductClose : cartHandlers?.onCartClose}
                                         className="text-primary hover:text-red transition-colors text-xl"
                                     >
                                         ×
                                     </button>
                                 </div>
                                 <div className="flex-1 overflow-hidden">
-                                    {cartContent}
+                                    {productHandlers?.selectedProduct ? productContent : cartContent}
                                 </div>
                             </div>
                         </aside>

@@ -54,6 +54,19 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                     isCartOpen: cartIsOpen
                 }}
                 cartContent={<Cart className="h-full overflow-y-auto" />}
+                productHandlers={{
+                    onProductClose: handleProductClose,
+                    selectedProduct: selectedProduct
+                }}
+                productContent={selectedProduct && (
+                    <ProductPanel
+                        product={selectedProduct}
+                        setIsCart={() => { }} // Not used in sidebar mode
+                        onClick={() => { }} // Not used in sidebar mode
+                        updateURL={handleProductSelect} // Allow navigation between products
+                        className="!p-4 !pt-4" // Override default padding
+                    />
+                )}
                 sidebarContent={[
                     {
                         title: 'About PostHog',
@@ -160,30 +173,6 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                             selectedProduct={selectedProduct}
                         />
                     </div>
-                    {selectedProduct && (
-                        <aside className="not-prose w-96 bg-accent border-l border-primary">
-                            <div className="h-full flex flex-col">
-                                <div className="flex items-center justify-between p-4 border-b border-primary">
-                                    <h3 className="font-semibold text-lg">Product Details</h3>
-                                    <button
-                                        onClick={handleProductClose}
-                                        className="text-primary hover:text-red transition-colors text-xl"
-                                    >
-                                        ×
-                                    </button>
-                                </div>
-                                <div className="flex-1 overflow-hidden">
-                                    <ProductPanel
-                                        product={selectedProduct}
-                                        setIsCart={() => { }} // Not used in sidebar mode
-                                        onClick={() => { }} // Not used in sidebar mode
-                                        updateURL={handleProductSelect} // Allow navigation between products
-                                        className="!p-4 !pt-4" // Override default padding
-                                    />
-                                </div>
-                            </div>
-                        </aside>
-                    )}
                 </div>
             </Explorer>
         </>
