@@ -31,6 +31,7 @@ import {
     CAN_UNDO_COMMAND,
 } from 'lexical'
 import { mergeRegister } from '@lexical/utils'
+import { navigate } from 'gatsby'
 
 export default function MDXEditor({
     body,
@@ -95,6 +96,18 @@ export default function MDXEditor({
         }
     }, [activeEditor])
 
+    useEffect(() => {
+        const handleLinkClick = (event: MouseEvent) => {
+            const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
+            if (href) {
+                navigate(href, { state: { newWindow: true } })
+            }
+        }
+
+        document.addEventListener('click', handleLinkClick, true)
+        return () => document.removeEventListener('click', handleLinkClick, true)
+    }, [])
+
     return (
         <Editor
             type="mdx"
@@ -136,6 +149,9 @@ export default function MDXEditor({
             <MDXEditorComponent
                 contentEditableClassName="outline-none"
                 markdown={body}
+                lexicalTheme={{
+                    link: 'mdx-editor-link cursor-pointer',
+                }}
                 plugins={[
                     headingsPlugin(),
                     frontmatterPlugin(),
