@@ -4,7 +4,6 @@ import React, { useEffect, useState } from 'react'
 import Tooltip from 'components/Tooltip'
 import { useLayoutData } from 'components/Layout/hooks'
 import { useLocation } from '@reach/router'
-import { useFeatureFlagVariantKey } from 'posthog-js/react'
 
 const UrsulaCookieBanner = ({
     handleClick,
@@ -107,7 +106,7 @@ export default function CookieBanner() {
     const { internalMenu } = useLayoutData()
     const [consentGiven, setConsentGiven] = useState('')
     const { pathname, state } = useLocation()
-    const paidAdsCookieBannerExperimentVariant = useFeatureFlagVariantKey('show-bottom-bar-cookie-banner')
+    const paidAdsCookieBannerExperimentVariant = posthog?.getFeatureFlag('show-bottom-bar-cookie-banner')
 
     const handleClick = (accept: boolean) => {
         localStorage.setItem('cookie_consent', accept ? 'yes' : 'no')
