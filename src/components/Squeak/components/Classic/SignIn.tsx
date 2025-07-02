@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import { CallToAction } from 'components/CallToAction'
 import { useApp } from '../../../../context/App'
 import { useWindow } from '../../../../context/Window'
-import { useUser } from '../../../../hooks/useUser'
+import { User, useUser } from '../../../../hooks/useUser'
 import Wizard from 'components/Wizard'
 
 import SecurityHog from '../../../../images/security-hog.png'
@@ -44,7 +44,11 @@ const errorMessages: Record<string, string> = {
     'Invalid identifier or password': 'Invalid email or password',
 }
 
-const SignInForm: React.FC = () => {
+interface SignInFormProps {
+    onSuccess?: (user: User) => void
+}
+
+const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
     const { login } = useUser()
     const { setWindowTitle, closeWindow, openRegister, openForgotPassword } = useApp()
     const { appWindow } = useWindow()
@@ -77,7 +81,10 @@ const SignInForm: React.FC = () => {
             } else if ('error' in user) {
                 setErrorMessage(errorMessages[user?.error] || user?.error)
             } else {
-                closeWindow(appWindow)
+                onSuccess?.(user)
+                if (appWindow) {
+                    closeWindow(appWindow)
+                }
             }
         },
     })

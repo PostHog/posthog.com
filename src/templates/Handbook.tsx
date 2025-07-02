@@ -204,6 +204,7 @@ export default function Handbook({
                 commits={commits}
                 filePath={post.parent?.relativePath}
                 homeURL={breadcrumbBase.url}
+                description={seo?.metaDescription || excerpt}
             />
         </>
     )

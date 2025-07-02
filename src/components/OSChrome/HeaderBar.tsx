@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { motion, Variants } from 'framer-motion'
 import OSButton from 'components/OSButton'
 import {
@@ -18,6 +18,10 @@ import { useWindow } from '../../context/Window'
 import SearchBar from 'components/Editor/SearchBar'
 import Tooltip from 'components/RadixUI/Tooltip'
 import Toast from 'components/RadixUI/Toast'
+import { useUser } from 'hooks/useUser'
+import { useApp } from '../../context/App'
+import { useToast } from '../../context/Toast'
+import Link from 'components/Link'
 
 interface HeaderBarProps {
     isNavVisible?: boolean
@@ -27,7 +31,6 @@ interface HeaderBarProps {
     showBack?: boolean
     showForward?: boolean
     showSearch?: boolean
-    showBookmark?: boolean
     showToc?: boolean
     showSidebar?: boolean
     hasLeftSidebar?: boolean
@@ -36,6 +39,11 @@ interface HeaderBarProps {
     rightActionButtons?: React.ReactNode
     searchContentRef?: React.RefObject<HTMLElement>
     homeURL?: string
+    bookmark?: {
+        title: string
+        description: string
+    }
+    onSearch?: (search: string) => void
 }
 
 export default function HeaderBar({
@@ -46,7 +54,6 @@ export default function HeaderBar({
     showBack = false,
     showForward = false,
     showSearch = false,
-    showBookmark = false,
     showToc = false,
     showSidebar = false,
     hasLeftSidebar = false,
@@ -55,21 +62,57 @@ export default function HeaderBar({
     rightActionButtons,
     searchContentRef,
     homeURL,
+    bookmark,
+    onSearch,
 }: HeaderBarProps) {
-    const { goBack, goForward, canGoBack, canGoForward } = useWindow()
+    const { user, addBookmark, removeBookmark } = useUser()
+    const { addToast } = useToast()
+    const { openSignIn } = useApp()
+    const { goBack, goForward, canGoBack, canGoForward, appWindow } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
-    const [isBookmarked, setIsBookmarked] = useState(false)
+    const currentURL = `https://posthog.com${appWindow?.path}`
+    const isBookmarked = useMemo(
+        () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === currentURL),
+        [user, appWindow?.path]
+    )
 
     const toggleSearch = () => {
         setSearchOpen(!searchOpen)
     }
 
-    const handleBookmark = () => {
-        setIsBookmarked(!isBookmarked)
-    }
+    const handleBookmark = async (add: boolean) => {
+        if (!user) {
+            openSignIn()
+            return
+        }
 
-    const handleUndo = () => {
-        setIsBookmarked(!isBookmarked)
+        if (bookmark) {
+            if (add) {
+                await addBookmark({ ...bookmark, url: currentURL })
+                addToast({
+                    title: 'Bookmark added',
+                    description: (
+                        <>
+                            This page has been added to your{' '}
+                            <Link to="/bookmarks" className="text-red dark:text-yellow font-bold">
+                                bookmarks
+                            </Link>
+                            .
+                        </>
+                    ),
+                    onUndo: () => {
+                        handleBookmark(false)
+                    },
+                })
+            } else {
+                await removeBookmark({ url: currentURL })
+                addToast({
+                    title: 'Bookmark removed',
+                    description: 'This page has been removed from your bookmarks.',
+                    onUndo: () => handleBookmark(true),
+                })
+            }
+        }
     }
 
     return (
@@ -109,38 +152,30 @@ export default function HeaderBar({
                 </div>
                 <div className="flex items-center gap-px relative">
                     {rightActionButtons}
-                    {showSearch && searchContentRef && (
+                    {showSearch && (searchContentRef || onSearch) && (
                         <Tooltip trigger={<OSButton variant="ghost" icon={<IconSearch />} onClick={toggleSearch} />}>
                             Search this page
                         </Tooltip>
                     )}
-                    {showBookmark && (
-                        <Toast
-                            description={() =>
-                                !isBookmarked
-                                    ? 'This page has been saved to your bookmarks.'
-                                    : 'This page has been removed from your bookmarks.'
+                    {bookmark?.title && bookmark?.description && (
+                        <Tooltip
+                            trigger={
+                                <OSButton
+                                    variant="ghost"
+                                    icon={isBookmarked ? <IconBookmarkSolid /> : <IconBookmark />}
+                                    onClick={() => handleBookmark(!isBookmarked)}
+                                />
                             }
-                            onUndo={handleUndo}
                         >
-                            <Tooltip
-                                trigger={
-                                    <OSButton
-                                        variant="ghost"
-                                        icon={isBookmarked ? <IconBookmarkSolid /> : <IconBookmark />}
-                                        onClick={handleBookmark}
-                                    />
-                                }
-                            >
-                                {isBookmarked ? 'Remove from bookmarks' : 'Bookmark this page'}
-                            </Tooltip>
-                        </Toast>
+                            {isBookmarked ? 'Remove from bookmarks' : 'Bookmark this page'}
+                        </Tooltip>
                     )}
-                    {showSearch && searchContentRef && (
+                    {showSearch && (searchContentRef || onSearch) && (
                         <SearchBar
                             contentRef={searchContentRef}
                             visible={searchOpen}
                             onClose={toggleSearch}
+                            onSearch={onSearch}
                             dataScheme="secondary"
                             className="-bottom-2 right-4 translate-y-full bg-primary"
                         />

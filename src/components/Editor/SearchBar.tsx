@@ -8,9 +8,10 @@ import debounce from 'lodash/debounce'
 interface SearchBarProps {
     visible: boolean
     onClose: () => void
-    contentRef: React.RefObject<HTMLElement>
+    contentRef?: React.RefObject<HTMLElement>
     className?: string
     dataScheme?: string
+    onSearch?: (search: string) => void
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -19,6 +20,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     contentRef,
     className,
     dataScheme = 'primary',
+    onSearch,
 }) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
@@ -32,6 +34,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
     // Reset when closing
     useEffect(() => {
+        if (!contentRef?.current) return
         if (!visible) {
             setInputValue('')
             if (duplicateContainerRef.current) {
@@ -44,7 +47,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }, [visible])
 
     const createDuplicateForHighlighting = () => {
-        if (!contentRef.current) return
+        if (!contentRef?.current) return
 
         if (duplicateContainerRef.current) {
             duplicateContainerRef.current.remove()
@@ -80,6 +83,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value
         setInputValue(value)
+        onSearch?.(value)
     }
 
     // Update the global search state after a brief delay (debounce)

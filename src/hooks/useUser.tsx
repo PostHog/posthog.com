@@ -61,6 +61,8 @@ type UserContextValue = {
     setNotifications: any
     isValidating: boolean
     voteReply: (id: number, vote: 'up' | 'down', user?: User) => Promise<void>
+    addBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
+    removeBookmark: (args: { url: string }) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -85,6 +87,8 @@ export const UserContext = createContext<UserContextValue>({
     setNotifications: () => undefined,
     isValidating: true,
     voteReply: async () => undefined,
+    addBookmark: async () => undefined,
+    removeBookmark: async () => undefined,
 })
 
 type UserProviderProps = {
@@ -323,6 +327,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                                     },
                                 },
                             },
+                            bookmarks: true,
                         },
                     },
                     role: {
@@ -572,6 +577,44 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         })
     }
 
+    const addBookmark = async ({ url, title, description }: { url: string; title: string; description: string }) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    bookmarks: [...(user?.profile?.bookmarks || []), { url, title, description }],
+                },
+            }),
+        })
+        fetchUser()
+    }
+
+    const removeBookmark = async ({ url }: { url: string }) => {
+        const profileID = user?.profile?.id
+        if (!profileID) return
+        const jwt = await getJwt()
+        await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${profileID}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${jwt}`,
+            },
+            body: JSON.stringify({
+                data: {
+                    bookmarks: user?.profile?.bookmarks?.filter((b) => b.url !== url),
+                },
+            }),
+        })
+        fetchUser()
+    }
+
     useEffect(() => {
         localStorage.setItem('user', JSON.stringify(user))
     }, [user])
@@ -594,6 +637,8 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         setNotifications: updateNotifications,
         isValidating,
         voteReply,
+        addBookmark,
+        removeBookmark,
     }
 
     return <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>

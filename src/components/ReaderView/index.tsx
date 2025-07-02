@@ -54,6 +54,7 @@ interface ReaderViewProps {
     padding?: boolean
     proseSize?: 'sm' | 'base' | 'lg'
     homeURL?: string
+    description?: string
 }
 
 interface BackgroundImageOption {
@@ -302,6 +303,7 @@ export default function ReaderView({
     padding = true,
     proseSize = 'sm',
     homeURL,
+    description,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -317,6 +319,7 @@ export default function ReaderView({
                 padding={padding}
                 proseSize={proseSize}
                 homeURL={homeURL}
+                description={description}
             >
                 {children}
             </ReaderViewContent>
@@ -410,6 +413,7 @@ function ReaderViewContent({
     padding = true,
     proseSize,
     homeURL,
+    description,
 }) {
     const { appWindow } = useWindow()
     const { hash, pathname } = useLocation()
@@ -471,12 +475,15 @@ function ReaderViewContent({
                     showBack
                     showForward
                     showSearch
-                    showBookmark
                     showToc
                     showSidebar={showSidebar}
                     hasLeftSidebar={renderLeftSidebar}
                     searchContentRef={contentRef}
                     homeURL={homeURL}
+                    bookmark={{
+                        title,
+                        description,
+                    }}
                 />
                 {/* Second row - Main Content */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">

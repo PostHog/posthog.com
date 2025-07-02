@@ -6,6 +6,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
+import { User } from 'hooks/useUser'
 
 type WindowElement = React.ReactNode & {
     key: string
@@ -52,7 +53,7 @@ interface AppContextType {
     handleSnapToSide: (side: 'left' | 'right') => void
     constraintsRef: React.RefObject<HTMLDivElement>
     expandWindow: () => void
-    openSignIn: () => void
+    openSignIn: (onSuccess?: (user: User) => void) => void
     openRegister: () => void
     openForgotPassword: () => void
     siteSettings: SiteSettings
@@ -95,7 +96,7 @@ export const Context = createContext<AppContextType>({
     handleSnapToSide: () => {},
     constraintsRef: { current: null },
     expandWindow: () => {},
-    openSignIn: () => {},
+    openSignIn: () => null,
     openRegister: () => {},
     openForgotPassword: () => {},
     siteSettings: {
@@ -614,10 +615,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
-    const openSignIn = () => {
+    const openSignIn = (onSuccess?: (user: User) => void) => {
         addWindow(
             <ScrollArea location={{ pathname: `community-auth-signin` }} key="community-auth-signin" newWindow>
-                <SignIn />
+                <SignIn onSuccess={onSuccess} />
             </ScrollArea>
         )
     }
