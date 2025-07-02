@@ -49,3 +49,7 @@ What we will ship:
 * **Enhanced observability** – Add tracking for big customer experience, implement alerting and internal SLOs/external SLAs <TeamMember name="Andy Zhao" photo />
 * **System resilience** – Decouple flag service from writer database, implement circuit breakers, build remote caches into server-side SDKs <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Dylan Martin" photo />
 * **SDK standardization** – Implement unified error handling framework and ensure all SDKs use latest (v2) flags response format <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Phil Haack" photo />
+
+**Service Level SLOs:**
+* **Latency:** p99 latency < 50ms. We already meet this today, but still have some spikes from experience continuity flags
+* **Availability:** alarm and investigate on > 10 `5xx` errors in a 1-min period. At 85k req/min, that is a 99.988% availability
