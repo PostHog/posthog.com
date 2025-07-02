@@ -15,7 +15,7 @@ crosspost:
   - Blog
 ---
 
-Two points about marketing at PostHog:
+You need to know two things about PostHog before reading this article:
 
 1. We’re a dev tool who markets mostly to software developers.
 2. We care a lot about our brand, content, website, and launches. Other marketing channels, less so.
@@ -28,7 +28,7 @@ Here’s what we’ve learned about marketing for developers.
 
 3. Building a great product and [telling people about it](/handbook/growth/marketing#2-pull-dont-push) is a more sustainable path to success than spamming people with generic content, ads, or emails. Putting in the effort to make what you produce a bit higher quality pays off. 
 
-4. Assume your audience is smart. Don’t [try to trick them](/handbook/growth/marketing#3-no-sneaky-shit) with tedious, clickbaity, hyperbolic marketing tactics. It’s patronizing. Make honest claims about the functionality of your product. Don’t unfairly or make false claims about competitors.
+4. Assume your audience is smart. [Don’t try to trick them](/handbook/growth/marketing#3-no-sneaky-shit) with tedious, clickbaity, hyperbolic marketing tactics. It’s patronizing. Make honest claims about the functionality of your product. Don’t unfairly or make false claims about competitors.
 
 5. Marketing lore tells you to focus on the *why*, but we think the opposite. Focusing on [benefits rather than features](/founders/features-sell) is tired, the language is vague, it makes it harder to understand what something does. Trust that your customers can figure it out and focus on features instead. 
 
