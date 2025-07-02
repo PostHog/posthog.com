@@ -5,14 +5,14 @@ import PostLayout from '../../components/PostLayout'
 import CommunityQuestions from '../../components/CommunityQuestions'
 import { docsMenu } from '../../navs'
 import ReactMarkdown from 'react-markdown'
-import Accordion from '../../components/SdkSpecs/Accordion'
-import Parameters from '../../components/SdkSpecs/Parameters'
-import FunctionReturn from '../../components/SdkSpecs/Return'
-import FunctionExamples from '../../components/SdkSpecs/Examples'
-import { Edit, Issue } from '../../components/Icons/Icons'
+import Accordion from '../../components/SdkReferences/Accordion'
+import Parameters from '../../components/SdkReferences/Parameters'
+import FunctionReturn from '../../components/SdkReferences/Return'
+import FunctionExamples from '../../components/SdkReferences/Examples'
 import CopyMarkdownActionsDropdown from '../../components/MarkdownActionsDropdown'
 import { useLocation } from '@reach/router'
 import Link from '../../components/Link'
+import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 
 interface Parameter {
     name: string
@@ -54,6 +54,7 @@ interface Class {
 interface SdkReferenceData {
     id: string
     hogRef: string
+    noDocsTypes: string[]
     info: {
         description: string
         id: string
@@ -121,6 +122,9 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     const { fullReference } = pageContext
     const activeInternalMenu = docsMenu.children.find(({ name }) => name === 'Product OS')
     const location = useLocation()
+
+    // Get the language for this SDK reference
+    const sdkLanguage = getLanguageFromSdkId(fullReference.id)
 
     // Badge styling based on release tag
     const getBadgeClasses = (releaseTag: string): string => {
@@ -216,16 +220,22 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                                 <ReactMarkdown>{func.details}</ReactMarkdown>
                                                             </Accordion>
                                                         )}
-                                                        <Parameters params={func.params} />
+                                                        <Parameters
+                                                            params={func.params}
+                                                            noDocsTypes={fullReference.noDocsTypes}
+                                                        />
                                                     </div>
 
                                                     <div className="lg:sticky top-[108px] space-y-6">
                                                         <FunctionExamples
                                                             examples={func.examples}
                                                             title={func.title}
-                                                            language={'js'}
+                                                            language={sdkLanguage}
                                                         />
-                                                        <FunctionReturn returnType={func.returnType} />
+                                                        <FunctionReturn
+                                                            returnType={func.returnType}
+                                                            noDocsTypes={fullReference.noDocsTypes}
+                                                        />
                                                     </div>
                                                 </div>
                                             </div>

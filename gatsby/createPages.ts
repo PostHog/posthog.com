@@ -336,6 +336,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             title
                             description
                         }
+                        noDocsTypes
                         types {
                             id
                             name
@@ -345,6 +346,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                                 name
                             }
                             path
+                            example
                         }
                     }
                 }
@@ -362,6 +364,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             specUrl
                             title
                         }
+                        noDocsTypes
                         classes {
                             description
                             id
@@ -837,6 +840,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     context: {
                         typeData: type,
                         version,
+                        id: node.info.id,
+                        noDocsTypes: node.noDocsTypes,
                     },
                 })
             }

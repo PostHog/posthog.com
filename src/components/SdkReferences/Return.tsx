@@ -1,7 +1,13 @@
 import React from 'react'
 import TypeLink from './TypeLink'
 
-const FunctionReturn = ({ returnType }: { returnType: { id: string; name: string } }) => {
+const FunctionReturn = ({
+    returnType,
+    noDocsTypes,
+}: {
+    returnType: { id: string; name: string }
+    noDocsTypes: string[]
+}) => {
     if (!returnType) return null
 
     const typeString = returnType.name
@@ -48,7 +54,7 @@ const FunctionReturn = ({ returnType }: { returnType: { id: string; name: string
                                     </td>
                                 )}
                                 <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
-                                    <TypeLink type={t} />
+                                    <TypeLink type={t} noDocsTypes={noDocsTypes} />
                                 </td>
                             </tr>
                         ))}

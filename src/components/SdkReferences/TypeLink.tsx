@@ -1,24 +1,10 @@
 import Link from '../Link'
 import React from 'react'
 
-const INTRINSIC_TYPES = [
-    'string',
-    'number',
-    'boolean',
-    'integer',
-    'object',
-    'array',
-    'null',
-    'undefined',
-    'any',
-    'unknown',
-    'void',
-]
-
 const isAlphanumeric = (str: string) => /^[a-zA-Z0-9_]+$/.test(str)
 const isGeneric = (str: string) => /<.*>/.test(str)
 
-const TypeLink = ({ type }: { type: string | { name: string } }) => {
+const TypeLink = ({ type, noDocsTypes }: { type: string | { name: string }; noDocsTypes: string[] }) => {
     const typeString = typeof type === 'string' ? type : type.name
 
     // Handle array types
@@ -26,7 +12,7 @@ const TypeLink = ({ type }: { type: string | { name: string } }) => {
         const baseType = typeString.slice(0, -2)
         return (
             <code className="font-semibold group">
-                <TypeLink type={baseType} />
+                <TypeLink type={baseType} noDocsTypes={noDocsTypes} />
                 {'[]'}
             </code>
         )
@@ -39,7 +25,7 @@ const TypeLink = ({ type }: { type: string | { name: string } }) => {
             <code className="font-semibold group">
                 {typeString.split(separator).map((t, i) => (
                     <React.Fragment key={t}>
-                        <TypeLink type={t.trim()} />
+                        <TypeLink type={t.trim()} noDocsTypes={noDocsTypes} />
                         {i < typeString.split(separator).length - 1 ? ` ${separator} ` : ''}
                     </React.Fragment>
                 ))}
@@ -48,8 +34,8 @@ const TypeLink = ({ type }: { type: string | { name: string } }) => {
     }
 
     // Handle intrinsic types (don't link)
-    if (typeString.startsWith('intrinsic_') || INTRINSIC_TYPES.includes(typeString)) {
-        const baseType = typeString.startsWith('intrinsic_') ? typeString.replace('intrinsic_', '') : typeString
+    if (noDocsTypes && noDocsTypes.includes(typeString)) {
+        const baseType = typeString
         return (
             <code className="font-semibold group">
                 <span className="text-gray-600 dark:text-gray-400">{baseType}</span>

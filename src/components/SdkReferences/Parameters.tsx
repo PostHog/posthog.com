@@ -9,7 +9,15 @@ export interface Parameter {
     isOptional?: boolean
 }
 
-const Parameters = ({ params, title = 'Parameters' }: { params: Parameter[]; title?: string }) => {
+const Parameters = ({
+    params,
+    title = 'Parameters',
+    noDocsTypes,
+}: {
+    params: Parameter[]
+    title?: string
+    noDocsTypes: string[]
+}) => {
     if (!params || params.length === 0) return null
 
     return (
@@ -44,7 +52,7 @@ const Parameters = ({ params, title = 'Parameters' }: { params: Parameter[]; tit
                                         </code>
                                     </td>
                                     <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
-                                        <TypeLink type={param.type} />
+                                        <TypeLink type={param.type} noDocsTypes={noDocsTypes} />
                                     </td>
                                 </tr>
                                 {param.description && (

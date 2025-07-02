@@ -2,13 +2,34 @@
     "id": "posthog-js",
     "hogRef": "0.1",
     "info": {
-        "version": "1.248.1",
+        "version": "1.256.0",
         "id": "posthog-js",
         "title": "PostHog JavaScript Web SDK",
         "description": "Posthog-js allows you to automatically capture usage and send events to PostHog.",
         "slugPrefix": "posthog-js",
         "specUrl": "https://github.com/PostHog/posthog-js"
     },
+    "noDocsTypes": [
+        "string",
+        "number",
+        "boolean",
+        "integer",
+        "object",
+        "array",
+        "null",
+        "undefined",
+        "any",
+        "unknown",
+        "void",
+        "Date",
+        "RegExp",
+        "Error",
+        "Symbol",
+        "BigInt",
+        "Map",
+        "Set",
+        "PostHog"
+    ],
     "classes": [
         {
             "description": "This is the SDK reference for the PostHog JavaScript Web SDK. You can learn more about example usage in the [JavaScript Web SDK documentation](/docs/libraries/js). You can also follow [framework specific guides](/docs/frameworks) to integrate PostHog into your project.\nThis SDK is designed for browser environments. Use the PostHog [Node.js SDK](/docs/libraries/node) for server-side usage.",
@@ -17,16 +38,21 @@
             "functions": [
                 {
                     "category": "",
-                    "description": "Create an alias, which PostHog will use to link two distinct_ids going forward (not retroactively).",
-                    "details": "Multiple aliases can map to the same original ID, but not vice-versa. Aliases can also be chained. If the original ID is not passed in, we will use the current distinct_id.\nThe best practice is to call `alias()` when a unique user is created (e.g. at registration), and before any `identify()` calls for that user.\nIn PostHog, aliases are different from distinct_ids. The following will **not** work:\nInstead, do this:",
+                    "description": "Creates an alias linking two distinct user identifiers.",
+                    "details": "PostHog will use this to link two distinct_ids going forward (not retroactively). Call this when a user signs up to connect their anonymous session with their account.\n#### Best Practices - Call alias() when a unique ID is first created (e.g., account creation) - Should only be called once per user (except for chaining) - Multiple aliases can map to the same original ID",
                     "id": "alias",
                     "showDocs": true,
                     "title": "alias",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\nposthog.alias('new_id', 'original_id');\n\n\n"
+                            "id": "link_anonymous_user_to_account_on_signup",
+                            "name": "link anonymous user to account on signup",
+                            "code": "\n\n// link anonymous user to account on signup\nposthog.alias('user_12345')\n\n\n"
+                        },
+                        {
+                            "id": "explicit_alias_with_original_id",
+                            "name": "explicit alias with original ID",
+                            "code": "\n\n// explicit alias with original ID\nposthog.alias('user_12345', 'anonymous_abc123')\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -38,7 +64,7 @@
                             "name": "alias"
                         },
                         {
-                            "description": "The current identifier being used for this user. Defaults to the current distinct_id.",
+                            "description": "The current identifier being used for this user.",
                             "isOptional": true,
                             "type": "string",
                             "name": "original"
@@ -52,22 +78,22 @@
                 },
                 {
                     "category": "",
-                    "description": "Calculates event properties before sending to PostHog.",
-                    "details": "This method is used internally and can also be used by integrations (e.g. Segment) to enrich events with PostHog properties before sending them to Segment, which is required for some PostHog products to work correctly (e.g. to have a correct $session_id property).",
+                    "description": "calculateEventProperties\nThis method is used internally to calculate the event properties before sending it to PostHog. It can also be used by integrations (e.g. Segment) to enrich events with PostHog properties before sending them to Segment, which is required for some PostHog products to work correctly. (e.g. to have a correct $session_id property).",
+                    "details": null,
                     "id": "calculateEventProperties",
                     "showDocs": true,
                     "title": "calculateEventProperties",
                     "examples": [
                         {
-                            "id": "calculate_event_properties_for_a_custom_event",
-                            "name": "Calculate event properties for a custom event",
-                            "code": "\n// Calculate event properties for a custom event\nconst properties = posthog.calculateEventProperties('custom_event', { event: 'prop' }, new Date(), 'uuid123');\n\n\n"
+                            "id": "calculateeventproperties",
+                            "name": "Generated example for calculateEventProperties",
+                            "code": "// Generated example for calculateEventProperties\nposthog.calculateEventProperties();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "The name of the event, e.g. 'Button Click', 'Sign Up', '$pageview'.",
+                            "description": "The name of the event. This can be anything the user does - 'Button Click', 'Sign Up', '$pageview', etc.",
                             "isOptional": false,
                             "type": "string",
                             "name": "eventName"
@@ -79,19 +105,19 @@
                             "name": "eventProperties"
                         },
                         {
-                            "description": "The timestamp of the event. Defaults to the current time.",
+                            "description": "The timestamp of the event, e.g. for calculating time on page. If not set, it'll automatically be set to the current time.",
                             "isOptional": true,
                             "type": "Date",
                             "name": "timestamp"
                         },
                         {
-                            "description": "The UUID of the event.",
+                            "description": "The uuid of the event, e.g. for storing the $pageview ID.",
                             "isOptional": true,
                             "type": "string",
                             "name": "uuid"
                         },
                         {
-                            "description": "If true, the event won't be sent and internal state won't be updated.",
+                            "description": "Set this if you do not intend to actually send the event, and therefore do not want to update internal state e.g. session timeout",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "readOnly"
@@ -114,7 +140,7 @@
                         {
                             "id": "canrendersurvey",
                             "name": "Generated example for canRenderSurvey",
-                            "code": "\n// Generated example for canRenderSurvey\nposthog.canRenderSurvey();\n    "
+                            "code": "// Generated example for canRenderSurvey\nposthog.canRenderSurvey();"
                         }
                     ],
                     "releaseTag": "deprecated",
@@ -143,7 +169,7 @@
                         {
                             "id": "canrendersurveyasync",
                             "name": "Generated example for canRenderSurveyAsync",
-                            "code": "\n// Generated example for canRenderSurveyAsync\nposthog.canRenderSurveyAsync();\n    "
+                            "code": "// Generated example for canRenderSurveyAsync\nposthog.canRenderSurveyAsync();"
                         }
                     ],
                     "releaseTag": "public",
@@ -169,39 +195,34 @@
                 },
                 {
                     "category": "",
-                    "description": "Capture an event. This is the most important and frequently used PostHog function.",
-                    "details": "By default, PostHog automatically captures pageviews and pageleaves as well as clicks, change of inputs, and form submissions associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags.\nWe recommend using a `[object] [verb]` format for your event names, where `[object]` is the entity that the behavior relates to, and `[verb]` is the behavior itself. For example, `project created`, `user signed up`, or `invite sent`.",
+                    "description": "Captures an event with optional properties and configuration.",
+                    "details": "You can capture arbitrary object-like values as events. [Learn about capture best practices](/docs/product-analytics/capture-events)",
                     "id": "capture",
                     "showDocs": true,
                     "title": "capture",
                     "examples": [
                         {
-                            "id": "capture_a_user_registration_event_with_properties",
-                            "name": "Capture a user registration event with properties",
-                            "code": "\n// Capture a user registration event with properties\nposthog.capture('user_signed_up', {'referral_code': '123456', 'login_type': 'email', 'trial': true});\n\n"
-                        },
-                        {
-                            "id": "capture_a_pageview_event",
-                            "name": "Capture a pageview event",
-                            "code": "\n// Capture a pageview event\nposthog.capture('$pageview');\n\n\n"
+                            "id": "basic_event_capture",
+                            "name": "basic event capture",
+                            "code": "\n\n// basic event capture\nposthog.capture('cta-button-clicked', {\n    button_name: 'Get Started',\n    page: 'homepage'\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "The name of the event. This can be anything the user does - 'Button Click', 'Sign Up', 'Item Purchased', etc.",
+                            "description": "The name of the event (e.g., 'Sign Up', 'Button Click', 'Purchase')",
                             "isOptional": false,
                             "type": "EventName",
                             "name": "event_name"
                         },
                         {
-                            "description": "A set of properties to include with the event you're sending. These describe the user who did the event or details about the event itself.",
+                            "description": "Properties to include with the event describing the user or event details",
                             "isOptional": true,
                             "type": "Properties | null",
                             "name": "properties"
                         },
                         {
-                            "description": "No description available",
+                            "description": "Optional configuration for the capture request",
                             "isOptional": true,
                             "type": "CaptureOptions",
                             "name": "options"
@@ -224,19 +245,19 @@
                         {
                             "id": "captureexception",
                             "name": "Generated example for captureException",
-                            "code": "\n// Generated example for captureException\nposthog.captureException();\n    "
+                            "code": "// Generated example for captureException\nposthog.captureException();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "unknown",
                             "name": "error"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": true,
                             "type": "Properties",
                             "name": "additionalProperties"
@@ -259,7 +280,7 @@
                         {
                             "id": "capturetracefeedback",
                             "name": "Generated example for captureTraceFeedback",
-                            "code": "\n// Generated example for captureTraceFeedback\nposthog.captureTraceFeedback();\n    "
+                            "code": "// Generated example for captureTraceFeedback\nposthog.captureTraceFeedback();"
                         }
                     ],
                     "releaseTag": "public",
@@ -294,7 +315,7 @@
                         {
                             "id": "capturetracemetric",
                             "name": "Generated example for captureTraceMetric",
-                            "code": "\n// Generated example for captureTraceMetric\nposthog.captureTraceMetric();\n    "
+                            "code": "// Generated example for captureTraceMetric\nposthog.captureTraceMetric();"
                         }
                     ],
                     "releaseTag": "public",
@@ -326,16 +347,16 @@
                 },
                 {
                     "category": "",
-                    "description": "Clear the user's opt in/out status of data capturing and cookies/localstorage for this PostHog instance.",
-                    "details": "This method clears the user's opt in/out status of data capturing and cookies/localstorage for this PostHog instance.",
+                    "description": "Clear the user's opt in/out status of data capturing and cookies/localstorage for this PostHog instance",
+                    "details": null,
                     "id": "clear_opt_in_out_capturing",
                     "showDocs": true,
                     "title": "clear_opt_in_out_capturing",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\nposthog.clear_opt_in_out_capturing();\n\n\n"
+                            "id": "clear_opt_in_out_capturing",
+                            "name": "Generated example for clear_opt_in_out_capturing",
+                            "code": "// Generated example for clear_opt_in_out_capturing\nposthog.clear_opt_in_out_capturing();"
                         }
                     ],
                     "releaseTag": "public",
@@ -357,7 +378,7 @@
                         {
                             "id": "createpersonprofile",
                             "name": "Generated example for createPersonProfile",
-                            "code": "\n// Generated example for createPersonProfile\nposthog.createPersonProfile();\n    "
+                            "code": "// Generated example for createPersonProfile\nposthog.createPersonProfile();"
                         }
                     ],
                     "releaseTag": "public",
@@ -370,16 +391,21 @@
                 },
                 {
                     "category": "",
-                    "description": "Enables or disables debug mode. You can also enable debug mode by appending `?__posthog_debug=true` to the URL",
-                    "details": null,
+                    "description": "Enables or disables debug mode for detailed logging.",
+                    "details": "Debug mode logs all PostHog calls to the browser console for troubleshooting. Can also be enabled by adding `?__posthog_debug=true` to the URL.",
                     "id": "debug",
                     "showDocs": true,
                     "title": "debug",
                     "examples": [
                         {
-                            "id": "debug",
-                            "name": "Generated example for debug",
-                            "code": "\n// Generated example for debug\nposthog.debug();\n    "
+                            "id": "enable_debug_mode",
+                            "name": "enable debug mode",
+                            "code": "\n\n// enable debug mode\nposthog.debug(true)\n\n\n"
+                        },
+                        {
+                            "id": "disable_debug_mode",
+                            "name": "disable debug mode",
+                            "code": "\n\n// disable debug mode\nposthog.debug(false)\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -399,16 +425,21 @@
                 },
                 {
                     "category": "",
-                    "description": "Returns the current distinct id of the user. This is either the id automatically generated by the library or the id that has been passed by a call to identify().",
-                    "details": "get_distinct_id() can only be called after the PostHog library has finished loading. init() has a loaded function available to handle this automatically.",
+                    "description": "Returns the current distinct ID for the user.",
+                    "details": "This is either the auto-generated ID or the ID set via `identify()`. The distinct ID is used to associate events with users in PostHog.",
                     "id": "get_distinct_id",
                     "showDocs": true,
                     "title": "get_distinct_id",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n```\n\n// Get the current distinct ID\n\nconst distinctId = posthog.get_distinct_id();\n\n// Use the distinct ID after PostHog has loaded\n\nposthog.init('YOUR PROJECT TOKEN', { loaded: function(posthog) { const distinctId = posthog.get_distinct_id(); // Use distinctId... } });\n\n\n"
+                            "id": "get_the_current_user_id",
+                            "name": "get the current user ID",
+                            "code": "\n\n// get the current user ID\nconst userId = posthog.get_distinct_id()\nconsole.log('Current user:', userId)\n\n\n"
+                        },
+                        {
+                            "id": "use_in_loaded_callback",
+                            "name": "use in loaded callback",
+                            "code": "\n\n// use in loaded callback\nposthog.init('token', {\n    loaded: (posthog) => {\n        const id = posthog.get_distinct_id()\n        // use the ID\n    }\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -421,16 +452,16 @@
                 },
                 {
                     "category": "",
-                    "description": "Returns the value of the super property named property_name. If no such property is set, get_property() will return the undefined value.\n### Notes:\nget_property() can only be called after the PostHog library has finished loading. init() has a loaded function available to handle this automatically. For example:\n// grab value for '$user_id' after the posthog library has loaded posthog.init('YOUR PROJECT TOKEN',  loaded: function(posthog)  user_id = posthog.get_property('$user_id');  );",
-                    "details": null,
+                    "description": "Returns the value of a super property. Returns undefined if the property doesn't exist.",
+                    "details": "get_property() can only be called after the PostHog library has finished loading. init() has a loaded function available to handle this automatically.",
                     "id": "get_property",
                     "showDocs": true,
                     "title": "get_property",
                     "examples": [
                         {
-                            "id": "get_property",
-                            "name": "Generated example for get_property",
-                            "code": "\n// Generated example for get_property\nposthog.get_property();\n    "
+                            "id": "grab_value_for_'$user_id'_after_the_posthog_library_has_loaded",
+                            "name": "grab value for '$user_id' after the posthog library has loaded",
+                            "code": "\n\n// grab value for '$user_id' after the posthog library has loaded\nposthog.init('<YOUR PROJECT TOKEN>', {\n    loaded: function(posthog) {\n        user_id = posthog.get_property('$user_id');\n    }\n});\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -450,6 +481,28 @@
                 },
                 {
                     "category": "",
+                    "description": "Returns the current session_id.\nNOTE: This should only be used for informative purposes. Any actual internal use case for the session_id should be handled by the sessionManager.",
+                    "details": null,
+                    "id": "get_session_id",
+                    "showDocs": true,
+                    "title": "get_session_id",
+                    "examples": [
+                        {
+                            "id": "get_session_id",
+                            "name": "Generated example for get_session_id",
+                            "code": "// Generated example for get_session_id\nposthog.get_session_id();"
+                        }
+                    ],
+                    "releaseTag": "public",
+                    "params": [],
+                    "returnType": {
+                        "id": "string",
+                        "name": "string"
+                    },
+                    "path": "lib/src/posthog-core.d.ts"
+                },
+                {
+                    "category": "",
                     "description": "Returns the Replay url for the current session.",
                     "details": null,
                     "id": "get_session_replay_url",
@@ -459,7 +512,7 @@
                         {
                             "id": "get_session_replay_url",
                             "name": "Generated example for get_session_replay_url",
-                            "code": "\n// Generated example for get_session_replay_url\nposthog.get_session_replay_url();\n    "
+                            "code": "// Generated example for get_session_replay_url\nposthog.get_session_replay_url();"
                         }
                     ],
                     "releaseTag": "public",
@@ -488,19 +541,19 @@
                         {
                             "id": "getactivematchingsurveys",
                             "name": "Generated example for getActiveMatchingSurveys",
-                            "code": "\n// Generated example for getActiveMatchingSurveys\nposthog.getActiveMatchingSurveys();\n    "
+                            "code": "// Generated example for getActiveMatchingSurveys\nposthog.getActiveMatchingSurveys();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "SurveyCallback",
                             "name": "callback"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "forceReload"
@@ -523,25 +576,25 @@
                         {
                             "id": "getearlyaccessfeatures",
                             "name": "Generated example for getEarlyAccessFeatures",
-                            "code": "\n// Generated example for getEarlyAccessFeatures\nposthog.getEarlyAccessFeatures();\n    "
+                            "code": "// Generated example for getEarlyAccessFeatures\nposthog.getEarlyAccessFeatures();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "EarlyAccessFeatureCallback",
                             "name": "callback"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "force_reload"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": true,
                             "type": "EarlyAccessFeatureStage[]",
                             "name": "stages"
@@ -555,28 +608,33 @@
                 },
                 {
                     "category": "",
-                    "description": "Get the value of a feature flag for the current user.",
-                    "details": null,
+                    "description": "Gets the value of a feature flag for the current user.",
+                    "details": "Returns the feature flag value which can be a boolean, string, or undefined. Supports multivariate flags that can return custom string values.",
                     "id": "getFeatureFlag",
                     "showDocs": true,
                     "title": "getFeatureFlag",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\nif (posthog.getFeatureFlag('beta-feature') === 'some-value') {\n   // do something\n}\n\n\n"
+                            "id": "check_boolean_flag",
+                            "name": "check boolean flag",
+                            "code": "\n\n// check boolean flag\nif (posthog.getFeatureFlag('new-feature')) {\n    // show new feature\n}\n\n\n"
+                        },
+                        {
+                            "id": "check_multivariate_flag",
+                            "name": "check multivariate flag",
+                            "code": "\n\n// check multivariate flag\nconst variant = posthog.getFeatureFlag('button-color')\nif (variant === 'red') {\n    // show red button\n}\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "The key of the feature flag.",
+                            "description": "",
                             "isOptional": false,
                             "type": "string",
                             "name": "key"
                         },
                         {
-                            "description": "If `send_event` is false, no `$feature_flag_called` event will be sent.",
+                            "description": "(optional) If send_event: false, we won't send an $feature_flag_call event to PostHog.",
                             "isOptional": true,
                             "type": "{\n        send_event?: boolean;\n    }",
                             "name": "options"
@@ -590,22 +648,21 @@
                 },
                 {
                     "category": "",
-                    "description": "Get the payload of a feature flag for the current user.",
                     "details": null,
                     "id": "getFeatureFlagPayload",
                     "showDocs": true,
                     "title": "getFeatureFlagPayload",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\nconst flagPayload = posthog.getFeatureFlagPayload('my-feature-flag');\n\n\n"
+                            "id": "getfeatureflagpayload",
+                            "name": "Generated example for getFeatureFlagPayload",
+                            "code": "// Generated example for getFeatureFlagPayload\nposthog.getFeatureFlagPayload();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "The key of the feature flag.",
+                            "description": "",
                             "isOptional": false,
                             "type": "string",
                             "name": "key"
@@ -619,12 +676,17 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "getGroups",
                     "showDocs": true,
                     "title": "getGroups",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "getgroups",
+                            "name": "Generated example for getGroups",
+                            "code": "// Generated example for getGroups\nposthog.getGroups();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [],
                     "returnType": {
@@ -635,12 +697,17 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "getPageViewId",
                     "showDocs": true,
                     "title": "getPageViewId",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "getpageviewid",
+                            "name": "Generated example for getPageViewId",
+                            "code": "// Generated example for getPageViewId\nposthog.getPageViewId();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [],
                     "returnType": {
@@ -651,38 +718,16 @@
                 },
                 {
                     "category": "",
-                    "description": "Returns the current session ID.",
-                    "details": "This method returns the current session ID.",
-                    "id": "getSessionId",
-                    "showDocs": true,
-                    "title": "getSessionId",
-                    "examples": [
-                        {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n``` const sessionId = posthog.getSessionId();\n\n\n"
-                        }
-                    ],
-                    "releaseTag": "public",
-                    "params": [],
-                    "returnType": {
-                        "id": "string",
-                        "name": "string"
-                    },
-                    "path": "lib/src/posthog-core.d.ts"
-                },
-                {
-                    "category": "",
-                    "description": "Returns the value of the session super property named property_name. If no such property is set, getSessionProperty() will return the undefined value.\n### Notes:\nThis is based on browser-level `sessionStorage`, NOT the PostHog session. getSessionProperty() can only be called after the PostHog library has finished loading. init() has a loaded function available to handle this automatically. For example:\n// grab value for 'user_id' after the posthog library has loaded posthog.init('YOUR PROJECT TOKEN',  loaded: function(posthog)  user_id = posthog.getSessionProperty('user_id');  );",
-                    "details": null,
+                    "description": "Returns the value of the session super property named property_name. If no such property is set, getSessionProperty() will return the undefined value.",
+                    "details": "This is based on browser-level `sessionStorage`, NOT the PostHog session. getSessionProperty() can only be called after the PostHog library has finished loading. init() has a loaded function available to handle this automatically.",
                     "id": "getSessionProperty",
                     "showDocs": true,
                     "title": "getSessionProperty",
                     "examples": [
                         {
-                            "id": "getsessionproperty",
-                            "name": "Generated example for getSessionProperty",
-                            "code": "\n// Generated example for getSessionProperty\nposthog.getSessionProperty();\n    "
+                            "id": "grab_value_for_'user_id'_after_the_posthog_library_has_loaded",
+                            "name": "grab value for 'user_id' after the posthog library has loaded",
+                            "code": "\n\n// grab value for 'user_id' after the posthog library has loaded\nposthog.init('YOUR PROJECT TOKEN', {\n    loaded: function(posthog) {\n        user_id = posthog.getSessionProperty('user_id');\n    }\n});\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -711,19 +756,19 @@
                         {
                             "id": "getsurveys",
                             "name": "Generated example for getSurveys",
-                            "code": "\n// Generated example for getSurveys\nposthog.getSurveys();\n    "
+                            "code": "// Generated example for getSurveys\nposthog.getSurveys();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "SurveyCallback",
                             "name": "callback"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "forceReload"
@@ -737,38 +782,21 @@
                 },
                 {
                     "category": "",
-                    "description": "Returns the current window ID.",
-                    "details": "This method returns the current window ID.",
-                    "id": "getWindowId",
-                    "showDocs": true,
-                    "title": "getWindowId",
-                    "examples": [
-                        {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n``` const windowId = posthog.getWindowId();\n\n\n"
-                        }
-                    ],
-                    "releaseTag": "public",
-                    "params": [],
-                    "returnType": {
-                        "id": "string",
-                        "name": "string"
-                    },
-                    "path": "lib/src/posthog-core.d.ts"
-                },
-                {
-                    "category": "",
-                    "description": "Sets group analytics information for subsequent events and reloads feature flags.",
-                    "details": "This method sets group analytics information for subsequent events and reloads feature flags. If the group key changes, stored group properties are removed.",
+                    "description": "Associates the user with a group for group-based analytics.",
+                    "details": "Groups allow you to analyze users collectively (e.g., by organization, team, or account). This sets the group association for all subsequent events and reloads feature flags.",
                     "id": "group",
                     "showDocs": true,
                     "title": "group",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n``` posthog.group('organization', 'org::5', { name: 'Acme Inc.', employees: 100 });\n\n\n"
+                            "id": "associate_user_with_an_organization",
+                            "name": "associate user with an organization",
+                            "code": "\n\n// associate user with an organization\nposthog.group('organization', 'org_12345', {\n    name: 'Acme Corp',\n    plan: 'enterprise'\n})\n\n\n"
+                        },
+                        {
+                            "id": "associate_with_multiple_group_types",
+                            "name": "associate with multiple group types",
+                            "code": "\n\n// associate with multiple group types\nposthog.group('organization', 'org_12345')\nposthog.group('team', 'team_67890')\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -800,16 +828,16 @@
                 },
                 {
                     "category": "",
-                    "description": "Check whether the user has opted in to data capturing and cookies/localstorage for this PostHog instance",
-                    "details": null,
+                    "description": "Checks if the user has opted into data capturing.",
+                    "details": "Returns the current consent status for event tracking and data persistence.",
                     "id": "has_opted_in_capturing",
                     "showDocs": true,
                     "title": "has_opted_in_capturing",
                     "examples": [
                         {
-                            "id": "has_opted_in_capturing",
-                            "name": "Generated example for has_opted_in_capturing",
-                            "code": "\n// Generated example for has_opted_in_capturing\nposthog.has_opted_in_capturing();\n    "
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nif (posthog.has_opted_in_capturing()) {\n    // show analytics features\n}\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -822,16 +850,16 @@
                 },
                 {
                     "category": "",
-                    "description": "Check whether the user has opted out of data capturing and cookies/localstorage for this PostHog instance",
-                    "details": null,
+                    "description": "Checks if the user has opted out of data capturing.",
+                    "details": "Returns the current consent status for event tracking and data persistence.",
                     "id": "has_opted_out_capturing",
                     "showDocs": true,
                     "title": "has_opted_out_capturing",
                     "examples": [
                         {
-                            "id": "has_opted_out_capturing",
-                            "name": "Generated example for has_opted_out_capturing",
-                            "code": "\n// Generated example for has_opted_out_capturing\nposthog.has_opted_out_capturing();\n    "
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nif (posthog.has_opted_out_capturing()) {\n    // disable analytics features\n}\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -844,16 +872,26 @@
                 },
                 {
                     "category": "",
-                    "description": "Identify a user with a unique ID instead of a PostHog randomly generated distinct_id. If the method is never called, then unique visitors will be identified by a UUID that is generated the first time they visit the site.",
-                    "details": "If user properties are passed, they are also sent to posthog.\n### Usage:\nposthog.identify('[user unique id]') posthog.identify('[user unique id]',  email: 'johnexample.com' ) posthog.identify('[user unique id]', ,  referral_code: '12345' )\n### Notes:\nYou can call this function to overwrite a previously set unique ID for the current user.\nIf the user has been identified ($user_state in persistence is set to 'identified'), then capture of $identify is skipped to avoid merging users. For example, if your system allows an admin user to impersonate another user.\nThen a single browser instance can have:\n`identify('a') -> capture(1) -> identify('b') -> capture(2)`\nand capture 1 and capture 2 will have the correct distinct_id. but users a and b will NOT be merged in posthog.\nHowever, if reset is called then:\n`identify('a') -> capture(1) -> reset() -> capture(2) -> identify('b') -> capture(3)`\nusers a and b are not merged. Capture 1 is associated with user a. A new distinct id is generated for capture 2. which is merged with user b. So, capture 2 and 3 are associated with user b.\nIf you want to merge two identified users, you can call posthog.alias",
+                    "description": "Associates a user with a unique identifier instead of an auto-generated ID.",
+                    "details": "By default, PostHog assigns each user a randomly generated `distinct_id`. Use this method to replace that ID with your own unique identifier (like a user ID from your database).\n#### User Merging Behavior - If the user is already identified, calling identify again will **not** merge users - To merge identified users, use the `alias` method instead - Use `reset()` to start a fresh session before identifying a different user",
                     "id": "identify",
                     "showDocs": true,
                     "title": "identify",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n```\n\nposthog.identify('distinct_id', { email: 'max@hedgehogmail.com', name: 'Max Hedgehog' }, { first_visited_url: '/blog' });\n\n\n"
+                            "id": "basic_identification",
+                            "name": "basic identification",
+                            "code": "\n\n// basic identification\nposthog.identify('user_12345')\n\n\n"
+                        },
+                        {
+                            "id": "identify_with_user_properties",
+                            "name": "identify with user properties",
+                            "code": "\n\n// identify with user properties\nposthog.identify('user_12345', {\n    email: 'user@example.com',\n    plan: 'premium'\n})\n\n\n"
+                        },
+                        {
+                            "id": "identify_with_set_and_set_once_properties",
+                            "name": "identify with set and set_once properties",
+                            "code": "\n\n// identify with set and set_once properties\nposthog.identify('user_12345',\n    { last_login: new Date() },  // updates every time\n    { signup_date: new Date() }  // sets only once\n)\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -886,7 +924,7 @@
                 {
                     "category": "Initialization",
                     "description": "Initializes a new instance of the PostHog capturing object.",
-                    "details": "All new instances are added to the main posthog object as sub properties (such as `posthog.library_name`) and also returned by this function. [Learn more about configuration options](/docs/libraries/js/config)",
+                    "details": "All new instances are added to the main posthog object as sub properties (such as `posthog.library_name`) and also returned by this function. [Learn more about configuration options](https://github.com/posthog/posthog-js/blob/6e0e873/src/posthog-core.js#L57-L91)",
                     "id": "init",
                     "showDocs": true,
                     "title": "init",
@@ -894,17 +932,12 @@
                         {
                             "id": "basic_initialization",
                             "name": "basic initialization",
-                            "code": "\n// basic initialization\nposthog.init(\n'<ph_project_api_key>', {\n    api_host: '<ph_client_api_host>',\n    defaults: '<ph_posthog_js_defaults>'\n})\n\n"
+                            "code": "\n\n// basic initialization\nposthog.init('<ph_project_api_key>', {\n    api_host: '<ph_client_api_host>'\n})\n\n\n"
                         },
                         {
                             "id": "multiple_instances",
                             "name": "multiple instances",
-                            "code": "\n// multiple instances\nposthog.init('<ph_project_api_key>', {}, 'project1')\nposthog.init('<ph_project_api_key>', {}, 'project2')\n\n"
-                        },
-                        {
-                            "id": "with_a_callback",
-                            "name": "with a callback",
-                            "code": "\n// with a callback\nposthog.init('<ph_project_api_key>', {\n    before_send: (event: CaptureResult | null): CaptureResult | null => {\n        if (!event) {\n            return null\n        }\n        event.properties = {\n            ...event.properties,\n            <property_name>: '<override_value>'\n        }\n\n        event.$set = {\n            ...event.$set,\n            <property_name>: '<override_value>'\n        }\n        event.$set_once = {\n            ...event.$set_once,\n            <property_name>: '<override_value>'\n        }\n\n        return event\n    }\n})\n\n\n"
+                            "code": "\n\n// multiple instances\nposthog.init('<ph_project_api_key>', {}, 'project1')\nposthog.init('<ph_project_api_key>', {}, 'project2')\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -916,7 +949,7 @@
                             "name": "token"
                         },
                         {
-                            "description": "A dictionary of config options to override. See [default config options](https://github.com/posthog/posthog-js/blob/6e0e873/src/posthog-core.js#L57-L91)",
+                            "description": "A dictionary of config options to override",
                             "isOptional": true,
                             "type": "OnlyValidKeys<Partial<PostHogConfig>, Partial<PostHogConfig>>",
                             "name": "config"
@@ -937,27 +970,32 @@
                 {
                     "category": "",
                     "description": "Checks if a feature flag is enabled for the current user.",
-                    "details": "This method checks if a feature flag is enabled for the current user. If the flag is not found or there is an error, it returns undefined.",
+                    "details": "Returns true if the flag is enabled, false if disabled, or undefined if not found. This is a convenience method that treats any truthy value as enabled.",
                     "id": "isFeatureEnabled",
                     "showDocs": true,
                     "title": "isFeatureEnabled",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n``` if (posthog.isFeatureEnabled('my-feature-flag')) { // Feature is enabled }\n\n\n"
+                            "id": "simple_feature_flag_check",
+                            "name": "simple feature flag check",
+                            "code": "\n\n// simple feature flag check\nif (posthog.isFeatureEnabled('new-checkout')) {\n    showNewCheckout()\n}\n\n\n"
+                        },
+                        {
+                            "id": "disable_event_tracking",
+                            "name": "disable event tracking",
+                            "code": "\n\n// disable event tracking\nif (posthog.isFeatureEnabled('feature', { send_event: false })) {\n    // flag checked without sending $feature_flag_call event\n}\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "The key of the feature flag",
+                            "description": "",
                             "isOptional": false,
                             "type": "string",
                             "name": "key"
                         },
                         {
-                            "description": "Optional configuration for the feature flag request",
+                            "description": "(optional) If send_event: false, we won't send an $feature_flag_call event to PostHog.",
                             "isOptional": true,
                             "type": "{\n        send_event: boolean;\n    }",
                             "name": "options"
@@ -980,13 +1018,13 @@
                         {
                             "id": "loadtoolbar",
                             "name": "Generated example for loadToolbar",
-                            "code": "\n// Generated example for loadToolbar\nposthog.loadToolbar();\n    "
+                            "code": "// Generated example for loadToolbar\nposthog.loadToolbar();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "ToolbarParams",
                             "name": "params"
@@ -1009,19 +1047,19 @@
                         {
                             "id": "on",
                             "name": "Generated example for on",
-                            "code": "\n// Generated example for on\nposthog.on();\n    "
+                            "code": "// Generated example for on\nposthog.on();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "'eventCaptured'",
                             "name": "event"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "(...args: any[]) => void",
                             "name": "cb"
@@ -1035,16 +1073,21 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "onFeatureFlags",
                     "showDocs": true,
                     "title": "onFeatureFlags",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "onfeatureflags",
+                            "name": "Generated example for onFeatureFlags",
+                            "code": "// Generated example for onFeatureFlags\nposthog.onFeatureFlags();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "FeatureFlagsCallback",
                             "name": "callback"
@@ -1058,16 +1101,21 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "onSessionId",
                     "showDocs": true,
                     "title": "onSessionId",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "onsessionid",
+                            "name": "Generated example for onSessionId",
+                            "code": "// Generated example for onSessionId\nposthog.onSessionId();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "SessionIdChangedCallback",
                             "name": "callback"
@@ -1081,16 +1129,21 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "onSurveysLoaded",
                     "showDocs": true,
                     "title": "onSurveysLoaded",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "onsurveysloaded",
+                            "name": "Generated example for onSurveysLoaded",
+                            "code": "// Generated example for onSurveysLoaded\nposthog.onSurveysLoaded();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "SurveyCallback",
                             "name": "callback"
@@ -1104,22 +1157,32 @@
                 },
                 {
                     "category": "",
-                    "description": "Opt the user in to data capturing and cookies/localstorage for this PostHog instance If the config.opt_out_persistence_by_default is set to false, the SDK persistence will be enabled.",
-                    "details": null,
+                    "description": "Opts the user into data capturing and persistence.",
+                    "details": "Enables event tracking and data persistence (cookies/localStorage) for this PostHog instance. By default, captures an `$opt_in` event unless disabled.",
                     "id": "opt_in_capturing",
                     "showDocs": true,
                     "title": "opt_in_capturing",
                     "examples": [
                         {
-                            "id": "opt_user_in",
-                            "name": "Opt user in",
-                            "code": "\n\n// Opt user in\n\nposthog.opt_in_capturing();\n\n@example\n\n// Opt user in with specific event name, properties\n\nposthog.opt_in_capturing({ capture_event_name: 'User opted in', capture_properties: { 'email': 'jdoe@example.com' } });\n\n\n"
+                            "id": "simple_opt-in",
+                            "name": "simple opt-in",
+                            "code": "\n\n// simple opt-in\nposthog.opt_in_capturing()\n\n\n"
+                        },
+                        {
+                            "id": "opt-in_with_custom_event_and_properties",
+                            "name": "opt-in with custom event and properties",
+                            "code": "\n\n// opt-in with custom event and properties\nposthog.opt_in_capturing({\n    captureEventName: 'Privacy Accepted',\n    captureProperties: { source: 'banner' }\n})\n\n\n"
+                        },
+                        {
+                            "id": "opt-in_without_capturing_event",
+                            "name": "opt-in without capturing event",
+                            "code": "\n\n// opt-in without capturing event\nposthog.opt_in_capturing({\n    captureEventName: false\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": true,
                             "type": "{\n        captureEventName?: EventName | null | false; /** event name to be used for capturing the opt-in action */\n        captureProperties?: Properties; /** set of properties to be captured along with the opt-in action */\n    }",
                             "name": "options"
@@ -1133,16 +1196,16 @@
                 },
                 {
                     "category": "",
-                    "description": "Opt the user out of data capturing and cookies/localstorage for this PostHog instance. If the config.opt_out_persistence_by_default is set to true, the SDK persistence will be disabled.",
-                    "details": null,
+                    "description": "Opts the user out of data capturing and persistence.",
+                    "details": "Disables event tracking and data persistence (cookies/localStorage) for this PostHog instance. If `opt_out_persistence_by_default` is true, SDK persistence will also be disabled.",
                     "id": "opt_out_capturing",
                     "showDocs": true,
                     "title": "opt_out_capturing",
                     "examples": [
                         {
-                            "id": "opt_out_capturing",
-                            "name": "Generated example for opt_out_capturing",
-                            "code": "\n// Generated example for opt_out_capturing\nposthog.opt_out_capturing();\n    "
+                            "id": "opt_user_out_(e.g.,_on_privacy_settings_page)",
+                            "name": "opt user out (e.g., on privacy settings page)",
+                            "code": "\n\n// opt user out (e.g., on privacy settings page)\nposthog.opt_out_capturing()\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1155,16 +1218,16 @@
                 },
                 {
                     "category": "",
-                    "description": "Pushes a command to the PostHog command queue.",
-                    "details": "This is only useful for external integrations that do not wish to rely on our convenience methods (created in the snippet). The push method keeps the standard async-array-push behavior around after the lib is loaded.",
+                    "description": "push() keeps the standard async-array-push behavior around after the lib is loaded. This is only useful for external integrations that do not wish to rely on our convenience methods (created in the snippet).\n### Usage: posthog.push(['register',  a: 'b' ]);",
+                    "details": null,
                     "id": "push",
                     "showDocs": true,
                     "title": "push",
                     "examples": [
                         {
-                            "id": "push_a_register_command_to_the_queue",
-                            "name": "Push a register command to the queue",
-                            "code": "\n// Push a register command to the queue\nposthog.push(['register', { a: 'b' }]);\n\n\n"
+                            "id": "push",
+                            "name": "Generated example for push",
+                            "code": "// Generated example for push\nposthog.push();"
                         }
                     ],
                     "releaseTag": "public",
@@ -1184,32 +1247,27 @@
                 },
                 {
                     "category": "",
-                    "description": "Register a set of super properties, which are included with all events for the current session.",
-                    "details": "These properties will overwrite any existing super properties for the duration of the session. They are cleared when the session ends.",
+                    "description": "Registers super properties for the current session only.",
+                    "details": "Session super properties are automatically added to all events during the current browser session. Unlike regular super properties, these are cleared when the session ends and are stored in sessionStorage.",
                     "id": "register_for_session",
                     "showDocs": true,
                     "title": "register_for_session",
                     "examples": [
                         {
-                            "id": "register_on_all_events_this_session",
-                            "name": "register on all events this session",
-                            "code": "\n// register on all events this session\nposthog.register_for_session({'referer': document.referrer});\n\n"
+                            "id": "register_session-specific_properties",
+                            "name": "register session-specific properties",
+                            "code": "\n\n// register session-specific properties\nposthog.register_for_session({\n    current_page_type: 'checkout',\n    ab_test_variant: 'control'\n})\n\n\n"
                         },
                         {
-                            "id": "register_several_session_super_properties_when_a_user_signs_up",
-                            "name": "register several session super properties when a user signs up",
-                            "code": "\n// register several session super properties when a user signs up\nposthog.register_for_session({\n    'selectedPlan': 'pro',\n    'completedSteps': 4,\n});\n\n"
-                        },
-                        {
-                            "id": "display_the_properties",
-                            "name": "Display the properties",
-                            "code": "\n// Display the properties\nconsole.log(posthog.sessionPersistence.properties())\n\n\n"
+                            "id": "register_properties_for_user_flow_tracking",
+                            "name": "register properties for user flow tracking",
+                            "code": "\n\n// register properties for user flow tracking\nposthog.register_for_session({\n    selected_plan: 'pro',\n    completed_steps: 3,\n    flow_id: 'signup_flow_v2'\n})\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "An object of properties to store for the session.",
+                            "description": "An associative array of properties to store about the user",
                             "isOptional": false,
                             "type": "Properties",
                             "name": "properties"
@@ -1223,16 +1281,21 @@
                 },
                 {
                     "category": "",
-                    "description": "Register a set of super properties only once. These will not overwrite previous super property values, unlike register().",
-                    "details": "### Usage:\n// register a super property for the first time only posthog.register_once( 'First Login Date': new Date().toISOString() );\n// Display the properties console.log(posthog.persistence.properties())\n### Notes:\nIf default_value is specified, current super properties with that value will be overwritten.",
+                    "description": "Registers super properties only if they haven't been set before.",
+                    "details": "Unlike `register()`, this method will not overwrite existing super properties. Use this for properties that should only be set once, like signup date or initial referrer.",
                     "id": "register_once",
                     "showDocs": true,
                     "title": "register_once",
                     "examples": [
                         {
-                            "id": "register_a_super_property_for_the_first_time_only",
-                            "name": "register a super property for the first time only",
-                            "code": "\n// register a super property for the first time only\nposthog.register_once({\n    'First Login Date': new Date().toISOString()\n});\n\n\n"
+                            "id": "register_once-only_properties",
+                            "name": "register once-only properties",
+                            "code": "\n\n// register once-only properties\nposthog.register_once({\n    first_login_date: new Date().toISOString(),\n    initial_referrer: document.referrer\n})\n\n\n"
+                        },
+                        {
+                            "id": "override_existing_value_if_it_matches_default",
+                            "name": "override existing value if it matches default",
+                            "code": "\n\n// override existing value if it matches default\nposthog.register_once(\n    { user_type: 'premium' },\n    'unknown'  // overwrite if current value is 'unknown'\n)\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1244,7 +1307,7 @@
                             "name": "properties"
                         },
                         {
-                            "description": "If specified, current super properties with this value will be overwritten",
+                            "description": "Value to override if already set in super properties (ex: 'False') Default: 'None'",
                             "isOptional": true,
                             "type": "Property",
                             "name": "default_value"
@@ -1264,27 +1327,32 @@
                 },
                 {
                     "category": "",
-                    "description": "Register a set of super properties, which are included with all events. This will overwrite previous super property values, except for session properties (see `register_for_session(properties)`).",
-                    "details": "### Usage:\n// register 'Gender' as a super property posthog.register('Gender': 'Female');\n// register several super properties when a user signs up posthog.register( 'Email': 'jdoeexample.com', 'Account Type': 'Free' );\n// Display the properties console.log(posthog.persistence.properties())",
+                    "description": "Registers super properties that are included with all events.",
+                    "details": "Super properties are stored in persistence and automatically added to every event you capture. These values will overwrite any existing super properties with the same keys.",
                     "id": "register",
                     "showDocs": true,
                     "title": "register",
                     "examples": [
                         {
-                            "id": "register_'gender'_as_a_super_property",
-                            "name": "register 'Gender' as a super property",
-                            "code": "\n// register 'Gender' as a super property\nposthog.register({'Gender': 'Female'});\n\n"
+                            "id": "register_a_single_property",
+                            "name": "register a single property",
+                            "code": "\n\n// register a single property\nposthog.register({ plan: 'premium' })\n\n\n"
                         },
                         {
-                            "id": "register_several_super_properties_when_a_user_signs_up",
-                            "name": "register several super properties when a user signs up",
-                            "code": "\n// register several super properties when a user signs up\nposthog.register({\n    'Email': 'jdoe@example.com',\n    'Account Type': 'Free'\n});\n\n\n"
+                            "id": "register_multiple_properties",
+                            "name": "register multiple properties",
+                            "code": "\n\n// register multiple properties\nposthog.register({\n    email: 'user@example.com',\n    account_type: 'business',\n    signup_date: '2023-01-15'\n})\n\n\n"
+                        },
+                        {
+                            "id": "register_with_custom_expiration",
+                            "name": "register with custom expiration",
+                            "code": "\n\n// register with custom expiration\nposthog.register({ campaign: 'summer_sale' }, 7) // expires in 7 days\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "An associative array of properties to store about the user",
+                            "description": "properties to store about the user",
                             "isOptional": false,
                             "type": "Properties",
                             "name": "properties"
@@ -1304,12 +1372,17 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "reloadFeatureFlags",
                     "showDocs": true,
                     "title": "reloadFeatureFlags",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "reloadfeatureflags",
+                            "name": "Generated example for reloadFeatureFlags",
+                            "code": "// Generated example for reloadFeatureFlags\nposthog.reloadFeatureFlags();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [],
                     "returnType": {
@@ -1329,19 +1402,19 @@
                         {
                             "id": "rendersurvey",
                             "name": "Generated example for renderSurvey",
-                            "code": "\n// Generated example for renderSurvey\nposthog.renderSurvey();\n    "
+                            "code": "// Generated example for renderSurvey\nposthog.renderSurvey();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "string",
                             "name": "surveyId"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "string",
                             "name": "selector"
@@ -1355,22 +1428,27 @@
                 },
                 {
                     "category": "",
-                    "description": "NB reset is normally only called when a user logs out calling reset at the wrong time can lead to unexpected results like split sessions\nResets all info. For example: session id, super properties, sets a random distinct_id and more.",
-                    "details": null,
+                    "description": "Resets all user data and starts a fresh session.",
+                    "details": "⚠️ **Warning**: Only call this when a user logs out. Calling at the wrong time can cause split sessions.\nThis clears: - Session ID and super properties - User identification (sets new random distinct_id) - Cached data and consent settings",
                     "id": "reset",
                     "showDocs": true,
                     "title": "reset",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n```\n\n// Reset all user data when they log out\n\nposthog.reset();\n\n// Reset all user data including device ID\n\nposthog.reset(true);\n\n\n"
+                            "id": "reset_on_user_logout",
+                            "name": "reset on user logout",
+                            "code": "\n\n// reset on user logout\nfunction logout() {\n    posthog.reset()\n    // redirect to login page\n}\n\n\n"
+                        },
+                        {
+                            "id": "reset_and_generate_new_device_id",
+                            "name": "reset and generate new device ID",
+                            "code": "\n\n// reset and generate new device ID\nposthog.reset(true)  // also resets device_id\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "If true, also resets the device ID. Default: false",
+                            "description": "",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "reset_device_id"
@@ -1384,16 +1462,21 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "resetGroupPropertiesForFlags",
                     "showDocs": true,
                     "title": "resetGroupPropertiesForFlags",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "resetgrouppropertiesforflags",
+                            "name": "Generated example for resetGroupPropertiesForFlags",
+                            "code": "// Generated example for resetGroupPropertiesForFlags\nposthog.resetGroupPropertiesForFlags();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": true,
                             "type": "string",
                             "name": "group_type"
@@ -1416,7 +1499,7 @@
                         {
                             "id": "resetgroups",
                             "name": "Generated example for resetGroups",
-                            "code": "\n// Generated example for resetGroups\nposthog.resetGroups();\n    "
+                            "code": "// Generated example for resetGroups\nposthog.resetGroups();"
                         }
                     ],
                     "releaseTag": "public",
@@ -1429,12 +1512,17 @@
                 },
                 {
                     "category": "",
-                    "description": "No description available",
                     "details": null,
                     "id": "resetPersonPropertiesForFlags",
                     "showDocs": true,
                     "title": "resetPersonPropertiesForFlags",
-                    "examples": [],
+                    "examples": [
+                        {
+                            "id": "resetpersonpropertiesforflags",
+                            "name": "Generated example for resetPersonPropertiesForFlags",
+                            "code": "// Generated example for resetPersonPropertiesForFlags\nposthog.resetPersonPropertiesForFlags();"
+                        }
+                    ],
                     "releaseTag": "public",
                     "params": [],
                     "returnType": {
@@ -1454,7 +1542,7 @@
                         {
                             "id": "sessionrecordingstarted",
                             "name": "Generated example for sessionRecordingStarted",
-                            "code": "\n// Generated example for sessionRecordingStarted\nposthog.sessionRecordingStarted();\n    "
+                            "code": "// Generated example for sessionRecordingStarted\nposthog.sessionRecordingStarted();"
                         }
                     ],
                     "releaseTag": "public",
@@ -1466,17 +1554,17 @@
                     "path": "lib/src/posthog-core.d.ts"
                 },
                 {
-                    "category": "Initialization",
-                    "description": "Update the configuration of a posthog library instance.\n[Learn more about configuration options](/docs/libraries/js/config)",
+                    "category": "",
+                    "description": "Updates the configuration of the PostHog instance.",
                     "details": null,
                     "id": "set_config",
                     "showDocs": true,
                     "title": "set_config",
                     "examples": [
                         {
-                            "id": "set_the_debug_flag_to_true",
-                            "name": "Set the debug flag to true",
-                            "code": "\n// Set the debug flag to true\nposthog.set_config({ debug: true });\n\n\n"
+                            "id": "set_config",
+                            "name": "Generated example for set_config",
+                            "code": "// Generated example for set_config\nposthog.set_config();"
                         }
                     ],
                     "releaseTag": "public",
@@ -1496,28 +1584,28 @@
                 },
                 {
                     "category": "",
-                    "description": "Set override group properties for feature flags. This is used when dealing with new groups / where you don't want to wait for ingestion to update properties.",
-                    "details": "This method sets override group properties for feature flags. It is used when dealing with new groups or when you don't want to wait for ingestion to update properties.",
+                    "description": "Set override group properties for feature flags. This is used when dealing with new groups / where you don't want to wait for ingestion to update properties. Takes in an object, the key of which is the group type. For example: setGroupPropertiesForFlags('organization':  name: 'CYZ', employees: '11'  )",
+                    "details": null,
                     "id": "setGroupPropertiesForFlags",
                     "showDocs": true,
                     "title": "setGroupPropertiesForFlags",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n``` posthog.setGroupPropertiesForFlags({ 'organization': { name: 'Acme Inc.', employees: 100 } });\n\n\n"
+                            "id": "setgrouppropertiesforflags",
+                            "name": "Generated example for setGroupPropertiesForFlags",
+                            "code": "// Generated example for setGroupPropertiesForFlags\nposthog.setGroupPropertiesForFlags();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "An associative array of properties to store about the group",
+                            "description": "",
                             "isOptional": false,
                             "type": "{\n        [type: string]: Properties;\n    }",
                             "name": "properties"
                         },
                         {
-                            "description": "Whether to reload feature flags after setting properties",
+                            "description": "",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "reloadFeatureFlags"
@@ -1531,16 +1619,21 @@
                 },
                 {
                     "category": "",
-                    "description": "Sets properties for the Person associated with the current distinct_id. If config.person_profiles is set to identified_only, and a Person profile has not been created yet, this will create one.",
-                    "details": null,
+                    "description": "Sets properties on the person profile associated with the current `distinct_id`.",
+                    "details": "Updates user properties that are stored with the person profile in PostHog. If `person_profiles` is set to `identified_only` and no profile exists, this will create one.",
                     "id": "setPersonProperties",
                     "showDocs": true,
                     "title": "setPersonProperties",
                     "examples": [
                         {
-                            "id": "setpersonproperties",
-                            "name": "Generated example for setPersonProperties",
-                            "code": "\n// Generated example for setPersonProperties\nposthog.setPersonProperties();\n    "
+                            "id": "set_user_properties",
+                            "name": "set user properties",
+                            "code": "\n\n// set user properties\nposthog.setPersonProperties({\n    email: 'user@example.com',\n    plan: 'premium'\n})\n\n\n"
+                        },
+                        {
+                            "id": "set_properties",
+                            "name": "set properties",
+                            "code": "\n\n// set properties\nposthog.setPersonProperties(\n    { name: 'Max Hedgehog' },  // $set properties\n    { initial_url: '/blog' }   // $set_once properties\n)\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
@@ -1567,27 +1660,27 @@
                 {
                     "category": "",
                     "description": "Set override person properties for feature flags. This is used when dealing with new persons / where you don't want to wait for ingestion to update user properties.",
-                    "details": "This is used when dealing with new persons or when you don't want to wait for ingestion to update user properties.",
+                    "details": null,
                     "id": "setPersonPropertiesForFlags",
                     "showDocs": true,
                     "title": "setPersonPropertiesForFlags",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n``` posthog.setPersonPropertiesForFlags({ email: 'user@example.com', plan: 'pro' });\n\n\n"
+                            "id": "setpersonpropertiesforflags",
+                            "name": "Generated example for setPersonPropertiesForFlags",
+                            "code": "// Generated example for setPersonPropertiesForFlags\nposthog.setPersonPropertiesForFlags();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "An associative array of properties to store about the user",
+                            "description": "",
                             "isOptional": false,
                             "type": "Properties",
                             "name": "properties"
                         },
                         {
-                            "description": "Whether to reload feature flags after setting properties",
+                            "description": "",
                             "isOptional": true,
                             "type": "boolean",
                             "name": "reloadFeatureFlags"
@@ -1610,7 +1703,7 @@
                         {
                             "id": "startsessionrecording",
                             "name": "Generated example for startSessionRecording",
-                            "code": "\n// Generated example for startSessionRecording\nposthog.startSessionRecording();\n    "
+                            "code": "// Generated example for startSessionRecording\nposthog.startSessionRecording();"
                         }
                     ],
                     "releaseTag": "public",
@@ -1639,7 +1732,7 @@
                         {
                             "id": "stopsessionrecording",
                             "name": "Generated example for stopSessionRecording",
-                            "code": "\n// Generated example for stopSessionRecording\nposthog.stopSessionRecording();\n    "
+                            "code": "// Generated example for stopSessionRecording\nposthog.stopSessionRecording();"
                         }
                     ],
                     "releaseTag": "public",
@@ -1652,16 +1745,15 @@
                 },
                 {
                     "category": "",
-                    "description": "Returns a string representation of the PostHog instance.",
-                    "details": "This method returns a string representation of the PostHog instance.",
+                    "details": null,
                     "id": "toString",
                     "showDocs": true,
                     "title": "toString",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\n\n``` const instanceName = posthog.toString();\n\n\n"
+                            "id": "tostring",
+                            "name": "Generated example for toString",
+                            "code": "// Generated example for toString\nposthog.toString();"
                         }
                     ],
                     "releaseTag": "public",
@@ -1674,22 +1766,22 @@
                 },
                 {
                     "category": "",
-                    "description": "Deletes a session super property stored with the current user.",
-                    "details": null,
+                    "description": "Removes a session super property from the current session.",
+                    "details": "This will stop the property from being automatically included in future events for this session. The property is removed from sessionStorage.",
                     "id": "unregister_for_session",
                     "showDocs": true,
                     "title": "unregister_for_session",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\nposthog.unregister_for_session('referer');\n\n\n"
+                            "id": "remove_a_session_property",
+                            "name": "remove a session property",
+                            "code": "\n\n// remove a session property\nposthog.unregister_for_session('current_flow')\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "The name of the session super property to remove.",
+                            "description": "The name of the session super property to remove",
                             "isOptional": false,
                             "type": "string",
                             "name": "property"
@@ -1703,22 +1795,22 @@
                 },
                 {
                     "category": "",
-                    "description": "Deletes a super property stored with the current user.",
-                    "details": null,
+                    "description": "Removes a super property from persistent storage.",
+                    "details": "This will stop the property from being automatically included in future events. The property will be permanently removed from the user's profile.",
                     "id": "unregister",
                     "showDocs": true,
                     "title": "unregister",
                     "examples": [
                         {
-                            "id": "",
-                            "name": "",
-                            "code": "\nposthog.unregister('Gender');\n\n\n"
+                            "id": "remove_a_super_property",
+                            "name": "remove a super property",
+                            "code": "\n\n// remove a super property\nposthog.unregister('plan_type')\n\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "The name of the super property to remove.",
+                            "description": "The name of the super property to remove",
                             "isOptional": false,
                             "type": "string",
                             "name": "property"
@@ -1741,19 +1833,19 @@
                         {
                             "id": "updateearlyaccessfeatureenrollment",
                             "name": "Generated example for updateEarlyAccessFeatureEnrollment",
-                            "code": "\n// Generated example for updateEarlyAccessFeatureEnrollment\nposthog.updateEarlyAccessFeatureEnrollment();\n    "
+                            "code": "// Generated example for updateEarlyAccessFeatureEnrollment\nposthog.updateEarlyAccessFeatureEnrollment();"
                         }
                     ],
                     "releaseTag": "public",
                     "params": [
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "string",
                             "name": "key"
                         },
                         {
-                            "description": "No description available",
+                            "description": "",
                             "isOptional": false,
                             "type": "boolean",
                             "name": "isEnrolled"
@@ -1773,14 +1865,14 @@
             "id": "ActionStepStringMatching",
             "name": "ActionStepStringMatching",
             "properties": [],
-            "path": "lib/src/posthog-surveys-types.d.ts"
+            "path": "lib/src/posthog-surveys-types.d.ts",
+            "example": "\"contains\" | \"exact\" | \"regex\""
         },
         {
             "id": "ActionStepType",
             "name": "ActionStepType",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "event"
                 },
@@ -1790,12 +1882,10 @@
                     "name": "href_matching"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "href"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "selector"
                 },
@@ -1810,7 +1900,6 @@
                     "name": "text_matching"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "text"
                 },
@@ -1820,7 +1909,6 @@
                     "name": "url_matching"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "url"
                 }
@@ -1831,7 +1919,8 @@
             "id": "AutocaptureCompatibleElement",
             "name": "AutocaptureCompatibleElement",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"a\" | \"button\" | \"form\" | \"input\" | \"select\" | \"textarea\" | \"label\""
         },
         {
             "id": "AutocaptureConfig",
@@ -1880,7 +1969,6 @@
             "name": "BasicSurveyQuestion",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "SurveyQuestionType.Open",
                     "name": "type"
                 }
@@ -1891,29 +1979,26 @@
             "id": "BeforeSendFn",
             "name": "BeforeSendFn",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(cr: CaptureResult | null) => CaptureResult | null"
         },
         {
             "id": "BootstrapConfig",
             "name": "BootstrapConfig",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "distinctID"
                 },
                 {
-                    "description": "No description available",
                     "type": "Record<string, JsonType>",
                     "name": "featureFlagPayloads"
                 },
                 {
-                    "description": "No description available",
                     "type": "Record<string, boolean | string>",
                     "name": "featureFlags"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "isIdentifiedID"
                 },
@@ -1929,13 +2014,15 @@
             "id": "Breaker",
             "name": "Breaker",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{}"
         },
         {
             "id": "CapturedNetworkRequest",
             "name": "CapturedNetworkRequest",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "Writable<Omit<PerformanceEntry, 'toJSON'>> & {\n    method?: string;\n    initiatorType?: InitiatorType;\n    status?: number;\n    timeOrigin?: number;\n    timestamp?: number;\n    startTime?: number;\n    endTime?: number;\n    requestHeaders?: Headers;\n    requestBody?: string | null;\n    responseHeaders?: Headers;\n    responseBody?: string | null;\n    isInitial?: boolean;\n}"
         },
         {
             "id": "CaptureOptions",
@@ -1994,34 +2081,43 @@
             "name": "CaptureResult",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "Properties",
                     "name": "$set_once"
                 },
                 {
-                    "description": "No description available",
                     "type": "Properties",
                     "name": "$set"
                 },
                 {
-                    "description": "No description available",
                     "type": "EventName",
                     "name": "event"
                 },
                 {
-                    "description": "No description available",
                     "type": "Properties",
                     "name": "properties"
                 },
                 {
-                    "description": "No description available",
                     "type": "Date",
                     "name": "timestamp"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "uuid"
+                }
+            ],
+            "path": "lib/src/types.d.ts"
+        },
+        {
+            "id": "Compression",
+            "name": "Compression",
+            "properties": [
+                {
+                    "type": "\"base64\"",
+                    "name": "Base64"
+                },
+                {
+                    "type": "\"gzip-js\"",
+                    "name": "GZipJS"
                 }
             ],
             "path": "lib/src/types.d.ts"
@@ -2030,44 +2126,38 @@
             "id": "ConfigDefaults",
             "name": "ConfigDefaults",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"2025-05-24\" | \"unset\""
         },
         {
             "id": "DeadClickCandidate",
             "name": "DeadClickCandidate",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "absoluteDelayMs"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "mutationDelayMs"
                 },
                 {
-                    "description": "No description available",
                     "type": "Element",
                     "name": "node"
                 },
                 {
-                    "description": "No description available",
                     "type": "MouseEvent",
                     "name": "originalEvent"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "scrollDelayMs"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "selectionChangedDelayMs"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "timestamp"
                 }
@@ -2078,72 +2168,37 @@
             "id": "DeadClicksAutoCaptureConfig",
             "name": "DeadClicksAutoCaptureConfig",
             "properties": [],
-            "path": "lib/src/types.d.ts"
-        },
-        {
-            "id": "DecideResponse",
-            "name": "DecideResponse",
-            "properties": [
-                {
-                    "description": "No description available",
-                    "type": "boolean",
-                    "name": "errorsWhileComputingFlags"
-                },
-                {
-                    "description": "No description available",
-                    "type": "Record<string, JsonType>",
-                    "name": "featureFlagPayloads"
-                },
-                {
-                    "description": "No description available",
-                    "type": "Record<string, string | boolean>",
-                    "name": "featureFlags"
-                },
-                {
-                    "description": "No description available",
-                    "type": "Record<string, FeatureFlagDetail>",
-                    "name": "flags"
-                },
-                {
-                    "description": "No description available",
-                    "type": "string",
-                    "name": "requestId"
-                }
-            ],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    scroll_threshold_ms?: number;\n    selection_change_threshold_ms?: number;\n    mutation_threshold_ms?: number;\n    __onCapture?: ((click: DeadClickCandidate, properties: Properties) => void) | undefined;\n} & Pick<AutocaptureConfig, 'element_attribute_ignorelist'>"
         },
         {
             "id": "DomAutocaptureEvents",
             "name": "DomAutocaptureEvents",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"click\" | \"change\" | \"submit\""
         },
         {
             "id": "EarlyAccessFeature",
             "name": "EarlyAccessFeature",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "description"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "documentationUrl"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "flagKey"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "name"
                 },
                 {
-                    "description": "No description available",
                     "type": "'concept' | 'alpha' | 'beta'",
                     "name": "stage"
                 }
@@ -2154,14 +2209,14 @@
             "id": "EarlyAccessFeatureCallback",
             "name": "EarlyAccessFeatureCallback",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(earlyAccessFeatures: EarlyAccessFeature[]) => void"
         },
         {
             "id": "EarlyAccessFeatureResponse",
             "name": "EarlyAccessFeatureResponse",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "EarlyAccessFeature[]",
                     "name": "earlyAccessFeatures"
                 }
@@ -2172,89 +2227,29 @@
             "id": "EarlyAccessFeatureStage",
             "name": "EarlyAccessFeatureStage",
             "properties": [],
-            "path": "lib/src/types.d.ts"
-        },
-        {
-            "id": "ErrorConversions",
-            "name": "ErrorConversions",
-            "properties": [
-                {
-                    "description": "No description available",
-                    "type": "(args: ErrorEventArgs) => ErrorProperties",
-                    "name": "errorToProperties"
-                },
-                {
-                    "description": "No description available",
-                    "type": "(args: [ev: PromiseRejectionEvent]) => ErrorProperties",
-                    "name": "unhandledRejectionToProperties"
-                }
-            ],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"concept\" | \"alpha\" | \"beta\" | \"general-availability\""
         },
         {
             "id": "ErrorEventArgs",
             "name": "ErrorEventArgs",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "[\n    event: string | Event, source?: string | undefined, lineno?: number | undefined, colno?: number | undefined, error?: Error | undefined\n]"
         },
         {
-            "id": "ErrorProperties",
-            "name": "ErrorProperties",
+            "id": "ErrorTrackingOptions",
+            "name": "ErrorTrackingOptions",
             "properties": [
                 {
-                    "description": "No description available",
+                    "description": "ADVANCED: alters the bucket size for the token bucket mutation throttling Normally only altered alongside posthog support guidance. Accepts values between 0 and 100\n10",
                     "type": "number",
-                    "name": "$exception_colno"
+                    "name": "__exceptionRateLimiterBucketSize"
                 },
                 {
-                    "description": "No description available",
-                    "type": "string",
-                    "name": "$exception_DOMException_code"
-                },
-                {
-                    "description": "No description available",
-                    "type": "boolean",
-                    "name": "$exception_handled"
-                },
-                {
-                    "description": "No description available",
-                    "type": "boolean",
-                    "name": "$exception_is_synthetic"
-                },
-                {
-                    "description": "No description available",
-                    "type": "SeverityLevel",
-                    "name": "$exception_level"
-                },
-                {
-                    "description": "No description available",
+                    "description": "ADVANCED: alters the refill rate for the token bucket mutation throttling Normally only altered alongside posthog support guidance. Accepts values between 0 and 100\n1",
                     "type": "number",
-                    "name": "$exception_lineno"
-                },
-                {
-                    "description": "No description available",
-                    "type": "string",
-                    "name": "$exception_message"
-                },
-                {
-                    "description": "No description available",
-                    "type": "string",
-                    "name": "$exception_personURL"
-                },
-                {
-                    "description": "No description available",
-                    "type": "string",
-                    "name": "$exception_source"
-                },
-                {
-                    "description": "No description available",
-                    "type": "string",
-                    "name": "$exception_stack_trace_raw"
-                },
-                {
-                    "description": "No description available",
-                    "type": "string",
-                    "name": "$exception_type"
+                    "name": "__exceptionRateLimiterRefillRate"
                 }
             ],
             "path": "lib/src/types.d.ts"
@@ -2264,12 +2259,10 @@
             "name": "ErrorTrackingSuppressionRule",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "'AND' | 'OR'",
                     "name": "type"
                 },
                 {
-                    "description": "No description available",
                     "type": "ErrorTrackingSuppressionRuleValue[]",
                     "name": "values"
                 }
@@ -2281,22 +2274,18 @@
             "name": "ErrorTrackingSuppressionRuleValue",
             "properties": [
                 {
-                    "description": "No description available",
-                    "type": "'$exception_types' | '$exception_messages'",
+                    "type": "'$exception_types' | '$exception_values'",
                     "name": "key"
                 },
                 {
-                    "description": "No description available",
                     "type": "PropertyMatchType",
                     "name": "operator"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "type"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | string[]",
                     "name": "value"
                 }
@@ -2307,55 +2296,98 @@
             "id": "EvaluationReason",
             "name": "EvaluationReason",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    code: string;\n    condition_index: number | undefined;\n    description: string | undefined;\n}"
         },
         {
             "id": "EventHandler",
             "name": "EventHandler",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(event: Event) => boolean | void"
         },
         {
             "id": "EventName",
             "name": "EventName",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"$pageview\" | \"$identify\" | \"custom_event\" | string"
         },
         {
             "id": "ExceptionAutoCaptureConfig",
             "name": "ExceptionAutoCaptureConfig",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    capture_unhandled_errors: boolean;\n    capture_unhandled_rejections: boolean;\n    capture_console_errors: boolean;\n}"
+        },
+        {
+            "id": "ExternalIntegrationKind",
+            "name": "ExternalIntegrationKind",
+            "properties": [],
+            "path": "lib/src/types.d.ts",
+            "example": "\"intercom\" | \"crispChat\""
         },
         {
             "id": "FeatureFlagDetail",
             "name": "FeatureFlagDetail",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    key: string;\n    enabled: boolean;\n    original_enabled?: boolean | undefined;\n    variant: string | undefined;\n    original_variant?: string | undefined;\n    reason: EvaluationReason | undefined;\n    metadata: FeatureFlagMetadata | undefined;\n}"
         },
         {
             "id": "FeatureFlagMetadata",
             "name": "FeatureFlagMetadata",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    id: number;\n    version: number | undefined;\n    description: string | undefined;\n    payload: JsonType | undefined;\n    original_payload?: JsonType | undefined;\n}"
         },
         {
             "id": "FeatureFlagsCallback",
             "name": "FeatureFlagsCallback",
             "properties": [],
+            "path": "lib/src/types.d.ts",
+            "example": "(flags: string[], variants: Record<string, string | boolean>, context?: {\n    errorsLoading?: boolean;\n}) => void"
+        },
+        {
+            "id": "FlagsResponse",
+            "name": "FlagsResponse",
+            "properties": [
+                {
+                    "type": "boolean",
+                    "name": "errorsWhileComputingFlags"
+                },
+                {
+                    "type": "Record<string, JsonType>",
+                    "name": "featureFlagPayloads"
+                },
+                {
+                    "type": "Record<string, string | boolean>",
+                    "name": "featureFlags"
+                },
+                {
+                    "type": "Record<string, FeatureFlagDetail>",
+                    "name": "flags"
+                },
+                {
+                    "type": "string",
+                    "name": "requestId"
+                }
+            ],
             "path": "lib/src/types.d.ts"
         },
         {
             "id": "FlagVariant",
             "name": "FlagVariant",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    flag: string;\n    variant: string;\n}"
         },
         {
             "id": "Headers_2",
             "name": "Headers_2",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "Record<string, string>"
         },
         {
             "id": "HeatmapConfig",
@@ -2373,43 +2405,46 @@
             "id": "InitiatorType",
             "name": "InitiatorType",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"audio\" | \"beacon\" | \"body\" | \"css\" | \"early-hint\" | \"embed\" | \"fetch\" | \"frame\" | \"iframe\" | \"icon\" | \"image\" | \"img\" | \"input\" | \"link\" | \"navigation\" | \"object\" | \"ping\" | \"script\" | \"track\" | \"video\" | \"xmlhttprequest\""
         },
         {
             "id": "JsonRecord",
             "name": "JsonRecord",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    [key: string]: JsonType;\n}"
         },
         {
             "id": "JsonType",
             "name": "JsonType",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "string | number | boolean | ..."
         },
         {
             "id": "KnownEventName",
             "name": "KnownEventName",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"$heatmaps_data\" | \"$opt_in\" | \"$exception\" | \"$$heatmap\" | \"$web_vitals\" | \"$dead_click\" | \"$autocapture\" | \"$rageclick\""
         },
         {
             "id": "KnownUnsafeEditableEvent",
             "name": "KnownUnsafeEditableEvent",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(typeof knownUnsafeEditableEvent)[number]"
         },
         {
             "id": "LinkSurveyQuestion",
             "name": "LinkSurveyQuestion",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "link"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyQuestionType.Link",
                     "name": "type"
                 }
@@ -2421,27 +2456,22 @@
             "name": "MultipleSurveyQuestion",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "string[]",
                     "name": "choices"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "hasOpenChoice"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "shuffleOptions"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "skipSubmitButton"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyQuestionType.SingleChoice | SurveyQuestionType.MultipleChoice",
                     "name": "type"
                 }
@@ -2452,13 +2482,15 @@
             "id": "NetworkRecordOptions",
             "name": "NetworkRecordOptions",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    initiatorTypes?: InitiatorType[];\n    maskRequestFn?: (data: CapturedNetworkRequest) => CapturedNetworkRequest | undefined;\n    recordHeaders?: boolean | {\n        request: boolean;\n        response: boolean;\n    };\n    recordBody?: boolean | string[] | {\n        request: boolean | string[];\n        response: boolean | string[];\n    };\n    recordInitialRequests?: boolean;\n    recordPerformance?: boolean;\n    performanceEntryTypeToObserve: string[];\n    payloadSizeLimitBytes: number;\n    payloadHostDenyList?: string[];\n}"
         },
         {
             "id": "NetworkRequest",
             "name": "NetworkRequest",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    url: string;\n}"
         },
         {
             "id": "PerformanceCaptureConfig",
@@ -2497,32 +2529,26 @@
             "name": "PersistentStore",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "(error: any) => void",
                     "name": "_error"
                 },
                 {
-                    "description": "No description available",
                     "type": "(name: string) => any",
                     "name": "_get"
                 },
                 {
-                    "description": "No description available",
                     "type": "() => boolean",
                     "name": "_is_supported"
                 },
                 {
-                    "description": "No description available",
                     "type": "(name: string) => any",
                     "name": "_parse"
                 },
                 {
-                    "description": "No description available",
                     "type": "(name: string, cross_subdomain?: boolean) => void",
                     "name": "_remove"
                 },
                 {
-                    "description": "No description available",
                     "type": "(name: string, value: any, expire_days?: number | null, cross_subdomain?: boolean, secure?: boolean, debug?: boolean) => void",
                     "name": "_set"
                 }
@@ -2549,7 +2575,7 @@
                     "name": "__preview_flags_v2"
                 },
                 {
-                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Enables the new RemoteConfig approach to loading config instead of decide",
+                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Enables the new RemoteConfig approach to loading config instead of /flags?v=2&config=true",
                     "type": "boolean",
                     "name": "__preview_remote_config"
                 },
@@ -2559,7 +2585,7 @@
                     "name": "_onCapture"
                 },
                 {
-                    "description": "One of the very first things the PostHog library does when init() is called is make a request to the /decide endpoint on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend.\nThis endpoint is required to run most features of the library. However, if you're not using any of the described features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.\nfalse",
+                    "description": "",
                     "type": "boolean",
                     "name": "advanced_disable_decide"
                 },
@@ -2569,14 +2595,24 @@
                     "name": "advanced_disable_feature_flags_on_first_load"
                 },
                 {
-                    "description": "Will keep /decide running, but without any feature flag requests\nfalse",
+                    "description": "Will keep /flags running, but without evaluating any feature flags. Useful for when you need to load the config data associated with the flags endpoint (e.g. /flags?v=2&config=true) without evaluating any feature flags. Most folks use this to save money on feature flag evaluation (by bootstrapping feature flags on the server side).\nfalse",
                     "type": "boolean",
                     "name": "advanced_disable_feature_flags"
+                },
+                {
+                    "description": "One of the very first things the PostHog library does when init() is called is make a request to the /flags endpoint on PostHog's backend. This endpoint contains information on how to run the PostHog library so events are properly received in the backend, and it also contains feature flag evaluation information for the current user.\nThis endpoint is required to run most features of this library. However, if you're not using any of the described features, you may wish to turn off the call completely to avoid an extra request and reduce resource usage on both the client and the server.\nfalse",
+                    "type": "boolean",
+                    "name": "advanced_disable_flags"
                 },
                 {
                     "description": "Determines whether PostHog should disable toolbar metrics. This is our internal instrumentation for our toolbar in your website.\nfalse",
                     "type": "boolean",
                     "name": "advanced_disable_toolbar_metrics"
+                },
+                {
+                    "description": "Determines whether PostHog should only evaluate feature flags for surveys. Useful for when you want to use this library to evaluate feature flags for surveys only but you have additional feature flags that you evaluate on the server side.\nfalse",
+                    "type": "boolean",
+                    "name": "advanced_only_evaluate_survey_feature_flags"
                 },
                 {
                     "description": "URL of your PostHog instance.\n'https://us.i.posthog.com'",
@@ -2709,7 +2745,12 @@
                     "name": "disable_session_recording"
                 },
                 {
-                    "description": "Determines whether PostHog should disable surveys.\nfalse",
+                    "description": "Determines whether PostHog should disable automatic display of surveys. If this is true, popup or widget surveys will not be shown when display conditions are met.\nfalse",
+                    "type": "boolean",
+                    "name": "disable_surveys_automatic_display"
+                },
+                {
+                    "description": "Determines whether PostHog should disable all surveys functionality.\nfalse",
                     "type": "boolean",
                     "name": "disable_surveys"
                 },
@@ -2719,7 +2760,6 @@
                     "name": "disable_web_experiments"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "enable_heatmaps"
                 },
@@ -2727,6 +2767,11 @@
                     "description": "Determines whether PostHog should enable recording console logs. When undefined, it falls back to the remote config setting.\nundefined",
                     "type": "boolean",
                     "name": "enable_recording_console_log"
+                },
+                {
+                    "description": "Determines the error tracking options.",
+                    "type": "ErrorTrackingOptions",
+                    "name": "error_tracking"
                 },
                 {
                     "description": "Sets timeout for fetching feature flags\n3000",
@@ -2754,7 +2799,12 @@
                     "name": "inapp_protocol"
                 },
                 {
-                    "description": "Determines whether PostHog should capture IP addresses.\ntrue",
+                    "description": "Used to set-up external integrations with PostHog data - such as session replays, distinct id, etc.",
+                    "type": "Record<ExternalIntegrationKind, boolean>",
+                    "name": "integrations"
+                },
+                {
+                    "description": "",
                     "type": "boolean",
                     "name": "ip"
                 },
@@ -2980,19 +3030,22 @@
             "id": "Properties",
             "name": "Properties",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "// Properties is a Record<string, Property> \n// Below are PostHog's default properties, you can add your own properties during capture\n{\n    $timestamp: '2024-05-29T17:32:07.202Z',\n    $os: 'Mac OS X',\n    $os_version: '10.15.7',\n    $browser: 'Chrome',\n    $browser_version: '125',\n    $device_type: 'Desktop',\n    $current_url: 'https://example.com/page',\n    $host: 'example.com',\n    $pathname: '/page',\n    $screen_height: 1080,\n    $screen_width: 1920,\n    $viewport_height: 950,\n    $viewport_width: 1903,\n    $lib: 'web',\n    $lib_version: '1.31.0',\n    $search_engine: 'google',\n    $referrer: 'https://google.com',\n    $referring_domain: 'www.google.com',\n    $active_feature_flags: ['beta_feature'],\n    $event_type: 'click',\n    $utm_source: 'newsletter',\n    $utm_medium: 'email',\n    $utm_campaign: 'product_launch',\n    $utm_term: 'new+product',\n    $utm_content: 'logolink',\n    $gclid: 'TeSter-123',\n    $gad_source: 'google_ads',\n    $gclsrc: 'dsa',\n    $dclid: 'testDclid123',\n    $wbraid: 'testWbraid123',\n    $gbraid: 'testGbraid123',\n    $fbclid: 'testFbclid123',\n    $msclkid: 'testMsclkid123',\n    $twclid: 'testTwclid123',\n    $li_fat_id: 'testLiFatId123',\n    $mc_cid: 'testMcCid123',\n    $igshid: 'testIgshid123',\n    $ttclid: 'testTtclid123',\n    $plugins_succeeded: ['GeoIP (56578)'],\n    $plugins_failed: ['plugin3'],\n    $plugins_deferred: ['plugin4'],\n    $ip: '192.168.1.1'\n}"
         },
         {
             "id": "Property",
             "name": "Property",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "// It can be a string\n\"max@example.com\"\n// It can be an object like field\n{\n    firstName: 'Max',\n    lastName: 'Hog',\n    isAdmin: true,\n}\n"
         },
         {
             "id": "PropertyMatchType",
             "name": "PropertyMatchType",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"regex\" | \"not_regex\" | \"exact\" | \"is_not\" | \"icontains\" | \"not_icontains\""
         },
         {
             "id": "QueuedRequestWithOptions",
@@ -3011,32 +3064,26 @@
             "name": "RatingSurveyQuestion",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "'number' | 'emoji'",
                     "name": "display"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "lowerBoundLabel"
                 },
                 {
-                    "description": "No description available",
                     "type": "3 | 5 | 7 | 10",
                     "name": "scale"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "skipSubmitButton"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyQuestionType.Rating",
                     "name": "type"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "upperBoundLabel"
                 }
@@ -3144,13 +3191,15 @@
             "id": "RemoteConfigFeatureFlagCallback",
             "name": "RemoteConfigFeatureFlagCallback",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(payload: JsonType) => void"
         },
         {
             "id": "RequestCallback",
             "name": "RequestCallback",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(response: RequestResponse) => void"
         },
         {
             "id": "RequestQueueConfig",
@@ -3169,17 +3218,14 @@
             "name": "RequestResponse",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "any",
                     "name": "json"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "statusCode"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "text"
                 }
@@ -3191,57 +3237,46 @@
             "name": "RequestWithOptions",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "RequestCallback",
                     "name": "callback"
                 },
                 {
-                    "description": "No description available",
                     "type": "Compression | 'best-available'",
                     "name": "compression"
                 },
                 {
-                    "description": "No description available",
                     "type": "Record<string, any> | Record<string, any>[]",
                     "name": "data"
                 },
                 {
-                    "description": "No description available",
                     "type": "{\n        cache?: RequestInit['cache'];\n        next?: NextOptions;\n    }",
                     "name": "fetchOptions"
                 },
                 {
-                    "description": "No description available",
                     "type": "Record<string, any>",
                     "name": "headers"
                 },
                 {
-                    "description": "No description available",
                     "type": "'POST' | 'GET'",
                     "name": "method"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "noRetries"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "timeout"
                 },
                 {
-                    "description": "No description available",
                     "type": "'XHR' | 'fetch' | 'sendBeacon'",
                     "name": "transport"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "url"
                 },
                 {
-                    "description": "No description available",
                     "type": "{\n        compression: Compression;\n    }",
                     "name": "urlQueryArgs"
                 }
@@ -3253,7 +3288,6 @@
             "name": "RetriableRequestWithOptions",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "retriesPerformedSoFar"
                 }
@@ -3264,13 +3298,15 @@
             "id": "SessionIdChangedCallback",
             "name": "SessionIdChangedCallback",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(sessionId: string, windowId: string | null | undefined, changeReason?: {\n    noSessionId: boolean;\n    activityTimeout: boolean;\n    sessionPastMaximumLength: boolean;\n}) => void"
         },
         {
             "id": "SessionRecordingCanvasOptions",
             "name": "SessionRecordingCanvasOptions",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    recordCanvas?: boolean | null;\n    canvasFps?: number | null;\n    canvasQuality?: string | null;\n}"
         },
         {
             "id": "SessionRecordingOptions",
@@ -3279,12 +3315,12 @@
                 {
                     "description": "ADVANCED: alters the bucket size for the token bucket mutation throttling Normally only altered alongside posthog support guidance. Accepts values between 0 and 100\n100",
                     "type": "number",
-                    "name": "__mutationRateLimiterBucketSize"
+                    "name": "__mutationThrottlerBucketSize"
                 },
                 {
                     "description": "ADVANCED: alters the refill rate for the token bucket mutation throttling Normally only altered alongside posthog support guidance. Accepts values between 0 and 100\n10",
                     "type": "number",
-                    "name": "__mutationRateLimiterRefillRate"
+                    "name": "__mutationThrottlerRefillRate"
                 },
                 {
                     "description": "Derived from `rrweb.record` options",
@@ -3297,7 +3333,7 @@
                     "name": "blockSelector"
                 },
                 {
-                    "description": "Allows local config to override remote canvas recording settings from the decide response",
+                    "description": "Allows local config to override remote canvas recording settings from the flags response",
                     "type": "SessionRecordingCanvasOptions",
                     "name": "captureCanvas"
                 },
@@ -3399,12 +3435,10 @@
             "name": "SessionRecordingUrlTrigger",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "'regex'",
                     "name": "matching"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "url"
                 }
@@ -3415,124 +3449,113 @@
             "id": "SeverityLevel",
             "name": "SeverityLevel",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "(typeof severityLevels)[number]"
         },
         {
             "id": "SiteApp",
             "name": "SiteApp",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    id: string;\n    loaded: boolean;\n    errored: boolean;\n    processedBuffer: boolean;\n    processEvent?: (globals: SiteAppGlobals) => void;\n}"
         },
         {
             "id": "SiteAppGlobals",
             "name": "SiteAppGlobals",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    event: {\n        uuid: string;\n        event: EventName;\n        properties: Properties;\n        timestamp?: Date;\n        elements_chain?: string;\n        distinct_id?: string;\n    };\n    person: {\n        properties: Properties;\n    };\n    groups: Record<string, {\n        id: string;\n        type: string;\n        properties: Properties;\n    }>;\n}"
         },
         {
             "id": "SiteAppLoader",
             "name": "SiteAppLoader",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "{\n    id: string;\n    init: (config: {\n        posthog: PostHog;\n        callback: (success: boolean) => void;\n    }) => {\n        processEvent?: (globals: SiteAppGlobals) => void;\n    };\n}"
         },
         {
             "id": "SnippetArrayItem",
             "name": "SnippetArrayItem",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "[method: string, ...args: any[]]"
         },
         {
             "id": "SupportedWebVitalsMetrics",
             "name": "SupportedWebVitalsMetrics",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"LCP\" | \"CLS\" | \"FCP\" | \"INP\""
         },
         {
             "id": "Survey",
             "name": "Survey",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "SurveyAppearance | null",
                     "name": "appearance"
                 },
                 {
-                    "description": "No description available",
                     "type": "{\n        url?: string;\n        selector?: string;\n        seenSurveyWaitPeriodInDays?: number;\n        urlMatchType?: PropertyMatchType;\n        events: {\n            repeatedActivation?: boolean;\n            values: {\n                name: string;\n            }[];\n        } | null;\n        actions: {\n            values: SurveyActionType[];\n        } | null;\n        deviceTypes?: string[];\n        deviceTypesMatchType?: PropertyMatchType;\n    } | null",
                     "name": "conditions"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "current_iteration_start_date"
                 },
                 {
-                    "description": "No description available",
                     "type": "number | null",
                     "name": "current_iteration"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "description"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean | null",
                     "name": "enable_partial_responses"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "end_date"
                 },
                 {
-                    "description": "No description available",
                     "type": "{\n        key: string;\n        value?: string;\n    }[] | null",
                     "name": "feature_flag_keys"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "id"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "internal_targeting_flag_key"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "linked_flag_key"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "name"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyQuestion[]",
                     "name": "questions"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveySchedule | null",
                     "name": "schedule"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "start_date"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "targeting_flag_key"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyType",
                     "name": "type"
                 }
@@ -3544,17 +3567,14 @@
             "name": "SurveyActionType",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "id"
                 },
                 {
-                    "description": "No description available",
                     "type": "string | null",
                     "name": "name"
                 },
                 {
-                    "description": "No description available",
                     "type": "ActionStepType[]",
                     "name": "steps"
                 }
@@ -3566,152 +3586,122 @@
             "name": "SurveyAppearance",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "autoDisappear"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "backgroundColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "borderColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "boxPadding"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "descriptionTextColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "disabledButtonOpacity"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "displayThankYouMessage"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "fontFamily"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "maxWidth"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "placeholder"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyPosition",
                     "name": "position"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "ratingButtonActiveColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "ratingButtonColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "ratingButtonHoverColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "shuffleQuestions"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "submitButtonColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "submitButtonText"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "submitButtonTextColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "surveyPopupDelaySeconds"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "textColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "thankYouMessageCloseButtonText"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "thankYouMessageDescription"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyQuestionDescriptionContentType",
                     "name": "thankYouMessageDescriptionContentType"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "thankYouMessageHeader"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "whiteLabel"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "widgetColor"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "widgetLabel"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "widgetSelector"
                 },
                 {
-                    "description": "No description available",
                     "type": "SurveyWidgetType",
                     "name": "widgetType"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "zIndex"
                 }
@@ -3722,71 +3712,169 @@
             "id": "SurveyCallback",
             "name": "SurveyCallback",
             "properties": [],
-            "path": "lib/src/posthog-surveys-types.d.ts"
+            "path": "lib/src/posthog-surveys-types.d.ts",
+            "example": "(surveys: Survey[], context?: {\n    isLoaded: boolean;\n    error?: string;\n}) => void"
         },
         {
             "id": "SurveyElement",
             "name": "SurveyElement",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "$el_text"
                 },
                 {
-                    "description": "No description available",
                     "type": "string[]",
                     "name": "attr_class"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "attr_id"
                 },
                 {
-                    "description": "No description available",
                     "type": "Record<string, any>",
                     "name": "attributes"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "event_id"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "group_id"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "href"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "nth_child"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "nth_of_type"
                 },
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "order"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "tag_name"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "text"
+                }
+            ],
+            "path": "lib/src/posthog-surveys-types.d.ts"
+        },
+        {
+            "id": "SurveyEventName",
+            "name": "SurveyEventName",
+            "properties": [
+                {
+                    "type": "\"survey dismissed\"",
+                    "name": "DISMISSED"
+                },
+                {
+                    "type": "\"survey sent\"",
+                    "name": "SENT"
+                },
+                {
+                    "type": "\"survey shown\"",
+                    "name": "SHOWN"
+                }
+            ],
+            "path": "lib/src/posthog-surveys-types.d.ts"
+        },
+        {
+            "id": "SurveyEventProperties",
+            "name": "SurveyEventProperties",
+            "properties": [
+                {
+                    "type": "\"$survey_completed\"",
+                    "name": "SURVEY_COMPLETED"
+                },
+                {
+                    "type": "\"$survey_id\"",
+                    "name": "SURVEY_ID"
+                },
+                {
+                    "type": "\"$survey_iteration\"",
+                    "name": "SURVEY_ITERATION"
+                },
+                {
+                    "type": "\"$survey_iteration_start_date\"",
+                    "name": "SURVEY_ITERATION_START_DATE"
+                },
+                {
+                    "type": "\"$survey_name\"",
+                    "name": "SURVEY_NAME"
+                },
+                {
+                    "type": "\"$survey_partially_completed\"",
+                    "name": "SURVEY_PARTIALLY_COMPLETED"
+                },
+                {
+                    "type": "\"$survey_questions\"",
+                    "name": "SURVEY_QUESTIONS"
+                },
+                {
+                    "type": "\"$survey_response\"",
+                    "name": "SURVEY_RESPONSE"
+                },
+                {
+                    "type": "\"$survey_submission_id\"",
+                    "name": "SURVEY_SUBMISSION_ID"
+                }
+            ],
+            "path": "lib/src/posthog-surveys-types.d.ts"
+        },
+        {
+            "id": "SurveyPosition",
+            "name": "SurveyPosition",
+            "properties": [
+                {
+                    "type": "\"center\"",
+                    "name": "Center"
+                },
+                {
+                    "type": "\"left\"",
+                    "name": "Left"
+                },
+                {
+                    "type": "\"middle_center\"",
+                    "name": "MiddleCenter"
+                },
+                {
+                    "type": "\"middle_left\"",
+                    "name": "MiddleLeft"
+                },
+                {
+                    "type": "\"middle_right\"",
+                    "name": "MiddleRight"
+                },
+                {
+                    "type": "\"next_to_trigger\"",
+                    "name": "NextToTrigger"
+                },
+                {
+                    "type": "\"right\"",
+                    "name": "Right"
+                },
+                {
+                    "type": "\"top_center\"",
+                    "name": "TopCenter"
+                },
+                {
+                    "type": "\"top_left\"",
+                    "name": "TopLeft"
+                },
+                {
+                    "type": "\"top_right\"",
+                    "name": "TopRight"
                 }
             ],
             "path": "lib/src/posthog-surveys-types.d.ts"
@@ -3795,12 +3883,64 @@
             "id": "SurveyQuestion",
             "name": "SurveyQuestion",
             "properties": [],
+            "path": "lib/src/posthog-surveys-types.d.ts",
+            "example": "BasicSurveyQuestion | LinkSurveyQuestion | RatingSurveyQuestion | ..."
+        },
+        {
+            "id": "SurveyQuestionBranchingType",
+            "name": "SurveyQuestionBranchingType",
+            "properties": [
+                {
+                    "type": "\"end\"",
+                    "name": "End"
+                },
+                {
+                    "type": "\"next_question\"",
+                    "name": "NextQuestion"
+                },
+                {
+                    "type": "\"response_based\"",
+                    "name": "ResponseBased"
+                },
+                {
+                    "type": "\"specific_question\"",
+                    "name": "SpecificQuestion"
+                }
+            ],
             "path": "lib/src/posthog-surveys-types.d.ts"
         },
         {
             "id": "SurveyQuestionDescriptionContentType",
             "name": "SurveyQuestionDescriptionContentType",
             "properties": [],
+            "path": "lib/src/posthog-surveys-types.d.ts",
+            "example": "\"html\" | \"text\""
+        },
+        {
+            "id": "SurveyQuestionType",
+            "name": "SurveyQuestionType",
+            "properties": [
+                {
+                    "type": "\"link\"",
+                    "name": "Link"
+                },
+                {
+                    "type": "\"multiple_choice\"",
+                    "name": "MultipleChoice"
+                },
+                {
+                    "type": "\"open\"",
+                    "name": "Open"
+                },
+                {
+                    "type": "\"rating\"",
+                    "name": "Rating"
+                },
+                {
+                    "type": "\"single_choice\"",
+                    "name": "SingleChoice"
+                }
+            ],
             "path": "lib/src/posthog-surveys-types.d.ts"
         },
         {
@@ -3808,14 +3948,69 @@
             "name": "SurveyRenderReason",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "disabledReason"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "visible"
+                }
+            ],
+            "path": "lib/src/posthog-surveys-types.d.ts"
+        },
+        {
+            "id": "SurveySchedule",
+            "name": "SurveySchedule",
+            "properties": [
+                {
+                    "type": "\"always\"",
+                    "name": "Always"
+                },
+                {
+                    "type": "\"once\"",
+                    "name": "Once"
+                },
+                {
+                    "type": "\"recurring\"",
+                    "name": "Recurring"
+                }
+            ],
+            "path": "lib/src/posthog-surveys-types.d.ts"
+        },
+        {
+            "id": "SurveyType",
+            "name": "SurveyType",
+            "properties": [
+                {
+                    "type": "\"api\"",
+                    "name": "API"
+                },
+                {
+                    "type": "\"popover\"",
+                    "name": "Popover"
+                },
+                {
+                    "type": "\"widget\"",
+                    "name": "Widget"
+                }
+            ],
+            "path": "lib/src/posthog-surveys-types.d.ts"
+        },
+        {
+            "id": "SurveyWidgetType",
+            "name": "SurveyWidgetType",
+            "properties": [
+                {
+                    "type": "\"button\"",
+                    "name": "Button"
+                },
+                {
+                    "type": "\"selector\"",
+                    "name": "Selector"
+                },
+                {
+                    "type": "\"tab\"",
+                    "name": "Tab"
                 }
             ],
             "path": "lib/src/posthog-surveys-types.d.ts"
@@ -3824,64 +4019,54 @@
             "id": "SurveyWithTypeAndAppearance",
             "name": "SurveyWithTypeAndAppearance",
             "properties": [],
-            "path": "lib/src/posthog-surveys-types.d.ts"
+            "path": "lib/src/posthog-surveys-types.d.ts",
+            "example": "\"id\" | \"type\" | \"appearance\""
         },
         {
             "id": "ToolbarParams",
             "name": "ToolbarParams",
             "properties": [
                 {
-                    "description": "No description available",
                     "type": "number",
                     "name": "actionId"
                 },
                 {
-                    "description": "No description available",
                     "type": "string[]",
                     "name": "dataAttributes"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "distinctId"
                 },
                 {
-                    "description": "No description available",
                     "type": "Record<string, string | boolean>",
                     "name": "featureFlags"
                 },
                 {
-                    "description": "No description available",
                     "type": "boolean",
                     "name": "instrument"
                 },
                 {
-                    "description": "No description available",
                     "type": "ToolbarSource",
                     "name": "source"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "temporaryToken"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "token"
                 },
                 {
-                    "description": "No description available",
                     "type": "ToolbarVersion",
                     "name": "toolbarVersion"
                 },
                 {
-                    "description": "No description available",
                     "type": "string",
                     "name": "userEmail"
                 },
                 {
-                    "description": "No description available",
                     "type": "ToolbarUserIntent",
                     "name": "userIntent"
                 }
@@ -3892,19 +4077,22 @@
             "id": "ToolbarSource",
             "name": "ToolbarSource",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"url\" | \"localstorage\""
         },
         {
             "id": "ToolbarUserIntent",
             "name": "ToolbarUserIntent",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"add-action\" | \"edit-action\""
         },
         {
             "id": "ToolbarVersion",
             "name": "ToolbarVersion",
             "properties": [],
-            "path": "lib/src/types.d.ts"
+            "path": "lib/src/types.d.ts",
+            "example": "\"toolbar\""
         }
     ]
 }

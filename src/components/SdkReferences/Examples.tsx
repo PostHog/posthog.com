@@ -11,6 +11,10 @@ interface Example {
 
 const FunctionExamples = ({ examples, title, language }: { examples: Example[]; title: string; language: string }) => {
     if (!examples || examples.length === 0) return null
+
+    // Get language info from the languageMap
+    const languageInfo = languageMap[language] || languageMap['js'] // fallback to 'js' if not found
+
     return (
         <div>
             <h4 className="text-lg font-semibold mb-4">Examples</h4>
@@ -29,8 +33,8 @@ const FunctionExamples = ({ examples, title, language }: { examples: Example[]; 
                                         <CodeBlock
                                             selector="dropdown"
                                             currentLanguage={{
-                                                label: languageMap[language].label as string,
-                                                language: languageMap[language].language,
+                                                label: languageInfo.label as string,
+                                                language: languageInfo.language,
                                                 code: example.code,
                                             }}
                                             label={
@@ -41,8 +45,8 @@ const FunctionExamples = ({ examples, title, language }: { examples: Example[]; 
                                         >
                                             {[
                                                 {
-                                                    label: 'JavaScript',
-                                                    language: 'javascript',
+                                                    label: languageInfo.label as string,
+                                                    language: languageInfo.language,
                                                     code: example.code,
                                                 },
                                             ]}
@@ -56,8 +60,8 @@ const FunctionExamples = ({ examples, title, language }: { examples: Example[]; 
                     <CodeBlock
                         selector="dropdown"
                         currentLanguage={{
-                            label: 'JavaScript',
-                            language: 'javascript',
+                            label: languageInfo.label as string,
+                            language: languageInfo.language,
                             code: examples[0].code,
                         }}
                         label={
@@ -68,8 +72,8 @@ const FunctionExamples = ({ examples, title, language }: { examples: Example[]; 
                     >
                         {[
                             {
-                                label: 'JavaScript',
-                                language: 'javascript',
+                                label: languageInfo.label as string,
+                                language: languageInfo.language,
                                 code: examples[0].code,
                             },
                         ]}
