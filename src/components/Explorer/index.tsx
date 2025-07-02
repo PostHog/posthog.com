@@ -193,7 +193,9 @@ export default function Explorer({
                             <div className="h-full flex flex-col">
                                 <div className="flex items-center justify-between p-4 border-b border-primary">
                                     <h3 className="font-semibold text-lg">
-                                        {productHandlers?.selectedProduct ? 'Product Details' : 'Cart'}
+                                        {productHandlers?.selectedProduct
+                                            ? productHandlers.selectedProduct.title
+                                            : 'Cart'}
                                     </h3>
                                     <button
                                         onClick={
