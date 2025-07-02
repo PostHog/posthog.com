@@ -6,7 +6,7 @@ We've built a new experimentation engine to support more advanced features and i
 
 * A single, consistent exposure criterion for the entire experiment
 * Support for outlier handling (Winsorization)
-* Exclusion of users exposed to multiple variants
+* Configurable handling of users exposed to multiple variants (exclude or use first seen variant)
 * Improved support for conversion windows and time-based metrics (formerly called trend metrics)
 * A better running time calculator that uses your historical data to estimate experiment duration
 
@@ -43,17 +43,40 @@ The new running time calculator provides a more accurate estimate of how long yo
 
 ## Experiment exposure
 
-This defines which users should be included in the experiment analysis. By default, we use the `$feature_flag_called` event, which typically indicates that a user was exposed to the experiment (i.e., saw the part of your app or site where the experiment is running). Only users who meet this criterion are included in the analysis.
-
-At the top of the experiment view, you'll see the total number of unique users in each variant. Users who saw more than one variant are grouped under `$multiple` and excluded from the analysis.
-
-Metric events are only counted if they occur *after* a user's first exposure.
+By default, a user is considered **exposed** when we record the `$feature_flag_called` event — meaning they reached the part of your product where the experiment runs. Only those users are included in the analysis. If the default `$feature_flag_called` event is not suitable for you, you can specify a different exposure event. We will then use the event property `$feature/<flag-key>: <variant-key>` to determine which variant a user is in.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_light_ec214e48ed.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_dark_32df91d9a6.png"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_light_b59c7a8a47.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_dark_73e0a1ae87.png"
   classes="rounded"
-  alt="Screenshot of outlier handling"
+  alt="Screenshot of edit exposure criteria"
+/>
+
+The experiment view shows the unique-user count for each variant at the top.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_light_354254b3e7.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_dark_7c1c480e54.png"
+  classes="rounded"
+  alt="Screenshot of experiment exposures"
+/>
+
+**Note:** Metric events are only counted if they occur *after* a user's first exposure.
+
+### Users exposed to multiple variants
+
+Sometimes, users may have been expsoed to more than one variant. To ensure robust experiment results, the default behavior is to exclude them from the analysis.
+If you still would like to inlucde them, you can change this behavior under "Edit exposure criteria":
+
+* **Exclude** (default): Exclude users exposed to multiple variants. This ensures clean results by only analyzing users who had a single, consistent experience. Excluded users are grouped under `$multiple` in the exposure table.
+
+* **First seen variant**: Include the users and attribute all metric events to the first variant they encountered. Only choose this option if you know what you are doing.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/multiple_variant_light_af25168c00.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/multiple_variant_dark_eb2a92c5ba.png"
+  classes="rounded"
+  alt="Screenshot of multiple variant handling"
 />
 
 ---
@@ -107,33 +130,4 @@ This ensures that only relevant, post-exposure behavior is included in the analy
   imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/conversion_window_limit_dark_c07beddef8.png"
   classes="rounded"
   alt="Screenshot of conversion window configuration"
-/>
-
----
-
-## What's not yet supported
-
-The new engine is still in beta, so some features in the old engine aren't supported yet.  We are working on fixing this and hope to ship them soon.
-
-* **Exploring results**: You can not yet easily explore and dive deeper into results in product analytics. You will have to manually create insights to do so.
-* **Funnel step breakdown**: We currently only display the conversion rate from first step (experiment exposure) to the last step of the funnel.
-* **Session recording links for funnels**: There is no direct links to session recordings for funnel metric results.
-
----
-
-## How to disable the new experimentation engine
-
-If you're having issues with the new engine, we would love to hear from you. You can email [anders@posthog.com](mailto:anders@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com/#panel=support%3Afeedback%3Aexperiments%3Alow%3Afalse), or use one of our other [support options](/docs/support-options).
-
-To disable the new experimentation engine:
-
-1. Click on your name in the lower-left corner of the [PostHog app](https://us.posthog.com/#panel=feature-previews) to open the menu.
-2. Select **Feature previews**.
-3. In the side panel that appears on the right, find **New experimentation engine** and toggle it off.
-
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_11_at_13_40_00_96f6868c79.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_11_at_13_39_36_9cc58e437d.png"
-  classes="rounded"
-  alt="Screenshot of how to find feature previews"
 />
