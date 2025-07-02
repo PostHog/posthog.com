@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { IconSearch, IconChatHelp, IconUser, IconApp, IconMessage, IconLetter, IconLock } from '@posthog/icons'
+import {
+    IconSearch,
+    IconChatHelp,
+    IconUser,
+    IconApp,
+    IconMessage,
+    IconLetter,
+    IconLock,
+    IconBookmark,
+} from '@posthog/icons'
 import { useApp } from '../../context/App'
 
 import { Popover } from 'components/RadixUI/Popover'
@@ -122,6 +131,12 @@ export default function TaskBarMenu() {
                                     label: 'My profile',
                                     link: `/community/profiles/${user?.profile.id}`,
                                     icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Bookmarks',
+                                    link: '/bookmarks',
+                                    icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),

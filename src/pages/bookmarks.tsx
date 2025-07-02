@@ -4,7 +4,7 @@ import { useUser } from 'hooks/useUser'
 import React, { useEffect, useState, useMemo } from 'react'
 import Link from 'components/Link'
 import Fuse from 'fuse.js'
-import { IconEllipsis } from '@posthog/icons'
+import { IconBookmark, IconEllipsis } from '@posthog/icons'
 import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/OSButton'
 import MenuBar from 'components/RadixUI/MenuBar'
@@ -51,18 +51,23 @@ const Bookmark = ({ title, description, url }: { title: string; description: str
     }, [url])
 
     return (
-        <div className="flex flex-col gap-1">
+        <div data-scheme="primary" className="flex flex-col gap-1 border border-primary bg-primary rounded p-2">
             {image ? (
                 <div className="relative">
                     <Link state={{ newWindow: true }} to={url.replace('https://posthog.com', '')}>
-                        <img src={image} alt={title} />
+                        <img src={image} alt={title} className="rounded border border-primary" />
                     </Link>
-                    <div className="absolute top-0 right-0">
+                    <div className="flex items-center justify-between pt-1">
+                        <h3 className="m-0 px-1">
+                            <Link state={{ newWindow: true }} to={url.replace('https://posthog.com', '')}>
+                                {title}
+                            </Link>
+                        </h3>
                         <EditButton url={url} />
                     </div>
                 </div>
             ) : (
-                <div>
+                <div className="pl-2">
                     <div className="flex items-center justify-between">
                         <Link
                             state={{ newWindow: true }}
@@ -109,8 +114,8 @@ export default function Bookmarks() {
     return (
         <div className="@container">
             <HeaderBar showSearch onSearch={setSearch} />
-            <div className="p-5 border-t border-primary">
-                {user?.profile?.bookmarks?.length > 0 ? (
+            <div className="p-4">
+                {user?.profile?.bookmarks && user.profile.bookmarks.length > 0 ? (
                     filteredBookmarks.length > 0 ? (
                         <ul className="list-none m-0 grid grid-cols-1 gap-5 @md:grid-cols-2 @xl:grid-cols-3 @2xl:grid-cols-4">
                             {filteredBookmarks?.map((bookmark) => (
@@ -122,6 +127,7 @@ export default function Bookmarks() {
                     ) : null
                 ) : (
                     <div className="text-center py-12">
+                        <IconBookmark className="size-12 mx-auto mb-2 text-muted" />
                         <h3 className="text-lg font-semibold m-0">No bookmarks ...yet!</h3>
                         <p className="text-muted m-0">Start exploring and bookmark your favorite pages.</p>
                     </div>
