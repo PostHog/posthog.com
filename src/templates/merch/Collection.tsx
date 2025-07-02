@@ -26,6 +26,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 template="generic"
                 slug={pageContext.handle}
                 headerBarOptions={['showBack', 'showForward', 'showSearch', 'showCart']}
+                padding={false}
+                showTitle={false}
                 sidebarContent={[
                     {
                         title: 'About PostHog',
