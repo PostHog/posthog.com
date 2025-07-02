@@ -1228,10 +1228,6 @@ export const handbookSidebar = [
                 url: '/handbook/product/releasing-as-beta',
             },
             {
-                name: 'Building new products fast',
-                url: '/handbook/product/building-new-products-fast',
-            },
-            {
                 name: 'Product manager role',
                 url: '/handbook/product/product-manager-role',
             },
