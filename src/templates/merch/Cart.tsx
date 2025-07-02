@@ -20,15 +20,14 @@ export function Cart(props: CartProps): React.ReactElement {
 
     const isEmpty = cartItems.length === 0
 
-    const classes = cn('text-primary dark:text-primary-dark h-full p-8 pt-20', className)
+    const classes = cn('text-primary h-full p-4', className)
 
     return (
         <div className={classes}>
-            <h3 className="text-xl font-bold mb-4">Cart</h3>
             {isEmpty && (
-                <div className="border border-primary bg-tan dark:bg-dark rounded p-8 text-center flex flex-col gap-8">
+                <div className="border border-primary bg-tan dark:bg-dark rounded p-2 text-center flex flex-col gap-8">
                     <p className="font-medium mb-0">This cart would look better with something in it.</p>
-                    <div className="w-64 mx-auto">
+                    <div className="w-48 mx-auto">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/shopahogic.png"
                             alt="Empty cart"
@@ -36,8 +35,6 @@ export function Cart(props: CartProps): React.ReactElement {
                     </div>
                 </div>
             )}
-
-            {!isEmpty && <ShippingBanner />}
 
             <>
                 <div>

@@ -150,14 +150,18 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             >
                 <SEO title="Merch - PostHog" image="/images/merch.png" />
                 <Nav currentCollectionHandle={pageContext.handle} />
-                <div className="p-4 flex gap-4">
-                    <div className="flex-1">
+                <ShippingBanner />
+                <div className="flex gap-4">
+                    <div className="@container flex-1 not-prose">
                         <DebugContainerQuery />
-                        <ShippingBanner />
-                        <ProductGrid products={transformedProducts} onProductClick={handleProductSelect} />
+                        <ProductGrid
+                            products={transformedProducts}
+                            onProductClick={handleProductSelect}
+                            selectedProduct={selectedProduct}
+                        />
                     </div>
                     {selectedProduct && (
-                        <aside className="w-[400px] bg-accent border-l border-primary">
+                        <aside className="not-prose w-96 bg-accent border-l border-primary">
                             <div className="h-full flex flex-col">
                                 <div className="flex items-center justify-between p-4 border-b border-primary">
                                     <h3 className="font-semibold text-lg">Product Details</h3>

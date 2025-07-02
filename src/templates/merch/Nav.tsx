@@ -32,7 +32,7 @@ export function Nav(props: NavProps): React.ReactElement {
 
     return (
         <>
-            <div className="mb-6 px-2 z-[50] bg-accent border-b border-primary">
+            <div className="px-2 z-[50] bg-accent border-b border-primary">
                 <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-3 py-1 min-h-[40px]">
                     {/**
                      * If you're on a product page
@@ -74,8 +74,7 @@ export function Nav(props: NavProps): React.ReactElement {
                                                     <Listbox.Option
                                                         key={i}
                                                         className={({ active }) =>
-                                                            `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent ${
-                                                                active ? 'font-bold' : 'opacity-75'
+                                                            `relative select-none py-2 px-4 text-sm cursor-pointer hover:bg-accent ${active ? 'font-bold' : 'opacity-75'
                                                             }`
                                                         }
                                                         value={collection}
@@ -87,9 +86,8 @@ export function Nav(props: NavProps): React.ReactElement {
                                                         }) => (
                                                             <>
                                                                 <span
-                                                                    className={`block truncate ${
-                                                                        currentCollection ? 'font-bold' : 'font-normal'
-                                                                    }`}
+                                                                    className={`block truncate ${currentCollection ? 'font-bold' : 'font-normal'
+                                                                        }`}
                                                                 >
                                                                     {collection.title}
                                                                 </span>

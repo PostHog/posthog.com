@@ -9,6 +9,7 @@ type ProductGridProps = {
     className?: string
     products: ShopifyProduct[]
     onProductClick?: (product: ShopifyProduct) => void
+    selectedProduct?: ShopifyProduct | null
 }
 
 function getProductFromHandle(products: ShopifyProduct[], handle: string) {
@@ -16,7 +17,7 @@ function getProductFromHandle(products: ShopifyProduct[], handle: string) {
 }
 
 export default function ProductGrid(props: ProductGridProps): React.ReactElement {
-    const { className, products, onProductClick } = props
+    const { className, products, onProductClick, selectedProduct } = props
     const [sidePanels, setSidePanels] = useState<{
         isOpen: boolean
         product: ShopifyProduct | null
@@ -58,7 +59,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
     }, [])
 
     const classes = cn(
-        'grid grid-cols-2 @3xl:grid-cols-3 gap-4 @2xl:gap-6',
+        'grid grid-cols-2 @3xl:grid-cols-3 gap-1 p-2',
         className
     )
 
@@ -80,6 +81,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
                             key={product.shopifyId}
                             product={product}
                             onClick={() => updateURL(product)}
+                            selected={selectedProduct?.shopifyId === product.shopifyId}
                         />
                     )
                 })}

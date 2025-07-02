@@ -178,10 +178,10 @@ export default function Explorer({
                         }`}
                 >
                     {cartHandlers?.isCartOpen && (
-                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+                        <aside data-scheme="secondary" className="not-prose w-96 bg-primary border-l border-primary h-full">
                             <div className="h-full flex flex-col">
                                 <div className="flex items-center justify-between p-4 border-b border-primary">
-                                    <h3 className="font-semibold text-lg">Shopping Cart</h3>
+                                    <h3 className="font-semibold text-lg">Cart</h3>
                                     <button
                                         onClick={cartHandlers?.onCartClose}
                                         className="text-primary hover:text-red transition-colors text-xl"
