@@ -14,6 +14,7 @@ import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
 import { getProductMetafieldByNamespace } from './utils'
 import { IconShop, IconShirt, IconSticker, IconMug, IconCouch } from 'components/OSIcons/Icons'
+import { Link } from 'gatsby'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -254,20 +255,32 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                     A tech startup with merch you actually want to wear? Now that's a novel idea...
                                 </p>
                                 <p className="text-sm mb-0">
-                                    <OSButton
-                                        variant="underline"
-                                        asLink
-                                        align="left"
-                                        width="full"
-                                        size="md"
-                                        to="/why"
-                                        icon={<Icons.IconArrowRight className="text-salmon" />}
-                                        iconPosition="right"
-                                        className="font-semibold !px-0"
-                                    >
-                                        Read about it
-                                    </OSButton>
+                                    We won't stop until our merch store reaches product-market fit.
                                 </p>
+                            </>
+                        ),
+                    },
+                    {
+                        title: 'Shipping',
+                        content: (
+                            <>
+                                <p className="prose text-primary text-sm mb-2">Merch is shipped from Ohio via our fulfillment partner, <a href="https://www.micromerch.com/" target="_blank" rel="noopener noreferrer">MicroMerch</a>.</p>
+                                <p><strong>Estimated shipping times:</strong></p>
+                                <div className="grid grid-cols-2 gap-2 mb-2">
+                                    <strong>Within the US:</strong>
+                                    <span>1-2 weeks</span>
+                                    <strong>Outside the US:</strong>
+                                    <span>2-4 weeks</span>
+                                </div>
+                            </>
+                        ),
+                    },
+                    {
+                        title: 'Returns',
+                        content: (
+                            <>
+                                <p>Returns?? We've literally never had a return. Not sure if it's because our products are that awesome or because we don't have an official return policy.</p>
+                                <p>Until then, just email merch@posthog.com if you have any issues and we'll get you squared away.</p>
                             </>
                         ),
                     },
@@ -276,31 +289,35 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         content: (
                             <>
                                 <p className="text-sm mb-2">
-                                    Submit a product request on GitHub.
+                                    Is our merch store missing something vital that you need for your closet or desk? Share your product idea with us on GitHub.
                                 </p>
 
-                                <OSButton
-                                    variant="underline"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="md"
-                                    to="/product-os"
-                                    icon={<Icons.IconStack className="text-salmon" />}
-                                >
-                                    RFP (request for product)
-                                </OSButton>
+                                <p className="text-sm mb-0">
+                                    <OSButton
+                                        variant="underline"
+                                        asLink
+                                        align="left"
+                                        width="full"
+                                        size="md"
+                                        to="https://github.com/posthog/posthog.com/issues"
+                                        icon={<Icons.IconArrowRight className="text-salmon" />}
+                                        iconPosition="right"
+                                        className="font-semibold !px-0"
+                                        externalNoIcon
+                                    >
+                                        Submit a product idea
+                                    </OSButton>
+                                </p>
                             </>
                         ),
                     },
                 ]}
             >
                 <SEO title="Merch - PostHog" image="/images/merch.png" />
-                <Nav currentCollectionHandle={pageContext.handle} />
-                <ShippingBanner />
+                {/* <Nav currentCollectionHandle={pageContext.handle} /> */}
+                {/* <ShippingBanner /> */}
                 <div className="flex gap-4">
                     <div className="@container flex-1 not-prose">
-                        <DebugContainerQuery />
                         <ProductGrid
                             products={filteredProducts}
                             onProductClick={handleProductSelect}

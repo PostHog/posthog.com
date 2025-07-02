@@ -107,12 +107,6 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
             <div className="space-y-0.5 text-center">
                 <h3 className="text-base leading-snug">
                     {product.title}
-                    <br />
-                    Category:
-                    {product.category ? product.category.name : 'No category'} <br />
-                    {product.category && (
-                        <span className="block text-xs text-muted mt-1">{getCategoryBreadcrumb(product.category)}</span>
-                    )}
                 </h3>
                 <p>
                     {productName}

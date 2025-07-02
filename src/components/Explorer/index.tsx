@@ -147,7 +147,7 @@ export default function Explorer({
                     {(productHandlers?.selectedProduct || cartHandlers?.isCartOpen) && (
                         <aside
                             data-scheme="secondary"
-                            className="not-prose w-96 bg-primary border-l border-primary h-full"
+                            className="not-prose w-96 bg-primary border-l border-primary h-full text-primary"
                         >
                             <div className="h-full flex flex-col">
                                 {/* 
