@@ -4,6 +4,7 @@ import { cn } from '../../utils'
 import { ProductCard } from './ProductCard'
 import { ProductPanels } from './ProductPanels'
 import { ShopifyProduct } from './types'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 type ProductGridProps = {
     className?: string
@@ -11,8 +12,6 @@ type ProductGridProps = {
     onProductClick?: (product: ShopifyProduct) => void
     selectedProduct?: ShopifyProduct | null
 }
-
-
 
 export default function ProductGrid(props: ProductGridProps): React.ReactElement {
     const { className, products, onProductClick, selectedProduct } = props
@@ -43,10 +42,7 @@ export default function ProductGrid(props: ProductGridProps): React.ReactElement
 
     // URL handling is now done in Collection.tsx component
 
-    const classes = cn(
-        'grid grid-cols-2 @3xl:grid-cols-3 gap-1 p-2',
-        className
-    )
+    const classes = cn('grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 @7xl:grid-cols-5 @2xl:gap-1 p-2', className)
 
     return (
         <>
