@@ -90,7 +90,7 @@ const features = [
     },
     {
         title: 'Multi-step surveys',
-        description: 'Up to 10 questions',
+        description: 'Ask multiple questions in a single survey',
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/steps.png"
@@ -113,7 +113,7 @@ const features = [
     {
         title: 'No-code? Yes. API? Yes.',
         description:
-            "Using PostHog.js? No more code required. But want to create your own UI? Check out the <a href='/docs/api/surveys'>Surveys API</a>.",
+            "Using Popover or Feedback button surveys? No more code required. But want to create your own UI? Check out the <a href='/docs/api/surveys'>Surveys API</a>.",
         image: (
             <CloudinaryImage
                 src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/api.png"

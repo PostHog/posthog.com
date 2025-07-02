@@ -322,7 +322,7 @@ const Teams: React.FC = () => {
                                 </p>
 
                                 <p>
-                                    <em>“Everybody codes”</em> has made it to{' '}
+                                    <em>"You're the driver"</em> has made it to{' '}
                                     <Link href="/handbook/values">our list of values</Link>.
                                 </p>
 
