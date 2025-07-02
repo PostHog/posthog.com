@@ -22,7 +22,7 @@ You need to know two things about PostHog before reading this article:
 
 Here’s what we’ve learned about marketing for developers.
 
-1. Ask yourself if your marketing is [genuinely useful](/founders/dev-marketing-for-startups) to a developer. This applies to everything you do from SEO to landing pages to paid ads. If you wouldn’t be proud to share it with a friend, you shouldn’t do it.
+1. If you wouldn't be proud to share your marketing with a friend, you shouldn't do it.
 
 2. Developers build things because what exists isn’t good enough. Tell people that! [Be opinionated](/handbook/growth/marketing#1-be-opinionated), unhappy with the status quo, and take a stand. Don’t follow the crowd or dilute your message with a bunch of corporate speak. 
 
@@ -36,7 +36,7 @@ Here’s what we’ve learned about marketing for developers.
 
 7. The best way to create your ICP is to start with [your best guess and test it](/newsletter/ideal-customer-profile-framework#3-start-with-your-best-guess-and-test-it). Figure out what your customer needs, what they have, and what they don’t need. [Gather intel,](/newsletter/ideal-customer-profile-framework#4-gather-intel-every-way-you-can) ask questions, and fill in details from there.
 
-8. Because our ICP is developers, we hire developers to do marketing. This gives us the skills we need to understand developers, speak their language, and create content they find useful.
+8. Because our ICP is developers, we hire developers to do marketing. This gives us the skills we need to understand developers, speak their language, and create content they find [genuinely useful](/founders/dev-marketing-for-startups).
 
 9. Speak like your users. Find out the terms and phrases they use and use those. Talking to users is a great way to figure this out. Doing so helps make your product legible to them. 
 
