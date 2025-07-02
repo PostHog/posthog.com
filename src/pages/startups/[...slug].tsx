@@ -65,7 +65,7 @@ export default function Startups(): JSX.Element {
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
-                sidebarContent={
+                leftSidebarContent={
                     <>
                         <Accordion
                             data-scheme="primary"

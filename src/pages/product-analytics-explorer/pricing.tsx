@@ -59,7 +59,7 @@ export default function ProductAnalyticsPricing(): JSX.Element {
                 template="product"
                 slug={slug}
                 title="Usage-based pricing"
-                sidebarContent={<ProductSidebar type="product_analytics" />}
+                leftSidebarContent={<ProductSidebar type="product_analytics" />}
             >
                 <div className="flex flex-col-reverse md:flex-row md:gap-12">
                     <div className="flex-1">

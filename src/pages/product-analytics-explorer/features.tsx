@@ -54,7 +54,7 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 template="product"
                 slug="product-analytics"
                 title="Features"
-                sidebarContent={<ProductSidebar type="product_analytics" />}
+                leftSidebarContent={<ProductSidebar type="product_analytics" />}
             >
                 <div className="@xl:hidden">
                     <Accordion

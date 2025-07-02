@@ -19,13 +19,14 @@ import { Link } from 'gatsby'
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
 
-const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number; slug: string }> = {
-    'all': { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
-    'Apparel': { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
-    'Stickers': { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
-    'Goods': { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
-    'Novelty': { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
-}
+const categoryConfig: Record<CategoryKey, { label: string; icon: string; color: string; order: number; slug: string }> =
+    {
+        all: { label: 'All products', icon: 'IconShop', color: 'blue', order: 1, slug: 'all' },
+        Apparel: { label: 'Apparel', icon: 'IconShirt', color: 'purple', order: 2, slug: 'apparel' },
+        Stickers: { label: 'Stickers', icon: 'IconSticker', color: 'yellow', order: 3, slug: 'stickers' },
+        Goods: { label: 'Goods', icon: 'IconMug', color: 'orange', order: 4, slug: 'goods' },
+        Novelty: { label: 'Novelty', icon: 'IconCouch', color: 'teal', order: 5, slug: 'novelty' },
+    }
 
 type CollectionProps = {
     pageContext: CollectionPageContext
@@ -35,8 +36,6 @@ type CollectionProps = {
 function getProductFromHandle(products: any[], handle: string) {
     return products.find((p) => p.handle === handle) || null
 }
-
-
 
 // Helper function to update URL without triggering navigation
 function updateURL(params: { product?: string; state?: string; category?: string }) {
@@ -56,7 +55,10 @@ function updateURL(params: { product?: string; state?: string; category?: string
             url.searchParams.set('state', params.state)
         }
         if (params.category && params.category !== 'all') {
-            url.searchParams.set('category', categoryConfig[params.category as CategoryKey]?.slug || params.category.toLowerCase())
+            url.searchParams.set(
+                'category',
+                categoryConfig[params.category as CategoryKey]?.slug || params.category.toLowerCase()
+            )
         }
 
         window.history.pushState({}, '', url.toString())
@@ -84,8 +86,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             // Handle category parameter
             if (category) {
                 // Find the category key that matches the slug
-                const properCategory = Object.entries(categoryConfig).find(([key, config]) =>
-                    config.slug === category.toLowerCase()
+                const properCategory = Object.entries(categoryConfig).find(
+                    ([key, config]) => config.slug === category.toLowerCase()
                 )?.[0]
                 if (properCategory && categoryConfig[properCategory as CategoryKey]) {
                     setSelectedCategory(properCategory)
@@ -136,7 +138,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             }
             // Try the direct search if namespace search fails
             else {
-                const directCategorySearch = product.metafields?.find(m => m.key === 'category')
+                const directCategorySearch = product.metafields?.find((m) => m.key === 'category')
                 if (directCategorySearch && typeof directCategorySearch.value === 'string') {
                     foundCategories.add(directCategorySearch.value)
                 }
@@ -153,7 +155,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
 
         // Filter to only include configured categories and sort by order
         const categoryList = Array.from(foundCategories)
-            .filter(category => categoryConfig[category as CategoryKey]) // Only include configured categories
+            .filter((category) => categoryConfig[category as CategoryKey]) // Only include configured categories
             .sort((a, b) => categoryConfig[a as CategoryKey].order - categoryConfig[b as CategoryKey].order) // Sort by configured order
 
         return [
@@ -185,7 +187,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 return metafieldCategory === selectedCategory
             }
             // Try direct search for category key regardless of namespace
-            const directCategorySearch = product.metafields?.find(m => m.key === 'category')
+            const directCategorySearch = product.metafields?.find((m) => m.key === 'category')
             if (directCategorySearch && typeof directCategorySearch.value === 'string') {
                 return directCategorySearch.value === selectedCategory
             }
@@ -229,24 +231,23 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 cartHandlers={{
                     onCartOpen: handleCartOpen,
                     onCartClose: handleCartClose,
-                    isCartOpen: cartIsOpen
+                    isCartOpen: cartIsOpen,
                 }}
-                cartContent={<Cart className="h-full overflow-y-auto" />}
-                productHandlers={{
-                    onProductClose: handleProductClose,
-                    selectedProduct: selectedProduct
-                }}
-                productContent={selectedProduct && (
-                    <ProductPanel
-                        product={selectedProduct}
-                        setIsCart={() => { }} // Not used in sidebar mode
-                        onClick={() => { }} // Not used in sidebar mode
-                        updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
-                        onCartOpen={handleCartOpen} // Allow opening cart from product panel
-                        className="!p-4 !pt-4" // Override default padding
-                    />
-                )}
-                sidebarContent={[
+                rightSidebarContent={
+                    cartIsOpen ? (
+                        <Cart className="h-full overflow-y-auto" />
+                    ) : selectedProduct ? (
+                        <ProductPanel
+                            product={selectedProduct}
+                            setIsCart={() => {}} // Not used in sidebar mode
+                            onClick={() => {}} // Not used in sidebar mode
+                            updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
+                            onCartOpen={handleCartOpen} // Allow opening cart from product panel
+                            className="!p-4 !pt-4" // Override default padding
+                        />
+                    ) : null
+                }
+                leftSidebarContent={[
                     {
                         title: 'About our merch',
                         content: (
@@ -264,8 +265,16 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         title: 'Shipping',
                         content: (
                             <>
-                                <p className="prose text-primary text-sm mb-2">Merch is shipped from Ohio via our fulfillment partner, <a href="https://www.micromerch.com/" target="_blank" rel="noopener noreferrer">MicroMerch</a>.</p>
-                                <p><strong>Estimated shipping times:</strong></p>
+                                <p className="prose text-primary text-sm mb-2">
+                                    Merch is shipped from Ohio via our fulfillment partner,{' '}
+                                    <a href="https://www.micromerch.com/" target="_blank" rel="noopener noreferrer">
+                                        MicroMerch
+                                    </a>
+                                    .
+                                </p>
+                                <p>
+                                    <strong>Estimated shipping times:</strong>
+                                </p>
                                 <div className="grid grid-cols-2 gap-2 mb-2">
                                     <strong>Within the US:</strong>
                                     <span>1-2 weeks</span>
@@ -279,8 +288,14 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         title: 'Returns',
                         content: (
                             <>
-                                <p>Returns?? We've literally never had a return. Not sure if it's because our products are that awesome or because we don't have an official return policy.</p>
-                                <p>Until then, just email merch@posthog.com if you have any issues and we'll get you squared away.</p>
+                                <p>
+                                    Returns?? We've literally never had a return. Not sure if it's because our products
+                                    are that awesome or because we don't have an official return policy.
+                                </p>
+                                <p>
+                                    Until then, just email merch@posthog.com if you have any issues and we'll get you
+                                    squared away.
+                                </p>
                             </>
                         ),
                     },
@@ -289,7 +304,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                         content: (
                             <>
                                 <p className="text-sm mb-2">
-                                    Is our merch store missing something vital that you need for your closet or desk? Share your product idea with us on GitHub.
+                                    Is our merch store missing something vital that you need for your closet or desk?
+                                    Share your product idea with us on GitHub.
                                 </p>
 
                                 <p className="text-sm mb-0">
