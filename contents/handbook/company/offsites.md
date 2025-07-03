@@ -96,6 +96,10 @@ In the event of an emergency, please cover any related expenses (ideally on your
 
 If your travel plans are affected due to a flight delay or an airline-induced missed connection and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that were caused by the airline, but with a little bit of polite coaxing, they will likely give in.
 
+### Partners / family joining offsites
+
+Sometimes at PostHog you will be asked to travel to places you've never been before and it could be a good opportunity to travel with your partner / family. At PostHog, we do infrequent in-person work that we want to maximise this time in person and your focus to be on PostHog, without distraction. This is why we don't allow partners or family to join you for the dates that the offsite / onboarding takes place. If timing allows it, you are able to tack holiday onto either side and for your partner/family to join you for those dates. However, for the dates of the offsite, you should be staying alone and focusing on your time with your teammates. 
+
 ## How to plan an offsite in 8 weeks - a checklist
 
 Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. Here's a [spreadsheet template](https://docs.google.com/spreadsheets/d/1aeRGN8DWqMQbQ9duSMCqCO2JJbPkQuSDt_Jz2jx10UI/edit?usp=sharing) you can use with your team to democratically vote for the meetup location, and in other tabs, include travel information (in case someone's flight gets delayed/cancelled), schedule, project ideas, team activities, etc. To use any of the templates, create a copy to your own drive and edit as you see fit.

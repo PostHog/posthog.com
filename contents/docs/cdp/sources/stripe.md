@@ -18,8 +18,8 @@ You need to give your API key the following **Read** permissions:
 
 | Resource Type | Required Read Permissions                                |
 |--------------|--------------------------------------------------------|
-| Core         | Balance transaction sources, Charges, Customer, Product  |
-| Billing      | Invoice, Price, Subscription                            |
+| Core         | Balance transaction sources, Charges, Customer, Product, Disputes, Payouts  |
+| Billing      | Invoice, Price, Subscription, Credit notes                            |
 | Connected    | All resources                                           |
 
 ## Adding a data source 

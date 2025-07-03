@@ -4,6 +4,9 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/gatsby.svg
 ---
 
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 > This [library](https://github.com/posthog/gatsby-plugin-posthog) was built by the community. Thanks to [Ritesh Kadmawala](https://github.com/kgritesh) for building it.
 
 Gatsby behaves like a single-page app which means to track `$pageview` events special care is needed. This integration takes care of that.
@@ -48,3 +51,8 @@ This will automatically start tracking pageviews, clicks and more.
 In your code you can access posthog via `window.posthog`.
 
 For more instructions, see [browser JS library](/docs/integrate/client/js).
+
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />

@@ -1,0 +1,133 @@
+---
+title: PostHog community incubator
+showTitle: false
+showSidebar: true
+width: lg
+---
+
+import CommunityIncubatorForm from 'components/CommunityIncubatorForm'
+import CloudinaryImage from 'components/CloudinaryImage'
+
+<div className="md:-mt-12 flex flex-col lg:flex-row-reverse gap-8 md:items-center">
+
+<div className="flex-1 lg:flex-[0_0_400px] xl:flex-[0_0_600px]">
+  <img
+    src="https://res.cloudinary.com/dmukukwp6/image/upload/f_webp,h_680,w_1209,c_fill,g_auto,q_auto/mykonoshackathon_979cf7bec6?_a=AXAH4nI0"
+    alt="Builders at Mykonos hackathon"
+    className="w-full shadow-xl rounded"
+  />
+</div>
+
+<div className="mx-auto lg:my-6">
+  <h1 className="text-4xl lg:!text-5xl !mb-1">PostHog community incubator</h1>
+  <h2 className="!text-xl font-semibold mb-6 opacity-70">Cash grants and support to help you start a <span className="whitespace-nowrap">co-working</span> group in your city</h2>
+
+
+  <p className="text-lg lg:text-xl mt-4 mb-4">
+    Want to start a co-working community of builders in your city? We're launching a pilot program in emerging tech hubs across the UK, EU, and North America and are looking for builders who want to be the first chapters we invest in.
+  </p>
+
+  <a href="#apply" className="inline-block mb-10">
+    <CallToAction to="#apply" type="primary">Apply to lead a chapter</CallToAction>
+  </a>
+  
+</div>
+
+</div>
+
+<div className="my-12 md:my-24">
+  <h3 className="text-2xl lg:text-4xl m-0 md:text-center mb-6">Here's how we support organizers</h3>
+  <div className="flex justify-center">
+    <ul className="m-0 p-0 list-none inline-grid sm:grid-cols-2 lg:grid-cols-3 gap-[10px] justify-evenly relative md:text-center sm:text-left">
+      <li className="bg-accent dark:bg-accent-dark relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
+        <h5 className="text-xl font-extrabold !m-0 pb-1 pr-4 text-black dark:text-white">$800 cash grant</h5>
+        <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
+          Meant to get you going and to be used at organizer's discretion. It's main purpose is to encourage you to get started. We'll also send merch. 
+        </p>
+      </li>
+      <li className="bg-accent dark:bg-accent-dark relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
+        <h5 className="text-xl font-extrabold !m-0 pb-1 pr-4 text-black dark:text-white">Help attracting attendees</h5>
+        <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
+          The people you gather are the sparks of your community. We'll help you find the builders we'd work alongside any day. 
+        </p>
+      </li>
+      <li className="bg-accent dark:bg-accent-dark relative md:max-w-md py-4 md:py-8 pl-4 pr-2 md:px-12 lg:px-8 rounded-2xl shadow-sm transition-colors duration-300">
+        <h5 className="text-xl font-extrabold !m-0 pb-1 pr-4 text-black dark:text-white">Help finding a venue</h5>
+        <p className="m-0 text-[15px] text-gray-800 dark:text-gray-300">
+          We've been remote working in coffee shops and co-working spaces for four years. We can help you find a great spot for your team.
+        </p>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div className="grid md:grid-cols-2 gap-8 items-start mt-6">
+  <div>
+    <h2 className="text-3xl lg:text-4xl mb-6">What we're asking from you, pilot participants</h2>
+    <p>
+      Bring together a group of at least 6 people to co-work and build for 4 straight weeks. The goal is to give you the initial push but let you carry forward afterwards. If the group continues and grows, we're going to highlight it in our community. 
+    </p>
+    <p>
+      Create a consistent time and structure that works for your group. For times, do evenings or weekends. For format, we suggest two ingredients: building and demo-ing.
+    </p>
+    <p>
+      Let us know how it's going along the way.
+    </p>
+  </div>
+  <div className="relative">
+    <div className="border-8 border-white shadow-xl rounded relative rotate-1">
+      <CloudinaryImage
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/cambridge_9a4e27f42e"
+        alt="Builder community in action"
+        className="w-full"
+      />
+      <div className="absolute bottom-0 left-0 w-full text-white bg-gradient-to-b from-black/0 to-black/50 p-2 pt-8 text-sm">
+        This could be you, hacking alongside us
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="apply" className="pt-6 md:pt-12">
+<div className="max-w-screen-md mx-auto">
+<h2 className="text-3xl lg:text-4xl text-center mb-8">Apply to lead a chapter</h2>
+
+<CommunityIncubatorForm />
+
+</div>
+</section>
+
+<section className="my-12 md:my-24 px-5">
+<div className="max-w-screen-md mx-auto space-y-1">
+<details>
+<summary>Who is eligible to lead?</summary>
+<p>You are someone who really wants to get together with other builders. You are plugged into your local ecosystem and operate with a bias for action.</p>
+</details>
+
+<details>
+<summary>Who is eligible to attend?</summary>
+<p>Individuals or small teams who want to build products.</p>
+</details>
+
+<details>
+<summary>What if more than one person applies from the same city?</summary>
+<p>For the pilot program we'll only select one based on your application and past experience. We'll connect you with other applicants from the same city.</p>
+</details>
+
+<details>
+<summary>What happens after 4 weeks?</summary>
+<p>You've now bootstrapped a community, keep it going. If you didn't get the traction required to keep it going, we'll mourn then move on.</p>
+</details>
+
+<details>
+<summary>What level of support do I get?</summary>
+<p>We're looking for organizers who can drive this builder community with limited support from us. Still, we'll be here to help along the way.</p>
+</details>
+
+<details>
+<summary>What's in it for us?</summary>
+<p>We are excited about helping to bootstrap communities of builders around the world. That's what we're in it for. No one needs to use PostHog as part of this.</p>
+</details>
+    
+</div>
+</section>

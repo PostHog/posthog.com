@@ -57,9 +57,9 @@ end
 
 ### Development mode
 
-If you are running in development or test mode, you can pass in a `capture_disabled: false` value to the config. This causes events to be dropped instead of sent to PostHog.
+If you are running in development or test mode, you can pass in a `enabled_capture: false` value to the config. This causes events to be dropped instead of sent to PostHog.
 
 ```elixir
 config :posthog,
-  capture_disabled: false
+  enabled_capture: false
 ```

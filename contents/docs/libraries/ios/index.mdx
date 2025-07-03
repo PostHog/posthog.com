@@ -19,7 +19,7 @@ features:
 ---
 
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
-import IOSIdentify from './\_snippets/identify.mdx'
+import IOSIdentify from './_snippets/identify.mdx'
 import IOSSendEvents from '../../integrate/send-events/_snippets/send-events-ios.mdx'
 
 This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -200,7 +200,7 @@ You can completely opt-out users from data capture. To do this, there are two op
 1. Opt users out by default by setting `optOut` to `true` in your PostHog config:
 
 ```swift
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_client_api_host>")
 config.optOut = true
 PostHogSDK.shared.setup(config)
 ```

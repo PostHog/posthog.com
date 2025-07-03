@@ -1,0 +1,85 @@
+---
+title: Frequentist statistical method
+---
+
+> You can set the default statistical method for experiments in **Settings > Organization > General**. You can also override this on a per-experiment basis in each experiment's settings.
+
+PostHog supports two statistical approaches: **Bayesian** and **Frequentist**. This page explains how our **Frequentist** engine works, what metrics it supports, and how to interpret its results.
+
+Frequentist testing is the classical statistical approach used in most academic and industry-standard A/B testing tools. Instead of assigning probabilities to outcomes, it asks: _“If there were no real difference between variants, how likely would we be to observe results like this?”_ That’s the foundation for the p-value and confidence interval you'll see in experiment results.
+
+## Supported metric types
+
+We support two metric types for Frequentist analysis:
+
+### Funnel
+
+Calculates the percentage of users for whom the metric occurred at least once (e.g. "Signed up", "Clicked CTA"). These are binary outcomes: the event either happened for a user or it didn’t.
+
+### Mean
+
+Tracks the value of the metric per user (e.g. revenue, session duration, number of clicks). These are numerical values and can often vary significantly between users.
+
+> **Note:** For mean metrics, you can limit the impact of extreme values using outlier handling. [Learn more about outlier handling](/docs/experiments/new-experimentation-engine#outlier-handling).
+
+## How the Frequentist engine works
+> To verify how the statistical calculations are implemented, [see the code in our GitHub repo](https://github.com/PostHog/posthog/tree/master/products/experiments/stats/frequentist).
+
+We use **Welch’s t-test** with a two-sided alternative. Welch’s method is robust when sample sizes or variances differ between control and test groups.
+
+Here's how the analysis works behind the scenes:
+
+### Step 1: Estimate the effect
+
+We start by calculating the difference between the control and test groups. Depending on your experiment configuration, this can be an **absolute** difference (e.g. +0.3 conversions per user) or a **relative** difference (e.g. +25% increase compared to control).
+
+### Step 2: Quantify uncertainty
+
+Next, we calculate how uncertain that difference is. This depends on:
+
+- Sample size (users per group)
+- Variability in each group (how much user behavior fluctuates)
+
+For example, conversion metrics (Funnel) rely on how consistently users convert. Mean metrics (e.g. revenue per user) depend on variation in numerical values.
+
+To account for differences between groups, we use **Welch’s method** to estimate the standard error and the associated degrees of freedom.
+
+### Step 3: Construct a confidence interval
+
+We calculate a **two-sided 95 % confidence interval**, giving you the range of plausible values for the true effect. If this interval doesn’t include zero, the result is considered statistically significant at the 5% level.
+
+This interval becomes narrower as you collect more data, reflecting increasing certainty about the true difference.
+
+### Step 4: Compute the p-value
+
+Finally, we calculate a **p-value**—the probability of observing results as extreme as yours if there was actually no difference between variants. A smaller p-value means the result is less likely to be due to random chance.
+
+By default, PostHog considers results statistically significant if the p-value is below **0.05**.
+
+## How to interpret results
+
+A typical experiment result might show:
+
+- **Effect size**: +3.49% (relative to control)
+- **95% confidence interval**: +0.27% to +6.71%
+- **p-value**: 0.0034
+- **Statistically significant**: ✅ Yes
+
+This means the test variant outperformed control by an estimated 3.49%, and we’re confident the true value lies somewhere between 0.27% and 6.71%. Since the p-value is below 0.05, the result is considered statistically significant.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_12_at_11_42_25_41a8332827.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_12_at_11_42_51_7227ce2dcc.png"
+  alt = "Preliminary experiment results"
+  classes = "rounded"
+/>
+
+## When to choose Frequentist
+
+Frequentist analysis is a good fit when:
+
+- You’re familiar with p-values and confidence intervals
+- You want to match academic literature or internal data science standards
+- You prefer a simpler intuitive method with fewer parametric assumptions
+
+This method is widely used in experimentation tooling across the industry and is well understood by data teams.
