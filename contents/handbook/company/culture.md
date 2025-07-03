@@ -31,7 +31,7 @@ This isn't just a meaningless corporate statement. Most of our communication hap
 
 Almost everything we do is open for anyone else to edit. This includes things like the contents of this very Handbook. Anyone can give direct feedback on work they think could be improved, which helps increase our responsiveness to the community. 
 
-We're committed to much more than just [public code](/handbook/company/values#we-are-open-source). 
+We're committed to much more than just [public code](/handbook/company/values#make-it-public). 
 
 ## We write everything down
 

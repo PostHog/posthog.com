@@ -3,7 +3,7 @@ title: Account planning for expansion and cross-sell
 sidebar: Handbook
 showTitle: true
 ---
-This account planning framework is designed to help team members (1) efficiently get up to speed on accounts and (2) consistently think through a set of strategic questions that elevate our role and partnership with the account. It encourages a proactive approach to identifying expansion and cross-sell opportunities, driving growth and customer success. This template was initially developed for managing a book of business primarily consisting of smaller startups. It will likely need modification to be useful for larger, more enterprise, accounts.
+This account planning framework is designed to help you quickly get up to speed on accounts and consistently think through a set of questions that deepen the partnership with your accounts. It encourages a proactive approach to identifying expansion and cross-sell opportunities, driving growth and customer success. This template was initially developed for managing a book of business primarily consisting of smaller startups. It will likely need modification to be useful for larger, more enterprise, accounts.
 
 Here are some times where it may help:
 - When onboarding a new account.
@@ -11,9 +11,10 @@ Here are some times where it may help:
 - When a significant change occurs within an account (e.g., new funding, leadership change, new strategic initiative, product launch).
 - To proactively identify and strategize on expansion or cross-sell opportunities.
 - Any other time you want to. Or not. No one is checking your work.
+
 ## Account planning template
 
-### Business info:
+### I. Business info:
 
 - Name:
 - Description:
@@ -22,13 +23,14 @@ Here are some times where it may help:
 - Business type: B2B SaaS, E-commerce, Marketplace, Developer Tools, Fintech, Healthcare, etc.
 - Goal: Identify typical key metrics and challenges for this company type/stage (e.g., MRR, CAC, LTV for SaaS; GMV, AOV for E-commerce).
 
-#### Business stage:
+#### A. Business stage:
 
 Businesses have different goals and constraints based on funding and stage. A venture-backed early-stage company may be very cash-conscious and focused on product-market fit, while a more established enterprise may be more focused on scaling, efficiency, and locking in multi-year discounts.
 
 - Current stage: (Seed, Series A/B/C+, Public, Bootstrapped, Acquired by X)
 - Funding:
 - Investors: 
+
 #### B. How they make money:
 
 - Key product(s) or services they offer: List their main offerings that their customers use.
@@ -41,9 +43,9 @@ Refer to the vibe-based sales matrix (internal only) - where does this account f
 - Potential ways to cross-sell:
 - Main risks:
 
-### II. Product Impressions:
+### II. Product impressions:
 
-Trying out a customer's product can give us useful context. It helps identify best practices we can recommend, understand their user experience firsthand, and spot potential cross-sell or value-add opportunities for PostHog.
+You should always try out a customer's product where possible, as it can give you useful context. It helps you identify best practices we can recommend, understand their user experience firsthand, and spot potential cross-sell or value-add opportunities for PostHog.
 
 - Personal impression/user experience notes: Your observations as a potential user – what was intuitive, confusing, delightful? Any obvious pain points or areas for improvement? How do they handle onboarding, core workflows, etc.?
 - Potential areas where PostHog could provide insight for their product development/UX: "Their checkout flow has 5 steps; Session Replay could help them identify drop-off points." "They just launched a new mobile app; Product Analytics is crucial for tracking adoption."

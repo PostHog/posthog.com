@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As an AE, you'll spend as much time managing your existing book of business as you will closing [new deals](/handbook/growth/sales/new-sales). Your first priority is retaining them - we have to work twice as hard if we're trying to close new deals and make up for lost customers. You'll typically be assigned a bunch of customers who are paying monthly - this means they could turn off PostHog at any time. 
+As a Technical Account Manager, you'll spend as much time managing your existing book of business as you will closing [product-led leads](/handbook/growth/sales/product-led-sales). Your first priority is retaining them - we have to work twice as hard if we're trying to close new deals and make up for lost customers. You'll typically be assigned a bunch of customers who are paying monthly - this means they could turn off PostHog at any time. 
 
 Once you're confident that a customer isn't going anywhere, then you want to think about how you can expand their usage. Usually (but not always) this is after they've signed an annual contract. 
 
@@ -12,7 +12,7 @@ In order of priority, your objectives should be:
 
 - Retention - establish multiple strong lines of communication
 - Expansion - cross-sell additional products
-- Retention - secure an annual commitment (maybe, but not always!)
+- Retention - secure an annual commitment (maybe, but not always - very hard to do on just a single product!)
 - Expansion - expand usage of the same product into new teams
 - Expansion - expand usage of the same product in the same team
 

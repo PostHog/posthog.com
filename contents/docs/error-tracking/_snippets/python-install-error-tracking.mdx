@@ -10,12 +10,14 @@ from posthog import Posthog
 posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
 ```
 
+We recommend setting up and using [contexts](/docs/libraries/python#contexts) so that exceptions automatically include distinct IDs, session IDs, and other properties you can set up with tags.
+
 ### Capturing errors in Python frameworks
 
 Python frameworks often have built-in error handlers. This means PostHog’s default exception autocapture won’t work and we need to manually capture errors instead. The exact process for doing this depends on the framework:
 
 import Tab from "components/Tab"
-import PythonDjangoExceptionAutocapture from './python-django-exception-autocapture.mdx'
+import DjangoContextMiddleware from '../../libraries/python/_snippets/django-context-middleware.mdx'
 import PythonFlaskExceptionAutocapture from './python-flask-exception-autocapture.mdx'
 import PythonFastAPIExceptionAutocapture from './python-fastapi-exception-autocapture.mdx'
 
@@ -27,7 +29,7 @@ import PythonFastAPIExceptionAutocapture from './python-fastapi-exception-autoca
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
-            <PythonDjangoExceptionAutocapture />
+            <DjangoContextMiddleware />
         </Tab.Panel>
         <Tab.Panel>
             <PythonFlaskExceptionAutocapture />
@@ -43,7 +45,7 @@ import PythonFastAPIExceptionAutocapture from './python-fastapi-exception-autoca
 For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
 
 ```python
-posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
+posthog.capture_exception(e, distinct_id="user_distinct_id", properties=additional_properties)
 ```
 
 You can find a full example of all of this in our [Python (and Flask) error tracking tutorial](/tutorials/python-error-tracking).
