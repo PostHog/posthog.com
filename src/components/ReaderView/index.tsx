@@ -357,7 +357,7 @@ const Menu = () => {
                     setActiveInternalMenu(selectedMenu)
                 }}
             />
-            <TreeMenu items={activeInternalMenu?.children} />
+            <TreeMenu key={activeInternalMenu?.url} items={activeInternalMenu?.children} />
         </>
     )
 }
