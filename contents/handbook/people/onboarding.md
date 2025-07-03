@@ -61,8 +61,13 @@ In these cases, the process is:
   - Preemptively create the new team member a Google account
   - Issue them a Brex card to their work email with a sufficiently high temporary balance to cover travel costs
   - Have the new team member book travel as usual
+  - Normally, the existing PostHog person organising the onboarding books accommodation to reduce need for coordination
 
-While there is no fixed budget for onboardings they should be relatively less expensive than a small team offsite. Some considerations to reduce the cost:
+The new joiner receives their own onboarding budget. The person organising the in-person onboarding should request a budget in Brex of $1500 per person attending.
+
+Onboardings should be relatively less expensive than a small team offsite. 
+
+Some considerations to reduce the cost:
 
   - Avoid intercontinental travel or choose a location that limits it to the minimum number of people possible
   - You should not need to plan a social activity
