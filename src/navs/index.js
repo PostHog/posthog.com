@@ -53,6 +53,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/mysql',
                 },
                 {
+                    name: 'MongoDB',
+                    url: '/docs/cdp/sources/mongodb',
+                },
+                {
                     name: 'Azure SQL Server',
                     url: '/docs/cdp/sources/azure-db',
                 },
