@@ -16,6 +16,7 @@ import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
 import Fuse from 'fuse.js'
+import { useApp } from '../../context/App'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -184,6 +185,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [hasInitialized, setHasInitialized] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
     const { appWindow } = useWindow()
+    const { windows } = useApp()
+    const closed = useMemo(() => appWindow?.minimized || !windows.some((w) => w === appWindow), [windows, appWindow])
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
@@ -418,11 +421,13 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                 {/* <ShippingBanner /> */}
                                 <div className="flex gap-4">
                                     <div className="@container flex-1 not-prose">
-                                        <ProductGrid
-                                            products={filteredProducts}
-                                            onProductClick={handleProductSelect}
-                                            selectedProduct={selectedProduct}
-                                        />
+                                        {!closed && (
+                                            <ProductGrid
+                                                products={filteredProducts}
+                                                onProductClick={handleProductSelect}
+                                                selectedProduct={selectedProduct}
+                                            />
+                                        )}
                                     </div>
                                 </div>
                             </div>

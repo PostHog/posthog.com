@@ -43,6 +43,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                         className="aspect-square overflow-hidden"
                         image={getShopifyImage({ image: product.featuredMedia.preview.image })}
                         alt={product.title}
+                        loading="lazy"
                     />
                 </div>
             </div>
