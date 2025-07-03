@@ -214,14 +214,17 @@ const getColorForSection = (sectionName: string) => {
 
 const renderSectionContent = (children: any[]) => {
     return (
-        <div data-scheme="primary" className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative">
+        <div
+            data-scheme="primary"
+            className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative items-start"
+        >
             {children
                 .filter((child) => child.url && child.name)
                 .slice(0, 8) // Limit to 8 items for better layout
                 .map((child, index) => {
                     const Icon = child.icon ? (Icons[child.icon as keyof typeof Icons] as any) : Icons.IconBook
                     return (
-                        <ZoomHover key={index} className="items-center text-center">
+                        <ZoomHover key={index} className="items-center text-center [&>span]:w-full">
                             <Link
                                 to={child.url}
                                 className="bg-accent border border-transparent hover:border-primary px-2 py-4 rounded flex flex-col h-full justify-start items-center gap-2 w-full font-medium"
@@ -261,12 +264,12 @@ export const DocsIndex = () => {
             content: (
                 <div
                     data-scheme="primary"
-                    className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative"
+                    className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,1fr))] gap-4 relative items-start"
                 >
                     {productSections.map((product: any, index: number) => {
                         const Icon = product.icon ? (Icons[product.icon as keyof typeof Icons] as any) : Icons.IconApps
                         return (
-                            <ZoomHover key={index} className="items-center text-center">
+                            <ZoomHover key={index} className="items-center text-center [&>span]:w-full">
                                 <Link
                                     to={product.url}
                                     className="bg-accent border border-transparent hover:border-primary px-2 py-4 rounded flex flex-col h-full justify-start items-center gap-2 w-full font-medium"
