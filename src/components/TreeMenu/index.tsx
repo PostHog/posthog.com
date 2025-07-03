@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import { useLocation } from '@reach/router'
 import { replacePath } from '../../../gatsby/utils'
 import OSButton from 'components/OSButton'
+import { useWindow } from '../../context/Window'
 
 interface MenuItem {
     name: string
@@ -72,6 +73,7 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 }
 
 export function TreeMenu(props: TreeMenuProps) {
+    const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem>(
         props.activeItem || getActiveItem(props.items || [], pathname)
@@ -82,6 +84,10 @@ export function TreeMenu(props: TreeMenuProps) {
     }
 
     const items = useMemo(() => props.items, [])
+
+    useEffect(() => {
+        setActiveItem(getActiveItem(props.items || [], appWindow?.path || pathname))
+    }, [appWindow?.path])
 
     return (
         <div className="not-prose space-y-px">
