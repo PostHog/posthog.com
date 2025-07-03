@@ -451,6 +451,10 @@ code {
     @apply font-code font-medium text-sm border border-primary bg-accent rounded-sm px-1 py-0.5;
 }
 
+hr {
+    @apply border-primary;
+}
+
 .code-block {
     /* target line numbers */
     pre pre {
