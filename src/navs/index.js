@@ -1303,7 +1303,7 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'Shared Processes',
+                name: 'Shared processes',
                 url: '',
                 children: [
                     {
