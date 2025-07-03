@@ -282,7 +282,11 @@ export default function DisplayOptions() {
     }
 
     const handleWallpaperChange = (value: string) => {
-        updateSiteSettings({ ...siteSettings, wallpaper: value as SiteSettings['wallpaper'] })
+        updateSiteSettings({
+            ...siteSettings,
+            wallpaper: value as SiteSettings['wallpaper'],
+            colorMode: value === 'coding-at-night' ? 'dark' : siteSettings.colorMode,
+        })
     }
 
     return (

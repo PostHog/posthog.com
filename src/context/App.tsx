@@ -880,7 +880,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
                     ;(window as any).__setPreferredTheme('dark')
                 }
-                updateSiteSettings({ ...siteSettings, colorMode: 'dark' })
             }
         }
     }, [siteSettings])
