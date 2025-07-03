@@ -42,6 +42,8 @@ We now use Brex Empower. This allows the People and Ops team to effectively trac
 
 By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
 
+If you have expenses that require payment from Brex via ACH or wire (i.e, you can't use your card to pay), you can upload the invoice directly into Brex via the 'draft bill' functionality. That allows someone from the People Ops team to go in and approve!
+
 ### Revolut
 
 - Buy something on your Revolut card.
