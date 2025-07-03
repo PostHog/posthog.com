@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { navigate } from 'gatsby'
@@ -106,7 +106,10 @@ export default function Explorer({
         return props
     }
 
-    const ContentWrapper = appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment
+    const ContentWrapper = useMemo(
+        () => (appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment),
+        [appWindow]
+    )
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">

@@ -187,7 +187,16 @@ export default function Collection(props: CollectionProps): React.ReactElement {
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
-    const transformedProducts = products?.map((p) => getProduct(p))
+    const transformedProducts = useMemo(() => products?.map((p) => getProduct(p)), [products])
+    const fuse = useMemo(
+        () =>
+            new Fuse(products, {
+                keys: ['title', 'description', 'id'],
+                includeMatches: true,
+                threshold: 0.3,
+            }),
+        [products]
+    )
 
     // Initialize state from URL parameters on mount only
     useEffect(() => {
@@ -318,11 +327,6 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         }
 
         if (searchQuery.trim() !== '' && products) {
-            const fuse = new Fuse(products, {
-                keys: ['title', 'description', 'id'],
-                includeMatches: true,
-                threshold: 0.3,
-            })
             return fuse.search(searchQuery).map((result) => result.item)
         }
 
@@ -351,7 +355,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         setSearchQuery(query)
     }
 
-    const ContentWrapper = appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment
+    const ContentWrapper = useMemo(
+        () => (appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment),
+        [appWindow]
+    )
 
     return (
         <div className="@container w-full h-full flex flex-col min-h-1">
