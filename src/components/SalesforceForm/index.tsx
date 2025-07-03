@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 import { button } from 'components/CallToAction'
 import Confetti from 'react-confetti'
 import usePostHog from 'hooks/usePostHog'
-import { IconCheck } from '@posthog/icons'
+import { IconCheck, IconSend } from '@posthog/icons'
 import * as Yup from 'yup'
+import Editor from 'components/Editor'
+import { Select } from 'components/RadixUI/Select'
 
 interface CustomFieldOption {
     label: string
@@ -35,6 +37,7 @@ interface IProps {
     form: {
         fields: {
             label: string
+            placeholder?: string
             type: 'string' | 'enumeration'
             name: string
             required?: boolean
@@ -122,27 +125,25 @@ function Radio({
     }
 
     return (
-        <label
-            onMouseUp={handleClick}
-            className="relative w-full text-center cursor-pointer"
-            htmlFor={`${name}-${value}`}
-        >
+        <>
+
+            <label
+                onMouseUp={handleClick}
+                className="relative w-full text-center cursor-pointer"
+                htmlFor={`${name}-${value}`}
+            >
+                {label}
+            </label>
             <input
                 checked={values[name] == value}
-                className="absolute opacity-0 peer inset-0"
+                className=""
                 type="radio"
                 value={value}
                 onChange={handleChange}
                 id={`${name}-${value}`}
                 {...(reference ? { ref: reference } : {})}
             />
-            <span
-                className="block py-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 dark:border-white/10  dark:peer-focus:border-white/40 dark:peer-checked:!border-white/80
-            text-sm"
-            >
-                {label}
-            </span>
-        </label>
+        </>
     )
 }
 
@@ -170,32 +171,28 @@ function Checkbox({
     const checked = values[name].includes(value)
 
     return (
-        <label
-            role="option"
-            className="relative w-full text-center cursor-pointer"
-            htmlFor={`${name}-${value}`}
-            aria-selected={checked}
-        >
+        <>
+            <label
+                role="option"
+                className="relative w-full text-center cursor-pointer"
+                htmlFor={`${name}-${value}`}
+                aria-selected={checked}
+            >
+                <span>
+                    <IconCheck className={`w-4 ${checked ? '' : 'opacity-40'}`} />
+                </span>
+                <span>{label}</span>
+            </label>
             <input
                 checked={checked}
-                className="absolute opacity-0 peer inset-0"
+                className=""
                 type="checkbox"
                 value={value}
                 onChange={handleChange}
                 id={`${name}-${value}`}
                 {...(reference ? { ref: reference } : {})}
             />
-
-            <span
-                className="flex space-x-2 items-center p-2 w-full rounded-md border-[2px] border-black/10  peer-focus:border-black/40 peer-checked:!border-black/80 dark:border-white/10  dark:peer-focus:border-white/40 dark:peer-checked:!border-white/80
-            text-sm"
-            >
-                <span>
-                    <IconCheck className={`w-4 ${checked ? '' : 'opacity-40'}`} />
-                </span>
-                <span>{label}</span>
-            </span>
-        </label>
+        </>
     )
 }
 
@@ -213,89 +210,45 @@ function RadioGroup({
     type: string
 }) {
     if (!name) return null
-    const { openOptions, setOpenOptions } = useContext(FormContext)
     const { errors, values, setFieldValue } = useFormikContext()
-    const error = errors[name]
-    const open = openOptions.includes(name)
-    const ref = useRef<HTMLInputElement>(null)
-    return (
-        <div
-            onFocus={() => {
-                !openOptions.includes(name) && setOpenOptions([...openOptions, name])
-            }}
-            onClick={() => {
-                if (options && !openOptions.includes(name)) {
-                    setOpenOptions([...openOptions, name])
-                    if (!values[name]) {
-                        ref.current?.focus()
-                    }
-                }
-            }}
-            className={`${inputContainerClasses} ${error ? 'pb-8' : ''} cursor-pointer`}
-        >
-            <p className={`m-0 ${open ? 'text-sm opacity-100' : 'opacity-50'} transition-all`} id={`group-${name}`}>
-                {placeholder}
-            </p>
-            <motion.div className="overflow-hidden" animate={{ height: open ? 'auto' : 0 }} initial={{ height: 0 }}>
-                {type !== 'checkbox' && (
-                    <p className="m-0 mt-1 mb-4 text-xs">
-                        <strong>Tip:</strong> Use{' '}
-                        <kbd
-                            className="text-xs border border-b-2 border-input rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans mr-1"
-                            style={{ fontSize: '10px' }}
-                        >
-                            ←
-                        </kbd>
-                        <kbd
-                            className="text-xs border border-b-2 border-input rounded-sm px-1.5 py-0.5 text-black/40 dark:text-white/40 font-sans"
-                            style={{ fontSize: '10px' }}
-                        >
-                            →
-                        </kbd>{' '}
-                        to advance through options
-                    </p>
-                )}
+    const error = (errors as any)[name]
+    const formValues = values as any
 
-                <div
-                    role={type === 'checkbox' ? 'listbox' : 'radiogroup'}
-                    aria-labelledby={`group-${name}`}
-                    className={`mt-2 grid grid-cols-${cols} gap-x-2 gap-y-2 ${
-                        open ? 'opacity-100' : 'opacity-0 absolute'
-                    }`}
-                    {...(type === 'checkbox'
-                        ? {
-                              'aria-multiselectable': true,
-                          }
-                        : {})}
-                >
-                    {options?.map((option, index) => {
-                        const { value, label } = option
-                        return type === 'checkbox' ? (
-                            <Checkbox
-                                {...(index === 0 && ref ? { reference: ref } : {})}
-                                key={value}
-                                value={value}
-                                label={label}
-                                name={name}
-                            />
-                        ) : (
-                            <Radio
-                                {...(index === 0 && ref ? { reference: ref } : {})}
-                                key={value}
-                                value={value}
-                                label={label}
-                                name={name}
-                            />
-                        )
-                    })}
-                </div>
-            </motion.div>
-            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
-        </div>
+    // Convert options to Select format
+    const selectGroups = [{
+        label: placeholder,
+        items: options?.map(option => ({
+            value: String(option.value),
+            label: option.label
+        })) || []
+    }]
+
+    const handleValueChange = (value: string) => {
+        setFieldValue(name, value)
+    }
+
+    return (
+        <>
+            <div className={`${inputContainerClasses} ${error ? '' : ''}`}>
+                <p className={`m-0`} id={`group-${name}`}>
+                    {placeholder}
+                </p>
+            </div>
+            <div className="col-span-10">
+                <Select
+                    value={String(formValues[name] || '')}
+                    onValueChange={handleValueChange}
+                    placeholder={`Select ${placeholder.toLowerCase()}`}
+                    groups={selectGroups}
+                    className="w-full"
+                />
+                {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm">{error}</p>}
+            </div>
+        </>
     )
 }
 
-const inputContainerClasses = `p-4 bg-accent group active:bg-light focus-within:bg-light dark:active:bg-dark dark:focus-within:bg-dark relative text-left`
+const inputContainerClasses = `relative text-left text-sm col-span-2`
 
 const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
     const { name, placeholder } = props
@@ -304,22 +257,24 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
     const error = errors[name]
 
     return (
-        <label className={`${inputContainerClasses} ${error ? 'pb-8' : ''}`} htmlFor={props.id}>
-            <textarea
-                rows={8}
-                onChange={(e) => setFieldValue(name, e.target.value)}
-                onBlur={() => {
-                    validateField(name)
-                }}
-                className={`bg-transparent w-full outline-none left-0 p-0 pt-3 placeholder-shown:pt-0 peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0 resize-none`}
-                {...props}
-                {...(props.type === 'number' ? { min: 0 } : {})}
-            />
-            <span className="absolute left-4 top-3 w-full peer-placeholder-shown:top-4 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
+        <>
+            <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={props.id}>
                 {placeholder}
-            </span>
-            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
-        </label>
+            </label>
+            <div className="col-span-10">
+                <textarea
+                    rows={8}
+                    onChange={(e) => setFieldValue(name, e.target.value)}
+                    onBlur={() => {
+                        validateField(name)
+                    }}
+                    className={`bg-transparent outline-none p-0 border py-0 shadow-none ring-0 focus:ring-0 resize-none ${error ? 'border-red' : 'border-primary'}`}
+                    {...props}
+                    {...(props.type === 'number' ? { min: 0 } : {})}
+                />
+                {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm">{error}</p>}
+            </div>
+        </>
     )
 }
 
@@ -330,24 +285,25 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { errors, validateField, setFieldValue } = useFormikContext()
     const error = errors[name]
     return (
-        <label className={`${inputContainerClasses} ${error ? 'pb-8' : ''}`} htmlFor={props.id}>
-            <input
-                onChange={(e) => setFieldValue(name, e.target.value)}
-                onBlur={() => {
-                    validateField(name)
-                }}
-                className={`bg-transparent w-full outline-none absolute left-0 px-4 ${
-                    error ? 'bottom-6 placeholder-shown:bottom-8' : 'bottom-2 placeholder-shown:bottom-4'
-                } peer placeholder-shown:placeholder-transparent transition-all border-0 py-0 shadow-none ring-0 focus:ring-0`}
-                {...props}
-                {...(props.type === 'number' ? { min: 0 } : {})}
-                type={props.type === 'date' ? 'date' : type}
-            />
-            <span className="relative -top-3 peer-placeholder-shown:top-0 text-xs peer-placeholder-shown:text-base peer-placeholder-shown:opacity-50 transition-all">
+        <>
+            <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={props.id}>
                 {placeholder}
-            </span>
-            {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm absolute bottom-1">{error}</p>}
-        </label>
+            </label>
+            <div className="col-span-10">
+                <input
+                    onChange={(e) => setFieldValue(name, e.target.value)}
+                    onBlur={() => {
+                        validateField(name)
+                    }}
+                    className={`bg-transparent w-full outline-none text-sm rounded border ${error ? 'border-red' : 'border-primary'
+                        } ring-0 focus:ring-0`}
+                    {...props}
+                    {...(props.type === 'number' ? { min: 0 } : {})}
+                    type={props.type === 'date' ? 'date' : type || 'text'}
+                />
+                {error && <p className="text-red dark:text-yellow font-semibold m-0 text-sm">{error}</p>}
+            </div>
+        </>
     )
 }
 
@@ -366,7 +322,7 @@ export default function SalesforceForm({
     const [submitted, setSubmitted] = useState(false)
     const [confetti, setConfetti] = useState(true)
 
-    const handleSubmit = async (values) => {
+    const handleSubmit = async (values: any) => {
         const distinctId = posthog?.get_distinct_id?.()
         posthog?.setPersonProperties?.({
             email: values.email,
@@ -391,44 +347,64 @@ export default function SalesforceForm({
                     </div>
                 )}
                 <div className="bg-accent border border-input px-6 py-8 rounded-md mt-4">
-                    {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message }} />}
+                    {customMessage || <div dangerouslySetInnerHTML={{ __html: form?.message || '' }} />}
                 </div>
             </>
         ) : (
-            <FormContext.Provider value={{ fields: form.fields, openOptions, setOpenOptions }}>
-                <Formik
-                    validationSchema={Yup.object().shape(
-                        Object.fromEntries(
-                            form.fields.map((field) => [
-                                field.name,
-                                field.required
-                                    ? field.fieldType === 'checkbox'
-                                        ? Yup.array()
-                                              .of(Yup.string())
-                                              .min(1, `${field.label} is a required field`)
-                                              .required(`${field.label} is a required field`)
-                                        : Yup.string().required(`${field.label} is a required field`)
-                                    : field.fieldType === 'checkbox'
+            <Formik
+                validationSchema={Yup.object().shape(
+                    Object.fromEntries(
+                        form.fields.map((field) => [
+                            field.name,
+                            field.required
+                                ? field.fieldType === 'checkbox'
+                                    ? Yup.array()
+                                        .of(Yup.string())
+                                        .min(1, `${field.label} is a required field`)
+                                        .required(`${field.label} is a required field`)
+                                    : Yup.string().required(`${field.label} is a required field`)
+                                : field.fieldType === 'checkbox'
                                     ? Yup.array().of(Yup.string())
                                     : Yup.string(),
-                            ])
-                        )
-                    )}
-                    validateOnChange={false}
-                    initialValues={Object.fromEntries(
-                        form.fields.map(({ name, fieldType }) => [name, fieldType === 'checkbox' ? [] : ''])
-                    )}
-                    onSubmit={handleSubmit}
-                >
-                    <Form className={formOptions?.className}>
-                        <div className="grid divide-y divide-border border border-primary dark:divide-border-dark dark:border-dark">
-                            {form.fields.map(({ name, label, type, required, options, fieldType, cols }, index) => {
+                        ])
+                    )
+                )}
+                validateOnChange={false}
+                initialValues={Object.fromEntries(
+                    form.fields.map(({ name, fieldType }) => [name, fieldType === 'checkbox' ? [] : ''])
+                )}
+                onSubmit={handleSubmit}
+            >
+                <Form className={formOptions?.className}>
+                    <div className="px-4 pt-2 pb-1 border-b border-primary">
+                        <button
+                            className={button(
+                                buttonOptions?.type,
+                                'auto',
+                                buttonOptions?.className ?? '',
+                                buttonOptions?.size ?? 'sm'
+                            )}
+                            type="submit"
+                        >
+                            <IconSend className="size-4 inline-block" />
+                            {form.buttonText ?? 'Submit'}
+                        </button>
+                    </div>
+                    <div className="p-4 border-b border-primary">
+                        <div className="grid grid-cols-12 gap-2">
+                            <span className="relative text-left text-sm col-span-2 ">
+                                To
+                            </span>
+                            <div className="col-span-10 text-sm">
+                                sales@posthog.com
+                            </div>
+                            {form.fields.map(({ name, label, placeholder, type, required, options, fieldType, cols }, index) => {
                                 if (customFields && customFields[name])
                                     return {
                                         radioGroup: (
                                             <RadioGroup
-                                                type={fieldType}
-                                                options={customFields[name].options || options}
+                                                type={fieldType || 'radio'}
+                                                options={customFields[name].options || options || []}
                                                 name={name}
                                                 placeholder={label}
                                                 cols={customFields[name].cols ?? formOptions?.cols}
@@ -449,6 +425,24 @@ export default function SalesforceForm({
                                     )
 
                                 if (fieldType === 'textarea')
+                                    return null
+
+                                return (
+                                    <Input
+                                        key={`${name}-${index}`}
+                                        type={fieldType}
+                                        name={name}
+                                        placeholder={placeholder || label}
+                                        required={required}
+                                    />
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div className="px-0">
+                        <Editor slug="/talk-to-a-human">
+                            {form.fields.map(({ name, label, fieldType, required }, index) => {
+                                if (fieldType === 'textarea') {
                                     return (
                                         <Textarea
                                             key={`${name}-${index}`}
@@ -457,32 +451,25 @@ export default function SalesforceForm({
                                             required={required}
                                         />
                                     )
-
-                                return (
-                                    <Input
-                                        key={`${name}-${index}`}
-                                        type={fieldType}
-                                        name={name}
-                                        placeholder={label}
-                                        required={required}
-                                    />
-                                )
+                                }
+                                return null
                             })}
-                        </div>
-                        <button
-                            className={button(
-                                buttonOptions?.type,
-                                'full',
-                                buttonOptions?.className ?? 'mt-4',
-                                buttonOptions?.size ?? 'sm'
-                            )}
-                            type="submit"
-                        >
-                            {form.buttonText ?? 'Submit'}
-                        </button>
-                    </Form>
-                </Formik>
-            </FormContext.Provider>
+                        </Editor>
+                    </div>
+
+                    <button
+                        className={button(
+                            buttonOptions?.type,
+                            'full',
+                            buttonOptions?.className ?? 'mt-4',
+                            buttonOptions?.size ?? 'sm'
+                        )}
+                        type="submit"
+                    >
+                        {form.buttonText ?? 'Submit'}
+                    </button>
+                </Form>
+            </Formik>
         )
     ) : null
 }

@@ -225,6 +225,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    '/talk-to-a-human': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 800,
+                height: 1000,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/start': {
         size: {
             min: {
