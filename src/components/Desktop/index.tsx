@@ -8,6 +8,7 @@ import ZoomHover from 'components/ZoomHover'
 import Screenshot from 'components/Screenshot'
 import { AppLink, AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 interface Product {
     name: string
@@ -115,12 +116,66 @@ export default function Desktop() {
         >
             <div data-scheme="primary" data-app="Desktop" className="fixed size-full p-4">
                 <div
-                    className="absolute bottom-0 right-0 size-full bg-contain bg-no-repeat bg-right-bottom -z-10"
-                    style={{
-                        backgroundImage:
-                            "url('https://res.cloudinary.com/dmukukwp6/image/upload/Frame_10127_b7362fd913.png')",
-                    }}
+                    className={`absolute bottom-0 right-0 size-full -z-10 
+                        wallpaper-hogzilla:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png')] wallpaper-hogzilla:bg-contain 
+                        wallpaper-hogzilla:bg-no-repeat
+                        wallpaper-hogzilla:bg-right-bottom
+
+                        wallpaper-office-party:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')]
+                        dark:wallpaper-office-party:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')]
+
+                        wallpaper-office-party:bg-repeat 
+                        wallpaper-office-party:bg-[length:200px_198px]
+                        wallpaper-keyboard-garden:bg-[#E1D7C2]
+                        dark:wallpaper-keyboard-garden:bg-[#37422D]
+
+                        wallpaper-2001-bliss:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg')]
+                        wallpaper-2001-bliss:bg-cover
+                        wallpaper-2001-bliss:bg-no-repeat
+                        wallpaper-2001-bliss:bg-center
+
+                        wallpaper-coding-at-night:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png')]
+                        wallpaper-coding-at-night:bg-[#54618E]
+                        wallpaper-coding-at-night:bg-contain
+                        wallpaper-coding-at-night:bg-no-repeat
+                        wallpaper-coding-at-night:bg-bottom
+
+                        wallpaper-parade:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png')] 
+                        dark:wallpaper-parade:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png')] 
+                        wallpaper-parade:bg-contain 
+                        wallpaper-parade:bg-no-repeat
+                        wallpaper-parade:bg-left-bottom
+
+                        wallpaper-startup-monopoly:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png')] 
+                        wallpaper-startup-monopoly:bg-[length:1087px_540px]
+                        wallpaper-startup-monopoly:bg-no-repeat
+                        wallpaper-startup-monopoly:bg-right-top
+                        wallpaper-startup-monopoly:bg-[#FEFCED]
+                        dark:wallpaper-startup-monopoly:bg-[#393836]
+                        
+                    `}
+
                 />
+                <div className="hidden wallpaper-office-party:block absolute bottom-24 left-24">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
+                        alt="Office party"
+                        width={997}
+                        height={858}
+                        className="w-[498.5px] h-[429px]"
+                    />
+                </div>
+                <div className="hidden wallpaper-keyboard-garden:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_7b4f9e93b6.png"
+                        alt="Office party"
+                        width={1242}
+                        height={1128}
+                        className="w-[621px] h-[564px]"
+                    />
+                </div>
+                <div className="hidden wallpaper-2001-bliss:block absolute inset-0 bg-white/60 dark:bg-black/60">
+                </div>
 
                 <div className="hidden">
                     <Screenshot

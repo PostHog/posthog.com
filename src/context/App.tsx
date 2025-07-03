@@ -80,29 +80,29 @@ interface AppProviderProps {
 
 export const Context = createContext<AppContextType>({
     windows: [],
-    closeWindow: () => {},
-    bringToFront: () => {},
+    closeWindow: () => { },
+    bringToFront: () => { },
     setWindowTitle: () => null,
     focusedWindow: undefined,
     location: {},
-    minimizeWindow: () => {},
+    minimizeWindow: () => { },
     taskbarHeight: 0,
-    addWindow: () => {},
-    updateWindowRef: () => {},
-    updateWindow: () => {},
+    addWindow: () => { },
+    updateWindowRef: () => { },
+    updateWindow: () => { },
     getPositionDefaults: () => ({ x: 0, y: 0 }),
     getDesktopCenterPosition: () => ({ x: 0, y: 0 }),
-    openSearch: () => {},
-    handleSnapToSide: () => {},
+    openSearch: () => { },
+    handleSnapToSide: () => { },
     constraintsRef: { current: null },
-    expandWindow: () => {},
+    expandWindow: () => { },
     openSignIn: () => null,
-    openRegister: () => {},
-    openForgotPassword: () => {},
+    openRegister: () => { },
+    openForgotPassword: () => { },
     siteSettings: {
         experience: 'posthog',
     },
-    updateSiteSettings: () => {},
+    updateSiteSettings: () => { },
 })
 
 export interface AppSetting {
@@ -171,11 +171,11 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 600,
-                height: 400,
+                height: 465,
             },
             max: {
                 width: 600,
-                height: 400,
+                height: 465,
             },
             fixed: true,
         },
@@ -388,12 +388,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                     windows.map((w) =>
                         w === focusedWindow
                             ? {
-                                  ...w,
-                                  element: newWindow.element,
-                                  path: newWindow.path,
-                                  fromHistory: newWindow.fromHistory,
-                                  props: newWindow.props,
-                              }
+                                ...w,
+                                element: newWindow.element,
+                                path: newWindow.path,
+                                fromHistory: newWindow.fromHistory,
+                                props: newWindow.props,
+                            }
                             : w
                     )
                 )
@@ -474,9 +474,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
-                      width: isSSR ? 0 : window.innerWidth * 0.9,
-                      height: isSSR ? 0 : window.innerHeight * 0.9,
-                  })
+                    width: isSSR ? 0 : window.innerWidth * 0.9,
+                    height: isSSR ? 0 : window.innerHeight * 0.9,
+                })
         return {
             width: Math.min(defaultSize.width, isSSR ? 0 : window.innerWidth * 0.9),
             height: Math.min(defaultSize.height, isSSR ? 0 : window.innerHeight * 0.9),
@@ -528,9 +528,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fixedSize: settings?.size.fixed || false,
             fromOrigin: lastClickedElementRect
                 ? {
-                      x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - taskbarHeight - size.height / 2,
-                  }
+                    x: lastClickedElementRect.x - size.width / 2,
+                    y: lastClickedElementRect.y - taskbarHeight - size.height / 2,
+                }
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
@@ -592,24 +592,24 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             windows.map((w) =>
                 w === appWindow
                     ? {
-                          ...appWindow,
-                          position: {
-                              ...appWindow.position,
-                              ...(updates.position || {}),
-                          },
-                          size: {
-                              ...appWindow.size,
-                              ...(updates.size || {}),
-                          },
-                          previousPosition: {
-                              ...appWindow.previousPosition,
-                              ...(updates.previousPosition || {}),
-                          },
-                          previousSize: {
-                              ...appWindow.previousSize,
-                              ...(updates.previousSize || {}),
-                          },
-                      }
+                        ...appWindow,
+                        position: {
+                            ...appWindow.position,
+                            ...(updates.position || {}),
+                        },
+                        size: {
+                            ...appWindow.size,
+                            ...(updates.size || {}),
+                        },
+                        previousPosition: {
+                            ...appWindow.previousPosition,
+                            ...(updates.previousPosition || {}),
+                        },
+                        previousSize: {
+                            ...appWindow.previousSize,
+                            ...(updates.previousSize || {}),
+                        },
+                    }
                     : w
             )
         )

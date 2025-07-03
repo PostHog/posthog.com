@@ -5,7 +5,7 @@ const toggleGroupItemClasses =
     'flex-1 flex border border-transparent p-1 items-center justify-center bg-primary leading-4 text-sm font-medium text-primary rounded hover:bg-accent focus:z-10 focus:shadow-[0_0_0_2px] focus:shadow-primary focus:outline-none data-[state=on]:bg-accent data-[state=on]:bg-accent skin-classic:data-[state=on]:border-primary skin-classic:border skin-classic:border-b-3 skin-classic:hover:border-primary skin-classic:hover:border-b-3'
 
 export interface ToggleOption {
-    label: string
+    label: React.ReactNode
     value: string
     icon?: React.ReactNode
     default?: boolean
@@ -47,7 +47,7 @@ export const ToggleGroup = ({
                         key={option.value}
                         className={toggleGroupItemClasses}
                         value={option.value}
-                        aria-label={option.label}
+                        aria-label={typeof option.label === 'string' ? option.label : option.value}
                     >
                         {option.icon ? option.icon : option.label}
                     </RadixToggleGroup.Item>
