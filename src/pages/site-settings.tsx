@@ -8,6 +8,7 @@ import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { SEO } from 'components/seo'
 import { useApp } from '../context/App'
 import type { SiteSettings } from '../context/App'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const XL_CURSOR_SVG = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 74 28"><g clip-path="url(#a)"><path fill="#000" stroke="#fff" stroke-width="5" d="m44.77 50.196.024.01.025.008c.48.177 1.014.286 1.58.286.665 0 1.28-.147 1.837-.392l.012-.006.013-.006 8.8-3.997.002-.001a4.5 4.5 0 0 0 2.225-5.968v-.001l-10.73-23.395 16.828-1.446.008-.001a4.504 4.504 0 0 0 2.678-7.78L20.073-37.289a4.51 4.51 0 0 0-4.858-.843l-.011.005A4.499 4.499 0 0 0 12.5-34v66a4.503 4.503 0 0 0 2.715 4.133l.01.003a4.505 4.505 0 0 0 4.86-.859L32.01 24.072l10.259 23.717.005.012.005.011a4.527 4.527 0 0 0 2.492 2.384Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h74v28H0z"/></clipPath></defs></svg>`
 
@@ -85,7 +86,15 @@ const wallpaperOptions: WallpaperOption[] = [
         },
     },
     {
-        label: 'Office Party',
+        label: 'Startup Monopoly',
+        value: 'startup-monopoly',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_light_b38ca0c4e5.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_dark_699c375497.png',
+        },
+    },
+    {
+        label: 'Office party',
         value: 'office-party',
         thumb: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_office_party_light_192b0c000f.png',
@@ -93,7 +102,7 @@ const wallpaperOptions: WallpaperOption[] = [
         },
     },
     {
-        label: 'Keyboard Garden',
+        label: 'Keyboard garden',
         value: 'keyboard-garden',
         thumb: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_keyboard_garden_light_272a92dc4c.png',
@@ -101,7 +110,7 @@ const wallpaperOptions: WallpaperOption[] = [
         },
     },
     {
-        label: '2001 Bliss',
+        label: '2001 bliss',
         value: '2001-bliss',
         thumb: {
             light: 'https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_light_0b2e4ef53c.jpg',
@@ -117,19 +126,11 @@ const wallpaperOptions: WallpaperOption[] = [
         },
     },
     {
-        label: 'Coding at Night',
+        label: 'Coding at night',
         value: 'coding-at-night',
         thumb: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_2001_bliss_dark_30f451bc5b.png',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_2001_bliss_dark_30f451bc5b.png',
-        },
-    },
-    {
-        label: 'Startup Monopoly',
-        value: 'startup-monopoly',
-        thumb: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_light_b38ca0c4e5.png',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_dark_699c375497.png',
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_coding_at_night_2df33d2f3d.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_coding_at_night_2df33d2f3d.png',
         },
     },
 ]
@@ -206,13 +207,14 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
             <label className="pt-1.5 text-sm">{title}</label>
             <Popover
                 trigger={trigger}
-                dataScheme="primary"
-                contentClassName="w-[340px] h-[550px] max-h-full p-0"
+                dataScheme="secondary"
+                contentClassName="@container bg-primary w-[800px] max-w-full min-h-[200px] h-[400px] max-h-full"
                 sideOffset={8}
                 open={isOpen}
                 onOpenChange={setIsOpen}
             >
-                <div className="space-y-0.5 divide-y divide-border">
+                <DebugContainerQuery />
+                <div className="grid @xl:grid-cols-2 @2xl:grid-cols-3 @xl:gap-2 p-2">
                     {wallpaperOptions.map((option) => {
                         const optionThumb = isDark ? option.thumb.dark : option.thumb.light
                         const isSelected = option.value === value
@@ -220,14 +222,15 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                             <button
                                 key={option.value}
                                 type="button"
+                                data-scheme="primary"
                                 onClick={() => handleSelect(option.value)}
-                                className={`w-full p-2 text-left hover:bg-accent flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
+                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
                                     }`}
                             >
                                 <img
                                     src={optionThumb}
                                     alt={option.label}
-                                    className="w-[300px] h-[188px] object-cover rounded"
+                                    className="w-full h-auto object-cover rounded"
                                 />
                                 <span className={`text-primary ${isSelected ? 'font-bold' : 'font-medium'}`}>{option.label}</span>
                             </button>
