@@ -42,7 +42,7 @@ We now use Brex Empower. This allows the People and Ops team to effectively trac
 
 By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
 
-> To ensure that our audit proceeds smoothly, we ask that you provide a reasoning/justification for the expense being incurred in detail. For ex: if requesting a budget to onboard a team mate, when raising the request on Brex, provide an explanation on the approx. breakdown for flights/hotel/other costs. Another ex: if you're incurring software spend beyond the limit assigned, explain why that is the case - like, the number of team members for whom you're paying, the upgraded plan you're paying for, etc.
+To ensure complete financials, we ask that you provide a reasoning/justification for the expense being incurred in detail eg, if requesting a budget to onboard a team mate, when raising the request on Brex, provide an explanation on the approx. breakdown for flights/hotel/other costs. Another ex: if you're incurring software spend beyond the limit assigned, explain why that is the case - like, the number of team members for whom you're paying, the upgraded plan you're paying for, etc.
 
 If you have expenses that require payment from Brex via ACH or wire (i.e, you can't use your card to pay), you can upload the invoice directly into Brex via the 'draft bill' functionality. That allows someone from the People Ops/Finance team to go in and approve! Please include the context of what the invoice is for, which budget it will be coming out of, and how it was approved.
 
