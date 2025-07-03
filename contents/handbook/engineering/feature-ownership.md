@@ -44,6 +44,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | SQL Insights | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/sql-insights</span> |
 | Internal Messaging (Email, Notifications) | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
+| MCP Server | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/mcp</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Table exports | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/table-exports</span> |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
