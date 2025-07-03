@@ -57,8 +57,20 @@ export interface Props {
     customMenuItems?: ContextMenuItemProps[]
 }
 
-const MenuWrapper = ({ children, menuItems }: { children: React.ReactNode; menuItems: ContextMenuItemProps[] }) => {
-    return <ContextMenu menuItems={menuItems}>{children}</ContextMenu>
+const MenuWrapper = ({
+    children,
+    menuItems,
+    className = '',
+}: {
+    children: React.ReactNode
+    menuItems: ContextMenuItemProps[]
+    className?: string
+}) => {
+    return (
+        <ContextMenu menuItems={menuItems} className={className}>
+            {children}
+        </ContextMenu>
+    )
 }
 
 export default function Link({
@@ -132,7 +144,7 @@ export default function Link({
     const Container = !contextMenu || !url ? React.Fragment : MenuWrapper
 
     return (
-        <Container menuItems={menuItems}>
+        <Container menuItems={menuItems} className={wrapperClassName}>
             {onClick && !url ? (
                 <button onClick={handleClick} className={className} disabled={disabled}>
                     {children}
