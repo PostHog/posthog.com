@@ -229,8 +229,9 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
                 <p className="text-[13px]">
                     Toggle light/dark mode in{' '}
                     <span className="inline-flex items-center gap-0.5">
-                        <button className="font-semibold underline">desktop settings</button>
-                        <Tooltip trigger={<IconInfo className="size-4" />}>Lower right!</Tooltip>
+                        <Link to="/site-settings" state={{ newWindow: true }} className="font-semibold underline">
+                            desktop settings
+                        </Link>
                     </span>
                 </p>
             </div>
