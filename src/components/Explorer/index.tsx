@@ -31,11 +31,6 @@ interface ExplorerProps {
     selectOptions?: any[]
     onCategoryChange?: (category: string) => void
     selectedCategory?: string
-    cartHandlers?: {
-        onCartOpen: () => void
-        onCartClose: () => void
-        isCartOpen: boolean
-    }
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -80,7 +75,6 @@ export default function Explorer({
     selectOptions = [],
     onCategoryChange,
     selectedCategory,
-    cartHandlers,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -107,13 +101,6 @@ export default function Explorer({
             props.showBack = true
             props.showForward = true
             props.showSearch = true
-        }
-
-        // Add cart handlers if provided
-        if (cartHandlers) {
-            props.onCartOpen = cartHandlers.onCartOpen
-            props.onCartClose = cartHandlers.onCartClose
-            props.isCartOpen = cartHandlers.isCartOpen
         }
 
         return props
