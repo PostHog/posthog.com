@@ -877,6 +877,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
             // Auto-switch to dark mode for "coding-at-night" wallpaper
             if (siteSettings.wallpaper === 'coding-at-night') {
+                if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
+                    ;(window as any).__setPreferredTheme('dark')
+                }
                 updateSiteSettings({ ...siteSettings, colorMode: 'dark' })
             }
         }
