@@ -1,5 +1,6 @@
 import React, { useRef } from 'react'
 import { Popover as RadixPopover } from 'radix-ui'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconX } from '@posthog/icons'
 
 interface PopoverProps {
@@ -11,12 +12,14 @@ interface PopoverProps {
     className?: string
     contentClassName?: string
     sideOffset?: number
+    open?: boolean
+    onOpenChange?: (open: boolean) => void
 }
 
 export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
-    ({ trigger, header, title, children, dataScheme, className = '', contentClassName = '', sideOffset = 5 }, ref) => {
+    ({ trigger, header, title, children, dataScheme, className = '', contentClassName = '', sideOffset = 5, open, onOpenChange }, ref) => {
         return (
-            <RadixPopover.Root>
+            <RadixPopover.Root open={open} onOpenChange={onOpenChange}>
                 <RadixPopover.Trigger asChild className={className}>
                     {trigger}
                 </RadixPopover.Trigger>
@@ -29,7 +32,7 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                         align="center"
                         side="bottom"
                     >
-                        <div className="flex flex-col gap-2.5">
+                        <div className="flex flex-col gap-2.5 h-full">
                             {header && (
                                 <div className="flex justify-between items-center">
                                     {title && <strong>{title}</strong>}
@@ -42,7 +45,9 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                                     </div>
                                 </div>
                             )}
-                            {children}
+                            <ScrollArea className="h-full">
+                                {children}
+                            </ScrollArea>
                         </div>
                         <RadixPopover.Arrow className="fill-white" />
                     </RadixPopover.Content>

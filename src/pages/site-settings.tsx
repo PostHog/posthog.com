@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react'
 import WindowTabs from 'components/WindowTabs'
 import { Fieldset } from 'components/OSFieldset'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import { Popover } from 'components/RadixUI/Popover'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconDay, IconLaptop, IconNight } from '@posthog/icons'
 import { SEO } from 'components/seo'
 import { useApp } from '../context/App'
@@ -64,6 +66,74 @@ const cursorOptions: ToggleOption[] = [
     },
 ]
 
+interface WallpaperOption {
+    label: string
+    value: string
+    thumb: {
+        light: string
+        dark: string
+    }
+}
+
+const wallpaperOptions: WallpaperOption[] = [
+    {
+        label: 'Hogzilla',
+        value: 'hogzilla',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_light_1b27bcadcf.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_dark_7f240e0422.png',
+        },
+    },
+    {
+        label: 'Office Party',
+        value: 'office-party',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_office_party_light_192b0c000f.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_office_party_dark_1d95807317.png',
+        },
+    },
+    {
+        label: 'Keyboard Garden',
+        value: 'keyboard-garden',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_keyboard_garden_light_272a92dc4c.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_keyboard_garden_dark_d8b80b34db.png',
+        },
+    },
+    {
+        label: '2001 Bliss',
+        value: '2001-bliss',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_light_0b2e4ef53c.jpg',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_dark_703ec033d6.jpg',
+        },
+    },
+    {
+        label: 'Parade',
+        value: 'parade',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_parade_light_7e7662c9dd.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_parade_dark_cc5b24c520.png',
+        },
+    },
+    {
+        label: 'Coding at Night',
+        value: 'coding-at-night',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_2001_bliss_dark_30f451bc5b.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_2001_bliss_dark_30f451bc5b.png',
+        },
+    },
+    {
+        label: 'Startup Monopoly',
+        value: 'startup-monopoly',
+        thumb: {
+            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_light_b38ca0c4e5.png',
+            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_startup_monopoly_dark_699c375497.png',
+        },
+    },
+]
+
 const experienceOptions = [
     {
         label: 'Boring',
@@ -75,18 +145,115 @@ const experienceOptions = [
     },
 ] satisfies (ToggleOption & { value: SiteSettings['experience'] })[]
 
+// Custom WallpaperSelect component
+interface WallpaperSelectProps {
+    value: string
+    onValueChange: (value: string) => void
+    title: string
+}
+
+const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) => {
+    const [isDark, setIsDark] = useState(false)
+    const [isOpen, setIsOpen] = useState(false)
+
+    // Check theme from body class
+    useEffect(() => {
+        const checkTheme = () => {
+            const bodyClass = document.body.className
+            setIsDark(bodyClass.includes('dark'))
+        }
+
+        checkTheme()
+
+        // Listen for theme changes
+        const observer = new MutationObserver(checkTheme)
+        observer.observe(document.body, { attributes: true, attributeFilter: ['class'] })
+
+        return () => observer.disconnect()
+    }, [])
+
+    const currentOption = wallpaperOptions.find(option => option.value === value)
+    const currentThumb = currentOption ? (isDark ? currentOption.thumb.dark : currentOption.thumb.light) : null
+
+    const handleSelect = (selectedValue: string) => {
+        onValueChange(selectedValue)
+        // setIsOpen(false) // Close the popover after selection
+    }
+
+    const trigger = (
+        <button
+            type="button"
+            className="w-full bg-white dark:bg-dark border border-primary rounded px-2 py-2 text-sm cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary flex items-center justify-between hover:bg-accent"
+        >
+            <div className="flex items-center gap-3">
+                {currentThumb && (
+                    <img
+                        src={currentThumb}
+                        alt={currentOption?.label || ''}
+                        className="w-[150px] h-[94px] object-contain border border-primary rounded"
+                    />
+                )}
+                <span className="text-primary">{currentOption?.label || 'Select wallpaper'}</span>
+            </div>
+            <svg className="w-4 h-4 text-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+    )
+
+    return (
+        <>
+            <label className="pt-1.5 text-sm">{title}</label>
+            <Popover
+                trigger={trigger}
+                dataScheme="primary"
+                contentClassName="w-[340px] h-[550px] max-h-full p-0"
+                sideOffset={8}
+                open={isOpen}
+                onOpenChange={setIsOpen}
+            >
+                <div className="space-y-0.5 divide-y divide-border">
+                    {wallpaperOptions.map((option) => {
+                        const optionThumb = isDark ? option.thumb.dark : option.thumb.light
+                        const isSelected = option.value === value
+                        return (
+                            <button
+                                key={option.value}
+                                type="button"
+                                onClick={() => handleSelect(option.value)}
+                                className={`w-full p-2 text-left hover:bg-accent flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
+                                    }`}
+                            >
+                                <img
+                                    src={optionThumb}
+                                    alt={option.label}
+                                    className="w-[300px] h-[188px] object-cover rounded"
+                                />
+                                <span className={`text-primary ${isSelected ? 'font-bold' : 'font-medium'}`}>{option.label}</span>
+                            </button>
+                        )
+                    })}
+                </div>
+            </Popover>
+        </>
+    )
+}
+
 export default function DisplayOptions() {
     const { siteSettings, updateSiteSettings } = useApp()
     const [colorMode, setColorMode] = useState('light')
     const [skinMode, setSkinMode] = useState('modern')
     const [cursor, setCursor] = useState('default')
+    const [wallpaper, setWallpaper] = useState('hogzilla')
 
     const handleExperienceChange = (value: string) => {
         updateSiteSettings({ ...siteSettings, experience: value as SiteSettings['experience'] })
     }
 
     const handleColorModeChange = (value: string) => {
-        window.__setPreferredTheme(value)
+        if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
+            (window as any).__setPreferredTheme(value)
+        }
         setColorMode(value)
     }
 
@@ -187,14 +354,38 @@ export default function DisplayOptions() {
         updateCursor(value)
     }
 
+    const updateWallpaper = (wallpaper: string) => {
+        localStorage.setItem('wallpaper', wallpaper)
+        setWallpaper(wallpaper)
+        document.body.setAttribute('data-wallpaper', wallpaper)
+
+        // Auto-switch to dark mode for "coding-at-night" wallpaper
+        if (wallpaper === 'coding-at-night') {
+            if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
+                (window as any).__setPreferredTheme('dark')
+            }
+            setColorMode('dark')
+        }
+
+        // Dispatch custom event for real-time updates
+        window.dispatchEvent(new CustomEvent('wallpaperchange', { detail: wallpaper }))
+    }
+
+    const handleWallpaperChange = (value: string) => {
+        updateWallpaper(value)
+    }
+
     useEffect(() => {
         const colorMode = localStorage.getItem('theme') || 'light'
         const savedCursor = localStorage.getItem('cursor') || 'default'
         const savedSkin = localStorage.getItem('skin') || 'modern'
+        const savedWallpaper = localStorage.getItem('wallpaper') || 'hogzilla'
         setColorMode(colorMode)
         setCursor(savedCursor)
         setSkinMode(savedSkin)
+        setWallpaper(savedWallpaper)
         updateCursor(savedCursor)
+        updateWallpaper(savedWallpaper)
     }, [])
 
     return (
@@ -224,6 +415,13 @@ export default function DisplayOptions() {
                             options={cursorOptions}
                             onValueChange={handleCursorChange}
                             value={cursor}
+                        />
+                    </div>
+                    <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
+                        <WallpaperSelect
+                            title="Desktop background"
+                            onValueChange={handleWallpaperChange}
+                            value={wallpaper}
                         />
                     </div>
                 </Fieldset>
