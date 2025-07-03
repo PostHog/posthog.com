@@ -145,6 +145,7 @@ module.exports = {
             fontFamily: {
                 'fairytale-title': ['Fairytale', 'sans-serif'],
                 fairytale: ['Computer Modern', 'sans-serif'],
+                retro: ['Milky Vintage', 'serif'],
                 serif: ['Charter', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
                     'MatterVF',
