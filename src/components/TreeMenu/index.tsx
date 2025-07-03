@@ -72,8 +72,9 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 }
 
 export function TreeMenu(props: TreeMenuProps) {
+    const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem>(
-        props.activeItem || getActiveItem(props.items, window.location.pathname)
+        props.activeItem || getActiveItem(props.items || [], pathname)
     )
 
     const handleClick = (item: MenuItem) => {
@@ -84,7 +85,7 @@ export function TreeMenu(props: TreeMenuProps) {
 
     return (
         <div className="not-prose space-y-px">
-            {items.map((item, index) => {
+            {items?.map((item, index) => {
                 const key = `${item.name}-${index}-${item.url}`
                 const hasChildren = item.children && item.children.length > 0
                 return hasChildren ? (

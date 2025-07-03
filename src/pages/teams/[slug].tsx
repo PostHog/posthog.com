@@ -108,13 +108,15 @@ export default function TeamPage(props: TeamPageProps) {
         <ReaderView
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
         >
-            <Team
-                emojis={team?.emojis}
-                roadmaps={team?.roadmaps}
-                objectives={objectives}
-                body={body}
-                slug={slug?.split('/').pop() || ''}
-            />
+            {body && (
+                <Team
+                    emojis={team?.emojis}
+                    roadmaps={team?.roadmaps}
+                    objectives={objectives}
+                    body={body}
+                    slug={slug?.split('/').pop() || ''}
+                />
+            )}
         </ReaderView>
     )
 }

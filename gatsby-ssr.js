@@ -11,6 +11,7 @@ import { initKea, wrapElement } from './kea'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
+import { Provider as ToastProvider } from './src/context/Toast'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
@@ -20,7 +21,9 @@ export const wrapPageElement = ({ element, props }) => {
             {wrapElement({
                 element: (
                     <Provider element={element} location={props.location}>
-                        <Wrapper element={element} />
+                        <ToastProvider>
+                            <Wrapper element={element} />
+                        </ToastProvider>
                     </Provider>
                 ),
             })}

@@ -354,8 +354,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
     const constraintsRef = useRef<HTMLDivElement>(null)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
-    const [windows, setWindows] = useState<AppWindow[]>([])
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
+    const [windows, setWindows] = useState<AppWindow[]>([createNewWindow(element, [], location, isSSR, taskbarHeight)])
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
             (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
@@ -428,7 +428,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w)))
     }, [])
 
-    const getWindowBasedSizeConstraints = () => {
+    function getWindowBasedSizeConstraints() {
         return {
             min: {
                 width: isSSR ? 0 : window.innerWidth * 0.2,
@@ -441,19 +441,19 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
-    const getDesktopCenterPosition = (size: { width: number; height: number }) => {
+    function getDesktopCenterPosition(size: { width: number; height: number }) {
         return {
             x: isSSR ? 0 : window.innerWidth / 2 - size.width / 2,
             y: isSSR ? 0 : (window.innerHeight - taskbarHeight) / 2 - size.height / 2,
         }
     }
 
-    const getPositionDefaults = (key: string, size: { width: number; height: number }, windows: AppWindow[]) => {
+    function getPositionDefaults(key: string, size: { width: number; height: number }, windows: AppWindow[]) {
         if (appSettings[key]?.position?.center) {
             return getDesktopCenterPosition(size)
         }
 
-        if (key.startsWith('ask-max')) {
+        if (key?.startsWith('ask-max')) {
             return {
                 x: isSSR ? 0 : window.innerWidth - size.width - 20,
                 y: isSSR ? 0 : window.innerHeight - size.height - 20,
@@ -463,7 +463,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const sortedWindows = [...windows].sort((a, b) => b.zIndex - a.zIndex)
         const previousWindow = sortedWindows[0]
 
-        if (previousWindow && !previousWindow.key.startsWith('ask-max')) {
+        if (previousWindow && !previousWindow.key?.startsWith('ask-max')) {
             const potentialX = previousWindow.position.x + 10
 
             const screenMidpoint = isSSR ? 0 : window.innerWidth / 2
@@ -484,10 +484,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         return getDesktopCenterPosition(size)
     }
 
-    const getInitialSize = (key: string) => {
+    function getInitialSize(key: string) {
         const defaultSize =
             appSettings[key]?.size?.max ||
-            (key.startsWith('ask-max')
+            (key?.startsWith('ask-max')
                 ? appSettings['ask-max']?.size?.max
                 : {
                     width: isSSR ? 0 : window.innerWidth * 0.9,
@@ -499,7 +499,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
-    const getLastClickedElementRect = () => {
+    function getLastClickedElementRect() {
         const rect = lastClickedElement?.getBoundingClientRect()
         if (!rect) return undefined
         return {
@@ -508,8 +508,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
     }
 
-    const updatePages = (element: WindowElement) => {
-        const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
+    function createNewWindow(
+        element: WindowElement,
+        windows: AppWindow[],
+        location: any,
+        isSSR: boolean,
+        taskbarHeight: number
+    ) {
         const size = getInitialSize(element.key)
         const position = getPositionDefaults(element.key, size, windows)
         const settings = appSettings[element.key]
@@ -556,6 +561,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (newWindow.position.y + newWindow.size.height > (isSSR ? 0 : window.innerHeight) - taskbarHeight - 20) {
             newWindow.size.height = isSSR ? 0 : window.innerHeight - newWindow.position.y - taskbarHeight - 20
         }
+
+        return newWindow
+    }
+
+    const updatePages = (element: WindowElement) => {
+        const existingWindow = windows.find((w) => w.path === element.props.location.pathname)
+        const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
             if (newWindow.appSettings?.size?.fixed) {

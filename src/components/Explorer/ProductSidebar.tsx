@@ -5,7 +5,7 @@ import OSButton from 'components/OSButton'
 import { IconCursor, IconHeadset, IconQuestion } from '@posthog/icons'
 
 export default function ProductSidebar({ type }: { type: string }): JSX.Element | null {
-    const product = useProduct({ type })
+    const product = useProduct({ handle: type })
     if (!product) return null
 
     const {
@@ -14,7 +14,7 @@ export default function ProductSidebar({ type }: { type: string }): JSX.Element 
         name,
         description,
         startsAt,
-        billingData: { unit },
+        billingData: { unit } = { unit: '' },
         freeLimit,
         worksWith,
         sharesFreeTier,
