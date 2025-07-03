@@ -252,7 +252,7 @@ export default function ProfilePage({ params }: PageProps) {
                         <>
                             <div className="space-y-8 my-8">
                                 <section className="">
-                                    <div className="relative mobile-xs:w-36 mobile-xs:h-36 w-48 h-48 float-right -mt-12 -z-10">
+                                    <div className="relative w-48 h-48 float-right -mt-12">
                                         <Avatar
                                             className={`${
                                                 profile.color
@@ -269,7 +269,7 @@ export default function ProfilePage({ params }: PageProps) {
                                     </div>
 
                                     <div className="space-y-1 mb-8">
-                                        <div className="flex gap-x-2 mobile-xs:flex-col items-baseline">
+                                        <div className="flex gap-x-2 items-baseline">
                                             <h1 className="m-0 text-5xl">{name || 'Anonymous'}</h1>
                                             {profile.pronouns && (
                                                 <div className="opacity-50 text-sm">{profile.pronouns}</div>
