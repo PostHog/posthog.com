@@ -1,27 +1,16 @@
-import Layout from 'components/Layout'
 import React, { useState, useMemo, useEffect } from 'react'
-import { Nav } from './Nav'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
 import { CollectionPageContext } from './types'
 import SEO from 'components/seo'
-import ShippingBanner from './ShippingBanner'
 import OSButton from 'components/OSButton'
 import * as Icons from '@posthog/icons'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { ProductPanel } from './ProductPanel'
 import { Cart } from './Cart'
 import { getProductMetafieldByNamespace } from './utils'
-import { IconShop, IconShirt, IconSticker, IconMug, IconCouch } from 'components/OSIcons/Icons'
-import { Link } from 'gatsby'
-
-// New imports for inline Explorer component
-import { Select } from 'components/RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
-import { navigate } from 'gatsby'
-import { useLocation } from '@reach/router'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { productMenu } from '../../navs'
 import { Accordion } from 'components/RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
@@ -82,6 +71,83 @@ interface AccordionItem {
     content: React.ReactNode
 }
 
+const leftSidebarContent = [
+    {
+        title: 'About our merch',
+        content: (
+            <>
+                <p className="text-sm mb-2">
+                    A tech startup with merch you actually want to wear? Now that's a novel idea...
+                </p>
+                <p className="text-sm mb-0">We won't stop until our merch store reaches product-market fit.</p>
+            </>
+        ),
+    },
+    {
+        title: 'Shipping',
+        content: (
+            <>
+                <p className="prose text-primary text-sm mb-2">
+                    Merch is shipped from Ohio via our fulfillment partner,{' '}
+                    <a href="https://www.micromerch.com/" target="_blank" rel="noopener noreferrer">
+                        MicroMerch
+                    </a>
+                    .
+                </p>
+                <p>
+                    <strong>Estimated shipping times:</strong>
+                </p>
+                <div className="grid grid-cols-2 gap-2 mb-2">
+                    <strong>Within the US:</strong>
+                    <span>1-2 weeks</span>
+                    <strong>Outside the US:</strong>
+                    <span>2-4 weeks</span>
+                </div>
+            </>
+        ),
+    },
+    {
+        title: 'Returns',
+        content: (
+            <>
+                <p>
+                    Returns?? We've literally never had a return. Not sure if it's because our products are that awesome
+                    or because we don't have an official return policy.
+                </p>
+                <p>Until then, just email merch@posthog.com if you have any issues and we'll get you squared away.</p>
+            </>
+        ),
+    },
+    {
+        title: 'Missing a product?',
+        content: (
+            <>
+                <p className="text-sm mb-2">
+                    Is our merch store missing something vital that you need for your closet or desk? Share your product
+                    idea with us on GitHub.
+                </p>
+
+                <p className="text-sm mb-0">
+                    <OSButton
+                        variant="underline"
+                        asLink
+                        align="left"
+                        width="full"
+                        size="md"
+                        to="https://github.com/posthog/posthog.com/issues"
+                        icon={<Icons.IconArrowRight className="text-salmon" />}
+                        iconPosition="right"
+                        className="font-semibold !px-0"
+                        external
+                    >
+                        Submit a product idea
+                    </OSButton>
+                </p>
+            </>
+        ),
+    },
+]
+
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
     if (!content) return null
 
@@ -115,7 +181,9 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [cartIsOpen, setCartIsOpen] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
     const [hasInitialized, setHasInitialized] = useState(false)
+    const { appWindow } = useWindow()
 
+    const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
     const transformedProducts = products?.map((p) => getProduct(p))
 
@@ -252,7 +320,6 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         setSelectedProduct(product)
         setCartIsOpen(false) // Close cart when product is opened
     }
-    const handleProductClose = () => setSelectedProduct(null)
 
     // Cart handlers - close product when cart is opened
     const handleCartOpen = () => {
@@ -261,188 +328,90 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     }
     const handleCartClose = () => setCartIsOpen(false)
 
-    // Add Explorer component variables (from inline Explorer)
-    const { appWindow } = useWindow()
-    const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
-
     const handleValueChange = (value: string) => {
         // Use custom category change handler for filtering
         setSelectedCategory(value)
     }
 
-    // Generate dynamic HeaderBar props
-    const getHeaderBarProps = () => {
-        const props: any = {}
-        const headerBarOptions = ['showBack', 'showForward', 'showSearch', 'showCart']
-        headerBarOptions.forEach((option) => {
-            props[option] = true
-        })
-
-        // Add cart handlers
-        props.onCartOpen = handleCartOpen
-        props.onCartClose = handleCartClose
-        props.isCartOpen = cartIsOpen
-
-        return props
-    }
-
     const ContentWrapper = appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment
 
-    // Left sidebar content
-    const leftSidebarContent = [
-        {
-            title: 'About our merch',
-            content: (
-                <>
-                    <p className="text-sm mb-2">
-                        A tech startup with merch you actually want to wear? Now that's a novel idea...
-                    </p>
-                    <p className="text-sm mb-0">We won't stop until our merch store reaches product-market fit.</p>
-                </>
-            ),
-        },
-        {
-            title: 'Shipping',
-            content: (
-                <>
-                    <p className="prose text-primary text-sm mb-2">
-                        Merch is shipped from Ohio via our fulfillment partner,{' '}
-                        <a href="https://www.micromerch.com/" target="_blank" rel="noopener noreferrer">
-                            MicroMerch
-                        </a>
-                        .
-                    </p>
-                    <p>
-                        <strong>Estimated shipping times:</strong>
-                    </p>
-                    <div className="grid grid-cols-2 gap-2 mb-2">
-                        <strong>Within the US:</strong>
-                        <span>1-2 weeks</span>
-                        <strong>Outside the US:</strong>
-                        <span>2-4 weeks</span>
-                    </div>
-                </>
-            ),
-        },
-        {
-            title: 'Returns',
-            content: (
-                <>
-                    <p>
-                        Returns?? We've literally never had a return. Not sure if it's because our products are that
-                        awesome or because we don't have an official return policy.
-                    </p>
-                    <p>
-                        Until then, just email merch@posthog.com if you have any issues and we'll get you squared away.
-                    </p>
-                </>
-            ),
-        },
-        {
-            title: 'Missing a product?',
-            content: (
-                <>
-                    <p className="text-sm mb-2">
-                        Is our merch store missing something vital that you need for your closet or desk? Share your
-                        product idea with us on GitHub.
-                    </p>
-
-                    <p className="text-sm mb-0">
-                        <OSButton
-                            variant="underline"
-                            asLink
-                            align="left"
-                            width="full"
-                            size="md"
-                            to="https://github.com/posthog/posthog.com/issues"
-                            icon={<Icons.IconArrowRight className="text-salmon" />}
-                            iconPosition="right"
-                            className="font-semibold !px-0"
-                            external
-                        >
-                            Submit a product idea
-                        </OSButton>
-                    </p>
-                </>
-            ),
-        },
-    ]
-
-    // Right sidebar content
-    const rightSidebarContent = cartIsOpen ? (
-        <Cart className="h-full overflow-y-auto" />
-    ) : selectedProduct ? (
-        <ProductPanel
-            product={selectedProduct}
-            setIsCart={() => undefined} // Fix linter error - return undefined instead of empty function
-            onClick={() => undefined} // Fix linter error - return undefined instead of empty function
-            updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
-            onCartOpen={handleCartOpen} // Allow opening cart from product panel
-            className="!p-4 !pt-4" // Override default padding
-        />
-    ) : null
-
     return (
-        <>
-            {/* Inline Explorer component content */}
-            <div className="@container w-full h-full flex flex-col min-h-1">
-                <HeaderBar {...getHeaderBarProps()} />
-                <AddressBar
-                    selectOptions={selectOptions}
-                    currentPath={currentPath}
-                    handleValueChange={handleValueChange}
-                    selectedCategory={selectedCategory}
-                />
-                {/* <DebugContainerQuery /> */}
-                <ContentWrapper>
-                    <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
-                        {rightSidebarContent && (
-                            <aside
-                                data-scheme="secondary"
-                                className="not-prose w-96 bg-primary border-l border-primary h-full text-primary"
-                            >
-                                <div className="h-full flex flex-col">
-                                    <div className="flex-1 overflow-auto">
-                                        <SidebarContent content={rightSidebarContent} />
+        <div className="@container w-full h-full flex flex-col min-h-1">
+            <HeaderBar
+                showBack
+                showForward
+                onCartOpen={handleCartOpen}
+                onCartClose={handleCartClose}
+                isCartOpen={cartIsOpen}
+                showCart
+            />
+            <AddressBar
+                selectOptions={selectOptions}
+                currentPath={currentPath}
+                handleValueChange={handleValueChange}
+                selectedCategory={selectedCategory}
+            />
+            {/* <DebugContainerQuery /> */}
+            <ContentWrapper>
+                <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
+                    {(cartIsOpen || selectedProduct) && (
+                        <aside
+                            data-scheme="secondary"
+                            className="not-prose w-96 bg-primary border-l border-primary h-full text-primary"
+                        >
+                            <div className="h-full flex flex-col">
+                                <div className="flex-1 overflow-auto">
+                                    {cartIsOpen ? (
+                                        <Cart className="h-full overflow-y-auto" />
+                                    ) : selectedProduct ? (
+                                        <ProductPanel
+                                            product={selectedProduct}
+                                            setIsCart={() => undefined} // Fix linter error - return undefined instead of empty function
+                                            onClick={() => undefined} // Fix linter error - return undefined instead of empty function
+                                            updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
+                                            onCartOpen={handleCartOpen} // Allow opening cart from product panel
+                                            className="!p-4 !pt-4" // Override default padding
+                                        />
+                                    ) : null}
+                                </div>
+                            </div>
+                        </aside>
+                    )}
+
+                    <main
+                        data-app="Explorer"
+                        data-scheme="primary"
+                        className="@container flex-1 bg-primary relative h-full"
+                    >
+                        <ScrollArea className="h-full">
+                            {/* <DebugContainerQuery /> */}
+                            <div className={`${getProseClasses()} max-w-none h-full`}>
+                                <SEO title="Merch - PostHog" image="/images/merch.png" />
+                                {/* <Nav currentCollectionHandle={pageContext.handle} /> */}
+                                {/* <ShippingBanner /> */}
+                                <div className="flex gap-4">
+                                    <div className="@container flex-1 not-prose">
+                                        <ProductGrid
+                                            products={filteredProducts}
+                                            onProductClick={handleProductSelect}
+                                            selectedProduct={selectedProduct}
+                                        />
                                     </div>
                                 </div>
-                            </aside>
-                        )}
-                        <main
-                            data-app="Explorer"
-                            data-scheme="primary"
-                            className="@container flex-1 bg-primary relative h-full"
-                        >
-                            <ScrollArea className="h-full">
-                                {/* <DebugContainerQuery /> */}
-                                <div className={`${getProseClasses()} max-w-none h-full`}>
-                                    <SEO title="Merch - PostHog" image="/images/merch.png" />
-                                    {/* <Nav currentCollectionHandle={pageContext.handle} /> */}
-                                    {/* <ShippingBanner /> */}
-                                    <div className="flex gap-4">
-                                        <div className="@container flex-1 not-prose">
-                                            <ProductGrid
-                                                products={filteredProducts}
-                                                onProductClick={handleProductSelect}
-                                                selectedProduct={selectedProduct}
-                                            />
-                                        </div>
-                                    </div>
+                            </div>
+                        </ScrollArea>
+                    </main>
+                    {leftSidebarContent && (
+                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+                            <ScrollArea className="p-2">
+                                <div className="space-y-3">
+                                    <SidebarContent content={leftSidebarContent} />
                                 </div>
                             </ScrollArea>
-                        </main>
-                        {leftSidebarContent && (
-                            <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
-                                <ScrollArea className="p-2">
-                                    <div className="space-y-3">
-                                        <SidebarContent content={leftSidebarContent} />
-                                    </div>
-                                </ScrollArea>
-                            </aside>
-                        )}
-                    </div>
-                </ContentWrapper>
-            </div>
-        </>
+                        </aside>
+                    )}
+                </div>
+            </ContentWrapper>
+        </div>
     )
 }
