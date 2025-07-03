@@ -133,7 +133,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     }
 
     const getActiveWindowsButtonPosition = () => {
-        const activeWindowsButton = document.querySelector('[data-active-windows]')
+        const activeWindowsButton = isSSR ? null : document.querySelector('[data-active-windows]')
         if (!activeWindowsButton) return { x: 0, y: 0 }
         const rect = activeWindowsButton.getBoundingClientRect()
         return {
@@ -283,7 +283,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         setRendered(true)
     }, [])
 
-    const chatWindows = windows.filter((w) => w.key.startsWith('ask-max'))
+    const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
 
     return (
         <WindowProvider
@@ -329,16 +329,6 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                       }`
                             }`}
                             style={{
-                                width:
-                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
-                                        ? '100%'
-                                        : size.width,
-                                height:
-                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
-                                        ? '100%'
-                                        : item.appSettings?.size?.autoHeight
-                                        ? 'auto'
-                                        : size.height,
                                 zIndex: item.zIndex,
                             }}
                             initial={{
@@ -364,11 +354,27 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                     siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                         ? 0
                                         : Math.round(position.y),
+                                width:
+                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? '100%'
+                                        : size.width,
+                                height:
+                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                        ? '100%'
+                                        : item.appSettings?.size?.autoHeight
+                                        ? 'auto'
+                                        : size.height,
                                 transition: {
                                     duration: siteSettings.experience === 'boring' ? 0 : 0.3,
                                     scale: {
                                         duration: siteSettings.experience === 'boring' ? 0 : 0.3,
                                         ease: [0.2, 0.2, 0.8, 1],
+                                    },
+                                    width: {
+                                        duration: 0,
+                                    },
+                                    height: {
+                                        duration: 0,
                                     },
                                 },
                             }}

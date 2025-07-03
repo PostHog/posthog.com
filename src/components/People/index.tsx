@@ -241,7 +241,7 @@ export const TeamMember = (props: any) => {
                                 </div>
 
                                 {/* Show first team's crest */}
-                                {teamData[0] && teamCrestMap[teamData[0].attributes.name] && (
+                                {teamData[0] && teamCrestMap?.[teamData[0].attributes.name] && (
                                     <img
                                         src={teamCrestMap[teamData[0].attributes.name]}
                                         alt={`${teamData[0].attributes.name} Team`}

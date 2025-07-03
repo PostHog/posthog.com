@@ -123,7 +123,7 @@ export const CareersHero = () => {
     )
 
     const [selectedJob, setSelectedJob] = useState(allJobs[0])
-    const teamsField = selectedJob.parent.customFields.find((field: { title: string }) => field.title === 'Teams')
+    const teamsField = selectedJob?.parent?.customFields.find((field: { title: string }) => field.title === 'Teams')
     const teams = teamsField ? JSON.parse(teamsField.value) : []
     const [selectedTeamName, setSelectedTeamName] = useState('')
 

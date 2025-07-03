@@ -33,7 +33,7 @@ export default function Product({
     type: string
     roadmapCategory?: string
 }): JSX.Element | null {
-    const product = useProduct({ type })
+    const product = useProduct({ handle: type })
     if (!product) return null
 
     const { Icon, color, slug, name } = product

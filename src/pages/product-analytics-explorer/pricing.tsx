@@ -45,7 +45,7 @@ const faqs = [
 ]
 
 export default function ProductAnalyticsPricing(): JSX.Element {
-    const product = useProduct({ type: 'product_analytics' })
+    const product = useProduct({ handle: 'product_analytics' })
     const slug = 'product-analytics'
 
     return (
