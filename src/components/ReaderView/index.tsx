@@ -34,6 +34,8 @@ import SearchProvider from 'components/Editor/SearchProvider'
 import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
+import { ChatProvider } from '../../hooks/useChat'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -416,6 +418,7 @@ function ReaderViewContent({
     homeURL,
     description,
 }) {
+    const { addWindow } = useApp()
     const { appWindow } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
@@ -611,7 +614,41 @@ function ReaderViewContent({
                         {/* this space intentionally left blank */}
                     </motion.div>
                     <div className="flex-grow flex justify-between items-center">
-                        <div>Questions?</div>
+                        <div>
+                            <p className="m-0 text-sm">
+                                Questions about this page?{' '}
+                                <button
+                                    className="font-semibold underline"
+                                    onClick={() =>
+                                        addWindow(
+                                            <ChatProvider
+                                                location={{
+                                                    pathname: `ask-max-${appWindow?.path}`,
+                                                }}
+                                                key={`ask-max-${appWindow?.path}`}
+                                                newWindow
+                                                context={[
+                                                    {
+                                                        type: 'page',
+                                                        value: {
+                                                            path: appWindow?.path,
+                                                            label: title,
+                                                        },
+                                                    },
+                                                ]}
+                                            />
+                                        )
+                                    }
+                                >
+                                    Ask Max AI
+                                </button>{' '}
+                                or{' '}
+                                <Link className="font-semibold underline" to="/questions" state={{ newWindow: true }}>
+                                    post a community question
+                                </Link>
+                                .
+                            </p>
+                        </div>
                         {body?.type === 'mdx' && (
                             <div>
                                 <AppOptionsButton
