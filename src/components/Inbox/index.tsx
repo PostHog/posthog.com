@@ -62,8 +62,7 @@ export default function Inbox(props) {
     const { data, params } = props
     const initialTopicID = data?.topic?.squeakId
     const permalink = params?.permalink
-    const [ready, setReady] = useState(props.path !== '/questions/subscriptions')
-    const [filters, setFilters] = useState({
+    const defaultFilters = {
         subject: {
             $ne: '',
         },
@@ -72,12 +71,10 @@ export default function Inbox(props) {
                 $notContainsi: '/community/profiles',
             },
         },
-        topics: {
-            id: {
-                $eq: initialTopicID,
-            },
-        },
-    })
+        topics: { id: { $eq: initialTopicID } },
+    }
+    const [ready, setReady] = useState(props.path !== '/questions/subscriptions')
+    const [filters, setFilters] = useState(defaultFilters)
     const { pathname } = useLocation()
     const { addToast } = useToast()
     const { user, setSubscription, isSubscribed, isValidating } = useUser()
@@ -162,6 +159,9 @@ export default function Inbox(props) {
     }, [question, user])
 
     useEffect(() => {
+        if (props.path === '/questions') {
+            setFilters(defaultFilters)
+        }
         if (props.path === '/questions/subscriptions' && !isValidating) {
             if (user) {
                 const { topics, ...newFilters } = filters
