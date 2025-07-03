@@ -532,7 +532,7 @@ function EditProfile({ profile, mutate }) {
                             return (
                                 <div key={index}>
                                     <h2>{section.title}</h2>
-                                    {section.subtitle && <p className="opacity-70 -mt-4 mb-4">{section.subtitle}</p>}
+                                    {section.subtitle && <p className="opacity-70 mb-4">{section.subtitle}</p>}
                                     <div className="flex flex-wrap items-center">
                                         {Object.keys(section.fields).map((key) => {
                                             const field = section.fields[key]
