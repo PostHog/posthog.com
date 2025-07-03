@@ -15,6 +15,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import { useWindow } from '../../context/Window'
 import { getProseClasses } from '../../constants'
 import AddressBar from 'components/OSChrome/AddressBar'
+import Fuse from 'fuse.js'
 
 // Category configuration with icons and display order
 type CategoryKey = 'all' | 'Apparel' | 'Stickers' | 'Goods' | 'Novelty'
@@ -181,6 +182,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [cartIsOpen, setCartIsOpen] = useState(false)
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
     const [hasInitialized, setHasInitialized] = useState(false)
+    const [searchQuery, setSearchQuery] = useState('')
     const { appWindow } = useWindow()
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -286,34 +288,46 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         ]
     }, [transformedProducts])
 
-    // Filter products based on selected category
+    // Filter products based on selected category and search query
     const filteredProducts = useMemo(() => {
-        if (selectedCategory === 'all') {
-            return transformedProducts
+        let products = transformedProducts
+
+        // First filter by category
+        if (selectedCategory !== 'all') {
+            products = products?.filter((product) => {
+                // Try metafield first (product namespace, category key)
+                const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
+                if (metafieldCategory && typeof metafieldCategory === 'string') {
+                    return metafieldCategory === selectedCategory
+                }
+                // Try direct search for category key regardless of namespace
+                const directCategorySearch = product.metafields?.find((m) => m.key === 'category')
+                if (directCategorySearch && typeof directCategorySearch.value === 'string') {
+                    return directCategorySearch.value === selectedCategory
+                }
+                // Fall back to product.category.name
+                if (product.category?.name) {
+                    return product.category.name === selectedCategory
+                }
+                // Fall back to product.type
+                if (product.type) {
+                    return product.type === selectedCategory
+                }
+                return false
+            })
         }
 
-        return transformedProducts?.filter((product) => {
-            // Try metafield first (product namespace, category key)
-            const metafieldCategory = getProductMetafieldByNamespace(product, 'product', 'category')
-            if (metafieldCategory && typeof metafieldCategory === 'string') {
-                return metafieldCategory === selectedCategory
-            }
-            // Try direct search for category key regardless of namespace
-            const directCategorySearch = product.metafields?.find((m) => m.key === 'category')
-            if (directCategorySearch && typeof directCategorySearch.value === 'string') {
-                return directCategorySearch.value === selectedCategory
-            }
-            // Fall back to product.category.name
-            if (product.category?.name) {
-                return product.category.name === selectedCategory
-            }
-            // Fall back to product.type
-            if (product.type) {
-                return product.type === selectedCategory
-            }
-            return false
-        })
-    }, [transformedProducts, selectedCategory])
+        if (searchQuery.trim() !== '' && products) {
+            const fuse = new Fuse(products, {
+                keys: ['title', 'description', 'id'],
+                includeMatches: true,
+                threshold: 0.3,
+            })
+            return fuse.search(searchQuery).map((result) => result.item)
+        }
+
+        return products
+    }, [transformedProducts, selectedCategory, searchQuery])
 
     // Product handlers - close cart when product is opened
     const handleProductSelect = (product: any) => {
@@ -333,6 +347,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
         setSelectedCategory(value)
     }
 
+    const handleSearch = (query: string) => {
+        setSearchQuery(query)
+    }
+
     const ContentWrapper = appWindow?.size?.width && appWindow.size.width <= 768 ? ScrollArea : React.Fragment
 
     return (
@@ -344,6 +362,8 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 onCartClose={handleCartClose}
                 isCartOpen={cartIsOpen}
                 showCart
+                showSearch
+                onSearch={handleSearch}
             />
             <AddressBar
                 selectOptions={selectOptions}
