@@ -946,6 +946,14 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Working with Max AI',
+                url: '/handbook/engineering/working-with-max-ai',
+            },
+            {
+                name: 'Implementing AI features',
+                url: '/handbook/engineering/implementing-ai-features',
+            },
+            {
                 name: 'Deployments',
                 url: '',
                 children: [
@@ -1234,10 +1242,6 @@ export const handbookSidebar = [
             {
                 name: 'Per-product growth reviews',
                 url: '/handbook/product/per-product-growth-reviews',
-            },
-            {
-                name: 'In-product AI playbook',
-                url: '/handbook/product/ai-playbook',
             },
             {
                 name: 'Prioritizing work for mature products',
