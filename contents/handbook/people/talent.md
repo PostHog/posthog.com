@@ -8,7 +8,7 @@ showTitle: true
 
 The talent team is uniquely placed at PostHog to have an outsized influence on the people that join the company in comparison to the rest of the business. This is why we ask our talent partners to think like owners.
 
-PostHog's business model requires us to build more products, to do that we need more engineers. Once we have more products, we require commercial team members to market those products and to look after the customers that sign up. We also need to support those customers and support the growth of the business.
+PostHog's business model requires us to build and automate more products, to do that we need more engineers. Once we have more products, we require commercial team members to market those products and to look after the customers that sign up. We also need to support those customers and support the growth of the business.
 This means that the people that join PostHog directly impact our growth, hence why we invest so heavily in finding and retaining great people. 
 
 At some companies the Talent team are seen as a support function, at PostHog we view them as a growth function, so we need our talent partners to be thinking about the growth of the business as a whole, not just as a headcount. 
