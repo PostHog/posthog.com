@@ -12,7 +12,7 @@ API queries enable you to query your data in PostHog. This is useful for:
 > **When should you _not_ use API queries?**
 > 1. When you want to export large amounts of data. Use [batch exports](/docs/cdp/batch-exports) instead.
 > 2. When you want to send data to destinations like Slack or webhooks immediately. Use [real-time destinations](/docs/cdp/destinations) instead.
-> 3. If you need regular fresh, non-trivial data. Use [materialized views](/docs/data-warehouse/views) with a schedule instead.
+> 3. If you need regular fresh, non-trivial data. Use [materialized views](/docs/data-warehouse/views) with a schedule instead. You can then query the materialized view through the HogQL and get almost instant results.
 
 ## Prerequisites
 
