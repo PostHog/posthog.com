@@ -384,7 +384,7 @@ posthog.captureException(error, additionalProperties)
 
 Since version 1.187.0, you can provide a `before_send` function when initializing the SDK to amend, filter, sample, or reject events before they are sent to PostHog.
 
-> **🚨 Warning:** Amending and sampling events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
+> **🚨 Warning:** Amending and sampling events is advanced functionality that requires careful implementation. Core PostHog features may require 100% of unmodified events to function properly. We recommend only modifying or sampling your own custom events if possible, and preserving all PostHog internal events in their original form.
 
 ### Redacting information in events
 
