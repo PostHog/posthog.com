@@ -685,32 +685,36 @@ function ReaderViewContent({
                                 contentClassName="w-[260px]"
                             >
                                 <ul className="list-none m-0 p-0 space-y-2 max-h-[200px] overflow-y-auto">
-                                    {commits.map((commit) => (
-                                        <li key={commit.url} className="flex gap-2 justify-between items-center">
-                                            <Link
-                                                to={commit.author.html_url}
-                                                className="flex items-center gap-2"
-                                                externalNoIcon
-                                            >
-                                                <div>
-                                                    <div className="size-7 bg-accent rounded-full relative">
-                                                        <img
-                                                            src={commit.author.avatar_url}
-                                                            alt={commit.author.login}
-                                                            className="size-full rounded-full object-cover"
-                                                        />
+                                    {commits
+                                        .filter((commit) => !!commit.author)
+                                        .map((commit) => (
+                                            <li key={commit.url} className="flex gap-2 justify-between items-center">
+                                                <Link
+                                                    to={commit.author.html_url}
+                                                    className="flex items-center gap-2"
+                                                    externalNoIcon
+                                                >
+                                                    <div>
+                                                        <div className="size-7 bg-accent rounded-full relative">
+                                                            <img
+                                                                src={commit.author.avatar_url}
+                                                                alt={commit.author.login}
+                                                                className="size-full rounded-full object-cover"
+                                                            />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <p className="text-sm m-0">{commit.author.login}</p>
-                                            </Link>
-                                            <div className="flex items-center gap-2">
-                                                <p className="text-xs opacity-60 m-0">{dayjs(commit.date).fromNow()}</p>
-                                                <Link to={commit.url} externalNoIcon>
-                                                    <IconPullRequest className="size-4" />
+                                                    <p className="text-sm m-0">{commit.author.login}</p>
                                                 </Link>
-                                            </div>
-                                        </li>
-                                    ))}
+                                                <div className="flex items-center gap-2">
+                                                    <p className="text-xs opacity-60 m-0">
+                                                        {dayjs(commit.date).fromNow()}
+                                                    </p>
+                                                    <Link to={commit.url} externalNoIcon>
+                                                        <IconPullRequest className="size-4" />
+                                                    </Link>
+                                                </div>
+                                            </li>
+                                        ))}
                                 </ul>
                             </Popover>
                         )}
