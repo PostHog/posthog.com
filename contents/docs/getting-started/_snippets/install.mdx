@@ -7,20 +7,20 @@ import API from "../../integrate/_snippets/api.mdx"
 import Wizard from "./wizard.mdx"
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['snippet', 'wizard', 'sdks', 'guides', 'api']}>
+<Tab.Group tabs={['wizard', 'snippet', 'sdks', 'guides', 'api']}>
     <Tab.List>  
-        <Tab>JS snippet</Tab>
         <Tab>AI wizard</Tab>
+        <Tab>JS snippet</Tab>
         <Tab count="14">Libraries</Tab>
         <Tab count="22">Framework guides</Tab>
         <Tab>API</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
-            <SnippetInstructions />
+            <Wizard />
         </Tab.Panel>
         <Tab.Panel>
-            <Wizard />
+            <SnippetInstructions />
         </Tab.Panel>
         <Tab.Panel>
             <SDKs />

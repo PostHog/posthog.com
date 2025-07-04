@@ -62,8 +62,7 @@ $ctaCount: 3;
 
 .home-hero-cta {
     @for $i from 1 through $ctaCount {
-        a:nth-of-type(#{$i}),
-        button:nth-of-type(#{$i}) {
+        a:nth-of-type(#{$i}) {
             animation: fadeIn;
             animation-duration: 3s;
             @if $i == 1 {
@@ -81,7 +80,7 @@ $ctaCount: 3;
     opacity: 0;
     animation: fadeIn;
     animation-duration: 3s;
-    animation-delay: 2000ms;
+    animation-delay: 1700ms;
     animation-timing-function: ease;
     animation-fill-mode: both;
 }

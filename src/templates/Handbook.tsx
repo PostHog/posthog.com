@@ -43,6 +43,8 @@ import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import { IconCheck } from '@posthog/icons'
 import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
+import IsEU from 'components/IsEU'
+import IsUS from 'components/IsUS'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -362,6 +364,8 @@ export default function Handbook({
         CopyCode,
         TeamMember,
         DestinationsLibraryCallout,
+        IsEU,
+        IsUS,
         table: (props) => (
             <OverflowXSection>
                 <table {...props} />
