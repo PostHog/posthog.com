@@ -337,7 +337,7 @@ export default function ProfilePage({ params }: PageProps) {
             <ScrollArea>
                 <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
                     <div className="flex flex-col @2xl:flex-row gap-6 p-6">
-                        <div className="@2xl:max-w-xs flex-shrink-0">
+                        <div className="@2xl:max-w-xs w-full flex-shrink-0">
                             <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
                                 <Avatar
                                     className="w-full border-b border-primary"
