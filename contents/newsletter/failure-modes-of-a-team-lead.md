@@ -36,13 +36,17 @@ In an effort to save everyone time and "protect engineers so they can focus", yo
 
 Let your engineers feel empowered to make decisions and take ownership of their feature's success. Here are a few way to do that:
 
+
 - **Let your [engineers own the product engineers](/newsletter/product-management-is-broken#2-engineers-make-product-decisions)**
 - **Push decisions down.** When someone asks, "Should we do X or Y?"" reply with, "What do you think and why?"" then ship *their* answer if it’s 80 % as good as yours.
 - **Ensure everyone has access to best information to make good decisions.** Write public RFCs, living docs, record quick Looms (?).
 - **Engineers talk directly to PMs, designers, and customers.**  Be connective tissue, not a gate.
 - **Don't the sole point of communication between your team and others.** Instead, connect the right people together. Be connective tissue, not a gate.
 - **Let engineers own the outcomes of their work** and offer support when needed.
-  
+
+
+( Maybe add: Let engineers own outcomes. At PostHog, Karl shipped Session Replay by ignoring the roadmap and chasing what users needed—and it changed the company’s trajectory. That autonomy is impossible if every conversation routes through a lead.)
+
 Then your job becomes to ensure the team is heading in the right direction and shipping the right features, instead of micromanaging every decision.
 
 > 🏆 **You'll know you're successful if:** You can disappear for two weeks without affecting the quality and frequency of the release schedule.
@@ -56,11 +60,11 @@ Coding should still be ~80-90% of your time. Leadership is an overlay, not a new
 
 Prioritize shipping and impact over unnecessary meta-work. (maybe this is a separate point)
 
-## Symptom
+### Symptom
 
 Slack is your new IDE and your calendar is a tetris board of stand-ups, retros, and "quick syncs". Your GitHub graph looks like a blank game of minesweeper.
 
-## Why it happens
+### Why it happens
 
 Leadership feels like a new role, so you abandon the old one. Meetings are the easiest way for you to keep an eye on things, so now you only have time to manage the work instead of actually doing it.
 
@@ -69,7 +73,7 @@ A quieter force is ego – those invites feel important. Meetings create an illu
 > Image idea: Repetition cements the habit: more meetings → fewer commits → you feel rusty → meetings feel safer → repeat.
 > Caption: The tech lead doom loop
 
-## How to fix it
+### How to fix it
 
 Kill the meetings and [work asynchronusly](https://posthog.com/newsletter/how-we-work-async):
 
@@ -91,7 +95,7 @@ Mid-quarter you discover customers aren't using Feature X, but you ship the next
 
 ### Why it happens
 
-Plans feel like commitments. You fear looking indecisive or a failure if you change them.
+Plans feel like commitments. You fear looking indecisive or a failure if you change them. You forget the job of the team lead is to ensure the team is delivering impact, not just code.
 
 ### How to fix it
 
@@ -111,32 +115,25 @@ Remember, the only failure is xyz.
 
 > 🏆 **You'll know you're successful if:** 
 
-## 5. You don't keep the talent bar high 
+## 4. You don't keep the talent bar high 
 
 Bits on using the [Keeper Test](https://posthog.com/handbook/company/management#the-keeper-test)
 
-## Symptom
+### Symptom
 
-the same bugs, missed estimates, and sloppy PRs keep reappearing from the same people, yet no one seems surprised.
+The same bugs and sloppy PRs keep reappearing from the same people, yet no one seems surprised.
 
-## Why it happens
+### Why it happens
 
-You're scared of giving hard feedback. So they never improve. Gradually, things start to annoy you.  Good humans are hard to let go.  Plus, firing feels like failure.  
+You're scared of giving [hard feedback](/newsletter/how-to-give-feedback), so they never improve. Gradually, things begin to annoy you and before you know it you...
 
+### How to fix it
 
-## How to fix it
+Great teams stay great by keeping the bar high. Run the Keeper Test quarterly: "If this person resigned today, would I fight to keep them". Dig in where the answer is "no" and ask yourself what would it take for this to be a "yes"? Is this just temporary, or is there a deeper issue to resolve? If not, do something today: coaching, clearer expectations, or, when necessary, parting ways. 
 
-Great teams stay great by continuously raising the average—not by accumulating warm bodies.
+Side note: anyone can ask their manager or tech lead "how hard would you work to change my mind if I were thinking of leaving?"". It's a great way to solicit valuable feedback.
 
-Run the Keeper Test quarterly: “If this person resigned today, would I fight to keep them?” If the answer is “no”, start a plan. Would you fight to keep every engineer if they told you they were leaving? If not, do something today — coaching, clearer expectations, or, when necessary, parting ways. Dig in where the answer is 'no' - what would it take for this to be a 'yes'? Is this just temporary, or is there a deeper issue to resolve?
-
-Side note: anyone can ask their manager 'how hard would you work to change my mind if I were thinking of leaving?'. It's a great way to solicit valuable feedback!
-
-Would you fight to keep every engineer if they told you they were leaving? If not, do something today — coaching, clearer expectations, or, when necessary, parting ways.
-
-start giving hard feedback. Avoid filler words like "uh", be direct, be specific and stop waiting for the right time
-
-
+> 🏆 **You'll know you're successful if:** 
 
 ## 4. You focus on made up metrics
 
@@ -187,15 +184,15 @@ Before green-lighting work, explain—in plain English—how a real human benefi
 ## 6. You try to do it all yourself
 
 ## Symptom
-
-You triage support, write specs, code features, review PRs, check dashboards, and still wonder why velocity crawls.
-You're burning yourself out. Theres not enough time in a day.
+ 
+You triage support, write specs, code features, review PRs, check dashboards, and still wonder why velocity crawls. There's never enough time in a day and you're slowly burning yourself out.
 
 ## Why it happens
 
-You confuse being responsible with doing it yourself.  Spoiler: that doesn’t scale
+You confuse being responsible with doing it yourself. Spoiler: that doesn’t scale
 
 ## How to fix it 
+
 
 Delegate decision‑making with the context and authority to act.
 
@@ -211,53 +208,4 @@ David's failure mode on not reaching out for a PM/ Was hard to dig into onboardi
 
 Feeling like you have to know all the answers . Your responible for making sure the team is making progress and getting answers, but you dont do it all yourself
 
-----
-
-Things I could include maybe:
-
-Maybe: A point on how team size doesnt matter, small teams etc. (can use bits from magic of small eng teams)
-
-
-from dylan:
-Pasting from notes app (I'm on a plane) so forgive formatting
-success stories
-Parallelizing subject matter expertise and shipping twice as fast (more credit to team than me)
-Start new hires off with easier stuff and let them ramp rather than throw them at the biggest problem they want to tackle.  Helps them grow confidence and get better faster.
-Recruiting my friends to join the team
-How it started
-I was a small team of 1 for about 2 months and I still just wrote down a lot of learnings, updates, and external processes in my channel even though no one was really there.  Great for referencing later
-Set up automations etc early when standing up a new team.
-Failure modes
-imposing too much process early, then not being intentional about process later.  Not so failure as optimizing
-Being a knowledge suck and not letting support heroes etc own it.  Too many pings of @dylan and not enough pings of @feature-flags-team.  Let the team shine! 
-Insulating folks from annoying processes rather than letting them tell me when it's too much. Shoot straight with the team.
-Emblematic
-Andy hiring was really good; watching the team come together to groom backlog and plan things and collectively unpack all of our shared knowledge of the product we own was a great exercise. 
-
-
 ---
-Symptom
-
-You attend every meeting, forward every message, approve every PR, and personally decide whether ticket ENG‑12345 ships today or next sprint. Your calendar is full; your CI pipeline is not.
-
-Why it happens – the “mini‑PM” trap
-
-What gets lost
-
-Engineers receive half‑baked specs instead of raw user feedback.
-
-Smart ideas die in your Slack DMs because nobody else sees the problem.
-
-Decision‑making bottlenecks on your availability, not the team’s talent.
-
-Fix
-
-Broadcast context, don’t hoard it. Forward the raw customer call recording, link the unfiltered metrics dashboard, cc everyone on the angry‑CEO email.
-
-Let engineers own outcomes. At PostHog, Karl shipped Session Replay by ignoring the roadmap and chasing what users needed—and it changed the company’s trajectory. That autonomy is impossible if every conversation routes through a lead.
-
-Pair the right people directly. Designer ↔︎ backend dev, support hero ↔︎ feature owner. Your job is switchboard operator, not firewall.
-
-Write yourself out of the critical path. Ask: “Could the team ship this feature if I disappeared for two weeks?” If not, fix the documentation or ownership until the answer is yes.
-
-Make yourself replaceable, and you’ll make the team unstoppable.
