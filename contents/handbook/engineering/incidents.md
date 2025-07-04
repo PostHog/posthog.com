@@ -144,10 +144,9 @@ When we’ve identified the root cause of the issue and put a fix in place. End 
 
 ## What happens after an incident? (Incident analysis)
 
-1. Schedule a half hour incident review, invite <engineering@posthog.com>
-2. Create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis) using [this template](https://github.com/PostHog/incidents-analysis/blob/master/yyyy-mm-dd-template.md).
-3. Hold the meeting.
-4. If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
+1. Create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis) using [this template](https://github.com/PostHog/incidents-analysis/blob/master/yyyy-mm-dd-template.md).
+2. If the impact was high, or the incident recurs frequently, hold a meeting discussing the above.
+3. If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 All critical incidents should have a PR in the post-mortem repository + a scheduled meeting. All major incidents should have a PR in the post-mortem repository, and optionally a scheduled meeting.
 
