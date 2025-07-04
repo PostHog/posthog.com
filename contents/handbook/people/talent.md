@@ -30,7 +30,7 @@ It is a talent partner's responsibility to screen applications at the top of the
 
 * have they worked at companies that have scaled like PostHog wants to
 * have they been a founder before
-* have they lead on projects
+* have they led on projects
 * have they written a personalized cover letter explaining how they fit the role
 * have they displayed high levels of ownership
 * are they [weird](https://posthog.com/handbook/values#do-more-weird)?
