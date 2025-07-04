@@ -67,8 +67,10 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
 
     // Set initial skin value
     try {
-        const savedSkin = localStorage.getItem('skin') || 'modern'
+        const savedSkin = JSON.parse(localStorage.getItem('siteSettings') || '{}').skinMode || 'modern'
         document.body.setAttribute('data-skin', savedSkin)
+        const savedWallpaper = JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'hogzilla'
+        document.body.setAttribute('data-wallpaper', savedWallpaper)
     } catch (err) {}
 })()
       `,

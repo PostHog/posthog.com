@@ -465,7 +465,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         colorMode: 'light',
         skinMode: 'modern',
         cursor: 'default',
-        wallpaper: 'hogzilla',
+        wallpaper:
+            typeof window !== 'undefined'
+                ? JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'hogzilla'
+                : 'hogzilla',
     })
 
     const closeWindow = useCallback(
