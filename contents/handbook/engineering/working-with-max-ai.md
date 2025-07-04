@@ -26,10 +26,10 @@ If your team needs to integrate AI capabilities into your product area, the Max 
 
 If you need AI capabilities for your product area:
 
-1. **Reach out early**: Contact the Max AI team lead to discuss your requirements
+1. **Reach out early**: Contact the Max AI team lead at #team-max-ai in Slack to discuss your requirements
 2. **Define the use case**: Be specific about what AI functionality you need, or consult with us if you're trying to flesh out ideas
 3. **Plan the collaboration**: Work with the Max AI team to determine the best approach (e.g., sending an engineer to your team for a sprint or a few sprints vs. building the feature in Max AI directly without your involvement, or you just being able to do it solo)
-4. **Coordinate sprints**: Align on timing and resource allocation if needed. This shouldn't feel like a heavyweight process, if it is - we should change it.
+4. **Coordinate sprints**: Align on timing and resource allocation if needed. This shouldn't feel like a heavyweight process, if it is - we should change it
 
 ### Best practices
 
@@ -44,4 +44,4 @@ If you need AI capabilities for your product area:
 
 ## Contact
 
-For questions about working with Max AI, reach out to the team lead or ask in the `#team-max-ai` Slack channel. 
+For questions about working with Max AI, ask in the `#team-max-ai` Slack channel.
