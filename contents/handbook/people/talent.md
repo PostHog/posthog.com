@@ -26,7 +26,7 @@ Throughout the recruitment process there are different ways that talent partners
 ## Top of the funnel
 
 Talent partners should be speaking to hiring managers before a job goes live to understand the types of candidate that they should be looking for at the top of the funnel, this part should continue to be honed as you learn more from feedback at the various stages of the process. We want to avoid passing through inappropriate candidates, that waste time. 
-It is a talent partners responsibility to screen applications at the top of the funnel, here we are looking for signal that people can be effective at PostHog. We look for things like:- 
+It is a talent partner's responsibility to screen applications at the top of the funnel, here we are looking for signal that people can be effective at PostHog. We look for things like:- 
 
 * have they worked at companies that have scaled like PostHog wants to
 * have they been a founder before
