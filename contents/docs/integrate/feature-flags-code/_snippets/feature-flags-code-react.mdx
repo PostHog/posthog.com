@@ -85,7 +85,7 @@ export default App;
 
 <CalloutBox icon="IconWarning" title="Payload hook" type="fyi">
 
-The `useFeatureFlagPayload` hook does *not* send a [`$feature_flag_called`](https://posthog.com/docs/experiments/new-experimentation-engine#experiment-exposure) event, which is required for analysis. You should **always** use the `useFeatureFlagPayload` with either the `useFeatureFlagEnabled` or `useFeatureFlagVariantKey` hook.
+The `useFeatureFlagPayload` hook does *not* send a [`$feature_flag_called`](https://posthog.com/docs/experiments/new-experimentation-engine#experiment-exposure) event, which is required for the experiment to be tracked. You should **always** use the `useFeatureFlagPayload` with either the `useFeatureFlagEnabled` or `useFeatureFlagVariantKey` hook.
 
 </CalloutBox>
 
