@@ -76,15 +76,15 @@ const padDescription = (description: string): string => {
 
 // Group functions by category, but Initialization always first, and "Other methods" for uncategorized
 function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | null; functions: SdkFunction[] }[] {
-    // Only include functions with showDocs !== false
-    const filtered = functions.filter((func) => func.showDocs !== false)
+    // Filter out null/undefined functions and those with showDocs === false
+    const validFunctions = functions.filter((func): func is SdkFunction => func != null && func.showDocs !== false)
 
     // Initialization always first
-    const initialization = filtered.filter((func) => func.category === 'Initialization')
+    const initialization = validFunctions.filter((func) => func.category === 'Initialization')
 
     // Group others by category (excluding Initialization and empty/undefined category)
     const categoryMap: Record<string, SdkFunction[]> = {}
-    filtered.forEach((func) => {
+    validFunctions.forEach((func) => {
         if (func.category && func.category !== 'Initialization') {
             if (!categoryMap[func.category]) {
                 categoryMap[func.category] = []
@@ -94,9 +94,7 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
     })
 
     // Find functions with no category or empty category (excluding Initialization)
-    const noCategory = filtered.filter(
-        (func) => (!func.category || func.category.trim() === '') && func.category !== 'Initialization'
-    )
+    const noCategory = validFunctions.filter((func) => !func.category || func.category.trim() === '')
 
     // Build ordered list: Initialization, then each category (alphabetical), then "Other methods"
     const ordered: { label: string | null; functions: SdkFunction[] }[] = []
@@ -120,6 +118,7 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
 
 export default function SdkReference({ pageContext }: { pageContext: PageContext }) {
     const { fullReference } = pageContext
+    console.log(fullReference)
     const activeInternalMenu = docsMenu.children.find(({ name }) => name === 'Product OS')
     const location = useLocation()
 
@@ -229,7 +228,6 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                     <div className="lg:sticky top-[108px] space-y-6">
                                                         <FunctionExamples
                                                             examples={func.examples}
-                                                            title={func.title}
                                                             language={sdkLanguage}
                                                         />
                                                         <FunctionReturn

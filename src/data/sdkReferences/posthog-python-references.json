@@ -1,0 +1,2956 @@
+{
+    "id": "posthog-python",
+    "hogRef": "0.1",
+    "info": {
+        "version": "6.0.2",
+        "id": "posthog-python",
+        "title": "PostHog Python SDK",
+        "description": "Integrate PostHog into any python application.",
+        "slugPrefix": "posthog-python",
+        "specUrl": "https://github.com/PostHog/posthog-python"
+    },
+    "noDocsTypes": [
+        "Client",
+        "any",
+        "int",
+        "float",
+        "bool",
+        "dict",
+        "list",
+        "str",
+        "tuple",
+        "set",
+        "frozenset",
+        "bytes",
+        "bytearray",
+        "memoryview",
+        "range",
+        "slice",
+        "complex",
+        "Union",
+        "Optional",
+        "Any",
+        "Callable",
+        "Type",
+        "TypeVar",
+        "Generic",
+        "Literal",
+        "ClassVar",
+        "Final",
+        "Annotated",
+        "NotRequired",
+        "Required",
+        "void",
+        "None",
+        "NoneType",
+        "object",
+        "Unpack",
+        "BaseException",
+        "Exception"
+    ],
+    "types": [
+        {
+            "id": "Any",
+            "name": "Any",
+            "path": "typing.Any",
+            "properties": [],
+            "example": ""
+        },
+        {
+            "id": "FeatureFlag",
+            "name": "FeatureFlag",
+            "path": "posthog.types.FeatureFlag",
+            "properties": [
+                {
+                    "name": "key",
+                    "type": "str",
+                    "description": "Field: key"
+                },
+                {
+                    "name": "enabled",
+                    "type": "bool",
+                    "description": "Field: enabled"
+                },
+                {
+                    "name": "variant",
+                    "type": "Optional[str]",
+                    "description": "Field: variant"
+                },
+                {
+                    "name": "reason",
+                    "type": "Optional[FlagReason]",
+                    "description": "Field: reason"
+                },
+                {
+                    "name": "metadata",
+                    "type": "Union[FlagMetadata, LegacyFlagMetadata]",
+                    "description": "Field: metadata"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "FeatureFlagResult",
+            "name": "FeatureFlagResult",
+            "path": "posthog.types.FeatureFlagResult",
+            "properties": [
+                {
+                    "name": "key",
+                    "type": "str",
+                    "description": "Field: key"
+                },
+                {
+                    "name": "enabled",
+                    "type": "bool",
+                    "description": "Field: enabled"
+                },
+                {
+                    "name": "variant",
+                    "type": "Optional[str]",
+                    "description": "Field: variant"
+                },
+                {
+                    "name": "payload",
+                    "type": "Optional[Any]",
+                    "description": "Field: payload"
+                },
+                {
+                    "name": "reason",
+                    "type": "Optional[str]",
+                    "description": "Field: reason"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "FlagMetadata",
+            "name": "FlagMetadata",
+            "path": "posthog.types.FlagMetadata",
+            "properties": [
+                {
+                    "name": "id",
+                    "type": "int",
+                    "description": "Field: id"
+                },
+                {
+                    "name": "payload",
+                    "type": "Optional[str]",
+                    "description": "Field: payload"
+                },
+                {
+                    "name": "version",
+                    "type": "int",
+                    "description": "Field: version"
+                },
+                {
+                    "name": "description",
+                    "type": "str",
+                    "description": "Field: description"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "FlagReason",
+            "name": "FlagReason",
+            "path": "posthog.types.FlagReason",
+            "properties": [
+                {
+                    "name": "code",
+                    "type": "str",
+                    "description": "Field: code"
+                },
+                {
+                    "name": "condition_index",
+                    "type": "Optional[int]",
+                    "description": "Field: condition_index"
+                },
+                {
+                    "name": "description",
+                    "type": "str",
+                    "description": "Field: description"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "FlagsAndPayloads",
+            "name": "FlagsAndPayloads",
+            "path": "posthog.types.FlagsAndPayloads",
+            "properties": [
+                {
+                    "name": "featureFlags",
+                    "type": "Optional[dict[str, Union[bool, str]]]",
+                    "description": "Field: featureFlags"
+                },
+                {
+                    "name": "featureFlagPayloads",
+                    "type": "Optional[dict[str, Any]]",
+                    "description": "Field: featureFlagPayloads"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "FlagsResponse",
+            "name": "FlagsResponse",
+            "path": "posthog.types.FlagsResponse",
+            "properties": [
+                {
+                    "name": "flags",
+                    "type": "dict[str, FeatureFlag]",
+                    "description": "Field: flags"
+                },
+                {
+                    "name": "errorsWhileComputingFlags",
+                    "type": "bool",
+                    "description": "Field: errorsWhileComputingFlags"
+                },
+                {
+                    "name": "requestId",
+                    "type": "str",
+                    "description": "Field: requestId"
+                },
+                {
+                    "name": "quotaLimit",
+                    "type": "Optional[list[str]]",
+                    "description": "Field: quotaLimit"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "LegacyFlagMetadata",
+            "name": "LegacyFlagMetadata",
+            "path": "posthog.types.LegacyFlagMetadata",
+            "properties": [
+                {
+                    "name": "payload",
+                    "type": "Any",
+                    "description": "Field: payload"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "Any",
+            "name": "Any",
+            "path": "typing.Any",
+            "properties": [],
+            "example": ""
+        },
+        {
+            "id": "OptionalCaptureArgs",
+            "name": "OptionalCaptureArgs",
+            "path": "posthog.args.OptionalCaptureArgs",
+            "properties": [
+                {
+                    "name": "distinct_id",
+                    "type": "NotRequired[Union[Number, str, UUID, int, any]]",
+                    "description": "Field: distinct_id"
+                },
+                {
+                    "name": "properties",
+                    "type": "NotRequired[Optional[dict[str, Any]]]",
+                    "description": "Field: properties"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "NotRequired[Union[datetime, str, any]]",
+                    "description": "Field: timestamp"
+                },
+                {
+                    "name": "uuid",
+                    "type": "NotRequired[Optional[str]]",
+                    "description": "Field: uuid"
+                },
+                {
+                    "name": "groups",
+                    "type": "NotRequired[Optional[dict[str, str]]]",
+                    "description": "Field: groups"
+                },
+                {
+                    "name": "send_feature_flags",
+                    "type": "NotRequired[Optional[bool]]",
+                    "description": "Field: send_feature_flags"
+                },
+                {
+                    "name": "disable_geoip",
+                    "type": "NotRequired[Optional[bool]]",
+                    "description": "Field: disable_geoip"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "OptionalSetArgs",
+            "name": "OptionalSetArgs",
+            "path": "posthog.args.OptionalSetArgs",
+            "properties": [
+                {
+                    "name": "distinct_id",
+                    "type": "NotRequired[Union[Number, str, UUID, int, any]]",
+                    "description": "Field: distinct_id"
+                },
+                {
+                    "name": "properties",
+                    "type": "NotRequired[Optional[dict[str, Any]]]",
+                    "description": "Field: properties"
+                },
+                {
+                    "name": "timestamp",
+                    "type": "NotRequired[Union[datetime, str, any]]",
+                    "description": "Field: timestamp"
+                },
+                {
+                    "name": "uuid",
+                    "type": "NotRequired[Optional[str]]",
+                    "description": "Field: uuid"
+                },
+                {
+                    "name": "disable_geoip",
+                    "type": "NotRequired[Optional[bool]]",
+                    "description": "Field: disable_geoip"
+                }
+            ],
+            "example": ""
+        },
+        {
+            "id": "traceback",
+            "name": "traceback",
+            "path": "builtins.traceback",
+            "properties": [],
+            "example": ""
+        },
+        {
+            "id": "UUID",
+            "name": "UUID",
+            "path": "uuid.UUID",
+            "properties": [],
+            "example": ""
+        },
+        {
+            "id": "datetime",
+            "name": "datetime",
+            "path": "datetime.datetime",
+            "properties": [],
+            "example": ""
+        }
+    ],
+    "classes": [
+        {
+            "id": "PostHog",
+            "title": "PostHog",
+            "description": "This is the SDK reference for the PostHog Python SDK.  You can learn more about example usage in the [Python SDK documentation](/docs/libraries/python).  You can also follow [Flask](/docs/libraries/flask) and [Django](/docs/libraries/django)  guides to integrate PostHog into your project.",
+            "functions": [
+                {
+                    "id": "__init__",
+                    "title": "Client",
+                    "description": "Initialize a new PostHog client instance.",
+                    "details": "Initialize a new PostHog client instance.\n\nArgs:\n    project_api_key: The project API key.\n    host: The host to use for the client.\n    debug: Whether to enable debug mode.\n\n```python\nfrom posthog import Posthog\n\nposthog = Posthog('<ph_project_api_key>', host='<ph_app_host>')\n```\n\n@category(\"Initialization\")",
+                    "category": "Initialization",
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import Posthog\n\nposthog = Posthog('<ph_project_api_key>', host='<ph_app_host>')"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "project_api_key",
+                            "description": "Parameter: project_api_key",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "host",
+                            "description": "Parameter: host",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "debug",
+                            "description": "Parameter: debug",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "max_queue_size",
+                            "description": "Parameter: max_queue_size",
+                            "isOptional": true,
+                            "type": "int"
+                        },
+                        {
+                            "name": "send",
+                            "description": "Parameter: send",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "on_error",
+                            "description": "Parameter: on_error",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "flush_at",
+                            "description": "Parameter: flush_at",
+                            "isOptional": true,
+                            "type": "int"
+                        },
+                        {
+                            "name": "flush_interval",
+                            "description": "Parameter: flush_interval",
+                            "isOptional": true,
+                            "type": "float"
+                        },
+                        {
+                            "name": "gzip",
+                            "description": "Parameter: gzip",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "max_retries",
+                            "description": "Parameter: max_retries",
+                            "isOptional": true,
+                            "type": "int"
+                        },
+                        {
+                            "name": "sync_mode",
+                            "description": "Parameter: sync_mode",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "timeout",
+                            "description": "Parameter: timeout",
+                            "isOptional": true,
+                            "type": "int"
+                        },
+                        {
+                            "name": "thread",
+                            "description": "Parameter: thread",
+                            "isOptional": true,
+                            "type": "int"
+                        },
+                        {
+                            "name": "poll_interval",
+                            "description": "Parameter: poll_interval",
+                            "isOptional": true,
+                            "type": "int"
+                        },
+                        {
+                            "name": "personal_api_key",
+                            "description": "Parameter: personal_api_key",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disabled",
+                            "description": "Parameter: disabled",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "historical_migration",
+                            "description": "Parameter: historical_migration",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "feature_flags_request_timeout_seconds",
+                            "description": "Parameter: feature_flags_request_timeout_seconds",
+                            "isOptional": true,
+                            "type": "int"
+                        },
+                        {
+                            "name": "super_properties",
+                            "description": "Parameter: super_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "enable_exception_autocapture",
+                            "description": "Parameter: enable_exception_autocapture",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "log_captured_exceptions",
+                            "description": "Parameter: log_captured_exceptions",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "project_root",
+                            "description": "Parameter: project_root",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "privacy_mode",
+                            "description": "Parameter: privacy_mode",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "before_send",
+                            "description": "Parameter: before_send",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "alias",
+                    "title": "alias",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "alias(previous_id=\"previous_id_value\", distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "alias(previous_id=\"previous_id_value\", distinct_id=\"distinct_id_value\", timestamp=\"timestamp_value\", uuid=\"uuid_value\", disable_geoip=\"disable_geoip_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "previous_id",
+                            "description": "Parameter: previous_id",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": true,
+                            "type": "str"
+                        },
+                        {
+                            "name": "timestamp",
+                            "description": "Parameter: timestamp",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "uuid",
+                            "description": "Parameter: uuid",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "capture",
+                    "title": "capture",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "capture(event=\"event_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "event",
+                            "description": "Parameter: event",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalCaptureArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[str]"
+                    }
+                },
+                {
+                    "id": "capture_exception",
+                    "title": "capture_exception",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "capture_exception(exception=BaseException())"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "exception",
+                            "description": "Parameter: exception",
+                            "isOptional": false,
+                            "type": "BaseException"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalCaptureArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "feature_enabled",
+                    "title": "feature_enabled",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "feature_enabled(key=\"key_value\", distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "feature_enabled(key=\"key_value\", distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "Parameter: send_feature_flag_events",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "feature_flag_definitions",
+                    "title": "feature_flag_definitions",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "feature_flag_definitions()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "flush",
+                    "title": "flush",
+                    "description": "Forces a flush from the internal queue to the server",
+                    "details": "Forces a flush from the internal queue to the server",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "flush()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "get_all_flags",
+                    "title": "get_all_flags",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_all_flags(distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_all_flags(distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[dict[str, Union[bool, str]]]"
+                    }
+                },
+                {
+                    "id": "get_all_flags_and_payloads",
+                    "title": "get_all_flags_and_payloads",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_all_flags_and_payloads(distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_all_flags_and_payloads(distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "FlagsAndPayloads"
+                    }
+                },
+                {
+                    "id": "get_feature_flag",
+                    "title": "get_feature_flag",
+                    "description": "Get a feature flag value for a key by evaluating locally or remotely depending on whether local evaluation is enabled and the flag can be locally evaluated.",
+                    "details": "Get a feature flag value for a key by evaluating locally or remotely\ndepending on whether local evaluation is enabled and the flag can be\nlocally evaluated.\n\nThis also captures the $feature_flag_called event unless send_feature_flag_events is False.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_feature_flag(key=\"key_value\", distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_feature_flag(key=\"key_value\", distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "Parameter: send_feature_flag_events",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Union[bool, str, any]"
+                    }
+                },
+                {
+                    "id": "get_feature_flag_payload",
+                    "title": "get_feature_flag_payload",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_feature_flag_payload(key=\"key_value\", distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_feature_flag_payload(key=\"key_value\", distinct_id=\"distinct_id_value\", match_value=True, groups=\"groups_value\", person_properties=\"person_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "match_value",
+                            "description": "Parameter: match_value",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "Parameter: send_feature_flag_events",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "get_feature_flag_result",
+                    "title": "get_feature_flag_result",
+                    "description": "Get a FeatureFlagResult object which contains the flag result and payload for a key by evaluating locally or remotely depending on whether local evaluation is enabled and the flag can be locally evaluated.",
+                    "details": "Get a FeatureFlagResult object which contains the flag result and payload for a key by evaluating locally or remotely\ndepending on whether local evaluation is enabled and the flag can be locally evaluated.\n\nThis also captures the $feature_flag_called event unless send_feature_flag_events is False.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_feature_flag_result(key=\"key_value\", distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_feature_flag_result(key=\"key_value\", distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "Parameter: send_feature_flag_events",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[FeatureFlagResult]"
+                    }
+                },
+                {
+                    "id": "get_feature_flags_and_payloads",
+                    "title": "get_feature_flags_and_payloads",
+                    "description": "Get feature flags and payloads for a distinct_id by calling decide.",
+                    "details": "Get feature flags and payloads for a distinct_id by calling decide.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_feature_flags_and_payloads(distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_feature_flags_and_payloads(distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "FlagsAndPayloads"
+                    }
+                },
+                {
+                    "id": "get_feature_payloads",
+                    "title": "get_feature_payloads",
+                    "description": "Get feature flag payloads for a distinct_id by calling decide.",
+                    "details": "Get feature flag payloads for a distinct_id by calling decide.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_feature_payloads(distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_feature_payloads(distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "dict[str, str]"
+                    }
+                },
+                {
+                    "id": "get_feature_variants",
+                    "title": "get_feature_variants",
+                    "description": "Get feature flag variants for a distinct_id by calling decide.",
+                    "details": "Get feature flag variants for a distinct_id by calling decide.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_feature_variants(distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_feature_variants(distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "dict[str, Union[bool, str]]"
+                    }
+                },
+                {
+                    "id": "get_flags_decision",
+                    "title": "get_flags_decision",
+                    "description": "Get feature flags decision, using either flags() or decide() API based on rollout.",
+                    "details": "Get feature flags decision, using either flags() or decide() API based on rollout.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_flags_decision()"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_flags_decision(distinct_id=Number(), groups={\"key\": \"value\"}, person_properties=\"person_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": true,
+                            "type": "Number"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "FlagsResponse"
+                    }
+                },
+                {
+                    "id": "get_remote_config_payload",
+                    "title": "get_remote_config_payload",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_remote_config_payload(key=\"<ph_project_api_key>\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "str"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "group_identify",
+                    "title": "group_identify",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "group_identify(group_type=\"group_type_value\", group_key=\"<ph_project_api_key>\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "group_identify(group_type=\"group_type_value\", group_key=\"<ph_project_api_key>\", properties=\"properties_value\", timestamp=\"timestamp_value\", uuid=\"uuid_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "group_type",
+                            "description": "Parameter: group_type",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "group_key",
+                            "description": "Parameter: group_key",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "properties",
+                            "description": "Parameter: properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "timestamp",
+                            "description": "Parameter: timestamp",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "uuid",
+                            "description": "Parameter: uuid",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "join",
+                    "title": "join",
+                    "description": "Ends the consumer thread once the queue is empty. Blocks execution until finished",
+                    "details": "Ends the consumer thread once the queue is empty.\nBlocks execution until finished",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "join()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "load_feature_flags",
+                    "title": "load_feature_flags",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "load_feature_flags()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "new_context",
+                    "title": "new_context",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "new_context()"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "new_context(fresh=\"fresh_value\", capture_exceptions=\"capture_exceptions_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "fresh",
+                            "description": "Parameter: fresh",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "capture_exceptions",
+                            "description": "Parameter: capture_exceptions",
+                            "isOptional": true,
+                            "type": "bool"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "set",
+                    "title": "set",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "set()"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalSetArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[str]"
+                    }
+                },
+                {
+                    "id": "set_once",
+                    "title": "set_once",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "set_once()"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalSetArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[str]"
+                    }
+                },
+                {
+                    "id": "shutdown",
+                    "title": "shutdown",
+                    "description": "Flush all messages and cleanly shutdown the client",
+                    "details": "Flush all messages and cleanly shutdown the client",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "shutdown()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "PostHogModule",
+            "title": "PostHog Module Functions",
+            "description": "Global functions available in the PostHog module",
+            "functions": [
+                {
+                    "id": "Any",
+                    "title": "Any",
+                    "description": "Special type indicating an unconstrained type.",
+                    "details": "Special type indicating an unconstrained type.\n\n- Any is compatible with every type.\n- Any assumed to have all methods.\n- All values assumed to be instances of Any.\n\nNote that all the above statements are true from the point of view of\nstatic type checkers. At runtime, Any should not be used with instance\nchecks.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "Any(args=\"args_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "args",
+                            "description": "Parameter: args",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "Callable",
+                    "title": "Callable",
+                    "description": "Deprecated alias to collections.abc.Callable.",
+                    "details": "Deprecated alias to collections.abc.Callable.\n\nCallable[[int], str] signifies a function that takes a single\nparameter of type int and returns a str.\n\nThe subscription syntax must always be used with exactly two\nvalues: the argument list and the return type.\nThe argument list must be a list of types, a ParamSpec,\nConcatenate or ellipsis. The return type must be a single type.\n\nThere is no syntax to indicate optional or keyword arguments;\nsuch function types are rarely used as callback types.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "Callable(args=\"args_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "args",
+                            "description": "Parameter: args",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "Dict",
+                    "title": "Dict",
+                    "description": "A generic version of dict.",
+                    "details": "A generic version of dict.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "Dict(args=\"args_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "args",
+                            "description": "Parameter: args",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "ExceptionArg",
+                    "title": "ExceptionArg",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "ExceptionArg(args=\"args_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "args",
+                            "description": "Parameter: args",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "FeatureFlag",
+                    "title": "FeatureFlag",
+                    "description": "FeatureFlag(key: str, enabled: bool, variant: Optional[str], reason: Optional[posthog.types.FlagReason], metadata: Union[posthog.types.FlagMetadata, posthog.types.LegacyFlagMetadata])",
+                    "details": "FeatureFlag(key: str, enabled: bool, variant: Optional[str], reason: Optional[posthog.types.FlagReason], metadata: Union[posthog.types.FlagMetadata, posthog.types.LegacyFlagMetadata])",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "FeatureFlag(key=\"<ph_project_api_key>\", enabled=True, variant=\"variant_value\", reason=FlagReason(), metadata=FlagMetadata())"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "enabled",
+                            "description": "Parameter: enabled",
+                            "isOptional": false,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "variant",
+                            "description": "Parameter: variant",
+                            "isOptional": true,
+                            "type": "str"
+                        },
+                        {
+                            "name": "reason",
+                            "description": "Parameter: reason",
+                            "isOptional": true,
+                            "type": "FlagReason"
+                        },
+                        {
+                            "name": "metadata",
+                            "description": "Parameter: metadata",
+                            "isOptional": false,
+                            "type": "FlagMetadata"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "any"
+                    }
+                },
+                null,
+                {
+                    "id": "Optional",
+                    "title": "Optional",
+                    "description": "Optional[X] is equivalent to Union[X, None].",
+                    "details": "Optional[X] is equivalent to Union[X, None].",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "Optional(args=\"args_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "args",
+                            "description": "Parameter: args",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "kwds",
+                            "description": "Parameter: kwds",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                null,
+                null,
+                {
+                    "id": "Unpack",
+                    "title": "Unpack",
+                    "description": "Type unpack operator.",
+                    "details": "Type unpack operator.\n\nThe type unpack operator takes the child types from some container type,\nsuch as `tuple[int, str]` or a `TypeVarTuple`, and 'pulls them out'. For\nexample:\n\n  # For some generic class `Foo`:\n  Foo[Unpack[tuple[int, str]]]  # Equivalent to Foo[int, str]\n\n  Ts = TypeVarTuple('Ts')\n  # Specifies that `Bar` is generic in an arbitrary number of types.\n  # (Think of `Ts` as a tuple of an arbitrary number of individual\n  #  `TypeVar`s, which the `Unpack` is 'pulling out' directly into the\n  #  `Generic[]`.)\n  class Bar(Generic[Unpack[Ts]]): ...\n  Bar[int]  # Valid\n  Bar[int, str]  # Also valid\n\nFrom Python 3.11, this can also be done using the `*` operator:\n\n    Foo[*tuple[int, str]]\n    class Bar(Generic[*Ts]): ...\n\nThe operator can also be used along with a `TypedDict` to annotate\n`**kwargs` in a function signature. For instance:\n\n  class Movie(TypedDict):\n    name: str\n    year: int\n\n  # This function expects two keyword arguments - *name* of type `str` and\n  # *year* of type `int`.\n  def foo(**kwargs: Unpack[Movie]): ...\n\nNote that there is only some runtime checking of this operator. Not\neverything the runtime allows may be accepted by static type checkers.\n\nFor more information, see PEP 646 and PEP 692.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "Unpack(args=\"args_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "args",
+                            "description": "Parameter: args",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "kwds",
+                            "description": "Parameter: kwds",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "alias",
+                    "title": "alias",
+                    "description": "To marry up whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like \"Which marketing channels leads to users churning after a month?\" or \"What do users do on our website before signing up?\". Particularly useful for associating user behaviour before and after they e.g. register, login, or perform some other identifying action.",
+                    "details": "To marry up whatever a user does before they sign up or log in with what they do after you need to make an alias call.\nThis will allow you to answer questions like \"Which marketing channels leads to users churning after a month?\" or\n\"What do users do on our website before signing up?\". Particularly useful for associating user behaviour before and after\nthey e.g. register, login, or perform some other identifying action.\n\nAn `alias` call requires\n- `previous distinct id` the unique ID of the user before\n- `distinct id` the current unique id\n\nFor example:\n```python\nposthog.alias('anonymous session id', 'distinct id')\n```",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "posthog.alias('anonymous session id', 'distinct id')"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "previous_id",
+                            "description": "Parameter: previous_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "timestamp",
+                            "description": "Parameter: timestamp",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "uuid",
+                            "description": "Parameter: uuid",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "capture",
+                    "title": "capture",
+                    "description": "Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.",
+                    "details": "Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up.\n\nA `capture` call requires\n- `event name` to specify the event\n- We recommend using [verb] [noun], like `movie played` or `movie updated` to easily identify what your events mean later on.\n\nCapture takes a number of optional arguments, which are defined by the `OptionalCaptureArgs` type.\n\nFor example:\n```python\n# Enter a new context (e.g. a request/response cycle, an instance of a background job, etc)\nwith posthog.new_context():\n    # Associate this context with some user, by distinct_id\n    posthog.identify_context('some user')\n\n    # Capture an event, associated with the context-level distinct ID ('some user')\n    posthog.capture('movie started')\n\n    # Capture an event associated with some other user (overriding the context-level distinct ID)\n    posthog.capture('movie joined', distinct_id='some-other-user')\n\n    # Capture an event with some properties\n    posthog.capture('movie played', properties={'movie_id': '123', 'category': 'romcom'})\n\n    # Capture an event with some properties\n    posthog.capture('purchase', properties={'product_id': '123', 'category': 'romcom'})\n    # Capture an event with some associated group\n    posthog.capture('purchase', groups={'company': 'id:5'})\n\n    # Adding a tag to the current context will cause it to appear on all subsequent events\n    posthog.tag_context('some-tag', 'some-value')\n\n    posthog.capture('another-event') # Will be captured with `'some-tag': 'some-value'` in the properties dict\n```",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "# Enter a new context (e.g. a request/response cycle, an instance of a background job, etc)\nwith posthog.new_context():\n    # Associate this context with some user, by distinct_id\n    posthog.identify_context('some user')\n\n    # Capture an event, associated with the context-level distinct ID ('some user')\n    posthog.capture('movie started')\n\n    # Capture an event associated with some other user (overriding the context-level distinct ID)\n    posthog.capture('movie joined', distinct_id='some-other-user')\n\n    # Capture an event with some properties\n    posthog.capture('movie played', properties={'movie_id': '123', 'category': 'romcom'})\n\n    # Capture an event with some properties\n    posthog.capture('purchase', properties={'product_id': '123', 'category': 'romcom'})\n    # Capture an event with some associated group\n    posthog.capture('purchase', groups={'company': 'id:5'})\n\n    # Adding a tag to the current context will cause it to appear on all subsequent events\n    posthog.tag_context('some-tag', 'some-value')\n\n    posthog.capture('another-event') # Will be captured with `'some-tag': 'some-value'` in the properties dict"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "event",
+                            "description": "Parameter: event",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalCaptureArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[str]"
+                    }
+                },
+                {
+                    "id": "capture_exception",
+                    "title": "capture_exception",
+                    "description": "capture_exception allows you to capture exceptions that happen in your code.",
+                    "details": "capture_exception allows you to capture exceptions that happen in your code.\n\nCapture exception is idempotent - if it is called twice with the same exception instance, only a occurrence will be tracked in posthog.\nThis is because, generally, contexts will cause exceptions to be captured automatically. However, to ensure you track an exception,\nif you catch and do not re-raise it, capturing it manually is recommended, unless you are certain it will have crossed a context\nboundary (e.g. by existing a `with posthog.new_context():` block already)\n\nA `capture_exception` call does not require any fields, but we recommend passing an exception of some kind:\n- `exception` to specify the exception to capture. If not provided, the current exception is captured via `sys.exc_info()`\n\nIf the passed exception was raised and caught, the captured stack trace will consist of every frame between where the exception was raised\nand the point at which it is captured (the \"traceback\").\n\nIf the passed exception was never raised, e.g. if you call `posthog.capture_exception(ValueError(\"Some Error\"))`, the stack trace\ncaptured will be the full stack trace at the moment the exception was captured.\n\nNote that heavy use of contexts will lead to truncated stack traces, as the exception will be captured by the context entered most recently,\nwhich may not be the point you catch the exception for the final time in your code. It's recommended to use contexts sparingly, for this reason.\n\n`capture_exception` takes the same set of optional arguments as `capture`.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "capture_exception()"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "capture_exception(exception=BaseException())"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "exception",
+                            "description": "Parameter: exception",
+                            "isOptional": true,
+                            "type": "BaseException"
+                        },
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalCaptureArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "feature_enabled",
+                    "title": "feature_enabled",
+                    "description": "Use feature flags to enable or disable features for users.",
+                    "details": "Use feature flags to enable or disable features for users.\n\nFor example:\n```python\nif posthog.feature_enabled('beta feature', 'distinct id'):\n    # do something\nif posthog.feature_enabled('groups feature', 'distinct id', groups={\"organization\": \"5\"}):\n    # do something\n```\n\nYou can call `posthog.load_feature_flags()` before to make sure you're not doing unexpected requests.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "if posthog.feature_enabled('beta feature', 'distinct id'):\n    # do something\nif posthog.feature_enabled('groups feature', 'distinct id', groups={\"organization\": \"5\"}):\n    # do something"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "Parameter: send_feature_flag_events",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "feature_flag_definitions",
+                    "title": "feature_flag_definitions",
+                    "description": "Returns loaded feature flags, if any. Helpful for debugging what flag information you have loaded.",
+                    "details": "Returns loaded feature flags, if any. Helpful for debugging what flag information you have loaded.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "feature_flag_definitions()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "flush",
+                    "title": "flush",
+                    "description": "Tell the client to flush.",
+                    "details": "Tell the client to flush.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "flush()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "get_all_flags",
+                    "title": "get_all_flags",
+                    "description": "Get all flags for a given user. Example:",
+                    "details": "Get all flags for a given user.\nExample:\n```python\nflags = posthog.get_all_flags('distinct_id')\n```\n\nflags are key-value pairs where the key is the flag key and the value is the flag variant, or True, or False.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "flags = posthog.get_all_flags('distinct_id')"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[dict[str, FeatureFlag]]"
+                    }
+                },
+                {
+                    "id": "get_all_flags_and_payloads",
+                    "title": "get_all_flags_and_payloads",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_all_flags_and_payloads(distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_all_flags_and_payloads(distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "FlagsAndPayloads"
+                    }
+                },
+                {
+                    "id": "get_feature_flag",
+                    "title": "get_feature_flag",
+                    "description": "Get feature flag variant for users. Used with experiments. Example:",
+                    "details": "Get feature flag variant for users. Used with experiments.\nExample:\n```python\nif posthog.get_feature_flag('beta-feature', 'distinct_id') == 'test-variant':\n    # do test variant code\nif posthog.get_feature_flag('beta-feature', 'distinct_id') == 'control':\n    # do control code\n```\n\n`groups` are a mapping from group type to group key. So, if you have a group type of \"organization\" and a group key of \"5\",\nyou would pass groups={\"organization\": \"5\"}.\n\n`group_properties` take the format: { group_type_name: { group_properties } }\n\nSo, for example, if you have the group type \"organization\" and the group key \"5\", with the properties name, and employee count,\nyou'll send these as:\n\n```python\n    group_properties={\"organization\": {\"name\": \"PostHog\", \"employees\": 11}}\n```",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "if posthog.get_feature_flag('beta-feature', 'distinct_id') == 'test-variant':\n    # do test variant code\nif posthog.get_feature_flag('beta-feature', 'distinct_id') == 'control':\n    # do control code"
+                        },
+                        {
+                            "id": "example_2",
+                            "name": "Example 2",
+                            "code": "group_properties={\"organization\": {\"name\": \"PostHog\", \"employees\": 11}}"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "Parameter: send_feature_flag_events",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[FeatureFlag]"
+                    }
+                },
+                {
+                    "id": "get_feature_flag_payload",
+                    "title": "get_feature_flag_payload",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_feature_flag_payload(key=\"key_value\", distinct_id=\"distinct_id_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "get_feature_flag_payload(key=\"key_value\", distinct_id=\"distinct_id_value\", match_value=\"match_value_value\", groups=\"groups_value\", person_properties=\"person_properties_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "match_value",
+                            "description": "Parameter: match_value",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "groups",
+                            "description": "Parameter: groups",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "person_properties",
+                            "description": "Parameter: person_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "group_properties",
+                            "description": "Parameter: group_properties",
+                            "isOptional": true,
+                            "type": "dict"
+                        },
+                        {
+                            "name": "only_evaluate_locally",
+                            "description": "Parameter: only_evaluate_locally",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "send_feature_flag_events",
+                            "description": "Parameter: send_feature_flag_events",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[str]"
+                    }
+                },
+                {
+                    "id": "get_remote_config_payload",
+                    "title": "get_remote_config_payload",
+                    "description": "Get the payload for a remote config feature flag.",
+                    "details": "Get the payload for a remote config feature flag.\n\nArgs:\n    key: The key of the feature flag\n\nReturns:\n    The payload associated with the feature flag. If payload is encrypted, the return value will decrypted\n\nNote:\n    Requires personal_api_key to be set for authentication",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "get_remote_config_payload(key=\"key_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "group_identify",
+                    "title": "group_identify",
+                    "description": "Set properties on a group",
+                    "details": "Set properties on a group\n\n A `group_identify` call requires\n - `group_type` type of your group\n - `group_key` unique identifier of the group\n\n For example:\n ```python\n posthog.group_identify('company', 5, {\n     'employees': 11,\n })\n ```",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "group_identify(group_type=\"group_type_value\", group_key=\"group_key_value\")"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "group_identify(group_type=\"group_type_value\", group_key=\"group_key_value\", properties=\"properties_value\", timestamp=\"timestamp_value\", uuid=\"uuid_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "group_type",
+                            "description": "Parameter: group_type",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "group_key",
+                            "description": "Parameter: group_key",
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "properties",
+                            "description": "Parameter: properties",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "timestamp",
+                            "description": "Parameter: timestamp",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "uuid",
+                            "description": "Parameter: uuid",
+                            "isOptional": true,
+                            "type": "any"
+                        },
+                        {
+                            "name": "disable_geoip",
+                            "description": "Parameter: disable_geoip",
+                            "isOptional": true,
+                            "type": "any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "identify_context",
+                    "title": "identify_context",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "identify_context(distinct_id=\"distinct_id_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "str"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "inner_identify_context",
+                    "title": "inner_identify_context",
+                    "description": "Identify the current context with a distinct ID, associating all events captured in this or child contexts with the given distinct ID (unless identify_context is called again). This is overridden by distinct id's passed directly to posthog.capture and related methods (identify, set etc). Entering a fresh context will clear the context-level distinct ID. The distinct-id passed should be uniquely associated with one of your users. Events captured outside of a context, or in a context with no associated distinct ID, will be assigned a random UUID, and captured as \"personless\".",
+                    "details": "Identify the current context with a distinct ID, associating all events captured in this or\nchild contexts with the given distinct ID (unless identify_context is called again). This is overridden by\ndistinct id's passed directly to posthog.capture and related methods (identify, set etc). Entering a\nfresh context will clear the context-level distinct ID. The distinct-id passed should be uniquely associated\nwith one of your users. Events captured outside of a context, or in a context with no associated distinct\nID, will be assigned a random UUID, and captured as \"personless\".\n\nArgs:\n    distinct_id: The distinct ID to associate with the current context and its children.\n\n@category(\"Contexts\")",
+                    "category": "Contexts",
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "inner_identify_context(distinct_id=\"distinct_id_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "distinct_id",
+                            "description": "Parameter: distinct_id",
+                            "isOptional": false,
+                            "type": "str"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "any"
+                    }
+                },
+                {
+                    "id": "inner_new_context",
+                    "title": "inner_new_context",
+                    "description": "Create a new context scope that will be active for the duration of the with block. Any tags set within this scope will be isolated to this context. Any exceptions raised or events captured within the context will be tagged with the context tags.",
+                    "details": "Create a new context scope that will be active for the duration of the with block.\nAny tags set within this scope will be isolated to this context. Any exceptions raised\nor events captured within the context will be tagged with the context tags.\n\nArgs:\n    fresh: Whether to start with a fresh context (default: False).\n           If False, inherits tags, identity and session id's from parent context.\n           If True, starts with no state\n    capture_exceptions: Whether to capture exceptions raised within the context (default: True).\n           If True, captures exceptions and tags them with the context tags before propagating them.\n           If False, exceptions will propagate without being tagged or captured.\n    client: Optional client instance to use for capturing exceptions (default: None).\n            If provided, the client will be used to capture exceptions within the context.\n            If not provided, the default (global) client will be used. Note that the passed\n            client is only used to capture exceptions within the context - other events captured\n            within the context via `Client.capture` or `posthog.capture` will still carry the context\n            state (tags, identity, session id), but will be captured by the client directly used (or\n            the global one, in the case of `posthog.capture`)\n\nExamples:\n    # Inherit parent context tags\n    with posthog.new_context():\n        posthog.tag(\"request_id\", \"123\")\n        # Both this event and the exception will be tagged with the context tags\n        posthog.capture(\"event_name\", {\"property\": \"value\"})\n        raise ValueError(\"Something went wrong\")\n\n    # Start with fresh context (no inherited tags)\n    with posthog.new_context(fresh=True):\n        posthog.tag(\"request_id\", \"123\")\n        # Both this event and the exception will be tagged with the context tags\n        posthog.capture(\"event_name\", {\"property\": \"value\"})\n        raise ValueError(\"Something went wrong\")\n\n@category(\"Contexts\")",
+                    "category": "Contexts",
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "inner_new_context()"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "inner_new_context(fresh=True, capture_exceptions=True, client=\"client_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "fresh",
+                            "description": "Parameter: fresh",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "capture_exceptions",
+                            "description": "Parameter: capture_exceptions",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "client",
+                            "description": "Parameter: client",
+                            "isOptional": true,
+                            "type": "ForwardRef('Client')"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "inner_scoped",
+                    "title": "inner_scoped",
+                    "description": "Decorator that creates a new context for the function. Simply wraps the function in a with posthog.new_context(): block.",
+                    "details": "Decorator that creates a new context for the function. Simply wraps\nthe function in a with posthog.new_context(): block.\n\nArgs:\n    fresh: Whether to start with a fresh context (default: False)\n    capture_exceptions: Whether to capture and track exceptions with posthog error tracking (default: True)\n\nExample:\n    @posthog.scoped()\n    def process_payment(payment_id):\n        posthog.tag(\"payment_id\", payment_id)\n        posthog.tag(\"payment_method\", \"credit_card\")\n\n        # This event will be captured with tags\n        posthog.capture(\"payment_started\")\n        # If this raises an exception, it will be captured with tags\n        # and then re-raised\n        some_risky_function()\n\n@category(\"Contexts\")",
+                    "category": "Contexts",
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "inner_scoped()"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "inner_scoped(fresh=True, capture_exceptions=True)"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "fresh",
+                            "description": "Parameter: fresh",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "capture_exceptions",
+                            "description": "Parameter: capture_exceptions",
+                            "isOptional": true,
+                            "type": "bool"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "inner_set_context_session",
+                    "title": "inner_set_context_session",
+                    "description": "Set the session ID for the current context, associating all events captured in this or child contexts with the given session ID (unless set_context_session is called again). Entering a fresh context will clear the context-level session ID.",
+                    "details": "Set the session ID for the current context, associating all events captured in this or\nchild contexts with the given session ID (unless set_context_session is called again).\nEntering a fresh context will clear the context-level session ID.\n\nArgs:\n    session_id: The session ID to associate with the current context and its children. See https://posthog.com/docs/data/sessions\n\n@category(\"Contexts\")",
+                    "category": "Contexts",
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "inner_set_context_session(session_id=\"session_id_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "session_id",
+                            "description": "Parameter: session_id",
+                            "isOptional": false,
+                            "type": "str"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "any"
+                    }
+                },
+                {
+                    "id": "inner_tag",
+                    "title": "inner_tag",
+                    "description": "Add a tag to the current context. All tags are added as properties to any event, including exceptions, captured within the context.",
+                    "details": "Add a tag to the current context. All tags are added as properties to any event, including exceptions, captured\nwithin the context.\n\nArgs:\n    key: The tag key\n    value: The tag value\n\nExample:\n    posthog.tag(\"user_id\", \"123\")\n\n@category(\"Contexts\")",
+                    "category": "Contexts",
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "inner_tag(key=\"<ph_project_api_key>\", value=Any())"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "key",
+                            "description": "Parameter: key",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "value",
+                            "description": "Parameter: value",
+                            "isOptional": false,
+                            "type": "Any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "any"
+                    }
+                },
+                {
+                    "id": "join",
+                    "title": "join",
+                    "description": "Block program until the client clears the queue",
+                    "details": "Block program until the client clears the queue",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "join()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "load_feature_flags",
+                    "title": "load_feature_flags",
+                    "description": "Load feature flag definitions from PostHog.",
+                    "details": "Load feature flag definitions from PostHog.",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "load_feature_flags()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "new_context",
+                    "title": "new_context",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "new_context()"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "new_context(fresh=\"fresh_value\", capture_exceptions=\"capture_exceptions_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "fresh",
+                            "description": "Parameter: fresh",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "capture_exceptions",
+                            "description": "Parameter: capture_exceptions",
+                            "isOptional": true,
+                            "type": "bool"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "scoped",
+                    "title": "scoped",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "scoped()"
+                        },
+                        {
+                            "id": "generated_example_2",
+                            "name": "Advanced usage",
+                            "code": "scoped(fresh=\"fresh_value\", capture_exceptions=\"capture_exceptions_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "fresh",
+                            "description": "Parameter: fresh",
+                            "isOptional": true,
+                            "type": "bool"
+                        },
+                        {
+                            "name": "capture_exceptions",
+                            "description": "Parameter: capture_exceptions",
+                            "isOptional": true,
+                            "type": "bool"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "set",
+                    "title": "set",
+                    "description": "Set properties on a user record. This will overwrite previous people property values. Generally operates similar to `capture`, with distinct_id being an optional argument, defaulting to the current context's distinct ID.",
+                    "details": "Set properties on a user record.\nThis will overwrite previous people property values. Generally operates similar to `capture`, with\ndistinct_id being an optional argument, defaulting to the current context's distinct ID.\n\nIf there is no context-level distinct ID, and no override distinct_id is passed, this function\nwill do nothing.\n\nContext tags are folded into $set properties, so tagging the current context and then calling `set` will\ncause those tags to be set on the user (unlike capture, which causes them to just be set on the event).\n\n For example:\n ```python\n posthog.set(distinct_id='distinct id', properties={\n     'current_browser': 'Chrome',\n })\n ```",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "set()"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalSetArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[str]"
+                    }
+                },
+                {
+                    "id": "set_context_session",
+                    "title": "set_context_session",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "set_context_session(session_id=\"session_id_value\")"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "session_id",
+                            "description": "Parameter: session_id",
+                            "isOptional": false,
+                            "type": "str"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "set_once",
+                    "title": "set_once",
+                    "description": "Set properties on a user record, only if they do not yet exist. This will not overwrite previous people property values, unlike `set`.",
+                    "details": "Set properties on a user record, only if they do not yet exist.\nThis will not overwrite previous people property values, unlike `set`.\n\nOtherwise, operates in an identical manner to `set`.\n ```",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "set_once()"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "kwargs",
+                            "description": "Parameter: kwargs",
+                            "isOptional": false,
+                            "type": "Unpack[OptionalSetArgs]"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "Optional[str]"
+                    }
+                },
+                {
+                    "id": "setup",
+                    "title": "setup",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "setup()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "shutdown",
+                    "title": "shutdown",
+                    "description": "Flush all messages and cleanly shutdown the client",
+                    "details": "Flush all messages and cleanly shutdown the client",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "shutdown()"
+                        }
+                    ],
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                },
+                {
+                    "id": "tag",
+                    "title": "tag",
+                    "description": "",
+                    "details": "",
+                    "category": null,
+                    "examples": [
+                        {
+                            "id": "generated_example_1",
+                            "name": "Basic usage",
+                            "code": "tag(name=\"name_value\", value=Any())"
+                        }
+                    ],
+                    "params": [
+                        {
+                            "name": "name",
+                            "description": "Parameter: name",
+                            "isOptional": false,
+                            "type": "str"
+                        },
+                        {
+                            "name": "value",
+                            "description": "Parameter: value",
+                            "isOptional": false,
+                            "type": "Any"
+                        }
+                    ],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    }
+                }
+            ]
+        }
+    ]
+}
