@@ -138,9 +138,21 @@ export interface AppItem {
     className?: string
     extension?: string
     children?: React.ReactNode
+    hasDragged?: boolean
 }
 
-export const AppLink = ({ Icon, type, color, background, label, url, className, extension, children }: AppItem) => {
+export const AppLink = ({
+    Icon,
+    type,
+    color,
+    background,
+    label,
+    url,
+    className,
+    extension,
+    children,
+    hasDragged,
+}: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
 
     const renderIcon = () => {
@@ -165,6 +177,12 @@ export const AppLink = ({ Icon, type, color, background, label, url, className, 
                 to={url}
                 state={{ newWindow: true }}
                 className="group inline-flex flex-col justify-center items-center w-auto max-w-28 text-center select-none space-y-1 text-primary"
+                onClick={(e) => {
+                    if (hasDragged) {
+                        e.preventDefault()
+                        e.stopPropagation()
+                    }
+                }}
             >
                 <span className="relative">
                     {renderIcon()}

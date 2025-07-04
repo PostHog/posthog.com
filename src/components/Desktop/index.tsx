@@ -1,14 +1,13 @@
-import React, { useRef } from 'react'
+import React, { useState, useEffect } from 'react'
 import { IconRewindPlay } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
 import { IconDice, IconDemoThumb, IconMessages, IconImage, AppIcon } from 'components/OSIcons'
-import ZoomHover from 'components/ZoomHover'
-import Screenshot from 'components/Screenshot'
-import { AppLink, AppItem } from 'components/OSIcons/AppIcon'
+import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
+import DraggableDesktopIcon from './DraggableDesktopIcon'
 
 interface Product {
     name: string
@@ -89,9 +88,72 @@ const apps: AppItem[] = [
     },
 ]
 
+interface IconPosition {
+    x: number
+    y: number
+}
+
+type IconPositions = Record<string, IconPosition>
+
+const STORAGE_KEY = 'desktop-icon-positions'
+
 export default function Desktop() {
-    const { taskbarHeight } = useApp()
-    const products = useProduct() as Product[]
+    const { constraintsRef } = useApp()
+    const [iconPositions, setIconPositions] = useState<IconPositions>({})
+
+    const generateInitialPositions = (): IconPositions => {
+        const positions: IconPositions = {}
+
+        // Default positions if container isn't available yet
+        const containerWidth =
+            constraintsRef.current?.getBoundingClientRect().width ||
+            (typeof window !== 'undefined' ? window.innerWidth : 1200)
+
+        const leftColumnX = 16
+        const rightColumnX = containerWidth - 112 - 16 // 112px icon width + 16px padding
+        const startY = 16
+        const iconSpacing = 105 // gap-y-5 = 20px + icon height ~85px
+
+        // Position productLinks on the left
+        productLinks.forEach((app, index) => {
+            positions[app.label] = {
+                x: leftColumnX,
+                y: startY + index * iconSpacing,
+            }
+        })
+
+        // Position apps on the right
+        apps.forEach((app, index) => {
+            positions[app.label] = {
+                x: rightColumnX,
+                y: startY + index * iconSpacing,
+            }
+        })
+
+        return positions
+    }
+
+    useEffect(() => {
+        const savedPositions = localStorage.getItem(STORAGE_KEY)
+        if (savedPositions) {
+            try {
+                setIconPositions(JSON.parse(savedPositions))
+            } catch (error) {
+                console.error('Error parsing saved positions:', error)
+                setIconPositions(generateInitialPositions())
+            }
+        } else {
+            setIconPositions(generateInitialPositions())
+        }
+    }, [])
+
+    const handlePositionChange = (appLabel: string, position: IconPosition) => {
+        const newPositions = { ...iconPositions, [appLabel]: position }
+        setIconPositions(newPositions)
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newPositions))
+    }
+
+    const allApps = [...productLinks, ...apps]
 
     return (
         <ContextMenu
@@ -112,9 +174,22 @@ export default function Desktop() {
                         </Link>
                     ),
                 },
+                {
+                    type: 'item',
+                    children: (
+                        <button
+                            onClick={() => {
+                                localStorage.removeItem(STORAGE_KEY)
+                                setIconPositions(generateInitialPositions())
+                            }}
+                        >
+                            Reset icons
+                        </button>
+                    ),
+                },
             ]}
         >
-            <div data-scheme="primary" data-app="Desktop" className="fixed size-full p-4">
+            <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
                 <div
                     className={`absolute bottom-0 right-0 size-full -z-10 
                         wallpaper-hogzilla:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png')] wallpaper-hogzilla:bg-contain 
@@ -154,7 +229,6 @@ export default function Desktop() {
                         dark:wallpaper-startup-monopoly:bg-[#393836]
                         
                     `}
-
                 />
                 <div className="hidden wallpaper-office-party:block absolute bottom-24 left-24">
                     <CloudinaryImage
@@ -174,58 +248,23 @@ export default function Desktop() {
                         className="w-[621px] h-[564px]"
                     />
                 </div>
-                <div className="hidden wallpaper-2001-bliss:block absolute inset-0 bg-white/60 dark:bg-black/60">
-                </div>
+                <div className="hidden wallpaper-2001-bliss:block absolute inset-0 bg-white/60 dark:bg-black/60"></div>
 
-                <div className="hidden">
-                    <Screenshot
-                        product="Session replay"
-                        slug="session-replay"
-                        icon={<IconRewindPlay />}
-                        order={1}
-                        className={``}
-                    />
-                </div>
+                <nav>
+                    <ul className="list-none m-0 p-0">
+                        {allApps.map((app) => {
+                            const position = iconPositions[app.label]
+                            if (!position) return null
 
-                <nav
-                    style={{
-                        // paddingTop: `${taskbarHeight}px`,
-                        height: `calc(100vh - ${taskbarHeight}px - 48px)`,
-                    }}
-                    className="overflow-hidden flex justify-between"
-                >
-                    <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
-                        {productLinks.map((app, index) => (
-                            <li key={app.label + index} className="w-28 flex justify-center">
-                                <ZoomHover>
-                                    <AppLink {...app} />
-                                </ZoomHover>
-                            </li>
-                        ))}
-                        {/* 
-                        {products?.map((product, index) => (
-                            <li key={product.name + index} className="w-[110px] flex justify-center">
-                                <ZoomHover>
-                                    <AppLink
-                                        label={product.name}
-                                        url={product.slug}
-                                        type="link"
-                                        Icon={product.Icon}
-                                        color={product.color}
-                                    />
-                                </ZoomHover>
-                            </li>
-                        ))}
-                         */}
-                    </ul>
-                    <ul className="py-1 px-0 m-0 list-none flex flex-col flex-wrap h-full content-start gap-x-8 gap-y-5">
-                        {apps.map((app, index) => (
-                            <li key={app.label + index} className="w-28 flex justify-center">
-                                <ZoomHover>
-                                    <AppLink {...app} />
-                                </ZoomHover>
-                            </li>
-                        ))}
+                            return (
+                                <DraggableDesktopIcon
+                                    key={app.label}
+                                    app={app}
+                                    initialPosition={position}
+                                    onPositionChange={(newPosition) => handlePositionChange(app.label, newPosition)}
+                                />
+                            )
+                        })}
                     </ul>
                 </nav>
             </div>
