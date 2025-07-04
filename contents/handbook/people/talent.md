@@ -56,7 +56,7 @@ Our aim is to get back to every candidate by the end of the day after their inte
 When it comes to quality, we are always looking to be impressed. We use a rating system out of 4 and it is rare that we would hire somebody without receiving a 4 from somebody in the process. We know that exceptional people are usually spiky, they don't have an evenly distributed skill set so people can have reservations about a certain area and they can still be exceptional. 
 Talent partners need to be aware of when to push and pull when it comes to hiring decisions. There will be circumstances when there are hard decisions over whether we should hire somebody or not and talent partners should be prepared to offer opinions. This could be vouching for a candidate that is similar to other successful team members who we might be hesitating on and conversely stepping in when it looks like we might be making a hiring that isn't appropriate. 
 
-When a hiring process is moving slowly, or we seem to be rejecting lots of candidates at SuperDay, it is up to the talent partner to own this. They should review what is going on, understand the problem and aim to fix this. They should get in front of this as soon as possible. 
+When a hiring process is moving slowly, or we seem to be rejecting lots of candidates at SuperDay, it is up to the talent partner to realize and own this. They should review what is going on, understand the problem and aim to fix this. They should get in front of this as soon as possible. 
 
 Maintaining quality is also about ensuring that our interviewers are assessing candidates in a consistent way, so spotting when there are inconsistencies are coming up in feedback and doing something about that is important.
 
