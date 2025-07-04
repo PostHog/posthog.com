@@ -109,7 +109,9 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We no longer offer a straight X% across all products, as they all have slightly different pricing. Instead the discount depends on factors such as the contract size and the customer’s anticipated volume. There is no set minimum spend or mandatory annual term. When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
+We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We start non-profit discounts at 15% regardless of spend or annual contract. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
+
+When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
 
 > Nonprofit discounts don't stack with annual discounts.  It's either/or, not both.
 
