@@ -43,7 +43,7 @@ At the screening stage it is important to make sure your notes are well organise
 Talent partners are responsible for moving candidates through the next two stages, we rely on automation from Ashby to allow candidates to book directly in calendars. Talent partners are responsible for the candidate experience so if a candidate or an interviewer can't make that time, then you need to step in and resolve the issue.
 It is important that interviewers know that they need to maintain an up to date calendar, however sometimes last minute changes do occur. 
 
-#SuperDay 
+# SuperDay 
 
 Talent partners are responsible for scheduling these, you can read more [here](https://posthog.com/handbook/people/hiring-process#4-posthog-superday). The people involved should be focused on assessing the candidate so talent partners need to be alert for helping with any logistics to make sure the SuperDay runs smoothly. 
 
