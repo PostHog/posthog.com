@@ -473,7 +473,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const closeWindow = useCallback(
         (item: AppWindow) => {
-            const windowsFiltered = windows.filter((el) => el.key !== item.key)
+            const windowsFiltered = windows.filter((el) => el.path !== item.path)
             const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
                 (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
                 undefined
