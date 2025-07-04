@@ -133,7 +133,7 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
             value: 'bio',
             label: 'Bio',
             content: (
-                <Markdown className="prose prose-sm">
+                <Markdown className="prose prose-sm max-w-full">
                     {profile.biography || `${firstName} hasn't written a bio yet`}
                 </Markdown>
             ),
@@ -477,6 +477,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                 size="sm"
                                                 to="/community/profile/edit"
                                                 type="secondary"
+                                                width="full"
                                                 state={{ profileID: profile.id }}
                                             >
                                                 Edit Profile
@@ -488,6 +489,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                     to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
                                                     size="sm"
                                                     type="secondary"
+                                                    width="full"
                                                 >
                                                     View in Strapi
                                                 </CallToAction>
@@ -495,6 +497,7 @@ export default function ProfilePage({ params }: PageProps) {
                                                     size="sm"
                                                     type="primary"
                                                     onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
+                                                    width="full"
                                                 >
                                                     {profile.user?.data.attributes.blocked
                                                         ? 'Unblock User'
