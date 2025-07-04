@@ -5,7 +5,7 @@ import { useUser } from 'hooks/useUser'
 
 export default function IntegrationPrompt() {
     const { user } = useUser()
-    const basePrompt = `npx --yes @PostHog/wizard@latest`
+    const basePrompt = `npx --yes @posthog/wizard@latest`
 
     let finalPrompt: string
 
