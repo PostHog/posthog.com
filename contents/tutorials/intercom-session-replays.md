@@ -1,4 +1,4 @@
----
+	---
 title: How to add session replays to Intercom
 date: 2024-02-13
 author:
@@ -10,6 +10,30 @@ tags:
 [Session replays](/session-replay) are a useful support tool for debugging and recreating issues. The errors, console, and network data along with the rest of PostHog's tools make it a powerful support platform.
 
 To get easy access to session replays in Intercom, you can add them as either user data or events. To show you how to do this, we build a basic Next.js app, add PostHog, add Intercom, and set up the session replay link to show in both places in Intercom.
+
+# Automatic setup with PostHog JS
+
+Since version 1.256.0 our web SDK can add Session replay and person URLs to Intercom automatically.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    integrations: {
+        intercom: true,
+    },
+    // the rest of your config
+});
+```
+
+The integration calls `update` and `trackEvent` on intercom whenever the session id changes.
+
+Adding `latestPosthogReplayURL` and `latestPosthogPersonURL` to your intercom person record.
+
+And sending a `posthog:sessionInfo` event with the replay and the person URL.
+
+> Note: you need to setup `latestPosthogReplayURL` and `latestPosthogPersonURL` to your intercom account (desscribed below)
+
+# Manual setup
 
 ## 1. Create a basic Next.js app
 
