@@ -32,6 +32,12 @@ If it's a viable opportunity then you should convert the lead to an [opportunity
 
 Even if after speaking with them you think they may not end up at $20k+, you should educate them on how to get help, as well as the value of adding our Scale, Boost, and Enterprise plans.
 
+## Startup plan roll off
+
+Customers who are rolling off the startup plan present a unique opportunity, as they are already using PostHog and will be at a spend level that would justify an annual contract. Just like any other customer, we want to help them reduce spend and get the most out of their existing usage, while also educating them on the savings involved with an annual deal.
+
+For customers that may have started implementation late, or ran into issues during their startup period, at our discretion, we can extend the life of their credits by 3 months. To do so, visit that customer's billing admin page (linked in Vitally), scroll to the bottom, and click the `extend startup plan` button. 
+
 ## Getting recognized on the deal
 
 As they have already shown intent by signing up/subscribing, you will need to demonstrate that you have actively worked on the opportunity to include it in your book of business.  We will use a common sense approach here but sending a couple of emails and 1 call won't be classed as 'actively working'. Simon will make the call here, escalating if needed. 
