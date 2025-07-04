@@ -1120,6 +1120,10 @@ export const handbookSidebar = [
                 url: '/handbook/people/finance',
             },
             {
+                name: 'Talent',
+                url: '/handbook/company/talent',
+            },
+            {
                 name: 'Merch store',
                 url: '/handbook/company/merch-store',
             },
