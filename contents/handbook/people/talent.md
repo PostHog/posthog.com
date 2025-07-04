@@ -19,7 +19,7 @@ Talent partners at PostHog do not just interview candidates and put them through
 
 ## Removing distractions from the rest of the team
 
-As a talent partner, part of the role is to ensure we are removing distractions from the rest of the business where we can. Practically, what this looks like in talent is that other team members really only need to concetrate on assessment and shouldn't need to concern themselves with other areas of the process. 
+As a talent partner, part of the role is to ensure we are removing distractions from the rest of the business where we can. Practically, what this looks like in talent is that other team members really only need to concentrate on assessment and shouldn't need to concern themselves with other areas of the process. 
 
 Throughout the recruitment process there are different ways that talent partners can remove distractions.
 
