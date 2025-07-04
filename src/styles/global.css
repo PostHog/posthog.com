@@ -657,6 +657,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: auto;
     height: auto !important;
+    @apply bg-accent dark:bg-accent-dark;
 }
 
 body.light {
@@ -1769,4 +1770,29 @@ li.squeak-left-border {
 
 body.dark .max-ai-body {
     color: #151515;
+}
+
+/* Content background */
+.article-content,
+.docsPagesContent,
+.blogPageLayout,
+.post-page-wrapper,
+.notDocsLayout,
+.docsPageLayout {
+    @apply bg-light dark:bg-dark rounded-sm;
+}
+
+/* Post layouts */
+article[class*="post-layout"],
+.post-page-wrapper,
+.blogPageLayout main,
+.article-content {
+    @apply bg-light dark:bg-dark rounded-sm;
+}
+
+/* Post layout wrappers */
+.post-layout-wrapper,
+.article-wrapper,
+.blog-wrapper {
+    @apply bg-light dark:bg-dark p-4 rounded-sm my-4;
 }
