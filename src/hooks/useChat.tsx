@@ -37,16 +37,16 @@ export function ChatProvider({
     const [hasFirstResponse, setHasFirstResponse] = useState(false)
     const [quickQuestions, setQuickQuestions] = useState(initialQuickQuestions || defaultQuickQuestions)
     const [conversationHistory, setConversationHistory] = useState<{ id: string; question: number; date: string }[]>([])
-    const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>(
-        initialContext || []
-    )
+    const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
 
     const logEventCallback = useCallback(
         (event: any) => {
             if (event?.eventName === 'user_message_submitted' && !firstResponse) {
-                setFirstResponse(event.properties.conversation.messages[0].content)
+                setFirstResponse(
+                    event.properties.conversation.messages.filter((m: any) => m.role === 'user')[0].content
+                )
             }
             if (event?.eventName === 'assistant_message_received') {
                 if (!hasFirstResponse) {
@@ -150,6 +150,12 @@ export function ChatProvider({
             })
         }
     }, [chatId])
+
+    useEffect(() => {
+        if (initialContext) {
+            initialContext.forEach((c) => addContext(c))
+        }
+    }, [initialContext])
 
     return (
         <ChatContext.Provider

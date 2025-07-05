@@ -307,10 +307,26 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                               {
                                   type: 'separator',
                               },
-                              ...chatWindows.map((window, index) => ({
+                              ...chatWindows.map((appWindow, index) => ({
                                   type: 'item',
-                                  label: window.meta?.title || `Chat ${index + 1}`,
-                                  onClick: () => bringToFront(window),
+                                  label: appWindow.meta?.title || `Chat ${index + 1}`,
+                                  onClick: () => {
+                                      const newAppWindow = updateWindow(appWindow, {
+                                          element: {
+                                              ...appWindow.element,
+                                              props: {
+                                                  ...appWindow.props,
+                                                  context: [
+                                                      {
+                                                          type: 'page',
+                                                          value: { path: item.path, label: item.meta?.title },
+                                                      },
+                                                  ],
+                                              },
+                                          },
+                                      })
+                                      bringToFront(newAppWindow)
+                                  },
                               })),
                           ]
                         : []),

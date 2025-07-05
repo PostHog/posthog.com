@@ -47,6 +47,7 @@ interface AppContextType {
             size?: { width?: number; height?: number }
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
+            element?: any
         }
     ) => void
     getPositionDefaults: (
@@ -725,33 +726,31 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             size?: { width?: number; height?: number }
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
+            element?: any
         }
     ) => {
-        setWindows((windows) =>
-            windows.map((w) =>
-                w === appWindow
-                    ? {
-                          ...appWindow,
-                          position: {
-                              ...appWindow.position,
-                              ...(updates.position || {}),
-                          },
-                          size: {
-                              ...appWindow.size,
-                              ...(updates.size || {}),
-                          },
-                          previousPosition: {
-                              ...appWindow.previousPosition,
-                              ...(updates.previousPosition || {}),
-                          },
-                          previousSize: {
-                              ...appWindow.previousSize,
-                              ...(updates.previousSize || {}),
-                          },
-                      }
-                    : w
-            )
-        )
+        const newAppWindow = {
+            ...appWindow,
+            position: {
+                ...appWindow.position,
+                ...(updates.position || {}),
+            },
+            size: {
+                ...appWindow.size,
+                ...(updates.size || {}),
+            },
+            previousPosition: {
+                ...appWindow.previousPosition,
+                ...(updates.previousPosition || {}),
+            },
+            previousSize: {
+                ...appWindow.previousSize,
+                ...(updates.previousSize || {}),
+            },
+            ...(updates.element ? { element: updates.element } : {}),
+        }
+        setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
+        return newAppWindow
     }
 
     const openSearch = (initialFilter?: string) => {
