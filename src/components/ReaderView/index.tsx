@@ -44,6 +44,8 @@ interface ReaderViewProps {
         content: string
         featuredImage?: any
         contributors?: any[]
+        date?: string
+        featuredVideo?: string
     }
     title?: string
     tableOfContents?: any
@@ -538,7 +540,12 @@ function ReaderViewContent({
                                     </div>
                                 )}
                                 {title && <h1>{title}</h1>}
-                                {body.contributors && <ContributorsSmall contributors={body.contributors} />}
+                                {(body.date || body.contributors) && (
+                                    <div className="flex items-center space-x-2 mb-4">
+                                        {body.contributors && <ContributorsSmall contributors={body.contributors} />}
+                                        {body.date && <p className="text-sm text-secondary m-0">{body.date}</p>}
+                                    </div>
+                                )}
                                 {tableOfContents && tableOfContents.length > 0 && (
                                     <div
                                         data-scheme="secondary"
@@ -551,6 +558,7 @@ function ReaderViewContent({
                                         />
                                     </div>
                                 )}
+                                {body.featuredVideo && <iframe src={body.featuredVideo} />}
                                 {body.type === 'mdx' ? (
                                     <div className={'@container'}>
                                         <MDXProvider components={mdxComponents}>

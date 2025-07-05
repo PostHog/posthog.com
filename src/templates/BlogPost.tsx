@@ -402,7 +402,7 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                         )}
                     </>
                 }
-                body={{ type: 'mdx', content: body, featuredImage, contributors }}
+                body={{ type: 'mdx', content: body, featuredImage, contributors, date, featuredVideo }}
                 title={title}
                 tableOfContents={tableOfContents}
                 mdxComponents={components}
