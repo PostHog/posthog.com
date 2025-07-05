@@ -17,6 +17,7 @@ import { useWindow } from '../context/Window'
 import MDXEditor from 'components/MDXEditor'
 import { graphql } from 'gatsby'
 import SEO from 'components/seo'
+import usePostHog from 'hooks/usePostHog'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -352,6 +353,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 export default function Home({ data }: { data: { mdx: { rawBody: string } } }) {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
+    const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
@@ -362,7 +364,16 @@ export default function Home({ data }: { data: { mdx: { rawBody: string } } }) {
     return (
         <>
             <SEO title="Welcome to PostHog!" description="Home" image="https://posthog.com/og-image.png" />
-            <MDXEditor jsxComponentDescriptors={jsxComponentDescriptors} body={data.mdx.rawBody} />
+            <MDXEditor
+                jsxComponentDescriptors={jsxComponentDescriptors}
+                body={data.mdx.rawBody}
+                cta={{
+                    url: `https://${
+                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                    }.posthog.com/signup`,
+                    label: 'Get started - free',
+                }}
+            />
         </>
     )
 }

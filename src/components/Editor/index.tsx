@@ -67,6 +67,10 @@ interface EditorProps {
     onSortChange?: (sort: string) => void
     defaultSortValue?: string
     proseSize?: 'sm' | 'base' | 'lg'
+    cta?: {
+        url: string
+        label: string
+    }
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -109,6 +113,7 @@ export function Editor({
     onSortChange,
     defaultSortValue,
     proseSize = 'sm',
+    cta,
     ...other
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
@@ -277,8 +282,8 @@ export function Editor({
                             onClick={() => setShowFilters(!showFilters)}
                         />
                     )}
-                    <OSButton variant="primary" size="xs">
-                        Share
+                    <OSButton variant="primary" size="xs" to={cta?.url} state={{ newWindow: true }} asLink>
+                        {cta?.label || 'Share'}
                     </OSButton>
                 </>
             ),

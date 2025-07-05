@@ -36,9 +36,14 @@ import { navigate } from 'gatsby'
 export default function MDXEditor({
     body,
     jsxComponentDescriptors = [],
+    cta,
 }: {
     body: string
     jsxComponentDescriptors: JsxComponentDescriptor[]
+    cta?: {
+        url: string
+        label: string
+    }
 }) {
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
     const [activeEditor, setActiveEditor] = useState<LexicalEditor>()
@@ -145,6 +150,7 @@ export default function MDXEditor({
                     active: currentAlignment === 'right',
                 },
             }}
+            cta={cta}
         >
             <MDXEditorComponent
                 contentEditableClassName="outline-none"
