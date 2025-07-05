@@ -39,7 +39,7 @@ strong,
 font-variation-settings: "wght" 800;
 }
 
-.ikp-loading__dots {
+.ikp-ai-chat-message-loading {
 background: url(https://res.cloudinary.com/dmukukwp6/image/upload/loading_bdba47912e.gif) no-repeat center center;
 background-size: 100%;
 height: 3rem;
@@ -47,7 +47,7 @@ margin-left: -.5rem;
 width: 3rem;
 }
 
-.ikp-loading__dots span {
+.ikp-ai-chat-message-loading span {
 display: none;
 }
 

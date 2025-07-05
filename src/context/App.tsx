@@ -7,6 +7,12 @@ import SignIn from 'components/Squeak/components/Classic/SignIn'
 import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
+import { ChatProvider } from 'hooks/useChat'
+
+interface ChatContext {
+    type: 'page'
+    value: { path: string; label: string }
+}
 
 type WindowElement = React.ReactNode & {
     key: string
@@ -58,6 +64,17 @@ interface AppContextType {
     openForgotPassword: () => void
     siteSettings: SiteSettings
     updateSiteSettings: (settings: SiteSettings) => void
+    openNewChat: ({
+        path,
+        context,
+        quickQuestions,
+        chatId,
+    }: {
+        path: string
+        context?: ChatContext[]
+        quickQuestions?: string[]
+        chatId?: string
+    }) => void
 }
 
 interface AppProviderProps {
@@ -190,6 +207,7 @@ export const Context = createContext<AppContextType>({
         wallpaper: 'hogzilla',
     },
     updateSiteSettings: () => {},
+    openNewChat: () => {},
 })
 
 export interface AppSetting {
@@ -776,6 +794,31 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }
 
+    const openNewChat = ({
+        path,
+        context,
+        quickQuestions,
+        chatId,
+    }: {
+        path: string
+        context?: ChatContext[]
+        quickQuestions?: string[]
+        chatId?: string
+    }) => {
+        addWindow(
+            <ChatProvider
+                location={{
+                    pathname: `ask-max-${path}`,
+                }}
+                key={`ask-max-${path}`}
+                newWindow
+                context={context}
+                quickQuestions={quickQuestions}
+                chatId={chatId}
+            />
+        )
+    }
+
     const handleSnapToSide = (side: 'left' | 'right') => {
         if (!constraintsRef.current || !focusedWindow) return
 
@@ -912,6 +955,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 openForgotPassword,
                 siteSettings,
                 updateSiteSettings,
+                openNewChat,
             }}
         >
             {children}

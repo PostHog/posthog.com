@@ -2688,40 +2688,44 @@
     "@pandacss/dev" "^0.22.0"
     framer-motion "^10.16.1"
 
-"@inkeep/cxkit-color-mode@0.5.89":
-  version "0.5.89"
-  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-color-mode/-/cxkit-color-mode-0.5.89.tgz#4a5471b3dc453262ef0277908c30e108b1095331"
-  integrity sha512-h89/i67uEiJh0Bqf/dt9nJWv3IjCnmu96nkomocZ3evPKrLeBq13IygFIxtvmvXfx1QBBdmAD+x933rc5RcgFA==
+"@inkeep/cxkit-color-mode@^0.5.92":
+  version "0.5.92"
+  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-color-mode/-/cxkit-color-mode-0.5.92.tgz#262c52034093c69705ecbc03ed4d9f2653e18c64"
+  integrity sha512-NoCcoH9z2LhTMBxOA5xvD4dpyfxGiMxheGhJ+25WEz6lCHa14LHdLD8K82mbltQmPJIKeHcmrGY8ClxkvhP6NA==
 
-"@inkeep/cxkit-primitives@0.5.89":
-  version "0.5.89"
-  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-primitives/-/cxkit-primitives-0.5.89.tgz#1f8252f18754aab2c28dd0e1436381b4323d2c0b"
-  integrity sha512-ugC80ivuimKmzcm8RktAL9C7YHss7CneerbHnNy+uipCx9ZcIY5dRfgMqIdoLG6fL7fhSm6E0QElGL8YjjfN6g==
+"@inkeep/cxkit-primitives@0.5.92":
+  version "0.5.92"
+  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-primitives/-/cxkit-primitives-0.5.92.tgz#be1f02f2696f7cee5601998c4e1400baaf439b61"
+  integrity sha512-r9TCSpagh84JzNxfTHX68Y8oXVJt03BmZ2uZElAvxScrPc9TJF9t6+oLK9UuJ8epbRVYXjzapefa2x+5Tad/cg==
   dependencies:
-    "@inkeep/cxkit-color-mode" "0.5.89"
-    "@inkeep/cxkit-theme" "0.5.89"
-    "@inkeep/cxkit-types" "0.5.89"
+    "@inkeep/cxkit-color-mode" "^0.5.92"
+    "@inkeep/cxkit-theme" "0.5.92"
+    "@inkeep/cxkit-types" "0.5.92"
+    "@radix-ui/number" "^1.1.1"
     "@radix-ui/primitive" "^1.1.1"
     "@radix-ui/react-avatar" "1.1.2"
     "@radix-ui/react-checkbox" "1.1.3"
+    "@radix-ui/react-collection" "^1.1.7"
     "@radix-ui/react-compose-refs" "^1.1.1"
     "@radix-ui/react-context" "^1.1.1"
+    "@radix-ui/react-direction" "^1.1.1"
     "@radix-ui/react-dismissable-layer" "^1.1.5"
     "@radix-ui/react-focus-guards" "^1.1.1"
     "@radix-ui/react-focus-scope" "^1.1.2"
     "@radix-ui/react-hover-card" "^1.1.6"
     "@radix-ui/react-id" "^1.1.0"
     "@radix-ui/react-popover" "1.1.6"
+    "@radix-ui/react-popper" "^1.2.7"
     "@radix-ui/react-portal" "^1.1.4"
     "@radix-ui/react-presence" "^1.1.2"
     "@radix-ui/react-primitive" "^2.0.2"
     "@radix-ui/react-scroll-area" "1.2.2"
-    "@radix-ui/react-select" "^2.1.7"
     "@radix-ui/react-slot" "^1.2.0"
     "@radix-ui/react-tabs" "^1.1.4"
     "@radix-ui/react-tooltip" "1.1.6"
     "@radix-ui/react-use-callback-ref" "^1.1.0"
     "@radix-ui/react-use-controllable-state" "^1.1.0"
+    "@radix-ui/react-use-layout-effect" "^1.1.1"
     "@zag-js/focus-trap" "^1.7.0"
     "@zag-js/presence" "^1.13.1"
     "@zag-js/react" "^1.13.1"
@@ -2745,37 +2749,37 @@
     unist-util-visit "^5.0.0"
     use-sync-external-store "^1.4.0"
 
-"@inkeep/cxkit-react@^0.5.72":
-  version "0.5.89"
-  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-react/-/cxkit-react-0.5.89.tgz#4bc37852bc6161ed4dc5b44b3ceb8beddf49f6f8"
-  integrity sha512-v86J6xe86kgKfDzlNGZSGHQ3PB8KJ46ra8xnVV4RrRjp7kPGiR7MvGfalFcSiaSEQzWiAcKAl4gya/AF/J/OZw==
+"@inkeep/cxkit-react@^0.5.92":
+  version "0.5.92"
+  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-react/-/cxkit-react-0.5.92.tgz#9599ea92727346af4b5b83a758495d1d83bc2e99"
+  integrity sha512-IlL9tKTz8O6HENJN28ry5ZjW3RNfaDpOtrUso5PMbx/xvouKWXmAZLvUX0XVYZDVmlsbd57QBpbsnGigmh3c3g==
   dependencies:
-    "@inkeep/cxkit-styled" "0.5.89"
+    "@inkeep/cxkit-styled" "0.5.92"
     "@radix-ui/react-use-controllable-state" "^1.1.0"
     lucide-react "^0.503.0"
 
-"@inkeep/cxkit-styled@0.5.89":
-  version "0.5.89"
-  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-styled/-/cxkit-styled-0.5.89.tgz#e113ee393f5055457281a52cfb8221dd14f70661"
-  integrity sha512-w9V3vYuq4ytluow16RO/0/V1s9PSBqOjZdvATdn+jy06gUn5ClNAiJ79m34fB3Ep0Y6o2m+obujX4njw4A+LPw==
+"@inkeep/cxkit-styled@0.5.92":
+  version "0.5.92"
+  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-styled/-/cxkit-styled-0.5.92.tgz#1d77038c713dcc1aa6afb5e6b932835d35c8b919"
+  integrity sha512-f51L0Lz706bkgjk7Vjn4oXRG6f3DvBn4ShB2xp73M1/NKq+UQXgV2TBU0zJ7PFFrTyf4am7e8WtBqZ74pRLEmA==
   dependencies:
-    "@inkeep/cxkit-primitives" "0.5.89"
+    "@inkeep/cxkit-primitives" "0.5.92"
     class-variance-authority "0.7.1"
     clsx "2.1.1"
     merge-anything "5.1.7"
     tailwind-merge "2.6.0"
 
-"@inkeep/cxkit-theme@0.5.89":
-  version "0.5.89"
-  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-theme/-/cxkit-theme-0.5.89.tgz#b1f9f7be2a87f25b8c6b2c4eb654b998b6bd7cc8"
-  integrity sha512-Yji2OCDi2buYZQXY4tw93U6W3ZFDaNw7wgGLP+vTyRZaFBMGwW52zNOjewz2UL1jNGl6ublHXmWM+kjIC4b5SQ==
+"@inkeep/cxkit-theme@0.5.92":
+  version "0.5.92"
+  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-theme/-/cxkit-theme-0.5.92.tgz#d0690271c4a8eb3791821eab15024f0814d1152e"
+  integrity sha512-bf97dOjJ9xnc4VC/wBiGU1HyaJVQilZdnmDFHENsCKvus7FJevbHOLnDalHwbKdwXG3efXxTtyF2FiFa0WCeow==
   dependencies:
     colorjs.io "0.5.2"
 
-"@inkeep/cxkit-types@0.5.89":
-  version "0.5.89"
-  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-types/-/cxkit-types-0.5.89.tgz#f8db85cca7c8dbb72c6a035882435b5e0e86ca76"
-  integrity sha512-zz6945Ex9kSpIUeZaVAX4h6HeCaOt28BzZyuprQWXIpzvAlFKuKDNV1Zm5umEglaiGSx+T9J6WViy3PoRXwTtA==
+"@inkeep/cxkit-types@0.5.92":
+  version "0.5.92"
+  resolved "https://registry.yarnpkg.com/@inkeep/cxkit-types/-/cxkit-types-0.5.92.tgz#ba897571dd378ce670bd794454d64c300f3de92e"
+  integrity sha512-RtkJxwR2PPKQOubD49Slh3yENreqW3cCUggXcCSvAfQNHE+dD5wPqW0lprUEqbGim4AAdOZ6D56/fP+IFoFu6Q==
 
 "@inkeep/preset-chakra@^0.1.4":
   version "0.1.4"
@@ -4433,7 +4437,7 @@
   resolved "https://registry.yarnpkg.com/@radix-ui/number/-/number-1.1.0.tgz#1e95610461a09cdf8bb05c152e76ca1278d5da46"
   integrity sha512-V3gRzhVNU1ldS5XhAPTom1fOIo4ccrjjJgmE+LI2h/WaFpHmx0MQApT+KZHnx8abG6Avtfcz4WoEciMnpFT3HQ==
 
-"@radix-ui/number@1.1.1":
+"@radix-ui/number@1.1.1", "@radix-ui/number@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@radix-ui/number/-/number-1.1.1.tgz#7b2c9225fbf1b126539551f5985769d0048d9090"
   integrity sha512-MkKCwxlXTgz6CFoJx3pCwn07GKp36+aZyu/u2Ln2VrA5DcdyCZkASEDBTd8x5whTQQL5CiYf4prXKLcgQdv29g==
@@ -4573,7 +4577,7 @@
     "@radix-ui/react-use-controllable-state" "1.2.2"
     "@radix-ui/react-use-layout-effect" "1.1.1"
 
-"@radix-ui/react-collection@1.1.7":
+"@radix-ui/react-collection@1.1.7", "@radix-ui/react-collection@^1.1.7":
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-collection/-/react-collection-1.1.7.tgz#d05c25ca9ac4695cc19ba91f42f686e3ea2d9aec"
   integrity sha512-Fh9rGN0MoI4ZFUNyfFVNU4y9LUz93u9/0K+yLgA2bwRojxM8JU1DyvvMBabnZPBgMWREAJvU2jjVzq+LrFUglw==
@@ -4640,7 +4644,7 @@
   resolved "https://registry.yarnpkg.com/@radix-ui/react-direction/-/react-direction-1.1.0.tgz#a7d39855f4d077adc2a1922f9c353c5977a09cdc"
   integrity sha512-BUuBvgThEiAXh2DWu93XsT+a3aWrGqolGlqqw5VU1kG7p/ZH2cuDlM1sRLNnY3QcBS69UIz2mcKhMxDsdewhjg==
 
-"@radix-ui/react-direction@1.1.1":
+"@radix-ui/react-direction@1.1.1", "@radix-ui/react-direction@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-direction/-/react-direction-1.1.1.tgz#39e5a5769e676c753204b792fbe6cf508e550a14"
   integrity sha512-1UEWRX6jnOA2y4H5WczZ44gOOjTEmlqv1uNW4GAJEO5+bauCBhv8snY65Iw5/VOS/ghKN9gr2KjnLKxrsvoMVw==
@@ -4938,7 +4942,7 @@
     "@radix-ui/react-use-size" "1.1.0"
     "@radix-ui/rect" "1.1.0"
 
-"@radix-ui/react-popper@1.2.7", "@radix-ui/react-popper@^1.2.4":
+"@radix-ui/react-popper@1.2.7", "@radix-ui/react-popper@^1.2.4", "@radix-ui/react-popper@^1.2.7":
   version "1.2.7"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-popper/-/react-popper-1.2.7.tgz#531cf2eebb3d3270d58f7d8136e4517646429978"
   integrity sha512-IUFAccz1JyKcf/RjB552PlWwxjeCJB8/4KxT7EhBHOJM+mN7LdW+B3kacJXILm32xawcMMjb2i0cIZpo+f9kiQ==
@@ -5084,7 +5088,7 @@
     "@radix-ui/react-use-callback-ref" "1.1.1"
     "@radix-ui/react-use-layout-effect" "1.1.1"
 
-"@radix-ui/react-select@2.2.5", "@radix-ui/react-select@^2.1.7", "@radix-ui/react-select@^2.2.2":
+"@radix-ui/react-select@2.2.5", "@radix-ui/react-select@^2.2.2":
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-select/-/react-select-2.2.5.tgz#9e2fa5b8f4cc99b86ef5bba3cb9b73828afb51f0"
   integrity sha512-HnMTdXEVuuyzx63ME0ut4+sEMYW6oouHWNGUZc7ddvUWIcfCva/AMoqEW/3wnEllriMWBa0RHspCYnfCWJQYmA==
@@ -5330,7 +5334,7 @@
   resolved "https://registry.yarnpkg.com/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.1.0.tgz#3c2c8ce04827b26a39e442ff4888d9212268bd27"
   integrity sha512-+FPE0rOdziWSrH9athwI1R0HDVbWlEhd+FR+aSDk4uWGmSJ9Z54sdZVDQPZAinJhJXwfT+qnj969mCsT2gfm5w==
 
-"@radix-ui/react-use-layout-effect@1.1.1":
+"@radix-ui/react-use-layout-effect@1.1.1", "@radix-ui/react-use-layout-effect@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@radix-ui/react-use-layout-effect/-/react-use-layout-effect-1.1.1.tgz#0c4230a9eed49d4589c967e2d9c0d9d60a23971e"
   integrity sha512-RbJRS4UWQFkzHTTwVymMTUv8EqYhOp8dOOviLj2ugtTiXRaRQS7GLGxZTLL1jWhMeoSCf5zmcZkqTl9IiYfXcQ==
@@ -26704,16 +26708,7 @@ string-similarity@^1.2.2:
     lodash.map "^4.6.0"
     lodash.maxby "^4.6.0"
 
-"string-width-cjs@npm:string-width@^4.2.0":
-  version "4.2.3"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
-  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
-  dependencies:
-    emoji-regex "^8.0.0"
-    is-fullwidth-code-point "^3.0.0"
-    strip-ansi "^6.0.1"
-
-"string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.0.0, string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.2, string-width@^4.2.3:
+"string-width-cjs@npm:string-width@^4.2.0", "string-width@^1.0.2 || 2 || 3 || 4", string-width@^4.0.0, string-width@^4.1.0, string-width@^4.2.0, string-width@^4.2.2, string-width@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -26861,7 +26856,7 @@ stringify-object@^3.3.0:
     is-obj "^1.0.1"
     is-regexp "^1.0.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -26888,13 +26883,6 @@ strip-ansi@^5.2.0:
   integrity sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==
   dependencies:
     ansi-regex "^4.1.0"
-
-strip-ansi@^6.0.0, strip-ansi@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
-  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
-  dependencies:
-    ansi-regex "^5.0.1"
 
 strip-ansi@^7.0.1:
   version "7.1.0"
@@ -29474,7 +29462,7 @@ worker-rpc@^0.1.0:
   dependencies:
     microevent.ts "~0.1.1"
 
-"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0":
+"wrap-ansi-cjs@npm:wrap-ansi@^7.0.0", wrap-ansi@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
   integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
@@ -29487,15 +29475,6 @@ wrap-ansi@^6.2.0:
   version "6.2.0"
   resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-6.2.0.tgz#e9393ba07102e6c91a3b221478f0257cd2856e53"
   integrity sha512-r6lPcBGxZXlIcymEu7InxDMhdW0KDxpLgoFLcguasxCaJ/SOIZwINatK9KY/tf+ZrlywOKU0UDj3ATXUBfxJXA==
-  dependencies:
-    ansi-styles "^4.0.0"
-    string-width "^4.1.0"
-    strip-ansi "^6.0.0"
-
-wrap-ansi@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz#67e145cff510a6a6984bdf1152911d69d2eb9e43"
-  integrity sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==
   dependencies:
     ansi-styles "^4.0.0"
     string-width "^4.1.0"

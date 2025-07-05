@@ -35,7 +35,6 @@ import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
-import { ChatProvider } from '../../hooks/useChat'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -420,7 +419,7 @@ function ReaderViewContent({
     homeURL,
     description,
 }) {
-    const { addWindow } = useApp()
+    const { openNewChat } = useApp()
     const { appWindow } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
@@ -628,24 +627,18 @@ function ReaderViewContent({
                                 <button
                                     className="font-semibold underline"
                                     onClick={() =>
-                                        addWindow(
-                                            <ChatProvider
-                                                location={{
-                                                    pathname: `ask-max-${appWindow?.path}`,
-                                                }}
-                                                key={`ask-max-${appWindow?.path}`}
-                                                newWindow
-                                                context={[
-                                                    {
-                                                        type: 'page',
-                                                        value: {
-                                                            path: appWindow?.path,
-                                                            label: title,
-                                                        },
+                                        openNewChat({
+                                            path: `ask-max-${appWindow?.path}`,
+                                            context: [
+                                                {
+                                                    type: 'page',
+                                                    value: {
+                                                        path: appWindow?.path,
+                                                        label: title,
                                                     },
-                                                ]}
-                                            />
-                                        )
+                                                },
+                                            ],
+                                        })
                                     }
                                 >
                                     Ask Max AI

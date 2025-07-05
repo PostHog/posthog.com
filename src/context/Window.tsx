@@ -1,6 +1,7 @@
 import { IMenu } from 'components/PostLayout/types'
 import React, { createContext, useContext } from 'react'
 import { AppSetting } from './App'
+import { MenuItemType } from 'components/RadixUI/MenuBar'
 
 export interface AppWindow {
     element: React.ReactNode
@@ -67,6 +68,7 @@ interface WindowProviderProps {
     canGoBack: boolean
     canGoForward: boolean
     dragControls?: any
+    setPageOptions: (pageOptions: MenuItemType[]) => void
 }
 
 interface WindowContextType {
@@ -78,6 +80,7 @@ interface WindowContextType {
     canGoBack: boolean
     canGoForward: boolean
     dragControls?: any
+    setPageOptions: (pageOptions: MenuItemType[]) => void
 }
 
 export const Context = createContext<WindowContextType>({
@@ -89,6 +92,9 @@ export const Context = createContext<WindowContextType>({
     },
     canGoBack: false,
     canGoForward: false,
+    setPageOptions: () => {
+        // No-op default implementation
+    },
 })
 
 export const Provider = ({
@@ -101,10 +107,21 @@ export const Provider = ({
     canGoBack,
     canGoForward,
     dragControls,
+    setPageOptions,
 }: WindowProviderProps) => {
     return (
         <Context.Provider
-            value={{ appWindow, menu, setMenu, goBack, goForward, canGoBack, canGoForward, dragControls }}
+            value={{
+                appWindow,
+                menu,
+                setMenu,
+                goBack,
+                goForward,
+                canGoBack,
+                canGoForward,
+                dragControls,
+                setPageOptions,
+            }}
         >
             {children}
         </Context.Provider>

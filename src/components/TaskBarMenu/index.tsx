@@ -25,10 +25,9 @@ import { StrapiRecord, ProfileData } from 'lib/strapi'
 import { Avatar as MainNavAvatar } from 'components/MainNav'
 import Wizard from 'components/Wizard'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { ChatProvider } from 'hooks/useChat'
 
 export default function TaskBarMenu() {
-    const { windows, bringToFront, focusedWindow, addWindow, openSearch, openSignIn, siteSettings } = useApp()
+    const { windows, bringToFront, focusedWindow, openSearch, openSignIn, siteSettings, openNewChat } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
@@ -203,13 +202,7 @@ export default function TaskBarMenu() {
                     <OSButton onClick={() => openSearch()} variant="ghost" size="md">
                         <IconSearch className="size-5" />
                     </OSButton>
-                    <OSButton
-                        onClick={() =>
-                            addWindow(<ChatProvider location={{ pathname: `ask-max` }} key={`ask-max`} newWindow />)
-                        }
-                        variant="ghost"
-                        size="md"
-                    >
+                    <OSButton onClick={() => openNewChat({ path: `ask-max` })} variant="ghost" size="md">
                         <IconChatHelp className="size-5" />
                     </OSButton>
                     {siteSettings.experience === 'posthog' && (

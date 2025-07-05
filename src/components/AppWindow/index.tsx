@@ -15,12 +15,11 @@ import { ContextMenu, Dialog } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
 import OSButton from 'components/OSButton'
 import { Button } from 'components/Squeak/components/SubscribeButton'
-import MenuBar from 'components/RadixUI/MenuBar'
+import MenuBar, { MenuItemType } from 'components/RadixUI/MenuBar'
 import { Popover } from '../RadixUI/Popover'
 import { FileMenu } from '../RadixUI/FileMenu'
 import { IMenu } from 'components/PostLayout/types'
 import { navigate } from 'gatsby'
-import { ChatProvider } from '../../hooks/useChat'
 import Inbox from 'components/Inbox'
 import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
@@ -75,6 +74,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         constraintsRef,
         expandWindow,
         siteSettings,
+        openNewChat,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -92,6 +92,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     const [rendered, setRendered] = useState(false)
     const [dragging, setDragging] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
+    const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
 
     useEffect(() => {
         if (windowRef.current) {
@@ -284,6 +285,44 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     }, [])
 
     const chatWindows = windows.filter((w) => w.key?.startsWith('ask-max'))
+    const defaultPageOptions = useMemo(
+        () => [
+            {
+                type: 'submenu',
+                label: 'Ask Max about this page',
+                items: [
+                    {
+                        type: 'item',
+                        label: 'New Max chat',
+                        onClick() {
+                            openNewChat({
+                                path: item.path,
+                                context: [{ type: 'page', value: { path: item.path, label: item.meta?.title } }],
+                            })
+                        },
+                    },
+
+                    ...(chatWindows.length > 0
+                        ? [
+                              {
+                                  type: 'separator',
+                              },
+                              ...chatWindows.map((window, index) => ({
+                                  type: 'item',
+                                  label: window.meta?.title || `Chat ${index + 1}`,
+                                  onClick: () => bringToFront(window),
+                              })),
+                          ]
+                        : []),
+                ],
+            },
+            {
+                type: 'item',
+                label: 'Bookmark',
+            },
+        ],
+        [item, chatWindows]
+    )
 
     return (
         <WindowProvider
@@ -295,6 +334,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
             canGoBack={canGoBack}
             canGoForward={canGoForward}
             dragControls={controls}
+            setPageOptions={setPageOptions}
         >
             <WindowContainer>
                 {!item.minimized && (
@@ -426,57 +466,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                     </>
                                                 ),
                                                 items: [
-                                                    {
-                                                        type: 'submenu',
-                                                        label: 'Ask Max about this page',
-                                                        items: [
-                                                            {
-                                                                type: 'item',
-                                                                label: 'New Max chat',
-                                                                onClick() {
-                                                                    addWindow(
-                                                                        <ChatProvider
-                                                                            location={{
-                                                                                pathname: `ask-max-${item.path}`,
-                                                                            }}
-                                                                            key={`ask-max-${item.path}`}
-                                                                            newWindow
-                                                                            context={[
-                                                                                {
-                                                                                    type: 'page',
-                                                                                    value: {
-                                                                                        path: item.path,
-                                                                                        label: item.meta?.title,
-                                                                                    },
-                                                                                },
-                                                                            ]}
-                                                                        />
-                                                                    )
-                                                                },
-                                                            },
-
-                                                            ...(chatWindows.length > 0
-                                                                ? [
-                                                                      {
-                                                                          type: 'separator',
-                                                                      },
-                                                                      ...chatWindows.map((window, index) => ({
-                                                                          type: 'item',
-                                                                          label:
-                                                                              window.meta?.title || `Chat ${index + 1}`,
-                                                                          onClick: () => bringToFront(window),
-                                                                      })),
-                                                                  ]
-                                                                : []),
-                                                        ],
-                                                    },
-                                                    {
-                                                        type: 'item',
-                                                        label: 'Bookmark',
-                                                    },
-                                                    {
-                                                        type: 'separator',
-                                                    },
+                                                    ...(pageOptions || defaultPageOptions),
                                                     {
                                                         type: 'item',
                                                         label: 'Close',
