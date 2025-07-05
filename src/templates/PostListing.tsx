@@ -212,6 +212,7 @@ export default function Posts({ pageContext }) {
                                 fetchMore()
                             }
                         }}
+                        rowAlignment="top"
                         columns={[
                             {
                                 name: 'Date',
@@ -247,7 +248,7 @@ export default function Posts({ pageContext }) {
                                     },
                                     {
                                         content: (
-                                            <>
+                                            <div className="flex justify-between items-start w-full">
                                                 <Link className="font-semibold flex-1" to={post.attributes.slug}>
                                                     {post.attributes.title}
                                                 </Link>
@@ -256,7 +257,7 @@ export default function Posts({ pageContext }) {
                                                         <FeaturedImage url={featuredImageURL} />
                                                     </Link>
                                                 ) : null}
-                                            </>
+                                            </div>
                                         ),
                                         className: '!flex-row !pl-[.3rem] gap-2 text-left',
                                     },
