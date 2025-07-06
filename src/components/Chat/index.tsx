@@ -67,7 +67,7 @@ export default function Chat(): JSX.Element | null {
                     ? [
                           {
                               type: 'submenu',
-                              label: 'Conversation history',
+                              label: 'Shared conversations',
                               items: [
                                   ...conversationHistory
                                       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())

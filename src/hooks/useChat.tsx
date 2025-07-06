@@ -1,4 +1,4 @@
-import React, { createContext, useContext, ReactNode, useState, useEffect, useCallback } from 'react'
+import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from 'react'
 import useInkeepSettings, { defaultQuickQuestions } from './useInkeepSettings'
 import Chat from 'components/Chat'
 
@@ -40,6 +40,7 @@ export function ChatProvider({
     const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
+    const conversationStartedDate = useMemo(() => new Date().toISOString(), [])
 
     const logEventCallback = useCallback(
         (event: any) => {
@@ -51,15 +52,25 @@ export function ChatProvider({
             if (event?.eventName === 'assistant_message_received') {
                 if (!hasFirstResponse) {
                     setHasFirstResponse(true)
+                }
+            }
+            if (event?.eventName === 'chat_share_button_clicked') {
+                const conversationId = event?.properties?.sharedConversationId
+                if (conversationId) {
                     try {
                         const newConversation = {
-                            id: event.properties.conversation.id,
+                            id: conversationId,
                             question: event.properties.conversation.messages[0].content,
-                            date: new Date().toISOString(),
+                            date: conversationStartedDate,
                         }
                         const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
-                        conversations.push(newConversation)
-                        localStorage.setItem('conversations', JSON.stringify(conversations))
+                        localStorage.setItem(
+                            'conversations',
+                            JSON.stringify([
+                                ...conversations.filter((c: any) => c.date !== conversationStartedDate),
+                                newConversation,
+                            ])
+                        )
                     } catch (error) {
                         console.error('Error adding conversation to history:', error)
                     }
