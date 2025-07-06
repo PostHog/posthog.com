@@ -83,7 +83,7 @@ export default function Chat(): JSX.Element | null {
                                   },
                                   {
                                       type: 'item',
-                                      label: 'Clear conversation history',
+                                      label: 'Clear shared conversations',
                                       onClick: () => {
                                           resetConversationHistory()
                                       },
