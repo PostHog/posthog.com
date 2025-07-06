@@ -35,24 +35,10 @@ const Context = () => {
 }
 
 export default function Chat(): JSX.Element | null {
-    const posthog = usePostHog()
     const { conversationHistory, resetConversationHistory, context, setContext, firstResponse, setConversationId } =
         useChat()
     const { setWindowTitle } = useApp()
     const { appWindow, setPageOptions } = useWindow()
-    const [showDisclaimer, setShowDisclaimer] = useState(false)
-    const [historyOpen, setHistoryOpen] = useState(false)
-
-    const handleHideDisclaimer = () => {
-        setShowDisclaimer(false)
-        localStorage.setItem('showDisclaimer', 'false')
-    }
-
-    useEffect(() => {
-        if (localStorage.getItem('showDisclaimer') !== 'false') {
-            setShowDisclaimer(true)
-        }
-    }, [])
 
     useEffect(() => {
         if (firstResponse && appWindow) {
@@ -100,7 +86,7 @@ export default function Chat(): JSX.Element | null {
     }, [appWindow, conversationHistory])
 
     return (
-        <div className="h-full relative" onClick={() => setHistoryOpen(false)}>
+        <div className="h-full relative">
             <div data-scheme="secondary">
                 {context?.length > 0 && (
                     <ul className="m-0 list-none p-2 flex space-x-1 overflow-auto snap-x snap-mandatory absolute left-0 w-full z-10 top-0">
@@ -137,32 +123,6 @@ export default function Chat(): JSX.Element | null {
                     </ul>
                 )}
             </div>
-
-            <AnimatePresence>
-                {showDisclaimer && (
-                    <motion.div
-                        initial={{ opacity: 0, translateY: '-100%' }}
-                        animate={{ opacity: 1, translateY: 0, transition: { duration: 0.2 } }}
-                        exit={{ opacity: 0, translateY: '-100%', transition: { duration: 0.2 } }}
-                        className="absolute top-0 left-0 w-full z-10"
-                    >
-                        <div className="m-2 p-2 flex items-center justify-between bg-[#feedd5] dark:bg-dark border border-primary rounded overflow-hidden flex-shrink-0">
-                            <p className="m-0 pl-4 text-sm opacity-70 flex-1">
-                                Use{' '}
-                                <kbd
-                                    className={`box-content p-[5px] border border-b-2 border-input rounded-[3px] inline-flex text-black/35 dark:text-white/40 text-code text-xs py-0 bg-white dark:bg-accent-dark`}
-                                >
-                                    /
-                                </kbd>{' '}
-                                to search PostHog.com
-                            </p>
-                            <button className="" onClick={handleHideDisclaimer}>
-                                <IconX className="size-4 opacity-60 hover:opacity-100 transition-opacity" />
-                            </button>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
             <Context />
             <InkeepEmbeddedChat />
         </div>
