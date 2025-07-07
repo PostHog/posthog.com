@@ -270,8 +270,6 @@ const defaultAiChatSettings: InkeepAIChatSettings = {
     },
     aiAssistantName: 'Max AI',
     isFirstExampleQuestionHighlighted: false,
-    isShareButtonVisible: true,
-    shareChatUrlBasePath: 'https://posthog.com',
 }
 
 const useInkeepSettings = (): InkeepSharedSettings => {
