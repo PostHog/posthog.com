@@ -17,7 +17,6 @@ interface ChatContextType {
     setContext: (context: { type: 'page'; value: { path: string; label: string } }[]) => void
     addContext: (newContext: { type: 'page'; value: { path: string; label: string } }) => void
     firstResponse: string | null
-    setConversationId: (id: string) => void
 }
 
 const ChatContext = createContext<ChatContextType | undefined>(undefined)
@@ -26,10 +25,12 @@ export function ChatProvider({
     context: initialContext,
     quickQuestions: initialQuickQuestions,
     chatId,
+    date,
 }: {
     context?: { type: 'page'; value: { path: string; label: string } }[]
     quickQuestions?: string[]
     chatId?: string
+    date?: string
 }): JSX.Element {
     const { baseSettings, aiChatSettings, setBaseSettings, setAiChatSettings } = useInkeepSettings()
     const [hasUnread, setHasUnread] = useState(false)
@@ -40,10 +41,48 @@ export function ChatProvider({
     const [context, setContext] = useState<{ type: 'page'; value: { path: string; label: string } }[]>([])
     const [EmbeddedChat, setEmbeddedChat] = useState<any>()
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
-    const conversationStartedDate = useMemo(() => new Date().toISOString(), [])
+    const conversationStartedDate = useMemo(() => date || new Date().toISOString(), [])
+
+    const logConversation = async (messages: any) => {
+        const body = JSON.stringify({
+            messages,
+            tags: [],
+            type: 'openai',
+            userProperties: {},
+            visibility: 'public',
+        })
+        const data = await fetch(`https://api.analytics.inkeep.com/conversations`, {
+            method: 'POST',
+            body,
+            headers: {
+                Authorization: `Bearer ${process.env.GATSBY_INKEEP_API_KEY}`,
+                'Content-Type': 'application/json',
+            },
+        }).then((response) => response.json())
+        const conversationId = data?.id
+        if (conversationId && messages?.length > 0) {
+            try {
+                const newConversation = {
+                    id: conversationId,
+                    question: messages[0].content,
+                    date: conversationStartedDate,
+                }
+                const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
+                localStorage.setItem(
+                    'conversations',
+                    JSON.stringify([
+                        ...conversations.filter((c: any) => c.date !== conversationStartedDate),
+                        newConversation,
+                    ])
+                )
+            } catch (error) {
+                console.error('Error adding conversation to history:', error)
+            }
+        }
+    }
 
     const logEventCallback = useCallback(
-        (event: any) => {
+        async (event: any) => {
             if (event?.eventName === 'user_message_submitted' && !firstResponse) {
                 setFirstResponse(
                     event.properties.conversation.messages.filter((m: any) => m.role === 'user')[0].content
@@ -54,27 +93,9 @@ export function ChatProvider({
                     setHasFirstResponse(true)
                 }
             }
-            if (event?.eventName === 'chat_share_button_clicked') {
-                const conversationId = event?.properties?.sharedConversationId
-                if (conversationId) {
-                    try {
-                        const newConversation = {
-                            id: conversationId,
-                            question: event.properties.conversation.messages[0].content,
-                            date: conversationStartedDate,
-                        }
-                        const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
-                        localStorage.setItem(
-                            'conversations',
-                            JSON.stringify([
-                                ...conversations.filter((c: any) => c.date !== conversationStartedDate),
-                                newConversation,
-                            ])
-                        )
-                    } catch (error) {
-                        console.error('Error adding conversation to history:', error)
-                    }
-                }
+            const messages = event?.properties?.conversation?.messages
+            if (messages?.length > 0) {
+                logConversation(messages.map(({ id, ...rest }: any) => ({ ...rest })))
             }
         },
         [hasFirstResponse]
@@ -146,13 +167,6 @@ export function ChatProvider({
         })
     }, [quickQuestions])
 
-    const setConversationId = (id: string) => {
-        setAiChatSettings({
-            ...aiChatSettings,
-            chatId: id,
-        })
-    }
-
     useEffect(() => {
         if (chatId) {
             setAiChatSettings({
@@ -185,7 +199,6 @@ export function ChatProvider({
                 setContext,
                 addContext,
                 firstResponse,
-                setConversationId,
             }}
         >
             <Chat />

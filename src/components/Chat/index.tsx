@@ -35,9 +35,8 @@ const Context = () => {
 }
 
 export default function Chat(): JSX.Element | null {
-    const { conversationHistory, resetConversationHistory, context, setContext, firstResponse, setConversationId } =
-        useChat()
-    const { setWindowTitle } = useApp()
+    const { conversationHistory, resetConversationHistory, context, setContext, firstResponse } = useChat()
+    const { setWindowTitle, openNewChat } = useApp()
     const { appWindow, setPageOptions } = useWindow()
 
     useEffect(() => {
@@ -53,7 +52,7 @@ export default function Chat(): JSX.Element | null {
                     ? [
                           {
                               type: 'submenu',
-                              label: 'Shared conversations',
+                              label: 'Conversation history',
                               items: [
                                   ...conversationHistory
                                       .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
@@ -61,7 +60,11 @@ export default function Chat(): JSX.Element | null {
                                           type: 'item',
                                           label: conversation.question,
                                           onClick: () => {
-                                              setConversationId(conversation.id)
+                                              openNewChat({
+                                                  path: conversation.id,
+                                                  chatId: conversation.id,
+                                                  date: conversation.date,
+                                              })
                                           },
                                       })),
                                   {
@@ -69,7 +72,7 @@ export default function Chat(): JSX.Element | null {
                                   },
                                   {
                                       type: 'item',
-                                      label: 'Clear shared conversations',
+                                      label: 'Clear conversation history',
                                       onClick: () => {
                                           resetConversationHistory()
                                       },

@@ -70,11 +70,13 @@ interface AppContextType {
         context,
         quickQuestions,
         chatId,
+        date,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
+        date?: string
     }) => void
 }
 
@@ -798,11 +800,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         context,
         quickQuestions,
         chatId,
+        date,
     }: {
         path: string
         context?: ChatContext[]
         quickQuestions?: string[]
         chatId?: string
+        date?: string
     }) => {
         addWindow(
             <ChatProvider
@@ -814,6 +818,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 context={context}
                 quickQuestions={quickQuestions}
                 chatId={chatId}
+                date={date}
             />
         )
     }
