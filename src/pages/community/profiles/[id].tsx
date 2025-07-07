@@ -484,7 +484,7 @@ export default function ProfilePage({ params }: PageProps) {
                             {(isCurrentUser || isModerator) && (
                                 <Block title="Profile Settings">
                                     <div className="flex flex-col space-y-2">
-                                        {(user?.profile?.id === profile.id ||
+                                        {(user?.profile?.id === data?.id ||
                                             (user?.role?.type === 'moderator' && user?.webmaster)) && (
                                             <CallToAction
                                                 size="sm"
