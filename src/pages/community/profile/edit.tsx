@@ -15,6 +15,8 @@ import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import { flattenStrapiResponse } from '../../../utils'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { profileBackgrounds } from '../../../data/profileBackgrounds'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -276,6 +278,68 @@ const formSections = [
         },
     },
     {
+        title: 'Profile background',
+        fields: {
+            backgroundImage: {
+                label: 'Choose a background for your profile',
+                className: 'w-full',
+                component: ({ values, setFieldValue }) => {
+                    const currentBg = values.backgroundImage
+                    return (
+                        <>
+                            <label className="font-bold">Choose a background for your profile</label>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
+                                {profileBackgrounds.map((bg) => {
+                                    const isSelected = currentBg?.id === bg.id
+                                    return (
+                                        <button
+                                            key={bg.id}
+                                            type="button"
+                                            onClick={() =>
+                                                setFieldValue('backgroundImage', {
+                                                    id: bg.id,
+                                                    url: bg.url,
+                                                    backgroundSize: bg.backgroundSize,
+                                                    backgroundRepeat: bg.backgroundRepeat,
+                                                    backgroundPosition: bg.backgroundPosition,
+                                                })
+                                            }
+                                            className={`relative overflow-hidden rounded-md border-2 ${
+                                                isSelected ? 'border-red dark:border-yellow' : 'border-input'
+                                            } transition-all hover:scale-105`}
+                                        >
+                                            <div
+                                                className="aspect-video w-full"
+                                                style={{
+                                                    backgroundImage: `url(${bg.url})`,
+                                                    backgroundSize: bg.backgroundSize || 'auto',
+                                                    backgroundRepeat: bg.backgroundRepeat || 'no-repeat',
+                                                    backgroundPosition: bg.backgroundPosition || 'center',
+                                                }}
+                                            />
+                                            <span className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs p-1">
+                                                {bg.name}
+                                            </span>
+                                        </button>
+                                    )
+                                })}
+                                {currentBg && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setFieldValue('backgroundImage', null)}
+                                        className="relative overflow-hidden rounded-md border-2 border-input transition-all hover:scale-105 flex items-center justify-center aspect-video bg-accent"
+                                    >
+                                        <span className="text-sm font-bold">Remove background</span>
+                                    </button>
+                                )}
+                            </div>
+                        </>
+                    )
+                },
+            },
+        },
+    },
+    {
         title: 'About you',
         fields: {
             biography: {
@@ -523,9 +587,22 @@ function EditProfile({ profile, mutate }) {
 
     return (
         <ScrollArea>
-            <div data-scheme="primary" className="bg-primary">
+            <div
+                data-scheme="primary"
+                className="bg-primary min-h-full"
+                style={
+                    values.backgroundImage
+                        ? {
+                              backgroundImage: `url(${values.backgroundImage.url})`,
+                              backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                              backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                              backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
+                          }
+                        : undefined
+                }
+            >
                 <SEO noindex title="Edit Profile - PostHog" />
-                <section className="max-w-2xl mx-auto py-12 px-4">
+                <section className="max-w-2xl mx-auto py-12 px-4 bg-primary/90 backdrop-blur-sm rounded-lg">
                     <form className="m-0 space-y-6" onSubmit={handleSubmit}>
                         {formSections.map((section, index) => {
                             if (section.modOnly && user?.role?.type !== 'moderator') return null

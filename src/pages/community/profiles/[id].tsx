@@ -335,7 +335,20 @@ export default function ProfilePage({ params }: PageProps) {
         <div data-scheme="secondary" className="h-full bg-primary">
             <SEO title={`${name}'s profile - PostHog`} />
             <ScrollArea>
-                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
+                <div
+                    data-scheme="primary"
+                    className="mx-auto max-w-screen-xl px-5 @container"
+                    style={
+                        profile.backgroundImage
+                            ? {
+                                  backgroundImage: `url(${profile.backgroundImage.url})`,
+                                  backgroundSize: profile.backgroundImage.backgroundSize || 'auto',
+                                  backgroundRepeat: profile.backgroundImage.backgroundRepeat || 'no-repeat',
+                                  backgroundPosition: profile.backgroundImage.backgroundPosition || 'center',
+                              }
+                            : undefined
+                    }
+                >
                     <div className="flex flex-col @2xl:flex-row gap-6 p-6">
                         <div className="@2xl:max-w-xs w-full flex-shrink-0">
                             <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
