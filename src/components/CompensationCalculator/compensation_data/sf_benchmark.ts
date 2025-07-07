@@ -2,6 +2,7 @@ export const sfBenchmark: Record<string, number> = {
     'Product Engineer': 243000,
     'Account Executive (OTE)': 300000,
     'Backend Engineer': 243000,
+    'Billing Support Specialist': 154619,
     'Content Marketer': 190910,
     'Customer Success Manager (OTE)': 211000,
     'Data Engineer': 243000,
