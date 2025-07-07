@@ -716,6 +716,10 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                                 /> \*\*Good to know\*\*: This page is about the \[Actions-framework\].*?Both of these destinations receive data from PostHog\./g,
                                 ''
                             ) // Remove banner regarding the Actions-framework
+                            .replaceAll(
+                                /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
+                                ''
+                            ) // Remove lines about other companies maintaining destinations or contact support
                             .trim()
                     }
 
