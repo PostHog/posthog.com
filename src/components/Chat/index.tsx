@@ -61,7 +61,7 @@ export default function Chat(): JSX.Element | null {
                                           label: conversation.question,
                                           onClick: () => {
                                               openNewChat({
-                                                  path: conversation.id,
+                                                  path: `ask-max-${conversation.id}`,
                                                   chatId: conversation.id,
                                                   date: conversation.date,
                                               })

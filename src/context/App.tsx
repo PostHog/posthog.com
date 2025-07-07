@@ -811,9 +811,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         addWindow(
             <ChatProvider
                 location={{
-                    pathname: `ask-max-${path}`,
+                    pathname: path,
                 }}
-                key={`ask-max-${path}`}
+                key={path}
                 newWindow
                 context={context}
                 quickQuestions={quickQuestions}

@@ -296,7 +296,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                         label: 'New Max chat',
                         onClick() {
                             openNewChat({
-                                path: item.path,
+                                path: `ask-max-${item.path}`,
                                 context: [{ type: 'page', value: { path: item.path, label: item.meta?.title } }],
                             })
                         },
