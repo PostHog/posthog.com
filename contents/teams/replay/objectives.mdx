@@ -1,4 +1,21 @@
-# 🚀 Goal 1: Keeping momentum on the things that are working
+# 🚀 Goal 1: Get Tue rocketing
+
+Get Tue rocketing!
+
+# Goal 2: Talk to users (all?)
+
+Over recent months we've primarily talked to people for specific reasons mostly session summarization
+Let's talk to some happy users
+
+* Let’s link up with Sales and CS since they’re already talking to users
+* And talk to a bunch of happy users
+    * Have recent changes worked for them?
+       * What to watch
+       * In-page filtering
+    * What keeps them happy that they wouldn’t want us to change
+    * What one thing could we do to take them from happy to ecstatic
+
+# 🚀 Goal 3: Keeping momentum on the things that are working
 
 * Commenting on recordings (@pauldambra)
     * Search by comments
@@ -7,44 +24,14 @@
     * Track retention of groups that see it vs don’t
     * Talk to them and see what led them to click through
 * Playback UI (@veryayskiy)
-    * Mix-max
+    * Mix-max 
+        * is searching by text accurate enough
+        * follow-up questions good enough
+        * does it always create valid filters
     * Cinema mode
+        * should close activity inspector
 
-# 👩‍🔬 Goal 2: Add things folk are asking for
-
-* Custom retention (Tue with Paul supporting)
-    * Longer retention
-        * This comes up often enough that it would be awesome to support it
-        * Plus the existing longer retention implementation is at best O(n)
-        * https://github.com/PostHog/product-internal/pull/766
-        * https://github.com/PostHog/product-internal/pull/738
-        * I think it would be a pretty powerful upsell
-    * Shorter retention
-        * some customers want to only keep recordings for 30 days (e.g. GDPR)
-        * not currently possible
-    * Some customers want to delete recordings **but not one a time**
-        * sometimes this is "delete all recordings because accidental PII" (we have break glass for this)
-        * sometimes this is "delete specific recordings because accidental PII" -> this is tricky right now
-        * sometimes this is "ha ha hah i have figured out a hack to get free recordings by deleting them before you charge me" -> user education needed
-   * activity log and access control
-        * all of these things need to go in the activity log to help track this down
-        * the new access control work might need to take it in to account
-* Conditional recording 3000 (@pauldambra)
-    * We’ve levelled up conditional recording but it could be much more cool
-    * E.g. sample 20% of mobile recordings but 60% of web recordings
-    * Or trigger with flag X at 20% sampling, event Y at 50% sampling, and on URL matching Z at 1% sampling
-* Working with customers who are building on top of us (@veryayskiy)
-    * Folk building on top of us is a new user group for us (and we don't measure their revenue separately 🤔)
-    * Currently they’re using our API which is a poor experience for everyone
-    * batch exports?
-        * We can learn from / work with existing batch exports code
-        * And have a temporal flow to copy recordings to a provided S3 bucket
-        * we need to find out if folk would _pay_ for this though
-        * so good chance we need to validate this before we build it
-        * https://github.com/PostHog/product-internal/pull/767
-    * the solution might actually be "make a different API for this"
-
-# Goal 3: Make support take less time
+# Goal 4: Make support take less time
 
 This will affect us all as we do support rotations, but @pauldambra will lead on this
 
@@ -58,21 +45,54 @@ This will affect us all as we do support rotations, but @pauldambra will lead on
     * We’ve also got some amazing, patient customers willing to work with us
     * Added benefit that we can contribute back upstream if the solution is inside rrweb
 
-# Goal 4: Talk to users @veryayskiy
+# Goal 5: Act on results of the churn survey (@veryskyiy)
 
-Over recent months we've primarily talked to people for specific reasons mostly session summarization
-Let's talk to some happy users
+ * https://github.com/PostHog/product-internal/pull/802 
+ * Prompting folk on settings to reduce opt-out on settings page
+     * settings
+     * privacy
+     * compliance
 
-* Let’s link up with Sales and CS since they’re already talking to users
-* And talk to a bunch of happy users
-    * Have recent changes worked for them?
-       * What to watch
-       * In-page filtering
-    * What keeps them happy that they wouldn’t want us to change
-    * What one thing could we do to take them from happy to ecstatic
-* And keep acting on info from churned users @veryayskiy 
-    * https://github.com/PostHog/product-internal/pull/802 
-    * Prompting folk on settings to reduce opt-out on settings page
-        * settings
-        * privacy
-        * compliance
+Then there are things that folk are consistently asking for 
+
+# Goal 6: Recording retention (tue with paul)
+
+    * Longer retention  (Tue with Paul supporting)
+        * This comes up often enough that it would be awesome to support it
+        * Plus the existing longer retention implementation is at best O(n)
+        * https://github.com/PostHog/product-internal/pull/766
+        * https://github.com/PostHog/product-internal/pull/738
+        * I think it would be a pretty powerful upsell
+
+    * Shorter retention  (Tue with Paul supporting)
+        * some customers want to only keep recordings for 30 days (e.g. GDPR)
+        * not currently possible
+
+# Goal 7: Recording deletion (@verayskiy)
+    * Some customers want to delete recordings **but not one a time** (@veryayskiy)
+        * two needs here!
+             * i don't want to see this -> soft delete
+             * i don't want to store this -> hard delete
+        * sometimes this is "delete all recordings because accidental PII" (we have break glass for this)
+        * sometimes this is "delete specific recordings because accidental PII" -> this is tricky right now
+        * sometimes this is "ha ha hah i have figured out a hack to get free recordings by deleting them before you charge me" -> user education needed
+
+   > note: activity log and access control
+   >     * all of these things need to go in the activity log to help track this down
+   >     * the new access control work might need to take it in to account
+
+# Goal 8: Conditional recording 3000 (@pauldambra)
+    * We’ve levelled up conditional recording but it could be much more cool
+    * E.g. sample 20% of mobile recordings but 60% of web recordings
+    * Or trigger with flag X at 20% sampling, event Y at 50% sampling, and on URL matching Z at 1% sampling
+
+# Goal 9: Working with customers who are building on top of us (@veryayskiy)
+    * Folk building on top of us is a new user group for us (and we don't measure their revenue separately 🤔)
+    * Currently they’re using our API which is a poor experience for everyone and we want this to be great for us and them
+    * batch exports?
+        * We can learn from / work with existing batch exports code
+        * And have a temporal flow to copy recordings to a provided S3 bucket
+        * we need to find out if folk would _pay_ for this though
+        * so good chance we need to validate this before we build it
+        * https://github.com/PostHog/product-internal/pull/767
+    * the solution might actually be "make a different API for this"
