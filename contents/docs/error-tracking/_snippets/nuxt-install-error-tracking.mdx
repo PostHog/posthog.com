@@ -14,13 +14,42 @@ Send errors directly using the posthog client, follow instructions on how to get
 
 ```vue component.vue
 <script>
-  function captureException() {
-    posthog.captureException(new Error("Error message"), {
-      ...additionalProperties
-    })
+  const { $posthog } = useNuxtApp()
+
+  if ($posthog) {
+    const posthog = $posthog()
+    posthog.captureException(new Error("Important error message"))
   }
 </script>
 ```
+
+On the server side, you can use the `posthog` object directly.
+
+```js file=server/api/example.js focusOnLines=4-21
+export default defineEventHandler(async (event) => {
+  const distinctId = getCookie(event, 'distinct_id')
+
+  const { PostHog } = await import('posthog-node');
+  const runtimeConfig = useRuntimeConfig()
+
+  const posthog = new PostHog(
+    runtimeConfig.public.posthogPublicKey,
+    { 
+      host: runtimeConfig.public.posthogHost, 
+      defaults: runtimeConfig.public.posthogDefaults,
+      capture_pageview: false
+    }
+  );
+
+  try {
+    const results = await DB.query.users.findMany()
+    return results
+  } catch (error) {
+    posthog.captureException(error)
+  }
+})
+```
+
 
 #### 2. Automatically
 
@@ -49,23 +78,28 @@ export default defineNuxtPlugin((nuxtApp) => {
 #### 3. Update your `nuxt.config.js`
 
 ```js file=nuxt.config.js
+import { execSync } from 'child_process' // +
+
 export default defineNuxtConfig({
   ...,
   sourcemap: {
     client: true
   },
   hooks: {
-    'nitro:build:public-assets': async () => {
-        console.log('Running PostHog sourcemap injection...')
-        try {
-            execSync("posthog-cli sourcemap inject --directory '.output/public'", {
-                stdio: 'inherit',
-            })
-            console.log('PostHog sourcemap injection completed successfully')
-        } catch (error) {
-            console.error('PostHog sourcemap injection failed:', error)
-        }
-    },
+    'close': async () => {
+      console.log('Running PostHog sourcemap injection...')
+      try {
+        execSync("posthog-cli sourcemap inject --directory '.output/public'", {
+          stdio: 'inherit',
+        })
+        execSync("posthog-cli sourcemap inject --directory '.output/server'", {
+          stdio: 'inherit',
+        })
+        console.log('PostHog sourcemap injection completed successfully for server')
+      } catch (error) {
+        console.error('PostHog sourcemap injection failed:', error)
+      }
+    }
   }
 })
 ```
