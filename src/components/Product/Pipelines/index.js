@@ -644,7 +644,6 @@ function PipelinesPage({ location }) {
                     product={product.capitalized}
                     title="Ingest, transform, and send data between hundreds of tools"
                     description="PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack."
-                    beta
                 />
 
                 <div className="flex justify-center mb-12">
