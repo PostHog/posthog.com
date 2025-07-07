@@ -40,6 +40,9 @@ export default function DataPipeline({
         },
     } = data
 
+    const segmentWarning =
+        "> The configuration process for this destination mirrors Segment's setup. We've automatically modified the documentation from third-party sources to show you how to set up this destination with PostHog."
+
     return (
         <Layout
             parent={docsMenu}
@@ -55,6 +58,7 @@ export default function DataPipeline({
                     <p>{description}</p>
                     {id.startsWith('segment-') && (
                         <>
+                            <ReactMarkdown>{segmentWarning}</ReactMarkdown>
                             <ReactMarkdown>{introSnippet || ''}</ReactMarkdown>
                             <ReactMarkdown>{installationSnippet || ''}</ReactMarkdown>
                         </>

@@ -52,7 +52,7 @@ When using data warehouse tables in insights, you can use properties from those 
 
 For more complicated queries, you can use [SQL insights](/docs/product-analytics/sql). 
 
-To start, create a new SQL insight from the [SQL tab](https://us.posthog.com/sql). Here you can see the schemas all available external and PostHog tables as well as saved views
+To start, create a new SQL insight from the [SQL tab](https://us.posthog.com/sql). Here you can see the schema of all available external and PostHog tables as well as saved views.
 
 To see available sources, go to the [data pipeline page](https://us.posthog.com/pipeline/sources). This page shows the external and PostHog tables as well as [saved views](/docs/data-warehouse/views) you can visualize with trends or query through [SQL insights](/docs/product-analytics/sql).
 
@@ -74,6 +74,28 @@ Here you can:
   imageLight={QueryLight} 
   imageDark={QueryDark} 
   alt="Querying a source in PostHog" 
+  classes="rounded"
+/>
+
+### SQL visualizations
+
+SQL queries have multiple different visualization options including:
+
+- Table (default)
+- Big number
+- Line chart
+- Bar chart
+- Stacked bar chart
+- Area chart
+
+By clicking on the **Visualization** tab below the query, you can customize the X-axis, Y-axis, legend, scale, goal lines, and more. Each visualization type has its own set of customization options.
+
+For example, with tables, you can add conditional formatting rules. These enable you to highlight cells based on their value and are set up in the **Conditional formatting** tab.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_01_00_2x_181ae75d28.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_02_28_2x_b3ba2d2d8a.png" 
+  alt="Customizing a SQL visualization" 
   classes="rounded"
 />
 

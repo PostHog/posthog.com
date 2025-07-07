@@ -35,7 +35,9 @@ We do not have Meta's pixel installed, as we do not allow any third-party cookie
 
 > **🚨 Important**: We must be extremely careful not to include any personally identifiable information. We should only include the `fbclid` parameter and the `client_user_agent`. Avoid sending personal identifiable information to Meta such as name or email.
 
-Our ad creative can be accessed in <PrivateLink url="https://www.figma.com/design/CLj2U34xpNiHuZRo73GJPm/posthog.com?node-id=17915-50&t=9Wn8U6aWkxf2ZVry-1">Figma</PrivateLink>
+Our ad creative can be accessed in <PrivateLink url="https://www.figma.com/design/CLj2U34xpNiHuZRo73GJPm/posthog.com?node-id=17915-50&t=9Wn8U6aWkxf2ZVry-1">Figma</PrivateLink>.
+
+This [issue](https://github.com/issues/assigned?issue=PostHog%7Cposthog.com%7C12092) has some information on learnings from previous ad campaigns
 
 ### Instant Form ads
 
@@ -86,6 +88,9 @@ We have also found that linking to an article directly converts better than just
 If you need images, there is a <PrivateLink url="https://www.figma.com/design/HwUmk7WqccLkGgNNGAs4zN/Art-board?node-id=10059-57205">collection of many sizes of them in Figma</PrivateLink>.
 
 
-## Reddit Ads
+## LinkedIn and Reddit Ads
 
-We have also started trialing Reddit ads as of June 2025. You can view the campaign dashboard <PrivateLink url="https://ads.reddit.com/account/gm6wfjb5i3tt/dashboard?attributionSettings=%5B%5D&breakdowns=&customizedGraphMetrics=spend&customizedGraphMetrics=impressions&customizedGraphMetrics=clicks&customizedGraphMetrics=ecpm&customizedGraphMetrics=cpc&customizedGraphMetrics=ctr&end=2025-06-13&fields=conversionGoalType%2Ckey_conversion_total_result%2Ckey_conversion_ecpa%2Cimpressions%2Cecpm%2Cclicks%2Ccpc%2Cctr%2Cspend&filters=%5B%7B%22field%22%3A%22entity+status%22%2C%22operator%22%3A%22EQUALS%22%2C%22value%22%3A%22Active%2CInactive%22%7D%5D&graphMetrics=spend&pageIndex=0&pageSize=10&selectedCustomColumnIds=&selectedIds=campaigns%3A2228747327678795712%3Badgroups%3A2228747327674925867%3Bads%3A2231624428765860877&sort=%7B%22field%22%3A%22campaignCreatedAt%22%2C%22direction%22%3A2%7D&start=2025-06-07&view=None">here</PrivateLink>.
+We tried to run LinkedIn and Reddit ads for the newsletter but both were unsuccessful. Here's what we found:
+
+- LinkedIn is too expensive. Cost per link clicks were north of $5, about 10x-20x more expesnvie than meta ads
+- Reddit ads had CPCs similar to meta ads, but converted at a significantly lower rate (about 20x worse), meaning that cost per sign up was between $50-$90.

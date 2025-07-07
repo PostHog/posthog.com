@@ -106,7 +106,7 @@ export default function CookieBanner() {
     const { internalMenu } = useLayoutData()
     const [consentGiven, setConsentGiven] = useState('')
     const { pathname, state } = useLocation()
-    const paidAdsCookieBannerExperimentVariant = posthog?.getFeatureFlag('show-bottom-bar-cookie-banner')
+    const paidAdsCookieBannerExperimentVariant = posthog?.getFeatureFlag?.('show-bottom-bar-cookie-banner')
 
     const handleClick = (accept: boolean) => {
         localStorage.setItem('cookie_consent', accept ? 'yes' : 'no')
