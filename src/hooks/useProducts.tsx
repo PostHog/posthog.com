@@ -1516,15 +1516,15 @@ window.posthog.onFeatureFlags(function () {
         },
         pairsWith: [
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description: 'Jump into a playlist of session recordings directly from any time series in a graph',
             },
             {
-                slug: '/feature-flags',
+                slug: 'feature-flags',
                 description: "See which feature flags are enabled for a user's session",
             },
             {
-                slug: '/experiments',
+                slug: 'experiments',
                 description:
                     'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
             },
@@ -2001,16 +2001,16 @@ window.posthog.onFeatureFlags(function () {
         },
         pairsWith: [
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description:
                     "Run any insight filtered by a flag's value, or group by flag to see usage across a flag's variants",
             },
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description: "User paths: See how a flag's value influenced an intended outcome",
             },
             {
-                slug: '/session-replay',
+                slug: 'session-replay',
                 description:
                     'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
             },
@@ -2025,7 +2025,7 @@ window.posthog.onFeatureFlags(function () {
         colorSecondary: 'lilac',
         category: 'product',
         billedWith: 'Feature flags',
-        slug: '/experiments',
+        slug: 'experiments',
     },
     {
         Icon: IconMessage,
@@ -2359,15 +2359,15 @@ window.posthog.onFeatureFlags(function () {
         },
         pairsWith: [
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description: 'Use insights to breakdown average scores, analyze results over time, or find trends.',
             },
             {
-                slug: '/feature-flags',
+                slug: 'feature-flags',
                 description: 'Connect a survey to a feature flag to gather feedback on your latest ideas and tests.',
             },
             {
-                slug: '/session-replay',
+                slug: 'session-replay',
                 description:
                     "Watch recordings of users completing a survey to understand full context about a user's behavior.",
             },
@@ -2516,15 +2516,15 @@ window.posthog.onFeatureFlags(function () {
         ],
         pairsWith: [
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description: 'Analyze data from any source independently, or alongside product data.',
             },
             {
-                slug: '/feature-flags',
+                slug: 'feature-flags',
                 description: 'Use synced data to toggle feature flags, trigger A/B experiments, and more.',
             },
             {
-                slug: '/docs/sql',
+                slug: 'docs/sql',
                 description: 'Create entirely custom queries, join sources, and get the answers you need.',
             },
         ],
@@ -2808,15 +2808,15 @@ window.posthog.onFeatureFlags(function () {
         },
         pairsWith: [
             {
-                slug: '/session-replay',
+                slug: 'session-replay',
                 description: 'Watch exactly how an error occurred for a specific user',
             },
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description: 'Analyze trends over time and get alerts when things go wrong',
             },
             {
-                slug: '/feature-flags',
+                slug: 'feature-flags',
                 description: 'Roll back features that cause errors, or test fixes with slow rollouts',
             },
         ],
@@ -2850,12 +2850,12 @@ window.posthog.onFeatureFlags(function () {
         ],
         pairsWith: [
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description:
                     'Get your source data into PostHog, then analyze it alongside your product data to unlock new insights and discover new user behaviours.',
             },
             {
-                slug: '/data-warehouse',
+                slug: 'data-warehouse',
                 description:
                     'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',
             },
@@ -3154,17 +3154,17 @@ window.posthog.onFeatureFlags(function () {
         },
         pairsWith: [
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description:
                     'Need to go deeper than a dashboard? Building your own insights and SQL queries from scratch!',
             },
             {
-                slug: '/session-replay',
+                slug: 'session-replay',
                 description:
                     "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
             },
             {
-                slug: '/surveys',
+                slug: 'surveys',
                 description:
                     'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
             },
@@ -3425,17 +3425,17 @@ window.posthog.onFeatureFlags(function () {
         },
         pairsWith: [
             {
-                slug: '/product-analytics',
+                slug: 'product-analytics',
                 description:
                     'Run analysis based on the value of a test, or build a cohort of users from a test variant',
             },
             {
-                slug: '/session-replay',
+                slug: 'session-replay',
                 description:
                     "Watch recordings of users in a variant to discover nuances in why they did or didn't complete the goal",
             },
             {
-                slug: '/feature-flags',
+                slug: 'feature-flags',
                 description:
                     'Make changes to the feature flag the experiment uses - including JSON payload for each variant',
             },

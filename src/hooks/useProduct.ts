@@ -49,7 +49,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         //     ...products.find((product) => product.handle === 'product_analytics'),
         //     handle: 'product_analytics',
         //     name: 'Product analytics',
-        //     slug: '/product-analytics',
+        //     slug: 'product-analytics',
         // },
 
         {
@@ -61,7 +61,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'sky-blue',
             category: 'marketing',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/broadcasts',
+            slug: 'broadcasts',
             status: 'WIP',
         },
         {
@@ -73,7 +73,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'purple',
             category: 'product',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/user-interviews',
+            slug: 'user-interviews',
             status: 'WIP',
         },
         {
@@ -131,7 +131,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'sky-blue',
             category: 'product_os',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/dashboards',
+            slug: 'dashboards',
         },
         {
             name: 'Heatmaps',
@@ -175,7 +175,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'product_os',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/notebooks',
+            slug: 'notebooks',
         },
         {
             name: 'Max',
@@ -186,7 +186,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'product_os',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/max',
+            slug: 'max',
             status: 'beta',
         },
         {
@@ -198,7 +198,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'yellow-2',
             category: 'product_os',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/activity',
+            slug: 'activity',
         },
         {
             name: 'Toolbar',
@@ -209,7 +209,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'red',
             category: 'product_os',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/toolbar',
+            slug: 'toolbar',
         },
         {
             name: 'Early access features',
@@ -220,7 +220,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'orange-2',
             category: 'product',
             // worksWith: ['product_analytics', 'session_replay', 'surveys'],
-            slug: '/early-access-features',
+            slug: 'early-access-features',
         },
         ...products,
     ]

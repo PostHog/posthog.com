@@ -20,6 +20,7 @@ import DocsSlide from './DocsSlide'
 import PairsWithSlide from './PairsWithSlide'
 import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, defaultSlides } from './createSlideConfig'
+import ProgressBar from 'components/ProgressBar'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -55,8 +56,8 @@ export default function SlidesTemplate({
     // Handle loading state
     if (!productData) {
         return (
-            <div className="h-full flex items-center justify-center">
-                <div className="text-primary">Loading product data...</div>
+            <div className="size-full flex items-center justify-center">
+                <ProgressBar title="product" />
             </div>
         )
     }

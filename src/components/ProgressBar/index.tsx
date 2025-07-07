@@ -38,7 +38,7 @@ export default function ProgressBar({ title, chrome = true }: { title?: string; 
     }, [])
 
     return (
-        <div data-scheme="secondary" className="@container min-w-40">
+        <div data-scheme="secondary" className="@container min-w-64">
             <div
                 className={`${chrome ? 'border border-primary bg-primary rounded-md p-8 mb-12' : ''} max-w-xl mx-auto`}
             >

@@ -14,6 +14,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import ZoomHover from 'components/ZoomHover'
 import { IconPresentation } from 'components/OSIcons'
 import { productMenu } from '../../navs'
+import { PRODUCT_COUNT } from '../../constants'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -66,9 +67,9 @@ export default function Products(): JSX.Element {
                         content: (
                             <>
                                 <p className="text-sm mb-2">
-                                    <strong>We have 10+ products today</strong> – but even if we don't have it yet, we
-                                    will eventually. We are going to build every piece of SaaS you need to make your
-                                    product successful.
+                                    <strong>We have {PRODUCT_COUNT}+ products today</strong> (and loads more in
+                                    development) – but even if we don't have it yet, we will eventually. We are going to
+                                    build every piece of SaaS you need to make your product successful.
                                 </p>
                                 <p className="text-sm mb-2">Why picking PostHog is a no-brainer?</p>
                                 <p className="text-sm mb-0">
