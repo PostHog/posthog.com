@@ -112,7 +112,7 @@ export default function Desktop() {
         const leftColumnX = 16
         const rightColumnX = containerWidth - 112 - 16 // 112px icon width + 16px padding
         const startY = 16
-        const iconSpacing = 105 // gap-y-5 = 20px + icon height ~85px
+        const iconSpacing = 85 // gap-y-5 = 20px + icon height ~85px
 
         // Position productLinks on the left
         productLinks.forEach((app, index) => {
