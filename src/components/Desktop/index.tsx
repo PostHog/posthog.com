@@ -8,6 +8,8 @@ import { AppItem } from 'components/OSIcons/AppIcon'
 import ContextMenu from 'components/RadixUI/ContextMenu'
 import CloudinaryImage from 'components/CloudinaryImage'
 import DraggableDesktopIcon from './DraggableDesktopIcon'
+import { Screensaver } from '../Screensaver'
+import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 
 interface Product {
     name: string
@@ -98,8 +100,11 @@ type IconPositions = Record<string, IconPosition>
 const STORAGE_KEY = 'desktop-icon-positions'
 
 export default function Desktop() {
-    const { constraintsRef } = useApp()
+    const { constraintsRef, siteSettings } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>({})
+    const { isInactive, dismiss } = useInactivityDetection({
+        enabled: !siteSettings.screensaverDisabled
+    })
 
     const generateInitialPositions = (): IconPositions => {
         const positions: IconPositions = {}
@@ -268,6 +273,7 @@ export default function Desktop() {
                     </ul>
                 </nav>
             </div>
+            <Screensaver isActive={isInactive} onDismiss={dismiss} />
         </ContextMenu>
     )
 }
