@@ -64,6 +64,8 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 ### Sourcemap upload
 
+PostHog requires sourcemaps to be generated during build to properly display stack traces. We can do this by running the `posthog-cli` to inject and upload sourcemaps post-build using the `close` hook.  
+
 #### 1. Download CLI
 
 <CLIDownload />
@@ -72,7 +74,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 <CLIAuthenticate />
 
-#### 3. Update your `nuxt.config.js`
+#### 3. Generate sourcemaps during build
 
 ```js file=nuxt.config.js
 import { execSync } from 'child_process' // +
@@ -80,19 +82,19 @@ import { execSync } from 'child_process' // +
 export default defineNuxtConfig({
   ...,
   sourcemap: {
-    client: true
+    client: true // +
   },
   hooks: {
     'close': async () => {
-      console.log('Running PostHog sourcemap injection...')
+      console.log('Running PostHog sourcemap injection and upload...')
       try {
-        execSync("posthog-cli sourcemap inject --directory '.output/public'", {
-          stdio: 'inherit',
-        })
-        execSync("posthog-cli sourcemap inject --directory '.output/server'", {
-          stdio: 'inherit',
-        })
-        console.log('PostHog sourcemap injection completed successfully for server')
+        execSync("posthog-cli sourcemap inject --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // +
+        execSync("posthog-cli sourcemap upload --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // + 
+        console.log('PostHog sourcemap injection completed successfully') 
       } catch (error) {
         console.error('PostHog sourcemap injection failed:', error)
       }
@@ -103,12 +105,10 @@ export default defineNuxtConfig({
 
 #### 4. Build your project for production
 
+Build your project for production by running the following command:
+
 ```bash
 nuxt build
 ```
 
-#### 5. Upload sourcemaps
-
-<CLIUpload />
-
-Where `./path/to/assets` is the path to your built assets. This is usually `.output/public` for Nuxt 3.
+You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
