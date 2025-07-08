@@ -12,7 +12,6 @@ import Link from 'components/Link'
 import TeamMember from 'components/TeamMember'
 import qs from 'qs'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { Controlled as ControlledZoom } from 'react-medium-image-zoom'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ProgressBar from 'components/ProgressBar'
 
@@ -26,6 +25,18 @@ const categories = [
     {
         label: 'Blog',
         root: 'blog',
+    },
+    {
+        label: 'Founders',
+        root: 'founders',
+    },
+    {
+        label: 'Product engineers',
+        root: 'product-engineers',
+    },
+    {
+        label: 'Newsletter',
+        root: 'newsletter',
     },
 ]
 
