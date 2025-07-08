@@ -123,7 +123,8 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     const location = useLocation()
 
     // Get the language for this SDK reference
-    const sdkLanguage = getLanguageFromSdkId(fullReference.id)
+    const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
+    console.log(fullReference.id)
 
     // Badge styling based on release tag
     const getBadgeClasses = (releaseTag: string): string => {

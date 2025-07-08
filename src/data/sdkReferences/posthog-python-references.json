@@ -2,7 +2,7 @@
     "id": "posthog-python",
     "hogRef": "0.1",
     "info": {
-        "version": "6.0.2",
+        "version": "6.0.3",
         "id": "posthog-python",
         "title": "PostHog Python SDK",
         "description": "Integrate PostHog into any python application.",
@@ -349,162 +349,161 @@
                     "description": "Initialize a new PostHog client instance.",
                     "details": "",
                     "category": "Initialization",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "from posthog import Posthog\n\nposthog = Posthog('<ph_project_api_key>', host='<ph_app_host>')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "project_api_key",
                             "description": "The project API key.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         },
                         {
                             "name": "host",
                             "description": "The host to use for the client.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "debug",
                             "description": "Whether to enable debug mode.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "max_queue_size",
                             "description": "Parameter: max_queue_size",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "send",
                             "description": "Parameter: send",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "on_error",
                             "description": "Parameter: on_error",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "flush_at",
                             "description": "Parameter: flush_at",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "flush_interval",
                             "description": "Parameter: flush_interval",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "float"
                         },
                         {
                             "name": "gzip",
                             "description": "Parameter: gzip",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "max_retries",
                             "description": "Parameter: max_retries",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "sync_mode",
                             "description": "Parameter: sync_mode",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "timeout",
                             "description": "Parameter: timeout",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "thread",
                             "description": "Parameter: thread",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "poll_interval",
                             "description": "Parameter: poll_interval",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "personal_api_key",
                             "description": "Parameter: personal_api_key",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disabled",
                             "description": "Parameter: disabled",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Parameter: disable_geoip",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "historical_migration",
                             "description": "Parameter: historical_migration",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "feature_flags_request_timeout_seconds",
                             "description": "Parameter: feature_flags_request_timeout_seconds",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "super_properties",
                             "description": "Parameter: super_properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "enable_exception_autocapture",
                             "description": "Parameter: enable_exception_autocapture",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "log_captured_exceptions",
                             "description": "Parameter: log_captured_exceptions",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "project_root",
                             "description": "Parameter: project_root",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "privacy_mode",
                             "description": "Parameter: privacy_mode",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "before_send",
                             "description": "Parameter: before_send",
-                            "isOptional": true,
+                            "isOptional": false,
+                            "type": "any"
+                        },
+                        {
+                            "name": "flag_fallback_cache_url",
+                            "description": "Parameter: flag_fallback_cache_url",
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -513,7 +512,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import Posthog\n\nposthog = Posthog('<ph_project_api_key>', host='<ph_app_host>')"
+                        }
+                    ]
                 },
                 {
                     "id": "alias",
@@ -521,18 +527,11 @@
                     "description": "Create an alias between two distinct IDs.",
                     "details": "",
                     "category": "Identification",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.alias('anonymous_id', 'user123')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "previous_id",
                             "description": "The previous distinct ID.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         },
                         {
@@ -544,19 +543,19 @@
                         {
                             "name": "timestamp",
                             "description": "The timestamp of the event.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "uuid",
                             "description": "A unique identifier for the event.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this event.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -565,7 +564,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "posthog.alias(previous_id='distinct_id', distinct_id='alias_id')"
+                        }
+                    ]
                 },
                 {
                     "id": "capture",
@@ -573,24 +579,17 @@
                     "description": "Captures an event manually. [Learn about capture best practices](https://posthog.com/docs/product-analytics/capture-events)",
                     "details": "",
                     "category": "Capture",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.capture('user_signed_up', distinct_id='user123')\nposthog.capture('button_clicked', properties={'button_name': 'signup'})"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "event",
                             "description": "The event name to capture.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         },
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalCaptureArgs]"
                         }
                     ],
@@ -599,7 +598,29 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[str]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Anonymous event",
+                            "code": "# Anonymous event\nposthog.capture('some-anon-event')"
+                        },
+                        {
+                            "id": "example_2",
+                            "name": "Context usage",
+                            "code": "# Context usage\nfrom posthog import identify_context, new_context\nwith new_context():\n    identify_context('distinct_id_of_the_user')\n    posthog.capture('user_signed_up')\n    posthog.capture('user_logged_in')\n    posthog.capture('some-custom-action', distinct_id='distinct_id_of_the_user')"
+                        },
+                        {
+                            "id": "example_3",
+                            "name": "Set event properties",
+                            "code": "# Set event properties\nposthog.capture(\n    \"user_signed_up\",\n    distinct_id=\"distinct_id_of_the_user\",\n    properties={\n        \"login_type\": \"email\",\n        \"is_free_trial\": \"true\"\n    }\n)"
+                        },
+                        {
+                            "id": "example_4",
+                            "name": "Page view event",
+                            "code": "# Page view event\nposthog.capture('$pageview', distinct_id=\"distinct_id_of_the_user\", properties={'$current_url': 'https://example.com'})"
+                        }
+                    ]
                 },
                 {
                     "id": "capture_exception",
@@ -607,24 +628,17 @@
                     "description": "Capture an exception for error tracking.",
                     "details": "",
                     "category": "Error Tracking",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "try:\n    # Some code that might fail\n    pass\nexcept Exception as e:\n    posthog.capture_exception(e, distinct_id='user123')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "exception",
                             "description": "The exception to capture.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "BaseException"
                         },
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalCaptureArgs]"
                         }
                     ],
@@ -633,7 +647,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "try:\n    # Some code that might fail\n    pass\nexcept Exception as e:\n    posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)"
+                        }
+                    ]
                 },
                 {
                     "id": "feature_enabled",
@@ -641,60 +662,53 @@
                     "description": "Check if a feature flag is enabled for a user.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "if posthog.feature_enabled('new-feature', 'user123'):\n    # Show new feature\n    pass"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "key",
                             "description": "The feature flag key.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to only evaluate locally.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "send_feature_flag_events",
                             "description": "Whether to send feature flag events.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -703,28 +717,35 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
-                },
-                {
-                    "id": "flush",
-                    "title": "flush",
-                    "description": "Force a flush from the internal queue to the server. Do not use directly, call `shutdown()` instead.  Examples:     ```python     posthog.capture('event_name')     posthog.flush()  # Ensures the event is sent immediately     ```",
-                    "details": "",
-                    "category": null,
+                    },
                     "examples": [
                         {
                             "id": "example_1",
                             "name": "Example 1",
-                            "code": "posthog.capture('event_name')\nposthog.flush()  # Ensures the event is sent immediately"
+                            "code": "is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')\nif is_my_flag_enabled:\n    # Do something differently for this user\n    # Optional: fetch the payload\n    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
                         }
-                    ],
+                    ]
+                },
+                {
+                    "id": "flush",
+                    "title": "flush",
+                    "description": "Force a flush from the internal queue to the server. Do not use directly, call `shutdown()` instead.",
+                    "details": "",
+                    "category": null,
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "posthog.capture('event_name')\nposthog.flush()  # Ensures the event is sent immediately"
+                        }
+                    ]
                 },
                 {
                     "id": "get_all_flags",
@@ -732,48 +753,41 @@
                     "description": "Get all feature flags for a user.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.get_all_flags('distinct_id_of_your_user')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to only evaluate locally.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -782,7 +796,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[dict[str, Union[bool, str]]]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "posthog.get_all_flags('distinct_id_of_your_user')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_all_flags_and_payloads",
@@ -790,48 +811,41 @@
                     "description": "Get all feature flags and their payloads for a user.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.get_all_flags_and_payloads('distinct_id_of_your_user')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to only evaluate locally.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -840,7 +854,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "FlagsAndPayloads"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "posthog.get_all_flags_and_payloads('distinct_id_of_your_user')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_feature_flag",
@@ -848,60 +869,53 @@
                     "description": "Get multivariate feature flag value for a user.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "enabled_variant = posthog.get_feature_flag('flag-key', 'distinct_id_of_your_user')\n\nif enabled_variant == 'variant-key': # replace 'variant-key' with the key of your variant\n    # Do something differently for this user\n    # Optional: fetch the payload\n    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "key",
                             "description": "The feature flag key.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to only evaluate locally.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "send_feature_flag_events",
                             "description": "Whether to send feature flag events.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -910,7 +924,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Union[bool, str, any]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "enabled_variant = posthog.get_feature_flag('flag-key', 'distinct_id_of_your_user')\nif enabled_variant == 'variant-key': # replace 'variant-key' with the key of your variant\n    # Do something differently for this user\n    # Optional: fetch the payload\n    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_feature_flag_payload",
@@ -918,66 +939,59 @@
                     "description": "Get the payload for a feature flag.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')\n\nif is_my_flag_enabled:\n    # Do something differently for this user\n    # Optional: fetch the payload\n    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "key",
                             "description": "The feature flag key.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "match_value",
                             "description": "The specific flag value to get payload for.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to only evaluate locally.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "send_feature_flag_events",
                             "description": "Whether to send feature flag events.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -986,7 +1000,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "is_my_flag_enabled = posthog.feature_enabled('flag-key', 'distinct_id_of_your_user')\n\nif is_my_flag_enabled:\n    # Do something differently for this user\n    # Optional: fetch the payload\n    matched_flag_payload = posthog.get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_feature_flag_result",
@@ -994,65 +1015,53 @@
                     "description": "Get a FeatureFlagResult object",
                     "details": "",
                     "category": null,
-                    "examples": [
-                        {
-                            "id": "generated_example_1",
-                            "name": "Basic usage",
-                            "code": "get_feature_flag_result(key=\"key_value\", distinct_id=\"distinct_id_value\")"
-                        },
-                        {
-                            "id": "generated_example_2",
-                            "name": "Advanced usage",
-                            "code": "get_feature_flag_result(key=\"key_value\", distinct_id=\"distinct_id_value\", groups=\"groups_value\", person_properties=\"person_properties_value\", group_properties=\"group_properties_value\")"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "key",
                             "description": "Parameter: key",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "Parameter: distinct_id",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "Parameter: groups",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "Parameter: person_properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "Parameter: group_properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Parameter: only_evaluate_locally",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "send_feature_flag_events",
                             "description": "Parameter: send_feature_flag_events",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Parameter: disable_geoip",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1069,42 +1078,35 @@
                     "description": "Get feature flags and payloads for a user by calling decide.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "result = posthog.get_feature_flags_and_payloads('<distinct_id>')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1113,7 +1115,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "FlagsAndPayloads"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "result = posthog.get_feature_flags_and_payloads('<distinct_id>')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_feature_payloads",
@@ -1121,42 +1130,35 @@
                     "description": "Get feature flag payloads for a user by calling decide.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "payloads = posthog.get_feature_payloads('<distinct_id>')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1165,7 +1167,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "dict[str, str]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "payloads = posthog.get_feature_payloads('<distinct_id>')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_feature_variants",
@@ -1173,42 +1182,35 @@
                     "description": "Get feature flag variants for a user by calling decide.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "variants = posthog.get_feature_variants('<distinct_id>')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "A dictionary of group information.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1225,18 +1227,11 @@
                     "description": "Get feature flags decision.",
                     "details": "",
                     "category": "Feature Flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "decision = posthog.get_flags_decision('user123')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "Number"
                         },
                         {
@@ -1248,19 +1243,19 @@
                         {
                             "name": "person_properties",
                             "description": "A dictionary of person properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "group_properties",
                             "description": "A dictionary of group properties.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this request.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1269,7 +1264,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "FlagsResponse"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "decision = posthog.get_flags_decision('user123')"
+                        }
+                    ]
                 },
                 {
                     "id": "group_identify",
@@ -1277,54 +1279,47 @@
                     "description": "Identify a group and set its properties.",
                     "details": "",
                     "category": "Identification",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.group_identify('company', 'company_123', properties={'name': 'PostHog Inc.'})"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "group_type",
                             "description": "The type of group (e.g., 'company', 'team').",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         },
                         {
                             "name": "group_key",
                             "description": "The unique identifier for the group.",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         },
                         {
                             "name": "properties",
                             "description": "A dictionary of properties to set on the group.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "timestamp",
                             "description": "The timestamp of the event.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "uuid",
                             "description": "A unique identifier for the event.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this event.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user performing the action.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1333,74 +1328,74 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "posthog.group_identify('company', 'company_id_in_your_db', {\n    'name': 'Awesome Inc.',\n    'employees': 11\n})"
+                        }
+                    ]
                 },
                 {
                     "id": "join",
                     "title": "join",
-                    "description": "End the consumer thread once the queue is empty. Do not use directly, call `shutdown()` instead.  Examples:     ```python     posthog.join()     ```",
+                    "description": "End the consumer thread once the queue is empty. Do not use directly, call `shutdown()` instead.",
                     "details": "",
                     "category": null,
+                    "params": [],
+                    "showDocs": true,
+                    "releaseTag": "public",
+                    "returnType": {
+                        "id": "return_type",
+                        "name": "void"
+                    },
                     "examples": [
                         {
                             "id": "example_1",
                             "name": "Example 1",
                             "code": "posthog.join()"
                         }
-                    ],
+                    ]
+                },
+                {
+                    "id": "load_feature_flags",
+                    "title": "load_feature_flags",
+                    "description": "Load feature flags for local evaluation.",
+                    "details": "",
+                    "category": "Feature Flags",
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
-                },
-                {
-                    "id": "load_feature_flags",
-                    "title": "load_feature_flags",
-                    "description": "Load feature flags for local evaluation.  Examples:     ```python     posthog.load_feature_flags()     ```  Category:     Feature Flags",
-                    "details": "",
-                    "category": "Feature Flags",
+                    },
                     "examples": [
                         {
                             "id": "example_1",
                             "name": "Example 1",
                             "code": "posthog.load_feature_flags()"
                         }
-                    ],
-                    "params": [],
-                    "showDocs": true,
-                    "releaseTag": "public",
-                    "returnType": {
-                        "id": "return_type",
-                        "name": "void"
-                    }
+                    ]
                 },
                 {
                     "id": "new_context",
                     "title": "new_context",
-                    "description": "Create a new context for managing shared state.",
+                    "description": "Create a new context for managing shared state. Learn more about [contexts](/docs/libraries/python#contexts).",
                     "details": "",
                     "category": "Contexts",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "with posthog.new_context():\n    posthog.identify_context('<distinct_id>')\n    posthog.capture('event_name')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "fresh",
                             "description": "Whether to create a fresh context that doesn't inherit from parent.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "capture_exceptions",
                             "description": "Whether to automatically capture exceptions in this context.",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         }
                     ],
@@ -1409,7 +1404,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "with posthog.new_context():\n    identify_context('<distinct_id>')\n    posthog.capture('event_name')"
+                        }
+                    ]
                 },
                 {
                     "id": "set",
@@ -1417,18 +1419,11 @@
                     "description": "Set properties on a person profile.",
                     "details": "",
                     "category": "Identification",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.set(distinct_id='user123', properties={'name': 'John Doe'})"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalSetArgs]"
                         }
                     ],
@@ -1437,7 +1432,19 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[str]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Set with distinct id",
+                            "code": "# Set with distinct id\nposthog.capture(\n    'event_name',\n    distinct_id='user-distinct-id',\n    properties={\n        '$set': {'name': 'Max Hedgehog'},\n        '$set_once': {'initial_url': '/blog'}\n    }\n)"
+                        },
+                        {
+                            "id": "example_2",
+                            "name": "Set using context",
+                            "code": "# Set using context\nfrom posthog import new_context, identify_context\nwith new_context():\n    identify_context('user-distinct-id')\n    posthog.capture('event_name')"
+                        }
+                    ]
                 },
                 {
                     "id": "set_once",
@@ -1445,18 +1452,11 @@
                     "description": "Set properties on a person profile only if they haven't been set before.",
                     "details": "",
                     "category": "Identification",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.set_once(distinct_id='user123', properties={'initial_signup_date': '2024-01-01'})"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalSetArgs]"
                         }
                     ],
@@ -1465,28 +1465,35 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[str]"
-                    }
-                },
-                {
-                    "id": "shutdown",
-                    "title": "shutdown",
-                    "description": "Flush all messages and cleanly shutdown the client. Call this before the process ends in serverless environments to avoid data loss.  Examples:     ```python     posthog.shutdown()     ```",
-                    "details": "",
-                    "category": null,
+                    },
                     "examples": [
                         {
                             "id": "example_1",
                             "name": "Example 1",
-                            "code": "posthog.shutdown()"
+                            "code": "posthog.set_once(distinct_id='user123', properties={'initial_signup_date': '2024-01-01'})"
                         }
-                    ],
+                    ]
+                },
+                {
+                    "id": "shutdown",
+                    "title": "shutdown",
+                    "description": "Flush all messages and cleanly shutdown the client. Call this before the process ends in serverless environments to avoid data loss.",
+                    "details": "",
+                    "category": null,
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "posthog.shutdown()"
+                        }
+                    ]
                 }
             ]
         },
@@ -1501,42 +1508,35 @@
                     "description": "Associate user behaviour before and after they e.g. register, login, or perform some other identifying action.",
                     "details": "To marry up whatever a user does before they sign up or log in with what they do after you need to make an alias call. This will allow you to answer questions like \"Which marketing channels leads to users churning after a month?\" or \"What do users do on our website before signing up?\". Particularly useful for associating user behaviour before and after they e.g. register, login, or perform some other identifying action.",
                     "category": "Identification",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.alias('anonymous session id', 'distinct id')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "previous_id",
                             "description": "The unique ID of the user before",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The current unique id",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "timestamp",
                             "description": "Optional timestamp for the event",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "uuid",
                             "description": "Optional UUID for the event",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP lookup",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1545,7 +1545,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Alias user",
+                            "code": "# Alias user\nfrom posthog import alias\nalias(previous_id='distinct_id', distinct_id='alias_id')"
+                        }
+                    ]
                 },
                 {
                     "id": "capture",
@@ -1553,24 +1560,17 @@
                     "description": "Capture anything a user does within your system.",
                     "details": "Capture allows you to capture anything a user does within your system, which you can later use in PostHog to find patterns in usage, work out which features to improve or where people are giving up. A capture call requires an event name to specify the event. We recommend using [verb] [noun], like `movie played` or `movie updated` to easily identify what your events mean later on. Capture takes a number of optional arguments, which are defined by the `OptionalCaptureArgs` type.",
                     "category": "Events",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Enter a new context (e.g. a request/response cycle, an instance of a background job, etc)",
-                            "code": "# Enter a new context (e.g. a request/response cycle, an instance of a background job, etc)\nwith posthog.new_context():\n    # Associate this context with some user, by distinct_id\n    posthog.identify_context('some user')\n\n    # Capture an event, associated with the context-level distinct ID ('some user')\n    posthog.capture('movie started')\n\n    # Capture an event associated with some other user (overriding the context-level distinct ID)\n    posthog.capture('movie joined', distinct_id='some-other-user')\n\n    # Capture an event with some properties\n    posthog.capture('movie played', properties={'movie_id': '123', 'category': 'romcom'})\n\n    # Capture an event with some properties\n    posthog.capture('purchase', properties={'product_id': '123', 'category': 'romcom'})\n    # Capture an event with some associated group\n    posthog.capture('purchase', groups={'company': 'id:5'})\n\n    # Adding a tag to the current context will cause it to appear on all subsequent events\n    posthog.tag_context('some-tag', 'some-value')\n\n    posthog.capture('another-event') # Will be captured with `'some-tag': 'some-value'` in the properties dict"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "event",
                             "description": "The event name to specify the event",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         },
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalCaptureArgs]"
                         }
                     ],
@@ -1579,7 +1579,19 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[str]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Context and capture usage",
+                            "code": "# Context and capture usage\nfrom posthog import new_context, identify_context, tag_context, capture\n# Enter a new context (e.g. a request/response cycle, an instance of a background job, etc)\nwith new_context():\n    # Associate this context with some user, by distinct_id\n    identify_context('some user')\n\n    # Capture an event, associated with the context-level distinct ID ('some user')\n    capture('movie started')\n\n    # Capture an event associated with some other user (overriding the context-level distinct ID)\n    capture('movie joined', distinct_id='some-other-user')\n\n    # Capture an event with some properties\n    capture('movie played', properties={'movie_id': '123', 'category': 'romcom'})\n\n    # Capture an event with some properties\n    capture('purchase', properties={'product_id': '123', 'category': 'romcom'})\n    # Capture an event with some associated group\n    capture('purchase', groups={'company': 'id:5'})\n\n    # Adding a tag to the current context will cause it to appear on all subsequent events\n    tag_context('some-tag', 'some-value')\n\n    capture('another-event') # Will be captured with `'some-tag': 'some-value'` in the properties dict"
+                        },
+                        {
+                            "id": "example_2",
+                            "name": "Set event properties",
+                            "code": "# Set event properties\nfrom posthog import capture\ncapture(\n    \"distinct_id_of_the_user\",\n    \"user_signed_up\",\n    {\n        \"login_type\": \"email\",\n        \"is_free_trial\": \"true\"\n    }\n)"
+                        }
+                    ]
                 },
                 {
                     "id": "capture_exception",
@@ -1587,24 +1599,17 @@
                     "description": "Capture exceptions that happen in your code.",
                     "details": "Capture exception is idempotent - if it is called twice with the same exception instance, only a occurrence will be tracked in posthog. This is because, generally, contexts will cause exceptions to be captured automatically. However, to ensure you track an exception, if you catch and do not re-raise it, capturing it manually is recommended, unless you are certain it will have crossed a context boundary (e.g. by existing a `with posthog.new_context():` block already). If the passed exception was raised and caught, the captured stack trace will consist of every frame between where the exception was raised and the point at which it is captured (the \"traceback\"). If the passed exception was never raised, e.g. if you call `posthog.capture_exception(ValueError(\"Some Error\"))`, the stack trace captured will be the full stack trace at the moment the exception was captured. Note that heavy use of contexts will lead to truncated stack traces, as the exception will be captured by the context entered most recently, which may not be the point you catch the exception for the final time in your code. It's recommended to use contexts sparingly, for this reason. `capture_exception` takes the same set of optional arguments as `capture`.",
                     "category": "Events",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "try:\n    risky_operation()\nexcept Exception as e:\n    posthog.capture_exception(e)"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "exception",
                             "description": "The exception to capture. If not provided, the current exception is captured via `sys.exc_info()`",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "BaseException"
                         },
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalCaptureArgs]"
                         }
                     ],
@@ -1613,7 +1618,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Capture exception",
+                            "code": "# Capture exception\nfrom posthog import capture_exception\ntry:\n    risky_operation()\nexcept Exception as e:\n    capture_exception(e)"
+                        }
+                    ]
                 },
                 {
                     "id": "feature_enabled",
@@ -1621,65 +1633,53 @@
                     "description": "Use feature flags to enable or disable features for users.",
                     "details": "You can call `posthog.load_feature_flags()` before to make sure you're not doing unexpected requests.",
                     "category": "Feature flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "if posthog.feature_enabled('beta feature', 'distinct id'):\n    # do something"
-                        },
-                        {
-                            "id": "example_2",
-                            "name": "Example 2",
-                            "code": "if posthog.feature_enabled('groups feature', 'distinct id', groups={\"organization\": \"5\"}):\n    # do something"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "key",
                             "description": "The feature flag key",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The user's distinct ID",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "Groups mapping",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "Person properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "Group properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to evaluate only locally",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "send_feature_flag_events",
                             "description": "Whether to send feature flag events",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP lookup",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1688,49 +1688,56 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Boolean feature flag",
+                            "code": "# Boolean feature flag\nfrom posthog import feature_enabled, get_feature_flag_payload\nis_my_flag_enabled = feature_enabled('flag-key', 'distinct_id_of_your_user')\nif is_my_flag_enabled:\n    matched_flag_payload = get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
+                        }
+                    ]
                 },
                 {
                     "id": "feature_flag_definitions",
                     "title": "feature_flag_definitions",
-                    "description": "Returns loaded feature flags.  Details:     Returns loaded feature flags, if any. Helpful for debugging what flag information you have loaded.  Examples:     ```python     definitions = posthog.feature_flag_definitions()     ```  Category:     Feature flags",
+                    "description": "Returns loaded feature flags.",
                     "details": "Returns loaded feature flags, if any. Helpful for debugging what flag information you have loaded.",
                     "category": "Feature flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "definitions = posthog.feature_flag_definitions()"
-                        }
-                    ],
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import feature_flag_definitions\ndefinitions = feature_flag_definitions()"
+                        }
+                    ]
                 },
                 {
                     "id": "flush",
                     "title": "flush",
-                    "description": "Tell the client to flush.  Examples:     ```python     posthog.flush()     ```  Category:     Client management",
+                    "description": "Tell the client to flush.",
                     "details": "",
                     "category": "Client management",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.flush()"
-                        }
-                    ],
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import flush\nflush()"
+                        }
+                    ]
                 },
                 {
                     "id": "get_all_flags",
@@ -1738,48 +1745,41 @@
                     "description": "Get all flags for a given user.",
                     "details": "Flags are key-value pairs where the key is the flag key and the value is the flag variant, or True, or False.",
                     "category": "Feature flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "flags = posthog.get_all_flags('distinct_id')"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The user's distinct ID",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "Groups mapping",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "Person properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "Group properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to evaluate only locally",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP lookup",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1788,7 +1788,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[dict[str, FeatureFlag]]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "All flags for user",
+                            "code": "# All flags for user\nfrom posthog import get_all_flags\nget_all_flags('distinct_id_of_your_user')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_feature_flag",
@@ -1796,65 +1803,53 @@
                     "description": "Get feature flag variant for users. Used with experiments.",
                     "details": "`groups` are a mapping from group type to group key. So, if you have a group type of \"organization\" and a group key of \"5\", you would pass groups={\"organization\": \"5\"}. `group_properties` take the format: { group_type_name: { group_properties } }. So, for example, if you have the group type \"organization\" and the group key \"5\", with the properties name, and employee count, you'll send these as: group_properties={\"organization\": {\"name\": \"PostHog\", \"employees\": 11}}.",
                     "category": "Feature flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "if posthog.get_feature_flag('beta-feature', 'distinct_id') == 'test-variant':\n    # do test variant code"
-                        },
-                        {
-                            "id": "example_2",
-                            "name": "Example 2",
-                            "code": "if posthog.get_feature_flag('beta-feature', 'distinct_id') == 'control':\n    # do control code"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "key",
                             "description": "The feature flag key",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The user's distinct ID",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
                             "description": "Groups mapping from group type to group key",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
                             "description": "Person properties",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
                             "description": "Group properties in format { group_type_name: { group_properties } }",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
                             "description": "Whether to evaluate only locally",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "send_feature_flag_events",
                             "description": "Whether to send feature flag events",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP lookup",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1863,7 +1858,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[FeatureFlag]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Multivariate feature flag",
+                            "code": "# Multivariate feature flag\nfrom posthog import get_feature_flag, get_feature_flag_payload\nenabled_variant = get_feature_flag('flag-key', 'distinct_id_of_your_user')\nif enabled_variant == 'variant-key':\n    matched_flag_payload = get_feature_flag_payload('flag-key', 'distinct_id_of_your_user')"
+                        }
+                    ]
                 },
                 {
                     "id": "get_remote_config_payload",
@@ -1871,18 +1873,11 @@
                     "description": "Get the payload for a remote config feature flag.",
                     "details": "",
                     "category": null,
-                    "examples": [
-                        {
-                            "id": "generated_example_1",
-                            "name": "Basic usage",
-                            "code": "get_remote_config_payload(key=\"key_value\")"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "key",
                             "description": "The key of the feature flag",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         }
                     ],
@@ -1899,48 +1894,41 @@
                     "description": "Set properties on a group.",
                     "details": "",
                     "category": "Identification",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.group_identify('company', 5, {\n    'employees': 11,\n})"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "group_type",
                             "description": "Type of your group",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "group_key",
                             "description": "Unique identifier of the group",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "properties",
                             "description": "Properties to set on the group",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "timestamp",
                             "description": "Optional timestamp for the event",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "uuid",
                             "description": "Optional UUID for the event",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP lookup",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "any"
                         }
                     ],
@@ -1949,7 +1937,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Group identify",
+                            "code": "# Group identify\nfrom posthog import group_identify\ngroup_identify('company', 'company_id_in_your_db', {\n    'name': 'Awesome Inc.',\n    'employees': 11\n})"
+                        }
+                    ]
                 },
                 {
                     "id": "identify_context",
@@ -1957,18 +1952,11 @@
                     "description": "Identify the current context with a distinct ID.",
                     "details": "",
                     "category": "Identification",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.identify_context(\"user_123\")"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID to associate with the current context and its children",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         }
                     ],
@@ -1977,49 +1965,56 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import identify_context\nidentify_context(\"user_123\")"
+                        }
+                    ]
                 },
                 {
                     "id": "join",
                     "title": "join",
-                    "description": "Block program until the client clears the queue.  Examples:     ```python     posthog.join()     ```  Category:     Client management",
+                    "description": "Block program until the client clears the queue.",
                     "details": "",
                     "category": "Client management",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.join()"
-                        }
-                    ],
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import join\njoin()"
+                        }
+                    ]
                 },
                 {
                     "id": "load_feature_flags",
                     "title": "load_feature_flags",
-                    "description": "Load feature flag definitions from PostHog.  Examples:     ```python     posthog.load_feature_flags()     ```  Category:     Feature flags",
+                    "description": "Load feature flag definitions from PostHog.",
                     "details": "",
                     "category": "Feature flags",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.load_feature_flags()"
-                        }
-                    ],
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import load_feature_flags\nload_feature_flags()"
+                        }
+                    ]
                 },
                 {
                     "id": "new_context",
@@ -2027,24 +2022,17 @@
                     "description": "Create a new context scope that will be active for the duration of the with block.",
                     "details": "",
                     "category": "Contexts",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "with posthog.new_context():\n    posthog.tag(\"request_id\", \"123\")\n    posthog.capture(\"event_name\", properties={\"property\": \"value\"})"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "fresh",
                             "description": "Whether to start with a fresh context (default: False)",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "capture_exceptions",
                             "description": "Whether to capture exceptions raised within the context (default: True)",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         }
                     ],
@@ -2053,7 +2041,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import new_context, tag, capture\nwith new_context():\n    tag(\"request_id\", \"123\")\n    capture(\"event_name\", properties={\"property\": \"value\"})"
+                        }
+                    ]
                 },
                 {
                     "id": "scoped",
@@ -2061,24 +2056,17 @@
                     "description": "Decorator that creates a new context for the function.",
                     "details": "",
                     "category": "Contexts",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "@posthog.scoped()\ndef process_payment(payment_id):\n    posthog.tag(\"payment_id\", payment_id)\n    posthog.capture(\"payment_started\")"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "fresh",
                             "description": "Whether to start with a fresh context (default: False)",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "capture_exceptions",
                             "description": "Whether to capture and track exceptions with posthog error tracking (default: True)",
-                            "isOptional": true,
+                            "isOptional": false,
                             "type": "bool"
                         }
                     ],
@@ -2087,26 +2075,26 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
-                },
-                {
-                    "id": "set",
-                    "title": "set",
-                    "description": "Set properties on a user record.  Details:     This will overwrite previous people property values. Generally operates similar to `capture`, with distinct_id being an optional argument, defaulting to the current context's distinct ID. If there is no context-level distinct ID, and no override distinct_id is passed, this function will do nothing. Context tags are folded into $set properties, so tagging the current context and then calling `set` will cause those tags to be set on the user (unlike capture, which causes them to just be set on the event).  Examples:     ```python     posthog.set(distinct_id='distinct id', properties={         'current_browser': 'Chrome',     })     ```  Category:     Identification",
-                    "details": "This will overwrite previous people property values. Generally operates similar to `capture`, with distinct_id being an optional argument, defaulting to the current context's distinct ID. If there is no context-level distinct ID, and no override distinct_id is passed, this function will do nothing. Context tags are folded into $set properties, so tagging the current context and then calling `set` will cause those tags to be set on the user (unlike capture, which causes them to just be set on the event).",
-                    "category": "Identification",
+                    },
                     "examples": [
                         {
                             "id": "example_1",
                             "name": "Example 1",
-                            "code": "posthog.set(distinct_id='distinct id', properties={\n    'current_browser': 'Chrome',\n})"
+                            "code": "from posthog import scoped, tag, capture\n@scoped()\ndef process_payment(payment_id):\n    tag(\"payment_id\", payment_id)\n    capture(\"payment_started\")"
                         }
-                    ],
+                    ]
+                },
+                {
+                    "id": "set",
+                    "title": "set",
+                    "description": "Set properties on a user record.",
+                    "details": "This will overwrite previous people property values. Generally operates similar to `capture`, with distinct_id being an optional argument, defaulting to the current context's distinct ID. If there is no context-level distinct ID, and no override distinct_id is passed, this function will do nothing. Context tags are folded into $set properties, so tagging the current context and then calling `set` will cause those tags to be set on the user (unlike capture, which causes them to just be set on the event).",
+                    "category": "Identification",
                     "params": [
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalSetArgs]"
                         }
                     ],
@@ -2115,7 +2103,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[str]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Set person properties",
+                            "code": "# Set person properties\nfrom posthog import capture\ncapture(\n    'distinct_id',\n    event='event_name',\n    properties={\n        '$set': {'name': 'Max Hedgehog'},\n        '$set_once': {'initial_url': '/blog'}\n    }\n)"
+                        }
+                    ]
                 },
                 {
                     "id": "set_context_session",
@@ -2123,18 +2118,11 @@
                     "description": "Set the session ID for the current context.",
                     "details": "",
                     "category": "Contexts",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.set_context_session(\"session_123\")"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "session_id",
                             "description": "The session ID to associate with the current context and its children",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         }
                     ],
@@ -2143,26 +2131,26 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
-                },
-                {
-                    "id": "set_once",
-                    "title": "set_once",
-                    "description": "Set properties on a user record, only if they do not yet exist.  Details:     This will not overwrite previous people property values, unlike `set`. Otherwise, operates in an identical manner to `set`.  Examples:     ```python     posthog.set_once(distinct_id='user_123', properties={         'first_seen': '2023-01-01',     })     ```  Category:     Identification",
-                    "details": "This will not overwrite previous people property values, unlike `set`. Otherwise, operates in an identical manner to `set`.",
-                    "category": "Identification",
+                    },
                     "examples": [
                         {
                             "id": "example_1",
                             "name": "Example 1",
-                            "code": "posthog.set_once(distinct_id='user_123', properties={\n    'first_seen': '2023-01-01',\n})"
+                            "code": "from posthog import set_context_session\nset_context_session(\"session_123\")"
                         }
-                    ],
+                    ]
+                },
+                {
+                    "id": "set_once",
+                    "title": "set_once",
+                    "description": "Set properties on a user record, only if they do not yet exist.",
+                    "details": "This will not overwrite previous people property values, unlike `set`. Otherwise, operates in an identical manner to `set`.",
+                    "category": "Identification",
                     "params": [
                         {
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Unpack[OptionalSetArgs]"
                         }
                     ],
@@ -2171,28 +2159,35 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[str]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Set property once",
+                            "code": "# Set property once\nfrom posthog import capture\ncapture(\n    'distinct_id',\n    event='event_name',\n    properties={\n        '$set': {'name': 'Max Hedgehog'},\n        '$set_once': {'initial_url': '/blog'}\n    }\n)"
+                        }
+                    ]
                 },
                 {
                     "id": "shutdown",
                     "title": "shutdown",
-                    "description": "Flush all messages and cleanly shutdown the client.  Examples:     ```python     posthog.shutdown()     ```  Category:     Client management",
+                    "description": "Flush all messages and cleanly shutdown the client.",
                     "details": "",
                     "category": "Client management",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.shutdown()"
-                        }
-                    ],
                     "params": [],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import shutdown\nshutdown()"
+                        }
+                    ]
                 },
                 {
                     "id": "tag",
@@ -2200,24 +2195,17 @@
                     "description": "Add a tag to the current context.",
                     "details": "",
                     "category": "Contexts",
-                    "examples": [
-                        {
-                            "id": "example_1",
-                            "name": "Example 1",
-                            "code": "posthog.tag(\"user_id\", \"123\")"
-                        }
-                    ],
                     "params": [
                         {
                             "name": "name",
                             "description": "The tag key",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "str"
                         },
                         {
                             "name": "value",
                             "description": "The tag value",
-                            "isOptional": false,
+                            "isOptional": true,
                             "type": "Any"
                         }
                     ],
@@ -2226,7 +2214,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "void"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "from posthog import tag\ntag(\"user_id\", \"123\")"
+                        }
+                    ]
                 }
             ]
         }
