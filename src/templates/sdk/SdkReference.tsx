@@ -187,7 +187,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                 {groupFunctionsByCategory(classData.functions).map(({ label, functions }, idx) => (
                                     <div key={label || 'other-methods'}>
                                         {/* Only show a heading if label is not null and not "Other methods" */}
-                                        {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label}</h3>}
+                                        {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label} methods</h3>}
                                         {/* If label is null, show "Other methods" heading */}
                                         {!label && <h3 className="text-xl font-semibold mb-2 mt-8">Other methods</h3>}
                                         {functions.map((func) => (
@@ -197,7 +197,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                             >
                                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                                                     <div className="space-y-6">
-                                                        <h4 className="text-2xl my-0 font-bold">
+                                                        <h4 className="text-lg my-0 font-bold">
                                                             <code>{func.title}</code>
                                                             {func.releaseTag && (
                                                                 <span
