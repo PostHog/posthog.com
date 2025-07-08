@@ -67,9 +67,9 @@ export default defineNuxtConfig({
 
 ```js file=server/api/example.js focusOnLines=7-27
 export default defineEventHandler(async (event) => {
-  const distinctId = getCookie(event, 'distinct_id')
+  const rawCookie = getCookie(event, `ph_${runtimeConfig.public.posthogPublicKey}_posthog`)
+  const distinctID = rawCookie ? JSON.parse(rawCookie)?.distinct_id : undefined
   const url = getRequestURL(event)
-  const pathname = url.pathname 
   const query = getQuery(event)
 
   const { PostHog } = await import('posthog-node');
@@ -79,8 +79,6 @@ export default defineEventHandler(async (event) => {
     runtimeConfig.public.posthogPublicKey,
     { 
       host: runtimeConfig.public.posthogHost, 
-      defaults: runtimeConfig.public.posthogDefaults,
-      capture_pageview: false
     }
   );
 
@@ -88,7 +86,7 @@ export default defineEventHandler(async (event) => {
     event: 'api_call',
     distinctId: distinctId,
     properties: {
-      pathname: pathname,
+      $current_url: url,
       query: query
     }
   })

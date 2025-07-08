@@ -36,8 +36,6 @@ export default defineEventHandler(async (event) => {
     runtimeConfig.public.posthogPublicKey,
     { 
       host: runtimeConfig.public.posthogHost, 
-      defaults: runtimeConfig.public.posthogDefaults,
-      capture_pageview: false
     }
   );
 
@@ -49,7 +47,6 @@ export default defineEventHandler(async (event) => {
   }
 })
 ```
-
 
 #### 2. Automatically
 
