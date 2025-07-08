@@ -24,7 +24,7 @@ You can find all per-product activation queries on [this dashboard](https://us.p
 
 ### Picking the right activation criteria
 
-The ideal activation metric is a combination of a high number of companies going from intent to activation, and then from activation to retention. To find a couple of potential definitions, you want to look at product usage and think about what behaviour *could* correlate with successful activation (aka the "aha-moment"). This could be things such as
+The ideal activation metric strikes a balance: enough companies should reach activation (so it's not too restrictive), while those who activate should have high retention (so it's not too easy). To find a couple of potential definitions, you want to look at product usage and think about what behaviour *could* correlate with successful activation (aka the "aha-moment"). This could be things such as
 
 1. Has done a key event once (such as launched an experiment)
 2. Has done a key event multiple times (such as analyzed 2 insights)
