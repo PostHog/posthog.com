@@ -59,14 +59,27 @@ export default function ContactSales({ location }) {
         }
     }
 
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const script = document.createElement('script')
+            script.id = 'default-form-script'
+            script.innerHTML = `!function(t,e){const o=509041,n=482;let a=0,i=!1;t.__default__={form_id:o,team_id:n},function t(){const r=e.createElement("script");r.async=!0,r.src="https://import-cdn.default.com/v2/index.js",r.onload=()=>{i=!0,console.info("[Default.com] Powered by Default.com")},r.onerror=()=>{!function(t,e){try{fetch("https://nucleus.default.com/import/error",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({errorMessage:t,payload:{attempt:e,form_id:o,team_id:n,location:window.location.href,userAgent:navigator.userAgent,timestamp:Date.now()}})})}catch(t){}}("Script failed to load",a),++a<=3&&setTimeout(t,1e3*a)},e.head.appendChild(r)}()}(window,document);`
+            document.body.appendChild(script)
+        }
+        return () => {
+            if (typeof window !== 'undefined') {
+                const script = document.getElementById('default-form-script')
+                script?.remove()
+                const scriptTags = document.querySelectorAll('script[src*="default.com"]')
+                scriptTags.forEach((script) => {
+                    script.remove()
+                })
+            }
+        }
+    }, [])
+
     return (
         <Layout>
-            <Script
-                id="default-form-script"
-                dangerouslySetInnerHTML={{
-                    __html: `!function(t,e){const o=509041,n=482;let a=0,i=!1;t.__default__={form_id:o,team_id:n},function t(){const r=e.createElement("script");r.async=!0,r.src="https://import-cdn.default.com/v2/index.js",r.onload=()=>{i=!0,console.info("[Default.com] Powered by Default.com")},r.onerror=()=>{!function(t,e){try{fetch("https://nucleus.default.com/import/error",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({errorMessage:t,payload:{attempt:e,form_id:o,team_id:n,location:window.location.href,userAgent:navigator.userAgent,timestamp:Date.now()}})})}catch(t){}}("Script failed to load",a),++a<=3&&setTimeout(t,1e3*a)},e.head.appendChild(r)}()}(window,document);`,
-                }}
-            />
             <SEO
                 title="Talk to a human - PostHog"
                 description="PostHog is self-serve, but you can talk to a real person if you need to!"
