@@ -32,7 +32,7 @@ export default function IntegrationPrompt() {
                     </h4>
                 </div>
                 <p className="text-[15px] text-primary dark:text-primary-dark mb-4">
-                    Works with tools like{' '}
+                    Works in your terminal or with tools like{' '}
                     <Link to="https://cursor.com/api/auth/login" external={true}>
                         Cursor
                     </Link>
