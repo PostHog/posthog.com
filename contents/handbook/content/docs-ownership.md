@@ -36,7 +36,7 @@ As ever, though, PRs > issues. ;)
 
 ## Docs hero
 
-Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them.
+Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them. The rotation schedule can be found <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">here</PrivateLink>.
 
 The docs hero role exists to ensure we continue to ship ongoing improvements to the docs outside of specific projects we're working on.
 
