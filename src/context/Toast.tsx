@@ -7,6 +7,9 @@ export interface Toast {
     error?: boolean
     createdAt?: number
     onUndo?: () => void
+    onAction?: () => void
+    actionLabel?: string
+    duration?: number
 }
 
 interface ToastContext {

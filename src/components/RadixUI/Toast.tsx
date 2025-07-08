@@ -8,12 +8,18 @@ const Toast = ({
     title,
     description,
     onUndo,
+    onAction,
+    actionLabel = 'Undo',
     className = '',
+    duration,
 }: {
     title?: string
     description: string | (() => string)
     onUndo?: () => void
+    onAction?: () => void
+    actionLabel?: string
     className?: string
+    duration?: number
 }): JSX.Element => {
     const [open, setOpen] = React.useState(true)
 
@@ -23,7 +29,7 @@ const Toast = ({
                 className={`ToastRoot grid grid-cols-[auto_max-content] items-center gap-x-[15px] rounded-md bg-light dark:bg-accent border border-primary text-primary p-[15px] shadow-[hsl(206_22%_7%_/_35%)_0px_10px_38px_-10px,_hsl(206_22%_7%_/_20%)_0px_10px_20px_-15px] [grid-template-areas:_'title_action'_'description_action'] data-[swipe=cancel]:translate-x-0 data-[swipe=move]:translate-x-[var(--radix-toast-swipe-move-x)] data-[state=closed]:animate-swipeOut data-[state=open]:animate-slideIn data-[swipe=end]:animate-swipeOut data-[swipe=cancel]:transition-[transform_200ms_ease-out] ${className}`}
                 open={open}
                 onOpenChange={setOpen}
-                duration={3000}
+                duration={duration || 3000}
             >
                 <div className="not-prose">
                     {title && (
@@ -35,15 +41,15 @@ const Toast = ({
                         <p className="text-sm !my-0 text-secondary">{description}</p>
                     </RadixToast.Description>
                 </div>
-                {onUndo && (
+                {(onUndo || onAction) && (
                     <RadixToast.Action
-                        onClick={onUndo}
+                        onClick={onUndo || onAction}
                         className="[grid-area:_action]"
                         asChild
-                        altText="Goto schedule to undo"
+                        altText={actionLabel}
                     >
-                        <OSButton variant="ghost" size="sm" icon={<IconUndo />}>
-                            Undo
+                        <OSButton variant="ghost" size="sm" icon={onUndo ? <IconUndo /> : undefined}>
+                            {actionLabel}
                         </OSButton>
                     </RadixToast.Action>
                 )}

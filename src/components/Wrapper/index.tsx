@@ -4,6 +4,7 @@ import Desktop from 'components/Desktop'
 import TaskBarMenu from 'components/TaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
+import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 
 export default function Wrapper() {
     const { windows, constraintsRef } = useApp()
@@ -34,6 +35,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
+            <CookieBannerToast />
         </div>
     )
 }
