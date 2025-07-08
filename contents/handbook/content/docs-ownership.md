@@ -50,6 +50,8 @@ Some notes and tips:
 
 - Tutorials count as well.
 
+- Talk to your teammates and update the <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">rotation schedule</PrivateLink> if you need to swap weeks.
+
 ### Sources for inspiration
 
 There are lots of places you can go to find inspiration for what to work on during your stint, such as:
