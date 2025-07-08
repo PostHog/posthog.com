@@ -43,11 +43,9 @@ See the [JavaScript SDK docs](/docs/libraries/js/features) for all usable functi
 
 1. Install `posthog-node` using your package manager:
 
-```shell
-yarn add posthog-node
-# or
-npm install --save posthog-node
-```
+import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
+
+<InstallNodePackageManagers />
 
 2. Add your PostHog API key and host to your `nuxt.config.js` file. If you've already done this when adding PostHog to the client side, you can skip this step.
 
@@ -112,15 +110,9 @@ the `posthog` object and make it available across our application.
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
-```shell
-yarn add posthog-js
-```
+import InstallWebPackageManagers from "../integrate/_snippets/install-web-package-managers.mdx"
 
-or
-
-```shell
-npm install --save posthog-js
-```
+<InstallWebPackageManagers />
 
 After that we want to create a app in `plugins/posthog/index.js`
 
