@@ -73,6 +73,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Usage reports | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/usage-reports</span>  |
 | Web Analytics  | [Team Web Analytics][Team Web Analytics]  | <span class="lemon-tag gh-tag">feature/web-analytics</span>  |
 | Webhook delivery service | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
+| Activity log | [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/activity-log</span> |
 
 ## Don't just copy other products
 Some of the features we are building may exist in other products already. It is fine for us to be inspired by them - there's no need to reinvent the wheel when there is already a standard way our users expect things to work. However, it is not ok for us to say 'let's copy how X does it', or to ship something with the exact same look and feel as another product. This is bad for two reasons:
