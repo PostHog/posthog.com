@@ -43,7 +43,7 @@ Generally we've made the plumbing such that recording these product intents is q
 2. When someone clicks that button / views that page / does that thing, then simply call [`addProductIntent` in the `teamLogic`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/teamLogic.tsx#L155). That fires off an API request that records the product intent in the [database](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py) and sends the event for you. You don't need to send the event yourself - it's all handled.
     - You must include the _context_ of the intent with this API call, this is so that you can understand what is driving product intent in the analytics. You can store this in the `intent_context` - and you can find existing intent contexts [here](https://github.com/PostHog/posthog/blob/master/frontend/src/lib/utils/product-intents.ts).
 
-It's worth noting that adding new product intents will impact your [activation rate](/handbook/growth/growth-engineering/per-product-activation) and makes it harder to compare them historically, so please add new product intents with caution.
+It's worth noting that adding new product intents will impact your activation rates (e.g. an existing user intent might be stronger or weaker than an onboarding intent). If you are comparing activation rates historically, it might be worth filtering for intents that rarely change, such as "onboarding product selected".
 
 ## Cross Sells
 
