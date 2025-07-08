@@ -6,6 +6,7 @@ import {
     IconGraph,
     IconMessage,
     IconRewindPlay,
+    IconPlug,
     IconToggle,
     IconFunnels,
     IconTrends,
@@ -325,63 +326,51 @@ const initialProducts = [
                 ],
             },
             {
-                title: 'Dashboards',
-                headline: 'Create custom analytics dashboards',
-                description: 'Build and customize dashboards to monitor key metrics and share insights with your team.',
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png',
-                        alt: 'Dashboard visualization',
-                    },
-                ],
-                features: [
-                    {
-                        title: 'Custom layouts',
-                        description: 'Arrange insights in custom layouts to tell your data story',
-                    },
-                    {
-                        title: 'Real-time updates',
-                        description: 'See your metrics update in real-time as new data comes in',
-                    },
-                    {
-                        title: 'Sharing',
-                        description: 'Share dashboards with team members and stakeholders',
-                    },
-                    {
-                        title: 'Templates',
-                        description: 'Use pre-built templates for common analytics needs',
-                    },
-                ],
-            },
-            {
-                title: 'SQL',
-                headline: 'Write custom SQL queries',
+                title: 'Powerful tools & features',
+                headline: 'Everything you need for comprehensive analytics',
                 description:
-                    'Create custom insights using SQL to analyze your data in ways that go beyond standard insights.',
-                icon: <IconHogQL />,
-                color: 'purple',
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-sql.png',
-                        alt: 'SQL query visualization',
-                    },
-                ],
+                    'From automatic data capture to custom SQL queries, get all the tools for modern product analytics.',
                 features: [
                     {
-                        title: 'Custom queries',
-                        description: 'Write SQL queries to analyze your data in any way you need',
+                        title: 'Dashboards',
+                        description: 'Create custom dashboards to monitor key metrics and share insights',
                     },
                     {
-                        title: 'Advanced analysis',
-                        description: 'Perform complex calculations and data transformations',
+                        title: 'HogQL',
+                        description: 'Write SQL queries to analyze data in ways beyond standard insights',
                     },
                     {
-                        title: 'Data export',
-                        description: 'Export query results for further analysis',
+                        title: 'Autocapture',
+                        description:
+                            'Automatically capture clicks, pageviews, and form submissions without manual tracking',
                     },
                     {
-                        title: 'Query templates',
-                        description: 'Save and reuse common queries',
+                        title: 'LLM insights',
+                        description: 'Track costs, latency, and usage patterns for AI/LLM applications',
+                    },
+                    {
+                        title: 'Privacy controls',
+                        description: 'Limit data capture with sensitive info blocking and EU cloud options',
+                    },
+                    {
+                        title: 'Sharing & embedding',
+                        description: 'Share insights publicly or embed dashboards in your app',
+                    },
+                    {
+                        title: 'Subscriptions',
+                        description: 'Send regular reports via email or Slack on custom schedules',
+                    },
+                    {
+                        title: 'Alerts',
+                        description: 'Get notified when metrics exceed thresholds or change significantly',
+                    },
+                    {
+                        title: 'Sampling',
+                        description: 'Speed up complex queries on large datasets while maintaining accuracy',
+                    },
+                    {
+                        title: 'Group analytics',
+                        description: 'Analyze data at company or team level for B2B products',
                     },
                 ],
             },
@@ -2017,17 +2006,6 @@ window.posthog.onFeatureFlags(function () {
         ],
     },
     {
-        Icon: IconFlask,
-        name: 'Experiments',
-        handle: 'feature_flags',
-        type: 'feature_flags',
-        color: 'purple',
-        colorSecondary: 'lilac',
-        category: 'product',
-        billedWith: 'Feature flags',
-        slug: 'experiments',
-    },
-    {
         Icon: IconMessage,
         name: 'Surveys',
         handle: 'surveys',
@@ -2822,8 +2800,10 @@ window.posthog.onFeatureFlags(function () {
         ],
     },
     {
-        Icon: IconDatabase, // Note: Should be IconPlug but using IconDatabase as placeholder
+        Icon: IconPlug,
         name: 'CDP',
+        description: 'Get data into PostHog and send it where it needs to go.',
+        // handle: 'data_pipelines',
         handle: 'cdp',
         type: 'cdp',
         slug: 'cdp',
@@ -2848,6 +2828,184 @@ window.posthog.onFeatureFlags(function () {
                 classes: '',
             },
         ],
+        features: [
+            {
+                title: 'Sources & destinations',
+                headline: 'Connect 60+ tools to your data pipeline',
+                description: 'Import data from your existing systems and export PostHog data anywhere you need it.',
+                images: [
+                    {
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
+                        alt: 'CDP sources and destinations',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Data warehouse sources',
+                        description: 'Import from Stripe, Hubspot, Salesforce, and more to join with product data',
+                    },
+                    {
+                        title: 'Real-time destinations',
+                        description: 'Send events to Slack, webhooks, and 40+ tools as they happen',
+                    },
+                    {
+                        title: 'Batch exports',
+                        description: 'Reliable scheduled exports to S3, Snowflake, BigQuery, and more',
+                    },
+                    {
+                        title: 'Custom transformations',
+                        description: 'Filter, modify, and enrich data before sending to destinations',
+                    },
+                    {
+                        title: 'No-code setup',
+                        description: 'Configure sources and destinations through the UI, no engineering required',
+                    },
+                ],
+            },
+            {
+                title: 'Data transformation',
+                headline: 'Clean, filter, and enrich your data',
+                description: 'Apply custom logic to your data pipeline with transformations that run on every event.',
+                features: [
+                    {
+                        title: 'Schema enforcement',
+                        description: 'Ensure data quality by validating events against defined schemas',
+                    },
+                    {
+                        title: 'Event labeling',
+                        description: 'Add custom properties to categorize and organize your events',
+                    },
+                    {
+                        title: 'Data filtering',
+                        description: 'Remove unwanted events or properties before they reach destinations',
+                    },
+                    {
+                        title: 'Property mapping',
+                        description: 'Transform property names and values to match destination requirements',
+                    },
+                    {
+                        title: 'Custom code',
+                        description: 'Write JavaScript transformations for complex logic',
+                    },
+                ],
+            },
+            {
+                title: 'Reliability & monitoring',
+                headline: 'Enterprise-grade data pipeline',
+                description:
+                    'Built for scale with monitoring, retries, and error handling to ensure your data flows reliably.',
+                features: [
+                    {
+                        title: 'Automatic retries',
+                        description: 'Failed deliveries retry automatically with exponential backoff',
+                    },
+                    {
+                        title: 'Error monitoring',
+                        description: 'Track delivery success rates and debug failures',
+                    },
+                    {
+                        title: 'Dead letter queue',
+                        description: 'Capture and recover events that fail processing',
+                    },
+                    {
+                        title: 'Performance metrics',
+                        description: 'Monitor throughput, latency, and resource usage',
+                    },
+                    {
+                        title: 'Scalable infrastructure',
+                        description: 'Handles millions of events per day without breaking a sweat',
+                    },
+                ],
+            },
+        ],
+        answers: [
+            {
+                q: "What's the difference between sources and destinations?",
+                a: 'Sources bring data INTO PostHog from external systems like your CRM or payment processor. Destinations send data FROM PostHog to other tools in your stack. Both work together to create a complete data pipeline.',
+            },
+            {
+                q: 'How reliable are batch exports?',
+                a: 'Very reliable. Batch exports run on a schedule with automatic retries, monitoring, and a dead letter queue for failed events. We guarantee at-least-once delivery to your destination.',
+            },
+            {
+                q: 'Can I transform data before sending it?',
+                a: 'Yes! Transformations let you filter, modify, and enrich events before they reach destinations. You can enforce schemas, add labels, map properties, or write custom JavaScript logic.',
+            },
+            {
+                q: "What's included in the free tier?",
+                a: 'The CDP add-on is required for destinations, but sources are free. You can import data from external systems at no cost - you only pay for the events you capture in PostHog.',
+            },
+        ],
+        comparison: {
+            comparison_companies: {
+                Segment: true,
+                mParticle: true,
+                RudderStack: true,
+                Fivetran: true,
+            },
+            comparison_rows: [
+                {
+                    feature: 'Number of integrations',
+                    companies: {
+                        Segment: '300+',
+                        mParticle: '300+',
+                        RudderStack: '200+',
+                        Fivetran: '500+',
+                        PostHog: '60+',
+                    },
+                },
+                {
+                    feature: 'Real-time streaming',
+                    companies: {
+                        Segment: true,
+                        mParticle: true,
+                        RudderStack: true,
+                        Fivetran: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Batch exports',
+                    companies: {
+                        Segment: true,
+                        mParticle: true,
+                        RudderStack: true,
+                        Fivetran: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Data warehouse sources',
+                    companies: {
+                        Segment: false,
+                        mParticle: false,
+                        RudderStack: true,
+                        Fivetran: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Built-in analytics',
+                    companies: {
+                        Segment: false,
+                        mParticle: false,
+                        RudderStack: false,
+                        Fivetran: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Starting price',
+                    companies: {
+                        Segment: '$120/mo',
+                        mParticle: 'Contact',
+                        RudderStack: '$500/mo',
+                        Fivetran: '$120/mo',
+                        PostHog: 'Free sources',
+                    },
+                },
+            ],
+        },
         pairsWith: [
             {
                 slug: 'product-analytics',
@@ -2862,7 +3020,7 @@ window.posthog.onFeatureFlags(function () {
         ],
     },
     {
-        Icon: IconDatabase, // Note: Should be IconPieChart but using IconDatabase as placeholder
+        Icon: IconGraph, // Using IconGraph for web analytics
         name: 'Web analytics',
         handle: 'web_analytics',
         type: 'web_analytics',
@@ -2872,13 +3030,15 @@ window.posthog.onFeatureFlags(function () {
         category: 'analytics',
         seo: {
             title: 'Web analytics - PostHog',
-            description: "It's like Google Analytics 3, but it still exists...",
+            description:
+                'Privacy-focused web analytics with pre-built dashboards, real-time data, and no sampling. The Google Analytics alternative that actually makes sense.',
         },
         answersDescription: 'Monitor your website traffic',
         sharesFreeTier: 'product_analytics',
         overview: {
-            title: 'Monitor your website traffic',
-            description: 'Web analytics for people who really liked GA3...',
+            title: 'Web analytics that just works',
+            description:
+                "Track visitors, pageviews, and conversions with a pre-built dashboard. No complex setup, real-time data, and privacy-focused. The GA4 alternative you've been looking for.",
             textColor: 'text-white', // tw
         },
         screenshots: [
@@ -2906,79 +3066,191 @@ window.posthog.onFeatureFlags(function () {
         },
         features: [
             {
-                title: 'Top paths',
-                headline: 'Top paths',
-                description: 'See the most visited pages on your site',
+                title: 'Core metrics',
+                headline: 'All the essential web analytics metrics',
+                description:
+                    'Track visitors, pageviews, sessions, bounce rate, and more with a pre-built dashboard that just works.',
                 images: [
                     {
-                        src: '/images/products/web-analytics/top-paths.jpg',
-                        alt: 'Top paths',
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png',
+                        alt: 'Web analytics dashboard',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Visitors & pageviews',
+                        description: 'Track unique visitors and total page views with real-time updates',
+                    },
+                    {
+                        title: 'Sessions & duration',
+                        description: 'Monitor visit frequency and how long users stay engaged',
+                    },
+                    {
+                        title: 'Bounce rate',
+                        description: 'See what percentage of users leave after viewing one page',
+                    },
+                    {
+                        title: 'Entry & exit paths',
+                        description: 'Understand where users start and end their journeys',
+                    },
+                    {
+                        title: 'Real-time visitors',
+                        description: 'See who is on your site right now with 30-second refresh',
                     },
                 ],
             },
             {
-                title: 'Top referrers',
-                headline: 'Top referrers',
-                description: 'Discover where traffic is coming from',
+                title: 'Traffic sources',
+                headline: 'Know exactly where your visitors come from',
+                description:
+                    'Track channels, referrers, UTMs, and create custom attribution channels for comprehensive source analysis.',
                 images: [
                     {
                         src: '/images/products/web-analytics/top-referrers.jpg',
-                        alt: 'Top referrers',
+                        alt: 'Traffic sources',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Channel attribution',
+                        description: 'Automatic categorization into Direct, Organic, Paid, Social, etc.',
+                    },
+                    {
+                        title: 'Referrer tracking',
+                        description: 'See which websites send you the most valuable traffic',
+                    },
+                    {
+                        title: 'UTM parameters',
+                        description: 'Full support for campaign, source, medium, content, and term',
+                    },
+                    {
+                        title: 'Custom channels',
+                        description: 'Define your own channels like AI, partners, or affiliates',
+                    },
+                    {
+                        title: 'Session explorer',
+                        description: 'Deep dive into individual session attribution details',
                     },
                 ],
             },
             {
-                title: 'Device types',
-                headline: 'Device types',
-                description: 'Break down traffic by device',
+                title: 'Advanced analytics',
+                headline: 'Go beyond basic metrics with powerful insights',
+                description: 'Track scroll depth, web vitals, conversions, and revenue directly in your web analytics.',
                 images: [
                     {
-                        src: '/images/products/web-analytics/device-types.jpg',
-                        alt: 'Device types',
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png',
+                        alt: 'Advanced analytics',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Scroll depth tracking',
+                        description: 'See how far users scroll and what content they actually read',
+                    },
+                    {
+                        title: 'Web vitals (LCP, FCP, INP, CLS)',
+                        description: 'Monitor Core Web Vitals for performance optimization',
+                    },
+                    {
+                        title: 'Conversion goals',
+                        description: 'Set up and track multiple conversion events',
+                    },
+                    {
+                        title: 'Revenue tracking',
+                        description: 'Connect revenue data from events or payment platforms',
+                    },
+                    {
+                        title: 'Active hours heatmap',
+                        description: 'Visualize when your users are most active',
                     },
                 ],
             },
             {
-                title: 'World map',
-                headline: 'World map',
-                description: 'Visualize users across planet earth',
+                title: 'Privacy & compliance',
+                headline: 'Analytics that respects user privacy',
+                description:
+                    'GDPR compliant, cookieless options, and ad blocker resilient tracking for better data coverage.',
+                features: [
+                    {
+                        title: 'Cookieless tracking',
+                        description: 'Option to track without cookies for strict privacy requirements',
+                    },
+                    {
+                        title: 'Anonymous mode',
+                        description: 'Significantly reduce costs with anonymous visitor tracking',
+                    },
+                    {
+                        title: 'GDPR compliant',
+                        description: 'Built with privacy regulations in mind from the start',
+                    },
+                    {
+                        title: 'Ad blocker resilient',
+                        description: 'Reverse proxy option reduces blocking by 70%+',
+                    },
+                    {
+                        title: 'Data residency',
+                        description: 'Choose between US and EU cloud hosting',
+                    },
+                ],
+            },
+            {
+                title: 'Device & demographics',
+                headline: 'Understand your audience better',
+                description: 'Break down traffic by device, browser, OS, and location to optimize for your users.',
                 images: [
                     {
                         src: '/images/products/web-analytics/world-map.jpg',
-                        alt: 'World map',
+                        alt: 'Demographics',
                     },
                 ],
-            },
-            {
-                title: 'Retention cohorts',
-                headline: 'Retention cohorts',
-                description: 'Analyze retention by week',
-                images: [
-                    {
-                        src: '/images/products/web-analytics/retention-cohorts.jpg',
-                        alt: 'Retention cohorts',
-                    },
-                ],
-            },
-            {
-                title: 'More features',
-                headline: 'More features',
                 features: [
                     {
-                        title: 'UTM tracking',
-                        description: 'See which campaigns perform best',
+                        title: 'Device types',
+                        description: 'Desktop vs mobile vs tablet breakdown',
                     },
                     {
-                        title: 'Scroll tracking',
-                        description: 'Discover how much users actually read',
+                        title: 'Browsers & OS',
+                        description: 'See which browsers and operating systems to support',
                     },
                     {
-                        title: 'Bounce tracking',
-                        description: 'Find out when users immediately get out of dodge',
+                        title: 'Geographic data',
+                        description: 'Country and city-level visitor location data',
                     },
                     {
-                        title: 'Duration tracking',
-                        description: 'Monitor how long users are hanging around',
+                        title: 'Screen sizes',
+                        description: 'Optimize for your most common screen resolutions',
+                    },
+                    {
+                        title: 'Bot detection',
+                        description: 'Automatic filtering of crawler and bot traffic',
+                    },
+                ],
+            },
+            {
+                title: 'Integration benefits',
+                headline: 'More than just web analytics',
+                description: 'Seamlessly switch between web and product analytics, all in one platform.',
+                features: [
+                    {
+                        title: 'Unified platform',
+                        description: 'Web analytics + product analytics + session replay + more',
+                    },
+                    {
+                        title: 'Shared events',
+                        description: 'Same events power multiple features, no duplicate tracking',
+                    },
+                    {
+                        title: 'Cross-domain tracking',
+                        description: 'Track users across multiple domains and subdomains',
+                    },
+                    {
+                        title: 'Backend integration',
+                        description: 'Connect server-side events with frontend sessions',
+                    },
+                    {
+                        title: 'Cost efficient',
+                        description: 'No additional cost beyond event usage',
                     },
                 ],
             },
@@ -3005,35 +3277,58 @@ window.posthog.onFeatureFlags(function () {
             {
                 question: 'How many visitors are coming back to my site regularly?',
             },
+            {
+                question: 'Which marketing campaigns drive the most conversions?',
+            },
+            {
+                question: 'How far are users scrolling on my landing pages?',
+            },
+            {
+                question: "What's my site's Core Web Vitals performance?",
+            },
+            {
+                question: 'How much revenue is each traffic source generating?',
+            },
+            {
+                question: 'When are my users most active during the day?',
+            },
         ],
         comparison: {
             summary: {
                 them: [
                     {
-                        title: 'You only need web analytics, nothing else',
+                        title: 'Complex setup and configuration',
+                        subtitle: 'GA4 requires extensive setup and custom events for basic tracking',
                     },
                     {
-                        title: "You don't need any integrations other than with Google",
+                        title: 'Sampled data',
+                        subtitle: 'GA4 samples data for large sites, missing important insights',
                     },
                     {
-                        title: 'You need to migrate data from GA4',
-                    },
-                    {
-                        title: 'You actually really like GA4 😱',
+                        title: 'Limited real-time data',
+                        subtitle: 'Most tools have delays or limited real-time capabilities',
                     },
                 ],
                 us: [
                     {
-                        title: 'You want to do more than just web analytics',
+                        title: 'Pre-built dashboard ready in minutes',
+                        subtitle: 'No complex setup - just add one snippet and go',
                     },
                     {
-                        title: "You don't want to spend weeks setting up dashboards",
+                        title: '100% accurate data, no sampling',
+                        subtitle: 'Every visitor and event is tracked, no matter your traffic',
                     },
                     {
-                        title: 'You need to comply with HIPAA',
+                        title: 'Privacy-focused with cookieless options',
+                        subtitle: 'GDPR compliant with EU hosting and anonymous tracking',
                     },
                     {
-                        title: "It's not GA4",
+                        title: 'Integrated with product analytics',
+                        subtitle: 'Seamlessly switch between web and product insights',
+                    },
+                    {
+                        title: 'Ad blocker resilient',
+                        subtitle: 'Reverse proxy reduces blocking by 70%+',
                     },
                 ],
             },
@@ -3107,7 +3402,7 @@ window.posthog.onFeatureFlags(function () {
                     companies: {
                         Matomo: true,
                         GA4: true,
-                        PostHog: false,
+                        PostHog: true,
                     },
                 },
                 {
@@ -3150,6 +3445,54 @@ window.posthog.onFeatureFlags(function () {
                         PostHog: true,
                     },
                 },
+                {
+                    feature: 'No data sampling',
+                    companies: {
+                        Matomo: true,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Scroll depth tracking',
+                    companies: {
+                        Matomo: false,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Custom channel types',
+                    companies: {
+                        Matomo: false,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Integrated product analytics',
+                    companies: {
+                        Matomo: false,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Revenue attribution',
+                    companies: {
+                        Matomo: false,
+                        GA4: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Ad blocker resilient',
+                    companies: {
+                        Matomo: false,
+                        GA4: false,
+                        PostHog: true,
+                    },
+                },
             ],
         },
         pairsWith: [
@@ -3171,7 +3514,7 @@ window.posthog.onFeatureFlags(function () {
         ],
     },
     {
-        Icon: IconDatabase, // Note: Should be IconFlask but using IconDatabase as placeholder
+        Icon: IconFlask,
         name: 'Experiments',
         handle: 'experiments',
         type: 'feature_flags', // Uses feature_flags billing
@@ -3189,7 +3532,7 @@ window.posthog.onFeatureFlags(function () {
         overview: {
             title: 'Test changes with statistical significance',
             description:
-                'A/B tests, multivariate tests, and robust targeting & exclusion rules. Analyze usage with product analytics and session replay.',
+                'Run A/B tests with our advanced Bayesian statistical engine. Check results anytime without p-hacking concerns, get clear win probabilities, and make confident decisions faster.',
             textColor: 'text-white', // tw
         },
         screenshots: [
@@ -3227,63 +3570,153 @@ window.posthog.onFeatureFlags(function () {
         },
         features: [
             {
-                title: 'Customizable goals',
-                headline: 'Customizable goals',
-                description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
+                title: 'Bayesian statistical engine',
+                headline: 'Advanced Bayesian statistics for faster decisions',
+                description:
+                    'Check results anytime without p-hacking concerns. Get clear win probabilities and credible intervals that show the likely range of improvement.',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
-                        alt: 'Customizable goals',
+                        alt: 'Bayesian statistics visualization',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Real-time results',
+                        description:
+                            'Check experiment results anytime without statistical penalties or peeking problems',
+                    },
+                    {
+                        title: 'Clear probability statements',
+                        description:
+                            'Get direct statements like "95% probability that variant B is better than control"',
+                    },
+                    {
+                        title: 'Credible intervals',
+                        description: 'See the likely range of improvement with visual confidence bands',
+                    },
+                    {
+                        title: 'No fixed sample sizes',
+                        description:
+                            'Make decisions when you have enough evidence, not when you hit an arbitrary number',
                     },
                 ],
             },
             {
-                title: 'Targeting & exclusion rules',
-                headline: 'Targeting & exclusion rules',
-                description: 'Set criteria for user location, person property, cohort, or group',
+                title: 'Flexible experiment types',
+                headline: 'Test any metric that matters to your business',
+                description:
+                    'Support for conversion funnels, count-based trends, value-based metrics, and custom goals',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png',
-                        alt: 'Targeting & exclusion rules',
+                        alt: 'Experiment metrics and goals',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Funnel metrics',
+                        description: 'Test conversion rates through multi-step user journeys',
+                    },
+                    {
+                        title: 'Count-based trends',
+                        description: 'Measure events like pageviews, clicks, or feature usage',
+                    },
+                    {
+                        title: 'Value-based trends',
+                        description: 'Track revenue, time spent, or any numeric value',
+                    },
+                    {
+                        title: 'Primary & secondary metrics',
+                        description: 'Monitor main goals while watching for negative side effects',
+                    },
+                    {
+                        title: 'Shared metrics library',
+                        description: 'Create reusable metrics across experiments for consistency',
                     },
                 ],
             },
             {
-                title: 'Recommendations',
-                headline: 'Recommendations',
+                title: 'Smart recommendations',
+                headline: 'Built-in guidance for successful experiments',
                 description:
-                    'Automatic suggestions for duration, sample size, and confidence threshold in a winning variant',
+                    'Get automatic recommendations for sample size, test duration, and minimum detectable effects based on your data',
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png',
-                        alt: 'Recommendations',
+                        alt: 'Smart recommendations',
+                    },
+                ],
+                features: [
+                    {
+                        title: 'Sample size calculator',
+                        description: 'Know how many users you need based on your minimum detectable effect',
+                    },
+                    {
+                        title: 'Duration estimates',
+                        description: 'Get recommendations on how long to run your test',
+                    },
+                    {
+                        title: 'Pre-launch checklist',
+                        description: 'Ensure your experiment is set up correctly before launch',
+                    },
+                    {
+                        title: 'Health monitoring',
+                        description: 'Automatic alerts for sample ratio mismatch and other issues',
                     },
                 ],
             },
             {
-                title: 'More features',
-                headline: 'More features',
+                title: 'Advanced targeting',
+                headline: 'Precise control over who sees your experiments',
+                description: 'Target by user properties, cohorts, geographic location, or custom conditions',
                 features: [
                     {
-                        title: 'Built on Feature Flags',
-                        description:
-                            'All the benefits of feature flags with added functionality around stat-sig experiments',
+                        title: 'User property targeting',
+                        description: 'Target based on any user attribute you track',
+                    },
+                    {
+                        title: 'Cohort integration',
+                        description: 'Run experiments on specific user segments or behavioral cohorts',
+                    },
+                    {
+                        title: 'Geographic targeting',
+                        description: 'Test changes in specific countries or regions',
+                    },
+                    {
+                        title: 'Percentage rollouts',
+                        description: 'Start small with 5% of users and scale up safely',
+                    },
+                    {
+                        title: 'Group-level experiments',
+                        description: 'Test at organization or team level for B2B products',
+                    },
+                ],
+            },
+            {
+                title: 'Developer-friendly implementation',
+                headline: 'Simple integration with powerful capabilities',
+                description: 'Built on our feature flag infrastructure with all major SDKs supported',
+                features: [
+                    {
+                        title: 'Feature flag foundation',
+                        description: 'Each experiment is a feature flag with statistical superpowers',
                     },
                     {
                         title: 'JSON payloads',
-                        description: 'Modify website content per-variant without additional deployments',
-                    },
-                    {
-                        title: 'Split testing',
-                        description: 'Automatically split traffic between variants',
+                        description: 'Pass configuration data to dynamically change experiences',
                     },
                     {
                         title: 'Multivariate testing',
-                        description: 'Test up to 9 variants against a control',
+                        description: 'Test up to 9 variants against a control group',
                     },
                     {
-                        title: 'Dynamic cohort support',
-                        description: 'Add new users to an experiment automatically by setting a person property',
+                        title: 'Local evaluation',
+                        description: 'Zero latency with cached flag values',
+                    },
+                    {
+                        title: 'All major platforms',
+                        description: 'SDKs for web, mobile, backend, and more',
                     },
                 ],
             },
@@ -3297,6 +3730,21 @@ window.posthog.onFeatureFlags(function () {
             },
             {
                 question: 'Will enterprise customers like this new feature?',
+            },
+            {
+                question: 'Which pricing model generates more revenue?',
+            },
+            {
+                question: 'Does simplifying our signup form reduce drop-off?',
+            },
+            {
+                question: 'Will this UI change improve user engagement?',
+            },
+            {
+                question: 'Should we show social proof on the landing page?',
+            },
+            {
+                question: 'Does the new checkout flow reduce cart abandonment?',
             },
         ],
         comparison: {
@@ -3314,19 +3762,27 @@ window.posthog.onFeatureFlags(function () {
                 ],
                 us: [
                     {
+                        title: 'Bayesian statistical engine',
+                        subtitle:
+                            'Check results anytime without p-hacking. Get clear win probabilities instead of confusing p-values.',
+                    },
+                    {
                         title: 'Integration with other PostHog products',
                         subtitle:
                             'Attach surveys to experiments or view replays for a test group. Analyze results beyond your initial hypothesis or goal metric.',
                     },
                     {
-                        title: 'Automated recommendations for sample sizes and runtime',
+                        title: 'No fixed sample size requirements',
+                        subtitle: 'Make decisions when you have enough evidence, not when you hit an arbitrary number',
                     },
                     {
-                        title: 'Automatic significance calculator – to help you figure out the winning variant as quickly as possible',
+                        title: 'Group-level experiments for B2B',
+                        subtitle:
+                            'Test features at the organization level to avoid contamination between users in the same company',
                     },
                     {
-                        title: 'Robust targeting and exclusion options, including cohorts and location',
-                        subtitle: 'Anything you monitor in analytics, you can target in an experiment',
+                        title: 'Shared metrics library',
+                        subtitle: 'Create consistent, reusable metrics across all experiments',
                     },
                 ],
             },
@@ -3417,6 +3873,51 @@ window.posthog.onFeatureFlags(function () {
                     companies: {
                         Pendo: true,
                         Optimizely: true,
+                        VWO: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Bayesian statistics',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: false,
+                        VWO: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Check results anytime',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: false,
+                        VWO: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Group-level experiments',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: false,
+                        VWO: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Integrated session replay',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: false,
+                        VWO: false,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'Shared metrics library',
+                    companies: {
+                        AmplitudeExperiments: false,
+                        Optimizely: false,
                         VWO: false,
                         PostHog: true,
                     },
