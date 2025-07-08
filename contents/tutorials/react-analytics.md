@@ -170,7 +170,7 @@ Now when you click the button, PostHog captures the custom `home_button_clicked`
 
 ## Hash-based routing
 
-If you are using <HashRouter/>, you might want to add the hash to the `$pathname` property. By default, PostHog captures paths using the `window.location.pathname`, which will not include the hash part of the URL. You can use `before_send` to modify the path before sending it to PostHog.
+If you are using <HashRouter/>, you might want to add the hash to the `$pathname` property. The `pathname` does not usually include the `hash` part of the URL, but You can use `before_send` to modify the path before sending it to PostHog.
 
 ```tsx
 posthog.init('<ph_project_api_key>', {
