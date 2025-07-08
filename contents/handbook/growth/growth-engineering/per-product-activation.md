@@ -13,7 +13,7 @@ Every product should have activation criteria - these are used to determine if a
 This is the basic structure of our activation queries:
 
 1. An organization triggered a 'product intent' -> This is the 'upfunnel' metric
-2. An organization met the 'activation criteria', usually one, multiple, or a set of qualifying events -> This is the 'downfunnel' metric
+2. An organization met the 'activation criteria', usually one, multiple, or a set of qualifying events in a given time period (e.g. 30 days) -> This is the 'downfunnel' metric
 3. An organization triggered an event correlating with product usage 3 months after they showed product intent -> This is the retention / survived metric
 
 Here is an example structure:
