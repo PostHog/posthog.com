@@ -36,19 +36,21 @@ As ever, though, PRs > issues. ;)
 
 ## Docs hero
 
-Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them.
+Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them. The rotation schedule can be found <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">here</PrivateLink>.
 
 The docs hero role exists to ensure we continue to ship ongoing improvements to the docs outside of specific projects we're working on.
 
 Some notes and tips: 
 
-- Four people (Edwin, Ian, Lior and Vincent) are currently in the rotation. This means two days in every 20 working days will be dedicated to the docs hero role – 10% of your time. This will reduce as we add more people to the team.
+- Four people (<TeamMember name="Edwin Lim" photo={true} />, <TeamMember name="Ian Vanagas" photo={true} />, <TeamMember name="Lior Neu-ner" photo={true} />, and <TeamMember name="Vincent Ge" photo={true} />) are currently in the rotation. This means two days in every 20 working days will be dedicated to the docs hero role – 10% of your time. This will reduce as we add more people to the team.
 
 - It's up to individuals to decide how to spend their two days. You can spend it shipping one or two things, or shipping a dozen small improvements. The only requirement is you should work on things you can ship in those two days. Work should not carry over into other days, or future docs hero stints.
 
 - Feel free to create issues about problems you find that are too big to deal with in a couple of days, but **most of your time should be spent on shipping** updates, not triaging requests.
 
 - Tutorials count as well.
+
+- Talk to your teammates and update the <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">rotation schedule</PrivateLink> if you need to swap weeks.
 
 ### Sources for inspiration
 
