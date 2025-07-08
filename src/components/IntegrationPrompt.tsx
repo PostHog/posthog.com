@@ -5,7 +5,7 @@ import { useUser } from 'hooks/useUser'
 
 export default function IntegrationPrompt() {
     const { user } = useUser()
-    const basePrompt = `npx --yes @PostHog/wizard@latest`
+    const basePrompt = `npx --yes @posthog/wizard@latest`
 
     let finalPrompt: string
 
@@ -32,7 +32,7 @@ export default function IntegrationPrompt() {
                     </h4>
                 </div>
                 <p className="text-[15px] text-primary dark:text-primary-dark mb-4">
-                    Works with tools like{' '}
+                    Works in your terminal or with tools like{' '}
                     <Link to="https://cursor.com/api/auth/login" external={true}>
                         Cursor
                     </Link>
