@@ -63,6 +63,16 @@ materialised view query</PrivateLink>. To write your own, we recommend copying t
 
 To write your own, we also recommend copying one of the <PrivateLink url="https://us.posthog.com/project/2/insights/ccIWa4br">existing queries</PrivateLink>. All our activation queries follow the same structure, which we should also follow for new products. Once you've found a good definion of activation for your product, please do add the final activation query to <PrivateLink url="https://us.posthog.com/project/2/dashboard/130345">this dashboard</PrivateLink>.
 
+## Tracking activation in the code
+
+We use SQL queries to analyze activation. In addition, we track product intents and activation in the code. We do this so in the future, we could act on this, e.g. someone showed intent, but they didn't activate? Show them in an-app banner or send them an email.
+
+To add a new product to this, you can add the activation criteria [here](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py#L77-L82).
+
+This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
+
+This part of the product intent plumbing needs some work - we should be able to manually trigger activation checks whenever someone does a certain action (not an Action like a grouping of events but a generic action like something that you just do). If you want to make that change, please do - and update these docs!
+
 ## Why does this matter?
 
 Tracking activation is important, because it tells us how many companies start using our products successfully each month, and how many retain. Measuring it month over month allows us to see trends, and whether improvements to the product actually made a difference.
