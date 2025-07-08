@@ -7,7 +7,7 @@ export default function WizardCommand() {
 
     const isEU = cloud === 'eu'
 
-    const code = `npx --yes @posthog/wizard@latest ${isEU ? '--eu' : ''}`
+    const code = `npx -y @posthog/wizard@latest ${isEU ? '--eu' : ''}`
 
     const languageOption = { language: 'bash', code }
     return (
