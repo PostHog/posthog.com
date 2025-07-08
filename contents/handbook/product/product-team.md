@@ -63,7 +63,7 @@ In Q3 2025, those are:
 * Something along the lines of having a materialized view per metric
 * Ideally we can use product analytics insights in materialized views, so that we don't have to create usage insights manually in SQL. This is something the data warehouse team would have to prioritize building
 
-**Goal 2: Better surface feature requests from Sales** -> <TeamMember name="Anna Szell" photo />
+**Goal 2: Better surface feature requests from sales** -> <TeamMember name="Anna Szell" photo />
 * We really like the manual, prioritized list of feature requests <TeamMember name="Simon Fischer" photo /> Simon creates at the end of each quarter. We tried to use Buildbetter x Vitally to automate some of this, but are missing important context. Can the automation be improved, so there is less manual effort?
 
 
