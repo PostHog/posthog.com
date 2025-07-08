@@ -1,31 +1,27 @@
-### Q2 2025 Objectives
+### Q3 2025 Objectives
 
-## Launch with pricing
-* Decide on tiers and implement billing / quota limiting changes
-* Remove plugin server from ingestion pipeline (cost savings)
-* Work with comms on rollout
+#### SDK improvements and language support
+* Mobile support
+   * React Native JS (& Hermes source maps)
+   * Native iOS & Android
+   * Stretch: Flutter
+* Add error tracking to 3 more server side SDKs
+* Complete `posthog-js` and `posthog-js-lite` merge to a monorepo
+  * Stretch: continue with [the megaissue](https://github.com/PostHog/posthog-js/issues/2067) as time permits
 
-## Be the default choice for the languages we support
+#### Integrate with other products
+* Find issues that impact signup / activation / retention heavily (correlation query)
+* Use Data warehouse / Revenue analytics to order issues by revenue impact
+* Add session context to issue page (example: breadcrumbs)
+* AI: Add session summaries to issues
 
-### Make it easier to integrate
-* Split stack trace parsing from exception autocapture
-* CLI download URL that points to the latest version
-* Add more source map upload options
-    * GitHub action
-    * NextJS config wrapper
-    * Bundler plugins for at least Webpack and Vite
-* Stretch: Isomorphic SDK for NextJS
-
-### Product quality
-* UI improvements to issue page
-    * Faster initial loading time (separate issue query from latest / earliest event)
-    * Add context from other products (affected users / groups, event impact correlation)
-* Improve grouping to decrease noise via Word2Vec or embeddings
-
-### Build advanced features for larger customers
-* Add versioning to symbol set uploads
-* Add Hog based control rules
-    * Auto assignment
-    * Custom server side grouping
-    * Alert filtering
-    * Inbound issue filtering / suppression
+#### Product experience
+* Gather more qualitative data
+  * Continue customer interviews
+  * Make sure existing customers remain happy
+* Make in-app searching more intuitive
+  * Add error tracking tab to taxonomic filter
+  * Add email to omnisearch
+  * Expose search via Max AI
+* Clearly call out issues with source maps and offer resolution steps
+* Support Docs team's goal to make error tracking docs amazing
