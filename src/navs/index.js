@@ -1121,7 +1121,7 @@ export const handbookSidebar = [
             },
             {
                 name: 'Talent',
-                url: '/handbook/company/talent',
+                url: '/handbook/people/talent',
             },
             {
                 name: 'Merch store',
