@@ -535,16 +535,18 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
         result.data.postCategories.nodes.forEach(
             ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
-                createPage({
-                    path: `/${categoryFolder}`,
-                    component: PostListingTemplate,
-                    context: {
-                        post: true,
-                        title: categoryLabel,
-                        article: false,
-                        root: categoryFolder,
-                    },
-                })
+                if (categoryFolder !== 'founders' && categoryFolder !== 'product-engineers') {
+                    createPage({
+                        path: `/${categoryFolder}`,
+                        component: PostListingTemplate,
+                        context: {
+                            post: true,
+                            title: categoryLabel,
+                            article: false,
+                            root: categoryFolder,
+                        },
+                    })
+                }
 
                 post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
                     createPage({
