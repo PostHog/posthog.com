@@ -3,7 +3,7 @@ title: Consistent scripts to rule them all
 sidebar: Handbook
 ---
 
-PostHog has 235 (at the time of writing) public repositories. Each of these repositories has a unique way to get the project up and running locally. To limit the friction of this we adopt and adapt GitHub's approach of [scripts to rule them all](https://github.blog/engineering/engineering-principles/scripts-to-rule-them-all/). As they say:
+PostHog has 235 (at the time of writing) public repositories. Each of these repositories has a unique way to get the project up and running locally. To limit the friction of this we adapt GitHub's approach of [scripts to rule them all](https://github.blog/engineering/engineering-principles/scripts-to-rule-them-all/). As they say:
 
 > Being able to get from git clone to an up-and-running project in a development environment is imperative for fast, reliable contributions.
 
