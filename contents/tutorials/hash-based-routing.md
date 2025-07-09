@@ -16,7 +16,7 @@ When using hash-based routing, the URL path is typically in the format `http://e
 
 To add the hash to the `$pathname` property, you can use the `before_send` function in PostHog's initialization. This function allows you to modify events before they are sent to PostHog.
 
-With this change the `$pathname` property will include the hash, so in the example above it will be `/#/path/to/page`.
+The below example is how you can change the `$pathname` property to include the hash, so in the example above it will be `/#/path/to/page`:
 
 ```tsx
 import posthog, { CaptureResult } from 'posthog-js'
