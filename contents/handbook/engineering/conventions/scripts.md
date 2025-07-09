@@ -13,7 +13,7 @@ Not every repository will need every script. Some repositories will need scripts
 
 When starting a new project, create a `bin` directory and include the following scripts (when relevant):
 
-* `bin/setup` - Install or upgrade dependencies (Ex. npm packages, brew packages, etc. Usually run once after cloning the repository).
+* `bin/setup` - Install or upgrade dependencies (Ex. npm packages, brew packages, etc. Usually run once after cloning the repository and occasionally to upgrade packages).
 * `bin/update` - Updates dependencies after a pull. This could simply call `bin/setup`.
 * `bin/build` - Build the project, for projects that are compiled such as C#, Java, etc.
 * `bin/start` - Start the project. For SDKs, this might start an example server.
@@ -21,13 +21,3 @@ When starting a new project, create a `bin` directory and include the following 
 * `bin/fmt` - Optional: Format/lint code. This can be called by `test`.
 
 > **Warning:** Some environments add `bin` to the `.gitignore` file by default because that's where they compile binaries to.
-
-Any of these we want to include too?
-
-* `script/bootstrap` - Install dependencies (Ex. npm packages, brew packages, etc. Usually run once after cloning the repository)
-* `script/setup` - Setup the project. Seems like this could just be merged in bootstrap
-* `script/update` - Update project after a pull such as migrations, etc.
-* `script/server` - For web apps, starts the application. For client SDKs, might start an example site.
-* `script/test` - Run tests (Ex. `npm test`, `bundle exec rspec`, etc.). Also includes linting, formatting, etc.
-* `script/cibuild` - used by the CI system to run tests, build, etc.
-* `script/console` - Is used to open a console for your application.
