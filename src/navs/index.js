@@ -841,6 +841,10 @@ export const handbookSidebar = [
                         name: 'Backend coding',
                         url: '/handbook/engineering/conventions/backend-coding',
                     },
+                    {
+                        name: 'Scripts',
+                        url: '/handbook/engineering/conventions/scripts',
+                    },
                 ],
             },
             {
