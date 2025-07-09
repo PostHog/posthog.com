@@ -252,7 +252,7 @@ export default function ProfilePage({ params }: PageProps) {
                         <>
                             <div className="space-y-8 my-8">
                                 <section className="">
-                                    <div className="relative w-48 h-48 float-right -mt-12">
+                                    <div className="relative w-40 h-40 float-right -mt-12">
                                         <Avatar
                                             className={`${
                                                 profile.color
