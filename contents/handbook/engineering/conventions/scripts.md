@@ -30,4 +30,4 @@ Any of these we want to include too?
 * `script/server` - For web apps, starts the application. For client SDKs, might start an example site.
 * `script/test` - Run tests (Ex. `npm test`, `bundle exec rspec`, etc.). Also includes linting, formatting, etc.
 * `script/cibuild` - used by the CI system to run tests, build, etc.
-* `script/console` - is used to open a console for your application.
+* `script/console` - Is used to open a console for your application.
