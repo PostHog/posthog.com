@@ -28,7 +28,7 @@ const TreeLink = ({
     menuItem: MenuItem
     index: number
     onClick: (item: MenuItem) => void
-    activeItem: MenuItem
+    activeItem: MenuItem | undefined
 }) => {
     const active = menuItem === activeItem
 
@@ -40,20 +40,14 @@ const TreeLink = ({
             width="full"
             asLink
             to={menuItem.url}
-            className={index === 0 ? '' : index === 1 ? 'pl-7' : 'pl-11'}
+            className={index === 0 ? '' : `pl-${4 + index * 3}`}
             onClick={() => onClick(menuItem)}
             icon={typeof menuItem.icon !== 'string' && menuItem.icon}
         >
             {menuItem.name}
         </OSButton>
     ) : (
-        <div
-            className={`text-muted text-sm py-0.5 !mt-2 ${index === 0 ? 'ml-2' : index === 1 ? 'ml-1' : ''} ${
-                index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'
-            }`}
-        >
-            {menuItem.name}
-        </div>
+        <div className={`text-muted text-sm py-0.5 !mt-2 ml-${2 + index} pl-${index * 4}`}>{menuItem.name}</div>
     )
 }
 
@@ -75,7 +69,7 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 export function TreeMenu(props: TreeMenuProps) {
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
-    const [activeItem, setActiveItem] = useState<MenuItem>(
+    const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
         props.activeItem || getActiveItem(props.items || [], pathname)
     )
 
@@ -104,7 +98,8 @@ export function TreeMenu(props: TreeMenuProps) {
     )
 }
 
-const isOpen = (children: MenuItem[], activeItem: MenuItem): boolean => {
+const isOpen = (children: MenuItem[], activeItem: MenuItem | undefined): boolean => {
+    if (!activeItem) return false
     return (
         children &&
         children.some((child: MenuItem) => {
@@ -120,7 +115,7 @@ function TreeMenuItem({
     onClick,
 }: {
     item: MenuItem
-    activeItem: MenuItem
+    activeItem: MenuItem | undefined
     index: number
     onClick: (item: MenuItem) => void
 }) {
@@ -129,12 +124,12 @@ function TreeMenuItem({
     const location = useLocation()
     const pathname = replacePath(location?.pathname)
 
-    const handleOpenChange = (open) => {
+    const handleOpenChange = (open: boolean) => {
         setOpen(open)
     }
 
     useEffect(() => {
-        if (item.children && !open) {
+        if (item.children && !open && activeItem) {
             setOpen(isOpen(item.children, activeItem))
         }
     }, [pathname])
@@ -146,7 +141,7 @@ function TreeMenuItem({
                     variant="ghost"
                     align="left"
                     width="full"
-                    className={index === 0 ? '' : index === 1 ? 'pl-6' : 'pl-11'}
+                    className={index === 0 ? '' : `pl-${2 + index * 4}`}
                     active={activeItem === item}
                     to={item.url || item.children?.[0]?.url}
                     asLink
@@ -164,8 +159,8 @@ function TreeMenuItem({
             {hasChildren && (
                 <Collapsible.Content>
                     <div className="space-y-px">
-                        {item.children?.map((child, index) => {
-                            const key = `${child.name}-${index}-${child.url}`
+                        {item.children?.map((child, childIndex) => {
+                            const key = `${child.name}-${childIndex}-${child.url}`
                             const hasChildren = child.children && child.children.length > 0
                             return hasChildren ? (
                                 <TreeMenuItem
