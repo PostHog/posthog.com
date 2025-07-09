@@ -1,59 +1,49 @@
 import Link from '../Link'
 import React from 'react'
 
-const isAlphanumeric = (str: string) => /^[a-zA-Z0-9_]+$/.test(str)
-const isGeneric = (str: string) => /<.*>/.test(str)
-
-const TypeLink = ({ type, noDocsTypes }: { type: string | { name: string }; noDocsTypes: string[] }) => {
+const TypeLink = ({ type, validTypes }: { type: string | { name: string }; validTypes: string[] }): JSX.Element => {
     const typeString = typeof type === 'string' ? type : type.name
 
-    // Handle array types
-    if (typeString.endsWith('[]')) {
-        const baseType = typeString.slice(0, -2)
-        return (
-            <code className="font-semibold group">
-                <TypeLink type={baseType} noDocsTypes={noDocsTypes} />
-                {'[]'}
-            </code>
-        )
-    }
+    // Simple function to extract and replace type identifiers
+    const renderTypeWithLinks = (input: string): React.ReactNode => {
+        // Split by common separators and brackets, but keep them in the result
+        // I'm sorry for my love of regex
+        const parts = input.split(/([\]<>(),|&]|\[|\s+)/)
 
-    // Handle union and intersection types
-    if (typeString.includes('|') || typeString.includes('&')) {
-        const separator = typeString.includes('|') ? '|' : '&'
-        return (
-            <code className="font-semibold group">
-                {typeString.split(separator).map((t, i) => (
-                    <React.Fragment key={t}>
-                        <TypeLink type={t.trim()} noDocsTypes={noDocsTypes} />
-                        {i < typeString.split(separator).length - 1 ? ` ${separator} ` : ''}
+        return parts.map((part, index) => {
+            const trimmed = part.trim()
+
+            // Skip empty parts, separators, brackets, and whitespace
+            if (!trimmed || /^[\]<>(),|&\s]+$/.test(trimmed) || trimmed === '[') {
+                return part
+            }
+
+            // Remove array suffixes to get base type
+            const baseType = trimmed.replace(/\[\]$/, '')
+            const arraysuffix = trimmed.endsWith('[]') ? '[]' : ''
+
+            // Check if this is a valid type to link
+            if (validTypes.includes(baseType)) {
+                return (
+                    <React.Fragment key={index}>
+                        <Link to={`/docs/references/types/${baseType}`} className="text-red hover:text-red-dark">
+                            {baseType}
+                        </Link>
+                        {arraysuffix}
                     </React.Fragment>
-                ))}
-            </code>
-        )
+                )
+            }
+
+            // Return as unlinked text
+            return (
+                <span key={index} className="text-gray-600 dark:text-gray-400">
+                    {part}
+                </span>
+            )
+        })
     }
 
-    // Handle intrinsic types (don't link)
-    if (noDocsTypes && noDocsTypes.includes(typeString)) {
-        const baseType = typeString
-        return (
-            <code className="font-semibold group">
-                <span className="text-gray-600 dark:text-gray-400">{baseType}</span>
-            </code>
-        )
-    }
-
-    // Only check for generic or alphanumeric for single types
-    if (isGeneric(typeString) || !isAlphanumeric(typeString)) {
-        return <code className="font-semibold group">{typeString}</code>
-    }
-
-    // Handle referenced types (link) - DO NOT wrap with <code>
-    return (
-        <Link to={`/docs/references/types/${typeString}`} className="text-red hover:text-red-dark">
-            {typeString}
-        </Link>
-    )
+    return <code className="font-semibold group">{renderTypeWithLinks(typeString)}</code>
 }
 
 export default TypeLink

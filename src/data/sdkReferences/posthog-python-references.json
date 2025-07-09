@@ -40,7 +40,6 @@
         "Annotated",
         "NotRequired",
         "Required",
-        "void",
         "None",
         "NoneType",
         "object",
@@ -49,13 +48,6 @@
         "Exception"
     ],
     "types": [
-        {
-            "id": "Any",
-            "name": "Any",
-            "path": "typing.Any",
-            "properties": [],
-            "example": ""
-        },
         {
             "id": "FeatureFlag",
             "name": "FeatureFlag",
@@ -111,7 +103,7 @@
                 },
                 {
                     "name": "payload",
-                    "type": "Optional[Any]",
+                    "type": "Optional[typing.Any]",
                     "description": "Field: payload"
                 },
                 {
@@ -185,7 +177,7 @@
                 },
                 {
                     "name": "featureFlagPayloads",
-                    "type": "Optional[dict[str, Any]]",
+                    "type": "Optional[dict[str, typing.Any]]",
                     "description": "Field: featureFlagPayloads"
                 }
             ],
@@ -226,17 +218,10 @@
             "properties": [
                 {
                     "name": "payload",
-                    "type": "Any",
+                    "type": "typing.Any",
                     "description": "Field: payload"
                 }
             ],
-            "example": ""
-        },
-        {
-            "id": "Any",
-            "name": "Any",
-            "path": "typing.Any",
-            "properties": [],
             "example": ""
         },
         {
@@ -246,37 +231,37 @@
             "properties": [
                 {
                     "name": "distinct_id",
-                    "type": "NotRequired[Union[Number, str, UUID, int, any]]",
+                    "type": "typing_extensions.NotRequired[Union[Number, str, UUID, int, any]]",
                     "description": "Field: distinct_id"
                 },
                 {
                     "name": "properties",
-                    "type": "NotRequired[Optional[dict[str, Any]]]",
+                    "type": "typing_extensions.NotRequired[Optional[dict[str, typing.Any]]]",
                     "description": "Field: properties"
                 },
                 {
                     "name": "timestamp",
-                    "type": "NotRequired[Union[datetime, str, any]]",
+                    "type": "typing_extensions.NotRequired[Union[datetime, str, any]]",
                     "description": "Field: timestamp"
                 },
                 {
                     "name": "uuid",
-                    "type": "NotRequired[Optional[str]]",
+                    "type": "typing_extensions.NotRequired[Optional[str]]",
                     "description": "Field: uuid"
                 },
                 {
                     "name": "groups",
-                    "type": "NotRequired[Optional[dict[str, str]]]",
+                    "type": "typing_extensions.NotRequired[Optional[dict[str, str]]]",
                     "description": "Field: groups"
                 },
                 {
                     "name": "send_feature_flags",
-                    "type": "NotRequired[Optional[bool]]",
+                    "type": "typing_extensions.NotRequired[Optional[bool]]",
                     "description": "Field: send_feature_flags"
                 },
                 {
                     "name": "disable_geoip",
-                    "type": "NotRequired[Optional[bool]]",
+                    "type": "typing_extensions.NotRequired[Optional[bool]]",
                     "description": "Field: disable_geoip"
                 }
             ],
@@ -289,27 +274,27 @@
             "properties": [
                 {
                     "name": "distinct_id",
-                    "type": "NotRequired[Union[Number, str, UUID, int, any]]",
+                    "type": "typing_extensions.NotRequired[Union[Number, str, UUID, int, any]]",
                     "description": "Field: distinct_id"
                 },
                 {
                     "name": "properties",
-                    "type": "NotRequired[Optional[dict[str, Any]]]",
+                    "type": "typing_extensions.NotRequired[Optional[dict[str, typing.Any]]]",
                     "description": "Field: properties"
                 },
                 {
                     "name": "timestamp",
-                    "type": "NotRequired[Union[datetime, str, any]]",
+                    "type": "typing_extensions.NotRequired[Union[datetime, str, any]]",
                     "description": "Field: timestamp"
                 },
                 {
                     "name": "uuid",
-                    "type": "NotRequired[Optional[str]]",
+                    "type": "typing_extensions.NotRequired[Optional[str]]",
                     "description": "Field: uuid"
                 },
                 {
                     "name": "disable_geoip",
-                    "type": "NotRequired[Optional[bool]]",
+                    "type": "typing_extensions.NotRequired[Optional[bool]]",
                     "description": "Field: disable_geoip"
                 }
             ],
@@ -341,7 +326,7 @@
         {
             "id": "PostHog",
             "title": "PostHog",
-            "description": "This is the SDK reference for the PostHog Python SDK.  You can learn more about example usage in the [Python SDK documentation](/docs/libraries/python).  You can also follow [Flask](/docs/libraries/flask) and [Django](/docs/libraries/django)  guides to integrate PostHog into your project.",
+            "description": "This is the SDK reference for the PostHog Python SDK. You can learn more about example usage in the [Python SDK documentation](/docs/libraries/python). You can also follow [Flask](/docs/libraries/flask) and [Django](/docs/libraries/django) guides to integrate PostHog into your project.",
             "functions": [
                 {
                     "id": "__init__",
@@ -511,7 +496,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -563,7 +548,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -590,7 +575,7 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalCaptureArgs]"
+                            "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
                     ],
                     "showDocs": true,
@@ -639,14 +624,14 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalCaptureArgs]"
+                            "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
                     ],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -716,7 +701,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -737,7 +722,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -999,7 +984,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1012,55 +997,55 @@
                 {
                     "id": "get_feature_flag_result",
                     "title": "get_feature_flag_result",
-                    "description": "Get a FeatureFlagResult object",
+                    "description": "Get a FeatureFlagResult object which contains the flag result and payload for a key by evaluating locally or remotely depending on whether local evaluation is enabled and the flag can be locally evaluated. This also captures the `$feature_flag_called` event unless `send_feature_flag_events` is `False`.",
                     "details": "",
                     "category": null,
                     "params": [
                         {
                             "name": "key",
-                            "description": "Parameter: key",
+                            "description": "The feature flag key.",
                             "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "distinct_id",
-                            "description": "Parameter: distinct_id",
+                            "description": "The distinct ID of the user.",
                             "isOptional": true,
                             "type": "any"
                         },
                         {
                             "name": "groups",
-                            "description": "Parameter: groups",
+                            "description": "A dictionary of group information.",
                             "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "person_properties",
-                            "description": "Parameter: person_properties",
+                            "description": "A dictionary of person properties.",
                             "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "group_properties",
-                            "description": "Parameter: group_properties",
+                            "description": "A dictionary of group properties.",
                             "isOptional": false,
                             "type": "dict"
                         },
                         {
                             "name": "only_evaluate_locally",
-                            "description": "Parameter: only_evaluate_locally",
+                            "description": "Whether to only evaluate locally.",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "send_feature_flag_events",
-                            "description": "Parameter: send_feature_flag_events",
+                            "description": "Whether to send feature flag events.",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
-                            "description": "Parameter: disable_geoip",
+                            "description": "Whether to disable GeoIP for this request.",
                             "isOptional": false,
                             "type": "any"
                         }
@@ -1070,7 +1055,14 @@
                     "returnType": {
                         "id": "return_type",
                         "name": "Optional[FeatureFlagResult]"
-                    }
+                    },
+                    "examples": [
+                        {
+                            "id": "example_1",
+                            "name": "Example 1",
+                            "code": "flag_result = posthog.get_feature_flag_result('flag-key', 'distinct_id_of_your_user')\nif flag_result and flag_result.get_value() == 'variant-key':\n    # Do something differently for this user\n    # Optional: fetch the payload\n    matched_flag_payload = flag_result.payload"
+                        }
+                    ]
                 },
                 {
                     "id": "get_feature_flags_and_payloads",
@@ -1327,7 +1319,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1348,7 +1340,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1369,7 +1361,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1403,7 +1395,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1424,7 +1416,7 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalSetArgs]"
+                            "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
                     ],
                     "showDocs": true,
@@ -1457,7 +1449,7 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalSetArgs]"
+                            "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
                     ],
                     "showDocs": true,
@@ -1485,7 +1477,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1544,7 +1536,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1563,7 +1555,7 @@
                     "params": [
                         {
                             "name": "event",
-                            "description": "The event name to specify the event",
+                            "description": "The event name to specify the event     **kwargs: Optional arguments including:",
                             "isOptional": true,
                             "type": "str"
                         },
@@ -1571,7 +1563,7 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalCaptureArgs]"
+                            "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
                     ],
                     "showDocs": true,
@@ -1589,7 +1581,7 @@
                         {
                             "id": "example_2",
                             "name": "Set event properties",
-                            "code": "# Set event properties\nfrom posthog import capture\ncapture(\n    \"distinct_id_of_the_user\",\n    \"user_signed_up\",\n    {\n        \"login_type\": \"email\",\n        \"is_free_trial\": \"true\"\n    }\n)"
+                            "code": "# Set event properties\nfrom posthog import capture\ncapture(\n    \"user_signed_up\",\n    distinct_id=\"distinct_id_of_the_user\",\n    properties={\n        \"login_type\": \"email\",\n        \"is_free_trial\": \"true\"\n    }\n)"
                         }
                     ]
                 },
@@ -1610,14 +1602,14 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalCaptureArgs]"
+                            "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
                     ],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1687,7 +1679,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1708,7 +1700,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1729,7 +1721,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1885,7 +1877,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     }
                 },
                 {
@@ -1936,7 +1928,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1964,7 +1956,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -1985,7 +1977,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -2006,7 +1998,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -2040,7 +2032,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -2074,7 +2066,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -2095,7 +2087,7 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalSetArgs]"
+                            "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
                     ],
                     "showDocs": true,
@@ -2130,7 +2122,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -2151,7 +2143,7 @@
                             "name": "kwargs",
                             "description": "Parameter: kwargs",
                             "isOptional": true,
-                            "type": "Unpack[OptionalSetArgs]"
+                            "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
                     ],
                     "showDocs": true,
@@ -2179,7 +2171,7 @@
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {
@@ -2206,14 +2198,14 @@
                             "name": "value",
                             "description": "The tag value",
                             "isOptional": true,
-                            "type": "Any"
+                            "type": "typing.Any"
                         }
                     ],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "void"
+                        "name": "None"
                     },
                     "examples": [
                         {

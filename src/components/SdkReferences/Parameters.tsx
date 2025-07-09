@@ -12,12 +12,12 @@ export interface Parameter {
 const Parameters = ({
     params,
     title = 'Parameters',
-    noDocsTypes,
+    validTypes,
 }: {
     params: Parameter[]
     title?: string
-    noDocsTypes: string[]
-}) => {
+    validTypes: string[]
+}): JSX.Element | null => {
     if (!params || params.length === 0) return null
 
     return (
@@ -52,7 +52,7 @@ const Parameters = ({
                                         </code>
                                     </td>
                                     <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
-                                        <TypeLink type={param.type} noDocsTypes={noDocsTypes} />
+                                        <TypeLink type={param.type} validTypes={validTypes} />
                                     </td>
                                 </tr>
                                 {param.description && (

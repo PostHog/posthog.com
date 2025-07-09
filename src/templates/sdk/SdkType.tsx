@@ -29,11 +29,12 @@ interface PageContext {
     version: string
     id: string
     noDocsTypes: string[]
+    types: string[]
 }
 
 export default function SdkType({ pageContext }: { pageContext: PageContext }) {
-    const { typeData, version, id, noDocsTypes } = pageContext
-    const activeInternalMenu = docsMenu.children.find(({ name }) => name === 'Product OS')
+    const { typeData, version, id, types } = pageContext
+    const activeInternalMenu = docsMenu.children.find(({ name }): boolean => name === 'Product OS')
 
     // Get the language for this SDK type
     const sdkLanguage = getLanguageFromSdkId(id)
@@ -65,7 +66,7 @@ export default function SdkType({ pageContext }: { pageContext: PageContext }) {
                     </div>
                     <div className="w-full">
                         {typeData.properties && typeData.properties.length > 0 ? (
-                            <Parameters params={typeData.properties} title="Properties" noDocsTypes={noDocsTypes} />
+                            <Parameters params={typeData.properties} title="Properties" validTypes={types} />
                         ) : typeData.example ? (
                             <div>
                                 <h2 className="text-2xl font-bold mb-4">Example values</h2>

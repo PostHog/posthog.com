@@ -816,6 +816,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             context: { id: node.id, ignoreWrapper: true },
         })
     })
+
+    const types = result.data.allTypes.edges.map(({ node }) => node.types.map(({ name }) => name)).flat()
     result.data.allSdkReferencesJson.edges.forEach(({ node }) => {
         createPage({
             path: `/docs/references/${node.info.slugPrefix}`,
@@ -825,6 +827,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 description: node.info.description,
                 fullReference: node,
                 regex: `/docs/references/${node.info.slugPrefix}`,
+                types,
             },
         })
     })
@@ -834,13 +837,14 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         node.types?.forEach((type) => {
             if (type.id && !type.id.includes('|') && !type.id.includes('&')) {
                 createPage({
-                    path: `/docs/references/types/${type.id}`,
+                    path: `/docs/references/${node.info.slugPrefix}/types/${type.id}`,
                     component: SdkTypeTemplate,
                     context: {
                         typeData: type,
                         version,
                         id: node.info.id,
                         noDocsTypes: node.noDocsTypes,
+                        types,
                     },
                 })
             }

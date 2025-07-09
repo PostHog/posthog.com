@@ -68,6 +68,7 @@ interface SdkReferenceData {
 
 interface PageContext {
     fullReference: SdkReferenceData
+    types: string[]
 }
 
 const padDescription = (description: string): string => {
@@ -118,14 +119,13 @@ function groupFunctionsByCategory(functions: SdkFunction[]): { label: string | n
 
 export default function SdkReference({ pageContext }: { pageContext: PageContext }) {
     const { fullReference } = pageContext
-    console.log(fullReference)
-    const activeInternalMenu = docsMenu.children.find(({ name }) => name === 'Product OS')
+
+    const activeInternalMenu = docsMenu.children.find(({ name }): boolean => name === 'Product OS')
     const location = useLocation()
 
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
-    console.log(fullReference.id)
-
+    const validTypes = pageContext.types
     // Badge styling based on release tag
     const getBadgeClasses = (releaseTag: string): string => {
         switch (releaseTag.toLowerCase()) {
@@ -185,7 +185,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                 <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
                                 <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
 
-                                {groupFunctionsByCategory(classData.functions).map(({ label, functions }, idx) => (
+                                {groupFunctionsByCategory(classData.functions).map(({ label, functions }) => (
                                     <div key={label || 'other-methods'}>
                                         {/* Only show a heading if label is not null and not "Other methods" */}
                                         {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label} methods</h3>}
@@ -220,10 +220,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                                 <ReactMarkdown>{func.details}</ReactMarkdown>
                                                             </Accordion>
                                                         )}
-                                                        <Parameters
-                                                            params={func.params}
-                                                            noDocsTypes={fullReference.noDocsTypes}
-                                                        />
+                                                        <Parameters params={func.params} validTypes={validTypes} />
                                                     </div>
 
                                                     <div className="lg:sticky top-[108px] space-y-6">
@@ -233,7 +230,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                         />
                                                         <FunctionReturn
                                                             returnType={func.returnType}
-                                                            noDocsTypes={fullReference.noDocsTypes}
+                                                            validTypes={validTypes}
                                                         />
                                                     </div>
                                                 </div>

@@ -3,16 +3,15 @@ import TypeLink from './TypeLink'
 
 const FunctionReturn = ({
     returnType,
-    noDocsTypes,
+    validTypes,
 }: {
     returnType: { id: string; name: string }
-    noDocsTypes: string[]
-}) => {
+    validTypes: string[]
+}): JSX.Element | null => {
     if (!returnType) return null
 
     const typeString = returnType.name
     const isUnionOrIntersection = typeString.includes('|') || typeString.includes('&')
-
     let types: string[] = [typeString]
     let label: string | null = null
 
@@ -54,7 +53,7 @@ const FunctionReturn = ({
                                     </td>
                                 )}
                                 <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
-                                    <TypeLink type={t} noDocsTypes={noDocsTypes} />
+                                    <TypeLink type={t} validTypes={validTypes} />
                                 </td>
                             </tr>
                         ))}
