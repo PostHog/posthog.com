@@ -230,28 +230,6 @@ config.setBeforeSend { event in
 
 </details>
 
-<details>
-<summary>Sample events by distinct ID</summary>
-
-```swift
-let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
-
-config.setBeforeSend { event in
-    // Sample 40% of users by their distinct ID
-    let distinctId = event.distinctId
-    let hash = abs(distinctId.hashValue)
-    let normalizedHash = Double(hash % 100) / 100.0
-    if normalizedHash < 0.4 {
-        event.properties["$sample_type"] = ["sampleByDistinctId"]
-        event.properties["$sample_threshold"] = 0.4
-        return event
-    }
-    return nil
-}
-```
-
-</details>
-
 ### Chaining multiple BeforeSendBlocks
 
 You can provide an array of `BeforeSendBlock` functions to be called one after the other:
@@ -260,17 +238,12 @@ You can provide an array of `BeforeSendBlock` functions to be called one after t
 let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
 
 config.setBeforeSend(
-    // First block: Sample 50% of users
+    // First block: Drop all events named "Stale Event"
     { event in
-        let distinctId = event.distinctId
-        let hash = abs(distinctId.hashValue)
-        let normalizedHash = Double(hash % 100) / 100.0
-        if normalizedHash < 0.5 {
-            event.properties["$sample_type"] = ["sampleByDistinctId"]
-            event.properties["$sample_threshold"] = 0.5
-            return event
+        if event.event == "Stale Event" {
+            return nil
         }
-        return nil
+        return event
     },
     // Second block: Redact sensitive information
     { event in
