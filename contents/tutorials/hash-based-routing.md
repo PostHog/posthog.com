@@ -2,7 +2,7 @@
 title: How to capture paths from hash-based routing
 date: 2025-07-09
 author:
-  - robbie
+  - robbie-coomber
 tags:
   - product analytics
   - web analytics
