@@ -168,29 +168,6 @@ export default HomePage;
 
 Now when you click the button, PostHog captures the custom `home_button_clicked` event. Notice that we also added a property `user_name` to the event. This is helpful for filtering events in PostHog.
 
-## Hash-based routing
-
-If you are using <HashRouter/>, you might want to add the hash to the `$pathname` property. The `pathname` does not usually include the `hash` part of the URL, but You can use `before_send` to modify the path before sending it to PostHog.
-
-```tsx
-posthog.init('<ph_project_api_key>', {
-  api_host: '<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>',
-  before_send: (event: CaptureResult | null): CaptureResult | null => {
-    if (event?.properties?.$current_url) {
-      // parse the URL
-      const parsed = new URL(event.properties.$current_url)
-  
-      // if there is a hash in the URL, we want to include it in the $pathname property
-      if (parsed.hash) {
-        event.properties.$pathname = parsed.pathname + parsed.hash
-      }
-    }
-    return event
-  },
-})
-```
-
 ## Further reading
 
 - [How to set up surveys in React](/tutorials/react-surveys)
