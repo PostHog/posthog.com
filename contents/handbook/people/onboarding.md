@@ -251,7 +251,6 @@ Below are a list of Slack channels you may find helpful:
 - `#rockets`
 - `#stonks`
 - `#cycling`
-- `#devel-random`
 - `#listening-to`
 - `#design-inspiration`
 
