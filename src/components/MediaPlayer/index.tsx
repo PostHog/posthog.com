@@ -52,7 +52,7 @@ export default function MediaPlayer({ videoId }: MediaPlayerProps) {
         window.onYouTubeIframeAPIReady = () => {
             const player = new window.YT.Player('youtube-player-demo', {
                 host: 'https://www.youtube-nocookie.com',
-                videoId: '2jQco8hEvTI',
+                videoId,
                 playerVars: {
                     autoplay: 1,
                     controls: 0,

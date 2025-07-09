@@ -356,6 +356,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    cher: {
+        size: {
+            min: {
+                width: 960,
+                height: 682,
+            },
+            max: {
+                width: 960,
+                height: 682,
+            },
+            fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
     'ask-max': {
         size: {
             min: {

@@ -27,6 +27,8 @@ import useProduct from 'hooks/useProduct'
 import { SearchProvider } from './SearchProvider'
 import { SearchBar } from './SearchBar'
 import { getProseClasses } from '../../constants/index'
+import { useApp } from '../../context/App'
+import MediaPlayer from 'components/MediaPlayer'
 
 interface EditorProps {
     slug?: string
@@ -125,6 +127,7 @@ export function Editor({
     // if we're filtering to a product, show the filter button in an active/open state
     const searchContentRef = useRef(null)
     const { search } = useLocation()
+    const { addWindow } = useApp()
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -282,7 +285,23 @@ export function Editor({
                             onClick={() => setShowFilters(!showFilters)}
                         />
                     )}
-                    <OSButton variant="primary" size="xs" to={cta?.url} state={{ newWindow: true }} asLink>
+                    <OSButton
+                        onClick={() =>
+                            addWindow(
+                                <MediaPlayer
+                                    newWindow
+                                    location={{ pathname: `cher` }}
+                                    key={`cher`}
+                                    videoId="nZXRV4MezEw"
+                                />
+                            )
+                        }
+                        variant="primary"
+                        size="xs"
+                        to={cta?.url}
+                        state={{ newWindow: true }}
+                        asLink
+                    >
                         {cta?.label || 'Share'}
                     </OSButton>
                 </>
