@@ -18,7 +18,7 @@
     "scripts": {
         "build-move": "gatsby build && bash ./src/scripts/move-index.sh",
         "build": "gatsby build",
-        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8001",
+        "start": "TAILWIND_MODE=watch gatsby develop -H 0.0.0.0 -p 8022",
         "serve": "gatsby serve",
         "format": "prettier --write \"**/*.{html,js,ts,tsx,json,yml,css,scss}\"",
         "clean": "gatsby clean",
