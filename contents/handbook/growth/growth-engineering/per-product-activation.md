@@ -71,8 +71,6 @@ To add a new product to this, you can add the activation criteria [here](https:/
 
 This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
 
-This part of the product intent plumbing needs some work - we should be able to manually trigger activation checks whenever someone does a certain action (not an Action like a grouping of events but a generic action like something that you just do). If you want to make that change, please do - and update these docs!
-
 ## Why does this matter?
 
 Tracking activation is important, because it tells us how many companies start using our products successfully each month, and how many retain. Measuring it month over month allows us to see trends, and whether improvements to the product actually made a difference.
