@@ -70,7 +70,7 @@ Each team will focus more or less on different members of the product team. This
 
 - Our product is very sticky. By being the default choice at the highest potential startups we can grow with them and learn from them. Other small-stage (but less high-potential) companies index on what they use.
 
-- High-potential startups haven’t cracked product-market fit yet, but are rapidly iterating towards it. They are founded by excellent product people that likely played key IC roles in other companies or founded a company previously; often in top accelerators.
+- High-potential startups haven’t cracked product-market fit yet, but are rapidly iterating towards it. They are founded by excellent product people that likely played key IC roles in other companies or founded a company previously, often in top accelerators.
 
 - Compared to the individual contributor personas in high-growth startups, at high-potential startups the CTO/technical co-founder will often take more of a lead.
 
