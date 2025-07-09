@@ -99,11 +99,37 @@ type IconPositions = Record<string, IconPosition>
 
 const STORAGE_KEY = 'desktop-icon-positions'
 
+const validateIconPositions = (positions: IconPositions, constraintsRef: React.RefObject<HTMLDivElement>): boolean => {
+    const iconWidth = 112
+    const iconHeight = 85
+
+    // Get current viewport dimensions
+    const containerWidth =
+        constraintsRef.current?.getBoundingClientRect().width ||
+        (typeof window !== 'undefined' ? window.innerWidth : 1200)
+    const containerHeight =
+        constraintsRef.current?.getBoundingClientRect().height ||
+        (typeof window !== 'undefined' ? window.innerHeight : 800)
+
+    for (const position of Object.values(positions)) {
+        // Check if icon is completely outside viewport bounds
+        if (
+            position.x < 0 ||
+            position.y < 0 ||
+            position.x + iconWidth > containerWidth ||
+            position.y + iconHeight > containerHeight
+        ) {
+            return false
+        }
+    }
+    return true
+}
+
 export default function Desktop() {
     const { constraintsRef, siteSettings } = useApp()
     const [iconPositions, setIconPositions] = useState<IconPositions>({})
     const { isInactive, dismiss } = useInactivityDetection({
-        enabled: !siteSettings.screensaverDisabled
+        enabled: !siteSettings.screensaverDisabled,
     })
 
     const generateInitialPositions = (): IconPositions => {
@@ -142,7 +168,15 @@ export default function Desktop() {
         const savedPositions = localStorage.getItem(STORAGE_KEY)
         if (savedPositions) {
             try {
-                setIconPositions(JSON.parse(savedPositions))
+                const parsedPositions = JSON.parse(savedPositions)
+
+                // Validate that all positions are within viewport bounds
+                if (validateIconPositions(parsedPositions, constraintsRef)) {
+                    setIconPositions(parsedPositions)
+                } else {
+                    // Some icons are out of bounds, reset to initial positions
+                    setIconPositions(generateInitialPositions())
+                }
             } catch (error) {
                 console.error('Error parsing saved positions:', error)
                 setIconPositions(generateInitialPositions())
