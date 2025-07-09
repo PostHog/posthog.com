@@ -12,7 +12,7 @@ Hash-based routing is a common way to manage navigation in single-page applicati
 
 ## Capturing paths in hash-based routing
 
-When using hash-based routing, the URL path is typically in the format `http://example.com/#/path/to/page`. The `$pathname` property in PostHog will not automatically include the hash part of the URL, and in this example will just be `/`.
+When using hash-based routing, the URL path is typically in the format `http://example.com/#/path/to/page`. The `$pathname` property in PostHog will not automatically include the hash part of the URL. In this example, it will just be `/`.
 
 To add the hash to the `$pathname` property, you can use the `before_send` function in PostHog's initialization. This function allows you to modify events before they are sent to PostHog.
 
