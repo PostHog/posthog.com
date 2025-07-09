@@ -5,9 +5,7 @@ import React from 'react'
 export default function WizardCommand() {
     const cloud = useCloud()
 
-    const isEU = cloud === 'eu'
-
-    const code = `npx -y @posthog/wizard@latest ${isEU ? '--eu' : ''}`
+    const code = `npx -y @posthog/wizard@latest${cloud ? ` --region ${cloud}` : ''}`
 
     const languageOption = { language: 'bash', code }
     return (
