@@ -6,7 +6,7 @@ availability:
     enterprise: full
 ---
 
-### Strings and quotes
+## Strings and quotes
 
 Quotation symbols work the same way they would work with ClickHouse, which inherits from ANSI SQL:
 
@@ -19,7 +19,7 @@ For example:
 SELECT * FROM events WHERE properties.`$browser` = 'Chrome'
 ```
 
-### Types
+## Types
 
 Types (and names) for the accessible data can be found in the [database](https://us.posthog.com/data-management/database), [properties](https://us.posthog.com/data-management/properties) tabs in data management as well as in the [SQL tab](https://us.posthog.com/sql) for external sources. They include:
 
@@ -40,7 +40,7 @@ This works because `$screen_width` and `$screen_height` are both defined as nume
 
 To cast a string property into a different type, use type conversion functions, such as`toString`, `toDate`, `toFloat`, `JSONExtractString`, `JSONExtractInt`, and more.
 
-### Property access
+## Property access
 
 To access a property stored on an event or person, just use dot notation. For example `properties.$browser` or `person.properties.$initial_browser`. You can also use bracket notation like `properties['$feature/cool-flag']`.
 
@@ -52,7 +52,7 @@ Property identifiers must be known at query time. For dynamic access, use the JS
 
 Some queries can error when accessing null values. To avoid this, use the `COALESCE` function to replace null values with a default value or filter `NULL` values with `IS NOT NULL` and use `assumeNotNull` to cast a column to a non-null type.
 
-### Actions
+## Actions
 
 To use [actions](/docs/data/actions) in SQL insights, use the `matchesAction()` function. For example, to get a count of the action `clicked homepage button`, you can do:
 
@@ -75,7 +75,7 @@ In the action details under "Matching events," click the export dropdown and sel
 
 This opens an SQL insight using the action. You can then copy parts of the SQL, like the `WHERE` filter or columns under `SELECT`, to use in your own insights.
 
-### Cohorts
+## Cohorts
 
 To use [cohorts](/docs/data/cohorts) in SQL insights, simply filter where `person_id IN COHORT '{name}'`.
 
