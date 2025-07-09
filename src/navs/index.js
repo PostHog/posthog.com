@@ -2668,7 +2668,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'SOC 2',
-                            url: '/handbook/company/security#soc-2',
+                            url: '/docs/privacy/soc2',
                         },
                         {
                             name: 'Ad blockers',
