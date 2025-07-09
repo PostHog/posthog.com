@@ -184,7 +184,7 @@ Strategy-wise, we're just leaning into our basic three principles, which we're s
 
 Revenue is in the low $10s of millions of ARR. We're very strongly default alive and will struggle to not end up profitable next year. Every time we get close to being profitable, we start speeding up hiring. 
 
-Revenue growth is fast enough and we're getting so many unprompted offers for investment (that we aren't taking) that money isn't really a meaningful constraint any more. Whilst we have a great grip on each product's individual performance, our understanding of cross sell is a little weak, so we're working on that now.
+Revenue growth is fast enough and we're getting so many unprompted offers for investment (that we aren't taking) that money isn't really a meaningful constraint anymore. Whilst we have a great grip on each product's individual performance, our understanding of cross sell is a little weak, so we're working on that now.
 
 Our marketing is getting weirder. It's more and more fun. We've commissioned a puppet, coming in January. Watch this space. Our newsletter, [Product for Engineers](/newsletter), now has 20,000 subscribers and it's growing fast.
 
