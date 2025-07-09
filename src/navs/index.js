@@ -783,52 +783,6 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'CS & Onboarding',
-        url: '',
-        children: [
-            {
-                name: 'Customer success overview',
-                url: '/handbook/cs-and-onboarding/customer-success',
-            },
-            {
-                name: 'Onboarding specialist overview',
-                url: '/handbook/cs-and-onboarding/onboarding-team',
-            },
-            {
-                name: 'New starter onboarding',
-                url: '/handbook/cs-and-onboarding/new-hire-onboarding',
-            },
-            {
-                name: 'Saying hi to your customers',
-                url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
-            },
-            {
-                name: 'Getting to know your customers',
-                url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
-            },
-            {
-                name: 'Health tracking',
-                url: '/handbook/cs-and-onboarding/health-tracking',
-            },
-            {
-                name: 'Customer health checks',
-                url: '/handbook/cs-and-onboarding/health-checks',
-            },
-            {
-                name: 'How we work',
-                url: '/handbook/cs-and-onboarding/how-we-work',
-            },
-            {
-                name: 'Tracking feature requests',
-                url: '/handbook/cs-and-onboarding/feature-requests',
-            },
-            {
-                name: 'YC onboarding',
-                url: '/handbook/growth/sales/yc-onboarding',
-            },
-        ],
-    },
-    {
         name: 'Demand gen',
         url: '',
         children: [
@@ -944,6 +898,14 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/databases/hogql-python',
                     },
                 ],
+            },
+            {
+                name: 'Working with Max AI',
+                url: '/handbook/engineering/working-with-max-ai',
+            },
+            {
+                name: 'Implementing AI features',
+                url: '/handbook/engineering/implementing-ai-features',
             },
             {
                 name: 'Deployments',
@@ -1236,10 +1198,6 @@ export const handbookSidebar = [
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
-                name: 'In-product AI playbook',
-                url: '/handbook/product/ai-playbook',
-            },
-            {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
             },
@@ -1264,61 +1222,92 @@ export const handbookSidebar = [
         ],
     },
     {
-        name: 'Sales',
+        name: 'Sales & CS',
         url: '',
         children: [
             {
-                name: 'Overview',
-                url: '/handbook/growth/sales/overview',
-            },
-            {
-                name: 'Why buy PostHog',
-                url: '/handbook/growth/sales/why-buy-posthog',
-            },
-            {
-                name: 'Inbound sales',
-                url: '/handbook/growth/sales/new-sales',
-            },
-            {
-                name: 'Product-led sales',
-                url: '/handbook/growth/sales/product-led-sales',
-            },
-            {
-                name: 'Outbound sales',
-                url: '/handbook/growth/sales/outbound-sales',
-            },
-            {
-                name: 'Expansion, cross-sell & retention',
-                url: '/handbook/growth/sales/expansion-and-retention',
+                name: 'Sales',
+                url: '',
                 children: [
                     {
-                        name: 'Account planning',
-                        url: '/handbook/growth/sales/account-planning',
+                        name: 'Overview',
+                        url: '/handbook/growth/sales/overview',
+                    },
+                    {
+                        name: 'Why buy PostHog',
+                        url: '/handbook/growth/sales/why-buy-posthog',
+                    },
+                    {
+                        name: 'Inbound sales',
+                        url: '/handbook/growth/sales/new-sales',
+                    },
+                    {
+                        name: 'Product-led sales',
+                        url: '/handbook/growth/sales/product-led-sales',
+                    },
+                    {
+                        name: 'Outbound sales',
+                        url: '/handbook/growth/sales/outbound-sales',
+                    },
+                    {
+                        name: 'Expansion, cross-sell & retention',
+                        url: '/handbook/growth/sales/expansion-and-retention',
+                        children: [
+                            {
+                                name: 'Account planning',
+                                url: '/handbook/growth/sales/account-planning',
+                            },
+                        ],
+                    },
+
+                    {
+                        name: 'Utilization by business type',
+                        url: '/handbook/growth/sales/utilization-by-business-type',
+                    },
+                    {
+                        name: 'How we work',
+                        url: '/handbook/growth/sales/how-we-work',
+                        children: [
+                            {
+                                name: 'New team member onboarding',
+                                url: '/handbook/growth/sales/new-hire-onboarding',
+                            },
+                        ],
                     },
                 ],
             },
-
             {
-                name: 'Utilization by business type',
-                url: '/handbook/growth/sales/utilization-by-business-type',
-            },
-            {
-                name: 'How we work',
-                url: '/handbook/growth/sales/how-we-work',
+                name: 'CS & Onboarding',
+                url: '',
                 children: [
                     {
-                        name: 'New team member onboarding',
-                        url: '/handbook/growth/sales/new-hire-onboarding',
+                        name: 'Customer success overview',
+                        url: '/handbook/cs-and-onboarding/customer-success',
+                    },
+                    {
+                        name: 'Onboarding specialist overview',
+                        url: '/handbook/cs-and-onboarding/onboarding-team',
+                    },
+                    {
+                        name: 'New starter onboarding',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                    },
+                    {
+                        name: 'Saying hi to your customers',
+                        url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
+                    },
+                    {
+                        name: 'Getting to know your customers',
+                        url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
+                    },
+                    {
+                        name: 'How we work',
+                        url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                 ],
             },
-
             {
-                name: 'Customer FAQs',
-                url: '/handbook/growth/sales/customer-faqs',
-            },
-            {
-                name: 'SalesOps',
+                name: 'Shared processes',
                 url: '',
                 children: [
                     {
@@ -1358,6 +1347,14 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
                     {
+                        name: 'Health tracking',
+                        url: '/handbook/cs-and-onboarding/health-tracking',
+                    },
+                    {
+                        name: 'Customer health checks',
+                        url: '/handbook/cs-and-onboarding/health-checks',
+                    },
+                    {
                         name: 'Historical imports',
                         url: '/handbook/growth/sales/historical-import',
                     },
@@ -1365,7 +1362,19 @@ export const handbookSidebar = [
                         name: 'Shared Slack channels',
                         url: '/handbook/growth/sales/slack-channels',
                     },
+                    {
+                        name: 'Tracking feature requests',
+                        url: '/handbook/cs-and-onboarding/feature-requests',
+                    },
+                    {
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
                 ],
+            },
+            {
+                name: 'Customer FAQs',
+                url: '/handbook/growth/sales/customer-faqs',
             },
         ],
     },
@@ -2659,7 +2668,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'SOC 2',
-                            url: '/handbook/company/security#soc-2',
+                            url: '/docs/privacy/soc2',
                         },
                         {
                             name: 'Ad blockers',

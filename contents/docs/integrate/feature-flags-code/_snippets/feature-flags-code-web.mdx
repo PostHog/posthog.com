@@ -29,7 +29,7 @@ This means that for most pages, the feature flags are available immediately — 
 To handle this, you can use the `onFeatureFlags` callback to wait for the feature flag request to finish:
 
 ```js-web
-posthog.onFeatureFlags(function (featureFlags, flagVariants, { errorsLoading }) {
+posthog.onFeatureFlags(function (flags, flagVariants, { errorsLoading }) {
     // feature flags are guaranteed to be available at this point
     if (posthog.isFeatureEnabled('flag-key')) {
         // do something

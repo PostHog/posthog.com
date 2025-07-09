@@ -8,7 +8,7 @@ So, what's it like working at PostHog?
 
 ## We're 100% remote 
 
-[Our team](/people) is 100% remote, and distributed across more than 15 countries.
+[Our team](/people) is 100% remote, and distributed across more than 20 countries.
 
 Being all remote has a bunch of advantages:
 
