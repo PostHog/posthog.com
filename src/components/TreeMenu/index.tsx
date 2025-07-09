@@ -86,7 +86,7 @@ export function TreeMenu(props: TreeMenuProps) {
     const items = useMemo(() => props.items, [])
 
     useEffect(() => {
-        setActiveItem(getActiveItem(props.items || [], appWindow?.path || pathname))
+        setActiveItem(getActiveItem(items || [], appWindow?.path || pathname))
     }, [appWindow?.path])
 
     return (
