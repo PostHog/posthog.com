@@ -26,16 +26,22 @@ import { DebugContainerQuery } from 'components/DebugContainerQuery'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
+    const { user } = useUser()
     const topicsNav = useTopicsNav()
     return (
         <ScrollArea className="p-2">
             <TreeMenu
+                key={user?.id}
                 items={[
-                    {
-                        name: 'My subscriptions',
-                        url: '/questions/subscriptions',
-                        icon: <IconNotification />,
-                    },
+                    ...(user
+                        ? [
+                              {
+                                  name: 'My subscriptions',
+                                  url: '/questions/subscriptions',
+                                  icon: <IconNotification />,
+                              },
+                          ]
+                        : []),
                     ...topicsNav,
                 ]}
             />
