@@ -12,7 +12,7 @@ API queries enable you to query your data in PostHog. This is useful for:
 > **When should you _not_ use API queries?**
 > 1. When you want to export large amounts of data. Use [batch exports](/docs/cdp/batch-exports) instead.
 > 2. When you want to send data to destinations like Slack or webhooks immediately. Use [real-time destinations](/docs/cdp/destinations) instead.
-> 3. If you need regular fresh, non-trivial data. Use [materialized views](/docs/data-warehouse/views) with a schedule instead. You can then query the materialized view through the HogQL and get almost instant results.
+> 3. If you need data from long-running queries with high memory usage at regular intervals. In this case, you should use [materialized views](/docs/data-warehouse/views) with a schedule instead. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
 
 ## Prerequisites
 
@@ -466,17 +466,17 @@ curl \
 
 ## Rate limits
 
-API queries are limited to:
+API queries are limited at the project-level to:
 
-- 3 queries running concurrently,
-- 1200 queries per hour,
-- 120 queries per minute,
-- max execution time of 10 seconds (this is a query execution time, not HTTP request duration),
-- 80 threads.
+- 3 queries running concurrently
+- 1200 queries per hour
+- 120 queries per minute
+- Max execution time of 10 seconds (this is a query execution time, not HTTP request duration)
+- 80 threads
 
 If you need higher limits than these, [get in touch with our sales team](/talk-to-a-human). We promise they're friendly and technical enough to know what an API is.
 
-Query queueing - if at a given moment the team's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue.
+If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
 
 *Notice* There are some customers being on an old limiting setup: 120 queries/hour.
 
