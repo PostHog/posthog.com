@@ -373,7 +373,9 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
-                            className={`@container absolute overflow-hidden !select-auto bg-primary ${
+                            className={`@container absolute overflow-hidden !select-auto ${
+                                item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary'
+                            } ${
                                 siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                     ? ''
                                     : `${
