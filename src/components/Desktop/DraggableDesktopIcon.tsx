@@ -87,7 +87,7 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
             onDragEnd={handleDragEnd}
             onMouseDown={handleMouseDown}
             whileDrag={{ scale: 1.1, rotate: 2 }}
-            initial={{ scale: 0.8, opacity: 0 }}
+            initial={{ x: position.x, y: position.y }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
         >
             <div
