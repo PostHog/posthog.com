@@ -189,7 +189,7 @@ Github does not allow for conflict resolution inside their website, so you must 
    git pull --rebase <your branch>
    ```
 
-In your terminal, it should show you the conflicts mimicing what you see in your Github PR.
+In your terminal, it should show you the conflicts mimicking what you see in your Github PR.
 
 
    ```bash
