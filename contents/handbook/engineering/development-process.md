@@ -158,7 +158,7 @@ If you wish to locally run `test-runner.ts` and output all snapshots:
 Or if you wish to run one particular story:
 
    ```bash
-   pnpm --filter=@posthog/storybook test:visual:ci:update <path to story>
+   pnpm --filter=@posthog/storybook test:visual:ci:update <path_to_story>
    
    # example: pnpm --filter=@posthog/storybook test:visual:ci:update frontend/src/scenes/settings/stories/SettingsProject.stories.tsx
    ```
