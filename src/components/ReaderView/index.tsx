@@ -453,19 +453,37 @@ function ReaderViewContent({
     }
 
     useEffect(() => {
-        const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]')
+        const scrollElement = contentRef.current?.closest('[data-radix-scroll-area-viewport]') as HTMLElement
         if (!scrollElement) return
-        scrollElement.scrollTo(
-            hash
-                ? {
-                      top: document.getElementById(CSS.escape(hash.replace('#', '')))?.offsetTop,
-                      behavior: 'smooth',
-                  }
-                : {
-                      top: 0,
-                  }
-        )
-    }, [appWindow?.path])
+
+        const waitForImagesAndScroll = async () => {
+            const images = contentRef.current?.querySelectorAll('img') || []
+            const imageLoadPromises = Array.from(images).map((img: HTMLImageElement) => {
+                return new Promise<void>((resolve) => {
+                    if (img.complete) {
+                        resolve()
+                    } else {
+                        img.addEventListener('load', () => resolve())
+                        img.addEventListener('error', () => resolve())
+                    }
+                })
+            })
+            await Promise.all(imageLoadPromises)
+            await new Promise((resolve) => setTimeout(resolve, 100))
+            scrollElement.scrollTo({
+                top: document.getElementById(hash.replace('#', ''))?.offsetTop || 0,
+                behavior: 'smooth',
+            })
+        }
+
+        if (hash) {
+            waitForImagesAndScroll()
+        } else {
+            scrollElement.scrollTo({
+                top: 0,
+            })
+        }
+    }, [appWindow?.path, hash])
 
     return (
         <SearchProvider>
