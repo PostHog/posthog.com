@@ -203,7 +203,7 @@ In your terminal, it should show you the conflicts mimicking what you see in you
    hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
    ```
 
-If all your conflicts are look like this (only snapshots), you can simply skip it.
+If all your conflicts are only snapshots, you can simply skip it.
 
    ```bash
    git rebase --skip
