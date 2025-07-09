@@ -380,15 +380,23 @@ export default function BlogPost({ data, pageContext, location, mobile = false }
                 leftSidebar={
                     <>
                         <Filters tag={tag} setTag={setTag} sort={sort} setSort={setSort} activeMenu={activeMenu} />
-                        <TreeMenu
-                            key={`posts-${posts?.length}`}
-                            items={posts?.map((post) => {
-                                return {
-                                    name: post.attributes.title,
-                                    url: post.attributes.slug,
-                                }
-                            })}
-                        />
+                        {isLoading ? (
+                            <div className="space-y-2">
+                                {Array.from({ length: 20 }).map((_, index) => (
+                                    <div key={index} className="bg-accent h-8 w-full rounded-md animate-pulse" />
+                                ))}
+                            </div>
+                        ) : (
+                            <TreeMenu
+                                key={`posts-${posts?.length}`}
+                                items={posts?.map((post) => {
+                                    return {
+                                        name: post.attributes.title,
+                                        url: post.attributes.slug,
+                                    }
+                                })}
+                            />
+                        )}
                         {hasMore && (
                             <CallToAction
                                 disabled={isValidating}

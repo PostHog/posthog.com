@@ -6,7 +6,7 @@ import * as Icons from '@posthog/icons'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import slugify from 'slugify'
 
-const tagOptions = {
+export const tagOptions = {
     'Being a founder': {
         icon: 'IconPeople',
     },
@@ -87,8 +87,15 @@ const tagOptions = {
     },
 }
 
+const HubSkeleteon = () => {
+    return Array.from({ length: 14 }).map((_, index) => (
+        <div key={index} className="bg-accent w-full h-20 rounded-md animate-pulse" />
+    ))
+}
+
 export default function Hub({ folder, sidebar, title }: { folder: string; sidebar?: React.ReactNode; title: string }) {
     const [tags, setTags] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const query = qs.stringify(
@@ -111,6 +118,7 @@ export default function Hub({ folder, sidebar, title }: { folder: string; sideba
             .then((response) => response.json())
             .then((data) => {
                 setTags(data.data)
+                setLoading(false)
             })
     }, [])
 
@@ -120,12 +128,15 @@ export default function Hub({ folder, sidebar, title }: { folder: string; sideba
                 <section className="flex-1">
                     <ScrollArea>
                         <h2 className="mb-4">{title}</h2>
-                        <div>
-                            <div
-                                data-scheme="primary"
-                                className="grid grid-cols-[repeat(auto-fit,minmax(max(7rem,calc(100%/6)),1fr))] gap-4 relative items-start"
-                            >
-                                {tags?.map((tag: any, index: number) => {
+
+                        <div
+                            data-scheme="primary"
+                            className="grid grid-cols-[repeat(auto-fit,minmax(max(7rem,calc(100%/6)),1fr))] gap-4 relative items-start"
+                        >
+                            {loading ? (
+                                <HubSkeleteon />
+                            ) : (
+                                tags?.map((tag: any, index: number) => {
                                     const {
                                         attributes: { label },
                                     } = tag
@@ -145,8 +156,8 @@ export default function Hub({ folder, sidebar, title }: { folder: string; sideba
                                             </Link>
                                         </ZoomHover>
                                     )
-                                })}
-                            </div>
+                                })
+                            )}
                         </div>
                     </ScrollArea>
                 </section>

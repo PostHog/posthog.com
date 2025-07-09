@@ -17,17 +17,17 @@ export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
     return (
-        <UserProvider>
-            {wrapElement({
-                element: (
-                    <Provider element={element} location={props.location}>
-                        <ToastProvider>
+        <ToastProvider>
+            <UserProvider>
+                {wrapElement({
+                    element: (
+                        <Provider element={element} location={props.location}>
                             <Wrapper element={element} />
-                        </ToastProvider>
-                    </Provider>
-                ),
-            })}
-        </UserProvider>
+                        </Provider>
+                    ),
+                })}
+            </UserProvider>
+        </ToastProvider>
     )
 }
 

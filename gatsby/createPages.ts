@@ -23,6 +23,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
     const HomeTemplate = path.resolve(`src/templates/Home.tsx`)
+    const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -535,7 +536,8 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
         result.data.postCategories.nodes.forEach(
             ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
-                if (categoryFolder !== 'founders' && categoryFolder !== 'product-engineers') {
+                const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
+                if (!isHub) {
                     createPage({
                         path: `/${categoryFolder}`,
                         component: PostListingTemplate,
@@ -551,7 +553,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                 post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
                     createPage({
                         path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
-                        component: PostListingTemplate,
+                        component: isHub ? HubTagTemplate : PostListingTemplate,
                         context: {
                             selectedTag: tagLabel,
                             post: true,

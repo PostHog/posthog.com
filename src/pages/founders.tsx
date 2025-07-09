@@ -3,25 +3,19 @@ import Link from 'components/Link'
 import SEO from 'components/seo'
 import React from 'react'
 
-export default function Founders() {
+export const Sidebar = () => {
     return (
         <>
-            <SEO title="Founder's hub - PostHog" />
-            <Hub
-                title="Founder's hub"
-                folder="founders"
-                sidebar={
-                    <>
-                        <h6 className="mb-2">About Founder's hub</h6>
+            <h6 className="mb-2">About Founder's hub</h6>
 
-                        <p>We've curated the best advice to build a successful company.</p>
+            <p>We've curated the best advice to build a successful company.</p>
 
-                        <p>
-                            Some are lessons we've heard from fellow founders, others are from first-hand experience in
-                            building PostHog to product-market fit and beyond.
-                        </p>
+            <p>
+                Some are lessons we've heard from fellow founders, others are from first-hand experience in building
+                PostHog to product-market fit and beyond.
+            </p>
 
-                        {/* <p>
+            {/* <p>
                         Each collection is a work in progress. You can{' '}
                         <Link to="/suggestion" className="underline font-medium">
                             suggest an article topic
@@ -33,7 +27,7 @@ export default function Founders() {
                         we haven't written about yet.
                     </p> */}
 
-                        {/* <hr className="my-4" />
+            {/* <hr className="my-4" />
 
         <h6>Key</h6>
 
@@ -57,17 +51,23 @@ export default function Founders() {
             </p>
         </div> */}
 
-                        <hr className="my-4" />
+            <hr className="my-4" />
 
-                        <p>
-                            You might also be interested in our{' '}
-                            <Link to="/engineers" className="underline font-medium">
-                                Product engineer's hub
-                            </Link>
-                        </p>
-                    </>
-                }
-            />
+            <p>
+                You might also be interested in our{' '}
+                <Link to="/engineers" className="underline font-medium">
+                    Product engineer's hub
+                </Link>
+            </p>
+        </>
+    )
+}
+
+export default function Founders() {
+    return (
+        <>
+            <SEO title="Founder's hub - PostHog" />
+            <Hub title="Founder's hub" folder="founders" sidebar={<Sidebar />} />
         </>
     )
 }

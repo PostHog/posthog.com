@@ -4,6 +4,8 @@ import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
 import { COOKIELESS_SENTINEL_VALUE } from 'posthog-js/lib/src/constants'
+import Link from 'components/Link'
+import { useToast } from '../context/Toast'
 
 export type User = {
     id: number
@@ -62,7 +64,7 @@ type UserContextValue = {
     isValidating: boolean
     voteReply: (id: number, vote: 'up' | 'down', user?: User) => Promise<void>
     addBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
-    removeBookmark: (args: { url: string }) => Promise<void>
+    removeBookmark: (args: { url: string; title: string; description: string }) => Promise<void>
 }
 
 export const UserContext = createContext<UserContextValue>({
@@ -101,6 +103,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     const [user, setUser] = useState<User | null>(null)
     const [jwt, setJwt] = useState<string | null>(null)
     const [notifications, setNotifications] = useState<any>([])
+    const { addToast } = useToast()
 
     const posthog = usePostHog()
 
@@ -589,14 +592,33 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             },
             body: JSON.stringify({
                 data: {
-                    bookmarks: [...(user?.profile?.bookmarks || []), { url, title, description }],
+                    bookmarks: [
+                        ...(user?.profile?.bookmarks?.filter((b) => b.url !== url) || []),
+                        { url, title, description },
+                    ],
                 },
             }),
         })
-        fetchUser()
+
+        addToast({
+            title: 'Bookmark added',
+            description: (
+                <>
+                    This page has been added to your{' '}
+                    <Link to="/bookmarks" state={{ newWindow: true }} className="text-red dark:text-yellow font-bold">
+                        bookmarks
+                    </Link>
+                    .
+                </>
+            ),
+            onUndo: async () => {
+                removeBookmark({ url, title, description })
+            },
+        })
+        await fetchUser()
     }
 
-    const removeBookmark = async ({ url }: { url: string }) => {
+    const removeBookmark = async ({ url, title, description }: { url: string; title: string; description: string }) => {
         const profileID = user?.profile?.id
         if (!profileID) return
         const jwt = await getJwt()
@@ -612,7 +634,14 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
                 },
             }),
         })
-        fetchUser()
+        await fetchUser()
+        addToast({
+            title: 'Bookmark removed',
+            description: 'This page has been removed from your bookmarks.',
+            onUndo: async () => {
+                addBookmark({ url, title, description })
+            },
+        })
     }
 
     useEffect(() => {

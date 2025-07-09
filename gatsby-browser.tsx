@@ -9,7 +9,11 @@ import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
 initKea(false)
 
-export const wrapRootElement = ({ element }) => <UserProvider>{wrapElement({ element })}</UserProvider>
+export const wrapRootElement = ({ element }) => (
+    <ToastProvider>
+        <UserProvider>{wrapElement({ element })}</UserProvider>
+    </ToastProvider>
+)
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice
@@ -34,8 +38,6 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
 
 export const wrapPageElement = ({ element, props: { pageContext, location } }) => (
     <Provider element={element} location={location}>
-        <ToastProvider>
-            <Wrapper />
-        </ToastProvider>
+        <Wrapper />
     </Provider>
 )

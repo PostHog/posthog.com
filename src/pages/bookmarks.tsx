@@ -9,7 +9,7 @@ import { Popover } from 'components/RadixUI/Popover'
 import OSButton from 'components/OSButton'
 import MenuBar from 'components/RadixUI/MenuBar'
 
-const EditButton = ({ url }: { url: string }) => {
+const EditButton = ({ url, title, description }: { url: string; title: string; description: string }) => {
     const { removeBookmark } = useUser()
 
     return (
@@ -26,7 +26,7 @@ const EditButton = ({ url }: { url: string }) => {
                             type: 'item',
                             label: 'Remove bookmark',
                             onClick: () => {
-                                removeBookmark({ url })
+                                removeBookmark({ url, title, description })
                             },
                         },
                     ],
@@ -63,7 +63,7 @@ const Bookmark = ({ title, description, url }: { title: string; description: str
                                 {title}
                             </Link>
                         </h3>
-                        <EditButton url={url} />
+                        <EditButton url={url} title={title} description={description} />
                     </div>
                 </div>
             ) : (
@@ -76,7 +76,7 @@ const Bookmark = ({ title, description, url }: { title: string; description: str
                         >
                             <h3 className="m-0">{title}</h3>
                         </Link>
-                        <EditButton url={url} />
+                        <EditButton url={url} title={title} description={description} />
                     </div>
                     <p className="text-sm text-muted-foreground">{description}</p>
                 </div>

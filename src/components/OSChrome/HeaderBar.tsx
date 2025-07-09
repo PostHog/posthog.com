@@ -76,15 +76,13 @@ export default function HeaderBar({
     isCartOpen = false,
 }: HeaderBarProps) {
     const { user, addBookmark, removeBookmark } = useUser()
-    const { addToast } = useToast()
     const { openSignIn } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
     const count = useCartStore((state) => state.count)
-    const currentURL = `https://posthog.com${appWindow?.path}`
     const isBookmarked = useMemo(
-        () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === currentURL),
+        () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === appWindow?.path),
         [user, appWindow?.path]
     )
 
@@ -119,33 +117,9 @@ export default function HeaderBar({
 
         if (bookmark) {
             if (add) {
-                await addBookmark({ ...bookmark, url: currentURL })
-                addToast({
-                    title: 'Bookmark added',
-                    description: (
-                        <>
-                            This page has been added to your{' '}
-                            <Link
-                                to="/bookmarks"
-                                state={{ newWindow: true }}
-                                className="text-red dark:text-yellow font-bold"
-                            >
-                                bookmarks
-                            </Link>
-                            .
-                        </>
-                    ),
-                    onUndo: () => {
-                        handleBookmark(false)
-                    },
-                })
+                await addBookmark({ ...bookmark, url: appWindow?.path })
             } else {
-                await removeBookmark({ url: currentURL })
-                addToast({
-                    title: 'Bookmark removed',
-                    description: 'This page has been removed from your bookmarks.',
-                    onUndo: () => handleBookmark(true),
-                })
+                await removeBookmark({ ...bookmark, url: appWindow?.path })
             }
         }
     }
