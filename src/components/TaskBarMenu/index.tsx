@@ -105,6 +105,7 @@ export default function TaskBarMenu() {
                           label: 'PostHog app',
                           link: 'https://app.posthog.com',
                           icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          external: true,
                       },
                       {
                           type: 'item' as const,

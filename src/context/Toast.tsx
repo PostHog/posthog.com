@@ -3,13 +3,14 @@ import Toasts from 'components/Toast'
 
 export interface Toast {
     title?: string
-    description: string
+    description: string | React.ReactNode
     error?: boolean
     createdAt?: number
     onUndo?: () => void
     onAction?: () => void
     actionLabel?: string
     duration?: number
+    image?: React.ReactNode
 }
 
 interface ToastContext {
