@@ -256,7 +256,7 @@ export default function Tabbed() {
     const initialProductAddons = useMemo(() => {
         const initialAddons = []
         for (const product of products) {
-            if (product.billingData.addons.length > 0) {
+            if (product.billingData?.addons?.length > 0) {
                 product.billingData.addons.forEach((addon) => {
                     initialAddons.push({
                         type: addon.type,
@@ -351,7 +351,7 @@ export default function Tabbed() {
                                 .filter(
                                     (addon) =>
                                         addon.checked &&
-                                        billingData.addons.some((billingAddon) => addon.type === billingAddon.type)
+                                        billingData?.addons.some((billingAddon) => addon.type === billingAddon.type)
                                 )
                                 .reduce((acc, addon) => acc + addon.totalCost, 0)
                             return (

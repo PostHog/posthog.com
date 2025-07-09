@@ -37,7 +37,7 @@
         "@headlessui/tailwindcss": "^0.1.1",
         "@heroicons/react": "^1.0.6",
         "@hubspot/api-client": "^7.1.2",
-        "@inkeep/cxkit-react": "^0.5.92",
+        "@inkeep/cxkit-react": "^0.5.93",
         "@inkeep/uikit": "^0.3.20",
         "@inkeep/uikit-js": "^0.3.20",
         "@mdxeditor/editor": "^3.32.3",

@@ -258,7 +258,6 @@ gap: .5rem;
     },
     privacyPreferences: {
         optOutAnalyticalCookies: true,
-        optOutAllAnalytics: true,
         optOutFunctionalCookies: true,
     },
 }
@@ -270,6 +269,7 @@ const defaultAiChatSettings: InkeepAIChatSettings = {
     },
     aiAssistantName: 'Max AI',
     isFirstExampleQuestionHighlighted: false,
+    conversationVisibility: 'public',
 }
 
 const useInkeepSettings = (): InkeepSharedSettings => {

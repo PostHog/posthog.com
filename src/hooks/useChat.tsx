@@ -43,28 +43,13 @@ export function ChatProvider({
     const [firstResponse, setFirstResponse] = useState<string | null>(null)
     const conversationStartedDate = useMemo(() => date || new Date().toISOString(), [])
 
-    const logConversation = async (messages: any) => {
-        const body = JSON.stringify({
-            messages,
-            tags: [],
-            type: 'openai',
-            userProperties: {},
-            visibility: 'public',
-        })
-        const data = await fetch(`https://api.analytics.inkeep.com/conversations`, {
-            method: 'POST',
-            body,
-            headers: {
-                Authorization: `Bearer ${process.env.GATSBY_INKEEP_API_KEY}`,
-                'Content-Type': 'application/json',
-            },
-        }).then((response) => response.json())
-        const conversationId = data?.id
-        if (conversationId && messages?.length > 0) {
+    const logConversation = async (event: any) => {
+        const conversationId = event?.properties?.conversation?.id
+        if (conversationId) {
             try {
                 const newConversation = {
                     id: conversationId,
-                    question: messages[0].content,
+                    question: event?.properties?.conversation?.messages[0]?.content,
                     date: conversationStartedDate,
                 }
                 const conversations = JSON.parse(localStorage.getItem('conversations') || '[]')
@@ -93,10 +78,7 @@ export function ChatProvider({
                     setHasFirstResponse(true)
                 }
             }
-            const messages = event?.properties?.conversation?.messages
-            if (messages?.length > 0) {
-                logConversation(messages.map(({ id, ...rest }: any) => ({ ...rest })))
-            }
+            logConversation(event)
         },
         [hasFirstResponse]
     )
