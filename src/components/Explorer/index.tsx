@@ -175,7 +175,10 @@ export default function Explorer({
                         )}
                     </main>
                     {leftSidebarContent && (
-                        <aside data-scheme="secondary" className="w-64 bg-primary border-r border-primary h-full">
+                        <aside
+                            data-scheme="secondary"
+                            className="w-64 bg-primary border-r border-primary h-full prose prose-sm"
+                        >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
                                     <SidebarContent content={leftSidebarContent} />

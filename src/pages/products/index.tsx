@@ -80,6 +80,7 @@ export default function Products(): JSX.Element {
                                         width="full"
                                         size="md"
                                         to="/why"
+                                        state={{ newWindow: true }}
                                         icon={<Icons.IconArrowRight className="text-salmon" />}
                                         iconPosition="right"
                                         className="font-semibold !px-0"
