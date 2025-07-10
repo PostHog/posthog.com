@@ -139,7 +139,7 @@ If you have any `blob_v2` sources, you can ignore all other sources and only mak
 
 You can also request multiple blobs at once using `?source=blob_v2&start_blob_key={the_first_key}&end_blob_key={the_second_blob_key}`. 
 
-> Note: you can request a maximum of 20 blob keys at a time. But you will need to tune this for your application as 20 blobs could be a lot of data and timeout. For example `?source=blob_v2&start_blob_key=0&end_blob_key=20` is invalid as it requests 21 keys.
+> **Note:** You can request a maximum of 20 blob keys at a time. You will need to tune this for your application as 20 blobs could be a lot of data and timeout. For example, `?source=blob_v2&start_blob_key=0&end_blob_key=20` is invalid as it requests 21 keys.
 
 ### Post-processing
 
