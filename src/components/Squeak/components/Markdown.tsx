@@ -37,7 +37,7 @@ export const Markdown = ({
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
             className={cn(
-                'flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 text-secondary font-normal [&_p:last-child]:mb-0',
+                'flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 font-normal [&_p:last-child]:mb-0',
                 !regularText && 'question-content community-post-markdown',
                 className
             )}

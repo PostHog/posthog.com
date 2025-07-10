@@ -132,7 +132,7 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
     return (
         <div
             data-scheme="primary"
-            className={`fixed top-[calc(37px+1rem)] -right-4 h-[calc(100vh-2rem-37px)] w-96 bg-primary border border-primary rounded shadow-xl z-30 transition-transform duration-300 ${
+            className={`fixed top-[calc(37px+1rem)] -right-4 h-[calc(100vh-2rem-37px)] w-96 bg-primary border border-primary rounded shadow-xl z-30 transition-transform duration-300 text-primary ${
                 isOpen ? '-translate-x-8' : 'translate-x-full'
             }`}
         >
