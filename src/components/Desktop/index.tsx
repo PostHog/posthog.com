@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { IconRewindPlay } from '@posthog/icons'
+import { IconRewindPlay, IconX } from '@posthog/icons'
 import Link from 'components/Link'
 import { useApp } from '../../context/App'
 import useProduct from 'hooks/useProduct'
@@ -10,6 +10,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import DraggableDesktopIcon from './DraggableDesktopIcon'
 import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
+import NotificationsPanel from 'components/NotificationsPanel'
 
 interface Product {
     name: string
@@ -229,6 +230,7 @@ export default function Desktop() {
             ]}
         >
             <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
+                <NotificationsPanel />
                 <div
                     className={`absolute bottom-0 right-0 size-full -z-10 
                         wallpaper-hogzilla:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png')] wallpaper-hogzilla:bg-contain 
