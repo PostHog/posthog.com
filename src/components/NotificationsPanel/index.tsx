@@ -157,7 +157,6 @@ export default function NotificationsPanel() {
                         }}
                         transition={{ duration: 0.3, type: 'tween' }}
                         className={`fixed top-[calc(37px+1rem)] right-4 h-[calc(100vh-2rem-37px)] w-96 bg-primary border border-primary rounded shadow-xl z-50 text-primary`}
-                        onClick={(e) => e.stopPropagation()}
                     >
                         <div className="h-full flex flex-col">
                             <div className="flex items-center justify-between px-4 py-2 border-b border-primary">
