@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { IconX } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import Link from 'components/Link'
@@ -115,6 +115,7 @@ const Question = ({ id, subject, activeAt, permalink, replies, date, onItemClick
 export default function NotificationsPanel() {
     const { notifications } = useUser()
     const { isNotificationsPanelOpen, setIsNotificationsPanelOpen } = useApp()
+    const panelRef = useRef<HTMLDivElement>(null)
 
     const closeNotificationsPanel = () => {
         setIsNotificationsPanelOpen(false)
@@ -125,10 +126,25 @@ export default function NotificationsPanel() {
         navigate(url, { state: { newWindow: true } })
     }
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (panelRef.current && !panelRef.current.contains(event.target as Node)) {
+                closeNotificationsPanel()
+            }
+        }
+
+        document.addEventListener('mousedown', handleClickOutside)
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [])
+
     return (
         <AnimatePresence>
             {isNotificationsPanelOpen && (
                 <motion.div
+                    ref={panelRef}
                     data-scheme="primary"
                     initial={{ translateX: '100%' }}
                     animate={{
