@@ -89,4 +89,4 @@ For our internal communications, we have the following policies:
 
 In case you should receive a suspicious email or other form of communication, please do not click on any links or open any attachments. Instead, please contact the team or person directly via Slack. E.g. if someone claims to be James, send them a message on Slack and ask "James, am I in a call with you right now?". This is a great and easy way to verify if this is legit. The same goes for any other form of communication. 
 
-Please report any suspicious communications to `#security` on Slack. 
+Please report any suspicious communications to `#project-security` on Slack. 
