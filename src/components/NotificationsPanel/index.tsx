@@ -146,6 +146,7 @@ export default function NotificationsPanel() {
             <AnimatePresence>
                 {isNotificationsPanelOpen && (
                     <motion.div
+                        ref={panelRef}
                         data-scheme="primary"
                         initial={{ translateX: '100%' }}
                         animate={{
