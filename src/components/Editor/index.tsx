@@ -1,16 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Select } from '../RadixUI/Select'
-import HeaderBar from 'components/OSChrome/HeaderBar'
-import * as Icons from '@posthog/icons'
-import { Link, navigate } from 'gatsby'
+import { IconSearch, IconMessage, IconFilter } from '@posthog/icons'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
-import CloudinaryImage from 'components/CloudinaryImage'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { productMenu } from '../../navs'
-import { Accordion } from '../RadixUI/Accordion'
-import { FileMenu } from '../RadixUI/FileMenu'
 import { Toolbar, ToolbarElement } from '../RadixUI/Toolbar'
 import {
     StrikethroughIcon,
@@ -21,14 +14,14 @@ import {
     FontItalicIcon,
     ReloadIcon,
 } from '@radix-ui/react-icons'
-import { IconSearch, IconMessage, IconX } from '@posthog/icons'
 import { IconLink } from '../OSIcons/Icons'
 import useProduct from 'hooks/useProduct'
 import { SearchProvider } from './SearchProvider'
 import { SearchBar } from './SearchBar'
 import { getProseClasses } from '../../constants/index'
 import { useApp } from '../../context/App'
-import MediaPlayer from 'components/MediaPlayer'
+import Share from 'components/Share'
+import { useWindow } from '../../context/Window'
 
 interface EditorProps {
     slug?: string
@@ -128,6 +121,8 @@ export function Editor({
     const searchContentRef = useRef(null)
     const { search } = useLocation()
     const { addWindow } = useApp()
+    const hasShareButton = !cta?.url || !cta?.label
+    const { appWindow } = useWindow()
 
     const toggleSearch = () => {
         setShowSearch(!showSearch)
@@ -273,7 +268,7 @@ export function Editor({
                         variant="ghost"
                         size="sm"
                         active={showSearch}
-                        icon={<Icons.IconSearch />}
+                        icon={<IconSearch />}
                         onClick={toggleSearch}
                     />
                     {availableFilters && availableFilters.length > 0 && (
@@ -281,28 +276,34 @@ export function Editor({
                             variant="ghost"
                             size="sm"
                             active={showFilters}
-                            icon={<Icons.IconFilter />}
+                            icon={<IconFilter />}
                             onClick={() => setShowFilters(!showFilters)}
                         />
                     )}
                     <OSButton
-                        onClick={() =>
-                            addWindow(
-                                <MediaPlayer
-                                    newWindow
-                                    location={{ pathname: `cher` }}
-                                    key={`cher`}
-                                    videoId="nZXRV4MezEw"
-                                />
-                            )
-                        }
                         variant="primary"
                         size="xs"
-                        to={cta?.url}
+                        {...(hasShareButton
+                            ? {
+                                  onClick: () => {
+                                      addWindow(
+                                          <Share
+                                              title={appWindow?.meta?.title}
+                                              location={{ pathname: `share` }}
+                                              key={`share`}
+                                              newWindow
+                                              url={`${window.location.origin}${appWindow?.path}`}
+                                          />
+                                      )
+                                  },
+                              }
+                            : {
+                                  to: cta?.url,
+                              })}
                         state={{ newWindow: true }}
                         asLink
                     >
-                        {cta?.label || 'Share'}
+                        {hasShareButton ? 'Share' : cta?.label}
                     </OSButton>
                 </>
             ),
