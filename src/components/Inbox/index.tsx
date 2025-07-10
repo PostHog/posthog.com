@@ -170,9 +170,10 @@ export default function Inbox(props) {
 
     useEffect(() => {
         if (props.path === '/questions') {
+            setShowSubscribedQuestions(false)
             setFilters(defaultFilters)
         }
-        if (props.path === '/questions/subscriptions' && !isValidating) {
+        if (props.path === '/questions/subscriptions') {
             if (user) {
                 setShowSubscribedQuestions(true)
             } else {
