@@ -420,28 +420,32 @@ export default function Inbox(props) {
                                             )}
 
                                             <div className="ml-1 pl-1 border-l border-primary">
-                                                <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
-                                                    <span>
-                                                        <OSButton
-                                                            variant="ghost"
-                                                            size="sm"
-                                                            className="relative"
-                                                            icon={
-                                                                <IconChevronDown
-                                                                    className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                        sideBySide
-                                                                            ? expandable
-                                                                                ? 'rotate-90'
-                                                                                : '-rotate-90'
-                                                                            : expandable
-                                                                            ? 'rotate-180'
-                                                                            : ''
-                                                                    }`}
-                                                                />
-                                                            }
-                                                            onClick={expandOrCollapse}
-                                                        />
-                                                    </span>
+                                                <Tooltip
+                                                    trigger={
+                                                        <span>
+                                                            <OSButton
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                className="relative"
+                                                                icon={
+                                                                    <IconChevronDown
+                                                                        className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                                            sideBySide
+                                                                                ? expandable
+                                                                                    ? 'rotate-90'
+                                                                                    : '-rotate-90'
+                                                                                : expandable
+                                                                                ? 'rotate-180'
+                                                                                : ''
+                                                                        }`}
+                                                                    />
+                                                                }
+                                                                onClick={expandOrCollapse}
+                                                            />
+                                                        </span>
+                                                    }
+                                                >
+                                                    {expandable ? 'Expand' : 'Collapse'}
                                                 </Tooltip>
                                             </div>
                                         </div>
