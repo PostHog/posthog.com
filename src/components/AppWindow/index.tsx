@@ -374,7 +374,19 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
-                            className={`@container absolute !select-auto`}
+                            className={`@container absolute !select-auto ${
+                                item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary'
+                            } ${
+                                siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
+                                    ? ''
+                                    : `${
+                                          focusedWindow === item
+                                              ? 'shadow-2xl border-primary'
+                                              : 'shadow-lg border-input'
+                                      } ${dragging ? '[&_*]:select-none' : ''} ${
+                                          item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
+                                      }`
+                            }`}
                             style={{
                                 zIndex: item.zIndex,
                             }}
@@ -455,269 +467,247 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             onMouseDown={handleMouseDown}
                         >
                             {item.path.startsWith('share') && <Cher />}
-                            <div
-                                className={`overflow-hidden ${
-                                    item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary'
-                                } ${
-                                    siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
-                                        ? ''
-                                        : `${
-                                              focusedWindow === item
-                                                  ? 'shadow-2xl border-primary'
-                                                  : 'shadow-lg border-input'
-                                          } ${dragging ? '[&_*]:select-none' : ''} ${
-                                              item.minimal ? '!shadow-none' : 'flex flex-col border rounded'
-                                          }`
-                                }`}
-                            >
-                                {!item.minimal && (
-                                    <div
-                                        data-scheme="tertiary"
-                                        onDoubleClick={handleDoubleClick}
-                                        className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input ${
-                                            siteSettings.experience === 'boring' ? '' : 'cursor-move'
-                                        }`}
-                                        onPointerDown={(e) => controls.start(e)}
-                                    >
-                                        <MenuBar
-                                            menus={[
-                                                {
-                                                    trigger: (
-                                                        <>
-                                                            <IconDocument className="size-5" />
-                                                            <IconChevronDown className="size-6 -mx-1.5 text-muted group-hover:text-primary data-[state=open]:text-primary" />
-                                                        </>
-                                                    ),
-                                                    items: [
-                                                        ...(pageOptions || defaultPageOptions),
-                                                        {
-                                                            type: 'item',
-                                                            label: 'Close',
-                                                            onClick: () => {
-                                                                closeWindow(item)
-                                                            },
+                            {!item.minimal && (
+                                <div
+                                    data-scheme="tertiary"
+                                    onDoubleClick={handleDoubleClick}
+                                    className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input ${
+                                        siteSettings.experience === 'boring' ? '' : 'cursor-move'
+                                    }`}
+                                    onPointerDown={(e) => controls.start(e)}
+                                >
+                                    <MenuBar
+                                        menus={[
+                                            {
+                                                trigger: (
+                                                    <>
+                                                        <IconDocument className="size-5" />
+                                                        <IconChevronDown className="size-6 -mx-1.5 text-muted group-hover:text-primary data-[state=open]:text-primary" />
+                                                    </>
+                                                ),
+                                                items: [
+                                                    ...(pageOptions || defaultPageOptions),
+                                                    {
+                                                        type: 'item',
+                                                        label: 'Close',
+                                                        onClick: () => {
+                                                            closeWindow(item)
                                                         },
-                                                    ],
-                                                },
-                                            ]}
-                                        />
+                                                    },
+                                                ],
+                                            },
+                                        ]}
+                                    />
 
-                                        <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
-                                            {menu && menu.length > 0 ? (
-                                                <Popover
-                                                    trigger={
-                                                        <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                            {item.meta?.title && item.meta.title}
-                                                            <IconChevronDown className="size-6 -m-1" />
-                                                        </button>
-                                                    }
-                                                    dataScheme="primary"
-                                                    contentClassName="w-auto p-0 border border-primary"
-                                                    header={false}
-                                                >
-                                                    <FileMenu menu={menu} />
-                                                </Popover>
-                                            ) : (
-                                                <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                    {item.meta?.title && item.meta.title}
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="flex justify-end">
-                                            {siteSettings.experience !== 'boring' && (
-                                                <>
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="xs"
-                                                        onClick={handleMinimize}
-                                                        className="!px-1.5"
-                                                    >
-                                                        <IconMinus className="size-4 relative top-1" />
-                                                    </OSButton>
-
-                                                    <ContextMenu.Root
-                                                        onOpenChange={() => setWindowOptionsTooltipVisible(false)}
-                                                    >
-                                                        <ContextMenu.Trigger
-                                                            className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
-                                                            asChild
-                                                        >
-                                                            {!item.fixedSize && (
-                                                                <OSButton
-                                                                    variant="ghost"
-                                                                    size="xs"
-                                                                    onClick={() => {
-                                                                        setWindowOptionsTooltipVisible(false)
-                                                                        if (size.width >= window?.innerWidth) {
-                                                                            collapseWindow()
-                                                                        } else {
-                                                                            expandWindow()
-                                                                        }
-                                                                    }}
-                                                                    onMouseEnter={() => {
-                                                                        setWindowOptionsTooltipVisible(true)
-                                                                    }}
-                                                                    onMouseLeave={() => {
-                                                                        setWindowOptionsTooltipVisible(false)
-                                                                    }}
-                                                                    className="!px-1.5 group"
-                                                                >
-                                                                    <Tooltip
-                                                                        trigger={
-                                                                            <span>
-                                                                                <IconSquare className="size-5 group-hover:hidden" />
-                                                                                {size.width >=
-                                                                                (isSSR ? 0 : window?.innerWidth) ? (
-                                                                                    <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                                ) : (
-                                                                                    <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
-                                                                                )}
-                                                                            </span>
-                                                                        }
-                                                                        open={windowOptionsTooltipVisible}
-                                                                    >
-                                                                        Right click for more options
-                                                                    </Tooltip>
-                                                                </OSButton>
-                                                            )}
-                                                        </ContextMenu.Trigger>
-                                                        <ContextMenu.Portal>
-                                                            <ContextMenu.Content
-                                                                className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
-                                                                data-scheme="primary"
-                                                            >
-                                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                                    Snap to...
-                                                                </ContextMenu.Label>
-                                                                <ContextMenu.Item
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={() => handleSnapToSide('left')}
-                                                                >
-                                                                    Left half
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        Shift+←
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                                <ContextMenu.Item
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={() => handleSnapToSide('right')}
-                                                                >
-                                                                    Right half
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        Shift+→
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                                <ContextMenu.Separator className="m-[5px] h-px bg-border" />
-                                                                <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
-                                                                    Resize
-                                                                </ContextMenu.Label>
-                                                                <ContextMenu.Item
-                                                                    disabled={
-                                                                        size.width === (isSSR ? 0 : window?.innerWidth)
-                                                                    }
-                                                                    className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
-                                                                    onClick={expandWindow}
-                                                                >
-                                                                    Maximize
-                                                                    <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
-                                                                        Shift+↑
-                                                                    </div>
-                                                                </ContextMenu.Item>
-                                                            </ContextMenu.Content>
-                                                        </ContextMenu.Portal>
-                                                    </ContextMenu.Root>
-                                                </>
-                                            )}
-                                            <OSButton
-                                                variant="ghost"
-                                                size="xs"
-                                                onClick={() => closeWindow(item)}
-                                                className="!px-1.5"
+                                    <div className="flex-1 truncate flex items-center justify-start @md:justify-center">
+                                        {menu && menu.length > 0 ? (
+                                            <Popover
+                                                trigger={
+                                                    <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
+                                                        {item.meta?.title && item.meta.title}
+                                                        <IconChevronDown className="size-6 -m-1" />
+                                                    </button>
+                                                }
+                                                dataScheme="primary"
+                                                contentClassName="w-auto p-0 border border-primary"
+                                                header={false}
                                             >
-                                                <IconX className="size-4" />
-                                            </OSButton>
-                                        </div>
+                                                <FileMenu menu={menu} />
+                                            </Popover>
+                                        ) : (
+                                            <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
+                                                {item.meta?.title && item.meta.title}
+                                            </div>
+                                        )}
                                     </div>
-                                )}
-                                <div ref={contentRef} className={` size-full flex-grow overflow-hidden`}>
-                                    <Router {...item.props}>{item.element}</Router>
-                                </div>
-                                {!item.fixedSize && !item.minimal && (
-                                    <motion.div
-                                        data-scheme="tertiary"
-                                        className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
-                                        drag="x"
-                                        dragMomentum={false}
-                                        dragConstraints={{ left: 0, right: 0 }}
-                                        onDrag={(_event, info) => {
-                                            updateWindow(item, {
-                                                size: {
-                                                    width: Math.max(
-                                                        size.width + info.delta.x,
-                                                        sizeConstraints.min.width
-                                                    ),
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
-                                            <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
-                                        </div>
-                                    </motion.div>
-                                )}
-                                {!item.fixedSize && !item.minimal && (
-                                    <motion.div
-                                        data-scheme="tertiary"
-                                        className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
-                                        drag="y"
-                                        dragMomentum={false}
-                                        dragConstraints={{ top: 0, bottom: 0 }}
-                                        onDrag={(_event, info) => {
-                                            updateWindow(item, {
-                                                size: {
-                                                    height: Math.max(
-                                                        size.height + info.delta.y,
-                                                        sizeConstraints.min.height
-                                                    ),
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <div className="relative w-full h-full">
-                                            <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
-                                            <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
-                                        </div>
-                                    </motion.div>
-                                )}
-                                {!item.fixedSize && !item.minimal && (
-                                    <motion.div
-                                        className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
-                                        drag
-                                        dragMomentum={false}
-                                        dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
-                                        onDrag={(_event, info) => {
-                                            updateWindow(item, {
-                                                size: {
-                                                    width: Math.max(
-                                                        size.width + info.delta.x,
-                                                        sizeConstraints.min.width
-                                                    ),
+                                    <div className="flex justify-end">
+                                        {siteSettings.experience !== 'boring' && (
+                                            <>
+                                                <OSButton
+                                                    variant="ghost"
+                                                    size="xs"
+                                                    onClick={handleMinimize}
+                                                    className="!px-1.5"
+                                                >
+                                                    <IconMinus className="size-4 relative top-1" />
+                                                </OSButton>
 
-                                                    height: Math.max(
-                                                        size.height + info.delta.y,
-                                                        sizeConstraints.min.height
-                                                    ),
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
-                                            <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
-                                        </div>
-                                    </motion.div>
-                                )}
+                                                <ContextMenu.Root
+                                                    onOpenChange={() => setWindowOptionsTooltipVisible(false)}
+                                                >
+                                                    <ContextMenu.Trigger
+                                                        className="data-[highlighted]:bg-accent data-[state=open]:bg-accent"
+                                                        asChild
+                                                    >
+                                                        {!item.fixedSize && (
+                                                            <OSButton
+                                                                variant="ghost"
+                                                                size="xs"
+                                                                onClick={() => {
+                                                                    setWindowOptionsTooltipVisible(false)
+                                                                    if (size.width >= window?.innerWidth) {
+                                                                        collapseWindow()
+                                                                    } else {
+                                                                        expandWindow()
+                                                                    }
+                                                                }}
+                                                                onMouseEnter={() => {
+                                                                    setWindowOptionsTooltipVisible(true)
+                                                                }}
+                                                                onMouseLeave={() => {
+                                                                    setWindowOptionsTooltipVisible(false)
+                                                                }}
+                                                                className="!px-1.5 group"
+                                                            >
+                                                                <Tooltip
+                                                                    trigger={
+                                                                        <span>
+                                                                            <IconSquare className="size-5 group-hover:hidden" />
+                                                                            {size.width >=
+                                                                            (isSSR ? 0 : window?.innerWidth) ? (
+                                                                                <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                            ) : (
+                                                                                <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
+                                                                            )}
+                                                                        </span>
+                                                                    }
+                                                                    open={windowOptionsTooltipVisible}
+                                                                >
+                                                                    Right click for more options
+                                                                </Tooltip>
+                                                            </OSButton>
+                                                        )}
+                                                    </ContextMenu.Trigger>
+                                                    <ContextMenu.Portal>
+                                                        <ContextMenu.Content
+                                                            className="min-w-[220px] rounded-md bg-white dark:bg-accent-dark p-1 shadow-xl"
+                                                            data-scheme="primary"
+                                                        >
+                                                            <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                                Snap to...
+                                                            </ContextMenu.Label>
+                                                            <ContextMenu.Item
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                onClick={() => handleSnapToSide('left')}
+                                                            >
+                                                                Left half
+                                                                <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                    Shift+←
+                                                                </div>
+                                                            </ContextMenu.Item>
+                                                            <ContextMenu.Item
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                onClick={() => handleSnapToSide('right')}
+                                                            >
+                                                                Right half
+                                                                <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                    Shift+→
+                                                                </div>
+                                                            </ContextMenu.Item>
+                                                            <ContextMenu.Separator className="m-[5px] h-px bg-border" />
+                                                            <ContextMenu.Label className="px-2.5 text-[13px] leading-[25px] text-muted">
+                                                                Resize
+                                                            </ContextMenu.Label>
+                                                            <ContextMenu.Item
+                                                                disabled={
+                                                                    size.width === (isSSR ? 0 : window?.innerWidth)
+                                                                }
+                                                                className="group relative flex h-[25px] select-none items-center rounded px-2.5 text-sm leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[highlighted]:bg-input-bg data-[disabled]:text-muted"
+                                                                onClick={expandWindow}
+                                                            >
+                                                                Maximize
+                                                                <div className="ml-auto pl-5 text-secondary group-data-[disabled]:text-muted group-data-[highlighted]:text-primary">
+                                                                    Shift+↑
+                                                                </div>
+                                                            </ContextMenu.Item>
+                                                        </ContextMenu.Content>
+                                                    </ContextMenu.Portal>
+                                                </ContextMenu.Root>
+                                            </>
+                                        )}
+                                        <OSButton
+                                            variant="ghost"
+                                            size="xs"
+                                            onClick={() => closeWindow(item)}
+                                            className="!px-1.5"
+                                        >
+                                            <IconX className="size-4" />
+                                        </OSButton>
+                                    </div>
+                                </div>
+                            )}
+                            <div ref={contentRef} className={` size-full flex-grow overflow-hidden`}>
+                                <Router {...item.props}>{item.element}</Router>
                             </div>
+                            {!item.fixedSize && !item.minimal && (
+                                <motion.div
+                                    data-scheme="tertiary"
+                                    className="group absolute right-0 top-0 w-1.5 bottom-6 cursor-ew-resize !transform-none"
+                                    drag="x"
+                                    dragMomentum={false}
+                                    dragConstraints={{ left: 0, right: 0 }}
+                                    onDrag={(_event, info) => {
+                                        updateWindow(item, {
+                                            size: {
+                                                width: Math.max(size.width + info.delta.x, sizeConstraints.min.width),
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <div className="relative w-full h-full">
+                                        <div className="hidden group-hover:block absolute inset-y-0 right-0 w-[2px] bg-light-8" />
+                                        <div className="hidden group-hover:block absolute -bottom-6 h-6 right-0 w-[2px] bg-light-8" />
+                                    </div>
+                                </motion.div>
+                            )}
+                            {!item.fixedSize && !item.minimal && (
+                                <motion.div
+                                    data-scheme="tertiary"
+                                    className="group absolute bottom-0 left-0 right-6 h-1.5 cursor-ns-resize !transform-none"
+                                    drag="y"
+                                    dragMomentum={false}
+                                    dragConstraints={{ top: 0, bottom: 0 }}
+                                    onDrag={(_event, info) => {
+                                        updateWindow(item, {
+                                            size: {
+                                                height: Math.max(
+                                                    size.height + info.delta.y,
+                                                    sizeConstraints.min.height
+                                                ),
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <div className="relative w-full h-full">
+                                        <div className="hidden group-hover:block absolute inset-x-0 bottom-0 h-[2px] bg-light-8" />
+                                        <div className="hidden group-hover:block absolute bottom-0 -right-6 w-6 h-[2px] bg-light-8" />
+                                    </div>
+                                </motion.div>
+                            )}
+                            {!item.fixedSize && !item.minimal && (
+                                <motion.div
+                                    className="group absolute bottom-0 right-0 w-6 h-6 cursor-se-resize flex items-center justify-center !transform-none"
+                                    drag
+                                    dragMomentum={false}
+                                    dragConstraints={{ left: 0, top: 0, right: 0, bottom: 0 }}
+                                    onDrag={(_event, info) => {
+                                        updateWindow(item, {
+                                            size: {
+                                                width: Math.max(size.width + info.delta.x, sizeConstraints.min.width),
+
+                                                height: Math.max(
+                                                    size.height + info.delta.y,
+                                                    sizeConstraints.min.height
+                                                ),
+                                            },
+                                        })
+                                    }}
+                                >
+                                    <div className="hidden group-hover:block relative w-full h-full border-b border-r border-transparent overflow-hidden rounded-bl">
+                                        <div className="absolute -bottom-10 -right-10 group-hover:-bottom-5 group-hover:-right-5 transition-all h-8 w-8 bg-accent-2 border-t border-light-8 -rotate-45" />
+                                    </div>
+                                </motion.div>
+                            )}
                         </motion.div>
                     </>
                 )}
