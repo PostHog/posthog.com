@@ -2,69 +2,60 @@ import React from 'react'
 import { useApp } from '../../context/App'
 import SidePanel from 'components/SidePanel'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSButton from 'components/OSButton'
 
 export default function ActiveWindowsPanel() {
-  const {
-    windows,
-    isActiveWindowsPanelOpen,
-    setIsActiveWindowsPanelOpen,
-    focusedWindow,
-    bringToFront,
-    closeWindow
-  } = useApp()
+    const { windows, isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen, focusedWindow, bringToFront, closeWindow } =
+        useApp()
 
-  const closeActiveWindowsPanel = () => {
-    setIsActiveWindowsPanelOpen(false)
-  }
+    const closeActiveWindowsPanel = () => {
+        setIsActiveWindowsPanelOpen(false)
+    }
 
-  const handleWindowClick = (window: any) => {
-    bringToFront(window)
-    closeActiveWindowsPanel()
-  }
+    const handleWindowClick = (window: any) => {
+        bringToFront(window)
+        closeActiveWindowsPanel()
+    }
 
-  const totalWindows = windows.length
+    const totalWindows = windows.length
 
-  return (
-    <SidePanel
-      isOpen={isActiveWindowsPanelOpen}
-      onClose={closeActiveWindowsPanel}
-      title="Active Windows"
-      width="w-80"
-    >
-      <ScrollArea className="p-2">
-        <div className="flex flex-col gap-px">
-          {windows.map((window) => (
-            <div key={window.key} className="flex items-center gap-2">
-              <button
-                onClick={() => handleWindowClick(window)}
-                className="text-primary text-left px-2 py-1.5 rounded hover:bg-accent text-sm flex-1 flex items-center gap-2"
-              >
-                <span
-                  className={`truncate ${window.minimized
-                      ? 'italic'
-                      : focusedWindow === window
-                        ? 'font-bold'
-                        : ''
-                    }`}
-                >
-                  {window.meta?.title || 'Untitled'}
-                </span>
-              </button>
-              <button
-                onClick={() => closeWindow(window)}
-                className="text-secondary hover:text-primary text-sm px-2 py-1"
-              >
-                ×
-              </button>
-            </div>
-          ))}
-          {totalWindows === 0 && (
-            <div className="text-center text-secondary p-4">
-              No active windows
-            </div>
-          )}
-        </div>
-      </ScrollArea>
-    </SidePanel>
-  )
-} 
+    return (
+        <SidePanel
+            isOpen={isActiveWindowsPanelOpen}
+            onClose={closeActiveWindowsPanel}
+            title="Active Windows"
+            width="w-80"
+        >
+            <ScrollArea className="p-2">
+                <div className="flex flex-col gap-1">
+                    {windows.map((window) => (
+                        <OSButton
+                            key={window.key}
+                            variant="ghost"
+                            size="sm"
+                            width="full"
+                            align="left"
+                            active={focusedWindow === window}
+                            onClick={() => handleWindowClick(window)}
+                            className="group"
+                        >
+                            <span className={`truncate flex-1 ${window.minimized ? 'italic opacity-60' : ''}`}>
+                                {window.meta?.title || 'Untitled'}
+                            </span>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    closeWindow(window)
+                                }}
+                                className="ml-2 text-secondary hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity text-lg leading-none px-1"
+                            >
+                                ×
+                            </button>
+                        </OSButton>
+                    ))}
+                    {totalWindows === 0 && <div className="text-center text-secondary p-4">No active windows</div>}
+                </div>
+            </ScrollArea>
+        </SidePanel>
+    )
+}
