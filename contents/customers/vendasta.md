@@ -29,7 +29,7 @@ Recognizing the need for a self-serve solution, Kedar Page, a Data Scientist at 
 
 “PMs, designers and strategists wanted insights at their fingertips, but it invariably required an analyst and the turnaround time wasn’t quick enough to facilitate data driven decision making,” explained Kedar. “So, I started exploring tools that would enable non-analysts to get the information they needed.”
 
-“We tried [Mixpanel](/customers/why-i-ditched-mixpanel-for-posthog) and Segment, but you’re totally bound by how they’ve set up the ETL pipeline,” added Vendasta Staff Engineer Jesse Redl. “Our senior engineering team didn’t like the [GDPR compliance](/blog/best-gdpr-compliant-analytics-tools) aspect either because you don’t own your own data. They say you do, but you don’t really. That’s when we decided to deploy PostHog.”
+“We tried Mixpanel and Segment, but you’re totally bound by how they’ve set up the ETL pipeline,” added Vendasta Staff Engineer Jesse Redl. “Our senior engineering team didn’t like the [GDPR compliance](/blog/best-gdpr-compliant-analytics-tools) aspect either because you don’t own your own data. They say you do, but you don’t really. That’s when we decided to deploy PostHog.”
 
 ## Cutting onboarding drop-off by 50% with a self-serve solution
 

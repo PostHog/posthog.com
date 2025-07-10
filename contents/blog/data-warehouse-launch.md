@@ -28,7 +28,7 @@ Why would you want to get non-product data into PostHog? So you can do things li
 - [Sync Hubspot data](/tutorials/hubspot-reports) to identify leads based on their actions, pageviews, and churn-risk.
 - [Sync Zendesk data](/tutorials/zendesk-reports) to see how ticket volume and SLA metrics impact usage and churn.
 
-All that is just using our pre-built connectors. You can also bring data into PostHog from almost anywhere using [Snowflake, Cloudflare R2, Amazon S3, Google Cloud Storage](/docs/data-warehouse/setup), or [custom sources](/docs/data-warehouse/setup#linking-a-custom-source) — and we’re fascinated to see what further use cases teams will come up with. 
+All that is just using our pre-built connectors. You can also bring data into PostHog from almost anywhere using [Snowflake, Cloudflare R2, Amazon S3, Google Cloud Storage](/docs/cdp/sources), or [custom sources](/docs/cdp/sources#linking-a-custom-source) — and we’re fascinated to see what further use cases teams will come up with. 
 
 Over the beta we’ve already seen teams sync everything from their bank data (for analyzing P&L without an accountant) to CRMs (for monitoring sales team performance). Teams like [Headshot Pro, for example, have synced Google Adwords](/customers/headshot-pro), so they can analyze marketing data in detail and attribute it to sign-ups and usage.
 
