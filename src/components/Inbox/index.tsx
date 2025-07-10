@@ -23,6 +23,8 @@ import useTopicsNav from '../../navs/useTopicsNav'
 import { useWindow } from '../../context/Window'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import { useSubscribedQuestions } from 'hooks/useSubscribedQuestions'
+import { flattenStrapiResponse } from '../../utils'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
@@ -102,6 +104,8 @@ export default function Inbox(props) {
     const [dragStartWidth, setDragStartWidth] = useState(0)
     const [lastQuestionRef, inView] = useInView({ threshold: 0.1 })
     const [sideBySide, setSideBySide] = useState(false)
+    const [showSubscribedQuestions, setShowSubscribedQuestions] = useState(false)
+    const { questions: subscribedQuestions } = useSubscribedQuestions()
 
     const expandable = useMemo(() => {
         if (!containerRef.current) return true
@@ -170,11 +174,7 @@ export default function Inbox(props) {
         }
         if (props.path === '/questions/subscriptions' && !isValidating) {
             if (user) {
-                const { topics, ...newFilters } = filters
-                setFilters({
-                    ...newFilters,
-                    id: { $in: user.profile.questionSubscriptions.map((question) => question.id) },
-                })
+                setShowSubscribedQuestions(true)
             } else {
                 navigate('/questions')
             }
@@ -238,12 +238,13 @@ export default function Inbox(props) {
                                     <div className="w-60 text-right @3xl:text-left">Last activity</div>
                                 </div>
                                 <div className="px-1 py-1 space-y-px">
-                                    {questions.data?.map((question) => {
-                                        const {
-                                            attributes: { subject, numReplies, activeAt, replies, profile, permalink },
-                                        } = question
+                                    {(showSubscribedQuestions
+                                        ? subscribedQuestions
+                                        : flattenStrapiResponse(questions.data)
+                                    )?.map((question) => {
+                                        const { subject, numReplies, activeAt, replies, profile, permalink } = question
                                         const latestAuthor =
-                                            replies?.data?.[replies.data.length - 1]?.attributes?.profile || profile
+                                            replies?.data?.[replies.data.length - 1]?.profile || profile
                                         const active = `/questions/${permalink}` === pathname
                                         return (
                                             <div key={question.id} ref={lastQuestionRef}>
@@ -269,8 +270,7 @@ export default function Inbox(props) {
                                                     }}
                                                 >
                                                     <div className="basis-9/12 @3xl:basis-auto order-1 @3xl:order-none @3xl:w-48 @3xl:block">
-                                                        {profile?.data.attributes.firstName}{' '}
-                                                        {profile?.data.attributes.lastName}
+                                                        {profile?.firstName} {profile?.lastName}
                                                         <span className="text-muted text-sm ml-1 @3xl:hidden">
                                                             {numReplies}
                                                         </span>
@@ -291,8 +291,7 @@ export default function Inbox(props) {
                                                             {dayjs(activeAt).format('h:mm A')}
                                                         </Tooltip>{' '}
                                                         <span className="hidden @3xl:inline-block">
-                                                            by {latestAuthor?.data.attributes.firstName}{' '}
-                                                            {latestAuthor?.data.attributes.lastName}
+                                                            by {latestAuthor?.firstName} {latestAuthor?.lastName}
                                                         </span>
                                                     </div>
                                                 </OSButton>
@@ -421,28 +420,32 @@ export default function Inbox(props) {
                                             )}
 
                                             <div className="ml-1 pl-1 border-l border-primary">
-                                                <Tooltip content={`${expandable ? 'Expand' : 'Collapse'}`}>
-                                                    <span>
-                                                        <OSButton
-                                                            variant="ghost"
-                                                            size="sm"
-                                                            className="relative"
-                                                            icon={
-                                                                <IconChevronDown
-                                                                    className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
-                                                                        sideBySide
-                                                                            ? expandable
-                                                                                ? 'rotate-90'
-                                                                                : '-rotate-90'
-                                                                            : expandable
-                                                                            ? 'rotate-180'
-                                                                            : ''
-                                                                    }`}
-                                                                />
-                                                            }
-                                                            onClick={expandOrCollapse}
-                                                        />
-                                                    </span>
+                                                <Tooltip
+                                                    trigger={
+                                                        <span>
+                                                            <OSButton
+                                                                variant="ghost"
+                                                                size="sm"
+                                                                className="relative"
+                                                                icon={
+                                                                    <IconChevronDown
+                                                                        className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
+                                                                            sideBySide
+                                                                                ? expandable
+                                                                                    ? 'rotate-90'
+                                                                                    : '-rotate-90'
+                                                                                : expandable
+                                                                                ? 'rotate-180'
+                                                                                : ''
+                                                                        }`}
+                                                                    />
+                                                                }
+                                                                onClick={expandOrCollapse}
+                                                            />
+                                                        </span>
+                                                    }
+                                                >
+                                                    {expandable ? 'Expand' : 'Collapse'}
                                                 </Tooltip>
                                             </div>
                                         </div>
