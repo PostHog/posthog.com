@@ -19,7 +19,7 @@ You can find your salesforce ID by going to your profile and copy the text in th
 
 ### Activation
 1. For the new users on your accounts, how many came back to analyze an insight, watch a recording, create a feature flag, etc. within their first week?
-2. What are the monthly activation rates across all your accounts for product analytics? (Hint: read this activation metric post and these insights)
+2. What are the monthly activation rates across all your accounts for product analytics? (Hint: read this [activation metric post](https://posthog.com/product-engineers/activation-metrics) and [these insights](https://us.posthog.com/project/2/insights?search=activation))
 
 ### Retention / Usage 
 1. Which of your new users have retained their usage after their first 3 months?
