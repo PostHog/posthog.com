@@ -61,4 +61,7 @@ If you want to use an alternative reverse proxy that we have not documented, it 
   host_header: us.i.posthog.com
 ```
 
-> Note: some systems have size limits (e.g. AWS WAF defaults to 8kb) which can cause problems if they are used as or with a reverse proxy. PostHog events can be up to 1MB and session replay can be up to 64MB per message.
+<CalloutBox icon="IconWarning" title="Beware of size limits" type="caution">
+  Some systems have size limits (e.g. AWS WAF defaults to 8kb) which can cause problems if they are used as or with a reverse proxy. PostHog events can be up to 1MB and session recordings can be up to 64MB per message, so you may need to adjust your limits.
+</CalloutBox>
+
