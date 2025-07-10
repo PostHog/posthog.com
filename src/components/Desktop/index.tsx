@@ -230,7 +230,6 @@ export default function Desktop() {
             ]}
         >
             <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
-                <NotificationsPanel />
                 <div
                     className={`absolute bottom-0 right-0 size-full -z-10 
                         wallpaper-hogzilla:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png')] wallpaper-hogzilla:bg-contain 
@@ -310,6 +309,7 @@ export default function Desktop() {
                 </nav>
             </div>
             <Screensaver isActive={isInactive} onDismiss={dismiss} />
+            <NotificationsPanel />
         </ContextMenu>
     )
 }

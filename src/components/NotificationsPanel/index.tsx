@@ -8,14 +8,11 @@ import isSameOrAfter from 'dayjs/plugin/isSameOrAfter'
 import Tooltip from 'components/Tooltip'
 import { navigate } from 'gatsby'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { AnimatePresence, motion } from 'framer-motion'
+import { useApp } from '../../context/App'
 
 dayjs.extend(relativeTime)
 dayjs.extend(isSameOrAfter)
-
-interface NotificationsPanelProps {
-    isOpen: boolean
-    onClose: () => void
-}
 
 interface NotificationProps {
     url: string
@@ -115,61 +112,73 @@ const Question = ({ id, subject, activeAt, permalink, replies, date, onItemClick
     )
 }
 
-export default function NotificationsPanel({ isOpen, onClose }: NotificationsPanelProps) {
-    const { fetchUser, notifications } = useUser()
+export default function NotificationsPanel() {
+    const { notifications } = useUser()
+    const { isNotificationsPanelOpen, setIsNotificationsPanelOpen } = useApp()
 
-    useEffect(() => {
-        if (isOpen) {
-            fetchUser()
-        }
-    }, [isOpen])
+    const closeNotificationsPanel = () => {
+        setIsNotificationsPanelOpen(false)
+    }
 
     const handleItemClick = (url: string) => {
-        onClose()
+        closeNotificationsPanel()
         navigate(url, { state: { newWindow: true } })
     }
 
     return (
-        <div
-            data-scheme="primary"
-            className={`fixed top-[calc(37px+1rem)] -right-4 h-[calc(100vh-2rem-37px)] w-96 bg-primary border border-primary rounded shadow-xl z-30 transition-transform duration-300 text-primary ${
-                isOpen ? '-translate-x-8' : 'translate-x-full'
-            }`}
-        >
-            <div className="h-full flex flex-col">
-                <div className="flex items-center justify-between px-4 py-2 border-b border-primary">
-                    <h2 className="text-lg font-semibold">
-                        Notifications{notifications?.length > 0 ? ` (${notifications.length})` : ''}
-                    </h2>
-                    <button onClick={onClose} className="text-sm text-secondary hover:text-primary">
-                        <IconX className="size-4" />
-                    </button>
-                </div>
+        <AnimatePresence>
+            {isNotificationsPanelOpen && (
+                <motion.div
+                    data-scheme="primary"
+                    initial={{ translateX: '100%' }}
+                    animate={{
+                        translateX: 0,
+                    }}
+                    exit={{
+                        translateX: '100%',
+                    }}
+                    transition={{ duration: 0.3, type: 'tween' }}
+                    className={`fixed top-[calc(37px+1rem)] right-4 h-[calc(100vh-2rem-37px)] w-96 bg-primary border border-primary rounded shadow-xl z-30 text-primary`}
+                >
+                    <div className="h-full flex flex-col">
+                        <div className="flex items-center justify-between px-4 py-2 border-b border-primary">
+                            <h2 className="text-lg font-semibold">
+                                Notifications{notifications?.length > 0 ? ` (${notifications.length})` : ''}
+                            </h2>
+                            <button
+                                onClick={closeNotificationsPanel}
+                                className="text-sm text-secondary hover:text-primary"
+                            >
+                                <IconX className="size-4" />
+                            </button>
+                        </div>
 
-                <div className="flex-1">
-                    <ScrollArea className="p-2">
-                        {notifications?.length > 0 ? (
-                            <ul className="list-none m-0 p-0 space-y-4">
-                                {notifications.map((notification: NotificationItem, i: number) => {
-                                    if (notification.question) {
-                                        return (
-                                            <Question
-                                                key={i}
-                                                {...notification.question}
-                                                date={notification.date}
-                                                onItemClick={handleItemClick}
-                                            />
-                                        )
-                                    }
-                                    return null
-                                })}
-                            </ul>
-                        ) : (
-                            <h5 className="m-0">You literally have no notifications.</h5>
-                        )}
-                    </ScrollArea>
-                </div>
-            </div>
-        </div>
+                        <div className="flex-1">
+                            <ScrollArea className="p-2">
+                                {notifications?.length > 0 ? (
+                                    <ul className="list-none m-0 p-0 space-y-4">
+                                        {notifications.map((notification: NotificationItem, i: number) => {
+                                            if (notification.question) {
+                                                return (
+                                                    <Question
+                                                        key={i}
+                                                        {...notification.question}
+                                                        date={notification.date}
+                                                        onItemClick={handleItemClick}
+                                                    />
+                                                )
+                                            }
+                                            return null
+                                        })}
+                                    </ul>
+                                ) : (
+                                    <h5 className="m-0 px-2">You literally have no notifications.</h5>
+                                )}
+                            </ScrollArea>
+                        </div>
+                    </div>
+                </motion.div>
+            )}
+        </AnimatePresence>
     )
 }

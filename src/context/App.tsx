@@ -78,6 +78,8 @@ interface AppContextType {
         chatId?: string
         date?: string
     }) => void
+    isNotificationsPanelOpen: boolean
+    setIsNotificationsPanelOpen: (isOpen: boolean) => void
 }
 
 interface AppProviderProps {
@@ -212,6 +214,8 @@ export const Context = createContext<AppContextType>({
     },
     updateSiteSettings: () => {},
     openNewChat: () => {},
+    isNotificationsPanelOpen: false,
+    setIsNotificationsPanelOpen: () => {},
 })
 
 export interface AppSetting {
@@ -509,6 +513,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 ? JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'hogzilla'
                 : 'hogzilla',
     })
+    const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
 
     const closeWindow = useCallback(
         (item: AppWindow) => {
@@ -978,6 +983,8 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 siteSettings,
                 updateSiteSettings,
                 openNewChat,
+                isNotificationsPanelOpen,
+                setIsNotificationsPanelOpen,
             }}
         >
             {children}
