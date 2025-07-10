@@ -25,12 +25,14 @@ import { StrapiRecord, ProfileData } from 'lib/strapi'
 import { Avatar as MainNavAvatar } from 'components/MainNav'
 import Wizard from 'components/Wizard'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import NotificationsPanel from 'components/NotificationsPanel'
 
 export default function TaskBarMenu() {
     const { windows, bringToFront, focusedWindow, openSearch, openSignIn, siteSettings, openNewChat } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
     const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
+    const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const { user, notifications, logout } = useUser()
     const menuData = useMenuData()
 
@@ -69,6 +71,18 @@ export default function TaskBarMenu() {
             document.activeElement.blur()
         }
         openSignIn()
+    }
+
+    const handleNotificationsClick = () => {
+        // Close the menu by blurring the active element
+        if (document.activeElement instanceof HTMLElement) {
+            document.activeElement.blur()
+        }
+        setIsNotificationsPanelOpen(true)
+    }
+
+    const handleCloseNotificationsPanel = () => {
+        setIsNotificationsPanelOpen(false)
     }
 
     const accountMenu: MenuType[] = [
@@ -123,7 +137,7 @@ export default function TaskBarMenu() {
                                 {
                                     type: 'item' as const,
                                     label: 'Notifications',
-                                    link: '/community/notifications',
+                                    onClick: handleNotificationsClick,
                                     icon: <IconLetter className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                                 {
@@ -288,6 +302,7 @@ export default function TaskBarMenu() {
                     <MenuBar menus={accountMenu} className="[&_button]:px-2" />
                 </aside>
             </div>
+            <NotificationsPanel isOpen={isNotificationsPanelOpen} onClose={handleCloseNotificationsPanel} />
         </>
     )
 }
