@@ -25,7 +25,7 @@ export default function Cher() {
                         <MediaPlayer newWindow location={{ pathname: `cher` }} key={`cher`} videoId="nZXRV4MezEw" />
                     )
                 }
-                whileHover={{ translateY: '-54%', translateX: '37%' }}
+                whileHover={{ translateY: '-52%', translateX: '35%' }}
                 whileTap={{ scale: 0.98 }}
                 className="absolute top-0 right-0 -z-[1]"
             >
