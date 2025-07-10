@@ -1519,6 +1519,10 @@
         {
             "source": "/manual/insights",
             "destination": "/docs/product-analytics/insights"
+        },
+        {
+            "source": "/manual/trends",
+            "destination": "/docs/product-analytics/trends"
         }
     ],
     "headers": [
