@@ -6,7 +6,7 @@ import {
     IconUser,
     IconApp,
     IconMessage,
-    IconLetter,
+    IconNotification,
     IconLock,
     IconBookmark,
 } from '@posthog/icons'
@@ -129,7 +129,9 @@ export default function TaskBarMenu() {
                                         notifications?.length > 0 ? ` (${notifications.length})` : ''
                                     }`,
                                     onClick: () => setIsNotificationsPanelOpen(true),
-                                    icon: <IconLetter className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                    icon: (
+                                        <IconNotification className="opacity-50 group-hover/item:opacity-75 size-4" />
+                                    ),
                                 },
                                 {
                                     type: 'item' as const,
