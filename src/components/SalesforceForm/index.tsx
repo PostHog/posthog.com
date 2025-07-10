@@ -379,6 +379,11 @@ export default function SalesforceForm({
             method: 'POST',
             body: JSON.stringify({ ...values, type, source }),
         })
+        // Extract URL parameters for marketing tracking
+        posthog?.capture('salesforce_form_submitted', {
+            formName: form.name,
+            ...values,
+        })
         setSubmitted(true)
     }
 
