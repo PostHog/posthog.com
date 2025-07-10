@@ -37,8 +37,11 @@ CSMs are responsible for ensuring that a larger book of existing customers - bot
 
 - Your OTE comprises a 90/10 split between base and contractual bonus.
 - Bonus is paid based on revenue retention above 100%, and is _uncapped_.
-  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus.
+  - For example, if you have 100% revenue retention and your target is 120% revenue retention, you get 0% of bonus. For 120% retention, it's 100% bonus, and for 140% retention, it's 200% bonus. This is on a sliding scale so if you hit 110% retention you get 50% bonus. 
   - While the Q2 2025 target is 120%, this may change in future depending on how things go.
+  - To calculate retention we use the total quarterly usage and annualize this.
+    - For monthly customers this is the total of their 3 invoices multiplied by 4
+    - For annual customers, we look at the usage-based MRR and multiply by 4
 - Bonuses are paid out quarterly, and in any case after an invoice is paid
   - Bonus payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down how you did.
 - Your bonus is guaranteed at 100% for your first 3 months at PostHog - this gives you time to get up to speed, but also if you over-perform then you will get your additional bonus.
