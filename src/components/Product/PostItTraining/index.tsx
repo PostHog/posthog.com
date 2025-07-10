@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'components/Link'
-import { IconNotebook, IconLightBulb, IconAI, IconHandwave, IconExternal } from '@posthog/icons'
+import { IconPencil, IconNotebook, IconHandMoney, IconHandwave, IconScreen, IconExternal } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Hero } from 'components/Products/Hero'
 import { Subfeature } from 'components/Products/Subfeature'
@@ -20,19 +20,19 @@ const subfeatures = [
         title: 'Step 1: Peel it from the side',
         description:
             "Don't peel from the bottom. That's wrong. You need to peel from the side, or you'll end up with a curve that minimizes the sticky surface area.",
-        icon: <IconNotebook />,
+        icon: <IconHandwave />,
     },
     {
         title: 'Step 2: Press it flat to the wall',
         description:
             "Next, you need to press it down firmly, but with respect. You don't want to smudge the ink or damage the wall, do you?",
-        icon: <IconLightBulb />,
+        icon: <IconScreen />,
     },
     {
         title: 'Step 3: Increase shareholder value',
         description:
             'Congratulations, you just increased shareholder value while also increasing operational efficiency. Take a moment to pat yourself on the back.',
-        icon: <IconHandwave />,
+        icon: <IconHandMoney />,
     },
 ]
 
@@ -187,7 +187,7 @@ export const ProductPostItTraining = () => {
                             </h2>
                             <div className="inline-flex mx-auto relative overflow-hidden w-full aspect-video">
                                 <iframe
-                                    src="https://www.youtube.com/embed/T9lEd2EpGhw"
+                                    src="https://www.youtube.com/watch?v=_eLZqBVkxCc"
                                     className="rounded aspect-video m-0 shadow-xl"
                                     allow="autoplay"
                                 />
