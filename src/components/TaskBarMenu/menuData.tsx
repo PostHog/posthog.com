@@ -276,12 +276,12 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'Pricing calculator',
-                    link: '/pricing?tab=calculator',
+                    link: '/pricing#calculator',
                 },
                 {
                     type: 'item',
                     label: 'Add-ons',
-                    link: '/pricing?tab=addons',
+                    link: '/pricing#addons',
                 },
                 {
                     type: 'separator',
@@ -320,7 +320,7 @@ export function useMenuData(): MenuType[] {
                 {
                     type: 'item',
                     label: 'How we do sales',
-                    link: '/pricing?tab=sales',
+                    link: '/pricing#sales',
                 },
             ],
         },
