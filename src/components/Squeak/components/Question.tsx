@@ -12,7 +12,7 @@ import SubscribeButton from './SubscribeButton'
 import Link from 'components/Link'
 import { useUser } from 'hooks/useUser'
 import { IconArchive, IconPencil, IconPin, IconSparkles, IconTrash, IconUndo } from '@posthog/icons'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { Listbox } from '@headlessui/react'
 import { fetchTopicGroups, topicGroupsSorted } from '../../../pages/questions'
 import { Check2, Close } from 'components/Icons'
@@ -69,24 +69,29 @@ const TopicSelect = (props: { selectedTopics: StrapiData<TopicData[]> }) => {
         <div className="relative">
             <Listbox value={selectedTopics} onChange={handleChange} multiple>
                 <Listbox.Button className="flex items-center leading-none rounded-sm p-1 relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold">
-                    <Tooltip content={() => <div style={{ maxWidth: 320 }}>Pin thread</div>}>
-                        <span className="flex items-center h-6 justify-center">
-                            <IconPin className="w-5 h-5" />
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth={1.5}
-                                stroke="currentColor"
-                                className="w-4 h-4"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                                />
-                            </svg>
-                        </span>
+                    <Tooltip
+                        delay={0}
+                        trigger={
+                            <span className="flex items-center h-6 justify-center">
+                                <IconPin className="w-5 h-5" />
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth={1.5}
+                                    stroke="currentColor"
+                                    className="w-4 h-4"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                                    />
+                                </svg>
+                            </span>
+                        }
+                    >
+                        <div style={{ maxWidth: 320 }}>Pin thread</div>
                     </Tooltip>
                 </Listbox.Button>
                 {topicGroups?.length > 0 && (
@@ -220,10 +225,15 @@ const DeleteButton = ({ questionID }: { questionID: number }) => {
             onClick={handleClick}
             className="flex items-center leading-none rounded-sm p-1 relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold"
         >
-            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Delete thread</div>}>
-                <span className="flex w-6 h-6">
-                    <IconTrash />
-                </span>
+            <Tooltip
+                delay={0}
+                trigger={
+                    <span className="flex w-6 h-6">
+                        <IconTrash />
+                    </span>
+                }
+            >
+                <div style={{ maxWidth: 320 }}>Delete thread</div>
             </Tooltip>
         </button>
     )
@@ -236,26 +246,26 @@ const MaxReply = ({ children }: { children: React.ReactNode }) => {
                 className={`pr-[5px] pl-[30px] pb-2 !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0`}
             >
                 <Tooltip
-                    content={() => (
-                        <div className="text-sm max-w-64">
-                            Max AI is our resident AI assistant. Double-check responses for accuracy.
-                        </div>
-                    )}
-                    placement="top"
-                >
-                    <div className="relative inline-block">
-                        <div className="flex items-center !text-black dark:!text-white">
-                            <div className="mr-2 relative">
-                                <Avatar
-                                    className="w-[25px] h-[25px] rounded-full"
-                                    image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
-                                />
-                                <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
-                                    <Logomark className="w-[16px]" />
-                                </span>
+                    delay={0}
+                    trigger={
+                        <div className="relative inline-block">
+                            <div className="flex items-center !text-black dark:!text-white">
+                                <div className="mr-2 relative">
+                                    <Avatar
+                                        className="w-[25px] h-[25px] rounded-full"
+                                        image="https://res.cloudinary.com/dmukukwp6/image/upload/v1688579513/thumbnail_max_c5dd553db8.png"
+                                    />
+                                    <span className="absolute -right-1.5 -bottom-2 h-[20px] w-[20px] flex items-center justify-center rounded-full bg-white  text-primary dark:text-primary-dark">
+                                        <Logomark className="w-[16px]" />
+                                    </span>
+                                </div>
+                                <strong>Max AI</strong>
                             </div>
-                            <strong>Max AI</strong>
                         </div>
+                    }
+                >
+                    <div className="text-sm max-w-64">
+                        Max AI is our resident AI assistant. Double-check responses for accuracy.
                     </div>
                 </Tooltip>
                 <div className="ml-[33px] mt-1 py-2 px-4 bg-accent rounded-md border border-primary">{children}</div>
@@ -334,10 +344,15 @@ const AskMaxButton = ({ onClick, askedMax }: { askedMax: boolean; onClick: () =>
             onClick={handleClick}
             className="flex items-center leading-none rounded-sm p-1 relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px] font-bold disabled:!scale-[1] disabled:!top-0 disabled:opacity-50 disabled:cursor-not-allowed disabled:!text-muted dark:disabled:!text-primary-dark/50"
         >
-            <Tooltip content={() => <div style={{ maxWidth: 320 }}>Ask Max</div>}>
-                <span className="flex w-6 h-6">
-                    <IconSparkles />
-                </span>
+            <Tooltip
+                delay={0}
+                trigger={
+                    <span className="flex w-6 h-6">
+                        <IconSparkles />
+                    </span>
+                }
+            >
+                <div style={{ maxWidth: 320 }}>Ask Max</div>
             </Tooltip>
         </button>
     )
@@ -472,7 +487,7 @@ export const Question = (props: QuestionProps) => {
                 mutate,
             }}
         >
-            <div className={`${isModerator && !publishedAt ? 'opacity-70' : ''}`}>
+            <div className={`text-primary ${isModerator && !publishedAt ? '' : ''}`}>
                 {archived && (
                     <div className="font-medium text-sm m-0 mb-6 bg-accent border border-primary p-4 rounded text-center">
                         <p className="font-bold !m-0 !p-0">The following thread has been archived.</p>
@@ -511,19 +526,25 @@ export const Question = (props: QuestionProps) => {
                                     >
                                         {!archived ? (
                                             <Tooltip
-                                                content={() => <div style={{ maxWidth: 320 }}>Archive thread</div>}
+                                                delay={0}
+                                                trigger={
+                                                    <span className="flex w-6 h-6">
+                                                        <IconArchive />
+                                                    </span>
+                                                }
                                             >
-                                                <span className="flex w-6 h-6">
-                                                    <IconArchive />
-                                                </span>
+                                                <div style={{ maxWidth: 320 }}>Archive thread</div>
                                             </Tooltip>
                                         ) : (
                                             <Tooltip
-                                                content={() => <div style={{ maxWidth: 320 }}>Restore thread</div>}
+                                                delay={0}
+                                                trigger={
+                                                    <span className="flex w-6 h-6">
+                                                        <IconUndo />
+                                                    </span>
+                                                }
                                             >
-                                                <span className="flex w-6 h-6">
-                                                    <IconUndo />
-                                                </span>
+                                                <div style={{ maxWidth: 320 }}>Restore thread</div>
                                             </Tooltip>
                                         )}
                                     </button>

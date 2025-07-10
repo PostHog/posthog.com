@@ -36,7 +36,7 @@ const Switch = ({
                 id={id}
                 style={{ '-webkit-tap-highlight-color': 'rgba(0, 0, 0, 0)' }}
             >
-                <RadixSwitch.Thumb className="block size-[21px] translate-x-0.5 rounded-full bg-black transition-transform duration-100 will-change-transform data-[state=checked]:bg-white data-[state=checked]:translate-x-[19px]" />
+                <RadixSwitch.Thumb className="block size-[21px] translate-x-0.5 rounded-full bg-dark dark:bg-light transition-transform duration-100 will-change-transform data-[state=checked]:bg-white data-[state=checked]:translate-x-[19px]" />
             </RadixSwitch.Root>
         </form>
     )
