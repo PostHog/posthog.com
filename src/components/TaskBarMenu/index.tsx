@@ -12,9 +12,8 @@ import {
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
-import { Popover } from 'components/RadixUI/Popover'
-import { Root as PopoverRoot } from '@radix-ui/react-popover'
 import MenuBar, { MenuType, MenuItemType } from 'components/RadixUI/MenuBar'
+import ActiveWindowsPanel from 'components/ActiveWindowsPanel'
 import OSButton from 'components/OSButton'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
@@ -30,10 +29,11 @@ export default function TaskBarMenu() {
         siteSettings,
         openNewChat,
         setIsNotificationsPanelOpen,
+        setIsActiveWindowsPanelOpen,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
-    const [isWindowPopoverOpen, setIsWindowPopoverOpen] = useState(false)
+
     const { user, notifications, logout } = useUser()
     const menuData = useMenuData()
 
@@ -61,9 +61,8 @@ export default function TaskBarMenu() {
         }
     }, [])
 
-    const handleWindowClick = (window: any) => {
-        bringToFront(window)
-        setIsWindowPopoverOpen(false)
+    const handleActiveWindowsClick = () => {
+        setIsActiveWindowsPanelOpen(true)
     }
 
     const handleSignInClick = () => {
@@ -98,72 +97,71 @@ export default function TaskBarMenu() {
             ),
             items: user
                 ? [
-                      {
-                          type: 'item' as const,
-                          label: 'Go to...',
-                          disabled: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'PostHog app',
-                          link: 'https://app.posthog.com',
-                          icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                          external: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Community',
-                          disabled: true,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Forums',
-                          link: '/questions',
-                          icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                      },
-                      ...(user?.profile
-                          ? [
-                                {
-                                    type: 'item' as const,
-                                    label: `Notifications${
-                                        notifications?.length > 0 ? ` (${notifications.length})` : ''
+                    {
+                        type: 'item' as const,
+                        label: 'Go to...',
+                        disabled: true,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'PostHog app',
+                        link: 'https://app.posthog.com',
+                        icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                        external: true,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'Community',
+                        disabled: true,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'Forums',
+                        link: '/questions',
+                        icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                    },
+                    ...(user?.profile
+                        ? [
+                            {
+                                type: 'item' as const,
+                                label: `Notifications${notifications?.length > 0 ? ` (${notifications.length})` : ''
                                     }`,
-                                    onClick: () => setIsNotificationsPanelOpen(true),
-                                    icon: (
-                                        <IconNotification className="opacity-50 group-hover/item:opacity-75 size-4" />
-                                    ),
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'My profile',
-                                    link: `/community/profiles/${user?.profile.id}`,
-                                    icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                                {
-                                    type: 'item' as const,
-                                    label: 'Bookmarks',
-                                    link: '/bookmarks',
-                                    icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                                },
-                            ]
-                          : []),
-                      {
-                          type: 'separator' as const,
-                      },
-                      {
-                          type: 'item' as const,
-                          label: 'Community logout',
-                          onClick: () => logout(),
-                          icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                      },
-                  ]
+                                onClick: () => setIsNotificationsPanelOpen(true),
+                                icon: (
+                                    <IconNotification className="opacity-50 group-hover/item:opacity-75 size-4" />
+                                ),
+                            },
+                            {
+                                type: 'item' as const,
+                                label: 'My profile',
+                                link: `/community/profiles/${user?.profile.id}`,
+                                icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                            },
+                            {
+                                type: 'item' as const,
+                                label: 'Bookmarks',
+                                link: '/bookmarks',
+                                icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                            },
+                        ]
+                        : []),
+                    {
+                        type: 'separator' as const,
+                    },
+                    {
+                        type: 'item' as const,
+                        label: 'Community logout',
+                        onClick: () => logout(),
+                        icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                    },
+                ]
                 : [
-                      {
-                          type: 'item' as const,
-                          label: 'Sign in',
-                          onClick: handleSignInClick,
-                      },
-                  ],
+                    {
+                        type: 'item' as const,
+                        label: 'Sign in',
+                        onClick: handleSignInClick,
+                    },
+                ],
         },
     ]
 
@@ -214,87 +212,54 @@ export default function TaskBarMenu() {
                         <IconChatHelp className="size-5" />
                     </OSButton>
                     {siteSettings.experience === 'posthog' && (
-                        <PopoverRoot open={isWindowPopoverOpen} onOpenChange={setIsWindowPopoverOpen}>
-                            <Popover
-                                trigger={
-                                    <motion.div
-                                        animate={
-                                            isAnimating
-                                                ? {
-                                                      scale: [1, 1.2, 1],
-                                                      rotate: [0, -5, 5, -5, 5, 0],
-                                                  }
-                                                : {}
-                                        }
-                                        transition={{
-                                            duration: 0.5,
-                                            ease: 'easeInOut',
-                                            times: [0, 0.2, 0.4, 0.6, 0.8, 1],
-                                        }}
-                                    >
-                                        <button
-                                            onClick={(e) => {
-                                                if (totalWindows <= 0) {
-                                                    return e.stopPropagation()
-                                                }
-                                            }}
-                                            data-scheme="primary"
-                                            data-active-windows
-                                            className={`min-w-6 h-5 px-1.5 py-1 inline-flex justify-center items-center rounded
-                                            border-[1.5px] 
-                                            border-t-4 
-                                            
-                                             
-                                            dark:hover:bg-dark 
-                                            hover:bg-light
+                        <motion.div
+                            animate={
+                                isAnimating
+                                    ? {
+                                        scale: [1, 1.2, 1],
+                                        rotate: [0, -5, 5, -5, 5, 0],
+                                    }
+                                    : {}
+                            }
+                            transition={{
+                                duration: 0.5,
+                                ease: 'easeInOut',
+                                times: [0, 0.2, 0.4, 0.6, 0.8, 1],
+                            }}
+                        >
+                            <button
+                                onClick={handleActiveWindowsClick}
+                                disabled={totalWindows <= 0}
+                                data-scheme="primary"
+                                data-active-windows
+                                className={`min-w-6 h-5 px-1.5 py-1 inline-flex justify-center items-center rounded
+                                border-[1.5px] 
+                                border-t-4 
+                                
+                                 
+                                dark:hover:bg-dark 
+                                hover:bg-light
 
-                                            text-secondary
-                                            dark:text-primary
-                                            hover:text-primary
+                                text-secondary
+                                dark:text-primary
+                                hover:text-primary
 
-                                            ${
-                                                totalWindows > 1
-                                                    ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
-                                                    : 'bg-accent border-primary dark:border-[#eaecf6]'
-                                            }
-                                        `}
-                                        >
-                                            <span className="text-[13px] font-semibold relative -top-px">
-                                                {totalWindows}
-                                            </span>
-                                        </button>
-                                    </motion.div>
-                                }
-                                title="Active Windows"
-                                dataScheme="primary"
+                                ${totalWindows > 1
+                                        ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
+                                        : 'bg-accent border-primary dark:border-[#eaecf6]'
+                                    }
+                            `}
                             >
-                                <div className="flex flex-col gap-px min-w-[200px]">
-                                    {windows.map((window) => (
-                                        <button
-                                            key={window.key}
-                                            onClick={() => handleWindowClick(window)}
-                                            className="text-primary text-left px-2 py-1.5 rounded hover:bg-accent text-sm flex items-center gap-2"
-                                        >
-                                            <span
-                                                className={`truncate ${
-                                                    window.minimized
-                                                        ? 'italic'
-                                                        : focusedWindow === window
-                                                        ? 'font-bold'
-                                                        : ''
-                                                }`}
-                                            >
-                                                {window.meta?.title || 'Untitled'}
-                                            </span>
-                                        </button>
-                                    ))}
-                                </div>
-                            </Popover>
-                        </PopoverRoot>
+                                <span className="text-[13px] font-semibold relative -top-px">
+                                    {totalWindows}
+                                </span>
+                            </button>
+                        </motion.div>
                     )}
                     <MenuBar menus={accountMenu} className="[&_button]:px-2" />
                 </aside>
             </div>
+            <ActiveWindowsPanel />
         </>
     )
 }
