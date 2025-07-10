@@ -136,7 +136,9 @@ export default function TaskBarMenu() {
                           ? [
                                 {
                                     type: 'item' as const,
-                                    label: 'Notifications',
+                                    label: `Notifications${
+                                        notifications?.length > 0 ? ` (${notifications.length})` : ''
+                                    }`,
                                     onClick: handleNotificationsClick,
                                     icon: <IconLetter className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },

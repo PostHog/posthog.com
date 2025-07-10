@@ -138,7 +138,9 @@ export default function NotificationsPanel({ isOpen, onClose }: NotificationsPan
         >
             <div className="h-full flex flex-col">
                 <div className="flex items-center justify-between px-4 py-2 border-b border-primary">
-                    <h2 className="text-lg font-semibold">Notifications</h2>
+                    <h2 className="text-lg font-semibold">
+                        Notifications{notifications?.length > 0 ? ` (${notifications.length})` : ''}
+                    </h2>
                     <button onClick={onClose} className="text-sm text-secondary hover:text-primary">
                         <IconX className="size-4" />
                     </button>
