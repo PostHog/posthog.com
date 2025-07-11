@@ -83,7 +83,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 - They understand the current targeting mechanisms which are available.
 - We've conducted training on how to set up Feature Flags and Experiments.
 
-#### Data Warehouse
+#### Data warehouse
 
 - They have connected up the sources the need to.
 - They are aware of the difference between incremental and full sync and the impact on billing.
