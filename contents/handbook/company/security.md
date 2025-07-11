@@ -72,6 +72,10 @@ We receive data collected by our customers from end-users and allow them to unde
 
 We conduct these annually, most recently in April 2024  - <PrivateLink url="https://github.com/PostHog/company-internal/issues/1577">see here</PrivateLink> for a link to the latest report and statuses. 
 
+## Responsible disclosure
+
+Security vulnerabilities and other security related findings can be reported by emailing security@posthog.com. Valid findings will be rewarded with PostHog swag.
+
 ## Secure communication (aka preventing or detecting social engineering)
 
 We have a few policies in place to prevent social engineering attacks. 
@@ -85,4 +89,4 @@ For our internal communications, we have the following policies:
 
 In case you should receive a suspicious email or other form of communication, please do not click on any links or open any attachments. Instead, please contact the team or person directly via Slack. E.g. if someone claims to be James, send them a message on Slack and ask "James, am I in a call with you right now?". This is a great and easy way to verify if this is legit. The same goes for any other form of communication. 
 
-Please report any suspicious communications to `#security` on Slack. 
+Please report any suspicious communications to `#project-security` on Slack. 
