@@ -1,5 +1,5 @@
 ---
-title: Activation & product intents
+title: Product intents
 sidebar: Handbook
 showTitle: true
 ---
@@ -19,7 +19,7 @@ Product intents are:
 
 ## When should I start capturing product intents?
 
-As soon as your product is in any sort of public beta you should start tracking product intents. This is _not_ because you should be hyper focusing on your product's activation numbers at this stage - instead it is so that we can start collecting data for later on when we want to determine a good [activation metric](/newsletter/wtf-is-activation).
+As soon as your product is in any sort of public beta you should start tracking product intents. This is _not_ because you should be hyper focusing on your product's activation numbers at this stage - instead it is so that we can start collecting data for later on when we want to determine a good [activation metric](/handbook/growth/growth-engineering/per-product-activation.md).
 
 So, collecting product intents should be a precursor to any sort of public release. 
 
@@ -43,16 +43,7 @@ Generally we've made the plumbing such that recording these product intents is q
 2. When someone clicks that button / views that page / does that thing, then simply call [`addProductIntent` in the `teamLogic`](https://github.com/PostHog/posthog/blob/master/frontend/src/scenes/teamLogic.tsx#L155). That fires off an API request that records the product intent in the [database](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py) and sends the event for you. You don't need to send the event yourself - it's all handled.
     - You must include the _context_ of the intent with this API call, this is so that you can understand what is driving product intent in the analytics. You can store this in the `intent_context` - and you can find existing intent contexts [here](https://github.com/PostHog/posthog/blob/master/frontend/src/lib/utils/product-intents.ts).
 
-## Product Activation
-
-Every product should have activation criteria - these are used to determine if a user has activated for a specific product yet. If they haven't, and they've showed intent for that product, we can nudge them in the right direction. These are also used to understand what retention looks like for the product, and to figure out what PostHog can do to offer a better experience!
-
-To add a new product to this, you can add the activation criteria [here](https://github.com/PostHog/posthog/blob/master/posthog/models/product_intent/product_intent.py#L77-L82).
-
-This code is run every time an intent is updated. For example, if the activation criteria is "save 4 insights", and we send a product intent every time someone clicks "new insight", we'll also check at that time if they have 4 insights saved, and if so mark them as activated.
-
-This part of the product intent plumbing needs some work - we should be able to manually trigger activation checks whenever someone does a certain action (not an Action like a grouping of events but a generic action like something that you just do). If you want to make that change, please do - and update these docs!
-
+It's worth noting that adding new product intents will impact your activation rates (e.g. an existing user intent might be stronger or weaker than an onboarding intent). If you are comparing activation rates historically, it might be worth filtering for intents that rarely change, such as "onboarding product selected".
 
 ## Cross Sells
 
