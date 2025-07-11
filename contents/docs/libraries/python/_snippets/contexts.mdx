@@ -100,14 +100,18 @@ You can read more about identifying users in the [user identification documentat
 
 Contexts can be associated with a session ID by calling `posthog.set_context_session`. Session IDs must be UUIDv7 strings.
 
-> **Using PostHog on your frontend too?** If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you and you can retrieve it by calling `posthog.get_session_id()`. We then recommend passing that session ID to your backend by setting the `X-POSTHOG-SESSION-ID` header. Alternatively you can enable '__add_tracing_headers' in your config and the header will be set automatically.
-> You will need to extract the header in your request handler (if you're using our Django middleware, this happens automatically).
-
 ```python
 from posthog import new_context, set_context_session
 with new_context():
     set_context_session(request.get_header("X-POSTHOG-SESSION-ID"))
 ```
+
+<CalloutBox icon="IconInfo" title="Using PostHog on your frontend too?">
+
+If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you and you can retrieve it by calling `posthog.get_session_id()`. You will then need to pass that session ID to your backend by setting the `X-POSTHOG-SESSION-ID` header on each fetch request. Alternatively you can enable '__add_tracing_headers' in your config and the header will be set automatically.
+You will need to extract the header in your request handler (if you're using our Django middleware integration, this happens automatically).
+
+</CalloutBox>
 
 If you associate a context with a session, you'll be able to do things like:
 - See backend events on the session timeline when viewing session replays
