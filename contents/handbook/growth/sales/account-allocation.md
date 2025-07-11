@@ -25,7 +25,7 @@ We track the count of these products in Vitally using the `Total paid product co
 
 ### Doing the allocation
 
-It's Simon's (and Dana as backup) job to review the list of $20K accounts without an owner, as well as accounts which need to be handed over from TAE and TAMs.  We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in.  Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer.  Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Dana and Charles, to review the list of $20K accounts without an owner, as well as accounts which need to be handed over from TAE and TAMs.  We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in.  Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer.  Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
