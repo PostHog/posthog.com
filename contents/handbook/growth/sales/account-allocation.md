@@ -69,7 +69,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
  - We have completed training for the core user base, so that they are aware of concepts such as Actions, Cohorts etc.
  - They have set some insights and dashboards aligned with their use case for PostHog.
 
-#### Session Replay
+#### Session replay
 
  - They have set up tracking using posthog-js.
  - They are aware of the different recording controls and how to use them.
