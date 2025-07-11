@@ -2614,6 +2614,10 @@ export const docsMenu = {
                             url: '/docs/advanced/proxy/nginx',
                         },
                         {
+                            name: 'Node',
+                            url: '/docs/advanced/proxy/node',
+                        },
+                        {
                             name: 'Nuxt',
                             url: '/docs/advanced/proxy/nuxt',
                         },
