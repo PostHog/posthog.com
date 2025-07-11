@@ -22,3 +22,5 @@ When starting a new project, create a `bin` directory and include the following 
 * `bin/docs` - Optional: Generate documentation artifacts like API and SDK references.
 
 > **Warning:** Some environments add `bin` to the `.gitignore` file by default because that's where they compile binaries to.
+
+Example scripts are available in the [PostHog/scripts](https://github.com/PostHog/scripts) repository.
