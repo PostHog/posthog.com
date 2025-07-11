@@ -74,7 +74,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
  - They have set up tracking using posthog-js.
  - They are aware of the different recording controls and how to use them.
  - They have implemented privacy controls where necessary.
- - We have completed training for the core user base so that they know how to find specific recordings, as well as navigate from other products to Session Replays (e.g. from a funnel)
+ - We have completed training for the core user base so that they know how to find specific recordings, as well as navigate from other products to session replays (e.g. from a funnel)
 
 #### Feature flags
 
