@@ -4,6 +4,9 @@ sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 API queries enable you to query your data in PostHog. This is useful for:
 
 - Building user or [customer-facing analytics](/tutorials/customer-facing-analytics). 
@@ -478,8 +481,9 @@ If you need higher limits than these, [get in touch with our sales team](/talk-t
 
 If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
 
-> **Note:** Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
-
+<CalloutBox type="fyi" icon="IconLightBulb" title="Legacy query limits">
+Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
+</CalloutBox>
 
 ## Further reading
 
