@@ -1043,7 +1043,7 @@ const initialProducts = [
                             Console logs are useful for debugging and can be enabled by passing{' '}
                             <code>enable_recording_console_logs: true</code> or in your project's settings.
                         </p>
-                        <div className="flex lg:flex-row lg:gap-x-6 flex-col">
+                        <div className="flex @lg:flex-row @lg:gap-x-6 flex-col">
                             <div className="shrink">
                                 <h4 className="text-lg">Your code</h4>
                                 <CodeBlock
@@ -1075,6 +1075,8 @@ const initialProducts = [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
                         alt: 'Network monitor',
+                        stylize: true,
+                        shadow: true,
                     },
                 ],
             },
@@ -1150,10 +1152,10 @@ const initialProducts = [
                 title: 'DOM explorer',
                 headline: 'DOM explorer',
                 description:
-                    'Inspect the DOM as it was at this moment in the session. Analyze the structure and elements captured during the recording.',
+                    "Inspect the DOM of the user's browser at any moment in the recording. This lets you see the exact HTML and CSS that was rendered at that point in time – useful for debugging.",
                 images: [
                     {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/SessionReplay/images/network.png',
+                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/inspect_dom_e9376c469a.png',
                         alt: 'DOM explorer',
                     },
                 ],
@@ -1280,16 +1282,17 @@ window.posthog.onFeatureFlags(function () {
                 features: [
                     {
                         title: 'Filter by event',
-                        description: 'Filter by events to quickly find relevant recordings',
+                        description: 'Limit to recordings where users performed a specific event or action',
                     },
                     {
                         title: 'Filter by people',
-                        description: 'Filter by person properties to quickly find relevant recordings',
+                        description:
+                            'Use person properties (like country, custom property, or even email address) to quickly find relevant recordings',
                     },
                     {
                         title: 'Block sensitive data',
                         description:
-                            'Disable capturing data from any DOM element with HTML attributes or a customizable config',
+                            'Limit the data you capture from the DOM with HTML attributes or a customizable config within the PostHog app',
                     },
                     {
                         title: 'Share & embed',
@@ -1301,7 +1304,8 @@ window.posthog.onFeatureFlags(function () {
                     },
                     {
                         title: 'Sample recorded sessions',
-                        description: 'Restrict the percentage of sessions that will be recorded',
+                        description:
+                            'Restrict the percentage of sessions that will be recorded to reduce data collection or cost',
                     },
                 ],
             },
@@ -1520,7 +1524,7 @@ window.posthog.onFeatureFlags(function () {
         ],
         presenterNotes: {
             overview:
-                "Session replay lets you see exactly how users interact with your app. You're watching their real session—what they clicked, where they got stuck, what broke. This isn't just for debugging; it's for building empathy. You can see what's intuitive and what isn't, and how it feels to actually use your product. It's often the fastest way to uncover small issues that analytics alone won't catch. Everything is captured automatically—no manual tagging needed.",
+                "<strong>Presenter notes:</strong> Session replay lets you see exactly how users interact with your app. You're watching their real session—what they clicked, where they got stuck, what broke. This isn't just for debugging; it's for building empathy. You can see what's intuitive and what isn't, and how it feels to actually use your product. It's often the fastest way to uncover small issues that analytics alone won't catch. Everything is captured automatically—no manual tagging needed.",
             customers:
                 "You don't need to guess if this is valuable—companies like Hasura, Netdata, and ElevenLabs are already using it to make real improvements. Hasura saw a measurable bump in conversion once they started watching user sessions. Netdata uses it to cut down on back-and-forth with their support team. And ElevenLabs watches replays while testing new ideas to quickly figure out what's working. This is the kind of feedback loop that helps teams move faster without relying only on instinct.",
             features:
@@ -1530,8 +1534,8 @@ window.posthog.onFeatureFlags(function () {
             pricing:
                 'Session replay starts free—with 5,000 recordings per month included. After that, it’s metered by usage. No lock-ins, no guessing what tier you need. You pay only for what you record. The more you use, the cheaper it gets. And unlike some other tools, you’re not paying for seats or stuck in an enterprise contract just to unlock basic features. This lets both small teams and large ones get the same level of insight, without friction.',
             'comparison-summary':
-                'One big difference with PostHog is that replay isn’t bolted on. It’s part of the full product suite. That means it connects directly to analytics, feature flags, experiments, and surveys. If you’re running an A/B test and a user drops out, you can jump into their replay and see why. Or you can filter recordings by flag variant. You’re not exporting data between tools—it’s already connected. That makes it easier to find patterns and actually act on them.',
-            'feature-comparison': '',
+                "<strong>TL;DR:</strong> If you want a replay product that deeply integrates with other analytics tools, use PostHog. We're always shipping code to get to feature parity with any competing product, so even if we don't have what you need yet, there's a good chance we'll have it soon. Plus you can follow along with this product's roadmap and see what the Replay Team is shipping next.",
+            'feature-comparison': "@TODO we should add some things we don't have that others do...",
             docs: 'We put a lot of effort into our documentation because we know that for most teams, this is your first real experience using PostHog. And we don’t outsource it. The people writing the docs are the same engineers building the product. That means what you’re reading is always up to date, technically accurate, and written by someone who knows what it’s like to implement this stuff in production.<br /><br />We treat the docs like a product of their own.Our team actively monitors GitHub issues, community Slack, and feedback widgets on the site.When something’s unclear, we don’t just note it—we fix it.Fast.That kind of feedback loop is why people often tell us our docs are among the best they’ve used.<br /><br />We also understand that getting analytics set up properly is only part of the job.If your team is concerned about session replay costs, sampling strategy, or anything else, we’re not passive.We’ll reach out, suggest optimizations, and help you get the right setup for your use case.We want you to get the most out of PostHog without surprises.',
             'pairs-with':
                 'One big difference with PostHog is that replay isn’t bolted on. It’s part of the full product suite. That means it connects directly to analytics, feature flags, experiments, and surveys. If you’re running an A/B test and a user drops out, you can jump into their replay and see why. Or you can filter recordings by flag variant. You’re not exporting data between tools—it’s already connected. That makes it easier to find patterns and actually act on them.',

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
-import ImageSlider from 'components/Pricing/Test/ImageSlider'
+import ProductImage from './Image'
 
 interface Feature {
     title: string
@@ -14,7 +14,7 @@ interface FeatureItem {
     icon?: any
     color?: string
     features?: Feature[]
-    images?: Array<{ src: string; alt: string }>
+    images?: Array<{ src: string; alt: string; stylize: boolean; shadow: boolean }>
     children?: React.ReactNode
 }
 
@@ -82,7 +82,7 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                             </div>
                             {item.images && item.images.length > 0 && (
                                 <div className="max-w-3xl mx-auto">
-                                    <ImageSlider images={item.images} id={`feature-${index}`} />
+                                    <ProductImage images={item.images} />
                                 </div>
                             )}
                             {(item as any).children && <div className="p-4">{(item as any).children}</div>}

@@ -73,7 +73,11 @@ export default function CustomersSlide({ productName, customers, customerData, h
                     },
                     {
                         content: hasCaseStudy(customer.slug) ? (
-                            <Link to={`/customers/${customer.slug}`} state={{ newWindow: true }}>
+                            <Link
+                                to={`/customers/${customer.slug}`}
+                                state={{ newWindow: true }}
+                                className="underline font-semibold"
+                            >
                                 Link
                             </Link>
                         ) : null,
