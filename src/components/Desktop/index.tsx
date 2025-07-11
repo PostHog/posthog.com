@@ -140,25 +140,48 @@ export default function Desktop() {
         const containerWidth =
             constraintsRef.current?.getBoundingClientRect().width ||
             (typeof window !== 'undefined' ? window.innerWidth : 1200)
+        const containerHeight =
+            constraintsRef.current?.getBoundingClientRect().height ||
+            (typeof window !== 'undefined' ? window.innerHeight : 800)
 
-        const leftColumnX = 16
-        const rightColumnX = containerWidth - 112 - 16 // 112px icon width + 16px padding
-        const startY = 16
-        const iconSpacing = 85 // gap-y-5 = 20px + icon height ~85px
+        const iconWidth = 112
+        const iconHeight = 85
+        const padding = 16
+        const columnSpacing = 128 // Space between columns (icon width + gap)
 
-        // Position productLinks on the left
+        const startY = padding
+        const availableHeight = containerHeight - padding * 2 // Top and bottom padding
+        const maxIconsPerColumn = Math.floor(availableHeight / iconHeight)
+
+        // Position productLinks starting from the left
+        let currentColumn = 0
         productLinks.forEach((app, index) => {
+            const columnIndex = Math.floor(index / maxIconsPerColumn)
+            const positionInColumn = index % maxIconsPerColumn
+
             positions[app.label] = {
-                x: leftColumnX,
-                y: startY + index * iconSpacing,
+                x: padding + columnIndex * columnSpacing,
+                y: startY + positionInColumn * iconHeight,
             }
+
+            currentColumn = Math.max(currentColumn, columnIndex + 1)
         })
 
-        // Position apps on the right
+        // Position apps starting from the right, but create new columns if needed
+        const totalAppsColumns = Math.ceil(apps.length / maxIconsPerColumn)
+        // Calculate the rightmost possible starting position for apps
+        const rightmostStart = containerWidth - padding - iconWidth - (totalAppsColumns - 1) * columnSpacing
+        // Ensure at least one column gap from productLinks
+        const minStartFromLeft = (currentColumn + 1) * columnSpacing + padding
+        const rightStartColumn = Math.max(rightmostStart, minStartFromLeft)
+
         apps.forEach((app, index) => {
+            const columnIndex = Math.floor(index / maxIconsPerColumn)
+            const positionInColumn = index % maxIconsPerColumn
+
             positions[app.label] = {
-                x: rightColumnX,
-                y: startY + index * iconSpacing,
+                x: rightStartColumn + columnIndex * columnSpacing,
+                y: startY + positionInColumn * iconHeight,
             }
         })
 
