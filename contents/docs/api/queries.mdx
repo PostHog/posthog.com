@@ -471,11 +471,13 @@ curl \
 
 API queries are limited at the project-level to:
 
+- 1200 requests per hour
+- 120 requests per minute
 - 3 queries running concurrently
-- 1200 queries per hour
-- 120 queries per minute
-- Max execution time of 10 seconds (this is a query execution time, not HTTP request duration)
-- 80 threads
+- 80 threads per query
+- 10 seconds of max execution time
+  - applies to query execution time, not HTTP request duration
+
 
 If you need higher limits than these, [get in touch with our sales team](/talk-to-a-human). We promise they're friendly and technical enough to know what an API is.
 
