@@ -103,7 +103,9 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 ? { file: null, objectURL: teamImage?.image?.data?.attributes?.url }
                 : undefined,
             teamImageCaption: teamImage?.caption,
-            crestImage: crest?.data ? { file: null, objectURL: crest?.data?.attributes?.url } : undefined,
+            crestImage: crest?.data 
+                ? { file: null, objectURL: crest?.data?.attributes?.url } 
+                : { file: null, objectURL: 'https://res.cloudinary.com/dmukukwp6/image/upload/crest_default_0c2e43f05c.png' },
             crestOptions: crestOptions || {
                 fontSize: 'base',
                 textColor: 'black',
@@ -118,7 +120,9 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             },
             teamMembers: team?.attributes?.profiles?.data || [],
             teamLeads: team?.attributes?.leadProfiles?.data || [],
-            miniCrest: miniCrest?.data ? { file: null, objectURL: miniCrest?.data?.attributes?.url } : undefined,
+            miniCrest: miniCrest?.data 
+                ? { file: null, objectURL: miniCrest?.data?.attributes?.url } 
+                : { file: null, objectURL: 'https://res.cloudinary.com/dmukukwp6/image/upload/minicrest_default_4637a5cc4c.png' },
         },
         onSubmit: async ({
             name,
