@@ -35,6 +35,14 @@ You can use the Intercom contact creation destination to ensure those records ex
 
 ## FAQ
 
+### Can I send session replays to Intercom?
+
+Yes, you can add a link to the session replay in Intercom by setting the `integrations` config option when initializing PostHog's Web SDK to `{ intercom: true }`. See [our tutorial on adding session replays to Intercom](/tutorials/intercom-session-replays) for more details.
+
+### Can I add PostHog person profile data to Intercom?
+
+Yes, you can add a link to the PostHog person profile in Intercom by setting the `integrations` config option when initializing PostHog's Web SDK to `{ intercom: true }`. See [our tutorial on adding session replays to Intercom](/tutorials/intercom-session-replays) for more details.
+
 ### Is the source code for this destination available?
 
 PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/intercom/template_intercom.py) is available on GitHub.
