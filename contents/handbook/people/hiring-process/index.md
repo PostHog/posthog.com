@@ -289,5 +289,5 @@ Currently, we are hiring a lot. Our pace of hiring is the biggest blocker to shi
 
 ## Internships
 
-We regularly recieve enthusiastic requests from students about internships, which we're always flattered by. Currently we don't offer internships, placements or work experience - we’re a bit too scrappy to do them well right now. Once you ~~escape uni~~ graduate, you're welcome to apply to full time roles via our [careers site](https://posthog.com/careers). Your details will then go straight through to our hiring team (who _are_ real humans, not AI) and you'll hear back from us shortly after.
+We regularly receive enthusiastic requests from students about internships, which we're always flattered by. Currently we don't offer internships, placements or work experience - we’re a bit too scrappy to do them well right now. Once you ~~escape uni~~ graduate, you're welcome to apply to full time roles via our [careers site](https://posthog.com/careers). Your details will then go straight through to our hiring team (who _are_ real humans, not AI) and you'll hear back from us shortly after.
 
