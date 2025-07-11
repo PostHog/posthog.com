@@ -24,7 +24,9 @@ Here's what we've learned about marketing for developers.
 
 1. If you wouldn't be proud to share your marketing with a friend, you shouldn't do it.
 
-2. Developers build things because what exists isn't good enough. Tell people that! [Be opinionated](/handbook/growth/marketing#1-be-opinionated), unhappy with the status quo, and take a stand. Don't follow the crowd or dilute your message with a bunch of corporate speak. 
+2. Developers build things because what exists isn't good enough. Tell people that! [Be opinionated](/handbook/growth/marketing#1-be-opinionated), unhappy with the status quo, and take a stand. Don't follow the crowd or dilute your message with a bunch of corporate speak.
+
+![Generic marketing](https://res.cloudinary.com/dmukukwp6/image/upload/whathappened_cc03f5e458.png)
 
 3. Building a great product and [telling people about it](/handbook/growth/marketing#2-pull-dont-push) is a more sustainable path to success than spamming people with generic content, ads, or emails. Putting in the effort to make what you produce a bit higher quality pays off. 
 
@@ -32,9 +34,11 @@ Here's what we've learned about marketing for developers.
 
 5. Marketing lore tells you to focus on the *why*, but we think the opposite. Focusing on [benefits rather than features](/founders/features-sell) is tired, the language is vague, it makes it harder to understand what something does. Trust that your customers can figure it out and focus on features instead. 
 
+![Sell features, not benefits](https://res.cloudinary.com/dmukukwp6/image/upload/sellfeatures_b1c7c146f8.png)
+
 6. Your entire strategy is downstream of [your ideal customer profile](/newsletter/ideal-customer-profile-framework#2-your-entire-strategy-is-downstream-of-your-icp). For any decision (marketing and beyond), ask yourself what your ICP wants and what will be useful to them. You need to create [your brand for someone](/blog/brand#you-need-to-create-your-brand-for-someone). For us, that's product engineers at high growth startups.
 
-7. The best way to create your ICP is to start with [your best guess and test it](/newsletter/ideal-customer-profile-framework#3-start-with-your-best-guess-and-test-it). Figure out what your customer needs, what they have, and what they don't need. [Gather intel,](/newsletter/ideal-customer-profile-framework#4-gather-intel-every-way-you-can) ask questions, and fill in details from there.
+7. The best way to create your ICP is to start with [your best guess and test it](/newsletter/ideal-customer-profile-framework#3-start-with-your-best-guess-and-test-it). Figure out what your customer needs, what they have, and what they don't need. [Gather intel](/newsletter/ideal-customer-profile-framework#4-gather-intel-every-way-you-can), ask questions, and fill in details from there.
 
 8. Because our ICP is developers, we hire developers to do marketing. This gives us the skills we need to understand developers, speak their language, and create content they find [genuinely useful](/founders/dev-marketing-for-startups).
 
@@ -46,11 +50,13 @@ Here's what we've learned about marketing for developers.
 
 12. Treat your [website like a product](/handbook/how-we-get-users#we-happily-spend-lots-of-money-on-our-website) and invest in it accordingly. In lots of ways, your website is your best sales person and is key to getting people to self-serve successfully. 
 
-13. On the other hand, your brand isn't [just your website,](/blog/brand#your-brand-isnt-just-your-website) it's how your company is experienced by others. This can include how much you invest in each function, what you look for when hiring, your reputation in the community, what you talk about, and more.
+13. On the other hand, your brand isn't [just your website](/blog/brand#your-brand-isnt-just-your-website), it's how your company is experienced by others. This can include how much you invest in each function, what you look for when hiring, your reputation in the community, what you talk about, and more.
 
 14. You're not going to win by copying what your competitors are already doing. This means you should be weirder, more opinionated, and go a bit more in-depth. As our lead designer Cory says: "We aren't the best in the world at being polished, but we can be the best in the world at being ourselves."
 
 15. You can't [80:20 everything](/blog/brand#you-cant-8020-everything). A lot of brand work has an increasing marginal return. This is because a great brand's purpose is that you stand out. You don't stand out by being average! We have spent a ton of time making our merch world-class (and figuring out a lot of logistics to make it happen). 
+
+![Merch](https://res.cloudinary.com/dmukukwp6/image/upload/merch_store_a97f57c226.png)
 
 16. On merch, it's cool and people love it, but it does take a lot of work. Fulfillment companies are a pain (we've been through 3 in 2 years). Also, don't expect to make any money from it, we give most of ours away.
 
@@ -62,9 +68,13 @@ Here's what we've learned about marketing for developers.
 
 20. Never underestimate the power of being funny on the internet. Many people discover us from James' [social posts](http://x.com/james406), our [onboarding emails](https://x.com/stephsmithio/status/1927743711934337510), or our [DPA generator](/dpa).
 
+![Quick call?](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_11_at_11_45_32_2x_e4d049a538.png)
+
 21. To keep quality high, [enforce reviews on your content](/founders/dev-marketing-for-startups#enforce-code-reviews-on-your-content) (like you would with code). Start with big picture feedback and go into line edits and details later. Early feedback can save you a lot of time when the feedback is “you should probably ditch this entirely.”
 
 22. [SEO still matters](/newsletter/seo-for-startups#9-yes-your-startup-still-needs-seo) in the age of AI (people have been saying it's dead for a decade), but [it's a long play](/newsletter/b2b-startup-marketing-strategy#7-invest-in-seo-after-product-market-fit-). Expect it to take 5 to 6 months to see progress. This means it's less valuable before product-market-fit. 
+
+![SEO](https://res.cloudinary.com/dmukukwp6/image/upload/posthog_seo_2bdba1ba71.png)
 
 23. If you're looking for a place to start with SEO, start with [defensive SEO](/newsletter/seo-for-startups#1-start-with-defensive-seo). This means comparisons with competitors, how to integrate your product with others, and the best tools in your category. These can act as sales collateral, but are also high-intent.
 
@@ -75,6 +85,8 @@ Here's what we've learned about marketing for developers.
 26. If your content doesn't rank well, it's probably because it just [isn't very good](/newsletter/seo-for-startups#7-your-great-content-probably-sucks). Would you share it with a friend you like and respect? Would someone who knows a lot about the topic share it? Is it opinionated? If not, try to improve this first. 
 
 27. AI platforms like ChatGPT seem to be more influential than Google already. We've seen a 41x increase in visitors from AI platforms in the last 12 months as well as a 15x increase in them being mentioned on signup since November.
+
+![AI traffic growth](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_11_at_11_51_53_2x_2fb804965d.png)
 
 28. No one has figured out how to improve your visibility on AI platforms (AKA "generative engine optimization") yet. We're relying on our SEO content, but also added LLM-friendly features like `llms.text` and "Copy as Markdown" to our site.
 
@@ -87,6 +99,8 @@ Here's what we've learned about marketing for developers.
 32. Beware the [attribution mirage](/founders/dev-marketing-for-startups#beware-the-attribution-mirage). UTM parameters might tell you users come from one source, but the reality of where they heard about you is likely different. A user could read an article they found, search “posthog,” and click a Google Ad. This would tell us “Google Ads are awesome” when maybe that isn't the case. 
 
 33. Although not perfect, a counter to the attribution mirage is a box that asks “where did you hear about PostHog” on signup. This provides a lot of interesting insights about what's working and a bunch of unexpected sources to explore.
+
+![Where did you hear about us?](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_11_at_11_54_04_2x_fe7b5a43e2.png)
 
 34. When it comes to [paid ads](/founders/dev-marketing-paid-ads#all-paid-ads-are-basically-the-same), there are two objectives you should care about: conversion and awareness. Conversion means people click your ad then do something you want (like sign up). Awareness means you just want people to see it, they create demand. We split our budget 50/50 between the two.
 
