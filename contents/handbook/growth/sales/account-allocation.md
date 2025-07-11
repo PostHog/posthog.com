@@ -76,7 +76,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
  - They have implemented privacy controls where necessary.
  - We have completed training for the core user base so that they know how to find specific recordings, as well as navigate from other products to Session Replays (e.g. from a funnel)
 
-#### Feature Flags
+#### Feature flags
 
 - They understand how to integrate Feature Flags into their workflow.
 - Feature Flags calls are implemented correctly so as not to artificially inflate the bill.
