@@ -1,0 +1,166 @@
+name: Check internal links
+
+on:
+    schedule:
+        - cron: '0 11 * * 1' # Every Monday at 11am UTC
+    workflow_dispatch:
+        inputs:
+            save_results:
+                description: 'Save results to file'
+                required: false
+                default: 'true'
+                type: boolean
+            send_slack_notification:
+                description: 'Send Slack notification'
+                required: false
+                default: 'true'
+                type: boolean
+
+jobs:
+    check-internal-links:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '18'
+                  cache: 'yarn'
+
+            - name: Install dependencies
+              run: yarn install --frozen-lockfile
+
+            - name: Build site
+              run: yarn build
+
+            - name: Check links (console only)
+              if: ${{ github.event_name == 'workflow_dispatch' && inputs.save_results == false }}
+              run: |
+                  OUTPUT=$(node scripts/check-links-post-build.js 2>&1)
+                  echo "$OUTPUT"
+                  echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
+                  echo "$OUTPUT" >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
+
+            - name: Check links (with file output)
+              if: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false) }}
+              run: |
+                  OUTPUT=$(node scripts/check-links-post-build.js link-check-results 2>&1)
+                  echo "$OUTPUT"
+                  echo "LINK_CHECK_OUTPUT<<EOF" >> $GITHUB_ENV
+                  echo "$OUTPUT" >> $GITHUB_ENV
+                  echo "EOF" >> $GITHUB_ENV
+
+            - name: Upload link check results
+              if: ${{ always() && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.save_results != false)) }}
+              id: upload-results
+              uses: actions/upload-artifact@v4
+              with:
+                  name: link-check-results
+                  path: link-check-results/*.json
+                  if-no-files-found: warn
+                  retention-days: 30
+
+            - name: Send Slack notification
+              if: always()
+              run: |
+                  # Default to true for scheduled runs, use input value for manual runs
+                  SEND_SLACK="${{ inputs.send_slack_notification }}"
+                  if [ "$SEND_SLACK" = "" ]; then SEND_SLACK="true"; fi
+
+                  if [ "$SEND_SLACK" = "true" ] && [ -n "${{ secrets.SLACK_LINKS_CHECK_WEBHOOK }}" ]; then
+                    WORKFLOW_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+                    
+                    if [ "${{ job.status }}" = "success" ]; then
+                      COLOR="good"
+                      EMOJI=":white_check_mark:"
+                      STATUS="completed successfully"
+                    else
+                      COLOR="danger"
+                      EMOJI=":x:"
+                      STATUS="failed"
+                    fi
+                    
+                    # Set triggered_by based on event type
+                    if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+                      TRIGGERED_BY="manually run by ${{ github.actor }}"
+                    elif [ "${{ github.event_name }}" = "schedule" ]; then
+                      TRIGGERED_BY="Triggered via schedule"
+                    else
+                      TRIGGERED_BY="${{ github.actor }}"
+                    fi
+                    
+                    # Extract statistics from the environment variable (suppress extra output)
+                    if [ -n "$LINK_CHECK_OUTPUT" ]; then
+                      MARKDOWN_FILES=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Scanned [0-9]* markdown files" | grep -o "[0-9]*" | head -1 || echo "0")
+                      TOTAL_INTERNAL_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Processed [0-9]* internal links" | grep -o "[0-9]*" | head -1 || echo "0")
+                      EXCLUDED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* excluded links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
+                      REDIRECTED_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* redirected links (skipped)" | grep -o "[0-9]*" | head -1 || echo "0")
+                      BROKEN_LINKS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken links" | grep -o "[0-9]*" | head -1 || echo "0")
+                      BROKEN_ANCHORS=$(echo "$LINK_CHECK_OUTPUT" | grep -o "Found [0-9]* broken anchor links" | grep -o "[0-9]*" | head -1 || echo "0")
+                    else
+                      MARKDOWN_FILES="0"
+                      TOTAL_INTERNAL_LINKS="0"
+                      EXCLUDED_LINKS="0"
+                      REDIRECTED_LINKS="0"
+                      BROKEN_LINKS="0"
+                      BROKEN_ANCHORS="0"
+                    fi
+                    
+                    # Prepare variables for Slack payload
+                    # Default to true for scheduled runs, use input value for manual runs
+                    SAVE_RESULTS="${{ inputs.save_results }}"
+                    if [ "$SAVE_RESULTS" = "" ]; then SAVE_RESULTS="true"; fi
+                    
+                    RESULTS_DOWNLOAD=""
+                    if [ "$SAVE_RESULTS" = "true" ]; then
+                      ARTIFACT_ID="${{ steps.upload-results.outputs.artifact-id }}"
+                      if [ -n "$ARTIFACT_ID" ]; then
+                        RESULTS_DOWNLOAD="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts/$ARTIFACT_ID"
+                      else
+                        RESULTS_DOWNLOAD="$WORKFLOW_URL"
+                      fi
+                    fi
+                    
+                    curl -s -X POST "${{ secrets.SLACK_LINKS_CHECK_WEBHOOK }}" \
+                      -H "Content-Type: application/json" \
+                      -d "{
+                        \"status\": \"$STATUS\",
+                        \"emoji\": \"$EMOJI\",
+                        \"repository\": \"${{ github.repository }}\",
+                        \"triggered_by\": \"$TRIGGERED_BY\",
+                        \"workflow_url\": \"$WORKFLOW_URL\",
+                        \"markdown_files\": \"$MARKDOWN_FILES\",
+                        \"links_checked\": \"$TOTAL_INTERNAL_LINKS\",
+                        \"excluded_links\": \"$EXCLUDED_LINKS\",
+                        \"redirected_links\": \"$REDIRECTED_LINKS\",
+                        \"broken_links\": \"$BROKEN_LINKS\",
+                        \"broken_anchors\": \"$BROKEN_ANCHORS\",
+                        \"results_download\": \"$RESULTS_DOWNLOAD\",
+                        \"save_results\": \"$SAVE_RESULTS\"
+                      }" > /dev/null 2>&1
+                    
+                    echo "✅ Slack notification sent successfully"
+                  else
+                    if [ "$SEND_SLACK" = "false" ]; then
+                      echo "Slack notifications disabled by user input"
+                    else
+                      echo "SLACK_LINKS_CHECK_WEBHOOK not configured, skipping Slack notification"
+                    fi
+                  fi
+
+            - name: Report results
+              if: always()
+              run: |
+                  # Default to true for scheduled runs, use input value for manual runs
+                  SAVE_RESULTS="${{ inputs.save_results }}"
+                  if [ "$SAVE_RESULTS" = "" ]; then SAVE_RESULTS="true"; fi
+
+                  echo "Link check completed!"
+                  echo "Check the job output above for detailed results."
+                  if [ "$SAVE_RESULTS" = "true" ]; then
+                    echo "Results files have been uploaded as artifacts."
+                  fi

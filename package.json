@@ -26,6 +26,7 @@
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "test-redirects": "jest scripts",
+        "check-links-post-build": "node scripts/check-links-post-build.js",
         "storybook": "start-storybook -s ./static -p 6006",
         "build-storybook": "build-storybook"
     },
