@@ -50,11 +50,11 @@ export const exportToPdf = async ({ slideId, filename }: ExportToPdfOptions = {}
         })
 
         try {
-            // Create PDF in landscape format with compression
+            // Create PDF in US Letter landscape format with compression
             const pdf = new jsPDF({
                 orientation: 'landscape',
                 unit: 'mm',
-                format: 'a4',
+                format: 'letter',
                 compress: true,
             })
 
@@ -78,11 +78,11 @@ export const exportToPdf = async ({ slideId, filename }: ExportToPdfOptions = {}
                 }
                 isFirstPage = false
 
-                // Calculate dimensions to fit slide in landscape page
-                // A4 landscape: 297mm x 210mm with some margin
-                const pageWidth = 297
-                const pageHeight = 210
-                const margin = 10
+                // Calculate dimensions to fit slide in US Letter landscape page
+                // US Letter landscape: 279.4mm x 215.9mm with reduced margin
+                const pageWidth = 279.4
+                const pageHeight = 215.9
+                const margin = 6
                 const maxWidth = pageWidth - margin * 2
                 const maxHeight = pageHeight - margin * 2
 
