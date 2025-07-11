@@ -27,7 +27,7 @@ You can find your salesforce ID by going to your profile and copy the text in th
 
 ### Churn
 
-1. Have any of your accounts churn from a specific product within the last 3 months? How many/if any across all your organizations within the last 3 months?
+1. Have any of your accounts churned from a specific product within the last 3 months? How many/if any across all your organizations within the last 3 months?
 
 ## Strategic questions
 
