@@ -161,7 +161,7 @@ You can either pass the session ID from posthog-js into your back end, or genera
 
 If the events are logically part of the same session, e.g. a user starts a purchase on the front end and you receive confirmation on the back end, it's better to re-use the session ID from the front end. On the other hand, if the events have no corresponding front-end session, you can generate a new session ID.
 
-### Automatically sending Session IDs from the JS SDK
+### Automatically sending Session IDs
 
 If you enable tracing headers within the JS SDK the Session ID will be sent on every request.
 
