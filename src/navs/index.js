@@ -1227,6 +1227,10 @@ export const handbookSidebar = [
                 name: 'Incidents & maintenance',
                 url: '/handbook/engineering/incidents#customer-communications',
             },
+            {
+                name: 'Troubleshooting tips',
+                url: '/handbook/support/troubleshooting-tips',
+            },
         ],
     },
     {
