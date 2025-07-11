@@ -108,8 +108,9 @@ with new_context():
 
 <CalloutBox icon="IconInfo" title="Using PostHog on your frontend too?">
 
-If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you and you can retrieve it by calling `posthog.get_session_id()`. You will then need to pass that session ID to your backend by setting the `X-POSTHOG-SESSION-ID` header on each fetch request. Alternatively you can enable '__add_tracing_headers' in your config and the header will be set automatically.
-You will need to extract the header in your request handler (if you're using our Django middleware integration, this happens automatically).
+If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you and you can retrieve it by calling `posthog.get_session_id()`. You then need to pass that session ID to your backend by setting the `X-POSTHOG-SESSION-ID` header on each fetch request. Alternatively, you can enable '__add_tracing_headers' in your config and the header is set automatically.
+
+You need to extract the header in your request handler (if you're using our Django middleware integration, this happens automatically).
 
 </CalloutBox>
 
