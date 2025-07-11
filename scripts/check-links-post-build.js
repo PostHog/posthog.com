@@ -636,8 +636,9 @@ function displayBrokenAnchors(brokenAnchors) {
 }
 
 // Display summary statistics
-function displaySummaryStats(stats, brokenLinks, brokenAnchors) {
-    console.log(`\nProcessed ${stats.totalLinks} internal links`)
+function displaySummaryStats(stats, brokenLinks, brokenAnchors, markdownFilesCount) {
+    console.log(`\nScanned ${markdownFilesCount} markdown files`)
+    console.log(`Processed ${stats.totalLinks} internal links`)
     console.log(`Found ${stats.excludedLinks} excluded links (skipped)`)
     console.log(`Found ${stats.redirectedLinks} redirected links (skipped)`)
     console.log(`Checked ${stats.anchorLinksChecked} anchor links`)
@@ -682,7 +683,7 @@ function checkLinks(outputPath) {
     }
 
     // Display summary stats at the end
-    displaySummaryStats(stats, brokenLinks, brokenAnchors)
+    displaySummaryStats(stats, brokenLinks, brokenAnchors, markdownFiles.length)
 
     // Create and save results at the end
     const results = createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages)
@@ -711,8 +712,7 @@ const brokenCount = checkLinks(outputPath)
 // Only exit with error code if there are broken PAGE links (not just anchor links)
 // This allows the workflow to continue while still reporting issues
 if (brokenCount > 0) {
-    console.log(`\n⚠️  Found ${brokenCount} broken links - but not failing the workflow`)
-    console.log('Check the output above to see what needs to be fixed')
+    console.log('\nCheck the output above ☝️')
 }
 
 process.exit(0) // Always exit successfully
