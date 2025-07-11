@@ -3,7 +3,7 @@ title: Account allocation and handover
 sidebar: Handbook
 showTitle: true
 ---
-We have different roles within the team who manage customers at various stages in their lifecycle.  Customers will typically sign up and start paying for PostHog themselves, or land as customers via a Technical Account Executive.  Once customers hit $20k a year in spend with us they should have a dedicated Techical Account Manager or Customer Success Manager.
+We have different roles within the team who manage customers at various stages in their lifecycle.  Customers will typically sign up and start paying for PostHog themselves, or land as customers via a Technical Account Executive.  Once customers hit $20k a year in spend with us they should have a dedicated Technical Account Manager or Customer Success Manager.
 
 ## TAM vs CSM
 
