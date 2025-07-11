@@ -268,30 +268,42 @@ export default function HeaderBar({
                     </motion.div>
                 )}
                 {exportToPdf && (
-                    <OSButton
-                        onClick={async () => {
-                            setIsExportingPdf(true)
-                            try {
-                                await exportPresentationToPdf({ slideId })
-                            } finally {
-                                setIsExportingPdf(false)
-                            }
-                        }}
-                        variant="secondary"
-                        size="sm"
-                        disabled={isExportingPdf}
-                        icon={isExportingPdf ? <Loading /> : <IconDownload />}
-                        className="mr-1"
-                    />
+                    <Tooltip
+                        trigger={
+                            <OSButton
+                                onClick={async () => {
+                                    setIsExportingPdf(true)
+                                    try {
+                                        await exportPresentationToPdf({ slideId })
+                                    } finally {
+                                        setIsExportingPdf(false)
+                                    }
+                                }}
+                                variant="secondary"
+                                size="sm"
+                                disabled={isExportingPdf}
+                                icon={isExportingPdf ? <Loading /> : <IconDownload />}
+                                className="mr-1"
+                            />
+                        }
+                    >
+                        Export to PDF
+                    </Tooltip>
                 )}
                 {showFullScreen && (
-                    <OSButton
-                        onClick={onFullScreenClick}
-                        variant="primary"
-                        size="sm"
-                        disabled={!onFullScreenClick}
-                        icon={<IconPlay />}
-                    />
+                    <Tooltip
+                        trigger={
+                            <OSButton
+                                onClick={onFullScreenClick}
+                                variant="primary"
+                                size="sm"
+                                disabled={!onFullScreenClick}
+                                icon={<IconPlay />}
+                            />
+                        }
+                    >
+                        Open presentation mode
+                    </Tooltip>
                 )}
             </div>
         </>
