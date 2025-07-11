@@ -36,6 +36,8 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image'
 import { FeatureSnapshot } from 'components/FeatureSnapshot'
 import { CallToAction } from 'components/CallToAction'
 import { IconRocket } from '@posthog/icons'
+import { StartupProductCards, startupProducts } from '../src/components/StartupProductCards'
+import * as Icons from '@posthog/icons'
 
 export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-refer.png"
 
@@ -43,19 +45,25 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
   <div className="w-full max-w-4xl mx-auto text-center">
     <div className="flex justify-center items-center mt-8 mb-6 gap-3">
       <IconRocket className="w-6 h-6 text-red" />
-      <span className="text-xs md:text-sm text-gray-700">PostHog for Startups</span>
+      <span className="text-xs md:text-sm font-semibold text-gray-700">PostHog for Startups</span>
     </div>
-    <h1 className="text-20xl md:text-lg leading-tight mb-6">
-      Start the journey to product-market fit with <span style={{ color: '#F54E00' }}>$50,000 in credits</span>
+    <h1 className="text-8xl md:text-5xl font-extrabold mb-6">
+      Start the journey to product-market fit with $50,000 in credits
     </h1>
     <h3 className="font-semibold text-base mb-8">
       (Plus get some extras you'll actually use)
     </h3>
     <div className="flex justify-center items-center gap-2">
-      <CallToAction href="https://app.posthog.com/startups">Apply now</CallToAction>
+      <CallToAction type="primary" href="https://app.posthog.com/startups">Apply now</CallToAction>
     </div>
+    <img
+      src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_0d2d44939f.png"
+      alt="PostHog for Startups illustration"
+      className="mx-auto mt-8 max-w-full w-[400px] md:w-[500px] lg:w-[600px] h-auto"
+    />
   </div>
 </section>
+
 
 <section class="py-16 px-5">
   <div class="max-w-screen-2xl mx-auto">
@@ -67,7 +75,7 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
       <div class="bg-[#E5E7E0] dark:bg-[#2C2C2C] p-8 rounded-2xl shadow-sm transition-colors duration-300">
-        <h5 class="text-2xl font-extrabold m-0 mb-4 text-black dark:text-white">$50,000 in PostHog credit</h5>
+        <h5 class="text-2xl font-extrabold m-0 mb-4 text-black dark:text-white">$50,000 in credit for a year</h5>
         <p class="m-0 text-[16px] text-gray-800 dark:text-gray-300">
           That's a lot of events, replays, API calls, survey responses, and more. It lasts a year!
         </p>
@@ -83,7 +91,7 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
       <div class="bg-[#E5E7E0] dark:bg-[#2C2C2C] p-8 rounded-2xl shadow-sm transition-colors duration-300">
         <h5 class="text-2xl font-extrabold m-0 mb-4 text-black dark:text-white">Better docs with Mintlify</h5>
         <p class="m-0 text-[16px] text-gray-800 dark:text-gray-300">
-          The best products deserve the best documentation. Get 50% off Mintlify for 6 months.
+          The best products deserve the best docus. So, get 50% off Mintlify for 6 months.
         </p>
       </div>
       
@@ -96,6 +104,16 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
     </div>
   </div>
 </section>
+
+<StartupProductCards
+    products={startupProducts}
+    leftContent={
+        <>
+            <h2 className="text-3xl lg:text-5xl mb-4">Explore our products</h2>
+            <p className="text-lg opacity-80 mb-4">PostHog offers a full suite of tools to help you build, measure, and grow your startup. Hover over a product to learn more.</p>
+        </>
+    }
+/>
 
 <section class="my-24 px-5">
 
@@ -286,9 +304,26 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
   </div>
 </section>
 
-<div className="text-center">
-
-<h2 className="text-3xl lg:text-5xl pb-8">Ready to get started?</h2>
-<CallToAction href="https://app.posthog.com/startups">Apply now</CallToAction>
-
-</div>
+<section className="relative overflow-hidden my-24 px-5">
+  <div className="relative z-10 p-8 rounded-lg mx-auto max-w-xl text-center">
+    <h2 className="text-3xl lg:text-5xl pb-2">Ready to get started?</h2>
+    <h3 className="text-xl font-semibold opacity-75 mb-6">Start your journey to product-market fit</h3>
+    <div className="flex justify-center my-6">
+      <img
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/1724161583653_billing_transition_01_J5_R0_KQ_253_HXSQKD_8_Y6_PMBJ_0_F_04a8cb9d51.png"
+        alt="What you get illustration"
+        className="mx-auto max-w-full h-auto w-1/3"
+      />
+    </div>
+    <div className="flex justify-center gap-2 mt-6">
+      <CallToAction
+        href="https://app.posthog.com/startups"
+        type="primary"
+        size="lg"
+        className="w-full sm:w-auto"
+      >
+        Join PostHog for Startups
+      </CallToAction>
+    </div>
+  </div>
+</section>
