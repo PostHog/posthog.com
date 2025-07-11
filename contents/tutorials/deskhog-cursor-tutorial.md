@@ -10,6 +10,8 @@ tags:
   - DeskHog
 ---
 
+> Unfortunately, since writing this the process for integrating Cursor and PlatformIO has changed and users can no longer directly install PlatformIO within Cursor. We're leaving this guide live for those who want to attempt the workaround of installing PlatformIO in VSCode and importing the plugin to Cursor - but our recommended route is to [use Claude Code instead](/tutorials/deskhog-claude-tutorial). It's just better. 
+
 [DeskHog](/deskhog) is an open-source developer toy, designed so that you can easily get started building your own apps and games from scratch. Just because it’s a developer toy doesn’t mean it’s just for experienced developers though — AI agents such as Cursor enable anyone to start building apps using just natural language. 
 
 This tutorial shows you how to get started building a simple game for DeskHog using Cursor, PlatformIO, GitHub, and some example prompts. We’ll start from the absolute basics and assume no prior knowledge or experience coding with C++, but quickly work towards making a basic Flappy Bird game for DeskHog.
