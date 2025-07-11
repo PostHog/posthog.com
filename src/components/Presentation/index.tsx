@@ -5,6 +5,7 @@ import { Accordion } from '../RadixUI/Accordion'
 import { ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconInfo, IconGear } from '@posthog/icons'
 import PresentationMode from './FullScreen'
+import { motion } from 'framer-motion'
 
 interface AccordionItem {
     title: string
@@ -21,11 +22,13 @@ interface PresentationProps {
     fullScreen?: boolean
     slides?: Array<{
         name: string
+        slug: string
         content: React.ReactNode
         rawContent?: React.ReactNode
         thumbnailContent?: React.ReactNode
     }>
     slideId?: string
+    presenterNotes?: Record<string, string>
 }
 
 const SidebarContent = ({
@@ -72,14 +75,55 @@ export default function Presentation({
     fullScreen = false,
     slides = [],
     slideId,
+    presenterNotes,
 }: PresentationProps) {
     const [isNavVisible, setIsNavVisible] = useState<boolean>(true)
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
+    const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(true)
+    const [drawerHeight, setDrawerHeight] = useState<number>(80)
+    const [lastOpenHeight, setLastOpenHeight] = useState<number>(80)
+    const [isDragging, setIsDragging] = useState<boolean>(false)
+    const [dragStartHeight, setDragStartHeight] = useState<number>(0)
+    const containerRef = useRef<HTMLDivElement>(null)
 
     const toggleNav = () => {
         setIsNavVisible(!isNavVisible)
+    }
+
+    const toggleDrawer = () => {
+        if (isDrawerOpen) {
+            // Closing: save current height (only if it's reasonable)
+            if (drawerHeight >= 10) {
+                setLastOpenHeight(drawerHeight)
+            }
+            setIsDrawerOpen(false)
+        } else {
+            // Opening: restore last height, but ensure it's reasonable
+            const heightToRestore = lastOpenHeight >= 25 ? lastOpenHeight : 80
+            setDrawerHeight(heightToRestore)
+            setIsDrawerOpen(true)
+        }
+    }
+
+    const handleVerticalDrag = (_event: any, info: any) => {
+        if (!containerRef.current || !isDrawerOpen) return
+        const containerHeight = containerRef.current.getBoundingClientRect().height
+        const newDrawerHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 0), 300)
+        setDrawerHeight(newDrawerHeight)
+
+        // Update lastOpenHeight for reasonable heights only
+        if (newDrawerHeight >= 10) {
+            setLastOpenHeight(newDrawerHeight)
+        }
+    }
+
+    const getCurrentSlideNotes = () => {
+        if (!presenterNotes || !slides || slides.length === 0) return ''
+        const currentSlide = slides[activeSlideIndex]
+        if (!currentSlide) return ''
+        return presenterNotes[currentSlide.slug] || ''
     }
 
     // Set up scroll-based detection to track active slide
@@ -147,7 +191,7 @@ export default function Presentation({
 
     return (
         <>
-            <div className="@container w-full h-full flex flex-col min-h-1">
+            <div ref={containerRef} className="@container w-full h-full flex flex-col min-h-1">
                 <div
                     data-scheme="secondary"
                     className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
@@ -180,6 +224,9 @@ export default function Presentation({
                                     isNavVisible={isNavVisible}
                                     onToggleNav={toggleNav}
                                     showFullScreen
+                                    showDrawerToggle
+                                    isDrawerOpen={isDrawerOpen}
+                                    onToggleDrawer={toggleDrawer}
                                     exportToPdf
                                     slideId={slideId}
                                     onFullScreenClick={slides.length > 0 ? enterPresentationMode : undefined}
@@ -189,20 +236,72 @@ export default function Presentation({
                         {fullScreen ? (
                             children
                         ) : (
-                            <div className="min-h-0">
-                                <ScrollArea className="h-full flex-1 border-t  border-primary">
-                                    {accentImage && (
-                                        <div className="absolute right-0 top-6">
-                                            <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
-                                                {accentImage}
-                                                <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
-                                                <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
+                            <>
+                                <div className="min-h-0 flex-1">
+                                    <ScrollArea className="h-full flex-1 border-t border-primary">
+                                        {accentImage && (
+                                            <div className="absolute right-0 top-6">
+                                                <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
+                                                    {accentImage}
+                                                    <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
+                                                    <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
+                                                </div>
                                             </div>
+                                        )}
+                                        <div className="relative">{children}</div>
+                                    </ScrollArea>
+                                </div>
+                                <div
+                                    data-scheme="primary"
+                                    className={`flex-none relative bg-primary border-t border-primary overflow-hidden ${
+                                        !isDragging ? 'transition-all duration-200 ease-out' : ''
+                                    }`}
+                                    style={{
+                                        height: isDrawerOpen ? drawerHeight : 0,
+                                        maxHeight: 300,
+                                        minHeight: 0,
+                                    }}
+                                >
+                                    <motion.div
+                                        data-scheme="tertiary"
+                                        className={`h-1.5 top-0 left-0 !transform-none absolute z-20 w-full ${
+                                            isDrawerOpen
+                                                ? 'cursor-ns-resize hover:bg-accent active:bg-accent'
+                                                : 'pointer-events-none'
+                                        }`}
+                                        drag={isDrawerOpen ? 'y' : false}
+                                        dragMomentum={false}
+                                        dragConstraints={{ top: 0, bottom: 0 }}
+                                        onDragStart={() => {
+                                            if (isDrawerOpen) {
+                                                setIsDragging(true)
+                                                setDragStartHeight(drawerHeight)
+                                            }
+                                        }}
+                                        onDragEnd={() => {
+                                            setIsDragging(false)
+                                            // Auto-close if dragged to near-zero height
+                                            if (drawerHeight <= 5) {
+                                                setIsDrawerOpen(false)
+                                                // Ensure we have a reasonable height for reopening
+                                                if (lastOpenHeight < 10) {
+                                                    setLastOpenHeight(80)
+                                                }
+                                            }
+                                        }}
+                                        onDrag={handleVerticalDrag}
+                                    />
+                                    <ScrollArea className="h-full">
+                                        <div className="p-4 text-sm">
+                                            {getCurrentSlideNotes() ? (
+                                                <div dangerouslySetInnerHTML={{ __html: getCurrentSlideNotes() }} />
+                                            ) : (
+                                                'No presenter notes for this slide.'
+                                            )}
                                         </div>
-                                    )}
-                                    <div className="relative">{children}</div>
-                                </ScrollArea>
-                            </div>
+                                    </ScrollArea>
+                                </div>
+                            </>
                         )}
                     </main>
                 </div>

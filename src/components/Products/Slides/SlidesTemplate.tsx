@@ -222,6 +222,7 @@ export default function SlidesTemplate({
                     <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} slideId={productData?.slug} />
                 )}
                 slides={slides}
+                presenterNotes={productData?.presenterNotes}
             >
                 <div
                     data-scheme="primary"

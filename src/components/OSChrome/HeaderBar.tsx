@@ -13,8 +13,9 @@ import {
     IconPlay,
     IconBookmark,
     IconBookmarkSolid,
-    IconDownload,
+    IconBottomPanel,
 } from '@posthog/icons'
+import { IconPDF } from 'components/OSIcons'
 import { useWindow } from '../../context/Window'
 import SearchBar from 'components/Editor/SearchBar'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -55,6 +56,9 @@ interface HeaderBarProps {
     isCartOpen?: boolean
     exportToPdf?: boolean
     slideId?: string
+    showDrawerToggle?: boolean
+    isDrawerOpen?: boolean
+    onToggleDrawer?: () => void
 }
 
 export default function HeaderBar({
@@ -81,6 +85,9 @@ export default function HeaderBar({
     isCartOpen = false,
     exportToPdf = false,
     slideId,
+    showDrawerToggle = false,
+    isDrawerOpen = false,
+    onToggleDrawer,
 }: HeaderBarProps) {
     const { user, addBookmark, removeBookmark } = useUser()
     const { openSignIn } = useApp()
@@ -267,44 +274,58 @@ export default function HeaderBar({
                         )}
                     </motion.div>
                 )}
-                {exportToPdf && (
-                    <Tooltip
-                        trigger={
-                            <OSButton
-                                onClick={async () => {
-                                    setIsExportingPdf(true)
-                                    try {
-                                        await exportPresentationToPdf({ slideId })
-                                    } finally {
-                                        setIsExportingPdf(false)
-                                    }
-                                }}
-                                variant="secondary"
-                                size="sm"
-                                disabled={isExportingPdf}
-                                icon={isExportingPdf ? <Loading /> : <IconDownload />}
-                                className="mr-1"
-                            />
-                        }
-                    >
-                        Export to PDF
-                    </Tooltip>
-                )}
-                {showFullScreen && (
-                    <Tooltip
-                        trigger={
-                            <OSButton
-                                onClick={onFullScreenClick}
-                                variant="primary"
-                                size="sm"
-                                disabled={!onFullScreenClick}
-                                icon={<IconPlay />}
-                            />
-                        }
-                    >
-                        Open presentation mode
-                    </Tooltip>
-                )}
+                <div className="flex items-center gap-1">
+                    {showDrawerToggle && (
+                        <Tooltip
+                            trigger={
+                                <OSButton
+                                    variant="ghost"
+                                    icon={<IconBottomPanel />}
+                                    active={isDrawerOpen}
+                                    onClick={onToggleDrawer}
+                                />
+                            }
+                        >
+                            {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
+                        </Tooltip>
+                    )}
+                    {exportToPdf && (
+                        <Tooltip
+                            trigger={
+                                <OSButton
+                                    onClick={async () => {
+                                        setIsExportingPdf(true)
+                                        try {
+                                            await exportPresentationToPdf({ slideId })
+                                        } finally {
+                                            setIsExportingPdf(false)
+                                        }
+                                    }}
+                                    variant="ghost"
+                                    disabled={isExportingPdf}
+                                    icon={isExportingPdf ? <Loading /> : <IconPDF />}
+                                />
+                            }
+                        >
+                            Export to PDF
+                        </Tooltip>
+                    )}
+                    {showFullScreen && (
+                        <Tooltip
+                            trigger={
+                                <OSButton
+                                    onClick={onFullScreenClick}
+                                    variant="primary"
+                                    size="sm"
+                                    disabled={!onFullScreenClick}
+                                    icon={<IconPlay />}
+                                />
+                            }
+                        >
+                            Open presentation mode
+                        </Tooltip>
+                    )}
+                </div>
             </div>
         </>
     )
