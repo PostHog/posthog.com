@@ -35,7 +35,7 @@ Brian runs monthly marketing growth reviews, which cover:
 
 A lead is someone who has either:
 
-- **Signed up** for PostHog ([we score these](/growth/sales/lead-scoring) to prioritize follow-up)  
+- **Signed up** for PostHog ([we score these](/handbook/growth/sales/lead-scoring) to prioritize follow-up)  
 - **Requested a demo** through the site  
 
 We don’t gate content or the product. We don’t rely on shady tactics or clickbait. If someone wants to try the product or talk to us, we make it easy.

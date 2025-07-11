@@ -1471,6 +1471,54 @@
         {
             "source": "/docs/privacy/data-deletion",
             "destination": "/docs/privacy/data-storage#data-deletion"
+        },
+        {
+            "source": "/manual/funnels",
+            "destination": "/docs/product-analytics/funnels"
+        },
+        {
+            "source": "/manual/lifecycle",
+            "destination": "/docs/product-analytics/lifecycle"
+        },
+        {
+            "source": "/manual/paths",
+            "destination": "/docs/product-analytics/paths"
+        },
+        {
+            "source": "/manual/correlation",
+            "destination": "/docs/product-analytics/correlation"
+        },
+        {
+            "source": "/manual/experimentation",
+            "destination": "/docs/experiments"
+        },
+        {
+            "source": "/manual/retention",
+            "destination": "/docs/product-analytics/retention"
+        },
+        {
+            "source": "/manual/feature-flags",
+            "destination": "/docs/feature-flags"
+        },
+        {
+            "source": "/manual/annotations",
+            "destination": "/docs/data/annotations"
+        },
+        {
+            "source": "/manual/dashboards",
+            "destination": "/docs/product-analytics/dashboards"
+        },
+        {
+            "source": "/manual/stickiness",
+            "destination": "/docs/product-analytics/stickiness"
+        },
+        {
+            "source": "/manual/insights",
+            "destination": "/docs/product-analytics/insights"
+        },
+        {
+            "source": "/manual/trends",
+            "destination": "/docs/product-analytics/trends"
         }
     ],
     "headers": [
