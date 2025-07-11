@@ -18,7 +18,7 @@ Technical Account Managers (Sales Team) and Customer Success Managers (Customer 
 - Data warehouse
 - Error tracking
 
-We track the count of these products in Vitally and can use that number in determining who gets allocated to a customer.
+We track the count of these products in Vitally sing the `Total paid product count (main only)` custom trait and can use that number in determining who gets allocated to a customer.
 
 - Customers paying for 1 or 2 primary products should go to a Technical Account Manager.  This is because there are a lot more products that the customer can use, so we need someone focused on cross-sell to make PostHog as sticky as possible.
 - Customers paying for 3 or more primary products should go to a Customer Success Manager.  At this product count they should be pretty sticky as a customer so the main focus here is retention.
@@ -39,8 +39,8 @@ And then it is down to the Team Leads to figure out which team member is taking 
 
 To help the new owner of a customer hit the ground running, we should make sure that the customer is in a good state and that a warm introduction happens.  Typical handoffs between roles are:
 
-- TAE -> TAM 1-3 after the initial contract is signed and the customer is onboarded into 1 or 2 primary products.
-- TAE -> CSM after the initial contract is signed and the customer is onboarded into 3 or more primary products.
+- TAE -> TAM 1-3 months after the initial contract is signed and the customer is onboarded into 1 or 2 primary products.
+- TAE -> CSM 1-3 months after the initial contract is signed and the customer is onboarded into 3 or more primary products.
 - TAE -> CSM after sufficient cross-product expansion has take place.
 
 For handover to take place there should be an Account Plan and the customer should have been onboarded properly to the products they are currently paying for.
