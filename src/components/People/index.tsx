@@ -25,6 +25,7 @@ import { Toolbar } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
 import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
+import useTeamCrestMap from 'hooks/useTeamCrestMap'
 
 export const TeamMember = (props: any) => {
     const {
@@ -38,11 +39,11 @@ export const TeamMember = (props: any) => {
         location,
         biography,
         teams,
-        teamCrestMap,
         pineappleOnPizza,
         startDate,
         isTeamLead,
     } = props
+    const teamCrestMap = useTeamCrestMap()
     const name = [firstName, lastName].filter(Boolean).join(' ')
 
     // Calculate years of service
