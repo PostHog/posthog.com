@@ -10,7 +10,7 @@ tags:
   - DeskHog
 ---
 
-> Unfortunately, since writing this tutorial Cursor has made changes which prevent users from directly installing PlatformIO within Cursor. We're leaving this guide live for those who want to attempt the workaround of installing PlatformIO in VSCode and importing the plugin to Cursor - but our recommended route is to [use Claude Code instead](/tutorials/deskhog-claude-tutorial). It's just better. 
+> Unfortunately, since writing this the process for integrating Cursor and PlatformIO has changed and users can no longer directly install PlatformIO within Cursor. We're leaving this guide live for those who want to attempt the workaround of installing PlatformIO in VSCode and importing the plugin to Cursor - but our recommended route is to [use Claude Code instead](/tutorials/deskhog-claude-tutorial). It's just better. 
 
 [DeskHog](/deskhog) is an open-source developer toy, designed so that you can easily get started building your own apps and games from scratch. Just because it’s a developer toy doesn’t mean it’s just for experienced developers though — AI agents such as Cursor enable anyone to start building apps using just natural language. 
 
