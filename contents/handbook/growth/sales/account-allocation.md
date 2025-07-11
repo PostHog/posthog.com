@@ -61,7 +61,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
  - They have the correct owners and admins set up in their PostHog organization.
  - We have the correct finance contact details in Stripe.
 
-#### Product Analytics
+#### Product analytics
 
  - They have set up tracking, implementing posthog.identify() and posthog.group() correctly where appropriate.
  - They are aware of the difference between anonymous and identified events.
