@@ -38,12 +38,14 @@ const GithubSlugger = require('github-slugger')
 
 const CONFIG = {
     MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
-    CHUNK_SIZE: 1024 * 1024, // 1MB
     CACHE_SIZE_LIMIT: 1000,
     BATCH_SIZE: 50,
     EXCLUDED_EXTENSIONS: ['.css', '.js', '.json', '.xml', '.svg', '.png', '.jpg', '.jpeg', '.gif', '.woff', '.woff2'],
-    EXCLUDE_PATTERNS: ['/community/', '/teams/', '/careers/'],
-    EXCLUDE_FILE_EXTENSIONS: ['.xml', '.svg'],
+    EXCLUDE_PATTERNS: [
+        '/community/', // powered by Strapi
+        '/teams/', // powered by Strapi
+        '/careers/', // powered by Ashby
+    ],
     SITEMAP_PATH: path.join(process.cwd(), 'public', 'sitemap', 'sitemap-0.xml'),
     CONTENTS_DIR: 'contents',
 }
@@ -420,7 +422,7 @@ function processLink(link, file, pages, redirects) {
     }
 
     // Check if link has file extension that should be ignored
-    const hasExcludedExtension = CONFIG.EXCLUDE_FILE_EXTENSIONS.some((ext) => urlWithoutQuery.endsWith(ext))
+    const hasExcludedExtension = CONFIG.EXCLUDED_EXTENSIONS.some((ext) => urlWithoutQuery.endsWith(ext))
     if (hasExcludedExtension) {
         return { type: 'excluded' }
     }
@@ -544,7 +546,7 @@ function createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, r
             pagesInSitemap: pages.length,
         },
         excludePatterns: CONFIG.EXCLUDE_PATTERNS,
-        excludeFileExtensions: CONFIG.EXCLUDE_FILE_EXTENSIONS,
+        excludeFileExtensions: CONFIG.EXCLUDED_EXTENSIONS,
         brokenLinks: brokenLinks.map((broken) => ({
             type: broken.type,
             file: path.relative(process.cwd(), broken.file),
@@ -671,13 +673,6 @@ function checkLinks(outputPath) {
     brokenLinks.sort((a, b) => a.file.localeCompare(b.file))
     brokenAnchors.sort((a, b) => a.file.localeCompare(b.file))
 
-    // Display results
-    displaySummaryStats(stats, brokenLinks, brokenAnchors)
-
-    // Create and optionally save results
-    const results = createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages)
-    writeResultsToFile(results, outputPath)
-
     // Display broken links
     displayBrokenLinks(brokenLinks)
     displayBrokenAnchors(brokenAnchors)
@@ -685,6 +680,13 @@ function checkLinks(outputPath) {
     if (brokenLinks.length === 0 && brokenAnchors.length === 0) {
         console.log('\nNo broken links found! 🎉')
     }
+
+    // Display summary stats at the end
+    displaySummaryStats(stats, brokenLinks, brokenAnchors)
+
+    // Create and save results at the end
+    const results = createResultsObject(brokenLinks, brokenAnchors, stats, markdownFiles, redirects, pages)
+    writeResultsToFile(results, outputPath)
 
     return brokenLinks.length
 }
