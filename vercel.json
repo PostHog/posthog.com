@@ -1477,10 +1477,6 @@
             "destination": "/docs/product-analytics/funnels"
         },
         {
-            "source": "/manua,l/trends",
-            "destination": "/docs/product-analytics/trends"
-        },
-        {
             "source": "/manual/lifecycle",
             "destination": "/docs/product-analytics/lifecycle"
         },
