@@ -1339,7 +1339,7 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/refunds',
                     },
                     {
-                        name: 'Allocating Accounts',
+                        name: 'Allocating accounts',
                         url: '/handbook/growth/sales/account-allocation',
                     },
                     {
