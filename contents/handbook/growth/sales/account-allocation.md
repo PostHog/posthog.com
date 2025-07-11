@@ -79,7 +79,7 @@ Before handing over a customer, the existing owner needs to ensure that the cust
 #### Feature flags
 
 - They understand how to integrate feature flags into their workflow.
-- Feature Flags calls are implemented correctly so as not to artificially inflate the bill.
+- Feature flag calls are implemented correctly so as not to artificially inflate the bill.
 - They understand the current targeting mechanisms which are available.
 - We've conducted training on how to set up Feature Flags and Experiments.
 
