@@ -13,6 +13,7 @@ import {
     IconPlay,
     IconBookmark,
     IconBookmarkSolid,
+    IconDownload,
 } from '@posthog/icons'
 import { useWindow } from '../../context/Window'
 import SearchBar from 'components/Editor/SearchBar'
@@ -23,6 +24,8 @@ import { useApp } from '../../context/App'
 import { useToast } from '../../context/Toast'
 import Link from 'components/Link'
 import { useCartStore } from '../../templates/merch/store'
+import { exportToPdf as exportPresentationToPdf } from '../../lib/exportToPdf'
+import Loading from 'components/Loading'
 
 interface HeaderBarProps {
     isNavVisible?: boolean
@@ -50,6 +53,8 @@ interface HeaderBarProps {
     onCartOpen?: () => void
     onCartClose?: () => void
     isCartOpen?: boolean
+    exportToPdf?: boolean
+    slideId?: string
 }
 
 export default function HeaderBar({
@@ -74,12 +79,15 @@ export default function HeaderBar({
     onCartOpen,
     onCartClose,
     isCartOpen = false,
+    exportToPdf = false,
+    slideId,
 }: HeaderBarProps) {
     const { user, addBookmark, removeBookmark } = useUser()
     const { openSignIn } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
+    const [isExportingPdf, setIsExportingPdf] = useState(false)
     const count = useCartStore((state) => state.count)
     const isBookmarked = useMemo(
         () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === appWindow?.path),
@@ -115,11 +123,11 @@ export default function HeaderBar({
             return
         }
 
-        if (bookmark) {
+        if (bookmark && appWindow?.path) {
             if (add) {
-                await addBookmark({ ...bookmark, url: appWindow?.path })
+                await addBookmark({ ...bookmark, url: appWindow.path })
             } else {
-                await removeBookmark({ ...bookmark, url: appWindow?.path })
+                await removeBookmark({ ...bookmark, url: appWindow.path })
             }
         }
     }
@@ -258,6 +266,23 @@ export default function HeaderBar({
                             </div>
                         )}
                     </motion.div>
+                )}
+                {exportToPdf && (
+                    <OSButton
+                        onClick={async () => {
+                            setIsExportingPdf(true)
+                            try {
+                                await exportPresentationToPdf({ slideId })
+                            } finally {
+                                setIsExportingPdf(false)
+                            }
+                        }}
+                        variant="secondary"
+                        size="sm"
+                        disabled={isExportingPdf}
+                        icon={isExportingPdf ? <Loading /> : <IconDownload />}
+                        className="mr-1"
+                    />
                 )}
                 {showFullScreen && (
                     <OSButton

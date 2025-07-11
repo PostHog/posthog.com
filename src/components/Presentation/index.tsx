@@ -180,6 +180,8 @@ export default function Presentation({
                                     isNavVisible={isNavVisible}
                                     onToggleNav={toggleNav}
                                     showFullScreen
+                                    exportToPdf
+                                    slideId={slideId}
                                     onFullScreenClick={slides.length > 0 ? enterPresentationMode : undefined}
                                 />
                             </>
