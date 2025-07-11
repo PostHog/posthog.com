@@ -3,11 +3,11 @@ title: Account allocation and handover
 sidebar: Handbook
 showTitle: true
 ---
-We have different roles within the team who manage customers at various stages in their lifecycle.  Customers will typically sign up and start paying for PostHog themselves, or land as customers via a Technical Account Executive.  Once customers hit $20k a year in spend with us they should have a dedicated Technical Account Manager or Customer Success Manager.
+We have different roles within the team who manage customers at various stages in their lifecycle.  Customers will typically sign up and start paying for PostHog themselves, or land as customers via a [Technical Account Executive](/handbook/growth/sales/how-we-work#technical-account-executives).  Once customers hit $20k a year in spend with us they should have a dedicated Technical Account Manager or Customer Success Manager.
 
 ## TAM vs CSM
 
-Technical Account Managers (Sales Team) and Customer Success Managers (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles.  When deciding whether a customer should be with a TAM or CSM we factor in to account their usage of our primary products.
+[Technical Account Managers](/handbook/growth/sales/how-we-work#technical-account-managers) (Sales Team) and [Customer Success Managers](/handbook/cs-and-onboarding/customer-success) (Customer Success Team) are the primary owner of customers spending $20k a year and above; and we aim to have full coverage of those customers across the two teams and roles.  When deciding whether a customer should be with a TAM or CSM we factor in to account their usage of our primary products.
 
 **Primary products** are the set of billable main products which can be found on the [pricing](/pricing) page, not including add-ons or platform features.  Our current set of primary products are:
 
@@ -25,7 +25,7 @@ We track the count of these products in Vitally using the `Total paid product co
 
 ### Doing the allocation
 
-It's Simon's job, with input from Dana and Charles, to review the list of $20K accounts without an owner, as well as accounts which need to be handed over from TAE and TAMs.  We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in.  Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer.  Once this has been decided the New Owner trait is populated with one of the following:
+It's Simon's job, with input from Dana and Charles, to review the list of [$20K accounts without an owner](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/1c518181-54a5-4c59-98de-f0b0bb54f9c3), as well as accounts which need to be handed over from TAE and TAMs.  We use the criteria above to figure out which team should own a customer, and then use Vitally data to understand which region they are primarily based in.  Looking at the user list in Vitally will show you where the most users are so make a judgement call on where the TAM or CSM should be based to best support and engage with the customer.  Once this has been decided the New Owner trait is populated with one of the following:
 
 - US TAM
 - US CSM
