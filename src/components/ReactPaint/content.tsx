@@ -83,7 +83,7 @@ export default class Content extends React.Component<ContentProps, ContentState>
     if (activeItem === "Pencil" || activeItem === "Brush") {
       ctx.moveTo(x, y);
       if (activeItem === "Brush") ctx.lineWidth = 5;
-    } else if (activeItem === "Line" || activeItem === "Rectangle") {
+    } else if (activeItem === "Line" || activeItem === "Rectangle" || activeItem === "Circle") {
       ctxOverlay.strokeStyle = this.props.color;
       ctxOverlay.lineWidth = 1;
       ctxOverlay.lineJoin = ctxOverlay.lineCap = "round";
@@ -91,6 +91,34 @@ export default class Content extends React.Component<ContentProps, ContentState>
         startX: x,
         startY: y
       });
+    } else if (activeItem === "Fill") {
+      // Fill bucket tool - fill the entire canvas with the selected color
+      ctx.fillStyle = this.props.color;
+      ctx.fillRect(0, 0, 600, 480);
+      this.setState({ isDrawing: false });
+    } else if (activeItem === "Erase") {
+      // Eraser tool - use white color to "erase"
+      ctx.strokeStyle = "white";
+      ctx.lineWidth = 10;
+      ctx.moveTo(x, y);
+    } else if (activeItem === "Text") {
+      // Text tool - prompt for text input
+      const text = prompt("Enter text:");
+      if (text) {
+        ctx.font = "16px Arial";
+        ctx.fillStyle = this.props.color;
+        ctx.fillText(text, x, y);
+      }
+      this.setState({ isDrawing: false });
+    } else if (activeItem === "Picker") {
+      // Color picker tool - get color from canvas
+      const imageData = ctx.getImageData(x, y, 1, 1);
+      const data = imageData.data;
+      const rgb = `rgb(${data[0]}, ${data[1]}, ${data[2]})`;
+      // Note: We can't directly change the color from here since this component doesn't own the color state
+      // The parent component would need to handle color picker functionality
+      console.log("Picked color:", rgb);
+      this.setState({ isDrawing: false });
     }
   }
 
@@ -112,6 +140,10 @@ export default class Content extends React.Component<ContentProps, ContentState>
         ctx.lineTo(x, y);
         ctx.stroke();
       }
+      if (this.props.activeItem === "Erase") {
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
       if (this.props.activeItem === "Line") {
         ctxOverlay.clearRect(0, 0, 600, 480);
         ctxOverlay.beginPath();
@@ -130,6 +162,14 @@ export default class Content extends React.Component<ContentProps, ContentState>
           width,
           height
         );
+      }
+      if (this.props.activeItem === "Circle") {
+        ctxOverlay.clearRect(0, 0, 600, 480);
+        ctxOverlay.beginPath();
+        let radius = Math.sqrt(Math.pow(x - this.state.startX, 2) + Math.pow(y - this.state.startY, 2));
+        ctxOverlay.arc(this.state.startX, this.state.startY, radius, 0, 2 * Math.PI);
+        ctxOverlay.stroke();
+        ctxOverlay.closePath();
       }
     }
   }
@@ -156,6 +196,15 @@ export default class Content extends React.Component<ContentProps, ContentState>
       let height = y - this.state.startY;
       ctxOverlay.clearRect(0, 0, 600, 480);
       ctx.strokeRect(this.state.startX, this.state.startY, width, height);
+    }
+
+    if (this.props.activeItem === "Circle") {
+      ctxOverlay.clearRect(0, 0, 600, 480);
+      ctx.beginPath();
+      let radius = Math.sqrt(Math.pow(x - this.state.startX, 2) + Math.pow(y - this.state.startY, 2));
+      ctx.arc(this.state.startX, this.state.startY, radius, 0, 2 * Math.PI);
+      ctx.stroke();
+      ctx.closePath();
     }
 
     ctx.closePath();
