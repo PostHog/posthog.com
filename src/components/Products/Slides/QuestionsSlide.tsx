@@ -167,7 +167,7 @@ export default function QuestionsSlide({
                         key={index}
                         value={`tab-${index}`}
                     >
-                        <ScrollArea className="h-full -mb-4">
+                        <ScrollArea className="h-full">
                             <div className="px-4">
                                 <h2 className="text-3xl mb-4">{question.question}</h2>
                                 <div className="prose max-w-none [&_p]:!text-lg [&_li]:!text-lg">
