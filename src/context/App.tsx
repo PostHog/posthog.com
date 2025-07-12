@@ -558,13 +558,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         [windows]
     )
 
-    const bringToFront = useCallback((item: AppWindow, element?: WindowElement) => {
+    const bringToFront = useCallback((item: AppWindow, location?: Location) => {
         setWindows((windows) =>
             windows.map((el) => ({
                 ...el,
                 zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
                 minimized: item === el ? false : el.minimized,
-                element: item === el ? element || el.element : el.element,
+                location: item === el ? location || el.location : el.location,
             }))
         )
     }, [])
@@ -722,6 +722,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
+            location: element.props.location,
         }
 
         // Adjust width if window extends beyond right edge
@@ -751,7 +752,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
 
         if (existingWindow) {
-            bringToFront(existingWindow, element)
+            bringToFront(existingWindow, element.props.location)
         } else if (element.props.newWindow || location?.state?.newWindow) {
             setWindows([...windows, newWindow])
         } else {

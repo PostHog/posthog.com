@@ -14,7 +14,7 @@ export default function ActiveWindowsPanel() {
     }
 
     const handleWindowClick = (appWindow: any) => {
-        navigate(`${appWindow.element.props.location.pathname}${appWindow.element.props.location.hash || ''}`)
+        navigate(`${appWindow.location.pathname}${appWindow.location.hash || ''}`)
         closeActiveWindowsPanel()
     }
 
