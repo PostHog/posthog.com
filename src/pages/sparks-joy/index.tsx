@@ -24,14 +24,14 @@ export default function SparkJoy(): JSX.Element {
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
                 // changelogCategory="product-analytics"
-                accentImage={
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
-                        alt="Screenshot of hedgehog mode's party mode"
-                        className="w-full"
-                        placeholder="none"
-                    />
-                }
+                // accentImage={
+                //     <CloudinaryImage
+                //         src="https://res.cloudinary.com/dmukukwp6/image/upload/party_mode_34c15751e4.png"
+                //         alt="Screenshot of hedgehog mode's party mode"
+                //         className="w-full"
+                //         placeholder="none"
+                //     />
+                // }
                 leftSidebarContent={
                     <>
                         <Accordion
@@ -48,9 +48,7 @@ export default function SparkJoy(): JSX.Element {
                                     ),
                                     content: (
                                         <>
-                                            <p className="text-sm mb-0">
-                                                Because we're not all work and no play.
-                                            </p>
+                                            <p className="text-sm mb-0">Because we're not all work and no play.</p>
                                         </>
                                     ),
                                 },
