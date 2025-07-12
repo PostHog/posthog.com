@@ -23,7 +23,7 @@ export default function ActiveWindowsPanel() {
         <SidePanel
             isOpen={isActiveWindowsPanelOpen}
             onClose={closeActiveWindowsPanel}
-            title="Active Windows"
+            title="Active windows"
             width="w-80"
         >
             <ScrollArea className="p-2">

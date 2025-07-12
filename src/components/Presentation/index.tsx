@@ -6,6 +6,7 @@ import { ToggleOption } from 'components/RadixUI/ToggleGroup'
 import { IconInfo, IconGear } from '@posthog/icons'
 import PresentationMode from './FullScreen'
 import { motion } from 'framer-motion'
+import { navigate } from 'gatsby'
 
 interface AccordionItem {
     title: string
@@ -125,6 +126,51 @@ export default function Presentation({
         if (!currentSlide) return ''
         return presenterNotes[currentSlide.slug] || ''
     }
+
+    // Handle initial hash navigation on page load
+    useEffect(() => {
+        if (slides.length === 0) return
+
+        const hash = typeof window !== 'undefined' ? window.location.hash.slice(1) : ''
+        if (hash) {
+            const slideIndex = slides.findIndex((slide) => slide.slug === hash)
+            if (slideIndex !== -1) {
+                // Small delay to ensure DOM is ready
+                setTimeout(() => {
+                    const slideSelector = slideId
+                        ? `[data-slide-id="${slideId}"][data-slide="${slideIndex}"]`
+                        : `[data-slide="${slideIndex}"]`
+                    const slideElement = document.querySelector(slideSelector)
+
+                    if (slideElement) {
+                        slideElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                }, 100)
+            }
+        }
+    }, [slides, slideId])
+
+    // Update URL hash when active slide changes
+    useEffect(() => {
+        if (slides.length === 0) return
+
+        const currentSlide = slides[activeSlideIndex]
+        if (!currentSlide) return
+
+        // Don't add hash for overview slide (first slide)
+        if (activeSlideIndex === 0 || currentSlide.slug === 'overview') {
+            if (typeof window !== 'undefined' && window.location.hash) {
+                navigate(window.location.pathname, { replace: true })
+            }
+        } else {
+            if (typeof window !== 'undefined') {
+                const newHash = `#${currentSlide.slug}`
+                if (window.location.hash !== newHash) {
+                    navigate(`${window.location.pathname}${newHash}`, { replace: true })
+                }
+            }
+        }
+    }, [activeSlideIndex, slides])
 
     // Set up scroll-based detection to track active slide
     useEffect(() => {
