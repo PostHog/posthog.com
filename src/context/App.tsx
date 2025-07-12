@@ -558,12 +558,13 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         [windows]
     )
 
-    const bringToFront = useCallback((item: AppWindow) => {
+    const bringToFront = useCallback((item: AppWindow, element?: WindowElement) => {
         setWindows((windows) =>
             windows.map((el) => ({
                 ...el,
                 zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
                 minimized: item === el ? false : el.minimized,
+                element: item === el ? element || el.element : el.element,
             }))
         )
     }, [])
@@ -750,7 +751,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         }
 
         if (existingWindow) {
-            bringToFront(existingWindow)
+            bringToFront(existingWindow, element)
         } else if (element.props.newWindow || location?.state?.newWindow) {
             setWindows([...windows, newWindow])
         } else {
