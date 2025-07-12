@@ -75,9 +75,9 @@ const apps: AppItem[] = [
         url: '/questions',
     },
     {
-        label: 'Games',
+        label: 'Fun stuff',
         Icon: <AppIcon name="games" />,
-        url: '/games',
+        url: '/sparks-joy',
     },
     {
         label: 'Photo booth',

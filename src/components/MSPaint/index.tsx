@@ -33,7 +33,14 @@ const colorPalette = [
   '#80FFFF', '#8080FF', '#FF0080', '#FF8040'
 ]
 
-export default function MSPaint() {
+interface MSPaintProps {
+  initialImage?: string; // URL or base64 image data
+  imageType?: 'raster' | 'svg'; // Type of image
+  threshold?: number; // Threshold for black/white conversion (0-255, default 128)
+  canvasSize?: { width: number; height: number };
+}
+
+export default function MSPaint({ initialImage, imageType = 'raster', threshold = 128, canvasSize: initialCanvasSize }: MSPaintProps = {}) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const overlayCanvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -45,7 +52,7 @@ export default function MSPaint() {
   const [brushSize, setBrushSize] = useState(1)
   const [isDrawing, setIsDrawing] = useState(false)
   const [startPos, setStartPos] = useState({ x: 0, y: 0 })
-  const [canvasSize, setCanvasSize] = useState({ width: 640, height: 480 })
+  const [canvasSize, setCanvasSize] = useState(initialCanvasSize || { width: 640, height: 480 })
   const [zoomLevel, setZoomLevel] = useState(1)
   const [canvasHistory, setCanvasHistory] = useState<ImageData[]>([])
   const [historyIndex, setHistoryIndex] = useState(-1)
@@ -53,6 +60,7 @@ export default function MSPaint() {
   const [polygonPoints, setPolygonPoints] = useState<{ x: number, y: number }[]>([])
   const [curvePoints, setCurvePoints] = useState<{ x: number, y: number }[]>([])
   const [selection, setSelection] = useState<{ x: number, y: number, width: number, height: number } | null>(null)
+  const [originalImageData, setOriginalImageData] = useState<ImageData | null>(null)
 
   // Initialize canvas
   useEffect(() => {
@@ -68,13 +76,58 @@ export default function MSPaint() {
       ctx.fillStyle = '#FFFFFF'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
 
-      // Save initial state
-      const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-      setCanvasHistory([imageData])
-      setHistoryIndex(0)
-      setIsModified(false)
+      // Load initial image if provided
+      if (initialImage) {
+        const img = new Image()
+        img.onload = () => {
+          // Draw the image as black lines on white background
+          ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
+
+          // Convert to pure black and white if needed
+          const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+          const data = imageData.data
+
+          // Convert to black lines on white background
+          for (let i = 0; i < data.length; i += 4) {
+            // Get grayscale value
+            const gray = (data[i] + data[i + 1] + data[i + 2]) / 3
+
+            // Threshold to pure black or white
+            if (gray < threshold) {
+              // Make it black
+              data[i] = 0       // R
+              data[i + 1] = 0   // G
+              data[i + 2] = 0   // B
+            } else {
+              // Make it white
+              data[i] = 255     // R
+              data[i + 1] = 255 // G
+              data[i + 2] = 255 // B
+            }
+            data[i + 3] = 255   // Alpha
+          }
+
+          ctx.putImageData(imageData, 0, 0)
+
+          // Save initial state with image
+          const finalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+          setCanvasHistory([finalImageData])
+          setHistoryIndex(0)
+          setIsModified(false)
+          
+          // Save original image data for reset functionality
+          setOriginalImageData(finalImageData)
+        }
+        img.src = initialImage
+      } else {
+        // Save initial blank state
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
+        setCanvasHistory([imageData])
+        setHistoryIndex(0)
+        setIsModified(false)
+      }
     }
-  }, [])
+  }, [initialImage])
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -553,6 +606,25 @@ export default function MSPaint() {
     reader.readAsDataURL(file)
   }
 
+  // Reset to original image
+  const resetImage = () => {
+    if (!originalImageData) return
+    
+    if (isModified && !confirm('Do you want to reset to the original image? Any unsaved changes will be lost.')) {
+      return
+    }
+
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    ctx.putImageData(originalImageData, 0, 0)
+    saveToHistory()
+    setIsModified(false)
+  }
+
   // Clear canvas
   const clearCanvas = () => {
     if (isModified && !confirm('Do you want to clear the canvas? Any unsaved changes will be lost.')) {
@@ -737,6 +809,7 @@ export default function MSPaint() {
         { type: 'item' as const, label: 'Undo', shortcut: 'Shift+Z', onClick: undo, disabled: historyIndex <= 0 },
         { type: 'item' as const, label: 'Redo', shortcut: 'Shift+Y', onClick: redo, disabled: historyIndex >= canvasHistory.length - 1 },
         { type: 'separator' as const },
+        ...(originalImageData ? [{ type: 'item' as const, label: 'Reset image', onClick: resetImage }] : []),
         { type: 'item' as const, label: 'Clear image', onClick: clearCanvas },
       ]
     },

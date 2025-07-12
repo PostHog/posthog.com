@@ -4,21 +4,22 @@ import { Link } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
-import { IconDice, IconDictator } from 'components/OSIcons/Icons'
+import { IconDice, IconDictator, IconBrush } from 'components/OSIcons/Icons'
+import { IconPencil } from '@posthog/icons'
 import { Accordion } from 'components/RadixUI/Accordion'
 
-export default function Games(): JSX.Element {
+export default function SparkJoy(): JSX.Element {
     return (
         <>
             <SEO
-                title="Games - PostHog"
-                description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
+                title="Fun stuff - PostHog"
+                description="Because we're not all work and no play"
                 image={`/images/og/product-analytics.jpg`}
             />
             <Explorer
                 template="generic"
-                slug="games"
-                title="Games"
+                slug="spark-joy"
+                title="Fun stuff"
                 // options below only needed to override matching the slug
                 // teamName="product-analytics"
                 // roadmapCategory="product-analytics"
@@ -42,12 +43,14 @@ export default function Games(): JSX.Element {
                                     trigger: (
                                         <>
                                             <IconDice className={`text-green size-5 inline-block`} />
-                                            <span className="flex-1">Games</span>
+                                            <span className="flex-1">Fun stuff</span>
                                         </>
                                     ),
                                     content: (
                                         <>
-                                            <p className="text-sm mb-0">It's all fun and games around here.</p>
+                                            <p className="text-sm mb-0">
+                                                Because we're not all work and no play.
+                                            </p>
                                         </>
                                     ),
                                 },
@@ -73,6 +76,14 @@ export default function Games(): JSX.Element {
                         >
                             <IconDictator className={`!size-14 -mt-2`} />
                             <p className="text-sm font-medium">Dictator or tech bro?</p>
+                        </Link>
+                        <Link
+                            to="/paint"
+                            state={{ newWindow: true }}
+                            className="flex flex-col justify-center items-center space-y-1 w-28 text-center text-primary hover:text-primary"
+                        >
+                            <IconBrush className={`size-7 text-purple`} />
+                            <p className="text-sm font-medium">HogPaint</p>
                         </Link>
                     </div>
                 </div>
