@@ -3,6 +3,7 @@ import { useApp } from '../../context/App'
 import SidePanel from 'components/SidePanel'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
+import { navigate } from 'gatsby'
 
 export default function ActiveWindowsPanel() {
     const { windows, isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen, focusedWindow, bringToFront, closeWindow } =
@@ -12,8 +13,8 @@ export default function ActiveWindowsPanel() {
         setIsActiveWindowsPanelOpen(false)
     }
 
-    const handleWindowClick = (window: any) => {
-        bringToFront(window)
+    const handleWindowClick = (appWindow: any) => {
+        navigate(`${appWindow.element.props.location.pathname}${appWindow.element.props.location.hash || ''}`)
         closeActiveWindowsPanel()
     }
 
