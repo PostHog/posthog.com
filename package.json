@@ -102,6 +102,7 @@
         "lodash.groupby": "^4.6.0",
         "lodash.uniqby": "^4.7.0",
         "lottie-react": "^2.4.1",
+        "lucide-react": "^0.525.0",
         "mark.js": "^8.11.1",
         "markdown-link-extractor": "^4.0.1",
         "markdown-to-jsx": "^7.4.0",

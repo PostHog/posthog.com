@@ -6,7 +6,7 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
 import { IconDice, IconDictator } from 'components/OSIcons/Icons'
 import { Accordion } from 'components/RadixUI/Accordion'
-import ReactPaint from 'components/ReactPaint'
+import MSPaint from 'components/MSPaint'
 
 export default function Paint(): JSX.Element {
   return (
@@ -27,8 +27,8 @@ export default function Paint(): JSX.Element {
 
         fullScreen
       >
-        <div className="@container reactpaint flex flex-col h-full">
-          <ReactPaint />
+        <div className="@container flex flex-col h-full">
+          <MSPaint />
         </div>
       </Explorer>
     </>
