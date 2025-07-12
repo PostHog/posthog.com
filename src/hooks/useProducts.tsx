@@ -1336,7 +1336,7 @@ window.posthog.onFeatureFlags(function () {
             },
             {
                 question: "What is a user's Page Loaded time",
-                url: '/tutorials/performance - metrics#3 - page - loaded',
+                url: '/tutorials/performance-metrics#3-page-loaded',
             },
             {
                 question: 'How do I optimize site performance?',

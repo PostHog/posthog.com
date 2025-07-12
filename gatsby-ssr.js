@@ -12,9 +12,25 @@ import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
 import { Provider as ToastProvider } from './src/context/Toast'
+import BlueScreenOfDeath from './src/components/NotFoundPage/BlueScreenOfDeath'
 
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
+
+    // Check if this is a 404 page by checking if the NotFound component is being rendered
+    // This catches both direct /404 visits and any non-existent pages
+    const is404Page = element?.type?.name === 'NotFound' || props.location.pathname === '/404'
+
+    if (is404Page) {
+        return (
+            <ToastProvider>
+                <UserProvider>
+                    <BlueScreenOfDeath />
+                </UserProvider>
+            </ToastProvider>
+        )
+    }
+
     initKea(true, props.location)
     return (
         <ToastProvider>

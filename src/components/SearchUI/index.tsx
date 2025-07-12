@@ -45,12 +45,14 @@ const Search = ({
     onChange,
     isRefinedClassName = 'bg-primary',
     hideFilters = false,
+    autoFocus = true,
 }: {
     initialFilter?: string
     className?: string
     onChange?: () => void
     isRefinedClassName?: string
     hideFilters?: boolean
+    autoFocus?: boolean
 }) => {
     const [query, setQuery] = useState('')
     const { dragControls } = useWindow()
@@ -84,7 +86,7 @@ const Search = ({
                             className="w-full !border-none !text-lg !px-4 !py-2 "
                             onChange={(e) => setQuery(e.target.value)}
                             placeholder="Search..."
-                            autoFocus
+                            autoFocus={autoFocus}
                             value={query}
                         />
                         {!hideFilters && (
@@ -188,11 +190,13 @@ export const SearchUI = ({
     className = '',
     isRefinedClassName = 'bg-primary',
     hideFilters = false,
+    autoFocus = true,
 }: {
     initialFilter?: string
     className?: string
     isRefinedClassName?: string
     hideFilters?: boolean
+    autoFocus?: boolean
 }) => {
     return (
         <InstantSearch
@@ -205,6 +209,7 @@ export const SearchUI = ({
                 className={className}
                 isRefinedClassName={isRefinedClassName}
                 hideFilters={hideFilters}
+                autoFocus={autoFocus}
             />
         </InstantSearch>
     )

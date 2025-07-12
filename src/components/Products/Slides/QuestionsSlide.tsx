@@ -167,25 +167,27 @@ export default function QuestionsSlide({
                         key={index}
                         value={`tab-${index}`}
                     >
-                        <div className="px-4">
-                            <h2 className="text-3xl mb-4">{question.question}</h2>
-                            <div className="prose max-w-none [&_p]:!text-lg [&_li]:!text-lg">
-                                <Markdown>{getContentForUrl(question.url)}</Markdown>
-                            </div>
-                            {question.url && (
-                                <div className="mt-6">
-                                    <OSButton
-                                        to={question.url}
-                                        variant="secondary"
-                                        size="lg"
-                                        asLink
-                                        state={{ newWindow: true }}
-                                    >
-                                        Read full tutorial →
-                                    </OSButton>
+                        <ScrollArea className="h-full -mb-4">
+                            <div className="px-4">
+                                <h2 className="text-3xl mb-4">{question.question}</h2>
+                                <div className="prose max-w-none [&_p]:!text-lg [&_li]:!text-lg">
+                                    <Markdown>{getContentForUrl(question.url)}</Markdown>
                                 </div>
-                            )}
-                        </div>
+                                {question.url && (
+                                    <div className="mt-6">
+                                        <OSButton
+                                            to={question.url}
+                                            variant="secondary"
+                                            size="lg"
+                                            asLink
+                                            state={{ newWindow: true }}
+                                        >
+                                            Read full tutorial →
+                                        </OSButton>
+                                    </div>
+                                )}
+                            </div>
+                        </ScrollArea>
                     </Tabs.Content>
                 ))}
             </Tabs.Root>
