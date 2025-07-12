@@ -1,5 +1,6 @@
 import React from 'react'
 import ZoomHover from 'components/ZoomHover'
+import Link from 'components/Link'
 
 interface PairProduct {
     name: string
@@ -33,7 +34,11 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
 
                     return (
                         <ZoomHover key={productDetails.name}>
-                            <div className="flex flex-col items-center border border-primary rounded p-4 bg-primary">
+                            <Link
+                                to={`/${pair.slug}`}
+                                state={{ newWindow: true }}
+                                className="flex flex-col items-center border border-primary rounded p-4 bg-primary hover:bg-accent transition-colors"
+                            >
                                 <span
                                     className={`inline-block size-8 my-4 ${
                                         productDetails.color
@@ -45,7 +50,7 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
                                 </span>
                                 <h3 className="text-2xl font-bold text-primary mb-2">{productDetails.name}</h3>
                                 <p className="text-lg text-secondary">{pair.description}</p>
-                            </div>
+                            </Link>
                         </ZoomHover>
                     )
                 })}
