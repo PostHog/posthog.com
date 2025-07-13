@@ -4,6 +4,7 @@ import React from 'react'
 interface ComparisonFeature {
     feature: string
     companies: Record<string, boolean | string>
+    type?: 'header' | 'feature'
 }
 
 interface FeatureComparisonSlideProps {
@@ -42,28 +43,45 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
                             </tr>
                         </thead>
                         <tbody>
-                            {features.map((feature: ComparisonFeature, index: number) => (
-                                <tr key={index} className={index % 2 === 0 ? 'bg-primary' : 'bg-accent'}>
-                                    <td className="border border-primary px-2 py-1.5 font-medium">{feature.feature}</td>
-                                    {Object.entries(feature.companies).map(([company, supported]) => (
-                                        <td key={company} className="border border-primary px-2 py-1.5 text-center">
-                                            {typeof supported === 'boolean' ? (
-                                                supported ? (
-                                                    <span className="text-green font-bold">✓</span>
-                                                ) : (
-                                                    <span className="text-red font-bold">✗</span>
-                                                )
-                                            ) : (
-                                                <span
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: supported as string,
-                                                    }}
-                                                />
-                                            )}
+                            {features.map((feature: ComparisonFeature, index: number) => {
+                                if (feature.type === 'header') {
+                                    return (
+                                        <tr key={index} className="bg-primary">
+                                            <td
+                                                className="border border-primary px-2 py-1.5 font-bold"
+                                                colSpan={companies.length + 1}
+                                            >
+                                                {feature.feature}
+                                            </td>
+                                        </tr>
+                                    )
+                                }
+
+                                return (
+                                    <tr key={index} className={index % 2 === 0 ? 'bg-primary' : 'bg-accent'}>
+                                        <td className="border border-primary px-2 py-1.5 font-medium">
+                                            {feature.feature}
                                         </td>
-                                    ))}
-                                </tr>
-                            ))}
+                                        {Object.entries(feature.companies).map(([company, supported]) => (
+                                            <td key={company} className="border border-primary px-2 py-1.5 text-center">
+                                                {typeof supported === 'boolean' ? (
+                                                    supported ? (
+                                                        <span className="text-green font-bold">✓</span>
+                                                    ) : (
+                                                        <span className="text-red font-bold">✗</span>
+                                                    )
+                                                ) : (
+                                                    <span
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: supported as string,
+                                                        }}
+                                                    />
+                                                )}
+                                            </td>
+                                        ))}
+                                    </tr>
+                                )
+                            })}
                         </tbody>
                     </table>
                 </ScrollArea>

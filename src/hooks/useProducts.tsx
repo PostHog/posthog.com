@@ -466,7 +466,8 @@ const initialProducts = [
             },
             features: [
                 {
-                    feature: '<strong>Funnels</strong>',
+                    feature: 'Funnels',
+                    type: 'header',
                     companies: {
                         Amplitude: '',
                         Mixpanel: '',
@@ -626,7 +627,8 @@ const initialProducts = [
                     },
                 },
                 {
-                    feature: '<strong>Path analysis</strong>',
+                    feature: 'Path analysis',
+                    type: 'header',
                     companies: {
                         Amplitude: '',
                         Mixpanel: '',
@@ -796,7 +798,8 @@ const initialProducts = [
                     },
                 },
                 {
-                    feature: '<strong>Dashboards</strong>',
+                    feature: 'Dashboards',
+                    type: 'header',
                     companies: {
                         Amplitude: '',
                         Mixpanel: '',
