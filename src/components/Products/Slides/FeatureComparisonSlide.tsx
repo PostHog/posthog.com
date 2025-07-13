@@ -29,7 +29,7 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
             <div className="max-w-6xl mx-auto flex-1 w-full min-h-0">
                 <ScrollArea className="">
                     <table className="w-full border-collapse border border-primary">
-                        <thead>
+                        <thead className="sticky top-0">
                             <tr className="bg-accent">
                                 <th className="border border-primary px-2 py-1.5 text-left font-semibold">Feature</th>
                                 {companies.map((company: string) => (

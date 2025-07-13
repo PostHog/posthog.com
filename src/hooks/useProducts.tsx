@@ -466,6 +466,37 @@ const initialProducts = [
             },
             features: [
                 {
+                    feature: 'Insights',
+                    type: 'header',
+                    companies: {
+                        Amplitude: '',
+                        Mixpanel: '',
+                        Heap: '',
+                        Pendo: '',
+                        PostHog: '',
+                    },
+                },
+                {
+                    feature: 'Ready-made insight types',
+                    companies: {
+                        Amplitude: true,
+                        Mixpanel: true,
+                        Heap: true,
+                        Pendo: true,
+                        PostHog: true,
+                    },
+                },
+                {
+                    feature: 'SQL mode',
+                    companies: {
+                        Amplitude: 'Exports only',
+                        Mixpanel: 'JQL only',
+                        Heap: 'Exports only',
+                        Pendo: 'Exports only',
+                        PostHog: true,
+                    },
+                },
+                {
                     feature: 'Funnels',
                     type: 'header',
                     companies: {
@@ -879,16 +910,6 @@ const initialProducts = [
                     },
                 },
                 {
-                    feature: '',
-                    companies: {
-                        Amplitude: true,
-                        Mixpanel: true,
-                        Heap: true,
-                        Pendo: true,
-                        PostHog: true,
-                    },
-                },
-                {
                     feature: 'Dashboard & insight tags',
                     companies: {
                         Amplitude: false,
@@ -898,16 +919,7 @@ const initialProducts = [
                         PostHog: true,
                     },
                 },
-                {
-                    feature: 'Webhooks',
-                    companies: {
-                        Amplitude: true,
-                        Mixpanel: true,
-                        Heap: false,
-                        Pendo: true,
-                        PostHog: true,
-                    },
-                },
+
                 {
                     feature: 'Annotations',
                     companies: {
@@ -928,18 +940,24 @@ const initialProducts = [
                         PostHog: false,
                     },
                 },
-                {
-                    feature: 'Apps / integrations',
-                    companies: {
-                        Amplitude: '70+',
-                        Mixpanel: '50+',
-                        Heap: '40+',
-                        Pendo: '40+',
-                        PostHog: '50+',
-                    },
-                },
             ],
         },
+        pairsWith: [
+            {
+                slug: 'session-replay',
+                description:
+                    'Jump into a playlist of session recordings directly from any point in a graph, or segment of a funnel',
+            },
+            {
+                slug: 'feature-flags',
+                description: "See which feature flags are enabled for a user's session",
+            },
+            {
+                slug: 'experiments',
+                description:
+                    'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
+            },
+        ],
     },
     {
         Icon: IconRewindPlay,
@@ -3053,7 +3071,22 @@ window.posthog.onFeatureFlags(function () {
         colorSecondary: '[#36C46F]',
         category: 'analytics',
         billedWith: 'Product analytics',
-        worksWith: ['product_analytics', 'session_replay', 'surveys'],
+        pairsWith: [
+            {
+                slug: 'product-analytics',
+                description: 'Go deeper than a dashboard by building your own insights and SQL queries from scratch.',
+            },
+            {
+                slug: 'session-replay',
+                description:
+                    "Get more context by watching what users actually do on your site. Spot the nuances that quantifiable data doesn't tell you.",
+            },
+            {
+                slug: 'surveys',
+                description:
+                    'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
+            },
+        ],
         seo: {
             title: 'Web analytics - PostHog',
             description:

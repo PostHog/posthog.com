@@ -37,7 +37,7 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
                             <Link
                                 to={`/${pair.slug}`}
                                 state={{ newWindow: true }}
-                                className="flex flex-col items-center border border-primary rounded p-4 bg-primary hover:bg-accent transition-colors"
+                                className="flex flex-col items-center border border-primary rounded p-4 bg-primary hover:bg-accent transition-colors h-full"
                             >
                                 <span
                                     className={`inline-block size-8 my-4 ${
