@@ -67,7 +67,7 @@ const initialProducts = [
             min: 0,
             max: MAX_PRODUCT_ANALYTICS,
         },
-        sharesFreeTier: 'web_analytics',
+        volume: 1000000,
         worksWith: ['session_replay', 'feature_flags', 'surveys'],
         customers: {
             ycombinator: {
@@ -164,9 +164,9 @@ const initialProducts = [
             },
             {
                 title: 'Lifecycle',
-                headline: 'Track user engagement patterns over time',
+                headline: 'Track user engagement over time',
                 description:
-                    'Discover how your active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.',
+                    'Analyze active users break down, highlighting those who have recently stopped being active or those who have just become active for the first time.',
                 icon: <IconLifecycle />,
                 color: 'purple',
                 images: [
@@ -194,7 +194,7 @@ const initialProducts = [
                     {
                         title: 'Integration',
                         description:
-                            'Works with cohorts, feature flags, and other PostHog features for comprehensive analysis',
+                            'Works with cohorts, feature flags, and other Product OS features and tools for comprehensive analysis',
                     },
                 ],
             },
@@ -382,7 +382,7 @@ const initialProducts = [
                 url: '/tutorials/track-new-returning-users',
             },
             {
-                question: "What's my churn rate? / How can I lower my churn rate ? ",
+                question: "What's my churn rate? / How can I reduce churn?",
                 url: '/tutorials/churn-rate',
             },
             {
@@ -420,10 +420,6 @@ const initialProducts = [
             {
                 question: 'How to I track performance marketing?',
                 url: '/tutorials/performance-marketing',
-            },
-            {
-                question: 'How do I measure growth loops?',
-                url: '/blog/growth-loops#measuring-your-growth-loop',
             },
             {
                 question: 'How many users return to use my product each day?',
