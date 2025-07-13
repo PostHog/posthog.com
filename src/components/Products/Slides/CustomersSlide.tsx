@@ -6,10 +6,12 @@ import Logo from 'components/Logo'
 interface Customer {
     slug: string
     name: string
-    logo?: {
-        light: string
-        dark: string
-    }
+    logo?:
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
 }
 
 interface CustomerData {
@@ -40,26 +42,44 @@ export default function CustomersSlide({ productName, customers, customerData, h
         .map((customer, index) => {
             const data = customerData?.[customer.slug]
 
+            // Determine logo rendering logic
+            const renderLogo = () => {
+                if (!customer.logo) {
+                    return <span>{customer.name}</span>
+                }
+
+                // Check if logo is a React component (single SVG format)
+                if (typeof customer.logo === 'function') {
+                    const LogoComponent = customer.logo
+                    return (
+                        <div className="fill-current">
+                            <LogoComponent className="w-auto object-contain max-h-10" />
+                        </div>
+                    )
+                }
+
+                // Otherwise, it's the existing light/dark object format
+                return (
+                    <>
+                        <img
+                            src={customer.logo.light}
+                            alt={customer.name}
+                            className="w-auto object-contain dark:hidden max-h-10"
+                        />
+                        <img
+                            src={customer.logo.dark}
+                            alt={customer.name}
+                            className="w-auto object-contain hidden dark:block max-h-10"
+                        />
+                    </>
+                )
+            }
+
             return {
                 cells: [
                     { content: index + 1 },
                     {
-                        content: customer.logo ? (
-                            <>
-                                <img
-                                    src={customer.logo.light}
-                                    alt={customer.name}
-                                    className="w-auto object-contain dark:hidden max-h-10"
-                                />
-                                <img
-                                    src={customer.logo.dark}
-                                    alt={customer.name}
-                                    className="w-auto object-contain hidden dark:block max-h-10"
-                                />
-                            </>
-                        ) : (
-                            <span>{customer.name}</span>
-                        ),
+                        content: renderLogo(),
                         className: '!p-4',
                     },
                     {

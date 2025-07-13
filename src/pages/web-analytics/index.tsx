@@ -66,6 +66,13 @@ export default function WebAnalytics(): JSX.Element {
             }
         }
     `)
+    const slides = createSlideConfig({
+        exclude: ['answers'],
+        // order: ['overview', 'pricing', 'features'],
+        templates: {
+            overview: 'stacked', // Use the horizontal split layout
+        },
+    })
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 }

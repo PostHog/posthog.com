@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ProductImage from './Image'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface Feature {
     title: string
@@ -8,6 +9,7 @@ interface Feature {
 }
 
 interface FeatureItem {
+    layout?: string
     title: string
     headline: string
     description?: string
@@ -15,6 +17,7 @@ interface FeatureItem {
     color?: string
     features?: Feature[]
     images?: Array<{ src: string; alt: string; stylize: boolean; shadow: boolean }>
+    imagesClasses?: string
     children?: React.ReactNode
 }
 
@@ -61,31 +64,65 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                         value={`tab-${index}`}
                     >
                         <div className="relative">
-                            <div className="px-8 pt-12 pb-8">
-                                <h2 className="text-5xl text-center mb-0">{item.headline}</h2>
+                            <div className={`${item.layout === 'columns' ? '' : 'px-8'} pt-12 pb-8`}>
+                                <h2
+                                    className={`text-5xl mb-0 ${
+                                        item.layout === 'columns' ? 'text-left' : 'text-center'
+                                    }`}
+                                >
+                                    {item.headline}
+                                </h2>
                                 {item.description && (
                                     <p
-                                        className="mt-4 text-center text-xl [&_code]:text-xl"
+                                        className={`mt-4 text-xl [&_code]:text-xl ${
+                                            item.layout === 'columns' ? 'text-left' : 'text-center'
+                                        }`}
                                         dangerouslySetInnerHTML={{ __html: item.description }}
                                     />
                                 )}
                             </div>
 
-                            <div className="grid grid-cols-2 gap-4 px-8">
-                                {item.features &&
-                                    item.features.map((feature: Feature, featureIndex: number) => (
-                                        <div key={featureIndex}>
-                                            <h3 className="text-2xl mb-1">{feature.title}</h3>
-                                            <p className="text-lg">{feature.description}</p>
-                                        </div>
-                                    ))}
-                            </div>
-                            {item.images && item.images.length > 0 && (
-                                <div className="max-w-3xl mx-auto">
-                                    <ProductImage images={item.images} />
+                            {item.layout === 'columns' ? (
+                                <div className="flex gap-4">
+                                    <div>
+                                        <ScrollArea className="h-full">
+                                            {item.features &&
+                                                item.features.map((feature: Feature, featureIndex: number) => (
+                                                    <div key={featureIndex}>
+                                                        <h3 className="text-2xl mb-1">{feature.title}</h3>
+                                                        <p className="text-lg">{feature.description}</p>
+                                                    </div>
+                                                ))}
+                                        </ScrollArea>
+                                    </div>
+                                    <aside className={item.imagesClasses || ''}>
+                                        {item.images && item.images.length > 0 && (
+                                            <div className="max-w-3xl mx-auto">
+                                                <ProductImage images={item.images} />
+                                            </div>
+                                        )}
+                                        {(item as any).children && <div className="p-4">{(item as any).children}</div>}
+                                    </aside>
                                 </div>
+                            ) : (
+                                <>
+                                    <div className="grid grid-cols-2 gap-4 px-8">
+                                        {item.features &&
+                                            item.features.map((feature: Feature, featureIndex: number) => (
+                                                <div key={featureIndex}>
+                                                    <h3 className="text-2xl mb-1">{feature.title}</h3>
+                                                    <p className="text-lg">{feature.description}</p>
+                                                </div>
+                                            ))}
+                                    </div>
+                                    {item.images && item.images.length > 0 && (
+                                        <div className="max-w-3xl mx-auto">
+                                            <ProductImage images={item.images} />
+                                        </div>
+                                    )}
+                                    {(item as any).children && <div className="p-4">{(item as any).children}</div>}
+                                </>
                             )}
-                            {(item as any).children && <div className="p-4">{(item as any).children}</div>}
                         </div>
                     </Tabs.Content>
                 ))}

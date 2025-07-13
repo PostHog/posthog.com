@@ -75,6 +75,7 @@ bg-gold-dark
 bg-gradient-to-tr
 bg-green
 bg-green/10
+bg-green-2
 bg-light-blue
 bg-light-purple
 bg-lilac
@@ -413,7 +414,7 @@ stroke-white
 stroke-white-dark
 stroke-yellow-2
 stroke-yellow-2-dark
-
+text-[#063619]
 text-[#36C46F]
 text-[#43B6E7]
 text-[#681291]

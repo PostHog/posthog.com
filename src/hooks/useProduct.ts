@@ -32,19 +32,9 @@ const dedupe = (products) => {
 export default function useProduct({ handle }: { handle?: string } = {}) {
     const { products } = useProducts()
     const extendedProducts = [
-        {
-            ...products.find((product) => product.handle === 'web_analytics'),
-            name: 'Web analytics',
-            Icon: IconPieChart,
-            description: 'Monitor your website traffic. Built for people who really liked GA3...',
-            handle: 'web_analytics',
-            slug: 'web-analytics',
-            color: 'green-2',
-            colorSecondary: 'red',
-            category: 'analytics',
-            sharesFreeTier: 'product_analytics',
-            worksWith: ['product_analytics', 'session_replay', 'surveys'],
-        },
+        // add alpha/beta products here, or "products" that aren't actually products (like dashboards, notebooks, etc).
+        // once a product is ready to be released, it should be added to useProducts.tsx.
+        // it needs either billing info or billed_with to appear in the products section. if neither of those are true, use this file.
 
         // if we want to override props on something that exists in useProducts.tsx (since it will ultimately move to the billing API...)
         // {

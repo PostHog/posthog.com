@@ -7,6 +7,7 @@ import MistralLogo from '../images/customers/mistralai-light.svg'
 import RaycastLogo from '../images/customers/raycast-light.svg'
 import AirbusLogo from '../images/customers/airbus-light.svg'
 import ContraLogo from '../images/customers/contra-light.svg'
+import CreatifyLogo from '../images/customers/creatify-light.png'
 import DhlLogo from '../images/customers/dhl-light.svg'
 import ElevenlabsLogo from '../images/customers/elevenlabs-light.svg'
 import HasuraLogo from '../images/customers/hasura-light.svg'
@@ -26,6 +27,7 @@ import MistralLogoDark from '../images/customers/mistralai-dark.svg'
 import RaycastLogoDark from '../images/customers/raycast-dark.svg'
 import AirbusLogoDark from '../images/customers/airbus-dark.svg'
 import ContraLogoDark from '../images/customers/contra-dark.svg'
+import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import DhlLogoDark from '../images/customers/dhl-dark.svg'
 import ElevenlabsLogoDark from '../images/customers/elevenlabs-dark.svg'
 import HasuraLogoDark from '../images/customers/hasura-dark.svg'
@@ -39,27 +41,51 @@ import PryLogoDark from '../images/customers/pry-dark.svg'
 import CarVerticalLogoDark from '../images/customers/carvertical-dark.svg'
 import PhantomLogoDark from '../images/customers/phantom-dark.svg'
 
+import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+
 export interface Customer {
     slug: string
     name: string
     toolsUsed: string[]
     notes?: string
-    logo?: {
-        light: string
-        dark: string
-    }
+    logo?:
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     height?: number
+    quotes?: Array<{
+        name: string
+        role: string
+        image: {
+            thumb: string
+            url?: string
+        }
+        products: Record<string, string>
+    }>
 }
 
 interface BaseCustomer {
     name: string
     toolsUsed: string[]
     notes?: string
-    logo?: {
-        light: string
-        dark: string
-    }
+    logo?:
+        | React.ComponentType<any>
+        | {
+              light: string
+              dark: string
+          }
     height?: number
+    quotes?: Array<{
+        name: string
+        role: string
+        image: {
+            thumb: string
+            url?: string
+        }
+        products: Record<string, string>
+    }>
 }
 
 // Define all customer data
@@ -101,6 +127,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             dark: ContraLogoDark,
         },
     },
+    creatify: {
+        name: 'Creatify',
+        toolsUsed: ['web_analytics'],
+        notes: '',
+        logo: {
+            light: CreatifyLogo,
+            dark: CreatifyLogoDark,
+        },
+    },
     dhl: {
         name: 'DHL',
         toolsUsed: [],
@@ -122,7 +157,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     hasura: {
         name: 'Hasura',
-        toolsUsed: [],
+        toolsUsed: ['session_replay'],
         notes: '',
         logo: {
             light: HasuraLogo,
@@ -201,6 +236,25 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: SpeakeasyLogo,
             dark: SpeakeasyLogo,
         },
+    },
+    significa: {
+        name: 'Significa',
+        toolsUsed: ['web_analytics', 'product_analytics'],
+        notes: '',
+        logo: SignificaLogo,
+        quotes: [
+            {
+                name: 'Tomás Gouveia',
+                role: 'Digital Marketer',
+                image: {
+                    thumb: 'https://posthog.com/images/customers/significa-tomas.jpg',
+                },
+                products: {
+                    web_analytics:
+                        "PostHog gives me all the same information Plausible used to give us, and a lot more. It's way more powerful and insightful than Plausible.",
+                },
+            },
+        ],
     },
     supabase: {
         name: 'Supabase',

@@ -16,6 +16,7 @@ import {
     IconRetention,
     IconStickiness,
     IconHogQL,
+    IconPieChart,
 } from '@posthog/icons'
 import { IconJavaScript, IconApple, IconAndroid, IconFlutter, IconReactNative } from 'components/OSIcons/Icons'
 import { calculatePrice } from 'components/Pricing/PricingSlider/pricingSliderLogic'
@@ -3044,26 +3045,27 @@ window.posthog.onFeatureFlags(function () {
         ],
     },
     {
-        Icon: IconGraph, // Using IconGraph for web analytics
+        Icon: IconPieChart,
         name: 'Web analytics',
         handle: 'web_analytics',
-        type: 'web_analytics',
+        type: 'product_analytics',
         slug: 'web-analytics',
-        color: '[#36C46F]',
-        colorSecondary: 'green',
+        color: 'green-2',
+        colorSecondary: '[#36C46F]',
         category: 'analytics',
+        billedWith: 'Product analytics',
+        worksWith: ['product_analytics', 'session_replay', 'surveys'],
         seo: {
             title: 'Web analytics - PostHog',
             description:
-                'Privacy-focused web analytics with pre-built dashboards, real-time data, and no sampling. The Google Analytics alternative that actually makes sense.',
+                'Privacy-focused web analytics with pre-built dashboards, real-time data, and no sampling. Built for people who really liked GA3...',
         },
         answersDescription: 'Monitor your website traffic',
-        sharesFreeTier: 'product_analytics',
         overview: {
-            title: 'Web analytics that just works',
+            title: 'Privacy-focused web analytics',
             description:
-                "Track visitors, pageviews, and conversions with a pre-built dashboard. No complex setup, real-time data, and privacy-focused. The GA4 alternative you've been looking for.",
-            textColor: 'text-white', // tw
+                'Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
+            textColor: 'text-[#063619]', // tw
         },
         screenshots: [
             {
@@ -3091,13 +3093,15 @@ window.posthog.onFeatureFlags(function () {
         features: [
             {
                 title: 'Core metrics',
-                headline: 'All the essential web analytics metrics',
+                headline: 'Track visitors. Cookies not required.',
                 description:
-                    'Track visitors, pageviews, sessions, bounce rate, and more with a pre-built dashboard that just works.',
+                    "If you're privacy-focused, our cookieless option means you don't need to add a cookie banner just for your web analytics.",
                 images: [
                     {
                         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png',
                         alt: 'Web analytics dashboard',
+                        stylized: true,
+                        shadow: true,
                     },
                 ],
                 features: [
@@ -3117,23 +3121,23 @@ window.posthog.onFeatureFlags(function () {
                         title: 'Entry & exit paths',
                         description: 'Understand where users start and end their journeys',
                     },
-                    {
-                        title: 'Real-time visitors',
-                        description: 'See who is on your site right now with 30-second refresh',
-                    },
                 ],
             },
             {
                 title: 'Traffic sources',
-                headline: 'Know exactly where your visitors come from',
+                headline: 'Check your sources',
                 description:
                     'Track channels, referrers, UTMs, and create custom attribution channels for comprehensive source analysis.',
                 images: [
                     {
                         src: '/images/products/web-analytics/top-referrers.jpg',
                         alt: 'Traffic sources',
+                        stylized: true,
+                        shadow: true,
                     },
                 ],
+                imagesClasses: '-mr-8',
+                layout: 'columns',
                 features: [
                     {
                         title: 'Channel attribution',
@@ -3161,12 +3165,6 @@ window.posthog.onFeatureFlags(function () {
                 title: 'Advanced analytics',
                 headline: 'Go beyond basic metrics with powerful insights',
                 description: 'Track scroll depth, web vitals, conversions, and revenue directly in your web analytics.',
-                images: [
-                    {
-                        src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1716289464/posthog.com/contents/stickiness-light.png',
-                        alt: 'Advanced analytics',
-                    },
-                ],
                 features: [
                     {
                         title: 'Scroll depth tracking',
@@ -3220,14 +3218,18 @@ window.posthog.onFeatureFlags(function () {
             },
             {
                 title: 'Device & demographics',
-                headline: 'Understand your audience better',
+                headline: 'Know your audience',
                 description: 'Break down traffic by device, browser, OS, and location to optimize for your users.',
                 images: [
                     {
                         src: '/images/products/web-analytics/world-map.jpg',
                         alt: 'Demographics',
+                        stylized: true,
+                        shadow: true,
                     },
                 ],
+                imagesClasses: '-mr-8',
+                layout: 'columns',
                 features: [
                     {
                         title: 'Device types',
@@ -3252,7 +3254,7 @@ window.posthog.onFeatureFlags(function () {
                 ],
             },
             {
-                title: 'Integration benefits',
+                title: 'Works with product analytics',
                 headline: 'More than just web analytics',
                 description: 'Seamlessly switch between web and product analytics, all in one platform.',
                 features: [
@@ -3542,17 +3544,17 @@ window.posthog.onFeatureFlags(function () {
         name: 'Experiments',
         handle: 'experiments',
         type: 'feature_flags', // Uses feature_flags billing
+        billedWith: 'Feature flags',
+        sharesFreeTier: 'feature_flags',
         slug: 'experiments',
         color: 'purple',
         colorSecondary: 'lilac',
         category: 'product',
-        billedWith: 'Feature flags',
         seo: {
             title: 'Experiments - PostHog',
             description: 'Run statistically-significant multivariate tests and robust targeting & exclusion rules.',
         },
         answersDescription: 'Test changes with statistical significance',
-        sharesFreeTier: 'feature_flags',
         overview: {
             title: 'Test changes with statistical significance',
             description:
