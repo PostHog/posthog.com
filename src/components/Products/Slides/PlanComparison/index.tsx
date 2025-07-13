@@ -35,6 +35,32 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
     // Get pricing tiers from paid plan
     const tiers = paidPlan?.tiers || []
 
+    // Custom unit overrides for specific features (defaults to feature name)
+    const customFeatureUnits: { [key: string]: string } = {
+        group_analytics: 'group',
+    }
+
+    // Helper function to get unit from feature key
+    const getFeatureUnit = (featureKey: string) => {
+        // Check for custom override first
+        if (customFeatureUnits[featureKey]) {
+            return customFeatureUnits[featureKey]
+        }
+
+        // Special handling for data retention keys
+        if (featureKey.includes('data_retention')) {
+            // Session replay uses months, everything else uses years
+            if (featureKey.includes('session_replay') || featureKey.includes('replay')) {
+                return 'month'
+            }
+            return 'year'
+        }
+
+        // Default: derive from feature name (remove trailing 's' if present)
+        const derivedUnit = featureKey.endsWith('s') ? featureKey.slice(0, -1) : featureKey
+        return derivedUnit
+    }
+
     // Format pricing tiers for display
     const formatCompactNumber = (number: number) => {
         const formatter = Intl.NumberFormat('en', {
@@ -96,16 +122,6 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
         const paidFeatures = paidPlan.features || []
         const allFeatureKeys = new Set([...freeFeatures.map((f: any) => f.key), ...paidFeatures.map((f: any) => f.key)])
 
-        // Known feature units for common features across all products
-        const featureUnits: { [key: string]: string } = {
-            data_retention: 'month',
-            replay_data_retention: 'month',
-            session_replay_data_retention: 'month',
-            analytics_data_retention: 'month',
-            feature_flag_data_retention: 'month',
-            survey_data_retention: 'month',
-        }
-
         // Check regular features first
         allFeatureKeys.forEach((featureKey: string) => {
             const freeFeature = freeFeatures.find((f: any) => f.key === featureKey)
@@ -122,10 +138,10 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
 
                 // Second priority: limit field with optional unit
                 if (feature.limit !== undefined && feature.limit !== null) {
-                    // Check if we know the unit for this feature
-                    const unit = featureUnits[featureKey] || feature.unit
+                    // Get unit from feature key or feature.unit
+                    const unit = getFeatureUnit(featureKey) || feature.unit
                     if (unit) {
-                        return `${feature.limit} ${unit}${feature.limit !== 1 ? 's' : ''}`
+                        return `${feature.limit} ${unit}${Number(feature.limit) !== 1 ? 's' : ''}`
                     }
                     return feature.limit
                 }
@@ -208,13 +224,24 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
     const planDifferences = calculatePlanDifferences()
 
     // Helper function to render feature values
-    const renderFeatureValue = (value: any, displayType: string) => {
+    const renderFeatureValue = (value: any, displayType: string, featureKey?: string) => {
         if (typeof value === 'boolean') {
             return <span className={`text-2xl ${value ? 'text-green' : 'text-red'}`}>{value ? '✓' : '✗'}</span>
         }
 
         if (displayType === 'limit' && typeof value === 'number') {
-            return <span className="text-lg font-semibold text-primary">{value.toLocaleString()}</span>
+            // Get the unit for this feature
+            const unit = featureKey ? getFeatureUnit(featureKey) : ''
+            const pluralizedUnit = unit && Number(value) !== 1 ? `${unit}s` : unit
+            const displayText = unit ? `${value.toLocaleString()} ${pluralizedUnit}` : value.toLocaleString()
+
+            return <span className="text-lg font-semibold text-primary">{displayText}</span>
+        }
+
+        // Handle text values - check if it's a number followed by a unit (like "1 year")
+        if (typeof value === 'string' && /^\d+\s+\w+s?$/.test(value)) {
+            // It's already formatted with a unit, just return it
+            return <span className="text-primary">{value}</span>
         }
 
         return <span className="text-primary capitalize">{value}</span>
@@ -357,8 +384,12 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                     {planDifferences.map((difference, index) => (
                         <React.Fragment key={index}>
                             <h4 className="text-lg font-semibold text-primary mb-0 pr-2">{difference.name}</h4>
-                            <div>{renderFeatureValue(difference.freeValue, difference.displayType)}</div>
-                            <div>{renderFeatureValue(difference.paidValue, difference.displayType)}</div>
+                            <div>
+                                {renderFeatureValue(difference.freeValue, difference.displayType, difference.key)}
+                            </div>
+                            <div>
+                                {renderFeatureValue(difference.paidValue, difference.displayType, difference.key)}
+                            </div>
                         </React.Fragment>
                     ))}
 
