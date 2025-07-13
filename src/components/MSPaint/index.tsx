@@ -232,12 +232,12 @@ export default function MSPaint({
   }, [state])
 
   useEffect(() => {
-    const { canvasHistory } = initialState || {}
-    if (canvasHistory && canvasHistory.length > 0) {
+    const { canvasHistory, historyIndex } = initialState || {}
+    if (canvasHistory && canvasHistory.length > 0 && historyIndex) {
       const canvas = canvasRef.current
       const ctx = canvas?.getContext('2d')
       if (ctx && canvas) {
-        ctx.putImageData(canvasHistory[canvasHistory.length - 1], 0, 0)
+        ctx.putImageData(canvasHistory[historyIndex], 0, 0)
       }
     }
   }, [])
