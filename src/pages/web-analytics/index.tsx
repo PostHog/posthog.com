@@ -19,7 +19,7 @@ const CustomPricingSlide = () => {
                 <div className="bg-accent border border-primary rounded p-8 text-left max-w-3xl mx-auto">
                     <p className="text-lg mb-6">
                         Web analytics is currently bundled with{' '}
-                        <Link to="/product-analytics" className="text-red font-semibold">
+                        <Link to="/product-analytics" className="underline font-medium" state={{ newWindow: true }}>
                             product analytics
                         </Link>
                         .
@@ -43,7 +43,11 @@ const CustomPricingSlide = () => {
 
                     <p className="text-lg">
                         Web analytics is designed to work well with{' '}
-                        <Link to="/blog/analytics-pricing" className="text-red font-semibold">
+                        <Link
+                            to="/blog/analytics-pricing"
+                            className="underline font-medium"
+                            state={{ newWindow: true }}
+                        >
                             anonymous events
                         </Link>
                         .

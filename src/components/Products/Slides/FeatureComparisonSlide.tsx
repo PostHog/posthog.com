@@ -1,3 +1,4 @@
+import ScrollArea from 'components/RadixUI/ScrollArea'
 import React from 'react'
 
 interface ComparisonFeature {
@@ -21,11 +22,11 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
     const companies = Object.keys(features[0]?.companies || {})
 
     return (
-        <div className="h-full p-8 text-primary">
-            <h2 className="text-4xl font-bold text-primary mb-10 text-center">Feature comparison</h2>
+        <div className="h-full text-primary flex flex-col">
+            <h2 className="text-4xl font-bold text-primary p-8 text-center shrink-0">Feature comparison</h2>
 
-            <div className="max-w-6xl mx-auto">
-                <div className="overflow-x-auto">
+            <div className="max-w-6xl mx-auto flex-1 w-full min-h-0">
+                <ScrollArea className="">
                     <table className="w-full border-collapse border border-primary">
                         <thead>
                             <tr className="bg-accent">
@@ -65,7 +66,7 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
                             ))}
                         </tbody>
                     </table>
-                </div>
+                </ScrollArea>
             </div>
         </div>
     )

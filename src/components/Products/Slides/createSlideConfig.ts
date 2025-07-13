@@ -28,7 +28,7 @@ export const defaultSlides: Record<string, SlideConfig> = {
     'feature-comparison': { slug: 'feature-comparison', name: 'Feature comparison' },
     docs: { slug: 'docs', name: 'Docs' },
     'pairs-with': { slug: 'pairs-with', name: 'Pairs with...' },
-    'getting-started': { slug: 'getting-started', name: 'Getting started' },
+    'getting-started': { slug: 'getting-started', name: 'Get started' },
 }
 
 /**

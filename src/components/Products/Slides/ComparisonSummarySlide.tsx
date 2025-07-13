@@ -33,15 +33,15 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
             <div className="grid md:grid-cols-2 gap-8 mb-8">
                 <div className="">
                     <h3 className="text-2xl font-bold text-primary mb-4">
-                        Reasons a competitor might suit you better<sup>*</sup>
+                        A competitor might suit you better <em>(for now)</em> if...
                     </h3>
                     <ul className="p-0 mb-2 list-none">
                         {them.map((item: ComparisonItem, index: number) => (
-                            <li key={index} className="border-b-2 border-primary py-2">
+                            <li key={index} className="border-b-2 last:border-b-0 border-primary py-2">
                                 <span className="font-semibold text-lg">{item.title}</span>
                                 {item.subtitle && (
                                     <span className="text-secondary ml-2 italic">
-                                        Update:{' '}
+                                        {/* Update:{' '} */}
                                         {item.subtitleUrl ? (
                                             <a
                                                 href={item.subtitleUrl}
@@ -59,7 +59,6 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
                             </li>
                         ))}
                     </ul>
-                    <strong className="text-secondary italic">*for now!</strong>
                 </div>
 
                 <div className="">
@@ -69,7 +68,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
                     </h3>
                     <ul className="p-0 mb-2 list-none">
                         {us.map((item: ComparisonItem, index: number) => (
-                            <li key={index} className="border-b-2 border-primary py-2">
+                            <li key={index} className="border-b-2 last:border-b-0 border-primary py-2">
                                 <span className="font-semibold text-lg">{item.title}</span>
                                 {item.subtitle && <span className="text-secondary ml-1">{item.subtitle}</span>}
                             </li>

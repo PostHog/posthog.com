@@ -3323,38 +3323,33 @@ window.posthog.onFeatureFlags(function () {
             summary: {
                 them: [
                     {
-                        title: 'Complex setup and configuration',
-                        subtitle: 'GA4 requires extensive setup and custom events for basic tracking',
+                        title: 'You only need web analytics, nothing else',
                     },
                     {
-                        title: 'Sampled data',
-                        subtitle: 'GA4 samples data for large sites, missing important insights',
+                        title: 'You don’t need any integrations other than with Google',
                     },
                     {
-                        title: 'Limited real-time data',
-                        subtitle: 'Most tools have delays or limited real-time capabilities',
+                        title: 'You need to migrate data from GA4',
+                        // subtitle: 'Most tools have delays or limited real-time capabilities',
+                    },
+                    {
+                        title: 'You actually really like GA4 🤡',
+                        subtitle: 'We recommend seeking medical attention.',
                     },
                 ],
                 us: [
                     {
-                        title: 'Pre-built dashboard ready in minutes',
-                        subtitle: 'No complex setup - just add one snippet and go',
+                        title: 'You want to do more than just web analytics',
+                        subtitle: 'Web Analytics integrates with the entire Product OS ecosystem.',
                     },
                     {
-                        title: '100% accurate data, no sampling',
-                        subtitle: 'Every visitor and event is tracked, no matter your traffic',
+                        title: "You don't want to spend weeks setting up dashboards",
                     },
                     {
-                        title: 'Privacy-focused with cookieless options',
-                        subtitle: 'GDPR compliant with EU hosting and anonymous tracking',
+                        title: 'You need to comply with HIPAA',
                     },
                     {
-                        title: 'Integrated with product analytics',
-                        subtitle: 'Seamlessly switch between web and product insights',
-                    },
-                    {
-                        title: 'Ad blocker resilient',
-                        subtitle: 'Reverse proxy reduces blocking by 70%+',
+                        title: "It's not GA4...",
                     },
                 ],
             },
@@ -3524,8 +3519,7 @@ window.posthog.onFeatureFlags(function () {
         pairsWith: [
             {
                 slug: 'product-analytics',
-                description:
-                    'Need to go deeper than a dashboard? Building your own insights and SQL queries from scratch!',
+                description: 'Go deeper than a dashboard by building your own insights and SQL queries from scratch.',
             },
             {
                 slug: 'session-replay',
