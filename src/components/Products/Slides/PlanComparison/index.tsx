@@ -1,4 +1,7 @@
 import React from 'react'
+import Tooltip from 'components/RadixUI/Tooltip'
+import { IconInfo } from '@posthog/icons'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface PlanComparisonProps {
     products: any[]
@@ -111,6 +114,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
 
         const differences: Array<{
             name: string
+            description?: string
             key: string
             freeValue: any
             paidValue: any
@@ -167,6 +171,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
 
                 differences.push({
                     name: freeFeature?.name || paidFeature?.name || featureKey,
+                    description: freeFeature?.description || paidFeature?.description,
                     key: featureKey,
                     freeValue,
                     paidValue,
@@ -210,6 +215,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
             if (freeAddonValue !== paidAddonValue) {
                 differences.push({
                     name: addon.name,
+                    description: addon.description,
                     key: addon.type,
                     freeValue: freeAddonValue,
                     paidValue: paidAddonValue,
@@ -330,7 +336,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
             </div>
 
             {/* Right side - Plans */}
-            <div className="p-12 bg-primary col-span-3 border-l border-primary">
+            <div className="p-12 bg-primary col-span-3 border-l border-primary h-full">
                 <h2 className="text-4xl font-bold text-primary mb-12">Plans</h2>
 
                 {/* Comparison rows */}
@@ -383,7 +389,23 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                     {/* Dynamic plan differences */}
                     {planDifferences.map((difference, index) => (
                         <React.Fragment key={index}>
-                            <h4 className="text-lg font-semibold text-primary mb-0 pr-2">{difference.name}</h4>
+                            <div className="">
+                                <h4 className="text-lg font-semibold text-primary mb-0 pr-2 inline">
+                                    {difference.name}
+                                </h4>
+                                {difference.description && (
+                                    <Tooltip
+                                        trigger={
+                                            <IconInfo className="inline-block size-5 text-secondary cursor-help relative -top-0.5 -left-0.5 mr-2" />
+                                        }
+                                        delay={0}
+                                    >
+                                        <div className="max-w-xs">
+                                            <p className="mb-0 text-[13px] leading-normal">{difference.description}</p>
+                                        </div>
+                                    </Tooltip>
+                                )}
+                            </div>
                             <div>
                                 {renderFeatureValue(difference.freeValue, difference.displayType, difference.key)}
                             </div>
