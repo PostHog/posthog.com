@@ -73,6 +73,8 @@ export const featureFlags = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/multivariate.png',
                     alt: 'Multivariate feature flags',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -136,13 +138,10 @@ export const featureFlags = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/release-conditions.png',
                     alt: 'Release conditions',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
-        },
-        {
-            title: 'Flag targeting',
-            headline: 'Flag targeting',
-            description: 'Target feature flag release conditions by group properties, not just user properties.',
         },
         {
             title: 'Local evaluation ',
@@ -174,7 +173,7 @@ export const featureFlags = {
             children: (
                 <div className="">
                     <h4 className="text-xl mb-1">
-                        Make feature flags available at initialization without waiting for a response from PostHog
+                        Make feature flags available at initialization without waiting for a response from PostHog.
                     </h4>
                     <p className="text-lg">
                         This is useful for redirecting to another page based on feature flag or showing variants
@@ -222,18 +221,6 @@ export const featureFlags = {
             ),
         },
         {
-            title: 'Experiments',
-            headline: 'Experiments',
-            description:
-                'Test changes to your product and evaluate the impacts those changes make. Track additional metrics to see how your experiment affects other parts of your app or different flows. Run experiments on funnels to see the impact of a change on a aggregate values or a series of events, like a signup flow.',
-        },
-        {
-            title: 'Statistical analysis',
-            headline: 'Statistical analysis',
-            description:
-                "Get a statistical analysis of your experiment results to see if the results are significant, or if they're likely just due to chance.",
-        },
-        {
             title: 'Developer-friendly automation',
             headline: 'Developer-friendly automation',
             description:
@@ -242,6 +229,8 @@ export const featureFlags = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/reports.png',
                     alt: 'Developer-friendly automation',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -254,6 +243,8 @@ export const featureFlags = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/early-access.png',
                     alt: 'Early access feature opt-in widget',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },

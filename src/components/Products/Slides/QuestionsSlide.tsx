@@ -49,7 +49,9 @@ export default function QuestionsSlide({
         const [slug, hashFragment] = url.split('#')
         const tutorialNode = tutorialData.allMdx.nodes.find((node: TutorialNode) => node.fields.slug === slug)
 
-        if (!tutorialNode) return 'Content not found.'
+        if (!tutorialNode) {
+            console.warn(`Content not found for URL: ${url} (slug: ${slug})`)
+        }
 
         // Use frontmatter description first, if available (only if no hash fragment)
         if (!hashFragment && tutorialNode.frontmatter?.description) {

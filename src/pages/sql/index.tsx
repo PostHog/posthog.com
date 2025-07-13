@@ -67,5 +67,13 @@ export default function SQL(): JSX.Element {
         }
     `)
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} />
+    // Merge content data with product data
+
+    const mergedData = {
+        ...data,
+
+        ...contentData,
+    }
+
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} />
 }

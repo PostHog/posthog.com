@@ -1,26 +1,18 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'feature_flags'
 
 export default function FeatureFlags(): JSX.Element {
-    // Combined GraphQL query for both tutorial data and product data
+    // Get content data from multiple directories
+    const contentData = useContentData()
+
+    // Combined GraphQL query for product data
     const data = useStaticQuery(graphql`
         query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
             allProductData {
                 nodes {
                     products {
@@ -77,5 +69,11 @@ export default function FeatureFlags(): JSX.Element {
         },
     })
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
+    // Merge content data with product data
+    const mergedData = {
+        ...data,
+        ...contentData,
+    }
+
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }

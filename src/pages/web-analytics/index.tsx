@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
 import Link from 'components/Link'
 
 // Product configuration - change this to adapt for different products
@@ -137,5 +138,13 @@ export default function WebAnalytics(): JSX.Element {
         }
     }
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
+    // Merge content data with product data
+
+    const mergedData = {
+        ...data,
+
+        ...contentData,
+    }
+
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }

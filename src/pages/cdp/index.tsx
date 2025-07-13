@@ -1,6 +1,7 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'cdp'
@@ -77,5 +78,13 @@ export default function CDP(): JSX.Element {
         },
     })
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
+    // Merge content data with product data
+
+    const mergedData = {
+        ...data,
+
+        ...contentData,
+    }
+
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }
