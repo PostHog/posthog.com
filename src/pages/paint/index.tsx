@@ -9,7 +9,7 @@ import { Accordion } from 'components/RadixUI/Accordion'
 import MSPaint from 'components/MSPaint'
 import GodzillaOutline from './hogzilla-outline.png'
 
-export default function Paint(): JSX.Element {
+export default function Paint({ initialState }: { initialState: any }): JSX.Element {
   const coloringPageImage = GodzillaOutline
 
   return (
@@ -36,6 +36,7 @@ export default function Paint(): JSX.Element {
             initialImage={coloringPageImage}
             threshold={128} // Adjust for your image (0-255)
             canvasSize={{ width: 800, height: 770 }}
+            initialState={initialState}
           />
         </div>
       </Explorer>
