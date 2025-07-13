@@ -299,38 +299,64 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                         Volume discounts
                     </h3>
                     <div className="space-y-2 text-sm">
-                        {tiers.map((tier: any, index: number) => {
-                            const isFirstTier = index === 0
-                            const isLastTier = !tier.up_to
-                            const prevTier = index > 0 ? tiers[index - 1] : null
+                        {(() => {
+                            // Find the maximum number of decimal places across all paid tiers
+                            const maxDecimalPlaces = tiers.reduce((max: number, tier: any) => {
+                                const price = parseFloat(tier.unit_amount_usd)
+                                if (price === 0) return max
 
-                            let rangeText = ''
-                            if (isFirstTier) {
-                                rangeText = `First ${formatCompactNumber(tier.up_to)} ${unit}s/mo`
-                            } else if (isLastTier) {
-                                rangeText = `${formatCompactNumber(prevTier?.up_to)}+`
-                            } else {
-                                rangeText = `${formatCompactNumber(prevTier?.up_to)}-${formatCompactNumber(tier.up_to)}`
+                                const priceStr = tier.unit_amount_usd.toString()
+                                const decimalIndex = priceStr.indexOf('.')
+                                if (decimalIndex === -1) return max
+
+                                const decimalPlaces = priceStr.length - decimalIndex - 1
+                                return Math.max(max, decimalPlaces)
+                            }, 0)
+
+                            // Helper function to format price with consistent decimal places
+                            const formatPrice = (priceStr: string) => {
+                                const price = parseFloat(priceStr)
+                                if (price === 0) return 'Free'
+
+                                // Format with the maximum decimal places, adding trailing zeros if needed
+                                return `$${price.toFixed(maxDecimalPlaces)}`
                             }
 
-                            const isFree = parseFloat(tier.unit_amount_usd) === 0
+                            return tiers.map((tier: any, index: number) => {
+                                const isFirstTier = index === 0
+                                const isLastTier = !tier.up_to
+                                const prevTier = index > 0 ? tiers[index - 1] : null
 
-                            return (
-                                <div key={index} className="flex justify-between text-lg">
-                                    <span className="text-secondary">{rangeText}</span>
-                                    <span className={`${isFree ? 'text-green font-bold' : 'text-primary'}`}>
-                                        {isFree ? (
-                                            'Free'
-                                        ) : (
-                                            <>
-                                                <strong>${tier.unit_amount_usd}</strong>
-                                                <span className="text-secondary">/{unit}</span>
-                                            </>
-                                        )}
-                                    </span>
-                                </div>
-                            )
-                        })}
+                                let rangeText = ''
+                                if (isFirstTier) {
+                                    rangeText = `First ${formatCompactNumber(tier.up_to)} ${unit}s/mo`
+                                } else if (isLastTier) {
+                                    rangeText = `${formatCompactNumber(prevTier?.up_to)}+`
+                                } else {
+                                    rangeText = `${formatCompactNumber(prevTier?.up_to)}-${formatCompactNumber(
+                                        tier.up_to
+                                    )}`
+                                }
+
+                                const isFree = parseFloat(tier.unit_amount_usd) === 0
+
+                                return (
+                                    <div key={index} className="flex justify-between text-lg">
+                                        <span className="text-secondary">{rangeText}</span>
+                                        <span className={`${isFree ? 'text-green font-bold' : 'text-primary'}`}>
+                                            {isFree ? (
+                                                'Free'
+                                            ) : (
+                                                <>
+                                                    <strong>{formatPrice(tier.unit_amount_usd)}</strong>
+                                                    <span className="text-secondary">/{unit}</span>
+                                                </>
+                                            )}
+                                        </span>
+                                    </div>
+                                )
+                            })
+                        })()}
                     </div>
                 </div>
             </div>
