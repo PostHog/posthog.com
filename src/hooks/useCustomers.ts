@@ -42,6 +42,7 @@ import CarVerticalLogoDark from '../images/customers/carvertical-dark.svg'
 import PhantomLogoDark from '../images/customers/phantom-dark.svg'
 
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
+import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 
 export interface Customer {
     slug: string
@@ -282,6 +283,12 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: TrustWalletLogo,
             dark: TrustWalletLogoDark,
         },
+    },
+    vendasta: {
+        name: 'Vendasta',
+        toolsUsed: ['experiments'],
+        notes: '',
+        logo: VendastaLogo,
     },
     ycombinator: {
         name: 'Y Combinator',

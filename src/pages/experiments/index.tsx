@@ -1,11 +1,15 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { SlidesTemplate } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'experiments'
 
 export default function Experiments(): JSX.Element {
+    // Get content data from multiple directories
+    const contentData = useContentData()
+
     // Combined GraphQL query for both tutorial data and product data
     const data = useStaticQuery(graphql`
         query {
@@ -67,13 +71,21 @@ export default function Experiments(): JSX.Element {
         }
     `)
 
-    // Merge content data with product data
+    // Optional: Customize slides
+    // See /components/Products/Slides/README.md for more details
+    const slides = createSlideConfig({
+        // exclude: ['comparison-summary'],
+        // order: ['overview', 'pricing', 'features'],
+        templates: {
+            overview: 'stacked', // Use the horizontal split layout
+        },
+    })
 
+    // Merge content data with product data
     const mergedData = {
         ...data,
-
         ...contentData,
     }
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }

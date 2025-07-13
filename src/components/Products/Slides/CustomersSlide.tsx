@@ -53,7 +53,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                     const LogoComponent = customer.logo
                     return (
                         <div className="fill-current">
-                            <LogoComponent className="w-auto object-contain max-h-10" />
+                            <LogoComponent className="w-full object-contain max-h-6" />
                         </div>
                     )
                 }

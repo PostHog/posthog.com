@@ -5,7 +5,7 @@ export const experiments = {
     Icon: IconFlask,
     name: 'Experiments',
     handle: 'experiments',
-    type: 'feature_flags', // Uses feature_flags billing
+    type: 'feature_flags',
     billedWith: 'Feature flags',
     sharesFreeTier: 'feature_flags',
     slug: 'experiments',
@@ -57,6 +57,18 @@ export const experiments = {
         },
     },
     features: [
+        {
+            title: 'Experiments',
+            headline: 'Experiments',
+            description:
+                'Test changes to your product and evaluate the impacts those changes make. Track additional metrics to see how your experiment affects other parts of your app or different flows. Run experiments on funnels to see the impact of a change on a aggregate values or a series of events, like a signup flow.',
+        },
+        {
+            title: 'Statistical analysis',
+            headline: 'Statistical analysis',
+            description:
+                "Get a statistical analysis of your experiment results to see if the results are significant, or if they're likely just due to chance.",
+        },
         {
             title: 'Bayesian statistical engine',
             headline: 'Advanced Bayesian statistics for faster decisions',
