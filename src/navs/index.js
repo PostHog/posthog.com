@@ -2929,6 +2929,12 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Calendar heatmap',
+                    url: '/docs/product-analytics/calendar-heatmap',
+                    icon: 'IconCalendar',
+                    color: 'seagreen',
+                },
+                {
                     name: 'Tools',
                 },
                 {

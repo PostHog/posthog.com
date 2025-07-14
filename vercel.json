@@ -1519,6 +1519,10 @@
         {
             "source": "/manual/trends",
             "destination": "/docs/product-analytics/trends"
+        },
+        {
+            "source": "/manual/calendar-heatmap",
+            "destination": "/docs/product-analytics/calendar-heatmap"
         }
     ],
     "headers": [
