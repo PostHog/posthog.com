@@ -1038,8 +1038,12 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/revenue-and-forecasting',
             },
             {
-                name: 'Activation & product intents',
+                name: 'Product intents',
                 url: '/handbook/growth/growth-engineering/product-intents',
+            },
+            {
+                name: 'Per-product activation',
+                url: '/handbook/growth/growth-engineering/per-product-activation',
             },
         ],
     },
