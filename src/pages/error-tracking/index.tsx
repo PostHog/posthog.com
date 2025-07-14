@@ -73,7 +73,7 @@ export default function ErrorTracking(): JSX.Element {
         // exclude: ['comparison-summary'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
-            overview: 'columns', // Use the horizontal split layout
+            overview: 'stacked', // Use the horizontal split layout
         },
     })
 

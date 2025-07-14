@@ -17,8 +17,8 @@ export const errorTracking = {
     answersDescription: 'Track and resolve errors and exceptions in your application',
     overview: {
         title: 'Track errors and resolve issues',
-        description: 'Take your product from exception to exceptional',
-        textColor: 'text-white', // tw
+        description: 'Take your product from exception to exceptional 🥁',
+        textColor: 'text-black', // tw
     },
     screenshots: [
         {
