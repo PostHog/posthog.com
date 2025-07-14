@@ -83,6 +83,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
   - ARR from new annual deals sold
   - ARR from monthly customers for the first _3 months_ where you got them set up but they didn't commit to an annual contract
+    - After 3 months, either you can keep working them if you believe they'll go annual, or they'll get handed over to a TAM or CSM
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
   - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
