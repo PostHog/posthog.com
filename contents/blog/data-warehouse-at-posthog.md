@@ -30,7 +30,7 @@ Our team is big fans of what we've built. As proof, they've created **over 1600*
 
 The downside of the data warehouse’s power and flexibility is that it can be tricky to know where to start. To help you with this, we’re going over how different teams at PostHog actually use the data warehouse from the sources they use to the actual SQL queries they write.
 
-> **Modifying queries to your data:** Because our data structure is unique, the SQL queries included here likely won’t work out-of-the-box for you. Luckily, [Max AI](/max) makes modifying SQL easily. Just paste these queries in as context and ask him to use your data instead.
+> **Modifying queries to your data:** Because our data structure is unique, the SQL queries included here likely won’t work out-of-the-box for you. Luckily, [Max AI](/max) makes modifying SQL easy. Just paste these queries in as context and ask him to use your data instead.
 
 ## Understanding growth and churn
 
