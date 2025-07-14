@@ -38,31 +38,17 @@ import { CallToAction } from 'components/CallToAction'
 import { IconRocket } from '@posthog/icons'
 import { StartupProductCards, startupProducts } from '../src/components/StartupProductCards'
 import * as Icons from '@posthog/icons'
+import { Hero } from 'components/Products/StartupsHero'
 
 export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-refer.png"
 
-<section className="flex flex-col justify-center items-center py-6 px-4">
-  <div className="w-full max-w-4xl mx-auto text-center">
-    <div className="flex justify-center items-center mt-8 mb-6 gap-3">
-      <IconRocket className="w-6 h-6 text-red" />
-      <span className="text-xs md:text-sm font-semibold text-gray-700">PostHog for Startups</span>
-    </div>
-    <h1 className="text-8xl md:text-5xl font-extrabold mb-6">
-      Start the journey to product-market fit with $50,000 in credits
-    </h1>
-    <h3 className="font-semibold text-base mb-8">
-      (Plus get some extras you'll actually use)
-    </h3>
-    <div className="flex justify-center items-center gap-2">
-      <CallToAction type="primary" href="https://app.posthog.com/startups">Apply now</CallToAction>
-    </div>
-    <img
-      src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_0d2d44939f.png"
-      alt="PostHog for Startups illustration"
-      className="mx-auto mt-8 max-w-full w-[400px] md:w-[500px] lg:w-[600px] h-auto"
-    />
-  </div>
-</section>
+<Hero
+  color="red"
+  icon={<IconRocket className="w-7 h-7" />}
+  product="PostHog for Startups"
+  title="Start the journey to product-market fit with $50,000 in credits"
+  description="The only startup program with free laptop stickers, exclusive founder merch, and $50,000 in PostHog credit. Teams must be less than 2 years old and have less than $5 million in funding to qualify."
+/>
 
 
 <section class="py-16 px-5">
