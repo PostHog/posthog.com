@@ -1,6 +1,6 @@
 ---
 title: How we use the data warehouse at PostHog
-date: 2025-07-10
+date: 2025-07-14
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/warehouse_blog_633055c72f.png
 featuredImageType: full
@@ -13,9 +13,13 @@ crosspost:
  - product-engineers
 ---
 
-PostHog’s [data warehouse](/data-warehouse) is arguably our most powerful feature. It lets you sync data from [external sources](/docs/cdp/sources), query it alongside your existing product data using [SQL](/docs/data-warehouse/sql), and visualize it natively. 
+PostHog’s [data warehouse](/data-warehouse) is arguably our most powerful feature. It lets you sync data from the tools you already use (like [Stripe](/docs/cdp/sources/stripe), [Salesforce](/docs/cdp/sources/salesforce), and [Hubspot](/docs/cdp/sources/hubspot)), query it alongside your existing product data using [SQL](/docs/data-warehouse/sql), and visualize it natively.
 
-We’re big fans of the data warehouse at PostHog (we did build it after all). To prove it, our team has created **over 1600** SQL insights using our data warehouse. It’s our second most popular type of insight behind trends (which existed many years before).
+We built it because the [modern data stack sucks](/blog/modern-data-stack-sucks). What starts as a handful of business critical tools devolves into dozens of tools, many specifically built to capture, clean, format, load, query, and visualize data.
+
+We knew it didn't have to be this way, so we built the data warehouse to get rid of all this complexity and give you a single source of truth for all your business data.
+
+Our team is big fans of what we've built. As proof, they've created **over 1600** SQL insights using our data warehouse. It’s our second most popular type of insight behind trends (which was around long before we had the data warehouse).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_10_at_11_47_15_2x_9b179c988a.png"
@@ -26,9 +30,9 @@ We’re big fans of the data warehouse at PostHog (we did build it after all). T
 
 The downside of the data warehouse’s power and flexibility is that it can be tricky to know where to start. To help you with this, we’re going over how different teams at PostHog actually use the data warehouse from the sources they use to the actual SQL queries they write.
 
-> **Note:** Because our data structure is unique, the SQL queries included here likely won’t work out-of-the-box for you. We recommend using them as inspiration or as context for [Max AI](/max) to modify the query to your data structure.
+> **Modifying queries to your data:** Because our data structure is unique, the SQL queries included here likely won’t work out-of-the-box for you. Luckily, [Max AI](/max) makes modifying SQL easily. Just paste these queries in as context and ask him to use your data instead.
 
-## Product management
+## Understanding growth and churn
 
 - Sources: [Postgres](/docs/cdp/sources/postgres), [PostHog](/docs/new-to-posthog/understand-posthog), [Salesforce](/docs/cdp/sources/salesforce)
 - Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `events`, `salesforce.contact`, `postgres.posthog_team`, `postgres.posthog_organization`,
@@ -265,7 +269,7 @@ ORDER BY ms.month
     
 </details>
 
-## Revenue
+## Tracking revenue
 
 - Sources: [Postgres](/docs/cdp/sources/postgres), [Salesforce](/docs/cdp/sources/salesforce)
 - Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `postgres_billing_usagereport`, `salesforce_opportunity`
@@ -462,20 +466,18 @@ LIMIT 500
     
 </details>
 
-## Startups and YC
+## Tracking startup and YC plan growth, costs, and ROI
 
 - Sources: [Stripe](/docs/cdp/sources/stripe), [Postgres](/docs/cdp/sources/postgres)
 - Tables: `stripe_customer`, `stripe_invoice`, `postgres_billing_usagereport`, `postgres_billing_customer`
 
-Where the data warehouse gets more interesting is when we leave traditional product metrics  and move to teams further away from our core products. 
-
-One area we care about is our startups and YC plan. Hundreds of startups sign up for our [startup plan](/startups) (which gives them $50k in free credits), dozens more sign up to our upgraded [YC plan](/handbook/brand/startups#posthog-for-y-combinator). To make sure it is going well, we have a dashboard with details like:
+Each quarter, hundreds of startups sign up for our [startup plan](/startups) (which gives them $50k in free credits), dozens more sign up to our upgraded [YC plan](/handbook/brand/startups#posthog-for-y-combinator). To make sure it is going well, we have a dashboard with details like:
 
 1. The number of organizations on the startup plan
 2. The cost of the startup plan for us based on credit usage.
 3. The count of startups who “graduate” and pay us money as well as how much money they pay us. 
 
-Unlike the product management and growth data, we actually do use Stripe for this. We have metadata on Stripe customers saying if they are a startup plan customer and what type of startup plan they are on. This helps us get the customer count as well as the “graduate” details.
+Unlike the revenue, churn, and growth data, we actually do use Stripe for this. We have metadata on Stripe customers saying if they are a startup plan customer and what type of startup plan they are on. This helps us get the customer count as well as the “graduate” details.
 
 Costs rely on combining the Stripe data with our billing data in Postgres. This lets us see how many credits startup plan customers are going through.
 
@@ -551,7 +553,7 @@ ORDER BY
 
 </details>
 
-## Support
+## Creating support reports (SLA, first response time, and more) 
 
 - Sources: [Zendesk](/docs/cdp/sources/zendesk)
 - Tables: `zendesk_ticket_events`, `zendesk_tickets`, `zendesk_ticket_metric_events`, `zendesk_groups`
@@ -579,6 +581,8 @@ Beyond this, they use both insight types to track:
 - Sources of support requests.
 
 This data is combined with [CSAT surveys](/templates/csat-survey) (both scores and responses) to give a complete picture of the support we’re providing at PostHog. Abigail writes up a summary based on this data and shares it with the exec team weekly. 
+
+![Support report](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_14_at_10_27_19_2x_5d1fdd9ef1.png)
 
 ### Sample queries
 
@@ -744,7 +748,7 @@ group by hour_of_day
 ```
 </details>
 
-## Sales
+## Creating quarterly sales and customer success reports
 
 - Sources: [Salesforce](/docs/cdp/sources/salesforce), [Postgres](/docs/cdp/sources/postgres), [Vitally](/docs/cdp/sources/vitally)
 - Tables: `invoice_with_annual_plans_shifted`, `vitally_all_managed_accounts`, `salesforce_opportunity`, `salesforce_user`
@@ -872,3 +876,13 @@ WHERE
 ```
 
 </details>
+
+## How should you get started?
+
+Feeling inspired? Here's how you can get started:
+
+1. Start by [linking a source](/docs/cdp/sources) from a tool you already use.
+2. Go to the [SQL editor](https://us.posthog.com/sql) and start by writing a basic query like `select * from events limit 10`.
+3. Layer more complexity, like filtering, [aggregating](/docs/data-warehouse/sql/useful-functions#aggregate-functions), and [joining](/docs/data-warehouse/join) data. Use [Max AI](/max) to help you with this.
+4. Use our [SQL visualizations](/docs/data-warehouse/query#sql-visualizations) to see your data in a new way.
+5. Build a dashboard of related insights and share them with your team.
