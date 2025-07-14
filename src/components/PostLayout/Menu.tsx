@@ -120,7 +120,9 @@ export default function Menu({
         children || topLevel
             ? 'hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all min-h-[34px]'
             : ''
-    } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''}`
+    } ${children && open ? 'bg-accent dark:bg-accent-dark font-bold !border-light dark:!border-dark' : ''} ${
+        children && !open && !isActive ? 'opacity-50' : ''
+    }`
     useEffect(() => {
         const isOpen = (children?: IMenu[]): boolean | undefined => {
             return (
