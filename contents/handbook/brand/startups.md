@@ -48,7 +48,7 @@ YC teams must apply via [our secret YC page](https://app.posthog.com/startups/yc
 
 We track all PostHog for YC applications in [this Zapier table](https://tables.zapier.com/app/tables/t/01JRCYMWYAJNP3K0B6GTYKKBQB).
 
-## What Happens After Companies Apply
+## What happens after companies apply?
 
 1. **Application**  
    A company signs up to PostHog, adds billing details, and applies via [the startup form](https://app.posthog.com/startups).
