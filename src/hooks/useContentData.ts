@@ -24,7 +24,7 @@ export interface ContentData {
 export function useContentData(): ContentData {
     const data = useStaticQuery(graphql`
         query ContentDataQuery {
-            allMdx(filter: { fields: { slug: { regex: "/^/(tutorials|product-engineers|founders)/" } } }) {
+            allMdx(filter: { fields: { slug: { regex: "/^/(tutorials|product-engineers|founders|docs)/" } } }) {
                 nodes {
                     fields {
                         slug

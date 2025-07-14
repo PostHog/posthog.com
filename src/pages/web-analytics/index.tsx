@@ -61,6 +61,8 @@ const CustomPricingSlide = () => {
 
 export default function WebAnalytics(): JSX.Element {
     // Combined GraphQL query for both tutorial data and product data
+    const contentData = useContentData()
+
     const data = useStaticQuery(graphql`
         query {
             allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {

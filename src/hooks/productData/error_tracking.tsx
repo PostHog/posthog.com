@@ -131,16 +131,16 @@ export const errorTracking = {
             url: '/docs/error-tracking/alerts',
         },
         {
-            question: 'How can I integrate with existing tools?',
-            url: '/docs/error-tracking/integrations',
+            question: 'How do I manage and resolve issues?',
+            url: '/docs/error-tracking/managing-issues',
         },
         {
-            question: 'How do I manage error retention?',
-            url: '/docs/error-tracking/retention',
+            question: 'How can I reduce error tracking costs?',
+            url: '/docs/error-tracking/cutting-costs',
         },
         {
-            question: 'How can I use session replay with errors?',
-            url: '/docs/error-tracking/session-replay',
+            question: 'How do stack traces work?',
+            url: '/docs/error-tracking/stack-traces',
         },
     ],
     comparison: {

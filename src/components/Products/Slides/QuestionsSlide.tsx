@@ -51,6 +51,7 @@ export default function QuestionsSlide({
 
         if (!tutorialNode) {
             console.warn(`Content not found for URL: ${url} (slug: ${slug})`)
+            return null
         }
 
         // Use frontmatter description first, if available (only if no hash fragment)

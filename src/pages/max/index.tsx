@@ -1,12 +1,12 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
 
-// Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'max_ai'
 
 export default function MaxAI(): JSX.Element {
-    // Combined GraphQL query for both tutorial data and product data
+    const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
             allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -67,11 +67,8 @@ export default function MaxAI(): JSX.Element {
         }
     `)
 
-    // Merge content data with product data
-
     const mergedData = {
         ...data,
-
         ...contentData,
     }
 
