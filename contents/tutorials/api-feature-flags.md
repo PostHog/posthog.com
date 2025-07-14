@@ -9,11 +9,11 @@ tags:
   - feature flags
 ---
 
-Like [capturing events](/tutorials/api-capture-events), feature flags get a special POST-only public endpoint in the PostHog API, `/decide/`.  There are also endpoints to get data from, update this data, and more. This tutorial shows you how to use these endpoints to evaluate your feature flags (both boolean and multivariate), get data about them, update them, and finally, shows how you can combine these requests together.
+Like [capturing events](/tutorials/api-capture-events), feature flags get a special POST-only public endpoint in the PostHog API, `/flags/`.  There are also endpoints to get data from, update this data, and more. This tutorial shows you how to use these endpoints to evaluate your feature flags (both boolean and multivariate), get data about them, update them, and finally, shows how you can combine these requests together.
 
 ## Setting up authentication and feature flags
 
-The `decide` endpoint requires your project API key for authentication. To get this value, go to your project settings, and copy the value under "Project Variables." This is the same value you use to initialize a library.
+The `flags` endpoint requires your project API key for authentication. To get this value, go to your project settings, and copy the value under "Project Variables." This is the same value you use to initialize a library.
 
 Obviously you also need to create a flag before you can evaluate it. To create a feature flag, in your PostHog instance, go to the "Feature Flags" tab, click "New feature flag," enter a key, set release conditions to 100% of users, and click save.
 
@@ -29,12 +29,12 @@ Formatting all this correctly looks like this:
 curl -v -L --header "Content-Type: application/json" -d '{
   "api_key": "<PH_PROJECT_API_KEY>",
   "distinct_id": "ian@posthog.com"
-}' "<ph_app_host>/decide/?v=3"
+}' "<ph_app_host>/flags/?v=2"
 ```
 
 ```python
 import requests
-url = "<ph_app_host>/decide/?v=3"
+url = "<ph_app_host>/flags/?v=2"
 
 headers = {
   "Content-Type": "application/json",
@@ -83,7 +83,7 @@ You can use this response with whatever language to control access or usage of f
 
 ```python
 import requests
-url = "<ph_app_host>/decide/?v=3"
+url = "<ph_app_host>/flags/?v=2"
 
 headers = {
   "Content-Type": "application/json",
@@ -291,7 +291,7 @@ body = {
 }
 
 evaluate = requests.post(
-  '<ph_app_host>/decide/?v=3',
+  '<ph_app_host>/flags/?v=2',
   headers=json_headers, 
   json=body
 )
@@ -355,7 +355,7 @@ Once confirmed, you're done. Congratulations, you’ve built a solid grasp of us
 ## Further reading
 
 - [How to use the PostHog API to get insights and persons](/tutorials/api-get-insights-persons)
-- [Documentation on our `decide` endpoint](/docs/api/decide)
+- [Documentation on our `flags` endpoint](/docs/api/flags)
 - [Using the PostHog API to capture events](/tutorials/api-capture-events)
 
 <NewsletterForm />

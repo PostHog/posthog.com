@@ -16,8 +16,9 @@ PostHog enables you to transform your events in realtime using a variety of pre-
 
 ![Transformations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/transformation_list_a15ad4e309.png)
 
-<!-- TODO: Add this back in once we support custom transformations
-Need more flexibility? Our [custom transformations](/docs/cdp/transformations/customizing-transformations) enable you to write your own Hog code to transform events exactly how you want. You can modify, enrich, or filter your events using our powerful Hog programming language. -->
+Need more flexibility? Our [custom transformations](/docs/cdp/transformations/customizing-transformations) enable you to write your own Hog code to transform events exactly how you want. You can modify, enrich, or filter your events using our powerful Hog programming language.
+
+**Note**: Transformations don't apply to exceptions we capture as part of the error tracking product. If you need to run transformation against your exception data, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
 ## Filtering
 
@@ -52,12 +53,11 @@ This history helps you:
 
 The history tab is particularly useful when multiple team members are working with transformations, as it provides transparency and accountability for all changes.
 
-<!--  TODO: Add this back in once we support custom transformations
 ## Going deeper
 
 If your needs are more specific than our defaults, try customizing your transformation's implementation. You can write, test, and deploy your own transformation in minutes.
 
-Learn more about this in [customizing transformations](/docs/cdp/transformations/customizing-transformations). -->
+Learn more about this in [customizing transformations](/docs/cdp/transformations/customizing-transformations).
 
 ## Creating transformations via API
 

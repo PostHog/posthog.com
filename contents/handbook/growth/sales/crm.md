@@ -148,7 +148,11 @@ If you receive a lead for a self-serve customer who has used the Sales Contact F
 - Set the 'Disqualification reason' to 'Support Request'
 - Update the lead status to 'Unqualified'
 
-This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Comms team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
+This will [automatically create a ticket](https://zapier.com/editor/274433115/published) in Zendesk for the Brand team to review and address. You will be CC'd on the ticket and the ticket link will be added to the Lead's 'Next Steps' field in Salesforce.
+
+### Spam
+
+These mostly come into the sales inbox rather than the contact form.  Whilst there is a `Spam` disqualification reason in Salesforce we can also prevent users from emailing the group again by banning them in the [Sales Google Group](https://groups.google.com/a/posthog.com/g/sales/banned-users).  If you do ban someone bear in mind they won't be able to email our sales email until the ban is lifted so only use this for genuine spam (e.g. people trying to sell us competitor user lists). 
 
 ### Lead Qualification Criteria
 - Do they match our ideal customer profile?
@@ -213,6 +217,18 @@ Stages will differ depending on the chosen Opportunity Record Type. The followin
 5. Commercial & Legal Review (80%) - They have completed their evaluation and PostHog is the right tool for them. We are now working with them on contractual items such as custom pricing, MSAs etc.
 6. Closed Won (100%) - They have signed the contract and are officially a PostHog customer.
 7. Closed Lost (0%) - At some point in the pipeline they decided not to use us. The Loss Reason field is required for any opportunity to be marked as Closed lost.
+
+### Forecast categories
+**Commit:** PostHog is integrated and the buyer has stated an intent to purchase within the Close Date quarter.
+
+**Best Case:** PostHog is or is being implemented, volume justifies an annual commitment, and the buyer has stated interest in purchasing with the Close Date quarter.
+
+**Pipeline:** Buyer is actively evaluating PostHog or intends to evaluate PostHog within the Close Date quarter and early volume/discussion indicates an annual contract could be justified.
+
+**Omitted:** Not used. You can omit from Forecast by moving the Opportunity to a new quarter or marking it as Closed - Lost.
+
+Forecast categories should be re-evaluated on an ongoing basis. While it is not ideal for Opportunities to move to an earlier category, we should do so if this reflects reality, especially as quarter end approaches.  In addition, we should think about what we can do differently in future to make the forecast more accurate.
+
 
 ### Renewal pipeline
 When an opportunity with Annual Plan type is Closed Won, a Salesforce [flow](https://posthog.lightning.force.com/builder_platform_interaction/flowBuilder.app?flowId=301Hp0000019zhnIAA) will create an opportunity associated with the contact and account from the original opportunity. The following fields will also be set:

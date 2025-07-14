@@ -63,7 +63,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
@@ -87,6 +88,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
+    defaults: runtimeConfig.public.posthogDefaults,
   })
   
   return {

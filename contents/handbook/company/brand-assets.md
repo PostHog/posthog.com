@@ -4,7 +4,8 @@ sidebar: Handbook
 showTitle: true
 hideAnchor: false
 ---
-> Want to add the [PostHog badge](/docs/contribute/badge) to your website? (Did we mention free merch?)
+
+> **Want to use our hedgehogs for your community event or article?** We have [a huge library of them you can use](https://www.figma.com/design/I0VKEEjbkKUDSVzFus2Lpu/Hoggies?node-id=2226-55&t=1sj1GezTKuCfaybF-1). Can't see what you need? [Let us know](mailto:joe@posthog.com)! Please don't use AI art though. We're quite particular about our illustrations and AI just doesn't get it right.
 
 ## Logo
 
@@ -20,16 +21,17 @@ If you're looking for the PostHog logo, you came to the right place. Please keep
 | <div style="background:#EEEFE9;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-black.svg)</div>  | Dark logo | <a href="/brand/posthog-logo-black.svg" download>SVG</a> | <a href="/brand/posthog-logo-black.png" download>PNG</a> \| <a href="/brand/posthog-logo-black@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-black-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-black-padded@2x.png" download>PNG @2x</a> |
 | <div style="background:#111;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-white.svg)</div>  | Light logo    | <a href="/brand/posthog-logo-white.svg" download>SVG</a> | <a href="/brand/posthog-logo-white.png" download>PNG</a> \| <a href="/brand/posthog-logo-white@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-white-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-white-padded@2x.png" download>PNG @2x</a> |
 | <div style="background:#EEEFE9;display:inline-block;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logomark.svg)</div>    | Logomark      | <a href="/brand/posthog-logomark.svg" download>SVG</a> | <a href="/brand/posthog-logomark.png" download>PNG</a> \| <a href="/brand/posthog-logomark@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logomark-padded.png" download>PNG</a> \| <a href="/brand/posthog-logomark-padded@2x.png" download>PNG @2x</a> |
+| <div style="background:#EEEFE9;display:inline-block;padding:5px 5px 0;margin-left:-5px;">![](/brand/posthog-logo-stacked.svg)</div>    | Logo (stacked)      | <a href="/brand/posthog-logo-stacked.svg" download>SVG</a> | <a href="/brand/posthog-logo-stacked.png" download>PNG</a> \| <a href="/brand/posthog-logo-stacked@2x.png" download>PNG @2x</a> |  <a href="/brand/posthog-logo-stacked-padded.png" download>PNG</a> \| <a href="/brand/posthog-logo-stacked-padded@2x.png" download>PNG @2x</a> |
 
 </OverflowXSection>
 
 *PNGs with padding are useful when uploading the logo to a third-party service where there is limited control over padding/margin around the logo.
 
-When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's eye color to white when using on a dark background).
+When using the logo on a dark background, use the white-only version of the logo. _Never_ modify the colors in the logomark (like changing the hedgehog's face color to white when using on a dark background).
 
 The @2x version of PNGs are designed for [hi-dpi (or "Retina") screens](https://en.wikipedia.org/wiki/Retina_display). When using the logo in third party services that support uploading multiple versions (standard and hi-dpi), please be sure to include the @2x logo as it will appear crisper on newer devices, tablets and high resolution mobile devices.
 
-> **Important:** We updated our logo in 2021. Please be sure to use the _correct_ version. 👇🏼
+> **Important:** We updated our logo in 2021. (Note the square font and sharp edges on the logomark in the old version.) Please be sure to use the _correct_ version. 👇🏼
 
 ![Logo usage examples](/brand/logo-usage.png)
 
@@ -37,7 +39,9 @@ If you have any questions or need clarification about which version to use, ask 
 
 ## Typography
 
-We use Displaay's typeface called *Matter SQ*. (SQ = square dots)
+We use Displaay's typeface called *Matter SQ*. (SQ = square dots.)
+
+On the website, we use this for all text. In-product, we only use for titles and buttons.
 
 ### Building for web
 
@@ -88,6 +92,53 @@ We have a handful of licenses for desktop use of Matter. Contact Cory if you nee
 | p                                     | Regular  | 17px       |                | 175%        |
 | p (small)                             | Regular  | 15px       |                | 150%        |
 
+## Other fonts
+
+We use two other fonts for special purposes. Please adhere to their usage guidelines listed below.
+
+### Squeak
+
+<PrivateLink url="https://github.com/PostHog/company-internal/blob/master/Squeak_OTF.zip">Squeak</PrivateLink> is used in informal settings, generally accompanied by hedgehog artwork.
+
+#### Usage guidelines
+
+- When used for headlines or at larger sizes, use the `Bold` variant
+- Only for small (description) text, use the `Normal` variant in regular casing. Never use for more than a couple lines of text in a row.
+- Always use uppercase letters
+- Letter spacing: -2%
+- Line height: 100% (generally)
+
+#### Examples
+
+<ImageSlider>
+
+![Squeak font example](https://res.cloudinary.com/dmukukwp6/image/upload/squeak_example_37b83e4cde.jpg)
+
+![Squeak font example](https://res.cloudinary.com/dmukukwp6/image/upload/squeak_example_2_4323797eb0.png)
+
+![Squeak font example](https://res.cloudinary.com/dmukukwp6/image/upload/squeak_example_3_d367809597.png)
+
+</ImageSlider>
+
+### Loud Noises
+
+<PrivateLink url="https://github.com/PostHog/company-internal/blob/master/fonts/LOUD_NOISES.ttf">Loud Noises</PrivateLink> is used for quotes in hedgehog artwork.
+
+#### Usage guidelines
+
+- Only use for quotes in hedgehog artwork or where hedgehogs are otherwise communicating something
+- Only use uppercase
+
+#### Example
+
+Loud Noises is used in the sign the hedgehog is holding:
+
+![](https://res.cloudinary.com/dmukukwp6/image/upload/loud_noises_5919818659.png)
+
+---
+
+If you have questions about which font to use, please ask in <PrivateLink url="https://posthog.slack.com/archives/C01V9AT7DK4">#team-brand-and-vibes</PrivateLink> - don't just do what feels right to you!
+
 ## Colors
 
 We have two color schemes (light and dark mode), but primarily use light mode.
@@ -131,6 +182,6 @@ Here's how:
 2. Select the hog you want. If needed, adjust the size using the 'Frame' menu in the top of the right-hand sidebar. 
 3. At the bottom of the right-hand sidebar, select the file type you need in the 'Export' menu, choose `@2x`, then select 'Export [filename]' to download the image.
 
-If you can't find a suitable hog, you can [request one from the design team](/handbook/words-and-pictures/art-requests). 
+If you can't find a suitable hog, you can [request one from the design team](/handbook/brand/art-requests). 
 
 > Non-team members can find some of the most-used hogs to download on [our press page](/media).

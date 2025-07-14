@@ -4,7 +4,7 @@ title: Replay data retention
 
 Depending on how your app or website is built, recordings can take a lot of disk space. To manage this, we have the following retention policy options in place.
 
-> **Note:** Any individual recording you want to preserve can be downloaded by clicking "Export to file" in the more options menu in the bottom right of a recording. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
+> **Note:** Any individual recording you want to preserve can be downloaded as a JSON file by clicking "Export to JSON" in the more options menu in the top right of a recording. Downloaded recordings can then be imported back into PostHog for future playback, even if the original recording has expired.
 
 ## PostHog Cloud
 
@@ -19,6 +19,8 @@ Some recordings are stored for 1 year:
 * pinned to a playlist
 * shared publicly
 * added to a notebook
+
+>  🧠 **Heads up:** This isn't meant to be a storage hack! We limit storage to keep replay prices low for everyone. If it looks like someone's gaming the system (e.g. automating these actions to stockpile recordings), we might apply a fair-use limitation and block automation against these endpoints for their project.
 
 ### Exporting your recordings
 

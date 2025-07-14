@@ -296,7 +296,7 @@ This one is hard to benchmark as the variation between features and companies is
 
 ## Further reading 📖
 
-- [The most useful metrics for mobile apps](/blog/mobile-app-metrics-kpis)
+- [The most useful metrics for mobile apps](/product-engineers/mobile-app-metrics-kpis)
 - [An engineer’s guide to talking to users](/newsletter/talk-to-users)
 - [A software engineer's guide to A/B testing](/product-engineers/ab-testing-guide-for-engineers)
 

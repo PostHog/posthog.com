@@ -9,10 +9,10 @@ PostHog provides several hooks to make it easy to use feature flags in your Reac
 
 | Hook | Description |
 | --- | --- |
-| `useFeatureFlagEnabled` | Returns a boolean indicating whether the feature flag is enabled. |
-| `useFeatureFlagPayload` | Returns the payload of the feature flag. |
-| `useFeatureFlagVariantKey` | Returns the variant key of the feature flag. |
-| `useActiveFeatureFlags` | Returns an array of active feature flags. |
+| `useFeatureFlagEnabled` | Returns a boolean indicating whether the feature flag is enabled. This sends a `$feature_flag_called` event. |
+| `useFeatureFlagVariantKey` | Returns the variant key of the feature flag. This sends a `$feature_flag_called` event. |
+| `useActiveFeatureFlags` | Returns an array of active feature flags. This does *not* send a `$feature_flag_called` event. |
+| `useFeatureFlagPayload` | Returns the payload of the feature flag. This does *not* send a `$feature_flag_called` event. Always use this with `useFeatureFlagEnabled` or `useFeatureFlagVariantKey`. |
 
 #### Example 1: Using a boolean feature flag
 
@@ -21,6 +21,7 @@ import { useFeatureFlagEnabled } from 'posthog-js/react'
 
 function App() {
   const showWelcomeMessage = useFeatureFlagEnabled('flag-key')
+  const payload = useFeatureFlagPayload('flag-key')
 
   return (
     <div className="App">
@@ -82,22 +83,29 @@ export default App;
 
 #### Example 3: Using a flag payload
 
+<CalloutBox icon="IconWarning" title="Payload hook" type="fyi">
+
+The `useFeatureFlagPayload` hook does *not* send a [`$feature_flag_called`](https://posthog.com/docs/experiments/new-experimentation-engine#experiment-exposure) event, which is required for the experiment to be tracked. To ensure the exposure event is sent, you should **always** use the `useFeatureFlagPayload` hook with either the `useFeatureFlagEnabled` or `useFeatureFlagVariantKey` hook.
+
+</CalloutBox>
+
 ```react
 import { useFeatureFlagPayload } from 'posthog-js/react'
 
 function App() {
+  const variant = useFeatureFlagEnabled('show-welcome-message')
   const payload = useFeatureFlagPayload('show-welcome-message')
 
     return (
                 <>
                 {
-                    payload?.welcomeMessage ? (
+                    variant ? (
                         <div className="welcome-message">
                             <h2>{payload?.welcomeTitle}</h2>
-                            <p>{payload.welcomeMessage}</p>
+                            <p>{payload?.welcomeMessage}</p>
                         </div>
                     ) : <div>
-                        <h2>No welcome message</h2>
+                        <h2>No custom welcome message</h2>
                         <p>Because the feature flag evaluated to false.</p>
                     </div>
                 }
@@ -168,9 +176,10 @@ You can configure the `feature_flag_request_timeout_ms` parameter when initializ
 
 ```js
 posthog.init('<ph_project_api_key>', { 
-        api_host: '<ph_client_api_host>',
-        feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).
-    }
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>'
+  feature_flag_request_timeout_ms: 3000 // Time in milliseconds. Default is 3000 (3 seconds).
+}
 )
 ```
 

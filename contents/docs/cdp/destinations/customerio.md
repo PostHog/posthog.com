@@ -15,7 +15,7 @@ You'll also need access to the relevant Customer.io account.
 ## Installation
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=customerio) tab.
 3. Search for 'Customer.io' and click **+ Create**.
 4. Add your Customer.io site ID and API Key at the configuration step. Note that our integration requires Track API credentials.
 5. Press **Create & Enable** and watch your 'People' list get populated in Customer.io!

@@ -1,0 +1,104 @@
+---
+title: Send PostHog event data using webhooks
+templateId:
+    - template-webhook
+---
+
+import Requirements from "../_snippets/requirements.mdx"
+import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
+import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+With webhook destinations, you can send event data from PostHog to any HTTP endpoint, whether it's to your own backend, an internal system, or a third-party platform.
+
+<details>
+<summary>Want to send PostHog data to a particular platform like Slack?</summary>
+
+Browse all the **Destinations** listed in the sidenav to integrate with well-known platforms like [Slack](/docs/cdp/destinations/slack), [HubSpot](/docs/cdp/destinations/hubspot), or [Zapier](/docs/cdp/destinations/zapier).
+
+</details>
+
+<details>
+<summary>Want to bring your data into PostHog?</summary>
+
+Check out [Sources](/docs/cdp/sources) to learn how to connect your systems like CRM, payment processor, or database with PostHog data for all-in-one analytics.
+
+</details>
+
+
+<Requirements />
+
+## Setting up destination webhooks
+
+### 1. Create a new destination
+
+In PostHog, navigate to the [data pipelines](https://us.posthog.com/pipeline/overview) section in the sidebar. Click **+ New** > **Destination** in the top-right corner. Search for "Webhook" then click **+ Create**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/webhook_destination_cd495788fc.png"
+  alt="Create new destination"
+  classes="rounded"
+/>
+
+### 2. Configure the webhook
+
+On the configuration page, enter a **Webhook URL**. This is the HTTP endpoint that will receive the event data from PostHog. By default, PostHog sends a `POST` request with a templated JSON body.
+
+Click **Create & Enable**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/webhook_url_config_5900a5a9b7.png"
+  alt="Configure webhook"
+  classes="rounded"
+/>
+
+<CalloutBox type="fyi" title="Webhook services" icon="IconInfo">
+
+You can use services like [webhook.site](https://webhook.site/) or [ngrok](https://ngrok.com/) to create **Webhook URLs** for quick testing.
+
+</CalloutBox>
+
+### 3. Test the webhook
+
+Now that the webhook is enabled, let's see it in action. In the **Testing** section of the configuration page, click **Start testing** > **Test function** to send an example event. 
+
+You should see the webhook endpoint receive a `POST` request with event data.
+
+<ProductVideo
+    videoLight="https://res.cloudinary.com/dmukukwp6/video/upload/webhook_test_01101dbebd.mp4" 
+    classes="rounded"
+    alt="Test webhook"
+/>
+
+<CalloutBox type="fyi" title="Debugging" icon="IconInfo">
+
+Try enabling **Log responses** to help debug HTTP calls. 
+
+</CalloutBox>
+
+### 4. Customize the webhook (optional)
+
+You can further configure and customize webhook destinations by:
+
+- Adding filters, match rules, and trigger options in the **Filters** section
+- Customizing the [payload](/docs/cdp/destinations/customizing-destinations#customizing-payload)
+- Using [global variables](/docs/cdp/destinations/customizing-destinations#global-object)
+- Modifying the [source code](/docs/cdp/destinations/customizing-destinations#modifying-destinations-with-hog) in the **Edit source** section
+
+<HideOnCDPIndex>
+
+## Configuration
+
+<TemplateParameters />
+
+## FAQ
+
+### Is the source code for this destination available?
+
+PostHog is open-source and so are all the destination on the platform. The [source code](https://github.com/PostHog/posthog/blob/master/posthog/cdp/templates/webhook/template_webhook.py) is available on GitHub.
+
+<PostHogMaintained />
+
+<FeedbackQuestions />
+
+</HideOnCDPIndex>

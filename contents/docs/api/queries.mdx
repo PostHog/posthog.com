@@ -4,6 +4,9 @@ sidebarTitle: Overview
 sidebar: Docs
 showTitle: true
 ---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 API queries enable you to query your data in PostHog. This is useful for:
 
 - Building user or [customer-facing analytics](/tutorials/customer-facing-analytics). 
@@ -12,6 +15,7 @@ API queries enable you to query your data in PostHog. This is useful for:
 > **When should you _not_ use API queries?**
 > 1. When you want to export large amounts of data. Use [batch exports](/docs/cdp/batch-exports) instead.
 > 2. When you want to send data to destinations like Slack or webhooks immediately. Use [real-time destinations](/docs/cdp/destinations) instead.
+> 3. If you need data from long-running queries with high memory usage at regular intervals. In this case, you should use [materialized views](/docs/data-warehouse/views) with a schedule instead. You can [query these through SQL](#2-materialize-a-view-for-the-data-you-need) and get faster results.
 
 ## Prerequisites
 
@@ -27,7 +31,6 @@ To create a query, you make a `POST` request to the `/api/projects/:project_id/q
 For example, to create a query that gets events where the `$current_url` contains blog, you use `kind: HogQLQuery` and SQL like:
 
 <MultiLanguage>
-
 
 ```bash
 curl \
@@ -163,6 +166,230 @@ createQuery()
 
 Every query you run is logged in the `query_log` table along with details like duration, read bytes, read rows, and more.
 
+## Writing performant queries
+
+When writing custom queries, the burden of performance falls onto you. PostHog handles performance for queries we own (for example, in product analytics insights and experiments, etc.), but because performance depends on how queries are structured and written, we can't optimize them for you. Large data sets particularly require extra careful attention to performance. 
+
+Here is some advice for making sure your queries are quick and don't read over too much data (which can increase costs):
+
+### 1. Use shorter time ranges
+
+You should almost always include a time range in your queries, and the shorter the better. There are a variety of SQL features to help you do this including `now()`, `INTERVAL`, and `dateDiff`. See more about these in our [SQL docs](/docs/product-analytics/sql#date-and-time).
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "SELECT count() FROM events WHERE timestamp >= now() - INTERVAL 7 DAY"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": """
+          SELECT count()
+          FROM events
+          WHERE timestamp >= now() - INTERVAL 7 DAY
+          LIMIT 100
+        """
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": `
+        SELECT count()
+        FROM events
+        WHERE timestamp >= now() - INTERVAL 7 DAY
+        LIMIT 100
+      `
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+### 2. Materialize a view for the data you need
+
+The data warehouse enables you to [save and materialize views](/docs/data-warehouse/views#materializing-and-scheduling-a-view) of your data. This means that the view is precomputed, which can significantly improve query performance.
+
+To do this, write your query in the [SQL editor](https://us.posthog.com/sql), click **Materialize**, then **Save and materialize**, and give it a name without spaces (I chose `mat_event_count`). You can also schedule to update the view at a specific interval.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_28_2x_db1e37a5cf.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_06_19_at_16_12_44_2x_90bd8f28ca.png"
+  alt="Materialize view"
+  classes="rounded"
+/>
+
+Once done, you can query the view like any other table.
+
+<MultiLanguage>
+
+```bash
+curl \
+  -H 'Content-Type: application/json' \
+  -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+  <ph_app_host>/api/projects/:project_id/query/ \
+  -d '{
+        "query": {
+          "kind": "HogQLQuery",
+          "query": "SELECT * FROM mat_event_count"
+        }
+      }'
+```
+
+```python
+import requests
+import json
+
+url = "<ph_app_host>/api/projects/{project_id}/query/"
+headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer {POSTHOG_PERSONAL_API_KEY}'
+}
+payload = {
+    "query": {
+        "kind": "HogQLQuery",
+        "query": """
+          SELECT *
+          FROM mat_event_count
+        """
+    }
+}
+response = requests.post(url, headers=headers, data=json.dumps(payload))
+print(response.json())
+```
+
+```node
+import fetch from "node-fetch";
+
+async function createQuery() {
+  const url = "<ph_app_host>/api/projects/:project_id/query/";
+  const headers = {
+    "Content-Type": "application/json",
+    "Authorization": "Bearer {POSTHOG_PERSONAL_API_KEY}"
+  };
+
+  const payload = {
+    "query": {
+      "kind": "HogQLQuery",
+      "query": `
+        SELECT *
+        FROM mat_event_count
+      `
+    }
+  }
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  console.log(data);
+}
+
+createQuery()
+```
+
+</MultiLanguage>
+
+### 3. Don't scan the same table multiple times
+
+Reading a large table like `events` or `persons` more than once in the same query multiplies the work PostHog has to do (more I/O, more CPU, more memory). For example, this query is inefficient:
+
+```sql
+WITH us_events AS (
+    SELECT *
+    FROM events
+    WHERE properties.$geoip_country_code = 'US'
+),
+ca_events AS (
+    SELECT *
+    FROM events
+    WHERE properties.$geoip_country_code = 'CA'
+)
+SELECT *
+FROM us_events
+UNION ALL
+SELECT *
+FROM ca_events
+```
+
+Instead, pull the rows you need **once**, typically in a first CTE, and have every later step reference that CTE like this:
+
+```sql
+WITH base_events AS (              -- one read only
+    SELECT event, properties.$geoip_country_code as country
+    FROM events
+    WHERE properties.$geoip_country_code IN ('US', 'CA')
+),
+us_events AS (
+    SELECT event
+    FROM base_events
+    WHERE country = 'US'
+),
+ca_events AS (
+    SELECT event
+    FROM base_events
+    WHERE country = 'CA'
+)
+SELECT *
+FROM us_events
+UNION ALL
+SELECT *
+FROM ca_events
+```
+
+### 4. Other SQL optimizations
+
+Option 1 and 2 make the most difference, but other generic SQL optimizations work too. See our [SQL docs](/docs/product-analytics/sql) for commands, useful functions, and more to help you with this.
+
 ## Query parameters
 
 Top level request parameters include:
@@ -242,18 +469,23 @@ curl \
 
 ## Rate limits
 
-API queries on our free plans are limited to:
+API queries are limited at the project-level to:
 
-- 1 query running concurrently
-- 10,000 rows
-- 1TB read bytes during query processing
-
-
-Our ridiculously cheap plan lifts this to:
-
+- 1200 requests per hour
+- 120 requests per minute
 - 3 queries running concurrently
+- 80 threads per query
+- 10 seconds of max execution time
+  - applies to query execution time, not HTTP request duration
+
 
 If you need higher limits than these, [get in touch with our sales team](/talk-to-a-human). We promise they're friendly and technical enough to know what an API is.
+
+If the project's concurrency quota is exhausted, we put the query in queue and wait. The query may wait up to 30 seconds in a queue before executing, being canceled, or timing out.
+
+<CalloutBox type="fyi" icon="IconLightBulb" title="Legacy query limits">
+Some customers haven't been migrated to the above limit and are on an old limit of 120 queries/hour.
+</CalloutBox>
 
 ## Further reading
 

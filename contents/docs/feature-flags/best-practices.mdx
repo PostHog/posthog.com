@@ -11,7 +11,7 @@ To avoid this, deploy a reverse proxy, which enables you to make requests and se
 
 This means that requests are less likely to be intercepted by tracking blockers, and your feature flags are more likely to work as intended. You'll also capture more usage data.
 
-PostHog customers on the [Teams add-on](/pricing#addons) can use our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), but there are numerous methods to run your own. See our [reverse proxy docs](/docs/advanced/proxy/managed-reverse-proxy) for more.
+PostHog customers on one of our [platforms add-ons](/platform-addons) can use our [managed reverse proxy](/docs/advanced/proxy/managed-reverse-proxy), but there are numerous methods to run your own. See our [reverse proxy docs](/docs/advanced/proxy/managed-reverse-proxy) for more.
 
 ## 2. Call your flag in as few places as possible
 
@@ -71,3 +71,7 @@ Leaving flags in your code for too long can confuse future developers and create
 It's possible that a feature flag will return an [unexpected value](/docs/feature-flags/common-questions#my-feature-flag-called-events-show-none-empty-string-or-false-instead-of-my-variant-names). For example, if the flag is disabled or failed to load due to a network error. 
 
 In this case, its best to check that the feature flag returns a valid expected value before using it. If it isn't, fallback to working code.
+
+## 10. Reducing your bill
+
+We aim to be significantly cheaper than our competitors. To help you reduce your bill, we've created a [dedicated guide](/docs/feature-flags/cutting-costs) to estimating and reducing your feature flag costs.

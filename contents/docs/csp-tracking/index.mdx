@@ -1,0 +1,141 @@
+---
+title: CSP Tracking
+sidebar: Docs
+showTitle: true
+---
+
+You can add a Content Security Policy (CSP) to your website to prevent cross-site scripting (XSS) attacks.
+This is a security feature built into modern browsers that helps protect your users' data and privacy.
+
+You can send reports of CSP rule violations to PostHog, which is useful for
+* warning when your website is under certain kinds of attack
+* debugging problems when adding external scripts/media/etc to your site
+* being confident that changes to your site haven't broken the loading of any resources
+
+## Where do I start?
+
+### Create a new dashboard using the CSP template
+<ProductScreenshot
+    imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_19_at_22_43_16_55c2359415.png"
+    imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_19_at_22_42_53_f30b0d9662.png"
+    alt="CSP dashboard template"
+    classes="rounded"
+/>
+
+To get started, create a [new dashboard](https://app.posthog.com/dashboard?templateFilter=csp#newDashboard=modal) and choose the **CSP Violation Reports** template.
+
+Initially, it'll be a little empty, as you'll need to set up the CSP rules and reporting URL to start receiving reports.
+
+### If you already have a CSP set up
+If you already have a CSP set up, you need to update the following headers to start sending reports to PostHog:
+
+> **Note:** The `/report/` endpoint **requires** the trailing slash. Omitting it may cause reports to fail to send correctly.
+
+```http
+Content-Security-Policy: <your existing rules here>; report-uri <ph_client_api_host>/report/?token=<ph_project_api_key>; report-to posthog
+Reporting-Endpoints: posthog="<ph_client_api_host>/report/?token=<ph_project_api_key>"
+```
+
+### If you don't have a CSP set up
+If you don't have a CSP set up, you will need to add one. To start with, set up some very strict rules,
+but set it to report only, rather than actually block content. When you have receive some reports, you can add additional
+rules to allow the content you want to load.
+
+To make sure that your CSP rules don't block PostHog from functioning correctly, please read ours docs on [CSP directives needed](/docs/advanced/content-security-policy#content-security-policy-directives-needed).
+
+> **Note:** The `/report/` endpoint **requires** the trailing slash. Omitting it may cause reports to fail to send correctly.
+
+```http
+Content-Security-Policy-Report-Only: <your initial rules here>; report-uri <ph_client_api_host>/report/?token=<ph_project_api_key>; report-to posthog
+Reporting-Endpoints: posthog="<ph_client_api_host>/report/?token=<ph_project_api_key>"
+```
+
+#### How to add HTTP headers to your site
+
+The exact method for adding HTTP headers to your site will depend on your web server and hosting provider. Here are some common methods:
+
+<MultiLanguage>
+
+```javascript file=Express
+const express = require('express');
+const helmet  = require('helmet');
+const app = express();
+app.use(
+  helmet.contentSecurityPolicy({
+    reportOnly: true, // remove this to enforce the policy
+    directives: {
+      defaultSrc: ["'self'"],
+      reportUri : ['<ph_client_api_host>/report/?token=<ph_project_api_key>'],
+      reportTo  : ['posthog'],
+    },
+  })
+);
+app.use((req, res, next) => {
+  res.setHeader(
+    'Reporting-Endpoints',
+    'posthog="<ph_client_api_host>/report/?token=<ph_project_api_key>"'
+  );
+  next();
+});
+```
+
+```ruby file=Rails
+# config/initializers/content_security_policy.rb
+Rails.application.config.content_security_policy do |policy|
+  policy.default_src :self
+  policy.report_uri  "<ph_client_api_host>/report/?token=<ph_project_api_key>"
+
+  # The Rails DSL doesn't yet have a helper for `report-to`,
+  # but you can add any custom directive manually:
+  policy.directives['report-to'] = %w[posthog]
+end
+Rails.application.config.content_security_policy_report_only = true  # remove this to enforce the policy
+
+# config/application.rb
+module YourApp
+  class Application < Rails::Application
+    config.action_dispatch.default_headers.merge!(
+      'Reporting-Endpoints' => 'posthog="<ph_client_api_host>/report/?token=<ph_project_api_key>"'
+    )
+  end
+end
+```
+</MultiLanguage>
+
+## Advanced features
+
+You can enable some advanced features by adding additional parameters to the report URL. These can be combined.
+
+### Sampling
+Sampling is **highly recommended** because each pageview can generate multiple CSP violation reports, which may quickly add up and overwhelm your reporting or dashboard. By sampling, you can reduce the number of reports sent to PostHog while still getting a representative view of violations.
+
+You can add the `sample_rate` property to the URL to specify the percentage of reports to send. For example, to send 5% of reports, you can use the following URL:
+
+The default value is 1, meaning no sampling.
+
+```http
+<ph_client_api_host>/report/?token=<ph_project_api_key>&sample_rate=0.05
+```
+
+#### How sampling works
+PostHog uses a deterministic stateless hashing-based mechanism for CSP report sampling:
+
+1. **Sampling key generation**: For each report, PostHog creates a sampling key by combining the reported URL (e.g: `report-uri` or `documentURL` depending on the report format) with the current timestamp truncated to the minute.
+2. **Hash-based decision**: This key is hashed and the result is compared against the `sample_rate` threshold to determine whether the report should be accepted or dropped.
+
+Because the sampling key includes the timestamp, the same URL that might be dropped in one minute could be accepted in the next minute, ensuring no URL is permanently excluded.
+
+### Versioning
+You can add the `v` param to your report URL to specify the version of your CSP rules. This is useful if you want to track the effect of changes to your CSP rules over time.
+
+```http
+<ph_client_api_host>/report/?token=<ph_project_api_key>&v=1
+```
+
+
+### Distinct ID and Session ID
+If your framework allows for setting the header dynamically per-request, you can add the `distinct_id` and `session_id` params to your report URL, to associate the report with a specific user and session.
+
+```http
+<ph_client_api_host>/report/?token=<ph_project_api_key>&distinct_id=REPLACE_THIS&session_id=REPLACE_THIS
+```

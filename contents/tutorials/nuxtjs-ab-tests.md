@@ -57,7 +57,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
@@ -72,7 +73,8 @@ import posthog from 'posthog-js'
 export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-    api_host: runtimeConfig.public.posthogHost || '<ph_client_api_host>',
+    api_host: runtimeConfig.public.posthogHost,
+    defaults: runtimeConfig.public.defaults,
   })
 
   // Make sure that pageviews are captured with each route change
@@ -211,7 +213,7 @@ Notice that when you refresh the page, the button text flickers between `No vari
 
 Server-side rendering is a way to avoid this. This fetches the feature flag before the page loads on the client.
 
-To set this up, we must install and use [PostHog’s Node library](/libraries/node) (because we are making server-side requests).
+To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
 npm install posthog-node

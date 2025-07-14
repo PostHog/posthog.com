@@ -645,6 +645,7 @@ function Privacy() {
                             <li>AWS - cloud data hosting</li>
                             <li>BuildBetter - product success platform </li>
                             <li>Clearbit - marketing data engine</li>
+                            <li>Clay - marketing data engine</li>
                             <li>Cloudflare - cloud data hosting</li>
                             <li>Customer.io - email campaign service provider</li>
                             <li>Digital Ocean - website user data for community profiles</li>
@@ -654,7 +655,6 @@ function Privacy() {
                             <li>Heroku - cloud data hosting</li>
                             <li>OpenPhone - SMS campaigns</li>
                             <li>Salesforce - CRM database</li>
-                            <li>Sentry - application monitoring and error tracking</li>
                             <li>Slack - internal communications tool</li>
                             <li>Vitally - CRM database</li>
                             <li>Zendesk - customer support tool</li>
@@ -741,31 +741,33 @@ function Privacy() {
                         </p>
                         <p>
                             Posthog complies with the EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the UK Extension
-                            to the EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF") as set
-                            forth by the U.S. Department of Commerce. Posthog has certified to the U.S. Department of
-                            Commerce that it adheres to the EU-U.S. DPF Principles with regard to the processing of
-                            personal data received from the European Union in reliance on the EU-U.S. DPF and from the
+                            to the EU-U.S. Data Privacy Framework ("UK Extension to the EU-U.S. DPF"), and the
+                            Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF") as set forth by the U.S. Department of
+                            Commerce. Posthog has certified to the U.S. Department of Commerce that it adheres to the
+                            EU-U.S. DPF Principles with regard to the processing of personal data received from the
+                            European Union in reliance on the EU-U.S. DPF and that it adheres to the UK Extension to the
+                            EU-U.S. DPF Principles with regard to the processing of personal data received from the
                             United Kingdom (and Gibraltar) in reliance on the UK Extension to the EU-U.S. DPF. Posthog
                             has certified to the U.S. Department of Commerce that it adheres to the Swiss-U.S. DPF
                             Principles with regard to the processing of personal data received from Switzerland in
                             reliance on the Swiss-U.S. DPF. If there is any conflict between the terms in this privacy
-                            policy and the EU-U.S. DPF Principles and/or the Swiss-U.S. DPF Principles (together, the
-                            "DPF Principles"), the DPF Principles shall govern. To learn more about the Data Privacy
-                            Framework ("DPF") program, and to view our certification, please visit&nbsp;
+                            policy and the EU-U.S. DPF Principles, the UK Extension to the EU-U.S. DPF Principles,
+                            and/or the Swiss-U.S. DPF Principles (together, the "DPF Principles"), the DPF Principles
+                            shall govern. To learn more about the Data Privacy Framework ("DPF") program, and to view
+                            our certification, please visit&nbsp;
                             <Link href="https://www.dataprivacyframework.gov/" externalNoIcon>
                                 <u>https://www.dataprivacyframework.gov/</u>
                             </Link>
                             .
                         </p>
                         <p>
-                            In compliance with the EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the UK Extension
-                            to the EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF"). 
-                            DPF, PostHog Inc commits to cooperate and comply with the advice of the panel
-                            established by the EU data protection authorities (DPAs) and the UK Information
-                            Commissioner’s Office (ICO) and the Swiss Federal Data Protection and Information
-                            Commissioner (FDPIC) with regard to unresolved complaints concerning our handling of human
-                            resources data received in reliance on the EU-U.S. DPF and the UK Extension to the EU-U.S.
-                            DPF and the Swiss-U.S. DPF in the context of the employment relationship
+                            In compliance with the EU-U.S. DPF, the UK Extension to the EU-U.S. DPF, and the Swiss-U.S.
+                            DPF. PostHog Inc commits to cooperate and comply with the advice of the panel established by
+                            the EU data protection authorities (DPAs), the UK Information Commissioner’s Office (ICO),
+                            and the Swiss Federal Data Protection and Information Commissioner (FDPIC) with regard to
+                            unresolved complaints concerning our handling of human resources data received in reliance
+                            on the EU-U.S. DPF, the UK Extension to the EU-U.S. DPF, and the Swiss-U.S. DPF in the
+                            context of the employment relationship.
                         </p>
                         <p>
                             For the actions of third party agents PostHog engages to process data on our behalf, PostHog
@@ -779,7 +781,7 @@ function Privacy() {
                             PostHog might have to share your information outside of the country you are in. PostHog is
                             part of the{' '}
                             <Link href="https://www.dataprivacyframework.gov/" externalNoIcon>
-                                EU-US Data Privacy Framework
+                                Data Privacy Framework
                             </Link>
                             , so we rely on various mechanisms that this provides to do so.
                         </p>
@@ -814,8 +816,7 @@ function Privacy() {
                                 </u>
                             </Link>
                             . The Federal Trade Commission has investigation and enforcement authority over PostHog’s
-                            compliance with EU-U.S. Data Privacy Framework ("EU-U.S. DPF"), the UK Extension
-                            to the EU-U.S. DPF, and the Swiss-U.S. Data Privacy Framework ("Swiss-U.S. DPF")
+                            compliance with EU-U.S. DPF, the UK Extension to the EU-U.S. DPF, and the Swiss-U.S. DPF.
                         </p>
                     </div>
                     <div>

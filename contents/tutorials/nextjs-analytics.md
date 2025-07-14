@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Next.js analytics, feature flags, and more'
-date: 2023-02-20
+date: 2025-05-22
 author:
   - ian-vanagas
 showTitle: true
@@ -45,7 +45,7 @@ npm run dev
 
 At your [localhost](http://localhost:3000/), you should see a basic webpage like this:
 
-![Next](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/next.png)
+![Next](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_13_30_02_2x_241dc87f1a.png)
 
 ## Adding blog functionality to our Next.js app
 
@@ -272,7 +272,7 @@ Once this is working, we have all the functionality we want in our Next.js app a
 
 ## Adding PostHog
 
-At this point, you need a PostHog instance ([signup for free](https://app.posthog.com/signup)). Once created, get your PostHog API key which is found in the getting started flow or your project settings and add it to your `.env.local` file and Next.js environment variables.
+At this point, you need a PostHog instance ([signup for free](https://app.posthog.com/signup)). Once created, get your PostHog API key which is found in [your project settings](https://us.posthog.com/settings/project) and add it to your `.env.local` file and Next.js environment variables.
 
 ```shell file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
@@ -285,7 +285,7 @@ Next, install [posthog-js](https://github.com/posthog/posthog-js):
 npm install --save posthog-js
 ```
 
-Now we will set up the `PostHogProvider` for our app. This enables you to access PostHog and its methods from anywhere in your app.
+Now we will set up the `PostHogProvider` for our app. This initializes PostHog and enables you to access it from anywhere in your app.
 
 ```js
 // pages/_app.js
@@ -301,6 +301,7 @@ export default function App(
   useEffect(() => {
     posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
       // Enable debug mode in development
       loaded: (posthog) => {
         if (process.env.NODE_ENV === 'development') posthog.debug()
@@ -322,44 +323,14 @@ export default function App(
 
 Once saved, go back to your app and click around, you should see events start to populate in your PostHog instance.
 
-![Events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-analytics/events.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_13_41_03_2x_3ef611b29d.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_13_41_17_2x_ab94c59413.png"
+  alt="Events in PostHog"
+  classes="rounded"
+/>
 
-The library autocaptures clicks, inputs, session recordings (if enabled), pageviews (for single pages, we'll fix this next) and more. It also provides access to the all the features of [`posthog-js`](/docs/integrate/client/js) which we will set up during the rest of this tutorial.
-
-## Capturing pageviews in Next.js
-
-When testing PostHog, you might notice pageview events aren’t captured when you move between pages. This is because Next.js acts as a [single-page app](/tutorials/single-page-app-pageviews). The app does not reload when moving between pageviews which does not trigger PostHog to capture a pageview.
-
-To solve this, we can capture a custom event when the route changes using `next/router` in `_app.js` with `useEffect`. It looks like this:
-
-```js
-// pages/_app.js
-import { SessionProvider } from "next-auth/react"
-import { Router } from "next/router"
-import { useEffect } from "react"
-import posthog from "posthog-js"
-import { PostHogProvider } from "posthog-js/react"
-
-export default function App(
-  { Component, pageProps: { session, ...pageProps } }
-) {
-  useEffect(() => {
-    posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-      // ... rest of the init code
-    })
-    // Track page views
-    const handleRouteChange = () => posthog?.capture('$pageview')
-    Router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      Router.events.off('routeChangeComplete', handleRouteChange);
-    }
-  }, [])
-//... the rest of the code you wrote earlier
-```
-
-Once you set this up, navigating between pages captures pageviews for each. The routes show up in the `URL/Screen` column in PostHog as well.
-
-> **Note**: When in React strict mode, `useEffect` runs twice. Once to mount and again to remount. This means pageviews trigger twice. When you deploy and run an app in production, this doesn’t happen. To turn off strict mode in development, go to `next.config.js` and set `reactStrictMode` to `false`. Find more details about strict mode in [the React documentation](https://beta.reactjs.org/learn/synchronizing-with-effects#sending-analytics).
+The library autocaptures clicks, inputs, session recordings (if enabled), pageviews, and more. It also provides access to the all the features of [`posthog-js`](/docs/integrate/client/js) which we will set up during the rest of this tutorial.
 
 ## Capturing custom events
 
@@ -644,7 +615,7 @@ export async function getServerSideProps(ctx) {
 
 Now, when you go to reload your post page (while signed in), the CTA loads right away.
 
-You now have a basic Next.js app with user authentication and many of the features of PostHog set up. You’re ready to customize your app or add more of PostHog’s features like [group analytics](/manual/group-analytics) or [experiments](/manual/experimentation). 
+You now have a basic Next.js app with user authentication and many of the features of PostHog set up. You’re ready to customize your app or add more of PostHog’s features like [group analytics](/docs/product-analytics/group-analytics) or [experiments](/docs/experiments).
 
 ## Further reading
 

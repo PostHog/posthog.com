@@ -14,7 +14,7 @@ export const SettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/S
 PostHog enables you to link your most important data from sources like your CRM, payment processor, or database. Once linked, you can combine this data with the product analytics data already in PostHog and query across all of it.
 
 To link a source, go to the Integrations tab, and click the **Sources** tab. On that page, you have an option to create a managed source such as:
- 
+
 - [Stripe](/docs/cdp/sources/stripe)
 - [Hubspot](/docs/cdp/sources/hubspot)
 - [Zendesk](/docs/cdp/sources/zendesk)
@@ -24,9 +24,14 @@ To link a source, go to the Integrations tab, and click the **Sources** tab. On 
 - [Snowflake](/docs/cdp/sources/snowflake)
 - [Vitally](/docs/cdp/sources/vitally)
 - [Chargebee](/docs/cdp/sources/chargebee)
+- [MongoDB](/docs/cdp/sources/mongodb)
 - [BigQuery](/docs/cdp/sources/bigquery)
+- [Google Ads](/docs/cdp/sources/google-ads)
+- [Google Sheets](/docs/cdp/sources/google-sheets)
+- [DoIt](/docs/cdp/sources/doit)
+- [Temporal.io](/docs/cdp/sources/temporal)
 
-The other option is a self-managed source, which include: 
+The other option is a self-managed source, which include:
 
 - [S3](/docs/cdp/sources/s3)
 - [R2](/docs/cdp/sources/r2)
@@ -50,9 +55,9 @@ The data warehouse can link to data in your object storage system. To do this, y
 
 See an example in our [S3 setup docs](/docs/cdp/sources/s3).
 
-## Incremental vs full table
+## Incremental vs append only vs full table
 
-On some sources and tables, you can choose the sync method. The options are incremental replication or full table replication. 
+On some sources and tables, you can choose the sync method. The options are incremental replication or full table replication.
 
 ### Incremental
 
@@ -66,6 +71,14 @@ When choosing incremental replication, you must select a field to identify new a
 - `numeric` (for Snowflake)
 
 The one downside to incremental syncing is that deletions of data won't be synced to your PostHog data warehouse. You need to use full table refreshes for this.
+
+### Append only
+
+Append only does what it says on the tin: append rows to your table. 
+
+We use a cursor in the form of an incremental field (similar to incremental syncing above) to query the source for new data. This replication method won't merge any rows, but this can cause duplicate data if you're using an incremental field that can change. To avoid this, we recommend using a timestamp field like `created_at`.
+
+Append only is ideal for tables where rows are never updated, only added. A common example is an event log table, where each new event is recorded as a new row and existing records remain unchanged.
 
 ### Full table
 
@@ -83,8 +96,8 @@ When you expand each source, you can see:
 - Time the table was last synced
 
 <ProductScreenshot
-    imageLight={SettingsLight} 
-    imageDark={SettingsDark} 
-    alt="Source settings in PostHog" 
+    imageLight={SettingsLight}
+    imageDark={SettingsDark}
+    alt="Source settings in PostHog"
     classes="rounded"
   />

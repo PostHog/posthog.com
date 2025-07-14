@@ -1,55 +1,60 @@
 ---
-title: Product analytics for browser extensions
+title: Using PostHog for browser extensions
 sidebar: Docs
 showTitle: true
 ---
 
-Do you have a Firefox or Chrome browser plugin with a user interface and want to understand how it's being used? PostHog is the perfect way to do just that.
+Do you have a Firefox or Chrome browser extension with a user interface and want to understand how it's being used? PostHog is the perfect way to do just that.
 
-## Setup for Firefox & Chrome plugins
+## Setup for Firefox & Chrome extension
 
-### Installing PostHog inside your plugin
-
-Open the HTML file used in your `default_popup` and add the PostHog `array.js` script. To do this you'll need to either:
-1. Copy the latest version of `array.js` from [PostHog's static assets](https://us-assets.i.posthog.com/static/array.js) and import it locally using `<script src="array.js" />` before the `</head>` tag
-2. If you're packaging your plugin automatically use the [npm module for posthog.js](https://www.npmjs.com/package/posthog-js)
-
-All you need to do now is initialize PostHog, add the following code to a new js file and import it into your `default_popup` html file to initiate PostHog.
-
-```js-web
-posthog.init('your_project_token',{api_host:'<ph_client_api_host>',persistence:'localStorage'})
+Start by installing the PostHog [JavaScript web SDK](/docs/libraries/js).
+```shell
+npm install --save posthog-js
 ```
 
-* `your_project_token` - This is the ``Project API key`` which can be found on PostHog under [Project Settings](https://app.posthog.com/project/settings)
-* `api_host` - This is the URL to your PostHog instance (if you're not using PostHog Cloud)
-* `persistence` - This indicates we should store user data in localStorage rather than cookies - there are issues with cookie persistence on Firefox plugins
+Browser extensions prohibit remote code loading. Import directly from the `posthog-js/dist/array.no-external.js` bundle and set `disable_external_dependency_loading: true` to avoid remote code loading.
 
-### Tracking events
+```js
+import 'posthog-js/dist/array.no-external.js'
 
-One of the best things about using PostHog is, all the interactions like clicks will automatically generate events in PostHog, so you don't need to do anything else to start analyzing.
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    persistence: 'localStorage',
+    disable_external_dependency_loading: true
+});
+```
 
-If you'd like to instrument your own custom events, all you need to do is:
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-```js-web
+<CalloutBox icon="IconInfo" title="Bundling">
+
+Browser extensions can block your imports. If your extension throws errors when trying to import PostHog, use a bundler like [Rollup](https://rollupjs.org/) to bundle your JavaScript, and import it in a single `<script type="module" src="dist/bundle.js"/>` tag.
+
+</CalloutBox>
+
+## Using product analytics
+
+If you have [autocapture enabled](/docs/product-analytics/autocapture), PostHog will automatically track when the extension interface is opened, closed, or clicked.
+
+If you'd like to instrument your own custom events, use the `posthog.capture()` function:
+
+```js
 posthog.capture('custom_event_name', {})
 ```
 
-[See our browser JS library guide for](/docs/integrate/client/js) more details
+See our [JavaScript web SDK docs](/docs/integrate/client/js) for more details.
 
-### Session replay
+## Using other PostHog products
 
-Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/improve-security) in Manifest v3 about unsafe-eval and remote code execution, importing only `array.js` isn't enough since the `array.js` code will try to load the recorder from the PostHog CDN. This will be blocked by the browser.
+Due to the new [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/improve-security) in Manifest v3 about unsafe-eval and remote code execution, you need to import bundles directly to use other PostHog products.
 
-To fix this instead of importing the `array.js`, you can import the `array.full.js`, follow the install step 1. but instead of using the former use the latter from PostHog's [full static assets](https://us-assets.i.posthog.com/static/array.full.js), also remember to change the `script src` to `array.full.js` or follow the install step 2. and install the [npm module for posthog.js](https://www.npmjs.com/package/posthog-js).
-
-Import the recorder to avoid the remote code execution if using the script from the step 1.
+To use [session replay](/docs/session-replay), [surveys](/docs/surveys), [error tracking](/docs/error-tracking), and [web analytics](/docs/web-analytics), import their bundles directly:
 
 ```js
-import "posthog-js/dist/recorder.js"
-```
-
-Import the recorder to avoid the remote code execution if using the npm module from step 2.
-
-```js
-import rrwebRecord from "posthog-js/dist/recorder"
+import "posthog-js/dist/posthog-recorder" // For session replay
+import "posthog-js/dist/surveys" // For surveys
+import "posthog-js/dist/exception-autocapture" // For error tracking
+import "posthog-js/dist/tracing-headers" // Tracking across client and server
+import "posthog-js/dist/web-vitals" // Tracking web vitals
 ```

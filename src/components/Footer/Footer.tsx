@@ -1,10 +1,10 @@
 import cntl from 'cntl'
-import Accordion from 'components/Accordion'
 import Link from 'components/Link'
 import Logo from 'components/Logo'
 import React from 'react'
 import { IProps, LinkListItem } from './LinkList'
-import { GitHub, LinkedIn, YouTube, SlackMonochrome, Twitter } from 'components/Icons/Icons'
+import { GitHub, LinkedIn, YouTube, Twitter } from 'components/Icons/Icons'
+import { useLocation } from '@reach/router'
 
 const linklist: IProps[] = [
     {
@@ -14,6 +14,10 @@ const linklist: IProps[] = [
             {
                 title: 'All products',
                 url: '/products',
+            },
+            {
+                title: 'Max AI',
+                url: '/max',
             },
             {
                 title: 'Product analytics',
@@ -244,8 +248,8 @@ const linklist: IProps[] = [
                 url: '/handbook/engineering/developing-locally',
             },
             {
-                title: 'Design',
-                url: '/handbook/design/philosophy',
+                title: 'Brand',
+                url: '/handbook/brand/philosophy',
             },
             {
                 title: 'Marketing',
@@ -354,6 +358,11 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 }
 
 export function Footer(): JSX.Element {
+    const { pathname, state } = useLocation()
+    if (pathname === '/newsletter-fbc' || (state as { isComingFromAd?: boolean })?.isComingFromAd) {
+        return <></>
+    }
+
     const social: Social[] = [
         {
             Icon: <Twitter className="w-5 h-5 box-border fill-current" />,
@@ -449,7 +458,7 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
-                                to="/handbook/company/security#soc-2"
+                                to="/docs/privacy/soc2"
                                 className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
                             >
                                 SOC 2

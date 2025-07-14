@@ -3,8 +3,13 @@ title: Cutting product analytics costs
 sidebar: Docs
 showTitle: true
 ---
+import PostHogBillableUsageTemplate from "../_snippets/posthog-billable-usage-template.mdx"
 
-We aim to be significantly cheaper than our competitors. In addition to our [ridiculously cheap pricing](/pricing), below are tips to reduce your product analytics costs:
+We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your product analytics costs:
+
+## Creating a billable usage dashboard
+
+<PostHogBillableUsageTemplate />
 
 ## Use anonymous events
 
@@ -39,13 +44,12 @@ PostHog automatically captures pageviews and pageleaves. This is great for analy
 To disable automatically capturing these events, set `capture_pageview` and `capture_pageleave` to `false` in the configuration options when initializing PostHog:
 
 ```js
-  posthog.init('<ph_project_api_key>',
-    {
-      api_host: '<ph_client_api_host>',
-      capture_pageview: false,
-      capture_pageleave: false,
-    }
-  )
+  posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    capture_pageview: false,
+    capture_pageleave: false,
+  })
 ```
 
 To manually capture these events, call `posthog.capture('$pageview')` and `posthog.capture('$pageleave')`.

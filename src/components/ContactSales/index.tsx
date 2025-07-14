@@ -10,6 +10,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import SalesforceForm from 'components/SalesforceForm'
 import TeamMember from 'components/TeamMember'
+import { Script } from 'gatsby'
 
 const features = [
     'Volume discounts',
@@ -60,6 +61,12 @@ export default function ContactSales({ location }) {
 
     return (
         <Layout>
+            <Script
+                id="default-form-script"
+                dangerouslySetInnerHTML={{
+                    __html: `!function(t,e){const o=509041,n=482;let a=0,i=!1;t.__default__={form_id:o,team_id:n,listenToIds:["contact-sales"]},function t(){const r=e.createElement("script");r.async=!0,r.src="https://import-cdn.default.com/v2/index.js",r.onload=()=>{i=!0,console.info("[Default.com] Powered by Default.com")},r.onerror=()=>{!function(t,e){try{fetch("https://nucleus.default.com/import/error",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({errorMessage:t,payload:{attempt:e,form_id:o,team_id:n,location:window.location.href,userAgent:navigator.userAgent,timestamp:Date.now()}})})}catch(t){}}("Script failed to load",a),++a<=3&&setTimeout(t,1e3*a)},e.head.appendChild(r)}()}(window,document);`,
+                }}
+            />
             <SEO
                 title="Talk to a human - PostHog"
                 description="PostHog is self-serve, but you can talk to a real person if you need to!"
@@ -128,7 +135,7 @@ export default function ContactSales({ location }) {
                             })}
                         </ul>
                     </div>
-                    <div className="">
+                    <div className="" data-default-form-id="509041">
                         <h3 className="mb-3">Contact us</h3>
                         <SalesforceForm
                             type="lead"

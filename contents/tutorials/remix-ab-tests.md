@@ -66,6 +66,7 @@ function PosthogInit() {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
     });
   }, []);
 
@@ -185,7 +186,7 @@ Notice that when you refresh the page, the button text flickers between `No vari
 
 Server-side rendering is a way to avoid this. This fetches the feature flag before the page loads on the client.
 
-To set this up, we must install and use [PostHog’s Node library](/libraries/node) (because we are making server-side requests).
+To set this up, we must install and use [PostHog’s Node library](/docs/libraries/node) (because we are making server-side requests).
 
 ```bash
 npm install posthog-node

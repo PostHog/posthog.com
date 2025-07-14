@@ -6,23 +6,19 @@ import Snippet from "./install-js-snippet.mdx"
 
 ### Option 2: Install via package manager
 
-<MultiLanguage>
+import InstallWebPackageManagers from "./install-web-package-managers.mdx"
 
-```bash file=Yarn
-yarn add posthog-js
-```
-
-```bash file=NPM
-npm install --save posthog-js
-```
-
-</MultiLanguage>
+<InstallWebPackageManagers />
 
 And then include it with your project API key and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
 
 ```js-web
 import posthog from 'posthog-js'
-posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>' })
+
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>'
+})
 ```
 
 See our framework specific docs for [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [Vue](/docs/libraries/vue-js), [Angular](/docs/libraries/angular), [Astro](/docs/libraries/astro), [Remix](/docs/libraries/remix), and [Svelte](/docs/libraries/svelte) for more installation details.
@@ -61,7 +57,7 @@ import "posthog-js/dist/web-vitals"
 import posthog from 'posthog-js/dist/module.no-external'
 
 // All other posthog commands are the same as usual
-posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>' })
+posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 ```
 
 **Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `posthog-js/react` does not work with any module import other than the default.
@@ -75,8 +71,14 @@ If you don't want to send test data while you're developing, you can do the foll
 
 ```js-web
 if (!window.location.host.includes('127.0.0.1') && !window.location.host.includes('localhost')) {
-    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>' })
+    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
 }
 ```
+
+</details>
+<details>
+<summary>What is the `defaults` option?</summary>
+
+The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
 
 </details>

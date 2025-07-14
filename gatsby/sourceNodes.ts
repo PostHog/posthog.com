@@ -387,165 +387,202 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
             createNode(node)
         })
 
-        const collection = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
-            },
-            body: JSON.stringify({
-                query: ` {
-            collectionByHandle(handle: "frontpage") {
-              handle
-              products(first: 250) {
-                nodes {
-                  description
-                  descriptionHtml
-                  featuredMedia {
-                    preview {
-                      image {
-                        width
-                        height
-                        originalSrc
-                      }
-                    }
-                  }
+        const getCollectionByHandle = async (handle: string) => {
+            const collection = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
+                },
+                body: JSON.stringify({
+                    query: ` {
+                collectionByHandle(handle: "${handle}") {
                   handle
-                  id
-                  media(first: 250) {
+                  products(first: 250) {
                     nodes {
-                      mediaContentType
-                      preview {
-                        image {
-                          width
-                          height
-                          originalSrc
+                      description
+                      descriptionHtml
+                      featuredMedia {
+                        preview {
+                          image {
+                            width
+                            height
+                            originalSrc
+                          }
                         }
                       }
-                    }
-                  }
-                  metafields(first: 250) {
-                    nodes {
-                      value
-                      key
-                    }
-                  }
-                  options {
-                    shopifyId: id
-                    name
-                    values
-                  }
-                  priceRangeV2 {
-                    maxVariantPrice {
-                      amount
-                    }
-                    minVariantPrice {
-                      amount
-                    }
-                  }
-                  shopifyId: id
-                  status
-                  title
-                  tags
-                  totalInventory
-                }
-              }
-            }
-          } 
-              `,
-            }),
-        }).then((res) => res.json())
-        const variants = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
-            },
-            body: JSON.stringify({
-                query: ` {
-            productVariants(first: 250) {
-                nodes {
-                availableForSale
-                media(first: 250) {
-                    nodes {
-                    preview {
-                        image {
-                        width
-                        height
-                        originalSrc
+                      handle
+                      id
+                      media(first: 250) {
+                        nodes {
+                          mediaContentType
+                          preview {
+                            image {
+                              width
+                              height
+                              originalSrc
+                            }
+                          }
                         }
-                    }
-                    }
-                }
-                price
-                product {
-                    shopifyId: id
-                    title
-                    featuredMedia {
-                    preview {
-                        image {
-                        width
-                        height
-                        originalSrc
+                      }
+                      metafields(first: 250) {
+                        nodes {
+                          value
+                          key
                         }
+                      }
+                      options {
+                        shopifyId: id
+                        name
+                        values
+                      }
+                      priceRangeV2 {
+                        maxVariantPrice {
+                          amount
+                        }
+                        minVariantPrice {
+                          amount
+                        }
+                      }
+                      shopifyId: id
+                      status
+                      title
+                      tags
+                      totalInventory
                     }
-                    }
+                  }
                 }
-                selectedOptions {
-                    name
-                    value
-                }
-                shopifyId: id
-                sku
-                title
-                }
-            }
-          } 
-              `,
-            }),
-        }).then((res) => res.json())
-        const moveNodesToParent = (obj) => {
-            if (Array.isArray(obj)) {
-                return obj.map(moveNodesToParent)
-            } else if (obj && typeof obj === 'object') {
-                if (obj.nodes) {
-                    return moveNodesToParent(obj.nodes)
-                }
-                return Object.fromEntries(Object.entries(obj).map(([key, value]) => [key, moveNodesToParent(value)]))
-            }
-            return obj
+              } 
+                  `,
+                }),
+            }).then((res) => res.json())
+            return collection
         }
 
-        const products = moveNodesToParent(collection.data.collectionByHandle.products.nodes).filter(
-            (product) => product.status === 'ACTIVE'
-        )
-        products.forEach((product) => {
-            product.variants = moveNodesToParent(
-                variants.data.productVariants.nodes.filter((variant) => variant.product.shopifyId === product.shopifyId)
+        const getAllVariants = async () => {
+            let allVariants = []
+            let hasNextPage = true
+            let cursor = null
+
+            while (hasNextPage) {
+                const response = await fetch(`https://${shopifyURL}/admin/api/${shopifyAdminAPIVersion}/graphql.json`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Shopify-Access-Token': shopifyAdminAPIAPIPassword!,
+                    },
+                    body: JSON.stringify({
+                        query: `{
+                            productVariants(first: 250${cursor ? `, after: "${cursor}"` : ''}) {
+                                pageInfo {
+                                    hasNextPage
+                                    endCursor
+                                }
+                                nodes {
+                                    inventoryPolicy
+                                    availableForSale
+                                    media(first: 250) {
+                                        nodes {
+                                            preview {
+                                                image {
+                                                    width
+                                                    height
+                                                    originalSrc
+                                                }
+                                            }
+                                        }
+                                    }
+                                    price
+                                    product {
+                                        shopifyId: id
+                                        title
+                                        featuredMedia {
+                                            preview {
+                                                image {
+                                                    width
+                                                    height
+                                                    originalSrc
+                                                }
+                                            }
+                                        }
+                                    }
+                                    selectedOptions {
+                                        name
+                                        value
+                                    }
+                                    shopifyId: id
+                                    sku
+                                    title
+                                }
+                            }
+                        }`,
+                    }),
+                }).then((res) => res.json())
+
+                const { nodes, pageInfo } = response.data.productVariants
+                allVariants = [...allVariants, ...nodes]
+                hasNextPage = pageInfo.hasNextPage
+                cursor = pageInfo.endCursor
+            }
+
+            return { data: { productVariants: { nodes: allVariants } } }
+        }
+
+        const variants = await getAllVariants()
+
+        const createShopifyNodesByCollectionHandle = async (handle: string) => {
+            const collection = await getCollectionByHandle(handle)
+
+            const moveNodesToParent = (obj) => {
+                if (Array.isArray(obj)) {
+                    return obj.map(moveNodesToParent)
+                } else if (obj && typeof obj === 'object') {
+                    if (obj.nodes) {
+                        return moveNodesToParent(obj.nodes)
+                    }
+                    return Object.fromEntries(
+                        Object.entries(obj).map(([key, value]) => [key, moveNodesToParent(value)])
+                    )
+                }
+                return obj
+            }
+
+            const products = moveNodesToParent(collection.data.collectionByHandle.products.nodes).filter(
+                (product) => product.status === 'ACTIVE'
             )
+            products.forEach((product) => {
+                product.variants = moveNodesToParent(
+                    variants.data.productVariants.nodes.filter(
+                        (variant) => variant.product.shopifyId === product.shopifyId
+                    )
+                )
+                const node = {
+                    id: createNodeId(`shopify-product-${product.shopifyId}`),
+                    internal: {
+                        type: 'ShopifyProduct',
+                        contentDigest: createContentDigest(product),
+                    },
+                    ...product,
+                }
+                createNode(node)
+            })
+            const data = {
+                handle: collection.data.collectionByHandle.handle,
+                products: products.map((product) => ({ shopifyId: product.shopifyId })),
+            }
             const node = {
-                id: createNodeId(`shopify-product-${product.shopifyId}`),
+                id: createNodeId(`shopify-collection-${handle}`),
                 internal: {
-                    type: 'ShopifyProduct',
-                    contentDigest: createContentDigest(product),
+                    type: 'ShopifyCollection',
+                    contentDigest: createContentDigest(data),
                 },
-                ...product,
+                ...data,
             }
             createNode(node)
-        })
-        const data = {
-            handle: collection.data.collectionByHandle.handle,
-            products: products.map((product) => ({ shopifyId: product.shopifyId })),
         }
-        const node = {
-            id: createNodeId(`shopify-collection`),
-            internal: {
-                type: 'ShopifyCollection',
-                contentDigest: createContentDigest(data),
-            },
-            ...data,
-        }
-        createNode(node)
+
+        await createShopifyNodesByCollectionHandle('frontpage')
+        await createShopifyNodesByCollectionHandle('kits')
     }
 
     const fetchSlackEmojis = async () => {
@@ -619,28 +656,105 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
         })
     }
 
+    const extractIntroSection = (markdown: string): string => {
+        const headingMatch = markdown.match(/^#{1,2}\s+/m)
+
+        if (headingMatch) {
+            const headingIndex = markdown.indexOf(headingMatch[0])
+            return markdown.substring(0, headingIndex).trim()
+        }
+
+        return markdown
+    }
+
+    const extractGettingStartedSection = (markdown: string): string => {
+        const gettingStartedMatch = markdown.match(/^#{1,2}\s+Getting started\s*$/im)
+
+        if (gettingStartedMatch) {
+            const startIndex = markdown.indexOf(gettingStartedMatch[0])
+            const afterHeading = markdown.substring(startIndex + gettingStartedMatch[0].length)
+
+            const nextHeadingMatch = afterHeading.match(/^#+\s+/m)
+
+            if (nextHeadingMatch) {
+                const endIndex = afterHeading.indexOf(nextHeadingMatch[0])
+                return '## Installation\n\n' + afterHeading.substring(0, endIndex).trim()
+            }
+
+            return '## Installation\n\n' + afterHeading.trim()
+        }
+
+        return ''
+    }
+
     const fetchPostHogPipelines = async (
         type: 'transformation' | 'destination',
         generateSlug: (pipeline: any) => string
     ) => {
-        const { results } = await fetch(`https://us.posthog.com/api/public_hog_function_templates?type=${type}`).then(
-            (res) => res.json()
+        const { results } = await fetch(
+            `https://us.posthog.com/api/public_hog_function_templates?type=${type}&limit=350`
+        ).then((res) => res.json())
+        await Promise.all(
+            results.map(async (pipeline) => {
+                let additionalData = {}
+
+                if (pipeline.id.startsWith('segment-')) {
+                    const cleanMarkdown = (markdown: string) => {
+                        return markdown
+                            .replaceAll(/^---[\s\S]*?---/g, '') // Remove frontmatter
+                            .replaceAll(/{%\s*.*?\s*%}/g, '') // Remove {% ... %}
+                            .replaceAll(/{:.*?}/g, '') // Remove {: ... }
+                            .replaceAll(/{{.*?}}/g, '') // Remove {{ ... }}
+                            .replaceAll('Segment', 'PostHog')
+                            .replaceAll('Connections > Catalog', 'Data pipelines')
+                            .replaceAll('Catalog', 'Data pipelines')
+                            .replaceAll(' (Actions)', '')
+                            .replaceAll('segmentio', 'posthog')
+                            .replaceAll(/\[([^\]]+)\]\(https?:\/\/[^\/]*segment\.com[^)]*\)(\s*\{:.*?\})?/g, '$1') // Remove segment.com links completely, keeping only the link text
+                            .replaceAll(/> \w+ ""/g, '')
+                            .replaceAll(
+                                /> \*\*Good to know\*\*: This page is about the \[Actions-framework\].*?Both of these destinations receive data from PostHog\./g,
+                                ''
+                            ) // Remove banner regarding the Actions-framework
+                            .replaceAll(
+                                /^.*(?:maintains this destination|maintained by|contact.*support|support.*team).*$/gm,
+                                ''
+                            ) // Remove lines about other companies maintaining destinations or contact support
+                            .trim()
+                    }
+
+                    const response = await fetch(
+                        `https://raw.githubusercontent.com/posthog/segment-docs/refs/heads/develop/src/connections/destinations/catalog/${pipeline.id.replace(
+                            'segment-',
+                            ''
+                        )}/index.md`
+                    )
+                    let markdown = await response.text()
+                    if (response.status !== 200) markdown = ''
+                    markdown = cleanMarkdown(markdown)
+
+                    additionalData = {
+                        introSnippet: extractIntroSection(markdown),
+                        installationSnippet: extractGettingStartedSection(markdown),
+                    }
+                }
+
+                const slug = generateSlug(pipeline)
+                const node = {
+                    id: createNodeId(`posthog-pipeline-${pipeline.id}`),
+                    internal: {
+                        type: 'PostHogPipeline',
+                        contentDigest: createContentDigest({ pipeline }),
+                    },
+                    pipelineId: pipeline.id,
+                    slug,
+                    type,
+                    ...pipeline,
+                    ...additionalData,
+                }
+                createNode(node)
+            })
         )
-        results.forEach((pipeline) => {
-            const slug = generateSlug(pipeline)
-            const node = {
-                id: createNodeId(`posthog-pipeline-${pipeline.id}`),
-                internal: {
-                    type: 'PostHogPipeline',
-                    contentDigest: createContentDigest(pipeline),
-                },
-                pipelineId: pipeline.id,
-                slug,
-                type,
-                ...pipeline,
-            }
-            createNode(node)
-        })
     }
 
     await fetchPostHogPipelines('transformation', (pipeline) => pipeline.id.replace('plugin-', ''))

@@ -1,28 +1,39 @@
 There are 3 steps to implement feature flags using the PostHog API:
 
-### Step 1: Evaluate the feature flag value using `decide`
+### Step 1: Evaluate the feature flag value using `flags`
 
-`decide` is the endpoint used to determine if a given flag is enabled for a certain user or not.
+`flags` is the endpoint used to determine if a given flag is enabled for a certain user or not.
 
 #### Request
 
 <MultiLanguage>
 
 ```shell
+# Basic request (flags only)
 curl -v -L --header "Content-Type: application/json" -d '  {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "distinct_id_of_your_user",
     "groups" : {
         "group_type": "group_id"
     }
-}' "<ph_client_api_host>/decide?v=4"
+}' "<ph_client_api_host>/flags?v=2"
+
+# With configuration (flags + PostHog config)
+curl -v -L --header "Content-Type: application/json" -d '  {
+    "api_key": "<ph_project_api_key>",
+    "distinct_id": "distinct_id_of_your_user",
+    "groups" : {
+        "group_type": "group_id"
+    }
+}' "<ph_client_api_host>/flags?v=2&config=true"
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/decide?v=4"
+# Basic request (flags only)
+url = "<ph_client_api_host>/flags?v=2"
 headers = {
     "Content-Type": "application/json"
 }
@@ -35,13 +46,17 @@ payload = {
 }
 response = requests.post(url, headers=headers, data=json.dumps(payload))
 print(response.json())
+
+# With configuration (flags + PostHog config)
+url_with_config = "<ph_client_api_host>/flags?v=2&config=true"
+response_with_config = requests.post(url_with_config, headers=headers, data=json.dumps(payload))
+print(response_with_config.json())
 ```
 
 ```node
 import fetch from "node-fetch";
 
-async function sendDecideRequest() {
-    const url = "<ph_client_api_host>/decide?v=4";
+async function sendFlagsRequest() {
     const headers = {
         "Content-Type": "application/json",
     };
@@ -53,6 +68,8 @@ async function sendDecideRequest() {
         },
     };
 
+    // Basic request (flags only)
+    const url = "<ph_client_api_host>/flags?v=2";
     const response = await fetch(url, {
         method: "POST",
         headers: headers,
@@ -60,9 +77,19 @@ async function sendDecideRequest() {
     });
     const data = await response.json();
     console.log(data);
+
+    // With configuration (flags + PostHog config)
+    const urlWithConfig = "<ph_client_api_host>/flags?v=2&config=true";
+    const responseWithConfig = await fetch(urlWithConfig, {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(payload),
+    });
+    const dataWithConfig = await responseWithConfig.json();
+    console.log(dataWithConfig);
 }
 
-sendDecideRequest();
+sendFlagsRequest();
 ```
 
 </MultiLanguage>
@@ -71,7 +98,65 @@ sendDecideRequest();
 
 #### Response
 
-When called, `decide` returns the flag values and payloads, along with more information.
+The response varies depending on whether you include the `config=true` query parameter:
+
+##### Basic response (`/flags?v=2`)
+
+Use this endpoint when you only need to evaluate feature flags. It returns a response with just the flag evaluation results:
+
+```json
+{
+  "flags": {
+    "my-awesome-flag": {
+      "key": "my-awesome-flag", 
+      "enabled": true,
+      "reason": {
+        "code": "condition_match",
+        "condition_index": 0,
+        "description": "Condition set 1 matched"
+      },
+      "metadata": {
+        "id": 1,
+        "version": 1,
+        "payload": "{\"example\": \"json\", \"payload\": \"value\"}"
+      }
+    },
+    "my-multivariate-flag" :{
+      "key":"my-multivariate-flag",
+      "enabled": true,
+      "variant": "some-string-value",
+      "reason": {
+        "code": "condition_match",
+        "condition_index": 1,
+        "description": "Condition set 2 matched"
+      },
+      "metadata": {
+        "id": 2,
+        "version": 42,
+      }
+    },
+    "flag-thats-not-on": {
+      "key": "flag-thats-not-on",
+      "enabled": false,
+      "reason": {
+        "code": "no_condition_match",
+        "condition_index": 0,
+        "description": "No condition sets matched"
+      },
+      "metadata": {
+        "id": 3,
+        "version": 1
+      }
+    }
+  },
+  "errorsWhileComputingFlags": false,
+  "requestId": "550e8400-e29b-41d4-a716-446655440000"
+}
+```
+
+##### Full response with configuration (`/flags?v=2&config=true`)
+
+Use this endpoint when you need both feature flag evaluation and PostHog configuration information (useful for client-side SDKs that need to initialize PostHog):
 
 ```json
 {
@@ -81,13 +166,14 @@ When called, `decide` returns the flag values and payloads, along with more info
   "toolbarParams": {},
   "errorsWhileComputingFlags": false,
   "isAuthenticated": false,
+  "requestId": "550e8400-e29b-41d4-a716-446655440000",
   "supportedCompression": [
     "gzip",
     "lz64"
   ],
   "flags": {
     "my-awesome-flag": {
-      "key": "my-awesome-flag",
+      "key": "my-awesome-flag", 
       "enabled": true,
       "reason": {
         "code": "condition_match",
@@ -137,8 +223,19 @@ When called, `decide` returns the flag values and payloads, along with more info
 
 #### Quota limiting
 
-If your organization exceeds its feature flag quota, the `/decide` endpoint will return a modified response with `quotaLimited`:
+If your organization exceeds its feature flag quota, the `/flags` endpoint will return a modified response with `quotaLimited`.
 
+For basic response (`/flags?v=2`):
+```json
+{
+  "flags": {},
+  "errorsWhileComputingFlags": false,
+  "quotaLimited": ["feature_flags"],
+  "requestId": "d4d89b14-9619-4627-adf2-01b761691c2e"
+}
+```
+
+For full response with configuration (`/flags?v=2&config=true`):
 ```json
 {
   "config": {
@@ -152,7 +249,8 @@ If your organization exceeds its feature flag quota, the `/decide` endpoint will
   ],
   "flags": {},
   "errorsWhileComputingFlags": false,
-  "quotaLimited": ["feature_flags"]
+  "quotaLimited": ["feature_flags"],
+  "requestId": "d4d89b14-9619-4627-adf2-01b761691c2e"
   // ... other fields, not relevant to feature flags
 }
 ```

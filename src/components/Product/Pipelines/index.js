@@ -64,6 +64,8 @@ import 'reactflow/dist/style.css'
 import Profile from '../../Team/Profile'
 import APIExamples from './APIExamples'
 import Configuration from './Configuration'
+import { useUser } from 'hooks/useUser'
+import usePostHog from 'hooks/usePostHog'
 
 const team = 'CDP'
 const teamSlug = '/teams/cdp'
@@ -444,7 +446,108 @@ const CDPFlowChart = () => {
 }
 
 export const getIconUrl = (iconUrl) => {
-    return iconUrl?.startsWith('http') ? iconUrl : `https://app.posthog.com${iconUrl}`
+    return iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
+}
+
+export const NotifyMe = ({ pipeline }) => {
+    const [submitted, setSubmitted] = useState(false)
+    const { user } = useUser()
+    const [email, setEmail] = useState('')
+    const posthog = usePostHog()
+
+    const handleNotifyMe = (pipeline) => {
+        posthog?.capture('notify_me_pipeline', {
+            name: pipeline.name,
+            type: pipeline.type,
+            email,
+        })
+        setSubmitted(true)
+    }
+
+    useEffect(() => {
+        if (user?.email) {
+            setEmail(user.email)
+        }
+    }, [user])
+
+    return (
+        <div className="border border-border dark:border-dark rounded p-4 bg-accent dark:bg-accent-dark">
+            {submitted ? (
+                <p className="!m-0">
+                    Thanks for your interest! We'll notify you when <strong>{pipeline.name}</strong> is available.
+                </p>
+            ) : (
+                <>
+                    <h3 className="!m-0 !leading-none !mb-0.5">Get notified</h3>
+                    <p className="m-0 !mb-2.5">
+                        Enter your email to get notified when this {pipeline.type} is available.
+                    </p>
+                    <div className="flex space-x-2">
+                        <input
+                            type="email"
+                            placeholder="Email"
+                            className="w-full border border-border dark:border-dark rounded-md p-2 max-w-sm text-primary"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <span className="flex-shrink-0">
+                            <CallToAction onClick={() => handleNotifyMe(pipeline)} type="primary">
+                                Notify me
+                            </CallToAction>
+                        </span>
+                    </div>
+                </>
+            )}
+        </div>
+    )
+}
+
+const PipelinePreview = ({ pipeline }) => {
+    return (
+        <>
+            <div className="article-content">
+                {pipeline.mdx ? (
+                    <MDXProvider
+                        components={{
+                            HideOnCDPIndex: () => null,
+                        }}
+                    >
+                        <MDXRenderer>{pipeline.mdx.body}</MDXRenderer>
+                    </MDXProvider>
+                ) : (
+                    <p>{pipeline.description}</p>
+                )}
+                {pipeline.status !== 'coming_soon' && pipeline.inputs_schema?.length > 0 && (
+                    <>
+                        <h2 className="!mt-2">Configuration</h2>
+                        <Configuration inputs_schema={pipeline.inputs_schema} />
+                    </>
+                )}
+                {pipeline.status !== 'coming_soon' && (
+                    <APIExamples
+                        name={pipeline.name}
+                        inputs_schema={pipeline.inputs_schema}
+                        id={pipeline.id}
+                        type={pipeline.type}
+                        initialOpen={pipeline.inputs_schema?.length <= 0}
+                    />
+                )}
+            </div>
+
+            <div className="border-t border-border dark:border-dark pt-4">
+                {pipeline.status === 'coming_soon' ? (
+                    <NotifyMe pipeline={pipeline} />
+                ) : (
+                    <CallToAction
+                        to={pipeline.mdx?.fields?.slug || `/docs/cdp/${pipeline.type}s/${pipeline.slug}`}
+                        type="secondary"
+                    >
+                        Learn more in docs
+                    </CallToAction>
+                )}
+            </div>
+        </>
+    )
 }
 
 function PipelinesPage({ location }) {
@@ -515,6 +618,13 @@ function PipelinesPage({ location }) {
                                         .slice(0, -1)}
                                 </span>
                             </p>
+                            {selectedDestination.status === 'coming_soon' && (
+                                <p
+                                    className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ml-1`}
+                                >
+                                    Roadmap
+                                </p>
+                            )}
                         </div>
                     ) : (
                         ''
@@ -524,48 +634,7 @@ function PipelinesPage({ location }) {
                 setOpen={setModalOpen}
                 className="max-w-screen-md w-full"
             >
-                {selectedDestination && (
-                    <>
-                        <div className="article-content">
-                            {selectedDestination.mdx ? (
-                                <MDXProvider
-                                    components={{
-                                        HideOnCDPIndex: () => null,
-                                    }}
-                                >
-                                    <MDXRenderer>{selectedDestination.mdx.body}</MDXRenderer>
-                                </MDXProvider>
-                            ) : (
-                                <p>{selectedDestination.description}</p>
-                            )}
-                            {selectedDestination.inputs_schema?.length > 0 && (
-                                <>
-                                    <h2 className="!mt-2">Configuration</h2>
-                                    <Configuration inputs_schema={selectedDestination.inputs_schema} />
-                                </>
-                            )}
-                            <APIExamples
-                                name={selectedDestination.name}
-                                inputs_schema={selectedDestination.inputs_schema}
-                                id={selectedDestination.id}
-                                type={selectedDestination.type}
-                                initialOpen={selectedDestination.inputs_schema?.length <= 0}
-                            />
-                        </div>
-
-                        <div className="border-t border-border dark:border-dark pt-4">
-                            <CallToAction
-                                to={
-                                    selectedDestination.mdx?.fields?.slug ||
-                                    `/docs/cdp/${selectedDestination.type}s/${selectedDestination.slug}`
-                                }
-                                type="secondary"
-                            >
-                                Learn more in docs
-                            </CallToAction>
-                        </div>
-                    </>
-                )}
+                {selectedDestination && <PipelinePreview pipeline={selectedDestination} />}
             </SideModal>
 
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} px-5 py-10 md:pt-20 pb-0`}>
@@ -573,9 +642,8 @@ function PipelinesPage({ location }) {
                     color="sky-blue"
                     icon={<IconPlug />}
                     product={product.capitalized}
-                    title="Ingest, transform, and send data between 25+ tools"
+                    title="Ingest, transform, and send data between hundreds of tools"
                     description="PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack."
-                    beta
                 />
 
                 <div className="flex justify-center mb-12">
@@ -724,7 +792,7 @@ function PipelinesPage({ location }) {
 
                                                         <h3 className="m-0 leading-none text-base">{name}</h3>
                                                         {selectedType === 'All' && (
-                                                            <p className="m-0 !ml-1.5 px-1 py-0 border border-border dark:border-dark rounded text-xs">
+                                                            <p className="m-0 !ml-1.5 px-1 py-0 border border-border dark:border-dark rounded text-xs flex-shrink-0">
                                                                 <span className="opacity-70">
                                                                     {Object.keys(pipelines)
                                                                         .find((key) =>
@@ -732,6 +800,15 @@ function PipelinesPage({ location }) {
                                                                         )
                                                                         .slice(0, -1)}
                                                                 </span>
+                                                            </p>
+                                                        )}
+                                                        {destination.status === 'coming_soon' && (
+                                                            <p
+                                                                className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs font-medium rounded px-1 m-0 !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 border border-blue flex-shrink-0 ${
+                                                                    selectedType === 'All' ? '!ml-1' : ''
+                                                                }`}
+                                                            >
+                                                                Roadmap
                                                             </p>
                                                         )}
                                                     </div>
@@ -836,6 +913,7 @@ const query = graphql`
                     required
                     description
                 }
+                status
             }
         }
         transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
@@ -860,6 +938,7 @@ const query = graphql`
                     required
                     description
                 }
+                status
             }
         }
     }

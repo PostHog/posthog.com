@@ -4,6 +4,9 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/svelte.svg
 ---
 
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 PostHog makes it easy to get data about traffic and usage of your [Svelte](https://svelte.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your SvelteKit app using the [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs.
@@ -20,49 +23,9 @@ import SvelteInstallClient from "../integrate/_snippets/install-svelte-client.md
 
 > ❗️ If you intend on using session replays with a server-side rendered Svelte app ensure that your [asset URLs are configured to be relative](/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
 
-### Tracking pageviews and pageleaves
+<DetailSetUpReverseProxy />
 
-PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Svelte creates a single-page app, this only happens once, and the router handles subsequent page changes.
-
-If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
-
-To do this, set up `beforeNavigate` and `afterNavigate` interceptors in a new file `routes/+layout.svelte` to capture `$pageview` and `$pageleave` events:
-
-```svelte file=+layout.svelte
-<script>
-  import { browser } from '$app/environment';
-  import { beforeNavigate, afterNavigate } from '$app/navigation';
-  import posthog from 'posthog-js'
-
-  if (browser) {
-    beforeNavigate(() => posthog.capture('$pageleave'));
-    afterNavigate(() => posthog.capture('$pageview'));
-  }
-</script>
-
-<slot></slot>
-```
-
-To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.js` to set `capture_pageview` and `capture_pageleave` to false.
-
-```js file=routes/+layout.js
-import posthog from 'posthog-js'
-import { browser } from '$app/environment';
-
-export const load = async () => {
-
-  if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      { api_host: '<ph_client_api_host>',
-        capture_pageview: false,
-        capture_pageleave: false
-       }
-    )
-  }
-  return
-};
-```
+<DetailGroupProductsInOneProject />
 
 ## Server-side setup
 

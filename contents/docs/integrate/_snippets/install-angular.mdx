@@ -1,10 +1,8 @@
+import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+
 Install `posthog-js` using your package manager:
 
-```bash
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
+<InstallWebPackageManagers />
 
 In your `src/main.ts`, initialize PostHog using your project API key and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
 
@@ -14,12 +12,10 @@ import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
 import posthog from 'posthog-js'
 
-posthog.init(
-  '<ph_project_api_key>',
-  {
-    api_host:'<ph_client_api_host>'
-  }
-)
+posthog.init('<ph_project_api_key>', {
+  api_host:'<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>'
+})
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));

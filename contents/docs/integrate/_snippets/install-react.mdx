@@ -2,11 +2,9 @@
 
 1. Install [`posthog-js`](https://github.com/posthog/posthog-js) using your package manager:
 
-```shell
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
+import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+
+<InstallWebPackageManagers />
 
 2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
 
@@ -27,6 +25,7 @@ import { PostHogProvider } from 'posthog-js/react'
 
 const options = {
   api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: '<ph_posthog_js_defaults>',
 }
 
 createRoot(document.getElementById('root')).render(
@@ -37,3 +36,22 @@ createRoot(document.getElementById('root')).render(
   </StrictMode>,
 )
 ```
+
+<details>
+  <summary>Using React Router v7?</summary>
+
+  You need to set `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
+
+  ```ts file=vite.config.ts
+  // ... imports
+
+  export default defineConfig({
+    plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+    ssr: {
+      noExternal: ['posthog-js', 'posthog-js/react']
+    }
+  });
+  ``` 
+
+  See our [Remix docs](/docs/libraries/remix) for more details.
+</details>

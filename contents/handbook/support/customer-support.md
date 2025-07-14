@@ -93,12 +93,14 @@ Tickets are considered high priority if they fulfill ANY of the following condit
 
 This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
 
+> **_NOTE:_** If a user has recently upgraded to the Enterprise plan, their tickets may not automatically be tagged as Enterprise in the PostHog Priority field in Zendesk. If this happens, manually set the Priority field to Enterprise to ensure they get in the proper queue.
+
 #### Normal priority
 **Response target: 2 business days**
 
 Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
 
-- The customer is subscribed to the `Ridiculously cheap` plan
+- The customer is subscribed to the `Pay-as-you-go` plan
 - The customer is on a PostHog for Startups or Y Combinator plan
 - The customer is raising a billing issue
 
@@ -155,6 +157,21 @@ Most of the time users can self-serve deletion requests and should be encouraged
 If a user refuses to delete their own data, you must first confirm they have the permissions to do this by checking their email address matches that  an organization admin. As an extra layer of security, you should also ask them to confirm their address by emailing you directly from it (e.g. not through Zendesk.) Only then should you delete any data on their behalf. 
 
 If a user asks for us to delete all of their _personal_ data in compliance with GDPR, you should confirm their identity as described above and delete the user from PostHog. Finally, you should notify <TeamMember name="Joe Martin" photo /> so he can delete customer data from our email marketing systems, and <TeamMember name="Fraser Hopper" photo /> so he can coordinate further data deletion across our systems.
+
+#### Targeted deletion requests
+
+Occasionally users will mistakenly share sensitive data which should not have been shared via event/person properties.  As such they wish to be more targeted in their deletion by removing only certain properties or events instead of an entire project.  
+
+> Before taking any deletion action, they should ensure that they are no longer sending the sensitive data to us either by [redacting information client-side](https://posthog.com/docs/libraries/js/features#redacting-information-in-events) or setting up a [CDP transformation](https://posthog.com/docs/cdp/transformations/property-filter-plugin).  If they don't do this first they will continue to send us the sensitive data even after deletion is actioned.
+
+Due to the the nature of how our infrastructure works, events and properties cannot be amended once they are stored in Clickhouse.  As such, the only way to remove sensitive data is to delete the person profile associated with the events where the sensitive data has been captured.  This can be achieved [in the app or via the API](https://posthog.com/docs/data/persons#deleting-person-data).  As per our [deletion docs](https://posthog.com/docs/privacy/data-deletion#asynchronous-data-deletion), the person profile will be removed immediately but the events will take some time (days or even weeks) to be removed.
+
+> If they aren't using person profiles, they won't be able to use this method and as such will need to revert back to deleting the entire project containing the sensitive data.
+
+**For customers spending $20K and above a year** our Clickhouse team may be able to craft a more targeted event deletion/property amendment query.  There are no guarantees here and it is very time consuming hence why we will only explore this for high-paying customers.  If you have a customer in this situation and the above methods won't work for them; escalate a support ticket to the Clickhouse team with as much detail as possible on the event and property names where the data is leaked so that they can create a query to process the deletion.  To expedite this you should ask the customer for a SQL query which correctly identifies the events or properties to be deleted, or help them in crafting that.  Also verify that the numbers returned by this query match what the customer expects to see.  Once started this can also take some time (days or weeks) so you should set those expectations with the customer.
+
+> If they need to remove data immediately, the only way to do this is the delete the project.  There are no other alternatives.
+
 
 ## Community
 

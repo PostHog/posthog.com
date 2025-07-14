@@ -50,7 +50,7 @@ To just see the total count, switch to a total value bar chart or table like the
     alt="Sample breakdown bar chart"
 />
 
-Breakdowns only support a single property at a time, unless you use SQL. To breakdown by the combination of browser and operating system, for example, you can use the following expression:
+Breakdowns support up to 3 properties at a time, unless you use SQL. To breakdown by the combination of browser and operating system, for example, you can use the following expression:
 
 ```
 concat(properties.$browser, ' - ', properties.$os)
@@ -62,7 +62,7 @@ See our [SQL expression docs](/docs/sql/expressions) for more information.
 
 You can also break down trends insights by [cohorts](/docs/data/cohorts) – a specific list of users you've created that is either static, or updated automatically based on pre-defined properties.
 
-Unlike properties, you can break down insights by _multiple_ cohorts at a time. This is useful if you want to compare how often different groups of users trigger a specific event, or complete an action.
+You can break down insights by _multiple_ cohorts at a time. This is useful if you want to compare how often different groups of users trigger a specific event, or complete an action.
 
 When you create a breakdown using a cohort, an 'Add cohort' button will appear where you can add more cohorts to your breakdown.
 

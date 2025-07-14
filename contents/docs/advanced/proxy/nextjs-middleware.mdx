@@ -6,10 +6,16 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
 
 If you are using Next.js and [rewrites aren't working for you](/docs/advanced/proxy/nextjs), you can write custom middleware to proxy requests to PostHog. 
 
@@ -20,7 +26,7 @@ import { NextResponse } from 'next/server'
  
 export function middleware(request) {
   let url = request.nextUrl.clone()
-  const hostname = url.pathname.startsWith("/ingest/static/") ? 'us-assets.i.posthog.com' : 'us.i.posthog.com'
+  const hostname = url.pathname.startsWith("/<ph_proxy_path>/static/") ? 'us-assets.i.posthog.com' : 'us.i.posthog.com'
   const requestHeaders = new Headers(request.headers)
   
   requestHeaders.set('host', hostname)
@@ -28,7 +34,7 @@ export function middleware(request) {
   url.protocol = 'https'
   url.hostname = hostname
   url.port = 443
-  url.pathname = url.pathname.replace(/^\/ingest/, '');
+  url.pathname = url.pathname.replace(/^\/<ph_proxy_path>/, '');
 
   return NextResponse.rewrite(url, {
     headers: requestHeaders,
@@ -36,7 +42,7 @@ export function middleware(request) {
 }
  
 export const config = {
-  matcher: '/ingest/:path*',
+  matcher: '/<ph_proxy_path>/:path*',
 }
 ```
 
@@ -55,7 +61,7 @@ Once done, configure the PostHog client to send requests via your rewrite.
 
 ```js
 posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-  api_host: "/ingest",
+  api_host: "/<ph_proxy_path>",
   ui_host: "<ph_app_host>"
 })
 ```

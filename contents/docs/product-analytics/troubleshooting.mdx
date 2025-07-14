@@ -16,7 +16,7 @@ This is the most common reason events don't appear. To debug this, you can try s
 <MultiLanguage>
 
 ```Web
-posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' }) // Replace with the URL you copied from webhook.site
+posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>', defaults: '<ph_posthog_js_defaults>' }) // Replace with the URL you copied from webhook.site
 ```
 
 ```node
@@ -224,7 +224,7 @@ Want a bot added to this list? Request it via [the in-app feedback form](http://
 
 ### Is it ok for my API key to be exposed and public?
 
-import ExposedApiKeys from "../\_snippets/exposed-api-keys.mdx"
+import ExposedApiKeys from "../_snippets/exposed-api-keys.mdx"
 
 <ExposedApiKeys />
 

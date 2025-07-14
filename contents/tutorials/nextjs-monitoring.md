@@ -57,8 +57,10 @@ export default function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
     })
   }, []);
+
   return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 ```
@@ -84,7 +86,7 @@ export default function RootLayout({ children }) {
 Once this is set up, go to your [project settings](https://app.posthog.com/project/settings), and make sure:
 
 - [Autocapture](/docs/data/autocapture) is enabled
-- Under [recordings](https://app.posthog.com/project/settings#recordings), record user sessions, capture console logs, and capture network performance are all enabled.
+- Under [recordings](https://us.posthog.com/replay/settings), record user sessions, capture console logs, and capture network performance are all enabled.
 
 ![Settings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/nextjs-monitoring/settings.png)
 

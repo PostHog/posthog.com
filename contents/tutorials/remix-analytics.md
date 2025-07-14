@@ -1,6 +1,6 @@
 ---
 title: 'How to set up Remix analytics, feature flags, and more'
-date: 2023-11-22
+date: 2025-05-09
 author:
   - ian-vanagas
 tags:
@@ -15,13 +15,13 @@ In this tutorial, we show you how to add PostHog to your Remix app (on both the 
 
 ## Creating a Remix app
 
-First, make sure to [install a Node version](https://nodejs.org/en/download) greater than 18. After confirming, run the following command to create a basic app and choose the default options.
+First, make sure to [install a Node version](https://nodejs.org/en/download) greater than 20. After confirming, run the following command to create a basic app and choose the default options.
 
 ```bash
 npx create-remix@latest remix-tutorial
 ```
 
-Our app is going to be a basic blog with a few pages we can move between. 
+Our app is going to be a basic blog with a few pages we can move between.
 
 We start by creating a top-level `json` folder in our newly created `remix-tutorial` folder. Our list of blog posts lives in a `data.json` file in this folder. Each contains a slug, title, and content.
 
@@ -46,7 +46,6 @@ Next, we rework the home page to show these posts. In `app/routes/_index.tsx`, w
 
 ```ts
 // app/routes/_index.tsx
-import { json } from "@remix-run/node";
 import { Link, useLoaderData } from "@remix-run/react";
 import { promises as fs } from "fs";
 import path from 'path';
@@ -63,19 +62,20 @@ export const loader = async () => {
   const fileContents = await fs.readFile(filePath, 'utf8');
   const { posts } = JSON.parse(fileContents);
 
-  return json({ posts })
+  return { posts };
 };
 
 export default function Index() {
   const { posts } = useLoaderData<typeof loader>();
   return (
-    <div>
-      <h1>Home</h1>
-      <ul>
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-6">Home</h1>
+      <ul className="space-y-4">
         {posts.map((post: Post) => (
           <li key={post.slug}>
             <Link
               to={`/posts/${post.slug}`}
+              className="text-blue-600 hover:text-blue-800 text-lg font-medium transition-colors"
             >
               {post.title}
             </Link>
@@ -91,7 +91,6 @@ Next, we add the pages for these blog posts. In the `app/routes` folder, create 
 
 ```ts
 import type { LoaderFunctionArgs } from "@remix-run/node";
-import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { promises as fs } from "fs";
 import path from 'path';
@@ -114,7 +113,7 @@ export const loader = async ({ params, request }: LoaderFunctionArgs) => {
     throw new Response("Not Found", { status: 404 });
   }
 
-  return json(post);
+  return post;
 };
 
 export default function PostSlug() {
@@ -125,10 +124,15 @@ export default function PostSlug() {
   };
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <button onClick={handleClick}>Like this post</button>
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+      <p className="text-gray-700 mb-6">{post.content}</p>
+      <button 
+        onClick={handleClick}
+        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors"
+      >
+        Like this post
+      </button>
     </div>
   );
 }
@@ -143,7 +147,7 @@ npm run dev
 
  Once done, your basic Remix blog is running locally.
 
-![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_09_at_15_54_29_2x_9b14886006.png)
 
 ## Adding PostHog on the client side
 
@@ -155,99 +159,123 @@ npm i posthog-js
 
 Once done, you need your project API key and instance address from your PostHog [project settings](https://app.posthog.com/settings/project). You can [sign up for free](https://app.posthog.com/signup) if you haven’t already.
 
-With these, go to `entry.client.tsx` and initialize PostHog using a component. This ensures the initialization doesn't break hydration.
+With these, create a `provider.tsx` file in the `app` folder. In it, set up the PostHog provider to initialize after hydration.
 
 ```tsx
-// app/entry.client.tsx
-import * as React from 'react';
-import { RemixBrowser } from '@remix-run/react';
-import { hydrateRoot } from 'react-dom/client';
-import posthog from 'posthog-js';
+// app/provider.tsx
+import { useEffect, useState } from "react";
+import posthog from "posthog-js";
+import { PostHogProvider } from "posthog-js/react";
 
-function hydrate() {
-  posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-  });
+export function PHProvider({ children }: { children: React.ReactNode }) {
+  const [hydrated, setHydrated] = useState(false);
 
-  React.startTransition(() => {
-    hydrateRoot(
-      document,
-      <React.StrictMode>
-        <RemixBrowser />
-      </React.StrictMode>,
-    );
-  });
-}
+  useEffect(() => {
+    posthog.init("<ph_project_api_key>", {
+      api_host: "<ph_client_api_host>",
+      defaults: "<ph_posthog_js_defaults>",
+      debug: true,
+    });
 
-if (window.requestIdleCallback) {
-  window.requestIdleCallback(hydrate);
-} else {
-  window.setTimeout(hydrate, 1);
+    setHydrated(true);
+  }, []);
+
+  if (!hydrated) return <>{children}</>;
+  return <PostHogProvider client={posthog}>{children}</PostHogProvider>;
 }
 ```
 
-After relaunching your app, PostHog begins autocapturing initial pageviews, clicks, [session replays](/docs/session-replay) (if [you enable them](https://app.posthog.com/settings/project#replay)), and more.
-
-![Autocapture](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/autocapture.png)
-
-## Capturing pageviews
-
-You might notice we captured only one pageview even though we navigated between multiple pages. This is because Remix is a [single-page app](/tutorials/single-page-app-pageviews) and only triggers an initial page load event. PostHog uses the page load event for pageviews, so to fix this, we must implement pageview capture ourselves.
-
-We do this in `routes/root.tsx`. We import `useLocation`, `useEffect`, and `posthog`. We set up `useLocation`, and then use a `useEffect` to capture a `$pageview` event.
+Next, go to `root.tsx` and wrap your app in the `PHProvider`.
 
 ```ts
-// routes/root.tsx
-//... rest of imports
-  ScrollRestoration,
-  useLocation
-} from "@remix-run/react";
-import posthog from "posthog-js";
-import { useEffect } from "react";
+// app/root.tsx
+// ... rest of imports
+import { PHProvider } from "./provider";
 
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
+// ... links, meta, etc.
 
-export default function App() {
-  const location = useLocation();
-  useEffect(() => {
-    posthog.capture('$pageview');
-  }, [location]);
-
+export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-//... rest of code
+      <head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <Meta />
+        <Links />
+      </head>
+      <body>
+        <PHProvider>
+          {children}
+          <ScrollRestoration />
+          <Scripts />
+        </PHProvider>
+      </body>
+    </html>
+  );
+}
+
+export default function App() {
+  return <Outlet />;
+}
 ```
 
-When you relaunch your app and navigate between pages, you now capture `$pageview` events in PostHog for each.
+Finally, go to `vite.config.ts` and add `posthog-js` and `posthog-js/react` as external packages. This ensures you app builds correctly when you're ready to deploy.
 
-![Pageview events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/pageview.png)
+```ts
+// vite.config.ts
+// ... imports and rest of config
 
-> **Why is it double capturing the pageviews?** There are two reasons this might happen. First, you need to set the `capture_pageview` [config option](/docs/libraries/js/config) in the PostHog initialization to `false` so we don’t double capture the initial pageview. Second, in strict mode, React renders twice. This triggers two pageview events, but doesn’t happen in production mode. You can also remove the `<StrictMode>` component in `app/entry.client.tsx` to stop it in development.
+export default defineConfig({
+  plugins: [
+    // ... plugins
+  ],
+  ssr: {
+    noExternal: ["posthog-js", "posthog-js/react"],
+  },
+});
+```
+
+After relaunching your app, PostHog begins autocapturing pageviews, clicks, [session replays](/docs/session-replay) (if [you enable them](https://app.posthog.com/settings/project#replay)), and more.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_09_at_16_00_35_2x_2bd83b5dc8.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_09_at_16_00_56_2x_cf2ad1075c.png"
+  alt="Autocapture"
+  classes="rounded"
+/>
 
 ## Capturing custom events
 
-Capturing pageviews gives you a preview of capturing custom events. To show what this looks like elsewhere, we can set up a specific event for the like button. Go to `routes/posts.$slug.tsx`, import PostHog, and then set up a `posthog.capture()` call in place of the `console.log()`.
+Although PostHog autocaptures clicks, we can set up custom events to capture more specific actions. For example, we can set up a `liked_post` event for the like button. 
+
+To do this, go to `routes/posts.$slug.tsx`, import the `usePostHog` hook, and then set up a `posthog.capture()` call in place of the `console.log()`.
 
 ```ts
-//... other imports
-import posthog from "posthog-js";
+// app/routes/posts.$slug.tsx
+// ... imports
+import { usePostHog } from "posthog-js/react";
 
-// type, loader
+// ... type, loader
 
 export default function PostSlug() {
   const post = useLoaderData<Post>();
-
+  const posthog = usePostHog();
   const handleClick = () => {
-    posthog.capture("liked_post", { 'post': post.slug });
+    posthog.capture('liked_post', {
+      post_id: post.slug,
+    });
   };
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <button onClick={handleClick}>Like this post</button>
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+      <p className="text-gray-700 mb-6">{post.content}</p>
+      <button 
+        onClick={handleClick}
+        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors"
+      >
+        Like this post
+      </button>
     </div>
   );
 }
@@ -257,23 +285,41 @@ Now, every time a user clicks this button, it captures a `liked_post` event with
 
 ## Setting up feature flags
 
-Next, we can add a [feature flag](/docs/feature-flags) to control a new version of the like button we want to try out. First, go to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and click "New feature flag." Name it `new-button-text`, set the rollout to 100% of users, fill out any other details, and press save.
+Next, we can add a [feature flag](/docs/feature-flags) to control a new version of the like button we want to try out. 
 
-![Flag creation video](https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/button.mp4)
+To this, start by going to the [feature flags tab](https://app.posthog.com/feature_flags) in PostHog and clicking **New feature flag**. Name it `new-button-text`, set the rollout to 100% of users, fill out any other details, and press **Save**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_09_at_16_16_28_2x_fef9b82d61.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_09_at_16_16_14_2x_807359315f.png"
+  alt="Flag creation"
+  classes="rounded"
+/>
 
 In the `posts.$slug.tsx` file, set up a `useState` for the button content, and a `useEffect` for flag evaluation. We conditionally render the button text based on the flag response.
 
 ```ts
 //... other imports
-import posthog from "posthog-js";
+import type { LoaderFunctionArgs } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { promises as fs } from "fs";
+import path from 'path';
+import { usePostHog } from "posthog-js/react";
 import { useEffect, useState } from "react";
 
-// type, loader
+// ... type, loader
 
 export default function PostSlug() {
   const post = useLoaderData<Post>();
 
   const [buttonText, setButtonText] = useState('Like this post');
+  const posthog = usePostHog();
+  const handleClick = () => {
+    posthog.capture('liked_post', {
+      post_id: post.slug,
+    });
+  };
+
   useEffect(() => {
     const flag = posthog.isFeatureEnabled('new-button-text');
     if (flag) {
@@ -281,15 +327,16 @@ export default function PostSlug() {
     }
   }, []);
 
-  const handleClick = () => {
-    posthog.capture("liked_post", { 'post': post.slug });
-  };
-
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.content}</p>
-      <button onClick={handleClick}>{buttonText}</button>
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-4">{post.title}</h1>
+      <p className="text-gray-700 mb-6">{post.content}</p>
+      <button   
+        onClick={handleClick}
+        className="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded transition-colors"
+      >
+        {buttonText}
+      </button>
     </div>
   );
 }
@@ -297,7 +344,7 @@ export default function PostSlug() {
 
 Our post page now shows the updated button, which you can toggle remotely with the flag in PostHog.
 
-![Button text controlled by flag](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/remix-analytics/flag.png)
+![Button text controlled by flag](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_09_at_16_19_19_2x_1e41d82f48.png)
 
 ## Adding PostHog on the server side
 

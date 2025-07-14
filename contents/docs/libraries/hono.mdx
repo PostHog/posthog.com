@@ -1,0 +1,97 @@
+---
+title: Hono
+icon: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog makes it easy to get data about usage of your [Hono](https://hono.dev/) app. Integrating PostHog into your app enables analytics, custom events capture, feature flags, and more.
+
+This guide walks you through integrating PostHog with your Hono app running on the [Node.js](https://hono.dev/docs/getting-started/nodejs) runtime, but has also been tested with Cloudflare Workers, Vercel, and Bun. You can hook into the same middleware and `onError` for other runtimes to capture events.
+
+## Prerequisites
+
+To follow this guide along, you need:
+
+1. A PostHog instance (either [Cloud](https://app.posthog.com/signup) or [self-hosted](/docs/self-host))
+2. A Hono application. We suggest trying first with a fresh [Hono Node.js starter template](https://hono.dev/docs/getting-started/nodejs#_1-setup).
+
+## Installation
+
+Start by installing the `posthog-node` package using your package manager.
+```bash
+npm install --save posthog-node
+```
+
+Then, create a [middleware](https://hono.dev/docs/guides/middleware) to capture events for your routes. Remember to **export** your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
+
+```js file=index.ts
+import { env } from 'hono/adapter'
+import { createMiddleware } from 'hono/factory'
+import { PostHog } from 'posthog-node'
+
+const posthogServerMiddleware = createMiddleware(async (c, next) => {
+  const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
+
+  posthog.capture({
+      distinctId: 'distinct_id_of_user', // Their user id or email
+      event: 'user_did_something',
+  })
+  await posthog.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+  await next()
+})
+```
+
+<CalloutBox icon="IconInfo" title="Shutdown">
+
+Make sure to always call `posthog.shutdown()` after capturing events from the server-side. PostHog queues events into larger batches. This call forces all batched events to be flushed immediately.
+
+</CalloutBox>
+
+Next, apply this middleware to your app. This middleware will be called on every request handled by Hono, denoted by the wildcard `*`.
+
+```ts file=index.ts
+// use the middleware on all (*) routes.
+app.use('*', posthogServerMiddleware)
+```
+
+In your routes, you can pass information to be captured by your middleware using [context `set()` and `get()` pair](https://hono.dev/docs/api/context#set-get)
+
+<CalloutBox icon="IconInfo" title="Cloudflare Pages">
+
+Cloudflare Pages uses its own middleware system that is different from Hono's middleware. Follow the [Hono documentation on Cloudflare Pages](https://hono.dev/docs/getting-started/cloudflare-pages#cloudflare-pages-middleware) to handle middleware. 
+
+</CalloutBox>
+
+## Error tracking
+
+Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) for root-level error handling. You can take advantage of this for [Error tracking](/docs/error-tracking).
+
+```ts file=index.ts
+import { env } from 'hono/adapter'
+import { PostHog } from 'posthog-node'
+
+app.onError((err, c) => {
+  const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
+  
+  posthog.captureException(new Error(err.message, { cause: err }), 'user_distinct_id_with_err_rethrow', {
+    path: c.req.path,
+    method: c.req.method,
+    url: c.req.url,
+    headers: c.req.header(),
+    // ... other properties
+  })
+  posthog.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+  // other error handling logic
+  return c.text('Internal Server Error', 500)
+})
+```
+
+## Next steps
+
+To read more about how to integrate specific PostHog features into Hono, have a look at our [Node SDK docs](/docs/libraries/node) for concepts such as:
+- [Capturing custom events, setting properties, and more.](/docs/libraries/node#capturing-events)
+- [Setting up feature flags including variants and payloads.](/docs/libraries/node#feature-flags)

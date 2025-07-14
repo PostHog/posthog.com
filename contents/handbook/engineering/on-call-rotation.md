@@ -12,9 +12,9 @@ PostHog Cloud doesn't shut down at night (_whose_ night anyway?) nor on Sunday. 
 
 We're very lucky that we have an almost-follow-the-sun rotation for service alerts, so nobody gets woken up in the middle of the night. Every engineer at PostHog is expected to be part of the rotation within one of the three PagerDuty schedules:
 
-- [Europe](https://posthog.pagerduty.com/schedules#PF7ZGBT) (08:00 to 16:00 UTC)
-- [Americas East](https://posthog.pagerduty.com/schedules#PW1E9Y4) (16:00 to 00:00 UTC)
-- [Americas West](https://posthog.pagerduty.com/schedules#P3J10CZ) (00:00 to 08:00 UTC)
+- [Europe](https://posthog.pagerduty.com/schedules#PF7ZGBT) (06:00 to 14:00 UTC)
+- [Americas East](https://posthog.pagerduty.com/schedules#PW1E9Y4) (14:00 to 22:00 UTC)
+- [Americas West](https://posthog.pagerduty.com/schedules#P3J10CZ) (22:00 to 06:00 UTC)
 
 Because the stability of production systems is critical, on-call involves weekends too (unlike Support Hero). More likely than not, nothing will happen over the weekend – but you never know, so the important thing is to keep your laptop at hand.
 
@@ -35,7 +35,7 @@ To be ready, make sure you have access to:
 - PostHog Cloud admin interfaces ([🇺🇸 US](https://us.posthog.com/admin/)  / [🇪🇺 EU](https://eu.posthog.com/admin/)) - post in #ask-posthog-anything to be added
 - Our tailnet, which gates our internal services (such as Grafana, Metabase, or runbooks) – follow [this guide](https://github.com/PostHog/posthog-cloud-infra/blob/main/terraform/environments/README.md#connect-to-a-service-hosted-in-our-internal-network) to join
 - Metabase ([🇺🇸 US](http://metabase-prod-us/)  / [🇪🇺 EU](http://metabase-eu/)) - post in #ask-posthog-anything to be invited
-- EKS over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod) – follow [this guide](http://runbooks/eks/access) to get access
+- EKS over `kubectl` / `k9s`, in case you need to run Kubernetes cluster operations (such as restarting a pod) – follow [this guide](http://runbooks/EKS/access) to get access
 
 A chunk of our high-frequency alerts have runbooks attached, which live in our internal runbooks site: [http://runbooks/](http://runbooks/) (also accessible as [go/rb](http://go/rb/)). This site is part of our tailnet, as mentioned above.
 

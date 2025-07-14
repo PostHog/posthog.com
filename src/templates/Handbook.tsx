@@ -41,6 +41,24 @@ import { Contributor, ContributorImageSmall } from 'components/PostLayout/Contri
 import { OverflowXSection } from 'components/OverflowXSection'
 import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
+import { IconCheck } from '@posthog/icons'
+import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
+import IsEU from 'components/IsEU'
+import IsUS from 'components/IsUS'
+
+const DestinationsLibraryCallout = () => {
+    return (
+        <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-4">
+            <h2 className="font-bold text-lg leading-tight !m-0">Did somebody say destinations?</h2>
+            <p className="m-0 !mb-3 !mt-1.5">
+                We're building new destinations and want your input on what to build next.
+            </p>
+            <CallToAction to="/cdp#library" size="sm">
+                Browse the library
+            </CallToAction>
+        </div>
+    )
+}
 
 const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
     switch (availability) {
@@ -103,6 +121,18 @@ const Contributors = (props) => {
 export const HandbookSidebar = ({ contributors, title, location, availability, related }) => {
     return (
         <>
+            {location.pathname.startsWith('/docs/cdp/destinations') &&
+                location.pathname !== '/docs/cdp/destinations' && (
+                    <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-8">
+                        <h5 className="text-lg font-bold leading-tight m-0">Did somebody say destinations?</h5>
+                        <p className="text-sm m-0 mb-3 mt-1.5">
+                            We're building more destinations and prioritzing them based on your feedback.
+                        </p>
+                        <CallToAction size="sm" to="/cdp#library">
+                            Browse the library
+                        </CallToAction>
+                    </div>
+                )}
             {contributors && (
                 <SidebarSection title="Contributors">
                     <Contributors contributors={contributors} />
@@ -119,6 +149,12 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                         <span>Self-serve</span>
                         {renderAvailabilityIcon(availability.selfServe)}
                     </div>
+                    {availability.teams && (
+                        <div className="flex items-center justify-between font-bold">
+                            <span>Teams</span>
+                            {renderAvailabilityIcon(availability.teams)}
+                        </div>
+                    )}
                     <div className="flex items-center justify-between font-bold">
                         <span>Enterprise</span>
                         {renderAvailabilityIcon(availability.enterprise)}
@@ -267,7 +303,7 @@ export default function Handbook({
     const {
         body,
         frontmatter,
-        fields: { slug, contributors, appConfig, templateConfigs },
+        fields: { slug, contributors, appConfig, templateConfigs, contentWithSnippets },
     } = post
     const {
         title,
@@ -327,6 +363,9 @@ export default function Handbook({
         TeamUpdate: (props) => TeamUpdate({ teamName: title?.replace(/team/gi, '').trim(), ...props }),
         CopyCode,
         TeamMember,
+        DestinationsLibraryCallout,
+        IsEU,
+        IsUS,
         table: (props) => (
             <OverflowXSection>
                 <table {...props} />
@@ -384,7 +423,7 @@ export default function Handbook({
                                                     {description}
                                                 </p>
                                             )}
-                                            {(!hideLastUpdated || filePath) && (
+                                            {(!hideLastUpdated || filePath || contentWithSnippets) && (
                                                 <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
                                                     {!hideLastUpdated && (
                                                         <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
@@ -403,6 +442,21 @@ export default function Handbook({
                                                         >
                                                             Edit this page
                                                         </Link>
+                                                    )}
+                                                    {contentWithSnippets && (!hideLastUpdated || filePath) && (
+                                                        <span className="text-primary/30 dark:text-primary-dark/30">
+                                                            |
+                                                        </span>
+                                                    )}
+                                                    {contentWithSnippets && (
+                                                        <CopyMarkdownActionsDropdown
+                                                            markdownContent={contentWithSnippets}
+                                                            pageUrl={
+                                                                typeof window !== 'undefined'
+                                                                    ? window.location.href
+                                                                    : undefined
+                                                            }
+                                                        />
                                                     )}
                                                 </div>
                                             )}
@@ -506,6 +560,7 @@ export const query = graphql`
                         description
                     }
                 }
+                contentWithSnippets
             }
             frontmatter {
                 title
@@ -529,6 +584,7 @@ export const query = graphql`
                 availability {
                     free
                     selfServe
+                    teams
                     enterprise
                 }
                 thumbnail {
