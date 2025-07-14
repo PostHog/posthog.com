@@ -1897,7 +1897,11 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Python',
+                                    name: 'Setup',
+                                    url: '/docs/libraries/python',
+                                },
+                                {
+                                    name: 'Reference',
                                     url: '/docs/references/posthog-python',
                                 },
                             ],
