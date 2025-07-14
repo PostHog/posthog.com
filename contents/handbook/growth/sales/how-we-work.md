@@ -115,8 +115,8 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
   - Increase ARR for your monthly customers
   - Convert monthly customers to annual - in this case, their monthly usage will count 1.25x towards your quota
-  - Net new ARR from annual deals sold
-  - Net new ARR for renewed annual deals
+  - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
+  - Renew annual deals at a higher ARR than they were on previously
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
   - We don't want TAMs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
@@ -128,6 +128,8 @@ The objective of the meeting is to hold each other to account, provide direct fe
 - In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE fixed.
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
+>
+> If you have customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
 
 ### Team target
 
