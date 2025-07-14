@@ -20,7 +20,7 @@ We run two special programs for early-stage teams. The primary place for discuss
 Any company that is <2 years old and has raised less than $5M in funding is eligible to apply and claim the following:
 
 - $50,000 in PostHog credits (valid for 12 months)
-- Up to 4 unique welcome packs for founders (see [Welcome merch](#welcome-merch))
+- One unique welcome pack for founders
 - Partner benefits with Speakeasy and Mintlify (50% off for 6 months)
 - A monthly newsletter for founders
 
