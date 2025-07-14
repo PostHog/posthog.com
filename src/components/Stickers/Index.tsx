@@ -1475,8 +1475,6 @@ export const StickerFlagIL: StickerComponent<StickerProps> = forwardRef(function
                 d="M31.14 5.76001H3.42C2.12976 5.76001 1.08 6.80977 1.08 8.10001V27.9C1.08 29.1902 2.12976 30.24 3.42 30.24H31.14C32.4302 30.24 33.48 29.1902 33.48 27.9V8.10001C33.48 6.80977 32.4302 5.76001 31.14 5.76001Z"
                 fill="#F2F2F2"
             />
-            <path d="M31.68 10.44H3.96001V13.68H31.68V10.44Z" fill="#2785BD" />
-            <path d="M31.32 22.32H3.59999V25.56H31.32V22.32Z" fill="#2785BD" />
             <path
                 d="M31.14 8.10001H3.42V27.9H31.14V8.10001Z"
                 stroke="#40396E"
@@ -1484,6 +1482,8 @@ export const StickerFlagIL: StickerComponent<StickerProps> = forwardRef(function
                 strokeMiterlimit="10"
                 strokeLinejoin="round"
             />
+            <path d="M30.6 10.44H3.95V13.68H30.6V10.44Z" fill="#2785BD" />
+            <path d="M30.6 22.32H3.95V25.56H30.6V22.32Z" fill="#2785BD" />
             <path d="M17.28 14.58L20.34 19.62H14.22L17.28 14.58Z" stroke="#2785BD" strokeWidth="0.54" />
             <path d="M14.22 16.38H20.34L17.28 21.42L14.22 16.38Z" stroke="#2785BD" strokeWidth="0.54" />
         </BaseSticker>
