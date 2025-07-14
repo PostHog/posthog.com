@@ -126,7 +126,7 @@ We're doing well at monetizing high-growth startups due to our optimization work
 
 We've decided to double down on mass adoption of the platform in high potential startups instead of focusing on enterprise. Simply, this will better help us increase the number of successful products in the world. As a result, we've removed support for [paid self-hosted deployment](/blog/sunsetting-helm-support-posthog) and are doubling down on our open source and cloud projects. We have released a [free tier](/pricing) of PostHog.
 
-We went from “product analytics with some extra stuff thrown in” to “Product OS” and started charging for session replay separately.
+We went from "product analytics with some extra stuff thrown in" to "Product OS" and started charging for session replay separately.
 
 In the product, we're working on making the experience slicker, and we have plans for a standalone quality [CDP](/cdp) in Q2.
 
