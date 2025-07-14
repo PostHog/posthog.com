@@ -53,7 +53,6 @@ export const Icon = ({ color, icon }: { color?: string; icon: string | React.Rea
 export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
 export const MenuItem = ({ icon, color, badge, name, isActive, isOpen }) => {
-    console.log({ name, isActive, isOpen })
     return icon ? (
         <span
             className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
