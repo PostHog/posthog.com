@@ -208,6 +208,16 @@ export default function Desktop() {
         } else {
             setIconPositions(generateInitialPositions())
         }
+
+        const handleResize = () => {
+            setIconPositions(generateInitialPositions())
+        }
+
+        window.addEventListener('resize', handleResize)
+
+        return () => {
+            window.removeEventListener('resize', handleResize)
+        }
     }, [])
 
     const handlePositionChange = (appLabel: string, position: IconPosition) => {
