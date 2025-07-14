@@ -13,10 +13,12 @@ const Parameters = ({
     params,
     title = 'Parameters',
     validTypes,
+    slugPrefix,
 }: {
     params: Parameter[]
     title?: string
     validTypes: string[]
+    slugPrefix: string
 }): JSX.Element | null => {
     if (!params || params.length === 0) return null
 
@@ -52,7 +54,7 @@ const Parameters = ({
                                         </code>
                                     </td>
                                     <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
-                                        <TypeLink type={param.type} validTypes={validTypes} />
+                                        <TypeLink slugPrefix={slugPrefix} type={param.type} validTypes={validTypes} />
                                     </td>
                                 </tr>
                                 {param.description && (

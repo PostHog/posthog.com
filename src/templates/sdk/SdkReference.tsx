@@ -220,7 +220,11 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                                 <ReactMarkdown>{func.details}</ReactMarkdown>
                                                             </Accordion>
                                                         )}
-                                                        <Parameters params={func.params} validTypes={validTypes} />
+                                                        <Parameters
+                                                            slugPrefix={fullReference.info.slugPrefix}
+                                                            params={func.params}
+                                                            validTypes={validTypes}
+                                                        />
                                                     </div>
 
                                                     <div className="lg:sticky top-[108px] space-y-6">
@@ -229,6 +233,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                             language={sdkLanguage}
                                                         />
                                                         <FunctionReturn
+                                                            slugPrefix={fullReference.info.slugPrefix}
                                                             returnType={func.returnType}
                                                             validTypes={validTypes}
                                                         />

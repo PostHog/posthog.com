@@ -1,7 +1,15 @@
 import Link from '../Link'
 import React from 'react'
 
-const TypeLink = ({ type, validTypes }: { type: string | { name: string }; validTypes: string[] }): JSX.Element => {
+const TypeLink = ({
+    type,
+    validTypes,
+    slugPrefix,
+}: {
+    type: string | { name: string }
+    validTypes: string[]
+    slugPrefix: string
+}): JSX.Element => {
     const typeString = typeof type === 'string' ? type : type.name
 
     // Simple function to extract and replace type identifiers
@@ -26,7 +34,10 @@ const TypeLink = ({ type, validTypes }: { type: string | { name: string }; valid
             if (validTypes.includes(baseType)) {
                 return (
                     <React.Fragment key={index}>
-                        <Link to={`/docs/references/types/${baseType}`} className="text-red hover:text-red-dark">
+                        <Link
+                            to={`/docs/references/${slugPrefix}/types/${baseType}`}
+                            className="text-red hover:text-red-dark"
+                        >
                             {baseType}
                         </Link>
                         {arraysuffix}

@@ -66,7 +66,12 @@ export default function SdkType({ pageContext }: { pageContext: PageContext }) {
                     </div>
                     <div className="w-full">
                         {typeData.properties && typeData.properties.length > 0 ? (
-                            <Parameters params={typeData.properties} title="Properties" validTypes={types} />
+                            <Parameters
+                                slugPrefix={typeData.path}
+                                params={typeData.properties}
+                                title="Properties"
+                                validTypes={types}
+                            />
                         ) : typeData.example ? (
                             <div>
                                 <h2 className="text-2xl font-bold mb-4">Example values</h2>

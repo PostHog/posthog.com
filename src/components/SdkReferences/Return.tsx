@@ -4,9 +4,11 @@ import TypeLink from './TypeLink'
 const FunctionReturn = ({
     returnType,
     validTypes,
+    slugPrefix,
 }: {
     returnType: { id: string; name: string }
     validTypes: string[]
+    slugPrefix: string
 }): JSX.Element | null => {
     if (!returnType) return null
 
@@ -53,7 +55,7 @@ const FunctionReturn = ({
                                     </td>
                                 )}
                                 <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
-                                    <TypeLink type={t} validTypes={validTypes} />
+                                    <TypeLink type={t} slugPrefix={slugPrefix} validTypes={validTypes} />
                                 </td>
                             </tr>
                         ))}

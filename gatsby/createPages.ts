@@ -335,6 +335,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                             id
                             title
                             description
+                            slugPrefix
                         }
                         noDocsTypes
                         types {
@@ -835,7 +836,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     result.data.allTypes.edges.forEach(({ node }) => {
         const version = node.info.version
         node.types?.forEach((type) => {
-            if (type.id && !type.id.includes('|') && !type.id.includes('&')) {
+            if (type.id && (type.properties || type.example)) {
                 createPage({
                     path: `/docs/references/${node.info.slugPrefix}/types/${type.id}`,
                     component: SdkTypeTemplate,
