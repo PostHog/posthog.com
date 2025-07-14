@@ -11,7 +11,7 @@ We run two special programs for early-stage teams. The primary place for discuss
 | Eligibility                | <2 years old, <$5M raised     | Must be in YC (any batch)        |
 | Credit                     | $50,000 for 12 months         | $50k (recent batches) or $25k    |
 | BAA eligible?              | ❌ Cannot use credit for BAA  | ✅ Can use credit for BAA        |
-| Founder merch              | Welcome pack (max 4)          | Different welcome pack (max 4)   |
+| Founder merch              | Welcome pack (max 1)          | Different welcome pack (max 4)   |
 | Community                  | —                             | Private YC founder Slack         |
 | Apply via…                 | [Startup page](/startups)     | [Secret YC page](https://app.posthog.com/startups/yc) |
 
