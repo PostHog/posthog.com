@@ -1,48 +1,31 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
-// Import SVG logos
-import AssemblyAILogo from '../images/customers/assemblyai-light.svg'
-import MistralLogo from '../images/customers/mistralai-light.svg'
-import RaycastLogo from '../images/customers/raycast-light.svg'
-import AirbusLogo from '../images/customers/airbus-light.svg'
-import ContraLogo from '../images/customers/contra-light.svg'
+// Import PNG logos (not converted to React components)
 import CreatifyLogo from '../images/customers/creatify-light.png'
-import DhlLogo from '../images/customers/dhl-light.svg'
-import ElevenlabsLogo from '../images/customers/elevenlabs-light.svg'
-import HasuraLogo from '../images/customers/hasura-light.svg'
-import ResearchGateLogo from '../images/customers/researchgate-light.svg'
-import SpeakeasyLogo from '../images/customers/speakeasy-light.svg'
-import StartEngineLogo from '../images/customers/startengine-light.svg'
-import TrustWalletLogo from '../images/customers/trustwallet-light.svg'
-import PostHogLogo from '../images/customers/posthog-light.svg'
-import SupabaseLogo from '../images/customers/supabase-light.svg'
-import NetdataLogo from '../images/customers/netdata-light.svg'
-import PryLogo from '../images/customers/pry-light.svg'
-import CarVerticalLogo from '../images/customers/carvertical-light.svg'
-import PhantomLogo from '../images/customers/phantom-light.svg'
-
-import AssemblyAILogoDark from '../images/customers/assemblyai-dark.svg'
-import MistralLogoDark from '../images/customers/mistralai-dark.svg'
-import RaycastLogoDark from '../images/customers/raycast-dark.svg'
-import AirbusLogoDark from '../images/customers/airbus-dark.svg'
-import ContraLogoDark from '../images/customers/contra-dark.svg'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
-import DhlLogoDark from '../images/customers/dhl-dark.svg'
-import ElevenlabsLogoDark from '../images/customers/elevenlabs-dark.svg'
-import HasuraLogoDark from '../images/customers/hasura-dark.svg'
-import ResearchGateLogoDark from '../images/customers/researchgate-dark.svg'
-import StartEngineLogoDark from '../images/customers/startengine-dark.svg'
-import TrustWalletLogoDark from '../images/customers/trustwallet-dark.svg'
-import PostHogLogoDark from '../images/customers/posthog-dark.svg'
-import SupabaseLogoDark from '../images/customers/supabase-dark.svg'
-import NetdataLogoDark from '../images/customers/netdata-dark.svg'
-import PryLogoDark from '../images/customers/pry-dark.svg'
-import CarVerticalLogoDark from '../images/customers/carvertical-dark.svg'
-import PhantomLogoDark from '../images/customers/phantom-dark.svg'
 
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
+import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
+import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
+import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
+import ContraLogo from '../components/CustomerLogos/ContraLogo'
+import DHLLogo from '../components/CustomerLogos/DHLLogo'
+import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
+import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
+import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
+import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
+import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
+import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
+import PryLogo from '../components/CustomerLogos/PryLogo'
+import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
+import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
+import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
+import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
+import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
+import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
+import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 
 export interface Customer {
     slug: string
@@ -95,38 +78,26 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Airbus',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: AirbusLogo,
-            dark: AirbusLogoDark,
-        },
+        logo: AirbusLogo,
         height: 24,
     },
     assemblyai: {
         name: 'AssemblyAI',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: AssemblyAILogo,
-            dark: AssemblyAILogoDark,
-        },
+        logo: AssemblyAILogo,
     },
     carvertical: {
         name: 'carVertical',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: CarVerticalLogo,
-            dark: CarVerticalLogoDark,
-        },
+        logo: CarVerticalLogo,
     },
     contra: {
         name: 'Contra',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: ContraLogo,
-            dark: ContraLogoDark,
-        },
+        logo: ContraLogo,
     },
     creatify: {
         name: 'Creatify',
@@ -141,102 +112,69 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'DHL',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: DhlLogo,
-            dark: DhlLogoDark,
-        },
+        logo: DHLLogo,
     },
     elevenlabs: {
         name: 'ElevenLabs',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: ElevenlabsLogo,
-            dark: ElevenlabsLogoDark,
-        },
+        logo: ElevenLabsLogo,
         height: 18,
     },
     hasura: {
         name: 'Hasura',
         toolsUsed: ['session_replay'],
         notes: '',
-        logo: {
-            light: HasuraLogo,
-            dark: HasuraLogoDark,
-        },
+        logo: HasuraLogo,
     },
     mistralai: {
         name: 'Mistral AI',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: MistralLogo,
-            dark: MistralLogoDark,
-        },
+        logo: MistralAILogo,
     },
     netdata: {
         name: 'Netdata',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: NetdataLogo,
-            dark: NetdataLogoDark,
-        },
+        logo: NetdataLogo,
     },
     phantom: {
         name: 'Phantom',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: PhantomLogo,
-            dark: PhantomLogoDark,
-        },
+        logo: PhantomLogo,
     },
     pry: {
         name: 'Pry',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: PryLogo,
-            dark: PryLogoDark,
-        },
+        logo: PryLogo,
     },
     posthog: {
         name: 'PostHog',
         toolsUsed: [],
         notes: 'Would it be clever or lame if we included our own company here?',
-        logo: {
-            light: PostHogLogo,
-            dark: PostHogLogoDark,
-        },
+        logo: PostHogLogo,
     },
     raycast: {
         name: 'Raycast',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: RaycastLogo,
-            dark: RaycastLogoDark,
-        },
+        logo: RaycastLogo,
     },
     researchgate: {
         name: 'ResearchGate',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: ResearchGateLogo,
-            dark: ResearchGateLogoDark,
-        },
+        logo: ResearchGateLogo,
         height: 20,
     },
     speakeasy: {
         name: 'Speakeasy',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: SpeakeasyLogo,
-            dark: SpeakeasyLogo,
-        },
+        logo: SpeakeasyLogo,
     },
     significa: {
         name: 'Significa',
@@ -261,28 +199,19 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Supabase',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: SupabaseLogo,
-            dark: SupabaseLogoDark,
-        },
+        logo: SupabaseLogo,
     },
     startengine: {
         name: 'StartEngine',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: StartEngineLogo,
-            dark: StartEngineLogoDark,
-        },
+        logo: StartEngineLogo,
     },
     trust: {
         name: 'Trust',
         toolsUsed: [],
         notes: '',
-        logo: {
-            light: TrustWalletLogo,
-            dark: TrustWalletLogoDark,
-        },
+        logo: TrustWalletLogo,
     },
     vendasta: {
         name: 'Vendasta',
@@ -292,12 +221,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     },
     ycombinator: {
         name: 'Y Combinator',
-        toolsUsed: ['Experiments', 'Autocapture', 'PostHog Cloud', 'Insights'],
+        toolsUsed: ['experiments', 'autocapture', 'posthog_cloud', 'insights'],
         notes: '',
-        logo: {
-            light: 'https://res.cloudinary.com/dmukukwp6/image/upload/ycombinator_light_86e121ca81.svg',
-            dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/ycombinator_dark_926586dfe2.svg',
-        },
+        logo: YCombinatorLogo,
     },
 }
 

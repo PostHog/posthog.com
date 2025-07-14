@@ -52,8 +52,8 @@ export default function CustomersSlide({ productName, customers, customerData, h
                 if (typeof customer.logo === 'function') {
                     const LogoComponent = customer.logo
                     return (
-                        <div className="fill-current">
-                            <LogoComponent className="w-full object-contain max-h-6" />
+                        <div className="">
+                            <LogoComponent className="w-full fill-current object-contain max-h-6" />
                         </div>
                     )
                 }
