@@ -119,7 +119,7 @@ Contacts:
 
 We previously offered DigitalOcean credits ($25k), but this was retired in Q2 2025.
 
-## Program Extensions
+## Program extensions
 
 We don’t usually extend credits — the 12-month window is intended to be firm and fair. However, we’re open to requests in exceptional cases. 
 
