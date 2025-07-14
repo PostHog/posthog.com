@@ -11,6 +11,7 @@ interface ProductCardProps {
     icon: React.ReactNode
     denominator?: string
     backContent: React.ReactNode
+    backText?: string
 }
 
 // Product details (from products.tsx)
@@ -120,11 +121,11 @@ export const StartupProductCards = ({
                     {products.map((product) => (
                         <div
                             key={product.name}
-                            className="relative group rounded-2xl shadow-xl p-8 text-left bg-white dark:bg-accent-dark transition-all duration-300 cursor-pointer h-40 flex flex-col items-center w-full min-w-[160px] max-w-[200px] mx-auto hover:shadow-2xl hover:scale-[1.03]"
+                            className="relative group rounded-2xl shadow-xl p-8 text-left bg-white dark:bg-accent-dark transition-all duration-300 cursor-pointer h-40 flex flex-col items-center w-full min-w-[200px] max-w-[280px] mx-auto hover:shadow-2xl hover:scale-[1.03]"
                         >
                             <div className="absolute inset-0 rounded-2xl bg-accent dark:bg-accent-dark opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 p-8 flex flex-col justify-center items-center text-center">
                                 <a href="/pricing" className="text-base font-medium underline text-primary">
-                                    See pricing
+                                    {product.backText || 'See pricing'}
                                 </a>
                             </div>
                             <div className="relative z-20 group-hover:opacity-0 transition-opacity duration-300 flex flex-col items-center mb-0 w-full rounded-2xl">

@@ -38,24 +38,20 @@ import { CallToAction } from 'components/CallToAction'
 import { IconRocket } from '@posthog/icons'
 import { StartupProductCards, startupProducts } from '../src/components/StartupProductCards'
 import * as Icons from '@posthog/icons'
-import { Hero } from 'components/Products/StartupsHero'
+import { StartupsHero } from 'components/Products/StartupsHero'
 
 export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/startup-refer.png"
 
-<Hero
+<StartupsHero
   color="red"
   icon={<IconRocket className="w-7 h-7" />}
   product="PostHog for Startups"
-  title="Start the journey to product-market fit with $50,000 in credits"
-  description="The only startup program with free laptop stickers, exclusive founder merch, and $50,000 in PostHog credit. Teams must be less than 2 years old and have less than $5 million in funding to qualify."
+  title="Start your journey to product-market fit with $50,000 in credits"
+  description="Plus, some sweet laptop stickers and other benefits you'll actually use"
 />
 
-
-<section class="py-16 px-5">
+<section class="pt-4 pb-16 px-5">
   <div class="max-w-screen-2xl mx-auto">
-    <div class="flex justify-center mb-8">
-      <img src="https://res.cloudinary.com/dmukukwp6/image/upload/1724161583653_billing_transition_01_J5_R0_KQ_253_HXSQKD_8_Y6_PMBJ_0_F_04a8cb9d51.png" alt="What you get illustration" class="mx-auto max-w-full h-auto w-1/4" />
-    </div>
     <h3 class="text-2xl lg:text-4xl m-0 text-center mb-6 sm:mb-16 lg:mb-1">Here's what you get when you join</h3>
     <p class="text-2xl lg:text-3xl m-0 text-center mb-16">Teams must be less than 2 years old and have less than $5 million in funding to qualify</p>
     
@@ -121,7 +117,7 @@ export const refer = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.
 <section class="my-24 px-5">
   <div class="max-w-screen-2xl mx-auto">
     <h3 class="text-2xl lg:text-4xl m-0 text-center mb-3 sm:mb-8 lg:mb-1">Recommended by the world's leading startup accelerators</h3>
-    <p className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 text-primary/75 dark:text-primary-dark/75 text-center text-xl pb-8">(And <a href="/blog/categories/startups">their startups</a> like us, too.)</p>
+    <p className="m-0 dark:text-primary-dark font-semibold mt-2 md:mt-0 text-primary/75 dark:text-primary-dark/75 text-center text-xl pb-8">(And <a href="/blog/categories/startups">their startups</a> like us, too)</p>
   </div>
   <ul class="list-none p-0 grid md:grid-cols-3 gap-4 mb-5 md:mb-10  justify-center">
 <li class="w-full bg-accent dark:bg-accent-dark p-6 rounded">
