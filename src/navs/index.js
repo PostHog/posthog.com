@@ -452,15 +452,11 @@ export const handbookSidebar = [
                 url: '/handbook/finance',
             },
             {
-                name: '14. Where we are now',
-                url: '/handbook/current-status',
-            },
-            {
-                name: '15. Where are we going?',
+                name: '14. Where are we going?',
                 url: '/handbook/future',
             },
             {
-                name: '16. How you can help',
+                name: '15. How you can help',
                 url: '/handbook/help',
             },
         ],
