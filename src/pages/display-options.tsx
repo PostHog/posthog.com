@@ -293,7 +293,7 @@ export default function DisplayOptions() {
 
     return (
         <>
-            <SEO title="Site settings" description="Personalize your PostHog.com experience" />
+            <SEO title="Display options" description="Personalize your PostHog.com experience" />
             <div data-scheme="secondary" className="w-full h-full bg-primary text-primary p-2">
                 <Fieldset legend="Display">
                     <div className="bg-primary grid grid-cols-2 gap-2">

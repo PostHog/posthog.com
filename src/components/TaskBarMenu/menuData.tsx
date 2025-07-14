@@ -249,8 +249,8 @@ export function useMenuData(): MenuType[] {
                 },
                 {
                     type: 'item',
-                    label: 'Site settings',
-                    link: '/site-settings',
+                    label: 'Display options',
+                    link: '/display-options',
                 },
                 { type: 'separator' },
                 {
