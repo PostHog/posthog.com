@@ -313,7 +313,7 @@ const appSettings: AppSettings = {
             fixed: true,
         },
     },
-    '/site-settings': {
+    '/display-options': {
         size: {
             min: {
                 width: 600,
