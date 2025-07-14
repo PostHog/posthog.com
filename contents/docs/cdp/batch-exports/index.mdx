@@ -73,6 +73,16 @@ More information, including any additional necessary permissions, schema informa
 * [Postgres](/docs/cdp/batch-exports/postgres)
 * [Redshift](/docs/cdp/batch-exports/redshift)
 
+## Sessions model <span class="bg-gray-accent-light dark:bg-gray-accent-dark text-gray font-semibold align-middle text-sm p-1 rounded">Beta</span>
+
+> **Note:** The sessions model is currently in `beta`. This means the schema of this model is subject to change.
+>
+> You can request access via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue).
+
+A [session](/docs/data/sessions) in PostHog represents a series of events that make up a single use of your product or visit to your website. The sessions model is immutable, with each session uniquely identified by its `session_id`.
+
+If you want to link events with sessions, you'll need to ensure you're capturing the `$session_id` in your events. This is done automatically by our JavaScript Web library and mobile SDKs. For server-side SDKs, refer to our [docs](https://posthog.com/docs/data/sessions#server-sdks-and-sessions).
+
 ## Batch runs
 
 A batch export is executed in batch runs depending on the configured frequency. For example, an hourly batch export starts a run on every hour. The data processed by every run has an **upper bound** given by the time in which the run is scheduled to start, and a **lower bound** that results from subtracting the frequency to the batch run's scheduled start time.
