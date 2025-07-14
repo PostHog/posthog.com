@@ -13,8 +13,6 @@ crosspost:
  - product-engineers
 ---
 
-# How we use the data warehouse at PostHog
-
 PostHog’s [data warehouse](/data-warehouse) is arguably our most powerful feature. It lets you sync data from [external sources](/docs/cdp/sources), query it alongside your existing product data using [SQL](/docs/data-warehouse/sql), and visualize it natively. 
 
 We’re big fans of the data warehouse at PostHog (we did build it after all). To prove it, our team has created **over 1600** SQL insights using our data warehouse. It’s our second most popular type of insight behind trends (which existed many years before).
@@ -744,7 +742,7 @@ from zendesk_tickets
 where created_at >= toStartOfDay(now()) - interval 6 month
 group by hour_of_day
 ```
-    
+</details>
 
 ## Sales
 
