@@ -63,6 +63,11 @@ export default function QuestionsSlide({
         if (tutorialNode.rawBody) {
             let content = tutorialNode.rawBody
 
+            // First, remove all import statements (they can be on single lines or span multiple lines)
+            content = content.replace(/^import\s+.*?from\s+['"].*?['"]\s*$/gm, '')
+            content = content.replace(/^import\s+{[\s\S]*?}\s+from\s+['"].*?['"]\s*$/gm, '')
+            content = content.replace(/^import\s+.*$/gm, '')
+
             // If there's a hash fragment, find the corresponding header and start from there
             if (hashFragment) {
                 // Convert hash fragment to potential header formats
@@ -104,9 +109,26 @@ export default function QuestionsSlide({
 
             // Split by double newlines to get paragraphs
             const paragraphs = content.split('\n\n')
-            // Take first few paragraphs, skip frontmatter, export statements, and images
+            // Take first few paragraphs, skip various non-content elements
             const contentParagraphs = paragraphs
-                .filter((p: string) => !p.startsWith('---') && !p.startsWith('export ') && p.trim().length > 50)
+                .filter((p: string) => {
+                    const trimmed = p.trim()
+                    // Skip frontmatter
+                    if (trimmed.startsWith('---')) return false
+                    // Skip export statements
+                    if (trimmed.startsWith('export ')) return false
+                    // Skip import statements (single or multiline)
+                    if (trimmed.startsWith('import ') || trimmed.match(/^import\s+{/)) return false
+                    // Skip code blocks (triple backticks)
+                    if (trimmed.startsWith('```')) return false
+                    // Skip JSX/HTML blocks
+                    if (trimmed.match(/^<[A-Z][a-zA-Z]*[\s>]/)) return false
+                    // Skip short paragraphs
+                    if (trimmed.length <= 50) return false
+                    // Skip paragraphs that are just lists of imports
+                    if (trimmed.match(/^import\s+.*from\s+['"].*['"]/m)) return false
+                    return true
+                })
                 .map((p: string) => {
                     // If paragraph starts with a header, remove just the header line but keep the rest
                     if (p.startsWith('#')) {
@@ -124,10 +146,36 @@ export default function QuestionsSlide({
                 })
                 .filter((p: string) => p.length > 0) // Remove empty paragraphs after image removal
                 .slice(0, 5)
-                .join('\n\n')
 
+            // If we found no content paragraphs, try to find any prose content
+            if (contentParagraphs.length === 0) {
+                // Split by single newlines and look for prose
+                const lines = content.split('\n')
+                const proseLines = lines.filter((line: string) => {
+                    const trimmed = line.trim()
+                    // Skip empty lines
+                    if (!trimmed) return false
+                    // Skip headers
+                    if (trimmed.startsWith('#')) return false
+                    // Skip code/component lines
+                    if (trimmed.startsWith('<') || trimmed.endsWith('>')) return false
+                    // Skip lines that look like code
+                    if (trimmed.startsWith('```') || trimmed.startsWith('    ')) return false
+                    // Skip lines with only special characters
+                    if (trimmed.match(/^[<>{}\[\]()]+$/)) return false
+                    // Accept lines with actual prose (at least 20 chars)
+                    return trimmed.length > 20
+                })
+                
+                if (proseLines.length > 0) {
+                    const proseContent = proseLines.slice(0, 10).join(' ')
+                    return proseContent.length > 900 ? proseContent.substring(0, 900) + '...' : proseContent
+                }
+            }
+
+            const joinedContent = contentParagraphs.join('\n\n')
             // Limit to reasonable length
-            return contentParagraphs.length > 900 ? contentParagraphs.substring(0, 900) + '...' : contentParagraphs
+            return joinedContent.length > 900 ? joinedContent.substring(0, 900) + '...' : joinedContent
         }
 
         return 'No preview available.'

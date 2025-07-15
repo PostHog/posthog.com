@@ -119,10 +119,6 @@ export const errorTracking = {
     ],
     questions: [
         {
-            question: 'How do I track errors in my application?',
-            url: '/docs/error-tracking/installation',
-        },
-        {
             question: 'How can I analyze error patterns?',
             url: '/docs/error-tracking/monitoring',
         },
