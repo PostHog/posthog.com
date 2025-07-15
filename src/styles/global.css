@@ -2088,7 +2088,6 @@ body.dark .max-ai-body {
     font-family: Arial, sans-serif;
     font-size: 4em;
     font-weight: bold;
-    position: relative;
     z-index: 1;
     display: inline-flex;
     -webkit-font-smoothing: antialiased;

@@ -15,24 +15,29 @@ export default function GettingStartedSlide({ initialState }: { initialState: an
                 canvasSize={{ width: 1066, height: 614 }}
                 initialState={initialState}
             />
-            <div className="absolute inset-0">
-                <div className="text-center">
-                    {/* <WordArt text="PostHog" theme="rainbow" fontSize={60} />
+            {/* <WordArt text="PostHog" theme="rainbow" fontSize={60} />
                     <WordArt text="Analytics" theme="superhero" fontSize={40} /> */}
 
-                    <WordArt text="If you were looking for a sign..." theme="superhero" fontSize={64} />
+            <div className="size-12 bg-red inline-block absolute top-0 left-0"></div>
+            <WordArt text="Get started!!" theme="superhero" fontSize={48} className="absolute top-16 left-24" />
+            <WordArt
+                text="If you were looking for a sign..."
+                theme="rainbow"
+                fontSize={40}
+                className="absolute top-24 left-48"
+            />
+            <WordArt text="Follow your dreams" theme="blues" fontSize={40} className="absolute top-36 right-12" />
+            <WordArt text="AI installation" theme="italicOutline" fontSize={24} className="absolute top-72 left-24" />
+            <WordArt text="Not AI install" theme="italicOutline" fontSize={24} className="absolute top-72 right-24" />
 
-                    {/*                     
+            {/*                     
                     <WordArt text="If you were looking for a sign..." theme="rainbow" fontSize={40} />
-                    <WordArt text="If you were looking for a sign..." theme="blues" fontSize={40} />
                     <WordArt text="If you were looking for a sign..." theme="radial" fontSize={40} />
                     <WordArt text="If you were looking for a sign..." theme="tilt" fontSize={40} />
                     <WordArt text="If you were looking for a sign..." theme="purple" fontSize={40} />
                     <WordArt text="If you were looking for a sign..." theme="horizon" fontSize={40} />
                     <WordArt text="If you were looking for a sign..." theme="italicOutline" fontSize={40} />
                     <WordArt text="If you were looking for a sign..." theme="slate" fontSize={40} /> */}
-                </div>
-            </div>
         </div>
     )
 }

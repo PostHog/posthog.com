@@ -80,6 +80,7 @@ interface MSPaintProps {
     threshold?: number // Threshold for black/white conversion (0-255, undefined = full color)
     canvasSize?: { width: number; height: number }
     initialState?: MSPaintState
+    children?: React.ReactNode
 }
 
 interface MSPaintState {
@@ -106,6 +107,7 @@ export default function MSPaint({
     threshold,
     canvasSize: initialCanvasSize,
     initialState,
+    children,
 }: MSPaintProps = {}) {
     const { updateWindow } = useApp()
     const { appWindow } = useWindow()
@@ -1104,6 +1106,7 @@ export default function MSPaint({
                                 height={state.canvasSize.height}
                                 className="absolute top-0 left-0 pointer-events-none"
                             />
+                            {children}
                         </div>
                     </div>
                 </div>

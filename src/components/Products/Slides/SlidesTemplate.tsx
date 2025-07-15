@@ -296,7 +296,7 @@ export default function SlidesTemplate({
                             >
                                 {slide.name}
                             </span>
-                            <DebugContainerQuery />
+                            {/* <DebugContainerQuery /> */}
                             {/* Mobile view - 9:16 aspect ratio */}
                             <div className="@2xl:hidden bg-primary aspect-[9/16] relative rounded-md shadow-lg overflow-hidden">
                                 {slide.mobileContent}
