@@ -265,6 +265,7 @@ export default function Presentation({
                         {!fullScreen && (
                             <>
                                 <HeaderBar
+                                    hasLeftSidebar={sidebarContent ? { enabled: true, alwaysShow: true } : false}
                                     showSidebar
                                     showSearch
                                     isNavVisible={isNavVisible}
@@ -285,15 +286,6 @@ export default function Presentation({
                             <>
                                 <div className="min-h-0 flex-1">
                                     <ScrollArea className="h-full flex-1 border-t border-primary">
-                                        {accentImage && (
-                                            <div className="absolute right-0 top-6">
-                                                <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
-                                                    {accentImage}
-                                                    <div className="absolute left-0 top-0 w-1/2 h-full bg-gradient-to-r from-[var(--bg)] to-[color-mix(in_srgb,var(--bg)_0%,transparent)]" />
-                                                    <div className="absolute bottom-0 left-0 h-1/2 w-full bg-gradient-to-b from-[color-mix(in_srgb,var(--bg)_0%,transparent)] to-[var(--bg)]" />
-                                                </div>
-                                            </div>
-                                        )}
                                         <div className="relative">{children}</div>
                                     </ScrollArea>
                                 </div>

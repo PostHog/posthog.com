@@ -26,6 +26,8 @@ import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
+import ZealotLogo from '../images/customers/zealot-light.png'
+import ZealotLogoDark from '../images/customers/zealot-dark.png'
 
 export interface Customer {
     slug: string
@@ -218,6 +220,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['experiments'],
         notes: '',
         logo: VendastaLogo,
+    },
+    zealot: {
+        name: 'Zealot',
+        toolsUsed: ['error_tracking'],
+        notes: '',
+        logo: {
+            light: ZealotLogo,
+            dark: ZealotLogoDark,
+        },
     },
     ycombinator: {
         name: 'Y Combinator',

@@ -232,7 +232,7 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
                 <p className="text-[13px]">
                     Toggle light/dark mode in{' '}
                     <span className="inline-flex items-center gap-0.5">
-                        <Link to="/site-settings" state={{ newWindow: true }} className="font-semibold underline">
+                        <Link to="/display-options" state={{ newWindow: true }} className="font-semibold underline">
                             desktop settings
                         </Link>
                     </span>
@@ -515,23 +515,21 @@ function ReaderViewContent({
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
                             ${renderLeftSidebar && isNavVisible ? 'rounded-l' : 'border-l-0'}
-                            ${
-                                showSidebar && isTocVisible
-                                    ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
-                                    : 'border-r-0'
-                            } ${
-                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                            ${showSidebar && isTocVisible
+                                ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
+                                : 'border-r-0'
+                            } ${selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                                 : ''
-                        }`}
+                            }`}
                         style={
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? {
-                                      backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
-                                      backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
-                                      backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
-                                      backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
-                                  }
+                                    backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
+                                    backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
+                                    backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
+                                    backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
+                                }
                                 : undefined
                         }
                     >
@@ -542,13 +540,11 @@ function ReaderViewContent({
                         >
                             <div
                                 ref={contentRef}
-                                className={`@container/reader-content relative ${
-                                    padding
+                                className={`@container/reader-content relative ${padding
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
-                                } mx-auto transition-all ${
-                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
-                                }`}
+                                    } mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
+                                    }`}
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && (
@@ -632,9 +628,8 @@ function ReaderViewContent({
                 {/* Third row - Footer */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
                     <motion.div
-                        className={`flex-shrink-0 transition-all min-w-0 ${
-                            renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 transition-all min-w-0 ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
+                            }`}
                     >
                         {/* this space intentionally left blank */}
                     </motion.div>
@@ -678,9 +673,8 @@ function ReaderViewContent({
                         )}
                     </div>
                     <motion.div
-                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
-                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
-                        }`}
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
+                            }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
                         {filePath && (

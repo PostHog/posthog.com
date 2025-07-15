@@ -3,7 +3,7 @@ import { IconPieChart } from '@posthog/icons'
 
 export const webAnalytics = {
     Icon: IconPieChart,
-    name: 'Web analytics',
+    name: 'Web Analytics',
     handle: 'web_analytics',
     type: 'product_analytics',
     slug: 'web-analytics',
@@ -503,4 +503,25 @@ export const webAnalytics = {
                 'Get even more context by sending surveys to users. Arrange interviews. Ask questions. Serve pop-ups.',
         },
     ],
+    presenterNotes: {
+        overview:
+            "GA4 is a disaster. Everyone knows it. We built what GA3 should have evolved into - simple, privacy-focused, no sampling. Works out of the box. Plus it's part of the whole platform, so you can jump from a traffic spike to watching those exact sessions. No cookies required if you don't want them.",
+        customers:
+            "Y Combinator gets 30% more data than GA4 because we're not blocked as much. Significa ditched Plausible for us - more powerful, same privacy focus. Creatify summed it up: 'It's so much better than GA4.' These aren't edge cases. GA4 is just that bad.",
+        features:
+            "<strong>Core metrics:</strong> Everything you expect: visitors, pageviews, sessions, bounce rate. Real-time. No sampling. Cookieless option means no cookie banner needed.<br /><br /><strong>Traffic sources:</strong> Auto-categorizes into channels (Direct, Organic, Paid, Social). Full UTM support. Create custom channels like 'AI' or 'Partners'. See exactly which sites send traffic.<br /><br /><strong>Advanced analytics:</strong> Scroll depth shows how far people actually read. Web Vitals (LCP, FCP, INP, CLS) for Core Web Vitals tracking. Set conversion goals. Track revenue. See when users are active.<br /><br /><strong>Privacy & compliance:</strong> GDPR compliant. Optional cookieless tracking. Anonymous mode cuts costs dramatically. Reverse proxy reduces ad blocker impact by 70%+. Choose US or EU hosting.<br /><br /><strong>Device & demographics:</strong> Device types, browsers, OS, screen sizes. Country and city data. Automatic bot filtering. Everything you need to know your audience.<br /><br /><strong>Works with product analytics:</strong> Same events power both. No duplicate tracking. Cross-domain support. Connect backend events to frontend sessions. No extra cost beyond events.",
+        answers:
+            "These are the questions everyone asks. The dashboard answers them all instantly. No building reports, no waiting for data to process. It's all there, real-time, from day one.",
+        pricing:
+            'Part of product analytics pricing. 1 million events free monthly. Anonymous events cost 10x less than identified. Most sites never pay anything. Even high-traffic sites pay way less than GA360.',
+        'comparison-summary':
+            "GA4 is free but terrible. Matomo is privacy-focused but limited. We're privacy-focused AND powerful. Plus we're not just web analytics - it's integrated with everything else. If you liked GA3, you'll love this. If you like GA4, seek help.",
+        'feature-comparison':
+            "We have everything the others have plus: scroll depth, custom channels, no sampling, ad blocker resilience, integrated product analytics. We don't have GA4's data lag or confusing interface. Thank god.",
+        docs: "Setup takes 5 minutes. Add snippet, see data. We document every metric clearly. Common questions like 'unique vs returning visitors' explained simply. Migration guides from GA4 and others included.",
+        'pairs-with':
+            "See traffic spike? Click through to session replays of those visitors. Run surveys on specific traffic sources. Build custom analytics beyond the dashboard. It all connects because it's one platform.",
+        'getting-started':
+            'Add our snippet. Data flows immediately. The pre-built dashboard has everything most people need. Later, customize with product analytics if you want deeper insights. But honestly, the defaults are probably enough.',
+    },
 }

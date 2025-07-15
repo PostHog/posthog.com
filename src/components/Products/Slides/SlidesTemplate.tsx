@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import SEO from 'components/seo'
 import Presentation from 'components/Presentation'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
@@ -21,6 +21,7 @@ import PairsWithSlide from './PairsWithSlide'
 import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, defaultSlides } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -39,6 +40,10 @@ export default function SlidesTemplate({
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
 }: SlidesTemplateProps) {
+    // Track whether we're in mobile or desktop view
+    // Start with true (mobile) as default since that's the initial visible state
+    const [isMobileView, setIsMobileView] = useState(true)
+
     // Extract products data for the pricing component
     const products = data.allProductData.nodes[0].products
 
@@ -52,6 +57,47 @@ export default function SlidesTemplate({
     // Get customer slugs from product and retrieve customer data
     const customerSlugs = productData?.customers ? Object.keys(productData.customers) : []
     const customers = getCustomers(customerSlugs)
+
+    // Effect to detect when we're in mobile vs desktop view
+    useEffect(() => {
+        const checkViewMode = () => {
+            // Find a slide container to check visibility
+            const slideContainer = document.querySelector('[data-slide-id]')
+            if (!slideContainer) return
+
+            // Find the mobile and desktop views within a slide
+            const mobileView = slideContainer.querySelector('.\\@2xl\\:hidden.aspect-\\[9\\/16\\]')
+            const desktopView = slideContainer.querySelector('.hidden.\\@2xl\\:block.aspect-video')
+
+            if (mobileView && desktopView) {
+                // Check which one is visible
+                const mobileStyles = window.getComputedStyle(mobileView)
+                const isMobileVisible = mobileStyles.display !== 'none'
+                setIsMobileView(isMobileVisible)
+            }
+        }
+
+        // Initial check
+        setTimeout(checkViewMode, 100)
+
+        // Check on window resize
+        window.addEventListener('resize', checkViewMode)
+
+        // Also observe container size changes
+        const observer = new ResizeObserver(() => {
+            setTimeout(checkViewMode, 50)
+        })
+
+        const containers = document.querySelectorAll('[data-slide-id]')
+        containers.forEach((container) => {
+            observer.observe(container)
+        })
+
+        return () => {
+            window.removeEventListener('resize', checkViewMode)
+            observer.disconnect()
+        }
+    }, [productData?.slug])
 
     // Handle loading state
     if (!productData) {
@@ -194,16 +240,20 @@ export default function SlidesTemplate({
     // Create slides with both raw content and wrapped content for different contexts
     const slides = rawSlides.map((slide) => ({
         ...slide,
-        // Wrapped content for editor view
+        // Wrapped content for editor view - desktop
         content: (
             <ScalableSlide mode="editor" baseWidth={1280} baseHeight={720}>
                 {slide.content}
             </ScalableSlide>
         ),
-        // Raw content for presentation mode
+        // Wrapped content for editor view - mobile
+        mobileContent: (
+            <ScalableSlide mode="editor" baseWidth={720} baseHeight={1280}>
+                {slide.content}
+            </ScalableSlide>
+        ),
+        // Raw content for presentation mode and thumbnails
         rawContent: slide.content,
-        // Simplified content for thumbnails (avoids complex components)
-        thumbnailContent: slide.content,
     }))
 
     return (
@@ -219,7 +269,12 @@ export default function SlidesTemplate({
                 title=""
                 slideId={productData?.slug}
                 sidebarContent={(activeSlideIndex) => (
-                    <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} slideId={productData?.slug} />
+                    <SlideThumbnails
+                        slides={slides}
+                        activeSlideIndex={activeSlideIndex}
+                        slideId={productData?.slug}
+                        isMobileView={isMobileView}
+                    />
                 )}
                 slides={slides}
                 presenterNotes={productData?.presenterNotes}
@@ -231,7 +286,7 @@ export default function SlidesTemplate({
                     {slides.map((slide, index) => (
                         <div
                             key={slide.slug}
-                            className="flex flex-col justify-center bg-accent"
+                            className="@container flex flex-col justify-center bg-accent"
                             data-slide={index}
                             data-slide-id={productData?.slug}
                         >
@@ -241,7 +296,13 @@ export default function SlidesTemplate({
                             >
                                 {slide.name}
                             </span>
-                            <div className="bg-primary aspect-video relative rounded-md shadow-lg overflow-hidden">
+                            <DebugContainerQuery />
+                            {/* Mobile view - 9:16 aspect ratio */}
+                            <div className="@2xl:hidden bg-primary aspect-[9/16] relative rounded-md shadow-lg overflow-hidden">
+                                {slide.mobileContent}
+                            </div>
+                            {/* Desktop view - 16:9 aspect ratio */}
+                            <div className="hidden @2xl:block bg-primary aspect-video relative rounded-md shadow-lg overflow-hidden">
                                 {slide.content}
                             </div>
                         </div>

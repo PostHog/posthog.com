@@ -12,18 +12,20 @@ type AppIconVariants = {
 
 type AppIconName =
     | 'doc'
-    | 'pricing'
-    | 'notebook'
-    | 'tour'
-    | 'map'
-    | 'spreadsheet'
+    | 'contact'
+    | 'folder'
     | 'forums'
     | 'games'
+    | 'hedgehog_mode'
+    | 'hogpaint'
+    | 'map'
+    | 'notebook'
     | 'photobooth'
-    | 'contact'
     | 'posthog'
-    | 'folder'
     | 'presentation'
+    | 'pricing'
+    | 'spreadsheet'
+    | 'tour'
 
 const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     doc: {
@@ -33,6 +35,12 @@ const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     folder: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/folder_classic_d2fdf96f82.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/folder_af7d0524aa.png',
+    },
+    hedgehog_mode: {
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/hedgehog_mode_eaf3d50472.png',
+    },
+    hogpaint: {
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/arthog_ed871b96df.png',
     },
     presentation: {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/presentation_f329e94fe5.png',

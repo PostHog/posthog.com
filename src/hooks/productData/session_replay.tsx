@@ -9,7 +9,7 @@ import SnippetRenderer from 'components/SnippetRenderer'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
-    name: 'Session replay',
+    name: 'Session Replay',
     handle: 'session_replay',
     type: 'session_replay',
     slug: 'session-replay',
@@ -75,29 +75,6 @@ export const sessionReplay = {
                     alt: 'Timeline',
                 },
             ],
-
-            // features: [
-            //     {
-            //         title: 'Filtering',
-            //         description:
-            //             'Set filters for individual steps – or the entire funnel – by person property, group or cohort, or event property',
-            //     },
-            //     {
-            //         title: 'Graph types',
-            //         description:
-            //             "Track user progression between steps, conversion time between each step, and how a funnel's conversion rate changes over time",
-            //     },
-            //     {
-            //         title: 'Step ordering',
-            //         description:
-            //             'Choose between a sequential series of steps, a strict order, or any order of steps that lead to conversion',
-            //     },
-            //     {
-            //         title: 'Granular controls',
-            //         description:
-            //             'Set conversion window limit, add exclusionary steps, set attribution type, and see the relative conversion rate between each step',
-            //     },
-            // ],
         },
         {
             title: 'Console logs',

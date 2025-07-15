@@ -7,7 +7,7 @@ import { useContentData } from 'hooks/useContentData'
 const PRODUCT_HANDLE = 'surveys'
 
 export default function Surveys(): JSX.Element {
-    // Combined GraphQL query for both tutorial data and product data
+    const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
             allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -82,7 +82,6 @@ export default function Surveys(): JSX.Element {
 
     const mergedData = {
         ...data,
-
         ...contentData,
     }
 

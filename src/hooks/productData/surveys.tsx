@@ -344,4 +344,25 @@ export const surveys = {
                 "Watch recordings of users completing a survey to understand full context about a user's behavior.",
         },
     ],
+    presenterNotes: {
+        overview:
+            "Surveys let you ask users anything right inside your product. No-code for simple stuff, API if you want custom UI. What's different: it's connected to everything else. See who answered what, watch their session recordings, run analytics on responses. Most survey tools are islands - ours is part of the whole system.",
+        customers:
+            "Purplewave hit 25% response rates because the surveys show up exactly when users care. ElevenLabs uses them creatively - they pop surveys asking power users to review them on G2. Smart. These aren't email surveys people ignore. They're contextual, in-app, at the right moment.",
+        features:
+            "<strong>Question types:</strong> All the standards: multiple choice, ratings, emojis, free text. Plus embedded links - great for calendly scheduling or external forms.<br /><br /><strong>Templates:</strong> NPS, PMF, satisfaction, user interviews. Start from these or build your own. Takes minutes.<br /><br /><strong>Display conditions:</strong> Target by URL, user properties, or feature flags. Ask beta users about new features. Survey only enterprise customers. Whatever you need.<br /><br /><strong>Multi-step surveys:</strong> Up to 10 questions. Progress bar included. People actually complete multi-step surveys when they're contextual.<br /><br /><strong>Link somewhere:</strong> End with a calendar link for user interviews. Or send to a detailed feedback form. Mix in-app and external collection.<br /><br /><strong>No-code and API:</strong> Visual builder for most cases. API when you need custom UI or complex logic. Both use the same backend.<br /><br /><strong>More features:</strong><br /><br /><strong>Aggregated results:</strong> See response distributions, average scores, trends over time.<br /><br /><strong>Slack notifications:</strong> Get responses in real-time. Great for catching urgent feedback.<br /><br /><strong>Customizable wait periods:</strong> Don't annoy new users. Set delays before showing surveys.",
+        answers:
+            'These are actual survey questions our customers use. User interviews? End with a Calendly link. PMF survey? Use the template. Support satisfaction? Time it after ticket resolution. The key is asking at the right moment - after they use a feature, complete a task, or hit a milestone.',
+        pricing:
+            '250 responses free every month. Then simple usage pricing. No limits on surveys created or questions asked. Compare that to SurveyMonkey charging $99/month for basic features. We include everything - targeting, multi-step, API access - in the base product.',
+        'comparison-summary':
+            "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. Also, we're the only one with feature flag targeting.",
+        'feature-comparison':
+            "We have all the core features. What we don't have: AI analysis (yet) or complex form logic. But we uniquely support feature flag targeting - survey only users who have a specific feature enabled. Nobody else does that.",
+        docs: 'Clear setup guides for both no-code and API approaches. We show real examples of different survey types and when to use them. Common patterns like NPS calculation and user interview scheduling are documented with copy-paste examples.',
+        'pairs-with':
+            "Survey someone, then watch their session to see what they were doing. Run analytics on survey responses segmented by user properties. Target surveys to users with specific feature flags enabled. This integration is why response rates are so high - you're asking the right people at the right time.",
+        'getting-started':
+            "Pick a template. Customize the questions. Set targeting rules. Launch. You'll see responses immediately. The hardest part is deciding what to ask. Start simple - one question about the feature they just used. You can always iterate from there.",
+    },
 }

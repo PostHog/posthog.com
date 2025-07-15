@@ -3,11 +3,10 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
-// Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'cdp'
 
 export default function CDP(): JSX.Element {
-    // Combined GraphQL query for both tutorial data and product data
+    const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
             allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {

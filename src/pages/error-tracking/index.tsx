@@ -3,25 +3,12 @@ import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
-// Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'error_tracking'
 
 export default function ErrorTracking(): JSX.Element {
-    // Combined GraphQL query for both tutorial data and product data
+    const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
             allProductData {
                 nodes {
                     products {
@@ -74,15 +61,12 @@ export default function ErrorTracking(): JSX.Element {
         // exclude: ['comparison-summary'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
-            overview: 'columns', // Use the horizontal split layout
+            overview: 'stacked', // Use the horizontal split layout
         },
     })
 
-    // Merge content data with product data
-
     const mergedData = {
         ...data,
-
         ...contentData,
     }
 

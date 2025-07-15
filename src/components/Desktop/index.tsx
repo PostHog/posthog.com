@@ -80,11 +80,6 @@ export const apps: AppItem[] = [
         url: '/sparks-joy',
     },
     {
-        label: 'Photo booth',
-        Icon: <AppIcon name="photobooth" />,
-        url: '/photobooth',
-    },
-    {
         label: 'Talk to a human',
         Icon: <AppIcon name="contact" />,
         url: '/talk-to-a-human',
@@ -235,7 +230,7 @@ export default function Desktop() {
                     {
                         type: 'item',
                         children: (
-                            <Link to="/site-settings" state={{ newWindow: true }}>
+                            <Link to="/display-options" state={{ newWindow: true }}>
                                 Display options
                             </Link>
                         ),

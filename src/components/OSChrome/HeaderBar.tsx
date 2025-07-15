@@ -38,7 +38,7 @@ interface HeaderBarProps {
     showSearch?: boolean
     showToc?: boolean
     showSidebar?: boolean
-    hasLeftSidebar?: boolean
+    hasLeftSidebar?: boolean | { enabled: true; alwaysShow: boolean }
     showFullScreen?: boolean
     showCart?: boolean
     onFullScreenClick?: () => void
@@ -149,7 +149,13 @@ export default function HeaderBar({
                         }`}
                     >
                         {homeURL && <OSButton variant="ghost" icon={<IconHome />} to={homeURL} asLink />}
-                        <div className="hidden @2xl:block">
+                        <div
+                            className={`${
+                                typeof hasLeftSidebar === 'object' && hasLeftSidebar.alwaysShow
+                                    ? ''
+                                    : 'hidden @2xl:block'
+                            }`}
+                        >
                             {hasLeftSidebar && (
                                 <OSButton
                                     onClick={onToggleNav}

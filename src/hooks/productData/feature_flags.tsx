@@ -4,7 +4,7 @@ import CodeBlock from 'components/Home/CodeBlock'
 
 export const featureFlags = {
     Icon: IconToggle,
-    name: 'Feature flags',
+    name: 'Feature Flags',
     description: 'Control feature access with precision',
     handle: 'feature_flags',
     type: 'feature_flags',
@@ -470,4 +470,25 @@ export const featureFlags = {
                 'Filter recordings down to only when a feature flag was called, or to a specific value of a flag',
         },
     ],
+    presenterNotes: {
+        overview:
+            "Feature flags control who sees what. We fixed the two biggest problems: latency (down from 500ms to under 50ms with local evaluation) and that annoying flicker on page load (bootstrapping makes flags instant). Ship faster, roll back instantly, see the impact in analytics. That's it.",
+        customers:
+            'Phantom cut failure rates by 90% - they just turn off broken features instantly. Contra boosted registrations 30% because they could finally see flag data next to analytics data. CarVertical ditched their homegrown system because, turns out, building good feature flags is hard.',
+        features:
+            "<strong>Boolean & multivariate feature flags:</strong> Start with on/off, but multivariate is where it's at. Test 9 variants at once. Show variant A to 20% of free users, B to paid users, whatever you need.<br /><br /><strong>Test changes without pushing code:</strong> JSON payloads let you change text, colors, whole UI sections from PostHog. Teams use this for testing pricing, onboarding flows, even seasonal promos. No deploys needed.<br /><br /><strong>Release conditions:</strong> Target by user properties, cohorts, whatever. Use AND/OR logic. Like: '50% of users who signed up after Jan 1st AND are Pro OR in beta testers.' As specific as you need.<br /><br /><strong>Local evaluation:</strong> Instead of network requests every flag check, evaluate locally. Latency drops from 100s of milliseconds to single digits. Essential when you're checking flags thousands of times per second.<br /><br /><strong>Bootstrapping:</strong> Flags available on first page load. No flicker. Server evaluates once, passes to client. Perfect for feature-gated routes or anything that affects initial render.<br /><br /><strong>Testing & diagnostics:</strong> Override flags in browser console for testing. See exactly who got what value and when. Makes debugging production issues way easier.<br /><br /><strong>Developer-friendly automation:</strong> Auto usage reports. Auto IP geolocation. Auto person property recall. Small things that save tons of time.<br /><br /><strong>Early access feature opt-in widget:</strong> Let users opt into betas themselves. They self-select, you get eager testers. Win-win.<br /><br /><strong>More features:</strong><br /><br /><strong>Persist flags across authentication:</strong> Anonymous user logs in? Flags carry over. No jarring changes.<br /><br /><strong>History & activity feed:</strong> Every change logged. Who, what, when, from where.<br /><br /><strong>Instant rollbacks:</strong> Something broke? Turn it off. No code, no deploys.<br /><br /><strong>Multi-environment support:</strong> Same flag keys work in local, staging, prod. Different rules per environment.",
+        answers:
+            "Test internally? Flag your team's emails or make an 'internal users' cohort. Canary release? Start at 1-5%, watch metrics, ramp up slowly. Pro tip: watch session replays from your canary users to catch what metrics miss. High-volume API? Use sampling flags to track a percentage of requests.",
+        pricing:
+            "1 million requests free per month. Then pay for what you use. LaunchDarkly charges $10-20 per developer PLUS usage. We just charge usage. A typical SaaS uses 5-10M requests/month. Even at 100M requests, we're way cheaper. And no 'enterprise tier' gatekeeping.",
+        'comparison-summary':
+            'LaunchDarkly pioneered standalone flags. Optimizely came from A/B testing. We built flags as part of a complete platform. Everything shares the same data model. LaunchDarkly has more enterprise workflow stuff, but most teams just want flags that work with their analytics.',
+        'feature-comparison':
+            "We auto-resolve IPs and recall person properties. Sounds minor but eliminates whole bug categories. We don't have data export because... why would you? Your flag data is already in our analytics. Query it there.",
+        docs: "Written by engineers who've actually built flag systems. Real code examples for every SDK. We cover the weird stuff - clock skew, network failures, race conditions. If something's broken, we tell you how to work around it.",
+        'pairs-with':
+            "Release a feature to 10% of users. Filter all analytics by that flag. Notice conversion dropped? Watch session replays of just those users. See the problem, fix it, roll out wider. This workflow only works when everything's actually integrated.",
+        'getting-started':
+            'One line to install. Create flag in UI. Add to code. Done. Later: add bootstrapping for instant flags, local evaluation for speed, multivariate for tests. Start simple, grow as needed.',
+    },
 }
