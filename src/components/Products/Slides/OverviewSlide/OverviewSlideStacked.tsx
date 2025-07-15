@@ -29,7 +29,7 @@ export default function OverviewSlideStacked({
                     </h1>
                 </div>
                 <p
-                    className={`text-3xl @2xl:text-xl text-center leading-snug drop-shadow max-w-2xl mx-auto ${textColor}`}
+                    className={`text-3xl @2xl:text-xl text-center leading-snug drop-shadow max-w-4xl text-balance mx-auto ${textColor}`}
                 >
                     {overview?.description}
                 </p>

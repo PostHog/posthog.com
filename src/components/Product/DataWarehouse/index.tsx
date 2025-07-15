@@ -198,7 +198,7 @@ export const ProductDataWarehouse = () => {
             }
         }
         {
-            headshotpro: mdx(slug: { eq: "customers/headshot-pro" }) {
+            headshotpro: mdx(slug: { eq: "customers/headshotpro" }) {
                 ...ProductCustomerFragment
             }
             webshare: mdx(slug: { eq: "customers/webshare" }) {

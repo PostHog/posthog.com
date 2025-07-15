@@ -64,7 +64,7 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                         value={`tab-${index}`}
                     >
                         <div className="relative">
-                            <div className={`${item.layout === 'columns' ? '' : 'px-8'} pt-12 pb-8`}>
+                            <div className={`${item.layout === 'columns' ? 'pt-4' : 'pt-12 px-4 pb-8'} pb-8`}>
                                 <h2
                                     className={`text-5xl mb-0 ${
                                         item.layout === 'columns' ? 'text-left' : 'text-center'
@@ -106,7 +106,7 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                                 </div>
                             ) : (
                                 <>
-                                    <div className="grid grid-cols-2 gap-4 px-8">
+                                    <div className="grid grid-cols-2 gap-4 px-4">
                                         {item.features &&
                                             item.features.map((feature: Feature, featureIndex: number) => (
                                                 <div key={featureIndex}>

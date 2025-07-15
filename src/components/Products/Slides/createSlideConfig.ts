@@ -96,11 +96,13 @@ export function createSlideConfig({
     custom?: SlideConfig[]
     templates?: Record<string, string>
 } = {}): SlideConfig[] {
-    // Get all available slide slugs
-    const slideSlugs = Object.keys(defaultSlides)
+    // Get all available slide slugs (default + custom)
+    const defaultSlugs = Object.keys(defaultSlides)
+    const customSlugs = custom.map((slide) => slide.slug)
+    const allSlugs = [...defaultSlugs, ...customSlugs]
 
     // Filter slides based on include/exclude
-    let filteredSlugs = include ? slideSlugs.filter((slug) => include.includes(slug)) : slideSlugs
+    let filteredSlugs = include ? allSlugs.filter((slug) => include.includes(slug)) : allSlugs
 
     // Remove excluded slides
     if (exclude.length > 0) {
@@ -115,7 +117,14 @@ export function createSlideConfig({
     }
 
     // Create final slide configuration
-    let slides = filteredSlugs.map((slug) => {
+    const slides = filteredSlugs.map((slug) => {
+        // Check if this is a custom slide
+        const customSlide = custom.find((slide) => slide.slug === slug)
+        if (customSlide) {
+            return customSlide
+        }
+
+        // Handle default slides
         const defaultSlide = defaultSlides[slug]
         const override = overrides[slug] || {}
         const template = templates[slug]
@@ -129,11 +138,6 @@ export function createSlideConfig({
             ...(template && { template }),
         }
     })
-
-    // Add custom slides
-    if (custom.length > 0) {
-        slides = [...slides, ...custom]
-    }
 
     return slides
 }

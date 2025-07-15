@@ -12,6 +12,7 @@ interface Customer {
               light: string
               dark: string
           }
+    height?: number
 }
 
 interface CustomerData {
@@ -51,25 +52,30 @@ export default function CustomersSlide({ productName, customers, customerData, h
                 // Check if logo is a React component (single SVG format)
                 if (typeof customer.logo === 'function') {
                     const LogoComponent = customer.logo
+                    const heightClass = customer.height ? `h-${customer.height}` : ''
+                    const className = `w-full fill-current object-contain ${heightClass}`.trim()
+
                     return (
                         <div className="">
-                            <LogoComponent className="w-full fill-current object-contain max-h-6" />
+                            <LogoComponent className={className} />
                         </div>
                     )
                 }
 
                 // Otherwise, it's the existing light/dark object format
+                const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-10'
+
                 return (
                     <>
                         <img
                             src={customer.logo.light}
                             alt={customer.name}
-                            className="w-auto object-contain dark:hidden max-h-10"
+                            className={`w-auto object-contain dark:hidden ${heightClass}`}
                         />
                         <img
                             src={customer.logo.dark}
                             alt={customer.name}
-                            className="w-auto object-contain hidden dark:block max-h-10"
+                            className={`w-auto object-contain hidden dark:block ${heightClass}`}
                         />
                     </>
                 )

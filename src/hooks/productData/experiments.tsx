@@ -20,7 +20,7 @@ export const experiments = {
     overview: {
         title: 'Test changes with statistical significance',
         description:
-            'Run A/B tests with our advanced Bayesian statistical engine. Check results anytime without p-hacking concerns, get clear win probabilities, and make confident decisions faster.',
+            'Run A/B tests and multivariate with robust targeting & exclusion rules, then analyze results with Session Replay and a auto-generated dashboard of insights from Product Analytics.',
         textColor: 'text-white', // tw
     },
     screenshots: [
@@ -58,28 +58,59 @@ export const experiments = {
     },
     features: [
         {
-            title: 'Experiments',
-            headline: 'Experiments',
-            description:
-                'Test changes to your product and evaluate the impacts those changes make. Track additional metrics to see how your experiment affects other parts of your app or different flows. Run experiments on funnels to see the impact of a change on a aggregate values or a series of events, like a signup flow.',
+            title: 'Customizable goals',
+            headline: 'Customizable goals',
+            description: 'Conversion funnels or trends, secondary metrics, and range for statistical significance',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
+                    alt: 'Customizable goals',
+                    stylize: true,
+                    shadow: true,
+                },
+            ],
         },
         {
-            title: 'Statistical analysis',
-            headline: 'Statistical analysis',
-            description:
-                "Get a statistical analysis of your experiment results to see if the results are significant, or if they're likely just due to chance.",
+            title: 'Targeting rules',
+            headline: 'Precise control over who sees your experiments',
+            description: 'Target by user properties, cohorts, geographic location, or custom conditions',
+            layout: 'columns',
+            features: [
+                {
+                    title: 'User property targeting',
+                    description: 'Target based on any user attribute you track',
+                },
+                {
+                    title: 'Cohort integration',
+                    description: 'Run experiments on specific user segments or behavioral cohorts',
+                },
+                {
+                    title: 'Geographic targeting',
+                    description: 'Test changes in specific countries or regions',
+                },
+                {
+                    title: 'Percentage rollouts',
+                    description: 'Start small with 5% of users and scale up safely',
+                },
+                {
+                    title: 'Group-level experiments',
+                    description: 'Test at organization or team level for B2B products',
+                },
+            ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png',
+                    alt: 'Targeting rules',
+                    stylize: true,
+                    shadow: true,
+                },
+            ],
         },
         {
             title: 'Bayesian statistical engine',
             headline: 'Advanced Bayesian statistics for faster decisions',
             description:
                 'Check results anytime without p-hacking concerns. Get clear win probabilities and credible intervals that show the likely range of improvement.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/goals.png',
-                    alt: 'Bayesian statistics visualization',
-                },
-            ],
             features: [
                 {
                     title: 'Real-time results',
@@ -103,12 +134,6 @@ export const experiments = {
             title: 'Flexible experiment types',
             headline: 'Test any metric that matters to your business',
             description: 'Support for conversion funnels, count-based trends, value-based metrics, and custom goals',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/targeting-ab.png',
-                    alt: 'Experiment metrics and goals',
-                },
-            ],
             features: [
                 {
                     title: 'Funnel metrics',
@@ -133,14 +158,17 @@ export const experiments = {
             ],
         },
         {
-            title: 'Smart recommendations',
+            title: 'Auto recommendations',
             headline: 'Built-in guidance for successful experiments',
             description:
                 'Get automatic recommendations for sample size, test duration, and minimum detectable effects based on your data',
+            layout: 'columns',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/AbTesting/images/recommendations.png',
                     alt: 'Smart recommendations',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
             features: [
@@ -159,33 +187,6 @@ export const experiments = {
                 {
                     title: 'Health monitoring',
                     description: 'Automatic alerts for sample ratio mismatch and other issues',
-                },
-            ],
-        },
-        {
-            title: 'Advanced targeting',
-            headline: 'Precise control over who sees your experiments',
-            description: 'Target by user properties, cohorts, geographic location, or custom conditions',
-            features: [
-                {
-                    title: 'User property targeting',
-                    description: 'Target based on any user attribute you track',
-                },
-                {
-                    title: 'Cohort integration',
-                    description: 'Run experiments on specific user segments or behavioral cohorts',
-                },
-                {
-                    title: 'Geographic targeting',
-                    description: 'Test changes in specific countries or regions',
-                },
-                {
-                    title: 'Percentage rollouts',
-                    description: 'Start small with 5% of users and scale up safely',
-                },
-                {
-                    title: 'Group-level experiments',
-                    description: 'Test at organization or team level for B2B products',
                 },
             ],
         },
@@ -286,7 +287,7 @@ export const experiments = {
             {
                 feature: 'Unlimited experiments',
                 companies: {
-                    AmplitudeExperiments: true,
+                    'Amplitude Experiments': true,
                     Optimizely: true,
                     VWO: true,
                     PostHog: true,
@@ -295,7 +296,7 @@ export const experiments = {
             {
                 feature: 'Multivariate experiments',
                 companies: {
-                    AmplitudeExperiments: true,
+                    'Amplitude Experiments': true,
                     Optimizely: true,
                     VWO: true,
                     PostHog: true,
@@ -304,7 +305,7 @@ export const experiments = {
             {
                 feature: 'Secondary goals',
                 companies: {
-                    AmplitudeExperiments: true,
+                    'Amplitude Experiments': true,
                     Optimizely: true,
                     VWO: true,
                     PostHog: true,
@@ -313,7 +314,7 @@ export const experiments = {
             {
                 feature: 'Minimum goals',
                 companies: {
-                    AmplitudeExperiments: true,
+                    'Amplitude Experiments': true,
                     Optimizely: true,
                     VWO: false,
                     PostHog: true,
@@ -322,7 +323,7 @@ export const experiments = {
             {
                 feature: 'Duration prediction',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: false,
                     VWO: true,
                     PostHog: true,
@@ -331,7 +332,7 @@ export const experiments = {
             {
                 feature: 'Cross-domain experiments',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: true,
                     VWO: true,
                     PostHog: true,
@@ -340,7 +341,7 @@ export const experiments = {
             {
                 feature: 'Traffic allocation',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: true,
                     VWO: true,
                     PostHog: true,
@@ -349,7 +350,7 @@ export const experiments = {
             {
                 feature: 'Target by location',
                 companies: {
-                    AmplitudeExperiments: true,
+                    'Amplitude Experiments': true,
                     Optimizely: true,
                     VWO: true,
                     PostHog: true,
@@ -376,7 +377,7 @@ export const experiments = {
             {
                 feature: 'Bayesian statistics',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: false,
                     VWO: true,
                     PostHog: true,
@@ -385,7 +386,7 @@ export const experiments = {
             {
                 feature: 'Check results anytime',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: false,
                     VWO: false,
                     PostHog: true,
@@ -394,7 +395,7 @@ export const experiments = {
             {
                 feature: 'Group-level experiments',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: false,
                     VWO: false,
                     PostHog: true,
@@ -403,7 +404,7 @@ export const experiments = {
             {
                 feature: 'Integrated session replay',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: false,
                     VWO: false,
                     PostHog: true,
@@ -412,7 +413,7 @@ export const experiments = {
             {
                 feature: 'Shared metrics library',
                 companies: {
-                    AmplitudeExperiments: false,
+                    'Amplitude Experiments': false,
                     Optimizely: false,
                     VWO: false,
                     PostHog: true,
@@ -438,7 +439,7 @@ export const experiments = {
     ],
     presenterNotes: {
         overview:
-            "Most A/B testing tools: pick sample size, wait exactly that long, check once. Ours: check whenever you want without messing up the stats. You get '95% chance B is better' not confusing p-values. Make decisions when the evidence is clear, not when you hit some arbitrary date.",
+            'Test changes to your product and evaluate the impacts those changes make. Track additional metrics to see how your experiment affects other parts of your app or different flows. Run experiments on funnels to see the impact of a change on a aggregate values or a series of events, like a signup flow. Use our advanced Bayesian statistical engine to check results anytime without p-hacking concerns, get clear win probabilities, and make confident decisions when the evidence is clear, not when you hit some arbitrary date.',
         customers:
             "Y Combinator tested small changes systematically - 40% engagement boost. ResearchGate runs experiments on 25M users because our infrastructure just handles it. Vendasta tested 'insignificant' ideas and got 30% more registrations. They all move fast because they're not waiting weeks for 'significance'.",
         features:
