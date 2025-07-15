@@ -117,6 +117,8 @@ When updating the status page, make sure to mark the affected component appropri
 
 Occasionally it may be desirable to do additional customer communications, such as sending an email to impacted customers or making updates to [the service page](/service-message). Product Marketers will organize and write these communications for you, so please let them know if this is needed. Joe is usually the best initial point of contact.
 
+#### When a customer is causing an incident
+
 In the case that we need to update a _specific_ customer, such as when an individual org is causing an incident, we should let them know as soon as possible. Use the following guidelines to ensure smooth communication:
 
 - Ensure you are always contacting the admins of the impacted organization

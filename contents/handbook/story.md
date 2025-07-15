@@ -126,7 +126,7 @@ We're doing well at monetizing high-growth startups due to our optimization work
 
 We've decided to double down on mass adoption of the platform in high potential startups instead of focusing on enterprise. Simply, this will better help us increase the number of successful products in the world. As a result, we've removed support for [paid self-hosted deployment](/blog/sunsetting-helm-support-posthog) and are doubling down on our open source and cloud projects. We have released a [free tier](/pricing) of PostHog.
 
-We went from “product analytics with some extra stuff thrown in” to “Product OS” and started charging for session replay separately.
+We went from "product analytics with some extra stuff thrown in" to "Product OS" and started charging for session replay separately.
 
 In the product, we're working on making the experience slicker, and we have plans for a standalone quality [CDP](/cdp) in Q2.
 
@@ -150,7 +150,7 @@ Our infrastructure has become pleasingly stable. The biggest challenge is scalin
 
 We are often mentioned as an alternative to product analytics tools.
 
-We are winning the internet when we get more of this for our _other_ products. We don’t have to win everything, but we need to get into the comparison each time. This is _starting_ to happen, but to Win the Internet, we need to see this happening daily.
+We are winning the internet when we get more of this for our _other_ products. We don’t have to win everything, but we need to get into the comparison each time. This is _starting_ to happen, but to *win* the Internet, we need to see this happening daily.
 
 Multiple products are early like the warehouse, ETL, surveys (used a lot but not paid), feature flags and experimentation (first revenue), CDP (pipelines being rebuilt, webhooks next), notebooks, and web analytics. 
 
@@ -158,7 +158,7 @@ There is a lot of supporting work needing to be done. This includes:
 
 - Helping teams with their per-product onboarding and growth experiments, infra, ingestion, dev tooling, sales, support, and marketing.
 - Promoting each product in its own right (i.e. through what we cover in marketing).
-- Keep nurturing the content / community growth, i.e. newsletter, and the /posts concept.
+- Keep nurturing the content / community growth, i.e. newsletter, and the `/posts` concept.
 
 ### January 2024: Well, that was good
 
