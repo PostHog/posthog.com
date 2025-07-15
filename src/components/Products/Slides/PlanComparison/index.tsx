@@ -41,6 +41,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
     // Custom unit overrides for specific features (defaults to feature name)
     const customFeatureUnits: { [key: string]: string } = {
         group_analytics: 'group',
+        error_tracking_destinations: 'alert',
     }
 
     // Helper function to get unit from feature key
@@ -244,8 +245,25 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
             return <span className="text-lg font-semibold text-primary">{displayText}</span>
         }
 
-        // Handle text values - check if it's a number followed by a unit (like "1 year")
-        if (typeof value === 'string' && /^\d+\s+\w+s?$/.test(value)) {
+        // Handle text values - check if it's a number followed by a unit (like "1 year" or "2 error_tracking_destinations")
+        if (typeof value === 'string' && /^\d+\s+\w+/.test(value)) {
+            const match = value.match(/^(\d+)\s+(.+)$/)
+            if (match) {
+                const [, count, unit] = match
+                const numCount = parseInt(count)
+
+                // Check if we have a custom unit override
+                const customUnit = customFeatureUnits[unit]
+                if (customUnit) {
+                    const pluralizedUnit = numCount !== 1 ? `${customUnit}s` : customUnit
+                    return (
+                        <span className="text-primary">
+                            {numCount} {pluralizedUnit}
+                        </span>
+                    )
+                }
+            }
+
             // It's already formatted with a unit, just return it
             return <span className="text-primary">{value}</span>
         }
