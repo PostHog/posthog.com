@@ -1,7 +1,9 @@
 # MSPaint Component - Preloading Images
 
 ## Overview
-The MSPaint component now supports preloading images that can be painted on top of, filled, and modified just like user-drawn content.
+The MSPaint component now supports preloading images in two modes:
+1. **Coloring Book Mode** - Converts images to black line art for coloring
+2. **Full Color Mode** - Loads images with their original colors preserved
 
 ## Usage
 
@@ -9,8 +11,14 @@ The MSPaint component now supports preloading images that can be painted on top 
 ```jsx
 import MSPaint from 'components/MSPaint'
 
-// Using a URL
-<MSPaint initialImage="/images/coloring-page.png" />
+// Full color image (no conversion)
+<MSPaint initialImage="/images/photo.png" />
+
+// Convert to black line art for coloring
+<MSPaint 
+  initialImage="/images/photo.png" 
+  threshold={128} // Converts to black/white
+/>
 
 // Using base64 data
 <MSPaint initialImage="data:image/png;base64,..." />
@@ -22,11 +30,22 @@ import MSPaint from 'components/MSPaint'
 />
 ```
 
-### Image Requirements
-For best results, provide images that are:
-1. **Black lines on white background** - Works perfectly as-is
-2. **Grayscale line art** - Will be converted to pure black/white
-3. **Colored images** - Will be converted to black/white based on threshold
+### Image Modes
+
+#### Full Color Mode (No Threshold)
+When you don't provide a `threshold` prop:
+- Image loads with all original colors preserved
+- Perfect for editing photos or full-color artwork
+- All paint tools work on top of the image
+
+#### Coloring Book Mode (With Threshold)
+When you provide a `threshold` prop:
+- Converts image to pure black lines on white background
+- Perfect for creating coloring pages from any image
+- Threshold values:
+  - **0-100**: More pixels become black (thicker lines)
+  - **100-200**: Fewer pixels become black (thinner lines)
+  - **128**: Default, works for most images
 
 ## How It Works
 
