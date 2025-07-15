@@ -509,6 +509,20 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'media-upload': {
+        size: {
+            min: {
+                width: 900,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 500,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {

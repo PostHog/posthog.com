@@ -1,9 +1,11 @@
 import { IconCheck, IconCopy, IconUpload, IconX } from '@posthog/icons'
 import Modal from 'components/Modal'
 import uploadImage from 'components/Squeak/util/uploadImage'
+import { useApp } from '../../context/App'
 import { useUser } from 'hooks/useUser'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDropzone } from 'react-dropzone'
+import { useWindow } from '../../context/Window'
 
 const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type }, ext }) => {
     const [copied, setCopied] = useState(false)
@@ -35,7 +37,9 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     )
 }
 
-export default function MediaUploadModal({ open, setOpen }) {
+export default function MediaUploadModal() {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
     const { getJwt, user } = useUser()
     const [loading, setLoading] = useState(0)
     const [images, setImages] = useState([])
@@ -60,62 +64,53 @@ export default function MediaUploadModal({ open, setOpen }) {
         }
     }
 
+    useEffect(() => {
+        setWindowTitle(appWindow, 'Upload media')
+    }, [])
+
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return isModerator ? (
-        <Modal open={open} setOpen={setOpen}>
-            {open && (
-                <div className="max-w-6xl w-full mx-auto relative p-5 pt-12">
-                    <div className="bg-light dark:bg-dark p-4 rounded-md border border-input relative grid grid-cols-2 gap-x-6">
-                        <button
-                            onClick={() => setOpen(false)}
-                            className="absolute right-0 top-0 bg-light dark:bg-dark rounded-full p-2 border border-input translate-x-1/2 -translate-y-1/2"
+        <div className="bg-primary">
+            <div className="p-4 relative grid grid-cols-2 gap-x-6">
+                <div className="flex flex-col">
+                    <h3 className="m-0">Upload media</h3>
+                    <p className="m-0 mt-1">
+                        Add images or videos to our CDN (Cloudinary) that can be linked in docs or blog posts.
+                    </p>
+                    <div
+                        {...getRootProps()}
+                        className={`mt-4 flex-grow w-full rounded-md border border-dashed border-input ${
+                            isDragActive ? 'bg-input' : ''
+                        }`}
+                    >
+                        <p
+                            className={`m-0 flex justify-center items-center font-bold space-x-1 h-full text-lg ${
+                                isDragActive ? '' : 'opacity-70'
+                            }`}
                         >
-                            <IconX className="size-4 opacity-70 hover:opacity-100 click" />
-                        </button>
-                        <div className="flex flex-col">
-                            <h3 className="m-0">Upload media</h3>
-                            <p className="m-0 mt-1">
-                                Add images or videos to our CDN (Cloudinary) that can be linked in docs or blog posts.
-                            </p>
-                            <div
-                                {...getRootProps()}
-                                className={`mt-4 flex-grow w-full rounded-md border border-dashed border-input ${
-                                    isDragActive ? 'bg-input' : ''
-                                }`}
-                            >
-                                <p
-                                    className={`m-0 flex justify-center items-center font-bold space-x-1 h-full text-lg ${
-                                        isDragActive ? '' : 'opacity-70'
-                                    }`}
-                                >
-                                    <IconUpload className="size-7" />
-                                    <span>{isDragActive ? 'Drop' : 'Drag'} media</span>
-                                </p>
-                                <input {...getInputProps()} />
-                            </div>
-                        </div>
-                        <div>
-                            <h3>Your uploads</h3>
-                            <ul className="list-none m-0 p-0 space-y-2 overflow-auto pr-4 flex-grow max-h-[450px]">
-                                {loading > 0 &&
-                                    Array.from({ length: loading }).map((_, index) => (
-                                        <li
-                                            key={index}
-                                            className="w-full h-20 bg-accent rounded-md animate-pulse mt-2"
-                                        />
-                                    ))}
-                                {images.map((image) => {
-                                    return <Image key={image.id} {...image} />
-                                })}
-                                {user?.profile?.images?.map((image) => {
-                                    return <Image key={image.id} {...image} />
-                                })}
-                            </ul>
-                        </div>
+                            <IconUpload className="size-7" />
+                            <span>{isDragActive ? 'Drop' : 'Drag'} media</span>
+                        </p>
+                        <input {...getInputProps()} />
                     </div>
                 </div>
-            )}
-        </Modal>
+                <div>
+                    <h3>Your uploads</h3>
+                    <ul className="list-none m-0 p-0 space-y-2 overflow-auto pr-4 flex-grow max-h-[450px]">
+                        {loading > 0 &&
+                            Array.from({ length: loading }).map((_, index) => (
+                                <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
+                            ))}
+                        {images.map((image) => {
+                            return <Image key={image.id} {...image} />
+                        })}
+                        {user?.profile?.images?.map((image) => {
+                            return <Image key={image.id} {...image} />
+                        })}
+                    </ul>
+                </div>
+            </div>
+        </div>
     ) : null
 }
