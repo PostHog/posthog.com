@@ -18,6 +18,7 @@ import OSButton from 'components/OSButton'
 import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 export default function TaskBarMenu() {
     const {
@@ -80,9 +81,10 @@ export default function TaskBarMenu() {
                     {isLoggedIn ? (
                         <>
                             <div className="relative">
-                                <img
+                                <CloudinaryImage
                                     src={getAvatarURL(user?.profile)}
                                     className={`size-6 rounded-full bg-${user?.profile?.color ?? 'white dark:bg-dark'}`}
+                                    width={48}
                                     alt=""
                                 />
                                 {notifications?.length > 0 && (
@@ -97,71 +99,72 @@ export default function TaskBarMenu() {
             ),
             items: user
                 ? [
-                    {
-                        type: 'item' as const,
-                        label: 'Go to...',
-                        disabled: true,
-                    },
-                    {
-                        type: 'item' as const,
-                        label: 'PostHog app',
-                        link: 'https://app.posthog.com',
-                        icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                        external: true,
-                    },
-                    {
-                        type: 'item' as const,
-                        label: 'Community',
-                        disabled: true,
-                    },
-                    {
-                        type: 'item' as const,
-                        label: 'Forums',
-                        link: '/questions',
-                        icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                    },
-                    ...(user?.profile
-                        ? [
-                            {
-                                type: 'item' as const,
-                                label: `Notifications${notifications?.length > 0 ? ` (${notifications.length})` : ''
+                      {
+                          type: 'item' as const,
+                          label: 'Go to...',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'PostHog app',
+                          link: 'https://app.posthog.com',
+                          icon: <IconApp className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                          external: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Community',
+                          disabled: true,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Forums',
+                          link: '/questions',
+                          icon: <IconMessage className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                      },
+                      ...(user?.profile
+                          ? [
+                                {
+                                    type: 'item' as const,
+                                    label: `Notifications${
+                                        notifications?.length > 0 ? ` (${notifications.length})` : ''
                                     }`,
-                                onClick: () => setIsNotificationsPanelOpen(true),
-                                icon: (
-                                    <IconNotification className="opacity-50 group-hover/item:opacity-75 size-4" />
-                                ),
-                            },
-                            {
-                                type: 'item' as const,
-                                label: 'My profile',
-                                link: `/community/profiles/${user?.profile.id}`,
-                                icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                            },
-                            {
-                                type: 'item' as const,
-                                label: 'Bookmarks',
-                                link: '/bookmarks',
-                                icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                            },
-                        ]
-                        : []),
-                    {
-                        type: 'separator' as const,
-                    },
-                    {
-                        type: 'item' as const,
-                        label: 'Community logout',
-                        onClick: () => logout(),
-                        icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
-                    },
-                ]
+                                    onClick: () => setIsNotificationsPanelOpen(true),
+                                    icon: (
+                                        <IconNotification className="opacity-50 group-hover/item:opacity-75 size-4" />
+                                    ),
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'My profile',
+                                    link: `/community/profiles/${user?.profile.id}`,
+                                    icon: <IconUser className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Bookmarks',
+                                    link: '/bookmarks',
+                                    icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                            ]
+                          : []),
+                      {
+                          type: 'separator' as const,
+                      },
+                      {
+                          type: 'item' as const,
+                          label: 'Community logout',
+                          onClick: () => logout(),
+                          icon: <IconLock className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                      },
+                  ]
                 : [
-                    {
-                        type: 'item' as const,
-                        label: 'Sign in',
-                        onClick: handleSignInClick,
-                    },
-                ],
+                      {
+                          type: 'item' as const,
+                          label: 'Sign in',
+                          onClick: handleSignInClick,
+                      },
+                  ],
         },
     ]
 
@@ -216,9 +219,9 @@ export default function TaskBarMenu() {
                             animate={
                                 isAnimating
                                     ? {
-                                        scale: [1, 1.2, 1],
-                                        rotate: [0, -5, 5, -5, 5, 0],
-                                    }
+                                          scale: [1, 1.2, 1],
+                                          rotate: [0, -5, 5, -5, 5, 0],
+                                      }
                                     : {}
                             }
                             transition={{
@@ -244,15 +247,14 @@ export default function TaskBarMenu() {
                                 dark:text-primary
                                 hover:text-primary
 
-                                ${totalWindows > 1
+                                ${
+                                    totalWindows > 1
                                         ? 'bg-light dark:bg-dark border-[#4d4f46] dark:border-[#eaecf6]'
                                         : 'bg-accent border-primary dark:border-[#eaecf6]'
-                                    }
+                                }
                             `}
                             >
-                                <span className="text-[13px] font-semibold relative -top-px">
-                                    {totalWindows}
-                                </span>
+                                <span className="text-[13px] font-semibold relative -top-px">{totalWindows}</span>
                             </button>
                         </motion.div>
                     )}
