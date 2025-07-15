@@ -99,31 +99,6 @@ export const errorTracking = {
                 },
             ],
         },
-        {
-            title: 'More features',
-            headline: 'More features',
-            features: [
-                {
-                    title: 'Session replay',
-                    description:
-                        'Watch session recordings of users who caused exceptions for more context about how to reproduce an issue',
-                },
-                {
-                    title: 'Product analytics',
-                    description:
-                        'Graph your $exception events, use filters and breakdowns to determine where errors happen and what to prioritize',
-                },
-                {
-                    title: 'Feature flags',
-                    description: 'Test fixes by rolling out code changes only to affected users',
-                },
-                {
-                    title: 'User profiles',
-                    description:
-                        'See all $exception events for specific users in their event history log and find which feature flags were enabled at the time an error occurred',
-                },
-            ],
-        },
     ],
     questions: [
         {
