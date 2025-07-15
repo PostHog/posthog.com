@@ -32,7 +32,6 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
    - For familiarization and self-led training, follow the [curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo App project](https://us.posthog.com/project/2267) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
-   - [Kaya](/community/profiles/34037) [designed an exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) to test your skills for working with customer accounts which you can work through.
  - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding. 
 
@@ -40,10 +39,11 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 - Shadow more live calls and listen to more [BuildBetter](https://app.buildbetter.app/) recordings.
 - Explore Vitally and [Metabase](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) – take note of any questions you have to go through during in-person onboarding.
+- Once you have your book of business, try running through the [onboarding exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) that [Kaya](/community/profiles/34037) designed to test your skills for working with customer accounts.
 - Towards the end of the week, schedule a demo and feedback session with Dana. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
 
-#### CSM / Technical CSM
+#### CSM
 - During your first week, Dana will figure out your initial book of business (around 30 accounts). We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Prioritize your current book of customers, and start reaching out! You should check conversations in Vitally to see if someone else has a prior relationship as they can make a warm intro for you.
 
@@ -70,7 +70,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 ### How do I know if I'm on track?
 
-#### CSM / Technical CSM
+#### CSM
 By the end of month 1:
  - Be starting to solve technical problems for your book with occasional help
  - Be leading customer calls and demos on your own
