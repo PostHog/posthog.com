@@ -147,6 +147,7 @@ export const CompensationCalculator = ({
             }
 
             localStorage.setItem('posthog-saved-compensation', JSON.stringify(state))
+            localStorage.setItem('testing-dont-merge', JSON.stringify(state))
         }
     }
 
