@@ -55,6 +55,15 @@ const Discounts = () => (
                     Most non-profits are eligible for up to 25% off. Get in touch through the app after signing up.
                 </p>
             </li>
+            <li className="relative pl-7 pt-4">
+                <IconCode className="size-5 absolute left-0 top-4.5 opacity-50" />
+                <strong>OSS projects without corporate backing</strong>
+                <p className="text-[15px] mb-2">
+                    If you've got an open source project that lacks corporate backing (ie runs off donations, 
+                    free time, and kind contributors), you can use PostHog on that project for free. Get in 
+                    touch through the app after signing up.
+                </p>
+            </li>
         </ul>
     </div>
 )
