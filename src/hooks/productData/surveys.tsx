@@ -18,7 +18,7 @@ export const surveys = {
         title: 'Ask anything with no-code surveys',
         description:
             'Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control.',
-        textColor: 'text-black', // tw
+        textColor: 'text-white', // tw
     },
     screenshots: [
         {
@@ -121,6 +121,7 @@ export const surveys = {
         {
             title: 'More features',
             headline: 'More features',
+            layout: 'columns',
             features: [
                 {
                     title: 'Aggregated results',
@@ -156,7 +157,7 @@ export const surveys = {
         summary: {
             them: [
                 {
-                    title: 'Forms',
+                    title: 'Full page forms',
                     subtitle:
                         "PostHog offers multi-step surveys, but they won't be full-page forms such as Typeform or Google Forms",
                 },

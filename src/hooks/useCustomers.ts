@@ -18,6 +18,7 @@ import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
+import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
@@ -158,6 +159,13 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: 'Would it be clever or lame if we included our own company here?',
         logo: PostHogLogo,
+    },
+    purplewave: {
+        name: 'Purplewave',
+        toolsUsed: ['surveys'],
+        notes: '',
+        logo: PurpleWaveLogo,
+        height: 24,
     },
     raycast: {
         name: 'Raycast',
