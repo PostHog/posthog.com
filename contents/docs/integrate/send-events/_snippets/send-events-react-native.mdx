@@ -57,9 +57,9 @@ export function App() {
     return (
         <NavigationContainer>
             <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
-              captureScreens: false,
+              captureScreens: false, // Screen events are handled differently for v7 and higher
               captureTouches: true,
-            }}> // Screen events are handled differently for v7 and higher
+            }}>
                 {/* Rest of app */}
             </PostHogProvider>
         </NavigationContainer>
@@ -72,7 +72,7 @@ Check out and set it up the official way for [Screen tracking for analytics](htt
 Then call the `screen` method within the `trackScreenView` method.
 
 ```react-native
-const posthog = usePostHog() // or reuse your own posthog instance
+const posthog = usePostHog() // or your own custom posthog instance
 // you can read the params from `getCurrentRoute()`
 posthog?.screen(currentRouteName, params)
 ```
@@ -134,7 +134,7 @@ Check out and set it up the official way for [Screen tracking for analytics](htt
 Then call the `screen` method within the `useEffect` callback.
 
 ```react-native
-const posthog = usePostHog() // or reuse your own posthog instance
+const posthog = usePostHog() // or your own custom posthog instance
 posthog?.screen(pathname, params)
 ```
 
