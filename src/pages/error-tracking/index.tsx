@@ -9,18 +9,6 @@ export default function ErrorTracking(): JSX.Element {
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
         query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
             allProductData {
                 nodes {
                     products {
