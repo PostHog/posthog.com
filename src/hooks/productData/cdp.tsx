@@ -220,4 +220,25 @@ export const cdp = {
                 'Build a data warehouse in PostHog and then pull in data from all your platforms to one place where it can be easily interrogated.',
         },
     ],
+    presenterNotes: {
+        overview:
+            "Data stuck in silos is useless. Our CDP gets it moving - from anywhere into PostHog, then out to wherever you need it. No complex pipelines, no data engineering. Just connect, transform if needed, and send. It's plumbing that actually works.",
+        customers:
+            "Teams use this to sync Stripe data for revenue analytics, send alerts to Slack when key events happen, and export to their data warehouse for deeper analysis. The common thread? They're tired of building custom integrations for every tool.",
+        features:
+            '<strong>Sources & destinations:</strong> 60+ integrations and growing. Import from data warehouses, CRMs, payment systems. Export to Slack, webhooks, S3, Snowflake, BigQuery. Real-time streaming or scheduled batches. No-code setup for everything.<br /><br /><strong>Data transformation:</strong> Clean messy data before it spreads. Enforce schemas, filter junk, map properties, add custom logic with JavaScript. Stop bad data at the source.<br /><br /><strong>Reliability & monitoring:</strong> Automatic retries with exponential backoff. Dead letter queue catches failures. Monitor success rates, debug errors, track performance. Built to handle millions of events without drama.',
+        answers:
+            'Sources bring data IN (Stripe → PostHog). Destinations send data OUT (PostHog → Slack). Batch exports are rock solid with retries and monitoring. Transform data with filters, property mapping, or custom JavaScript. Sources are free - you only pay for events captured.',
+        pricing:
+            "Sources are completely free. Import all the data you want. Destinations require the CDP add-on. Still way cheaper than Segment's $120/month starting price or RudderStack's $500/month. We don't charge by 'MTUs' or other made-up metrics.",
+        'comparison-summary':
+            "Segment and mParticle have more integrations but cost 10x more. Fivetran is great for data warehouse ETL but can't do real-time. RudderStack is closest to us but lacks built-in analytics. We have fewer integrations but everything you actually need, plus it works with all PostHog features.",
+        'feature-comparison':
+            'We have 60+ integrations vs their 300+. But honestly, how many do you actually use? We have the important ones. What we uniquely offer: built-in analytics on all your data. Others just move data - we help you understand it.',
+        docs: 'Each integration has its own guide with screenshots. Common patterns documented - like Stripe revenue tracking or Slack alerting. Transformation recipes for cleaning data. All written by engineers who use these integrations daily.',
+        'pairs-with':
+            'Import Stripe data → analyze revenue by product feature. Send key events → Slack for real-time alerts. Export everything → your data warehouse for custom analysis. The CDP ties your whole data stack together.',
+        'getting-started':
+            'Start with one integration. Usually Slack for alerts or a data source you need. Click add, authenticate, configure, done. Data flows immediately. Add transformations later if needed. The goal is moving data, not perfecting it.',
+    },
 }

@@ -296,4 +296,25 @@ export const errorTracking = {
             description: 'Roll back features that cause errors, or test fixes with slow rollouts',
         },
     ],
+    presenterNotes: {
+        overview:
+            "Error tracking that's actually connected to everything else. See an error? Watch the session replay to see exactly what happened. Check which feature flags were on. Roll back instantly. Most error tools are isolated - ours shows the full context.",
+        customers:
+            "Zealot switched from BugSnag and Amplitude. Why? 'In two clicks, I can see who had an error, then their replays.' That's the difference. Not just a stack trace - the whole story of what the user was doing when it broke.",
+        features:
+            "<strong>Alerts:</strong> Get notified via email, Slack, or webhooks when new errors appear. Set custom thresholds. No more finding out from angry users.<br /><br /><strong>Triage:</strong> Assign errors to people or teams. Track status. Know who's fixing what. Basic but essential.<br /><br /><strong>Organize and prioritize:</strong> Merge similar errors. Sort by frequency or recency. Search by error message. Focus on what matters most.<br /><br /><strong>Stack traces:</strong> Full stack traces with source maps. See exactly where errors happen. Works with all major frameworks.<br /><br /><strong>More features:</strong><br /><br /><strong>Session replay:</strong> Watch the user's session leading up to the error. No more 'can't reproduce' tickets.<br /><br /><strong>Product analytics:</strong> Graph error rates over time. Break down by user properties. Find patterns.<br /><br /><strong>Feature flags:</strong> Error in production? Turn off the feature instantly. Test fixes on small groups first.<br /><br /><strong>User profiles:</strong> See all errors for a specific user. Check their feature flags at error time.",
+        answers:
+            'Common questions with real answers. Analyze patterns by graphing errors over time. Set up alerts so you know before users complain. Manage issues with assignment and status tracking. Reduce costs by sampling or filtering non-critical errors. Stack traces work with source maps for minified code.',
+        pricing:
+            "100k error events free monthly. Then simple usage pricing. Compare to Sentry charging per seat plus usage. We're just usage-based. No surprise bills when you add developers.",
+        'comparison-summary':
+            "Sentry is the 800-pound gorilla. They're good at pure error tracking. But errors don't happen in isolation. We show you the full context - what the user did, which flags were on, the session replay. For mobile-heavy apps, Sentry's still better. For everything else, context wins.",
+        'feature-comparison':
+            "We have the core features. What we're missing: uptime monitoring, advanced alert rules, mobile SDK maturity. What we uniquely have: deep integration with analytics, replays, and feature flags. Pick based on what matters more.",
+        docs: 'Setup guides for all major languages and frameworks. Source map upload instructions. Common patterns like error boundaries and custom grouping. Written by engineers who actually use this stuff.',
+        'pairs-with':
+            "Error happens → watch the replay → see the user's journey → check their feature flags → roll back if needed. This workflow is impossible with standalone tools. Everything connects because it's all in one platform.",
+        'getting-started':
+            "Add our SDK. Errors start flowing immediately. Set up alerts for critical errors. Use session replay to debug faster. Roll out fixes with feature flags. The integration is what makes it powerful - you're not just collecting errors, you're solving them faster.",
+    },
 }
