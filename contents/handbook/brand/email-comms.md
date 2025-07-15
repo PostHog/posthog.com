@@ -66,7 +66,7 @@ The goal of this flow is to set expectations for what the self-hosted experience
 Our open source onboarding email is essentially identical to the self-hosted onboarding flow, but excludes information about the sunsetting of the self-hosted product. 
 
 #### Beta onboarding emails
-When a user opts in to a beta via [the feature preview menu](http://app.posthog.com/home#panel=feature-previews) we enter them into an email flow designed to help us collect feedback from users. 
+When a user opts in to a beta via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews) we enter them into an email flow designed to help us collect feedback from users. 
 
 This flow currently comprises a single, personal email from either Joe or the team lead working on the beta feature. This email is sent one week after the user joins the beta and features tailored content based on which beta the user joined. 
 
