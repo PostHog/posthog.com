@@ -14,7 +14,11 @@ export default function ActiveWindowsPanel() {
     }
 
     const handleWindowClick = (appWindow: any) => {
-        navigate(`${appWindow.location.pathname}${appWindow.location.hash || ''}`)
+        if (appWindow.path.startsWith('/')) {
+            navigate(`${appWindow.path}`)
+        } else {
+            bringToFront(appWindow)
+        }
         closeActiveWindowsPanel()
     }
 
