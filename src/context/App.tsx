@@ -8,6 +8,7 @@ import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
 import { ChatProvider } from 'hooks/useChat'
+import Start from 'components/Start'
 
 interface ChatContext {
     type: 'page'
@@ -281,6 +282,22 @@ const appSettings: AppSettings = {
                 height: 1000,
             },
             fixed: false,
+        },
+        position: {
+            center: true,
+        },
+    },
+    start: {
+        size: {
+            min: {
+                width: 850,
+                height: 580,
+            },
+            max: {
+                width: 850,
+                height: 580,
+            },
+            fixed: true,
         },
         position: {
             center: true,
@@ -1030,6 +1047,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         window.addEventListener('resize', handleResize)
 
         return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => {
+        if (location.key === 'initial' && location.pathname === '/' && !isMobile) {
+            addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} />)
+        }
     }, [])
 
     return (
