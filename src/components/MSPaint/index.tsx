@@ -305,11 +305,18 @@ export default function MSPaint({
         const canvas = canvasRef.current
         if (!canvas) return { x: 0, y: 0 }
 
+        // Get the bounding rect of the canvas
         const rect = canvas.getBoundingClientRect()
-        return {
-            x: (e.clientX - rect.left) / state.zoomLevel,
-            y: (e.clientY - rect.top) / state.zoomLevel,
-        }
+
+        // Calculate the scale factors from the actual rendered size vs natural size
+        const scaleX = canvas.width / rect.width
+        const scaleY = canvas.height / rect.height
+
+        // Get coordinates relative to the canvas element
+        const x = (e.clientX - rect.left) * scaleX
+        const y = (e.clientY - rect.top) * scaleY
+
+        return { x, y }
     }
 
     // Handle mouse down

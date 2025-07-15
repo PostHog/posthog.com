@@ -223,7 +223,7 @@ export default function SlidesTemplate({
                 )
 
             case 'getting-started':
-                return <GettingStartedSlide {...props} />
+                return <GettingStartedSlide productName={productData?.name} {...props} />
 
             default:
                 return <div>Slide not found: {slug}</div>

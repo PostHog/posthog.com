@@ -19,7 +19,7 @@ export const SignupCTA = ({
     type?: string
     width?: string
     event?: any
-    size?: 'lg' | 'sm' | 'md'
+    size?: 'lg' | 'sm' | 'md' | 'absurd'
 }): JSX.Element => {
     const posthog = usePostHog()
 
