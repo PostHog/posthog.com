@@ -32,6 +32,11 @@ import Tooltip from 'components/Tooltip'
 import CheckIcon from 'assets/icons/check.svg'
 import WarningIcon from 'assets/icons/warning.svg'
 import XIcon from 'assets/icons/x.svg'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
+import { useState } from 'react'
+import SidebarSection from 'components/PostLayout/SidebarSection'
+import Contributor from 'components/Docs/Contributors'
 
 const DestinationsLibraryCallout = () => {
     return (
@@ -168,34 +173,34 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
 
 type AppParametersProps = {
     config:
-    | {
-        key: string
-        name: string | null
-        required: boolean | null
-        type: string | null
-        hint: string | null
-        description: string | null
-    }[]
-    | null
+        | {
+              key: string
+              name: string | null
+              required: boolean | null
+              type: string | null
+              hint: string | null
+              description: string | null
+          }[]
+        | null
 }
 
 type TemplateParametersProps =
     | {
-        templateId: string
-        name: string
-        type: string
-        inputs_schema:
-        | {
-            key: string
-            type: string | null
-            label: string | null
-            description: string | null
-            default?: string | null
-            secret?: boolean | null
-            required?: boolean | null
-        }[]
-        | null
-    }[]
+          templateId: string
+          name: string
+          type: string
+          inputs_schema:
+              | {
+                    key: string
+                    type: string | null
+                    label: string | null
+                    description: string | null
+                    default?: string | null
+                    secret?: boolean | null
+                    required?: boolean | null
+                }[]
+              | null
+      }[]
     | null
 
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
