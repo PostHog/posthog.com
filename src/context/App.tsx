@@ -528,13 +528,16 @@ export interface SiteSettings {
 }
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
-    console.log('location', location)
     const isSSR = typeof window === 'undefined'
     const constraintsRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
-    const [windows, setWindows] = useState<AppWindow[]>([createNewWindow(element, [], location, isSSR, taskbarHeight)])
+    const [windows, setWindows] = useState<AppWindow[]>(
+        location.key === 'initial' && location.pathname === '/' && isMobile
+            ? []
+            : [createNewWindow(element, [], location, isSSR, taskbarHeight)]
+    )
     const focusedWindow = useMemo(() => {
         return windows.reduce<AppWindow | undefined>(
             (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
@@ -918,6 +921,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }
 
     useEffect(() => {
+        if (location.key === 'initial' && location.pathname === '/' && isMobile) {
+            return
+        }
         updatePages(element)
     }, [element])
 

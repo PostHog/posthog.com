@@ -15,7 +15,7 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
     const [isDragging, setIsDragging] = useState(false)
     const [hasDragged, setHasDragged] = useState(false)
     const controls = useDragControls()
-    const { constraintsRef } = useApp()
+    const { constraintsRef, isMobile } = useApp()
 
     useEffect(() => {
         setPosition(initialPosition)
@@ -70,15 +70,21 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
 
     return (
         <motion.li
-            className={`absolute w-28 flex justify-center items-center ${isDragging ? 'z-50' : 'z-10'}`}
-            animate={{
-                x: position.x,
-                y: position.y,
-                scale: 1,
-                opacity: 1,
-            }}
-            drag
-            dragControls={controls}
+            className={`${isMobile ? '' : 'absolute'} w-28 flex justify-center items-center ${
+                isDragging ? 'z-50' : 'z-10'
+            }`}
+            animate={
+                isMobile
+                    ? undefined
+                    : {
+                          x: position.x,
+                          y: position.y,
+                          scale: 1,
+                          opacity: 1,
+                      }
+            }
+            drag={!isMobile}
+            dragControls={!isMobile ? controls : undefined}
             dragListener={false}
             dragMomentum={false}
             dragConstraints={constraintsRef}
@@ -87,7 +93,7 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
             onDragEnd={handleDragEnd}
             onMouseDown={handleMouseDown}
             whileDrag={{ scale: 1.1, rotate: 2 }}
-            initial={{ x: position.x, y: position.y }}
+            initial={isMobile ? undefined : { x: position.x, y: position.y }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
         >
             <div
