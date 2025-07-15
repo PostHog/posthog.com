@@ -455,7 +455,7 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
-                                to="/handbook/company/security#soc-2"
+                                to="/docs/privacy/soc2"
                                 className="font-bold text-sm text-secondary hover:text-primary"
                             >
                                 SOC 2

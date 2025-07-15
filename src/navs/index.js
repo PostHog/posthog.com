@@ -452,15 +452,11 @@ export const handbookSidebar = [
                 url: '/handbook/finance',
             },
             {
-                name: '14. Where we are now',
-                url: '/handbook/current-status',
-            },
-            {
-                name: '15. Where are we going?',
+                name: '14. Where are we going?',
                 url: '/handbook/future',
             },
             {
-                name: '16. How you can help',
+                name: '15. How you can help',
                 url: '/handbook/help',
             },
         ],
@@ -841,6 +837,10 @@ export const handbookSidebar = [
                         name: 'Backend coding',
                         url: '/handbook/engineering/conventions/backend-coding',
                     },
+                    {
+                        name: 'Scripts',
+                        url: '/handbook/engineering/conventions/scripts',
+                    },
                 ],
             },
             {
@@ -1034,8 +1034,12 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/revenue-and-forecasting',
             },
             {
-                name: 'Activation & product intents',
+                name: 'Product intents',
                 url: '/handbook/growth/growth-engineering/product-intents',
+            },
+            {
+                name: 'Per-product activation',
+                url: '/handbook/growth/growth-engineering/per-product-activation',
             },
         ],
     },
@@ -1080,6 +1084,10 @@ export const handbookSidebar = [
             {
                 name: 'Finance',
                 url: '/handbook/people/finance',
+            },
+            {
+                name: 'Talent',
+                url: '/handbook/people/talent',
             },
             {
                 name: 'Merch store',
@@ -1219,6 +1227,10 @@ export const handbookSidebar = [
                 name: 'Incidents & maintenance',
                 url: '/handbook/engineering/incidents#customer-communications',
             },
+            {
+                name: 'Troubleshooting tips',
+                url: '/handbook/support/troubleshooting-tips',
+            },
         ],
     },
     {
@@ -1339,6 +1351,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/refunds',
                     },
                     {
+                        name: 'Allocating accounts',
+                        url: '/handbook/growth/sales/account-allocation',
+                    },
+                    {
                         name: 'Automations',
                         url: '/handbook/growth/sales/automations',
                     },
@@ -1369,6 +1385,10 @@ export const handbookSidebar = [
                     {
                         name: 'YC onboarding',
                         url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'New hire onboarding exercise',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding-exercise',
                     },
                 ],
             },
@@ -2668,7 +2688,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'SOC 2',
-                            url: '/handbook/company/security#soc-2',
+                            url: '/docs/privacy/soc2',
                         },
                         {
                             name: 'Ad blockers',
@@ -2906,6 +2926,12 @@ export const docsMenu = {
                     url: 'https://posthog.com/docs/data-warehouse/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
+                },
+                {
+                    name: 'Calendar heatmap',
+                    url: '/docs/product-analytics/calendar-heatmap',
+                    icon: 'IconCalendar',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Tools',

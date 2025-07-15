@@ -46,8 +46,9 @@ posthog.capture(
 )
 
 # Using contexts
-with posthog.new_context():
-    posthog.identify_context('user-distinct-id')
+from posthog import new_context, identify_context
+with new_context():
+    identify_context('user-distinct-id')
     posthog.capture('event_name')
 ```
 
@@ -156,7 +157,7 @@ You can also manually capture exceptions using the `capture_exception` method:
 posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
 ```
 
-Contexts automatically capture exceptions thrown inside them, unless disable it by passing `capture_exceptions=False` to `posthog.new_context()`.
+Contexts automatically capture exceptions thrown inside them, unless disable it by passing `capture_exceptions=False` to `new_context()`.
 
 ## GeoIP properties
 

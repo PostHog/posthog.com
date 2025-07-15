@@ -12,7 +12,7 @@ We’re an international bunch of weirdos, but one thing us weirdos have in comm
 
 We have tried many different tactics over the years, and these are the things we have found _actually_ make a difference. 
 
-- We are all remote. At the time of writing, [we employ people in 17 countries](/people) across 3 continents.
+- We are all remote. At the time of writing, [we employ people in 23 countries](/people) across 3 continents.
 - Asynchronous and transparent [communication](/handbook/company/communication) - so people can get the context they need to work effectively no matter what their schedule.
 - We offer near complete flexibility over working hours. You can do the school run, or schedule that dentist appointment you’ve been avoiding!
 - An [anti-meeting culture](/handbook/getting-started/meetings). Ever had someone schedule a meeting over family time because they couldn’t find a slot in your schedule? That doesn’t happen here. 
