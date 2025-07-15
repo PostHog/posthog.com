@@ -57,11 +57,11 @@ const Discounts = () => (
             </li>
             <li className="relative pl-7 pt-4">
                 <IconCode className="size-5 absolute left-0 top-4.5 opacity-50" />
-                <strong>OSS projects without corporate backing</strong>
+                <strong>Small OSS projects without corporate backing</strong>
                 <p className="text-[15px] mb-2">
-                    If you've got an open source project that lacks corporate backing (ie runs off donations, 
-                    free time, and kind contributors), you can use PostHog on that project for free. Get in 
-                    touch through the app after signing up.
+                    If you've got an open source project that lacks corporate backing and has less than $200k annual 
+                    revenues, you can use PostHog on that project for free, subject to approval. Get in touch 
+                    through the app after signing up to see if you qualify.
                 </p>
             </li>
         </ul>
