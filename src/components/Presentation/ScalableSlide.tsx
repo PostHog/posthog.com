@@ -49,10 +49,14 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
             if (mode === 'thumbnail') {
                 console.log(`📏 ScalableSlide thumbnail: Zero dimensions, retrying...`)
             }
-            // Retry up to 15 times with exponential backoff
-            if (retryCountRef.current < 15) {
+            // More aggressive retry for thumbnails, less for others
+            const maxRetries = mode === 'thumbnail' ? 25 : 15
+            if (retryCountRef.current < maxRetries) {
                 retryCountRef.current++
-                const delay = Math.min(50 * Math.pow(1.5, retryCountRef.current), 2000) // Up to 2 second delay
+                const delay =
+                    mode === 'thumbnail'
+                        ? Math.min(30 * Math.pow(1.3, retryCountRef.current), 1000) // Faster retry for thumbnails
+                        : Math.min(50 * Math.pow(1.5, retryCountRef.current), 2000) // Original logic for others
                 setTimeout(updateScale, delay)
             }
             return
@@ -131,31 +135,29 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
     }, [baseWidth, baseHeight, mode])
 
     useEffect(() => {
-        // More robust initialization that waits for layout to be complete
+        // Simple, reliable initialization
         const initializeScale = () => {
-            // Use multiple requestAnimationFrame calls to ensure layout is complete
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        // Additional delay for any animations to complete
-                        setTimeout(() => {
-                            updateScale()
-                        }, 100)
-                    })
-                })
-            })
+            updateScale()
         }
 
-        // Initial scale calculation with better timing
+        // Try immediate initialization
         initializeScale()
 
-        // Set up resize observer
-        const resizeObserver = new ResizeObserver(() => {
+        // Set up resize observer with more aggressive retry
+        const resizeObserver = new ResizeObserver((entries) => {
             // Reset stability tracking when container resizes
             dimensionStabilityCountRef.current = 0
             retryCountRef.current = 0
-            // Small debounce to avoid too frequent updates
-            setTimeout(updateScale, 10)
+
+            // For thumbnails, be more aggressive about retrying
+            if (mode === 'thumbnail') {
+                // Try multiple times with different delays to catch layout changes
+                setTimeout(updateScale, 0)
+                setTimeout(updateScale, 50)
+                setTimeout(updateScale, 200)
+            } else {
+                setTimeout(updateScale, 10)
+            }
         })
 
         if (containerRef.current) {
@@ -170,12 +172,21 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
         }
         window.addEventListener('resize', handleResize)
 
+        // Additional initialization attempts for thumbnails
+        if (mode === 'thumbnail') {
+            // Multiple initialization attempts with different timings
+            setTimeout(updateScale, 0)
+            setTimeout(updateScale, 100)
+            setTimeout(updateScale, 250)
+            setTimeout(updateScale, 500)
+        }
+
         // Cleanup
         return () => {
             resizeObserver.disconnect()
             window.removeEventListener('resize', handleResize)
         }
-    }, [updateScale])
+    }, [updateScale, mode])
 
     // Don't render scaled content until we have proper dimensions
     if (!isInitialized) {
