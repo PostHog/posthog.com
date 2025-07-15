@@ -461,8 +461,8 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
 
                     {/* Fallback message if no differences found */}
                     {planDifferences.length === 0 && (
-                        <div className="border border-primary rounded-lg p-4 bg-primary">
-                            <p className="text-center text-primary text-sm">
+                        <div className="border border-primary bg-accent rounded p-4 col-span-3">
+                            <p className="text-center text-primary text-sm mb-0">
                                 <span className="font-semibold">All features</span> are available on both plans
                             </p>
                         </div>

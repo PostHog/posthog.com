@@ -70,18 +70,15 @@ export default function DataWarehouse(): JSX.Element {
     // Optional: Customize slides
     // See /components/Products/Slides/README.md for more details
     const slides = createSlideConfig({
-        // exclude: ['comparison-summary'],
+        exclude: ['comparison-summary', 'feature-comparison'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
-            overview: 'columns', // Use the horizontal split layout
+            overview: 'stacked', // Use the horizontal split layout
         },
     })
 
-    // Merge content data with product data
-
     const mergedData = {
         ...data,
-
         ...contentData,
     }
 

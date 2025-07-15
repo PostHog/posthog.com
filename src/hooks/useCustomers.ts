@@ -4,7 +4,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 // Import PNG logos (not converted to React components)
 import CreatifyLogo from '../images/customers/creatify-light.png'
 import CreatifyLogoDark from '../images/customers/creatify-dark.png'
-
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
@@ -14,6 +13,7 @@ import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
+import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
@@ -26,6 +26,7 @@ import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
+import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
@@ -130,6 +131,12 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: HasuraLogo,
     },
+    headshotpro: {
+        name: 'HeadshotPro',
+        toolsUsed: ['data_warehouse'],
+        notes: '',
+        logo: HeadshotProLogo,
+    },
     mistralai: {
         name: 'Mistral AI',
         toolsUsed: [],
@@ -229,6 +236,18 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: VendastaLogo,
     },
+    webshare: {
+        name: 'Webshare',
+        toolsUsed: ['data_warehouse'],
+        notes: '',
+        logo: WebshareLogo,
+    },
+    ycombinator: {
+        name: 'Y Combinator',
+        toolsUsed: ['experiments', 'autocapture', 'posthog_cloud', 'insights'],
+        notes: '',
+        logo: YCombinatorLogo,
+    },
     zealot: {
         name: 'Zealot',
         toolsUsed: ['error_tracking'],
@@ -237,12 +256,6 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: ZealotLogo,
             dark: ZealotLogoDark,
         },
-    },
-    ycombinator: {
-        name: 'Y Combinator',
-        toolsUsed: ['experiments', 'autocapture', 'posthog_cloud', 'insights'],
-        notes: '',
-        logo: YCombinatorLogo,
     },
 }
 
