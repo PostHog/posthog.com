@@ -60,8 +60,8 @@ const Discounts = () => (
                 <strong>Small OSS projects without corporate backing</strong>
                 <p className="text-[15px] mb-2">
                     If you've got an open source project that lacks corporate backing and has less than $200k annual 
-                    revenues, you can use PostHog on that project for free, subject to approval. Get in touch 
-                    through the app after signing up to see if you qualify.
+                    revenues, you can get up to $50k credits per year to use PostHog for free, subject to approval. 
+                    Get in touch through the app after signing up to see if you qualify.
                 </p>
             </li>
         </ul>
