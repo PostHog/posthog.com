@@ -14,6 +14,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ### Day 1
 
+- Familiarize yourself with [how we work at PostHog](https://posthog.com/handbook/company/culture).
 - Meet with [Dana](/community/profiles/32545) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
 - Setup relevant [Sales & CS Tools](/handbook/growth/sales/new-hire-onboarding#sales--cs-tools) 
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
@@ -24,11 +25,15 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ### Rest of week 1
 
+ - Confirm that you have been added as a member to the [PostHog organization in GitHub](https://github.com/PostHog?view_as=member). [Fraser](https://posthog.com/community/profiles/30207) can add you if you haven't.
+ - Work your way through your GitHub onboarding issue that a member of the [People & Ops Team](https://posthog.com/teams/people) should have created and sent a link to.
  - Ask team members in your region to be invited to some customer calls so you can gain an understanding of how we work with customers.
  - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
- - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and update it as you learn more.
+   - For familiarization and self-led training, follow the [curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo App project](https://us.posthog.com/project/2267) which is already populated with data. Alternatively, you can create a new [project](https://posthog.com/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](https://posthog.com/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
+   - [Kaya](https://posthog.com/community/profiles/34037) [designed an exercise](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding-exercise) to test your skills for working with customer accounts which you can work through.
+ - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding. 
 
 ### Week 2
@@ -38,7 +43,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 - Towards the end of the week, schedule a demo and feedback session with Dana. We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products.
 
-#### CSM
+#### CSM / Technical CSM
 - During your first week, Dana will figure out your initial book of business (around 30 accounts). We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Prioritize your current book of customers, and start reaching out! You should check conversations in Vitally to see if someone else has a prior relationship as they can make a warm intro for you.
 
@@ -65,7 +70,7 @@ Ideally, this will happen in Week 3 or 4, and will be with a few existing team m
 
 ### How do I know if I'm on track?
 
-#### CSM
+#### CSM / Technical CSM
 By the end of month 1:
  - Be starting to solve technical problems for your book with occasional help
  - Be leading customer calls and demos on your own
