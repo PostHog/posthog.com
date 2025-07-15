@@ -6,7 +6,7 @@ import { useValues } from 'kea'
 import { layoutLogic } from 'logic/layoutLogic'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import { useCustomers } from 'hooks/useCustomers'
+import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 
 const CUSTOMER_ORDER = [
     'ycombinator',
@@ -25,43 +25,54 @@ const CUSTOMER_ORDER = [
 
 interface CustomerProps {
     number: number
-    customer: {
-        logo?: {
-            light: string
-            dark: string
-        }
-        name: string
-        toolsUsed?: string[]
-        slug: string
-        notes?: string
-    }
+    customer: CustomerType
 }
 
 const Customer = ({ number, customer }: CustomerProps) => {
     const { hasCaseStudy } = useCustomers()
+
+    // Determine logo rendering logic - same as CustomersSlide.tsx
+    const renderLogo = () => {
+        if (!customer.logo) {
+            return <span>{customer.name}</span>
+        }
+
+        // Check if logo is a React component (single SVG format)
+        if (typeof customer.logo === 'function') {
+            const LogoComponent = customer.logo
+            const heightClass = customer.height ? `h-${customer.height}` : ''
+            const className = `w-full fill-current object-contain ${heightClass}`.trim()
+
+            return <LogoComponent className={className} />
+        }
+
+        // Otherwise, it's the existing light/dark object format
+        const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-10'
+
+        return (
+            <>
+                <img
+                    src={customer.logo.light}
+                    alt={customer.name}
+                    className={`w-auto object-contain dark:hidden ${heightClass}`}
+                />
+                <img
+                    src={customer.logo.dark}
+                    alt={customer.name}
+                    className={`w-auto object-contain hidden dark:block ${heightClass}`}
+                />
+            </>
+        )
+    }
+
     return {
         cells: [
             { content: number },
             {
-                content: customer.logo ? (
-                    <>
-                        <img
-                            src={customer.logo.light}
-                            alt={customer.name}
-                            className="w-auto object-contain dark:hidden"
-                        />
-                        <img
-                            src={customer.logo.dark}
-                            alt={customer.name}
-                            className="w-auto object-contain hidden dark:block"
-                        />
-                    </>
-                ) : (
-                    <span>{customer.name}</span>
-                ),
+                content: renderLogo(),
                 className: '!p-4',
             },
-            { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
+            { content: customer.toolsUsed?.join(', '), className: 'text-sm text-red' },
             { content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`}>Link</Link> : null },
             { content: customer.notes || '', className: 'text-sm' },
         ],
