@@ -13,7 +13,7 @@ export default function OverviewSlideStacked({
     const textColor = overview?.textColor || 'text-white'
 
     return (
-        <div className={`h-full p-12 flex flex-col items-center relative bg-${color} ${textColor}`}>
+        <div className={`h-full p-4 @2xl:p-12 flex flex-col items-center relative bg-${color} ${textColor}`}>
             <div className="mb-4 w-full flex flex-col">
                 <div className="flex justify-center items-center gap-2 mb-2">
                     {Icon && <Icon className={`size-8 drop-shadow-xl ${textColor}`} />}
@@ -22,11 +22,15 @@ export default function OverviewSlideStacked({
                     </span>
                 </div>
                 <div>
-                    <h1 className={`text-5xl font-bold text-center leading-tight drop-shadow-2xl ${textColor}`}>
+                    <h1
+                        className={`text-6xl @2xl:text-5xl mb-4 font-bold text-center leading-tight drop-shadow-2xl ${textColor}`}
+                    >
                         {overview?.title}
                     </h1>
                 </div>
-                <p className={`text-xl text-center leading-snug drop-shadow max-w-2xl mx-auto ${textColor}`}>
+                <p
+                    className={`text-3xl @2xl:text-xl text-center leading-snug drop-shadow max-w-2xl mx-auto ${textColor}`}
+                >
                     {overview?.description}
                 </p>
             </div>
