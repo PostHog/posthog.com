@@ -57,6 +57,7 @@ export interface AppWindow {
     minimal: boolean
     appSettings?: AppSetting
     location?: Location
+    animating?: boolean
 }
 
 interface WindowProviderProps {

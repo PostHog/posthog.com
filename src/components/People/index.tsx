@@ -26,6 +26,7 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
+import { useWindow } from '../../context/Window'
 
 export const TeamMember = (props: any) => {
     const {
@@ -267,6 +268,7 @@ export const TeamMember = (props: any) => {
 }
 
 export default function People() {
+    const { appWindow } = useWindow()
     const {
         team: { teamMembers },
         allTeams,
@@ -379,19 +381,21 @@ export default function People() {
                     */}
 
                     <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
-                        {teamMembers.map((teamMember: any, index: number) => {
-                            // Calculate if this person is a team lead of any team
-                            const isTeamLead = teamMember.leadTeams?.data?.length > 0
+                        {(appWindow?.animating ? teamMembers.slice(0, 8) : teamMembers).map(
+                            (teamMember: any, index: number) => {
+                                // Calculate if this person is a team lead of any team
+                                const isTeamLead = teamMember.leadTeams?.data?.length > 0
 
-                            return (
-                                <TeamMember
-                                    key={index}
-                                    {...teamMember}
-                                    isTeamLead={isTeamLead}
-                                    teamCrestMap={teamCrestMap}
-                                />
-                            )
-                        })}
+                                return (
+                                    <TeamMember
+                                        key={index}
+                                        {...teamMember}
+                                        isTeamLead={isTeamLead}
+                                        teamCrestMap={teamCrestMap}
+                                    />
+                                )
+                            }
+                        )}
                     </ul>
                 </ScrollArea>
             </div>
