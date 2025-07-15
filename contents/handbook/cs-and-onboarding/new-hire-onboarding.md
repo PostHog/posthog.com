@@ -14,7 +14,7 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
 
 ### Day 1
 
-- Familiarize yourself with [how we work at PostHog](https://posthog.com/handbook/company/culture).
+- Familiarize yourself with [how we work at PostHog](/handbook/company/culture).
 - Meet with [Dana](/community/profiles/32545) who will run through this plan and answer any questions you may have. In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
 - Setup relevant [Sales & CS Tools](/handbook/growth/sales/new-hire-onboarding#sales--cs-tools) 
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
@@ -31,8 +31,8 @@ Also look at the [sales team's onboarding page](/handbook/growth/sales/new-hire-
  - Check out some [BuildBetter](https://app.buildbetter.app/) calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying.
    - There are a few BuildBetter playlists to start with – [customer training calls](https://app.buildbetter.app/folders/15381), [PostHog knowledge calls](https://app.buildbetter.app/folders/14593), [onboarding specialist calls](https://app.buildbetter.app/folders/14521), add to them as you listen! 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
-   - For familiarization and self-led training, follow the [curriculum](/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo App project](https://us.posthog.com/project/2267) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
-   - [Kaya](/community/profiles/34037) [designed an exercise](handbook/cs-and-onboarding/new-hire-onboarding-exercise) to test your skills for working with customer accounts which you can work through.
+   - For familiarization and self-led training, follow the [curriculum](/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). You work through this with the [HogFlix Demo App project](https://us.posthog.com/project/2267) which is already populated with data. Alternatively, you can create a new [project](/docs/settings/projects) in either the [US](https://us.posthog.com/) or [EU](https://eu.posthog.com/) PostHog instances and [hook it up](/docs/getting-started/install) to your own app or [HogFlix instance](https://github.com/PostHog/posthog-demo-3000).
+   - [Kaya](/community/profiles/34037) [designed an exercise](/handbook/cs-and-onboarding/new-hire-onboarding-exercise) to test your skills for working with customer accounts which you can work through.
  - Read all of the CS & Onboarding section in the Handbook as well as the Sales section, and [update it as you learn more](https://posthog.com/handbook/company/new-to-github#creating-a-pull-request).
  - Meet with [Charles](/community/profiles/28625), the exec responsible for CS and Onboarding. 
 
