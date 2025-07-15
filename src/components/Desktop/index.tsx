@@ -19,7 +19,7 @@ interface Product {
     color?: string
 }
 
-const productLinks: AppItem[] = [
+export const productLinks: AppItem[] = [
     {
         label: 'home.mdx',
         Icon: <AppIcon name="doc" />,
@@ -53,7 +53,7 @@ const productLinks: AppItem[] = [
     },
 ]
 
-const apps: AppItem[] = [
+export const apps: AppItem[] = [
     {
         label: 'Why PostHog?',
         Icon: <AppIcon name="tour" />,
@@ -229,42 +229,43 @@ export default function Desktop() {
     const allApps = [...productLinks, ...apps]
 
     return (
-        <ContextMenu
-            menuItems={[
-                {
-                    type: 'item',
-                    children: (
-                        <Link to="/site-settings" state={{ newWindow: true }}>
-                            Display options
-                        </Link>
-                    ),
-                },
-                {
-                    type: 'item',
-                    children: (
-                        <Link to="/about" state={{ newWindow: true }}>
-                            About PostHog
-                        </Link>
-                    ),
-                },
-                {
-                    type: 'item',
-                    children: (
-                        <button
-                            onClick={() => {
-                                localStorage.removeItem(STORAGE_KEY)
-                                setIconPositions(generateInitialPositions())
-                            }}
-                        >
-                            Reset icons
-                        </button>
-                    ),
-                },
-            ]}
-        >
-            <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
-                <div
-                    className={`absolute bottom-0 right-0 size-full -z-10 
+        <>
+            <ContextMenu
+                menuItems={[
+                    {
+                        type: 'item',
+                        children: (
+                            <Link to="/site-settings" state={{ newWindow: true }}>
+                                Display options
+                            </Link>
+                        ),
+                    },
+                    {
+                        type: 'item',
+                        children: (
+                            <Link to="/about" state={{ newWindow: true }}>
+                                About PostHog
+                            </Link>
+                        ),
+                    },
+                    {
+                        type: 'item',
+                        children: (
+                            <button
+                                onClick={() => {
+                                    localStorage.removeItem(STORAGE_KEY)
+                                    setIconPositions(generateInitialPositions())
+                                }}
+                            >
+                                Reset icons
+                            </button>
+                        ),
+                    },
+                ]}
+            >
+                <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
+                    <div
+                        className={`absolute bottom-0 right-0 size-full -z-10 
                         wallpaper-hogzilla:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png')] wallpaper-hogzilla:bg-contain 
                         wallpaper-hogzilla:bg-no-repeat
                         wallpaper-hogzilla:bg-right-bottom
@@ -302,47 +303,48 @@ export default function Desktop() {
                         dark:wallpaper-startup-monopoly:bg-[#393836]
                         
                     `}
-                />
-                <div className="hidden wallpaper-office-party:block absolute bottom-24 left-24">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
-                        alt="Office party"
-                        width={997}
-                        height={858}
-                        className="w-[498.5px] h-[429px]"
                     />
-                </div>
-                <div className="hidden wallpaper-keyboard-garden:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_7b4f9e93b6.png"
-                        alt="Office party"
-                        width={1242}
-                        height={1128}
-                        className="w-[621px] h-[564px]"
-                    />
-                </div>
-                <div className="hidden wallpaper-2001-bliss:block absolute inset-0 bg-white/60 dark:bg-black/60"></div>
+                    <div className="hidden wallpaper-office-party:block absolute bottom-24 left-24">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
+                            alt="Office party"
+                            width={997}
+                            height={858}
+                            className="w-[498.5px] h-[429px]"
+                        />
+                    </div>
+                    <div className="hidden wallpaper-keyboard-garden:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_7b4f9e93b6.png"
+                            alt="Office party"
+                            width={1242}
+                            height={1128}
+                            className="w-[621px] h-[564px]"
+                        />
+                    </div>
+                    <div className="hidden wallpaper-2001-bliss:block absolute inset-0 bg-white/60 dark:bg-black/60"></div>
 
-                <nav>
-                    <ul className="list-none m-0 p-0">
-                        {allApps.map((app) => {
-                            const position = iconPositions[app.label]
-                            if (!position) return null
+                    <nav>
+                        <ul className="list-none m-0 p-0">
+                            {allApps.map((app) => {
+                                const position = iconPositions[app.label]
+                                if (!position) return null
 
-                            return (
-                                <DraggableDesktopIcon
-                                    key={app.label}
-                                    app={app}
-                                    initialPosition={position}
-                                    onPositionChange={(newPosition) => handlePositionChange(app.label, newPosition)}
-                                />
-                            )
-                        })}
-                    </ul>
-                </nav>
-            </div>
-            <Screensaver isActive={isInactive} onDismiss={dismiss} />
+                                return (
+                                    <DraggableDesktopIcon
+                                        key={app.label}
+                                        app={app}
+                                        initialPosition={position}
+                                        onPositionChange={(newPosition) => handlePositionChange(app.label, newPosition)}
+                                    />
+                                )
+                            })}
+                        </ul>
+                    </nav>
+                </div>
+                <Screensaver isActive={isInactive} onDismiss={dismiss} />
+            </ContextMenu>
             <NotificationsPanel />
-        </ContextMenu>
+        </>
     )
 }

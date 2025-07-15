@@ -374,11 +374,11 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
-                            className={`@container absolute !select-auto ${
+                            className={`@container absolute !select-auto flex flex-col ${
                                 item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary'
                             } ${
                                 siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
-                                    ? ''
+                                    ? 'border-b border-primary'
                                     : `${
                                           focusedWindow === item
                                               ? 'shadow-2xl border-primary'

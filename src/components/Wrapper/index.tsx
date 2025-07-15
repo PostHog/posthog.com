@@ -5,6 +5,7 @@ import TaskBarMenu from 'components/TaskBarMenu'
 import AppWindow from 'components/AppWindow'
 import { AnimatePresence, motion } from 'framer-motion'
 import CookieBannerToast from 'components/CookieBanner/ToastVersion'
+import Dock from 'components/Desktop/Dock'
 
 export default function Wrapper() {
     const { windows, constraintsRef } = useApp()
@@ -12,7 +13,7 @@ export default function Wrapper() {
     return (
         <div className="fixed inset-0 size-full flex flex-col">
             <TaskBarMenu />
-            <div ref={constraintsRef} className="flex-grow">
+            <div ref={constraintsRef} className="flex-grow relative">
                 <Desktop />
                 <AnimatePresence>
                     {windows.map((item) => {
@@ -35,6 +36,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
+            <Dock />
             <CookieBannerToast />
         </div>
     )
