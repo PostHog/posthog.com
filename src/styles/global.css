@@ -2387,3 +2387,8 @@ body.dark .max-ai-body {
         }
     }
 }
+
+/* Rainbow glowing border animation */
+.animate-gradient-rotate {
+    background-size: 400% 400%;
+}

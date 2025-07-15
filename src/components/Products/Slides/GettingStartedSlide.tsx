@@ -70,12 +70,26 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     fontSize={12}
                 />
                 <br />
-                <div className="rounded border border-primary p-2 bg-white mt-4 mb-2 text-left inline-block">
-                    <div className="flex items-center gap-0.5">
-                        <code className="text-sm">npx -y @posthog/wizard@latest</code>
-                        <OSButton size="xs" variant="ghost" onClick={handleCopy} aria-label="Copy to clipboard">
-                            {justCopied ? <IconCheck className="size-5 text-green" /> : <IconCopy className="size-5" />}
-                        </OSButton>
+                <div
+                    className="relative inline-block mt-4 mb-2 rounded p-[2px] shadow-2xl animate-gradient-rotate"
+                    style={{
+                        background:
+                            'linear-gradient(90deg, #ff0000 0%, #ff7f00 14%, #ffff00 28%, #00ff00 42%, #00ffff 56%, #0000ff 70%, #9400d3 84%, #ff0000 100%)',
+                        backgroundSize: '400% 400%',
+                        filter: 'drop-shadow(0 0 15px rgba(255, 0, 0, 0.5)) drop-shadow(0 0 15px rgba(0, 255, 0, 0.5)) drop-shadow(0 0 15px rgba(0, 0, 255, 0.5))',
+                    }}
+                >
+                    <div className="rounded p-2 bg-white text-left">
+                        <div className="flex items-center gap-0.5">
+                            <code className="text-sm">npx -y @posthog/wizard@latest</code>
+                            <OSButton size="xs" variant="ghost" onClick={handleCopy} aria-label="Copy to clipboard">
+                                {justCopied ? (
+                                    <IconCheck className="size-5 text-green" />
+                                ) : (
+                                    <IconCopy className="size-5" />
+                                )}
+                            </OSButton>
+                        </div>
                     </div>
                 </div>
                 <WordArt

@@ -322,6 +322,18 @@ module.exports = {
                     from: { transform: 'translateX(var(--radix-toast-swipe-end-x))' },
                     to: { transform: 'translateX(calc(100% + var(--viewport-padding)))' },
                 },
+                'spin-slow': {
+                    from: { transform: 'rotate(0deg)' },
+                    to: { transform: 'rotate(360deg)' },
+                },
+                'spin-slow-reverse': {
+                    from: { transform: 'rotate(360deg)' },
+                    to: { transform: 'rotate(0deg)' },
+                },
+                'gradient-rotate': {
+                    '0%, 100%': { 'background-position': '0% 50%' },
+                    '50%': { 'background-position': '100% 50%' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -338,6 +350,9 @@ module.exports = {
                 hide: 'hide 100ms ease-in',
                 slideIn: 'slideIn 150ms cubic-bezier(0.16, 1, 0.3, 1)',
                 swipeOut: 'swipeOut 100ms ease-out',
+                'spin-slow': 'spin-slow 4s linear infinite',
+                'spin-slow-reverse': 'spin-slow-reverse 4s linear infinite',
+                'gradient-rotate': 'gradient-rotate 3s ease-in-out infinite',
             },
             containers: {
                 '2xs': '16rem',
