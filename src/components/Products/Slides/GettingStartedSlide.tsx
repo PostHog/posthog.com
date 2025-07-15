@@ -7,6 +7,12 @@ import { SignupCTA } from 'components/SignupCTA'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import { IconCheck, IconCopy } from '@posthog/icons'
 import { useToast } from '../../../context/Toast'
+import { Link } from 'gatsby'
+import OSButton from 'components/OSButton'
+import Unicorn from './unicorn.gif'
+import ArrowStencil from './arrow-stencil.gif'
+import ArrowBlink from './arrow-blink.gif'
+import ArrowRainbow from './arrow-rainbow.gif'
 
 export default function GettingStartedSlide({ initialState, productName }: { initialState: any; productName: string }) {
     const coloringPageImage = StopImage
@@ -43,6 +49,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
             />
             {/* <WordArt text="PostHog" theme="rainbow" fontSize={60} />
                     <WordArt text="Analytics" theme="superhero" fontSize={40} /> */}
+            {/* <img src={Unicorn} className="absolute right-36 top-28 w-60 [mix-blend-mode:multiply]" /> */}
 
             <WordArt text="Get started today!!" theme="superhero" fontSize={48} className="absolute top-20 left-20" />
             <WordArt
@@ -52,13 +59,44 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                 className="absolute top-40 left-72"
             />
             <WordArt text="Follow your dreams" theme="blues" fontSize={24} className="absolute top-12 right-40" />
-            <WordArt text="Install with AI" theme="italicOutline" fontSize={24} className="absolute top-96 left-52" />
-            <WordArt
-                text="Install without AI"
-                theme="italicOutline"
-                fontSize={24}
-                className="absolute top-96 right-72"
-            />
+            <div className="absolute top-[24rem] left-32 text-center max-w-sm">
+                <WordArt text="Install with AI" theme="italicOutline" fontSize={24} className="" />
+                <br />
+                <WordArt text="in less than 90 seconds" theme="italicOutline" fontSize={16} />
+                <br />
+                <WordArt
+                    text="Works in your terminal or with tools like Cursor, Replit, and Bolt."
+                    theme="italicOutline"
+                    fontSize={12}
+                />
+                <br />
+                <div className="rounded border border-primary p-2 bg-white mt-4 mb-2 text-left inline-block">
+                    <div className="flex items-center gap-0.5">
+                        <code className="text-sm">npx -y @posthog/wizard@latest</code>
+                        <OSButton size="xs" variant="ghost" onClick={handleCopy} aria-label="Copy to clipboard">
+                            {justCopied ? <IconCheck className="size-5 text-green" /> : <IconCopy className="size-5" />}
+                        </OSButton>
+                    </div>
+                </div>
+                <WordArt
+                    text="Supports Next.js, React, React Native Svelte, and Astro"
+                    theme="italicOutline"
+                    fontSize={12}
+                />
+                <br />
+            </div>
+            <div className="absolute top-[24rem] right-72 text-center">
+                <WordArt text="Install without AI" theme="italicOutline" fontSize={24} />
+                <br />
+                <div className="relative">
+                    <SignupCTA size="absurd" type="primary" className="animate-grow mt-2" />
+                    <div className="absolute top-full flex gap-2 ml-6 -mt-6 -translate-x-1/2 scale-75">
+                        <img src={ArrowStencil} className="rotate-45 mr-2 relative -top-8" />
+                        <img src={ArrowBlink} className="rotate-90 -mr-24" />
+                        <img src={ArrowRainbow} className="rotate-90" />
+                    </div>
+                </div>
+            </div>
             <WordArt
                 text={`${productName} is my passion`}
                 theme="radial"
@@ -77,27 +115,6 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                 fontSize={30}
                 className="absolute bottom-20 left-96"
             />
-
-            <div className="absolute bottom-56 left-32 flex items-center gap-2">
-                <div className="rounded border border-primary px-5 py-4 bg-white dark:bg-accent-dark flex items-center gap-2">
-                    <code className="text-sm">npx -y @posthog/wizard@latest</code>
-                    <button
-                        onClick={handleCopy}
-                        className="p-1 hover:bg-accent-dark rounded transition-colors"
-                        aria-label="Copy to clipboard"
-                    >
-                        {justCopied ? (
-                            <IconCheck className="size-5 text-green-600" />
-                        ) : (
-                            <IconCopy className="size-5 hover:text-secondary cursor-pointer" />
-                        )}
-                    </button>
-                </div>
-            </div>
-
-            <div className="absolute bottom-56 right-64">
-                <SignupCTA size="absurd" type="primary" />
-            </div>
 
             {/*                     
                     <WordArt text="If you were looking for a sign..." theme="rainbow" fontSize={40} />
