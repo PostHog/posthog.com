@@ -12,7 +12,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 
 > **Important:** This feature is currently an opt-in beta. You can enable it on the [feature previews settings page](https://app.posthog.com/settings/user-feature-previews#marketing-analytics). Please leave a comment on this page if you have feedback or questions, or leave feedback via the in-app support modal.
 
-The **Marketing analytics** feature allows you to track marketing information, costs and performance from multiple advertising platforms in your [marketing analytics dashboard](https://app.posthog.com/web/marketing).
+The **marketing analytics** feature allows you to track marketing information, costs and performance from multiple advertising platforms in your [marketing analytics dashboard](https://app.posthog.com/web/marketing).
 
 ## Marketing dashboard
 
@@ -44,8 +44,8 @@ The marketing costs chart displays your total advertising spend aggregated acros
 
 The campaign breakdown table provides detailed performance metrics by individual campaign:
 
-- **Campaign**: Campaign identifier from your advertising platform (should match to utm_campaign value)
-- **Source**: Ad platform name (e.g., google, should match to utm_source value)
+- **Campaign**: Campaign identifier from your advertising platform (should match to `utm_campaign` value)
+- **Source**: Ad platform name (e.g., google, should match to `utm_source` value)
 - **Total Cost**: Total spend for the campaign in your base currency
 - **Total Clicks**: Number of clicks received during the selected period
 - **Total Impressions**: Number of impressions served
@@ -83,7 +83,7 @@ Define conversion goals by selecting events, actions or data warehouse tables. T
 To configure conversion goals:
 - **Conversion goal name**: Descriptive name (e.g., purchase, sign up, download)
 - **Event, action or data warehouse table**: Select what to track for conversions
-- **Schema mapping**: For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: **utm_campaign** and **utm_source**
+- **Schema mapping**: For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source`
 
 ### Data sources
 
@@ -98,7 +98,7 @@ To configure conversion goals:
 
 Configure native integrations to automatically sync marketing data from supported platforms. You'll need to sync the required tables for each source to enable the functionality.
 
-The simplest way to add marketing data is to [add a Google Ads source](https://us.posthog.com/project/2/pipeline/new/source?kind=googleads) by following [this guide](https://posthog.com/docs/cdp/sources/google-ads).
+The simplest way to add marketing data is to [add a Google Ads source](https://us.posthog.com/project/2/pipeline/new/source?kind=googleads) by following [this guide](/docs/cdp/sources/google-ads).
 
 Required tables for native sources:
 - **campaign**: Contains campaign information and metadata
@@ -113,7 +113,7 @@ Required tables for native sources:
     classes="rounded"
 />
 
-Configure external data warehouse sources to display marketing analytics. You'll need to map the required columns for each table to enable the functionality. Currently only BigQuery tables are supported.
+Configure external data warehouse sources to display marketing analytics. You'll need to map the required columns for each table to enable the functionality. Currently, only BigQuery tables are supported.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/configuring_white_0005e8dba1.png" 
@@ -123,10 +123,10 @@ Configure external data warehouse sources to display marketing analytics. You'll
 />
 
 **Required field mappings:**
-- **Campaign**: Campaign identifier or name (mapped to utm_campaign query param)
+- **Campaign**: Campaign identifier or name (mapped to `utm_campaign` query param)
 - **Cost**: Cost amount for the period
 - **Date**: Date of the data record
-- **Source**: Platform name (mapped to utm_source query param)
+- **Source**: Platform name (mapped to `utm_source` query param)
 
 **Optional field mappings:**
 - **Clicks**: Number of clicks received
@@ -146,4 +146,4 @@ Configure self-managed sources from S3, GCS, Cloudflare R2, and Azure. You'll ne
 
 > **Note:** We strongly recommend using .json format for better support and troubleshooting. Like data warehouse tables, you simply need to create a connection between PostHog and your marketing source, map the desired fields, and PostHog will automatically sync the marketing data.
 
-Please refer to the [Data Warehouse docs](/data-warehouse) for more information on configuring external data sources.
+Please refer to the [data warehouse](/data-warehouse) for more information on configuring external data sources.
