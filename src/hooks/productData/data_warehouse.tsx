@@ -3,7 +3,7 @@ import { IconDatabase } from '@posthog/icons'
 
 export const dataWarehouse = {
     Icon: IconDatabase,
-    name: 'Data warehouse',
+    name: 'Data Warehouse',
     handle: 'data_warehouse',
     type: 'data_warehouse',
     slug: 'data-warehouse',

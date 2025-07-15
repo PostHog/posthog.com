@@ -3,7 +3,7 @@ import { IconPieChart } from '@posthog/icons'
 
 export const webAnalytics = {
     Icon: IconPieChart,
-    name: 'Web analytics',
+    name: 'Web Analytics',
     handle: 'web_analytics',
     type: 'product_analytics',
     slug: 'web-analytics',

@@ -4,7 +4,7 @@ import CodeBlock from 'components/Home/CodeBlock'
 
 export const featureFlags = {
     Icon: IconToggle,
-    name: 'Feature flags',
+    name: 'Feature Flags',
     description: 'Control feature access with precision',
     handle: 'feature_flags',
     type: 'feature_flags',

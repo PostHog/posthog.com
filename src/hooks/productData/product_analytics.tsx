@@ -13,7 +13,7 @@ import { FIFTY_MILLION, MAX_PRODUCT_ANALYTICS, MILLION, TEN_MILLION } from 'comp
 
 export const productAnalytics = {
     Icon: IconGraph,
-    name: 'Product analytics',
+    name: 'Product Analytics',
     slug: 'product-analytics',
     handle: 'product_analytics',
     type: 'product_analytics',

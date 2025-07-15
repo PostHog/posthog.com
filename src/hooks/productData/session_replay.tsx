@@ -9,7 +9,7 @@ import SnippetRenderer from 'components/SnippetRenderer'
 
 export const sessionReplay = {
     Icon: IconRewindPlay,
-    name: 'Session replay',
+    name: 'Session Replay',
     handle: 'session_replay',
     type: 'session_replay',
     slug: 'session-replay',

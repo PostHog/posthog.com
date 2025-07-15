@@ -3,7 +3,7 @@ import { IconWarning } from '@posthog/icons'
 
 export const errorTracking = {
     Icon: IconWarning,
-    name: 'Error tracking',
+    name: 'Error Tracking',
     slug: 'error-tracking',
     handle: 'error_tracking',
     type: 'error_tracking',
@@ -47,13 +47,15 @@ export const errorTracking = {
     },
     features: [
         {
-            title: 'Alert',
-            headline: 'Alert',
+            title: 'Alerts',
+            headline: 'Alerts',
             description: 'Get notified of new issues by email, Slack, or webhook',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_alerts_00824b03f5.png',
                     alt: 'Alert',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -65,6 +67,8 @@ export const errorTracking = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png',
                     alt: 'Triage',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -76,6 +80,8 @@ export const errorTracking = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_organize_94b4d00ea2.png',
                     alt: 'Organize and prioritize',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -88,6 +94,8 @@ export const errorTracking = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png',
                     alt: 'Stack traces',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
