@@ -206,17 +206,17 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                 <span className="text-red dark:text-yellow">joy</span>
             </h1>
             <p className="text-lg font-semibold text-center text-opacity-75 mb-5">
-                Full kits coming soon. DIY version available now.
+                Full kits available, or 3D print it instead
             </p>
             <div className="flex justify-center gap-2 mb-12">
-                <CallToAction href="https://github.com/PostHog/DeskHog" type="primary" externalNoIcon>
+                <CallToAction href="https://posthog.com/merch" type="primary" externalNoIcon>
+                    <>Buy a kit now</>
+                </CallToAction>
+                <CallToAction href="https://github.com/PostHog/DeskHog" type="secondary" externalNoIcon>
                     <>
-                        Get the DIY version
+                        3D print it
                         <IconExternal className="size-4 inline-block ml-1" />
                     </>
-                </CallToAction>
-                <CallToAction href="https://posthog.com/merch" type="secondary" externalNoIcon>
-                    <>Join the kit waitlist</>
                 </CallToAction>
             </div>
         </section>
@@ -427,32 +427,24 @@ export const ProductDeskHog = () => {
                             />
                         </aside>
                     </div>
-                    <h2 className="text-5xl text-center mb-2">Of course, we're making some games for it too</h2>
+                    <h2 className="text-5xl text-center mb-2">It comes with games and important business tools</h2>
                     <h3 className="text-xl text-center font-medium mb-12">
-                        We're still nailing down the launch lineup, but you can{' '}
-                        <Link
-                            to="https://github.com/PostHog/DeskHog"
-                            externalNoIcon
-                            className="text-red dark:text-yellow"
-                        >
-                            build your own
-                        </Link>{' '}
-                        while you wait
+                        (The latter are a perfect excuse to expense your DeskHog purchase)
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/edcbc25d_262b_4590_936a_552c445a2ccb_1812ec3330.png"
-                            title="Pog"
+                            title="Paddle"
                             description="It's Pong, but with a different name. It's perfect for playing on the toilet. Apparently."
                             author="Leon Daly"
                             authorUrl="https://posthog.com/community/profiles/30833"
                         />
                         <App
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/a3e7c64e_2bfa_424e_aad2_f79bf1b86c63_7028720d2a.png"
-                            title="IdleHog"
-                            description="It's a wry satire. It's an idle clicker game. It's delivering shareholder value."
-                            author="Chris McNeill"
-                            authorUrl="https://posthog.com/community/profiles/33534"
+                            image="https://res.cloudinary.com/dmukukwp6/image/upload/0e9ed66b_2907_4e08_b105_99f15bfee041_3bca3468a4.png"
+                            title="Flappy Hog"
+                            description="Despite the title, this game has neither hedgehogs nor flapping."
+                            author="Joe Martin"
+                            authorUrl="https://posthog.com/community/profiles/29070"
                         />
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/e90c7a39_484a_40a0_94b1_693962bbd13e_52085d0806.png"
@@ -468,62 +460,6 @@ export const ProductDeskHog = () => {
                             author="Joe Martin"
                             authorUrl="https://posthog.com/community/profiles/29070"
                         />
-                        <App
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/52974df0_4084_41c0_a1e1_3e628c143c2c_dca92f8f5c.png"
-                            title="Dictator or Techbro: Mobile Edition"
-                            description="A good idea is worth stealing. Even if it's Charles'."
-                            author="Chris McNeill"
-                            authorUrl="https://posthog.com/community/profiles/33534"
-                        />
-                        <App
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/b46b4cb6_d18e_4ae2_9913_7a8966a778ed_3e9927cf98.png"
-                            title="Notchagotchi"
-                            description="We were a little worried we'd be sued if we called this what it really is."
-                            author="Sophie Payne"
-                            authorUrl="https://posthog.com/community/profiles/33385"
-                        />
-                        <App
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/0e9ed66b_2907_4e08_b105_99f15bfee041_3bca3468a4.png"
-                            title="Flappy Hog"
-                            description="Despite the title, this game has neither hedgehogs nor flapping."
-                            author="Joe Martin"
-                            authorUrl="https://posthog.com/community/profiles/29070"
-                        />
-                        <App
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/54ac3129_4dd2_446d_afa2_e6c25668f52b_0e92dbcf4c.png"
-                            title="Hogspeed"
-                            description="Test your reflexes with this high-speed, minimal reaction game with ASCII art."
-                            author="Chris McNeill"
-                            authorUrl="https://posthog.com/community/profiles/33534"
-                        />
-                        <App
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/a06eea35_ff91_4b86_945b_3f25fc5fd259_c3307a2350.png"
-                            title="Pineapple Reflex"
-                            description="Does pineapple belong on pizza? Sophie thinks so."
-                            author="Sophie Payne"
-                            authorUrl="https://posthog.com/community/profiles/33385"
-                        />
-                        <App
-                            title="Build your own"
-                            description="Start your game development journey with DeskHog. Vibe coding encouraged!"
-                            author=""
-                            authorUrl=""
-                            isBuildYourOwn={true}
-                        />
-                    </div>
-                </section>
-            </div>
-
-            <VibeCodingBoxout />
-
-            <section className="py-10">
-                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
-                    <h2 className="text-4xl lg:text-5xl text-center mb-2">
-                        It will also have important business tools
-                    </h2>
-                    <h3 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h3>
-
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/8404130b_d081_45e3_9187_80c20a8c53fb_959f19a07e.png"
                             title="Friend"
@@ -553,8 +489,10 @@ export const ProductDeskHog = () => {
                             authorUrl="https://posthog.com/community/profiles/31731"
                         />
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
+
+            <VibeCodingBoxout />
 
             <section className="max-w-7xl mx-auto px-5">
                 <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-8">
