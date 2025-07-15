@@ -1,0 +1,152 @@
+The Python SDK uses nested contexts for managing state that's shared across events. Contexts are the recommended way to manage things like "which user is taking this action" (through `identify_context`), rather than manually passing user state through your apps stack.
+
+When events (including exceptions) are captured in a context, the event uses the user [distinct ID](/docs/getting-started/identify-users), [session ID](/docs/data/sessions), and tags that are (optionally) set in the context. This is useful for adding properties to multiple events during a single user's interaction with your product.
+
+You can enter a context using the `with` statement:
+
+```python
+from posthog import new_context, tag, set_context_session, identify_context
+
+with new_context():
+    tag("transaction_id", "abc123")
+    tag("some_arbitrary_value", {"tags": "can be dicts"})
+
+    # Sessions are UUIDv7 values and used to track a sequence of events that occur within a single user session
+    # See https://posthog.com/docs/data/sessions
+    set_context_session(session_id)
+
+    # Setting the context-level distinct ID. See below for more details.
+    identify_context(user_id)
+
+    # This event is captured with the distinct ID, session ID, and tags set above
+    posthog.capture("order_processed")
+```
+
+Contexts are persisted across function calls. If you enter one and then call a function and capture an event in the called function, it uses the context tags and session ID set in the parent context:
+
+```python
+from posthog import new_context, tag
+
+def some_function():
+    # When called from `outer_function`, this event is captured with the property some-key="value-4"
+    posthog.capture("order_processed")
+
+
+def outer_function():
+    with new_context():
+        tag("some-key", "value-4")
+        some_function()
+
+```
+
+Contexts are nested, so tags added to a parent context are inherited by child contexts. If you set the same tag in both a parent and child context, the child context's value overrides the parent's at event capture (but the parent context won't be affected). This nesting also applies to session IDs and distinct IDs.
+
+```python
+from posthog import new_context, tag
+
+with new_context():
+    tag("some-key", "value-1")
+    tag("some-other-key", "another-value")
+    with new_context():
+        tag("some-key", "value-2")
+        # This event is captured with some-key="value-2" and some-other-key="another-value"
+        posthog.capture("order_processed")
+
+    # This event is captured with some-key="value-1" and some-other-key="another-value"
+    posthog.capture("order_processed")
+
+```
+
+You can disable this nesting behavior by passing `fresh=True` to `new_context`:
+
+```python
+from posthog import new_context
+
+with new_context(fresh=True):
+    tag("some-key", "value-2")
+    # This event only has the property some-key="value-2" from the fresh context
+    posthog.capture("order_processed")
+
+```
+
+> **Note:** Distinct IDs, session IDs, and properties passed directly to calls to `capture` and related functions override context state in the final event captured.
+
+### Contexts and user identification
+
+Contexts can be associated with a distinct ID by calling `posthog.identify_context`:
+
+```python
+from posthog import identify_context
+
+identify_context("distinct-id")
+```
+
+Within a context associated with a distinct ID, all events captured are associated with that user. You can override the distinct ID for a specific event by passing a `distinct_id` argument to `capture`:
+
+```python
+from posthog import new_context, identify_context
+
+with new_context():
+    identify_context("distinct-id")
+    posthog.capture("order_processed") # will be associated with distinct-id
+    posthog.capture("order_processed", distinct_id="another-distinct-id") # will be associated with another-distinct-id
+```
+
+It's recommended to pass the currently active distinct ID from the frontend to the backend, using the `X-POSTHOG-DISTINCT-ID` header. If you're using our Django middleware, this is extracted and associated with the request handler context automatically.
+
+You can read more about identifying users in the [user identification documentation](/docs/product-analytics/identify). 
+
+### Contexts and sessions
+
+Contexts can be associated with a session ID by calling `posthog.set_context_session`. Session IDs must be UUIDv7 strings.
+
+```python
+from posthog import new_context, set_context_session
+with new_context():
+    set_context_session(request.get_header("X-POSTHOG-SESSION-ID"))
+```
+
+<CalloutBox icon="IconInfo" title="Using PostHog on your frontend too?">
+
+If you're using the PostHog JavaScript Web SDK on your frontend, it generates a session ID for you and you can retrieve it by calling `posthog.get_session_id()`. You then need to pass that session ID to your backend by setting the `X-POSTHOG-SESSION-ID` header on each fetch request. Alternatively, you can enable '__add_tracing_headers' in your config and the header is set automatically.
+
+You need to extract the header in your request handler (if you're using our Django middleware integration, this happens automatically).
+
+</CalloutBox>
+
+If you associate a context with a session, you'll be able to do things like:
+- See backend events on the session timeline when viewing session replays
+- View session replays for users that triggered a backend exception in error tracking
+
+You can read more about sessions in the [session tracking](/docs/data/sessions) documentation.
+
+### Exception capture
+
+By default exceptions raised within a context are captured and available in the [error tracking](/docs/error-tracking) dashboard. You can override this behavior by passing `capture_exceptions=False` to `new_context`:
+
+```python
+from posthog import new_context, tag
+
+with new_context(capture_exceptions=False):
+    tag("transaction_id", "abc123")
+    tag("some_arbitrary_value", {"tags": "can be dicts"})
+
+    # This event will be captured with the tags set above
+    posthog.capture("order_processed")
+    # This exception will not be captured
+    raise Exception("Order processing failed")
+```
+
+### Decorating functions
+
+The SDK exposes a function decorator. It takes the same arguments as `new_context` and provides a handy way to mark a whole function as being in a new context. For example:
+
+```python
+from posthog import scoped, identify_context
+
+@scoped(fresh=True)
+def process_order(user, order_id):
+    identify_context(user.distinct_id)
+    posthog.capture("order_processed") # Associated with the user
+    raise Exception("Order processing failed") # This exception is also captured and associated with the user
+```

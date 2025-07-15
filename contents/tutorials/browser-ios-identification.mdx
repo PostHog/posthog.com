@@ -1,0 +1,170 @@
+---
+title: How to track user flows from web to iOS
+date: 2025-06-20
+author:
+  - vincent-ge
+tags:
+  - configuration
+  - persons
+  - product os
+---
+
+If you use PostHog on both web and iOS apps, you can track user activity across them. When a user is authenticated on both web and mobile, their events are automatically associated by identifying them through the same account. We cover identifying users in-depth in the [identifying users documentation](/docs/product-analytics/identify).
+
+If a user is not authenticated on web or mobile, you can't identify the user by their account. 
+Instead, you can track web to mobile flows using deeplinks. 
+
+This is useful for use cases like:
+
+- Tracking unauthenticated users across web and mobile.
+
+- Identifying users on pre-authentication screens like onboarding and landing pages.
+
+- Marketing campaign attribution from an unauthenticated website to an authenticated mobile app.
+
+## Understanding cross-platform tracking
+
+When a user is authenticated on both web and mobile, their events are automatically linked because they are identified by a shared `distinct_id` associated with their account. This is why we recommend [calling `posthog.identify`](https://posthog.com/docs/product-analytics/identify#1-call-identify-as-soon-as-youre-able-to) on both web and mobile as soon as the user signs up or logs in.
+
+When a user is not authenticated, you can't call `posthog.identify`. Instead, PostHog tracks [anonymous events](/docs/data/anonymous-vs-identified-events) using a **randomly generated** `distinct_id` that contains no identifiable information.
+
+To associate anonymous events from web to mobile, you can use deeplinks:
+1. Get a distinct ID from the web app using `posthog.get_distinct_id`
+2. Attach the distinct ID and other properties like UTM parameters to the deeplink
+3. When the user opens the mobile app, call `posthog.identify` or `posthog.alias` with the distinct ID and other properties
+
+Let's go through an example with Next.js and SwiftUI. These principles apply to any other web and mobile app.
+
+## 1. Get a distinct ID from the web app
+
+On your Next.js app, you can get the distinct ID using `posthog.get_distinct_id`. This will work for both authenticated and anonymous users.
+
+For Next.js you should call `posthog.get_distinct_id` in `useEffect` to ensure it's called after PostHog is initialized and right after the page is loaded.
+
+```tsx focusOnLines=6-8
+'use client'
+import posthog from 'posthog-js'
+import { useEffect, useState } from 'react'
+
+export default function Home() {
+  const [distinctId, setDistinctId] = useState<string | null>(null)
+  useEffect(() => {
+    setDistinctId(posthog.get_distinct_id()) // HIGHLIGHT
+  }, [])
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      <h1>Hello world</h1>
+      {/* You can add other properties to the deeplink like UTM parameters */}
+      <a href={`your-super-cool-mobile-app://launch?distinct_id=${distinctId}`} target="_blank" rel="noopener noreferrer">
+        Go to Next.js
+      </a>
+      <p>Distinct ID: {distinctId}</p>
+    </div>
+  );
+}
+```
+
+## 2. Create a deeplink with the distinct ID
+
+Using the distinct ID, you can create a deeplink that will take the user to the mobile app when the user clicks on it. You should attach other properties to the deeplink like UTM parameters to track attribution.
+
+```tsx focusOnLines=10-17
+'use client'
+import posthog from 'posthog-js'
+import { useEffect, useState } from 'react'
+
+export default function Home() {
+  const [distinctId, setDistinctId] = useState<string | null>(null)
+  useEffect(() => {
+    setDistinctId(posthog.get_distinct_id())
+  }, [])
+  return (
+    <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+      <h1>Hello world</h1>
+      {/* You can add other properties to the deeplink like UTM parameters */}
+      <a href={`your-super-cool-mobile-app://launch?distinct_id=${distinctId}`} target="_blank" rel="noopener noreferrer"> // HIGHLIGHT
+        Go to Next.js
+      </a>
+      <p>Distinct ID: {distinctId}</p>
+    </div>
+  );
+}
+```
+
+## 3. Handle the deeplink in the mobile app
+
+You need to configure your mobile app to handle the deeplink, you can follow the [support universal links documentation](https://developer.apple.com/documentation/xcode/allowing-apps-and-websites-to-link-to-your-content/#Support-universal-links) from Apple. Then, in your mobile app, you have two situations to handle:
+
+1. The user is not authenticated on the mobile app
+2. The user is already authenticated on the mobile app
+
+Below is a SwiftUI example of how to handle the deeplink in the mobile app. The `DeeplinkHandler` is called from `onOpenURL` in the `App` struct.
+
+### 3.1. The user is not authenticated on the mobile app
+
+If the user is not authenticated on the mobile app, you can call `posthog.identify` directly with the distinct ID and other properties like UTM parameters. 
+
+- If the web app is also unidentified, this will create a person in PostHog that links the web and mobile events.
+- If the web app is identified, this will create a person in PostHog that links the web and mobile events.
+
+```swift focusOnLines=13-17
+class DeeplinkHandler: ObservableObject {
+  func handleDeeplink(_ url: URL) {
+
+    guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+      let queryItems = components.queryItems else {
+      print("❌ No query parameters found")
+      return
+    }
+
+    if let distinctIdItem = queryItems.first(where: { $0.name == "distinct_id" }),
+      let distinctId = distinctIdItem.value {
+      print("✅ Found distinct_id: \(distinctId)")
+      
+      if (authenticated()) {
+        PostHogSDK.shared.alias(distinctId)
+      } else {
+        PostHogSDK.shared.identify(distinctId, userProperties: [] ) // HIGHLIGHT
+      }
+    } else {
+      ...
+    }
+  }
+}
+```
+
+### 3.2 The user is authenticated on the mobile app
+
+If the user is already authenticated on the mobile app, you can call `posthog.alias` with the distinct ID **passed in the deeplink**. Assuming you've already identified the authenticated user on the mobile app, this will attach the distinct ID to the existing person in PostHog.
+
+```swift focusOnLines=13-17
+class DeeplinkHandler: ObservableObject {
+  func handleDeeplink(_ url: URL) {
+
+    guard let components = URLComponents(url: url, resolvingAgainstBaseURL: false),
+      let queryItems = components.queryItems else {
+      print("❌ No query parameters found")
+      return
+    }
+
+    if let distinctIdItem = queryItems.first(where: { $0.name == "distinct_id" }),
+      let distinctId = distinctIdItem.value {
+      print("✅ Found distinct_id: \(distinctId)")
+      
+      if (authenticated()) {
+        PostHogSDK.shared.alias(distinctId) // HIGHLIGHT
+      } else {
+        PostHogSDK.shared.identify(distinctId, userProperties: [] )
+      }
+    } else {
+      ...
+    }
+  }
+}
+```
+
+## Further reading
+
+- [Identifying users](/docs/product-analytics/identify)
+- [Anonymous vs identified events](/docs/data/anonymous-vs-identified-events)
+- [Complete guide to event tracking](/tutorials/event-tracking-guide)

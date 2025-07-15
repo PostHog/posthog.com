@@ -148,3 +148,16 @@ If you have similar pages that have dynamic content based on an identifier in th
 For example, if the product pages on an ecommerce site use a URL format of `https://yourwebsite.com/products/product-id`, you can use the wildcard URL `https://yourwebsite.com/products/*` to display a combined heatmap from all the product pages.
 
 ![Toolbar heatmaps popover menu being used to add a wildcard into the URL](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/products/product-analytics/toolbar-heatmap-wildcard.png)
+
+## Troubleshooting
+
+### Heatmap is captured, but site is not showing
+
+If you're viewing heatmaps [in-app](https://us.posthog.com/heatmaps) and the heatmap appears over a blank page, your site may be blocking it from being displayed in an `<iframe>`.
+
+In app, PostHog overlays the heatmap over your site in an iframe. You can allow PostHog to place your site in an `<iframe>` by updating your `Content-Security-Policy` header.
+
+| Region | Content Security Policy |
+| --- | --- |
+| US | `Content-Security-Policy: frame-ancestors 'self' https://us.posthog.com;` |
+| EU | `Content-Security-Policy: frame-ancestors 'self' https://eu.posthog.com;` |

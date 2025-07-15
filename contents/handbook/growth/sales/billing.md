@@ -17,7 +17,7 @@ To ensure consistency in the setup of annual plans we have [Zapier Automation](h
 
 #### Loading contract details
 
-Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01H9QPTRYEZVGFTJ84XMCYQFSK) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
+Once an [Order Form is closed in PandaDoc](/handbook/growth/sales/contracts#routing-an-order-form-for-review-and-signature), Zapier will add a new row to the [Annual Plan Table](https://tables.zapier.com/app/tables/t/01HGX2N9JXNV2EEDYARD24901R) with the PandaDoc ID of the document. The table will have the following information automatically filled in: PandaDoc Order Form, Company Name, Customer Email, Credit Amount, Discount, Price, Start Date, Term, PostHog Org ID. 
 
 #### Upfront vs Monthly Payment Schedule
 
@@ -25,7 +25,7 @@ Customers can choose to pay their subscription fee upfront or in monthly install
 
 ##### Upfront Payment Setup
 
-###### Step 1: Update zapier table with existing Stripe ID
+###### Step 1: Update Zapier table with existing Stripe ID
 
 If this is a new contract for an existing customer, you will need to add their existing Stripe Customer ID manually to the table. You can find this information in Vitally under Traits. If this is a brand new customer, click “Create Stripe Customer” button to assign them a new ID.
 
@@ -35,9 +35,10 @@ If this is a new contract for an existing customer, you will need to add their e
   - Add the ID of the Invoice to the table (for easy review later on). The due date of the invoice will be the Contract Start Date + 30 days which are our standard payment terms. You might need to manually change this if we have different terms with the customer.
 
 ###### Step 3: Verify invoice details and send
-- Use the Invoice ID recorded in the table to locate the invoice in Stripe.
+- Click the invoice link in the table to open it in Stripe, or use the Invoice ID to locate the invoice in Stripe. 
 - Ensure all details are correct, particularly the Customer’s Billing/Shipping addresses and Tax ID on the Customer object.
-- Send the invoice to the customer and wait for the payment to be completed.  Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
+- If the customer has an existing credit balance in Stripe (common for renewals), remove the credit before sending the invoice. Otherwise, Stripe will automatically apply the credit balance to the invoice. After the invoice is sent, you can reapply the credit. 
+- Send the invoice to the customer and wait for the payment to be completed. Ensure that the customer is aware that payment is via Bank Transfer only (no checks).
 
 **Do not proceed to the next steps until payment is confirmed.** Any credits added to an account gets automatically applied to outstanding invoices. If you add credits before payment is completed, the credits will settle any existing debts, and customer will not be able to make a payment.
 
@@ -101,7 +102,7 @@ In either of the above scenarios the account owner as defined in Vitally needs t
 
 #### Step 1 - On the day their payment becomes late
 
-You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For annual customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page.  Make it easy for them to make payment by including these details in your email.
+You should reach out to any known contacts, as well as any finance email addresses we have in Stripe asking for payment to be made immediately.  For annual customers, you can download the Invoice PDF from the Stripe invoice page, and for monthly customers you can get the payment link from the Stripe invoice page. To get a payment update link, click on the subscription, then click actions in the top right corner and choose share payment update link. Make it easy for them to make payment by including these details in your email.
 
 > Make it clear in this outreach that if we don't receive payment in the next 7 calendar days, their user access will be suspended. If they come back to you with genuine reasons why they need more time, use your discretion with the next steps. 
 

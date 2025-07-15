@@ -7,87 +7,58 @@ showTitle: true
 **Product teams** are responsible for [writing docs](/handbook/engineering/writing-docs) and ensuring they are up-to-date. This means:
 
 - Documenting new features when they're launched
-- Correcting mistakes reported by users
+- Add doc comments to SDKs to make them easier to understand
 - Clarifying documentation where needed based on support tickets
-- Ensuring public betas have documentation which is linked to from feature preview menu
+- Ensuring public betas have docs that are linked to from the feature preview menu
 
-**Content & Docs** is responsible for improving the docs. This means:
+Read [writing docs as an engineer](/handbook/engineering/writing-docs) – it's really important! 
+
+**The content team** is responsible for improving the docs. This means:
 
 - Reviewing and improving draft documentation created by product teams
-- Identifying and improving low quality documentation
+- Improving the subjective docs experience (navigation, discovery, interactivity, etc.)
+- Identifying and improving low quality documentation and making it better
 - Ensuring screenshots and other visual elements are up-to-date
 - Shipping supplementary docs and tutorials based on feedback and emerging use cases
 
-**Website & Vibes** is responsible for design, organization, and discovery. This means:
+## Ownership in the content team
 
-- The design and content of index pages
-- The overall layout of docs and how they're organized
-- In-page elements and components – e.g. light and dark mode screenshots
-- Website search and other elements that help users find the answers they need
+We've previously assigned ownership to areas of the product and docs to individuals, but we're presently more project orientated.
 
-## Ownership in Content & Docs team
+You can view what we're working on right now by:
 
-We aim to have a named individual for most areas of the docs. If one doesn't exist, make [a PR to add one](https://github.com/PostHog/posthog.com/blob/master/contents/handbook/content-and-docs/docs.md).
+1. Reading our goals on the [content team page](/teams/content)
+2. Reading issues on our [team GitHub project board](https://github.com/orgs/PostHog/projects/107/views/1)
 
-#### Product OS
+You can share ideas / requests for new docs in the #content-docs-ideas Slack channel, or by creating an issue on the posthog.com repo.
 
-| &nbsp                                   | **Individual owner** |
-|-----------------------------------------|----------------------|
-| **Integration (SDKs, frameworks, API)** | Ian                  |
-| **Winning with PostHog**                | Ian                  |
-| **PostHog explained (data, tools)**     | Lior                 |
-| **Resources (migrate, reverse proxy)**  | Ian                  |
+As ever, though, PRs > issues. ;) 
 
-#### Products
+## Docs hero
 
-| &nbsp                           | **Individual owner** |
-|---------------------------------|----------------------|
-| **Product analytics**           | Vincent              |
-| **Web analytics**               | Edwin                 |
-| **Session replay**              | Lior                 |
-| **Feature flags**               | Edwin                |
-| **Experiments**                 | Edwin                 |
-| **Error tracking**              | Ian                  |
-| **Surveys**                     | Lior                 |
-| **LLM observability**           | Ian                  |
-| **Data pipelines**              | Lior                 |
-| **Data warehouse**              | Vincent               |
+Each week, the assigned docs hero will set aside two days to ship fixes and improvements to the docs anywhere they can find them. The rotation schedule can be found <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">here</PrivateLink>.
 
-New products should be given an owner when we are planning the product launch.
+The docs hero role exists to ensure we continue to ship ongoing improvements to the docs outside of specific projects we're working on.
 
-### What is the responsibility of the docs owner?
+Some notes and tips: 
 
-For their assigned areas, docs owners are responsible for:
+- Four people (<TeamMember name="Edwin Lim" photo={true} />, <TeamMember name="Ian Vanagas" photo={true} />, <TeamMember name="Lior Neu-ner" photo={true} />, and <TeamMember name="Vincent Ge" photo={true} />) are currently in the rotation. This means two days in every 20 working days will be dedicated to the docs hero role – 10% of your time. This will reduce as we add more people to the team.
 
-1. Using and being an expert on the parts of the product they own.
-2. Reviewing and polishing docs created by product teams (or other contributors)
-3. Working on issues assigned to them by the [docs gardener](#docs-gardener)
-4. Planning and executing large docs overhauls and updates
-5. Reviewing and answering questions on their assigned docs pages
+- It's up to individuals to decide how to spend their two days. You can spend it shipping one or two things, or shipping a dozen small improvements. The only requirement is you should work on things you can ship in those two days. Work should not carry over into other days, or future docs hero stints.
 
-This doesn't preclude anyone from submitting new or improved docs for any product – remember: PRs > issues.
+- Feel free to create issues about problems you find that are too big to deal with in a couple of days, but **most of your time should be spent on shipping** updates, not triaging requests.
 
-Also, because of how wide PostHog is, this can be an overwhelming amount of work. Here's some recommendations on how to prioritize:
+- Tutorials count as well.
 
-1. Make time to use the product, scroll the product team Slack, and read the docs. Reconcile glaring differences between them.
-2. Check the most popular *and* unhelpful docs pages you are responsible for. Prioritize these. 
-3. We care more about making sure everything has some coverage than a subset of things are 100% correct.
+- Talk to your teammates and update the <PrivateLink url="https://docs.google.com/spreadsheets/d/1XPhjb5lPPisiiSrhA5qW-DqgIN7DvvWtj1czkUqOwZw/edit?gid=0#gid=0">rotation schedule</PrivateLink> if you need to swap weeks.
 
-## Docs gardener
+### Sources for inspiration
 
-The docs gardener is a critical role for ensuring our docs are up to date and useful. We assign someone from the Content & Docs team to do this each week. Their responsibility is to:
+There are lots of places you can go to find inspiration for what to work on during your stint, such as:
 
-1. Review the feedback across the channels below.
-2. Create issues for docs updates with the context on why it's important and the source of the feedback (unless it is a very simple fix). Be careful not to publish private data (like user emails) in these. 
-3. Assign the issue to the [docs owner](#ownership-in-content--docs-team).
-4. When done, add a ✅ emoji react to the message in Slack or similar (if possible) so that the next docs gardener knows that this has been assigned.
-
-It is then up to the assignee to prioritize and complete these issues.
-
-Docs gardening should occupy no more than 2-4 hours of effort each week.
-
-### Feedback channels
-
+- community questions
+- open issues on our project board
+- feedback in #brand-mentions
 - #docs-feedback
 - #content-docs-ideas
 - #ask-max for questions missing content
@@ -95,6 +66,7 @@ Docs gardening should occupy no more than 2-4 hours of effort each week.
 - <PrivateLink url="https://portal.inkeep.com/posthog/projects/clz7fyu8i001bomqpr7t8lds8/chat/chat-sessions?filters={%22isOnTopic%22:%22yes%22,%22isClear%22:%22yes%22,%22firstMessageTime%22:%2230d%22,%22isDocumented%22:%22no%22}">Inkeep chat sessions</PrivateLink> where there is a documentation gap
 - <PrivateLink url="https://us.posthog.com/project/2/insights/jNpQrgjg">Most unhelpful docs</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/insights/nfKr7JOs">Most popular docs</PrivateLink>
+- that annoying thing you saw that you keep meaning to go fix
 
 ## FAQ
 
@@ -111,7 +83,7 @@ If you need help updating documentation:
 
 ### Who should review docs updates?
 
-Tag the individual owner from the Contents & Docs team – see [Ownership in Contents & Docs](#ownership-in-content--docs-team) below.
+Tag the `docs reviewers` team on GitHub and someone will come running.
 
 ### How do I add images to my docs?
 

@@ -1,0 +1,59 @@
+Next.js uses [error boundaries](https://nextjs.org/docs/app/building-your-application/routing/error-handling#using-error-boundaries) to handle uncaught exceptions by rendering a fallback UI instead of the crashing components.
+
+To set one up, create a `error.tsx` file in any of your route directories. This triggers when there is an error rendering your component and should look like this: 
+
+```tsx file=error.tsx
+"use client";  // Error boundaries must be Client Components
+
+import posthog from "posthog-js";
+import { useEffect } from "react";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    posthog.captureException(error);
+  }, [error]);
+
+  return (
+    ...
+  );
+}
+```
+
+You can also create a [Global Error component](https://nextjs.org/docs/app/building-your-application/routing/error-handling#handling-global-errors) in your root layout to capture unhandled exceptions in your root layout.
+
+```tsx file=app/global-error.tsx
+'use client' // Error boundaries must be Client Components
+
+import posthog from "posthog-js";
+import NextError from "next/error";
+import { useEffect } from "react";
+
+export default function GlobalError({
+  error,
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    posthog.captureException(error);
+  }, [error]);
+
+  return (
+    // global-error must include html and body tags
+    <html>
+      <body>
+        {/* `NextError` is the default Next.js error page component */}
+        <NextError statusCode={0} />
+      </body>
+    </html>
+  )
+}
+
+```

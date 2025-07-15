@@ -73,7 +73,7 @@ If something has been detected incorrectly, you can manually change the type by 
 
 ### Default properties
 
-Below is a list of some of the properties that PostHog captures by default in client-side apps. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/event-utils.ts). 
+Below is a list of some of the properties that PostHog captures by default in client-side apps. You can see the full list of properties that PostHog captures by default in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts). 
 
 | Name                        | Key                      | Example value                  |
 |-----------------------------|--------------------------|--------------------------------|
@@ -119,3 +119,13 @@ Below is a list of some of the properties that PostHog captures by default in cl
 | Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
 | Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
 | IP Address                  | `$ip`                    | `192.168.1.1`                  |
+
+## Managing event definitions
+
+On the [events management page](https://us.posthog.com/data-management/events), you can edit event tags and descriptions. These show up when searching for events throughout PostHog and provide more context about the purpose of the event.
+
+You can also change the event status to:
+
+1. **Visible (default).** The standard visibility for events, nothing special.
+2. **Verified.** Adds a checkmark next to the event definition wherever it is in PostHog. 
+3. **Hidden.** Hides an event from being searched for throughout PostHog. Useful as an alternative to deleting events and preventing people from using old events in their analysis. 

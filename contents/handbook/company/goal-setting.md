@@ -8,10 +8,10 @@ We plan objectives every quarter. The exec team set the direction and overall ob
 
 ## How quarterly planning works
 
-1. ~3 weeks before the end of each quarter, the Exec team meet to come up with initial ideas for objectives for each small team.
-3. ~2 weeks before the end of the quarter, team leads should schedule planning meetings with each small team to go through these - these will be run by the team lead and include the relevant Exec team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
-5. The outcome of these meetings should be a PR to the relevant small team page. The team lead is responsible for creating this and getting it merged. Make sure you tag the relevant member of the Exec team for review at a minimum.
-6. PRs get merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
+1. ~3 weeks before the end of each quarter, the Exec team meets to come up with larger goals for the company, which sometimes (but not always) trickle down to individual teams.
+2. ~2 weeks before the end of the quarter, team leads should schedule planning meetings to go through these - these will be run by the team lead and include the relevant Exec team member, following the template below. Each small team can change or propose alternate objectives, goals, and/or key results (we are not prescriptive about the exact terms used here - use these as a starting point). 
+3. After the planning meeting, the team lead creates a PR on their small team page with the new goals. Make sure you tag the relevant member of the Exec team for review at a minimum.
+4. Goal PRs need to be merged before the next quarter starts. We usually then run through the objectives in the first all hands of the next quarter.
 
 In terms of accountability, Scott will notify all the small teams and make sure that the quarterly meetings happen (and that each small team has a PR), but he will not schedule the meetings for you. 
 
@@ -22,17 +22,19 @@ In terms of accountability, Scott will notify all the small teams and make sure 
 Teams should fill in the previous quarter and HOGS sections async in the doc before the meeting starts. The meeting itself should be 20% reviewing the past, and 80% talking about goals for next quarter. Don't fall into the trap of spending most of your time reviewing and then rushing the goals right at the end. 
 
 ```md
-## Previous quarter reflection
+## Last quarter objectives reflection (5 mins - do as a team)
 
 [Paste in previous quarter objectives from the team page]
 
 For each objective, write up a reflection - usually the person who was the lead on the objective should do this, but some might be shared.
 
+What else did we get done? List items from the changelog or PRs merged if they were significant items that deviated from the original goals (changing goals mid-quarter is okay!)
+
 You may also want to write some overall thoughts about how the quarter generally went.
 
-## HOGS
+## HOGS (10 minutes - do beforehand solo)
 
-Get each person to answer these questions in their own doc, then go round the group for each question to get thoughts. It's ok to plus 1 someone else to save time - this section can overrun if you're not careful!
+This should be done BEFORE the meeting by everyone, independently. During the meeting, paste your items into the sections below. Spend 10 minutes in the meeting silently reading through everyone’s HOGS during the meeting.
 
 - Hope
   - What are you most excited about this quarter?
@@ -42,12 +44,17 @@ Get each person to answer these questions in their own doc, then go round the gr
   - What’s stopping you from shipping 2x what you’re shipping now?
 - Growth
   - What single thing would move the needle the most this quarter?
-  - What are users asking for that we’re ignoring?
+  - What are users asking for? Which of these are we ignoring?
 - Sneak attack
   - Say a competitor beats your team’s product, what would that product do differently?
   - What are we not talking about enough?
 
-## Current quarter objectives
+## Themes (20 minutes - do as a team)
+
+What themes can we distill from the above HOGS list? What are categories of things we should consider working on? What are other things we might want to consider?
+
+
+## New goals (15 minutes - do as a team)
 
 This is an example - feel free to adapt as you need. Generally it is a good idea to have at least one person's name against each thing for accountability even if multiple people work on it - shared goals usually results in less getting shipped. 
 
@@ -80,7 +87,7 @@ If you aren't on a product team, replace 'product' with the equivalent 'thing' o
 
 Bear the following in mind:
 
-- Use metrics only if they help you
+- Use metrics only if they help you. Goals should be primarily output-based - the actual things that we will do and build.
 - Don't fall into an existential crisis every time we do this exercise - while objectives are important, they're easy to change, so iterate if you need to mid-quarter
 - All objectives are bad - they have many compromises, are fallible, easy to game, or may be affected by external factors, so use the least bad ones
 - Use counter metrics where needed (X happens, but Y shouldn't happen)

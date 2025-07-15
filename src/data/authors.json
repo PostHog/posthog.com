@@ -397,5 +397,21 @@
         "link_type": "github",
         "link_url": "https://github.com/edwinyjlim",
         "profile_id": 33938
+    },
+    {
+        "handle": "dylan-martin",
+        "name": "Dylan Martin",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/dmarticus",
+        "profile_id": 30455
+    },
+    {
+        "handle": "robbie-coomber",
+        "name": "Robbie Coomber",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/robbie-c",
+        "profile_id": 29292
     }
 ]

@@ -321,6 +321,25 @@ const ExpandableCallout = () => {
     )
 }
 
+// Vibe Coding Boxout Component
+const VibeCodingBoxout = () => {
+    return (
+        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 my-8 max-w-2xl mx-auto">
+            <div className="text-left">
+                <h3 className="text-lg font-bold mb-2">DeskHog is optimized for vibe coding</h3>
+                <p className="text-sm text-primary dark:text-primary-dark mb-2">
+                    Don't want to waste time writing C++ and fixing floating-point errors? We gotchu.
+                </p>
+                <p className="text-sm text-primary dark:text-primary-dark">
+                    DeskHog is built with vibe coding in mind. We've prepared some ready-made files to give AI agents
+                    perfect context about DeskHog, plus{' '}
+                    <a href="/tutorials/deskhog-claude-tutorial">a vibe coding guide to help you get started</a>.
+                </p>
+            </div>
+        </div>
+    )
+}
+
 export const ProductDeskHog = () => {
     const { fullWidthContent } = useLayoutData()
     return (
@@ -420,8 +439,7 @@ export const ProductDeskHog = () => {
                         </Link>{' '}
                         while you wait
                     </h3>
-
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/edcbc25d_262b_4590_936a_552c445a2ccb_1812ec3330.png"
                             title="Pog"
@@ -440,6 +458,13 @@ export const ProductDeskHog = () => {
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/e90c7a39_484a_40a0_94b1_693962bbd13e_52085d0806.png"
                             title="One Button Dungeon"
                             description="It's a roguelike throwback about an endless corridor. Such is life."
+                            author="Joe Martin"
+                            authorUrl="https://posthog.com/community/profiles/29070"
+                        />
+                        <App
+                            image="https://res.cloudinary.com/dmukukwp6/image/upload/c8a2a90c_bea7_4c99_99ab_0c67e4d97d48_24c67b992e.png"
+                            title="Three Button Dungeon"
+                            description="It's a roguelike throwback, but this time the corridor is a desert. Wow!"
                             author="Joe Martin"
                             authorUrl="https://posthog.com/community/profiles/29070"
                         />
@@ -489,6 +514,8 @@ export const ProductDeskHog = () => {
                 </section>
             </div>
 
+            <VibeCodingBoxout />
+
             <section className="py-10">
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
                     <h2 className="text-4xl lg:text-5xl text-center mb-2">
@@ -496,7 +523,14 @@ export const ProductDeskHog = () => {
                     </h2>
                     <h3 className="text-2xl text-center mb-12">(A great excuse to expense your DeskHog purchase)</h3>
 
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                        <App
+                            image="https://res.cloudinary.com/dmukukwp6/image/upload/8404130b_d081_45e3_9187_80c20a8c53fb_959f19a07e.png"
+                            title="Friend"
+                            description="DeskHog is a friend. These inspirational quotes prove it."
+                            author="Danilo Campos"
+                            authorUrl="https://posthog.com/community/profiles/31731"
+                        />
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/5598bc45_d969_45c3_bce9_3cc4c5cf0ad5_ef111c5357.png"
                             title="Awkwardness Avoider"

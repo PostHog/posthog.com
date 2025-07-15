@@ -23,47 +23,30 @@ Vercel supports [rewrites](https://vercel.com/docs/concepts/projects/project-con
 {
   "rewrites": [
     {
-      "source": "/<ph_proxy_path>/static/:path*",
-      "destination": "https://us-assets.i.posthog.com/static/:path*"
+      "source": "/<ph_proxy_path>/static/(.*)",
+      "destination": "https://us-assets.i.posthog.com/static/$1"
     },
     {
-      "source": "/<ph_proxy_path>/:path*",
-      "destination": "https://us.i.posthog.com/:path*"
+      "source": "/<ph_proxy_path>/(.*)",
+      "destination": "https://us.i.posthog.com/$1"
     }
   ]
 }
 ```
 
-Some frameworks, like **SvelteKit** and [Astro](/tutorials/astro-analytics), require a hungrier regex pattern like:
+> **Note:** Some frameworks, like T3 app, don't support Vercel rewrites well. In this scenario, we recommend trying another proxy method.
 
-```json
-{
-  "rewrites": [
-    {
-      "source": "/<ph_proxy_path>/static/:path(.*)",
-      "destination": "https://us-assets.i.posthog.com/static/:path*"
-    },
-    {
-      "source": "/<ph_proxy_path>/:path(.*)",
-      "destination": "https://us.i.posthog.com/:path*"
-    }
-  ]
-}
-```
-
-> **Note:** Some frameworks, like T3 app, don't support Vercel rewrites well. If neither of these options work, we recommend trying another proxy method.
-
-Once done, set the `/<ph_proxy_path>` route of your domain as the API host in your PostHog initialization like this:
+Once done, set the `/<ph_proxy_path>/` route of your domain as the API host in your PostHog initialization like this:
 
 ```js
 posthog.init('<ph_project_api_key>', {
-  api_host: 'https://www.your-domain.com/ingest',
+  api_host: '/<ph_proxy_path>/',
   ui_host: '<ph_app_host>',
   defaults: '<ph_posthog_js_defaults>',
 })
 ```
 
-Once updated, deploy your changes on Vercel and check that PostHog requests are going to `https://www.your-domain.com/ingest` by checking the network tab on your domain.
+Once updated, deploy your changes on Vercel and check that PostHog requests are going to `/<ph_proxy_path>/` by checking the network tab on your domain.
 
 ## Setup video
 

@@ -126,6 +126,8 @@ We're doing well at monetizing high-growth startups due to our optimization work
 
 We've decided to double down on mass adoption of the platform in high potential startups instead of focusing on enterprise. Simply, this will better help us increase the number of successful products in the world. As a result, we've removed support for [paid self-hosted deployment](/blog/sunsetting-helm-support-posthog) and are doubling down on our open source and cloud projects. We have released a [free tier](/pricing) of PostHog.
 
+We went from "product analytics with some extra stuff thrown in" to "Product OS" and started charging for session replay separately.
+
 In the product, we're working on making the experience slicker, and we have plans for a standalone quality [CDP](/cdp) in Q2.
 
 ### March 2023: Decided to ship a warehouse
@@ -140,15 +142,43 @@ So we decided we would ship our [own warehouse](/data-warehouse), enabling us to
 
 We've doubled revenue so far this year without any increase in headcount. We've hit 15.7% MoM for the last 12 months. Our CAC payback is now just five days. Our numbers are exceptional. We even discounted several of our products. We've added ten extra roles and will be profitable in around a year.
 
-We have [user surveys](/surveys) and the data warehouse in private beta.
+We have [user surveys](/surveys) and the data warehouse in private beta. Other products are being positioned as first-class products of their own (AKA "The Great Unbundling"). This means we can make it clearer for new folk to get what we do, give more ownership (which means more speed) to our own teams, and we can compete on commercials more effectively.
 
 Our infrastructure has become pleasingly stable. The biggest challenge is scaling our data pipeline, and making sure we give as much responsibility as we can to each small team owning each product for their own pipelines, where rational to do so.
+
+### October 2023: Winning the internet
+
+We are often mentioned as an alternative to product analytics tools.
+
+We are winning the internet when we get more of this for our _other_ products. We don’t have to win everything, but we need to get into the comparison each time. This is _starting_ to happen, but to *win* the Internet, we need to see this happening daily.
+
+Multiple products are early like the warehouse, ETL, surveys (used a lot but not paid), feature flags and experimentation (first revenue), CDP (pipelines being rebuilt, webhooks next), notebooks, and web analytics. 
+
+There is a lot of supporting work needing to be done. This includes:
+
+- Helping teams with their per-product onboarding and growth experiments, infra, ingestion, dev tooling, sales, support, and marketing.
+- Promoting each product in its own right (i.e. through what we cover in marketing).
+- Keep nurturing the content / community growth, i.e. newsletter, and the `/posts` concept.
 
 ### January 2024: Well, that was good
 
 That was quite the year.
 
-We wound up quadrupling our revenue, but only increasing our net headcount by three people in 2023. Last year, we validated that we could get multiple products to product-market fit.
+We wound up quadrupling our revenue, but only increasing our net headcount by three people in 2023. Last year, we validated that we could get multiple products to product-market fit (like feature flags and experimentation).
+
+We built more integrations between our products like HogQL, notebooks, CDP, and the data warehouse.
+
+Now, we are doubling down. We shipped a lot in Q4 2023, but every product could be improved a lot. We're caring about the craft of our products:
+
+- Major missing features vs competitors
+- Scalability/stability
+- Developer UX
+- Talking to users and incorporating their feedback
+- Nailing support for your product - fixing things
+
+Products are not limited to engineers working on the app. It includes what customer success, marketing, and ops are working on. Everything can be considered a product.
+
+Each team should be aiming to feel proud of what they've built by the end of the quarter.
 
 ### April 2024: We're now the default for startups
 
@@ -164,7 +194,7 @@ We cut pricing by up to 80% for our [two most](/blog/session-replay-pricing) [po
 
 We've started doing [growth reviews](/handbook/product/per-product-growth-reviews) for almost every product we have. We run through each product's metrics (revenue/usage/support/performance) and feedback / reasons for any churn that has happened, so we can truly treat each small team like a startup. This session is designed so the engineering team leads may choose to reprioritize work, or not.
 
-## October 2024: 100,000 customers, and speeding up – more products and more people
+### October 2024: 100,000 customers, and speeding up – more products and more people
 
 We hit 100,000 customers either paying or free, and over a quarter of a million users. We've started hiring a lot faster as growth has continued this year. We're now 65 ish people with ~9 products.
 
@@ -184,7 +214,7 @@ Strategy-wise, we're just leaning into our basic three principles, which we're s
 
 Revenue is in the low $10s of millions of ARR. We're very strongly default alive and will struggle to not end up profitable next year. Every time we get close to being profitable, we start speeding up hiring. 
 
-Revenue growth is fast enough and we're getting so many unprompted offers for investment (that we aren't taking) that money isn't really a meaningful constraint any more. Whilst we have a great grip on each product's individual performance, our understanding of cross sell is a little weak, so we're working on that now.
+Revenue growth is fast enough and we're getting so many unprompted offers for investment (that we aren't taking) that money isn't really a meaningful constraint anymore. Whilst we have a great grip on each product's individual performance, our understanding of cross sell is a little weak, so we're working on that now.
 
 Our marketing is getting weirder. It's more and more fun. We've commissioned a puppet, coming in January. Watch this space. Our newsletter, [Product for Engineers](/newsletter), now has 20,000 subscribers and it's growing fast.
 

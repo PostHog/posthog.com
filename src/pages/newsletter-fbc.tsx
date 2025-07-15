@@ -13,6 +13,11 @@ import { useInView } from 'react-intersection-observer'
 
 const topIssues = [
     {
+        title: "Job interview questions engineers should ask (but don't)",
+        url: '/newsletter/job-interview-questions-engineers',
+        image: 'https://res.cloudinary.com/dmukukwp6/image/upload/job_interview_questions_35bb07c898.jpg' as `https://res.cloudinary.com/${string}`,
+    },
+    {
         title: 'What engineers get wrong about communication',
         url: '/newsletter/communication-mistakes',
         image: 'https://res.cloudinary.com/dmukukwp6/image/upload/image_1_2594402957.png' as `https://res.cloudinary.com/${string}`,
@@ -118,9 +123,8 @@ function NewsletterSubscribeForm({
             <div className="w-full">
                 {!submitted ? (
                     <>
-                        <p className="!text-[15px] opacity-50 !mb-2 text-center">Subscribe to our newsletter</p>
-                        <h4 className="relative !text-2xl !m-0 !leading-tight text-center">Product for Engineers</h4>
-                        <p className="!m-0 !text-sm md:!text-base !leading-normal !opacity-75 !pt-1 text-center">
+                        <h1 className="relative !text-2xl !m-0 !leading-tight text-center">Product for Engineers</h1>
+                        <p className="!m-0 !text-lg md:!text-base !leading-normal !opacity-75 !pt-1 text-center">
                             Read by 60,000+ founders and builders
                         </p>
                         <div className="">
@@ -188,7 +192,7 @@ function NewsletterFBC(): JSX.Element {
     return (
         <Layout>
             <SEO title="Newsletter" description="Subscribe to our newsletter" />
-            <div className="mx-auto px-4 pt-2">
+            <div className="mx-auto px-4 pt-2 pb-24">
                 <div className="flex flex-col items-center min-h-[60vh]">
                     <div className="w-full max-w-[150px]">
                         <CloudinaryImage

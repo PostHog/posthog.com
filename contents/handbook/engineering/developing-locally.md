@@ -378,6 +378,9 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 ```bash
 ./bin/start
+
+# only services strictly required to run posthog
+./bin/start --minimal
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -591,6 +594,8 @@ When creating a new email, there are a few steps to take. It's important to add 
 ## Extra: Developing paid features (PostHog employees only)
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+
+In PostHog you'll want to add the Stripe public key so it can load on the client. To do so, go to 1Password and find "Local PostHog environment variables". Take that value and put it into a `.env` file at the root of your PostHog repo locally. If your server is already running, you'll want to restart it.
 
 ## Extra: Working with the data warehouse and a MySQL source
 

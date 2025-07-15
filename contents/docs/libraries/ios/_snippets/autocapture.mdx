@@ -1,3 +1,5 @@
+import AutocaptureConfig from './autocapture-config-ios.mdx'
+
 PostHog autocapture automatically tracks the following events for you:
 
 -   **Application Opened** - when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
@@ -13,22 +15,7 @@ PostHog autocapture automatically tracks the following events for you:
 
 You can enable or disable autocapture through the `PostHogConfig` object.
 
-```swift file=AppDelegate.swift
-let POSTHOG_API_KEY = "<ph_project_api_key>"
-// usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
-let POSTHOG_HOST = "<ph_client_api_host>"
-
-let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
-
-// capture screen views
-config.captureScreenViews = true 
-// capture application lifecycle events (installed, updated, opened, backgrounded)
-config.captureApplicationLifecycleEvents = true
-// capture element interactions (button presses, text input changes, etc.)
-config.captureElementInteractions = true // TIP: Disabled by default
-
-PostHogSDK.shared.setup(config)
-```
+<AutocaptureConfig />
 
 ### Capturing screen views
 
@@ -41,6 +28,8 @@ PostHogSDK.shared.screen("Dashboard", properties: ["fromIcon": "bottom"])
 ```
 
 > **Important:** While `captureScreenViews` works with both `UIKit` and `SwiftUI`, the screen names captured in `SwiftUI` may not be very meaningful as they are based on internal SwiftUI view identifiers. For `SwiftUI` applications, we recommend turning this option off and instead using the `.postHogScreenView()` view modifier (see next section) to capture screen views with meaningful names.
+
+> **Note:** You can use the `BeforeSendBlock` to filter or drop any undesired screen events, giving you control over which screen views are sent to PostHog. See [Amending, dropping or sampling events](/docs/libraries/ios#amending-dropping-or-sampling-events) for implementation examples.
 
 ### Capturing screen views in SwiftUI
 
@@ -102,7 +91,7 @@ In this example, interactions with the _underlying_ UITextField will be captured
 
 The generated analytics element in the examples above will have the following form: 
 
-```html
+```swift
 <UITextField id="usernameTextField">text value</UITextField>
 ```
 
