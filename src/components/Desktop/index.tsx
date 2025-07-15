@@ -320,7 +320,7 @@ export default function Desktop() {
                     <div className="hidden wallpaper-2001-bliss:block absolute inset-0 bg-white/60 dark:bg-black/60"></div>
 
                     <nav>
-                        <ul className="list-none m-0 p-0">
+                        <ul className="list-none m-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2 md:mt-0 mt-4">
                             {allApps.map((app) => {
                                 const position = iconPositions[app.label]
                                 if (!position) return null

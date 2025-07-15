@@ -17,10 +17,11 @@ function numberToWords(num: number): string {
 export default function Pricing() {
     const { products: initialProducts } = useProducts()
     const products = initialProducts.filter((product) => productsToShow.includes(product.name.toLowerCase()))
-    console.log(products)
+
     return (
         <div className="mt-4">
             <OSTable
+                overflowX
                 columns={[
                     { name: '', width: '50px', align: 'center' as const },
                     { name: 'product', width: 'minmax(200px,1fr)', align: 'left' as const },

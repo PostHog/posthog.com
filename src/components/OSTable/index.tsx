@@ -26,6 +26,7 @@ interface OSTableProps {
     editable?: boolean
     onLastRowInView?: () => void
     loading?: boolean
+    overflowX?: boolean
 }
 
 const RowSkeleton = () => {
@@ -45,6 +46,7 @@ const OSTable: React.FC<OSTableProps> = ({
     size = 'md',
     onLastRowInView,
     loading,
+    overflowX = false,
 }) => {
     const gridClass = columns?.map((col) => col.width || 'auto').join(' ') || ''
     const [lastRowRef, lastRowInView] = useInView({ threshold: 0.1 })
@@ -58,7 +60,9 @@ const OSTable: React.FC<OSTableProps> = ({
     return (
         <>
             <div
-                className={`text-primary grid divide-x divide-y divide-border border-r border-b border-primary text-[15px] [&>div]:px-2 ${
+                className={`${
+                    overflowX ? ' min-w-full overflow-x-auto w-0' : ''
+                } text-primary grid divide-x divide-y divide-border border-b border-primary text-[15px] [&>div]:px-2 ${
                     size === 'sm' ? '[&>div]:py-1' : size === 'md' ? '[&>div]:py-2' : '[&>div]:py-3'
                 } ${className}`}
                 style={{ gridTemplateColumns: gridClass }}
@@ -70,8 +74,8 @@ const OSTable: React.FC<OSTableProps> = ({
                             <div
                                 key={index}
                                 className={`text-sm border-l border-t border-primary bg-input font-bold ${
-                                    column.align === 'center' ? 'text-center' : ''
-                                } ${column.className || ''}`}
+                                    index === columns.length - 1 ? '!border-r' : ''
+                                } ${column.align === 'center' ? 'text-center' : ''} ${column.className || ''}`}
                             >
                                 {column.name}
                             </div>
@@ -87,6 +91,7 @@ const OSTable: React.FC<OSTableProps> = ({
                                 ref={rowIndex === rows.length - 1 ? lastRowRef : null}
                                 key={cellIndex}
                                 className={`
+                                   ${cellIndex === row.cells.length - 1 ? '!border-r' : ''}
                                 flex flex-col 
                                 ${rowAlignment === 'top' ? 'justify-start' : 'justify-center'} 
                                 ${
