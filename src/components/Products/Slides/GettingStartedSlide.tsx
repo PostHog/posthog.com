@@ -13,16 +13,19 @@ import Unicorn from './unicorn.gif'
 import ArrowStencil from './arrow-stencil.gif'
 import ArrowBlink from './arrow-blink.gif'
 import ArrowRainbow from './arrow-rainbow.gif'
+import Confetti from 'react-confetti'
 
 export default function GettingStartedSlide({ initialState, productName }: { initialState: any; productName: string }) {
     const coloringPageImage = StopImage
     const [justCopied, setJustCopied] = useState(false)
+    const [showConfetti, setShowConfetti] = useState(false)
     const { addToast } = useToast()
 
     const handleCopy = async () => {
         try {
             await navigator.clipboard.writeText('npx -y @posthog/wizard@latest')
             setJustCopied(true)
+            setShowConfetti(true)
 
             // Show global toast
             addToast({
@@ -41,6 +44,20 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
 
     return (
         <div className="h-full flex flex-col justify-center bg-light dark:bg-dark text-primary relative">
+            {showConfetti && (
+                <div className="fixed inset-0 pointer-events-none z-50">
+                    <Confetti
+                        onConfettiComplete={() => setShowConfetti(false)}
+                        recycle={false}
+                        numberOfPieces={800}
+                        gravity={0.4}
+                        initialVelocityY={25}
+                        initialVelocityX={10}
+                        tweenDuration={3000}
+                        colors={['#ff0000', '#ff7f00', '#ffff00', '#00ff00', '#00ffff', '#0000ff', '#9400d3']}
+                    />
+                </div>
+            )}
             <MSPaint
                 // Pass the image URL to preload it as line art
                 initialImage={coloringPageImage}
@@ -103,8 +120,15 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                 <WordArt text="Install without AI" theme="italicOutline" fontSize={24} />
                 <br />
                 <div className="relative">
-                    <SignupCTA size="absurd" type="primary" className="animate-grow mt-2" />
-                    <div className="absolute top-full flex gap-2 ml-6 -mt-6 -translate-x-1/2 scale-75">
+                    <SignupCTA size="absurd" type="primary" className="animate-grow mt-2 mb-1" />
+                    <br />
+                    <WordArt
+                        text="(Yes this is a real button, you can actually click it)"
+                        theme="italicOutline"
+                        fontSize={10}
+                    />
+
+                    <div className="absolute top-full flex gap-2 ml-6 -mt-10 -translate-x-1/2 scale-75">
                         <img src={ArrowStencil} className="rotate-45 mr-2 relative -top-8" />
                         <img src={ArrowBlink} className="rotate-90 -mr-24" />
                         <img src={ArrowRainbow} className="rotate-90" />
