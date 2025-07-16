@@ -46,7 +46,7 @@ That was me a couple years back.
 
 So we’ve done the homework. An ESP32-S3 has two cores: tasks are divided between them, with networking on one, and the user-facing application running on the other. It’s easy to trip yourself on the classic horrors of concurrency this way and crash the board. DeskHog’s solution: an event queue that can safely pass messages between tasks without mangling memory.
 
-I’ve got a DeskHog sitting on my desk running for days on end without drama.
+I’ve had a DeskHog sitting on my desk running for days on end without drama.
 
 Which means if you write some new code for DeskHog, you know any crash that shows up is a result of the new code, not some obscure detail lurking in a system you barely understand.
 
