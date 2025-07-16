@@ -224,11 +224,11 @@ export default function CDP(): JSX.Element {
 
     // Define table columns
     const columns = [
-        { name: 'Name', width: 'minmax(150px, 1fr)' },
-        { name: 'Description', width: 'minmax(200px, 2fr)' },
-        { name: 'Status', width: '100px', align: 'center' as const },
+        { name: 'Name', width: 'minmax(150px, 1fr)', align: 'left' as const },
+        { name: 'Description', width: 'minmax(200px, 2fr)', align: 'left' as const },
+        { name: 'Category', width: 'minmax(100px, 1fr)', align: 'left' as const },
         { name: 'Type', width: '120px', align: 'center' as const },
-        { name: 'Category', width: 'minmax(100px, 1fr)' },
+        { name: 'Status', width: '100px', align: 'center' as const },
     ]
 
     // Use filtered pipelines if available, otherwise use all
@@ -261,32 +261,26 @@ export default function CDP(): JSX.Element {
                             alt={pipeline.name}
                             className="w-6 h-6 object-contain flex-shrink-0"
                         />
-                        <span>{pipeline.name}</span>
+                        <span className="leading-tight">{pipeline.name}</span>
                     </div>
                 ),
             },
             { content: pipeline.description, className: 'text-sm' },
+            { content: pipeline.category?.join(', ') || '', className: 'text-sm' },
+            {
+                content: <span className="capitalize text-sm">{pipeline.type}</span>,
+            },
             {
                 content: (
                     <span
-                        className={`text-xs font-medium px-2 py-1 rounded ${
-                            pipeline.status === 'coming_soon'
-                                ? 'bg-blue/10 text-blue dark:text-white dark:bg-blue/50 border border-blue'
-                                : 'bg-green/10 text-green dark:text-white dark:bg-green/50 border border-green'
+                        className={`font-medium text-sm ${
+                            pipeline.status === 'coming_soon' ? 'text-blue' : 'text-green'
                         }`}
                     >
                         {pipeline.status === 'coming_soon' ? 'Roadmap' : 'Live'}
                     </span>
                 ),
             },
-            {
-                content: (
-                    <span className="text-xs font-medium px-2 py-1 rounded bg-accent border border-input capitalize">
-                        {pipeline.type}
-                    </span>
-                ),
-            },
-            { content: pipeline.category?.join(', ') || '', className: 'text-sm' },
         ],
     }))
 
@@ -347,7 +341,8 @@ export default function CDP(): JSX.Element {
                     </h2>
                     <p>
                         PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with
-                        event data, and export to other products in your stack.
+                        event data, and export to other products. Any event or action in PostHog can update user records
+                        or trigger workflows in other products in your stack.
                     </p>
                     <OSTable columns={columns} rows={rows} editable={false} />
                 </ScrollArea>

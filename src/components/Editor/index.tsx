@@ -385,7 +385,7 @@ export function Editor({
                                                     key={filter.label}
                                                     groups={[
                                                         {
-                                                            label: filter.label,
+                                                            label: '',
                                                             items: filter.options.map((option) => ({
                                                                 label: option.label,
                                                                 value: option.value,
