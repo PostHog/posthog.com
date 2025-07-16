@@ -180,7 +180,7 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                 <span className="text-red dark:text-yellow">joy</span>
             </h1>
             <p className="text-lg font-semibold text-center text-opacity-75 mb-5">
-                And it costs less than a LEGO set too
+                And it costs less than a Star Wars LEGO set
             </p>
             <div className="flex justify-center gap-2 mb-12">
                 <CallToAction href="https://posthog.com/merch" type="primary" externalNoIcon>
@@ -246,10 +246,7 @@ const DeskHogCTA = () => {
                         className="w-full sm:w-auto"
                         externalNoIcon
                     >
-                        <>
-                            Buy a DeskHog kit
-                            <IconExternal className="size-4 inline-block ml-1" />
-                        </>
+                        <>Buy a DeskHog kit</>
                     </CallToAction>
                     <CallToAction
                         href="https://github.com/PostHog/DeskHog"
@@ -276,7 +273,7 @@ const ExpandableCallout = () => {
             <div className="mt-4 flex flex-col md:flex-row gap-8 items-start">
                 <div className="flex-1">
                     <h2 className="text-center md:text-left mb-4">
-                        You can <span className="text-red dark:text-yellow">add your own hardware too</span>
+                        You can even <span className="text-red dark:text-yellow">add your own hardware</span>
                     </h2>
                     <p className="mb-3">
                         Want to add more buttons, speakers, or sensors? How about a Bluetooth module? All you need to do
