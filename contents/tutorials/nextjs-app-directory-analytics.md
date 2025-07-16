@@ -149,8 +149,8 @@ You can use feature flags to control what users see in your app. For example, yo
 To set one up, go to the [feature flags page](https://us.posthog.com/feature_flags) in PostHog and create a new feature flag. Give it a key (I chose `main-cta`), make sure to roll it out to 100% of users, and click **Save**. 
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_15_at_13_44_15_2x_485233b39a.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_15_at_13_44_38_2x_1010000000.png"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_15_at_13_44_35_2x_8e7e69a22a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_15_at_13_44_15_2x_485233b39a.png"
   alt="Feature flag in PostHog"
   classes="rounded"
 />
