@@ -295,8 +295,7 @@ export default function CDP(): JSX.Element {
                 title="pipelines"
                 type="mdx"
                 slug="/cdp"
-                searchFiltersRows={true}
-                onSearchFilter={(query) => setSearchQuery(query)}
+                onSearchChange={(query) => setSearchQuery(query)}
                 availableFilters={[
                     {
                         label: 'type',

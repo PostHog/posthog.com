@@ -12,7 +12,6 @@ interface SearchBarProps {
     className?: string
     dataScheme?: string
     onSearch?: (search: string) => void
-    disableHighlight?: boolean
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -22,7 +21,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     className,
     dataScheme = 'primary',
     onSearch,
-    disableHighlight = false,
 }) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
@@ -36,25 +34,20 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
     // Reset when closing
     useEffect(() => {
+        if (!contentRef?.current) return
         if (!visible) {
             setInputValue('')
-            onSearch?.('') // Clear the search filter when closing
-
-            // Only handle duplicate content if highlighting is enabled
-            if (!disableHighlight && contentRef?.current && duplicateContainerRef.current) {
+            if (duplicateContainerRef.current) {
                 duplicateContainerRef.current.remove()
                 contentRef.current.style.display = 'block'
             }
         } else {
-            // Only create duplicate for highlighting if enabled
-            if (!disableHighlight) {
-                createDuplicateForHighlighting()
-            }
+            createDuplicateForHighlighting()
         }
-    }, [visible, onSearch, disableHighlight])
+    }, [visible])
 
     const createDuplicateForHighlighting = () => {
-        if (!contentRef?.current || disableHighlight) return
+        if (!contentRef?.current) return
 
         if (duplicateContainerRef.current) {
             duplicateContainerRef.current.remove()
@@ -97,12 +90,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     const debouncedSetSearchQuery = React.useCallback(
         debounce((value) => {
             setSearchQuery(value)
-            if (!disableHighlight && markedRef.current && duplicateContainerRef.current) {
+            if (markedRef.current && duplicateContainerRef.current) {
                 markedRef.current.unmark()
                 markedRef.current.mark(value)
             }
         }, 200),
-        [disableHighlight]
+        []
     )
 
     useEffect(() => {
@@ -111,11 +104,11 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
     useEffect(() => {
         return () => {
-            if (!disableHighlight && duplicateContainerRef.current) {
+            if (duplicateContainerRef.current) {
                 duplicateContainerRef.current.remove()
             }
         }
-    }, [disableHighlight])
+    }, [])
 
     if (!visible) return null
 
@@ -132,13 +125,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onKeyDown={handleKeyDown}
                 autoFocus
                 onBlur={() => {
-                    if (!disableHighlight && duplicateContainerRef.current) {
+                    if (duplicateContainerRef.current) {
                         duplicateContainerRef.current.remove()
-                        if (contentRef?.current) {
-                            contentRef.current.style.display = 'block'
-                        }
                     }
-                    onSearch?.('') // Clear search on blur
+                    onSearch?.('')
                     onClose()
                 }}
             />
@@ -147,7 +137,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 size="xs"
                 icon={<IconX />}
                 onClick={() => {
-                    onSearch?.('') // Clear search when clicking X
+                    onSearch?.('')
                     onClose()
                 }}
                 className="rounded-full !p-1.5"

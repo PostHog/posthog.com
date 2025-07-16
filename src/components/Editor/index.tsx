@@ -66,8 +66,6 @@ interface EditorProps {
         url: string
         label: string
     }
-    searchFiltersRows?: boolean
-    onSearchFilter?: (searchQuery: string) => void
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -111,8 +109,6 @@ export function Editor({
     defaultSortValue,
     proseSize = 'sm',
     cta,
-    searchFiltersRows = false,
-    onSearchFilter,
     ...other
 }: EditorProps) {
     const [showFilters, setShowFilters] = useState(initialShowFilters)
@@ -362,11 +358,9 @@ export function Editor({
                         <SearchBar
                             visible={showSearch}
                             onClose={closeSearch}
-                            contentRef={searchContentRef}
+                            contentRef={onSearchChange ? undefined : searchContentRef}
                             dataScheme="secondary"
                             className="bg-primary -top-px right-8"
-                            onSearch={searchFiltersRows ? onSearchFilter : undefined}
-                            disableHighlight={searchFiltersRows}
                         />
 
                         <ScrollArea>
@@ -396,7 +390,7 @@ export function Editor({
                                                         handleFilterChange(
                                                             filter.value || filter.label,
                                                             value,
-                                                            filter.filter!
+                                                            filter.filter
                                                         )
                                                     }
                                                 />
