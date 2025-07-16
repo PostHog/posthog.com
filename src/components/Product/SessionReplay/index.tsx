@@ -100,7 +100,7 @@ const subfeatures = [
         icon: <IconBolt />,
     },
     {
-        title: 'Automatic playlists',
+        title: 'Saved filters',
         description: 'Filter by user behavior or time',
         icon: <IconPlaylist />,
     },
@@ -341,7 +341,7 @@ const PairsWithArray = [
         icon: <IconGraph />,
         color: 'blue',
         product: 'Product analytics',
-        description: 'Jump into a playlist of session recordings directly from any time series in a graph',
+        description: 'Jump into a collection of session recordings directly from any time series in a graph',
         url: '/product-analytics',
     },
     {
@@ -356,7 +356,7 @@ const PairsWithArray = [
         color: 'purple',
         product: 'Experiments',
         description:
-            'Generate a playlist of recordings limited to an A/B test or specific group within a multivariate experiment.',
+            'Generate a collection of recordings limited to an A/B test or specific group within a multivariate experiment.',
         url: '/experiments',
     },
 ]
