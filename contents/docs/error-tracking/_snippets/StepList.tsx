@@ -19,7 +19,7 @@ export interface StepDef {
 
 export function StepList({ steps }: { steps: StepDef[] }) {
     return (
-        <section className="max-w-2xl mx-auto">
+        <section className="max-w-2xl mx-auto scroll-pt-[108px]">
             <ol className="ml-0">
                 {steps.map((step, i) => (
                     <li key={i} className="mb-10 flex w-full">
@@ -32,13 +32,19 @@ export function StepList({ steps }: { steps: StepDef[] }) {
                             )}
                         </span>
                         <div className="min-w-0 flex-1">
-                            <div className="flex items-center gap-2 font-semibold text-base text-primary dark:text-primary-dark">
-                                <h2 className="!my-0 !text-2xl truncate">{step.title}</h2>
-                                {step.required && requiredBadgeMap[step.required] && (
-                                    <span className={`${requiredBadgeMap[step.required].className} shrink-0`}>
-                                        {requiredBadgeMap[step.required].text}
-                                    </span>
-                                )}
+                            <div className="relative">
+                                <div
+                                    className="absolute -top-[108px]"
+                                    id={step.title.toLowerCase().replace(/ /g, '-')}
+                                ></div>
+                                <div className="flex items-center gap-2 font-semibold text-base text-primary dark:text-primary-dark">
+                                    <h2 className="!my-0 !text-2xl truncate">{step.title}</h2>
+                                    {step.required && requiredBadgeMap[step.required] && (
+                                        <span className={`${requiredBadgeMap[step.required].className} shrink-0`}>
+                                            {requiredBadgeMap[step.required].text}
+                                        </span>
+                                    )}
+                                </div>
                             </div>
                             {step.goal && step.goal.trim() && (
                                 <div className="text-xs text-primary/60 dark:text-primary-dark/60 mt-1 mb-2">

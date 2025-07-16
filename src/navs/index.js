@@ -3521,6 +3521,39 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Upload source maps',
+                    url: '/docs/error-tracking/upload-source-maps',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Next.js',
+                            url: '/docs/error-tracking/upload-source-maps/nextjs',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/error-tracking/upload-source-maps/nuxt',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/error-tracking/upload-source-maps/react',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/error-tracking/upload-source-maps/angular',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/error-tracking/upload-source-maps/web',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/error-tracking/upload-source-maps/node',
+                        },
+                    ],
+                },
+                {
                     name: 'Concepts',
                 },
                 {

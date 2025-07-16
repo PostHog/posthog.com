@@ -1,0 +1,29 @@
+import CLIAuthenticate from '../../../_snippets/cli/authenticate.mdx'
+
+<CLIAuthenticate />
+
+Then configure Nuxt to automatically inject source map metadata using the `close` hook:
+
+```js file=nuxt.config.js
+import { execSync } from 'child_process' // +
+
+export default defineNuxtConfig({
+  ...,
+  sourcemap: {
+    client: true // +
+  },
+  hooks: {
+    'close': async () => {
+      console.log('Running PostHog sourcemap injection and upload...')
+      try {
+        execSync("posthog-cli sourcemap inject --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // +
+        console.log('PostHog sourcemap injection completed successfully') 
+      } catch (error) {
+        console.error('PostHog sourcemap injection failed:', error)
+      }
+    }
+  }
+})
+```
