@@ -23,15 +23,12 @@ import APIExamples from 'components/Product/Pipelines/APIExamples'
 import Configuration from 'components/Product/Pipelines/Configuration'
 import Link from 'components/Link'
 import SEO from 'components/seo'
-import { IconCheck } from '@posthog/icons'
+import { IconWarning, IconCheck, IconX } from '@posthog/icons'
 import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
 import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 import { CallToAction } from 'components/CallToAction'
 import Tooltip from 'components/Tooltip'
-import CheckIcon from 'assets/icons/check.svg'
-import WarningIcon from 'assets/icons/warning.svg'
-import XIcon from 'assets/icons/x.svg'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { useState } from 'react'
@@ -57,19 +54,19 @@ const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
         case 'full':
             return (
                 <Tooltip content="This plan has full access to this feature">
-                    <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+                    <IconCheck className="size-4 inline-block" />
                 </Tooltip>
             )
         case 'partial':
             return (
                 <Tooltip content="Some parts of this feature are not available on this plan">
-                    <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+                    <IconWarning className="size-4 inline-block" />
                 </Tooltip>
             )
         case 'none':
             return (
                 <Tooltip content="This feature is not available on this plan">
-                    <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+                    <IconX className="size-4 inline-block" />
                 </Tooltip>
             )
     }
