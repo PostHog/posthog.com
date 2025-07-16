@@ -3521,10 +3521,16 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Concepts',
+                },
+                {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
                     color: 'purple',
+                },
+                {
+                    name: 'Guides',
                 },
                 {
                     name: 'Monitor issues',

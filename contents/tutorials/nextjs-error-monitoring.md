@@ -298,6 +298,6 @@ You can click into any of these errors to get more details on them, including a 
 
 ## 5. Uploading source maps
 
-import NextJsUploadSourceMaps from "../docs/error-tracking/_snippets/nextjs-upload-source-maps.mdx"
+import NextJsUploadSourceMaps from "../docs/error-tracking/_snippets/nextjs/upload-source-maps.mdx"
 
 <NextJsUploadSourceMaps />
