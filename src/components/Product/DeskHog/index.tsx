@@ -206,7 +206,7 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                 <span className="text-red dark:text-yellow">joy</span>
             </h1>
             <p className="text-lg font-semibold text-center text-opacity-75 mb-5">
-                Full kits available, or 3D print it instead
+                And it costs less than a LEGO set too
             </p>
             <div className="flex justify-center gap-2 mb-12">
                 <CallToAction href="https://posthog.com/merch" type="primary" externalNoIcon>
@@ -255,10 +255,8 @@ const DeskHogCTA = () => {
         <section className="relative overflow-hidden">
             {/* Text Content Wrapper with PostHog card style */}
             <div className="relative z-10 bg-white dark:bg-accent-dark p-8 rounded-lg mx-auto max-w-xl border border-light dark:border-dark shadow-xl">
-                <h2 className={headingClasses}>3D print it yourself now</h2>
-                <h3 className={`${subheadingClasses} mb-0`}>
-                    DeskHog kits coming soon but you can 3D print it yourself now. Just add components!
-                </h3>
+                <h2 className={headingClasses}>Ready to get building?</h2>
+                <h4 className={`${subheadingClasses} mb-0`}>Maybe it'll help if we make it look cuter</h4>
                 <div className="flex justify-center my-6">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_smiling_36bb2647ff.png"
@@ -268,26 +266,26 @@ const DeskHogCTA = () => {
                 </div>
                 <div className="flex justify-center gap-2">
                     <CallToAction
-                        href="https://github.com/PostHog/DeskHog"
+                        href="https://posthog.com/merch"
                         type="primary"
                         size="lg"
                         className="w-full sm:w-auto"
                         externalNoIcon
                     >
                         <>
-                            Make your own
+                            Buy a DeskHog kit
                             <IconExternal className="size-4 inline-block ml-1" />
                         </>
                     </CallToAction>
                     <CallToAction
-                        href="https://posthog.com/merch"
+                        href="https://github.com/PostHog/DeskHog"
                         type="secondary"
                         size="lg"
                         className="w-full sm:w-auto"
                         externalNoIcon
                     >
                         <>
-                            Join the kit waitlist
+                            3D print your own
                             <IconExternal className="size-4 inline-block ml-1" />
                         </>
                     </CallToAction>
@@ -300,22 +298,37 @@ const DeskHogCTA = () => {
 // Expandable Callout Component
 const ExpandableCallout = () => {
     return (
-        <div className="col-span-2 bg-accent dark:bg-accent-dark py-4 px-8 rounded-lg w-full max-w-lg mx-auto">
-            <div className="mt-4 flex flex-col">
-                <CloudinaryImage
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_max_904ca43b3e.png"
-                    alt="DeskHog Pro"
-                    className="w-full max-w-[224px] mx-auto mb-4"
-                />
-                <h5 className="text-center">Coming soon: DeskHog Pro & Friends?</h5>
-                <p>This is just the beginning of the DeskHog adventure. If you like it we'll make more, maybe.</p>
-                <p>
-                    DeskHog Pro will connect via the I²C port, adding more buttons, and a huge dial so you can crank up
-                    the vibes. We're also thinking about making a watch strap, so you can wear DeskHog on your wrist.
-                </p>
-                <p>
-                    Got ideas for other accessories? <a href="mailto:danilo@posthog.com">Let us know!</a>
-                </p>
+        <div className="col-span-2 bg-accent dark:bg-accent-dark py-4 px-8 rounded-lg w-full max-w-4xl mx-auto">
+            <div className="mt-4 flex flex-col md:flex-row gap-8 items-start">
+                <div className="flex-1">
+                    <h5 className="text-center md:text-left mb-4">
+                        Why the heck is <span className="text-red dark:text-yellow">PostHog</span> making hardware?
+                    </h5>
+                    <p className="mb-3">
+                        DeskHog kits are bought to you by Danilo and Leo. The project started as a joke. But then we
+                        found out that messing with hardware wasn't as tricky as we thought.
+                    </p>
+                    <p className="mb-3">
+                        DeskHog Pro will connect via the I²C port, adding more buttons, and a huge dial so you can crank
+                        up the vibes. We're also thinking about making a watch strap, so you can wear DeskHog on your
+                        wrist.
+                    </p>
+                    <p>
+                        Got ideas for other accessories? <a href="mailto:danilo@posthog.com">Let us know!</a>
+                    </p>
+                </div>
+                <div className="shrink-0 w-full md:w-96">
+                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
+                        <iframe
+                            src="https://www.youtube.com/embed/2jQco8hEvTI"
+                            title="DeskHog Demo Video"
+                            className="w-full h-full"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     )
@@ -324,17 +337,27 @@ const ExpandableCallout = () => {
 // Vibe Coding Boxout Component
 const VibeCodingBoxout = () => {
     return (
-        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 my-8 max-w-2xl mx-auto">
-            <div className="text-left">
-                <h3 className="text-lg font-bold mb-2">DeskHog is optimized for vibe coding</h3>
-                <p className="text-sm text-primary dark:text-primary-dark mb-2">
-                    Don't want to waste time writing C++ and fixing floating-point errors? We gotchu.
-                </p>
-                <p className="text-sm text-primary dark:text-primary-dark">
-                    DeskHog is built with vibe coding in mind. We've prepared some ready-made files to give AI agents
-                    perfect context about DeskHog, plus{' '}
-                    <a href="/tutorials/deskhog-claude-tutorial">a vibe coding guide to help you get started</a>.
-                </p>
+        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 mt-4 mb-4 max-w-2xl mx-auto">
+            <div className="flex items-start gap-4">
+                <div className="flex-shrink-0">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/29970a1b_7c79_420c_ac17_83b189f2af32_0a700168a7.png"
+                        alt="Make your own games"
+                        className="w-[215px] h-auto"
+                    />
+                </div>
+                <div className="flex-1">
+                    <h3 className="text-lg font-bold mb-2">It's never been easier to make your own games</h3>
+                    <p className="text-sm text-primary dark:text-primary-dark mb-1">
+                        Don&apos;t want to spend all evening writing C++? That's why DeskHog is optimized for vibe
+                        coding!
+                    </p>
+                    <p className="text-sm text-primary dark:text-primary-dark mb-0">
+                        We've included ready-made files to give AI agents the context they need, plus{' '}
+                        <a href="/tutorials/deskhog-claude-tutorial">a guide to get you started</a>. Many of the games
+                        above were made in exactly this way!
+                    </p>
+                </div>
             </div>
         </div>
     )
@@ -358,14 +381,19 @@ export const ProductDeskHog = () => {
                     description="Pre-built kits coming soon. DIY version available now."
                 />
                 {/* <VideoDeskHog /> */}
-                <section id="demo-image" className="mb-0 pt-0">
+                <section id="demo-video" className="mb-0 pt-0">
                     <div className="flex justify-center">
-                        <div className="w-full max-w-[400px]">
-                            <CloudinaryImage
-                                src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_smiling_36bb2647ff.png"
-                                alt="DeskHog in action"
-                                className="w-full"
-                            />
+                        <div className="w-full max-w-[600px]">
+                            <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+                                <iframe
+                                    src="https://www.youtube.com/embed/2jQco8hEvTI"
+                                    title="DeskHog Demo Video"
+                                    className="w-full h-full"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
                         </div>
                     </div>
                 </section>
@@ -374,11 +402,6 @@ export const ProductDeskHog = () => {
             <div id="features">
                 <section className="max-w-7xl mx-auto px-5 pb-6">
                     <div className="mb-4">
-                        <h2 className="text-4xl lg:text-5xl text-center text-balance mb-12">
-                            DeskHog is an <span className="text-red dark:text-yellow">open-source,</span>{' '}
-                            <span className="text-red dark:text-yellow">3D printed,</span>{' '}
-                            <span className="text-red dark:text-yellow">palm-sized</span> slice of developer joy
-                        </h2>
                         <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
                             {subfeatures.map((subfeature, index) => {
                                 return <Subfeature {...subfeature} key={index} />
@@ -431,9 +454,9 @@ export const ProductDeskHog = () => {
                     <h3 className="text-xl text-center font-medium mb-12">
                         (The latter are a perfect excuse to expense your DeskHog purchase)
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
                         <App
-                            image="https://res.cloudinary.com/dmukukwp6/image/upload/edcbc25d_262b_4590_936a_552c445a2ccb_1812ec3330.png"
+                            image="https://res.cloudinary.com/dmukukwp6/image/upload/0a21fcc0_41df_4469_bb70_456919ca1a05_6dd8ca3f3f.png"
                             title="Paddle"
                             description="It's Pong, but with a different name. It's perfect for playing on the toilet. Apparently."
                             author="Leon Daly"
@@ -494,7 +517,7 @@ export const ProductDeskHog = () => {
 
             <VibeCodingBoxout />
 
-            <section className="max-w-7xl mx-auto px-5">
+            <section className="max-w-7xl mx-auto pt-12 px-5">
                 <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-8">
                     <div className="flex-1">
                         <h2 className="text-4xl lg:text-5xl text-center md:text-left">
@@ -506,8 +529,8 @@ export const ProductDeskHog = () => {
                             Scan the QR code with your phone to connect and link data to the Insight Keeper-upper.
                         </p>
                         <p>
-                            The DIY version of DeskHog already supports simple insights, like big numbers and trends
-                            (squinting required), but we're working on more. And we're open source, so you can help!
+                            DeskHog already supports simple insights, like big numbers and trends (squinting required),
+                            but we're working on more. And we're open source, so you can help!
                         </p>
                     </div>
                     <aside className="shrink-0 md:basis-[500px] flex justify-center">
@@ -530,7 +553,7 @@ export const ProductDeskHog = () => {
                         }}
                     />
                     <div className="flex justify-center">
-                        <div className="grid md:inline-grid grid-cols-2 gap-x-8 md:gap-x-16 gap-y-10">
+                        <div className="grid md:inline-grid grid-cols-3 gap-x-8 md:gap-x-16 gap-y-10">
                             {[
                                 {
                                     label: 'Processor',
@@ -571,17 +594,12 @@ export const ProductDeskHog = () => {
                                 {
                                     label: 'Inputs',
                                     icon: <IconButton />,
-                                    details: '3x User Tactile Buttons\nReset & DFU Buttons',
+                                    details: '3x User Tactile Buttons\nReset & DFU buttons',
                                 },
                                 {
                                     label: 'Dimensions',
                                     icon: <IconRuler />,
-                                    details: '~70mm x 40mm x 15mm\nPalm-Perfectly-Sized',
-                                },
-                                {
-                                    label: 'Also included',
-                                    icon: <IconInfinity />,
-                                    details: 'Unlimited potential\n(Hardware permitting)',
+                                    details: '~70mm x 40mm x 15mm\nPerfectly-palm-sized',
                                 },
                             ].map((spec, index) => (
                                 <div
@@ -604,7 +622,7 @@ export const ProductDeskHog = () => {
                     </div>
                     {/* New expandable callout */}
                     <div className="text-base italic font-semibold text-center w-full pb-6 mt-12">
-                        And this is just for starters...
+                        OK, but what you really want to know is...
                     </div>
                     <ExpandableCallout />
                 </div>
