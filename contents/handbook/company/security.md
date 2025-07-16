@@ -70,7 +70,7 @@ We receive data collected by our customers from end-users and allow them to unde
 
 ## Pen tests
 
-We conduct these annually, most recently in April 2024  - <PrivateLink url="https://github.com/PostHog/company-internal/issues/1577">see here</PrivateLink> for a link to the latest report and statuses. 
+We conduct these annually, most recently in May 2025 - you can find the report [here](https://drive.google.com/file/d/1JoR74x6U7Kh_0HA8sLDe0AN6YK5-OOZ5/view?usp=sharing) 
 
 ## Responsible disclosure
 
