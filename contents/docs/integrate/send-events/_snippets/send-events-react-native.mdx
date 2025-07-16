@@ -72,9 +72,9 @@ Check out and set it up the official way for [Screen tracking for analytics](htt
 Then call the `screen` method within the `trackScreenView` method.
 
 ```react-native
-const posthog = usePostHog() // or your own custom posthog instance
+const posthog = usePostHog() // use the usePostHog hook if using the PostHogProvider or your own custom posthog instance
 // you can read the params from `getCurrentRoute()`
-posthog?.screen(currentRouteName, params)
+posthog.screen(currentRouteName, params)
 ```
 
 #### With `react-native-navigation` and autocapture:
@@ -134,8 +134,8 @@ Check out and set it up the official way for [Screen tracking for analytics](htt
 Then call the `screen` method within the `useEffect` callback.
 
 ```react-native
-const posthog = usePostHog() // or your own custom posthog instance
-posthog?.screen(pathname, params)
+const posthog = usePostHog() // use the usePostHog hook if using the PostHogProvider or your own custom posthog instance
+posthog.screen(pathname, params)
 ```
 
 #### Manually capturing screen capture events
