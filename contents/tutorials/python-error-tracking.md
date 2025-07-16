@@ -133,7 +133,7 @@ When you go to `http://localhost:5000/error` now, you’ll see the error capture
 
 ## Monitoring errors in PostHog
 
-Beyond the basic activity tab view, PostHog has a dedicated [error tracking tab](https://us.posthog.com/error_tracking) to view captured errors grouped into issues along with stack traces, frequency, and more.
+Beyond the basic [activity tab view](/docs/activity), PostHog has a dedicated [error tracking tab](https://us.posthog.com/error_tracking) to view captured errors grouped into issues along with stack traces, frequency, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_17_at_15_28_23_2x_af7585e805.png"
