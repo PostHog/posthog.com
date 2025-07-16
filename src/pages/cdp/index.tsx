@@ -6,6 +6,7 @@ import OSTable from 'components/OSTable'
 import SEO from 'components/seo'
 import Editor from 'components/Editor'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import Link from 'components/Link'
 
 const PRODUCT_HANDLE = 'cdp'
 
@@ -105,6 +106,29 @@ const sources = [
 
 const getIconUrl = (iconUrl: string) => {
     return iconUrl?.startsWith('http') ? iconUrl : `https://us.posthog.com${iconUrl}`
+}
+
+const Title = ({ pipeline }: { pipeline: any }) => {
+    const url =
+        pipeline.status !== 'coming_soon' &&
+        (pipeline.mdx?.fields?.slug || `/docs/cdp/${pipeline.type}s/${pipeline.slug}`)
+
+    return (
+        <div className="flex items-center space-x-2">
+            <img
+                src={getIconUrl(pipeline.icon_url)}
+                alt={pipeline.name}
+                className="w-6 h-6 object-contain flex-shrink-0"
+            />
+            {url ? (
+                <Link to={url} state={{ newWindow: true }}>
+                    {pipeline.name}
+                </Link>
+            ) : (
+                <span className="leading-tight">{pipeline.name}</span>
+            )}
+        </div>
+    )
 }
 
 export default function CDP(): JSX.Element {
@@ -254,16 +278,7 @@ export default function CDP(): JSX.Element {
     const rows = searchFilteredPipelines.map((pipeline: any) => ({
         cells: [
             {
-                content: (
-                    <div className="flex items-center space-x-2">
-                        <img
-                            src={getIconUrl(pipeline.icon_url)}
-                            alt={pipeline.name}
-                            className="w-6 h-6 object-contain flex-shrink-0"
-                        />
-                        <span className="leading-tight">{pipeline.name}</span>
-                    </div>
-                ),
+                content: <Title pipeline={pipeline} />,
             },
             { content: pipeline.description, className: 'text-sm' },
             { content: pipeline.category?.join(', ') || '', className: 'text-sm' },
