@@ -2405,6 +2405,10 @@ export const docsMenu = {
                             url: '/docs/notebooks',
                         },
                         {
+                            name: 'Activity',
+                            url: '/docs/activity',
+                        }
+                        {
                             name: 'Organizations',
                             url: '/docs/settings/organizations',
                         },
