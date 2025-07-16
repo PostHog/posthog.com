@@ -137,7 +137,7 @@ When someone gives you feedback about your product, respond with something usefu
 
 Failing to do so will teach them not to share more feedback in the future. If and when you do ship a fix, or the new feature they wanted, let them know.
 
-> **What we’ve learned:** Don’t outsource this to a specific team – make it everyone’s responsibility. Reward helpful users with merch store discounts (also, have [a merch store](/merch!)) and early access to new features. We pull all feedback into a single Slack channel, so everyone sees it.
+> **What we’ve learned:** Don’t outsource this to a specific team – make it everyone’s responsibility. Reward helpful users with merch store discounts (also, have [a merch store](/merch)) and early access to new features. We pull all feedback into a single Slack channel, so everyone sees it.
 
 ## 8. Obsessing over competitors
 

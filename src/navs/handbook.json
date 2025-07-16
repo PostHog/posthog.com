@@ -19,9 +19,8 @@
                 "to": "/handbook/world-class-engineering"
             },
             { "order": "13", "name": "Not running out of money", "to": "/handbook/finance" },
-            { "order": "14", "name": "Where we are now", "to": "/handbook/current-status" },
-            { "order": "15", "name": "Where are we going?", "to": "/handbook/future" },
-            { "order": "16", "name": "How you can help", "to": "/handbook/help" }
+            { "order": "14", "name": "Where are we going?", "to": "/handbook/future" },
+            { "order": "15", "name": "How you can help", "to": "/handbook/help" }
         ]
     }
 ]

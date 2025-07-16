@@ -54,7 +54,7 @@ For new product announcements we generally apply the following best practices:
 Comms should also be aware of [the engineering best practices for product launches](/handbook/engineering/development-process#best-practices-for-full-releases), so we can be sure that features launch well.
 
 ### PR announcements
-We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/growth/brand/press). 
+We do not typically do public relations for anything other than company-level news. We have separate [processes and guides for managing press announcements](/handbook/brand/press). 
 
 ## Maintenance communications
 

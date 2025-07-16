@@ -22,7 +22,7 @@ If a customer contacts us about migrating data into PostHog we should first refe
 - [Migrating from LaunchDarkly to PostHog](/docs/migrate/launchdarkly)
 - [Migrating from Statsig to PostHog](/docs/migrate/statsig)
 - [Migrating from a self-hosted deployment to PostHog Cloud](/docs/migrate/migrate-to-cloud#between-cloud-instances-eg-us-cloud-to-eu-cloud)
-- [Syncing other platforms to our data warehouse](/docs/data-warehouse/setup)
+- [Syncing other platforms to our data warehouse](/docs/data-warehouse)
 
 ### Implementation help
 Sometimes teams want help or advice on their event taxonomy, or creating specific insights. Users who look like they have the potential to pay >$20k should generally be referred to the Sales & CS team, otherwise they should go through the regular support flow. We also have [a wide variety of dashboard templates](/templates) and tutorials to help teams get started.

@@ -125,7 +125,7 @@ Improving reliability, integrations, and UX is critical for success here. Being 
 
 To go one better, we are also working on making PostHog a data warehouse. This means storing and using arbitrary data from many different sources, scaling this up to users needs, and integrating with traditional data warehousing tools. Our team [built this](https://github.com/PostHog/posthog/pull/14915) at our last Hackathon.
 
-It consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), [Intercom](/tutorials/intercom-reports), and more along with data from PostHog. 
+It consists of custom tables that are created and queried through the PostHog UI and API. These tables provide a way to store and query data from sources like [Stripe](/tutorials/stripe-reports), [Hubspot](/tutorials/hubspot-reports), Intercom, and more along with data from PostHog. 
 
 This improves data accuracy and reporting flexibility. It also enables teams to continue using PostHog (which they are familiar with), as they scale. This replaces many of the tools of the modern data stack, which means they don't have to set up or maintain it. They can spend their time and resources building a great product.
 

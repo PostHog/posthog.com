@@ -64,7 +64,7 @@ This brings us to our next point…
 
 At a lower level, individual teams also have an idea of what all the potential features they can build are. To discover these, they use [user feedback](/product-engineers/10x-engineers-do-user-interviews), metrics, experience, product principles, and personal opinions.
 
-Our small teams use their offsites to map these options. Below is an example of a [Team Replay](/small-teams/replay) 2x2 grid from a recent offsite (notes in the top right are high effort and high impact):
+Our small teams use their offsites to map these options. Below is an example of a [Team Replay](/teams/replay) 2x2 grid from a recent offsite (notes in the top right are high effort and high impact):
 
 ![2x2](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/how-we-decide-what-to-build/2x2.jpeg)
 

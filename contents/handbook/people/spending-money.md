@@ -85,7 +85,7 @@ We enforce the use of hardware security keys wherever we can. Every team member 
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
 
-* For engineering roles, we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
+* For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
 * For all other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.

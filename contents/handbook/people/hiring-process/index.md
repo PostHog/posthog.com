@@ -28,7 +28,8 @@ We are all-remote, but we have a few limitations on the countries we are able to
 
 - We hire within -8 to +2 GMT timezones - beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
 - Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
-- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. 
+- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk.
+  
 
 ## Hiring Process         
 
@@ -257,9 +258,9 @@ If we don't make an offer, it's important to clearly outline to the candidate wh
 
 Hooray!
 
-The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate and Charles. 
+The People & Ops team will prepare the offer details. James and Tim give final signoff. We then schedule an offer call with the candidate - this might be Charles, Fraser or a member of the people & ops team. 
 
-During the offer call, Charles will share feedback from the interview process, and will sell the role and opportunity here at PostHog. He will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. He'll then follow up with an offer email, outlining all details. If a candidate is proving tricky to close, he may escalate to James or Tim to help. 
+During the offer call, we'll share feedback from the interview process, and sell the opportunity here at PostHog. We will also briefly cover the offer details (salary, equity, benefits), and answer any open questions. Afterwards the person who made the offer will follow up with an offer email, outlining all the details. If a candidate is proving tricky to close, the team may escalate to James or Tim to help. 
 
 Once the candidate accepts, the People & Ops team will kick off the [onboarding process](/handbook/people/onboarding) and take the role offline, after rejecting all remaining candidates. 
 
@@ -278,10 +279,14 @@ If a candidate needs visa sponsorship, please keep in mind that the process is l
 
 We participate in [E-verify](https://www.e-verify.gov/about-e-verify) for all US new hires which allows us to verify employment eligibility remotely and continue hiring in multiple states. E-Verify is not used as a tool to pre-screen candidates.
 
-## Location - April 2024 update
+## Location
 
 For some teams, it's important to have a wide range of timezones covered by the small team - this allows us to have closer to 24 hour coverage in case of incidents, and is particularly relevant for infrastructure or pipeline teams.
 
 For teams working on a pre-product market fit product with no users, it is preferable to hire people within a few timezones of each other so it's easier to get together in person and to do synchronous meetings if people wish to work that way.
 
-Currently, we are hiring a lot - aiming to go from ~45 people to ~70 by the end of 2024. Our pace of hiring is the biggest blocker to shipping all the tools in one and driving our growth, so we need to go fast while keeping the bar high. Therefore we should _not_ restrict hires to certain timezones, even if in the short run a small team would prefer to have everyone closer together. This is because over the next six months, we'll have enough new people, that we can later re-org our teams to group people back together by timezone if needed as we have higher density of talent everywhere in the timezones we cover. 
+Currently, we are hiring a lot - aiming to go from ~96 people to ~185 by the end of 2025. Our pace of hiring is the biggest blocker to shipping all the tools in one and driving our growth, so we need to go fast while keeping the bar high. Therefore we should _not_ restrict hires to certain timezones, even if in the short run a small team would prefer to have everyone closer together. This is because over the next six months, we'll have enough new people, that we can later re-org our teams to group people back together by timezone if needed as we have higher density of talent everywhere in the timezones we cover. 
+
+## Internships
+
+We regularly receive enthusiastic requests from students about internships, which we're always flattered by. Currently we don't offer internships, placements or work experience - we’re a bit too scrappy to do them well right now. Once you ~~escape uni~~ graduate, you're welcome to apply to full time roles via our [careers site](/careers). Your details will then go straight through to our hiring team (who _are_ real humans, not AI) and you'll hear back from us shortly after.

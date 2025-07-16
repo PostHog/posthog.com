@@ -173,5 +173,5 @@ You can also edit and save the remote config in PostHog and then press the **ref
 ## Further reading
 
 - [How to set up analytics in Android](/tutorials/android-analytics)
-- [How to run A/B tests in Android](/tutorials/android-ab-testing)
+- [How to run A/B tests in Android](/tutorials/android-ab-tests)
 - [Feature flags vs configuration: Which should you choose?](/product-engineers/feature-flags-vs-configuration)
