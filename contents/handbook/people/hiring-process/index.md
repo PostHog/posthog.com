@@ -239,7 +239,15 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 *   It is important for product engineer candidates to be prepped for their check-in call to do a deep dive of their progress so far with their SuperDay buddy while other non-technical roles in Sales, Onboarding, and Customer Success, the candidates will be running a demo mid-point of their SuperDay. 
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
 
-> For some roles, we may occasionally set a task that goes over multiple days. For example, we have set Content Marketer tasks that last 3 days in order to create a piece of content. 
+> For some roles, we may occasionally set a task that goes over multiple days. For example, we have set Content Marketer tasks that last 3 days in order to create a piece of content.
+
+### How to make a SuperDay payment
+- Log into [Brex.com](https://www.brex.com/)
+- Click on vendors on the left hand side of your dashboard
+- Click on “Add Vendor” and enter the candidate’s full name and email address
+- Select the option where the “Vendor - Email the vendor a link to a secure portal to provide payment methods” and the next screen, if it’s a US candidate select “Vendor - Email your vendor a link to a secure portal to provide W-9 tax information” otherwise, if it’s for a non-US candidate, just select “skip” and send the request for the SuperDay candidate to complete the details for their payment
+- Once you receive the vendor’s banking details, make the superday payment from the primary posthog account. In the description,  make sure to add the superday and the position they applied for (i.e. SuperDay 7/20: Product Engineer)
+
 
 ### Decide if we will hire
 
