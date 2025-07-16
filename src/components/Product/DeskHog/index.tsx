@@ -13,6 +13,7 @@ import {
     IconBatteryCharge,
     IconExpand45,
     IconBox,
+    IconPhone,
     IconButton,
     IconRuler,
     IconInfinity,
@@ -48,8 +49,6 @@ import { CallToAction } from 'components/CallToAction'
 import { Hero } from 'components/Products/Hero'
 import { Subfeature } from 'components/Products/Subfeature'
 import CTA from 'components/Home/CTA'
-import { PairsWith } from 'components/Products/PairsWith'
-import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { FAQ } from 'components/Products/FAQ'
 import Tooltip from 'components/Tooltip'
 import { TextCard } from 'components/Products/TextCard'
@@ -152,31 +151,6 @@ const subfeatures = [
         description:
             "DeskHog is small enough to fit in your pocket. It's got a 10-hour battery life, WiFi, and a cute flashing LED so you can find it in the dark.",
         icon: <IconHandwave />,
-    },
-]
-
-const pairsWithItemCount = 3
-const PairsWithArray = [
-    {
-        icon: <IconCode />,
-        product: 'Developers',
-        color: 'blue',
-        description: 'Make things with an AI editor, or C++ if you want to show off your l33t skills.',
-        url: '#',
-    },
-    {
-        icon: <IconPeople />,
-        product: 'Bathroom breaks',
-        color: 'seagreen',
-        description: "Your boss will never suspect you're DeskHogging. Trust us. ",
-        url: '#',
-    },
-    {
-        icon: <IconThoughtBubble />,
-        product: 'Imagination',
-        color: 'black dark:text-white',
-        description: 'Build new features, add extra hardware, or just tinker with it.',
-        url: '#',
     },
 ]
 
@@ -301,33 +275,27 @@ const ExpandableCallout = () => {
         <div className="col-span-2 bg-accent dark:bg-accent-dark py-4 px-8 rounded-lg w-full max-w-4xl mx-auto">
             <div className="mt-4 flex flex-col md:flex-row gap-8 items-start">
                 <div className="flex-1">
-                    <h5 className="text-center md:text-left mb-4">
-                        Why the heck is <span className="text-red dark:text-yellow">PostHog</span> making hardware?
-                    </h5>
+                    <h2 className="text-center md:text-left mb-4">
+                        You can <span className="text-red dark:text-yellow">add your own hardware too</span>
+                    </h2>
                     <p className="mb-3">
-                        DeskHog kits are bought to you by Danilo and Leo. The project started as a joke. But then we
-                        found out that messing with hardware wasn't as tricky as we thought.
+                        Want to add more buttons, speakers, or sensors? How about a Bluetooth module? All you need to do
+                        is plug it into the I²C port and patch in the firmware.
                     </p>
                     <p className="mb-3">
-                        DeskHog Pro will connect via the I²C port, adding more buttons, and a huge dial so you can crank
-                        up the vibes. We're also thinking about making a watch strap, so you can wear DeskHog on your
-                        wrist.
+                        We already made a prototype DeskHog Pro to prove what's possible. It has a macropad of buttons,
+                        a speaker, and a huge dial so you can crank up the vibes.
                     </p>
                     <p>
-                        Got ideas for other accessories? <a href="mailto:danilo@posthog.com">Let us know!</a>
+                        Got ideas for something else we should add? <a href="https://x.com/posthog">Let us know!</a>
                     </p>
                 </div>
-                <div className="shrink-0 w-full md:w-96">
-                    <div className="relative aspect-video rounded-lg overflow-hidden shadow-lg">
-                        <iframe
-                            src="https://www.youtube.com/embed/2jQco8hEvTI"
-                            title="DeskHog Demo Video"
-                            className="w-full h-full"
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen
-                        />
-                    </div>
+                <div className="shrink-0 w-full md:w-80 flex justify-center">
+                    <CloudinaryImage
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_max_904ca43b3e.png"
+                        alt="DeskHog Pro"
+                        className="w-full max-w-[280px]"
+                    />
                 </div>
             </div>
         </div>
@@ -337,7 +305,7 @@ const ExpandableCallout = () => {
 // Vibe Coding Boxout Component
 const VibeCodingBoxout = () => {
     return (
-        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 mt-4 mb-4 max-w-2xl mx-auto">
+        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 mb-14 max-w-2xl mx-auto">
             <div className="flex items-start gap-4">
                 <div className="flex-shrink-0">
                     <CloudinaryImage
@@ -383,7 +351,7 @@ export const ProductDeskHog = () => {
                 {/* <VideoDeskHog /> */}
                 <section id="demo-video" className="mb-0 pt-0">
                     <div className="flex justify-center">
-                        <div className="w-full max-w-[600px]">
+                        <div className="w-full max-w-[1000px]">
                             <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                                 <iframe
                                     src="https://www.youtube.com/embed/2jQco8hEvTI"
@@ -450,9 +418,9 @@ export const ProductDeskHog = () => {
                             />
                         </aside>
                     </div>
-                    <h2 className="text-5xl text-center mb-2">It comes with games and important business tools</h2>
+                    <h2 className="text-5xl text-center mb-2">Obviously it comes with games</h2>
                     <h3 className="text-xl text-center font-medium mb-12">
-                        (The latter are a perfect excuse to expense your DeskHog purchase)
+                        Also, some important business tools so you have an excuse to expense your purchase
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
                         <App
@@ -517,29 +485,39 @@ export const ProductDeskHog = () => {
 
             <VibeCodingBoxout />
 
-            <section className="max-w-7xl mx-auto pt-12 px-5">
-                <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-8">
-                    <div className="flex-1">
-                        <h2 className="text-4xl lg:text-5xl text-center md:text-left">
-                            Your phone and data are{' '}
-                            <span className="text-red dark:text-yellow">DeskHog's best friends</span>
-                        </h2>
-                        <p>
-                            DeskHog can get online via a captive portal and pull insights from your PostHog projects.
-                            Scan the QR code with your phone to connect and link data to the Insight Keeper-upper.
-                        </p>
-                        <p>
-                            DeskHog already supports simple insights, like big numbers and trends (squinting required),
-                            but we're working on more. And we're open source, so you can help!
-                        </p>
+            <section className="bg-accent dark:bg-accent-dark py-16 -mx-5 md:-mx-8">
+                <div className="max-w-7xl mx-auto px-5 md:px-8">
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8">
+                        <div className="flex-1">
+                            <h2 className="text-4xl lg:text-5xl text-center md:text-left">
+                                You may be wondering <br />
+                                <span className="text-red dark:text-yellow">why we're making hardware</span>
+                            </h2>
+                            <p>
+                                DeskHog started as a joke in our internal Slack, but then{' '}
+                                <a href="/blog/welcome-to-deskhog">Danilo</a> decided to build it anyway. Two prototypes
+                                and one hackathon later, we had a working version with a bunch of apps.
+                            </p>
+                            <p>
+                                Ultimately, we're not sure if DeskHog will be a success, but we've has a lot of fun
+                                building it. And we're selling it as cost so you can join in!
+                            </p>
+                        </div>
+                        <aside className="shrink-0 md:basis-[500px] flex justify-center">
+                            <div className="w-full max-w-[470px]">
+                                <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+                                    <iframe
+                                        src="https://www.youtube.com/embed/2jQco8hEvTI?modestbranding=1&rel=0&showinfo=0"
+                                        title="DeskHog Demo Video"
+                                        className="w-full h-full"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    />
+                                </div>
+                            </div>
+                        </aside>
                     </div>
-                    <aside className="shrink-0 md:basis-[500px] flex justify-center">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hell_yeah_app_c750f3c058.png"
-                            alt="DeskHog is a beast"
-                            className="w-1/2 max-w-[470px] mx-auto"
-                        />
-                    </aside>
                 </div>
             </section>
 
@@ -622,19 +600,11 @@ export const ProductDeskHog = () => {
                     </div>
                     {/* New expandable callout */}
                     <div className="text-base italic font-semibold text-center w-full pb-6 mt-12">
-                        OK, but what you really want to know is...
+                        Oh, and there's an I²C expansion port, so...
                     </div>
                     <ExpandableCallout />
                 </div>
             </section>
-
-            {/* <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-10`}>
-                <PairsWith items={pairsWithItemCount}>
-                    {PairsWithArray.map((card, index) => {
-                        return <PairsWithItem {...card} key={index} />
-                    })}
-                </PairsWith>
-            </div> */}
 
             {/* DeskHogCTA Section Wrapper */}
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 pb-10`}>
