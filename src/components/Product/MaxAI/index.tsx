@@ -801,7 +801,7 @@ export const ProductMax = () => {
                             </p>
                             <p>
                                 Deep research mode. Max will build a deep understanding of your customers and product to
-                                answer questions, pulling together context from all our tools and data – like a an
+                                answer questions, pulling together context from all our tools and data – like an
                                 automatic PM or analyst.
                             </p>
                             <p>
