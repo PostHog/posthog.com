@@ -2407,7 +2407,7 @@ export const docsMenu = {
                         {
                             name: 'Activity',
                             url: '/docs/activity',
-                        }
+                        },
                         {
                             name: 'Organizations',
                             url: '/docs/settings/organizations',
