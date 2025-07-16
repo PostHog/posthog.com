@@ -79,7 +79,7 @@ First, [sign up for PostHog](https://app.posthog.com/signup) if you haven't alre
 
 Next, we need a project API key and client API host. You can get both from your [project settings](https://app.posthog.com/settings/project). Add both of these to a `.env.local` file in our base directory.
 
-```
+``` file=.env.local
 NEXT_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
 NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 ```
@@ -106,7 +106,9 @@ After you set this up and restart your app, PostHog starts autocapturing events 
 />
 
 <Callout type="info" title="Setting up a reverse proxy ">
+
 We highly recommend setting up a reverse proxy to ensure requests aren't blocked by tracking blockers. You can find instructions for doing this in our [reverse proxy guide](/docs/advanced/proxy).
+
 </Callout>
 
 ## Capturing custom events
