@@ -3069,6 +3069,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'Marketing analytics',
+                    url: '/docs/web-analytics/marketing-analytics',
+                    icon: 'IconGraph',
+                    color: 'blue',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
