@@ -49,7 +49,7 @@ Additionally, we can ladder our tools – session recording is used much earlier
 
 ### Be the pipeline for product and customer data
 
-Traditionally, as companies scale their data warehouse becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant. By being their core pipeline from connecting their data to their warehouses we can remain sticky for the life of our customers. And by providing this infra, we ensure the data we have remains comprehensive. We will continue pushing back the need for companies to even set up a warehouse in the first place.
+Traditionally, as companies scale their [data warehouse](/blog/data-warehouse-at-posthog) becomes the source of truth and non-warehouse native tools (like product analytics) become less relevant. By being their core pipeline from connecting their data to their warehouses we can remain sticky for the life of our customers. And by providing this infra, we ensure the data we have remains comprehensive. We will continue pushing back the need for companies to even set up a warehouse in the first place.
 
 ## What's to come this year?
 

@@ -39,7 +39,7 @@ This means sending emails when customers abandon their basket. Triggering survey
 
 By having all the tools and data together in one platform, we can use AI to help automate a lot of the manual work needed to build products people love, and run your business more successfully. The more products we build, the better this gets.
 
-You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, data warehouse, and so on. We also have great coverage for product, engineering, and growth use cases.
+You can already replace an entire stack of legacy data tools with PostHog – analytics, business intelligence, customer data platform, [data warehouse](/blog/data-warehouse-at-posthog), and so on. We also have great coverage for product, engineering, and growth use cases.
 
 This funding round means we can build more products for support, sales, and marketing use cases, keep up with demand for our existing products, and ultimately automate the entire chain of tools that businesses use to grow by creating a perfect customer record.
 
