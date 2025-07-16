@@ -290,71 +290,73 @@ export const DocsIndex = () => {
     return (
         <div data-scheme="secondary" className="p-5 bg-primary h-full">
             <SEO title="Documentation - PostHog" />
+            <ScrollArea>
+                <div className="flex @md:flex-row flex-col gap-8 h-full">
+                    <section className="flex-1">
+                        <h2>Docs</h2>
+                        <SearchUI initialFilter="docs" hideFilters isRefinedClassName="bg-white" className="mb-4" />
+                        <ScrollArea>
+                            {accordionItems.map((item, index) => (
+                                <Accordion
+                                    key={index}
+                                    skin={false}
+                                    triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
+                                    defaultValue={item.value}
+                                    items={[item]}
+                                />
+                            ))}
+                        </ScrollArea>
+                    </section>
 
-            <div className="flex gap-8 h-full">
-                <section className="flex-1">
-                    <h2>Docs</h2>
-                    <SearchUI initialFilter="docs" hideFilters isRefinedClassName="bg-white" className="mb-4" />
-                    <ScrollArea>
-                        {accordionItems.map((item, index) => (
-                            <Accordion
-                                key={index}
-                                skin={false}
-                                triggerClassName="flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&>span]:relative [&>span]:after:absolute [&>span]:after:right-0 [&>span]:after:top-1/2 [&>span]:after:h-px [&>span]:after:w-full [&>span]:after:bg-border [&>span]:after:content-['']"
-                                defaultValue={item.value}
-                                items={[item]}
-                            />
-                        ))}
-                    </ScrollArea>
-                </section>
+                    <aside className="max-w-xs text-sm">
+                        <ScrollArea>
+                            <h6>About our docs</h6>
+                            <p>There are a few ways to explore our docs:</p>
+                            <p>
+                                <strong>On our website</strong> (You are here)
+                            </p>
+                            <ul>
+                                <li>
+                                    <AskMax linkOnly className="underline font-medium">
+                                        Ask Max
+                                    </AskMax>
+                                    , our trusty AI chatbot. Start a chat on any docs page and Max will have the
+                                    relevant context.
+                                </li>
+                                <li>Search with the icon at the top right</li>
+                            </ul>
+                            <p>
+                                You can also ask a question at the end of each docs article. They get cross-posted to
+                                our{' '}
+                                <Link to="/questions" className="underline font-medium" state={{ newWindow: true }}>
+                                    community forums
+                                </Link>
+                                .
+                            </p>
+                            <p>
+                                <strong>In the product</strong>
+                            </p>
+                            <ul>
+                                <li>Look for tooltips that link to docs - they open right inside the product</li>
+                                <li>Ask Max in the product</li>
+                            </ul>
 
-                <aside className="max-w-xs text-sm">
-                    <ScrollArea>
-                        <h6>About our docs</h6>
-                        <p>There are a few ways to explore our docs:</p>
-                        <p>
-                            <strong>On our website</strong> (You are here)
-                        </p>
-                        <ul>
-                            <li>
-                                <AskMax linkOnly className="underline font-medium">
-                                    Ask Max
-                                </AskMax>
-                                , our trusty AI chatbot. Start a chat on any docs page and Max will have the relevant
-                                context.
-                            </li>
-                            <li>Search with the icon at the top right</li>
-                        </ul>
-                        <p>
-                            You can also ask a question at the end of each docs article. They get cross-posted to our{' '}
-                            <Link to="/questions" className="underline font-medium" state={{ newWindow: true }}>
-                                community forums
-                            </Link>
-                            .
-                        </p>
-                        <p>
-                            <strong>In the product</strong>
-                        </p>
-                        <ul>
-                            <li>Look for tooltips that link to docs - they open right inside the product</li>
-                            <li>Ask Max in the product</li>
-                        </ul>
+                            <hr className="my-4" />
 
-                        <hr className="my-4" />
+                            <h6>Feedback</h6>
 
-                        <h6>Feedback</h6>
-
-                        <p>
-                            Our docs are perpetually a work in progress. The{' '}
-                            <Link to="/teams/content" className="underline font-medium" state={{ newWindow: true }}>
-                                Content team
-                            </Link>{' '}
-                            is responsible for what you see here. At the end of each page, you can provide feedback
-                            about what was (or wasn't) helpful. We read all feedback.
-                        </p>
-                    </ScrollArea>
-                </aside>
-            </div>
+                            <p>
+                                Our docs are perpetually a work in progress. The{' '}
+                                <Link to="/teams/content" className="underline font-medium" state={{ newWindow: true }}>
+                                    Content team
+                                </Link>{' '}
+                                is responsible for what you see here. At the end of each page, you can provide feedback
+                                about what was (or wasn't) helpful. We read all feedback.
+                            </p>
+                        </ScrollArea>
+                    </aside>
+                </div>
+            </ScrollArea>
         </div>
     )
 }
