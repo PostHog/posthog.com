@@ -15,9 +15,13 @@ Next.js is one of the most popular frameworks for building web apps. Have one an
 
 In this tutorial, we'll create a simple Next.js app and set up PostHog on the client and server side. We'll also capture pageviews and custom events, set up feature flags, and more.
 
-<Callout type="info" title="Looking for the pages router?">
-  If you use Next.js with the **pages** router, check out our other [Next.js pages router analytics tutorial](/tutorials/nextjs-analytics).
-</Callout>
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox type="info" title="Looking for the pages router?">
+
+    If you use Next.js with the **pages** router, check out our other [Next.js pages router analytics tutorial](/tutorials/nextjs-analytics).
+    
+</CalloutBox>
 
 ## Creating a Next.js app with the app router
 
@@ -105,7 +109,6 @@ After you set this up and restart your app, PostHog starts autocapturing events 
   classes="rounded"
 />
 
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox type="info" title="Setting up a reverse proxy ">
 
