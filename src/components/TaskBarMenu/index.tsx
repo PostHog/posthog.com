@@ -9,6 +9,7 @@ import {
     IconNotification,
     IconLock,
     IconBookmark,
+    IconUpload,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -19,6 +20,7 @@ import { useUser } from 'hooks/useUser'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
+import MediaUploadModal from 'components/MediaUploadModal'
 
 export default function TaskBarMenu() {
     const {
@@ -31,11 +33,12 @@ export default function TaskBarMenu() {
         openNewChat,
         setIsNotificationsPanelOpen,
         setIsActiveWindowsPanelOpen,
+        addWindow,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
 
-    const { user, notifications, logout } = useUser()
+    const { user, notifications, logout, isModerator } = useUser()
     const menuData = useMenuData()
 
     const isLoggedIn = !!user
@@ -145,6 +148,28 @@ export default function TaskBarMenu() {
                                     label: 'Bookmarks',
                                     link: '/bookmarks',
                                     icon: <IconBookmark className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                },
+                            ]
+                          : []),
+                      ...(isModerator
+                          ? [
+                                {
+                                    type: 'item' as const,
+                                    label: 'Moderator tools',
+                                    disabled: true,
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Upload media',
+                                    icon: <IconUpload className="opacity-50 group-hover/item:opacity-75 size-4" />,
+                                    onClick: () =>
+                                        addWindow(
+                                            <MediaUploadModal
+                                                newWindow
+                                                location={{ pathname: `media-upload` }}
+                                                key={`media-upload`}
+                                            />
+                                        ),
                                 },
                             ]
                           : []),

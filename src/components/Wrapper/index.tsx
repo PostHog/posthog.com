@@ -8,7 +8,7 @@ import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import Dock from 'components/Desktop/Dock'
 
 export default function Wrapper() {
-    const { windows, constraintsRef } = useApp()
+    const { windows, constraintsRef, updateWindow } = useApp()
 
     return (
         <div className="fixed inset-0 size-full flex flex-col">
@@ -29,6 +29,8 @@ export default function Wrapper() {
                                         },
                                     },
                                 }}
+                                onAnimationStartCapture={() => updateWindow(item, { animating: true })}
+                                onAnimationComplete={() => updateWindow(item, { animating: false })}
                             >
                                 <AppWindow item={item} key={item.key} constraintsRef={constraintsRef} />
                             </motion.div>

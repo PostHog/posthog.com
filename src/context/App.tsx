@@ -8,6 +8,7 @@ import Register from 'components/Squeak/components/Classic/Register'
 import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
 import { ChatProvider } from 'hooks/useChat'
+import Start from 'components/Start'
 
 interface ChatContext {
     type: 'page'
@@ -48,6 +49,7 @@ interface AppContextType {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
+            animating?: boolean
         }
     ) => void
     getPositionDefaults: (
@@ -286,6 +288,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    start: {
+        size: {
+            min: {
+                width: 850,
+                height: 580,
+            },
+            max: {
+                width: 850,
+                height: 580,
+            },
+            fixed: true,
+        },
+        position: {
+            center: true,
+        },
+    },
     '/start': {
         size: {
             min: {
@@ -509,6 +527,20 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'media-upload': {
+        size: {
+            min: {
+                width: 900,
+                height: 500,
+            },
+            max: {
+                width: 900,
+                height: 500,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
@@ -559,21 +591,24 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const closeWindow = useCallback(
         (item: AppWindow) => {
-            const windowsFiltered = windows.filter((el) => el.path !== item.path)
-            const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
-                (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
-                undefined
-            )
-            if (nextFocusedWindow && !nextFocusedWindow.minimized) {
-                if (nextFocusedWindow.path.startsWith('/')) {
-                    navigate(nextFocusedWindow.path)
+            updateWindow(item, { animating: true })
+            setTimeout(() => {
+                const windowsFiltered = windows.filter((el) => el.path !== item.path)
+                const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
+                    (highest, current) => (current.zIndex > (highest?.zIndex ?? -1) ? current : highest),
+                    undefined
+                )
+                if (nextFocusedWindow && !nextFocusedWindow.minimized) {
+                    if (nextFocusedWindow.path.startsWith('/')) {
+                        navigate(nextFocusedWindow.path)
+                    } else {
+                        bringToFront(nextFocusedWindow)
+                    }
                 } else {
-                    bringToFront(nextFocusedWindow)
+                    window.history.pushState({}, '', '/')
                 }
-            } else {
-                window.history.pushState({}, '', '/')
-            }
-            setWindows(windowsFiltered)
+                setWindows(windowsFiltered)
+            }, 0)
         },
         [windows]
     )
@@ -617,7 +652,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [])
 
     const minimizeWindow = useCallback((appWindow: AppWindow) => {
-        setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w)))
+        setWindows((windows) =>
+            windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true, animating: true } : w))
+        )
     }, [])
 
     function getWindowBasedSizeConstraints() {
@@ -743,6 +780,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
             location: element.props.location,
+            animating: true,
         }
 
         // Adjust width if window extends beyond right edge
@@ -796,6 +834,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
+            animating?: boolean
         }
     ) => {
         const newAppWindow = {
@@ -817,6 +856,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 ...(updates.previousSize || {}),
             },
             ...(updates.element ? { element: updates.element } : {}),
+            ...('animating' in updates ? { animating: updates.animating } : {}),
         }
         setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
         return newAppWindow
@@ -1016,6 +1056,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         window.addEventListener('resize', handleResize)
 
         return () => window.removeEventListener('resize', handleResize)
+    }, [])
+
+    useEffect(() => {
+        if (location.key === 'initial' && location.pathname === '/' && !isMobile) {
+            addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} />)
+        }
     }, [])
 
     return (
