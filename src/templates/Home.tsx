@@ -36,11 +36,11 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
 
     return (
         <span className={`flex flex-wrap gap-1 ${className}`}>
-            {productTypes.map((type) => {
+            {productTypes.map((type, index) => {
                 const product = getProduct(type)
                 return product ? (
                     <OSButton
-                        key={product.type}
+                        key={type}
                         variant="ghost"
                         icon={product.Icon ? <product.Icon /> : undefined}
                         iconClassName={`text-${product.color}`}
