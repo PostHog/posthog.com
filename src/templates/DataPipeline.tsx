@@ -8,6 +8,7 @@ import Configuration from 'components/Product/Pipelines/Configuration'
 import SEO from 'components/seo'
 import { getIconUrl, NotifyMe } from 'components/Product/Pipelines'
 import ReactMarkdown from 'react-markdown'
+import ReaderView from 'components/ReaderView'
 
 export default function DataPipeline({
     data,
@@ -44,12 +45,9 @@ export default function DataPipeline({
         "> The configuration process for this destination mirrors Segment's setup. We've automatically modified the documentation from third-party sources to show you how to set up this destination with PostHog."
 
     return (
-        <Layout
-            parent={docsMenu}
-            activeInternalMenu={docsMenu.children.find((child) => child.name === 'Data pipelines')}
-        >
+        <>
             <SEO title={`${name} - Docs - PostHog`} description={description} />
-            <PostLayout title={name} menu={dataPipelines.children} menuWidth={{ left: 400 }} hideSidebar hideSurvey>
+            <ReaderView title={name}>
                 <div className="flex items-center space-x-2">
                     <img src={getIconUrl(icon_url)} alt={name} className="w-10 h-10" />
                     <h1 className="m-0">{name}</h1>
@@ -122,8 +120,8 @@ export default function DataPipeline({
                         </div>
                     )}
                 </div>
-            </PostLayout>
-        </Layout>
+            </ReaderView>
+        </>
     )
 }
 

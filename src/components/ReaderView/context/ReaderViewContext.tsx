@@ -1,8 +1,9 @@
-import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
+import React, { createContext, useContext, useState, useCallback, useEffect, useMemo } from 'react'
 import { useLocation } from '@reach/router'
 import { useLayoutData } from 'components/Layout/hooks'
-import menu from '../../../navs'
+import initialMenu from '../../../navs'
 import { useWindow } from '../../../context/Window'
+import useDataPipelinesNav from '../../../navs/useDataPipelinesNav'
 
 interface MenuItem {
     name: string
@@ -73,6 +74,8 @@ const getComputedLineHeight = (selector: string) => {
 
 const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undefined)
 
+const isLabel = (item: any) => !item?.url && item?.name
+
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
     const { setMenu } = useWindow()
     const [isNavVisible, setIsNavVisible] = useState(true)
@@ -89,6 +92,55 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
         return null
     })
+    const dynamicMenus = useMemo(
+        () => ({
+            'data-pipeline-destinations': useDataPipelinesNav({ type: 'destination' }),
+            'data-pipeline-transformations': useDataPipelinesNav({ type: 'transformation' }),
+        }),
+        []
+    )
+
+    const injectDynamicChildren = useCallback((menu: Menu) => {
+        return menu?.map((item) => {
+            const processedItem = { ...item }
+
+            if (item.dynamicChildren && dynamicMenus[item.dynamicChildren]) {
+                const newChildren = [...(item.children || []), ...dynamicMenus[item.dynamicChildren]].reduce(
+                    (acc, child) => {
+                        if (isLabel(child)) {
+                            acc.push([child])
+                        } else {
+                            const lastGroup = acc[acc.length - 1]
+                            if (!lastGroup || isLabel(lastGroup[lastGroup.length - 1])) {
+                                acc.push([child])
+                            } else {
+                                lastGroup.push(child)
+                            }
+                        }
+                        return acc
+                    },
+                    []
+                )
+
+                newChildren.forEach((group) => {
+                    group.sort((a, b) => {
+                        if (!a.url || !b.url) return 0
+                        return a.name.localeCompare(b.name)
+                    })
+                })
+
+                processedItem.children = newChildren.flat()
+            }
+
+            if (processedItem.children && processedItem.children.length > 0) {
+                processedItem.children = injectDynamicChildren(processedItem.children)
+            }
+
+            return processedItem
+        })
+    }, [])
+
+    const menu = injectDynamicChildren(initialMenu)
 
     const toggleNav = useCallback(() => {
         setIsNavVisible((prev) => !prev)
