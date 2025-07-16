@@ -1,11 +1,13 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { SlidesTemplate } from 'components/Products/Slides'
+import { useContentData } from 'hooks/useContentData'
 
 // Product configuration - change this to adapt for different products
 const PRODUCT_HANDLE = 'api'
 
 export default function API(): JSX.Element {
+    const contentData = useContentData()
     // Combined GraphQL query for both tutorial data and product data
     const data = useStaticQuery(graphql`
         query {
