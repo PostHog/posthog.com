@@ -19,11 +19,13 @@ The options for customization on the activity tab include:
 
 2. Customizing the columns shown. These can include event properties, person properties, feature flags, and even SQL queries. You can reorder them and set your customization as the default for all project members.
 
+For example, to show an absolute timestamp like `Jul 16, 09:12:55`, you can add an SQL expression like `formatDateTime(toTimeZone($timestamp, 'America/Chicago' ), '%b %d, %H:%i:%s')`.
+
 ## Activity views
 
 The activity tab also has multiple views:
 
-1. **PostHog default:** Shows a list of events with their person, URL or screen, web, and time.
+1. **PostHog default:** Shows a list of events with their person, URL or screen, library, and time.
 
 2. **Project default:** Shows a list of events with the configured columns you set.
 
