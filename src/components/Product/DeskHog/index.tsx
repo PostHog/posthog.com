@@ -175,14 +175,14 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                     </span>
                 )}
             </div>
-            <h1 className="text-5xl md:text-6xl text-center mb-4 md:mb-2 text-balance">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 md:mb-2 text-balance px-2">
                 It's a developer <span className="text-red dark:text-yellow">toy</span> that brings developers{' '}
                 <span className="text-red dark:text-yellow">joy</span>
             </h1>
-            <p className="text-lg font-semibold text-center text-opacity-75 mb-5">
+            <p className="text-base sm:text-lg font-semibold text-center text-opacity-75 mb-5 px-4">
                 And it costs less than a Star Wars LEGO set
             </p>
-            <div className="flex justify-center gap-2 mb-12">
+            <div className="flex flex-col sm:flex-row justify-center gap-2 mb-12 px-4">
                 <CallToAction href="https://posthog.com/merch" type="primary" externalNoIcon>
                     <>Buy a kit now</>
                 </CallToAction>
@@ -266,9 +266,8 @@ const DeskHogCTA = () => {
                             Act now and get a palm-sized slice of developer joy.
                         </p>
                     </div>
-                    <ul className="p-0 m-0 space-y-5 text-left">
+                    <ul className="p-0 m-0 space-y-2 text-left">
                         <li className="list-none">
-                            <strong className="text-lg block">Starts at:</strong>
                             <div className="flex items-baseline gap-1 justify-center md:justify-start">
                                 <s className="font-bold text-xl">$50</s>
                                 <span className="font-bold text-red text-xl uppercase">$35</span>
@@ -380,7 +379,11 @@ export const ProductDeskHog = () => {
                 description="It's a developer toy that brings developers joy. Open-source. 3D-printed. Palm-sized."
                 image={`/images/og/deskhog.jpg`}
             />
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-10 pb-10`}>
+            <div
+                className={`${
+                    fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'
+                } px-4 sm:px-5 pt-6 sm:pt-10 pb-10`}
+            >
                 <HeroDeskHog
                     color="blue"
                     icon={<IconDeskHog />}
@@ -389,9 +392,9 @@ export const ProductDeskHog = () => {
                     description="Pre-built kits coming soon. DIY version available now."
                 />
                 {/* <VideoDeskHog /> */}
-                <section id="demo-video" className="mb-0 pt-0">
+                <section id="demo-video" className="mb-0 pt-0 px-2 sm:px-0">
                     <div className="flex justify-center">
-                        <div className="w-full max-w-[1000px]">
+                        <div className="w-full max-w-[800px] lg:max-w-[1000px]">
                             <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                                 <iframe
                                     src="https://www.youtube.com/embed/2jQco8hEvTI"
@@ -408,18 +411,20 @@ export const ProductDeskHog = () => {
             </div>
 
             <div id="features">
-                <section className="max-w-7xl mx-auto px-5 pb-6">
+                <section className="max-w-7xl mx-auto px-4 sm:px-5 pb-6">
                     <div className="mb-4">
-                        <ul className={`list-none p-0 grid md:grid-cols-${subfeaturesItemCount} gap-4`}>
+                        <ul
+                            className={`list-none p-0 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-${subfeaturesItemCount} gap-4`}
+                        >
                             {subfeatures.map((subfeature, index) => {
                                 return <Subfeature {...subfeature} key={index} />
                             })}
                         </ul>
                     </div>
 
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 pt-20 mb-20">
-                        <div className="flex-1">
-                            <h2 className="text-4xl lg:text-5xl">
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8 pt-12 sm:pt-16 md:pt-20 mb-12 sm:mb-16 md:mb-20">
+                        <div className="flex-1 text-center md:text-left">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl mb-4">
                                 But what is DeskHog really?
                                 <br />
                                 <span className="text-red dark:text-yellow">It's a teeny, tiny, beast.</span>
@@ -450,19 +455,21 @@ export const ProductDeskHog = () => {
                                 We included an I²C expansion port, just for people like you.
                             </p>
                         </div>
-                        <aside className="shrink-0 md:basis-[500px]">
+                        <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
                             <CloudinaryImage
                                 src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_73b822a689.png"
                                 alt="DeskHog is a beast"
-                                className="w-full max-w-[470px]"
+                                className="w-full max-w-[350px] sm:max-w-[400px] md:max-w-[470px]"
                             />
                         </aside>
                     </div>
-                    <h2 className="text-5xl text-center mb-2">Obviously it comes with games</h2>
-                    <h3 className="text-xl text-center font-medium mb-12">
+                    <h2 className="text-3xl sm:text-4xl md:text-5xl text-center mb-2 px-2">
+                        Obviously it comes with games
+                    </h2>
+                    <h3 className="text-lg sm:text-xl text-center font-medium mb-8 sm:mb-12 px-4">
                         Also, some important business tools so you have an excuse to expense your purchase
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-6">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-6">
                         <App
                             image="https://res.cloudinary.com/dmukukwp6/image/upload/0a21fcc0_41df_4469_bb70_456919ca1a05_6dd8ca3f3f.png"
                             title="Paddle"
@@ -525,11 +532,11 @@ export const ProductDeskHog = () => {
 
             <VibeCodingBoxout />
 
-            <section className="bg-accent dark:bg-accent-dark py-16 -mx-5 md:-mx-8">
-                <div className="max-w-7xl mx-auto px-5 md:px-8">
-                    <div className="flex flex-col-reverse items-center md:flex-row gap-8">
-                        <div className="flex-1">
-                            <h2 className="text-4xl lg:text-5xl text-center md:text-left">
+            <section className="bg-accent dark:bg-accent-dark py-8 sm:py-12 md:py-16 -mx-4 sm:-mx-5 md:-mx-8">
+                <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-8">
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8">
+                        <div className="flex-1 text-center md:text-left">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center md:text-left mb-4">
                                 You may be wondering <br />
                                 <span className="text-red dark:text-yellow">why we're making hardware</span>
                             </h2>
@@ -543,8 +550,8 @@ export const ProductDeskHog = () => {
                                 building it. And we're selling it as cost so you can join in!
                             </p>
                         </div>
-                        <aside className="shrink-0 md:basis-[500px] flex justify-center">
-                            <div className="w-full max-w-[470px]">
+                        <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center mb-6 md:mb-0">
+                            <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[470px]">
                                 <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                                     <iframe
                                         src="https://www.youtube.com/embed/2jQco8hEvTI?modestbranding=1&rel=0&showinfo=0"
@@ -562,16 +569,16 @@ export const ProductDeskHog = () => {
             </section>
 
             {/* DeskHog Specs Section */}
-            <section className="py-10">
-                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5`}>
+            <section className="py-8 sm:py-10">
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-4 sm:px-5`}>
                     <h2
-                        className="text-5xl font-bold text-center mb-16 text-primary dark:text-primary-dark"
+                        className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 sm:mb-12 md:mb-16 text-primary dark:text-primary-dark px-2"
                         dangerouslySetInnerHTML={{
                             __html: 'The <s>devil</s> <span class="text-red dark:text-yellow">power</span> is in the details<br />',
                         }}
                     />
                     <div className="flex justify-center">
-                        <div className="grid md:inline-grid grid-cols-3 gap-x-8 md:gap-x-16 gap-y-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-x-16 gap-y-8 sm:gap-y-10">
                             {[
                                 {
                                     label: 'Processor',
@@ -620,10 +627,7 @@ export const ProductDeskHog = () => {
                                     details: '~70mm x 40mm x 15mm\nPerfectly-palm-sized',
                                 },
                             ].map((spec, index) => (
-                                <div
-                                    key={index}
-                                    className="grid-cols-2 md:grid-cols-1 flex flex-col md:flex-row items-start gap-4"
-                                >
+                                <div key={index} className="flex flex-col sm:flex-row items-start gap-4">
                                     <span className="text-primary/50 size-8 -mt-1 shrink-0">{spec.icon}</span>
                                     <div>
                                         <h3 className="text-base font-bold text-primary/80 dark:text-primary-dark/80 mb-1">
@@ -647,7 +651,7 @@ export const ProductDeskHog = () => {
             </section>
 
             {/* DeskHogCTA Section Wrapper */}
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-5 pb-10`}>
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'mx-auto'} relative px-4 sm:px-5 pb-10`}>
                 <section className="mb-0">
                     <DeskHogCTA />
                 </section>
