@@ -105,11 +105,13 @@ After you set this up and restart your app, PostHog starts autocapturing events 
   classes="rounded"
 />
 
-<Callout type="info" title="Setting up a reverse proxy ">
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox type="info" title="Setting up a reverse proxy ">
 
 We highly recommend setting up a reverse proxy to ensure requests aren't blocked by tracking blockers. You can find instructions for doing this in our [reverse proxy guide](/docs/advanced/proxy).
 
-</Callout>
+</CalloutBox>
 
 ## Capturing custom events
 
