@@ -110,6 +110,7 @@ const getIconUrl = (iconUrl: string) => {
 export default function CDP(): JSX.Element {
     const contentData = useContentData()
     const [filteredPipelines, setFilteredPipelines] = useState<any>(null)
+    const [searchQuery, setSearchQuery] = useState('')
     const data = useStaticQuery(graphql`
         query {
             allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
@@ -236,8 +237,21 @@ export default function CDP(): JSX.Element {
     // Sort pipelines alphabetically by name
     const sortedPipelines = [...pipelinesToDisplay].sort((a, b) => a.name.localeCompare(b.name))
 
+    // Apply search filter if searchQuery exists
+    const searchFilteredPipelines = searchQuery
+        ? sortedPipelines.filter((pipeline) => {
+              const searchLower = searchQuery.toLowerCase()
+              return (
+                  pipeline.name?.toLowerCase().includes(searchLower) ||
+                  pipeline.description?.toLowerCase().includes(searchLower) ||
+                  pipeline.category?.some((cat: string) => cat.toLowerCase().includes(searchLower)) ||
+                  pipeline.type?.toLowerCase().includes(searchLower)
+              )
+          })
+        : sortedPipelines
+
     // Create table rows
-    const rows = sortedPipelines.map((pipeline: any) => ({
+    const rows = searchFilteredPipelines.map((pipeline: any) => ({
         cells: [
             {
                 content: (
@@ -276,24 +290,6 @@ export default function CDP(): JSX.Element {
         ],
     }))
 
-    // Optional: Customize slides
-    // See /components/Products/Slides/README.md for more details
-    const slides = createSlideConfig({
-        // exclude: ['comparison-summary'],
-        // order: ['overview', 'pricing', 'features'],
-        templates: {
-            overview: 'columns', // Use the horizontal split layout
-        },
-    })
-
-    // Merge content data with product data
-
-    const mergedData = {
-        ...data,
-
-        ...contentData,
-    }
-
     return (
         <>
             <SEO
@@ -305,6 +301,8 @@ export default function CDP(): JSX.Element {
                 title="cdp"
                 type="mdx"
                 slug="/cdp"
+                searchFiltersRows={true}
+                onSearchFilter={(query) => setSearchQuery(query)}
                 availableFilters={[
                     {
                         label: 'type',

@@ -12,6 +12,7 @@ interface SearchBarProps {
     className?: string
     dataScheme?: string
     onSearch?: (search: string) => void
+    disableHighlight?: boolean
 }
 
 export const SearchBar: React.FC<SearchBarProps> = ({
@@ -21,6 +22,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     className,
     dataScheme = 'primary',
     onSearch,
+    disableHighlight = false,
 }) => {
     const { searchQuery, setSearchQuery } = useSearch()
     const [inputValue, setInputValue] = useState(searchQuery)
@@ -34,20 +36,25 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
     // Reset when closing
     useEffect(() => {
-        if (!contentRef?.current) return
         if (!visible) {
             setInputValue('')
-            if (duplicateContainerRef.current) {
+            onSearch?.('') // Clear the search filter when closing
+
+            // Only handle duplicate content if highlighting is enabled
+            if (!disableHighlight && contentRef?.current && duplicateContainerRef.current) {
                 duplicateContainerRef.current.remove()
                 contentRef.current.style.display = 'block'
             }
         } else {
-            createDuplicateForHighlighting()
+            // Only create duplicate for highlighting if enabled
+            if (!disableHighlight) {
+                createDuplicateForHighlighting()
+            }
         }
-    }, [visible])
+    }, [visible, onSearch, disableHighlight])
 
     const createDuplicateForHighlighting = () => {
-        if (!contentRef?.current) return
+        if (!contentRef?.current || disableHighlight) return
 
         if (duplicateContainerRef.current) {
             duplicateContainerRef.current.remove()
@@ -90,12 +97,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     const debouncedSetSearchQuery = React.useCallback(
         debounce((value) => {
             setSearchQuery(value)
-            if (markedRef.current && duplicateContainerRef.current) {
+            if (!disableHighlight && markedRef.current && duplicateContainerRef.current) {
                 markedRef.current.unmark()
                 markedRef.current.mark(value)
             }
         }, 200),
-        []
+        [disableHighlight]
     )
 
     useEffect(() => {
@@ -104,18 +111,18 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
     useEffect(() => {
         return () => {
-            if (duplicateContainerRef.current) {
+            if (!disableHighlight && duplicateContainerRef.current) {
                 duplicateContainerRef.current.remove()
             }
         }
-    }, [])
+    }, [disableHighlight])
 
     if (!visible) return null
 
     return (
         <div
             data-scheme={dataScheme}
-            className={`absolute w-64 p-1.5 border border-t-0 border-primary rounded-b z-10 flex items-center gap-1 ${className}`}
+            className={`absolute w-64 p-1.5 border border-t-0 border-primary rounded-b z-20 flex items-center gap-1 ${className}`}
         >
             <input
                 placeholder="Search this page..."
@@ -125,13 +132,26 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onKeyDown={handleKeyDown}
                 autoFocus
                 onBlur={() => {
-                    if (duplicateContainerRef.current) {
+                    if (!disableHighlight && duplicateContainerRef.current) {
                         duplicateContainerRef.current.remove()
+                        if (contentRef?.current) {
+                            contentRef.current.style.display = 'block'
+                        }
                     }
+                    onSearch?.('') // Clear search on blur
                     onClose()
                 }}
             />
-            <OSButton variant="ghost" size="xs" icon={<IconX />} onClick={onClose} className="rounded-full !p-1.5" />
+            <OSButton
+                variant="ghost"
+                size="xs"
+                icon={<IconX />}
+                onClick={() => {
+                    onSearch?.('') // Clear search when clicking X
+                    onClose()
+                }}
+                className="rounded-full !p-1.5"
+            />
         </div>
     )
 }
