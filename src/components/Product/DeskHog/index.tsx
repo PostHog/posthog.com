@@ -226,40 +226,83 @@ const DeskHogCTA = () => {
         'text-center text-primary dark:text-primary-dark opacity-75 dark:opacity-100 max-w-xl mx-auto mb-6'
 
     return (
-        <section className="relative overflow-hidden">
-            {/* Text Content Wrapper with PostHog card style */}
-            <div className="relative z-10 bg-white dark:bg-accent-dark p-8 rounded-lg mx-auto max-w-xl border border-light dark:border-dark shadow-xl">
-                <h2 className={headingClasses}>Ready to get building?</h2>
-                <h4 className={`${subheadingClasses} mb-0`}>Maybe it'll help if we make it look cuter</h4>
-                <div className="flex justify-center my-6">
-                    <CloudinaryImage
-                        src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_smiling_36bb2647ff.png"
-                        alt="DeskHog marketing image"
-                        width={350}
-                    />
+        <section className="relative overflow-hidden pt-8 md:pt-0 px-5 lg:px-0">
+            <h2 className={headingClasses}>Ready to get building?</h2>
+            <h3 className={subheadingClasses}>Maybe it'll help if we make it look cuter</h3>
+
+            <div className="md:grid grid-cols-2 gap-16 md:pt-12 pb-16 max-w-5xl mx-auto">
+                <div className="relative text-center md:text-right">
+                    <div className="mb-6">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_smiling_36bb2647ff.png"
+                            alt="DeskHog marketing image"
+                            className="max-w-[350px] mx-auto md:mx-0"
+                        />
+                    </div>
+
+                    {/* Fun animated element similar to CTA.js */}
+                    <div className="absolute top-4 md:-top-8 -right-8 md:-right-12">
+                        <div className="relative">
+                            <Bang className="w-[120px] md:w-[150px] animate-grow" />
+                            <p className="px-4 md:px-6 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-sm md:text-base rotate-6">
+                                <span className="text-xs">Not</span>
+                                endorsed <br />
+                                by Kim K
+                            </p>
+                        </div>
+                    </div>
                 </div>
-                <div className="flex justify-center gap-2">
-                    <CallToAction
-                        href="https://posthog.com/merch"
-                        type="primary"
-                        size="lg"
-                        className="w-full sm:w-auto"
-                        externalNoIcon
-                    >
-                        <>Buy a DeskHog kit</>
-                    </CallToAction>
-                    <CallToAction
-                        href="https://github.com/PostHog/DeskHog"
-                        type="secondary"
-                        size="lg"
-                        className="w-full sm:w-auto"
-                        externalNoIcon
-                    >
-                        <>
-                            3D print your own
-                            <IconExternal className="size-4 inline-block ml-1" />
-                        </>
-                    </CallToAction>
+
+                <div className="text-center md:text-left">
+                    <div className="mb-6">
+                        <span className="bg-green inline-flex items-center gap-1 px-2 py-1 rounded-sm">
+                            <span className="w-3 h-3">
+                                <IconWrench />
+                            </span>
+                            <span className="uppercase font-semibold text-xs text-white">DIY-friendly</span>
+                        </span>
+                        <p className="text-4xl font-bold m-0 md:mt-2">DeskHog Kit</p>
+                        <p className="opacity-50 m-0 mb-4 text-sm">
+                            Act now and get a palm-sized slice of developer joy.
+                        </p>
+                    </div>
+                    <ul className="p-0 m-0 space-y-5 text-left">
+                        <li className="list-none">
+                            <strong className="text-lg block">Starts at:</strong>
+                            <div className="flex items-baseline gap-1 justify-center md:justify-start">
+                                <s className="font-bold text-xl">$50</s>
+                                <span className="font-bold text-red text-xl uppercase">$35</span>
+                                <span className="text-xs opacity-50">
+                                    &gt;<span className="text-sm">Limited supply!</span>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <div className="py-6">
+                        <CallToAction
+                            href="https://posthog.com/merch"
+                            type="primary"
+                            size="absurd"
+                            width="64"
+                            className="animate-grow-sm"
+                            externalNoIcon
+                        >
+                            Get your DeskHog
+                        </CallToAction>
+                    </div>
+
+                    <div className="flex items-center gap-3 justify-center md:justify-start">
+                        <span className="bg-accent dark:bg-accent-dark rounded h-8 w-8 p-1">
+                            <IconHandwave className="opacity-75" />
+                        </span>
+                        <p className="text-sm text-primary/50 dark:text-primary-dark/50 leading-tight mb-0">
+                            <strong>Supplies are limited, but more are on the way!</strong>
+                            <br className="hidden sm:block" />
+                            When it's out of stock, join the waitlist or{' '}
+                            <a href="https://github.com/PostHog/DeskHog">3D print it</a>!
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
