@@ -994,7 +994,7 @@ export const ProductMax = () => {
                                     <CallToAction
                                         type="secondary"
                                         size="sm"
-                                        to="https://us.posthog.com/#panel=feature-previews%3Aadvanced-max-ai-features"
+                                        to="https://app.posthog.com/settings/user-feature-previews#advanced-max-ai-features"
                                     >
                                         Sign up to the waitlist
                                     </CallToAction>
