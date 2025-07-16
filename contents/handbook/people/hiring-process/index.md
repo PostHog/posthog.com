@@ -233,7 +233,8 @@ In advance of the SuperDay, we will need to do some additional prep to ensure th
 *   We also send the candidate a follow up email with details of the day, and ask them for their day rate and bank details right away so the candidate can fully prepared what to expect and who they will meet. There is a template for this email in Ashby, depending on the role - this will probably need customising.
 *   When scheduling in Ashby, please make sure to turn on the option to create a private Slack channel for the candidate and all relevant people - this will be where they can chat to us over the course of the day if they have any questions etc. Invite the candidate as a single channel guest. We might need to add the candidate to one of our systems depending on the role, e.g. Ashby for a recruiter SuperDay, but on the whole this should be minimized.
 *   The last step will be to schedule the appropriate engineering task to go to the candidate's GitHub handle the day of their SuperDay. Sign into your [Vercel app](https://posthog-superdays.vercel.app/superdays) and click on Manage SuperDays and fill out the form for the candidate's info. Please be aware the task is case sensitive. 
-*           * For the Clickhouse Engineer task, please follow this [task](https://github.com/PostHog/clickhouse-superday) and click on the "Code" button and hit download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone. 
+     - For the Clickhouse Engineer task, please follow this [task](https://github.com/PostHog/clickhouse-superday) and click on the "Code" button and hit download button and upload the zip file into the candidate's slack channel to go out the morning of the SuperDay by 8:00 am in the candidate's timezone.
+     - If there are any issues with scheduling the superday task, there's a way to manually send an invite to the candidate's GitHub manually by following [these steps](https://github.com/Posthog-Interviews/superday-interview-test?tab=readme-ov-file#using-github-actions-manual) in GitHub
 *   (One day before the SuperDay) For non-technical roles, invite the candidate to a kickoff meeting with the hiring manager at the start of the day and send the candidate the task - aim to send this before the kick-off session so if the candidate has any questions they are able to go through them during the kick-off session. We encourage the candidate to ask questions throughout their SuperDay, but sometimes it is nice to have any questions answered in advance so they can kick off their task appropriately.
 *   It is important for product engineer candidates to be prepped for their check-in call to do a deep dive of their progress so far with their SuperDay buddy while other non-technical roles in Sales, Onboarding, and Customer Success, the candidates will be running a demo mid-point of their SuperDay. 
 *   (On the SuperDay) Give the candidate a warm welcome! Make it clear that the team is here to answer any questions, and they should feel free to reach out any time! Otherwise don't feel like we need to check in with them - let them get on with the task and trust that they will message us.
@@ -253,6 +254,23 @@ If a decision is made to hire, the People & Ops team will open an onboarding iss
 - Share the output of their SuperDay (if applicable)
 
 If we don't make an offer, it's important to clearly outline to the candidate why that decision was made. Highlight what went well, but also mention specific points of improvement. Offer to schedule a call if they would like to discuss further. Make sure to leave the door open for the future so they can apply again in 12-18 months time as circumstances and people change.
+
+### How to create an offer 
+- Go into the [shared drives](https://drive.google.com/drive/u/0/shared-drives), click on [Legal Docs](https://drive.google.com/drive/u/0/folders/0AHE6s4htUnT2Uk9PVA)
+- Click on the [Teams folder](https://drive.google.com/drive/u/0/folders/1YliTxLAOTB9nVAxrZf4CIoSd6Sb4tggO)
+- Click on Offer [Letters folder](https://drive.google.com/drive/u/0/folders/1q82IDhnDIMRGaXfbzKuhXMvOkwj70yu_)
+- Then use the correct offer letter template  and then click on file within the doc and “make a copy”, save the copy under the first and last name of the new hire
+- Fill in the missing details in the copy offer letter under the new hire’s name- which would be the following info: 
+   - Name
+   - Title and team
+   - Total compensation broken down by base salary and total equity worth today - you will get these numbers by using the [TEMPLATE - compensation Jan 2025 version Equity calculator](https://docs.google.com/spreadsheets/d/1MCNBgG19GBylk1x2zQ8Sq0K2F3Nyygp-5iGseN_TScU/edit?gid=0#gid=0) All format must be in USD for this sheet.
+   - Base salary - find this in the [compensation calculator](https://posthog.com/handbook/people/compensation) section of the handbook
+   - Equity missing field in the offer letter - make a copy of the [“compensation sheet”](https://docs.google.com/spreadsheets/d/1MCNBgG19GBylk1x2zQ8Sq0K2F3Nyygp-5iGseN_TScU/edit?gid=0#gid=0) hyperlink section and name the sheet under the candidate’s first and last name
+   - Copy over the information from the [TEMPLATE  - compensation Jan 2025 version Equity calculator](https://docs.google.com/spreadsheets/d/1fjEu3Zjd8cOK-p2j0-75-xpoaGHuSXa7thuhhSXXy2c/edit?gid=0#gid=0) to the [compensation sheet](https://docs.google.com/spreadsheets/d/1MCNBgG19GBylk1x2zQ8Sq0K2F3Nyygp-5iGseN_TScU/edit?gid=0#gid=0) (the compensation sheet will go into the offer letter to the candidate)
+   - Send the draft offer into the private-people-and-hiring channel and tagged the appropriate exec to review and approve:
+      - Engineering - Tim and Raquel
+      - Product - Tim, James, and Raquel
+      - GTM - Charles and James
 
 ### Making the offer
 
