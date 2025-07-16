@@ -59,9 +59,9 @@ const Discounts = () => (
                 <IconCode className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Small OSS projects without corporate backing</strong>
                 <p className="text-[15px] mb-2">
-                    If you've got an open source project that lacks corporate backing and has less than $200k annual 
-                    revenues, you can get up to $50k credits per year to use PostHog for free, subject to approval. 
-                    Get in touch through the app after signing up to see if you qualify.
+                    If you have an open source project without corporate backing that has less than $200k annual 
+                    revenue, you can get up to $50k credits per year to use PostHog for free, subject to approval. 
+                    Get in touch through the app after signing up to see if you qualify!
                 </p>
             </li>
         </ul>
