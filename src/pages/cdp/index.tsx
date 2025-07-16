@@ -298,7 +298,7 @@ export default function CDP(): JSX.Element {
                 image={`images/og/cdp.jpg`}
             />
             <Editor
-                title="cdp"
+                title="pipelines"
                 type="mdx"
                 slug="/cdp"
                 searchFiltersRows={true}
@@ -342,7 +342,7 @@ export default function CDP(): JSX.Element {
                 onFilterChange={(data) => setFilteredPipelines(data)}
             >
                 <ScrollArea>
-                    <h2 className="text-2xl font-bold mb-4">
+                    <h2 className="text-2xl font-bold my-4">
                         Ingest, transform, and send data between hundreds of tools
                     </h2>
                     <p>

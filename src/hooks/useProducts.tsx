@@ -34,42 +34,24 @@ export default function useProducts() {
     } = useStaticQuery(allProductsData)
 
     const [products, setProducts] = useState(
-        initialProducts
-            .filter((product, index) => {
-                // Only show products that have direct billing data OR have a billedWith property
-                const hasBillingData = billingProducts.find(
-                    (billingProduct: any) => billingProduct.type === product.handle
-                )
-                const hasBilledWith = product.billedWith
-
-                // Avoid duplicate Experiments entries - keep only the first one
-                if (product.name === 'Experiments' && hasBilledWith) {
-                    const firstExperimentsIndex = initialProducts.findIndex(
-                        (p) => p.name === 'Experiments' && p.billedWith
-                    )
-                    return index === firstExperimentsIndex
-                }
-
-                return hasBillingData || hasBilledWith
-            })
-            .map((product) => {
-                const billingData = billingProducts.find(
-                    (billingProduct: any) => billingProduct.type === product.handle
-                )
-                const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
-                const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
-                const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
-                const unit = billingData?.unit
-                return {
-                    ...product,
-                    cost: 0,
-                    billingData,
-                    costByTier: paidPlan?.tiers ? calculatePrice(product.volume || 0, paidPlan.tiers).costByTier : [],
-                    freeLimit,
-                    startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
-                    unit,
-                }
-            })
+        initialProducts.map((product) => {
+            const billingData = billingProducts.find((billingProduct: any) => billingProduct.type === product.handle)
+            const paidPlan = billingData?.plans.find((plan: any) => plan.tiers)
+            const startsAt = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd !== '0')?.unit_amount_usd
+            const freeLimit = paidPlan?.tiers?.find((tier: any) => tier.unit_amount_usd === '0')?.up_to
+            const unit = billingData?.unit
+            return {
+                ...product,
+                cost: 0,
+                billingData,
+                costByTier: paidPlan?.tiers
+                    ? calculatePrice((product as any).volume || 0, paidPlan.tiers).costByTier
+                    : [],
+                freeLimit,
+                startsAt: startsAt && startsAt.length <= 3 ? Number(startsAt).toFixed(2) : startsAt,
+                unit,
+            }
+        })
     )
 
     const monthlyTotal = useMemo(() => products.reduce((acc, product) => acc + product.cost, 0), [products])
@@ -77,7 +59,7 @@ export default function useProducts() {
     const setProduct = (handle: string, data: any) => {
         setProducts((products) =>
             products.map((product) => {
-                if (product.handle === handle && !product.billedWith) {
+                if (product.handle === handle && !(product as any).billedWith) {
                     return {
                         ...product,
                         ...data,
