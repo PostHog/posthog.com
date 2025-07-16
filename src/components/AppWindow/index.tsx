@@ -76,6 +76,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         expandWindow,
         siteSettings,
         openNewChat,
+        isMobile,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -639,7 +640,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             )}
                             <div
                                 ref={contentRef}
-                                style={{ visibility: item.animating ? 'hidden' : 'visible' }}
+                                style={{ visibility: isMobile || !item.animating ? 'visible' : 'hidden' }}
                                 className={` size-full flex-grow overflow-hidden`}
                             >
                                 <Router {...item.props}>{item.element}</Router>
