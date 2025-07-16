@@ -185,6 +185,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [hasInitialized, setHasInitialized] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
     const { appWindow } = useWindow()
+    const { isMobile } = useApp()
 
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const products = pageContext.productsForCurrentPage
@@ -362,7 +363,10 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     )
 
     return (
-        <div className="@container w-full h-full flex flex-col min-h-1">
+        <div
+            style={{ visibility: isMobile || !appWindow?.animating ? 'visible' : 'hidden' }}
+            className="@container w-full h-full flex flex-col min-h-1"
+        >
             <HeaderBar
                 showBack
                 showForward

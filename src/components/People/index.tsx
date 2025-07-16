@@ -27,6 +27,7 @@ import ZoomHover from 'components/ZoomHover'
 import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
 import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
 
 export const TeamMember = (props: any) => {
     const {
@@ -268,6 +269,7 @@ export const TeamMember = (props: any) => {
 }
 
 export default function People() {
+    const { isMobile } = useApp()
     const { appWindow } = useWindow()
     const {
         team: { teamMembers },
@@ -325,7 +327,11 @@ export default function People() {
             title="People"
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
         >
-            <div data-scheme="primary" className="bg-primary h-full">
+            <div
+                style={{ visibility: isMobile || !appWindow?.animating ? 'visible' : 'hidden' }}
+                data-scheme="primary"
+                className="bg-primary h-full"
+            >
                 <SEO title="Team - PostHog" />
                 <ScrollArea className="h-full">
                     <div className="columns-2 gap-4 mb-4">

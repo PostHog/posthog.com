@@ -638,11 +638,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                     </div>
                                 </div>
                             )}
-                            <div
-                                ref={contentRef}
-                                style={{ visibility: isMobile || !item.animating ? 'visible' : 'hidden' }}
-                                className={` size-full flex-grow overflow-hidden`}
-                            >
+                            <div ref={contentRef} className={`size-full flex-grow overflow-hidden`}>
                                 <Router {...item.props}>{item.element}</Router>
                             </div>
                             {!item.fixedSize && !item.minimal && (
