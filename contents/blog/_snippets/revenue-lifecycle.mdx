@@ -1,0 +1,128 @@
+```sql
+WITH date_range AS (
+    SELECT 
+        toStartOfMonth(now() - INTERVAL number MONTH) as month
+    FROM numbers(35)  -- 33 months back + 2 forward
+    WHERE month >= toStartOfMonth(now() - INTERVAL 33 MONTH)
+        AND month <= toStartOfMonth(now() + INTERVAL 2 MONTH)
+),
+all_customers AS (
+    SELECT DISTINCT id as customer_id
+    FROM iwa_summary_customer_month
+    WHERE month &lt; toStartOfMonth(now() + INTERVAL 2 MONTH) 
+    AND month &gt; toStartOfMonth(now() - INTERVAL 33 MONTH)
+),
+customer_month_grid AS (
+    SELECT 
+        ac.customer_id,
+        dr.month
+    FROM all_customers ac
+    CROSS JOIN date_range dr
+),
+customers_per_month AS (
+    SELECT 
+        cmg.customer_id,
+        cmg.month,
+        COALESCE(sum(iscm.total_mrr), 0) as mrr
+    FROM customer_month_grid cmg
+    LEFT JOIN iwa_summary_customer_month iscm 
+        ON cmg.customer_id = iscm.id 
+        AND cmg.month = iscm.month
+    WHERE cmg.month &lt; toStartOfMonth(now() + INTERVAL 2 MONTH) 
+    AND cmg.month &gt; toStartOfMonth(now() - INTERVAL 33 MONTH)
+    GROUP BY cmg.customer_id, cmg.month
+), 
+churn_calc AS (
+    SELECT
+        customer_id,
+        month AS churn_accounting_month,
+        
+        mrr AS curr_mrr,
+        
+        lagInFrame(mrr, 1, 0) OVER (
+        PARTITION BY customer_id
+        ORDER BY month
+        ) AS prev_mrr
+    FROM customers_per_month
+),
+churned AS (
+    SELECT
+        churn_accounting_month,
+        sum(prev_mrr - curr_mrr) AS churned_mrr,
+        count(*) as churned_customers
+    FROM churn_calc
+    WHERE prev_mrr &gt; 0
+        AND curr_mrr <= 0
+    GROUP BY 1
+),
+customer_status AS (
+    SELECT 
+        customer_id,
+        month,
+        mrr,
+        CASE WHEN MIN(month) OVER (PARTITION BY customer_id) = month THEN TRUE ELSE FALSE END as first_month_active,
+        CASE WHEN lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) &gt; 0 THEN TRUE ELSE FALSE END as active_in_previous_month,
+        lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) as prev_month_mrr
+    FROM customers_per_month
+),
+lifecycle AS (
+    SELECT
+        month,
+        CASE 
+            WHEN NOT active_in_previous_month THEN 'NEW'
+            WHEN active_in_previous_month AND prev_month_mrr = mrr THEN 'FLAT'
+            WHEN active_in_previous_month AND prev_month_mrr &gt; mrr THEN 'SHRINKING'
+            WHEN active_in_previous_month AND prev_month_mrr &lt; mrr THEN 'GROWING'
+            ELSE 'UNCATEGORIZED'
+        END AS growth_lifecycle_stage, 
+        mrr, 
+        prev_month_mrr
+    FROM customer_status
+    WHERE mrr &gt; 0
+), 
+growth_base AS (
+    SELECT 
+        month, 
+        SUM(CASE WHEN growth_lifecycle_stage = 'NEW' THEN mrr ELSE 0 END) as new, 
+        SUM(CASE 
+            WHEN growth_lifecycle_stage = 'FLAT' THEN mrr
+            WHEN growth_lifecycle_stage IN ('GROWING', 'SHRINKING') THEN prev_month_mrr 
+            ELSE 0 END) as retained,
+        SUM(CASE WHEN growth_lifecycle_stage = 'GROWING' THEN mrr - prev_month_mrr ELSE 0 END) as grown_from_existing,
+        SUM(CASE WHEN growth_lifecycle_stage = 'SHRINKING' THEN mrr - prev_month_mrr ELSE 0 END) as shrunk_from_existing,
+        SUM(CASE WHEN growth_lifecycle_stage = 'UNCATEGORIZED' THEN mrr ELSE 0 END) as uncategorized,
+        -- Calculate the base MRR that was "at risk" (from continuing customers)
+        SUM(prev_month_mrr) as at_risk_mrr
+    FROM lifecycle    
+    GROUP BY month
+)
+SELECT 
+    growth_base.month as month, 
+    growth_base.new,
+    growth_base.retained,
+    growth_base.grown_from_existing,
+    growth_base.shrunk_from_existing, 
+    growth_base.uncategorized, 
+    -churned.churned_mrr as churned,
+    churned.churned_customers,
+        -- Add period start and end MRR
+    lagInFrame(
+        growth_base.new +
+        growth_base.retained + 
+        growth_base.grown_from_existing + 
+        growth_base.shrunk_from_existing +
+        growth_base.uncategorized
+    ) OVER (ORDER BY growth_base.month) as period_start_mrr,
+    
+    -- Period end MRR = current month's total
+    growth_base.new +
+    growth_base.retained + 
+    growth_base.grown_from_existing + 
+    growth_base.shrunk_from_existing +
+    growth_base.uncategorized as period_end_mrr,
+FROM growth_base
+LEFT JOIN churned
+ON growth_base.month = churned.churn_accounting_month
+WHERE growth_base.month &lt; today() + interval 1 month
+ORDER BY month ASC
+```

@@ -1,0 +1,27 @@
+```sql
+WITH previous_startup_customers AS (
+    SELECT 
+        sc.id AS customer_id,
+        sc.name as name,
+        sc.metadata.startup_plan_end_at
+    FROM stripe_customer AS sc
+    WHERE 
+        sc.metadata.is_previous_startup_plan_customer = 'true'
+)
+SELECT 
+    psc.customer_id,
+    psc.name,
+    concat('$', formatReadableQuantity(SUM(si.amount_paid / 100))) as total_amount_paid,
+    concat('$', formatReadableQuantity(SUM(si.total / 100))) as total_invoice_amount,
+    concat('$', formatReadableQuantity(SUM((si.starting_balance - si.ending_balance) / 100)*-1)) as total_credits,
+    COUNT(si.id) AS invoice_count
+FROM stripe_invoice AS si
+JOIN previous_startup_customers AS psc ON psc.customer_id = si.customer_id
+WHERE 
+    si.total &gt; 0
+    AND 
+    si.status &lt;&gt; 'draft'
+group by psc.customer_id, psc.name
+having SUM(si.amount_paid) &gt; 0
+order by SUM(si.amount_paid) desc    
+```

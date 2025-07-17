@@ -1,0 +1,71 @@
+```sql
+WITH customers_per_month AS (
+    SELECT 
+        customer_id,
+        dateTrunc('month', toDateTime(period_end, 'UTC')) as month,
+        JSONExtractString(data, 'customer_email') AS customer,
+        sum(JSONExtractFloat(mrr_per_product, &lbrace;variables.product&rbrace;)) AS mrr
+    FROM postgres_invoice_with_annual_view
+    WHERE dateTrunc('month', toDateTime(period_end, 'UTC')) IN ('2025-04-01', '2025-05-01', '2025-06-01')
+        AND JSONExtractFloat(mrr_per_product, &lbrace;variables.product&rbrace;) &gt; 0
+    GROUP BY customer_id, customer, month
+),
+
+april_customers AS (
+    SELECT 
+        customer_id,
+        customer,
+        mrr as april_mrr
+    FROM customers_per_month
+    WHERE month = '2025-04-01'
+),
+
+may_customers AS (
+    SELECT 
+        customer_id,
+        customer,
+        mrr as may_mrr
+    FROM customers_per_month
+    WHERE month = '2025-05-01'
+),
+
+june_customers AS (
+    SELECT 
+        customer_id,
+        customer,
+        mrr as june_mrr
+    FROM customers_per_month
+    WHERE month = '2025-06-01'
+),
+
+exception_events AS (
+    SELECT 
+        customer_id,  -- Assuming this field exists to join with invoice data
+        sum(toInt(org_usage_summary.exceptions)) as exception_count,
+        count(DISTINCT date) as days_with_exceptions_june
+    FROM postgres.prod.billing_usagereport
+    WHERE org_usage_summary.exceptions IS NOT NULL
+        AND toInt(org_usage_summary.exceptions) &gt; 0  -- Only count days with actual exceptions
+        AND date >= '2025-06-01'
+        AND date &lt; '2025-07-01'  -- June only
+    GROUP BY customer_id
+)
+
+SELECT 
+    m.customer as _customer,
+    m.customer_id,
+    round(COALESCE(a.april_mrr, 0), 0) as april_mrr,
+    round(m.may_mrr, 0) as may_mrr,
+    round(COALESCE(j.june_mrr, 0), 0) as june_mrr,
+    round(m.may_mrr - COALESCE(j.june_mrr, 0), 0) as mrr_change,
+    COALESCE(e.exception_count, 0) as exception_events,
+    COALESCE(e.days_with_exceptions_june, 0) as days_with_exceptions_june,
+    'CHURNED IN JUNE' as churn_status
+FROM may_customers m
+LEFT JOIN april_customers a ON m.customer_id = a.customer_id
+LEFT JOIN june_customers j ON m.customer_id = j.customer_id
+LEFT JOIN exception_events e ON m.customer_id = e.customer_id
+WHERE j.customer_id IS NULL  -- Had May MRR but no June MRR = June churn
+    AND m.customer_id IS NOT NULL
+ORDER BY m.may_mrr DESC, days_with_exceptions_june DESC, exception_events DESC
+```

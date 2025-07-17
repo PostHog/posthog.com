@@ -1,0 +1,71 @@
+```sql
+with first_escalated as(
+    select 
+        ticket_id,
+        min(created_at) as timestamp
+    from zendesk_ticket_events
+    where child_events like '%"added_tags":["escalated"%'
+    group by ticket_id
+),
+
+escalated_breaches_in_time_range as(
+    select
+        ztme.ticket_id as ticket_id
+
+    from zendesk_ticket_metric_events ztme
+        join first_escalated fe on fe.ticket_id = ztme.ticket_id
+    where 
+        ztme.type = 'breach'
+        and ztme.metric in ('reply_time', 'pausable_update_time')
+        and ztme.time >= fe.timestamp
+        and ztme.time >= &lbrace;filters.dateRange.from&rbrace;
+        and ztme.time <= &lbrace;filters.dateRange.to&rbrace;
+    group by ztme.ticket_id
+),
+
+escalated_fulfill_events_in_time_range as (
+    select
+        ztme.ticket_id as ticket_id
+
+    from zendesk_ticket_metric_events ztme
+        join first_escalated fe on fe.ticket_id = ztme.ticket_id
+    where 
+        ztme.type = 'fulfill'
+        and ztme.metric in ('reply_time', 'pausable_update_time')
+        and ztme.time >= fe.timestamp
+        and ztme.time >= &lbrace;filters.dateRange.from&rbrace;
+        and ztme.time <= &lbrace;filters.dateRange.to&rbrace;
+    group by ztme.ticket_id
+),
+
+breaches_by_group as (
+    select 
+        count(distinct(zt.id)) as num_breaches,
+        zg.name as group_name
+    from zendesk_tickets zt
+        join zendesk_groups zg on zg.id = zt.group_id
+    where zt.id in (select ticket_id from escalated_breaches_in_time_range)
+    group by zg.name
+    order by num_breaches desc
+),
+
+fulfills_by_group as (
+    select 
+        count(distinct(zt.id)) as num_fulfills,
+        zg.name as group_name
+    from zendesk_tickets zt
+        join zendesk_groups zg on zg.id = zt.group_id
+    where zt.id in (select ticket_id from escalated_fulfill_events_in_time_range)
+    group by zg.name
+    order by num_fulfills desc
+),
+
+select
+    zg.name,
+    IF(fbg.num_fulfills=0, 0, (fbg.num_fulfills-bbg.num_breaches)/fbg.num_fulfills) as sla_attainment
+from zendesk_groups zg
+    left outer join breaches_by_group bbg on bbg.group_name = zg.name
+    left outer join fulfills_by_group fbg on fbg.group_name = zg.name
+where (bbg.num_breaches>0 or fbg.num_fulfills>0)
+order by sla_attainment desc
+```

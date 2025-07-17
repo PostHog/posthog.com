@@ -1,0 +1,75 @@
+```sql
+WITH monthly_active_orgs AS (
+    SELECT
+        dateTrunc('month', toDate(date)) AS month,
+        customer_id,
+        JSONExtractString(report, 'organization_name') AS organization_name,
+        COALESCE(JSONExtractInt(org_usage_summary, 'survey_responses'), 0) AS monthly_survey_responses
+    FROM
+        postgres_billing_usagereport
+    WHERE 
+        date &lt; dateTrunc('month', now())
+        AND date &gt; dateTrunc('month', now()) - INTERVAL 18 MONTH
+    GROUP BY 1, 2, 3, 4
+),
+monthly_stats AS (
+    SELECT
+        month,
+        COUNT(*) AS total_active_orgs,
+        COUNT(CASE WHEN monthly_survey_responses &gt; 0 THEN 1 ELSE NULL END) AS orgs_with_responses,
+        ROUND(COUNT(CASE WHEN monthly_survey_responses &gt; 0 THEN 1 ELSE NULL END) * 100.0 / COUNT(*), 2) AS pct_orgs_with_responses
+    FROM monthly_active_orgs
+    GROUP BY month
+),
+orgs_with_responses AS (
+    SELECT
+        month,
+        customer_id,
+        organization_name,
+        monthly_survey_responses
+    FROM monthly_active_orgs
+    WHERE monthly_survey_responses &gt; 0
+),
+max_org_per_month AS (
+    SELECT 
+        month,
+        argMax(organization_name, monthly_survey_responses) AS max_org_name
+    FROM orgs_with_responses
+    GROUP BY month
+),
+monthly_stats_with_growth AS (
+    SELECT
+        ms.month,
+        ms.total_active_orgs,
+        ms.orgs_with_responses,
+        ms.pct_orgs_with_responses,
+        prev_ms.orgs_with_responses AS prev_month_orgs_with_responses,
+        CASE 
+            WHEN prev_ms.orgs_with_responses &gt; 0 
+            THEN ROUND(((toFloat(ms.orgs_with_responses) / toFloat(prev_ms.orgs_with_responses)) - 1) * 100, 2)
+            ELSE NULL 
+        END AS month_over_month_growth_pct
+    FROM monthly_stats ms
+    LEFT JOIN monthly_stats prev_ms ON prev_ms.month = ms.month - INTERVAL 1 MONTH
+)
+
+SELECT
+    ms.month,
+    ms.total_active_orgs,
+    ms.orgs_with_responses,
+    ms.prev_month_orgs_with_responses,
+    ms.month_over_month_growth_pct,
+    ms.pct_orgs_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN ROUND(AVG(owr.monthly_survey_responses), 0) ELSE NULL END AS avg_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN quantile(0.5)(owr.monthly_survey_responses) ELSE NULL END AS median_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN quantile(0.75)(owr.monthly_survey_responses) ELSE NULL END AS p75_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN ROUND(quantile(0.95)(owr.monthly_survey_responses), 0) ELSE NULL END AS p95_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN max(owr.monthly_survey_responses) ELSE NULL END AS max_responses_per_org,
+    mo.max_org_name AS max_org_name,
+    COALESCE(SUM(owr.monthly_survey_responses), 0) AS total_monthly_responses
+FROM monthly_stats_with_growth ms
+LEFT JOIN orgs_with_responses owr ON ms.month = owr.month
+LEFT JOIN max_org_per_month mo ON ms.month = mo.month
+GROUP BY ms.month, ms.total_active_orgs, ms.orgs_with_responses, ms.prev_month_orgs_with_responses, ms.month_over_month_growth_pct, ms.pct_orgs_with_responses, mo.max_org_name
+ORDER BY ms.month
+```

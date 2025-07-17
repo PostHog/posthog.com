@@ -1,0 +1,58 @@
+```sql
+with first_escalated as(
+    select 
+        ticket_id,
+        min(created_at) as timestamp
+    from zendesk_ticket_events
+    where child_events like '%escalated%'
+    group by ticket_id
+),
+
+before_escalated_breaches_in_time_range as(
+    select
+        ztme.ticket_id as ticket_id,
+    from zendesk_ticket_metric_events ztme
+    join first_escalated fe on fe.ticket_id = ztme.ticket_id
+    where 
+        ztme.type = 'breach'
+        and ztme.metric in ('reply_time', 'pausable_update_time')
+        and ztme.time <= fe.timestamp
+        and ztme.time >= &lbrace;filters.dateRange.from&rbrace;
+        and ztme.time <= &lbrace;filters.dateRange.to&rbrace;
+    group by ztme.ticket_id
+),
+
+never_escalated as(
+    select 
+        id as ticket_id,
+    from zendesk_tickets
+    where tags not like '%escalated%'
+    group by id
+),
+
+never_escalated_breaches_in_time_range as(
+    select
+        ztme.ticket_id as ticket_id,
+    from zendesk_ticket_metric_events ztme
+    join never_escalated ne on ne.ticket_id = ztme.ticket_id
+    where 
+        ztme.type = 'breach'
+        and ztme.metric in ('reply_time', 'pausable_update_time')
+        and ztme.time >= &lbrace;filters.dateRange.from&rbrace;
+        and ztme.time <= &lbrace;filters.dateRange.to&rbrace;
+    group by ztme.ticket_id
+),
+
+select 
+    count(distinct(zt.id)) as num_breaches,
+    count(distinct(IF(zt.id in (select ticket_id from never_escalated_breaches_in_time_range), zt.id, null)))as never_escalated_breaches,
+    count(distinct(IF(zt.id in (select ticket_id from before_escalated_breaches_in_time_range), zt.id, null))) as before_escalated_breaches,
+    zg.name
+from zendesk_tickets zt
+join zendesk_groups zg on zg.id = zt.group_id
+where 
+    zt.id in (select ticket_id from before_escalated_breaches_in_time_range)
+    or zt.id in (select ticket_id from never_escalated_breaches_in_time_range)
+group by zg.name
+order by num_breaches desc
+```

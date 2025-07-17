@@ -1,0 +1,41 @@
+```sql
+WITH daily_exceptions AS (
+    SELECT 
+        JSONExtractString(properties, 'organization_id') as org_id,
+        toStartOfMonth(timestamp) as month,
+        toDate(timestamp) as report_date,
+        JSONExtractInt(properties, 'exceptions_captured_in_period') as exceptions
+    FROM events 
+    WHERE event = 'organization usage report'
+        AND JSONExtractInt(properties, 'exceptions_captured_in_period') &gt; 0
+        AND &lbrace;filters&rbrace;  -- Same filters as daily customers query
+        AND timestamp >= toDateTime('2025-03-01')
+),
+
+monthly_activity AS (
+    SELECT 
+        org_id,
+        month,
+        count(DISTINCT report_date) as days_with_exceptions,
+        -- Calculate weeks in the month to get proper average
+        dateDiff('day', min(report_date), max(report_date)) / 7.0 as weeks_active,
+        count(DISTINCT report_date) / GREATEST(dateDiff('day', min(report_date), max(report_date)) / 7.0, 1) as avg_days_per_week
+    FROM daily_exceptions
+    GROUP BY org_id, month
+),
+
+regular_users AS (
+    SELECT 
+        org_id,
+        month
+    FROM monthly_activity
+    WHERE avg_days_per_week &gt; 4
+)
+
+SELECT 
+    month,
+    count(DISTINCT org_id) as orgs_regularly_capturing_exceptions
+FROM regular_users
+GROUP BY month
+ORDER BY month
+```
