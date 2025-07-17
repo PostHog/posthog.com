@@ -93,7 +93,7 @@ For customers contracting for $100k or more we can accept quarterly payments wit
 
 ### Credit for case studies
 
-We don't want to offer additional discount in exchange for a case study however we can offer up to 5% additional credit in exchange for a _published_ case study on PostHog.com.  Simon or Charles need to approve this before offering it to the customer, as we want to be selective about who we include here.
+We don't offer additional discounts in exchange for a case study, but we can offer up to 5% additional credit in exchange for a _published_ case study on PostHog.com (ie. the credit is only applied after the case study goes live, not up front). Simon or Charles need to approve this before you offer it to the customer - most case studies are not going to be useful for us. 
 
 This should be added as a special term into the order form as follows:
 
