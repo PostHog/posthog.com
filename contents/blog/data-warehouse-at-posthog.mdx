@@ -538,7 +538,7 @@ JOIN previous_startup_customers AS psc ON psc.customer_id = si.customer_id
 WHERE 
     si.total > 0
     AND 
-    si.status <> 'draft'
+    si.status &lt;&gt; 'draft'
 group by psc.customer_id, psc.name
 having SUM(si.amount_paid) > 0
 order by SUM(si.amount_paid) desc    
