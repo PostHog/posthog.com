@@ -3489,6 +3489,85 @@ export const docsMenu = {
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Web',
+                            url: '/docs/error-tracking/installation/web',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/error-tracking/installation/nextjs',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/installation/python',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/error-tracking/installation/node',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/error-tracking/installation/react',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/error-tracking/installation/angular',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/error-tracking/installation/nuxt',
+                        },
+                        {
+                            name: 'SvelteKit',
+                            url: '/docs/error-tracking/installation/svelte',
+                        },
+                        {
+                            name: 'Hono',
+                            url: '/docs/error-tracking/installation/hono',
+                        },
+                        {
+                            name: 'Sentry',
+                            url: '/docs/error-tracking/installation/sentry',
+                        },
+                        {
+                            name: 'Manual/API',
+                            url: '/docs/error-tracking/installation/manual',
+                        },
+                    ],
+                },
+                {
+                    name: 'Upload source maps',
+                    url: '/docs/error-tracking/upload-source-maps',
+                    icon: 'IconCode',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Next.js',
+                            url: '/docs/error-tracking/upload-source-maps/nextjs',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/error-tracking/upload-source-maps/nuxt',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/error-tracking/upload-source-maps/react',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/error-tracking/upload-source-maps/angular',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/error-tracking/upload-source-maps/web',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/error-tracking/upload-source-maps/node',
+                        },
+                    ],
                 },
                 {
                     name: 'Stack traces',
