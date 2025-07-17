@@ -87,7 +87,7 @@ WITH customers_per_month AS (
         sum(JSONExtractFloat(mrr_per_product, {variables.product})) AS mrr
     FROM postgres_invoice_with_annual_view
     WHERE dateTrunc('month', toDateTime(period_end, 'UTC')) IN ('2025-04-01', '2025-05-01', '2025-06-01')
-        AND JSONExtractFloat(mrr_per_product, {variables.product}) > 0
+        AND JSONExtractFloat(mrr_per_product, {variables.product}) &gt; 0
     GROUP BY customer_id, customer, month
 ),
 
@@ -125,7 +125,7 @@ exception_events AS (
         count(DISTINCT date) as days_with_exceptions_june
     FROM postgres.prod.billing_usagereport
     WHERE org_usage_summary.exceptions IS NOT NULL
-        AND toInt(org_usage_summary.exceptions) > 0  -- Only count days with actual exceptions
+        AND toInt(org_usage_summary.exceptions) &gt; 0  -- Only count days with actual exceptions
         AND date >= '2025-06-01'
         AND date &lt; '2025-07-01'  -- June only
     GROUP BY customer_id
@@ -164,7 +164,7 @@ WITH daily_exceptions AS (
         JSONExtractInt(properties, 'exceptions_captured_in_period') as exceptions
     FROM events 
     WHERE event = 'organization usage report'
-        AND JSONExtractInt(properties, 'exceptions_captured_in_period') > 0
+        AND JSONExtractInt(properties, 'exceptions_captured_in_period') &gt; 0
         AND {filters}  -- Same filters as daily customers query
         AND timestamp >= toDateTime('2025-03-01')
 ),
@@ -186,7 +186,7 @@ regular_users AS (
         org_id,
         month
     FROM monthly_activity
-    WHERE avg_days_per_week > 4
+    WHERE avg_days_per_week &gt; 4
 )
 
 SELECT 
@@ -213,15 +213,15 @@ WITH monthly_active_orgs AS (
         postgres_billing_usagereport
     WHERE 
         date &lt; dateTrunc('month', now())
-        AND date > dateTrunc('month', now()) - INTERVAL 18 MONTH
+        AND date &gt; dateTrunc('month', now()) - INTERVAL 18 MONTH
     GROUP BY 1, 2, 3, 4
 ),
 monthly_stats AS (
     SELECT
         month,
         COUNT(*) AS total_active_orgs,
-        COUNT(CASE WHEN monthly_survey_responses > 0 THEN 1 ELSE NULL END) AS orgs_with_responses,
-        ROUND(COUNT(CASE WHEN monthly_survey_responses > 0 THEN 1 ELSE NULL END) * 100.0 / COUNT(*), 2) AS pct_orgs_with_responses
+        COUNT(CASE WHEN monthly_survey_responses &gt; 0 THEN 1 ELSE NULL END) AS orgs_with_responses,
+        ROUND(COUNT(CASE WHEN monthly_survey_responses &gt; 0 THEN 1 ELSE NULL END) * 100.0 / COUNT(*), 2) AS pct_orgs_with_responses
     FROM monthly_active_orgs
     GROUP BY month
 ),
@@ -232,7 +232,7 @@ orgs_with_responses AS (
         organization_name,
         monthly_survey_responses
     FROM monthly_active_orgs
-    WHERE monthly_survey_responses > 0
+    WHERE monthly_survey_responses &gt; 0
 ),
 max_org_per_month AS (
     SELECT 
@@ -249,7 +249,7 @@ monthly_stats_with_growth AS (
         ms.pct_orgs_with_responses,
         prev_ms.orgs_with_responses AS prev_month_orgs_with_responses,
         CASE 
-            WHEN prev_ms.orgs_with_responses > 0 
+            WHEN prev_ms.orgs_with_responses &gt; 0 
             THEN ROUND(((toFloat(ms.orgs_with_responses) / toFloat(prev_ms.orgs_with_responses)) - 1) * 100, 2)
             ELSE NULL 
         END AS month_over_month_growth_pct
@@ -264,11 +264,11 @@ SELECT
     ms.prev_month_orgs_with_responses,
     ms.month_over_month_growth_pct,
     ms.pct_orgs_with_responses,
-    CASE WHEN ms.orgs_with_responses > 0 THEN ROUND(AVG(owr.monthly_survey_responses), 0) ELSE NULL END AS avg_responses_per_org_with_responses,
-    CASE WHEN ms.orgs_with_responses > 0 THEN quantile(0.5)(owr.monthly_survey_responses) ELSE NULL END AS median_responses_per_org_with_responses,
-    CASE WHEN ms.orgs_with_responses > 0 THEN quantile(0.75)(owr.monthly_survey_responses) ELSE NULL END AS p75_responses_per_org_with_responses,
-    CASE WHEN ms.orgs_with_responses > 0 THEN ROUND(quantile(0.95)(owr.monthly_survey_responses), 0) ELSE NULL END AS p95_responses_per_org_with_responses,
-    CASE WHEN ms.orgs_with_responses > 0 THEN max(owr.monthly_survey_responses) ELSE NULL END AS max_responses_per_org,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN ROUND(AVG(owr.monthly_survey_responses), 0) ELSE NULL END AS avg_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN quantile(0.5)(owr.monthly_survey_responses) ELSE NULL END AS median_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN quantile(0.75)(owr.monthly_survey_responses) ELSE NULL END AS p75_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN ROUND(quantile(0.95)(owr.monthly_survey_responses), 0) ELSE NULL END AS p95_responses_per_org_with_responses,
+    CASE WHEN ms.orgs_with_responses &gt; 0 THEN max(owr.monthly_survey_responses) ELSE NULL END AS max_responses_per_org,
     mo.max_org_name AS max_org_name,
     COALESCE(SUM(owr.monthly_survey_responses), 0) AS total_monthly_responses
 FROM monthly_stats_with_growth ms
@@ -317,7 +317,7 @@ select
     dateTrunc('month', toDateTime(period_end, 'UTC')) as period
 from postgres_invoice_with_annual_view
 where toDateTime(period_end, 'UTC') &lt; dateTrunc('month', now()) + interval 2 month
-and toDateTime(period_end, 'UTC') > dateTrunc('month', now() - interval 12 month)
+and toDateTime(period_end, 'UTC') &gt; dateTrunc('month', now() - interval 12 month)
 
 group by period order by period asc
 ```
@@ -339,7 +339,7 @@ all_customers AS (
     SELECT DISTINCT id as customer_id
     FROM iwa_summary_customer_month
     WHERE month &lt; toStartOfMonth(now() + INTERVAL 2 MONTH) 
-    AND month > toStartOfMonth(now() - INTERVAL 33 MONTH)
+    AND month &gt; toStartOfMonth(now() - INTERVAL 33 MONTH)
 ),
 customer_month_grid AS (
     SELECT 
@@ -358,7 +358,7 @@ customers_per_month AS (
         ON cmg.customer_id = iscm.id 
         AND cmg.month = iscm.month
     WHERE cmg.month &lt; toStartOfMonth(now() + INTERVAL 2 MONTH) 
-    AND cmg.month > toStartOfMonth(now() - INTERVAL 33 MONTH)
+    AND cmg.month &gt; toStartOfMonth(now() - INTERVAL 33 MONTH)
     GROUP BY cmg.customer_id, cmg.month
 ), 
 churn_calc AS (
@@ -380,7 +380,7 @@ churned AS (
         sum(prev_mrr - curr_mrr) AS churned_mrr,
         count(*) as churned_customers
     FROM churn_calc
-    WHERE prev_mrr > 0
+    WHERE prev_mrr &gt; 0
         AND curr_mrr <= 0
     GROUP BY 1
 ),
@@ -390,7 +390,7 @@ customer_status AS (
         month,
         mrr,
         CASE WHEN MIN(month) OVER (PARTITION BY customer_id) = month THEN TRUE ELSE FALSE END as first_month_active,
-        CASE WHEN lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) > 0 THEN TRUE ELSE FALSE END as active_in_previous_month,
+        CASE WHEN lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) &gt; 0 THEN TRUE ELSE FALSE END as active_in_previous_month,
         lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) as prev_month_mrr
     FROM customers_per_month
 ),
@@ -400,14 +400,14 @@ lifecycle AS (
         CASE 
             WHEN NOT active_in_previous_month THEN 'NEW'
             WHEN active_in_previous_month AND prev_month_mrr = mrr THEN 'FLAT'
-            WHEN active_in_previous_month AND prev_month_mrr > mrr THEN 'SHRINKING'
+            WHEN active_in_previous_month AND prev_month_mrr &gt; mrr THEN 'SHRINKING'
             WHEN active_in_previous_month AND prev_month_mrr &lt; mrr THEN 'GROWING'
             ELSE 'UNCATEGORIZED'
         END AS growth_lifecycle_stage, 
         mrr, 
         prev_month_mrr
     FROM customer_status
-    WHERE mrr > 0
+    WHERE mrr &gt; 0
 ), 
 growth_base AS (
     SELECT 
@@ -536,11 +536,11 @@ SELECT
 FROM stripe_invoice AS si
 JOIN previous_startup_customers AS psc ON psc.customer_id = si.customer_id
 WHERE 
-    si.total > 0
+    si.total &gt; 0
     AND 
     si.status &lt;&gt; 'draft'
 group by psc.customer_id, psc.name
-having SUM(si.amount_paid) > 0
+having SUM(si.amount_paid) &gt; 0
 order by SUM(si.amount_paid) desc    
 ```
 
