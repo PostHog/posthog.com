@@ -1,0 +1,20 @@
+import { Steps, Step } from 'components/ImplementationSteps/MarkdownStepList'
+import InstallCLI from './nextjs/install-cli.mdx'
+import OutputSourceMaps from './nextjs/output-source-maps.mdx'
+import InjectSourceMap from './nextjs/inject-source-map.mdx'
+import UploadSourceMap from './nextjs/upload-source-map.mdx'
+
+<Steps>
+    <Step title="Install the PostHog CLI" goal="Install the PostHog CLI tool (included in the Next.js package)." required="required">
+        <InstallCLI />
+    </Step>
+    <Step title="Output source maps for your framework" goal="Configure Next.js to generate source maps and set up automatic processing." required="required">
+        <OutputSourceMaps />
+    </Step>
+    <Step title="Inject source map" goal="Automatically inject metadata during the build process." required="required">
+        <InjectSourceMap />
+    </Step>
+    <Step title="Upload source map" goal="Automatically upload source maps to PostHog during build." required="required">
+        <UploadSourceMap />
+    </Step>
+</Steps>

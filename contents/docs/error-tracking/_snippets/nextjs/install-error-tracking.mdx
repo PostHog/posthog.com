@@ -1,0 +1,24 @@
+import { Steps, Step } from 'components/ImplementationSteps/MarkdownStepList'
+import Step1 from './steps/step1-install-web-sdk.mdx'
+import Step2 from './steps/step2-capture-client-exceptions.mdx'
+import Step3 from './steps/step3-install-node-sdk.mdx'
+import Step4 from './steps/step4-capture-server-exceptions.mdx'
+import Step5 from './steps/step5-upload-source-maps.mdx'
+
+<Steps>
+    <Step title="Installing PostHog web SDK" goal="Install the PostHog web JavaScript SDK." required="required">
+        <Step1 />
+    </Step>
+    <Step title="Capturing client-side exceptions" goal="Capture your first client-side exception event." required="required">
+        <Step2 />
+    </Step>
+    <Step title="Installing PostHog Node.js SDK" goal="Install the PostHog Node.js SDK." required="required">
+        <Step3 />
+    </Step>
+    <Step title="Capturing server-side exceptions" goal="Capture your first server-side exception event." required="required">
+        <Step4 />
+    </Step>
+    <Step title="Next steps">
+        <Step5 />
+    </Step>
+</Steps>

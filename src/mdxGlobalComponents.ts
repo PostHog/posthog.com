@@ -19,6 +19,7 @@ import { ProductVideo } from './components/ProductVideo'
 import { StarRepoButton } from './components/StarRepoButton'
 import { CalloutBox } from './components/Docs/CalloutBox'
 import ImplementationSteps from './components/ImplementationSteps'
+import { Steps, Step } from './components/ImplementationSteps/MarkdownStepList'
 
 export const shortcodes = {
     ArrayCTA,
@@ -34,6 +35,8 @@ export const shortcodes = {
     ImageSlider,
     GDPRForm,
     ImplementationSteps,
+    Steps,
+    Step,
     OverflowXSection,
     Quote,
     Link,

@@ -2,8 +2,29 @@
 title: Getting started with error tracking
 ---
 
-import ErrorTrackingImplementationSteps from '../_snippets/implementation.tsx'
+import { Steps, Step } from 'components/ImplementationSteps/MarkdownStepList'
+import InstallationPlatforms from '../_snippets/installation-platforms'
+import { CallToAction } from 'components/CallToAction'
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Here's what you'll need to do to get started:
 
-<ErrorTrackingImplementationSteps />
+<Steps>
+    <Step title="Capture your first exception" required="required" goal="Capture your first exception events to PostHog.">
+        <InstallationPlatforms />        
+    </Step>
+    <Step title="Get accurate stack traces" required="optional" goal="automatically upload source maps for your captured stack traces.">
+        <CallToAction type="primary" to="#upload-source-maps">
+            Upload source maps
+        </CallToAction>
+    </Step>
+    <Step title="Configure alerts and automations" required="optional" goal="Receive notifications and automate your error tracking related workflows.">
+        <CallToAction type="primary" to="#configure-alerts">
+            Configure alerts and automations
+        </CallToAction>
+    </Step>
+    <Step title="Cutting costs" required="optional" goal="We try to have the lowest pricing for every product. Here's how you can take advantage of our pricing.">
+        <CallToAction type="primary" to="#cutting-costs">
+            See cost-cutting tipssss
+        </CallToAction>
+    </Step>
+</Steps>
