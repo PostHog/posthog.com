@@ -12,14 +12,16 @@ import Tab from "components/Tab"
 import WebSurveys from "./_snippets/web-surveys-installation.mdx"
 import ReactNativeSurveys from "./_snippets/react-native-surveys-installation.mdx"
 import IOSSurveys from "./_snippets/ios-surveys-installation.mdx"
+import FlutterSurveys from "./_snippets/flutter-surveys-installation.mdx"
 
 Surveys are a great tool to collect qualitative feedback from your users.
 
-<Tab.Group tabs={['Web', 'React Native', 'iOS']}>
+<Tab.Group tabs={['Web', 'React Native', 'iOS', 'Flutter']}>
     <Tab.List>
         <Tab>Web</Tab>
         <Tab>React Native</Tab>
         <Tab>iOS</Tab>
+        <Tab>Flutter</Tab>
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
@@ -30,6 +32,9 @@ Surveys are a great tool to collect qualitative feedback from your users.
         </Tab.Panel>
         <Tab.Panel>
             <IOSSurveys />
+        </Tab.Panel>
+        <Tab.Panel>
+            <FlutterSurveys />
         </Tab.Panel>
     </Tab.Panels>
 </Tab.Group>

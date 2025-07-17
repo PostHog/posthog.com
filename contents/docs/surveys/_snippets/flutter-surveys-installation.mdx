@@ -1,0 +1,83 @@
+## Step one: Add PostHog to your app
+
+> 🚧 **Note:** Mobile surveys for Flutter is currently in **beta** and only available for **iOS**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow%3Atrue) or one of our other [support options](/docs/support-options).
+>
+> Using it requires PostHog's Flutter SDK version >= 5.1.0, but it's recommended to always use the latest version.
+
+import FlutterInstall from "../../integrate/_snippets/install-flutter.mdx"
+
+<FlutterInstall />
+
+## Step two: Enable surveys in your configuration
+
+To enable surveys in your Flutter app, update your PostHog configuration:
+
+```dart
+final config = PostHogConfig('<ph_project_api_key>');
+config.host = 'https://us.i.posthog.com';
+config.surveys = true; // Enable surveys (iOS Only)
+
+await Posthog().setup(config);
+```
+
+## Step three: Install PosthogObserver
+
+For surveys to display properly, you need to add the `PosthogObserver` to your app. The observer allows PostHog to determine the appropriate context for displaying surveys.
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PostHogWidget(
+      child: MaterialApp(
+        navigatorObservers: [PosthogObserver()],
+        title: 'My App',
+        home: const HomeScreen(),
+      ),
+    );
+  }
+}
+```
+
+If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing-screen-views) to learn how to set up the `PosthogObserver`.
+
+## Supported Features
+
+| Feature                           | Support (iOS only) | 
+| --------------------------------- | ---------------------- |
+| **Questions**                                              |
+| All question types                | ✅                     |
+| Multi-question surveys            | ✅                     |
+| Confirmation message              | ✅                     |
+| Feedback button presentation      | ❌                     |
+| Conditional questions             | ✅                     |
+| **Customization / Appearance**                            |
+| Set colors in PostHog dashboard   | ✅                     | 
+| Shuffle questions                 | ❌                     | 
+| PostHog branding                  | ❌                     | 
+| Delay popup after screen view     | ❌                     | 
+| Position config                   | ❌ Always bottom sheet | 
+| **Display conditions**                                     |
+| Feature flag & property targeting | ✅                     | 
+| Screen/URL targeting              | ❌                     | 
+| Device type targeting             | ✅                     | 
+| Survey wait period                | ❌                     | 
+| Event triggers                    | ✅                     | 
+| Action triggers                   | ❌                     | 
+| Partial responses                 | ❌                     |
