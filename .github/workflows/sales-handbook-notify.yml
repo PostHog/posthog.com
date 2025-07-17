@@ -1,5 +1,8 @@
 name: Sales Handbook Change Notification
 
+permissions:
+  contents: read
+
 on:
   push:
     branches: [ master, main ]
