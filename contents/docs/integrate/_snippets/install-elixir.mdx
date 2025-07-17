@@ -20,7 +20,7 @@ config :posthog,
 # Optional configurations
 config :posthog,
   json_library: Jason,   # Default JSON parser (optional)
-  capture_enabled: true, # Whether to enable PostHog tracking (optional, defaults to true)
+  enabled_capture: true, # Enable/disable PostHog tracking (optional, defaults to true)
   http_client: Posthog.HTTPClient.Hackney,  # Default HTTP client (optional)
   http_client_opts: [    # HTTP client options (optional)
     timeout: 5_000,      # Request timeout in milliseconds (default: 5_000)
