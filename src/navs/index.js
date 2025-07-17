@@ -57,6 +57,10 @@ export const dataPipelines = {
                     url: '/docs/cdp/sources/mongodb',
                 },
                 {
+                    name: 'Meta Ads',
+                    url: '/docs/cdp/sources/meta-ads',
+                },
+                {
                     name: 'Azure SQL Server',
                     url: '/docs/cdp/sources/azure-db',
                 },
