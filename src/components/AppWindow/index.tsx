@@ -77,6 +77,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         siteSettings,
         openNewChat,
         isMobile,
+        compact,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -469,7 +470,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             onAnimationComplete={() => updateWindow(item, { animating: false })}
                         >
                             {item.path.startsWith('share') && <Cher />}
-                            {!item.minimal && (
+                            {!item.minimal && !compact && (
                                 <div
                                     data-scheme="tertiary"
                                     onDoubleClick={handleDoubleClick}

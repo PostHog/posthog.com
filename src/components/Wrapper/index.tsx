@@ -8,11 +8,11 @@ import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import Dock from 'components/Desktop/Dock'
 
 export default function Wrapper() {
-    const { windows, constraintsRef, updateWindow } = useApp()
+    const { windows, constraintsRef, updateWindow, compact, isMobile } = useApp()
 
     return (
         <div className="fixed inset-0 size-full flex flex-col">
-            <TaskBarMenu />
+            {!compact && <TaskBarMenu />}
             <div ref={constraintsRef} className="flex-grow relative">
                 <Desktop />
                 <AnimatePresence>
@@ -38,7 +38,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
-            <Dock />
+            {isMobile && !compact && <Dock />}
             <CookieBannerToast />
         </div>
     )

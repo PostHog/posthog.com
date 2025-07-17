@@ -419,7 +419,7 @@ function ReaderViewContent({
     homeURL,
     description,
 }) {
-    const { openNewChat } = useApp()
+    const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
     const { hash, pathname } = useLocation()
     const contentRef = useRef(null)
@@ -440,7 +440,7 @@ function ReaderViewContent({
     const showSidebar = tableOfContents && tableOfContents?.length > 0
 
     // Determine if we should render the left sidebar at all (separate from animation state)
-    const renderLeftSidebar = !hideLeftSidebar
+    const renderLeftSidebar = !compact && !hideLeftSidebar
 
     const selectedBackgroundOption = backgroundImage
         ? backgroundImageOptions.find((option) => option.value === backgroundImage)
@@ -515,21 +515,23 @@ function ReaderViewContent({
                         dataScheme="primary"
                         className={`bg-primary border border-primary flex-grow  
                             ${renderLeftSidebar && isNavVisible ? 'rounded-l' : 'border-l-0'}
-                            ${showSidebar && isTocVisible
-                                ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
-                                : 'border-r-0'
-                            } ${selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
+                            ${
+                                showSidebar && isTocVisible
+                                    ? 'rounded-r-0 border-r-0 @4xl/app-reader:rounded-r @4xl/app-reader:border-r'
+                                    : 'border-r-0'
+                            } ${
+                            selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? 'before:absolute before:inset-0 before:bg-primary before:opacity-75'
                                 : ''
-                            }`}
+                        }`}
                         style={
                             selectedBackgroundOption && selectedBackgroundOption.value !== 'none'
                                 ? {
-                                    backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
-                                    backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
-                                    backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
-                                    backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
-                                }
+                                      backgroundImage: `url(${selectedBackgroundOption.backgroundImage})`,
+                                      backgroundRepeat: selectedBackgroundOption.backgroundRepeat || 'repeat',
+                                      backgroundSize: selectedBackgroundOption.backgroundSize || 'auto',
+                                      backgroundPosition: selectedBackgroundOption.backgroundPosition || 'center',
+                                  }
                                 : undefined
                         }
                     >
@@ -540,11 +542,13 @@ function ReaderViewContent({
                         >
                             <div
                                 ref={contentRef}
-                                className={`@container/reader-content relative ${padding
+                                className={`@container/reader-content relative ${
+                                    padding
                                         ? 'p-4 @md/reader-content-container:px-6 @lg/reader-content-container:px-8'
                                         : ''
-                                    } mx-auto transition-all ${fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
-                                    }`}
+                                } mx-auto transition-all ${
+                                    fullWidthContent || body?.type !== 'mdx' ? 'max-w-full' : 'max-w-2xl'
+                                }`}
                             >
                                 {/* <DebugContainerQuery /> */}
                                 {body.featuredImage && (
@@ -628,53 +632,61 @@ function ReaderViewContent({
                 {/* Third row - Footer */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
                     <motion.div
-                        className={`flex-shrink-0 transition-all min-w-0 ${renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
-                            }`}
+                        className={`flex-shrink-0 transition-all min-w-0 ${
+                            renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
+                        }`}
                     >
                         {/* this space intentionally left blank */}
                     </motion.div>
-                    <div className="flex-grow flex justify-between items-center">
-                        <div>
-                            <p className="m-0 text-sm">
-                                Questions about this page?{' '}
-                                <button
-                                    className="font-semibold underline"
-                                    onClick={() =>
-                                        openNewChat({
-                                            path: `ask-max-${appWindow?.path}`,
-                                            context: [
-                                                {
-                                                    type: 'page',
-                                                    value: {
-                                                        path: appWindow?.path,
-                                                        label: title,
-                                                    },
-                                                },
-                                            ],
-                                        })
-                                    }
-                                >
-                                    Ask Max AI
-                                </button>{' '}
-                                or{' '}
-                                <Link className="font-semibold underline" to="/questions" state={{ newWindow: true }}>
-                                    post a community question
-                                </Link>
-                                .
-                            </p>
-                        </div>
-                        {body?.type === 'mdx' && (
+                    {!compact && (
+                        <div className="flex-grow flex justify-between items-center">
                             <div>
-                                <AppOptionsButton
-                                    lineHeightMultiplier={lineHeightMultiplier}
-                                    handleLineHeightChange={handleLineHeightChange}
-                                />
+                                <p className="m-0 text-sm">
+                                    Questions about this page?{' '}
+                                    <button
+                                        className="font-semibold underline"
+                                        onClick={() =>
+                                            openNewChat({
+                                                path: `ask-max-${appWindow?.path}`,
+                                                context: [
+                                                    {
+                                                        type: 'page',
+                                                        value: {
+                                                            path: appWindow?.path,
+                                                            label: title,
+                                                        },
+                                                    },
+                                                ],
+                                            })
+                                        }
+                                    >
+                                        Ask Max AI
+                                    </button>{' '}
+                                    or{' '}
+                                    <Link
+                                        className="font-semibold underline"
+                                        to="/questions"
+                                        state={{ newWindow: true }}
+                                    >
+                                        post a community question
+                                    </Link>
+                                    .
+                                </p>
                             </div>
-                        )}
-                    </div>
+                            {body?.type === 'mdx' && (
+                                <div>
+                                    <AppOptionsButton
+                                        lineHeightMultiplier={lineHeightMultiplier}
+                                        handleLineHeightChange={handleLineHeightChange}
+                                    />
+                                </div>
+                            )}
+                        </div>
+                    )}
                     <motion.div
-                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
-                            }`}
+                        className={`flex-shrink-0 items-center flex justify-end transition-all min-w-0 relative z-10 ${
+                            showSidebar && isTocVisible ? '@4xl/app-reader:min-w-[250px]' : 'w-auto'
+                        }`}
                         animate={showSidebar && isTocVisible ? 'open' : 'closed'}
                     >
                         {filePath && (

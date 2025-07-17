@@ -14,6 +14,7 @@ import {
     IconBookmark,
     IconBookmarkSolid,
     IconBottomPanel,
+    IconChevronDown,
 } from '@posthog/icons'
 import { IconPDF } from 'components/OSIcons'
 import { useWindow } from '../../context/Window'
@@ -27,6 +28,8 @@ import Link from 'components/Link'
 import { useCartStore } from '../../templates/merch/store'
 import { exportToPdf as exportPresentationToPdf } from '../../lib/exportToPdf'
 import Loading from 'components/Loading'
+import { Popover } from 'components/RadixUI/Popover'
+import { FileMenu } from 'components/RadixUI/FileMenu'
 
 interface HeaderBarProps {
     isNavVisible?: boolean
@@ -90,8 +93,8 @@ export default function HeaderBar({
     onToggleDrawer,
 }: HeaderBarProps) {
     const { user, addBookmark, removeBookmark } = useUser()
-    const { openSignIn } = useApp()
-    const { goBack, goForward, canGoBack, canGoForward, appWindow } = useWindow()
+    const { openSignIn, compact } = useApp()
+    const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
     const [isExportingPdf, setIsExportingPdf] = useState(false)
@@ -142,31 +145,33 @@ export default function HeaderBar({
     return (
         <>
             <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
-                <div>
-                    <motion.div
-                        className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${
-                            hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
-                        }`}
-                    >
-                        {homeURL && <OSButton variant="ghost" icon={<IconHome />} to={homeURL} asLink />}
-                        <div
-                            className={`${
-                                typeof hasLeftSidebar === 'object' && hasLeftSidebar.alwaysShow
-                                    ? ''
-                                    : 'hidden @2xl:block'
+                {!compact && (
+                    <div>
+                        <motion.div
+                            className={`flex-shrink-0 overflow-hidden flex items-center gap-px transition-all min-w-0 ${
+                                hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
                             }`}
                         >
-                            {hasLeftSidebar && (
-                                <OSButton
-                                    onClick={onToggleNav}
-                                    variant="ghost"
-                                    active={isNavVisible}
-                                    icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
-                                />
-                            )}
-                        </div>
-                    </motion.div>
-                </div>
+                            {homeURL && <OSButton variant="ghost" icon={<IconHome />} to={homeURL} asLink />}
+                            <div
+                                className={`${
+                                    typeof hasLeftSidebar === 'object' && hasLeftSidebar.alwaysShow
+                                        ? ''
+                                        : 'hidden @2xl:block'
+                                }`}
+                            >
+                                {hasLeftSidebar && (
+                                    <OSButton
+                                        onClick={onToggleNav}
+                                        variant="ghost"
+                                        active={isNavVisible}
+                                        icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
+                                    />
+                                )}
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
                 <div className="flex-grow flex justify-between items-center">
                     <div className="flex items-center gap-px">
                         {showBack && (
@@ -186,6 +191,26 @@ export default function HeaderBar({
                             />
                         )}
                     </div>
+                    {compact &&
+                        (menu && menu.length > 0 ? (
+                            <Popover
+                                trigger={
+                                    <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
+                                        {appWindow?.meta?.title}
+                                        <IconChevronDown className="size-6 -m-1" />
+                                    </button>
+                                }
+                                dataScheme="primary"
+                                contentClassName="w-auto p-0 border border-primary"
+                                header={false}
+                            >
+                                <FileMenu menu={menu} />
+                            </Popover>
+                        ) : (
+                            <div className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
+                                {appWindow?.meta?.title}
+                            </div>
+                        ))}
                     <div className="flex items-center gap-px relative">
                         {rightActionButtons}
                         {showSearch && (searchContentRef || onSearch) && (

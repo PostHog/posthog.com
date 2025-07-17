@@ -85,6 +85,7 @@ interface AppContextType {
     isActiveWindowsPanelOpen: boolean
     setIsActiveWindowsPanelOpen: (isOpen: boolean) => void
     isMobile: boolean
+    compact: boolean
 }
 
 interface AppProviderProps {
@@ -224,6 +225,7 @@ export const Context = createContext<AppContextType>({
     isActiveWindowsPanelOpen: false,
     setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
+    compact: false,
 })
 
 export interface AppSetting {
@@ -561,6 +563,7 @@ export interface SiteSettings {
 
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
+    const compact = typeof window !== 'undefined' && window !== window.parent
     const constraintsRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
@@ -577,7 +580,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         )
     }, [windows])
     const [siteSettings, setSiteSettings] = useState<SiteSettings>({
-        experience: isMobile ? 'boring' : 'posthog',
+        experience: isMobile || compact ? 'boring' : 'posthog',
         colorMode: 'light',
         skinMode: 'modern',
         cursor: 'default',
@@ -1062,7 +1065,50 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         if (location.key === 'initial' && location.pathname === '/' && !isMobile) {
             addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} />)
         }
+
+        if (compact) {
+            window.parent.postMessage(
+                {
+                    type: 'docs-ready',
+                },
+                '*'
+            )
+
+            // window.parent.postMessage(
+            //     {
+            //         type: 'docs-menu',
+            //         menu: docsMenu.children,
+            //     },
+            //     '*'
+            // )
+        }
+
+        const onMessage = (e: MessageEvent): void => {
+            if (e.data.type === 'theme-toggle') {
+                window.__setPreferredTheme(e.data.isDarkModeOn ? 'dark' : 'light')
+                return
+            }
+            if (e.data.type === 'navigate') {
+                navigate(e.data.url)
+            }
+        }
+
+        window.addEventListener('message', onMessage)
+
+        return () => window.removeEventListener('message', onMessage)
     }, [])
+
+    useEffect(() => {
+        if (compact) {
+            window.parent.postMessage(
+                {
+                    type: 'internal-navigation',
+                    url: location.pathname,
+                },
+                '*'
+            )
+        }
+    }, [location.pathname])
 
     return (
         <Context.Provider
@@ -1095,6 +1141,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 isActiveWindowsPanelOpen,
                 setIsActiveWindowsPanelOpen,
                 isMobile,
+                compact,
             }}
         >
             {children}
