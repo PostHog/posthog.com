@@ -188,7 +188,7 @@ URLs are automatically clickable in the **Table** visualization, but you can als
 ```sql
 select 
     properties.$pathname,
-    <a href={concat('https://posthog.com', properties.$pathname, '')} target='_blank'>{'Link'}</a> as link
+    <a href={f'https://posthog.com/{properties.$pathname}'} target='_blank'>Link</a> as link
 from events
 where event = '$pageview'
 ```
