@@ -7,7 +7,7 @@ WITH daily_exceptions AS (
         JSONExtractInt(properties, 'exceptions_captured_in_period') as exceptions
     FROM events 
     WHERE event = 'organization usage report'
-        AND JSONExtractInt(properties, 'exceptions_captured_in_period') &gt; 0
+        AND JSONExtractInt(properties, 'exceptions_captured_in_period') > 0
         AND &lbrace;filters&rbrace;  -- Same filters as daily customers query
         AND timestamp >= toDateTime('2025-03-01')
 ),
@@ -29,7 +29,7 @@ regular_users AS (
         org_id,
         month
     FROM monthly_activity
-    WHERE avg_days_per_week &gt; 4
+    WHERE avg_days_per_week > 4
 )
 
 SELECT 

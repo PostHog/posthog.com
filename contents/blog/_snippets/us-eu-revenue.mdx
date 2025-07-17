@@ -9,8 +9,8 @@ select
     coalesce(round(sumIf(mrr, customer_id is null OR (customer_id not in (select id from eu_customers) and customer_id not in (select id from us_customers)))) * 12, 0) as other_ARR,
     dateTrunc('month', toDateTime(period_end, 'UTC')) as period
 from postgres_invoice_with_annual_view
-where toDateTime(period_end, 'UTC') &lt; dateTrunc('month', now()) + interval 2 month
-and toDateTime(period_end, 'UTC') &gt; dateTrunc('month', now() - interval 12 month)
+where toDateTime(period_end, 'UTC') < dateTrunc('month', now()) + interval 2 month
+and toDateTime(period_end, 'UTC') > dateTrunc('month', now() - interval 12 month)
 
 group by period order by period asc
 ```

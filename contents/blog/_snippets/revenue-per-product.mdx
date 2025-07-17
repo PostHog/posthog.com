@@ -6,7 +6,7 @@ SELECT
 FROM postgres_invoice_with_annual_view
 ARRAY JOIN JSONExtractKeysAndValuesRaw(assumeNotNull(mrr_per_product)) AS kv
 WHERE 
-    toDateTime(period_end, 'UTC') &lt; dateTrunc('month', now() + interval 1 month)
+    toDateTime(period_end, 'UTC') < dateTrunc('month', now() + interval 1 month)
     AND toDateTime(period_end, 'UTC') >= dateTrunc('month', now() - interval 12 month)
 GROUP BY period_month, product
 ORDER BY period_month, product

@@ -7,7 +7,7 @@ WITH customers_per_month AS (
         sum(JSONExtractFloat(mrr_per_product, &lbrace;variables.product&rbrace;)) AS mrr
     FROM postgres_invoice_with_annual_view
     WHERE dateTrunc('month', toDateTime(period_end, 'UTC')) IN ('2025-04-01', '2025-05-01', '2025-06-01')
-        AND JSONExtractFloat(mrr_per_product, &lbrace;variables.product&rbrace;) &gt; 0
+        AND JSONExtractFloat(mrr_per_product, &lbrace;variables.product&rbrace;) > 0
     GROUP BY customer_id, customer, month
 ),
 
@@ -45,9 +45,9 @@ exception_events AS (
         count(DISTINCT date) as days_with_exceptions_june
     FROM postgres.prod.billing_usagereport
     WHERE org_usage_summary.exceptions IS NOT NULL
-        AND toInt(org_usage_summary.exceptions) &gt; 0  -- Only count days with actual exceptions
+        AND toInt(org_usage_summary.exceptions) > 0  -- Only count days with actual exceptions
         AND date >= '2025-06-01'
-        AND date &lt; '2025-07-01'  -- June only
+        AND date < '2025-07-01'  -- June only
     GROUP BY customer_id
 )
 

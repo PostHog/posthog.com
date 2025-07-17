@@ -9,8 +9,8 @@ WITH date_range AS (
 all_customers AS (
     SELECT DISTINCT id as customer_id
     FROM iwa_summary_customer_month
-    WHERE month &lt; toStartOfMonth(now() + INTERVAL 2 MONTH) 
-    AND month &gt; toStartOfMonth(now() - INTERVAL 33 MONTH)
+    WHERE month < toStartOfMonth(now() + INTERVAL 2 MONTH) 
+    AND month > toStartOfMonth(now() - INTERVAL 33 MONTH)
 ),
 customer_month_grid AS (
     SELECT 
@@ -28,8 +28,8 @@ customers_per_month AS (
     LEFT JOIN iwa_summary_customer_month iscm 
         ON cmg.customer_id = iscm.id 
         AND cmg.month = iscm.month
-    WHERE cmg.month &lt; toStartOfMonth(now() + INTERVAL 2 MONTH) 
-    AND cmg.month &gt; toStartOfMonth(now() - INTERVAL 33 MONTH)
+    WHERE cmg.month < toStartOfMonth(now() + INTERVAL 2 MONTH) 
+    AND cmg.month > toStartOfMonth(now() - INTERVAL 33 MONTH)
     GROUP BY cmg.customer_id, cmg.month
 ), 
 churn_calc AS (
@@ -51,7 +51,7 @@ churned AS (
         sum(prev_mrr - curr_mrr) AS churned_mrr,
         count(*) as churned_customers
     FROM churn_calc
-    WHERE prev_mrr &gt; 0
+    WHERE prev_mrr > 0
         AND curr_mrr <= 0
     GROUP BY 1
 ),
@@ -61,7 +61,7 @@ customer_status AS (
         month,
         mrr,
         CASE WHEN MIN(month) OVER (PARTITION BY customer_id) = month THEN TRUE ELSE FALSE END as first_month_active,
-        CASE WHEN lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) &gt; 0 THEN TRUE ELSE FALSE END as active_in_previous_month,
+        CASE WHEN lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) > 0 THEN TRUE ELSE FALSE END as active_in_previous_month,
         lagInFrame(mrr, 1, 0) OVER (PARTITION BY customer_id ORDER BY month) as prev_month_mrr
     FROM customers_per_month
 ),
@@ -71,14 +71,14 @@ lifecycle AS (
         CASE 
             WHEN NOT active_in_previous_month THEN 'NEW'
             WHEN active_in_previous_month AND prev_month_mrr = mrr THEN 'FLAT'
-            WHEN active_in_previous_month AND prev_month_mrr &gt; mrr THEN 'SHRINKING'
-            WHEN active_in_previous_month AND prev_month_mrr &lt; mrr THEN 'GROWING'
+            WHEN active_in_previous_month AND prev_month_mrr > mrr THEN 'SHRINKING'
+            WHEN active_in_previous_month AND prev_month_mrr < mrr THEN 'GROWING'
             ELSE 'UNCATEGORIZED'
         END AS growth_lifecycle_stage, 
         mrr, 
         prev_month_mrr
     FROM customer_status
-    WHERE mrr &gt; 0
+    WHERE mrr > 0
 ), 
 growth_base AS (
     SELECT 
@@ -123,6 +123,6 @@ SELECT
 FROM growth_base
 LEFT JOIN churned
 ON growth_base.month = churned.churn_accounting_month
-WHERE growth_base.month &lt; today() + interval 1 month
+WHERE growth_base.month < today() + interval 1 month
 ORDER BY month ASC
 ```

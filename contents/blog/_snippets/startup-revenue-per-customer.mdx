@@ -18,10 +18,10 @@ SELECT
 FROM stripe_invoice AS si
 JOIN previous_startup_customers AS psc ON psc.customer_id = si.customer_id
 WHERE 
-    si.total &gt; 0
+    si.total > 0
     AND 
-    si.status &lt;&gt; 'draft'
+    si.status <> 'draft'
 group by psc.customer_id, psc.name
-having SUM(si.amount_paid) &gt; 0
+having SUM(si.amount_paid) > 0
 order by SUM(si.amount_paid) desc    
 ```

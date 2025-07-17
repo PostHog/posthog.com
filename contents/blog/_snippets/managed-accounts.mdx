@@ -17,7 +17,7 @@ WITH start_of_quarter AS (
         vitally_all_managed_accounts acc 
         ON inv.organization_id = acc.organization_id
     WHERE 
-        period_end &lt; toDateTime(&lbrace;variables.start_of_quarter&rbrace;)
+        period_end < toDateTime(&lbrace;variables.start_of_quarter&rbrace;)
         AND period_end >= toDateTime(&lbrace;variables.start_of_quarter&rbrace;) - INTERVAL 1 MONTH
     GROUP BY 
         organization_id, organization_name, account_executive, customer_success_manager
