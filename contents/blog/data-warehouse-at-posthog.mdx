@@ -127,7 +127,7 @@ exception_events AS (
     WHERE org_usage_summary.exceptions IS NOT NULL
         AND toInt(org_usage_summary.exceptions) > 0  -- Only count days with actual exceptions
         AND date >= '2025-06-01'
-        AND date < '2025-07-01'  -- June only
+        AND date &lt; '2025-07-01'  -- June only
     GROUP BY customer_id
 )
 
@@ -200,7 +200,7 @@ ORDER BY month
 </details>
 
 <details>
-<summary>Surveys usage growth rate over time</summary>
+  <summary>Surveys usage growth rate over time</summary>
 
 ```sql
 WITH monthly_active_orgs AS (
@@ -212,7 +212,7 @@ WITH monthly_active_orgs AS (
     FROM
         postgres_billing_usagereport
     WHERE 
-        date < dateTrunc('month', now())
+        date &lt; dateTrunc('month', now())
         AND date > dateTrunc('month', now()) - INTERVAL 18 MONTH
     GROUP BY 1, 2, 3, 4
 ),
@@ -316,7 +316,7 @@ select
     coalesce(round(sumIf(mrr, customer_id is null OR (customer_id not in (select id from eu_customers) and customer_id not in (select id from us_customers)))) * 12, 0) as other_ARR,
     dateTrunc('month', toDateTime(period_end, 'UTC')) as period
 from postgres_invoice_with_annual_view
-where toDateTime(period_end, 'UTC') < dateTrunc('month', now()) + interval 2 month
+where toDateTime(period_end, 'UTC') &lt; dateTrunc('month', now()) + interval 2 month
 and toDateTime(period_end, 'UTC') > dateTrunc('month', now() - interval 12 month)
 
 group by period order by period asc
@@ -338,7 +338,7 @@ WITH date_range AS (
 all_customers AS (
     SELECT DISTINCT id as customer_id
     FROM iwa_summary_customer_month
-    WHERE month < toStartOfMonth(now() + INTERVAL 2 MONTH) 
+    WHERE month &lt; toStartOfMonth(now() + INTERVAL 2 MONTH) 
     AND month > toStartOfMonth(now() - INTERVAL 33 MONTH)
 ),
 customer_month_grid AS (
@@ -401,7 +401,7 @@ lifecycle AS (
             WHEN NOT active_in_previous_month THEN 'NEW'
             WHEN active_in_previous_month AND prev_month_mrr = mrr THEN 'FLAT'
             WHEN active_in_previous_month AND prev_month_mrr > mrr THEN 'SHRINKING'
-            WHEN active_in_previous_month AND prev_month_mrr < mrr THEN 'GROWING'
+            WHEN active_in_previous_month AND prev_month_mrr &lt; mrr THEN 'GROWING'
             ELSE 'UNCATEGORIZED'
         END AS growth_lifecycle_stage, 
         mrr, 
@@ -452,7 +452,7 @@ SELECT
 FROM growth_base
 LEFT JOIN churned
 ON growth_base.month = churned.churn_accounting_month
-WHERE growth_base.month < today() + interval 1 month
+WHERE growth_base.month &lt; today() + interval 1 month
 ORDER BY month ASC
 ```
 
@@ -469,7 +469,7 @@ SELECT
 FROM postgres_invoice_with_annual_view
 ARRAY JOIN JSONExtractKeysAndValuesRaw(assumeNotNull(mrr_per_product)) AS kv
 WHERE 
-    toDateTime(period_end, 'UTC') < dateTrunc('month', now() + interval 1 month)
+    toDateTime(period_end, 'UTC') &lt; dateTrunc('month', now() + interval 1 month)
     AND toDateTime(period_end, 'UTC') >= dateTrunc('month', now() - interval 12 month)
 GROUP BY period_month, product
 ORDER BY period_month, product
