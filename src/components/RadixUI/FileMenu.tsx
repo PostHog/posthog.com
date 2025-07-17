@@ -3,6 +3,8 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import * as Icons from '@posthog/icons'
 import { IMenu } from 'components/PostLayout/types'
+import { navigate } from 'gatsby'
+import { useApp } from '../../context/App'
 
 // --- Data Structure ---
 
@@ -91,6 +93,7 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
 }
 
 export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ initialPath = [], menu }) => {
+    const { compact } = useApp()
     const { getItemChildren } = useFileData(menu)
     const [path, setPath] = useState<(IMenu | null)[]>([null, ...initialPath]) // Start with null for root
 
@@ -121,6 +124,9 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
 
     const handleSelect = useCallback(
         (columnIndex: number, item: IMenu) => {
+            if (compact && item.url && !item.children) {
+                return navigate(item.url)
+            }
             const newPath = path.slice(0, columnIndex + 1) // Trim path up to the current column index
             newPath.push(item) // Add the newly selected item
 
