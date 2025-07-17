@@ -44,7 +44,7 @@ You don't need to treat engineers like children. They're capable of [making grea
 
 - **Ensure everyone has access to best information to make good decisions.** Expose all context to public channels by default. PMs should provide them with insights from analytics, user interviews, and competitor research. 
 - **Push decisions down.** When someone asks, "Should we do X or Y?"" reply with, "What do you think and why?". Ship their answer if it's 80% as good as yours.
-- **Don't the sole point of communication between your team and others.** Instead, connect the right people together. Be connective tissue, not a gate.
+- **Don't be the sole point of communication between your team and others.** Instead, connect the right people together. Be connective tissue, not a gate.
 - **Define outcomes for your team, not tickets.** Let the team decide how they'll achieve them.
   
 > 🏆 **You'll know you're successful if:** You can disappear for two weeks without affecting the quality and frequency of releases.
