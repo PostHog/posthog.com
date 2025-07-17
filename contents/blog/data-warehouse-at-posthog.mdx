@@ -44,7 +44,9 @@ The downside of the data warehouse's power and flexibility is that it can be tri
 ## Understanding growth and churn
 
 - Sources: [Postgres](/docs/cdp/sources/postgres), [PostHog](/docs/new-to-posthog/understand-posthog), [Salesforce](/docs/cdp/sources/salesforce)
-- Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `events`, `salesforce.contact`, `postgres.posthog_team`, `postgres.posthog_organization`,
+- Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `events`, `salesforce.contact`, `postgres.posthog_team`, `postgres.posthog_organization`, `postgres_billing_usagereport`
+
+![Growth and churn](https://res.cloudinary.com/dmukukwp6/image/upload/growth_churn_61b9f808a7.png)
 
 Product managers at PostHog [don't tell engineers what to do](/newsletter/product-management-is-broken). Instead, they do help them with analysis. SQL is often their weapon of choice to do this.
 
@@ -283,6 +285,8 @@ ORDER BY ms.month
 - Sources: [Postgres](/docs/cdp/sources/postgres), [Salesforce](/docs/cdp/sources/salesforce)
 - Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `postgres_billing_usagereport`, `salesforce_opportunity`
 
+![Revenue](https://res.cloudinary.com/dmukukwp6/image/upload/revenue_c11fd894d5.png)
+
 As I hinted at above, tracking revenue at PostHog can be quite complicated. Because we have multiple products with usage-based and tiered pricing with discounts and add-ons, we can't just query Stripe and get our revenue data. We have a specific billing service that generates invoices and reports and adds them to Postgres.
 
 For multiple years, we used Metabase to query and visualize all this revenue data from Postgres. All of the cleanup and reformatting needed to make it usable was in there too. Moving all this to PostHog was a lot of work (it had its own project Slack channel), but we've done it now. 
@@ -480,6 +484,8 @@ LIMIT 500
 - Sources: [Stripe](/docs/cdp/sources/stripe), [Postgres](/docs/cdp/sources/postgres)
 - Tables: `stripe_customer`, `stripe_invoice`, `postgres_billing_usagereport`, `postgres_billing_customer`
 
+![Startup and YC](https://res.cloudinary.com/dmukukwp6/image/upload/startup_yc_375b27d761.png)
+
 Each quarter, hundreds of startups sign up for our [startup plan](/startups) (which gives them $50k in free credits), dozens more sign up to our upgraded [YC plan](/handbook/brand/startups#posthog-for-y-combinator). To make sure it is going well, we have a dashboard with details like:
 
 1. The number of organizations on the startup plan
@@ -566,6 +572,8 @@ ORDER BY
 
 - Sources: [Zendesk](/docs/cdp/sources/zendesk)
 - Tables: `zendesk_ticket_events`, `zendesk_tickets`, `zendesk_ticket_metric_events`, `zendesk_groups`
+
+![Support](https://res.cloudinary.com/dmukukwp6/image/upload/support_26663efc71.png)
 
 We have high standards for our support experience. Where do those standards get judged? The data warehouse, of course. 
 
@@ -761,6 +769,8 @@ group by hour_of_day
 
 - Sources: [Salesforce](/docs/cdp/sources/salesforce), [Postgres](/docs/cdp/sources/postgres), [Vitally](/docs/cdp/sources/vitally)
 - Tables: `invoice_with_annual_plans_shifted`, `vitally_all_managed_accounts`, `salesforce_opportunity`, `salesforce_user`
+
+![Sales and CS](https://res.cloudinary.com/dmukukwp6/image/upload/sales_9c2c3860b7.png)
 
 Similar to support, sales does reporting through PostHog. They pull from Salesforce mostly, but also billing data in Postgres and account ownership details from Vitally. These are best combined in the **Sales and CS Quarter Tracker** dashboard which covers details like:
 
