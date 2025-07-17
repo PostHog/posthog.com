@@ -1,0 +1,34 @@
+---
+title: Upload source maps
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
+>
+> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
+>    Follow in PostHog
+> </CallToAction>
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallCLI from './_snippets/install-cli.mdx'
+import OutputSourceMaps from './_snippets/output-source-maps.mdx'
+import InjectSourceMap from './_snippets/inject-source-map.mdx'
+import UploadSourceMap from './_snippets/upload-source-map.mdx'
+
+<Steps>
+    <Step title="Install the PostHog CLI" goal="Get the CLI tool or framework-specific package." required="required">
+        <InstallCLI />
+    </Step>
+    <Step title="Output source maps for your framework" goal="Configure your build to generate source maps." required="required">
+        <OutputSourceMaps />
+    </Step>
+    <Step title="Inject source map" goal="Add metadata to associate maps with your code." required="required">
+        <InjectSourceMap />
+    </Step>
+    <Step title="Upload source map" goal="Send the processed source maps to PostHog." required="required">
+        <UploadSourceMap />
+    </Step>
+</Steps>
+
+

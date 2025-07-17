@@ -1,0 +1,20 @@
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallCLI from './nuxt/install-cli.mdx'
+import NuxtOutputSourceMaps from './nuxt/output-source-maps.mdx'
+import NuxtInjectSourceMap from './nuxt/inject-source-map.mdx'
+import NuxtUploadSourceMap from './nuxt/upload-source-map.mdx'
+
+<Steps>
+    <Step title="Install the PostHog CLI" goal="Install the PostHog CLI tool." required="required">
+        <InstallCLI />
+    </Step>
+    <Step title="Output source maps for your framework" goal="Configure Nuxt to generate source maps during build." required="required">
+        <NuxtOutputSourceMaps />
+    </Step>
+    <Step title="Inject source map" goal="Inject metadata into source maps to associate them with your code." required="required">
+        <NuxtInjectSourceMap />
+    </Step>
+    <Step title="Upload source map" goal="Upload the injected source maps to PostHog during build." required="required">
+        <NuxtUploadSourceMap />
+    </Step>
+</Steps>
