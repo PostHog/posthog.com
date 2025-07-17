@@ -3363,6 +3363,12 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Feature flag dependencies',
+                    url: '/docs/feature-flags/dependencies',
+                    icon: 'IconLink',
+                    color: 'purple',
+                },
+                {
                     name: 'Adding your code',
                     url: '/docs/feature-flags/adding-feature-flag-code',
                     icon: 'IconCode',
