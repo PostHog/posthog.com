@@ -143,7 +143,7 @@ const subfeatures = [
     {
         title: '3D printed',
         description:
-            "Danilo prints these at home and assembles them by hand. It's a friction-fit labor of love. Or you can print your own from the files on GitHub.",
+            "<a href='/community/profiles/31731'>Danilo</a> prints these at home and assembles them by hand. It's a friction-fit labor of love. Or you can print your own from the files on GitHub.",
         icon: <IconWrench />,
     },
     {
@@ -175,12 +175,12 @@ const HeroDeskHog = ({ color, icon, beta, product, title, description }: HeroDes
                     </span>
                 )}
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-center mb-4 md:mb-2 text-balance px-2">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl text-center mb-4 md:mb-2 text-balance px-2">
                 It's a developer <span className="text-red dark:text-yellow">toy</span> that brings developers{' '}
                 <span className="text-red dark:text-yellow">joy</span>
             </h1>
             <p className="text-base sm:text-lg font-semibold text-center text-opacity-75 mb-5 px-4">
-                And it costs less than a Star Wars LEGO set
+                (And it costs less than a Star Wars LEGO set)
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-2 mb-12 px-4">
                 <CallToAction href="https://posthog.com/merch" type="primary" externalNoIcon>
@@ -226,7 +226,7 @@ const DeskHogCTA = () => {
         'text-center text-primary dark:text-primary-dark opacity-75 dark:opacity-100 max-w-xl mx-auto mb-6'
 
     return (
-        <section className="relative overflow-hidden pt-8 md:pt-0 px-5 lg:px-0">
+        <section className="relative pt-8 md:pt-0 px-5 lg:px-0">
             <h2 className={headingClasses}>Ready to get building?</h2>
             <h3 className={subheadingClasses}>Maybe it'll help if we make it look cuter</h3>
 
@@ -243,11 +243,12 @@ const DeskHogCTA = () => {
                     {/* Fun animated element similar to CTA.js */}
                     <div className="absolute top-4 md:-top-8 -right-8 md:-right-12">
                         <div className="relative">
-                            <Bang className="w-[120px] md:w-[150px] animate-grow" />
-                            <p className="px-4 md:px-6 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-sm md:text-base rotate-6">
-                                <span className="text-xs">Not</span>
-                                endorsed <br />
-                                by Kim K
+                            <Bang className="w-[160px] animate-grow" />
+                            <p className="px-4 md:px-6 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase !leading-[1.2rem] font-bold text-sm md:text-base rotate-6">
+                                <span className="text-xs">Now with</span>
+                                100% more
+                                <br />
+                                nostalgia
                             </p>
                         </div>
                     </div>
@@ -271,8 +272,9 @@ const DeskHogCTA = () => {
                             <div className="flex items-baseline gap-1 justify-center md:justify-start">
                                 <s className="font-bold text-xl">$50</s>
                                 <span className="font-bold text-red text-xl uppercase">$35</span>
+                                <br className="md:hidden" />
                                 <span className="text-xs opacity-50">
-                                    &gt;<span className="text-sm">Limited supply!</span>
+                                    <span className="text-sm">Limited stock remaining</span>
                                 </span>
                             </div>
                         </li>
@@ -295,11 +297,14 @@ const DeskHogCTA = () => {
                         <span className="bg-accent dark:bg-accent-dark rounded h-8 w-8 p-1">
                             <IconHandwave className="opacity-75" />
                         </span>
-                        <p className="text-sm text-primary/50 dark:text-primary-dark/50 leading-tight mb-0">
-                            <strong>Supplies are limited, but more are on the way!</strong>
-                            <br className="hidden sm:block" />
-                            When it's out of stock, join the waitlist or{' '}
-                            <a href="https://github.com/PostHog/DeskHog">3D print it</a>!
+                        <p className="text-left text-sm text-primary/50 dark:text-primary-dark/50 leading-tight mb-0">
+                            <strong>Supplies are limited, but more are on the way.</strong>{' '}
+                            <br className="hidden md:block" />
+                            Don't want to wait? You can{' '}
+                            <a href="https://github.com/PostHog/DeskHog" target="_blank" rel="noopener noreferrer">
+                                3D print it
+                            </a>
+                            !
                         </p>
                     </div>
                 </div>
@@ -344,22 +349,22 @@ const ExpandableCallout = () => {
 // Vibe Coding Boxout Component
 const VibeCodingBoxout = () => {
     return (
-        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 mb-14 max-w-2xl mx-auto">
-            <div className="flex items-start gap-4">
+        <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark rounded-lg p-4 mb-14 max-w-2xl mx-4 md:mx-auto">
+            <div className="flex flex-col md:flex-row items-start gap-4">
                 <div className="flex-shrink-0">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/29970a1b_7c79_420c_ac17_83b189f2af32_0a700168a7.png"
                         alt="Make your own games"
-                        className="w-[215px] h-auto"
+                        className="w-full md:w-[215px] h-auto"
                     />
                 </div>
                 <div className="flex-1">
-                    <h3 className="text-lg font-bold mb-2">It's never been easier to make your own games</h3>
-                    <p className="text-sm text-primary dark:text-primary-dark mb-1">
+                    <h3 className="text-lg font-bold mb-1">It's never been easier to make your own games</h3>
+                    <p className="leading-normal text-sm text-primary dark:text-primary-dark mb-1">
                         Don&apos;t want to spend all evening writing C++? That's why DeskHog is optimized for vibe
                         coding!
                     </p>
-                    <p className="text-sm text-primary dark:text-primary-dark mb-0">
+                    <p className="leading-normal text-sm text-primary dark:text-primary-dark mb-0">
                         We've included ready-made files to give AI agents the context they need, plus{' '}
                         <a href="/tutorials/deskhog-claude-tutorial">a guide to get you started</a>. Many of the games
                         above were made in exactly this way!
@@ -541,8 +546,8 @@ export const ProductDeskHog = () => {
                                 <span className="text-red dark:text-yellow">why we're making hardware</span>
                             </h2>
                             <p>
-                                DeskHog started as a joke in our internal Slack, but then{' '}
-                                <a href="/blog/welcome-to-deskhog">Danilo</a> decided to build it anyway. Two prototypes
+                                DeskHog started as a joke in our internal Slack, but then Danilo{' '}
+                                <Link to="/blog/welcome-to-deskhog">decided to build it anyway</Link>. Two prototypes
                                 and one hackathon later, we had a working version with a bunch of apps.
                             </p>
                             <p>
@@ -552,7 +557,7 @@ export const ProductDeskHog = () => {
                         </div>
                         <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center mb-6 md:mb-0">
                             <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[470px]">
-                                <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+                                <div className="relative aspect-video rounded overflow-hidden shadow-xl">
                                     <iframe
                                         src="https://www.youtube.com/embed/2jQco8hEvTI?modestbranding=1&rel=0&showinfo=0"
                                         title="DeskHog Demo Video"
@@ -574,56 +579,58 @@ export const ProductDeskHog = () => {
                     <h2
                         className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-8 sm:mb-12 md:mb-16 text-primary dark:text-primary-dark px-2"
                         dangerouslySetInnerHTML={{
-                            __html: 'The <s>devil</s> <span class="text-red dark:text-yellow">power</span> is in the details<br />',
+                            __html: 'The <s class="opacity-60">devil</s> <span class="text-red dark:text-yellow">power</span> is in the details<br />',
                         }}
                     />
                     <div className="flex justify-center">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-x-16 gap-y-8 sm:gap-y-10">
+                        <div className="grid grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 md:gap-x-16 gap-y-8 sm:gap-y-10">
                             {[
                                 {
                                     label: 'Processor',
-                                    icon: <IconChip />,
+                                    icon: <IconChip className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: 'ESP32-S3 Dual Core\n240MHz Tensilica',
                                 },
                                 {
                                     label: 'Memory',
-                                    icon: <IconMemory />,
+                                    icon: <IconMemory className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: '4MB Flash, 2MB PSRAM\n512KB SRAM',
                                 },
                                 {
                                     label: 'Display',
-                                    icon: <IconScreen />,
+                                    icon: <IconScreen className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: '1.14" Color IPS TFT\n240x135 pixels (ST7789)\n',
                                 },
                                 {
                                     label: 'Connectivity',
-                                    icon: <IconSignal />,
+                                    icon: <IconSignal className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: '2.4GHz Wi-Fi (802.11b/g/n)\nBluetooth LE (BLE)',
                                 },
                                 {
                                     label: 'Power & Battery',
-                                    icon: <IconBatteryCharge />,
+                                    icon: (
+                                        <IconBatteryCharge className="fill-primary dark:fill-primary-dark opacity-75" />
+                                    ),
                                     details:
                                         'USB Type-C / LiPo Battery\nBuilt-in Charging, MAX17048 Monitor\nLow Power Sleep (40-50µA)',
                                 },
                                 {
                                     label: 'Expansion',
-                                    icon: <IconExpand45 />,
+                                    icon: <IconExpand45 className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: 'STEMMA QT (I²C)\nFeatherWing Compatible\nSerial Debug Pin',
                                 },
                                 {
                                     label: 'Enclosure',
-                                    icon: <IconBox />,
+                                    icon: <IconBox className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: 'Custom 3D Printed (PETG)\nOpen source files available',
                                 },
                                 {
                                     label: 'Inputs',
-                                    icon: <IconButton />,
+                                    icon: <IconButton className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: '3x User Tactile Buttons\nReset & DFU buttons',
                                 },
                                 {
                                     label: 'Dimensions',
-                                    icon: <IconRuler />,
+                                    icon: <IconRuler className="fill-primary dark:fill-primary-dark opacity-75" />,
                                     details: '~70mm x 40mm x 15mm\nPerfectly-palm-sized',
                                 },
                             ].map((spec, index) => (
