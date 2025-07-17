@@ -30,16 +30,24 @@ This is rendered as:
 
 #### `<a>`
 
-Renders a link to another site.
+Renders a link to another page or website.
 
-- `select <a href='https://posthog.com'>Click me</a>`
-- `select <a href='https://posthog.com' target='_blank'>Let's go</a>`
+```sql
+select
+    <a href='https://posthog.com'>Click me</a>,
+    <a href={f'https://posthog.com/?t={now()}'} target='_blank'>Time to go</a>
+```
 
 #### `<redacted>`
 
 Overlays the content with a redacted box, hiding it from view. It is only shown when you move your mouse over it. This is useful for sensitive information like emails or personal data.
 
-- `select <redacted>{person.properties.email}</redacted> from events`
+```sql
+select
+    person.properties.name,
+    <redacted>{person.properties.email}</redacted>
+from events
+```
 
 #### `<Sparkline>`
 
