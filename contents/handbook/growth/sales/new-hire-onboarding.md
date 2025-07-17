@@ -68,6 +68,12 @@ Sales at PostHog isn't like most other software companies! These are some of the
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales. 
  - Meet with [Simon](/community/profiles/28895), Sales Lead
+ - PostHog integration exercise - by the end of week 1:
+   - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
+   - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
+   - Implement a custom event
+   - Implement user identification
+   - Record a loom showing what you’ve done and share it in our team channel
 
 
 ### Week 2
@@ -127,6 +133,12 @@ By the end of month 3:
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
  - Meet with [Simon](/community/profiles/28895), Sales Lead
+ - PostHog integration exercise - by the end of week 1:
+   - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
+   - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
+   - Implement a custom event
+   - Implement user identification
+   - Record a loom showing what you’ve done and share it in our team channel
 
 ### Week 2
 
