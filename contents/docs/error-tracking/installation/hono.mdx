@@ -2,8 +2,32 @@
 title: Hono error tracking installation
 ---
 
-import HonoErrorTracking from '../_snippets/hono-install-error-tracking.mdx'
-
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
 
-<HonoErrorTracking /> 
+Start by installing the `posthog-node` package using your package manager.
+```bash
+npm install --save posthog-node
+```
+
+Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) to handle uncaught exceptions. You can take advantage of this for error tracking. Remember to **export** your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
+
+```ts file=index.ts
+import { env } from 'hono/adapter'
+import { PostHog } from 'posthog-node'
+
+app.onError((err, c) => {
+  const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
+  
+  posthog.captureException(new Error(err.message, { cause: err }), 'user_distinct_id_with_err_rethrow', {
+    path: c.req.path,
+    method: c.req.method,
+    url: c.req.url,
+    headers: c.req.header(),
+    // ... other properties
+  })
+  posthog.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+  // other error handling logic
+  return c.text('Internal Server Error', 500)
+})
+```

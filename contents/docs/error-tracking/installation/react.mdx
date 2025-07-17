@@ -2,8 +2,23 @@
 title: React error tracking installation
 ---
 
-import ReactErrorTracking from '../_snippets/react-install-error-tracking.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallReactSDK from './_snippets/react/step1-install-react-sdk.mdx'
+import SetupReactExceptionAutocapture from './_snippets/react/step2-setup-exception-autocapture.mdx'
+import ConfigureSourceMaps from './_snippets/react/step3-configure-source-maps.mdx'
+import ReactNextSteps from './_snippets/react/step4-next-steps.mdx'
 
-Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
-
-<ReactErrorTracking /> 
+<Steps>
+    <Step title="Installing PostHog React SDK" goal="Install the PostHog React SDK." required="required">
+        <InstallReactSDK />
+    </Step>
+    <Step title="Setting up exception autocapture" goal="Enable automatic exception tracking for your React application." required="required">
+        <SetupReactExceptionAutocapture />
+    </Step>
+    <Step title="Configuring source maps" goal="Configure your build process to generate source maps for accurate stack traces." required="required">
+        <ConfigureSourceMaps />
+    </Step>
+    <Step title="Next steps">
+        <ReactNextSteps />
+    </Step>
+</Steps> 

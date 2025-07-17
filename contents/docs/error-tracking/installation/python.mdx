@@ -2,10 +2,19 @@
 title: Python error tracking installation
 ---
 
-import PythonInstall from '../../integrate/_snippets/install-python.mdx'
-import PythonErrorTracking from '../_snippets/python-install-error-tracking.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallPythonSDK from './_snippets/python/step1-install-python-sdk.mdx'
+import SetupPythonExceptionAutocapture from './_snippets/python/step2-setup-exception-autocapture.mdx'
+import NextSteps from './_snippets/python/step3-next-steps.mdx'
 
-Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
-
-<PythonInstall />
-<PythonErrorTracking /> 
+<Steps>
+    <Step title="Installing PostHog Python SDK" goal="Install the PostHog Python SDK." required="required">
+        <InstallPythonSDK />
+    </Step>
+    <Step title="Setting up exception autocapture" goal="Enable automatic exception tracking for your Python application." required="required">
+        <SetupPythonExceptionAutocapture />
+    </Step>
+    <Step title="Next steps">
+        <PythonNextSteps />
+    </Step>
+</Steps> 

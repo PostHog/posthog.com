@@ -2,14 +2,19 @@
 title: Node.js error tracking installation
 ---
 
-import NodeInstall from '../../integrate/_snippets/install-node.mdx'
-import NodeErrorTracking from '../_snippets/node-install-error-tracking.mdx'
-import UploadSourceMaps from '../_snippets/upload-source-maps.mdx'
-import UploadSourceMapsSteps from '../_snippets/upload-source-maps-steps.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallNodeSDK from './_snippets/node/step1-install-node-sdk.mdx'
+import SetupNodeExceptionCapture from './_snippets/node/step2-setup-exception-autocapture.mdx'
+import NodeNextSteps from './_snippets/node/step3-next-steps.mdx'
 
-Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
-
-<NodeInstall />
-<NodeErrorTracking />
-<UploadSourceMaps />
-<UploadSourceMapsSteps /> 
+<Steps>
+    <Step title="Installing PostHog Node.js SDK" goal="Install the PostHog Node.js SDK." required="required">
+        <InstallNodeSDK />
+    </Step>
+    <Step title="Setting up exception autocapture" goal="Enable automatic exception tracking for your Node.js application." required="required">
+        <SetupNodeExceptionAutocapture />
+    </Step>
+    <Step title="Next steps">
+        <NodeNextSteps />
+    </Step>
+</Steps> 

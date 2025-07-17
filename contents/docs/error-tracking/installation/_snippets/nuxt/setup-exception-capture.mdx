@@ -1,0 +1,53 @@
+#### 1. Manually
+
+Send errors directly using the posthog client, follow instructions on how to get the posthog instance.
+
+```vue component.vue
+<script>
+  const { $posthog } = useNuxtApp()
+
+  if ($posthog) {
+    const posthog = $posthog()
+    posthog.captureException(new Error("Important error message"))
+  }
+</script>
+```
+
+On the server side, you can use the `posthog` object directly.
+
+```js file=server/api/example.js focusOnLines=4-21
+export default defineEventHandler(async (event) => {
+  const distinctId = getCookie(event, 'distinct_id')
+
+  const { PostHog } = await import('posthog-node');
+  const runtimeConfig = useRuntimeConfig()
+
+  const posthog = new PostHog(
+    runtimeConfig.public.posthogPublicKey,
+    { 
+      host: runtimeConfig.public.posthogHost, 
+    }
+  );
+
+  try {
+    const results = await DB.query.users.findMany()
+    return results
+  } catch (error) {
+    posthog.captureException(error)
+  }
+})
+```
+
+#### 2. Automatically
+
+Update your `posthog.client.js` to add an error hook
+
+```js
+export default defineNuxtPlugin((nuxtApp) => {
+    ...
+    nuxtApp.hook('vue:error', (error) => {
+        posthogClient.captureException(error)
+    })
+    ...
+})
+```

@@ -2,14 +2,19 @@
 title: Web error tracking installation
 ---
 
-import WebInstall from '../../integrate/_snippets/install-web.mdx'
-import JSWebErrorTracking from '../_snippets/web-install-error-tracking.mdx'
-import UploadSourceMaps from '../_snippets/upload-source-maps.mdx'
-import UploadSourceMapsSteps from '../_snippets/upload-source-maps-steps.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallWebSDK from './_snippets/web/step1-install-web-snippet.mdx'
+import SetupWebExceptionAutocapture from './_snippets/web/step2-setup-exception-autocapture.mdx'
+import WebNextSteps from './_snippets/web/step3-next-steps.mdx'
 
-Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
-
-<WebInstall />
-<JSWebErrorTracking />
-<UploadSourceMaps />
-<UploadSourceMapsSteps /> 
+<Steps>
+    <Step title="Installing PostHog web SDK" goal="Install the PostHog web JavaScript SDK." required="required">
+        <InstallWebSDK />
+    </Step>
+    <Step title="Capturing exceptions" goal="Enable automatic exception tracking for your web application." required="required">
+        <SetupWebExceptionAutocapture />
+    </Step>
+    <Step title="Next steps">
+        <WebNextSteps />
+    </Step>
+</Steps> 

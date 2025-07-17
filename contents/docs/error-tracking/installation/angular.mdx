@@ -2,14 +2,19 @@
 title: Angular error tracking installation
 ---
 
-import AngularInstall from "../../integrate/_snippets/install-angular.mdx"
-import AngularErrorTracking from '../_snippets/angular-install-error-tracking.mdx'
-import UploadSourceMaps from '../_snippets/upload-source-maps.mdx'
-import UploadSourceMapsSteps from '../_snippets/upload-source-maps-steps.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallAngularSDK from './_snippets/angular/install-angular-sdk.mdx'
+import SetupAngularExceptionAutocapture from './_snippets/angular/setup-exception-autocapture.mdx'
+import AngularNextSteps from './_snippets/angular/next-steps.mdx'
 
-Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
-
-<AngularInstall />
-<AngularErrorTracking />
-<UploadSourceMaps />
-<UploadSourceMapsSteps /> 
+<Steps>
+    <Step title="Installing PostHog Angular SDK" goal="Install the PostHog Angular SDK." required="required">
+        <InstallAngularSDK />
+    </Step>
+    <Step title="Setting up exception autocapture" goal="Enable automatic exception tracking for your Angular application." required="required">
+        <SetupAngularExceptionAutocapture />
+    </Step>
+    <Step title="Next steps">
+        <AngularNextSteps />
+    </Step>
+</Steps> 

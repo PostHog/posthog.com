@@ -2,8 +2,15 @@
 title: SvelteKit error tracking installation
 ---
 
-import SvelteErrorTracking from '../_snippets/svelte-install-error-tracking.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+import SetupSvelteExceptionCapture from './_snippets/svelte/setup-exception-capture.mdx'
+import SvelteNextSteps from './_snippets/svelte/next-steps.mdx'
 
-Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
-
-<SvelteErrorTracking /> 
+<Steps>
+    <Step title="Setting up exception capture" goal="Install PostHog SDKs and enable automatic exception tracking for your SvelteKit application." required="required">
+        <SetupSvelteExceptionCapture />
+    </Step>
+    <Step title="Next steps">
+        <SvelteNextSteps />
+    </Step>
+</Steps> 
