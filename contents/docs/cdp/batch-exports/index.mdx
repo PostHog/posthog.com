@@ -186,23 +186,22 @@ When this happens, the batch export logs will display a message like "Batch expo
 
 ### Why do I get duplicate data?
 
-There are a few situations that can cause batch exports to export duplicate data:
-
+There are a few situations that can cause batch exports to export duplicate data. For this reason, although we strive to keep the number of duplicates below a threshold, we recommend that you set up processes to de-duplicate the data in your destination if any amount of duplicates is undesirable. Different destinations will offer different tools to optimally handle duplicates, so we suggest you review your destination's documentation to find out what is the best strategy.
 
 #### 1. Batch exports run before deduplication
 
-Occasionally, PostHog ingests duplicate data, as we want to ensure all data is captured, even if that means sometimes capturing the same event multiple times. PostHog has several asynchronous processes that clean up these duplicate values so that they never surface to any visible dashboards. 
+Occasionally, PostHog ingests duplicate data, as we want to ensure all data is captured, even if that means sometimes capturing the same event multiple times. PostHog has several asynchronous processes that clean up these duplicate values so that they never surface to any visible dashboards.
 
-Batch exports can run before these asynchronous processes have done their work. In that situation, the batch export can be served duplicate data by our underlying data storage. Batch exports will attempt to de-duplicate data within a batch, but any de-duplication across multiple batches would be too expensive to execute within the time constraints of the batch export. 
+Batch exports can run before these asynchronous processes have done their work. In that situation, the batch export can be served duplicate data by our underlying data storage. Batch exports will attempt to de-duplicate data within a batch, but any de-duplication across multiple batches would be too expensive to execute within the time constraints of the batch export.
 
 In these rare situations, you will see duplicate data in your destination.
 
 
 #### 2. Backfills
 
-When requesting a backfill, PostHog does not check if the data to backfill already exists in the destination. Doing so would negatively impact performance of each batch export run, potentially require more permissions to operate on the destination, and introduce more complexity into the configuration of the batch export. 
+When requesting a backfill, PostHog does not check if the data to backfill already exists in the destination. Doing so would negatively impact performance of each batch export run, potentially require more permissions to operate on the destination, and introduce more complexity into the configuration of the batch export.
 
-Batch exports assume that users who start a backfill want all the data within the backfill window exported, which means that multiple backfills over the same time period will produce duplicates. 
+Batch exports assume that users who start a backfill want all the data within the backfill window exported, which means that multiple backfills over the same time period will produce duplicates.
 
 When requesting a backfill, we recommend doing so for data that wasn't exported at all, like data from before the batch export was created, or when re-exporting the same data is required, like if it is accidentally deleted from the destination by an unrelated error.
 
