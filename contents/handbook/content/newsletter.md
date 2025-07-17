@@ -12,7 +12,7 @@ The newsletter is long-form, original copy, often based on blog posts we already
 
 We [run ads](/handbook/growth/marketing/open-source-sponsorship) to drive subscriptions for this newsletter.
 
-Art from previous newsletters is in <PrivateLink url="https://www.figma.com/design/tNuNQ0STmx0ve4f1sAv4Ka/Blog-images?node-id=0-1&p=f&t=qHbYLFRHbl0v8wqW-0">Figma</PrivateLink>.
+Art from previous newsletters is in <PrivateLink url="https://www.figma.com/design/tNuNQ0STmx0ve4f1sAv4Ka/Blog-images?node-id=0-1&p=f&t=qHbYLFRHbl0v8wqW-0">Figma</PrivateLink> and diagrams are in <PrivateLink url="https://www.figma.com/board/b0ttECQMiQ6LlGKpIICUcM/Marketing-Jam?node-id=0-1&p=f&t=Uy3T3a4MXGY266zM-0">FigJam</PrivateLink>.
 
 ## How to write a good newsletter
 
