@@ -97,7 +97,7 @@ We don't offer additional discounts in exchange for a case study, but we can off
 
 This should be added as a special term into the order form as follows:
 
-> PostHog will add an additional $10,000 of credit to Customer account upon successful publishing of a case study on Customer's usage of PostHog on PostHog.com.
+> PostHog will add an additional $XXXXX of credit to Customer account upon successful publishing of a case study on Customer's usage of PostHog on PostHog.com.
 
 ### Self-serve discounts
 
