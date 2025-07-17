@@ -1,0 +1,100 @@
+---
+title: HTML in SQL
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import {ProductScreenshot} from 'components/ProductScreenshot'
+
+PostHog SQL is no ordinary SQL. One of its neatest tricks is that it supports HTML tags inside SQL, internally known as _HogQLX_.
+
+This is valid PostHog SQL:
+
+```sql
+select
+    timestamp,
+    <span>This is <strong>{event}</strong>!<span> as html,
+    <a href={f'https://admin/user/{distinct_id}'}>{person.properties.email}</a> as email
+from events
+```
+
+This is rendered as:
+
+{/* TODO: add all screenshots */}
+
+### Special tags and components
+
+#### `<a>`
+
+Renders a link to another site.
+
+- `select <a href='https://posthog.com'>Click me</a>`
+- `select <a href='https://posthog.com' target='_blank'>Let's go</a>`
+
+#### `<redacted>`
+
+Overlays the content with a redacted box, hiding it from view. It is only shown when you move your mouse over it. This is useful for sensitive information like emails or personal data.
+
+- `select <redacted>{person.properties.email}</redacted> from events`
+
+#### `<Sparkline>`
+
+Show an array of numbers as an inline sparkline.
+
+```sql
+select
+    -- simplest case
+    <Sparkline>{[1,2,3]}</Sparkline> as simple,
+
+    -- with name and color, as a line
+    <Sparkline name='My Data' color='blue' type='line'>{[1,2,3]}</Sparkline> as pretty,
+
+    -- with labels for datapoints
+    <Sparkline labels={['First', 'Second', 'Third']}>{[1,2,3]}</Sparkline> as notated,
+
+    -- multiple series as children
+    <Sparkline colors={['blue', 'green']} names={['aa', 'bb']}>{[1,2,3,4,5,2,4,5,2]}{[1,2,3,4,5,2,4,5,2]}</Sparkline> as big,
+
+    -- everything via "data"
+    <Sparkline data={[{'color': 'green', 'name': 'asd', 'values': [1,2,3]}, {'color': 'blue', 'values': [4,5,2]}]} /> as line
+```
+
+### Standard tags
+
+The following tags are currently supported. For security reasons, none of them support attributes right now:
+
+- `em`
+- `strong`
+- `span`
+- `div`
+- `p`
+- `pre`
+- `code`
+- `h1`
+- `h2`
+- `h3`
+- `h4`
+- `h5`
+- `h6`
+- `ul`
+- `ol`
+- `li`
+- `table`
+- `thead`
+- `tbody`
+- `tr`
+- `th`
+- `td`
+- `blockquote`
+- `hr`
+- `b`
+- `i`
+- `u`
+
+### Easter eggs
+
+What are your favourite HTML tags from 1999?
