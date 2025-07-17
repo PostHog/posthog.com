@@ -28,7 +28,7 @@ Our team is big fans of what we've built. As proof, we sync hundreds of millions
   classes="rounded"
 />
 
-We've also created **over 1600** SQL insights using our data warehouse. Each is a combination of an SQL query and a visualization. It's our second most popular type of insight behind trends (which was around long before we had the data warehouse).
+We've also created **over 1,600** SQL insights using our data warehouse. Each is a combination of an SQL query and a visualization. It's our second most popular type of insight behind trends (which was around long before we had the data warehouse).
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_10_at_11_47_15_2x_9b179c988a.png"
@@ -52,11 +52,11 @@ Product managers at PostHog [don't tell engineers what to do](/newsletter/produc
 
 Core to this analysis is often combining product and revenue data, we don't only want to see how people are using a product but:
 
-- Who churned, how much was their churn, and why (so we can prevent future churn).
+- Who churned, how much was their churn, and why? (so we can prevent future churn)
 - Product-specific activation and retention rates, using our custom definition.
-- Metrics for their growth reviews like revenue expansion and contraction
+- Metrics for their growth reviews, like revenue expansion and contraction.
 
-For all this, you might think we'd use our [Stripe source](/docs/cdp/sources/stripe), but you'd be wrong. Since we have multiple different products with different usage-based pricing, we need a custom billing service to handle everything. The data from this service goes into Postgres which then gets synced and used in PostHog. 
+For all this, you might think we'd use our [Stripe source](/docs/cdp/sources/stripe), but you'd be wrong. Since we have multiple different products with different usage-based pricing, we need a custom billing service to handle everything. The data from this service goes into Postgres, which then gets synced and used in PostHog. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_39_25_2x_9cd97c333c.png"
@@ -287,7 +287,7 @@ ORDER BY ms.month
 
 ![Revenue](https://res.cloudinary.com/dmukukwp6/image/upload/revenue_c11fd894d5.png)
 
-As I hinted at above, tracking revenue at PostHog can be quite complicated. Because we have multiple products with usage-based and tiered pricing with discounts and add-ons, we can't just query Stripe and get our revenue data. We have a specific billing service that generates invoices and reports and adds them to Postgres.
+As I hinted at above, tracking revenue at PostHog is complicated. We have multiple products with usage-based and tiered pricing with discounts and add-ons, so we can't just query Stripe and get our revenue data. We have a specific billing service that generates invoices and reports, and adds them to Postgres.
 
 For multiple years, we used Metabase to query and visualize all this revenue data from Postgres. All of the cleanup and reformatting needed to make it usable was in there too. Moving all this to PostHog was a lot of work (it had its own project Slack channel), but we've done it now. 
 
