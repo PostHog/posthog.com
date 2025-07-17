@@ -28,11 +28,9 @@ interface ProductButtonsProps {
 const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
     const allProducts = useProduct()
 
-    // Helper to get product by type or name
-    const getProduct = (typeOrName: string) =>
-        Array.isArray(allProducts)
-            ? allProducts.find((p: any) => p.type === typeOrName || p.name === typeOrName)
-            : undefined
+    // Helper to get product by handle
+    const getProduct = (handle: string) =>
+        Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
 
     return (
         <span className={`flex flex-wrap gap-1 ${className}`}>
@@ -46,7 +44,7 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
                         iconClassName={`text-${product.color}`}
                         color={product.color}
                         className="font-medium text-primary hover:text-primary"
-                        to={`${product.slug}`}
+                        to={`/${product.slug}`}
                         state={{ newWindow: true }}
                         asLink
                     >
@@ -70,11 +68,6 @@ const HappyHog = () => {
 }
 
 const Products = () => {
-    const allProducts = useProduct() // This returns the deduped array of products
-
-    // Helper to get product by type or name
-    const getProduct = (typeOrName) => allProducts.find((p) => p.type === typeOrName || p.name === typeOrName)
-
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
@@ -87,7 +80,7 @@ const Products = () => {
                 { content: 1 },
                 { content: 'understand product usage', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['Web analytics', 'Product analytics', 'Session replay']} />,
+                    content: <ProductButtons productTypes={['web_analytics', 'product_analytics', 'session_replay']} />,
                     className: 'text-sm flex-wrap gap-px',
                 },
             ],
@@ -97,7 +90,7 @@ const Products = () => {
                 { content: 2 },
                 { content: 'test new features', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['Feature flags', 'Experiments', 'Error tracking']} />,
+                    content: <ProductButtons productTypes={['feature_flags', 'experiments', 'error_tracking']} />,
                     className: 'text-sm',
                 },
             ],
@@ -107,9 +100,7 @@ const Products = () => {
                 { content: 3 },
                 { content: 'talk to customers', className: 'font-bold' },
                 {
-                    content: (
-                        <ProductButtons productTypes={['Surveys', 'messaging', 'User interviews', 'Broadcasts']} />
-                    ),
+                    content: <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts']} />,
                     className: 'text-sm',
                 },
             ],
@@ -119,7 +110,7 @@ const Products = () => {
                 { content: 4 },
                 { content: 'organize usage data', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['data_warehouse', 'data_pipelines']} />,
+                    content: <ProductButtons productTypes={['data_warehouse', 'cdp']} />,
                     className: 'text-sm',
                 },
             ],
@@ -137,10 +128,10 @@ const Products = () => {
 
             <p className="mt-2 inline-flex items-center">
                 <span>using these tools, you can track your findings with</span>
-                <ProductButtons productTypes={['Dashboards']} />
+                <ProductButtons productTypes={['dashboards']} />
 
                 <span>or create</span>
-                <ProductButtons productTypes={['Notebooks']} />
+                <ProductButtons productTypes={['notebooks']} />
             </p>
         </div>
     )
