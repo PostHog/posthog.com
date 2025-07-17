@@ -134,7 +134,7 @@ As previously mentioned, batch exports are implemented on [Temporal](https://www
 
 When a batch export run is triggered, all workflows first read the data to export from our database and store it in an internal S3 bucket. The workflows then read the data from this internal bucket, processes it into the desired output format, and sends it to the destination.
 
-To trigger these workflows according to intervals chosen by our users, we leverage another feature of Temporal: [schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal schedule configured to execute the workflow associated with the export destination at the chosen interval.
+To trigger these workflows on intervals chosen by our users, we leverage another feature of Temporal: [schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal schedule configured to execute the workflow associated with the export destination at the chosen interval.
 
 After creation, the schedule will wait until the end of the current batch period as defined by the batch export frequency, such as until the end of the current hour for hourly exports. At this point, the schedule will trigger a workflow to export the data for the batch period that has just concluded. However, before doing so, the schedule will wait for an additional small and randomly assigned amount of time. This additional waiting time allows us to avoid issues with having all workflows starting just as the next hour or day starts (commonly known as the thundering herd problem).
 
