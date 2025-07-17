@@ -18,8 +18,8 @@ escalated_breaches_in_time_range as(
         ztme.type = 'breach'
         and ztme.metric in ('reply_time', 'pausable_update_time')
         and ztme.time >= fe.timestamp
-        and ztme.time >= &lbrace;filters.dateRange.from&rbrace;
-        and ztme.time <= &lbrace;filters.dateRange.to&rbrace;
+        and ztme.time >= {filters.dateRange.from}
+        and ztme.time <= {filters.dateRange.to}
     group by ztme.ticket_id
 ),
 
@@ -33,8 +33,8 @@ escalated_fulfill_events_in_time_range as (
         ztme.type = 'fulfill'
         and ztme.metric in ('reply_time', 'pausable_update_time')
         and ztme.time >= fe.timestamp
-        and ztme.time >= &lbrace;filters.dateRange.from&rbrace;
-        and ztme.time <= &lbrace;filters.dateRange.to&rbrace;
+        and ztme.time >= {filters.dateRange.from}
+        and ztme.time <= {filters.dateRange.to}
     group by ztme.ticket_id
 ),
 

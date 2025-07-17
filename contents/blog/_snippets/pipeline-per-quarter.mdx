@@ -6,11 +6,11 @@ FROM
 JOIN 
     salesforce_user u ON opp.owner_id = u.id
 WHERE 
-    toDateTime(opp.close_date) >= &lbrace;variables.start_of_quarter&rbrace;
-    AND toDateTime(opp.close_date) < &lbrace;variables.start_of_quarter&rbrace; + INTERVAL 3 MONTH
+    toDateTime(opp.close_date) >= {variables.start_of_quarter}
+    AND toDateTime(opp.close_date) < {variables.start_of_quarter} + INTERVAL 3 MONTH
     AND opp.forecast_category_name IN ('Commit', 'Best Case', 'Pipeline')
     AND opp.self_serve_no_interaction_c = FALSE
     AND opp.self_serve_post_engagement_c = FALSE
     AND opp.type = 'Annual Contract'
-    AND u.email LIKE CONCAT('%', &lbrace;variables.account_owner&rbrace;);
+    AND u.email LIKE CONCAT('%', {variables.account_owner});
 ```

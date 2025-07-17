@@ -4,10 +4,10 @@ WITH customers_per_month AS (
         customer_id,
         dateTrunc('month', toDateTime(period_end, 'UTC')) as month,
         JSONExtractString(data, 'customer_email') AS customer,
-        sum(JSONExtractFloat(mrr_per_product, &lbrace;variables.product&rbrace;)) AS mrr
+        sum(JSONExtractFloat(mrr_per_product, {variables.product})) AS mrr
     FROM postgres_invoice_with_annual_view
     WHERE dateTrunc('month', toDateTime(period_end, 'UTC')) IN ('2025-04-01', '2025-05-01', '2025-06-01')
-        AND JSONExtractFloat(mrr_per_product, &lbrace;variables.product&rbrace;) > 0
+        AND JSONExtractFloat(mrr_per_product, {variables.product}) > 0
     GROUP BY customer_id, customer, month
 ),
 

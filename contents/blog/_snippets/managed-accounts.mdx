@@ -17,8 +17,8 @@ WITH start_of_quarter AS (
         vitally_all_managed_accounts acc 
         ON inv.organization_id = acc.organization_id
     WHERE 
-        period_end < toDateTime(&lbrace;variables.start_of_quarter&rbrace;)
-        AND period_end >= toDateTime(&lbrace;variables.start_of_quarter&rbrace;) - INTERVAL 1 MONTH
+        period_end < toDateTime({variables.start_of_quarter})
+        AND period_end >= toDateTime({variables.start_of_quarter}) - INTERVAL 1 MONTH
     GROUP BY 
         organization_id, organization_name, account_executive, customer_success_manager
     ORDER BY 
@@ -31,13 +31,13 @@ FROM
     start_of_quarter
 WHERE 
     (
-        account_executive LIKE CONCAT('%', &lbrace;variables.account_owner&rbrace;) 
-        OR customer_success_manager LIKE CONCAT('%', &lbrace;variables.account_owner&rbrace;)
+        account_executive LIKE CONCAT('%', {variables.account_owner}) 
+        OR customer_success_manager LIKE CONCAT('%', {variables.account_owner})
     )
     AND CASE 
-        WHEN &lbrace;variables.segment&rbrace; = 'All' THEN 1
-        WHEN &lbrace;variables.segment&rbrace; = 'AE Managed' AND account_executive IS NOT NULL THEN 1
-        WHEN &lbrace;variables.segment&rbrace; = 'CSM Managed' AND customer_success_manager IS NOT NULL THEN 1
+        WHEN {variables.segment} = 'All' THEN 1
+        WHEN {variables.segment} = 'AE Managed' AND account_executive IS NOT NULL THEN 1
+        WHEN {variables.segment} = 'CSM Managed' AND customer_success_manager IS NOT NULL THEN 1
         ELSE 0
     END = 1;
 ```

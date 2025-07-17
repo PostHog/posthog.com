@@ -8,7 +8,7 @@ WITH daily_exceptions AS (
     FROM events 
     WHERE event = 'organization usage report'
         AND JSONExtractInt(properties, 'exceptions_captured_in_period') > 0
-        AND &lbrace;filters&rbrace;  -- Same filters as daily customers query
+        AND {filters}  -- Same filters as daily customers query
         AND timestamp >= toDateTime('2025-03-01')
 ),
 
