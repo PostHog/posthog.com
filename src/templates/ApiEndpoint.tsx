@@ -118,6 +118,7 @@ const titleMap: Record<string, string> = {
     subscriptions: 'Subscriptions',
     surveys: 'Survey',
     users: 'Users',
+    web_analytics: 'Web analytics',
     data_model: 'Data model',
 }
 
