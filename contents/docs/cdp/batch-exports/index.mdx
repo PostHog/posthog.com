@@ -132,7 +132,7 @@ The start date of a backfill may be adjusted depending on when the earliest avai
 
 As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal workflow](https://docs.temporal.io/workflows). These workflows contain all the destination-specific operations required to connect to each specific destination. For example, the `s3-export` workflow contains the code to export data from PostHog to AWS S3.
 
-When a batch export run is triggered, all workflows first read the data to export from our database and store it in an internal S3 bucket. The workflows then read the data from this internal bucket, processes it into the desired output format, and send it over to the destination.
+When a batch export run is triggered, all workflows first read the data to export from our database and store it in an internal S3 bucket. The workflows then read the data from this internal bucket, processes it into the desired output format, and sends it to the destination.
 
 To trigger these workflows according to intervals chosen by our users, we leverage another feature of Temporal: [schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal schedule configured to execute the workflow associated with the export destination at the chosen interval.
 
