@@ -28,7 +28,13 @@ Every batch export exports data to a destination using the configuration paramet
 * [Postgres](/docs/cdp/batch-exports/postgres)
 * [Redshift](/docs/cdp/batch-exports/redshift)
 
-Support for new destinations will be added based on demand. You can follow development of new destinations [here](https://github.com/PostHog/posthog/issues/15997).
+The configurations of each destination can be tested by clicking the "Start test" button below the configuration form:
+
+![image of configuration test showing 3 completed steps](https://res.cloudinary.com/dmukukwp6/image/upload/Destination_tests_998d84299b.png)
+
+This test can be used to detect and diagnose configuration issues, like invalid credentials or missing permissions, before running the batch export.
+
+Support for new destinations will be added based on demand. You may reach us via the [in-app support form](https://us.posthog.com/#panel=support%3Asupport%3Abatch_exports%3Alow%3Atrue) or by creating an [issue in GitHub](https://github.com/PostHog/posthog/issues/new?template=feature_request.yml) to voice your interest in the development of new destinations.
 
 import InboundIpAddresses from '../_snippets/inbound-ip-addresses.mdx'
 
@@ -105,7 +111,7 @@ Each run has:
 
 ## Backfills (exporting historical data)
 
-When you create a batch export, it will start exporting data from the current time interval. If you want to export historical data, you can run a backfill.
+When you create a batch export, it will start exporting data from the current time interval. If you want to export historical data, you can **backfill** the batch export.
 
 To view your existing backfills or to start a new one, you can navigate to the "Backfills" tab of the destination:
 
@@ -117,22 +123,24 @@ From here, you can create a new backfill by clicking the "Start backfill" button
 
 This will immediately schedule a series of batch export runs that fall within the bounds selected, based on the batch export's frequency.
 
-The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 2024-01-01 but the earliest event captured in PostHog is 2024-01-02, the start date will be adjusted to 2024-01-02.
+The start date of a backfill may be adjusted depending on when the earliest available data is. For example, if you choose a start date of 2024-01-01 but the earliest event captured in PostHog is 2024-01-02, the start date will be adjusted to 2024-01-02. On the other hand, the end date of the backfill cannot be set past the current time, as our engineers have yet to figure out time traveling to allow us to export events in the future.
 
 
 ## FAQ
 
 ### How do batch exports work?
 
-As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal Workflow](https://docs.temporal.io/workflows), with a [Workflow Type](https://docs.temporal.io/workflows#workflow-type) that indicates which destination is implemented in it.
+As previously mentioned, batch exports are implemented on [Temporal](https://www.temporal.io/). More in detail, each supported destination is defined as a [Temporal workflow](https://docs.temporal.io/workflows). These workflows contain all the destination-specific operations required to connect to each specific destination. For example, the `s3-export` workflow contains the code to export data from PostHog to AWS S3.
 
-For example, the Workflow of `s3-export` type contains the code to export data from PostHog to AWS S3. This way, PostHog maintains a map of destinations to Workflow Types, so whenever a user selects a destination, like Snowflake, we can check the map to arrive at the Workflow Type `snowflake-export`.
+When a batch export run is triggered, all workflows first read the data to export from our database and store it in an internal S3 bucket. The workflows then read the data from this internal bucket, processes it into the desired output format, and send it over to the destination.
 
-To trigger these workflows according to intervals chosen by our users, we leverage [Schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal Schedule configured to execute the Workflow associated with the export destination, at the chosen interval.
+To trigger these workflows according to intervals chosen by our users, we leverage another feature of Temporal: [schedules](https://docs.temporal.io/workflows#schedule). Whenever a PostHog user creates a batch export, under the hood PostHog creates a Temporal schedule configured to execute the workflow associated with the export destination at the chosen interval.
 
-After creation, the Schedule will wait until the end of the current batch period as defined by the batch export frequency, such as until the end of the current hour for hourly exports. At this point, the Schedule will trigger a Workflow to export the data for the batch period that has just concluded. Scheduling a Workflow for execution places the Activities defined in the Workflow on a task queue. Temporal Workers running in [PostHog infrastructure](/docs/how-posthog-works) will then pick up these tasks as they become available and execute them.
+After creation, the schedule will wait until the end of the current batch period as defined by the batch export frequency, such as until the end of the current hour for hourly exports. At this point, the schedule will trigger a workflow to export the data for the batch period that has just concluded. However, before doing so, the schedule will wait for an additional small and randomly assigned amount of time. This additional waiting time allows us to avoid issues with having all workflows starting just as the next hour or day starts (commonly known as the thundering herd problem).
 
-> **Note:** Temporal Workers run in PostHog infrastructure and are maintained by PostHog, not by Temporal. This means no data leaves PostHog infrastructure unless it is being exported to the destination of your choosing. Any configuration parameters are encrypted before being sent to Temporal Cloud.
+Each workflow is divided into activities, and we operate workers running in [PostHog infrastructure](/docs/how-posthog-works) that pick up and run these activities as they are queued-up by each workflow.
+
+> **Note:** Workers run in PostHog infrastructure and are maintained by PostHog, not by Temporal. This means no event, person, or session data is ever sent to Temporal, as it is only handled by the aforementioned workers. Only configuration parameters are sent to external Temporal servers as they coordinate the execution of batch exports across multiple workers. This configuration data is always encrypted before leaving PostHog.
 
 ```mermaid
 sequenceDiagram
