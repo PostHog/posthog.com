@@ -102,3 +102,7 @@ Community events are better when organizers share what happened and any follow-u
 [We value feedback](handbook/people/feedback) and expect the same from event organizers. A great event will speak for itself but sometimes an event will miss the mark, too. Either way, we want to hear how it went and value organizers who learn from the experience.
 
 In addition to what you learned and feedback from attendees, we will share any photos, videos, quotes, data points with our team.
+
+## Sponsoring external events
+
+We sometimes get asked by other companies or people if we are interested in sponsoring their events - these can range from small to extremely large. We don't do these at the moment because they are a poor return on investment, though we always encourage team members to speak at these if there is an opportunity to, and we can support you with budget, social posts, merch etc. Ask in the #team-brand-and-vibes channel. 
