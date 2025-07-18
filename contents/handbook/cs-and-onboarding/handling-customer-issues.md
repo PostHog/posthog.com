@@ -3,40 +3,44 @@ title: Handling customer issues
 sidebar: Handbook
 showTitle: true
 ---
-As a member of the Sales / CS / Onboarding team, you're the first point of contact for customer issues. This helps build your relationship as a technical point of contact, plus you have the most context on the customer and can help with proper escalation.
+As a dedicated PostHog human for customers, you're the first point of contact for customer issues. This helps build your relationship as a technical point of contact, plus you have the most context on the customer and can help with proper escalation.
 
 The support team and engineering teams are always available to help, but you should try to solve issues yourself before handing off to other teams. This also helps you level up your product knowledge.
 
-# Raising issues
+## Raising issues
 
-## Zendesk
+### Zendesk
 We use [Zendesk Support](https://posthoghelp.zendesk.com/agent) as our internal platform to manage support tickets. For specifics on how we use Zendesk, [look here](/handbook/engineering/support-hero#how-do-i-use-zendesk).
 
-## Slack x Zendesk
+### Tickets created from Slack
 Customers can [create tickets from Slack via the Pylon integration](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) by adding the 🎫 emoji reaction. If this isn't working as expected, make sure you've [invited Pylon to the channel](/handbook/growth/sales/slack-channels).
 
-Make sure to [fill out the `Group` and `Severity`](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) form so the ticket is routed to the right team (customers sometimes forget so please remind them). Check [feature ownership](/handbook/engineering/feature-ownership) if you're unsure which team is responsible for a product area. 
+Make sure to [fill out the automated message asking for `Group` and `Severity`](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) so the ticket is routed to the right team (customers sometimes forget so help fill it for them). Check [feature ownership](/handbook/engineering/feature-ownership) if you're unsure which team is responsible for a product area. 
 
 If you're investigating a ticket that your customer raised in Slack, let support know you're on it to avoid duplicate effort. You can do this by leaving an internal note directly in Zendesk. 
 
-Tip: All customer messages from channels with Pylon also go to the [#support-customer-success](https://posthog.slack.com/archives/C05MUMZLC13) channel. If you prefer to stay in Slack, you can find the ticket and leave a message in the thread. This also creates an internal note in Zendesk.
+> Tip: Customer messages from channels with Pylon also go to [#support-customer-success](https://posthog.slack.com/archives/C05MUMZLC13). You can find the ticket in the channel and leave a message in the thread. This also creates an internal note in Zendesk.
 
-# Investigating issues
+## Investigating issues
 
-When investigating customer issues, it's a good idea to ask for specifics – e.g. links to the insight, feature flag, or dashboard; a screenshot of the error or the specific error message. 
+When investigating customer issues, it's helpful to ask for specifics – e.g. links to the insight, feature flag, or dashboard; a screenshot of the error or the specific error message. 
 
 If helpful, you can log in as the customer into their PostHog org. Clicking a link from a customer's PostHog instance will give you the option to login as the customer. Alternatively, log into [Django admin](https://us.posthog.com/admin/) ([EU instance](https://eu.posthog.com/admin/)), search for the org or user, and click "Log in as user". If you're not seeing this option, ask Dana to add you as a staff member in Django.
 
-When investigating, use our [docs](/docs), look at [troubleshooting tips](/handbook/support/troubleshooting-tips), search through Slack, Zendesk, GitHub, and Pylon for similar issues. If you've just joined, try to spend 30 mins to 1 hour investigating by yourself before asking for help. Onboarding is the best time to learn about PostHog products! Obviously, balance this with the urgency of the issue and use common sense.
+When investigating, use our [docs](/docs), look at [troubleshooting tips](/handbook/support/troubleshooting-tips), search through Slack, Zendesk, GitHub, or Pylon for similar issues. If you've just joined, try to spend 30 mins to 1 hour investigating by yourself before asking for help. Onboarding is the best time to learn about PostHog products! Obviously, balance this with the urgency of the issue and use common sense.
 
 Whilst investigating, keep the customer in the loop by communicating progress, blockers, next steps etc.
 
-# Escalating tickets
+## Escalating tickets
 
-You can escalate tickets to either the support team or the [relevant engineering team](/handbook/engineering/feature-ownership). The decision depends on whether you need help with additional context or further digging (➡️ support), or if the issue requires deep technical domain knowledge (➡️ engineer). Our support team are technical engineers and can answer the majority of tickets. If in doubt, escalate to support. 
+You can escalate tickets to either the support team or the [relevant engineering team](/handbook/engineering/feature-ownership). The decision depends on:
+- You need help with additional context or further digging ➡️ support 
+- The issue requires deep technical domain knowledge ➡️ engineering
+
+Our support team are technical engineers and can answer the majority of tickets. If in doubt, escalate to support. 
 
 If you're escalating to support, you don't need to do anything special - the ticket will stay in the support queue. 
 
-If you're escalating to engineering, set the `esc.` dropdown in the left sidebar to escalated and double check the group assignee makes sense. If you can't edit the dropdown, [upgrade your Zendesk role to full agent](handbook/engineering/support-hero#i-cant-assign-tickets-or-make-public-replies) and downgrade after. 
+If you're escalating to engineering, in Zendesk, set the `esc.` dropdown in the left sidebar to escalated and double check the group assignee makes sense. You might need to [upgrade your Zendesk role to full agent](handbook/engineering/support-hero#i-cant-assign-tickets-or-make-public-replies), just remember to downgrade after. 
 
 When escalating tickets, leave an internal note saying who you're escalating this to – so it's clear who should pick it up. Also include details about the investigation you've done and observations you've made. Even if it's confirming that you followed the customer's reproduction steps and saw the same issue, that context is incredibly valuable. 
