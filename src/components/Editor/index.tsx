@@ -22,6 +22,7 @@ import { getProseClasses } from '../../constants/index'
 import { useApp } from '../../context/App'
 import Share from 'components/Share'
 import { useWindow } from '../../context/Window'
+import Cher from 'components/Cher'
 
 interface EditorProps {
     slug?: string
@@ -111,6 +112,7 @@ export function Editor({
     cta,
     ...other
 }: EditorProps) {
+    const [showCher, setShowCher] = useState(false)
     const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
     const [filters, setFilters] = useState({})
@@ -280,31 +282,38 @@ export function Editor({
                             onClick={() => setShowFilters(!showFilters)}
                         />
                     )}
-                    <OSButton
-                        variant="primary"
-                        size="xs"
-                        {...(hasShareButton
-                            ? {
-                                  onClick: () => {
-                                      addWindow(
-                                          <Share
-                                              title={appWindow?.meta?.title}
-                                              location={{ pathname: `share` }}
-                                              key={`share`}
-                                              newWindow
-                                              url={`${window.location.origin}${appWindow?.path}`}
-                                          />
-                                      )
-                                  },
-                              }
-                            : {
-                                  to: cta?.url,
-                              })}
-                        state={{ newWindow: true }}
-                        asLink
+                    <div
+                        onMouseEnter={() => setShowCher(true)}
+                        onMouseLeave={() => setShowCher(false)}
+                        className="relative z-10"
                     >
-                        {hasShareButton ? 'Share' : cta?.label}
-                    </OSButton>
+                        <Cher active={showCher} />
+                        <OSButton
+                            variant="primary"
+                            size="xs"
+                            {...(hasShareButton
+                                ? {
+                                      onClick: () => {
+                                          addWindow(
+                                              <Share
+                                                  title={appWindow?.meta?.title}
+                                                  location={{ pathname: `share` }}
+                                                  key={`share`}
+                                                  newWindow
+                                                  url={`${window.location.origin}${appWindow?.path}`}
+                                              />
+                                          )
+                                      },
+                                  }
+                                : {
+                                      to: cta?.url,
+                                  })}
+                            state={{ newWindow: true }}
+                            asLink
+                        >
+                            {hasShareButton ? 'Share' : cta?.label}
+                        </OSButton>
+                    </div>
                 </>
             ),
         },

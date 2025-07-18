@@ -25,7 +25,6 @@ import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
 import { getProseClasses } from '../../constants'
-import Cher from 'components/Cher'
 
 const snapThreshold = -50
 
@@ -469,7 +468,6 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             onMouseDown={handleMouseDown}
                             onAnimationComplete={() => updateWindow(item, { animating: false })}
                         >
-                            {item.path.startsWith('share') && <Cher />}
                             {!item.minimal && !compact && (
                                 <div
                                     data-scheme="tertiary"
@@ -639,7 +637,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                     </div>
                                 </div>
                             )}
-                            <div ref={contentRef} className={`size-full flex-grow overflow-hidden`}>
+                            <div ref={contentRef} className={`size-full flex-grow`}>
                                 <Router {...item.props}>{item.element}</Router>
                             </div>
                             {!item.fixedSize && !item.minimal && (
