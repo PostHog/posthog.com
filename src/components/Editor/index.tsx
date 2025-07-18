@@ -287,7 +287,7 @@ export function Editor({
                         onMouseLeave={() => setShowCher(false)}
                         className="relative z-10"
                     >
-                        <Cher active={showCher} />
+                        {hasShareButton && <Cher active={showCher} />}
                         <OSButton
                             variant="primary"
                             size="xs"
