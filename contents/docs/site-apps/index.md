@@ -6,7 +6,7 @@ showTitle: true
 ---
 
 
-Site apps enable you easily add functionality to your site without extra code. They are injected through the `posthog-js` library or snippet and can be used to show content or banners on your site.
+Site apps enable you to easily add functionality to your site without extra code. They are injected through the `posthog-js` library or snippet and can be used to show content or banners on your site.
 
 ## Enabling apps
 
@@ -16,5 +16,5 @@ Head to **Data pipelines** and click the [Site apps](https://us.posthog.com/pipe
 
 | App | Description |
 |-----|-------------|
-| [Notification bar](/docs/cdp/site-apps/notification-bar) | Display a customised banner on your site to notify users about events such as product releases, sales, and events. |
-| [Pineapple mode](/docs/cdp/site-apps/pineapple-mode) | Rain pineapples all over your product or website. Yes, really. |
+| [Notification bar](/docs/site-apps/notification-bar) | Display a customised banner on your site to notify users about events such as product releases, sales, and events. |
+| [Pineapple mode](/docs/site-apps/pineapple-mode) | Rain pineapples all over your product or website. Yes, really. |
