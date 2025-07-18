@@ -56,7 +56,7 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
             onMouseLeave={() => setHovered(false)}
         >
             {/* Vertical line positioned absolutely relative to li */}
-            <div className="absolute left-4 w-[1px] bg-gray-accent dark:bg-gray-accent-dark h-full"></div>
+            <div className="absolute left-4 w-[1px] bg-gray-accent dark:bg-gray-accent-dark h-full opacity-70"></div>
 
             <div className="flex items-start mr-4 relative z-10">
                 <div className="flex flex-col items-center relative">
