@@ -234,10 +234,22 @@ const DeskHogCTA = () => {
                 <div className="relative text-center md:text-right">
                     <div className="mb-6">
                         <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hog_danilo_leo_2b784f0398.png"
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_smiling_36bb2647ff.png"
                             alt="DeskHog marketing image"
-                            className="max-w-[390px] mx-auto md:mx-0"
+                            className="max-w-[350px] mx-auto md:mx-0"
                         />
+                    </div>
+
+                    {/* Fun animated element similar to CTA.js */}
+                    <div className="absolute top-4 md:-top-8 -right-8 md:-right-12">
+                        <div className="relative">
+                            <Bang className="w-[120px] md:w-[150px] animate-grow" />
+                            <p className="px-4 md:px-6 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-sm md:text-base rotate-6">
+                                <span className="text-xs">Not</span>
+                                endorsed <br />
+                                by Kim K
+                            </p>
+                        </div>
                     </div>
                 </div>
 
@@ -389,7 +401,7 @@ export const ProductDeskHog = () => {
                         <div className="w-full max-w-[800px] lg:max-w-[1000px]">
                             <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                                 <iframe
-                                    src="https://youtu.be/8hMfu3kXR20"
+                                    src="https://www.youtube.com/embed/2jQco8hEvTI"
                                     title="DeskHog Demo Video"
                                     className="w-full h-full"
                                     frameBorder="0"
@@ -546,7 +558,7 @@ export const ProductDeskHog = () => {
                             <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[470px]">
                                 <div className="relative aspect-video rounded overflow-hidden shadow-xl">
                                     <iframe
-                                        src="https://youtu.be/lqeD2vvAA4w"
+                                        src="https://www.youtube.com/embed/2jQco8hEvTI?modestbranding=1&rel=0&showinfo=0"
                                         title="DeskHog Demo Video"
                                         className="w-full h-full"
                                         frameBorder="0"
