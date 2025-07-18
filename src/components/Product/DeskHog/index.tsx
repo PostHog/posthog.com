@@ -401,7 +401,7 @@ export const ProductDeskHog = () => {
                         <div className="w-full max-w-[800px] lg:max-w-[1000px]">
                             <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
                                 <iframe
-                                    src="https://www.youtube.com/embed/2jQco8hEvTI"
+                                    src="https://youtu.be/8hMfu3kXR20"
                                     title="DeskHog Demo Video"
                                     className="w-full h-full"
                                     frameBorder="0"
@@ -558,7 +558,7 @@ export const ProductDeskHog = () => {
                             <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[470px]">
                                 <div className="relative aspect-video rounded overflow-hidden shadow-xl">
                                     <iframe
-                                        src="https://www.youtube.com/embed/2jQco8hEvTI?modestbranding=1&rel=0&showinfo=0"
+                                        src="https://youtu.be/lqeD2vvAA4w"
                                         title="DeskHog Demo Video"
                                         className="w-full h-full"
                                         frameBorder="0"
