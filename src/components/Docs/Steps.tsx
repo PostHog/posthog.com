@@ -48,22 +48,26 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
 
     return (
         <li
-            className="mb-10 flex w-full group"
+            className="mb-10 flex w-full group relative"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            <div className="flex items-start mr-4 relative">
-                <span className="flex flex-col items-center relative">
+            {/* Vertical line positioned absolutely relative to li */}
+            <div className="absolute left-4 w-[1px] bg-gray-accent dark:bg-gray-accent-dark h-full"></div>
+
+            <div className="flex items-start mr-4 relative z-10">
+                <div className="flex flex-col items-center">
                     <CopyAnchor id={anchorId} hovered={hovered} />
-                    <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-accent-light dark:bg-gray-accent-dark text-primary dark:text-primary-dark font-bold text-base z-10 border border-light dark:border-dark border-b-4 border-b-gray-accent dark:border-b-gray-accent-dark">
-                        {number}
-                    </span>
-                    <span className="mt-2 w-[1px] top-4 bg-gray-accent dark:bg-gray-accent-dark h-[calc(100%_-_3rem)]"></span>
-                </span>
+                    <div className="bg-tan dark:bg-dark py-2">
+                        <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-accent-light dark:bg-gray-accent-dark text-primary dark:text-primary-dark font-bold text-base border border-light dark:border-dark border-b-4 border-b-gray-accent dark:border-b-gray-accent-dark">
+                            {number}
+                        </span>
+                    </div>
+                </div>
             </div>
             <div className="min-w-0 flex-1">
                 <div className="relative">
-                    <div className="flex items-center gap-2 font-semibold text-base text-primary dark:text-primary-dark">
+                    <div className="flex items-center gap-2 font-semibold text-base text-primary dark:text-primary-dark pt-2">
                         {!titleSize || titleSize === 'h2' ? (
                             <h2 id={anchorId} className="!my-0 !text-2xl truncate">
                                 {title}
