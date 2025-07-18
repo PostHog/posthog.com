@@ -86,7 +86,9 @@ export default function TaskBarMenu() {
                             <div className="relative">
                                 <CloudinaryImage
                                     src={getAvatarURL(user?.profile)}
-                                    className={`size-6 rounded-full bg-${user?.profile?.color ?? 'white dark:bg-dark'}`}
+                                    className={`size-6 rounded-full overflow-hidden bg-${
+                                        user?.profile?.color ?? 'white dark:bg-dark'
+                                    }`}
                                     width={48}
                                     alt=""
                                 />
