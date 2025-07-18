@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Outbound sales is a thing we will need to get really good at as we scale PostHog, as 100% inbound eventually dries up. Most companies like us start thinking about outbound around our ARR. We should start doing stuff now, as if we wait til inbound slows down, we’ll panic and make bad decisions, trash the brand, copy and paste what other boring companies have done in a short-sighted way etc. 
+Outbound sales is a thing we will need to get really good at as we continue to scale PostHog, as 100% inbound eventually dries up. Most companies like us start thinking about outbound around our ARR. We should start doing stuff now, as if we wait til inbound slows down, we’ll panic and make bad decisions, trash the brand, copy and paste what other boring companies have done in a short-sighted way etc. 
 
 ## What is outbound?
 

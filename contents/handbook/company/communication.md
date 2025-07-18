@@ -197,7 +197,7 @@ Here are the steps for an RFC:
 3. Share the RFC:
     - Assign people whom this RFC will impact, or who may have good opinions on the topic, as reviews to the pull request.
     - Post in the relevant Slack channel (normally the teams slack channel, or `#tell-posthog-anything` if it's a bigger cross-team RFC)
-    - The aim is not to get one person to mark the as RFC approved, but to get the right people involved and commenting. It's a request for _comments_ not a request for _approval_. That means you might need to chase them to make sure it happens - tag the people, present at all hands, use offsites or other sync time - **it's your responsibility to nudge the relevant people for their input**
+    - The aim is not to get one person to mark the RFC as approved, but to get the right people involved and commenting. It's a request for _comments_ not a request for _approval_. That means you might need to chase them to make sure it happens - tag the people, present at all hands, use offsites or other sync time - **it's your responsibility to nudge the relevant people for their input**
 4. If an RFC is cross-team and is causing a large amount of disagreement, it might be worth having a sync meeting to reach a decision
 5. Once a decision is made, include the decision in the pull request, merge it in and share this in the relevant channel and `#github-rfcs` again.
 

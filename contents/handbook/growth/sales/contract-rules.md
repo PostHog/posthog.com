@@ -91,6 +91,14 @@ For customers contracting for $100k or more we can accept quarterly payments wit
 
 > It's worth being aware that fast-growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%.
 
+### Credit for case studies
+
+We don't offer additional discounts in exchange for a case study, but we can offer up to 5% additional credit in exchange for a _published_ case study on PostHog.com (ie. the credit is only applied after the case study goes live, not up front). Simon or Charles need to approve this before you offer it to the customer - most case studies are not going to be useful for us. 
+
+This should be added as a special term into the order form as follows:
+
+> PostHog will add an additional $XXXXX of credit to Customer account upon successful publishing of a case study on Customer's usage of PostHog on PostHog.com.
+
 ### Self-serve discounts
 
 We also offer a way for customers to receive discounts on their usage without talking to sales or being on an Enterprise plan. In PostHog, if a customer meets certain criteria, they will see a banner on their billing page with a call-to-action (CTA) to "buy credits". The form they fill out will be auto-populated with an estimated number of credits based on their last 3 months of usage, but they can adjust this value as needed. They will have the option to pay with the card on file or to receive an invoice. Credits will be applied to their account once the invoice is paid.
