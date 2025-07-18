@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { CopyAnchor } from 'components/Heading'
 import Slugger from 'github-slugger'
 
-const badgeClasses =
-    'bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block'
+const optionalBadgeClasses =
+    '!bg-green/10 !text-green !dark:text-white !dark:bg-green/50 text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block'
 const requiredBadgeClasses =
     '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50 text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block'
 const recommendedBadgeClasses =
@@ -11,7 +11,7 @@ const recommendedBadgeClasses =
 
 const badgeMap: Record<string, { text: string; className: string }> = {
     required: { text: 'Required', className: requiredBadgeClasses },
-    optional: { text: 'Optional', className: badgeClasses },
+    optional: { text: 'Optional', className: optionalBadgeClasses },
     recommended: { text: 'Recommended', className: recommendedBadgeClasses },
 }
 
