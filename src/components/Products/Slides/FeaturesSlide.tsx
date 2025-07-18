@@ -35,7 +35,7 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
     return (
         <div className="h-full">
             <Tabs.Root
-                className="flex w-full h-full items-start bg-accent"
+                className="flex w-full h-full items-start bg-accent text-primary"
                 defaultValue={`tab-${currentTab}`}
                 value={`tab-${currentTab}`}
                 onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}

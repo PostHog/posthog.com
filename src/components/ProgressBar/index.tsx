@@ -40,7 +40,9 @@ export default function ProgressBar({ title, chrome = true }: { title?: string; 
     return (
         <div data-scheme="secondary" className="@container min-w-64">
             <div
-                className={`${chrome ? 'border border-primary bg-primary rounded-md p-8 mb-12' : ''} max-w-xl mx-auto`}
+                className={`${
+                    chrome ? 'border border-primary bg-primary text-primary rounded-md p-8 mb-12' : ''
+                } max-w-xl mx-auto`}
             >
                 <div className="flex flex-col @md:flex-row justify-between mb-2 text-sm">
                     <span className="font-semibold">Loading {title} data...</span>
