@@ -7,11 +7,11 @@ export const shareReplayDark = "https://res.cloudinary.com/dmukukwp6/video/uploa
 
 Replays are typically viewed in **[session replay](https://us.posthog.com/replay)** part of PostHog, but sometimes, you might want to share them internally or externally.
 
-We provide multiple ways for you to do so. 
+We provide multiple ways for you to do so.
 
 ## Sharing (and embedding) a session replay
 
-On every session replay, you'll see a share button. 
+On every session replay, you'll see a share button.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_03_39_2x_7ff8eacf12.png"
@@ -46,7 +46,29 @@ If you just want to share an image from the replay, you can click the **Screensh
 
 ![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_23_09_2x_ef258076c9.png)
 
-## Sharing via the PostHog API
+### Method two: Automatically share replays to Intercom or Crisp
+
+You can automatically share replays to Intercom or Crisp by setting the `integrations` config option when initializing PostHog's Web SDK to `{ intercom: true }` or `{ crispChat: true }`.
+
+```js-web
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    integrations: {
+        intercom: true,
+        crispChat: true,
+    },
+});
+```
+
+When enabled, this:
+
+- Automatically sets the latest session replay URL and person profile URL to Intercom or Crisp
+- Tracks a PostHog event (`posthog:sessionInfo`) in Intercom with replay and person URLs
+- Updates whenever a new session starts
+
+This requires the respective chat widget (Intercom or Crisp Chat) to be installed and configured on your site. The integrations only activates if the chat widgets are detected on the page.
+
+### Method three: Sharing via the PostHog API
 
 Using the [PostHog API](/docs/api/session-recordings), you can automate the sharing of replays. For example, a common use case is to include a session replay in a support ticket whenever a user reports a bug.
 
