@@ -6,16 +6,19 @@ const badgeClasses =
     'bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block'
 const requiredBadgeClasses =
     '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50 text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block'
+const recommendedBadgeClasses =
+    '!bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50 text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block'
 
 const badgeMap: Record<string, { text: string; className: string }> = {
     required: { text: 'Required', className: requiredBadgeClasses },
     optional: { text: 'Optional', className: badgeClasses },
+    recommended: { text: 'Recommended', className: recommendedBadgeClasses },
 }
 
 export interface StepProps {
     title: string
     subtitle?: string
-    badge?: 'required' | 'optional'
+    badge?: 'required' | 'optional' | 'recommended'
     titleSize?: 'h2' | 'h3'
     children: React.ReactNode
 }
