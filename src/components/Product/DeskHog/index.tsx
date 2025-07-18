@@ -245,9 +245,9 @@ const DeskHogCTA = () => {
                         <div className="relative">
                             <Bang className="w-[120px] md:w-[150px] animate-grow" />
                             <p className="px-4 md:px-6 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-sm md:text-base rotate-6">
-                                <span className="text-xs">Not</span>
-                                endorsed <br />
-                                by Kim K
+                                <span className="text-xs">Now with</span>
+                                100% more <br />
+                                nostalgia
                             </p>
                         </div>
                     </div>
