@@ -5,16 +5,16 @@ import NextjsInjectSourceMap from './nextjs/inject-source-map.mdx'
 import NextjsUploadSourceMap from './nextjs/upload-source-map.mdx'
 
 <Steps>
-    <Step title="Install the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool (included in the Next.js package)." required="required">
+    <Step title="Install the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool (included in the Next.js package)." badge="required">
         <NextjsInstallCLI />
     </Step>
-    <Step title="Output source maps for your framework" subtitle="Your goal in this step: Configure Next.js to generate source maps and set up automatic processing." required="required">
+    <Step title="Output source maps for your framework" subtitle="Your goal in this step: Configure Next.js to generate source maps and set up automatic processing." badge="required">
         <NextjsOutputSourceMaps />
     </Step>
-    <Step title="Inject source map" subtitle="Your goal in this step: Automatically inject metadata during the build process." required="required">
+    <Step title="Inject source map" subtitle="Your goal in this step: Automatically inject metadata during the build process." badge="required">
         <NextjsInjectSourceMap />
     </Step>
-    <Step title="Upload source map" subtitle="Your goal in this step: Automatically upload source maps to PostHog during build." required="required">
+    <Step title="Upload source map" subtitle="Your goal in this step: Automatically upload source maps to PostHog during build." badge="required">
         <NextjsUploadSourceMap />
     </Step>
 </Steps>

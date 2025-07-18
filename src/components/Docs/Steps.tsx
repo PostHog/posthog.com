@@ -5,7 +5,7 @@ const badgeClasses =
 const requiredBadgeClasses =
     '!bg-orange/10 !text-orange !dark:text-white !dark:bg-orange/50 text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block'
 
-const requiredBadgeMap: Record<string, { text: string; className: string }> = {
+const badgeMap: Record<string, { text: string; className: string }> = {
     required: { text: 'Required', className: requiredBadgeClasses },
     optional: { text: 'Optional', className: badgeClasses },
 }
@@ -13,7 +13,7 @@ const requiredBadgeMap: Record<string, { text: string; className: string }> = {
 export interface StepProps {
     title: string
     subtitle?: string
-    required?: 'required' | 'optional'
+    badge?: 'required' | 'optional'
     titleSize?: 'h2' | 'h3'
     children: React.ReactNode
 }
@@ -35,7 +35,7 @@ export const Steps: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 export const Step: React.FC<StepProps & { number?: number }> = ({
     title,
     subtitle,
-    required,
+    badge,
     titleSize,
     children,
     number,
@@ -57,10 +57,8 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
                     ) : (
                         <h3 className="!my-0 !text-xl truncate">{title}</h3>
                     )}
-                    {required && requiredBadgeMap[required] && (
-                        <span className={`${requiredBadgeMap[required].className} shrink-0`}>
-                            {requiredBadgeMap[required].text}
-                        </span>
+                    {badge && badgeMap[badge] && (
+                        <span className={`${badgeMap[badge].className} shrink-0`}>{badgeMap[badge].text}</span>
                     )}
                 </div>
             </div>
