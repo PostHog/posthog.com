@@ -59,7 +59,7 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
             <div className="absolute left-4 w-[1px] bg-gray-accent dark:bg-gray-accent-dark h-full"></div>
 
             <div className="flex items-start mr-4 relative z-10">
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center relative">
                     <CopyAnchor id={anchorId} hovered={hovered} />
                     <div className="bg-tan dark:bg-dark py-2">
                         <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-accent-light dark:bg-gray-accent-dark text-primary dark:text-primary-dark font-bold text-base border border-light dark:border-dark border-b-4 border-b-gray-accent dark:border-b-gray-accent-dark">
