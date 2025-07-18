@@ -12,11 +12,7 @@ export const watchRecordingsDark = "https://res.cloudinary.com/dmukukwp6/video/u
 export const createPlaylistLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/create-playlist-light-mode.mp4"
 export const createPlaylistDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/create-playlist-dark-mode.mp4"
 
-To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) page. When watching replays, you can change the playback speed, as well as select the option 'skip inactivity' - this skips parts of the recording where the user was inactive on the page.
-
-You can also watch recordings by clicking on any data point in an insight. This opens a list of persons and displays a "watch recording" button if available. This is especially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and watch recordings of users who converted or dropped off. 
-
-You can also click into the "Recordings" tab for a person to view all their recordings.
+To watch recordings, you can visit the [Replay](https://us.posthog.com/replay) page or click on any data point in an insight. This opens a list of persons and displays a **Watch recording** button or **Recordings** tab if available. This is especially useful in [funnels](/docs/product-analytics/funnels), where you can drill down and [watch recordings of users who converted or dropped off](/tutorials/explore-insights-session-recordings).
 
 <ProductVideo
     videoLight={watchRecordingsLight} 
@@ -25,20 +21,55 @@ You can also click into the "Recordings" tab for a person to view all their reco
     classes="rounded"
 />
 
-## How to create a playlist
+When watching replays, you can:
 
-It's possible to create dynamic playlists of replays that you're interested in. To do so, go to the [Playlists tab](https://app.posthog.com/replay/playlists) and click "New playlist". You'll then have the option to apply filters to specify the criteria videos in the playlist should meet, for example:
+1. Change the playback speed, as well as select the option **Skip inactivity** which skips parts of the recording where the user was inactive on the page.
 
-- Recording time and duration.
-- Event and [action](/docs/data/actions) filters.
-- Person and [cohort](/docs/data/cohorts) filters. These require capturing identified events.
-- Console log level filters: Log, warn, and error.
+2. Open the activity panel to see a list of all the events that happened during the recording. This also lets you see the network waterfall, page performance score, asset breakdown, and more.
 
-<ProductVideo
-    videoLight={createPlaylistLight} 
-    videoDark={createPlaylistDark}
-    alt="How to create playlists" 
-    classes="rounded"
+3. Click **Inspect DOM** to interact with the DOM of the page. It may not be 100% accurate, but should be close enough to help you debug. You can interact with the content below but most things won't work as it is only a snapshot of your app. Use your browser's developer tools (`CMD`+`Opt`+`I` on Mac and `Ctrl`+`Shift`+`I` on PC for Chrome) to inspect the content.
+
+4. Add comments by pressing **C** or clicking the **Comment** button to share your thoughts with your team. You can also add emojis to the timeline to highlight specific parts.
+
+5. Enter cinema and fullscreen mode to remove the UI elements and focus on the recording.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_13_41_15_2x_509d07cde3.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_13_40_58_2x_bbafdeed8d.png"
+  alt="Everything you can do in session replay"
+  classes="rounded"
+/>
+
+## How to create saved filters
+
+It's possible to create dynamic list of replays that you're interested in.
+
+To do so:
+
+1. Click **Show filters**.
+2. Create your filter with options for date, active duration, events, properties, console logs, and more.
+3. Once done, click **Add to "Saved filters"**. 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_39_38_2x_6f98a05cfb.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_39_20_2x_a11de9b792.png"
+  alt="Saved filters in session replay"
+  classes="rounded"
+/>
+
+This will then be accessible to anyone in your project via the **Shared filters** tab and new replays will automatically be added to it.
+
+## How to create a collection
+
+If instead, you want to create a more permanent list of replays to watch later, analyze specific behavior, or share with your team, you can create a collection.
+
+To do so click **+ Add to collection** next to the **Share** button on a replay, search or create a new collection, and then select it. You can share the collection by going to the [collection page](https://us.posthog.com/replay/playlists), finding that collection, and sharing the link to anyone with access to your PostHog project.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_41_58_2x_00e619e6af.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_42_24_2x_cc87368eb1.png"
+  alt="Session replay collection"
+  classes="rounded"
 />
 
 ## Further reading
