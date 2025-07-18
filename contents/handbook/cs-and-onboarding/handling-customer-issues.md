@@ -29,7 +29,7 @@ If helpful, you can log in as the customer into their PostHog org. Clicking a li
 
 When investigating, use our [docs](/docs), look at [troubleshooting tips](/handbook/support/troubleshooting-tips), search through Slack, Zendesk, GitHub, or Pylon for similar issues. If you've just joined, try to spend 30 mins to 1 hour investigating by yourself before asking for help. Onboarding is the best time to learn about PostHog products! Obviously, balance this with the urgency of the issue and use common sense.
 
-Whilst investigating, keep the customer in the loop by communicating progress, blockers, next steps etc.
+While investigating, keep the customer in the loop by communicating progress, blockers, next steps etc.
 
 ## Escalating tickets
 
@@ -41,6 +41,6 @@ Our support team are technical engineers and can answer the majority of tickets.
 
 If you're escalating to support, you don't need to do anything special - the ticket will stay in the support queue. 
 
-If you're escalating to engineering, in Zendesk, set the `esc.` dropdown in the left sidebar to escalated and double check the group assignee makes sense. You might need to [upgrade your Zendesk role to full agent](handbook/engineering/support-hero#i-cant-assign-tickets-or-make-public-replies), just remember to downgrade after. 
+If you're escalating to engineering, in Zendesk, set the `esc.` dropdown in the left sidebar to escalated and double check the group assignee makes sense. You might need to [upgrade your Zendesk role to full agent](/handbook/engineering/support-hero#i-cant-assign-tickets-or-make-public-replies), just remember to downgrade after. 
 
 When escalating tickets, leave an internal note saying who you're escalating this to – so it's clear who should pick it up. Also include details about the investigation you've done and observations you've made. Even if it's confirming that you followed the customer's reproduction steps and saw the same issue, that context is incredibly valuable. 
