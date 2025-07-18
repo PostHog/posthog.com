@@ -217,11 +217,11 @@ function Params({ params, objects, object, depth = 0 }) {
                                         {param.schema.type}
                                     </span>
                                 </div>
-                                {param.schema.default && (
+                                {param.schema.default !== undefined && param.schema.default !== null && (
                                     <>
                                         <div>
                                             <span className="text-sm">
-                                                Default: <code>{param.schema.default}</code>
+                                                Default: <code>{String(param.schema.default)}</code>
                                             </span>
                                         </div>
                                     </>
