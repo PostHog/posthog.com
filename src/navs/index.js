@@ -3079,6 +3079,16 @@ export const docsMenu = {
                     },
                 },
                 {
+                    name: 'API',
+                    url: '/docs/web-analytics/api',
+                    icon: 'IconCode',
+                    color: 'purple',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
                     name: 'FAQ',
                     url: '/docs/web-analytics/faq',
                     icon: 'IconQuestion',
