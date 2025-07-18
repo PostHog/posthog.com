@@ -1,0 +1,11 @@
+{
+  "commentTypes": [
+    "logic",
+    "syntax"
+  ],
+  "instructions": "Ensure contents/handbook/content/docs-style-guide.mdx and contents/handbook/content/posthog-style-guide.md are enforced.",
+  "ignorePatterns": "api/**\ngatsby/**\nplugins/**\nscripts/**\nsrc/**\n*.json\n*.js\n*.ts\n*.jsx\n.tsx",
+  "triggerOnUpdates": false,
+  "shouldUpdateDescription": false,
+  "disabledLabels": ["no-greptile"]
+}
