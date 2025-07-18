@@ -12,7 +12,7 @@ const requiredBadgeMap: Record<string, { text: string; className: string }> = {
 
 export interface StepProps {
     title: string
-    goal?: string
+    subtitle?: string
     required?: 'required' | 'optional'
     titleSize?: 'h2' | 'h3'
     children: React.ReactNode
@@ -34,7 +34,7 @@ export const Steps: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 
 export const Step: React.FC<StepProps & { number?: number }> = ({
     title,
-    goal,
+    subtitle,
     required,
     titleSize,
     children,
@@ -64,9 +64,9 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
                     )}
                 </div>
             </div>
-            {goal && goal.trim() && (
-                <div className="text-xs text-primary/60 dark:text-primary-dark/60 mt-1 mb-2">
-                    Your goal in this step: {goal}
+            {subtitle && subtitle.trim() && (
+                <div className="text-sm text-primary/75 dark:text-primary-dark/75 mt-1 mb-2">
+                    <em>{subtitle}</em>
                 </div>
             )}
             <div className="mt-4 mb-4 overflow-x-auto overflow-y-hidden">{children}</div>
