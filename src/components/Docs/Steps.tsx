@@ -14,6 +14,7 @@ export interface StepProps {
     title: string
     goal?: string
     required?: 'required' | 'optional'
+    titleSize?: 'h2' | 'h3'
     children: React.ReactNode
 }
 
@@ -24,7 +25,6 @@ export const Steps: React.FC<{ children: React.ReactNode }> = ({ children }) => 
                 React.isValidElement(child)
                     ? React.cloneElement(child as React.ReactElement<any>, {
                           number: i + 1,
-                          last: i === React.Children.count(children) - 1,
                       })
                     : null
             )}
@@ -32,28 +32,31 @@ export const Steps: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     </section>
 )
 
-export const Step: React.FC<StepProps & { number?: number; last?: boolean }> = ({
+export const Step: React.FC<StepProps & { number?: number }> = ({
     title,
     goal,
     required,
+    titleSize,
     children,
     number,
-    last,
 }) => (
     <li className="mb-10 flex w-full">
-        <span className="flex flex-col items-center mr-6 relative">
+        <span className="flex flex-col items-center mr-4 relative">
             <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-accent-light dark:bg-gray-accent-dark text-primary dark:text-primary-dark font-bold text-base z-10 border border-light dark:border-dark border-b-4 border-b-gray-accent dark:border-b-gray-accent-dark">
                 {number}
             </span>
-            {!last && (
-                <span className="absolute top-8 left-1/2 -translate-x-1/2 w-[3px] bg-gray-accent dark:bg-gray-accent-dark h-[calc(100%_-_2rem)]"></span>
-            )}
+
+            <span className="mt-2 w-[1px] top-4 bg-gray-accent dark:bg-gray-accent-dark h-[calc(100%_-_3rem)]"></span>
         </span>
         <div className="min-w-0 flex-1">
             <div className="relative">
                 <div className="absolute -top-[108px]" id={title.toLowerCase().replace(/ /g, '-')}></div>
                 <div className="flex items-center gap-2 font-semibold text-base text-primary dark:text-primary-dark">
-                    <h2 className="!my-0 !text-2xl truncate">{title}</h2>
+                    {!titleSize || titleSize === 'h2' ? (
+                        <h2 className="!my-0 !text-2xl truncate">{title}</h2>
+                    ) : (
+                        <h3 className="!my-0 !text-xl truncate">{title}</h3>
+                    )}
                     {required && requiredBadgeMap[required] && (
                         <span className={`${requiredBadgeMap[required].className} shrink-0`}>
                             {requiredBadgeMap[required].text}
