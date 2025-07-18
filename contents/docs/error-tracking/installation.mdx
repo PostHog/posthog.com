@@ -5,7 +5,6 @@ title: Error tracking installation
 import Tab from "components/Tab"
 import WebInstall from '../integrate/_snippets/install-web.mdx'
 import JSWebErrorTracking from './_snippets/web-install-error-tracking.mdx'
-import ReactInstall from '../integrate/_snippets/install-react.mdx'
 import NodeInstall from '../integrate/_snippets/install-node.mdx'
 import NodeErrorTracking from './_snippets/node-install-error-tracking.mdx'
 import PythonInstall from '../integrate/_snippets/install-python.mdx'
@@ -18,8 +17,10 @@ import NuxtErrorTracking from './_snippets/nuxt-install-error-tracking.mdx'
 import SvelteErrorTracking from './_snippets/svelte-install-error-tracking.mdx'
 import HonoErrorTracking from './_snippets/hono-install-error-tracking.mdx'
 import ManualErrorTracking from './_snippets/manual-error-tracking.mdx'
-import CustomErrorBoundary from './_snippets/custom-error-boundary.mdx'
 import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
+import UploadSourceMapsSteps from './_snippets/upload-source-maps-steps.mdx'
+import ReactErrorTracking from './_snippets/react-install-error-tracking.mdx'
+
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
 
@@ -43,6 +44,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <WebInstall />
           <JSWebErrorTracking />
           <UploadSourceMaps />
+          <UploadSourceMapsSteps />
         </Tab.Panel>
         <Tab.Panel>
           <NextJSErrorTracking />
@@ -55,6 +57,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <NodeInstall />
           <NodeErrorTracking />
           <UploadSourceMaps />
+          <UploadSourceMapsSteps />
         </Tab.Panel>
         <Tab.Panel>
           <SentryInstall />
@@ -63,10 +66,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <ManualErrorTracking />
         </Tab.Panel>
         <Tab.Panel>
-          <ReactInstall />
-          <JSWebErrorTracking />
-          <CustomErrorBoundary />
-          <UploadSourceMaps />
+          <ReactErrorTracking />
         </Tab.Panel>
         <Tab.Panel>
           <NuxtErrorTracking />
@@ -78,6 +78,7 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <AngularInstall />
           <AngularErrorTracking />
           <UploadSourceMaps />
+          <UploadSourceMapsSteps />
         </Tab.Panel>
         <Tab.Panel>
           <HonoErrorTracking />

@@ -20,6 +20,8 @@ This is maintained as an issue template in GitHub, [which you can view here](htt
 
 We send an introductory email to all new hires to welcome them to the team and ease them in the some of the essential actions we need them to take. This needs communicating openly, as users may not be able to access the `company-internal` repo yet. So, we send them an email. 
 
+> Once you've joined PostHog, we will **not** use email for communicating with each other. For example, James or Tim will never ask you to do something critical over email only – they'll always confirm it over Slack, and so will everyone else. Be extremely cautious of direct emails from James, Tim, or other people of PostHog. 
+
 The onboarding email is sent by the People team directly. We want to strike a balance between sending attractive, personalized emails and avoiding creating process or using overpowered tools, such as Customer.io or Mailchimp. So, we send email using Gmail Layouts. You can access Gmail Layouts with this button: 
 
 ![google email layouts](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/handbook/layouts-button.png)
@@ -179,12 +181,12 @@ All new hires should schedule a 30 minute session with the [support engineer clo
 
 In this call the support engineer will be able to answer any questions, as well as demonstrate how we deal with support at PostHog. In particular, the support engineer should cover:
 
-- [ ] [What the role of a support hero is](/handbook/growth/customer-support#engineers-are-support-heroes) and how they can expect to receive tickets/escalations
-- [ ] [An overview of where tickets come from](/handbook/growth/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
+- [ ] [What the role of a support hero is](/handbook/support/customer-support#support-is-done-by-actual-engineers) and how they can expect to receive tickets/escalations
+- [ ] [An overview of where tickets come from](/handbook/support/customer-support#its-easy-for-customers-to-reach-us) and how to differentiate between paying/free users
 - [ ] [How to create tickets from Slack threads](/handbook/engineering/support-hero#pylon-to-create-zendesk-tickets-from-slack-posts) and [reassign tickets to other teams](https://support.zendesk.com/hc/en-us/articles/4408887127450-Manually-assigning-a-ticket)
 - [ ] [Advice on how to communicate with customers](/handbook/engineering/support-hero#how-do-i-communicate) and [prioritize tickets](/handbook/engineering/support-hero#how-do-i-prioritize)
 - [ ] [How and when to mark tickets as 'On Hold' or 'Pending'](/handbook/engineering/support-hero#ticket-status)
-- [ ] [What our SLAs](/handbook/growth/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
+- [ ] [What our SLAs](/handbook/support/customer-support#response-targets) are and [what ticket severity indicates](/docs/support-options#severity-levels)
 - [ ] How to deal with bug reports and feature requests
 - [ ] [How to use macros to answer questions quickly](https://support.zendesk.com/hc/en-us/articles/4408887656602-Using-macros-to-update-tickets)
 - [ ] How to avoid duplication of effort in ZenDesk
@@ -249,7 +251,6 @@ Below are a list of Slack channels you may find helpful:
 - `#rockets`
 - `#stonks`
 - `#cycling`
-- `#devel-random`
 - `#listening-to`
 - `#design-inspiration`
 

@@ -1,0 +1,4 @@
+Contact: mailto:security@posthog.com
+Preferred-Languages: en
+Canonical: https://posthog.com/.well-known/security.txt
+Policy: https://posthog.com/handbook/company/security

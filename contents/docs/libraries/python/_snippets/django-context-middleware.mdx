@@ -21,6 +21,12 @@ The middleware automatically extracts and uses:
 
 All events captured during the request (including exceptions) will include these properties and be associated with the extracted session and distinct ID.
 
+If you are using PostHog on your frontend, the JavaScript Web SDK will add the session and distinct ID headers automatically if you enable tracing headers.
+
+```javascript
+__add_tracing_headers: true
+```
+
 ### Exception capture
 
 By default, the middleware captures exceptions and sends them to PostHog's error tracking. Disable this by setting:

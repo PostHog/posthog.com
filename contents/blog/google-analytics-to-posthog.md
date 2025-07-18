@@ -26,7 +26,7 @@ We’re biased, but PostHog is a great one. When [compared with Google Analytics
 
 This post will go over the basics you must know to make the transition from Google Analytics to PostHog.
 
-> **Want to track website visitors in PostHog?** Find out [how to migrate from Google Analytics to PostHog](/migrate/google-analytics) and start using [our new web analytics tool](/web-analytics). 
+> **Want to track website visitors in PostHog?** Find out [how to migrate from Google Analytics to PostHog](/docs/migrate/google-analytics) and start using [our new web analytics tool](/web-analytics). 
 
 ## Initial PostHog setup
 

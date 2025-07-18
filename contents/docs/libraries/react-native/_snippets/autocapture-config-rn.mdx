@@ -1,9 +1,10 @@
 ```react-native
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
     captureTouches: true,
-    captureScreens: true, 
+    captureScreens: true,
     ignoreLabels: [], // Any labels here will be ignored from the stack in touch events
     customLabelProp: "ph-label",
+    maxElementsCaptured: 20,
     noCaptureProp: "ph-no-capture",
     propsToCapture: ["testID"], // Limit which props are captured. By default, identifiers and text content are captured.
 
@@ -18,7 +19,8 @@
             if (name === "SensitiveScreen") return undefined
             return params
         },
-    }
+    },
+    navigationRef: navigationRef, // If you create a navigation ref with createNavigationContainerRef
 }}>
     ...
 </PostHogProvider>

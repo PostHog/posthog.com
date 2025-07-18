@@ -1,10 +1,10 @@
 ---
-title: Aligning PostHog utilization by business type
+title: Matching PostHog to a business type
 sidebar: Handbook
 showTitle: true
 ---
 
-# Aligning PostHog utilization by business type
+# Matching PostHog to a business type
 
 This guide provides detailed instructions on how to achieve key business metrics using PostHog's analytics platform. Each business type has specific metrics that matter most, and this guide shows you exactly how to set up PostHog to track and optimize for those metrics.
 
@@ -114,26 +114,32 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 ### Key metrics & PostHog
 #### User Activation Rate
 **Importance:** Measures the percentage of new users who complete key onboarding steps and experience the product's core value. High activation is crucial for retention and indicates a successful onboarding experience.
+
 **PostHog approach:** Track activation events (`account_created`, `onboarding_completed`) with properties like activation step and acquisition source. Use funnel analysis to optimize time-to-value, and cohort analysis to track activation rates on dashboards. Session recordings can help identify activation friction points, and alerts can be set for activation rate drops. Non-technical users can use autocapture for onboarding page visits and tutorial interactions to create no-code funnels and analyze user behavior.
 
 #### Daily/Monthly Active Users (DAU/MAU)
 **Importance:** Measures user engagement and product stickiness by tracking the number of unique users who interact with the product on a daily or monthly basis. A high DAU/MAU ratio indicates strong, consistent user value.
+
 **PostHog approach:** Track user activity events like `session_started` and `feature_used` with properties such as user segment and session duration. Create dashboards for real-time DAU/MAU tracking and trend analysis. Calculate stickiness (DAU/MAU ratio) and use cohort analysis to track engagement over time. Alerts can be configured for significant engagement drops. Autocapture can track page visits and feature interactions, enabling non-technical users to analyze engagement patterns and identify popular features.
 
 #### Customer Lifetime Value (CLV)
 **Importance:** Represents the total revenue a business can expect from a single customer account throughout their relationship. CLV is a key indicator of long-term profitability and customer loyalty.
+
 **PostHog approach:** Track all revenue events (`subscription_started`, `purchase_made`) with properties like purchase amount and acquisition source. Use cohort analysis to analyze CLV by acquisition month and correlation analysis to identify high-value behaviors. PostHog's predictive analytics can be used for CLV forecasting. For non-technical users, autocapture on purchase pages and upgrade buttons helps track the user journey to purchase and identify which features drive upgrades, with session recordings providing insights into purchase behavior.
 
 #### Viral Coefficient
 **Importance:** Measures the number of new users an existing user generates, indicating the effectiveness of viral loops and word-of-mouth growth. A coefficient greater than one signifies exponential growth.
+
 **PostHog approach:** Track viral events like `referral_sent` and `invitation_accepted` with properties such as referral type and conversion rate. Use funnel analysis to optimize referral flows and A/B test referral incentives and messaging. Dashboards can show viral coefficient trends. Non-technical users can use autocapture to track share button clicks and referral page visits, using session recordings to understand and optimize referral behavior.
 
 #### User Retention Rate
 **Importance:** The percentage of users who continue to use the product over a given period. It's a critical metric for sustainable growth, reflecting long-term product value and user satisfaction.
+
 **PostHog approach:** Track retention events like `user_returned` and `session_started`. Create retention dashboards with cohort analysis by acquisition source to track trends over time. Use session recordings to understand the behavior of retained users and correlation analysis to identify key retention-driving features. Set up automated alerts for retention drops. Autocapture allows non-technical users to track user return patterns and feature usage that correlates with retention.
 
 #### Mobile App Performance
 **Importance:** Measures the responsiveness, stability, and overall user experience of a mobile application. Good performance is essential for user satisfaction and retention on mobile devices.
+
 **PostHog approach:** Track mobile-specific events like `app_opened` and `app_crashed` with properties such as app version and device type. Use PostHog's real user monitoring for performance and Core Web Vitals tracking. Create mobile performance dashboards, set up crash monitoring with alerts, and use session recordings to identify mobile-specific UX issues. Non-technical users can leverage autocapture to track mobile interactions and compare mobile vs. desktop usage patterns.
 
 ## E-commerce
@@ -176,22 +182,27 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 
 #### GMV (Gross Merchandise Value)
 **Importance:** Represents the total value of all goods sold over a specific period. GMV is the primary measure of an e-commerce platform's scale and is essential for understanding top-line growth and market share.
+
 **PostHog approach:** Track all purchase events (`product_viewed`, `add_to_cart`, `purchase_completed`) with properties like product category, price, and quantity. Connect to your e-commerce platform for comprehensive data. Create dashboards for real-time GMV tracking and product performance analysis by category. Use cohort analysis to track customer value over time and set up alerts for unusual GMV patterns. For non-technical users, autocapture on product pages and "add to cart" buttons can track the conversion journey and identify popular products, with session recordings helping to optimize product pages.
 
 #### AOV (Average Order Value)
 **Importance:** The average amount spent each time a customer places an order. Increasing AOV is a key strategy for maximizing revenue without increasing the number of customers, directly impacting profitability.
+
 **PostHog approach:** Track cart and purchase events (`cart_updated`, `purchase_completed`) with properties like cart value and discount applied. Use funnel analysis to optimize the cart and identify abandonment points. A/B test pricing and product recommendations to find effective upselling strategies. Use correlation analysis to identify behaviors of customers with high AOV. Non-technical users can use autocapture to track interactions on the cart page, analyze abandonment patterns, and use session recordings to optimize the checkout flow.
 
 #### Conversion Rate
 **Importance:** The percentage of visitors who complete a purchase. This is a critical metric for gauging the effectiveness of the entire customer journey, from landing page to checkout, and is a primary indicator of site performance and user experience.
+
 **PostHog approach:** Track all steps in the conversion funnel (`page_viewed`, `product_viewed`, `add_to_cart`, `checkout_started`, `purchase_completed`) with properties like traffic source and device type. Create comprehensive conversion funnels to identify drop-off points and use session recordings to understand checkout friction. A/B test checkout flows and product pages to optimize the user path. Non-technical users can use autocapture to track all funnel page visits and interactions, creating funnels and using session recordings to optimize conversion paths with no code.
 
 #### Cart Abandonment
 **Importance:** The rate at which users add items to their cart but leave without completing the purchase. A high cart abandonment rate often indicates friction in the checkout process, unexpected costs, or a poor user experience.
+
 **PostHog approach:** Track cart interactions like `add_to_cart` and `remove_from_cart`. Use session recordings to understand the behavior of users who abandon their carts, and implement exit-intent surveys to gather direct feedback on abandonment reasons. Create funnels that specifically track the checkout process to pinpoint exact drop-off points. This data can inform cart abandonment recovery strategies. Non-technical users can use autocapture to track all cart page interactions and build abandonment funnels to analyze user behavior.
 
 #### Customer Lifetime Value
 **Importance:** The total revenue a business can expect from a single customer throughout their relationship. CLV is vital for making strategic decisions about marketing spend, customer acquisition, and retention efforts, ensuring long-term profitability.
+
 **PostHog approach:** Track all customer interactions, including `purchase_completed`, `return_requested`, and `support_contacted`, with properties like purchase history and acquisition source. Create cohort analyses by acquisition month to understand how customer value evolves. Use correlation analysis to identify behaviors of high-value customers and PostHog's predictive analytics for CLV forecasting. Non-technical users can use autocapture on account and order history pages to track engagement patterns and use session recordings to understand high-value customer behavior.
 
 ## Marketplace
@@ -234,22 +245,27 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 
 #### GMV (Gross Merchandise Value)
 **Importance:** Represents the total value of all transactions between buyers and sellers on the platform over a specific period. It is the primary indicator of a marketplace's scale, liquidity, and overall health, reflecting its ability to facilitate transactions and generate value for its users.
+
 **PostHog approach:** Track marketplace transaction events like `listing_viewed`, `booking_requested`, and `transaction_completed` with properties such as category, price, seller_id, and buyer_id. Integrate with payment processors for comprehensive data. Use PostHog to create real-time GMV dashboards with breakdowns by category, set up seller and buyer performance tracking, conduct cohort analysis to monitor marketplace growth, and create alerts for unusual transaction patterns. Non-technical users can use autocapture to track listing views and booking requests, creating funnels to analyze the path to a completed transaction and using session recordings to optimize the user journey.
 
 #### Take Rate
 **Importance:** The percentage of GMV that the marketplace captures as revenue (commission or fees). It is a crucial metric for understanding the marketplace's business model effectiveness and profitability. Optimizing the take rate is key to sustainable growth.
+
 **PostHog approach:** Track commission events like `commission_earned` from `transaction_completed` events, with properties for transaction amount, commission percentage, and category. Analyze revenue and profitability by category on dashboards. This allows for identifying opportunities to optimize the take rate, for example by analyzing its drivers with correlation analysis and setting up alerts for significant changes. Non-technical users can build dashboards to monitor take rate trends across different product categories or seller tiers, helping to inform pricing strategy without writing any code.
 
 #### Supply/Demand Balance
 **Importance:** Measures the equilibrium between the number of sellers (supply) and buyers (demand) on the platform. A balanced marketplace ensures a good user experience for both sides, preventing situations like too few products for buyers or too few customers for sellers, which can lead to churn.
+
 **PostHog approach:** Track supply-side events (`listing_created`, `service_offered`) and demand-side events (`search_performed`, `booking_requested`). Use properties like category, location, and search terms to analyze supply-demand gaps on dashboards. Funnel analysis can reveal booking conversion rates, while alerts can notify of imbalances, helping to identify and act on new market opportunities. Non-technical users can create dashboards that visualize searches with no results, providing a simple way to spot unmet demand and guide supply-side growth efforts.
 
 #### Network Effects
 **Importance:** Measures how the value of the platform increases for users as more people use it. Strong network effects create a powerful competitive advantage (a "moat") and are the engine of sustainable, viral growth for marketplaces. It's what makes a marketplace more valuable as it scales.
+
 **PostHog approach:** Track network interaction events like `user_referred`, `invitation_accepted`, and `cross_side_activity` (e.g., a user being both a buyer and seller). Use properties to distinguish user types. Dashboards can visualize network growth and viral coefficients. Cohort analysis is key to measuring how network effects develop over time for different user groups, and alerts can highlight opportunities for growth. Non-technical users can use autocapture on referral pages and share buttons to analyze the effectiveness of viral loops and optimize the user flow with session recordings.
 
 #### Trust & Safety Metrics
 **Importance:** Trust is the currency of a marketplace. These metrics, such as user ratings, review rates, fraud reports, and dispute rates, measure the level of safety and reliability on the platform. High trust is essential for encouraging transactions, retaining users, and building a strong brand reputation.
+
 **PostHog approach:** Track trust-related events like `review_submitted`, `dispute_filed`, and `fraud_detected`, enriched with properties on user reputation and transaction history. Dashboards can monitor trust scores and fraud rates. Session recordings are invaluable for investigating suspicious user behavior and understanding how trust is built (or broken) in user flows. Set up alerts for fraud signals and use correlation analysis to identify key indicators of trust. Non-technical users can create surveys to collect user feedback on trust and use session recordings to review the user journey for those who file disputes.
 
 ## Developer Tools
@@ -292,22 +308,27 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 
 #### Developer Adoption
 **Importance:** Measures the rate at which developers start using a tool, from initial signup to making their first API call. It's the most critical top-of-funnel metric for developer tools, as it indicates the health of the onboarding process and the tool's initial appeal. High adoption is a leading indicator of future growth and product-market fit.
+
 **PostHog approach:** Track key developer touchpoints like `account_created`, `sdk_installed`, and `api_call_made` with properties for tech stack and company size. Create adoption funnels to analyze the journey from first contact to active use, identifying drop-off points. Use cohort analysis to track developer retention over time and map the developer journey to understand common paths to success. Alerts can signal developer churn risk. Non-technical users, like DevRel teams, can build these funnels and dashboards without code to monitor adoption trends and measure the impact of their initiatives.
 
 #### API Usage
 **Importance:** Tracks the frequency, volume, and patterns of API calls made by developers. This metric is vital for understanding which features are most valuable, how developers are integrating the product, and the overall health and performance of the API. It directly reflects product engagement and stickiness for a developer-focused product.
+
 **PostHog approach:** Instrument all API endpoints to track events like `api_request` and `api_error`, with properties for the specific endpoint, response time, and error type. Create API performance dashboards to monitor usage, latency, and error rates in real-time. Set up alerts for performance degradation or spikes in errors. Use correlation analysis to understand which usage patterns are associated with retention or expansion. Non-technical users can use dashboards to see which endpoints are most popular and identify which customers are experiencing the most errors.
 
 #### Documentation Engagement
 **Importance:** For developer tools, documentation is the product. This metric measures how developers interact with documentation, including page views, search queries, and time spent on pages. High engagement indicates that the documentation is useful and helps developers solve problems, which is critical for adoption and reducing support load.
+
 **PostHog approach:** Track documentation interactions like `docs_page_viewed`, `code_sample_copied`, and `tutorial_completed`, with properties for the page, search terms, and user segment. Use session recordings to see where developers get stuck or confused. Analyze search patterns to identify content gaps and create dashboards to monitor documentation effectiveness. Non-technical users, like technical writers, can use these insights to prioritize content updates and improve the developer experience without needing to write code.
 
 #### Community Growth
 **Importance:** Measures the health and vibrancy of the developer community around a product (e.g., on GitHub, Slack, Discord). A growing, active community provides social proof, drives word-of-mouth adoption, offers scalable support, and is a rich source of product feedback. It acts as a moat and a powerful growth engine.
+
 **PostHog approach:** Track community interactions from various platforms by sending events like `forum_post_created`, `github_issue_opened`, or `community_event_attended`. Use properties to segment by contribution level and topic. Create dashboards to monitor community engagement and growth trends. Use cohort analysis to track member retention and identify "power users" who can become community champions. Non-technical users, like community managers, can easily track these metrics to demonstrate the value of their programs.
 
 #### Support Ticket Volume
 **Importance:** The number of support tickets created by developers. While some tickets are expected, a high volume, especially on recurring themes, points to friction in the product, confusing documentation, or a poor onboarding experience. Analyzing this data is key to improving the product and reducing operational costs.
+
 **PostHog approach:** Integrate your support system (e.g., Zendesk, Jira) with PostHog to track `support_ticket_created` and `support_ticket_resolved` events. Enrich these events with properties like ticket type, priority, and resolution time. Use correlation analysis to link support tickets to specific in-product behaviors or documentation pages, identifying the root cause of developer friction. Dashboards can help monitor support trends and efficiency. This allows non-technical team members to identify which product areas are generating the most support load.
 
 ## Fintech
@@ -350,22 +371,27 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 
 #### Transaction Volume
 **Importance:** Measures the total number or value of transactions processed by the platform. This is a fundamental indicator of a fintech product's adoption, usage, and overall scale. It directly impacts revenue and is a key signal of market traction and business health.
+
 **PostHog approach:** Track all financial transaction events like `transaction_initiated`, `transaction_completed`, and `transaction_failed` with detailed properties such as transaction type, amount, currency, and user segment. Use dashboards for real-time monitoring of transaction volume and success rates. Correlation analysis can help understand what user behaviors lead to more transactions, and alerts can be set for unusual spikes or dips in activity. Non-technical users can build funnels to analyze the transaction flow and identify drop-off points without writing any code.
 
 #### Fraud Rate
 **Importance:** The percentage of transactions that are fraudulent. In fintech, managing fraud is critical for financial stability, maintaining user trust, and meeting regulatory obligations. A low fraud rate is essential for long-term viability and building a reputable platform.
+
 **PostHog approach:** Track fraud and risk-related events such as `fraud_detected`, `risk_assessment_failed`, or `verification_completed`. Enrich this data with properties like risk factors, fraud type, and user behavior patterns. Session recordings are invaluable for investigating suspicious user behavior to understand fraud vectors. Create dashboards to monitor fraud rates in real-time and set up alerts for emerging fraud patterns. Non-technical risk teams can use session recordings to review suspicious sessions flagged by alerts.
 
 #### Compliance Metrics
 **Importance:** Measures adherence to financial regulations like KYC (Know Your Customer) and AML (Anti-Money Laundering). For fintech companies, compliance is not optional; it's a license to operate. Tracking these metrics is crucial for avoiding fines, legal penalties, and reputational damage.
+
 **PostHog approach:** Track all compliance-related events, such as `kyc_started`, `kyc_completed`, and `aml_check_failed`. Use properties to log the compliance type, status, and user segment. This creates a detailed audit trail for regulatory purposes. Dashboards can provide a real-time view of compliance status and help monitor the efficiency of these critical flows. Alerts can be configured to flag compliance failures, allowing teams to act quickly. Non-technical compliance officers can use funnels to analyze and optimize the KYC process.
 
 #### Customer Acquisition Cost
 **Importance:** The total cost to acquire a new, verified customer. Fintech often has high acquisition costs due to marketing, compliance, and verification expenses. Understanding and optimizing CAC is crucial for ensuring profitability and scaling the business sustainably.
+
 **PostHog approach:** Track the entire acquisition funnel, from `ad_clicked` and `account_opened` to `verification_completed` and `first_transaction`. Enrich these events with properties like acquisition source, campaign, and verification costs. Use funnel analysis to identify drop-off points in the onboarding and KYC process. A/B testing can be used to optimize landing pages and onboarding flows to reduce CAC. Non-technical marketers can use dashboards to compare the CAC and LTV across different channels.
 
 #### Regulatory Reporting
 **Importance:** This tracks the ability of the company to generate accurate and timely reports for regulatory bodies. Efficient and reliable reporting processes are essential for demonstrating compliance and avoiding penalties. While PostHog doesn't generate the reports, it can monitor the internal processes that do.
+
 **PostHog approach:** Track internal events related to the reporting process, such as `report_generated`, `audit_trail_requested`, and `compliance_check_completed`. Use properties to specify the report type and its status. This provides visibility into the operational health of the reporting systems. Dashboards can be used to monitor the success and timeliness of report generation, and alerts can be set up to flag any failures or delays in the process, ensuring the compliance team is aware of any issues.
 
 ## Healthcare/Medtech
@@ -408,22 +434,27 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 
 #### Patient Outcomes
 **Importance:** This is the core metric for any healthcare product, measuring the actual health impact on patients. Demonstrating positive patient outcomes is crucial for clinical validation, provider adoption, regulatory approval, and building patient trust. It is the ultimate measure of product value and efficacy.
+
 **PostHog approach:** Track key events in the patient journey, such as `treatment_plan_started`, `outcome_measured`, and `follow_up_completed`. Use properties to segment by treatment type, patient demographics, and specific outcome metrics. Cohort analysis can track how outcomes trend over time for different patient groups. Dashboards can visualize progress towards clinical goals, and correlation analysis can help identify which product features are linked to better outcomes. Non-technical users, like clinicians, can use dashboards to monitor patient progress without writing code.
 
 #### Compliance Metrics
 **Importance:** Healthcare is a highly regulated industry (e.g., HIPAA in the US). Compliance metrics track adherence to these regulations, particularly around data privacy and security. Failure to comply can result in severe penalties, loss of trust, and legal action, making it a foundational requirement for any MedTech product.
+
 **PostHog approach:** Track all compliance-related events, such as `hipaa_audit_trail_accessed`, `data_access_logged`, and `patient_consent_obtained`. Properties should include the user role, type of data accessed, and audit results to create an immutable log. Dashboards can provide a real-time view of compliance activities, and alerts can be set up for any unauthorized access attempts or compliance failures. Non-technical compliance officers can use these dashboards to monitor activity and generate reports.
 
 #### User Adoption
 **Importance:** Measures how effectively healthcare providers (doctors, nurses, etc.) are integrating a new tool into their daily work. Low adoption by clinicians can undermine the intended benefits of a technology, regardless of its potential. High adoption is key to realizing efficiency gains and improving patient care at scale.
+
 **PostHog approach:** Track user interactions such as `feature_used`, `workflow_completed`, and `training_module_completed`. Segment by user role (e.g., doctor, nurse) using properties. Adoption funnels can show where users drop off during onboarding. Session recordings are invaluable for understanding how clinicians use the product in a real-world context. Alerts can flag low adoption in specific departments. Non-technical training teams can analyze session recordings to improve their training materials.
 
 #### Clinical Workflow Efficiency
 **Importance:** Measures the time and effort required for clinicians to complete tasks using the product. In the high-pressure healthcare environment, time is a critical resource. Improving workflow efficiency can reduce clinician burnout, lower operational costs, and allow more time for direct patient care.
+
 **PostHog approach:** Track workflow events from start to finish: `workflow_started`, `step_completed`, `workflow_completed`. Use properties to capture the duration of each step and the user role. Funnel analysis is perfect for identifying bottlenecks where users get stuck or take too long. Dashboards can monitor average completion times for key workflows. Non-technical managers can use these funnels to identify areas for process improvement without needing technical assistance.
 
 #### Data Accuracy
 **Importance:** In healthcare, critical decisions are made based on patient data. Inaccurate or incomplete data can lead to misdiagnosis, incorrect treatment, and serious patient harm. This metric tracks the integrity and reliability of the data within the system, which is fundamental to patient safety.
+
 **PostHog approach:** Track data entry and validation events like `data_entered`, `data_validated`, and `error_detected`. Use properties to specify the data type, validation method, and error type. Create dashboards to monitor data quality trends and error rates. Correlation analysis can help identify if specific user roles or workflow steps are associated with higher error rates. Alerts can notify teams of spikes in data entry errors, allowing for swift investigation.
 
 ## Content/Media
@@ -466,20 +497,25 @@ B2B SaaS companies often grapple with a core set of challenges that directly imp
 
 #### Engagement Rate
 **Importance:** Measures how actively users are interacting with content beyond just viewing it (e.g., likes, shares, comments, time spent). It's a key indicator of content quality and audience resonance. High engagement suggests that the content is valuable, which is crucial for building a loyal audience and driving retention.
+
 **PostHog approach:** Track engagement events like `content_viewed`, `time_spent_on_page`, `video_played_to_75%`, and `article_shared`. Use properties to segment by content type and user segment. A custom "engagement score" can be created using formulas in PostHog to weigh different interactions. Cohort analysis can track how engagement evolves for different user groups. Non-technical editors can use dashboards to see which articles are most engaging to inform their content strategy.
 
 #### Content Performance
 **Importance:** Provides a holistic view of how individual pieces of content contribute to business goals, from views to conversions. Understanding what content performs well is essential for optimizing content strategy, allocating production resources effectively, and maximizing the ROI of content creation.
+
 **PostHog approach:** Track the content lifecycle with events like `content_published`, `content_viewed`, and `content_shared`, enriched with properties like category, author, and format. Use correlation analysis to identify the attributes of successful content (e.g., "how-to" articles over 1500 words drive the most shares). Dashboards can rank content by performance, and alerts can notify teams when a piece of content starts trending. Non-technical content teams can use these insights to double down on what works.
 
 #### User Retention
 **Importance:** Measures the percentage of users who return to the platform over time. For media companies, retention is the lifeblood of the business, as it's far more cost-effective than acquisition. High retention indicates that users find ongoing value in the content, which is key for long-term growth and subscription revenue.
+
 **PostHog approach:** Track retention by monitoring `user_returned` or `session_started` events. Use PostHog's retention cohorts to analyze how retention differs by acquisition source or first content consumed. Correlation analysis can identify behaviors (e.g., subscribing to a newsletter) that are leading indicators of retention. Churn prediction models can help proactively identify at-risk users. Non-technical marketers can use cohorts to understand the long-term value of users from different campaigns.
 
 #### Ad Revenue
 **Importance:** For ad-supported media companies, this metric directly measures financial performance. Optimizing ad revenue involves balancing user experience with monetization, making it crucial to track metrics like impressions, click-through rates (CTR), and revenue per user.
+
 **PostHog approach:** Track ad-related events like `ad_impression`, `ad_click`, and `ad_revenue_generated`. Use properties to segment by ad type, placement, and user segment. A/B test different ad placements and formats to see what generates the most revenue without harming engagement. Dashboards can monitor ad performance in real-time, and alerts can flag underperforming ad units. Non-technical revenue teams can use these dashboards to track progress against revenue goals.
 
 #### Subscription Metrics
 **Importance:** For subscription-based media companies, metrics like conversion rate, subscriber LTV, and churn are the ultimate measure of business health. They track the ability to convert casual readers into paying subscribers and retain them, directly reflecting the perceived value of the premium offering.
+
 **PostHog approach:** Track the entire subscription funnel with events like `paywall_hit`, `subscription_started`, `subscription_renewed`, and `subscription_cancelled`. Use funnel analysis to identify drop-off points in the conversion process and properties like plan type to segment subscribers. Cohort analysis is essential for tracking subscriber LTV and churn over time. Non-technical product managers can use funnels to optimize the checkout flow and A/B test different paywall strategies.

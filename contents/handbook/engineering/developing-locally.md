@@ -378,6 +378,9 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 ```bash
 ./bin/start
+
+# only services strictly required to run posthog
+./bin/start --minimal
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.

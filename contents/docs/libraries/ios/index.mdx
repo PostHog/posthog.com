@@ -52,7 +52,7 @@ view.accessibilityLabel = "ph-no-capture"
 
 > **Important:** By default, PostHog will make a best effort to automatically exclude fields detected as sensitive, even without the `ph-no-capture` tag. These include password fields, credit card fields, OTP fields, and any other fields related to Personally Identifiable Information (PII).
 
-For more details on how to setup masking for session replay, please refer to our [Privacy Controls](/docs/session-replay/privacy?tab=iOS) documentation. 
+For more details on how to setup masking for session replay, please refer to our [Privacy Controls](/docs/session-replay/privacy?tab=iOS) documentation.
 
 ## Identifying users
 
@@ -140,34 +140,122 @@ This will remove the Super Property and subsequent events will not include it.
 
 If you are doing this as part of a user logging out you can instead simply use `PostHogSDK.shared.reset` which takes care of clearing all stored Super Properties and more.
 
-## Amending event properties before they are captured
+## Amending, dropping or sampling events
 
-In case you need to modify or process event properties before they are captured, cached, and sent to PostHog, you can use the `config.propertiesSanitizer` option. 
+Since version 3.28.0, you can provide a `BeforeSendBlock` function when initializing the SDK to amend, drop or sample events before they are sent to PostHog. 
 
-This feature allows you to define custom logic for sanitizing or transforming properties, ensuring that your event data meets your specific requirements before it is sent over the wire.
+> **⚠️ Note:** This replaces the deprecated `propertiesSanitizer` option and provides more flexibility in modifying events. You can achieve the same functionality as `propertiesSanitizer` by using a `BeforeSendBlock` that mutates the event's properties in place. 
 
-To implement this, define a custom sanitizer by creating a class or struct that conforms to the `PostHogPropertiesSanitizer` protocol and implement the `sanitize()` method. 
+> **🚨 Warning:** Amending and sampling events is advanced functionality that requires careful implementation. Core PostHog features may require 100% of unmodified events to function properly. We recommend only modifying or sampling your own custom events if possible, and preserving all PostHog internal events in their original form.
 
-The `sanitize()` method receives a dictionary of event properties and should return a modified version of the dictionary. 
+### Redacting information in events
 
-Then pass your custom sanitizer to `config.propertiesSanitizer` option.  
+`BeforeSendBlock` gives you one place to edit or redact information before it is sent to PostHog. For example:
+
+<details>
+<summary>Redact URLs in event properties</summary>
 
 ```swift
-class ExampleSanitizer: PostHogPropertiesSanitizer {
-    public func sanitize(_ properties: [String: Any]) -> [String: Any] {
-        // Create a mutable copy
-        var sanitizedProperties = properties
-        // Perform sanitization
-        // For example, removing keys with empty values
-        for (key, value) in properties {
-            if let stringValue = value as? String, stringValue.isEmpty {
-                sanitizedProperties.removeValue(forKey: key)
-            }
-        }
-        return sanitizedProperties
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+
+config.setBeforeSend { event in
+    // Redact URLs
+    if let url = event.properties["url"] as? String {
+        event.properties["url"] = url.map { _ in "*" }.joined()
     }
+    return event
 }
 ```
+</details>
+
+<details>
+<summary>Redact sensitive information from event properties</summary>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+
+config.setBeforeSend { event in
+    // Redact sensitive information
+    if let email = event.properties["email"] as? String {
+        event.properties["email"] = email.map { _ in "*" }.joined()
+    }
+    
+    return event
+}
+```
+
+</details>
+
+<details>
+<summary>Drop events by event name</summary>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+
+config.setBeforeSend { event in
+    // Drop all events named "Stale Event"
+    if event.event == "Stale Event" {
+        return nil
+    }
+    return event
+}
+```
+
+</details>
+
+### Sampling events
+
+Sampling lets you choose to send only a percentage of events to PostHog. It is a good way to control your costs without having to completely turn off features of the SDK.
+
+<details>
+<summary>Sample events by event name</summary>
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+
+config.setBeforeSend { event in
+    // Sample 10% of Sampled Event events
+    if event.event == "Sampled Event" {
+        if Double.random(in: 0...1) < 0.1 {
+            event.properties["$sample_type"] = ["sampleByEvent"]
+            event.properties["$sample_threshold"] = 0.1
+            event.properties["$sampled_events"] = ["Sampled Event"]
+            return event
+        }
+        return nil
+    }
+    return event
+}
+```
+
+</details>
+
+### Chaining multiple BeforeSendBlocks
+
+You can provide an array of `BeforeSendBlock` functions to be called one after the other:
+
+```swift
+let config = PostHogConfig(apiKey: "<ph_project_api_key>", host: "<ph_instance_address>")
+
+config.setBeforeSend(
+    // First block: Drop all events named "Stale Event"
+    { event in
+        if event.event == "Stale Event" {
+            return nil
+        }
+        return event
+    },
+    // Second block: Redact sensitive information
+    { event in
+        if let email = event.properties["email"] as? String {
+            event.properties["email"] = email.map { _ in "*" }.joined()
+        }
+        return event
+    }
+)
+```
+
+**Note:** When chaining beforeSend blocks, order is important. The first block is executed first and the mutated event is passed along to the second block, and so on. If at any point in the chain the event is dropped, any subsequent blocks will not be executed.
 
 ## Flush
 
@@ -355,11 +443,6 @@ configuration.debug = false
 configuration.optOut = false
 
 /**
- * Callback that allows to sanitize the event properties (not set by default)
- */
-configuration.propertiesSanitizer = { ... }
-
-/**
  * Hook that allows for modification of the default mechanism for
  * generating anonymous id (which as of now is just random UUID v7)
  */
@@ -400,4 +483,16 @@ configuration.appGroupIdentifier = nil
  * Defaults to false
  */
 configuration.reuseAnonymousId = false
+
+
+/**
+ * Enable Surveys. (off/false by default)
+ * Experimental feature under @_spi(Experimental)
+ */
+configuration.surveys = false
+
+/**
+ * Hook that allows for amending, sampling, or dropping events before they are sent to PostHog.
+ */
+configuration.setBeforeSend { ... }
 ```

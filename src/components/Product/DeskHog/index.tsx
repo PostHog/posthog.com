@@ -333,7 +333,7 @@ const VibeCodingBoxout = () => {
                 <p className="text-sm text-primary dark:text-primary-dark">
                     DeskHog is built with vibe coding in mind. We've prepared some ready-made files to give AI agents
                     perfect context about DeskHog, plus{' '}
-                    <a href="/tutorials/deskhog-101">a vibe coding guide to help you get started</a>.
+                    <a href="/tutorials/deskhog-claude-tutorial">a vibe coding guide to help you get started</a>.
                 </p>
             </div>
         </div>

@@ -1,28 +1,50 @@
 ---
-title: Sharing or embedding replays
+title: Sharing and embedding replays
 ---
 import {ProductVideo} from'components/ProductVideo'
 export const shareReplayLight = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/share-replay-light-mode.mp4"
 export const shareReplayDark = "https://res.cloudinary.com/dmukukwp6/video/upload/posthog.com/contents/images/docs/session-replay/share-replay-dark-mode.mp4"
 
-Replays are typically viewed in **[Session Replay](https://us.posthog.com/replay)** part of PostHog. However, you may want to share specific recordings with people outside of your PostHog organization. You can share them directly using a URL, or embed them in a webpage using an iframe:
+Replays are typically viewed in **[session replay](https://us.posthog.com/replay)** part of PostHog, but sometimes, you might want to share them internally or externally.
 
-<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://us.posthog.com/embedded/VDVn0WRlvJdBomoFyy2Xg0Di2T1pEg"></iframe>
+We provide multiple ways for you to do so.
 
-> Above is an embedded recording of posthog.com… on posthog.com – very meta.
+## Sharing (and embedding) a session replay
 
-## How to share session replays
+On every session replay, you'll see a share button.
 
-### Method one: Sharing via the PostHog app
-
-When viewing any recording, press `Share`. You can then configure the recording for **external sharing**. There are also configuration options for the iframe, as well as the ability to specify whether it should start at a particular timestamp.
-
-<ProductVideo
-    videoLight={shareReplayLight} 
-    videoDark={shareReplayDark}
-    alt="Sharing a session replay via the PostHog app" 
-    classes="rounded"
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_03_39_2x_7ff8eacf12.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_04_57_2x_c3f6cd30d4.png"
+  alt="Share button on session replay"
+  classes="rounded"
 />
+
+This enables you to share the replay directly in three different ways:
+
+1. **Private link:** A direct link to the replay only accessible by teammates added to your project.
+
+2. **Public link:** A direct link to the replay that can be shared with anyone. It can also be used to embed the replay in a webpage using an iframe like this:
+
+```html
+<iframe width="100%" height="400" frameborder="0" allowfullscreen src="https://us.posthog.com/embedded/Bi48yMpp9pFCZJMmGe_h3-gMDwlBrQ"></iframe>
+```
+
+<iframe allowfullscreen width="100%" height="450" frameborder="0" src="https://us.posthog.com/embedded/Bi48yMpp9pFCZJMmGe_h3-gMDwlBrQ"></iframe>
+
+3. **Share to Linear:** You can add an issue to Linear from a replay that will include a link to the replay along with the title and description you set. You can connect your Linear account in [your project settings](https://us.posthog.com/settings/project#error-tracking-integrations).
+
+## Sharing a collection
+
+If you want to share multiple replays internally, such as for a product review, you can create a collection.
+
+Click the **+ Add to collection** button next to the **Share** button on a replay, search or create a new collection, and then select it. You can then go to the [collection page](https://us.posthog.com/replay/playlists), find that collection, and share the link to anyone with access to your PostHog project.
+
+## Sharing a screenshot
+
+If you just want to share an image from the replay, you can click the **Screenshot** button. This opens a modal with the current frame and enables you to add text or drawings to it. You can then download and share the image.
+
+![Screenshot](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_18_at_11_23_09_2x_ef258076c9.png)
 
 ### Method two: Automatically share replays to Intercom or Crisp
 
@@ -100,5 +122,7 @@ const accessToken = response.accessToken
 ## Limitations
 
 1. We make **no guarantees** about sensitive information contained in the recording. We recommend you only sharing recordings that you are certain contain no sensitive information or embed them only where authorized users can see them.
+
 2. Events will not be shown in the shared iframe, as they are loaded from a separate endpoint that is not accessible from the embedded iframe.
+
 3. If your replays look incorrect or buggy, be sure to read our [troubleshooting docs on how to debug this](/docs/session-replay/troubleshooting#replay-of-recording-looks-incorrect-or-buggy).

@@ -8,7 +8,7 @@ availability:
 
 Our SQL flavor includes many functions to aggregate and manipulate queried data. Below are some examples of some of the most popular SQL functions you can use in your insights. 
 
-### Aggregate functions
+## Aggregate functions
 
 These aggregate results for columns across all rows. They include:
 
@@ -28,17 +28,17 @@ WHERE event = '$pageview' AND properties.$screen_height IS NOT NULL
 
 You can find a full list of these in [supported aggregations](/docs/sql/aggregations).
 
-#### Count
+### Count
 
 Use `count()` to count the number of rows in a particular column. `count(*)` counts all rows, while `count(column_name)` counts the number of non-null values in a column.
 
-### Regular functions
+## Regular functions
 
 Our SQL flavor provides many functions for accessing, modifying, and calculating data from queries. Along with the ones listed below, many basics include calculation operators (`+`, `-`, `/`, `*`), type conversions (`toInt`, `toString`), conditional statements (`if`, `multiIf`), and rounding (`floor`, `round`).
 
 You can find a full list of these in [supported ClickHouse functions](/docs/sql/clickhouse-functions).
 
-#### Date and time
+### Date and time
 
 - `now()`, `today()`, `yesterday()`: Returns the current time, date, or yesterday’s date respectively.
 - `interval`: A length of time for use in arithmetic operations with other dates and times.
@@ -58,7 +58,7 @@ WHERE timestamp > now() - interval 1 day
 
 > Read more examples in [How to do time-based breakdowns (hour, minute, real time)](/tutorials/time-breakdowns) and [Using SQL for advanced time and date filters](/tutorials/hogql-date-time-filters).
 
-#### String
+### String
 
 - `extract`: Extracts a fragment of a string using a regular expression.
 - `concat`: Concatenates strings listed without separator.
@@ -79,7 +79,7 @@ where event = '$autocapture'
 
 > Read more in [How to analyze autocapture events with SQL](/tutorials/hogql-autocapture).
 
-#### JSON
+### JSON
 
 You can access nested data in JSON and objects directly.
 
@@ -104,7 +104,7 @@ Specialized `JSONExtract` functions exist for different data types including:
 - `JSONExtractString`
 - `JSONExtractBool`
 
-#### Array
+### Array
 
 - `arrayElement(arr, n)`: Retrieves the element with the index of n from the array `arr`.
 - `arrayJoin(arr)`: Takes a row and generates multiple rows for the number of elements in the array. It copies all the column values, except the column where this function is applied. It replaces the applied column with the corresponding array value.
@@ -122,7 +122,7 @@ ORDER BY count() desc
 
 > Read more in [How to filter and breakdown arrays with SQL](/tutorials/array-filter-breakdown).
 
-#### Sparkline
+### Sparkline
 
 A sparkline is a tiny graph contained in one cell of your query result. As an argument, it takes an array of integers.
 
@@ -162,7 +162,7 @@ select
 from events
 ```
 
-#### Session replays
+### Session replays
 
 You can create a button to view the replay for a session by using the `recording_button()` function with the `session_id`. For example, to get a list of recent replays, you can use:
 
@@ -180,3 +180,29 @@ ORDER BY
     min_first_timestamp DESC
 LIMIT 10
 ```
+
+### Links
+
+URLs are automatically clickable in the **Table** visualization, but you can also set a custom link using an `<a>` tag.
+
+```sql
+select 
+    properties.$pathname,
+    <a href={f'https://posthog.com/{properties.$pathname}'} target='_blank'>Link</a> as link
+from events
+where event = '$pageview'
+```
+
+### Text effects
+
+Plain text is so boring, so we added some text effects to make it cooler. Wrap any text in `<blink>` to make it blink, `<marquee>` to make it horizontally scroll, and `<redacted>` to hide it unless hovered.
+
+```sql
+select
+    <span>is this <blink>{event}</blink> real?</span>,
+    <marquee>so real, yes!</marquee>,
+    <redacted>but this one is hidden</redacted>
+from events
+```
+
+![Cool text effects](https://res.cloudinary.com/dmukukwp6/video/upload/sqlhtml_d49175518b.mp4)

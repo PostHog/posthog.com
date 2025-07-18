@@ -26,7 +26,7 @@ import ConfigureFlagsSecureKey from "../integrate/_snippets/configure-flags-secu
 
 <ConfigureFlagsSecureKey />
 
-> **Note:** When you initialize PostHog with your feature flags secure API key to enable remote config, PostHog also enables [local evaluation](./local-evaluation).
+> **Note:** By default, initializing PostHog with your feature flags secure API key enables local evaluation, but this can be disabled in `posthog-node` by setting `enableLocalEvaluation: false` in your config.
 
 
 ## Step 3: Use remote config flags

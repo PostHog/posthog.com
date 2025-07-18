@@ -79,12 +79,15 @@ If you'd like to book it, please message Kendal in the #team-people-and-ops chan
 
 For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.  These are all relatively near our [Work.Life coworking space in Farringdon](https://work.life/office-space/london/city/farringdon/): 
 
+- [Z Hotel City](https://www.thezhotels.com/hotels/city/)
 - [citizenM Tower of London hotel](https://www.citizenm.com/hotels/europe/london/tower-of-london-hotel)
 - [Clayton Hotel - City of London](https://www.claytonhotels.com/city-of-london/)
 - [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
 - [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
 - [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 - [Bob W Tower Hill Studios](https://bobw.co/apartments/comfy-studio-tower-hill)
+
+If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 
 ## Travel insurance
 

@@ -35,11 +35,9 @@ Next.js enables you to both server-side render pages and add server-side functio
 
 First, install the `posthog-node` library:
 
-```shell
-yarn add posthog-node
-# or
-npm install --save posthog-node
-```
+import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
+
+<InstallNodePackageManagers />
 
 For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://us.posthog.com/settings/project). 
 
