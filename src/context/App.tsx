@@ -616,13 +616,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         [windows]
     )
 
-    const bringToFront = useCallback((item: AppWindow, location?: Location) => {
+    const bringToFront = useCallback((item: AppWindow, location?: Location, position?: { x: number; y: number }) => {
         setWindows((windows) =>
             windows.map((el) => ({
                 ...el,
                 zIndex: el === item ? windows.length : el.zIndex < item.zIndex ? el.zIndex : el.zIndex - 1,
                 minimized: item === el ? false : el.minimized,
                 location: item === el ? location || el.location : el.location,
+                position: item === el ? position || el.position : el.position,
             }))
         )
     }, [])
@@ -751,6 +752,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const position = getPositionDefaults(element.key, size, windows)
         const settings = appSettings[element.key]
         const lastClickedElementRect = getLastClickedElementRect()
+
+        if (element.props.offset) {
+            position.x += element.props.offset.x
+            position.y += element.props.offset.y
+        }
 
         const newWindow: AppWindow = {
             element,
@@ -1063,7 +1069,12 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (location.key === 'initial' && location.pathname === '/' && !isMobile) {
-            addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} />)
+            const currentWindow = windows[0]
+            addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} offset={{ x: 100, y: 0 }} />)
+            bringToFront(currentWindow, undefined, {
+                x: currentWindow.position.x - 100,
+                y: currentWindow.position.y,
+            })
         }
 
         if (compact) {
