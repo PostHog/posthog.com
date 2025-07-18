@@ -478,16 +478,43 @@ response = requests.${item.httpVerb}(
     )
 }
 
-function ResponseExample({ objects, objectKey }) {
+function ResponseExample({ item, objects, objectKey }) {
     if (!objectKey) {
         return null
     }
 
-    const response = JSON.stringify(
-        OpenAPISampler.sample(objects.schemas[objectKey], {}, { components: objects }),
-        null,
-        2
-    )
+    let response
+
+    try {
+        // Check if there are examples in the API spec
+        const firstResponseKey = Object.keys(item.responses || {})[0]
+        const responseSpec = item.responses?.[firstResponseKey]
+        const examples = responseSpec?.content?.['application/json']?.examples
+
+        if (examples) {
+            const firstExampleKey = Object.keys(examples)[0]
+            const exampleValue = examples[firstExampleKey]?.value
+
+            if (exampleValue !== undefined) {
+                response = JSON.stringify(exampleValue, null, 2)
+            }
+        }
+    } catch (error) {
+        // Continue to fallback
+    }
+
+    // Fallback to generated example if no real example exists
+    if (!response) {
+        try {
+            response = JSON.stringify(
+                OpenAPISampler.sample(objects.schemas[objectKey], {}, { components: objects }),
+                null,
+                2
+            )
+        } catch (error) {
+            response = JSON.stringify({ message: 'No example available' }, null, 2)
+        }
+    }
 
     return (
         <SingleCodeBlock
