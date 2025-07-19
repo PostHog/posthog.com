@@ -1,0 +1,20 @@
+---
+title: Node.js error tracking installation
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallNodeSDK from './_snippets/node/step1-install-node-sdk.mdx'
+import SetupNodeExceptionCapture from './_snippets/node/step2-setup-exception-autocapture.mdx'
+import NodeNextSteps from './_snippets/node/step3-next-steps.mdx'
+
+<Steps>
+    <Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
+        <InstallNodeSDK />
+    </Step>
+    <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Node.js application." badge="required">
+        <SetupNodeExceptionAutocapture />
+    </Step>
+    <Step title="Next steps">
+        <NodeNextSteps />
+    </Step>
+</Steps> 

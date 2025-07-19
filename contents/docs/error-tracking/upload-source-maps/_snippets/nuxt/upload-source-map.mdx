@@ -1,0 +1,38 @@
+Update your Nuxt configuration to also upload source maps after injection:
+
+```js file=nuxt.config.js
+import { execSync } from 'child_process'
+
+export default defineNuxtConfig({
+  ...,
+  sourcemap: {
+    client: true
+  },
+  hooks: {
+    'close': async () => {
+      console.log('Running PostHog sourcemap injection and upload...')
+      try {
+        execSync("posthog-cli sourcemap inject --directory '.output'", {
+          stdio: 'inherit',
+        })
+        execSync("posthog-cli sourcemap upload --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // + 
+        console.log('PostHog sourcemap injection completed successfully') 
+      } catch (error) {
+        console.error('PostHog sourcemap injection failed:', error)
+      }
+    }
+  }
+})
+```
+
+#### Build your project for production
+
+Build your project for production by running the following command:
+
+```bash
+nuxt build
+```
+
+You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.

@@ -1,0 +1,15 @@
+If you're using React with Vite, you can enable source maps in your `vite.config.js` file.
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    sourcemap: true, // +
+  }
+})
+```
+
+If you're using another build tool like [webpack](https://webpack.js.org/configuration/devtool/) or [Rollup](https://rollupjs.org/configuration-options/#output-sourcemap), consult the documentation for your build tool to enable source maps.
