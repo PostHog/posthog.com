@@ -54,6 +54,7 @@ export const LibraryComparison = () => {
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                    errorTracking
                 }
             }
         }
@@ -64,6 +65,13 @@ export const LibraryComparison = () => {
             return null
         }
         return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon} />
+    }
+
+    const renderErrorTracking = (isAvailable?: boolean) => {
+        if (isAvailable == null || !isAvailable) {
+            return null
+        }
+        return <img className="w-4 h-4" src={CheckIcon} />
     }
 
     return (
@@ -78,6 +86,7 @@ export const LibraryComparison = () => {
                         <th>Session recording</th>
                         <th>Feature flags</th>
                         <th>Group analytics</th>
+                        <th>Error tracking</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,6 +103,7 @@ export const LibraryComparison = () => {
                                 <td>{renderAvailability(lib.frontmatter.features?.sessionRecording)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.featureFlags)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.groupAnalytics)}</td>
+                                <td>{renderErrorTracking(lib.frontmatter.features?.errorTracking)}</td>
                             </tr>
                         ))}
                 </tbody>
