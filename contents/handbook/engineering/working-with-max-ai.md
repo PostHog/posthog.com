@@ -9,6 +9,7 @@ Max AI is PostHog's AI-powered platform that lets users interact with PostHog's 
 ## What is Max AI?
 
 Max AI enables users to:
+
 - Ask questions about their data in natural language
 - Generate insights and reports through conversation
 - Navigate PostHog's products using AI assistance
@@ -18,9 +19,21 @@ We want Max to work with _every_ PostHog product, so that we can at some stage m
 
 ## How to work with the Max AI team
 
-### For other product teams
+**Products already integrated with Max always have a supporting engineer assigned on the Max team.**
 
-If your team needs to integrate AI capabilities into your product area, the Max AI team will do their best to assign a supporting engineer to help you out. This approach naturally distributes AI knowledge throughout the organization while ensuring high-quality AI features that integrate properly with the platform.
+This naturally distributes AI knowledge throughout the organization, while ensuring high-quality AI features that integrate properly with the platform. Implementing something new, missing features in the Max API, or seeing failures? Your supporting engineer is your go-to! Tag them directly on your PRs and questions.
+
+**If your team is integrating AI features for the first time – the Max AI team will do their best to assign a supporting engineer.**
+
+Just message about your plans in the #team-max-ai channel in Slack. 
+
+| Product | Supporting engineer on the Max AI team |
+| --- | --- |
+| Product analytics | <TeamMember name="Emanuele Capparelli" /> |
+| Data warehouse | <TeamMember name="Michael Matloka" /> |
+| Session replay | <TeamMember name="Alex Lebedev" /> |
+| CDP | <TeamMember name="Georgiy Tarasov" /> |
+| _Insert your team_ | [**Shoot #team-max-ai a message!**](https://posthog.slack.com/archives/C06NZEZ7V3Q) |
 
 ### Getting started
 
