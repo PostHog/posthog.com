@@ -1864,6 +1864,10 @@ export const docsMenu = {
                                     name: 'Persistence',
                                     url: '/docs/libraries/js/persistence',
                                 },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-js',
+                                },
                             ],
                         },
                         {
@@ -1920,6 +1924,16 @@ export const docsMenu = {
                         {
                             name: 'Python',
                             url: '/docs/libraries/python',
+                            children: [
+                                {
+                                    name: 'Setup',
+                                    url: '/docs/libraries/python',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-python',
+                                },
+                            ],
                         },
                         {
                             name: 'React',
