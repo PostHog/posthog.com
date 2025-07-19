@@ -8,7 +8,7 @@ tags:
   - pineapple-mode
 ---
 
-Activating Pineapple Mode makes it rain pineapples all over your product or website. Yes, really.
+Activating pineapple mode makes it rain pineapples all over your product or website. Yes, really.
 
 ## OK, but why does Pineapple Mode do that?
 
