@@ -87,7 +87,7 @@ import NextJSInstallServer from "../../integrate/_snippets/nextjs/install-nextjs
 
 ### Server-side configuration
 
-Next.js overrides the default `fetch` behavior on the server to introduce their own cache. PostHog ignores that cache by default, as this Next.js's default behavior to any fetch call.
+Next.js overrides the default `fetch` behavior on the server to introduce their own cache. PostHog ignores that cache by default, as this is Next.js's default behavior for any fetch call.
 
 You can override that configuration when initializing PostHog, but make sure you understand the pros/cons of using Next.js's cache and that you might get cached results rather than the actual result our server would return. This is important for feature flags, for example.
 
