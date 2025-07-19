@@ -1363,6 +1363,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
                     {
+                        name: 'Handling customer issues',
+                        url: '/handbook/cs-and-onboarding/handling-customer-issues',
+                    },
+                    {
                         name: 'Health tracking',
                         url: '/handbook/cs-and-onboarding/health-tracking',
                     },
