@@ -1,0 +1,415 @@
+---
+title: Web Analytics API
+sidebar: Docs
+showTitle: true
+availability:
+  free: partial
+  selfServe: partial
+  enterprise: partial
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+The Web Analytics API allows you to programmatically access your web analytics data outside of PostHog. This is useful for building custom dashboards, integrating with other tools, or creating your own analytics applications.
+
+> **Note:** The Web Analytics API is currently in beta. Please [contact support](https://app.posthog.com/#panel=support%3Asupport%3Aweb_analytics%3Alow%3Atrue) to enable it for your team or [sign up to get notified when it's released](https://app.posthog.com/settings/user-feature-previews#web-analytics-api).
+
+## Prerequisites
+
+To use the Web Analytics API, you need:
+
+1. A [personal API key](https://us.posthog.com/settings/user-api-keys) with `query:read` permissions
+2. Your project ID (found in [project settings](https://us.posthog.com/settings/project#variables))
+
+## Endpoints
+
+The Web Analytics API provides two main endpoints:
+
+- **Overview** - Get aggregated metrics like total visitors, views, sessions, bounce rate, and session duration for a date range
+- **Breakdown** - Get metrics broken down by properties like page paths, countries, browsers, device types, and more
+
+> **Full API documentation:** For complete endpoint specifications, see the [Web Analytics API reference](/api/docs/web-analytics).
+
+### Overview
+
+Get key metrics including visitors, views, sessions, bounce rate, and session duration.
+
+**Endpoint:** `GET /api/projects/{project_id}/web_analytics/overview`
+
+**Key Parameters:**
+- `date_from` (required): Start date in YYYY-MM-DD format
+- `date_to` (required): End date in YYYY-MM-DD format
+- `host` (optional): Filter by specific host (e.g., `example.com`)
+
+> **Full parameter list:** See the [complete API reference](/api/docs/web-analytics) for all available parameters.
+
+**Example Request:**
+
+<MultiLanguage>
+
+```shell
+curl -H "Authorization: Bearer <your_personal_api_key>" \
+  "https://us.posthog.com/api/projects/123/web_analytics/overview?date_from=2024-01-01&date_to=2024-01-31"
+```
+
+```python
+import requests
+
+url = "https://us.posthog.com/api/projects/123/web_analytics/overview"
+headers = {
+    "Authorization": "Bearer <your_personal_api_key>"
+}
+params = {
+    "date_from": "2024-01-01",
+    "date_to": "2024-01-31"
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.json())
+```
+
+```javascript
+const response = await fetch(
+  "https://us.posthog.com/api/projects/123/web_analytics/overview?date_from=2024-01-01&date_to=2024-01-31",
+  {
+    headers: {
+      "Authorization": "Bearer <your_personal_api_key>"
+    }
+  }
+);
+const data = await response.json();
+console.log(data);
+```
+
+</MultiLanguage>
+
+**Example Response:**
+
+```json
+{
+  "visitors": 12500,
+  "views": 45000,
+  "sessions": 18200,
+  "bounce_rate": 0.32,
+  "session_duration": 185.5
+}
+```
+
+### Breakdown
+
+Get web analytics data broken down by a specific property like browser, device type, country, or page path.
+
+**Endpoint:** `GET /api/projects/{project_id}/web_analytics/breakdown`
+
+**Key Parameters:**
+- `date_from` (required): Start date in YYYY-MM-DD format
+- `date_to` (required): End date in YYYY-MM-DD format
+- `breakdown_by` (required): Property to break down by, e.g.
+  - `Page` - Page paths
+  - `Country` - Country names
+  - `Browser` - Browser names
+  - `DeviceType` - Device types
+- `limit` (optional): Number of results to return in a page (default: 100, max: 1000)
+
+> **Full parameter list:** See the [complete API reference](/api/docs/web-analytics) for all breakdown options and parameters.
+
+**Example Request:**
+
+<MultiLanguage>
+
+```shell
+curl -H "Authorization: Bearer <your_personal_api_key>" \
+  "https://us.posthog.com/api/projects/123/web_analytics/breakdown?date_from=2024-01-01&date_to=2024-01-31&breakdown_by=Page&limit=2"
+```
+
+```python
+import requests
+
+url = "https://us.posthog.com/api/projects/123/web_analytics/breakdown"
+headers = {
+    "Authorization": "Bearer <your_personal_api_key>"
+}
+params = {
+    "date_from": "2024-01-01",
+    "date_to": "2024-01-31",
+    "breakdown_by": "Page", 
+    "limit": 2,
+}
+
+response = requests.get(url, headers=headers, params=params)
+print(response.json())
+```
+
+```javascript
+const params = new URLSearchParams({
+  date_from: "2024-01-01",
+  date_to: "2024-01-31",
+  breakdown_by: "Page",
+  limit: 2,
+});
+
+const response = await fetch(
+  `https://us.posthog.com/api/projects/123/web_analytics/breakdown?${params}`,
+  {
+    headers: {
+      "Authorization": "Bearer <your_personal_api_key>"
+    }
+  }
+);
+const data = await response.json();
+console.log(data);
+```
+
+</MultiLanguage>
+
+**Response:**
+
+```json
+{
+  "count": 25,
+  "next": "https://us.posthog.com/api/projects/123/web_analytics/breakdown?offset=2&limit=2",
+  "previous": null,
+  "results": [
+    {
+      "breakdown_value": "/home",
+      "visitors": 8500,
+      "views": 12000,
+      "sessions": 9200,
+      "bounce_rate": 0.28,
+      "session_duration": 195.3
+    },
+    {
+      "breakdown_value": "/about",
+      "visitors": 2100,
+      "views": 2800,
+      "sessions": 2300,
+      "bounce_rate": 0.45,
+      "session_duration": 120.8
+    }
+  ]
+}
+```
+
+## Common Use Cases
+
+### Building a Custom Dashboard
+
+You can combine the overview and breakdown endpoints to build a comprehensive analytics dashboard:
+
+<MultiLanguage>
+
+```python
+import requests
+from datetime import datetime, timedelta
+
+# Set up authentication and date range
+headers = {
+    "Authorization": "Bearer <your_personal_api_key>"
+}
+base_url = "https://us.posthog.com/api/projects/123/web_analytics"
+
+# Get date range for last 30 days
+end_date = datetime.now().date()
+start_date = end_date - timedelta(days=30)
+
+# Get overview metrics
+overview_response = requests.get(
+    f"{base_url}/overview",
+    headers=headers,
+    params={
+        "date_from": start_date.isoformat(),
+        "date_to": end_date.isoformat()
+    }
+)
+overview_data = overview_response.json()
+
+# Get top pages
+pages_response = requests.get(
+    f"{base_url}/breakdown",
+    headers=headers,
+    params={
+        "date_from": start_date.isoformat(),
+        "date_to": end_date.isoformat(),
+        "breakdown_by": "$pathname",
+        "limit": 10
+    }
+)
+pages_data = pages_response.json()
+
+# Get traffic by country
+countries_response = requests.get(
+    f"{base_url}/breakdown",
+    headers=headers,
+    params={
+        "date_from": start_date.isoformat(),
+        "date_to": end_date.isoformat(),
+        "breakdown_by": "$geoip_country_code",
+        "limit": 10
+    }
+)
+countries_data = countries_response.json()
+
+print(f"Total visitors: {overview_data['visitors']}")
+print(f"Total views: {overview_data['views']}")
+print(f"Bounce rate: {overview_data['bounce_rate']:.2%}")
+print(f"Top page: {pages_data['results'][0]['breakdown_value']}")
+```
+
+```javascript
+// Set up authentication and date range
+const headers = {
+  "Authorization": "Bearer <your_personal_api_key>"
+};
+const baseUrl = "https://us.posthog.com/api/projects/123/web_analytics";
+
+// Get date range for last 30 days
+const endDate = new Date();
+const startDate = new Date(endDate);
+startDate.setDate(startDate.getDate() - 30);
+
+const formatDate = (date) => date.toISOString().split('T')[0];
+
+// Get overview metrics
+const overviewResponse = await fetch(
+  `${baseUrl}/overview?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}`,
+  { headers }
+);
+const overviewData = await overviewResponse.json();
+
+// Get top pages
+const pagesResponse = await fetch(
+  `${baseUrl}/breakdown?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}&breakdown_by=$pathname&limit=10`,
+  { headers }
+);
+const pagesData = await pagesResponse.json();
+
+// Get traffic by country
+const countriesResponse = await fetch(
+  `${baseUrl}/breakdown?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}&breakdown_by=$geoip_country_code&limit=10`,
+  { headers }
+);
+const countriesData = await countriesResponse.json();
+
+console.log(`Total visitors: ${overviewData.visitors}`);
+console.log(`Total views: ${overviewData.views}`);
+console.log(`Bounce rate: ${(overviewData.bounce_rate * 100).toFixed(2)}%`);
+console.log(`Top page: ${pagesData.results[0].breakdown_value}`);
+```
+
+</MultiLanguage>
+
+### Monitoring Website Performance
+
+Track key metrics over time to monitor your website's performance:
+
+<MultiLanguage>
+
+```python
+import requests
+from datetime import datetime, timedelta
+
+def get_weekly_metrics(project_id, api_key):
+    headers = {"Authorization": f"Bearer {api_key}"}
+    base_url = f"https://us.posthog.com/api/projects/{project_id}/web_analytics"
+    
+    # Get metrics for the last 4 weeks
+    metrics_by_week = []
+    
+    for week in range(4):
+        end_date = datetime.now().date() - timedelta(days=week * 7)
+        start_date = end_date - timedelta(days=6)
+        
+        response = requests.get(
+            f"{base_url}/overview",
+            headers=headers,
+            params={
+                "date_from": start_date.isoformat(),
+                "date_to": end_date.isoformat()
+            }
+        )
+        
+        if response.status_code == 200:
+            data = response.json()
+            metrics_by_week.append({
+                "week": f"{start_date} to {end_date}",
+                "visitors": data["visitors"],
+                "bounce_rate": data["bounce_rate"],
+                "session_duration": data["session_duration"]
+            })
+    
+    return metrics_by_week
+
+# Usage
+weekly_metrics = get_weekly_metrics(123, "<your_personal_api_key>")
+for week_data in weekly_metrics:
+    print(f"Week {week_data['week']}: {week_data['visitors']} visitors, {week_data['bounce_rate']:.2%} bounce rate")
+```
+
+</MultiLanguage>
+
+### Integrating with Other Tools
+
+Export your web analytics data to other platforms or tools:
+
+<MultiLanguage>
+
+```python
+import requests
+import csv
+from datetime import datetime, timedelta
+
+def export_to_csv(project_id, api_key, filename="web_analytics_export.csv"):
+    headers = {"Authorization": f"Bearer {api_key}"}
+    base_url = f"https://us.posthog.com/api/projects/{project_id}/web_analytics"
+    
+    # Get data for the last 30 days
+    end_date = datetime.now().date()
+    start_date = end_date - timedelta(days=30)
+    
+    # Get page breakdown data
+    response = requests.get(
+        f"{base_url}/breakdown",
+        headers=headers,
+        params={
+            "date_from": start_date.isoformat(),
+            "date_to": end_date.isoformat(),
+            "breakdown_by": "$pathname",
+            "limit": 1000
+        }
+    )
+    
+    if response.status_code == 200:
+        data = response.json()
+        
+        # Write to CSV
+        with open(filename, 'w', newline='') as csvfile:
+            fieldnames = ['page_path', 'visitors', 'views', 'sessions', 'bounce_rate', 'session_duration']
+            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+            
+            writer.writeheader()
+            for item in data['results']:
+                writer.writerow({
+                    'page_path': item['breakdown_value'],
+                    'visitors': item['visitors'],
+                    'views': item['views'],
+                    'sessions': item['sessions'],
+                    'bounce_rate': item['bounce_rate'],
+                    'session_duration': item['session_duration']
+                })
+        
+        print(f"Data exported to {filename}")
+    else:
+        print(f"Error: {response.status_code}")
+
+# Usage
+export_to_csv(123, "<your_personal_api_key>")
+```
+
+</MultiLanguage>
+
+## Getting Help
+
+If you need help with the Web Analytics API:
+
+1. Check the [API documentation](/docs/api/web-analytics) for general API guidance
+2. Contact [support](https://app.posthog.com/#panel=support%3Asupport%3Aweb_analytics%3Alow%3Atrue) for beta access or technical issues
