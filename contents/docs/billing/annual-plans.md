@@ -2,7 +2,7 @@
 title: Annual plans
 ---
 
-We offer annual plans to companies who are looking to commit to using PostHog longer term, as well as save some money whilst doing so.  If you're interested in learning more then [get in touch](/talk-to-a-human) with our Sales team.
+We offer annual plans to companies who are looking to commit to using PostHog longer term, as well as save some money whilst doing so.  If you're interested in learning more, see if you're eligible for purchasing credits on your [billing page](http://app.posthog.com/organization/billing) or [get in touch](/talk-to-a-human) with our Sales team.
 
 ## Benefits
 
@@ -16,6 +16,8 @@ With an annual plan you'll:
 ## How it works
 
 * Our annual plans are credit-based, meaning you get a discount on pre-paid PostHog credit.  You can use this credit on any of our current and future products during the contract term (usually 12 months).
+* Credits are dispersed monthly and roll over to the next month. They expire at the end of the contract term.
+* If you use more than the available credits in any month, you'll pay for the usage at the standard rate. 
 * We'll ask you to sign an order form which captures the credit amount, term, discount percentage and payment terms (Net 30 by default).  We use PandaDoc for e-signatures here.
 * The order form will also specify that you can buy additional credit at the same discount level in the first 6 months, meaning that you aren't penalised for underestimating your usage across the term.
 * You can then subscribe to any of our [monthly plans](/pricing) and track your credit usage on the [billing page](https://app.posthog.com/organization/billing)
