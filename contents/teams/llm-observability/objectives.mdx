@@ -1,19 +1,20 @@
-### Q2 2025 objectives
+### Q3 2025 objectives
 
-#### Goal 1: Public Launch
+#### Goal 1: General Availability Launch of LLM Observability
 
-*Description*: After the initial success of the Beta we are excited to roll LLM Observability out to more customers.
+*Description*: Make LLM Observability a fully supported PostHog product available to all customers. This will help teams reliably understand, monitor, and optimize their AI applications at scale.
 
-*What we will ship*: Dedicated pricing, onboarding flow, case study
+*What we will ship*: 
+- Comprehensive, easy-to-follow documentation covering all major workflows and SDKs
+- Integrated into the onboarding experience to help AI companies discover and set up LLM Observability quickly
 
-#### Goal 2: Evals
+#### Goal 2: Evals  
 
-*Description*: LLM Evals are becoming an important part of monitoring performance of AI applications in production. Evals provide a solution to get quantifiable metrics out of non-deterministic systems.
+*Description*: AI systems are inherently unpredictable, outputs often vary even when inputs are the same. Evals will give teams a structured way to measure output quality, detect regressions, and prioritize improvements as their AI applications evolve.
 
-*What we will ship*: Configuration panel, evals ingestion pipeline, dashboard to view evals, filter by evals
+*What we will ship*:
+- Support for **LLM-as-a-judge** evaluations during AI event ingestion
+- **Semantic Clustering and Labeling** to group similar outputs and spot patterns
+- Ability to run Evals in CI pipelines to catch issues before production
+- Tools for creating and managing **Datasets** for consistent, repeatable evaluations
 
-#### Goal 3: Improve cost tracking
-
-*Description*: We need to match all major LLM providers and inference providers with accurate pricing (including cached tokens). This needs to be automated to stay up to date with pricing changes.
-
-*What we will ship*: Automated updated pricing retrieval on build, internal price match metrics, cost overrides
