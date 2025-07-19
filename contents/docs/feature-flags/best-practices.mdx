@@ -72,6 +72,16 @@ It's possible that a feature flag will return an [unexpected value](/docs/featur
 
 In this case, its best to check that the feature flag returns a valid expected value before using it. If it isn't, fallback to working code.
 
-## 10. Reducing your bill
+## 10. Use dependencies for complex rollouts
+
+For sophisticated feature rollouts, consider using [feature flag dependencies](/docs/feature-flags/dependencies) where one flag's activation depends on another flag's state. This is useful for:
+
+- Enabling complex features only after foundational components are active
+- Running experiments only on users with specific features enabled
+- Creating safety mechanisms where critical flags must be enabled first
+
+When using dependencies, keep the dependency chains simple and avoid circular dependencies.
+
+## 11. Reducing your bill
 
 We aim to be significantly cheaper than our competitors. To help you reduce your bill, we've created a [dedicated guide](/docs/feature-flags/cutting-costs) to estimating and reducing your feature flag costs.

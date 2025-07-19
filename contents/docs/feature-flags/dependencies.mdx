@@ -1,0 +1,170 @@
+---
+title: Feature flag dependencies
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+Feature flag dependencies allow you to create flags that are conditionally enabled
+based on the state of other flags. This enables sophisticated feature rollout
+strategies where one flag's activation depends on another flag's value.
+
+## When to use flag dependencies
+
+Flag dependencies are useful for:
+
+- **Gradual feature rollouts**: Enable a complex feature only after its
+  foundational components are active
+- **Conditional experiments**: Run experiments only on users who have specific
+  features enabled
+- **Safety mechanisms**: Ensure critical flags are enabled before activating
+  dependent features
+- **User segmentation**: Target users based on their participation in other
+  flag rollouts
+
+## Setting up flag dependencies
+
+You can create flag dependencies through release conditions when creating or
+editing a feature flag.
+
+### Step 1: Create your base flag
+
+First, create the flag that other flags will depend on:
+
+1. Navigate to [Feature flags](https://app.posthog.com/feature_flags) in your
+   PostHog app
+2. Click **Create feature flag**
+3. Set up your base flag with appropriate release conditions
+4. Save the flag
+
+### Step 2: Create a dependent flag
+
+1. Create a new feature flag or edit an existing one
+2. In the **Release conditions** section, click **Add condition**
+3. Select **Feature flag** from the property type dropdown
+4. Choose the flag you want to depend on
+5. Set the condition (e.g., flag equals `true` or specific variant)
+6. Configure additional conditions and rollout percentage as needed
+
+### Example: Beta program dependency
+
+Here's a common pattern where you want to enable a new feature only for users
+in your beta program:
+
+**Base flag**: `beta_program`
+
+- 10% rollout to all users
+- Returns `true` for beta users, `false` for others
+
+**Dependent flag**: `new_dashboard`
+
+- Condition: `beta_program` equals `true`
+- 100% rollout to users who meet the condition
+
+This ensures the new dashboard is only shown to beta program participants.
+
+## Supported dependency types
+
+Feature flag dependencies support several condition types:
+
+### Boolean flags
+
+- `flag_name` equals `true`
+- `flag_name` equals `false`
+
+### Multi-variant flags
+
+- `flag_name` equals `specific_variant`
+- `flag_name` does not equal `specific_variant`
+
+## Best practices
+
+### Avoid circular dependencies
+
+PostHog prevents circular dependencies where Flag A depends on Flag B, and
+Flag B depends on Flag A. Always design your flag hierarchy to flow in one
+direction.
+
+### Keep dependency chains simple
+
+While you can create complex dependency chains (A → B → C), simpler structures
+are easier to understand and debug. Consider flattening deep dependency chains
+when possible.
+
+### Document your flag relationships
+
+Use descriptive flag names and maintain documentation about flag dependencies
+outside of PostHog to help your team understand the relationships.
+
+### Test dependency scenarios
+
+When testing flags with dependencies:
+
+1. Test the base flag independently
+2. Test the dependent flag when the base flag is enabled
+3. Test the dependent flag when the base flag is disabled
+4. Test edge cases like partial rollouts
+
+## Troubleshooting
+
+### Dependent flag not activating
+
+If your dependent flag isn't working as expected:
+
+1. **Check the base flag**: Ensure the flag your dependency relies on is
+   active and returning the expected value
+2. **Verify conditions**: Confirm the dependency condition matches the base
+   flag's return value exactly
+3. **Review rollout percentage**: Even if conditions are met, the rollout
+   percentage still applies
+4. **Check user properties**: Ensure the user meets all conditions, not just
+   the flag dependency
+
+### Performance considerations
+
+Flag dependencies add minimal overhead to flag evaluation. However, be mindful
+of:
+
+- **Local evaluation**: Dependent flags may not work with local evaluation in
+  all SDKs
+- **API calls**: Each dependency may require additional flag evaluations
+
+### Debugging with the PostHog toolbar
+
+Use the [PostHog toolbar](/docs/toolbar) to inspect flag values and verify
+that dependencies are working correctly in your application.
+
+## API usage
+
+When using PostHog's API or SDKs, flag dependencies work automatically. The
+flag evaluation will handle dependency resolution:
+
+```javascript
+// JavaScript example
+const isNewDashboardEnabled = await posthog.isFeatureEnabled('new_dashboard')
+// This automatically checks the 'beta_program' dependency
+```
+
+```python
+# Python example
+is_new_dashboard_enabled = posthog.feature_enabled('new_dashboard', 'user_id')
+# Dependencies are resolved automatically
+```
+
+## Limitations
+
+- Flag dependencies are resolved server-side and may not work with all local
+  evaluation scenarios
+- Circular dependencies are prevented and will result in an error
+- Self-referential dependencies (a flag depending on itself) are not allowed
+
+## Next steps
+
+- Learn about [testing feature flags](/docs/feature-flags/testing)
+- Explore [best practices](/docs/feature-flags/best-practices) for feature flag
+  management
+- Set up [early access feature management](/docs/feature-flags/early-access-feature-management)
+  for beta programs
