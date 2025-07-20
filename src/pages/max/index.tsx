@@ -1,6 +1,6 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
-import { SlidesTemplate } from 'components/Products/Slides'
+import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
 
 const PRODUCT_HANDLE = 'max_ai'
@@ -67,10 +67,37 @@ export default function MaxAI(): JSX.Element {
         }
     `)
 
+    // Configure slides with custom ProductOS Benefits slide
+    const slides = createSlideConfig({
+        exclude: ['customers'],
+        // custom: [
+        //     {
+        //         slug: 'product-os-benefits',
+        //         name: 'Product OS Benefits',
+        //         component: ProductOSBenefitsSlide,
+        //     },
+        // ],
+        // order: [
+        //     'overview',
+        //     'product-os-benefits',
+        //     'features',
+        //     'pricing',
+        //     'answers',
+        //     'comparison-summary',
+        //     'feature-comparison',
+        //     'docs',
+        //     'pairs-with',
+        //     'getting-started',
+        // ],
+        templates: {
+            overview: 'columns', // Use the horizontal split layout
+        },
+    })
+
     const mergedData = {
         ...data,
         ...contentData,
     }
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} />
+    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
 }

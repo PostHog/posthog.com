@@ -1482,10 +1482,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'web_analytics', 'data_warehouse', 'session_replay'],
         },
         {
-            name: 'Max',
+            name: 'Max AI',
             Icon: IconMagicWand,
-            description: 'AI-powered product analyst and assistant.',
-            handle: 'max',
+            description: 'Your AI-powered product analyst and product manager',
+            handle: 'max_ai',
             color: 'purple',
             colorSecondary: 'lilac',
             category: 'product_os',
@@ -1493,8 +1493,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
             seo: {
                 title: 'Max AI - PostHog',
-                description:
-                    'AI-powered product analyst and assistant that lives in PostHog. Research answers to product questions, update filters, and learn about PostHog features.',
+                description: 'Your AI-powered product analyst and product manager',
             },
             overview: {
                 title: 'Your AI product analyst and assistant',
@@ -1507,7 +1506,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_30_at_09_57_49_2e30546e93.png',
                     alt: 'Max AI in the sidebar',
-                    classes: '',
+                    classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
                 },
             ],
             hog: {
@@ -1536,7 +1535,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             features: [
                 {
                     title: 'Data analysis superpowers',
-                    headline: 'Max understands your data deeply',
+                    headline: 'Max understands your data',
                     description:
                         'Unlike generic AI agents, Max can explore your PostHog data, generate visualizations, and write complex HogQL queries.',
                     images: [
