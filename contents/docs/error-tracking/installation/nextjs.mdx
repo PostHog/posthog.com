@@ -8,21 +8,231 @@ import NextJSCaptureClientExceptions from './_snippets/nextjs/step2-capture-clie
 import InstallNodeForNextJS from './_snippets/nextjs/step3-install-node-sdk.mdx'
 import CaptureServerExceptions from './_snippets/nextjs/step4-capture-server-exceptions.mdx'
 import NextJSNextSteps from './_snippets/nextjs/step5-next-steps.mdx'
+import CalloutBox from 'components/Docs/CalloutBox'
 
 <Steps>
-    <Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK." badge="required">
-        <InstallWebForNextJS />
-    </Step>
-    <Step title="Capturing client-side exceptions" subtitle="Your goal in this step: Capture your first client-side exception event." badge="required">
-        <NextJSCaptureClientExceptions />
-    </Step>
-    <Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
-        <InstallNodeForNextJS />
-    </Step>
-    <Step title="Capturing server-side exceptions" subtitle="Your goal in this step: Capture your first server-side exception event." badge="required">
-        <CaptureServerExceptions />
-    </Step>
-    <Step title="Next steps">
-        <NextJSNextSteps />
-    </Step>
+  <Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK." badge="required">
+
+  **2-spaces indented (2 from `<Steps>`, 0 from `<Step>`)**
+
+  Lorem ipsum **dolor sit amet** consectetur [adipisicing elit](https://www.google.com). Quisquam, quos.
+
+  A list of markdown:
+  - bulleted list
+  - bulleted list
+    - **4-spaces indented**
+    - sub-bulleted (2-space sub-bullet indents)
+    - sub-bulleted (2-space sub-bullet indents)
+
+  ** 2-spaces indented (2 from `<Steps>`, 0 from `<Step>`)**
+
+  i don't *get it*
+
+    **4-spaces indented (4 from `<Steps>`, 2 from `<Step>`)**
+    
+    Lorem ipsum **dolor sit amet** consectetur [adipisicing elit](https://www.google.com). Quisquam, quos.
+  
+      **6-spaces indented (6 from <Steps>, 4 from <Step>)**
+      
+      another paragraph
+
+**0-spaces indented (0 from `<Steps>`, 0 from `<Step>`)**
+
+I think I *get it*
+
+  **2-spaces indented (2 from `<Steps>`, 0 from `<Step>`)**
+  
+  Lorem ipsum **dolor sit amet** consectetur [adipisicing elit](https://www.google.com). Quisquam, quos.
+
+    **4-spaces indented (4 from <Steps>, 2 from <Step>)**
+    
+    why is this a code block
+
+Time to to write some code:
+
+
+  ```javascript
+  // 2 from <Steps>, 0 from <Step>
+  const b = {
+      key: 'value',
+      key2: 'value2',
+  }
+
+  const a = () => {
+      return;
+  }
+  ```
+
+  **2-spaces indented (2 from `<Steps>`, 0 from `<Step>`)**
+
+  Lorem ipsum **dolor sit amet** consectetur [adipisicing elit](https://www.google.com). Quisquam, quos.
+
+    **4-spaces indented, 4 from `<Steps>`, 2 from `<Step>`**
+
+    WHY IS THIS A CODE BLOCK?
+
+
+      **6-spaces indented, 6 from `<Steps>`, 4 from `<Step>`**
+
+      WHY IS THIS A CODE BLOCK
+
+
+
+  Lorem ipsum **dolor sit amet** consectetur [adipisicing elit](https://www.google.com). Quisquam, quos.
+
+  <CallToAction href="https://www.google.com">
+  Visit Google
+
+  </CallToAction>
+
+
+  </Step>
+
+<Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog  web JavaScript SDK." badge="required">
+
+Lorem ipsum **dolor sit amet** consectetur [adipisicing elit](https://www.google.com). Quisquam, quos.
+
+A list of markdown:
+- bulleted list
+  - sub-bulleted (2 space indents)
+- bulleted list
+  - sub bulleted (2 space indents)
+
+1. numbered list
+    1. sub-numbered list (4 space indents)
+    2. sub-numbered list (4 space indents)
+2. numbered list
+3. numbered list
+
+
+```javascript
+const b = {
+    key: 'value',
+    key2: 'value2',
+}
+
+const a = () => {
+    return;
+}
+```
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_39_1030eea240.png"
+    alt="Stack traces example"
+    classes="rounded"
+/>
+
+**table**
+
+| Column 1 | Column 2 | Column 3 |
+|----------|----------|----------|
+| Row 1    | Row 1    | Row 1    |
+| Row 2    | Row 2    | Row 2    |
+| Row 3    | Row 3    | Row 3    |
+
+
+what happens now????
+
+<CallToAction href="https://www.google.com">
+  Visit google. Here's an *italics* text. What about [hyperlink](https://www.posthog.com)
+
+  Then there's a list:
+  - bulleted list
+  - bulleted list
+    - sub-bulleted 
+  - bulleted list
+    - sub bulleted
+
+1. numbered list
+  1. sub-numbered list
+  2. sub-numbered list
+2. numbered list
+3. numbered list
+
+```javascript
+const b = {
+    key: 'value',
+    key2: 'value2',
+}
+
+const a = () => {
+  const c = {
+    key: 'value',
+    key2: 'value2',
+  }
+  return;
+}
+```
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_39_1030eea240.png"
+    alt="Stack traces example"
+    classes="rounded"
+/>
+
+</CallToAction>
+
+<CalloutBox>
+
+  **2-spaces indented**
+  
+  Visit google. Here's an *italics* text. What about [hyperlink](https://www.posthog.com)
+
+    **4-spaces indented**
+    Then there's a list:
+    - bulleted list
+    - bulleted list
+      - sub-bulleted 
+    - bulleted list
+      - sub bulleted
+
+**0-spaces indented**
+1. numbered list
+2. numbered list
+3. numbered list
+
+```javascript
+**0-spaces indented**
+const b = {
+    key: 'value',
+    key2: 'value2',
+}
+
+const a = () => {
+  const c = {
+    key: 'value',
+    key2: 'value2',
+    object2: {
+      key: 'value',
+      key3: 'value2',
+      object3: {
+        key: 'value',
+        key2: 'value2',
+      }
+    } 
+  }
+  return;
+}
+```
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_39_1030eea240.png"
+    alt="Stack traces example"
+    classes="rounded"
+/>
+
+
+
+</CalloutBox>
+
+
+
+
+
+</Step>
+
+
 </Steps>
