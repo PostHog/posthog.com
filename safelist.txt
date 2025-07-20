@@ -314,6 +314,7 @@ md:-mx-16
 md:right-16
 md:w-48
 md:w-60
+min-w-[10rem]
 mt-16
 opacity-1
 opacity-100

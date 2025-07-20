@@ -2,53 +2,68 @@
 title: Home
 template: home
 ---
-<div class="flex @lg:flex-row-reverse @lg:justify-end @lg:items-end flex-col">
 
-<HappyHog />
-
-<div>
+<HomeHappyHog />
 
 <h1 class="[&_p]:m-0 flex gap-2 flex-wrap">
-<span>welcome to</span> 
-<Logo />
-<span>PostHog</span>
+    <span>welcome to</span>
+    <Logo />
+    <span>PostHog</span>
 </h1>
 
-we're building the operating system for people who build products.
+**we're building the AI-powered operating system for running a software business.**
 
-</div>
-
-</div>
+this means every piece of software you need for working with customer data and interacting with customers.
 
 <div class="space-y-8 pt-2">
 
 <div id="product-os">
 
-<h2 class="mt-0">we call it Product OS</h2>
+<h2 class="mt-0">14 tools, one customer record</h2>
 
-you can do powerful things across the platform, like:
+when all your customer data lives in one place, you can make better decisions. PostHog ships with a data warehouse, 100+ pipelines, and SQL access.
 
-- ask questions about product usage or specific customers
-- auto-generate insights or run deep research
-- discover correlations in data that used to loads of time (and lots of SQL)
+even if you don’t need any of these today, they’ll come in handy as you grow.
 
 </div>
 
-<div id="products">
+<div id="toolkits">
 
-## products
+## products we offer
 
-we've built 19 products and tools so far. many of them fit into these categories:
-<Products />
+we have <ProductCount /> with <strong>6 more</strong> in development. all products have usage-based pricing.
+
+<Toolkits />
+
+overwhelmed? just start with a single product – you can always add more later.
 
 </div>
 
-<div id="roadmap">
+<div id="ai">
 
-## roadmap
+## AI
 
-we haven't built our defining feature. customers help us decide what to build next.
-<Roadmap />
+our AI agents help you automate monotonous tasks of gathering context, summarizing information, and making code changes to fix bugs and improve software.
+
+<AIAgents />
+
+_(yes, we named our AI agents after real employees!)_
+
+</div>
+
+<div id="customer-infrastructure">
+
+## customer infrastructure
+
+built-in, PostHog OS ships with:
+
+-   a data warehouse + SQL editor
+-   data pipelines (110+ sources/destinations) + API, webhooks
+-   user activity feed
+
+this means you can connect all your existing data _and_ send it to where it needs to be without changing any of your existing workflows.
+
+<CustomerInfrastructureAccordion />
 
 </div>
 
@@ -57,15 +72,17 @@ we haven't built our defining feature. customers help us decide what to build ne
 ## pricing
 
 our usage-based pricing means you don't have to "talk to sales". plus each product has a generous monthly free tier – in fact, 98% of customers use PostHog for free!
+
 <Pricing />
 
 </div>
 
-<div id="logos">
+<div id="customers">
 
-## logos
+## who's using PostHog?
 
 here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)
+
 <Customers />
 
 </div>
@@ -76,9 +93,9 @@ here are some of our paying customers. (yes they actually use us, no it's not ju
 
 we're different from most companies for a bunch of reasons:
 
-- **transparency.** read our [company handbook](/handbook), our [sales manual](/sales-manual), or [company strategy](/strategy)
-- **we ship fast.** see our [changelog](/changelog)
-- **actually-technical support.** our [support people](/support) all have engineering backgrounds.
+-   **transparency.** read our [company handbook](/handbook), our [sales manual](/sales-manual), or [company strategy](/strategy)
+-   **we ship fast.** see our [changelog](/changelog)
+-   **actually-technical support.** our [support people](/support) all have engineering backgrounds.
 
 [take the company tour](/why) →
 
@@ -90,11 +107,11 @@ we're different from most companies for a bunch of reasons:
 
 here are some links that may be interesting to you:
 
-- [demo.mov](/demo)
-- [technical docs](/docs)
-- [api](/docs/api)
-- [ask a question](/questions)
-- [small teams at PostHog](/teams)
+-   [demo.mov](/demo)
+-   [technical docs](/docs)
+-   [api](/docs/api)
+-   [ask a question](/questions)
+-   [small teams at PostHog](/teams)
 
 </div>
 

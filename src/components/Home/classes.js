@@ -3,10 +3,10 @@ import cntl from 'cntl'
 
 export const heading = (size = 'lg', color = 'primary', classes = '') => {
     const options = {
-        lg: 'text-5xl md:text-7xl',
-        md: 'text-4xl lg:text-5xl 2xl:text-5xl',
+        lg: 'text-4xl md:text-5xl',
+        md: 'text-3xl lg:text-4xl 2xl:text-4xl',
         subtitle: 'text-xl xl:text-2xl leading-tight font-semibold mt-2 md:mt-3 text-secondary',
-        sm: 'text-[18px] md:text-[20px] leading-tight md:text-xl font-semibold mt-2 md:mt-3 opacity-75',
+        sm: 'text-base md:text-[18px] leading-tight md:text-xl font-medium mt-2 md:mt-3 text-secondary',
     }
     return cntl`
         m-0

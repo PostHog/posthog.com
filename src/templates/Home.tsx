@@ -18,11 +18,37 @@ import MDXEditor from 'components/MDXEditor'
 import { graphql } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
+import Tooltip from 'components/RadixUI/Tooltip'
+import { PRODUCT_COUNT } from '../constants'
 
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
     beta?: boolean
+}
+
+const ProgressBar = ({ progress }: { progress: number }) => {
+    return (
+        <div>
+            <Tooltip
+                trigger={
+                    <div className="flex items-center justify-between gap-1 pb-1">
+                        <div className="w-full h-2 bg-accent rounded-sm flex min-w-[10rem]">
+                            <div className="h-full bg-blue" style={{ width: `${progress}%` }}></div>
+                        </div>
+                        <span className="text-xs whitespace-nowrap">{progress}%</span>
+                    </div>
+                }
+                delay={0}
+            >
+                <div>
+                    <p className="mb-0">
+                        <span>Toolkit completion: {progress}%</span>
+                    </p>
+                </div>
+            </Tooltip>
+        </div>
+    )
 }
 
 const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className = '', beta = false }) => {
@@ -33,7 +59,7 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
         Array.isArray(allProducts) ? allProducts.find((p: any) => p.handle === handle) : undefined
 
     return (
-        <span className={`flex flex-wrap gap-1 ${className}`}>
+        <span className={`flex flex-wrap gap-1 pt-1 ${className}`}>
             {productTypes.map((type, index) => {
                 const product = getProduct(type)
                 return product ? (
@@ -57,17 +83,17 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
     )
 }
 
-const HappyHog = () => {
+const HomeHappyHog = () => {
     return (
         <img
             src="https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png"
             alt="happy hog"
-            className="max-w-[400px] max-h-48 -mt-2 -mr-2"
+            className="@xl:float-right @xl:ml-2 max-w-[400px] max-h-48 -mt-2 -mr-2"
         />
     )
 }
 
-const Products = () => {
+const Toolkits = () => {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
@@ -78,9 +104,27 @@ const Products = () => {
         {
             cells: [
                 { content: 1 },
-                { content: 'understand product usage', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['web_analytics', 'product_analytics', 'session_replay']} />,
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            product development <ProgressBar progress={69} />
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: (
+                        <ProductButtons
+                            productTypes={[
+                                'web_analytics',
+                                'product_analytics',
+                                'session_replay',
+                                'feature_flags',
+                                'experiments',
+                                'error_tracking',
+                            ]}
+                        />
+                    ),
                     className: 'text-sm flex-wrap gap-px',
                 },
             ],
@@ -88,9 +132,16 @@ const Products = () => {
         {
             cells: [
                 { content: 2 },
-                { content: 'test new features', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['feature_flags', 'experiments', 'error_tracking']} />,
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            customer engagement <ProgressBar progress={15} />
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts', 'support']} />,
                     className: 'text-sm',
                 },
             ],
@@ -98,19 +149,16 @@ const Products = () => {
         {
             cells: [
                 { content: 3 },
-                { content: 'talk to customers', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts']} />,
-                    className: 'text-sm',
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            sales <ProgressBar progress={5} />
+                        </div>
+                    ),
+                    className: 'font-bold',
                 },
-            ],
-        },
-        {
-            cells: [
-                { content: 4 },
-                { content: 'organize usage data', className: 'font-bold' },
                 {
-                    content: <ProductButtons productTypes={['data_warehouse', 'cdp']} />,
+                    content: <ProductButtons productTypes={['CRM', 'cross-sell/expansion']} />,
                     className: 'text-sm',
                 },
             ],
@@ -119,20 +167,94 @@ const Products = () => {
 
     return (
         <div className="mt-4">
-            <OSTable columns={columns} rows={rows} size="sm" />
-            <div className="bg-accent p-1 text-right text-xs border-primary border-x border-b">
-                <Link to="/products" state={{ newWindow: true }} className="hover:underline">
-                    Open product explorer <IconArrowRight className="inline-block -rotate-45 size-4 text-primary" />
-                </Link>
-            </div>
+            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" overflowX />
+        </div>
+    )
+}
 
-            <p className="mt-2 inline-flex items-center">
-                <span>using these tools, you can track your findings with</span>
-                <ProductButtons productTypes={['dashboards']} />
+const AIAgents = () => {
+    const columns = [
+        { name: '', width: 'auto', align: 'center' as const },
+        { name: 'agent', width: 'minmax(150px,250px)', align: 'left' as const },
+        { name: 'skills', width: 'minmax(auto,1fr)', align: 'left' as const },
+    ]
 
-                <span>or create</span>
-                <ProductButtons productTypes={['notebooks']} />
-            </p>
+    const rows = [
+        {
+            cells: [
+                { content: 1 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            Max - helpful chatbot <ProgressBar progress={75} />
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content:
+                        'writing SQL, building data transformations, gathering context in insights, summarizing session recordings',
+                    className: 'text-sm',
+                },
+            ],
+        },
+        {
+            cells: [
+                { content: 2 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            Raquel - exec <ProgressBar progress={40} />
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: 'researches complex data problems',
+                    className: 'text-sm',
+                },
+            ],
+        },
+        {
+            cells: [
+                { content: 3 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            Annika - product manager <ProgressBar progress={25} />
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content:
+                        'identifies errors and UX bugs, writes requirements docs, monitors code changes with phased rollouts',
+                    className: 'text-sm',
+                },
+            ],
+        },
+        {
+            cells: [
+                { content: 4 },
+                {
+                    content: (
+                        <div className="flex flex-col gap-1">
+                            Marius - engineer <ProgressBar progress={10} />
+                        </div>
+                    ),
+                    className: 'font-bold',
+                },
+                {
+                    content: 'implementing bug fixes, creating and configuring feature flags, creating pull requests',
+                    className: 'text-sm',
+                },
+            ],
+        },
+    ]
+
+    return (
+        <div className="mt-4">
+            <OSTable columns={columns} rows={rows} size="sm" overflowX />
         </div>
     )
 }
@@ -164,6 +286,62 @@ interface CustomerProps {
         slug: string
         notes?: string
     }
+}
+
+const ProductCount = () => {
+    return <strong>{PRODUCT_COUNT}+ products</strong>
+}
+
+const CustomerInfrastructureAccordion = () => {
+    return (
+        <div>
+            <Accordion
+                // defaultValue="customer-infrastructure"
+                skin={false}
+                triggerClassName="pl-0 -ml-1 flex-row-reverse [&>svg]:!-rotate-90 [&[data-state=open]>svg]:!rotate-0 [&_strong]:text-[15px]"
+                items={[
+                    {
+                        value: 'customer-infrastructure',
+                        trigger: <strong>learn more about customer infrastructure</strong>,
+                        content: (
+                            <div className="-my-4 -mx-2 text-[15px]">
+                                <p>
+                                    the problem with today’s customer data infrastructure is that there’s no single
+                                    source of truth.
+                                </p>
+                                <p>
+                                    most products only have a subset of customer data because each tool requires a
+                                    manual integration. so your CRM contains different info about a customer than your
+                                    support tool and your product analytics software has different data than you can
+                                    pull from revenue insights.
+                                </p>
+                                <p>
+                                    this mess of third party data integrations leads to siloed views of a customer.
+                                    sure, you can make educated decisions from a subset of data but it’s{' '}
+                                    <strong>an order of magnitude more powerful</strong> when you have the full picture.
+                                </p>
+                                <p>
+                                    PostHog can import data from third party sources into our data warehouse, but as you
+                                    start sending more data directly to PostHog OS,every PostHog product has access to
+                                    the same data.
+                                </p>
+                                <p>
+                                    and when you layer AI into the mix, you can produce more accurate, more valuable
+                                    insights than in any single other product – because PostHog has access to nuanced
+                                    data you never thought would be worth sending via an integration (or would be
+                                    cost-prohibitive to do so).
+                                </p>
+                                <p>
+                                    the fundamental difference with PostHog – this unified customer infrastructure –
+                                    means everyone is working from the same central source of data.
+                                </p>
+                            </div>
+                        ),
+                    },
+                ]}
+            />
+        </div>
+    )
 }
 
 const PageNavigation = () => {
@@ -215,6 +393,40 @@ const Customers = () => {
     const hugeCustomers = getCustomers(HUGE)
     const gonnaBeHugeCustomers = getCustomers(GONNA_BE_HUGE)
 
+    // Helper function to render logo - same logic as CustomersSlide.tsx
+    const renderLogo = (customer: any) => {
+        if (!customer.logo) {
+            return <span className="text-xs">{customer.name}</span>
+        }
+
+        // Check if logo is a React component (single SVG format)
+        if (typeof customer.logo === 'function') {
+            const LogoComponent = customer.logo
+            const heightClass = customer.height ? `h-${customer.height}` : 'h-6'
+            const className = `w-full fill-current object-contain ${heightClass} max-h-6`.trim()
+
+            return <LogoComponent className={className} />
+        }
+
+        // Otherwise, it's the existing light/dark object format
+        const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-6'
+
+        return (
+            <>
+                <img
+                    src={customer.logo.light}
+                    alt={customer.name}
+                    className={`h-full w-auto object-contain dark:hidden ${heightClass}`}
+                />
+                <img
+                    src={customer.logo.dark}
+                    alt={customer.name}
+                    className={`h-full w-auto object-contain hidden dark:block ${heightClass}`}
+                />
+            </>
+        )
+    }
+
     const columns = [
         { name: 'Huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
         { name: 'Gonna be huge companies', width: 'minmax(auto,1fr)', align: 'center' as const },
@@ -226,24 +438,11 @@ const Customers = () => {
                 {
                     content: (
                         <div className="flex flex-wrap gap-4 justify-center items-center">
-                            {hugeCustomers.map((customer) =>
-                                customer.logo ? (
-                                    <div key={customer.slug} className="h-8 flex items-center justify-center">
-                                        <img
-                                            src={customer.logo.light}
-                                            alt={customer.name}
-                                            className={`h-full w-auto object-contain dark:hidden`}
-                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
-                                        />
-                                        <img
-                                            src={customer.logo.dark}
-                                            alt={customer.name}
-                                            className={`h-full w-auto object-contain hidden dark:block`}
-                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
-                                        />
-                                    </div>
-                                ) : null
-                            )}
+                            {hugeCustomers.map((customer) => (
+                                <div key={customer.slug} className="h-8 flex items-center justify-center">
+                                    {renderLogo(customer)}
+                                </div>
+                            ))}
                         </div>
                     ),
                     className: '!p-4',
@@ -251,24 +450,11 @@ const Customers = () => {
                 {
                     content: (
                         <div className="flex flex-wrap gap-4 justify-center items-center">
-                            {gonnaBeHugeCustomers.map((customer) =>
-                                customer.logo ? (
-                                    <div key={customer.slug} className="h-8 flex items-center justify-center">
-                                        <img
-                                            src={customer.logo.light}
-                                            alt={customer.name}
-                                            className={`h-full w-auto object-contain dark:hidden`}
-                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
-                                        />
-                                        <img
-                                            src={customer.logo.dark}
-                                            alt={customer.name}
-                                            className={`h-full w-auto object-contain hidden dark:block`}
-                                            style={{ maxHeight: customer.height ? `${customer.height}px` : 'auto' }}
-                                        />
-                                    </div>
-                                ) : null
-                            )}
+                            {gonnaBeHugeCustomers.map((customer) => (
+                                <div key={customer.slug} className="h-8 flex items-center justify-center">
+                                    {renderLogo(customer)}
+                                </div>
+                            ))}
                         </div>
                     ),
                     className: '!p-4',
@@ -282,16 +468,22 @@ const Customers = () => {
 
 const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     {
+        name: 'ProductCount',
+        kind: 'flow',
+        props: [],
+        Editor: () => <ProductCount />,
+    },
+    {
         name: 'PageNavigation',
         kind: 'flow',
         props: [],
         Editor: () => <PageNavigation />,
     },
     {
-        name: 'HappyHog',
+        name: 'HomeHappyHog',
         kind: 'flow',
         props: [],
-        Editor: () => <HappyHog />,
+        Editor: () => <HomeHappyHog />,
     },
     {
         name: 'Headline',
@@ -304,16 +496,22 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         ),
     },
     {
-        name: 'Products',
+        name: 'Toolkits',
         kind: 'flow',
         props: [],
-        Editor: () => <Products />,
+        Editor: () => <Toolkits />,
     },
     {
-        name: 'Roadmap',
+        name: 'AIAgents',
         kind: 'flow',
         props: [],
-        Editor: () => <Roadmap frame={false} />,
+        Editor: () => <AIAgents />,
+    },
+    {
+        name: 'CustomerInfrastructureAccordion',
+        kind: 'flow',
+        props: [],
+        Editor: () => <CustomerInfrastructureAccordion />,
     },
     {
         name: 'Pricing',
@@ -331,7 +529,14 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'CTA',
         kind: 'flow',
         props: [],
-        Editor: () => <CTA />,
+        Editor: () => (
+            <>
+                <p className="-mt-2">
+                    if nothing else has sold you on PostHog, hopefully these classic marketing tactics will.
+                </p>
+                <CTA headline={false} />
+            </>
+        ),
     },
     {
         name: 'Logo',
