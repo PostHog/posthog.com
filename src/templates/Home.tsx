@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
 import Roadmap from 'components/Home/New/Roadmap'
 import Pricing from 'components/Home/New/Pricing'
 import OSButton from 'components/OSButton'
@@ -141,7 +141,12 @@ const Toolkits = () => {
                     className: 'font-bold',
                 },
                 {
-                    content: <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts', 'support']} />,
+                    content: (
+                        <>
+                            <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts', 'support']} />{' '}
+                            Support
+                        </>
+                    ),
                     className: 'text-sm',
                 },
             ],
@@ -158,7 +163,11 @@ const Toolkits = () => {
                     className: 'font-bold',
                 },
                 {
-                    content: <ProductButtons productTypes={['CRM', 'cross-sell/expansion']} />,
+                    content: (
+                        <>
+                            CRM, Cross-sell/expansion <ProductButtons productTypes={['CRM', 'cross-sell/expansion']} />
+                        </>
+                    ),
                     className: 'text-sm',
                 },
             ],
@@ -186,7 +195,10 @@ const AIAgents = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            Max - helpful chatbot <ProgressBar progress={75} />
+                            <Link to="/max" state={{ newWindow: true }}>
+                                Max - helpful chatbot <IconArrowUpRight className="inline-block size-4" />
+                            </Link>
+                            <ProgressBar progress={75} />
                         </div>
                     ),
                     className: 'font-bold',
