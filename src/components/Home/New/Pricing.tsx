@@ -2,10 +2,8 @@ import React from 'react'
 import useProducts from 'hooks/useProducts'
 import useProduct from 'hooks/useProduct'
 import OSTable from 'components/OSTable'
-import { IconArrowUpRight } from '@posthog/icons'
-import { Link } from 'gatsby'
 
-const productsToShow = ['product_analytics', 'feature_flags', 'session_replay', 'data_warehouse']
+const productsToShow = ['analytics', 'feature flags', 'session replay', 'data warehouse']
 
 function numberToWords(num: number): string {
     if (num >= 1_000_000) {
@@ -18,7 +16,7 @@ function numberToWords(num: number): string {
 
 export default function Pricing() {
     const { products: initialProducts } = useProducts()
-    const products = initialProducts.filter((product) => productsToShow.includes(product.handle))
+    const products = initialProducts.filter((product) => productsToShow.includes(product.name.toLowerCase()))
 
     return (
         <div className="mt-4">
@@ -56,11 +54,6 @@ export default function Pricing() {
                     ],
                 }))}
             />
-            <p>
-                <Link to="/pricing" state={{ newWindow: true }}>
-                    explore pricing <IconArrowUpRight className="inline-block size-4" />
-                </Link>
-            </p>
         </div>
     )
 }

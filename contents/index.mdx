@@ -3,7 +3,11 @@ title: Home
 template: home
 ---
 
-<HomeHappyHog />
+<div class="flex @lg:flex-row-reverse @lg:justify-end @lg:items-end flex-col">
+
+<HappyHog />
+
+<div>
 
 <h1 class="[&_p]:m-0 flex gap-2 flex-wrap">
     <span>welcome to</span>
@@ -11,59 +15,43 @@ template: home
     <span>PostHog</span>
 </h1>
 
-**we're building the AI-powered operating system for running a software business.**
+we're building the operating system for people who build products.
 
-this means every piece of software you need for working with customer data and interacting with customers.
+</div>
+
+</div>
 
 <div class="space-y-8 pt-2">
 
 <div id="product-os">
 
-<h2 class="mt-0">14 tools, one customer record</h2>
+<h2 class="mt-0">we call it Product OS</h2>
 
-when all your customer data lives in one place, you can make better decisions. PostHog ships with a data warehouse, 100+ pipelines, and SQL access.
+you can do powerful things across the platform, like:
 
-even if you don’t need any of these today, they’ll come in handy as you grow.
-
-</div>
-
-<div id="toolkits">
-
-## products we offer
-
-we have <ProductCount /> with <strong>6 more</strong> in development. all products have usage-based pricing.
-
-<Toolkits />
-
-overwhelmed? just start with a single product – you can always add more later.
+-   ask questions about product usage or specific customers
+-   auto-generate insights or run deep research
+-   discover correlations in data that used to loads of time (and lots of SQL)
 
 </div>
 
-<div id="ai">
+<div id="products">
 
-## AI
+## products
 
-our AI agents help you automate monotonous tasks of gathering context, summarizing information, and making code changes to fix bugs and improve software.
+we've built 19 products and tools so far. many of them fit into these categories:
 
-<AIAgents />
-
-_(yes, we named our AI agents after real employees!)_
+<Products />
 
 </div>
 
-<div id="customer-infrastructure">
+<div id="roadmap">
 
-## customer infrastructure
+## roadmap
 
-built-in, PostHog OS ships with:
+we haven't built our defining feature. customers help us decide what to build next.
 
--   a data warehouse + SQL editor
--   data pipelines (110+ sources/destinations) + API, webhooks
--   user activity feed
-
-this means you can connect all your existing data _and_ send it to where it needs to be without changing any of your existing workflows.
-
-<CustomerInfrastructureAccordion />
+<Roadmap />
 
 </div>
 
@@ -77,9 +65,9 @@ our usage-based pricing means you don't have to "talk to sales". plus each produ
 
 </div>
 
-<div id="customers">
+<div id="logos">
 
-## who's using PostHog?
+## logos
 
 here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)
 
