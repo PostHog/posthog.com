@@ -1069,12 +1069,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         if (location.key === 'initial' && location.pathname === '/' && !isMobile) {
-            const currentWindow = windows[0]
-            addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} offset={{ x: 100, y: 0 }} />)
-            bringToFront(currentWindow, undefined, {
-                x: currentWindow.position.x - 100,
-                y: currentWindow.position.y,
-            })
+            addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} />)
         }
 
         if (compact) {
