@@ -2,12 +2,161 @@
 title: Web error tracking installation
 ---
 
-import WebInstall from '../../integrate/_snippets/install-web.mdx'
-import JSWebErrorTracking from '../_snippets/web-install-error-tracking.mdx'
-import UploadSourceMaps from '../_snippets/upload-source-maps.mdx'
-import UploadSourceMapsSteps from '../_snippets/upload-source-maps-steps.mdx'
+import { Steps, Step } from 'components/Docs/Steps'
+import WebNextSteps from './_snippets/web/step3-next-steps.mdx'
 
-<WebInstall />
-<JSWebErrorTracking />
-<UploadSourceMaps />
-<UploadSourceMapsSteps />
+
+import JsSnippet from "../../integrate/_snippets/install-js-snippet.mdx"
+import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
+
+
+<Steps>
+
+<Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK." badge="required">
+
+
+**NO IMPORT:**
+
+### Option 1: Add the JavaScript snippet to your HTML <span class="bg-gray-accent-light dark:bg-gray-accent-dark text-gray font-semibold align-middle text-sm p-1 rounded">Recommended</span>
+
+<JsSnippet />
+
+### Option 2: Install via package manager
+
+<InstallWebPackageManagers />
+
+And then include it with your project API key and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
+
+```js-web
+import posthog from 'posthog-js'
+
+posthog.init('<ph_project_api_key>', {
+  api_host: '<ph_client_api_host>',
+  defaults: '<ph_posthog_js_defaults>'
+})
+```
+
+See our framework specific docs for [Next.js](/docs/libraries/next-js), [React](/docs/libraries/react), [Vue](/docs/libraries/vue-js), [Angular](/docs/libraries/angular), [Astro](/docs/libraries/astro), [Remix](/docs/libraries/remix), and [Svelte](/docs/libraries/svelte) for more installation details.
+
+<details>
+<summary>Bundle all required extensions (advanced)</summary>
+
+By default, the JavaScript Web library only loads the core functionality. It lazy-loads extensions such as surveys or the session replay 'recorder' when needed. 
+
+This can cause issues if:
+
+- You have a Content Security Policy (CSP) that blocks inline scripts. 
+- You want to optimize your bundle at build time to ensure all dependencies are ready immediately.
+- Your app is running in environments like the Chrome Extension store or [Electron](/tutorials/electron-analytics) that reject or block remote code loading.
+
+To solve these issues, we have multiple import options available below.
+
+**Note:** With any of the `no-external` options, the toolbar will be unavailable as this is only possible as a runtime dependency loaded directly from `us.posthog.com`.
+
+```js-web
+// No external code loading possible (this disables all extensions such as Replay, Surveys, Exceptions etc.)
+import posthog from 'posthog-js/dist/module.no-external'
+
+// No external code loading possible but all external dependencies pre-bundled
+import posthog from 'posthog-js/dist/module.full.no-external'
+
+// All external dependencies pre-bundled and with the ability to load external scripts (primarily useful is you use Site Apps)
+import posthog from 'posthog-js/dist/module.full'
+
+// Finally you can also import specific extra dependencies 
+import "posthog-js/dist/recorder"
+import "posthog-js/dist/surveys"
+import "posthog-js/dist/exception-autocapture"
+import "posthog-js/dist/tracing-headers"
+import "posthog-js/dist/web-vitals"
+import posthog from 'posthog-js/dist/module.no-external'
+
+// All other posthog commands are the same as usual
+posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
+```
+
+**Note:** You should ensure if using this option that you always import `posthog-js` from the same module, otherwise multiple bundles could get included. At this time `posthog-js/react` does not work with any module import other than the default.
+
+</details>
+
+<details>
+<summary>Don't want to send test data while developing?</summary>
+
+If you don't want to send test data while you're developing, you can do the following:
+
+```js-web
+if (!window.location.host.includes('127.0.0.1') && !window.location.host.includes('localhost')) {
+    posthog.init('<ph_project_api_key>', { api_host: '<ph_client_api_host>', defaults: '<ph_posthog_js_defaults>' })
+}
+```
+
+</details>
+<details>
+<summary>What is the `defaults` option?</summary>
+
+The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot used as defaults to initialize PostHog. This default is overridden when you explicitly set a value for any of the options.
+
+</details>
+
+---
+
+**✅ Checkpoint** – Before proceeding, confirm that:
+
+1. You can [manually capture](/docs/product-analytics/capture-events) events in client-side code (components using `'use client'`).
+2. If [autocapture is enabled](/docs/product-analytics/autocapture#disabling-autocapture), you should see basic events like clicks and page views.
+
+<div className="mt-4 mb-2">
+    <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+        Check for events in PostHog
+    </CallToAction>
+</div>
+
+</Step>
+
+<Step title="Capturing exceptions" subtitle="Your goal in this step: Enable automatic exception tracking for your web application." badge="required">
+
+**NO IMPORT:**
+
+### Setting up exception autocapture
+
+> **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://us.posthog.com/settings/project-error-tracking#exception-autocapture). 
+
+When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
+
+#### Manual error capture
+
+It is also possible to manually capture exceptions using the `captureException` method:
+
+```js
+posthog.captureException(error, additionalProperties)
+```
+
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that exceptions are being captured in PostHog.
+
+<div className="mt-4 mb-2">
+    <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+        Check for exceptions in PostHog
+    </CallToAction>
+</div>
+
+</Step>
+
+<Step title="Next steps">
+
+**NO IMPORT:**
+
+After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
+
+| Action | Description |
+|--------|-------------|
+| [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
+| [Configure alerting](/docs/error-tracking/alerting) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cost-optimization) | Take advantage of our cost-effective pricing |
+
+</Step>
+
+</Steps> 
