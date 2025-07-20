@@ -432,8 +432,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             home: HomeTemplate,
         }
         const template = templates[node.frontmatter.template] || PlainTemplate
+        const path = replacePath(node.slug)
         createPage({
-            path: node.frontmatter.template === 'home' ? '/' : replacePath(node.slug),
+            path: path === '' ? '/' : path,
             component: template,
             context: {
                 id: node.id,
