@@ -870,6 +870,16 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Monitoring',
+                url: '',
+                children: [
+                    {
+                        name: 'Grafana',
+                        url: '/handbook/engineering/monitoring/grafana',
+                    },
+                ],
+            },
+            {
                 name: 'Working with data',
                 url: '',
                 children: [
