@@ -3,26 +3,175 @@ title: Next.js error tracking installation
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import InstallWebForNextJS from './_snippets/nextjs/step1-install-web-sdk.mdx'
-import NextJSCaptureClientExceptions from './_snippets/nextjs/step2-capture-client-exceptions.mdx'
-import InstallNodeForNextJS from './_snippets/nextjs/step3-install-node-sdk.mdx'
-import CaptureServerExceptions from './_snippets/nextjs/step4-capture-server-exceptions.mdx'
-import NextJSNextSteps from './_snippets/nextjs/step5-next-steps.mdx'
+
+import NextJSInstall from '../../integrate/_snippets/nextjs/install-nextjs.mdx'
+import { CallToAction } from 'components/CallToAction'
+
+import Tab from "components/Tab"
+import AppRouterErrorTracking from './_snippets/nextjs-router-snippets/app-router.mdx'
+import PagesRouterErrorTracking from './_snippets/nextjs-router-snippets/page-router.mdx'
+import JSWebErrorTracking from '../_snippets/web-install-error-tracking.mdx'
+import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
+
 
 <Steps>
-    <Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK." badge="required">
-        <InstallWebForNextJS />
-    </Step>
-    <Step title="Capturing client-side exceptions" subtitle="Your goal in this step: Capture your first client-side exception event." badge="required">
-        <NextJSCaptureClientExceptions />
-    </Step>
-    <Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
-        <InstallNodeForNextJS />
-    </Step>
-    <Step title="Capturing server-side exceptions" subtitle="Your goal in this step: Capture your first server-side exception event." badge="required">
-        <CaptureServerExceptions />
-    </Step>
-    <Step title="Next steps">
-        <NextJSNextSteps />
-    </Step>
+<Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK." badge="required">
+
+<NextJSInstall />
+
+---  
+
+**✅ Checkpoint** – Before proceeding, confirm that:
+
+1. You can [manually capture](/docs/product-analytics/capture-events) events in client-side code (components using `'use client'`).
+2. If [autocapture is enabled](/docs/product-analytics/autocapture#disabling-autocapture), you should see basic events like clicks and page views.
+
+
+<div className="mt-4 mb-2">
+    <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+        Check for events in PostHog
+    </CallToAction>
+</div>
+</Step>
+<Step title="Capturing client-side exceptions" subtitle="Your goal in this step: Capture your first client-side exception event." badge="required">
+
+<JSWebErrorTracking />
+
+<Tab.Group tabs={[
+  'App router', 
+  'Pages router']}>
+  <Tab.List>
+      <Tab>App router</Tab>
+      <Tab>Pages router</Tab>
+  </Tab.List>
+  <Tab.Panels>
+      <Tab.Panel>
+          <AppRouterErrorTracking />
+      </Tab.Panel>
+      <Tab.Panel>
+          <PagesRouterErrorTracking />
+      </Tab.Panel>
+  </Tab.Panels>
+</Tab.Group>
+
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that autocapture, manual capture, and any error boundary capture are working on the client-side.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+<Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
+
+Next.js enables you to both server-side render pages and add server-side functionality. To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
+
+First, install the `posthog-node` library:
+
+<InstallNodePackageManagers />
+
+For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://us.posthog.com/settings/project). 
+
+This looks like this:
+
+```js file=lib/posthog-server.js
+import { PostHog } from 'posthog-node'
+
+let posthogInstance = null
+
+export function getPostHogServer() {
+  if (!posthogInstance) {
+    posthogInstance = new PostHog(
+      process.env.NEXT_PUBLIC_POSTHOG_KEY,
+      {
+        host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+        flushAt: 1,
+        flushInterval: 0,
+      }
+    )
+  }
+
+  return posthogInstance
+}
+```
+
+You can now use the `getPostHogServer` function to capture exceptions in server-side code.
+
+```js
+const posthog = getPostHogServer()
+
+posthog.capture("button-clicked")
+```
+
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that you can manually capture exceptions in server-side code.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for server events in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+<Step title="Capturing server-side exceptions" subtitle="Your goal in this step: Capture your first server-side exception event." badge="required">
+
+To capture errors that occur in your server-side code, you can set up a [`instrumentation.ts`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of your project. This provides a `onRequestError` hook that you can use to capture errors.
+
+Importantly, you need to:
+
+1. Set up a `posthog-node` client in your server-side code. See our doc on [setting up Next.js server-side analytics](/docs/libraries/next-js#server-side-analytics) for more.
+2. Check the request is running in the `nodejs` runtime to ensure PostHog works. You can call `posthog.debug()` to get verbose logging.
+3. Get the `distinct_id` from the cookie to connect the error to a specific user.
+
+This looks like this:
+
+```js
+// instrumentation.js
+export function register() {
+  // No-op for initialization
+}
+
+export const onRequestError = async (err, request, context) => {
+  if (process.env.NEXT_RUNTIME === 'nodejs') {
+    const { getPostHogServer } = require('./lib/posthog-server')
+    const posthog = await getPostHogServer()
+    let distinctId = null
+    if (request.headers.cookie) {
+      const cookieString = request.headers.cookie
+      const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
+
+      if (postHogCookieMatch && postHogCookieMatch[1]) {
+        try {
+          const decodedCookie = decodeURIComponent(postHogCookieMatch[1])
+          const postHogData = JSON.parse(decodedCookie)
+          distinctId = postHogData.distinct_id
+        } catch (e) {
+          console.error('Error parsing PostHog cookie:', e)
+        }
+      }
+    }
+
+    await posthog.captureException(err, distinctId || undefined)
+  }
+}
+```
+
+You can find a full example of both this and client-side error tracking in our [Next.js error monitoring tutorial](/tutorials/nextjs-error-monitoring).
+
+</Step>
+<Step title="Next steps">
+
+After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
+
+| Action | Description |
+|--------|-------------|
+| [Upload source maps](/docs/error-tracking/upload-source-maps/nextjs) | Required for accurate stack traces if you serve minified bundles. |
+| [Configure alerting](/docs/error-tracking/alerting) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cost-optimization) | Take advantage of our cost-effective pricing |
+
+</Step>
 </Steps>

@@ -3,14 +3,66 @@ title: SvelteKit error tracking installation
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import SetupSvelteExceptionCapture from './_snippets/svelte/setup-exception-capture.mdx'
-import SvelteNextSteps from './_snippets/svelte/next-steps.mdx'
+
+import SvelteInstallClient from '../../integrate/_snippets/install-svelte-client.mdx'
+import SvelteInstallServer from '../../integrate/_snippets/install-svelte-server.mdx'
 
 <Steps>
-    <Step title="Setting up exception capture" subtitle="Your goal in this step: Install PostHog SDKs and enable automatic exception tracking for your SvelteKit application." badge="required">
-        <SetupSvelteExceptionCapture />
-    </Step>
-    <Step title="Next steps">
-        <SvelteNextSteps />
-    </Step>
+<Step title="Setting up exception capture" subtitle="Your goal in this step: Install PostHog SDKs and enable automatic exception tracking for your SvelteKit application." badge="required">
+
+[SvelteKit Hooks](https://svelte.dev/docs/kit/hooks) can be used to capture exceptions in the client and server-side.
+
+### Client-side setup
+
+<SvelteInstallClient />
+
+Lastly, you will need to capture exceptions in the `handleError` callback in your client-side hooks file:
+
+```js file=src/hooks.client.js
+import posthog from 'posthog-js';
+import type { HandleClientError } from '@sveltejs/kit';
+
+export const handleError = ({ error, status }: HandleClientError) => {
+  // SvelteKit 2.0 offers a reliable way to check for a 404 error:
+  if (status !== 404) {
+      posthog.captureException(error);
+  }
+};
+```
+
+### Server-side setup
+
+<SvelteInstallServer />
+
+To capture exceptions on the server-side, you will also need to implement the `handleError` callback:
+
+```js file=src/hooks.server.ts
+import type { HandleServerError } from '@sveltejs/kit';
+import { PostHog } from 'posthog-node';
+
+const client = new PostHog(
+  '<ph_project_api_key>',
+  { host: '<ph_client_api_host>' }
+)
+
+export const handleError = async ({ error, status }: HandleServerError) => {
+  if (status !== 404) {
+      client.captureException(error);
+      await client.shutdown();
+  }
+};
+```
+
+</Step>
+<Step title="Next steps">
+
+After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
+
+| Action | Description |
+|--------|-------------|
+| [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
+| [Configure alerting](/docs/error-tracking/alerting) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cost-optimization) | Take advantage of our cost-effective pricing |
+
+</Step>
 </Steps> 

@@ -3,18 +3,85 @@ title: Node.js error tracking installation
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import InstallNodeSDK from './_snippets/node/step1-install-node-sdk.mdx'
-import SetupNodeExceptionCapture from './_snippets/node/step2-setup-exception-autocapture.mdx'
-import NodeNextSteps from './_snippets/node/step3-next-steps.mdx'
+
+import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
 
 <Steps>
-    <Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
-        <InstallNodeSDK />
-    </Step>
-    <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Node.js application." badge="required">
-        <SetupNodeExceptionAutocapture />
-    </Step>
-    <Step title="Next steps">
-        <NodeNextSteps />
-    </Step>
+<Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
+
+Run either `npm` or `yarn` in terminal to add it to your project:
+
+<InstallNodePackageManagers />
+
+In your app, set your project API key **before** making any calls.
+
+```node
+import { PostHog } from 'posthog-node'
+
+const client = new PostHog(
+    '<ph_project_api_key>',
+    { host: '<ph_client_api_host>' }
+)
+
+await client.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+```
+
+You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+> **Note:** As a rule of thumb, we do not recommend hardcoding API keys. Setting it as an environment variable is preferred.
+
+</Step>
+<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Node.js application." badge="required">
+
+### Setting up Node exception autocapture
+
+> **Note:** A minimum SDK version of v4.5.2 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+You can enable exception autocapture when initializing the PostHog client to automatically capture uncaught exceptions and unhandled rejections in your Node app. 
+
+```node
+import { PostHog } from 'posthog-node'
+
+const client = new PostHog(
+    '<ph_project_api_key>',
+    { enableExceptionAutocapture: true }
+)
+```
+
+If you are using the Express framework, you will need to import and call `setupExpressErrorHandler` with your PostHog client and Express app. This is because Express handles uncaught exceptions internally meaning exception autocapture will not work by default.
+
+```node file=server.ts
+import express from 'express'
+import { PostHog, setupExpressErrorHandler } from 'posthog-node'
+
+const app = express()
+const posthog = new PostHog(PH_API_KEY)
+
+setupExpressErrorHandler(posthog, app)
+```
+
+> **Note:** Error tracking requires access the file system to process stack traces. Some providers, like Cloudflare workers, do not support Node.js runtime APIs by default and need to be [included as per their documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#nodejs-compatibility).
+
+### Capturing exceptions manually
+
+If you need to manually capture exceptions, you can do so by calling the `captureException` method:
+
+```node
+posthog.captureException(e, 'user_distinct_id', additionalProperties)
+```
+
+This is helpful if you've built your own error handling logic or want to capture exceptions normally handled by the framework.
+
+</Step>
+<Step title="Next steps">
+
+After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
+
+| Action | Description |
+|--------|-------------|
+| [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
+| [Configure alerting](/docs/error-tracking/alerting) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cost-optimization) | Take advantage of our cost-effective pricing |
+
+</Step>
 </Steps> 

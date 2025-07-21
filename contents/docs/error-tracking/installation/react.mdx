@@ -3,22 +3,147 @@ title: React error tracking installation
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
-import InstallReactSDK from './_snippets/react/step1-install-react-sdk.mdx'
-import SetupReactExceptionAutocapture from './_snippets/react/step2-setup-exception-autocapture.mdx'
-import ConfigureSourceMaps from './_snippets/react/step3-configure-source-maps.mdx'
-import ReactNextSteps from './_snippets/react/step4-next-steps.mdx'
+
+import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
 
 <Steps>
-    <Step title="Installing PostHog React SDK" subtitle="Your goal in this step: Install the PostHog React SDK." badge="required">
-        <InstallReactSDK />
-    </Step>
-    <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your React application." badge="required">
-        <SetupReactExceptionAutocapture />
-    </Step>
-    <Step title="Configuring source maps" subtitle="Your goal in this step: Configure your build process to generate source maps for accurate stack traces." badge="required">
-        <ConfigureSourceMaps />
-    </Step>
-    <Step title="Next steps">
-        <ReactNextSteps />
-    </Step>
+<Step title="Installing PostHog React SDK" subtitle="Your goal in this step: Install the PostHog React SDK." badge="required">
+
+> For Next.js, we recommend following the [Next.js integration guide](/docs/integrate/next-js) instead.
+
+1. Install [`posthog-js`](https://github.com/posthog/posthog-js) using your package manager:
+
+<InstallWebPackageManagers />
+
+2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
+
+```shell file=.env.local
+VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
+VITE_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
+```
+
+3. Integrate PostHog at the root of your app (such as `main.jsx` if you are using Vite).
+
+```react
+// src/main.jsx
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import { PostHogProvider } from 'posthog-js/react'
+
+const options = {
+api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+defaults: '<ph_posthog_js_defaults>',
+}
+
+createRoot(document.getElementById('root')).render(
+<StrictMode>
+    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+    <App />
+    </PostHogProvider>
+</StrictMode>,
+)
+```
+
+<details>
+<summary>Using React Router v7?</summary>
+
+You need to set `posthog-js` and `posthog-js/react` as external packages in your `vite.config.ts` file to avoid SSR errors.
+
+```ts file=vite.config.ts
+// ... imports
+
+export default defineConfig({
+    plugins: [tailwindcss(), reactRouter(), tsconfigPaths()],
+    ssr: {
+    noExternal: ['posthog-js', 'posthog-js/react']
+    }
+});
+``` 
+
+See our [Remix docs](/docs/libraries/remix) for more details.
+</details>
+      
+</Step>
+<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your React application." badge="required">
+
+> **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://us.posthog.com/settings/project-error-tracking#exception-autocapture). 
+
+When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
+
+#### Implementing error boundaries
+
+You can add a custom error boundary to capture rendering errors thrown by components:
+
+```javascript
+import * as React from 'react';
+
+class CustomErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  componentDidCatch(error) {
+    posthog.captureException(error)
+  }
+
+  render() {
+    if (this.state.hasError) {
+      // You can render any custom fallback UI
+      return this.props.fallback;
+    }
+
+    return this.props.children;
+  }
+}
+```
+
+#### Manual error capture
+
+It is also possible to manually capture exceptions using the `captureException` method:
+
+```js
+posthog.captureException(error, additionalProperties)
+```
+
+</Step>
+<Step title="Configuring source maps" subtitle="Your goal in this step: Configure your build process to generate source maps for accurate stack traces." badge="required">
+
+If you're using React with Vite, you can enable source maps in your `vite.config.js` file.
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    sourcemap: true, // +
+  }
+})
+```
+
+If you're using another build tool like [webpack](https://webpack.js.org/configuration/devtool/) or [Rollup](https://rollupjs.org/configuration-options/#output-sourcemap), consult the documentation for your build tool to enable source maps.
+
+</Step>
+<Step title="Next steps">
+
+After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
+
+| Action | Description |
+|--------|-------------|
+| [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
+| [Configure alerting](/docs/error-tracking/alerting) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cost-optimization) | Take advantage of our cost-effective pricing |
+
+</Step>
 </Steps> 
