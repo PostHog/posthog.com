@@ -116,6 +116,8 @@ export function Editor({
     const [showFilters, setShowFilters] = useState(initialShowFilters)
     const [showSearch, setShowSearch] = useState(false)
     const [filters, setFilters] = useState({})
+    const [isModifierKeyPressed, setIsModifierKeyPressed] = useState(false)
+    const [isHovering, setIsHovering] = useState(false)
     const products = useProduct() as { slug: string; name: string; type: string }[]
     // take the product name passed in and check the useProduct hook to get the product's display name
     const getProductName = (type: string) => products.find((p) => p.type === type)?.name || type
@@ -283,8 +285,8 @@ export function Editor({
                         />
                     )}
                     <div
-                        onMouseEnter={() => setShowCher(true)}
-                        onMouseLeave={() => setShowCher(false)}
+                        onMouseEnter={() => setIsHovering(true)}
+                        onMouseLeave={() => setIsHovering(false)}
                         className="relative z-10"
                     >
                         {hasShareButton && <Cher active={showCher} />}
@@ -351,6 +353,32 @@ export function Editor({
             }
         }
     }, [availableFilters])
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.ctrlKey || event.metaKey) {
+                setIsModifierKeyPressed(true)
+            }
+        }
+
+        const handleKeyUp = (event: KeyboardEvent) => {
+            if (!event.ctrlKey && !event.metaKey) {
+                setIsModifierKeyPressed(false)
+            }
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        window.addEventListener('keyup', handleKeyUp)
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown)
+            window.removeEventListener('keyup', handleKeyUp)
+        }
+    }, [])
+
+    useEffect(() => {
+        setShowCher(isHovering && isModifierKeyPressed)
+    }, [isHovering, isModifierKeyPressed])
 
     return (
         <SearchProvider onSearchChange={onSearchChange}>
