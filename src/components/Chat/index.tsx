@@ -103,7 +103,7 @@ export default function Chat(): JSX.Element | null {
                                     key={path}
                                     className={`font-semibold p-1.5 border border-light-7 rounded flex justify-between bg-primary ${
                                         context.length === 1 ? 'w-full' : ' w-[80%]'
-                                    } flex-shrink-0 transition-all`}
+                                    } flex-shrink-0 transition-all text-primary`}
                                 >
                                     <div>
                                         <p className="text-xs opacity-70 m-0">Context</p>

@@ -646,7 +646,7 @@ function ReaderViewContent({
                         {/* this space intentionally left blank */}
                     </motion.div>
                     {!compact && (
-                        <div className="flex-grow flex justify-between items-center">
+                        <div className="flex-grow flex justify-between items-center text-primary">
                             <div>
                                 <p className="m-0 text-sm">
                                     Questions about this page?{' '}

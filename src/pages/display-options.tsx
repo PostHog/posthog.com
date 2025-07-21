@@ -240,8 +240,9 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                                 type="button"
                                 data-scheme="primary"
                                 onClick={() => handleSelect(option.value)}
-                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
-                                    }`}
+                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${
+                                    isSelected ? 'bg-accent' : ''
+                                }`}
                             >
                                 <img
                                     src={optionThumb}
@@ -270,9 +271,13 @@ export default function DisplayOptions() {
 
     const handleColorModeChange = (value: string) => {
         if (typeof window !== 'undefined' && (window as any).__setPreferredTheme) {
-            ; (window as any).__setPreferredTheme(value)
+            const newTheme = window.__setPreferredTheme(value)
+            updateSiteSettings({
+                ...siteSettings,
+                theme: newTheme as SiteSettings['theme'],
+                colorMode: value as SiteSettings['colorMode'],
+            })
         }
-        updateSiteSettings({ ...siteSettings, colorMode: value as SiteSettings['colorMode'] })
     }
 
     const handleSkinChange = (value: string) => {
@@ -346,7 +351,7 @@ export default function DisplayOptions() {
                                 title=""
                                 options={[
                                     { label: 'Disabled', value: 'true' },
-                                    { label: 'Enabled', value: 'false' }
+                                    { label: 'Enabled', value: 'false' },
                                 ]}
                                 onValueChange={(value) => {
                                     updateSiteSettings({ ...siteSettings, screensaverDisabled: value === 'true' })
@@ -367,15 +372,12 @@ export default function DisplayOptions() {
                     </div>
                 </Fieldset>
             </div>
-            {previewScreensaver && typeof document !== 'undefined' &&
+            {previewScreensaver &&
+                typeof document !== 'undefined' &&
                 createPortal(
-                    <Screensaver
-                        isActive={true}
-                        onDismiss={() => setPreviewScreensaver(false)}
-                    />,
+                    <Screensaver isActive={true} onDismiss={() => setPreviewScreensaver(false)} />,
                     document.body
-                )
-            }
+                )}
         </>
     )
 }

@@ -211,6 +211,7 @@ export const Context = createContext<AppContextType>({
     openRegister: () => {},
     openForgotPassword: () => {},
     siteSettings: {
+        theme: 'light',
         experience: 'posthog',
         colorMode: 'light',
         skinMode: 'modern',
@@ -563,7 +564,8 @@ const appSettings: AppSettings = {
 
 export interface SiteSettings {
     experience: 'posthog' | 'boring'
-    colorMode: 'light' | 'dark'
+    colorMode: 'light' | 'dark' | 'system'
+    theme: 'light' | 'dark'
     skinMode: 'modern' | 'classic'
     cursor: 'default' | 'xl' | 'james'
     wallpaper:
@@ -598,6 +600,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const [siteSettings, setSiteSettings] = useState<SiteSettings>({
         experience: isMobile || compact ? 'boring' : 'posthog',
         colorMode: 'light',
+        theme: 'light',
         skinMode: 'modern',
         cursor: 'default',
         wallpaper:
@@ -1050,7 +1053,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             if (isMobile && settings.experience === 'posthog') {
                 settings.experience = 'boring'
             }
-            setSiteSettings(settings)
+            setSiteSettings({ ...siteSettings, ...settings })
         }
     }, [])
 
@@ -1113,6 +1116,10 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             if (e.data.type === 'navigate') {
                 navigate(e.data.url)
             }
+        }
+
+        window.__onThemeChange = (theme) => {
+            updateSiteSettings({ ...siteSettings, theme })
         }
 
         window.addEventListener('message', onMessage)

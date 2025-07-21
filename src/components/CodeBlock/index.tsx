@@ -13,6 +13,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import Tooltip from 'components/Tooltip'
 import Mermaid from 'components/Mermaid'
 import usePostHog from 'hooks/usePostHog'
+import { useApp } from '../../context/App'
 
 type LanguageOption = {
     label?: string
@@ -170,7 +171,7 @@ export const CodeBlock = ({
     }
 
     const codeBlockId = generateRandomHtmlId()
-
+    const { siteSettings } = useApp()
     const [tooltipVisible, setTooltipVisible] = React.useState(false)
     const posthog = usePostHog()
     const [projectName, setProjectName] = React.useState<string | null>(null)
@@ -181,7 +182,7 @@ export const CodeBlock = ({
 
     const displayName = label || languageMap[currentLanguage.language]?.label || currentLanguage.language
 
-    const { websiteTheme } = useValues(layoutLogic)
+    const websiteTheme = siteSettings.theme
 
     const [expanded, setExpanded] = React.useState(false)
     const linesToShow = currentLanguage.focusOnLines ? getLinesToShow(currentLanguage.focusOnLines) : []

@@ -288,7 +288,7 @@ export const DocsIndex = () => {
     ]
 
     return (
-        <div data-scheme="secondary" className="p-5 bg-primary h-full">
+        <div data-scheme="secondary" className="p-5 bg-primary h-full text-primary">
             <SEO title="Documentation - PostHog" />
             <ScrollArea>
                 <div className="flex @md:flex-row flex-col gap-8 h-full">
