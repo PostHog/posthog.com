@@ -244,7 +244,7 @@ const DeskHogCTA = () => {
                     <div className="absolute top-4 md:-top-8 -right-8 md:-right-12">
                         <div className="relative">
                             <Bang className="w-[120px] md:w-[150px] animate-grow" />
-                            <p className="px-4 md:px-6 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase leading-none font-bold text-sm md:text-base rotate-6">
+                            <p className="px-4 md:px-6 text-center m-0 absolute top-0 left-0 right-0 bottom-0 flex flex-col items-center justify-center text-black uppercase !leading-none font-bold text-sm md:text-base rotate-6">
                                 <span className="text-xs">Now with</span>
                                 100% more <br />
                                 nostalgia
@@ -257,7 +257,7 @@ const DeskHogCTA = () => {
                     <div className="mb-6">
                         <span className="bg-green inline-flex items-center gap-1 px-2 py-1 rounded-sm">
                             <span className="w-3 h-3">
-                                <IconWrench />
+                                <IconWrench className="fill-white" />
                             </span>
                             <span className="uppercase font-semibold text-xs text-white">DIY-friendly</span>
                         </span>
@@ -396,12 +396,12 @@ export const ProductDeskHog = () => {
                     description="Pre-built kits coming soon. DIY version available now."
                 />
                 {/* <VideoDeskHog /> */}
-                <section id="demo-video" className="mb-0 pt-0 px-2 sm:px-0">
+                <section id="demo-video" className="mb-0 pt-0 md:px-2 sm:px-0">
                     <div className="flex justify-center">
                         <div className="w-full max-w-[800px] lg:max-w-[1000px]">
-                            <div className="relative aspect-video rounded-lg overflow-hidden shadow-xl">
+                            <div className="relative aspect-video rounded overflow-hidden shadow-xl">
                                 <iframe
-                                    src="https://youtu.be/8hMfu3kXR20"
+                                    src="https://www.youtube-nocookie.com/embed/8hMfu3kXR20"
                                     title="DeskHog Demo Video"
                                     className="w-full h-full"
                                     frameBorder="0"
@@ -536,7 +536,7 @@ export const ProductDeskHog = () => {
 
             <VibeCodingBoxout />
 
-            <section className="bg-accent dark:bg-accent-dark py-8 sm:py-12 md:py-16 -mx-4 sm:-mx-5 md:-mx-8">
+            <section className="bg-accent dark:bg-accent-dark py-8">
                 <div className="max-w-7xl mx-auto px-4 sm:px-5 md:px-8">
                     <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8">
                         <div className="flex-1 text-center md:text-left">
@@ -558,7 +558,7 @@ export const ProductDeskHog = () => {
                             <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[470px]">
                                 <div className="relative aspect-video rounded overflow-hidden shadow-xl">
                                     <iframe
-                                        src="https://youtu.be/lqeD2vvAA4w"
+                                        src="https://www.youtube-nocookie.com/embed/lqeD2vvAA4w"
                                         title="DeskHog Demo Video"
                                         className="w-full h-full"
                                         frameBorder="0"
