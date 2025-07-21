@@ -46,6 +46,30 @@ import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
 import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 
+function parseStepsFromMDX(mdxString) {
+    const steps = []
+
+    // Find all Step title matches with their positions
+    const stepRegex = /mdx\(Step,\s*\{[^}]*\btitle:\s*["'](.*?)["'][^}]*\}/g
+    let match
+
+    while ((match = stepRegex.exec(mdxString)) !== null) {
+        console.log('match', match)
+        const title = match[1]
+        const url = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+        steps.push({
+            depth: 0,
+            value: title,
+            url: url,
+        })
+    }
+
+    return steps
+}
+
 const DestinationsLibraryCallout = () => {
     return (
         <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-4">
@@ -321,10 +345,14 @@ export default function Handbook({
     } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
-    const showToc = !hideAnchor && tableOfContents?.length > 0
     const filePath = post?.parent?.relativePath
 
     const isArticle = frontmatter.isArticle !== false
+
+    // Parse steps from MDX content and use them to replace table of contents if found
+    const stepsFromMDX = parseStepsFromMDX(body)
+    const toc = stepsFromMDX.length > 0 ? stepsFromMDX : tableOfContents
+    const showToc = !hideAnchor && toc?.length > 0
 
     const [showCTA, setShowCTA] = React.useState<boolean>(
         typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
@@ -404,7 +432,7 @@ export default function Handbook({
                             title={title}
                         />
                     }
-                    tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
+                    tableOfContents={[...toc, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
@@ -477,10 +505,16 @@ export default function Handbook({
                                 </div>
                             </div>
                         </div>
-                        <div className="lg:hidden">
-                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
-                        </div>
+                        <div className="lg:hidden">{showToc && <MobileSidebar tableOfContents={toc} />}</div>
                         {features && <LibraryFeatures availability={features} />}
+                        {console.log('gatsby tableOfContents', [
+                            ...tableOfContents,
+                            { depth: 0, value: 'Questions?', url: 'squeak-questions' },
+                        ])}
+                        {console.log('parsed tableOfContents', [
+                            ...toc,
+                            { depth: 0, value: 'Questions?', url: 'squeak-questions' },
+                        ])}
                         <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
