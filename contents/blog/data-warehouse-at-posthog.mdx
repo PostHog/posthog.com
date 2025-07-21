@@ -66,7 +66,7 @@ We're also sharing the actual SQL queries we use to answer these questions and t
   Because our data structure is unique, the SQL queries included here likely won't work out-of-the-box for you. Luckily, [Max AI](/max) makes modifying SQL easy. Just paste these queries in as context and ask him to use your data instead.
 </CalloutBox>
 
-## Understanding growth and churn
+## Problem #1: Understanding growth and churn
 
 - Sources: 
   - [Postgres](/docs/cdp/sources/postgres) for billing data
@@ -120,7 +120,7 @@ Because product managers are slicing and dicing the data in multiple similar way
   <SurveyGrowth />
 </details>
 
-## Tracking revenue
+## Problem #2: Tracking revenue
 
 - Sources: 
   - [Postgres](/docs/cdp/sources/postgres) for billing data
@@ -159,7 +159,7 @@ Rebuilding (and improving) these insights required us to build views that standa
   <RevenuePerProduct />
 </details>
 
-## Creating quarterly sales and customer success reports
+## Problem #3: Creating quarterly sales and customer success reports
 
 - Sources: 
   - [Salesforce](/docs/cdp/sources/salesforce) for sales context (e.g. ICP scores)
@@ -207,7 +207,7 @@ This makes all of the insights much more reusable by being able to reuse them ac
   <ManagedAccounts />
 </details>
 
-## Creating support reports (SLA, first response time, and more) 
+## Problem #4: Creating support reports (SLA, first response time, and more) 
 
 - Sources: 
   - [Zendesk](/docs/cdp/sources/zendesk) for ticket data
@@ -259,7 +259,7 @@ This data is combined with [CSAT surveys](/templates/csat-survey) (both scores a
   <TimeTicketsCreated />
 </details>
 
-## Tracking startup and YC plan growth, costs, and ROI
+## Problem #5: Tracking startup and YC plan growth, costs, and ROI
 
 - Sources: 
   - [Stripe](/docs/cdp/sources/stripe) for startup plan customer data
