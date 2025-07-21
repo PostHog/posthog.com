@@ -54,7 +54,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 
 ### Day 1
 
-- Meet with [Simon](/community/profiles/28895) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
+- Meet with [Ben](/community/profiles/32367) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
 - Setup relevant [Sales & CS Tools](#sales--cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales standup.
@@ -67,14 +67,23 @@ Sales at PostHog isn't like most other software companies! These are some of the
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
  - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales. 
+ - Meet with [Simon](/community/profiles/28895), Sales Lead
+ - PostHog integration exercise - by the end of week 1:
+   - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
+   - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
+   - Implement a custom event
+   - Implement user identification
+   - Record a loom showing what you’ve done and share it in our team channel
+
 
 ### Week 2
 
-- During your first week, Simon will go through the sales process with you and answer any questions you may have about the playbook. 
+- During your first week, Ben will go through the sales process with you and answer any questions you may have about the playbook. 
 - Shadow more live calls and listen to more Buildbetter recordings
-- Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
+- Towards the end of the week, schedule a demo and feedback session with Ben.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
+- Make sure you're comfortable with the Shared Processes section of the Handbook
 
 ### In-person onboarding
 
@@ -110,7 +119,7 @@ By the end of month 3:
 
 ### Day 1
 
-- Meet with [Simon](/community/profiles/28895) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
+- Meet with [Landon](/community/profiles/33186) who will run through this plan and answer any questions you may have.  In addition, come equipped to talk about any nuances around how you prefer to work (e.g. schedules, family time etc.).
 - Setup relevant [Sales & CS Tools](#sales--cs-tools)
 - If you start on a Monday, join your first PostHog All Hands (at 4.30pm UK/8.30am PT) and be prepared to have a strong opinion on whether pineapple belongs on pizza.
 - If you start on a Monday, join your first Sales standup.
@@ -122,13 +131,20 @@ By the end of month 3:
  - Check out some Buildbetter calls and add yourself to a bunch of Slack channels - get immersed in what our customers are saying. 
  - Learn and practise a [demo](https://youtu.be/2jQco8hEvTI) of PostHog.
  - Read all of the Sales section in the Handbook, and update it as you learn more.
- - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales. 
+ - Meet with [Charles](/community/profiles/28625), the exec responsible for Sales.
+ - Meet with [Simon](/community/profiles/28895), Sales Lead
+ - PostHog integration exercise - by the end of week 1:
+   - Find/build a blank app which doesn’t yet have PostHog integrated.  You should be able to vibe code something simple with React using Cursor or Lovable.dev
+   - Once you’ve got your app up and running get PostHog deployed and capturing events and replays.  Default config is fine.
+   - Implement a custom event
+   - Implement user identification
+   - Record a loom showing what you’ve done and share it in our team channel
 
 ### Week 2
 
 - During your first week, Simon will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Shadow more live calls and listen to more Buildbetter recordings. 
-- Towards the end of the week, schedule a demo and feedback session with Simon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
+- Towards the end of the week, schedule a demo and feedback session with Landon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
 - Get comfortable with the PostHog [Docs](/docs) around our main products. 
 - We'll start routing new Salesforce Leads to you at the end of week 1.  Start to review these and reach out, using a shared booking link with someone else from your region so they can back you up in the first few weeks. This is a great option to practise and fail. 
