@@ -142,7 +142,7 @@ By the end of month 3:
 
 ### Week 2
 
-- During your first week, Landon will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
+- During your first week, Simon will figure out your initial book of business (10 accounts).  We will review these at the start of your second week, and make sure you understand how your targets are set. 
 - Shadow more live calls and listen to more Buildbetter recordings. 
 - Towards the end of the week, schedule a demo and feedback session with Landon.  We might need to do a couple of iterations over the next few weeks as you take on board feedback, don't worry if that's the case!
 - Prioritize your current book of customers, and start reaching out!
