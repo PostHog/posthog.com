@@ -35,6 +35,7 @@ import { useLocation } from '@reach/router'
 import { getProseClasses } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
+import { Questions } from 'components/Squeak'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -585,6 +586,12 @@ function ReaderViewContent({
                                 ) : (
                                     children
                                 )}
+                                <div className="mt-8">
+                                    <h3 id="squeak-questions" className="mb-4">
+                                        Community questions
+                                    </h3>
+                                    <Questions slug={appWindow?.path} />
+                                </div>
                             </div>
                         </article>
                     </ScrollArea>
