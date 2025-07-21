@@ -482,7 +482,6 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             onDragTransitionEnd={handleDragTransitionEnd}
                             onMouseDown={handleMouseDown}
                             onAnimationComplete={() => updateWindow(item, { animating: false })}
-                            onAnimationStartCapture={() => updateWindow(item, { animating: true })}
                         >
                             {!item.minimal && !compact && (
                                 <div
