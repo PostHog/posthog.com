@@ -18,4 +18,4 @@ Our Grafana instances are environment-specific and accessible via these endpoint
 
 You can edit dashboards directly in any of the Grafana instances. Changes are automatically synced across all environments every hour through our [Grafana sync GitHub Action](https://github.com/PostHog/posthog-cloud-infra/actions/workflows/grafana-sync-dashboards.yml).
 
-This workflow can also be triggered manually if you need to sync changes immediately.
+This workflow can also be triggered manually if you need to sync changes immediately by clicking "Run workflow" in the GitHub Actions interface.
