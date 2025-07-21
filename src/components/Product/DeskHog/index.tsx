@@ -327,7 +327,7 @@ const ExpandableCallout = () => {
                     </p>
                     <p className="mb-3">
                         We already made a prototype DeskHog Pro to prove what's possible. It has a macropad of buttons,
-                        a speaker, and a huge dial so you can crank up the vibes.
+                        and a huge dial so you can crank up the vibes.
                     </p>
                     <p>
                         Got ideas for something else we should add? <a href="https://x.com/posthog">Let us know!</a>
