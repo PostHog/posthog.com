@@ -54,7 +54,6 @@ function parseStepsFromMDX(mdxString) {
     let match
 
     while ((match = stepRegex.exec(mdxString)) !== null) {
-        console.log('match', match)
         const title = match[1]
         const url = title
             .toLowerCase()
@@ -507,14 +506,6 @@ export default function Handbook({
                         </div>
                         <div className="lg:hidden">{showToc && <MobileSidebar tableOfContents={toc} />}</div>
                         {features && <LibraryFeatures availability={features} />}
-                        {console.log('gatsby tableOfContents', [
-                            ...tableOfContents,
-                            { depth: 0, value: 'Questions?', url: 'squeak-questions' },
-                        ])}
-                        {console.log('parsed tableOfContents', [
-                            ...toc,
-                            { depth: 0, value: 'Questions?', url: 'squeak-questions' },
-                        ])}
                         <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>
                                 <MDXRenderer>{body}</MDXRenderer>
