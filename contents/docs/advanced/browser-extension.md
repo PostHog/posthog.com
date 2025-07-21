@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Do you have a Firefox, Safari or Chrome browser extension and want to understand how it's being used? PostHog is the perfect way to do just that.
+Do you have a Firefox, Safari, or Chrome browser extension and want to understand how it's being used? PostHog is the perfect way to do just that.
 
 ## Setup for Chrome, Safari & Firefox extensions
 
@@ -26,7 +26,7 @@ import InstallWebPackageManagers from "../integrate/_snippets/install-web-packag
 
 <CalloutBox icon="IconInfo" title="Bundling">
 
-Browser extensions can block your imports. If your extension throws errors when trying to import PostHog, use a bundler like [Rollup](https://rollupjs.org/) to bundle your JavaScript, and import it in a single `<script type="module" src="dist/bundle.js"/>` tag.
+Browser extensions can block your imports. If your extension throws errors when trying to import PostHog, use a bundler like [Rollup](https://rollupjs.org/) to bundle your JavaScript and import it in a single `<script type="module" src="dist/bundle.js"/>` tag.
 
 </CalloutBox>
 
@@ -34,7 +34,7 @@ Browser extensions can block your imports. If your extension throws errors when 
 
 Manifest v3 introduced stricter [content security policies](https://developer.chrome.com/docs/extensions/develop/migrate/improve-security) that prohibit unsafe-eval and remote code execution. To ensure your extension passes the extension store verification:
 
-1. Import bundles directly.
+### 1. Import bundles directly.
 
    Instead of relying on dynamic imports, import all PostHog features as static bundles:
 
@@ -52,17 +52,23 @@ Manifest v3 introduced stricter [content security policies](https://developer.ch
 
    You can also use `import 'posthog-js/dist/array.no-external.js'` as the core import to get an instantiated object instead, but if you're using TypeScript you won't get types, so we're going to use `posthog-js/dist/module.no-external` throughout this document.
 
-2. Import a compatible session recording module if required
+### 2. Import a compatible session recording module if required
 
-   Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64. To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this Github comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
+Session recording is the most common cause of extension store rejections due to potential obfuscation concerns. The recording library `rrweb` that is bundled with PostHog by default contains parts of its code encoded in base64. 
 
-3. Disable external dependency loading
+To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `posthog-js/dist/recorder` as explained in [this Github comment](https://github.com/PostHog/posthog-js/issues/1464#issuecomment-2792093981).
 
-   Set `disable_external_dependency_loading: true` in PostHog config to avoid remote code loading.
+### 3. Disable external dependency loading
 
-4. Set `persistence` to one of `localStorage`, `sessionStorage`, or `memory`. See the *Persistence* section below for details.
+Set `disable_external_dependency_loading: true` in PostHog config to avoid remote code loading.
 
-5. Declare permissions and add [PostHog domain(s) to Content Security Policy](/docs/advanced/content-security-policy) appropriately in your `manifest.json`:
+### Change persistence
+
+Set `persistence` to one of `localStorage`, `sessionStorage`, or `memory`. See the *Persistence* section below for details.
+
+### 5. Declare permissions and set Content Security Policy
+
+To do this, add [PostHog domain(s) to Content Security Policy](/docs/advanced/content-security-policy) appropriately in your `manifest.json`:
 
    ```json
    {
@@ -94,7 +100,7 @@ posthog.init('<ph_project_api_key>', {
 
 ## Persistence in browser extensions
 
-Browser extensions have unique constraints that affect how PostHog can store its data. Unlike regular web applications, extensions should only use specific persistence methods.
+Browser extensions have unique constraints that affect how PostHog can store its data. Unlike regular web applications, extensions shouldn't use cookies and should use `localStorage`, `sessionStorage`, or `memory` instead.
 
 ### Supported persistence options
 
@@ -110,11 +116,11 @@ For more details about PostHog's persistence options, see our [JavaScript persis
 
 ### Why cookies aren't recommended
 
-The default `localStorage+cookie`, and `cookie` persistence methods are problematic for extensions because extension contexts (service worker scripts, content scripts, popups, etc.) have different cookie accesses. They are also partitioned per origin, so in a content script data would always be written separately for each domain.
+The default `localStorage+cookie`, and `cookie` persistence methods are problematic for extensions because extension contexts (service worker scripts, content scripts, popups, etc.) have different cookie access. They are also partitioned per origin, so, in a content script data, would always be written separately for each domain.
 
 ### Persistence and distinct ID management
 
-Since PostHog instances in different contexts can't share the same storage for persistence, you should manage `distinct_id`s on your own to maintain continuity across contexts. See below for details.
+Since PostHog instances in different contexts can't share the same storage for persistence, you should manage `distinct_id` values on your own to maintain continuity across contexts. See below for details.
 
 ## PostHog usage across extension contexts
 
@@ -145,8 +151,7 @@ export async function getSharedDistinctId() {
 }
 ```
 
-Use the shared utility in all contexts (either directly, where storage APIs are
-available, or via [messaging](https://developer.chrome.com/docs/extensions/develop/concepts/messaging) with the service worker to bootstrap PostHog with the same ID:
+Use the shared utility in all contexts (either directly, where storage APIs are available, or via [messaging](https://developer.chrome.com/docs/extensions/develop/concepts/messaging) with the service worker to bootstrap PostHog with the same ID:
 
 ```js
 // In all extension contexts, initialize PostHog with the shared distinct_id
@@ -184,7 +189,7 @@ posthog.init('<ph_project_api_key>', {
 
 **Important considerations**:
 
-Unless you need to capture DOM-based events e.g. for session recordings, it's advisable to relay your custom events through a service worker using [messaging](https://developer.chrome.com/docs/extensions/develop/concepts/messaging) to avoid importing a posthog instance potentially into every tab the user has open.
+Unless you need to capture DOM-based events e.g. for session recordings, it's advisable to relay your custom events through a service worker using [messaging](https://developer.chrome.com/docs/extensions/develop/concepts/messaging) to avoid importing a PostHog instance potentially into every tab the user has open.
 
 ### Service workers (background scripts)
 
@@ -210,9 +215,9 @@ posthog.init('<ph_project_api_key>', {
 **Important considerations**:
 
 - No DOM access (no session recording, surveys, or autocapture)
-- Has access, and can pass data like `distinct_id` to/from `chrome.storage`
+- Has access and can pass data like `distinct_id` to/from `chrome.storage`
 
-### Popup, Options, Sidepanel, and other pages
+### Popup, options, sidepanel, and other pages
 
 **Best for**: User interaction tracking in the extension UI, surveys
 
