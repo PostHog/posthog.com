@@ -7,18 +7,27 @@ import { Steps, Step } from 'components/Docs/Steps'
 import CLIUpload from "../_snippets/cli/upload.mdx"
 import CLIAuthenticate from "../_snippets/cli/authenticate.mdx"
 import CLIDownload from "../_snippets/cli/download.mdx"
+import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 
 <Steps>
 <Step title="Installing PostHog Nuxt SDK" subtitle="Your goal in this step: Install the PostHog Nuxt.js SDK." badge="required">
 
-Follow instructions [here](/docs/libraries/nuxt-js) to install `posthog-js` in your project.
+<InstallNuxt />
+
+---
+
+**✅ Checkpoint** – Before proceeding, confirm that you can [capture events](/docs/libraries/nuxt-js#capture-custom-events) with PostHog.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for events in PostHog
+  </CallToAction>
+</div>
 
 </Step>
-<Step title="Setting up exception capture" subtitle="Your goal in this step: Enable manual and automatic exception tracking for your Nuxt application." badge="required">
+<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Nuxt application." badge="required">
 
-#### 1. Manually
-
-Send errors directly using the posthog client, follow instructions on how to get the posthog instance.
+Send errors directly using the posthog client, follow instructions on how to get the posthog instance:
 
 ```vue component.vue
 <script>
@@ -56,7 +65,18 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
-#### 2. Automatically
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that exceptions are being properly captured.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+<Step title="Configuring exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Nuxt application." badge="required">
 
 Update your `posthog.client.js` to add an error hook
 
@@ -70,57 +90,15 @@ export default defineNuxtPlugin((nuxtApp) => {
 })
 ```
 
-</Step>
-<Step title="Configuring source maps" subtitle="Your goal in this step: Configure your build process to generate and upload source maps for accurate stack traces." badge="required">
+--- 
 
-PostHog requires sourcemaps to be generated during build to properly display stack traces. We can do this by running the `posthog-cli` to inject and upload sourcemaps post-build using the `close` hook.  
+**✅ Checkpoint** – Before proceeding, confirm that exceptions are being automatically captured.
 
-#### 1. Download CLI
-
-<CLIDownload />
-
-#### 2. Authenticate
-
-<CLIAuthenticate />
-
-#### 3. Generate sourcemaps during build
-
-```js file=nuxt.config.js
-import { execSync } from 'child_process' // +
-
-export default defineNuxtConfig({
-  ...,
-  sourcemap: {
-    client: true // +
-  },
-  hooks: {
-    'close': async () => {
-      console.log('Running PostHog sourcemap injection and upload...')
-      try {
-        execSync("posthog-cli sourcemap inject --directory '.output'", { // +
-          stdio: 'inherit', // +
-        }) // +
-        execSync("posthog-cli sourcemap upload --directory '.output'", { // +
-          stdio: 'inherit', // +
-        }) // + 
-        console.log('PostHog sourcemap injection completed successfully') 
-      } catch (error) {
-        console.error('PostHog sourcemap injection failed:', error)
-      }
-    }
-  }
-})
-```
-
-#### 4. Build your project for production
-
-Build your project for production by running the following command:
-
-```bash
-nuxt build
-```
-
-You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
 
 </Step>
 <Step title="Next steps">
@@ -130,8 +108,8 @@ After configuring PostHog, you will start receiving exceptions in PostHog. To he
 | Action | Description |
 |--------|-------------|
 | [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
-| [Configure alerting](/docs/error-tracking/alerting) | Get notified when errors occur |
-| [Cutting cost](/docs/error-tracking/cost-optimization) | Take advantage of our cost-effective pricing |
+| [Configure alerting](/docs/error-tracking/alerts) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cutting-costs) | Take advantage of our cost-effective pricing |
 
 </Step>
 </Steps> 

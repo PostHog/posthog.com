@@ -1,0 +1,58 @@
+---
+title: Upload source maps for Angular
+---
+
+import { CallToAction } from 'components/CallToAction'
+
+> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
+>
+> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
+>    Follow in PostHog
+> </CallToAction>
+
+import { Steps, Step } from 'components/Docs/Steps'
+import InstallCLI from './_snippets/install-cli.mdx'
+import OutputSourceMaps from './_snippets/output-source-maps.mdx'
+import InjectSourceMap from './_snippets/inject-source-map.mdx'
+import UploadSourceMap from './_snippets/upload-source-map.mdx'
+
+<Steps>
+<Step title="Install the PostHog CLI" subtitle="Your goal in this step: Get the CLI tool or framework-specific package." badge="required">
+<InstallCLI />
+</Step>
+<Step title="Output source maps for Angular" subtitle="Your goal in this step: Configure your build to generate source maps." badge="required">
+
+You can configure Angular to [generate source maps](https://angular.dev/reference/configs/workspace-config#source-map-configuration) by adding the following to your `angular.json` file:
+
+```json file=angular.json focusOnLines=5-13
+{
+  "projects": {
+    "my-app": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "sourceMap": {
+              "scripts": true, // +
+              "styles": true, // +
+              "hidden": true, // +
+              "vendor": true // +
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+</Step>
+<Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
+<InjectSourceMap />
+</Step>
+<Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
+<UploadSourceMap />
+</Step>
+</Steps>
+
+

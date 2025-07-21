@@ -1,0 +1,43 @@
+---
+title: Upload source maps for React
+---
+
+import NextJSUploadSourceMaps from './_snippets/nextjs-upload-source-maps.mdx'
+import { CallToAction } from 'components/CallToAction'
+
+> By the end of this guide, your Next.js source maps will be automatically uploaded to PostHog during your build process.
+>
+> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
+>    Follow in PostHog
+> </CallToAction>
+
+<Steps>
+<Step title="Install the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool (included in the Next.js package)." badge="required">
+  <NextjsInstallCLI />
+</Step>
+<Step title="Output source maps for your framework" subtitle="Your goal in this step: Configure React to generate source maps and set up automatic processing." badge="required">
+  
+If you're using React with Vite, you can enable source maps in your `vite.config.js` file.
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    sourcemap: true, // +
+  }
+})
+```
+
+If you're using another build tool like [webpack](https://webpack.js.org/configuration/devtool/) or [Rollup](https://rollupjs.org/configuration-options/#output-sourcemap), consult the documentation for your build tool to enable source maps.
+
+</Step>
+<Step title="Inject source map" subtitle="Your goal in this step: Automatically inject metadata during the build process." badge="required">
+  <NextjsInjectSourceMap />
+</Step>
+<Step title="Upload source map" subtitle="Your goal in this step: Automatically upload source maps to PostHog during build." badge="required">
+  <NextjsUploadSourceMap />
+</Step>
+</Steps>

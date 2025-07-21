@@ -2,12 +2,20 @@
 title: Hono error tracking installation
 ---
 
+import { Steps, Step } from 'components/Docs/Steps'
+
+<Steps>
+<Step title="Installing PostHog Node.js SDK" badge="required">
+
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
 
 Start by installing the `posthog-node` package using your package manager.
 ```bash
 npm install --save posthog-node
 ```
+
+</Step>
+<Step title="Exception handling example" badge="required">
 
 Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) to handle uncaught exceptions. You can take advantage of this for error tracking. Remember to **export** your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
 
@@ -31,3 +39,17 @@ app.onError((err, c) => {
   return c.text('Internal Server Error', 500)
 })
 ```
+
+</Step>
+<Step title="Next steps">
+
+After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
+
+| Action | Description |
+|--------|-------------|
+| [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
+| [Configure alerting](/docs/error-tracking/alerts) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cutting-costs) | Take advantage of our cost-effective pricing |
+
+</Step>
+</Steps>

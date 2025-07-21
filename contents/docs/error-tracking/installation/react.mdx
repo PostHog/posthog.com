@@ -64,8 +64,25 @@ export default defineConfig({
 
 See our [Remix docs](/docs/libraries/remix) for more details.
 </details>
-      
+
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that you can capture events with PostHog using `posthog.capture('test_event')`.
+
+```tsx
+import { usePostHog } from 'posthog-js/react'
+const posthog = usePostHog()
+posthog?.capture('clicked_log_in')
+```
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for events in PostHog
+  </CallToAction>
+</div>
+
 </Step>
+
 <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your React application." badge="required">
 
 > **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
@@ -74,7 +91,18 @@ You can enable exception autocapture for the JavaScript Web SDK in the **Error t
 
 When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
 
-#### Implementing error boundaries
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that exceptions are being automatically captured.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+<Step title="Setting up error boundaries" subtitle="Your goal in this step: Capturing errors with error boundaries." badge="optional">
 
 You can add a custom error boundary to capture rendering errors thrown by components:
 
@@ -107,7 +135,18 @@ class CustomErrorBoundary extends React.Component {
 }
 ```
 
-#### Manual error capture
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that exceptions are being properly captured by the error boundary.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your React application." badge="optional">
 
 It is also possible to manually capture exceptions using the `captureException` method:
 
@@ -115,24 +154,15 @@ It is also possible to manually capture exceptions using the `captureException` 
 posthog.captureException(error, additionalProperties)
 ```
 
-</Step>
-<Step title="Configuring source maps" subtitle="Your goal in this step: Configure your build process to generate source maps for accurate stack traces." badge="required">
+--- 
 
-If you're using React with Vite, you can enable source maps in your `vite.config.js` file.
+**✅ Checkpoint** – Before proceeding, confirm that manual exception capture is working.
 
-```js
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  build: {
-    sourcemap: true, // +
-  }
-})
-```
-
-If you're using another build tool like [webpack](https://webpack.js.org/configuration/devtool/) or [Rollup](https://rollupjs.org/configuration-options/#output-sourcemap), consult the documentation for your build tool to enable source maps.
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
 
 </Step>
 <Step title="Next steps">
@@ -142,8 +172,8 @@ After configuring PostHog, you will start receiving exceptions in PostHog. To he
 | Action | Description |
 |--------|-------------|
 | [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
-| [Configure alerting](/docs/error-tracking/alerting) | Get notified when errors occur |
-| [Cutting cost](/docs/error-tracking/cost-optimization) | Take advantage of our cost-effective pricing |
+| [Configure alerting](/docs/error-tracking/alerts) | Get notified when errors occur |
+| [Cutting cost](/docs/error-tracking/cutting-costs) | Take advantage of our cost-effective pricing |
 
 </Step>
 </Steps> 
