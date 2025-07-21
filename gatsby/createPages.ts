@@ -22,7 +22,6 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
-    const HomeTemplate = path.resolve(`src/templates/Home.tsx`)
     const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
@@ -40,7 +39,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
             allMdx(
                 filter: {
                     fileAbsolutePath: { regex: "/^((?!contents/teams/|contents/about.mdx).)*$/" }
-                    frontmatter: { title: { nin: [""] } }
+                    frontmatter: { title: { nin: [""] }, template: { nin: ["custom"] } }
                 }
             ) {
                 nodes {
@@ -428,14 +427,9 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     }
 
     result.data.allMdx.nodes.forEach((node) => {
-        const templates = {
-            home: HomeTemplate,
-        }
-        const template = templates[node.frontmatter.template] || PlainTemplate
-        const path = replacePath(node.slug)
         createPage({
-            path: path === '' ? '/' : path,
-            component: template,
+            path: replacePath(node.slug),
+            component: PlainTemplate,
             context: {
                 id: node.id,
             },

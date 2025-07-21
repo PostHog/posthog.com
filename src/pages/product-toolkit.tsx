@@ -15,7 +15,7 @@ import Logo from 'components/Logo'
 import { useApp } from '../context/App'
 import { useWindow } from '../context/Window'
 import MDXEditor from 'components/MDXEditor'
-import { graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 
@@ -341,7 +341,16 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
     },
 ]
 
-export default function Home({ data }: { data: { mdx: { rawBody: string } } }) {
+export default function ProductToolkit() {
+    const {
+        mdx: { rawBody },
+    } = useStaticQuery(graphql`
+        query {
+            mdx(slug: { eq: "product-toolkit" }) {
+                rawBody
+            }
+        }
+    `)
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
     const posthog = usePostHog()
@@ -357,7 +366,7 @@ export default function Home({ data }: { data: { mdx: { rawBody: string } } }) {
             <SEO title="Welcome to PostHog!" description="Home" image="https://posthog.com/og-image.png" />
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
-                body={data.mdx.rawBody}
+                body={rawBody}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
@@ -368,11 +377,3 @@ export default function Home({ data }: { data: { mdx: { rawBody: string } } }) {
         </>
     )
 }
-
-export const query = graphql`
-    query HomeQuery($id: String!) {
-        mdx(id: { eq: $id }) {
-            rawBody
-        }
-    }
-`
