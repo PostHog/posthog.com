@@ -7,7 +7,6 @@ author:
 date: 2023-01-02
 tags:
   - session replay
-  - sentry
 ---
 
 On top of being useful for understanding user behavior, session replays help solve problems with your product. You can use them to discover issues, understand why they are happening, and work to fix them. In this way, session replays help you provide a better support experience to users.

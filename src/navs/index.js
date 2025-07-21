@@ -2041,10 +2041,6 @@ export const docsMenu = {
                             url: '/docs/libraries/segment',
                         },
                         {
-                            name: 'Sentry',
-                            url: '/docs/libraries/sentry',
-                        },
-                        {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
                         },

@@ -22,7 +22,7 @@ PostHog offers a variety of tools which are useful for [real user monitoring](/b
 
 In this tutorial, we’ll demonstrate how connecting PostHog and Sentry enables you to correlate errors in Sentry with other product metrics, and to debug issues more easily. 
 
-> **Interested in capturing errors in PostHog?** Our new error tracking product is currently in beta. Learn more about it in [our docs](/docs/error-tracking).
+> **Interested in capturing errors in PostHog?** Our new error tracking product is live. Learn more about it in [our docs](/docs/error-tracking).
 
 ## Step 1: Connect PostHog with Sentry
 
