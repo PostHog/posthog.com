@@ -3484,12 +3484,19 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/error-tracking/installation',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                     children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/installation',
+                        },
                         {
                             name: 'Web',
                             url: '/docs/error-tracking/installation/web',
@@ -3544,6 +3551,10 @@ export const docsMenu = {
                     featured: true,
                     children: [
                         {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/upload-source-maps',
+                        },
+                        {
                             name: 'Next.js',
                             url: '/docs/error-tracking/upload-source-maps/nextjs',
                         },
@@ -3570,10 +3581,22 @@ export const docsMenu = {
                     ],
                 },
                 {
+                    name: 'Fundamentals',
+                },
+                {
+                    name: 'Issues',
+                    url: '/docs/error-tracking/issues',
+                    icon: 'IconWarning',
+                    color: 'yellow',
+                },
+                {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
                     color: 'purple',
+                },
+                {
+                    name: 'Guides',
                 },
                 {
                     name: 'Monitor issues',
@@ -3589,10 +3612,13 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Alerts',
+                    name: 'Set up alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'Cutting costs',
