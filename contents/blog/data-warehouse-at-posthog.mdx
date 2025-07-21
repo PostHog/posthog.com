@@ -28,13 +28,11 @@ import OpportunitiesPerQuarter from './_snippets/opportunities-per-quarter.mdx'
 import PipelinePerQuarter from './_snippets/pipeline-per-quarter.mdx'
 import ManagedAccounts from './_snippets/managed-accounts.mdx'
 
-PostHog's [data warehouse](/data-warehouse) is arguably our most powerful feature. It lets you sync data from the tools you already use (like [Stripe](/docs/cdp/sources/stripe), [Salesforce](/docs/cdp/sources/salesforce), and [Hubspot](/docs/cdp/sources/hubspot)), query it alongside your existing product data using [SQL](/docs/data-warehouse/sql), and visualize it natively.
+PostHog's [data warehouse](/data-warehouse) is our most powerful feature. It lets you sync data from the tools you already use like [Stripe](/docs/cdp/sources/stripe), [Salesforce](/docs/cdp/sources/salesforce), and [Hubspot](/docs/cdp/sources/hubspot), query it alongside your existing product data using [SQL](/docs/data-warehouse/sql), and visualize it natively.
 
 We built it because the [modern data stack sucks](/blog/modern-data-stack-sucks). What starts as a handful of business critical tools devolves into dozens of tools, many specifically built to capture, clean, format, load, query, and visualize data.
 
 We knew it didn't have to be this way, so we built the data warehouse to get rid of all this complexity and give you a single source of truth for all your business data.
-
-Our team is big fans of what we've built. As proof, we sync hundreds of millions of rows from Postgres, Stripe, Temporal, and more on top of the tens of millions of events we capture each day.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_16_at_11_04_28_2x_905d242fe0.png"
@@ -42,8 +40,9 @@ Our team is big fans of what we've built. As proof, we sync hundreds of millions
   alt="PostHog data warehouse rows synced"
   classes="rounded"
 />
+<Caption>We sync hundreds of millions of rows from Postgres, Stripe, Temporal, and more on top of the tens of millions of events we capture each day.</Caption>
 
-We've also created **over 1,600** SQL insights using our data warehouse. Each is a combination of an SQL query and a visualization. It's our second most popular type of insight behind trends (which was around long before we had the data warehouse).
+We've created **over 1,600** SQL insights and visualizations using our data warehouse so far. It's our second most-used insight type behind [trends](/docs/product-analytics/trends/overview), which was around long before we had the data warehouse.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_10_at_11_47_15_2x_9b179c988a.png"
@@ -52,7 +51,15 @@ We've also created **over 1,600** SQL insights using our data warehouse. Each is
   classes="rounded"
 />
 
-The downside of the data warehouse's power and flexibility is that it can be tricky to know where to start. To help you with this, we're going over how different teams at PostHog actually use the data warehouse from the sources they use to the actual SQL queries they write.
+To help you get started, we're sharing how teams at PostHog use our built-in data warehouse and custom SQL insights to answer critical business questions, like:
+
+- Which customers churned and how did it impact revenue?
+- Which customers are increasing their spend?
+- Who are our biggest customers and what products are they using?
+- Are we achieving our customer support goals?
+- What are the biggest sales opportunities in our pipeline?
+
+We're also sharing the actual SQL queries we use to answer these questions and the dashboards we use to visualize the data.   
 
 > **Modifying queries to your data:** Because our data structure is unique, the SQL queries included here likely won't work out-of-the-box for you. Luckily, [Max AI](/max) makes modifying SQL easy. Just paste these queries in as context and ask him to use your data instead.
 
@@ -63,15 +70,17 @@ The downside of the data warehouse's power and flexibility is that it can be tri
 
 ![Growth and churn](https://res.cloudinary.com/dmukukwp6/image/upload/growth_churn_61b9f808a7.png)
 
-Product managers at PostHog [don't tell engineers what to do](/newsletter/product-management-is-broken). Instead, they do help them with analysis. SQL is often their weapon of choice to do this.
+[Engineers make the product decisions](/newsletter/product-management-is-broken) at PostHog, but they'd be lost without the context product managers provide. 
 
-Core to this analysis is often combining product and revenue data, we don't only want to see how people are using a product but:
+One of the ways PMs give them this context is through monthly growth reviews, where they explore:
 
-- Who churned, how much was their churn, and why? (so we can prevent future churn)
-- Product-specific activation and retention rates, using our custom definition.
+- Who churned, how much was their churn, and why (so we can prevent future churn)
+- Product-specific activation and retention rates, using [our custom definitions](/product-engineers/activation-metrics).
 - Metrics for their growth reviews, like revenue expansion and contraction.
 
-For all this, you might think we'd use our [Stripe source](/docs/cdp/sources/stripe), but you'd be wrong. Since we have multiple different products with different usage-based pricing, we need a custom billing service to handle everything. The data from this service goes into Postgres, which then gets synced and used in PostHog. 
+This analysis is only possible when you combine product and revenue data, so the data warehouse and SQL insights are their weapon of choice.
+
+Most companies would use our [Stripe source](/docs/cdp/sources/stripe) to import revenue data, but we don't. Since we have multiple different products with different usage-based pricing, we need a custom billing service to handle everything. The data from this service goes into Postgres, which then gets synced and used in PostHog. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_39_25_2x_9cd97c333c.png"
