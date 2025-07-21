@@ -17,24 +17,7 @@ export default function Wrapper() {
                 <Desktop />
                 <AnimatePresence>
                     {windows.map((item) => {
-                        return (
-                            <motion.div
-                                key={item.key}
-                                exit={{
-                                    scale: 0.005,
-                                    transition: {
-                                        scale: {
-                                            duration: 0.23,
-                                            ease: [0.2, 0.2, 0.8, 1],
-                                        },
-                                    },
-                                }}
-                                onAnimationStartCapture={() => updateWindow(item, { animating: true })}
-                                onAnimationComplete={() => updateWindow(item, { animating: false })}
-                            >
-                                <AppWindow item={item} key={item.key} constraintsRef={constraintsRef} />
-                            </motion.div>
-                        )
+                        return <AppWindow item={item} key={item.key} />
                     })}
                 </AnimatePresence>
             </div>

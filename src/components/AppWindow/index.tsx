@@ -45,8 +45,8 @@ const Router = (props) => {
     return children
 }
 
-const WindowContainer = ({ children }: { children: React.ReactNode }) => {
-    const { siteSettings } = useApp()
+const WindowContainer = ({ children, closing }: { children: React.ReactNode; closing: boolean }) => {
+    const { siteSettings, closeWindow } = useApp()
     const { appWindow } = useWindow()
     return siteSettings.experience === 'boring' && appWindow?.appSettings?.size?.fixed ? (
         <Dialog.Root open>
@@ -54,7 +54,15 @@ const WindowContainer = ({ children }: { children: React.ReactNode }) => {
             <Dialog.Content className="relative z-50">{children}</Dialog.Content>
         </Dialog.Root>
     ) : (
-        <AnimatePresence>{children}</AnimatePresence>
+        <AnimatePresence
+            onExitComplete={() => {
+                if (closing) {
+                    closeWindow(appWindow)
+                }
+            }}
+        >
+            {children}
+        </AnimatePresence>
     )
 }
 
@@ -95,6 +103,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     const [dragging, setDragging] = useState(false)
     const contentRef = useRef<HTMLDivElement>(null)
     const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
+    const [closing, setClosing] = useState(false)
+    const [closed, setClosed] = useState(false)
 
     useEffect(() => {
         if (windowRef.current) {
@@ -342,6 +352,13 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         [item, chatWindows]
     )
 
+    const handleClose = () => {
+        setClosing(true)
+        setTimeout(() => {
+            setClosed(true)
+        }, 0)
+    }
+
     return (
         <WindowProvider
             appWindow={item}
@@ -354,8 +371,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
             dragControls={controls}
             setPageOptions={setPageOptions}
         >
-            <WindowContainer>
-                {!item.minimized && (
+            <WindowContainer closing={closing}>
+                {!item.minimized && !closed && (
                     <>
                         {snapIndicator && (
                             <motion.div
@@ -440,8 +457,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             }}
                             exit={{
                                 scale: 0.005,
-                                x: windowPosition.x,
-                                y: windowPosition.y,
+                                ...(closing ? {} : { x: windowPosition.x, y: windowPosition.y }),
                                 transition: {
                                     scale: {
                                         duration: 0.23,
@@ -467,6 +483,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             onDragTransitionEnd={handleDragTransitionEnd}
                             onMouseDown={handleMouseDown}
                             onAnimationComplete={() => updateWindow(item, { animating: false })}
+                            onAnimationStartCapture={() => updateWindow(item, { animating: true })}
                         >
                             {!item.minimal && !compact && (
                                 <div
@@ -491,9 +508,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                     {
                                                         type: 'item',
                                                         label: 'Close',
-                                                        onClick: () => {
-                                                            closeWindow(item)
-                                                        },
+                                                        onClick: handleClose,
                                                     },
                                                 ],
                                             },
@@ -626,12 +641,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                 </ContextMenu.Root>
                                             </>
                                         )}
-                                        <OSButton
-                                            variant="ghost"
-                                            size="xs"
-                                            onClick={() => closeWindow(item)}
-                                            className="!px-1.5"
-                                        >
+                                        <OSButton variant="ghost" size="xs" onClick={handleClose} className="!px-1.5">
                                             <IconX className="size-4" />
                                         </OSButton>
                                     </div>
