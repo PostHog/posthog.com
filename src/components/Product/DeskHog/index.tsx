@@ -456,7 +456,7 @@ export const ProductDeskHog = () => {
                                 <strong>
                                     Want <i>more</i> hardware?
                                 </strong>{' '}
-                                We included an I²C expansion port, just for people like you.
+                                The board includes an I²C expansion port, just for people like you.
                             </p>
                         </div>
                         <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center">
