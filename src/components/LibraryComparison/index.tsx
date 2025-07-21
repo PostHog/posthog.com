@@ -67,13 +67,6 @@ export const LibraryComparison = () => {
         return isAvailable ? <img className="w-4 h-4" src={CheckIcon} /> : <img className="w-4 h-4" src={XIcon} />
     }
 
-    const renderErrorTracking = (isAvailable?: boolean) => {
-        if (isAvailable == null || !isAvailable) {
-            return null
-        }
-        return <img className="w-4 h-4" src={CheckIcon} />
-    }
-
     return (
         <div className="overflow-x-scroll mb-4">
             <table>
@@ -103,7 +96,7 @@ export const LibraryComparison = () => {
                                 <td>{renderAvailability(lib.frontmatter.features?.sessionRecording)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.featureFlags)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.groupAnalytics)}</td>
-                                <td>{renderErrorTracking(lib.frontmatter.features?.errorTracking)}</td>
+                                <td>{renderAvailability(lib.frontmatter.features?.errorTracking)}</td>
                             </tr>
                         ))}
                 </tbody>
