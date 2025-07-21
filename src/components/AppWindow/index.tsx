@@ -350,6 +350,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     )
 
     const handleClose = () => {
+        updateWindow(item, { animating: true })
         setClosing(true)
         setTimeout(() => {
             setClosed(true)
