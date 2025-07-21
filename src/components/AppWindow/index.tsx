@@ -70,10 +70,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     const {
         minimizeWindow,
         bringToFront,
-        closeWindow,
         focusedWindow,
         taskbarHeight,
-        addWindow,
         windows,
         updateWindowRef,
         updateWindow,
@@ -83,7 +81,6 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         expandWindow,
         siteSettings,
         openNewChat,
-        isMobile,
         compact,
     } = useApp()
     const isSSR = typeof window === 'undefined'
@@ -409,7 +406,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 zIndex: item.zIndex,
                             }}
                             initial={{
-                                scale: 0.005,
+                                scale: 0.08,
                                 x: rendered
                                     ? siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                         ? 0
@@ -442,9 +439,10 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                         ? 'auto'
                                         : size.height,
                                 transition: {
-                                    duration: siteSettings.experience === 'boring' ? 0 : 0.3,
+                                    duration: siteSettings.experience === 'boring' ? 0 : 0.2,
                                     scale: {
-                                        duration: siteSettings.experience === 'boring' ? 0 : 0.3,
+                                        duration: siteSettings.experience === 'boring' ? 0 : 0.2,
+                                        delay: siteSettings.experience === 'boring' ? 0 : 0.2,
                                         ease: [0.2, 0.2, 0.8, 1],
                                     },
                                     width: {

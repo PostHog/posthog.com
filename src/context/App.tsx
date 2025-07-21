@@ -799,7 +799,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             fromOrigin: lastClickedElementRect
                 ? {
                       x: lastClickedElementRect.x - size.width / 2,
-                      y: lastClickedElementRect.y - taskbarHeight - size.height / 2,
+                      y: lastClickedElementRect.y - size.height / 2,
                   }
                 : undefined,
             minimal: element.props.minimal ?? false,
