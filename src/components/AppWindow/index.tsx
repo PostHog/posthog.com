@@ -54,7 +54,7 @@ const WindowContainer = ({ children }: { children: React.ReactNode }) => {
             <Dialog.Content className="relative z-50">{children}</Dialog.Content>
         </Dialog.Root>
     ) : (
-        <>{children}</>
+        <AnimatePresence>{children}</AnimatePresence>
     )
 }
 
@@ -440,7 +440,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             }}
                             exit={{
                                 scale: 0.005,
-                                ...(item.minimized ? { x: windowPosition.x, y: windowPosition.y } : {}),
+                                x: windowPosition.x,
+                                y: windowPosition.y,
                                 transition: {
                                     scale: {
                                         duration: 0.23,
