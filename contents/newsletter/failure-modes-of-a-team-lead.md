@@ -42,10 +42,10 @@ In an effort to keep quality high and make the right calls, you start acting mor
 
 ### How to fix it
 
-Dont treat engineers like children. They're capable of [making great product decisions](/newsletter/product-management-is-broken#2-engineers-make-product-decisions) and owning their success. Here are a few ways to empower them to do that:
+Don't treat engineers like children. They're capable of [making great product decisions](/newsletter/product-management-is-broken#2-engineers-make-product-decisions) and owning their success. Here are a few ways to empower them to do that:
 
-- **Work transparently in public Slack channels and shared docs.** It gives your team the visibility and context they need to make smart, independent decisions.
-- **Push decisions down.** When someone asks, "Should we do X or Y?"" reply with, "What do you think and why?". Ship their answer if it's 80% as good as yours.
+- **Work transparently.** It gives your team the visibility and context they need to make smart, independent decisions. Use public Slack channels and shared docs.
+- **Push decisions down.** When someone asks, "Should we do X or Y?" reply with, "What do you think and why?". Ship their answer if it's 80% as good as yours. This builds trust and confidence.
 - **Don't be the sole point of communication between your team and others.** Instead, connect the right people together. Act as a bridge, not a gate.
 - **Define outcomes for your team, not tasks.** How they get there is up to them.
   
@@ -70,12 +70,13 @@ Another factor is ego: all those invites make you feel important. They create an
 Aim for 80‑90 % of your week in the codebase. Kill the meetings and [work asynchronously](https://posthog.com/newsletter/how-we-work-async). Here's how:
 
 - Add at least two no-meeting days in your team's calendar.
+- Cancel all reoccurring meetings and only add back the ones you need.
 - Batch 1-1s, skip a cycle, or consider skipping them altogether.
 - Replace daily stand-ups with async updates in Slack.
 - Record Loom walk-throughs instead of live demos.
 - Default to written RFCs instead of meetings. Give teammates 24-48 hours to comment, then merge the doc and treat it as a source of truth.
 
-> 🏆 **You'll know you're successful if:** Your team genuinely look up to you. Respect is earned in pull requests far faster than in meetings.
+> 🏆 **You'll know you're successful if:** You spend a majority of your time coding. Your team's respect comes from what you've shipped rather than what you've said.
 
 ## 3. You're scared of changing goals
 
@@ -101,7 +102,7 @@ First, we gather all available data – revenue metrics, product analytics, user
 
 This paints a full picture of how the product and team are doing. Then it's up to you to decide if the team shound continue on their course or if something needs to change.
 
-> 🏆 **You'll know you're successful if:** Your reviews end with projects being removed from the roadmap because the data showed better opportunities. At the end of the quarter, your core metrics are higher than ever.
+> 🏆 **You'll know you're successful if:** You're confident your team is working on the most important tasks nearly all the time. Your reviews end with projects being removed from the roadmap because the data showed better opportunities. At the end of the quarter, your core metrics are higher than ever.
 
 ## 4. You don't keep the talent bar high 
 
