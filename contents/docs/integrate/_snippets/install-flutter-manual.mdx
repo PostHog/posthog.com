@@ -58,6 +58,14 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 </plist>
 ```
 
+You'll need to set the minimum platform version to iOS 13.0 in your Podfile:
+
+```yaml file=ios/Podfile
+platform :ios, '13.0'
+
+# rest of your config
+```
+
 #### Dart setup
 
 Then setup the SDK manually:
@@ -78,12 +86,4 @@ Future<void> main() async {
   await Posthog().setup(config);
   runApp(MyApp());
 }
-```
-
-You'll need to set the minimum platform version to iOS 13.0 in your Podfile:
-
-```yaml file=ios/Podfile
-platform :ios, '13.0'
-
-# rest of your config
 ```
