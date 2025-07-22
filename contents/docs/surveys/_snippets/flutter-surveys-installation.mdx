@@ -4,9 +4,11 @@
 >
 > Using it requires PostHog's Flutter SDK version >= 5.1.0, but it's recommended to always use the latest version.
 
-import FlutterInstall from "../../integrate/_snippets/install-flutter.mdx"
+import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
 
-<FlutterInstall />
+> ⚠️ **Note:** For mobile surveys, you must setup the SDK manually.
+
+<FlutterInstallManual />
 
 ## Step two: Enable surveys in your configuration
 
@@ -81,3 +83,16 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 | Event triggers                    | ✅                     | 
 | Action triggers                   | ❌                     | 
 | Partial responses                 | ❌                     |
+
+## Limitations
+
+- Surveys are only available on iOS, with minimum deployment target of [iOS13](/docs/libraries/ios).
+- Requires PostHog Flutter SDK version >= 5.1.0
+
+## Troubleshooting
+
+- Update your SDK and iOS Pods.
+- Run a clean build if you experience issues.
+- If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation?tab=Flutter#step-three-install-posthogobserver).
+  - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
+  - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)

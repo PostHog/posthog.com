@@ -1,0 +1,106 @@
+### Manual installation
+
+First, add `posthog_flutter` to your `pubspec.yaml`:
+
+```yaml file=pubspec.yaml
+# rest of your code
+
+dependencies:
+  flutter:
+    sdk: flutter
+  posthog_flutter: ^4.0.1
+
+# rest of your code
+```
+
+Then complete the manual setup for each platform:
+
+#### Android setup
+
+Add your PostHog configuration to your `AndroidManifest.xml` file located in the `android/app/src/main`:
+
+```xml file=android/app/src/main/AndroidManifest.xml
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="your.package.name">
+    <application>
+        <!-- ... other configuration ... -->
+        <meta-data android:name="com.posthog.posthog.AUTO_INIT" android:value="false" />
+    </application>
+</manifest>
+```
+
+And setup the SDK manually:
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+Future<void> main() async {
+  // init WidgetsFlutterBinding if not yet
+  WidgetsFlutterBinding.ensureInitialized();
+  final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
+  config.debug = true;
+  config.captureApplicationLifecycleEvents = true;
+  // or EU Host: 'https://eu.i.posthog.com'
+  config.host = 'https://us.i.posthog.com';
+  await Posthog().setup(config);
+  runApp(MyApp());
+}
+```
+
+You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
+
+```gradle_kotlin file=android/app/build.gradle
+// rest of your config
+
+    defaultConfig {
+        minSdkVersion 21
+        // rest of your config
+    }
+
+// rest of your config
+```
+
+#### iOS setup
+
+Add your PostHog configuration to the `Info.plist` file located in the `ios/Runner` directory:
+
+```xml file=ios/Runner/Info.plist
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- rest of your configuration -->
+	<key>com.posthog.posthog.AUTO_INIT</key>
+	<false/>
+</dict>
+</plist>
+```
+
+And setup the SDK manually:
+
+```dart
+import 'package:flutter/material.dart';
+
+import 'package:posthog_flutter/posthog_flutter.dart';
+
+Future<void> main() async {
+  // init WidgetsFlutterBinding if not yet
+  WidgetsFlutterBinding.ensureInitialized();
+  final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
+  config.debug = true;
+  config.captureApplicationLifecycleEvents = true;
+  // or EU Host: 'https://eu.i.posthog.com'
+  config.host = 'https://us.i.posthog.com';
+  await Posthog().setup(config);
+  runApp(MyApp());
+}
+```
+
+You'll need to set the minimum platform version to iOS 13.0 in your Podfile:
+
+```yaml file=ios/Podfile
+platform :ios, '13.0'
+
+# rest of your config
+```
