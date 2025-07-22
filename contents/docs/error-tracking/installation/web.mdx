@@ -19,7 +19,6 @@ import InstallWebPackageManagers from "../../integrate/_snippets/install-web-pac
 <InstallWebPackageManagers />
 
 And then include it with your project API key and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
-
 ```js-web
 import posthog from 'posthog-js'
 
@@ -104,7 +103,7 @@ The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot use
   </CallToAction>
 </div>
 </Step>
-<Step title="Capturing exceptions" subtitle="Your goal in this step: Enable automatic exception tracking for your web application." badge="required">
+<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your web application." badge="required">
 
 ### Setting up exception autocapture
 
@@ -114,7 +113,18 @@ You can enable exception autocapture for the JavaScript Web SDK in the **Error t
 
 When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
 
-#### Manual error capture
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that exceptions are being automatically captured in PostHog.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your web application." badge="optional">
 
 It is also possible to manually capture exceptions using the `captureException` method:
 
@@ -122,9 +132,11 @@ It is also possible to manually capture exceptions using the `captureException` 
 posthog.captureException(error, additionalProperties)
 ```
 
+This is helpful if you've built your own error handling logic or want to capture exceptions that are handled by your application code.
+
 --- 
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being captured in PostHog.
+**✅ Checkpoint** – Before proceeding, confirm that manual exception capture is working.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -137,11 +149,9 @@ posthog.captureException(error, additionalProperties)
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
 
-| Action | Description |
-|--------|-------------|
-| [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
-| [Configure alerting](/docs/error-tracking/alerts) | Get notified when errors occur |
-| [Cutting cost](/docs/error-tracking/cutting-costs) | Take advantage of our cost-effective pricing |
+1. [Upload source maps](/docs/error-tracking/upload-source-maps/web) – Required for accurate stack traces if you serve minified bundles.
+2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
+3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
 
 </Step>
 </Steps> 

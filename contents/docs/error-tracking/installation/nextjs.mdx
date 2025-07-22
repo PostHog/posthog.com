@@ -13,9 +13,10 @@ import PagesRouterErrorTracking from './_snippets/nextjs-router-snippets/page-ro
 import JSWebErrorTracking from '../_snippets/web-install-error-tracking.mdx'
 import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
 
+Next.js is a SSR framework with both client-side and server-side rendering. To track errors in your Next.js app, you need to install and configure the PostHog SDK for both **client-side** and **server-side**.
 
 <Steps>
-<Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK." badge="required">
+<Step title="Installing PostHog SDK for client-side" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK for client-side error tracking." badge="required">
 
 <NextJSInstall />
 
@@ -29,7 +30,7 @@ import InstallNodePackageManagers from "../../integrate/_snippets/install-node-p
 
 <div className="mt-4 mb-2">
     <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
-        Check for events in PostHog
+      Check for events in PostHog
     </CallToAction>
 </div>
 </Step>
@@ -41,16 +42,16 @@ import InstallNodePackageManagers from "../../integrate/_snippets/install-node-p
   'App router', 
   'Pages router']}>
   <Tab.List>
-      <Tab>App router</Tab>
-      <Tab>Pages router</Tab>
+  <Tab>App router</Tab>
+  <Tab>Pages router</Tab>
   </Tab.List>
   <Tab.Panels>
-      <Tab.Panel>
-          <AppRouterErrorTracking />
-      </Tab.Panel>
-      <Tab.Panel>
-          <PagesRouterErrorTracking />
-      </Tab.Panel>
+  <Tab.Panel>
+    <AppRouterErrorTracking />
+  </Tab.Panel>
+  <Tab.Panel>
+    <PagesRouterErrorTracking />
+  </Tab.Panel>
   </Tab.Panels>
 </Tab.Group>
 
@@ -65,7 +66,7 @@ import InstallNodePackageManagers from "../../integrate/_snippets/install-node-p
 </div>
 
 </Step>
-<Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
+<Step title="Installing PostHog SDK for server-side" subtitle="Your goal in this step: Install the PostHog Node.js SDK for server-side error tracking." badge="required">
 
 Next.js enables you to both server-side render pages and add server-side functionality. To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
 
@@ -177,11 +178,9 @@ You can find a full example of both this and client-side error tracking in our [
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
 
-| Action | Description |
-|--------|-------------|
-| [Upload source maps](/docs/error-tracking/upload-source-maps/nextjs) | Required for accurate stack traces if you serve minified bundles. |
-| [Configure alerting](/docs/error-tracking/alerts) | Get notified when errors occur |
-| [Cutting cost](/docs/error-tracking/cutting-costs) | Take advantage of our cost-effective pricing |
+1. [Upload source maps](/docs/error-tracking/upload-source-maps/nextjs) – Required for accurate stack traces if you serve minified bundles.
+2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
+3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
 
 </Step>
 </Steps>
