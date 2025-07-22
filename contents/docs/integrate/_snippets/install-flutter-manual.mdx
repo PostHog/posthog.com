@@ -8,7 +8,7 @@ First, add `posthog_flutter` to your `pubspec.yaml`:
 dependencies:
   flutter:
     sdk: flutter
-  posthog_flutter: ^4.0.1
+  posthog_flutter: ^5.0.0
 
 # rest of your code
 ```
@@ -28,25 +28,6 @@ Add your PostHog configuration to your `AndroidManifest.xml` file located in the
 </manifest>
 ```
 
-And setup the SDK manually:
-
-```dart
-import 'package:flutter/material.dart';
-
-import 'package:posthog_flutter/posthog_flutter.dart';
-
-Future<void> main() async {
-  // init WidgetsFlutterBinding if not yet
-  WidgetsFlutterBinding.ensureInitialized();
-  final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
-  config.debug = true;
-  config.captureApplicationLifecycleEvents = true;
-  // or EU Host: 'https://eu.i.posthog.com'
-  config.host = 'https://us.i.posthog.com';
-  await Posthog().setup(config);
-  runApp(MyApp());
-}
-```
 
 You'll also need to update the minimum Android SDK version to `21` in `android/app/build.gradle`:
 
@@ -77,6 +58,8 @@ Add your PostHog configuration to the `Info.plist` file located in the `ios/Runn
 </plist>
 ```
 
+#### Dart setup
+
 And setup the SDK manually:
 
 ```dart
@@ -87,7 +70,7 @@ import 'package:posthog_flutter/posthog_flutter.dart';
 Future<void> main() async {
   // init WidgetsFlutterBinding if not yet
   WidgetsFlutterBinding.ensureInitialized();
-  final config = PostHogConfig('YOUR_API_KEY_GOES_HERE');
+  final config = PostHogConfig('<ph_project_api_key>');
   config.debug = true;
   config.captureApplicationLifecycleEvents = true;
   // or EU Host: 'https://eu.i.posthog.com'
