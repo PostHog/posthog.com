@@ -1,23 +1,27 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { IconPlus, IconPlay } from '@posthog/icons'
 
-interface Quest {
-    id: number
+export interface QuestLogItemProps {
     title: string
     location?: string
     status?: string
     icon?: React.ReactNode
+    children: React.ReactNode
 }
 
-interface QuestLogProps {
-    quests: Quest[]
-    children: React.ReactNode[]
-}
-
-const QuestLog = ({ quests = [], children = [] }: QuestLogProps): JSX.Element => {
+export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selectedQuest, setSelectedQuest] = useState(0)
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
+
+    const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
+        QuestLogItemProps & {
+            index?: number
+            isSelected?: boolean
+            questRef?: React.Ref<HTMLDivElement>
+            onSelect?: () => void
+        }
+    >[]
 
     useEffect(() => {
         const updateBracketPosition = () => {
@@ -36,7 +40,6 @@ const QuestLog = ({ quests = [], children = [] }: QuestLogProps): JSX.Element =>
         }
 
         updateBracketPosition()
-        // Also update on window resize
         window.addEventListener('resize', updateBracketPosition)
 
         return () => window.removeEventListener('resize', updateBracketPosition)
@@ -99,55 +102,22 @@ const QuestLog = ({ quests = [], children = [] }: QuestLogProps): JSX.Element =>
                                 </svg>
                             </div>
 
-                            {quests.map((quest, index) => (
-                                <div
-                                    key={quest.id}
-                                    ref={(el) => (questRefs.current[index] = el)}
-                                    className={`relative rounded-sm bg-white shadow-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 ${
-                                        selectedQuest === index
-                                            ? 'border border-orange bg-orange/5 shadow-md'
-                                            : 'border border-light dark:border-dark'
-                                    }`}
-                                    onClick={() => setSelectedQuest(index)}
-                                >
-                                    <div
-                                        className={`flex items-center space-x-2.5 py-2 ${
-                                            selectedQuest === index ? 'text-red' : ''
-                                        }`}
-                                    >
-                                        <div
-                                            className={`flex-shrink-0 w-5 h-5 ${
-                                                selectedQuest === index ? 'text-red' : ''
-                                            }`}
-                                        >
-                                            {quest.icon}
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <strong
-                                                className={`text-sm md:text-base font-bold truncate leading-tight ${
-                                                    selectedQuest === index ? 'text-red' : ''
-                                                }`}
-                                            >
-                                                {quest.title}
-                                            </strong>
-                                            {quest.location && (
-                                                <div className="text-xs md:text-sm text-gray-600 leading-tight text-primary/30 dark:text-primary-dark/30">
-                                                    <strong>
-                                                        <em>{quest.location}</em>
-                                                    </strong>
-                                                </div>
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
+                            {questItems.map((child, index) =>
+                                React.cloneElement(child, {
+                                    key: index,
+                                    index,
+                                    isSelected: selectedQuest === index,
+                                    questRef: (el: HTMLDivElement | null) => (questRefs.current[index] = el),
+                                    onSelect: () => setSelectedQuest(index),
+                                })
+                            )}
                         </div>
 
                         {/* Progress Indicator */}
                         <div className="mt-4 md:mt-6 bg-white border border-light dark:border-dark rounded-sm p-3 md:p-4 shadow-sm">
                             <div className="flex justify-between text-xs md:text-sm text-gray-600 mb-2">
                                 <span>Installation Progress</span>
-                                <span>0/{quests.length} Complete</span>
+                                <span>0/{questItems.length} Complete</span>
                             </div>
                             <div className="w-full bg-gray-200 rounded-full h-2">
                                 <div className="bg-gradient-to-r from-orange to-red h-2 rounded-sm w-0 transition-all duration-300"></div>
@@ -162,18 +132,18 @@ const QuestLog = ({ quests = [], children = [] }: QuestLogProps): JSX.Element =>
                                 <div className="flex items-center space-x-3">
                                     <span className="text-red text-base md:text-lg">⚠</span>
                                     <h2 className="text-lg md:text-xl font-bold text-orange truncate">
-                                        {quests[selectedQuest]?.title}
+                                        {questItems[selectedQuest]?.props.title}
                                     </h2>
                                 </div>
-                                {quests[selectedQuest]?.location && (
+                                {questItems[selectedQuest]?.props.location && (
                                     <p className="text-gray-600 mt-1 text-sm md:text-base">
-                                        {quests[selectedQuest].location}
+                                        {questItems[selectedQuest].props.location}
                                     </p>
                                 )}
                             </div>
 
                             <div className="p-4 md:p-6 space-y-6">
-                                {children[selectedQuest] || (
+                                {questItems[selectedQuest]?.props.children || (
                                     <div>
                                         <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">
                                             Overview
@@ -204,4 +174,41 @@ const QuestLog = ({ quests = [], children = [] }: QuestLogProps): JSX.Element =>
     )
 }
 
-export default QuestLog
+export const QuestLogItem: React.FC<
+    QuestLogItemProps & {
+        index?: number
+        isSelected?: boolean
+        questRef?: React.Ref<HTMLDivElement>
+        onSelect?: () => void
+    }
+> = ({ title, location, status, icon, children, index, isSelected = false, questRef, onSelect }) => {
+    return (
+        <div
+            ref={questRef}
+            className={`relative rounded-sm bg-white shadow-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 ${
+                isSelected ? 'border border-orange bg-orange/5 shadow-md' : 'border border-light dark:border-dark'
+            }`}
+            onClick={onSelect}
+        >
+            <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red' : ''}`}>
+                <div className={`flex-shrink-0 w-5 h-5 ${isSelected ? 'text-red' : ''}`}>{icon}</div>
+                <div className="flex-1 min-w-0">
+                    <strong
+                        className={`text-sm md:text-base font-bold truncate leading-tight ${
+                            isSelected ? 'text-red' : ''
+                        }`}
+                    >
+                        {title}
+                    </strong>
+                    {location && (
+                        <div className="text-xs md:text-sm text-gray-600 leading-tight text-primary/30 dark:text-primary-dark/30">
+                            <strong>
+                                <em>{location}</em>
+                            </strong>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    )
+}
