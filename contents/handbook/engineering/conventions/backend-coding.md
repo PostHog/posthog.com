@@ -63,7 +63,7 @@ A good test should:
 * have a minimal set of assertions per test
 * explain itself well
 * help you understand the system
-* make good use of parameterized testing to show behaviour with a range of inputs
+* make good use of parameterized testing to show behavior with a range of inputs
 * help us have confidence that the impossible is unrepresentable
 * help us have confidence that the system will work as expected
 
