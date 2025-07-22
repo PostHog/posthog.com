@@ -7,10 +7,129 @@ import { Steps, Step } from 'components/Docs/Steps'
 import InstallationPlatforms from './_snippets/installation-platforms'
 import { CallToAction } from 'components/CallToAction'
 import QuestLog from 'components/Docs/QuestLog'
+import { IconGear, IconBox, IconBolt, IconPlus } from '@posthog/icons'
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Here's what you'll need to do to get started:
 
-<QuestLog />
+<QuestLog 
+    quests={[
+        {
+            id: 1,
+            title: "Capture your first exception",
+            location: "Code Sanctuary",
+            status: "available",
+            icon: <IconBox className="w-5 h-5" />
+        },
+        {
+            id: 2,
+            title: "Get accurate stack traces",
+            location: "Settings Realm",
+            status: "available", 
+            icon: <IconBolt className="w-5 h-5" />
+        },
+        {
+            id: 3,
+            title: "Configure alerts and automations",
+            location: "Data Caverns",
+            status: "available",
+            icon: <IconGear className="w-5 h-5" />
+        },
+        {
+            id: 4,
+            title: "Cutting costs",
+            location: "Guardian's Gate",
+            status: "locked",
+            icon: <IconPlus className="w-5 h-5" />
+        }
+    ]}
+>
+    <div>
+        <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">Overview</h3>
+        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+            Capture your first exception events to PostHog. This foundational step enables you to start tracking errors and exceptions in your application.
+        </p>
+        
+        <div className="mt-4">
+            <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">What's Involved</h3>
+            <InstallationPlatforms />
+        </div>
+        
+        <div className="bg-orange/10 border border-light dark:border-dark rounded-lg p-3 md:p-4 mt-4">
+            <h4 className="text-orange font-semibold mb-2 text-sm md:text-base">Purpose</h4>
+            <p className="text-gray-700 text-xs md:text-sm italic">
+                Enable error tracking to start capturing exception events from your application
+            </p>
+        </div>
+    </div>
+    
+    <div>
+        <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">Overview</h3>
+        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+            Upload source maps to get accurate, readable stack traces for your captured exceptions. This helps you quickly identify and debug issues.
+        </p>
+        
+        <div className="mt-4">
+            <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">What's Involved</h3>
+            <CallToAction type="primary" to="#upload-source-maps">
+                Upload source maps
+            </CallToAction>
+        </div>
+        
+        <div className="bg-orange/10 border border-light dark:border-dark rounded-lg p-3 md:p-4 mt-4">
+            <h4 className="text-orange font-semibold mb-2 text-sm md:text-base">Purpose</h4>
+            <p className="text-gray-700 text-xs md:text-sm italic">
+                Automatically upload source maps for accurate stack traces in your error reports
+            </p>
+        </div>
+    </div>
+    
+    <div>
+        <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">Overview</h3>
+        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+            Set up notifications and automate your error tracking workflows. Get alerted when critical errors occur and integrate with your development workflow.
+        </p>
+        
+        <div className="mt-4">
+            <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">What's Involved</h3>
+            <CallToAction type="primary" to="#configure-alerts">
+                Configure alerts and automations
+            </CallToAction>
+        </div>
+        
+        <div className="bg-orange/10 border border-light dark:border-dark rounded-lg p-3 md:p-4 mt-4">
+            <h4 className="text-orange font-semibold mb-2 text-sm md:text-base">Purpose</h4>
+            <p className="text-gray-700 text-xs md:text-sm italic">
+                Receive notifications and automate your error tracking related workflows
+            </p>
+        </div>
+    </div>
+    
+    <div>
+        <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">Overview</h3>
+        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+            Optimize your PostHog costs while maintaining comprehensive error tracking. Learn about our pricing structure and cost-saving strategies.
+        </p>
+        
+        <div className="mt-4">
+            <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">What's Involved</h3>
+            <CallToAction type="primary" to="#cutting-costs">
+                See cost-cutting tips
+            </CallToAction>
+        </div>
+        
+        <div className="bg-orange/10 border border-light dark:border-dark rounded-lg p-3 md:p-4 mt-4">
+            <h4 className="text-orange font-semibold mb-2 text-sm md:text-base">Purpose</h4>
+            <p className="text-gray-700 text-xs md:text-sm italic">
+                Take advantage of our lowest pricing for error tracking while maintaining full functionality
+            </p>
+        </div>
+    </div>
+</QuestLog>
+
+
+---
+
+HAHAHHAHA
 
 <Steps>
 <Step title="Capture your first exception" badge="required" subtitle="Your goal in this step: Capture your first exception events to PostHog.">
