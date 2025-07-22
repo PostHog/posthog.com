@@ -14,11 +14,11 @@ export interface QuestLogItemProps {
 export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selectedQuest, setSelectedQuest] = useState(0)
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
-    const [animationKey, setAnimationKey] = useState(0)
     const [hasInitialAnimated, setHasInitialAnimated] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
+    const spriteRef = useRef<HTMLDivElement>(null)
     const isFirstRender = useRef(true)
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
@@ -66,21 +66,33 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     }, [questItems])
 
+    // Restart sprite animation on quest change
+    const restartSpriteAnimation = () => {
+        if (spriteRef.current) {
+            // Remove animation class to reset
+            spriteRef.current.classList.remove('quest-log-sprite-animate')
+            // Force reflow to ensure class removal takes effect
+            void spriteRef.current.offsetWidth
+            // Re-add animation class to restart animation
+            spriteRef.current.classList.add('quest-log-sprite-animate')
+        }
+    }
+
     // Trigger sprite animation on quest change
     useEffect(() => {
         if (isFirstRender.current) {
             isFirstRender.current = false
             return // Skip animation on first render
         }
-        setAnimationKey((prev) => prev + 1)
+        restartSpriteAnimation()
     }, [selectedQuest])
 
     // Initial delay animation
     useEffect(() => {
         const timer = setTimeout(() => {
             setHasInitialAnimated(true)
-            setAnimationKey((prev) => prev + 1) // Trigger sprite animation when loading bar starts
-        }, 1500)
+            restartSpriteAnimation() // Trigger sprite animation when loading bar starts
+        }, 1000)
 
         return () => clearTimeout(timer)
     }, [])
@@ -111,24 +123,13 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         setSelectedQuest(index)
     }
 
-    // No CSS injection needed - using Tailwind container queries!
-
     const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialAnimated
         ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
         : 'calc(0% - 10px)'
 
-    // Dynamic sprite animation CSS
-    const spriteAnimationCSS = `
-        @keyframes walk-sprite-${animationKey} {
-            0% { background-position: 0 0; }
-            100% { background-position: -528px 0; }
-        }
-    `
-
     return (
         <>
-            <style>{spriteAnimationCSS}</style>
             <div className="max-w-7xl mx-auto @container">
                 <div className="flex gap-5 flex-col @lg:flex-row">
                     {/* Quest List */}
@@ -147,6 +148,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                 ></div>
                                 {/* Sprite Animation */}
                                 <div
+                                    ref={spriteRef}
                                     className={`absolute w-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
                                     style={{
                                         left: spritePosition,
@@ -155,8 +157,6 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                         backgroundRepeat: 'no-repeat',
                                         height: '48px',
                                         top: '-48px',
-                                        animation:
-                                            animationKey > 0 ? `walk-sprite-${animationKey} 0.25s steps(11) 7` : 'none',
                                     }}
                                 ></div>
                             </div>
