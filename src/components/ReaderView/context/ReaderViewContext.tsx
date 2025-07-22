@@ -79,7 +79,9 @@ const isLabel = (item: any) => !item?.url && item?.name
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
     const { setMenu } = useWindow()
     const [isNavVisible, setIsNavVisible] = useState(true)
-    const [isTocVisible, setIsTocVisible] = useState(true)
+    const [isTocVisible, setIsTocVisible] = useState(false)
+    const [tocUserToggled, setTocUserToggled] = useState(false)
+    const [isContainerLarge, setIsContainerLarge] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(false)
     const { pathname } = useLocation()
     const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
@@ -92,12 +94,17 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
         return null
     })
+
+    // Call hooks directly, not inside useMemo
+    const destinationNav = useDataPipelinesNav({ type: 'destination' })
+    const transformationNav = useDataPipelinesNav({ type: 'transformation' })
+
     const dynamicMenus = useMemo(
         () => ({
-            'data-pipeline-destinations': useDataPipelinesNav({ type: 'destination' }),
-            'data-pipeline-transformations': useDataPipelinesNav({ type: 'transformation' }),
+            'data-pipeline-destinations': destinationNav,
+            'data-pipeline-transformations': transformationNav,
         }),
-        []
+        [destinationNav, transformationNav]
     )
 
     const injectDynamicChildren = useCallback((menu: Menu) => {
@@ -147,6 +154,7 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     }, [])
 
     const toggleToc = useCallback(() => {
+        setTocUserToggled(true)
         setIsTocVisible((prev) => !prev)
     }, [])
 
@@ -205,6 +213,11 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         setMenu?.(internalMenu)
     }, [activeInternalMenu])
 
+    // Reset ToC toggle state when path changes
+    useEffect(() => {
+        setTocUserToggled(false)
+    }, [pathname])
+
     const handleBackgroundImageChange = useCallback((image: string | null) => {
         setBackgroundImage(image)
         if (typeof window !== 'undefined') {
@@ -226,6 +239,38 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     useEffect(() => {
         localStorage.setItem('fullWidthContent', fullWidthContent.toString())
     }, [fullWidthContent])
+
+    // Monitor container size and update ToC visibility
+    useEffect(() => {
+        const checkContainerSize = () => {
+            const readerContainer = document.querySelector('.\\@container\\/app-reader')
+            if (readerContainer) {
+                const width = readerContainer.clientWidth
+                // @6xl breakpoint is 72rem = 1152px
+                const isLarge = width >= 1152
+                setIsContainerLarge(isLarge)
+
+                // Only update ToC visibility if user hasn't manually toggled it
+                if (!tocUserToggled) {
+                    setIsTocVisible(isLarge)
+                }
+            }
+        }
+
+        // Initial check
+        checkContainerSize()
+
+        // Create ResizeObserver to monitor container size changes
+        const readerContainer = document.querySelector('.\\@container\\/app-reader')
+        if (readerContainer) {
+            const resizeObserver = new ResizeObserver(checkContainerSize)
+            resizeObserver.observe(readerContainer)
+
+            return () => {
+                resizeObserver.disconnect()
+            }
+        }
+    }, [tocUserToggled])
 
     const value = {
         isNavVisible,
