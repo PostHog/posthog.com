@@ -72,3 +72,9 @@ A good test should:
 * Integration tests should ensure that the feature works in the running system
 * They give greater confidence (because you avoid the mistake of just testing a mock) but they're slower
 * They are generally less brittle in response to changes because they test at a higher level than developer tests (e.g. they test a Django API not a class used inside it)
+
+### To ee or not to ee?
+
+We default to open but when adding a new feature we should consider if it should be MIT licensed or Enterprise edition licensed. Everything in the `ee` folder is covered by [a different license](https://github.com/PostHog/posthog/blob/master/ee/LICENSE). It's easy to move things from `ee` to open, but not the other way.
+
+All the open source code is copied to [the posthog-foss repo](https://github.com/posthog/posthog-foss) with the `ee` code stripped out.  You need to consider whether your code will work if imports to `ee` are unavailable
