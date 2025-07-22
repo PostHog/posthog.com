@@ -230,7 +230,7 @@ pages_response = requests.get(
     params={
         "date_from": start_date.isoformat(),
         "date_to": end_date.isoformat(),
-        "breakdown_by": "$pathname",
+        "breakdown_by": "Page",
         "limit": 10
     }
 )
@@ -243,7 +243,7 @@ countries_response = requests.get(
     params={
         "date_from": start_date.isoformat(),
         "date_to": end_date.isoformat(),
-        "breakdown_by": "$geoip_country_code",
+        "breakdown_by": "Country",
         "limit": 10
     }
 )
@@ -252,48 +252,73 @@ countries_data = countries_response.json()
 print(f"Total visitors: {overview_data['visitors']}")
 print(f"Total views: {overview_data['views']}")
 print(f"Bounce rate: {overview_data['bounce_rate']:.2%}")
-print(f"Top page: {pages_data['results'][0]['breakdown_value']}")
+if pages_data.get('results') and len(pages_data['results']) > 0:
+    print(f"Top page: {pages_data['results'][0]['breakdown_value']}")
+else:
+    print("No page data available")
+
+print("\nTop countries:")
+if countries_data.get('results'):
+    for country in countries_data['results'][:5]:
+        print(f"  {country['breakdown_value']}: {country['visitors']} visitors")
+else:
+    print("  No country data available")
 ```
 
 ```javascript
-// Set up authentication and date range
-const headers = {
-  "Authorization": "Bearer <your_personal_api_key>"
-};
-const baseUrl = "https://us.posthog.com/api/projects/123/web_analytics";
+(async () => {
+  // Set up authentication and date range
+  const headers = {
+    "Authorization": "Bearer <your_personal_api_key>"
+  };
+  const baseUrl = "https://us.posthog.com/api/projects/123/web_analytics";
 
-// Get date range for last 30 days
-const endDate = new Date();
-const startDate = new Date(endDate);
-startDate.setDate(startDate.getDate() - 30);
+  // Get date range for last 30 days
+  const endDate = new Date();
+  const startDate = new Date(endDate);
+  startDate.setDate(startDate.getDate() - 30);
 
-const formatDate = (date) => date.toISOString().split('T')[0];
+  const formatDate = (date) => date.toISOString().split('T')[0];
 
-// Get overview metrics
-const overviewResponse = await fetch(
-  `${baseUrl}/overview?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}`,
-  { headers }
-);
-const overviewData = await overviewResponse.json();
+  // Get overview metrics
+  const overviewResponse = await fetch(
+    `${baseUrl}/overview?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}`,
+    { headers }
+  );
+  const overviewData = await overviewResponse.json();
 
-// Get top pages
-const pagesResponse = await fetch(
-  `${baseUrl}/breakdown?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}&breakdown_by=$pathname&limit=10`,
-  { headers }
-);
-const pagesData = await pagesResponse.json();
+  // Get top pages
+  const pagesResponse = await fetch(
+    `${baseUrl}/breakdown?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}&breakdown_by=Page&limit=10`,
+    { headers }
+  );
+  const pagesData = await pagesResponse.json();
 
-// Get traffic by country
-const countriesResponse = await fetch(
-  `${baseUrl}/breakdown?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}&breakdown_by=$geoip_country_code&limit=10`,
-  { headers }
-);
-const countriesData = await countriesResponse.json();
+  // Get traffic by country
+  const countriesResponse = await fetch(
+    `${baseUrl}/breakdown?date_from=${formatDate(startDate)}&date_to=${formatDate(endDate)}&breakdown_by=Country&limit=10`,
+    { headers }
+  );
+  const countriesData = await countriesResponse.json();
 
-console.log(`Total visitors: ${overviewData.visitors}`);
-console.log(`Total views: ${overviewData.views}`);
-console.log(`Bounce rate: ${(overviewData.bounce_rate * 100).toFixed(2)}%`);
-console.log(`Top page: ${pagesData.results[0].breakdown_value}`);
+  console.log(`Total visitors: ${overviewData.visitors}`);
+  console.log(`Total views: ${overviewData.views}`);
+  console.log(`Bounce rate: ${(overviewData.bounce_rate * 100).toFixed(2)}%`);
+  if (pagesData.results && pagesData.results.length > 0) {
+    console.log(`Top page: ${pagesData.results[0].breakdown_value}`);
+  } else {
+    console.log("No page data available");
+  }
+
+  console.log("\nTop countries:");
+  if (countriesData.results && countriesData.results.length > 0) {
+    countriesData.results.slice(0, 5).forEach(country => {
+      console.log(`  ${country.breakdown_value}: ${country.visitors} visitors`);
+    });
+  } else {
+    console.log("  No country data available");
+  }
+})();
 ```
 
 </MultiLanguage>
@@ -336,73 +361,15 @@ def get_weekly_metrics(project_id, api_key):
                 "bounce_rate": data["bounce_rate"],
                 "session_duration": data["session_duration"]
             })
+        else:
+            print(f"Request failed: {response.status_code} {response.text}")
     
     return metrics_by_week
 
 # Usage
-weekly_metrics = get_weekly_metrics(123, "<your_personal_api_key>")
+weekly_metrics = get_weekly_metrics(<your_project_id>, "<your_personal_api_key>")
 for week_data in weekly_metrics:
     print(f"Week {week_data['week']}: {week_data['visitors']} visitors, {week_data['bounce_rate']:.2%} bounce rate")
-```
-
-</MultiLanguage>
-
-### Integrating with Other Tools
-
-Export your web analytics data to other platforms or tools:
-
-<MultiLanguage>
-
-```python
-import requests
-import csv
-from datetime import datetime, timedelta
-
-def export_to_csv(project_id, api_key, filename="web_analytics_export.csv"):
-    headers = {"Authorization": f"Bearer {api_key}"}
-    base_url = f"https://us.posthog.com/api/projects/{project_id}/web_analytics"
-    
-    # Get data for the last 30 days
-    end_date = datetime.now().date()
-    start_date = end_date - timedelta(days=30)
-    
-    # Get page breakdown data
-    response = requests.get(
-        f"{base_url}/breakdown",
-        headers=headers,
-        params={
-            "date_from": start_date.isoformat(),
-            "date_to": end_date.isoformat(),
-            "breakdown_by": "$pathname",
-            "limit": 1000
-        }
-    )
-    
-    if response.status_code == 200:
-        data = response.json()
-        
-        # Write to CSV
-        with open(filename, 'w', newline='') as csvfile:
-            fieldnames = ['page_path', 'visitors', 'views', 'sessions', 'bounce_rate', 'session_duration']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            
-            writer.writeheader()
-            for item in data['results']:
-                writer.writerow({
-                    'page_path': item['breakdown_value'],
-                    'visitors': item['visitors'],
-                    'views': item['views'],
-                    'sessions': item['sessions'],
-                    'bounce_rate': item['bounce_rate'],
-                    'session_duration': item['session_duration']
-                })
-        
-        print(f"Data exported to {filename}")
-    else:
-        print(f"Error: {response.status_code}")
-
-# Usage
-export_to_csv(123, "<your_personal_api_key>")
 ```
 
 </MultiLanguage>
