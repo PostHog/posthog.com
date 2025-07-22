@@ -18,14 +18,16 @@ In the spot where you initialize the Anthropic SDK, import PostHog and our Anthr
 
 ```python 
 from posthog.ai.anthropic import Anthropic
-import posthog
+from posthog import Posthog
 
-posthog.project_api_key = "<ph_project_api_key>"
-posthog.host = "<ph_client_api_host>"
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>"
+)
 
 client = Anthropic(
-    api_key="sk-ant-api...",  # Replace with your Anthropic API key
-    posthog_client=posthog
+    api_key="sk-ant-api...", # Replace with your Anthropic API key
+    posthog_client=posthog # This is an optional parameter. If it is not provided, a default client will be used.
 )
 ``` 
 
