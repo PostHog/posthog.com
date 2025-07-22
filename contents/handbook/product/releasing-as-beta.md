@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-It's sometimes worth releasing big new features under a 'beta' label to set expectations with customers that this feature is still in active development, and might have some rough edges. We generally do this by making betas an opt-in experience for users via [the feature preview menu](http://app.posthog.com/home#panel=feature-previews).
+It's sometimes worth releasing big new features under a 'beta' label to set expectations with customers that this feature is still in active development, and might have some rough edges. We generally do this by making betas an opt-in experience for users via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews).
 
 If you're releasing something as a beta there are some guidelines you should follow - especially if the intent is that the beta will eventually become a full product in it's own right. 
 

@@ -1363,6 +1363,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/who-we-do-business-with',
                     },
                     {
+                        name: 'Handling customer issues',
+                        url: '/handbook/cs-and-onboarding/handling-customer-issues',
+                    },
+                    {
                         name: 'Health tracking',
                         url: '/handbook/cs-and-onboarding/health-tracking',
                     },
@@ -2230,6 +2234,10 @@ export const docsMenu = {
                             url: '/docs/api/user',
                         },
                         {
+                            name: 'Web Analytics',
+                            url: '/docs/api/web-analytics',
+                        },
+                        {
                             name: 'Data model',
                             url: '/docs/data-model',
                         },
@@ -2403,6 +2411,10 @@ export const docsMenu = {
                         {
                             name: 'Notebooks',
                             url: '/docs/notebooks',
+                        },
+                        {
+                            name: 'Activity',
+                            url: '/docs/activity',
                         },
                         {
                             name: 'Organizations',
@@ -3059,6 +3071,16 @@ export const docsMenu = {
                     url: '/docs/web-analytics/revenue-analytics',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Marketing analytics',
+                    url: '/docs/web-analytics/marketing-analytics',
+                    icon: 'IconGraph',
+                    color: 'blue',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',

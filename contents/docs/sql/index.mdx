@@ -23,7 +23,7 @@ Our "flavor" is effectively a wrapper around [ClickHouse SQL](https://clickhouse
 
 [SQL expressions](/docs/sql/expressions) enable you to use database identifiers and functions to directly access, [aggregate](/docs/sql/aggregations), filter, transform, and breakdown your data.
 
-They can be used by selecting the **SQL** tab or **SQL expression** option in filters, breakdowns, dashboards, trends, funnels (aggregating by), user paths (event types), the activity tab (columns), and more.
+They can be used by selecting the **SQL** tab or **SQL expression** option in filters, breakdowns, dashboards, trends, funnels (aggregating by), user paths (event types), the [activity tab](/docs/activity) (columns), and more.
 
 For example, to group pageviews into "desktop" or "mobile," you can breakdown with the expression `multiIf(properties.$os == 'Android', 'mobile', properties.$os == 'iOS', 'mobile', 'desktop')`
 

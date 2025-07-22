@@ -188,7 +188,21 @@ URLs are automatically clickable in the **Table** visualization, but you can als
 ```sql
 select 
     properties.$pathname,
-    <a href={concat('https://posthog.com', properties.$pathname, '')} target='_blank'>{'Link'}</a> as link
+    <a href={f'https://posthog.com/{properties.$pathname}'} target='_blank'>Link</a> as link
 from events
 where event = '$pageview'
 ```
+
+### Text effects
+
+Plain text is so boring, so we added some text effects to make it cooler. Wrap any text in `<blink>` to make it blink, `<marquee>` to make it horizontally scroll, and `<redacted>` to hide it unless hovered.
+
+```sql
+select
+    <span>is this <blink>{event}</blink> real?</span>,
+    <marquee>so real, yes!</marquee>,
+    <redacted>but this one is hidden</redacted>
+from events
+```
+
+![Cool text effects](https://res.cloudinary.com/dmukukwp6/video/upload/sqlhtml_d49175518b.mp4)
