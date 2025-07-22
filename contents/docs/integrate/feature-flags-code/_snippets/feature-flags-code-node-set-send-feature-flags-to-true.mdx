@@ -36,6 +36,6 @@ client.capture({
 
 ## Breaking change in v5.5.0
 
-**Important**: Prior to version 5.5.0, feature flags were automatically sent with events when using local evaluation, even when `sendFeatureFlags` was not explicitly set. This behavior has been **removed** in v5.5.0 to be more predictable and explicit.
+Prior to version 5.5.0, feature flags were automatically sent with events when using local evaluation, even when `sendFeatureFlags` was not explicitly set. This behavior has been **removed** in v5.5.0 to be more predictable and explicit.
 
 If you were relying on this automatic behavior, you must now explicitly set `sendFeatureFlags: true` to continue sending feature flags with your events.
