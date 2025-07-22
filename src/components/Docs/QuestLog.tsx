@@ -30,6 +30,32 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     >[]
 
+    // Inline slugify function
+    const slugify = (str: string) =>
+        str
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+
+    // Hoisted function to select quest from hash
+    const selectQuestFromHash = () => {
+        if (typeof window !== 'undefined') {
+            const hash = window.location.hash
+            const match = hash.match(/^#quest-item-(.+)$/)
+            if (match) {
+                const slug = match[1]
+                const questIndex = questItems.findIndex((item) => slugify(item.props.title) === slug)
+                if (questIndex >= 0) {
+                    setSelectedQuest(questIndex)
+                    return
+                }
+            }
+            // If no valid hash, default to first quest
+            setSelectedQuest(0)
+        }
+    }
+
+    // Set bracket position on quest change
     useEffect(() => {
         const updateBracketPosition = () => {
             const selectedElement = questRefs.current[selectedQuest]
@@ -52,18 +78,11 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => window.removeEventListener('resize', updateBracketPosition)
     }, [selectedQuest])
 
-    // Handle URL parameters
+    // Handle URL fragment/hash for quest selection
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const params = new URLSearchParams(window.location.search)
-            const questTitle = params.get('quest-item')
-            if (questTitle) {
-                const questIndex = questItems.findIndex((item) => item.props.title === questTitle)
-                if (questIndex >= 0) {
-                    setSelectedQuest(questIndex)
-                }
-            }
-        }
+        selectQuestFromHash()
+        window.addEventListener('hashchange', selectQuestFromHash)
+        return () => window.removeEventListener('hashchange', selectQuestFromHash)
     }, [questItems])
 
     // Restart sprite animation on quest change
@@ -116,9 +135,8 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
     const handleQuestSelect = (index: number) => {
         if (typeof window !== 'undefined') {
-            const url = new URL(window.location.href)
-            url.searchParams.set('quest-item', questItems[index]?.props.title || '')
-            window.history.pushState({}, '', url)
+            const slug = slugify(questItems[index]?.props.title || '')
+            window.location.hash = `quest-item-${slug}`
         }
         setSelectedQuest(index)
     }
