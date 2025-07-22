@@ -180,10 +180,10 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
           }
         `}
             </style>
-            <div className="max-w-7xl mx-auto py-4 pb-8 quest-log-container">
+            <div className="max-w-7xl mx-auto quest-log-container">
                 <div className="flex gap-5 quest-container">
                     {/* Quest List */}
-                    <div className="quest-list">
+                    <div className="quest-list mt-3">
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-6 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/r0 mb-2">
@@ -217,7 +217,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                         <div className="quest-list-desktop space-y-4 relative">
                             {/* Moving Corner Brackets */}
                             <div
-                                className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-out"
+                                className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
                                 style={{
                                     top: `${bracketPosition.top}px`,
                                     height: `${bracketPosition.height}px`,
@@ -290,21 +290,11 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                     {/* Quest Details */}
                     <div className="quest-details">
                         <div className="bg-white border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm quest-details-sticky">
-                            <div className="bg-orange/10 border-b border-light dark:border-dark p-3 md:p-4">
-                                <div className="flex items-center space-x-3">
-                                    <span className="text-red text-base md:text-lg">⚠</span>
-                                    <h2 className="text-lg md:text-xl font-bold text-orange truncate">
-                                        {questItems[selectedQuest]?.props.title}
-                                    </h2>
-                                </div>
-                                {questItems[selectedQuest]?.props.subtitle && (
-                                    <p className="text-primary/40 dark:text-primary-dark/r0 mt-1 text-sm md:text-base">
-                                        {questItems[selectedQuest].props.subtitle}
-                                    </p>
-                                )}
-                            </div>
+                            <div className="p-4 md:p-6">
+                                <h2 className="!mt-0 text-lg md:text-xl font-bold">
+                                    {questItems[selectedQuest]?.props.title}
+                                </h2>
 
-                            <div className="p-4 md:p-6 space-y-6">
                                 {questItems[selectedQuest]?.props.children || (
                                     <div>
                                         <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">
@@ -349,10 +339,10 @@ export const QuestLogItem: React.FC<
     return (
         <div
             ref={questRef}
-            className={`relative rounded-sm shadow-sm bg-white px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 ${
+            className={`relative bg-white rounded-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 active:transition-all active:duration-100 ${
                 isSelected
-                    ? 'border border-orange shadow-md opacity-100'
-                    : 'border border-light dark:border-dark opacity-65 bg-white'
+                    ? 'border border-orange shadow-md opacity-100 bg-orange/10'
+                    : 'border border-light dark:border-dark opacity-65 bg-white shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
             }`}
             onClick={onSelect}
         >
