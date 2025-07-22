@@ -2,88 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import * as Icons from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 
-// CSS styles for the QuestLog component
-const questLogStyles = {
-    questLogContainer: {
-        containerType: 'inline-size' as const,
-    },
-    questContainer: {
-        flexDirection: 'column' as const,
-    },
-    questList: {
-        width: '100%',
-    },
-    questDetails: {
-        width: '100%',
-    },
-    questListDesktop: {
-        display: 'none',
-    },
-    questDropdownMobile: {
-        display: 'block',
-    },
-    questDetailsSticky: {},
-} as const
-
-// Container query CSS
-const containerQueryCSS = `
-  /* Container query setup */
-  .quest-log-container {
-    container-type: inline-size;
-  }
-  
-  /* Default mobile-first styles */
-  .quest-container {
-    flex-direction: column;
-  }
-  
-  .quest-list {
-    width: 100%;
-  }
-  
-  .quest-details {
-    width: 100%;
-  }
-  
-  .quest-list-desktop {
-    display: none;
-  }
-  
-  .quest-dropdown-mobile {
-    display: block;
-  }
-  
-  /* Desktop styles when container is wide enough */
-  @container (min-width: 601px) {
-    .quest-container {
-      flex-direction: row;
-    }
-    
-    .quest-list {
-      width: auto;
-      max-width: 33.33%;
-      flex-shrink: 0;
-    }
-    
-    .quest-details {
-      flex: 1;
-      min-width: 0;
-    }
-    
-    .quest-list-desktop {
-      display: block;
-    }
-    
-    .quest-dropdown-mobile {
-      display: none;
-    }
-    
-    .quest-details-sticky {
-      position: sticky;
-      top: 2rem;
-    }
-  }
-`
+// No CSS injection needed - using Tailwind container queries!
 
 export interface QuestLogItemProps {
     title: string
@@ -192,16 +111,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         setSelectedQuest(index)
     }
 
-    // Inject container query CSS once
-    useEffect(() => {
-        const styleId = 'quest-log-container-queries'
-        if (!document.getElementById(styleId)) {
-            const styleElement = document.createElement('style')
-            styleElement.id = styleId
-            styleElement.textContent = containerQueryCSS
-            document.head.appendChild(styleElement)
-        }
-    }, [])
+    // No CSS injection needed - using Tailwind container queries!
 
     const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialAnimated
@@ -219,10 +129,10 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
     return (
         <>
             <style>{spriteAnimationCSS}</style>
-            <div className="max-w-7xl mx-auto quest-log-container">
-                <div className="flex gap-5 quest-container">
+            <div className="max-w-7xl mx-auto @container">
+                <div className="flex gap-5 flex-col @lg:flex-row">
                     {/* Quest List */}
-                    <div className="quest-list mt-3">
+                    <div className="w-full @lg:w-auto @lg:max-w-[33.33%] @lg:flex-shrink-0 mt-3">
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-6 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
@@ -253,7 +163,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                         </div>
 
                         {/* Desktop Quest List */}
-                        <div className="quest-list-desktop space-y-4 relative">
+                        <div className="hidden @lg:block space-y-4 relative">
                             {/* Moving Corner Brackets */}
                             <div
                                 className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
@@ -316,19 +226,21 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                         </div>
 
                         {/* Mobile Dropdown */}
-                        <MobileQuestLogItem
-                            questItems={questItems}
-                            selectedQuest={selectedQuest}
-                            onQuestSelect={handleQuestSelect}
-                            dropdownOpen={dropdownOpen}
-                            onDropdownToggle={setDropdownOpen}
-                            dropdownRef={dropdownRef}
-                        />
+                        <div className="block @lg:hidden">
+                            <MobileQuestLogItem
+                                questItems={questItems}
+                                selectedQuest={selectedQuest}
+                                onQuestSelect={handleQuestSelect}
+                                dropdownOpen={dropdownOpen}
+                                onDropdownToggle={setDropdownOpen}
+                                dropdownRef={dropdownRef}
+                            />
+                        </div>
                     </div>
 
                     {/* Quest Details */}
-                    <div className="quest-details">
-                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm quest-details-sticky">
+                    <div className="w-full @lg:flex-1 @lg:min-w-0">
+                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm @lg:sticky @lg:top-8">
                             <div className="p-4 md:p-6">
                                 <h2 className="!mt-0 text-lg md:text-xl font-bold">
                                     {questItems[selectedQuest]?.props.title}
@@ -428,7 +340,7 @@ export const MobileQuestLogItem: React.FC<{
     dropdownRef: React.RefObject<HTMLDivElement>
 }> = ({ questItems, selectedQuest, onQuestSelect, dropdownOpen, onDropdownToggle, dropdownRef }) => {
     return (
-        <div className="quest-dropdown-mobile relative" ref={dropdownRef}>
+        <div className="relative" ref={dropdownRef}>
             <button
                 className="w-full flex items-center justify-between p-3 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-sm hover:shadow-md transition-all duration-200"
                 onClick={() => onDropdownToggle(!dropdownOpen)}
