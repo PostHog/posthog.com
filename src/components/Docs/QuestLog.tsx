@@ -2,6 +2,89 @@ import React, { useState, useRef, useEffect } from 'react'
 import * as Icons from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 
+// CSS styles for the QuestLog component
+const questLogStyles = {
+    questLogContainer: {
+        containerType: 'inline-size' as const,
+    },
+    questContainer: {
+        flexDirection: 'column' as const,
+    },
+    questList: {
+        width: '100%',
+    },
+    questDetails: {
+        width: '100%',
+    },
+    questListDesktop: {
+        display: 'none',
+    },
+    questDropdownMobile: {
+        display: 'block',
+    },
+    questDetailsSticky: {},
+} as const
+
+// Container query CSS
+const containerQueryCSS = `
+  /* Container query setup */
+  .quest-log-container {
+    container-type: inline-size;
+  }
+  
+  /* Default mobile-first styles */
+  .quest-container {
+    flex-direction: column;
+  }
+  
+  .quest-list {
+    width: 100%;
+  }
+  
+  .quest-details {
+    width: 100%;
+  }
+  
+  .quest-list-desktop {
+    display: none;
+  }
+  
+  .quest-dropdown-mobile {
+    display: block;
+  }
+  
+  /* Desktop styles when container is wide enough */
+  @container (min-width: 601px) {
+    .quest-container {
+      flex-direction: row;
+    }
+    
+    .quest-list {
+      width: auto;
+      max-width: 33.33%;
+      flex-shrink: 0;
+    }
+    
+    .quest-details {
+      flex: 1;
+      min-width: 0;
+    }
+    
+    .quest-list-desktop {
+      display: block;
+    }
+    
+    .quest-dropdown-mobile {
+      display: none;
+    }
+    
+    .quest-details-sticky {
+      position: sticky;
+      top: 2rem;
+    }
+  }
+`
+
 export interface QuestLogItemProps {
     title: string
     subtitle?: string
@@ -109,78 +192,33 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         setSelectedQuest(index)
     }
 
+    // Inject container query CSS once
+    useEffect(() => {
+        const styleId = 'quest-log-container-queries'
+        if (!document.getElementById(styleId)) {
+            const styleElement = document.createElement('style')
+            styleElement.id = styleId
+            styleElement.textContent = containerQueryCSS
+            document.head.appendChild(styleElement)
+        }
+    }, [])
+
     const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialAnimated
         ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
         : 'calc(0% - 10px)'
 
-    return (
-        <>
-            <style>
-                {`
-          @keyframes walk-sprite-${animationKey} {
+    // Dynamic sprite animation CSS
+    const spriteAnimationCSS = `
+        @keyframes walk-sprite-${animationKey} {
             0% { background-position: 0 0; }
             100% { background-position: -528px 0; }
-          }
-          
-          /* Container query setup */
-          .quest-log-container {
-            container-type: inline-size;
-          }
-          
-          /* Default mobile-first styles */
-          .quest-container {
-            flex-direction: column;
-          }
-          
-          .quest-list {
-            width: 100%;
-          }
-          
-          .quest-details {
-            width: 100%;
-          }
-          
-          .quest-list-desktop {
-            display: none;
-          }
-          
-          .quest-dropdown-mobile {
-            display: block;
-          }
-          
-          /* Desktop styles when container is wide enough */
-          @container (min-width: 601px) {
-            .quest-container {
-              flex-direction: row;
-            }
-            
-            .quest-list {
-              width: auto;
-              max-width: 33.33%;
-              flex-shrink: 0;
-            }
-            
-            .quest-details {
-              flex: 1;
-              min-width: 0;
-            }
-            
-            .quest-list-desktop {
-              display: block;
-            }
-            
-            .quest-dropdown-mobile {
-              display: none;
-            }
-            
-            .quest-details-sticky {
-              position: sticky;
-              top: 2rem;
-            }
-          }
-        `}
-            </style>
+        }
+    `
+
+    return (
+        <>
+            <style>{spriteAnimationCSS}</style>
             <div className="max-w-7xl mx-auto quest-log-container">
                 <div className="flex gap-5 quest-container">
                     {/* Quest List */}
@@ -308,7 +346,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                 )}
 
                                 <div className="pt-3 md:pt-4 border-t border-light dark:border-dark">
-                                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
+                                    <div className="items-stretch sm:items-center gap-3 sm:gap-4">
                                         {selectedQuest < questItems.length - 1 && (
                                             <CallToAction
                                                 type="primary"
