@@ -83,7 +83,7 @@ const AIInstallContent = () => (
 
 const SignupContent = () => (
     <div className="flex flex-1 w-full h-full border-y border-primary">
-        <iframe src="http://app.dev.posthog.dev/signup" className="w-full h-full border-0" title="PostHog signup" />
+        <iframe src="https://app.posthog.com/signup" className="w-full h-full border-0" title="PostHog signup" />
     </div>
 )
 
