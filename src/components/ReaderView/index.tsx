@@ -637,7 +637,7 @@ function ReaderViewContent({
                 </div>
 
                 {/* Third row - Footer */}
-                <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
+                <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 rounded-b">
                     <motion.div
                         className={`flex-shrink-0 transition-all min-w-0 ${
                             renderLeftSidebar && isNavVisible ? '@2xl/app-reader:min-w-[250px]' : 'w-auto'
