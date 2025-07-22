@@ -36,6 +36,6 @@ posthog.capture(
 
 #### Breaking change in v6.3.0
 
-Prior to version 6.3.0, feature flags were automatically sent with events when using local evaluation, even when `send_feature_flags` was not explicitly set. This behavior has been **removed** in v6.2.0 to be more predictable and explicit.
+Prior to version 6.3.0, feature flags were automatically sent with events when using local evaluation, even when `send_feature_flags` was not explicitly set. This behavior has been **removed** in v6.3.0 to be more predictable and explicit.
 
 If you were relying on this automatic behavior, you must now explicitly set `send_feature_flags=True` to continue sending feature flags with your events.
