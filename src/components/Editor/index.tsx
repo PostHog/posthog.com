@@ -402,7 +402,7 @@ export function Editor({
 
                         <ScrollArea>
                             {showFilters && availableFilters && availableFilters.length > 0 && (
-                                <div className="bg-accent p-2 text-sm border-b border-primary flex gap-1 sticky top-0 z-10">
+                                <div className="bg-accent p-2 text-sm border-b border-primary flex gap-1 sticky top-0 z-10 flex-wrap">
                                     {availableFilters?.map((filter, index) => {
                                         return (
                                             <div key={filter.label} className="flex items-center gap-1">
