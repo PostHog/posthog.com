@@ -92,6 +92,8 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 ## Troubleshooting
 
 - Update your SDK and iOS Pods.
+- Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
+- Make sure you have disabled automatic SDK intialization. 
 - Run a clean build if you experience issues.
 - If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation?tab=Flutter#step-three-install-posthogobserver).
   - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
