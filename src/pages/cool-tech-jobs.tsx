@@ -48,6 +48,11 @@ import {
     HighlightedMarkdown,
 } from 'components/Editor/SearchUtils'
 import { useSearch } from 'components/Editor/SearchProvider'
+import { useApp } from '../context/App'
+import { useWindow } from '../context/Window'
+import { useInView } from 'react-intersection-observer'
+import ProgressBar from 'components/ProgressBar'
+
 dayjs.extend(relativeTime)
 
 type JobBoardType = 'ashby' | 'greenhouse' | 'gem' | 'kadoa' | 'other'
@@ -207,8 +212,9 @@ const CompanyRows = ({
     mutate,
     deleteCompany,
     isValidating,
-    setAddAJobModalOpen,
-    setCompanyId,
+    openAddAJobWindow,
+    hasMore,
+    fetchMore,
 }: {
     companyFilters: FiltersType
     jobFilters: FiltersType
@@ -218,11 +224,15 @@ const CompanyRows = ({
     mutate: () => void
     deleteCompany: (companyId: number, companyName: string) => void
     isValidating: boolean
-    setAddAJobModalOpen: (open: boolean) => void
-    setCompanyId: (companyId: number) => void
+    openAddAJobWindow: (companyId?: number) => void
+    hasMore: boolean
+    fetchMore: () => void
 }) => {
     const { isModerator } = useUser()
     const { websiteTheme } = useValues(layoutLogic)
+    const [ref, inView] = useInView({
+        threshold: 0.5,
+    })
 
     const jobColumns = useMemo(
         () => [
@@ -241,9 +251,15 @@ const CompanyRows = ({
         })
     }, [companies])
 
+    useEffect(() => {
+        if (inView && hasMore) {
+            fetchMore()
+        }
+    }, [inView])
+
     return (
         <div className="space-y-8">
-            {displayCompanies.map((company) => {
+            {displayCompanies.map((company, index) => {
                 const { name } = company.attributes
                 const logoLight = company.attributes.logoLight?.data?.attributes?.url
                 const logoDark = company.attributes.logoDark?.data?.attributes?.url
@@ -294,7 +310,11 @@ const CompanyRows = ({
                 })
 
                 return (
-                    <div key={company.id} className="border border-primary rounded-md">
+                    <div
+                        key={company.id}
+                        ref={index === displayCompanies.length - 1 ? ref : null}
+                        className="border border-primary rounded-md"
+                    >
                         <div className="flex flex-col lg:flex-row lg:items-center gap-6 border-b border-primary p-4">
                             <div title={name} className="flex-shrink-0">
                                 {(logoLight || logoDark) && (
@@ -321,8 +341,7 @@ const CompanyRows = ({
                                         <button
                                             className="font-bold text-red dark:text-yellow text-sm flex items-center space-x-1 bg-transparent hover:bg-accent rounded-md px-2 py-1"
                                             onClick={() => {
-                                                setCompanyId(company.id)
-                                                setAddAJobModalOpen(true)
+                                                openAddAJobWindow(company.id)
                                             }}
                                         >
                                             <IconPencil className="size-3" />
@@ -389,31 +408,14 @@ const CompanyRows = ({
                 </div>
             )}
 
-            {isLoading && (
-                <div className="text-center py-8">
+            {isLoading && <ProgressBar title="job board" />}
+            {isValidating && !isLoading && (
+                <div className="text-center pb-4">
                     <IconSpinner className="size-7 opacity-60 animate-spin mx-auto" />
                 </div>
             )}
         </div>
     )
-}
-
-const getAvailableFilters = () => {
-    return toggleFilters
-        .filter((filter) => filter.appliesTo === 'company')
-        .map((filter) => ({
-            label: filter.label,
-            operator: 'equals' as const,
-            options: [
-                { label: 'All', value: null },
-                { label: 'Yes', value: true },
-                { label: 'No', value: false },
-            ],
-            filter: (company: Company, value: any) => {
-                if (value === null) return true
-                return (company.attributes as any)[filter.key] === value
-            },
-        }))
 }
 
 const IssueForm = () => {
@@ -629,7 +631,7 @@ const ModeratorInitialView = ({
                 </div>
             )}
             <h4 className="opacity-70 py-3 my-3 relative before:w-full before:h-[1px] before:bg-border dark:before:bg-dark before:absolute flex items-center justify-center text-base">
-                <span className="bg-white dark:bg-accent-dark px-2 relative">or</span>
+                <span className="bg-primary px-2 relative">or</span>
             </h4>
             <CallToAction size="md" width="full" type="secondary" onClick={onAddNewCompany}>
                 Add a new company
@@ -641,14 +643,12 @@ const ModeratorInitialView = ({
 const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
     return (
         <div className="prose dark:prose-dark">
-            <p className="mb-2">
+            <p>
                 Our job board is designed to help product engineers (and other tech-adjacent candidates) find companies
                 that have a similar vibe to PostHog – where employees are empowered to do their best work.
             </p>
-            <p className="mb-2">
-                To qualify to have your open roles listed, you'll need to meet the following criteria:
-            </p>
-            <ul className="mb-4">
+            <p>To qualify to have your open roles listed, you'll need to meet the following criteria:</p>
+            <ul>
                 <li>
                     At least one unique perk listed in our filters
                     <br />{' '}
@@ -675,19 +675,23 @@ const JobBoardIntro = ({ onConfirm }: { onConfirm: () => void }) => {
 
 const Auth = () => {
     return (
-        <>
-            <div className="bg-border dark:bg-border-dark p-4 mt-0 mb-2">
-                <p className="text-sm mb-2">
-                    <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                </p>
+        <div className="-m-4">
+            <div className="p-4">
+                <div className="bg-accent p-4 mt-0 mb-2 rounded-md border border-primary">
+                    <p className="text-sm mb-2">
+                        <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                    </p>
 
-                <p className="text-sm mb-0">
-                    We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
-                    account.
-                </p>
+                    <p className="text-sm mb-0">
+                        We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                        account.
+                    </p>
+                </div>
             </div>
-            <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
-        </>
+            <div className="">
+                <Authentication initialView="sign-in" showBanner={false} showProfile={false} />
+            </div>
+        </div>
     )
 }
 
@@ -1231,14 +1235,56 @@ const CompanyForm = ({ onSuccess, companyId }: { onSuccess?: () => void; company
     )
 }
 
+const IssueWindow = () => {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
+
+    useEffect(() => {
+        setWindowTitle(appWindow, 'Report an issue')
+    }, [])
+
+    return (
+        <div data-scheme="secondary" className="bg-primary p-4">
+            <IssueForm />
+        </div>
+    )
+}
+
+const AddAJobWindow = ({
+    companyId,
+    onSuccess,
+    onClose,
+}: {
+    companyId?: number
+    onSuccess?: () => void
+    onClose?: () => void
+}) => {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
+
+    useEffect(() => {
+        setWindowTitle(appWindow, 'Add a company')
+
+        return () => {
+            onClose?.()
+        }
+    }, [])
+
+    return (
+        <div data-scheme="secondary" className="bg-primary p-4 max-h-[500px] overflow-y-auto">
+            <CompanyForm companyId={companyId} onSuccess={onSuccess} />
+        </div>
+    )
+}
+
 export default function JobsPage() {
-    const [issueModalOpen, setIssueModalOpen] = useState(false)
-    const [addAJobModalOpen, setAddAJobModalOpen] = useState(false)
     const [companyId, setCompanyId] = useState<number>()
     const [filteredCompanies, setFilteredCompanies] = useState<Company[]>()
     const [companyFilters, setCompanyFilters] = useState<FiltersType>([])
     const [jobFilters, setJobFilters] = useState<FiltersType>([])
     const [search, setSearch] = useState('')
+    const { addWindow } = useApp()
+    const { appWindow } = useWindow()
 
     const {
         companies: initialCompanies,
@@ -1250,7 +1296,28 @@ export default function JobsPage() {
         isValidating: companiesValidating,
     } = useCompanies({ companyFilters, jobFilters, search })
 
-    const { isModerator, user } = useUser()
+    const openIssueWindow = () => {
+        addWindow(
+            <IssueWindow newWindow location={{ pathname: `cool-tech-jobs-issue` }} key={`cool-tech-jobs-issue`} />
+        )
+    }
+
+    const openAddAJobWindow = (companyId?: number) => {
+        addWindow(
+            <AddAJobWindow
+                newWindow
+                location={{ pathname: `cool-tech-jobs-add-a-job` }}
+                key={`cool-tech-jobs-add-a-job`}
+                companyId={companyId}
+                onSuccess={() => {
+                    mutate()
+                }}
+                onClose={() => {
+                    setCompanyId(undefined)
+                }}
+            />
+        )
+    }
 
     return (
         <>
@@ -1264,6 +1331,9 @@ export default function JobsPage() {
                 type="psheet"
                 slug="/cool-tech-jobs"
                 maxWidth="full"
+                onSearchChange={(search) => {
+                    setSearch(search)
+                }}
                 availableFilters={toggleFilters
                     .filter((filter) => filter.appliesTo === 'company')
                     .map((filter) => ({
@@ -1288,7 +1358,6 @@ export default function JobsPage() {
                         })
                     setCompanyFilters(newFilters)
                 }}
-                showFilters
             >
                 <section>
                     <p className="my-0 mb-4 -mt-1">
@@ -1303,17 +1372,14 @@ export default function JobsPage() {
                             Work at a company with great perks?{' '}
                             <button
                                 className="text-red dark:text-yellow font-semibold"
-                                onClick={() => setAddAJobModalOpen(true)}
+                                onClick={() => openAddAJobWindow(companyId)}
                             >
                                 Apply to get your jobs listed here.
                             </button>
                         </li>
                         <li>
                             Something off?{' '}
-                            <button
-                                className="text-red dark:text-yellow font-semibold"
-                                onClick={() => setIssueModalOpen(true)}
-                            >
+                            <button className="text-red dark:text-yellow font-semibold" onClick={openIssueWindow}>
                                 Let us know
                             </button>
                             .
@@ -1328,31 +1394,12 @@ export default function JobsPage() {
                         mutate={mutate}
                         deleteCompany={deleteCompany}
                         isValidating={companiesValidating}
-                        setAddAJobModalOpen={setAddAJobModalOpen}
-                        setCompanyId={setCompanyId}
+                        openAddAJobWindow={openAddAJobWindow}
+                        hasMore={hasMore}
+                        fetchMore={fetchMore}
                     />
                 </section>
             </Editor>
-
-            <SideModal className="w-full" open={issueModalOpen} setOpen={setIssueModalOpen} title="Report an issue">
-                <IssueForm />
-            </SideModal>
-            <SideModal
-                className="w-full"
-                open={addAJobModalOpen}
-                setOpen={(open) => {
-                    setAddAJobModalOpen(open)
-                    setCompanyId(undefined)
-                }}
-                title={!user ? 'Sign into PostHog.com' : 'Add a company'}
-            >
-                <CompanyForm
-                    companyId={companyId}
-                    onSuccess={() => {
-                        mutate()
-                    }}
-                />
-            </SideModal>
         </>
     )
 }

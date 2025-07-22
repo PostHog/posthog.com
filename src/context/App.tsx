@@ -560,6 +560,40 @@ const appSettings: AppSettings = {
             autoHeight: true,
         },
     },
+    'cool-tech-jobs-issue': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 500,
+                height: 500,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    'cool-tech-jobs-add-a-job': {
+        size: {
+            min: {
+                width: 500,
+                height: 500,
+            },
+            max: {
+                width: 500,
+                height: 500,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
