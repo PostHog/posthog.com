@@ -570,8 +570,9 @@ export default function Home() {
         }
     `)
     const { appWindow } = useWindow()
-    const { setWindowTitle, isMobile, addWindow } = useApp()
+    const { setWindowTitle, isMobile, addWindow, updateWindow } = useApp()
     const posthog = usePostHog()
+    const [positionUpdated, setPositionUpdated] = useState(false)
 
     useEffect(() => {
         if (appWindow) {
@@ -583,7 +584,7 @@ export default function Home() {
                         location={{ pathname: `start` }}
                         key={`start`}
                         position={{
-                            x: appWindow.position.x + 100,
+                            x: appWindow.position.x + 50,
                             y: appWindow.position.y + 200,
                         }}
                     />
@@ -591,6 +592,15 @@ export default function Home() {
             }
         }
     }, [])
+
+    useEffect(() => {
+        if (appWindow && appWindow.location?.key === 'initial' && !isMobile && !positionUpdated) {
+            updateWindow(appWindow, {
+                position: { x: appWindow.position.x - 50, y: appWindow.position.y },
+            })
+            setPositionUpdated(true)
+        }
+    }, [appWindow])
 
     return (
         <>
