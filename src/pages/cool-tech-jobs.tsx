@@ -226,8 +226,8 @@ const CompanyRows = ({
 
     const jobColumns = useMemo(
         () => [
-            { name: 'Date Posted', width: 'minmax(120px, auto)', align: 'left' as const },
-            { name: 'Job Title', width: 'minmax(300px, 2fr)', align: 'left' as const },
+            { name: 'Date posted', width: 'minmax(120px, auto)', align: 'left' as const },
+            { name: 'Job title', width: 'minmax(300px, 2fr)', align: 'left' as const },
             { name: 'Department', width: 'minmax(150px, auto)', align: 'left' as const },
         ],
         []
@@ -367,7 +367,12 @@ const CompanyRows = ({
 
                         <div className="p-4">
                             {hasJobs ? (
-                                <OSTable columns={jobColumns} rows={jobRows} rowAlignment="center" />
+                                <OSTable
+                                    columns={jobColumns}
+                                    rows={jobRows}
+                                    rowAlignment="center"
+                                    groupBy="Department"
+                                />
                             ) : (
                                 <div className="text-center py-8 px-4 bg-accent rounded-md border border-border">
                                     <em>No jobs currently available</em>
