@@ -18,8 +18,8 @@ The Web Analytics API allows you to programmatically access your web analytics d
 
 To use the Web Analytics API, you need:
 
-1. A [personal API key](https://<ph_app_host>/settings/user-api-keys) with `query:read` permissions
-2. Your project ID (found in [project settings](https://<ph_app_host>/settings/project#variables))
+1. A [personal API key](https://app.posthog.com/settings/user-api-keys) with `query:read` permissions
+2. Your project ID (found in [project settings](https://app.posthog.com/settings/project#variables))
 
 ## Endpoints
 
@@ -49,7 +49,7 @@ Get key metrics including visitors, views, sessions, bounce rate, and session du
 
 ```shell
 curl -H "Authorization: Bearer <ph_project_api_key>" \
-  "https://<ph_app_host>/api/projects/<your_project_id>/web_analytics/overview?date_from=2024-01-01&date_to=2024-01-31"
+  "<ph_app_host>/api/projects/<your_project_id>/web_analytics/overview?date_from=2024-01-01&date_to=2024-01-31"
 ```
 
 ```python
@@ -59,7 +59,7 @@ import requests
 project_id = "<your_project_id>"
 api_key = "<ph_project_api_key>"
 
-url = f"https://<ph_app_host>/api/projects/{project_id}/web_analytics/overview"
+url = f"<ph_app_host>/api/projects/{project_id}/web_analytics/overview"
 headers = {
     "Authorization": f"Bearer {api_key}"
 }
@@ -78,7 +78,7 @@ const projectId = "<your_project_id>";
 const apiKey = "<ph_project_api_key>";
 
 const response = await fetch(
-  `https://<ph_app_host>/api/projects/${projectId}/web_analytics/overview?date_from=2024-01-01&date_to=2024-01-31`,
+  `<ph_app_host>/api/projects/${projectId}/web_analytics/overview?date_from=2024-01-01&date_to=2024-01-31`,
   {
     headers: {
       "Authorization": `Bearer ${apiKey}`
@@ -127,7 +127,7 @@ Get web analytics data broken down by a specific property like browser, device t
 
 ```shell
 curl -H "Authorization: Bearer <ph_project_api_key>" \
-  "https://<ph_app_host>/api/projects/<your_project_id>/web_analytics/breakdown?date_from=2024-01-01&date_to=2024-01-31&breakdown_by=Page&limit=2"
+  "<ph_app_host>/api/projects/<your_project_id>/web_analytics/breakdown?date_from=2024-01-01&date_to=2024-01-31&breakdown_by=Page&limit=2"
 ```
 
 ```python
@@ -137,7 +137,7 @@ import requests
 project_id = "<your_project_id>"
 api_key = "<ph_project_api_key>"
 
-url = f"https://<ph_app_host>/api/projects/{project_id}/web_analytics/breakdown"
+url = f"<ph_app_host>/api/projects/{project_id}/web_analytics/breakdown"
 headers = {
     "Authorization": f"Bearer {api_key}"
 }
@@ -165,7 +165,7 @@ const params = new URLSearchParams({
 });
 
 const response = await fetch(
-  `https://<ph_app_host>/api/projects/${projectId}/web_analytics/breakdown?${params}`,
+  `<ph_app_host>/api/projects/${projectId}/web_analytics/breakdown?${params}`,
   {
     headers: {
       "Authorization": `Bearer ${apiKey}`
@@ -182,9 +182,7 @@ console.log(data);
 
 ```json
 {
-  "count": 25,
-  "next": "https://<ph_app_host>/api/projects/<your_project_id>/web_analytics/breakdown?offset=2&limit=2",
-  "previous": null,
+  "next": "<ph_app_host>/api/projects/<your_project_id>/web_analytics/breakdown?offset=2&limit=2",
   "results": [
     {
       "breakdown_value": "/home",
@@ -226,7 +224,7 @@ api_key = "<ph_project_api_key>"
 headers = {
     "Authorization": f"Bearer {api_key}"
 }
-base_url = f"https://<ph_app_host>/api/projects/{project_id}/web_analytics"
+base_url = f"<ph_app_host>/api/projects/{project_id}/web_analytics"
 
 # Get date range for last 30 days
 end_date = datetime.now().date()
@@ -295,7 +293,7 @@ else:
   const headers = {
     "Authorization": `Bearer ${apiKey}`
   };
-  const baseUrl = `https://<ph_app_host>/api/projects/${projectId}/web_analytics`;
+  const baseUrl = `<ph_app_host>/api/projects/${projectId}/web_analytics`;
 
   // Get date range for last 30 days
   const endDate = new Date();
@@ -359,7 +357,7 @@ from datetime import datetime, timedelta
 
 def get_weekly_metrics(project_id, api_key):
     headers = {"Authorization": f"Bearer {api_key}"}
-    base_url = f"https://<ph_app_host>/api/projects/{project_id}/web_analytics"
+    base_url = f"<ph_app_host>/api/projects/{project_id}/web_analytics"
     
     # Get metrics for the last 4 weeks
     metrics_by_week = []
