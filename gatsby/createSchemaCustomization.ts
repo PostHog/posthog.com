@@ -257,6 +257,8 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type PostHogPipeline implements Node {
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
+      introSnippet: String
+      installationSnippet: String
     }
     type ProductDataProductsAddons {
       legacy_product: Boolean
@@ -331,6 +333,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               shopifyId: String!
               title: String!
               selectedOptions: [ShopifySelectedOption!]!
+              inventoryPolicy: String
             }
             type ShopifyImage {
               width: Int

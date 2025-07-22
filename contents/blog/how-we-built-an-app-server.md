@@ -214,13 +214,13 @@ It has evolved significantly. A high-level version of the ingestion pipeline now
 ```mermaid
 graph TD
     CLIENT[Client Library]
-    DECIDE["/decide API"]
+    FLAGS["/flags API"]
     CAPTURE[Capture API]
     PLUGINS[Plugin server]
     PERSONS["PostgreSQL (persons table)"]
     Kafka2[Kafka]
 
-    CLIENT -..-> DECIDE
+    CLIENT -..-> FLAGS
 
     CLIENT -..-> CAPTURE
     CAPTURE --> Kafka

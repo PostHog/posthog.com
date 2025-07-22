@@ -3,6 +3,7 @@ import React, { createContext, useEffect, useState } from 'react'
 import qs from 'qs'
 import { ProfileData } from 'lib/strapi'
 import usePostHog from './usePostHog'
+import { COOKIELESS_SENTINEL_VALUE } from 'posthog-js/lib/src/constants'
 
 export type User = {
     id: number
@@ -162,7 +163,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
             try {
                 const distinctId = posthog?.get_distinct_id?.()
 
-                if (distinctId) {
+                if (distinctId && distinctId !== COOKIELESS_SENTINEL_VALUE) {
                     await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/users/${user.id}`, {
                         method: 'PUT',
                         headers: {

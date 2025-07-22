@@ -79,12 +79,15 @@ If you'd like to book it, please message Kendal in the #team-people-and-ops chan
 
 For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.  These are all relatively near our [Work.Life coworking space in Farringdon](https://work.life/office-space/london/city/farringdon/): 
 
+- [Z Hotel City](https://www.thezhotels.com/hotels/city/)
 - [citizenM Tower of London hotel](https://www.citizenm.com/hotels/europe/london/tower-of-london-hotel)
 - [Clayton Hotel - City of London](https://www.claytonhotels.com/city-of-london/)
 - [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
 - [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
 - [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 - [Bob W Tower Hill Studios](https://bobw.co/apartments/comfy-studio-tower-hill)
+
+If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 
 ## Travel insurance
 
@@ -95,6 +98,10 @@ In the event of an emergency, please cover any related expenses (ideally on your
 ### Flight delays
 
 If your travel plans are affected due to a flight delay or an airline-induced missed connection and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that were caused by the airline, but with a little bit of polite coaxing, they will likely give in.
+
+### Partners / family joining offsites
+
+Sometimes at PostHog you will be asked to travel to places you've never been before and it could be a good opportunity to travel with your partner / family. At PostHog, we do infrequent in-person work that we want to maximise this time in person and your focus to be on PostHog, without distraction. This is why we don't allow partners or family to join you for the dates that the offsite / onboarding takes place. If timing allows it, you are able to tack holiday onto either side and for your partner/family to join you for those dates. However, for the dates of the offsite, you should be staying alone and focusing on your time with your teammates. 
 
 ## How to plan an offsite in 8 weeks - a checklist
 

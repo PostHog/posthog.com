@@ -1,26 +1,42 @@
-## Q2 2025 objectives
+## Q3 2025 objectives
 
-- Web Analytics-like default dashboard containing the following metrics, and its evolution over time
-    - MRR
-    - ARR
-    - LTV
-    - Churn
-    - Growth
-    - Retention
-    - Expansion
-    - Contraction
-- Customer shouldn't need to configure anything besides connecting with Stripe
-    - Opinionated settings on what revenue tracking should look like
-    - Users don't need to be able to customize our assumptions about what their Stripe data looks like
-        - This might change in follow-up quarters
-- Expose streamlined revenue DW view to allow customers to improve on top of it `revenue_analytics` (or similar)
-- Streamline Stripe + ChargeBee connectors setup
-    - Improve UX to make it easier to track what's happening during setup
-    - Allow connectors to be added directly from the new Revenue analytics page, instead of going to the connectors page
-        - Keep track of progress while data is being imported into DW
+- Web Analytics-like default dashboard containing the following metrics, and its evolution over time <TeamMember name="Rafael Audibert" photo />
+    - Net Revenue
+    - MRR (Monthly Recurring Revenue)
+        - Revenue from subscriptions only
+    - ARR (Annual Run Rate)
+    - Active + New + Churned Customers
+    - Active + New + Churned Subscriptions
+    - ARPU (Average Revenue Per User)
+    - LTV (Lifetime Value)
+    - Revenue/User Churn + Growth + Retention + Expansion + Contraction
+- Closer integration with CRM and Max AI <TeamMember name="Rafael Audibert" photo />
+    - Let customers see data for a specific customer (B2C)
+    - Let Max AI answer revenue-related questions using Revenue data
+- Research whether it makes sense to use Data Warehouse-only data or if we should expand
+into storing data separately to DW + use webhooks <TeamMember name="Rafael Audibert" photo />
 
 
 ### Stretch goal
 
-If we find the time, it would be interesting to update our Stripe setup to use the OAuth flow + create a PostHog [Stripe App](https://stripe.com/apps) -
-will work very well with the [CRM team](/teams/crm): display PostHog data *inside* Stripe.
+These aren't obligatory, but they'd be achievable if we could get the time + a new engineer on the team.
+
+- Support ChargeBee and RevenueCat connectors <FutureTeamMember />
+    - For ChargeBee this is simply creating the view mapping from our DW to our managed views
+    - For RevenueCat this is a bit more complex because we'd need to create a new DW source
+- Stripe OAuth integration to simplify setup even further - and display PostHog inside Stripe to foster adoption (great for CRM)
+
+## Recap
+
+### What did we do in Q2 2025?
+
+A lot! Non-trivial work was done to guarantee we have a solid foundation for the Revenue analytics page using
+data coming in both from events and Data Warehouse sources.
+
+Non-exhaustive list:
+- Split it off of Web Analytics' dashboard, with a basic Revenue Analytics page with focus on Net Revenue
+- Reimplemented most of the breakdown/filtering logic so that it also works for Data Warehouse data rather than just events
+- Guarantee customers simply need to connect their Stripe account to get started + improve Stripe setup UX
+- Expose managed revenue analytics view to customers (and internally)
+- Support revenue goals in our charts - which implied supporting goals globally for our insights
+- Currency conversion support

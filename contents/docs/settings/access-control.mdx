@@ -37,11 +37,13 @@ The three access levels are: Member, Admin, and Owner. An organization must have
 | Changing authentication settings (SAML, SSO settings, 2FA enforcement, etc.)          | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Changing organization settings (name, logo, etc.)                                     | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Managing RBAC Roles (creating, editing, deleting, changing members, etc.)             | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
-| Inviting new members (only for current level or below)                                | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
+| Inviting new members (only for current level or below)*                               | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Managing members (changing roles, removing, etc.)                                     | <span className="text-red text-lg">✖</span>                  | <span className="text-green text-lg">✔</span>          | <span className="text-green text-lg">✔</span>    |
 | Leaving an organization                                                               | <span className="text-green text-lg">✔</span>                | <span className="text-green text-lg">✔</span>          | <span className="text-red text-lg">✖</span>      |
 | Transferring organization ownership                                                   | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
 | Deleting an organization                                                              | <span className="text-red text-lg">✖</span>                  | <span className="text-red text-lg">✖</span>            | <span className="text-green text-lg">✔</span>    |
+
+*This permission is configurable and can be disabled for members by organization admins and owners.
 
 Access levels can be viewed and changed in the [Members section](https://app.posthog.com/settings/organization-members) of organization settings.
 
@@ -91,8 +93,9 @@ Note: We do not yet support limiting access to querying data, viewing replays, o
 
 Resource access controls have three possible access levels:
 - **No access** – Cannot view or edit the resource
-- **View** – Can view but not modify the resource
-- **Edit** – Can view and modify the resource
+- **Viewer** – Can view but not modify the resource
+- **Editor** – Can view and modify the resource
+- **Manager** - Can change metadata about the resource like access controls
 
 There are two ways to set resource-level access controls:
 
@@ -100,7 +103,7 @@ There are two ways to set resource-level access controls:
 
 These settings allow you to control who can view and edit a specific resource object. You can access these controls via the project's access control settings.
 
-By default, new resources are set to "Edit" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
+By default, new resources are set to "Editor" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
 
 Resource creators and project admins can always view and edit resources, as well as manage their access controls. Only creators and project admins can manage access controls for a resource object.
 
@@ -134,15 +137,15 @@ You cannot set project-wide access controls for project admins, as they always h
 
 ### Free / Pay-as-you-go
 
-These plans do not currently offer any access control features. All projects are open to all members and all resources are open to all members with "Edit" access.
+These plans do not currently offer any access control features. All projects are open to all members and all resources are open to all members with "Editor" access.
 
-### Teams
+### Boost or scale
 
-The Teams Add-on gives advanced permissions.
+The Boost and Scale add-ons give advanced permissions.
 
 The goal of this is to allow teams with stricter access requirements to control who can access their projects and resources.
 
-On this plan, you can set default access levels for projects and resources, and also set specific access levels for individual members (but not roles).
+On these plans, you can set default access levels for projects and resources, and also set specific access levels for individual members (but not roles).
 
 ### Enterprise
 

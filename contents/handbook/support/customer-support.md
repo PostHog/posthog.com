@@ -91,7 +91,11 @@ The response times listed below are targets for an initial response, and it's po
 
 Within Zendesk, we will further prioritize tickets based on their selected severity. If you come across a ticket that doesn't have the severity set appropriately [according to our severity level guidelines](/docs/support-options#severity-levels), then you should update the ticket with the appropriate severity level.
 
+
 As a general rule, we aim to prioritize customers who pay for support, or who are otherwise considered a priority customer, to ensure they get the best possible support experience.
+
+> **_NOTE:_** If a user has recently upgraded to the Enterprise plan, their tickets may not automatically be tagged as Enterprise in the PostHog Priority field in Zendesk. If this happens, manually set the Priority field to Enterprise to ensure they get in the proper queue.
+
 
 ### Follow-up / next reply response targets
 

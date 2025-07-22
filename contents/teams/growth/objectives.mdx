@@ -1,43 +1,43 @@
-## Q2 2025 Objectives
+## Q3 2025 Objectives
 
-### Josh
+### Joshua
 
-1. Installation & SDK experience: Automate the setup of 50% of PostHog installations
-    - Setup wizard:
-        - Support more integrations
-        - Uploading environment variables to common hosting providers
-        - PR workflow
-        - Github action
-        - Automatic event instrumentation
-    - Be the default analytics provider for vibe coders
-    - Be the default option in boilerplates for NextJS, React & React Native
-    - Improve the onboarding experience for self hosting users
+- PostHog applications
+    - Rollout OAuth support
+    - Applications beta - organizations can create applications to integrate with PostHog
+    - Make our APIs easier to use (e.g. generate API SDKs, improve OpenAPI spec etc.)
 
-2. Make it easier to use multiple products
-    - Project homepage: make this a good place to see an overview of all your products
-    - Gather common pitfalls from user onboarding calls and replays in each product and remove them
+- AI developer experience
+    - Make MCP server compatible with OpenAI, Anthropic
+    - Add functionality to the MCP server based on user feedback
+    - Add more products to the AI wizard integration
+    - Move MCP server to our own infra to support EU users
 
-3. Launch a creative product experiment once a month!
+- Side quests (if there is time):
+    - Reduce CI times
+    - Set up basic internal retargeting experiment
+    - Demo environment: public demo environment for users to interact with PostHog
+    - Investigate impact of not having a reverse proxy setup
 
 ### Danilo
 
-1. Agent coding
-    - Make it easy to integrate PostHog using Cursor and other AI coding agents.
-    - Ensure LLMs follow best practice on initial integration and prevent the sort of long-term skew that happens when the agent takes unhelpful initiative.
-    - **What we're shipping:**
-    - Single-prompt integrations for 3-5 popular frameworks
-    - Cursor rules integrated **and updated** via wizard for each framework and at least five of our major products
-    - Public posts explaining what we've figured out and how other developers can apply it
-    - **We'll know we're successful when:**
-    - We measure growing usage of the wizard, especially events related to updating the docs
-    - Vibe coding enthusiasts love using our approach
-    - People say "this is how it's done"
-2. DeskHog
-    - Keep using DeskHog development to learn about the agent coding frontier, around one or two afternoons a week
-    - Get first batch of hardware into the hands of our most passionate users
+- AI developer experience
+    - Add more products to the AI wizard
+    - PostHog starter: AMAZING for agents
+    - Automation additions: push products and reduce tedium to integration (e.g. push products to the AI wizard)
 
-### Extras
+- Scale DeskHog
 
-_These are meant as nice to haves if we have time or you feel inspired_
+- Side quests (if there is time):
+    - Demo environment website: a place where users can trigger events into the demo environment and explore features like experiments, feature flags etc. live on the website
+    - Graphic novel onboarding
 
-- Improve the experience of creating your first insight for product analytics (e.g. suggested insights)
+### Jonathan
+
+- Overhaul project homepage for a more intuitive and less overwhelming onboarding experience
+- Add more products to the setup wizard and add error tracking + testing.
+- Connecting Postgres / Stripe / Hubspot during onboarding
+	- Integrate with major db providers (e.g. Supabase, retrieve DB info from Vercel environment variables)
+- Side quests:
+	- Adding shortcuts from people pages to popular services (Stripe, HubSpot, Custom?)
+	- Make our APIs easier to use. (improve openAPI spec, API SDK generation, improve API docs interface)

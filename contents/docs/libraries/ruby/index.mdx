@@ -67,7 +67,7 @@ posthog.capture(
 
 ## Alias
 
-Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
 
 In this case, you can use `alias` to assign another distinct ID to the same user.
 
@@ -126,6 +126,7 @@ on_worker_boot do
     on_error: Proc.new { |status, msg| print msg }
   )
 end
+```
 
 ## Experiments (A/B tests)
 
@@ -135,7 +136,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 variant = posthog.get_feature_flag('experiment-feature-flag-key', 'user_distinct_id')
 
 if variant == 'variant-name'
-    # Do something 
+    # Do something
 end
 ```
 

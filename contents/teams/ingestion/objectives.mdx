@@ -1,34 +1,32 @@
-## Q2 objectives
+## Q3 objectives
 
-### Fix property definitions service
+### Prepare the system for 4x the traffic
 
-We identified several problems with the current implementation of property-defs, which we want to fix in Q2:
+We need to improve several pieces of the ingestion pipeline to support the increase in traffic:
 
-- Improve scalability
-- Improve data consistency
-- Break out its data store
-- Reduce the troubleshooting effort
+- Make persons database horizontally scalable
+- Support 4x ingestion throughput
+- Make deployments smoother
+- Optimize Kafka consumers
 
-### Finish moving to capture-rs
+### Design system architecture for next 10x growth
 
-We are still running the Django capture service, and we need to transition away from it. In Q2, we will:
+We will be able to scale the system horizontally for some time, but we’re expecting to hit some harder limits soon after that. We need to understand how we’re going to scale the system further:
 
-- Move all capture endpoints to capture-rs
-- Improve team's confidence in maintaining the capture layer
+- Implement a PoC for the next generation ingestion architecture
+- Make an informed decision on how far Postgres will take us
 
-### Develop ownership of ingestion incidents
+### Improve operational maturity
 
-As the product has matured and the traffic has increased, we need to improve our incident response process. This quarter we'll focus on:
+We’re working on improving the reliability of the ingestion pipeline, so that the system performs better for the customers and we have fewer distractions from shipping features:
 
-- Developing a solid process for managing incidents and followups
-- Bring more discipline to handling alerts, and exceptions
-- Improve documentation on troubleshooting ingestion problems
-- Reducing the incident response times
+- Improve ingestion and infrastructure dashboards
+- Make ingestion logs usable
+- Write runbooks for incident response for out-of-hours incidents
 
-### Improve infrastructure for deployments
+### Reduce event duplication
 
-We're too slow and have too little confidence in the ingestion deployment process. Our plan is to:
+We’ve received support requests and questions from customers about event duplication. We would like to provide a solution that solves the majority of the problem:
 
-- Switch to a more feature-flag-oriented development process
-- Move all ingestion components to ArgoCD
-- Investigate other mechanisms to reduce the risk of deployments, e.g. blue/green, faster rollbacks
+- Add metrics for event duplication
+- Ship an improvement for at least one source of event duplication

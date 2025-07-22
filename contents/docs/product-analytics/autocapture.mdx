@@ -46,21 +46,10 @@ These are an array of events, URLs, elements, and CSS selectors that you want au
 
 For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` and don't contain the data attribute `data-attr-pii="email"`, you can do the following:
 
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    defaults: '<ph_posthog_js_defaults>',
-    autocapture: {
-        dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
-        url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
-        // url_ignorelist can be used on its own, or combined with url_allowlist to further filter which URLs are captured
-        url_ignorelist: ['posthog.com./docs/.*/secret-section/.*'], // strings or RegExps
-        element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
-        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
-        element_attribute_ignorelist:['data-attr-pii="email"'], // List of element attributes to ignore
-    },
-})
-```
+import AutocaptureConfig from './_snippets/multilanguage/autocapture-config.mdx'
+
+<AutocaptureConfig />
+
 Allow and ignorelists only filter autocapture events. They don't affect the data collected by session recordings or custom events.
 
 > **Note:** When using `element_allowlist` or `css_selector_allowlist`, PostHog considers the entire tree of elements from the root to the target element of the click event, not just the element that was directly clicked. If *any* element or selector is in the tree *and* allow list, the click is captured.
@@ -189,7 +178,7 @@ Autocaptured events include:
 
 Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo.
 
-You can see a full list in [PostHog](https://us.posthog.com/data-management/properties) or in [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/event-utils.ts), but the most important ones include:
+You can see a full list in [PostHog](https://us.posthog.com/data-management/properties) or in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts), but the most important ones include:
 
 | Name                        | Key                      | Example value                  |
 |-----------------------------|--------------------------|--------------------------------|
@@ -275,7 +264,7 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis or use the Activity page to view the copied content in context.
+We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis or use the [activity page](/docs/activity) to view the copied content in context.
 
 <ProductScreenshot
   imageLight={ImgClipboardAuocaptureLight} 

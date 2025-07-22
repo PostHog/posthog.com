@@ -68,7 +68,7 @@ Stay tuned for more exciting features that were built during the hackathon.
 
 Based on community feedback, we made it easier for feature flags to be integrated with your backend, in addition to our frontend JavaScript implementation.
 
-We've added feature flag support to our [Python Library](https://github.com/PostHog/posthog-python/pull/9), as well as [improved the `/decide` endpoint](https://github.com/PostHog/posthog/pull/1592) used by feature flags to make the API experience better.
+We've added feature flag support to our [Python Library](https://github.com/PostHog/posthog-python/pull/9), as well as [improved the `/flags` endpoint](https://github.com/PostHog/posthog/pull/1592) used by feature flags to make the API experience better.
 
 We have ourselves been using feature flags with the Python Library to slowly roll out some exciting new features. 
 
@@ -130,7 +130,7 @@ In addition to the main features mentioned above, we also merged over 100 PRs im
 - Add per entity filtering [\#1838](https://github.com/PostHog/posthog/pull/1838) ([EDsCODE](https://github.com/EDsCODE))
 - Disable web snippet on DEBUG instances [\#1837](https://github.com/PostHog/posthog/pull/1837) ([Twixes](https://github.com/Twixes))
 - Fix distinct id too long [\#1831](https://github.com/PostHog/posthog/pull/1831) ([timgl](https://github.com/timgl))
-- Get rid of caching in /decide endpoint [\#1829](https://github.com/PostHog/posthog/pull/1829) ([macobo](https://github.com/macobo))
+- Get rid of caching in /flags endpoint [\#1829](https://github.com/PostHog/posthog/pull/1829) ([macobo](https://github.com/macobo))
 - Improve event properties display [\#1825](https://github.com/PostHog/posthog/pull/1825) ([timgl](https://github.com/timgl))
 - Fix tsconfig.json lib property [\#1818](https://github.com/PostHog/posthog/pull/1818) ([mariusandra](https://github.com/mariusandra))
 - Update dockerfile for dev-ing [\#1817](https://github.com/PostHog/posthog/pull/1817) ([fuziontech](https://github.com/fuziontech))
@@ -213,7 +213,7 @@ In addition to the main features mentioned above, we also merged over 100 PRs im
 - Bump posthog-js 1.4.5 [\#1597](https://github.com/PostHog/posthog/pull/1597) ([timgl](https://github.com/timgl))
 - Add statsd to celery tasks and add task to monitor queue size [\#1595](https://github.com/PostHog/posthog/pull/1595) ([fuziontech](https://github.com/fuziontech))
 - Papercups identify user [\#1593](https://github.com/PostHog/posthog/pull/1593) ([timgl](https://github.com/timgl))
-- Make /decide endpoint more flexible \(pt. 2\) [\#1592](https://github.com/PostHog/posthog/pull/1592) ([yakkomajuri](https://github.com/yakkomajuri))
+- Make /flags endpoint more flexible \(pt. 2\) [\#1592](https://github.com/PostHog/posthog/pull/1592) ([yakkomajuri](https://github.com/yakkomajuri))
 - Revert "Add monitoring of celery queue size to statsd \(\#1589\)" [\#1591](https://github.com/PostHog/posthog/pull/1591) ([fuziontech](https://github.com/fuziontech))
 - Add monitoring of celery queue size to statsd [\#1589](https://github.com/PostHog/posthog/pull/1589) ([fuziontech](https://github.com/fuziontech))
 - Noop on celery worker if ee is not enabled [\#1587](https://github.com/PostHog/posthog/pull/1587) ([fuziontech](https://github.com/fuziontech))

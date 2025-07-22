@@ -58,7 +58,11 @@ export default function Product(props: ProductPageProps): React.ReactElement {
     const handleAddToCart = () => {
         setIsAdding(true)
         setTimeout(() => {
-            addToCart(variantForCart || product.variants[0], quantity)
+            const cartItem = variantForCart || product.variants[0]
+            if (product.kit) {
+                cartItem.kit = true
+            }
+            addToCart(cartItem, quantity)
             setCartIsOpen(true)
             setIsAdding(false)
         }, 500)
@@ -118,7 +122,7 @@ export default function Product(props: ProductPageProps): React.ReactElement {
                                 })
                                 .filter(Boolean)}
 
-                        <Quantity value={quantity} onChange={setQuantity} />
+                        <Quantity value={quantity} onChange={setQuantity} disabled={product.kit} />
 
                         <CallToAction
                             disabled={loading || outOfStock}

@@ -117,6 +117,14 @@ The default value is 1, meaning no sampling.
 <ph_client_api_host>/report/?token=<ph_project_api_key>&sample_rate=0.05
 ```
 
+#### How sampling works
+PostHog uses a deterministic stateless hashing-based mechanism for CSP report sampling:
+
+1. **Sampling key generation**: For each report, PostHog creates a sampling key by combining the reported URL (e.g: `report-uri` or `documentURL` depending on the report format) with the current timestamp truncated to the minute.
+2. **Hash-based decision**: This key is hashed and the result is compared against the `sample_rate` threshold to determine whether the report should be accepted or dropped.
+
+Because the sampling key includes the timestamp, the same URL that might be dropped in one minute could be accepted in the next minute, ensuring no URL is permanently excluded.
+
 ### Versioning
 You can add the `v` param to your report URL to specify the version of your CSP rules. This is useful if you want to track the effect of changes to your CSP rules over time.
 

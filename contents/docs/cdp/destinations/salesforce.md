@@ -18,7 +18,7 @@ You'll also need access to the relevant Salesforce account.
 ## Installation
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
-2. Click the [Destinations](https://us.posthog.com/pipeline/destinations) tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=salesforce) tab.
 3. Search for 'Salesforce' and click **+ Create**.
 4. Connect your Salesforce account at the configuration step.
 5. Press **Create & Enable** and watch your 'Objects' get populated in Salesforce!

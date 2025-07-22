@@ -3,7 +3,7 @@ title: Events
 sidebar: Handbook
 showTitle: true
 ---
-> If you’re planning an event and want support or promotion from the PostHog team, go to [Community events](#community-events)
+> If you want to build a local network of builders, go to [Community incubator](#community-incubator). If you’re planning an event and want support or promotion from the PostHog team, go to [Community events](#community-events)
 
 We’re [100% remote](handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life (and our best ideas come from [working together](handbook/company/offsites)).
 
@@ -15,7 +15,25 @@ To get us to perk up with curiosity, at least one of these desired event criteri
   - Experiences that allow engineers and founders to flex their product muscles
   - When [product engineers](blog/what-is-a-product-engineer) get together to identify problems and build solutions for users
 
-## Community events
+## Community incubator
+
+Our effort to activate and connect builders around the world by helping them incubate micro-communities that gather for weekly co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person. We believe this format can make a higher impact to communities of builders because of the velocity built over weeks of communal work and collaboration.
+
+### Geographies
+
+The [pilot program](/community-incubator) is starting in tech hubs in North America, UK, and EU outside major capitals (examples include Detroit, Krakow, Guadalajara, and Manchester). After the pilot group, we'll expand to more cities encompassed by other regions and continents. 
+
+### Co-working structure
+
+ The focus is on recurring weekly gatherings with small groups of 10-20 people. 
+ 
+ Gatherings can take place during weekday evenings or weekends and go for about 3 hours. A suggested format is to have at least 2-2.5 hours for working and 0.5-1 hours for welcomes and demos. Outside co-working, the group is encouraged to take part in an activity such as a walk, a bike ride, a hike, or a trip to the climbing gym. Preferably, this is outdoors.
+
+ ### Venues
+
+ The ideal venues for the community incubator are free-to-use spaces conducive to a group comfortably working (accessible, quiet, Wi-Fi-enabled.) If you have a venue and want to host a community of builders once per week, [reach out](mailto:daniel.z@posthog.com) directly. 
+
+ ## Community events
 
 People often underestimate the power and potential within their teams and ecosystems. Community events are in real life (IRL) manifestations of [our mission](handbook/why-does-posthog-exist#our-mission) organized by enthusiastic customers. They take place when someone has identified a gap or opportunity where an event helps people move [faster](newsletter/this-is-why-youre-not-shipping), smarter, and more together.
 
@@ -84,3 +102,7 @@ Community events are better when organizers share what happened and any follow-u
 [We value feedback](handbook/people/feedback) and expect the same from event organizers. A great event will speak for itself but sometimes an event will miss the mark, too. Either way, we want to hear how it went and value organizers who learn from the experience.
 
 In addition to what you learned and feedback from attendees, we will share any photos, videos, quotes, data points with our team.
+
+## Sponsoring external events
+
+We sometimes get asked by other companies or people if we are interested in sponsoring their events - these can range from small to extremely large. We don't do these at the moment because they are a poor return on investment, though we always encourage team members to speak at these if there is an opportunity to, and we can support you with budget, social posts, merch etc. Ask in the #team-brand-and-vibes channel. 

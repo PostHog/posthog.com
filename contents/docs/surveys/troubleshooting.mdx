@@ -95,10 +95,6 @@ The event must be captured on the user's session by the `posthog-js` SDK.
 
 Backend events aren't supported yet, upvote this [issue](https://github.com/PostHog/posthog/issues/25433) if that would be useful for you.
 
-### I set a survey to be activated based on an action. Why does it shows up to users who haven't performed that action?
-
-Check your `posthog-js` version.  If its lower than `v1.151.0`, please upgrade your installation of `posthog-js` to the latest to support action based surveys.
-
 ### Why am I getting a feature flags error on my survey?
 
 If you're seeing: `Update survey failed: Cohort with behavioral filters cannot be used in feature flags.` or similar, it's because surveys are powered by feature flags for person property targeting.

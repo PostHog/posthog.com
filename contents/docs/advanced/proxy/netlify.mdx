@@ -6,23 +6,29 @@ showTitle: true
 
 import RegionWarning from "../_snippets/region-warning.mdx"
 import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-<ProxyWarning />
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
 
-<RegionWarning />
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
 
-Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) which we can use as a reverse proxy from an `/ingest` route. In your `netlify.toml` file, add a redirect like this:
+</CalloutBox>
+
+Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redirects/#syntax-for-the-redirects-file) which we can use as a reverse proxy from a custom route. In your `netlify.toml` file, add a redirect like this:
 
 ```js
 [[redirects]]
-  from = "/ingest/static/*"
+  from = "/<ph_proxy_path>/static/*"
   to = "https://us-assets.i.posthog.com/static/:splat"
   host = "us-assets.i.posthog.com"
   status = 200
   force = true
 
 [[redirects]]
-  from = "/ingest/*"
+  from = "/<ph_proxy_path>/*"
   to = "https://us.i.posthog.com/:splat"
   host = "us.i.posthog.com"
   status = 200
@@ -32,20 +38,20 @@ Netlify supports [redirects and rewrites](https://docs.netlify.com/routing/redir
 > **Note:** If deploying SvelteKit on Netlify use `_redirects` file and place it in the project root, as redirects in `netlify.toml` configuration [are not supported](https://docs.netlify.com/frameworks/sveltekit/#limitations).
 
 ```js
-/ingest/static/*  https://us-assets.i.posthog.com/static/:splat  200!
-/ingest/*         https://us.i.posthog.com/:splat  200!
+/<ph_proxy_path>/static/*  https://us-assets.i.posthog.com/static/:splat  200!
+/<ph_proxy_path>/*         https://us.i.posthog.com/:splat  200!
 ```
 
 > **Note:** This proxy configuration works with custom domains but may not work correctly with the default `.netlify.app` domain. If you're experiencing issues with PostHog requests being blocked, ensure you're using a custom domain rather than the default Netlify domain.
 
-Once done, set the `/ingest` route of your domain as the API host in your PostHog initialization like this:
+Once done, set the `/<ph_proxy_path>` route of your domain as the API host in your PostHog initialization like this:
 
 ```js
 posthog.init('<ph_project_api_key>', {
-  api_host: 'https://www.your-domain.com/ingest',
+  api_host: 'https://www.your-domain.com/<ph_proxy_path>',
   ui_host: '<ph_app_host>',
   defaults: '<ph_posthog_js_defaults>',
 })
 ```
 
-Once updated, deploy your changes on Netlify and check that PostHog requests are going to `https://www.your-domain.com/ingest` by checking the network tab on your domain.
+Once updated, deploy your changes on Netlify and check that PostHog requests are going to `https://www.your-domain.com/<ph_proxy_path>` by checking the network tab on your domain.

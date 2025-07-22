@@ -89,7 +89,7 @@ The following settings should mainly be managed with [Instance settings](/docs/s
 | `EMAIL_HOST`               | Please see [configuring email] for details. | Please see [configuring email] for details. | ✅ Yes                         |
 | `EMAIL_PORT`               | Please see [configuring email] for details. | Please see [configuring email] for details. | ✅ Yes                         |
 | `EMAIL_USE_TLS`            | Please see [configuring email] for details. | Please see [configuring email] for details. | ✅ Yes                         |
-| `EMAIL_USE_TLS`            | Please see [configuring email] for details. | Please see [configuring email] for details. | ✅ Yes                         |
+| `EMAIL_USE_SSL`            | Please see [configuring email] for details. | Please see [configuring email] for details. | ✅ Yes                         |
 | `SLACK_APP_CLIENT_ID`      | Please see [configuring slack] for details. | Please see [configuring slack] for details. | ✅ Yes                         |
 | `SLACK_APP_CLIENT_SECRET`  | Please see [configuring slack] for details. | Please see [configuring slack] for details. | ✅ Yes                         |
 | `SLACK_APP_SIGNING_SECRET` | Please see [configuring slack] for details. | Please see [configuring slack] for details. | ✅ Yes                         |

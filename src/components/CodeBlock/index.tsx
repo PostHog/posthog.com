@@ -208,6 +208,10 @@ export const CodeBlock = ({
             .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
             .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
             .replace(/<ph_posthog_js_defaults>/g, '2025-05-24')
+            .replace(
+                /<ph_proxy_path>/g,
+                projectToken ? `relay-${removeQuotes(projectToken)?.slice(-4)}` : '<ph_proxy_path>'
+            )
     }
 
     const copyToClipboard = () => {

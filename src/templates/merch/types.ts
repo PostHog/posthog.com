@@ -92,6 +92,7 @@ export type ShopifyProductVariant = {
     shopifyId: string
     sku: string
     title: string
+    kit?: boolean
 }
 
 interface Image {
@@ -152,7 +153,6 @@ export interface StorefrontProductVariantNode {
     }
     quantityAvailable: number
     selectedOptions: VariantSelectedOption[]
-    brilliantQuantity: number
 }
 
 export type StorefrontProductVariant = StorefrontProductVariantNode

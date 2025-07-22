@@ -13,7 +13,7 @@ Ops provide all the tools, literally and metaphorically, needed for our team to 
 - A small ops team covering a wide range of disciplines that can react to any incoming items to allow the rest of the business to focus on what they do best - building products.
 - Nailing the basics of working at a start-up for our team members. Making sure things like payroll, onboarding, offboarding etc. all work smoothly and are on autopilot as much as possible.
 - Thinking slightly further ahead than the “here and now" to predict when we may need to make changes like hiring new team members, changing our spending patterns to manage cash, managing our comp structure, implementing a new tool etc. 
-- Setting a very high bar for bringing people on board. We are always looking for the best people in their field, or people on their way to becoming exceptional at their jobs. This is so important to us, it's enshrined in our company [values](/values).
+- Setting a very high bar for bringing people on board. We are always looking for the best people in their field, or people on their way to becoming exceptional at their jobs. This is so important to us, it's enshrined in our company [values](/handbook/values).
 - Manage compliance projects like SOC 2 or HIPAA to help us land larger customers. These projects require input from some small team members, but Ops will make sure everybody knows who and what is needed.
 - Partnering with the Exec team to work on people initiatives to build a diverse and inclusive culture at PostHog. We want to put a strong sense of belonging at the heart of everything we do. 
 - Running any disciplinary or grievance [process](/handbook/people/grievances) that may occasionally arise. 

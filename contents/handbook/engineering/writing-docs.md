@@ -43,13 +43,13 @@ Nearly all our docs live on `posthog.com/docs`. You can find the repo to add and
 
 Most docs should go somewhere in your product's section. Product docs usually have sections on installation, basic set up, key features, troubleshooting, common questions, and more. Docs for platform features like [SDKs](/docs/libraries), [data types](/docs/new-to-posthog/understand-posthog), and [Max AI](/docs/max-ai) live in the [Product OS](/docs) section.
 
-> **Don't know where a doc or feature should go?** Ask in [`#team-content`](https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6).
+> **Don't know where a doc or feature should go?** Ask in <PrivateLink url="https://app.slack.com/client/TSS5W8YQZ/C01FHN8DNN6">`#team-content`</PrivateLink>.
 
 ## What about internal docs?
 
 If you can make something public, you should. Being open source is a core value of PostHog. We try to avoid "internal" docs as much as possible. 
 
-If it deals with private information, like security, customer data, or competitor analysis, use one of our internal repos like [product-internal](https://github.com/PostHog/product-internal). 
+If it deals with private information, like security, customer data, or competitor analysis, use one of our internal repos like <PrivateLink url="https://github.com/PostHog/product-internal">`product-internal`</PrivateLink>. 
 
 You can learn more about this in the [communications handbook entry](/handbook/company/communication).
 

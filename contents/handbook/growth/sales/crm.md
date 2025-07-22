@@ -174,13 +174,13 @@ Opportunities track potential deals in Salesforce. Managing opportunities effect
 
 ### Opportunity Record Types
 
-New Business: Select this type when engaging with a new customer for the first time or when selling a product/service to an existing customer for the first time.
+New Revenue: Select this type when engaging with a customer who has never paid us before. This includes new customers and startup customers transitioning to a paid plan for the first time.
 
-Existing Business (Expansion Opportunity): Choose this type when selling additional products or services to a customer with whom we already have a business relationship.
+New Revenue – Existing Customer: Choose this type for additional credits to a customer who is already paying us. This includes upsells, cross sells, or expansion within the same account.
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
-Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' opportunity is Closed (more on these later).
+Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' type opportunity is Closed (more on these later).
 
 ### Opportunity Types
 Annual Plan: Select this type when the customer agrees to pay for a year-long+ subscription to our services.

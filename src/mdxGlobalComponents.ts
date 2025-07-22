@@ -13,6 +13,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import Link from './components/Link'
 import { PrivateLink } from './components/PrivateLink'
+import ImageSlider from './components/ImageSlider'
 import { ProductScreenshot } from './components/ProductScreenshot'
 import { ProductVideo } from './components/ProductVideo'
 import { StarRepoButton } from './components/StarRepoButton'
@@ -29,6 +30,7 @@ export const shortcodes = {
     Emoji,
     FeatureAvailability,
     FormulaScreenshot,
+    ImageSlider,
     GDPRForm,
     OverflowXSection,
     Quote,

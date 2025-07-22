@@ -4,6 +4,9 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/integrate/frameworks/svelte.svg
 ---
 
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 PostHog makes it easy to get data about traffic and usage of your [Svelte](https://svelte.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
 This guide walks you through integrating PostHog into your SvelteKit app using the [JavaScript Web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs.
@@ -19,6 +22,10 @@ import SvelteInstallClient from "../integrate/_snippets/install-svelte-client.md
 <SvelteInstallClient />
 
 > ❗️ If you intend on using session replays with a server-side rendered Svelte app ensure that your [asset URLs are configured to be relative](/docs/session-replay/troubleshooting#ensure-assets-are-imported-from-the-base-URL-in-Svelte).
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
 
 ## Server-side setup
 

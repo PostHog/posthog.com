@@ -14,7 +14,7 @@ Health scores are a great way to assess whether your customer is at risk of chur
 
 Health score metrics are divided into two categories: Customer Engagement (20%) and Product Engagement (80%).
 
-[**Customer engagement**](/contents/handbook/cs-and-onboarding/health-tracking#customer-engagement)
+[**Customer engagement**](/handbook/cs-and-onboarding/health-tracking#customer-engagement)
 
 | Score Name                | Measuring                                        | Weighting    | 
 |---------------------------|--------------------------------------------------|--------------|
@@ -22,13 +22,13 @@ Health score metrics are divided into two categories: Customer Engagement (20%) 
 | Product experience        | Are there negative experiences with the product? | 5%           | 
 | Company engagement        | Are they engaging with PostHog humans?           | 5%           | 
 
-[**Product engagement**](/contents/handbook/cs-and-onboarding/health-tracking#product-engagement)
+[**Product engagement**](/handbook/cs-and-onboarding/health-tracking#product-engagement)
 
 | Score Name                  | Measuring                                                                            | Weighting    | 
 |-----------------------------|--------------------------------------------------------------------------------------|--------------|
 | Product Analytics           | Event volume and users analyzing insights                                            | 33%          | 
 | Session replay              | Replay volume and users analyzing replays                                            | 20%          | 
-| Feature flags & Experiments | Decide requests, users creating feature flags, users creating or viewing experiments | 17%          | 
+| Feature flags & Experiments | Flag requests, users creating feature flags, users creating or viewing experiments | 17%          | 
 | Surveys & Data warehouse    | Users creating and viewing surveys, volume of rows synced                            | 5%           | 
 
 ### Customer engagement

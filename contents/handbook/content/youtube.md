@@ -33,3 +33,7 @@ We also were starting to run out of obvious tutorial and SEO blog content to tur
 YouTube comments are posted to [Slack](https://posthog.slack.com/archives/C083NMDUVPW) using [Make](https://www.make.com/). It's a tool similar to Zapier, except Zapier doesn't support YouTube comments.
 
 For access to Make, ask anyone in the [Content team](https://posthog.com/teams/content). They're all admins and so they can add you.
+
+## Thumbnails
+
+Thumbnails can be accessed in <PrivateLink url="https://www.figma.com/design/CLj2U34xpNiHuZRo73GJPm/posthog.com?node-id=16285-119901&t=BRg6Nu5JyIvdBxL1-0">Figma</PrivateLink>

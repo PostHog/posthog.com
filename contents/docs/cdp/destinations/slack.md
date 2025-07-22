@@ -22,7 +22,7 @@ You'll also need access to the relevant Slack account.
 
 1. In PostHog, click the [Data pipeline tab](https://us.posthog.com/pipeline/overview) in the left sidebar.
 
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=slack) tab.
 
 3. Search for **Slack** and click **+ Create**.
 <img alt="Creating a Slack destination" src="https://res.cloudinary.com/dmukukwp6/image/upload/slack_create_8b55d6d50f.png"/>

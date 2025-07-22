@@ -32,7 +32,7 @@ import HowToCaptureIdentifiedEventsWeb from '../../product-analytics/_snippets/h
 
 The most useful of these methods is `identify`. We strongly recommend reading our doc on [identifying users](/docs/product-analytics/identify) to better understand how to correctly use it.
 
-import JSIdentify from './\_snippets/identify.mdx'
+import JSIdentify from './_snippets/identify.mdx'
 
 <JSIdentify />
 
@@ -384,7 +384,7 @@ posthog.captureException(error, additionalProperties)
 
 Since version 1.187.0, you can provide a `before_send` function when initializing the SDK to amend, filter, sample, or reject events before they are sent to PostHog.
 
-> **🚨 Warning:** Amending and sampling events is advanced functionality and should be done with care. It can cause unexpected results in parts of PostHog.
+> **🚨 Warning:** Amending and sampling events is advanced functionality that requires careful implementation. Core PostHog features may require 100% of unmodified events to function properly. We recommend only modifying or sampling your own custom events if possible, and preserving all PostHog internal events in their original form.
 
 ### Redacting information in events
 
@@ -405,10 +405,30 @@ posthog.init('<ph_project_api_key>', {
             return value.replace(/project\/\d+/, 'project/1234567');
         }
 
+        // NB these functions are examples and you should implement something specific to your site
+        // redacting information can impact features that rely on it, e.g. heatmaps are keyed by URL
+        function redactArray(value: any[]) {
+            return value.map((v) => {
+                if (typeof v === 'string') {
+                    return redactUrl(v)
+                } else if (Array.isArray(v)) {
+                    return redactArray(v)
+                } else if (typeof v === 'object' && v) {
+                    return redactObject(v)
+                } else {
+                    return v
+                }
+            })
+        }
+
+        // NB these functions are examples and you should implement something specific to your site
+        // redacting information can impact features that rely on it, e.g. heatmaps are keyed by URL
         function redactObject(objectToRedact: Record<string, any>): Record<string, any> {
             return Object.entries(objectToRedact).reduce((acc, [key, value]) => {
                 if ((key.includes('url') || key.includes('href')) && typeof value === 'string') {
                     acc[key] = redactUrl(value)
+                } else if (Array.isArray(value)) {
+                    acc[key] = redactArray(value)
                 } else if (typeof value === 'object' && value) {
                     acc[key] = redactObject(value)
                 } else {

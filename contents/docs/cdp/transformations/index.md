@@ -18,6 +18,8 @@ PostHog enables you to transform your events in realtime using a variety of pre-
 
 Need more flexibility? Our [custom transformations](/docs/cdp/transformations/customizing-transformations) enable you to write your own Hog code to transform events exactly how you want. You can modify, enrich, or filter your events using our powerful Hog programming language.
 
+**Note**: Transformations don't apply to exceptions we capture as part of the error tracking product. If you need to run transformation against your exception data, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+
 ## Filtering
 
 Filters enable you to target your transformations, affecting only the kinds of events you chose. Filter by event type, properties, or any SQL statement you can come up with.

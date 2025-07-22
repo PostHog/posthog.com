@@ -9,11 +9,11 @@ tags:
 
 Errors are an inevitable part of software development, but so is catching and fixing them. You can use error tracking in PostHog to help you do this.
 
-To help you set this up, this tutorial details how to create a basic Next.js app, set up PostHog on both the front and backend, and then automatically capture errors that happen in both locations.  
+To help you set this up, this tutorial details how to create a basic Next.js app, set up PostHog on both the front and backend, and then automatically capture errors that happen in both locations.
 
 ## 1. Creating a Next.js app
 
-Start by ensuring [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer) then run the following command. Say **no** to TypeScript, **yes** to app router, and the defaults for other options.
+Start by ensuring [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer) then run the following command. Say **no** to TypeScript, **yes** to app router, and the defaults for other options.
 
 ```bash
 npx create-next-app@latest next-errors
@@ -66,7 +66,7 @@ export async function GET() {
 }
 ```
 
-Once saved, run `npm run dev` to see your new app in action. Click either of the buttons to see the errors they trigger.
+Once saved, run `npm run dev` to see your new app in action. Click either of the buttons to see the errors they trigger.
 
 ![Errors in our Next.js app](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_14_at_09_37_44_e92f247dbb.png)
 
@@ -80,7 +80,7 @@ npm i posthog-js posthog-node
 
 ### Frontend setup
 
-We’ll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`. 
+We'll set up PostHog in the frontend first. This starts by creating a `providers.js` file in the `app` directory. In it, we initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project) and pass it to a `PostHogProvider`.
 
 ```js
 // app/providers.js
@@ -126,7 +126,7 @@ export default function RootLayout({ children }) {
 
 ```
 
-PostHog then begins to autocapture events and frontend errors. If you go back to your app and click the **Click me for an error** button, you’ll see an `$exception` event captured into PostHog.
+PostHog then begins to autocapture events and frontend errors. If you go back to your app and click the **Click me for an error** button, you'll see an `$exception` event captured into PostHog.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_14_at_10_28_09_2x_d94a11ac4d.png"
@@ -148,7 +148,7 @@ let posthogInstance = null
 export function getPostHogServer() {
   if (!posthogInstance) {
     posthogInstance = new PostHog(
-      '<ph_project_api_key>', 
+      '<ph_project_api_key>',
       {
         host: '<ph_client_api_host>',
         flushAt: 1,
@@ -160,11 +160,11 @@ export function getPostHogServer() {
 }
 ```
 
-We can then import this singleton wherever we need it in the backend. Unfortunately, this doesn’t autocapture errors by default, so we have some more work to do.
+We can then import this singleton wherever we need it in the backend. Unfortunately, this doesn't autocapture errors by default, so we have some more work to do.
 
 ## 3. Capturing errors
 
-With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException` or capturing an `$exception` event. 
+With both front and backend initializations set up, capturing errors with PostHog is as simple as calling `captureException` or capturing an `$exception` event.
 
 <MultiLanguage>
 
@@ -178,7 +178,7 @@ posthog.captureException(e, 'user_distinct_id', additionalProperties)
 
 </MultiLanguage>
 
-Doing this for every possible error is a hassle though and we'll inevitably miss errors we’re not expecting. Our frontend implementation automatically captures errors thrown and caught by `onError` and `onUnhandledRejection` listeners, but this doesn’t cover everything.
+Doing this for every possible error is a hassle though and we'll inevitably miss errors we're not expecting. Our frontend implementation automatically captures errors thrown and caught by `onError` and `onUnhandledRejection` listeners, but this doesn't cover everything.
 
 To capture more, we can set up some more boundaries and instrumentation.
 
@@ -220,11 +220,11 @@ import { useState, useEffect } from 'react'
 // ... rest of your code
 
   const [shouldError, setShouldError] = useState(false)
-  
+
   useEffect(() => {
     setShouldError(true)
   }, [])
-  
+
   if (shouldError) {
     throw new Error('This is a test error')
   }
@@ -236,7 +236,7 @@ You can also create a similar `global-error.jsx` file to capture errors affectin
 
 ### How to automatically capture backend errors
 
-Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can’t rely on exception autocapture. 
+Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can't rely on exception autocapture.
 
 Instead, we create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we to both check the request is running in the `nodejs` runtime to ensure PostHog works and get the  `distinct_id` from the cookie to connect the error to a specific user.
 
@@ -257,7 +257,7 @@ export const onRequestError = async (err, request, context) => {
     if (request.headers.cookie) {
       const cookieString = request.headers.cookie
       const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
-      
+
       if (postHogCookieMatch && postHogCookieMatch[1]) {
         try {
           const decodedCookie = decodeURIComponent(postHogCookieMatch[1])
@@ -274,7 +274,7 @@ export const onRequestError = async (err, request, context) => {
 }
 ```
 
-Now, when you click the **Click me for a backend API error** button, it will trigger an error which will be automatically captured by PostHog. 
+Now, when you click the **Click me for a backend API error** button, it will trigger an error which will be automatically captured by PostHog.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_14_at_15_30_05_2x_e99f29a546.png"
@@ -285,7 +285,7 @@ Now, when you click the **Click me for a backend API error** button, it will tri
 
 ## 4. Monitoring errors in PostHog
 
-Once you’ve set up error capture in your app, you can head to the [error tracking tab](https://us.posthog.com/error_tracking) in PostHog to review the issues popping up along with their frequency.
+Once you've set up error capture in your app, you can head to the [error tracking tab](https://us.posthog.com/error_tracking) in PostHog to review the issues popping up along with their frequency.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_14_at_15_39_23_2x_04c490c326.png"
@@ -295,3 +295,9 @@ Once you’ve set up error capture in your app, you can head to the [error track
 />
 
 You can click into any of these errors to get more details on them, including a stack trace as well as archive, resolve, or suppress them. On top of this, you can analyze `$exception` events like you would any event in PostHog, including setting up [trends](/docs/product-analytics/trends/overview) for them and querying them with [SQL](/docs/product-analytics/sql).
+
+## 5. Uploading source maps
+
+import NextJsUploadSourceMaps from "../docs/error-tracking/_snippets/nextjs-upload-source-maps.mdx"
+
+<NextJsUploadSourceMaps />

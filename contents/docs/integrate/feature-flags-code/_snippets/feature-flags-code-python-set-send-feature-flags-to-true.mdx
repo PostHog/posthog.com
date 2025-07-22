@@ -4,7 +4,7 @@ Note that by doing this, PostHog will make an additional request to fetch featur
 
 ```python
 posthog.capture(
-    'distinct_id_of_your_user',
+    distinct_id="distinct_id_of_the_user"
     'event_name',
     send_feature_flags=True
 )

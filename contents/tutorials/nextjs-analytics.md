@@ -615,7 +615,7 @@ export async function getServerSideProps(ctx) {
 
 Now, when you go to reload your post page (while signed in), the CTA loads right away.
 
-You now have a basic Next.js app with user authentication and many of the features of PostHog set up. You’re ready to customize your app or add more of PostHog’s features like [group analytics](/manual/group-analytics) or [experiments](/manual/experimentation). 
+You now have a basic Next.js app with user authentication and many of the features of PostHog set up. You’re ready to customize your app or add more of PostHog’s features like [group analytics](/docs/product-analytics/group-analytics) or [experiments](/docs/experiments).
 
 ## Further reading
 

@@ -222,7 +222,7 @@ Our basic set up is now complete. Build and run your app to see it in action.
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, install [PostHog’s Flutter SDK](/libraries/flutter) by adding `posthog_flutter` to your `pubspec.yaml`:
+To start, install [PostHog’s Flutter SDK](/docs/libraries/flutter) by adding `posthog_flutter` to your `pubspec.yaml`:
 
 ```yaml file=pubspec.yaml
 # rest of your code

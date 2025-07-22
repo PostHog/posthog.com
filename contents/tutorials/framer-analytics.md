@@ -46,7 +46,7 @@ Once you publish and go to your site, PostHog begins automatically capturing eve
 
 ### Enabling session replays
 
-To enable session replays, go to [your project settings](https://app.posthog.com/project/settings#recordings), scroll down to **Recordings**, and enable **Record user sessions**. PostHog then starts to record sessions of your users, so you can see all the details of how they use your site.
+To enable session replays, go to [your project settings](https://us.posthog.com/replay/settings), scroll down to **Recordings**, and enable **Record user sessions**. PostHog then starts to record sessions of your users, so you can see all the details of how they use your site.
 
 ## Adding a custom event
 

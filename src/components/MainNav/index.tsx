@@ -797,8 +797,8 @@ export const Main = () => {
 }
 
 export const Mobile = () => {
-    const { pathname } = useLocation()
-    if (pathname === '/newsletter-fbc') {
+    const { pathname, state } = useLocation()
+    if (pathname === '/newsletter-fbc' || (state as { isComingFromAd?: boolean })?.isComingFromAd) {
         return <></>
     }
 

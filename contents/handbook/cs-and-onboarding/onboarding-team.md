@@ -13,7 +13,7 @@ showTitle: true
 
 The north star metric for the Onboarding team is 3-month logo retention from the first $500+ forecasted bill, which can be tracked here ([link](https://us.posthog.com/project/2/dashboard/363452)).
 
-Secondarily, we also care about net dollar retention for this segment.
+Secondly, we also care about net dollar retention for this segment.
 
 ### Which customers get onboarding?
 
@@ -52,17 +52,17 @@ The response rate for billing/cost-reduction initial messaging is typically very
 The main tools for this team are:
 
 - Vitally
-  - `Onboarding Lead` segment
+  - `Onboarding Lead` and `Onboarding Engaged` segments
   - Segments `Paid one nonzero bill`, `Paid two nonzero bills`, and `Paid three nonzero bills` are set as respective bills are paid by [this](https://posthog.vitally-eu.io/settings/playbooks/f6f3c9e0-2dc5-4560-8653-63d143816293) playbook, so we can track this data elsewhere (eg in PostHog via DWH sync, though this hasn't run as a backfill/won't be up to date as of Q1 2025)
   - Onboarding Specialist role is set by region [here](https://posthog.vitally-eu.io/settings/playbooks/50120bc6-98ae-4fc2-af38-7374ba424474)
 - Metabase [Customer Usage Dash (US/EU)](https://metabase.prod-us.posthog.dev/dashboard/139-customer-usage-breakdown?organization_id=&project_id=&lookback_days=30)
-- Stripe (make sure you have “Support Associate” permission level)
+- Billing Admin and Stripe (make sure you have “Support Associate” permission level)
 - Calendly and BuildBetter (read more in [How we work](https://posthog.com/handbook/growth/sales/how-we-work#tools-we-use))
 - QuoteHog (useful for predicting the usage)
 
 ### Onboarding Lifecycle
 
-Since our role is focused on proactively providing users with value and setting them up for success, we’ve found it’s best to contact them **at least** 7 days before their bill renews. This gives them enough time to see our email, schedule a call, and implement potential improvements in their setup.
+Since our role is focused on proactively providing users with value and setting them up for success, we’ve found it’s best to contact them ~14 days before their bill renews. This gives them enough time to see our email, schedule a call, and implement potential improvements in their setup.
 
 Our email should already include some actionable advice, so make sure you’re spending enough time on account analysis. Use your sixth sense here—if you see a large team with non-technical members who might benefit from PostHog training, offer it if you think it’s appropriate!
 
@@ -91,11 +91,21 @@ Remember to add a short summary from meetings in a Note, and if you need to foll
 **3. Kanban view** ([link](https://posthog.vitally-eu.io/hubs/fcbd959f-4b0e-4786-9c37-8a1d9fc4f634/5dca462e-a6d2-4710-a8f8-a2f4b492569c ))
 
 A supplementary view that’s great for getting a general overview of progress.
-   
+
+### Alerts and revenue tracking
+
+Apart from the standard prioritization, we occasionally shift our attention to help customers who may need more urgent assistance. For these, we have two types of alerts (tasks) in Vitally - they're currently assigned to Magda.
+- Failed payments alert  - This is more of a safety net, as users are informed when it happens. It's a good moment to reach out and offer help in figuring out their volume/billing.
+- Upcoming large invoice alert - It lets us prioritize the customer to touch base and make sure the bill doesn't come as a surprise.
+
+To help our Revenue team get the forecasting right, we have now Payment Risk Assessment field in the Vitally dashboard, where we can manually mark when we see that the customer is unlikely to pay their invoice.
+
 ### Account analysis
 
 - Take a look at the [Metabase primer](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) and follow the tips included there.
-- Check and get familiar with the [Account health check](https://posthog.com/handbook/growth/sales/health-checks) page.
+- Check and get familiar with the [Account health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking) page.
+- Use our docs, and link to relevant information.
+- Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
 
 ### How to deal with complex technical issues
 
@@ -106,17 +116,20 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 - Consider sharing a Loom recording in your reply to the user – It might be more efficient than a written instruction.
 - If the issue requires in-depth troubleshooting, you can direct the user to create a ticket from the app, or you can do so on their behalf. Just remember to let them know before you do, so they’re not surprised when they see it in the UI!
 - Before escalating the issue to Support, gather as much information and context as possible so your handover is informative and thorough. You can also share a recording of the call with the team, highlighting the relevant timestamp.
+- If a support issue lands in your inbox, forwarding it to supportreply@posthog.com should do the trick. Make sure to double-check in Zendesk that the ticket is not marked as Solved.
 
 **Teach how to fish**
 
 Ideally, after the meeting with the user, they should know how to seek further help. That includes using Max, consulting the docs, and reaching out to our Support team.
 
-### How to deepen product knowledge
+### How to deepen your knowledge
 
+- Go through Sales docs, especially [Contract Rules](https://posthog.com/handbook/growth/sales/contract-rules), [Creating Contracts](https://posthog.com/handbook/growth/sales/contracts), and others from the SalesOps section. There will be some related conversations that you'll need to handle yourself, so come prepared.
 - Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
 - Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) BuildBetter folder.
-- Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh).
-- Go through the [PostHog curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum). 
+- Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh) and [Analytics Exercise](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding-exercise).
+- Go through the [PostHog curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum).
+- Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend Ticket Deep Dive sessions that are scheduled periodically. 
 
 ### Handover to the Sales team
 
@@ -124,7 +137,7 @@ If you see that a customer is spending more than ~$1,667 monthly, conduct a disc
 
 We typically hand the account over to Sales when a customer is interested in the annual plan or requires additional contractual or legal support.
 
-If you come across an account with growth potential or stable high-level spend that might benefit from an annual plan or general sales engagement, but has been unresponsive after this option was suggested, you can add them to the “Create AE lead” segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic. Historically, AEs have been successful in reaching out and securing long-term commitments.
+If you come across an account with growth potential or stable high-level spend (especially if that high spend has occurred over the past three months and there are no pending issues to resolve), that might benefit from an annual plan or general sales engagement but has been unresponsive after this option was suggested, you can add them to the “Create AE lead” segment in Vitally. Within a few minutes, this will automatically create a Salesforce lead and assign it using round-robin logic. Historically, AEs have been successful in reaching out and securing long-term commitments.
 
 If the account has engaged with the Sales team at some point and it's unclear where the conversation stands, ping your fellow AE to make sure you’re not overlapping efforts. If it’s clear there’s a duplication issue and we shouldn’t be involved, ping Mine to double-check the logic.
 

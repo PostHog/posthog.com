@@ -15,7 +15,7 @@ A/B testing enables you to experiment with how changes to your app affect metric
 
 ## Creating a basic Flask app
 
-To demonstrate how to implement A/B testing, we'll create an app using [Flask](https://flask.palletsprojects.com/), a Python web framework. 
+To demonstrate how to implement A/B testing, we'll create an app using [Flask](https://flask.palletsprojects.com/), a Python web framework.
 
 To start, create a folder for our app named `ab-test-demo` and a file named `hello.py` in that folder.
 
@@ -92,7 +92,7 @@ from posthog import Posthog
 import uuid
 
 posthog = Posthog(
-  '<ph_project_api_key>', 
+  '<ph_project_api_key>',
   host='<ph_client_api_host>'
 )
 
@@ -127,9 +127,9 @@ def blog(slug):
     return response
   elif request.method == "POST":
     posthog.capture(
-      user_id, 
-      "liked_post", 
-      {
+      "liked_post",
+      distinct_id=user_id,
+      properties={
         'slug': slug
       }
     )
@@ -142,20 +142,20 @@ Rerun your app with `flask --app hello run`, go to a blog route like `http://127
 
 ## Creating an A/B test
 
-We are now ready to create and set up our A/B test. To do this, go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment." 
+We are now ready to create and set up our A/B test. To do this, go to the [experiments tab](https://app.posthog.com/experiments) in PostHog and click "New experiment."
 
 Enter a name, feature flag key (we use `blog-like`), edit any more details, and click **Save as draft**. Set the primary metric to a trend of the "liked post" event and then click **Launch**.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_39_30_2x_a436c75796.png" 
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_39_11_2x_c1a2392612.png" 
-  alt="Experiment setup in PostHog" 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_39_30_2x_a436c75796.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_16_at_09_39_11_2x_c1a2392612.png"
+  alt="Experiment setup in PostHog"
   classes="rounded"
 />
 
 ## Implementing our A/B test
 
-With the A/B test created, we can now implement it in our Flask app. 
+With the A/B test created, we can now implement it in our Flask app.
 
 Back in our blog route, add a check with PostHog of the `blog-like` flag using the `user_id`. If it returns `test`, we return a new button component. If not, return the same component as before.
 
@@ -198,22 +198,22 @@ def blog(slug):
 # ... elif
 ```
 
-Restart your app and check a few pages for the new component. You can also add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag to show a value to users with specific properties (like `intial_slug` if you set that up). 
+Restart your app and check a few pages for the new component. You can also add an [optional override](/docs/feature-flags/testing#method-1-assign-a-user-a-specific-flag-value) to your feature flag to show a value to users with specific properties (like `intial_slug` if you set that up).
 
 ![A/B test in app](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/python-ab-testing/test.png)
 
-Lastly, we must capture the experiment details in our event. Do this by adding `$feature/blog-like` with the variant key to the `liked post` event’s properties. This enables us to track and analyze our new button’s impact on our goal metric. 
+Lastly, we must capture the experiment details in our event. Do this by adding `$feature/blog-like` with the variant key to the `liked post` event’s properties. This enables us to track and analyze our new button’s impact on our goal metric.
 
 ```python
 # ... posthog, flask, hello_world(), blog GET
 elif request.method == "POST":
     posthog.capture(
-      user_id, 
-      "liked_post", 
-      {
+      "liked_post",
+      distinct_id=user_id,
+      properties={
         'slug': slug,
         f'$feature/{flag_key}': flag
-        
+
       }
     )
     return f"<p>Thanks for liking {slug}</p>"

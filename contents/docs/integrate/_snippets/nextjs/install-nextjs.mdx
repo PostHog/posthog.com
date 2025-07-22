@@ -1,12 +1,8 @@
 Install `posthog-js` using your package manager:
 
-```shell
-yarn add posthog-js
-# or
-npm install --save posthog-js
-# or
-pnpm add posthog-js
-```
+import InstallWebPackageManagers from "../install-web-package-managers.mdx"
+
+<InstallWebPackageManagers />
 
 Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key in your [project settings](https://app.posthog.com/project/settings).
 
@@ -17,25 +13,57 @@ NEXT_PUBLIC_POSTHOG_HOST=<ph_client_api_host>
 
 These values need to start with `NEXT_PUBLIC_` to be accessible on the client-side.
 
-## Router-specific instructions
+## Integration
 
 import Tab from "components/Tab"
 import AppRouterSetup from "./app-router-setup.mdx"
 import PagesRouterSetup from "./pages-router-setup.mdx"
 
+Next.js 15.3+ provides the [`instrumentation-client.ts|js`](https://nextjs.org/docs/app/api-reference/file-conventions/instrumentation-client) file for a quick, lightweight setup. Add it to the root of your Next.js app (for both app and pages router) and initialize PostHog in it like this:
+
+<MultiLanguage>
+
+```js file=instrumentation-client.js
+import posthog from 'posthog-js'
+
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+  defaults: '<ph_posthog_js_defaults>'
+});
+```
+
+```ts file=instrumentation-client.ts
+import posthog from 'posthog-js'
+
+posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
+  api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+  defaults: '<ph_posthog_js_defaults>'
+});
+```
+
+</MultiLanguage>
+
+<details>
+<summary>Using Next.js 15.2 or older?</summary>
+
+Older versions of Next.js don't support the `instrumentation-client.ts|js` file. You can use the following setup instead:
+
 <Tab.Group tabs={[
-    'App router', 
-    'Pages router']}>
-    <Tab.List>
-        <Tab>App router</Tab>
-        <Tab>Pages router</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-            <AppRouterSetup />
-        </Tab.Panel>
-        <Tab.Panel>
-            <PagesRouterSetup />
-        </Tab.Panel>
-    </Tab.Panels>
+  'App router', 
+  'Pages router'
+]}>
+  <Tab.List>
+    <Tab>App router</Tab>
+    <Tab>Pages router</Tab>
+  </Tab.List>
+  <Tab.Panels>
+      <Tab.Panel>
+        <AppRouterSetup />
+      </Tab.Panel>
+      <Tab.Panel>
+        <PagesRouterSetup />
+      </Tab.Panel>
+  </Tab.Panels>
 </Tab.Group>
+
+</details>

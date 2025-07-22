@@ -358,8 +358,8 @@ const FooterMenuItem = ({ title, url, className = '', marginBottom = '1' }) => {
 }
 
 export function Footer(): JSX.Element {
-    const { pathname } = useLocation()
-    if (pathname === '/newsletter-fbc') {
+    const { pathname, state } = useLocation()
+    if (pathname === '/newsletter-fbc' || (state as { isComingFromAd?: boolean })?.isComingFromAd) {
         return <></>
     }
 
@@ -458,7 +458,7 @@ export function Footer(): JSX.Element {
                         </li>
                         <li>
                             <Link
-                                to="/handbook/company/security#soc-2"
+                                to="/docs/privacy/soc2"
                                 className="font-bold text-sm text-primary/70 hover:text-red dark:text-primary-dark/75 dark:hover:text-yellow"
                             >
                                 SOC 2

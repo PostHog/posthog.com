@@ -598,7 +598,7 @@ export const ProductFeatureFlags = () => {
                         />
                         <TutorialCard
                             title="How to evaluate and update feature flags with the PostHog API"
-                            description='Learn how to use the <code class="text-[13px]">decide</code> endpoint to evaluate your feature flags (both boolean and multivariate), get data about them, and update them.'
+                            description='Learn how to use the <code class="text-[13px]">flags</code> endpoint to evaluate your feature flags (both boolean and multivariate), get data about them, and update them.'
                             url="/tutorials/api-feature-flags"
                         />
                         <TutorialCard

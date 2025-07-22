@@ -12,7 +12,7 @@ The Notification Bar app is a site app which enables you to display a customised
 
 Site apps are a new, big, and currently beta feature which enable you to inject code from PostHog into your website via `posthog-js`.
 
-### Requirements
+## Requirements
 
 The Notification Bar requires either PostHog Cloud, or a self-hosted PostHog instance running [version 1.41.0](https://posthog.com/blog/the-posthog-array-1-41-0#one-more-thing-site-apps) or later.
 
