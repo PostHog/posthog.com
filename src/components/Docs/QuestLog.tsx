@@ -13,7 +13,9 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const [animationKey, setAnimationKey] = useState(0)
     const [hasInitialAnimated, setHasInitialAnimated] = useState(false)
+    const [dropdownOpen, setDropdownOpen] = useState(false)
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
+    const dropdownRef = useRef<HTMLDivElement>(null)
     const isFirstRender = useRef(true)
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
@@ -66,6 +68,23 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => clearTimeout(timer)
     }, [])
 
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+                setDropdownOpen(false)
+            }
+        }
+
+        if (dropdownOpen) {
+            document.addEventListener('mousedown', handleClickOutside)
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside)
+        }
+    }, [dropdownOpen])
+
     const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialAnimated
         ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
@@ -79,15 +98,72 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
             0% { background-position: 0 0; }
             100% { background-position: -528px 0; }
           }
+          
+          /* Container query setup */
+          .quest-log-container {
+            container-type: inline-size;
+          }
+          
+          /* Default mobile-first styles */
+          .quest-container {
+            flex-direction: column;
+          }
+          
+          .quest-list {
+            width: 100%;
+          }
+          
+          .quest-details {
+            width: 100%;
+          }
+          
+          .quest-list-desktop {
+            display: none;
+          }
+          
+          .quest-dropdown-mobile {
+            display: block;
+          }
+          
+          /* Desktop styles when container is wide enough */
+          @container (min-width: 601px) {
+            .quest-container {
+              flex-direction: row;
+            }
+            
+            .quest-list {
+              width: auto;
+              max-width: 40%;
+              flex-shrink: 0;
+            }
+            
+            .quest-details {
+              flex: 1;
+              min-width: 0;
+            }
+            
+            .quest-list-desktop {
+              display: block;
+            }
+            
+            .quest-dropdown-mobile {
+              display: none;
+            }
+            
+            .quest-details-sticky {
+              position: sticky;
+              top: 2rem;
+            }
+          }
         `}
             </style>
-            <div className="max-w-7xl mx-auto py-4 pb-8">
-                <div className="flex md:flex-row gap-5">
+            <div className="max-w-7xl mx-auto py-4 pb-8 quest-log-container">
+                <div className="flex gap-5 quest-container">
                     {/* Quest List */}
-                    <div className="w-full md:w-auto md:max-w-[40%] md:flex-shrink-0">
+                    <div className="quest-list">
                         {/* Progress Indicator */}
-                        <div className="mt-3 mb-6">
-                            <div className="flex justify-start text-xs md:text-sm text-gray-600 mb-2">
+                        <div className="mt-3 mb-6 px-1">
+                            <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/r0 mb-2">
                                 <span>
                                     {selectedQuest + 1}/{questItems.length}
                                 </span>
@@ -113,7 +189,9 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                 ></div>
                             </div>
                         </div>
-                        <div className="space-y-4 relative">
+
+                        {/* Desktop Quest List */}
+                        <div className="quest-list-desktop space-y-4 relative">
                             {/* Moving Corner Brackets */}
                             <div
                                 className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-out"
@@ -174,11 +252,92 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                 })
                             )}
                         </div>
+
+                        {/* Mobile Dropdown */}
+                        <div className="quest-dropdown-mobile relative" ref={dropdownRef}>
+                            <button
+                                className="w-full flex items-center justify-between p-3 bg-white border border-light dark:border-dark rounded-sm shadow-sm hover:shadow-md transition-all duration-200"
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
+                            >
+                                <div className="flex items-center space-x-2.5">
+                                    <div className="flex-shrink-0 w-5 h-5 text-red">
+                                        {(() => {
+                                            const selectedItem = questItems[selectedQuest]
+                                            const Icon = Icons[selectedItem?.props.icon] || Icons.IconInfo
+                                            return <Icon className="w-5 h-5" />
+                                        })()}
+                                    </div>
+                                    <div className="flex-1 min-w-0 text-left">
+                                        <strong className="text-sm font-bold text-red leading-tight block">
+                                            {questItems[selectedQuest]?.props.title}
+                                        </strong>
+                                        {questItems[selectedQuest]?.props.subtitle && (
+                                            <div className="text-xs text-primary/40 dark:text-primary-dark/r0 leading-tight">
+                                                <strong>
+                                                    <em>{questItems[selectedQuest].props.subtitle}</em>
+                                                </strong>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                                <Icons.IconChevronDown
+                                    className={`w-7 h-7 text-primary/40 dark:text-primary-dark/r0 transition-transform duration-200 ${
+                                        dropdownOpen ? 'rotate-180' : ''
+                                    }`}
+                                />
+                            </button>
+
+                            {dropdownOpen && (
+                                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
+                                    {questItems.map((child, index) => (
+                                        <div
+                                            key={index}
+                                            className={`p-3 cursor-pointer transition-all duration-200 hover:bg-gray-50 border-b border-light dark:border-dark last:border-b-0 ${
+                                                selectedQuest === index ? 'bg-orange/10' : ''
+                                            }`}
+                                            onClick={() => {
+                                                setSelectedQuest(index)
+                                                setDropdownOpen(false)
+                                            }}
+                                        >
+                                            <div className="flex items-center space-x-2.5">
+                                                <div
+                                                    className={`flex-shrink-0 w-5 h-5 ${
+                                                        selectedQuest === index ? 'text-red' : ''
+                                                    }`}
+                                                >
+                                                    {(() => {
+                                                        const Icon = Icons[child.props.icon] || Icons.IconInfo
+                                                        return <Icon className="w-5 h-5" />
+                                                    })()}
+                                                </div>
+                                                <div className="flex-1 min-w-0">
+                                                    <strong
+                                                        className={`text-sm font-bold leading-tight block ${
+                                                            selectedQuest === index ? 'text-red' : ''
+                                                        }`}
+                                                    >
+                                                        {child.props.title}
+                                                    </strong>
+                                                    {child.props.subtitle && (
+                                                        <div className="text-xs text-primary/40 dark:text-primary-dark/r0 leading-tight">
+                                                            <strong>
+                                                                <em>{child.props.subtitle}</em>
+                                                            </strong>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
                     </div>
 
                     {/* Quest Details */}
-                    <div className="w-full md:flex-1 md:min-w-0">
-                        <div className="bg-white border border-light dark:border-dark rounded-sm overflow-hidden md:sticky md:top-8 shadow-sm">
+                    <div className="quest-details">
+                        <div className="bg-white border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm quest-details-sticky">
                             <div className="bg-orange/10 border-b border-light dark:border-dark p-3 md:p-4">
                                 <div className="flex items-center space-x-3">
                                     <span className="text-red text-base md:text-lg">⚠</span>
@@ -187,7 +346,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                     </h2>
                                 </div>
                                 {questItems[selectedQuest]?.props.subtitle && (
-                                    <p className="text-gray-600 mt-1 text-sm md:text-base">
+                                    <p className="text-primary/40 dark:text-primary-dark/r0 mt-1 text-sm md:text-base">
                                         {questItems[selectedQuest].props.subtitle}
                                     </p>
                                 )}
@@ -199,7 +358,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                         <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">
                                             Overview
                                         </h3>
-                                        <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                                        <p className="text-primary/40 dark:text-primary-dark/r0 leading-relaxed text-sm md:text-base">
                                             Select a quest to view details.
                                         </p>
                                     </div>
@@ -211,7 +370,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                             <Icons.IconPlay className="w-4 h-4" />
                                             <span>Begin Quest</span>
                                         </button>
-                                        <span className="text-xs md:text-sm text-gray-600 text-center sm:text-left">
+                                        <span className="text-xs md:text-sm text-primary/40 dark:text-primary-dark/r0 text-center sm:text-left">
                                             Estimated time: 15-30 minutes
                                         </span>
                                     </div>
@@ -250,15 +409,11 @@ export const QuestLogItem: React.FC<
                     {Icon && <Icon className="w-5 h-5" />}
                 </div>
                 <div className="flex-1 min-w-0">
-                    <strong
-                        className={`text-sm md:text-base font-bold truncate leading-tight ${
-                            isSelected ? 'text-red' : ''
-                        }`}
-                    >
+                    <strong className={`text-sm md:text-base font-bold leading-tight ${isSelected ? 'text-red' : ''}`}>
                         {title}
                     </strong>
                     {subtitle && (
-                        <div className="text-xs md:text-sm text-gray-600 leading-tight text-primary/40 dark:text-primary-dark/r0">
+                        <div className="text-xs md:text-sm text-primary/40 dark:text-primary-dark/r0 leading-tight text-primary/40 dark:text-primary-dark/r0">
                             <strong>
                                 <em>{subtitle}</em>
                             </strong>
