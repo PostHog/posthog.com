@@ -7,7 +7,6 @@ import { Steps, Step } from 'components/Docs/Steps'
 import InstallationPlatforms from './_snippets/installation-platforms'
 import { CallToAction } from 'components/CallToAction'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconGear, IconBox, IconBolt, IconPlus } from '@posthog/icons'
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Here's what you'll need to do to get started:
@@ -15,9 +14,8 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
 <QuestLog>
 <QuestLogItem 
   title="Capture your first exception"
-  location="Code Sanctuary"
-  status="available"
-  icon={<IconBox className="w-5 h-5" />}
+  subtitle="Code Sanctuary"
+  icon="IconBox"
 >
 
   ### Overview 2 tabs
@@ -35,9 +33,8 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
 
 <QuestLogItem 
   title="Get accurate stack traces"
-  location="Settings Realm"
-  status="available"
-  icon={<IconBolt className="w-5 h-5" />}
+  subtitle="Settings Realm"
+  icon="IconBolt"
 >
 
 ### Markdown baby
@@ -55,10 +52,9 @@ Upload source maps to get accurate, readable stack traces for your captured exce
 </QuestLogItem>
 
 <QuestLogItem 
-title="Configure alerts and automations"
-location="Data Caverns"
-status="available"
-icon={<IconGear className="w-5 h-5" />}
+  title="Configure alerts and automations"
+  subtitle="Data Caverns"
+  icon="IconGear"
 >
 
 ### Overview
@@ -76,10 +72,9 @@ Set up notifications and automate your error tracking workflows. Get alerted whe
 </QuestLogItem>
 
 <QuestLogItem 
-title="Cutting costs"
-location="Guardian's Gate"
-status="locked"
-icon={<IconPlus className="w-5 h-5" />}
+  title="Cutting costs"
+  subtitle="Guardian's Gate"
+  icon="IconPlus"
 >
 
 ### Overview

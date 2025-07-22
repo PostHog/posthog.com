@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { IconPlus, IconPlay } from '@posthog/icons'
+import * as Icons from '@posthog/icons'
 
 export interface QuestLogItemProps {
     title: string
-    location?: string
-    status?: string
-    icon?: React.ReactNode
+    subtitle?: string
+    icon?: string
     children: React.ReactNode
 }
 
@@ -135,9 +134,9 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                         {questItems[selectedQuest]?.props.title}
                                     </h2>
                                 </div>
-                                {questItems[selectedQuest]?.props.location && (
+                                {questItems[selectedQuest]?.props.subtitle && (
                                     <p className="text-gray-600 mt-1 text-sm md:text-base">
-                                        {questItems[selectedQuest].props.location}
+                                        {questItems[selectedQuest].props.subtitle}
                                     </p>
                                 )}
                             </div>
@@ -157,7 +156,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                 <div className="pt-3 md:pt-4 border-t border-light dark:border-dark">
                                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
                                         <button className="bg-orange hover:bg-orange/80 active:bg-orange/90 px-4 md:px-6 py-3 md:py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center space-x-2 text-sm md:text-base text-white">
-                                            <IconPlay className="w-4 h-4" />
+                                            <Icons.IconPlay className="w-4 h-4" />
                                             <span>Begin Quest</span>
                                         </button>
                                         <span className="text-xs md:text-sm text-gray-600 text-center sm:text-left">
@@ -181,17 +180,23 @@ export const QuestLogItem: React.FC<
         questRef?: React.Ref<HTMLDivElement>
         onSelect?: () => void
     }
-> = ({ title, location, status, icon, children, index, isSelected = false, questRef, onSelect }) => {
+> = ({ title, subtitle, icon, isSelected = false, questRef, onSelect }) => {
+    const Icon = Icons[icon] || Icons.IconInfo
+
     return (
         <div
             ref={questRef}
-            className={`relative rounded-sm bg-white shadow-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 ${
-                isSelected ? 'border border-orange bg-orange/5 shadow-md' : 'border border-light dark:border-dark'
+            className={`relative rounded-sm shadow-sm bg-white px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 ${
+                isSelected
+                    ? 'border border-orange shadow-md opacity-100'
+                    : 'border border-light dark:border-dark opacity-65 bg-white'
             }`}
             onClick={onSelect}
         >
             <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red' : ''}`}>
-                <div className={`flex-shrink-0 w-5 h-5 ${isSelected ? 'text-red' : ''}`}>{icon}</div>
+                <div className={`flex-shrink-0 w-5 h-5 ${isSelected ? 'text-red' : ''}`}>
+                    {Icon && <Icon className="w-5 h-5" />}
+                </div>
                 <div className="flex-1 min-w-0">
                     <strong
                         className={`text-sm md:text-base font-bold truncate leading-tight ${
@@ -200,10 +205,10 @@ export const QuestLogItem: React.FC<
                     >
                         {title}
                     </strong>
-                    {location && (
-                        <div className="text-xs md:text-sm text-gray-600 leading-tight text-primary/30 dark:text-primary-dark/30">
+                    {subtitle && (
+                        <div className="text-xs md:text-sm text-gray-600 leading-tight text-primary/40 dark:text-primary-dark/r0">
                             <strong>
-                                <em>{location}</em>
+                                <em>{subtitle}</em>
                             </strong>
                         </div>
                     )}
