@@ -27,7 +27,7 @@ posthog = Posthog(
 
 client = OpenAI(
     api_key="your_openai_api_key",
-    posthog_client=posthog
+    posthog_client=posthog # This is an optional parameter. If it is not provided, a default client will be used.
 )
 ```
 

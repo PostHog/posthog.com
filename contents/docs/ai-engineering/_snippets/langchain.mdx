@@ -28,7 +28,7 @@ posthog = Posthog(
 )
 
 callback_handler = CallbackHandler(
-    client=posthog,
+    client=posthog, # This is an optional parameter. If it is not provided, a default client will be used.
     distinct_id="user_123", # optional
     trace_id="trace_456", # optional
     properties={"conversation_id": "abc123"} # optional

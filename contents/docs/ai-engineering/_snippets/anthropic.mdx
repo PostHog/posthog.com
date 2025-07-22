@@ -26,8 +26,8 @@ posthog = Posthog(
 )
 
 client = Anthropic(
-    api_key="sk-ant-api...",  # Replace with your Anthropic API key
-    posthog_client=posthog
+    api_key="sk-ant-api...", # Replace with your Anthropic API key
+    posthog_client=posthog # This is an optional parameter. If it is not provided, a default client will be used.
 )
 ``` 
 
