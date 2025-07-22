@@ -36,21 +36,21 @@ Manifest v3 introduced stricter [content security policies](https://developer.ch
 
 ### 1. Import bundles directly.
 
-   Instead of relying on dynamic imports, import all PostHog features as static bundles:
+Instead of relying on dynamic imports, import all PostHog features as static bundles:
 
-   ```js
-   // Core PostHog (required)
-   import { PostHog } from 'posthog-js/dist/module.no-external'
+```js
+// Core PostHog (required)
+import { PostHog } from 'posthog-js/dist/module.no-external'
 
-   // Additional features (import only what you need in a given context)
-   import 'posthog-js/dist/posthog-recorder' // For session replay
-   import 'posthog-js/dist/surveys' // For surveys  
-   import 'posthog-js/dist/exception-autocapture' // For error tracking
-   import 'posthog-js/dist/tracing-headers' // For tracking across client and server
-   import 'posthog-js/dist/web-vitals' // For web vitals tracking
-   ```
+// Additional features (import only what you need in a given context)
+import 'posthog-js/dist/posthog-recorder' // For session replay
+import 'posthog-js/dist/surveys' // For surveys  
+import 'posthog-js/dist/exception-autocapture' // For error tracking
+import 'posthog-js/dist/tracing-headers' // For tracking across client and server
+import 'posthog-js/dist/web-vitals' // For web vitals tracking
+```
 
-   You can also use `import 'posthog-js/dist/array.no-external.js'` as the core import to get an instantiated object instead, but if you're using TypeScript you won't get types, so we're going to use `posthog-js/dist/module.no-external` throughout this document.
+You can also use `import 'posthog-js/dist/array.no-external.js'` as the core import to get an instantiated object instead, but if you're using TypeScript you won't get types, so we're going to use `posthog-js/dist/module.no-external` throughout this document.
 
 ### 2. Import a compatible session recording module if required
 
@@ -62,7 +62,7 @@ To avoid issues, explicitly load `posthog-js/dist/posthog-recorder` instead of `
 
 Set `disable_external_dependency_loading: true` in PostHog config to avoid remote code loading.
 
-### Change persistence
+### 4. Change persistence
 
 Set `persistence` to one of `localStorage`, `sessionStorage`, or `memory`. See the *Persistence* section below for details.
 
@@ -70,14 +70,14 @@ Set `persistence` to one of `localStorage`, `sessionStorage`, or `memory`. See t
 
 To do this, add [PostHog domain(s) to Content Security Policy](/docs/advanced/content-security-policy) appropriately in your `manifest.json`:
 
-   ```json
-   {
-       // (…)
-       "permissions": ["storage"], // for shared distinct_id, see below
-       "content_security_policy": {
-           "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://*.posthog.com;" // example CSP
-       }
-   }
+```json
+{
+    // (…)
+    "permissions": ["storage"], // for shared distinct_id, see below
+    "content_security_policy": {
+        "extension_pages": "script-src 'self'; object-src 'self'; connect-src 'self' https://*.posthog.com;" // example CSP
+    }
+}
    ```
 
 ### Example minimal configuration
