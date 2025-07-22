@@ -11,7 +11,10 @@ export interface QuestLogItemProps {
 export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const [selectedQuest, setSelectedQuest] = useState(0)
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
+    const [animationKey, setAnimationKey] = useState(0)
+    const [hasInitialAnimated, setHasInitialAnimated] = useState(false)
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
+    const isFirstRender = useRef(true)
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
         QuestLogItemProps & {
@@ -44,16 +47,76 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => window.removeEventListener('resize', updateBracketPosition)
     }, [selectedQuest])
 
+    // Trigger sprite animation on quest change
+    useEffect(() => {
+        if (isFirstRender.current) {
+            isFirstRender.current = false
+            return // Skip animation on first render
+        }
+        setAnimationKey((prev) => prev + 1)
+    }, [selectedQuest])
+
+    // Initial delay animation
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setHasInitialAnimated(true)
+            setAnimationKey((prev) => prev + 1) // Trigger sprite animation when loading bar starts
+        }, 1500)
+
+        return () => clearTimeout(timer)
+    }, [])
+
+    const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
+    const spritePosition = hasInitialAnimated
+        ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
+        : 'calc(0% - 10px)'
+
     return (
         <>
-            <div className="max-w-7xl mx-auto py-4 md:py-8 pb-20 md:pb-8">
-                <div className="flex md:flex-row gap-4">
+            <style>
+                {`
+          @keyframes walk-sprite-${animationKey} {
+            0% { background-position: 0 0; }
+            100% { background-position: -528px 0; }
+          }
+        `}
+            </style>
+            <div className="max-w-7xl mx-auto py-4 pb-8">
+                <div className="flex md:flex-row gap-5">
                     {/* Quest List */}
                     <div className="w-full md:w-auto md:max-w-[40%] md:flex-shrink-0">
-                        <div className="space-y-3 relative">
+                        {/* Progress Indicator */}
+                        <div className="mt-3 mb-6">
+                            <div className="flex justify-start text-xs md:text-sm text-gray-600 mb-2">
+                                <span>
+                                    {selectedQuest + 1}/{questItems.length}
+                                </span>
+                            </div>
+                            <div className="w-full bg-accent rounded-full h-1.5 relative">
+                                <div
+                                    className="bg-red h-1.5 rounded-full transition-all duration-[2s] ease-in-out"
+                                    style={{ width: `${progressPercentage}%` }}
+                                ></div>
+                                {/* Sprite Animation */}
+                                <div
+                                    className={`absolute w-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
+                                    style={{
+                                        left: spritePosition,
+                                        backgroundImage: 'url(/images/game-walk.png)',
+                                        backgroundSize: '528px 48px',
+                                        backgroundRepeat: 'no-repeat',
+                                        height: '48px',
+                                        top: '-48px',
+                                        animation:
+                                            animationKey > 0 ? `walk-sprite-${animationKey} 0.25s steps(11) 7` : 'none',
+                                    }}
+                                ></div>
+                            </div>
+                        </div>
+                        <div className="space-y-4 relative">
                             {/* Moving Corner Brackets */}
                             <div
-                                className="absolute inset-x-0 pointer-events-none transition-all duration-300 ease-out"
+                                className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-out"
                                 style={{
                                     top: `${bracketPosition.top}px`,
                                     height: `${bracketPosition.height}px`,
@@ -110,17 +173,6 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                     onSelect: () => setSelectedQuest(index),
                                 })
                             )}
-                        </div>
-
-                        {/* Progress Indicator */}
-                        <div className="mt-4 md:mt-6 bg-white border border-light dark:border-dark rounded-sm p-3 md:p-4 shadow-sm">
-                            <div className="flex justify-between text-xs md:text-sm text-gray-600 mb-2">
-                                <span>Installation Progress</span>
-                                <span>0/{questItems.length} Complete</span>
-                            </div>
-                            <div className="w-full bg-gray-200 rounded-full h-2">
-                                <div className="bg-gradient-to-r from-orange to-red h-2 rounded-sm w-0 transition-all duration-300"></div>
-                            </div>
                         </div>
                     </div>
 
