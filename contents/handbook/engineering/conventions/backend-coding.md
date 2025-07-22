@@ -53,7 +53,8 @@ Don’t log sensitive information. Make sure you never log:
     * it's recommended in the pytest docs
     * and you get better output when the test fails
 * prefer assertions like `assert ['x', 'y'] == response.json()["results"]` over `assert len(response.json()["results"]) == 2`
-    * you'll have a happier time when the test fails 
+    * that's because you want test output to give you the information you need to fix a failure
+    * and because you want your assertions to be as concrete as possible it shouldn't be possible to break the code and the test pass
 
 #### Fast developer ("unit") tests
 
