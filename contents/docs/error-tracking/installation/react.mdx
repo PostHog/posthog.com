@@ -6,10 +6,11 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
 
+> For Next.js, we recommend following the [Next.js integration guide](/docs/integrate/next-js) instead.
+
 <Steps>
 <Step title="Installing PostHog React SDK" subtitle="Your goal in this step: Install the PostHog React SDK." badge="required">
 
-> For Next.js, we recommend following the [Next.js integration guide](/docs/integrate/next-js) instead.
 
 1. Install [`posthog-js`](https://github.com/posthog/posthog-js) using your package manager:
 
@@ -169,11 +170,9 @@ posthog.captureException(error, additionalProperties)
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
 
-| Action | Description |
-|--------|-------------|
-| [Upload source maps](/docs/error-tracking/upload-source-maps) | Required for accurate stack traces if you serve minified bundles. |
-| [Configure alerting](/docs/error-tracking/alerts) | Get notified when errors occur |
-| [Cutting cost](/docs/error-tracking/cutting-costs) | Take advantage of our cost-effective pricing |
+1. [Upload source maps](/docs/error-tracking/upload-source-maps) – Required for accurate stack traces if you serve minified bundles.
+2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
+3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
 
 </Step>
 </Steps> 

@@ -2,13 +2,76 @@
 title: Upload source maps for Nuxt
 ---
 
-import NuxtUploadSourceMaps from './_snippets/nuxt-upload-source-maps.mdx'
 import { CallToAction } from 'components/CallToAction'
 
-> By the end of this guide, your Nuxt source maps will be automatically uploaded to PostHog during your build process.
+> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
 >
-> <CallToAction type="primary" to="https://us.posthog.com/error_tracking">
->    View source maps in PostHog
+> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
+>    Follow in PostHog
 > </CallToAction>
 
-<NuxtUploadSourceMaps />
+import { Steps, Step } from 'components/Docs/Steps'
+import CLIDownload from '../_snippets/cli/download.mdx'
+import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+
+<Steps>
+<Step title="Installing the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool." badge="required">
+<CLIDownload />
+</Step>
+<Step title="Authenticating the PostHog CLI" subtitle="Your goal in this step: Authenticate the PostHog CLI tool." badge="required">
+<CLIAuthenticate />
+</Step>
+<Step title="Generate sourcemaps during build" subtitle="Your goal in this step: Configure your build process to generate and upload sourcemaps." badge="required">
+
+You can hook into the `close` event to generate and upload sourcemaps for your Nuxt application like this:
+
+```js file=nuxt.config.js
+import { execSync } from 'child_process' // +
+
+export default defineNuxtConfig({
+  ...,
+  sourcemap: {
+    client: true // +
+  },
+  hooks: {
+    'close': async () => {
+      console.log('Running PostHog sourcemap injection and upload...')
+      try {
+        execSync("posthog-cli sourcemap inject --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // +
+        execSync("posthog-cli sourcemap upload --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // + 
+        console.log('PostHog sourcemap injection completed successfully') 
+      } catch (error) {
+        console.error('PostHog sourcemap injection failed:', error)
+      }
+    }
+  }
+})
+```
+
+</Step>
+<Step title="Build your project for production" subtitle="Your goal in this step: Build your project for production and test the sourcemaps." badge="required">
+
+Build your project for production by running the following command:
+```bash
+nuxt build
+```
+
+Post-build scripts should automatically generate and upload sourcemaps to PostHog.
+
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that sourcemaps are being properly uploaded.
+
+You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
+
+</Step>
+<Step title="Next steps" >
+
+After configuring PostHog, update your build and deployment process to serve bundles **injected** with the `chunkId` comments. PostHog relies on these comments to display the correct stack traces. Remember to export the [required environment variables](#authenticating-the-posthog-cli) in your deployment process.
+
+</Step>
+</Steps>

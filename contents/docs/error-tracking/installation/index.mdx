@@ -13,16 +13,37 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
   <InstallationPlatforms />        
 </Step>
 <Step title="Get accurate stack traces" badge="optional" subtitle="Your goal in this step: automatically upload source maps for your captured stack traces.">
-  <CallToAction type="primary" to="#upload-source-maps">
+  <ProductScreenshot
+      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
+      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_39_1030eea240.png"
+      alt="Stack traces example"
+      classes="rounded"
+  />
+
+  If you serve compiled code or minified bundles, PostHog cannot accurately display stack traces without source maps. Upload them during builds to get accurate stack traces.
+  <br />
+
+  <CallToAction type="primary" to="/docs/error-tracking/upload-source-maps">
     Upload source maps
   </CallToAction>
 </Step>
 <Step title="Configure alerts and automations" badge="optional" subtitle="Your goal in this step: Receive notifications and automate your error tracking related workflows.">
-  <CallToAction type="primary" to="#configure-alerts">
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_11_53_54_2x_81605f7812.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_11_53_11_2x_8b15ee84e0.png"
+    alt="Error tracking alerting"
+    classes="rounded"
+  />
+
+  Receive notifications when an issue is created or reopened through an integration or webhook.
+  <br />
+
+  <CallToAction type="primary" to="/docs/error-tracking/alerts">
     Configure alerts and automations
   </CallToAction>
 </Step>
 <Step title="Cutting costs" badge="optional" subtitle="Your goal in this step: We try to have the lowest pricing for every product. Here's how you can take advantage of our pricing.">
+
   <CallToAction type="primary" to="#cutting-costs">
     See cost-cutting tips
   </CallToAction>

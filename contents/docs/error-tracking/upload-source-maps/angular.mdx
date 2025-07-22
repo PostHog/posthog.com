@@ -3,6 +3,12 @@ title: Upload source maps for Angular
 ---
 
 import { CallToAction } from 'components/CallToAction'
+import { Steps, Step } from 'components/Docs/Steps'
+import CLIDownload from '../_snippets/cli/download.mdx'
+import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+import OutputSourceMaps from './_snippets/output-source-maps.mdx'
+import InjectSourceMap from './_snippets/inject-source-map.mdx'
+import UploadSourceMap from './_snippets/upload-source-map.mdx'
 
 > By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
 >
@@ -10,16 +16,16 @@ import { CallToAction } from 'components/CallToAction'
 >    Follow in PostHog
 > </CallToAction>
 
-import { Steps, Step } from 'components/Docs/Steps'
-import InstallCLI from './_snippets/install-cli.mdx'
-import OutputSourceMaps from './_snippets/output-source-maps.mdx'
-import InjectSourceMap from './_snippets/inject-source-map.mdx'
-import UploadSourceMap from './_snippets/upload-source-map.mdx'
-
 <Steps>
-<Step title="Install the PostHog CLI" subtitle="Your goal in this step: Get the CLI tool or framework-specific package." badge="required">
-<InstallCLI />
+
+<Step title="Installing the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool." badge="required">
+<CLIDownload />
 </Step>
+
+<Step title="Authenticating the PostHog CLI" subtitle="Your goal in this step: Authenticate the PostHog CLI tool." badge="required">
+<CLIAuthenticate />
+</Step>
+
 <Step title="Output source maps for Angular" subtitle="Your goal in this step: Configure your build to generate source maps." badge="required">
 
 You can configure Angular to [generate source maps](https://angular.dev/reference/configs/workspace-config#source-map-configuration) by adding the following to your `angular.json` file:

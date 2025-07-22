@@ -48,6 +48,7 @@ import IsUS from 'components/IsUS'
 
 function parseStepsFromMDX(mdxString) {
     const steps = []
+    let stepNumber = 1
 
     // Find all Step title matches with their positions
     const stepRegex = /mdx\(Step,\s*\{[^}]*\btitle:\s*["'](.*?)["'][^}]*\}/g
@@ -61,9 +62,10 @@ function parseStepsFromMDX(mdxString) {
             .replace(/^-+|-+$/g, '')
         steps.push({
             depth: 0,
-            value: title,
+            value: `Step ${stepNumber}: ${title}`,
             url: url,
         })
+        stepNumber++
     }
 
     return steps
