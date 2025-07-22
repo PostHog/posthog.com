@@ -23,7 +23,9 @@ The number of `/flags` requests and the number of `$feature_flag_called` events 
 
 <CalloutBox icon="IconWarning" title="Unused flags still incur charges" type="caution">
 
-  Active feature flags that you're not using in your code will still be evaluated (and charged) every time the `/flags` endpoint is called. To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough.
+  Active feature flags you're not using in your code are still evaluated (and charged) every time the `/flags` endpoint is called. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
+  
+  To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough.
 
 </CalloutBox>
 
