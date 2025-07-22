@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import * as Icons from '@posthog/icons'
+import { CallToAction } from 'components/CallToAction'
 
 export interface QuestLogItemProps {
     title: string
@@ -186,14 +187,14 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                     <div className="quest-list mt-3">
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-6 px-1">
-                            <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/r0 mb-2">
+                            <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
                                 <span>
                                     {selectedQuest + 1}/{questItems.length}
                                 </span>
                             </div>
                             <div className="w-full bg-accent rounded-full h-1.5 relative">
                                 <div
-                                    className="bg-red h-1.5 rounded-full transition-all duration-[2s] ease-in-out"
+                                    className="bg-red dark:bg-yellow h-1.5 rounded-full transition-all duration-[2s] ease-in-out"
                                     style={{ width: `${progressPercentage}%` }}
                                 ></div>
                                 {/* Sprite Animation */}
@@ -289,7 +290,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
                     {/* Quest Details */}
                     <div className="quest-details">
-                        <div className="bg-white border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm quest-details-sticky">
+                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm quest-details-sticky">
                             <div className="p-4 md:p-6">
                                 <h2 className="!mt-0 text-lg md:text-xl font-bold">
                                     {questItems[selectedQuest]?.props.title}
@@ -300,7 +301,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                         <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">
                                             Overview
                                         </h3>
-                                        <p className="text-primary/40 dark:text-primary-dark/r0 leading-relaxed text-sm md:text-base">
+                                        <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
                                             Select a quest to view details.
                                         </p>
                                     </div>
@@ -308,13 +309,22 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
                                 <div className="pt-3 md:pt-4 border-t border-light dark:border-dark">
                                     <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4">
-                                        <button className="bg-orange hover:bg-orange/80 active:bg-orange/90 px-4 md:px-6 py-3 md:py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center justify-center space-x-2 text-sm md:text-base text-white">
-                                            <Icons.IconPlay className="w-4 h-4" />
-                                            <span>Begin Quest</span>
-                                        </button>
-                                        <span className="text-xs md:text-sm text-primary/40 dark:text-primary-dark/r0 text-center sm:text-left">
-                                            Estimated time: 15-30 minutes
-                                        </span>
+                                        {selectedQuest < questItems.length - 1 && (
+                                            <CallToAction
+                                                type="primary"
+                                                size="md"
+                                                className="flex space-x-2"
+                                                onClick={() => {
+                                                    const nextIndex = selectedQuest + 1
+                                                    handleQuestSelect(nextIndex)
+                                                }}
+                                            >
+                                                <>
+                                                    Next step
+                                                    <Icons.IconArrowRight className="size-5 inline-block ml-1" />
+                                                </>
+                                            </CallToAction>
+                                        )}
                                     </div>
                                 </div>
                             </div>
@@ -339,23 +349,27 @@ export const QuestLogItem: React.FC<
     return (
         <div
             ref={questRef}
-            className={`relative bg-white rounded-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 active:transition-all active:duration-100 ${
+            className={`relative bg-white dark:bg-accent-dark rounded-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 active:transition-all active:duration-100 ${
                 isSelected
-                    ? 'border border-orange shadow-md opacity-100 bg-orange/10'
-                    : 'border border-light dark:border-dark opacity-65 bg-white shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
+                    ? 'border border-orange shadow-md opacity-100 bg-orange/10 dark:bg-orange/10'
+                    : 'border border-light dark:border-dark opacity-65 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
             }`}
             onClick={onSelect}
         >
-            <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red' : ''}`}>
-                <div className={`flex-shrink-0 w-5 h-5 ${isSelected ? 'text-red' : ''}`}>
+            <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
+                <div className={`flex-shrink-0 w-5 h-5 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
                     {Icon && <Icon className="w-5 h-5" />}
                 </div>
                 <div className="flex-1 min-w-0">
-                    <strong className={`text-sm md:text-base font-bold leading-tight ${isSelected ? 'text-red' : ''}`}>
+                    <strong
+                        className={`text-sm md:text-base font-bold leading-tight ${
+                            isSelected ? 'text-red dark:text-yellow' : ''
+                        }`}
+                    >
                         {title}
                     </strong>
                     {subtitle && (
-                        <div className="text-xs md:text-sm text-primary/40 dark:text-primary-dark/r0 leading-tight text-primary/40 dark:text-primary-dark/r0">
+                        <div className="text-xs md:text-sm text-primary/40 dark:text-primary-dark leading-tight">
                             <strong>
                                 <em>{subtitle}</em>
                             </strong>
@@ -378,11 +392,11 @@ export const MobileQuestLogItem: React.FC<{
     return (
         <div className="quest-dropdown-mobile relative" ref={dropdownRef}>
             <button
-                className="w-full flex items-center justify-between p-3 bg-white border border-light dark:border-dark rounded-sm shadow-sm hover:shadow-md transition-all duration-200"
+                className="w-full flex items-center justify-between p-3 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-sm hover:shadow-md transition-all duration-200"
                 onClick={() => onDropdownToggle(!dropdownOpen)}
             >
                 <div className="flex items-center space-x-2.5">
-                    <div className="flex-shrink-0 w-5 h-5 text-red">
+                    <div className="flex-shrink-0 w-5 h-5 text-red dark:text-yellow">
                         {(() => {
                             const selectedItem = questItems[selectedQuest]
                             const Icon = Icons[selectedItem?.props.icon] || Icons.IconInfo
@@ -390,11 +404,11 @@ export const MobileQuestLogItem: React.FC<{
                         })()}
                     </div>
                     <div className="flex-1 min-w-0 text-left">
-                        <strong className="text-sm font-bold text-red leading-tight block">
+                        <strong className="text-sm font-bold text-red dark:text-yellow leading-tight block">
                             {questItems[selectedQuest]?.props.title}
                         </strong>
                         {questItems[selectedQuest]?.props.subtitle && (
-                            <div className="text-xs text-primary/40 dark:text-primary-dark/r0 leading-tight">
+                            <div className="text-xs text-primary/40 dark:text-primary-dark leading-tight">
                                 <strong>
                                     <em>{questItems[selectedQuest].props.subtitle}</em>
                                 </strong>
@@ -403,19 +417,19 @@ export const MobileQuestLogItem: React.FC<{
                     </div>
                 </div>
                 <Icons.IconChevronDown
-                    className={`w-7 h-7 text-primary/40 dark:text-primary-dark/r0 transition-transform duration-200 ${
+                    className={`w-7 h-7 text-primary/40 dark:text-primary-dark/40 transition-transform duration-200 ${
                         dropdownOpen ? 'rotate-180' : ''
                     }`}
                 />
             </button>
 
             {dropdownOpen && (
-                <div className="absolute top-full left-0 right-0 mt-1 bg-white border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
                     {questItems.map((child, index) => (
                         <div
                             key={index}
-                            className={`p-3 cursor-pointer transition-all duration-200 hover:bg-gray-50 border-b border-light dark:border-dark last:border-b-0 ${
-                                selectedQuest === index ? 'bg-orange/10' : ''
+                            className={`p-3 cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800 border-b border-light dark:border-dark last:border-b-0 ${
+                                selectedQuest === index ? 'bg-orange/10 dark:bg-orange/10' : ''
                             }`}
                             onClick={() => {
                                 onQuestSelect(index)
@@ -423,7 +437,11 @@ export const MobileQuestLogItem: React.FC<{
                             }}
                         >
                             <div className="flex items-center space-x-2.5">
-                                <div className={`flex-shrink-0 w-5 h-5 ${selectedQuest === index ? 'text-red' : ''}`}>
+                                <div
+                                    className={`flex-shrink-0 w-5 h-5 ${
+                                        selectedQuest === index ? 'text-red dark:text-yellow' : ''
+                                    }`}
+                                >
                                     {(() => {
                                         const Icon = Icons[child.props.icon] || Icons.IconInfo
                                         return <Icon className="w-5 h-5" />
@@ -432,13 +450,13 @@ export const MobileQuestLogItem: React.FC<{
                                 <div className="flex-1 min-w-0">
                                     <strong
                                         className={`text-sm font-bold leading-tight block ${
-                                            selectedQuest === index ? 'text-red' : ''
+                                            selectedQuest === index ? 'text-red dark:text-yellow' : ''
                                         }`}
                                     >
                                         {child.props.title}
                                     </strong>
                                     {child.props.subtitle && (
-                                        <div className="text-xs text-primary/40 dark:text-primary-dark/r0 leading-tight">
+                                        <div className="text-xs text-primary/40 dark:text-primary-dark/40 leading-tight">
                                             <strong>
                                                 <em>{child.props.subtitle}</em>
                                             </strong>
