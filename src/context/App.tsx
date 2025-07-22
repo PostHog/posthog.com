@@ -768,14 +768,9 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         taskbarHeight: number
     ) {
         const size = getInitialSize(element.key)
-        const position = getPositionDefaults(element.key, size, windows)
+        const position = element.props.position || getPositionDefaults(element.key, size, windows)
         const settings = appSettings[element.key]
         const lastClickedElementRect = getLastClickedElementRect()
-
-        if (element.props.offset) {
-            position.x += element.props.offset.x
-            position.y += element.props.offset.y
-        }
 
         const newWindow: AppWindow = {
             element,
@@ -807,7 +802,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 : undefined,
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
-            location: element.props.location,
+            location,
             animating: true,
         }
 
@@ -1087,10 +1082,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [])
 
     useEffect(() => {
-        if (location.key === 'initial' && location.pathname === '/' && !isMobile) {
-            addWindow(<Start newWindow location={{ pathname: `start` }} key={`start`} />)
-        }
-
         if (compact) {
             window.parent.postMessage(
                 {

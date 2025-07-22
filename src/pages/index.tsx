@@ -20,6 +20,7 @@ import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
 import { PRODUCT_COUNT } from '../constants'
+import Start from 'components/Start'
 
 interface ProductButtonsProps {
     productTypes: string[]
@@ -569,12 +570,25 @@ export default function Home() {
         }
     `)
     const { appWindow } = useWindow()
-    const { setWindowTitle } = useApp()
+    const { setWindowTitle, isMobile, addWindow } = useApp()
     const posthog = usePostHog()
 
     useEffect(() => {
         if (appWindow) {
             setWindowTitle(appWindow, 'home.mdx')
+            if (appWindow.location?.key === 'initial' && !isMobile) {
+                addWindow(
+                    <Start
+                        newWindow
+                        location={{ pathname: `start` }}
+                        key={`start`}
+                        position={{
+                            x: appWindow.position.x + 100,
+                            y: appWindow.position.y + 200,
+                        }}
+                    />
+                )
+            }
         }
     }, [])
 
