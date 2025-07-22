@@ -49,7 +49,7 @@ Don’t log sensitive information. Make sure you never log:
 * All new packages and most new significant functionality should come with unit tests
 * Significant features should come with integration and/or end-to-end tests
 * Analytics-related queries should be covered by snapshot tests for ease of reviewing
-* For pytest use the `assert x == y` instead of the `self.assertEqual(x, y) format of tests
+* For pytest use the `assert x == y` instead of the `self.assertEqual(x, y)` format of tests
     * it's recommended in the pytest docs
     * and you get better output when the test fails
 * prefer assertions like `assert ['x', 'y'] == response.json()["results"]` over `assert len(response.json()["results"]) == 2`
