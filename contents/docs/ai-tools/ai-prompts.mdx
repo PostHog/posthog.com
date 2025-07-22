@@ -1,0 +1,394 @@
+---
+title: AI prompts
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+Getting good answers from AI depends on asking good questions. This guide shows you how to write effective prompts to get better insights from your PostHog data, whether you're using [Max AI](/docs/max-ai), [MCP integrations](/docs/ai-tools/model-context-protocol), or building your own AI-powered analytics workflows.
+
+## Ready-to-use prompts
+
+Copy these prompts and adapt them to your specific product and data.
+
+### Discover what's happening with your users
+
+**Find interesting patterns:**
+```
+"Analyze our user behavior over the last 30 days. What are the most interesting trends or anomalies you can identify?"
+```
+
+**Understand what drives retention:**
+```
+"What are the top 5 user actions that correlate most strongly with user retention?"
+```
+
+**Compare user types:**
+```
+"Show me usage patterns that differ significantly between our power users and casual users."
+```
+
+### Analyze specific events
+
+**Find problem areas:**
+```
+"Which events have the highest drop-off rates and what might be causing users to abandon these flows?"
+```
+
+**Spot recent changes:**
+```
+"Identify events where completion rates have changed significantly in the past week compared to the previous period."
+```
+
+**Map successful journeys:**
+```
+"What's the typical user journey for our most successful conversions?"
+```
+
+### Segment your users
+
+**Create behavioral segments:**
+```
+"Create user segments based on behavior patterns and describe the key characteristics of each segment."
+```
+
+**Compare acquisition channels:**
+```
+"How do user behaviors differ across our main acquisition channels?"
+```
+
+**Study churn patterns:**
+```
+"What behavioral differences can you identify between users who churned vs. those who remained active?"
+```
+
+### Optimize your conversions
+
+**Improve your funnels:**
+```
+"Analyze our signup funnel and identify the biggest opportunities for improvement. Focus on steps where we lose the most users."
+```
+
+**Find your best segments:**
+```
+"Compare conversion rates across different user segments and recommend which segments to prioritize for optimization."
+```
+
+**Understand conversion timing:**
+```
+"What patterns do you see in users who convert quickly vs. those who take longer to convert?"
+```
+
+### Learn from your experiments
+
+**Get deeper insights from A/B tests:**
+```
+"Analyze the results of our [experiment name] and explain not just whether it won, but why it might have won."
+```
+
+**Understand segment responses:**
+```
+"What user segments responded most positively to variant B, and what does this tell us about our user base?"
+```
+
+**Plan your next tests:**
+```
+"Based on our experiment results, what hypotheses should we test next?"
+```
+
+### Boost feature adoption
+
+**Find adoption blockers:**
+```
+"Which features have the lowest adoption rates despite high visibility? What might be preventing users from engaging with them?"
+```
+
+**Identify retention drivers:**
+```
+"Identify features that are strong predictors of long-term user retention and explain why they might be effective."
+```
+
+**Map feature discovery:**
+```
+"What's the typical user journey before someone adopts [specific feature]?"
+```
+
+### Fix performance issues
+
+**Find slow pages:**
+```
+"Analyze our page load times and identify pages that might be causing user friction due to slow performance."
+```
+
+**Connect speed to engagement:**
+```
+"What correlation exists between page load speed and user engagement metrics?"
+```
+
+**Spot technical problems:**
+```
+"Identify sessions where users experienced technical issues and describe common patterns."
+```
+
+### Track down errors
+
+**Prioritize critical errors:**
+```
+"What are our most critical errors based on user impact, and how are they affecting key user journeys?"
+```
+
+**Find error patterns:**
+```
+"Analyze error patterns to identify if certain user segments or browsers are disproportionately affected."
+```
+
+**Measure error impact:**
+```
+"How do error rates correlate with user abandonment in our key conversion flows?"
+```
+
+### Grow your business
+
+**Find revenue opportunities:**
+```
+"Analyze our revenue trends and identify which user behaviors are most predictive of high customer lifetime value."
+```
+
+**Connect features to revenue:**
+```
+"What's the relationship between feature usage and revenue per user?"
+```
+
+**Optimize growth channels:**
+```
+"What are our most effective growth channels based on user quality, not just quantity?"
+```
+
+**Predict successful customers:**
+```
+"Identify early indicators that predict whether a new user will become a long-term customer."
+```
+
+### Prevent churn
+
+**Spot churn signals:**
+```
+"What early warning signs indicate a user is likely to churn, and how far in advance can we predict this?"
+```
+
+**Profile at-risk users:**
+```
+"Analyze the behavior patterns of users who churned and create a profile of at-risk users."
+```
+
+**Plan interventions:**
+```
+"What interventions could we implement based on churn prediction signals?"
+```
+
+## How to write better prompts
+
+### Be specific about what you want
+
+**Instead of this:** "Analyze user behavior"  
+**Try this:** "Analyze user behavior for the checkout flow between December 1-31, focusing on mobile users who abandoned their cart"
+
+The more specific you are, the more useful the answer will be.
+
+### Ask for actions, not just insights
+
+**Get actionable recommendations:**
+```
+"Don't just tell me what happened, but recommend 3 specific actions we should take based on this data."
+```
+
+**Prioritize by impact:**
+```
+"Prioritize your recommendations by potential impact and implementation difficulty."
+```
+
+**Get testing suggestions:**
+```
+"What would you test first if you were optimizing this flow?"
+```
+
+### Get different viewpoints
+
+**Multiple perspectives:**
+```
+"Analyze this data from three perspectives: user experience, business impact, and technical feasibility."
+```
+
+**Stakeholder-specific insights:**
+```
+"What would different stakeholders (product, marketing, engineering) care most about in this data?"
+```
+
+### Make comparisons
+
+**Historical comparisons:**
+```
+"Compare this month's performance to the same period last year, accounting for seasonal trends."
+```
+
+**Benchmarking:**
+```
+"How do these metrics compare to industry benchmarks or our historical performance?"
+```
+
+**User comparisons:**
+```
+"Show me the difference between our top 10% and bottom 10% of users for this metric."
+```
+
+## Advanced prompt techniques
+
+### Break it down step by step
+
+Get AI to think through problems systematically:
+
+```
+"Let's think step by step:
+1. First, identify the key metrics that changed
+2. Then, analyze what might have caused these changes
+3. Finally, recommend specific actions based on your analysis
+4. Explain your confidence level for each recommendation"
+```
+
+### Ask AI to play a role
+
+**Product manager perspective:**
+```
+"Act as a senior product manager analyzing user retention data. What questions would you ask, and what insights would be most valuable for product decisions?"
+```
+
+**Growth marketer view:**
+```
+"Approach this analysis as a growth marketer trying to optimize our acquisition channels. What patterns matter most?"
+```
+
+### Test your hunches
+
+**Hypothesis testing:**
+```
+"I suspect our new onboarding flow is causing users to drop off. Analyze the data to confirm or refute this hypothesis, and suggest alternative explanations if my hypothesis is wrong."
+```
+
+**Compare user types:**
+```
+"Test the hypothesis that power users engage differently with our new feature compared to casual users."
+```
+
+### Set constraints
+
+**Time-bounded analysis:**
+```
+"Analyze our conversion funnel, but focus only on changes we could implement within the next month with our current engineering resources."
+```
+
+**Resource-conscious recommendations:**
+```
+"Identify growth opportunities that don't require significant product changes."
+```
+
+## PostHog-specific prompts
+
+### For Max AI
+
+**Understand metric changes:**
+```
+"Using our PostHog data, explain why our DAU/MAU ratio changed last month and what specific user behaviors drove this change."
+```
+
+**Create useful queries:**
+```
+"Create a dashboard query that shows the relationship between feature adoption and user retention."
+```
+
+### For MCP integrations
+
+**Find user patterns:**
+```
+"Query our PostHog data to find users who completed the signup flow but never used [core feature]. What characteristics do they share?"
+```
+
+**Generate reports:**
+```
+"Generate a weekly report showing our key growth metrics with explanations for any significant changes."
+```
+
+### For API-based analysis
+
+**Segment users:**
+```
+"Write a PostHog query that identifies our most valuable user segments based on engagement and revenue metrics."
+```
+
+**Track retention:**
+```
+"Create a cohort analysis showing retention rates by acquisition channel over the past 6 months."
+```
+
+## Common mistakes to avoid
+
+**Don't be vague:** Instead of "Make our metrics better" → "Increase trial-to-paid conversion rate by 15% over the next quarter"
+
+**Include timeframes:** Instead of "Analyze user behavior" → "Analyze user behavior from our last product launch (Nov 15) through today"
+
+**Define success:** Instead of "Optimize the funnel" → "Reduce checkout abandonment by 20% while maintaining conversion quality"
+
+**Consider broader impact:** Instead of "Increase signups" → "Improve signup rates while maintaining user quality and LTV"
+
+## Quick prompts by role
+
+### Product managers
+```
+"Identify feature usage patterns that predict user success"
+"Compare feature adoption across different user segments"
+"Find opportunities for product-led growth"
+```
+
+### Growth teams
+```
+"Optimize acquisition channels based on user quality metrics" 
+"Identify viral loops and sharing patterns"
+"Find opportunities for activation improvements"
+```
+
+### Customer success
+```
+"Identify early warning signs of customer health issues"
+"Find usage patterns that predict expansion opportunities"  
+"Create customer health scoring based on behavioral data"
+```
+
+### Engineering teams
+```
+"Identify performance bottlenecks affecting user experience"
+"Prioritize technical debt based on user impact"
+"Measure the effect of performance improvements"
+```
+
+## Tips for different AI tools
+
+### Max AI
+- Start broad, then get specific
+- Ask for dashboard suggestions
+- Request visualization recommendations
+
+### MCP with Claude
+- Provide business context upfront
+- Ask for methodology explanations  
+- Request multiple analysis approaches
+
+### Custom AI workflows
+- Include data quality checks
+- Ask for confidence levels
+- Request suggestions for better data
+
+## What's next?
+
+- [Try Max AI →](/docs/max-ai)
+- [Set up MCP integration →](/docs/ai-tools/model-context-protocol) 
+- [Learn LLM observability →](/docs/ai-engineering/observability)

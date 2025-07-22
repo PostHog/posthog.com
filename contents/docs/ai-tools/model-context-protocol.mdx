@@ -1,0 +1,159 @@
+---
+title: Model Context Protocol (MCP)
+---
+import CalloutBox from '../../../src/components/Docs/CalloutBox'
+import { CursorMCPInstallDeeplink } from '../../../src/components/Product/MCP/CursorMCPInstallDeeplink'
+import MCPConfig from './snippets/mcp-config.mdx'
+
+The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with the PostHog platform.
+This guide covers how to use the MCP server and best practices for using it.
+
+The PostHog MCP is great for having your AI agents query your data, insights without having to manually input all this data into the agent's context.
+We also wrote a [great article](https://posthog.com/blog/machine-copy-paste-mcp-intro) that dives into the workings of the MCP.
+
+
+## Quick install using the PostHog wizard
+
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into Cursor and Claude.
+
+```bash
+# Install PostHog MCP server to supported clients
+npx @posthog/wizard mcp add
+```
+
+## Manual install
+
+<CalloutBox icon="IconInfo" title="Using Cursor or Claude Desktop?" type="fyi">
+  If you're using Cursor or Claude Desktop, you can save time by using the PostHog Wizard to set up the MCP server instead!
+</CalloutBox>
+
+
+### 1. Obtain a personal API key
+
+Obtain a personal API key using the MCP Server preset [here](https://app.posthog.com/settings/user-api-keys?preset=mcp_server).
+
+### 2. Configure your AI tool
+
+Add the MCP configuration to your desktop client (e.g. Cursor, Windsurf, Claude Desktop) and add your personal API key.
+
+In all examples, make sure to replace the `POSTHOG_AUTH_HEADER` environment variable placeholder with your actual API key.
+
+### Cursor
+
+Skip the rest of the manual installation by installing the MCP by clicking *Add to Cursor*:
+
+<CursorMCPInstallDeeplink/>
+
+In Cursor, make sure to replace the `POSTHOG_AUTH_HEADER` environment variable placeholder with your actual API key: `Bearer {INSERT_YOUR_PERSONAL_API_KEY_HERE}`
+
+Alternatively, manually update the MCP configuration file:
+
+1. Open [Cursor](https://cursor.com) and navigate to **Cursor Settings > Tools & Integrations**
+
+2. Click **New MCP Server**
+
+3. Update `mcp.json` with the following configuration:
+
+<MCPConfig/>
+
+4. Save the configuration file.
+
+5. You should see **posthog** under **MCP Tools** with a green status.
+
+
+### Claude Code
+
+1. Run the following command in your shell:
+```bash
+claude mcp add-json posthog -s user '{
+  "command": "npx",
+  "args": [
+    "-y",
+    "mcp-remote@latest",
+    "https://mcp.posthog.com/sse",
+    "--header",
+    "Authorization:${POSTHOG_AUTH_HEADER}"
+  ],
+  "env": {
+    "POSTHOG_AUTH_HEADER": "Bearer {INSERT_YOUR_PERSONAL_API_KEY_HERE}" // HIGHLIGHT
+  }
+}'
+```
+
+2. That's all! Next time you run [Claude Code](https://www.anthropic.com/claude-code), it'll have access to the PostHog MCP.
+
+
+### Claude Desktop
+
+1. Open [Claude Desktop](http://claude.ai/download) and navigate to **Settings > Developer**
+
+2. Click **Edit Config** to open the configuration file.
+
+3. Update `claude_desktop_config.json` with the following configuration:
+
+<MCPConfig/>
+
+4. **Save** the configuration file and **restart Claude** Desktop
+
+5. The MCP server should show as **PostHog** up in your list of Connectors found in **Settings > Connectors**.
+
+### Visual Studio Code (Copilot)
+
+1. Open [Visual Studio Code](https://code.visualstudio.com/). In the command palette, run: `MCP: Open User Configuration` to open the configuration file.
+
+2. Update `mcp.json` with the following configuration:
+
+```json
+{
+  "servers": {
+    "posthog": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "mcp-remote@latest",
+        "https://mcp.posthog.com/sse",
+        "--header",
+        "Authorization:${POSTHOG_AUTH_HEADER}"
+      ],
+      "env": {
+        "POSTHOG_AUTH_HEADER": "Bearer {INSERT_YOUR_PERSONAL_API_KEY_HERE}" // HIGHLIGHT
+      }
+    }
+  }
+}
+```
+
+3. **Save** the configuration file.
+
+## Windsurf
+
+1. Open Windsurf. Navigate to **Windsurf Settings > Cascade > MCP Servers**
+
+2. Click **Manage MCP Servers**
+
+3. Click **View raw config**
+
+4. Update `mcp_config.json` with the following configuration:
+
+<MCPConfig />
+
+
+
+
+
+
+## Security Considerations
+
+
+## Available Tools
+
+Tools trigger actions on behalf of the user, based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
+
+
+
+## Next Steps
+
+- [AI Prompts](docs/ai-tools/ai-prompts): Now that the MCP server is connected, check out some example prompts to work with.
+- [PostHog MCP server](https://github.com/posthog/mcp): Check out GitHub repository for the MCP server
+- [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
+- [MCP: machine/copy paste](https://posthog.com/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?
