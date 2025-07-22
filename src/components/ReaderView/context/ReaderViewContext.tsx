@@ -77,11 +77,10 @@ const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undef
 const isLabel = (item: any) => !item?.url && item?.name
 
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
-    const { setMenu } = useWindow()
+    const { setMenu, appWindow } = useWindow()
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(false)
     const [tocUserToggled, setTocUserToggled] = useState(false)
-    const [isContainerLarge, setIsContainerLarge] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(false)
     const { pathname } = useLocation()
     const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
@@ -95,7 +94,6 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         return null
     })
 
-    // Call hooks directly, not inside useMemo
     const destinationNav = useDataPipelinesNav({ type: 'destination' })
     const transformationNav = useDataPipelinesNav({ type: 'transformation' })
 
@@ -242,35 +240,15 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
 
     // Monitor container size and update ToC visibility
     useEffect(() => {
-        const checkContainerSize = () => {
-            const readerContainer = document.querySelector('.\\@container\\/app-reader')
-            if (readerContainer) {
-                const width = readerContainer.clientWidth
-                // @6xl breakpoint is 72rem = 1152px
-                const isLarge = width >= 1152
-                setIsContainerLarge(isLarge)
+        if (!appWindow?.size?.width) return
 
-                // Only update ToC visibility if user hasn't manually toggled it
-                if (!tocUserToggled) {
-                    setIsTocVisible(isLarge)
-                }
-            }
+        // @6xl breakpoint is 72rem = 1152px
+        const isLarge = appWindow?.size?.width >= 1152
+        // Only update ToC visibility if user hasn't manually toggled it
+        if (!tocUserToggled) {
+            setIsTocVisible(isLarge)
         }
-
-        // Initial check
-        checkContainerSize()
-
-        // Create ResizeObserver to monitor container size changes
-        const readerContainer = document.querySelector('.\\@container\\/app-reader')
-        if (readerContainer) {
-            const resizeObserver = new ResizeObserver(checkContainerSize)
-            resizeObserver.observe(readerContainer)
-
-            return () => {
-                resizeObserver.disconnect()
-            }
-        }
-    }, [tocUserToggled])
+    }, [appWindow?.size?.width])
 
     const value = {
         isNavVisible,
