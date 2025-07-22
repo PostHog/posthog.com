@@ -20,10 +20,12 @@ In the spot where you make your OpenAI calls, import PostHog, LangChain, and our
 from posthog.ai.langchain import CallbackHandler
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
-import posthog
+from posthog import Posthog
 
-posthog.project_api_key = "<ph_project_api_key>"
-posthog.host = "<ph_client_api_host>"
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>"
+)
 
 callback_handler = CallbackHandler(
     client=posthog,
