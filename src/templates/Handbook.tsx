@@ -46,26 +46,41 @@ import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
 import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 
-function parseStepsFromMDX(mdxString) {
+function parseStepsFromMDX(mdxString: string) {
     const steps = []
     let stepNumber = 1
 
-    // Find all Step title matches with their positions
-    const stepRegex = /mdx\(Step,\s*\{[^}]*\btitle:\s*["'](.*?)["'][^}]*\}/g
+    // Find all Step components with their props
+    const stepRegex = /mdx\(Step,\s*\{([^}]*)\}/g
     let match
 
     while ((match = stepRegex.exec(mdxString)) !== null) {
-        const title = match[1]
+        const propsString = match[1]
+
+        // Extract title
+        const titleMatch = propsString.match(/\btitle:\s*["'](.*?)["']/)
+        if (!titleMatch) continue
+
+        const title = titleMatch[1]
+
+        // Check if checkpoint prop is present
+        const hasCheckpoint = /\bcheckpoint\b/.test(propsString)
+
         const url = title
             .toLowerCase()
             .replace(/[^a-z0-9]+/g, '-')
             .replace(/^-+|-+$/g, '')
+
         steps.push({
             depth: 0,
-            value: `Step ${stepNumber}: ${title}`,
+            value: hasCheckpoint ? `Checkpoint: ${title}` : `Step ${stepNumber}: ${title}`,
             url: url,
         })
-        stepNumber++
+
+        // Only increment step number for non-checkpoint steps
+        if (!hasCheckpoint) {
+            stepNumber++
+        }
     }
 
     return steps
