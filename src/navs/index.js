@@ -1316,6 +1316,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
+                    {
+                        name: "Template for onboarding success plan",
+                        url: '/handbook/cs-and-onboarding/onboarding-success-plan',
+                    },
                 ],
             },
             {
