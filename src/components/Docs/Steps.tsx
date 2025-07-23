@@ -68,18 +68,21 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}
         >
-            {/* Removed vertical line div, add border-l to content container for alignment */}
-            {/* Hide the number badge and flag icon on small screens, show only on lg+ */}
-            <div className="hidden lg:flex flex-col items-center mr-4 relative z-10">
-                <CopyAnchor id={anchorId} hovered={hovered} />
-                <div className="bg-tan dark:bg-dark py-2">
-                    <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-accent-light dark:bg-gray-accent-dark text-primary dark:text-primary-dark font-bold text-base border border-light dark:border-dark border-b-4 border-b-gray-accent dark:border-b-dark">
-                        {isCheckpoint ? <Icons.IconFlag className="w-4 h-4" /> : number}
-                    </span>
+            {/* Vertical line positioned absolutely relative to li - only show on lg+ */}
+            <div className="hidden lg:block absolute left-4 w-[1px] border-l border-light dark:border-dark h-full opacity-70"></div>
+
+            {/* Number/flag column - only show on lg+ */}
+            <div className="hidden lg:flex items-start mr-4 relative z-10">
+                <div className="flex flex-col items-center relative">
+                    <CopyAnchor id={anchorId} hovered={hovered} />
+                    <div className="bg-tan dark:bg-dark py-2">
+                        <span className="flex items-center justify-center w-8 h-8 rounded-md bg-gray-accent-light dark:bg-gray-accent-dark text-primary dark:text-primary-dark font-bold text-base border border-light dark:border-dark border-b-4 border-b-gray-accent dark:border-b-dark">
+                            {isCheckpoint ? <Icons.IconFlag className="w-4 h-4" /> : number}
+                        </span>
+                    </div>
                 </div>
             </div>
-            {/* Responsive border and padding for content container */}
-            <div className="min-w-0 flex-1 border-l-0 lg:border-l-2 border-gray-accent dark:border-dark lg:pl-8 lg:-ml-8 ml-0 lg:ml-4">
+            <div className="min-w-0 flex-1">
                 <div className="relative">
                     <div className="flex items-center gap-2 font-semibold text-base text-primary dark:text-primary-dark pt-2">
                         {!titleSize || titleSize === 'h2' ? (
