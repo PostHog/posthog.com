@@ -32,7 +32,7 @@ interface CustomerProps {
 }
 
 const Customer = ({ number, customer }: CustomerProps) => {
-    const { hasCaseStudy, featured } = useCustomers()
+    const { hasCaseStudy } = useCustomers()
 
     // Determine logo rendering logic - same as CustomersSlide.tsx
     const renderLogo = () => {
@@ -88,10 +88,20 @@ const Customer = ({ number, customer }: CustomerProps) => {
     }
 }
 
+const sortCustomers = (customers: CustomerType[]) => {
+    return customers.sort((a, b) => {
+        const aIndex = CUSTOMER_ORDER.indexOf(a.slug)
+        const bIndex = CUSTOMER_ORDER.indexOf(b.slug)
+        const aOrder = aIndex === -1 ? Infinity : aIndex
+        const bOrder = bIndex === -1 ? Infinity : bIndex
+        return aOrder - bOrder
+    })
+}
+
 export default function Customers(): JSX.Element {
-    const { getCustomers, hasCaseStudy, featured } = useCustomers()
-    const customers = getCustomers(CUSTOMER_ORDER)
-    const [filteredCustomers, setFilteredCustomers] = useState<any>(null)
+    const { hasCaseStudy, isFeatured, customers: allCustomers } = useCustomers()
+    const customers = sortCustomers(Object.values(allCustomers))
+    const [filteredCustomers, setFilteredCustomers] = useState<any>(customers.filter((customer) => customer.featured))
 
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
@@ -112,6 +122,7 @@ export default function Customers(): JSX.Element {
         <>
             <SEO title="customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
             <Editor
+                showFilters
                 title="customers"
                 type="mdx"
                 slug="/customers"
@@ -151,12 +162,13 @@ export default function Customers(): JSX.Element {
                             { label: 'TRUE', value: true },
                             { label: 'FALSE', value: false },
                         ],
-                        filter: (obj, value) => (value ? featured(obj.slug) : !featured(obj.slug)),
+                        filter: (obj, value) => (value ? isFeatured(obj.slug) : !isFeatured(obj.slug)),
                         operator: 'equals',
+                        initialValue: true,
                     },
                 ]}
                 dataToFilter={customers}
-                onFilterChange={(data) => setFilteredCustomers(data)}
+                onFilterChange={(data) => setFilteredCustomers(sortCustomers(data))}
             >
                 <ScrollArea>
                     <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>

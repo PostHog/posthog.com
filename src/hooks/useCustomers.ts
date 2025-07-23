@@ -472,10 +472,15 @@ export const useCustomers = () => {
         return !!frontmatterCustomers[slug]
     }
 
+    const isFeatured = (slug: string): boolean => {
+        return !!customers[slug]?.featured
+    }
+
     return {
         customers,
         getCustomer,
         getCustomers,
         hasCaseStudy,
+        isFeatured,
     }
 }

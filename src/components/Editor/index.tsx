@@ -32,7 +32,7 @@ interface EditorProps {
     children?: React.ReactNode
     availableFilters?: {
         label: string
-        value?: string
+        value?: any
         options: {
             label: string
             value: any
@@ -40,7 +40,7 @@ interface EditorProps {
         onChange?: (value: string) => void
         operator: string
         filter?: (obj: any, value: any) => boolean
-        initialValue?: string
+        initialValue?: any
     }[]
     onSearchChange?: (query: string) => void
     showFilters?: boolean
