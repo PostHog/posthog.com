@@ -185,11 +185,18 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => clearTimeout(timer)
     }, [])
 
-    // Handle URL hash changes
+    // Process initial hash on mount
     useEffect(() => {
-        selectQuestFromHash()
+        // Small delay to ensure DOM is ready
+        const timer = setTimeout(() => {
+            selectQuestFromHash()
+        }, 0)
+
         window.addEventListener('hashchange', selectQuestFromHash)
-        return () => window.removeEventListener('hashchange', selectQuestFromHash)
+        return () => {
+            clearTimeout(timer)
+            window.removeEventListener('hashchange', selectQuestFromHash)
+        }
     }, [])
 
     // Update bracket position on quest change
