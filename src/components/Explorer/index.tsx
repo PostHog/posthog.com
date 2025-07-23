@@ -124,7 +124,6 @@ export default function Explorer({
                     />
                 </>
             )}
-            {/* <DebugContainerQuery /> */}
             <ContentWrapper>
                 <div
                     data-scheme="secondary"
