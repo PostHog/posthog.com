@@ -136,11 +136,11 @@ claude mcp add-json posthog -s user '{
 
 We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
 
-- **Read-only mode**: If you must connect to real data, limit the MCP server's permissions to read-only access. This prevents the AI from making unintended changes to your PostHog configuration or data. Use the provided `MCP Server` preset in the Personal API Key creator.
+- **Use the right API key permissions:** Use the provided **MCP Server** preset in the personal API key creator. If you use the MCP in an agentic workflow on production data, scope down the API key's permissions to only the permissions you want it to use. This prevents the AI from making unintended changes to your PostHog configuration or data.
 
-- **Project scoping**: Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
+- **Project scoping:** Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
 
-- **Be mindful of prompt injection**: Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
+- **Be mindful of prompt injection:** Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
 
 ## Available Tools
 
