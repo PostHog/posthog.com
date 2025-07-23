@@ -66,7 +66,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
     const [selectedQuest, setSelectedQuest] = useState(0)
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
-    const [hasInitialAnimated, setHasInitialAnimated] = useState(false)
+    const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
 
@@ -74,7 +74,6 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
     const dropdownRef = useRef<HTMLDivElement>(null)
     const spriteRef = useRef<HTMLDivElement>(null)
     const isFirstRender = useRef(true)
-    // isProgrammaticScroll removed
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
         QuestLogItemProps & {
@@ -100,8 +99,6 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     }
 
-    // updateUrlHash removed
-
     const selectQuestFromHash = () => {
         if (typeof window !== 'undefined') {
             const hash = window.location.hash
@@ -122,6 +119,9 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
     // Restore Scrollspy onUpdate for both desktop and mobile
     const handleScrollspyUpdate = (el: HTMLElement | null) => {
+        // Only allow scrollspy updates after user has actually interacted with the page
+        if (!hasInitialLoadSettled) return
+
         if (el && el.id) {
             const questIndex = questIds.findIndex((id) => id === el.id)
             if (questIndex >= 0 && questIndex !== selectedQuest) {
@@ -131,9 +131,6 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     }
 
-    // Remove handleScrollspyUpdate and any scroll-based selectedQuest logic
-    // Only update selectedQuest in response to hash changes (and on mount)
-
     useEffect(() => {
         // Run on mount and whenever the hash changes
         const onHashChange = () => selectQuestFromHash()
@@ -142,12 +139,10 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => window.removeEventListener('hashchange', onHashChange)
     }, [questItems])
 
-    // handleQuestSelect removed
-
-    // Initial delay animation
+    // Initial page load delay
     useEffect(() => {
         const timer = setTimeout(() => {
-            setHasInitialAnimated(true)
+            setHasInitialLoadSettled(true)
             restartSpriteAnimation()
         }, 1000)
         return () => clearTimeout(timer)
@@ -222,8 +217,8 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
-    const spritePosition = hasInitialAnimated
+    const progressPercentage = hasInitialLoadSettled ? ((selectedQuest + 1) / questItems.length) * 100 : 0
+    const spritePosition = hasInitialLoadSettled
         ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
         : 'calc(0% - 10px)'
 
@@ -243,7 +238,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                             top: isMobile ? '3rem' : `${STICKY_LIST_OFFSET_REM}rem`,
                         }}
                     >
-                        {/* Progress Indicator - Outside both Scrollspy instances */}
+                        {/* Progress Indicator */}
                         <div className="mt-3 mb-6 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
                                 <span>
@@ -271,9 +266,9 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                             </div>
                         </div>
 
-                        {/* Desktop Navigation - Its own Scrollspy */}
+                        {/* Desktop Navigation */}
                         <div className="hidden @lg:block space-y-4 relative">
-                            {/* Moving Corner Brackets - Outside Scrollspy */}
+                            {/* Moving Corner Brackets */}
                             <div
                                 className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
                                 style={{
@@ -313,7 +308,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                             </Scrollspy>
                         </div>
 
-                        {/* Mobile Navigation - Separate Scrollspy */}
+                        {/* Mobile Navigation */}
                         <div className="block @lg:hidden">
                             <Scrollspy
                                 items={questIds}
@@ -325,7 +320,6 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                 <MobileQuestLogItem
                                     questItems={questItems}
                                     selectedQuest={selectedQuest}
-                                    // onQuestSelect removed
                                     dropdownOpen={dropdownOpen}
                                     onDropdownToggle={setDropdownOpen}
                                     dropdownRef={dropdownRef}
