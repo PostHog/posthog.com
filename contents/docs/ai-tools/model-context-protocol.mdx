@@ -14,7 +14,7 @@ We also wrote a [great article](https://posthog.com/blog/machine-copy-paste-mcp-
 
 ## Quick install using the PostHog wizard
 
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into Cursor and Claude.
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor** and **Claude Desktop**. More supported tools are on the way!
 
 ```bash
 # Install PostHog MCP server to supported clients
@@ -36,15 +36,15 @@ Obtain a personal API key using the MCP Server preset [here](https://app.posthog
 
 Add the MCP configuration to your desktop client (e.g. Cursor, Windsurf, Claude Desktop) and add your personal API key.
 
-In all examples, make sure to replace the `POSTHOG_AUTH_HEADER` environment variable placeholder with your actual API key.
+<CalloutBox icon="IconInfo" title="Don't forget to use your personal API Key!" type="action">
+In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER</code> environment variable placeholder with the personal API key you obtained in the first step.
+</CalloutBox>
 
 ### Cursor
 
-Skip the rest of the manual installation by installing the MCP by clicking *Add to Cursor*:
+Skip the rest of the manual installation by installing the MCP by clicking *Add to Cursor*.
 
 <CursorMCPInstallDeeplink/>
-
-In Cursor, make sure to replace the `POSTHOG_AUTH_HEADER` environment variable placeholder with your actual API key: `Bearer {INSERT_YOUR_PERSONAL_API_KEY_HERE}`
 
 Alternatively, manually update the MCP configuration file:
 
@@ -56,9 +56,9 @@ Alternatively, manually update the MCP configuration file:
 
 <MCPConfig/>
 
-4. Save the configuration file.
+4. **Save** the configuration file
 
-5. You should see **posthog** under **MCP Tools** with a green status.
+5. You should see **posthog** under **MCP Tools** with a green status
 
 
 ### Claude Code
@@ -87,19 +87,19 @@ claude mcp add-json posthog -s user '{
 
 1. Open [Claude Desktop](http://claude.ai/download) and navigate to **Settings > Developer**
 
-2. Click **Edit Config** to open the configuration file.
+2. Click **Edit Config** to open the configuration file
 
 3. Update `claude_desktop_config.json` with the following configuration:
 
 <MCPConfig/>
 
-4. **Save** the configuration file and **restart Claude** Desktop
+4. **Save** the configuration file and **restart Claude Desktop**
 
-5. The MCP server should show as **PostHog** up in your list of Connectors found in **Settings > Connectors**.
+5. The MCP server should show as **PostHog** in your list of Connectors found in **Settings > Connectors**
 
 ### Visual Studio Code (Copilot)
 
-1. Open [Visual Studio Code](https://code.visualstudio.com/). In the command palette, run: `MCP: Open User Configuration` to open the configuration file.
+1. Open [Visual Studio Code](https://code.visualstudio.com/). In the command palette, run: `MCP: Open User Configuration` to open the configuration file
 
 2. Update `mcp.json` with the following configuration:
 
@@ -123,11 +123,11 @@ claude mcp add-json posthog -s user '{
 }
 ```
 
-3. **Save** the configuration file.
+3. **Save** the configuration file
 
-## Windsurf
+### Windsurf
 
-1. Open Windsurf. Navigate to **Windsurf Settings > Cascade > MCP Servers**
+1. Open Windsurf and navigate to **Windsurf Settings > Cascade > MCP Servers**
 
 2. Click **Manage MCP Servers**
 
@@ -141,14 +141,256 @@ claude mcp add-json posthog -s user '{
 
 
 
-
 ## Security Considerations
+
+We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
+
+**Read-only mode**: If you must connect to real data, limit the MCP server's permissions to read-only access. This prevents the AI from making unintended changes to your PostHog configuration or data. Use the provided `MCP Server` preset in the Personal API Key creator.
+
+**Project scoping**: Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
+
+**Be mindful of prompt injection**: Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
+
 
 
 ## Available Tools
 
 Tools trigger actions on behalf of the user, based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
 
+### Organization & Project Management
+
+#### `organizations-get`
+List all organizations the user has access to.
+
+**Parameters:** None
+
+**Returns:** Array of organization objects with IDs, names, and metadata
+
+#### `set-active-organization`
+Set the active organization for subsequent API calls.
+
+**Parameters:**
+- `orgId` (string, required): UUID of the organization to set as active
+
+**Returns:** Confirmation message
+
+#### `get-organization-details`
+Get detailed information about the current active organization.
+
+**Parameters:** None
+
+**Returns:** Organization details including settings and configuration
+
+#### `get-projects`
+List all projects within the current organization.
+
+**Parameters:** None
+
+**Returns:** Array of project objects with IDs, names, and metadata
+
+#### `set-active-project`
+Set the active project for subsequent API calls.
+
+**Parameters:**
+- `projectId` (number, required): ID of the project to set as active
+
+**Returns:** Confirmation message
+
+#### `get-property-definitions`
+Get property definitions for the current project.
+
+**Parameters:** None
+
+**Returns:** Array of property definitions including event properties and person properties
+
+### Feature Flags
+
+#### `get-all-feature-flags`
+List all feature flags in the current project.
+
+**Parameters:** None
+
+**Returns:** Array of feature flag objects with configurations and settings
+
+#### `get-feature-flag-definition`
+Get detailed information about a specific feature flag.
+
+**Parameters:**
+- `flagId` (number, optional): ID of the feature flag
+- `flagKey` (string, optional): Key of the feature flag
+
+**Returns:** Feature flag definition with rollout conditions and targeting rules
+
+#### `create-feature-flag`
+Creates a new feature flag in the project.
+
+**Parameters:**
+- `name` (string, required): Display name for the feature flag
+- `key` (string, required): Unique key identifier for the flag
+- `description` (string, required): Description of what the flag does
+- `filters` (object, required): Targeting and rollout conditions
+- `active` (boolean, required): Whether the flag is active
+- `tags` (array of strings, optional): Tags for organization
+
+**Returns:** Created feature flag object with URL for management
+
+#### `update-feature-flag`
+Update an existing feature flag.
+
+**Parameters:**
+- `flagKey` (string, required): Key of the feature flag to update
+- `data` (object, required): Updated feature flag configuration
+
+**Returns:** Updated feature flag object
+
+#### `delete-feature-flag`
+Delete a feature flag from the project.
+
+**Parameters:**
+- `flagKey` (string, required): Key of the feature flag to delete
+
+**Returns:** Confirmation of deletion
+
+### Insights & Analytics
+
+#### `get-all-insights`
+List all insights in the current project.
+
+**Parameters:**
+- `data` (object, optional): Optional filtering and pagination parameters
+
+**Returns:** Array of insight objects with queries and visualizations
+
+#### `get-insight`
+Get detailed information about a specific insight.
+
+**Parameters:**
+- `insightId` (number, required): ID of the insight to retrieve
+
+**Returns:** Insight object with query configuration and results
+
+#### `create-insight`
+Create a new insight in the project.
+
+**Parameters:**
+- `data` (object, required): Insight configuration including query, filters, and visualization settings
+
+**Returns:** Created insight object with URL for viewing
+
+#### `update-insight`
+Update an existing insight.
+
+**Parameters:**
+- `insightId` (number, required): ID of the insight to update
+- `data` (object, required): Updated insight configuration
+
+**Returns:** Updated insight object
+
+#### `delete-insight`
+Delete an insight from the project.
+
+**Parameters:**
+- `insightId` (number, required): ID of the insight to delete
+
+**Returns:** Confirmation of deletion
+
+#### `get-sql-insight`
+Query the project's PostHog data warehouse using natural language.
+
+**Parameters:**
+- `query` (string, required): Natural language question about the data (max 1000 characters)
+
+**Returns:** SQL query results with the generated SQL and data
+
+### Dashboards
+
+#### `get-all-dashboards`
+List all dashboards in the current project.
+
+**Parameters:**
+- `data` (object, optional): Optional filtering and pagination parameters
+
+**Returns:** Array of dashboard objects with metadata
+
+#### `get-dashboard`
+Get detailed information about a specific dashboard.
+
+**Parameters:**
+- `dashboardId` (number, required): ID of the dashboard to retrieve
+
+**Returns:** Dashboard object with insights and layout configuration
+
+#### `create-dashboard`
+Create a new dashboard in the project.
+
+**Parameters:**
+- `data` (object, required): Dashboard configuration including name, description, and layout
+
+**Returns:** Created dashboard object with URL for viewing
+
+#### `update-dashboard`
+Update an existing dashboard.
+
+**Parameters:**
+- `dashboardId` (number, required): ID of the dashboard to update
+- `data` (object, required): Updated dashboard configuration
+
+**Returns:** Updated dashboard object
+
+#### `delete-dashboard`
+Delete a dashboard from the project.
+
+**Parameters:**
+- `dashboardId` (number, required): ID of the dashboard to delete
+
+**Returns:** Confirmation of deletion
+
+#### `add-insight-to-dashboard`
+Add an existing insight to a dashboard.
+
+**Parameters:**
+- `data` (object, required): Configuration for adding the insight including dashboard ID, insight ID, and layout position
+
+**Returns:** Updated dashboard with the new insight
+
+### Error Tracking
+
+#### `list-errors`
+List errors in the current project with filtering options.
+
+**Parameters:**
+- Various filtering parameters for error querying (see schema for details)
+
+**Returns:** Array of error objects with stack traces and metadata
+
+#### `get-error-details`
+Get detailed information about a specific error.
+
+**Parameters:**
+- Error identification parameters (see schema for details)
+
+**Returns:** Detailed error information including occurrences and user impact
+
+### Documentation
+
+#### `docs-search`
+Search the PostHog documentation for information.
+
+**Parameters:**
+- `query` (string, required): Search query for PostHog documentation
+
+**Returns:** Relevant documentation content and links
+
+### LLM Observability
+
+#### `get-llm-costs`
+Get LLM usage costs for the project.
+
+**Parameters:**
+- `projectId` (number, required): ID of the project
+- `days` (number, optional): Number of days to look back for cost data
+
+**Returns:** LLM cost breakdown and usage metrics
 
 
 ## Next Steps
