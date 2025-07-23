@@ -51,7 +51,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Important" type="fyi">
   
-Use `$set_once` instead of `$set` to ensure the property is only set on the first evaluation and never overwritten.
+Use "$set_once" instead of "$set" to ensure the property is only set on the first evaluation and never overwritten.
 
 </CalloutBox>
 
