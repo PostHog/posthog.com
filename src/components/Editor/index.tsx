@@ -398,6 +398,7 @@ export function Editor({
                             contentRef={onSearchChange ? undefined : searchContentRef}
                             dataScheme="secondary"
                             className="bg-primary -top-px right-8"
+                            onSearch={onSearchChange}
                         />
 
                         <ScrollArea>

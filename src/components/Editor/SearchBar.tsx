@@ -26,7 +26,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     const [inputValue, setInputValue] = useState(searchQuery)
     const markedRef = useRef(null)
     const duplicateContainerRef = useRef<HTMLDivElement>(null)
-
+    const containerRef = useRef<HTMLDivElement>(null)
     // Sync input value with searchQuery when it changes externally
     useEffect(() => {
         setInputValue(searchQuery)
@@ -110,10 +110,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         }
     }, [])
 
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (event.target instanceof HTMLElement && !containerRef.current?.contains(event.target)) {
+                if (duplicateContainerRef.current) {
+                    duplicateContainerRef.current.remove()
+                }
+                onClose()
+            }
+        }
+        document.addEventListener('click', handleClickOutside)
+        return () => document.removeEventListener('click', handleClickOutside)
+    }, [])
+
     if (!visible) return null
 
     return (
         <div
+            ref={containerRef}
             data-scheme={dataScheme}
             className={`absolute w-64 p-1.5 border border-t-0 border-primary rounded-b z-20 flex items-center gap-1 ${className}`}
         >
@@ -124,13 +138,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}
                 autoFocus
-                onBlur={() => {
-                    if (duplicateContainerRef.current) {
-                        duplicateContainerRef.current.remove()
-                    }
-                    onSearch?.('')
-                    onClose()
-                }}
             />
             <OSButton
                 variant="ghost"
@@ -138,6 +145,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 icon={<IconX />}
                 onClick={() => {
                     onSearch?.('')
+                    setSearchQuery('')
                     onClose()
                 }}
                 className="rounded-full !p-1.5"
