@@ -85,15 +85,19 @@ export function TreeMenu(props: TreeMenuProps) {
 
     return (
         <div className="not-prose space-y-px">
-            {items?.map((item, index) => {
-                const key = `${item.name}-${index}-${item.url}`
-                const hasChildren = item.children && item.children.length > 0
-                return hasChildren ? (
-                    <TreeMenuItem key={key} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
-                ) : (
-                    <TreeLink key={key} menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
-                )
-            })}
+            {items?.length > 0 ? (
+                items?.map((item, index) => {
+                    const key = `${item.name}-${index}-${item.url}`
+                    const hasChildren = item.children && item.children.length > 0
+                    return hasChildren ? (
+                        <TreeMenuItem key={key} item={item} activeItem={activeItem} index={0} onClick={handleClick} />
+                    ) : (
+                        <TreeLink key={key} menuItem={item} index={0} onClick={handleClick} activeItem={activeItem} />
+                    )
+                })
+            ) : (
+                <p className="text-sm">No posts available</p>
+            )}
         </div>
     )
 }
