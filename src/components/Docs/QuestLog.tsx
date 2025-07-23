@@ -1,13 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import * as Icons from '@posthog/icons'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import Slugger from 'github-slugger'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 import Scrollspy from 'react-scrollspy'
-
-// No CSS injection needed - using Tailwind container queries!
 
 export interface QuestLogItemProps {
     title: string
@@ -17,14 +11,68 @@ export interface QuestLogItemProps {
 }
 
 export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const SCROLLSPY_OFFSET = 0
+    const MOBILE_SCROLLSPY_OFFSET = 125
+    const SCROLL_OFFSET_REM = 8
+    const MOBILE_SCROLL_OFFSET_REM = 15
+    const STICKY_LIST_OFFSET_REM = 8
+
+    // Corner bracket SVG constants
+    const TOP_LEFT_CORNER_SVG = (
+        <svg
+            className="absolute -top-[0.45rem] -left-[0.45rem] w-7 h-7"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M2 12V6C2 3.79086 3.79086 2 6 2H12" stroke="orange" strokeWidth="2" />
+        </svg>
+    )
+
+    const TOP_RIGHT_CORNER_SVG = (
+        <svg
+            className="absolute -top-[0.45rem] -right-[0.45rem] w-7 h-7"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M22 12V6C22 3.79086 20.2091 2 18 2H12" stroke="orange" strokeWidth="2" />
+        </svg>
+    )
+
+    const BOTTOM_LEFT_CORNER_SVG = (
+        <svg
+            className="absolute -bottom-[0.45rem] -left-[0.45rem] w-7 h-7"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M2 12V18C2 20.2091 3.79086 22 6 22H12" stroke="orange" strokeWidth="2" />
+        </svg>
+    )
+
+    const BOTTOM_RIGHT_CORNER_SVG = (
+        <svg
+            className="absolute -bottom-[0.45rem] -right-[0.45rem] w-7 h-7"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+        >
+            <path d="M22 12V18C22 20.2091 20.2091 22 18 22H12" stroke="orange" strokeWidth="2" />
+        </svg>
+    )
+
     const [selectedQuest, setSelectedQuest] = useState(0)
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const [hasInitialAnimated, setHasInitialAnimated] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
+    const [isMobile, setIsMobile] = useState(false)
+
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
     const spriteRef = useRef<HTMLDivElement>(null)
     const isFirstRender = useRef(true)
+    const isProgrammaticScroll = useRef(false)
 
     const questItems = React.Children.toArray(children).filter(React.isValidElement) as React.ReactElement<
         QuestLogItemProps & {
@@ -35,7 +83,8 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     >[]
 
-    // Generic utility function for scrolling to element with custom offset
+    const slugger = new Slugger()
+
     const scrollToElementWithOffset = (element: HTMLElement, offsetRem = 0) => {
         const offsetPx = offsetRem * parseFloat(getComputedStyle(document.documentElement).fontSize)
         const elementTop = element.getBoundingClientRect().top + window.pageYOffset
@@ -45,20 +94,19 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         })
     }
 
-    // Consistent ID Strategy using github-slugger
-    // This ensures all quest identifiers (IDs, hashes, anchors) use the same slugification rules
-    const slugger = new Slugger()
-
-    // Utility function to generate consistent slugs from quest titles
     const generateQuestSlug = (title: string) => {
         slugger.reset() // Reset for each use to ensure consistency
         return slugger.slug(title)
     }
 
-    // Generate consistent quest IDs for scrollspy and anchors using github-slugger
-    const questIds = questItems.map((item) => `quest-item-${generateQuestSlug(item.props.title)}`)
+    const restartSpriteAnimation = () => {
+        if (spriteRef.current) {
+            spriteRef.current.classList.remove('quest-log-sprite-animate')
+            void spriteRef.current.offsetWidth // Force reflow
+            spriteRef.current.classList.add('quest-log-sprite-animate')
+        }
+    }
 
-    // Hoisted function to select quest from hash
     const selectQuestFromHash = () => {
         if (typeof window !== 'undefined') {
             const hash = window.location.hash
@@ -71,13 +119,18 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                     return
                 }
             }
-            // If no valid hash, default to first quest
-            setSelectedQuest(0)
+            setSelectedQuest(0) // Default to first quest if no valid hash
         }
     }
 
-    // Handle scrollspy updates
+    const questIds = questItems.map((item) => `quest-item-${generateQuestSlug(item.props.title)}`)
+
     const handleScrollspyUpdate = (el: HTMLElement | null) => {
+        // Skip scrollspy updates during programmatic scrolling
+        if (isProgrammaticScroll.current) {
+            return
+        }
+
         if (el && el.id) {
             const questIndex = questIds.findIndex((id) => id === el.id)
             if (questIndex >= 0 && questIndex !== selectedQuest) {
@@ -86,14 +139,57 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     }
 
-    // Set bracket position on quest change
+    const handleQuestSelect = (index: number) => {
+        const questId = questIds[index]
+        const element = document.getElementById(questId)
+
+        if (element) {
+            // Set flag to prevent Scrollspy from triggering during programmatic scroll
+            isProgrammaticScroll.current = true
+
+            // Use mobile offset for mobile, desktop offset for desktop
+            const offsetRem = isMobile ? MOBILE_SCROLL_OFFSET_REM : SCROLL_OFFSET_REM
+            scrollToElementWithOffset(element, offsetRem)
+
+            // Update URL hash for sharing
+            if (typeof window !== 'undefined') {
+                const slug = generateQuestSlug(questItems[index]?.props.title || '')
+                const newUrl = `${window.location.pathname}${window.location.search}#quest-item-${slug}`
+                window.history.replaceState(null, '', newUrl)
+            }
+
+            // Clear flag after scroll animation completes (smooth scroll typically takes ~500-1000ms)
+            setTimeout(() => {
+                isProgrammaticScroll.current = false
+            }, 1000)
+        }
+
+        setSelectedQuest(index)
+    }
+
+    // Initial delay animation
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setHasInitialAnimated(true)
+            restartSpriteAnimation()
+        }, 1000)
+        return () => clearTimeout(timer)
+    }, [])
+
+    // Handle URL hash changes
+    useEffect(() => {
+        selectQuestFromHash()
+        window.addEventListener('hashchange', selectQuestFromHash)
+        return () => window.removeEventListener('hashchange', selectQuestFromHash)
+    }, [])
+
+    // Update bracket position on quest change
     useEffect(() => {
         const updateBracketPosition = () => {
             const selectedElement = questRefs.current[selectedQuest]
             if (selectedElement) {
                 const rect = selectedElement.getBoundingClientRect()
                 const containerRect = selectedElement.parentElement?.getBoundingClientRect()
-
                 if (containerRect) {
                     setBracketPosition({
                         top: selectedElement.offsetTop,
@@ -105,55 +201,19 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
         updateBracketPosition()
         window.addEventListener('resize', updateBracketPosition)
-
         return () => window.removeEventListener('resize', updateBracketPosition)
     }, [selectedQuest])
-
-    // Handle URL fragment/hash for quest selection - only on mount and hash changes
-    useEffect(() => {
-        selectQuestFromHash()
-        window.addEventListener('hashchange', selectQuestFromHash)
-        return () => window.removeEventListener('hashchange', selectQuestFromHash)
-    }, []) // Empty dependency array - only run once on mount
-
-    // Restart sprite animation on quest change
-    const restartSpriteAnimation = () => {
-        if (spriteRef.current) {
-            // Remove animation class to reset
-            spriteRef.current.classList.remove('quest-log-sprite-animate')
-            // Force reflow to ensure class removal takes effect
-            void spriteRef.current.offsetWidth
-            // Re-add animation class to restart animation
-            spriteRef.current.classList.add('quest-log-sprite-animate')
-        }
-    }
 
     // Trigger sprite animation on quest change
     useEffect(() => {
         if (isFirstRender.current) {
             isFirstRender.current = false
-            return // Skip animation on first render
+            return
         }
         restartSpriteAnimation()
     }, [selectedQuest])
 
-    // Static offset constants
-    // ScrollSpy offset should be negative to account for sticky header (8rem = 128px)
-    const SCROLLSPY_OFFSET = -150 // Negative means "trigger when element is 150px below viewport top"
-    const SCROLL_OFFSET_REM = 8
-    const STICKY_LIST_OFFSET_REM = 8
-
-    // Initial delay animation
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setHasInitialAnimated(true)
-            restartSpriteAnimation() // Trigger sprite animation when loading bar starts
-        }, 1000)
-
-        return () => clearTimeout(timer)
-    }, [])
-
-    // Close dropdown when clicking outside
+    // Handle dropdown outside clicks
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
             if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -164,31 +224,19 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         if (dropdownOpen) {
             document.addEventListener('mousedown', handleClickOutside)
         }
-
-        return () => {
-            document.removeEventListener('mousedown', handleClickOutside)
-        }
+        return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [dropdownOpen])
 
-    const handleQuestSelect = (index: number) => {
-        const questId = questIds[index]
-        const element = document.getElementById(questId)
-
-        if (element) {
-            // Scroll to the quest header with static offset
-            scrollToElementWithOffset(element, SCROLL_OFFSET_REM)
-
-            // Update hash for sharing
-            if (typeof window !== 'undefined') {
-                const slug = generateQuestSlug(questItems[index]?.props.title || '')
-                const newUrl = `${window.location.pathname}${window.location.search}#quest-item-${slug}`
-                window.history.replaceState(null, '', newUrl)
-            }
+    // Handle responsive sticky top offset
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(window.innerWidth < 1024)
         }
 
-        // Set selected quest (though scrollspy will also update this)
-        setSelectedQuest(index)
-    }
+        handleResize() // Set initial value
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [])
 
     const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialAnimated
@@ -200,12 +248,13 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
             <div className="max-w-7xl mx-auto @container">
                 <div className="flex gap-5 flex-col @lg:flex-row">
                     {/* Quest List - Sticky Container */}
-                    {/* Using inline style for dynamic top value since Tailwind can't generate classes from variables */}
                     <div
-                        className="w-full @lg:w-auto @lg:max-w-[33.33%] @lg:flex-shrink-0 @lg:sticky @lg:self-start mt-3"
-                        style={{ top: `${STICKY_LIST_OFFSET_REM}rem` }}
+                        className="w-full @lg:w-auto @lg:max-w-[33.33%] @lg:flex-shrink-0 sticky self-start mt-3 pt-6 @lg:pt-0 bg-light dark:bg-dark z-50"
+                        style={{
+                            top: isMobile ? '3rem' : `${STICKY_LIST_OFFSET_REM}rem`,
+                        }}
                     >
-                        {/* Progress Indicator */}
+                        {/* Progress Indicator - Outside both Scrollspy instances */}
                         <div className="mt-3 mb-6 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
                                 <span>
@@ -233,74 +282,31 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                             </div>
                         </div>
 
-                        {/* ScrollSpy with static offset for scroll position detection */}
-                        <Scrollspy
-                            items={questIds}
-                            currentClassName="active"
-                            offset={SCROLLSPY_OFFSET}
-                            onUpdate={handleScrollspyUpdate}
-                            style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
-                        >
-                            {/* Desktop Quest List */}
-                            <div className="hidden @lg:block space-y-4 relative">
-                                {/* Moving Corner Brackets */}
-                                <div
-                                    className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
-                                    style={{
-                                        top: `${bracketPosition.top}px`,
-                                        height: `${bracketPosition.height}px`,
-                                    }}
-                                >
-                                    {/* Top Left Corner */}
-                                    <svg
-                                        className="absolute -top-[0.45rem] -left-[0.45rem] w-7 h-7"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path d="M2 12V6C2 3.79086 3.79086 2 6 2H12" stroke="orange" strokeWidth="2" />
-                                    </svg>
-                                    {/* Top Right Corner */}
-                                    <svg
-                                        className="absolute -top-[0.45rem] -right-[0.45rem] w-7 h-7"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M22 12V6C22 3.79086 20.2091 2 18 2H12"
-                                            stroke="orange"
-                                            strokeWidth="2"
-                                        />
-                                    </svg>
-                                    {/* Bottom Left Corner */}
-                                    <svg
-                                        className="absolute -bottom-[0.45rem] -left-[0.45rem] w-7 h-7"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M2 12V18C2 20.2091 3.79086 22 6 22H12"
-                                            stroke="orange"
-                                            strokeWidth="2"
-                                        />
-                                    </svg>
-                                    {/* Bottom Right Corner */}
-                                    <svg
-                                        className="absolute -bottom-[0.45rem] -right-[0.45rem] w-7 h-7"
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                    >
-                                        <path
-                                            d="M22 12V18C22 20.2091 20.2091 22 18 22H12"
-                                            stroke="orange"
-                                            strokeWidth="2"
-                                        />
-                                    </svg>
-                                </div>
+                        {/* Desktop Navigation - Its own Scrollspy */}
+                        <div className="hidden @lg:block space-y-4 relative">
+                            {/* Moving Corner Brackets - Outside Scrollspy */}
+                            <div
+                                className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
+                                style={{
+                                    top: `${bracketPosition.top}px`,
+                                    height: `${bracketPosition.height}px`,
+                                }}
+                            >
+                                {TOP_LEFT_CORNER_SVG}
+                                {TOP_RIGHT_CORNER_SVG}
+                                {BOTTOM_LEFT_CORNER_SVG}
+                                {BOTTOM_RIGHT_CORNER_SVG}
+                            </div>
 
+                            <Scrollspy
+                                items={questIds}
+                                currentClassName="active"
+                                offset={SCROLLSPY_OFFSET}
+                                onUpdate={handleScrollspyUpdate}
+                                className="space-y-4"
+                                style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
+                                rootEl="#content-menu-wrapper"
+                            >
                                 {questItems.map((child, index) =>
                                     React.cloneElement(child, {
                                         key: index,
@@ -310,10 +316,18 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                         onSelect: () => handleQuestSelect(index),
                                     })
                                 )}
-                            </div>
+                            </Scrollspy>
+                        </div>
 
-                            {/* Mobile Dropdown */}
-                            <div className="block @lg:hidden">
+                        {/* Mobile Navigation - Separate Scrollspy */}
+                        <div className="block @lg:hidden">
+                            <Scrollspy
+                                items={questIds}
+                                currentClassName="active"
+                                offset={MOBILE_SCROLLSPY_OFFSET}
+                                onUpdate={handleScrollspyUpdate}
+                                style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
+                            >
                                 <MobileQuestLogItem
                                     questItems={questItems}
                                     selectedQuest={selectedQuest}
@@ -322,8 +336,8 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                     onDropdownToggle={setDropdownOpen}
                                     dropdownRef={dropdownRef}
                                 />
-                            </div>
-                        </Scrollspy>
+                            </Scrollspy>
+                        </div>
                     </div>
 
                     {/* Quest Details */}
@@ -332,7 +346,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                             <div className="divide-y divide-light dark:divide-dark">
                                 {questItems.map((questItem, index) => (
                                     <div key={index} className="p-4 md:p-6">
-                                        <h2 id={questIds[index]} className="!mt-0 text-lg md:text-xl font-bold mb-4">
+                                        <h2 id={questIds[index]} className={`!mt-0 text-lg md:text-xl font-bold mb-4`}>
                                             {questItem.props.title}
                                         </h2>
 
