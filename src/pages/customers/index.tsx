@@ -11,6 +11,7 @@ import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
 const CUSTOMER_ORDER = [
     'ycombinator',
     'mistralai',
+    'supabase',
     'elevenlabs',
     'raycast',
     'airbus',
@@ -87,9 +88,9 @@ export default function Customers(): JSX.Element {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
-        { name: 'Product(s) used', width: 'minmax(auto,250px)' },
+        { name: 'Product(s) used', width: 'minmax(auto,250px)', align: 'left' },
         { name: 'Case study?', width: 'minmax(auto,100px)', align: 'center' as const },
-        { name: 'Notes', width: 'minmax(auto,180px)', align: 'center' as const },
+        { name: 'Notes', width: 'minmax(auto,180px)', align: 'left' as const },
     ]
 
     const rows = (filteredCustomers || customers).map((customer: any, index: number) => {
@@ -101,9 +102,9 @@ export default function Customers(): JSX.Element {
 
     return (
         <>
-            <SEO title="notable customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <SEO title="customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
             <Editor
-                title="notable customers"
+                title="cool customers"
                 type="mdx"
                 slug="/customers"
                 availableFilters={[
@@ -152,6 +153,10 @@ export default function Customers(): JSX.Element {
                 onFilterChange={(data) => setFilteredCustomers(data)}
             >
                 <ScrollArea>
+                    <p>
+                        Here are some customers who use PostHog. Use the filers above to read case studies of customers
+                        who use specific PostHog products.
+                    </p>
                     <OSTable columns={columns} rows={rows} />
                 </ScrollArea>
             </Editor>

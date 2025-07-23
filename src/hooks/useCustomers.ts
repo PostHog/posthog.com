@@ -1,15 +1,17 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
+// @todo:
+// fields to import from /contents/customers/*.md:
+// industries, users
+
 // Import PNG logos (not converted to React components)
-import CreatifyLogo from '../images/customers/creatify-light.png'
-import CreatifyLogoDark from '../images/customers/creatify-dark.png'
-import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
-import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
+import CreatifyLogo from '../images/customers/creatify-light.png'
+import CreatifyLogoDark from '../images/customers/creatify-dark.png'
 import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
@@ -18,14 +20,16 @@ import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
-import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
+import PurpleWaveLogo from '../components/CustomerLogos/PurpleWaveLogo'
 import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
+import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
+import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
@@ -78,87 +82,161 @@ interface BaseCustomer {
 
 // Define all customer data
 const CUSTOMER_DATA: Record<string, BaseCustomer> = {
+    '4dayweek': {
+        name: '4DayWeek',
+        toolsUsed: ['experiments', 'product_analytics'],
+        notes: '',
+        // logo: 4DayWeek,
+    },
+    '11x': {
+        name: '11x',
+        toolsUsed: ['experiments', 'product_analytics', 'llm_analytics', 'cdp'],
+        notes: 'AI SDR',
+        // logo: 11x,
+    },
+    adauris: {
+        name: 'Adauris',
+        toolsUsed: ['experiments', 'session_replay', 'product_analytics'],
+        notes: 'Generative AI audio',
+        // logo: Adauris,
+    },
     airbus: {
         name: 'Airbus',
         toolsUsed: [],
-        notes: '',
+        notes: 'They make airplanes',
         logo: AirbusLogo,
-        height: 24,
+        height: 10,
     },
     assemblyai: {
         name: 'AssemblyAI',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['experiments', 'product_analytics'],
+        notes: 'AI-based transcription APIs',
         logo: AssemblyAILogo,
+    },
+    brainboard: {
+        name: 'Brainboard',
+        toolsUsed: ['experiments', 'product_analytics', 'apps'],
+        notes: 'Collaborative DevOps',
+        // logo: Brainboard,
     },
     carvertical: {
         name: 'carVertical',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['feature_flags', 'product_analytics'],
+        notes: 'Vehicle history reports',
         logo: CarVerticalLogo,
     },
     contra: {
         name: 'Contra',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
+        notes: 'Creative freelance marketplace',
         logo: ContraLogo,
     },
     creatify: {
         name: 'Creatify',
-        toolsUsed: ['web_analytics'],
-        notes: '',
+        toolsUsed: ['web_analytics', 'product_analytics'],
+        notes: 'AI video editor',
         logo: {
             light: CreatifyLogo,
             dark: CreatifyLogoDark,
         },
+        height: 28,
     },
     dhl: {
         name: 'DHL',
         toolsUsed: [],
-        notes: '',
+        notes: 'The logistics company with the red and yellow logo',
         logo: DHLLogo,
     },
     elevenlabs: {
         name: 'ElevenLabs',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['feature_flags', 'product_analytics', 'feature_flags', 'surveys'],
+        notes: 'AI voice generator',
         logo: ElevenLabsLogo,
         height: 18,
     },
+    greatexpectations: {
+        name: 'Great Expectations',
+        toolsUsed: ['product_analytics'],
+        notes: 'Data quality SaaS platform',
+        // logo: GreatExpectations,
+    },
+    groove: {
+        name: 'Groove',
+        toolsUsed: ['experiments', 'product_analytics', 'surveys'],
+        notes: 'Help desk platform',
+        // logo: Groove,
+    },
     hasura: {
         name: 'Hasura',
-        toolsUsed: ['session_replay'],
-        notes: '',
+        toolsUsed: ['session_replay', 'product_analytics'],
+        notes: 'Open source GraphQL engine',
         logo: HasuraLogo,
     },
     headshotpro: {
         name: 'HeadshotPro',
-        toolsUsed: ['data_warehouse'],
-        notes: '',
+        toolsUsed: ['data_warehouse', 'product_analytics'],
+        notes: 'AI photo generator',
         logo: HeadshotProLogo,
+    },
+    hostai: {
+        name: 'HostAI',
+        toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
+        notes: 'AI for vacation rentals managers',
+        // logo: HostAI,
+    },
+    juicebox: {
+        name: 'Juicebox',
+        toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
+        notes: 'AI recruitment platform',
+        // logo: Juicebox,
+    },
+    mentionme: {
+        name: 'Mention Me',
+        toolsUsed: ['product_analytics', 'session_replay'],
+        notes: 'Marketing referral campaigns',
+        // logo: MentionMe,
+    },
+    mintlify: {
+        name: 'Mintlify',
+        toolsUsed: ['session_replay', 'api'],
+        notes: 'Product and technical docs',
+        // logo: Mintlify,
     },
     mistralai: {
         name: 'Mistral AI',
         toolsUsed: [],
         notes: '',
         logo: MistralAILogo,
+        height: 12,
     },
     netdata: {
         name: 'Netdata',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['session_replay', 'apps'],
+        notes: 'Open source monitoring',
         logo: NetdataLogo,
+    },
+    octomind: {
+        name: 'Octomind',
+        toolsUsed: ['experiments', 'surveys', 'product_analytics', 'web_analytics'],
+        notes: 'AI-powered end-to-end testing',
+        // logo: Octomind,
+    },
+    opensauced: {
+        name: 'OpenSauced',
+        toolsUsed: ['product_analytics'],
+        notes: 'Open source contribution tracker',
+        // logo: Opensauced,
     },
     phantom: {
         name: 'Phantom',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['data_warehouse', 'feature_flags'],
+        notes: 'Crypto wallet',
         logo: PhantomLogo,
     },
     pry: {
         name: 'Pry',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['product_analytics', 'session_replay', 'heatmaps'],
+        notes: 'Financial planning for SMBs, acquired by Brex',
         logo: PryLogo,
     },
     posthog: {
@@ -177,38 +255,34 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         ],
         notes: 'Would it be clever or lame if we included our own company here?',
         logo: PostHogLogo,
+        height: 10,
     },
     purplewave: {
         name: 'Purplewave',
         toolsUsed: ['surveys'],
-        notes: '',
+        notes: 'Heavy duty equipment marketplace',
         logo: PurpleWaveLogo,
         height: 24,
     },
     raycast: {
         name: 'Raycast',
         toolsUsed: [],
-        notes: '',
+        notes: 'MacOS spotlight replacement on steroids',
         logo: RaycastLogo,
     },
     researchgate: {
         name: 'ResearchGate',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['experiments', 'feature_flags', 'product_analytics'],
+        notes: "World's largest professional network for scientists",
         logo: ResearchGateLogo,
-        height: 20,
-    },
-    speakeasy: {
-        name: 'Speakeasy',
-        toolsUsed: [],
-        notes: '',
-        logo: SpeakeasyLogo,
+        height: 12,
     },
     significa: {
         name: 'Significa',
         toolsUsed: ['web_analytics', 'product_analytics'],
-        notes: '',
+        notes: 'Digital agency',
         logo: SignificaLogo,
+        height: 24,
         quotes: [
             {
                 name: 'Tomás Gouveia',
@@ -223,46 +297,72 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             },
         ],
     },
+    speakeasy: {
+        name: 'Speakeasy',
+        toolsUsed: ['feature_flags', 'product_analytics'],
+        notes: 'API generator',
+        logo: SpeakeasyLogo,
+    },
     supabase: {
         name: 'Supabase',
-        toolsUsed: [],
-        notes: '',
+        toolsUsed: ['max_ai', 'experiments', 'product_analytics'],
+        notes: 'Postgres in the cloud',
         logo: SupabaseLogo,
+    },
+    swype: {
+        name: 'Swype',
+        toolsUsed: ['session_replay', 'product_analytics'],
+        notes: 'Tinder for jobs',
+        // logo: Swype,
     },
     startengine: {
         name: 'StartEngine',
         toolsUsed: [],
-        notes: '',
+        notes: 'Crowdfunding for startups',
         logo: StartEngineLogo,
+        height: 12,
     },
     trust: {
         name: 'Trust',
         toolsUsed: [],
-        notes: '',
+        notes: 'Crypto wallet',
         logo: TrustWalletLogo,
     },
     vendasta: {
         name: 'Vendasta',
-        toolsUsed: ['experiments'],
-        notes: '',
+        toolsUsed: ['experiments', 'apps', 'cdp'],
+        notes: 'Channel partner platform',
         logo: VendastaLogo,
     },
     webshare: {
         name: 'Webshare',
-        toolsUsed: ['data_warehouse'],
-        notes: '',
+        toolsUsed: ['data_warehouse', 'experiments', 'product_analytics'],
+        notes: 'Proxy server',
         logo: WebshareLogo,
+    },
+    wittyworks: {
+        name: 'Witty Works',
+        toolsUsed: ['apps', 'product_analytics'],
+        notes: '',
+        // logo: Wittyworks,
+    },
+    wowzer: {
+        name: 'Wowzer',
+        toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
+        notes: 'AI image generator',
+        // logo: Wowzer,
     },
     ycombinator: {
         name: 'Y Combinator',
-        toolsUsed: ['experiments', 'autocapture', 'posthog_cloud', 'insights'],
-        notes: '',
+        toolsUsed: ['experiments', 'insights'],
+        notes: "World's premier startup accelerator",
         logo: YCombinatorLogo,
+        height: 10,
     },
     zealot: {
         name: 'Zealot',
-        toolsUsed: ['error_tracking'],
-        notes: '',
+        toolsUsed: ['error_tracking', 'session_replay', 'error_tracking', 'product_analytics'],
+        notes: 'AI customer activation platform',
         logo: {
             light: ZealotLogo,
             dark: ZealotLogoDark,
