@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'gatsby'
 import OSTable from 'components/OSTable'
 import Logo from 'components/Logo'
+import { SlideContainer } from './SlidesTemplate'
 
 interface Customer {
     slug: string
@@ -30,7 +31,7 @@ interface CustomersSlideProps {
 export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
     // Create table structure for customers
     const customerTableColumns = [
-        { name: '', width: 'minmax(auto,100px)', align: 'center' as const },
+        { name: '', width: 'minmax(auto,100px)', align: 'center' as const, className: 'hidden @md:block' },
         { name: 'Company', width: 'minmax(150px,300px)', align: 'center' as const },
         { name: '', width: 'minmax(auto,1fr)', align: 'left' as const },
         { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
@@ -83,10 +84,10 @@ export default function CustomersSlide({ productName, customers, customerData, h
 
             return {
                 cells: [
-                    { content: index + 1 },
+                    { content: index + 1, className: 'hidden @md:block' },
                     {
                         content: renderLogo(),
-                        className: '!p-4',
+                        className: 'p-1 @md:!p-4',
                     },
                     {
                         content: (
@@ -95,7 +96,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                                 <span className="text-lg italic">"{data.description}"</span>
                             </>
                         ),
-                        className: 'text-xl !px-8 !py-4',
+                        className: 'text-xl px-2 @md:!px-8 !py-4',
                     },
                     {
                         content: hasCaseStudy(customer.slug) ? (
@@ -114,12 +115,12 @@ export default function CustomersSlide({ productName, customers, customerData, h
         })
 
     return (
-        <div className="h-full p-12 bg-light dark:bg-dark">
+        <SlideContainer>
             <h2 className="text-4xl font-bold text-primary mb-6 text-center">
                 Customers who love <Logo noText fill="primary" className="h-14 inline-block relative -top-1 mx-1" />{' '}
                 {productName}
             </h2>
             <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" />
-        </div>
+        </SlideContainer>
     )
 }

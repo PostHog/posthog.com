@@ -237,7 +237,7 @@ export default function Products(): JSX.Element {
                                                     </span>
                                                 ),
                                                 content: (
-                                                    <div className="pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-4 relative [&>div]:mx-auto [&_figure]:text-center">
+                                                    <div className="@md:pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-x-1 gap-y-4 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center">
                                                         {products.map((product) => (
                                                             <ZoomHover
                                                                 key={product.slug}

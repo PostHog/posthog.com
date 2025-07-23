@@ -153,7 +153,6 @@ export default function Explorer({
                             children
                         ) : (
                             <ScrollArea className="h-full">
-                                {/* <DebugContainerQuery /> */}
                                 {accentImage && (
                                     <div className="absolute right-0 top-6">
                                         <div className="relative max-w-md @4xl:max-w-lg @5xl:max-w-xl @6xl:max-w-2xl transition-all duration-700 ease-out opacity-25 @xl:opacity-50">
@@ -165,7 +164,7 @@ export default function Explorer({
                                 )}
                                 <div
                                     className={`${getProseClasses()} max-w-none h-full ${
-                                        padding ? 'relative p-4' : ''
+                                        padding ? 'relative @md:p-4' : ''
                                     }`}
                                 >
                                     {!fullScreen && showTitle && <h1>{title}</h1>}
@@ -177,7 +176,7 @@ export default function Explorer({
                     {leftSidebarContent && (
                         <aside
                             data-scheme="secondary"
-                            className="w-64 bg-primary border-r border-primary h-full prose prose-sm"
+                            className="@md:w-64 bg-primary border-t @md:border-t-0 @md:border-r border-primary h-full prose prose-sm"
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">

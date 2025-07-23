@@ -34,6 +34,10 @@ interface SlidesTemplateProps {
     }
 }
 
+export const SlideContainer = ({ children }: { children: React.ReactNode }) => {
+    return <div className="h-full py-8 px-4 @md:p-12 bg-light dark:bg-dark">{children}</div>
+}
+
 export default function SlidesTemplate({
     productHandle,
     data,
@@ -281,7 +285,7 @@ export default function SlidesTemplate({
             >
                 <div
                     data-scheme="primary"
-                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden p-4"
+                    className="bg-accent grid grid-cols-1 gap-2 [&>div:first-child_>span]:hidden p-2 @md:p-4"
                 >
                     {slides.map((slide, index) => (
                         <div
