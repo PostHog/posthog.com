@@ -117,7 +117,7 @@ module.exports = {
                 shouldBlockNodeFromTransformation: (node) =>
                     node.internal.type === 'File' &&
                     node.url &&
-                    node.url.includes('https://raw.githubusercontent.com/'),
+                    new URL(node.url).hostname === 'raw.githubusercontent.com',
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
