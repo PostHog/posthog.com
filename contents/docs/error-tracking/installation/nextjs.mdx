@@ -20,21 +20,15 @@ Next.js is a SSR framework with both client-side and server-side rendering. To t
 
 <NextJSInstall />
 
----  
-
-**✅ Checkpoint** – Before proceeding, confirm that:
-
-1. You can [manually capture](/docs/product-analytics/capture-events) events in client-side code (components using `'use client'`).
-2. If [autocapture is enabled](/docs/product-analytics/autocapture#disabling-autocapture), you should see basic events like clicks and page views.
-
-
-<div className="mt-4 mb-2">
-    <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
-      Check for events in PostHog
-    </CallToAction>
-</div>
 </Step>
+
+
 <Step title="Capturing client-side exceptions" subtitle="Your goal in this step: Capture your first client-side exception event." badge="required">
+
+You can capture exceptions in client-side code in two ways:
+
+1. [Manual capture](/docs/product-analytics/capture-events): Use `posthog.capture()` in compontents that include `'use client'`.
+2. [Autocapture](/docs/product-analytics/autocapture#disabling-autocapture): PostHog will automatically capture common events and interactions like page views and clicks.
 
 <JSWebErrorTracking />
 
@@ -55,9 +49,13 @@ Next.js is a SSR framework with both client-side and server-side rendering. To t
   </Tab.Panels>
 </Tab.Group>
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that autocapture, manual capture, and any error boundary capture are working on the client-side.
+<Step checkpoint title="Verify client-side exceptions" subtitle="Confirm capture is working client-side">
+
+Before proceeding, let's make sure that autocapture, manual capture, and any error boundary capture are working on the client-side.
+
+You should see events in the PostHog activity feed.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -66,6 +64,7 @@ Next.js is a SSR framework with both client-side and server-side rendering. To t
 </div>
 
 </Step>
+
 <Step title="Installing PostHog SDK for server-side" subtitle="Your goal in this step: Install the PostHog Node.js SDK for server-side error tracking." badge="required">
 
 Next.js enables you to both server-side render pages and add server-side functionality. To integrate PostHog into your Next.js app on the server-side, you can use the [Node SDK](/docs/libraries/node).
@@ -107,9 +106,11 @@ const posthog = getPostHogServer()
 posthog.capture("button-clicked")
 ```
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that you can manually capture exceptions in server-side code.
+<Step checkpoint title="Verify server-side exceptions" subtitle="Confirm capture is working server-side">
+
+You should see events and exceptions in PostHog coming from your server-side code in the activity feed.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -118,6 +119,7 @@ posthog.capture("button-clicked")
 </div>
 
 </Step>
+
 <Step title="Capturing server-side exceptions" subtitle="Your goal in this step: Capture your first server-side exception event." badge="required">
 
 To capture errors that occur in your server-side code, you can set up a [`instrumentation.ts`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of your project. This provides a `onRequestError` hook that you can use to capture errors.
@@ -163,17 +165,8 @@ export const onRequestError = async (err, request, context) => {
 
 You can find a full example of both this and client-side error tracking in our [Next.js error monitoring tutorial](/tutorials/nextjs-error-monitoring).
 
---- 
-
-**✅ Checkpoint** – Before proceeding, confirm that you can capture exceptions in server-side code.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
-    Check for server-side exceptions in PostHog
-  </CallToAction>
-</div>
-
 </Step>
+
 <Step title="Next steps">
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
