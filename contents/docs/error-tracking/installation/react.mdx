@@ -66,9 +66,11 @@ export default defineConfig({
 See our [Remix docs](/docs/libraries/remix) for more details.
 </details>
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that you can capture events with PostHog using `posthog.capture('test_event')`.
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, confirm that you can capture events with PostHog using `posthog.capture('test_event')`.
 
 ```tsx
 import { usePostHog } from 'posthog-js/react'
@@ -92,9 +94,11 @@ You can enable exception autocapture for the JavaScript Web SDK in the **Error t
 
 When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being automatically captured.
+<Step checkpoint title="Verify exception autocapture" subtitle="Confirm exceptions are being automatically captured">
+
+Before proceeding, confirm that exceptions are being automatically captured.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -103,6 +107,7 @@ When enabled, this automatically captures `$exception` events when errors are th
 </div>
 
 </Step>
+
 <Step title="Setting up error boundaries" subtitle="Your goal in this step: Capturing errors with error boundaries." badge="optional">
 
 You can add a custom error boundary to capture rendering errors thrown by components:
@@ -136,9 +141,11 @@ class CustomErrorBoundary extends React.Component {
 }
 ```
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being properly captured by the error boundary.
+<Step checkpoint title="Verify error boundary capture" subtitle="Confirm exceptions are being properly captured by the error boundary">
+
+Before proceeding, confirm that exceptions are being properly captured by the error boundary.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -147,6 +154,7 @@ class CustomErrorBoundary extends React.Component {
 </div>
 
 </Step>
+
 <Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your React application." badge="optional">
 
 It is also possible to manually capture exceptions using the `captureException` method:
@@ -155,9 +163,11 @@ It is also possible to manually capture exceptions using the `captureException` 
 posthog.captureException(error, additionalProperties)
 ```
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that manual exception capture is working.
+<Step checkpoint title="Verify manual exception capture" subtitle="Confirm manual exception capture is working">
+
+Before proceeding, confirm that manual exception capture is working.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -166,6 +176,7 @@ posthog.captureException(error, additionalProperties)
 </div>
 
 </Step>
+
 <Step title="Next steps">
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:

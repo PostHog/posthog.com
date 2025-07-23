@@ -12,9 +12,11 @@ import InstallAngular from "../../integrate/_snippets/install-angular.mdx"
 
 <InstallAngular/>
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that you can [capture events](/docs/libraries/angular#capture-custom-events) with PostHog.
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, confirm that you can [capture events](/docs/libraries/angular#capture-custom-events) with PostHog.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -23,6 +25,7 @@ import InstallAngular from "../../integrate/_snippets/install-angular.mdx"
 </div>
 
 </Step>
+
 <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Angular application." badge="required">
   
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Angular application.
@@ -163,9 +166,11 @@ If there are more errors you'd like to capture, you can manually call the `captu
 posthog.captureException(e, additionalProperties)
 ```
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being properly captured.
+<Step checkpoint title="Verify exception capture" subtitle="Confirm exceptions are being properly captured">
+
+Before proceeding, confirm that exceptions are being properly captured.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -174,6 +179,7 @@ posthog.captureException(e, additionalProperties)
 </div>
 
 </Step>
+
 <Step title="Next steps">
     
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:

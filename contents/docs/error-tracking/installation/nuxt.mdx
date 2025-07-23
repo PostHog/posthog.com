@@ -14,9 +14,11 @@ import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 
 <InstallNuxt />
 
----
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that you can [capture events](/docs/libraries/nuxt-js#capture-custom-events) with PostHog.
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, confirm that you can [capture events](/docs/libraries/nuxt-js#capture-custom-events) with PostHog.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -25,6 +27,7 @@ import InstallNuxt from "../../integrate/_snippets/install-nuxt.mdx"
 </div>
 
 </Step>
+
 <Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Nuxt application." badge="required">
 
 Send errors directly using the posthog client, follow instructions on how to get the posthog instance:
@@ -65,9 +68,11 @@ export default defineEventHandler(async (event) => {
 })
 ```
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being properly captured.
+<Step checkpoint title="Verify manual exception capture" subtitle="Confirm exceptions are being properly captured">
+
+Before proceeding, confirm that exceptions are being properly captured.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -76,6 +81,7 @@ export default defineEventHandler(async (event) => {
 </div>
 
 </Step>
+
 <Step title="Configuring exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Nuxt application." badge="required">
 
 Update your `posthog.client.js` to add an error hook
@@ -90,9 +96,11 @@ export default defineNuxtPlugin((nuxtApp) => {
 })
 ```
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being automatically captured.
+<Step checkpoint title="Verify exception autocapture" subtitle="Confirm exceptions are being automatically captured">
+
+Before proceeding, confirm that exceptions are being automatically captured.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -101,6 +109,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 </div>
 
 </Step>
+
 <Step title="Next steps">
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:

@@ -39,24 +39,30 @@ If you serve minified bundles in production, PostHog requires source maps to gen
 For other build tools, consult their documentation to enable source maps.
 
 </Step>
+
 <Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
 <InjectSourceMap />
 
---- 
+</Step>
 
-**✅ Checkpoint** – Confirm that the served files are injected with the correct source map comment in production in dev tools:
+<Step checkpoint title="Verify source map injection" subtitle="Confirm source map comments are present">
+
+Confirm that the served files are injected with the correct source map comment in production in dev tools:
 
 ```js 
 //# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
 ``` 
 
 </Step>
+
 <Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
 <UploadSourceMap />
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
+<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
+
+Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
 
 <div className="mt-4 mb-2">
 <CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">

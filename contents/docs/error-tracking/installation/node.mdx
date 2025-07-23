@@ -30,9 +30,11 @@ You can find your project API key and instance address in the [project settings]
 
 > **Note:** As a rule of thumb, we do not recommend hardcoding API keys. Setting it as an environment variable is preferred.
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that you can capture events with PostHog using `client.capture('test_event')`.
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, confirm that you can capture events with PostHog using `client.capture('test_event')`.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -81,9 +83,11 @@ posthog.captureException(e, 'user_distinct_id', additionalProperties)
 
 This is helpful if you've built your own error handling logic or want to capture exceptions normally handled by the framework.
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being properly captured.
+<Step checkpoint title="Verify exception capture" subtitle="Confirm exceptions are being properly captured">
+
+Before proceeding, confirm that exceptions are being properly captured.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -92,6 +96,7 @@ This is helpful if you've built your own error handling logic or want to capture
 </div>
 
 </Step>
+
 <Step title="Next steps">
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:

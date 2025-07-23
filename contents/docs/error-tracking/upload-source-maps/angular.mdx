@@ -60,18 +60,23 @@ Then, build your Angular application:
 ng build --configuration production
 ```
 
---- 
+</Step>
 
-**✅ Checkpoint** – Confirm that the source maps are generated in the `dist/<your-app-name>/` directory. You should see a `.js.map` file for each JS bundle.
+<Step checkpoint title="Verify source map generation" subtitle="Confirm source maps are generated">
+
+Confirm that the source maps are generated in the `dist/<your-app-name>/` directory. You should see a `.js.map` file for each JS bundle.
 
 </Step>
+
 <Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
 
 <InjectSourceMap />
 
---- 
+</Step>
 
-**✅ Checkpoint** – Confirm that the served files are injected with the correct source map comment in production in dev tools:
+<Step checkpoint title="Verify source map injection" subtitle="Confirm source map comments are present">
+
+Confirm that the served files are injected with the correct source map comment in production in dev tools:
 
 You should see a comment like this in your minified JS files, for example `main-IX6K2QJM.js`:
 
@@ -80,12 +85,15 @@ You should see a comment like this in your minified JS files, for example `main-
 ``` 
 
 </Step>
+
 <Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
 <UploadSourceMap />
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
+<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
+
+Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
 
 <div className="mt-4 mb-2">
 <CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">

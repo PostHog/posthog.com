@@ -90,9 +90,11 @@ The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot use
 
 </details>
 
----
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that:
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, confirm that:
 
 1. You can [manually capture](/docs/product-analytics/capture-events) events in client-side code (components using `'use client'`).
 2. If [autocapture is enabled](/docs/product-analytics/autocapture#disabling-autocapture), you should see basic events like clicks and page views.
@@ -102,7 +104,9 @@ The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot use
     Check for events in PostHog
   </CallToAction>
 </div>
+
 </Step>
+
 <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your web application." badge="required">
 
 ### Setting up exception autocapture
@@ -113,9 +117,11 @@ You can enable exception autocapture for the JavaScript Web SDK in the **Error t
 
 When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that exceptions are being automatically captured in PostHog.
+<Step checkpoint title="Verify exception autocapture" subtitle="Confirm exceptions are being automatically captured">
+
+Before proceeding, confirm that exceptions are being automatically captured in PostHog.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -124,6 +130,7 @@ When enabled, this automatically captures `$exception` events when errors are th
 </div>
 
 </Step>
+
 <Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your web application." badge="optional">
 
 It is also possible to manually capture exceptions using the `captureException` method:
@@ -134,9 +141,11 @@ posthog.captureException(error, additionalProperties)
 
 This is helpful if you've built your own error handling logic or want to capture exceptions that are handled by your application code.
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that manual exception capture is working.
+<Step checkpoint title="Verify manual exception capture" subtitle="Confirm manual exception capture is working">
+
+Before proceeding, confirm that manual exception capture is working.
 
 <div className="mt-4 mb-2">
   <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
@@ -145,6 +154,7 @@ This is helpful if you've built your own error handling logic or want to capture
 </div>
 
 </Step>
+
 <Step title="Next steps">
 
 After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:

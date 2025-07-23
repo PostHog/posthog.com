@@ -62,9 +62,11 @@ nuxt build
 
 Post-build scripts should automatically generate and upload sourcemaps to PostHog.
 
---- 
+</Step>
 
-**✅ Checkpoint** – Before proceeding, confirm that sourcemaps are being properly uploaded.
+<Step checkpoint title="Verify source map upload" subtitle="Confirm sourcemaps are being properly uploaded">
+
+Before proceeding, confirm that sourcemaps are being properly uploaded.
 
 You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
 
@@ -75,6 +77,7 @@ You can verify the injection is successful by checking your `.mjs.map` source ma
 </div>
 
 </Step>
+
 <Step title="Next steps" >
 
 After configuring PostHog, update your build and deployment process to serve bundles **injected** with the `chunkId` comments. PostHog relies on these comments to display the correct stack traces. Remember to export the [required environment variables](#authenticating-the-posthog-cli) in your deployment process.
