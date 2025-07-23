@@ -97,7 +97,7 @@ export default function Customers(): JSX.Element {
         { name: '', width: 'auto', align: 'center' as const },
         { name: 'Company name', width: 'minmax(150px,1fr)', align: 'center' as const },
         { name: 'Product(s) used', width: 'minmax(auto,250px)', align: 'left' },
-        { name: 'Case study?', width: 'minmax(auto,100px)', align: 'center' as const },
+        { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
         { name: 'Notes', width: 'minmax(auto,180px)', align: 'left' as const },
     ]
 

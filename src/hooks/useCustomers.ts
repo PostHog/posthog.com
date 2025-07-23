@@ -1,13 +1,20 @@
 import React from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 
-// @todo:
-// fields to import from /contents/customers/*.md:
-// industries, users
+// todos:
+// - import roles, industries from MDX
+// - source "tools used" exclusively from useCustomers
+//   - read tools used by slug, check useProduct hook to get name, link, and link product name to presentation (product page)
+// - make 'featured' filter work, default page to feature = true
+// - open filters bar by default on /customers page
+// - don't we have a case study we link to for ourselves? can't find it offline.
+// - link PostHog's "Read [how we use PostHog](/blog/posthog-marketing) at PostHog." from PostHog row's notes (whether it be Markdown link parsing or dangerouslySetInnerHtml)
+// - check the following (blindly-imported) logos: brainboard, mentionme, mintlify, opensauced, wittyworks
 
 // Import PNG logos (not converted to React components)
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
 import AssemblyAILogo from '../components/CustomerLogos/AssemblyAILogo'
+import BrainboardLogo from '../components/CustomerLogos/BrainboardLogo'
 import CarVerticalLogo from '../components/CustomerLogos/CarVerticalLogo'
 import ContraLogo from '../components/CustomerLogos/ContraLogo'
 import CreatifyLogo from '../images/customers/creatify-light.png'
@@ -16,8 +23,11 @@ import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
+import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
+import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
 import NetdataLogo from '../components/CustomerLogos/NetdataLogo'
+import OpenSaucedLogo from '../components/CustomerLogos/OpenSaucedLogo'
 import PhantomLogo from '../components/CustomerLogos/PhantomLogo'
 import PostHogLogo from '../components/CustomerLogos/PostHogLogo'
 import PryLogo from '../components/CustomerLogos/PryLogo'
@@ -31,6 +41,7 @@ import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
 import VendastaLogo from '../components/CustomerLogos/VendastaLogo'
 import WebshareLogo from '../components/CustomerLogos/WebshareLogo'
+import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
@@ -88,19 +99,19 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: '4DayWeek',
         toolsUsed: ['experiments', 'product_analytics'],
         notes: '',
-        // logo: 4DayWeek,
+        // logo: 4DayWeekLogo,
     },
     '11x': {
         name: '11x',
         toolsUsed: ['experiments', 'product_analytics', 'llm_analytics', 'cdp'],
         notes: 'AI SDR',
-        // logo: 11x,
+        // logo: 11xLogo,
     },
     adauris: {
         name: 'Adauris',
         toolsUsed: ['experiments', 'session_replay', 'product_analytics'],
         notes: 'Generative AI audio',
-        // logo: Adauris,
+        // logo: AdaurisLogo,
     },
     airbus: {
         name: 'Airbus',
@@ -121,7 +132,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Brainboard',
         toolsUsed: ['experiments', 'product_analytics', 'apps'],
         notes: 'Collaborative DevOps',
-        // logo: Brainboard,
+        logo: BrainboardLogo,
     },
     carvertical: {
         name: 'carVertical',
@@ -164,13 +175,13 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Great Expectations',
         toolsUsed: ['product_analytics'],
         notes: 'Data quality SaaS platform',
-        // logo: GreatExpectations,
+        // logo: GreatExpectationsLogo,
     },
     groove: {
         name: 'Groove',
         toolsUsed: ['experiments', 'product_analytics', 'surveys'],
         notes: 'Help desk platform',
-        // logo: Groove,
+        // logo: GrooveLogo,
     },
     hasura: {
         name: 'Hasura',
@@ -189,25 +200,25 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'HostAI',
         toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
         notes: 'AI for vacation rentals managers',
-        // logo: HostAI,
+        // logo: HostAILogo,
     },
     juicebox: {
         name: 'Juicebox',
         toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
         notes: 'AI recruitment platform',
-        // logo: Juicebox,
+        // logo: JuiceboxLogo,
     },
     mentionme: {
         name: 'Mention Me',
         toolsUsed: ['product_analytics', 'session_replay'],
         notes: 'Marketing referral campaigns',
-        // logo: MentionMe,
+        logo: MentionMeLogo,
     },
     mintlify: {
         name: 'Mintlify',
         toolsUsed: ['session_replay', 'api'],
         notes: 'Product and technical docs',
-        // logo: Mintlify,
+        logo: MintlifyLogo,
     },
     mistralai: {
         name: 'Mistral AI',
@@ -227,13 +238,13 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Octomind',
         toolsUsed: ['experiments', 'surveys', 'product_analytics', 'web_analytics'],
         notes: 'AI-powered end-to-end testing',
-        // logo: Octomind,
+        // logo: OctomindLogo,
     },
     opensauced: {
         name: 'OpenSauced',
         toolsUsed: ['product_analytics'],
         notes: 'Open source contribution tracker',
-        // logo: Opensauced,
+        logo: OpenSaucedLogo,
     },
     phantom: {
         name: 'Phantom',
@@ -261,7 +272,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'cdp',
             'max_ai',
         ],
-        notes: 'Would it be clever or lame if we included our own company here?',
+        notes: 'Would it be clever or lame if we included our own company here? Read [how we use PostHog](/blog/posthog-marketing) at PostHog.',
         logo: PostHogLogo,
         height: 10,
         featured: true,
@@ -325,7 +336,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Swype',
         toolsUsed: ['session_replay', 'product_analytics'],
         notes: 'Tinder for jobs',
-        // logo: Swype,
+        // logo: SwypeLogo,
     },
     startengine: {
         name: 'StartEngine',
@@ -358,13 +369,13 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         name: 'Witty Works',
         toolsUsed: ['apps', 'product_analytics'],
         notes: '',
-        // logo: Wittyworks,
+        logo: WittyWorksLogo,
     },
     wowzer: {
         name: 'Wowzer',
         toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
         notes: 'AI image generator',
-        // logo: Wowzer,
+        // logo: WowzerLogo,
     },
     ycombinator: {
         name: 'Y Combinator',
