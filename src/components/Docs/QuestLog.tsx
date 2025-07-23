@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
 import * as Icons from '@posthog/icons'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import Slugger from 'github-slugger'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import Scrollspy from 'react-scrollspy'
 
 export interface QuestLogItemProps {
@@ -107,6 +111,14 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     }
 
+    const updateUrlHash = (questIndex: number) => {
+        if (typeof window !== 'undefined' && questItems[questIndex]) {
+            const slug = generateQuestSlug(questItems[questIndex].props.title)
+            const newUrl = `${window.location.pathname}${window.location.search}#quest-item-${slug}`
+            window.history.replaceState(null, '', newUrl)
+        }
+    }
+
     const selectQuestFromHash = () => {
         if (typeof window !== 'undefined') {
             const hash = window.location.hash
@@ -135,6 +147,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
             const questIndex = questIds.findIndex((id) => id === el.id)
             if (questIndex >= 0 && questIndex !== selectedQuest) {
                 setSelectedQuest(questIndex)
+                updateUrlHash(questIndex)
             }
         }
     }
@@ -152,11 +165,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
             scrollToElementWithOffset(element, offsetRem)
 
             // Update URL hash for sharing
-            if (typeof window !== 'undefined') {
-                const slug = generateQuestSlug(questItems[index]?.props.title || '')
-                const newUrl = `${window.location.pathname}${window.location.search}#quest-item-${slug}`
-                window.history.replaceState(null, '', newUrl)
-            }
+            updateUrlHash(index)
 
             // Clear flag after scroll animation completes (smooth scroll typically takes ~500-1000ms)
             setTimeout(() => {
@@ -245,7 +254,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
     return (
         <>
-            <div className="max-w-7xl mx-auto @container">
+            <div className="max-w-7xl mx-auto pb-6 @container">
                 <div className="flex gap-5 flex-col @lg:flex-row">
                     {/* Quest List - Sticky Container */}
                     <div
