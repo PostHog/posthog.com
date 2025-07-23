@@ -56,6 +56,7 @@ export interface Customer {
         }
         products: Record<string, string>
     }>
+    featured: boolean
 }
 
 interface BaseCustomer {
@@ -78,6 +79,7 @@ interface BaseCustomer {
         }
         products: Record<string, string>
     }>
+    featured: boolean
 }
 
 // Define all customer data
@@ -106,12 +108,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'They make airplanes',
         logo: AirbusLogo,
         height: 10,
+        featured: true,
     },
     assemblyai: {
         name: 'AssemblyAI',
         toolsUsed: ['experiments', 'product_analytics'],
         notes: 'AI-based transcription APIs',
         logo: AssemblyAILogo,
+        featured: true,
     },
     brainboard: {
         name: 'Brainboard',
@@ -146,6 +150,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: [],
         notes: 'The logistics company with the red and yellow logo',
         logo: DHLLogo,
+        featured: true,
     },
     elevenlabs: {
         name: 'ElevenLabs',
@@ -153,6 +158,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'AI voice generator',
         logo: ElevenLabsLogo,
         height: 18,
+        featured: true,
     },
     greatexpectations: {
         name: 'Great Expectations',
@@ -171,6 +177,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['session_replay', 'product_analytics'],
         notes: 'Open source GraphQL engine',
         logo: HasuraLogo,
+        featured: true,
     },
     headshotpro: {
         name: 'HeadshotPro',
@@ -208,6 +215,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: MistralAILogo,
         height: 12,
+        featured: true,
     },
     netdata: {
         name: 'Netdata',
@@ -256,6 +264,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Would it be clever or lame if we included our own company here?',
         logo: PostHogLogo,
         height: 10,
+        featured: true,
     },
     purplewave: {
         name: 'Purplewave',
@@ -267,8 +276,9 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     raycast: {
         name: 'Raycast',
         toolsUsed: [],
-        notes: 'MacOS spotlight replacement on steroids',
+        notes: 'MacOS Spotlight replacement on steroids',
         logo: RaycastLogo,
+        featured: true,
     },
     researchgate: {
         name: 'ResearchGate',
@@ -276,6 +286,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: "World's largest professional network for scientists",
         logo: ResearchGateLogo,
         height: 12,
+        featured: true,
     },
     significa: {
         name: 'Significa',
@@ -308,6 +319,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['max_ai', 'experiments', 'product_analytics'],
         notes: 'Postgres in the cloud',
         logo: SupabaseLogo,
+        featured: true,
     },
     swype: {
         name: 'Swype',
@@ -321,12 +333,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Crowdfunding for startups',
         logo: StartEngineLogo,
         height: 12,
+        featured: true,
     },
     trust: {
         name: 'Trust',
         toolsUsed: [],
         notes: 'Crypto wallet',
         logo: TrustWalletLogo,
+        featured: true,
     },
     vendasta: {
         name: 'Vendasta',
@@ -358,6 +372,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: "World's premier startup accelerator",
         logo: YCombinatorLogo,
         height: 10,
+        featured: true,
     },
     zealot: {
         name: 'Zealot',

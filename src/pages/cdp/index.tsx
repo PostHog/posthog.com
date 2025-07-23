@@ -248,7 +248,7 @@ export default function CDP(): JSX.Element {
 
     // Define table columns
     const columns = [
-        { name: 'Name', width: 'minmax(150px, 1fr)', align: 'left' as const },
+        { name: 'Name', width: 'minmax(170px, 1fr)', align: 'left' as const },
         { name: 'Description', width: 'minmax(200px, 2fr)', align: 'left' as const },
         { name: 'Category', width: 'minmax(100px, 1fr)', align: 'left' as const },
         { name: 'Type', width: '120px', align: 'center' as const },

@@ -36,7 +36,7 @@ export const productLinks: AppItem[] = [
         url: '/pricing',
     },
     {
-        label: 'notable customers.mdx',
+        label: 'customers.mdx',
         Icon: <AppIcon name="spreadsheet" />,
         url: '/customers',
     },

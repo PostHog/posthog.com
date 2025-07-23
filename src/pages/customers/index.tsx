@@ -7,7 +7,9 @@ import { layoutLogic } from 'logic/layoutLogic'
 import OSTable from 'components/OSTable'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useCustomers, Customer as CustomerType } from 'hooks/useCustomers'
+import { IconArrowUpRight } from '@posthog/icons'
 
+// add `featured: true` to useCustomers.ts (for filtering), then set the order below:
 const CUSTOMER_ORDER = [
     'ycombinator',
     'mistralai',
@@ -30,7 +32,7 @@ interface CustomerProps {
 }
 
 const Customer = ({ number, customer }: CustomerProps) => {
-    const { hasCaseStudy } = useCustomers()
+    const { hasCaseStudy, featured } = useCustomers()
 
     // Determine logo rendering logic - same as CustomersSlide.tsx
     const renderLogo = () => {
@@ -73,15 +75,21 @@ const Customer = ({ number, customer }: CustomerProps) => {
                 content: renderLogo(),
                 className: '!p-4',
             },
-            { content: customer.toolsUsed?.join(', '), className: 'text-sm text-red' },
-            { content: hasCaseStudy(customer.slug) ? <Link to={`/customers/${customer.slug}`}>Link</Link> : null },
+            { content: customer.toolsUsed?.join(', '), className: 'text-sm' },
+            {
+                content: hasCaseStudy(customer.slug) ? (
+                    <Link to={`/customers/${customer.slug}`} className="group" state={{ newWindow: true }}>
+                        Link <IconArrowUpRight className="size-4 inline-block text-muted group-hover:text-primary" />
+                    </Link>
+                ) : null,
+            },
             { content: customer.notes || '', className: 'text-sm' },
         ],
     }
 }
 
 export default function Customers(): JSX.Element {
-    const { getCustomers, hasCaseStudy } = useCustomers()
+    const { getCustomers, hasCaseStudy, featured } = useCustomers()
     const customers = getCustomers(CUSTOMER_ORDER)
     const [filteredCustomers, setFilteredCustomers] = useState<any>(null)
 
@@ -104,7 +112,7 @@ export default function Customers(): JSX.Element {
         <>
             <SEO title="customers.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
             <Editor
-                title="cool customers"
+                title="customers"
                 type="mdx"
                 slug="/customers"
                 availableFilters={[
@@ -146,6 +154,16 @@ export default function Customers(): JSX.Element {
                             { label: 'FALSE', value: false },
                         ],
                         filter: (obj, value) => (value ? hasCaseStudy(obj.slug) : !hasCaseStudy(obj.slug)),
+                        operator: 'equals',
+                    },
+                    {
+                        label: 'featured',
+                        options: [
+                            { label: 'Any', value: null },
+                            { label: 'TRUE', value: true },
+                            { label: 'FALSE', value: false },
+                        ],
+                        filter: (obj, value) => (value ? featured(obj.slug) : !featured(obj.slug)),
                         operator: 'equals',
                     },
                 ]}
