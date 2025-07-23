@@ -329,6 +329,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                     dropdownOpen={dropdownOpen}
                                     onDropdownToggle={setDropdownOpen}
                                     dropdownRef={dropdownRef}
+                                    questIds={questIds}
                                 />
                             </Scrollspy>
                         </div>
@@ -341,13 +342,13 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                 {questItems.map((questItem, index) => (
                                     <div key={index} className="p-4 md:p-6">
                                         {index === 0 ? (
-                                            <h2 className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-32">
+                                            <h2 className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32">
                                                 {questItem.props.title}
                                             </h2>
                                         ) : (
                                             <h2
                                                 id={questIds[index]}
-                                                className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-32"
+                                                className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32"
                                             >
                                                 {questItem.props.title}
                                             </h2>
@@ -417,14 +418,23 @@ export const QuestLogItem: React.FC<
     )
 }
 
-export const MobileQuestLogItem: React.FC<{
+type MobileQuestLogItemProps = {
     questItems: React.ReactElement<QuestLogItemProps>[]
     selectedQuest: number
-    // onQuestSelect removed
     dropdownOpen: boolean
     onDropdownToggle: (open: boolean) => void
     dropdownRef: React.RefObject<HTMLDivElement>
-}> = ({ questItems, selectedQuest, dropdownOpen, onDropdownToggle, dropdownRef }) => {
+    questIds: string[]
+}
+
+export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
+    questItems,
+    selectedQuest,
+    dropdownOpen,
+    onDropdownToggle,
+    dropdownRef,
+    questIds,
+}) => {
     return (
         <div className="relative" ref={dropdownRef}>
             <button
@@ -464,11 +474,14 @@ export const MobileQuestLogItem: React.FC<{
             {dropdownOpen && (
                 <div className="absolute top-full left-0 right-0 mt-1 bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-lg z-10 max-h-60 overflow-y-auto">
                     {questItems.map((child, index) => (
-                        <div
+                        <a
                             key={index}
-                            className={`p-3 cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800 border-b border-light dark:border-dark last:border-b-0 ${
+                            href={`#${questIds[index]}`}
+                            className={`block p-3 cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800 border-b border-light dark:border-dark last:border-b-0 ${
                                 selectedQuest === index ? 'bg-orange/10 dark:bg-orange/10' : ''
                             }`}
+                            onClick={() => onDropdownToggle(false)}
+                            style={{ textDecoration: 'none' }}
                         >
                             <div className="flex items-center space-x-2.5">
                                 <div
@@ -487,7 +500,9 @@ export const MobileQuestLogItem: React.FC<{
                                 <div className="flex-1 min-w-0">
                                     <strong
                                         className={`text-sm font-bold leading-tight block ${
-                                            selectedQuest === index ? 'text-red dark:text-yellow' : ''
+                                            selectedQuest === index
+                                                ? 'text-red dark:text-yellow'
+                                                : 'text-primary dark:text-primary-dark'
                                         }`}
                                     >
                                         {Number.isFinite(index) ? questItems[index]?.props.title || '' : ''}
@@ -501,7 +516,7 @@ export const MobileQuestLogItem: React.FC<{
                                     )}
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     ))}
                 </div>
             )}
