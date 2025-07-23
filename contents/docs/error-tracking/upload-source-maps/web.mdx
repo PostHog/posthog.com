@@ -13,7 +13,6 @@ import { CallToAction } from 'components/CallToAction'
 import { Steps, Step } from 'components/Docs/Steps'
 import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
-import OutputSourceMaps from './_snippets/output-source-maps.mdx'
 import InjectSourceMap from './_snippets/inject-source-map.mdx'
 import UploadSourceMap from './_snippets/upload-source-map.mdx'
 
@@ -42,9 +41,29 @@ For other build tools, consult their documentation to enable source maps.
 </Step>
 <Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
 <InjectSourceMap />
+
+--- 
+
+**✅ Checkpoint** – Confirm that the served files are injected with the correct source map comment in production in dev tools.
+
+```js 
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+``` 
+
 </Step>
 <Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
 <UploadSourceMap />
+
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
+
+<div className="mt-4 mb-2">
+<CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">
+    Check symbol sets in PostHog
+</CallToAction>
+</div>
+
 </Step>
 </Steps>
 

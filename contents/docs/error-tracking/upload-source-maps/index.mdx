@@ -13,26 +13,30 @@ import { CallToAction } from 'components/CallToAction'
 import { Steps, Step } from 'components/Docs/Steps'
 import DownloadCLI from '../_snippets/cli/download.mdx'
 import AuthenticateCLI from '../_snippets/cli/authenticate.mdx'
-import OutputSourceMaps from './_snippets/output-source-maps.mdx'
 import InjectSourceMap from './_snippets/inject-source-map.mdx'
 import UploadSourceMap from './_snippets/upload-source-map.mdx'
+import UploadSourceMapPlatforms from './upload-source-map-platforms.tsx'
 
 <Steps>
-    <Step title="Install the PostHog CLI" subtitle="Your goal in this step: Get the CLI tool or framework-specific package." badge="required">
-        <DownloadCLI />
-    </Step>
-    <Step title="Authenticate the CLI" subtitle="Your goal in this step: Authenticate the CLI to upload source maps to PostHog." badge="required">
-        <AuthenticateCLI />
-    </Step>
-    <Step title="Output source maps for your framework" subtitle="Your goal in this step: Configure your build to generate source maps." badge="required">
-        <OutputSourceMaps />
-    </Step>
-    <Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
-        <InjectSourceMap />
-    </Step>
-    <Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
-        <UploadSourceMap />
-    </Step>
+  <Step title="Install the PostHog CLI" subtitle="Your goal in this step: Get the CLI tool or framework-specific package." badge="required">
+    <DownloadCLI />
+  </Step>
+  <Step title="Authenticate the CLI" subtitle="Your goal in this step: Authenticate the CLI to upload source maps to PostHog." badge="required">
+    <AuthenticateCLI />
+  </Step>
+  <Step title="Output source maps for your framework" subtitle="Your goal in this step: Configure your build to generate source maps." badge="required">
+    
+  Configure your build process to generate source maps. This typically involves enabling source map generation in your build tool or framework configuration.
+
+  Follow the instructions for your framework to output source maps.
+
+  <UploadSourceMapPlatforms />
+
+  </Step>
+  <Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
+    <InjectSourceMap />
+  </Step>
+  <Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
+    <UploadSourceMap />
+  </Step>
 </Steps>
-
-

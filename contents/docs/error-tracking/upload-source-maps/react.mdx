@@ -45,9 +45,29 @@ If you're using another build tool like [webpack](https://webpack.js.org/configu
 
 </Step>
 <Step title="Inject source map" subtitle="Your goal in this step: Automatically inject metadata during the build process." badge="required">
-  <InjectSourceMap />
+<InjectSourceMap />
+
+--- 
+
+**✅ Checkpoint** – Confirm that the served files are injected with the correct source map comment in production in dev tools.
+
+```js 
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+``` 
+
 </Step>
 <Step title="Upload source map" subtitle="Your goal in this step: Automatically upload source maps to PostHog during build." badge="required">
-  <UploadSourceMap />
+<UploadSourceMap />
+
+--- 
+
+**✅ Checkpoint** – Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
+
+<div className="mt-4 mb-2">
+<CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">
+    Check symbol sets in PostHog
+</CallToAction>
+</div>
+
 </Step>
 </Steps>
