@@ -238,12 +238,23 @@ You can also create a similar `global-error.jsx` file to capture errors affectin
 
 Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can't rely on exception autocapture.
 
-Instead, we create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we to both check the request is running in the `nodejs` runtime to ensure PostHog works and get the  `distinct_id` from the cookie to connect the error to a specific user.
+The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. You can set PostHog up to send this data on every request by specifying the domains you wish to patch with the session and user distinct id. 
+
+```js
+posthog.init('<ph_project_api_key>', {
+  __add_tracing_headers: ['your-domain.com'], // 
+})
+```
+
+Alternatively, you can manually set the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which can be fetched using the `posthog.get_session_id()` and `posthog.get_distinct_id()` methods respectively.
+
+On the backend create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we check the request is running in the `nodejs` runtime to ensure PostHog works and get the `session_id` and `distinct_id` from the request headers that can then be added to the captured exception.
 
 This looks like this:
 
 ```js
 // instrumentation.js
+
 export function register() {
   // No-op for initialization
 }
@@ -253,23 +264,10 @@ export const onRequestError = async (err, request, context) => {
     const { getPostHogServer } = require('./app/posthog-server')
     const posthog = await getPostHogServer()
 
-    let distinctId = null
-    if (request.headers.cookie) {
-      const cookieString = request.headers.cookie
-      const postHogCookieMatch = cookieString.match(/ph_phc_.*?_posthog=([^;]+)/)
+    const sessionId = request.headers.get('X-POSTHOG-SESSION-ID');
+    const distinctId = request.headers.get('X-POSTHOG-DISTINCT-ID');
 
-      if (postHogCookieMatch && postHogCookieMatch[1]) {
-        try {
-          const decodedCookie = decodeURIComponent(postHogCookieMatch[1])
-          const postHogData = JSON.parse(decodedCookie)
-          distinctId = postHogData.distinct_id
-        } catch (e) {
-          console.error('Error parsing PostHog cookie:', e)
-        }
-      }
-    }
-
-    await posthog.captureException(err, distinctId || undefined)
+    await posthog.captureException(err, distinctId || undefined, { $session_id: sessionId })
   }
 }
 ```
