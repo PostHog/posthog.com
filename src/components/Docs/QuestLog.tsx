@@ -66,7 +66,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
     const [selectedQuest, setSelectedQuest] = useState(0)
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
-    const [hasInitialAnimated, setHasInitialAnimated] = useState(false)
+    const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
 
@@ -119,6 +119,9 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
 
     // Restore Scrollspy onUpdate for both desktop and mobile
     const handleScrollspyUpdate = (el: HTMLElement | null) => {
+        // Only allow scrollspy updates after user has actually interacted with the page
+        if (!hasInitialLoadSettled) return
+
         if (el && el.id) {
             const questIndex = questIds.findIndex((id) => id === el.id)
             if (questIndex >= 0 && questIndex !== selectedQuest) {
@@ -136,10 +139,10 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => window.removeEventListener('hashchange', onHashChange)
     }, [questItems])
 
-    // Initial delay animation
+    // Initial page load delay
     useEffect(() => {
         const timer = setTimeout(() => {
-            setHasInitialAnimated(true)
+            setHasInitialLoadSettled(true)
             restartSpriteAnimation()
         }, 1000)
         return () => clearTimeout(timer)
@@ -214,8 +217,8 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
-    const progressPercentage = hasInitialAnimated ? ((selectedQuest + 1) / questItems.length) * 100 : 0
-    const spritePosition = hasInitialAnimated
+    const progressPercentage = hasInitialLoadSettled ? ((selectedQuest + 1) / questItems.length) * 100 : 0
+    const spritePosition = hasInitialLoadSettled
         ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
         : 'calc(0% - 10px)'
 
