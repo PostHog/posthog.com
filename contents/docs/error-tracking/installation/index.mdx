@@ -1,51 +1,92 @@
 ---
 title: Getting started with error tracking
+hideAnchor: true
 ---
 
 import { Steps, Step } from 'components/Docs/Steps'
 import InstallationPlatforms from './_snippets/installation-platforms'
 import { CallToAction } from 'components/CallToAction'
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Here's what you'll need to do to get started:
 
-<Steps>
-<Step title="Capture your first exception" badge="required" subtitle="Your goal in this step: Capture your first exception events to PostHog.">
-  <InstallationPlatforms />        
-</Step>
-<Step title="Get accurate stack traces" badge="optional" subtitle="Your goal in this step: automatically upload source maps for your captured stack traces.">
-  <ProductScreenshot
-      imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
-      imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_39_1030eea240.png"
-      alt="Stack traces example"
-      classes="rounded"
-  />
+<QuestLog>
+<QuestLogItem 
+    title="Capture your first exception"
+    subtitle="Required"
+    icon="IconBox"
+>
 
-  If you serve compiled code or minified bundles, PostHog cannot accurately display stack traces without source maps. Upload them during builds to get accurate stack traces.
-  <br />
+  Capture your first exception events to PostHog. This foundational step enables you to start tracking errors and exceptions in your application.
 
-  <CallToAction type="primary" to="/docs/error-tracking/upload-source-maps">
-    Upload source maps
-  </CallToAction>
-</Step>
-<Step title="Configure alerts and automations" badge="optional" subtitle="Your goal in this step: Receive notifications and automate your error tracking related workflows.">
-  <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_11_53_54_2x_81605f7812.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_11_53_11_2x_8b15ee84e0.png"
-    alt="Error tracking alerting"
+  ### What's Involved
+  <InstallationPlatforms />
+
+  <CalloutBox type="info" icon="IconInfo" title="Purpose">
+    Enable error tracking to start capturing exception events from your application
+  </CalloutBox>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Get accurate stack traces"
+  subtitle="Required"
+  icon="IconBolt"
+>
+
+Upload source maps to get accurate, readable stack traces for your captured exceptions. This helps you quickly identify and debug issues.
+
+### What's Involved
+
+[Upload source maps](#upload-source-maps)
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_39_1030eea240.png"
+    alt="Stack traces example"
     classes="rounded"
-  />
+/>
 
-  Receive notifications when an issue is created or reopened through an integration or webhook.
-  <br />
+> **Purpose**
+> 
+> Automatically upload source maps for accurate stack traces in your error reports
 
-  <CallToAction type="primary" to="/docs/error-tracking/alerts">
-    Configure alerts and automations
-  </CallToAction>
-</Step>
-<Step title="Cutting costs" badge="optional" subtitle="Your goal in this step: We try to have the lowest pricing for every product. Here's how you can take advantage of our pricing.">
+</QuestLogItem>
 
-  <CallToAction type="primary" to="#cutting-costs">
-    See cost-cutting tips
-  </CallToAction>
-</Step>
-</Steps>
+<QuestLogItem 
+  title="Configure alerts and automations"
+  subtitle="Optional"
+  icon="IconGear"
+>
+
+  Set up notifications and automate your error tracking workflows. Get alerted when critical errors occur and integrate with your development workflow.
+
+  ### What's Involved
+
+  [Configure alerts and automations](#configure-alerts)
+
+  > **Purpose**
+  > 
+  > Receive notifications and automate your error tracking related workflows
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Cutting costs"
+  subtitle="Optional"
+  icon="IconPlus"
+>
+
+  Optimize your PostHog costs while maintaining comprehensive error tracking. Learn about our pricing structure and cost-saving strategies.
+
+  ### What's Involved
+
+  [See cost-cutting tips](#cutting-costs)
+
+  > **Purpose**
+  > 
+  > Take advantage of our lowest pricing for error tracking while maintaining full functionality
+
+</QuestLogItem>
+</QuestLog>
