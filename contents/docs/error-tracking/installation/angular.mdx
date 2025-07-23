@@ -5,30 +5,12 @@ title: Angular error tracking installation
 import { Steps, Step } from 'components/Docs/Steps'
 
 import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
+import InstallAngular from "../../integrate/_snippets/install-angular.mdx"
 
 <Steps>
 <Step title="Installing PostHog Angular SDK" subtitle="Your goal in this step: Install the PostHog Angular SDK." badge="required">
 
-Install `posthog-js` using your package manager:
-
-<InstallWebPackageManagers />
-
-In your `src/main.ts`, initialize PostHog using your project API key and instance address. You can find both in your [project settings](https://us.posthog.com/project/settings).  
-
-```ts file=main.ts
-import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
-import posthog from 'posthog-js'
-
-posthog.init('<ph_project_api_key>', {
-  api_host:'<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>'
-})
-
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
-```
+<InstallAngular/>
 
 --- 
 
@@ -159,18 +141,18 @@ export function providePostHogErrorHandler(): Provider {
 
 Then, in your `src/app/app.config.ts`, import the `providePostHogErrorHandler` function and add it to the providers array:
 
-```diff
+```ts file=src/app/app.config.ts
 // src/app/app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-+import { providePostHogErrorHandler } from './posthog-error-handler';
+import { providePostHogErrorHandler } from './posthog-error-handler'; // +
 
 export const appConfig: ApplicationConfig = {
   providers: [
     ...
-+   providePostHogErrorHandler(),
+    providePostHogErrorHandler(), // +
   ],
 };
 ```

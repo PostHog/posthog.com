@@ -32,7 +32,7 @@ import UploadSourceMap from './_snippets/upload-source-map.mdx'
 
 You can configure Angular to [generate source maps](https://angular.dev/reference/configs/workspace-config#source-map-configuration) by adding the following to your `angular.json` file:
 
-```json file=angular.json focusOnLines=5-13
+```json file=angular.json focusOnLines=4-14
 {
   "projects": {
     "my-app": {
@@ -54,13 +54,26 @@ You can configure Angular to [generate source maps](https://angular.dev/referenc
 }
 ```
 
+Then, build your Angular application:
+
+```bash
+ng build --configuration production
+```
+
+--- 
+
+**✅ Checkpoint** – Confirm that the source maps are generated in the `dist/<your-app-name>/` directory. You should see a `.js.map` file for each JS bundle.
+
 </Step>
 <Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
+
 <InjectSourceMap />
 
 --- 
 
 **✅ Checkpoint** – Confirm that the served files are injected with the correct source map comment in production in dev tools:
+
+You should see a comment like this in your minified JS files, for example `main-IX6K2QJM.js`:
 
 ```js 
 //# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c

@@ -10,12 +10,12 @@ In your `src/main.ts`, initialize PostHog using your project API key and instanc
 import { bootstrapApplication } from '@angular/platform-browser';
 import { appConfig } from './app/app.config';
 import { AppComponent } from './app/app.component';
-import posthog from 'posthog-js'
+import posthog from 'posthog-js' // +
 
-posthog.init('<ph_project_api_key>', {
-  api_host:'<ph_client_api_host>',
-  defaults: '<ph_posthog_js_defaults>'
-})
+posthog.init('<ph_project_api_key>', { // +
+  api_host:'<ph_client_api_host>', // +   
+  defaults: '<ph_posthog_js_defaults>' // +
+}) // +
 
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
