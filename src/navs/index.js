@@ -376,6 +376,7 @@ export const dataPipelines = {
             ],
             dynamicChildren: 'data-pipeline-transformations',
         },
+
         {
             name: 'Troubleshooting and FAQs',
             url: '/docs/cdp/common-questions',
@@ -2469,6 +2470,24 @@ export const docsMenu = {
                         {
                             name: 'Account settings',
                             url: '/docs/settings/account-settings',
+                        },
+                        {
+                            name: 'Site Apps',
+                            url: '/docs/site-apps',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/site-apps',
+                                },
+                                {
+                                    name: 'Notification Bar',
+                                    url: '/docs/site-apps/notification-bar',
+                                },
+                                {
+                                    name: 'Pineapple Mode',
+                                    url: '/docs/site-apps/pineapple-mode',
+                                },
+                            ],
                         },
                     ],
                 },
