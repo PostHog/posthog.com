@@ -126,7 +126,7 @@ Since PostHog instances in different contexts can't share the same storage for p
 
 Browser extensions run in multiple contexts, each with different capabilities and limitations. Here's how to use PostHog effectively across them:
 
-### Context-specific persistence considerations
+### Context-specific persistance considerations
 
 For contexts like popup, sidepanel, background, and most other, `localStorage` or `sessionStorage` is recommended since they are shared across all contexts that have access to the `chrome.storage` API. In content scripts, as they use origin's storage, there is no advantage to them over `memory` as data wouldn't be shared between different websites.
 
