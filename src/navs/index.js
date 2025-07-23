@@ -2252,10 +2252,6 @@ export const docsMenu = {
                             name: 'Model Context Protocol (MCP)',
                             url: '/docs/ai-tools/model-context-protocol',
                         },
-                        {
-                            name: 'AI prompts',
-                            url: '/docs/ai-tools/ai-prompts',
-                        },
                     ],
                 },
 
