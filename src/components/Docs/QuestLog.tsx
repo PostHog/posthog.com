@@ -1,6 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react'
 import * as Icons from '@posthog/icons'
-import { CallToAction } from 'components/CallToAction'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import Slugger from 'github-slugger'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import Scrollspy from 'react-scrollspy'
 
 // No CSS injection needed - using Tailwind container queries!
 
@@ -30,12 +35,28 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
     >[]
 
-    // Inline slugify function
-    const slugify = (str: string) =>
-        str
-            .toLowerCase()
-            .replace(/[^a-z0-9]+/g, '-')
-            .replace(/^-+|-+$/g, '')
+    // Generic utility function for scrolling to element with custom offset
+    const scrollToElementWithOffset = (element: HTMLElement, offsetRem = 0) => {
+        const offsetPx = offsetRem * parseFloat(getComputedStyle(document.documentElement).fontSize)
+        const elementTop = element.getBoundingClientRect().top + window.pageYOffset
+        window.scrollTo({
+            top: elementTop - offsetPx,
+            behavior: 'smooth',
+        })
+    }
+
+    // Consistent ID Strategy using github-slugger
+    // This ensures all quest identifiers (IDs, hashes, anchors) use the same slugification rules
+    const slugger = new Slugger()
+
+    // Utility function to generate consistent slugs from quest titles
+    const generateQuestSlug = (title: string) => {
+        slugger.reset() // Reset for each use to ensure consistency
+        return slugger.slug(title)
+    }
+
+    // Generate consistent quest IDs for scrollspy and anchors using github-slugger
+    const questIds = questItems.map((item) => `quest-item-${generateQuestSlug(item.props.title)}`)
 
     // Hoisted function to select quest from hash
     const selectQuestFromHash = () => {
@@ -44,7 +65,7 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
             const match = hash.match(/^#quest-item-(.+)$/)
             if (match) {
                 const slug = match[1]
-                const questIndex = questItems.findIndex((item) => slugify(item.props.title) === slug)
+                const questIndex = questItems.findIndex((item) => generateQuestSlug(item.props.title) === slug)
                 if (questIndex >= 0) {
                     setSelectedQuest(questIndex)
                     return
@@ -52,6 +73,16 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
             }
             // If no valid hash, default to first quest
             setSelectedQuest(0)
+        }
+    }
+
+    // Handle scrollspy updates
+    const handleScrollspyUpdate = (el: HTMLElement | null) => {
+        if (el && el.id) {
+            const questIndex = questIds.findIndex((id) => id === el.id)
+            if (questIndex >= 0 && questIndex !== selectedQuest) {
+                setSelectedQuest(questIndex)
+            }
         }
     }
 
@@ -78,12 +109,12 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return () => window.removeEventListener('resize', updateBracketPosition)
     }, [selectedQuest])
 
-    // Handle URL fragment/hash for quest selection
+    // Handle URL fragment/hash for quest selection - only on mount and hash changes
     useEffect(() => {
         selectQuestFromHash()
         window.addEventListener('hashchange', selectQuestFromHash)
         return () => window.removeEventListener('hashchange', selectQuestFromHash)
-    }, [questItems])
+    }, []) // Empty dependency array - only run once on mount
 
     // Restart sprite animation on quest change
     const restartSpriteAnimation = () => {
@@ -105,6 +136,12 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         }
         restartSpriteAnimation()
     }, [selectedQuest])
+
+    // Static offset constants
+    // ScrollSpy offset should be negative to account for sticky header (8rem = 128px)
+    const SCROLLSPY_OFFSET = -150 // Negative means "trigger when element is 150px below viewport top"
+    const SCROLL_OFFSET_REM = 8
+    const STICKY_LIST_OFFSET_REM = 8
 
     // Initial delay animation
     useEffect(() => {
@@ -134,10 +171,22 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
     }, [dropdownOpen])
 
     const handleQuestSelect = (index: number) => {
-        if (typeof window !== 'undefined') {
-            const slug = slugify(questItems[index]?.props.title || '')
-            window.location.hash = `quest-item-${slug}`
+        const questId = questIds[index]
+        const element = document.getElementById(questId)
+
+        if (element) {
+            // Scroll to the quest header with static offset
+            scrollToElementWithOffset(element, SCROLL_OFFSET_REM)
+
+            // Update hash for sharing
+            if (typeof window !== 'undefined') {
+                const slug = generateQuestSlug(questItems[index]?.props.title || '')
+                const newUrl = `${window.location.pathname}${window.location.search}#quest-item-${slug}`
+                window.history.replaceState(null, '', newUrl)
+            }
         }
+
+        // Set selected quest (though scrollspy will also update this)
         setSelectedQuest(index)
     }
 
@@ -150,8 +199,12 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         <>
             <div className="max-w-7xl mx-auto @container">
                 <div className="flex gap-5 flex-col @lg:flex-row">
-                    {/* Quest List */}
-                    <div className="w-full @lg:w-auto @lg:max-w-[33.33%] @lg:flex-shrink-0 mt-3">
+                    {/* Quest List - Sticky Container */}
+                    {/* Using inline style for dynamic top value since Tailwind can't generate classes from variables */}
+                    <div
+                        className="w-full @lg:w-auto @lg:max-w-[33.33%] @lg:flex-shrink-0 @lg:sticky @lg:self-start mt-3"
+                        style={{ top: `${STICKY_LIST_OFFSET_REM}rem` }}
+                    >
                         {/* Progress Indicator */}
                         <div className="mt-3 mb-6 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
@@ -180,121 +233,121 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                             </div>
                         </div>
 
-                        {/* Desktop Quest List */}
-                        <div className="hidden @lg:block space-y-4 relative">
-                            {/* Moving Corner Brackets */}
-                            <div
-                                className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
-                                style={{
-                                    top: `${bracketPosition.top}px`,
-                                    height: `${bracketPosition.height}px`,
-                                }}
-                            >
-                                {/* Top Left Corner */}
-                                <svg
-                                    className="absolute -top-[0.45rem] -left-[0.45rem] w-7 h-7"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
+                        {/* ScrollSpy with static offset for scroll position detection */}
+                        <Scrollspy
+                            items={questIds}
+                            currentClassName="active"
+                            offset={SCROLLSPY_OFFSET}
+                            onUpdate={handleScrollspyUpdate}
+                            style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
+                        >
+                            {/* Desktop Quest List */}
+                            <div className="hidden @lg:block space-y-4 relative">
+                                {/* Moving Corner Brackets */}
+                                <div
+                                    className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
+                                    style={{
+                                        top: `${bracketPosition.top}px`,
+                                        height: `${bracketPosition.height}px`,
+                                    }}
                                 >
-                                    <path d="M2 12V6C2 3.79086 3.79086 2 6 2H12" stroke="orange" strokeWidth="2" />
-                                </svg>
-                                {/* Top Right Corner */}
-                                <svg
-                                    className="absolute -top-[0.45rem] -right-[0.45rem] w-7 h-7"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path d="M22 12V6C22 3.79086 20.2091 2 18 2H12" stroke="orange" strokeWidth="2" />
-                                </svg>
-                                {/* Bottom Left Corner */}
-                                <svg
-                                    className="absolute -bottom-[0.45rem] -left-[0.45rem] w-7 h-7"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path d="M2 12V18C2 20.2091 3.79086 22 6 22H12" stroke="orange" strokeWidth="2" />
-                                </svg>
-                                {/* Bottom Right Corner */}
-                                <svg
-                                    className="absolute -bottom-[0.45rem] -right-[0.45rem] w-7 h-7"
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        d="M22 12V18C22 20.2091 20.2091 22 18 22H12"
-                                        stroke="orange"
-                                        strokeWidth="2"
-                                    />
-                                </svg>
+                                    {/* Top Left Corner */}
+                                    <svg
+                                        className="absolute -top-[0.45rem] -left-[0.45rem] w-7 h-7"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path d="M2 12V6C2 3.79086 3.79086 2 6 2H12" stroke="orange" strokeWidth="2" />
+                                    </svg>
+                                    {/* Top Right Corner */}
+                                    <svg
+                                        className="absolute -top-[0.45rem] -right-[0.45rem] w-7 h-7"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M22 12V6C22 3.79086 20.2091 2 18 2H12"
+                                            stroke="orange"
+                                            strokeWidth="2"
+                                        />
+                                    </svg>
+                                    {/* Bottom Left Corner */}
+                                    <svg
+                                        className="absolute -bottom-[0.45rem] -left-[0.45rem] w-7 h-7"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M2 12V18C2 20.2091 3.79086 22 6 22H12"
+                                            stroke="orange"
+                                            strokeWidth="2"
+                                        />
+                                    </svg>
+                                    {/* Bottom Right Corner */}
+                                    <svg
+                                        className="absolute -bottom-[0.45rem] -right-[0.45rem] w-7 h-7"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path
+                                            d="M22 12V18C22 20.2091 20.2091 22 18 22H12"
+                                            stroke="orange"
+                                            strokeWidth="2"
+                                        />
+                                    </svg>
+                                </div>
+
+                                {questItems.map((child, index) =>
+                                    React.cloneElement(child, {
+                                        key: index,
+                                        index,
+                                        isSelected: selectedQuest === index,
+                                        questRef: (el: HTMLDivElement | null) => (questRefs.current[index] = el),
+                                        onSelect: () => handleQuestSelect(index),
+                                    })
+                                )}
                             </div>
 
-                            {questItems.map((child, index) =>
-                                React.cloneElement(child, {
-                                    key: index,
-                                    index,
-                                    isSelected: selectedQuest === index,
-                                    questRef: (el: HTMLDivElement | null) => (questRefs.current[index] = el),
-                                    onSelect: () => handleQuestSelect(index),
-                                })
-                            )}
-                        </div>
-
-                        {/* Mobile Dropdown */}
-                        <div className="block @lg:hidden">
-                            <MobileQuestLogItem
-                                questItems={questItems}
-                                selectedQuest={selectedQuest}
-                                onQuestSelect={handleQuestSelect}
-                                dropdownOpen={dropdownOpen}
-                                onDropdownToggle={setDropdownOpen}
-                                dropdownRef={dropdownRef}
-                            />
-                        </div>
+                            {/* Mobile Dropdown */}
+                            <div className="block @lg:hidden">
+                                <MobileQuestLogItem
+                                    questItems={questItems}
+                                    selectedQuest={selectedQuest}
+                                    onQuestSelect={handleQuestSelect}
+                                    dropdownOpen={dropdownOpen}
+                                    onDropdownToggle={setDropdownOpen}
+                                    dropdownRef={dropdownRef}
+                                />
+                            </div>
+                        </Scrollspy>
                     </div>
 
                     {/* Quest Details */}
                     <div className="w-full @lg:flex-1 @lg:min-w-0">
-                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm @lg:sticky @lg:top-8">
-                            <div className="p-4 md:p-6">
-                                <h2 className="!mt-0 text-lg md:text-xl font-bold">
-                                    {questItems[selectedQuest]?.props.title}
-                                </h2>
+                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm">
+                            <div className="divide-y divide-light dark:divide-dark">
+                                {questItems.map((questItem, index) => (
+                                    <div key={index} className="p-4 md:p-6">
+                                        <h2 id={questIds[index]} className="!mt-0 text-lg md:text-xl font-bold mb-4">
+                                            {questItem.props.title}
+                                        </h2>
 
-                                {questItems[selectedQuest]?.props.children || (
-                                    <div>
-                                        <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">
-                                            Overview
-                                        </h3>
-                                        <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
-                                            Select a quest to view details.
-                                        </p>
-                                    </div>
-                                )}
-
-                                <div className="pt-3 md:pt-4 border-t border-light dark:border-dark">
-                                    <div className="items-stretch sm:items-center gap-3 sm:gap-4">
-                                        {selectedQuest < questItems.length - 1 && (
-                                            <CallToAction
-                                                type="primary"
-                                                size="md"
-                                                className="flex space-x-2"
-                                                onClick={() => {
-                                                    const nextIndex = selectedQuest + 1
-                                                    handleQuestSelect(nextIndex)
-                                                }}
-                                            >
-                                                <>
-                                                    Next step
-                                                    <Icons.IconArrowRight className="size-5 inline-block ml-1" />
-                                                </>
-                                            </CallToAction>
+                                        {questItem.props.children || (
+                                            <div>
+                                                <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">
+                                                    Overview
+                                                </h3>
+                                                <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
+                                                    Quest details will appear here.
+                                                </p>
+                                            </div>
                                         )}
                                     </div>
-                                </div>
+                                ))}
                             </div>
                         </div>
                     </div>
