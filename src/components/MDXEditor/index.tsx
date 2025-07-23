@@ -51,6 +51,7 @@ export default function MDXEditor({
     const [currentAlignment, setCurrentAlignment] = useState<'left' | 'center' | 'right' | 'justify'>('left')
     const [canUndo, setCanUndo] = React.useState(false)
     const [canRedo, setCanRedo] = React.useState(false)
+    const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
 
     useEffect(() => {
         if (activeEditor) {
@@ -101,17 +102,12 @@ export default function MDXEditor({
         }
     }, [activeEditor])
 
-    useEffect(() => {
-        const handleLinkClick = (event: MouseEvent) => {
-            const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
-            if (href) {
-                navigate(href, { state: { newWindow: true } })
-            }
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
+        if (href) {
+            navigate(href, { state: { newWindow: true } })
         }
-
-        document.addEventListener('click', handleLinkClick, true)
-        return () => document.removeEventListener('click', handleLinkClick, true)
-    }, [])
+    }
 
     return (
         <Editor
@@ -152,36 +148,38 @@ export default function MDXEditor({
             }}
             cta={cta}
         >
-            <MDXEditorComponent
-                contentEditableClassName="outline-none"
-                markdown={body}
-                lexicalTheme={{
-                    link: 'mdx-editor-link cursor-pointer',
-                }}
-                plugins={[
-                    headingsPlugin(),
-                    frontmatterPlugin(),
-                    listsPlugin(),
-                    linkPlugin(),
-                    jsxPlugin({ jsxComponentDescriptors }),
-                    toolbarPlugin({
-                        toolbarContents: () => {
-                            const [currentFormat, activeEditor] = useCellValues(currentFormat$, activeEditor$)
-                            const applyFormat = usePublisher(applyFormat$)
-                            useEffect(() => {
-                                applyFormatRef.current = applyFormat
-                            }, [])
-                            useEffect(() => {
-                                setCurrentFormat(currentFormat)
-                            }, [currentFormat])
-                            useEffect(() => {
-                                setActiveEditor(activeEditor)
-                            }, [activeEditor])
-                            return null
-                        },
-                    }),
-                ]}
-            />
+            <div onClick={handleClick} ref={mdxEditorContainerRef}>
+                <MDXEditorComponent
+                    contentEditableClassName="outline-none"
+                    markdown={body}
+                    lexicalTheme={{
+                        link: 'mdx-editor-link cursor-pointer',
+                    }}
+                    plugins={[
+                        headingsPlugin(),
+                        frontmatterPlugin(),
+                        listsPlugin(),
+                        linkPlugin(),
+                        jsxPlugin({ jsxComponentDescriptors }),
+                        toolbarPlugin({
+                            toolbarContents: () => {
+                                const [currentFormat, activeEditor] = useCellValues(currentFormat$, activeEditor$)
+                                const applyFormat = usePublisher(applyFormat$)
+                                useEffect(() => {
+                                    applyFormatRef.current = applyFormat
+                                }, [])
+                                useEffect(() => {
+                                    setCurrentFormat(currentFormat)
+                                }, [currentFormat])
+                                useEffect(() => {
+                                    setActiveEditor(activeEditor)
+                                }, [activeEditor])
+                                return null
+                            },
+                        }),
+                    ]}
+                />
+            </div>
         </Editor>
     )
 }

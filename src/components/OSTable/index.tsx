@@ -1,8 +1,9 @@
-import { MDXEditor } from '@mdxeditor/editor'
+import { linkPlugin, MDXEditor } from '@mdxeditor/editor'
 import { IconSpinner } from '@posthog/icons'
 import React, { useEffect, useState } from 'react'
 import { useInView } from 'react-intersection-observer'
 import { groupBy as _groupBy } from 'lodash'
+import { navigate } from 'gatsby'
 
 interface Column {
     name: string
@@ -35,6 +36,30 @@ const RowSkeleton = () => {
     return (
         <div className="flex items-center justify-center mt-4">
             <IconSpinner className="size-7 opacity-60 animate-spin" />
+        </div>
+    )
+}
+
+const Editor = ({ markdown }: { markdown: string }) => {
+    const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
+        if (href) {
+            navigate(href, { state: { newWindow: true } })
+        }
+    }
+
+    return (
+        <div onClick={handleClick} ref={mdxEditorContainerRef}>
+            <MDXEditor
+                lexicalTheme={{
+                    link: 'mdx-editor-link cursor-pointer',
+                }}
+                contentEditableClassName="[&_p]:m-0 min-w-[10px]"
+                markdown={markdown}
+                plugins={[linkPlugin()]}
+            />
         </div>
     )
 }
@@ -78,7 +103,7 @@ const Row = ({
             } ${cell.className || ''}`}
                         >
                             {editable && typeof cell.content === 'string' ? (
-                                <MDXEditor contentEditableClassName="[&_p]:m-0 min-w-[10px]" markdown={cell.content} />
+                                <Editor markdown={cell.content} />
                             ) : (
                                 cell.content
                             )}
