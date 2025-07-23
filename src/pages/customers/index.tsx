@@ -117,18 +117,6 @@ export default function Customers(): JSX.Element {
                 slug="/customers"
                 availableFilters={[
                     {
-                        label: 'company name',
-                        options: [
-                            { label: 'Any', value: null },
-                            ...customers.map((customer) => ({
-                                label: customer.name,
-                                value: customer.name,
-                            })),
-                        ],
-                        filter: (obj, value) => obj['name'] === value,
-                        operator: 'equals',
-                    },
-                    {
                         label: 'product(s) used',
                         options: [
                             { label: 'Any', value: null },
@@ -171,10 +159,8 @@ export default function Customers(): JSX.Element {
                 onFilterChange={(data) => setFilteredCustomers(data)}
             >
                 <ScrollArea>
-                    <p>
-                        Here are some customers who use PostHog. Use the filers above to read case studies of customers
-                        who use specific PostHog products.
-                    </p>
+                    <p className="!mt-0 mb-2">Here are some customers who use PostHog.</p>
+                    <p className="!mt-0">You can use the filters (above) to read how they use different products.</p>
                     <OSTable columns={columns} rows={rows} />
                 </ScrollArea>
             </Editor>
