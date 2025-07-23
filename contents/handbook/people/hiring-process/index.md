@@ -154,7 +154,7 @@ Ashby is a pretty intuitive platform to use, but here are a few helpful tips to 
 *   Link your Gmail account in Settings if you are in direct contact with candidates. This means any emails you send directly from your inbox will automatically be captured on their Ashby record for everyone on the hiring team to see.
 *   When emailing candidates from within Ashby, you can select a Template from the dropdown bar (and customize it if you want). If you find yourself writing the same email, it is worth saving as a template.
 
-If you receive an application via email or some other non-Ashby channel like Slack, pass it on to careers@posthog.com. 
+If you receive an application, of a candidate you think we should definitely interview, via email or some other non-Ashby channel like Slack, tell them to apply directly via the website and forward it on to careers@posthog.com. You will get people reach out to you over LinkedIn regularly, only forward the high priority candidates to the talent team. 
 
 ### Booking interviews through Ashby
 
