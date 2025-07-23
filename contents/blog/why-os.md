@@ -24,3 +24,15 @@ So instead of fighting this, we built PostHog.com to act more like an operating 
 This also lends toward breaking out of the mold of whitespace and simplicity in exchange for information density and the ability to access everything with less effort.
 
 So welcome to the new PostHog.com. Be curious, click on things, and discover all the easter eggs that we hope will spark joy in your experience.
+
+Cool things:
+
+-   useCustomers hook
+-   useProducts hook
+    -   how billing is already pulled from billing API
+    -   now all product data is in json, separates visual layer from content
+-   templatized apps (where we can pass different options like filters):
+    -   explorer
+    -   editor
+    -   reader
+    -   presentation
