@@ -2667,6 +2667,10 @@ export const docsMenu = {
                             name: 'Common questions about billing',
                             url: '/docs/billing/common-questions',
                         },
+                        {
+                            name: 'Spike detection',
+                            url: '/docs/billing/spike-detection',
+                        },
                     ],
                 },
                 {
