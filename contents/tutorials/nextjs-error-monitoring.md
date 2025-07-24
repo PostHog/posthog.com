@@ -238,7 +238,7 @@ You can also create a similar `global-error.jsx` file to capture errors affectin
 
 Because backend requests in Next.js vary between server-side rendering, short-lived processes and more, we can't rely on exception autocapture.
 
-The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. You can set PostHog up to send this data on every request by specifying the domains you wish to patch with the session and user distinct ID. 
+The context of a user and their session lives on the frontend. As such it is necessary to pass this data to your backend when making requests. We recommend configuring PostHog to send this data on every request by specifying the domains you wish to patch with the session and user distinct ID.
 
 ```js
 posthog.init('<ph_project_api_key>', {
