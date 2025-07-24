@@ -46,7 +46,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - PostHog [US](https://us.posthog.com/) and [EU](https://eu.posthog.com/) instances - use Google SSO
 - [PostHog App + Website](https://us.posthog.com/project/2) within PostHog US instance - use Google SSO
 - Metabase [US](https://metabase.prod-us.posthog.dev/) and [EU](https://metabase.prod-eu.posthog.dev/) - use Google SSO
-- [Stripe](https://dashboard.stripe.com/) - wait for Simon or Dana to invite you, then sign up using your PostHog email
+- [Stripe](https://dashboard.stripe.com/) - ask Simon or Dana to invite you, then sign up using your PostHog email
 - Any additional [tools you may find useful](#tools-that-you-may-find-useful)!
 
 *Note: You'll be added to group emails sent to sales@posthog.com or cs-onboarding@posthog.com. It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
