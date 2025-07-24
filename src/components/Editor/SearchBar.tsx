@@ -112,7 +112,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
     useEffect(() => {
         const handleClickOutside = (event: MouseEvent) => {
-            if (event.target instanceof HTMLElement && !containerRef.current?.contains(event.target)) {
+            if (visible && event.target instanceof HTMLElement && !containerRef.current?.contains(event.target)) {
                 if (duplicateContainerRef.current) {
                     duplicateContainerRef.current.remove()
                 }
