@@ -248,7 +248,7 @@ posthog.init('<ph_project_api_key>', {
 
 Alternatively, you can manually set the `X-POSTHOG-SESSION-ID` and `X-POSTHOG-DISTINCT-ID`, which can be fetched using the `posthog.get_session_id()` and `posthog.get_distinct_id()` methods respectively.
 
-On the backend create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we check the request is running in the `nodejs` runtime to ensure PostHog works and get the `session_id` and `distinct_id` from the request headers that can then be added to the captured exception.
+On the backend create a [`instrumentation.js`](https://nextjs.org/docs/app/building-your-application/optimizing/instrumentation) file at the root of our project and set up an `onRequestError` handler there. Importantly, we check the request is running in the `nodejs` runtime to ensure PostHog works. We get the `session_id` and `distinct_id` from request headers to add to the captured exception.
 
 This looks like this:
 
