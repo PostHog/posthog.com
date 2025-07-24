@@ -4,7 +4,7 @@ Event Name: `$ai_span`
 
 | Property | Description |
 |----------|-------------|
-| `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id`, do not use colons in this ID |
+| `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id`<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, <code>\|</code> |
 | `$ai_input_state` | The input of the span |
 | `$ai_output_state` | The output of the span |
 | `$ai_latency` | The latency of the span (seconds) |
