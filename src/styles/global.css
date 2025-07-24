@@ -227,7 +227,6 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
-
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -242,6 +241,7 @@
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-accent: var(--accent);
         }
     }
 
@@ -265,7 +265,6 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
-
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -296,7 +295,6 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
-
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -327,7 +325,6 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
-
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -344,6 +341,9 @@
             --muted: var(--text-muted);
         }
     }
+
+    /* populate tailwind.js with the variables that are set above. */
+    /* this is important for tailwind utilities like `divide`, and to set opacity on things like backgrounds, eg: bg-primary/50 */
 
     .bg-primary {
         background-color: var(--bg);

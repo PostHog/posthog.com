@@ -51,6 +51,11 @@ export const productLinks: AppItem[] = [
         Icon: <AppIcon name="notebook" />,
         url: '/docs',
     },
+    {
+        label: 'Talk to a human',
+        Icon: <AppIcon name="contact" />,
+        url: '/talk-to-a-human',
+    },
 ]
 
 export const apps: AppItem[] = [
@@ -78,11 +83,6 @@ export const apps: AppItem[] = [
         label: 'Fun stuff',
         Icon: <AppIcon name="games" />,
         url: '/sparks-joy',
-    },
-    {
-        label: 'Talk to a human',
-        Icon: <AppIcon name="contact" />,
-        url: '/talk-to-a-human',
     },
 ]
 
@@ -260,7 +260,7 @@ export default function Desktop() {
             >
                 <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
                     <div
-                        className={`absolute bottom-0 right-0 size-full -z-10 
+                        className={`fixed inset-0 -z-10 
                         wallpaper-hogzilla:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png')] wallpaper-hogzilla:bg-contain 
                         wallpaper-hogzilla:bg-no-repeat
                         wallpaper-hogzilla:bg-right-bottom
