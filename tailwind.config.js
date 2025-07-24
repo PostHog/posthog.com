@@ -419,9 +419,9 @@ module.exports = {
         function ({ addVariant }) {
             addVariant('skin-modern', 'body[data-skin="modern"] &')
             addVariant('skin-classic', 'body[data-skin="classic"] &')
+            addVariant('wallpaper-keyboard-garden', 'body[data-wallpaper="keyboard-garden"] &')
             addVariant('wallpaper-hogzilla', 'body[data-wallpaper="hogzilla"] &')
             addVariant('wallpaper-office-party', 'body[data-wallpaper="office-party"] &')
-            addVariant('wallpaper-keyboard-garden', 'body[data-wallpaper="keyboard-garden"] &')
             addVariant('wallpaper-2001-bliss', 'body[data-wallpaper="2001-bliss"] &')
             addVariant('wallpaper-parade', 'body[data-wallpaper="parade"] &')
             addVariant('wallpaper-coding-at-night', 'body[data-wallpaper="coding-at-night"] &')

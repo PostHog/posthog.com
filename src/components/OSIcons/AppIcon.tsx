@@ -2,6 +2,7 @@ import React from 'react'
 import { BaseIcon, type IconProps } from './Icons'
 import Link from 'components/Link'
 import { useRef } from 'react'
+import useTheme from '../../hooks/useTheme'
 
 // App icon mapping for different skins
 type AppIconVariants = {
@@ -162,6 +163,7 @@ export const AppLink = ({
     hasDragged,
 }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
+    const { getThemeSpecificBackgroundColors } = useTheme()
 
     const renderIcon = () => {
         if (typeof Icon === 'string') {
@@ -178,6 +180,16 @@ export const AppLink = ({
         const IconComponent = Icon as React.ComponentType<any>
         return <IconComponent className={`text-${color} ${className}`} />
     }
+
+    const baseBackgroundColors = `
+        bg-[rgba(238,239,233,0.75)] 
+        group-hover:bg-[rgba(238,239,233,1)] 
+        dark:bg-[rgba(1,1,1,0.75)] 
+        dark:group-hover:bg-[rgba(1,1,1,1)]
+    `
+
+    const themeSpecificColors = getThemeSpecificBackgroundColors()
+    const backgroundMatchedColors = `${baseBackgroundColors} ${themeSpecificColors}`
 
     return (
         <figure ref={ref}>
@@ -199,11 +211,10 @@ export const AppLink = ({
                 <figcaption className="text-sm font-medium leading-tight">
                     <span className={`inline-block leading-tight`}>
                         <span
-                            className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${
-                                background
-                                    ? background
-                                    : 'bg-[rgba(238,239,233,0.75)] group-hover:bg-[rgba(238,239,233,1)] dark:bg-[rgba(1,1,1,0.75)] dark:group-hover:bg-[rgba(1,1,1,1)]'
-                            }  rounded-[2px] px-0.5 py-0`}
+                            className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${background
+                                ? background
+                                : backgroundMatchedColors
+                                }  rounded-[2px] px-0.5 py-0`}
                         >
                             {label}
                             {extension && <span className="opacity-75">.{extension}</span>}

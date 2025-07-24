@@ -87,7 +87,7 @@ export const onRenderBody = function ({ setPreBodyComponents }) {
     try {
         const savedSkin = JSON.parse(localStorage.getItem('siteSettings') || '{}').skinMode || 'modern'
         document.body.setAttribute('data-skin', savedSkin)
-        const savedWallpaper = JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'hogzilla'
+        const savedWallpaper = JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'keyboard-garden'
         document.body.setAttribute('data-wallpaper', savedWallpaper)
     } catch (err) {}
 })()
