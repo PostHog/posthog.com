@@ -4,9 +4,7 @@ hideAnchor: true
 ---
 
 import InstallationPlatforms from './installation/_snippets/installation-platforms'
-import { CallToAction } from 'components/CallToAction'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate error tracking!">
 
@@ -18,7 +16,8 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
   PostHog's error tracking lets you monitor, investigate, and resolve any issues your users encounter within your app, so you can ship with confidence and debug faster.
 
-  The first step is to [install the PostHog SDK](/docs/error-tracking/installation) to start capturing exception events within your application. We support a wide range of languages, frameworks, and platforms.
+
+  The first step is to install the PostHog SDK to start capturing exception events within your application.
 
   ### Platforms
 
@@ -26,13 +25,13 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
   ### Auto and manual capture
 
-  [Exception autocapture](https://us.posthog.com/settings/project-error-tracking#exception-autocapture) can be enabled for most platforms. When enabled, PostHog automatically captures `$exception` events whenever errors are thrown by the client or server application.
+  Exception autocapture can be enabled for most platforms. When enabled, PostHog automatically captures `$exception` events whenever errors are thrown by the client or server application.
 
-  You can also call the capture method to manually send exceptions to PostHog with custom properties.
+  You can also call the capture method `posthog.captureException()` to manually send exceptions to PostHog with custom properties. 
 
-  ```javascript
-  posthog.captureException(error, additionalProperties)
-  ```
+  <CallToAction type="primary" to="/docs/error-tracking/installation">
+    Install PostHog SDK
+  </CallToAction>
 
 </QuestLogItem>
 
@@ -42,7 +41,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
   icon="IconCode"
 >
 
-  The second step is to [upload source maps](/docs/error-tracking/upload-source-maps) to get accurate, readable [stack traces](/docs/error-tracking/stack-traces) for your captured exceptions. This helps you quickly identify and debug issues by showing you the original code context where the error occurred.
+  The second step is to upload source maps to get accurate, readable stack traces for your captured exceptions. This helps you quickly identify and debug issues by showing you the original code context where the error occurred.
 
   <ProductScreenshot
       imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_01_30_at_09_48_09_63dd3c5241.png"
@@ -51,18 +50,10 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
       classes="rounded"
   />
 
-  For languages like Python, the stack trace and code context can be gathered by the PostHog client and requires no additional processing.
 
-  But for compiled or minified languages like JavaScript or TypeScript, you can upload source maps with the [PostHog CLI](https://www.npmjs.com/package/@posthog/cli).
-
-  ```bash
-  npm install -g @posthog/cli
-
-  # Inject metadata in files to resolve errors
-  posthog-cli sourcemap inject --directory ./path/to/assets
-  # Upload assets to PostHog
-  posthog-cli sourcemap upload --directory ./path/to/assets
-  ```
+  <CallToAction type="primary" to="/docs/error-tracking/upload-source-maps">
+    Upload source maps
+  </CallToAction>
 
 </QuestLogItem>
 
@@ -72,7 +63,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
   icon="IconWarning"
 >
 
-  Once you're capturing errors, the next step is to stay on top of [issues](/docs/error-tracking/issues). Exception events are grouped into issues for your team to manage based on event information, such as the exception type, message, and stack trace. 
+  Once you're capturing errors, the next step is to stay on top of issues. Exception events are grouped into issues for your team to manage based on event information, such as the exception type, message, and stack trace. 
 
   <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_21_2x_f4848a78c6.png"
@@ -87,6 +78,11 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
   - Customize issue grouping with rules 
   - Set up real-time alerts based on event triggers, filters, and trends
   - Integrate with Slack, Discord, Teams, or an HTTP webhook
+
+
+  <CallToAction type="primary" to="/docs/error-tracking/issues">
+    Learn about issues
+  </CallToAction>
 
 </QuestLogItem>
 
@@ -125,9 +121,10 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
   icon="IconPiggyBank"
 >
 
-  PostHog's error tracking is built to be cost-effective by default, with a generous free tier and [transparent usage-based pricing](/error-tracking#pricing). Our generous free tier means more than 90% of companies use PostHog for free. 
+  PostHog's error tracking is built to be cost-effective by default, with a generous free tier and transparent usage-based pricing. Our generous free tier means more than 90% of companies use PostHog for free. 
 
-  We aim to be the cheapest option at every scale compared to any major competitor. If we’re not, [tell us](https://twitter.com/intent/tweet?text=@posthog%20Your%20pricing%20is...). Seriously.
+  And if that's *still* not enough, we wrote a whole page on how to [cut costs with error tracking](/docs/error-tracking/cutting-costs).
+
 
   ### TL;DR 💸 
 
@@ -137,10 +134,8 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
   - 325K-10 million are $0.000140/exception
   - 10 million+ are $0.000115/exception
   - You can set billing limits to avoid surprise charges
-  - See our [pricing page](https://posthog.com/error-tracking#pricing) for more up-to-date details
+  - See our [pricing page](/error-tracking#pricing) for more up-to-date details
 
-
-  And if that's *still* not enough, we wrote a whole page on how to [cut costs](/docs/error-tracking/cutting-costs) with PostHog error tracking.
 
   --- 
 
