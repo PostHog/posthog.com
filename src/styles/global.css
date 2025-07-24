@@ -178,7 +178,7 @@
     }
 
     .light[data-skin='classic'] [data-scheme='primary'] {
-        --accent: #fdfdf8;
+        --accent: 253 253 248;
     }
 
     .light [data-scheme='secondary'] {
@@ -252,7 +252,7 @@
 
     /* only overrides from modern */
     .light[data-skin='classic'] [data-scheme='tertiary'] {
-        --bg: #fdfdf8;
+        --bg: 253 253 248;
     }
 
     .dark [data-scheme='primary'] {
