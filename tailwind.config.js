@@ -170,10 +170,12 @@ module.exports = {
                 'button-shadow-dark': '#99660E',
                 'button-secondary-shadow-dark': '#925D05',
 
-                primary: 'var(--primary)',
-                secondary: 'var(--secondary)',
-                accent: 'var(--accent)',
-                border: 'var(--border)',
+                primary: 'rgb(var(--text-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
+                border: 'rgb(var(--border) / <alpha-value>)',
+                'bg-primary': 'rgb(var(--bg) / <alpha-value>)',
+                'bg-accent': 'rgb(var(--accent) / <alpha-value>)',
 
                 light: '#fff',
                 'accent-light': '#e5e7e0',

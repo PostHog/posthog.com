@@ -31,35 +31,37 @@
 
 @layer utilities {
     .light [data-scheme='primary'] {
-        --bg: #fdfdf8;
-        --accent: #e5e7e0;
-        --border: #bfc1b7;
-        --input-bg: #eeefe9;
-        --input-bg-hover: #eeefe9;
-        --input-border: #d2d3cc;
-        --input-border-hover: #d2d3cc;
-        --text-primary: #4d4f46;
-        --text-secondary: #65675e;
-        --text-muted: #9ea096;
-        --tw-shadow-color: #4d4f46;
+        --bg: 253 253 248;
+        --accent: 229 231 224;
+        --border: 191 193 183;
+        --input-bg: 238 239 233;
+        --input-bg-hover: 238 239 233;
+        --input-border: 210 211 204;
+        --input-border-hover: 210 211 204;
+        --text-primary: 77 79 70;
+        --text-secondary: 101 103 94;
+        --text-muted: 158 160 150;
+        --tw-shadow-color: 77 79 70;
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-accent: var(--accent);
 
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
-            --bg: #4d4f46;
-            --accent: #9ea096;
-            --border: #bfc1b7;
-            --input-bg: #eeefe9;
-            --input-bg-hover: #eeefe9;
-            --text-primary: #fdfdf8;
-            --text-secondary: #e5e7e0;
-            --text-muted: #e5e7e0;
+            --bg: 77 79 70;
+            --accent: 158 160 150;
+            --border: 191 193 183;
+            --input-bg: 238 239 233;
+            --input-bg-hover: 238 239 233;
+            --text-primary: 253 253 248;
+            --text-secondary: 229 231 224;
+            --text-muted: 229 231 224;
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-accent: var(--accent);
         }
     }
 
@@ -180,33 +182,35 @@
     }
 
     .light [data-scheme='secondary'] {
-        --bg: #eeefe9;
-        --accent: #d2d3cc;
-        --border: #b6b7af;
-        --input-bg: #fdfdf8;
-        --input-border: #bfc1b7;
-        --text-primary: #23251d;
-        --text-secondary: #23251d;
-        --text-muted: #9ea096;
-        --tw-shadow-color: #23251d;
+        --bg: 238 239 233;
+        --accent: 210 211 204;
+        --border: 182 183 175;
+        --input-bg: 253 253 248;
+        --input-border: 191 193 183;
+        --text-primary: 35 37 29;
+        --text-secondary: 35 37 29;
+        --text-muted: 158 160 150;
+        --tw-shadow-color: 35 37 29;
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-accent: var(--accent);
 
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
-            --bg: #23251d;
-            --accent: #4d4f46;
-            --border: #b6b7af;
-            --input-bg: #fdfdf8;
-            --input-border: #bfc1b7;
-            --text-primary: #eeefe9;
-            --text-secondary: #d2d3cc;
-            --text-muted: #d2d3cc;
+            --bg: 35 37 29;
+            --accent: 77 79 70;
+            --border: 182 183 175;
+            --input-bg: 253 253 248;
+            --input-border: 191 193 183;
+            --text-primary: 238 239 233;
+            --text-secondary: 210 211 204;
+            --text-muted: 210 211 204;
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-accent: var(--accent);
         }
     }
 
@@ -215,29 +219,30 @@
     }
 
     .light [data-scheme='tertiary'] {
-        --bg: #e5e7e0;
-        --accent: #c8cac1;
-        --border: #9ea096;
-        --input-bg: #eeefe9;
-        --input-border: #bfc1b7;
-        --text-primary: #23251d;
-        --text-secondary: #4d4f46;
-        --text-muted: #73756b;
-        --tw-shadow-color: #23251d;
+        --bg: 229 231 224;
+        --accent: 200 202 193;
+        --border: 158 160 150;
+        --input-bg: 238 239 233;
+        --input-border: 191 193 183;
+        --text-primary: 35 37 29;
+        --text-secondary: 77 79 70;
+        --text-muted: 115 117 107;
+        --tw-shadow-color: 35 37 29;
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-accent: var(--accent);
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
-            --bg: #23251d;
-            --accent: #4d4f46;
-            --border: #9ea096;
-            --input-bg: #eeefe9;
-            --input-border: #bfc1b7;
-            --text-primary: #e5e7e0;
-            --text-secondary: #c8cac1;
-            --text-muted: #c8cac1;
+            --bg: 35 37 29;
+            --accent: 77 79 70;
+            --border: 158 160 150;
+            --input-bg: 238 239 233;
+            --input-border: 191 193 183;
+            --text-primary: 229 231 224;
+            --text-secondary: 200 202 193;
+            --text-muted: 200 202 193;
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
@@ -251,94 +256,100 @@
     }
 
     .dark [data-scheme='primary'] {
-        --bg: #1e1f23;
-        --accent: #2d2e37;
-        --border: #3e424f;
-        --input-bg: #25262b;
-        --input-bg-hover: #222320;
-        --input-border: #32343f;
-        --input-border-hover: #b0b4c4;
-        --text-primary: #eaecf6;
-        --text-secondary: #7a7e8c;
-        --text-muted: #626674;
-        --tw-shadow-color: #b0b4c4;
+        --bg: 30 31 35;
+        --accent: 45 46 55;
+        --border: 62 66 79;
+        --input-bg: 37 38 43;
+        --input-bg-hover: 34 35 32;
+        --input-border: 50 52 63;
+        --input-border-hover: 176 180 196;
+        --text-primary: 234 236 246;
+        --text-secondary: 122 126 140;
+        --text-muted: 98 102 116;
+        --tw-shadow-color: 176 180 196;
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-accent: var(--accent);
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
-            --bg: #fdfdf8;
-            --accent: #d2d3cc;
-            --border: #4d4f46;
-            --input-bg: #1b1c1a;
-            --input-bg-hover: #1b1c1a;
-            --text-primary: #111111;
-            --text-secondary: #65675e;
-            --text-muted: #65675e;
+            --bg: 253 253 248;
+            --accent: 210 211 204;
+            --border: 77 79 70;
+            --input-bg: 27 28 26;
+            --input-bg-hover: 27 28 26;
+            --text-primary: 17 17 17;
+            --text-secondary: 101 103 94;
+            --text-muted: 101 103 94;
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-accent: var(--accent);
         }
     }
 
     .dark [data-scheme='secondary'] {
-        --bg: #25262b;
-        --accent: #32343f;
-        --border: #4a4e5c;
-        --input-bg: #1e1f24;
-        --input-border: #3e424f;
-        --text-primary: #edeef4;
-        --text-secondary: #b0b4c4;
-        --text-muted: #6e7281;
-        --tw-shadow-color: #edeef4;
+        --bg: 37 38 43;
+        --accent: 50 52 63;
+        --border: 74 78 92;
+        --input-bg: 30 31 36;
+        --input-border: 62 66 79;
+        --text-primary: 237 238 244;
+        --text-secondary: 176 180 196;
+        --text-muted: 110 114 129;
+        --tw-shadow-color: 237 238 244;
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-accent: var(--accent);
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
-            --bg: #eeefe9;
-            --accent: #d2d3cc;
-            --border: #3a3b37;
-            --input-bg: #111111;
-            --input-border: #2c2d2a;
-            --text-primary: #1b1c1a;
-            --text-secondary: #4d4f46;
-            --text-muted: #65675e;
+            --bg: 238 239 233;
+            --accent: 210 211 204;
+            --border: 58 59 55;
+            --input-bg: 17 17 17;
+            --input-border: 44 45 42;
+            --text-primary: 27 28 26;
+            --text-secondary: 77 79 70;
+            --text-muted: 101 103 94;
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-accent: var(--accent);
         }
     }
 
     .dark [data-scheme='tertiary'] {
-        --bg: #2d2e37;
-        --accent: #383a47;
-        --border: #626674;
-        --input-bg: #1e1f23;
-        --input-border: #3e424f;
-        --text-primary: #edeef4;
-        --text-secondary: #b0b4c4;
-        --text-muted: #6e7281;
-        --tw-shadow-color: #edeef4;
+        --bg: 45 46 55;
+        --accent: 56 58 71;
+        --border: 98 102 116;
+        --input-bg: 30 31 35;
+        --input-border: 62 66 79;
+        --text-primary: 237 238 244;
+        --text-secondary: 176 180 196;
+        --text-muted: 110 114 129;
+        --tw-shadow-color: 237 238 244;
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-accent: var(--accent);
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
-            --bg: #e5e7e0;
-            --accent: #bfc1b7;
-            --border: #4d4f46;
-            --input-bg: #1b1c1a;
-            --input-border: #3a3b37;
-            --text-primary: #222320;
-            --text-secondary: #65675e;
-            --text-muted: #73756b;
+            --bg: 229 231 224;
+            --accent: 191 193 183;
+            --border: 77 79 70;
+            --input-bg: 27 28 26;
+            --input-border: 58 59 55;
+            --text-primary: 34 35 32;
+            --text-secondary: 101 103 94;
+            --text-muted: 115 117 107;
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-accent: var(--accent);
         }
     }
 
@@ -346,36 +357,36 @@
     /* this is important for tailwind utilities like `divide`, and to set opacity on things like backgrounds, eg: bg-primary/50 */
 
     .bg-primary {
-        background-color: var(--bg);
+        background-color: rgb(var(--bg));
     }
     .bg-accent {
-        background-color: var(--accent);
+        background-color: rgb(var(--accent));
     }
     .bg-input {
-        background-color: var(--input-bg);
+        background-color: rgb(var(--input-bg));
     }
     .bg-input-hover {
-        background-color: var(--input-bg-hover);
+        background-color: rgb(var(--input-bg-hover));
     }
     .border-primary,
     .divide-primary > :not([hidden]) ~ :not([hidden]) {
-        border-color: var(--border);
+        border-color: rgb(var(--border));
     }
     .border-input {
-        border-color: var(--input-border);
+        border-color: rgb(var(--input-border));
     }
     .border-input-hover {
-        border-color: var(--input-border-hover);
+        border-color: rgb(var(--input-border-hover));
     }
 
     .text-primary {
-        color: var(--text-primary);
+        color: rgb(var(--text-primary));
     }
     .text-secondary {
-        color: var(--text-secondary);
+        color: rgb(var(--text-secondary));
     }
     .text-muted {
-        color: var(--text-muted);
+        color: rgb(var(--text-muted));
     }
 
     .text-shadow-none {
