@@ -14,10 +14,23 @@ export interface QuestLogItemProps {
     children: React.ReactNode
 }
 
-export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const QuestLog: React.FC<{
+    children: React.ReactNode
+    firstSpeechBubble?: string
+    lastSpeechBubble?: string
+}> = ({
+    children,
+    firstSpeechBubble = "We're going on an adventure!",
+    lastSpeechBubble = "You're ready to start building!",
+}) => {
     const SCROLLSPY_OFFSET = 0
     const MOBILE_SCROLLSPY_OFFSET = 125
     const STICKY_LIST_OFFSET_REM = 8
+
+    // Animation timing constants
+    const INITIAL_LOAD_DELAY = 1000
+    const SPEECH_BUBBLE_SHOW_DELAY = 200
+    const SPEECH_BUBBLE_AUTO_HIDE_DELAY = 2500
 
     // Corner bracket SVG constants
     const TOP_LEFT_CORNER_SVG = (
@@ -69,6 +82,8 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
     const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
     const [isMobile, setIsMobile] = useState(false)
+    const [speechText, setSpeechText] = useState('')
+    const [showSpeechBubble, setShowSpeechBubble] = useState(false)
 
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -91,11 +106,43 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         return slugger.slug(title)
     }
 
+    const shouldShowSpeechBubble = (questIndex: number, totalQuests: number) => {
+        // Show only at first and last quest
+        const firstQuest = 0
+        const lastQuest = totalQuests - 1
+
+        return questIndex === firstQuest || questIndex === lastQuest
+    }
+
     const restartSpriteAnimation = () => {
         if (spriteRef.current) {
             spriteRef.current.classList.remove('quest-log-sprite-animate')
             void spriteRef.current.offsetWidth // Force reflow
             spriteRef.current.classList.add('quest-log-sprite-animate')
+
+            // Only show speech bubble for specific quests
+            if (shouldShowSpeechBubble(selectedQuest, questItems.length)) {
+                // Update speech bubble - use first message for first quest, last message for last quest
+                const message =
+                    selectedQuest === questItems.length - 1
+                        ? lastSpeechBubble // Last quest message
+                        : firstSpeechBubble // First quest message
+                setSpeechText(message)
+                setShowSpeechBubble(false)
+
+                // Show new speech bubble after brief delay
+                setTimeout(() => {
+                    setShowSpeechBubble(true)
+
+                    // Auto-hide speech bubble after delay
+                    setTimeout(() => {
+                        setShowSpeechBubble(false)
+                    }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
+                }, SPEECH_BUBBLE_SHOW_DELAY)
+            } else {
+                // Hide speech bubble for other quests
+                setShowSpeechBubble(false)
+            }
         }
     }
 
@@ -144,7 +191,18 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
         const timer = setTimeout(() => {
             setHasInitialLoadSettled(true)
             restartSpriteAnimation()
-        }, 1000)
+
+            // Show initial speech bubble only if first quest should show it (it should, since it's index 0)
+            if (questItems.length === 0 || shouldShowSpeechBubble(0, questItems.length)) {
+                setSpeechText(firstSpeechBubble) // Set initial message
+                setShowSpeechBubble(true)
+
+                // Auto-hide initial speech bubble after delay
+                setTimeout(() => {
+                    setShowSpeechBubble(false)
+                }, SPEECH_BUBBLE_AUTO_HIDE_DELAY)
+            }
+        }, INITIAL_LOAD_DELAY)
         return () => clearTimeout(timer)
     }, [])
 
@@ -250,19 +308,79 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                     className="bg-red dark:bg-yellow h-1.5 rounded-full transition-all duration-[2s] ease-in-out"
                                     style={{ width: `${progressPercentage}%` }}
                                 ></div>
-                                {/* Sprite Animation */}
+                                {/* Sprite Animation with Speech Bubble */}
                                 <div
-                                    ref={spriteRef}
-                                    className={`absolute w-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
+                                    className="absolute transition-all duration-[2s] ease-in-out"
                                     style={{
                                         left: spritePosition,
-                                        backgroundImage: 'url(/images/game-walk.png)',
-                                        backgroundSize: '528px 48px',
-                                        backgroundRepeat: 'no-repeat',
-                                        height: '48px',
                                         top: '-48px',
+                                        width: '48px',
+                                        height: '48px',
                                     }}
-                                ></div>
+                                >
+                                    {/* Walking Sprite */}
+                                    <div
+                                        ref={spriteRef}
+                                        className={`quest-log-sprite-animate w-[48px] h-[48px] pointer-events-none transition-all duration-[2s] ease-in-out`}
+                                        style={{
+                                            backgroundImage: 'url(/images/game-walk.png)',
+                                            backgroundSize: '528px 48px',
+                                            backgroundRepeat: 'no-repeat',
+                                            height: '48px',
+                                        }}
+                                    />
+
+                                    {/* Speech Bubble */}
+                                    <div
+                                        className={`absolute ${
+                                            selectedQuest === questItems.length - 1 ? 'right-full mr-2' : 'left-full'
+                                        } top-[calc(50%-3px)] transform -translate-y-[calc(50%)] transition-all duration-300 ease-out ${
+                                            showSpeechBubble
+                                                ? 'opacity-100 translate-x-0 scale-100'
+                                                : selectedQuest === questItems.length - 1
+                                                ? 'opacity-0 translate-x-2 scale-95'
+                                                : 'opacity-0 -translate-x-2 scale-95'
+                                        }`}
+                                        style={{
+                                            animation: showSpeechBubble
+                                                ? selectedQuest === questItems.length - 1
+                                                    ? 'speechBounceLeft 0.5s ease-out'
+                                                    : 'speechBounce 0.5s ease-out'
+                                                : 'none',
+                                            zIndex: 60, // Higher than your sticky nav
+                                        }}
+                                    >
+                                        {/* Speech Bubble Container */}
+                                        <div className="relative bg-white dark:bg-accent-dark rounded-lg shadow-md border-1 border-white dark:border-dark px-1 py-1 min-w-[120px] max-w-[175px]">
+                                            {/* Speech Text */}
+                                            <div className="text-xs font-medium text-primary dark:text-primary-dark text-center">
+                                                <span className="inline-block">{speechText}</span>
+                                            </div>
+
+                                            {/* Speech Bubble Tail */}
+                                            <div
+                                                className={`absolute ${
+                                                    selectedQuest === questItems.length - 1 ? 'left-full' : 'right-full'
+                                                } top-1/2 transform -translate-y-1/2`}
+                                            >
+                                                <div
+                                                    className={`w-0 h-0 border-t-[7px] border-b-[7px] ${
+                                                        selectedQuest === questItems.length - 1
+                                                            ? 'border-l-[10px] border-l-white dark:border-l-dark'
+                                                            : 'border-r-[10px] border-r-white dark:border-r-dark'
+                                                    } border-t-transparent border-b-transparent`}
+                                                ></div>
+                                                <div
+                                                    className={`absolute ${
+                                                        selectedQuest === questItems.length - 1
+                                                            ? '-left-[8px] border-l-[8px] border-l-white dark:border-l-accent-dark'
+                                                            : '-right-[8px] border-r-[8px] border-r-white dark:border-r-accent-dark'
+                                                    } top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-[6px] border-b-[6px] border-t-transparent border-b-transparent`}
+                                                ></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
