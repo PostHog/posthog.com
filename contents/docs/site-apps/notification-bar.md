@@ -1,6 +1,5 @@
 ---
 title: Notification Bar
-github: 'https://github.com/PostHog/notification-bar-app'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apps/thumbnails/notification-bar.png
 topics:

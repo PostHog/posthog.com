@@ -1,6 +1,5 @@
 ---
 title: Pineapple Mode
-github: 'https://github.com/PostHog/pineapple-mode-app'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apps/thumbnails/pineapple-mode.png
 tags:
