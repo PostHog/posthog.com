@@ -261,27 +261,111 @@ export default function Desktop() {
                 ]}
             >
                 <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
-                    <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`}
-                    />
-                    <div className="hidden wallpaper-office-party:block absolute bottom-24 left-24">
+                    <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
+                    {/* Hogzilla */}
+                    <div className="hidden wallpaper-hogzilla:block absolute inset-0">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
+                            alt="Hogzilla"
+                            width={2574}
+                            height={1256}
+                            className="absolute right-0 bottom-0 object-contain w-full h-auto"
+                        />
+                    </div>
+
+                    {/* Startup Monopoly */}
+                    <div className="hidden wallpaper-startup-monopoly:block absolute inset-0">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
+                            alt="Startup Monopoly"
+                            width={1087}
+                            height={540}
+                            className="absolute right-0 top-0 w-[1087px] h-[540px]"
+                        />
+                    </div>
+
+                    {/* Office party */}
+                    <div className="hidden wallpaper-office-party:block absolute inset-0">
+                        <div
+                            className="absolute inset-0 opacity-100"
+                            style={{
+                                backgroundImage:
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_light_27d74f73b5.png')",
+                                backgroundSize: '200px 198px',
+                                backgroundRepeat: 'repeat',
+                            }}
+                        />
+                        <div
+                            className="absolute inset-0 opacity-0 dark:opacity-100"
+                            style={{
+                                backgroundImage:
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/carpet_dark_f1c9f5ce39.png')",
+                                backgroundSize: '200px 198px',
+                                backgroundRepeat: 'repeat',
+                            }}
+                        />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/office_cc4ae8675f.png"
                             alt="Office party"
                             width={997}
                             height={858}
-                            className="w-[498.5px] h-[429px]"
+                            className="absolute bottom-24 left-24 w-[498.5px] h-[429px]"
                         />
                     </div>
+
+                    {/* Keyboard garden */}
                     <div className="hidden wallpaper-keyboard-garden:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_7b4f9e93b6.png"
-                            alt="Office party"
+                            alt="Keyboard garden"
                             width={1242}
                             height={1128}
                             className="w-[621px] h-[564px]"
                         />
                     </div>
-                    <div className="hidden wallpaper-2001-bliss:block absolute inset-0 bg-white/60 dark:bg-black/60"></div>
+
+                    {/* 2001 bliss */}
+                    <div className="hidden wallpaper-2001-bliss:block absolute inset-0">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
+                            alt="2001 bliss"
+                            width={1180}
+                            height={738}
+                            imgClassName="absolute inset-0 w-full h-full object-cover object-center"
+                        />
+                        <div className="absolute inset-0 bg-white/60 dark:bg-black/60"></div>
+                    </div>
+
+                    {/* Parade */}
+                    <div className="hidden wallpaper-parade:block absolute inset-0">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
+                            alt="Parade"
+                            width={1565}
+                            height={744}
+                            className="absolute inset-0"
+                            imgClassName="object-contain h-full max-w-none dark:hidden"
+                        />
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_dark_238d90c5ef.png"
+                            alt="Parade"
+                            width={1565}
+                            height={744}
+                            className="absolute inset-0"
+                            imgClassName="object-contain h-full max-w-none hidden dark:block"
+                        />
+                    </div>
+
+                    {/* Coding at night */}
+                    <div className="hidden wallpaper-coding-at-night:block absolute inset-0">
+                        <CloudinaryImage
+                            src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
+                            alt="Coding at night"
+                            width={800}
+                            height={600}
+                            className="absolute bottom-0 left-1/2 -translate-x-1/2 object-contain h-full max-w-none"
+                        />
+                    </div>
 
                     <nav>
                         <ul className="list-none m-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2 md:mt-0 mt-4">

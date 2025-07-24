@@ -71,8 +71,6 @@ const cursorOptions: ToggleOption[] = [
     },
 ]
 
-
-
 const experienceOptions = [
     {
         label: (
@@ -128,9 +126,9 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
 
     const currentOption = themeOptions.find((option) => option.value === value)
     const currentThumb = currentOption
-        ? (isDark
-            ? currentOption.background?.image?.dark?.thumb
-            : currentOption.background?.image?.light?.thumb)
+        ? isDark
+            ? currentOption.background?.thumb?.dark
+            : currentOption.background?.thumb?.light
         : null
 
     const handleSelect = (selectedValue: string) => {
@@ -172,9 +170,7 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
             >
                 <div className="grid @xl:grid-cols-2 @2xl:grid-cols-3 @xl:gap-2 p-2">
                     {themeOptions.map((option) => {
-                        const optionThumb = isDark
-                            ? option.background?.image?.dark?.thumb
-                            : option.background?.image?.light?.thumb
+                        const optionThumb = isDark ? option.background?.thumb?.dark : option.background?.thumb?.light
                         const isSelected = option.value === value
                         return (
                             <button
@@ -182,8 +178,9 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                                 type="button"
                                 data-scheme="primary"
                                 onClick={() => handleSelect(option.value)}
-                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
-                                    }`}
+                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${
+                                    isSelected ? 'bg-accent' : ''
+                                }`}
                             >
                                 <img
                                     src={optionThumb}
