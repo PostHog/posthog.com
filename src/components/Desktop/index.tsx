@@ -295,7 +295,7 @@ export default function Desktop() {
                         wallpaper-startup-monopoly:bg-no-repeat
                         wallpaper-startup-monopoly:bg-right-top
                         wallpaper-startup-monopoly:bg-[#FEFCED]
-                        dark:wallpaper-startup-monopoly:bg-[#393836]
+                        dark:wallpaper-startup-monopoly:bg-[#1d1f27]
                         
                     `}
                     />

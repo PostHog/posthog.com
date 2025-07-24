@@ -96,7 +96,10 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                         </RadixSelect.Icon>
                     </RadixSelect.Trigger>
                     <RadixSelect.Portal>
-                        <RadixSelect.Content className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl">
+                        <RadixSelect.Content
+                            className="overflow-hidden rounded bg-white dark:bg-accent-dark shadow-xl"
+                            data-scheme={dataScheme}
+                        >
                             <RadixSelect.ScrollUpButton className="flex h-[25px] cursor-default items-center justify-center bg-white dark:bg-accent-dark text-secondary">
                                 <IconChevronDown className="size-4 rotate-180" />
                             </RadixSelect.ScrollUpButton>
