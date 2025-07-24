@@ -1,0 +1,37 @@
+---
+title: Issues
+---
+
+## What is an issue?
+
+Errors are captured as `$exception` events which means that you can create insights, filter recordings, trigger surveys, and more in the same way you can for any other type of event.
+
+Exception events are grouped into issues based on event information, such as the exception type, message, and stack trace. The data used for grouping depends on what is available. 
+
+We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+
+You can also manually combine two or more issues by [merging them](/docs/error-tracking/monitoring#merging-issues).
+
+### Issue list
+
+In addition to using events in insights, replays, and surveys as mentioned above customers can also visit the [error tracking page](https://us.posthog.com/error_tracking).
+
+Exceptions are grouped by type, each with aggregated counts and sparklines providing an indication of the severity of each group.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_21_2x_f4848a78c6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_46_2x_f1f5e7f31b.png"
+    alt="Error tracking overview"
+    classes="rounded"
+/>
+
+### Issue page
+
+Clicking through to an individual group shows you all the associated exceptions, including the associated stack trace, active feature flags when the exception was captured, and a link to the relevant session replay.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issue_page_light_b74b913232.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issue_page_dark_bfe4579559.png"
+    alt="Error tracking issue page"
+    classes="rounded"
+/>

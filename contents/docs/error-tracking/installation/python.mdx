@@ -1,0 +1,156 @@
+---
+title: Python error tracking installation
+---
+
+import { Steps, Step } from 'components/Docs/Steps'
+
+import Tab from "components/Tab"
+import DjangoContextMiddleware from '../../libraries/python/_snippets/django-context-middleware.mdx'
+import PythonFlaskExceptionAutocapture from '../../libraries/python/_snippets/python-flask-exception-autocapture.mdx'
+import PythonFastAPIExceptionAutocapture from '../../libraries/python/_snippets/python-fastapi-exception-autocapture.mdx'
+
+<Steps>
+<Step title="Installing PostHog Python SDK" subtitle="Your goal in this step: Install the PostHog Python SDK." badge="required">
+
+```bash
+pip install posthog
+```
+
+In your app, import the `posthog` library and set your project API key and host **before** making any calls.
+
+```python
+from posthog import Posthog
+
+
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+```
+
+> **Note:** As a rule of thumb, we do not recommend having API keys in plaintext. Setting it as an environment variable is best.
+
+You can find your project API key and instance address in the [project settings](https://app.posthog.com/project/settings) page in PostHog.
+
+To debug, you can toggle debug mode:
+
+```python
+posthog.debug = True
+```
+
+To make sure no calls happen during tests, you can disable PostHog, like so:
+
+```python
+if settings.TEST:
+    posthog.disabled = True
+```
+
+</Step>
+
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, enable debug and call `posthog.capture('test_event')` to make sure you can capture events.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+
+<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Python application." badge="required">
+
+> **Note:** A minimum SDK version of v3.7.0 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
+
+Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any unhandled exceptions thrown by your Python application. It works by setting Python's built-in exception hooks, such as `sys.excepthook` and `threading.excepthook`.
+
+```python
+from posthog import Posthog
+
+posthog = Posthog("<ph_project_api_key>", enable_exception_autocapture=True, ...)
+```
+
+We recommend setting up and using [contexts](/docs/libraries/python#contexts) so that exceptions automatically include distinct IDs, session IDs, and other properties you can set up with tags.
+
+</Step>
+
+<Step checkpoint title="Verify exception autocapture" subtitle="Confirm exceptions are being automatically captured">
+
+Before proceeding, confirm that exceptions are being automatically captured.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+
+<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Python application." badge="optional">
+
+For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
+
+```python
+posthog.capture_exception(e, distinct_id="user_distinct_id", properties=additional_properties)
+```
+
+You can find a full example of all of this in our [Python (and Flask) error tracking tutorial](/tutorials/python-error-tracking).
+
+</Step>
+
+<Step checkpoint title="Verify manual exception capture" subtitle="Confirm you can successfully capture exceptions">
+
+Before proceeding, confirm that you can successfully capture exceptions.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+
+<Step title="Framework-specific exception capture" subtitle="Your goal in this step: Configure framework-specific exception capture." badge="optional">
+
+Python frameworks often have built-in error handlers. This means PostHog's default exception autocapture won't work and we need to manually capture errors instead. The exact process for doing this depends on the framework:
+
+<Tab.Group tabs={['Django', 'Flask', 'FastAPI']}>
+  <Tab.List>
+    <Tab>Django</Tab>
+    <Tab>Flask</Tab>
+    <Tab>FastAPI</Tab>
+  </Tab.List>
+  <Tab.Panels>
+    <Tab.Panel>
+      <DjangoContextMiddleware />
+    </Tab.Panel>
+    <Tab.Panel>
+      <PythonFlaskExceptionAutocapture />
+    </Tab.Panel>
+    <Tab.Panel>
+      <PythonFastAPIExceptionAutocapture />
+    </Tab.Panel>
+  </Tab.Panels>
+</Tab.Group>
+
+</Step>
+
+<Step checkpoint title="Verify framework exception capture" subtitle="Confirm exceptions are being properly captured by the framework">
+
+Before proceeding, confirm that exceptions are being properly captured by the framework.
+
+<div className="mt-4 mb-2">
+  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+    Check for exceptions in PostHog
+  </CallToAction>
+</div>
+
+</Step>
+
+<Step title="Next steps">
+
+After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
+
+1. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
+2. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
+
+</Step>
+</Steps> 

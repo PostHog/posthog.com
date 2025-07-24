@@ -1,0 +1,80 @@
+---
+title: Upload source maps for React
+---
+
+import { CallToAction } from 'components/CallToAction'
+import { Steps, Step } from 'components/Docs/Steps'
+
+import CLIDownload from '../_snippets/cli/download.mdx'
+import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+import InjectSourceMap from './_snippets/inject-source-map.mdx'
+import UploadSourceMap from './_snippets/upload-source-map.mdx'
+
+> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
+>
+> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
+>    Follow in PostHog
+> </CallToAction>
+
+<Steps>
+
+<Step title="Installing the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool." badge="required">
+<CLIDownload />
+</Step>
+
+<Step title="Authenticating the PostHog CLI" subtitle="Your goal in this step: Authenticate the PostHog CLI tool." badge="required">
+<CLIAuthenticate />
+</Step>
+
+<Step title="Output source maps for your framework" subtitle="Your goal in this step: Configure React to generate source maps and set up automatic processing." badge="required">
+  
+If you're using React with Vite, you can enable source maps in your `vite.config.js` file.
+
+```js
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  build: {
+    sourcemap: true, // +
+  }
+})
+```
+
+If you're using another build tool like [webpack](https://webpack.js.org/configuration/devtool/) or [Rollup](https://rollupjs.org/configuration-options/#output-sourcemap), consult the documentation for your build tool to enable source maps.
+
+</Step>
+
+<Step title="Inject source map" subtitle="Your goal in this step: Automatically inject metadata during the build process." badge="required">
+<InjectSourceMap />
+
+</Step>
+
+<Step checkpoint title="Verify source map injection" subtitle="Confirm source map comments are present">
+
+Confirm that the served files are injected with the correct source map comment in production in dev tools.
+
+```js 
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+``` 
+
+</Step>
+
+<Step title="Upload source map" subtitle="Your goal in this step: Automatically upload source maps to PostHog during build." badge="required">
+<UploadSourceMap />
+
+</Step>
+
+<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
+
+Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
+
+<div className="mt-4 mb-2">
+<CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">
+    Check symbol sets in PostHog
+</CallToAction>
+</div>
+
+</Step>
+</Steps>

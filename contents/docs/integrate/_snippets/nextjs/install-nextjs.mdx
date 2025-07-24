@@ -48,22 +48,12 @@ posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY!, {
 
 Older versions of Next.js don't support the `instrumentation-client.ts|js` file. You can use the following setup instead:
 
-<Tab.Group tabs={[
-  'App router', 
-  'Pages router'
-]}>
-  <Tab.List>
-    <Tab>App router</Tab>
-    <Tab>Pages router</Tab>
-  </Tab.List>
-  <Tab.Panels>
-      <Tab.Panel>
-        <AppRouterSetup />
-      </Tab.Panel>
-      <Tab.Panel>
-        <PagesRouterSetup />
-      </Tab.Panel>
-  </Tab.Panels>
-</Tab.Group>
+### App router
+
+<AppRouterSetup />
+
+### Pages router
+
+<PagesRouterSetup />
 
 </details>
