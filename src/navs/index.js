@@ -1897,7 +1897,7 @@ export const docsMenu = {
                             url: '/docs/libraries/python',
                             children: [
                                 {
-                                    name: 'Setup',
+                                    name: 'Setup and features',
                                     url: '/docs/libraries/python',
                                 },
                                 {
