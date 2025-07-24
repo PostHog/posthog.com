@@ -28,7 +28,8 @@ const MainContent = ({ selectedOption, setSelectedOption, options }) => (
             </div>
         </div>
         <div className="w-[60%] flex flex-col justify-center px-8 py-4">
-            <Logo className="h-10 mb-4" />
+            <Logo className="h-10 mb-4 dark:hidden" />
+            <Logo className="h-10 mb-4 hidden dark:block" fill="white" />
             <h1 className="text-xl font-bold mb-1">The toolkit for building successful products</h1>
             <p className="text-secondary text-[15px]">
                 PostHog is the single platform to build products, talk to users, and ship new features
@@ -43,11 +44,11 @@ const MainContent = ({ selectedOption, setSelectedOption, options }) => (
 
                 <div className="mt-6 text-sm border-t border-primary pt-6">
                     You can also{' '}
-                    <Link to="/demo" className="font-semibold text-red" state={{ newWindow: true }}>
+                    <Link to="/demo" className="font-semibold text-red dark:text-yellow" state={{ newWindow: true }}>
                         watch a demo
                     </Link>{' '}
                     or learn{' '}
-                    <Link to="/credits" className="font-semibold text-red" state={{ newWindow: true }}>
+                    <Link to="/credits" className="font-semibold text-red dark:text-yellow" state={{ newWindow: true }}>
                         why our website looks like this
                     </Link>
                     .
