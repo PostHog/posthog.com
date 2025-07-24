@@ -6,12 +6,12 @@ showTitle: true
 
 # Introduction
 
-Each customer is going to be a bit of a snowflake when it comes to onboarding and implementation; especially with such a broad product surface area! 
+Each customer is going to be a bit unique when it comes to onboarding and implementation; especially with such a broad product surface area! 
 There are still some best practices we can follow to collaborate with the customer and plan for their success. It really helps customers to build engagement if we can collaborate with them on a plan for their first 30 days at PostHog.
 
 ## Customize the below template
 
-- Customize the template
+- Customize the template with the goals, specific products and commitments that make sense for your customer's use case.
 - Share with customer, ideally as a Slack Canvas
 
 # Template
@@ -43,6 +43,9 @@ There are still some best practices we can follow to collaborate with the custom
 - [ ] **First Insights:** Identify 2-3 actionable findings from your data
 
 **Weekly check-in:** [Day/Time] - 30 minutes
+- What findings have you learned from the first few insights you set up?
+- Have you come across any points of friction in the setup or areas of the product you're struggling to understand?
+- What are the next actions steps for us to follow up with in the next meeting?
 
 ---
 
@@ -104,7 +107,7 @@ There are still some best practices we can follow to collaborate with the custom
 ### Key Contacts & Communication
 
 #### PostHog Team
-- **PostHog Human:** <your email here>
+- **PostHog Human:** [your email]
 - **Support Channel:** [Dedicated Slack channel/email]
 - **Documentation:** [posthog.com/docs](https://posthog.com/docs)
 
@@ -121,7 +124,7 @@ There are still some best practices we can follow to collaborate with the custom
 
 ### What You Can Expect From Us
 
-✅ **Rapid Response:** Same-day replies to questions/issues  
+✅ **Rapid Response:** Same-day replies to questions/issues from your PostHog Human
 ✅ **Proactive Guidance:** We'll suggest optimizations based on your usage  
 ✅ **Custom Resources:** Tailored documentation and best practices  
 ✅ **Issue Resolution:** PostHog human will resolve issues directly and escalate internally as needed  
