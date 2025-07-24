@@ -13,6 +13,7 @@ import CopyMarkdownActionsDropdown from '../../components/MarkdownActionsDropdow
 import { useLocation } from '@reach/router'
 import Link from '../../components/Link'
 import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
+import { Heading } from '../../components/Heading'
 
 interface Parameter {
     name: string
@@ -198,7 +199,11 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                             >
                                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                                                     <div className="space-y-6">
-                                                        <h4 className="text-lg my-0 font-bold">
+                                                        <Heading
+                                                            as="h4"
+                                                            id={func.id}
+                                                            className="text-lg my-0 font-bold"
+                                                        >
                                                             <code>{func.title}</code>
                                                             {func.releaseTag && (
                                                                 <span
@@ -209,7 +214,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                                                     {func.releaseTag}
                                                                 </span>
                                                             )}
-                                                        </h4>
+                                                        </Heading>
                                                         {func.description && (
                                                             <ReactMarkdown>
                                                                 {padDescription(func.description)}
