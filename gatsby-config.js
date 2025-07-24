@@ -161,6 +161,14 @@ module.exports = {
             },
         },
         {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `sdkReferences`,
+                path: `${__dirname}/src/data/sdkReferences`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+            },
+        },
+        {
             resolve: `gatsby-source-strapi-pages`,
             options: {
                 strapiURL: process.env.STRAPI_URL,
