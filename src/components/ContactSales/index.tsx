@@ -74,7 +74,7 @@ export default function ContactSales({ location }) {
                 image={`/images/og/talk-to-a-human.png`}
             />
 
-            <div className="" data-default-form-id="509041">
+            <div data-scheme="primary" className="bg-accent text-primary" data-default-form-id="509041">
                 <SalesforceForm
                     type="lead"
                     buttonOptions={{
@@ -158,11 +158,7 @@ export default function ContactSales({ location }) {
                         name: 'Contact sales',
                     }}
                 />
-
-
             </div>
-
-
         </>
     )
 }
