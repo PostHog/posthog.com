@@ -9,7 +9,6 @@ import { useStaticQuery, graphql } from 'gatsby'
 // - open filters bar by default on /customers page
 // - don't we have a case study we link to for ourselves? can't find it offline.
 // - link PostHog's "Read [how we use PostHog](/blog/posthog-marketing) at PostHog." from PostHog row's notes (whether it be Markdown link parsing or dangerouslySetInnerHtml)
-// - check the following (blindly-imported) logos: brainboard, mentionme, mintlify, opensauced, wittyworks
 
 // Import PNG logos (not converted to React components)
 import AirbusLogo from '../components/CustomerLogos/AirbusLogo'
@@ -98,7 +97,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     '4dayweek': {
         name: '4DayWeek',
         toolsUsed: ['experiments', 'product_analytics'],
-        notes: '',
+        notes: 'Job board',
         // logo: 4DayWeekLogo,
     },
     '11x': {
@@ -332,12 +331,12 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: SupabaseLogo,
         featured: true,
     },
-    swype: {
-        name: 'Swype',
-        toolsUsed: ['session_replay', 'product_analytics'],
-        notes: 'Tinder for jobs',
-        // logo: SwypeLogo,
-    },
+    // swype: {
+    //     name: 'Swype',
+    //     toolsUsed: ['session_replay', 'product_analytics'],
+    //     notes: 'Tinder for jobs',
+    //     // logo: SwypeLogo,
+    // },
     startengine: {
         name: 'StartEngine',
         toolsUsed: [],
