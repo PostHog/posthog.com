@@ -28,4 +28,4 @@ To avoid notification fatigue the system consolidates all detected spikes across
 
 ## Related systems
 
-Spike detection complements other billing and usage monitoring features, such as **[billing limits](/handbook/growth/billing/customer-billing-configurations)** and **usage dashboards**.
+Spike detection complements other billing and usage monitoring features, such as **[billing limits](/docs/billing/limits-alerts)** and **usage dashboards**.
