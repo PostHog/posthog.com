@@ -1057,6 +1057,14 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
+            if (
+                e.target.tagName === 'INPUT' ||
+                e.target.tagName === 'TEXTAREA' ||
+                e.target.shadowRoot ||
+                (e.target instanceof HTMLElement && e.target.closest('.mdxeditor'))
+            ) {
+                return
+            }
             if (e.shiftKey && e.key === 'ArrowLeft') {
                 handleSnapToSide('left')
             }
