@@ -45,7 +45,9 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-primary: var(--primary);
         --bg-accent: var(--accent);
+        --bg-tertiary: var(--tertiary);
 
         .hover-invert:hover,
         .hover-invert[data-state='open'],
@@ -61,6 +63,7 @@
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-primary: var(--primary);
             --bg-accent: var(--accent);
         }
     }
@@ -194,7 +197,9 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-primary: var(--primary);
         --bg-accent: var(--accent);
+        --bg-tertiary: var(--tertiary);
 
         .hover-invert:hover,
         .hover-invert[data-state='open'],
@@ -210,6 +215,7 @@
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-primary: var(--primary);
             --bg-accent: var(--accent);
         }
     }
@@ -231,7 +237,10 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-primary: var(--primary);
         --bg-accent: var(--accent);
+        --bg-tertiary: var(--tertiary);
+
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -246,6 +255,7 @@
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-primary: var(--primary);
             --bg-accent: var(--accent);
         }
     }
@@ -270,7 +280,10 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-primary: var(--primary);
         --bg-accent: var(--accent);
+        --bg-tertiary: var(--tertiary);
+
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -285,6 +298,7 @@
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-primary: var(--primary);
             --bg-accent: var(--accent);
         }
     }
@@ -302,7 +316,10 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-primary: var(--primary);
         --bg-accent: var(--accent);
+        --bg-tertiary: var(--tertiary);
+
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -317,6 +334,7 @@
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-primary: var(--primary);
             --bg-accent: var(--accent);
         }
     }
@@ -334,7 +352,10 @@
         --primary: var(--text-primary);
         --secondary: var(--text-secondary);
         --muted: var(--text-muted);
+        --bg-primary: var(--primary);
         --bg-accent: var(--accent);
+        --bg-tertiary: var(--tertiary);
+
         .hover-invert:hover,
         .hover-invert[data-state='open'],
         .hover-invert[data-state='highlighted'] {
@@ -349,6 +370,7 @@
             --primary: var(--text-primary);
             --secondary: var(--text-secondary);
             --muted: var(--text-muted);
+            --bg-primary: var(--primary);
             --bg-accent: var(--accent);
         }
     }

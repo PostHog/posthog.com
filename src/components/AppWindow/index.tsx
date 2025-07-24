@@ -391,7 +391,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             data-app="AppWindow"
                             data-scheme="tertiary"
                             className={`@container absolute !select-auto flex flex-col ${
-                                item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-primary'
+                                item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'
                             } ${
                                 siteSettings.experience === 'boring' && !item.appSettings?.size?.fixed
                                     ? 'border-b border-primary'
@@ -497,7 +497,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 <div
                                     data-scheme="tertiary"
                                     onDoubleClick={handleDoubleClick}
-                                    className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary border-b border-input ${
+                                    className={`flex-shrink-0 w-full flex @md:grid grid-cols-[minmax(100px,auto)_1fr_minmax(100px,auto)] gap-1 items-center py-0.5 pl-1.5 pr-0.5 bg-primary/75 backdrop-blur skin-classic:bg-primary border-b border-input ${
                                         siteSettings.experience === 'boring' ? '' : 'cursor-move'
                                     }`}
                                     onPointerDown={(e) => controls.start(e)}

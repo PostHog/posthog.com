@@ -47,6 +47,10 @@ module.exports = {
                 'accent-light': '#e5e7e0',
                 dark: '#1e1f23',
                 'accent-dark': '#232429',
+                primary: 'rgb(var(--bg) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
+                input: 'rgb(var(--input-bg) / <alpha-value>)',
+                'input-hover': 'rgb(var(--input-bg-hover) / <alpha-value>)',
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -82,6 +86,10 @@ module.exports = {
                 button: '#B17816',
                 'button-dark': '#835C19',
                 'button-secondary-dark': '#C78617',
+
+                primary: 'rgb(var(--border) / <alpha-value>)',
+                input: 'rgb(var(--input-border) / <alpha-value>)',
+                'input-hover': 'rgb(var(--input-border-hover) / <alpha-value>)',
             },
             borderRadius: {
                 xs: '2px',
@@ -170,12 +178,7 @@ module.exports = {
                 'button-shadow-dark': '#99660E',
                 'button-secondary-shadow-dark': '#925D05',
 
-                primary: 'rgb(var(--text-primary) / <alpha-value>)',
-                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
-                accent: 'rgb(var(--accent) / <alpha-value>)',
                 border: 'rgb(var(--border) / <alpha-value>)',
-                'bg-primary': 'rgb(var(--bg) / <alpha-value>)',
-                'bg-accent': 'rgb(var(--accent) / <alpha-value>)',
 
                 light: '#fff',
                 'accent-light': '#e5e7e0',
@@ -187,6 +190,23 @@ module.exports = {
                 // plaque-bg
                 // plaque-border
                 // plaque-shadow-bg
+            },
+            textColor: {
+                primary: 'rgb(var(--text-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+                muted: 'rgb(var(--text-muted) / <alpha-value>)',
+            },
+            fill: {
+                primary: 'rgb(var(--text-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+                muted: 'rgb(var(--text-muted) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
+            },
+            stroke: {
+                primary: 'rgb(var(--text-primary) / <alpha-value>)',
+                secondary: 'rgb(var(--text-secondary) / <alpha-value>)',
+                muted: 'rgb(var(--text-muted) / <alpha-value>)',
+                accent: 'rgb(var(--accent) / <alpha-value>)',
             },
             fontFamily: {
                 'fairytale-title': ['Fairytale', 'sans-serif'],
