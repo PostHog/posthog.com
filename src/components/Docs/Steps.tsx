@@ -8,7 +8,7 @@ import Slugger from 'github-slugger'
 import * as Icons from '@posthog/icons'
 
 const badgeClasses = (color: string) =>
-    `!bg-${color}/10 !text-${color} !dark:text-white !dark:bg-${color}/50 text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
+    `bg-${color}/10 text-${color} dark:text-white dark:bg-${color}/50 text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
 const badgeMap: Record<string, { text: string; color: string }> = {
     required: { text: 'Required', color: 'orange' },

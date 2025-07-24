@@ -3487,6 +3487,13 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
+                    name: 'How it works',
+                    url: '/docs/error-tracking/how-it-works',
+                    icon: 'IconListCheck',
+                    featured: true,
+                    color: 'orange',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/error-tracking/installation',
                     icon: 'IconBook',
@@ -3547,7 +3554,7 @@ export const docsMenu = {
                     name: 'Upload source maps',
                     url: '/docs/error-tracking/upload-source-maps',
                     icon: 'IconCode',
-                    color: 'blue',
+                    color: 'green',
                     featured: true,
                     children: [
                         {
@@ -3581,7 +3588,7 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Fundamentals',
+                    name: 'Concepts',
                 },
                 {
                     name: 'Issues',

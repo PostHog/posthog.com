@@ -349,9 +349,6 @@ export const QuestLog: React.FC<{ children: React.ReactNode }> = ({ children }) 
                                         )}
                                         {questItem.props.children || (
                                             <div>
-                                                <h3 className="text-base md:text-lg font-semibold text-orange mb-2 md:mb-3">
-                                                    Overview
-                                                </h3>
                                                 <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
                                                     Quest details will appear here.
                                                 </p>
@@ -384,7 +381,7 @@ export const QuestLogItem: React.FC<
             className={`relative rounded-sm px-2.5 cursor-pointer transition-all duration-200 ease-in-out hover:shadow-md hover:border-orange/50 active:transition-all active:duration-100 ${
                 isSelected
                     ? 'border border-orange shadow-md opacity-100 bg-orange/10 dark:bg-orange/10'
-                    : 'border border-light dark:border-dark opacity-65 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
+                    : 'border border-light dark:border-dark opacity-80 bg-white dark:bg-accent-dark shadow-sm hover:translate-y-[-2px] active:translate-y-[-1px]'
             }`}
         >
             <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
