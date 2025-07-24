@@ -127,7 +127,7 @@ As an example of what being easy to work with looks like, the best sort of commu
 
 Because we work closely and give each other a lot of [feedback](/newsletter/how-to-give-feedback), being difficult to work with would create a lot of tension and could have a massive negative impact on many.
 
-> **What to look for:** Referrals, lack of excuses and complaints from past roles, gels well with team, proactive during the interview process.
+> **What to look for:** Referrals, lack of excuses and complaints from past roles, gets well with the team, proactive during the interview process.
 
 ## Why do we value these traits?
 Looking for these traits makes it harder to find engineers, especially 10x ones, but we think it’s worth it. Among other things, it enables us to:
