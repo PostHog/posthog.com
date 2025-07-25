@@ -8,7 +8,7 @@ We get it, nobody likes rules.  As we scale the Sales and CS teams we need to be
 
 ## Discounts
 
-> We don't offer discounts to customers paying monthly with no commitment aside from non-profit orgs (see below). 
+> We don't offer discounts to customers paying monthly, irrespective of commitment. 
 
 Although our standard monthly [pricing](/pricing) has volume discounts built in, it's common practice when negotiating software contracts for the customer (and their procurement team) to ask for a discount.  We can be super transparent about the levers we have in discounting PostHog:
 
@@ -85,15 +85,13 @@ The below table summarizes the discount levels contained in points 2-4:
 </tbody>
 </table>
 
-For customers contracting for less than $100k annually if they don't _pay_ the whole year up front, we usually halve the discount. Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster.
+Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. For this reason, discounts only apply if customers pay the whole year(s) up front.
 
-For customers contracting for $100k or more we can accept quarterly payments without the need to reduce the discount.
-
-> It's worth being aware that fast-growing startups, even if they have the budget to pay annually, will probably prefer to pay quarterly or even monthly as flexibility may be a priority for them over saving 20%.
+As an exception, a customer can choose to contract for a year but pay quarterly - in this case, they can get a discount, but it is halved. No discounts are available for customers paying monthly. 
 
 ### Credit for case studies
 
-We don't offer additional discounts in exchange for a case study, but we can offer up to 5% additional credit in exchange for a _published_ case study on PostHog.com (ie. the credit is only applied after the case study goes live, not up front). Simon or Charles need to approve this before you offer it to the customer - most case studies are not going to be useful for us. 
+We don't offer additional discounts in exchange for a case study, but we can offer up to 5% additional year 1 credit in exchange for a _published_ case study on PostHog.com (ie. the credit is only applied after the case study goes live, not up front). Simon or Charles need to approve this before you offer it to the customer - most case studies are not going to be useful for us, so don't assume you can just offer this. 
 
 This should be added as a special term into the order form as follows:
 
@@ -117,7 +115,7 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We start non-profit discounts at 15% regardless of spend or annual contract. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
+We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We start non-profit discounts at 15% regardless of spend. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
 
 When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
 
@@ -167,7 +165,7 @@ Our strong preference is for customers to pay by credit card, as this is easier 
 
 If a customer wants to pay by ACH or bank transfer, we will usually only consider this if they are paying for 1 year or more up front. This is more likely to be the case for very large customers.
 
-For customers in an annual contract but paying monthly we require them to pay via credit card for monthly payments.
+For customers in an annual contract but paying quarterly we require them to pay via credit card - ACH or bank transfer are not accepted.
 
 > We absolutely do not allow payment by check.
 
@@ -213,5 +211,3 @@ The typical approach here is for them to redline a .docx format of the contract.
 ## Non-PostHog contracts
 
 If a customer requests to use a non-PostHog drafted contract for DPA, MSA, Order Form, or BAA generally we avoid doing this as it adds too much risk for us. We usually would not even consider this for deals not above $100k or for extremely blue chip companies. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. An exception to this rule is for NDAs - these are usually fine. 
-
-
