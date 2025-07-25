@@ -21,6 +21,7 @@ import getAvatarURL from 'components/Squeak/util/getAvatar'
 import { useMenuData } from './menuData'
 import CloudinaryImage from 'components/CloudinaryImage'
 import MediaUploadModal from 'components/MediaUploadModal'
+import { navigate } from 'gatsby'
 
 export default function TaskBarMenu() {
     const {
@@ -203,8 +204,8 @@ export default function TaskBarMenu() {
                 className="w-full bg-accent/75 skin-classic:bg-accent backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
             >
                 <MenuBar menus={menuData} className="[&_button]:px-2" />
-                <aside className="flex items-center gap-px py-0.5">
-                    <MenuBar
+                <aside className="flex items-center gap-0.5 pb-1">
+                    {/* <MenuBar
                         menus={[
                             {
                                 trigger: <span className="text-red font-semibold">Get started - free</span>,
@@ -212,7 +213,7 @@ export default function TaskBarMenu() {
                                     {
                                         type: 'item',
                                         label: 'Sign up',
-                                        link: 'https://app.posthog.com/signup',
+                                        link: '/start',
                                         external: true,
                                     },
                                     {
@@ -234,11 +235,21 @@ export default function TaskBarMenu() {
                             },
                         ]}
                         className="[&_button]:px-2"
-                    />
-                    <OSButton onClick={() => openSearch()} variant="ghost" size="md">
+                    /> */}
+                    <div className="relative mr-1 -top-px">
+                        <OSButton
+                            variant="secondary"
+                            size="sm"
+                            onClick={() => navigate('/start', { state: { newWindow: true } })}
+                            className=""
+                        >
+                            Get started – free
+                        </OSButton>
+                    </div>
+                    <OSButton onClick={() => openSearch()} variant="ghost" size="sm">
                         <IconSearch className="size-5" />
                     </OSButton>
-                    <OSButton onClick={() => openNewChat({ path: `ask-max` })} variant="ghost" size="md">
+                    <OSButton onClick={() => openNewChat({ path: `ask-max` })} variant="ghost" size="sm">
                         <IconChatHelp className="size-5" />
                     </OSButton>
                     {siteSettings.experience === 'posthog' && (
@@ -262,7 +273,7 @@ export default function TaskBarMenu() {
                                 disabled={totalWindows <= 0}
                                 data-scheme="primary"
                                 data-active-windows
-                                className={`min-w-6 h-5 px-1.5 py-1 inline-flex justify-center items-center rounded
+                                className={`min-w-6 h-5 px-1.5 ml-1 py-1 inline-flex justify-center items-center rounded
                                 border-[1.5px] 
                                 border-t-4 
                                 

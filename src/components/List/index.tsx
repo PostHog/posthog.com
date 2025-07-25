@@ -51,13 +51,13 @@ export const ListItem = ({
             <Link
                 onClick={handleClick}
                 to={url}
-                className={`group flex justify-between items-center space-x-2 relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all !text-inherit hover:!text-inherit`}
+                className={`group flex justify-between items-center space-x-2 relative rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all !text-inherit hover:!text-inherit`}
             >
                 <span className="flex items-center space-x-2">
-                    {image && <img className="icon w-12 h-12 p-2 rounded-sm" src={image} />}
+                    {image && <img className="icon size-8 rounded-sm" src={image} />}
                     {Icon && (
                         <Icon
-                            className={`w-10 h-10 p-2 ${
+                            className={`size-8 ${
                                 iconColor ? `text-${iconColor} bg-${iconColor} bg-opacity-20` : `bg-accent`
                             }  rounded-sm shrink-0`}
                         />

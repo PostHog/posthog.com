@@ -12,21 +12,25 @@ interface TabItem {
 interface OSTabsProps {
     tabs: TabItem[]
     defaultValue?: string
+    value?: string
     frame: boolean
     children?: React.ReactNode
     fullScreen?: boolean
     className?: string
     triggerDataScheme?: string
+    extraTabRowContent?: React.ReactNode
     onValueChange?: (value: string) => void
 }
 
 export default function OSTabs({
     tabs,
     defaultValue,
+    value,
     children,
     frame = true,
     className,
     triggerDataScheme = 'secondary',
+    extraTabRowContent,
     onValueChange,
 }: OSTabsProps) {
     return (
@@ -34,9 +38,10 @@ export default function OSTabs({
             <Tabs.Root
                 onValueChange={onValueChange}
                 defaultValue={defaultValue || tabs[0]?.value}
+                value={value}
                 className={className ?? 'relative flex flex-col pt-2 px-4 pb-4 h-full min-h-0 bg-primary'}
             >
-                <Tabs.List className="ml-1.5 flex-shrink-0">
+                <Tabs.List className="ml-1.5 flex-shrink-0 flex flex-wrap items-center">
                     {tabs.map((tab) => (
                         <Tabs.Trigger
                             key={tab.value}
@@ -47,11 +52,14 @@ export default function OSTabs({
                             {tab.label}
                         </Tabs.Trigger>
                     ))}
+                    {extraTabRowContent}
                 </Tabs.List>
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <ScrollArea
-                            className={`@container bg-primary ${frame ? 'border border-primary rounded-md' : ''}`}
+                            className={`@container bg-primary h-full min-h-0 ${
+                                frame ? 'border border-primary rounded-md' : ''
+                            }`}
                         >
                             <div className={frame ? '@container p-4 @2xl:p-6' : '@container'}>{tab.content}</div>
                         </ScrollArea>
