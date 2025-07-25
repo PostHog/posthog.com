@@ -1244,7 +1244,7 @@ const IssueWindow = () => {
     }, [])
 
     return (
-        <div data-scheme="secondary" className="bg-primary p-4">
+        <div data-scheme="secondary" className="bg-primary p-4 size-full">
             <IssueForm />
         </div>
     )
@@ -1259,7 +1259,7 @@ const AddAJobWindow = ({
     onSuccess?: () => void
     onClose?: () => void
 }) => {
-    const { setWindowTitle } = useApp()
+    const { setWindowTitle, siteSettings } = useApp()
     const { appWindow } = useWindow()
 
     useEffect(() => {
@@ -1271,7 +1271,12 @@ const AddAJobWindow = ({
     }, [])
 
     return (
-        <div data-scheme="secondary" className="bg-primary p-4 max-h-[500px] overflow-y-auto">
+        <div
+            data-scheme="secondary"
+            className={`bg-primary p-4 overflow-y-auto ${
+                siteSettings.experience === 'boring' ? 'size-full' : 'max-h-[500px]'
+            }`}
+        >
             <CompanyForm companyId={companyId} onSuccess={onSuccess} />
         </div>
     )

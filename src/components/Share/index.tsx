@@ -797,14 +797,14 @@ URL: ${url}
 
 export default function Share({ url, title }: { url: string; title: string }) {
     const { appWindow } = useWindow()
-    const { setWindowTitle } = useApp()
+    const { setWindowTitle, siteSettings } = useApp()
 
     useEffect(() => {
         setWindowTitle(appWindow, `Share ${title || url}`)
     }, [])
 
     return (
-        <div className="w-[500px]">
+        <div className={`${siteSettings.experience === 'boring' ? 'size-full' : 'w-[500px]'}`}>
             <OSTabs
                 frame
                 tabs={[

@@ -96,62 +96,64 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
     }, [])
 
     return (
-        <Wizard
-            leftNavigation={
-                <button className="text-sm text-red dark:text-yellow font-semibold" onClick={openForgotPassword}>
-                    Forgot password?
-                </button>
-            }
-            rightNavigation={
-                <div className="flex items-center space-x-2">
-                    {errorMessage && <p className="text-red text-sm m-0 font-bold">{errorMessage}</p>}
+        <div className="size-full">
+            <Wizard
+                leftNavigation={
+                    <button className="text-sm text-red dark:text-yellow font-semibold" onClick={openForgotPassword}>
+                        Forgot password?
+                    </button>
+                }
+                rightNavigation={
+                    <div className="flex items-center space-x-2">
+                        {errorMessage && <p className="text-red text-sm m-0 font-bold">{errorMessage}</p>}
 
-                    <CallToAction
-                        disabled={isSubmitting}
-                        type="primary"
-                        size="sm"
-                        onClick={submitForm}
-                        className="flex-shrink-0"
-                    >
-                        {isSubmitting ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Login'}
-                    </CallToAction>
-                </div>
-            }
-        >
-            <div className="bg-accent flex gap-6 px-8 py-6">
-                <div className="max-w-20">
-                    <img src={SecurityHog} className="w-20" />
-                </div>
-                <div data-scheme="primary" className="flex-1">
-                    <h3 className="text-base font-semibold leading-tight mb-4">
-                        Enter your email and password to log on to PostHog.com
-                    </h3>
-                    <form onSubmit={handleSubmit} className="space-y-2 mb-4">
-                        <Input
-                            label="Email"
-                            type="email"
-                            touched={!!touched.email}
-                            error={errors.email}
-                            {...getFieldProps('email')}
-                        />
-                        <Input
-                            label="Password"
-                            type="password"
-                            touched={!!touched.password}
-                            error={errors.password}
-                            {...getFieldProps('password')}
-                        />
-                        <button type="submit" className="hidden" />
-                    </form>
-                    <div className="text-sm">
-                        No account yet?{' '}
-                        <button className="text-red dark:text-yellow font-semibold" onClick={openRegister}>
-                            Register here
-                        </button>
+                        <CallToAction
+                            disabled={isSubmitting}
+                            type="primary"
+                            size="sm"
+                            onClick={submitForm}
+                            className="flex-shrink-0"
+                        >
+                            {isSubmitting ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Login'}
+                        </CallToAction>
+                    </div>
+                }
+            >
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                    <div className="max-w-20">
+                        <img src={SecurityHog} className="w-20" />
+                    </div>
+                    <div data-scheme="primary" className="flex-1">
+                        <h3 className="text-base font-semibold leading-tight mb-4">
+                            Enter your email and password to log on to PostHog.com
+                        </h3>
+                        <form onSubmit={handleSubmit} className="space-y-2 mb-4">
+                            <Input
+                                label="Email"
+                                type="email"
+                                touched={!!touched.email}
+                                error={errors.email}
+                                {...getFieldProps('email')}
+                            />
+                            <Input
+                                label="Password"
+                                type="password"
+                                touched={!!touched.password}
+                                error={errors.password}
+                                {...getFieldProps('password')}
+                            />
+                            <button type="submit" className="hidden" />
+                        </form>
+                        <div className="text-sm">
+                            No account yet?{' '}
+                            <button className="text-red dark:text-yellow font-semibold" onClick={openRegister}>
+                                Register here
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Wizard>
+            </Wizard>
+        </div>
     )
 }
 

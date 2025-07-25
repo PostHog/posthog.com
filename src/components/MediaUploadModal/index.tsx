@@ -71,7 +71,7 @@ export default function MediaUploadModal() {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return isModerator ? (
-        <div className="bg-primary">
+        <div className="bg-primary size-full">
             <div className="p-4 relative grid grid-cols-2 gap-x-6">
                 <div className="flex flex-col">
                     <h3 className="m-0">Upload media</h3>

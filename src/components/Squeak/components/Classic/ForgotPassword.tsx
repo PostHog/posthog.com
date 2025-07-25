@@ -96,58 +96,64 @@ const ForgotPasswordForm: React.FC = () => {
     }, [])
 
     return (
-        <Wizard
-            rightNavigation={
-                <div className="flex items-center space-x-2">
-                    {errorMessage && <p className="text-red text-sm m-0 font-bold">{errorMessage}</p>}
+        <div className="size-full">
+            <Wizard
+                rightNavigation={
+                    <div className="flex items-center space-x-2">
+                        {errorMessage && <p className="text-red text-sm m-0 font-bold">{errorMessage}</p>}
 
-                    {!emailSent && (
-                        <CallToAction
-                            disabled={isSubmitting}
-                            type="primary"
-                            size="sm"
-                            onClick={submitForm}
-                            className="flex-shrink-0"
-                        >
-                            {isSubmitting ? <IconSpinner className="size-4 animate-spin my-0.5" /> : 'Send reset email'}
-                        </CallToAction>
-                    )}
-                </div>
-            }
-        >
-            <div className="bg-accent flex gap-6 px-8 py-6">
-                <div className="max-w-20">
-                    <img src={SecurityHog} className="w-20" />
-                </div>
-                <div data-scheme="primary" className="flex-1">
-                    <h3 className="text-base font-semibold leading-tight mb-4">
-                        {emailSent ? 'Check your email' : 'Forgot your password?'}
-                    </h3>
-                    {emailSent ? (
-                        <p className="text-sm m-0 mb-4">
-                            We've sent you a reset link! Check your email (and spam folder, just in case).
-                        </p>
-                    ) : (
-                        <form onSubmit={handleSubmit} className="space-y-2 mb-4">
-                            <Input
-                                label="Email"
-                                type="email"
-                                touched={!!touched.email}
-                                error={errors.email}
-                                {...getFieldProps('email')}
-                            />
-                            <button type="submit" className="hidden" />
-                        </form>
-                    )}
-                    <div className="text-sm">
-                        Remember your password?{' '}
-                        <button className="text-red dark:text-yellow font-semibold" onClick={openSignIn}>
-                            Sign in here
-                        </button>
+                        {!emailSent && (
+                            <CallToAction
+                                disabled={isSubmitting}
+                                type="primary"
+                                size="sm"
+                                onClick={submitForm}
+                                className="flex-shrink-0"
+                            >
+                                {isSubmitting ? (
+                                    <IconSpinner className="size-4 animate-spin my-0.5" />
+                                ) : (
+                                    'Send reset email'
+                                )}
+                            </CallToAction>
+                        )}
+                    </div>
+                }
+            >
+                <div className="bg-accent flex gap-6 px-8 py-6 flex-1">
+                    <div className="max-w-20">
+                        <img src={SecurityHog} className="w-20" />
+                    </div>
+                    <div data-scheme="primary" className="flex-1">
+                        <h3 className="text-base font-semibold leading-tight mb-4">
+                            {emailSent ? 'Check your email' : 'Forgot your password?'}
+                        </h3>
+                        {emailSent ? (
+                            <p className="text-sm m-0 mb-4">
+                                We've sent you a reset link! Check your email (and spam folder, just in case).
+                            </p>
+                        ) : (
+                            <form onSubmit={handleSubmit} className="space-y-2 mb-4">
+                                <Input
+                                    label="Email"
+                                    type="email"
+                                    touched={!!touched.email}
+                                    error={errors.email}
+                                    {...getFieldProps('email')}
+                                />
+                                <button type="submit" className="hidden" />
+                            </form>
+                        )}
+                        <div className="text-sm">
+                            Remember your password?{' '}
+                            <button className="text-red dark:text-yellow font-semibold" onClick={openSignIn}>
+                                Sign in here
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Wizard>
+            </Wizard>
+        </div>
     )
 }
 
