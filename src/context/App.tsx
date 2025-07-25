@@ -858,7 +858,11 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
         const newWindow = createNewWindow(element, windows, location, isSSR, taskbarHeight)
 
         if (siteSettings.experience === 'boring') {
-            return replaceFocusedWindow(newWindow)
+            if (newWindow.key.startsWith('/')) {
+                return replaceFocusedWindow(newWindow)
+            } else {
+                return setWindows([...windows, newWindow])
+            }
         }
 
         if (existingWindow) {
