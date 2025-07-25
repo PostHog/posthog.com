@@ -1318,7 +1318,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: "Template for onboarding success plan",
+                        name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                 ],
@@ -1533,7 +1533,6 @@ export const communityMenu = {
                     url: '/tutorials/categories/filters',
                     children: [
                         { name: 'Filters', url: '/tutorials/categories/filters' },
-                        { name: 'Sentry', url: '/tutorials/categories/sentry' },
                         { name: 'Zapier', url: '/tutorials/categories/zapier' },
                     ],
                 },
