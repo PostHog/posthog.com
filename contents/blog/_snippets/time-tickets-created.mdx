@@ -1,0 +1,16 @@
+```sql
+with all_tickets as(
+    select
+        count() as total_tickets
+    from zendesk_tickets
+    where created_at >= toStartOfDay(now()) - interval 6 month
+)
+
+select
+    toHour(toTimeZone(created_at, 'UTC')) as hour_of_day,
+    count() as count_per_hour,
+    count_per_hour/(select total_tickets from all_tickets) as percentage_per_hour
+from zendesk_tickets
+where created_at >= toStartOfDay(now()) - interval 6 month
+group by hour_of_day
+```

@@ -1,0 +1,9 @@
+```sql
+SELECT 
+    COUNT(*) 
+FROM 
+    stripe_customer 
+WHERE 
+    metadata.is_current_startup_plan_customer = 'true' 
+    AND metadata.startup_plan_label != 'YC'
+```

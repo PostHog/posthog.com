@@ -1,0 +1,43 @@
+```sql
+WITH start_of_quarter AS (
+    SELECT 
+        inv.organization_id AS organization_id,
+        acc.organization_name,
+        acc.account_executive,
+        acc.customer_success_manager,
+        ROUND(SUM(inv.mrr * 12), 2) AS arr,
+        CASE 
+            WHEN arrayExists(x -> x LIKE '%annual%', groupArray(type)) 
+            THEN 'annual' 
+            ELSE 'monthly' 
+        END AS type
+    FROM 
+        invoice_with_annual_plans_shifted inv
+    JOIN 
+        vitally_all_managed_accounts acc 
+        ON inv.organization_id = acc.organization_id
+    WHERE 
+        period_end < toDateTime({variables.start_of_quarter})
+        AND period_end >= toDateTime({variables.start_of_quarter}) - INTERVAL 1 MONTH
+    GROUP BY 
+        organization_id, organization_name, account_executive, customer_success_manager
+    ORDER BY 
+        arr DESC
+)
+
+SELECT 
+    ROUND(SUM(arr), 0)
+FROM 
+    start_of_quarter
+WHERE 
+    (
+        account_executive LIKE CONCAT('%', {variables.account_owner}) 
+        OR customer_success_manager LIKE CONCAT('%', {variables.account_owner})
+    )
+    AND CASE 
+        WHEN {variables.segment} = 'All' THEN 1
+        WHEN {variables.segment} = 'AE Managed' AND account_executive IS NOT NULL THEN 1
+        WHEN {variables.segment} = 'CSM Managed' AND customer_success_manager IS NOT NULL THEN 1
+        ELSE 0
+    END = 1;
+```
