@@ -71,7 +71,7 @@ export default function MediaUploadModal() {
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return isModerator ? (
-        <div className="bg-primary size-full">
+        <div data-scheme="primary" className="bg-primary size-full">
             <div className="p-4 relative grid grid-cols-2 gap-x-6">
                 <div className="flex flex-col">
                     <h3 className="m-0">Upload media</h3>
@@ -80,14 +80,13 @@ export default function MediaUploadModal() {
                     </p>
                     <div
                         {...getRootProps()}
-                        className={`mt-4 flex-grow w-full rounded-md border border-dashed border-input ${
-                            isDragActive ? 'bg-input' : ''
-                        }`}
+                        data-scheme="secondary"
+                        className={`mt-4 flex-grow w-full rounded-md bg-primary border border-dashed border-input ${isDragActive ? 'bg-input' : ''
+                            }`}
                     >
                         <p
-                            className={`m-0 flex justify-center items-center font-bold space-x-1 h-full text-lg ${
-                                isDragActive ? '' : 'opacity-70'
-                            }`}
+                            className={`m-0 flex justify-center items-center font-bold space-x-1 h-full text-lg ${isDragActive ? '' : 'opacity-70'
+                                }`}
                         >
                             <IconUpload className="size-7" />
                             <span>{isDragActive ? 'Drop' : 'Drag'} media</span>

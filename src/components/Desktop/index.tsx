@@ -85,6 +85,11 @@ export const apps: AppItem[] = [
         Icon: <AppIcon name="games" />,
         url: '/sparks-joy',
     },
+    {
+        label: 'Trash',
+        Icon: <AppIcon name="trash" />,
+        url: '/trash',
+    },
 ]
 
 interface IconPosition {

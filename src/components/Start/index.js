@@ -48,7 +48,11 @@ const MainContent = ({ selectedOption, setSelectedOption, options }) => (
                         watch a demo
                     </Link>{' '}
                     or learn{' '}
-                    <Link to="/credits" className="font-semibold text-red dark:text-yellow" state={{ newWindow: true }}>
+                    <Link
+                        to="/blog/why-os"
+                        className="font-semibold text-red dark:text-yellow"
+                        state={{ newWindow: true }}
+                    >
                         why our website looks like this
                     </Link>
                     .

@@ -27,6 +27,18 @@ type AppIconName =
     | 'pricing'
     | 'spreadsheet'
     | 'tour'
+    | 'trash'
+    | 'video'
+    | 'pdf'
+    | 'canvas'
+    | 'report'
+    | 'invite'
+    | 'script'
+    | 'pdf_locked'
+    | 'mixpanel'
+    | 'amplitude'
+    | 'ga'
+
 
 const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     doc: {
@@ -86,6 +98,47 @@ const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_95648ff771.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog_bdd451f4e8.png',
     },
+    trash: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/trash_classic_94fddf05b4.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/trash_modern_a550bcaa95.png',
+    },
+    video: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/video_classic_beadf43e4b.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/video_4159554b6d.png',
+    },
+    pdf: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/pdf_classic_069acad91b.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/pdf_64c653db35.png',
+    },
+    pdf_locked: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/pdf_locked_classic_395a6801c4.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/pdf_locked_20a3464430.png',
+    },
+    canvas: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/canvas_classic_28b592aed7.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/canvas_d05d4932e0.png',
+    },
+    report: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/report_classic_84c2e01c55.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/report_096e46a740.png',
+    },
+    invite: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/invite_classic_e9486b8295.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/invite_8454a37bed.png',
+    },
+    script: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/script_classic_84c2e01c55.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/script_8454a37bed.png',
+    },
+    mixpanel: {
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/mixpanel_9bf9de9f2d.png',
+    },
+    amplitude: {
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/amplitude_317f86f654.png',
+    },
+    ga: {
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/ga3_1651ec493f.png',
+    },
 }
 
 export interface AppIconProps extends IconProps {
@@ -143,7 +196,7 @@ export interface AppItem {
     color?: string
     background?: string
     label: string
-    url: string
+    url?: string
     className?: string
     extension?: string
     children?: React.ReactNode
@@ -191,37 +244,51 @@ export const AppLink = ({
     const themeSpecificColors = getThemeSpecificBackgroundColors()
     const backgroundMatchedColors = `${baseBackgroundColors} ${themeSpecificColors}`
 
+    const content = (
+        <>
+            <span className="relative">
+                {renderIcon()}
+                {children}
+            </span>
+            <figcaption className="text-sm font-medium leading-tight">
+                <span className={`inline-block leading-tight`}>
+                    <span
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${background
+                            ? background
+                            : backgroundMatchedColors
+                            }  rounded-[2px] px-0.5 py-0`}
+                    >
+                        {label}
+                        {extension && <span className="opacity-75">.{extension}</span>}
+                    </span>
+                </span>
+            </figcaption>
+        </>
+    )
+
+    const commonClassName = "group inline-flex flex-col justify-center items-center w-auto max-w-28 text-center select-none space-y-1 text-primary"
+
     return (
         <figure ref={ref}>
-            <Link
-                to={url}
-                state={{ newWindow: true }}
-                className="group inline-flex flex-col justify-center items-center w-auto max-w-28 text-center select-none space-y-1 text-primary"
-                onClick={(e) => {
-                    if (hasDragged) {
-                        e.preventDefault()
-                        e.stopPropagation()
-                    }
-                }}
-            >
-                <span className="relative">
-                    {renderIcon()}
-                    {children}
+            {url ? (
+                <Link
+                    to={url}
+                    state={{ newWindow: true }}
+                    className={commonClassName}
+                    onClick={(e) => {
+                        if (hasDragged) {
+                            e.preventDefault()
+                            e.stopPropagation()
+                        }
+                    }}
+                >
+                    {content}
+                </Link>
+            ) : (
+                <span className={`${commonClassName} cursor-not-allowed opacity-75`}>
+                    {content}
                 </span>
-                <figcaption className="text-sm font-medium leading-tight">
-                    <span className={`inline-block leading-tight`}>
-                        <span
-                            className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${background
-                                ? background
-                                : backgroundMatchedColors
-                                }  rounded-[2px] px-0.5 py-0`}
-                        >
-                            {label}
-                            {extension && <span className="opacity-75">.{extension}</span>}
-                        </span>
-                    </span>
-                </figcaption>
-            </Link>
+            )}
         </figure>
     )
 }

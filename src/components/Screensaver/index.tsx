@@ -87,7 +87,7 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
 
     return (
         <div className="fixed inset-0 bg-black z-[9999] overflow-hidden" style={{ width: '100vw', height: '100vh' }}>
-            <div 
+            <div
                 className="absolute"
                 style={{
                     left: `${position.x}%`,
@@ -96,14 +96,14 @@ export const Screensaver: React.FC<ScreensaverProps> = ({ isActive, onDismiss })
                     height: `${logoSizeRef.current.height}px`
                 }}
             >
-                <Lottie 
+                <Lottie
                     options={defaultOptions}
                     height={logoSizeRef.current.height}
                     width={logoSizeRef.current.width}
                 />
             </div>
-            
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white/50 text-sm">
+
+            <div className="absolute bottom-8 w-full @md:w-auto @md:left-1/2 transform @md:-translate-x-1/2 text-white/50 text-sm text-center">
                 Visit display options to disable screensaver
             </div>
         </div>
