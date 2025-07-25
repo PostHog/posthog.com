@@ -60,7 +60,7 @@ Navigate to IAM and click on Grant Access to arrive at this screen:
 
 ![Dataset grant access](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/batch-exports/bigquery/dataset-grant-access.png)
 
-8. All done! After completing these steps you can create a BigQuery [batch export in PostHog](https://app.posthog.com/project/apps?tab=batch_exports) and your data will start flowing from PostHog to BigQuery.
+8. All done! After completing these steps you can create a BigQuery [batch export in PostHog](https://app.posthog.com/pipeline/new/destination?search=bigquery) and your data will start flowing from PostHog to BigQuery.
 
 ## Models
 

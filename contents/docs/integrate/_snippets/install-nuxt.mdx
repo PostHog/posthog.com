@@ -26,6 +26,7 @@ export default defineNuxtConfig({
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
 
 import posthog from 'posthog-js'
+
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {

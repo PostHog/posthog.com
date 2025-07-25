@@ -9,9 +9,24 @@ We aim to be significantly cheaper than our competitors. In addition to our [pay
 
 ## Understanding your bill
 
-Feature flags are charged based requests made to our `/flags` endpoint, which is used to evaluate a feature flag for a given user. They are not billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
+Feature flags are charged based on requests made to our `/flags` endpoint, which is used to evaluate feature flags for a given user. This endpoint is called in several scenarios:
+
+- When explicitly requesting feature flags via SDK methods like `getFeatureFlags()` or `onFeatureFlags()`
+- Automatically on SDK initialization (unless disabled, see below)
+- When evaluating survey targeting, which checks **all active feature flags** in your project
+
+
+Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
 
 The number of `/flags` requests and the number of `$feature_flag_called` events are **not** directly related.
+
+<CalloutBox icon="IconWarning" title="Unused flags still incur charges" type="caution">
+
+  Active feature flags you're not using in your code are still evaluated (and charged) every time the `/flags` endpoint is called. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
+  
+  To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough.
+
+</CalloutBox>
 
 ### Creating a billable usage dashboard
 
@@ -39,7 +54,18 @@ You can do the following using the [advanced configuration](/docs/libraries/js/c
 
 2. Set `advanced_disable_feature_flags` to `true`. This stops PostHog automatically requesting feature flags. Instead, use [bootstrapping](/docs/feature-flags/bootstrapping) to load flags exactly once.
 
-3. Set `advanced_only_evaluate_survey_feature_flags` to `true`. When enabled, only survey feature flags are evaluated. This disables frontend evaluation of feature flags but still allows you to use them in surveys.
+3. Set `advanced_only_evaluate_survey_feature_flags` to `true`. When enabled, only survey-related feature flags are evaluated, which significantly reduces costs if you primarily use PostHog for surveys. This disables evaluation of regular feature flags while still allowing surveys to function properly.
+
+<CalloutBox icon="IconInfo" title="Surveys and feature flag billing" type="info">
+
+  If you plan to use PostHog primarily for surveys, consider either:
+  
+  - Setting `advanced_only_evaluate_survey_feature_flags` to `true` to only evaluate survey-related flags
+  - Disabling or archiving all non-survey feature flags in your PostHog project
+  
+  This prevents charges from evaluating unused feature flags when surveys are loaded.
+
+</CalloutBox>
 
 <CalloutBox icon="IconWarning" title="Note" type="caution">
 

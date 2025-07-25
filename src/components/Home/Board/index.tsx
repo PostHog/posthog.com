@@ -407,7 +407,7 @@ const products: Product[] = [
         badge: 'BETA',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/#panel=feature-previews%3Allm-observability',
+                url: 'https://app.posthog.com/settings/user-feature-previews#llm-observability',
                 text: 'Try it out',
             },
         },

@@ -118,7 +118,7 @@ Unlike most tools in this list, VWO charges separately for website and mobile ap
 
 #### Summary
 
-LaunchDarkly is primarily a feature management platform for controlling what users see and when, and managing the rollout of new features. However, it also offers an experimentation suite, albeit as a paid add-on.
+[LaunchDarkly](/blog/best-launchdarkly-alternatives) is primarily a feature management platform for controlling what users see and when, and managing the rollout of new features. However, it also offers an experimentation suite, albeit as a paid add-on.
 
 As a tool designed for engineers, LaunchDarkly supports running experiments on the front and back end. This enables engineers to run experiments to measure the performance impact of API and infrastructure changes, for example. 
 

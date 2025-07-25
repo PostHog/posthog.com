@@ -1,14 +1,12 @@
 ---
 title: Pineapple Mode
-github: 'https://github.com/PostHog/pineapple-mode-app'
-installUrl: 'https://app.posthog.com/project/apps?name=pineapple-mode'
 thumbnail: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/apps/thumbnails/pineapple-mode.png
 tags:
   - pineapple-mode
 ---
 
-Activating Pineapple Mode makes it rain pineapples all over your product or website. Yes, really.
+Activating pineapple mode makes it rain pineapples all over your product or website. Yes, really.
 
 ## OK, but why does Pineapple Mode do that?
 

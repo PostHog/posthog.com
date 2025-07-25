@@ -119,7 +119,7 @@ module.exports = {
                 shouldBlockNodeFromTransformation: (node) =>
                     node.internal.type === 'File' &&
                     node.url &&
-                    node.url.includes('https://raw.githubusercontent.com/'),
+                    new URL(node.url).hostname === 'raw.githubusercontent.com',
                 extensions: ['.mdx', '.md'],
                 gatsbyRemarkPlugins: [
                     { resolve: 'gatsby-remark-autolink-headers', options: { icon: false } },
@@ -159,6 +159,14 @@ module.exports = {
             options: {
                 name: `testimonials`,
                 path: `${__dirname}/src/data/testimonials.json`,
+                ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `sdkReferences`,
+                path: `${__dirname}/src/data/sdkReferences`,
                 ignore: [`**/*.{png,jpg,jpeg,gif,svg,webp,mp4,avi,mov}`],
             },
         },

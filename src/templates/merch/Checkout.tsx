@@ -7,6 +7,7 @@ import { LoaderIcon } from './LoaderIcon'
 import { useCartStore } from './store'
 import type { AdjustedLineItem, Cart } from './types'
 import { getAvailableQuantity, getCartVariables } from './utils'
+import { graphql, useStaticQuery } from 'gatsby'
 
 type CheckoutProps = {
     className?: string
@@ -45,6 +46,18 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
     const [isCheckingOut, setIsCheckingOut] = React.useState(false)
     const [showAdjustments, setShowAdjustments] = React.useState(false)
     const discountCode = useCartStore((state) => state.discountCode)
+    const { allProducts } = useStaticQuery(graphql`
+        {
+            allProducts: allShopifyProduct {
+                nodes {
+                    variants {
+                        shopifyId
+                        inventoryPolicy
+                    }
+                }
+            }
+        }
+    `)
 
     const handleCheckout = useCallback(() => {
         setIsCheckingOut(true)
@@ -73,6 +86,17 @@ export function Checkout(props: CheckoutProps): React.ReactElement {
                 if (item.product.tags.includes('digital')) {
                     continue
                 }
+                const continueSelling = allProducts.nodes.some((p: any) =>
+                    p.variants.some(
+                        (variant: any) =>
+                            variant.shopifyId === item.shopifyId && variant.inventoryPolicy.toLowerCase() === 'continue'
+                    )
+                )
+
+                if (continueSelling) {
+                    continue
+                }
+
                 // first check if it's available for sale. If not, then add to the list
                 // with flag for removal from cart
                 const quantityAvailable = item.kit ? 100 : await getAvailableQuantity(item.shopifyId)

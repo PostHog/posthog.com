@@ -1,0 +1,125 @@
+name: Sales Handbook Change Notification
+
+permissions:
+    contents: read
+
+on:
+    push:
+        branches: [master, main]
+        paths:
+            - 'contents/handbook/growth/sales/**'
+
+jobs:
+    notify-sales-team:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 2 # Get current and previous commit for comparison
+
+            - name: Get changed files
+              id: changed-files
+              run: |
+                  # Get the list of changed files in the sales handbook directory
+                  CHANGED_FILES=$(git diff --name-status HEAD~1 HEAD -- contents/handbook/growth/sales/ | head -20)
+
+                  # Format the changes for Slack
+                  echo "CHANGED_FILES<<EOF" >> $GITHUB_OUTPUT
+                  echo "$CHANGED_FILES" >> $GITHUB_OUTPUT
+                  echo "EOF" >> $GITHUB_OUTPUT
+
+                  # Get commit info
+                  COMMIT_MESSAGE=$(git log -1 --pretty=format:"%s")
+                  COMMIT_AUTHOR=$(git log -1 --pretty=format:"%an")
+                  COMMIT_HASH=$(git log -1 --pretty=format:"%h")
+                  COMMIT_URL="https://github.com/${{ github.repository }}/commit/${{ github.sha }}"
+
+                  echo "COMMIT_MESSAGE=$COMMIT_MESSAGE" >> $GITHUB_OUTPUT
+                  echo "COMMIT_AUTHOR=$COMMIT_AUTHOR" >> $GITHUB_OUTPUT
+                  echo "COMMIT_HASH=$COMMIT_HASH" >> $GITHUB_OUTPUT
+                  echo "COMMIT_URL=$COMMIT_URL" >> $GITHUB_OUTPUT
+
+            - name: Format file changes
+              id: format-changes
+              run: |
+                  # Process the changed files and format them nicely
+                  CHANGES="${{ steps.changed-files.outputs.CHANGED_FILES }}"
+
+                  ADDED_FILES=""
+                  MODIFIED_FILES=""
+                  DELETED_FILES=""
+
+                  while IFS=$'\t' read -r status file; do
+                    if [ -n "$file" ]; then
+                      filename=$(basename "$file")
+                      case "$status" in
+                        "A")
+                          ADDED_FILES="$ADDED_FILES• ➕ Added: $filename\n"
+                          ;;
+                        "M")
+                          MODIFIED_FILES="$MODIFIED_FILES• ✏️ Modified: $filename\n"
+                          ;;
+                        "D")
+                          DELETED_FILES="$DELETED_FILES• ❌ Deleted: $filename\n"
+                          ;;
+                      esac
+                    fi
+                  done <<< "$CHANGES"
+
+                  # Combine all changes
+                  ALL_CHANGES="$ADDED_FILES$MODIFIED_FILES$DELETED_FILES"
+
+                  # Remove trailing newline
+                  ALL_CHANGES=$(echo -e "$ALL_CHANGES" | sed '$d')
+
+                  echo "ALL_CHANGES<<EOF" >> $GITHUB_OUTPUT
+                  echo -e "$ALL_CHANGES" >> $GITHUB_OUTPUT
+                  echo "EOF" >> $GITHUB_OUTPUT
+
+            - name: Send Slack notification
+              uses: 8398a7/action-slack@v3
+              with:
+                  status: custom
+                  custom_payload: |
+                      {
+                        "channel": "#sales-alerts",
+                        "attachments": [
+                          {
+                            "color": "good",
+                            "blocks": [
+                              {
+                                "type": "header",
+                                "text": {
+                                  "type": "plain_text",
+                                  "text": "📚 Sales Handbook Updated"
+                                }
+                              },
+                              {
+                                "type": "section",
+                                "text": {
+                                  "type": "mrkdwn",
+                                  "text": "*Commit:* ${{ steps.changed-files.outputs.COMMIT_MESSAGE }}\n*Author:* ${{ steps.changed-files.outputs.COMMIT_AUTHOR }}\n*Hash:* `${{ steps.changed-files.outputs.COMMIT_HASH }}`"
+                                }
+                              },
+                              {
+                                "type": "section",
+                                "text": {
+                                  "type": "mrkdwn",
+                                  "text": "*📝 Changes:*\n${{ steps.format-changes.outputs.ALL_CHANGES }}"
+                                }
+                              },
+                              {
+                                "type": "section",
+                                "text": {
+                                  "type": "mrkdwn",
+                                  "text": "*🔗 Links:*\n• <${{ steps.changed-files.outputs.COMMIT_URL }}|View Commit>\n• <https://github.com/${{ github.repository }}/tree/${{ github.sha }}/contents/handbook/growth/sales|View Sales Handbook>"
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+              env:
+                  SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SALES_WEBHOOK }}
