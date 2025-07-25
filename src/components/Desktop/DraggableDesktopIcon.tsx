@@ -73,16 +73,12 @@ export default function DraggableDesktopIcon({ app, initialPosition, onPositionC
             className={`${isMobile ? '' : 'absolute'} w-28 flex justify-center items-center ${
                 isDragging ? 'z-50' : 'z-10'
             }`}
-            animate={
-                isMobile
-                    ? undefined
-                    : {
-                          x: position.x,
-                          y: position.y,
-                          scale: 1,
-                          opacity: 1,
-                      }
-            }
+            animate={{
+                x: isMobile ? 0 : position.x,
+                y: isMobile ? 0 : position.y,
+                scale: 1,
+                opacity: 1,
+            }}
             drag={!isMobile}
             dragControls={!isMobile ? controls : undefined}
             dragListener={false}
