@@ -223,6 +223,26 @@ In this case, set the `Attribution type` to `Specific step` / `Step 1` to see on
 
 > For an unordered funnel, the specific step is meaningless, as the first step can be the last step, and vice versa. So, it's referred to as "any step" in the UI. It has the same semantics as a specific step in an ordered funnel, but it looks at property values from all steps.
 
+#### Filtering for first occurrence
+
+When analyzing funnels, you can specify which event to count if a user performs it multiple times. This is configured in the dropdown for each step of the funnel.
+
+TODO: add image for dropdown
+
+There are two options for this:
+
+##### 1. First-ever occurrence
+
+This matches only the first time a user performs a specific event type. If this first event doesn't match the filters for that funnel step, or is outside the funnel's date range, the user is excluded from the funnel entirely. This is true even if they perform the event again later with matching filters.
+
+**Example:** You have a funnel step looking for pageviews to `/about`. A user's first-ever pageview is to `/pricing`. PostHog will only check this first event. Since it doesn't match the `/about` filter, the user will be dropped from the funnel, even if they visit `/about` later.
+
+##### 2. First occurrence matching filters
+
+This matches the first time a user performs an event *that also matches the filters for that funnel step*. Any previous events of the same type that don't match the filters are ignored.
+
+**Example:** You have a funnel step looking for pageviews to `/about`. A user first visits `/pricing` and then later visits `/about`. PostHog ignores the `/pricing` view and matches the `/about` view, as it's the first one that fits the step's criteria.
+
 ### Graph type
 
 The graph type dropdown let's you choose between conversion steps, time to convert, and historical trends.

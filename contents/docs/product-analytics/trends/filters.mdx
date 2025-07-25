@@ -120,3 +120,25 @@ This option is useful for excluding events sent from local builds of your produc
 />
 
 Click on the settings icon to go to [your project settings](https://us.posthog.com/settings/project#internal-user-filtering) to customize the filters that are used.
+
+## Filtering by first event occurrence
+
+Beyond filtering on properties, you can also specify which event to count for a user if they perform it multiple times. This is useful for analyzing user activation or the first time a user interacts with a feature.
+
+This setting is configured per series in a trend insight, in the aggregation dropdown next to the event name.
+
+TODO: add image for dropdown
+
+There are two options for this:
+
+### First-ever occurrence for user
+
+This option finds a user's very first occurrence of an event type, and then checks if it matches your filters. If this first-ever event doesn't match your filters, the user is excluded from the results, even if they performed the same event later with matching filters.
+
+**Example:** You're filtering for pageview events to `/about`, but the user's first ever pageview was to `/pricing`. PostHog will only check the `/pricing` event, and since it doesn't match the filter, this user will be excluded, even if they later visited `/about`.
+
+### First occurrence matching filters for user
+
+This option finds the first time a user performed an event type *that also matches your filters*. Previous events of the same type from that user that don't match the filters are ignored.
+
+**Example:** You're filtering for pageview events to `/about`. A user first visited `/pricing` and then later visited `/about`. PostHog ignores the `/pricing` view and counts the `/about` view, as it's the first one that matches the filter.
