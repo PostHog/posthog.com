@@ -17,3 +17,7 @@ Right now, no. The vast majority of our customers are happy to host on one or th
 ## Do you have a dummy account we can mess around with?
 
 No, the best way to trial PostHog is to start sending your own data into it. When a trial is filled with dummy data, which isn't relevant to the specific team, the overall engagement and success of the trial is lower.
+
+## Does PostHog follow the MEDDPICC sales methodology?
+
+Yes! But like everything we do here, it's not what you would expect. At PostHog, MEDDPICC means "Make every deal a delightful PostHog implementation - Charles Cook"
