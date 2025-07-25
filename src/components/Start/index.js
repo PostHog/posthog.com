@@ -21,7 +21,7 @@ import IntegrationPrompt from 'components/IntegrationPrompt'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
-const AIInstall = () => (
+const AIInstall = ({ setActiveTab }) => (
     <div
         data-scheme="primary"
         className="bg-primary -m-4 @2xl:-m-6 flex flex-col-reverse @xl:flex-row overflow-hidden rounded"
@@ -85,7 +85,7 @@ export default function Start() {
                     {
                         label: 'Install with AI',
                         value: 'ai',
-                        content: <AIInstall />,
+                        content: <AIInstall setActiveTab={setActiveTab} />,
                     },
                     {
                         label: 'Web signup',
