@@ -144,6 +144,21 @@ export default function HeaderBar({
         }
     }
 
+    useEffect(() => {
+        if (appWindow?.ref?.current) {
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'F' && e.shiftKey) {
+                    e.preventDefault()
+                    setSearchOpen(true)
+                }
+            }
+            document.addEventListener('keydown', handleKeyDown)
+            return () => {
+                document.removeEventListener('keydown', handleKeyDown)
+            }
+        }
+    }, [])
+
     return (
         <>
             <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
