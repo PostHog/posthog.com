@@ -26,7 +26,6 @@ showTitle: true
 
 ### Additional tools
 
-- Application monitoring: [Sentry](https://sentry.io/welcome/)
 - CI/CD: [GitHub Actions](https://github.com/features/actions)
 - Containerization: [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/)
 - Linter (frontend): [ESLint](https://eslint.org/)

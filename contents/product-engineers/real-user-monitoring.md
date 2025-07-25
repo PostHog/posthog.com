@@ -73,7 +73,7 @@ Session replays capture a visual of exactly how users are interacting with your 
 
 To capture errors, query speed, and other events relevant to the real usage of your product, you need a way to know when those events happen in your code. This could be an error boundary, web vital report, or a server profiler. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/capture).
 
-Alternatively, for error capture, you can use our [Sentry integration](/docs/libraries/sentry). 
+Alternatively, for error capture, you can use our [error tracking product](/docs/error-tracking).
 
 ### 2. Analyze
 

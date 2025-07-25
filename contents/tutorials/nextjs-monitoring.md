@@ -94,10 +94,7 @@ Enabling these provides the key monitoring tools including performance monitorin
 
 ## Custom error capture
 
-Error capture gives you insights into the errors your users experience. There are two ways to set this up with PostHog:
-
-1. You could set up and use our [Sentry integration](/docs/libraries/sentry). 
-2. Alternatively, you could set up custom error capture (shown below).
+Error capture gives you insights into the errors your users experience.
 
 To set up custom error capturing, we can create a [React error boundary](https://nextjs.org/docs/pages/building-your-application/configuring/error-handling#handling-client-errors):
 

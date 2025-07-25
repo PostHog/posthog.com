@@ -9,7 +9,6 @@ import NodeInstall from '../integrate/_snippets/install-node.mdx'
 import NodeErrorTracking from './_snippets/node-install-error-tracking.mdx'
 import PythonInstall from '../integrate/_snippets/install-python.mdx'
 import PythonErrorTracking from './_snippets/python-install-error-tracking.mdx'
-import SentryInstall from '../libraries/_snippets/install-sentry.mdx'
 import AngularInstall from "../integrate/_snippets/install-angular.mdx"
 import AngularErrorTracking from './_snippets/angular-install-error-tracking.mdx'
 import NextJSErrorTracking from './_snippets/nextjs-install-error-tracking.mdx'
@@ -25,13 +24,12 @@ import ReactErrorTracking from './_snippets/react-install-error-tracking.mdx'
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'Next.js', 'Python', 'Node', 'Sentry', 'Manual', 'React', 'Nuxt', 'SvelteKit', 'Angular', 'Hono']}>
+<Tab.Group tabs={['Web', 'Next.js', 'Python', 'Node', 'Manual', 'React', 'Nuxt', 'SvelteKit', 'Angular', 'Hono']}>
     <Tab.List>
       <Tab>Web</Tab>
       <Tab>Next.js</Tab>
       <Tab>Python</Tab>
       <Tab>Node</Tab>
-      <Tab>Sentry</Tab>
       <Tab>Manual/API</Tab>
       <Tab>React</Tab>
       <Tab>Nuxt</Tab>
@@ -58,9 +56,6 @@ Error tracking enables you to track, investigate, and resolve exceptions your cu
           <NodeErrorTracking />
           <UploadSourceMaps />
           <UploadSourceMapsSteps />
-        </Tab.Panel>
-        <Tab.Panel>
-          <SentryInstall />
         </Tab.Panel>
         <Tab.Panel>
           <ManualErrorTracking />

@@ -92,10 +92,6 @@ export const quickLinks: QuickLinks = [
         to: '/docs/libraries/segment',
     },
     {
-        name: 'Sentry',
-        to: '/docs/libraries/sentry',
-    },
-    {
         name: 'Slack',
         to: '/docs/libraries/slack',
     },
