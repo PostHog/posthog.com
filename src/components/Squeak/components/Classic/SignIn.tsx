@@ -8,6 +8,8 @@ import Wizard from 'components/Wizard'
 
 import SecurityHog from '../../../../images/security-hog.png'
 import { IconSpinner } from '@posthog/icons'
+import { useToast } from '../../../../context/Toast'
+import Link from 'components/Link'
 
 const Input = ({
     label,
@@ -49,6 +51,7 @@ interface SignInFormProps {
 }
 
 const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
+    const { addToast } = useToast()
     const { login } = useUser()
     const { setWindowTitle, closeWindow, openRegister, openForgotPassword } = useApp()
     const { appWindow } = useWindow()
@@ -81,6 +84,14 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSuccess }) => {
             } else if ('error' in user) {
                 setErrorMessage(errorMessages[user?.error] || user?.error)
             } else {
+                addToast({
+                    title: 'Successfully signed in to PostHog.com',
+                    description: (
+                        <Link to="https://app.posthog.com" className="text-red dark:text-yellow font-semibold">
+                            Looking for the app?
+                        </Link>
+                    ),
+                })
                 onSuccess?.(user)
                 if (appWindow) {
                     closeWindow(appWindow)
