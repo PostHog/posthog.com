@@ -18,6 +18,8 @@ export const surveyTriggeredByEventLight = "https://res.cloudinary.com/dmukukwp6
 export const surveyTriggeredByEventDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg"
 export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg"
 export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg"
+export const maxSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_25_at_02_30_36_b350521fd7.gif"
+export const maxSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_25_at_02_30_36_b350521fd7.gif"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -41,6 +43,29 @@ After choosing one, you are brought to a form where you can complete the details
     alt="Create a survey"
     classes="rounded"
 />
+
+## MaxAI and Surveys
+
+<ProductScreenshot
+    imageDark
+/>
+
+[Max](/docs/max-ai), PostHog's AI-powered product analyst, can help you create surveys quickly using natural language. Max understands different question types and can:
+
+- Generate complete surveys based on your research goals
+- Suggest appropriate question types (freeform text, rating scales, multiple choice, etc.)
+- Help you set up display conditions and targeting
+- Recommend survey templates for common use cases
+
+You can ask Max things like:
+- "Create an NPS survey for my mobile app users"
+- "Build a product satisfaction survey with rating questions"
+- "Help me create a survey to understand why users churn"
+- "Generate a post-purchase feedback survey"
+
+To get started, click "Max" in the top right corner of the PostHog app and describe what kind of survey you want to create.
+
+> **Note:** Max is currently in beta, so you may encounter occasional issues. We appreciate any feedback you can share to help us improve!
 
 ## Creating a new survey
 
@@ -185,7 +210,7 @@ For this option, the survey is shown again every time the display conditions are
 
 The main use case for this is for `Feedback button` surveys. This enables the survey to show up every time the user clicks the feedback button.
 
-This can also be combined with the `Wait time` option. If you select this option and set a `Wait time` of 30 days, the survey is only shown again if they haven't seen any surveys in the last 30 days. This useful for getting feature regular feedback or asking about an error. 
+This can also be combined with the `Wait time` option. If you select this option and set a `Wait time` of 30 days, the survey is only shown again if they haven't seen any surveys in the last 30 days. This useful for getting feature regular feedback or asking about an error.
 
 ## Launching your survey
 
