@@ -85,7 +85,7 @@ The below table summarizes the discount levels contained in points 2-4:
 </tbody>
 </table>
 
-Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. For this reason, discounts only apply if customer pay the whole year(s) up front. 
+Our general principle is that a customer should get a discount because the cash up front is beneficial to PostHog, as it allows us to invest more in building more products, faster. For this reason, discounts only apply if customers pay the whole year(s) up front.
 
 As an exception, a customer can choose to contract for a year but pay quarterly - in this case, they can get a discount, but it is halved. No discounts are available for customers paying monthly. 
 
