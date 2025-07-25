@@ -133,3 +133,17 @@ Before launching, ensure the following:
 1. **Test thoroughly**: Verify that all variants display and function as expected across devices and browsers. See our [testing feature flags doc](/docs/feature-flags/testing) for more details.
 
 2. **Document changes**: Record the modifications made to each variant and their goals. Add a description of the changes to your experiment as well as screenshots of each of the variants.
+
+### Troubleshooting and FAQs
+
+#### Why am I seeing hydration errors during development?
+
+If you're testing no-code experiments in development mode (e.g., Next.js), you may see hydration errors about browser plugins modifying the DOM. This is expected behavior since no-code experiments change HTML after the page loads, which frameworks like Next.js + Turbopack try to prevent to preserve server-side rendering.
+
+These errors can be safely ignored as long as you're not implementing code that modifies HTML at build time. No-code experiments run on your live site after the static HTML is served, so they won't cause issues in production.
+
+#### Why is there a delay before my element changes?
+
+If you're evaluating the experiment flag on the same page where the element needs to change, you'll see a brief delay as PostHog loads and processes the experiment's feature flag.
+
+To prevent that, evaluate the flag on a page before the one where you need the element to change. For the best user experience, evaluate the flag on the server and pass it to the frontend using [Feature flag bootstrapping](/docs/feature-flags/bootstrapping).
