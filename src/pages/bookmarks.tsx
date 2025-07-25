@@ -112,9 +112,9 @@ export default function Bookmarks() {
     }, [search, user?.profile?.bookmarks])
 
     return (
-        <div className="@container">
+        <div data-scheme="primary" className="@container bg-primary text-primary h-full">
             <HeaderBar showSearch onSearch={setSearch} />
-            <div className="p-4">
+            <div className="p-4 border-t border-primary">
                 {user?.profile?.bookmarks && user.profile.bookmarks.length > 0 ? (
                     filteredBookmarks.length > 0 ? (
                         <ul className="list-none m-0 grid grid-cols-1 gap-5 @md:grid-cols-2 @xl:grid-cols-3 @2xl:grid-cols-4">
