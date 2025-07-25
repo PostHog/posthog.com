@@ -251,14 +251,6 @@ export default function Presentation({
                 >
                     {sidebarContent && (
                         <motion.aside
-                            initial={
-                                isMobile
-                                    ? {
-                                          height: isNavVisible ? 'auto' : 0,
-                                          width: '100%',
-                                      }
-                                    : { width: isNavVisible ? '100%' : 0, height: '100%' }
-                            }
                             animate={
                                 isMobile
                                     ? {
