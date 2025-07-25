@@ -99,6 +99,16 @@ Session replay relies on the `$session_id` property added to events by the web S
 
 To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events. 
 
+## Recording not found
+
+There are several valid reasons why recordings aren't captured. To keep the site fast we don't actively confirm a recording has been captured before showing the "view recording" button. 
+
+For example:
+
+ * If an event is captured before [your minimum recording duration setting](https://us.posthog.com/settings/project-replay#replay-triggers) there is no guarantee that the session lasted long enough to start recording.
+ * If a user closes the browser tab or window there may not be enough time to send the data to the backend
+ * If you have [conditional triggers set](https://us.posthog.com/settings/project-replay#replay-triggers) we don't send data to the backend until the trigger conditions are met
+
 ## Person not found
 
 If you are able to capture a replay, but the entry says "person not found," this is replay has been captured from an anonymous user and a [person profile](/docs/data/persons) has **not** been created for them. 
