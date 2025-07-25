@@ -1,0 +1,119 @@
+---
+title: Using node:http as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
+
+You can use Node's built-in `http` module to proxy requests to PostHog. This is a simple and lightweight way to proxy requests. 
+
+```ts
+import http from "node:http";
+
+const API_HOST = "eu.i.posthog.com"; // Change to "us.i.posthog.com" for the US region
+const ASSET_HOST = "eu-assets.i.posthog.com"; // Change to "us-assets.i.posthog.com" for the US region
+
+// Convert Node.js headers to Fetch API Headers
+const toHeaders = (headers: Record<string, string[] | undefined>): Headers =>
+  Object.entries(headers).reduce((acc, [name, values]) => {
+    values?.forEach((value) => acc.append(name, value));
+    return acc;
+  }, new Headers());
+
+/**
+ * Proxies an incoming HTTP request to the appropriate PostHog endpoint.
+ */
+export default function proxy(
+  request: http.IncomingMessage,
+  response: http.ServerResponse,
+  prefix: string,
+): undefined {
+  const pathname = (request.url ?? "").slice(prefix.length);
+  const posthogHost = pathname.startsWith("/static/") ? ASSET_HOST : API_HOST;
+
+  // Rewrite headers
+  const headers = toHeaders(request.headersDistinct);
+  headers.set("host", posthogHost);
+  if (request.headers.host) {
+    headers.set("X-Forwarded-Host", request.headers.host);
+  }
+  if (request.socket.remoteAddress) {
+    headers.set("X-Real-IP", request.socket.remoteAddress);
+    headers.set("X-Forwarded-For", request.socket.remoteAddress);
+  }
+
+  // Remove sensitive or hop-by-hop headers
+  headers.delete("cookie");
+  headers.delete("connection"); // https://datatracker.ietf.org/doc/html/rfc7230#section-6.1
+
+  fetch(new URL(pathname, `https://${posthogHost}`), {
+    method: request.method ?? "",
+    headers,
+    body: !["HEAD", "GET"].includes(request.method ?? "") ? request : null,
+  })
+    .then(async (res: Response) => {
+      const headers = new Headers(res.headers);
+      const body = await res.text();
+
+      // See https://github.com/nodejs/undici/issues/2514
+      if (headers.has("content-encoding")) {
+        headers.delete("content-encoding");
+        headers.delete("content-length");
+      }
+
+      response.writeHead(res.status, [...headers.entries()]);
+
+      response.end(body);
+    })
+    .catch(() => {
+      if (!response.writableEnded) {
+        response.writeHead(502);
+        response.end("Bad gateway");
+      }
+    });
+}
+```
+
+To use this proxy, you can create a server like this:
+
+```js
+import http from "node:http";
+import proxy from "./proxy-posthog.js";
+
+const server = http.createServer((req, res) => {
+  // Check if this is the proxy route
+  const posthogPrefix = "/<ph_proxy_path>";
+  if (req.url?.startsWith(posthogPrefix)) {
+    proxy(req, res, posthogPrefix);
+    return;
+  }
+
+  // Your next handler ...
+  handler(req, res);
+});
+```
+
+Once done, you can initialize the PostHog client with the proxy path:
+
+```js
+import { PostHog } from 'posthog-node'
+
+const client = new PostHog(
+    '<ph_project_api_key>',
+    { host: '/<ph_proxy_path>' }
+)
+```
+
+> Thank you to [SimonSimCity](https://github.com/SimonSimCity) for this method.
