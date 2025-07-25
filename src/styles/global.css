@@ -551,7 +551,7 @@ input[type='password'] {
 }
 
 textarea {
-    @apply border border-primary !px-1.5 !py-1 !text-sm w-full ring-0 focus:ring-1;
+    @apply text-sm w-full ring-0 focus:ring-1;
 }
 
 fieldset {
@@ -2418,4 +2418,15 @@ body.dark .max-ai-body {
 /* Rainbow glowing border animation */
 .animate-gradient-rotate {
     background-size: 400% 400%;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
 }

@@ -126,7 +126,6 @@ function Radio({
 
     return (
         <>
-
             <label
                 onMouseUp={handleClick}
                 className="relative w-full text-center cursor-pointer"
@@ -215,13 +214,16 @@ function RadioGroup({
     const formValues = values as any
 
     // Convert options to Select format
-    const selectGroups = [{
-        label: placeholder,
-        items: options?.map(option => ({
-            value: String(option.value),
-            label: option.label
-        })) || []
-    }]
+    const selectGroups = [
+        {
+            label: placeholder,
+            items:
+                options?.map((option) => ({
+                    value: String(option.value),
+                    label: option.label,
+                })) || [],
+        },
+    ]
 
     const handleValueChange = (value: string) => {
         setFieldValue(name, value)
@@ -258,7 +260,7 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
 
     return (
         <>
-            <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={props.id}>
+            <label className={`sr-only ${inputContainerClasses}`} htmlFor={props.id}>
                 {placeholder}
             </label>
             <div className="col-span-10">
@@ -268,7 +270,9 @@ const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
                     onBlur={() => {
                         validateField(name)
                     }}
-                    className={`bg-transparent outline-none p-0 border py-0 shadow-none ring-0 focus:ring-0 resize-none ${error ? 'border-red' : 'border-primary'}`}
+                    className={`bg-primary outline-none border rounded shadow-none ring-0 focus:ring-0 resize-none ${
+                        error ? 'border-red' : 'border-primary'
+                    }`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                 />
@@ -295,8 +299,9 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
                     onBlur={() => {
                         validateField(name)
                     }}
-                    className={`bg-transparent w-full outline-none text-sm rounded border ${error ? 'border-red' : 'border-primary'
-                        } ring-0 focus:ring-0`}
+                    className={`outline-none text-sm rounded border ${
+                        error ? 'border-red' : 'border-primary'
+                    } ring-0 focus:ring-0`}
                     {...props}
                     {...(props.type === 'number' ? { min: 0 } : {})}
                     type={props.type === 'date' ? 'date' : type || 'text'}
@@ -359,13 +364,13 @@ export default function SalesforceForm({
                             field.required
                                 ? field.fieldType === 'checkbox'
                                     ? Yup.array()
-                                        .of(Yup.string())
-                                        .min(1, `${field.label} is a required field`)
-                                        .required(`${field.label} is a required field`)
+                                          .of(Yup.string())
+                                          .min(1, `${field.label} is a required field`)
+                                          .required(`${field.label} is a required field`)
                                     : Yup.string().required(`${field.label} is a required field`)
                                 : field.fieldType === 'checkbox'
-                                    ? Yup.array().of(Yup.string())
-                                    : Yup.string(),
+                                ? Yup.array().of(Yup.string())
+                                : Yup.string(),
                         ])
                     )
                 )}
@@ -390,84 +395,81 @@ export default function SalesforceForm({
                             {form.buttonText ?? 'Submit'}
                         </button>
                     </div>
-                    <div className="p-4 border-b border-primary">
+                    <div className="p-4">
                         <div className="grid grid-cols-12 gap-2">
-                            <span className="relative text-left text-sm col-span-2 ">
-                                To
-                            </span>
-                            <div className="col-span-10 text-sm">
-                                sales@posthog.com
-                            </div>
-                            {form.fields.map(({ name, label, placeholder, type, required, options, fieldType, cols }, index) => {
-                                if (customFields && customFields[name])
-                                    return {
-                                        radioGroup: (
+                            <span className="relative text-left text-sm col-span-2 ">To</span>
+                            <div className="col-span-10 text-sm">sales@posthog.com</div>
+                            {form.fields.map(
+                                ({ name, label, placeholder, type, required, options, fieldType, cols }, index) => {
+                                    if (customFields && customFields[name])
+                                        return {
+                                            radioGroup: (
+                                                <RadioGroup
+                                                    type={fieldType || 'radio'}
+                                                    options={customFields[name].options || options || []}
+                                                    name={name}
+                                                    placeholder={label}
+                                                    cols={customFields[name].cols ?? formOptions?.cols}
+                                                />
+                                            ),
+                                        }[customFields[name]?.type]
+
+                                    if (type === 'enumeration')
+                                        return (
                                             <RadioGroup
-                                                type={fieldType || 'radio'}
-                                                options={customFields[name].options || options || []}
+                                                key={`${name}-${index}`}
+                                                type={fieldType}
+                                                options={options}
                                                 name={name}
                                                 placeholder={label}
-                                                cols={customFields[name].cols ?? formOptions?.cols}
+                                                cols={cols || formOptions?.cols}
                                             />
-                                        ),
-                                    }[customFields[name]?.type]
+                                        )
 
-                                if (type === 'enumeration')
+                                    if (fieldType === 'textarea') return null
+
                                     return (
-                                        <RadioGroup
+                                        <Input
                                             key={`${name}-${index}`}
                                             type={fieldType}
-                                            options={options}
                                             name={name}
-                                            placeholder={label}
-                                            cols={cols || formOptions?.cols}
-                                        />
-                                    )
-
-                                if (fieldType === 'textarea')
-                                    return null
-
-                                return (
-                                    <Input
-                                        key={`${name}-${index}`}
-                                        type={fieldType}
-                                        name={name}
-                                        placeholder={placeholder || label}
-                                        required={required}
-                                    />
-                                )
-                            })}
-                        </div>
-                    </div>
-                    <div className="px-0">
-                        <Editor slug="/talk-to-a-human">
-                            {form.fields.map(({ name, label, fieldType, required }, index) => {
-                                if (fieldType === 'textarea') {
-                                    return (
-                                        <Textarea
-                                            key={`${name}-${index}`}
-                                            name={name}
-                                            placeholder={label}
+                                            placeholder={placeholder || label}
                                             required={required}
                                         />
                                     )
                                 }
-                                return null
-                            })}
-                        </Editor>
+                            )}
+                        </div>
+                    </div>
+                    <div className="px-4">
+                        {form.fields.map(({ name, label, fieldType, required }, index) => {
+                            if (fieldType === 'textarea') {
+                                return (
+                                    <Textarea
+                                        key={`${name}-${index}`}
+                                        name={name}
+                                        placeholder={label}
+                                        required={required}
+                                    />
+                                )
+                            }
+                            return null
+                        })}
                     </div>
 
-                    <button
-                        className={button(
-                            buttonOptions?.type,
-                            'full',
-                            buttonOptions?.className ?? 'mt-4',
-                            buttonOptions?.size ?? 'sm'
-                        )}
-                        type="submit"
-                    >
-                        {form.buttonText ?? 'Submit'}
-                    </button>
+                    <div className="px-4">
+                        <button
+                            className={button(
+                                buttonOptions?.type,
+                                'full',
+                                buttonOptions?.className ?? 'mt-4',
+                                buttonOptions?.size ?? 'sm'
+                            )}
+                            type="submit"
+                        >
+                            {form.buttonText ?? 'Submit'}
+                        </button>
+                    </div>
                 </Form>
             </Formik>
         )
