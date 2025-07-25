@@ -570,7 +570,7 @@ function EditProfile({ profile, mutate }) {
             throw error
         } finally {
             setSubmitting(false)
-            addToast({ message: 'Profile updated!' })
+            addToast({ description: 'Profile updated!' })
         }
     }
 
@@ -678,5 +678,9 @@ export default function EditProfilePage({ location }) {
         getProfile()
     }, [])
 
-    return ready ? <EditProfile profile={profile} mutate={getProfile} /> : null
+    return ready ? (
+        <EditProfile profile={profile} mutate={getProfile} />
+    ) : (
+        <div data-scheme="secondary" className="h-full bg-primary" />
+    )
 }

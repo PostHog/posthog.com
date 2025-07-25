@@ -325,7 +325,7 @@ export default function ProfilePage({ params }: PageProps) {
         : {}
 
     if (!profile && isLoading) {
-        return null
+        return <div data-scheme="secondary" className="h-full bg-primary" />
     } else if (!profile && !isLoading) {
         // if profile wasn't found after loading, show 404 page
         return <NotFoundPage />
