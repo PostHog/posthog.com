@@ -292,7 +292,7 @@ export function Editor({
                         {hasShareButton && <Cher active={showCher} />}
                         <OSButton
                             variant="primary"
-                            size="xs"
+                            size="sm"
                             {...(hasShareButton
                                 ? {
                                       onClick: () => {
@@ -312,6 +312,7 @@ export function Editor({
                                   })}
                             state={{ newWindow: true }}
                             asLink
+                            className="ml-1 -mt-1"
                         >
                             {hasShareButton ? 'Share' : cta?.label}
                         </OSButton>
