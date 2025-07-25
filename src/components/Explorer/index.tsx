@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useRef } from 'react'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { navigate } from 'gatsby'
@@ -78,7 +78,7 @@ export default function Explorer({
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
-
+    const searchContainerRef = useRef<HTMLDivElement>(null)
     const handleValueChange = (value: string) => {
         if (onCategoryChange) {
             // Use custom category change handler for filtering
@@ -115,7 +115,7 @@ export default function Explorer({
         <div className="@container w-full h-full flex flex-col min-h-1">
             {!fullScreen && (
                 <>
-                    <HeaderBar {...getHeaderBarProps()} />
+                    <HeaderBar {...getHeaderBarProps()} searchContentRef={searchContainerRef} />
                     <AddressBar
                         selectOptions={selectOptions}
                         currentPath={currentPath}
@@ -162,6 +162,7 @@ export default function Explorer({
                                     </div>
                                 )}
                                 <div
+                                    ref={searchContainerRef}
                                     className={`${getProseClasses()} max-w-none h-full ${
                                         padding ? 'relative @md:p-4' : ''
                                     }`}
