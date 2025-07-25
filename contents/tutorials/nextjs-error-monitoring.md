@@ -190,13 +190,15 @@ To ensure all component errors are tracked, we can use the [built-in error bound
 // app/error.jsx
 'use client'
 
-import { useEffect } from 'react'
-import posthog from 'posthog-js'
+import { useEffect } from 'react';
+import { usePostHog } from 'posthog-js/react';
 
 export default function Error({
   error,
   reset,
 }) {
+  const posthog = usePostHog()
+
   useEffect(() => {
     posthog.captureException(error)
   }, [error])
