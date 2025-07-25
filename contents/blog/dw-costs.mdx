@@ -1,0 +1,108 @@
+---
+title: "How we estimate our costs of Data Warehouse with Data Warehouse"
+date: 2025-08-01
+author:
+  - peter-hicks
+featuredImage: >-
+{/* https://res.cloudinary.com/dmukukwp6/image/upload/todo */}
+featuredImageType: full
+tags:
+- Engineering
+---
+
+Yes, of course we use our data warehouse recursively.
+
+## Some business background
+
+One of our perennial struggles is to attribute our cloud costs to the independent products within the PostHog universe. There are many disparate billing metrics from our various providers since we use a variety of different tools to make our warehouse available. For the Data Warehouse, this includes ClickHouse, Temporal, and S3 to persist everything. Our warehouse specific compute services are sitting inside our Kubernetes cluster alongside everything else that makes PostHog run. Attributing our costs allows us to both build a sustainable business model as we go and keep an eye on our day-to-day operations to see if anything deviates from the norm.
+
+## Some technical background
+
+Behind the scenes we use [Temporal](https://temporal.io/) to schedule our data syncs, exports, and recurring materialized views. We also have multiple regions in which we store data for both latency, performance, and compliance reasons. This means that we must merge together regional data with the same schema to get a comprehensive aggregate result. Our cost calculation must encompass a few different components:
+
+1. How much compute time and resources it took to bring data into our warehouse.
+2. How much it costs to store data indefinitely.
+3. The cost segmented across teams.
+
+Each of our cost metrics has specific components that aren't really cross compatible with other metrics and can be processed independently before being rolled up into a single result.
+
+## Materializing it all
+
+Some of the queries we need to run to roll up our costs are expensive to execute and write out millions of rows. They can take ~30 minutes to fully process independently of anything else. This is the case for us when we work with things like our scheduled tasks in Temporal and S3 read operations. It would be impractical to run some of our SQL expressions all the time on demand. It's also not essential that the data is completely up to date when consuming them. since we're interested in segmenting specific time periods historically and plotting them on graphs for daily dashboards when working with cost estimations. For this reason, we're using our scheduled materialized views to periodically update these result sets. The result of our materialized views are readily available without any additional processing logic. They can be used directly as part of downstream queries within a `from` clause. We also manage the potentially complex directed dependency chain behind the scenes as well, so that tables that a certain query relies upon aren't stale when using them.
+
+Below we rollup all of our S3 costs with a materialized view named `int_data_warehouse_jobs__s3_cost`:
+
+```sql
+with usage_reports as (
+    SELECT
+        t_id,
+        date,
+        if(report.site_url like '%us.%', 'US', 'EU') AS region,
+        toFloat(toString(JSONExtractFloat(team_obj, 'dwh_total_storage_in_s3_in_mib'))) AS dwh_total_storage_in_s3_in_mib
+    FROM postgres.prod.billing_usagereport
+    ARRAY JOIN
+        arrayMap(x -> x.1, JSONExtractKeysAndValuesRaw(ifNull(report, '{}'), 'teams')) AS t_id,
+        arrayMap(x -> x.2, JSONExtractKeysAndValuesRaw(ifNull(report, '{}'), 'teams')) AS team_obj
+    WHERE
+        JSONExtractFloat(team_obj, 'dwh_total_storage_in_s3_in_mib') is not null
+        and toFloat(toString(JSONExtractFloat(team_obj, 'dwh_total_storage_in_s3_in_mib'))) != 0
+        and date >= '2025-06-01'
+),
+
+jobs as (
+    select id, finished_at, rows_synced, team_id, 'US' as region from postgres.posthog_externaldatajob
+    where finished_at >= '2025-06-01'
+    UNION ALL
+    select id, finished_at, rows_synced, team_id, 'EU' as region from eu_postgres_posthog_externaldatajob
+    where finished_at >= '2025-06-01'
+)
+
+select id, s3_cost, cost_per_row from (
+    select
+        j.id,
+        ur.dwh_total_storage_in_s3_in_mib / count() over (partition by j.team_id, toDate(toTimeZone(j.finished_at, 'UTC')), j.region) as dwh_total_storage_in_s3_in_mib_share,
+        ifNull((dwh_total_storage_in_s3_in_mib_share / bc.total_s3_mib) * bc.cost, 0) as s3_cost,
+        if(rows_synced = 0 or s3_cost = 0 or s3_cost is null, 0, s3_cost / rows_synced) as cost_per_row
+    from jobs j
+    left join usage_reports ur on ur.date = toDate(toTimeZone(j.finished_at, 'UTC')) and j.team_id = toInt(ur.t_id) and j.region = ur.region
+    left join int_data_warehouse_jobs__daily_s3_bucket_costs bc on bc.date = toDate(toTimeZone(j.finished_at, 'UTC')) and bc.region = j.region
+)
+```
+
+This is our unedited query that computes our S3 costs where we first gather the storage usage segmented by team and join it with the compute time and synced rows that were written to block storage. We generate a result here that ultimately gets the unit economics of the tasks that sync data into our warehouse. This is an intermediate result in our pipeline that we merge with our other cost drivers to get a complete picture of our costs.
+
+## Stitching it all together
+
+The final result is a unified dataset that breaks down our data warehouse costs by S3, Temporal, and EKS at the task level, across all our regions (so far). With this result, we can finally build our insight and monitor it over time. The query below is the culmination of the several layers of materialized views that we have built up to.
+
+```sql
+with jobs as (
+    select *, 'US' as region from postgres.posthog_externaldatajob
+    where finished_at >= '2025-06-01'
+    UNION ALL
+    select *, 'EU' as region from eu_postgres_posthog_externaldatajob
+    where finished_at >= '2025-06-01'
+)
+
+select
+    s3_cost.s3_cost,
+    s3_cost.cost_per_row as s3_cost_per_row,
+    temporal_cost.temporal_cost,
+    temporal_cost.cost_per_row as temporal_cost_per_row,
+    eks_cost.compute_cost as eks_cost,
+    eks_cost.cost_per_row as eks_cost_per_row,
+    s3_cost + temporal_cost + eks_cost as total_cost,
+    s3_cost_per_row + temporal_cost_per_row + eks_cost_per_row as total_cost_per_row,
+    j.*
+from jobs j
+left join int_data_warehouse_jobs__s3_cost s3_cost on s3_cost.id = j.id
+left join int_data_warehouse_jobs__temporal_cost temporal_cost on temporal_cost.id = j.id
+left join int_data_warehouse_jobs__eks_cost eks_cost on eks_cost.id = j.id
+```
+
+
+## What does this even look like
+
+It's hard to get a sense of the inheritance pattern of the data that you're working with. A group of queries that rely upon one another doesn't dereference as well as code does. When we built our cost estimation we actually crafted an intrinsic directed graph that we weren't really thinking about along the way. In one example above the process that estimates the S3 cost must run before we roll up the S3 cost with our other cost drivers. Since we manage both the runtime and warehouse parts of the workflow we can resolve all the upstream transformations our data went through to get to its eventual destination of a palatable dataset. One of our most recent additions shows the graph that that emerges from all the SQL that you write within our SQL editor, and for now we'll leave you with the complete graph of our cost attribution workflow.
+
+> Note: Todo Image of lineage graph!
