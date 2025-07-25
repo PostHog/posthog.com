@@ -7,6 +7,7 @@ import { IconInfo, IconGear } from '@posthog/icons'
 import PresentationMode from './FullScreen'
 import { motion } from 'framer-motion'
 import { navigate } from 'gatsby'
+import { useWindow } from '../../context/Window'
 
 interface AccordionItem {
     title: string
@@ -78,7 +79,9 @@ export default function Presentation({
     slideId,
     presenterNotes,
 }: PresentationProps) {
-    const [isNavVisible, setIsNavVisible] = useState<boolean>(true)
+    const { appWindow } = useWindow()
+    const isMobile = appWindow?.size?.width && appWindow?.size?.width <= 512
+    const [isNavVisible, setIsNavVisible] = useState<boolean>(!isMobile)
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
     const [activeSlideIndex, setActiveSlideIndex] = useState<number>(0)
@@ -223,6 +226,10 @@ export default function Presentation({
         }
     }, [slides.length, slideId])
 
+    useEffect(() => {
+        setIsNavVisible(!isMobile)
+    }, [isMobile])
+
     const enterPresentationMode = () => {
         // Use the currently active slide index instead of searching for visible slide
         if (slides.length > 0) {
@@ -243,18 +250,35 @@ export default function Presentation({
                     className={`flex flex-grow min-h-0 ${fullScreen ? 'border-t border-primary' : ''}`}
                 >
                     {sidebarContent && (
-                        <aside
+                        <motion.aside
+                            initial={
+                                isMobile
+                                    ? {
+                                          height: isNavVisible ? 'auto' : 0,
+                                          width: '100%',
+                                      }
+                                    : { width: isNavVisible ? '100%' : 0, height: '100%' }
+                            }
+                            animate={
+                                isMobile
+                                    ? {
+                                          height: isNavVisible ? 'auto' : 0,
+                                          width: '100%',
+                                      }
+                                    : { width: isNavVisible ? 192 : 0, height: '100%' }
+                            }
+                            transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`${
-                                isNavVisible ? 'w-48' : 'w-0'
-                            } transition-all duration-300 bg-primary border-r border-primary h-full overflow-hidden`}
+                            className={`bg-primary @lg:border-y-0 border-y @lg:border-r ${
+                                isNavVisible ? '' : 'border-b-0'
+                            } border-primary overflow-hidden absolute z-10 @lg:relative @lg:translate-y-0 translate-y-[50px]`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
                                     <SidebarContent content={sidebarContent} activeSlideIndex={activeSlideIndex} />
                                 </div>
                             </ScrollArea>
-                        </aside>
+                        </motion.aside>
                     )}
                     <main
                         data-app="Presentation"
@@ -277,6 +301,7 @@ export default function Presentation({
                                     exportToPdf
                                     slideId={slideId}
                                     onFullScreenClick={slides.length > 0 ? enterPresentationMode : undefined}
+                                    navIconClassName={isMobile ? 'rotate-90' : ''}
                                 />
                             </>
                         )}

@@ -273,12 +273,7 @@ export default function SlidesTemplate({
                 title=""
                 slideId={productData?.slug}
                 sidebarContent={(activeSlideIndex) => (
-                    <SlideThumbnails
-                        slides={slides}
-                        activeSlideIndex={activeSlideIndex}
-                        slideId={productData?.slug}
-                        isMobileView={isMobileView}
-                    />
+                    <SlideThumbnails slides={slides} activeSlideIndex={activeSlideIndex} slideId={productData?.slug} />
                 )}
                 slides={slides}
                 presenterNotes={productData?.presenterNotes}

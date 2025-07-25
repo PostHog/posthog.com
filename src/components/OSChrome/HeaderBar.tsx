@@ -62,6 +62,7 @@ interface HeaderBarProps {
     showDrawerToggle?: boolean
     isDrawerOpen?: boolean
     onToggleDrawer?: () => void
+    navIconClassName?: string
 }
 
 export default function HeaderBar({
@@ -91,6 +92,7 @@ export default function HeaderBar({
     showDrawerToggle = false,
     isDrawerOpen = false,
     onToggleDrawer,
+    navIconClassName = '',
 }: HeaderBarProps) {
     const { user, addBookmark, removeBookmark } = useUser()
     const { openSignIn, compact } = useApp()
@@ -165,7 +167,13 @@ export default function HeaderBar({
                                         onClick={onToggleNav}
                                         variant="ghost"
                                         active={isNavVisible}
-                                        icon={isNavVisible ? <IconSidebarOpen /> : <IconSidebarClose />}
+                                        icon={
+                                            isNavVisible ? (
+                                                <IconSidebarOpen className={navIconClassName} />
+                                            ) : (
+                                                <IconSidebarClose className={navIconClassName} />
+                                            )
+                                        }
                                     />
                                 )}
                             </div>
