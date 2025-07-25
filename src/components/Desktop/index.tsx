@@ -169,10 +169,8 @@ export default function Desktop() {
             currentColumn = Math.max(currentColumn, columnIndex + 1)
         })
 
-        // Position apps starting from the right, but create new columns if needed
-        const totalAppsColumns = Math.ceil(apps.length / maxIconsPerColumn)
-        // Calculate the rightmost possible starting position for apps
-        const rightmostStart = containerWidth - padding - iconWidth - (totalAppsColumns - 1) * columnSpacing
+        // Start from the rightmost position and flow left
+        const rightmostStart = containerWidth - padding - iconWidth
         // Ensure at least one column gap from productLinks
         const minStartFromLeft = (currentColumn + 1) * columnSpacing + padding
         const rightStartColumn = Math.max(rightmostStart, minStartFromLeft)
@@ -182,7 +180,7 @@ export default function Desktop() {
             const positionInColumn = index % maxIconsPerColumn
 
             positions[app.label] = {
-                x: rightStartColumn + columnIndex * columnSpacing,
+                x: rightStartColumn - columnIndex * columnSpacing,
                 y: startY + positionInColumn * iconHeight,
             }
         })
