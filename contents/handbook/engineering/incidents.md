@@ -149,7 +149,7 @@ When we’ve identified the root cause of the issue and put a fix in place. End 
 1. If the impact was high, or the incident recurs frequently, proceed to the next step to document the incident and hold an incident-review meeting. If this is a low-/no-impact incident, it's recommended to opt-out of the post-incident flow - we only want to document relevant incidents and keep our processes lean!
 2. Create a PR against the [incidents analysis repository](https://github.com/PostHog/incidents-analysis) using [this template](https://github.com/PostHog/incidents-analysis/blob/master/yyyy-mm-dd-template.md).
 3. Hold a ~30 min meeting discussing the above
-4. If a post-mortem had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
+4. If an incident had significant impact on customers (like data loss or flags not being available), we should sanitize and copy the post mortem into the public [post-mortems repository](https://github.com/PostHog/post-mortems)
 
 All critical incidents should have a PR in the post-mortem repository + a scheduled meeting. All major incidents should have a PR in the post-mortem repository, and optionally a scheduled meeting.
 

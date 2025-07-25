@@ -22,8 +22,8 @@ As with any startup, the principles that govern these small teams are:
 
 - Can decide what to build within their own products
 - Can ship without outside interference as far as possible
-  - No product by default
-  - [No design by default](/handbook/brand/process)
+  - No product management by default
+  - [No product design by default](/handbook/brand/process)
 - Should work directly with its own users (until it has hit product-market fit within PostHog's platform)
 - Should be small
 

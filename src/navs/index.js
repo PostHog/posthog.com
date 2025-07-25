@@ -376,6 +376,7 @@ export const dataPipelines = {
             ],
             dynamicChildren: 'data-pipeline-transformations',
         },
+
         {
             name: 'Troubleshooting and FAQs',
             url: '/docs/cdp/common-questions',
@@ -1316,6 +1317,10 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
+                    {
+                        name: "Template for onboarding success plan",
+                        url: '/handbook/cs-and-onboarding/onboarding-success-plan',
+                    },
                 ],
             },
             {
@@ -1361,6 +1366,10 @@ export const handbookSidebar = [
                     {
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Handling customer issues',
+                        url: '/handbook/cs-and-onboarding/handling-customer-issues',
                     },
                     {
                         name: 'Health tracking',
@@ -1864,6 +1873,10 @@ export const docsMenu = {
                                     name: 'Persistence',
                                     url: '/docs/libraries/js/persistence',
                                 },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-js',
+                                },
                             ],
                         },
                         {
@@ -1920,6 +1933,16 @@ export const docsMenu = {
                         {
                             name: 'Python',
                             url: '/docs/libraries/python',
+                            children: [
+                                {
+                                    name: 'Setup and features',
+                                    url: '/docs/libraries/python',
+                                },
+                                {
+                                    name: 'Reference',
+                                    url: '/docs/references/posthog-python',
+                                },
+                            ],
                         },
                         {
                             name: 'React',
@@ -2226,6 +2249,10 @@ export const docsMenu = {
                             url: '/docs/api/user',
                         },
                         {
+                            name: 'Web Analytics',
+                            url: '/docs/api/web-analytics',
+                        },
+                        {
                             name: 'Data model',
                             url: '/docs/data-model',
                         },
@@ -2457,6 +2484,24 @@ export const docsMenu = {
                         {
                             name: 'Account settings',
                             url: '/docs/settings/account-settings',
+                        },
+                        {
+                            name: 'Site Apps',
+                            url: '/docs/site-apps',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/site-apps',
+                                },
+                                {
+                                    name: 'Notification Bar',
+                                    url: '/docs/site-apps/notification-bar',
+                                },
+                                {
+                                    name: 'Pineapple Mode',
+                                    url: '/docs/site-apps/pineapple-mode',
+                                },
+                            ],
                         },
                     ],
                 },

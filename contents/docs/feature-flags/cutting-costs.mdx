@@ -15,7 +15,6 @@ Feature flags are charged based on requests made to our `/flags` endpoint, which
 - Automatically on SDK initialization (unless disabled, see below)
 - When evaluating survey targeting, which checks **all active feature flags** in your project
 
-**Important**: If you have active feature flags in your project, you'll be charged for evaluating them even if you're not explicitly using them in your code. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
 
 Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
 
@@ -23,7 +22,9 @@ The number of `/flags` requests and the number of `$feature_flag_called` events 
 
 <CalloutBox icon="IconWarning" title="Unused flags still incur charges" type="caution">
 
-  Active feature flags that you're not using in your code will still be evaluated (and charged) every time the `/flags` endpoint is called. To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough.
+  Active feature flags you're not using in your code are still evaluated (and charged) every time the `/flags` endpoint is called. This includes when surveys are loaded, as survey targeting evaluates all active flags to determine eligibility.
+  
+  To stop charges for unused flags, you must **disable, delete, or archive** them in the PostHog UI – simply removing them from your code is not enough.
 
 </CalloutBox>
 

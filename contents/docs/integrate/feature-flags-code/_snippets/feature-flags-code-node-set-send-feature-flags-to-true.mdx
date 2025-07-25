@@ -1,6 +1,8 @@
-The `capture()` method has an optional argument `sendFeatureFlags`, which is set to `false` by default. By setting this to `true`, feature flag information will automatically be sent with the event.
+The `capture()` method has an optional argument `sendFeatureFlags`, which is set to `false` by default. This parameter controls whether feature flag information is sent with the event.
 
-Note that by doing this, PostHog will make an additional request to fetch feature flag information before capturing the event. So this method is only recommended if you don't mind the extra API call and delay.
+#### Basic usage
+
+Setting `sendFeatureFlags` to `true` will include feature flag information with the event:
 
 ```node
 client.capture({
@@ -9,3 +11,31 @@ client.capture({
     sendFeatureFlags: true,
 })
 ```
+
+#### Advanced usage (v5.5.0+)
+
+As of version 5.5.0, `sendFeatureFlags` can also accept an options object for more granular control:
+
+```node
+client.capture({
+    distinctId: 'distinct_id_of_your_user',
+    event: 'event_name',
+    sendFeatureFlags: {
+        onlyEvaluateLocally: true,
+        personProperties: { plan: 'premium' },
+        groupProperties: { org: { tier: 'enterprise' } }
+    }
+})
+```
+
+#### Performance considerations
+
+- **With local evaluation**: When [local evaluation](/docs/feature-flags/local-evaluation) is configured, setting `sendFeatureFlags: true` will **not** make additional server requests. Instead, it uses the locally cached feature flags, and it provides an interface for including person and/or group properties needed to evaluate the flags in the context of the event, if required.
+
+- **Without local evaluation**: PostHog will make an additional request to fetch feature flag information before capturing the event, which adds delay.
+
+#### Breaking change in v5.5.0
+
+Prior to version 5.5.0, feature flags were automatically sent with events when using local evaluation, even when `sendFeatureFlags` was not explicitly set. This behavior has been **removed** in v5.5.0 to be more predictable and explicit.
+
+If you were relying on this automatic behavior, you must now explicitly set `sendFeatureFlags: true` to continue sending feature flags with your events.

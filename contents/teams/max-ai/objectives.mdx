@@ -1,36 +1,42 @@
-### Q2 2025 objectives
+### Q3 2025 objectives
 
-- ~~50 external users that love the PostHog editor~~
-- $1k ARR from the Max AI
-- Max AI features embedded in 5 PostHog products
+1. Deep research
 
-#### AI product manager platform
+    Complex, multistep reports delivered by Max, **replacing** OpenAI Deep Research for product research:
+    - Report planning, and re-planning
+    - PostHog data access using sub-agents: query creation, session summarization
+    - Web search
+    - Output in the form of notebooks
 
-In the order we'll execute in:
+    Goal: At least a few PostHog users who can't stop using Max Deep Research. A set of real-world-like evaluation cases, passing. Research mode released at a higher price point.
 
-1. Glaring gaps
-    - Internal docs for Max platform
-    - User-facing docs for Max UX
-    - History of conversations
-2. General release
-    - Pricing
-    - Billing
-3. Product analysis trust
-    - New query planning architecture (first plan, then choose insight type)
-    - Evals running on every Max PR
-    - Eval cases regularly added based on real-world failures
-    - Deep research-style reports
-    - Semantic search on existing insights
-    - Property values search in insight creation
-    - Step-by-step onboarding
-    - Replace generated question suggestions with a hand-crafted set
-    - BuildBetter-type product context accessible to Max
-4. Platform missions
-    - Data warehouse
-    - Product analytics
-    - TBD
+2. Session summaries
+    
+    Learnings extracted by an LLM's ability to analyze hundreds of session recordings, including the associated event data:
+    - Max tool (usable by Deep Research)
+    - Session summaries scene UX
+    - Data from more products included
 
-<details>
-<summary>Rough impact matrix</summary>
-<img src="https://res.cloudinary.com/dmukukwp6/image/upload/max_q2_product_manager_3e0d1640e3.png" alt="Platform + AI PM Q2 tasks" />
-</details>
+    Goal: Dozens of retaining active users of session summaries.
+
+3. Universal assistant
+
+    Reliably assist the user across all of PostHog:
+    - Universal filtering API - shared foundation for filtering recordings, events, LLM traces, error tracking issues, and other types of data
+    - Universal search – allow Max to search user-created resources as well, such as insight, feature flags, or experiments
+    - Perform insight and cohort search in query creation
+    - "Create dashboard" tool
+    - Smooth flow of adding insights to dashboards with Max
+    - Prefill memory with web search without interrupting user
+    - Expand existing suites of curated evals
+    - Help the LLM observability team ship valuable automated evals on prod data
+
+    Goal: All the above features shipped. A query quality improvement every week.
+
+4. Max 🤝 other products
+
+    Last but not least, we're here to help other teams easily ship valuable, Max-integrated AI features:
+    - Constantly review RFCs and PRs from other product teams
+    - Build missing Max tooling when it's a blocker
+
+    Goal: PostHog avoids _death by AI widgets_. No team is blocked significantly waiting for Max AI input.
