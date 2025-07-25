@@ -77,6 +77,7 @@ To monitor and stay on top of where accounts are in their ~3-month-long Onboardi
 - `Onboarded (Done)` – They have told us they are happy with PostHog and don't have any issues, or they have paid three bills.
 - `No Engagement` – We haven’t heard back despite our efforts, but they’re still actively using PostHog.
 - `Churned` – Sadly, despite our efforts, we lost the customer.
+- `Sales Handoff` — This customer is being handled by sales. This will automatically get added when the corresponding `Create AE Lead` segment is added, but often it is added when we an account gets tagged for onboarding when they already have an active AE conversation.
 
 **2. Daily view** ([link](https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/d08c5202-bdcd-40b8-aba7-5746c340a35b))
 
