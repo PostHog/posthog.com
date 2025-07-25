@@ -110,6 +110,7 @@ const Bio = ({ biography, readme }) => {
 const Block = ({ title, children, url }) => {
     return (
         <Fieldset
+            className="bg-primary"
             legend={
                 url ? (
                     <Link className="text-red dark:text-yellow font-semibold" to={url}>
