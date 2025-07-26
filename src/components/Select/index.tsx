@@ -76,10 +76,10 @@ export default function Select({
                     </div>
                 </Listbox.Button>
                 {open && (
-                    <div className="absolute z-50 bg-white dark:bg-gray-accent-dark-hover w-full max-h-[247px] overflow-auto shadow-m border rounded-bl-md rounded-br-md border-border dark:border-dark">
+                    <div className="absolute z-50 bg-white w-full max-h-[247px] overflow-auto shadow-m border rounded-bl-md rounded-br-md border-input">
                         {search && (
                             <input
-                                className="w-full p-2 text-primary border-b border-border dark:border-dark sticky top-0"
+                                className="w-full p-2 text-primary border-b border-input sticky top-0"
                                 placeholder="Search..."
                                 value={searchValue}
                                 onChange={(e) => setSearchValue(e.target.value)}
@@ -104,10 +104,10 @@ export default function Select({
                                                 <div
                                                     className={`${
                                                         selected
-                                                            ? 'bg-gray-accent-light text-black dark:bg-gray-accent-dark dark:text-primary-dark'
+                                                            ? 'bg-accent text-primary'
                                                             : active
-                                                            ? 'bg-gray-accent-light/60 dark:bg-gray-accent-dark/60'
-                                                            : 'bg-white text-black hover:bg-gray-accent-light/30 dark:bg-gray-accent-dark-hover dark:hover:bg-gray-accent-dark/30 dark:text-primary-dark'
+                                                            ? 'bg-accent'
+                                                            : 'prose-invert'
                                                     } py-2 px-4 cursor-pointer transition-all text-sm`}
                                                 >
                                                     <div>{option.label || option.value}</div>

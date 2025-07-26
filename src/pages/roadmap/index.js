@@ -1,3 +1,8 @@
+import React from 'react'
 import Roadmap from 'components/Roadmap'
 
-export default Roadmap
+const RoadmapPage = () => {
+    return <Roadmap />
+}
+
+export default RoadmapPage

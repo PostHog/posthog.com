@@ -2,9 +2,9 @@
 title: How Y Combinator used PostHog experiments to boost engagement by 40%
 customer: Y Combinator
 logo: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/ycombinator/logo.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/ycombinator_light_86e121ca81.svg
 logoDark: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/customers/ycombinator/logo_dark.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/ycombinator_dark_926586dfe2.svg
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog_YC_68ed8fa1bb.png
 featuredCustomer: true
@@ -20,6 +20,7 @@ toolsUsed:
   - PostHog Cloud
   - Insights
 date: 2022-10-05
+notes: ""
 ---
 
 Y Combinator is the world’s top startup accelerator, helping to fund, train and nurture the next generation of innovative businesses. Since 2005, thousands of successful companies have emerged from Y Combinator, including Dropbox, Airbnb, PagerDuty, Reddit, Amplitude... and PostHog. 

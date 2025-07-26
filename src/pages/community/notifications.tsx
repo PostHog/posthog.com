@@ -16,7 +16,7 @@ dayjs.extend(isSameOrAfter)
 const Notification = ({ url, title, excerpt, date, count, onDismiss }) => {
     return (
         <li>
-            <div className="relative group active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0 rounded px-2 py-1.5 -mt-1.5 mx-[-2px] -mb-3">
+            <div className="relative group active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0 rounded px-2 py-1.5 -mt-1.5 mx-[-2px] -mb-3">
                 <Link
                     to={url}
                     className={`flex items-center text-inherit hover:text-inherit`}
@@ -45,7 +45,7 @@ const Notification = ({ url, title, excerpt, date, count, onDismiss }) => {
                 </Link>
                 <button
                     onClick={onDismiss}
-                    className="flex-shrink-0 absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-7 border border-border bg-white dark:bg-accent-dark dark:border-dark rounded-full group-hover:flex justify-center items-center hidden"
+                    className="flex-shrink-0 absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 size-7 border border-primary bg-white dark:bg-accent-dark dark:border-dark rounded-full group-hover:flex justify-center items-center hidden"
                 >
                     <Tooltip content="Dismiss" placement="top">
                         <span className="relative">
@@ -107,7 +107,7 @@ export default function Notifications() {
                         })}
                     </ul>
                 ) : (
-                    <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark">
+                    <div className="p-4 bg-accent rounded-md border border-input">
                         <h5 className="m-0">New notifications will appear here</h5>
                     </div>
                 )}

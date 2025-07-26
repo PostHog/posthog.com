@@ -56,7 +56,7 @@ export default function EditWrapper({
         <div>
             {editing ? (
                 <>
-                    <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-md overflow-hidden mb-2">
+                    <div className="bg-white dark:bg-accent-dark border border-primary rounded-md overflow-hidden mb-2">
                         <RichText
                             initialValue={values.body}
                             setFieldValue={setFieldValue}

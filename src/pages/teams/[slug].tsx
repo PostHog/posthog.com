@@ -1,8 +1,10 @@
 import Team from 'components/Team'
 import { companyMenu } from '../../navs'
-import Layout from 'components/Layout'
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
+import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
 
 type TeamPageProps = {
     params: {
@@ -82,18 +84,39 @@ export default function TeamPage(props: TeamPageProps) {
         (node) => node?.fields?.slug === `/teams/${slug}/objectives`
     )?.body
     const team = data?.allSqueakTeam?.nodes?.find((node) => node?.slug === slug)
+
+    const navigate = useNavigate()
+    const location = useLocation()
+    const currentPath = location.pathname.replace('/', '')
+
+    const selectOptions = [
+        {
+            label: 'Company',
+            items: [
+                { value: 'company', label: 'Company', icon: companyMenu.icon },
+                ...companyMenu.children.map((item) => ({
+                    value: item.url?.replace('/', '') || item.name.toLowerCase(),
+                    label: item.name,
+                    icon: item.icon,
+                    color: item.color || undefined,
+                })),
+            ],
+        },
+    ]
+
     return (
-        <Layout
-            parent={companyMenu}
-            activeInternalMenu={companyMenu.children.find((menu) => menu.name.toLowerCase() === 'teams')}
+        <ReaderView
+            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
         >
-            <Team
-                emojis={team?.emojis}
-                roadmaps={team?.roadmaps}
-                objectives={objectives}
-                body={body}
-                slug={slug?.split('/').pop() || ''}
-            />
-        </Layout>
+            {body && (
+                <Team
+                    emojis={team?.emojis}
+                    roadmaps={team?.roadmaps}
+                    objectives={objectives}
+                    body={body}
+                    slug={slug?.split('/').pop() || ''}
+                />
+            )}
+        </ReaderView>
     )
 }

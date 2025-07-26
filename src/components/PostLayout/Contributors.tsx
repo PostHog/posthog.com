@@ -22,7 +22,7 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
     const cloudinaryPublicId = typeof image === 'string' && isCloudinaryImage(image) && getCloudinaryPublicId(image)
     return (
         <div
-            className={`w-[32px] h-[32px] relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
+            className={`relative rounded-full overflow-hidden border-2 border-tan dark:border-primary transition-all ${className}`}
         >
             {typeof image === 'string' ? (
                 cloudinaryPublicId ? (
@@ -31,7 +31,7 @@ export const ContributorImageSmall = ({ image, name, className = '', imgClassNam
                         publicId={cloudinaryPublicId}
                         cloudName={process.env.GATSBY_CLOUDINARY_CLOUD_NAME}
                     >
-                        <Transformation width="50" crop="scale" />
+                        <Transformation width="100" crop="scale" />
                     </Image>
                 ) : (
                     <img className={`rounded-full ${imgClassName}`} src={image} />
@@ -130,7 +130,7 @@ export const Contributor = ({
             {...(url ? { to: url, state } : {})}
             className={`${compact ? 'overflow-hidden' : ''} flex bg-${color ? color : 'accent'} dark:bg-${
                 color ? color : 'accent-dark'
-            } border border-light dark:border-dark md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark ${
+            } border border-primary md:mx-4 rounded relative hover:-translate-y-0.5 active:translate-y-0 hover:transition-all hover:border-b-[4px] active:border-b-1 active:top-[2px] justify-between text-primary dark:text-primary-dark hover:text-primary dark:hover:text-primary-dark ${
                 roundedImage ? 'items-center' : ''
             }`}
         >
@@ -141,7 +141,7 @@ export const Contributor = ({
                     </h3>
                     {role && (
                         <p
-                            className={`text-primary/50 dark:text-primary-dark/50 m-0 leading-tight text-sm line-clamp-1 ${
+                            className={`text-muted m-0 leading-tight text-sm line-clamp-1 ${
                                 compact ? 'text-[13px]' : 'text-sm'
                             }`}
                         >

@@ -1,32 +1,81 @@
+import { graphql } from 'gatsby'
 import React from 'react'
-import Layout from 'components/Layout'
-import { SEO } from 'components/seo'
-import { AboutHero } from 'components/About/AboutHero'
-import { AboutAnchorScrollNavbar } from 'components/About/AboutAnchorScrollNavbar'
-import { AboutStory } from 'components/About/AboutStory'
-import { AboutTransparency } from 'components/About/AboutTransparency'
-import { AboutTeam } from 'components/About/AboutTeam'
-import { AboutInvestors } from 'components/About/AboutInvestors'
-import { AboutBlog } from 'components/About/AboutBlog'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
+import { companyMenu } from '../navs'
+import { YC } from 'components/About/v2/YC'
+import { TLDR } from 'components/About/v2/TLDR'
+import Logo from 'components/Logo'
+import { shortcodes } from '../mdxGlobalComponents'
+import { Blockquote } from 'components/BlockQuote'
+import { MdxCodeBlock } from 'components/CodeBlock'
+import { Heading } from 'components/Heading'
+import { InlineCode } from 'components/InlineCode'
+import { ZoomImage } from 'components/ZoomImage'
+import Link from 'components/Link'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { PRODUCT_COUNT } from '../constants/index'
+import { James, Plus, Tim } from 'components/Signatures'
+import SEO from 'components/seo'
 
-const AboutPage = () => {
+const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
+
+const HappyHog = () => (
+    <img
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/happy_hog_ebc59e4658.png"
+        alt="happy hog"
+        className="float-right max-w-[400px] max-h-48 -mt-2 -mr-2"
+    />
+)
+
+const A = (props: any) => <Link {...props} />
+
+export default function About({ data }: { data: { mdx: { body: string; frontmatter: { title: string } } } }) {
+    const components = {
+        HappyHog,
+        Logo: () => <Logo noText className="inline-block" />,
+        YC,
+        TLDR,
+        James,
+        Tim,
+        Plus,
+        CloudinaryImage,
+        ProductCount,
+        inlineCode: InlineCode,
+        blockquote: Blockquote,
+        pre: MdxCodeBlock,
+        h1: (props: any) => Heading({ as: 'h1', ...props }),
+        h2: (props: any) => Heading({ as: 'h2', ...props }),
+        h3: (props: any) => Heading({ as: 'h3', ...props }),
+        h4: (props: any) => Heading({ as: 'h4', ...props }),
+        h5: (props: any) => Heading({ as: 'h5', ...props }),
+        h6: (props: any) => Heading({ as: 'h6', ...props }),
+        img: ZoomImage,
+        a: A,
+        ...shortcodes,
+    }
+
     return (
-        <Layout>
-            <SEO
-                title="About PostHog"
-                description="PostHog is building the world's first open source Product OS."
-                image={`/images/about.png`}
+        <>
+            <SEO title="About PostHog" description="All about PostHog" image={`/images/og/product-analytics.jpg`} />
+            <ReaderView
+                title={data.mdx.frontmatter.title}
+                body={{ type: 'mdx', content: data.mdx.body }}
+                leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+                mdxComponents={components}
+                proseSize="base"
             />
-
-            <AboutHero />
-            <AboutAnchorScrollNavbar />
-            <AboutStory />
-            <AboutTransparency />
-            <AboutTeam />
-            <AboutInvestors />
-            <AboutBlog />
-        </Layout>
+        </>
     )
 }
 
-export default AboutPage
+export const query = graphql`
+    {
+        mdx(fields: { slug: { eq: "/about" } }) {
+            body
+            frontmatter {
+                title
+            }
+        }
+    }
+`

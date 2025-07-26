@@ -1,8 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useLocation } from '@reach/router'
 import { useStaticQuery, graphql } from 'gatsby'
+import { useApp } from '../context/App'
+import { useWindow } from '../context/Window'
 
 interface SEOProps {
     title: string
@@ -12,6 +13,7 @@ interface SEOProps {
     canonicalUrl?: string
     noindex?: boolean
     imageType?: 'absolute' | 'relative'
+    updateWindowTitle?: boolean
 }
 
 export const SEO = ({
@@ -22,7 +24,10 @@ export const SEO = ({
     canonicalUrl,
     noindex,
     imageType = 'relative',
+    updateWindowTitle = true,
 }: SEOProps): JSX.Element => {
+    const { appWindow } = useWindow()
+    const { setWindowTitle } = useApp()
     const { pathname } = useLocation()
     const { site } = useStaticQuery(query)
 
@@ -38,6 +43,12 @@ export const SEO = ({
                 : `${process.env.GATSBY_DEPLOY_PRIME_URL || siteUrl}${image || defaultImage}`,
         url: `${siteUrl}${pathname}`,
     }
+
+    useEffect(() => {
+        if (updateWindowTitle && seo.title && appWindow) {
+            setWindowTitle(appWindow, seo.title)
+        }
+    }, [seo.title])
 
     return (
         <Helmet title={seo.title} titleTemplate={titleTemplate}>
@@ -63,20 +74,6 @@ export const SEO = ({
 }
 
 export default SEO
-
-SEO.propTypes = {
-    title: PropTypes.string,
-    description: PropTypes.string,
-    image: PropTypes.string,
-    article: PropTypes.bool,
-}
-
-SEO.defaultProps = {
-    title: null,
-    description: null,
-    image: null,
-    article: false,
-}
 
 const query = graphql`
     query SEO {

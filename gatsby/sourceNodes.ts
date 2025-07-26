@@ -429,6 +429,7 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                         nodes {
                           value
                           key
+                          namespace
                         }
                       }
                       options {
@@ -449,6 +450,13 @@ export const sourceNodes: GatsbyNode['sourceNodes'] = async ({ actions, createCo
                       title
                       tags
                       totalInventory
+                      createdAt
+                      category {
+                        id
+                        name
+                        level
+                        parentId
+                      }
                     }
                   }
                 }

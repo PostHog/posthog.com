@@ -149,7 +149,7 @@ const Integrations: React.FC<IntegrationsProps> = () => {
                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/product-analytics-hog.png"
                 />
                 <h1 className="text-4xl mt-0 mb-2">Framework guides</h1>
-                <h3 className="text-lg font-semibold text-primary/60 dark:text-primary-dark/75 leading-tight">
+                <h3 className="text-lg font-semibold text-secondary leading-tight">
                     PostHog works with most popular web frameworks and services.
                 </h3>
 

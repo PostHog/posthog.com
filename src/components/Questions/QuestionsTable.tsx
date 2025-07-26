@@ -36,15 +36,15 @@ export const Skeleton = () => {
             <div className="col-span-12 md:col-span-7 2xl:col-span-8 flex items-center space-x-4">
                 <div className="w-5 flex-shrink-0" />
                 <div className="w-full space-y-1">
-                    <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md w-2/3" />
-                    <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md" />
+                    <div className="animate-pulse bg-accent h-[18px] rounded-md w-2/3" />
+                    <div className="animate-pulse bg-accent h-[18px] rounded-md" />
                 </div>
             </div>
             <div className="hidden md:flex md:col-span-2 2xl:col-span-1 items-start justify-center h-full">
-                <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md w-[18px]" />
+                <div className="animate-pulse bg-accent h-[18px] rounded-md w-[18px]" />
             </div>
             <div className="hidden md:flex md:col-span-2 2xl:col-span-1 items-start justify-center h-full">
-                <div className="animate-pulse bg-accent dark:bg-accent-dark h-[18px] rounded-md w-full" />
+                <div className="animate-pulse bg-accent h-[18px] rounded-md w-full" />
             </div>
         </div>
     )
@@ -136,14 +136,14 @@ const Row = ({
             <Link
                 state={currentPage && { previous: currentPage }}
                 to={`/questions/${permalink}`}
-                className={`${className} group flex items-center relative px-2 py-1.5 -mt-1.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
+                className={`${className} group flex items-center relative px-2 py-1.5 -mt-1.5 mx-[-2px] -mb-3 rounded active:bg-light dark:active:bg-dark border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all active:before:h-[2px] active:before:bg-light dark:active:before:bg-dark active:before:absolute active:before:content-[''] active:before:top-[-3px] active:before:left-0 active:before:right-0`}
             >
                 <div className="grid grid-cols-12 items-center w-full">
                     <div className="col-span-12 md:col-span-7 2xl:col-span-8 flex items-center space-x-4">
                         <div className="w-5 flex-shrink-0">
                             {pinned ? (
                                 <Tooltip content="Pinned">
-                                    <span className="relative text-primary/60 dark:text-primary-dark/60">
+                                    <span className="relative text-secondary">
                                         <IconPin />
                                     </span>
                                 </Tooltip>
@@ -190,13 +190,13 @@ const Row = ({
                         </div>
                     </div>
                     <div
-                        className={`hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-primary/60 dark:text-primary-dark/60 ${
+                        className={`hidden md:block md:col-span-2 2xl:col-span-1 text-center text-sm font-normal text-secondary ${
                             hasNewReplies ? 'font-bold !text-red dark:!text-yellow' : ''
                         }`}
                     >
                         {numReplies}
                     </div>
-                    <div className="hidden md:block md:col-span-3 text-sm font-normal text-primary/60 dark:text-primary-dark/60">
+                    <div className="hidden md:block md:col-span-3 text-sm font-normal text-secondary">
                         <div className="text-primary dark:text-primary-dark font-medium opacity-60 line-clamp-2">
                             {dayjs(sortBy === 'activity' ? activeAt : createdAt).fromNow()} by{' '}
                             {profile.data?.attributes?.firstName} {profile.data?.attributes?.lastName} {}
@@ -226,7 +226,7 @@ export const QuestionsTable = ({
     const questionsFiltered = questions.data.length > 0 && questions.data.filter(Boolean)
     return (
         <ul className="m-0 p-0 list-none">
-            <li className="grid grid-cols-12 pl-2 pr-3 py-1.5 items-center text-primary/75 dark:text-primary-dark/75 !text-sm bg-accent dark:bg-accent-dark rounded">
+            <li className="grid grid-cols-12 pl-2 pr-3 py-1.5 items-center text-secondary !text-sm bg-accent rounded">
                 <div className="col-span-12 xl:col-span-7 2xl:col-span-8 pl-8">Question / Topic</div>
                 <div className="hidden xl:block xl:col-span-2 2xl:col-span-1 text-center">Replies</div>
                 <div className="hidden xl:block xl:col-span-3">{sortBy === 'activity' ? 'Last active' : 'Created'}</div>
@@ -254,7 +254,7 @@ export const QuestionsTable = ({
             {questionsFiltered
                 ? questionsFiltered.map((question, index) => {
                       return (
-                          <li key={question.id} className="list-none px-[2px] divide-y divide-light dark:divide-dark">
+                          <li key={question.id} className="list-none px-[2px] divide-y divide-primary">
                               <Row
                                   showStatus={showStatus}
                                   className={className}

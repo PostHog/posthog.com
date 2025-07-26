@@ -6,6 +6,7 @@ import { ZoomImage } from 'components/ZoomImage'
 import { TransformImage } from 'react-markdown/lib/ast-to-react'
 import remarkGfm from 'remark-gfm'
 import { cn } from '../../../utils'
+import Link from 'components/Link'
 
 const replaceMentions = (body: string) => {
     return body.replace(/@([a-zA-Z0-9-]+\/[0-9]+|max)/g, (match, username) => {
@@ -36,7 +37,7 @@ export const Markdown = ({
             transformImageUri={transformImageUri}
             rehypePlugins={[rehypeSanitize]}
             className={cn(
-                'flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 text-primary/75 dark:text-primary-dark/75 font-normal [&_p:last-child]:mb-0',
+                'flex-1 !text-sm overflow-hidden text-ellipsis !pb-0 mr-1 font-normal [&_p:last-child]:mb-0',
                 !regularText && 'question-content community-post-markdown',
                 className
             )}
@@ -68,7 +69,7 @@ export const Markdown = ({
                     return <code {...props} className="break-all inline-block" />
                 },
                 a: ({ node, ...props }) => {
-                    return <a rel="nofollow" {...props} />
+                    return <Link rel="nofollow noopener noreferrer" {...props} state={{ newWindow: true }} />
                 },
                 img: ZoomImage,
             }}

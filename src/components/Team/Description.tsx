@@ -18,7 +18,7 @@ export default function Description({
             onChange={handleChange}
             placeholder="Description"
             value={values.description}
-            className="w-full p-2 text-[15px] rounded-md bg-white dark:bg-accent-dark border border-border dark:border-dark mb-2 resize-none"
+            className="w-full p-2 text-[15px] rounded-md bg-white dark:bg-accent-dark border border-input mb-2 resize-none"
         />
     ) : description ? (
         <p className="my-2 md:mb-4 text-[15px]" dangerouslySetInnerHTML={{ __html: description }} />

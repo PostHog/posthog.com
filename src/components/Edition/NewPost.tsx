@@ -17,18 +17,18 @@ const CategoryDropdown = ({ category, categories, onChange }) => {
     return (
         <div className="relative">
             <Listbox value={category} onChange={onChange}>
-                <Listbox.Button className="font-bold flex justify-between space-x-2 items-center px-4 py-2 rounded-md border border-light dark:border-dark w-full text-left bg-white dark:bg-accent-dark">
+                <Listbox.Button className="font-bold flex justify-between space-x-2 items-center px-4 py-2 rounded-md border border-primary w-full text-left bg-white dark:bg-accent-dark">
                     <span>{category?.attributes?.label || 'Select a category'}</span>
                     <IconChevronDown className="w-7" />
                 </Listbox.Button>
-                <Listbox.Options className="absolute mt-1 z-10 bg-white dark:bg-accent-dark list-none m-0 p-0 w-full border border-light dark:border-dark rounded-md divide-y divide-border dark:divide-border-dark">
+                <Listbox.Options className="absolute mt-1 z-10 bg-white dark:bg-accent-dark list-none m-0 p-0 w-full border border-primary rounded-md divide-y divide-border dark:divide-border-dark">
                     {categories.map((category) => (
                         <Listbox.Option key={category.id} value={category}>
                             {({ active }) => {
                                 return (
                                     <span
-                                        className={`inline-block w-full px-4 py-2 cursor-pointer text-sm hover:bg-accent/50 dark:hover:bg-gray-dark/30 ${
-                                            active ? 'bg-accent/80 dark:bg-dark/80' : ''
+                                        className={`inline-block w-full px-4 py-2 cursor-pointer text-sm hover:bg-accent ${
+                                            active ? 'font-bold' : ''
                                         }`}
                                     >
                                         {category.attributes.label}
@@ -149,11 +149,11 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
                     onChange={(e) => setFieldValue('title', e.target.value)}
                     placeholder="Title"
                     value={values.title}
-                    className="px-4 py-2 border border-border dark:border-dark rounded-md w-full mt-2 dark:bg-accent-dark"
+                    className="px-4 py-2 border border-input rounded-md w-full mt-2 dark:bg-accent-dark"
                 />
                 {errors.title && touched.title && <ErrorMessage>{errors.title}</ErrorMessage>}
 
-                <div className="bg-white dark:bg-accent-dark mt-2 border border-border dark:border-dark rounded-md overflow-hidden">
+                <div className="bg-white dark:bg-accent-dark mt-2 border border-input rounded-md overflow-hidden">
                     <RichText
                         preview={false}
                         initialValue={initialValues.body}
@@ -177,7 +177,7 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
                                                 : [...values.tags, tag]
                                             setFieldValue('tags', newTags)
                                         }}
-                                        className={`rounded-full p-2 border border-border dark:border-dark whitespace-nowrap text-sm ${
+                                        className={`rounded-full p-2 border border-input whitespace-nowrap text-sm ${
                                             active ? 'bg-white dark:bg-black  font-bold' : ''
                                         }`}
                                         key={tag.id}
@@ -194,7 +194,7 @@ export default function NewPost({ id, onSubmit, ...other }: { id?: number; onSub
                     {id ? 'Update' : 'Post'}
                 </CallToAction>
             </form>
-            <div className="pl-8 ml-8 border-l border-border dark:border-dark py-12 h-full">
+            <div className="pl-8 ml-8 border-l border-input py-12 h-full">
                 <Post
                     transformImageUri={(fakeImagePath) => {
                         const objectURL = values.images.find(

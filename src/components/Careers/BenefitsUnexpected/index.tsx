@@ -40,7 +40,7 @@ const BenefitsUnexpected: React.FC = () => {
                     </div>
                 </aside>
                 <div className="order-1 md:order-2 relative">
-                    <h3 className="text-4xl mb-1">
+                    <h3 className="mb-1">
                         <span className="text-red dark:text-yellow">Two meeting-free days</span> per week
                     </h3>
                     <p className="max-w-lg mb-3">
@@ -69,7 +69,7 @@ const BenefitsUnexpected: React.FC = () => {
 
             <div className="grid md:grid-cols-2 items-start lg:items-center gap-4 md:gap-8 lg:gap-12">
                 <div className="relative">
-                    <h3 className="text-4xl mb-1">
+                    <h3 className="mb-1">
                         Company off-sites <span className="text-red dark:text-yellow">in exotic locations</span>
                     </h3>
                     <p className="max-w-lg mb-3">
@@ -78,7 +78,7 @@ const BenefitsUnexpected: React.FC = () => {
                     </p>
 
                     <p className="font-bold text-[15px] mb-1">Off-site history:</p>
-                    <div className="grid md:inline-grid grid-cols-2 min-w-72 divide-y divide-light dark:divide-dark text-sm [&_*]:py-1 md[&_*]:py-0.5">
+                    <div className="grid md:inline-grid grid-cols-2 min-w-72 divide-y divide-primary text-sm [&_*]:py-1 md[&_*]:py-0.5">
                         <strong>Year</strong>
                         <strong className="!border-t-0">Location</strong>
                         <div>2020</div>
@@ -92,10 +92,10 @@ const BenefitsUnexpected: React.FC = () => {
                         <div>2024</div>
                         <div>Mykonos</div>
                         <div>2025</div>
-                        <div>Mexico</div>
+                        <div>Tulum</div>
                         <div>2026</div>
                         <div>
-                            <span className="inline-block bg-border dark:bg-border-dark rounded-[2px] text-sm w-16 h-[16px] relative top-[2px]"></span>
+                            <span className="inline-block bg-accent rounded-[2px] text-sm w-16 h-[16px] relative top-[2px]"></span>
                         </div>
                     </div>
                 </div>
@@ -127,12 +127,12 @@ const BenefitsUnexpected: React.FC = () => {
                             >
                                 Dope Roasting Co.
                             </Link>{' '}
-                            in Athens, Greece – a great place to build pages like this
+                            in Athens, Greece – <em>was</em> a great place to build pages like this (RIP)
                         </div>
                     </div>
                 </aside>
                 <div className="order-1 md:order-2 relative">
-                    <h3 className="text-4xl mb-1">Monthly co-working or café credit</h3>
+                    <h3 className="mb-1">Monthly co-working or café credit</h3>
                     <p className="max-w-lg mb-3">
                         Use $300/mo toward a co-working space or coffee shops if that's where you do your best work.
                         Charge it to your company card – everyone gets one.
@@ -142,7 +142,7 @@ const BenefitsUnexpected: React.FC = () => {
 
             <div className="grid md:grid-cols-2 items-start lg:items-center md:gap-8 lg:gap-12">
                 <div className="relative">
-                    <h3 className="text-4xl mb-1">
+                    <h3 className="mb-1">
                         <span className="text-red dark:text-yellow">Small team</span> off-sites
                     </h3>
                     <p className="max-w-lg mb-3">
@@ -180,7 +180,7 @@ const BenefitsUnexpected: React.FC = () => {
                     </div>
                 </aside>
                 <div className="relative order-1 md:order-2">
-                    <h3 className="text-4xl mb-1">
+                    <h3 className="mb-1">
                         Access to the <span className="text-red dark:text-yellow">Hedge House</span>
                     </h3>
                     <p className="max-w-lg mb-3">
@@ -191,7 +191,7 @@ const BenefitsUnexpected: React.FC = () => {
 
             <div className="grid md:grid-cols-2 md:items-center gap-4 md:gap-8 lg:gap-12">
                 <div className="relative">
-                    <h3 className="text-4xl mb-1">Local meetup budget</h3>
+                    <h3 className="mb-1">Local meetup budget</h3>
                     <p className="max-w-lg mb-3">
                         You're encouraged to meet up with other team members who you don't work with on a regular basis
                         with a generous quarterly budget.

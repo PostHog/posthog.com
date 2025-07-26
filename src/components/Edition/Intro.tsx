@@ -4,7 +4,7 @@ import { PostsContext } from './Posts'
 
 const Founders = () => {
     return (
-        <div className="bg-accent dark:bg-accent-dark px-6 py-4 mt-8 md:mt-0 rounded border border-light dark:border-dark">
+        <div className="bg-accent px-6 py-4 mt-8 md:mt-0 rounded border border-primary">
             <h2 className="text-lg mb-2">Welcome to our founder's hub</h2>
             <p className="text-sm">
                 We've curated the best advice in all the major disciplines you need to build a successful company – and

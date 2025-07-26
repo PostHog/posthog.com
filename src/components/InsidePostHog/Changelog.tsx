@@ -36,7 +36,7 @@ export default function Changelog() {
                     const imageURL = image?.data?.attributes?.formats?.small?.url
 
                     return (
-                        <li key={squeakId} className="border-t border-light dark:border-dark first:border-t-0 pt-4">
+                        <li key={squeakId} className="border-t border-primary first:border-t-0 pt-4">
                             <Link
                                 className="grid md:grid-cols-8 gap-x-4 items-center text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark"
                                 to={`/changelog/${dayjs(dateCompleted).year()}#${slugify(title, { lower: true })}`}

@@ -3,8 +3,9 @@ import Link from 'components/Link'
 import Tooltip from 'components/Tooltip'
 import React, { useState } from 'react'
 import { CTA as PlanCTA } from '../Plans'
-import { section, SectionHeader } from './Sections'
+import { section, SectionHeader, SectionLayout } from './Sections'
 import { BillingV2PlanType } from 'types'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 interface PlanData {
     title: string
@@ -23,18 +24,18 @@ interface PlanData {
 const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
     return (
         <>
-            <div className="flex flex-col h-full border border-light dark:border-dark bg-white dark:bg-accent-dark rounded-md relative">
+            <div className="not-prose flex-1 flex flex-col h-full border border-primary bg-white dark:bg-accent-dark rounded-md relative">
                 {planData.title === 'Free' && (
-                    <div className="absolute -top-6 right-4 !border-2 border-yellow bg-white dark:bg-dark rounded-sm text-center py-1 px-2">
+                    <div className="absolute -top-6 right-4 !border-2 border-yellow bg-light dark:bg-dark rounded-sm text-center py-1 px-2">
                         <strong className="block text-yellow text-sm">Just pick this one!</strong>
                         <p className="text-xs mb-0 text-opacity-75">You can upgrade later.</p>
                     </div>
                 )}
                 <div className="flex flex-col h-full gap-4 pt-3 px-4 xl:px-4 pb-6">
                     <div>
-                        <h4 className="text-lg mb-0">
+                        <h3 className="text-xl my-0">
                             <em>{planData.title}</em>
-                        </h4>
+                        </h3>
                         <p className="text-[15px] mb-0 opacity-70">{planData.subtitle}</p>
                     </div>
                     <div>
@@ -54,7 +55,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
                                 <IconCheck className="size-5 text-green absolute top-0 left-0" />
                                 <strong>{feature.name}</strong>
                                 {feature.description && (
-                                    <p className="mb-0 opacity-70 text-sm">{feature.description}</p>
+                                    <p className="my-0 opacity-70 text-sm">{feature.description}</p>
                                 )}
                             </li>
                         ))}
@@ -132,9 +133,9 @@ const planSummary = [
 
 const AllPlansInclude = () => {
     return (
-        <div className="inline-flex lg:inline-flex w-full flex-col md:flex-row lg:flex-col md:gap-12 lg:gap-4 lg:pl-6">
-            <p className="font-bold text-[15px] lg:mt-4 mb-2 lg:mb-0">All plans include:</p>
-            <ul className="flex-1 list-none pl-0 xs:grid grid-cols-2 lg:flex gap-x-4 xs:gap-x-2 md:gap-x-6 lg:gap-x-4 gap-y-2 lg:gap-1 lg:flex-col">
+        <div className="@container w-full text-primary">
+            <p className="font-bold text-[15px] mb-2">All plans include:</p>
+            <ul className="prose grid @xl:grid-cols-2 gap-x-4">
                 <li className="flex gap-1 items-start text-[15px]">
                     <IconCheck className="w-5 h-5 text-green relative top-0.5" />
                     Unlimited team members
@@ -171,39 +172,40 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
 
     return (
         <>
-            <section id="plans" className={`${section} mt-8 !mb-12 md:px-4`}>
+            <SectionLayout id="plans" className={`mt-8 !mb-12`}>
                 <SectionHeader>
-                    <h3>Compare plans</h3>
+                    <h2>Compare plans</h2>
                 </SectionHeader>
-                <div className="mt-4 -mx-4 lg:mx-0 px-4 lg:px-0 mb-4 lg:mb-0 overflow-x-auto">
-                    <div className="pt-6 pb-2">
-                        <div
-                            className={`grid grid-cols-[repeat(3,_minmax(300px,_1fr))] md:grid-cols-[repeat(3,_minmax(300px,_1fr))_1fr] gap-4 mb-4 ${
-                                highlight === 'free'
-                                    ? '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
-                                    : '[&>*:nth-child(3)_>div]:border-yellow [&>*:nth-child(3)_>div]:border-3'
-                            }`}
-                        >
-                            <div className="hidden lg:block col-span-3 md:col-span-1">
-                                <AllPlansInclude />
-                                <div className="md:gap-12 xl:pl-6 mt-6">
-                                    <p className="font-bold text-[15px] xl:mt-4 mb-2">
-                                        Looking for features for larger teams?
-                                    </p>
-                                    <Link to="/platform-addons">Check out our platform add-ons.</Link>
+                <div className="mt-4 -mx-4 @2xl:-mx-6 @5xl:mx-0 px-4 @5xl:px-0 mb-4 @5xl:mb-0">
+                    <ScrollArea>
+                        <div className="pt-6 pb-2">
+                            <div
+                                className={`flex flex-wrap @4xl:grid grid-cols-[repeat(2,1fr)__minmax(200px,_400px)] gap-4 @4xl:gap-8 mb-4 ${
+                                    highlight === 'free'
+                                        ? '[&>*:nth-child(1)_>div]:border-yellow [&>*:nth-child(1)_>div]:border-3'
+                                        : '[&>*:nth-child(2)_>div]:border-yellow [&>*:nth-child(2)_>div]:border-3'
+                                }`}
+                            >
+                                {planSummary.map((plan, index) => (
+                                    <Plan key={index} planData={plan} />
+                                ))}
+                                <div className="flex-[1_0_100%] max-w-2xl mx-auto @4xl:mx-4">
+                                    <AllPlansInclude />
+                                    <div className="mt-6">
+                                        <p className="font-bold text-[15px] xl:mt-4 mb-2">
+                                            Looking for features for larger teams?{' '}
+                                            <Link to="/platform-addons">Check out our platform add-ons.</Link>
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                            {planSummary.map((plan, index) => (
-                                <Plan key={index} planData={plan} />
-                            ))}
-                            <div className="col-span-0 sm:col-span-1 hidden lg:block"></div>
                         </div>
-                    </div>
+                    </ScrollArea>
                 </div>
                 <div className="lg:hidden mb-8">
                     <AllPlansInclude />
                     <div className="md:gap-12 xl:pl-6 mt-6">
-                        <p className="font-bold text-[15px] xl:mt-4 mb-2">Looking for features for larger teams?</p>
+                        <p className="text-[15px] xl:mt-4 mb-2">Looking for features for larger teams?</p>
                         <Link to="/platform-addons">Check out our platform add-ons.</Link>
                     </div>
                 </div>
@@ -227,27 +229,23 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                 <div
                     className={`${
                         isPlanComparisonVisible
-                            ? 'visible max-h-full opacity-1 mb-12 mt-2 md:px-4'
+                            ? 'visible max-h-full opacity-1 mb-12 mt-2 @3xl:px-4'
                             : 'overflow-y-hidden invisible max-h-0 opacity-0'
                     } transition duration-500 ease-in-out transform`}
                 >
                     <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
-                        <div className="grid grid-cols-12 sm:grid-cols-16 mb-1 min-w-[1000px]">
+                        <div className="grid grid-cols-12 mb-1 min-w-min not-prose">
                             <div className="col-span-4 px-3 py-1">&nbsp;</div>
                             {mainPlans.map((plan: BillingV2PlanType) => (
                                 <div className="col-span-4 px-3 py-1" key={plan.key}>
                                     <strong className="text-sm opacity-75">{plan.name}</strong>
                                 </div>
                             ))}
-                            <div
-                                key="empty-cell-plan-names"
-                                className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell"
-                            ></div>
                         </div>
 
-                        <div className="grid grid-cols-12 sm:grid-cols-16 mb-2 border-l border-light dark:border-dark bg-white dark:bg-accent-dark [&>div]:border-t [&>div]:border-light dark:[&>div]:border-dark min-w-[1000px]">
-                            <div className="col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm">
-                                <strong className="text-primary/75 dark:text-primary-dark/75">Base price</strong>
+                        <div className="grid grid-cols-12 mb-2 border-l border-primary bg-white dark:bg-dark [&>div]:border-t [&>div]:border-primary min-w-min">
+                            <div data-scheme="secondary" className="col-span-4 bg-primary px-3 py-2 text-sm">
+                                <strong className="text-primary">Base price</strong>
                             </div>
                             {/* Header */}
                             {mainPlans.map((plan: BillingV2PlanType, idx: number) => {
@@ -256,7 +254,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 return (
                                     <div
                                         className={`main col-span-4 px-3 py-2 text-sm${
-                                            isLast ? ' border-r border-light dark:border-dark' : ''
+                                            isLast ? ' border-r border-primary' : ''
                                         }`}
                                         key={`${plan.key}-base-price`}
                                     >
@@ -272,31 +270,26 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                     </div>
                                 )
                             })}
-                            <div
-                                key="empty-cell-header"
-                                className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell bg-[#eeefe9] dark:bg-[#1d1f27] !border-none"
-                            ></div>
                             {/* Rows */}
                             {highestPlanFeatures.map((feature: BillingV2FeatureType, idx_outer: number) => (
                                 <>
                                     {/* Feature names */}
                                     <div
-                                        className={`col-span-4 bg-accent/50 dark:bg-black/75 px-3 py-2 text-sm ${
+                                        data-scheme="secondary"
+                                        className={`col-span-4 bg-primary px-3 py-2 text-sm ${
                                             idx_outer === highestPlanFeatures?.length - 1
-                                                ? 'border-b border-light dark:border-dark'
+                                                ? 'border-b border-primary'
                                                 : ''
                                         }`}
                                     >
                                         {feature.description ? (
                                             <Tooltip content={feature.description}>
-                                                <strong className="border-b border-dashed border-light dark:border-dark cursor-help text-primary/75 dark:text-primary-dark/75">
+                                                <strong className="border-b border-dashed border-primary cursor-help text-primary">
                                                     {feature.name}
                                                 </strong>
                                             </Tooltip>
                                         ) : (
-                                            <strong className="text-primary/75 dark:text-primary-dark/75">
-                                                {feature.name}
-                                            </strong>
+                                            <strong className="text-primary">{feature.name}</strong>
                                         )}
                                     </div>
                                     {/* Feature values */}
@@ -307,8 +300,8 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                         return (
                                             <div
                                                 className={`inside col-span-4 px-3 py-2 text-sm ${
-                                                    isLastColumn ? 'border-r border-light dark:border-dark' : ''
-                                                } ${isLastRow ? 'border-b border-light dark:border-dark' : ''}`}
+                                                    isLastColumn ? 'border-r border-primary' : ''
+                                                } ${isLastRow ? 'border-b border-primary' : ''}`}
                                                 key={`${plan.key}-${feature.key}`}
                                             >
                                                 {planFeature ? (
@@ -330,20 +323,16 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                             </div>
                                         )
                                     })}
-                                    <div
-                                        key={`empty-cell-${feature.key}`}
-                                        className="col-span-0 sm:col-span-4 hidden sm:block px-3 py-2 text-sm empty-cell bg-[#eeefe9] dark:bg-[#1d1f27] !border-none"
-                                    ></div>
                                 </>
                             ))}
                         </div>
                     </div>
-                    <div className="border border-light dark:border-dark bg-accent dark:bg-accent-dark px-4 py-3 mt-2 mb-4 rounded">
-                        <p className="mb-2 text-[15px]">
+                    <div className="border border-primary bg-accent px-4 mt-2 mb-4 rounded">
+                        <p className="">
                             The table above compares <span className="bg-yellow/25 p-0.5">platform features</span>{' '}
                             between plans.
                         </p>
-                        <p className="mb-0 text-[15px]">
+                        <p className="">
                             <strong>
                                 Looking to compare <span className="bg-yellow/25 p-0.5">product features</span>{' '}
                                 availability?
@@ -357,7 +346,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                         </p>
                     </div>
                 </div>
-            </section>
+            </SectionLayout>
         </>
     )
 }

@@ -14,8 +14,8 @@ export const Feature = ({ title, description, image, background, border, fade }:
         <li className="text-center">
             <div
                 className={`mb-2 w-full ${background || (border && 'rounded overflow-hidden')} ${
-                    background && 'bg-accent dark:bg-accent-dark'
-                } ${border && 'border border-light dark:border-dark'} ${
+                    background && 'bg-accent'
+                } ${border && 'border border-primary'} ${
                     fade &&
                     'relative after:absolute after:w-full after:h-24 after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10'
                 }`}

@@ -30,31 +30,26 @@ export default function Header({
     loading: boolean
 }): JSX.Element {
     return (
-        <Section className="mb-6">
+        <div className="my-6">
             <div className="flex flex-col md:flex-row space-x-4 items-center">
-                {loading ? (
-                    <div className="size-[300px] bg-accent dark:bg-accent-dark rounded" />
-                ) : (
-                    <Crest teamName={teamName} editing={editing} setFieldValue={setFieldValue} values={values} />
-                )}
-                <div className="max-w-xl w-full">
+                <div className="flex-1">
                     <Link
                         to="/teams"
-                        className="-ml-2 mb-1 inline-flex items-center gap-1 text-sm text-primary/50 dark:text-primary-dark/50 hover:text-primary dark:hover:text-primary-dark relative px-2 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                        className="-ml-2 mb-1 inline-flex items-center gap-1 text-sm text-muted hover:text-primary relative px-2 pt-1.5 pb-1 rounded hover:bg-primary border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                     >
                         <IconArrowLeft className="size-5" />
                         <span>Teams</span>
                     </Link>
                     {loading ? (
-                        <div className="h-8 w-full bg-accent dark:bg-accent-dark rounded" />
+                        <div className="h-8 w-full bg-accent rounded" />
                     ) : (
                         <TeamName teamName={teamName} handleChange={handleChange} values={values} editing={editing} />
                     )}
                     {loading ? (
                         <div className="flex flex-col gap-2">
-                            <div className="h-4 w-full bg-accent dark:bg-accent-dark rounded" />
-                            <div className="h-4 w-full bg-accent dark:bg-accent-dark rounded" />
-                            <div className="h-4 w-2/3 bg-accent dark:bg-accent-dark rounded" />
+                            <div className="h-4 w-full bg-accent rounded" />
+                            <div className="h-4 w-full bg-accent rounded" />
+                            <div className="h-4 w-2/3 bg-accent rounded" />
                         </div>
                     ) : (
                         <Description
@@ -70,12 +65,13 @@ export default function Header({
                         </CallToAction>
                     )}
                 </div>
+
                 {loading ? (
-                    <div className="max-w-sm w-full aspect-video bg-accent dark:bg-accent-dark rounded rotate-2" />
+                    <div className="size-[300px] bg-accent rounded" />
                 ) : (
-                    <TeamImage values={values} setFieldValue={setFieldValue} teamImage={teamImage} editing={editing} />
+                    <Crest teamName={teamName} editing={editing} setFieldValue={setFieldValue} values={values} />
                 )}
             </div>
-        </Section>
+        </div>
     )
 }

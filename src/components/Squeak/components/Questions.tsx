@@ -15,6 +15,7 @@ type QuestionsProps = {
     subject?: boolean
     initialView?: string
     disclaimer?: boolean
+    autoFocus?: boolean
 }
 
 export const Questions = ({
@@ -29,6 +30,7 @@ export const Questions = ({
     subject,
     initialView,
     disclaimer,
+    autoFocus,
 }: QuestionsProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
@@ -58,6 +60,7 @@ export const Questions = ({
             {/* TODO: Pass refresh for now questions */}
             {showForm && (
                 <QuestionForm
+                    autoFocus={autoFocus}
                     buttonText={buttonText}
                     parentName={parentName}
                     initialView={initialView}

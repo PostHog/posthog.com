@@ -9,8 +9,10 @@ export default function WizardCommand() {
 
     const languageOption = { language: 'bash', code }
     return (
-        <CodeBlock currentLanguage={languageOption} showLabel={true} showCopy={true}>
-            {[languageOption]}
-        </CodeBlock>
+        <div data-scheme="primary">
+            <CodeBlock currentLanguage={languageOption} showLabel={true} showCopy={true}>
+                {[languageOption]}
+            </CodeBlock>
+        </div>
     )
 }
