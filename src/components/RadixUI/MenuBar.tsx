@@ -29,14 +29,14 @@ const RootClasses = 'flex gap-px py-0.5 h-full'
 const TriggerClasses =
     'group flex select-none items-center justify-between gap-0.5 rounded px-1.5 py-0.5 text-[13px] leading-none text-primary outline-none data-[highlighted]:bg-accent hover:bg-accent-2 data-[state=open]:bg-accent'
 const ItemClasses =
-    'hover-invert group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary hover:bg-primary outline-none data-[disabled]:pointer-events-none data-[state=open]:bg-accent data-[highlighted]:bg-input-bg data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-secondary'
+    'hover-invert group relative flex h-[25px] select-none justify-between items-center rounded text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted'
 const SubTriggerClasses =
-    ' group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary outline-none data-[disabled]:pointer-events-none hover:bg-secondary hover:text-light data-[state=open]:bg-secondary data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-light data-[highlighted]:data-[state=open]:bg-secondary data-[highlighted]:bg-text-secondary data-[state=open]:text-light'
+    'hover-invert group relative flex h-[25px] select-none items-center rounded px-2.5 text-[13px] leading-none text-primary bg-primary outline-none data-[disabled]:pointer-events-none data-[disabled]:text-muted'
 const ContentClasses =
     'bg-primary min-w-[220px] rounded-md p-[5px] shadow-[0px_10px_38px_-10px_rgba(22,_23,_24,_0.35),_0px_10px_20px_-15px_rgba(22,_23,_24,_0.2)] will-change-[transform,opacity] [animation-duration:_400ms] [animation-timing-function:_cubic-bezier(0.16,_1,_0.3,_1)]'
 const SeparatorClasses = 'm-[5px] h-px bg-border'
 const ShortcutClasses =
-    'ml-auto pl-5 group-hover:text-light group-data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-light group-data-[highlighted]:text-light'
+    'ml-auto pl-5 group-hover:text-secondary group-data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-secondary group-data-[highlighted]:text-secondary'
 
 // Helper to generate stable IDs
 const generateStableId = (baseId: string, ...parts: (string | number)[]): string => {
