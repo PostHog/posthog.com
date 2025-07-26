@@ -361,6 +361,7 @@ const Menu = () => {
                     )
                     setActiveInternalMenu(selectedMenu)
                 }}
+                dataScheme="primary"
             />
             <TreeMenu key={activeInternalMenu?.url} items={activeInternalMenu?.children} />
         </>
