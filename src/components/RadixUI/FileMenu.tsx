@@ -3,7 +3,7 @@ import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import * as Icons from '@posthog/icons'
 import { IMenu } from 'components/PostLayout/types'
-import { navigate } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 import { useApp } from '../../context/App'
 
 // --- Data Structure ---
@@ -176,9 +176,14 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
                         <h3 className="text-lg font-semibold text-primary dark:text-primary-dark mb-2">
                             {lastSelectedItem.name}
                         </h3>
-                        <p className="text-sm text-secondary dark:text-secondary-dark">
+                        <p className="text-sm text-secondary dark:text-secondary-dark mb-2">
                             Type: {lastSelectedItem.children ? 'folder' : 'file'}
                         </p>
+                        {!compact && lastSelectedItem.url && (
+                            <Link className="text-sm text-red dark:text-yellow font-semibold" to={lastSelectedItem.url}>
+                                Visit
+                            </Link>
+                        )}
                         {/* Add more file details here */}
                     </div>
                 )}
