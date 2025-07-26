@@ -95,7 +95,7 @@ export default function TaskBarMenu() {
                                     alt=""
                                 />
                                 {notifications?.length > 0 && (
-                                    <span className="absolute top-4 -right-1 size-2.5 bg-red border border-accent rounded-full" />
+                                    <span className="absolute top-4 -right-1 size-2.5 bg-red border border-bg-primary rounded-full" />
                                 )}
                             </div>
                         </>
@@ -211,7 +211,7 @@ export default function TaskBarMenu() {
                 className="w-full bg-accent/75 skin-classic:bg-accent backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
             >
                 <MenuBar menus={menuData} className="[&_button]:px-2" />
-                <aside className="flex items-center gap-0.5 pb-1">
+                <aside className="flex items-center gap-0.5 py-1">
                     {/* <MenuBar
                         menus={[
                             {
@@ -243,10 +243,10 @@ export default function TaskBarMenu() {
                         ]}
                         className="[&_button]:px-2"
                     /> */}
-                    <div className="relative mr-1 -top-px">
+                    <div className="relative mr-1">
                         <OSButton
                             variant="secondary"
-                            size="sm"
+                            size="md"
                             onClick={() => navigate('/start', { state: { newWindow: true } })}
                             className=""
                         >

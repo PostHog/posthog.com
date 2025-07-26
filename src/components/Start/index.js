@@ -20,6 +20,8 @@ import OSTabs from 'components/OSTabs'
 import IntegrationPrompt from 'components/IntegrationPrompt'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import Loading from 'components/Loading'
+import ProgressBar from 'components/ProgressBar'
 
 const AIInstall = ({ setActiveTab }) => (
     <div
@@ -55,8 +57,16 @@ const AIInstall = ({ setActiveTab }) => (
 )
 
 const BoomerInstall = () => (
-    <div className="-m-4 @2xl:-m-6 flex flex-1 h-[450px]">
-        <iframe src="https://app.posthog.com/signup" className="w-full h-full border-0" title="PostHog signup" />
+    <div className="-m-4 @2xl:-m-6 flex flex-1 h-[630px] relative">
+        <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
+            <Loading className="size-8 text-muted" />
+            <div className="text-sm text-secondary">Loading...</div>
+        </div>
+        <iframe
+            src="https://app.posthog.com/signup"
+            className="w-full h-full border-0 rounded relative z-10"
+            title="PostHog signup"
+        />
     </div>
 )
 
