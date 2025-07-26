@@ -82,7 +82,6 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     const [isTocVisible, setIsTocVisible] = useState(false)
     const [tocUserToggled, setTocUserToggled] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(false)
-    const { pathname } = useLocation()
     const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
     const [lineHeightP, setLineHeightP] = useState<number | null>(null)
     const [lineHeightLi, setLineHeightLi] = useState<number | null>(null)
@@ -194,7 +193,7 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     }, [])
 
     const parent = (menu as Menu).find(({ children, url }) => {
-        const currentURL = pathname
+        const currentURL = appWindow?.path
         return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
     }) || { name: 'Default', children: [] }
 
@@ -202,7 +201,7 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
 
     const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(
         internalMenu?.find((menuItem: MenuItem) => {
-            const currentURL = pathname
+            const currentURL = appWindow?.path
             return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
     )
@@ -214,7 +213,7 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     // Reset ToC toggle state when path changes
     useEffect(() => {
         setTocUserToggled(false)
-    }, [pathname])
+    }, [appWindow?.path])
 
     const handleBackgroundImageChange = useCallback((image: string | null) => {
         setBackgroundImage(image)
