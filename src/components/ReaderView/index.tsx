@@ -171,7 +171,7 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
                     onValueChange={onValueChange}
                 />
             </div>
-            <OSButton onClick={() => onValueChange([1.3])} variant="ghost" icon={<IconRefresh className="size-5" />} />
+            <OSButton onClick={() => onValueChange([1.3])} icon={<IconRefresh className="size-5" />} />
         </div>
     )
 }
@@ -194,7 +194,7 @@ const AppOptionsButton = ({ lineHeightMultiplier, handleLineHeightChange }) => {
             dataScheme="secondary"
             trigger={
                 <span>
-                    <OSButton variant="ghost" icon={<IconGear className="size-5" />} />
+                    <OSButton icon={<IconGear className="size-5" />} />
                 </span>
             }
             contentClassName="w-80"
@@ -700,7 +700,6 @@ function ReaderViewContent({
                             <OSButton
                                 asLink
                                 to={`https://github.com/PostHog/posthog.com/tree/master/contents/${filePath}`}
-                                variant="ghost"
                                 icon={<IconPencil />}
                             />
                         )}
@@ -709,7 +708,7 @@ function ReaderViewContent({
                             <Popover
                                 trigger={
                                     <span>
-                                        <OSButton variant="ghost" icon={<IconClockRewind />} />
+                                        <OSButton icon={<IconClockRewind />} />
                                     </span>
                                 }
                                 title="Edit history"

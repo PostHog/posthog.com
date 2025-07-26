@@ -271,13 +271,8 @@ const EmailGenerator = ({ url }: { url: string }) => {
                         </div>
                     </div>
                     <div className="absolute right-1 top-1 flex">
-                        <OSButton variant="ghost" size="sm" icon={<IconRefresh />} onClick={refreshEmail} />
-                        <OSButton
-                            size="sm"
-                            variant="ghost"
-                            icon={copied ? <IconCheck /> : <IconCopy />}
-                            onClick={copyToClipboard}
-                        />
+                        <OSButton size="sm" icon={<IconRefresh />} onClick={refreshEmail} />
+                        <OSButton size="sm" icon={copied ? <IconCheck /> : <IconCopy />} onClick={copyToClipboard} />
                     </div>
                 </div>
 
@@ -545,13 +540,8 @@ const TweetGenerator = ({ url }: { url: string }) => {
                         </div>
                     </div>
                     <div className="absolute right-1 top-1">
-                        <OSButton variant="ghost" size="sm" icon={<IconRefresh />} onClick={refreshTweet} />
-                        <OSButton
-                            size="sm"
-                            variant="ghost"
-                            icon={copied ? <IconCheck /> : <IconCopy />}
-                            onClick={copyToClipboard}
-                        />
+                        <OSButton size="sm" icon={<IconRefresh />} onClick={refreshTweet} />
+                        <OSButton size="sm" icon={copied ? <IconCheck /> : <IconCopy />} onClick={copyToClipboard} />
                     </div>
                 </div>
 
@@ -774,10 +764,9 @@ URL: ${url}
                                 --- END OF TRANSMISSION ---
                             </div>
                             <div className="flex absolute top-1 right-1">
-                                <OSButton variant="ghost" size="sm" icon={<IconRefresh />} onClick={refreshFax} />
+                                <OSButton size="sm" icon={<IconRefresh />} onClick={refreshFax} />
                                 <OSButton
                                     size="sm"
-                                    variant="ghost"
                                     icon={copied ? <IconCheck /> : <IconCopy />}
                                     onClick={copyToClipboard}
                                 />

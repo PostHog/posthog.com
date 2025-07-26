@@ -532,12 +532,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                     <div className="flex justify-end">
                                         {siteSettings.experience !== 'boring' && (
                                             <>
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="xs"
-                                                    onClick={handleMinimize}
-                                                    className="!px-1.5"
-                                                >
+                                                <OSButton size="xs" onClick={handleMinimize} className="!px-1.5">
                                                     <IconMinus className="size-4 relative top-1" />
                                                 </OSButton>
 
@@ -550,7 +545,6 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                     >
                                                         {!item.fixedSize && (
                                                             <OSButton
-                                                                variant="ghost"
                                                                 size="xs"
                                                                 onClick={() => {
                                                                     setWindowOptionsTooltipVisible(false)
@@ -634,7 +628,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                 </ContextMenu.Root>
                                             </>
                                         )}
-                                        <OSButton variant="ghost" size="xs" onClick={handleClose} className="!px-1.5">
+                                        <OSButton size="xs" onClick={handleClose} className="!px-1.5">
                                             <IconX className="size-4" />
                                         </OSButton>
                                     </div>

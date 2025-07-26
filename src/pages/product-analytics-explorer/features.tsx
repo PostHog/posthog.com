@@ -85,7 +85,6 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                 <div className="hidden @xl:block relative -mt-2">
                     <div className="flex gap-px -top-10 right-2 absolute">
                         <OSButton
-                            variant="ghost"
                             className="previous-button"
                             icon={<IconArrowLeft className="rotate-90" />}
                             onClick={handlePrevious}
@@ -94,7 +93,6 @@ export default function ProductAnalyticsFeatures(): JSX.Element {
                             Previous
                         </OSButton>
                         <OSButton
-                            variant="ghost"
                             className="next-button"
                             icon={<IconArrowRight className="rotate-90" />}
                             iconPosition="right"

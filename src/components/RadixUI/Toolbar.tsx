@@ -152,7 +152,6 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
                             >
                                 {item.icon ? (
                                     <OSButton
-                                        variant="ghost"
                                         icon={item.icon}
                                         className="[&_svg]:size-full"
                                         size="sm"

@@ -238,7 +238,6 @@ window.posthog.onFeatureFlags(function () {
                         <legend className="text-lg font-semibold">Web</legend>
                         <OSButton
                             asLink
-                            variant="ghost"
                             icon={<IconJavaScript className="size-8" />}
                             size="xl"
                             className="!text-xl text-primary font-semibold"
@@ -254,7 +253,6 @@ window.posthog.onFeatureFlags(function () {
                         <legend className="text-lg font-semibold">Mobile</legend>
                         <OSButton
                             asLink
-                            variant="ghost"
                             icon={<IconApple className="size-8" />}
                             size="xl"
                             className="!text-xl text-primary font-semibold"
@@ -267,7 +265,6 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                         <OSButton
                             asLink
-                            variant="ghost"
                             icon={<IconAndroid className="size-8" />}
                             size="xl"
                             className="!text-xl text-primary font-semibold"
@@ -283,7 +280,6 @@ window.posthog.onFeatureFlags(function () {
                         <legend className="text-lg font-semibold">Cross-platform</legend>
                         <OSButton
                             asLink
-                            variant="ghost"
                             icon={<IconReactNative className="size-8" />}
                             size="xl"
                             className="!text-xl text-primary font-semibold"
@@ -296,7 +292,6 @@ window.posthog.onFeatureFlags(function () {
                         </OSButton>
                         <OSButton
                             asLink
-                            variant="ghost"
                             icon={<IconFlutter className="size-8" />}
                             size="xl"
                             className="!text-xl text-primary font-semibold"

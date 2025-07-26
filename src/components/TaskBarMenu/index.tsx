@@ -246,10 +246,10 @@ export default function TaskBarMenu() {
                             Get started – free
                         </OSButton>
                     </div>
-                    <OSButton onClick={() => openSearch()} variant="ghost" size="sm">
+                    <OSButton onClick={() => openSearch()} size="sm">
                         <IconSearch className="size-5" />
                     </OSButton>
-                    <OSButton onClick={() => openNewChat({ path: `ask-max` })} variant="ghost" size="sm">
+                    <OSButton onClick={() => openNewChat({ path: `ask-max` })} size="sm">
                         <IconChatHelp className="size-5" />
                     </OSButton>
                     {siteSettings.experience === 'posthog' && (

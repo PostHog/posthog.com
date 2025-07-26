@@ -67,7 +67,6 @@ export const SmallTeams = () => {
                                 <OSButton
                                     to={`/teams/${slug}`}
                                     key={id}
-                                    variant="ghost"
                                     align="left"
                                     width="full"
                                     zoomHover="md"

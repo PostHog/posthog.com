@@ -52,7 +52,7 @@ const Toast = ({
                         asChild
                         altText={actionLabel}
                     >
-                        <OSButton variant="ghost" size="sm" icon={onUndo ? <IconUndo /> : undefined}>
+                        <OSButton size="sm" icon={onUndo ? <IconUndo /> : undefined}>
                             {actionLabel}
                         </OSButton>
                     </RadixToast.Action>

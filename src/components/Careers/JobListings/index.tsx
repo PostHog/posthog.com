@@ -532,7 +532,6 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                             return (
                                                 <li key={job.fields.title} className="p-0">
                                                     <OSButton
-                                                        variant="ghost"
                                                         size="md"
                                                         align="left"
                                                         width="full"
@@ -590,7 +589,6 @@ export const JobListings = ({ embedded = false }: { embedded?: boolean }) => {
                                             return (
                                                 <li key={job.fields.title} className="p-0">
                                                     <OSButton
-                                                        variant="ghost"
                                                         size="md"
                                                         align="left"
                                                         width="full"

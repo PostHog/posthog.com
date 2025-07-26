@@ -34,7 +34,6 @@ const TreeLink = ({
 
     return menuItem.url ? (
         <OSButton
-            variant="ghost"
             active={active}
             align="left"
             width="full"
@@ -142,7 +141,6 @@ function TreeMenuItem({
         <Collapsible.Root open={open} onOpenChange={handleOpenChange}>
             <Collapsible.Trigger asChild>
                 <OSButton
-                    variant="ghost"
                     align="left"
                     width="full"
                     className={index === 0 ? '' : `pl-${2 + index * 4}`}

@@ -99,7 +99,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     <div className="rounded p-2 bg-white text-left">
                         <div className="flex items-center gap-0.5">
                             <code className="text-sm">npx -y @posthog/wizard@latest</code>
-                            <OSButton size="xs" variant="ghost" onClick={handleCopy} aria-label="Copy to clipboard">
+                            <OSButton size="xs" onClick={handleCopy} aria-label="Copy to clipboard">
                                 {justCopied ? (
                                     <IconCheck className="size-5 text-green" />
                                 ) : (

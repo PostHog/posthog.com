@@ -36,7 +36,6 @@ export default function ActiveWindowsPanel() {
                     {windows.map((window) => (
                         <OSButton
                             key={window.key}
-                            variant="ghost"
                             size="sm"
                             width="full"
                             align="left"

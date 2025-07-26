@@ -252,7 +252,6 @@ export default function Inbox(props) {
                                                 <OSButton
                                                     asLink
                                                     to={`/questions/${permalink}`}
-                                                    variant="ghost"
                                                     align="left"
                                                     width="full"
                                                     key={question.id}
@@ -425,7 +424,6 @@ export default function Inbox(props) {
                                                     trigger={
                                                         <span>
                                                             <OSButton
-                                                                variant="ghost"
                                                                 size="sm"
                                                                 className="relative"
                                                                 icon={

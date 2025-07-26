@@ -66,7 +66,6 @@ const ProductButtons: React.FC<ProductButtonsProps> = ({ productTypes, className
                 return product ? (
                     <OSButton
                         key={type}
-                        variant="ghost"
                         icon={product.Icon ? <product.Icon /> : undefined}
                         iconClassName={`text-${product.color}`}
                         color={product.color}

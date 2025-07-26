@@ -48,8 +48,8 @@ export default function Components(): JSX.Element {
                             <div className="mb-8">
                                 <h3 className="text-xl font-semibold mb-4">Common usage</h3>
                                 <div className="flex items-center gap-px flex-wrap">
-                                    <OSButton variant="ghost" size="sm" icon={<IconSearch />}></OSButton>
-                                    <OSButton variant="ghost" size="md" icon={<IconSearch />}></OSButton>
+                                    <OSButton size="sm" icon={<IconSearch />}></OSButton>
+                                    <OSButton size="md" icon={<IconSearch />}></OSButton>
                                     <OSButton variant="primary">Get started – free</OSButton>
                                     <OSButton variant="secondary">Get started – free</OSButton>
                                 </div>
@@ -77,7 +77,7 @@ export default function Components(): JSX.Element {
                                             <tr>
                                                 <td className="border border-primary px-4 py-2 font-mono">default</td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    Black background with white text, standard button appearance
+                                                    Transparent background with subtle hover effects (formerly ghost)
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
                                                     <OSButton size="xs">Button</OSButton>
@@ -160,7 +160,7 @@ export default function Components(): JSX.Element {
                                             <tr>
                                                 <td className="border border-primary px-4 py-2 font-mono">underline</td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    Transparent background with underline on hover
+                                                    Always shows underline, removes on hover
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
                                                     <OSButton variant="underline" size="xs">
@@ -189,32 +189,34 @@ export default function Components(): JSX.Element {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td className="border border-primary px-4 py-2 font-mono">ghost</td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    Transparent background with subtle hover effects
+                                                <td className="border border-primary px-4 py-2 font-mono">
+                                                    underlineOnHover
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="xs">
+                                                    Transparent background with underline on hover
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton variant="underlineOnHover" size="xs">
                                                         Button
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="sm">
+                                                    <OSButton variant="underlineOnHover" size="sm">
                                                         Button
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="md">
+                                                    <OSButton variant="underlineOnHover" size="md">
                                                         Button
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="lg">
+                                                    <OSButton variant="underlineOnHover" size="lg">
                                                         Button
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="xl">
+                                                    <OSButton variant="underlineOnHover" size="xl">
                                                         Button
                                                     </OSButton>
                                                 </td>
@@ -346,47 +348,6 @@ export default function Components(): JSX.Element {
                                                     ></OSButton>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td className="border border-primary px-4 py-2 font-mono">ghost</td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    Icon-only button with ghost styling
-                                                </td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="xs"
-                                                        icon={<IconSearch />}
-                                                    ></OSButton>
-                                                </td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="sm"
-                                                        icon={<IconSearch />}
-                                                    ></OSButton>
-                                                </td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="md"
-                                                        icon={<IconSearch />}
-                                                    ></OSButton>
-                                                </td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="lg"
-                                                        icon={<IconSearch />}
-                                                    ></OSButton>
-                                                </td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    <OSButton
-                                                        variant="ghost"
-                                                        size="xl"
-                                                        icon={<IconSearch />}
-                                                    ></OSButton>
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
                                 </ScrollArea>
@@ -464,34 +425,32 @@ export default function Components(): JSX.Element {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td className="border border-primary px-4 py-2 font-mono">
-                                                    active (ghost)
+                                                <td className="border border-primary px-4 py-2 font-mono">active</td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    Active state (for default variant)
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    Active state (for ghost variant)
-                                                </td>
-                                                <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="xs" active>
+                                                    <OSButton size="xs" active>
                                                         Active
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="sm" active>
+                                                    <OSButton size="sm" active>
                                                         Active
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="md" active>
+                                                    <OSButton size="md" active>
                                                         Active
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="lg" active>
+                                                    <OSButton size="lg" active>
                                                         Active
                                                     </OSButton>
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    <OSButton variant="ghost" size="xl" active>
+                                                    <OSButton size="xl" active>
                                                         Active
                                                     </OSButton>
                                                 </td>
@@ -824,6 +783,41 @@ export default function Components(): JSX.Element {
                                 <h3 className="text-xl font-semibold mb-4">Complex examples with all sizes</h3>
                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                                     <div className="border border-primary p-4 rounded">
+                                        <h4 className="font-semibold mb-4">Default with icon & label</h4>
+                                        <div className="space-y-2">
+                                            <div>
+                                                <span className="text-sm font-mono">XS:</span>{' '}
+                                                <OSButton size="xs" icon={<IconUser />} label="New">
+                                                    Create
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <span className="text-sm font-mono">SM:</span>{' '}
+                                                <OSButton size="sm" icon={<IconUser />} label="New">
+                                                    Create
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <span className="text-sm font-mono">MD:</span>{' '}
+                                                <OSButton size="md" icon={<IconUser />} label="New">
+                                                    Create
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <span className="text-sm font-mono">LG:</span>{' '}
+                                                <OSButton size="lg" icon={<IconUser />} label="New">
+                                                    Create
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <span className="text-sm font-mono">XL:</span>{' '}
+                                                <OSButton size="xl" icon={<IconUser />} label="New">
+                                                    Create
+                                                </OSButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="border border-primary p-4 rounded">
                                         <h4 className="font-semibold mb-4">Primary with icon & label</h4>
                                         <div className="space-y-2">
                                             <div>
@@ -919,55 +913,35 @@ export default function Components(): JSX.Element {
                                         </div>
                                     </div>
                                     <div className="border border-primary p-4 rounded">
-                                        <h4 className="font-semibold mb-4">Ghost with tooltip</h4>
+                                        <h4 className="font-semibold mb-4">Default with tooltip</h4>
                                         <div className="space-y-2">
                                             <div>
                                                 <span className="text-sm font-mono">XS:</span>{' '}
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="xs"
-                                                    tooltip="This action cannot be undone"
-                                                >
+                                                <OSButton size="xs" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
                                             <div>
                                                 <span className="text-sm font-mono">SM:</span>{' '}
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="sm"
-                                                    tooltip="This action cannot be undone"
-                                                >
+                                                <OSButton size="sm" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
                                             <div>
                                                 <span className="text-sm font-mono">MD:</span>{' '}
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="md"
-                                                    tooltip="This action cannot be undone"
-                                                >
+                                                <OSButton size="md" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
                                             <div>
                                                 <span className="text-sm font-mono">LG:</span>{' '}
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="lg"
-                                                    tooltip="This action cannot be undone"
-                                                >
+                                                <OSButton size="lg" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
                                             <div>
                                                 <span className="text-sm font-mono">XL:</span>{' '}
-                                                <OSButton
-                                                    variant="ghost"
-                                                    size="xl"
-                                                    tooltip="This action cannot be undone"
-                                                >
+                                                <OSButton size="xl" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
@@ -1006,6 +980,133 @@ export default function Components(): JSX.Element {
                                                     Loading...
                                                 </OSButton>
                                             </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Additional Features */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Additional features</h3>
+                                <div className="space-y-6">
+                                    {/* Button as Link */}
+                                    <div className="border border-primary p-4 rounded">
+                                        <h4 className="font-semibold mb-4">Button as Link</h4>
+                                        <div className="space-y-2">
+                                            <div>
+                                                <OSButton
+                                                    asLink
+                                                    to="/docs"
+                                                    icon={<IconArrowRight />}
+                                                    iconPosition="right"
+                                                >
+                                                    Go to docs (internal)
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <OSButton
+                                                    asLink
+                                                    to="https://github.com/posthog/posthog"
+                                                    external
+                                                    variant="primary"
+                                                >
+                                                    View on GitHub (external)
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <OSButton asLink to="/pricing" variant="secondary" size="sm">
+                                                    View pricing
+                                                </OSButton>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Alignment Options */}
+                                    <div className="border border-primary p-4 rounded">
+                                        <h4 className="font-semibold mb-4">Alignment</h4>
+                                        <div className="space-y-2">
+                                            <div className="w-64 border border-dashed border-primary p-1">
+                                                <OSButton width="full" align="left" icon={<IconUser />}>
+                                                    Left aligned (default)
+                                                </OSButton>
+                                            </div>
+                                            <div className="w-64 border border-dashed border-primary p-1">
+                                                <OSButton width="full" align="center" icon={<IconUser />}>
+                                                    Center aligned
+                                                </OSButton>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Custom Styling */}
+                                    <div className="border border-primary p-4 rounded">
+                                        <h4 className="font-semibold mb-4">Custom Styling</h4>
+                                        <div className="space-y-2">
+                                            <div>
+                                                <OSButton className="!bg-red-500 !text-white hover:!bg-red-600">
+                                                    Custom colors via className
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <OSButton icon={<IconSearch />} iconClassName="text-orange">
+                                                    Custom icon color
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <OSButton variant="primary" className="!rounded-full">
+                                                    Fully rounded
+                                                </OSButton>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Special Props */}
+                                    <div className="border border-primary p-4 rounded">
+                                        <h4 className="font-semibold mb-4">Special Props</h4>
+                                        <div className="space-y-2">
+                                            <div>
+                                                <OSButton
+                                                    asLink
+                                                    to="/docs"
+                                                    state={{ from: 'components-page' }}
+                                                    variant="secondary"
+                                                >
+                                                    Link with state prop
+                                                </OSButton>
+                                            </div>
+                                            <div>
+                                                <OSButton zoomHover={false}>Default variant without ZoomHover</OSButton>
+                                            </div>
+                                            <div>
+                                                <OSButton variant="primary" zoomHover>
+                                                    Primary with manual ZoomHover
+                                                </OSButton>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Inline Usage */}
+                                    <div className="border border-primary p-4 rounded">
+                                        <h4 className="font-semibold mb-4">Inline Usage</h4>
+                                        <div className="space-y-2">
+                                            <p>
+                                                This is some text with an{' '}
+                                                <OSButton variant="underline" size="sm">
+                                                    inline underline button
+                                                </OSButton>{' '}
+                                                and an{' '}
+                                                <OSButton variant="underlineOnHover" size="sm">
+                                                    underline on hover button
+                                                </OSButton>{' '}
+                                                in the middle.
+                                            </p>
+                                            <p>
+                                                You can also use{' '}
+                                                <OSButton size="xs" asLink to="/docs">
+                                                    tiny link buttons
+                                                </OSButton>{' '}
+                                                inline.
+                                            </p>
                                         </div>
                                     </div>
                                 </div>

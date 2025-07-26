@@ -169,7 +169,7 @@ export default function HeaderBar({
                                 hasLeftSidebar && isNavVisible ? '@2xl:min-w-[250px]' : 'w-auto'
                             }`}
                         >
-                            {homeURL && <OSButton variant="ghost" icon={<IconHome />} to={homeURL} asLink />}
+                            {homeURL && <OSButton icon={<IconHome />} to={homeURL} asLink />}
                             <div
                                 className={`${
                                     typeof hasLeftSidebar === 'object' && hasLeftSidebar.alwaysShow
@@ -180,7 +180,6 @@ export default function HeaderBar({
                                 {hasLeftSidebar && (
                                     <OSButton
                                         onClick={onToggleNav}
-                                        variant="ghost"
                                         active={isNavVisible}
                                         icon={
                                             isNavVisible ? (
@@ -197,21 +196,9 @@ export default function HeaderBar({
                 )}
                 <div className="flex-grow flex justify-between items-center">
                     <div className="flex items-center gap-px">
-                        {showBack && (
-                            <OSButton
-                                disabled={!canGoBack}
-                                onClick={goBack}
-                                variant="ghost"
-                                icon={<IconChevronLeft />}
-                            />
-                        )}
+                        {showBack && <OSButton disabled={!canGoBack} onClick={goBack} icon={<IconChevronLeft />} />}
                         {showForward && (
-                            <OSButton
-                                disabled={!canGoForward}
-                                onClick={goForward}
-                                variant="ghost"
-                                icon={<IconChevronRight />}
-                            />
+                            <OSButton disabled={!canGoForward} onClick={goForward} icon={<IconChevronRight />} />
                         )}
                     </div>
                     {compact &&
@@ -237,21 +224,14 @@ export default function HeaderBar({
                     <div className="flex items-center gap-px relative">
                         {rightActionButtons}
                         {showSearch && (searchContentRef || onSearch) && (
-                            <Tooltip
-                                trigger={<OSButton variant="ghost" icon={<IconSearch />} onClick={toggleSearch} />}
-                            >
+                            <Tooltip trigger={<OSButton icon={<IconSearch />} onClick={toggleSearch} />}>
                                 Search this page
                             </Tooltip>
                         )}
                         {showCart && (
                             <Tooltip
                                 trigger={
-                                    <OSButton
-                                        variant="ghost"
-                                        onClick={handleCartClick}
-                                        className="relative"
-                                        active={isCartOpen}
-                                    >
+                                    <OSButton onClick={handleCartClick} className="relative" active={isCartOpen}>
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             viewBox="0 0 24 24"
@@ -282,7 +262,6 @@ export default function HeaderBar({
                             <Tooltip
                                 trigger={
                                     <OSButton
-                                        variant="ghost"
                                         icon={isBookmarked ? <IconBookmarkSolid /> : <IconBookmark />}
                                         onClick={() => handleBookmark(!isBookmarked)}
                                     />
@@ -315,7 +294,6 @@ export default function HeaderBar({
                                 <Tooltip
                                     trigger={
                                         <OSButton
-                                            variant="ghost"
                                             icon={<IconTableOfContents />}
                                             active={isTocVisible}
                                             onClick={onToggleToc}
@@ -332,12 +310,7 @@ export default function HeaderBar({
                     {showDrawerToggle && (
                         <Tooltip
                             trigger={
-                                <OSButton
-                                    variant="ghost"
-                                    icon={<IconBottomPanel />}
-                                    active={isDrawerOpen}
-                                    onClick={onToggleDrawer}
-                                />
+                                <OSButton icon={<IconBottomPanel />} active={isDrawerOpen} onClick={onToggleDrawer} />
                             }
                         >
                             {isDrawerOpen ? 'Hide' : 'Show'} presenter notes
@@ -355,7 +328,6 @@ export default function HeaderBar({
                                             setIsExportingPdf(false)
                                         }
                                     }}
-                                    variant="ghost"
                                     disabled={isExportingPdf}
                                     icon={isExportingPdf ? <Loading /> : <IconPDF />}
                                 />

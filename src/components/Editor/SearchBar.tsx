@@ -140,7 +140,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 autoFocus
             />
             <OSButton
-                variant="ghost"
                 size="xs"
                 icon={<IconX />}
                 onClick={() => {

@@ -268,16 +268,9 @@ export function Editor({
             className: 'ml-auto flex items-center gap-px',
             children: (
                 <>
-                    <OSButton
-                        variant="ghost"
-                        size="sm"
-                        active={showSearch}
-                        icon={<IconSearch />}
-                        onClick={toggleSearch}
-                    />
+                    <OSButton size="sm" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
                     {availableFilters && availableFilters.length > 0 && (
                         <OSButton
-                            variant="ghost"
                             size="sm"
                             active={showFilters}
                             icon={<IconFilter />}
