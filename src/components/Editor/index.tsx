@@ -268,10 +268,10 @@ export function Editor({
             className: 'ml-auto flex items-center gap-px',
             children: (
                 <>
-                    <OSButton size="sm" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
+                    <OSButton size="md" active={showSearch} icon={<IconSearch />} onClick={toggleSearch} />
                     {availableFilters && availableFilters.length > 0 && (
                         <OSButton
-                            size="sm"
+                            size="md"
                             active={showFilters}
                             icon={<IconFilter />}
                             onClick={() => setShowFilters(!showFilters)}
@@ -285,7 +285,7 @@ export function Editor({
                         {hasShareButton && <Cher active={showCher} />}
                         <OSButton
                             variant="primary"
-                            size="sm"
+                            size="md"
                             {...(hasShareButton
                                 ? {
                                       onClick: () => {
@@ -305,7 +305,7 @@ export function Editor({
                                   })}
                             state={{ newWindow: true }}
                             asLink
-                            className="ml-1 -mt-1"
+                            className="ml-1 -my-0.5"
                         >
                             {hasShareButton ? 'Share' : cta?.label}
                         </OSButton>

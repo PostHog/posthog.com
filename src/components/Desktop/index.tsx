@@ -270,7 +270,7 @@ export default function Desktop() {
                 <div data-scheme="primary" data-app="Desktop" className="fixed size-full">
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}
-                    <div className="hidden wallpaper-hogzilla:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-hogzilla:block absolute inset-0">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                             alt="Hogzilla"
@@ -281,7 +281,7 @@ export default function Desktop() {
                     </div>
 
                     {/* Startup Monopoly */}
-                    <div className="hidden wallpaper-startup-monopoly:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-startup-monopoly:block absolute inset-0">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/startup_monopoly_2ac9d45ce3.png"
                             alt="Startup Monopoly"
@@ -292,7 +292,7 @@ export default function Desktop() {
                     </div>
 
                     {/* Office party */}
-                    <div className="hidden wallpaper-office-party:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-office-party:block absolute inset-0">
                         <div
                             className="absolute inset-0 opacity-100"
                             style={{
@@ -321,7 +321,7 @@ export default function Desktop() {
                     </div>
 
                     {/* Keyboard garden */}
-                    <div className="hidden wallpaper-keyboard-garden:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <div className="hidden select-none wallpaper-keyboard-garden:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_7b4f9e93b6.png"
                             alt="Keyboard garden"
@@ -332,7 +332,7 @@ export default function Desktop() {
                     </div>
 
                     {/* 2001 bliss */}
-                    <div className="hidden wallpaper-2001-bliss:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-2001-bliss:block absolute inset-0">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/bliss_8bit_1x_27e9e47112.jpg"
                             alt="2001 bliss"
@@ -344,7 +344,7 @@ export default function Desktop() {
                     </div>
 
                     {/* Parade */}
-                    <div className="hidden wallpaper-parade:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-parade:block absolute inset-0">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/parade_light_ffe041646a.png"
                             alt="Parade"
@@ -364,7 +364,7 @@ export default function Desktop() {
                     </div>
 
                     {/* Coding at night */}
-                    <div className="hidden wallpaper-coding-at-night:block absolute inset-0">
+                    <div className="hidden select-none wallpaper-coding-at-night:block absolute inset-0">
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/coding_at_night_5d7d21791e.png"
                             alt="Coding at night"

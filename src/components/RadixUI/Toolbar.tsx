@@ -107,8 +107,9 @@ export const Toolbar = ({ elements, className, 'aria-label': ariaLabel }: Toolba
                         <OSButton
                             key={index}
                             onClick={() => !element.disabled && element.onClick?.()}
-                            variant={element.variant || 'ghost'}
-                            size={element.size || 'sm'}
+                            variant={element.variant || 'default'}
+                            size={element.size || 'md'}
+                            hover="background"
                             icon={element.icon}
                             className={`${element.className} !px-[5px] ${
                                 element.active ? '!bg-accent-2 hover:!bg-accent-2 text-primary' : ''

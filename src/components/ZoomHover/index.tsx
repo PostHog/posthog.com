@@ -3,7 +3,7 @@ import React from 'react'
 interface ZoomHoverProps {
     size?: 'xs' | 'sm' | 'md' | 'lg'
     width?: string
-    display?: 'block' | 'inline-block'
+    display?: 'block' | 'inline-flex'
     className?: string
     children: React.ReactNode
 }
@@ -25,7 +25,7 @@ const ZoomHover: React.FC<ZoomHoverProps> = ({
     }
 
     const widthClass = width === 'auto' ? 'w-auto' : width === 'full' ? 'w-full' : width
-    const displayClass = display || (width === 'full' ? 'block' : 'inline-block')
+    const displayClass = display || (width === 'full' ? 'block' : 'inline-flex')
     const classes = `${widthClass} ${displayClass} relative ${sizeClasses[size]} ${className}`
 
     return <div className={classes}>{children}</div>
