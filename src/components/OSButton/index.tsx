@@ -82,17 +82,17 @@ export default function OSButton({
         'relative items-center rounded border text-primary transition-colors font-medium transition-[font-size,line-height,padding] transition-50 hover:transition-none disabled:text-muted disabled:cursor-not-allowed'
 
     const parentSizeClasses = {
-        xs: 'border-px top-[1px] rounded-[5px]',
-        sm: 'border-[1.5px] top-[3px] rounded-[5px]',
-        md: 'border-[1.5px] top-[3px] rounded-[6px]',
-        lg: 'border-[1.5px] top-[2px] rounded-[6px]',
-        xl: 'border-[1.5px] top-[2px] rounded-[6px]',
+        xs: 'border-px top-[0px] rounded-[5px]',
+        sm: 'border-[1.5px] top-[0px] rounded-[5px]',
+        md: 'border-[1.5px] top-[0px] rounded-[6px]',
+        lg: 'border-[1.5px] top-[0px] rounded-[6px]',
+        xl: 'border-[1.5px] top-[0px] rounded-[6px]',
     }
 
     const childSizeClasses = {
         xs: 'px-1.5 py-0.5 text-[11px] gap-0.5 rounded-[5px] translate-y-[-1px] hover:translate-y-[-2px] active:-translate-y-px border-[1.5px] -mx-px group-disabled:hover:!translate-y-[-1px]',
-        sm: 'px-2 py-0.5 text-xs gap-1 rounded-[5px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
-        md: 'px-2.5 py-1 gap-1 rounded-[6px] text-[13px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
+        sm: 'px-2 py-0.5 text-xs gap-1 rounded-[5px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1.5px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
+        md: 'px-2.5 py-1 gap-1 rounded-[6px] text-[13px] translate-y-[-2px] hover:translate-y-[-3px] active:translate-y-[-1.5px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
         lg: 'px-3 py-1.5 text-[15px] gap-1 rounded-[6px] translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
         xl: 'px-4 py-2 text-base gap-1.5 rounded-[6px] translate-y-[-2px] hover:translate-y-[-4px] active:translate-y-[-1px] border-[1.5px] mx-[-1.5px] group-disabled:hover:!translate-y-[-2px]',
     }
@@ -182,7 +182,7 @@ export default function OSButton({
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
                     {tooltip && (
-                        <span className="">
+                        <span className="contents">
                             <Tooltip content={tooltip}>
                                 <IconInfo className={`${iconSizeClasses[size]} opacity-50 hover:opacity-100`} />
                             </Tooltip>

@@ -342,7 +342,7 @@ export default function HeaderBar({
                                 <OSButton
                                     onClick={onFullScreenClick}
                                     variant="primary"
-                                    size="sm"
+                                    size="md"
                                     disabled={!onFullScreenClick}
                                     icon={<IconPlay />}
                                 />
