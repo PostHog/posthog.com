@@ -211,6 +211,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     }
 
     const windowPosition = useMemo(() => {
+        if (isSSR) return { x: 0, y: 0 }
         const activeWindowsPosition = getActiveWindowsButtonPosition()
         return {
             x: activeWindowsPosition.x - size.width / 2,
@@ -385,6 +386,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             ref={windowRef}
                             data-app="AppWindow"
                             data-scheme="tertiary"
+                            suppressHydrationWarning
                             className={`@container absolute !select-auto flex flex-col ${
                                 item.appSettings?.size?.fixed ? 'bg-transparent' : 'bg-transparent'
                             } ${
@@ -570,8 +572,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                                                     trigger={
                                                                         <span>
                                                                             <IconSquare className="size-5 group-hover:hidden" />
-                                                                            {size.width >=
-                                                                            (isSSR ? 0 : window?.innerWidth) ? (
+                                                                            {!isSSR &&
+                                                                            size.width >= window?.innerWidth ? (
                                                                                 <IconCollapse45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />
                                                                             ) : (
                                                                                 <IconExpand45Chevrons className="size-6 -m-0.5 hidden group-hover:block" />

@@ -38,15 +38,28 @@ const SeparatorClasses = 'm-[5px] h-px bg-border'
 const ShortcutClasses =
     'ml-auto pl-5 group-hover:text-light group-data-[disabled]:text-muted data-[highlighted]:data-[state=open]:text-light group-data-[highlighted]:text-light'
 
+// Helper to generate stable IDs
+const generateStableId = (baseId: string, ...parts: (string | number)[]): string => {
+    return `${baseId}-${parts.join('-')}`
+}
+
 // Components
-const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({ item, forceIconIndent }) => {
+const MenuItem: React.FC<{
+    item: MenuItemType
+    forceIconIndent?: boolean
+    menuIndex: number
+    itemIndex: number
+    baseId: string
+}> = ({ item, forceIconIndent, menuIndex, itemIndex, baseId }) => {
+    const itemId = generateStableId(baseId, 'item', menuIndex, itemIndex)
+
     if (item.type === 'separator') {
         return <RadixMenubar.Separator className={SeparatorClasses} />
     }
 
     if (item.node) {
         return (
-            <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick}>
+            <RadixMenubar.Item className={ItemClasses} disabled={item.disabled} onClick={item.onClick} id={itemId}>
                 {item.node}
             </RadixMenubar.Item>
         )
@@ -56,9 +69,11 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
         // If items is an array, render as before
         if (Array.isArray(item.items)) {
             const anyChildHasIcon = item.items.some((subItem) => !!subItem.icon)
+            const subTriggerId = generateStableId(baseId, 'sub-trigger', menuIndex, itemIndex)
+            const subContentId = generateStableId(baseId, 'sub-content', menuIndex, itemIndex)
             return (
-                <RadixMenubar.Sub>
-                    <RadixMenubar.SubTrigger className={SubTriggerClasses}>
+                <RadixMenubar.Sub key={itemId}>
+                    <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
                         {item.icon ? (
                             <span className="mr-2 flex items-center">{item.icon}</span>
                         ) : forceIconIndent ? (
@@ -70,10 +85,22 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
                         </div>
                     </RadixMenubar.SubTrigger>
                     <RadixMenubar.Portal>
-                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
+                        <RadixMenubar.SubContent
+                            className={ContentClasses}
+                            alignOffset={-5}
+                            data-scheme="primary"
+                            id={subContentId}
+                        >
                             <ScrollArea className="max-h-screen !overflow-y-auto">
-                                {item.items.map((subItem, index) => (
-                                    <MenuItem key={index} item={subItem} forceIconIndent={anyChildHasIcon} />
+                                {item.items.map((subItem, subIndex) => (
+                                    <MenuItem
+                                        key={generateStableId(baseId, 'sub', menuIndex, itemIndex, subIndex)}
+                                        item={subItem}
+                                        forceIconIndent={anyChildHasIcon}
+                                        menuIndex={menuIndex}
+                                        itemIndex={subIndex}
+                                        baseId={`${baseId}-sub-${menuIndex}-${itemIndex}`}
+                                    />
                                 ))}
                             </ScrollArea>
                         </RadixMenubar.SubContent>
@@ -83,9 +110,11 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
         }
         // If items is a React element, render it directly
         if (React.isValidElement(item.items)) {
+            const subTriggerId = generateStableId(baseId, 'sub-trigger-element', menuIndex, itemIndex)
+            const subContentId = generateStableId(baseId, 'sub-content-element', menuIndex, itemIndex)
             return (
-                <RadixMenubar.Sub>
-                    <RadixMenubar.SubTrigger className={SubTriggerClasses}>
+                <RadixMenubar.Sub key={itemId}>
+                    <RadixMenubar.SubTrigger className={SubTriggerClasses} id={subTriggerId}>
                         {item.icon ? (
                             <span className="mr-2 flex items-center">{item.icon}</span>
                         ) : forceIconIndent ? (
@@ -97,7 +126,12 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
                         </div>
                     </RadixMenubar.SubTrigger>
                     <RadixMenubar.Portal>
-                        <RadixMenubar.SubContent className={ContentClasses} alignOffset={-5} data-scheme="primary">
+                        <RadixMenubar.SubContent
+                            className={ContentClasses}
+                            alignOffset={-5}
+                            data-scheme="primary"
+                            id={subContentId}
+                        >
                             {item.items}
                         </RadixMenubar.SubContent>
                     </RadixMenubar.Portal>
@@ -111,6 +145,7 @@ const MenuItem: React.FC<{ item: MenuItemType; forceIconIndent?: boolean }> = ({
             className={`${ItemClasses} ${item.active ? 'bg-accent' : ''}`}
             disabled={item.disabled}
             onClick={item.onClick}
+            id={itemId}
         >
             {item.link ? (
                 <Link
@@ -148,40 +183,71 @@ export interface MenuBarProps {
     className?: string
     customTriggerClasses?: string
     triggerAsChild?: boolean
+    id?: string // Allow custom base ID
 }
 
-const MenuBar: React.FC<MenuBarProps> = ({ menus, className, triggerAsChild, customTriggerClasses }) => {
+const MenuBar: React.FC<MenuBarProps> = ({
+    menus,
+    className,
+    triggerAsChild,
+    customTriggerClasses,
+    id = 'menubar',
+}) => {
+    const baseId = React.useMemo(() => {
+        // Generate a stable ID based on the menu structure
+        const menuSignature = menus
+            .map((menu) => `${typeof menu.trigger === 'string' ? menu.trigger : 'trigger'}-${menu.items.length}`)
+            .join('-')
+        return `${id}-${menuSignature}`
+    }, [menus, id])
+
     return (
-        <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`}>
-            {menus.map((menu, menuIndex) => (
-                <RadixMenubar.Menu key={`menu-${menuIndex}`} data-scheme="primary">
-                    <RadixMenubar.Trigger
-                        asChild={triggerAsChild}
-                        className={`${triggerAsChild ? '' : TriggerClasses} ${
-                            menu.bold ? 'font-bold' : 'font-medium'
-                        } ${customTriggerClasses}`}
-                    >
-                        {menu.trigger}
-                    </RadixMenubar.Trigger>
-                    <RadixMenubar.Portal>
-                        <RadixMenubar.Content
-                            className={ContentClasses}
-                            align="start"
-                            sideOffset={5}
-                            alignOffset={-3}
-                            data-scheme="primary"
+        <RadixMenubar.Root data-scheme="tertiary" className={`${RootClasses} ${className || ''}`} id={baseId}>
+            {menus.map((menu, menuIndex) => {
+                const menuId = generateStableId(baseId, 'menu', menuIndex)
+                const triggerId = generateStableId(baseId, 'trigger', menuIndex)
+                const contentId = generateStableId(baseId, 'content', menuIndex)
+                return (
+                    <RadixMenubar.Menu key={menuId} data-scheme="primary">
+                        <RadixMenubar.Trigger
+                            asChild={triggerAsChild}
+                            className={`${triggerAsChild ? '' : TriggerClasses} ${
+                                menu.bold ? 'font-bold' : 'font-medium'
+                            } ${customTriggerClasses}`}
+                            id={triggerId}
                         >
-                            {menu.items.map((item, itemIndex) => (
-                                <MenuItem
-                                    key={`menu-${menuIndex}-item-${itemIndex}-${item.label || item.type}`}
-                                    item={item}
-                                    data-scheme="primary"
-                                />
-                            ))}
-                        </RadixMenubar.Content>
-                    </RadixMenubar.Portal>
-                </RadixMenubar.Menu>
-            ))}
+                            {menu.trigger}
+                        </RadixMenubar.Trigger>
+                        <RadixMenubar.Portal>
+                            <RadixMenubar.Content
+                                className={ContentClasses}
+                                align="start"
+                                sideOffset={5}
+                                alignOffset={-3}
+                                data-scheme="primary"
+                                id={contentId}
+                            >
+                                {menu.items.map((item, itemIndex) => (
+                                    <MenuItem
+                                        key={generateStableId(
+                                            baseId,
+                                            'menu',
+                                            menuIndex,
+                                            'item',
+                                            itemIndex,
+                                            item.label || item.type
+                                        )}
+                                        item={item}
+                                        menuIndex={menuIndex}
+                                        itemIndex={itemIndex}
+                                        baseId={baseId}
+                                    />
+                                ))}
+                            </RadixMenubar.Content>
+                        </RadixMenubar.Portal>
+                    </RadixMenubar.Menu>
+                )
+            })}
         </RadixMenubar.Root>
     )
 }

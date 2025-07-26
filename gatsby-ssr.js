@@ -32,19 +32,17 @@ export const wrapPageElement = ({ element, props }) => {
     }
 
     initKea(true, props.location)
-    return (
-        <ToastProvider>
-            <UserProvider>
-                {wrapElement({
-                    element: (
-                        <Provider element={element} location={props.location}>
-                            <Wrapper element={element} />
-                        </Provider>
-                    ),
-                })}
-            </UserProvider>
-        </ToastProvider>
-    )
+    return wrapElement({
+        element: (
+            <ToastProvider>
+                <UserProvider>
+                    <Provider element={element} location={props.location}>
+                        <Wrapper element={element} />
+                    </Provider>
+                </UserProvider>
+            </ToastProvider>
+        ),
+    })
 }
 
 export const onRenderBody = function ({ setPreBodyComponents }) {

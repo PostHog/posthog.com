@@ -11,7 +11,6 @@ export default function Toasts(): JSX.Element {
             {toasts.map((toast: any, index: number) => (
                 <Toast key={toast.createdAt} {...toast} />
             ))}
-            <RadixToast.Viewport className="fixed bottom-0 right-0 z-[2147483647] m-0 flex w-[390px] max-w-[100vw] list-none flex-col gap-2.5 p-[var(--viewport-padding)] outline-none [--viewport-padding:_25px]" />
         </RadixToast.Provider>
     )
 }

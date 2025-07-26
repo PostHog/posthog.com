@@ -42,19 +42,13 @@ export const wrapPageElement = ({ element, props: { pageContext, location } }) =
     // This catches both direct /404 visits and any non-existent pages
     const is404Page = element?.type?.name === 'NotFound' || location.pathname === '/404'
 
-    if (is404Page) {
-        return (
-            <ToastProvider>
-                <UserProvider>
-                    <BlueScreenOfDeath />
-                </UserProvider>
-            </ToastProvider>
-        )
-    }
-
     return (
-        <Provider element={element} location={location}>
-            <Wrapper />
-        </Provider>
+        <ToastProvider>
+            <UserProvider>
+                <Provider element={element} location={location}>
+                    {is404Page ? <BlueScreenOfDeath /> : <Wrapper />}
+                </Provider>
+            </UserProvider>
+        </ToastProvider>
     )
 }

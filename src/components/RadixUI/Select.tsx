@@ -74,6 +74,31 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
         },
         ref
     ) => {
+        // Use client-only rendering to prevent hydration mismatches
+        const [isClient, setIsClient] = React.useState(false)
+
+        React.useEffect(() => {
+            setIsClient(true)
+        }, [])
+
+        // During SSR, render a simple button placeholder that matches the Select trigger
+        if (!isClient) {
+            return (
+                <div className="flex items-center" data-scheme={dataScheme}>
+                    <button
+                        ref={ref}
+                        className={`flex justify-between items-center gap-1 rounded px-2 py-1 text-sm leading-none text-primary bg-primary outline-none hover:bg-input-hover border border-primary disabled:border-primary focus:shadow-[0_0_0_2px] focus:shadow-black data-[placeholder]:text-muted disabled:cursor-not-allowed ${className}`}
+                        disabled={disabled}
+                        aria-label={ariaLabel}
+                        data-scheme={dataScheme}
+                    >
+                        <span className="text-muted">{placeholder || 'Select...'}</span>
+                        <IconChevronDown className="size-6 text-muted" />
+                    </button>
+                </div>
+            )
+        }
+
         return (
             <div className="flex items-center" data-scheme={dataScheme}>
                 <RadixSelect.Root
@@ -104,15 +129,15 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                                 <IconChevronDown className="size-4 rotate-180" />
                             </RadixSelect.ScrollUpButton>
                             <RadixSelect.Viewport className="p-1">
-                                {groups.map((group, index) => (
-                                    <React.Fragment key={group.label}>
+                                {groups.map((group, groupIndex) => (
+                                    <React.Fragment key={`group-${groupIndex}-${group.label}`}>
                                         <RadixSelect.Group>
                                             <RadixSelect.Label className="px-8 text-sm leading-[25px] text-secondary">
                                                 {group.label}
                                             </RadixSelect.Label>
-                                            {group.items.map((item) => (
+                                            {group.items.map((item, itemIndex) => (
                                                 <SelectItem
-                                                    key={item.value}
+                                                    key={`item-${groupIndex}-${itemIndex}-${item.value}`}
                                                     value={item.value}
                                                     disabled={item.disabled}
                                                     className="text-primary dark:text-primary-dark"
@@ -124,7 +149,7 @@ export const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                                                 </SelectItem>
                                             ))}
                                         </RadixSelect.Group>
-                                        {index < groups.length - 1 && (
+                                        {groupIndex < groups.length - 1 && (
                                             <RadixSelect.Separator className="m-1 h-px bg-border dark:bg-border-dark" />
                                         )}
                                     </React.Fragment>
