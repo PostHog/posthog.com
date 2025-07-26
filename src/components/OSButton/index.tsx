@@ -50,6 +50,7 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     onClick?: (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => void
     state?: any
     zoomHover?: boolean | 'xs' | 'sm' | 'md' | 'lg'
+    hover?: 'border' | 'background'
 }
 
 export default function OSButton({
@@ -74,10 +75,11 @@ export default function OSButton({
     onClick,
     state = {},
     zoomHover,
+    hover = 'border',
     ...props
 }: OSButtonProps) {
     const baseClasses =
-        'relative inline-flex items-center rounded border text-primary transition-colors transition-[font-size,line-height,padding] transition-50 hover:transition-none disabled:text-muted disabled:cursor-not-allowed'
+        'relative items-center rounded border text-primary transition-colors font-medium transition-[font-size,line-height,padding] transition-50 hover:transition-none disabled:text-muted disabled:cursor-not-allowed'
 
     const parentSizeClasses = {
         xs: 'border-px top-[1px] rounded-[5px]',
@@ -106,9 +108,9 @@ export default function OSButton({
 
     // Size classes for non-primary/secondary buttons (without the translate effects and negative margins)
     const simpleSizeClasses = {
-        xs: 'px-1 py-0.5 text-[11px] gap-0.5 rounded-[5px]',
-        sm: 'px-1 py-0.5 text-xs gap-1 rounded-[5px]',
-        md: 'px-1.5 py-1 gap-1 rounded-[6px] text-[13px]',
+        xs: 'px-1 py-0.5 text-xs gap-0.5 rounded-[5px]',
+        sm: 'px-1 py-0.5 text-[13px] gap-1 rounded-[5px]',
+        md: 'px-1.5 py-1 gap-1 rounded-[6px] text-sm',
         lg: 'px-2 py-1.5 text-[15px] gap-1 rounded-[6px]',
         xl: 'px-2.5 py-2 text-base gap-1.5 rounded-[6px]',
     }
@@ -133,9 +135,15 @@ export default function OSButton({
     const variantClasses = {
         default: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${
             active
-                ? 'font-bold skin-modern:bg-accent skin-modern:hover:border-primary skin-classic:border-primary skin-classic:bg-primary'
-                : 'hover:bg-accent hover:skin-classic:bg-primary skin-classic:hover:border-primary skin-classic:border-transparent disabled:hover:bg-transparent disabled:hover:border-transparent'
-        } active:bg-accent-2/80 focus:border-primary`,
+                ? 'font-bold skin-modern:bg-accent/50 dark:skin-modern:bg-accent skin-modern:hover:border-primary skin-classic:border-primary skin-classic:bg-primary'
+                : hover === 'border'
+                ? 'hover:border-primary skin-classic:hover:border-primary skin-classic:border-transparent disabled:hover:bg-transparent disabled:hover:border-transparent'
+                : 'hover:bg-accent dark:hover:bg-accent disabled:hover:bg-transparent disabled:hover:border-transparent'
+        } ${
+            hover === 'border'
+                ? 'active:bg-accent/50 dark:active:bg-accent/50'
+                : 'active:bg-accent dark:active:bg-accent'
+        } active:border-primary focus:border-primary`,
         primary: {
             parent: 'bg-button-shadow dark:bg-button-shadow-dark text-primary border-button text-center group disabled:opacity-50 disabled:cursor-not-allowed inline-block',
             child: 'flex items-center justify-center bg-orange text-black hover:text-black dark:text-black dark:hover:text-black no-underline border-button dark:border-button-dark dark:bg-orange font-bold active:transition-all active:duration-100 select-none',
@@ -213,7 +221,7 @@ export default function OSButton({
     )
 
     const commonProps = {
-        className: `${baseClasses} ${
+        className: `${baseClasses} ${width === 'full' ? 'flex' : 'inline-flex'} ${
             variant === 'primary' || variant === 'secondary'
                 ? `${parentSizeClasses[size]} ${variantClasses[variant].parent}`
                 : `${simpleSizeClasses[size]} ${variantClasses[variant]} ${
@@ -236,7 +244,7 @@ export default function OSButton({
 
     return asLink ? (
         shouldApplyZoomHover ? (
-            <ZoomHover size={zoomHoverSize}>
+            <ZoomHover size={zoomHoverSize} width={width} display={width === 'full' ? 'block' : undefined}>
                 <Link to={to || ''} {...commonProps} {...(external ? { externalNoIcon: true } : {})}>
                     {buttonContent}
                 </Link>
@@ -247,7 +255,7 @@ export default function OSButton({
             </Link>
         )
     ) : shouldApplyZoomHover ? (
-        <ZoomHover size={zoomHoverSize} width={width}>
+        <ZoomHover size={zoomHoverSize} width={width} display={width === 'full' ? 'block' : undefined}>
             <button {...commonProps}>{buttonContent}</button>
         </ZoomHover>
     ) : (

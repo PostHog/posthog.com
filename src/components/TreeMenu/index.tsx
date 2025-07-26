@@ -37,6 +37,8 @@ const TreeLink = ({
             active={active}
             align="left"
             width="full"
+            size="md"
+            hover="background"
             asLink
             to={menuItem.url}
             className={index === 0 ? '' : `pl-${4 + index * 3}`}

@@ -59,6 +59,31 @@ export default function Components(): JSX.Element {
                                 </div>
                             </div>
 
+                            {/* Hover Styles Comparison */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">Hover styles comparison</h3>
+                                <div className="space-y-2">
+                                    <div className="flex items-center gap-4">
+                                        <OSButton>Default (border hover)</OSButton>
+                                        <span className="text-sm text-muted">Hover shows border</span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <OSButton hover="background">Background hover</OSButton>
+                                        <span className="text-sm text-muted">Hover shows background color</span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <OSButton active>Active state (border hover)</OSButton>
+                                        <span className="text-sm text-muted">Active with opacity</span>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <OSButton hover="background" active>
+                                            Active state (background hover)
+                                        </OSButton>
+                                        <span className="text-sm text-muted">Active with full color</span>
+                                    </div>
+                                </div>
+                            </div>
+
                             {/* Variants with All Sizes */}
                             <div className="mb-8">
                                 <h3 className="text-xl font-semibold mb-4">Variants with all sizes</h3>
@@ -670,6 +695,39 @@ export default function Components(): JSX.Element {
                                                 <td className="border border-primary px-4 py-2">
                                                     <OSButton size="xl" zoomHover>
                                                         Zoom
+                                                    </OSButton>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="border border-primary px-4 py-2 font-mono">
+                                                    hover="background"
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    Background color on hover instead of border
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="xs" hover="background">
+                                                        Background
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="sm" hover="background">
+                                                        Background
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="md" hover="background">
+                                                        Background
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="lg" hover="background">
+                                                        Background
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="xl" hover="background">
+                                                        Background
                                                     </OSButton>
                                                 </td>
                                             </tr>

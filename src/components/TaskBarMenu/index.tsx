@@ -10,6 +10,7 @@ import {
     IconLock,
     IconBookmark,
     IconUpload,
+    IconCode,
 } from '@posthog/icons'
 import { useApp } from '../../context/App'
 
@@ -173,6 +174,12 @@ export default function TaskBarMenu() {
                                                 key={`media-upload`}
                                             />
                                         ),
+                                },
+                                {
+                                    type: 'item' as const,
+                                    label: 'Components',
+                                    link: '/components',
+                                    icon: <IconCode className="opacity-50 group-hover/item:opacity-75 size-4" />,
                                 },
                             ]
                           : []),
