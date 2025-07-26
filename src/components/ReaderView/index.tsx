@@ -333,7 +333,7 @@ export default function ReaderView({
 }
 
 const Menu = () => {
-    const { parent, activeInternalMenu, setActiveInternalMenu } = useReaderView()
+    const { setActiveInternalMenu, activeInternalMenu, parent } = useWindow()
 
     return (
         <>
@@ -435,8 +435,6 @@ function ReaderViewContent({
         toggleToc,
         handleLineHeightChange,
         setFullWidthContent,
-        parent,
-        activeInternalMenu,
     } = useReaderView()
 
     const showSidebar = tableOfContents && tableOfContents?.length > 0

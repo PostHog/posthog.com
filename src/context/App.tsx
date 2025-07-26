@@ -9,6 +9,18 @@ import ForgotPassword from 'components/Squeak/components/Classic/ForgotPassword'
 import { User } from 'hooks/useUser'
 import { ChatProvider } from 'hooks/useChat'
 import Start from 'components/Start'
+import useDataPipelinesNav from '../navs/useDataPipelinesNav'
+import initialMenu from '../navs'
+
+export interface MenuItem {
+    name: string
+    url?: string
+    icon?: React.ReactNode
+    color?: string
+    children?: MenuItem[]
+}
+
+export type Menu = MenuItem[]
 
 interface ChatContext {
     type: 'page'
@@ -86,6 +98,7 @@ interface AppContextType {
     setIsActiveWindowsPanelOpen: (isOpen: boolean) => void
     isMobile: boolean
     compact: boolean
+    menu: Menu
 }
 
 interface AppProviderProps {
@@ -227,6 +240,7 @@ export const Context = createContext<AppContextType>({
     setIsActiveWindowsPanelOpen: () => {},
     isMobile: false,
     compact: false,
+    menu: [],
 })
 
 export interface AppSetting {
@@ -631,6 +645,8 @@ export interface SiteSettings {
     screensaverDisabled?: boolean
 }
 
+const isLabel = (item: any) => !item?.url && item?.name
+
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
     const compact = typeof window !== 'undefined' && window !== window.parent
@@ -662,6 +678,59 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     })
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
+
+    const destinationNav = useDataPipelinesNav({ type: 'destination' })
+    const transformationNav = useDataPipelinesNav({ type: 'transformation' })
+
+    const dynamicMenus = useMemo(
+        () => ({
+            'data-pipeline-destinations': destinationNav,
+            'data-pipeline-transformations': transformationNav,
+        }),
+        [destinationNav, transformationNav]
+    )
+
+    const injectDynamicChildren = useCallback((menu: Menu) => {
+        return menu?.map((item) => {
+            const processedItem = { ...item }
+
+            if (item.dynamicChildren && dynamicMenus[item.dynamicChildren]) {
+                const newChildren = [...(item.children || []), ...dynamicMenus[item.dynamicChildren]].reduce(
+                    (acc, child) => {
+                        if (isLabel(child)) {
+                            acc.push([child])
+                        } else {
+                            const lastGroup = acc[acc.length - 1]
+                            if (!lastGroup || isLabel(lastGroup[lastGroup.length - 1])) {
+                                acc.push([child])
+                            } else {
+                                lastGroup.push(child)
+                            }
+                        }
+                        return acc
+                    },
+                    []
+                )
+
+                newChildren.forEach((group) => {
+                    group.sort((a, b) => {
+                        if (!a.url || !b.url) return 0
+                        return a.name.localeCompare(b.name)
+                    })
+                })
+
+                processedItem.children = newChildren.flat()
+            }
+
+            if (processedItem.children && processedItem.children.length > 0) {
+                processedItem.children = injectDynamicChildren(processedItem.children)
+            }
+
+            return processedItem
+        })
+    }, [])
+
+    const menu = injectDynamicChildren(initialMenu)
 
     const closeWindow = useCallback(
         (item: AppWindow) => {
@@ -1220,6 +1289,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 setIsActiveWindowsPanelOpen,
                 isMobile,
                 compact,
+                menu,
             }}
         >
             {children}

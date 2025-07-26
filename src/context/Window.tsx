@@ -1,6 +1,6 @@
 import { IMenu } from 'components/PostLayout/types'
 import React, { createContext, useContext } from 'react'
-import { AppSetting } from './App'
+import { AppSetting, MenuItem } from './App'
 import { MenuItemType } from 'components/RadixUI/MenuBar'
 
 export interface AppWindow {
@@ -71,6 +71,10 @@ interface WindowProviderProps {
     canGoForward: boolean
     dragControls?: any
     setPageOptions: (pageOptions: MenuItemType[]) => void
+    setActiveInternalMenu: (activeInternalMenu: MenuItem) => void
+    internalMenu: MenuItem[]
+    activeInternalMenu?: MenuItem
+    parent: MenuItem
 }
 
 interface WindowContextType {
@@ -83,6 +87,10 @@ interface WindowContextType {
     canGoForward: boolean
     dragControls?: any
     setPageOptions: (pageOptions: MenuItemType[]) => void
+    setActiveInternalMenu: (activeInternalMenu: MenuItem) => void
+    internalMenu: MenuItem[]
+    activeInternalMenu?: MenuItem
+    parent: MenuItem
 }
 
 export const Context = createContext<WindowContextType>({
@@ -97,6 +105,19 @@ export const Context = createContext<WindowContextType>({
     setPageOptions: () => {
         // No-op default implementation
     },
+    setActiveInternalMenu: () => {
+        // No-op default implementation
+    },
+    internalMenu: [],
+    activeInternalMenu: {
+        name: '',
+        url: '',
+    },
+    parent: {
+        name: '',
+        url: '',
+        children: [],
+    },
 })
 
 export const Provider = ({
@@ -110,6 +131,10 @@ export const Provider = ({
     canGoForward,
     dragControls,
     setPageOptions,
+    setActiveInternalMenu,
+    internalMenu,
+    activeInternalMenu,
+    parent,
 }: WindowProviderProps) => {
     return (
         <Context.Provider
@@ -123,6 +148,10 @@ export const Provider = ({
                 canGoForward,
                 dragControls,
                 setPageOptions,
+                setActiveInternalMenu,
+                internalMenu,
+                activeInternalMenu,
+                parent,
             }}
         >
             {children}

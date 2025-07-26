@@ -1,19 +1,6 @@
-import React, { createContext, useContext, useState, useCallback, useEffect, useMemo } from 'react'
-import { useLocation } from '@reach/router'
-import { useLayoutData } from 'components/Layout/hooks'
-import initialMenu from '../../../navs'
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
 import { useWindow } from '../../../context/Window'
-import useDataPipelinesNav from '../../../navs/useDataPipelinesNav'
-
-interface MenuItem {
-    name: string
-    url?: string
-    icon?: React.ReactNode
-    color?: string
-    children?: MenuItem[]
-}
-
-type Menu = MenuItem[]
+import { MenuItem } from '../../../context/App'
 
 interface ReaderViewContextType {
     isNavVisible: boolean
@@ -21,36 +8,12 @@ interface ReaderViewContextType {
     fullWidthContent: boolean
     setFullWidthContent: (value: boolean) => void
     parent: MenuItem
-    internalMenu: MenuItem[]
-    activeInternalMenu: MenuItem | undefined
     lineHeightMultiplier: number
     backgroundImage: string | null
     toggleNav: () => void
     toggleToc: () => void
     handleLineHeightChange: (value: number) => void
-    setActiveInternalMenu: (menu: MenuItem) => void
     setBackgroundImage: (image: string | null) => void
-}
-
-const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
-    if (!array) return false
-
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i]
-
-        if (element.url?.split('?')[0] === value) {
-            return true
-        }
-
-        if (element.children) {
-            const found = recursiveSearch(element.children, value)
-            if (found) {
-                return true
-            }
-        }
-    }
-
-    return false
 }
 
 const getComputedLineHeight = (selector: string) => {
@@ -92,59 +55,6 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
         return null
     })
-
-    const destinationNav = useDataPipelinesNav({ type: 'destination' })
-    const transformationNav = useDataPipelinesNav({ type: 'transformation' })
-
-    const dynamicMenus = useMemo(
-        () => ({
-            'data-pipeline-destinations': destinationNav,
-            'data-pipeline-transformations': transformationNav,
-        }),
-        [destinationNav, transformationNav]
-    )
-
-    const injectDynamicChildren = useCallback((menu: Menu) => {
-        return menu?.map((item) => {
-            const processedItem = { ...item }
-
-            if (item.dynamicChildren && dynamicMenus[item.dynamicChildren]) {
-                const newChildren = [...(item.children || []), ...dynamicMenus[item.dynamicChildren]].reduce(
-                    (acc, child) => {
-                        if (isLabel(child)) {
-                            acc.push([child])
-                        } else {
-                            const lastGroup = acc[acc.length - 1]
-                            if (!lastGroup || isLabel(lastGroup[lastGroup.length - 1])) {
-                                acc.push([child])
-                            } else {
-                                lastGroup.push(child)
-                            }
-                        }
-                        return acc
-                    },
-                    []
-                )
-
-                newChildren.forEach((group) => {
-                    group.sort((a, b) => {
-                        if (!a.url || !b.url) return 0
-                        return a.name.localeCompare(b.name)
-                    })
-                })
-
-                processedItem.children = newChildren.flat()
-            }
-
-            if (processedItem.children && processedItem.children.length > 0) {
-                processedItem.children = injectDynamicChildren(processedItem.children)
-            }
-
-            return processedItem
-        })
-    }, [])
-
-    const menu = injectDynamicChildren(initialMenu)
 
     const toggleNav = useCallback(() => {
         setIsNavVisible((prev) => !prev)
@@ -192,24 +102,6 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
     }, [])
 
-    const parent = (menu as Menu).find(({ children, url }) => {
-        const currentURL = appWindow?.path
-        return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
-    }) || { name: 'Default', children: [] }
-
-    const internalMenu = parent?.children || []
-
-    const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(
-        internalMenu?.find((menuItem: MenuItem) => {
-            const currentURL = appWindow?.path
-            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
-        })
-    )
-
-    useEffect(() => {
-        setMenu?.(internalMenu)
-    }, [activeInternalMenu])
-
     // Reset ToC toggle state when path changes
     useEffect(() => {
         setTocUserToggled(false)
@@ -255,14 +147,11 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         fullWidthContent,
         setFullWidthContent,
         parent,
-        internalMenu,
-        activeInternalMenu,
         lineHeightMultiplier,
         backgroundImage,
         toggleNav,
         toggleToc,
         handleLineHeightChange,
-        setActiveInternalMenu,
         setBackgroundImage: handleBackgroundImageChange,
     }
 

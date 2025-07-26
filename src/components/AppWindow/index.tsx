@@ -9,7 +9,7 @@ import {
     IconExpand45Chevrons,
     IconSquare,
 } from '@posthog/icons'
-import { useApp } from '../../context/App'
+import { Menu, MenuItem, useApp } from '../../context/App'
 import { Provider as WindowProvider, AppWindow as AppWindowType, useWindow } from '../../context/Window'
 import { ContextMenu, Dialog } from 'radix-ui'
 import Tooltip from 'components/RadixUI/Tooltip'
@@ -25,6 +25,27 @@ import Handbook from '../../templates/Handbook'
 import BlogPost from '../../templates/BlogPost'
 import Legal from 'components/Legal'
 import { getProseClasses } from '../../constants'
+
+const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean => {
+    if (!array) return false
+
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i]
+
+        if (element.url?.split('?')[0] === value) {
+            return true
+        }
+
+        if (element.children) {
+            const found = recursiveSearch(element.children, value)
+            if (found) {
+                return true
+            }
+        }
+    }
+
+    return false
+}
 
 const snapThreshold = -50
 
@@ -77,6 +98,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         siteSettings,
         openNewChat,
         compact,
+        menu: appMenu,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -97,6 +119,24 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
     const [closing, setClosing] = useState(false)
     const [closed, setClosed] = useState(false)
+
+    const parent = (appMenu as Menu).find(({ children, url }) => {
+        const currentURL = item?.path
+        return currentURL === url?.split('?')[0] || recursiveSearch(children, currentURL)
+    }) || { name: 'Default', children: [] }
+
+    const internalMenu = parent?.children || []
+
+    const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(
+        internalMenu?.find((menuItem: MenuItem) => {
+            const currentURL = item?.path
+            return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
+        })
+    )
+
+    useEffect(() => {
+        setMenu?.(internalMenu)
+    }, [activeInternalMenu])
 
     useEffect(() => {
         if (windowRef.current) {
@@ -364,6 +404,10 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
             canGoForward={canGoForward}
             dragControls={controls}
             setPageOptions={setPageOptions}
+            activeInternalMenu={activeInternalMenu}
+            setActiveInternalMenu={setActiveInternalMenu}
+            internalMenu={internalMenu}
+            parent={parent}
         >
             <WindowContainer closing={closing}>
                 {!item.minimized && !closed && (
@@ -513,7 +557,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                             <Popover
                                                 trigger={
                                                     <button className="text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark text-left items-center justify-center text-sm font-semibold flex select-none">
-                                                        {item.meta?.title && item.meta.title}
+                                                        {(item.meta?.title && item.meta.title) ||
+                                                            activeInternalMenu?.name}
                                                         <IconChevronDown className="size-6 -m-1" />
                                                     </button>
                                                 }
