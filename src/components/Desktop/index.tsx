@@ -12,6 +12,7 @@ import { Screensaver } from '../Screensaver'
 import { useInactivityDetection } from '../../hooks/useInactivityDetection'
 import NotificationsPanel from 'components/NotificationsPanel'
 import useTheme from '../../hooks/useTheme'
+import { motion } from 'framer-motion'
 
 interface Product {
     name: string
@@ -129,13 +130,14 @@ const validateIconPositions = (positions: IconPositions, constraintsRef: React.R
 
 export default function Desktop() {
     const { constraintsRef, siteSettings } = useApp()
-    const [iconPositions, setIconPositions] = useState<IconPositions>({})
+    const [iconPositions, setIconPositions] = useState<IconPositions>(generateInitialPositions())
     const { isInactive, dismiss } = useInactivityDetection({
         enabled: !siteSettings.screensaverDisabled,
     })
+    const [rendered, setRendered] = useState(false)
     const { getWallpaperClasses } = useTheme()
 
-    const generateInitialPositions = (): IconPositions => {
+    function generateInitialPositions(): IconPositions {
         const positions: IconPositions = {}
 
         // Default positions if container isn't available yet
@@ -212,6 +214,8 @@ export default function Desktop() {
         const handleResize = () => {
             setIconPositions(generateInitialPositions())
         }
+
+        setRendered(true)
 
         window.addEventListener('resize', handleResize)
 
@@ -371,10 +375,13 @@ export default function Desktop() {
                     </div>
 
                     <nav>
-                        <ul className="list-none m-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2 md:mt-0 mt-4">
+                        <motion.ul
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: rendered ? 1 : 0 }}
+                            className="list-none m-0 p-0 grid sm:grid-cols-4 grid-cols-3 gap-2 md:mt-0 mt-4"
+                        >
                             {allApps.map((app) => {
                                 const position = iconPositions[app.label]
-                                if (!position) return null
 
                                 return (
                                     <DraggableDesktopIcon
@@ -385,7 +392,7 @@ export default function Desktop() {
                                     />
                                 )
                             })}
-                        </ul>
+                        </motion.ul>
                     </nav>
                 </div>
                 <Screensaver isActive={isInactive} onDismiss={dismiss} />
