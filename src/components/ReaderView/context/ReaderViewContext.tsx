@@ -7,7 +7,6 @@ interface ReaderViewContextType {
     isTocVisible: boolean
     fullWidthContent: boolean
     setFullWidthContent: (value: boolean) => void
-    parent: MenuItem
     lineHeightMultiplier: number
     backgroundImage: string | null
     toggleNav: () => void
@@ -40,7 +39,7 @@ const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undef
 const isLabel = (item: any) => !item?.url && item?.name
 
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
-    const { setMenu, appWindow } = useWindow()
+    const { appWindow } = useWindow()
     const [isNavVisible, setIsNavVisible] = useState(true)
     const [isTocVisible, setIsTocVisible] = useState(false)
     const [tocUserToggled, setTocUserToggled] = useState(false)
@@ -146,7 +145,6 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         isTocVisible,
         fullWidthContent,
         setFullWidthContent,
-        parent,
         lineHeightMultiplier,
         backgroundImage,
         toggleNav,
