@@ -49,6 +49,10 @@ export default function Components(): JSX.Element {
                                 <h3 className="text-xl font-semibold mb-4">Common usage</h3>
                                 <div className="flex items-center gap-px flex-wrap">
                                     <OSButton size="sm" icon={<IconSearch />}></OSButton>
+                                    <OSButton size="sm" icon={<IconSearch />}></OSButton>
+                                    <OSButton size="sm" icon={<IconSearch />}></OSButton>
+                                    <OSButton size="md" icon={<IconSearch />}></OSButton>
+                                    <OSButton size="md" icon={<IconSearch />}></OSButton>
                                     <OSButton size="md" icon={<IconSearch />}></OSButton>
                                     <OSButton variant="primary">Get started – free</OSButton>
                                     <OSButton variant="secondary">Get started – free</OSButton>
@@ -548,7 +552,7 @@ export default function Components(): JSX.Element {
                                             <tr>
                                                 <td className="border border-primary px-4 py-2 font-mono">label</td>
                                                 <td className="border border-primary px-4 py-2">
-                                                    Additional label text with reduced opacity
+                                                    Additional label text with secondary color
                                                 </td>
                                                 <td className="border border-primary px-4 py-2">
                                                     <OSButton size="xs" label="New">
@@ -573,6 +577,37 @@ export default function Components(): JSX.Element {
                                                 <td className="border border-primary px-4 py-2">
                                                     <OSButton size="xl" label="New">
                                                         Create
+                                                    </OSButton>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td className="border border-primary px-4 py-2 font-mono">chip</td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    Chip badge with border (optional color)
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="xs" chip="New">
+                                                        Create
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="sm" chip="Beta" chipColor="blue">
+                                                        Feature
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="md" chip="Pro" chipColor="green">
+                                                        Upgrade
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="lg" chip="Hot" chipColor="red">
+                                                        Deal
+                                                    </OSButton>
+                                                </td>
+                                                <td className="border border-primary px-4 py-2">
+                                                    <OSButton size="xl" chip="Limited" chipColor="orange">
+                                                        Offer
                                                     </OSButton>
                                                 </td>
                                             </tr>
@@ -785,32 +820,32 @@ export default function Components(): JSX.Element {
                                     <div className="border border-primary p-4 rounded">
                                         <h4 className="font-semibold mb-4">Default with icon & label</h4>
                                         <div className="space-y-2">
-                                            <div>
-                                                <span className="text-sm font-mono">XS:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">XS:</span>
                                                 <OSButton size="xs" icon={<IconUser />} label="New">
                                                     Create
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">SM:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">SM:</span>
                                                 <OSButton size="sm" icon={<IconUser />} label="New">
                                                     Create
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">MD:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">MD:</span>
                                                 <OSButton size="md" icon={<IconUser />} label="New">
                                                     Create
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">LG:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">LG:</span>
                                                 <OSButton size="lg" icon={<IconUser />} label="New">
                                                     Create
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">XL:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">XL:</span>
                                                 <OSButton size="xl" icon={<IconUser />} label="New">
                                                     Create
                                                 </OSButton>
@@ -915,34 +950,80 @@ export default function Components(): JSX.Element {
                                     <div className="border border-primary p-4 rounded">
                                         <h4 className="font-semibold mb-4">Default with tooltip</h4>
                                         <div className="space-y-2">
-                                            <div>
-                                                <span className="text-sm font-mono">XS:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">XS:</span>
                                                 <OSButton size="xs" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">SM:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">SM:</span>
                                                 <OSButton size="sm" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">MD:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">MD:</span>
                                                 <OSButton size="md" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">LG:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">LG:</span>
                                                 <OSButton size="lg" tooltip="This action cannot be undone">
                                                     Delete
                                                 </OSButton>
                                             </div>
-                                            <div>
-                                                <span className="text-sm font-mono">XL:</span>{' '}
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">XL:</span>
                                                 <OSButton size="xl" tooltip="This action cannot be undone">
                                                     Delete
+                                                </OSButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="border border-primary p-4 rounded">
+                                        <h4 className="font-semibold mb-4">Button with chip & icon</h4>
+                                        <div className="space-y-2">
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">XS:</span>
+                                                <OSButton size="xs" icon={<IconUser />} chip="Pro">
+                                                    Profile
+                                                </OSButton>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">SM:</span>
+                                                <OSButton
+                                                    size="sm"
+                                                    icon={<IconArrowRight />}
+                                                    iconPosition="right"
+                                                    chip="New"
+                                                    chipColor="green"
+                                                >
+                                                    Try it
+                                                </OSButton>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">MD:</span>
+                                                <OSButton size="md" variant="primary" chip="Beta" chipColor="blue">
+                                                    Enable feature
+                                                </OSButton>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">LG:</span>
+                                                <OSButton
+                                                    size="lg"
+                                                    variant="secondary"
+                                                    icon={<IconInfo />}
+                                                    chip="Limited"
+                                                >
+                                                    Learn more
+                                                </OSButton>
+                                            </div>
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-sm font-mono">XL:</span>
+                                                <OSButton size="xl" label="$99/mo" chip="Sale" chipColor="red">
+                                                    Upgrade now
                                                 </OSButton>
                                             </div>
                                         </div>

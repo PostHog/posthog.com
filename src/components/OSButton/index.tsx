@@ -36,6 +36,8 @@ interface OSButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElemen
     iconClassName?: string
     tooltip?: string
     label?: string
+    chip?: string
+    chipColor?: string
     className?: string
     active?: boolean
     disabled?: boolean
@@ -58,6 +60,8 @@ export default function OSButton({
     iconClassName,
     tooltip,
     label,
+    chip,
+    chipColor,
     className = '',
     active = false,
     disabled = false,
@@ -117,6 +121,15 @@ export default function OSButton({
         xl: 'size-6',
     }
 
+    // Label and chip sizes relative to button text
+    const labelSizeClasses = {
+        xs: 'text-[10px]',
+        sm: 'text-[11px]',
+        md: 'text-xs',
+        lg: 'text-sm',
+        xl: 'text-[15px]',
+    }
+
     const variantClasses = {
         default: `bg-transparent border-transparent skin-classic:border-b-3 rounded ${
             active
@@ -147,7 +160,16 @@ export default function OSButton({
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
                     {children}
-                    {label && <span className="text-sm opacity-75">{label}</span>}
+                    {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
+                    {chip && (
+                        <span
+                            className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${
+                                chipColor ? `text-${chipColor} border-${chipColor}` : 'text-primary border-primary'
+                            }`}
+                        >
+                            {chip}
+                        </span>
+                    )}
                     {icon && iconPosition === 'right' && (
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
@@ -165,7 +187,16 @@ export default function OSButton({
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
                     {children}
-                    {label && <span className="text-sm opacity-75">{label}</span>}
+                    {label && <span className={`${labelSizeClasses[size]} text-secondary`}>{label}</span>}
+                    {chip && (
+                        <span
+                            className={`${labelSizeClasses[size]} border px-0.5 rounded-sm ${
+                                chipColor ? `text-${chipColor} border-${chipColor}` : 'text-primary border-primary'
+                            }`}
+                        >
+                            {chip}
+                        </span>
+                    )}
                     {icon && iconPosition === 'right' && (
                         <span className={`${iconSizeClasses[size]} ${iconClassName}`}>{icon}</span>
                     )}
