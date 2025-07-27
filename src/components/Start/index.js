@@ -30,7 +30,7 @@ const AIInstall = ({ setActiveTab }) => (
     >
         <div className="flex-1 p-4 @2xl:p-6">
             <IntegrationPrompt />
-            <p className="border-t border-primary pt-4 mt-4 text-sm">
+            <p className="border-t border-primary pt-4 mt-6 text-sm">
                 Not into AI?{' '}
                 <button className="cursor-pointer font-semibold underline" onClick={() => setActiveTab('signup')}>
                     Sign up the old fashioned way.

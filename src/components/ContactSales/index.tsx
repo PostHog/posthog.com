@@ -80,6 +80,9 @@ export default function ContactSales({ location }) {
                     buttonOptions={{
                         size: 'md',
                     }}
+                    formOptions={{
+                        className: 'pb-4',
+                    }}
                     form={{
                         fields: [
                             {

@@ -17,7 +17,7 @@ export default function IntegrationPrompt() {
     return (
         <>
             <h3>
-                <span className="mr-1">Install in 90 seconds with this command</span>
+                <span className="mr-1">Install with AI in 90 seconds</span>
                 <div className="inline-block bg-blue/10 text-blue px-0.5 rounded-sm text-xs font-medium border border-blue">
                     BETA
                 </div>

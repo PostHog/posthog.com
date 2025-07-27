@@ -254,6 +254,7 @@ export default function Inbox(props) {
                                                     to={`/questions/${permalink}`}
                                                     align="left"
                                                     width="full"
+                                                    hover="background"
                                                     key={question.id}
                                                     className={` 
                                                         flex-wrap @3xl:flex-nowrap !gap-0 @3xl:!gap-1 !items-start

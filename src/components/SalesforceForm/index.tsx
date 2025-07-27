@@ -8,6 +8,7 @@ import { IconCheck, IconSend } from '@posthog/icons'
 import * as Yup from 'yup'
 import Editor from 'components/Editor'
 import { Select } from 'components/RadixUI/Select'
+import OSButton from 'components/OSButton'
 
 interface CustomFieldOption {
     label: string
@@ -98,7 +99,7 @@ function Radio({
     reference?: RefObject<HTMLInputElement>
 }) {
     const { fields, openOptions, setOpenOptions } = useContext(FormContext)
-    const { setFieldValue, values } = useFormikContext()
+    const { setFieldValue, values } = useFormikContext<Record<string, any>>()
 
     const handleChange = async (e: React.FormEvent<HTMLInputElement>) => {
         const { value } = e.currentTarget
@@ -157,17 +158,19 @@ function Checkbox({
     name: string
     reference?: RefObject<HTMLInputElement>
 }) {
-    const { setFieldValue, values } = useFormikContext()
+    const { setFieldValue, values } = useFormikContext<Record<string, any>>()
 
     const handleChange = async (e: React.FormEvent<HTMLInputElement>) => {
         const { value } = e.currentTarget
-        const newValues = values[name].includes(value)
-            ? values[name].filter((v) => v !== value)
-            : [...values[name], value]
+        const currentValues = Array.isArray(values[name]) ? values[name] : []
+        const newValues = currentValues.includes(value)
+            ? currentValues.filter((v: any) => v !== value)
+            : [...currentValues, value]
         name && value && (await setFieldValue(name, newValues))
     }
 
-    const checked = values[name].includes(value)
+    const currentValues = Array.isArray(values[name]) ? values[name] : []
+    const checked = currentValues.includes(value)
 
     return (
         <>
@@ -209,7 +212,7 @@ function RadioGroup({
     type: string
 }) {
     if (!name) return null
-    const { errors, values, setFieldValue } = useFormikContext()
+    const { errors, values, setFieldValue } = useFormikContext<Record<string, any>>()
     const error = (errors as any)[name]
     const formValues = values as any
 
@@ -255,8 +258,8 @@ const inputContainerClasses = `relative text-left text-sm col-span-2`
 const Textarea = (props: InputHTMLAttributes<HTMLTextAreaElement>) => {
     const { name, placeholder } = props
     if (!name) return null
-    const { errors, validateField, setFieldValue } = useFormikContext()
-    const error = errors[name]
+    const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
+    const error = (errors as any)[name]
 
     return (
         <>
@@ -286,8 +289,8 @@ const Input = (props: InputHTMLAttributes<HTMLInputElement>) => {
     const { name, placeholder } = props
     if (!name) return null
     const type = props.type
-    const { errors, validateField, setFieldValue } = useFormikContext()
-    const error = errors[name]
+    const { errors, validateField, setFieldValue } = useFormikContext<Record<string, any>>()
+    const error = (errors as any)[name]
     return (
         <>
             <label className={`${inputContainerClasses} ${error ? '' : ''}`} htmlFor={props.id}>
@@ -382,18 +385,9 @@ export default function SalesforceForm({
             >
                 <Form className={formOptions?.className}>
                     <div className="px-4 pt-2 pb-1 border-b border-primary">
-                        <button
-                            className={button(
-                                buttonOptions?.type,
-                                'auto',
-                                buttonOptions?.className ?? '',
-                                buttonOptions?.size ?? 'sm'
-                            )}
-                            type="submit"
-                        >
-                            <IconSend className="size-4 inline-block" />
+                        <OSButton size="md" variant="primary" icon={<IconSend />} type="submit">
                             {form.buttonText ?? 'Submit'}
-                        </button>
+                        </OSButton>
                     </div>
                     <div className="p-4">
                         <div className="grid grid-cols-12 gap-2">
@@ -418,8 +412,8 @@ export default function SalesforceForm({
                                         return (
                                             <RadioGroup
                                                 key={`${name}-${index}`}
-                                                type={fieldType}
-                                                options={options}
+                                                type={fieldType || 'radio'}
+                                                options={options || []}
                                                 name={name}
                                                 placeholder={label}
                                                 cols={cols || formOptions?.cols}
@@ -455,20 +449,6 @@ export default function SalesforceForm({
                             }
                             return null
                         })}
-                    </div>
-
-                    <div className="px-4">
-                        <button
-                            className={button(
-                                buttonOptions?.type,
-                                'full',
-                                buttonOptions?.className ?? 'mt-4',
-                                buttonOptions?.size ?? 'sm'
-                            )}
-                            type="submit"
-                        >
-                            {form.buttonText ?? 'Submit'}
-                        </button>
                     </div>
                 </Form>
             </Formik>
