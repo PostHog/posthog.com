@@ -92,24 +92,28 @@ interface BaseCustomer {
     featured: boolean
 }
 
-// Define all customer data
+// Note: height needs to be a Tailwind class. Use /customers for reference as that's where it's balanced out.
+// Product customer slides also use these, but use the value with a multiplier to make them larger for that slide.
 const CUSTOMER_DATA: Record<string, BaseCustomer> = {
     '4dayweek': {
         name: '4DayWeek',
         toolsUsed: ['experiments', 'product_analytics'],
         notes: 'Job board',
+        featured: false,
         // logo: 4DayWeekLogo,
     },
     '11x': {
         name: '11x',
         toolsUsed: ['experiments', 'product_analytics', 'llm_analytics', 'cdp'],
         notes: 'AI SDR',
+        featured: false,
         // logo: 11xLogo,
     },
     adauris: {
         name: 'Adauris',
         toolsUsed: ['experiments', 'session_replay', 'product_analytics'],
         notes: 'Generative AI audio',
+        featured: false,
         // logo: AdaurisLogo,
     },
     airbus: {
@@ -132,18 +136,21 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['experiments', 'product_analytics', 'apps'],
         notes: 'Collaborative DevOps',
         logo: BrainboardLogo,
+        featured: false,
     },
     carvertical: {
         name: 'carVertical',
         toolsUsed: ['feature_flags', 'product_analytics'],
         notes: 'Vehicle history reports',
         logo: CarVerticalLogo,
+        featured: false,
     },
     contra: {
         name: 'Contra',
         toolsUsed: ['feature_flags', 'session_replay', 'product_analytics'],
         notes: 'Creative freelance marketplace',
         logo: ContraLogo,
+        featured: false,
     },
     creatify: {
         name: 'Creatify',
@@ -154,6 +161,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             dark: CreatifyLogoDark,
         },
         height: 28,
+        featured: false,
     },
     dhl: {
         name: 'DHL',
@@ -167,19 +175,21 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['feature_flags', 'product_analytics', 'feature_flags', 'surveys'],
         notes: 'AI voice generator',
         logo: ElevenLabsLogo,
-        height: 18,
+        height: 8,
         featured: true,
     },
     greatexpectations: {
         name: 'Great Expectations',
         toolsUsed: ['product_analytics'],
         notes: 'Data quality SaaS platform',
+        featured: false,
         // logo: GreatExpectationsLogo,
     },
     groove: {
         name: 'Groove',
         toolsUsed: ['experiments', 'product_analytics', 'surveys'],
         notes: 'Help desk platform',
+        featured: false,
         // logo: GrooveLogo,
     },
     hasura: {
@@ -188,23 +198,27 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Open source GraphQL engine',
         logo: HasuraLogo,
         featured: true,
+        height: 10,
     },
     headshotpro: {
         name: 'HeadshotPro',
         toolsUsed: ['data_warehouse', 'product_analytics'],
         notes: 'AI photo generator',
         logo: HeadshotProLogo,
+        featured: false,
     },
     hostai: {
         name: 'HostAI',
         toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
         notes: 'AI for vacation rentals managers',
+        featured: false,
         // logo: HostAILogo,
     },
     juicebox: {
         name: 'Juicebox',
         toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
         notes: 'AI recruitment platform',
+        featured: false,
         // logo: JuiceboxLogo,
     },
     mentionme: {
@@ -212,19 +226,21 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['product_analytics', 'session_replay'],
         notes: 'Marketing referral campaigns',
         logo: MentionMeLogo,
+        featured: false,
     },
     mintlify: {
         name: 'Mintlify',
         toolsUsed: ['session_replay', 'api'],
         notes: 'Product and technical docs',
         logo: MintlifyLogo,
+        featured: false,
     },
     mistralai: {
         name: 'Mistral AI',
         toolsUsed: [],
         notes: '',
         logo: MistralAILogo,
-        height: 12,
+        height: 10,
         featured: true,
     },
     netdata: {
@@ -232,11 +248,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['session_replay', 'apps'],
         notes: 'Open source monitoring',
         logo: NetdataLogo,
+        height: 8,
+        featured: false,
     },
     octomind: {
         name: 'Octomind',
         toolsUsed: ['experiments', 'surveys', 'product_analytics', 'web_analytics'],
         notes: 'AI-powered end-to-end testing',
+        featured: false,
         // logo: OctomindLogo,
     },
     opensauced: {
@@ -244,18 +263,22 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['product_analytics'],
         notes: 'Open source contribution tracker',
         logo: OpenSaucedLogo,
+        featured: false,
     },
     phantom: {
         name: 'Phantom',
         toolsUsed: ['data_warehouse', 'feature_flags'],
         notes: 'Crypto wallet',
         logo: PhantomLogo,
+        featured: false,
     },
     pry: {
         name: 'Pry',
         toolsUsed: ['product_analytics', 'session_replay', 'heatmaps'],
         notes: 'Financial planning for SMBs, acquired by Brex',
         logo: PryLogo,
+        height: 8,
+        featured: false,
     },
     posthog: {
         name: 'PostHog',
@@ -282,6 +305,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Heavy duty equipment marketplace',
         logo: PurpleWaveLogo,
         height: 24,
+        featured: false,
     },
     raycast: {
         name: 'Raycast',
@@ -304,6 +328,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Digital agency',
         logo: SignificaLogo,
         height: 24,
+        featured: false,
         quotes: [
             {
                 name: 'Tomás Gouveia',
@@ -323,6 +348,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['feature_flags', 'product_analytics'],
         notes: 'API generator',
         logo: SpeakeasyLogo,
+        featured: false,
     },
     supabase: {
         name: 'Supabase',
@@ -357,23 +383,27 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['experiments', 'apps', 'cdp'],
         notes: 'Channel partner platform',
         logo: VendastaLogo,
+        featured: false,
     },
     webshare: {
         name: 'Webshare',
         toolsUsed: ['data_warehouse', 'experiments', 'product_analytics'],
         notes: 'Proxy server',
         logo: WebshareLogo,
+        featured: false,
     },
     wittyworks: {
         name: 'Witty Works',
         toolsUsed: ['apps', 'product_analytics'],
         notes: '',
         logo: WittyWorksLogo,
+        featured: false,
     },
     wowzer: {
         name: 'Wowzer',
         toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
         notes: 'AI image generator',
+        featured: false,
         // logo: WowzerLogo,
     },
     ycombinator: {
@@ -392,6 +422,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: ZealotLogo,
             dark: ZealotLogoDark,
         },
+        featured: false,
     },
 }
 

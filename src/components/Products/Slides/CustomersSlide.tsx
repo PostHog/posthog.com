@@ -31,7 +31,7 @@ interface CustomersSlideProps {
 export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
     // Create table structure for customers
     const customerTableColumns = [
-        { name: '', width: 'minmax(auto,100px)', align: 'center' as const, className: 'hidden @md:block' },
+        { name: '', width: 'minmax(auto,100px)', align: 'center' as const, className: 'hidden @md:flex' },
         { name: 'Company', width: 'minmax(150px,300px)', align: 'center' as const },
         { name: '', width: 'minmax(auto,1fr)', align: 'left' as const },
         { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
@@ -57,8 +57,8 @@ export default function CustomersSlide({ productName, customers, customerData, h
                     const className = `w-full fill-current object-contain ${heightClass}`.trim()
 
                     return (
-                        <div className="">
-                            <LogoComponent className={className} />
+                        <div className="" style={{ maxHeight: customer.height ? customer.height * 5 + 'px' : '' }}>
+                            <LogoComponent className={`${className} h-full`} />
                         </div>
                     )
                 }
@@ -84,7 +84,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
 
             return {
                 cells: [
-                    { content: index + 1, className: 'hidden @md:block' },
+                    { content: index + 1, className: 'hidden @md:flex' },
                     {
                         content: renderLogo(),
                         className: 'p-1 @md:!p-4',

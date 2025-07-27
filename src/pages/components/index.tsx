@@ -10,8 +10,45 @@ import { IconPencil, IconUser, IconArrowRight, IconInfo, IconSearch } from '@pos
 import { Accordion } from 'components/RadixUI/Accordion'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
+import { useCustomers } from 'hooks/useCustomers'
 
 export default function Components(): JSX.Element {
+    const { customers } = useCustomers()
+
+    // Logo rendering logic from customers page
+    const renderCustomerLogo = (customer: any) => {
+        if (!customer.logo) {
+            return <span className="text-sm text-muted">{customer.name}</span>
+        }
+
+        // Check if logo is a React component (single SVG format)
+        if (typeof customer.logo === 'function') {
+            const LogoComponent = customer.logo
+            const heightClass = customer.height ? `h-${customer.height}` : ''
+            const className = `w-full fill-current object-contain ${heightClass}`.trim()
+
+            return <LogoComponent className={className} />
+        }
+
+        // Otherwise, it's the existing light/dark object format
+        const heightClass = customer.height ? `max-h-${customer.height}` : 'max-h-10'
+
+        return (
+            <>
+                <img
+                    src={customer.logo.light}
+                    alt={customer.name}
+                    className={`w-auto object-contain dark:hidden ${heightClass}`}
+                />
+                <img
+                    src={customer.logo.dark}
+                    alt={customer.name}
+                    className={`w-auto object-contain hidden dark:block ${heightClass}`}
+                />
+            </>
+        )
+    }
+
     return (
         <>
             <SEO
@@ -1248,6 +1285,39 @@ export default function Components(): JSX.Element {
                                             </p>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </section>
+                        <section>
+                            <h2 className="">
+                                <code>useCustomers</code>
+                            </h2>
+
+                            {/* Customer Logos Display */}
+                            <div className="mb-8">
+                                <h3 className="text-xl font-semibold mb-4">
+                                    All customer logos with normalized sizing
+                                </h3>
+                                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                                    {Object.values(customers).map((customer: any) => (
+                                        <div
+                                            key={customer.slug}
+                                            className="flex flex-col items-center space-y-2 p-4 border border-primary rounded"
+                                        >
+                                            <div className="flex items-center justify-center h-16 w-full">
+                                                {renderCustomerLogo(customer)}
+                                            </div>
+                                            <div className="text-center">
+                                                <div className="text-sm font-medium">{customer.name}</div>
+                                                {customer.height && (
+                                                    <div className="text-xs text-muted">Height: {customer.height}</div>
+                                                )}
+                                                {customer.featured && (
+                                                    <div className="text-xs text-orange">Featured</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    ))}
                                 </div>
                             </div>
                         </section>
