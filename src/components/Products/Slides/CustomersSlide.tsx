@@ -31,7 +31,7 @@ interface CustomersSlideProps {
 export default function CustomersSlide({ productName, customers, customerData, hasCaseStudy }: CustomersSlideProps) {
     // Create table structure for customers
     const customerTableColumns = [
-        { name: '', width: 'minmax(auto,100px)', align: 'center' as const, className: 'hidden @md:flex' },
+        { name: '', width: 'minmax(auto,100px)', align: 'center' as const },
         { name: 'Company', width: 'minmax(150px,300px)', align: 'center' as const },
         { name: '', width: 'minmax(auto,1fr)', align: 'left' as const },
         { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
@@ -84,10 +84,10 @@ export default function CustomersSlide({ productName, customers, customerData, h
 
             return {
                 cells: [
-                    { content: index + 1, className: 'hidden @md:flex' },
+                    { content: index + 1, className: 'flex' },
                     {
                         content: renderLogo(),
-                        className: 'p-1 @md:!p-4',
+                        className: '!p-4',
                     },
                     {
                         content: (
@@ -96,7 +96,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                                 <span className="text-lg italic">"{data.description}"</span>
                             </>
                         ),
-                        className: 'text-xl px-2 @md:!px-8 !py-4',
+                        className: 'text-xl !px-8 !py-4',
                     },
                     {
                         content: hasCaseStudy(customer.slug) ? (
