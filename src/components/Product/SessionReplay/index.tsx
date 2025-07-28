@@ -465,7 +465,7 @@ export const ProductSessionReplay = () => {
                     </ul>
                 </section>
 
-                <section className="bg-accent dark:bg-accent-dark">
+                <section className="bg-accent">
                     <Marquee product={product.capitalized}>
                         {questions.map((question, index) => {
                             return <Question {...question} key={index} />

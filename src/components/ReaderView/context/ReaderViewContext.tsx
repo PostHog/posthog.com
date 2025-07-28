@@ -1,0 +1,165 @@
+import React, { createContext, useContext, useState, useCallback, useEffect } from 'react'
+import { useWindow } from '../../../context/Window'
+import { MenuItem } from '../../../context/App'
+
+interface ReaderViewContextType {
+    isNavVisible: boolean
+    isTocVisible: boolean
+    fullWidthContent: boolean
+    setFullWidthContent: (value: boolean) => void
+    lineHeightMultiplier: number
+    backgroundImage: string | null
+    toggleNav: () => void
+    toggleToc: () => void
+    handleLineHeightChange: (value: number) => void
+    setBackgroundImage: (image: string | null) => void
+}
+
+const getComputedLineHeight = (selector: string) => {
+    const articleContent = document.querySelector('.article-content')
+    const elements = articleContent?.querySelectorAll(selector)
+
+    if (!elements?.length) return 1
+
+    const computedStyle = window.getComputedStyle(elements[0])
+    const lineHeight = computedStyle.lineHeight
+
+    if (lineHeight === 'normal') return 1.2
+    if (lineHeight.endsWith('px')) {
+        return parseFloat(lineHeight) / parseFloat(computedStyle.fontSize)
+    }
+    if (lineHeight.endsWith('%')) {
+        return parseFloat(lineHeight) / 100
+    }
+    return parseFloat(lineHeight)
+}
+
+const ReaderViewContext = createContext<ReaderViewContextType | undefined>(undefined)
+
+const isLabel = (item: any) => !item?.url && item?.name
+
+export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
+    const { appWindow } = useWindow()
+    const [isNavVisible, setIsNavVisible] = useState(true)
+    const [isTocVisible, setIsTocVisible] = useState(false)
+    const [tocUserToggled, setTocUserToggled] = useState(false)
+    const [fullWidthContent, setFullWidthContent] = useState(false)
+    const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
+    const [lineHeightP, setLineHeightP] = useState<number | null>(null)
+    const [lineHeightLi, setLineHeightLi] = useState<number | null>(null)
+    const [backgroundImage, setBackgroundImage] = useState<string | null>(() => {
+        if (typeof window !== 'undefined') {
+            const savedBackground = localStorage.getItem('background-image')
+            return savedBackground
+        }
+        return null
+    })
+
+    const toggleNav = useCallback(() => {
+        setIsNavVisible((prev) => !prev)
+    }, [])
+
+    const toggleToc = useCallback(() => {
+        setTocUserToggled(true)
+        setIsTocVisible((prev) => !prev)
+    }, [])
+
+    const handleLineHeightChange = (value: number) => {
+        setLineHeightMultiplier(value)
+    }
+
+    useEffect(() => {
+        if (!lineHeightP || !lineHeightLi) return
+        const styleId = 'reader-line-height-style'
+        let style = document.getElementById(styleId) as HTMLStyleElement
+
+        if (!style) {
+            style = document.createElement('style')
+            style.id = styleId
+            document.head.appendChild(style)
+        }
+
+        style.textContent = `
+            .article-content p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
+            .article-content li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
+        `
+        localStorage.setItem('lineHeightMultiplier', lineHeightMultiplier.toString())
+
+        return () => {
+            style.remove()
+        }
+    }, [lineHeightMultiplier, lineHeightLi, lineHeightP])
+
+    useEffect(() => {
+        const baseLineHeightP = getComputedLineHeight('p')
+        const baseLineHeightLi = getComputedLineHeight('li')
+        setLineHeightP(baseLineHeightP)
+        setLineHeightLi(baseLineHeightLi)
+        const storedLineHeightMultiplier = localStorage.getItem('lineHeightMultiplier')
+        if (storedLineHeightMultiplier) {
+            handleLineHeightChange(parseFloat(storedLineHeightMultiplier))
+        }
+    }, [])
+
+    // Reset ToC toggle state when path changes
+    useEffect(() => {
+        setTocUserToggled(false)
+    }, [appWindow?.path])
+
+    const handleBackgroundImageChange = useCallback((image: string | null) => {
+        setBackgroundImage(image)
+        if (typeof window !== 'undefined') {
+            if (image) {
+                localStorage.setItem('background-image', image)
+            } else {
+                localStorage.removeItem('background-image')
+            }
+        }
+    }, [])
+
+    useEffect(() => {
+        const storedFullWidthContent = localStorage.getItem('fullWidthContent')
+        if (storedFullWidthContent) {
+            setFullWidthContent(storedFullWidthContent === 'true')
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('fullWidthContent', fullWidthContent.toString())
+    }, [fullWidthContent])
+
+    // Monitor container size and update ToC visibility
+    useEffect(() => {
+        if (!appWindow?.size?.width) return
+
+        // @6xl breakpoint is 72rem = 1152px
+        const isLarge = appWindow?.size?.width >= 1152
+        // Only update ToC visibility if user hasn't manually toggled it
+        if (!tocUserToggled) {
+            setIsTocVisible(isLarge)
+        }
+    }, [appWindow?.size?.width])
+
+    const value = {
+        isNavVisible,
+        isTocVisible,
+        fullWidthContent,
+        setFullWidthContent,
+        lineHeightMultiplier,
+        backgroundImage,
+        toggleNav,
+        toggleToc,
+        handleLineHeightChange,
+        setBackgroundImage: handleBackgroundImageChange,
+    }
+
+    return <ReaderViewContext.Provider value={value}>{children}</ReaderViewContext.Provider>
+}
+
+export function useReaderView() {
+    const context = useContext(ReaderViewContext)
+    if (context === undefined) {
+        throw new Error('useReaderView must be used within a ReaderViewProvider')
+    }
+    return context
+}

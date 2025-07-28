@@ -44,8 +44,8 @@ function RoadmapDetail({
     className?: string
 }) {
     return (
-        <div className={`md:col-span-5 border border-border dark:border-border-dark w-full ${className}`}>
-            <div className="flex justify-between items-center py-2 px-4 border-b border-light dark:border-dark bg-accent dark:bg-accent-dark">
+        <div className={`md:col-span-5 border border-primary w-full ${className}`}>
+            <div className="flex justify-between items-center py-2 px-4 border-b border-primary bg-accent">
                 <CallToAction
                     size="xs"
                     type="outline"
@@ -80,7 +80,7 @@ function RoadmapDetail({
                     </span>
                 </CallToAction>
             </div>
-            <div className="p-4 bg-white dark:bg-dark">
+            <div className="p-4 bg-light dark:bg-dark">
                 <h3 className="text-lg font-bold mb-1">{activeRoadmap.title}</h3>
                 <Markdown>{activeRoadmap.description}</Markdown>
             </div>
@@ -176,7 +176,7 @@ export default function TimelineNew() {
             </p>
             {/* <div className="mt-10">
                 <Slider
-                    className="border-b border-border dark:border-border-dark mb-8 space-x-4"
+                    className="border-b border-primary mb-8 space-x-4"
                     activeIndex={filters.indexOf(activeFilter)}
                 >
                     {filters.map((label) => {
@@ -196,12 +196,12 @@ export default function TimelineNew() {
                     })}
                 </Slider>
             </div> */}
-            <ul className="m-0 p-0 list-none space-x-2 flex flex-shrink-0 border-b border-border dark:border-border-dark mt-8 mb-3">
+            <ul className="m-0 p-0 list-none space-x-2 flex flex-shrink-0 border-b border-primary mt-8 mb-3">
                 {Object.entries(roadmapsGrouped).map(([year]) => (
                     <li key={year}>
                         <button
-                            className={`text-sm hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md ${
-                                year === activeYear ? 'bg-accent dark:bg-accent-dark font-bold' : ''
+                            className={`text-sm hover:bg-accent px-2 py-1 rounded-md ${
+                                year === activeYear ? 'bg-accent font-bold' : ''
                             }`}
                             onClick={() => {
                                 setActiveYear(year)
@@ -241,7 +241,7 @@ export default function TimelineNew() {
                                 roadmaps.map((node) => (
                                     <li key={node.squeakId}>
                                         <button
-                                            className={`text-left text-sm hover:bg-accent/60 dark:hover:bg-accent-dark px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
+                                            className={`text-left text-sm hover:bg-accent px-2 py-1 rounded-md text-ellipsis overflow-hidden ${
                                                 node.squeakId === activeRoadmap.squeakId
                                                     ? 'md:bg-accent md:dark:bg-accent-dark md:font-bold'
                                                     : ''

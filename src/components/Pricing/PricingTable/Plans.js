@@ -34,7 +34,7 @@ export const SelfHosted = ({ hideActions, hideBadge, hideCalculator, className =
             className={className}
         >
             <div className="h-full flex flex-col">
-                <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
+                <div className="py-3 my-4 border-y border-primary border-dashed">
                     <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
                     <p className="m-0">
                         <span>
@@ -71,7 +71,7 @@ export const Enterprise = ({ setOpen, hideActions, hideBadge, hideCalculator, cl
             className={className}
         >
             <div className="h-full flex flex-col">
-                <div className="py-3 my-4 border-y border-gray-accent-light border-dashed">
+                <div className="py-3 my-4 border-y border-primary border-dashed">
                     <h5 className="text-[15px] opacity-50 m-0 font-medium"> Starts at</h5>
                     <p className="m-0">
                         <strong>$450</strong>

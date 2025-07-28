@@ -6,13 +6,14 @@ export const Header = ({ blur = true }): JSX.Element => {
         <>
             <header
                 id="header"
-                className={`relative z-[999998] reasonable:sticky reasonable:top-0 bg-gradient-to-b from-primary-dark/100 via-primary-dark/100 to-primary-dark/50 dark:from-dark/100 dark:via-dark/100 dark:to-dark/50 print:hidden ${blur ? 'backdrop-blur' : 'bg-light dark:bg-dark'
-                    }`}
+                className={`relative z-[999998] reasonable:sticky reasonable:top-0 bg-gradient-to-b from-primary-dark/100 via-primary-dark/100 to-primary-dark/50 dark:from-dark/100 dark:via-dark/100 dark:to-dark/50 print:hidden ${
+                    blur ? 'backdrop-blur' : 'bg-light dark:bg-dark'
+                }`}
             >
                 <Main />
             </header>
             {/* viewport debugging
-            <div className="bg-light dark:bg-dark border-t border-l rounded-tl border-light dark:border-dark px-3 py-1 fixed bottom-0 right-0 z-[50]">
+            <div className="bg-light dark:bg-dark border-t border-l rounded-tl border-primary px-3 py-1 fixed bottom-0 right-0 z-[50]">
                 <strong className="sm:hidden">xs?</strong>
                 <strong className="hidden sm:inline md:hidden">sm</strong>
                 <strong className="hidden md:inline mdlg:hidden">md</strong>

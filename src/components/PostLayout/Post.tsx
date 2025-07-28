@@ -13,7 +13,6 @@ import Scrollspy from 'react-scrollspy'
 import InternalSidebarLink from 'components/Docs/InternalSidebarLink'
 import SidebarAction from './SidebarAction'
 import { Edit, ExpandDocument, Issue } from 'components/Icons'
-import { DarkModeToggle } from 'components/DarkModeToggle'
 import { useLayoutData } from 'components/Layout/hooks'
 import AskMax from 'components/AskMax'
 import { useUser } from 'hooks/useUser'
@@ -50,7 +49,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
     const { user } = useUser()
 
     return (
-        <div className={!internalMenu ? '-mt-1' : ''}>
+        <div data-scheme="secondary" className={`${!internalMenu ? '-mt-1' : ''} bg-primary`}>
             {menu && mobileMenu && <MobileNav className={`flex ${compact ? '' : 'md:hidden'}`} menu={menu} />}
             <div
                 className={`w-full relative md:flex justify-between mx-auto transition-all ${
@@ -65,7 +64,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                         <aside
                             className={`md:sticky md:top-0 ${
                                 internalMenu ? 'reasonable:top-[108px]' : 'reasonable:top-[56px]'
-                            } max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-light dark:border-dark ${
+                            } max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end px-4 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-primary ${
                                 hideSearch ? 'pt-5' : ''
                             }`}
                         >
@@ -100,7 +99,7 @@ export default function Post({ children }: { children: React.ReactNode }) {
                     <aside
                         key={`${title}-sidebar`}
                         style={{ maxWidth: menuWidth?.right ?? defaultMenuWidth.right }}
-                        className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border hidden lg:flex flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-light dark:border-dark"
+                        className="flex-shrink-0 pt-4 pl-4 w-full justify-self-end my-10 lg:my-0 box-border hidden lg:flex flex-col reasonable:sticky reasonable:top-[108px] mr-8 border-l border-primary"
                     >
                         <div
                             className={`${

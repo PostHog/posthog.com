@@ -2,21 +2,18 @@ import React from 'react'
 import { initKea, wrapElement } from './kea'
 import './src/styles/global.css'
 import HandbookLayout from './src/templates/Handbook'
-import Job from './src/templates/Job'
-import Posts from './src/components/Edition/Posts'
-import { Provider as ToastProvider } from './src/context/toast'
+import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
-import { ChatProvider } from './src/hooks/useChat'
-
+import Wrapper from './src/components/Wrapper'
+import { Provider } from './src/context/App'
+import BlueScreenOfDeath from './src/components/NotFoundPage/BlueScreenOfDeath'
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
-    <UserProvider>
-        <ToastProvider>
-            <ChatProvider>{wrapElement({ element })}</ChatProvider>
-        </ToastProvider>
-    </UserProvider>
+    <ToastProvider>
+        <UserProvider>{wrapElement({ element })}</UserProvider>
+    </ToastProvider>
 )
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
@@ -39,30 +36,19 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
         window?.posthog?.capture('$pageview')
     }
 }
-export const wrapPageElement = ({ element, props }) => {
-    const slug = props.location.pathname.substring(1)
-    return !/^posts\/new|^posts\/(.*)\/edit/.test(slug) &&
-        (props.pageContext.post || /^posts|^changelog\/(.*?)\//.test(slug)) ? (
-        <Posts {...props}>{element}</Posts>
-    ) : props.custom404 || !props.data || props.pageContext.ignoreWrapper ? (
-        element
-    ) : /^handbook|^docs\/(?!api)|^manual/.test(slug) &&
-      ![
-          'docs/api/post-only-endpoints',
-          'docs/api/user',
-          'docs/integrations',
-          'docs/product-analytics',
-          'docs/session-replay',
-          'docs/feature-flags',
-          'docs/experiments',
-          'docs/data',
-      ].includes(slug) ? (
-        <HandbookLayout {...props} />
-    ) : /^session-replay|^product-analytics|^feature-flags|^experiments|^product-os/.test(slug) ? (
-        <Product {...props} />
-    ) : /^careers\//.test(slug) ? (
-        <Job {...props} />
-    ) : (
-        element
+
+export const wrapPageElement = ({ element, props: { pageContext, location } }) => {
+    // Check if this is a 404 page by checking if the NotFound component is being rendered
+    // This catches both direct /404 visits and any non-existent pages
+    const is404Page = element?.type?.name === 'NotFound' || location.pathname === '/404'
+
+    return (
+        <ToastProvider>
+            <UserProvider>
+                <Provider element={element} location={location}>
+                    {is404Page ? <BlueScreenOfDeath /> : <Wrapper />}
+                </Provider>
+            </UserProvider>
+        </ToastProvider>
     )
 }

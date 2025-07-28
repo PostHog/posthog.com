@@ -15,11 +15,11 @@ export default function KeyboardShortcut({
             : size === 'md'
             ? 'text-sm py-0.5'
             : size === 'sm'
-            ? 'text-xs py-1'
+            ? 'text-xs py-[2px]'
             : 'text-[11px] p-0'
     return (
         <kbd
-            className={`border border-b-2 border-light dark:border-dark rounded-sm px-1.5 text-primary/50 dark:text-primary-dark/50 bg-accent-light dark:bg-accent-dark font-code ${sizeClasses} ${className}`}
+            className={`border border-b-2 border-primary rounded-sm px-1.5 text-secondary bg-accent font-code ${sizeClasses} ${className}`}
         >
             {text}
         </kbd>

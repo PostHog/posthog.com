@@ -18,7 +18,7 @@ const UrsulaCookieBanner = ({
                 internalMenu?.length > 0 ? 'bottom-[122px]' : 'bottom-[75px]'
             } `}
         >
-            <div className="bg-primary/80 backdrop-blur dark:bg-gray-accent-dark rounded-[15px] shadow-[0px_4px_10px_rgba(0,0,0,.4)] px-6 py-5 sm:pb-3 w-[calc(100%_-_2rem)] sm:max-w-[300px] translate-x-4 sm:translate-x-[80px] border border-white/20 mb-2">
+            <div className="bg-accent backdrop-blur  rounded-[15px] shadow-[0px_4px_10px_rgba(0,0,0,.4)] px-6 py-5 sm:pb-3 w-[calc(100%_-_2rem)] sm:max-w-[300px] translate-x-4 sm:translate-x-[80px] border border-white/20 mb-2">
                 <p className="text-[14px] m-0 pb-2 text-white">
                     <strong>PostHog.com doesn't use third party cookies</strong>{' '}
                     <span className="text-white/80">- only a single in-house cookie.</span>
@@ -54,7 +54,7 @@ const UrsulaCookieBanner = ({
                     </>
                 )}
                 placement="right"
-                tooltipClassName="max-w-[325px] shadow-xl rounded text-xs backdrop-blur bg-accent dark:bg-accent-dark -ml-12 !px-4 !py-2"
+                tooltipClassName="max-w-[325px] shadow-xl rounded text-xs backdrop-blur bg-accent -ml-12 !px-4 !py-2"
                 offset={[0, 0]}
             >
                 <div className="relative max-w-[280px]">

@@ -1,21 +1,21 @@
 ---
-title: JavaScript Web setup
+title: JavaScript Web
 sidebarTitle: JavaScript Web
 sidebar: Docs
 showTitle: true
 github: 'https://github.com/PostHog/posthog-js'
 icon: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg
+    https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/js.svg
 features:
-  eventCapture: true
-  userIdentification: true
-  autoCapture: true
-  sessionRecording: true
-  featureFlags: true
-  groupAnalytics: true
-  surveys: true
-  llmObservability: false
-  errorTracking: true
+    eventCapture: true
+    userIdentification: true
+    autoCapture: true
+    sessionRecording: true
+    featureFlags: true
+    groupAnalytics: true
+    surveys: true
+    llmObservability: false
+    errorTracking: true
 ---
 
 > **Note:** This doc refers to our [posthog-js](https://github.com/PostHog/posthog-js) library for use on the browser. For server-side JavaScript, see our [Node SDK](/docs/libraries/node).
@@ -80,9 +80,10 @@ posthog.init('<ph_project_api_key>', {}, 'project2')
 You can then call these different instances by accessing it on the global `posthog` object
 
 ```ts
-posthog.project1.capture("some_event")
-posthog.project2.capture("other_event")
+posthog.project1.capture('some_event')
+posthog.project2.capture('other_event')
 ```
+
 > **Note:** You'll probably want to disable autocapture (and some other events) to avoid them from being sent to both instances. Check all of our [config options](/docs/libraries/js/config) to better understand that.
 
 ## Debugging

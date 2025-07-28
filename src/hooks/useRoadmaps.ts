@@ -9,12 +9,13 @@ const query = (params: any, offset: number, limit = 20) => {
                 populate: ['question', 'team'],
             },
             teams: {
-                populate: ['leadProfiles', 'miniCrest'],
+                populate: ['leadProfiles', 'miniCrest', 'profiles'],
             },
             likes: true,
             topic: true,
             image: true,
             cta: true,
+            profiles: true,
         },
         sort: 'updatedAt:desc',
         pagination: {

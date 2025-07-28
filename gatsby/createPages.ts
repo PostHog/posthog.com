@@ -9,7 +9,7 @@ const Slugger = require('github-slugger')
 const markdownLinkExtractor = require('markdown-link-extractor')
 
 export const createPages: GatsbyNode['createPages'] = async ({ actions: { createPage }, graphql }) => {
-    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.js`)
+    const BlogPostTemplate = path.resolve(`src/templates/BlogPost.tsx`)
     const PlainTemplate = path.resolve(`src/templates/Plain.js`)
     const BlogCategoryTemplate = path.resolve(`src/templates/BlogCategory.tsx`)
     const BlogTagTemplate = path.resolve(`src/templates/BlogTag.tsx`)
@@ -22,7 +22,7 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
     const ChangelogTemplate = path.resolve(`src/templates/Changelog.tsx`)
     const PostListingTemplate = path.resolve(`src/templates/PostListing.tsx`)
     const PaginationTemplate = path.resolve(`src/templates/Pagination.tsx`)
-
+    const HubTagTemplate = path.resolve(`src/templates/Hub/Tag.tsx`)
     // Tutorials
     const TutorialsTemplate = path.resolve(`src/templates/tutorials/index.tsx`)
     const TutorialTemplate = path.resolve(`src/templates/tutorials/Tutorial.tsx`)
@@ -40,13 +40,16 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
         {
             allMdx(
                 filter: {
-                    fileAbsolutePath: { regex: "/^((?!contents/teams/).)*$/" }
-                    frontmatter: { title: { ne: "" } }
+                    fileAbsolutePath: { regex: "/^((?!contents/teams/|contents/about.mdx).)*$/" }
+                    frontmatter: { title: { nin: [""] }, template: { nin: ["custom"] } }
                 }
             ) {
                 nodes {
                     id
                     slug
+                    frontmatter {
+                        template
+                    }
                 }
             }
             handbook: allMdx(
@@ -281,7 +284,11 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
                     totalCount
                 }
             }
-            postCategories: allPostCategory(filter: { attributes: { folder: { ne: null } } }) {
+            postCategories: allPostCategory(
+                filter: {
+                    attributes: { folder: { nin: [null, "customers", "changelog"] }, label: { ne: "Customers" } }
+                }
+            ) {
                 nodes {
                     attributes {
                         label
@@ -597,25 +604,30 @@ export const createPages: GatsbyNode['createPages'] = async ({ actions: { create
 
         result.data.postCategories.nodes.forEach(
             ({ attributes: { folder: categoryFolder, label: categoryLabel, post_tags } }) => {
-                createPage({
-                    path: `/${categoryFolder}`,
-                    component: PostListingTemplate,
-                    context: {
-                        post: true,
-                        title: categoryLabel,
-                        article: false,
-                    },
-                })
+                const isHub = categoryFolder === 'founders' || categoryFolder === 'product-engineers'
+                if (!isHub) {
+                    createPage({
+                        path: `/${categoryFolder}`,
+                        component: PostListingTemplate,
+                        context: {
+                            post: true,
+                            title: categoryLabel,
+                            article: false,
+                            root: categoryFolder,
+                        },
+                    })
+                }
 
                 post_tags?.data?.forEach(({ attributes: { label: tagLabel } }) => {
                     createPage({
                         path: `/${categoryFolder}/${slugify(tagLabel, { lower: true, strict: true })}`,
-                        component: PostListingTemplate,
+                        component: isHub ? HubTagTemplate : PostListingTemplate,
                         context: {
                             selectedTag: tagLabel,
                             post: true,
                             title: tagLabel,
                             article: false,
+                            root: categoryFolder,
                         },
                     })
                 })

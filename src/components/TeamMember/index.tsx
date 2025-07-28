@@ -42,8 +42,8 @@ export const TeamMemberLink = ({
                     <span
                         className={`invisible max-h-4 inline-flex items-center ${
                             photo
-                                ? 'gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
-                                : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
+                                ? 'gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
+                                : 'border-b border-primary border-dashed'
                         }`}
                     >
                         <span className="h-6 shrink-0 rounded-full overflow-hidden">
@@ -58,7 +58,7 @@ export const TeamMemberLink = ({
                                 />
                             )}
                         </span>
-                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
+                        <span className="!text-sm text-red dark:text-yellow font-semibold inline-block truncate">
                             {children ? children : displayName}
                         </span>
                     </span>
@@ -66,8 +66,8 @@ export const TeamMemberLink = ({
                 <span
                     className={`inline-flex items-center ${
                         photo
-                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-light hover:border-bg-dark/50 dark:border-dark dark:hover:border-bg-light/50 rounded-full'
-                            : 'border-b border-light dark:border-dark border-dashed hover:border-bg-dark/50 dark:hover:border-bg-light/50'
+                            ? 'absolute top-0 left-0 whitespace-nowrap gap-1.5 p-0.5 pr-1.5 border border-primary rounded-full'
+                            : 'border-b border-primary border-dashed'
                     } ${className}`}
                 >
                     {photo ? (
@@ -84,7 +84,7 @@ export const TeamMemberLink = ({
                                     />
                                 )}
                             </span>
-                            <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
+                            <span className="!text-sm text-red dark:text-yellow font-semibold inline-block truncate">
                                 {children ? children : displayName}
                             </span>
                         </>
@@ -93,7 +93,7 @@ export const TeamMemberLink = ({
                             content={() => (
                                 <div className="text-center max-w-xs flex flex-col items-center">
                                     {avatarUrl ? (
-                                        <div className="inline-block size-24 rounded-full p-[2px] bg-white dark:bg-accent-dark border border-light dark:border-dark">
+                                        <div className="inline-block size-24 rounded-full p-[2px] bg-white dark:bg-dark border border-primary">
                                             <div
                                                 className={`bg-${
                                                     color ? color : 'red'
@@ -107,7 +107,7 @@ export const TeamMemberLink = ({
                                             </div>
                                         </div>
                                     ) : (
-                                        <div className="inline-block size-24 bg-yellow rounded-full overflow-hidden p-1 border-light dark:border-dark">
+                                        <div className="inline-block size-24 bg-yellow rounded-full overflow-hidden p-1 border border-primary">
                                             <CloudinaryImage
                                                 alt=""
                                                 width={100}
@@ -118,7 +118,7 @@ export const TeamMemberLink = ({
                                     )}
                                     <strong className="text-[15px] mt-1">{displayName}</strong>
                                     <div className="opacity-75">{companyRole}</div>
-                                    <span className="text-sm mt-0.5 flex gap-1 items-center text-primary/75 dark:text-primary-dark/75">
+                                    <span className="text-sm mt-0.5 flex gap-1 items-center text-secondary">
                                         {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
                                         {country === 'world' ? 'Planet Earth' : location || country}
                                     </span>
@@ -195,5 +195,7 @@ export default function TeamMember({
                 <TeamMemberLink {...person} photo={photo} className={className} showOnlyFirstName={showOnlyFirstName} />
             )}
         </>
-    ) : null
+    ) : (
+        name
+    )
 }

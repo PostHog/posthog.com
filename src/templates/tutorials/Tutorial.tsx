@@ -35,7 +35,7 @@ export const ViewButton = ({ title, view, setView }) => {
             className={`py-2 px-4 text-sm transition-colors border-b-2 font-medium relative after:absolute after:top-[100%] after:left-0 after:right-0 after:rounded-full after:h-[2px] ${
                 view === title
                     ? 'font-bold after:bg-red'
-                    : 'font-semibold border-transparent opacity-50 hover:opacity-75 hover:after:bg-gray-accent'
+                    : 'font-semibold border-transparent opacity-50 hover:opacity-75 hover:after:bg-accent'
             }`}
         >
             {title}
@@ -43,7 +43,7 @@ export const ViewButton = ({ title, view, setView }) => {
     )
 }
 
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const A = (props) => <Link {...props} />
 
 export default function Tutorial({ data, pageContext: { tableOfContents, menu }, location }) {
     const { pageData } = data
@@ -107,7 +107,7 @@ export default function Tutorial({ data, pageContext: { tableOfContents, menu },
                     </div>
                 </div>
                 {view === 'Article' && (
-                    <aside className="shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-dark pt-4">
+                    <aside className="shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-input pt-4">
                         <MobileSidebar tableOfContents={tableOfContents} mobile={false} />
                     </aside>
                 )}

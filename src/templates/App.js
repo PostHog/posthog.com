@@ -67,7 +67,7 @@ export default function App({ data }) {
                         return (
                             <li key={id}>
                                 <Link
-                                    className="text-[18px] group font-semibold pb-3 mb-3 border-b border-dashed border-gray-accent-light dark:border-gray-accent-dark flex justify-between items-center"
+                                    className="text-[18px] group font-semibold pb-3 mb-3 border-b border-dashed border-primary dark: flex justify-between items-center"
                                     to={`${documentation.fields?.slug}#${id}`}
                                 >
                                     <span>{heading.value}</span>

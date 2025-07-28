@@ -1318,7 +1318,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: "Template for onboarding success plan",
+                        name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                 ],
@@ -2887,6 +2887,9 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Analysis views',
                 },
                 {
@@ -3194,6 +3197,9 @@ export const docsMenu = {
                     color: 'yellow',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -3429,6 +3435,9 @@ export const docsMenu = {
                     color: 'blue',
                 },
                 {
+                    type: 'divider',
+                },
+                {
                     name: 'Features',
                 },
                 {
@@ -3629,6 +3638,9 @@ export const docsMenu = {
                     icon: 'IconGraduationCap',
                     color: 'blue',
                     featured: true,
+                },
+                {
+                    type: 'divider',
                 },
                 {
                     name: 'Features',
@@ -3903,66 +3915,91 @@ export const productMenu = {
     name: 'Products',
     url: '/products',
     icon: 'IconApps',
+    slug: 'products',
+    color: 'salmon',
     children: [
-        {
-            name: 'All products',
-            icon: 'IconApps',
-            color: 'red',
-            url: '/products',
-        },
         {
             name: 'Product analytics',
             icon: 'IconGraph',
             color: 'blue',
             url: '/product-analytics',
+            slug: 'product-analytics',
+            description: 'Understand user behavior with event-based analytics, cohorts, and conversion funnels.',
+            startsAt: '0.00005',
+            denomination: 'event',
+            freeTier: 1000000,
+            sharesFreeTier: 'web-analytics',
+            worksWith: ['session-replay', 'experiments', 'surveys'],
+            category: 'analytics',
         },
         {
             name: 'Web analytics',
             icon: 'IconPieChart',
             color: '[#36C46F]',
             url: '/web-analytics',
+            slug: 'web-analytics',
+            description: 'Monitor your website traffic. Built for people who really liked GA3...',
+            startsAt: '0.00005',
+            denomination: 'event',
+            freeTier: 1000000,
+            sharesFreeTier: 'product-analytics',
+            worksWith: ['product-analytics', 'session-replay', 'surveys'],
+            category: 'analytics',
         },
         {
             name: 'Session replay',
             icon: 'IconRewindPlay',
             color: 'yellow',
             url: '/session-replay',
+            slug: 'session-replay',
+            category: 'behavior',
         },
         {
             name: 'Feature flags',
             icon: 'IconToggle',
             color: 'seagreen',
             url: '/feature-flags',
+            slug: 'feature-flags',
+            category: 'features',
         },
         {
             name: 'Experiments',
             icon: 'IconFlask',
             color: 'purple',
             url: '/experiments',
+            slug: 'experiments',
+            category: 'features',
         },
         {
             name: 'Error tracking',
             icon: 'IconWarning',
             color: 'orange',
             url: '/error-tracking',
+            slug: 'error-tracking',
+            category: 'behavior',
         },
         {
             name: 'Surveys',
             icon: 'IconMessage',
             color: 'salmon',
             url: '/surveys',
+            slug: 'surveys',
+            category: 'behavior',
         },
         {
             name: 'Data pipelines',
             icon: 'IconPlug',
             color: 'sky-blue',
             url: '/cdp',
+            slug: 'cdp',
+            category: 'tools',
         },
         {
             name: 'Data warehouse',
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+            slug: 'data-warehouse',
         },
         {
             name: 'Max AI',
@@ -3973,8 +4010,9 @@ export const productMenu = {
         {
             name: 'Product OS',
             icon: 'IconStack',
-            color: 'blue',
+            color: 'salmon',
             url: '/product-os',
+            slug: 'product-os',
         },
     ],
 }
