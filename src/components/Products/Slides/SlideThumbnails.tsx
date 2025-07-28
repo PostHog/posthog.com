@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import ScalableSlide from 'components/Presentation/ScalableSlide'
 import { useWindow } from '../../../context/Window'
+import { useApp } from '../../../context/App'
+import { getIsMobile } from 'components/Presentation'
 
 interface Slide {
     name: string
@@ -19,8 +21,9 @@ interface SlideThumbProps {
 
 // Component for individual slide thumbnail with proper scaling
 const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
+    const { siteSettings } = useApp()
     const { appWindow } = useWindow()
-    const isMobile = appWindow?.size?.width && appWindow?.size?.width <= 512
+    const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
     const slideRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
         if (isActive && isMobile && slideRef.current) {
@@ -33,6 +36,14 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
             })
         }
     }, [isActive])
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(getIsMobile(siteSettings, appWindow))
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [appWindow, siteSettings])
 
     return (
         <div

@@ -8,6 +8,7 @@ import PresentationMode from './FullScreen'
 import { motion } from 'framer-motion'
 import { navigate } from 'gatsby'
 import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
 
 interface AccordionItem {
     title: string
@@ -70,6 +71,14 @@ const SidebarContent = ({
     return <>{content}</>
 }
 
+export const getIsMobile = (siteSettings: any, appWindow: any) => {
+    return (
+        (typeof window !== 'undefined' && siteSettings.experience === 'boring'
+            ? window.innerWidth
+            : appWindow?.size?.width) < 512
+    )
+}
+
 export default function Presentation({
     accentImage,
     sidebarContent,
@@ -79,8 +88,9 @@ export default function Presentation({
     slideId,
     presenterNotes,
 }: PresentationProps) {
+    const { siteSettings } = useApp()
     const { appWindow } = useWindow()
-    const isMobile = appWindow?.size?.width && appWindow?.size?.width <= 512
+    const [isMobile, setIsMobile] = useState<boolean>(getIsMobile(siteSettings, appWindow))
     const [isNavVisible, setIsNavVisible] = useState<boolean>(!isMobile)
     const [isPresentationMode, setIsPresentationMode] = useState<boolean>(false)
     const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0)
@@ -225,6 +235,14 @@ export default function Presentation({
             scrollContainer.removeEventListener('scroll', handleScroll)
         }
     }, [slides.length, slideId])
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsMobile(getIsMobile(siteSettings, appWindow))
+        }
+        window.addEventListener('resize', handleResize)
+        return () => window.removeEventListener('resize', handleResize)
+    }, [appWindow, siteSettings])
 
     useEffect(() => {
         setIsNavVisible(!isMobile)
