@@ -1318,7 +1318,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: "Template for onboarding success plan",
+                        name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                 ],
@@ -2378,10 +2378,6 @@ export const docsMenu = {
                             url: '/docs/data/sessions',
                         },
                         {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
                             name: 'Data management',
                             url: '/docs/data',
                         },
@@ -2406,6 +2402,14 @@ export const docsMenu = {
                                     url: '/docs/data/utm-segmentation',
                                 },
                             ],
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Replay comments',
+                            url: '/docs/data/comments',
                         },
                     ],
                 },
