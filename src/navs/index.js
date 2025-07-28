@@ -1318,7 +1318,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: "Template for onboarding success plan",
+                        name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                 ],
@@ -2918,6 +2918,10 @@ export const docsMenu = {
                         {
                             name: 'Formulas',
                             url: '/docs/product-analytics/trends/formulas',
+                        },
+                        {
+                            name: 'Statistical analysis',
+                            url: '/docs/product-analytics/trends/statistical-analysis',
                         },
                         {
                             name: 'Tips',
