@@ -48,7 +48,7 @@ const TabsRoot = ({
     defaultValue,
     value,
     onValueChange,
-    orientation = 'vertical',
+    orientation = 'vertical', // set to horizontal for responsive. starts horizontal, then use container queries to adjust to vertical like in @FeaturesSlide.tsx
     size = 'sm',
     children,
 }: TabsRootProps): JSX.Element => {
@@ -72,12 +72,7 @@ const TabsRoot = ({
     )
 }
 
-const TabsList = ({
-    'aria-label': ariaLabel,
-    orientation = 'vertical',
-    className,
-    children,
-}: TabsListProps): JSX.Element => {
+const TabsList = ({ 'aria-label': ariaLabel, orientation, className, children }: TabsListProps): JSX.Element => {
     return (
         <RadixTabs.List
             className={`flex shrink-0 p-1 gap-0.5 min-w-52 ${className} ${
@@ -107,7 +102,7 @@ const TabsTrigger = ({ className, value, children, icon, color }: TabsTriggerPro
         },
         lg: {
             height: 'h-[55px]',
-            fontSize: 'text-lg',
+            fontSize: 'text-xl @xl:text-lg',
             padding: icon ? 'p-2' : 'px-5 py-3',
         },
         xl: {
@@ -118,7 +113,7 @@ const TabsTrigger = ({ className, value, children, icon, color }: TabsTriggerPro
     }
 
     const currentSize = sizeStyles[size]
-    const baseClassName = `flex w-full ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center ${currentSize.fontSize} leading-tight text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group`
+    const baseClassName = `flex w-full ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center ${currentSize.fontSize} leading-tight text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group whitespace-nowrap @xl:whitespace-normal`
     const finalClassName = `${baseClassName} ${currentSize.padding} ${className}`
 
     return (

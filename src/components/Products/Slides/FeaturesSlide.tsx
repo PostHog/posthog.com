@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Tabs from 'components/RadixUI/Tabs'
 import ProductImage from './Image'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface Feature {
     title: string
@@ -35,31 +36,36 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
     return (
         <div className="h-full">
             <Tabs.Root
-                className="h-full bg-accent text-primary"
+                className="h-full bg-accent text-primary @xl:flex-row"
                 defaultValue={`tab-${currentTab}`}
                 value={`tab-${currentTab}`}
                 onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
-                // orientation="vertical"
+                orientation="horizontal"
                 size="lg"
             >
-                <div data-scheme="secondary" className="w-64 h-full bg-primary">
-                    <Tabs.List className="" aria-label="Features">
-                        {features.map((item: FeatureItem, index: number) => (
-                            <Tabs.Trigger
-                                key={index}
-                                value={`tab-${index}`}
-                                icon={(item as any).icon}
-                                color={(item as any).color}
-                                className="text-left"
-                            >
-                                {item.title}
-                            </Tabs.Trigger>
-                        ))}
-                    </Tabs.List>
+                <div
+                    data-scheme="secondary"
+                    className="w-full @xl:w-64 @xl:h-full bg-primary border-b border-primary @xl:border-b-0"
+                >
+                    <ScrollArea className="overflow-y-hidden @xl:overflow-y-auto">
+                        <Tabs.List className="flex @xl:flex-col" aria-label="Features">
+                            {features.map((item: FeatureItem, index: number) => (
+                                <Tabs.Trigger
+                                    key={index}
+                                    value={`tab-${index}`}
+                                    icon={(item as any).icon}
+                                    color={(item as any).color}
+                                    className="text-left"
+                                >
+                                    {item.title}
+                                </Tabs.Trigger>
+                            ))}
+                        </Tabs.List>
+                    </ScrollArea>
                 </div>
                 {features.map((item: FeatureItem, index: number) => (
                     <Tabs.Content
-                        className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative"
+                        className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 @xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative"
                         key={index}
                         value={`tab-${index}`}
                     >
