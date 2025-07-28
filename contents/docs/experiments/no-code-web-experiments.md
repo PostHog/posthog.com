@@ -142,7 +142,7 @@ If you're testing no-code experiments in development mode (e.g., Next.js), you m
 
 These errors can be safely ignored as long as you're not implementing code that modifies HTML at build time. No-code experiments run on your live site after the static HTML is served, so they won't cause issues in production.
 
-#### Why is there a delay before my element changes?
+### Why is there a delay before my element changes?
 
 If you're evaluating the experiment flag on the same page where the element needs to change, you'll see a brief delay as PostHog loads and processes the experiment's feature flag.
 
