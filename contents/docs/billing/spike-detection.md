@@ -27,7 +27,7 @@ Spike detection emails are sent **only to customers that don't have an account o
 
 ### Email frequency and limits
 
-To avoid notification fatigue the system consolidates all detected spikes across all products into a single daily email. If an email was sent in the past 7 days, no new spike detection email will be sent, even if new spikes are detected.
+To avoid notification fatigue, the system consolidates all detected spikes across all products into a single daily email. If an email was sent in the past 7 days, no new spike detection email will be sent, even if new spikes are detected.
 
 ## Related systems
 
