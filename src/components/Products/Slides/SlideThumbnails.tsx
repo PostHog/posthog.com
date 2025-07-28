@@ -39,8 +39,10 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(getIsMobile(siteSettings, appWindow))
+            const mobile = getIsMobile(siteSettings, appWindow)
+            setIsMobile(mobile)
         }
+        handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [appWindow, siteSettings])
@@ -87,10 +89,10 @@ interface SlideThumbnailsProps {
 export default function SlideThumbnails({ slides, activeSlideIndex, slideId }: SlideThumbnailsProps) {
     return (
         <div className="space-y-3 p-1">
-            <h3 className="text-sm text-center font-semibold text-secondary mb-3 @lg:block hidden">Slides</h3>
-            <div className="flex @lg:grid gap-2">
+            <h3 className="text-sm text-center font-semibold text-secondary mb-3 @2xl:block hidden">Slides</h3>
+            <div className="flex @2xl:grid gap-2">
                 {slides.map((slide, index) => (
-                    <div key={index} className="flex-shrink-0 @lg:w-full w-48">
+                    <div key={index} className="flex-shrink-0 @2xl:w-full w-48">
                         <SlideThumb
                             key={index}
                             slide={slide}

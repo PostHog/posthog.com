@@ -72,11 +72,11 @@ const SidebarContent = ({
 }
 
 export const getIsMobile = (siteSettings: any, appWindow: any) => {
-    return (
-        (typeof window !== 'undefined' && siteSettings.experience === 'boring'
+    const width =
+        typeof window !== 'undefined' && siteSettings.experience === 'boring'
             ? window.innerWidth
-            : appWindow?.size?.width) < 512
-    )
+            : appWindow?.size?.width
+    return width < 672
 }
 
 export default function Presentation({
@@ -238,8 +238,10 @@ export default function Presentation({
 
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(getIsMobile(siteSettings, appWindow))
+            const mobile = getIsMobile(siteSettings, appWindow)
+            setIsMobile(mobile)
         }
+        handleResize()
         window.addEventListener('resize', handleResize)
         return () => window.removeEventListener('resize', handleResize)
     }, [appWindow, siteSettings])
@@ -279,9 +281,9 @@ export default function Presentation({
                             }
                             transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`bg-primary @lg:border-y-0 border-y ${
-                                isNavVisible ? '@lg:border-r' : 'border-b-0'
-                            } border-primary overflow-hidden absolute z-10 @lg:relative @lg:translate-y-0 translate-y-[50px]`}
+                            className={`bg-primary @2xl:border-y-0 border-y ${
+                                isNavVisible ? '@2xl:border-r' : 'border-b-0'
+                            } border-primary overflow-hidden absolute z-10 @2xl:relative @2xl:translate-y-0 translate-y-[50px]`}
                         >
                             <ScrollArea className="p-2">
                                 <div className="space-y-3">
