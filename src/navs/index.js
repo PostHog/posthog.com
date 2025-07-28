@@ -2700,6 +2700,10 @@ export const docsMenu = {
                             url: '/docs/billing/annual-plans',
                         },
                         {
+                            name: 'Spike detection',
+                            url: '/docs/billing/spike-detection',
+                        },
+                        {
                             name: 'Common questions about billing',
                             url: '/docs/billing/common-questions',
                         },
