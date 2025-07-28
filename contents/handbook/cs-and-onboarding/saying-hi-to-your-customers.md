@@ -13,7 +13,7 @@ You likely won't have an established contact so introduce yourself to the widest
 
 Your intro message should: 
 - Introduce yourself as their new CSM
-- Describe value of CSM – dedicated point of contact, go-to person for help or questions, help customer use PostHog effectively
+- Describe value of CSM – dedicated point of contact, go-to person for help or questions, help customer use PostHog effectively e.g. through training or strategic guidance. Many customers misunderstand the CSM role as 'just support', so make sure to distinguish your role as CSM apart from that.
 - Value nugget: show how you can help by delivering value-add 
 
 ### Examples of a value nugget
@@ -35,7 +35,7 @@ You should find what you're comfortable with whilst keeping a sense of PostHog's
 
 In Vitally, you can see how other team members have reached out to customers in the past by going to an account's Active conversations tab for inspiration.
 
-If no response, follow up after 2-3 business days targeting folks in the product or data team.
+If no response, follow up after 2-3 business days targeting folks in the product or data team. Emphasize the purpose of you reaching out - you're not trying to sell them something, you want to understand their use-case and help optimize their PostHog integration.
 
 ## Connect with champion
 
@@ -64,3 +64,13 @@ Call structure:
 3. Q&A on product
 4. Next steps and ideal catch up cadence.
 
+# Customer Prioritization
+
+- Consider a separate approach for monthly and annual customers:
+  - Annual plans: prioritize accounts with contract renewals in the next 3-4 months
+  - Monthly plans: look for significant growth within the last quarter
+- Accounts with platform add-ons
+  - Customers on legacy "Teams" add-on ($450/month) could save $200 by switching to the "Boost" add-on. The teams add-on has been split into:
+    - [Boost add-on](https://posthog.com/platform-addons#boost-add-on) ($250/month)
+    - [Scale add-on](https://posthog.com/platform-addons#scale-add-on) ($750/month)
+    - [Enterprise add-on](https://posthog.com/platform-addons#enterprise-add-on) ($2000/month)
