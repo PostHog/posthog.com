@@ -261,8 +261,8 @@ export default function Presentation({
                             }
                             transition={{ duration: 0.3 }}
                             data-scheme="secondary"
-                            className={`bg-primary @lg:border-y-0 border-y @lg:border-r ${
-                                isNavVisible ? '' : 'border-b-0'
+                            className={`bg-primary @lg:border-y-0 border-y ${
+                                isNavVisible ? '@lg:border-r' : 'border-b-0'
                             } border-primary overflow-hidden absolute z-10 @lg:relative @lg:translate-y-0 translate-y-[50px]`}
                         >
                             <ScrollArea className="p-2">
@@ -347,7 +347,7 @@ export default function Presentation({
                                         onDrag={handleVerticalDrag}
                                     />
                                     <ScrollArea className="h-full">
-                                        <div className="p-4 text-sm">
+                                        <div className="p-4 text-sm prose prose-sm">
                                             {getCurrentSlideNotes() ? (
                                                 <div dangerouslySetInnerHTML={{ __html: getCurrentSlideNotes() }} />
                                             ) : (
