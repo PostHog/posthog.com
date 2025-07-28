@@ -30,7 +30,7 @@ export default function ComparisonSummarySlide({ them, us }: ComparisonSummarySl
             </div>
 
             {/* Comparison Summary */}
-            <div className="grid md:grid-cols-2 gap-8 mb-8">
+            <div className="grid @2xl:grid-cols-2 gap-8 mb-8">
                 <div className="">
                     <h3 className="text-2xl font-bold text-primary mb-4">
                         A competitor might suit you better <em>(for now)</em> if...

@@ -26,7 +26,7 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
             <p className="text-xl text-secondary max-w-4xl mx-auto mb-12">
                 {productName} pairs with other products to give you a complete picture of your product.
             </p>
-            <div className="grid grid-cols-1 @xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 @2xl:grid-cols-3 gap-4">
                 {pairsWith.map((pair: PairItem) => {
                     // Find the product details by slug
                     const productDetails = allProducts.find((product: any) => product.slug === pair.slug)
@@ -40,11 +40,10 @@ export default function PairsWithSlide({ productName, pairsWith, allProducts }: 
                                 className="flex flex-col items-center border border-primary rounded p-4 bg-primary hover:bg-accent transition-colors h-full w-full"
                             >
                                 <span
-                                    className={`inline-block size-8 my-4 ${
-                                        productDetails.color
+                                    className={`inline-block size-8 my-4 ${productDetails.color
                                             ? 'text-' + productDetails.color
                                             : 'text-primary dark:text-primary-dark opacity-50'
-                                    }`}
+                                        }`}
                                 >
                                     {productDetails.Icon && <productDetails.Icon />}
                                 </span>

@@ -272,9 +272,9 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
     }
 
     return (
-        <div className="h-full grid grid-cols-1 @xl:grid-cols-5 text-primary">
+        <div className="h-full grid grid-cols-1 @2xl:grid-cols-5 text-primary">
             {/* Left side - Pricing */}
-            <div className="p-12 bg-tan dark:bg-dark col-span-1 @xl:col-span-2 flex flex-col justify-between border-b border-primary @xl:border-b-0">
+            <div className="p-12 bg-tan dark:bg-dark col-span-1 @2xl:col-span-2 flex flex-col justify-between border-b border-primary @2xl:border-b-0">
                 <div>
                     <h2 className="text-4xl font-bold text-primary mb-6">Pricing</h2>
 
@@ -380,7 +380,7 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
             </div>
 
             {/* Right side - Plans */}
-            <div className="p-12 bg-primary col-span-1 @xl:col-span-3 border-l border-primary h-full">
+            <div className="p-12 bg-primary col-span-1 @2xl:col-span-3 border-l border-primary h-full">
                 <h2 className="text-4xl font-bold text-primary mb-12">Plans</h2>
 
                 {/* Comparison rows */}

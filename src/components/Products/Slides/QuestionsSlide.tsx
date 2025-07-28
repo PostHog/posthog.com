@@ -194,7 +194,7 @@ export default function QuestionsSlide({
                 <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">{answersDescription}</p>
             </div>
             <Tabs.Root
-                className="flex-1 flex w-full min-h-0 items-start bg-accent rounded @xl:flex-row"
+                className="flex-1 flex w-full min-h-0 items-start bg-accent rounded @2xl:flex-row"
                 defaultValue={`tab-${currentTab}`}
                 value={`tab-${currentTab}`}
                 onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
@@ -203,10 +203,10 @@ export default function QuestionsSlide({
             >
                 <div
                     data-scheme="secondary"
-                    className="w-full @xl:w-96 @xl:h-full bg-primary rounded-t @xl:rounded-t-none @xl:rounded-l border-b border-primary @xl:border-b-0"
+                    className="w-full @2xl:w-96 @2xl:h-full bg-primary rounded-t @2xl:rounded-t-none @2xl:rounded-l border-b border-primary @2xl:border-b-0"
                 >
-                    <ScrollArea className="overflow-y-hidden @xl:overflow-y-auto @xl:h-full">
-                        <Tabs.List className="flex @xl:flex-col" aria-label="Questions">
+                    <ScrollArea className="overflow-y-hidden @2xl:overflow-y-auto @2xl:h-full">
+                        <Tabs.List className="flex @2xl:flex-col" aria-label="Questions">
                             {questions.map((question: Question, index: number) => (
                                 <Tabs.Trigger key={index} value={`tab-${index}`} className="text-left">
                                     {question.question}
@@ -217,12 +217,12 @@ export default function QuestionsSlide({
                 </div>
                 {questions.map((question: Question, index: number) => (
                     <Tabs.Content
-                        className="text-primary flex-1 bg-primary @xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full rounded-b @xl:rounded-b-none @xl:rounded-r"
+                        className="text-primary flex-1 bg-primary @2xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full rounded-b @2xl:rounded-b-none @2xl:rounded-r"
                         key={index}
                         value={`tab-${index}`}
                     >
                         <ScrollArea className="h-full">
-                            <div className="px-4 pt-8 @xl:pt-0">
+                            <div className="px-4 pt-8 @2xl:pt-0">
                                 <h2 className="text-3xl mb-4">{question.question}</h2>
                                 <div className="prose max-w-none [&_p]:!text-lg [&_li]:!text-lg">
                                     <Markdown>{getContentForUrl(question.url)}</Markdown>

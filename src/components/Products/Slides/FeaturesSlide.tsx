@@ -36,7 +36,7 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
     return (
         <div className="h-full">
             <Tabs.Root
-                className="h-full bg-accent text-primary @xl:flex-row"
+                className="h-full bg-accent text-primary @2xl:flex-row"
                 defaultValue={`tab-${currentTab}`}
                 value={`tab-${currentTab}`}
                 onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
@@ -45,10 +45,10 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
             >
                 <div
                     data-scheme="secondary"
-                    className="w-full @xl:w-64 @xl:h-full bg-primary border-b border-primary @xl:border-b-0"
+                    className="w-full @2xl:w-64 @2xl:h-full bg-primary border-b border-primary @2xl:border-b-0"
                 >
-                    <ScrollArea className="overflow-y-hidden @xl:overflow-y-auto">
-                        <Tabs.List className="flex @xl:flex-col" aria-label="Features">
+                    <ScrollArea className="overflow-y-hidden @2xl:overflow-y-auto">
+                        <Tabs.List className="flex @2xl:flex-col" aria-label="Features">
                             {features.map((item: FeatureItem, index: number) => (
                                 <Tabs.Trigger
                                     key={index}
@@ -65,24 +65,22 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                 </div>
                 {features.map((item: FeatureItem, index: number) => (
                     <Tabs.Content
-                        className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 @xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative"
+                        className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 @2xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative"
                         key={index}
                         value={`tab-${index}`}
                     >
                         <div className="relative">
                             <div className={`${item.layout === 'columns' ? 'pt-4' : 'pt-12 px-4 pb-8'} pb-8`}>
                                 <h2
-                                    className={`text-5xl mb-0 ${
-                                        item.layout === 'columns' ? 'text-left' : 'text-center'
-                                    }`}
+                                    className={`text-5xl mb-0 ${item.layout === 'columns' ? 'text-left' : 'text-center'
+                                        }`}
                                 >
                                     {item.headline}
                                 </h2>
                                 {item.description && (
                                     <p
-                                        className={`mt-4 text-xl [&_code]:text-xl ${
-                                            item.layout === 'columns' ? 'text-left' : 'text-center'
-                                        }`}
+                                        className={`mt-4 text-xl [&_code]:text-xl ${item.layout === 'columns' ? 'text-left' : 'text-center'
+                                            }`}
                                         dangerouslySetInnerHTML={{ __html: item.description }}
                                     />
                                 )}

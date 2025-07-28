@@ -75,9 +75,8 @@ const TabsRoot = ({
 const TabsList = ({ 'aria-label': ariaLabel, orientation, className, children }: TabsListProps): JSX.Element => {
     return (
         <RadixTabs.List
-            className={`flex shrink-0 p-1 gap-0.5 min-w-52 ${className} ${
-                orientation === 'vertical' ? 'flex-col' : ''
-            }`}
+            className={`flex shrink-0 p-1 gap-0.5 min-w-52 ${className} ${orientation === 'vertical' ? 'flex-col' : ''
+                }`}
             aria-label={ariaLabel}
         >
             {children}
@@ -113,7 +112,7 @@ const TabsTrigger = ({ className, value, children, icon, color }: TabsTriggerPro
     }
 
     const currentSize = sizeStyles[size]
-    const baseClassName = `flex w-full ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center ${currentSize.fontSize} leading-tight text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group whitespace-nowrap @xl:whitespace-normal`
+    const baseClassName = `flex w-full ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center ${currentSize.fontSize} leading-tight text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group whitespace-nowrap @2xl:whitespace-normal`
     const finalClassName = `${baseClassName} ${currentSize.padding} ${className}`
 
     return (

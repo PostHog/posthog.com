@@ -23,7 +23,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
     const [showConfetti, setShowConfetti] = useState(false)
     const { addToast } = useToast()
     const { appWindow } = useWindow()
-    const isMobile = appWindow?.size?.width && appWindow?.size?.width <= 512
+    const isMobile = appWindow?.size?.width && appWindow?.size?.width <= 671
 
     const WordArtSlop = () => {
         return (
@@ -32,22 +32,22 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     text="Get started today!!"
                     theme="superhero"
                     fontSize={48}
-                    className="absolute top-8 @xl:top-20 left-6 @xl:left-20"
+                    className="absolute top-8 @2xl:top-20 left-6 @2xl:left-20"
                 />
                 <WordArt
                     text="If you we're looking for a sign..."
                     secretMessage="(yes, the typo was intentional)"
                     theme="rainbow"
                     fontSize={36}
-                    className="absolute top-[8.5rem] @xl;top-44 left-24 @xl:left-72 scale-75 @xl:scale-100"
+                    className="absolute top-[8.5rem] @xl;top-44 left-24 @2xl:left-72 scale-75 @2xl:scale-100"
                 />
                 <WordArt
                     text="Follow your dreams"
                     theme="blues"
                     fontSize={24}
-                    className="absolute top-12 right-12 @xl:right-40"
+                    className="absolute top-12 right-12 @2xl:right-40"
                 />
-                <div className="absolute top-[58rem] @xl:top-[24rem] left-36 @xl:left-32 text-center max-w-sm scale-150 @xl:scale-100">
+                <div className="absolute top-[58rem] @2xl:top-[24rem] left-36 @2xl:left-32 text-center max-w-sm scale-150 @2xl:scale-100">
                     <WordArt text="Install with AI" theme="italicOutline" fontSize={24} className="" />
                     <br />
                     <WordArt text="in less than 90 seconds" theme="italicOutline" fontSize={16} />
@@ -86,7 +86,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                         fontSize={12}
                     />
                     <br />
-                    <div className="@xl:hidden">
+                    <div className="@2xl:hidden">
                         <WordArt
                             text="(Probably best to do this from a computer though)"
                             theme="italicOutline"
@@ -94,7 +94,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                         />
                     </div>
                 </div>
-                <div className="absolute top-[15rem] @xl:top-[28rem] right-64 @xl:right-72 text-center scale-150 @xl:scale-100">
+                <div className="absolute top-[15rem] @2xl:top-[28rem] right-64 @2xl:right-72 text-center scale-150 @2xl:scale-100">
                     <WordArt text="Install without AI" theme="italicOutline" fontSize={24} />
                     <br />
                     <div className="relative">
@@ -117,19 +117,19 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     text={`${productName} is my passion`}
                     theme="radial"
                     fontSize={24}
-                    className="absolute bottom-20 right-8 @xl:right-36 [writing-mode:vertical-rl]"
+                    className="absolute bottom-20 right-8 @2xl:right-36 [writing-mode:vertical-rl]"
                 />
                 <WordArt
                     text="New year, new you!"
                     theme="slate"
                     fontSize={30}
-                    className="absolute bottom-36 left-4 @xl:left-16 [writing-mode:sideways-lr]"
+                    className="absolute bottom-36 left-4 @2xl:left-16 [writing-mode:sideways-lr]"
                 />
                 <WordArt
                     text="Get started with a new better life"
                     theme="tilt"
                     fontSize={30}
-                    className="absolute bottom-12 @xl:bottom-20 left-36 @xl:left-96"
+                    className="absolute bottom-12 @2xl:bottom-20 left-36 @2xl:left-96"
                 />
             </>
         )

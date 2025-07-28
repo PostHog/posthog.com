@@ -31,7 +31,7 @@ export const sessionReplay = {
         {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
             alt: 'Session replay screenshot',
-            classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
+            classes: 'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
         },
     ],
     hog: {
