@@ -14,16 +14,12 @@ import ArrowStencil from './arrow-stencil.gif'
 import ArrowBlink from './arrow-blink.gif'
 import ArrowRainbow from './arrow-rainbow.gif'
 import Confetti from 'react-confetti'
-import { useWindow } from '../../../context/Window'
-import CloudinaryImage from 'components/CloudinaryImage'
 
 export default function GettingStartedSlide({ initialState, productName }: { initialState: any; productName: string }) {
     const coloringPageImage = StopImage
     const [justCopied, setJustCopied] = useState(false)
     const [showConfetti, setShowConfetti] = useState(false)
     const { addToast } = useToast()
-    const { appWindow } = useWindow()
-    const isMobile = appWindow?.size?.width && appWindow?.size?.width <= 671
 
     const WordArtSlop = () => {
         return (
@@ -173,24 +169,22 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                 </div>
             )}
 
-            {isMobile ? (
-                <div
-                    className="absolute inset-0"
-                    style={{
-                        backgroundImage: `url(${StopImage})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                ></div>
-            ) : (
+            <div
+                className="absolute inset-0 @2xl:hidden"
+                style={{
+                    backgroundImage: `url(${StopImage})`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            ></div>
+            <div className="hidden @2xl:block">
                 <MSPaint
                     // Pass the image URL to preload it as line art
                     initialImage={coloringPageImage}
                     canvasSize={{ width: 1066, height: 614 }}
                     initialState={initialState}
                 />
-            )}
-
+            </div>
             {/* <WordArt text="PostHog" theme="rainbow" fontSize={60} />
                     <WordArt text="Analytics" theme="superhero" fontSize={40} /> */}
             {/* <img src={Unicorn} className="absolute right-36 top-28 w-60 [mix-blend-mode:multiply]" /> */}
