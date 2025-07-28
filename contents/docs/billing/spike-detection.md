@@ -8,7 +8,7 @@ Spike detection is a system that monitors customer usage patterns and sends emai
 
 The spike detection system runs daily and analyzes usage patterns across all products (product analytics, session replay, feature flags, etc., **except data warehouse**) to identify unusual spikes in usage that might indicate:
 
-- Implementation issues or bugs causing excessive event sending
+- Implementation issues or bugs causing excessive sent events
 - Unexpected traffic increases
 - System outages leading to lower usage
 
