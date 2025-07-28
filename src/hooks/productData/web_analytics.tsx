@@ -1,5 +1,6 @@
 import React from 'react'
 import { IconPieChart } from '@posthog/icons'
+import Link from 'components/Link'
 
 export const webAnalytics = {
     Icon: IconPieChart,
@@ -512,8 +513,17 @@ export const webAnalytics = {
             "<strong>Core metrics:</strong> Everything you expect: visitors, pageviews, sessions, bounce rate. Real-time. No sampling. Cookieless option means no cookie banner needed.<br /><br /><strong>Traffic sources:</strong> Auto-categorizes into channels (Direct, Organic, Paid, Social). Full UTM support. Create custom channels like 'AI' or 'Partners'. See exactly which sites send traffic.<br /><br /><strong>Advanced analytics:</strong> Scroll depth shows how far people actually read. Web Vitals (LCP, FCP, INP, CLS) for Core Web Vitals tracking. Set conversion goals. Track revenue. See when users are active.<br /><br /><strong>Privacy & compliance:</strong> GDPR compliant. Optional cookieless tracking. Anonymous mode cuts costs dramatically. Reverse proxy reduces ad blocker impact by 70%+. Choose US or EU hosting.<br /><br /><strong>Device & demographics:</strong> Device types, browsers, OS, screen sizes. Country and city data. Automatic bot filtering. Everything you need to know your audience.<br /><br /><strong>Works with product analytics:</strong> Same events power both. No duplicate tracking. Cross-domain support. Connect backend events to frontend sessions. No extra cost beyond events.",
         answers:
             "These are the questions everyone asks. The dashboard answers them all instantly. No building reports, no waiting for data to process. It's all there, real-time, from day one.",
-        pricing:
-            'PostHog\'s Web Analytics is billed as Product Analytics events, which means you get access to both products for the same price. 1 million events free monthly. Anonymous events cost 10x less than identified. (<a href="/events">Learn about the difference between anonymous events and identified events.</a>) Most sites never pay anything. Even high-traffic sites pay way less than GA 360.',
+        pricing: (
+            <>
+                PostHog's Web Analytics is billed as Product Analytics events, which means you get access to both
+                products for the same price. 1 million events free monthly. Anonymous events cost 10x less than
+                identified. (
+                <Link state={{ newWindow: true }} to="/events">
+                    Learn about the difference between anonymous events and identified events.
+                </Link>
+                ) Most sites never pay anything. Even high-traffic sites pay way less than GA 360.
+            </>
+        ),
         'comparison-summary':
             "GA4 is free but also really hard to use. Matomo is privacy-focused but limited. We're privacy-focused AND powerful. Plus we're not just web analytics - it's integrated with everything else. If you liked GA3, you'll love this. If you like GA4, please seek medical attention immediately. (But spoiler: doctors orders will likely be to try PostHog Web Analytics.)",
         'feature-comparison':

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { Accordion } from '../RadixUI/Accordion'
@@ -123,12 +123,12 @@ export default function Presentation({
         }
     }
 
-    const getCurrentSlideNotes = () => {
+    const currentSlideNotes = useMemo(() => {
         if (!presenterNotes || !slides || slides.length === 0) return ''
         const currentSlide = slides[activeSlideIndex]
         if (!currentSlide) return ''
         return presenterNotes[currentSlide.slug] || ''
-    }
+    }, [presenterNotes, slides, activeSlideIndex])
 
     //// Handle initial hash navigation on page load
     // useEffect(() => {
@@ -348,8 +348,12 @@ export default function Presentation({
                                     />
                                     <ScrollArea className="h-full">
                                         <div className="p-4 text-sm prose prose-sm">
-                                            {getCurrentSlideNotes() ? (
-                                                <div dangerouslySetInnerHTML={{ __html: getCurrentSlideNotes() }} />
+                                            {currentSlideNotes ? (
+                                                typeof currentSlideNotes === 'string' ? (
+                                                    <div dangerouslySetInnerHTML={{ __html: currentSlideNotes }} />
+                                                ) : (
+                                                    currentSlideNotes
+                                                )
                                             ) : (
                                                 'No presenter notes for this slide.'
                                             )}
