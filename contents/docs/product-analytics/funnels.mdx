@@ -243,7 +243,7 @@ First-ever occurrence matches only the first time a user performs a specific eve
 
 ##### 2. First occurrence matching filters
 
-This matches the first time a user performs an event *that also matches the filters for that funnel step*. Any previous events of the same type that don't match the filters are ignored.
+First occurrence matching filters matches the first time a user performs an event *that also matches the filters for that funnel step*. Any previous events of the same type that don't match the filters are ignored.
 
 **Example:** You have a funnel step looking for pageviews to `/about`. A user first visits `/pricing` and then later visits `/about`. PostHog ignores the `/pricing` view and matches the `/about` view, as it's the first one that fits the step's criteria.
 
