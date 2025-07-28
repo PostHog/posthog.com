@@ -50,18 +50,18 @@ export default function CustomersSlide({ productName, customers, customerData, h
             // Determine logo rendering logic
             const renderLogo = () => {
                 if (!customer.logo) {
-                    return <span>{customer.name}</span>
+                    return <span className="text-2xl font-semibold">{customer.name}</span>
                 }
 
                 // Check if logo is a React component (single SVG format)
                 if (typeof customer.logo === 'function') {
                     const LogoComponent = customer.logo
                     const heightClass = customer.height ? `h-${customer.height}` : ''
-                    const className = `w-full fill-current object-contain ${heightClass}`.trim()
+                    const className = `fill-current object-contain ${heightClass}`.trim()
 
                     return (
                         <div className="" style={{ maxHeight: customer.height ? customer.height * 5 + 'px' : '' }}>
-                            <LogoComponent className={`${className} h-full`} />
+                            <LogoComponent className={`${className}`} />
                         </div>
                     )
                 }
@@ -142,15 +142,17 @@ export default function CustomersSlide({ productName, customers, customerData, h
                                 // Check if logo is a React component (single SVG format)
                                 if (typeof customer.logo === 'function') {
                                     const LogoComponent = customer.logo
-                                    const heightClass = customer.height ? `h-${customer.height}` : ''
-                                    const className = `w-full fill-current object-contain ${heightClass}`.trim()
+                                    const className = `max-w-full max-h-12 fill-current object-contain`.trim()
 
                                     return (
                                         <div
                                             className=""
-                                            style={{ height: customer.height ? customer.height * 6 + 'px' : '' }}
+                                            style={{ maxHeight: customer.height ? customer.height * 6 + 'px' : '' }}
                                         >
-                                            <LogoComponent className={`${className} h-full`} />
+                                            <LogoComponent
+                                                className={`${className} h-full`}
+                                                style={{ maxHeight: customer.height ? customer.height * 4 + 'px' : '' }}
+                                            />
                                         </div>
                                     )
                                 }
@@ -163,12 +165,12 @@ export default function CustomersSlide({ productName, customers, customerData, h
                                         <img
                                             src={customer.logo.light}
                                             alt={customer.name}
-                                            className={`w-auto object-contain dark:hidden ${heightClass}`}
+                                            className={`w-auto object-contain max-h-12 dark:hidden ${heightClass}`}
                                         />
                                         <img
                                             src={customer.logo.dark}
                                             alt={customer.name}
-                                            className={`w-auto object-contain hidden dark:block ${heightClass}`}
+                                            className={`w-auto object-contain max-h-12 hidden dark:block ${heightClass}`}
                                         />
                                     </>
                                 )
@@ -176,10 +178,10 @@ export default function CustomersSlide({ productName, customers, customerData, h
 
                             return (
                                 <div key={customer.slug} className="p-6 border border-primary bg-primary rounded">
-                                    <div className="mb-4 flex justify-between">
-                                        {renderLogo()}
+                                    <div className="mb-4 flex justify-between gap-8">
+                                        <div className="flex-1">{renderLogo()}</div>
 
-                                        <div>
+                                        <div className="shrink-0">
                                             {hasCaseStudy(customer.slug) && (
                                                 <OSButton
                                                     variant="secondary"
@@ -187,6 +189,7 @@ export default function CustomersSlide({ productName, customers, customerData, h
                                                     to={`/customers/${customer.slug}`}
                                                     asLink
                                                     state={{ newWindow: true }}
+                                                    className="whitespace-nowrap"
                                                 >
                                                     Read case study
                                                 </OSButton>
