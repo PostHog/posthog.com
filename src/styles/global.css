@@ -85,6 +85,8 @@
     }
 
     .prose {
+        @apply max-w-none;
+
         code {
             @apply before:hidden after:hidden; /* hide prose ticks */
         }
