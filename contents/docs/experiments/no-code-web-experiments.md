@@ -134,9 +134,9 @@ Before launching, ensure the following:
 
 2. **Document changes**: Record the modifications made to each variant and their goals. Add a description of the changes to your experiment as well as screenshots of each of the variants.
 
-### Troubleshooting and FAQs
+## Troubleshooting and FAQs
 
-#### Why am I seeing hydration errors during development?
+### Why am I seeing hydration errors during development?
 
 If you're testing no-code experiments in development mode (e.g., Next.js), you may see hydration errors about browser plugins modifying the DOM. This is expected behavior since no-code experiments change HTML after the page loads, which frameworks like Next.js + Turbopack try to prevent to preserve server-side rendering.
 
