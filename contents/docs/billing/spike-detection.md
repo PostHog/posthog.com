@@ -20,7 +20,10 @@ The system uses statistical analysis to detect usage spikes by establishing norm
 
 ### Who receives emails
 
-Spike detection emails are sent **only to customers that don't have an account owner assigned to them**. This ensures that self-serve customers, who may not be actively monitoring their usage, receive proactive alerts, while enterprise customers with dedicated account managers avoid duplicate notifications, as their account teams may reach out directly.
+Spike detection emails are sent **only to customers that don't have an account owner assigned to them**. This ensures that:
+
+1. Self-serve customers, who may not be actively monitoring their usage, receive proactive alerts.
+2. Enterprise customers with dedicated account managers avoid duplicate notifications, as their account teams may reach out directly.
 
 ### Email frequency and limits
 
