@@ -166,7 +166,7 @@ export default function QuestionsSlide({
                     // Accept lines with actual prose (at least 20 chars)
                     return trimmed.length > 20
                 })
-                
+
                 if (proseLines.length > 0) {
                     const proseContent = proseLines.slice(0, 10).join(' ')
                     return proseContent.length > 900 ? proseContent.substring(0, 900) + '...' : proseContent
@@ -194,16 +194,19 @@ export default function QuestionsSlide({
                 <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">{answersDescription}</p>
             </div>
             <Tabs.Root
-                className="flex-1 flex w-full min-h-0 items-start bg-accent rounded"
+                className="flex-1 flex w-full min-h-0 items-start bg-accent rounded @xl:flex-row"
                 defaultValue={`tab-${currentTab}`}
                 value={`tab-${currentTab}`}
                 onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
                 orientation="horizontal"
                 size="md"
             >
-                <div data-scheme="secondary" className="w-96 h-full bg-primary rounded">
-                    <ScrollArea className="h-full">
-                        <Tabs.List className="flex flex-col p-1 gap-0.5" aria-label="Questions">
+                <div
+                    data-scheme="secondary"
+                    className="w-full @xl:w-96 @xl:h-full bg-primary rounded-t @xl:rounded-t-none @xl:rounded-l border-b border-primary @xl:border-b-0"
+                >
+                    <ScrollArea className="overflow-y-hidden @xl:overflow-y-auto @xl:h-full">
+                        <Tabs.List className="flex @xl:flex-col" aria-label="Questions">
                             {questions.map((question: Question, index: number) => (
                                 <Tabs.Trigger key={index} value={`tab-${index}`} className="text-left">
                                     {question.question}
@@ -214,12 +217,12 @@ export default function QuestionsSlide({
                 </div>
                 {questions.map((question: Question, index: number) => (
                     <Tabs.Content
-                        className="text-primary flex-1 bg-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full"
+                        className="text-primary flex-1 bg-primary @xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full rounded-b @xl:rounded-b-none @xl:rounded-r"
                         key={index}
                         value={`tab-${index}`}
                     >
                         <ScrollArea className="h-full">
-                            <div className="px-4">
+                            <div className="px-4 pt-8 @xl:pt-0">
                                 <h2 className="text-3xl mb-4">{question.question}</h2>
                                 <div className="prose max-w-none [&_p]:!text-lg [&_li]:!text-lg">
                                     <Markdown>{getContentForUrl(question.url)}</Markdown>
