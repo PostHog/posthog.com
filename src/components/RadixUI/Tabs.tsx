@@ -16,6 +16,7 @@ interface TabsRootProps {
 interface TabsListProps {
     className?: string
     'aria-label'?: string
+    orientation?: 'horizontal' | 'vertical'
     children: React.ReactNode
 }
 
@@ -43,7 +44,7 @@ const PresentationModeContext = React.createContext<boolean>(false)
 export { PresentationModeContext }
 
 const TabsRoot = ({
-    className = 'flex items-start w-full',
+    className,
     defaultValue,
     value,
     onValueChange,
@@ -59,7 +60,7 @@ const TabsRoot = ({
     return (
         <TabsContext.Provider value={effectiveSize}>
             <RadixTabs.Root
-                className={className}
+                className={`flex items-start w-full ${orientation === 'vertical' ? '' : 'flex-col'} ${className}`}
                 defaultValue={defaultValue}
                 value={value}
                 onValueChange={onValueChange}
@@ -72,12 +73,18 @@ const TabsRoot = ({
 }
 
 const TabsList = ({
-    className = 'flex flex-col shrink-0 p-1 gap-0.5 min-w-52',
     'aria-label': ariaLabel,
+    orientation = 'vertical',
+    className,
     children,
 }: TabsListProps): JSX.Element => {
     return (
-        <RadixTabs.List className={className} aria-label={ariaLabel}>
+        <RadixTabs.List
+            className={`flex shrink-0 p-1 gap-0.5 min-w-52 ${className} ${
+                orientation === 'vertical' ? 'flex-col' : ''
+            }`}
+            aria-label={ariaLabel}
+        >
             {children}
         </RadixTabs.List>
     )
@@ -111,7 +118,7 @@ const TabsTrigger = ({ className, value, children, icon, color }: TabsTriggerPro
     }
 
     const currentSize = sizeStyles[size]
-    const baseClassName = `flex ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center ${currentSize.fontSize} leading-tight text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group`
+    const baseClassName = `flex w-full ${currentSize.height} flex-1 gap-2 cursor-default select-none items-center ${currentSize.fontSize} leading-tight text-primary rounded outline-none hover:text-primary hover:bg-accent data-[state=active]:font-bold data-[state=active]:bg-accent data-[state=active]:focus:relative data-[state=active]:focus:shadow-[0_0_0_2px] data-[state=active]:focus:shadow-black group`
     const finalClassName = `${baseClassName} ${currentSize.padding} ${className}`
 
     return (

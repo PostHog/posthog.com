@@ -35,15 +35,15 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
     return (
         <div className="h-full">
             <Tabs.Root
-                className="flex w-full h-full items-start bg-accent text-primary"
+                className="h-full bg-accent text-primary"
                 defaultValue={`tab-${currentTab}`}
                 value={`tab-${currentTab}`}
                 onValueChange={(value) => setCurrentTab(parseInt(value.split('-')[1]))}
-                orientation="horizontal"
+                // orientation="vertical"
                 size="lg"
             >
                 <div data-scheme="secondary" className="w-64 h-full bg-primary">
-                    <Tabs.List className="flex flex-col p-1 gap-0.5" aria-label="Features">
+                    <Tabs.List className="" aria-label="Features">
                         {features.map((item: FeatureItem, index: number) => (
                             <Tabs.Trigger
                                 key={index}
