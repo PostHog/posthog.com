@@ -1318,7 +1318,7 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: "Template for onboarding success plan",
+                        name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                 ],
@@ -1533,7 +1533,6 @@ export const communityMenu = {
                     url: '/tutorials/categories/filters',
                     children: [
                         { name: 'Filters', url: '/tutorials/categories/filters' },
-                        { name: 'Sentry', url: '/tutorials/categories/sentry' },
                         { name: 'Zapier', url: '/tutorials/categories/zapier' },
                     ],
                 },
@@ -2064,10 +2063,6 @@ export const docsMenu = {
                             url: '/docs/libraries/segment',
                         },
                         {
-                            name: 'Sentry',
-                            url: '/docs/libraries/sentry',
-                        },
-                        {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
                         },
@@ -2378,10 +2373,6 @@ export const docsMenu = {
                             url: '/docs/data/sessions',
                         },
                         {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
                             name: 'Data management',
                             url: '/docs/data',
                         },
@@ -2406,6 +2397,14 @@ export const docsMenu = {
                                     url: '/docs/data/utm-segmentation',
                                 },
                             ],
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Replay comments',
+                            url: '/docs/data/comments',
                         },
                     ],
                 },
