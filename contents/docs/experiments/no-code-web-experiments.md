@@ -146,4 +146,4 @@ These errors can be safely ignored as long as you're not implementing code that 
 
 If you're evaluating the experiment flag on the same page where the element needs to change, you'll see a brief delay as PostHog loads and processes the experiment's feature flag.
 
-To prevent that, evaluate the flag on a page before the one where you need the element to change. For the best user experience, evaluate the flag on the server and pass it to the frontend using [Feature flag bootstrapping](/docs/feature-flags/bootstrapping).
+To prevent that, evaluate the flag on a page before the one where you need the element to change. For the best user experience, evaluate the flag on the server and pass it to the frontend using [feature flag bootstrapping](/docs/feature-flags/bootstrapping).
