@@ -25,14 +25,20 @@ const Parameters = ({
     return (
         <div>
             <h4 className="text-lg font-semibold mb-2">{title}</h4>
-            <div className="min-w-full overflow-x-auto -mx-5 px-5 lg:-mx-6 lg:px-6 xl:-mx-12 xl:px-12">
-                <table className="w-full table-auto">
+            <div className="min-w-0">
+                <table className="w-full" style={{ tableLayout: 'fixed' }}>
                     <thead className="bg-gray-accent-light dark:bg-gray-accent-dark">
                         <tr>
-                            <th className="text-left text-[14px] leading-5 opacity-75 font-[800] py-2 px-2 text-gray-900 dark:text-gray-100 whitespace-nowrap">
+                            <th
+                                className="text-left text-sm leading-5 opacity-75 font-[800] py-2 px-2 text-gray-900 dark:text-gray-100"
+                                style={{ width: '50%' }}
+                            >
                                 Name
                             </th>
-                            <th className="text-left text-[14px] leading-5 opacity-75 font-[800] py-2 px-2 text-gray-900 dark:text-gray-100 whitespace-nowrap">
+                            <th
+                                className="text-left text-sm leading-5 opacity-75 font-[800] py-2 px-2 text-gray-900 dark:text-gray-100"
+                                style={{ width: '50%' }}
+                            >
                                 Type
                             </th>
                         </tr>
@@ -47,14 +53,20 @@ const Parameters = ({
                                             : ''
                                     }
                                 >
-                                    <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-nowrap">
-                                        <code className="text-red hover:text-red font-semibold group">
+                                    <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top">
+                                        <code className="break-words text-red hover:text-red font-semibold group">
                                             {param.name}
                                             {param.isOptional && '?'}
                                         </code>
                                     </td>
-                                    <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top whitespace-normal">
-                                        <TypeLink slugPrefix={slugPrefix} type={param.type} validTypes={validTypes} />
+                                    <td className="text-gray-600 dark:text-gray-300 text-[15px] py-2 px-2 align-top">
+                                        <div className="break-words">
+                                            <TypeLink
+                                                slugPrefix={slugPrefix}
+                                                type={param.type}
+                                                validTypes={validTypes}
+                                            />
+                                        </div>
                                     </td>
                                 </tr>
                                 {param.description && (

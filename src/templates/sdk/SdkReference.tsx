@@ -14,6 +14,7 @@ import { useLocation } from '@reach/router'
 import Link from '../../components/Link'
 import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
+import { defaultMenuWidth } from '../../components/PostLayout/context'
 
 interface Parameter {
     name: string
@@ -55,7 +56,6 @@ interface Class {
 interface SdkReferenceData {
     id: string
     hogRef: string
-    noDocsTypes: string[]
     info: {
         description: string
         id: string
@@ -139,120 +139,187 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         }
     }
 
+    // Generate ToC from classes and functions
+    const tableOfContents = fullReference.classes.flatMap((classData) => [
+        {
+            url: `#${classData.id}`,
+            value: `${classData.title}`,
+            depth: 0,
+        },
+        ...classData.functions.map((func) => ({
+            url: `#${func.id}`,
+            value: `${func.title}()`,
+            depth: 1,
+        })),
+    ])
+
     return (
         <Layout parent={docsMenu} activeInternalMenu={activeInternalMenu}>
             <SEO title={`${fullReference.info.title} - PostHog`} />
-            <PostLayout
-                title={fullReference.info.title}
-                questions={<CommunityQuestions />}
-                menu={activeInternalMenu?.children || []}
-                fullWidthContent={true}
-                hideSidebar
-            >
-                <section>
-                    <div className="mb-8 relative">
-                        <div className="flex items-center mt-0 flex-wrap justify-between">
-                            <div className="flex flex-col-reverse md:flex-row md:items-center space-x-2 mb-1 w-full">
-                                <div className="flex-1">
-                                    <h1 className="dark:text-white text-3xl sm:text-4xl m-0">
-                                        {fullReference.info.title}
-                                    </h1>
-                                    <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
-                                        <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
-                                            SDK Version: {fullReference.info.version}
-                                        </p>
+            <>
+                <div className="w-full relative md:flex justify-between mx-auto transition-all max-w-screen-2xl">
+                    {/* Main content */}
+                    <div className="py-4 box-border w-full flex-shrink mx-auto transition-all min-w-0 max-w-screen-2xl">
+                        <PostLayout
+                            title={fullReference.info.title}
+                            questions={<CommunityQuestions />}
+                            menu={activeInternalMenu?.children || []}
+                            fullWidthContent={true}
+                            hideSidebar
+                        >
+                            <section>
+                                <div className="mb-8 relative">
+                                    <div className="flex items-center mt-0 flex-wrap justify-between">
+                                        <div className="flex flex-col-reverse md:flex-row md:items-center space-x-2 mb-1 w-full">
+                                            <div className="flex-1">
+                                                <h1 className="dark:text-white text-3xl sm:text-4xl m-0">
+                                                    {fullReference.info.title}
+                                                </h1>
+                                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                                    <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
+                                                        SDK Version: {fullReference.info.version}
+                                                    </p>
 
-                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
-                                        <Link
-                                            className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
-                                            to={fullReference.info.specUrl}
-                                        >
-                                            Edit this page
-                                        </Link>
-                                        <span className="text-primary/30 dark:text-primary-dark/30">|</span>
-                                        <CopyMarkdownActionsDropdown
-                                            markdownContent={JSON.stringify(fullReference, null, 2)}
-                                            pageUrl={location.href}
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="w-full">
-                        {fullReference.classes.map((classData) => (
-                            <div key={classData.id} className="mb-12">
-                                <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
-                                <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
-
-                                {groupFunctionsByCategory(classData.functions).map(({ label, functions }) => (
-                                    <div key={label || 'other-methods'}>
-                                        {/* Only show a heading if label is not null and not "Other methods" */}
-                                        {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label} methods</h3>}
-                                        {/* If label is null, show "Other methods" heading */}
-                                        {!label && <h3 className="text-xl font-semibold mb-2 mt-8">Other methods</h3>}
-                                        {functions.map((func) => (
-                                            <div
-                                                key={func.id}
-                                                className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0 py-8"
-                                            >
-                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-                                                    <div className="space-y-6">
-                                                        <Heading
-                                                            as="h4"
-                                                            id={func.id}
-                                                            className="text-lg my-0 font-bold"
-                                                        >
-                                                            <code>{func.title}</code>
-                                                            {func.releaseTag && (
-                                                                <span
-                                                                    className={`${getBadgeClasses(
-                                                                        func.releaseTag
-                                                                    )} ml-2`}
-                                                                >
-                                                                    {func.releaseTag}
-                                                                </span>
-                                                            )}
-                                                        </Heading>
-                                                        {func.description && (
-                                                            <ReactMarkdown>
-                                                                {padDescription(func.description)}
-                                                            </ReactMarkdown>
-                                                        )}
-                                                        {func.details && (
-                                                            <Accordion title="Notes:">
-                                                                <ReactMarkdown>{func.details}</ReactMarkdown>
-                                                            </Accordion>
-                                                        )}
-                                                        <Parameters
-                                                            slugPrefix={fullReference.info.slugPrefix}
-                                                            params={func.params}
-                                                            validTypes={validTypes}
-                                                        />
-                                                    </div>
-
-                                                    <div className="lg:sticky top-[108px] space-y-6">
-                                                        <FunctionExamples
-                                                            examples={func.examples}
-                                                            language={sdkLanguage}
-                                                        />
-                                                        <FunctionReturn
-                                                            slugPrefix={fullReference.info.slugPrefix}
-                                                            returnType={func.returnType}
-                                                            validTypes={validTypes}
-                                                        />
-                                                    </div>
+                                                    <span className="text-primary/30 dark:text-primary-dark/30">|</span>
+                                                    <Link
+                                                        className="text-primary/30 dark:text-primary-dark/30 hover:text-red dark:hover:text-yellow"
+                                                        to={fullReference.info.specUrl}
+                                                    >
+                                                        Edit this page
+                                                    </Link>
+                                                    <span className="text-primary/30 dark:text-primary-dark/30">|</span>
+                                                    <CopyMarkdownActionsDropdown
+                                                        markdownContent={JSON.stringify(fullReference, null, 2)}
+                                                        pageUrl={location.href}
+                                                    />
                                                 </div>
                                             </div>
-                                        ))}
+                                        </div>
                                     </div>
-                                ))}
-                            </div>
-                        ))}
+                                </div>
+
+                                <div className="w-full">
+                                    {fullReference.classes.map((classData) => (
+                                        <div key={classData.id} className="mb-12">
+                                            <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
+                                            <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
+
+                                            {groupFunctionsByCategory(classData.functions).map(
+                                                ({ label, functions }) => (
+                                                    <div key={label || 'other-methods'}>
+                                                        {/* Only show a heading if label is not null and not "Other methods" */}
+                                                        {label && (
+                                                            <h3 className="text-xl font-semibold mb-2 mt-8">
+                                                                {label} methods
+                                                            </h3>
+                                                        )}
+                                                        {/* If label is null, show "Other methods" heading */}
+                                                        {!label && (
+                                                            <h3 className="text-xl font-semibold mb-2 mt-8">
+                                                                Other methods
+                                                            </h3>
+                                                        )}
+                                                        {functions.map((func) => (
+                                                            <div
+                                                                key={func.id}
+                                                                className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0 py-8"
+                                                            >
+                                                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                                                                    <div className="space-y-6">
+                                                                        <Heading
+                                                                            as="h4"
+                                                                            id={func.id}
+                                                                            className="text-lg my-0 font-bold"
+                                                                        >
+                                                                            <code>{func.title}</code>
+                                                                            {func.releaseTag && (
+                                                                                <span
+                                                                                    className={`${getBadgeClasses(
+                                                                                        func.releaseTag
+                                                                                    )} ml-2`}
+                                                                                >
+                                                                                    {func.releaseTag}
+                                                                                </span>
+                                                                            )}
+                                                                        </Heading>
+                                                                        {func.description && (
+                                                                            <ReactMarkdown>
+                                                                                {padDescription(func.description)}
+                                                                            </ReactMarkdown>
+                                                                        )}
+                                                                        {func.details && (
+                                                                            <Accordion title="Notes:">
+                                                                                <ReactMarkdown>
+                                                                                    {func.details}
+                                                                                </ReactMarkdown>
+                                                                            </Accordion>
+                                                                        )}
+                                                                        <Parameters
+                                                                            slugPrefix={fullReference.info.slugPrefix}
+                                                                            params={func.params}
+                                                                            validTypes={validTypes}
+                                                                        />
+                                                                    </div>
+
+                                                                    <div className="lg:sticky top-[108px] space-y-6">
+                                                                        <FunctionExamples
+                                                                            examples={func.examples}
+                                                                            language={sdkLanguage}
+                                                                        />
+                                                                        <FunctionReturn
+                                                                            slugPrefix={fullReference.info.slugPrefix}
+                                                                            returnType={func.returnType}
+                                                                            validTypes={validTypes}
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            </section>
+                        </PostLayout>
                     </div>
-                </section>
-            </PostLayout>
+                    {/* ToC sidebar, hidden on mobile */}
+                    {tableOfContents.length > 0 && (
+                        <aside
+                            style={{ maxWidth: defaultMenuWidth.right }}
+                            className="w-full flex-shrink-0 lg:block hidden relative z-20"
+                        >
+                            <div className="md:sticky md:top-0 reasonable:top-[108px] max-h-screen reasonable:h-[calc(100vh_-_108px)] flex-shrink-0 w-full justify-self-end pl-0 md:box-border my-10 md:my-0 mr-auto overflow-y-auto pt-6 pb-10 bg-light dark:bg-dark border-r border-light dark:border-dark">
+                                <h4 className="text-black dark:text-white font-semibold opacity-25 m-0 mb-1 text-sm">
+                                    Jump to:
+                                </h4>
+                                <ul className="list-none m-0 p-0 flex flex-col">
+                                    {tableOfContents.map((navItem) => (
+                                        <li className="relative leading-none m-0" key={navItem.url}>
+                                            <span>
+                                                <a
+                                                    href={navItem.url}
+                                                    className={`relative block py-1 pr-4 text-primary dark:text-primary-dark hover:bg-accent dark:hover:bg-accent-dark leading-tight font-medium hover:text-primary dark:hover:text-primary-dark cursor-pointer hover:opacity-100 opacity-60 text-[14px] py-1 block relative active:top-[0.5px] active:scale-[.99]${
+                                                        navItem.depth === 0 ? ' font-semibold' : ''
+                                                    }`}
+                                                    style={{ paddingLeft: `${(navItem.depth || 0) + 1}rem` }}
+                                                >
+                                                    <code className="font-semibold group text-xs">
+                                                        <span className="text-gray-600 dark:text-gray-400">
+                                                            {navItem.value}
+                                                        </span>
+                                                    </code>
+                                                </a>
+                                            </span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        </aside>
+                    )}
+                </div>
+            </>
         </Layout>
     )
 }
