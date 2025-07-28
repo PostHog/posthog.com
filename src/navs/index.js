@@ -2373,10 +2373,6 @@ export const docsMenu = {
                             url: '/docs/data/sessions',
                         },
                         {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
                             name: 'Data management',
                             url: '/docs/data',
                         },
@@ -2401,6 +2397,14 @@ export const docsMenu = {
                                     url: '/docs/data/utm-segmentation',
                                 },
                             ],
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Replay comments',
+                            url: '/docs/data/comments',
                         },
                     ],
                 },
