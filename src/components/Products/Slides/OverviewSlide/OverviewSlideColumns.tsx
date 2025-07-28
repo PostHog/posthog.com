@@ -26,7 +26,7 @@ export default function OverviewSlideColumns({
                     imgClassName={hog.classes}
                 />
             )}
-            <div className="pt-12 pr-12 pb-1/2 pl-1/2">
+            <div className="@2xl:pt-12 @2xl:pr-12 @2xl:pb-1/2 @2xl:pl-1/2">
                 <div className="inline-flex items-center gap-3 text-primary mb-4">
                     {Icon && <Icon className={`size-7 ${overview?.textColor || 'text-black'}`} />}
                     <span className={`text-xl font-bold ${overview?.textColor || 'text-black'}`}>{productName}</span>
