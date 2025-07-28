@@ -31,4 +31,4 @@ To avoid notification fatigue, the system consolidates all detected spikes acros
 
 ## Related systems
 
-Spike detection complements other billing and usage monitoring features, such as **[billing limits](/docs/billing/limits-alerts)** and **usage dashboards**.
+Spike detection complements other billing and usage monitoring features, such as [billing limits](/docs/billing/limits-alerts) and [usage dashboards](/templates/posthog-billable-usage).
