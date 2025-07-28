@@ -12,7 +12,7 @@ const CustomPricingSlide = () => {
     return (
         <div
             data-scheme="primary"
-            className="flex flex-col justify-center items-center h-full bg-primary text-primary px-8"
+            className="flex flex-col pt-12 @2xl:pt-0 @2xl:justify-center items-center h-full bg-primary text-primary px-8"
         >
             <div className="max-w-4xl w-full text-center">
                 <h2 className="text-4xl md:text-5xl font-bold mb-8">Usage-based pricing</h2>
