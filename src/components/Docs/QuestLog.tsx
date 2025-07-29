@@ -25,7 +25,6 @@ export const QuestLog: React.FC<{
 }) => {
     const SCROLLSPY_OFFSET = 0
     const MOBILE_SCROLLSPY_OFFSET = 125
-    const CONTAINER_BREAKPOINT = 640
 
     // Animation timing constants
     const INITIAL_LOAD_DELAY = 1000
@@ -354,19 +353,15 @@ export const QuestLog: React.FC<{
 
     return (
         <>
-            <div className="max-w-7xl mx-auto pb-6 @container">
+            <div className="max-w-7xl mx-auto pb-6 quest-log-container">
                 <div
                     id={questIds[0]}
                     style={{ position: 'absolute', top: 0, height: 0, width: 0 }}
                     aria-hidden="true"
                 />
-                <div
-                    className={`flex @[${CONTAINER_BREAKPOINT}px]:gap-y-6 gap-x-6 flex-col-reverse @[${CONTAINER_BREAKPOINT}px]:flex-row`}
-                >
+                <div className="quest-main-content">
                     {/* Quest Details */}
-                    <div
-                        className={`w-full @[${CONTAINER_BREAKPOINT}px]:w-[66.66%] @[${CONTAINER_BREAKPOINT}px]:flex-shrink-0`}
-                    >
+                    <div className="quest-details">
                         <div className="space-y-4">
                             {questItems.map((questItem, index) => (
                                 <div
@@ -399,7 +394,7 @@ export const QuestLog: React.FC<{
 
                     {/* Quest List - Sticky Container */}
                     <div
-                        className={`w-full @[${CONTAINER_BREAKPOINT}px]:max-w-[30%] @[${CONTAINER_BREAKPOINT}px]:flex-shrink-0 @[${CONTAINER_BREAKPOINT}]:mt-3 pt-4 sticky self-start z-50 bg-light dark:bg-dark pb-2 @[${CONTAINER_BREAKPOINT}px]:pb-4`}
+                        className="quest-sidebar bg-light dark:bg-dark"
                         style={{
                             top: `${headerHeight}px`,
                         }}
@@ -493,7 +488,7 @@ export const QuestLog: React.FC<{
                         </div>
 
                         {/* Desktop Navigation */}
-                        <div className={`hidden @[${CONTAINER_BREAKPOINT}px]:block space-y-4 relative`}>
+                        <div className="quest-desktop-nav space-y-4 relative">
                             {/* Moving Corner Brackets */}
                             <div
                                 className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
@@ -538,7 +533,7 @@ export const QuestLog: React.FC<{
                         </div>
 
                         {/* Mobile Navigation */}
-                        <div className={`block @[${CONTAINER_BREAKPOINT}px]:hidden`}>
+                        <div className="quest-mobile-nav">
                             <Scrollspy
                                 items={questIds}
                                 currentClassName="active"
