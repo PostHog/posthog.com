@@ -88,11 +88,9 @@ Now experiment with a few search parameters that communicate the values we want,
 
 This will help narrow down your search to roles and companies that are looking for product engineer-style people.
 
-As you do so, pay attention to how much detail companies add to their profiles. Most will include a basic bio of the founders, what they're building, and their tech stack; the really good ones will go into the detail about the type of company they want to build.
+As you do so, pay attention to how much detail companies add to their profiles. Most will include a basic bio of the founders, what they're building, and their tech stack; the really good ones will go into the detail about the type of company they want to build. Here's a good one from [Dart](https://www.dartai.com/), a company from YC's WW22 batch:
 
 ![dart](https://res.cloudinary.com/dmukukwp6/image/upload/dart_d741c85b2b.png)
-  
-<Caption>[Dart](https://www.dartai.com/) (W22 batch) nails the kind of detail you want to see</Caption>
 
 Other companies may have this kind of context on their careers website, or in their ads, but a surprising number put very little emphasis on communicating anything about their culture.
 
@@ -129,15 +127,11 @@ The "About you" section backs this up and adds emphasis on the need to "lead aut
 
 ![railway job ad](https://res.cloudinary.com/dmukukwp6/image/upload/railway_cap_1972a40df3.png)
 
-<Caption>Source: [Senior Full-Stack Engineer at Railway](https://railway.com/careers/full-stack)</Caption>
-
 [Railway](https://railway.com/) has clearly thought deeply about how to communicate what it wants. Frankly, we need to up *our* game now, so tip-of-the-hat to the Railway folks on this one.
 
 [Incident.io](http://incident.io) also nails the key points you should look for in product engineer roles. I particularly love the focus on interacting with customers, and the need to be comfortable with ambiguity – a vital quality for any product engineer.
 
 ![incident.io](https://res.cloudinary.com/dmukukwp6/image/upload/incident_io_9858cf59aa.png)
-
-<Caption>Source: [Product Engineer at Incident.io](https://incident.io/careers/89545f48-fa53-4d79-8927-f0226f4a2f57?ashby_jid=89545f48-fa53-4d79-8927-f0226f4a2f57)</Caption>
 
 And, just to prove that it's not just early-stage startups that want product engineers, let's take a look at Intercom. Its [career pages](https://www.intercom.com/careers-engineering) are full of good signs for anyone interested in product engineer roles.
 
@@ -186,7 +180,7 @@ Not writing a cover letter might work for bigger companies that are hiring at a 
 
 * **Side projects are great.** Building something people actually pay for is even better. This is where the real war stories come from, where you can talk about decisions you made, user interactions, and what you learned. It’s proof you can do everything needed to be a product engineer.
 
-* **Write about your experiences.** A personal website where you write about things you've built, lessons you learned, tools and technologies you've chosen and why, will add color to your application.[^2] You don't need to go viral on Hacker News. The habit is enough to build a narrative that gets you an interview.
+* **Write about your experiences.** A personal website where you write about things you've built, lessons you learned, tools and technologies you've chosen and why, will add color to your application. You don't need to go viral on Hacker News. The habit is enough to build a narrative that gets you an interview.
 
 * **Found a company!** Ok, this is a stretch goal, but ex-technical founders make great product engineers. We look for them specifically.
 
@@ -199,11 +193,3 @@ Not writing a cover letter might work for bigger companies that are hiring at a 
 * [**What startup recruiters actually see when you apply for a job**](/founders/what-recruiters-see)
 
 [^1]: Figuring this out isn’t straightforward. If you pay for LinkedIn Premium, you can look up the spread of roles at a company via the “Insights” tab on a company’s page. This data isn’t perfect, but it is directionally useful.
-
-[^2]: Here’s a quick sample from engineers at PostHog for inspiration:
-
-* [Failure suuuuucks](https://haacked.com/archive/2023/11/13/failure/) – Phil Haack  
-* [Reflections on my career in 2020](https://www.dylanamartin.com/2021/01/11/reflections-on-my-career-in-2020.html) – Dylan Martin  
-* [Tech debts](https://pauldambra.dev/2021/07/tech-debts.html) – Paul D’Ambra  
-* [Floating-point arithmetic, explained interactively](https://matloka.com/blog/floating-point-101) – Michael Matloka  
-* [A Functional view over Dart with Advent Of Code](https://www.rafaaudibert.dev/blog/a-functional-view-over-advent-of-code-with-dart/) – Rafa Audibert
