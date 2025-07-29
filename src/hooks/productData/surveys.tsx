@@ -109,13 +109,15 @@ export const surveys = {
         },
         {
             title: 'No-code and API',
-            headline: 'No-code? Yes. API? Yes.',
+            headline: 'No-code? Yes. API? Also yes.',
             description:
                 'Using PostHog.js? No more code required. But want to create your own UI? Check out the Surveys API.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/api.png',
                     alt: 'No-code and API',
+                    stylize: true,
+                    shadow: true,
                 },
             ],
         },
@@ -347,23 +349,23 @@ export const surveys = {
     ],
     presenterNotes: {
         overview:
-            "Surveys let you ask users anything right inside your product. No-code for simple stuff, API if you want custom UI. What's different: it's connected to everything else. See who answered what, watch their session recordings, run analytics on responses. Most survey tools are islands - ours is part of the whole system.",
+            "<strong>Presenter notes:</strong> Surveys let you ask users anything right inside your product. No-code for simple stuff, API if you want a custom UI. But what's different about PostHog Surveys is that it works with other PostHog products. See <em>who</em> answered what, watch their session recordings, run analytics on responses. Most survey tools are siloed - ours is part of the whole system that let's you drill in for additional context.",
         customers:
-            "Purplewave hit 25% response rates because the surveys show up exactly when users care. ElevenLabs uses them creatively - they pop surveys asking power users to review them on G2. Smart. These aren't email surveys people ignore. They're contextual, in-app, at the right moment.",
+            "<strong>Purplewave</strong> hit a 25% response rate by targeting active users who were more likely to respond which meant more actionable feedback from loyal users without annoying those who weren't likely to respond anyway. <strong>ElevenLabs</strong> uses them creatively - they pop surveys asking power users to review them on G2. Instead of email surveys people ignore, PostHog surveys are contextual, in-app, at can be tailored to show at exactly the right moment.",
         features:
-            "<strong>Question types:</strong> All the standards: multiple choice, ratings, emojis, free text. Plus embedded links - great for calendly scheduling or external forms.<br /><br /><strong>Templates:</strong> NPS, PMF, satisfaction, user interviews. Start from these or build your own. Takes minutes.<br /><br /><strong>Display conditions:</strong> Target by URL, user properties, or feature flags. Ask beta users about new features. Survey only enterprise customers. Whatever you need.<br /><br /><strong>Multi-step surveys:</strong> Up to 10 questions. Progress bar included. People actually complete multi-step surveys when they're contextual.<br /><br /><strong>Link somewhere:</strong> End with a calendar link for user interviews. Or send to a detailed feedback form. Mix in-app and external collection.<br /><br /><strong>No-code and API:</strong> Visual builder for most cases. API when you need custom UI or complex logic. Both use the same backend.<br /><br /><strong>More features:</strong><br /><br /><strong>Aggregated results:</strong> See response distributions, average scores, trends over time.<br /><br /><strong>Slack notifications:</strong> Get responses in real-time. Great for catching urgent feedback.<br /><br /><strong>Customizable wait periods:</strong> Don't annoy new users. Set delays before showing surveys.",
+            "<strong>Question types:</strong> Everything you'd expect like multiple choice, ratings (1-5, 1-7 for Likert, 0-10 for NPS), emojis, free text. Plus you can embed links as the survey's CTA – great for external forms or scheduling calls like user interviews.<br /><br /><strong>Templates:</strong> We've got many of the acronyms covered including <strong>NPS</strong> (Net Promoter Score), <strong>PMF</strong> (product-market tit), <strong>CSAT</strong> (customer satisfaction score), <strong>CES</strong> (customer effort score), and others like one that helps schedule user interviews, one for user-provided context that fires after hitting an exception, and of course a freeform text option for collecting user feedback. Start from a template or build your own from scratch.<br /><br /><strong>Display conditions:</strong> Target by URL, user properties, or feature flags. You can ask beta users about new features or survey only enterprise customers.<br /><br /><strong>Multi-step surveys:</strong> Up to 10 questions, progress bar included.<br /><br /><strong>Link somewhere:</strong> End with a calendar link for user interviews or send to a detailed feedback form. Mix in-app and external collection.<br /><br /><strong>No-code and API:</strong> Visual builder for most cases and an API when you need custom UI or complex logic – both use the same backend.<br /><br /><strong>More features:</strong><br /><br /><strong>Aggregated results:</strong> See response distributions, average scores, trends over time.<br /><br /><strong>Slack notifications:</strong> Get responses in real-time – great for catching urgent feedback.<br /><br /><strong>Customizable wait periods:</strong> Avoid annoying users new users – set delays before showing surveys so you trigger at the right time.",
         answers:
             'These are actual survey questions our customers use. User interviews? End with a Calendly link. PMF survey? Use the template. Support satisfaction? Time it after ticket resolution. The key is asking at the right moment - after they use a feature, complete a task, or hit a milestone.',
         pricing:
-            '250 responses free every month. Then simple usage pricing. No limits on surveys created or questions asked. Compare that to SurveyMonkey charging $99/month for basic features. We include everything - targeting, multi-step, API access - in the base product.',
+            "Use surveys free, or enter a credit card for advanced features. Either way, your first 250 survey responses are free – every month, then it's simple usage-based pricing. No limits on surveys created or questions asked. Compare that to SurveyMonkey charging $99/month for basic features. We include everything – targeting, multi-step, API access – out of the box.",
         'comparison-summary':
-            "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. Also, we're the only one with feature flag targeting.",
+            "Traditional survey tools (SurveyMonkey, Typeform) are disconnected from your product. Modern tools (Pendo, Sprig) are expensive and still siloed. We built surveys into the platform, so responses connect to user data, sessions, and analytics. (We're the only one with feature flag targeting.)",
         'feature-comparison':
             "We have all the core features. What we don't have: AI analysis (yet) or complex form logic. But we uniquely support feature flag targeting - survey only users who have a specific feature enabled. Nobody else does that.",
-        docs: 'Clear setup guides for both no-code and API approaches. We show real examples of different survey types and when to use them. Common patterns like NPS calculation and user interview scheduling are documented with copy-paste examples.',
+        docs: "We've got clear setup guides for both no-code and API approaches with real-world examples of different survey types and when to use them. Common patterns like NPS calculation and user interview scheduling are documented with copy-paste examples.",
         'pairs-with':
             "Survey someone, then watch their session to see what they were doing. Run analytics on survey responses segmented by user properties. Target surveys to users with specific feature flags enabled. This integration is why response rates are so high - you're asking the right people at the right time.",
         'getting-started':
-            "Pick a template. Customize the questions. Set targeting rules. Launch. You'll see responses immediately. The hardest part is deciding what to ask. Start simple - one question about the feature they just used. You can always iterate from there.",
+            "Build a survey in minutes: pick a template, customize the questions, set targeting rules. You'll start seeing responses immediately. The hardest part is deciding what to ask. Not sure where to start? Go simple: ask one question about the feature they just used. You can always iterate from there!",
     },
 }

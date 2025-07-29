@@ -439,7 +439,7 @@ export const experiments = {
     ],
     presenterNotes: {
         overview:
-            "Test changes to your product and evaluate the impacts those changes make. Run experiments on funnels to see the impact of a change on a aggregate values or a series of events, like a signup flow. You can track up to nine metrics to see how your experiment affects other parts of your app or different flows. Our Bayesian statistical engine gives you results anytime without p-hacking concerns. You'll get clear win probabilities that let you make confident decisions when you have data to back it up, not when you hit some arbitrary date.",
+            "<strong>Presenter notes:</strong> Test changes to your product and evaluate the impacts those changes make. Run experiments on funnels to see the impact of a change on a aggregate values or a series of events, like a signup flow. You can track up to nine metrics to see how your experiment affects other parts of your app or different flows. Our Bayesian statistical engine gives you results anytime without p-hacking concerns. You'll get clear win probabilities that let you make confident decisions when you have data to back it up, not when you hit some arbitrary date.",
         customers:
             'Y Combinator tested small changes systematically and saw a 40% engagement boost. ResearchGate runs experiments on 25 million users. Vendasta tested "insignificant" ideas and got 30% more registrations. They all move fast because they\'re not waiting weeks for "significance".',
         features:

@@ -484,7 +484,7 @@ export const webAnalytics = {
     ],
     presenterNotes: {
         overview:
-            "Google took something great (GA 3) and made it worse. So we built what GA3 should have evolved into - simple, privacy-focused, no sampling. Works out of the box. Plus it's part of the whole PostHog platform, so you can jump from a traffic spike to watching recordings of those exact sessions. And no cookies required if you don't want them.",
+            "<strong>Presenter notes:</strong> Google took something great (GA 3) and made it worse. So we built what GA3 should have evolved into - simple, privacy-focused, no sampling. Works out of the box. Plus it's part of the whole PostHog platform, so you can jump from a traffic spike to watching recordings of those exact sessions. And no cookies required if you don't want them.",
         customers:
             "Y Combinator gets 30% more data than GA4 because you can create a reverse proxy which privacy tools can't block. Significa ditched Plausible for us - more powerful, same privacy focus. Creatify summed it up: 'It's so much better than GA4.' These aren't edge cases. PostHog Web Analytics can't replace *everything* in GA4 (yet) like advanced attribution features, but we're getting there.",
         features:

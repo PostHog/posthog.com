@@ -273,7 +273,7 @@ export const errorTracking = {
     ],
     presenterNotes: {
         overview:
-            "Error tracking that's actually connected to everything else. See an error? Watch the session replay to see exactly what happened. Check which feature flags were on. Roll back instantly. Most error tools are isolated - ours shows the full context.",
+            "<strong>Presenter notes:</strong> Error tracking that's actually connected to everything else. See an error? Watch the session replay to see exactly what happened. Check which feature flags were on. Roll back instantly. Most error tools are isolated - ours shows the full context.",
         customers:
             "Zealot switched from BugSnag and Amplitude. Why? 'In two clicks, I can see who had an error, then their replays.' That's the difference. Not just a stack trace - the whole story of what the user was doing when it broke.",
         features:

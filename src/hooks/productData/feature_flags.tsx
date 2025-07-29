@@ -472,7 +472,7 @@ export const featureFlags = {
     ],
     presenterNotes: {
         overview:
-            "Feature flags control who sees what. We fixed the two biggest problems: latency (down from 500ms to under 50ms with local evaluation) and that annoying flicker on page load (bootstrapping makes flags instant). Ship faster, roll back instantly, see the impact in analytics. That's it.",
+            "<strong>Presenter notes:</strong> Feature flags control who sees what. We fixed the two biggest problems: latency (down from 500ms to under 50ms with local evaluation) and that annoying flicker on page load (bootstrapping makes flags instant). Ship faster, roll back instantly, see the impact in analytics. That's it.",
         customers:
             'Phantom cut failure rates by 90% - they just turn off broken features instantly. Contra boosted registrations 30% because they could finally see flag data next to analytics data. CarVertical ditched their homegrown system because, turns out, building good feature flags is hard.',
         features:

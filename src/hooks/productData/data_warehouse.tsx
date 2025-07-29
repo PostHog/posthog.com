@@ -158,7 +158,7 @@ export const dataWarehouse = {
     ],
     presenterNotes: {
         overview:
-            "Your product data is lonely. It needs friends - Stripe data, CRM data, support data. Our data warehouse brings them all together. Now you can answer questions like 'What do high-value customers actually do in our product?' No ETL pipelines, no data engineering team required.",
+            "<strong>Presenter notes:</strong> Your product data is lonely. It needs friends - Stripe data, CRM data, support data. Our data warehouse brings them all together. Now you can answer questions like 'What do high-value customers actually do in our product?' No ETL pipelines, no data engineering team required.",
         customers:
             "HeadshotPro analyzes Adwords alongside product usage - marketing and engineering finally speak the same language. Webshare syncs Intercom data to see how support interactions affect retention. These aren't special cases - everyone needs this.",
         features:

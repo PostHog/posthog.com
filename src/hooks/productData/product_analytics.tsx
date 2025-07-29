@@ -939,7 +939,7 @@ export const productAnalytics = {
     ],
     presenterNotes: {
         overview:
-            "Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",
+            "<strong>Presenter notes:</strong> Product analytics tells you what's happening in your product. PostHog is different than others because every product we build is natively integrated. This means you can jump from a graph to a session recording to visually see why something happened. Plus we use autocapture, which tracks every click and pageview automatically. No more realizing you forgot to track something important – you can define events retroactively (we call these 'actions').",
         customers:
             "Y Combinator gets 30% more data than they did with Google Analytics using a reverse proxy. Hasura found drop-offs they'd never seen before and fixed them. Contra watched recordings of users who dropped off and increased registrations by 30%. When you can understand the 'why' behind the numbers, fixing things gets a lot easier.",
         features:
