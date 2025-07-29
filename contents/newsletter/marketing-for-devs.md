@@ -108,8 +108,6 @@ No one has figured out how to improve your visibility on AI platforms (AKA "gene
 
 35. When it comes to [paid ads](/founders/dev-marketing-paid-ads#all-paid-ads-are-basically-the-same), there are two objectives you should care about: conversion and awareness. Conversion means people click your ad then do something you want (like sign up). Awareness means you just want people to see it, they create demand. We split our budget 50/50 between the two.
 
-![Paid ads](https://res.cloudinary.com/dmukukwp6/image/upload/paid_ads_0000000000.png)
-
 36. You might read this and think you are immune to ads; and therefore, they are useless. You're wrong. [Ads work on you](/founders/dev-marketing-paid-ads#paid-ads-dont-work-on-developers) (and developers like you), we've collected the quantitative data to back this up.
 
 37. You cannot simply [outsource your marketing to an agency](/founders/dev-marketing-paid-ads#an-agency-will-solve-all-your-problems). They can be helpful with paid ad creative, setting it up on the ad platform, and analyzing results, but you need to give constant guidance, feedback, and ideas to make the most of them.
