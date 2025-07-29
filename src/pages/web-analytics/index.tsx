@@ -124,7 +124,7 @@ export default function WebAnalytics(): JSX.Element {
     `)
 
     const slides = createSlideConfig({
-        exclude: ['answers'],
+        // exclude: ['answers'],
         // order: ['overview', 'pricing', 'features'],
         templates: {
             overview: 'stacked', // Use the horizontal split layout

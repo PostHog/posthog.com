@@ -200,11 +200,11 @@ const ScalableSlide: React.FC<ScalableSlideProps> = ({
     }
 
     return (
-        <div ref={containerRef} className={`relative w-full h-full overflow-hidden rounded-md ${className}`}>
+        <div ref={containerRef} className={`relative w-full h-full overflow-hidden rounded ${className}`}>
             <div
                 ref={contentRef}
                 data-scheme="primary"
-                className="absolute top-1/2 left-1/2 origin-center shadow-2xl border-primary bg-primary rounded-md overflow-hidden"
+                className="absolute top-1/2 left-1/2 origin-center shadow-2xl border-primary bg-primary rounded overflow-hidden"
                 style={{
                     width: baseWidth,
                     height: baseHeight,

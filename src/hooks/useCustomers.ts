@@ -151,6 +151,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Creative freelance marketplace',
         logo: ContraLogo,
         featured: false,
+        height: 8,
     },
     creatify: {
         name: 'Creatify',
@@ -349,6 +350,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'API generator',
         logo: SpeakeasyLogo,
         featured: false,
+        height: 6,
     },
     supabase: {
         name: 'Supabase',

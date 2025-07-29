@@ -62,7 +62,7 @@ const SlideThumb = ({ slide, index, isActive, slideId }: SlideThumbProps) => {
             }}
         >
             <div
-                className={`aspect-video bg-primary border rounded-sm overflow-hidden relative ${
+                className={`aspect-video bg-primary border rounded overflow-hidden relative ${
                     isActive ? 'border-blue outline outline-blue' : 'border-primary group-hover:border-primary'
                 }`}
             >

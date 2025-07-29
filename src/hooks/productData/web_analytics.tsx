@@ -33,7 +33,7 @@ export const webAnalytics = {
         description:
             'Privacy-focused web analytics with pre-built dashboards, real-time data, and no sampling. Built for people who really liked GA3...',
     },
-    answersDescription: 'Monitor your website traffic',
+    answersDescription: 'Plus some helpful reading to make the most of Web Analytics',
     overview: {
         title: 'Privacy-focused web analytics',
         description:
@@ -255,40 +255,20 @@ export const webAnalytics = {
     ],
     questions: [
         {
-            question: 'How many visitors have I had this week?',
+            question: 'Fine broken links (404s)',
+            url: '/tutorials/broken-link-checker',
         },
         {
-            question: "What's my average bounce rate?",
+            question: 'Analytics without cookies',
+            url: '/tutorials/cookieless-tracking',
         },
         {
-            question: 'Where in the world are my visitors coming from?',
+            question: 'Identifying users',
+            url: '/tutorials/identifying-users-guide',
         },
         {
-            question: 'Are my users mostly on mobile, tablet, or desktop?',
-        },
-        {
-            question: "What's my most popular blog post from the last month?",
-        },
-        {
-            question: 'What other websites are sending me the most traffic?',
-        },
-        {
-            question: 'How many visitors are coming back to my site regularly?',
-        },
-        {
-            question: 'Which marketing campaigns drive the most conversions?',
-        },
-        {
-            question: 'How far are users scrolling on my landing pages?',
-        },
-        {
-            question: "What's my site's Core Web Vitals performance?",
-        },
-        {
-            question: 'How much revenue is each traffic source generating?',
-        },
-        {
-            question: 'When are my users most active during the day?',
+            question: 'A non-technical guide to PostHog data',
+            url: '/tutorials/non-technical-guide-to-data',
         },
     ],
     comparison: {

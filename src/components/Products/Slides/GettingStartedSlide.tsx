@@ -28,14 +28,14 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                     text="Get started today!!"
                     theme="superhero"
                     fontSize={48}
-                    className="absolute top-8 @2xl:top-20 left-6 @2xl:left-20"
+                    className="absolute top-8 @2xl:top-24 left-6 @2xl:left-20"
                 />
                 <WordArt
                     text="If you we're looking for a sign..."
                     secretMessage="(yes, the typo was intentional)"
                     theme="rainbow"
                     fontSize={36}
-                    className="absolute top-[8.5rem] @xl;top-44 left-24 @2xl:left-72 scale-75 @2xl:scale-100"
+                    className="absolute top-[8.5rem] @xl:top-44 left-24 @2xl:left-72 scale-75 @2xl:scale-100"
                 />
                 <WordArt
                     text="Follow your dreams"
@@ -90,7 +90,7 @@ export default function GettingStartedSlide({ initialState, productName }: { ini
                         />
                     </div>
                 </div>
-                <div className="absolute top-[15rem] @2xl:top-[28rem] right-64 @2xl:right-72 text-center scale-150 @2xl:scale-100">
+                <div className="absolute top-[15rem] @2xl:top-[24rem] right-64 @2xl:right-72 text-center scale-150 @2xl:scale-100">
                     <WordArt text="Install without AI" theme="italicOutline" fontSize={24} />
                     <br />
                     <div className="relative">
