@@ -14,7 +14,7 @@ const Tooltip = ({ trigger, children, open, onOpenChange, delay = 500 }: Tooltip
         <RadixTooltip.Provider delayDuration={delay}>
             <RadixTooltip.Root open={open} onOpenChange={onOpenChange}>
                 <RadixTooltip.Trigger asChild>
-                    <span className="contents">{trigger}</span>
+                    <span>{trigger}</span>
                 </RadixTooltip.Trigger>
                 <RadixTooltip.Portal>
                     <RadixTooltip.Content
