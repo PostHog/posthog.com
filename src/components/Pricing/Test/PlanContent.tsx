@@ -202,6 +202,7 @@ export default function PlanContent({ activePlan, onFreeTierClick, isMainColumn 
                     </div>
                 </div>
                 <TrackedCTA
+                    state={{ initialTab: 'signup' }}
                     event={{
                         name: `clicked Get started - free`,
                         type: 'cloud',

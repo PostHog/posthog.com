@@ -6,6 +6,7 @@ import React from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { IconArrowUpRight } from '@posthog/icons'
 import ContextMenu, { ContextMenuItemProps } from 'components/RadixUI/ContextMenu'
+import { useApp } from '../../context/App'
 
 // Helper function to create standard context menu items
 const createStandardMenuItems = (url: string, state?: any, isExternal = false): ContextMenuItemProps[] => {
@@ -94,6 +95,7 @@ export default function Link({
     ...other
 }: Props): JSX.Element {
     const { compact } = useLayoutData()
+    const { openStart } = useApp()
     const posthog = usePostHog()
     const url = to || href
     const internal = !disablePrefetch && url && /^\/(?!\/)/.test(url)
@@ -106,7 +108,10 @@ export default function Link({
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl) {
+            e.preventDefault()
             posthog?.createPersonProfile?.()
+            const subdomain = new URL(url).hostname.split('.')[0]
+            openStart({ subdomain, initialTab: state?.initialTab })
         }
         if (event && posthog) {
             posthog.capture(event)

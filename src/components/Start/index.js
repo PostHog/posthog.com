@@ -70,9 +70,9 @@ const BoomerInstall = () => (
     </div>
 )
 
-export default function Start() {
+export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
     const posthog = usePostHog()
-    const [activeTab, setActiveTab] = useState('ai')
+    const [activeTab, setActiveTab] = useState(initialTab)
     const { search } = useLocation()
 
     useEffect(() => {

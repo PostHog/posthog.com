@@ -172,6 +172,7 @@ export default function CTA({ headline = true }) {
                                 width="64"
                                 to={`https://${version === 'us' ? 'app' : 'eu'}.posthog.com/signup`}
                                 className="animate-grow-sm"
+                                state={{ initialTab: 'signup' }}
                             >
                                 Get started
                             </CallToAction>

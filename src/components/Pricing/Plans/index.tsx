@@ -309,6 +309,7 @@ export const CTA = ({
                           posthog?.isFeatureEnabled && posthog?.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
                       }.posthog.com/signup`
             }
+            state={{ initialTab: 'signup' }}
         >
             {ctaText ? ctaText : 'Get started - free'}
         </TrackedCTA>
