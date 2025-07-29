@@ -5,6 +5,8 @@ hideAnchor: true
 
 import InstallationPlatforms from './installation/_snippets/installation-platforms'
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconRewindPlay, IconToggle  } from '@posthog/icons'
+
 
 <QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate error tracking!">
 
@@ -66,8 +68,8 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
   Once you're capturing errors, the next step is to stay on top of issues. Exception events are grouped into issues for your team to manage based on event information, such as the exception type, message, and stack trace. 
 
   <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_21_2x_f4848a78c6.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_10_15_46_2x_f1f5e7f31b.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_ryub_aa8398de10.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_rzmm_23fa3181c4.png"
     alt="Error tracking overview"
     classes="rounded"
 />
@@ -94,7 +96,7 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 
   Take advantage of PostHog's [customer infrastructure](/docs) features to help you move from application errors to product improvements.
 
-  ### Session replay
+  ### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay
 
   See exactly what users did before and after the error with [session replays](/docs/session-replay).
 
@@ -105,13 +107,27 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
     loop="true"
   />
 
-  ### Product analytics
+  ###  <IconGraph className="text-blue w-7 -mt-1 inline-block"/>  Product analytics
 
-  Use `$exception` events with [product analytics](/docs/product-analytics) to create trends, funnels, or retention [insights](/docs/product-analytics/insights) to spot patterns and prioritize issues. You can also see exceptions by individual users in their event history log.
+  Use `$exception` events with [product analytics](/docs/product-analytics) to create trends, funnels, or retention insights to spot patterns and prioritize issues. You can also see exceptions by individual users in their event history log.
 
-  ### Feature flags
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sgre_98426bdbdb.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sgvz_a9af4766fe.png"
+    alt="Product analytics dashboards"
+    classes="rounded"
+  />
+
+  ###  <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/>  Feature flags
 
   Roll out or revert code updates with [feature flags](/docs/feature-flags) based on users who’ve hit specific exceptions.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sirw_4622f2f7d0.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sivj_9e5d71bb69.png"
+    alt="Feature flags taregting error cohorts"
+    classes="rounded"
+  />
 
 </QuestLogItem>
 
@@ -139,7 +155,11 @@ import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
 
   --- 
 
-  That's how it works! Now get started with error tracking by [installing the PostHog SDK](/docs/error-tracking/installation).
+  That's how it works! You're ready to integrate error tracking.
+
+  <CallToAction type="primary" to="/docs/error-tracking/installation">
+    Get started
+  </CallToAction>
 
 </QuestLogItem>
 

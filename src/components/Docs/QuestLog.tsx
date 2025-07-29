@@ -288,10 +288,42 @@ export const QuestLog: React.FC<{
                     style={{ position: 'absolute', top: 0, height: 0, width: 0 }}
                     aria-hidden="true"
                 />
-                <div className="flex gap-5 flex-col @lg:flex-row">
+                <div className="flex gap-6 flex-col-reverse @lg:flex-row">
+                    {/* Quest Details */}
+                    <div className="w-full @lg:w-[66.66%] @lg:flex-shrink-0">
+                        <div className="space-y-4">
+                            {questItems.map((questItem, index) => (
+                                <div
+                                    key={index}
+                                    className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm shadow-sm p-4 md:p-6"
+                                >
+                                    {index === 0 ? (
+                                        <h2 className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32">
+                                            {questItem.props.title}
+                                        </h2>
+                                    ) : (
+                                        <h2
+                                            id={questIds[index]}
+                                            className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32"
+                                        >
+                                            {questItem.props.title}
+                                        </h2>
+                                    )}
+                                    {questItem.props.children || (
+                                        <div>
+                                            <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
+                                                Quest details will appear here.
+                                            </p>
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
                     {/* Quest List - Sticky Container */}
                     <div
-                        className="w-full @lg:w-auto @lg:max-w-[33.33%] @lg:flex-shrink-0 sticky self-start mt-3 pt-6 @lg:pt-0 bg-light dark:bg-dark z-50"
+                        className="w-full @lg:max-w-[30%] @lg:flex-shrink-0 sticky self-start mt-3 pt-6 @lg:pt-0 bg-light dark:bg-dark z-50"
                         style={{
                             top: isMobile ? '3rem' : `${STICKY_LIST_OFFSET_REM}rem`,
                         }}
@@ -446,37 +478,6 @@ export const QuestLog: React.FC<{
                             </Scrollspy>
                         </div>
                     </div>
-
-                    {/* Quest Details */}
-                    <div className="w-full @lg:flex-1 @lg:min-w-0">
-                        <div className="bg-white dark:bg-accent-dark border border-light dark:border-dark rounded-sm overflow-hidden shadow-sm">
-                            <div className="divide-y divide-light dark:divide-dark">
-                                {questItems.map((questItem, index) => (
-                                    <div key={index} className="p-4 md:p-6">
-                                        {index === 0 ? (
-                                            <h2 className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32">
-                                                {questItem.props.title}
-                                            </h2>
-                                        ) : (
-                                            <h2
-                                                id={questIds[index]}
-                                                className="!mt-0 text-lg md:text-xl font-bold mb-4 scroll-mt-64 sm:scroll-mt-32"
-                                            >
-                                                {questItem.props.title}
-                                            </h2>
-                                        )}
-                                        {questItem.props.children || (
-                                            <div>
-                                                <p className="text-primary/40 dark:text-primary-dark/40 leading-relaxed text-sm md:text-base">
-                                                    Quest details will appear here.
-                                                </p>
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </>
@@ -503,7 +504,11 @@ export const QuestLogItem: React.FC<
             }`}
         >
             <div className={`flex items-center space-x-2.5 py-2 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
-                <div className={`flex-shrink-0 w-5 h-5 ${isSelected ? 'text-red dark:text-yellow' : ''}`}>
+                <div
+                    className={`flex-shrink-0 w-5 h-5 ${
+                        isSelected ? 'text-red dark:text-yellow' : 'text-primary/40 dark:text-primary-dark'
+                    }`}
+                >
                     {Icon && <Icon className="w-5 h-5" />}
                 </div>
                 <div className="flex-1 min-w-0">
@@ -595,7 +600,9 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
                             <div className="flex items-center space-x-2.5">
                                 <div
                                     className={`flex-shrink-0 w-5 h-5 ${
-                                        selectedQuest === index ? 'text-red dark:text-yellow' : ''
+                                        selectedQuest === index
+                                            ? 'text-red dark:text-yellow'
+                                            : 'text-primary/40 dark:text-primary-dark'
                                     }`}
                                 >
                                     {(() => {
