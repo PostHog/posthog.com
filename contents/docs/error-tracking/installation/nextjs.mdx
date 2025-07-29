@@ -58,7 +58,7 @@ Before proceeding, let's make sure that autocapture, manual capture, and any err
 You should see events in the PostHog activity feed.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for exceptions in PostHog
   </CallToAction>
 </div>
@@ -73,7 +73,7 @@ First, install the `posthog-node` library:
 
 <InstallNodePackageManagers />
 
-For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://us.posthog.com/settings/project). 
+For the backend, we can create a `lib/posthog-server.js` file. In it, initialize PostHog from `posthog-node` as a singleton with your project API key and host from [your project settings](https://app.posthog.com/settings/project). 
 
 This looks like this:
 
@@ -113,7 +113,7 @@ posthog.capture("button-clicked")
 You should see events and exceptions in PostHog coming from your server-side code in the activity feed.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for server events in PostHog
   </CallToAction>
 </div>

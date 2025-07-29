@@ -16,7 +16,7 @@ import InstallWebPackageManagers from "../../integrate/_snippets/install-web-pac
 
 <InstallWebPackageManagers />
 
-2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://us.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
+2. Add your environment variables to your `.env.local` file and to your hosting provider (e.g. Vercel, Netlify, AWS). You can find your project API key and host in [your project settings](https://app.posthog.com/settings/project). Including `VITE_PUBLIC_` in their names ensures they are accessible in the frontend.
 
 ```shell file=.env.local
 VITE_PUBLIC_POSTHOG_KEY=<ph_project_api_key>
@@ -79,7 +79,7 @@ posthog?.capture('clicked_log_in')
 ```
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for events in PostHog
   </CallToAction>
 </div>
@@ -90,7 +90,7 @@ posthog?.capture('clicked_log_in')
 
 > **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
-You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://us.posthog.com/settings/project-error-tracking#exception-autocapture). 
+You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture). 
 
 When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
 
@@ -101,7 +101,7 @@ When enabled, this automatically captures `$exception` events when errors are th
 Before proceeding, confirm that exceptions are being automatically captured.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for exceptions in PostHog
   </CallToAction>
 </div>
@@ -148,7 +148,7 @@ class CustomErrorBoundary extends React.Component {
 Before proceeding, confirm that exceptions are being properly captured by the error boundary.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for exceptions in PostHog
   </CallToAction>
 </div>
@@ -170,7 +170,7 @@ posthog.captureException(error, additionalProperties)
 Before proceeding, confirm that manual exception capture is working.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for exceptions in PostHog
   </CallToAction>
 </div>

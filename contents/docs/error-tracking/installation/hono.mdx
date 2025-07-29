@@ -17,7 +17,7 @@ npm install --save posthog-node
 </Step>
 <Step title="Exception handling example" badge="required">
 
-Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) to handle uncaught exceptions. You can take advantage of this for error tracking. Remember to **export** your [project API key](https://us.posthog.com/settings/project#variables) as an environment variable.
+Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) to handle uncaught exceptions. You can take advantage of this for error tracking. Remember to **export** your [project API key](https://app.posthog.com/settings/project#variables) as an environment variable.
 
 ```ts file=index.ts
 import { env } from 'hono/adapter'
@@ -47,7 +47,7 @@ app.onError((err, c) => {
 Before proceeding, confirm that you've captured an exception in PostHog.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for server-side exceptions in PostHog
   </CallToAction>
 </div>

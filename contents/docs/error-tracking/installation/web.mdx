@@ -18,7 +18,7 @@ import InstallWebPackageManagers from "../../integrate/_snippets/install-web-pac
 
 <InstallWebPackageManagers />
 
-And then include it with your project API key and host (which you can find in [your project settings](https://us.posthog.com/settings/project)):
+And then include it with your project API key and host (which you can find in [your project settings](https://app.posthog.com/settings/project)):
 ```js-web
 import posthog from 'posthog-js'
 
@@ -43,7 +43,7 @@ This can cause issues if:
 
 To solve these issues, we have multiple import options available below.
 
-**Note:** With any of the `no-external` options, the toolbar will be unavailable as this is only possible as a runtime dependency loaded directly from `us.posthog.com`.
+**Note:** With any of the `no-external` options, the toolbar will be unavailable as this is only possible as a runtime dependency loaded directly from `app.posthog.com`.
 
 ```js-web
 // No external code loading possible (this disables all extensions such as Replay, Surveys, Exceptions etc.)
@@ -100,7 +100,7 @@ Before proceeding, confirm that:
 2. If [autocapture is enabled](/docs/product-analytics/autocapture#disabling-autocapture), you should see basic events like clicks and page views.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for events in PostHog
   </CallToAction>
 </div>
@@ -113,7 +113,7 @@ Before proceeding, confirm that:
 
 > **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
-You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://us.posthog.com/settings/project-error-tracking#exception-autocapture). 
+You can enable exception autocapture for the JavaScript Web SDK in the **Error tracking** section of [your project settings](https://app.posthog.com/settings/project-error-tracking#exception-autocapture). 
 
 When enabled, this automatically captures `$exception` events when errors are thrown by wrapping the `window.onerror` and `window.onunhandledrejection` listeners.
 
@@ -124,7 +124,7 @@ When enabled, this automatically captures `$exception` events when errors are th
 Before proceeding, confirm that exceptions are being automatically captured in PostHog.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for exceptions in PostHog
   </CallToAction>
 </div>
@@ -148,7 +148,7 @@ This is helpful if you've built your own error handling logic or want to capture
 Before proceeding, confirm that manual exception capture is working.
 
 <div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://us.posthog.com/activity/explore">
+  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
     Check for exceptions in PostHog
   </CallToAction>
 </div>
