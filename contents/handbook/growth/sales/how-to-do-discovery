@@ -1,0 +1,189 @@
+# How to Do Discovery at PostHog 
+
+## The Discovery Mindset
+
+Discovery isn't about presenting PostHog's features - it's about actually becoming someone your customer can trust by deeply understanding your prospect's business. Your goal is to uncover the real problems, understand their current state, and identify who potentially can champion PostHog internally.
+
+This is meant to be a guide, not a rule-set. Individuals at PostHog are just that, individuals. Each person has their own unique style, delivery, tone, cadence. The goal here is to surface the right insights, by providing a framework for how to go about _asking the right questions_ vs. a talk-track for how to run discussions with prospects and customers. 
+  
+**Core Principles:**
+
+- **Curiosity over pitching** - Be genuinely interested in their challenges
+- **Dig for the 'why'** - Every answer leads to another question
+- **Find the pain** - People buy solutions to problems, not features
+- **Identify champions** - Someone needs to sell internally when you're not there
+- **Build relationships** - Trust is earned through understanding, not just talking
+
+
+## Before your 1st call
+
+### Prep work
+
+There is a bare minimum of preparation recommended prior to speaking with any new prospect or customer interested in engaging further with PostHog. Below are some recommendations around where and how you can prepare prior to said meeting: 
+
+- Cross-reference Vitally, PostHog, Slack and Salesforce for any prior engagement or current activity/status. 
+- Learn more about who you're speaking with by visiting their LinkedIn page or X/Twitter profile (ICP is often more active here). 
+- Visit the company's website, learn about their product, who they are marketing/selling to, language they are using. Familiarize yourself with what may be important to them. 
+
+
+## The Art of Open-Ended Questioning
+
+### **Question Hierarchy: Peeling away at said 'onion'
+
+Think of discovery like peeling the proverbial onion - each layer reveals deeper insights. These same principles are used during user interviews with customers (often run by Product teams), so one can approach this with the same mindset. The bigger takeway here is to ask questions in a way that allow your customer/prospect to be open and surface insights that are actionable. 
+
+**Layer 1: Surface Facts**
+
+- "What analytics tools are you using?"
+- "How many users do you have?"
+- "What's your current setup?"
+
+**Layer 2: Situational Understanding**
+
+- "How is that working for your team?"
+- "Walk me through challenges that creates?"
+- "What kind of impact does that have on the business?"
+
+**Layer 3: Problem Impact**
+
+- "What happens when you can't get that data?"
+- "How does that affect your decision-making?"
+- "What's the cost of not having this visibility?"
+
+**Layer 4: Emotional Impact**
+
+- "What would solving this mean for your team? What would it mean for the business?"
+
+**Layer 5: Vision & Outcome**
+
+- "What would the ideal setup look like?"
+- "What would success mean to your organization?"
+
+### **Better Questions
+
+**Instead of:** "Do you need better analytics?" **Ask:** "Talk to me about a recent decision you had to make without enough data. What happened?"
+
+**Instead of:** "Are you looking at other tools?" **Ask:** "Why the urgency to get this done now? 
+
+**Instead of:** "What features do you need?" **Ask:** "Walk me through the last time you couldn't answer a question about your users. What was the impact?"
+
+## Using questions to identify your Champion
+
+### **Identifying Potential Champions**
+
+Champions aren't just customers your friendly with - they're people who will actively sell your solution internally. Look for these signals as you ask questions during discovery: 
+
+**Questions to Identify Champions:**
+
+- "Who else is affected by this problem?" (Look for ownership/advocacy in their response)
+- "How do you typically evaluate new tools at [Company]?" (Champions know the process)
+- "What would need to happen for this to get approved?" (Champions understand internal politics)
+- "Who would be most excited about solving this?" (Champions will often name themselves)
+
+**Characteristics to listen for:**
+
+- Using "we" and "us" language (ownership)
+- Asking for detailed technical / instrumentation questions
+- Mentioning budget or approval processes prior to you asking
+- Referencing internal stakeholders by name
+- Expressing personal frustration with their current state
+- Have a vision for what future state needs to look like
+
+**Follow-up Questions for Potential Champions:**
+
+- "What's your role in making this decision?"
+- "How have you handled similar evaluations in the past?"
+- "What concerns might others have about changing tools?"
+- "Besides you, who else would we need to win over?"
+
+### **Building Champion Relationships**
+
+**Create Mutual Investment:**
+
+- "What questions should I be asking that I haven't asked yet?"
+- "If you were me, how would you go about positioning PostHog?"
+- "Whats the best way to position this to [insert stakeholder here]"
+- "How can I help you build the internal case for this?"
+
+## Discovery Call Structure with Question Flow
+
+### **1. Opening & Rapport (5 mins)**
+
+**Goal:** Establish credibility and create comfort for deeper conversation
+
+**Potential opening questions:**
+
+- "What prompted you to reach out to PostHog?"
+- "What's your experience working with other platforms like PostHog?"
+- "Talk to me about your role at [Company] and how PostHog would fit into what you do?"
+- "How does [Company] typically evaluate new tools?"
+- "Is there anyone else who would want/need to be included in future conversations?"
+
+### **2. Current Situation Assessment (5-10mins)**
+
+**Goal:** Understand their current analytics landscape and uncover (if any) dissatisfaction
+
+**Questions:**
+
+- "Walk me through your current state - what tools are you using and how are they working?"
+- "Who are the primary users of this tooling and who actively leverages the data in your organization?"
+- "What type of decisions are you trying to make with your data today? If your not currently, what difference would it make if you could?"
+
+**The Follow-Up Why:**
+
+You may often get surface-level answers here. That's normal and presents an opportunity for you to dig deeper with follow-up questions:
+
+#####  **Examples:**
+
+**If they say:** "We're using Google Analytics and it's okay" **Follow with:** "What does 'okay' mean to you? What would make it better than okay?" **Then dig deeper:** "When you say [their response], what impact does that have on your team?" **Go deeper:** "How does that affect your ability to make decisions?"
+
+**If they say:** "We need better user tracking" **Follow with:** "Help me understand what 'better' looks like - what's not working with your current tracking?" **Then dig deeper:** "When that happens, what's the cost to your business?" **Go deeper:** "Who else is affected when you can't track users properly?"
+
+**If they say:** "Our current tool is too expensive" **Follow with:** "What's driving the cost - is it the volume, the features, or something else?" **Then dig deeper:** "Beyond the money, what other problems is this creating for you?" 
+
+Simply put, the goal here being that you're trying to get to the actual root of their problem and answer the question - "Can PostHog solve this for them?"
+
+### **3. Problem Impact & Consequences (5-10 mins)**
+
+**Goal:** Quantify the pain and understand the broader business impact
+
+**Questions:**
+
+- "Help me understand the cost of these challenges - what's the impact on your business?"
+- "How often do these issues come up?"
+- "Who else in the organization feels this pain?"
+- "How does this affect decision-making?"
+- "What are the downstream effects? With product? With leadership?"
+
+#####  **Examples:**
+
+**If they say:** "We make decisions without enough data" **Follow with:** "Can you tell me about a recent example so I have context? What happened?" **Then dig deeper:** "What was the outcome of that decision? How did it turn out?" 
+
+**If they say:** "Our users aren't engaging as much as we'd like" **Follow with:** "What do you think is driving that lack of engagement?" **Then dig deeper:** "How do you know this? How are you measuring engagement today, and what's missing?" 
+
+
+#### **4. Leveraging multiple channels**
+
+Depending on the context, there is normally no pressure to get all of your questions answered on the first call. Matter a fact, we'd advise against this (see below).
+
+Whether it's a new prospect or a current customer, there are multiple mediums/channels for which you can build the relationship and do deeper discovery over a longer time horizon. Sometimes, this can work to your benefit, as like most relationships - they are not often built overnight. 
+
+**Other channels you can use for discovery:** 
+- Zoom / Phone
+- Email
+- Shared team Slack channel
+- DMs in Slack / LinkedIn / X
+- Text / SMS
+
+Leverage these wisely by using your best judgement in combination with asking yourself the question "What would PostHog do?"
+
+#### 5. **Closing thoughts on Discovery**
+
+A lot of this context dependent right? The goal here isn't to pepper prospects with incessant questions or be formulaic in how you run calls; the goal is to be genuinely curious about what their current state looks like in an effort to properly prescribe how PostHog will solve it.
+
+If you get the feeling that the prospect isn't open to sharing more, don't push or prod. Use good judgment when approaching discovery and dig deeper if/when appropriate.
+
+At the end of the day, this is a human to human interaction and the hope is that many of these insights are organically surfaced by virtue of asking the _right questions_ vs. having all the right answers while in conversation with a customer or prospect. The operative word here being _conversation_ vs. interview/interrogation. 
+
+This isn't a new thread you've started with your LLM of choice, it's a discussion, a conversation with a fellow human. Put yourself in the customers shoes - what type of person would you look to be working throughout the sales process?
+
