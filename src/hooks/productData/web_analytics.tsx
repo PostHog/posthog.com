@@ -72,7 +72,7 @@ export const webAnalytics = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/web_analytics_top_light_mode_2024_10_be53cf5325.png',
                     alt: 'Web analytics dashboard',
-                    stylized: true,
+                    stylize: true,
                     shadow: true,
                 },
             ],
@@ -104,7 +104,6 @@ export const webAnalytics = {
                 {
                     src: '/images/products/web-analytics/top-referrers.jpg',
                     alt: 'Traffic sources',
-                    stylized: true,
                     shadow: true,
                 },
             ],
@@ -196,7 +195,6 @@ export const webAnalytics = {
                 {
                     src: '/images/products/web-analytics/world-map.jpg',
                     alt: 'Demographics',
-                    stylized: true,
                     shadow: true,
                 },
             ],

@@ -17,7 +17,7 @@ export const surveys = {
     overview: {
         title: 'Ask anything with no-code surveys',
         description:
-            'Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control.',
+            'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
         textColor: 'text-white', // tw
     },
     screenshots: [
@@ -70,6 +70,7 @@ export const surveys = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/Surveys/images/templates.png',
                     alt: 'Templates',
+                    stylize: true,
                 },
             ],
         },
@@ -121,7 +122,6 @@ export const surveys = {
         {
             title: 'More features',
             headline: 'More features',
-            layout: 'columns',
             features: [
                 {
                     title: 'Aggregated results',
