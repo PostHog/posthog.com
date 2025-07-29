@@ -6,9 +6,10 @@ import Link from 'components/Link'
 import { Bang, Eco, TrendUp } from 'components/Icons'
 import { StaticImage } from 'gatsby-plugin-image'
 import usePostHog from 'hooks/usePostHog'
-import Modal from 'components/Modal'
 import { useInView } from 'react-intersection-observer'
 import { motion } from 'framer-motion'
+import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 const ProductDetails = () => (
     <>
@@ -23,11 +24,31 @@ const ProductDetails = () => (
     </>
 )
 
+const SignupEmbed = () => {
+    const { setWindowTitle } = useApp()
+    const { appWindow } = useWindow()
+
+    useEffect(() => {
+        if (appWindow) {
+            setWindowTitle(appWindow, 'Signup trends')
+        }
+    }, [])
+
+    return (
+        <iframe
+            className="m-0 size-full"
+            width="100%"
+            height="100%"
+            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
+        />
+    )
+}
+
 export default function CTA({ headline = true }) {
+    const { addWindow } = useApp()
     const posthog = usePostHog()
     const [version, setVersion] = useState('us')
     const [signupCountToday, setSignupCountToday] = useState(0)
-    const [modalOpen, setModalOpen] = useState(false)
     const [ref, inView] = useInView({ threshold: 0.5, triggerOnce: true })
 
     useEffect(() => {
@@ -42,18 +63,6 @@ export default function CTA({ headline = true }) {
 
     return (
         <>
-            <Modal open={modalOpen} setOpen={setModalOpen}>
-                <div className="px-5">
-                    <div className="max-w-4xl mx-auto mt-12 relative rounded-md overflow-hidden">
-                        <iframe
-                            className="m-0"
-                            width="100%"
-                            height="400"
-                            src="https://app.posthog.com/embedded/gQMqaRP0ZH0V3P3XXrSDnNcqDGoe7Q?refresh=true"
-                        />
-                    </div>
-                </div>
-            </Modal>
             <section id="cta" ref={ref} className="pt-8 md:pt-0 px-5 lg:px-0">
                 {headline && (
                     <>
@@ -185,7 +194,15 @@ export default function CTA({ headline = true }) {
                             <p className="text-sm text-secondary leading-tight mb-0">
                                 <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
                                 <button
-                                    onClick={() => setModalOpen(true)}
+                                    onClick={() =>
+                                        addWindow(
+                                            <SignupEmbed
+                                                location={{ pathname: 'signup-embed' }}
+                                                key="signup-embed"
+                                                newWindow
+                                            />
+                                        )
+                                    }
                                     className="font-bold dark:text-yellow text-red"
                                 >
                                     today

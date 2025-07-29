@@ -629,6 +629,22 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'signup-embed': {
+        size: {
+            min: {
+                width: 500,
+                height: 400,
+            },
+            max: {
+                width: 500,
+                height: 400,
+            },
+            fixed: true,
+        },
+        position: {
+            center: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {
