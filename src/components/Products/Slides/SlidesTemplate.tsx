@@ -201,7 +201,13 @@ export default function SlidesTemplate({
                 )
 
             case 'feature-comparison':
-                return <FeatureComparisonSlide features={productData?.comparison?.features || []} {...props} />
+                return (
+                    <FeatureComparisonSlide
+                        features={productData?.comparison?.features || []}
+                        companies={productData?.comparison?.companies}
+                        {...props}
+                    />
+                )
 
             case 'docs':
                 return (

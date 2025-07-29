@@ -1,5 +1,8 @@
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import Link from 'components/Link'
+import Logo from 'components/Logo'
 import React from 'react'
+import { IconArrowUpRight } from '@posthog/icons'
 
 interface ComparisonFeature {
     feature: string
@@ -7,11 +10,18 @@ interface ComparisonFeature {
     type?: 'header' | 'feature'
 }
 
-interface FeatureComparisonSlideProps {
-    features: ComparisonFeature[]
+interface CompanyMetadata {
+    name: string
+    key: string
+    link?: string
 }
 
-export default function FeatureComparisonSlide({ features }: FeatureComparisonSlideProps) {
+interface FeatureComparisonSlideProps {
+    features: ComparisonFeature[]
+    companies?: CompanyMetadata[]
+}
+
+export default function FeatureComparisonSlide({ features, companies }: FeatureComparisonSlideProps) {
     if (!features || features.length === 0) {
         return (
             <div className="h-full p-8 flex items-center justify-center">
@@ -20,7 +30,8 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
         )
     }
 
-    const companies = Object.keys(features[0]?.companies || {})
+    // Use provided companies metadata or fallback to extracting from first feature
+    const companyList = companies || Object.keys(features[0]?.companies || {}).map((key) => ({ name: key, key }))
 
     return (
         <div className="h-full text-primary flex flex-col">
@@ -30,14 +41,31 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
                 <ScrollArea className="">
                     <table className="w-full border-collapse border border-primary">
                         <thead className="sticky top-0">
-                            <tr className="bg-accent">
+                            <tr className="bg-accent align-top">
                                 <th className="border border-primary px-2 py-1.5 text-left font-semibold">Feature</th>
-                                {companies.map((company: string) => (
+                                {companyList.map((company: CompanyMetadata) => (
                                     <th
-                                        key={company}
-                                        className="border border-primary px-2 py-1.5 text-center font-semibold min-w-[100px]"
+                                        key={company.key}
+                                        className="border border-primary px-2 py-1.5 text-center font-semibold min-w-[100px] leading-[1.1rem]"
                                     >
-                                        {company}
+                                        {company.link ? (
+                                            <>
+                                                {company.name}
+                                                <br />
+                                                <Link
+                                                    to={company.link}
+                                                    className="underline text-[13px] opacity-75 hover:opacity-100 ml-3"
+                                                    state={{ newWindow: true }}
+                                                >
+                                                    compare
+                                                    <IconArrowUpRight className="inline-block size-3" />
+                                                </Link>
+                                            </>
+                                        ) : company.key === 'postHog' ? (
+                                            <Logo className="h-5 mx-auto" />
+                                        ) : (
+                                            company.name
+                                        )}
                                     </th>
                                 ))}
                             </tr>
@@ -49,7 +77,7 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
                                         <tr key={index} className="bg-primary">
                                             <td
                                                 className="border border-primary px-2 py-1.5 font-bold"
-                                                colSpan={companies.length + 1}
+                                                colSpan={companyList.length + 1}
                                             >
                                                 {feature.feature}
                                             </td>
@@ -62,23 +90,29 @@ export default function FeatureComparisonSlide({ features }: FeatureComparisonSl
                                         <td className="border border-primary px-2 py-1.5 font-medium">
                                             {feature.feature}
                                         </td>
-                                        {Object.entries(feature.companies).map(([company, supported]) => (
-                                            <td key={company} className="border border-primary px-2 py-1.5 text-center">
-                                                {typeof supported === 'boolean' ? (
-                                                    supported ? (
-                                                        <span className="text-green font-bold">✓</span>
+                                        {companyList.map((company) => {
+                                            const supported = feature.companies[company.key]
+                                            return (
+                                                <td
+                                                    key={company.key}
+                                                    className="border border-primary px-2 py-1.5 text-center"
+                                                >
+                                                    {typeof supported === 'boolean' ? (
+                                                        supported ? (
+                                                            <span className="text-green font-bold">✓</span>
+                                                        ) : (
+                                                            <span className="text-red font-bold">✗</span>
+                                                        )
                                                     ) : (
-                                                        <span className="text-red font-bold">✗</span>
-                                                    )
-                                                ) : (
-                                                    <span
-                                                        dangerouslySetInnerHTML={{
-                                                            __html: supported as string,
-                                                        }}
-                                                    />
-                                                )}
-                                            </td>
-                                        ))}
+                                                        <span
+                                                            dangerouslySetInnerHTML={{
+                                                                __html: supported as string,
+                                                            }}
+                                                        />
+                                                    )}
+                                                </td>
+                                            )
+                                        })}
                                     </tr>
                                 )
                             })}
