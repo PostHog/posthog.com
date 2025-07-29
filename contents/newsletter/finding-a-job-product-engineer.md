@@ -90,8 +90,9 @@ This will help narrow down your search to roles and companies that are looking f
 
 As you do so, pay attention to how much detail companies add to their profiles. Most will include a basic bio of the founders, what they're building, and their tech stack; the really good ones will go into the detail about the type of company they want to build.
 
-![][image2]  
-[Dart](https://www.dartai.com/) (W22 batch) nails the kind of detail you want to see
+![dart](https://res.cloudinary.com/dmukukwp6/image/upload/dart_d741c85b2b.png)
+  
+<Cpation>[Dart](https://www.dartai.com/) (W22 batch) nails the kind of detail you want to see</Caption>
 
 Other companies may have this kind of context on their careers website, or in their ads, but a surprising number put very little emphasis on communicating anything about their culture.
 
