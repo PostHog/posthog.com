@@ -6,6 +6,7 @@ icon: >-
 
 import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
 import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
 
 PostHog makes it easy to get data about traffic and usage of your [Angular](https://angular.dev/) app. Integrating PostHog into your site enables analytics about user behavior, custom events capture, session recordings, feature flags, and more.
 
@@ -58,7 +59,8 @@ Session replay uses change detection to record the DOM. This can clash with Angu
 
 The recorder tool attempts to detect when an Angular zone is present and avoid the clash but might not always succeed.
 
-If you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
+- If you followed the installation instructions for Angular v17 and above, you don't need to do anything. 
+- If you followed the installation instructions for Angular v16 and below and you see performance impact from recording in an Angular project, ensure that you use [`ngZone.runOutsideAngular`](https://angular.io/api/core/NgZone#runoutsideangular). 
 
 ```ts file=posthog.service.ts
 import { Injectable } from '@angular/core';
@@ -77,35 +79,26 @@ initPostHog() {
 }
 ```
 
-## Idiomatic service for Angular v17 and above
+## Angular with SSR
 
-For larger projects, you might prefer to set up PostHog as a singleton service. To do this, start by creating and injecting a `PosthogService` instance:
+To use PostHog with Angular SSR (Server-Side Rendering), you need to:
 
-```ts file=main.ts
-import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
-import { PosthogService } from "./services/posthog.service";
+1. Update the PostHog web JS client to only initialize on the client-side.
+2. Initialize PostHog Node in the server-side code.
 
-@Component({
-  selector: "app-root",
-  styleUrls: ["./app.component.scss"],
-  template: `
-    <router-outlet />`,
-  imports: [RouterOutlet],
-})
-export class AppComponent {
-  title = "angular-app";
+### 1. Update the PostHog web JS client
 
-  constructor(posthogService: PosthogService) {}
-}
-```
+Update your `posthog.service.ts` to restrict the initialization of the PostHog web JS client to the client-side. The web SDK uses methods that are not available on the server side, so we need to check if we're on the client side before initializing PostHog.
 
-The service itself looks like this:
-```ts file=posthog.service.ts
-import { DestroyRef, Injectable, NgZone } from "@angular/core";
+```ts file=posthog.service.ts focusOnLines=5-21
+import { DestroyRef, Injectable, NgZone, Inject } from "@angular/core";
 import posthog from "posthog-js";
 import { environment } from "../../environments/environment";
 import { Router } from "@angular/router";
+
+import { isPlatformBrowser } from "@angular/common"; // +
+import { PLATFORM_ID } from "@angular/core"; // +
+import { Inject } from "@angular/core"; // +
 
 @Injectable({ providedIn: "root" })
 export class PosthogService {
@@ -113,14 +106,19 @@ export class PosthogService {
     private ngZone: NgZone,
     private router: Router,
     private destroyRef: DestroyRef,
+    @Inject(PLATFORM_ID) private platformId: Object // +
   ) {
-    this.initPostHog();
+    // Only initialize PostHog in browser environment
+    if (isPlatformBrowser(this.platformId)) { // +
+      this.initPostHog(); //+
+    } 
   }
+
   private initPostHog() {
     this.ngZone.runOutsideAngular(() => {
       posthog.init(environment.posthogKey, {
         api_host: environment.posthogHost,
-        defaults: '<ph_posthog_js_defaults>'
+        defaults: '2025-05-24',
         debug: false,
         cross_subdomain_cookie: true,
       });
@@ -129,7 +127,97 @@ export class PosthogService {
 }
 ```
 
-This service contains PostHog initialization.
+### 2. Add server-side initialization
+
+Angular SSR uses a `server.ts` file to handle requests. We can add any server-side initialization code to this file.
+
+First, install the `posthog-node` package to run on the server side.
+
+<InstallNodePackageManagers />
+
+Then, add the following code to the `server.ts` file:
+
+```ts file=server.ts
+// src/server.ts
+
+import { environment } from './environments/environment';
+import { PostHog } from 'posthog-node'
+
+/**
+ * Extract distinct ID from PostHog cookie
+ */
+function getDistinctIdFromCookie(cookieHeader: string | undefined): string | null {
+  if (!cookieHeader) return null;
+  
+  const cookieMatch = cookieHeader.match(`ph_${environment.posthogKey}_posthog=([^;]+)`);
+  if (cookieMatch) {
+    try {
+      const parsed = JSON.parse(decodeURIComponent(cookieMatch[1]));
+      return parsed?.distinct_id || null;
+    } catch (error) {
+      console.error('Error parsing PostHog cookie:', error);
+      return null;
+    }
+  }
+  return null;
+}
+
+/**
+ * Handle all other requests by rendering the Angular application.
+ */
+app.get('**', async (req, res, next) => {
+  const { protocol, originalUrl, baseUrl, headers } = req;
+
+  const distinctId = getDistinctIdFromCookie(headers.cookie);
+  let isFeatureEnabled = false;
+  const client = new PostHog(
+      'phc_w0xVqLhImmQgphdKDrz896233CEWfbp9O5ypCxaAfw0',
+      { host: 'https://us.i.posthog.com' }
+  )
+
+  if (distinctId) {
+    client.capture({
+      distinctId: distinctId,
+      event: 'test_ssr_event',
+      properties: {
+        message: 'Hello from Angular SSR!'
+      }
+    })
+
+    isFeatureEnabled = await client.isFeatureEnabled(
+      'your_feature_flag_key', distinctId) || false;
+  }
+
+  commonEngine
+    .render({
+      bootstrap,
+      documentFilePath: indexHtml,
+      url: `${protocol}://${headers.host}${originalUrl}`,
+      publicPath: browserDistFolder,
+      providers: [
+        { provide: APP_BASE_HREF, useValue: baseUrl },
+        { provide: 'FEATURE_FLAG_ENABLED', useValue: isFeatureEnabled }
+      ],
+    })
+    .then((html) => res.send(html))
+    .catch((err) => next(err));
+
+  await client.shutdown() 
+});
+```
+
+This code does the following:
+
+- Extracts the distinct ID from the cookie header. This is set by the web JS client.
+- Captures an event on the server side.
+- Evaluates a feature flag on the server side. This can be passed as a provider to the Angular application.
+- Calls `shutdown` on the PostHog Node client to ensure all events are flushed.
+
+<CalloutBox icon="IconInfo" title="Using PostHog in server-side code">
+
+Angular SSR does not allow Node.js code to be bundled into client-side components. Even though resolvers and other server-side code can be written along with client-side components, you cannot use PostHog Node in those components.
+
+</CalloutBox>
 
 ## Next steps
 
