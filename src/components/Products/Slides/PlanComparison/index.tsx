@@ -294,21 +294,39 @@ const PlanComparison: React.FC<PlanComparisonProps> = ({
                     <div className="mb-8">
                         <p className="text-lg mb-1">Monthly free tier</p>
                         <p className="text-2xl mb-4">
-                            <span className="font-bold text-green">
-                                {freePlan?.free_allocation?.toLocaleString() || '5,000'}
-                            </span>{' '}
+                            <span className="font-bold text-green">{freePlan?.free_allocation?.toLocaleString()}</span>{' '}
                             {unit}s/mo
                         </p>
 
-                        <p className="text-lg mb-1">Then starts at</p>
-                        <p className="text-2xl mb-8">
-                            <span className="font-bold text-primary">
-                                $
-                                {tiers.find((tier: any) => parseFloat(tier.unit_amount_usd) > 0)?.unit_amount_usd ||
-                                    '0.005'}
-                            </span>
-                            /{unit}
-                        </p>
+                        {tiers.length > 0 && (
+                            <>
+                                <p className="text-lg mb-1">Then starts at</p>
+                                <p className="text-2xl mb-8">
+                                    <span className="font-bold text-primary">
+                                        $
+                                        {(() => {
+                                            const firstPaidTier = tiers.find(
+                                                (tier: any) => parseFloat(tier.unit_amount_usd) > 0
+                                            )
+                                            if (!firstPaidTier) return '0.00'
+
+                                            const price = parseFloat(firstPaidTier.unit_amount_usd)
+                                            const priceStr = firstPaidTier.unit_amount_usd
+                                            const decimalIndex = priceStr.indexOf('.')
+
+                                            // If no decimal point or fewer than 2 decimal places, format to 2 decimals
+                                            if (decimalIndex === -1 || priceStr.length - decimalIndex - 1 < 2) {
+                                                return price.toFixed(2)
+                                            }
+
+                                            // Otherwise, show all decimal places
+                                            return priceStr
+                                        })()}
+                                    </span>
+                                    /{unit}
+                                </p>
+                            </>
+                        )}
                     </div>
                 </div>
 
