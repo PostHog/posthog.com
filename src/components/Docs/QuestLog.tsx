@@ -30,7 +30,8 @@ export const QuestLog: React.FC<{
     // Animation timing constants
     const INITIAL_LOAD_DELAY = 1000
     const SPEECH_BUBBLE_SHOW_DELAY = 200
-    const SPEECH_BUBBLE_AUTO_HIDE_DELAY = 2500
+    const SPEECH_BUBBLE_AUTO_HIDE_DELAY = 3000
+    const SMOOTH_SCROLL_DURATION = 1000
 
     // Corner bracket SVG constants
     const TOP_LEFT_CORNER_SVG = (
@@ -84,6 +85,7 @@ export const QuestLog: React.FC<{
     const [headerHeight, setHeaderHeight] = useState(0)
     const [speechText, setSpeechText] = useState('')
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
+    const [isSmoothScrolling, setIsSmoothScrolling] = useState(false)
 
     const questRefs = useRef<(HTMLDivElement | null)[]>([])
     const dropdownRef = useRef<HTMLDivElement>(null)
@@ -104,6 +106,36 @@ export const QuestLog: React.FC<{
     const generateQuestSlug = (title: string) => {
         slugger.reset() // Reset for each use to ensure consistency
         return slugger.slug(title)
+    }
+
+    // Reusable smooth scroll function
+    const handleSmoothScroll = (questId: string, callback?: () => void) => {
+        const element = document.getElementById(questId)
+        if (element) {
+            setIsSmoothScrolling(true)
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            window.history.pushState(null, '', `#${questId}`)
+            // Re-enable scrollspy after smooth scroll completes
+            setTimeout(() => {
+                setIsSmoothScrolling(false)
+            }, SMOOTH_SCROLL_DURATION)
+            // Execute optional callback
+            callback?.()
+        }
+    }
+
+    // Desktop navigation click handler
+    const handleDesktopNavClick = (e: React.MouseEvent, questId: string) => {
+        e.preventDefault()
+        handleSmoothScroll(questId)
+    }
+
+    // Mobile navigation click handler
+    const handleMobileNavClick = (e: React.MouseEvent, questId: string, onDropdownToggle: (open: boolean) => void) => {
+        e.preventDefault()
+        handleSmoothScroll(questId, () => {
+            onDropdownToggle(false)
+        })
     }
 
     const shouldShowSpeechBubble = (questIndex: number, totalQuests: number) => {
@@ -168,6 +200,9 @@ export const QuestLog: React.FC<{
     const handleScrollspyUpdate = (el: HTMLElement | null) => {
         // Only allow scrollspy updates after user has actually interacted with the page
         if (!hasInitialLoadSettled) return
+
+        // Prevent updates during smooth scrolling
+        if (isSmoothScrolling) return
 
         if (el && el.id) {
             const questIndex = questIds.findIndex((id) => id === el.id)
@@ -291,7 +326,12 @@ export const QuestLog: React.FC<{
                 setTimeout(() => {
                     const element = document.getElementById(hash.substring(1))
                     if (element) {
+                        setIsSmoothScrolling(true)
                         element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                        // Re-enable scrollspy after smooth scroll completes
+                        setTimeout(() => {
+                            setIsSmoothScrolling(false)
+                        }, SMOOTH_SCROLL_DURATION)
                     }
                 }, 100)
             }
@@ -484,12 +524,7 @@ export const QuestLog: React.FC<{
                                         className="block no-underline"
                                         style={{ textDecoration: 'none' }}
                                         onClick={(e) => {
-                                            e.preventDefault()
-                                            const element = document.getElementById(questIds[index])
-                                            if (element) {
-                                                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                                                window.history.pushState(null, '', `#${questIds[index]}`)
-                                            }
+                                            handleDesktopNavClick(e, questIds[index])
                                         }}
                                     >
                                         {React.cloneElement(child, {
@@ -518,6 +553,7 @@ export const QuestLog: React.FC<{
                                     onDropdownToggle={setDropdownOpen}
                                     dropdownRef={dropdownRef}
                                     questIds={questIds}
+                                    onNavClick={handleMobileNavClick}
                                 />
                             </Scrollspy>
                         </div>
@@ -583,6 +619,7 @@ type MobileQuestLogItemProps = {
     onDropdownToggle: (open: boolean) => void
     dropdownRef: React.RefObject<HTMLDivElement>
     questIds: string[]
+    onNavClick: (e: React.MouseEvent, questId: string, onDropdownToggle: (open: boolean) => void) => void
 }
 
 export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
@@ -592,6 +629,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
     onDropdownToggle,
     dropdownRef,
     questIds,
+    onNavClick,
 }) => {
     return (
         <div className="relative" ref={dropdownRef}>
@@ -639,13 +677,7 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
                                 selectedQuest === index ? 'bg-orange/10 dark:bg-orange/10' : ''
                             }`}
                             onClick={(e) => {
-                                e.preventDefault()
-                                const element = document.getElementById(questIds[index])
-                                if (element) {
-                                    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-                                    window.history.pushState(null, '', `#${questIds[index]}`)
-                                }
-                                onDropdownToggle(false)
+                                onNavClick(e, questIds[index], onDropdownToggle)
                             }}
                             style={{ textDecoration: 'none' }}
                         >
