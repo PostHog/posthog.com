@@ -88,7 +88,7 @@ function parseStepsFromMDX(mdxString: string) {
 
 const DestinationsLibraryCallout = () => {
     return (
-        <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-4">
+        <div className="p-4 mb-4 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
             <h2 className="font-bold text-lg leading-tight !m-0">Did somebody say destinations?</h2>
             <p className="m-0 !mb-3 !mt-1.5">
                 We're building new destinations and want your input on what to build next.
@@ -105,19 +105,19 @@ const renderAvailabilityIcon = (availability: 'full' | 'partial' | 'none') => {
         case 'full':
             return (
                 <Tooltip content="This plan has full access to this feature">
-                    <img src={CheckIcon} alt="Available" className="h-4 w-4" aria-hidden="true" />
+                    <img src={CheckIcon} alt="Available" className="w-4 h-4" aria-hidden="true" />
                 </Tooltip>
             )
         case 'partial':
             return (
                 <Tooltip content="Some parts of this feature are not available on this plan">
-                    <img src={WarningIcon} alt="Partially available" className="h-4 w-4" aria-hidden="true" />
+                    <img src={WarningIcon} alt="Partially available" className="w-4 h-4" aria-hidden="true" />
                 </Tooltip>
             )
         case 'none':
             return (
                 <Tooltip content="This feature is not available on this plan">
-                    <img src={XIcon} alt="Not available" className="h-4 w-4" aria-hidden="true" />
+                    <img src={XIcon} alt="Not available" className="w-4 h-4" aria-hidden="true" />
                 </Tooltip>
             )
     }
@@ -134,7 +134,7 @@ const Contributors = (props) => {
     const contributors = expanded ? props.contributors : props.contributors.slice(0, 3)
     const more = props.contributors.length - 3
     return (
-        <div className={`mb-4 flex flex-col gap-2 -mx-4`}>
+        <div className={`flex flex-col gap-2 -mx-4 mb-4`}>
             {contributors.map(({ avatar, username, profile, url }) => {
                 return (
                     <Contributor
@@ -150,8 +150,8 @@ const Contributors = (props) => {
                 )
             })}
             {more > 0 && !expanded && (
-                <button onClick={() => setExpanded(true)} className="mx-4 flex space-x-2 items-center">
-                    <span className="text-sm text-red font-bold text-left flex-shrink-0">+{more} more</span>
+                <button onClick={() => setExpanded(true)} className="flex items-center mx-4 space-x-2">
+                    <span className="flex-shrink-0 text-sm font-bold text-left text-red">+{more} more</span>
                 </button>
             )}
         </div>
@@ -163,8 +163,8 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
         <>
             {location.pathname.startsWith('/docs/cdp/destinations') &&
                 location.pathname !== '/docs/cdp/destinations' && (
-                    <div className="p-4 bg-accent dark:bg-accent-dark rounded-md border border-border dark:border-dark mb-8">
-                        <h5 className="text-lg font-bold leading-tight m-0">Did somebody say destinations?</h5>
+                    <div className="p-4 mb-8 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
+                        <h5 className="m-0 text-lg font-bold leading-tight">Did somebody say destinations?</h5>
                         <p className="text-sm m-0 mb-3 mt-1.5">
                             We're building more destinations and prioritzing them based on your feedback.
                         </p>
@@ -181,21 +181,21 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
 
             {availability && (
                 <SidebarSection title="Feature availability" className="space-y-1.5">
-                    <div className="flex items-center justify-between font-bold">
+                    <div className="flex justify-between items-center font-bold">
                         <span>Free / Open-source</span>
                         {renderAvailabilityIcon(availability.free)}
                     </div>
-                    <div className="flex items-center justify-between font-bold">
+                    <div className="flex justify-between items-center font-bold">
                         <span>Self-serve</span>
                         {renderAvailabilityIcon(availability.selfServe)}
                     </div>
                     {availability.teams && (
-                        <div className="flex items-center justify-between font-bold">
+                        <div className="flex justify-between items-center font-bold">
                             <span>Teams</span>
                             {renderAvailabilityIcon(availability.teams)}
                         </div>
                     )}
-                    <div className="flex items-center justify-between font-bold">
+                    <div className="flex justify-between items-center font-bold">
                         <span>Enterprise</span>
                         {renderAvailabilityIcon(availability.enterprise)}
                     </div>
@@ -207,7 +207,7 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
                     <ul className="p-0 space-y-1.5">
                         {related.map(({ childMdx }) => (
                             <li key={childMdx.fields.slug} className="list-none">
-                                <Link to={childMdx.fields.slug} className="text-sm block">
+                                <Link to={childMdx.fields.slug} className="block text-sm">
                                     {childMdx.frontmatter.title}
                                 </Link>
                             </li>
@@ -275,7 +275,7 @@ export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({
                             <tr key={option.key}>
                                 <td>
                                     <div className="mb-6">
-                                        <code className="dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit p-1 rounded">
+                                        <code className="p-1 rounded dark:bg-gray-accent-dark dark:text-white bg-gray-accent-light text-inherit">
                                             {option.name}
                                         </code>
                                     </div>
@@ -354,7 +354,6 @@ export default function Handbook({
         features,
         github,
         availability,
-        installUrl,
         thumbnail,
         related,
         seo,
@@ -378,7 +377,7 @@ export default function Handbook({
         <Link
             {...props}
             glossary={glossary?.nodes?.map(formatNode)}
-            className="text-red hover:text-red font-semibold"
+            className="font-semibold text-red hover:text-red"
         />
     )
 
@@ -455,20 +454,20 @@ export default function Handbook({
                     askMax
                 >
                     <section>
-                        <div className="mb-8 relative">
-                            <div className="flex items-center mt-0 flex-wrap justify-between">
-                                <div className="flex flex-col-reverse md:flex-row md:items-center space-x-2 mb-1 w-full">
+                        <div className="relative mb-8">
+                            <div className="flex flex-wrap justify-between items-center mt-0">
+                                <div className="flex flex-col-reverse mb-1 space-x-2 w-full md:flex-row md:items-center">
                                     {thumbnail && <GatsbyImage image={getImage(thumbnail)} />}
                                     {showTitle !== false && (
                                         <div className="flex-1">
-                                            <h1 className="dark:text-white text-3xl sm:text-4xl m-0">{title}</h1>
+                                            <h1 className="m-0 text-3xl dark:text-white sm:text-4xl">{title}</h1>
                                             {description && (
-                                                <p className="italic opacity-75 leading-tight mt-1 mb-0">
+                                                <p className="mt-1 mb-0 italic leading-tight opacity-75">
                                                     {description}
                                                 </p>
                                             )}
                                             {(!hideLastUpdated || filePath || contentWithSnippets) && (
-                                                <div className="flex space-x-2 items-center mb-4 md:mt-1 md:mb-0 text-black dark:text-white">
+                                                <div className="flex items-center mb-4 space-x-2 text-black md:mt-1 md:mb-0 dark:text-white">
                                                     {!hideLastUpdated && (
                                                         <p className="m-0 font-semibold text-primary/30 dark:text-primary-dark/30">
                                                             Last updated: <time>{lastUpdated}</time>
@@ -510,13 +509,8 @@ export default function Handbook({
                                 <div className="flex items-center space-x-2">
                                     {github && (
                                         <Link to={github}>
-                                            <GitHub className="w-8 h-8 text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60 transition-colors" />
+                                            <GitHub className="w-8 h-8 transition-colors text-black/80 hover:text-black/60 dark:text-white/80 hover:dark:text-white/60" />
                                         </Link>
-                                    )}
-                                    {installUrl && showCTA && (
-                                        <CallToAction size="sm" to={installUrl}>
-                                            <span className="text-[17px] md:px-1 md:py-0.5">Install</span>
-                                        </CallToAction>
                                     )}
                                 </div>
                             </div>
@@ -644,7 +638,6 @@ export const query = graphql`
                         }
                     }
                 }
-                installUrl
                 featuredImage {
                     publicURL
                 }

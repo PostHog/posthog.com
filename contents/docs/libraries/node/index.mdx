@@ -16,7 +16,7 @@ features:
   errorTracking: true
 ---
 
-If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
+If you're working with Node.js (versions 15+), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
 
 ## Installation
 
@@ -271,40 +271,6 @@ You can capture LLM usage and performance data by combining the `posthog-node` a
 ## Error tracking
 
 You can capture errors using the `posthog-node` library. This enables you to see stack traces, source code, and watch associated session recordings to improve your application stability. Learn more in our [error tracking docs](/docs/error-tracking/installation?tab=Node).
-
-## Sentry integration
-
-When using [Sentry in Node.js](https://docs.sentry.io/platforms/node/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
-
-### Example implementation
-
-See the [`posthog-node`](https://github.com/PostHog/posthog-js-lite/blob/main/examples/example-node/server.ts) project for a complete example.
-
-```node
-import { PostHog, PostHogSentryIntegration } from 'posthog-node'
-import * as Sentry from '@sentry/node'
-
-const posthog = new PostHog(PH_API_KEY, { host: PH_HOST })
-
-Sentry.init({
-  dsn: 'https://examplePublicKey@o0.ingest.sentry.io/0',
-  integrations: [new PostHogSentryIntegration(posthog)],
-})
-
-// Set the PostHog distinctId for the relevant session either globally for all events
-Sentry.setTag(PostHogSentryIntegration.POSTHOG_ID_TAG, 'my-nodejs-service');
-
-// or contextually for example within an api request
-try {
-    myFunction()
-} catch(err) {
-  Sentry.captureException(err, {
-    tags: {
-      [PostHogSentryIntegration.POSTHOG_ID_TAG]: request.user.id,
-    },
-  })
-}
-```
 
 ## Upgrading from V1 to V2
 

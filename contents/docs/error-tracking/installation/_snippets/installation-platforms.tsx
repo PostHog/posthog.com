@@ -49,11 +49,6 @@ const InstallationPlatforms = () => {
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/hono_9d80c0611c.svg',
         },
         {
-            label: 'Sentry',
-            url: '/docs/error-tracking/installation/sentry',
-            image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/sentry.svg',
-        },
-        {
             label: 'Manual/API',
             url: '/docs/error-tracking/installation/manual',
             icon: 'IconCode',

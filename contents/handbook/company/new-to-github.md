@@ -41,7 +41,7 @@ By default, you’ll receive email notifications for everything you subscribe to
 
 As I’m not a huge fan of email, I prefer to visit a centralized place for my GitHub notifications, although many engineers prefer email notifications. Personally, I don’t like GitHub’s [/notifications](https://github.com/notifications) page, as it feels cumbersome (slow) to read through updates. Here are two much better ways to consume GitHub notifications (entirely my opinion):
 
-1. [GitHub’s iPad app](https://apps.apple.com/us/app/github/id1477376905?platform=ipad) - provides an email-like interface that feels a lot more natural to reading notifications github.com/notifications. (If only GitHub had this UI on the web...)
+1. [GitHub’s iPad app](https://apps.apple.com/us/app/github/id1477376905?platform=ipad) - provides an email-like interface that feels a lot more natural to reading notifications than github.com/notifications. (If only GitHub had this UI on the web...)
 2. [octobox.io](http://octobox.io) - uses the same email-like interface, but in a browser
 
 I have [octobox.io](http://octobox.io) set to my homepage in Chrome, so anytime I want to see my notifications, I just click the Home button and I have one-click access to my work “inbox”.

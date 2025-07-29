@@ -104,7 +104,8 @@ To help our Revenue team get the forecasting right, we have now Payment Risk Ass
 
 - Take a look at the [Metabase primer](https://github.com/PostHog/company-internal/wiki/Onboarding-Workflows#metabase-account-analysis) and follow the tips included there.
 - Check and get familiar with the [Account health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking) page.
-- Use our docs, and link to relevant information. 
+- Use our docs, and link to relevant information.
+- Check the [Matching PostHog to a business type](https://posthog.com/handbook/growth/sales/utilization-by-business-type) page to understand your customers better in general.
 
 ### How to deal with complex technical issues
 
@@ -115,6 +116,7 @@ Our role is pretty hybrid and lives at the intersection of other teams. As much 
 - Consider sharing a Loom recording in your reply to the user – It might be more efficient than a written instruction.
 - If the issue requires in-depth troubleshooting, you can direct the user to create a ticket from the app, or you can do so on their behalf. Just remember to let them know before you do, so they’re not surprised when they see it in the UI!
 - Before escalating the issue to Support, gather as much information and context as possible so your handover is informative and thorough. You can also share a recording of the call with the team, highlighting the relevant timestamp.
+- If a support issue lands in your inbox, forwarding it to supportreply@posthog.com should do the trick. Make sure to double-check in Zendesk that the ticket is not marked as Solved.
 
 **Teach how to fish**
 
@@ -125,9 +127,9 @@ Ideally, after the meeting with the user, they should know how to seek further h
 - Go through Sales docs, especially [Contract Rules](https://posthog.com/handbook/growth/sales/contract-rules), [Creating Contracts](https://posthog.com/handbook/growth/sales/contracts), and others from the SalesOps section. There will be some related conversations that you'll need to handle yourself, so come prepared.
 - Add yourself to some AEs' Slack channels to see what kinds of questions are being asked and how they’re solved.
 - Check recordings in the [Technical product troubleshooting](https://app.buildbetter.app/folders/14593) BuildBetter folder.
-- Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh).
+- Go through [Product Homework](https://docs.google.com/document/d/1x8fnUUi5bDGeSYQl_E-_fViuNxi7j_tC0YwhLC5lwv0/edit?tab=t.0#heading=h.cioukeluttdh) and [Analytics Exercise](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding-exercise).
 - Go through the [PostHog curriculum](https://posthog.com/handbook/cs-and-onboarding/new-hire-onboarding#posthog-curriculum).
-- Attend Ticket Deep Dive sessions that are scheduled periodically. 
+- Check out [Troubleshooting tips](https://posthog.com/handbook/support/troubleshooting-tips) and attend Ticket Deep Dive sessions that are scheduled periodically. 
 
 ### Handover to the Sales team
 

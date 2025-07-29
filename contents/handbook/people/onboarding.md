@@ -14,7 +14,7 @@ Our [team](/people) is spread across the world, and so are our new joiners. In o
 
 ## Onboarding checklist
 
-This is maintained as an issue template in GitHub, [which you can view here](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md). The People team will create a new onboarding issue for each new joiner.
+This is maintained as an issue template in GitHub, <PrivateLink url="https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md">which you can view here</PrivateLink>. The People team will create a new onboarding issue for each new joiner.
 
 ### Onboarding email
 
