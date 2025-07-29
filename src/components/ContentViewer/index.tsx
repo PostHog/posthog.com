@@ -18,6 +18,7 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import { ZoomImage } from 'components/ZoomImage'
 import Markdown from 'components/Squeak/components/Markdown'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { OSQuote } from 'components/OSQuote'
 
 const A = (props) => <Link {...props} />
 
@@ -48,6 +49,7 @@ export default function ContentViewer({ content, title, initialIndex, scrollToTo
         BorderWrapper,
         Caption,
         ImageBlock,
+        OSQuote,
         FloatedImage,
         a: A,
         inlineCode: InlineCode,

@@ -41,6 +41,7 @@ import { FAQ } from './components/Products/FAQ'
 import { Feature } from './components/Products/Feature'
 import { Marquee } from './components/Products/Marquee'
 import { MobileSlides } from './components/Products/MobileSlides'
+import { OSQuote } from './components/OSQuote'
 import { PairsWith } from './components/Products/PairsWith'
 import { Question } from './components/Products/Question'
 import { SmoothScroll } from './components/Products/SmoothScroll'
@@ -83,6 +84,7 @@ export const shortcodes = {
     List,
     OverflowXSection,
     Quote,
+    OSQuote,
     Link,
     PrivateLink,
     AbTesting,

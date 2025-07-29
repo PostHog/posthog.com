@@ -57,15 +57,18 @@ export interface Customer {
               dark: string
           }
     height?: number
-    quotes?: Array<{
-        name: string
-        role: string
-        image: {
-            thumb: string
-            url?: string
+    quotes?: Record<
+        string,
+        {
+            name: string
+            role: string
+            image: {
+                thumb: string
+                url?: string
+            }
+            products: Record<string, string>
         }
-        products: Record<string, string>
-    }>
+    >
     featured: boolean
 }
 
@@ -80,15 +83,18 @@ interface BaseCustomer {
               dark: string
           }
     height?: number
-    quotes?: Array<{
-        name: string
-        role: string
-        image: {
-            thumb: string
-            url?: string
+    quotes?: Record<
+        string,
+        {
+            name: string
+            role: string
+            image: {
+                thumb: string
+                url?: string
+            }
+            products: Record<string, string>
         }
-        products: Record<string, string>
-    }>
+    >
     featured: boolean
 }
 
@@ -302,12 +308,25 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: true,
     },
     purplewave: {
-        name: 'Purplewave',
+        name: 'Purple Wave',
         toolsUsed: ['surveys'],
         notes: 'Heavy duty equipment marketplace',
         logo: PurpleWaveLogo,
         height: 24,
         featured: false,
+        quotes: {
+            matt_amick: {
+                name: 'Matt Amick',
+                role: 'Product Owner',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/purplewave_matt_175a82bf75.jpg',
+                },
+                products: {
+                    surveys:
+                        'I love everything about PostHog from the design to the culture, just everything. When the team launched the surveys beta and we could make no-code surveys and have everything in one place too? That was just phenomenal.',
+                },
+            },
+        },
     },
     raycast: {
         name: 'Raycast',
@@ -331,19 +350,20 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         logo: SignificaLogo,
         height: 24,
         featured: false,
-        quotes: [
-            {
+        quotes: {
+            tomas_gouveia: {
                 name: 'Tomás Gouveia',
                 role: 'Digital Marketer',
                 image: {
-                    thumb: 'https://posthog.com/images/customers/significa-tomas.jpg',
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/significa_tomas_thumb_51eaed534c.jpg',
+                    url: 'https://res.cloudinary.com/dmukukwp6/image/upload/significa_tomas_baced563d7.jpg',
                 },
                 products: {
                     web_analytics:
                         "PostHog gives me all the same information Plausible used to give us, and a lot more. It's way more powerful and insightful than Plausible.",
                 },
             },
-        ],
+        },
     },
     speakeasy: {
         name: 'Speakeasy',

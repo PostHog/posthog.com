@@ -10,6 +10,7 @@ import { FeatureAvailability } from './components/FeatureAvailability'
 import { FormulaScreenshot } from './components/FormulaScreenshot'
 import { GDPRForm } from './components/GDPRForm'
 import { OverflowXSection } from './components/OverflowXSection'
+import { OSQuote } from './components/OSQuote'
 import { Quote } from './components/Pricing/Quote'
 import Link from './components/Link'
 import { PrivateLink } from './components/PrivateLink'
@@ -33,6 +34,7 @@ export const shortcodes = {
     ImageSlider,
     GDPRForm,
     OverflowXSection,
+    OSQuote,
     Quote,
     Link,
     PrivateLink,
