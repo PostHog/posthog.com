@@ -108,10 +108,14 @@ export default function Link({
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement> | React.MouseEvent<HTMLAnchorElement>) => {
         if (isPostHogAppUrl) {
-            e.preventDefault()
             posthog?.createPersonProfile?.()
-            const subdomain = new URL(url).hostname.split('.')[0]
-            openStart({ subdomain, initialTab: state?.initialTab })
+            const urlObj = new URL(url)
+            const path = urlObj.pathname
+            if (path === '/signup') {
+                e.preventDefault()
+                const subdomain = urlObj.hostname.split('.')[0]
+                openStart({ subdomain, initialTab: state?.initialTab })
+            }
         }
         if (event && posthog) {
             posthog.capture(event)
