@@ -23,6 +23,7 @@ import { useApp } from '../../context/App'
 import Share from 'components/Share'
 import { useWindow } from '../../context/Window'
 import Cher from 'components/Cher'
+import BookmarkButton from 'components/BookmarkButton'
 
 interface EditorProps {
     slug?: string
@@ -67,6 +68,10 @@ interface EditorProps {
         url: string
         label: string
     }
+    bookmark?: {
+        title: string
+        description: string
+    }
 }
 
 type EditorAction = 'bold' | 'italic' | 'strikethrough' | 'undo' | 'redo' | 'leftAlign' | 'centerAlign' | 'rightAlign'
@@ -110,6 +115,7 @@ export function Editor({
     defaultSortValue,
     proseSize = 'sm',
     cta,
+    bookmark,
     ...other
 }: EditorProps) {
     const [showCher, setShowCher] = useState(false)
@@ -277,6 +283,7 @@ export function Editor({
                             onClick={() => setShowFilters(!showFilters)}
                         />
                     )}
+                    {bookmark && <BookmarkButton bookmark={bookmark} />}
                     <div
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}

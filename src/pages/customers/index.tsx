@@ -126,6 +126,10 @@ export default function Customers(): JSX.Element {
                 title="customers"
                 type="mdx"
                 slug="/customers"
+                bookmark={{
+                    title: 'Customers',
+                    description: 'Customers who use PostHog',
+                }}
                 availableFilters={[
                     {
                         label: 'product(s) used',

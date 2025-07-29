@@ -30,6 +30,7 @@ import { exportToPdf as exportPresentationToPdf } from '../../lib/exportToPdf'
 import Loading from 'components/Loading'
 import { Popover } from 'components/RadixUI/Popover'
 import { FileMenu } from 'components/RadixUI/FileMenu'
+import BookmarkButton from 'components/BookmarkButton'
 
 interface HeaderBarProps {
     isNavVisible?: boolean
@@ -94,17 +95,12 @@ export default function HeaderBar({
     onToggleDrawer,
     navIconClassName = '',
 }: HeaderBarProps) {
-    const { user, addBookmark, removeBookmark } = useUser()
-    const { openSignIn, compact } = useApp()
+    const { compact } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
     const [searchOpen, setSearchOpen] = useState(false)
     const [animateCartCount, setAnimateCartCount] = useState(false)
     const [isExportingPdf, setIsExportingPdf] = useState(false)
     const count = useCartStore((state) => state.count)
-    const isBookmarked = useMemo(
-        () => typeof window !== 'undefined' && user?.profile?.bookmarks?.some((b) => b.url === appWindow?.path),
-        [user, appWindow?.path]
-    )
 
     // Animate cart count when it changes
     useEffect(() => {
@@ -126,21 +122,6 @@ export default function HeaderBar({
             onCartClose?.()
         } else {
             onCartOpen?.()
-        }
-    }
-
-    const handleBookmark = async (add: boolean) => {
-        if (!user) {
-            openSignIn()
-            return
-        }
-
-        if (bookmark && appWindow?.path) {
-            if (add) {
-                await addBookmark({ ...bookmark, url: appWindow.path })
-            } else {
-                await removeBookmark({ ...bookmark, url: appWindow.path })
-            }
         }
     }
 
@@ -271,19 +252,7 @@ export default function HeaderBar({
                                 Shopping cart ({count || 0})
                             </Tooltip>
                         )}
-                        {bookmark?.title && bookmark?.description && (
-                            <Tooltip
-                                trigger={
-                                    <OSButton
-                                        size="md"
-                                        icon={isBookmarked ? <IconBookmarkSolid /> : <IconBookmark />}
-                                        onClick={() => handleBookmark(!isBookmarked)}
-                                    />
-                                }
-                            >
-                                {isBookmarked ? 'Remove from bookmarks' : 'Bookmark this page'}
-                            </Tooltip>
-                        )}
+                        {bookmark?.title && bookmark?.description && <BookmarkButton bookmark={bookmark} />}
                         {showSearch && (searchContentRef || onSearch) && (
                             <SearchBar
                                 contentRef={searchContentRef}
