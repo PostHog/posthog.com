@@ -57,7 +57,7 @@ Typing "companies that hire product engineers" into Google doesn't work. ChatGPT
 
 * **Low-meeting culture.** Most early-stage companies will be like this by default, but this is something you'll have to check for during interviews. Explicit meeting-free days and a preference for async communication are good signs. Dig into how decisions are made during interviews.
 
-### **Red flags**
+### Red flags
 
 * **No engineers as founders**. A company where none of the founders are engineers is unlikely to foster a product engineer culture, and more likely to view engineering as a cost center that needs to be “optimized”.
 
@@ -65,7 +65,7 @@ Typing "companies that hire product engineers" into Google doesn't work. ChatGPT
 
 * **Enterprise-ey vibes.** White and blue websites. No public pricing. Generic messaging. These are all signs that a company is going to be sales-led and focused on selling big contracts to slow-moving companies. Many huge companies are built this way, but they’re not a great place for product engineers.
 
-## **2. How and where to find them**
+## 2. How and where to find them
 
 You're unlikely to find these companies and their open roles on Indeed.
 
@@ -96,7 +96,7 @@ Other companies may have this kind of context on their careers website, or in th
 
 Many of these companies may be great places to work, but the odds are lower. Fostering a product engineering culture requires intent. Anyone with intent should want to tell people about it.
 
-### **Other places to look**
+### Other places to look
 
 * [Monthly Who's hiring? thread](https://www.google.com/search?q=site%3Anews.ycombinator.com+who%27s+hiring&oq=site%3Anews.ycombinator.com+who%27s+hiring) on Hacker News – good for engineering-led startups  
 * [Launches on Hacker News](https://news.ycombinator.com/launches) for new companies that might be hiring  
@@ -104,7 +104,7 @@ Many of these companies may be great places to work, but the odds are lower. Fos
 * [Brian's Job Search](https://briansjobsearch.com/), which makes it easy to search ads hosted on popular application tracking systems, like Greenhouse, Lever, and Ashby  
 * VC job boards like [Sequoia](https://jobs.sequoiacap.com/jobs) and [a16z](https://jobs.a16z.com/jobs)  
 * LinkedIn alerts using its AI search (the prompt ["jobs for product-minded engineers at startups and scaleups"](https://www.linkedin.com/jobs/search-results/?currentJobId=4245439263&eBP=NON_CHARGEABLE_CHANNEL&keywords=jobs%20for%20product-minded%20engineers%20at%20startups%20and%20scaleups) provides some good results)  
-* [Our Cool Tech Jobs board](https://posthog.com/cool-tech-jobs), where you can filter roles by **Engineers decide what to build** and **High engineer ratio**
+* [Our Cool Tech Jobs board](/cool-tech-jobs), where you can filter roles by **Engineers decide what to build** and **High engineer ratio**
 
 ## 3. Reading between the lines
 
@@ -147,7 +147,7 @@ Remember, too, that culture can vary from team-to-team in larger companies, so i
 * "What does a typical work day look like?"  
 * "What are the things or behaviors that would cause a person in this role to fail?"
 
-## **4. Increasing your odds**
+## 4. Increasing your odds
 
 You need to [think like a recruiter](/founders/what-recruiters-see).
 
@@ -186,10 +186,10 @@ Not writing a cover letter might work for bigger companies that are hiring at a 
 
 * **Contribute to open source.** Being a great contributor is both good for your resume, and can actually land you jobs at those companies, especially when they're early-stage companies. Fixing typos in their docs doesn't count.
 
-**Further reading:**
+## Further reading
 
-* [**How to get a job at a startup**](/newsletter/how-to-get-job-startup)  
-* [**Interview questions engineers should ask (but don’t)**](/newsletter/job-interview-questions-engineers)  
-* [**What startup recruiters actually see when you apply for a job**](/founders/what-recruiters-see)
+* [How to get a job at a startup](/newsletter/how-to-get-job-startup)  
+* [Interview questions engineers should ask (but don’t)](/newsletter/job-interview-questions-engineers)  
+* [What startup recruiters actually see when you apply for a job](/founders/what-recruiters-see)
 
 [^1]: Figuring this out isn’t straightforward. If you pay for LinkedIn Premium, you can look up the spread of roles at a company via the “Insights” tab on a company’s page. This data isn’t perfect, but it is directionally useful.
