@@ -107,7 +107,7 @@ const Toolkits = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            product development <ProgressBar progress={69} />
+                            <span>product development</span> <ProgressBar progress={69} />
                         </div>
                     ),
                     className: 'font-bold',
@@ -135,7 +135,7 @@ const Toolkits = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            customer engagement <ProgressBar progress={15} />
+                            <span>customer engagement</span> <ProgressBar progress={15} />
                         </div>
                     ),
                     className: 'font-bold',
@@ -157,7 +157,7 @@ const Toolkits = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            sales <ProgressBar progress={5} />
+                            <span>sales</span> <ProgressBar progress={5} />
                         </div>
                     ),
                     className: 'font-bold',
@@ -216,7 +216,7 @@ const AIAgents = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            Raquel - exec <ProgressBar progress={40} />
+                            <span>Raquel - exec</span> <ProgressBar progress={40} />
                         </div>
                     ),
                     className: 'font-bold',
@@ -233,7 +233,7 @@ const AIAgents = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            Annika - product manager <ProgressBar progress={25} />
+                            <span>Annika - product manager</span> <ProgressBar progress={25} />
                         </div>
                     ),
                     className: 'font-bold',
@@ -251,7 +251,7 @@ const AIAgents = () => {
                 {
                     content: (
                         <div className="flex flex-col gap-1">
-                            Marius - engineer <ProgressBar progress={10} />
+                            <span>Marius - engineer</span> <ProgressBar progress={10} />
                         </div>
                     ),
                     className: 'font-bold',
