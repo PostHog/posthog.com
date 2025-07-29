@@ -84,6 +84,10 @@
         }
     }
 
+    mark {
+        @apply inline;
+    }
+
     .prose {
         @apply max-w-none;
 

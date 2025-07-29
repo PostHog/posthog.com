@@ -92,7 +92,7 @@ export default function CTA({ headline = true }) {
                                 transition={{ duration: 1, type: 'tween' }}
                                 initial={{ translateX: '-100vw' }}
                                 animate={{ translateX: 0 }}
-                                className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-8 md:right-auto rounded md:rounded-none"
+                                className="bg-blue text-left leading-none px-4 py-2 absolute -top-12 left-4 right-4 @xl:-left-4 md:right-auto rounded md:rounded-none"
                             >
                                 <span className="text-sm font-bold text-white">
                                     3 people <span className="text-xs text-normal">(would have)</span> added PostHog to
@@ -181,7 +181,7 @@ export default function CTA({ headline = true }) {
                             <span className="bg-accent rounded h-8 w-8 p-1">
                                 <TrendUp className="opacity-75" />
                             </span>
-                            <p className="text-sm text-muted leading-tight mb-0">
+                            <p className="text-sm text-secondary leading-tight mb-0">
                                 <strong>Hurry:</strong> {signupCountToday || 'Tons of '} companies signed up{' '}
                                 <button
                                     onClick={() => setModalOpen(true)}

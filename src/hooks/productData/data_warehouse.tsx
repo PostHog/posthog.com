@@ -50,6 +50,39 @@ export const dataWarehouse = {
     },
     features: [
         {
+            title: 'Features',
+            headline: 'Features',
+            features: [
+                {
+                    title: 'Link multiple sources',
+                    description: 'Add joins to link tables together and connect run advanced queries',
+                },
+                {
+                    title: 'Query with SQL',
+                    description: 'Directly access your data, join sources, and build custom queries',
+                },
+                {
+                    title: 'Save queries as views',
+                    description: 'Save time by saving visualized data as tables, graphics, and more',
+                },
+                {
+                    title: 'Custom sync periods',
+                    description: 'Decide whether to sync data sources daily, weekly, or monthly',
+                },
+            ],
+        },
+        {
+            title: 'Sync from anywhere',
+            headline: 'Sync from anywhere',
+            description: 'Adwords, Salesforce, and major databases. Grab anything you want using custom sources.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',
+                    alt: 'Sync from anywhere',
+                },
+            ],
+        },
+        {
             title: 'Sync from Stripe',
             headline: 'Sync from Stripe',
             description: 'Combine financial and product data to see how usage turns into growth.',
@@ -79,39 +112,6 @@ export const dataWarehouse = {
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png',
                     alt: 'Sync from Zendesk',
-                },
-            ],
-        },
-        {
-            title: 'Sync from anywhere',
-            headline: 'Sync from anywhere',
-            description: 'Adwords? Salesforce? Grab anything you want using custom sources.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',
-                    alt: 'Sync from anywhere',
-                },
-            ],
-        },
-        {
-            title: 'More features',
-            headline: 'More features',
-            features: [
-                {
-                    title: 'Link multiple sources',
-                    description: 'Add joins to link tables together and connect run advanced queries',
-                },
-                {
-                    title: 'Query with SQL',
-                    description: 'Directly access your data, join sources, and build custom queries',
-                },
-                {
-                    title: 'Save queries as views',
-                    description: 'Save time by saving visualized data as tables, graphics, and more',
-                },
-                {
-                    title: 'Custom sync periods',
-                    description: 'Decide whether to sync data sources daily, weekly, or monthly',
                 },
             ],
         },
@@ -158,15 +158,15 @@ export const dataWarehouse = {
     ],
     presenterNotes: {
         overview:
-            "<strong>Presenter notes:</strong> Your product data is lonely. It needs friends - Stripe data, CRM data, support data. Our data warehouse brings them all together. Now you can answer questions like 'What do high-value customers actually do in our product?' No ETL pipelines, no data engineering team required.",
+            '<strong>Presenter notes:</strong> Your product data is lonely inside your data warehouse unless it has all the relevant context you need to make decisions across your entire organization. PostHog\'s Data Warehouse brings them all together so you can answer questions like "What do high-value customers actually do in our product?" No ETL pipelines, no data engineering team required.',
         customers:
-            "HeadshotPro analyzes Adwords alongside product usage - marketing and engineering finally speak the same language. Webshare syncs Intercom data to see how support interactions affect retention. These aren't special cases - everyone needs this.",
+            "HeadshotPro analyzes Adwords alongside product usage - marketing and engineering finally speak the same language. Webshare syncs Intercom data to see how support interactions affect retention. These aren't special cases - everyone needs this. Even if you don't have a warehouse now, you'll need it eventually, so start small and ours will grow with you.",
         features:
-            "<strong>Sync from Stripe:</strong> Connect revenue to product usage. See which features drive MRR. Track churn by usage patterns. Finally answer 'what makes customers pay more?'<br /><br /><strong>Sync from Hubspot:</strong> Link your CRM to product data. See how leads use your product before they buy. Track deal velocity by feature adoption.<br /><br /><strong>Sync from Zendesk:</strong> Connect support tickets to user behavior. Do angry users churn more? Which features cause the most tickets?<br /><br /><strong>Sync from anywhere:</strong> Google Ads, Salesforce, custom databases. If it has data, we can sync it. CSV uploads for everything else.<br /><br /><strong>More features:</strong><br /><br /><strong>Link multiple sources:</strong> Join Stripe customers to PostHog users. Connect everything with simple UI.<br /><br /><strong>Query with SQL:</strong> Full SQL access to everything. No vendor lock-in - it's just SQL.<br /><br /><strong>Save queries as views:</strong> Build once, use everywhere. Turn complex joins into simple tables.<br /><br /><strong>Custom sync periods:</strong> Daily for critical data, monthly for the rest. You control the schedule.",
+            "<strong>More features:</strong><br /><br /><strong>Link multiple sources:</strong> Join Stripe customers to PostHog users. Connect everything with simple UI.<br /><br /><strong>Query with SQL:</strong> Full SQL access to everything. No vendor lock-in - it's just SQL.<br /><br /><strong>Save queries as views:</strong> Build once, use everywhere. Turn complex joins into simple tables.<br /><br /><strong>Custom sync periods:</strong> Daily for critical data, monthly for the rest. You control the schedule.<br /><br /><strong>Sync from Stripe:</strong> Connect revenue to product usage. See which features drive MRR. Track churn by usage patterns. Finally answer 'what makes customers pay more?'<br /><br /><strong>Sync from Hubspot:</strong> Link your CRM to product data. See how leads use your product before they buy. Track deal velocity by feature adoption.<br /><br /><strong>Sync from Zendesk:</strong> Connect support tickets to user behavior. Do angry users churn more? Which features cause the most tickets?<br /><br /><strong>Sync from anywhere:</strong> Google Ads, Salesforce, custom databases. If it has data, we can sync it. CSV uploads for everything else.",
         answers:
-            'These are real questions our customers answer. MRR vs behavior - join Stripe and product data. Support impact - connect Zendesk to retention metrics. Lead quality - link HubSpot to usage patterns. Revenue predictions - compare CRM forecasts to actual Stripe data. Churn analysis - see payment failures alongside last product usage.',
+            'These are real questions our customers answer with PostHog. <em>MRR vs behavior?</em> Join Stripe and product data. <em>Support impact?</em> Connect Zendesk to retention metrics. <em>Lead quality?</em> Link HubSpot to usage patterns. <em>Revenue predictions?</em> Compare CRM forecasts to actual Stripe data. <em>Churn analysis</em> See payment failures alongside last product usage.',
         pricing:
-            "1 million rows synced free monthly. Then simple per-row pricing. Compare to Fivetran charging thousands per month. We're 10x cheaper because we built for product teams, not enterprise IT.",
+            "1 million rows sync free every month, then it's simple per-row pricing. Compare that to Fivetran who charges thousands per month! We're 10x cheaper because we built for product teams, not enterprise IT. We grow with you vs. trying to lock you in with value-based pricing.",
         'comparison-summary':
             'Traditional data warehouses (Snowflake, BigQuery) require data teams. ETL tools (Fivetran, Stitch) just move data around. We do both - sync and analyze in one place. Perfect for product teams who need answers, not infrastructure.',
         'feature-comparison':
@@ -175,6 +175,6 @@ export const dataWarehouse = {
         'pairs-with':
             "The magic happens when everything connects. Stripe revenue in your funnels. CRM data in your experiments. Support tickets next to session replays. This is why we built it - your data shouldn't live in silos.",
         'getting-started':
-            "Pick your most important external data source. Usually Stripe or your CRM. Click connect, authenticate, pick tables. Data starts syncing immediately. Write your first JOIN query in 5 minutes. That 'aha' moment when revenue meets product data? Priceless.",
+            "All you need to do get started is connect a source, authenticate, and pick the tables you want to sync. Data starts syncing immediately. Write your first JOIN query in 5 minutes. And if you're using Product Analytics, you can leverage customer usage data to answer questions that would have required stitching together and normalizing additional sources.",
     },
 }
