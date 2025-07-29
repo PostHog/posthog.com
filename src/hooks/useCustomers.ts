@@ -130,6 +130,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'AI-based transcription APIs',
         logo: AssemblyAILogo,
         featured: true,
+        height: 10,
     },
     brainboard: {
         name: 'Brainboard',
@@ -386,6 +387,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Channel partner platform',
         logo: VendastaLogo,
         featured: false,
+        height: 10,
     },
     webshare: {
         name: 'Webshare',

@@ -33,7 +33,7 @@ export default function SupabaseLogo({ className = '' }: SupabaseLogoProps) {
                     <stop offset="1" stopOpacity="0" />
                 </linearGradient>
                 <clipPath id="a">
-                    <path fill="#fff" d="M.945.542h150v29.174h-150z" />
+                    <path className="fill-black dark:fill-white" d="M.945.542h150v29.174h-150z" />
                 </clipPath>
             </defs>
         </svg>
