@@ -26,7 +26,7 @@ Before proceeding, confirm that you can [capture events](/docs/libraries/nuxt-js
 
 <Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Nuxt application." badge="required">
 
-Send errors directly using the posthog client, follow instructions on how to get the posthog instance:
+To send errors directly using the PostHog client, import it and use the `captureException` method like this:
 
 ```vue component.vue
 <script>

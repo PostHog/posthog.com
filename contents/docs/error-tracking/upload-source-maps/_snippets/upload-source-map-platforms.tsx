@@ -10,7 +10,7 @@ const UploadSourceMapPlatforms = () => {
         },
         {
             label: 'Next.js',
-            url: '/docs/error-tracking/upload-source-maps/nextjs#output-source-maps-for-your-framework',
+            url: '/docs/error-tracking/upload-source-maps/nextjs',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nextjs.svg',
         },
         {

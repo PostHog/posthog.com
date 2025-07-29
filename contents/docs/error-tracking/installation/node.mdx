@@ -9,7 +9,7 @@ import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 <Steps>
 <Step title="Install PostHog Node.js SDK" badge="required">
 
-Run either `npm` or `yarn` in terminal to add it to your project:
+Install the PostHog Node SDK using the package manager of your choice:
 
 <InstallNodePackageManagers />
 
@@ -49,7 +49,7 @@ import { PostHog } from 'posthog-node'
 
 const client = new PostHog(
     '<ph_project_api_key>',
-    { enableExceptionAutocapture: true }
+    { host: '<ph_client_api_host>', enableExceptionAutocapture: true }
 )
 ```
 
@@ -65,7 +65,7 @@ const posthog = new PostHog(PH_API_KEY)
 setupExpressErrorHandler(posthog, app)
 ```
 
-> **Note:** Error tracking requires access the file system to process stack traces. Some providers, like Cloudflare workers, do not support Node.js runtime APIs by default and need to be [included as per their documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#nodejs-compatibility).
+> **Note:** Error tracking requires access the file system to process stack traces. Some providers, like Cloudflare Workers, do not support Node.js runtime APIs by default and need to be [included as per their documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#nodejs-compatibility).
 
 </Step>
 

@@ -27,8 +27,8 @@ Next.js is a SSR framework with both client-side and server-side rendering. To t
 
 You can capture exceptions in client-side code in two ways:
 
-1. [Manual capture](/docs/product-analytics/capture-events): Use `posthog.capture()` in components that include `'use client'`.
-2. [Autocapture](/docs/product-analytics/autocapture#disabling-autocapture): PostHog will automatically capture common events and interactions like page views and clicks.
+1. **Manual capture**: Use `posthog.captureException()` in components that include `'use client'`.
+2. **Autocapture**: PostHog will automatically capture `$exception` events when errors are thrown.
 
 #### Setting up exception autocapture
 
@@ -93,7 +93,14 @@ You can now use the `getPostHogServer` function to capture exceptions in server-
 ```js
 const posthog = getPostHogServer()
 
-posthog.capture("button-clicked")
+try {
+    throw new Error("This is a test exception for error tracking")
+} catch (error) {
+    posthog.captureException(error, {
+        source: 'test',
+        user_id: 'test-user-123',
+    })
+}
 ```
 
 </Step>

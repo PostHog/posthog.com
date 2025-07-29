@@ -19,6 +19,8 @@ import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
 ### Option 2: Install via package manager
 
+Start by installing PostHog with the package manager of your choice:
+
 <InstallWebPackageManagers />
 
 And then include it with your project API key and host (which you can find in [your project settings](https://app.posthog.com/settings/project)):
@@ -121,7 +123,7 @@ This is helpful if you've built your own error handling logic or want to capture
 <StepVerifyErrorTracking />
 
 <Step title="Upload source maps" badge="required">
-  <StepUploadSourceMaps urlPath="web" framework="Web" />
+  <StepUploadSourceMaps urlPath="web" framework="web" />
 </Step>
 
 

@@ -23,11 +23,15 @@ import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload
 
 If you serve minified bundles in production, PostHog requires source maps to generate accurate stack traces. Here are instructions to enable source map generation for popular build tools:
 
+<div className="overflow-x-hidden">
+
 | Build Tool | Documentation |
 |------------|--------------|
 | Vite | [Source Map Configuration](https://v3.vitejs.dev/config/build-options.html#build-sourcemap) |
 | webpack | [Source Map Configuration](https://webpack.js.org/configuration/devtool/) |
 | Rollup | [Source Map Options](https://rollupjs.org/configuration-options/#output-sourcemap) |
+
+</div>
 
 For other build tools, consult their documentation to enable source maps.
 
