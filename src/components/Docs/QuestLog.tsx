@@ -280,6 +280,33 @@ export const QuestLog: React.FC<{
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
+    // Handle initial scroll after images load
+    useEffect(() => {
+        if (typeof window === 'undefined') return
+
+        const handleInitialScroll = () => {
+            const hash = window.location.hash
+            if (hash) {
+                // Small delay to ensure DOM is settled
+                setTimeout(() => {
+                    const element = document.getElementById(hash.substring(1))
+                    if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                    }
+                }, 100)
+            }
+        }
+
+        // If page is already loaded, run immediately
+        if (document.readyState === 'complete') {
+            handleInitialScroll()
+        } else {
+            // Wait for all resources (including images) to load
+            window.addEventListener('load', handleInitialScroll)
+            return () => window.removeEventListener('load', handleInitialScroll)
+        }
+    }, [])
+
     const progressPercentage = hasInitialLoadSettled ? ((selectedQuest + 1) / questItems.length) * 100 : 0
     const spritePosition = hasInitialLoadSettled
         ? `calc(${((selectedQuest + 1) / questItems.length) * 100}% - 32px)`
@@ -456,6 +483,14 @@ export const QuestLog: React.FC<{
                                         href={`#${questIds[index]}`}
                                         className="block no-underline"
                                         style={{ textDecoration: 'none' }}
+                                        onClick={(e) => {
+                                            e.preventDefault()
+                                            const element = document.getElementById(questIds[index])
+                                            if (element) {
+                                                element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                                window.history.pushState(null, '', `#${questIds[index]}`)
+                                            }
+                                        }}
                                     >
                                         {React.cloneElement(child, {
                                             index,
@@ -603,7 +638,15 @@ export const MobileQuestLogItem: React.FC<MobileQuestLogItemProps> = ({
                             className={`block p-3 cursor-pointer transition-all duration-200 hover:bg-gray-50 dark:hover:bg-gray-800 border-b border-light dark:border-dark last:border-b-0 ${
                                 selectedQuest === index ? 'bg-orange/10 dark:bg-orange/10' : ''
                             }`}
-                            onClick={() => onDropdownToggle(false)}
+                            onClick={(e) => {
+                                e.preventDefault()
+                                const element = document.getElementById(questIds[index])
+                                if (element) {
+                                    element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+                                    window.history.pushState(null, '', `#${questIds[index]}`)
+                                }
+                                onDropdownToggle(false)
+                            }}
                             style={{ textDecoration: 'none' }}
                         >
                             <div className="flex items-center space-x-2.5">
