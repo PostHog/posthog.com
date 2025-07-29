@@ -171,31 +171,51 @@ Because product managers are slicing and dicing the data in multiple similar way
 
 As I hinted at above, tracking revenue at PostHog is complicated. We have multiple products with usage-based and tiered pricing with discounts and add-ons, so we can't just query Stripe and get our revenue data. We have a specific billing service that generates invoices and reports, and adds them to Postgres.
 
-For multiple years, we used Metabase to query and visualize all this revenue data from Postgres. All of the cleanup and reformatting needed to make it usable was in there too. Moving all this to PostHog was a lot of work (it had its own project Slack channel), but we've done it now. 
+For multiple years, we used Metabase to query and visualize all this revenue data from Postgres. All of the cleanup and reformatting needed to make it usable was in there too. Moving all this to PostHog was a lot of work (it had its own project Slack channel), but we've done it now and it looks like this:
 
-Our PostHog revenue dashboard now includes insights on the following (powered by the data warehouse): 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/revdashlight_8069258cd9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/revdashdark_16d7a23dab.png"
+  alt="Revenue dashboard"
+  classes="rounded"
+/>
 
-- Monthly and annual recurring revenue over time
-- Revenue lifecycle (new, retention, expansion, contraction)
-- Customer size analysis
-- Per-product revenue analysis
+Rebuilding (and improving) these insights required us to build views that standardize the data, connect Salesforce to better project revenue, create SQL visualizations we were missing, and more. Overall, the project was a success both in terms of making our revenue data more accessible and improving our data warehouse as a product.
 
-Rebuilding (and improving) these insights required us to build views that standardize the data, connect Salesforce to better project revenue, create SQL visualizations we were missing, and more. Overall, the project was a success both in terms of making our revenue data more accessible and improving our data warehouse as a product. 
+Our PostHog revenue dashboard now includes insights like the following (powered by the data warehouse): 
 
-### Sample queries
+### US/EU revenue split
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/revsplitlight_12dda53107.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/revdashdark_16d7a23dab.png"
+  alt="US/EU revenue split"
+  classes="rounded"
+/>
 
 <details>
-  <summary>US/EU revenue split</summary>
+  <summary>SQL query for US/EU revenue split</summary>
   <USEURevenue />
 </details>
 
+### Revenue lifecycle
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/revperprolight_5ff8e7c9a4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/revperprodark_a97adcfe47.png"
+  alt="Revenue per product"
+  classes="rounded"
+/>
+
 <details>
-  <summary>Revenue lifecycle</summary>
+  <summary>SQL query for revenue lifecycle</summary>
   <RevenueLifecycle />
 </details>
 
+### Revenue per product
+
 <details>
-  <summary>Revenue per product</summary>
+  <summary>SQL query for revenue per product</summary>
   <RevenuePerProduct />
 </details>
 
