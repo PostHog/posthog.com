@@ -36,7 +36,7 @@ export default function ActiveWindowsPanel() {
                     {windows.map((window) => (
                         <OSButton
                             key={window.key}
-                            size="sm"
+                            size="md"
                             width="full"
                             align="left"
                             active={focusedWindow === window}

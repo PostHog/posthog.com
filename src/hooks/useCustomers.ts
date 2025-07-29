@@ -22,6 +22,8 @@ import DHLLogo from '../components/CustomerLogos/DHLLogo'
 import ElevenLabsLogo from '../components/CustomerLogos/ElevenLabsLogo'
 import HasuraLogo from '../components/CustomerLogos/HasuraLogo'
 import HeadshotProLogo from '../components/CustomerLogos/HeadshotProLogo'
+import HostAILogo from '../components/CustomerLogos/HostAILogo'
+import JuiceboxLogo from '../components/CustomerLogos/JuiceboxLogo'
 import MentionMeLogo from '../components/CustomerLogos/MentionMeLogo'
 import MistralAILogo from '../components/CustomerLogos/MistralAILogo'
 import MintlifyLogo from '../components/CustomerLogos/MintlifyLogo'
@@ -35,6 +37,7 @@ import RaycastLogo from '../components/CustomerLogos/RaycastLogo'
 import ResearchGateLogo from '../components/CustomerLogos/ResearchGateLogo'
 import SignificaLogo from '../components/CustomerLogos/SignificaLogo'
 import SpeakeasyLogo from '../components/CustomerLogos/SpeakeasyLogo'
+import SquadSVenturesLogo from '../components/CustomerLogos/SquadSVenturesLogo'
 import StartEngineLogo from '../components/CustomerLogos/StartEngineLogo'
 import SupabaseLogo from '../components/CustomerLogos/SupabaseLogo'
 import TrustWalletLogo from '../components/CustomerLogos/TrustWalletLogo'
@@ -144,6 +147,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Collaborative DevOps',
         logo: BrainboardLogo,
         featured: false,
+        height: 10,
     },
     carvertical: {
         name: 'carVertical',
@@ -151,6 +155,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Vehicle history reports',
         logo: CarVerticalLogo,
         featured: false,
+        height: 10,
     },
     contra: {
         name: 'Contra',
@@ -168,7 +173,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             light: CreatifyLogo,
             dark: CreatifyLogoDark,
         },
-        height: 28,
+        height: 12,
         featured: false,
     },
     dhl: {
@@ -177,6 +182,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'The logistics company with the red and yellow logo',
         logo: DHLLogo,
         featured: true,
+        height: 10,
     },
     elevenlabs: {
         name: 'ElevenLabs',
@@ -214,20 +220,23 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'AI photo generator',
         logo: HeadshotProLogo,
         featured: false,
+        height: 10,
     },
     hostai: {
         name: 'HostAI',
         toolsUsed: ['feature_flags', 'product_analytics', 'llm_analytics'],
         notes: 'AI for vacation rentals managers',
         featured: false,
-        // logo: HostAILogo,
+        logo: HostAILogo,
+        height: 12,
     },
     juicebox: {
         name: 'Juicebox',
         toolsUsed: ['feature_flags', 'product_analytics', 'session_replay', 'llm_analytics'],
         notes: 'AI recruitment platform',
         featured: false,
-        // logo: JuiceboxLogo,
+        logo: JuiceboxLogo,
+        height: 10,
     },
     mentionme: {
         name: 'Mention Me',
@@ -235,6 +244,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Marketing referral campaigns',
         logo: MentionMeLogo,
         featured: false,
+        height: 10,
     },
     mintlify: {
         name: 'Mintlify',
@@ -242,6 +252,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Product and technical docs',
         logo: MintlifyLogo,
         featured: false,
+        height: 10,
     },
     mistralai: {
         name: 'Mistral AI',
@@ -272,6 +283,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Open source contribution tracker',
         logo: OpenSaucedLogo,
         featured: false,
+        height: 10,
     },
     phantom: {
         name: 'Phantom',
@@ -279,6 +291,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Crypto wallet',
         logo: PhantomLogo,
         featured: false,
+        height: 10,
     },
     pry: {
         name: 'Pry',
@@ -334,13 +347,14 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'MacOS Spotlight replacement on steroids',
         logo: RaycastLogo,
         featured: true,
+        height: 10,
     },
     researchgate: {
         name: 'ResearchGate',
         toolsUsed: ['experiments', 'feature_flags', 'product_analytics'],
         notes: "World's largest professional network for scientists",
         logo: ResearchGateLogo,
-        height: 12,
+        height: 10,
         featured: true,
     },
     significa: {
@@ -348,7 +362,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         toolsUsed: ['web_analytics', 'product_analytics'],
         notes: 'Digital agency',
         logo: SignificaLogo,
-        height: 24,
+        height: 12,
         featured: false,
         quotes: {
             tomas_gouveia: {
@@ -373,12 +387,35 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         featured: false,
         height: 6,
     },
+    squadsventures: {
+        name: 'SquadS Ventures',
+        toolsUsed: ['product_analytics', 'session_replay', 'error_tracking'],
+        notes: 'Venture funding for LatAm startups',
+        logo: SquadSVenturesLogo,
+        featured: false,
+        height: 12,
+        quotes: {
+            luciano_trujillo: {
+                name: 'Luciano Trujillo',
+                role: 'Head of Engineering',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/luciano_trujullo_thumb_50ac708fc7.jpg',
+                    url: 'https://res.cloudinary.com/dmukukwp6/image/upload/luciano_trujullo_3bb80fa039.jpg',
+                },
+                products: {
+                    error_tracking:
+                        "My smartwatch indicates a 20% increase in sleep quality after using PostHog's Error Tracking. We ditched our previous error tracking SaaS so we could manage errors, see session replays, and do analytics all in one place. It's exactly what we were looking for.",
+                },
+            },
+        },
+    },
     supabase: {
         name: 'Supabase',
         toolsUsed: ['max_ai', 'experiments', 'product_analytics'],
         notes: 'Postgres in the cloud',
         logo: SupabaseLogo,
         featured: true,
+        height: 10,
     },
     // swype: {
     //     name: 'Swype',
@@ -400,6 +437,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Crypto wallet',
         logo: TrustWalletLogo,
         featured: true,
+        height: 10,
     },
     vendasta: {
         name: 'Vendasta',
@@ -415,6 +453,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Proxy server',
         logo: WebshareLogo,
         featured: false,
+        height: 10,
     },
     wittyworks: {
         name: 'Witty Works',
@@ -422,14 +461,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: '',
         logo: WittyWorksLogo,
         featured: false,
+        height: 10,
     },
-    wowzer: {
-        name: 'Wowzer',
-        toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
-        notes: 'AI image generator',
-        featured: false,
-        // logo: WowzerLogo,
-    },
+    // wowzer: {
+    //     name: 'Wowzer',
+    //     toolsUsed: ['experiments', 'product_analytics', 'surveys', 'llm_analytics'],
+    //     notes: 'AI image generator',
+    //     featured: false,
+    //     // logo: WowzerLogo,
+    // },
     ycombinator: {
         name: 'Y Combinator',
         toolsUsed: ['experiments', 'insights'],
