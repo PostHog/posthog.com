@@ -6,6 +6,8 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
 import InstallAngular from "../../integrate/_snippets/install-angular.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
 <Steps>
 <Step title="Installing PostHog Angular SDK" subtitle="Your goal in this step: Install the PostHog Angular SDK." badge="required">
@@ -16,13 +18,7 @@ import InstallAngular from "../../integrate/_snippets/install-angular.mdx"
 
 <Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
 
-Before proceeding, confirm that you can [capture events](/docs/libraries/angular#capture-custom-events) with PostHog.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for events in PostHog
-  </CallToAction>
-</div>
+Before proceeding, confirm that you can capture events with PostHog using `posthog.capture('test_event')`.
 
 </Step>
 
@@ -168,25 +164,14 @@ posthog.captureException(e, additionalProperties)
 
 </Step>
 
-<Step checkpoint title="Verify exception capture" subtitle="Confirm exceptions are being properly captured">
+<StepVerifyErrorTracking />
 
-Before proceeding, confirm that exceptions are being properly captured.
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
+<Step title="Upload source maps" badge="required">
+
+<StepUploadSourceMaps urlPath="angular" framework="Angular" />
 
 </Step>
 
-<Step title="Next steps">
-    
-After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
 
-1. [Upload source maps](/docs/error-tracking/upload-source-maps/angular) – Required for accurate stack traces if you serve minified bundles.
-2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
-3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
-  
-</Step>
 </Steps> 

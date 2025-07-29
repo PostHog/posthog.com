@@ -2,12 +2,12 @@
 title: Node.js error tracking installation
 ---
 
-import { Steps, Step } from 'components/Docs/Steps'
-
 import InstallNodePackageManagers from "../../integrate/_snippets/install-node-package-managers.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
 <Steps>
-<Step title="Installing PostHog Node.js SDK" subtitle="Your goal in this step: Install the PostHog Node.js SDK." badge="required">
+<Step title="Install PostHog Node.js SDK" badge="required">
 
 Run either `npm` or `yarn` in terminal to add it to your project:
 
@@ -36,14 +36,9 @@ You can find your project API key and instance address in the [project settings]
 
 Before proceeding, confirm that you can capture events with PostHog using `client.capture('test_event')`.
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for events in PostHog
-  </CallToAction>
-</div>
-
 </Step>
-<Step title="Configuring exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Node.js application." badge="required">
+
+<Step title="Configure exception autocapture" badge="required">
 
 > **Note:** A minimum SDK version of v4.5.2 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
@@ -73,7 +68,8 @@ setupExpressErrorHandler(posthog, app)
 > **Note:** Error tracking requires access the file system to process stack traces. Some providers, like Cloudflare workers, do not support Node.js runtime APIs by default and need to be [included as per their documentation](https://developers.cloudflare.com/workers/runtime-apis/nodejs/#nodejs-compatibility).
 
 </Step>
-<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Node.js application." badge="optional">
+
+<Step title="Manually capture exceptions" badge="optional">
 
 If you need to manually capture exceptions, you can do so by calling the `captureException` method:
 
@@ -85,25 +81,13 @@ This is helpful if you've built your own error handling logic or want to capture
 
 </Step>
 
-<Step checkpoint title="Verify exception capture" subtitle="Confirm exceptions are being properly captured">
+<StepVerifyErrorTracking />
 
-Before proceeding, confirm that exceptions are being properly captured.
+<Step title="Upload source maps" badge="optional">
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
+<StepUploadSourceMaps urlPath="node" framework="Node.js" />
 
 </Step>
 
-<Step title="Next steps">
 
-After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
-
-1. [Upload source maps](/docs/error-tracking/upload-source-maps/node) – Required for accurate stack traces if you serve minified bundles.
-2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
-3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
-
-</Step>
 </Steps> 

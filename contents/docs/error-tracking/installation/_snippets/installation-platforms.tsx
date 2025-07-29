@@ -55,6 +55,6 @@ const InstallationPlatforms = () => {
         },
     ]
 
-    return <List className="grid sm:grid-cols-2 md:grid-cols-3" items={platforms} />
+    return <List className="grid sm:grid-cols-2" items={platforms} />
 }
 export default InstallationPlatforms

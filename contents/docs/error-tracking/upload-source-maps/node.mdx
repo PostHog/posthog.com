@@ -2,27 +2,20 @@
 title: Upload source maps for Node.js
 ---
 
-import { CallToAction } from 'components/CallToAction'
-
-> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
->
-> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
->    Follow in PostHog
-> </CallToAction>
-
-import { Steps, Step } from 'components/Docs/Steps'
 import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
 import InjectSourceMap from './_snippets/inject-source-map.mdx'
 import UploadSourceMap from './_snippets/upload-source-map.mdx'
+import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
+
 
 <Steps>
 
-<Step title="Installing the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool." badge="required">
+<Step title="Install the PostHog CLI" badge="required">
 <CLIDownload />
 </Step>
 
-<Step title="Authenticating the PostHog CLI" subtitle="Your goal in this step: Authenticate the PostHog CLI tool." badge="required">
+<Step title="Authenticate the PostHog CLI" badge="required">
 <CLIAuthenticate />
 </Step>
 
@@ -40,12 +33,12 @@ For other build tools, consult their documentation to enable source maps.
 
 </Step>
 
-<Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
+<Step title="Inject source map" badge="required">
 <InjectSourceMap />
 
 </Step>
 
-<Step checkpoint title="Verify source map injection" subtitle="Confirm source map comments are present">
+<Step checkpoint title="Verify source map injection" >
 
 Confirm that the served files are injected with the correct source map comment in production in dev tools:
 
@@ -55,22 +48,13 @@ Confirm that the served files are injected with the correct source map comment i
 
 </Step>
 
-<Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
+<Step title="Upload source map" badge="required">
 <UploadSourceMap />
 
 </Step>
 
-<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
+<StepVerifySourceMapUpload />
 
-Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
-
-<div className="mt-4 mb-2">
-<CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">
-    Check symbol sets in PostHog
-</CallToAction>
-</div>
-
-</Step>
 </Steps>
 
 

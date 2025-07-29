@@ -2,41 +2,16 @@
 title: Upload source maps
 ---
 
-import { CallToAction } from 'components/CallToAction'
-
-> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
->
-> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
->    Follow in PostHog
-> </CallToAction>
-
-import { Steps, Step } from 'components/Docs/Steps'
 import DownloadCLI from '../_snippets/cli/download.mdx'
 import AuthenticateCLI from '../_snippets/cli/authenticate.mdx'
 import InjectSourceMap from './_snippets/inject-source-map.mdx'
 import UploadSourceMap from './_snippets/upload-source-map.mdx'
-import UploadSourceMapPlatforms from './upload-source-map-platforms.tsx'
+import UploadSourceMapPlatforms from './_snippets/upload-source-map-platforms.tsx'
 
-<Steps>
-  <Step title="Install the PostHog CLI" subtitle="Your goal in this step: Get the CLI tool or framework-specific package." badge="required">
-    <DownloadCLI />
-  </Step>
-  <Step title="Authenticate the CLI" subtitle="Your goal in this step: Authenticate the CLI to upload source maps to PostHog." badge="required">
-    <AuthenticateCLI />
-  </Step>
-  <Step title="Output source maps for your framework" subtitle="Your goal in this step: Configure your build to generate source maps." badge="required">
-    
-  Configure your build process to generate source maps. This typically involves enabling source map generation in your build tool or framework configuration.
 
-  Follow the instructions for your framework to output source maps.
+If you serve compiled or minified code, PostHog requires source maps to generate accurate stack traces. If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. 
 
-  <UploadSourceMapPlatforms />
+You can either use the `@posthog/nextjs-config` package or the `posthog-cli` to upload source maps. Select your platform to view further instructions.
 
-  </Step>
-  <Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
-    <InjectSourceMap />
-  </Step>
-  <Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
-    <UploadSourceMap />
-  </Step>
-</Steps>
+<UploadSourceMapPlatforms />
+

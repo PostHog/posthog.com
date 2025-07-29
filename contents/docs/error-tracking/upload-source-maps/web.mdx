@@ -2,30 +2,23 @@
 title: Upload source maps for web
 ---
 
-import { CallToAction } from 'components/CallToAction'
-import { Steps, Step } from 'components/Docs/Steps'
 import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
 import InjectSourceMap from './_snippets/inject-source-map.mdx'
 import UploadSourceMap from './_snippets/upload-source-map.mdx'
-
-> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
->
-> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
->    Follow in PostHog
-> </CallToAction>
+import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
 
 <Steps>
 
-<Step title="Installing the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool." badge="required">
+<Step title="Install the PostHog CLI" badge="required">
 <CLIDownload />
 </Step>
 
-<Step title="Authenticating the PostHog CLI" subtitle="Your goal in this step: Authenticate the PostHog CLI tool." badge="required">
+<Step title="Authenticate the PostHog CLI" badge="required">
 <CLIAuthenticate />
 </Step>
 
-<Step title="Output source maps for web" subtitle="Your goal in this step: Configure your build to generate source maps." badge="required">
+<Step title="Output source maps for web" badge="required">
 
 If you serve minified bundles in production, PostHog requires source maps to generate accurate stack traces. Here are instructions to enable source map generation for popular build tools:
 
@@ -59,17 +52,8 @@ Confirm that the served files are injected with the correct source map comment i
 
 </Step>
 
-<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
+<StepVerifySourceMapUpload />
 
-Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
-
-<div className="mt-4 mb-2">
-<CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">
-    Check symbol sets in PostHog
-</CallToAction>
-</div>
-
-</Step>
 </Steps>
 
 

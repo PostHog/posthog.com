@@ -6,16 +6,18 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 import SvelteInstallClient from '../../integrate/_snippets/install-svelte-client.mdx'
 import SvelteInstallServer from '../../integrate/_snippets/install-svelte-server.mdx'
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
 <Steps>
-<Step title="Installing PostHog" subtitle="Your goal in this step: Install the PostHog SvelteKit SDK." badge="required">
+<Step title="Install PostHog" badge="required">
 
 <SvelteInstallClient />
 <SvelteInstallServer />
 
 </Step>
 
-<Step title="Setting up client-side exception capture" subtitle="Your goal in this step: Capture exceptions in the client-side." badge="required">
+<Step title="Set up client-side exception capture" badge="required">
 
 [SvelteKit Hooks](https://svelte.dev/docs/kit/hooks) can be used to capture exceptions in the client and server-side.
 
@@ -35,19 +37,7 @@ export const handleError = ({ error, status }: HandleClientError) => {
 
 </Step>
 
-<Step checkpoint title="Verify client-side exceptions" subtitle="Confirm exceptions are being properly captured">
-
-Before proceeding, confirm that exceptions are being properly captured.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
-</Step>
-
-<Step title="Setting up server-side exception capture" subtitle="Your goal in this step: Capture exceptions in the server-side." badge="required">
+<Step title="Set up server-side exception capture" badge="required">
 
 To capture exceptions on the server-side, you will also need to implement the `handleError` callback:
 
@@ -70,25 +60,13 @@ export const handleError = async ({ error, status }: HandleServerError) => {
 
 </Step>
 
-<Step checkpoint title="Verify server-side exceptions" subtitle="Confirm exceptions are being properly captured">
+<StepVerifyErrorTracking />
 
-Before proceeding, confirm that exceptions are being properly captured.
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
+<Step title="Upload source maps" badge="required">
+
+<StepUploadSourceMaps urlPath="web" />
 
 </Step>
 
-<Step title="Next steps">
-
-After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
-
-1. [Upload source maps](/docs/error-tracking/upload-source-maps) – Required for accurate stack traces if you serve minified bundles.
-2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
-3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
-
-</Step>
 </Steps> 

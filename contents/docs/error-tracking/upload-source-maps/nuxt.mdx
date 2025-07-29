@@ -2,26 +2,18 @@
 title: Upload source maps for Nuxt
 ---
 
-import { CallToAction } from 'components/CallToAction'
-
-> By the end of this guide, you'll understand how to upload source maps for your framework and have proper stack traces in PostHog.
->
-> <CallToAction type="primary" to="https://us.posthog.com/onboarding/error_tracking?step=source_maps">
->    Follow in PostHog
-> </CallToAction>
-
-import { Steps, Step } from 'components/Docs/Steps'
 import CLIDownload from '../_snippets/cli/download.mdx'
 import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
 
 <Steps>
-<Step title="Installing the PostHog CLI" subtitle="Your goal in this step: Install the PostHog CLI tool." badge="required">
+<Step title="Install the PostHog CLI" badge="required">
 <CLIDownload />
 </Step>
-<Step title="Authenticating the PostHog CLI" subtitle="Your goal in this step: Authenticate the PostHog CLI tool." badge="required">
+<Step title="Authenticate the PostHog CLI" badge="required">
 <CLIAuthenticate />
 </Step>
-<Step title="Generate sourcemaps during build" subtitle="Your goal in this step: Configure your build process to generate and upload sourcemaps." badge="required">
+<Step title="Generate sourcemaps during build" badge="required">
 
 You can hook into the `close` event to generate and upload sourcemaps for your Nuxt application like this:
 
@@ -53,7 +45,7 @@ export default defineNuxtConfig({
 ```
 
 </Step>
-<Step title="Build your project for production" subtitle="Your goal in this step: Build your project for production and test the sourcemaps." badge="required">
+<Step title="Build your project for production" badge="required">
 
 Build your project for production by running the following command:
 ```bash
@@ -70,11 +62,9 @@ Before proceeding, confirm that sourcemaps are being properly uploaded.
 
 You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
 
-<div className="mt-4 mb-2">
-<CallToAction type="primary" to="https://us.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets">
+<CallToAction type="secondary" className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
     Check symbol sets in PostHog
 </CallToAction>
-</div>
 
 </Step>
 

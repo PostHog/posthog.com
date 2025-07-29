@@ -3629,6 +3629,10 @@ export const docsMenu = {
                             name: 'Node.js',
                             url: '/docs/error-tracking/upload-source-maps/node',
                         },
+                        {
+                            name: 'CLI',
+                            url: '/docs/error-tracking/upload-source-maps/cli',
+                        },
                     ],
                 },
                 {

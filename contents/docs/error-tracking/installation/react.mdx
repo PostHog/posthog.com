@@ -2,14 +2,14 @@
 title: React error tracking installation
 ---
 
-import { Steps, Step } from 'components/Docs/Steps'
-
 import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
 > For Next.js, we recommend following the [Next.js integration guide](/docs/integrate/next-js) instead.
 
 <Steps>
-<Step title="Installing PostHog React SDK" subtitle="Your goal in this step: Install the PostHog React SDK." badge="required">
+<Step title="Install PostHog React SDK" badge="required">
 
 
 1. Install [`posthog-js`](https://github.com/posthog/posthog-js) using your package manager:
@@ -78,15 +78,9 @@ const posthog = usePostHog()
 posthog?.capture('clicked_log_in')
 ```
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for events in PostHog
-  </CallToAction>
-</div>
-
 </Step>
 
-<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your React application." badge="required">
+<Step title="Set up exception autocapture" badge="required">
 
 > **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
@@ -96,19 +90,7 @@ When enabled, this automatically captures `$exception` events when errors are th
 
 </Step>
 
-<Step checkpoint title="Verify exception autocapture" subtitle="Confirm exceptions are being automatically captured">
-
-Before proceeding, confirm that exceptions are being automatically captured.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
-</Step>
-
-<Step title="Setting up error boundaries" subtitle="Your goal in this step: Capturing errors with error boundaries." badge="optional">
+<Step title="Set up error boundaries" badge="optional">
 
 You can add a custom error boundary to capture rendering errors thrown by components:
 
@@ -143,19 +125,7 @@ class CustomErrorBoundary extends React.Component {
 
 </Step>
 
-<Step checkpoint title="Verify error boundary capture" subtitle="Confirm exceptions are being properly captured by the error boundary">
-
-Before proceeding, confirm that exceptions are being properly captured by the error boundary.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
-</Step>
-
-<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your React application." badge="optional">
+<Step title="Manually capture exceptions" badge="optional">
 
 It is also possible to manually capture exceptions using the `captureException` method:
 
@@ -165,25 +135,12 @@ posthog.captureException(error, additionalProperties)
 
 </Step>
 
-<Step checkpoint title="Verify manual exception capture" subtitle="Confirm manual exception capture is working">
+<StepVerifyErrorTracking />
 
-Before proceeding, confirm that manual exception capture is working.
+<Step title="Upload source maps" badge="required">
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
+<StepUploadSourceMaps urlPath="react" framework="React" />
 
 </Step>
 
-<Step title="Next steps">
-
-After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
-
-1. [Upload source maps](/docs/error-tracking/upload-source-maps) – Required for accurate stack traces if you serve minified bundles.
-2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
-3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
-
-</Step>
 </Steps> 

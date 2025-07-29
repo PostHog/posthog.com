@@ -6,9 +6,12 @@ import { Steps, Step } from 'components/Docs/Steps'
 
 import Snippet from "../../integrate/_snippets/install-js-snippet.mdx"
 import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+
 
 <Steps>
-<Step title="Installing PostHog web SDK" subtitle="Your goal in this step: Install the PostHog web JavaScript SDK." badge="required">
+<Step title="Install PostHog web SDK" badge="required">
 
 ### Option 1: Add the JavaScript snippet to your HTML <span class="bg-gray-accent-light dark:bg-gray-accent-dark text-gray font-semibold align-middle text-sm p-1 rounded">Recommended</span>
 
@@ -92,24 +95,8 @@ The `defaults` is a date, such as `2025-05-24`, for a configuration snapshot use
 
 </Step>
 
-<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
 
-Before proceeding, confirm that:
-
-1. You can [manually capture](/docs/product-analytics/capture-events) events in client-side code (components using `'use client'`).
-2. If [autocapture is enabled](/docs/product-analytics/autocapture#disabling-autocapture), you should see basic events like clicks and page views.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for events in PostHog
-  </CallToAction>
-</div>
-
-</Step>
-
-<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your web application." badge="required">
-
-### Setting up exception autocapture
+<Step title="Set up exception autocapture" badge="required">
 
 > **Note:** A minimum SDK version of v1.207.8 is required, but we recommend keeping up to date with the latest version to ensure you have all of error tracking's features.
 
@@ -119,19 +106,7 @@ When enabled, this automatically captures `$exception` events when errors are th
 
 </Step>
 
-<Step checkpoint title="Verify exception autocapture" subtitle="Confirm exceptions are being automatically captured">
-
-Before proceeding, confirm that exceptions are being automatically captured in PostHog.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
-</Step>
-
-<Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your web application." badge="optional">
+<Step title="Manually capture exceptions" badge="optional">
 
 It is also possible to manually capture exceptions using the `captureException` method:
 
@@ -143,25 +118,11 @@ This is helpful if you've built your own error handling logic or want to capture
 
 </Step>
 
-<Step checkpoint title="Verify manual exception capture" subtitle="Confirm manual exception capture is working">
+<StepVerifyErrorTracking />
 
-Before proceeding, confirm that manual exception capture is working.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
+<Step title="Upload source maps" badge="required">
+  <StepUploadSourceMaps urlPath="web" framework="Web" />
 </Step>
 
-<Step title="Next steps">
 
-After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
-
-1. [Upload source maps](/docs/error-tracking/upload-source-maps/web) – Required for accurate stack traces if you serve minified bundles.
-2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
-3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
-
-</Step>
 </Steps> 

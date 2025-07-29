@@ -33,8 +33,13 @@ const UploadSourceMapPlatforms = () => {
             url: '/docs/error-tracking/upload-source-maps/nuxt',
             image: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg',
         },
+        {
+            label: 'CLI',
+            url: '/docs/error-tracking/upload-source-maps/cli',
+            icon: 'IconCode',
+        },
     ]
 
-    return <List className="grid sm:grid-cols-2 md:grid-cols-3" items={platforms} />
+    return <List className="grid sm:grid-cols-2" items={platforms} />
 }
 export default UploadSourceMapPlatforms

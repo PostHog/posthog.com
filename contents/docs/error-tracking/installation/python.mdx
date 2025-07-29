@@ -2,15 +2,16 @@
 title: Python error tracking installation
 ---
 
-import { Steps, Step } from 'components/Docs/Steps'
 
 import Tab from "components/Tab"
 import DjangoContextMiddleware from '../../libraries/python/_snippets/django-context-middleware.mdx'
 import PythonFlaskExceptionAutocapture from '../../libraries/python/_snippets/python-flask-exception-autocapture.mdx'
 import PythonFastAPIExceptionAutocapture from '../../libraries/python/_snippets/python-fastapi-exception-autocapture.mdx'
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
 <Steps>
-<Step title="Installing PostHog Python SDK" subtitle="Your goal in this step: Install the PostHog Python SDK." badge="required">
+<Step title="Install PostHog Python SDK" badge="required">
 
 ```bash
 pip install posthog
@@ -48,12 +49,6 @@ if settings.TEST:
 
 Before proceeding, enable debug and call `posthog.capture('test_event')` to make sure you can capture events.
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
 </Step>
 
 <Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Python application." badge="required">
@@ -72,18 +67,6 @@ We recommend setting up and using [contexts](/docs/libraries/python#contexts) so
 
 </Step>
 
-<Step checkpoint title="Verify exception autocapture" subtitle="Confirm exceptions are being automatically captured">
-
-Before proceeding, confirm that exceptions are being automatically captured.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
-</Step>
-
 <Step title="Manually capturing exceptions" subtitle="Your goal in this step: Manually capture exceptions in your Python application." badge="optional">
 
 For exceptions handled by your application that you would still like sent to PostHog, you can manually call the capture method:
@@ -96,17 +79,7 @@ You can find a full example of all of this in our [Python (and Flask) error trac
 
 </Step>
 
-<Step checkpoint title="Verify manual exception capture" subtitle="Confirm you can successfully capture exceptions">
-
-Before proceeding, confirm that you can successfully capture exceptions.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
-</Step>
+<StepVerifyErrorTracking />
 
 <Step title="Framework-specific exception capture" subtitle="Your goal in this step: Configure framework-specific exception capture." badge="optional">
 
@@ -133,24 +106,9 @@ Python frameworks often have built-in error handlers. This means PostHog's defau
 
 </Step>
 
-<Step checkpoint title="Verify framework exception capture" subtitle="Confirm exceptions are being properly captured by the framework">
+<Step title="Upload source maps" badge="optional">
 
-Before proceeding, confirm that exceptions are being properly captured by the framework.
-
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for exceptions in PostHog
-  </CallToAction>
-</div>
-
-</Step>
-
-<Step title="Next steps">
-
-After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
-
-1. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
-2. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
+<StepUploadSourceMaps urlPath="cli" />
 
 </Step>
 </Steps> 

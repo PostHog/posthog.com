@@ -2,10 +2,12 @@
 title: Hono error tracking installation
 ---
 
-import { Steps, Step } from 'components/Docs/Steps'
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+
 
 <Steps>
-<Step title="Installing PostHog Node.js SDK" badge="required">
+<Step title="Install PostHog Node.js SDK" badge="required">
 
 Error tracking enables you to track, investigate, and resolve exceptions your customers face. Getting this working requires installing PostHog:
 
@@ -42,25 +44,14 @@ app.onError((err, c) => {
 
 </Step>
 
-<Step checkpoint title="Verify exception capture" subtitle="Confirm you've captured an exception in PostHog">
+<StepVerifyErrorTracking />
 
-Before proceeding, confirm that you've captured an exception in PostHog.
 
-<div className="mt-4 mb-2">
-  <CallToAction type="primary" to="https://app.posthog.com/activity/explore">
-    Check for server-side exceptions in PostHog
-  </CallToAction>
-</div>
+<Step title="Upload source maps" badge="required">
+
+<StepUploadSourceMaps urlPath="cli" />
 
 </Step>
 
-<Step title="Next steps">
 
-After configuring PostHog, you will start receiving exceptions in PostHog. To help you get more out of your error tracking, you can:
-
-1. [Upload source maps](/docs/error-tracking/upload-source-maps/node) – Required for accurate stack traces if you serve minified bundles.
-2. [Configure alerting](/docs/error-tracking/alerts) – Get notified when errors occur
-3. [Cutting cost](/docs/error-tracking/cutting-costs) – Take advantage of our cost-effective pricing
-
-</Step>
 </Steps>

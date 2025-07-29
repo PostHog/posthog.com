@@ -30,26 +30,11 @@ You can see the symbol sets fetched by PostHog and the associated frames within 
     classes="rounded"
 />
 
-import UploadSourceMaps from './_snippets/upload-source-maps-steps.mdx'
-import UploadSourceMapsSteps from './_snippets/upload-source-maps-steps.mdx'
-import NextJsSourcemaps from "./_snippets/nextjs-upload-source-maps.mdx"
+
+import UploadSourceMapPlatforms from  './upload-source-maps/_snippets/upload-source-map-platforms.tsx'
 
 ## Uploading source maps
 
-If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces, you can either use the `@posthog/nextjs-config` package or the `posthog-cli` to handle this process.
+If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. You can either use the `@posthog/nextjs-config` package or the `posthog-cli` to handle this process. Select your platform to view instructions.
 
-<!-- prettier-ignore -->
-<Tab.Group tabs={['Next.js', 'Cli']}>
-    <Tab.List>
-      <Tab>Next.js</Tab>
-      <Tab>CLI</Tab>
-    </Tab.List>
-    <Tab.Panels>
-        <Tab.Panel>
-          <NextJsSourcemaps />
-        </Tab.Panel>
-        <Tab.Panel>
-          <UploadSourceMaps />
-        </Tab.Panel>
-    </Tab.Panels>
-</Tab.Group>
+<UploadSourceMapPlatforms />
