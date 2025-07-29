@@ -180,7 +180,7 @@ Not writing a cover letter might work for bigger companies that are hiring at a 
 * Prioritize clarity over design  
 * No profile pics. This isn't social media  
 * Keep your LinkedIn up-to-date – big discrepancies are suspicious  
-* If you took a career break, just say so. It's not a big deal. Unexplained gaps are
+* If you took a career break, just say so. It's not a big deal. Unexplained gaps are suspicious.
 
 ### c) Showing your product engineer credentials
 
