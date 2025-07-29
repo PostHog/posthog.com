@@ -466,7 +466,7 @@ export const productAnalytics = {
             },
             {
                 name: 'PostHog',
-                key: 'postHog',
+                key: 'posthog',
             },
         ],
         features: [

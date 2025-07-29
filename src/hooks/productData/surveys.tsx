@@ -202,7 +202,7 @@ export const surveys = {
             },
             {
                 name: 'PostHog',
-                key: 'postHog',
+                key: 'posthog',
             },
         ],
         features: [

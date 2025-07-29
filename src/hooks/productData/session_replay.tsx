@@ -439,6 +439,16 @@ window.posthog.onFeatureFlags(function () {
         ],
         features: [
             {
+                feature: 'AI summaries',
+                companies: {
+                    hotjar: false,
+                    logrocket: false,
+                    matomo: false,
+                    fullstory: false,
+                    posthog: 'In alpha',
+                },
+            },
+            {
                 feature: 'Single-page app support',
                 companies: {
                     hotjar: true,
@@ -549,13 +559,23 @@ window.posthog.onFeatureFlags(function () {
                 },
             },
             {
-                feature: 'Export recordings',
+                feature: 'Export recordings to JSON',
                 companies: {
                     hotjar: true,
                     logrocket: false,
                     matomo: true,
                     fullstory: true,
                     posthog: true,
+                },
+            },
+            {
+                feature: 'Export recordings to video',
+                companies: {
+                    hotjar: false,
+                    logrocket: false,
+                    matomo: false,
+                    fullstory: false,
+                    posthog: 'WIP',
                 },
             },
             {

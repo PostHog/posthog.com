@@ -44,6 +44,11 @@ export const errorTracking = {
             description:
                 'In two clicks, I can see who had an error, then their replays. The more of PostHog you use, the more powerful it becomes.',
         },
+        squadsventures: {
+            headline: 'consolidated three separate tools into one platform',
+            description:
+                "We ditched our previous error tracking SaaS so we could manage errors, see session replays, and do analytics all in one place. It's exactly what we were looking for.",
+        },
     },
     features: [
         {
@@ -154,105 +159,129 @@ export const errorTracking = {
                 },
             ],
         },
+        companies: [
+            {
+                name: 'LogRocket',
+                key: 'logrocket',
+                link: '/blog/posthog-vs-logrocket',
+            },
+            {
+                name: 'Sentry',
+                key: 'sentry',
+                link: '/blog/posthog-vs-sentry',
+            },
+            {
+                name: 'Bugsnag',
+                key: 'bugsnag',
+            },
+            {
+                name: 'Datadog',
+                key: 'datadog',
+            },
+            {
+                name: 'PostHog',
+                key: 'posthog',
+            },
+        ],
         features: [
             {
                 feature: 'Error alerts',
                 companies: {
-                    Sentry: true,
-                    LogRocket: true,
-                    BugSnag: true,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: true,
+                    bugsnag: true,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Exception capture',
                 companies: {
-                    Sentry: true,
-                    LogRocket: true,
-                    BugSnag: true,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: true,
+                    bugsnag: true,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Issue management',
                 companies: {
-                    Sentry: true,
-                    LogRocket: false,
-                    BugSnag: true,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: false,
+                    bugsnag: true,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Network performance monitoring',
                 companies: {
-                    Sentry: true,
-                    LogRocket: true,
-                    BugSnag: true,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: true,
+                    bugsnag: true,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Error grouping',
                 companies: {
-                    Sentry: true,
-                    LogRocket: true,
-                    BugSnag: true,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: true,
+                    bugsnag: true,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Source map support',
                 companies: {
-                    Sentry: true,
-                    LogRocket: true,
-                    BugSnag: true,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: true,
+                    bugsnag: true,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Stack tracing',
                 companies: {
-                    Sentry: true,
-                    LogRocket: false,
-                    BugSnag: true,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: false,
+                    bugsnag: true,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Integration with product analytics',
                 companies: {
-                    Sentry: false,
-                    LogRocket: true,
-                    BugSnag: false,
-                    Datadog: false,
-                    PostHog: true,
+                    sentry: false,
+                    logrocket: true,
+                    bugsnag: false,
+                    datadog: false,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Integration with session replays',
                 companies: {
-                    Sentry: true,
-                    LogRocket: true,
-                    BugSnag: false,
-                    Datadog: true,
-                    PostHog: true,
+                    sentry: true,
+                    logrocket: true,
+                    bugsnag: false,
+                    datadog: true,
+                    posthog: true,
                 },
             },
             {
                 feature: 'Integration with A/B experiments',
                 companies: {
-                    Sentry: false,
-                    LogRocket: false,
-                    BugSnag: true,
-                    Datadog: false,
-                    PostHog: true,
+                    sentry: false,
+                    logrocket: false,
+                    bugsnag: true,
+                    datadog: false,
+                    posthog: true,
                 },
             },
         ],
@@ -273,23 +302,25 @@ export const errorTracking = {
     ],
     presenterNotes: {
         overview:
-            "<strong>Presenter notes:</strong> Error tracking that's actually connected to everything else. See an error? Watch the session replay to see exactly what happened. Check which feature flags were on. Roll back instantly. Most error tools are isolated - ours shows the full context.",
+            '<strong>Presenter notes:</strong> PostHog Error Tracking is connected to all other PostHog products. See an error? <em>Watch the session recording</em> to see exactly what happened. <em>Check which feature flags were on</em>. Roll back instantly. Most error tools are isolated whereas PostHog shows the full context.',
         customers:
-            "Zealot switched from BugSnag and Amplitude. Why? 'In two clicks, I can see who had an error, then their replays.' That's the difference. Not just a stack trace - the whole story of what the user was doing when it broke.",
+            "Zealot switched from BugSnag and Amplitude. Squads Ventures ditched three separate tools and consolidated everything into one platform. (That'd be PostHog, if you weren't <em>tracking...</em> 🥁). Why? It's all about getting all the context they need in one place, reducing the friction of debugging and fixing errors faster than their legacy workflows.",
+        product_os_benefits:
+            "In case we haven't driven the point home by now, here's a slide all about it: PostHog Error Tracking is connected to all other PostHog products. It makes it faster to debug because you can see the full event log of what happened leading up to an error. You can watch a session recording to visualize it. You can see which feature flags were enabled at the time. And if you need to run a complex query, use the SQL editor or write a query directly from the PostHog Data Warehouse.",
         features:
-            "<strong>Alerts:</strong> Get notified via email, Slack, or webhooks when new errors appear. Set custom thresholds. No more finding out from angry users.<br /><br /><strong>Triage:</strong> Assign errors to people or teams. Track status. Know who's fixing what. Basic but essential.<br /><br /><strong>Organize and prioritize:</strong> Merge similar errors. Sort by frequency or recency. Search by error message. Focus on what matters most.<br /><br /><strong>Stack traces:</strong> Full stack traces with source maps. See exactly where errors happen. Works with all major frameworks.<br /><br /><strong>More features:</strong><br /><br /><strong>Session replay:</strong> Watch the user's session leading up to the error. No more 'can't reproduce' tickets.<br /><br /><strong>Product analytics:</strong> Graph error rates over time. Break down by user properties. Find patterns.<br /><br /><strong>Feature flags:</strong> Error in production? Turn off the feature instantly. Test fixes on small groups first.<br /><br /><strong>User profiles:</strong> See all errors for a specific user. Check their feature flags at error time.",
+            "<strong>Alerts:</strong> Get notified via email, Slack, or webhooks when new errors appear. Set custom thresholds. You don't have to wait for a spike in support tickets to know what issues users are facing. (This is also important because only a fraction of them are motivated enough to actually message you!)<br /><br /><strong>Triage:</strong> Assign errors to people or teams. Track status. Know who's fixing what. Basic but essential.<br /><br /><strong>Organize and prioritize:</strong> Merge similar errors, sort by frequency or recency, search by error message.<br /><br /><strong>Stack traces:</strong> Full stack traces with source maps. See exactly where errors happen. Works with all major frameworks.<br /><br /><strong>And then there's the convergence:</strong><br /><br /><strong>Session Replay:</strong> Watch the user's session leading up to the error. No more \"can't reproduce\" tickets.<br /><br /><strong>Product Analytics:</strong> Graph error rates over time. Break down by user properties. Find patterns.<br /><br /><strong>Feature Flags:</strong> Error in production? Turn off the feature instantly. Test fixes on small groups first.<br /><br /><strong>User Profiles:</strong> See all errors for a specific user in their dedicated activity timeline. Check their feature flags at error time.",
         answers:
-            'Common questions with real answers. Analyze patterns by graphing errors over time. Set up alerts so you know before users complain. Manage issues with assignment and status tracking. Reduce costs by sampling or filtering non-critical errors. Stack traces work with source maps for minified code.',
+            'Here are some guides about how to use Error Tracking. Some of the things you can do: Analyze patterns by graphing errors over time, set up alerts so you know before users complain, manage issues with assignment and status tracking, and reduce costs by sampling or filtering non-critical errors. And our stack traces work with source maps for minified code.',
         pricing:
-            "100k error events free monthly. Then simple usage pricing. Compare to Sentry charging per seat plus usage. We're just usage-based. No surprise bills when you add developers.",
+            "Log up to 100k errors without even entering a credit card. You also get the monthly free tier even if you <em>have</em> added a card. Beyond that, it's simple, usage-based pricing. Compare that to Sentry who charges per seat <em>plus</em> usage. No surprise bills when you add developers, and you can set a billing limit so you never pay more than expected.",
         'comparison-summary':
-            "Sentry is the 800-pound gorilla. They're good at pure error tracking. But errors don't happen in isolation. We show you the full context - what the user did, which flags were on, the session replay. For mobile-heavy apps, Sentry's still better. For everything else, context wins.",
+            "Sentry is the 800-pound gorilla. They're <em>exception</em>ally good at pure error tracking. But errors don't happen in isolation. PostHog gives you the full context – what the user did, which flags were on, and the related session recording. For mobile-heavy apps, Sentry's still better (though we're actively working on that). For everything else, context wins.",
         'feature-comparison':
-            "We have the core features. What we're missing: uptime monitoring, advanced alert rules, mobile SDK maturity. What we uniquely have: deep integration with analytics, replays, and feature flags. Pick based on what matters more.",
-        docs: 'Setup guides for all major languages and frameworks. Source map upload instructions. Common patterns like error boundaries and custom grouping. Written by engineers who actually use this stuff.',
+            "We have the core features. For now, we're missing a few things like uptime monitoring, advanced alert rules, and our mobile SDKs are in active development. But what we uniquely have: deep integration with analytics, replays, and feature flags. Choose according to your stage of growth, and keep in mind PostHog is designed to grow <em>with</em> you, so even if we don't have all the features you need, we likely will soon!",
+        docs: 'Setup guides for all major languages and frameworks. Source map upload instructions. Common patterns like error boundaries and custom grouping. Written by engineers who actually built (and use) this stuff themselves!',
         'pairs-with':
             "Error happens → watch the replay → see the user's journey → check their feature flags → roll back if needed. This workflow is impossible with standalone tools. Everything connects because it's all in one platform.",
         'getting-started':
-            "Add our SDK. Errors start flowing immediately. Set up alerts for critical errors. Use session replay to debug faster. Roll out fixes with feature flags. The integration is what makes it powerful - you're not just collecting errors, you're solving them faster.",
+            'Add our SDK(s) and errors start flowing immediately. Set up Slack alerts for critical errors and start identifying core problems faster – and at a fraction of the cost vs. the big players!',
     },
 }

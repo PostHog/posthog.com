@@ -316,7 +316,7 @@ export const webAnalytics = {
             },
             {
                 name: 'PostHog',
-                key: 'postHog',
+                key: 'posthog',
             },
         ],
         features: [

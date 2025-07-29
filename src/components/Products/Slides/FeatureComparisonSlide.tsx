@@ -61,7 +61,7 @@ export default function FeatureComparisonSlide({ features, companies }: FeatureC
                                                     <IconArrowUpRight className="inline-block size-3" />
                                                 </Link>
                                             </>
-                                        ) : company.key === 'postHog' ? (
+                                        ) : company.key === 'posthog' ? (
                                             <Logo className="h-5 mx-auto" />
                                         ) : (
                                             company.name

@@ -143,7 +143,6 @@ export default function ErrorTracking(): JSX.Element {
 
     // Configure slides with custom ProductOS Benefits slide
     const slides = createSlideConfig({
-        exclude: ['customers'],
         custom: [
             {
                 slug: 'product-os-benefits',
@@ -153,6 +152,7 @@ export default function ErrorTracking(): JSX.Element {
         ],
         order: [
             'overview',
+            'customers',
             'product-os-benefits',
             'features',
             'pricing',

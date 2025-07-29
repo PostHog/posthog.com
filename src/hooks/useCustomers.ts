@@ -487,6 +487,23 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             dark: ZealotLogoDark,
         },
         featured: false,
+        quotes: {
+            brandon_jakobson: {
+                name: 'Brandon Jakobson',
+                role: 'Co-founder & CTO',
+                image: {
+                    thumb: 'https://res.cloudinary.com/dmukukwp6/image/upload/zealot_brandon_thumb_6c4b5ea067.png',
+                    url: 'https://res.cloudinary.com/dmukukwp6/image/upload/zealot_brandon_ef6f4241d7.png',
+                },
+                quotes: [
+                    "I'm so glad you guys don't price based on seats. As soon as I realized that, I invited my whole team.",
+                ],
+                products: {
+                    error_tracking:
+                        'I can look at an error and see everyone who had it, then view their replays, in two clicks. That’s the part about PostHog that’s so cool: you get all these tools for free and the more you use, the more powerful they become.',
+                },
+            },
+        },
     },
 }
 
