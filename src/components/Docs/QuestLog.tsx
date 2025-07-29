@@ -25,7 +25,7 @@ export const QuestLog: React.FC<{
 }) => {
     const SCROLLSPY_OFFSET = 0
     const MOBILE_SCROLLSPY_OFFSET = 125
-    const STICKY_LIST_OFFSET_REM = 8
+    const CONTAINER_BREAKPOINT = 640
 
     // Animation timing constants
     const INITIAL_LOAD_DELAY = 1000
@@ -81,7 +81,7 @@ export const QuestLog: React.FC<{
     const [bracketPosition, setBracketPosition] = useState({ top: 0, height: 0 })
     const [hasInitialLoadSettled, setHasInitialLoadSettled] = useState(false)
     const [dropdownOpen, setDropdownOpen] = useState(false)
-    const [isMobile, setIsMobile] = useState(false)
+    const [headerHeight, setHeaderHeight] = useState(0)
     const [speechText, setSpeechText] = useState('')
     const [showSpeechBubble, setShowSpeechBubble] = useState(false)
 
@@ -264,10 +264,15 @@ export const QuestLog: React.FC<{
         return () => document.removeEventListener('mousedown', handleClickOutside)
     }, [dropdownOpen])
 
-    // Handle responsive sticky top offset
+    // Handle header height for sticky positioning
     useEffect(() => {
         const handleResize = () => {
-            setIsMobile(window.innerWidth < 1024)
+            // Calculate header height
+            const headerElement = document.getElementById('header')
+            if (headerElement) {
+                const headerRect = headerElement.getBoundingClientRect()
+                setHeaderHeight(headerRect.height)
+            }
         }
 
         handleResize() // Set initial value
@@ -288,9 +293,13 @@ export const QuestLog: React.FC<{
                     style={{ position: 'absolute', top: 0, height: 0, width: 0 }}
                     aria-hidden="true"
                 />
-                <div className="flex gap-6 flex-col-reverse @lg:flex-row">
+                <div
+                    className={`flex @[${CONTAINER_BREAKPOINT}px]:gap-y-6 gap-x-6 flex-col-reverse @[${CONTAINER_BREAKPOINT}px]:flex-row`}
+                >
                     {/* Quest Details */}
-                    <div className="w-full @lg:w-[66.66%] @lg:flex-shrink-0">
+                    <div
+                        className={`w-full @[${CONTAINER_BREAKPOINT}px]:w-[66.66%] @[${CONTAINER_BREAKPOINT}px]:flex-shrink-0`}
+                    >
                         <div className="space-y-4">
                             {questItems.map((questItem, index) => (
                                 <div
@@ -323,13 +332,13 @@ export const QuestLog: React.FC<{
 
                     {/* Quest List - Sticky Container */}
                     <div
-                        className="w-full @lg:max-w-[30%] @lg:flex-shrink-0 sticky self-start mt-3 pt-6 @lg:pt-0 bg-light dark:bg-dark z-50"
+                        className={`w-full @[${CONTAINER_BREAKPOINT}px]:max-w-[30%] @[${CONTAINER_BREAKPOINT}px]:flex-shrink-0 @[${CONTAINER_BREAKPOINT}]:mt-3 pt-4 sticky self-start z-50 bg-light dark:bg-dark pb-2 @[${CONTAINER_BREAKPOINT}px]:pb-4`}
                         style={{
-                            top: isMobile ? '3rem' : `${STICKY_LIST_OFFSET_REM}rem`,
+                            top: `${headerHeight}px`,
                         }}
                     >
                         {/* Progress Indicator */}
-                        <div className="mt-3 mb-6 px-1">
+                        <div className="mt-3 mb-3 px-1">
                             <div className="flex justify-start text-xs md:text-sm text-primary/40 dark:text-primary-dark/40 mb-2">
                                 <span>
                                     {selectedQuest + 1}/{questItems.length}
@@ -417,7 +426,7 @@ export const QuestLog: React.FC<{
                         </div>
 
                         {/* Desktop Navigation */}
-                        <div className="hidden @lg:block space-y-4 relative">
+                        <div className={`hidden @[${CONTAINER_BREAKPOINT}px]:block space-y-4 relative`}>
                             {/* Moving Corner Brackets */}
                             <div
                                 className="absolute inset-x-0 pointer-events-none transition-all duration-500 ease-in-out"
@@ -459,12 +468,12 @@ export const QuestLog: React.FC<{
                         </div>
 
                         {/* Mobile Navigation */}
-                        <div className="block @lg:hidden">
+                        <div className={`block @[${CONTAINER_BREAKPOINT}px]:hidden`}>
                             <Scrollspy
                                 items={questIds}
                                 currentClassName="active"
                                 offset={MOBILE_SCROLLSPY_OFFSET}
-                                style={{ marginLeft: 0, paddingLeft: 0, listStyle: 'none' }}
+                                componentTag="div"
                                 onUpdate={handleScrollspyUpdate}
                             >
                                 <MobileQuestLogItem
