@@ -36,12 +36,12 @@ For example, if a customer visits your website, signs up for your mobile app, an
 
 Creating unified records for all your customers makes your data much more accurate and actionable.
 
-### What are some CDP use cases?
-
-- Marketers sending customer segments to paid ads platforms to enhance ad targeting.
-- Growth teams using segments to target personalization and experimentation (A/B testing).
-- Salespeople enriching customer profiles with usage data, lifecycle marketing engagement, and more.
-- Analysts getting more accurate and de-duplicated data in their analytics and business intelligence tools.
+<CalloutBox icon="IconQuestion" title="What are some CDP use cases?" type="fyi">
+  - Marketers sending customer segments to paid ads platforms to enhance ad targeting.
+  - Growth teams using segments to target personalization and experimentation (A/B testing).
+  - Salespeople enriching customer profiles with usage data, lifecycle marketing engagement, and more.
+  - Analysts getting more accurate and de-duplicated data in their analytics and business intelligence tools.
+</CalloutBox>
 
 ## What is a data warehouse?
 
@@ -55,38 +55,40 @@ This could include customer data (like the CDP), but also employee records, AI t
 
 It does this by having a significantly different structure from traditional databases, usually made up of three parts:
 
-1. **Data-in:** This usually relies on extracting data from another tool, transforming it to fit other data, and loading it into the warehouse (ETL). The warehouse itself can also extract data from sources, load it, and then run transformation jobs on it (ELT). 
+1. **Data-in:** This usually relies on extracting data from another platform, transforming it to fit existing data, and loading it into the warehouse. This is known as ETL (extract, transform, load). The warehouse itself can also extract data from sources, load it, and then run transformation jobs on it. This is known as ELT (extract, load, transform). Why they couldn't come up with more unique and less confusing acronyms is beyond me.
+ 
 2. **Data layer.** Where the data lives, along with all the metadata and schema needed to make use of it. Data is segmented and, typically, governance and security rules can be set up here.
+
 3. **Data-out:** The warehouse itself usually has systems (AKA engines) to efficiently run the type of workloads you need, for example, aggregate analytics queries.
 
 ![What is a data warehouse?](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_23_at_11_14_49_2x_a4e6e96f54.png)
 
 Once you’ve extracted data from the data warehouse, you usually rely on other tools to make use of it, such as  business intelligence tools for visualization or CDPs with reverse ETL functionality for activation.
 
-### What are some data warehouse use cases?
-
-- Analysts building in-depth reports and forecasting based on historical data.
-- Executives viewing regular reports on KPIs, revenue, growth, churn, usage, and more using sources like analytics, payments, CRM, and more.
-- ML engineers preparing and processing data for forecasting, machine learning, and AI. Prepare historic, clean datasets for ML models.
-- Security and compliance teams storing access logs and audit trails for regulations like GDPR, HIPAA, SOC 2, CCPA.
+<CalloutBox icon="IconQuestion" title="What are some data warehouse use cases?" type="fyi">
+  - Analysts building in-depth reports and forecasting based on historical data.
+  - Executives viewing regular reports on KPIs, revenue, growth, churn, usage, and more using sources like analytics, payments, CRM, and more.
+  - ML engineers preparing and processing data for forecasting, machine learning, and AI. Prepare historic, clean datasets for ML models.
+  - Security and compliance teams storing access logs and audit trails for regulations like GDPR, HIPAA, SOC 2, CCPA.
+</CalloutBox>
 
 ## How do a CDP and a data warehouse compare?
 
 | Aspect | CDP | Data warehouse |
 | --- | --- | --- |
-| When companies adopt | Early for marketing campaigns | Growth for consolidation and reporting |
-| Data sources | Customer touchpoints (website, apps, ads, email) | Business systems (database, analytics, CRM) |
-| Data flow | Ingest → process → activate | Ingest → store → analyze |
-| Data ingestion | Primarily real-time or near real-time | Typically batched, but real-time is possible |
-| Storage timeframe | Medium to long-term | Long-term and historical by design |
-| Target users | GTM, marketing, sales, customer experience teams | Data engineers, analysts, compliance, executives |
-| Scalability | Scales with volume but often limited by vendor pricing/models | Cloud-native warehouses scale with storage and compute needs |
-| Complexity | Turnkey with lower technical lift thanks to prebuilt connectors and UI | Orchestrated and higher lift due to modeling, ETL, and schema design |
-| Usage | Activation, personalization, audience segmentation | Analytics, reporting, machine learning, regulatory compliance |
-| Output | Segments, customer profiles, and real-time syncs to tools (ad platforms, lifecycle marketing) | SQL queries, reports, dashboards, ML pipelines |
-| Modeling | Abstracted or automated with pre-built schemas | Manual, requires dbt or SQL expertise |
-| Privacy | Consent management, field-level suppression, blocking at source | Warehouse masking, row-level security, custom policies |
-| Pricing model | Per event or record | Storage + compute |
+| **When companies adopt** | Early for marketing campaigns | Growth for consolidation and reporting |
+| **Data sources** | Customer touchpoints (website, apps, ads, email) | Business systems (database, analytics, CRM) |
+| **Data flow** | Ingest → process → activate | Ingest → store → analyze |
+| **Data ingestion** | Primarily real-time or near real-time | Typically batched, but real-time is possible |
+| **Storage timeframe** | Medium to long-term | Long-term and historical by design |
+| **Target users** | GTM, marketing, sales, customer experience teams | Data engineers, analysts, compliance, executives |
+| **Scalability** | Scales with volume but often limited by vendor pricing/models | Cloud-native warehouses scale with storage and compute needs |
+| **Complexity** | Turnkey with lower technical lift thanks to prebuilt connectors and UI | Orchestrated and higher lift due to modeling, ETL, and schema design |
+| **Usage** | Activation, personalization, audience segmentation | Analytics, reporting, machine learning, regulatory compliance |
+| **Output** | Segments, customer profiles, and real-time syncs to tools (ad platforms, lifecycle marketing) | SQL queries, reports, dashboards, ML pipelines |
+| **Modeling** | Abstracted or automated with pre-built schemas | Manual, requires dbt or SQL expertise |
+| **Privacy** | Consent management, field-level suppression, blocking at source | Warehouse masking, row-level security, custom policies |
+| **Pricing model** | Per event or record | Storage + compute |
 
 ## Which should you choose?
 
@@ -120,7 +122,8 @@ If you spend any time with PostHog, you’ll quickly notice we have both a CDP (
 
 We and our customers have found both to be essential so in our effort to “equip every developer to build successful products,” we’ve built both:
 
-1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from Slack to webhooks to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it. 
+1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from Slack to webhooks to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it.
+
 2. Our **data warehouse** enables teams to sync data from the tools they already use like Stripe, Hubspot, Postgres, S3 and query it alongside the event data they already have in PostHog. We provide a full SQL editor as well as visualizations for this data.
 
 When compared with either of the stacks mentioned above, PostHog enables teams to have one that looks like this:
