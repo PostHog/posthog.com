@@ -2923,6 +2923,10 @@ export const docsMenu = {
                             url: '/docs/product-analytics/trends/formulas',
                         },
                         {
+                            name: 'Statistical analysis',
+                            url: '/docs/product-analytics/trends/statistical-analysis',
+                        },
+                        {
                             name: 'Tips',
                             url: '/docs/product-analytics/trends/tips',
                         },
