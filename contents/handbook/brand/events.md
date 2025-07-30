@@ -7,7 +7,7 @@ showTitle: true
 
 We’re [100% remote](handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life (and our best ideas come from [working together](handbook/company/offsites)).
 
-Still, we’re figuring out how to do events "the PostHog way." We prefer to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](handbook/growth/marketing#2-pull-dont-push) over push, so we avoid formats like webinars, dinners, and lunch & learns.
+Still, we’re figuring out how to do events "the PostHog way." We prefer not to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](handbook/growth/marketing#2-pull-dont-push) over push, so we avoid formats like webinars, dinners, and lunch & learns.
 
 To get us to perk up with curiosity, at least one of these desired event criteria gets met:
 

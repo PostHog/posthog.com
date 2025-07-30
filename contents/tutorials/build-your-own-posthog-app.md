@@ -151,6 +151,5 @@ Want to know more about building your own apps? Join [our community page](/posts
 Alternatively, check out the following tutorials for more information in the mean time…
 
 [How to protect user privacy with the Property Filter app](/tutorials/property-filter)
-[How to correlate errors with product performance using Sentry](/tutorials/sentry-plugin-tutorial)
 
 <NewsletterForm />
