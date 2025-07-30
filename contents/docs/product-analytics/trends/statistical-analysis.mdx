@@ -7,11 +7,12 @@ availability:
 ---
 
 import {ProductScreenshot} from 'components/ProductScreenshot'
+import Link from 'components/Link'
 
 export const confidenceLight = "https://res.cloudinary.com/dmukukwp6/image/upload/ci_light_964273850b.png"
 export const confidenceDark = "https://res.cloudinary.com/dmukukwp6/image/upload/ci_dark_70b3c2973c.png"
-export const confidenceSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/ci_options_light_faeb378f6c.png"
-export const confidenceSettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/ci_options_dark_096f6b4c4b.png"
+export const confidenceSettingsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/ci_settings_light_2_ee4aa887f2.png"
+export const confidenceSettingsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/ci_settings_dark_2_cc793838c2.png"
 
 When analyzing data, it's important to understand if your results are statistically significant. In other words, are the trends you're seeing real, or are they just due to random chance?
 
@@ -19,7 +20,7 @@ PostHog helps you answer this question by providing confidence intervals for you
 
 ## What are confidence intervals?
 
-A confidence interval is a range of values that likely contains the true value of a metric.
+A <Link to='https://en.wikipedia.org/wiki/Confidence_interval' external>confidence interval</Link> is a range of values that likely contains the true value of a metric.
 A 95% confidence level means that if you were to run the same analysis again 100 times, 95 of those times the true value would fall within the calculated confidence interval.
 
 In PostHog, confidence intervals are displayed as a shaded area around your trend lines. The wider the shaded area, the less confident we are in the data. The narrower the area, the more confident we are.
@@ -42,7 +43,7 @@ To enable confidence intervals, go to "Options" section of your trend insight an
     alt="Confidence interval settings"
 />
 
-You can also set the confidence level, which is 95% by default. A higher confidence level will result in a wider interval, while a lower confidence level will result in a narrower interval. Common confidence levels are 90%, 95%, and 99%.
+You can also set the <Link to='https://www.statisticshowto.com/probability-and-statistics/statistics-definitions/confidence-level/' external>confidence level</Link>, which is 95% by default. A higher confidence level will result in a wider interval, while a lower confidence level will result in a narrower interval. Common confidence levels are 90%, 95%, and 99%.
 
 ## Interpreting confidence intervals
 
