@@ -237,13 +237,13 @@ There are two options for this:
 
 ##### 1. First-ever occurrence
 
-This matches only the first time a user performs a specific event type. If this first event doesn't match the filters for that funnel step, or is outside the funnel's date range, the user is excluded from the funnel entirely. This is true even if they perform the event again later with matching filters.
+First-ever occurrence matches only the first time a user performs a specific event type. If this first event doesn't **match the filters** for that funnel step, or is **outside the funnel's date range**, the user is excluded from the funnel entirely. This is true even if they perform the event again later with matching filters.
 
-**Example:** You have a funnel step looking for pageviews to `/about`. A user's first-ever pageview is to `/pricing`. PostHog will only check this first event. Since it doesn't match the `/about` filter, the user will be dropped from the funnel, even if they visit `/about` later.
+**Example:** You have a funnel step looking for page views to `/about` and the user's first-ever page view is to `/pricing`. PostHog will only consider the first `$pageview` event, which is on the `/pricing` page. Since the first page view doesn't match the `/about` filter, the user will be dropped from the funnel, even if they visit `/about` later.
 
 ##### 2. First occurrence matching filters
 
-This matches the first time a user performs an event *that also matches the filters for that funnel step*. Any previous events of the same type that don't match the filters are ignored.
+First occurrence matching filters matches the first time a user performs an event *that also matches the filters for that funnel step*. Any previous events of the same type that don't match the filters are ignored.
 
 **Example:** You have a funnel step looking for pageviews to `/about`. A user first visits `/pricing` and then later visits `/about`. PostHog ignores the `/pricing` view and matches the `/about` view, as it's the first one that fits the step's criteria.
 
