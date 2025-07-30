@@ -14,6 +14,7 @@ import usePostHog from '../../hooks/usePostHog'
 import { RenderInClient } from 'components/RenderInClient'
 import { IconExternal } from '@posthog/icons'
 import { useDropzone } from 'react-dropzone'
+import DropDown from '../DropDown/DropDown'
 const allowedFileTypes = ['application/pdf']
 
 interface IResumeComponentProps {
@@ -24,6 +25,16 @@ interface IResumeComponentProps {
 }
 
 const components = {
+    dropdown: ({ title, required, path, options, className }) => (
+        // Prepend a placeholder option
+        <DropDown
+            title={title}
+            required={required}
+            path={path}
+            options={[{ label: 'Select an option', value: '' }, ...options]}
+            className="w-full block h-10 !bg-white dark:!bg-white/10 box-border rounded-sm focus:shadow-xl border border-black/20 text-[17px] font-medium dark:bg-white box-border/10 dark:text-white"
+        />
+    ),
     valueselect: ({ title, required, path, options }) => (
         <select
             name={title}
@@ -170,7 +181,7 @@ const Form = ({ setSubmitted, info, id }) => {
                             return (
                                 <div
                                     className={
-                                        type === 'string' || type === 'email' || type === 'valueselect'
+                                        type === 'string' || type === 'email' || type === 'dropdown'
                                             ? 'sm:col-span-1 col-span-2 flex flex-col'
                                             : 'col-span-2'
                                     }
