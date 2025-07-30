@@ -91,7 +91,7 @@ When capture is finally called, the `third_function_called` event will have a cu
 Contexts can be nested. This means:
 - Parent context values are shared with child contexts. 
 - Child contexts can override parent context value within the child context's scope.
-- When a child context exits, the overriden parent context is restored.
+- When a child context exits, the overridden parent context is restored.
 
 ```python
 from posthog import new_context, tag
