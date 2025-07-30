@@ -200,6 +200,13 @@ Our PostHog revenue dashboard now includes insights like the following (powered 
 
 ### Revenue lifecycle
 
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revlifelight_8a4e73b8b3.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revlifedark_b88f1e5eb7.png"
+  alt="Revenue lifecycle"
+  classes="rounded"
+/>
+
 <details>
   <summary>SQL query for revenue lifecycle</summary>
   <RevenueLifecycle />
@@ -236,6 +243,51 @@ Our sales and customer success teams do reporting through PostHog. They pull fro
 - Salesforce opportunity pipeline and how much they're worth
 - Won opportunities and how much they're worth
 
+Some examples include:
+
+### Salesforce opportunities by quarter
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openoppslight_b77896aaa0.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openoppsdark_a2a1ba29c9.png"
+  alt="Salesforce opportunities by quarter"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Salesforce opportunities by quarter</summary>
+  <OpportunitiesPerQuarter />
+</details>
+
+### Salesforce open pipeline by quarter (annual only)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openpipelight_4839830a14.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openpipedark_c08527c47d.png"
+  alt="Salesforce open pipeline by quarter (annual only)"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Salesforce open pipeline by quarter (annual only)</summary>
+  <PipelinePerQuarter />
+
+</details>
+
+### Sales and CS managed accounts start of quarter ARR
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/salesarrdark_ad2b0cfc92.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/salesarrlight_8fe5d4b706.png"
+  alt="Sales and CS managed accounts start of quarter ARR"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Sales and CS managed accounts start of quarter ARR</summary>
+  <ManagedAccounts />
+</details>
+
 ### Using variables
 
 The sales dashboard is the best example of the power of [variables](/docs/data-warehouse/sql/variables). Nearly every insight uses variables to set the account owner, quarter, and whether they are managed by sales or customer success. 
@@ -250,24 +302,6 @@ This makes all of the insights much more reusable by being able to reuse them ac
 />
 
 <Caption>We use variables for the account owner, quarter, and whether an account is managed by sales or customer success to make our sales and CS dashboard more reusable.</Caption>
-
-### Sample queries
-
-<details>
-  <summary>Salesforce opportunities by quarter</summary>
-  <OpportunitiesPerQuarter />
-</details>
-
-<details>
-  <summary>Salesforce open pipeline by quarter (annual only)</summary>
-  <PipelinePerQuarter />
-
-</details>
-
-<details>
-  <summary>Sales and CS managed accounts start of quarter ARR</summary>
-  <ManagedAccounts />
-</details>
 
 ## Problem #4: Creating support reports (SLA, first response time, and more) 
 
