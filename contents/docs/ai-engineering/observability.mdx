@@ -104,17 +104,19 @@ It can also be on at the request level by including setting the `privacy_mode` p
 <MultiLanguage>
 
 ```python file=OpenAI.py
-client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[...],
+client.responses.create(
+    model="gpt-4o-mini",
+    instructions="...",
+    input="...",
     posthog_privacy_mode=True
 )
 ```
 
 ```typescript file=OpenAI.ts
-const completion = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [...],
+const completion = await openai.responses.create({
+    model: "gpt-4o-mini",
+    instructions: "...",
+    input: "...",
     posthogPrivacyMode: true
 });
 ```
