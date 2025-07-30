@@ -3535,8 +3535,8 @@ export const docsMenu = {
                     name: 'Getting started',
                 },
                 {
-                    name: 'How it works',
-                    url: '/docs/error-tracking/how-it-works',
+                    name: 'Start here',
+                    url: '/docs/error-tracking/start-here',
                     icon: 'IconListCheck',
                     featured: true,
                     color: 'orange',

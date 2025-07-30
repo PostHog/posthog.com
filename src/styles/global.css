@@ -1864,7 +1864,6 @@ body.dark .max-ai-body {
     .quest-sidebar {
         max-width: 30%;
         flex-shrink: 0;
-        margin-top: 0.75rem;
         padding-bottom: 1rem;
     }
 
