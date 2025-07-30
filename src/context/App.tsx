@@ -591,8 +591,9 @@ const appSettings: AppSettings = {
                 width: 900,
                 height: 500,
             },
-            fixed: true,
-            autoHeight: true,
+        },
+        position: {
+            center: true,
         },
     },
     'cool-tech-jobs-issue': {
