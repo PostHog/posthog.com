@@ -122,11 +122,25 @@ const components = {
     boolean: ({ title, required, path }: IResumeComponentProps) => (
         <div className="flex space-x-4">
             <label className="flex items-center space-x-2">
-                <input data-path={path} type="radio" name={title} value="yes" className="w-4 h-4" required={required} />
+                <input
+                    data-path={path}
+                    type="radio"
+                    name={title}
+                    value={true}
+                    className="w-4 h-4"
+                    required={required}
+                />
                 <span>Yes</span>
             </label>
             <label className="flex items-center space-x-2">
-                <input data-path={path} type="radio" name={title} value="no" className="w-4 h-4" required={required} />
+                <input
+                    data-path={path}
+                    type="radio"
+                    name={title}
+                    value={false}
+                    className="w-4 h-4"
+                    required={required}
+                />
                 <span>No</span>
             </label>
         </div>
