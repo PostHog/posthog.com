@@ -136,6 +136,7 @@ interface FileNode {
     handle: FileSystemHandle
     children?: FileNode[]
     expanded?: boolean
+    lastModified?: number
 }
 
 const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) => {
@@ -166,16 +167,39 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         const children: FileNode[] = []
 
         for await (const entry of dirHandle.values()) {
-            children.push({
+            const fileNode: FileNode = {
                 name: entry.name,
                 type: entry.kind as 'file' | 'directory',
                 handle: entry,
                 expanded: false,
-            })
+            }
+
+            // Get last modified time for files
+            if (entry.kind === 'file') {
+                try {
+                    const fileHandle = entry as FileSystemFileHandle
+                    const file = await fileHandle.getFile()
+                    fileNode.lastModified = file.lastModified
+                } catch (err) {
+                    console.error('Error getting file info:', err)
+                }
+            }
+
+            children.push(fileNode)
         }
 
+        // Sort: directories first, then by most recent modification date for files
         node.children = children.sort((a, b) => {
             if (a.type !== b.type) return a.type === 'directory' ? -1 : 1
+
+            // For files, sort by most recent first
+            if (a.type === 'file' && b.type === 'file') {
+                const aTime = a.lastModified || 0
+                const bTime = b.lastModified || 0
+                return bTime - aTime // Descending order (most recent first)
+            }
+
+            // For directories, keep alphabetical
             return a.name.localeCompare(b.name)
         })
     }
@@ -241,6 +265,28 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
             node.type === 'file' &&
             ['png', 'jpg', 'jpeg', 'webp', 'gif'].some((ext) => node.name.toLowerCase().endsWith(`.${ext}`))
 
+        // Format the last modified date
+        const formatDate = (timestamp?: number) => {
+            if (!timestamp) return ''
+            const date = new Date(timestamp)
+            const now = new Date()
+            const diffMs = now.getTime() - date.getTime()
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
+
+            if (diffHours < 1) {
+                const diffMins = Math.floor(diffMs / (1000 * 60))
+                return `${diffMins}m ago`
+            } else if (diffHours < 24) {
+                return `${diffHours}h ago`
+            } else if (diffHours < 168) {
+                // 7 days
+                const diffDays = Math.floor(diffHours / 24)
+                return `${diffDays}d ago`
+            } else {
+                return date.toLocaleDateString()
+            }
+        }
+
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
@@ -265,8 +311,11 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
                             <IconDocument className="size-4" />
                         </div>
                     )}
-                    <span className={`text-sm ${isImage ? 'font-medium' : ''}`}>{node.name}</span>
-                    {loading && <Loading className="size-3 ml-auto" />}
+                    <span className={`text-sm flex-grow ${isImage ? 'font-medium' : ''}`}>{node.name}</span>
+                    {node.type === 'file' && node.lastModified && (
+                        <span className="text-xs text-secondary ml-2">{formatDate(node.lastModified)}</span>
+                    )}
+                    {loading && <Loading className="size-3 ml-2" />}
                 </div>
                 {node.type === 'directory' && node.expanded && node.children && (
                     <div>{node.children.map((child) => renderNode(child, level + 1))}</div>
@@ -285,7 +334,7 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
                         onClick={openDirectory}
                         className="px-4 py-2 bg-accent rounded hover:bg-opacity-70 transition-colors text-sm"
                     >
-                        Open Folder
+                        Open folder
                     </button>
                 </div>
             ) : (
@@ -296,7 +345,7 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
                             onClick={openDirectory}
                             className="text-xs px-2 py-1 bg-accent rounded hover:bg-opacity-70"
                         >
-                            Change Folder
+                            Change folder
                         </button>
                     </div>
                     {renderNode(rootDirectory)}
