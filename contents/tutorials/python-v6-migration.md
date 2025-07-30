@@ -31,7 +31,7 @@ Here are the major changes from `5.x` to `6.x`:
 
 <CalloutBox icon="IconInfo" title="Upgrade best practices">
 
-You should always pin versions using the [compatible release clause](https://packaging.python.org/en/latest/specifications/version-specifiers/#compatible-release) to avoid auto-upgrading to an uncompatible version accidentally.
+You should always pin versions using the [compatible release clause](https://packaging.python.org/en/latest/specifications/version-specifiers/#compatible-release) to avoid auto-upgrading to an incompatible version accidentally.
 
 </CalloutBox>
 
@@ -80,12 +80,19 @@ def process_payment():
 
 def update_inventory():
     tag("order_steps", [*get_tags()["order_steps"], "update_inventory"])
+<<<<<<< HEAD
     capture("order_completed")
 ```
 
 When `capture` is finally called, the `order_completed` event will have a custom event property called `order_steps` with a list of values `"validate_order"`, `"process_payment"`, and `"update_inventory"`.
 
 Contexts can also be nested. This means that:
+=======
+    capture("order_completed") # HIGHLIGHT
+```
+
+When capture is finally called, the `order_completed` event will have a custom event property called `order_steps` with the value `["validate_order", "process_payment", "update_inventory"]`.
+>>>>>>> 142fc05a2fd18a12bd6c9d3bb3f2751b47f955a2
 
 - Parent context values are shared with child contexts. 
 - Child contexts can override parent context value within the child context's scope.
@@ -121,7 +128,7 @@ The new [contexts middleware for Django](/docs/libraries/django#django-contexts-
 
 If you're using the PostHog JavaScript web SDK on the client-side, [enabling tracing headers](/docs/data/sessions#automatically-sending-session-ids) will populate these headers automatically.
 
-This middleware will also automatically capture exceptions. You can learn more about this middle ware in the [Django integration docs](/docs/libraries/django#django-contexts-middleware).
+This middleware will also automatically capture exceptions. You can learn more about this middleware in the [Django integration docs](/docs/libraries/django#django-contexts-middleware).
 
 ## Breaking change: identification
 
@@ -279,7 +286,7 @@ posthog.capture("user123", "button_clicked", {"button_id": "123"})
 ### New pattern with contexts
 with posthog.new_context():
     posthog.identify_context("user123")
-    posthog.tag("button_id": "123")
+    posthog.tag("button_id", "123")
     # The event name is the first argument, and can be passed positionally, or as a keyword argument in a later position
     posthog.capture("button_pressed")
 
@@ -315,7 +322,7 @@ POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 
 ### 5. Adopt contexts
 
-Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](docs/libraries/python) to learn more.
+Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](/docs/libraries/python) to learn more.
 
 ## Further reading
 
