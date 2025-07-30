@@ -1,6 +1,6 @@
 ---
 title: "CDP vs data warehouse: Which should you use and why"
-date: 2025-07-23
+date: 2025-07-30
 author:
  - ian-vanagas
 tags:
@@ -8,19 +8,19 @@ tags:
  - data pipelines
 ---
 
-Customer data platform (CDP) vs data warehouse is sort of like Batman vs Superman for people who know SQL. They are seen as rivals and rely on different tools but often end up working together.
+[Customer data platform](/cdp) (CDP) vs [data warehouse](/data-warehouse) is sort of like Batman vs Superman for people [who know SQL](/product-engineers/sql-for-analytics). They are seen as rivals and rely on different tools but often end up working together.
 
 There are dozens of articles trying to convince you one or the other is the "right" choice, but, in reality, both (or neither) might be right for you. This article will help you understand what they do and decide whether a CDP and/or data warehouse is right for you.
 
 ## What is a CDP?
 
-Even by modern data stack standards, the name "customer data platform" is frustratingly vague – it doesn’t actually explain any of the underlying functionality. 
+Even by [modern data stack](/blog/modern-data-stack-sucks) standards, the name "customer data platform" is frustratingly vague – it doesn’t actually explain any of the underlying functionality. 
 
 In a nutshell, a CDP does three things:
 
-1. Ingests data from many different sources / touchpoints, like your website, app, ads, analytics, email, helpdesk, and more.
+1. Ingests data from many different [sources](/docs/cdp/sources) / touchpoints, like your website, app, ads, analytics, email, helpdesk, and more.
 2. Creates and stores a combined customer profile based on all these sources. Data scattered between platforms gets aggregated in one place.
-3. Sends customer data to destinations like ad platforms, CRMs, and more.
+3. Sends customer data to [destinations](/docs/cdp/destinations) like ad platforms, CRMs, and more.
 
 ![What is a CDP?](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_15_at_11_01_48_2x_b3c889b8cc.png)
 
@@ -30,7 +30,7 @@ Teams need this because they:
 - Want a single source of truth for their “customer record”
 - Need a combined customer record for tracking and improving ad campaigns, personalization, lifecycle marketing, and more.
 
-A CDP’s ability to do identity resolution (i.e. figuring out what data belongs to whom) is key here.
+A CDP’s ability to do [identity resolution](/docs/product-analytics/identify) (i.e. figuring out what data belongs to whom) is key here.
 
 For example, if a customer visits your website, signs up for your mobile app, and sends you an email, these three touchpoints could be treated as three separate customers. A CDP stitches these together into one customer by using persistent identifiers, relying on deterministic data (e.g. IDs and emails), and even using probabilistic data (e.g. IP address, device type, browser, and OS).
 
@@ -38,7 +38,7 @@ Creating unified records for all your customers makes your data much more accura
 
 <CalloutBox icon="IconQuestion" title="What are some CDP use cases?" type="fyi">
   - Marketers sending customer segments to paid ads platforms to enhance ad targeting.
-  - Growth teams using segments to target personalization and experimentation (A/B testing).
+  - Growth teams using segments to target personalization and [experimentation](/docs/experiments) (A/B testing).
   - Salespeople enriching customer profiles with usage data, lifecycle marketing engagement, and more.
   - Analysts getting more accurate and de-duplicated data in their analytics and business intelligence tools.
 </CalloutBox>
@@ -96,7 +96,7 @@ Actually, you will need both eventually – it's more about when you should ado
 
 ![Graph of the importance of a CDP and data warehouse over time](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_22_at_09_22_17_2x_83e5a95ddf.png)
 
-Early-stage companies likely won’t find a data warehouse useful, but a CDP quickly provides significant help collecting and activating customer data to power early marketing efforts. 
+[Early-stage companies](/founders/early-stage-analytics) likely won’t find a data warehouse useful, but a CDP quickly provides significant help collecting and activating customer data to power early marketing efforts. 
 
 As companies mature, their reporting and analysis requirements grow and increase in complexity. Doing reporting in each individual tool doesn’t cut it anymore. Having consolidated data becomes more important, and so does the data warehouse.
 
@@ -118,13 +118,13 @@ At huge scale, use cases fragment significantly. Each function will likely have 
 
 ## PostHog is both a CDP and data warehouse
 
-If you spend any time with PostHog, you’ll quickly notice we have both a CDP (data pipelines) and a data warehouse. You might wonder: hey, I thought it was supposed to be one or the other? Well, we’ve broken that rule.
+If you spend any time with PostHog, you’ll quickly notice we have both a [CDP](/docs/cdp) (data pipelines) and a [data warehouse](/docs/data-warehouse). You might wonder: hey, I thought it was supposed to be one or the other? Well, we’ve broken that rule.
 
-We and our customers have found both to be essential so in our effort to “equip every developer to build successful products,” we’ve built both:
+We and our customers have found both to be essential so in our effort to “[equip every developer to build successful products](/handbook/why-does-posthog-exist),” we’ve built both:
 
-1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from Slack to webhooks to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it.
+1. Our **data pipelines** enable teams to send data captured into PostHog anywhere, from [Slack](/docs/cdp/destinations/slack) to [webhooks](/docs/cdp/destinations/webhook) to lifecycle marketing platforms to data warehouses. They also enable teams to customize and transform these destinations and data before sending it.
 
-2. Our **data warehouse** enables teams to sync data from the tools they already use like Stripe, Hubspot, Postgres, S3 and query it alongside the event data they already have in PostHog. We provide a full SQL editor as well as visualizations for this data.
+2. Our **data warehouse** enables teams to sync data from the tools they already use like [Stripe](/docs/cdp/sources/stripe), [Hubspot](/docs/cdp/sources/hubspot), [Postgres](/docs/cdp/sources/postgres), [S3](/docs/cdp/sources/s3) and query it alongside the event data they already have in PostHog. We provide a full [SQL editor](/docs/data-warehouse/sql) as well as [visualizations](/docs/data-warehouse/query) for this data.
 
 When compared with either of the stacks mentioned above, PostHog enables teams to have one that looks like this:
 
@@ -132,4 +132,4 @@ When compared with either of the stacks mentioned above, PostHog enables teams t
 
 Rather than the data spaghetti created by separate CDPs, data warehouses, and other tools, PostHog provides them all in a unified platform. This means teams have more of the tools they need as they grow and there is less need for migration or reimplementation. We can fulfill the use cases teams need whatever stage they are at, whether it is marketing campaign enrichment early or complex analysis from consolidated datasets later. 
 
-If you’re curious, see the product pages or just sign up and get started; each comes with a generous free tier.
+If you’re curious, see the [product pages](/cdp) or [just sign up and get started](https://us.posthog.com/signup); both our CDP and data warehouse come with a generous free tier.
