@@ -106,8 +106,7 @@ It can also be on at the request level by including setting the `privacy_mode` p
 ```python file=OpenAI.py
 client.responses.create(
     model="gpt-4o-mini",
-    instructions="...",
-    input="...",
+    input=[...],
     posthog_privacy_mode=True
 )
 ```
@@ -115,8 +114,7 @@ client.responses.create(
 ```typescript file=OpenAI.ts
 const completion = await openai.responses.create({
     model: "gpt-4o-mini",
-    instructions: "...",
-    input: "...",
+    input: [...],
     posthogPrivacyMode: true
 });
 ```
