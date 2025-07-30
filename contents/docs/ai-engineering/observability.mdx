@@ -135,7 +135,7 @@ response = client.messages.create(
 ```python file=Google
 response = client.models.generate_content(
     model="gemini-2.5-flash",
-    contents="...",
+    contents=[...],
     posthog_privacy_mode=True
 )
 ```
