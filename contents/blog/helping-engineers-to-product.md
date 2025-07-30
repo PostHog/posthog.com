@@ -45,7 +45,7 @@ The best use of an engineer's time is to ship features that have an impact on cu
 
 It’s the technical co-founder and early engineers building the MVP and integrating the first product tools, not PMs. By focusing on engineers we can get in first, and later become the default choice for each additional tool they add. 
 
-Additionally, we can ladder our tools – session recording is used much earlier in the life cycle of the product than others, like the customer data platforms (CDP), helping us get in earlier than competing products. As a result, we aren't heavily focused on enterprise – we even [sunsetted K8s support](sunsetting-helm-support-posthog) as part of this change.
+Additionally, we can ladder our tools – session recording is used much earlier in the life cycle of the product than others, like the [customer data platforms (CDP)](/blog/cdp-vs-data-warehouse), helping us get in earlier than competing products. As a result, we aren't heavily focused on enterprise – we even [sunsetted K8s support](sunsetting-helm-support-posthog) as part of this change.
 
 ### Be the pipeline for product and customer data
 
