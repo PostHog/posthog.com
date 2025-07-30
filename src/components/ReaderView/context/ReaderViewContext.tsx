@@ -80,8 +80,8 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
 
         style.textContent = `
-            .article-content p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
-            .article-content li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
+            .reader-content-container p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
+            .reader-content-container li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
         `
         localStorage.setItem('lineHeightMultiplier', lineHeightMultiplier.toString())
 

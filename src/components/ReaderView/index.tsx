@@ -576,15 +576,17 @@ function ReaderViewContent({
                                     </div>
                                 )}
                                 {body.featuredVideo && <iframe src={body.featuredVideo} />}
-                                {body.type === 'mdx' ? (
-                                    <div className={'@container'}>
-                                        <MDXProvider components={mdxComponents}>
-                                            <MDXRenderer>{body.content}</MDXRenderer>
-                                        </MDXProvider>
-                                    </div>
-                                ) : (
-                                    children
-                                )}
+                                <div className="reader-content-container">
+                                    {body.type === 'mdx' ? (
+                                        <div className={'@container'}>
+                                            <MDXProvider components={mdxComponents}>
+                                                <MDXRenderer>{body.content}</MDXRenderer>
+                                            </MDXProvider>
+                                        </div>
+                                    ) : (
+                                        children
+                                    )}
+                                </div>
                                 <div className="mt-8">
                                     <h3 id="squeak-questions" className="mb-4">
                                         Community questions
