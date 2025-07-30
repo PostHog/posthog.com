@@ -89,7 +89,7 @@ Contexts can also be nested. This means that:
 
 - Parent context values are shared with child contexts. 
 - Child contexts can override parent context value within the child context's scope.
-- When a child context exits, the overriden parent context is restored.
+- When a child context exits, the overridden parent context is restored.
 
 ```python
 from posthog import new_context, tag
