@@ -315,7 +315,7 @@ We have high standards for our support experience. Where do those standards get 
 
 Similar to the sales and customer success teams, support does reporting through PostHog. It used to all be done in Zendesk, but since we added the Zendesk source, doing it in PostHog has become easier and better. 
 
-Unlike other teams, support almost always uses Zendesk exclusively. This means less complicated queries and more opportunities to use trend insights on top of SQL insights. 
+Unlike other teams, support almost always uses exclusively Zendesk. This means less complicated queries and more opportunities to use trend insights on top of SQL insights. 
 
 For example, our **SLA Achievement Rate** insight looks at the `ticket_metrics_events` table from `zendesk` to find what percentage of tickets were replied to or updated within the [SLA goals we set out](/handbook/support/customer-support#response-targets-slas-and-csat-surveys) (no SQL required).
 
@@ -341,18 +341,44 @@ This data is combined with [CSAT surveys](/templates/csat-survey) (both scores a
 
 <Caption>Abigail's message to the exec team.</Caption>
 
-### Sample queries
+Some examples of insights on the support dashboard include:
+
+### Breached non-escalated tickets in the last 7 days
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/breachedlight_23c730c12b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/breacheddark_104fcc4665.png"
+  alt="Breached non-escalated tickets in the last 7 days"
+  classes="rounded"
+/>
 
 <details>
-  <summary>Breached non-escalated tickets in the last 7 days</summary>
+  <summary>SQL query for Breached non-escalated tickets in the last 7 days</summary>
   <BreachedTickets />
-
 </details>
 
+### Escalated SLA % last 7 days by team
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_09_01_2x_ef1b32d6ed.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_08_44_2x_005d521ba7.png"
+  alt="Escalated SLA % last 7 days by team"
+  classes="rounded"
+/>
+
 <details>
-  <summary>Escalated SLA % last 7 days by team</summary>
+  <summary>SQL query for Escalated SLA % last 7 days by team</summary>
   <EscalatedSLA />
 </details>
+
+### Time UTC when tickets are created (last 6 months)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_10_28_2x_ca4c7edfb5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_10_45_2x_f14f728d22.png"
+  alt="Time UTC when tickets are created (last 6 months)"
+  classes="rounded"
+/>
 
 <details>
   <summary>Time UTC when tickets are created (last 6 months)</summary>
@@ -374,25 +400,49 @@ Each quarter, hundreds of startups sign up for our [startup plan](/startups) (wh
 2. The cost of the startup plan for us based on credit usage.
 3. The count of startups who “graduate” and pay us money as well as how much money they pay us. 
 
-Unlike the revenue, churn, and growth data, we actually do use Stripe for this. We have metadata on Stripe customers saying if they are a startup plan customer and what type of startup plan they are on. This helps us get the customer count as well as the “graduate” details.
+Unlike the revenue, churn, and growth data, we actually do use Stripe for this. We have metadata on Stripe customers saying if they are a startup plan customer and what type of startup plan they are on. This helps us get the customer count as well as the “graduate” details. We can then combine the Stripe data with our billing data in Postgres to get the cost of the startup plan for us based on credit usage.
 
-Costs rely on combining the Stripe data with our billing data in Postgres. This lets us see how many credits startup plan customers are going through.
+This is all put together in a **Startup and YC Plan** dashboard with insights like these:
 
-### Sample queries
+### Startup plan customer count (not YC)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startupcountlight_9c333baa95.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startupcountdark_d5d8ffcd16.png"
+  alt="Startup plan customer count (not YC)"
+  classes="rounded"
+/>
 
 <details>
-  <summary>Startup plan customer count (not YC)</summary>
+  <summary>SQL query for startup plan customer count (not YC)</summary>
   <StartupPlanCustomerCount />
-
 </details>
 
+### Previous startup & YC plan customers revenue per customer
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revlight_1f9edaea10.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revdark_8dce9d49b0.png"
+  alt="Previous startup & YC plan customers revenue per customer"
+  classes="rounded"
+/>
+
 <details>
-  <summary>Previous startup & YC plan customers revenue per customer</summary>
+  <summary>SQL query for previous startup & YC plan customers revenue per customer</summary>
   <StartupRevenuePerCustomer />
 </details>
 
+### Startup & YC plan customers cohorts by starting month
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cohortlight_72b7521357.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cohortdark_4b46c8b336.png"
+  alt="Startup & YC plan customers cohorts by starting month"
+  classes="rounded"
+/>
+
 <details>
-  <summary>Startup & YC plan customers cohorts by starting month</summary>
+  <summary>SQL query for startup & YC plan customers cohorts by starting month</summary>
   <StartupCohorts />
 </details>
 
