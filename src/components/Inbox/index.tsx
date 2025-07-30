@@ -172,7 +172,7 @@ export default function Inbox(props) {
             setSideWidth(expandable ? containerWidth : minWidth)
         } else {
             const containerHeight = containerRef.current.getBoundingClientRect().height
-            const minHeight = 57
+            const minHeight = 45
             setBottomHeight(expandable ? containerHeight : minHeight)
         }
     }
@@ -180,7 +180,7 @@ export default function Inbox(props) {
     const handleVerticalDrag = (_event, info) => {
         if (!containerRef.current) return
         const containerHeight = containerRef.current.getBoundingClientRect().height
-        const newBottomHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 57), containerHeight)
+        const newBottomHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 45), containerHeight)
         setBottomHeight(newBottomHeight)
     }
 
@@ -254,7 +254,6 @@ export default function Inbox(props) {
                     <>
                         <CallToAction
                             size="sm"
-                            className="mr-2"
                             onClick={() =>
                                 addWindow(
                                     <AskAQuestion
@@ -275,7 +274,7 @@ export default function Inbox(props) {
                                 options={layoutOptions}
                                 onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
                                 value={sideBySide ? 'side-by-side' : 'stacked'}
-                                className="-my-1"
+                                className="-my-1 ml-2"
                             />
                         ) : null}
                     </>
@@ -322,7 +321,7 @@ export default function Inbox(props) {
                                                     `}
                                                     onClick={() => {
                                                         if (!containerRef.current) return
-                                                        if (bottomHeight <= 57) {
+                                                        if (bottomHeight <= 45) {
                                                             setBottomHeight(
                                                                 containerRef.current.getBoundingClientRect().height *
                                                                     0.8
@@ -487,6 +486,7 @@ export default function Inbox(props) {
                                                             <OSButton
                                                                 size="sm"
                                                                 className="relative"
+                                                                style={{ width: 26, height: 26 }}
                                                                 icon={
                                                                     <IconChevronDown
                                                                         className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${
