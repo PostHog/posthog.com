@@ -1,8 +1,14 @@
-<PythonInstall />
-
 ```bash
 pip install posthog
 ```
+
+import CalloutBox from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconInfo" title="Upgrading to v6" type="fyi">
+
+Version `6.x` of the PostHog Python SDK introduces a new [contexts](/docs/libraries/python#contexts) and breaking changes. If you're upgrading from `5.x` to `6.x`, read the [migration guide](/tutorials/python-v6-migration) first to learn more.
+
+</CalloutBox>
 
 In your app, import the `posthog` library and set your project API key and host **before** making any calls.
 
