@@ -142,7 +142,7 @@ export default function HeaderBar({
 
     return (
         <>
-            <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0">
+            <div data-scheme="secondary" className="bg-primary flex w-full gap-px p-2 flex-shrink-0 items-center">
                 {!compact && (
                     <div>
                         <motion.div

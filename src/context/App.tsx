@@ -645,6 +645,23 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
+    'ask-a-question': {
+        size: {
+            min: {
+                width: 600,
+                height: 500,
+            },
+            max: {
+                width: 600,
+                height: 500,
+            },
+            fixed: true,
+            autoHeight: true,
+        },
+        position: {
+            center: true,
+        },
+    },
 } as const
 
 export interface SiteSettings {

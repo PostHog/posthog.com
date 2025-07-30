@@ -6,7 +6,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { Question } from 'components/Squeak'
+import { Question, QuestionForm } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import { IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification } from '@posthog/icons'
@@ -25,6 +25,9 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useSubscribedQuestions } from 'hooks/useSubscribedQuestions'
 import { flattenStrapiResponse } from '../../utils'
+import { CallToAction } from 'components/CallToAction'
+import { useApp } from '../../context/App'
+import Link from 'components/Link'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
@@ -66,6 +69,44 @@ const layoutOptions = [
     },
 ]
 
+const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
+    const { addToast } = useToast()
+    const { appWindow } = useWindow()
+    const { closeWindow, setWindowTitle } = useApp()
+
+    useEffect(() => {
+        setWindowTitle(appWindow, 'Ask a question')
+    }, [])
+
+    return (
+        <div data-scheme="secondary" className="bg-primary size-full p-4">
+            <QuestionForm
+                onSubmit={(_values, _type, data) => {
+                    onSubmit()
+                    addToast({
+                        title: 'Question posted',
+                        description: (
+                            <>
+                                Your question has been posted.
+                                <br />
+                                <Link
+                                    className="text-red dark:text-yellow font-semibold"
+                                    to={`/questions/${data.attributes.permalink}`}
+                                >
+                                    View it here
+                                </Link>
+                            </>
+                        ),
+                    })
+                    closeWindow(appWindow)
+                }}
+                initialView="question-form"
+                slug="/questions"
+            />
+        </div>
+    )
+}
+
 export default function Inbox(props) {
     const { data, params } = props
     const initialTopicID = data?.topic?.squeakId
@@ -91,6 +132,7 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
+    const { addWindow } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -209,16 +251,34 @@ export default function Inbox(props) {
                 showForward
                 showSearch
                 rightActionButtons={
-                    permalink ? (
-                        <ToggleGroup
-                            title="Layout"
-                            hideTitle={true}
-                            options={layoutOptions}
-                            onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
-                            value={sideBySide ? 'side-by-side' : 'stacked'}
-                            className="-my-1"
-                        />
-                    ) : null
+                    <>
+                        <CallToAction
+                            size="sm"
+                            className="mr-2"
+                            onClick={() =>
+                                addWindow(
+                                    <AskAQuestion
+                                        newWindow
+                                        location={{ pathname: `ask-a-question` }}
+                                        key={`ask-a-question`}
+                                        onSubmit={refresh}
+                                    />
+                                )
+                            }
+                        >
+                            Ask a question
+                        </CallToAction>
+                        {permalink ? (
+                            <ToggleGroup
+                                title="Layout"
+                                hideTitle={true}
+                                options={layoutOptions}
+                                onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
+                                value={sideBySide ? 'side-by-side' : 'stacked'}
+                                className="-my-1"
+                            />
+                        ) : null}
+                    </>
                 }
             />
             <div data-scheme="secondary" className="flex flex-grow border-t border-primary min-h-0">
