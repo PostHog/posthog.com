@@ -1,0 +1,55 @@
+---
+title: Hono error tracking installation
+---
+
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
+
+
+<Steps>
+<Step title="Install PostHog Node.js SDK" badge="required">
+
+Error tracking enables you to track, investigate, and resolve exceptions your customers face. Start by installing the `posthog-node` package using your package manager:
+```bash
+npm install --save posthog-node
+```
+
+</Step>
+<Step title="Exception handling example" badge="required">
+
+Hono uses [`app.onError`](https://hono.dev/docs/api/exception#handling-httpexception) to handle uncaught exceptions. You can take advantage of this for error tracking. Remember to **export** your [project API key](https://app.posthog.com/settings/project#variables) as an environment variable.
+
+```ts file=index.ts
+import { env } from 'hono/adapter'
+import { PostHog } from 'posthog-node'
+
+app.onError((err, c) => {
+  const { POSTHOG_PUBLIC_KEY } = env<{ POSTHOG_PUBLIC_KEY:string }>(c)
+  const posthog = new PostHog(POSTHOG_PUBLIC_KEY, { host: '<ph_client_api_host>' })
+  
+  posthog.captureException(new Error(err.message, { cause: err }), 'user_distinct_id_with_err_rethrow', {
+    path: c.req.path,
+    method: c.req.method,
+    url: c.req.url,
+    headers: c.req.header(),
+    // ... other properties
+  })
+  posthog.shutdown() // TIP: On program exit, call shutdown to stop pending pollers and flush any remaining events
+  // other error handling logic
+  return c.text('Internal Server Error', 500)
+})
+```
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+
+<Step title="Upload source maps" badge="required">
+
+<StepUploadSourceMaps urlPath="cli" />
+
+</Step>
+
+
+</Steps>

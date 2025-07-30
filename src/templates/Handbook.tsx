@@ -46,6 +46,46 @@ import { CopyMarkdownActionsDropdown } from 'components/MarkdownActionsDropdown'
 import IsEU from 'components/IsEU'
 import IsUS from 'components/IsUS'
 
+function parseStepsFromMDX(mdxString: string) {
+    const steps = []
+    let stepNumber = 1
+
+    // Find all Step components with their props
+    const stepRegex = /mdx\(Step,\s*\{([^}]*)\}/g
+    let match
+
+    while ((match = stepRegex.exec(mdxString)) !== null) {
+        const propsString = match[1]
+
+        // Extract title
+        const titleMatch = propsString.match(/\btitle:\s*["'](.*?)["']/)
+        if (!titleMatch) continue
+
+        const title = titleMatch[1]
+
+        // Check if checkpoint prop is present
+        const hasCheckpoint = /\bcheckpoint\b/.test(propsString)
+
+        const url = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+
+        steps.push({
+            depth: 0,
+            value: hasCheckpoint ? `Checkpoint: ${title}` : `Step ${stepNumber}: ${title}`,
+            url: url,
+        })
+
+        // Only increment step number for non-checkpoint steps
+        if (!hasCheckpoint) {
+            stepNumber++
+        }
+    }
+
+    return steps
+}
+
 const DestinationsLibraryCallout = () => {
     return (
         <div className="p-4 mb-4 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
@@ -320,10 +360,18 @@ export default function Handbook({
     } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
-    const showToc = !hideAnchor && tableOfContents?.length > 0
     const filePath = post?.parent?.relativePath
 
     const isArticle = frontmatter.isArticle !== false
+
+    // Parse steps from MDX content and use them to replace table of contents if found
+    const stepsFromMDX = parseStepsFromMDX(body)
+    const toc = stepsFromMDX.length > 0 ? stepsFromMDX : tableOfContents
+    const showToc = !hideAnchor && toc?.length > 0
+
+    const [showCTA, setShowCTA] = React.useState<boolean>(
+        typeof window !== 'undefined' ? Boolean(getCookie('ph_current_project_token')) : false
+    )
 
     const A = (props) => (
         <Link
@@ -399,7 +447,7 @@ export default function Handbook({
                             title={title}
                         />
                     }
-                    tableOfContents={[...tableOfContents, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
+                    tableOfContents={[...toc, { depth: 0, value: 'Questions?', url: 'squeak-questions' }]}
                     breadcrumb={[breadcrumbBase, ...(breadcrumb?.slice(0, breadcrumb.length - 1) || [])]}
                     hideSidebar={hideAnchor}
                     nextPost={nextPost}
@@ -467,9 +515,7 @@ export default function Handbook({
                                 </div>
                             </div>
                         </div>
-                        <div className="lg:hidden">
-                            {showToc && <MobileSidebar tableOfContents={tableOfContents} />}
-                        </div>
+                        <div className="lg:hidden">{showToc && <MobileSidebar tableOfContents={toc} />}</div>
                         {features && <LibraryFeatures availability={features} />}
                         <div className={isArticle && 'article-content'}>
                             <MDXProvider components={components}>
