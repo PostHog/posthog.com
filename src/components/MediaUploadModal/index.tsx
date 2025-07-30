@@ -1,4 +1,4 @@
-import { IconCopy, IconUpload } from '@posthog/icons'
+import { IconCopy, IconUpload, IconFolder, IconDocument, IconChevronRight, IconChevronDown } from '@posthog/icons'
 import Modal from 'components/Modal'
 import uploadImage from 'components/Squeak/util/uploadImage'
 import { useApp } from '../../context/App'
@@ -8,6 +8,17 @@ import { useDropzone } from 'react-dropzone'
 import { useWindow } from '../../context/Window'
 import { useToast } from '../../context/Toast'
 import Loading from 'components/Loading'
+
+// File System Access API types
+declare global {
+    interface Window {
+        showDirectoryPicker(): Promise<FileSystemDirectoryHandle>
+    }
+
+    interface FileSystemDirectoryHandle {
+        values(): AsyncIterableIterator<FileSystemHandle>
+    }
+}
 
 const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type }, ext, width, height }: any) => {
     const { addToast } = useToast()
@@ -119,6 +130,181 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
     )
 }
 
+interface FileNode {
+    name: string
+    type: 'file' | 'directory'
+    handle: FileSystemHandle
+    children?: FileNode[]
+    expanded?: boolean
+}
+
+const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) => {
+    const [rootDirectory, setRootDirectory] = useState<FileNode | null>(null)
+    const [loading, setLoading] = useState(false)
+    const { addToast } = useToast()
+
+    const openDirectory = async () => {
+        try {
+            const dirHandle = await window.showDirectoryPicker()
+            const rootNode: FileNode = {
+                name: dirHandle.name,
+                type: 'directory',
+                handle: dirHandle,
+                expanded: true,
+            }
+            await loadDirectoryContents(rootNode)
+            setRootDirectory(rootNode)
+        } catch (err) {
+            console.error('Error opening directory:', err)
+        }
+    }
+
+    const loadDirectoryContents = async (node: FileNode) => {
+        if (node.type !== 'directory') return
+
+        const dirHandle = node.handle as FileSystemDirectoryHandle
+        const children: FileNode[] = []
+
+        for await (const entry of dirHandle.values()) {
+            children.push({
+                name: entry.name,
+                type: entry.kind as 'file' | 'directory',
+                handle: entry,
+                expanded: false,
+            })
+        }
+
+        node.children = children.sort((a, b) => {
+            if (a.type !== b.type) return a.type === 'directory' ? -1 : 1
+            return a.name.localeCompare(b.name)
+        })
+    }
+
+    const toggleDirectory = async (node: FileNode) => {
+        if (node.type !== 'directory') return
+
+        if (!node.expanded && !node.children) {
+            await loadDirectoryContents(node)
+        }
+
+        node.expanded = !node.expanded
+        setRootDirectory({ ...rootDirectory! })
+    }
+
+    const handleFileDrag = async (e: React.DragEvent, node: FileNode) => {
+        if (node.type !== 'file') return
+
+        const fileHandle = node.handle as FileSystemFileHandle
+        const file = await fileHandle.getFile()
+
+        // Create a DataTransfer object
+        const dt = new DataTransfer()
+        dt.items.add(file)
+        e.dataTransfer = dt
+        e.dataTransfer.effectAllowed = 'copy'
+    }
+
+    const handleFileClick = async (node: FileNode) => {
+        if (node.type !== 'file') return
+
+        const supportedFormats = ['png', 'jpg', 'jpeg', 'webp', 'gif', 'mp4', 'mov']
+        const extension = node.name.split('.').pop()?.toLowerCase()
+
+        if (!extension || !supportedFormats.includes(extension)) {
+            addToast({
+                description: 'Unsupported file format',
+                error: true,
+                duration: 3000,
+            })
+            return
+        }
+
+        setLoading(true)
+        try {
+            const fileHandle = node.handle as FileSystemFileHandle
+            const file = await fileHandle.getFile()
+            onFileDrop([file])
+        } catch (err) {
+            console.error('Error uploading file:', err)
+            addToast({
+                description: 'Failed to upload file',
+                error: true,
+                duration: 3000,
+            })
+        } finally {
+            setLoading(false)
+        }
+    }
+
+    const renderNode = (node: FileNode, level = 0) => {
+        const isImage =
+            node.type === 'file' &&
+            ['png', 'jpg', 'jpeg', 'webp', 'gif'].some((ext) => node.name.toLowerCase().endsWith(`.${ext}`))
+
+        return (
+            <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
+                <div
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
+                        node.type === 'file' ? 'draggable' : ''
+                    }`}
+                    onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
+                    draggable={node.type === 'file'}
+                    onDragStart={(e) => handleFileDrag(e, node)}
+                >
+                    {node.type === 'directory' ? (
+                        <>
+                            {node.expanded ? (
+                                <IconChevronDown className="size-3" />
+                            ) : (
+                                <IconChevronRight className="size-3" />
+                            )}
+                            <IconFolder className="size-4" />
+                        </>
+                    ) : (
+                        <div className="ml-4">
+                            <IconDocument className="size-4" />
+                        </div>
+                    )}
+                    <span className={`text-sm ${isImage ? 'font-medium' : ''}`}>{node.name}</span>
+                    {loading && <Loading className="size-3 ml-auto" />}
+                </div>
+                {node.type === 'directory' && node.expanded && node.children && (
+                    <div>{node.children.map((child) => renderNode(child, level + 1))}</div>
+                )}
+            </div>
+        )
+    }
+
+    return (
+        <div className="border border-input rounded-md p-4 h-[400px] overflow-auto">
+            {!rootDirectory ? (
+                <div className="flex flex-col items-center justify-center h-full">
+                    <p className="text-sm text-secondary mb-4">Select a folder to browse local files</p>
+                    <button
+                        onClick={openDirectory}
+                        className="px-4 py-2 bg-accent rounded hover:bg-opacity-70 transition-colors text-sm"
+                    >
+                        Open Folder
+                    </button>
+                </div>
+            ) : (
+                <div>
+                    <div className="flex items-center justify-between mb-2 pb-2 border-b border-input">
+                        <span className="text-sm font-medium">{rootDirectory.name}</span>
+                        <button
+                            onClick={openDirectory}
+                            className="text-xs px-2 py-1 bg-accent rounded hover:bg-opacity-70"
+                        >
+                            Change Folder
+                        </button>
+                    </div>
+                    {renderNode(rootDirectory)}
+                </div>
+            )}
+        </div>
+    )
+}
+
 export default function MediaUploadModal() {
     const { appWindow } = useWindow()
     const { setWindowTitle } = useApp()
@@ -156,44 +342,61 @@ export default function MediaUploadModal() {
 
     return isModerator ? (
         <div data-scheme="primary" className="bg-primary size-full">
-            <div className="p-4 relative flex flex-col gap-4">
-                <div className="flex flex-col">
-                    <h2>Upload media</h2>
-                    <p className="m-0 mt-1">
-                        Add images or videos to our CDN (Cloudinary) that can be linked in docs or blog posts.
-                    </p>
-                    <div
-                        {...getRootProps()}
-                        data-scheme="secondary"
-                        className={`mt-4 flex-grow w-full rounded-md bg-primary border border-dashed border-input ${
-                            isDragActive ? 'bg-input' : ''
-                        }`}
-                    >
-                        <p
-                            className={`m-0 flex justify-center items-center font-bold space-x-1 text-sm h-full py-4 ${
-                                isDragActive ? '' : 'opacity-70'
+            <div className="p-4 relative space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                    <div className="flex flex-col">
+                        <h3 className="m-0">Local files</h3>
+                        <p className="text-sm text-secondary mt-1 mb-4">
+                            Click files to upload or drag to the drop zone
+                        </p>
+                        <FileExplorer onFileDrop={onDrop} />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <h3 className="m-0">Upload media</h3>
+                        <p className="text-sm text-secondary mt-1 mb-4">Drag files here or use the file explorer</p>
+                        <div
+                            {...getRootProps()}
+                            data-scheme="secondary"
+                            className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
+                                isDragActive ? 'bg-input border-primary' : ''
                             }`}
                         >
-                            <IconUpload className="size-5" />
-                            <span>{isDragActive ? 'Drop' : 'Drag'} media</span>
-                        </p>
-                        <input {...getInputProps()} />
+                            <div
+                                className={`flex flex-col justify-center items-center h-full p-8 ${
+                                    isDragActive ? '' : 'opacity-50'
+                                }`}
+                            >
+                                <IconUpload className="size-12 mb-4" />
+                                <p className="text-center font-medium m-0">
+                                    {isDragActive ? 'Drop files here' : 'Drop files to upload'}
+                                </p>
+                                <p className="text-sm text-secondary text-center mt-2 m-0">
+                                    PNG, JPG, WEBP, GIF, MP4, MOV
+                                </p>
+                            </div>
+                            <input {...getInputProps()} />
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <h3>Your uploads</h3>
-                    <ul className="list-none m-0 p-0 space-y-2 overflow-auto pr-4 flex-grow max-h-[450px]">
-                        {loading > 0 &&
-                            Array.from({ length: loading }).map((_, index) => (
-                                <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
-                            ))}
-                        {images.map((image) => {
-                            return <Image key={image.id} {...image} />
-                        })}
-                        {user?.profile?.images?.map((image: any) => {
-                            return <Image key={image.id} {...image} />
-                        })}
-                    </ul>
+
+                <div className="flex flex-col">
+                    <h3 className="m-0">Your uploads</h3>
+                    <p className="text-sm text-secondary mt-1 mb-4">Recent uploads to Cloudinary</p>
+                    <div className="flex-grow border border-input rounded-md p-4 overflow-auto">
+                        <ul className="list-none m-0 p-0 space-y-2">
+                            {loading > 0 &&
+                                Array.from({ length: loading }).map((_, index) => (
+                                    <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
+                                ))}
+                            {images.map((image) => {
+                                return <Image key={image.id} {...image} />
+                            })}
+                            {(user?.profile as any)?.images?.map((image: any) => {
+                                return <Image key={image.id} {...image} />
+                            })}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
