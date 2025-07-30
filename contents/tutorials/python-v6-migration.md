@@ -31,7 +31,7 @@ Here are the major changes from `5.x` to `6.x`:
 
 <CalloutBox icon="IconInfo" title="Upgrade best practices">
 
-You should always pin versions using the [compatible release clause](https://packaging.python.org/en/latest/specifications/version-specifiers/#compatible-release) to avoid auto-upgrading to an uncompatible version accidentally.
+You should always pin versions using the [compatible release clause](https://packaging.python.org/en/latest/specifications/version-specifiers/#compatible-release) to avoid auto-upgrading to an incompatible version accidentally.
 
 </CalloutBox>
 
@@ -39,7 +39,7 @@ You should always pin versions using the [compatible release clause](https://pac
 
 Version `6.x` introduces contexts. Events captured under the same context scope will share properties set on the context. This can be used to identify who, where, and when an event is triggered.
 
-This is very convenient for server-side use cases like Django or Flask. Unlike client-side SDKs where all events captured are under the same identity and context, server SDKs might manage **multiple identities and contexts** simutaneously.
+This is very convenient for server-side use cases like Django or Flask. Unlike client-side SDKs where all events captured are under the same identity and context, server SDKs might manage **multiple identities and contexts** simultaneously.
 
 ```python
 from posthog import new_context, tag, set_context_session, identify_context
@@ -83,10 +83,10 @@ def process_payment():
 def update_inventory():
     # ... logic
     tag("order_steps", [*get_tags()["order_steps"], "update_inventory"])
-    capture("order_completed") // HIGHLIGHT
+    capture("order_completed") # HIGHLIGHT
 ```
 
-When capture is finally called, the `third_function_called` event will have a custom event property called `methods_called` with the value `["first_function","second_function","third_function"]`.
+When capture is finally called, the `order_completed` event will have a custom event property called `order_steps` with the value `["validate_order", "process_payment", "update_inventory"]`.
 
 Contexts can be nested. This means:
 - Parent context values are shared with child contexts. 
@@ -123,7 +123,7 @@ The new contexts middleware for Django wraps every request in a context. The con
 
 If you're using the PostHog JavaScript web SDK on the client-side, [enabling tracing headers](/docs/data/sessions#automatically-sending-session-ids) will populate these headers automatically.
 
-This middleware will also automatically capture exceptions. You can learn more about this middle ware in the [Django integration docs](/docs/libraries/django#django-contexts-middleware).
+This middleware will also automatically capture exceptions. You can learn more about this middleware in the [Django integration docs](/docs/libraries/django#django-contexts-middleware).
 
 ## Breaking change: identification
 
@@ -279,7 +279,7 @@ posthog.capture("user123", "button_clicked", {"button_id": "123"})
 ### New pattern with contexts
 with posthog.new_context():
     posthog.identify_context("user123")
-    posthog.tag("button_id": "123")
+    posthog.tag("button_id", "123")
     # The event name is the first argument, and can be passed positionally, or as a keyword argument in a later position
     posthog.capture("button_pressed")
 
@@ -313,4 +313,4 @@ POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 
 ### 5. Adopt contexts
 
-Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](docs/libraries/python) to learn more.
+Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](/docs/libraries/python) to learn more.
