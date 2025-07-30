@@ -4,6 +4,8 @@ sidebar: Docs
 showTitle: true
 ---
 
+This is an internal guide to setting up and working with the data warehouse for PostHog engineers. If you're a PostHog user, check out our [data warehouse docs](/docs/data-warehouse) instead.
+
 ## Adding a new source
 
 Looking to add a new source to data warehouse? [We have a detailed guide in the codebase](https://github.com/PostHog/posthog/blob/master/posthog/temporal/data_imports/sources/README.md). 
@@ -13,7 +15,7 @@ Looking to add a new source to data warehouse? [We have a detailed guide in the 
 
 ## Importing your local Postgres instance
 
-1. Head to the the [new source flow](http://localhost:8010/project/pipeline/new/source) in your local app, hit the link button next to Postgres
+1. Head to the [new source flow](http://localhost:8010/project/pipeline/new/source) in your local app, hit the link button next to Postgres
 2. Use the following settings:
     1. host = 127.0.0.1
     2. port = 5432
@@ -26,7 +28,7 @@ Looking to add a new source to data warehouse? [We have a detailed guide in the 
 
 ## Accessing MinIO
 
-All your data warehouse data will be stored in your local MinIO instance. You can view all the files by going to http://localhost:19001/ and using the username `object_storage_root_user` and password `object_storage_root_password`. There should be a `data-warehouse` bucket that has a separate folder for each table you sync. 
+All your data warehouse data is stored in your local MinIO instance. You can view all the files by going to `http://localhost:19001/` and using the username `object_storage_root_user` and password `object_storage_root_password`. There should be a `data-warehouse` bucket that has a separate folder for each table you sync. 
 
 ## Setting up a MySQL source
 
