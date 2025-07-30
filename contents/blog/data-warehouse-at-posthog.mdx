@@ -1,0 +1,458 @@
+---
+title: How we use PostHog's built-in data warehouse
+date: 2025-07-30
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/blog/hog_ql.png
+featuredImageType: full
+author:
+ - ian-vanagas
+tags:
+ - data warehouse
+ - Product engineers
+crosspost:
+ - product-engineers
+---
+
+import ErrorTrackingChurn from './_snippets/error-tracking-churn.mdx'
+import CaptureExceptions from './_snippets/capture-exceptions.mdx'
+import ErrorTrackingTopCustomers from './_snippets/error-tracking-top-customers.mdx'
+import USEURevenue from './_snippets/us-eu-revenue.mdx'
+import RevenueLifecycle from './_snippets/revenue-lifecycle.mdx'
+import RevenuePerProduct from './_snippets/revenue-per-product.mdx'
+import StartupPlanCustomerCount from './_snippets/startup-plan.mdx'
+import StartupRevenuePerCustomer from './_snippets/startup-revenue-per-customer.mdx'
+import BreachedTickets from './_snippets/breached-tickets.mdx'
+import EscalatedSLA from './_snippets/escalated-sla.mdx'
+import TimeTicketsCreated from './_snippets/time-tickets-created.mdx'
+import OpportunitiesPerQuarter from './_snippets/opportunities-per-quarter.mdx'
+import PipelinePerQuarter from './_snippets/pipeline-per-quarter.mdx'
+import ManagedAccounts from './_snippets/managed-accounts.mdx'
+import StartupCohorts from './_snippets/startup-cohorts.mdx'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+PostHog's [data warehouse](/data-warehouse) is our most powerful feature. It lets you sync data from the tools you already use like [Stripe](/docs/cdp/sources/stripe), [Salesforce](/docs/cdp/sources/salesforce), and [Hubspot](/docs/cdp/sources/hubspot), query it alongside your existing product data using [SQL](/docs/data-warehouse/sql), and visualize it natively.
+
+We built it because the [modern data stack sucks](/blog/modern-data-stack-sucks). What starts as a handful of business critical tools devolves into dozens of tools, many specifically built to capture, clean, format, load, query, and visualize data.
+
+We knew it didn't have to be this way, so we built the data warehouse to get rid of all this complexity and give you a single source of truth for all your business data.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_16_at_11_04_28_2x_905d242fe0.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_16_at_11_04_02_2x_690da5bd8b.png"
+  alt="PostHog data warehouse rows synced"
+  classes="rounded"
+/>
+<Caption>We sync hundreds of millions of rows from Postgres, Stripe, Temporal, and more on top of the tens of millions of events we capture each day.</Caption>
+
+We've created **over 1,600** SQL insights and visualizations using our data warehouse so far. It's our second most-used insight type behind [trends](/docs/product-analytics/trends/overview), which was around long before we had the data warehouse.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_10_at_11_47_15_2x_9b179c988a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_10_at_11_47_58_2x_19e2267c12.png"
+  alt="PostHog SQL insights"
+  classes="rounded"
+/>
+
+To help you get started, we're sharing how teams at PostHog use our built-in data warehouse and custom SQL insights to answer critical business questions, like:
+
+- Which customers churned and how did it impact revenue?
+- Which customers are increasing their spend?
+- Who are our biggest customers and what products are they using?
+- Are we achieving our customer support goals?
+- What are the biggest sales opportunities in our pipeline?
+
+We're also sharing the actual SQL queries we use to answer these questions as well as the insights and dashboards we use to visualize the data (we've faked the data for the screenshots though).
+
+<CalloutBox icon="IconInfo" title="Modifying queries to your data" type="fyi">
+  Because our data structure is unique, the SQL queries included here likely won't work out-of-the-box for you. Luckily, <a href="/max">Max AI</a> makes modifying SQL easy. Just paste these queries in as context and ask him to use your data instead.
+</CalloutBox>
+
+## Problem #1: Understanding growth and churn
+
+- Sources: 
+  - [Postgres](/docs/cdp/sources/postgres) for billing data
+  - [PostHog](/docs/new-to-posthog/understand-posthog) for usage and activation data
+  - [Salesforce](/docs/cdp/sources/salesforce) for sales context (e.g. ICP scores)
+- Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `events`, `salesforce.contact`, `postgres.posthog_team`, `postgres.posthog_organization`, `postgres_billing_usagereport`
+
+![Growth and churn](https://res.cloudinary.com/dmukukwp6/image/upload/growth_churn_61b9f808a7.png)
+
+[Engineers make the product decisions](/newsletter/product-management-is-broken) at PostHog, but they'd be lost without the context product managers provide. 
+
+One of the ways PMs give them this context is through monthly growth reviews, where they explore:
+
+- Who churned, how much was their churn, and why (so we can prevent future churn)
+- Product-specific activation and retention rates, using [our custom definitions](/product-engineers/activation-metrics).
+- Metrics for their growth reviews, like revenue expansion and contraction.
+
+This analysis is only possible when you combine product and revenue data, so the data warehouse and SQL insights are their weapon of choice.
+
+Most companies would use our [Stripe source](/docs/cdp/sources/stripe) to import revenue data, but we don't. Since we have multiple different products with different usage-based pricing, we need a custom billing service to handle everything. The data from this service goes into Postgres, which then gets synced and used in PostHog. 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_39_25_2x_9cd97c333c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_01_at_13_40_29_2x_88ae2be58f.png"
+  alt="PostHog"
+  classes="rounded"
+/>
+
+<Caption>We import millions of rows from our billing tables in our Postgres database into PostHog.</Caption>
+
+Product managers combine this billing data from Postgres with product analytics event and property data collected by PostHog, and some additional supplementary customer info imported from Salesforce.
+
+From here they create specific SQL insights and combine them into a single dashboard like this one for error tracking:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_light_fbad414c9c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_dark_0e4274f50e.png"
+  alt="PostHog error tracking dashboard"
+  classes="rounded"
+/>
+
+It includes insights like:
+
+### Top 50 error tracking customers by volume
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_23_at_08_22_45_2x_a12460726c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_23_at_08_23_06_2x_246a482e8d.png"
+  alt="Top 50 error tracking customers by volume"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for top 50 error tracking customers by volume</summary>
+  <ErrorTrackingTopCustomers />
+</details>
+
+### Organizations regularly capturing exceptions (monthly)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/regular_d6527dba5b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/regular_dark_9def980458.png"
+  alt="Organizations regularly capturing exceptions (monthly)"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for organizations regularly capturing exceptions (monthly)</summary>
+  <CaptureExceptions />
+</details>
+
+### Error tracking churn for June
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/churn_e335f7cafa.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/churn_dark_e064750849.png"
+  alt="Error tracking churn for June"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for error tracking churn for June</summary>  
+  <ErrorTrackingChurn />
+</details>
+
+### Using views to create reusable queries
+
+Because product managers are slicing and dicing the data in multiple similar ways, they end up using a lot of [views](/docs/data-warehouse/views). These are saved queries that can be reused easily. It enables them to build a query to get the data they want in the format they want then use it to build multiple other queries. Some examples include:
+
+- `org_icp_scores`: Gets ICP scores for customers from Salesforce where they are calculated.
+- `feature_flags_activation_base`: Builds a funnel of product intent → activation → retention, all centered on [feature flags](/feature-flags) and enriched with an ICP score.
+- `source_of_truth_for_dp_pricing_model`: Data on which customers are using [pipelines](/cdp), what volume they are doing, and more to help improve our data pipeline pricing.
+
+## Problem #2: Tracking revenue
+
+- Sources: 
+  - [Postgres](/docs/cdp/sources/postgres) for billing data
+  - [Salesforce](/docs/cdp/sources/salesforce) for sales context (e.g. ICP scores)
+- Tables: `postgres_invoice_with_annual_view`, `postgres_billing_customer`, `postgres_billing_usagereport`, `salesforce_opportunity`
+
+![Revenue](https://res.cloudinary.com/dmukukwp6/image/upload/revenue_c11fd894d5.png)
+
+As I hinted at above, tracking revenue at PostHog is complicated. We have multiple products with usage-based and tiered pricing with discounts and add-ons, so we can't just query Stripe and get our revenue data. We have a specific billing service that generates invoices and reports, and adds them to Postgres.
+
+For multiple years, we used Metabase to query and visualize all this revenue data from Postgres. All of the cleanup and reformatting needed to make it usable was in there too. Moving all this to PostHog was a lot of work (it had its own project Slack channel), but we've done it now and it looks like this:
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/revdashlight_8069258cd9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/revdashdark_16d7a23dab.png"
+  alt="Revenue dashboard"
+  classes="rounded"
+/>
+
+Rebuilding (and improving) these insights required us to build views that standardize the data, connect Salesforce to better project revenue, create SQL visualizations we were missing, and more. Overall, the project was a success both in terms of making our revenue data more accessible and improving our data warehouse as a product.
+
+Our PostHog revenue dashboard now includes insights like the following (powered by the data warehouse): 
+
+### US/EU revenue split
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/revsplitlight_12dda53107.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/revdashdark_16d7a23dab.png"
+  alt="US/EU revenue split"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for US/EU revenue split</summary>
+  <USEURevenue />
+</details>
+
+### Revenue lifecycle
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revlifelight_8a4e73b8b3.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revlifedark_b88f1e5eb7.png"
+  alt="Revenue lifecycle"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for revenue lifecycle</summary>
+  <RevenueLifecycle />
+</details>
+
+### Revenue per product
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/revperprolight_5ff8e7c9a4.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/revperprodark_a97adcfe47.png"
+  alt="Revenue per product"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for revenue per product</summary>
+  <RevenuePerProduct />
+</details>
+
+## Problem #3: Creating quarterly sales and customer success reports
+
+- Sources: 
+  - [Salesforce](/docs/cdp/sources/salesforce) for sales context (e.g. ICP scores)
+  - [Postgres](/docs/cdp/sources/postgres) for billing data
+  - [Vitally](/docs/cdp/sources/vitally) for account ownership details
+- Tables: `invoice_with_annual_plans_shifted`, `vitally_all_managed_accounts`, `salesforce_opportunity`, `salesforce_user`
+
+![Sales and CS](https://res.cloudinary.com/dmukukwp6/image/upload/sales_9c2c3860b7.png)
+
+Our sales and customer success teams do reporting through PostHog. They pull from Salesforce mostly, but also billing data in Postgres and account ownership details from Vitally. These are best combined in the **Sales and CS Quarter Tracker** dashboard which covers details like:
+
+- Revenue from customers managed by sales and customer success
+- Details on managed customers
+- Salesforce opportunity pipeline and how much they're worth
+- Won opportunities and how much they're worth
+
+Some examples include:
+
+### Salesforce opportunities by quarter
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openoppslight_b77896aaa0.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openoppsdark_a2a1ba29c9.png"
+  alt="Salesforce opportunities by quarter"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Salesforce opportunities by quarter</summary>
+  <OpportunitiesPerQuarter />
+</details>
+
+### Salesforce open pipeline by quarter (annual only)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openpipelight_4839830a14.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/openpipedark_c08527c47d.png"
+  alt="Salesforce open pipeline by quarter (annual only)"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Salesforce open pipeline by quarter (annual only)</summary>
+  <PipelinePerQuarter />
+
+</details>
+
+### Sales and CS managed accounts start of quarter ARR
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/salesarrlight_8fe5d4b706.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/salesarrdark_ad2b0cfc92.png"
+  alt="Sales and CS managed accounts start of quarter ARR"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Sales and CS managed accounts start of quarter ARR</summary>
+  <ManagedAccounts />
+</details>
+
+### Using variables
+
+The sales dashboard is the best example of the power of [variables](/docs/data-warehouse/sql/variables). Nearly every insight uses variables to set the account owner, quarter, and whether they are managed by sales or customer success. 
+
+This makes all of the insights much more reusable by being able to reuse them across quarters or for looking at individual performance. 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_09_at_13_52_43_2x_d99d5c2158.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_09_at_13_52_20_2x_a3d79b8b95.png"
+  alt="PostHog"
+  classes="rounded"
+/>
+
+<Caption>We use variables for the account owner, quarter, and whether an account is managed by sales or customer success to make our sales and CS dashboard more reusable.</Caption>
+
+## Problem #4: Creating support reports (SLA, first response time, and more) 
+
+- Sources: 
+  - [Zendesk](/docs/cdp/sources/zendesk) for ticket data
+- Tables: `zendesk_ticket_events`, `zendesk_tickets`, `zendesk_ticket_metric_events`, `zendesk_groups`
+
+![Support](https://res.cloudinary.com/dmukukwp6/image/upload/support_26663efc71.png)
+
+We have high standards for our support experience. Where do those standards get judged? The data warehouse, of course. 
+
+Similar to the sales and customer success teams, support does reporting through PostHog. It used to all be done in Zendesk, but since we added the Zendesk source, doing it in PostHog has become easier and better. 
+
+Unlike other teams, support almost always uses exclusively Zendesk. This means less complicated queries and more opportunities to use trend insights on top of SQL insights. 
+
+For example, our **SLA Achievement Rate** insight looks at the `ticket_metrics_events` table from `zendesk` to find what percentage of tickets were replied to or updated within the [SLA goals we set out](/handbook/support/customer-support#response-targets-slas-and-csat-surveys) (no SQL required).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_09_at_10_31_29_2x_5928b4166b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_09_at_10_31_48_2x_73f756a1b4.png"
+  alt="PostHog"
+  classes="rounded"
+/>
+
+<Caption>The support dashboard uses the standard trend insight type and formula mode to calculate our SLA achievement rate.</Caption>
+
+Beyond this, they use both insight types to track:
+
+- Service-level agreement (SLA) and first response time goals.
+- Performance and breaches on escalated tickets.
+- Support load on our product teams.
+- Sources of support requests.
+
+This data is combined with [CSAT surveys](/templates/csat-survey) (both scores and responses) to give a complete picture of the support we're providing at PostHog. <TeamMember name="Abigail Richardson" photo /> writes up a summary based on this data and shares it with the exec team weekly. 
+
+![Support report](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_14_at_10_27_19_2x_5d1fdd9ef1.png)
+
+<Caption>Abigail's message to the exec team.</Caption>
+
+Some examples of insights on the support dashboard include:
+
+### Breached non-escalated tickets in the last 7 days
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/breachedlight_23c730c12b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/breacheddark_104fcc4665.png"
+  alt="Breached non-escalated tickets in the last 7 days"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Breached non-escalated tickets in the last 7 days</summary>
+  <BreachedTickets />
+</details>
+
+### Escalated SLA % last 7 days by team
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_09_01_2x_ef1b32d6ed.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_08_44_2x_005d521ba7.png"
+  alt="Escalated SLA % last 7 days by team"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for Escalated SLA % last 7 days by team</summary>
+  <EscalatedSLA />
+</details>
+
+### Time UTC when tickets are created (last 6 months)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_10_28_2x_ca4c7edfb5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_07_30_at_13_10_45_2x_f14f728d22.png"
+  alt="Time UTC when tickets are created (last 6 months)"
+  classes="rounded"
+/>
+
+<details>
+  <summary>Time UTC when tickets are created (last 6 months)</summary>
+  <TimeTicketsCreated />
+</details>
+
+## Problem #5: Tracking startup and YC plan growth, costs, and ROI
+
+- Sources: 
+  - [Stripe](/docs/cdp/sources/stripe) for startup plan customer data
+  - [Postgres](/docs/cdp/sources/postgres) for billing data
+- Tables: `stripe_customer`, `stripe_invoice`, `postgres_billing_usagereport`, `postgres_billing_customer`
+
+![Startup and YC](https://res.cloudinary.com/dmukukwp6/image/upload/startup_yc_375b27d761.png)
+
+Each quarter, hundreds of startups sign up for our [startup plan](/startups) (which gives them $50k in free credits), dozens more sign up to our upgraded [YC plan](/handbook/brand/startups#posthog-for-y-combinator). To make sure it is going well, we have a dashboard with details like:
+
+1. The number of organizations on the startup plan
+2. The cost of the startup plan for us based on credit usage.
+3. The count of startups who “graduate” and pay us money as well as how much money they pay us. 
+
+Unlike the revenue, churn, and growth data, we actually do use Stripe for this. We have metadata on Stripe customers saying if they are a startup plan customer and what type of startup plan they are on. This helps us get the customer count as well as the “graduate” details. We can then combine the Stripe data with our billing data in Postgres to get the cost of the startup plan for us based on credit usage.
+
+This is all put together in a **Startup and YC Plan** dashboard with insights like these:
+
+### Startup plan customer count (not YC)
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startupcountlight_9c333baa95.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/startupcountdark_d5d8ffcd16.png"
+  alt="Startup plan customer count (not YC)"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for startup plan customer count (not YC)</summary>
+  <StartupPlanCustomerCount />
+</details>
+
+### Previous startup & YC plan customers revenue per customer
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revlight_1f9edaea10.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/revdark_8dce9d49b0.png"
+  alt="Previous startup & YC plan customers revenue per customer"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for previous startup & YC plan customers revenue per customer</summary>
+  <StartupRevenuePerCustomer />
+</details>
+
+### Startup & YC plan customers cohorts by starting month
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cohortlight_72b7521357.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cohortdark_4b46c8b336.png"
+  alt="Startup & YC plan customers cohorts by starting month"
+  classes="rounded"
+/>
+
+<details>
+  <summary>SQL query for startup & YC plan customers cohorts by starting month</summary>
+  <StartupCohorts />
+</details>
+
+## How should you get started?
+
+Feeling inspired? Here's how you can get started:
+
+1. Start by [linking a source](/docs/cdp/sources) from a tool you already use.
+2. Go to the [SQL editor](https://us.posthog.com/sql) and start by writing a basic query like `select * from events limit 10`.
+3. Layer more complexity, like filtering, [aggregating](/docs/data-warehouse/sql/useful-functions#aggregate-functions), and [joining](/docs/data-warehouse/join) data. Use [Max AI](/max) to help you with this.
+4. Use our [SQL visualizations](/docs/data-warehouse/query#sql-visualizations) to see your data in a new way.
+5. Build a dashboard of related insights and share them with your team.

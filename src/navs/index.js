@@ -824,6 +824,10 @@ export const handbookSidebar = [
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
                     },
+                    {
+                        name: 'Working with data warehouse',
+                        url: '/handbook/engineering/data-warehouse',
+                    },
                 ],
             },
             {
@@ -1302,10 +1306,6 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/onboarding-team',
                     },
                     {
-                        name: 'New starter onboarding',
-                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
-                    },
-                    {
                         name: 'Saying hi to your customers',
                         url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
                     },
@@ -1314,12 +1314,20 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
                     },
                     {
-                        name: 'How we work',
-                        url: '/handbook/cs-and-onboarding/how-we-work',
+                        name: "Template for onboarding success plan",
+                        url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                     {
-                        name: 'Template for onboarding success plan',
-                        url: '/handbook/cs-and-onboarding/onboarding-success-plan',
+                        name: "Renewals",
+                        url: '/handbook/cs-and-onboarding/renewals',
+                    },
+                    {
+                        name: 'New starter onboarding',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                    },
+                    {
+                        name: 'How we work',
+                        url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                 ],
             },
@@ -2921,6 +2929,10 @@ export const docsMenu = {
                         {
                             name: 'Formulas',
                             url: '/docs/product-analytics/trends/formulas',
+                        },
+                        {
+                            name: 'Statistical analysis',
+                            url: '/docs/product-analytics/trends/statistical-analysis',
                         },
                         {
                             name: 'Tips',
