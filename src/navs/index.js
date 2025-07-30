@@ -824,6 +824,10 @@ export const handbookSidebar = [
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
                     },
+                    {
+                        name: 'Working with data warehouse',
+                        url: '/handbook/engineering/data-warehouse',
+                    },
                 ],
             },
             {
