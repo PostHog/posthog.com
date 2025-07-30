@@ -15,6 +15,9 @@ assignees:
 > - Assign / tag Lottie, so she knows about it + and add your issue to the Art & Branding project board.
 > - If your request is genuinely urgent, please share in #website-and-vibes channel and mention Lottie and/or Cory.
 
+## Assignee
+@lottiecoxon & [ADD DANIEL'S GITHUB HANDLE HERE]
+
 ## Outline
 _Explain what you need_
 
