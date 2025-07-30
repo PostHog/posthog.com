@@ -279,7 +279,8 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         <div className="border border-input rounded-md p-4 h-[400px] overflow-auto">
             {!rootDirectory ? (
                 <div className="flex flex-col items-center justify-center h-full">
-                    <p className="text-sm text-secondary mb-4">Select a folder to browse local files</p>
+                    <p className="text-sm text-secondary mb-1">Select a folder to browse local files</p>
+                    <p className="text-xs text-muted mb-4">(Only works in supported browsers)</p>
                     <button
                         onClick={openDirectory}
                         className="px-4 py-2 bg-accent rounded hover:bg-opacity-70 transition-colors text-sm"
@@ -346,15 +347,13 @@ export default function MediaUploadModal() {
                 <div className="grid grid-cols-2 gap-4">
                     <div className="flex flex-col">
                         <h3 className="m-0">Local files</h3>
-                        <p className="text-sm text-secondary mt-1 mb-4">
-                            Click files to upload or drag to the drop zone
-                        </p>
+                        <p className="text-sm text-secondary mt-1 mb-4">Click a filename to upload instantly</p>
                         <FileExplorer onFileDrop={onDrop} />
                     </div>
 
                     <div className="flex flex-col">
                         <h3 className="m-0">Upload media</h3>
-                        <p className="text-sm text-secondary mt-1 mb-4">Drag files here or use the file explorer</p>
+                        <p className="text-sm text-secondary mt-1 mb-4">Or drag files here</p>
                         <div
                             {...getRootProps()}
                             data-scheme="secondary"
@@ -372,7 +371,7 @@ export default function MediaUploadModal() {
                                     {isDragActive ? 'Drop files here' : 'Drop files to upload'}
                                 </p>
                                 <p className="text-sm text-secondary text-center mt-2 m-0">
-                                    PNG, JPG, WEBP, GIF, MP4, MOV
+                                    PNG, JPG, WEBP, GIF, MP4, MOV, PDF, SVG, ABC, XYZ
                                 </p>
                             </div>
                             <input {...getInputProps()} />
