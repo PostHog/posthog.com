@@ -13,7 +13,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 > If you're just looking for instructions to upgrade to `6.x`, skip directly to the [migration guide](#migrating-from-v5-to-v6).
 
-Version `6.x` of the PostHog Python SDK introduces a new `context()` API for scope-based state sharing across captures along with a series of breaking changes. This guide walks through changes introduced and how to migrate from `5.x` to `6.x`.
+Version `6.x` of the PostHog Python SDK introduces a new [`context()`](/docs/libraries/python#contexts) API for scope-based state sharing across captures along with a series of breaking changes. This guide walks through changes introduced and how to migrate from `5.x` to `6.x`.
 
 ## Overview
 
@@ -21,13 +21,13 @@ Here are the major changes from `5.x` to `6.x`:
 
 | Type | Summary |
 |------|--------|
-| **New** | Scoped contexts for state management across event captures |
-| **New** | Django contexts middleware wraps all requests in a context, extracts user and session information from headers automatically |
+| **New** | [Scoped contexts](#new-feature-contexts) for state management across event captures |
+| **New** | [Django contexts middleware](/docs/libraries/django#django-contexts-middleware) wraps all requests in a context, extracts user and session information from headers automatically |
 | **Breaking** | The `identify()` method is deprecated in favor of contexts |
 | **Breaking** | Deprecated `page()` and `screen()` methods. Prefer use of `capture()` on the backend or capturing page/screen view events on the client-end |
 | **Breaking** | Order of arguments updated for capture-related methods. You must update calls to use kwargs before upgrading |
 | **Breaking** | Capture methods now return the UUID of the captured event, rather than the full event object |
-| **Breaking** | Deletes unmaintained exception-capture integrations, which is replaced by the general purpose Django middleware |
+| **Breaking** | Deletes unmaintained exception capture integrations, which is replaced by the general purpose Django middleware |
 
 <CalloutBox icon="IconInfo" title="Upgrade best practices">
 
@@ -39,7 +39,7 @@ You should always pin versions using the [compatible release clause](https://pac
 
 Version `6.x` introduces contexts. Events captured under the same context scope will share properties set on the context. This can be used to identify who, where, and when an event is triggered.
 
-This is very convenient for server-side use cases like Django or Flask. Unlike client-side SDKs where all events captured are under the same identity and context, server SDKs might manage **multiple identities and contexts** simutaneously.
+This is very convenient for server-side use cases like [Django](/docs/libraries/django#django-contexts-middleware) apps, where each request might be handled for a different user. 
 
 ```python
 from posthog import new_context, tag, set_context_session, identify_context
@@ -71,24 +71,22 @@ def handle_order(request):
     return HttpResponse("Hello, World!")
 
 def validate_order():
-    # ... logic
     tag("order_steps", ["validate_order"])
     process_payment()
 
 def process_payment():
-    # ... logic
     tag("order_steps", [*get_tags()["order_steps"], "process_payment"])
     update_inventory()
 
 def update_inventory():
-    # ... logic
     tag("order_steps", [*get_tags()["order_steps"], "update_inventory"])
-    capture("order_completed") // HIGHLIGHT
+    capture("order_completed")
 ```
 
-When capture is finally called, the `third_function_called` event will have a custom event property called `methods_called` with the value `["first_function","second_function","third_function"]`.
+When `capture` is finally called, the `order_completed` event will have a custom event property called `order_steps` with a list of values `"validate_order"`, `"process_payment"`, and `"update_inventory"`.
 
-Contexts can be nested. This means:
+Contexts can also be nested. This means that:
+
 - Parent context values are shared with child contexts. 
 - Child contexts can override parent context value within the child context's scope.
 - When a child context exits, the overriden parent context is restored.
@@ -112,7 +110,7 @@ Learn more about contexts in the [Python SDK docs](/docs/libraries/python#contex
 
 ## New: Django contexts middleware
 
-The new contexts middleware for Django wraps every request in a context. The context will automatically capture the following information:
+The new [contexts middleware for Django](/docs/libraries/django#django-contexts-middleware) wraps every request in a context. The context will automatically capture the following information:
 
 | Property | Source |
 | --- | --- |
@@ -127,9 +125,9 @@ This middleware will also automatically capture exceptions. You can learn more a
 
 ## Breaking change: identification
 
-The `identify()` method is now removed from the Python SDK. On client SDKs, `identify()` declares which user is using the device. This pattern doesn't apply to server SDKs, where each request handled could belong to a different user.
+The `identify()` method no longer exists in the Python SDK. On client SDKs, `identify()` declares which user is using the device. This pattern doesn't apply to server SDKs, where each request handled could belong to a different user.
 
-The preferred way to identify events in `6.x` is to use contexts. For example, when handling requests from the client, you can parse the distinct ID and session ID from the incoming request and set this information on a context.
+The preferred way to identify events in `6.x` is to use contexts. For example, when handling requests from the client, you can parse the [distinct ID](/docs/data/persons) and [session ID](/docs/data/sessions) from the incoming request and set this information on a context.
 
 ```python
 # Using contexts
@@ -179,7 +177,7 @@ You can still capture events with an explicit `distinct_id` like before, but it 
 # You can also capture events with a specific distinct_id
 posthog.capture('some-custom-action', distinct_id='distinct_id_of_the_user')
 ```
-Capture methods also now return the event UUID instead of the full event object.
+Capture methods also now return the event UUID instead of the full event object. You can find the exact function signature in the [Python SDK reference](/docs/references/posthog-python#capture).
 
 ## Breaking change: Django error tracking integration
 
@@ -196,7 +194,7 @@ This is deprecated and no longer necessary in `6.x`, instead, the general purpos
 
 ## Migrating from V5 to V6
 
-If you're planning to upgrade from `5.x` to `6.x` of the Python SDK, here are the changes you need to make to complete the migration.
+If you're planning to upgrade from `5.x` to `6.x` of the Python SDK, here are the changes you need to make to complete the migration. You can do this by installing `"posthog~=6.0.0"` using your package manager of choice.
 
 ### 1. Replace `identify()` calls
 
@@ -268,6 +266,8 @@ capture('$pageview',
 
 ### 3. Update `capture()` and `capture_exception()` calls
 
+The `capture()` and `capture_exception()` methods now take keyword arguments instead of positional arguments. The distinct ID is now optional.
+
 **Before:**
 
 ```python
@@ -288,6 +288,8 @@ posthog.capture(distinct_id="user123", event="button_clicked", properties={"butt
 ```
 
 ### 4. Replace the Django error handling integration
+
+The `exception_capture` module is removed. Instead, use the [context middleware](/docs/libraries/django#django-contexts-middleware) to capture exceptions.
 
 **Before:**
 
@@ -314,3 +316,11 @@ POSTHOG_MW_CAPTURE_EXCEPTIONS = True
 ### 5. Adopt contexts
 
 Contexts are new. While they're not a breaking change, we recommend that you adopt the contexts pattern for easier management of state between captured events. See the [context docs](docs/libraries/python) to learn more.
+
+## Further reading
+
+- [Python SDK docs](/docs/libraries/python)
+- [Full Python SDK reference](/docs/references/posthog-python)
+- [Django contexts middleware docs](/docs/libraries/django#django-contexts-middleware)
+- [Contexts docs](/docs/libraries/python#contexts)
+- [Identification](/docs/product-analytics/identify)
