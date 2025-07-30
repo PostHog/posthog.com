@@ -8,17 +8,17 @@ tags:
  - data pipelines
 ---
 
-Customer data platform (CDP) vs data warehouse is sort of like Batman vs Superman for people who know what SQL is. They are seen as rivals and rely on different tools but often end up working together.
+Customer data platform (CDP) vs data warehouse is sort of like Batman vs Superman for people who know SQL. They are seen as rivals and rely on different tools but often end up working together.
 
-There are dozens of articles trying to convince you one or the other is the “right” choice, but, in reality, both (or neither) might be right for you. This article aims to help you understand what each does and decide whether a CDP and/or data warehouse is right for you.
+There are dozens of articles trying to convince you one or the other is the "right" choice, but, in reality, both (or neither) might be right for you. This article will help you understand what they do and decide whether a CDP and/or data warehouse is right for you.
 
-## What is a CDP (customer data platform)?
+## What is a CDP?
 
-The biggest challenge with defining a customer data platform is its name. Even by data stack standards, it’s vague and doesn’t actually explain any of the underlying functionality. 
+Even by modern data stack standards, the name "customer data platform" is frustratingly vague – it doesn’t actually explain any of the underlying functionality. 
 
-A CDP basically does three things:
+In a nutshell, a CDP does three things:
 
-1. Ingests data from many different touchpoints (AKA sources) like your website, app, ads, analytics, email, helpdesk, and more.
+1. Ingests data from many different sources / touchpoints, like your website, app, ads, analytics, email, helpdesk, and more.
 2. Creates and stores a combined customer profile based on all these sources. Data scattered between platforms gets aggregated in one place.
 3. Sends customer data to destinations like ad platforms, CRMs, and more.
 
@@ -30,9 +30,9 @@ Teams need this because they:
 - Want a single source of truth for their “customer record”
 - Need a combined customer record for tracking and improving ad campaigns, personalization, lifecycle marketing, and more.
 
-Key to making this happen is a CDP’s ability to do identity resolution (AKA figuring out what data belongs to whom). 
+A CDP’s ability to do identity resolution (i.e. figuring out what data belongs to whom) is key here.
 
-For example, if a customer visits your website, signs up for your mobile app, and sends you an email, these three touchpoints could be treated as three separate customers. A CDP stitches these together into one customer by using persistent identifiers, relying on deterministic data (like IDs and emails), and even using probabilistic data (like IP address, device type, browser, and OS).
+For example, if a customer visits your website, signs up for your mobile app, and sends you an email, these three touchpoints could be treated as three separate customers. A CDP stitches these together into one customer by using persistent identifiers, relying on deterministic data (e.g. IDs and emails), and even using probabilistic data (e.g. IP address, device type, browser, and OS).
 
 Creating unified records for all your customers makes your data much more accurate and actionable.
 
@@ -45,13 +45,13 @@ Creating unified records for all your customers makes your data much more accura
 
 ## What is a data warehouse?
 
-Simply, a data warehouse is a flexible way to: 
+A data warehouse is a flexible way to: 
 
 1. Store a variety of data 
 2. Keep it for an extended period of time 
 3. Support business decision-making. 
 
-This could include customer data (like the CDP), but also employee records, AI training data, transactions, references, and anything else you can think of. Data warehouses are like your production database but built to store more data, both volume and variety (typically structured, but also unstructured and semi-structured) for longer.
+This could include customer data (like the CDP), but also employee records, AI training data, transactions, references, and anything else you can think of. Data warehouses are like your production database, but built to store greater volumes of structured, and (sometimes) unstructured data, for longer.
 
 It does this by having a significantly different structure from traditional databases, usually made up of three parts:
 
@@ -61,7 +61,7 @@ It does this by having a significantly different structure from traditional data
 
 ![What is a data warehouse?](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_23_at_11_14_49_2x_a4e6e96f54.png)
 
-Once you’ve extracted data from the data warehouse, you usually rely on other tools to make use of it. For example, you can use business intelligence tools for visualization or CDPs with reverse ETL functionality for activation.
+Once you’ve extracted data from the data warehouse, you usually rely on other tools to make use of it, such as  business intelligence tools for visualization or CDPs with reverse ETL functionality for activation.
 
 ### What are some data warehouse use cases?
 
@@ -90,15 +90,15 @@ Once you’ve extracted data from the data warehouse, you usually rely on other 
 
 ## Which should you choose?
 
-Unlike many comparisons, CDP vs data warehouse is less one or the other, and more about the company stage you are at. If I had to graph the importance of each over time, it would look like this:
+Actually, you will need both eventually – it's more about when you should adopt them. If I had to graph the importance of each over time, it would look like this:
 
 ![Graph of the importance of a CDP and data warehouse over time](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_22_at_09_22_17_2x_83e5a95ddf.png)
 
-Early stage companies likely won’t find a data warehouse useful, but a CDP quickly provides significant help collecting and activating customer data to power early marketing efforts. 
+Early-stage companies likely won’t find a data warehouse useful, but a CDP quickly provides significant help collecting and activating customer data to power early marketing efforts. 
 
 As companies mature, their reporting and analysis requirements grow and increase in complexity. Doing reporting in each individual tool doesn’t cut it anymore. Having consolidated data becomes more important, and so does the data warehouse.
 
-This doesn’t mean abandoning your CDP though. Teams can continue using the CDP to send data to the data warehouse. This means they don’t need to rearchitect their data stack to start using a data warehouse. They can just add the data warehouse as a source.
+This doesn’t mean abandoning your CDP, though. Teams can continue using the CDP to send data to the data warehouse. This means they don’t need to rearchitect their data stack to start using a data warehouse. They can just add the data warehouse as a source.
 
 This creates a stack that looks like this:
 
