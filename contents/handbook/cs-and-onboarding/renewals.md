@@ -12,7 +12,9 @@ When estimating renewal amount, we want to make sure we accurately determine the
 This page walks through recommendations for approaching and handling renewals. [Contract rules](/handbook/growth/sales/contract-rules) and [how to create contracts](/handbook/growth/sales/contracts) are covered in relevant pages under our shared processes. 
 
 ## When to start
-Start renewal conversations 2 months before the contract renewal date. Vitally and Slack will keep you on track with automated reminders. When a customer hits the 2-month mark, they'll automatically enter the `Upcoming renewal` segment, you'll get a task assigned to you in Vitally, and Slack will send a notification.
+Start renewal conversations at least 2 months before the contract renewal date for customers you are already in frequent contact with. For customers who are quiet, start renewal discussions 3 months out to allow more time for re-engagement.
+
+Vitally and Slack will keep you on track with automated reminders. When a customer hits the 2-month mark, they'll automatically enter the `Upcoming renewal` segment, you'll get a task assigned to you in Vitally, and Slack will send a notification.
 
 Start by sending a message in the shared Slack channel. Things will change in a year – the person you worked with previously may not be the right person this time. Mention when the customer is set to renew and ask if they have any preferred next steps.
 
