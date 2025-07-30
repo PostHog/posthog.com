@@ -139,6 +139,7 @@ The preferred way to identify events in `6.x` is to use contexts. For example, w
 ```python
 # Using contexts
 from posthog import new_context, identify_context, set_context_session
+from posthog.contexts import scoped
 
 @scoped(fresh=True)
 def handle_request(request):
