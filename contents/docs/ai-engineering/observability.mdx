@@ -42,6 +42,7 @@ The rest of the setup depends on the LLM platform you're using. These SDKs _do n
 import Tab from "components/Tab"
 import OpenAIInstall from "./_snippets/openai.mdx"
 import AnthropicInstall from "./_snippets/anthropic.mdx"
+import GoogleInstall from "./_snippets/google.mdx"
 import LangChainInstall from "./_snippets/langchain.mdx"
 import VercelAISDKInstall from "./_snippets/vercelai.mdx"
 
@@ -59,6 +60,9 @@ import VercelAISDKInstall from "./_snippets/vercelai.mdx"
         </Tab.Panel>
         <Tab.Panel>
             <AnthropicInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoogleInstall />
         </Tab.Panel>
         <Tab.Panel>
             <LangChainInstall />
@@ -123,6 +127,14 @@ const completion = await openai.chat.completions.create({
 response = client.messages.create(
     model="claude-3-opus-20240229",
     messages=[...],
+    posthog_privacy_mode=True
+)
+```
+
+```python file=Google
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents="...",
     posthog_privacy_mode=True
 )
 ```
