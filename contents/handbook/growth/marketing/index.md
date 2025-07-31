@@ -6,14 +6,27 @@ showTitle: true
 
 ## How marketing works
 
-Marketing at PostHog is a collaborative effort dispersed across four teams:
+There is no marketing team at PostHog. Instead, marketing at PostHog is a collaborative effort dispersed across two teams, though this will likely grow in the future:
 
-- **Content & Docs:** Responsible for content marketing, SEO, and maintaining documentation.
-- **Comms:** Responsible for product marketing, artwork, events, special programs, cross-sell and email marketing.
-- **Video:** Responsible for video ideation, production, editing, and publishing.
-- **Website & Vibes:** Responsible for website design, community, and backend.
+- **Content:**
+  - Content marketing
+  - SEO and LLM brand visibility
+  - Newsletters
+  - Social content
+  - Maintaining and improving documentation
+  - Video production
 
-See [Marketing ownership](/handbook/growth/marketing/ownership) for more.
+- **Brand & Vibes:**
+  - Product marketing
+  - Artwork and graphic design
+  - Events 
+  - Special programs (PostHog for Startups)
+  - Cross-sell and email marketing
+  - Website
+  - Billboards
+  - Vibes (because they insist)
+
+See [Who can help me?](/handbook/growth/marketing/ownership) for more on who to talk to.
 
 ## Marketing values
 
@@ -23,7 +36,7 @@ See [Marketing ownership](/handbook/growth/marketing/ownership) for more.
 
 ### 1. Be opinionated
 
-PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. 
+PostHog was created because we believed that product analytics was broken, and we had a vision of how it could be much better. We're more than just product analytics now, but the principles are the same.
 
 We need to reflect this vision in our marketing and content, and not dilute it with boring corporate-speak. When we write content, we take a firm stance on what we believe is right. We would rather have 50% of people love us and 50% hate us than 80% mildly agree with us. 
  
@@ -35,7 +48,9 @@ It's ok to have a sense of humor. We are more likely to die because we are forge
 
 ### 2. Pull, don't push
 
-_We focus on word of mouth by default._ We believe customers will judge us first and foremost on our product (i.e. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
+_We focus on word of mouth by default._ 
+
+We believe customers will judge us first and foremost on our product (i.e. our app, our website, and our docs). We won’t set ourselves up for long-term success if we push customers into using us. 
  
 If a customer doesn't choose PostHog, that means either:
  
@@ -43,9 +58,9 @@ If a customer doesn't choose PostHog, that means either:
 2. The product isn't the right solution for them
 3. We didn't communicate the product and its benefits well enough
  
-We don't believe companies will be long-term customers of a competitor because they did a better job of spamming them with generic content. We know this because we frequently have customers switching from a competitor to us – they are not afraid to do this.
+We don't believe companies will be long-term customers of a competitor because they did a better job of spamming them with generic marketing. We know this because we frequently have customers switching from a competitor to us – they are not afraid to do this.
  
-Tackling (1) is the responsibility of everyone at PostHog. The marketing team's specific job is to avoid spending time advertising to people in group (2), and making sure we do a great job avoiding (3). 
+Tackling (1) is the responsibility of everyone at PostHog. The job of marketing teams is to avoid spending time advertising to people in group (2), and making sure we do a great job avoiding (3). 
 
 This means:
  
@@ -55,7 +70,7 @@ This means:
 
 ### 3. No sneaky shit
 
-Our [target users](/handbook/growth/marketing/customer-personas) are technical and acutely aware of the tedious, clickbaity, hyperbolic marketing tactics that software companies use to try and entice them. Stop. It's patronizing to them and the marketing people creating the content. 
+Our [ideal customers](/handbook/who-we-are-building-for) are technical and acutely aware of the tedious, clickbaity, hyperbolic marketing tactics that software companies use to try and entice them. Stop. It's patronizing to them and the marketing people creating the content. 
  
 For these reasons, we:
  
@@ -91,6 +106,8 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
  
 ### Things we want to be good at
 
+- **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
+
 - **Social media:** Specifically Twitter, where we've seen good traction posting on [James' personal account](https://x.com/james406) and the PostHog brand account. We do a minimal amount of posting on PostHog's LinkedIn account to keep it active, but it's not an important channel for us. We don't use any other social media channels. 
 
 - **Paid ads:** We run a lot of paid ads on Google and others. It is fuel for everything else we are doing. We want to be good at this, but do it in a way unique to PostHog. We're not throwing everything at the wall and seeing what sticks. We have a minimum brand bar we need to hit.
@@ -104,8 +121,6 @@ Beyond PostHog's company [mission and strategy](/handbook/why-does-posthog-exist
 - **Doing sales without salespeople:** Rather than care a lot about "capturing every lead" or "marketing qualified leads," we'd rather work with sales to create content that helps potential customers, ideally without a salesperson.
 
 ### Things we might want to be good at but haven't tested yet
-
-- **Events:** We have been involved in some events, but we are still figuring out "the PostHog way" to do them. We don't just want to be a name on the sponsor list. We want to create superfans. 
 
 - **Broader partnerships:** PostHog is a complement to a bunch of types of companies, from vibe coding tools to infrastructure platforms. Our data warehouse and CDP are built to enable integrations. How can we leverage this?
 
