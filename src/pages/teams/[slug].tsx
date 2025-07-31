@@ -1,10 +1,12 @@
 import Team from 'components/Team'
 import { companyMenu } from '../../navs'
-import React from 'react'
-import { graphql, navigate, useStaticQuery } from 'gatsby'
-import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
+import React, { useState, useRef } from 'react'
+import { graphql, useStaticQuery } from 'gatsby'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
+import { useUser } from 'hooks/useUser'
+import { IconPencil } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 
 type TeamPageProps = {
     params: {
@@ -14,6 +16,12 @@ type TeamPageProps = {
 
 export default function TeamPage(props: TeamPageProps) {
     const { slug } = props?.params || {}
+    const [editing, setEditing] = useState(false)
+    const [saving, setSaving] = useState(false)
+    const { user } = useUser()
+    const isModerator = user?.role?.type === 'moderator'
+    const onSaveRef = useRef<(() => void) | null>(null)
+
     const data = useStaticQuery(graphql`
         {
             allTeams: allMdx(filter: { fields: { slug: { regex: "/^/teams/[^/]+$/" } } }) {
@@ -79,34 +87,50 @@ export default function TeamPage(props: TeamPageProps) {
             }
         }
     `)
-    const body = data?.allTeams?.nodes?.find((node) => node?.fields?.slug === `/teams/${slug}`)?.body
+    const body = data?.allTeams?.nodes?.find((node: any) => node?.fields?.slug === `/teams/${slug}`)?.body
     const objectives = data?.allObjectives?.nodes?.find(
-        (node) => node?.fields?.slug === `/teams/${slug}/objectives`
+        (node: any) => node?.fields?.slug === `/teams/${slug}/objectives`
     )?.body
-    const team = data?.allSqueakTeam?.nodes?.find((node) => node?.slug === slug)
+    const team = data?.allSqueakTeam?.nodes?.find((node: any) => node?.slug === slug)
 
-    const navigate = useNavigate()
-    const location = useLocation()
-    const currentPath = location.pathname.replace('/', '')
+    // These variables are defined but not used in this component
+    // const navigate = useNavigate()
+    // const location = useLocation()
+    // const currentPath = location.pathname.replace('/', '')
 
-    const selectOptions = [
-        {
-            label: 'Company',
-            items: [
-                { value: 'company', label: 'Company', icon: companyMenu.icon },
-                ...companyMenu.children.map((item) => ({
-                    value: item.url?.replace('/', '') || item.name.toLowerCase(),
-                    label: item.name,
-                    icon: item.icon,
-                    color: item.color || undefined,
-                })),
-            ],
-        },
-    ]
+    const handleSave = async () => {
+        // Call the save function from Team component
+        if (onSaveRef.current) {
+            onSaveRef.current()
+        }
+    }
+
+    const handleCancel = () => {
+        // The Team component will handle the actual cancel logic
+        setEditing(false)
+    }
+
+    const editButton = isModerator ? (
+        <>{!editing && <OSButton size="md" icon={<IconPencil />} onClick={() => setEditing(true)} />}</>
+    ) : null
+
+    const editActions =
+        editing && isModerator ? (
+            <>
+                <OSButton size="md" variant="secondary" onClick={handleCancel}>
+                    Cancel
+                </OSButton>
+                <OSButton size="md" variant="primary" onClick={handleSave} disabled={saving}>
+                    Save
+                </OSButton>
+            </>
+        ) : null
 
     return (
         <ReaderView
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+            rightActionButtons={editing ? editActions : editButton}
+            isEditing={editing}
         >
             {body && (
                 <Team
@@ -115,6 +139,11 @@ export default function TeamPage(props: TeamPageProps) {
                     objectives={objectives}
                     body={body}
                     slug={slug?.split('/').pop() || ''}
+                    editing={editing}
+                    setEditing={setEditing}
+                    saving={saving}
+                    setSaving={setSaving}
+                    onSaveRef={onSaveRef}
                 />
             )}
         </ReaderView>

@@ -60,6 +60,8 @@ interface ReaderViewProps {
     proseSize?: 'sm' | 'base' | 'lg'
     homeURL?: string
     description?: string
+    rightActionButtons?: React.ReactNode
+    isEditing?: boolean
 }
 
 interface BackgroundImageOption {
@@ -311,6 +313,8 @@ export default function ReaderView({
     proseSize = 'sm',
     homeURL,
     description,
+    rightActionButtons,
+    isEditing,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -328,6 +332,8 @@ export default function ReaderView({
                 proseSize={proseSize}
                 homeURL={homeURL}
                 description={description}
+                rightActionButtons={rightActionButtons}
+                isEditing={isEditing}
             >
                 {children}
             </ReaderViewContent>
@@ -424,6 +430,8 @@ function ReaderViewContent({
     proseSize,
     homeURL,
     description,
+    rightActionButtons,
+    isEditing,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -511,6 +519,8 @@ function ReaderViewContent({
                         title,
                         description,
                     }}
+                    rightActionButtons={rightActionButtons}
+                    isEditing={isEditing}
                 />
                 {/* Second row - Main Content */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">

@@ -1,22 +1,21 @@
-import { CallToAction } from 'components/CallToAction'
 import { PineappleText } from 'components/Job/Sidebar'
 import { InProgress } from 'components/Roadmap/InProgress'
 import { Question } from 'components/Squeak'
 import useTeamUpdates from 'hooks/useTeamUpdates'
 import { graphql, navigate, useStaticQuery } from 'gatsby'
 import { kebabCase } from 'lib/utils'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import Tooltip from 'components/Tooltip'
+import Tooltip from 'components/RadixUI/Tooltip'
 import SEO from 'components/seo'
 import SideModal from 'components/Modal/SideModal'
 import { TeamMember } from 'components/People'
 import TeamMemberComponent, { FutureTeamMember } from 'components/TeamMember'
 import { AddTeamMember } from 'components/TeamMembers'
 import useTeam from 'hooks/useTeam'
-import { IconInfo, IconSpinner, IconX, IconCrown, IconPlus } from '@posthog/icons'
+import { IconInfo, IconX, IconCrown, IconPlus } from '@posthog/icons'
 import { useUser } from 'hooks/useUser'
 import { useFormik } from 'formik'
 import TeamUpdate from 'components/TeamUpdate'
@@ -43,6 +42,7 @@ import {
     StickerPineapple,
 } from 'components/Stickers/Index'
 import ZoomHover from 'components/ZoomHover'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const hedgehogImageWidth = 30
 const hedgehogLengthInches = 7
@@ -113,8 +113,8 @@ const SidebarSection = ({
             <h5 className="m-0 text-[15px] opacity-75 font-normal mb-2">
                 {title}
                 {tooltip && (
-                    <Tooltip content={tooltip}>
-                        <IconInfo className="w-4 h-4 ml-0.5 relative -top-px inline-block" />
+                    <Tooltip trigger={<IconInfo className="w-4 h-4 ml-0.5 relative -top-px inline-block" />}>
+                        {tooltip}
                     </Tooltip>
                 )}
             </h5>
@@ -130,6 +130,11 @@ interface TeamProps {
     emojis?: any[]
     newTeam?: boolean
     slug: string
+    editing?: boolean
+    setEditing?: (editing: boolean) => void
+    saving?: boolean
+    setSaving?: (saving: boolean) => void
+    onSaveRef?: React.MutableRefObject<(() => void) | null>
 }
 
 export const TeamMemberCard = ({
@@ -226,9 +231,27 @@ const JobCard = ({ job }: { job: any }) => {
     )
 }
 
-export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug }: TeamProps): JSX.Element {
-    const [saving, setSaving] = useState(false)
-    const [editing, setEditing] = useState(newTeam || false)
+export default function Team({
+    body,
+    roadmaps,
+    objectives,
+    emojis,
+    newTeam,
+    slug,
+    editing: editingProp,
+    setEditing: setEditingProp,
+    saving: savingProp,
+    setSaving: setSavingProp,
+    onSaveRef,
+}: TeamProps): JSX.Element {
+    const [localSaving, setLocalSaving] = useState(false)
+    const [localEditing, setLocalEditing] = useState(newTeam || false)
+
+    // Use prop values if provided, otherwise use local state
+    const editing = editingProp !== undefined ? editingProp : localEditing
+    const setEditing = setEditingProp || setLocalEditing
+    const saving = savingProp !== undefined ? savingProp : localSaving
+    const setSaving = setSavingProp || setLocalSaving
     const [activeProfile, setActiveProfile] = useState<boolean | ProfileData>(false)
     const { team, updateTeam, loading } = useTeam({
         slug,
@@ -279,7 +302,7 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
         }
     `)
 
-    const { handleChange, values, submitForm, setFieldValue, errors, resetForm } = useFormik({
+    const { handleChange, values, submitForm, setFieldValue } = useFormik({
         enableReinitialize: true,
         validateOnMount: true,
         validationSchema: yup.object({
@@ -371,6 +394,13 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
             setEditing(false)
         },
     })
+
+    // Connect submitForm to parent ref if provided
+    useEffect(() => {
+        if (onSaveRef) {
+            onSaveRef.current = submitForm
+        }
+    }, [onSaveRef, submitForm])
 
     const teamLength = profiles?.data?.length
     const pineapplePercentage =
@@ -505,62 +535,76 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                 setFieldValue={setFieldValue}
             />
 
-            <div className="not-prose grid grid-cols-2 gap-4">
-                <div>
-                    <Fieldset legend="Pineapple on pizza">
-                        <PineapplePieChart percentage={pineapplePercentage} />
-                    </Fieldset>
-                    {teamEmojis?.length > 0 && (
-                        <Fieldset legend="Custom emojis">
-                            <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
-                                {teamEmojis?.map(({ name, localFile }) => (
-                                    <li key={name}>
-                                        <Tooltip content={`:${name}:`}>
-                                            <img className="h-8" src={localFile?.publicURL} />
-                                        </Tooltip>
-                                    </li>
-                                ))}
-                            </ul>
-                        </Fieldset>
-                    )}
+            {/* <DebugContainerQuery name="reader-content-container" /> */}
 
-                    <Fieldset
-                        legend={
-                            <span className="flex items-center gap-1">
-                                Team length in hedgehogs{' '}
-                                <Tooltip
-                                    placement="right"
-                                    content={`The average hedgehog is ${
-                                        posthog?.getFeatureFlag?.('are-you-in-the-us') ? '7 inches' : '17 centimeters'
-                                    } long`}
-                                >
-                                    <IconInfo className="w-4" />
-                                </Tooltip>
-                            </span>
-                        }
-                    >
-                        <ul className="list-none m-0 p-0 flex flex-wrap">
-                            {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
-                                <li className="m-0.5" key={i}>
-                                    <Hedgehog />
-                                </li>
-                            ))}
-                            {hedgehogPercentage && (
-                                <li
-                                    style={{
-                                        width: hedgehogPercentage,
-                                    }}
-                                    className="overflow-hidden relative m-0.5"
-                                >
-                                    <Hedgehog className="absolute object-none object-left" />
-                                </li>
+            <div className="not-prose grid @2xl/reader-content:grid-cols-2 gap-8 mb-8">
+                <div className={!teamImage?.image?.data && !editing ? 'col-span-2' : ''}>
+                    <div className="@container/team-stats">
+                        <div className="grid @xl/team-stats:grid-cols-2 gap-4">
+                            {/* <DebugContainerQuery /> */}
+                            <div>
+                                <Fieldset legend="Pineapple on pizza">
+                                    <PineapplePieChart percentage={pineapplePercentage} />
+                                </Fieldset>
+                                {teamEmojis?.length > 0 && (
+                                    <Fieldset legend="Custom emojis">
+                                        <ul className="list-none m-0 p-0 mt-2 flex flex-wrap gap-2">
+                                            {teamEmojis?.map(({ name, localFile }) => (
+                                                <li key={name}>
+                                                    <Tooltip
+                                                        trigger={<img className="h-8" src={localFile?.publicURL} />}
+                                                        delay={0}
+                                                    >
+                                                        :{name}:
+                                                    </Tooltip>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </Fieldset>
+                                )}
+                            </div>
+                            {heightToHedgehogs > 0 && (
+                                <div>
+                                    <Fieldset
+                                        legend={
+                                            <span className="flex items-center gap-1">
+                                                Team height in hedgehogs{' '}
+                                                <Tooltip trigger={<IconInfo className="w-4" />} delay={0}>
+                                                    The average hedgehog is{' '}
+                                                    {posthog?.getFeatureFlag?.('are-you-in-the-us')
+                                                        ? '7 inches'
+                                                        : '17 centimeters'}{' '}
+                                                    long
+                                                </Tooltip>
+                                            </span>
+                                        }
+                                    >
+                                        <ul className="list-none m-0 p-0 flex flex-wrap">
+                                            {new Array(Math.floor(heightToHedgehogs)).fill(0).map((_, i) => (
+                                                <li className="m-0.5" key={i}>
+                                                    <Hedgehog />
+                                                </li>
+                                            ))}
+                                            {hedgehogPercentage && (
+                                                <li
+                                                    style={{
+                                                        width: hedgehogPercentage,
+                                                    }}
+                                                    className="overflow-hidden relative m-0.5"
+                                                >
+                                                    <Hedgehog className="absolute object-none object-left" />
+                                                </li>
+                                            )}
+                                        </ul>
+                                    </Fieldset>
+                                </div>
                             )}
-                        </ul>
-                    </Fieldset>
+                        </div>
+                    </div>
                 </div>
 
                 {loading ? (
-                    <div className="max-w-sm w-full aspect-video bg-accent rounded rotate-2" />
+                    <div className="max-w-md w-full aspect-video bg-accent rounded rotate-2" />
                 ) : (
                     <TeamImage values={values} setFieldValue={setFieldValue} teamImage={teamImage} editing={editing} />
                 )}
@@ -696,46 +740,6 @@ export default function Team({ body, roadmaps, objectives, emojis, newTeam, slug
                     <MDXRenderer>{body}</MDXRenderer>
                 </MDXProvider>
             </div>
-
-            {isModerator && (
-                <div className="flex justify-end space-x-2 absolute top-4 right-4 z-50">
-                    <CallToAction
-                        disabled={saving || !!errors.name}
-                        size="sm"
-                        onClick={() => {
-                            if (editing) {
-                                submitForm()
-                            } else {
-                                setEditing(true)
-                            }
-                        }}
-                    >
-                        {saving ? (
-                            <IconSpinner className="size-5 animate-spin" />
-                        ) : editing ? (
-                            newTeam ? (
-                                'Save & publish'
-                            ) : (
-                                'Save'
-                            )
-                        ) : (
-                            'Edit'
-                        )}
-                    </CallToAction>
-                    {!newTeam && editing && (
-                        <CallToAction
-                            type="secondary"
-                            size="sm"
-                            onClick={() => {
-                                setEditing(false)
-                                resetForm()
-                            }}
-                        >
-                            Cancel
-                        </CallToAction>
-                    )}
-                </div>
-            )}
         </>
     )
 }

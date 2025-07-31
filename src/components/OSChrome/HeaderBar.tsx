@@ -64,6 +64,7 @@ interface HeaderBarProps {
     isDrawerOpen?: boolean
     onToggleDrawer?: () => void
     navIconClassName?: string
+    isEditing?: boolean
 }
 
 export default function HeaderBar({
@@ -94,6 +95,7 @@ export default function HeaderBar({
     isDrawerOpen = false,
     onToggleDrawer,
     navIconClassName = '',
+    isEditing = false,
 }: HeaderBarProps) {
     const { compact } = useApp()
     const { goBack, goForward, canGoBack, canGoForward, appWindow, menu } = useWindow()
@@ -212,7 +214,7 @@ export default function HeaderBar({
                         ))}
                     <div className="flex items-center gap-px relative">
                         {rightActionButtons}
-                        {showSearch && (searchContentRef || onSearch) && (
+                        {showSearch && (searchContentRef || onSearch) && !isEditing && (
                             <Tooltip trigger={<OSButton size="md" icon={<IconSearch />} onClick={toggleSearch} />}>
                                 Search this page
                             </Tooltip>

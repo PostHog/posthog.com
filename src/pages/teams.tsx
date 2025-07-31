@@ -184,7 +184,7 @@ const Teams: React.FC = () => {
                 image={`/images/small-teams.png`}
             />
             <section data-scheme="primary" className="bg-primary">
-                <DebugContainerQuery />
+                {/* <DebugContainerQuery /> */}
                 <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                     <div className="md:flex-1">
                         <h1>Small teams</h1>

@@ -31,7 +31,7 @@ export default function Header({
 }): JSX.Element {
     return (
         <div className="my-6">
-            <div className="flex flex-col md:flex-row space-x-4 items-center">
+            <div className="flex flex-col gap-12 @lg/reader-content:gap-4 @lg/reader-content:flex-row items-center">
                 <div className="flex-1">
                     <Link
                         to="/teams"
