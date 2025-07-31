@@ -591,8 +591,9 @@ const appSettings: AppSettings = {
                 width: 900,
                 height: 500,
             },
-            fixed: true,
-            autoHeight: true,
+        },
+        position: {
+            center: true,
         },
     },
     'cool-tech-jobs-issue': {
@@ -640,6 +641,23 @@ const appSettings: AppSettings = {
                 height: 400,
             },
             fixed: true,
+        },
+        position: {
+            center: true,
+        },
+    },
+    'ask-a-question': {
+        size: {
+            min: {
+                width: 600,
+                height: 500,
+            },
+            max: {
+                width: 600,
+                height: 500,
+            },
+            fixed: true,
+            autoHeight: true,
         },
         position: {
             center: true,

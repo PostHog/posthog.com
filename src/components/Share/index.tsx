@@ -6,6 +6,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSTabs from 'components/OSTabs'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
+import { CallToAction } from 'components/CallToAction'
 
 interface TweetTemplate {
     id: string
@@ -196,7 +197,7 @@ const EmailGenerator = ({ url }: { url: string }) => {
     ]
 
     const refreshEmail = () => {
-        const newEmail = generateContextualEmail(emailPersonas[currentPersona], url, 'amazing page', 'content')
+        const newEmail = generateContextualEmail(emailPersonas[currentPersona], url, 'page', 'content')
         setCurrentEmail(newEmail)
     }
 
@@ -280,6 +281,13 @@ const EmailGenerator = ({ url }: { url: string }) => {
                     <strong>Current style:</strong> {emailPersonas[currentPersona].name} -{' '}
                     {emailPersonas[currentPersona].description}
                 </div>
+                <CallToAction
+                    to={`mailto:?subject=${currentEmail.subject}&body=${currentEmail.body}`}
+                    className="w-full mt-2"
+                    externalNoIcon
+                >
+                    Send email
+                </CallToAction>
             </div>
         </div>
     )
@@ -487,7 +495,7 @@ const TweetGenerator = ({ url }: { url: string }) => {
 
     const refreshTweet = () => {
         // Get current page title from the Editor props (we'll need to pass this down)
-        const newTweet = generateContextualTweet(tweetPersonas[currentPersona], 'amazing page', 'content')
+        const newTweet = generateContextualTweet(tweetPersonas[currentPersona], 'page', 'content')
         setCurrentTweet(newTweet)
     }
 
@@ -549,6 +557,13 @@ const TweetGenerator = ({ url }: { url: string }) => {
                     <strong>Current persona:</strong> {tweetPersonas[currentPersona].name} -{' '}
                     {tweetPersonas[currentPersona].description}
                 </div>
+                <CallToAction
+                    to={`https://x.com/intent/tweet?text=${currentTweet}&url=${url}`}
+                    externalNoIcon
+                    className="w-full mt-2"
+                >
+                    Post to X
+                </CallToAction>
             </div>
         </div>
     )
@@ -669,7 +684,7 @@ const FaxGenerator = ({ url }: { url: string }) => {
     ]
 
     const refreshFax = () => {
-        const newFax = generateContextualFax(faxPersonas[currentPersona], 'amazing page', 'content')
+        const newFax = generateContextualFax(faxPersonas[currentPersona], 'page', 'content')
         setCurrentFax(newFax)
     }
 
@@ -777,6 +792,13 @@ URL: ${url}
                             <strong>Current style:</strong> {faxPersonas[currentPersona].name} -{' '}
                             {faxPersonas[currentPersona].description}
                         </div>
+                        <CallToAction
+                            to="https://www.google.com/search?q=fax+machine+near+me"
+                            className="w-full mt-2"
+                            externalNoIcon
+                        >
+                            Find a fax machine
+                        </CallToAction>
                     </div>
                 </div>
             </ScrollArea>

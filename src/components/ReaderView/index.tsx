@@ -48,6 +48,7 @@ interface ReaderViewProps {
         featuredVideo?: string
     }
     title?: string
+    hideTitle?: boolean
     tableOfContents?: any
     mdxComponents?: any
     commits?: any[]
@@ -171,7 +172,7 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
                     onValueChange={onValueChange}
                 />
             </div>
-            <OSButton onClick={() => onValueChange([1.3])} icon={<IconRefresh className="size-5" />} />
+            <OSButton onClick={() => onValueChange([1])} icon={<IconRefresh className="size-5" />} />
         </div>
     )
 }
@@ -298,6 +299,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
 export default function ReaderView({
     body = {},
     title,
+    hideTitle = false,
     tableOfContents,
     mdxComponents,
     commits,
@@ -315,6 +317,7 @@ export default function ReaderView({
             <ReaderViewContent
                 body={body}
                 title={title}
+                hideTitle={hideTitle}
                 tableOfContents={tableOfContents}
                 mdxComponents={mdxComponents}
                 commits={commits}
@@ -409,6 +412,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
 function ReaderViewContent({
     body,
     title,
+    hideTitle = false,
     tableOfContents,
     mdxComponents,
     commits,
@@ -556,7 +560,7 @@ function ReaderViewContent({
                                         <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
                                     </div>
                                 )}
-                                {title && <h1>{title}</h1>}
+                                {title && !hideTitle && <h1>{title}</h1>}
                                 {(body.date || body.contributors) && (
                                     <div className="flex items-center space-x-2 mb-4">
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}
@@ -576,15 +580,17 @@ function ReaderViewContent({
                                     </div>
                                 )}
                                 {body.featuredVideo && <iframe src={body.featuredVideo} />}
-                                {body.type === 'mdx' ? (
-                                    <div className={'@container'}>
-                                        <MDXProvider components={mdxComponents}>
-                                            <MDXRenderer>{body.content}</MDXRenderer>
-                                        </MDXProvider>
-                                    </div>
-                                ) : (
-                                    children
-                                )}
+                                <div className="reader-content-container">
+                                    {body.type === 'mdx' ? (
+                                        <div className={'@container'}>
+                                            <MDXProvider components={mdxComponents}>
+                                                <MDXRenderer>{body.content}</MDXRenderer>
+                                            </MDXProvider>
+                                        </div>
+                                    ) : (
+                                        children
+                                    )}
+                                </div>
                                 <div className="mt-8">
                                     <h3 id="squeak-questions" className="mb-4">
                                         Community questions

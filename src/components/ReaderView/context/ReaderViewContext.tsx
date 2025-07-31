@@ -16,15 +16,15 @@ interface ReaderViewContextType {
 }
 
 const getComputedLineHeight = (selector: string) => {
-    const articleContent = document.querySelector('.article-content')
+    const articleContent = document.querySelector('.reader-content-container')
     const elements = articleContent?.querySelectorAll(selector)
 
-    if (!elements?.length) return 1
+    if (!elements?.length) return 1.5
 
     const computedStyle = window.getComputedStyle(elements[0])
     const lineHeight = computedStyle.lineHeight
 
-    if (lineHeight === 'normal') return 1.2
+    if (lineHeight === 'normal') return 1.5
     if (lineHeight.endsWith('px')) {
         return parseFloat(lineHeight) / parseFloat(computedStyle.fontSize)
     }
@@ -80,8 +80,8 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
         }
 
         style.textContent = `
-            .article-content p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
-            .article-content li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
+            .reader-content-container p { line-height: ${lineHeightP * lineHeightMultiplier} !important; }
+            .reader-content-container li { line-height: ${lineHeightLi * lineHeightMultiplier} !important; }
         `
         localStorage.setItem('lineHeightMultiplier', lineHeightMultiplier.toString())
 

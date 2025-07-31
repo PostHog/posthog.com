@@ -200,7 +200,7 @@ function QuestionFormMain({
                                     <>
                                         <Field
                                             autoFocus={autoFocus}
-                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-b border-primary text-base w-full py-3 px-4 outline-none rounded-none"
+                                            className="font-semibold text-black dark:text-primary-dark dark:bg-accent-dark border-x-0 border-t-0 border-b border-primary text-base w-full py-3 px-4 outline-none rounded-none"
                                             onBlur={(e) => e.preventDefault()}
                                             required
                                             id="subject"
@@ -208,7 +208,6 @@ function QuestionFormMain({
                                             placeholder="Title"
                                             maxLength="140"
                                         />
-                                        <hr />
                                     </>
                                 )}
                                 <div className="leading-[0]">
@@ -259,7 +258,7 @@ type QuestionFormProps = {
     slug?: string
     formType?: 'question' | 'reply'
     questionId?: number
-    reply: (body: string) => Promise<void>
+    reply?: (body: string) => Promise<void>
     onSubmit?: (values: any, formType: string) => void
     initialView?: string
     topicID?: number

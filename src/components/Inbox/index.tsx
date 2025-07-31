@@ -6,7 +6,7 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import { TreeMenu } from 'components/TreeMenu'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { Question } from 'components/Squeak'
+import { Question, QuestionForm } from 'components/Squeak'
 import { useLocation } from '@reach/router'
 import OSButton from 'components/OSButton'
 import { IconCornerDownRight, IconSidePanel, IconBottomPanel, IconChevronDown, IconNotification } from '@posthog/icons'
@@ -25,6 +25,9 @@ import Tooltip from 'components/RadixUI/Tooltip'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { useSubscribedQuestions } from 'hooks/useSubscribedQuestions'
 import { flattenStrapiResponse } from '../../utils'
+import { CallToAction } from 'components/CallToAction'
+import { useApp } from '../../context/App'
+import Link from 'components/Link'
 dayjs.extend(relativeTime)
 
 const Menu = () => {
@@ -66,6 +69,44 @@ const layoutOptions = [
     },
 ]
 
+const AskAQuestion = ({ onSubmit }: { onSubmit: () => void }) => {
+    const { addToast } = useToast()
+    const { appWindow } = useWindow()
+    const { closeWindow, setWindowTitle } = useApp()
+
+    useEffect(() => {
+        setWindowTitle(appWindow, 'Ask a question')
+    }, [])
+
+    return (
+        <div data-scheme="secondary" className="bg-primary size-full p-4">
+            <QuestionForm
+                onSubmit={(_values, _type, data) => {
+                    onSubmit()
+                    addToast({
+                        title: 'Question posted',
+                        description: (
+                            <>
+                                Your question has been posted.
+                                <br />
+                                <Link
+                                    className="text-red dark:text-yellow font-semibold"
+                                    to={`/questions/${data.attributes.permalink}`}
+                                >
+                                    View it here
+                                </Link>
+                            </>
+                        ),
+                    })
+                    closeWindow(appWindow)
+                }}
+                initialView="question-form"
+                slug="/questions"
+            />
+        </div>
+    )
+}
+
 export default function Inbox(props) {
     const { data, params } = props
     const initialTopicID = data?.topic?.squeakId
@@ -91,6 +132,7 @@ export default function Inbox(props) {
         sortBy: 'activity',
         filters,
     })
+    const { addWindow } = useApp()
     const { appWindow } = useWindow()
     const bottomHeightDefault = useMemo(() => ((appWindow?.size.height || 0) * 3) / 5, [appWindow?.size.height])
     const [bottomHeight, setBottomHeight] = useState(bottomHeightDefault)
@@ -130,7 +172,7 @@ export default function Inbox(props) {
             setSideWidth(expandable ? containerWidth : minWidth)
         } else {
             const containerHeight = containerRef.current.getBoundingClientRect().height
-            const minHeight = 57
+            const minHeight = 45
             setBottomHeight(expandable ? containerHeight : minHeight)
         }
     }
@@ -138,7 +180,7 @@ export default function Inbox(props) {
     const handleVerticalDrag = (_event, info) => {
         if (!containerRef.current) return
         const containerHeight = containerRef.current.getBoundingClientRect().height
-        const newBottomHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 57), containerHeight)
+        const newBottomHeight = Math.min(Math.max(dragStartHeight - info.offset.y, 45), containerHeight)
         setBottomHeight(newBottomHeight)
     }
 
@@ -209,16 +251,33 @@ export default function Inbox(props) {
                 showForward
                 showSearch
                 rightActionButtons={
-                    permalink ? (
-                        <ToggleGroup
-                            title="Layout"
-                            hideTitle={true}
-                            options={layoutOptions}
-                            onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
-                            value={sideBySide ? 'side-by-side' : 'stacked'}
-                            className="-my-1"
-                        />
-                    ) : null
+                    <>
+                        <CallToAction
+                            size="sm"
+                            onClick={() =>
+                                addWindow(
+                                    <AskAQuestion
+                                        newWindow
+                                        location={{ pathname: `ask-a-question` }}
+                                        key={`ask-a-question`}
+                                        onSubmit={refresh}
+                                    />
+                                )
+                            }
+                        >
+                            Ask a question
+                        </CallToAction>
+                        {permalink ? (
+                            <ToggleGroup
+                                title="Layout"
+                                hideTitle={true}
+                                options={layoutOptions}
+                                onValueChange={(value) => handleSideBySide(value === 'side-by-side')}
+                                value={sideBySide ? 'side-by-side' : 'stacked'}
+                                className="-my-1 ml-2"
+                            />
+                        ) : null}
+                    </>
                 }
             />
             <div data-scheme="secondary" className="flex flex-grow border-t border-primary min-h-0">
@@ -262,7 +321,7 @@ export default function Inbox(props) {
                                                     `}
                                                     onClick={() => {
                                                         if (!containerRef.current) return
-                                                        if (bottomHeight <= 57) {
+                                                        if (bottomHeight <= 45) {
                                                             setBottomHeight(
                                                                 containerRef.current.getBoundingClientRect().height *
                                                                     0.8
@@ -427,6 +486,7 @@ export default function Inbox(props) {
                                                             <OSButton
                                                                 size="sm"
                                                                 className="relative"
+                                                                style={{ width: 26, height: 26 }}
                                                                 icon={
                                                                     <IconChevronDown
                                                                         className={`w-6 absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 ${

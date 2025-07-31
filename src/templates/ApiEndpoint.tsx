@@ -19,6 +19,7 @@ import { MdxCodeBlock } from 'components/CodeBlock'
 import { InlineCode } from 'components/InlineCode'
 import { docsMenu } from '../navs'
 import { CallToAction } from 'components/CallToAction'
+import ReaderView from 'components/ReaderView'
 
 const mapVerbsColor = {
     get: 'blue',
@@ -594,119 +595,110 @@ export default function ApiEndpoint({ data, pageContext: { menu, breadcrumb, bre
     const overviewNode = allMdx.nodes?.find((node) => node.slug === `docs/api/${name}/overview`)
 
     return (
-        <Layout parent={docsMenu} activeInternalMenu={docsMenu.children.find(({ name }) => name === 'Product OS')}>
+        <ReaderView>
             <SEO title={`${title} API Reference - PostHog`} />
-            <PostLayout
-                title={title}
-                questions={<CommunityQuestions />}
-                menu={menu}
-                tableOfContents={tableOfContents}
-                fullWidthContent={true}
-                hideSidebar
-                breadcrumb={[breadcrumbBase, ...(breadcrumb || [])]}
-            >
-                <h2 className="!mt-0">{title}</h2>
-                <blockquote className="p-6 mb-4 rounded bg-accent">
-                    <p>
-                        For instructions on how to authenticate to use this endpoint, see{' '}
-                        <a href="/docs/api/overview">API overview</a>.
-                    </p>
-                </blockquote>
 
-                {overviewNode?.body && (
-                    <div className="article-content mt-6">
-                        <MDXProvider components={components}>
-                            <MDXRenderer>{overviewNode.body}</MDXRenderer>
-                        </MDXProvider>
-                    </div>
-                )}
+            <h2 className="!mt-0">{title}</h2>
+            <blockquote className="p-6 mb-4 rounded bg-accent">
+                <p>
+                    For instructions on how to authenticate to use this endpoint, see{' '}
+                    <a href="/docs/api/overview">API overview</a>.
+                </p>
+            </blockquote>
 
-                <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
+            {overviewNode?.body && (
+                <div className="article-content mt-6">
+                    <MDXProvider components={components}>
+                        <MDXRenderer>{overviewNode.body}</MDXRenderer>
+                    </MDXProvider>
+                </div>
+            )}
 
-                <Endpoints paths={paths} />
+            <ReactMarkdown>{items[0].operationSpec?.description}</ReactMarkdown>
 
-                {items.map((item) => {
-                    item = item.operationSpec
-                    const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
+            <Endpoints paths={paths} />
 
-                    return (
-                        <div className="mt-8" key={item.operationId}>
-                            <div
-                                className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
-                                id={pathID(item.httpVerb, item.pathName)}
-                            >
-                                <div className="space-y-6">
-                                    <h2>{generateName(item)}</h2>
-                                    {mdxNode?.body && (
-                                        <div className="article-content">
-                                            <MDXProvider components={components}>
-                                                <MDXRenderer>{mdxNode.body}</MDXRenderer>
-                                            </MDXProvider>
+            {items.map((item) => {
+                item = item.operationSpec
+                const mdxNode = allMdx.nodes?.find((node) => node.slug.split('/').pop() === item.operationId)
+
+                return (
+                    <div className="mt-8" key={item.operationId}>
+                        <div
+                            className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start"
+                            id={pathID(item.httpVerb, item.pathName)}
+                        >
+                            <div className="space-y-6">
+                                <h2>{generateName(item)}</h2>
+                                {mdxNode?.body && (
+                                    <div className="article-content">
+                                        <MDXProvider components={components}>
+                                            <MDXRenderer>{mdxNode.body}</MDXRenderer>
+                                        </MDXProvider>
+                                    </div>
+                                )}
+                                <ReactMarkdown>
+                                    {!item.description || item.description === items[0].operationSpec?.description
+                                        ? pathDescription(item)
+                                        : item.description}
+                                </ReactMarkdown>
+                                <Security item={item} objects={objects} />
+                                <Parameters item={item} objects={objects} />
+
+                                <RequestBody item={item} objects={objects} />
+
+                                <ResponseBody item={item} objects={objects} />
+                            </div>
+                            <div className="lg:sticky top-[108px]">
+                                <h4>Request</h4>
+                                <RequestExample
+                                    name={name}
+                                    item={item}
+                                    objects={objects}
+                                    exampleLanguage={exampleLanguage}
+                                    setExampleLanguage={setExampleLanguage}
+                                />
+
+                                <h4>Response</h4>
+                                {Object.keys(item.responses).map((statusCode) => {
+                                    const response = item.responses[statusCode]
+                                    return (
+                                        <div key={statusCode}>
+                                            <h5 className="text-sm font-semibold">
+                                                <span className="bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
+                                                    Status {statusCode}
+                                                </span>{' '}
+                                                {response.description}
+                                            </h5>
+                                            <ResponseExample
+                                                item={item}
+                                                objects={objects}
+                                                objectKey={
+                                                    response.content?.['application/json']?.schema['$ref']
+                                                        ?.split('/')
+                                                        .at(-1) ||
+                                                    response.content?.['application/json']?.schema.items['$ref']
+                                                        ?.split('/')
+                                                        .at(-1)
+                                                }
+                                                exampleLanguage={exampleLanguage}
+                                                setExampleLanguage={setExampleLanguage}
+                                            />
                                         </div>
-                                    )}
-                                    <ReactMarkdown>
-                                        {!item.description || item.description === items[0].operationSpec?.description
-                                            ? pathDescription(item)
-                                            : item.description}
-                                    </ReactMarkdown>
-                                    <Security item={item} objects={objects} />
-                                    <Parameters item={item} objects={objects} />
-
-                                    <RequestBody item={item} objects={objects} />
-
-                                    <ResponseBody item={item} objects={objects} />
-                                </div>
-                                <div className="lg:sticky top-[108px]">
-                                    <h4>Request</h4>
-                                    <RequestExample
-                                        name={name}
-                                        item={item}
-                                        objects={objects}
-                                        exampleLanguage={exampleLanguage}
-                                        setExampleLanguage={setExampleLanguage}
-                                    />
-
-                                    <h4>Response</h4>
-                                    {Object.keys(item.responses).map((statusCode) => {
-                                        const response = item.responses[statusCode]
-                                        return (
-                                            <div key={statusCode}>
-                                                <h5 className="text-sm font-semibold">
-                                                    <span className="bg-accent inline-block px-[4px] py-[2px] text-sm rounded-sm">
-                                                        Status {statusCode}
-                                                    </span>{' '}
-                                                    {response.description}
-                                                </h5>
-                                                <ResponseExample
-                                                    item={item}
-                                                    objects={objects}
-                                                    objectKey={
-                                                        response.content?.['application/json']?.schema['$ref']
-                                                            ?.split('/')
-                                                            .at(-1) ||
-                                                        response.content?.['application/json']?.schema.items['$ref']
-                                                            ?.split('/')
-                                                            .at(-1)
-                                                    }
-                                                    exampleLanguage={exampleLanguage}
-                                                    setExampleLanguage={setExampleLanguage}
-                                                />
-                                            </div>
-                                        )
-                                    })}
-                                </div>
+                                    )
+                                })}
                             </div>
                         </div>
-                    )
-                })}
+                    </div>
+                )
+            })}
 
-                {nextURL && (
-                    <CallToAction className="mt-8" to={nextURL}>
-                        Next page →
-                    </CallToAction>
-                )}
-            </PostLayout>
-        </Layout>
+            {nextURL && (
+                <CallToAction className="mt-8" to={nextURL}>
+                    Next page →
+                </CallToAction>
+            )}
+        </ReaderView>
     )
 }
 

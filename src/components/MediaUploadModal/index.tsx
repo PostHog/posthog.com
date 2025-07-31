@@ -8,6 +8,7 @@ import { useDropzone } from 'react-dropzone'
 import { useWindow } from '../../context/Window'
 import { useToast } from '../../context/Toast'
 import Loading from 'components/Loading'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 // File System Access API types
 declare global {
@@ -386,67 +387,72 @@ export default function MediaUploadModal() {
         if (appWindow) {
             setWindowTitle(appWindow, 'Upload media')
         }
-    }, [appWindow])
+    }, [])
 
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return isModerator ? (
-        <div data-scheme="primary" className="bg-primary size-full">
-            <div className="p-4 relative space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="flex flex-col">
-                        <h3 className="m-0">Local files</h3>
-                        <p className="text-sm text-secondary mt-1 mb-4">Click a filename to upload instantly</p>
-                        <FileExplorer onFileDrop={onDrop} />
+        <ScrollArea>
+            <div data-scheme="primary" className="bg-primary size-full">
+                <div className="p-4 relative space-y-4">
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="flex flex-col">
+                            <h3 className="m-0">Local files</h3>
+                            <p className="text-sm text-secondary mt-1 mb-4">Click a filename to upload instantly</p>
+                            <FileExplorer onFileDrop={onDrop} />
+                        </div>
+
+                        <div className="flex flex-col">
+                            <h3 className="m-0">Upload media</h3>
+                            <p className="text-sm text-secondary mt-1 mb-4">Or drag files here</p>
+                            <div
+                                {...getRootProps()}
+                                data-scheme="secondary"
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
+                                    isDragActive ? 'bg-input border-primary' : ''
+                                }`}
+                            >
+                                <div
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${
+                                        isDragActive ? '' : 'opacity-50'
+                                    }`}
+                                >
+                                    <IconUpload className="size-12 mb-4" />
+                                    <p className="text-center font-medium m-0">
+                                        {isDragActive ? 'Drop files here' : 'Drop files to upload'}
+                                    </p>
+                                    <p className="text-sm text-secondary text-center mt-2 m-0">
+                                        PNG, JPG, WEBP, GIF, MP4, MOV, PDF, SVG, ABC, XYZ
+                                    </p>
+                                </div>
+                                <input {...getInputProps()} />
+                            </div>
+                        </div>
                     </div>
 
                     <div className="flex flex-col">
-                        <h3 className="m-0">Upload media</h3>
-                        <p className="text-sm text-secondary mt-1 mb-4">Or drag files here</p>
-                        <div
-                            {...getRootProps()}
-                            data-scheme="secondary"
-                            className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
-                                isDragActive ? 'bg-input border-primary' : ''
-                            }`}
-                        >
-                            <div
-                                className={`flex flex-col justify-center items-center h-full p-8 ${
-                                    isDragActive ? '' : 'opacity-50'
-                                }`}
-                            >
-                                <IconUpload className="size-12 mb-4" />
-                                <p className="text-center font-medium m-0">
-                                    {isDragActive ? 'Drop files here' : 'Drop files to upload'}
-                                </p>
-                                <p className="text-sm text-secondary text-center mt-2 m-0">
-                                    PNG, JPG, WEBP, GIF, MP4, MOV, PDF, SVG, ABC, XYZ
-                                </p>
-                            </div>
-                            <input {...getInputProps()} />
+                        <h3 className="m-0">Your uploads</h3>
+                        <p className="text-sm text-secondary mt-1 mb-4">Recent uploads to Cloudinary</p>
+                        <div className="flex-grow border border-input rounded-md p-4 overflow-auto">
+                            <ul className="list-none m-0 p-0 space-y-2">
+                                {loading > 0 &&
+                                    Array.from({ length: loading }).map((_, index) => (
+                                        <li
+                                            key={index}
+                                            className="w-full h-20 bg-accent rounded-md animate-pulse mt-2"
+                                        />
+                                    ))}
+                                {images.map((image) => {
+                                    return <Image key={image.id} {...image} />
+                                })}
+                                {(user?.profile as any)?.images?.map((image: any) => {
+                                    return <Image key={image.id} {...image} />
+                                })}
+                            </ul>
                         </div>
                     </div>
                 </div>
-
-                <div className="flex flex-col">
-                    <h3 className="m-0">Your uploads</h3>
-                    <p className="text-sm text-secondary mt-1 mb-4">Recent uploads to Cloudinary</p>
-                    <div className="flex-grow border border-input rounded-md p-4 overflow-auto">
-                        <ul className="list-none m-0 p-0 space-y-2">
-                            {loading > 0 &&
-                                Array.from({ length: loading }).map((_, index) => (
-                                    <li key={index} className="w-full h-20 bg-accent rounded-md animate-pulse mt-2" />
-                                ))}
-                            {images.map((image) => {
-                                return <Image key={image.id} {...image} />
-                            })}
-                            {(user?.profile as any)?.images?.map((image: any) => {
-                                return <Image key={image.id} {...image} />
-                            })}
-                        </ul>
-                    </div>
-                </div>
             </div>
-        </div>
+        </ScrollArea>
     ) : null
 }
