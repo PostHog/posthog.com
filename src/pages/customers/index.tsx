@@ -69,6 +69,7 @@ const Customer = ({ number, customer }: CustomerProps) => {
     }
 
     return {
+        key: customer.name,
         cells: [
             { content: number },
             {
