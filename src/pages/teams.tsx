@@ -18,35 +18,12 @@ import { TreeMenu } from 'components/TreeMenu'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconX } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
+import { useWindow } from '../context/Window'
 
 const Teams: React.FC = () => {
-    const location = useLocation()
-    const currentPath = location.pathname.replace('/', '')
+    const { appWindow } = useWindow()
     const [searchTerm, setSearchTerm] = useState('')
     const [selectedIndex, setSelectedIndex] = useState(0)
-    const searchInputRef = useRef<HTMLInputElement>(null)
-
-    // Auto-focus the input when component loads
-    useEffect(() => {
-        if (searchInputRef.current) {
-            searchInputRef.current.focus()
-        }
-    }, [])
-
-    const selectOptions = [
-        {
-            label: 'Company',
-            items: [
-                { value: 'company', label: 'Company', icon: companyMenu.icon },
-                ...companyMenu.children.map((item) => ({
-                    value: item.url?.replace('/', '') || item.name.toLowerCase(),
-                    label: item.name,
-                    icon: item.icon,
-                    color: item.color || undefined,
-                })),
-            ],
-        },
-    ]
 
     const { isModerator } = useUser()
     const { allTeams } = useStaticQuery(graphql`
@@ -174,8 +151,34 @@ const Teams: React.FC = () => {
         return firstName.includes(searchLower) || lastName.includes(searchLower) || fullName.includes(searchLower)
     }
 
+    useEffect(() => {
+        if (appWindow?.ref?.current) {
+            const handleKeyDown = (e: KeyboardEvent) => {
+                if (e.key === 'Escape') {
+                    setSearchTerm('')
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault()
+                    setSelectedIndex((prev) => (prev < filteredTeams.length - 1 ? prev + 1 : prev))
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault()
+                    setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev))
+                } else if (e.key === 'Enter' && filteredTeams[selectedIndex]) {
+                    e.preventDefault()
+                    navigate(`/teams/${filteredTeams[selectedIndex].slug}`)
+                }
+            }
+
+            appWindow.ref?.current?.addEventListener('keydown', handleKeyDown)
+
+            return () => {
+                appWindow.ref?.current?.removeEventListener('keydown', handleKeyDown)
+            }
+        }
+    }, [appWindow?.ref, filteredTeams, selectedIndex])
+
     return (
         <ReaderView
+            onSearch={(searchTerm) => setSearchTerm(searchTerm)}
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
         >
             <SEO
@@ -201,28 +204,6 @@ const Teams: React.FC = () => {
                         </p>
 
                         <div className="relative mb-6">
-                            <input
-                                ref={searchInputRef}
-                                type="text"
-                                placeholder="Search teams"
-                                className="w-full border border-primary text-lg px-4 py-2 pr-10"
-                                value={searchTerm}
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                                onKeyDown={(e) => {
-                                    if (e.key === 'Escape') {
-                                        setSearchTerm('')
-                                    } else if (e.key === 'ArrowDown') {
-                                        e.preventDefault()
-                                        setSelectedIndex((prev) => (prev < filteredTeams.length - 1 ? prev + 1 : prev))
-                                    } else if (e.key === 'ArrowUp') {
-                                        e.preventDefault()
-                                        setSelectedIndex((prev) => (prev > 0 ? prev - 1 : prev))
-                                    } else if (e.key === 'Enter' && filteredTeams[selectedIndex]) {
-                                        e.preventDefault()
-                                        navigate(`/teams/${filteredTeams[selectedIndex].slug}`)
-                                    }
-                                }}
-                            />
                             {searchTerm && (
                                 <button
                                     onClick={() => setSearchTerm('')}
