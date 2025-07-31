@@ -4,90 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer not-prose {
-    .not-prose h1 {
-        font-size: 1.875rem;
-        line-height: 2.25rem;
-    }
-    .not-prose h2 {
-        font-size: 1.5rem;
-        line-height: 2rem;
-    }
-    .not-prose h3 {
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-    }
-
-    .not-prose ul,
-    .not-prose ol {
-        padding-left: 0;
-    }
-
-    .not-prose ul li,
-    .not-prose ol li {
-        list-style-type: none;
-    }
-}
-
-@layer utilities {
-    .light [data-scheme='primary'] {
-        --bg: 253 253 248;
-        --accent: 229 231 224;
-        --border: 191 193 183;
-        --input-bg: 238 239 233;
-        --input-bg-hover: 238 239 233;
-        --input-border: 210 211 204;
-        --input-border-hover: 210 211 204;
-        --text-primary: 77 79 70;
-        --text-secondary: 101 103 94;
-        --text-muted: 158 160 150;
-        --tw-shadow-color: 77 79 70;
-        --primary: var(--text-primary);
-        --secondary: var(--text-secondary);
-        --muted: var(--text-muted);
-        --bg-primary: var(--primary);
-        --bg-accent: var(--accent);
-
-        .hover-invert:hover,
-        .hover-invert[data-state='open'],
-        .hover-invert[data-state='highlighted'] {
-            --bg: 77 79 70;
-            --accent: 158 160 150;
-            --border: 191 193 183;
-            --input-bg: 238 239 233;
-            --input-bg-hover: 238 239 233;
-            --text-primary: 253 253 248;
-            --text-secondary: 229 231 224;
-            --text-muted: 229 231 224;
-            --primary: var(--text-primary);
-            --secondary: var(--text-secondary);
-            --muted: var(--text-muted);
-            --bg-primary: var(--primary);
-            --bg-accent: var(--accent);
-        }
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        @apply font-bold;
-    }
-
-    .prose-sm {
-        @apply text-[15px];
-
-        li p {
-            @apply mt-2;
-        }
-    }
-
-    mark {
-        @apply inline;
-    }
-
+@layer components {
     .prose {
         @apply max-w-none;
 
@@ -170,6 +87,91 @@
         del {
             @apply text-muted;
         }
+    }
+}
+
+@layer not-prose {
+    .not-prose h1 {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+    .not-prose h2 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+    .not-prose h3 {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+
+    .not-prose ul,
+    .not-prose ol {
+        padding-left: 0;
+    }
+
+    .not-prose ul li,
+    .not-prose ol li {
+        list-style-type: none;
+    }
+}
+
+@layer utilities {
+    .light [data-scheme='primary'] {
+        --bg: 253 253 248;
+        --accent: 229 231 224;
+        --border: 191 193 183;
+        --input-bg: 238 239 233;
+        --input-bg-hover: 238 239 233;
+        --input-border: 210 211 204;
+        --input-border-hover: 210 211 204;
+        --text-primary: 77 79 70;
+        --text-secondary: 101 103 94;
+        --text-muted: 158 160 150;
+        --tw-shadow-color: 77 79 70;
+        --primary: var(--text-primary);
+        --secondary: var(--text-secondary);
+        --muted: var(--text-muted);
+        --bg-primary: var(--primary);
+        --bg-accent: var(--accent);
+
+        .hover-invert:hover,
+        .hover-invert[data-state='open'],
+        .hover-invert[data-state='highlighted'] {
+            --bg: 77 79 70;
+            --accent: 158 160 150;
+            --border: 191 193 183;
+            --input-bg: 238 239 233;
+            --input-bg-hover: 238 239 233;
+            --text-primary: 253 253 248;
+            --text-secondary: 229 231 224;
+            --text-muted: 229 231 224;
+            --primary: var(--text-primary);
+            --secondary: var(--text-secondary);
+            --muted: var(--text-muted);
+            --bg-primary: var(--primary);
+            --bg-accent: var(--accent);
+        }
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        @apply font-bold;
+    }
+
+    .prose-sm {
+        @apply text-[15px];
+
+        li p {
+            @apply mt-2;
+        }
+    }
+
+    mark {
+        @apply inline;
     }
 
     .prose a > code,
