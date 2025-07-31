@@ -1,6 +1,6 @@
 ---
 title: "CDP vs data warehouse: Which should you use and why"
-date: 2025-07-30
+date: 2025-07-31
 author:
  - ian-vanagas
 tags:
@@ -22,7 +22,7 @@ In a nutshell, a CDP does three things:
 2. Creates and stores a combined customer profile based on all these sources. Data scattered between platforms gets aggregated in one place.
 3. Sends customer data to [destinations](/docs/cdp/destinations) like ad platforms, CRMs, and more.
 
-![What is a CDP?](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_15_at_11_01_48_2x_b3c889b8cc.png)
+![What is a CDP?](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cdp_a91655db2e.png)
 
 Teams need this because they:
 
@@ -61,7 +61,7 @@ It does this by having a significantly different structure from traditional data
 
 3. **Data-out:** The warehouse itself usually has systems (AKA engines) to efficiently run the type of workloads you need, for example, aggregate analytics queries.
 
-![What is a data warehouse?](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_23_at_11_14_49_2x_a4e6e96f54.png)
+![What is a data warehouse?](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/warehouse_342ea35d84.png)
 
 Once you’ve extracted data from the data warehouse, you usually rely on other tools to make use of it, such as  business intelligence tools for visualization or CDPs with reverse ETL functionality for activation.
 
@@ -94,7 +94,7 @@ Once you’ve extracted data from the data warehouse, you usually rely on other 
 
 Actually, you will need both eventually – it's more about when you should adopt them. If I had to graph the importance of each over time, it would look like this:
 
-![Graph of the importance of a CDP and data warehouse over time](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_22_at_09_22_17_2x_83e5a95ddf.png)
+![Graph of the importance of a CDP and data warehouse over time](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/importance_78e2f11f9d.png)
 
 [Early-stage companies](/founders/early-stage-analytics) likely won’t find a data warehouse useful, but a CDP quickly provides significant help collecting and activating customer data to power early marketing efforts. 
 
@@ -104,7 +104,7 @@ This doesn’t mean abandoning your CDP, though. Teams can continue using the CD
 
 This creates a stack that looks like this:
 
-![CDP first](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_22_at_10_19_53_2x_01524f997f.png)
+![CDP first](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cdp_first_d7bb5a9233.png)
 
 As a company grows and adds more non-customer data, like logs and ERP data, the data warehouse becomes increasingly important as a source of truth. This also satisfies additional access, governance, and security requirements a data warehouse can handle.
 
@@ -112,7 +112,7 @@ Again, a CDP remains important as a company matures; it just decreases in relati
 
 Another way CDPs are useful later is reverse ETL. This means getting data *out* of the data warehouse and into all the tools a CDP has integrations with. At this phase, the stack might look like this:
 
-![Warehouse first](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_22_at_10_21_46_2x_e41c7d6531.png)
+![Warehouse first](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/warehouse_first_0023fdb8dd.png)
 
 At huge scale, use cases fragment significantly. Each function will likely have their own set of specialized requirements that a data warehouse (if adopted) will likely play a large role in, but that’s beyond the scope of this post.
 
@@ -128,7 +128,7 @@ We and our customers have found both to be essential so in our effort to “[equ
 
 When compared with either of the stacks mentioned above, PostHog enables teams to have one that looks like this:
 
-![Unified stack](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_07_22_at_10_24_44_2x_d8c1d219f1.png)
+![Unified stack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unified_0bf01bd084.png)
 
 Rather than the data spaghetti created by separate CDPs, data warehouses, and other tools, PostHog provides them all in a unified platform. This means teams have more of the tools they need as they grow and there is less need for migration or reimplementation. We can fulfill the use cases teams need whatever stage they are at, whether it is marketing campaign enrichment early or complex analysis from consolidated datasets later. 
 
