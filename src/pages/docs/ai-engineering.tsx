@@ -12,6 +12,7 @@ import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
+import ReaderView from 'components/ReaderView'
 
 type LLMObservabilityProps = {
     data: {
@@ -73,24 +74,22 @@ export const Content = ({ quickLinks = false }) => {
 
 const LLMObservability: React.FC<LLMObservabilityProps> = ({ data }) => {
     return (
-        <Layout>
+        <ReaderView>
             <SEO title="LLM observability - Documentation - PostHog" />
 
-            <PostLayout title={'LLM observability'} hideSurvey hideSidebar>
-                <Intro
-                    subheader="Getting started"
-                    title="LLM observability"
-                    description="Gather data for your AI and LLM products usage and performance."
-                    buttonText="Start capturing LLM data"
-                    buttonLink="/docs/ai-engineering/observability"
-                    imageColumnClasses="max-w-96 mt-8 md:mt-0"
-                    imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
-                    imageClasses="max-h-48 md:max-h-64"
-                />
+            <Intro
+                subheader="Getting started"
+                title="LLM observability"
+                description="Gather data for your AI and LLM products usage and performance."
+                buttonText="Start capturing LLM data"
+                buttonLink="/docs/ai-engineering/observability"
+                imageColumnClasses="max-w-96 mt-8 md:mt-0"
+                imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
+                imageClasses="max-h-48 md:max-h-64"
+            />
 
-                <Content />
-            </PostLayout>
-        </Layout>
+            <Content />
+        </ReaderView>
     )
 }
 
