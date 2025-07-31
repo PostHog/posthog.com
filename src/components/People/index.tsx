@@ -258,7 +258,11 @@ export const TeamMember = (props: any) => {
                     )}
 
                     <div className="absolute left-0 w-full top-full pt-8 px-4 group-hover:top-[0%] transition-all">
-                        <ReactMarkdown className="text-sm bio-preview" rehypePlugins={[rehypeRaw] as any}>
+                        <ReactMarkdown
+                            disallowedElements={['a']}
+                            className="text-sm bio-preview"
+                            rehypePlugins={[rehypeRaw] as any}
+                        >
                             {biography || getBioPlaceholder() + ' Ask me if hot dogs are a form of taco!'}
                         </ReactMarkdown>
                     </div>
