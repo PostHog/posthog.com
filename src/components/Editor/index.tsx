@@ -24,6 +24,8 @@ import Share from 'components/Share'
 import { useWindow } from '../../context/Window'
 import Cher from 'components/Cher'
 import BookmarkButton from 'components/BookmarkButton'
+import MediaPlayer from 'components/MediaPlayer'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 interface EditorProps {
     slug?: string
@@ -289,24 +291,36 @@ export function Editor({
                         onMouseLeave={() => setIsHovering(false)}
                         className="relative z-10"
                     >
-                        {hasShareButton && <Cher active={showCher} />}
                         <OSButton
                             variant="primary"
                             size="md"
                             {...(hasShareButton
-                                ? {
-                                      onClick: () => {
-                                          addWindow(
-                                              <Share
-                                                  title={appWindow?.meta?.title}
-                                                  location={{ pathname: `share` }}
-                                                  key={`share`}
-                                                  newWindow
-                                                  url={`${window.location.origin}${appWindow?.path}`}
-                                              />
-                                          )
-                                      },
-                                  }
+                                ? showCher
+                                    ? {
+                                          onClick: () => {
+                                              addWindow(
+                                                  <MediaPlayer
+                                                      newWindow
+                                                      location={{ pathname: `cher` }}
+                                                      key={`cher`}
+                                                      videoId="nZXRV4MezEw"
+                                                  />
+                                              )
+                                          },
+                                      }
+                                    : {
+                                          onClick: () => {
+                                              addWindow(
+                                                  <Share
+                                                      title={appWindow?.meta?.title}
+                                                      location={{ pathname: `share` }}
+                                                      key={`share`}
+                                                      newWindow
+                                                      url={`${window.location.origin}${appWindow?.path}`}
+                                                  />
+                                              )
+                                          },
+                                      }
                                 : {
                                       to: cta?.url,
                                   })}
@@ -314,7 +328,21 @@ export function Editor({
                             asLink
                             className="ml-1 -my-0.5"
                         >
-                            {hasShareButton ? 'Share' : cta?.label}
+                            {hasShareButton ? (
+                                showCher ? (
+                                    <span className="relative">
+                                        <CloudinaryImage
+                                            src="https://res.cloudinary.com/dmukukwp6/image/upload/cher_hog_5cdafbe899.png"
+                                            className="w-[38px] absolute left-0 translate-x-[-25%] translate-y-[-25%]"
+                                        />
+                                        <span className="inline-block ml-6">Cher</span>
+                                    </span>
+                                ) : (
+                                    'Share'
+                                )
+                            ) : (
+                                cta?.label
+                            )}
                         </OSButton>
                     </div>
                 </>
