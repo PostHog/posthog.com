@@ -81,11 +81,7 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 <details>
 <summary>A customer has an issue with merch</summary>
 
-Please share in the #merch channel: 
-
-- <TeamMember name="Kendall Hall" /> owns fulfillment issues. 
-- <TeamMember name="Lottie Coxon" /> owns merch design and creation.
-- <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
+Please share in the #merch channel. - <TeamMember name="Kendall Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
 </details>
 
 <details>
