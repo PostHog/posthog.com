@@ -282,7 +282,7 @@ const AvatarBlock = ({
     }, [values.avatar])
 
     return (
-        <div className="relative flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
+        <div className="relative flex flex-col items-center mb-4 bg-primary rounded-md overflow-hidden border border-primary">
             {isEditing && (
                 <div className="absolute right-0 top-0 flex items-center">
                     <div className="relative p-2 border-l border-b border-primary rounded-bl-md bg-primary overflow-hidden">
@@ -923,6 +923,8 @@ export default function ProfilePage({ params }: PageProps) {
             height: profile?.height,
             color: profile?.color,
             backgroundImage: profile?.backgroundImage,
+            companyRole: profile?.companyRole,
+            amaEnabled: profile?.amaEnabled,
         },
         onSubmit: async ({ avatar, images, ...values }) => {
             try {
@@ -1043,7 +1045,10 @@ export default function ProfilePage({ params }: PageProps) {
                                 errors={errors}
                             />
 
-                            {(profile.pineappleOnPizza !== null || profile.pronouns || profile.location) && (
+                            {(isEditing ||
+                                profile.pineappleOnPizza !== null ||
+                                profile.pronouns ||
+                                profile.location) && (
                                 <Block title="Details">
                                     <Details
                                         profile={profile}
@@ -1091,97 +1096,91 @@ export default function ProfilePage({ params }: PageProps) {
                             )}
                             {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
                             {isModerator && isEditing && (
-                                <Block title="Special moderator things">
+                                <Block title="Special employee things">
                                     <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
                                 </Block>
                             )}
-                            {(isCurrentUser || isModerator) && (
-                                <Block title="Profile Settings">
-                                    <div className="flex flex-col space-y-2">
-                                        {!isEditing &&
-                                            (user?.profile?.id === data?.id ||
-                                                (user?.role?.type === 'moderator' && user?.webmaster)) && (
-                                                <CallToAction
-                                                    size="sm"
-                                                    onClick={() => {
-                                                        setIsEditing(true)
-                                                    }}
-                                                    type="secondary"
-                                                    width="full"
-                                                >
-                                                    Edit Profile
-                                                </CallToAction>
-                                            )}
-                                        {isEditing && (
-                                            <>
-                                                <CallToAction
-                                                    size="sm"
-                                                    type="primary"
-                                                    width="full"
-                                                    onClick={submitForm}
-                                                    disabled={isSubmitting}
-                                                >
-                                                    {isSubmitting ? (
-                                                        <IconSpinner className="size-5 animate-spin mx-auto" />
-                                                    ) : (
-                                                        'Update profile'
-                                                    )}
-                                                </CallToAction>
-                                                <CallToAction
-                                                    size="sm"
-                                                    type="secondary"
-                                                    width="full"
-                                                    onClick={() => {
-                                                        setIsEditing(false)
-                                                        resetForm()
-                                                    }}
-                                                >
-                                                    Cancel
-                                                </CallToAction>
-                                            </>
+                            {isEditing ? (
+                                <div className="space-y-2 mb-4">
+                                    <CallToAction
+                                        size="sm"
+                                        type="primary"
+                                        width="full"
+                                        onClick={submitForm}
+                                        disabled={isSubmitting}
+                                    >
+                                        {isSubmitting ? (
+                                            <IconSpinner className="size-5 animate-spin mx-auto" />
+                                        ) : (
+                                            'Update profile'
                                         )}
-                                        {user?.role?.type === 'moderator' && (
-                                            <>
-                                                <CallToAction
-                                                    to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
-                                                    size="sm"
-                                                    type="secondary"
-                                                    width="full"
-                                                >
-                                                    View in Strapi
-                                                </CallToAction>
-                                                <CallToAction
-                                                    size="sm"
-                                                    type="primary"
-                                                    onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
-                                                    width="full"
-                                                >
-                                                    {profile.user?.data.attributes.blocked
-                                                        ? 'Unblock User'
-                                                        : 'Block User'}
-                                                </CallToAction>
-                                            </>
-                                        )}
+                                    </CallToAction>
+                                    <CallToAction
+                                        size="sm"
+                                        type="secondary"
+                                        width="full"
+                                        onClick={() => {
+                                            setIsEditing(false)
+                                            resetForm()
+                                        }}
+                                    >
+                                        Cancel
+                                    </CallToAction>
+                                </div>
+                            ) : (
+                                (user?.profile?.id === data?.id ||
+                                    (user?.role?.type === 'moderator' && user?.webmaster)) && (
+                                    <div className="mb-4">
+                                        <CallToAction
+                                            size="sm"
+                                            onClick={() => {
+                                                setIsEditing(true)
+                                            }}
+                                            type="secondary"
+                                            width="full"
+                                        >
+                                            Edit Profile
+                                        </CallToAction>
+                                    </div>
+                                )
+                            )}
+                            {isModerator && (
+                                <Block title="Moderator tools">
+                                    <div className="space-y-2">
+                                        <CallToAction
+                                            to={`${process.env.GATSBY_SQUEAK_API_HOST}/admin/content-manager/collection-types/plugin::users-permissions.user/${profile.user?.data.id}`}
+                                            size="sm"
+                                            type="secondary"
+                                            width="full"
+                                        >
+                                            View in Strapi
+                                        </CallToAction>
+                                        <CallToAction
+                                            size="sm"
+                                            type="primary"
+                                            onClick={() => handleBlock(!profile.user?.data.attributes.blocked)}
+                                            width="full"
+                                        >
+                                            {profile.user?.data.attributes.blocked ? 'Unblock User' : 'Block User'}
+                                        </CallToAction>
                                     </div>
                                 </Block>
                             )}
                         </div>
 
                         <div className="flex-grow @container">
-                            <div className="sticky top-2">
-                                <ProfileTabs
-                                    profile={profile}
-                                    firstName={firstName}
-                                    id={id}
-                                    sort={sort}
-                                    setSort={setSort}
-                                    posts={posts}
-                                    isEditing={isEditing}
-                                    values={values}
-                                    errors={errors}
-                                    setFieldValue={setFieldValue}
-                                />
-                            </div>
+                            <ProfileTabs
+                                profile={profile}
+                                firstName={firstName}
+                                id={id}
+                                sort={sort}
+                                setSort={setSort}
+                                posts={posts}
+                                isEditing={isEditing}
+                                values={values}
+                                errors={errors}
+                                setFieldValue={setFieldValue}
+                            />
                             <div className="mt-6">
                                 {profile.teams?.data?.length > 0 &&
                                     profile.teams.data[0].attributes.profiles?.data?.length > 0 && (
