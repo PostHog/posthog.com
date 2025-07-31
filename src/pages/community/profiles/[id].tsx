@@ -26,17 +26,18 @@ import PostsTable from 'components/Edition/PostsTable'
 import { SortDropdown } from 'components/Edition/Views/Default'
 import { sortOptions } from 'components/Edition/Posts'
 import { AnimatePresence, motion } from 'framer-motion'
-import Tooltip from 'components/Tooltip'
 import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import Flag from 'react-country-flag'
+import Stickers from 'components/Stickers/Index'
+import RadixTooltip from 'components/RadixUI/Tooltip'
+import Tooltip from 'components/Tooltip'
 import CloudinaryImage from 'components/CloudinaryImage'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { formatDistanceToNow } from 'date-fns'
 import OSTabs from 'components/OSTabs'
 import { TeamMember } from 'components/People'
-import { IconThumbsUpFilled, IconThumbsDownFilled } from '@posthog/icons'
+import { IconThumbsUpFilled, IconThumbsDownFilled, IconArrowUpRight } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
 dayjs.extend(relativeTime)
@@ -182,11 +183,13 @@ const Bio = ({ biography, readme }) => {
 const Block = ({ title, children, url }) => {
     return (
         <Fieldset
+            data-scheme="secondary"
             className="bg-primary"
             legend={
                 url ? (
-                    <Link className="text-red dark:text-yellow font-semibold" to={url}>
+                    <Link className="font-semibold group" to={url} state={{ newWindow: true }}>
                         {title}
+                        <IconArrowUpRight className="size-4 -mt-px inline-block text-muted group-hover:text-secondary" />
                     </Link>
                 ) : (
                     title
@@ -433,11 +436,12 @@ export default function ProfilePage({ params }: PageProps) {
                                 <div className="flex items-center space-x-2 my-2">
                                     <h2 className="uppercase">{name}</h2>
                                     {profile.country && (
-                                        <Flag
-                                            style={{ width: '1.5rem', height: '1.5rem' }}
-                                            countryCode={profile.country}
-                                            svg
-                                        />
+                                        <RadixTooltip
+                                            trigger={<Stickers country={profile.country} className="w-6 h-6" />}
+                                            delay={0}
+                                        >
+                                            {profile.location || profile.country}
+                                        </RadixTooltip>
                                     )}
                                 </div>
                                 {profile.companyRole && (
@@ -609,10 +613,10 @@ export default function ProfilePage({ params }: PageProps) {
                                 {profile.teams?.data?.length > 0 &&
                                     profile.teams.data[0].attributes.profiles?.data?.length > 0 && (
                                         <Block
-                                            title={`${team.attributes.name} team`}
+                                            title={`${team.attributes.name} Team`}
                                             url={`/teams/${team.attributes.slug}`}
                                         >
-                                            <div className="grid grid-cols-2 gap-3 @xl:grid-cols-4">
+                                            <div className="grid grid-cols-2 gap-3 @lg:grid-cols-3 @3xl:grid-cols-4 pt-8">
                                                 {team.attributes.profiles.data
                                                     .filter((teammate) => teammate.id !== data?.id)
                                                     .map((teammate) => {
