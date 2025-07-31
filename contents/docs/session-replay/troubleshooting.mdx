@@ -77,7 +77,7 @@ By default, `base` and `assets` imported from `$app/paths` in Svelte use relativ
 
 For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
 
-## Images and other media assets do not appear in the replay
+## Images and videos do not appear in the replay
 
 PostHog captures session replays by capturing the DOM and not videos/screenshots. When you watch a replay, PostHog tries to reconstruct the DOM.
 
