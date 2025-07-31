@@ -230,6 +230,7 @@ export default function RichText({
     preview = true,
     label = '',
     mentions = false,
+    bodyKey = 'body',
 }: any) {
     const textarea = useRef<HTMLTextAreaElement>(null)
     const [value, setValue] = useState(initialValue)
@@ -328,7 +329,7 @@ export default function RichText({
     }, [cursor])
 
     useEffect(() => {
-        setFieldValue('body', value)
+        setFieldValue(bodyKey, value)
     }, [value])
 
     const handleKeyDown = (e) => {
@@ -433,7 +434,7 @@ export default function RichText({
                         )}
                         <span className="bg-white dark:bg-accent-dark absolute right-4 bottom-2 px-1 rounded-sm">
                             <span className="text-xs opacity-70">
-                                {values.body.length} / {maxLength}
+                                {values[bodyKey]?.length} / {maxLength}
                             </span>
                         </span>
                     </div>

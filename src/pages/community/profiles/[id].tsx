@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
 import Layout from 'components/Layout'
@@ -37,10 +37,500 @@ import relativeTime from 'dayjs/plugin/relativeTime'
 import { formatDistanceToNow } from 'date-fns'
 import OSTabs from 'components/OSTabs'
 import { TeamMember } from 'components/People'
-import { IconThumbsUpFilled, IconThumbsDownFilled, IconArrowUpRight } from '@posthog/icons'
+import {
+    IconThumbsUpFilled,
+    IconThumbsDownFilled,
+    IconArrowUpRight,
+    IconLoading,
+    IconSpinner,
+    IconUpload,
+    IconX,
+} from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import RichText from 'components/Squeak/components/RichText'
+import transformValues from 'components/Squeak/util/transformValues'
+import { profileBackgrounds } from '../../../data/profileBackgrounds'
+
 dayjs.extend(relativeTime)
+
+const WebsiteIcon = () => {
+    return (
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity"
+        >
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
+            />
+        </svg>
+    )
+}
+
+const BackgroundImageField = ({
+    setFieldValue,
+    values,
+}: {
+    setFieldValue: (field: string, value: any) => void
+    values: any
+}) => {
+    const currentBg = values.backgroundImage
+    return (
+        <Block title="Fun things">
+            <label className="text-sm font-bold">Choose a background for your profile</label>
+            <div className="grid grid-cols-2 gap-2 mt-2">
+                {profileBackgrounds.map((bg) => {
+                    const isSelected = currentBg?.id === bg.id
+                    return (
+                        <button
+                            key={bg.id}
+                            type="button"
+                            onClick={() =>
+                                setFieldValue('backgroundImage', {
+                                    id: bg.id,
+                                    url: bg.url,
+                                    backgroundSize: bg.backgroundSize,
+                                    backgroundRepeat: bg.backgroundRepeat,
+                                    backgroundPosition: bg.backgroundPosition,
+                                })
+                            }
+                            className={`relative overflow-hidden rounded-md border-2 ${
+                                isSelected ? 'border-red dark:border-yellow' : 'border-input'
+                            } transition-all hover:scale-105`}
+                        >
+                            <div
+                                className="aspect-video w-full"
+                                style={{
+                                    backgroundImage: `url(${bg.url})`,
+                                    backgroundSize: bg.backgroundSize || 'auto',
+                                    backgroundRepeat: bg.backgroundRepeat || 'no-repeat',
+                                    backgroundPosition: bg.backgroundPosition || 'center',
+                                }}
+                            />
+                            <span className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs p-1">
+                                {bg.name}
+                            </span>
+                        </button>
+                    )
+                })}
+
+                <button
+                    type="button"
+                    onClick={() => setFieldValue('backgroundImage', null)}
+                    className={`relative overflow-hidden rounded-md border-2 ${
+                        !currentBg ? 'border-red dark:border-yellow' : 'border-input'
+                    } transition-all hover:scale-105 aspect-video`}
+                >
+                    <span className="text-sm font-bold">No background</span>
+                </button>
+            </div>
+        </Block>
+    )
+}
+
+const Links = ({
+    profile,
+    isEditing,
+    setFieldValue,
+    formValues,
+    errors,
+}: {
+    profile: ProfileData
+    isEditing: boolean
+    setFieldValue: (field: string, value: string) => void
+    formValues: any
+    errors: any
+}) => {
+    return (
+        <ul className={`flex m-0 p-0 list-none ${isEditing ? 'flex-col' : 'space-x-3'}`}>
+            {isEditing ? (
+                <li>
+                    <Input
+                        error={errors.github}
+                        label="GitHub"
+                        name="github"
+                        value={formValues.github}
+                        onChange={(e) => setFieldValue('github', e.target.value)}
+                    />
+                </li>
+            ) : (
+                profile.github && (
+                    <li>
+                        <Link to={profile.github} externalNoIcon>
+                            <GitHub className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                        </Link>
+                    </li>
+                )
+            )}
+            {isEditing ? (
+                <li>
+                    <Input
+                        error={errors.twitter}
+                        label="X"
+                        name="twitter"
+                        value={formValues.twitter}
+                        onChange={(e) => setFieldValue('twitter', e.target.value)}
+                    />
+                </li>
+            ) : (
+                profile.twitter && (
+                    <li>
+                        <Link to={profile.twitter} externalNoIcon>
+                            <Twitter className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                        </Link>
+                    </li>
+                )
+            )}
+            {isEditing ? (
+                <li>
+                    <Input
+                        error={errors.linkedin}
+                        label="LinkedIn"
+                        name="linkedin"
+                        value={formValues.linkedin}
+                        onChange={(e) => setFieldValue('linkedin', e.target.value)}
+                    />
+                </li>
+            ) : (
+                profile.linkedin && (
+                    <li>
+                        <Link to={profile.linkedin} externalNoIcon>
+                            <LinkedIn className="w-6 h-6 opacity-80 hover:opacity-100 transition-opacity" />
+                        </Link>
+                    </li>
+                )
+            )}
+            {isEditing ? (
+                <li>
+                    <Input
+                        error={errors.website}
+                        label="Website"
+                        name="website"
+                        value={formValues.website}
+                        onChange={(e) => setFieldValue('website', e.target.value)}
+                    />
+                </li>
+            ) : (
+                profile.website && (
+                    <li>
+                        <Link to={profile.website} externalNoIcon>
+                            <WebsiteIcon />
+                        </Link>
+                    </li>
+                )
+            )}
+        </ul>
+    )
+}
+
+const Input = ({ label, name, value, onChange, error }) => {
+    return (
+        <div>
+            <label className="text-xs font-semibold" htmlFor={name}>
+                {label}
+            </label>
+            <input type="text" name={name} value={value} onChange={onChange} placeholder={label} className="rounded" />
+            {error && <p className="text-red m-0 text-xs font-bold mt-1">{error}</p>}
+        </div>
+    )
+}
+
+const AvatarBlock = ({
+    profile,
+    isEditing,
+    name,
+    setFieldValue,
+    values,
+    errors,
+}: {
+    profile: ProfileData
+    isEditing: boolean
+    name: string
+    setFieldValue: (field: string, value: string) => void
+    values: any
+    errors: any
+}) => {
+    const inputRef = useRef<HTMLInputElement>(null)
+    const [imageURL, setImageURL] = useState(values?.avatar)
+
+    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+        const file = e.target.files[0]
+        setFieldValue('avatar', file)
+        const reader = new FileReader()
+        reader.onloadend = () => {
+            reader?.result && setImageURL(reader.result)
+        }
+
+        reader.readAsDataURL(file)
+    }
+
+    useEffect(() => {
+        if (!values.avatar && inputRef?.current) {
+            inputRef.current.value = null
+        }
+
+        setImageURL(values.avatar)
+    }, [values.avatar])
+
+    return (
+        <div className="relative flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
+            {isEditing && (
+                <div className="absolute right-0 top-0 flex items-center">
+                    <div className="relative p-2 border-l border-b border-primary rounded-bl-md bg-primary overflow-hidden">
+                        <IconUpload className="size-5" />
+                        <input
+                            ref={inputRef}
+                            onChange={handleChange}
+                            accept=".jpg, .png, .gif, .jpeg"
+                            className="opacity-0 absolute w-full h-full top-0 left-0 cursor-pointer z-10"
+                            name="avatar"
+                            type="file"
+                        />
+                    </div>
+                    {imageURL && (
+                        <button
+                            onClick={() => setFieldValue('avatar', null)}
+                            className="p-2 border-l border-b border-primary bg-primary"
+                        >
+                            <IconX className="size-5" />
+                        </button>
+                    )}
+                </div>
+            )}
+            <Avatar className="w-full border-b border-primary" src={imageURL} color={profile.color} />
+            {isEditing ? (
+                <div className="p-3 w-full">
+                    <Input
+                        label="First name"
+                        name="firstName"
+                        value={values.firstName}
+                        onChange={(e) => setFieldValue('firstName', e.target.value)}
+                        error={errors.firstName}
+                    />
+                    <Input
+                        label="Last name"
+                        name="lastName"
+                        value={values.lastName}
+                        onChange={(e) => setFieldValue('lastName', e.target.value)}
+                        error={errors.lastName}
+                    />
+                    <label className="text-xs font-semibold">Favorite color</label>
+                    <ul className="list-none m-0 p-0 flex space-x-1">
+                        {[
+                            'lime-green',
+                            'blue',
+                            'orange',
+                            'teal',
+                            'purple',
+                            'seagreen',
+                            'salmon',
+                            'yellow',
+                            'red',
+                            'green',
+                            'lilac',
+                            'sky-blue',
+                        ].map((color) => {
+                            const active = values.color === color
+                            return (
+                                <li key={color} onClick={() => setFieldValue('color', color)}>
+                                    <button
+                                        type="button"
+                                        className={`size-5 rounded-full bg-${color} border-[1.5px] ${
+                                            active ? 'border-black dark:border-white' : 'border-transparent'
+                                        }`}
+                                    />
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
+            ) : (
+                <div className="flex items-center space-x-2 my-2">
+                    <h2 className="uppercase">{name}</h2>
+                    {profile.country && (
+                        <RadixTooltip trigger={<Stickers country={profile.country} className="w-6 h-6" />} delay={0}>
+                            {profile.location || profile.country}
+                        </RadixTooltip>
+                    )}
+                </div>
+            )}
+            {!isEditing && profile.companyRole && (
+                <p className="text-secondary text-sm m-0 mb-2 -mt-2">{profile.companyRole}</p>
+            )}
+        </div>
+    )
+}
+
+const Details = ({ profile, isEditing, setFieldValue, values, errors, isTeamMember }) => {
+    return (
+        <div className="text-sm space-y-1">
+            {!isEditing && (
+                <p className="flex justify-between m-0">
+                    {isTeamMember ? (
+                        <>
+                            <span className="font-semibold">Joined PostHog</span>
+                            <span>{dayjs(profile.startDate).fromNow()}</span>
+                        </>
+                    ) : (
+                        <>
+                            <span className="font-semibold">Community member since</span>
+                            <span>{dayjs(profile.createdAt).format('MMMM D, YYYY')}</span>
+                        </>
+                    )}
+                </p>
+            )}
+            {isEditing ? (
+                <>
+                    <label className="text-xs font-semibold">Pineapple on pizza</label>
+                    <ToggleGroup
+                        title="Pineapple on pizza"
+                        hideTitle={true}
+                        options={[
+                            {
+                                label: 'Yes',
+                                value: 'yes',
+                            },
+                            {
+                                label: 'No',
+                                value: 'no',
+                            },
+                        ]}
+                        value={values.pineappleOnPizza === null ? undefined : values.pineappleOnPizza ? 'yes' : 'no'}
+                        onValueChange={(value) => setFieldValue('pineappleOnPizza', value === 'yes' ? true : false)}
+                    />
+                </>
+            ) : (
+                profile.pineappleOnPizza !== null && (
+                    <p className="flex justify-between m-0">
+                        <span className="font-semibold">Pineapple on pizza:</span>
+                        <span>
+                            {profile.pineappleOnPizza ? (
+                                <IconThumbsUpFilled className="size-4 text-green" />
+                            ) : (
+                                <IconThumbsDownFilled className="size-4 text-red" />
+                            )}
+                        </span>
+                    </p>
+                )
+            )}
+            {isEditing ? (
+                <Input
+                    label="Location"
+                    name="location"
+                    value={values.location}
+                    onChange={(e) => setFieldValue('location', e.target.value)}
+                    error={errors.location}
+                />
+            ) : (
+                profile.location && (
+                    <p className="flex justify-between m-0">
+                        <span className="font-semibold">Location:</span>
+                        <span>{profile.location}</span>
+                    </p>
+                )
+            )}
+            {isEditing ? (
+                <Input
+                    label="Pronouns"
+                    name="pronouns"
+                    value={values.pronouns}
+                    onChange={(e) => setFieldValue('pronouns', e.target.value)}
+                    error={errors.pronouns}
+                />
+            ) : (
+                profile.pronouns && (
+                    <p className="flex justify-between m-0">
+                        <span className="font-semibold">Pronouns:</span>
+                        <span>{profile.pronouns}</span>
+                    </p>
+                )
+            )}
+        </div>
+    )
+}
+
+function convertCentimetersToInches(centimeters: number): number {
+    return centimeters / 2.54
+}
+
+const ModeratorFields = ({ setFieldValue, values, errors }) => {
+    const [heightUnit, setHeightUnit] = useState('in')
+    const [height, setHeight] = useState(values.height)
+
+    useEffect(() => {
+        setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(height) : height)
+    }, [heightUnit])
+
+    return (
+        <div>
+            <Input
+                label="Role"
+                name="companyRole"
+                value={values.companyRole}
+                onChange={(e) => setFieldValue('companyRole', e.target.value)}
+                error={errors.companyRole}
+            />
+            <Input
+                label="Country (2-char code)"
+                name="country"
+                value={values.country}
+                onChange={(e) => setFieldValue('country', e.target.value)}
+                error={errors.country}
+            />
+            <div>
+                <label className="text-xs font-semibold">Height</label>
+                <div className="flex items-center space-x-1">
+                    <input
+                        className="rounded"
+                        type="number"
+                        name="height"
+                        value={height}
+                        onChange={(e) => {
+                            const value = Number(e.target.value)
+                            setHeight(value)
+                            setFieldValue('height', heightUnit === 'cm' ? convertCentimetersToInches(value) : value)
+                        }}
+                    />
+                    <ToggleGroup
+                        title="Height unit"
+                        hideTitle
+                        options={[
+                            { label: 'in', value: 'in' },
+                            { label: 'cm', value: 'cm' },
+                        ]}
+                        value={heightUnit}
+                        onValueChange={(value) => setHeightUnit(value)}
+                    />
+                </div>
+            </div>
+            <div>
+                <label className="text-xs font-semibold">Show comments</label>
+                <p className="text-xs text-secondary m-0 mb-2">
+                    Let visitors comment on your profile. You'll get comment notifications via email.
+                </p>
+                <ToggleGroup
+                    title="Show comments"
+                    hideTitle
+                    options={[
+                        { label: 'Yes', value: 'yes' },
+                        { label: 'No', value: 'no' },
+                    ]}
+                    value={values.amaEnabled === null ? undefined : values.amaEnabled ? 'yes' : 'no'}
+                    onValueChange={(value) => setFieldValue('amaEnabled', value === 'yes' ? true : false)}
+                />
+            </div>
+        </div>
+    )
+}
 
 const ProfileSkeleton = () => {
     return (
@@ -155,31 +645,6 @@ const LikedPosts = ({ profileID }) => {
     )
 }
 
-const Bio = ({ biography, readme }) => {
-    const [activeTab, setActiveTab] = useState('biography')
-    const tabbable = biography && readme
-    const Container = tabbable ? 'button' : 'span'
-
-    const tabs = [
-        {
-            value: 'biography',
-            label: 'Biography',
-            content: <Markdown>{biography}</Markdown>,
-        },
-        {
-            value: 'readme',
-            label: 'README',
-            content: <Markdown>{readme}</Markdown>,
-        },
-    ]
-
-    return (
-        <section className="article-content">
-            <OSTabs tabs={tabs} defaultValue={tabs[0].value} />
-        </section>
-    )
-}
-
 const Block = ({ title, children, url }) => {
     return (
         <Fieldset
@@ -201,25 +666,49 @@ const Block = ({ title, children, url }) => {
     )
 }
 
-const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
-    const { user } = useUser()
+const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
+    return (
+        <div className="bg-white dark:bg-accent-dark rounded-md border border-primary overflow-hidden">
+            <RichText values={values} initialValue={initialValue} setFieldValue={setFieldValue} bodyKey={bodyKey} />
+        </div>
+    )
+}
+
+const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts, isEditing, values, errors, setFieldValue }) => {
+    const { user, isModerator } = useUser()
 
     const tabs = [
         {
             value: 'bio',
             label: 'Bio',
-            content: (
+            content: isEditing ? (
+                <BodyEditor
+                    values={values}
+                    setFieldValue={setFieldValue}
+                    bodyKey="biography"
+                    initialValue={profile.biography}
+                />
+            ) : (
                 <Markdown className="prose prose-sm max-w-full">
                     {profile.biography || `${firstName} hasn't written a bio yet`}
                 </Markdown>
             ),
         },
-        ...(profile.readme
+        ...((isModerator && isEditing) || profile.readme
             ? [
                   {
                       value: 'readme',
                       label: 'README',
-                      content: <Markdown className="prose prose-sm">{profile.readme}</Markdown>,
+                      content: isEditing ? (
+                          <BodyEditor
+                              values={values}
+                              setFieldValue={setFieldValue}
+                              bodyKey="readme"
+                              initialValue={profile.readme}
+                          />
+                      ) : (
+                          <Markdown className="prose prose-sm">{profile.readme}</Markdown>
+                      ),
                   },
               ]
             : []),
@@ -259,12 +748,25 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts }) => {
     return <OSTabs tabs={tabs} defaultValue={tabs[0].value} className="h-auto" triggerDataScheme="primary" />
 }
 
+const ValidationSchema = Yup.object().shape({
+    firstName: Yup.string().required('Required'),
+    lastName: Yup.string().required('Required'),
+    website: Yup.string().url('Invalid URL').nullable(),
+    github: Yup.string().url('Invalid URL').nullable(),
+    linkedin: Yup.string().url('Invalid URL').nullable(),
+    twitter: Yup.string().url('Invalid URL').nullable(),
+    biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
+    country: Yup.string().nullable(),
+    location: Yup.string().nullable(),
+})
+
 export default function ProfilePage({ params }: PageProps) {
     const id = parseInt(params.id || params['*'])
     const posthog = usePostHog()
     const nav = useTopicsNav()
     const { user, getJwt } = useUser()
     const [sort, setSort] = useState(sortOptions[0].label)
+    const [isEditing, setIsEditing] = useState(false)
     const posts = usePosts({
         params: {
             sort: sortOptions.find((option) => option.label === sort)?.sort,
@@ -400,6 +902,111 @@ export default function ProfilePage({ params }: PageProps) {
           }
         : {}
 
+    const { submitForm, isSubmitting, setFieldValue, values, resetForm, errors } = useFormik({
+        validationSchema: ValidationSchema,
+        enableReinitialize: true,
+        initialValues: {
+            website: profile?.website,
+            twitter: profile?.twitter,
+            linkedin: profile?.linkedin,
+            github: profile?.github,
+            avatar: getAvatarURL(profile),
+            firstName: profile?.firstName,
+            lastName: profile?.lastName,
+            location: profile?.location,
+            country: profile?.country,
+            pronouns: profile?.pronouns,
+            pineappleOnPizza: profile?.pineappleOnPizza,
+            biography: profile?.biography,
+            images: [],
+            readme: profile?.readme,
+            height: profile?.height,
+            color: profile?.color,
+            backgroundImage: profile?.backgroundImage,
+        },
+        onSubmit: async ({ avatar, images, ...values }) => {
+            try {
+                posthog?.capture('squeak profile update start', {
+                    profileId: id,
+                    ...values,
+                })
+
+                const JWT = await getJwt()
+                let image = avatar
+
+                if (avatar && typeof avatar === 'object') {
+                    const formData = new FormData()
+                    formData.append('files', avatar)
+
+                    const uploadedImage = await fetch(`${process.env.GATSBY_SQUEAK_API_HOST}/api/upload`, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            Authorization: `Bearer ${JWT}`,
+                        },
+                    }).then((res) => res.json())
+
+                    if (uploadedImage?.length > 0) {
+                        image = uploadedImage[0]
+                    }
+                }
+
+                const { body: biography } =
+                    values.biography && images.length > 0
+                        ? await transformValues({ body: values.biography, images }, id, JWT)
+                        : {}
+
+                const { body: readme } =
+                    values.readme && images.length > 0
+                        ? await transformValues({ body: values.readme, images }, id, JWT)
+                        : {}
+
+                const body = {
+                    data: {
+                        ...values,
+                        ...((image && typeof image !== 'string') || image === null
+                            ? { avatar: image?.id ?? null }
+                            : {}),
+                        ...(biography ? { biography } : {}),
+                        ...(readme ? { readme } : {}),
+                    },
+                }
+
+                const { data } = await fetch(
+                    `${process.env.GATSBY_SQUEAK_API_HOST}/api/profiles/${id}?populate=avatar`,
+                    {
+                        method: 'PUT',
+                        body: JSON.stringify(body),
+                        headers: {
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${JWT}`,
+                        },
+                    }
+                ).then((res) => res.json())
+
+                if (data) {
+                    await mutate()
+                }
+
+                posthog?.capture('squeak profile update', {
+                    profileId: id,
+                    ...values,
+                })
+            } catch (error) {
+                posthog?.capture('squeak error', {
+                    source: 'EditProfile.handleSubmit',
+                    error: JSON.stringify(error),
+                    profileId: id,
+                    ...values,
+                })
+
+                throw error
+            } finally {
+                setIsEditing(false)
+            }
+        },
+    })
+
     if (!profile && isLoading) {
         return <ProfileSkeleton />
     } else if (!profile && !isLoading) {
@@ -415,129 +1022,53 @@ export default function ProfilePage({ params }: PageProps) {
                     data-scheme="primary"
                     className="mx-auto max-w-screen-xl px-5 @container"
                     style={
-                        profile.backgroundImage
+                        values.backgroundImage
                             ? {
-                                  backgroundImage: `url(${profile.backgroundImage.url})`,
-                                  backgroundSize: profile.backgroundImage.backgroundSize || 'auto',
-                                  backgroundRepeat: profile.backgroundImage.backgroundRepeat || 'no-repeat',
-                                  backgroundPosition: profile.backgroundImage.backgroundPosition || 'center',
+                                  backgroundImage: `url(${values.backgroundImage.url})`,
+                                  backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                                  backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                                  backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
                               }
                             : undefined
                     }
                 >
                     <div className="flex flex-col @2xl:flex-row gap-6 p-6">
                         <div className="@2xl:max-w-xs w-full flex-shrink-0">
-                            <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
-                                <Avatar
-                                    className="w-full border-b border-primary"
-                                    src={profile.avatar?.data?.attributes?.url}
-                                    color={profile.color}
-                                />
-                                <div className="flex items-center space-x-2 my-2">
-                                    <h2 className="uppercase">{name}</h2>
-                                    {profile.country && (
-                                        <RadixTooltip
-                                            trigger={<Stickers country={profile.country} className="w-6 h-6" />}
-                                            delay={0}
-                                        >
-                                            {profile.location || profile.country}
-                                        </RadixTooltip>
-                                    )}
-                                </div>
-                                {profile.companyRole && (
-                                    <p className="text-secondary text-sm m-0 mb-2 -mt-2">{profile.companyRole}</p>
-                                )}
-                            </div>
+                            <AvatarBlock
+                                profile={profile}
+                                isEditing={isEditing}
+                                name={name}
+                                setFieldValue={setFieldValue}
+                                values={values}
+                                errors={errors}
+                            />
 
                             {(profile.pineappleOnPizza !== null || profile.pronouns || profile.location) && (
                                 <Block title="Details">
-                                    <div className="text-sm space-y-1">
-                                        <p className="flex justify-between m-0">
-                                            {isTeamMember ? (
-                                                <>
-                                                    <span className="font-semibold">Joined PostHog</span>
-                                                    <span>{dayjs(profile.startDate).fromNow()}</span>
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <span className="font-semibold">Community member since</span>
-                                                    <span>{dayjs(profile.createdAt).format('MMMM D, YYYY')}</span>
-                                                </>
-                                            )}
-                                        </p>
-                                        {profile.pineappleOnPizza !== null && (
-                                            <p className="flex justify-between m-0">
-                                                <span className="font-semibold">Pineapple on pizza:</span>
-                                                <span>
-                                                    {profile.pineappleOnPizza ? (
-                                                        <IconThumbsUpFilled className="size-4 text-green" />
-                                                    ) : (
-                                                        <IconThumbsDownFilled className="size-4 text-red" />
-                                                    )}
-                                                </span>
-                                            </p>
-                                        )}
-                                        {profile.pronouns && (
-                                            <p className="flex justify-between m-0">
-                                                <span className="font-semibold">Pronouns:</span>
-                                                <span>{profile.pronouns}</span>
-                                            </p>
-                                        )}
-                                        {profile.location && (
-                                            <p className="flex justify-between m-0">
-                                                <span className="font-semibold">Location:</span>
-                                                <span>{profile.location}</span>
-                                            </p>
-                                        )}
-                                    </div>
+                                    <Details
+                                        profile={profile}
+                                        isEditing={isEditing}
+                                        setFieldValue={setFieldValue}
+                                        values={values}
+                                        errors={errors}
+                                        isTeamMember={isTeamMember}
+                                    />
                                 </Block>
                             )}
 
-                            {(profile.github || profile.twitter || profile.linkedin || profile.website) && (
+                            {(isEditing ||
+                                profile.github ||
+                                profile.twitter ||
+                                profile.linkedin ||
+                                profile.website) && (
                                 <Block title="Links">
-                                    <ul className="flex space-x-3 m-0 p-0 list-none">
-                                        {profile.github && (
-                                            <li>
-                                                <Link to={profile.github} externalNoIcon>
-                                                    <GitHub className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
-                                                </Link>
-                                            </li>
-                                        )}
-                                        {profile.twitter && (
-                                            <li>
-                                                <Link to={profile.twitter} externalNoIcon>
-                                                    <Twitter className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
-                                                </Link>
-                                            </li>
-                                        )}
-                                        {profile.linkedin && (
-                                            <li>
-                                                <Link to={profile.linkedin} externalNoIcon>
-                                                    <LinkedIn className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity" />
-                                                </Link>
-                                            </li>
-                                        )}
-                                        {profile.website && (
-                                            <li>
-                                                <Link to={profile.website} externalNoIcon>
-                                                    <svg
-                                                        xmlns="http://www.w3.org/2000/svg"
-                                                        fill="none"
-                                                        viewBox="0 0 24 24"
-                                                        strokeWidth={1.5}
-                                                        stroke="currentColor"
-                                                        className="w-6 h-6 opacity-70 hover:opacity-100 transition-opacity"
-                                                    >
-                                                        <path
-                                                            strokeLinecap="round"
-                                                            strokeLinejoin="round"
-                                                            d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418"
-                                                        />
-                                                    </svg>
-                                                </Link>
-                                            </li>
-                                        )}
-                                    </ul>
+                                    <Links
+                                        errors={errors}
+                                        setFieldValue={setFieldValue}
+                                        formValues={values}
+                                        profile={profile}
+                                        isEditing={isEditing}
+                                    />
                                 </Block>
                             )}
 
@@ -558,20 +1089,56 @@ export default function ProfilePage({ params }: PageProps) {
                                     </ul>
                                 </Block>
                             )}
+                            {isEditing && <BackgroundImageField setFieldValue={setFieldValue} values={values} />}
+                            {isModerator && isEditing && (
+                                <Block title="Special moderator things">
+                                    <ModeratorFields setFieldValue={setFieldValue} values={values} errors={errors} />
+                                </Block>
+                            )}
                             {(isCurrentUser || isModerator) && (
                                 <Block title="Profile Settings">
                                     <div className="flex flex-col space-y-2">
-                                        {(user?.profile?.id === data?.id ||
-                                            (user?.role?.type === 'moderator' && user?.webmaster)) && (
-                                            <CallToAction
-                                                size="sm"
-                                                to="/community/profile/edit"
-                                                type="secondary"
-                                                width="full"
-                                                state={{ profileID: profile.id }}
-                                            >
-                                                Edit Profile
-                                            </CallToAction>
+                                        {!isEditing &&
+                                            (user?.profile?.id === data?.id ||
+                                                (user?.role?.type === 'moderator' && user?.webmaster)) && (
+                                                <CallToAction
+                                                    size="sm"
+                                                    onClick={() => {
+                                                        setIsEditing(true)
+                                                    }}
+                                                    type="secondary"
+                                                    width="full"
+                                                >
+                                                    Edit Profile
+                                                </CallToAction>
+                                            )}
+                                        {isEditing && (
+                                            <>
+                                                <CallToAction
+                                                    size="sm"
+                                                    type="primary"
+                                                    width="full"
+                                                    onClick={submitForm}
+                                                    disabled={isSubmitting}
+                                                >
+                                                    {isSubmitting ? (
+                                                        <IconSpinner className="size-5 animate-spin mx-auto" />
+                                                    ) : (
+                                                        'Update profile'
+                                                    )}
+                                                </CallToAction>
+                                                <CallToAction
+                                                    size="sm"
+                                                    type="secondary"
+                                                    width="full"
+                                                    onClick={() => {
+                                                        setIsEditing(false)
+                                                        resetForm()
+                                                    }}
+                                                >
+                                                    Cancel
+                                                </CallToAction>
+                                            </>
                                         )}
                                         {user?.role?.type === 'moderator' && (
                                             <>
@@ -601,14 +1168,20 @@ export default function ProfilePage({ params }: PageProps) {
                         </div>
 
                         <div className="flex-grow @container">
-                            <ProfileTabs
-                                profile={profile}
-                                firstName={firstName}
-                                id={id}
-                                sort={sort}
-                                setSort={setSort}
-                                posts={posts}
-                            />
+                            <div className="sticky top-2">
+                                <ProfileTabs
+                                    profile={profile}
+                                    firstName={firstName}
+                                    id={id}
+                                    sort={sort}
+                                    setSort={setSort}
+                                    posts={posts}
+                                    isEditing={isEditing}
+                                    values={values}
+                                    errors={errors}
+                                    setFieldValue={setFieldValue}
+                                />
+                            </div>
                             <div className="mt-6">
                                 {profile.teams?.data?.length > 0 &&
                                     profile.teams.data[0].attributes.profiles?.data?.length > 0 && (
