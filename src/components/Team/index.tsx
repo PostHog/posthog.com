@@ -195,7 +195,7 @@ const JobCard = ({ job }: { job: any }) => {
 
     return (
         <ZoomHover size="lg" className="!flex h-full w-full aspect-[3/4]">
-            <div className="group container-size not-prose aspect-[3/4] border border-primary bg-teal block rounded max-w-96 relative">
+            <div className="group container-size not-prose aspect-[3/4] border border-primary bg-teal block rounded max-w-96 relative hover:z-20">
                 <Link
                     to={`${job.fields.slug}`}
                     state={{ newWindow: true }}
