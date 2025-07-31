@@ -19,7 +19,7 @@ We run email campaigns through Customer.io. Speak to <TeamMember name="Joe Marti
 <details>
 <summary>I'm interested in running, attending, or speaking at an event</summary>
 
-<TeamMember name="Daniel Zaltsman" /> is our resident party planner. Read the [events strategy handbook](https://posthog.com/handbook/brand/events) for more. 
+You should speak to <TeamMember name="Daniel Zaltsman" />, our resident "party planner". Read the [events strategy handbook](/handbook/brand/events) for more. 
 </details>
 
 <details>
@@ -31,7 +31,9 @@ Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/
 <details>
 <summary>I need help with documentation</summary>
 
-<TeamMember name="Vincent Ge" /> and <TeamMember name="Edwin Lim" /> on the content team are your main contacts here, but please read the [docs ownership handbook](/handbook/content/docs-ownership) to understand how best to work with them.  
+Your main contacts are <TeamMember name="Vincent Ge" /> and <TeamMember name="Edwin Lim" /> on the content, but please read the [docs ownership handbook](/handbook/content/docs-ownership) to understand how best to work with them. 
+
+If you just need someone to review something, tag `docs reviewers` in GitHub.
 </details>
 
 <details>
@@ -74,7 +76,7 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 <details>
 <summary>A customer is interested in doing a case study with us</summary>
 
-<TeamMember name="Joe Martin" /> is your guy.
+Speak to <TeamMember name="Joe Martin" />.
 </details>
 
 
@@ -99,7 +101,7 @@ We probably are already, but if you have something specific in mind, speak to <T
 <details>
 <summary>I need a new hedgehog design, illustration, or other art asset.</summary>
 
-<TeamMember name="Lottie Coxon" /> or <TeamMember name="Daniel Hawkins" /> can help, but please read [Art and branding requests](/handbook/brand/art-requests) first.
+Speak to <TeamMember name="Lottie Coxon" /> or <TeamMember name="Daniel Hawkins" />, but please read [Art and branding requests](/handbook/brand/art-requests) first.
 </details>
 
 <details>
