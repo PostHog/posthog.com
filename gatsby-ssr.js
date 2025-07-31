@@ -20,8 +20,8 @@ export const wrapRootElement = ({ element }) => (
     </ToastProvider>
 )
 
-export const wrapPageElement = ({ element, props }) => {
-    initKea(true, props.location)
+export const wrapPageElement = ({ element, props: { location } }) => {
+    initKea(true, location)
     // Check if this is a 404 page by checking if the NotFound component is being rendered
     // This catches both direct /404 visits and any non-existent pages
     const is404Page = element?.type?.name === 'NotFound' || location.pathname === '/404'
