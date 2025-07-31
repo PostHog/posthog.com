@@ -171,7 +171,7 @@ const LineHeightSlider = ({ lineHeightMultiplier, onValueChange }) => {
                     onValueChange={onValueChange}
                 />
             </div>
-            <OSButton onClick={() => onValueChange([1.3])} icon={<IconRefresh className="size-5" />} />
+            <OSButton onClick={() => onValueChange([1])} icon={<IconRefresh className="size-5" />} />
         </div>
     )
 }
