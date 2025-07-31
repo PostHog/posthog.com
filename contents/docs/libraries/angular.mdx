@@ -81,10 +81,10 @@ initPostHog() {
 
 ## Angular with SSR
 
-To use PostHog with Angular SSR (Server-Side Rendering), you need to:
+To use PostHog with Angular server-side rendering (SSR), you need to:
 
 1. Update the PostHog web JS client to only initialize on the client-side.
-2. Initialize PostHog Node in the server-side code.
+2. Initialize PostHog Node on the server-side.
 
 ### 1. Update the PostHog web JS client
 
@@ -98,7 +98,8 @@ import { Router } from "@angular/router";
 
 import { isPlatformBrowser } from "@angular/common"; // +
 import { PLATFORM_ID } from "@angular/core"; // +
-import { Inject } from "@angular/core"; // +
+import { isPlatformBrowser } from "@angular/common"; // +
+import { PLATFORM_ID } from "@angular/core"; // +
 
 @Injectable({ providedIn: "root" })
 export class PosthogService {
@@ -118,7 +119,7 @@ export class PosthogService {
     this.ngZone.runOutsideAngular(() => {
       posthog.init(environment.posthogKey, {
         api_host: environment.posthogHost,
-        defaults: '2025-05-24',
+        defaults: '<ph_posthog_js_defaults>',
         debug: false,
         cross_subdomain_cookie: true,
       });
@@ -171,8 +172,10 @@ app.get('**', async (req, res, next) => {
   const distinctId = getDistinctIdFromCookie(headers.cookie);
   let isFeatureEnabled = false;
   const client = new PostHog(
-      'phc_w0xVqLhImmQgphdKDrz896233CEWfbp9O5ypCxaAfw0',
-      { host: 'https://us.i.posthog.com' }
+      const client = new PostHog(
+      environment.posthogKey,
+      { host: environment.posthogHost }
+  )
   )
 
   if (distinctId) {
