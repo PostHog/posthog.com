@@ -11,7 +11,7 @@ If you need help with the website, go to `#posthogdotcom`.
 Here's a quick guide to who to ask if you want help with a specific marketing activity.
 
 <details>
-<summary>I want to send an email to a lot users</summary>
+<summary>I want to send an email to a lot of users</summary>
 
 We run email campaigns through Customer.io. Speak to <TeamMember name="Joe Martin" /> to get started. See: [Email comms](/handbook/brand/email-comms)
 </details>
