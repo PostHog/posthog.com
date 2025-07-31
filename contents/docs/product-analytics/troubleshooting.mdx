@@ -230,7 +230,7 @@ import ExposedApiKeys from "../_snippets/exposed-api-keys.mdx"
 
 ### How do I rename my events?
 
-It's not possible to rename events in PostHog. Instead, you should use [actions](/docs/data/actions). This [tutorial](/tutorials/how-to-rename-events) covers this in detail.
+It's not possible to rename events in PostHog. Renaming is very resource intensive because it requires updating every existing event in the database. It's more practical to give events aliases instead using [actions](/docs/data/actions). This [tutorial](/tutorials/how-to-rename-events) covers this in detail.
 
 ## Insights and queries FAQ
 
