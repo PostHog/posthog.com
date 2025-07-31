@@ -60,7 +60,7 @@ const ProfileSkeleton = () => {
                             </div>
 
                             {/* Details block skeleton */}
-                            <Fieldset className="bg-primary mb-6" legend="Details">
+                            <Fieldset data-scheme="secondary" className="bg-primary mb-6" legend="Details">
                                 <div className="space-y-3">
                                     <div className="flex justify-between">
                                         <div className="h-4 w-24 bg-accent animate-pulse rounded" />
@@ -78,7 +78,7 @@ const ProfileSkeleton = () => {
                             </Fieldset>
 
                             {/* Links block skeleton */}
-                            <Fieldset className="bg-primary mb-6" legend="Links">
+                            <Fieldset data-scheme="secondary" className="bg-primary mb-6" legend="Links">
                                 <div className="flex space-x-3">
                                     <div className="w-6 h-6 bg-accent animate-pulse rounded" />
                                     <div className="w-6 h-6 bg-accent animate-pulse rounded" />
@@ -87,7 +87,7 @@ const ProfileSkeleton = () => {
                             </Fieldset>
 
                             {/* Achievements block skeleton */}
-                            <Fieldset className="bg-primary mb-6" legend="Achievements">
+                            <Fieldset data-scheme="secondary" className="bg-primary mb-6" legend="Achievements">
                                 <div className="grid grid-cols-7 gap-2">
                                     {Array.from({ length: 7 }).map((_, i) => (
                                         <div key={i} className="aspect-square bg-accent animate-pulse rounded" />
