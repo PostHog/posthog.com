@@ -35,7 +35,7 @@ Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/
 </details>
 
 <details>
-<summary>Someone wants to write a guest post / is requesting a backlink backlink etc.</summary>
+<summary>Someone wants to write a guest post / is requesting a backlink etc.</summary>
 
 Unless it's someone huge and important with a real audience, "Mark as spam" and "Move to bin". 
 </details>
@@ -85,7 +85,7 @@ Please share in the #merch channel:
 
 - <TeamMember name="Kendall Hall" /> owns fulfillment issues. 
 - <TeamMember name="Lottie Coxon" /> owns merch design and creation.
-- <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefont.
+- <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
 </details>
 
 <details>
@@ -109,7 +109,7 @@ We probably are already, but if you have something specific in mind, speak to <T
 <details>
 <summary>I need a font, logo, etc.</summary>
 
-See [Logos, brand, hedgehogs](handbook/company/brand-assets)
+See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
 </details>
 
 <details>
