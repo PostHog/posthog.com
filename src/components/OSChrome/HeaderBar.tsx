@@ -257,7 +257,7 @@ export default function HeaderBar({
                         {bookmark?.title && bookmark?.description && <BookmarkButton bookmark={bookmark} />}
                         {showSearch && (searchContentRef || onSearch) && (
                             <SearchBar
-                                contentRef={searchContentRef}
+                                contentRef={onSearch ? undefined : searchContentRef}
                                 visible={searchOpen}
                                 onClose={toggleSearch}
                                 onSearch={onSearch}

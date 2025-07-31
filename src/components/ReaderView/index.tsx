@@ -62,6 +62,7 @@ interface ReaderViewProps {
     description?: string
     rightActionButtons?: React.ReactNode
     isEditing?: boolean
+    onSearch?: (query: string) => void
 }
 
 interface BackgroundImageOption {
@@ -315,6 +316,7 @@ export default function ReaderView({
     description,
     rightActionButtons,
     isEditing,
+    onSearch,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -334,6 +336,7 @@ export default function ReaderView({
                 description={description}
                 rightActionButtons={rightActionButtons}
                 isEditing={isEditing}
+                onSearch={onSearch}
             >
                 {children}
             </ReaderViewContent>
@@ -432,6 +435,7 @@ function ReaderViewContent({
     description,
     rightActionButtons,
     isEditing,
+    onSearch,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -521,6 +525,7 @@ function ReaderViewContent({
                     }}
                     rightActionButtons={rightActionButtons}
                     isEditing={isEditing}
+                    onSearch={onSearch}
                 />
                 {/* Second row - Main Content */}
                 <div data-scheme="secondary" className="bg-primary flex w-full gap-2 min-h-0 flex-grow">

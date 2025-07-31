@@ -3,7 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useCallback } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
@@ -28,6 +28,8 @@ import rehypeRaw from 'rehype-raw'
 import useTeamCrestMap from 'hooks/useTeamCrestMap'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
+import Fuse from 'fuse.js'
+import debounce from 'lodash/debounce'
 
 export const TeamMember = (props: any) => {
     const {
@@ -279,6 +281,7 @@ export default function People() {
         team: { teamMembers },
         allTeams,
     } = useStaticQuery(teamQuery)
+    const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
 
     const teamSize = teamMembers.length - 1
 
@@ -288,48 +291,43 @@ export default function People() {
         return acc
     }, {})
 
-    // Calculate unique countries represented by all team members
-    const uniqueCountriesCount = useMemo(() => {
-        const countries = new Set<string>()
-
-        teamMembers.forEach((member: any) => {
-            const country = member.country
-            if (country && country.trim() && country !== 'world') {
-                countries.add(country.trim())
-            }
+    const fuse = useMemo(() => {
+        return new Fuse(teamMembers, {
+            keys: [
+                {
+                    name: 'fullName',
+                    getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
+                },
+                'teams.data.attributes.name',
+                'companyRole',
+            ],
+            threshold: 0.3,
         })
-
-        return countries.size
     }, [teamMembers])
 
-    // Some Stats were used as fallback until the actual data is added to the GraphQL Server
-    const teamStats = [
-        {
-            data: pineappleOnPizzaStat(teamMembers) ? pineappleOnPizzaStat(teamMembers) : [60, 40],
-            caption: '(Correctly) think pineapple belongs on pizza',
-            icon: '🍍 + 🍕',
-        },
-        {
-            data: [45, 55],
-            caption: 'Are a former founder',
-            icon: '💻',
-        },
-        {
-            data: [100, 0],
-            caption: 'Write code',
-            icon: '☕️',
-        },
-        {
-            data: [80, 20],
-            caption: 'See themselves working at PostHog in 2 years',
-            icon: '',
-        },
-    ]
+    const debouncedSearch = useCallback(
+        debounce((query: string) => {
+            if (!query.trim()) {
+                setFilteredTeamMembers(teamMembers)
+                return
+            }
+
+            const results = fuse.search(query)
+            const filtered = results.map((result) => result.item)
+            setFilteredTeamMembers(filtered)
+        }, 300),
+        [fuse, teamMembers]
+    )
+
+    const handleSearch = (query: string) => {
+        debouncedSearch(query)
+    }
 
     return (
         <ReaderView
             title="People"
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+            onSearch={handleSearch}
         >
             <div
                 style={{ visibility: isMobile || !appWindow?.animating ? 'visible' : 'hidden' }}
@@ -391,7 +389,7 @@ export default function People() {
                     */}
 
                     <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
-                        {(appWindow?.animating ? teamMembers.slice(0, 8) : teamMembers).map(
+                        {(appWindow?.animating ? teamMembers.slice(0, 8) : filteredTeamMembers).map(
                             (teamMember: any, index: number) => {
                                 // Calculate if this person is a team lead of any team
                                 const isTeamLead = teamMember.leadTeams?.data?.length > 0
