@@ -83,7 +83,7 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 
 Please share in the #merch channel: 
 
-- <TeamMember name="Kendall Hall" /> owns fulfilment issues. 
+- <TeamMember name="Kendall Hall" /> owns fulfillment issues. 
 - <TeamMember name="Lottie Coxon" /> owns merch design and creation.
 - <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefont.
 </details>
