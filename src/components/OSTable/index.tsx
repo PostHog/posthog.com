@@ -13,6 +13,7 @@ interface Column {
 }
 
 interface Row {
+    key?: string
     cells: {
         content: React.ReactNode
         className?: string
@@ -238,7 +239,7 @@ const OSTable: React.FC<OSTableProps> = ({
                       ))
                     : rows.map((row, rowIndex) => (
                           <Row
-                              key={rowIndex}
+                              key={row.key || rowIndex}
                               row={row}
                               lastRowRef={rowIndex === rows.length - 1 ? lastRowRef : null}
                               rowAlignment={rowAlignment}
