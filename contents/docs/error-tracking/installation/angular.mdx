@@ -1,9 +1,29 @@
-import AngularInstall from "../../integrate/_snippets/install-angular.mdx"
+---
+title: Angular error tracking installation
+---
 
-<AngularInstall />
+import { Steps, Step } from 'components/Docs/Steps'
 
-### Setting up Angular exception autocapture
+import InstallWebPackageManagers from "../../integrate/_snippets/install-web-package-managers.mdx"
+import InstallAngular from "../../integrate/_snippets/install-angular.mdx"
+import StepVerifyErrorTracking from "./_snippets/step-verify-error-tracking.mdx"
+import StepUploadSourceMaps from "./_snippets/step-upload-source-maps.tsx"
 
+<Steps>
+<Step title="Installing PostHog Angular SDK" subtitle="Your goal in this step: Install the PostHog Angular SDK." badge="required">
+
+<InstallAngular/>
+
+</Step>
+
+<Step checkpoint title="Verify PostHog is initialized" subtitle="Confirm you can capture events with PostHog">
+
+Before proceeding, confirm that you can capture events with PostHog using `posthog.capture('test_event')`.
+
+</Step>
+
+<Step title="Setting up exception autocapture" subtitle="Your goal in this step: Enable automatic exception tracking for your Angular application." badge="required">
+  
 Exception autocapture can be enabled during initialization of the PostHog client to automatically capture any exception thrown by your Angular application.
 
 This requires overriding Angular's default `ErrorHandler` provider:
@@ -120,18 +140,18 @@ export function providePostHogErrorHandler(): Provider {
 
 Then, in your `src/app/app.config.ts`, import the `providePostHogErrorHandler` function and add it to the providers array:
 
-```diff
+```ts file=src/app/app.config.ts
 // src/app/app.config.ts
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
-+import { providePostHogErrorHandler } from './posthog-error-handler';
+import { providePostHogErrorHandler } from './posthog-error-handler'; // +
 
 export const appConfig: ApplicationConfig = {
   providers: [
     ...
-+   providePostHogErrorHandler(),
+    providePostHogErrorHandler(), // +
   ],
 };
 ```
@@ -141,3 +161,17 @@ If there are more errors you'd like to capture, you can manually call the `captu
 ```ts
 posthog.captureException(e, additionalProperties)
 ```
+
+</Step>
+
+<StepVerifyErrorTracking />
+
+
+<Step title="Upload source maps" badge="required">
+
+<StepUploadSourceMaps urlPath="angular" framework="Angular" />
+
+</Step>
+
+
+</Steps> 

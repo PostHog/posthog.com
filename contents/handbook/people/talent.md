@@ -35,7 +35,7 @@ It is a talent partner's responsibility to screen applications at the top of the
 * have they displayed high levels of ownership
 * are they [weird](https://posthog.com/handbook/values#do-more-weird)?
 
-Once you've screened the candidate and passed them through, then you are going to screen that candidate. You are screen for culture fit and role suitability. We also want to ensure that we are putting relevant and motivated candidates through to the next round. 
+Once you’ve screened the application and moved them forward you will have a culture screening call. We also want to ensure that we are putting relevant and motivated candidates through to the next round. 
 At the screening stage it is important to make sure your notes are well organised and clear, not just for the next stage. These notes will be reviewed at SuperDay and will be taken into consideration if we are going to hire this person so make sure to have these in good order. 
 
 ## Post-screen, pre-SuperDay
