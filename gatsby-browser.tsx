@@ -1,7 +1,6 @@
 import React from 'react'
 import { initKea, wrapElement } from './kea'
 import './src/styles/global.css'
-import HandbookLayout from './src/templates/Handbook'
 import { Provider as ToastProvider } from './src/context/Toast'
 import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
@@ -15,6 +14,7 @@ export const wrapRootElement = ({ element }) => (
         <UserProvider>{wrapElement({ element })}</UserProvider>
     </ToastProvider>
 )
+
 export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     // This is checked and set on initial load in the body script set in gatsby-ssr.js
     // Checking for prevLocation prevents this from happening twice
@@ -43,12 +43,8 @@ export const wrapPageElement = ({ element, props: { pageContext, location } }) =
     const is404Page = element?.type?.name === 'NotFound' || location.pathname === '/404'
 
     return (
-        <ToastProvider>
-            <UserProvider>
-                <Provider element={element} location={location}>
-                    {is404Page ? <BlueScreenOfDeath /> : <Wrapper />}
-                </Provider>
-            </UserProvider>
-        </ToastProvider>
+        <Provider element={element} location={location}>
+            {is404Page ? <BlueScreenOfDeath /> : <Wrapper />}
+        </Provider>
     )
 }

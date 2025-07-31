@@ -14,35 +14,23 @@ import { Provider } from './src/context/App'
 import { Provider as ToastProvider } from './src/context/Toast'
 import BlueScreenOfDeath from './src/components/NotFoundPage/BlueScreenOfDeath'
 
-export const wrapPageElement = ({ element, props }) => {
-    const slug = props.location.pathname.substring(1)
+export const wrapRootElement = ({ element }) => (
+    <ToastProvider>
+        <UserProvider>{wrapElement({ element })}</UserProvider>
+    </ToastProvider>
+)
 
+export const wrapPageElement = ({ element, props: { location } }) => {
+    initKea(true, location)
     // Check if this is a 404 page by checking if the NotFound component is being rendered
     // This catches both direct /404 visits and any non-existent pages
-    const is404Page = element?.type?.name === 'NotFound' || props.location.pathname === '/404'
+    const is404Page = element?.type?.name === 'NotFound' || location.pathname === '/404'
 
-    if (is404Page) {
-        return (
-            <ToastProvider>
-                <UserProvider>
-                    <BlueScreenOfDeath />
-                </UserProvider>
-            </ToastProvider>
-        )
-    }
-
-    initKea(true, props.location)
-    return wrapElement({
-        element: (
-            <ToastProvider>
-                <UserProvider>
-                    <Provider element={element} location={props.location}>
-                        <Wrapper element={element} />
-                    </Provider>
-                </UserProvider>
-            </ToastProvider>
-        ),
-    })
+    return (
+        <Provider element={element} location={location}>
+            {is404Page ? <BlueScreenOfDeath /> : <Wrapper />}
+        </Provider>
+    )
 }
 
 export const onRenderBody = function ({ setPreBodyComponents }) {
