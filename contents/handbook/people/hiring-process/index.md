@@ -29,7 +29,7 @@ We are all-remote, but we have a few limitations on the countries we are able to
 - We hire within -8 to +2 GMT timezones. Beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
 - Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
 - We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs.
-  - In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. We have done this before successfully in Brazil.
+  - In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. We have done this before successfully in Brazil and Uruguay.
 - We have an entity in Germany, which allows us to hire people directly. However, due to employment restrictions with companies with over 10 people, we have reached the total number of employees that we will hire here, so we will no longer be hiring in Germany and no current team member will be able to relocate to Germany.
 
 ## Hiring Process         
