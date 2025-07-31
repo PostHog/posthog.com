@@ -48,6 +48,7 @@ interface ReaderViewProps {
         featuredVideo?: string
     }
     title?: string
+    hideTitle?: boolean
     tableOfContents?: any
     mdxComponents?: any
     commits?: any[]
@@ -298,6 +299,7 @@ const TableOfContents = ({ tableOfContents, contentRef, title = 'Jump to:', clas
 export default function ReaderView({
     body = {},
     title,
+    hideTitle = false,
     tableOfContents,
     mdxComponents,
     commits,
@@ -315,6 +317,7 @@ export default function ReaderView({
             <ReaderViewContent
                 body={body}
                 title={title}
+                hideTitle={hideTitle}
                 tableOfContents={tableOfContents}
                 mdxComponents={mdxComponents}
                 commits={commits}
@@ -409,6 +412,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
 function ReaderViewContent({
     body,
     title,
+    hideTitle = false,
     tableOfContents,
     mdxComponents,
     commits,
@@ -556,7 +560,7 @@ function ReaderViewContent({
                                         <GatsbyImage image={getImage(body.featuredImage)} alt={title} />
                                     </div>
                                 )}
-                                {title && <h1>{title}</h1>}
+                                {title && !hideTitle && <h1>{title}</h1>}
                                 {(body.date || body.contributors) && (
                                     <div className="flex items-center space-x-2 mb-4">
                                         {body.contributors && <ContributorsSmall contributors={body.contributors} />}

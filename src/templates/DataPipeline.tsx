@@ -9,6 +9,7 @@ import SEO from 'components/seo'
 import { getIconUrl, NotifyMe } from 'components/Product/Pipelines'
 import ReactMarkdown from 'react-markdown'
 import ReaderView from 'components/ReaderView'
+import { getProseClasses } from '../constants'
 
 export default function DataPipeline({
     data,
@@ -47,12 +48,12 @@ export default function DataPipeline({
     return (
         <>
             <SEO title={`${name} - Docs - PostHog`} description={description} />
-            <ReaderView title={name}>
+            <ReaderView title={name} hideTitle>
                 <div className="flex items-center space-x-2">
                     <img src={getIconUrl(icon_url)} alt={name} className="w-10 h-10" />
                     <h1 className="m-0">{name}</h1>
                 </div>
-                <div className="article-content">
+                <div className={getProseClasses('base')}>
                     <p>{description}</p>
                     {id.startsWith('segment-') && (
                         <>
