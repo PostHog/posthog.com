@@ -147,7 +147,7 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
         notes: 'Collaborative DevOps',
         logo: BrainboardLogo,
         featured: false,
-        height: 10,
+        height: 14,
     },
     carvertical: {
         name: 'carVertical',
