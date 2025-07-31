@@ -41,6 +41,78 @@ import { CallToAction } from 'components/CallToAction'
 import { Fieldset } from 'components/OSFieldset'
 dayjs.extend(relativeTime)
 
+const ProfileSkeleton = () => {
+    return (
+        <div data-scheme="secondary" className="h-full bg-primary">
+            <ScrollArea>
+                <div data-scheme="primary" className="mx-auto max-w-screen-xl px-5 @container">
+                    <div className="flex flex-col @2xl:flex-row gap-6 p-6">
+                        {/* Left sidebar skeleton */}
+                        <div className="@2xl:max-w-xs w-full flex-shrink-0">
+                            {/* Avatar section skeleton */}
+                            <div className="flex flex-col items-center mb-6 bg-primary rounded-md overflow-hidden border border-primary">
+                                <div className="w-full aspect-square bg-accent animate-pulse border-b border-primary" />
+                                <div className="flex items-center space-x-2 my-2">
+                                    <div className="h-6 w-32 bg-accent animate-pulse rounded" />
+                                </div>
+                                <div className="h-4 w-24 bg-accent animate-pulse rounded mb-2" />
+                            </div>
+
+                            {/* Details block skeleton */}
+                            <Fieldset className="bg-primary mb-6" legend="Details">
+                                <div className="space-y-3">
+                                    <div className="flex justify-between">
+                                        <div className="h-4 w-24 bg-accent animate-pulse rounded" />
+                                        <div className="h-4 w-16 bg-accent animate-pulse rounded" />
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <div className="h-4 w-20 bg-accent animate-pulse rounded" />
+                                        <div className="h-4 w-12 bg-accent animate-pulse rounded" />
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <div className="h-4 w-16 bg-accent animate-pulse rounded" />
+                                        <div className="h-4 w-20 bg-accent animate-pulse rounded" />
+                                    </div>
+                                </div>
+                            </Fieldset>
+
+                            {/* Links block skeleton */}
+                            <Fieldset className="bg-primary mb-6" legend="Links">
+                                <div className="flex space-x-3">
+                                    <div className="w-6 h-6 bg-accent animate-pulse rounded" />
+                                    <div className="w-6 h-6 bg-accent animate-pulse rounded" />
+                                    <div className="w-6 h-6 bg-accent animate-pulse rounded" />
+                                </div>
+                            </Fieldset>
+
+                            {/* Achievements block skeleton */}
+                            <Fieldset className="bg-primary mb-6" legend="Achievements">
+                                <div className="grid grid-cols-7 gap-2">
+                                    {Array.from({ length: 7 }).map((_, i) => (
+                                        <div key={i} className="aspect-square bg-accent animate-pulse rounded" />
+                                    ))}
+                                </div>
+                            </Fieldset>
+                        </div>
+
+                        {/* Right content skeleton */}
+                        <div className="flex-grow @container">
+                            {/* Tabs skeleton */}
+                            <div className="bg-primary rounded-md border border-primary mb-6">
+                                <div className="p-6 space-y-4">
+                                    <div className="h-4 w-full bg-accent animate-pulse rounded" />
+                                    <div className="h-4 w-3/4 bg-accent animate-pulse rounded" />
+                                    <div className="h-4 w-1/2 bg-accent animate-pulse rounded" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ScrollArea>
+        </div>
+    )
+}
+
 const Avatar = (props: { className?: string; src?: string; color?: string }) => {
     return (
         <div className={`overflow-hidden aspect-square bg-${props.color} ${props.className}`}>
@@ -326,7 +398,7 @@ export default function ProfilePage({ params }: PageProps) {
         : {}
 
     if (!profile && isLoading) {
-        return <div data-scheme="secondary" className="h-full bg-primary" />
+        return <ProfileSkeleton />
     } else if (!profile && !isLoading) {
         // if profile wasn't found after loading, show 404 page
         return <NotFoundPage />
