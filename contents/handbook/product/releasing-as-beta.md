@@ -54,7 +54,7 @@ Product teams are responsible for [writing documentation](/handbook/engineering/
 ### Collecting beta feedback
 Teams are encouraged to collect feedback from users in current betas so that they can build better products and we have some automations in place to facilitate this. 
 
-After a week in any new beta, users will trigger an automatic email from the `beta-feedback@posthog.com` Google Group. This email will ask them, essentially, for any suggested changes to the beta. By default, all team leads and exec team members are in this Google Group an will get daily digests of responses. Others are invited to add themselves to the group, or change their notification settings. 
+After a week in any new beta, users will trigger an automatic email from the `beta-feedback@posthog.com` Google Group. This email will ask them, essentially, for any suggested changes to the beta. By default, all team leads and exec team members are in this Google Group and will get daily digests of responses. Others are invited to add themselves to the group, or change their notification settings.
 
 Regardless, emails to this Google Group will sync to the PostHog Feedback Slack channel for general awareness. Team leads are encouraged to respond to beta feedback emails. 
 
