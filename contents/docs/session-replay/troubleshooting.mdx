@@ -79,7 +79,7 @@ For apps with SSR enabled you should set `relative` to `false` in the [`paths` o
 
 ## Images and videos do not appear in the replay
 
-PostHog captures session replays by capturing the DOM and not videos/screenshots. When you watch a replay, PostHog tries to reconstruct the DOM.
+PostHog captures session replays by capturing the DOM, not videos or screenshots. When you watch a replay, PostHog tries to reconstruct the DOM.
 
 If the DOM contains images or other media assets referenced by a URL that is signed, expired, or otherwise not available, the replay will not be able to reconstruct the DOM correctly. A workaround to make replays more accurately represent the original session is to fallback to a placeholder if the asset is no longer available.
 
