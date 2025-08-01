@@ -31,7 +31,7 @@ Speak to <TeamMember name="Joe Martin" /> and read [Product launches](/handbook/
 <details>
 <summary>I need help with documentation</summary>
 
-Your main contacts are <TeamMember name="Vincent Ge" /> and <TeamMember name="Edwin Lim" /> on the content, but please read the [docs ownership handbook](/handbook/content/docs-ownership) to understand how best to work with them. 
+Your main contacts are <TeamMember name="Vincent Ge" /> and <TeamMember name="Edwin Lim" /> on the content team, but please read the [docs ownership handbook](/handbook/content/docs-ownership) to understand how best to work with them. 
 
 If you just need someone to review something, tag `docs reviewers` in GitHub.
 </details>
@@ -45,9 +45,7 @@ Unless it's someone huge and important with a real audience, "Mark as spam" and 
 <details>
 <summary>Someone wants to partner with us</summary>
 
-We do not currently operate any form of partnership program to help users implement, extend, or adapt PostHog to their needs.
-
-If someone contacts you about partnering with PostHog, refer them to <TeamMember name="Joe Martin" />. He'll give them the bad news / explore any opportunities.
+Refer them to <TeamMember name="Joe Martin" />. He'll give them the bad news / explore any opportunities.
 
 If another company is interested in building an integration with PostHog, speak to the [Growth Team](/teams/growth).
 </details>
@@ -59,7 +57,7 @@ If it's an influencer or podcast, refer them to <TeamMember name="Ian Vanagas" /
 
 We're not currently running newsletter sponsorships, but contact <TeamMember name="Lior Neu-ner" /> if you think it's sufficiently interesting.
 
-If it's an event, speak to <TeamMember name="Daniel Zaltsman" />, though the answer will probably be no.
+If it's an event, speak to <TeamMember name="Daniel Zaltsman" />.
 </details>
 
 
@@ -79,11 +77,10 @@ If your idea is for PostHog Stories (HogTok), hit up <TeamMember name="Edwin Lim
 Speak to <TeamMember name="Joe Martin" />.
 </details>
 
-
 <details>
 <summary>A customer has an issue with merch</summary>
 
-Please share in the #merch channel. <TeamMember name="Kendall Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
+Please share in the #merch channel. <TeamMember name="Kendal Hall" /> owns fulfillment issues. <TeamMember name="Lottie Coxon" /> owns merch design and creation. <TeamMember name="Cory Watilo" /> and <TeamMember name="Eli Kinsey" /> own the storefront.
 </details>
 
 <details>
@@ -113,5 +110,5 @@ See [Logos, brand, hedgehogs](/handbook/company/brand-assets)
 <details>
 <summary>A journalist has contacted me</summary>
 
-Direct them press@posthog.com, where one of Joe, James, Charles, or Tim can respond. See: [Press & PR](/handbook/brand/press)
+Direct them to press@posthog.com, where one of Joe, James, Charles, or Tim can respond. They're the only people who should speak to press. See: [Press & PR](/handbook/brand/press)
 </details>
