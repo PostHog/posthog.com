@@ -138,9 +138,14 @@ Unqualified: A lead that does not meet the criteria to become an opportunity.
 Use the following criteria to determine when a lead should be converted to an opportunity:
 - You've had an initial call and have decided to work this as a hands-on sale.
 - There's a clearly identified problem that PostHog can solve.
-- There's a solid next step.
+- The customer has taken a concrete, identifiable action toward further evaluating PostHog. The action will be evaluated in context, but the goal is to identify something they have done that provides evidence they're serious. Examples include:
+  - Signing up for a PostHog organization
+  - Implementing PostHog 
+  - Getting an MNDA in place
+  - Accepting a Slack Connect invite and asking questions in a Slack channel
+  - Accepting a call invite with their boss/buying committee
 
-Converting at this stage (rather than waiting until later) helps us get a more accurate view of our pipeline and standardize our approach across territories and team members.
+All three criteria should be met. Converting at this stage (rather than waiting until later) helps us get a more accurate view of our pipeline and standardize our approach across territories and team members.
 
 ### Support Requests
 
@@ -174,13 +179,13 @@ Opportunities track potential deals in Salesforce. Managing opportunities effect
 
 ### Opportunity Record Types
 
-New Business: Select this type when engaging with a new customer for the first time or when selling a product/service to an existing customer for the first time.
+New Revenue: Select this type when engaging with a customer who has never paid us before. This includes new customers and startup customers transitioning to a paid plan for the first time.
 
-Existing Business (Expansion Opportunity): Choose this type when selling additional products or services to a customer with whom we already have a business relationship.
+New Revenue – Existing Customer: Choose this type for additional credits to a customer who is already paying us. This includes upsells, cross sells, or expansion within the same account.
 
 Existing - Convert to Annual: Choose this when discussing an annual contract with a pay-as-you-go customer.
 
-Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' opportunity is Closed (more on these later).
+Renewal: Choose this type when an existing customer is renewing their contract or subscription for our products or services. We automatically create a renewal opportunity if an 'Annual Plan' type opportunity is Closed (more on these later).
 
 ### Opportunity Types
 Annual Plan: Select this type when the customer agrees to pay for a year-long+ subscription to our services.

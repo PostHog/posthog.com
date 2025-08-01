@@ -75,54 +75,35 @@ We may occasionally pause this rotation if we have a big initiative that needs m
 
 ### Response Targets
 
-We have a high volume of tickets and we're a small team so we're not able to respond to all issues equally. For this reason we prioritize tickets into three categories. We set a response target for each so that we can be sure that tickets are being handled effectively. 
+We have a high volume of tickets and we're a small team, so we're not able to respond to all issues equally. For this reason we prioritize tickets according to the customer's plan. We set a response target for each plan so that we can be sure that tickets are being handled effectively. 
 
 Note that tickets are automatically prioritized in Zendesk and users are updated with information about response targets to set appropriate expectations. In all cases, tickets are routed to the appropriate team and that team is responsible for meeting the response target.
 
-The response targets listed below are our minimums for an initial response, and we often respond far faster. Please note that we do not offer any level of weekend customer support.
+The response times listed below are targets for an initial response, and it's possible we will respond faster. These targets are listed in calendar hours Monday - Friday. Please note that we do not offer any level of weekend customer support.
 
-#### High priority
-**Response target: 1 business day**
+| Plan level | Target response time  | 
+|-----------|----------------------|
+| Free | Community support only | 
+| Pay-as-you-go | 72 hours | 
+| Boost | 48 hours  | 
+| Scale | 24 hours  |
+| Enterprise | 8 hours | 
 
-Tickets are considered high priority if they fulfill ANY of the following conditions:
+Within Zendesk, we will further prioritize tickets based on their selected severity. If you come across a ticket that doesn't have the severity set appropriately [according to our severity level guidelines](/docs/support-options#severity-levels), then you should update the ticket with the appropriate severity level.
 
-- The customer is high paying
-- The customer is in a trial stage with the product
-- The customer is subscribed to the teams add-on
-- The ticket is listed as critical severity
 
-This ensures that users who pay for support or which are otherwise considered a priority customer are prioritized and get the best possible support experience. Free users can raise critical impact bugs or issues to an appropriate level.
+As a general rule, we aim to prioritize customers who pay for support, or who are otherwise considered a priority customer, to ensure they get the best possible support experience.
 
 > **_NOTE:_** If a user has recently upgraded to the Enterprise plan, their tickets may not automatically be tagged as Enterprise in the PostHog Priority field in Zendesk. If this happens, manually set the Priority field to Enterprise to ensure they get in the proper queue.
 
-#### Normal priority
-**Response target: 2 business days**
-
-Tickets are considered normal priority if they fulfill ANY of the following conditions but the user does NOT qualify as a high-paying org:
-
-- The customer is subscribed to the `Pay-as-you-go` plan
-- The customer is on a PostHog for Startups or Y Combinator plan
-- The customer is raising a billing issue
-
-This ensures that most paying users get appropriately rapid support and that all billing issues are ensured to get a response.
-
-#### Low priority 
-**Response target: N/A**
-
-Tickets are considered low priority if they fulfill none of the conditions for High or Normal priority. This includes tickets raised in the PostHog community, and is mostly users who are on a free plan and who have not entered a card.
-
-We aim to respond to low priority tickets and will often read and consider them, but we do not set a response target or promise to respond due to the high volume and our need to focus on paying users. 
 
 ### Follow-up / next reply response targets
 
-After our initial response, our follow-up response targets are double those of our initial response targets. For example, if a user replies to our initial response on a high priority ticket (1 business day), our follow-up / next reply response target is within 2 business days.
+Our follow-up response targets and next reply targets are the same as the initial response targets. We believe that customers should receive regular updates on the status of their query - even if the update is that we're working on it and there's nothing meaningful to report at present.
 
 ### Escalated ticket response targets
 
-When support engineers need to escalate issues to other engineering teams for deeper investigation, the investigations can take longer. For escalated tickets, our response targets are as follows: 
-- High priority escalated ticket response target: 2 business days
-- Normal priority escalated ticket response target: 4 business days
-- Low priority escalated ticket response target: N/A
+When support engineers need to escalate issues to other engineering teams for deeper investigation, the investigations can take longer but we should still check in with the customer to let them know! For escalated tickets, our response targets are the same as for all other tickets.
 
 > **_NOTE:_** The targets are for a reply to the user. If the escalation turns out to be a bug or feature request, the reported issue doesn't have to be solved by the response target date, we just need to reply to the user. That reply may be to let them know it won't be fixed right away, but that we have opened a bug report or feature request. If we've opened a feature request or a bug report, you can refer the user to the GitHub issue for updates, and `Solve` the ticket. If you're replying with info that should resolve the issue, leave it in a `Pending` state (will be auto-solved in 7 days if the user doesn't reply.) If the user replied to confirm the issue is resolved, `Solve` the ticket. Use `On-Hold` sparingly, e.g. if you intend to get back to the user soon (more than a week, less than a month.)
 

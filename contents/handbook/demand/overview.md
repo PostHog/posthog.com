@@ -15,6 +15,21 @@ There are two main reasons this team exists:
 - **Lead flow can’t be taken for granted.** Inbound may look great now, but it takes 4–6 months to fix a pipeline once it starts to flatten. By the time you realize it's slowing, you’re already behind. This team will ensure we stay ahead of the curve.
 - **Cross-selling gets harder as we scale.** In larger organizations, different teams often own different tools. One team might be responsible for analytics, another for feature flags. That makes it harder to grow within existing accounts. Smart, personalized ABM (account-based marketing) helps AEs and CSMs expand usage across teams.
 
+## Protecting the brand
+
+Most demand gen teams will do literally anything to get leads, including stuff that while technically 'allowed' leaves a bad taste. We've worked hard to build a strong brand that people trust, in part because we don't engage in some of the bad practices our competitors might. This doesn't mean we will never do 'marketingy stuff' - there's a balance here - but there may be some things that literally everyone else does that we won't. 
+
+Some principles to make sure demand gen doesn't wreck the brand:
+
+- We will never use 3rd party pixels or tracking scripts - we only use PostHog (yes as a performance marketer at PostHog you have to get your head around no Facebook pixel, Google Tag Manager etc.)
+- Make it easy for users to sign up or book a demo - don't hide things behind forms and qualifying meetings
+- Measure ROI and iterate – but don’t obsess over attribution and spend, just get stuff out there first that we think people will like 
+- Focus on growth of quality signups, not vanity metrics that don't convert to actual revenue because we bought some email lists
+- Don't make unsubstantiated or vague product claims
+- Cold outbound may work in future but it has to be a) honest, b) entertaining, and c) easy to opt out
+- Be extremely conscientious about using personal data (users _and_ non-users) for advertising purposes, even if technically allowed under our terms - think 'would I be ok if my data was used by [insert favorite devtool] in this way?'
+- We are very transparent in this Handbook about how exactly we do demand gen, in a way that other companies are not
+
 ## What we’re here to do
 
 - Deliver a consistent stream of high-quality sales leads  
@@ -35,7 +50,7 @@ Brian runs monthly marketing growth reviews, which cover:
 
 A lead is someone who has either:
 
-- **Signed up** for PostHog ([we score these](/growth/sales/lead-scoring) to prioritize follow-up)  
+- **Signed up** for PostHog ([we score these](/handbook/growth/sales/lead-scoring) to prioritize follow-up)  
 - **Requested a demo** through the site  
 
 We don’t gate content or the product. We don’t rely on shady tactics or clickbait. If someone wants to try the product or talk to us, we make it easy.
@@ -59,23 +74,19 @@ ABM is about targeting specific companies and individuals based on context, rath
 
 We don’t need to wait for a hire to start this, but will probably bring someone on board once we've got it up and running to focus on this exclusively. Internal retargeting efforts (e.g. serving ads to users already in our product or org) fall under this umbrella too.
 
-## Protecting the brand
+### ABM process
 
-Some dos and don'ts to make sure demand gen doesn't wreck the brand:
+Not reinventing the wheel - any company that runs paid ads follows this playbook basically:
 
-**We do:**
+- Get list of target companies from Sales
+- Use Clay to get all names, emails, and roles from each target company
+- Remove any existing PostHog users from each org
+- Identify targets at each company
+- Use Clay then get the personal email addresses for each person
+- Upload these to LinkedIn, Facebook, and Reddit to build a target audience
+- Run ads targeted at these audiences
 
-- Make it easy for users to sign up or book a demo  
-- Keep copy, design, and creative as close to existing product page content as possible
-- Measure ROI and iterate – but don’t obsess over attribution and spend, just get stuff out there first 
-- Focus on growth of quality signups, not vanity metrics that don't convert to actual revenue
-
-**We don’t:**
-
-- Send cold outbound emails  
-- Use 3rd party pixels or tracking scripts (we only use PostHog)  
-- Gate product access or documentation  
-- Retarget users by sending their personal data to 3rd party platforms 
+While we do not share _existing_ user email addresses with third party ad platforms, we think it is reasonable to target non-PostHog users whose data is already in Clay (which in turn pulls from 130+ data sources).
 
 ## How we work
 

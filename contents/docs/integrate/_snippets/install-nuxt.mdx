@@ -1,12 +1,10 @@
 <!-- Keep in sync with https://github.com/PostHog/posthog-js/tree/main/playground/nuxtjs -->
 
+import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+
 1. Install `posthog-js` using your package manager:
 
-```shell
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
+<InstallWebPackageManagers />
 
 2. Add your PostHog API key and host to your `nuxt.config.js` file. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
@@ -28,6 +26,7 @@ export default defineNuxtConfig({
 import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
 
 import posthog from 'posthog-js'
+
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {

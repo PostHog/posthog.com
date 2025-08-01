@@ -376,6 +376,7 @@ export const dataPipelines = {
             ],
             dynamicChildren: 'data-pipeline-transformations',
         },
+
         {
             name: 'Troubleshooting and FAQs',
             url: '/docs/cdp/common-questions',
@@ -452,15 +453,11 @@ export const handbookSidebar = [
                 url: '/handbook/finance',
             },
             {
-                name: '14. Where we are now',
-                url: '/handbook/current-status',
-            },
-            {
-                name: '15. Where are we going?',
+                name: '14. Where are we going?',
                 url: '/handbook/future',
             },
             {
-                name: '16. How you can help',
+                name: '15. How you can help',
                 url: '/handbook/help',
             },
         ],
@@ -743,16 +740,32 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Video',
+                url: '/handbook/growth/marketing/video',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/growth/marketing/video',
+                    },
+                    {
+                        name: 'YouTube',
+                        url: '/handbook/content/youtube',
+                    },
+                ],    
+            },
+            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
-            },
-            {
-                name: 'Newsletter ads',
-                url: '/handbook/content/newsletter-ads',
-            },
-            {
-                name: 'YouTube',
-                url: '/handbook/content/youtube',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/newsletter',
+                    },
+                    {
+                        name: 'Newsletter ads',
+                        url: '/handbook/content/newsletter-ads',
+                    },
+                ],
             },
             {
                 name: 'Writing for PostHog',
@@ -779,52 +792,6 @@ export const handbookSidebar = [
                         url: '/handbook/content/components',
                     },
                 ],
-            },
-        ],
-    },
-    {
-        name: 'CS & Onboarding',
-        url: '',
-        children: [
-            {
-                name: 'Customer success overview',
-                url: '/handbook/cs-and-onboarding/customer-success',
-            },
-            {
-                name: 'Onboarding specialist overview',
-                url: '/handbook/cs-and-onboarding/onboarding-team',
-            },
-            {
-                name: 'New starter onboarding',
-                url: '/handbook/cs-and-onboarding/new-hire-onboarding',
-            },
-            {
-                name: 'Saying hi to your customers',
-                url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
-            },
-            {
-                name: 'Getting to know your customers',
-                url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
-            },
-            {
-                name: 'Health tracking',
-                url: '/handbook/cs-and-onboarding/health-tracking',
-            },
-            {
-                name: 'Customer health checks',
-                url: '/handbook/cs-and-onboarding/health-checks',
-            },
-            {
-                name: 'How we work',
-                url: '/handbook/cs-and-onboarding/how-we-work',
-            },
-            {
-                name: 'Tracking feature requests',
-                url: '/handbook/cs-and-onboarding/feature-requests',
-            },
-            {
-                name: 'YC onboarding',
-                url: '/handbook/growth/sales/yc-onboarding',
             },
         ],
     },
@@ -873,6 +840,10 @@ export const handbookSidebar = [
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
                     },
+                    {
+                        name: 'Working with data warehouse',
+                        url: '/handbook/engineering/data-warehouse',
+                    },
                 ],
             },
             {
@@ -886,6 +857,10 @@ export const handbookSidebar = [
                     {
                         name: 'Backend coding',
                         url: '/handbook/engineering/conventions/backend-coding',
+                    },
+                    {
+                        name: 'Scripts',
+                        url: '/handbook/engineering/conventions/scripts',
                     },
                 ],
             },
@@ -944,6 +919,14 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/databases/hogql-python',
                     },
                 ],
+            },
+            {
+                name: 'Working with Max AI',
+                url: '/handbook/engineering/working-with-max-ai',
+            },
+            {
+                name: 'Implementing AI features',
+                url: '/handbook/engineering/implementing-ai-features',
             },
             {
                 name: 'Deployments',
@@ -1072,8 +1055,12 @@ export const handbookSidebar = [
                 url: '/handbook/engineering/revenue-and-forecasting',
             },
             {
-                name: 'Activation & product intents',
+                name: 'Product intents',
                 url: '/handbook/growth/growth-engineering/product-intents',
+            },
+            {
+                name: 'Per-product activation',
+                url: '/handbook/growth/growth-engineering/per-product-activation',
             },
         ],
     },
@@ -1086,27 +1073,29 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Marketing ownership',
+                name: 'Who can help me?',
                 url: '/handbook/growth/marketing/ownership',
             },
             {
-                name: 'How we do video at PostHog',
-                url: '/handbook/growth/marketing/video',
-            },
-            {
-                name: 'Sponsorships',
+                name: 'Other',
                 url: '/handbook/growth/marketing/open-source-sponsorship',
-            },
-            {
-                name: 'ICP scoring',
-                url: '/handbook/growth/marketing/icp',
-            },
-            {
-                name: 'Dashboard templates',
-                url: '/handbook/growth/marketing/templates',
+                children: [
+                    {
+                        name: 'Sponsorships',
+                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/marketing/icp',
+                    },
+                    {
+                        name: 'Dashboard templates',
+                        url: '/handbook/growth/marketing/templates',
+                    },
+                ]
             },
         ],
-    },
+    },       
     {
         name: 'People & Ops',
         url: '',
@@ -1118,6 +1107,10 @@ export const handbookSidebar = [
             {
                 name: 'Finance',
                 url: '/handbook/people/finance',
+            },
+            {
+                name: 'Talent',
+                url: '/handbook/people/talent',
             },
             {
                 name: 'Merch store',
@@ -1236,10 +1229,6 @@ export const handbookSidebar = [
                 url: '/handbook/product/per-product-growth-reviews',
             },
             {
-                name: 'In-product AI playbook',
-                url: '/handbook/product/ai-playbook',
-            },
-            {
                 name: 'Prioritizing work for mature products',
                 url: '/handbook/product/prioritizing-work-for-mature-products',
             },
@@ -1261,64 +1250,107 @@ export const handbookSidebar = [
                 name: 'Incidents & maintenance',
                 url: '/handbook/engineering/incidents#customer-communications',
             },
+            {
+                name: 'Troubleshooting tips',
+                url: '/handbook/support/troubleshooting-tips',
+            },
         ],
     },
     {
-        name: 'Sales',
+        name: 'Sales & CS',
         url: '',
         children: [
             {
-                name: 'Overview',
-                url: '/handbook/growth/sales/overview',
-            },
-            {
-                name: 'Why buy PostHog',
-                url: '/handbook/growth/sales/why-buy-posthog',
-            },
-            {
-                name: 'Inbound sales',
-                url: '/handbook/growth/sales/new-sales',
-            },
-            {
-                name: 'Product-led sales',
-                url: '/handbook/growth/sales/product-led-sales',
-            },
-            {
-                name: 'Outbound sales',
-                url: '/handbook/growth/sales/outbound-sales',
-            },
-            {
-                name: 'Expansion, cross-sell & retention',
-                url: '/handbook/growth/sales/expansion-and-retention',
+                name: 'Sales',
+                url: '',
                 children: [
                     {
-                        name: 'Account planning',
-                        url: '/handbook/growth/sales/account-planning',
+                        name: 'Overview',
+                        url: '/handbook/growth/sales/overview',
+                    },
+                    {
+                        name: 'Why buy PostHog',
+                        url: '/handbook/growth/sales/why-buy-posthog',
+                    },
+                    {
+                        name: 'Inbound sales',
+                        url: '/handbook/growth/sales/new-sales',
+                    },
+                    {
+                        name: 'Product-led sales',
+                        url: '/handbook/growth/sales/product-led-sales',
+                    },
+                    {
+                        name: 'Outbound sales',
+                        url: '/handbook/growth/sales/outbound-sales',
+                    },
+                    {
+                        name: 'Expansion, cross-sell & retention',
+                        url: '/handbook/growth/sales/expansion-and-retention',
+                        children: [
+                            {
+                                name: 'Account planning',
+                                url: '/handbook/growth/sales/account-planning',
+                            },
+                        ],
+                    },
+
+                    {
+                        name: 'Utilization by business type',
+                        url: '/handbook/growth/sales/utilization-by-business-type',
+                    },
+                    {
+                        name: 'How we work',
+                        url: '/handbook/growth/sales/how-we-work',
+                        children: [
+                            {
+                                name: 'New team member onboarding',
+                                url: '/handbook/growth/sales/new-hire-onboarding',
+                            },
+                        ],
                     },
                 ],
             },
-
             {
-                name: 'Utilization by business type',
-                url: '/handbook/growth/sales/utilization-by-business-type',
-            },
-            {
-                name: 'How we work',
-                url: '/handbook/growth/sales/how-we-work',
+                name: 'CS & Onboarding',
+                url: '',
                 children: [
                     {
-                        name: 'New team member onboarding',
-                        url: '/handbook/growth/sales/new-hire-onboarding',
+                        name: 'Customer success overview',
+                        url: '/handbook/cs-and-onboarding/customer-success',
+                    },
+                    {
+                        name: 'Onboarding specialist overview',
+                        url: '/handbook/cs-and-onboarding/onboarding-team',
+                    },
+                    {
+                        name: 'Saying hi to your customers',
+                        url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
+                    },
+                    {
+                        name: 'Getting to know your customers',
+                        url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
+                    },
+                    {
+                        name: "Template for onboarding success plan",
+                        url: '/handbook/cs-and-onboarding/onboarding-success-plan',
+                    },
+                    {
+                        name: "Renewals",
+                        url: '/handbook/cs-and-onboarding/renewals',
+                    },
+                    {
+                        name: 'New starter onboarding',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                    },
+                    {
+                        name: 'How we work',
+                        url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                 ],
             },
-
             {
-                name: 'Customer FAQs',
-                url: '/handbook/growth/sales/customer-faqs',
-            },
-            {
-                name: 'SalesOps',
+                name: 'Shared processes',
                 url: '',
                 children: [
                     {
@@ -1350,12 +1382,28 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/refunds',
                     },
                     {
+                        name: 'Allocating accounts',
+                        url: '/handbook/growth/sales/account-allocation',
+                    },
+                    {
                         name: 'Automations',
                         url: '/handbook/growth/sales/automations',
                     },
                     {
                         name: 'Who we do business with',
                         url: '/handbook/growth/sales/who-we-do-business-with',
+                    },
+                    {
+                        name: 'Handling customer issues',
+                        url: '/handbook/cs-and-onboarding/handling-customer-issues',
+                    },
+                    {
+                        name: 'Health tracking',
+                        url: '/handbook/cs-and-onboarding/health-tracking',
+                    },
+                    {
+                        name: 'Customer health checks',
+                        url: '/handbook/cs-and-onboarding/health-checks',
                     },
                     {
                         name: 'Historical imports',
@@ -1365,7 +1413,23 @@ export const handbookSidebar = [
                         name: 'Shared Slack channels',
                         url: '/handbook/growth/sales/slack-channels',
                     },
+                    {
+                        name: 'Tracking feature requests',
+                        url: '/handbook/cs-and-onboarding/feature-requests',
+                    },
+                    {
+                        name: 'YC onboarding',
+                        url: '/handbook/growth/sales/yc-onboarding',
+                    },
+                    {
+                        name: 'New hire onboarding exercise',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding-exercise',
+                    },
                 ],
+            },
+            {
+                name: 'Customer FAQs',
+                url: '/handbook/growth/sales/customer-faqs',
             },
         ],
     },
@@ -1495,7 +1559,6 @@ export const communityMenu = {
                     url: '/tutorials/categories/filters',
                     children: [
                         { name: 'Filters', url: '/tutorials/categories/filters' },
-                        { name: 'Sentry', url: '/tutorials/categories/sentry' },
                         { name: 'Zapier', url: '/tutorials/categories/zapier' },
                     ],
                 },
@@ -2026,10 +2089,6 @@ export const docsMenu = {
                             url: '/docs/libraries/segment',
                         },
                         {
-                            name: 'Sentry',
-                            url: '/docs/libraries/sentry',
-                        },
-                        {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
                         },
@@ -2215,6 +2274,10 @@ export const docsMenu = {
                             url: '/docs/api/user',
                         },
                         {
+                            name: 'Web Analytics',
+                            url: '/docs/api/web-analytics',
+                        },
+                        {
                             name: 'Data model',
                             url: '/docs/data-model',
                         },
@@ -2336,10 +2399,6 @@ export const docsMenu = {
                             url: '/docs/data/sessions',
                         },
                         {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
                             name: 'Data management',
                             url: '/docs/data',
                         },
@@ -2365,6 +2424,14 @@ export const docsMenu = {
                                 },
                             ],
                         },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Replay comments',
+                            url: '/docs/data/comments',
+                        },
                     ],
                 },
                 {
@@ -2388,6 +2455,10 @@ export const docsMenu = {
                         {
                             name: 'Notebooks',
                             url: '/docs/notebooks',
+                        },
+                        {
+                            name: 'Activity',
+                            url: '/docs/activity',
                         },
                         {
                             name: 'Organizations',
@@ -2442,6 +2513,24 @@ export const docsMenu = {
                         {
                             name: 'Account settings',
                             url: '/docs/settings/account-settings',
+                        },
+                        {
+                            name: 'Site Apps',
+                            url: '/docs/site-apps',
+                            children: [
+                                {
+                                    name: 'Overview',
+                                    url: '/docs/site-apps',
+                                },
+                                {
+                                    name: 'Notification Bar',
+                                    url: '/docs/site-apps/notification-bar',
+                                },
+                                {
+                                    name: 'Pineapple Mode',
+                                    url: '/docs/site-apps/pineapple-mode',
+                                },
+                            ],
                         },
                     ],
                 },
@@ -2637,6 +2726,10 @@ export const docsMenu = {
                             url: '/docs/billing/annual-plans',
                         },
                         {
+                            name: 'Spike detection',
+                            url: '/docs/billing/spike-detection',
+                        },
+                        {
                             name: 'Common questions about billing',
                             url: '/docs/billing/common-questions',
                         },
@@ -2673,7 +2766,7 @@ export const docsMenu = {
                         },
                         {
                             name: 'SOC 2',
-                            url: '/handbook/company/security#soc-2',
+                            url: '/docs/privacy/soc2',
                         },
                         {
                             name: 'Ad blockers',
@@ -2856,6 +2949,10 @@ export const docsMenu = {
                             url: '/docs/product-analytics/trends/formulas',
                         },
                         {
+                            name: 'Statistical analysis',
+                            url: '/docs/product-analytics/trends/statistical-analysis',
+                        },
+                        {
                             name: 'Tips',
                             url: '/docs/product-analytics/trends/tips',
                         },
@@ -2908,6 +3005,12 @@ export const docsMenu = {
                     url: 'https://posthog.com/docs/data-warehouse/sql',
                     icon: 'IconHogQL',
                     color: 'purple',
+                },
+                {
+                    name: 'Calendar heatmap',
+                    url: '/docs/product-analytics/calendar-heatmap',
+                    icon: 'IconCalendar',
+                    color: 'seagreen',
                 },
                 {
                     name: 'Tools',
@@ -3038,6 +3141,16 @@ export const docsMenu = {
                     url: '/docs/web-analytics/revenue-analytics',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
+                    badge: {
+                        title: 'Beta',
+                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
+                    },
+                },
+                {
+                    name: 'Marketing analytics',
+                    url: '/docs/web-analytics/marketing-analytics',
+                    icon: 'IconGraph',
+                    color: 'blue',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -3449,17 +3562,126 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/error-tracking/start-here',
+                    icon: 'IconListCheck',
+                    featured: true,
+                    color: 'orange',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/error-tracking/installation',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/installation',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/error-tracking/installation/web',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/error-tracking/installation/nextjs',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/installation/python',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/error-tracking/installation/node',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/error-tracking/installation/react',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/error-tracking/installation/angular',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/error-tracking/installation/nuxt',
+                        },
+                        {
+                            name: 'SvelteKit',
+                            url: '/docs/error-tracking/installation/svelte',
+                        },
+                        {
+                            name: 'Hono',
+                            url: '/docs/error-tracking/installation/hono',
+                        },
+                        {
+                            name: 'Manual/API',
+                            url: '/docs/error-tracking/installation/manual',
+                        },
+                    ],
+                },
+                {
+                    name: 'Upload source maps',
+                    url: '/docs/error-tracking/upload-source-maps',
+                    icon: 'IconCode',
+                    color: 'green',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/upload-source-maps',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/error-tracking/upload-source-maps/nextjs',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/error-tracking/upload-source-maps/nuxt',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/error-tracking/upload-source-maps/react',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/error-tracking/upload-source-maps/angular',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/error-tracking/upload-source-maps/web',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/error-tracking/upload-source-maps/node',
+                        },
+                        {
+                            name: 'CLI',
+                            url: '/docs/error-tracking/upload-source-maps/cli',
+                        },
+                    ],
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Issues',
+                    url: '/docs/error-tracking/issues',
+                    icon: 'IconWarning',
+                    color: 'yellow',
                 },
                 {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
                     color: 'purple',
+                },
+                {
+                    name: 'Guides',
                 },
                 {
                     name: 'Monitor issues',
@@ -3475,10 +3697,13 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Alerts',
+                    name: 'Set up alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'Cutting costs',

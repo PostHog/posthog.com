@@ -1,0 +1,98 @@
+---
+title: Upload source maps for Angular
+showStepsToc: true
+---
+
+import CLIDownload from '../_snippets/cli/download.mdx'
+import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+import InjectSourceMap from './_snippets/inject-source-map.mdx'
+import UploadSourceMap from './_snippets/upload-source-map.mdx'
+
+<Steps>
+
+<Step title="Install the PostHog CLI" badge="required">
+  
+  <CLIDownload />
+
+
+</Step>
+
+<Step title="Authenticate the PostHog CLI" badge="required">
+<CLIAuthenticate />
+</Step>
+
+<Step title="Output source maps for Angular" badge="required">
+
+You can configure Angular to [generate source maps](https://angular.dev/reference/configs/workspace-config#source-map-configuration) by adding the following to your `angular.json` file:
+
+```json file=angular.json focusOnLines=4-14
+{
+  "projects": {
+    "my-app": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "sourceMap": {
+              "scripts": true, // +
+              "styles": true, // +
+              "hidden": true, // +
+              "vendor": true // +
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+Then, build your Angular application:
+
+```bash
+ng build --configuration production
+```
+
+</Step>
+
+<Step checkpoint title="Verify source map generation" subtitle="Confirm source maps are generated">
+
+Confirm that the source maps are generated in the `dist/<your-app-name>/` directory. You should see a `.js.map` file for each JS bundle.
+
+</Step>
+
+<Step title="Inject source map" subtitle="Your goal in this step: Add metadata to associate maps with your code." badge="required">
+
+<InjectSourceMap />
+
+</Step>
+
+<Step checkpoint title="Verify source map injection" subtitle="Confirm source map comments are present">
+
+Confirm that the served files are injected with the correct source map comment in production in dev tools:
+
+You should see a comment like this in your minified JS files, for example `main-IX6K2QJM.js`:
+
+```js 
+//# chunkId=0197e6db-9a73-7b91-9e80-4e1b7158db5c
+``` 
+
+</Step>
+
+<Step title="Upload source map" subtitle="Your goal in this step: Send the processed source maps to PostHog." badge="required">
+<UploadSourceMap />
+
+</Step>
+
+<Step checkpoint title="Verify source map upload" subtitle="Confirm source maps are successfully uploaded">
+
+Before proceeding, confirm that source maps are successfully uploaded to PostHog. 
+
+<CallToAction className="my-2" size="sm" type="secondary" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
+    Check symbol sets in PostHog
+</CallToAction>
+
+</Step>
+</Steps>
+
+

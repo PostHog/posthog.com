@@ -40,7 +40,6 @@ Some guidelines:
 
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
 - Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
-- You should default to picking a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
 - We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved. If the group is large enough optimize for multiple apartments in the same building so that you have separate spaces to work / chill / take calls.
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
@@ -79,12 +78,15 @@ If you'd like to book it, please message Kendal in the #team-people-and-ops chan
 
 For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.  These are all relatively near our [Work.Life coworking space in Farringdon](https://work.life/office-space/london/city/farringdon/): 
 
+- [Z Hotel City](https://www.thezhotels.com/hotels/city/)
 - [citizenM Tower of London hotel](https://www.citizenm.com/hotels/europe/london/tower-of-london-hotel)
 - [Clayton Hotel - City of London](https://www.claytonhotels.com/city-of-london/)
 - [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
 - [hub by Premier Inn London Clerkenwell hotel](https://www.premierinn.com/gb/en/hotels/england/greater-london/london/hub-london-clerkenwell.html)
 - [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 - [Bob W Tower Hill Studios](https://bobw.co/apartments/comfy-studio-tower-hill)
+
+If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
 
 ## Travel insurance
 

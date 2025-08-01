@@ -6,7 +6,7 @@ showTitle: true
 
 import { IconTestTube } from '@posthog/icons'
 
-> 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://app.posthog.com/#panel=feature-previews%3Aweb-experiments) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your Posthog web snippet configuration.
+> 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#web-experiments) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your Posthog web snippet configuration.
 >
 > We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [anders@posthog.com](mailto:anders@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
 
@@ -133,3 +133,17 @@ Before launching, ensure the following:
 1. **Test thoroughly**: Verify that all variants display and function as expected across devices and browsers. See our [testing feature flags doc](/docs/feature-flags/testing) for more details.
 
 2. **Document changes**: Record the modifications made to each variant and their goals. Add a description of the changes to your experiment as well as screenshots of each of the variants.
+
+## Troubleshooting and FAQs
+
+### Why am I seeing hydration errors during development?
+
+If you're testing no-code experiments in development mode (e.g., Next.js), you may see hydration errors about browser plugins modifying the DOM. This is expected behavior since no-code experiments change HTML after the page loads, which frameworks like Next.js + Turbopack try to prevent to preserve server-side rendering.
+
+These errors can be safely ignored as long as you're not implementing code that modifies HTML at build time. No-code experiments run on your live site after the static HTML is served, so they won't cause issues in production.
+
+### Why is there a delay before my element changes?
+
+If you're evaluating the experiment flag on the same page where the element needs to change, you'll see a brief delay as PostHog loads and processes the experiment's feature flag.
+
+To prevent that, evaluate the flag on a page before the one where you need the element to change. For the best user experience, evaluate the flag on the server and pass it to the frontend using [feature flag bootstrapping](/docs/feature-flags/bootstrapping).

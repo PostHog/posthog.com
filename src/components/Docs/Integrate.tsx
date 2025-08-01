@@ -134,7 +134,6 @@ const query = graphql`
                             "/docs/libraries/retool"
                             "/docs/libraries/rudderstack"
                             "/docs/libraries/segment"
-                            "/docs/libraries/sentry"
                             "/docs/libraries/slack"
                             "/docs/libraries/shopify"
                             "/docs/libraries/svelte"

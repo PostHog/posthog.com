@@ -3,7 +3,7 @@ title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
-github: 'https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node'
+github: 'https://github.com/PostHog/posthog-js/tree/main/packages/node'
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
 features:
@@ -16,7 +16,7 @@ features:
   errorTracking: true
 ---
 
-If you're working with Node.js, the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
+If you're working with Node.js (versions 15+), the official `posthog-node` library is the simplest way to integrate your software with PostHog. This library uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server-side application that needs performance. And in addition to event capture, [feature flags](/docs/feature-flags) are supported as well.
 
 ## Installation
 
@@ -48,16 +48,16 @@ import NodeSendEvents from '../../integrate/send-events/_snippets/send-events-no
 
 ## Person profiles and properties
 
-The Node SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The Node SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event using `$set` and `$set_once`:
 
 ```node
 client.capture({
-    distinctId: 'distinct_id_of_the_user',
-    event: 'movie_played',
-    properties: {
-        $set: { name: 'Max Hedgehog'  },
-        $set_once: { initial_url: '/blog' },
-    },
+  distinctId: 'distinct_id_of_the_user',
+  event: 'movie_played',
+  properties: {
+    $set: { name: 'Max Hedgehog'  },
+    $set_once: { initial_url: '/blog' },
+  },
 })
 ```
 
@@ -67,11 +67,11 @@ To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without
 
 ```node
 client.capture({
-    distinctId: 'distinct_id_of_the_user',
-    event: 'movie_played',
-    properties: {
-        $process_person_profile: false,
-    },
+  distinctId: 'distinct_id_of_the_user',
+  event: 'movie_played',
+  properties: {
+    $process_person_profile: false,
+  },
 })
 ```
 
@@ -83,8 +83,8 @@ In this case, you can use `alias` to assign another distinct ID to the same user
 
 ```node
 client.alias({
-    distinctId: 'distinct_id',
-    alias: 'alias_id',
+  distinctId: 'distinct_id',
+  alias: 'alias_id',
 })
 ```
 
@@ -102,14 +102,14 @@ import NodeFeatureFlagsCode from '../../integrate/feature-flags-code/_snippets/f
 
 import LocalEvaluationIntro from "../../feature-flags/snippets/local-evaluation-intro.mdx"
 
-### Local Evaluation
+### Local evaluation
 
 <LocalEvaluationIntro />
 
 For details on how to implement local evaluation, see our [local evaluation guide](/docs/feature-flags/local-evaluation).
 
 ```node
-const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organisation': 'google'}, groupProperties:{'organisation': {'is_authorized': True}})
+const flagValue = await client.getFeatureFlag('flag-key', 'user distinct id', {groups:{'organization': 'google'}, groupProperties:{'organization': {'is_authorized': True}})
 ```
 
 #### Reloading feature flags
@@ -130,7 +130,7 @@ Since [experiments](/docs/experiments/manual) use feature flags, the code for ru
 const variant = await client.getFeatureFlag('experiment-feature-flag-key', 'user_distinct_id')
 
 if (variant === 'variant-name') {
-    // do something
+  // do something
 }
 ```
 
@@ -138,63 +138,61 @@ It's also possible to [run experiments without using feature flags](/docs/experi
 
 ## Group analytics
 
-Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
+Group analytics enable you to associate an event with a group (e.g. teams, organizations, etc.). Read the [group analytics guide](/docs/product-analytics/group-analytics) for more information.
 
-> **Note: ** This is a paid feature and is not available on the open-source or free cloud plan. Learn more [here](/pricing).
-
--   Capture an event and associate it with a group
-
-```node
-client.capture({
-    event: 'some_event',
-    distinctId: 'user_distinct_id',
-    groups: { company: 'company_id_in_your_db' },
-})
-```
-
--   Update properties on a group
+To create a group or update its properties, use `groupIdentify`:
 
 ```node
 client.groupIdentify({
-    groupType: 'company',
-    groupKey: 'company_id_in_your_db',
-    properties: {
-        name: 'Awesome Inc',
-        employees: 11,
-    },
-    // optional distinct ID to associate event with an existing person
-    distinctId: 'xyz'
+  groupType: 'company',
+  groupKey: 'company_id_in_your_db',
+  properties: {
+    name: 'Awesome Inc',
+    employees: 11,
+  },
+  // optional distinct ID to associate event with an existing person
+  distinctId: 'xyz'
 })
 ```
 
-The `name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID will be used instead.
+`name` is a special property which is used in the PostHog UI for the name of the group. If you don't specify a `name` property, the group ID is used instead.
 
-If the optional `distinct_id` is not provided in the group identify call, it defaults to `${groupType}_${groupKey}` (e.g., `$company_company_id_in_your_db` in the example above). This default behavior will result in each group appearing as a separate person in PostHog. To avoid this, it's often more practical to use a consistent `distinct_id`, such as `group_identifier`.
+If the optional `distinctId` parameter is not provided in the group identify call, it defaults to `${groupType}_${groupKey}` (e.g., `$company_company_id_in_your_db` in the example above). This default behavior results in each group appearing as a separate person in PostHog. To avoid this, it's often more practical to use a consistent `distinctId`, such as `group_identifier`.
+
+Once a group is created, you can use the `capture` method and pass in the `groups` parameter to capture an event with group analytics.
+
+```node
+client.capture({
+  event: 'some_event',
+  distinctId: 'user_distinct_id',
+  groups: { company: 'company_id_in_your_db' },
+})
+```
 
 ## GeoIP properties
 
-Before posthog-node v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
+Before `posthog-node` v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
 
-As of posthog-node v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
+As of `posthog-node` v3.0, the default now is to disregard the server IP, not add the GeoIP properties, and not use the values for feature flag evaluations.
 
 You can go back to previous behavior by setting `disableGeoip` to false in your initialization:
 
 ```node
-const posthog = new PostHog(PH_API_KEY, {
-  host: PH_HOST,
+const posthog = new PostHog('<ph_project_api_key>', {
+  host: '<ph_client_api_host>',
   disableGeoip: false
 })
 ```
 
 The list of properties that this overrides:
 
-1. $geoip_city_name
-2. $geoip_country_name
-3. $geoip_country_code
-4. $geoip_continent_name
-5. $geoip_continent_code
-6. $geoip_postal_code
-7. $geoip_time_zone
+1. `$geoip_city_name`
+2. `$geoip_country_name`
+3. `$geoip_country_code`
+4. `$geoip_continent_name`
+5. `$geoip_continent_code`
+6. `$geoip_postal_code`
+7. `$geoip_time_zone`
 
 
 You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
@@ -270,43 +268,9 @@ This is also useful for shutting down a standard Node.js app.
 
 You can capture LLM usage and performance data by combining the `posthog-node` and `@posthog/ai` libraries. These work with LLM providers like OpenAI and Vercel's AI SDKs. Learn more in our [LLM observability docs](/docs/ai-engineering/observability).
 
-## Error Tracking
+## Error tracking
 
 You can capture errors using the `posthog-node` library. This enables you to see stack traces, source code, and watch associated session recordings to improve your application stability. Learn more in our [error tracking docs](/docs/error-tracking/installation?tab=Node).
-
-## Sentry integration
-
-When using [Sentry in Node.js](https://docs.sentry.io/platforms/node/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
-
-### Example implementation
-
-See the [`posthog-node`](https://github.com/PostHog/posthog-js-lite/blob/main/examples/example-node/server.ts) project for a complete example.
-
-```node
-import { PostHog, PostHogSentryIntegration } from 'posthog-node'
-import * as Sentry from '@sentry/node'
-
-const posthog = new PostHog(PH_API_KEY, { host: PH_HOST })
-
-Sentry.init({
-  dsn: 'https://examplePublicKey@o0.ingest.sentry.io/0',
-  integrations: [new PostHogSentryIntegration(posthog)],
-})
-
-// Set the PostHog distinctId for the relevant session either globally for all events
-Sentry.setTag(PostHogSentryIntegration.POSTHOG_ID_TAG, 'my-nodejs-service');
-
-// or contextually for example within an api request
-try {
-    myFunction()
-} catch(err) {
-  Sentry.captureException(err, {
-    tags: {
-      [PostHogSentryIntegration.POSTHOG_ID_TAG]: request.user.id,
-    },
-  })
-}
-```
 
 ## Upgrading from V1 to V2
 
@@ -317,4 +281,4 @@ With the release of V2, the API was kept mostly the same but with some small cha
 1. The minimum PostHog version requirement is 1.38
 2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
 3. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
-4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
+4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js/blob/main/packages/node/CHANGELOG.md)

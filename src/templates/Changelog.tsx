@@ -230,7 +230,7 @@ export default function Changelog({ pageContext }) {
                 <p className="m-0 text-sm text-primary dark:text-primary-dark">
                     Want to stay updated with what's coming soon?{' '}
                     <a
-                        href="http://app.posthog.com/home#panel=feature-previews"
+                        href="https://app.posthog.com/settings/user-feature-previews"
                         className="text-red dark:text-yellow hover:underline font-semibold"
                         target="_blank"
                         rel="noopener noreferrer"

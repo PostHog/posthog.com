@@ -26,6 +26,7 @@
         "typegen": "kea-typegen write .",
         "update-sprite": "svg-sprite -s --symbol-dest src/components/productFeature/images/icons --symbol-sprite sprited-icons.svg src/components/productFeature/images/icons/*.svg",
         "test-redirects": "jest scripts",
+        "check-links-post-build": "node scripts/check-links-post-build.js",
         "storybook": "start-storybook -s ./static -p 6006",
         "build-storybook": "build-storybook"
     },
@@ -104,7 +105,7 @@
         "p-limit": "3.1.0",
         "parse-link-header": "^2.0.0",
         "pluralize": "^8.0.0",
-        "posthog-js": "1.256.1",
+        "posthog-js": "1.258.1",
         "posthog-node": "^4.2.0",
         "prism-react-renderer": "^1.3.5",
         "prismjs": "^1.29.0",

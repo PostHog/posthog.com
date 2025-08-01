@@ -78,11 +78,13 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 **Variables**
 
-- Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter
-- Commission is _uncapped_ and paid out based on:
-  - X% of ARR for new annual deals sold
-  - X% of ARR for monthly customers for the first 3 months where you got them set up but they didn't commit to an annual contract
-  - Your specific commission % will depend on your OTE and quota size
+- Your quota is set for the year and then divided by 4 - this means you don't have to cram deals into the end of a quarter.
+- Commission is _uncapped_ and paid out on a sliding scale based on the % of your quota you hit. Hit 100% quota, get 100% of commission. 0% for 0%. And 200% for 200%. 
+- Quota is based on $ amount sold, not credits/product usage, so you can't in theory sell a $500k deal with an 80% discount and claim the full $500k to your quota, for example. Ways to hit quota:
+  - ARR from new annual deals sold
+  - ARR from monthly customers for the first _3 months_ where you got them set up but they didn't commit to an annual contract
+    - After 3 months, either you can keep working them if you believe they'll go annual, or they'll get handed over to a TAM or CSM
+  - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
   - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
     - If you close an annual contract with monthly/quarterly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
@@ -91,7 +93,7 @@ The objective of the meeting is to hold each other to account, provide direct fe
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did. 
-- In your first 3 months you'll be paid 100% OTE.
+- In your first 3 months you'll be paid 100% OTE fixed. 
 
 ## How commission works - Technical Account Managers
 
@@ -106,34 +108,29 @@ The objective of the meeting is to hold each other to account, provide direct fe
 
 **Variables**
 
-- Your quota is set as _the additional $ you are expected to add to your book of business_ - ie. any new revenue counts.
-  - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure. 
-- This means you can hit quota by a combo of bringing in new business and expanding existing. 
-- It also means that you are less likely to totally neglect existing customers because if they churn, it hurts your overall ARR figure.
-- Commission is _uncapped_ and paid out based on:
-  - X% of ARR for new annual deals sold
-  - X% of ARR for expanded annual deals sold
-    - This stops overselling in the first year
-    - Your quota is based on expansion potential here, not the whole contract
-  - X% of ARR for monthly customers
-    - We'll factor in your overall change in monthly accounts
-  - X% of ARR for monthly customers that convert to annual
-    - The % is taken of the whole annual contract
-  - 0% of ARR on any overages at the end of an annual contract
-    - This is because we don’t do overages in our current model
-  - Your specific commission % will depend on your OTE and quota size
+- Your quota is set as _the additional $ on a usage basis you are expected to add to your book of business_ - ie. any new product usage counts. This is different from TAEs, because here we care about the invoiced usage _not_ the actual $ amount. 
+  - For example, if you start a quarter with $700k in ARR and are set a target to grow this by $200k ARR, your commission is based on your attainment towards the $200k figure based on amounts invoiced.
+  - We measure the change in annualised quarterly ARR. Take Q1's usage ARR x4, compare it to Q2's usage ARR x4 - the different in these numbers is your attainment towards quota.
+- This means you can hit quota by a combo of bringing in new business and expanding existing. Because your target is based on invoiced usage, this means that even if you have an annual customer in your book, you can still expand their usage and get recognized for that. 
+  - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
+- Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
+  - Increase ARR for your monthly customers
+  - Convert monthly customers to annual - in this case, their monthly usage will count 1.25x towards your quota
+  - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
+  - Renew annual deals at a higher ARR than they were on previously
+  - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
-  - This incentivises securing upfront payment, not just annual contracts with monthly payment every time.
-    - If you close an annual contract with monthly/quarterly payments, you will still get recognized for the full commission amount, but the actual payout of your commission will be quarterly.
-  - We also don't want AEs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
+  - We don't want TAMs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
   - For monthly customers, commission is only paid after the first 2 invoices have been paid (ie. you don't get commission due to a random spike)
     - To clarify, this means the first 2 invoices the customer has ever paid, ie. you still get commission from 'your' month 1 if you inherit a paying monthly customer
     - Commission is still paid out quarterly even if the customer pays monthly
   - If we have to give a customer a big refund, we’ll deal with your commission on a case by case basis - in the future we may introduce a more formal clawback
   - Commission payments are made at the end of January, April, July, and October - at the end of each quarter, we'll monitor how many invoices actually get paid in the first two weeks of the next quarter. Fraser will send you an email that breaks down your commmission into the above 4 buckets and how you did. 
-- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE for this period.
+- In your first 3 months you are expected to retain your existing book and have closed at least one deal (either totally new or converting an existing customer to annual) - you'll be paid 100% OTE fixed.
 
 > Your quota and assigned customers are likely to change slightly from quarter to quarter. In any case, your quota will be amended appropriately (up or down) to account for any movement. We will also be flexible in making changes mid-quarter if it's obviously the sensible thing to do. If you inherit a new account, you have a 3 month grace period - if they churn in that initial period, they won't be counted against your quota.
+>
+> If you have customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
 
 ### Team target
 
@@ -144,7 +141,7 @@ To calculate the team quota we combine the quota of all team members, with prora
 
 Example: With a flat quota of $250,000 and 3 fully-ramped people, and 1 ramping, the team quota would be $875,000 (($250,000 * 3) + $125,000)
 
-> If someone leaves the team we don't recalculate the team quota as their accounts and opportunities will be reallocated to others in the team.
+> If someone leaves the team we may recalculate the team quota depending on how their accounts and opportunities are reallocated to others in the team. If someone joins the team, we don't change the team target, and don't count their contribution towards the existing target, to keep it simple. 
 
 ## Travel to see customers
 

@@ -62,7 +62,7 @@ We will then send over an email covering the following points with the team memb
 Final pay will be determined based on length of service and the reasons for leaving:
 
 * If the offboarding is voluntary, they will be paid up until their last day. We will look at the amount of holiday taken in the last 12 months and will pay any "unused" vacation pay assuming they would have taken 25 days (since we offer unlimited vacation periods).
-* If the offboarding is involuntary and due to performance reasons or a change in business needs, they will receive 4 months of pay, provided they have been at PostHog for at least 3 months. If they have been with PostHog for less time, they will receive 1 month of pay and, if a US team member, we will also cover healthcare costs through the end of the next calendar month. 
+* If the offboarding is involuntary and due to performance reasons or a change in business needs, they will receive 4 months of pay, provided they have been at PostHog for at least 3 months (6 months for sales roles). If they have been with PostHog for less time, they will receive 1 month of pay and, if a US team member, we will also cover healthcare costs through the end of the next calendar month. 
 * If the offboarding is involuntary and for gross misconduct, including breach of contract, they may be paid the statutory minimum required only, and receive no notice. This is at our discretion depending on the circumstances.
 
 > We ask departing team members to sign a post-termination certificate in order to receive payments beyond their final day of work. If we do not receive this, then we will only pay in line with statutory requirements. 

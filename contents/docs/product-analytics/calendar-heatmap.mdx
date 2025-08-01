@@ -1,0 +1,37 @@
+---
+title: Calendar heatmap
+sidebar: Docs
+showTitle: true
+availability:
+    free: full
+    selfServe: full
+    enterprise: full
+---
+
+
+> **Important:** This feature is currently an opt-in beta. You can enable it on the [feature previews settings page](https://app.posthog.com/settings/user-feature-previews#calendar-heatmap-insight).
+
+The **Calendar heatmap** insight displays a heatmap showing either the number of **unique users** or **total events** for **any selected event**, broken down by hour of the day and day of the week.
+
+## What the heatmap shows
+
+- Each **cell** represents the number of unique users or total events during a specific hour of a specific day. Numbers are formatted for readability (e.g., 1.73K for 1,730).
+
+- The **"All" column** on the right aggregates the total for each day across all hours, and is highlighted in a different color.
+
+- The **bottom row ("All")** aggregates the total for each hour across all days, also highlighted in a different color.
+
+- The **bottom-right cell** shows the grand total for the selected metric (unique users or total events) across all days and hours in the selected time range, with a distinct color.
+
+- Use the **"Show more"** button to expand the heatmap and view additional details if available.
+
+- The displayed time for each cell and the starting day of the week are based on your project's date and time settings. By default, the time is UTC, but you can change the timezone in [your project settings](https://us.posthog.com/settings/project-product-analytics#date-and-time).
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_07_14_at_3_01_50_PM_2367cb2440.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/chd_1c288a0c04.png"
+  alt="Calendar heatmap showing user activity patterns" 
+  classes="rounded"
+/>
+
+> **Note:** Selecting a time range longer than 7 days will include additional occurrences of weekdays and hours, potentially increasing the counts in those buckets. For best results, select 7 closed days or a multiple of 7 closed day ranges.

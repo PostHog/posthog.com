@@ -48,7 +48,7 @@ Session recordings are the most useful analytical tool for early-stage startups.
 
 PostHog includes 5k monthly recordings for free – more than enough for any early-stage product. Just include the [snippet or library](/docs/integrate) in your app and turn them on in project settings. Once done, you get a steady stream of session recordings (if you have users) in your PostHog instance. 
 
-To maximize your problem-solving potential, add [Sentry](/docs/libraries/sentry) and connect it to PostHog to monitor errors. When Sentry captures an error, the PostHog connection links the session recording. The recording becomes the re-creation steps that make squashing bugs and fixing issues easier.
+To maximize your problem-solving potential, setup PostHog [error tracking](/docs/error-tracking) to monitor errors. Captured exceptions link to the session recording. The recording becomes the re-creation steps that make squashing bugs and fixing issues easier.
 
 Session recordings replace number-crunching, database querying, and user testing to give you the details on the good and bad of your product fast.
 

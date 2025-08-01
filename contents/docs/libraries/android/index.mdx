@@ -15,7 +15,6 @@ features:
   groupAnalytics: true
   surveys: false
   llmObservability: false
-  errorTracking: false
 ---
 
 It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your mobile app.
@@ -341,3 +340,10 @@ val config = PostHogAndroidConfig(apiKey = POSTHOG_API_KEY, host = POSTHOG_HOST)
     reuseAnonymousId = false
 }
 ```
+
+# FAQ
+
+## Do I need to declare permissions in the AndroidManifest.xml?
+
+We don't declare nor use any 'Service', so no permissions are needed.
+

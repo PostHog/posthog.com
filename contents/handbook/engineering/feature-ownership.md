@@ -20,6 +20,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | API Structure | Shared responsibility. Features owned by the relevant Small Team. | <span class="lemon-tag gh-tag">feature/api-structure</span> |
 | Async migrations | [Team CDP][Team CDP]  | <span class="lemon-tag gh-tag">feature/async-migrations</span> |
 | Authentication | [Team Infrastructure][Team Infrastructure]  | <span class="lemon-tag gh-tag">feature/authentication</span> |
+| Autocapture | Shared responsibility with features owned by the relevant Small Team ([Team Product Analytics][Team Product Analytics] & [Team Web Analytics][Team Web Analytics]) | <span class="lemon-tag gh-tag">feature/autocapture</span> |
 | Batch exports | Team Batch Exports | <span class="lemon-tag gh-tag">feature/batch-exports</span> |
 | Billing | [Team Billing][Team Billing]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #feature-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR)  | <span class="lemon-tag gh-tag">feature/pipeline</span> |
@@ -44,6 +45,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | SQL Insights | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/sql-insights</span> |
 | Internal Messaging (Email, Notifications) | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live Events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
+| Marketing Analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/marketing-analytics</span> |
+| MCP Server | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/mcp</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Table exports | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/table-exports</span> |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
@@ -72,6 +75,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Usage reports | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/usage-reports</span>  |
 | Web Analytics  | [Team Web Analytics][Team Web Analytics]  | <span class="lemon-tag gh-tag">feature/web-analytics</span>  |
 | Webhook delivery service | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
+| Activity log | [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/activity-log</span> |
 
 ## Don't just copy other products
 Some of the features we are building may exist in other products already. It is fine for us to be inspired by them - there's no need to reinvent the wheel when there is already a standard way our users expect things to work. However, it is not ok for us to say 'let's copy how X does it', or to ship something with the exact same look and feel as another product. This is bad for two reasons:

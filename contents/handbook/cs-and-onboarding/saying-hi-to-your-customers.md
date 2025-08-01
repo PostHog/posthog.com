@@ -6,7 +6,7 @@ showTitle: true
 
 Many customers have never spoken to PostHog – some happily welcome our help, others are strongly independent. In order to be a successful as a CSM, we want to understand our customers and be helpful.
 
-Get people to talk to you (/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) also has good helpful tactics.
+[Get people to talk to you](/handbook/growth/sales/expansion-and-retention#1-get-people-to-talk-to-you) also has good helpful tactics.
 
 # Introduce yourself
 You likely won't have an established contact so introduce yourself to the widest blast range: org owner, org admin, users who have recently raised tickets, and users who have logged in in the last month. Even if there *seems* to be a point of contact, things probably changed – multi-thread!

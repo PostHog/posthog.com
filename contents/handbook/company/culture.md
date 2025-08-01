@@ -8,7 +8,7 @@ So, what's it like working at PostHog?
 
 ## We're 100% remote 
 
-[Our team](/people) is 100% remote, and distributed across more than 15 countries.
+[Our team](/people) is 100% remote, and distributed across more than 20 countries.
 
 Being all remote has a bunch of advantages:
 
@@ -48,7 +48,7 @@ Putting things in writing helps us clarify our own ideas, as well as allow other
 
 ## We give direct feedback early and often
 
-Everyone should help everyone else raise their game. Fatigue sets in when you complete a task, so it's easier for outsiders to help those creating the work to raise their game.
+Everyone should help everyone else raise their game. After completing difficult work, fatigue tends to set in. It is challenging to maintain objective views of the quality of your own work when you are fatigued. It's easier for outsiders with fresh eyes and energy to raise the level of others around them.
 
 We are direct about the quality of work. That doesn't always mean work needs to be completely polished, as it depends on the speed and impact of a task. Being great at [giving and receiving feedback](/handbook/people/feedback) is a key part of our culture. 
 

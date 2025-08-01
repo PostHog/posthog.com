@@ -26,6 +26,8 @@ We store session replay data in more than one place as it is ingested. A "source
 
 ## Using the snapshot API (Version 1)
 
+> Note! Version 1 is deprecated as of June 2025 and will stop working by the end of August 2025. You need to upgrade to version 2 (see below)
+
 ### First call:
 
 `https://us.posthog.com/api/environments/{the project id}/session_recordings/{the session id}/snapshots`
@@ -135,9 +137,11 @@ will return a sources list:
 }
 ```
 
-If you have any `blob_v2` sources, you can ignore all other sources and only make calls to snapshot(s) with `?source=blob_v2&blob_key={the blob_key}` for each `blob_v2` source. 
+If you have any `blob_v2` sources, you can ignore all other sources and only make calls to snapshot(s) with `?source=blob_v2&blob_key={the blob_key}` for each `blob_v2` source. This is because `blob_v2` files are flushed more frequently. There is no need to poll the realtime source. Instead, you can poll the original snapshot API to check for new sources to load.
 
-This is because `blob_v2` files are flushed more frequently. There is no need to poll the realtime source. Instead, you can poll the original snapshot API to check for new sources to load.
+You can also request multiple blobs at once using `?source=blob_v2&start_blob_key={the_first_key}&end_blob_key={the_second_blob_key}`. 
+
+> **Note:** You can request a maximum of 20 blob keys at a time. You will need to tune this for your application as 20 blobs could be a lot of data and timeout. For example, `?source=blob_v2&start_blob_key=0&end_blob_key=20` is invalid as it requests 21 keys.
 
 ### Post-processing
 

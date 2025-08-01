@@ -16,7 +16,7 @@ features:
   errorTracking: true
 ---
 
-This is an optional library you can install if you're working with Python. It uses an internal queue to make calls fast and non-blocking. It also batches requests and flushes asynchronously, making it perfect to use in any part of your web app or other server side application that needs performance.
+The Python SDK makes it easy to capture events, evaluate feature flags, track errors, and more in your Python apps.
 
 ## Installation
 
@@ -32,26 +32,32 @@ import PythonSendEvents from '../../integrate/send-events/_snippets/send-events-
 
 ## Person profiles and properties
 
-The Python SDK captures identified events by default. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
+The Python SDK captures identified events if the current context is identified or if you pass a distinct ID explicitly. These create [person profiles](/docs/data/persons). To set [person properties](/docs/data/user-properties) in these profiles, include them when capturing an event:
 
 ```python
+# Passing a distinct id explicitly
 posthog.capture(
-    'distinct_id',
-    event='event_name',
+    'event_name',
+    distinct_id='user-distinct-id',
     properties={
         '$set': {'name': 'Max Hedgehog'},
         '$set_once': {'initial_url': '/blog'}
     }
 )
+
+# Using contexts
+from posthog import new_context, identify_context
+with new_context():
+    identify_context('user-distinct-id')
+    posthog.capture('event_name')
 ```
 
 For more details on the difference between `$set` and `$set_once`, see our [person properties docs](/docs/data/user-properties#what-is-the-difference-between-set-and-set_once).
 
-To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `false`:
+To capture [anonymous events](/docs/data/anonymous-vs-identified-events) without person profiles, set the event's `$process_person_profile` property to `False`. Events captured with no context or explicit distinct_id are marked as personless, and will have an auto-generated distinct_id:
 
 ```python
 posthog.capture(
-    'distinct_id',
     event='event_name',
     properties={
         '$process_person_profile': False
@@ -61,7 +67,7 @@ posthog.capture(
 
 ## Alias
 
-Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend. 
+Sometimes, you want to assign multiple distinct IDs to a single user. This is helpful when your primary distinct ID is inaccessible. For example, if a distinct ID used on the frontend is not available in your backend.
 
 In this case, you can use `alias` to assign another distinct ID to the same user.
 
@@ -71,19 +77,25 @@ posthog.alias(previous_id='distinct_id', distinct_id='alias_id')
 
 We strongly recommend reading our docs on [alias](/docs/product-analytics/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
+## Contexts
+
+import Contexts from './_snippets/contexts.mdx'
+
+<Contexts />
+
 ## Group analytics
 
 Group analytics allows you to associate an event with a group (e.g. teams, organizations, etc.). Read the [Group Analytics](/docs/user-guides/group-analytics) guide for more information.
 
 > **Note:** This is a paid feature and is not available on the open-source or free cloud plan. Learn more on our [pricing page](/pricing).
 
--   Capture an event and associate it with a group
+To capture an event and associate it with a group:
 
 ```python
-posthog.capture('user_distinct_id', 'some_event', groups={'company': 'company_id_in_your_db'})
+posthog.capture('some_event', groups={'company': 'company_id_in_your_db'})
 ```
 
--   Update properties on a group
+To update properties on a group:
 
 ```python
 posthog.group_identify('company', 'company_id_in_your_db', {
@@ -123,7 +135,7 @@ if variant == 'variant-name':
     # Do something
 ```
 
-It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags). 
+It's also possible to [run experiments without using feature flags](/docs/experiments/running-experiments-without-feature-flags).
 
 ## LLM observability
 
@@ -145,6 +157,8 @@ You can also manually capture exceptions using the `capture_exception` method:
 posthog.capture_exception(e, 'user_distinct_id', properties=additional_properties)
 ```
 
+Contexts automatically capture exceptions thrown inside them, unless disable it by passing `capture_exceptions=False` to `new_context()`.
+
 ## GeoIP properties
 
 Before posthog-python v3.0, we added GeoIP properties to all incoming events by default. We also used these properties for feature flag evaluation, based on the IP address of the request. This isn't ideal since they are created based on your server IP address, rather than the user's, leading to incorrect location resolution.
@@ -159,18 +173,18 @@ posthog = Posthog('api_key', disable_geoip=False)
 
 The list of properties that this overrides:
 
-1. $geoip_city_name
-2. $geoip_country_name
-3. $geoip_country_code
-4. $geoip_continent_name
-5. $geoip_continent_code
-6. $geoip_postal_code
-7. $geoip_time_zone
+1. `$geoip_city_name`
+2. `$geoip_country_name`
+3. `$geoip_country_code`
+4. `$geoip_continent_name`
+5. `$geoip_continent_code`
+6. `$geoip_postal_code`
+7. `$geoip_time_zone`
 
 You can also explicitly chose to enable or disable GeoIP for a single capture request like so:
 
 ```python
-posthog.capture('test_id', 'test_event', disable_geoip=True|False)
+posthog.capture('test_event', disable_geoip=True|False)
 ```
 
 ## Historical migrations
@@ -190,7 +204,8 @@ By default, the library buffers events before sending them to the capture endpoi
 
 ## Django
 
-See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django.
+See our [Django docs](/docs/libraries/django) for how to set up PostHog in Django. Our library includes a [contexts middleware](/docs/libraries/django#django-contexts-middleware) that can automatically capture distinct IDs, session IDs, and other properties you can set up with tags.
+
 
 ## Alternative name
 

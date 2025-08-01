@@ -37,10 +37,10 @@ Unlike [product analytics](/docs/product-analytics), web analytics offers a more
 To get started with web analytics, install PostHog on the site or app you want to track.
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'AI wizard', 'React', 'Next.js', 'GTM', 'Vue', 'Nuxt', 'Svelte', 'WordPress', 'Astro', 'Framer', 'Webflow', 'Phoenix']}>
+<Tab.Group tabs={['AI wizard', 'Web', 'React', 'Next.js', 'GTM', 'Vue', 'Nuxt', 'Svelte', 'WordPress', 'Astro', 'Framer', 'Webflow', 'Phoenix']}>
     <Tab.List>
-        <Tab>Web</Tab>
         <Tab>AI wizard</Tab>
+        <Tab>Web</Tab>
         <Tab>React</Tab>
         <Tab>Next.js</Tab>
         <Tab>GTM</Tab>
@@ -55,10 +55,10 @@ To get started with web analytics, install PostHog on the site or app you want t
     </Tab.List>
     <Tab.Panels>
         <Tab.Panel>
-            <WebInstall />
-        </Tab.Panel>
+            <Wizard />
+        </Tab.Panel> 
         <Tab.Panel>
-            <Wizard />  
+            <WebInstall />
         </Tab.Panel>
         <Tab.Panel>
             <ReactInstall />
