@@ -69,11 +69,6 @@ Smaller features which don't require [major announcements](/handbook/brand/produ
 
 If you're releasing an entirely new product or tool then teams should create [a new product RFC](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-product.md) and complete that process before releasing the feature as GA to users. This RFC should be created by the Team Lead. 
 
-In any case, there are some things you'll need to do as part of the beta process if you're launching a major feature. 
-
-- If the product will be metered, talk to billing team about getting the usage added to usage reports
-- Create a dashboard/notebook to track usage and opt-ins
-- Ensure other teams are aware by posting to the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY)
 
 > **How do I work with marketing and billing teams?**
 > The short version here is to try and give other teams as much notice as possible when starting a launch cycle. Marketing and billing teams typically ask for two weeks of notice before a major launch, as a minimum. It's the responsibility of the team lead to ensure these teams are aware of upcoming launches.
