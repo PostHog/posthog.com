@@ -4,43 +4,93 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Discoveries
+We track a short list of metrics in each [per-product growth review](/handbook/product/per-product-growth-reviews). The idea of a standardised list of metrics is that each product team has roughly the same metrics they care about, and we can compare metrics across products, such as revenue growth, to see how we compare.
 
-As we improve our Product, it's key to have a guiding metric that we can all at Product & Engineering rally behind and measure our progress against. For the Product, this metric is **Discoveries**. The metric can be tracked in the [product dashboard][dashboard] and is reported weekly at PostHog News.
+Our growth review metrics strike a balance strike between depth, efficiency and “measuring what matters”. We want to make sure our metrics alert us of potential negative (or positive!) developments, giving us enough signal to dive deeper into lower-level metrics.
 
-> 💡 Discoveries is different from Discovered Learnings. Discovered Learnings is used as a metric for activation and growth.
+If as a new product manager or team lead you want to look at a wider range of metrics, please do! These can either be incorporated in the growth reviews, or in ad-hoc metrics reviews you or your team are doing.
 
-Generally, small teams should be making measurable impact towards improving this metric (not all teams, not all the time). It's okay for epics and sprints to have other intermediate (and probably more concrete) goals, but overall each team should be moving the metric as a whole.
+## Metrics we use in growth reviews
 
-## What is a Discovery?
-The metric is defined [in this action][action]. The concept of the metric is users driving insights from PostHog, so any of these actions:
-- Analyzing any insight. Analyzing means viewing for 10 seconds or more. Insights include: trends, funnels, paths, lifecycle, stickiness.
-- Analyzing a recording. Watching a recording for 10 seconds or more.
-- Analyzing a correlation analysis report. Analyzing means viewing for 10 seconds or more. 
-- Analyzing a dashboard. Analyzing means viewing a dashboard for 10 seconds or more. Viewing a dashboard does not fire "insight analyzed" events for its dashboard items. _Introduced on Feb 21, 2022._
+### Revenue
 
+These queries are written and owned by the billing team. They are standardised across products, and match the combined PostHog revenue queries. If you are intending a change, please chat to the billing team first.
 
-**Adding new insights**
-We're continuously improving the product and it's inevitable that we'll add more more insights. When we add more insights, they should either fire the already existing "insight viewed" & "insight analyzed" events (with adjusted properties), or the new event should be added to the action definition. In either case, it's important to **update this document, so we have a clear log of when new insights were added.**
+- <PrivateLink url="https://us.posthog.com/project/2/dashboard/198672">Link to combined revenue dashboard</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/dashboard/215472">Link to per-product revenue dashboard</PrivateLink>
 
+| Metric | Notes |
+| --- | --- |
+| Monthly recurring revenue (MRR) |  |
+| Annual recurring revenue (ARR) |  |
+| MoM growth rate | For more mature products, we want this to be over 9%, for newer products between 15-20% on average |
+| New revenue growth rate |  |
+| Revenue expansion rate  |  |
+| Revenue contraction rate |  |
+| Revenue churn rate |  |
+| Revenue retention rate |  |
+| Total paying customers count |  |
+| Paying customers growth rate |  |
+| Quarterly net revenue retention (NRR) | Instead of a rolling metric, we use the quarterly values and report on it once a quarter. The rolling metric is available on the dashboard too, as it can be helpful for debugging |
+| Annualised NRR | Same as above |
+| Revenue share | For revenue products like data pipelines or product analytics, it makes sense to calculate CDP/batch exports/anonymous-only share of revenue, to understand individual product contribution better |
 
-**Exclusions**
-We exclude the following events from counting as they don't signal getting actual value from PostHog:
-- Events done on test projects.
-- Insights where it's the first component load (i.e. you just open the insights page and don't change any config nor move to any other insight).
-  - Indirectly, this means we also don't count when a user shares an insight link and just opens that link. This is deliberate as we believe this is not about discovering a new insight, but rather collaboration.
+### Usage
 
+Product usage metrics are defined by the PM or small team lead. When setting up metrics for a new product, it’s recommended to start with a longer list and trim it once user behaviour is better understood. We recommend adding all relevant product metrics to one dashboard that is accessible, kept up to date and reviewed by the whole small team. For better discoverability, some of us use the appendix ™ to mark the primary usage dashboard.
 
-## Additional context
-- The metric is purposefully kept simple to make it easy to action and avoid complex edge cases in an already ambiguous landscape (product changes all the time).
-- Why not _Discovered Learnings_? It seems to have a higher correlation to retention, but:
-  - It limits us only to trends and funnels, and users drive value from a variety of other sources. We're particularly investing in providing more value in others parts of the app too.
-  - While Discovered Learnings seems to lead to higher levels of retention percentually, in absolute numbers we retain more users through Discoveries (1).
-  - Counts when users open an insight shared by another user (direct link).
-- Caveat: This metric also captures any value from Marketing efforts. As we start to invest more in user acquisition, we'll need to isolate the effect from Marketing in this Product metric.
+This dashboard can also include NPS & support metrics (see below).
 
+- <PrivateLink url="https://us.posthog.com/project/2/dashboard/26089">Link to session replay usage metrics dashboard (example)</PrivateLink>
 
-(1): _A test carried out on Oct 6 with cohorts from Aug 8 to Aug 29, 2021 revealed that Discoveries show 2.3x more retained users (in absolute numbers) and had an F1-score 33% higher than for Discovered Learnings._
+| Metric | Notes |
+| --- | --- |
+| Unique monthly users - count | As defined by a key product action we also use in the activation definition, such as “flag created” or “recording analyzed” |
+| Unique monthly users, growth rate |  |
+| Unique monthly organizations - count | Same definition as unique monthly users |
+| Unique monthly organizations, growth rate |  |
+| Activation | [Guide how to define activation for a new product](/handbook/growth/growth-engineering/product-intents); <PrivateLink url="https://us.posthog.com/project/2/dashboard/130345">Dashboard that contains all per-product activation queries</PrivateLink> |
+| Usage retention (1, 3, 6-month) | Report on it once a quarter. Retention changes slowly, it will be easier to see changes zoomed out |
 
-[dashboard]: https://app.posthog.com/dashboard/14719
-[action]: https://app.posthog.com/action/10784
+### NPS
+
+We have a NPS survey set up for each product. They need regular updates due to some survey limitations. If you want to set up a new NPS survey, speak to the Surveys PM (Cory), he can help you set one up and keep it updated.
+
+We track a 4-week NPS score, but we don’t have the volume of responses we need to get reliable results. This is why we include the open-ended feedback in the growth reviews, as this is usually more actionable.
+
+- <PrivateLink url="https://us.posthog.com/project/2/surveys/018c8bb5-3b27-0000-5231-23807a63f324">Link to session replay NPS survey (example)</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/insights/JYAmNKUd?dashboard=26089&variables_override=%7B%7D">Link to session replay 4 week NPS score insight (example)</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/insights/rpDp8GoL?dashboard=26089&variables_override=%7B%7D">Link to session replay list of feedback insight (example)</PrivateLink>
+
+| Metric | Notes |
+| --- | --- |
+| NPS score - last 4 weeks | Include constructive feedback as a comment in the spreadsheet for context |
+
+### Support
+
+Similar to our revenue metrics, we are reusing queries the support team have set up, broken down by product. If you need to make a change or want to understand how SLA reporting works in detail, speak to the support team.
+
+- <PrivateLink url="https://us.posthog.com/project/2/dashboard/250270">Link to overall support dashboard</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/insights/h0jiEYgF">Link to per-product ticket count insight</PrivateLink>
+- <PrivateLink url="https://us.posthog.com/project/2/insights/J6fRRkgO">Link to per-product SLA insight</PrivateLink>
+
+| Metric | Notes |
+| --- | --- |
+| Created tickets |  |
+| Escalated tickets |  |
+| Escalated tickets - SLA | The insight also tracks non-escalated tickets SLA, which is useful to be aware of, but we don’t need to report on it in every growth review |
+| Ratio no. of users vs. no. of tickets | Formula dividing no. of tickets / unique monthly users |
+
+## Metrics outside of growth reviews
+
+If there are any other metrics you want to track to understand how well your product is doing, or which areas need improvement, go for it! Just make sure you are not tracking too many metrics and lose sight of what matters.
+
+## Tips for increasing metrics awareness in a small product team
+
+If you are a PM at PostHog, you will be more successful if your whole team is aware and keeps track of your per-product metrics, instead of just you summarising growth review insights once a month. Here are some tips we found are working well:
+
+- Speak to your team what they care about and are interested in tracking, and add those metrics to your dashboard
+- Link the revenue & usage dashboards in your team’s Slack channel, so they are easy to find for your team
+- If your team has shipped a new feature, encourage them to set up an event, and track the new feature’s usage on the usage dashboard. For example you could have a “feature usage” section on the dashboard that tracks multiple features
+- Some teams do a “metrics Monday” where they review the usage dashboard together in the Monday standup, looking for trends and anomalies. These sessions are usually led by an engineer, not the PM
+- You will likely have to try a bunch of things to find what sticks with your team. Ultimately, you want to make sure you and your team are looking at the same metrics, and everyone in your team knows how to find the relevant dashboards. It’s a team effort!
