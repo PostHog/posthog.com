@@ -49,7 +49,7 @@ This dashboard can also include NPS & support metrics (see below).
 | Unique monthly users, growth rate |  |
 | Unique monthly organizations - count | Same definition as unique monthly users |
 | Unique monthly organizations, growth rate |  |
-| Activation | [Guide how to define activation for a new product](/handbook/growth/growth-engineering/product-intents); <PrivateLink url="https://us.posthog.com/project/2/dashboard/130345">Dashboard that contains all per-product activation queries</PrivateLink> |
+| Activation | [Guide how to define activation for a new product](/handbook/growth/growth-engineering/per-product-activation); <PrivateLink url="https://us.posthog.com/project/2/dashboard/130345">Dashboard that contains all per-product activation queries</PrivateLink> |
 | Usage retention (1, 3, 6-month) | Report on it once a quarter. Retention changes slowly, it will be easier to see changes zoomed out |
 
 ### NPS
