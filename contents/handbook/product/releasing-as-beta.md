@@ -19,7 +19,7 @@ Adding items to the coming soon menu early offers several advantages. It enables
 Coming soon features can either be large or small, so use your judgement about what is of interest to users, but it should be something that you expect to work on in the next 3-6 months. 
 
 > **Moving from `Concept` to `Beta`**
-> Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that they beta is available. All users who are subscribed to updates will be immediately opted in to the beta. 
+> Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
 
 ## Releasing as beta
 If your team is releasing an early version of a feature which users can interact with, you should consider adding it to the beta menu by creating a flag in the `beta` stage. Betas do not need to have been in `concept` stage first. 
