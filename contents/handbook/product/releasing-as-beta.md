@@ -5,7 +5,7 @@ showTitle: true
 hideAnchor: true
 ---
 
-PostHog includes a variety of early access features [the feature previews section of a users' settings page](https://app.posthog.com/settings/user-feature-previews), as well as a roadmap of feature previews which are coming soon. 
+PostHog includes a variety of early access features in [the feature previews section of a users' settings page](https://app.posthog.com/settings/user-feature-previews), as well as a roadmap of feature previews which are coming soon.
 
 Items in the feature previews section can be toggled on or off if users want to try a feature out. Items in the coming soon section enable users to register their interest so that we can contact them with updates. Both sections work only at the user-level and not at the org or project level. 
 
