@@ -1,52 +1,14 @@
 {
     "id": "posthog-python",
-    "hogRef": "0.1",
+    "hogRef": "0.2",
     "info": {
-        "version": "6.0.3",
+        "version": "6.3.1",
         "id": "posthog-python",
         "title": "PostHog Python SDK",
         "description": "Integrate PostHog into any python application.",
         "slugPrefix": "posthog-python",
         "specUrl": "https://github.com/PostHog/posthog-python"
     },
-    "noDocsTypes": [
-        "Client",
-        "any",
-        "int",
-        "float",
-        "bool",
-        "dict",
-        "list",
-        "str",
-        "tuple",
-        "set",
-        "frozenset",
-        "bytes",
-        "bytearray",
-        "memoryview",
-        "range",
-        "slice",
-        "complex",
-        "Union",
-        "Optional",
-        "Any",
-        "Callable",
-        "Type",
-        "TypeVar",
-        "Generic",
-        "Literal",
-        "ClassVar",
-        "Final",
-        "Annotated",
-        "NotRequired",
-        "Required",
-        "None",
-        "NoneType",
-        "object",
-        "Unpack",
-        "BaseException",
-        "Exception"
-    ],
     "types": [
         {
             "id": "FeatureFlag",
@@ -225,6 +187,29 @@
             "example": ""
         },
         {
+            "id": "SendFeatureFlagsOptions",
+            "name": "SendFeatureFlagsOptions",
+            "path": "posthog.types.SendFeatureFlagsOptions",
+            "properties": [
+                {
+                    "name": "only_evaluate_locally",
+                    "type": "Optional[bool]",
+                    "description": "Field: only_evaluate_locally"
+                },
+                {
+                    "name": "person_properties",
+                    "type": "Optional[dict[str, typing.Any]]",
+                    "description": "Field: person_properties"
+                },
+                {
+                    "name": "group_properties",
+                    "type": "Optional[dict[str, dict[str, typing.Any]]]",
+                    "description": "Field: group_properties"
+                }
+            ],
+            "example": ""
+        },
+        {
             "id": "OptionalCaptureArgs",
             "name": "OptionalCaptureArgs",
             "path": "posthog.args.OptionalCaptureArgs",
@@ -256,7 +241,7 @@
                 },
                 {
                     "name": "send_feature_flags",
-                    "type": "typing_extensions.NotRequired[Optional[bool]]",
+                    "type": "typing_extensions.NotRequired[Union[bool, SendFeatureFlagsOptions, any]]",
                     "description": "Field: send_feature_flags"
                 },
                 {
@@ -301,24 +286,26 @@
             "example": ""
         },
         {
-            "id": "traceback",
-            "name": "traceback",
-            "path": "builtins.traceback",
-            "properties": [],
-            "example": ""
-        },
-        {
-            "id": "UUID",
-            "name": "UUID",
-            "path": "uuid.UUID",
-            "properties": [],
-            "example": ""
-        },
-        {
-            "id": "datetime",
-            "name": "datetime",
-            "path": "datetime.datetime",
-            "properties": [],
+            "id": "SendFeatureFlagsOptions",
+            "name": "SendFeatureFlagsOptions",
+            "path": "posthog.types.SendFeatureFlagsOptions",
+            "properties": [
+                {
+                    "name": "only_evaluate_locally",
+                    "type": "Optional[bool]",
+                    "description": "Field: only_evaluate_locally"
+                },
+                {
+                    "name": "person_properties",
+                    "type": "Optional[dict[str, typing.Any]]",
+                    "description": "Field: person_properties"
+                },
+                {
+                    "name": "group_properties",
+                    "type": "Optional[dict[str, dict[str, typing.Any]]]",
+                    "description": "Field: group_properties"
+                }
+            ],
             "example": ""
         }
     ],
@@ -355,141 +342,147 @@
                         },
                         {
                             "name": "max_queue_size",
-                            "description": "Parameter: max_queue_size",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "send",
-                            "description": "Parameter: send",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "on_error",
-                            "description": "Parameter: on_error",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "flush_at",
-                            "description": "Parameter: flush_at",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "flush_interval",
-                            "description": "Parameter: flush_interval",
+                            "description": "",
                             "isOptional": false,
                             "type": "float"
                         },
                         {
                             "name": "gzip",
-                            "description": "Parameter: gzip",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "max_retries",
-                            "description": "Parameter: max_retries",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "sync_mode",
-                            "description": "Parameter: sync_mode",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "timeout",
-                            "description": "Parameter: timeout",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "thread",
-                            "description": "Parameter: thread",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "poll_interval",
-                            "description": "Parameter: poll_interval",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "personal_api_key",
-                            "description": "Parameter: personal_api_key",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "disabled",
-                            "description": "Parameter: disabled",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "disable_geoip",
-                            "description": "Parameter: disable_geoip",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "historical_migration",
-                            "description": "Parameter: historical_migration",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "feature_flags_request_timeout_seconds",
-                            "description": "Parameter: feature_flags_request_timeout_seconds",
+                            "description": "",
                             "isOptional": false,
                             "type": "int"
                         },
                         {
                             "name": "super_properties",
-                            "description": "Parameter: super_properties",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "enable_exception_autocapture",
-                            "description": "Parameter: enable_exception_autocapture",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "log_captured_exceptions",
-                            "description": "Parameter: log_captured_exceptions",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "project_root",
-                            "description": "Parameter: project_root",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "privacy_mode",
-                            "description": "Parameter: privacy_mode",
+                            "description": "",
                             "isOptional": false,
                             "type": "bool"
                         },
                         {
                             "name": "before_send",
-                            "description": "Parameter: before_send",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
                         },
                         {
                             "name": "flag_fallback_cache_url",
-                            "description": "Parameter: flag_fallback_cache_url",
+                            "description": "",
                             "isOptional": false,
                             "type": "any"
+                        },
+                        {
+                            "name": "enable_local_evaluation",
+                            "description": "",
+                            "isOptional": false,
+                            "type": "bool"
                         }
                     ],
                     "showDocs": true,
@@ -573,7 +566,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -622,7 +615,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -1287,39 +1280,39 @@
                         {
                             "name": "properties",
                             "description": "A dictionary of properties to set on the group.",
-                            "isOptional": false,
-                            "type": "any"
+                            "isOptional": true,
+                            "type": "dict[str, typing.Any]"
                         },
                         {
                             "name": "timestamp",
                             "description": "The timestamp of the event.",
                             "isOptional": false,
-                            "type": "any"
+                            "type": "datetime"
                         },
                         {
                             "name": "uuid",
                             "description": "A unique identifier for the event.",
-                            "isOptional": false,
-                            "type": "any"
+                            "isOptional": true,
+                            "type": "str"
                         },
                         {
                             "name": "disable_geoip",
                             "description": "Whether to disable GeoIP for this event.",
-                            "isOptional": false,
-                            "type": "any"
+                            "isOptional": true,
+                            "type": "bool"
                         },
                         {
                             "name": "distinct_id",
                             "description": "The distinct ID of the user performing the action.",
                             "isOptional": false,
-                            "type": "any"
+                            "type": "Number"
                         }
                     ],
                     "showDocs": true,
                     "releaseTag": "public",
                     "returnType": {
                         "id": "return_type",
-                        "name": "None"
+                        "name": "Optional[str]"
                     },
                     "examples": [
                         {
@@ -1414,7 +1407,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
@@ -1447,7 +1440,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
@@ -1561,7 +1554,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -1600,7 +1593,7 @@
                         },
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalCaptureArgs]"
                         }
@@ -1713,7 +1706,7 @@
                 {
                     "id": "flush",
                     "title": "flush",
-                    "description": "Tell the client to flush.",
+                    "description": "Tell the client to flush all queued events.",
                     "details": "",
                     "category": "Client management",
                     "params": [],
@@ -1969,7 +1962,7 @@
                 {
                     "id": "join",
                     "title": "join",
-                    "description": "Block program until the client clears the queue.",
+                    "description": "Block program until the client clears the queue. Used during program shutdown. You should use `shutdown()` directly in most cases.",
                     "details": "",
                     "category": "Client management",
                     "params": [],
@@ -2085,7 +2078,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }
@@ -2141,7 +2134,7 @@
                     "params": [
                         {
                             "name": "kwargs",
-                            "description": "Parameter: kwargs",
+                            "description": "",
                             "isOptional": true,
                             "type": "typing_extensions.Unpack[OptionalSetArgs]"
                         }

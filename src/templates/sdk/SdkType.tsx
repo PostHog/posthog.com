@@ -28,7 +28,6 @@ interface PageContext {
     typeData: TypeData
     version: string
     id: string
-    noDocsTypes: string[]
     types: string[]
 }
 

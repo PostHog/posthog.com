@@ -36,7 +36,7 @@ const TypeLink = ({
                     <React.Fragment key={index}>
                         <Link
                             to={`/docs/references/${slugPrefix}/types/${baseType}`}
-                            className="text-red hover:text-red-dark"
+                            className="text-red hover:text-red-dark break-words"
                         >
                             {baseType}
                         </Link>
@@ -47,7 +47,7 @@ const TypeLink = ({
 
             // Return as unlinked text
             return (
-                <span key={index} className="text-gray-600 dark:text-gray-400">
+                <span key={index} className="text-gray-600 dark:text-gray-400 break-words">
                     {part}
                 </span>
             )
