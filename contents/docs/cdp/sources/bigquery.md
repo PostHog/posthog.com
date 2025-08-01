@@ -56,8 +56,14 @@ To securely connect your BigQuery account to PostHog, create a dedicated service
 
 ## How it works
 
-PostHog creates and deletes [temporary tables](https://cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) when querying your data. This is necessary for handling large BigQuery tables.
-Temporary tables help break down large data processing tasks into manageable chunks. However, they incur storage and query costs in BigQuery while they exist. We delete them as soon as the job is done.
+PostHog creates and deletes [temporary tables](https://cloud.google.com/bigquery/docs/writing-results#temporary_and_permanent_tables) when querying your data. This is necessary for handling large BigQuery tables. Temporary tables help break down large data processing tasks into manageable chunks. However, they incur storage and query costs in BigQuery while they exist. We delete them as soon as the job is done.
+
+PostHog requires a unique primary key when importing data. PostHog will look for this key in this order:
+
+- PostHog will use the `id` column as the primary key if it exists
+- If `id` does not exist, PostHog will use any primary key constraints in the table
+
+After selecting the primary key, PostHog will query the table to see if the column is unique. If it is not, PostHog will fail the import with a `DuplicatePrimaryKeysException`. If you have no `id` column and no primary key constraints, future incremental imports will fail.
 
 ### Costs
 
