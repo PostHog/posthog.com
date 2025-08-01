@@ -357,6 +357,7 @@ export default function Handbook({
         thumbnail,
         related,
         seo,
+        showStepsToc,
     } = frontmatter
     const { parent, excerpt } = post
     const lastUpdated = parent?.fields?.gitLogLatestDate
@@ -365,7 +366,7 @@ export default function Handbook({
     const isArticle = frontmatter.isArticle !== false
 
     // Parse steps from MDX content and use them to replace table of contents if found
-    const stepsFromMDX = parseStepsFromMDX(body)
+    const stepsFromMDX = frontmatter.showStepsToc ? parseStepsFromMDX(body) : []
     const toc = stepsFromMDX.length > 0 ? stepsFromMDX : tableOfContents
     const showToc = !hideAnchor && toc?.length > 0
 
@@ -606,6 +607,7 @@ export const query = graphql`
                 hideLastUpdated
                 github
                 isArticle
+                showStepsToc
                 features {
                     eventCapture
                     userIdentification

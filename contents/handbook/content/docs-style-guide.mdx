@@ -85,6 +85,17 @@ posthog.capture('user_signed_up', {
 })
 ```
 
+### Record videos
+
+For flows with many steps, it's often more helpful to include a video instead of a screenshot. We use [Screen Studio](https://screen.studio/) to record videos. Feel free to buy yourself a license.
+
+Use the following settings:
+- <PrivateLink url="https://posthog.slack.com/archives/C01FHN8DNN6/p1729759474007969">Preset</PrivateLink>
+- Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
+- For exporting: use MP4, 720, 60 fps, and "web" quality
+
+## Docs components
+
 ### Callout boxes
 
 import { CalloutBox } from '../../../src/components/Docs/CalloutBox'
@@ -138,11 +149,110 @@ This creates the following component in the docs, where the final link will dive
 
 This component is globally available and doesn't need to be imported per page, but doesn't automatically run the query with Max AI (currently).
 
-### Record videos
+### Steps
 
-For flows with many steps, it's often more helpful to include a video instead of a screenshot. We use [Screen Studio](https://screen.studio/) to record videos. Feel free to buy yourself a license.
+Use the `<Steps>` component for content that walks the reader through a strict sequence of instructions. Think how-to guides or step-by-step tutorials. 
 
-Use the following settings:
-- <PrivateLink url="https://posthog.slack.com/archives/C01FHN8DNN6/p1729759474007969">Preset</PrivateLink>
-- Remove any zooming-in for clicks, as this can sometimes make videos hard to follow.
-- For exporting: use MP4, 720, 60 fps, and "web" quality
+<Steps>
+
+<Step title="Install the SDK" badge="required">
+
+Steps are automatically numbered.
+
+</Step>
+
+<Step title="Call the capture method" badge="required">
+
+Write the *content* in **markdown**.
+
+</Step>
+
+<Step checkpoint title="Check for events in PostHog" subtitle="Log in to your PostHog account" badge="optional">
+
+You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember name="Vincent Ge" photo />
+
+Add more steps!
+
+</Step>
+
+</Steps>
+
+<CalloutBox icon="IconInfo" title="Watch the whitespace" type="fyi">
+
+  Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
+
+  - Add a line break after the opening component tags
+  - Avoid using 4-space indents
+
+</CalloutBox>
+
+```mdx
+---
+showStepsToc: true # for table of contents with steps only
+---
+<Steps>
+
+<Step title="Install the SDK" badge="required">
+
+Steps are automatically numbered.
+
+</Step>
+
+<Step title="Call the capture method" badge="required">
+
+Write the *content* in **markdown**.
+
+</Step>
+
+<Step checkpoint title="Check for events in PostHog" subtitle="Log in to your PostHog account" badge="optional">
+
+Add checkpoints to help readers know they're on the right track.
+
+You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember name="Vincent Ge" photo />
+
+</Step>
+
+</Steps>
+```
+
+### Quest log
+
+The `<QuestLog>` component is for syllabus-style pages. Inspired by video games, it outlines each section as a "quest" to give the reader a visual roadmap of what's needed to reach a larger goal or milestone – like fully adopting our error tracking product.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250731_oiej_cdce484c1c.png"
+    alt="Questlog example"
+    classes="rounded"
+    padding={false}
+/>
+
+<CalloutBox icon="IconInfo" title="Watch the whitespace" type="fyi">
+
+  Our mdx parser does not play nice with certain whitespace. When using the component, make sure you:
+
+  - Add a line break after the opening component tags
+  - Avoid using 4-space indents
+
+</CalloutBox>
+
+```mdx
+---
+hideAnchor: true # for a wider content column
+---
+
+<QuestLog firstSpeechBubble="Let's go on an adventure!" lastSpeechBubble="Time to build products!">
+
+<QuestLogItem title="Capture your first exception" subtitle="Required" icon="IconCode">
+
+Write the *content* in **markdown**.
+
+</QuestLogItem>
+
+<QuestLogItem title="Integrate customer data" subtitle="Recommended" icon="IconLogomark">
+
+You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember name="Vincent Ge" photo />
+
+</QuestLogItem>
+
+</QuestLog>
+```
