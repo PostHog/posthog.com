@@ -10,7 +10,7 @@ PostHog includes a variety of early access features [the feature previews sectio
 Items in the feature previews section can be toggled on or off if users want to try a feature out. Items in the coming soon section enable users to register their interest so that we can contact them with updates. Both sections work only at the user-level and not at the org or project level. 
 
 ## Releasing as coming soon
-If your team is considering building a feature in the future, you should consider adding it to the coming soon menu. This responsibility usually sits with the Team Lead, unless the project is an individual one. 
+If your team is considering building a feature in the future, you should add it to the coming soon menu. This responsibility usually sits with the Team Lead, unless the project is an individual one. 
 
 To add an item to the coming soon, simply create a feature flag with the `concept` state in [PostHog's early access features tool](/docs/feature-flags/early-access-feature-management).
 
