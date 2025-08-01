@@ -117,7 +117,9 @@ Additional notes on self-serve discounts:
 
 We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We start non-profit discounts at 15% regardless of spend. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
 
-When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
+When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
+
+To set up the non-profit discount in Stripe, follow the [instructions here](/handbook/growth/sales/billing#coupons-and-discounts).
 
 > Nonprofit discounts don't stack with annual discounts.  It's either/or, not both.
 
@@ -196,7 +198,7 @@ We have CreditBot alerts set up in [#sales-alerts](https://posthog.slack.com/arc
 * If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date.  This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     * Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September.  We need a new 12-month order form in place with a Contract Start Date of September 1st.
 
-For any of the above scenarios you should use our [discounting principles](/handbook/growth/sales/contract-rules#discounts) which apply to the annual spend.  In scenario one above if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract.
+For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the annual spend.  In scenario one above if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract.
 
 ### When they will end the contract term with credit remaining
 
