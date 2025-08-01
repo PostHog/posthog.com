@@ -14,6 +14,7 @@ import { useLocation } from '@reach/router'
 import Link from '../../components/Link'
 import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
+import { defaultMenuWidth } from '../../components/PostLayout/context'
 
 interface Parameter {
     name: string
@@ -55,7 +56,6 @@ interface Class {
 interface SdkReferenceData {
     id: string
     hogRef: string
-    noDocsTypes: string[]
     info: {
         description: string
         id: string
@@ -139,6 +139,20 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         }
     }
 
+    // Generate ToC from classes and functions
+    const tableOfContents = fullReference.classes.flatMap((classData) => [
+        {
+            url: `${classData.id}`,
+            value: `${classData.title}`,
+            depth: 0,
+        },
+        ...classData.functions.map((func) => ({
+            url: `${func.id}`,
+            value: `${func.title}()`,
+            depth: 1,
+        })),
+    ])
+
     return (
         <Layout parent={docsMenu} activeInternalMenu={activeInternalMenu}>
             <SEO title={`${fullReference.info.title} - PostHog`} />
@@ -147,7 +161,9 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                 questions={<CommunityQuestions />}
                 menu={activeInternalMenu?.children || []}
                 fullWidthContent={true}
-                hideSidebar
+                hideSidebar={false}
+                sidebar={<></>}
+                tableOfContents={tableOfContents}
             >
                 <section>
                     <div className="mb-8 relative">
@@ -172,7 +188,7 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                         <span className="text-primary/30 dark:text-primary-dark/30">|</span>
                                         <CopyMarkdownActionsDropdown
                                             markdownContent={JSON.stringify(fullReference, null, 2)}
-                                            pageUrl={location.href}
+                                            pageUrl={location.href || ''}
                                         />
                                     </div>
                                 </div>
