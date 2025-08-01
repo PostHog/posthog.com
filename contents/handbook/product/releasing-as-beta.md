@@ -49,7 +49,9 @@ All betas should follow the best practices below in order to provide a minimum a
 
 Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the [Content team](/teams/content) can help, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
 
-> **Launching a new beta?** It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+<CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
+  It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+</CalloutBox>
 
 ### Collecting beta feedback
 Teams are encouraged to collect feedback from users in current betas so that they can build better products and we have some automations in place to facilitate this. 
