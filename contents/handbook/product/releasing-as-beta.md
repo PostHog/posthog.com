@@ -1,20 +1,32 @@
 ---
-title: Releasing a feature as beta
+title: Releasing early access and coming soon features
 sidebar: Handbook
 showTitle: true
 hideAnchor: true
 ---
 
-It's sometimes worth releasing big new features under a 'beta' label to set expectations with customers that this feature is still in active development, and might have some rough edges. We generally do this by making betas an opt-in experience for users via [the feature preview menu](https://app.posthog.com/settings/user-feature-previews).
+PostHog includes a variety of early access features in [the feature previews section of a users' settings page](https://app.posthog.com/settings/user-feature-previews), as well as a roadmap of feature previews which are coming soon.
 
-If you're releasing something as a beta there are some guidelines you should follow - especially if the intent is that the beta will eventually become a full product in it's own right. 
+Items in the feature previews section can be toggled on or off if users want to try a feature out. Items in the coming soon section enable users to register their interest so that we can contact them with updates. Both sections work only at the user-level and not at the org or project level. 
 
-## What can be released as a beta?
-A beta doesn't need to be perfect, but it should provide value to the user and have base elements of functionality. It doesn't need to be feature complete, but it should provide more than a mocked up front end. 
+## Releasing as coming soon
+If your team is considering building a feature in the future, you should add it to the coming soon menu. This responsibility usually sits with the Team Lead, unless the project is an individual one. 
+
+To add an item to the coming soon, simply create a feature flag with the `concept` state in PostHog's <PrivateLink url="https://us.posthog.com/project/2/early_access_features">early access features tool</PrivateLink>.
+
+Adding items to the coming soon menu early offers several advantages. It enables us to gauge interest in a new feature via sign-ups, equips our marketing teams with news they can promote to users, and ensures that betas can have sample users ready from the moment they launch. 
+
+Coming soon features can either be large or small, so use your judgement about what is of interest to users, but it should be something that you expect to work on in the next 3-6 months. 
+
+> **Moving from `Concept` to `Beta`**
+> Once you are ready to move an item from the coming soon roadmap to a beta which users can interact with, simply update the flag state from `concept` to `beta`. This will trigger an automatic notification to all subscribed users letting them know that the beta is available. All users who are subscribed to updates will be immediately opted in to the beta.
+
+## Releasing as beta
+If your team is releasing an early version of a feature which users can interact with, you should consider adding it to the beta menu by creating a flag in the `beta` stage. Betas do not need to have been in `concept` stage first. 
+
+A beta doesn't need to be perfect, but it should provide value to the user and have base elements of functionality. It doesn't need to be feature complete, but it should provide more than a mocked up front end. We aim not to leave items in beta unless they are in active development. All betas should be clearly documented. 
 
 Betas do not need to be performant for high-volume users and can have big bugs, but should be clearly marked as such in the UI. 
-
-## Launching as a beta
 
 <CloudinaryImage
   src="https://res.cloudinary.com/dmukukwp6/image/upload/goodbeta_daa2ddca2a.png"
@@ -28,32 +40,45 @@ Betas do not need to be performant for high-volume users and can have big bugs, 
 /> 
 <Caption>Betas should include a title, description, feedback button, and link to basic docs</Caption>
 
-If you're launching or planning a beta then it can be to start with [a new product RFC](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-product.md). In any case, there are some things you'll need to do as part of the beta process if you're launching a major feature. 
-
-- If the product will be metered, talk to billing team about getting the usage added to usage reports
-- Create a dashboard/notebook to track usage and opt-ins
-
-There are also some best practices which all betas should follow in order to provide a minimum amount of information and usability for customers.
+All betas should follow the best practices below in order to provide a minimum amount of information and usability for customers.
 
 - Betas in the feature preview menu should include a title and short description 
 - Betas in the feature preview menu should include a 'Give feedback' button
 - Betas in the feature preview menu should have documentation (marked as beta) linked to them
 - Betas should have a [feature owner](/handbook/engineering/feature-ownership)
 
-Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), the [Content team](/teams/content) can help, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
+Product teams are responsible for [writing documentation](/handbook/engineering/writing-docs), but the [Content team](/teams/content) can help, if needed. Titles, descriptions, and links can be added using [the early access menu](https://us.posthog.com/project/2/early_access_features).
 
-> **Launching a new beta?** It's helpful to let  know when it launches. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the team Slack channel](https://posthog.slack.com/archives/C083V7C6GKE).
+<CalloutBox icon="IconInfo" title="Launching a new beta?" type="fyi">
+  It's helpful to let the Marketing teams know when new betas are added. They'll then add the beta to [the changelog](https://posthog.com/changelog/), organize any marketing announcements, plan [a full announcement](https://github.com/PostHog/meta/issues/new?template=launch-plan-.md) for full release, create an email onboarding flow to help you collect user feedback, and anything else you need. You can let them know via [the Marketing Slack channel](https://posthog.slack.com/archives/C08CG24E3SR).
+</CalloutBox>
 
-## Announcing a beta
+### Collecting beta feedback
+Teams are encouraged to collect feedback from users in current betas so that they can build better products and we have some automations in place to facilitate this. 
 
-When we're ready to launch a new beta, it's helpful to let [the Brand & Vibes team](/teams/brand-vibes) know. They can then go through the beta announcement checklist, if appropriate. 
+After a week in any new beta, users will trigger an automatic email from the `beta-feedback@posthog.com` Google Group. This email will ask them, essentially, for any suggested changes to the beta. By default, all team leads and exec team members are in this Google Group and will get daily digests of responses. Others are invited to add themselves to the group, or change their notification settings.
 
-- [ ] Announce the beta to the changelog in a stand-alone post
-- [ ] Announce the beta to users in the monthly changelog email
-- [ ] Send a personal (non-designed, personally addressed) email to the `Beta Feedback - Power Users` segment in Customer.io, encouraging early beta adoption with previous beta users
-- [ ] If the beta exists on [the roadmap](/roadmap), export that waitlist to a segment, email them too
-- [ ] Announce the beta in-app with a changelog notification
-- [ ] Add the beta as a variant path in the beta feedback flow, in Customer.io
+Regardless, emails to this Google Group will sync to the PostHog Feedback Slack channel for general awareness. Team leads are encouraged to respond to beta feedback emails. 
+
+Teams can collect additional feedback if needed and the Brand & Vibes team is able to help with creating feedback emails or funnels.
+
+## Releasing as generally available
+Once a beta is mature enough, you may want to launch it into general availability (GA). 
+
+Smaller features which don't require [major announcements](/handbook/brand/product-announcements) should be announced internally via the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY) so other teams are aware. 
+
+If you're releasing an entirely new product or tool then teams should create [a new product RFC](https://github.com/PostHog/product-internal/blob/main/requests-for-comments/templates/request-for-comments-new-product.md) and complete that process before releasing the feature as GA to users. This RFC should be created by the Team Lead. 
+
+Before the marketing launch, you can set the feature flag to release to 100% of users. 
+
+> **How do I work with marketing and billing teams?**
+> The short version here is to try and give other teams as much notice as possible when starting a launch cycle. Marketing and billing teams typically ask for two weeks of notice before a major launch, as a minimum. It's the responsibility of the team lead to ensure these teams are aware of upcoming launches.
+
+
+
+
+
+
 
 ## Activation criteria
 

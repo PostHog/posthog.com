@@ -5,6 +5,7 @@ import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
+import CloudinaryImage from './components/CloudinaryImage'
 import { Images } from './components/Careers/Images'
 import { ComparisonTable } from './components/ComparisonTable'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -65,6 +66,7 @@ export const shortcodes = {
     BorderWrapper,
     CallToAction,
     Caption,
+    CloudinaryImage,
     Images,
     ImageSlider,
     ComparisonTable,
