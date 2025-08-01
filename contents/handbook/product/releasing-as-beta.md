@@ -74,7 +74,7 @@ In any case, there are some things you'll need to do as part of the beta process
 - Ensure other teams are aware by posting to the [Tell PostHog Anything channel](https://posthog.slack.com/archives/C0351B1DMUY)
 
 > **How do I work with marketing and billing teams?**
-> The short version here is to try and give other teams as much notice as possible when starting a launch cycle. Marketing and billing teams typically ask for two weeks of notice before a major launch, as minimum. It's the responsibility of the team lead to ensure these teams are aware of upcoming launches. 
+> The short version here is to try and give other teams as much notice as possible when starting a launch cycle. Marketing and billing teams typically ask for two weeks of notice before a major launch, as a minimum. It's the responsibility of the team lead to ensure these teams are aware of upcoming launches.
 
 
 
