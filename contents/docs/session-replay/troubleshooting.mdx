@@ -77,11 +77,17 @@ By default, `base` and `assets` imported from `$app/paths` in Svelte use relativ
 
 For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
 
+## Images and videos do not appear in the replay
+
+PostHog captures session replays by capturing the DOM, not videos or screenshots. When you watch a replay, PostHog tries to reconstruct the DOM.
+
+If the DOM contains images or other media assets referenced by a URL that is signed, expired, or otherwise not available, the replay will not be able to reconstruct the DOM correctly. A workaround to make replays more accurately represent the original session is to fallback to a placeholder if the asset is no longer available.
+
 ## Unable to filter by user or page properties
 
 Some of the filtering options in session replays depend on [product analytics](/docs/product-analytics) events. 
 
-To enable all filtering options, we recommend capturing at least one event per session. Most commonly identifying users via `identify()`. This makes sure you can use all of the power of filtering by person and event properties
+To enable all filtering options, we recommend capturing at least one event per session. Most commonly identifying users via `identify()`. This makes sure you can use all of the power of filtering by person and event properties.
 
 Since these events contribute to the product analytics usage and [billing limits](/docs/billing/limits-alerts), if you exceed your product analytics monthly limit, the recordings captured after that (until new billing period starts or limit is increased) won't be possible to filter by these properties.
 
