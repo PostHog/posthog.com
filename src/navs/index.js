@@ -740,16 +740,32 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Video',
+                url: '/handbook/growth/marketing/video',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/growth/marketing/video',
+                    },
+                    {
+                        name: 'YouTube',
+                        url: '/handbook/content/youtube',
+                    },
+                ],    
+            },
+            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
-            },
-            {
-                name: 'Newsletter ads',
-                url: '/handbook/content/newsletter-ads',
-            },
-            {
-                name: 'YouTube',
-                url: '/handbook/content/youtube',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/newsletter',
+                    },
+                    {
+                        name: 'Newsletter ads',
+                        url: '/handbook/content/newsletter-ads',
+                    },
+                ],
             },
             {
                 name: 'Writing for PostHog',
@@ -1057,27 +1073,29 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Marketing ownership',
+                name: 'Who can help me?',
                 url: '/handbook/growth/marketing/ownership',
             },
             {
-                name: 'How we do video at PostHog',
-                url: '/handbook/growth/marketing/video',
-            },
-            {
-                name: 'Sponsorships',
+                name: 'Other',
                 url: '/handbook/growth/marketing/open-source-sponsorship',
-            },
-            {
-                name: 'ICP scoring',
-                url: '/handbook/growth/marketing/icp',
-            },
-            {
-                name: 'Dashboard templates',
-                url: '/handbook/growth/marketing/templates',
+                children: [
+                    {
+                        name: 'Sponsorships',
+                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/marketing/icp',
+                    },
+                    {
+                        name: 'Dashboard templates',
+                        url: '/handbook/growth/marketing/templates',
+                    },
+                ]
             },
         ],
-    },
+    },       
     {
         name: 'People & Ops',
         url: '',
