@@ -2,7 +2,7 @@
     "id": "posthog-js",
     "hogRef": "0.2",
     "info": {
-        "version": "1.258.2",
+        "version": "1.258.3",
         "id": "posthog-js",
         "title": "PostHog JavaScript Web SDK",
         "description": "Posthog-js allows you to automatically capture usage and send events to PostHog.",

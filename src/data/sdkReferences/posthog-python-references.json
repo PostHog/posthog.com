@@ -307,27 +307,6 @@
                 }
             ],
             "example": ""
-        },
-        {
-            "id": "traceback",
-            "name": "traceback",
-            "path": "builtins.traceback",
-            "properties": [],
-            "example": ""
-        },
-        {
-            "id": "UUID",
-            "name": "UUID",
-            "path": "uuid.UUID",
-            "properties": [],
-            "example": ""
-        },
-        {
-            "id": "datetime",
-            "name": "datetime",
-            "path": "datetime.datetime",
-            "properties": [],
-            "example": ""
         }
     ],
     "classes": [

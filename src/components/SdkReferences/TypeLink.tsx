@@ -30,6 +30,7 @@ const TypeLink = ({
             const baseType = trimmed.replace(/\[\]$/, '')
             const arraysuffix = trimmed.endsWith('[]') ? '[]' : ''
 
+            console.log(validTypes)
             // Check if this is a valid type to link
             if (validTypes.includes(baseType)) {
                 return (
