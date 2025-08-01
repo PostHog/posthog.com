@@ -54,7 +54,7 @@ This dashboard can also include NPS & support metrics (see below).
 
 ### NPS
 
-We have a NPS survey set up for each product. They need regular updates due to some survey limitations. If you want to set up a new NPS survey, speak to the Surveys PM (Cory), he can help you set one up and keep it updated.
+We have a NPS survey set up for each product. They need regular updates due to some survey limitations. If you want to set up a new NPS survey, speak to the Surveys PM (<TeamMember name="Cory Slater" photo />), he can help you set one up and keep it updated.
 
 We track a 4-week NPS score, but we don’t have the volume of responses we need to get reliable results. This is why we include the open-ended feedback in the growth reviews, as this is usually more actionable.
 
