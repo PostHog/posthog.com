@@ -1,35 +1,14 @@
 {
     "id": "posthog-js",
-    "hogRef": "0.1",
+    "hogRef": "0.2",
     "info": {
-        "version": "1.256.0",
+        "version": "1.258.3",
         "id": "posthog-js",
         "title": "PostHog JavaScript Web SDK",
         "description": "Posthog-js allows you to automatically capture usage and send events to PostHog.",
         "slugPrefix": "posthog-js",
         "specUrl": "https://github.com/PostHog/posthog-js"
     },
-    "noDocsTypes": [
-        "string",
-        "number",
-        "boolean",
-        "integer",
-        "object",
-        "array",
-        "null",
-        "undefined",
-        "any",
-        "unknown",
-        "void",
-        "Date",
-        "RegExp",
-        "Error",
-        "Symbol",
-        "BigInt",
-        "Map",
-        "Set",
-        "PostHog"
-    ],
     "classes": [
         {
             "description": "This is the SDK reference for the PostHog JavaScript Web SDK. You can learn more about example usage in the [JavaScript Web SDK documentation](/docs/libraries/js). You can also follow [framework specific guides](/docs/frameworks) to integrate PostHog into your project.\nThis SDK is designed for browser environments. Use the PostHog [Node.js SDK](/docs/libraries/node) for server-side usage.",
@@ -73,59 +52,6 @@
                     "returnType": {
                         "id": "CaptureResult | void | number",
                         "name": "CaptureResult | void | number"
-                    },
-                    "path": "lib/src/posthog-core.d.ts"
-                },
-                {
-                    "category": "",
-                    "description": "calculateEventProperties\nThis method is used internally to calculate the event properties before sending it to PostHog. It can also be used by integrations (e.g. Segment) to enrich events with PostHog properties before sending them to Segment, which is required for some PostHog products to work correctly. (e.g. to have a correct $session_id property).",
-                    "details": null,
-                    "id": "calculateEventProperties",
-                    "showDocs": true,
-                    "title": "calculateEventProperties",
-                    "examples": [
-                        {
-                            "id": "calculateeventproperties",
-                            "name": "Generated example for calculateEventProperties",
-                            "code": "// Generated example for calculateEventProperties\nposthog.calculateEventProperties();"
-                        }
-                    ],
-                    "releaseTag": "public",
-                    "params": [
-                        {
-                            "description": "The name of the event. This can be anything the user does - 'Button Click', 'Sign Up', '$pageview', etc.",
-                            "isOptional": false,
-                            "type": "string",
-                            "name": "eventName"
-                        },
-                        {
-                            "description": "The properties to include with the event.",
-                            "isOptional": false,
-                            "type": "Properties",
-                            "name": "eventProperties"
-                        },
-                        {
-                            "description": "The timestamp of the event, e.g. for calculating time on page. If not set, it'll automatically be set to the current time.",
-                            "isOptional": true,
-                            "type": "Date",
-                            "name": "timestamp"
-                        },
-                        {
-                            "description": "The uuid of the event, e.g. for storing the $pageview ID.",
-                            "isOptional": true,
-                            "type": "string",
-                            "name": "uuid"
-                        },
-                        {
-                            "description": "Set this if you do not intend to actually send the event, and therefore do not want to update internal state e.g. session timeout",
-                            "isOptional": true,
-                            "type": "boolean",
-                            "name": "readOnly"
-                        }
-                    ],
-                    "returnType": {
-                        "id": "Properties",
-                        "name": "Properties"
                     },
                     "path": "lib/src/posthog-core.d.ts"
                 },
@@ -264,8 +190,8 @@
                         }
                     ],
                     "returnType": {
-                        "id": "void",
-                        "name": "void"
+                        "id": "CaptureResult | undefined",
+                        "name": "CaptureResult | undefined"
                     },
                     "path": "lib/src/posthog-core.d.ts"
                 },
@@ -1849,6 +1775,12 @@
                             "isOptional": false,
                             "type": "boolean",
                             "name": "isEnrolled"
+                        },
+                        {
+                            "description": "",
+                            "isOptional": true,
+                            "type": "string",
+                            "name": "stage"
                         }
                     ],
                     "returnType": {
@@ -2250,6 +2182,11 @@
                     "description": "ADVANCED: alters the refill rate for the token bucket mutation throttling Normally only altered alongside posthog support guidance. Accepts values between 0 and 100\n1",
                     "type": "number",
                     "name": "__exceptionRateLimiterRefillRate"
+                },
+                {
+                    "description": "Decide whether exceptions thrown by browser extensions should be captured\nfalse",
+                    "type": "boolean",
+                    "name": "captureExtensionExceptions"
                 }
             ],
             "path": "lib/src/types.d.ts"
@@ -2420,7 +2357,7 @@
             "name": "JsonType",
             "properties": [],
             "path": "lib/src/types.d.ts",
-            "example": "string | number | boolean | ..."
+            "example": "string | number | boolean | null | undefined | JsonRecord | Array<JsonType>"
         },
         {
             "id": "KnownEventName",
@@ -2560,8 +2497,8 @@
             "name": "PostHogConfig",
             "properties": [
                 {
-                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION Whether to wrap fetch and add tracing headers to the request",
-                    "type": "boolean",
+                    "description": "PREVIEW - MAY CHANGE WITHOUT WARNING - DO NOT USE IN PRODUCTION A list of hostnames for which to inject PostHog tracing headers to all requests (X-POSTHOG-DISTINCT-ID, X-POSTHOG-SESSION-ID, X-POSTHOG-WINDOW-ID)",
+                    "type": "string[]",
                     "name": "__add_tracing_headers"
                 },
                 {
@@ -2700,7 +2637,7 @@
                     "name": "custom_campaign_params"
                 },
                 {
-                    "description": "Custom list of personal data properties to mask.\n[]",
+                    "description": "Custom list of personal data properties to mask.\nE.g. if you added `email` to this list, then any `email` property in the URL will be masked. https://www.example.com/login?email=john.doe%40example.com = https://www.example.com/login?email=\n[]",
                     "type": "string[]",
                     "name": "custom_personal_data_properties"
                 },
@@ -2824,7 +2761,7 @@
                     "name": "mask_all_text"
                 },
                 {
-                    "description": "Prevent autocapture from capturing personal data properties. These include campaign parameters, UTM parameters, and other parameters that could be considered personal data under e.g. GDPR.\nfalse",
+                    "description": "Mask personal data properties from the current URL. This will mask personal data properties such as advertising IDs (gclid, fbclid, etc.), and you can also add custom properties to mask with `custom_personal_data_properties`.   false",
                     "type": "boolean",
                     "name": "mask_personal_data_properties"
                 },
@@ -3136,7 +3073,7 @@
                 },
                 {
                     "description": "Error tracking configuration options",
-                    "type": "{\n        autocaptureExceptions?: boolean;\n        suppressionRules?: ErrorTrackingSuppressionRule[];\n    }",
+                    "type": "{\n        autocaptureExceptions?: boolean;\n        captureExtensionExceptions?: boolean;\n        suppressionRules?: ErrorTrackingSuppressionRule[];\n    }",
                     "name": "errorTracking"
                 },
                 {
@@ -3884,7 +3821,7 @@
             "name": "SurveyQuestion",
             "properties": [],
             "path": "lib/src/posthog-surveys-types.d.ts",
-            "example": "BasicSurveyQuestion | LinkSurveyQuestion | RatingSurveyQuestion | ..."
+            "example": "BasicSurveyQuestion | LinkSurveyQuestion | RatingSurveyQuestion | MultipleSurveyQuestion"
         },
         {
             "id": "SurveyQuestionBranchingType",
@@ -3984,6 +3921,10 @@
                 {
                     "type": "\"api\"",
                     "name": "API"
+                },
+                {
+                    "type": "\"external_survey\"",
+                    "name": "ExternalSurvey"
                 },
                 {
                     "type": "\"popover\"",
