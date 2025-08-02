@@ -688,7 +688,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
     const compact = typeof window !== 'undefined' && window !== window.parent
     const constraintsRef = useRef<HTMLDivElement>(null)
-    const [isMobile, setIsMobile] = useState(false)
+    const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
     const [windows, setWindows] = useState<AppWindow[]>(
