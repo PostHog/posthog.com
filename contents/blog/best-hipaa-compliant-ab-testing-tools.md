@@ -30,7 +30,7 @@ There are three ways to comply with the Privacy rule when adopting analytics and
 
 1. **Anonymize all PHI and identifiers:** There are two so-called "[De-identification Standards](https://www.hhs.gov/hipaa/for-professionals/privacy/special-topics/de-identification/index.html#standard)" – "Expert Determination," where an expert verifies that data isn't personally identifiable, and "Safe Harbor" where all 18 types of identifier are removed. The former is preferable simply because applying the Safe Harbor approach can render data effectively useless for analytical purposes.
 
-2. **Sign a BAA with a third-party tool:** You must sign a Business Associate Agreement (BAA) with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also any tools you use for importing and exporting data from your data warehouse.
+2. **Sign a BAA with a third-party tool:** You must sign a Business Associate Agreement (BAA) with any third-party platform that handles your protected health information (PHI). This can mean signing multiple agreements, though, such as one with your analytical partner, but also any tools you use for importing and exporting data from your [data warehouse](/blog/cdp-vs-data-warehouse).
 
 3. **Self-host and keep control of all your data:** The less common is to self-host tools for analytics and experimentation on your own infrastructure. This reduces the number of BAAs and general legal wrangling needed to generate user insights. The only downside is you'll need the expertise to manage self-hosted instances, or third-party support to do so, and you are wholly liable for any security breaches.
 
