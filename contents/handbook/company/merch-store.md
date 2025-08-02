@@ -6,32 +6,32 @@ showTitle: true
 
 We have a [merch store](/merch) where our community can purchase high quality PostHog-branded merch. The People & Ops team is responsible for managing merch inventory, fulfillment etc. even though multiple people contribute, and Kendal is the point person.
 
-We use [Brilliant](https://www.brilliantmade.com/) to manufacture and fulfill our merch. Anyone can suggest a product for us to sell or give away. 
+We use [Micromerch](https://www.micromerch.com/) to manufacture and fulfill our merch. Anyone can suggest a product for us to sell or give away. 
 
-The Words & Pictures team ultimately decide on what items we wish to sell or give away (including how many and sizes), and Lottie provide assets to produce and order these items in to stock.
+The Brand & Vibes team ultimately decide on what items we wish to sell or give away (including how many and sizes), and Lottie provide assets to produce and order these items in to stock.
 
 We generally try to launch new products in line with the typical fashion cycle (spring/summer and fall/winter). However, this doesn't mean we can't do fun side quests! If you are looking to do an off-cycle merch run, just make sure you keep Kendal in the loop so the admin side goes smoothly.
 
 ## How to reorder merch
 
-All of our permanent merch items are reordered via Brilliant. To do this you need to:
+All of our permanent merch items are reordered via Micromerch. To do this you need to:
 
-1. Request a restock quote for the item(s) and enter the quantity you need
-2. Approve the estimate that will be sent from Brilliant (this will trigger the order to start being worked on)
-3. Pay the invoice via Brex once it comes in (usually in 1-2 days after estimate approval)
+1. Request a restock of the item(s) through the Micromerch x PostHog Slack channel
+2. If the design is already on file, there's nothing more to do, the Micromerch team will get printing! If the design is not already on file, send over the vector file of the design and they will mock it up for us.
+3. Pay the invoice via Brex once it comes in (usually in 1-2 days after design approval)
 
 It's really important that we do not allow stock levels to run low as restocking items can take a couple of weeks, so the Ops team will regularly check inventory levels. However if you happen to see anything looking amiss, or you know you want to place a big order for a customer that may affect our stock levels a lot, just let Kendal know ahead of time!
 
 ## Adding new items
 
-The Website & Vibes team built the integration with Brilliant. It relies on webhooks to check stock levels and sends orders to Brilliant via their API. To add new products to Shopify, [follow these instructions.](/handbook/engineering/posthog-com/merch-store).
+The Brand & Vibes team built the integration with Brilliant. It relies on webhooks to check stock levels and sends orders to Brilliant via their API. To add new products to Shopify, [follow these instructions.](/handbook/engineering/posthog-com/merch-store).
 
 ## Shipping
 
-Shipping is also done through Brilliant - they can ship to over 200 territories worldwide:
+Shipping is also done through Micromerch - they can ship to over 200 territories worldwide:
 
-* When orders come in from our Shopify store they will automatically be shipped to the people who order them via Brilliant
-* If you want to ship merch for an event or as part of a giveaway, do this from the Brilliant dashboard.
+* When orders come in from our Shopify store they will automatically be shipped to the people who order them via Shiphero
+* If you want to ship merch for an event or as part of a giveaway, do this from the Shopify dashboard directly.
 
 ## Merch giveaways
 
@@ -61,8 +61,9 @@ You can find instructions for this on the dedicated [YC Deal page](/handbook/gro
 
 Sometimes customers get in touch with us because their order hasn't arrived. There are a couple of things you can do:
 
-1. Check the <PrivateLink url="https://app.brilliantmade.com/store/3002/history">orders status</PrivateLink> in Brilliant.
-1. If you don't see the order listed in Brilliant, check <PrivateLink url="https://admin.shopify.com/store/posthog/orders">Shopify</PrivateLink>. If the order is listed there, there may have been a problem with transmitting the order from Shopify to Brilliant. Please mention this in the #merch channel immediately so the Website & Vibes team can look into it.
+1. Check the <PrivateLink url="https://admin.shopify.com/store/posthog/orders">Shopify</PrivateLink> in Shopify.
+1. Once you've located the order in Shopify, you can see the status of the order. If it's been hanging around for a while with no movement, give Kendal a ping and she can follow up with Micromerch.
+2. Directly in Shopify, you can also modify customer's details (as long as the order hasn't shipped yet) like delivery address, contact number, etc.
 
 > **Note:** There have been some issues with fulfilling orders to Brazil due to the country's customs policies.
 
