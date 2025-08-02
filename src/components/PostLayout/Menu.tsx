@@ -52,7 +52,7 @@ export const Icon = ({ color, icon }: { color?: string; icon: string | React.Rea
 }
 export const badgeClasses = `bg-gray-accent/50 text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs m-[-2px] font-medium rounded-sm px-1 py-0.5 inline-block`
 
-export const MenuItem = ({ icon, color, badge, name }) => {
+export const MenuItem = ({ icon, color, badge, name, isActive, isOpen }) => {
     return icon ? (
         <span
             className={`cursor-pointer w-full flex space-x-2 font-semibold text-primary hover:text-primary dark:text-primary-dark dark:hover:text-primary-dark leading-tight ${
@@ -60,18 +60,16 @@ export const MenuItem = ({ icon, color, badge, name }) => {
             }`}
         >
             <Icon icon={icon} color={color} />
-            <span className={`${color ? '' : 'opacity-100'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}>
-                {name}
+            <span className={`${badge?.title ? 'mr-1.5' : ''}`}>
+                <span className={isActive || isOpen ? '' : 'opacity-50'}>{name}</span>
             </span>
             {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
         </span>
     ) : (
         <>
             <span>
-                <span
-                    className={`${color ? '' : 'opacity-50'} group-hover:opacity-100 ${badge?.title ? 'mr-1.5' : ''}`}
-                >
-                    {name}
+                <span className={`${badge?.title ? 'mr-1.5' : ''}`}>
+                    <span className={isActive || isOpen ? '' : 'opacity-50'}>{name}</span>
                 </span>
                 {badge?.title && <span className={`${badgeClasses} ${badge.className || ''}`}> {badge.title}</span>}
             </span>
@@ -178,7 +176,7 @@ export default function Menu({
                             }
                         }}
                         className={`${buttonClasses} ${!topLevel ? 'group' : ''} ${color ? '!py-1' : ''} ${
-                            isActive || isWithChild ? 'active' : ''
+                            isActive ? 'active' : ''
                         }`}
                         to={menuType === 'scroll' ? url.replace(pathname + '#', '') : url}
                         {...menuLinkProps}
@@ -194,7 +192,14 @@ export default function Menu({
                                 />
                             )}
                         </AnimatePresence>
-                        <MenuItem badge={badge} color={color} icon={icon} name={name} />
+                        <MenuItem
+                            badge={badge}
+                            color={color}
+                            icon={icon}
+                            name={name}
+                            isActive={isActive}
+                            isOpen={open}
+                        />
                         {isWithChild && <Chevron open={open ?? false} />}
                     </MenuLink>
                 ) : (
