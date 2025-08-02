@@ -210,7 +210,10 @@ export default function TaskBarMenu() {
                 data-scheme="primary"
                 className="w-full bg-accent/75 skin-classic:bg-accent backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
             >
-                <MenuBar menus={menuData} className="[&_button]:px-2" />
+                <MenuBar
+                    menus={menuData}
+                    className="[&_button]:px-2 [&_button:not(:first-child)]:hidden md:[&_button:not(:first-child)]:flex"
+                />
                 <aside className="flex items-center gap-0.5 py-1">
                     {/* <MenuBar
                         menus={[

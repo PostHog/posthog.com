@@ -8,7 +8,7 @@ import CookieBannerToast from 'components/CookieBanner/ToastVersion'
 import Dock from 'components/Desktop/Dock'
 
 export default function Wrapper() {
-    const { windows, constraintsRef, updateWindow, compact, isMobile } = useApp()
+    const { windows, constraintsRef, compact } = useApp()
 
     return (
         <div className="fixed inset-0 size-full flex flex-col">
@@ -21,7 +21,7 @@ export default function Wrapper() {
                     })}
                 </AnimatePresence>
             </div>
-            {isMobile && !compact && <Dock />}
+            {!compact && <Dock />}
             <CookieBannerToast />
         </div>
     )

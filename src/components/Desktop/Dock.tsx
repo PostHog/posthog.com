@@ -90,7 +90,7 @@ export default function Dock() {
     }, [])
 
     return (
-        <div ref={ref} data-scheme="tertiary" className="bg-primary w-full p-1 relative z-50">
+        <div ref={ref} data-scheme="tertiary" className="bg-primary w-full p-1 relative z-50 md:hidden block">
             <div
                 data-scheme="secondary"
                 className="bg-primary w-full rounded-md border border-primary p-2 grid grid-cols-5 gap-2"

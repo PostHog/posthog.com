@@ -225,7 +225,7 @@ const processHandbookSidebar = (items: any[], isRoot = true): any[] => {
 
 export function useMenuData(): MenuType[] {
     const smallTeamsMenuItems = useSmallTeamsMenuItems()
-    const { isMobile } = useApp()
+
     return [
         {
             trigger: (
@@ -263,233 +263,229 @@ export function useMenuData(): MenuType[] {
                 },
             ],
         },
-        ...(isMobile
-            ? []
-            : [
-                  {
-                      trigger: 'Products',
-                      items: getProductMenuItems(),
-                  },
-                  {
-                      trigger: 'Pricing',
-                      items: [
-                          {
-                              type: 'item',
-                              label: 'Plans & usage-based pricing',
-                              link: '/pricing',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Pricing calculator',
-                              link: '/pricing#calculator',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Add-ons',
-                              link: '/pricing#addons',
-                          },
-                          {
-                              type: 'separator',
-                          },
-                          {
-                              type: 'item',
-                              label: 'PostHog for...',
-                              disabled: true,
-                          },
-                          {
-                              type: 'item',
-                              label: 'Founder stack',
-                              link: '/founders',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Startups',
-                              link: '/startups',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Enterprise',
-                              link: '/enterprise',
-                          },
-                          { type: 'separator' },
-                          {
-                              type: 'item',
-                              label: 'Bedtime reading',
-                              disabled: true,
-                          },
-                          {
-                              type: 'item',
-                              label: 'Pricing philosophy',
-                              link: '/pricing?tab=philosophy',
-                          },
-                          {
-                              type: 'item',
-                              label: 'How we do sales',
-                              link: '/pricing#sales',
-                          },
-                      ],
-                  },
-                  {
-                      trigger: 'Docs',
-                      items: mergedDocsMenu(),
-                  },
-                  {
-                      trigger: 'Content',
-                      items: [
-                          {
-                              type: 'item',
-                              label: 'Newsletter',
-                              link: '/newsletter',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Product for engineers',
-                              link: '/product-engineers',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Founders hub',
-                              link: '/founders',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Blog',
-                              link: '/blog',
-                          },
-                      ],
-                  },
-                  {
-                      trigger: 'Company',
-                      items: [
-                          {
-                              type: 'item',
-                              label: 'About',
-                              link: '/about',
-                          },
-                          {
-                              type: 'item',
-                              label: 'People',
-                              link: '/people',
-                          },
-                          {
-                              type: 'submenu',
-                              label: 'Small teams',
-                              items: smallTeamsMenuItems,
-                          },
-                          {
-                              type: 'submenu',
-                              label: 'Handbook',
-                              link: '/handbook',
-                              items: processHandbookSidebar(handbookSidebar),
-                          },
-                          {
-                              type: 'item',
-                              label: 'Blog',
-                              link: '/blog',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Careers',
-                              link: '/careers',
-                          },
-                          {
-                              type: 'submenu',
-                              label: 'Social media',
-                              items: [
-                                  {
-                                      type: 'item',
-                                      label: 'X',
-                                      link: 'https://x.com/posthog',
-                                      external: true,
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'LinkedIn',
-                                      link: 'https://www.linkedin.com/company/posthog',
-                                      external: true,
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'Substack',
-                                      link: 'https://newsletter.posthog.com',
-                                      external: true,
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'YouTube',
-                                      link: 'https://www.youtube.com/@posthog',
-                                      external: true,
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'GitHub',
-                                      link: 'https://github.com/posthog',
-                                      external: true,
-                                  },
-                              ],
-                          },
-                      ],
-                  },
-                  {
-                      trigger: (
-                          <>
-                              <span className="ml-1">More</span>
-                          </>
-                      ),
-                      items: [
-                          {
-                              type: 'item',
-                              label: 'Merch store',
-                              link: '/merch',
-                          },
-                          {
-                              type: 'item',
-                              label: 'Cool tech jobs',
-                              link: '/cool-tech-jobs',
-                          },
-                          {
-                              type: 'submenu',
-                              label: 'Sexy legal stuff',
-                              items: [
-                                  {
-                                      type: 'item',
-                                      label: 'Terms',
-                                      link: '/terms',
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'Privacy',
-                                      link: '/privacy',
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'DPA generator',
-                                      link: '/dpa',
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'SOC ✌️',
-                                      link: '/handbook/company/security#soc-2',
-                                  },
-                                  {
-                                      type: 'item',
-                                      label: 'HIPAA',
-                                      link: '/docs/privacy/hipaa-compliance',
-                                  },
-                              ],
-                          },
-                          {
-                              type: 'separator',
-                          },
-                          {
-                              type: 'item',
-                              label: 'System status',
-                              link: 'https://status.posthog.com',
-                              external: true,
-                          },
-                      ],
-                  },
-              ]),
+        {
+            trigger: 'Products',
+            items: getProductMenuItems(),
+        },
+        {
+            trigger: 'Pricing',
+            items: [
+                {
+                    type: 'item',
+                    label: 'Plans & usage-based pricing',
+                    link: '/pricing',
+                },
+                {
+                    type: 'item',
+                    label: 'Pricing calculator',
+                    link: '/pricing#calculator',
+                },
+                {
+                    type: 'item',
+                    label: 'Add-ons',
+                    link: '/pricing#addons',
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'PostHog for...',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Founder stack',
+                    link: '/founders',
+                },
+                {
+                    type: 'item',
+                    label: 'Startups',
+                    link: '/startups',
+                },
+                {
+                    type: 'item',
+                    label: 'Enterprise',
+                    link: '/enterprise',
+                },
+                { type: 'separator' },
+                {
+                    type: 'item',
+                    label: 'Bedtime reading',
+                    disabled: true,
+                },
+                {
+                    type: 'item',
+                    label: 'Pricing philosophy',
+                    link: '/pricing?tab=philosophy',
+                },
+                {
+                    type: 'item',
+                    label: 'How we do sales',
+                    link: '/pricing#sales',
+                },
+            ],
+        },
+        {
+            trigger: 'Docs',
+            items: mergedDocsMenu(),
+        },
+        {
+            trigger: 'Content',
+            items: [
+                {
+                    type: 'item',
+                    label: 'Newsletter',
+                    link: '/newsletter',
+                },
+                {
+                    type: 'item',
+                    label: 'Product for engineers',
+                    link: '/product-engineers',
+                },
+                {
+                    type: 'item',
+                    label: 'Founders hub',
+                    link: '/founders',
+                },
+                {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                },
+            ],
+        },
+        {
+            trigger: 'Company',
+            items: [
+                {
+                    type: 'item',
+                    label: 'About',
+                    link: '/about',
+                },
+                {
+                    type: 'item',
+                    label: 'People',
+                    link: '/people',
+                },
+                {
+                    type: 'submenu',
+                    label: 'Small teams',
+                    items: smallTeamsMenuItems,
+                },
+                {
+                    type: 'submenu',
+                    label: 'Handbook',
+                    link: '/handbook',
+                    items: processHandbookSidebar(handbookSidebar),
+                },
+                {
+                    type: 'item',
+                    label: 'Blog',
+                    link: '/blog',
+                },
+                {
+                    type: 'item',
+                    label: 'Careers',
+                    link: '/careers',
+                },
+                {
+                    type: 'submenu',
+                    label: 'Social media',
+                    items: [
+                        {
+                            type: 'item',
+                            label: 'X',
+                            link: 'https://x.com/posthog',
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'LinkedIn',
+                            link: 'https://www.linkedin.com/company/posthog',
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'Substack',
+                            link: 'https://newsletter.posthog.com',
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'YouTube',
+                            link: 'https://www.youtube.com/@posthog',
+                            external: true,
+                        },
+                        {
+                            type: 'item',
+                            label: 'GitHub',
+                            link: 'https://github.com/posthog',
+                            external: true,
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            trigger: (
+                <>
+                    <span className="ml-1">More</span>
+                </>
+            ),
+            items: [
+                {
+                    type: 'item',
+                    label: 'Merch store',
+                    link: '/merch',
+                },
+                {
+                    type: 'item',
+                    label: 'Cool tech jobs',
+                    link: '/cool-tech-jobs',
+                },
+                {
+                    type: 'submenu',
+                    label: 'Sexy legal stuff',
+                    items: [
+                        {
+                            type: 'item',
+                            label: 'Terms',
+                            link: '/terms',
+                        },
+                        {
+                            type: 'item',
+                            label: 'Privacy',
+                            link: '/privacy',
+                        },
+                        {
+                            type: 'item',
+                            label: 'DPA generator',
+                            link: '/dpa',
+                        },
+                        {
+                            type: 'item',
+                            label: 'SOC ✌️',
+                            link: '/handbook/company/security#soc-2',
+                        },
+                        {
+                            type: 'item',
+                            label: 'HIPAA',
+                            link: '/docs/privacy/hipaa-compliance',
+                        },
+                    ],
+                },
+                {
+                    type: 'separator',
+                },
+                {
+                    type: 'item',
+                    label: 'System status',
+                    link: 'https://status.posthog.com',
+                    external: true,
+                },
+            ],
+        },
     ]
 }
 
