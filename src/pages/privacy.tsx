@@ -658,6 +658,8 @@ function Privacy() {
                             <li>Slack - internal communications tool</li>
                             <li>Vitally - CRM database</li>
                             <li>Zendesk - customer support tool</li>
+                            <li>OpenAI - AI model APIs and services </li>
+                            <li>Anthropic - AI model APIs and services</li>
                         </ul>
                         <p>
                             Our service providers and partners are required by contract to safeguard any personal
