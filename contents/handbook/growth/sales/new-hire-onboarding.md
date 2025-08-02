@@ -49,7 +49,7 @@ Sales at PostHog isn't like most other software companies! These are some of the
 - [Stripe](https://dashboard.stripe.com/) - ask Simon or Dana to invite you, then sign up using your PostHog email
 - Any additional [tools you may find useful](#tools-that-you-may-find-useful)!
 
-*Note: You'll be added to group emails sent to sales@posthog.com or cs-onboarding@posthog.com. It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
+*Note: Add yourself to group emails sent to sales@posthog.com or cs@posthog.com by joining the corresponding Google Group ([sales@](https://groups.google.com/a/posthog.com/g/sales/about) or [cs@](https://groups.google.com/a/posthog.com/g/cs/about)). It's important you don't mark these emails as spam as Google will unsubscribe you from these group emails.*
 
 ## Technical Account Executive ramp
 
