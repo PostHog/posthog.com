@@ -211,10 +211,6 @@ export default function Inbox(props) {
     }, [question, user])
 
     useEffect(() => {
-        if (props.path === '/questions') {
-            setShowSubscribedQuestions(false)
-            setFilters(defaultFilters)
-        }
         if (props.path === '/questions/subscriptions') {
             if (user) {
                 setShowSubscribedQuestions(true)
@@ -222,6 +218,9 @@ export default function Inbox(props) {
                 navigate('/questions')
             }
             setReady(true)
+        } else {
+            setShowSubscribedQuestions(false)
+            setFilters(defaultFilters)
         }
     }, [isValidating, props.path])
 
