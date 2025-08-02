@@ -1749,6 +1749,10 @@ export const companyMenu = {
                     url: '/teams/cs-onboarding',
                 },
                 {
+                    name: 'Demand Gen',
+                    url: '/teams/demand-gen',
+                },
+                {
                     name: 'Exec',
                     url: '/teams/exec',
                 },
