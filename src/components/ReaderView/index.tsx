@@ -387,7 +387,7 @@ const LeftSidebar = ({ children }: { children: React.ReactNode }) => {
             {isNavVisible && (
                 <motion.div
                     id="nav"
-                    className="hidden @2xl/app-reader:block flex-shrink-0 overflow-hidden mb-[-47px]"
+                    className="hidden @2xl/app-reader:block flex-shrink-0 overflow-hidden mb-[-47px] text-primary"
                     initial={{ width: '250px' }}
                     animate={{
                         width: '250px',
