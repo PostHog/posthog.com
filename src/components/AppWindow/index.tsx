@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo, useRef } from 'react'
+import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react'
 import { AnimatePresence, motion, useDragControls } from 'framer-motion'
 import {
     IconChevronDown,
@@ -127,12 +127,14 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
 
     const internalMenu = parent?.children || []
 
-    const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(
-        internalMenu?.find((menuItem: MenuItem) => {
+    const getActiveInternalMenu = useCallback(() => {
+        return internalMenu?.find((menuItem: MenuItem) => {
             const currentURL = item?.path
             return currentURL === menuItem.url?.split('?')[0] || recursiveSearch(menuItem.children, currentURL)
         })
-    )
+    }, [internalMenu, item])
+
+    const [activeInternalMenu, setActiveInternalMenu] = useState<MenuItem | undefined>(getActiveInternalMenu())
 
     useEffect(() => {
         setMenu?.(internalMenu)
@@ -267,6 +269,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
             setHistory((prev) => [...prev, item.path])
             setActiveHistoryIndex(history.length)
         }
+        setActiveInternalMenu(getActiveInternalMenu())
     }, [item?.path])
 
     const goBack = () => {
