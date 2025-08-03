@@ -751,7 +751,7 @@ export const handbookSidebar = [
                         name: 'YouTube',
                         url: '/handbook/content/youtube',
                     },
-                ],    
+                ],
             },
             {
                 name: 'Newsletter',
@@ -1092,10 +1092,10 @@ export const handbookSidebar = [
                         name: 'Dashboard templates',
                         url: '/handbook/growth/marketing/templates',
                     },
-                ]
+                ],
             },
         ],
-    },       
+    },
     {
         name: 'People & Ops',
         url: '',
@@ -1332,11 +1332,11 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
                     },
                     {
-                        name: "Template for onboarding success plan",
+                        name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
                     {
-                        name: "Renewals",
+                        name: 'Renewals',
                         url: '/handbook/cs-and-onboarding/renewals',
                     },
                     {
@@ -1751,6 +1751,10 @@ export const companyMenu = {
                 {
                     name: 'Exec',
                     url: '/teams/exec',
+                },
+                {
+                    name: 'Onboarding',
+                    url: '/teams/onboarding',
                 },
                 {
                     name: 'People & Ops',
