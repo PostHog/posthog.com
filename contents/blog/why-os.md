@@ -21,18 +21,10 @@ As website creators, we can organize the content as best we can, but we’ll nev
 
 So instead of fighting this, we built PostHog.com to act more like an operating system where you can multi-task and open multiple pages simultaneously. And since we all know how to use an OS, there's not much of a learning curve.
 
-This also lends toward breaking out of the mold of whitespace and simplicity in exchange for information density and the ability to access everything with less effort.
+This also means deviating from the industry norm of copious whitespace and longform scrolling in exchange for information density and the ability to access everything with less effort and fewer clicks.
 
-So welcome to the new PostHog.com. Be curious, click on things, and discover all the easter eggs that we hope will spark joy in your experience.
+There's also a ton of technical improvements which will make it easier for the PostHog team to maintain content as we grow past 15+ products toward 50 and beyond. And this is just the beginning – we have a ton of stuff we want to do next.
 
-Cool things:
+So welcome to the new PostHog.com. Be curious, click around, have some fun. We hope you enjoy your time here as much as we enjoyed building it.
 
--   useCustomers hook
--   useProducts hook
-    -   how billing is already pulled from billing API
-    -   now all product data is in json, separates visual layer from content
--   templatized apps (where we can pass different options like filters):
-    -   explorer
-    -   editor
-    -   reader
-    -   presentation
+And if you want to _more_ about how and why we did this, [read how the site works](/handbook/engineering/posthog-com/how-posthog-website-works).
