@@ -25,7 +25,7 @@ type Fieldset = {
 }
 
 export default function Credits(): JSX.Element {
-    const { focusedWindow, updateWindow } = useApp()
+    const { focusedWindow, updateWindow, getDesktopCenterPosition } = useApp()
     const [isExpanded, setIsExpanded] = useState(false)
 
     const {
@@ -56,6 +56,7 @@ export default function Credits(): JSX.Element {
                     width: maxWidth,
                     height: maxHeight,
                 },
+                position: getDesktopCenterPosition({ width: maxWidth, height: maxHeight }),
             })
 
             setIsExpanded(true)
