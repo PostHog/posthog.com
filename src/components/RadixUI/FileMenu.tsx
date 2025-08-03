@@ -93,7 +93,7 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
 }
 
 export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ initialPath = [], menu }) => {
-    const { compact } = useApp()
+    const { compact, isMobile } = useApp()
     const { getItemChildren } = useFileData(menu)
     const [path, setPath] = useState<(IMenu | null)[]>([null, ...initialPath]) // Start with null for root
 
@@ -124,7 +124,7 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
 
     const handleSelect = useCallback(
         (columnIndex: number, item: IMenu) => {
-            if (compact && item.url && !item.children) {
+            if ((isMobile || compact) && item.url && !item.children) {
                 return navigate(item.url)
             }
             const newPath = path.slice(0, columnIndex + 1) // Trim path up to the current column index
