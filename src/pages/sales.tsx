@@ -598,6 +598,7 @@ function Sales() {
     const [themRef, themInView, themEntry] = useInView({ threshold: 0.5 })
     const [usRef, usInView, usEntry] = useInView({ threshold: 0.5 })
     const keyboardContainerRef = useRef(null)
+    const companyNameRef = useRef(null)
 
     useEffect(() => {
         const keyboardContainer =
@@ -683,8 +684,16 @@ function Sales() {
                                     <IconRedo className="size-5 inline-block text-red/90 hover:text-red/100 dark:text-white/70 dark:group-hover:text-white/100" />
                                 </button>
                                 <span className="border-b-2 border-black/50 dark:border-white/50 text-red dark:text-yellow px-0.5 mr-8 w-[calc(100vw_-_6rem)] xs:max-w-sm inline-flex gap-2 justify-center relative overflow-hidden">
-                                    <CSSTransition in={show} timeout={500} classNames="company-name" unmountOnExit>
-                                        <span className="cursor-default">{companyName}</span>
+                                    <CSSTransition
+                                        in={show}
+                                        timeout={500}
+                                        classNames="company-name"
+                                        unmountOnExit
+                                        nodeRef={companyNameRef}
+                                    >
+                                        <span ref={companyNameRef} className="cursor-default">
+                                            {companyName}
+                                        </span>
                                     </CSSTransition>
                                 </span>
                             </div>

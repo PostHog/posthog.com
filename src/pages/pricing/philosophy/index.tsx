@@ -70,10 +70,10 @@ const PricingPhilosophy = (): JSX.Element => {
                 </ul>
                 <p className="mb-4">If this makes you happy – like most people - just start here:</p>
                 <p>
-                    <div className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
+                    <span className="flex flex-col md:flex-row gap-2 md:gap-4 items-center">
                         <PlanCTA />
                         <em className="opacity-75 text-sm">No credit card required</em>
-                    </div>
+                    </span>
                 </p>
                 <p>
                     Or if you need more info, <Link href="/pricing#faq">read our FAQ</Link>,{' '}

@@ -118,7 +118,7 @@ export const Reviews = () => {
                 <div className="col-span-full @2xl:col-span-3 border-b border-primary pb-4 @2xl:border-b-0">
                     <label className="block font-semibold opacity-70">Overall rating</label>
                     <div className="flex items-baseline gap-1.5">
-                        <h3 className="mb-1">{totalRating}</h3>
+                        <h3 className="mb-1">{totalRating || 0}</h3>
                         <span className="opacity-60 text-sm font-semibold">{allReviews.totalCount} reviews</span>
                     </div>
                     <Stars rating={totalRating} />

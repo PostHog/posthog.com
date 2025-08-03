@@ -4,8 +4,13 @@ import Tooltip from 'components/Tooltip'
 import React, { useState } from 'react'
 import { CTA as PlanCTA } from '../Plans'
 import { section, SectionHeader, SectionLayout } from './Sections'
-import { BillingV2PlanType } from 'types'
+import { BillingV2PlanType, BillingProductV2Type, BillingV2FeatureType } from 'types'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+
+interface FeatureItem {
+    name: string
+    description?: string
+}
 
 interface PlanData {
     title: string
@@ -13,7 +18,7 @@ interface PlanData {
     pricePreface?: string
     price: string
     priceSubtitle?: string | JSX.Element
-    features: React.ReactNode[]
+    features: FeatureItem[]
     projects: number | 'Unlimited'
     dataRetention: string
     CTAText?: string
@@ -83,7 +88,7 @@ const Plan: React.FC<{ planData: PlanData }> = ({ planData }) => {
     )
 }
 
-const planSummary = [
+const planSummary: PlanData[] = [
     {
         title: 'Free',
         subtitle: 'No credit card required',
@@ -104,7 +109,7 @@ const planSummary = [
         ],
         projects: 1,
         dataRetention: '1-year',
-        intent: 'free',
+        intent: 'free' as const,
     },
     {
         title: 'Pay-as-you-go',
@@ -127,7 +132,7 @@ const planSummary = [
         ],
         projects: 6,
         dataRetention: '7-year',
-        intent: 'paid',
+        intent: 'paid' as const,
     },
 ]
 
@@ -157,15 +162,20 @@ const AllPlansInclude = () => {
     )
 }
 
-export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
+interface PlanColumnsProps {
+    billingProducts: BillingProductV2Type[]
+    highlight?: 'free' | 'paid'
+}
+
+export const PlanColumns: React.FC<PlanColumnsProps> = ({ billingProducts, highlight = 'paid' }) => {
     const platformAndSupportProduct = billingProducts.find(
         (product: BillingProductV2Type) => product.type === 'platform_and_support'
     )
 
     const [isPlanComparisonVisible, setIsPlanComparisonVisible] = useState(false)
 
-    const mainPlans = platformAndSupportProduct?.plans?.filter((p) => !p.contact_support)
-    const highestSupportPlan = mainPlans.slice(-1)[0]
+    const mainPlans = platformAndSupportProduct?.plans?.filter((p: BillingV2PlanType) => !p.contact_support)
+    const highestSupportPlan = mainPlans?.slice(-1)[0]
     const highestPlanFeatures = highestSupportPlan?.features?.filter(
         (f: BillingV2FeatureType) => f.entitlement_only !== true
     )
@@ -236,8 +246,11 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                     <div className="overflow-x-auto -mx-4 px-4 md:mx-0 md:px-0">
                         <div className="grid grid-cols-12 mb-1 min-w-min not-prose">
                             <div className="col-span-4 px-3 py-1">&nbsp;</div>
-                            {mainPlans.map((plan: BillingV2PlanType) => (
-                                <div className="col-span-4 px-3 py-1" key={plan.key}>
+                            {mainPlans?.map((plan: BillingV2PlanType, index: number) => (
+                                <div
+                                    className="col-span-4 px-3 py-1"
+                                    key={plan.key || plan.plan_key || `plan-${index}`}
+                                >
                                     <strong className="text-sm opacity-75">{plan.name}</strong>
                                 </div>
                             ))}
@@ -248,15 +261,16 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 <strong className="text-primary">Base price</strong>
                             </div>
                             {/* Header */}
-                            {mainPlans.map((plan: BillingV2PlanType, idx: number) => {
+                            {mainPlans?.map((plan: BillingV2PlanType, idx: number) => {
                                 // Add border-r to the last plan column (Pay-as-you-go)
                                 const isLast = idx === mainPlans.length - 1
+                                const planKey = plan.key || plan.plan_key || `plan-${idx}`
                                 return (
                                     <div
                                         className={`main col-span-4 px-3 py-2 text-sm${
                                             isLast ? ' border-r border-primary' : ''
                                         }`}
-                                        key={`${plan.key}-base-price`}
+                                        key={`${planKey}-base-price`}
                                     >
                                         {plan.included_if === 'no_active_subscription' ? (
                                             <span>Free forever</span>
@@ -271,8 +285,8 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                 )
                             })}
                             {/* Rows */}
-                            {highestPlanFeatures.map((feature: BillingV2FeatureType, idx_outer: number) => (
-                                <>
+                            {highestPlanFeatures?.map((feature: BillingV2FeatureType, idx_outer: number) => (
+                                <React.Fragment key={`feature-${feature.key}-${idx_outer}`}>
                                     {/* Feature names */}
                                     <div
                                         data-scheme="secondary"
@@ -293,16 +307,17 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                         )}
                                     </div>
                                     {/* Feature values */}
-                                    {mainPlans.map((plan: BillingV2PlanType, idx_inner: number) => {
+                                    {mainPlans?.map((plan: BillingV2PlanType, idx_inner: number) => {
                                         const planFeature = plan?.features?.find((f) => f.key === feature.key)
                                         const isLastColumn = idx_inner === mainPlans.length - 1
                                         const isLastRow = idx_outer === highestPlanFeatures?.length - 1
+                                        const planKey = plan.key || plan.plan_key || `plan-${idx_inner}`
                                         return (
                                             <div
                                                 className={`inside col-span-4 px-3 py-2 text-sm ${
                                                     isLastColumn ? 'border-r border-primary' : ''
                                                 } ${isLastRow ? 'border-b border-primary' : ''}`}
-                                                key={`${plan.key}-${feature.key}`}
+                                                key={`${planKey}-${feature.key}-${idx_inner}`}
                                             >
                                                 {planFeature ? (
                                                     <div className="flex gap-x-2">
@@ -323,7 +338,7 @@ export const PlanColumns = ({ billingProducts, highlight = 'paid' }) => {
                                             </div>
                                         )
                                     })}
-                                </>
+                                </React.Fragment>
                             ))}
                         </div>
                     </div>

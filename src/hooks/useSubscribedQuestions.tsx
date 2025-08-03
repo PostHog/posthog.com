@@ -127,7 +127,7 @@ export const useSubscribedQuestions = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 }).then((res) => res.json())
-                setQuestions(data.profile.questionSubscriptions)
+                setQuestions(data?.profile?.questionSubscriptions || [])
             } catch (error) {
                 console.error(error)
             } finally {

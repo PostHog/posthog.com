@@ -50,15 +50,27 @@ const Slide = ({
 
     const content = <img src={src} alt={alt} className="w-full h-full object-contain" />
 
+    if (isThumbnail) {
+        return (
+            <button
+                ref={ref}
+                id={`${sliderId}-${id}`}
+                onClick={handleClick}
+                className={`bg-accent flex items-center justify-center flex-grow flex-shrink-0 snap-center ${className}`}
+            >
+                {content}
+            </button>
+        )
+    }
+
     return (
-        <button
+        <div
             ref={ref}
             id={`${sliderId}-${id}`}
-            onClick={handleClick}
             className={`bg-accent flex items-center justify-center flex-grow flex-shrink-0 snap-center ${className}`}
         >
-            {isThumbnail ? content : <ZoomImage>{content}</ZoomImage>}
-        </button>
+            <ZoomImage>{content}</ZoomImage>
+        </div>
     )
 }
 
@@ -91,9 +103,8 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
         <>
             <div className="relative flex flex-nowrap snap-x snap-mandatory overflow-y-hidden overflow-x-auto rounded border border-primary">
                 {images.map((image, index) => (
-                    <>
+                    <React.Fragment key={`${image.src}-${index}`}>
                         <Slide
-                            key={index}
                             className="w-full cursor-auto"
                             id={`pricing-slider-slide-${index}`}
                             src={image.src}
@@ -107,7 +118,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
                                 *{disclaimer}
                             </div>
                         )}
-                    </>
+                    </React.Fragment>
                 ))}
             </div>
             {images.length > 1 && (
@@ -116,7 +127,7 @@ export default function ImageSlider({ images, className, showDisclaimer = false,
                         <div className="flex flex-nowrap @xl:grid grid-cols-4 @3xl:flex @4xl:grid @4xl:grid-cols-4 @7xl:grid-cols-5 @xl:[overflow:unset] px-4 @xl:px-0 snap-x snap-mandatory my-2 gap-2">
                             {images.map((image, index) => (
                                 <Slide
-                                    key={index}
+                                    key={`${index}-${image.src}`}
                                     className={`w-1/5 @xl:w-auto @3xl:w-1/4 @4xl:w-auto p-1 border border-light hover:border-input dark:hover:border-primary-dark rounded relative transition-all hover:scale-[1.01] hover:top-[-.5px] active:scale-[.98] active:top-[.5px] ${
                                         index === activeIndex ? 'active' : 'opacity-70 hover:opacity-100'
                                     }`}

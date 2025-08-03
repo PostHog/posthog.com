@@ -103,11 +103,7 @@ const Row = ({
                     : 'items-center'
             } ${cell.className || ''}`}
                         >
-                            {editable && typeof cell.content === 'string' ? (
-                                <Editor markdown={cell.content} />
-                            ) : (
-                                cell.content
-                            )}
+                            {cell.content}
                         </div>
                     )
                 })}
