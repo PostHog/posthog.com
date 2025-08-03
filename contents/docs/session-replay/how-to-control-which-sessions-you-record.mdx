@@ -34,40 +34,40 @@ posthog.init('<ph_project_api_key>', {
 
 By default, `startSessionRecording` obeys any ingestion controls you've set - so you might call start and not record a session because of sampling or some other control.
 
-You can pass override options to `startSessionRecording` to change this. 
+You can pass override options to `startSessionRecording` to change this.
 
 ```
 posthog.startSessionRecording(true) // start ignoring all ingestion controls
 posthog.startSessionRecording({
   // you don't have to send all of these
-  sampling: true || false; 
-  linked_flag: true || false; 
-  url_trigger: true || false; 
-  event_trigger: true || false 
+  sampling: true || false;
+  linked_flag: true || false;
+  url_trigger: true || false;
+  event_trigger: true || false
 })
 ```
 
 ## With URL trigger conditions
 
-You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.  
+You can opt to only start recordings once your user visits a certain page. After the URL matches, the recording continues even after they leave the matching page.
 The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the page.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_light_bc6130e3d0.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/replay_url_trigger_dark_9c6ebb6c37.png"
-    alt="Adding URL trigger to control session recordings" 
+    alt="Adding URL trigger to control session recordings"
     classes="rounded"
 />
 
 ## With Event trigger conditions
 
-Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.  
+Since posthog-js version 1.186.0, you can opt to only start recordings once your user emits a particular event. After the event is captured, the recording continues even after they leave the matching page.
 The client keeps a short buffer in-memory, so you'll still be able to see how they have arrived at the event.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_light_21a531edbb.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/event_trigger_dark_f67b3ffb30.png"
-    alt="Adding event trigger to control session recordings" 
+    alt="Adding event trigger to control session recordings"
     classes="rounded"
 />
 
@@ -80,9 +80,9 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 3. Link your newly created flag in the **Enable recordings using feature flag**.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725441098/posthog.com/contents/Screenshot_2024-09-04_at_10.11.12_AM.png" 
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/v1725441098/posthog.com/contents/Screenshot_2024-09-04_at_10.11.12_AM.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/v1725441098/posthog.com/contents/Screenshot_2024-09-04_at_10.11.20_AM.png"
-    alt="Selecting a feature flag to control session recordings" 
+    alt="Selecting a feature flag to control session recordings"
     classes="rounded"
 />
 
@@ -91,9 +91,9 @@ You can select a [feature flag](/docs/feature-flags) to control whether to recor
 Sampling enables you to record a percentage of all sessions. To set a sampling rate, go to the [replay ingestion settings page](https://us.posthog.com/replay/settings#selectedSetting=replay-triggers).
 
 <ProductScreenshot
-    imageLight={ImgSampleConfigLight} 
+    imageLight={ImgSampleConfigLight}
     imageDark={ImgSampleConfigDark}
-    alt="Sampling config shown set to 100% i.e. no sampling" 
+    alt="Sampling config shown set to 100% i.e. no sampling"
     classes="rounded"
 />
 
@@ -117,21 +117,24 @@ You'll capture 20% of any session on the checkout page that has an exception eve
 
 ## Minimum duration
 
-In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded. 
+In your [replay ingestion settings](https://us.posthog.com/settings/project-replay#replay-ingestion), you can set a minimum duration for sessions to be recorded.
 
 <ProductScreenshot
-    imageLight={ImgMinDurationLight} 
+    imageLight={ImgMinDurationLight}
     imageDark={ImgMinDurationDark}
-    alt="Minimum duration config shown set to 2 seconds" 
+    alt="Minimum duration config shown set to 2 seconds"
     classes="rounded"
 />
 
 This is useful if you want to exclude sessions that are too short to be useful. For example, you might want to exclude sessions that are less than 2 seconds long to avoid recording sessions where users quickly bounce off your site.
 
+**Note**:​ The minimum duration setting only applies to new recordings going forward. Any session recordings that were previously captured and stored will remain accessible regardless of their duration, even if they are shorter than your newly configured minimum duration.
+
+
 ### Limitations
 
 
-The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory. 
+The minimum duration is set in seconds. Whenever a new session starts, the browser records the start time. If the minimum duration has passed since the start time, the session data is sent. If it hasn't, the session continues to be buffered in-memory.
 
 This means that if you set a high minimum duration and your user visits multiple pages each for a short time, the browser risks dropping the buffered data. The result is that the session is still recorded, but you miss the beginning.
 
@@ -139,4 +142,4 @@ If you find you are missing the beginning of sessions, reduce the minimum durati
 
 ## Billing Limits
 
-You can set a [billing limit](/docs/billing/limits-alerts). We'll stop ingesting recordings when you reach your limit. 
+You can set a [billing limit](/docs/billing/limits-alerts). We'll stop ingesting recordings when you reach your limit.
