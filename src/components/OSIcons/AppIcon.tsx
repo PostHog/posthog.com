@@ -35,10 +35,7 @@ type AppIconName =
     | 'invite'
     | 'script'
     | 'pdf_locked'
-    | 'mixpanel'
-    | 'amplitude'
     | 'ga'
-
 
 const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     doc: {
@@ -129,12 +126,6 @@ const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     script: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/script_classic_84c2e01c55.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/script_8454a37bed.png',
-    },
-    mixpanel: {
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/mixpanel_9bf9de9f2d.png',
-    },
-    amplitude: {
-        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/amplitude_317f86f654.png',
     },
     ga: {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/ga3_1651ec493f.png',
@@ -253,10 +244,9 @@ export const AppLink = ({
             <figcaption className="text-sm font-medium leading-tight">
                 <span className={`inline-block leading-tight`}>
                     <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${background
-                            ? background
-                            : backgroundMatchedColors
-                            }  rounded-[2px] px-0.5 py-0`}
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${
+                            background ? background : backgroundMatchedColors
+                        }  rounded-[2px] px-0.5 py-0`}
                     >
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}
@@ -266,7 +256,8 @@ export const AppLink = ({
         </>
     )
 
-    const commonClassName = "group inline-flex flex-col justify-center items-center w-auto max-w-28 text-center select-none space-y-1 text-primary"
+    const commonClassName =
+        'group inline-flex flex-col justify-center items-center w-auto max-w-28 text-center select-none space-y-1 text-primary'
 
     return (
         <figure ref={ref}>
@@ -285,9 +276,7 @@ export const AppLink = ({
                     {content}
                 </Link>
             ) : (
-                <span className={`${commonClassName} cursor-not-allowed opacity-75`}>
-                    {content}
-                </span>
+                <span className={`${commonClassName} cursor-not-allowed opacity-75`}>{content}</span>
             )}
         </figure>
     )

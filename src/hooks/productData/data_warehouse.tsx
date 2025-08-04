@@ -49,31 +49,36 @@ export const dataWarehouse = {
     },
     features: [
         {
-            title: 'Features',
-            headline: 'Features',
+            title: 'Query with PostHog SQL',
+            headline: 'Query with PostHog SQL',
+            description: 'Directly access your data, join sources, and interrogate data however you want',
+            layout: 'columns',
             features: [
                 {
-                    title: 'Link multiple sources',
-                    description: 'Add joins to link tables together and connect run advanced queries',
-                },
-                {
-                    title: 'Query with SQL',
-                    description: 'Directly access your data, join sources, and build custom queries',
+                    title: 'Add queries to notebooks',
+                    description:
+                        'Use PostHog notebooks to collect warehouse info, research topics, or just as a scratch pad',
                 },
                 {
                     title: 'Save queries as views',
-                    description: 'Save time by saving visualized data as tables, graphics, and more',
+                    description: 'Visualize your results as tables, graphs, and more, then save them for easy access',
                 },
                 {
-                    title: 'Custom sync periods',
-                    description: 'Decide whether to sync data sources daily, weekly, or monthly',
+                    title: 'Write SQL without knowing SQL',
+                    description: 'Nobody likes writing SQL, except for our AI helper, Max',
+                },
+            ],
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png',
+                    alt: '',
                 },
             ],
         },
         {
             title: 'Sync from anywhere',
             headline: 'Sync from anywhere',
-            description: 'Adwords, Salesforce, and major databases. Grab anything you want using custom sources.',
+            description: 'Stripe, Hubspot, Zendesk, Adwords, Salesforce, and major databases.',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',
@@ -82,38 +87,62 @@ export const dataWarehouse = {
             ],
         },
         {
-            title: 'Sync from Stripe',
-            headline: 'Sync from Stripe',
-            description: 'Combine financial and product data to see how usage turns into growth.',
+            title: 'Custom sources',
+            headline: 'Custom sources',
+            description:
+                'Build your own sources and let us read data from your storage system, with complete control of how regularly we sync.',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png',
-                    alt: 'Sync from Stripe',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',
+                    alt: 'Sync from anywhere',
                 },
             ],
         },
         {
-            title: 'Sync from Hubspot',
-            headline: 'Sync from Hubspot',
-            description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
+            title: 'Connectors',
+            headline: 'Connectors',
+            description:
+                "Use Temportal to sync data from your sources into PostHog's S3 storage smoothly. We'll handle the data flow for you.",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png',
-                    alt: 'Sync from Hubspot',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',
+                    alt: 'Sync from anywhere',
                 },
             ],
         },
-        {
-            title: 'Sync from Zendesk',
-            headline: 'Sync from Zendesk',
-            description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png',
-                    alt: 'Sync from Zendesk',
-                },
-            ],
-        },
+        // {
+        //     title: 'Sync from Stripe',
+        //     headline: 'Sync from Stripe',
+        //     description: 'Combine financial and product data to see how usage turns into growth.',
+        //     images: [
+        //         {
+        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png',
+        //             alt: 'Sync from Stripe',
+        //         },
+        //     ],
+        // },
+        // {
+        //     title: 'Sync from Hubspot',
+        //     headline: 'Sync from Hubspot',
+        //     description: 'Bring your CRM into the mix and track your sales funnel directly in PostHog.',
+        //     images: [
+        //         {
+        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/hubspot.png',
+        //             alt: 'Sync from Hubspot',
+        //         },
+        //     ],
+        // },
+        // {
+        //     title: 'Sync from Zendesk',
+        //     headline: 'Sync from Zendesk',
+        //     description: 'See how ticket volumes and SLA breaches impact sign-ups and churn.',
+        //     images: [
+        //         {
+        //             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/zendesk.png',
+        //             alt: 'Sync from Zendesk',
+        //         },
+        //     ],
+        // },
     ],
     questions: [
         {
