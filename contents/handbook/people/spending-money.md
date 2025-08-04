@@ -150,7 +150,13 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
 
-Every person has $100 per month for personal software - this is software that is purely for your individual use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+Every person has $100 per month for individual software use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+
+### AI tools & API
+
+This is excpected to be a dedicated monthly budget to help you enhance your work productivity and empower you to ship faster. This budget of USD 300 per month for the Tech/R&D department, is separate from your regular software subscription. It is meant for work related tools only, such as AI coding assistants, API credits, other AI tool subscriptions, strictly for work productivity, not for personal use.
+
+These budgets shouldn't stop us from innovating, and we can approve an increase on a case-by-case basis.
 
 ### Optional software
 
