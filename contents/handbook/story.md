@@ -26,7 +26,7 @@ showTitle: true
 
 Like many things at PostHog, this handbook has scrappy origins.
 
-[Tim](/tim) and [James](/james) were planning on launching on [HackerNews](https://news.ycombinator.com/), and wanted to look as mature as possible. We felt that few people would want to use a flaky new startup's product seriously. So we asked ourselves: how do we signal that we're mature? 
+[Tim](/tim) and [James](/james) were planning on launching on [Hacker News](https://news.ycombinator.com/), and wanted to look as mature as possible. We felt that few people would want to use a flaky new startup's product seriously. So we asked ourselves: how do we signal that we're mature? 
 
 We looked around at some big, boring companies and realized they all had huge footer sections on their websites with lots of links! How do we produce a lot of content to add to our footer when the product, at that time, was so simple? The answer: we should write up how we want to work.
 
