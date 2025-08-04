@@ -232,7 +232,7 @@ If you are meeting a user for an interview or a potential customer, we would enc
 
 We encourage team members to meet with users and key customers in person. This type of travel is separate from your quarterly "working together" budget. This enables us to track the budgets and costs separately. To cover costs for travel, accommodation, and meals when meeting customers, please submit a separate budget request in Brex.
 
-When submitting your request, please provide details of your arrangements and the purpose of the trip - this is required to justify the budget and costs to the auditor, and ensuring that our records are complete. A screenshot/link to a Slack conversation or an email is a great way to provide this context.
+When submitting your request, please provide details of your arrangements and the purpose of the trip - this is required to justify the budget and costs to the auditor, and to ensure that our records are complete. A screenshot/link to a Slack conversation or an email is a great way to provide this context.
 
 ## Training
 
