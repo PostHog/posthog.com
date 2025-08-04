@@ -1,45 +1,43 @@
-import CloudinaryImage from 'components/CloudinaryImage'
-import React, { useState } from 'react'
-import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconMessage,
     IconClock,
     IconGraph,
-    IconFlask,
-    IconToggle,
-    IconPieChart,
+    IconMessage,
     IconNotification,
+    IconPieChart,
     IconRewindPlay,
+    IconToggle,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
-import { CustomerCard } from 'components/Products/CustomerCard'
-import { TutorialCard } from 'components/Products/TutorialCard'
-import { Hero } from 'components/Products/Hero'
-import { Feature } from 'components/Products/Feature'
-import { Subfeature } from 'components/Products/Subfeature'
-import { graphql, useStaticQuery } from 'gatsby'
-import { docsMenu } from '../../../navs'
-import TeamRoadmap from 'components/TeamRoadmap'
-import { Marquee } from 'components/Products/Marquee'
-import RecentChange from '../RecentChange'
-import TeamMembers from '../TeamMembers'
-import Questions from '../Questions'
+import CloudinaryImage from 'components/CloudinaryImage'
 import CTA from 'components/Home/CTA'
-import Comparison from '../Comparison'
+import { useLayoutData } from 'components/Layout/hooks'
+import Link from 'components/Link'
+import Plans from 'components/Pricing/Plans'
+import { VsCompetitor } from 'components/Products/Competitor'
+import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
+import { CustomerCard } from 'components/Products/CustomerCard'
+import { DocLinks } from 'components/Products/DocsLinks'
+import { FAQ } from 'components/Products/FAQ'
+import { Feature } from 'components/Products/Feature'
+import { Hero } from 'components/Products/Hero'
+import { Marquee } from 'components/Products/Marquee'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
 import { Question } from 'components/Products/Question'
-import { VsCompetitor } from 'components/Products/Competitor'
-import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
-import { DocLinks } from 'components/Products/DocsLinks'
 import { SmoothScroll } from 'components/Products/SmoothScroll'
-import { FAQ } from 'components/Products/FAQ'
+import { Subfeature } from 'components/Products/Subfeature'
+import { TutorialCard } from 'components/Products/TutorialCard'
 import { SEO } from 'components/seo'
-import { useLayoutData } from 'components/Layout/hooks'
-import Plans from 'components/Pricing/Plans'
+import TeamRoadmap from 'components/TeamRoadmap'
+import { graphql, useStaticQuery } from 'gatsby'
+import React, { useState } from 'react'
+import { docsMenu } from '../../../navs'
 import SideModal from '../../Modal/SideModal'
 import Profile from '../../Team/Profile'
+import Comparison from '../Comparison'
+import Questions from '../Questions'
+import RecentChange from '../RecentChange'
+import TeamMembers from '../TeamMembers'
 
 const product = {
     slug: 'surveys',
@@ -403,7 +401,7 @@ export const ProductSurveys = () => {
                     icon={<IconMessage />}
                     product={product.capitalized}
                     title='Ask anything with <span class="text-red dark:text-yellow">no-code surveys</span>'
-                    description="Build in-app popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for complete control."
+                    description="Build in-app popups or hosted surveys with freeform text responses, multiple choice, NPS, ratings, and emoji reactions.<br />Or use the API for complete control."
                 />
 
                 <div className="text-center">

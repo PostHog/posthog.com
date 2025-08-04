@@ -20,6 +20,8 @@ export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/
 export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg"
 export const presentationTypesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_03_at_23_18_18_2x_5447610bdd.jpg"
 export const presentationTypesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_03_at_23_17_46_2x_d11c449694.jpg"
+export const copySurveyLinkLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_01_14_59_2_2x_c5ba68ce3e.jpg"
+export const copySurveyLinkDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_01_14_28_2x_225a93d88b.jpg"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -77,7 +79,7 @@ There are three options for displaying a survey:
 
 3. **Feedback Button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
 
-4. **Hosted Surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter.
+4. **Hosted Surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter, which will allow you to link responses to a specific user.
 
 <ProductScreenshot
     imageLight={presentationTypesLight}
@@ -155,6 +157,8 @@ You can display your survey to specific users based on:
     classes="rounded"
 />
 
+**Display conditions are not available for hosted surveys**. For now, any user who visits the link will be shown the survey, as long as they are launched and still collecting responses.
+
 ### Completion conditions
 
 This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set. The completion conditions properties are evaluated with internal feature flags.
@@ -186,7 +190,7 @@ Under complete conditions, there's two options that can be configured so the sur
 
 #### Repeat on a schedule
 
-You can also configure surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
+You can also configure in-app surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
 
 <ProductScreenshot
     imageLight={repeatingSurveyLight}
@@ -228,6 +232,15 @@ Once you've set up your survey, click "Save as draft" to save your survey. This 
 If you've created a [popover survey](#presentation), your survey will begin showing immediately to users matching your display conditions.
 
 If you've created an [API survey](#presentation), you'll need to add your [custom survey code](/docs/surveys/implementing-custom-surveys) before launching.
+
+For [hosted surveys](#presentation), when you launch it, you'll get a link you can share with your users. You can also copy it by clicking on "Copy external survey".
+
+<ProductScreenshot
+    imageLight={copySurveyLinkLight}
+    imageDark={copySurveyLinkDark}
+    alt="Copy survey link"
+    classes="rounded"
+/>
 
 ## How PostHog handles partial survey responses
 
