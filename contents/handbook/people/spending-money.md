@@ -154,7 +154,7 @@ Every person has $100 per month for individual software use. Anything that has o
 
 ### AI tools & API
 
-This is excpected to be a dedicated monthly budget to help you enhance your work productivity and empower you to ship faster. This budget of USD 300 per month for the Tech/R&D department, is separate from your regular software subscription. It is meant for work related tools only, such as AI coding assistants, API credits, other AI tool subscriptions, strictly for work productivity, not for personal use.
+This is expected to be a dedicated monthly budget to help you enhance your work productivity and empower you to ship faster. This budget of USD 300 per month for the Tech/R&D department, is separate from your regular software subscription. It is meant for work related tools only, such as AI coding assistants, API credits, other AI tool subscriptions, strictly for work productivity, not for personal use.
 
 These budgets shouldn't stop us from innovating, and we can approve an increase on a case-by-case basis.
 
