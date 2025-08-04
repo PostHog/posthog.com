@@ -16,7 +16,6 @@ export const featureFlags = {
         title: 'Feature flags - PostHog',
         description: 'Safely roll out features to specific users or groups',
     },
-    answersDescription: 'Control the release of new features to your users',
     overview: {
         title: 'Safely roll out features to specific users or groups',
         description:

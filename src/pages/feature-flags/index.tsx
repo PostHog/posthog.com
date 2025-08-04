@@ -67,6 +67,9 @@ export default function FeatureFlags(): JSX.Element {
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        content: {
+            answersDescription: 'Control the release of new features to your users',
+        },
     })
 
     // Merge content data with product data

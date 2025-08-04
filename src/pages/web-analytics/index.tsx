@@ -148,13 +148,17 @@ export default function WebAnalytics(): JSX.Element {
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        content: {
+            answersHeadline: "Here's what you can do with Web Analytics",
+            answersDescription: 'Plus some helpful reading for no-code platforms',
+        },
     })
 
     // Override the pricing slide with our custom component
-    const pricingSlideIndex = slides.findIndex((slide) => slide.slug === 'pricing')
+    const pricingSlideIndex = slides.slides.findIndex((slide) => slide.slug === 'pricing')
     if (pricingSlideIndex !== -1) {
-        slides[pricingSlideIndex] = {
-            ...slides[pricingSlideIndex],
+        slides.slides[pricingSlideIndex] = {
+            ...slides.slides[pricingSlideIndex],
             component: CustomPricingSlide,
         }
     }

@@ -14,7 +14,6 @@ export const errorTracking = {
         title: 'Error Tracking - PostHog',
         description: 'Track errors and exceptions in your code, then assign them as issues.',
     },
-    answersDescription: 'Track and resolve errors and exceptions in your application',
     overview: {
         title: 'Track errors and resolve issues',
         description: 'Take your product from exception to exceptional 🥁',

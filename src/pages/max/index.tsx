@@ -92,6 +92,9 @@ export default function MaxAI(): JSX.Element {
         templates: {
             overview: 'columns', // Use the horizontal split layout
         },
+        content: {
+            answersDescription: 'What can Max do?',
+        },
     })
 
     const mergedData = {

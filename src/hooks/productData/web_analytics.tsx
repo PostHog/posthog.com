@@ -33,7 +33,6 @@ export const webAnalytics = {
         description:
             'Privacy-focused web analytics with pre-built dashboards, real-time data, and no sampling. Built for people who really liked GA3...',
     },
-    answersDescription: 'Plus some helpful reading to make the most of Web Analytics',
     overview: {
         title: 'Privacy-focused web analytics',
         description:
@@ -556,8 +555,7 @@ export const webAnalytics = {
             "Y Combinator gets 30% more data than GA4 because you can create a reverse proxy which privacy tools can't block. Significa ditched Plausible for us - more powerful, same privacy focus. Creatify summed it up: 'It's so much better than GA4.' These aren't edge cases. PostHog Web Analytics can't replace *everything* in GA4 (yet) like advanced attribution features, but we're getting there.",
         features:
             "<strong>Core metrics:</strong> Everything you expect: visitors, pageviews, sessions, bounce rate. Real-time. No sampling. Cookieless option means no cookie banner needed.<br /><br /><strong>Traffic sources:</strong> Auto-categorizes into channels (Direct, Organic, Paid, Social). Full UTM support. Create custom channels like 'AI' or 'Partners'. See exactly which sites send traffic.<br /><br /><strong>Advanced analytics:</strong> Scroll depth shows how far people actually read. Web Vitals (LCP, FCP, INP, CLS) for Core Web Vitals tracking. Set conversion goals. Track revenue. See when users are active.<br /><br /><strong>Privacy & compliance:</strong> GDPR compliant. Optional cookieless tracking. Anonymous mode cuts costs dramatically. Reverse proxy reduces ad blocker impact by 70%+. Choose US or EU hosting.<br /><br /><strong>Device & demographics:</strong> Device types, browsers, OS, screen sizes. Country and city data. Automatic bot filtering. Everything you need to know your audience.<br /><br /><strong>Works with product analytics:</strong> Same events power both. No duplicate tracking. Cross-domain support. Connect backend events to frontend sessions. No extra cost beyond events.",
-        answers:
-            "These are the questions everyone asks. The dashboard answers them all instantly. No building reports, no waiting for data to process. It's all there, real-time, from day one.",
+        answers: '',
         pricing: (
             <>
                 PostHog's Web Analytics is billed as Product Analytics events, which means you get access to both

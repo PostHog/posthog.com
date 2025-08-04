@@ -19,14 +19,14 @@ import FeatureComparisonSlide from './FeatureComparisonSlide'
 import DocsSlide from './DocsSlide'
 import PairsWithSlide from './PairsWithSlide'
 import GettingStartedSlide from './GettingStartedSlide'
-import { SlideConfig, defaultSlides } from './createSlideConfig'
+import { SlideConfig, SlideConfigResult, defaultSlides } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 interface SlidesTemplateProps {
     productHandle: string
     data: any // GraphQL data
-    slideConfig?: SlideConfig[]
+    slideConfig?: SlideConfig[] | SlideConfigResult
     seoOverrides?: {
         title?: string
         description?: string
@@ -44,6 +44,9 @@ export default function SlidesTemplate({
     slideConfig = Object.values(defaultSlides),
     seoOverrides,
 }: SlidesTemplateProps) {
+    // Extract slides and content configuration
+    const slideConfigs = Array.isArray(slideConfig) ? slideConfig : slideConfig.slides
+    const contentConfig = Array.isArray(slideConfig) ? {} : slideConfig.content || {}
     // Track whether we're in mobile or desktop view
     // Start with true (mobile) as default since that's the initial visible state
     const [isMobileView, setIsMobileView] = useState(true)
@@ -158,13 +161,20 @@ export default function SlidesTemplate({
                 )
 
             case 'features':
-                return <FeaturesSlide features={productData?.features || []} {...props} />
+                return (
+                    <FeaturesSlide
+                        features={productData?.features || []}
+                        backgroundImage={contentConfig.featuresBackgroundImage}
+                        {...props}
+                    />
+                )
 
             case 'answers':
                 return (
                     <QuestionsSlide
                         productName={productData?.name}
-                        answersDescription={productData?.answersDescription}
+                        answersDescription={contentConfig.answersDescription || productData?.answersDescription}
+                        answersHeadline={contentConfig.answersHeadline}
                         questions={productData?.questions || []}
                         tutorialData={data}
                         {...props}
@@ -179,7 +189,7 @@ export default function SlidesTemplate({
                         productData={productData}
                         onScrollToFeatures={() => {
                             // Find the Features slide dynamically by slug
-                            const featuresSlideIndex = slideConfig.findIndex((slide) => slide.slug === 'features')
+                            const featuresSlideIndex = slideConfigs.findIndex((slide) => slide.slug === 'features')
                             if (featuresSlideIndex !== -1) {
                                 const featuresSlide = document.querySelector(
                                     `[data-slide-id="${productData?.slug}"][data-slide="${featuresSlideIndex}"]`
@@ -241,7 +251,7 @@ export default function SlidesTemplate({
     }
 
     // Create raw slides from configuration
-    const rawSlides = slideConfig.map(({ slug, name, component: CustomComponent, props, template }) => ({
+    const rawSlides = slideConfigs.map(({ slug, name, component: CustomComponent, props, template }) => ({
         name,
         slug,
         content: CustomComponent ? <CustomComponent {...props} /> : createSlideContent(slug, props, template),

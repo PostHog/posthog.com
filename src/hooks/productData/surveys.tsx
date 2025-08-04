@@ -13,7 +13,6 @@ export const surveys = {
         title: 'Surveys - PostHog',
         description: 'Ask anything with no-code surveys – or use the API for complete control.',
     },
-    answersDescription: 'Get feedback from your users with customizable surveys',
     overview: {
         title: 'Ask anything with no-code surveys',
         description:

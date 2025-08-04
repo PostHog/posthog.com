@@ -24,9 +24,15 @@ interface FeatureItem {
 
 interface FeaturesSlideProps {
     features: FeatureItem[]
+    backgroundImage?: {
+        url: string
+        opacity?: number
+        position?: string
+        size?: string
+    }
 }
 
-export default function FeaturesSlide({ features }: FeaturesSlideProps) {
+export default function FeaturesSlide({ features, backgroundImage }: FeaturesSlideProps) {
     const [currentTab, setCurrentTab] = useState(0)
 
     if (!features || features.length === 0) {
@@ -65,10 +71,23 @@ export default function FeaturesSlide({ features }: FeaturesSlideProps) {
                 </div>
                 {features.map((item: FeatureItem, index: number) => (
                     <Tabs.Content
-                        className="flex-1 bg-primary before:absolute before:inset-0 before:bg-[url('https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg')] before:bg-cover before:bg-center before:opacity-20 @2xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative [&_a]:underline [&_a]:font-semibold"
+                        className="flex-1 bg-primary @2xl:border-l border-primary grow px-5 py-2 outline-none focus-visible:shadow-[0_0_0_2px] focus-visible:shadow-black h-full relative [&_a]:underline [&_a]:font-semibold"
                         key={index}
                         value={`tab-${index}`}
                     >
+                        {backgroundImage && (
+                            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                                <img
+                                    src={backgroundImage.url}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                    style={{
+                                        opacity: backgroundImage.opacity || 0.2,
+                                        objectPosition: backgroundImage.position || 'center',
+                                    }}
+                                />
+                            </div>
+                        )}
                         <div className="relative">
                             <div className={`${item.layout === 'columns' ? 'pt-4' : 'pt-12 px-4 pb-8'} pb-8`}>
                                 <h2

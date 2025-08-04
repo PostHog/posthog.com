@@ -375,7 +375,7 @@ export default function Presentation({
                                                     currentSlideNotes
                                                 )
                                             ) : (
-                                                'No presenter notes for this slide.'
+                                                <div className="text-secondary">No presenter notes for this slide.</div>
                                             )}
                                         </div>
                                     </ScrollArea>

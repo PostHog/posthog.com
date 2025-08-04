@@ -1,6 +1,6 @@
 export { default as SlidesTemplate } from './SlidesTemplate'
 export { createSlideConfig, defaultSlides } from './createSlideConfig'
-export type { SlideConfig, SlideConfigOptions } from './createSlideConfig'
+export type { SlideConfig, SlideConfigOptions, SlideConfigResult } from './createSlideConfig'
 export { default as SlideThumbnails } from './SlideThumbnails'
 export { default as OverviewSlide } from './OverviewSlide'
 export { default as CustomersSlide } from './CustomersSlide'

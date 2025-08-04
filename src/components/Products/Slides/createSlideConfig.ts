@@ -8,6 +8,11 @@ export interface SlideConfig {
     template?: string
 }
 
+export interface SlideConfigResult {
+    slides: SlideConfig[]
+    content?: SlideConfigOptions['content']
+}
+
 export interface SlideConfigOptions {
     include?: string[]
     exclude?: string[]
@@ -15,6 +20,16 @@ export interface SlideConfigOptions {
     overrides?: Record<string, Partial<SlideConfig>>
     custom?: SlideConfig[]
     templates?: Record<string, string>
+    content?: {
+        answersDescription?: string
+        answersHeadline?: string
+        featuresBackgroundImage?: {
+            url: string
+            opacity?: number
+            position?: string
+            size?: string
+        }
+    }
 }
 
 // Default slide configuration
@@ -41,8 +56,12 @@ export const defaultSlides: Record<string, SlideConfig> = {
  * @param options.overrides - Override properties for specific slides
  * @param options.custom - Array of custom slides to add
  * @param options.templates - Specify templates for slides (e.g., overview: 'stacked')
+ * @param options.content - Content configuration for slides
+ * @param options.content.answersDescription - Custom description for the answers/questions slide
+ * @param options.content.answersHeadline - Custom headline for the answers/questions slide
+ * @param options.content.featuresBackgroundImage - Background image configuration for features slide
  *
- * @returns Array of SlideConfig objects
+ * @returns SlideConfigResult object containing slides array and content configuration
  *
  * @example
  * ```tsx
@@ -79,6 +98,20 @@ export const defaultSlides: Record<string, SlideConfig> = {
  *         { slug: 'custom-slide', name: 'My Custom Slide', component: MyCustomComponent }
  *     ]
  * })
+ *
+ * // Configure content for specific slides
+ * const slides = createSlideConfig({
+ *     content: {
+ *         answersDescription: 'Discover insights about your users and improve your product',
+ *         answersHeadline: 'What can Product Analytics help me discover?',
+ *         featuresBackgroundImage: {
+ *             url: 'https://example.com/bg.jpg',
+ *             opacity: 0.2,
+ *             position: 'center',
+ *             size: 'cover'
+ *         }
+ *     }
+ * })
  * ```
  */
 export function createSlideConfig({
@@ -88,14 +121,8 @@ export function createSlideConfig({
     overrides = {},
     custom = [],
     templates = {},
-}: {
-    include?: string[]
-    exclude?: string[]
-    order?: string[]
-    overrides?: Record<string, Partial<SlideConfig>>
-    custom?: SlideConfig[]
-    templates?: Record<string, string>
-} = {}): SlideConfig[] {
+    content = {},
+}: SlideConfigOptions = {}): SlideConfigResult {
     // Get all available slide slugs (default + custom)
     const defaultSlugs = Object.keys(defaultSlides)
     const customSlugs = custom.map((slide) => slide.slug)
@@ -139,5 +166,8 @@ export function createSlideConfig({
         }
     })
 
-    return slides
+    return {
+        slides,
+        content,
+    }
 }

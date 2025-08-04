@@ -75,6 +75,9 @@ export default function DataWarehouse(): JSX.Element {
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        content: {
+            answersDescription: 'Unify and query data from any source',
+        },
     })
 
     const mergedData = {

@@ -56,13 +56,42 @@ const slides = createSlideConfig({
 return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />
 ```
 
+### Content Configuration
+
+You can configure content for specific slides without modifying the product data files:
+
+```tsx
+const slides = createSlideConfig({
+    content: {
+        // Customize the description text for the Q&A/Answers slide
+        answersDescription: 'Discover insights about your users and improve your product',
+        
+        // Customize the headline for the Q&A/Answers slide (defaults to "What can I discover with {productName}?")
+        answersHeadline: 'What can Product Analytics help me discover?',
+        
+        // Add a background image to the Features slide
+        // The image is rendered as an absolutely positioned element behind the content
+        featuresBackgroundImage: {
+            url: 'https://res.cloudinary.com/dmukukwp6/image/upload/bg_replay_5775c24ad4.jpg',
+            opacity: 0.2,        // Optional, defaults to 0.2
+            position: 'center',  // Optional, defaults to 'center' (CSS object-position)
+            size: 'cover'        // Optional, defaults to 'cover' (CSS object-fit)
+        }
+    }
+})
+```
+
+**Note:** The `answersDescription` property has been moved from product data files to the page configuration. This allows each product page to customize the Q&A slide content without modifying shared data files.
+
 ## Available Components
 
 ### Main Component
 - `SlidesTemplate` - Complete product page with all common logic
 
 ### Slide Configuration
-- `createSlideConfig` - Helper to customize slide configuration
+- `createSlideConfig` - Helper to customize slide configuration. Returns a `SlideConfigResult` object containing:
+  - `slides`: Array of slide configurations
+  - `content`: Optional content configuration for slides (answersDescription, answersHeadline, featuresBackgroundImage)
 - `defaultSlides` - Default slide configuration object
 
 ### Individual Slides
@@ -225,7 +254,16 @@ export default function YourProductPage(): JSX.Element {
     const slides = createSlideConfig({
         // exclude: ['comparison-summary', 'feature-comparison'],
         // order: ['overview', 'pricing', 'features'],
-        // overrides: { pricing: { name: 'Plans & Pricing' } }
+        // overrides: { pricing: { name: 'Plans & Pricing' } },
+        content: {
+            // Add your answersDescription here (previously in product data files)
+            answersDescription: 'Your custom description for the Q&A slide',
+            // Optionally add background image for features slide
+            featuresBackgroundImage: {
+                url: 'https://your-image-url.jpg',
+                opacity: 0.2
+            }
+        }
     })
 
     return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={data} slideConfig={slides} />

@@ -14,7 +14,6 @@ export const dataWarehouse = {
         title: 'Data Warehouse - PostHog',
         description: 'Unify and query data from any source and analyze it alongside your product data.',
     },
-    answersDescription: 'Unify and query data from any source',
     overview: {
         title: 'All your data in one place',
         description: 'Unify and query data from any source and analyze it alongside your product data.',

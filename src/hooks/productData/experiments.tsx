@@ -16,7 +16,6 @@ export const experiments = {
         title: 'Experiments - PostHog',
         description: 'Run statistically-significant multivariate tests and robust targeting & exclusion rules.',
     },
-    answersDescription: 'Test changes with statistical significance',
     overview: {
         title: 'Test changes with statistical significance',
         description:

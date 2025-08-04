@@ -123,10 +123,10 @@ export default function Experiments(): JSX.Element {
     })
 
     // Override the pricing slide with our custom component
-    const pricingSlideIndex = slides.findIndex((slide) => slide.slug === 'pricing')
+    const pricingSlideIndex = slides.slides.findIndex((slide) => slide.slug === 'pricing')
     if (pricingSlideIndex !== -1) {
-        slides[pricingSlideIndex] = {
-            ...slides[pricingSlideIndex],
+        slides.slides[pricingSlideIndex] = {
+            ...slides.slides[pricingSlideIndex],
             component: CustomPricingSlide,
         }
     }

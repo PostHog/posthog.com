@@ -16,7 +16,6 @@ export const cdp = {
         title: 'Max AI - PostHog',
         description: 'Max AI is a tool that helps you analyze your data and make decisions.',
     },
-    answersDescription: 'What can Max do?',
     overview: {
         title: 'Max AI is a tool that helps you analyze your data and make decisions.',
         description: 'Max AI is a tool that helps you analyze your data and make decisions.',

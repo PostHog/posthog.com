@@ -166,6 +166,9 @@ export default function ErrorTracking(): JSX.Element {
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },
+        content: {
+            answersDescription: 'Track and resolve errors and exceptions in your application',
+        },
     })
 
     const mergedData = {

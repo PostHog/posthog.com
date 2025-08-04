@@ -29,6 +29,7 @@ interface TutorialData {
 interface QuestionsSlideProps {
     productName: string
     answersDescription: string
+    answersHeadline?: string
     questions: Question[]
     tutorialData: TutorialData
 }
@@ -36,6 +37,7 @@ interface QuestionsSlideProps {
 export default function QuestionsSlide({
     productName,
     answersDescription,
+    answersHeadline,
     questions,
     tutorialData,
 }: QuestionsSlideProps) {
@@ -162,7 +164,7 @@ export default function QuestionsSlide({
                     // Skip lines that look like code
                     if (trimmed.startsWith('```') || trimmed.startsWith('    ')) return false
                     // Skip lines with only special characters
-                    if (trimmed.match(/^[<>{}\[\]()]+$/)) return false
+                    if (trimmed.match(/^[<>{}[\]()]+$/)) return false
                     // Accept lines with actual prose (at least 20 chars)
                     return trimmed.length > 20
                 })
@@ -189,7 +191,7 @@ export default function QuestionsSlide({
         <div className="h-full flex flex-col p-4">
             <div className="flex-0">
                 <h2 className="text-4xl font-bold text-primary my-2 text-center">
-                    What can I discover with {productName}?
+                    {answersHeadline || `What can I discover with ${productName}?`}
                 </h2>
                 <p className="text-xl text-secondary max-w-4xl mx-auto mb-8 text-center">{answersDescription}</p>
             </div>

@@ -13,7 +13,6 @@ export const sessionReplay = {
     handle: 'session_replay',
     type: 'session_replay',
     slug: 'session-replay',
-    answersDescription: 'Understand user behavior, identify friction points, and improve your product experience',
     color: 'yellow',
     colorSecondary: '[#B56C00]',
     category: 'product',
