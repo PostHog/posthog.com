@@ -135,7 +135,7 @@ export const webAnalytics = {
             title: 'Core Web Vitals',
             headline: 'Monitor Core Web Vitals',
             description:
-                'Track LCP, FCP, INP, and CLS for performance optimization. Also available in PostHog Toolbar. <div><a href="/docs/web-analytics/web-vitals">What do all these silly acronyms mean?</a></div>',
+                'Track LCP, FCP, INP, and CLS for performance optimization. Also available in PostHog Toolbar. <div class="text-base"><a href="/docs/web-analytics/web-vitals">What do all these silly acronyms mean?</a></div>',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/web_vitals_4704da6644.png',
