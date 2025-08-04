@@ -123,3 +123,27 @@ If you only wish to get notifications about completed surveys, you can use the `
     alt="Handling partial responses with notifications/destinations"
     classes="rounded"
 />
+
+## Hosted surveys
+
+### Hosted surveys are showing in `getActiveMatchingSurveys`
+
+Make sure you upgrade `posthog-js` to at least version `1.258.1`, as it updates the SDK to support hosted surveys.
+
+### Hosted survey responses are anonymous / not linked to users
+
+If you're using hosted surveys and responses appear as anonymous users instead of being linked to your identified users, you're missing the `distinct_id` query parameter.
+
+**Solution:** Add the `distinct_id` parameter to your hosted survey URL:
+
+```
+https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
+```
+
+**Important:** The `distinct_id` value must match exactly what you use in `posthog.identify()` calls in your application. This is the only way PostHog can link the external survey response to the correct user profile.
+
+**Common mistakes:**
+- Using a different ID format than the one you use in `posthog.identify()` calls in your application (e.g., email vs user ID)
+- Forgetting to add the parameter entirely
+
+**Note:** In-app surveys (popover, API, feedback button) don't need this parameter as they automatically use the current user's identity.
