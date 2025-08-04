@@ -18,6 +18,8 @@ export const surveyTriggeredByEventLight = "https://res.cloudinary.com/dmukukwp6
 export const surveyTriggeredByEventDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg"
 export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg"
 export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg"
+export const presentationTypesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_03_at_23_18_18_2x_5447610bdd.jpg"
+export const presentationTypesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_03_at_23_17_46_2x_d11c449694.jpg"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -73,7 +75,18 @@ There are three options for displaying a survey:
 
 2. **API:** Implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
 
-3. **Feedback button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
+3. **Feedback Button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
+
+4. **Hosted Surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter.
+
+<ProductScreenshot
+    imageLight={presentationTypesLight}
+    imageDark={presentationTypesDark}
+    alt="Survey presentation types"
+    classes="rounded"
+/>
+
+Popover, API and Feedback Button surveys are considered *in-app* surveys, meaning they are displayed directly in your application using the [PostHog JS SDK](/docs/libraries/js). Hosted surveys are displayed via an external link, hosted by PostHog.
 
 ### Steps
 
@@ -113,9 +126,11 @@ Customization enables you to change the look, feel, and timing of your popover s
     classes="rounded"
 />
 
+**For hosted surveys, you can only customize colors and placeholders.**
+
 ### Display conditions
 
-This specifies the conditions a user must meet to be shown the survey. A user must meet **ALL** the conditions to be eligible.
+This specifies the conditions a user must meet to be shown the survey. A user must meet **ALL** the conditions to be eligible. **It is not available for hosted surveys, as those are accessed via an external link.**
 
 You can display your survey to specific users based on:
 

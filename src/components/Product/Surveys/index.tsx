@@ -514,15 +514,6 @@ export const ProductSurveys = () => {
                                 }
                             >
                                 <ul>
-                                    <li>
-                                        Forms
-                                        <ul className="pl-6">
-                                            <li className="text-sm">
-                                                PostHog offers multi-step surveys, but they won't be full-page forms
-                                                such as Typeform or Google Forms
-                                            </li>
-                                        </ul>
-                                    </li>
                                     <li>AI-powered analysis or recommendations based on results</li>
                                     <li>Limited formatting options</li>
                                 </ul>
