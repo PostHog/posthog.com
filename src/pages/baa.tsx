@@ -331,6 +331,9 @@ function BAAGenerator() {
                             appropriately safeguard Protected Health Information (PHI) as required by the Health
                             Insurance Portability and Accountability Act of 1996 (HIPAA).
                         </p>
+                         <p>
+                            This Agreement is only available to customers on the Teams Plan, as defined below, and is effective only if the Customer has the required add-on in place at the time of signing. By signing this Agreement, the Customer represents and warrants that they meet the requirements of the Teams Plan. This Agreement shall be null, void, and of no effect if the Customer does not meet those requirements at the time of signing, regardless of whether this Agreement has been electronically executed.
+                        </p>
                         <p>
                             Capitalized terms used in this Agreement and not otherwise defined shall have the meanings
                             ascribed to them in HIPAA.
