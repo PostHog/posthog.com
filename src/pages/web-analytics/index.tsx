@@ -44,12 +44,20 @@ const CustomPricingSlide = () => {
 
                     <p className="text-lg">
                         Web analytics is designed to work well with{' '}
+                        <Link to="/events" className="underline font-medium" state={{ newWindow: true }}>
+                            anonymous events
+                        </Link>
+                        .
+                    </p>
+
+                    <p className="text-lg mb-0">
+                        Learn more about{' '}
                         <Link
                             to="/blog/analytics-pricing"
                             className="underline font-medium"
                             state={{ newWindow: true }}
                         >
-                            anonymous events
+                            analytics pricing
                         </Link>
                         .
                     </p>
@@ -125,7 +133,18 @@ export default function WebAnalytics(): JSX.Element {
 
     const slides = createSlideConfig({
         // exclude: ['answers'],
-        // order: ['overview', 'pricing', 'features'],
+        order: [
+            'overview',
+            'customers',
+            'features',
+            'comparison-summary',
+            'feature-comparison',
+            'answers',
+            'pricing',
+            'docs',
+            'pairs-with',
+            'getting-started',
+        ],
         templates: {
             overview: 'stacked', // Use the horizontal split layout
         },

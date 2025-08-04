@@ -39,7 +39,7 @@ export default function FeatureComparisonSlide({ features, companies }: FeatureC
 
             <div className="max-w-6xl mx-auto flex-1 w-full min-h-0">
                 <ScrollArea className="">
-                    <table className="w-full border-collapse border border-primary">
+                    <table className="w-full border-collapse border border-primary mb-8 [&_a]:underline [&_a]:font-semibold">
                         <thead className="sticky top-0">
                             <tr className="bg-accent align-top">
                                 <th className="border border-primary px-2 py-1.5 text-left font-semibold">Feature</th>

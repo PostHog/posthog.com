@@ -133,17 +133,44 @@ export const webAnalytics = {
             ],
         },
         {
+            title: 'Core Web Vitals',
+            headline: 'Monitor Core Web Vitals',
+            description:
+                'Track LCP, FCP, INP, and CLS for performance optimization. Also available in PostHog Toolbar. <div><a href="/docs/web-analytics/web-vitals">What do all these silly acronyms mean?</a></div>',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/w_1000,c_limit,q_auto,f_auto/web_vitals_4704da6644.png',
+                    alt: 'Web vitals',
+                    shadow: true,
+                },
+            ],
+            features: [
+                {
+                    title: 'Graph changes over time',
+                    description: 'Monitor changes to your performance optimization metrics',
+                },
+                {
+                    title: 'Find which paths have good and bad performance',
+                    description: 'See paths broken down by load time',
+                },
+                {
+                    title: 'Filtering options',
+                    description: 'Analyze by domain, path, device type, and user properties',
+                },
+                {
+                    title: 'Analyze by performance percentile',
+                    description: 'Start with p90 or optimize even further',
+                },
+            ],
+        },
+        {
             title: 'Advanced analytics',
             headline: 'Go beyond basic metrics with powerful insights',
-            description: 'Track scroll depth, web vitals, conversions, and revenue directly in your web analytics.',
+            description: 'Track scroll depth, conversions, and revenue directly in your web analytics.',
             features: [
                 {
                     title: 'Scroll depth tracking',
                     description: 'See how far users scroll and what content they actually read',
-                },
-                {
-                    title: 'Web vitals (LCP, FCP, INP, CLS)',
-                    description: 'Monitor Core Web Vitals for performance optimization',
                 },
                 {
                     title: 'Conversion goals',
@@ -253,7 +280,7 @@ export const webAnalytics = {
     ],
     questions: [
         {
-            question: 'Fine broken links (404s)',
+            question: 'Find broken links (404s)',
             url: '/tutorials/broken-link-checker',
         },
         {
@@ -261,8 +288,32 @@ export const webAnalytics = {
             url: '/tutorials/cookieless-tracking',
         },
         {
+            question: 'Cross-domain tracking',
+            url: '/tutorials/cross-domain-tracking',
+        },
+        {
+            question: 'How to capture paths from hash-based routing',
+            url: '/tutorials/hash-based-routing',
+        },
+        {
+            question: 'What are Core Web Vitals?',
+            url: '/docs/web-analytics/web-vitals',
+        },
+        {
             question: 'Identifying users',
             url: '/tutorials/identifying-users-guide',
+        },
+        {
+            question: 'Squarespace analytics',
+            url: '/tutorials/squarespace-analytics',
+        },
+        {
+            question: 'Framer analytics',
+            url: '/tutorials/framer-analytics',
+        },
+        {
+            question: 'Ghost CMS analytics',
+            url: '/tutorials/ghost-analytics',
         },
         {
             question: 'A non-technical guide to PostHog data',
@@ -372,7 +423,7 @@ export const webAnalytics = {
                 feature: 'Web Vitals reporting',
                 companies: {
                     ga4: true,
-                    matomo: '<a href="https://matomo.org/guide/reports/seo-web-vitals/">On-premise only</a>',
+                    matomo: '<a href="https://matomo.org/guide/reports/seo-web-vitals/" target="_blank" rel="noopener noreferrer">On-premise only</a>',
                     posthog: true,
                 },
             },
@@ -500,7 +551,7 @@ export const webAnalytics = {
     ],
     presenterNotes: {
         overview:
-            "<strong>Presenter notes:</strong> Google took something great (GA 3) and made it worse. So we built what GA3 should have evolved into - simple, privacy-focused, no sampling. Works out of the box. Plus it's part of the whole PostHog platform, so you can jump from a traffic spike to watching recordings of those exact sessions. And no cookies required if you don't want them.",
+            "<strong>Presenter notes:</strong> Google took something great (GA3) and made it worse. So we built what GA3 should have evolved into - simple, privacy-focused, no sampling. Works out of the box. Plus it's part of the whole PostHog platform, so you can jump from a traffic spike to watching recordings of those exact sessions. And no cookies required if you don't want them.",
         customers:
             "Y Combinator gets 30% more data than GA4 because you can create a reverse proxy which privacy tools can't block. Significa ditched Plausible for us - more powerful, same privacy focus. Creatify summed it up: 'It's so much better than GA4.' These aren't edge cases. PostHog Web Analytics can't replace *everything* in GA4 (yet) like advanced attribution features, but we're getting there.",
         features:
