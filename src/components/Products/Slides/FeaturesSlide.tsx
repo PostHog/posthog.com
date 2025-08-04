@@ -102,7 +102,9 @@ export default function FeaturesSlide({ features, backgroundImage }: FeaturesSli
                                         className={`mt-4 text-xl [&_code]:text-xl ${
                                             item.layout === 'columns' ? 'text-left' : 'text-center'
                                         }`}
-                                        dangerouslySetInnerHTML={{ __html: item.description }}
+                                        {...(typeof item.description === 'string'
+                                            ? { dangerouslySetInnerHTML: { __html: item.description } }
+                                            : { children: item.description })}
                                     />
                                 )}
                             </div>
