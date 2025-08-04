@@ -18,10 +18,10 @@ export const surveyTriggeredByEventLight = "https://res.cloudinary.com/dmukukwp6
 export const surveyTriggeredByEventDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg"
 export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg"
 export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg"
-export const presentationTypesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_03_at_23_18_18_2x_5447610bdd.jpg"
-export const presentationTypesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_03_at_23_17_46_2x_d11c449694.jpg"
-export const copySurveyLinkLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_01_14_59_2_2x_c5ba68ce3e.jpg"
-export const copySurveyLinkDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_01_14_28_2x_225a93d88b.jpg"
+export const presentationTypesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg"
+export const presentationTypesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg"
+export const copySurveyLinkLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg"
+export const copySurveyLinkDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_39_26_2x_11ecb9914d.jpg"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -79,7 +79,7 @@ There are three options for displaying a survey:
 
 3. **Feedback button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
 
-4. **Hosted Surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter, which will allow you to link responses to a specific user.
+4. **Hosted surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
 
 <ProductScreenshot
     imageLight={presentationTypesLight}
@@ -88,7 +88,23 @@ There are three options for displaying a survey:
     classes="rounded"
 />
 
-Popover, API, and feedback button surveys are considered *in-app* surveys, meaning they are displayed directly in your application using the [PostHog JS SDK](/docs/libraries/js). Hosted surveys are displayed via an external link, hosted by PostHog.
+Popover, API, and feedback button surveys are considered *in-app* surveys, meaning they are displayed directly in your application using our SDKs. Hosted surveys are displayed via an external URLs, hosted by PostHog.
+
+#### Identifying respondents on hosted surveys
+
+**In-app surveys** automatically link responses to users when you [identify users](/docs/product-analytics/identify) in your app.
+
+**Hosted surveys** require manual user linking since they're accessed via external URLs. To connect survey responses to specific users, add the `distinct_id` query parameter to your survey URL:
+
+```
+https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
+```
+
+**Important:** Use the exact same `distinct_id` value that you pass to `posthog.identify()` in your application. This ensures survey responses appear in the correct user's profile.
+
+Without the parameter, responses are collected anonymously and cannot be linked to users.
+With the parameter, responses are attributed to the specified user, enabling you to see survey data alongside other user events and properties.
+
 
 ### Steps
 
@@ -132,7 +148,9 @@ For hosted surveys, you can only customize colors and placeholders.
 
 ### Display conditions
 
-This specifies the conditions a user must meet to be shown the survey. A user must meet **ALL** the conditions to be eligible.
+> Display conditions are **not available for hosted surveys**. Any user who visits the link is shown the survey, as long as it is launched and still collecting responses.
+
+This specifies the conditions a user must meet to be shown an in-app survey. A user must meet **ALL** the conditions to be eligible.
 
 You can display your survey to specific users based on:
 
@@ -157,7 +175,6 @@ You can display your survey to specific users based on:
     classes="rounded"
 />
 
-Display conditions are **not available for hosted surveys**. Any user who visits the link is shown the survey, as long as it is launched and still collecting responses.
 
 ### Completion conditions
 
@@ -233,7 +250,7 @@ If you've created a [popover survey](#presentation), your survey will begin show
 
 If you've created an [API survey](#presentation), you'll need to add your [custom survey code](/docs/surveys/implementing-custom-surveys) before launching.
 
-When you launch a [hosted survey](#presentation), you'll get a link you can share with your users. You can also copy it by clicking **Copy external survey**.
+When you launch a [hosted survey](#presentation), you'll get a link you can share with your users. You can also copy it by clicking **Copy URL**.
 
 <ProductScreenshot
     imageLight={copySurveyLinkLight}
