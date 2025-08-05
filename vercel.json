@@ -1532,6 +1532,10 @@
         {
             "source": "/docs/cdp/url-query",
             "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+        },
+        {
+            "source": "/teams/cs-onboarding",
+            "destination": "/teams/customer-success"
         }
     ],
     "headers": [
