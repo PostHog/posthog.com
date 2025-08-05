@@ -42,6 +42,10 @@ First, create the flag that other flags will depend on:
 5. Set the condition (e.g., flag equals `true` or specific variant)
 6. Configure additional conditions and rollout percentage as needed
 
+### Step 3: Evaluate the dependent flag
+
+When you evaluate a dependent flag, PostHog will automatically evaluate its chain of dependencies. For example, when evaluating the `dependent_flag` flag, PostHog will evaluate the `base_flag` flag first and use its value to determine if the `dependent_flag` condition is met.
+
 ### Example: Beta program dependency
 
 Here's a common pattern where you want to enable a new feature only for users in your beta program:
