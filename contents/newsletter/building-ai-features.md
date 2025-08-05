@@ -66,7 +66,7 @@ Other companies have found this pattern works for them too:
 - [Website and app generation](/newsletter/vibe-designing) from Lovable, Bolt, and other AI-powered app builders
 - Visual and design generation in Figma, Canva, and more design tools
 
-For each of these, the user could probably create what the model generates, just a lot slower. Speeding up genmeration helps users realize the value of a product and accomplish their goals faster. As Stephen Whitworth of [incident.io](http://incident.io) said in [Lenny’s Newsletter](lennysnewsletter.com/p/counterintuitive-advice-for-building):
+For each of these, the user could probably create what the model generates, just a lot slower. Speeding up generation helps users realize the value of a product and accomplish their goals faster. As Stephen Whitworth of [incident.io](http://incident.io) said in [Lenny's Newsletter](lennysnewsletter.com/p/counterintuitive-advice-for-building):
 
 > Look less at ‘what cool new things could AI do’ but more at ‘what’s the thing our users do 100 times a day that AI could make better.’ An example for us is writing a summary for an incident. It turns out that users vastly, vastly prefer automatically generated summaries to writing these themselves; 75% of incident summaries are now AI-generated.
 
