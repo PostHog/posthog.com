@@ -1,6 +1,6 @@
 ---
 title: "CDP vs data warehouse: Which should you use and why"
-date: 2025-07-31
+date: 2025-08-05
 author:
  - ian-vanagas
 tags:
@@ -22,7 +22,12 @@ In a nutshell, a CDP does three things:
 2. Creates and stores a combined customer profile based on all these sources. Data scattered between platforms gets aggregated in one place.
 3. Sends customer data to [destinations](/docs/cdp/destinations) like ad platforms, CRMs, and more.
 
-![What is a CDP?](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cdp_a91655db2e.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/CDP_desktop_light_16c5bd08ab.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/CDP_desktop_dark_e30977fa61.png"
+  alt="What is a CDP?"
+  classes="rounded"
+/>
 
 Teams need this because they:
 
@@ -60,8 +65,12 @@ It does this by having a significantly different structure from traditional data
 2. **Data layer.** Where the data lives, along with all the metadata and schema needed to make use of it. Data is segmented and, typically, governance and security rules can be set up here.
 
 3. **Data-out:** The warehouse itself usually has systems (AKA engines) to efficiently run the type of workloads you need, for example, aggregate analytics queries.
-
-![What is a data warehouse?](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/warehouse_342ea35d84.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Server_Chart_desktop_light_46e5e0a582.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Server_Chart_desktop_dark_d44ccb7f90.png"
+  alt="What is a data warehouse?"
+  classes="rounded"
+/>
 
 Once you’ve extracted data from the data warehouse, you usually rely on other tools to make use of it, such as  business intelligence tools for visualization or CDPs with reverse ETL functionality for activation.
 
@@ -94,7 +103,12 @@ Once you’ve extracted data from the data warehouse, you usually rely on other 
 
 Actually, you will need both eventually – it's more about when you should adopt them. If I had to graph the importance of each over time, it would look like this:
 
-![Graph of the importance of a CDP and data warehouse over time](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/importance_78e2f11f9d.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Data_Warehouse_Chart_desktop_Light_c10fa0dd26.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Data_Warehouse_Chart_desktop_dark_97743ebb16.png"
+  alt="Graph of the importance of a CDP and data warehouse over time"
+  classes="rounded"
+/>
 
 [Early-stage companies](/founders/early-stage-analytics) likely won’t find a data warehouse useful, but a CDP quickly provides significant help collecting and activating customer data to power early marketing efforts. 
 
@@ -104,7 +118,12 @@ This doesn’t mean abandoning your CDP, though. Teams can continue using the CD
 
 This creates a stack that looks like this:
 
-![CDP first](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cdp_first_d7bb5a9233.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/CDP_first_Feeding_a_Warehouse_desktop_light_9d6961856c.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/CDP_first_Feeding_a_Warehouse_desktop_dark_2aee415b7d.png"
+  alt="CDP first"
+  classes="rounded"
+/>
 
 As a company grows and adds more non-customer data, like logs and ERP data, the data warehouse becomes increasingly important as a source of truth. This also satisfies additional access, governance, and security requirements a data warehouse can handle.
 
@@ -112,7 +131,12 @@ Again, a CDP remains important as a company matures; it just decreases in relati
 
 Another way CDPs are useful later is reverse ETL. This means getting data *out* of the data warehouse and into all the tools a CDP has integrations with. At this phase, the stack might look like this:
 
-![Warehouse first](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/warehouse_first_0023fdb8dd.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Warehouse_first_Reverse_ETL_desktop_light_1e011d57ad.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Warehouse_first_Reverse_ETL_desktop_dark_bb57ba8810.png"
+  alt="Warehouse first"
+  classes="rounded"
+/>
 
 At huge scale, use cases fragment significantly. Each function will likely have their own set of specialized requirements that a data warehouse (if adopted) will likely play a large role in, but that’s beyond the scope of this post.
 
@@ -128,7 +152,12 @@ We and our customers have found both to be essential so in our effort to “[equ
 
 When compared with either of the stacks mentioned above, PostHog enables teams to have one that looks like this:
 
-![Unified stack](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/unified_0bf01bd084.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Unified_Platform_desktop_light_8c01e7cb38.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Unified_Platform_desktop_dark_a3fdfdbe14.png"
+  alt="Unified stack"
+  classes="rounded"
+/>
 
 Rather than the data spaghetti created by separate CDPs, data warehouses, and other tools, PostHog provides them all in a unified platform. This means teams have more of the tools they need as they grow and there is less need for migration or reimplementation. We can fulfill the use cases teams need whatever stage they are at, whether it is marketing campaign enrichment early or complex analysis from consolidated datasets later. 
 
