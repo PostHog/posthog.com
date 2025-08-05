@@ -5,10 +5,13 @@ author:
  - ian-vanagas
 featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cdp_vs_dw_06a0b878d6.png
+featuredImageType: full
 tags:
  - data warehouse
  - data pipelines
 ---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
 [Customer data platform](/cdp) (CDP) vs [data warehouse](/data-warehouse) is sort of like Batman vs Superman for people [who know SQL](/product-engineers/sql-for-analytics). They are seen as rivals and rely on different tools but often end up working together.
 
