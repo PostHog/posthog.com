@@ -8,34 +8,27 @@ availability:
   enterprise: full
 ---
 
-Feature flag dependencies allow you to create flags that are conditionally enabled
-based on the state of other flags. This enables sophisticated feature rollout
+Feature flag dependencies allow you to create flags that are conditionally enabled based on the state of other flags. This enables sophisticated feature rollout
 strategies where one flag's activation depends on another flag's value.
 
 ## When to use flag dependencies
 
 Flag dependencies are useful for:
 
-- **Gradual feature rollouts**: Enable a complex feature only after its
-  foundational components are active
-- **Conditional experiments**: Run experiments only on users who have specific
-  features enabled
-- **Safety mechanisms**: Ensure critical flags are enabled before activating
-  dependent features
-- **User segmentation**: Target users based on their participation in other
-  flag rollouts
+- **Gradual feature rollouts**: Enable a complex feature only after its foundational components are active
+- **Conditional experiments**: Run experiments only on users who have specific features enabled
+- **Safety mechanisms**: Ensure critical flags are enabled before activating dependent features
+- **User segmentation**: Target users based on their participation in other flag rollouts
 
 ## Setting up flag dependencies
 
-You can create flag dependencies through release conditions when creating or
-editing a feature flag.
+You can create flag dependencies through release conditions when creating or editing a feature flag.
 
 ### Step 1: Create your base flag
 
 First, create the flag that other flags will depend on:
 
-1. Navigate to [Feature flags](https://app.posthog.com/feature_flags) in your
-   PostHog app
+1. Navigate to [Feature flags](https://app.posthog.com/feature_flags) in your PostHog app
 2. Click **Create feature flag**
 3. Set up your base flag with appropriate release conditions
 4. Save the flag
@@ -51,8 +44,7 @@ First, create the flag that other flags will depend on:
 
 ### Example: Beta program dependency
 
-Here's a common pattern where you want to enable a new feature only for users
-in your beta program:
+Here's a common pattern where you want to enable a new feature only for users in your beta program:
 
 **Base flag**: `beta_program`
 
@@ -84,20 +76,15 @@ Feature flag dependencies support several condition types:
 
 ### Avoid circular dependencies
 
-PostHog prevents circular dependencies where Flag A depends on Flag B, and
-Flag B depends on Flag A. Always design your flag hierarchy to flow in one
-direction.
+PostHog prevents circular dependencies where Flag A depends on Flag B, and Flag B depends on Flag A. Always design your flag hierarchy to flow in one direction.
 
 ### Keep dependency chains simple
 
-While you can create complex dependency chains (A → B → C), simpler structures
-are easier to understand and debug. Consider flattening deep dependency chains
-when possible.
+While you can create complex dependency chains (A → B → C), simpler structures are easier to understand and debug. Consider flattening deep dependency chains when possible.
 
 ### Document your flag relationships
 
-Use descriptive flag names and maintain documentation about flag dependencies
-outside of PostHog to help your team understand the relationships.
+Use descriptive flag names and maintain documentation about flag dependencies outside of PostHog to help your team understand the relationships.
 
 ### Test dependency scenarios
 
@@ -114,33 +101,25 @@ When testing flags with dependencies:
 
 If your dependent flag isn't working as expected:
 
-1. **Check the base flag**: Ensure the flag your dependency relies on is
-   active and returning the expected value
-2. **Verify conditions**: Confirm the dependency condition matches the base
-   flag's return value exactly
-3. **Review rollout percentage**: Even if conditions are met, the rollout
-   percentage still applies
-4. **Check user properties**: Ensure the user meets all conditions, not just
-   the flag dependency
+1. **Check the base flag**: Ensure the flag your dependency relies on is active and returning the expected value
+2. **Verify conditions**: Confirm the dependency condition matches the base flag's return value exactly
+3. **Review rollout percentage**: Even if conditions are met, the rollout percentage still applies
+4. **Check user properties**: Ensure the user meets all conditions, not just the flag dependency
 
 ### Performance considerations
 
-Flag dependencies add minimal overhead to flag evaluation. However, be mindful
-of:
+Flag dependencies add minimal overhead to flag evaluation. However, be mindful of:
 
-- **Local evaluation**: Dependent flags may not work with local evaluation in
-  all SDKs
+- **Local evaluation**: At this time, dependent flags do not work with local evaluation in all SDKs
 - **API calls**: Each dependency may require additional flag evaluations
 
 ### Debugging with the PostHog toolbar
 
-Use the [PostHog toolbar](/docs/toolbar) to inspect flag values and verify
-that dependencies are working correctly in your application.
+Use the [PostHog toolbar](/docs/toolbar) to inspect flag values and verify that dependencies are working correctly in your application.
 
 ## API usage
 
-When using PostHog's API or SDKs, flag dependencies work automatically. The
-flag evaluation will handle dependency resolution:
+When using PostHog's API or SDKs, flag dependencies work automatically. The flag evaluation will handle dependency resolution:
 
 ```javascript
 // JavaScript example
@@ -156,15 +135,12 @@ is_new_dashboard_enabled = posthog.feature_enabled('new_dashboard', 'user_id')
 
 ## Limitations
 
-- Flag dependencies are resolved server-side and may not work with all local
-  evaluation scenarios
+- Flag dependencies are resolved server-side and may not work with all local evaluation scenarios
 - Circular dependencies are prevented and will result in an error
 - Self-referential dependencies (a flag depending on itself) are not allowed
 
 ## Next steps
 
 - Learn about [testing feature flags](/docs/feature-flags/testing)
-- Explore [best practices](/docs/feature-flags/best-practices) for feature flag
-  management
-- Set up [early access feature management](/docs/feature-flags/early-access-feature-management)
-  for beta programs
+- Explore [best practices](/docs/feature-flags/best-practices) for feature flag management
+- Set up [early access feature management](/docs/feature-flags/early-access-feature-management) for beta programs
