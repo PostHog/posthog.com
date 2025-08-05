@@ -30,7 +30,7 @@ export const Steps: React.FC<{ children: React.ReactNode }> = ({ children }) => 
     let numberCounter = 1
 
     return (
-        <section className="max-w-2xl mx-auto scroll-pt-[108px]">
+        <section className="scroll-pt-[108px]">
             <ol className="ml-0">
                 {React.Children.map(children, (child) => {
                     if (!React.isValidElement(child)) return null
@@ -72,7 +72,7 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
             <div className="hidden lg:block absolute left-4 w-[1px] border-l border-light dark:border-dark h-full opacity-70"></div>
 
             {/* Number/flag column - only show on lg+ */}
-            <div className="hidden lg:flex items-start mr-4 relative z-10">
+            <div className="hidden lg:flex items-start mr-2 relative z-10">
                 <div className="flex flex-col items-center relative">
                     <CopyAnchor id={anchorId} hovered={hovered} />
                     <div className="bg-tan dark:bg-dark py-2">
@@ -83,7 +83,7 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
                 </div>
             </div>
             <div className="min-w-0 flex-1">
-                <div className="relative">
+                <div className="relative pl-2">
                     <div className="flex items-center gap-2 font-semibold text-base text-primary dark:text-primary-dark pt-2">
                         {!titleSize || titleSize === 'h2' ? (
                             <h2 id={anchorId} className="!my-0 !text-2xl truncate">
@@ -106,11 +106,11 @@ export const Step: React.FC<StepProps & { number?: number }> = ({
                     </div>
                 </div>
                 {subtitle && subtitle.trim() && (
-                    <div className="text-sm text-primary/75 dark:text-primary-dark/75 mt-1 mb-2">
+                    <div className="text-sm text-primary/75 dark:text-primary-dark/75 mt-1 mb-2 pl-2">
                         <em>{subtitle}</em>
                     </div>
                 )}
-                <div className="mt-4 mb-4 overflow-x-auto overflow-y-hidden">{children}</div>
+                <div className="mt-4 mb-4 overflow-x-auto overflow-y-hidden pl-2">{children}</div>
             </div>
         </li>
     )
