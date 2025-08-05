@@ -70,7 +70,6 @@ Call structure:
   - Annual plans: prioritize accounts with contract renewals in the next 3-4 months
   - Monthly plans: look for significant growth within the last quarter
 - Accounts with platform add-ons
-  - Customers on legacy "Teams" add-on ($450/month) could save $200 by switching to the "Boost" add-on. The teams add-on has been split into:
+  - Customers on legacy "Teams" add-on ($450/month) could save $200 by switching to the "Boost" add-on if they do not require SAML SSO or managed reserve proxy. The teams add-on has now been split into:
     - [Boost add-on](https://posthog.com/platform-addons#boost-add-on) ($250/month)
     - [Scale add-on](https://posthog.com/platform-addons#scale-add-on) ($750/month)
-    - [Enterprise add-on](https://posthog.com/platform-addons#enterprise-add-on) ($2000/month)
