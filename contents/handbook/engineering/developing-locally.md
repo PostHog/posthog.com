@@ -556,7 +556,7 @@ This allows you to easily confirm that emails are being sent and formatted corre
 
 Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
 
-## Extra: Debugging with Jaeger
+## Extra: Enable tracing with Jaeger
 
 To debug with Jaeger, you can use the following command:
 
