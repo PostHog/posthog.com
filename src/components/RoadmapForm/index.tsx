@@ -301,10 +301,10 @@ const SocialSharing = ({ values, setFieldValue }) => {
     const [showHogSelector, setShowHogSelector] = useState(false)
 
     useEffect(() => {
-        if (!socialValues.title && values.title) {
+        if (values.title) {
             setFieldValue('social.title', values.title)
         }
-    }, [])
+    }, [values.title, setFieldValue])
 
     return (
         <div className="p-4 border-t col-span-2">
