@@ -54,10 +54,12 @@ For example, if a customer visits your website, signs up for your mobile app, an
 Creating unified records for all your customers makes your data much more accurate and actionable.
 
 <CalloutBox icon="IconQuestion" title="What are some CDP use cases?" type="fyi">
+
   - Marketers sending customer segments to paid ads platforms to enhance ad targeting.
   - Growth teams using segments to target personalization and [experimentation](/docs/experiments) (A/B testing).
   - Salespeople enriching customer profiles with usage data, lifecycle marketing engagement, and more.
   - Analysts getting more accurate and de-duplicated data in their analytics and business intelligence tools.
+
 </CalloutBox>
 
 ## What is a data warehouse?
