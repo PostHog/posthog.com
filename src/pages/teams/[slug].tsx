@@ -132,20 +132,18 @@ export default function TeamPage(props: TeamPageProps) {
             rightActionButtons={editing ? editActions : editButton}
             isEditing={editing}
         >
-            {body && (
-                <Team
-                    emojis={team?.emojis}
-                    roadmaps={team?.roadmaps}
-                    objectives={objectives}
-                    body={body}
-                    slug={slug?.split('/').pop() || ''}
-                    editing={editing}
-                    setEditing={setEditing}
-                    saving={saving}
-                    setSaving={setSaving}
-                    onSaveRef={onSaveRef}
-                />
-            )}
+            <Team
+                emojis={team?.emojis}
+                roadmaps={team?.roadmaps}
+                objectives={objectives}
+                body={body}
+                slug={slug?.split('/').pop() || ''}
+                editing={editing}
+                setEditing={setEditing}
+                saving={saving}
+                setSaving={setSaving}
+                onSaveRef={onSaveRef}
+            />
         </ReaderView>
     )
 }

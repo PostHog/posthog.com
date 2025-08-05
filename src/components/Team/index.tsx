@@ -694,52 +694,62 @@ export default function Team({
                 </div>
             </Fieldset>
 
-            <h2>Roadmap</h2>
+            {(hasInProgress || hasUnderConsideration || recentlyShipped) && (
+                <>
+                    <h2>Roadmap</h2>
 
-            {hasInProgress && (
-                <Fieldset legend="What we're building">
-                    <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
-                        <ul className="list-none m-0 p-0 flex flex-col gap-4">
-                            {inProgress.map((roadmap) => (
-                                <InProgress key={roadmap.squeakId} {...roadmap} />
-                            ))}
-                        </ul>
-                        {(updates.length > 0 || isModerator) && (
-                            <div className="lg:max-w-[340px] w-full flex-shrink-0">
-                                {isModerator && (
-                                    <div className={`${updates.length > 0 ? 'mb-8 pb-8 border-input ' : ''}`}>
-                                        <TeamUpdate teamName={name} hideTeamSelect />
+                    {hasInProgress && (
+                        <Fieldset legend="What we're building">
+                            <div className="lg:flex lg:space-x-12 space-y-8 lg:space-y-0 items-start">
+                                <ul className="list-none m-0 p-0 flex flex-col gap-4">
+                                    {inProgress.map((roadmap) => (
+                                        <InProgress key={roadmap.squeakId} {...roadmap} />
+                                    ))}
+                                </ul>
+                                {(updates.length > 0 || isModerator) && (
+                                    <div className="lg:max-w-[340px] w-full flex-shrink-0">
+                                        {isModerator && (
+                                            <div className={`${updates.length > 0 ? 'mb-8 pb-8 border-input ' : ''}`}>
+                                                <TeamUpdate teamName={name} hideTeamSelect />
+                                            </div>
+                                        )}
+                                        {updates.length > 0 && (
+                                            <Question key={updates[0].question} id={updates[0].question} />
+                                        )}
                                     </div>
                                 )}
-                                {updates.length > 0 && <Question key={updates[0].question} id={updates[0].question} />}
                             </div>
-                        )}
-                    </div>
-                </Fieldset>
+                        </Fieldset>
+                    )}
+                    <Roadmap
+                        hasUnderConsideration={hasUnderConsideration}
+                        underConsideration={underConsideration}
+                        recentlyShipped={recentlyShipped}
+                    />
+                </>
             )}
-            <Roadmap
-                hasUnderConsideration={hasUnderConsideration}
-                underConsideration={underConsideration}
-                recentlyShipped={recentlyShipped}
-            />
 
-            <h2>Goals</h2>
+            {objectives && (
+                <>
+                    <h2>Goals</h2>
+                    <div className="article-content team-page-content">
+                        <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
+                            <div dangerouslySetInnerHTML={{ __html: objectives }} />
+                        </MDXProvider>
+                    </div>
+                </>
+            )}
 
-            <div className="article-content team-page-content">
-                {objectives && (
-                    <MDXProvider components={{ TeamMember: TeamMemberComponent, FutureTeamMember }}>
-                        <div dangerouslySetInnerHTML={{ __html: objectives }} />
-                    </MDXProvider>
-                )}
-            </div>
-
-            <h2>Handbook</h2>
-
-            <div className="article-content team-page-content">
-                <MDXProvider components={{ PrivateLink }}>
-                    <MDXRenderer>{body}</MDXRenderer>
-                </MDXProvider>
-            </div>
+            {body && (
+                <>
+                    <h2>Handbook</h2>
+                    <div className="article-content team-page-content">
+                        <MDXProvider components={{ PrivateLink }}>
+                            <MDXRenderer>{body}</MDXRenderer>
+                        </MDXProvider>
+                    </div>
+                </>
+            )}
         </>
     )
 }

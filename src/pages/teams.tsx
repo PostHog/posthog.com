@@ -16,9 +16,10 @@ import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
-import { IconX } from '@posthog/icons'
+import { IconPlus, IconX } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useWindow } from '../context/Window'
+import OSButton from 'components/OSButton'
 
 const Teams: React.FC = () => {
     const { appWindow } = useWindow()
@@ -180,6 +181,7 @@ const Teams: React.FC = () => {
         <ReaderView
             onSearch={(searchTerm) => setSearchTerm(searchTerm)}
             leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+            rightActionButtons={isModerator && <OSButton size="md" icon={<IconPlus />} asLink to="/teams/new" />}
         >
             <SEO
                 title="Teams - PostHog"
@@ -369,13 +371,6 @@ const Teams: React.FC = () => {
                                         </Link>
                                     )
                                 )}
-                            {isModerator && (
-                                <div className="flex justify-center items-center">
-                                    <CallToAction to="/teams/new" size="md">
-                                        New team
-                                    </CallToAction>
-                                </div>
-                            )}
                         </div>
                     </div>
                 </div>
