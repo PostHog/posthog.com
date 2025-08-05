@@ -3,6 +3,8 @@ title: "CDP vs data warehouse: Which should you use and why"
 date: 2025-08-05
 author:
  - ian-vanagas
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cdp_vs_dw_06a0b878d6.png
 tags:
  - data warehouse
  - data pipelines
