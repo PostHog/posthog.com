@@ -14,7 +14,7 @@ Our [team](/people) is spread across the world, and so are our new joiners. In o
 
 ## Onboarding checklist
 
-This is maintained as an issue template in GitHub, [which you can view here](https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md). The People team will create a new onboarding issue for each new joiner.
+This is maintained as an issue template in GitHub, <PrivateLink url="https://github.com/PostHog/company-internal/blob/master/.github/ISSUE_TEMPLATE/onboarding.md">which you can view here</PrivateLink>. The People team will create a new onboarding issue for each new joiner.
 
 ### Onboarding email
 
@@ -125,22 +125,19 @@ We use a number of different tools to organise our work and communicate at PostH
 - PagerDuty
 - Heroku
 - Grafana
-- Sentry
 
 ### Design
 - Figma
 
 ### Ops, People & CS
-- HubSpot - customer CRM
+- Salesforce - customer CRM
 - Zendesk - our support platform
-- Pry - financial modelling
+- Mosaic - financial modelling
 - Carta - cap table management
 - Fondo - US accounting
-- Calendly - external meeting scheduling (e.g. demos, sales)
-- Gusto - US payroll and benefits management
 - Deel - international payroll and contracts management
 - Ashby - recruitment
-- Brilliant - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
+- Micromerch - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 

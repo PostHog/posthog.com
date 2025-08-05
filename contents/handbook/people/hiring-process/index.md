@@ -28,7 +28,9 @@ We are all-remote, but we have a few limitations on the countries we are able to
 
 - We hire within -8 to +2 GMT timezones. Beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
 - Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
-- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk.
+- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs.
+  - In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. We have done this before successfully in Brazil and Uruguay.
+- We have an entity in Germany, which allows us to hire people directly. However, due to employment restrictions with companies with over 10 people, we have reached the total number of employees that we will hire here, so we will no longer be hiring in Germany and no current team member will be able to relocate to Germany.
 
 ## Hiring Process         
 
@@ -154,7 +156,7 @@ Ashby is a pretty intuitive platform to use, but here are a few helpful tips to 
 *   Link your Gmail account in Settings if you are in direct contact with candidates. This means any emails you send directly from your inbox will automatically be captured on their Ashby record for everyone on the hiring team to see.
 *   When emailing candidates from within Ashby, you can select a Template from the dropdown bar (and customize it if you want). If you find yourself writing the same email, it is worth saving as a template.
 
-If you receive an application via email or some other non-Ashby channel like Slack, pass it on to careers@posthog.com. 
+If you receive an application via email or some other non-Ashby channel like Slack from a candidate you think we should definitely interview, tell them to apply directly via the website and forward it to careers@posthog.com. You will get people reaching out to you over LinkedIn regularly - only forward the high priority candidates to the talent team.
 
 ### Booking interviews through Ashby
 

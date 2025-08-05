@@ -31,7 +31,7 @@ cd fake-door
 npm i posthog-js
 ```
 
-After installing `posthog-js`, set up the PostHog initialization. This requires going to our `app` folder, creating a `providers.js` file, adding our PostHog initialization behind a window check with `opt_in_site_apps: true` (for later), and creating a provider component like this:
+After installing `posthog-js`, set up the PostHog initialization. This requires going to our `app` folder, creating a `providers.js` file, adding our PostHog initialization behind a window check, and creating a provider component like this:
 
 ```js-web
 // app/providers.js
@@ -44,8 +44,7 @@ export function PHProvider({ children }) {
   useEffect(() => {
     posthog.init('<ph_project_api_key>', {
       api_host: '<ph_client_api_host>',
-      defaults: '<ph_posthog_js_defaults>',
-      opt_in_site_apps: true
+      defaults: '<ph_posthog_js_defaults>'
     })
   }, []);
 
@@ -138,8 +137,6 @@ Next, we can set up the survey we mention. To do this, go to the [surveys tab in
 2. Add a question like "What are you looking for in this new feature?"
 3. Add a target on URLs containing `/new`.
 4. Click "Save as draft."
-
-Because we set `opt_in_site_apps: true` in our PostHog initialization earlier, all we need to do is enable the survey site app. Either click the link on your draft survey page or go to the [apps tab](https://app.posthog.com/project/apps) and search for "Surveys app," enable it, and press save.
 
 > **Don’t want a popover?** You can learn how to implement an integrated, custom survey component in our "[How to create custom surveys](/tutorials/survey)" tutorial.
 

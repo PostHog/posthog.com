@@ -2,7 +2,7 @@ import React from 'react'
 import { Avatar } from 'components/MainNav'
 import Stickers from 'components/ProfileStickers'
 import getAvatarURL from 'components/Squeak/util/getAvatar'
-import Markdown from 'markdown-to-jsx'
+import Markdown from 'components/Squeak/components/Markdown'
 import { CallToAction } from 'components/CallToAction'
 
 export interface ProfileData {

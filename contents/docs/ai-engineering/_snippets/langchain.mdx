@@ -92,7 +92,7 @@ const prompt = ChatPromptTemplate.fromMessages([
 ]);
 
 const model = new ChatOpenAI({
-  openAIApiKey: "your_openai_api_key"
+  apiKey: "your_openai_api_key"
 });
 
 const chain = prompt.pipe(model);

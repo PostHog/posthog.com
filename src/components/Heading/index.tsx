@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
 
-const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
+export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }): JSX.Element => {
     const [visible, setVisible] = useState(false)
     const { href } = useLocation()
     const handleClick = () => {

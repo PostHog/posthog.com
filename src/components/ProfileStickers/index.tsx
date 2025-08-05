@@ -12,6 +12,7 @@ import {
     StickerFlagCO,
     StickerFlagCY,
     StickerFlagDE,
+    StickerFlagDK,
     StickerFlagDO,
     StickerFlagES,
     StickerFlagFI,
@@ -61,6 +62,8 @@ const Stickers = ({ location, country, pineappleOnPizza, isTeamLead, editing, id
                     <StickerFlagGR className="w-8 h-8" />
                 ) : country === 'DE' ? (
                     <StickerFlagDE className="w-8 h-8" />
+                ) : country === 'DK' ? (
+                    <StickerFlagDK className="w-8 h-8" />
                 ) : country === 'DO' ? (
                     <StickerFlagDO className="w-8 h-8" />
                 ) : country === 'ES' ? (
