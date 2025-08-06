@@ -318,7 +318,7 @@ export const ProductDataWarehouse = () => {
                 } px-5 py-10 md:pt-0 md:-mt-12 pb-0`}
             >
                 <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pb-0`}>
-                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured tutorials</h3>
+                    <h3 className="text-3xl lg:text-4xl text-center mb-2">Featured guides</h3>
                     <p className="mt-0 text-opacity-75 text-center mb-6">
                         Visit the <Link to="/tutorials">tutorials</Link> section for more.
                     </p>
