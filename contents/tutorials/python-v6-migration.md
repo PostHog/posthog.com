@@ -141,7 +141,7 @@ def handle_request(request):
   posthog.capture('event_name')
 ```
 
-All events captured under this context's scope, which is all events captured during the handling of this request will be identified by the distinct ID of the user and session ID.
+All events captured under this context's scope, which is all events captured during the handling of this request, will be identified by the distinct ID of the user and session ID.
 
 Alternatively, you can specify distinct ID explicitly during a capture and set persons properties:
 
@@ -239,7 +239,7 @@ posthog.set(
 
 ### 2. Replace `screen()` and `page()` calls
 
-The methods `screen()` and `page()` are removed. They are aliases for the `capture()` method. Instead, use `capture()` explicitly to capture `$pageview` events. You can check the [activity tab](https://app.posthog.com/activity/explore) to see what properties are captured in a `$pageview` event.
+The methods `screen()` and `page()` are removed. They are aliases for the `capture()` method. Instead, use `capture()` explicitly to capture `$pageview` or `$screen` events. You can check the [activity tab](https://app.posthog.com/activity/explore) to see what properties are captured in a `$pageview` event.
 
 **Before:**
 
