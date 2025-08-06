@@ -80,19 +80,12 @@ def process_payment():
 
 def update_inventory():
     tag("order_steps", [*get_tags()["order_steps"], "update_inventory"])
-<<<<<<< HEAD
     capture("order_completed")
 ```
 
-When `capture` is finally called, the `order_completed` event will have a custom event property called `order_steps` with a list of values `"validate_order"`, `"process_payment"`, and `"update_inventory"`.
+When `capture` is finally called, the `order_completed` event will have a custom event property called `order_steps` with a list of values `["validate_order", "process_payment", "update_inventory"]`.
 
 Contexts can also be nested. This means that:
-=======
-    capture("order_completed") # HIGHLIGHT
-```
-
-When capture is finally called, the `order_completed` event will have a custom event property called `order_steps` with the value `["validate_order", "process_payment", "update_inventory"]`.
->>>>>>> 142fc05a2fd18a12bd6c9d3bb3f2751b47f955a2
 
 - Parent context values are shared with child contexts. 
 - Child contexts can override parent context value within the child context's scope.
