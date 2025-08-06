@@ -46,12 +46,14 @@ You can find a full list of these in [supported ClickHouse functions](/docs/sql/
 - `toStartOfYear`, `toStartOfMonth`, `toMonday`, `toStartOfDay`, `toStartOfMinute`: rounds date down to the nearest year, month, Monday, day, hour, or minute respectively
 - `dateDiff('unit', startdate, enddate)`: Returns the count in `unit` between `startdate` and `enddate`.
 - `formatDateTime`: Formats a time according to a [MySQL datetime format string](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_date-format).
+- `parseDateTimeBestEffort`: Converts most human-readable dates into a datetime.
 
 ```sql
 SELECT 
    formatDateTime(now(), '%a %b %T') AS current_time,
    toDayOfWeek(now()) AS current_day_of_week,
-   dateDiff('day', timestamp, now()) AS days_since_event
+   dateDiff('day', timestamp, now()) AS days_since_event,
+   parseDateTimeBestEffort('4-Dec-2023') AS converted_date
 FROM events
 WHERE timestamp > now() - interval 1 day
 ```
@@ -179,6 +181,16 @@ WHERE
 ORDER BY
     min_first_timestamp DESC
 LIMIT 10
+```
+
+### Actions
+
+To use actions in SQL by using the `matchesAction()` function with the name of your action. For example, to get a count of the action clicked homepage button, you can do:
+
+```sql
+SELECT count() 
+FROM events 
+WHERE matchesAction('clicked homepage button')
 ```
 
 ### Links
