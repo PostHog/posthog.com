@@ -1144,16 +1144,16 @@
                 },
                 {
                     "category": "",
-                    "description": "push() keeps the standard async-array-push behavior around after the lib is loaded. This is only useful for external integrations that do not wish to rely on our convenience methods (created in the snippet).\n### Usage: posthog.push(['register',  a: 'b' ]);",
+                    "description": "push() keeps the standard async-array-push behavior around after the lib is loaded. This is only useful for external integrations that do not wish to rely on our convenience methods (created in the snippet).",
                     "details": null,
                     "id": "push",
                     "showDocs": true,
                     "title": "push",
                     "examples": [
                         {
-                            "id": "push",
-                            "name": "Generated example for push",
-                            "code": "// Generated example for push\nposthog.push();"
+                            "id": "",
+                            "name": "",
+                            "code": "\n\nposthog.push(['register', { a: 'b' }]);\n\n\n"
                         }
                     ],
                     "releaseTag": "public",
