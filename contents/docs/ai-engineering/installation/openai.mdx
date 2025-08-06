@@ -1,4 +1,36 @@
-Start by installing the OpenAI SDK:
+---
+title: OpenAI observability installation
+showStepsToc: true
+---
+
+import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
+import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+
+LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
+
+<Steps>
+
+<Step title="Install the PostHog SDK" badge="required">
+
+Setting up observability starts with installing the PostHog SDK for your language. LLM observability works best with our Python and Node SDKs.
+
+<MultiLanguage>
+
+```bash file=Python
+pip install posthog
+```
+
+```bash file=TypeScript
+npm install @posthog/ai posthog-node
+```
+
+</MultiLanguage>
+
+</Step>
+
+<Step title="Install the Open AI SDK" badge="required">
+
+Install the OpenAI SDK:
 
 <MultiLanguage>
 
@@ -11,6 +43,12 @@ npm install openai
 ```
 
 </MultiLanguage>
+
+<LLMsSDKsCallout />
+
+</Step>
+
+<Step title="Initialize PostHog and OpenAI client" badge="required">
 
 In the spot where you initialize the OpenAI SDK, import PostHog and our OpenAI wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to our OpenAI wrapper.
 
@@ -55,6 +93,10 @@ phClient.shutdown()
 
 > **Note:** This also works with the `AsyncOpenAI` client. 
 
+</Step>
+
+<Step title="Make OpenAI calls" badge="required">
+
 Now, when you use the OpenAI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_reasoning_tokens`, `$ai_tools`, `$ai_output_choices`, and `$ai_output_tokens`.
 
 You can also capture or modify additional properties with the distinct ID, trace ID, properties, groups, and privacy mode parameters.
@@ -77,6 +119,7 @@ response = client.responses.create(
 print(response.choices[0].message.content)
 ```
 
+
 ```ts
 const completion = await openai.responses.create({
     model: "gpt-4o-mini",
@@ -98,7 +141,11 @@ console.log(completion.choices[0].message.content)
 > - This works with responses where `stream=True`.
 > - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
 
-### Embeddings
+</Step>
+
+<VerifyLLMEventsStep />
+
+<Step title= "Capture embeddings" badge="optional">
 
 PostHog can also capture embedding generations as `$ai_embedding` events. Just make sure to use the same `posthog.ai.openai` client to do so:
 
@@ -113,3 +160,7 @@ response = client.embeddings.create(
     posthog_privacy_mode=False # optional
 )
 ```
+
+</Step>
+
+</Steps>

@@ -1,4 +1,38 @@
-Start by installing the LangChain and OpenAI Python SDKs:
+---
+title: LangChain observability installation
+showStepsToc: true
+---
+
+import LLMsSDKsCallout from './_snippets/llms-sdks-callout.mdx'
+import VerifyLLMEventsStep from './_snippets/verify-llm-events-step.mdx'
+
+LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
+
+<Steps>
+
+<Step title="Install the PostHog SDK" badge="required">
+
+LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
+
+Setting up observability starts with installing the PostHog SDK for your language. LLM observability works best with our Python and Node SDKs.
+
+<MultiLanguage>
+
+```bash file=Python
+pip install posthog
+```
+
+```bash file=TypeScript
+npm install @posthog/ai posthog-node
+```
+
+</MultiLanguage>
+
+</Step>
+
+<Step title="Install LangChain and OpenAI SDKs" badge="required">
+
+Install the LangChain and OpenAI Python SDKs:
 
 <MultiLanguage>
 
@@ -11,6 +45,12 @@ npm install langchain @langchain/core @posthog/ai
 ```
 
 </MultiLanguage>
+
+<LLMsSDKsCallout />
+
+</Step>
+
+<Step title="Initialize PostHog and LangChain" badge="required">
 
 In the spot where you make your OpenAI calls, import PostHog, LangChain, and our LangChain `CallbackHandler`. Initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to the `CallbackHandler` along with (optionally) a user distinct ID, trace ID, PostHog properties, [groups](/docs/product-analytics/group-analytics), and privacy mode.
 
@@ -63,6 +103,10 @@ const callbackHandler = new LangChainCallbackHandler({
 
 > **Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the `CallbackHandler`. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
 
+</Step>
+
+<Step title="Make LangChain calls" badge="required">
+
 When you invoke your chain, pass the `callback_handler` in the `config` as part of your `callbacks`:
 
 <MultiLanguage>
@@ -110,3 +154,9 @@ phClient.shutdown();
 </MultiLanguage>
 
 This automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`. It also automatically creates a trace hierarchy based on how LangChain components are nested 
+
+</Step>
+
+<VerifyLLMEventsStep />
+
+</Steps>

@@ -1,0 +1,126 @@
+---
+title: Getting started with LLM observability
+hideAnchor: true
+---
+
+import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
+import { IconGraph, IconFlask, IconPlug  } from '@posthog/icons'
+import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
+
+
+<QuestLog firstSpeechBubble="Let's get started!" lastSpeechBubble="Time to integrate LLM observability!">
+
+<QuestLogItem 
+    title="Capture LLM conversations"
+    subtitle="Required"
+    icon="IconLlmPromptManagement"
+>
+
+  LLM observability gives you x-ray vision into your LLM applications. You can track:
+
+  - Every conversation (inputs, outputs, and tokens) 🗣️
+  - Model performance (cost, latency and error rates) 🤖
+  - Full traces for when you need to go detective mode 🔍
+  - How much each chat/user/organization is costing you 💰
+
+
+  The first step is to install the PostHog SDK to capture conversations, requests, and responses from an LLM provider.
+
+  ### Platforms
+
+  <LLMsInstallationPlatforms />
+
+  ### Beta 🚧
+
+  LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
+  
+  We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [peter@posthog.com](mailto:peter@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+
+  <CallToAction type="primary" to="/docs/ai-engineering/installation">
+    Install PostHog SDK
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Record traces and generations"
+  subtitle="Required"
+  icon="IconRecord"
+>
+
+  Content tk...
+
+  <CallToAction type="primary" to="/docs/ai-engineering/traces-generations">
+    Learn more
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Analyze model performance"
+  subtitle="Required"
+  icon="IconMagic"
+>
+
+  Content tk...
+
+  <CallToAction type="primary" to="/docs/ai-engineering/tutorials">
+    Learn more
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Integrate customer data"
+  subtitle="Recommended"
+  icon="IconLogomark"
+>
+
+  Take advantage of PostHog's [customer infrastructure](/docs) other features...
+
+  ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/>  Product analytics
+
+  The best part? All this data gets sent as regular PostHog events, where you can slice, dice, and analyze it in dashboards, insights, and alerts.
+
+  content tk...
+
+  ### <IconFlask className="text-purple w-7 -mt-1 inline-block"/>  Experiments
+  
+  content tk...
+
+  ### <IconPlug className="text-sky-blue w-7 -mt-1 inline-block"/>  Data pipelines
+  
+  content tk...
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Use for free"
+  subtitle="Free 1M events/mo"
+  icon="IconPiggyBank"
+>
+
+  PostHog's LLM observability is built to be cost-effective. With a generous free tier and transparent usage-based pricing, more than 90% of companies use PostHog completely for free. 
+  
+  LLM observability events priced the same as regular PostHog data events, making it roughly **10x cheaper** than other LLM observability tools.
+
+  ### TL;DR 💸 
+
+  - No credit card required to start
+  - Free 1M exceptions per month are free
+  - Above 100k we have usage-based pricing starting at $0.00005/event with discounts as volume increases
+  - Set billing limits to avoid surprise charges
+  - See our [pricing page](/pricing) for more up-to-date details
+
+
+  --- 
+
+  That's it! You're ready to start integrating.
+
+  <CallToAction type="primary" to="/docs/error-tracking/installation">
+    Install error tracking
+  </CallToAction>
+
+</QuestLogItem>
+
+</QuestLog>

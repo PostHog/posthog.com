@@ -3906,10 +3906,70 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/ai-engineering/start-here',
+                    icon: 'IconListCheck',
+                    color: 'orange',
+                    featured: true,
+                },
+                {
                     name: 'Installation',
-                    url: '/docs/ai-engineering/observability',
+                    url: '/docs/ai-engineering/installation',
                     icon: 'IconBook',
                     color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/ai-engineering/installation',
+                        },
+                        {
+                            name: 'OpenAI',
+                            url: '/docs/ai-engineering/installation/openai',
+                        },
+                        {
+                            name: 'Anthropic',
+                            url: '/docs/ai-engineering/installation/anthropic',
+                        },
+                        {
+                            name: 'Google',
+                            url: '/docs/ai-engineering/installation/google',
+                        },
+                        {
+                            name: 'LangChain',
+                            url: '/docs/ai-engineering/installation/langchain',
+                        },
+                        {
+                            name: 'Vercel AI SDK',
+                            url: '/docs/ai-engineering/installation/vercel-ai',
+                        },
+                    ],
+                },
+                {
+                    name: 'Manual capture',
+                    url: '/docs/ai-engineering/manual-capture',
+                    icon: 'IconCode',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Privacy mode',
+                    url: '/docs/ai-engineering/privacy-mode',
+                    icon: 'IconLock',
+                    color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Traces and generations',
+                    url: '/docs/ai-engineering/traces-generations',
+                    icon: 'IconTarget',
+                    color: 'orange',
                     featured: true,
                 },
                 {
@@ -3919,10 +3979,7 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Traces and generations',
-                    url: '/docs/ai-engineering/traces-generations',
-                    icon: 'IconTarget',
-                    color: 'orange',
+                    name: 'Guides',
                 },
                 {
                     name: 'Tutorials and guides',
@@ -3932,29 +3989,48 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Observability integrations',
-                    url: '/docs/ai-engineering/llm-insights',
+                    name: 'Integrations',
+                    url: '/docs/ai-engineering/integrations',
                     icon: 'IconAIText',
                     featured: true,
                     color: 'purple',
                     children: [
                         {
+                            name: 'Overview',
+                            url: '/docs/ai-engineering/integrations',
+                        },
+                        {
                             name: 'Helicone',
-                            url: '/docs/ai-engineering/helicone-posthog',
+                            url: '/docs/ai-engineering/integrations/helicone-posthog',
                         },
                         {
                             name: 'Langfuse',
-                            url: '/docs/ai-engineering/langfuse-posthog',
+                            url: '/docs/ai-engineering/integrations/langfuse-posthog',
                         },
                         {
                             name: 'Traceloop',
-                            url: '/docs/ai-engineering/traceloop-posthog',
+                            url: '/docs/ai-engineering/integrations/traceloop-posthog',
                         },
                         {
                             name: 'Keywords AI',
-                            url: '/docs/ai-engineering/keywords-ai-posthog',
+                            url: '/docs/ai-engineering/integrations/keywords-ai-posthog',
                         },
                     ],
+                },
+                {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Billing',
+                    url: '/docs/ai-engineering/billing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/ai-engineering/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
                 },
             ],
         },

@@ -82,7 +82,7 @@ const LLMObservability: React.FC<LLMObservabilityProps> = ({ data }) => {
                     title="LLM observability"
                     description="Gather data for your AI and LLM products usage and performance."
                     buttonText="Start capturing LLM data"
-                    buttonLink="/docs/ai-engineering/observability"
+                    buttonLink="/docs/ai-engineering/start-here"
                     imageColumnClasses="max-w-96 mt-8 md:mt-0"
                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
                     imageClasses="max-h-48 md:max-h-64"
