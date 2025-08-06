@@ -325,19 +325,19 @@ export const ProductDataWarehouse = () => {
 
                     <ul className="list-none p-0 grid md:grid-cols-3 gap-4 mb-10 md:mb-20mx-5 md:mx-0">
                         <TutorialCard
-                            title="How to set up Stripe reports"
-                            description="Analyze gross revenue, customer counts, MRR, churn, and more"
-                            url="/tutorials/stripe-reports"
+                            title="How we use PostHog's built-in data warehouse"
+                            description="How we track revenue, churn, sales, support, and more."
+                            url="/blog/data-warehouse-at-posthog"
                         />
                         <TutorialCard
-                            title="How to set up Hubspot reports"
-                            description="Monitor deal counts, lead ratings, and identify leads by pageview behaviours."
-                            url="/tutorials/hubspot-reports"
+                            title="How we found our activation metric (and how you can too)"
+                            description="The real process (and queries) we used to find our activation metric."
+                            url="/product-engineers/activation-metrics"
                         />
                         <TutorialCard
-                            title="How to set up Zendesk reports"
-                            description="Track ticket counts, power users, SLA metrics, and more."
-                            url="/tutorials/zendesk-reports"
+                            title="The basics of SQL for analytics"
+                            description="No idea where to start with SQL? We've got you covered."
+                            url="/product-engineers/sql-for-analytics"
                         />
                     </ul>
                 </div>
