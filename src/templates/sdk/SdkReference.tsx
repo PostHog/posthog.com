@@ -161,8 +161,6 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         ),
     ])
 
-    console.log(tableOfContents)
-
     return (
         <Layout parent={docsMenu} activeInternalMenu={activeInternalMenu}>
             <SEO title={`${fullReference.info.title} - PostHog`} />
