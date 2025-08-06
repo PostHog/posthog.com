@@ -68,7 +68,7 @@ We track a 4-week NPS score, but we don’t have the volume of responses we need
 
 ### Support
 
-Similar to our revenue metrics, we are reusing queries the support team have set up, broken down by product. If you need to make a change or want to understand how SLA reporting works in detail, speak to the support team.
+Similar to our revenue metrics, we are reusing queries the support team has set up, broken down by product. If you need to make a change or want to understand how SLA reporting works in detail, speak to the support team.
 
 - <PrivateLink url="https://us.posthog.com/project/2/dashboard/250270">Link to overall support dashboard</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/insights/h0jiEYgF">Link to per-product ticket count insight</PrivateLink>
