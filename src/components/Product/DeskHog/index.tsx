@@ -551,7 +551,7 @@ export const ProductDeskHog = () => {
                             </p>
                             <p>
                                 Ultimately, we're not sure if DeskHog will be a success, but we've had a lot of fun
-                                building it. And we're selling it as cost so you can join in!
+                                building it. And we're selling it at cost so you can join in!
                             </p>
                         </div>
                         <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center mb-6 md:mb-0">
