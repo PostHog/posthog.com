@@ -1,13 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import usePostHog from '../../hooks/usePostHog'
-import { CallToAction } from '../CallToAction'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
 import { Link, navigate } from 'gatsby'
 
 export default function BlueScreenOfDeath(): JSX.Element {
     const posthog = usePostHog()
-    const searchInputRef = useRef<HTMLInputElement>(null)
 
     useEffect(() => {
         // Capture the event only if posthog is available
@@ -51,7 +49,7 @@ export default function BlueScreenOfDeath(): JSX.Element {
     }, [])
 
     return (
-        <div className="fixed inset-0 bg-blue-600 min-h-screen flex items-center justify-center z-[99999]">
+        <div className="bg-blue-600 flex items-center justify-center">
             <ScrollArea className="h-full w-full">
                 <div
                     className="bg-blue-600 text-white font-mono text-sm leading-relaxed p-8"

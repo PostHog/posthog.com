@@ -6,7 +6,6 @@ import { RouteUpdateArgs } from 'gatsby'
 import { UserProvider } from './src/hooks/useUser'
 import Wrapper from './src/components/Wrapper'
 import { Provider } from './src/context/App'
-import BlueScreenOfDeath from './src/components/NotFoundPage/BlueScreenOfDeath'
 initKea(false)
 
 export const wrapRootElement = ({ element }) => (
@@ -37,14 +36,10 @@ export const onRouteUpdate = ({ location, prevLocation }: RouteUpdateArgs) => {
     }
 }
 
-export const wrapPageElement = ({ element, props: { pageContext, location } }) => {
-    // Check if this is a 404 page by checking if the NotFound component is being rendered
-    // This catches both direct /404 visits and any non-existent pages
-    const is404Page = element?.type?.name === 'NotFound' || location.pathname === '/404'
-
+export const wrapPageElement = ({ element, props: { location } }) => {
     return (
         <Provider element={element} location={location}>
-            {is404Page ? <BlueScreenOfDeath /> : <Wrapper />}
+            <Wrapper />
         </Provider>
     )
 }
