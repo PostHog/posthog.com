@@ -127,6 +127,12 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
     const validTypes = pageContext.types
+
+    // Pre-transform classes with sorted functions
+    const sortedClasses = fullReference.classes.map((classData) => ({
+        ...classData,
+        sortedFunctions: groupFunctionsByCategory(classData.functions),
+    }))
     // Badge styling based on release tag
     const getBadgeClasses = (releaseTag: string): string => {
         switch (releaseTag.toLowerCase()) {
@@ -140,18 +146,22 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     }
 
     // Generate ToC from classes and functions
-    const tableOfContents = fullReference.classes.flatMap((classData) => [
+    const tableOfContents = sortedClasses.flatMap((classData) => [
         {
-            url: `${classData.id}`,
+            url: classData.id,
             value: `${classData.title}`,
             depth: 0,
         },
-        ...classData.functions.map((func) => ({
-            url: `${func.id}`,
-            value: `${func.title}()`,
-            depth: 1,
-        })),
+        ...classData.sortedFunctions.flatMap(({ functions }) =>
+            functions.map((func) => ({
+                url: `${classData.id}-${func.id}`,
+                value: `${func.title}()`,
+                depth: 1,
+            }))
+        ),
     ])
+
+    console.log(tableOfContents)
 
     return (
         <Layout parent={docsMenu} activeInternalMenu={activeInternalMenu}>
@@ -197,12 +207,12 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                     </div>
 
                     <div className="w-full">
-                        {fullReference.classes.map((classData) => (
-                            <div key={classData.id} className="mb-12">
+                        {sortedClasses.map((classData) => (
+                            <div key={classData.id} className="mb-12" id={classData.id}>
                                 <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
                                 <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
 
-                                {groupFunctionsByCategory(classData.functions).map(({ label, functions }) => (
+                                {classData.sortedFunctions.map(({ label, functions }) => (
                                     <div key={label || 'other-methods'}>
                                         {/* Only show a heading if label is not null and not "Other methods" */}
                                         {label && <h3 className="text-xl font-semibold mb-2 mt-8">{label} methods</h3>}
@@ -210,14 +220,14 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                                         {!label && <h3 className="text-xl font-semibold mb-2 mt-8">Other methods</h3>}
                                         {functions.map((func) => (
                                             <div
-                                                key={func.id}
+                                                key={`${classData.id}-${func.id}`}
                                                 className="border-gray-accent-light dark:border-gray-accent-dark border-solid border-b first:border-t-0 last:border-b-0 py-8"
                                             >
                                                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                                                     <div className="space-y-6">
                                                         <Heading
                                                             as="h4"
-                                                            id={func.id}
+                                                            id={`${classData.id}-${func.id}`}
                                                             className="text-lg my-0 font-bold"
                                                         >
                                                             <code>{func.title}</code>
