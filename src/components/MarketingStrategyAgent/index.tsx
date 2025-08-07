@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
 import SiteInput from './SiteInput'
-
-type ResearchNode = {
-    node_id: string
-}
+import { AnyResearchNode, ResearchTree } from './types'
+import { Summary } from './Summary'
+import { Competitor } from './Competitor'
 
 export default function MarketingStrategyAgent(): JSX.Element {
     const [isLoading, setIsLoading] = useState(false)
-    const [researchNodes, setResearchNodes] = useState<Record<string, ResearchNode> | null>(null)
+    const [researchTree, setResearchTree] = useState<ResearchTree>({})
     const abortControllerRef = React.useRef<AbortController | null>(null)
 
     const handleAnalyze = async (url: string, context: string) => {
         console.log('Analyzing website:', url, 'with context:', context)
         setIsLoading(true)
-        setResearchNodes(null)
+        setResearchTree({})
 
         // Abort any ongoing request
         if (abortControllerRef.current) {
@@ -66,15 +65,38 @@ export default function MarketingStrategyAgent(): JSX.Element {
                         const data = line.slice(6) // Remove 'data: ' prefix
 
                         try {
-                            const parsedData: ResearchNode = JSON.parse(data)
+                            const parsedData: AnyResearchNode = JSON.parse(data)
                             console.log('Received streaming data:', parsedData)
 
-                            if (parsedData.node_id) {
-                                // Handle research node updates
-                                setResearchNodes((prev) => ({
-                                    ...prev,
-                                    [parsedData.node_id]: parsedData,
-                                }))
+                            if ('kind' in parsedData) {
+                                switch (parsedData.kind) {
+                                    case 'get_site_content': {
+                                        setResearchTree((prev) => {
+                                            const competitors = { ...prev.competitors }
+                                            for (const [key, val] of Object.entries(
+                                                parsedData.result.marketing_research_data.results
+                                            )) {
+                                                competitors[key] = {
+                                                    ...competitors[key],
+                                                    name: val.url,
+                                                    marketing_research_data: val,
+                                                }
+                                            }
+                                            return {
+                                                ...prev,
+                                                rootSiteDate: parsedData.result.site_data,
+                                                competitors,
+                                            }
+                                        })
+                                        break
+                                    }
+                                    case 'get_summary':
+                                        setResearchTree((prev) => ({
+                                            ...prev,
+                                            summary: parsedData.result.summary,
+                                        }))
+                                        break
+                                }
                             }
                         } catch (error) {
                             console.error('Error parsing streaming data:', error)
@@ -87,7 +109,7 @@ export default function MarketingStrategyAgent(): JSX.Element {
                 console.log('Request was aborted')
             } else {
                 console.error('Error during analysis:', error)
-                setResearchNodes(null)
+                setResearchTree({})
             }
         } finally {
             setIsLoading(false)
@@ -117,7 +139,19 @@ export default function MarketingStrategyAgent(): JSX.Element {
 
                 <SiteInput onAnalyze={handleAnalyze} isLoading={isLoading} />
 
-                <code>{JSON.stringify(researchNodes, null, 2)}</code>
+                {isLoading && (
+                    <div className="text-center mt-8">
+                        <p className="text-gray-600">Analyzing your website, please wait...</p>
+                    </div>
+                )}
+
+                {researchTree.summary ? <Summary summary={researchTree.summary}></Summary> : null}
+
+                {researchTree.competitors && Object.keys(researchTree.competitors).length > 0
+                    ? Object.values(researchTree.competitors).map((competitor) => (
+                          <Competitor key={competitor.name} competitor={competitor} />
+                      ))
+                    : null}
             </div>
         </div>
     )
