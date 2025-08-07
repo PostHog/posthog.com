@@ -8,7 +8,7 @@ import { IconTestTube } from '@posthog/icons'
 
 > 🚧 **Note:** No-code web experiments are currently considered in `beta`. To access them, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#web-experiments) in your PostHog account. You'll also need to define `disable_web_experiments: false` in your Posthog web snippet configuration.
 >
-> We are keen to gather as much feedback as possible so if you try this out please let us know. You can email [anders@posthog.com](mailto:anders@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
+> We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Aexperiments%3Alow), or use one of our other [support options](/docs/support-options).
 
 ## Limitations and use cases
 
