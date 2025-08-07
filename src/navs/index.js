@@ -1603,12 +1603,6 @@ export const companyMenu = {
             url: '/roadmap',
         },
         {
-            name: 'WIP',
-            icon: 'IconHourglass',
-            color: 'seagreen',
-            url: '/wip',
-        },
-        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',

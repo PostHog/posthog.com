@@ -36,6 +36,7 @@ import { getProseClasses } from '../../constants'
 import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
+import { navigate } from 'gatsby'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -372,6 +373,9 @@ const Menu = () => {
                         (menuItem) => menuItem.url === value || menuItem.name === value
                     )
                     setActiveInternalMenu(selectedMenu)
+                    if (!selectedMenu?.children && selectedMenu?.url) {
+                        navigate(selectedMenu.url)
+                    }
                 }}
                 dataScheme="primary"
             />
