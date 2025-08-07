@@ -43,8 +43,8 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Experimentation | [Team Experiments](/teams/experiments) |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
 | Feature flags | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Group analytics | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
-| HogQL | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Heatmaps | [Team Replay][Team Replay] | <span class="lemon-tag gh-tag">feature/heatmaps</span> |
+| HogQL | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Ingestion | [Team Ingestion][Team Ingestion]  | <span class="lemon-tag gh-tag">feature/team-ingestion</span> |
 | Insights | [Team Product Analytics][Team Product Analytics]  | <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Internal messaging (email, notifications) | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
@@ -67,9 +67,9 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Queries as a Service | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
 | Query performance | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Quota limiting | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/quota-limiting</span>  |
+| Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Revenue analytics | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-analytics</span>  |
 | Revenue data management | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-data-management</span>  |
-| Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Security | [Team Infrastructure][Team Infrastructure] though it is every teams job to consider and react to security issues |  <span class="lemon-tag gh-tag">feature/security</span> |
 | Self-hosting | [Team Infrastructure][Team Infrastructure]  |  <span class="lemon-tag gh-tag">feature/self-hosting</span> |
 | Sentry integration | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
