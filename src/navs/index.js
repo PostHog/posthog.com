@@ -1321,6 +1321,10 @@ export const handbookSidebar = [
                         name: 'Template for onboarding success plan',
                         url: '/handbook/cs-and-onboarding/onboarding-success-plan',
                     },
+                    {
+                        name: 'Getting started with newly assigned customers',
+                        url: '/handbook/cs-and-onboarding/newly-assigned-customer',
+                    },
                 ],
             },
             {
