@@ -38,9 +38,9 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Data visualization | [Team Data Warehouse][Team Data Warehouse] | <span class="lemon-tag gh-tag">feature/data-visualization</span>  |
 | Data pipelines | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipeline</span> |
 | Data warehouse | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/data-warehouse</span> |
+| Early access features | [Team Feature Flags][Team Feature Flags] | <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Error tracking | [Team Error Tracking](/teams/error-tracking)  |  <span class="lemon-tag gh-tag">feature/error-tracking</span>  |
 | Experimentation | [Team Experiments](/teams/experiments) |  <span class="lemon-tag gh-tag">feature/experimentation</span> |
-| Early access features | [Team Feature Flags][Team Feature Flags] | <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Feature flags | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/feature-flags</span> |
 | Group analytics | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/group-analytics</span> |
 | HogQL | [Team Data Warehouse][Team Data Warehouse]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
