@@ -134,7 +134,7 @@ export const errorTracking = {
         {
             title: 'Target affected users',
             headline: 'Target affected users',
-            description: 'Roll out changes with PostHog feature flags to target only affected users',
+            description: 'Revert feature flag roll out to users who are affected by an issue',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sirw_4622f2f7d0.png',
@@ -343,9 +343,10 @@ export const errorTracking = {
     presenterNotes: {
         // TODO: hopefully we have issue autofix and revenue analytics ordering by time this launches
         overview:
-            "<strong>Presenter notes:</strong> Error tracking lets you monitor, investigate, and resolve any issues your users encounter within your app – so you can ship with confidence and debug faster. It's connected with PostHog's other products to give you all the context you need. <em>Watch session replays</em> to see exactly what a user was doing when the exception occurred. <em>Correlate product analytics events</em> to understand the impact of issue on conversion, activation and feature usage. <em>Use data pipelines</em> to receive alerts about new and reoccurring issues to any of our destinations.",
-        customers:
-            "Zealot switched from BugSnag and Amplitude. Squads Ventures ditched three separate tools and consolidated everything into one platform. (That'd be PostHog, if you weren't <em>tracking...</em> 🥁). Why? It's all about getting all the context they need in one place, and turning application errors into product improvements.",
+            "<strong>Presenter notes:</strong> Error tracking lets you monitor, investigate, and resolve any issues your users encounter within your app – so you can ship with confidence and debug faster. It's uniquely connected to PostHog's customer infrastructure products. <em>Watch session replays</em> to see exactly what happened. <em>Create product analytics</em> to discover how  errors are impacting trends, funnels, or retention. <em>Use feature flags</em> to roll back instantly and target affected users.",
+        customers: `Zealot switched from BugSnag and Amplitude. SquadS Ventures ditched three separate tools and consolidated everything into one platform. (That'd be PostHog, if you weren't <em>tracking...</em> 🥁). Why? It's all about getting all the context they need in one place, reducing the friction of debugging and fixing errors faster than their legacy workflows. 
+            <br /> <br />
+            There are health benefits too. The head of engineering at SquadS Ventures shared, "My smartwatch indicates a <em>20% increase</em> in sleep quality after using PostHog's error tracking."`,
         product_os_benefits:
             "In case we haven't driven the point home by now, here's a slide all about it: PostHog Error Tracking is connected to all other PostHog products. It makes it faster to debug because you can see the full event log of what happened leading up to an error. You can watch a session recording to visualize it. You can see which feature flags were enabled at the time. And if you need to run a complex query, use the SQL editor or write a query directly from the PostHog Data Warehouse.",
         features:
