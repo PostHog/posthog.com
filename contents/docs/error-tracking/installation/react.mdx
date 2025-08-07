@@ -100,10 +100,15 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { PostHogProvider, PostHogErrorBoundary } from 'posthog-js/react'
 
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: '2025-05-24',
+}
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <PostHogProvider apiKey={"phc_your_api_key"} options={{ /* Your posthog options */ }}>
-      <PostHogErrorBoundary fallback={/* Optionally, add a fallback component that's shown when an error happens. */}>
+    <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY} options={options}>
+      <PostHogErrorBoundary /* fallback={<YourFallbackComponent />} Optionally, add a fallback component that's shown when an error happens.} */ >
         <YourApp />
       </PostHogErrorBoundary>
     </PostHogProvider>
