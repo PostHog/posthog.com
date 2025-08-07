@@ -342,11 +342,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
 
 export default function ProductToolkit() {
     const {
-        mdx: { rawBody },
+        mdx: { rawBody, mdxBody },
     } = useStaticQuery(graphql`
         query {
             mdx(slug: { eq: "product-toolkit" }) {
                 rawBody
+                mdxBody
             }
         }
     `)
@@ -366,6 +367,7 @@ export default function ProductToolkit() {
             <MDXEditor
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
+                mdxBody={mdxBody}
                 cta={{
                     url: `https://${
                         posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'

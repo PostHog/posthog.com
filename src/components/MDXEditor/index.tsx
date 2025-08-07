@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Editor from 'components/Editor'
 import {
     JsxComponentDescriptor,
@@ -32,12 +32,16 @@ import {
 } from 'lexical'
 import { mergeRegister } from '@lexical/utils'
 import { navigate } from 'gatsby'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
 
 export default function MDXEditor({
     body,
+    mdxBody,
     jsxComponentDescriptors = [],
     cta,
 }: {
+    mdxBody?: string
     body: string
     jsxComponentDescriptors: JsxComponentDescriptor[]
     cta?: {
@@ -45,6 +49,7 @@ export default function MDXEditor({
         label: string
     }
 }) {
+    const [isSSR, setIsSSR] = useState(true)
     const [currentFormat, setCurrentFormat] = useState<FORMAT>(0)
     const [activeEditor, setActiveEditor] = useState<LexicalEditor>()
     const applyFormatRef = React.useRef<((value: any) => void) | null>(null)
@@ -52,6 +57,13 @@ export default function MDXEditor({
     const [canUndo, setCanUndo] = React.useState(false)
     const [canRedo, setCanRedo] = React.useState(false)
     const mdxEditorContainerRef = React.useRef<HTMLDivElement>(null)
+
+    const mdxComponents = useMemo(() => {
+        return jsxComponentDescriptors.reduce((acc, descriptor) => {
+            acc[descriptor.name] = descriptor.Editor
+            return acc
+        }, {} as Record<string, React.ComponentType<any>>)
+    }, [])
 
     useEffect(() => {
         if (activeEditor) {
@@ -102,6 +114,10 @@ export default function MDXEditor({
         }
     }, [activeEditor])
 
+    useEffect(() => {
+        setIsSSR(false)
+    }, [])
+
     const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
         const href = (event.target as HTMLElement).closest('a.mdx-editor-link')?.getAttribute('href')
         if (href) {
@@ -149,36 +165,42 @@ export default function MDXEditor({
             cta={cta}
         >
             <div onClick={handleClick} ref={mdxEditorContainerRef}>
-                <MDXEditorComponent
-                    contentEditableClassName="outline-none"
-                    markdown={body}
-                    lexicalTheme={{
-                        link: 'mdx-editor-link cursor-pointer',
-                    }}
-                    plugins={[
-                        headingsPlugin(),
-                        frontmatterPlugin(),
-                        listsPlugin(),
-                        linkPlugin(),
-                        jsxPlugin({ jsxComponentDescriptors }),
-                        toolbarPlugin({
-                            toolbarContents: () => {
-                                const [currentFormat, activeEditor] = useCellValues(currentFormat$, activeEditor$)
-                                const applyFormat = usePublisher(applyFormat$)
-                                useEffect(() => {
-                                    applyFormatRef.current = applyFormat
-                                }, [])
-                                useEffect(() => {
-                                    setCurrentFormat(currentFormat)
-                                }, [currentFormat])
-                                useEffect(() => {
-                                    setActiveEditor(activeEditor)
-                                }, [activeEditor])
-                                return null
-                            },
-                        }),
-                    ]}
-                />
+                {isSSR && mdxBody ? (
+                    <MDXProvider components={mdxComponents}>
+                        <MDXRenderer>{mdxBody}</MDXRenderer>
+                    </MDXProvider>
+                ) : (
+                    <MDXEditorComponent
+                        contentEditableClassName="outline-none"
+                        markdown={body}
+                        lexicalTheme={{
+                            link: 'mdx-editor-link cursor-pointer',
+                        }}
+                        plugins={[
+                            headingsPlugin(),
+                            frontmatterPlugin(),
+                            listsPlugin(),
+                            linkPlugin(),
+                            jsxPlugin({ jsxComponentDescriptors }),
+                            toolbarPlugin({
+                                toolbarContents: () => {
+                                    const [currentFormat, activeEditor] = useCellValues(currentFormat$, activeEditor$)
+                                    const applyFormat = usePublisher(applyFormat$)
+                                    useEffect(() => {
+                                        applyFormatRef.current = applyFormat
+                                    }, [])
+                                    useEffect(() => {
+                                        setCurrentFormat(currentFormat)
+                                    }, [currentFormat])
+                                    useEffect(() => {
+                                        setActiveEditor(activeEditor)
+                                    }, [activeEditor])
+                                    return null
+                                },
+                            }),
+                        ]}
+                    />
+                )}
             </div>
         </Editor>
     )
