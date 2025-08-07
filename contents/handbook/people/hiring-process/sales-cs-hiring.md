@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Sales and Customer Success hiring at PostHog
 
-The [Sales and CS team](/teams/sales-cs) look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the team is to land and expand usage of PostHog in these customers.
+The [Sales](/teams/sales-cs) look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the team is to land and expand usage of PostHog in these customers. We have two roles on the sales team: Technical Account Executives focused on closing new business from inbound and outbound leads; and Technical Account Managers focused on expansion from existing customers and closing new business from product-led leads.
 
 We've proven that [the way we do sales](/sales) works at a small scale, we are now growing the team in line with increased top-of-funnel growth for PostHog. Please check our [careers page](/careers) for our open roles. 
 
@@ -20,6 +20,16 @@ Outside of the skills listed in the job description, we are generally looking fo
 *   A genuine passion for helping customers be successful.
 *   Prioritization skills - you'll be working with a book of business at different states and will have to prioritize your work accordingly.
 *   People who are motivated by revenue growth.
+
+### How We Evaluate Candidates
+
+In evaluating potential hires, we are guardians of PostHog's culture and success on the sales team. This means we need to be selective when it comes to adding new folks to the team, as having someone strong in these roles can mean the difference between hitting $100M ARR this year. Interviewing is an information limited practice: we can only go off the information we have and we know that it is not complete. This means making what may seem like a snap judgment in absense of additional info, because of how important it is to get these hires right.
+
+We need to be particularly sensitive to culture at this stage. We can handle someone underperforming much better than someone who is a poor culture fit due to the impact on the broader team. We don't want to end up taking cold leads from BDRs so we can run MEDPICC from our car phone while promising 50% discounts if they sign before the next full moon.
+
+Thinking about the positive impact a candidate brings to the team: unique skills, strong ability, breadth of experience, and a bias for action are great filters to determine whether someone is "just OK" vs. being an outstanding candidate. Similar to looking for developers who have built something great, we want to look for salespeople who have done something great. Even if the thing they've done isn't directly in the sales space, seeing that they can execute well is a great sign. If we have a candidate that would be a "2.5," rounding down to 2 is probably better than rounding up to 3.
+
+It can be tempting to feel bad rejecting someone who is OK, but not great. It's helpful to remember that this isn't a value judgment on them as a person. This doesn't make them bad, it just means they wouldn't be a good fit here. Our opportunity cost here is high, and we want to make each hire as impactful as we can. We should think about how a cadidate's skills grow our team's ability to make customers happy and grow revenue. It can also be helpful to think about: How would htin person perform in a difficult situation with a difficult customer? Could we trust that they would jump in and tackle the problem head on, or would be the team be left to pick up the slack?
 
 ### Sales and CS hiring process 
 
