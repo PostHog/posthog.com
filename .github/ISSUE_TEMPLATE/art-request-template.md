@@ -16,7 +16,7 @@ assignees:
 > - If your request is genuinely urgent, please share in #website-and-vibes channel and mention Lottie and/or Cory.
 
 ## Assignee
-@lottiecoxon & [ADD DANIEL'S GITHUB HANDLE HERE]
+@lottiecoxon & @dphawkins1617
 
 ## Outline
 _Explain what you need_
