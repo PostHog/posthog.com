@@ -21,6 +21,7 @@ export const errorTracking = {
     },
     screenshots: [
         {
+            // TODO: we should update this as the UI has changed a lot since
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png',
             alt: 'Screenshot of the PostHog error tracking',
             classes: '',
@@ -51,12 +52,26 @@ export const errorTracking = {
     },
     features: [
         {
-            title: 'Alerts',
-            headline: 'Alerts',
-            description: 'Get notified of new issues by email, Slack, or webhook',
+            title: 'Stack traces',
+            headline: 'Stack traces',
+            description:
+                "Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_alerts_00824b03f5.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png',
+                    alt: 'Stack traces',
+                    stylize: true,
+                    shadow: true,
+                },
+            ],
+        },
+        {
+            title: 'Alerts',
+            headline: 'Alerts',
+            description: 'Get notified in real time by email, Slack, or webhook when issues occur',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_11_53_54_2x_81605f7812.png',
                     alt: 'Alert',
                     stylize: true,
                     shadow: true,
@@ -64,12 +79,12 @@ export const errorTracking = {
             ],
         },
         {
-            title: 'Triage',
-            headline: 'Triage',
-            description: 'Assign issues to individuals or groups',
+            title: 'Monitor issues',
+            headline: 'Monitor issues',
+            description: 'Stay on top of issues as they happen based on event triggers, filters, and trends',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sgre_98426bdbdb.png',
                     alt: 'Triage',
                     stylize: true,
                     shadow: true,
@@ -77,9 +92,9 @@ export const errorTracking = {
             ],
         },
         {
-            title: 'Organize and prioritize',
-            headline: 'Organize and prioritize',
-            description: 'Merge issues, sort by frequency or recency, or use text search to find specific errors',
+            title: 'Manage and organize',
+            headline: 'Manage and organize',
+            description: 'Merge issues, sort by frequency or recency, and group issues with custom rules',
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_organize_94b4d00ea2.png',
@@ -90,14 +105,39 @@ export const errorTracking = {
             ],
         },
         {
-            title: 'Stack traces',
-            headline: 'Stack traces',
-            description:
-                "Get code context automatically with PostHog's server-side libraries, or upload source maps for front-end frameworks",
+            title: 'Assign and triage',
+            headline: 'Assign and triage',
+            description: 'Auto-assign issues to individuals or groups',
             images: [
                 {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_trace_3fc569059c.png',
-                    alt: 'Stack traces',
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_assign_4c9bb9ee60.png',
+                    alt: 'Assign and triage',
+                    stylize: true,
+                    shadow: true,
+                },
+            ],
+        },
+        {
+            title: 'Investigate and resolve',
+            headline: 'Investigate and resolve',
+            description: 'Use PostHog session replay to investigate and resolve issues with complete customer context',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_tracking_session_replay_investigate_da4ee40642.gif',
+                    alt: 'Investigate and resolve',
+                    stylize: true,
+                    shadow: true,
+                },
+            ],
+        },
+        {
+            title: 'Target affected users',
+            headline: 'Target affected users',
+            description: 'Revert feature flag roll out to users who are affected by an issue',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250728_sirw_4622f2f7d0.png',
+                    alt: 'Target affected users',
                     stylize: true,
                     shadow: true,
                 },
@@ -300,14 +340,16 @@ export const errorTracking = {
         },
     ],
     presenterNotes: {
+        // TODO: hopefully we have issue autofix and revenue analytics ordering by time this launches
         overview:
-            '<strong>Presenter notes:</strong> PostHog Error Tracking is connected to all other PostHog products. See an error? <em>Watch the session recording</em> to see exactly what happened. <em>Check which feature flags were on</em>. Roll back instantly. Most error tools are isolated whereas PostHog shows the full context.',
-        customers:
-            "Zealot switched from BugSnag and Amplitude. Squads Ventures ditched three separate tools and consolidated everything into one platform. (That'd be PostHog, if you weren't <em>tracking...</em> 🥁). Why? It's all about getting all the context they need in one place, reducing the friction of debugging and fixing errors faster than their legacy workflows.",
+            "<strong>Presenter notes:</strong> Error tracking lets you monitor, investigate, and resolve any issues your users encounter within your app – so you can ship with confidence and debug faster. It's uniquely connected to PostHog's customer infrastructure products. <em>Watch session replays</em> to see exactly what happened. <em>Create product analytics</em> to discover how  errors are impacting trends, funnels, or retention. <em>Use feature flags</em> to roll back instantly and target affected users.",
+        customers: `Zealot switched from BugSnag and Amplitude. SquadS Ventures ditched three separate tools and consolidated everything into one platform. (That'd be PostHog, if you weren't <em>tracking...</em> 🥁). Why? It's all about getting all the context they need in one place, reducing the friction of debugging and fixing errors faster than their legacy workflows. 
+            <br /> <br />
+            There are health benefits too. The head of engineering at SquadS Ventures shared, "My smartwatch indicates a <em>20% increase</em> in sleep quality after using PostHog's error tracking."`,
         product_os_benefits:
             "In case we haven't driven the point home by now, here's a slide all about it: PostHog Error Tracking is connected to all other PostHog products. It makes it faster to debug because you can see the full event log of what happened leading up to an error. You can watch a session recording to visualize it. You can see which feature flags were enabled at the time. And if you need to run a complex query, use the SQL editor or write a query directly from the PostHog Data Warehouse.",
         features:
-            "<strong>Alerts:</strong> Get notified via email, Slack, or webhooks when new errors appear. Set custom thresholds. You don't have to wait for a spike in support tickets to know what issues users are facing. (This is also important because only a fraction of them are motivated enough to actually message you!)<br /><br /><strong>Triage:</strong> Assign errors to people or teams. Track status. Know who's fixing what. Basic but essential.<br /><br /><strong>Organize and prioritize:</strong> Merge similar errors, sort by frequency or recency, search by error message.<br /><br /><strong>Stack traces:</strong> Full stack traces with source maps. See exactly where errors happen. Works with all major frameworks.<br /><br /><strong>And then there's the convergence:</strong><br /><br /><strong>Session Replay:</strong> Watch the user's session leading up to the error. No more \"can't reproduce\" tickets.<br /><br /><strong>Product Analytics:</strong> Graph error rates over time. Break down by user properties. Find patterns.<br /><br /><strong>Feature Flags:</strong> Error in production? Turn off the feature instantly. Test fixes on small groups first.<br /><br /><strong>User Profiles:</strong> See all errors for a specific user in their dedicated activity timeline. Check their feature flags at error time.",
+            "<strong>Alerts:</strong> Get notified via email, Slack, or webhooks when new errors appear. Set custom thresholds. You don't have to wait for a spike in support tickets to know what issues users are facing. (This is also important because only a fraction of them are motivated enough to actually message you!)<br /><br /><strong>Triage:</strong> Assign errors to people or teams. Track status. Know who's fixing what. Basic but essential.<br /><br /><strong>Organize and prioritize:</strong> Merge similar errors, sort by frequency or recency, search by error message.<br /><br /><strong>Stack traces:</strong> Full stack traces with source maps. See exactly where errors happen. Works with all major frameworks. Even when minified.<br /><br /><strong>And then there's the convergence:</strong><br /><br /><strong>Session Replay:</strong> Watch the user's session leading up to the error. No more \"can't reproduce\" tickets.<br /><br /><strong>Product Analytics:</strong> Graph error rates over time. Break down by user properties. Find patterns.<br /><br /><strong>Feature Flags:</strong> Error in production? Turn off the feature instantly. Test fixes on small groups first.<br /><br /><strong>User Profiles:</strong> See all errors for a specific user in their dedicated activity timeline. Check their feature flags at error time.",
         answers:
             'Here are some guides about how to use Error Tracking. Some of the things you can do: Analyze patterns by graphing errors over time, set up alerts so you know before users complain, manage issues with assignment and status tracking, and reduce costs by sampling or filtering non-critical errors. And our stack traces work with source maps for minified code.',
         pricing:
