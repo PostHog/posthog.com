@@ -13,7 +13,22 @@ export interface GetSummaryResponseNode extends ResearchNode {
     result: GetSummaryResponse
 }
 
-export type AnyResearchNode = GetSiteContentResponseNode | ResearchNode | GetSummaryResponseNode
+export interface FindCompetitorsResponseNode extends ResearchNode {
+    kind: 'find_competitors'
+    result: GetCompetitorsResponse
+}
+
+export interface EnrichCompetitorsResponseNode extends ResearchNode {
+    kind: 'enrich_competitors'
+    result: EnrichCompetitorsResponse
+}
+
+export type AnyResearchNode =
+    | GetSiteContentResponseNode
+    | ResearchNode
+    | GetSummaryResponseNode
+    | FindCompetitorsResponseNode
+    | EnrichCompetitorsResponseNode
 
 export interface GetSiteContentSiteData {
     url: string
@@ -76,9 +91,70 @@ export interface GetSummaryResponse {
     summary: GetSummarySummary
 }
 
+export interface GetCompetitorsCompetitor {
+    id: string
+    url: string
+    title: string
+    score: number | null
+    published_date: string // ISO 8601
+    author: string
+    favicon: string | null
+    summary: string
+}
+
+export interface GetCompetitorsTargetCompany {
+    url: string
+    description: string
+}
+
+export interface GetCompetitorsResponse {
+    competitors_found: number
+    competitors: GetCompetitorsCompetitor[]
+    query_processed: string
+    target_company: GetCompetitorsTargetCompany
+    status: string
+}
+
+export interface EnrichCompetitorsSeoMetadata {
+    [key: string]: string
+}
+
+export interface EnrichCompetitorsSocialChannels {
+    [key: string]: string
+}
+
+export interface EnrichCompetitorsSeoData {
+    url: string
+    seo_metadata: EnrichCompetitorsSeoMetadata
+    social_channels: EnrichCompetitorsSocialChannels
+    error: string | null
+    content_type: string
+    server: string
+}
+
+export interface EnrichCompetitorsEnrichedCompetitor {
+    id: string
+    url: string
+    title: string
+    score: number | null
+    published_date: string // ISO 8601
+    author: string
+    favicon: string | null
+    summary: string
+    seo_data?: EnrichCompetitorsSeoData
+}
+
+export interface EnrichCompetitorsResponse {
+    enriched_competitors: EnrichCompetitorsEnrichedCompetitor[]
+    enrichment_count: number
+    progressive_enrichment: boolean
+    status: string
+}
+
 export interface ResearchCompetitor {
     name: string
-    marketing_research_data?: GetSiteContentMarketingResearchResult
+    find_competitors_data?: GetCompetitorsCompetitor
+    enrich_competitors_data?: EnrichCompetitorsEnrichedCompetitor
 }
 
 export interface ResearchTree {

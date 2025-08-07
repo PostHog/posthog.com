@@ -6,23 +6,23 @@ interface Props {
 }
 
 export const Competitor = ({ competitor }: Props): React.ReactElement => {
+    const info = competitor.enrich_competitors_data || competitor.find_competitors_data
     return (
         <div className="competitor">
             <h3>{competitor.name}</h3>
-            {competitor.marketing_research_data && (
+            {info && (
                 <div>
                     <p>
-                        <strong>Score:</strong> {competitor.marketing_research_data.score ?? 'N/A'}
+                        <strong>Score:</strong> {info.score ?? 'N/A'}
                     </p>
                     <p>
-                        <strong>Published Date:</strong>{' '}
-                        {new Date(competitor.marketing_research_data.published_date).toLocaleDateString()}
+                        <strong>Published Date:</strong> {new Date(info.published_date).toLocaleDateString()}
                     </p>
                     <p>
-                        <strong>Author:</strong> {competitor.marketing_research_data.author}
+                        <strong>Author:</strong> {info.author}
                     </p>
                     <p>
-                        <strong>Summary:</strong> {competitor.marketing_research_data.summary}
+                        <strong>Summary:</strong> {info.summary}
                     </p>
                 </div>
             )}

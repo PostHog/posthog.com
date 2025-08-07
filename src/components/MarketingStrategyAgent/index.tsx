@@ -70,32 +70,50 @@ export default function MarketingStrategyAgent(): JSX.Element {
 
                             if ('kind' in parsedData) {
                                 switch (parsedData.kind) {
-                                    case 'get_site_content': {
-                                        setResearchTree((prev) => {
-                                            const competitors = { ...prev.competitors }
-                                            for (const [key, val] of Object.entries(
-                                                parsedData.result.marketing_research_data.results
-                                            )) {
-                                                competitors[key] = {
-                                                    ...competitors[key],
-                                                    name: val.url,
-                                                    marketing_research_data: val,
-                                                }
-                                            }
-                                            return {
-                                                ...prev,
-                                                rootSiteDate: parsedData.result.site_data,
-                                                competitors,
-                                            }
-                                        })
-                                        break
-                                    }
                                     case 'get_summary':
                                         setResearchTree((prev) => ({
                                             ...prev,
                                             summary: parsedData.result.summary,
                                         }))
                                         break
+                                    case 'find_competitors': {
+                                        setResearchTree((prev) => {
+                                            const competitors = { ...prev.competitors }
+                                            for (const [key, val] of Object.entries(parsedData.result.competitors)) {
+                                                console.log('find_competitors', { key, val })
+
+                                                competitors[key] = {
+                                                    ...competitors[key],
+                                                    name: val.url,
+                                                    find_competitors_data: val,
+                                                }
+                                            }
+                                            return {
+                                                ...prev,
+                                                competitors,
+                                            }
+                                        })
+                                        break
+                                    }
+                                    case 'enrich_competitors': {
+                                        setResearchTree((prev) => {
+                                            const competitors = { ...prev.competitors }
+                                            for (const [key, val] of Object.entries(
+                                                parsedData.result.enriched_competitors
+                                            )) {
+                                                console.log('enrich_competitors', { key, val })
+                                                competitors[key] = {
+                                                    ...competitors[key],
+                                                    enrich_competitors_data: val,
+                                                }
+                                            }
+                                            return {
+                                                ...prev,
+                                                competitors,
+                                            }
+                                        })
+                                        break
+                                    }
                                 }
                             }
                         } catch (error) {
@@ -145,7 +163,7 @@ export default function MarketingStrategyAgent(): JSX.Element {
                     </div>
                 )}
 
-                {researchTree.summary ? <Summary summary={researchTree.summary}></Summary> : null}
+                {researchTree.summary ? <Summary summary={researchTree.summary} /> : null}
 
                 {researchTree.competitors && Object.keys(researchTree.competitors).length > 0
                     ? Object.values(researchTree.competitors).map((competitor) => (
