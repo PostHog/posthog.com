@@ -347,7 +347,7 @@ export default function ProductToolkit() {
         query {
             mdx(slug: { eq: "product-toolkit" }) {
                 rawBody
-                mdxBody
+                mdxBody: body
             }
         }
     `)
