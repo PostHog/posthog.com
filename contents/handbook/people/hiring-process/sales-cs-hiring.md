@@ -23,7 +23,7 @@ Outside of the skills listed in the job description, we are generally looking fo
 
 ### How We Evaluate Candidates
 
-In evaluating potential hires, we are guardians of PostHog's culture and success on the sales team. This means we need to be selective when it comes to adding new folks to the team, as having someone strong in these roles can mean the difference between hitting $100M ARR this year. Interviewing is an information limited practice: we can only go off the information we have and we know that it is not complete. This means making what may seem like a snap judgment in absense of additional info, because of how important it is to get these hires right.
+In evaluating potential hires, we are guardians of PostHog's culture and success on the sales team. This means we need to be selective when it comes to adding new folks to the team, as having someone strong in these roles can mean the difference between hitting $100M ARR this year. Interviewing is an information limited practice: we can only go off the information we have and we know that it is not complete. This means making what may seem like a snap judgment in absence of additional info, because of how important it is to get these hires right.
 
 We need to be particularly sensitive to culture at this stage. We can handle someone underperforming much better than someone who is a poor culture fit due to the impact on the broader team. We don't want to end up taking cold leads from BDRs so we can run MEDPICC from our car phone while promising 50% discounts if they sign before the next full moon.
 
