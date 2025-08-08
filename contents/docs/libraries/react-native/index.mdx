@@ -230,6 +230,14 @@ To reset the user's ID and anonymous ID, call `reset`. Usually you would do this
 posthog.reset()
 ```
 
+## Offline behavior
+
+The PostHog React Native SDK will continue to capture events when the device is offline. When `persistence` is set to `file` (by default), the events are stored in a queue in the device's file storage. Even when the app is closed, the events are persisted and will be flushed when the app is opened again.
+
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed only when the device is online.
+
 ## Opt in/out
 
 By default, PostHog has tracking enabled unless it is forcefully disabled by default using the option `{ defaultOptIn: false }`.

@@ -272,6 +272,14 @@ PostHogSDK.shared.capture("logged_out")
 PostHogSDK.shared.flush()
 ```
 
+## Offline behavior
+
+The PostHog iOS SDK will continue to capture events when the device is offline. The events are stored in a queue in the device's file storage and are flushed when the device is online.
+
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed only when the device is online.
+
 ## Reset after logout
 
 To reset the user's ID and anonymous ID, call `reset`. Usually you would do this right after the user logs out.
