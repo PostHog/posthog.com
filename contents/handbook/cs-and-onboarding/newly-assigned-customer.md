@@ -32,7 +32,7 @@ Start by gathering context about who they are and how they're using PostHog:
 **Data management assessment:**
 In their project(s), check the data management tab:
 - Do they have custom events defined?
-  - If no and they're using auto capture, have they defined actions?
+  - If no and they're using autocapture, have they defined [actions](/docs/data/actions)?
 - For their custom events, do they have robust properties?
 - If they're identifying persons or groups, have they defined a meaningful set of properties on those profiles?
 
