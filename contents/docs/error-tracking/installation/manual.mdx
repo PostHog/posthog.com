@@ -1,3 +1,9 @@
+---
+title: Manual error tracking installation
+---
+
+Error tracking enables you to track, investigate, and resolve exceptions your customers face.
+
 If you're using a different SDK or the API, you can manually capture errors by using the capture API or calling the `capture` method to capture an `$exception` event with the following properties:
 
 | Property | Description |
@@ -5,7 +11,7 @@ If you're using a different SDK or the API, you can manually capture errors by u
 | `$exception_list` | A list of exception objects with detailed information about each error |
 | `$exception_fingerprint` | (Optional) The identifier used to group issues. If not set, a unique hash based on the exception pattern will be generated during ingestion |
 
-The expected schema is described as [a type in our JS repo](https://github.com/PostHog/posthog-js-lite/blob/bd164b8c7e515eb73deb892bdbbd33eacc1cfdc0/posthog-node/src/extensions/error-tracking/types.ts#L24). 
+The expected schema is described as [a type in our JS repo](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L24-L29). 
 
 ### Example
 

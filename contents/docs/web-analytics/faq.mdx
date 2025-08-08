@@ -59,7 +59,7 @@ A [session](/docs/data/sessions) is a grouping of user activity, which starts on
 
 Some traffic to your site might be bots like search engines crawlers, archivers, or content scrapers. You may want some of these to be able to access your site, but you don't want them to appear in your analytics data. Different tools use different methods, which may result in different visitor or page view counts.
 
-Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
+Our client-side bot detection code is available on [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/blocked-uas.ts) (pull requests welcome!) and we automatically prevent detected bots from sending events.
 
 You can also block custom user agents by setting the `custom_blocked_useragents` [config](/docs/libraries/js/config) option if there's a specific user agent that you don't want to track - your custom user agent or maybe a bad actor you want to block.
 

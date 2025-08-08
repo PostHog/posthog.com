@@ -811,7 +811,10 @@
         { "source": "/docs/apps/twitter-followers", "destination": "/docs/cdp/twitter-followers" },
         { "source": "/docs/apps/unduplicator", "destination": "/docs/cdp/" },
         { "source": "/docs/apps/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
-        { "source": "/docs/apps/url-query", "destination": "/docs/cdp/url-query" },
+        {
+            "source": "/docs/apps/url-query",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+        },
         { "source": "/docs/apps/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         { "source": "/docs/apps/variance-connector", "destination": "/docs/cdp/variance-connector" },
         { "source": "/docs/apps/zapier-connector", "destination": "/docs/cdp/" },
@@ -1373,7 +1376,10 @@
         { "source": "/cdp/taxonomy-standardizer", "destination": "/docs/cdp/taxonomy-standardizer" },
         { "source": "/cdp/timestamp-parser", "destination": "/docs/cdp/timestamp-parser" },
         { "source": "/cdp/url-normalizer", "destination": "/docs/cdp/url-normalizer" },
-        { "source": "/cdp/url-query", "destination": "/docs/cdp/url-query" },
+        {
+            "source": "/cdp/url-query",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+        },
         { "source": "/cdp/user-agent-populator", "destination": "/docs/cdp/user-agent-populator" },
         {
             "source": "/handbook/growth/marketing/components",
@@ -1522,6 +1528,14 @@
         {
             "source": "/manual/trends",
             "destination": "/docs/product-analytics/trends"
+        },
+        {
+            "source": "/docs/cdp/url-query",
+            "destination": "/docs/cdp/transformations/posthog-app-url-parameters-to-event-properties"
+        },
+        {
+            "source": "/teams/cs-onboarding",
+            "destination": "/teams/customer-success"
         }
     ],
     "headers": [

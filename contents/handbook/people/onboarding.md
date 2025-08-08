@@ -125,22 +125,19 @@ We use a number of different tools to organise our work and communicate at PostH
 - PagerDuty
 - Heroku
 - Grafana
-- Sentry
 
 ### Design
 - Figma
 
 ### Ops, People & CS
-- HubSpot - customer CRM
+- Salesforce - customer CRM
 - Zendesk - our support platform
-- Pry - financial modelling
+- Mosaic - financial modelling
 - Carta - cap table management
 - Fondo - US accounting
-- Calendly - external meeting scheduling (e.g. demos, sales)
-- Gusto - US payroll and benefits management
 - Deel - international payroll and contracts management
 - Ashby - recruitment
-- Brilliant - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
+- Micromerch - merch inventory management, [YC onboarding](/handbook/growth/sales/yc-onboarding) merch, and merch [drop-shipping for small events](https://github.com/PostHog/meta/issues/31)
 
 ## Signatories
 

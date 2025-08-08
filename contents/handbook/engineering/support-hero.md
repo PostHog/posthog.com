@@ -81,8 +81,7 @@ Outside of your team's Support Hero rotation, you are also eligible to serve in 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
 - [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
 - New issues in the SDK repositories
-  - [posthog-js (Web, React, Next)](https://github.com/PostHog/posthog-js/)
-  - [posthog-js-lite (React Native, Node)](https://github.com/PostHog/posthog-js-lite/)
+  - [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
   - [posthog-ios](https://github.com/PostHog/posthog-ios)
   - [posthog-android](https://github.com/PostHog/posthog-android)
   - [posthog-flutter](https://github.com/PostHog/posthog-flutter)

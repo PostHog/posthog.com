@@ -117,7 +117,9 @@ Additional notes on self-serve discounts:
 
 We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We start non-profit discounts at 15% regardless of spend. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
 
-When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above. 
+When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
+
+To set up the non-profit discount in Stripe, follow the [instructions here](/handbook/growth/sales/billing#coupons-and-discounts).
 
 > Nonprofit discounts don't stack with annual discounts.  It's either/or, not both.
 
@@ -196,7 +198,7 @@ We have CreditBot alerts set up in [#sales-alerts](https://posthog.slack.com/arc
 * If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date.  This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     * Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September.  We need a new 12-month order form in place with a Contract Start Date of September 1st.
 
-For any of the above scenarios you should use our [discounting principles](/handbook/growth/sales/contract-rules#discounts) which apply to the annual spend.  In scenario one above if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract.
+For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the annual spend.  In scenario one above if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract.
 
 ### When they will end the contract term with credit remaining
 
@@ -206,8 +208,14 @@ We can roll up to half the amount of credit from the original order form to a ne
 
 > If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of potential changes.
 
-The typical approach here is for them to redline a .docx format of the contract.  Once you have that ask for a review in the [#legal](https://posthog.slack.com/archives/C08MYQX74KH) channel with any context you have about the customer and opportunity.
+The customer should redline the .docx version of the document in question.  You can find the latest versions of the templates in the Team Internal Info tab in the #team-sales Slack channel.  Once they have returned the redlines to you first check to ensure that they have used the template which you provided, and then share the document for review in the #legal channel.  There will usually be a few rounds of back and forth as we converge on an agreement.  
+
+> We don't accept redlines on our standard terms of service and if a customer has proposed this you should share the correct templates with them before involving legal.
+
+We also sometimes receive unsolicited requests to vary our terms.  In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity.
 
 ## Non-PostHog contracts
 
-If a customer requests to use a non-PostHog drafted contract for DPA, MSA, Order Form, or BAA generally we avoid doing this as it adds too much risk for us. We usually would not even consider this for deals not above $100k or for extremely blue chip companies. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. An exception to this rule is for NDAs - these are usually fine. 
+If a customer requests to use a non-PostHog drafted contract for documents such as a DPA, MSA, Order Form, or BAA, we generally decline, except in special circumstances.  We avoid doing this as it adds too much risk for us, and also because reviewing and negotiating non-standard terms introduces significant operational inefficiencies and doesn't scale well as we continue to grow. We typically do not even consider using customer paper unless the deal is over $100k annually or involves an extremely blue-chip company. It is best to manage this expectation early and just avoid entertaining the idea with customers as soon as possible. 
+
+We are somewhat more flexible when it comes to NDAs. That said, since we contract through our U.S. entity, we require customer NDAs to be governed by U.S. law. This is necessary to maintain consistency and ensure we’re not taking on legal or operational risk in jurisdictions where we don’t operate or fully understand the legal landscape. This is mainly about ensuring we can review and manage agreements efficiently with our limited legal resources.

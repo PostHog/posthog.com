@@ -6,6 +6,8 @@ showTitle: true
 
 Incidents are going to happen.
 
+If you'd rather watch a Loom, check out an incident drill recording [here](https://www.loom.com/share/5603d887624f4981bc089677cb4b8611).
+
 ## When to raise an incident
 
 > **Anyone can declare an incident and, when in doubt, you should always raise an incident.** We'd much rather have declared an incident which turned out not to be an incident. Many incidents take too long to get called, or are missed completely because someone didn't ring the alarm when they had a suspicion something was wrong. It's _always_ better to sound an alarm than not. 
