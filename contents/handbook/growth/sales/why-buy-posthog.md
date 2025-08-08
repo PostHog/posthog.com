@@ -8,7 +8,7 @@ AKA our Value Proposition, these are some of the things we've found useful to sh
 
 # In short
 
-Our messaging varies depending on whether our users have a data engineering team and warehouse already.  If they don't
+Our messaging varies depending on whether our users have a data engineering team and warehouse already.  If they don't:
 
 > PostHog is an all-in-one data warehouse providing the only tools you need to understand and work better with your customers.
 
