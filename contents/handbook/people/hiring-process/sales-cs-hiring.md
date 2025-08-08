@@ -21,15 +21,17 @@ Outside of the skills listed in the job description, we are generally looking fo
 *   Prioritization skills - you'll be working with a book of business at different states and will have to prioritize your work accordingly.
 *   People who are motivated by revenue growth.
 
-### How We Evaluate Candidates
+### How we evaluate candidates
 
-In evaluating potential hires, we are guardians of PostHog's culture and success on the sales team. This means we need to be selective when it comes to adding new folks to the team, as having someone strong in these roles can mean the difference between hitting $100M ARR this year. Interviewing is an information limited practice: we can only go off the information we have and we know that it is not complete. This means making what may seem like a snap judgment in absence of additional info, because of how important it is to get these hires right.
+We need to be particularly sensitive to culture at this stage. We can handle someone underperforming much better than someone who is a poor culture fit due to the impact on the broader team. We don't want to end up taking cold leads from BDRs so we can run MEDPICC from our car phone while promising 50% discounts if they sign before the next full moon. We want someone who is comfortable carrying a sales conversation while also possessing the technical chops to talk to engineers and get their hands dirty.
 
-We need to be particularly sensitive to culture at this stage. We can handle someone underperforming much better than someone who is a poor culture fit due to the impact on the broader team. We don't want to end up taking cold leads from BDRs so we can run MEDPICC from our car phone while promising 50% discounts if they sign before the next full moon.
+We want someone who can own technical problems and even if they don't have the answer, understand enough of the context to provide that to engineers. We want someone who sees themselves as the first line of defense for our engineers, because engineering time is valuable; it's a win when they can solve a problem without additional engineering lean in.
 
-Thinking about the positive impact a candidate brings to the team: unique skills, strong ability, breadth of experience, and a bias for action are great filters to determine whether someone is "just OK" vs. being an outstanding candidate. Similar to looking for developers who have built something great, we want to look for salespeople who have done something great. Even if the thing they've done isn't directly in the sales space, seeing that they can execute well is a great sign. If we have a candidate that would be a "2.5," rounding down to 2 is probably better than rounding up to 3.
+A great litmus test for a candidate is if they are comfortable instrumenting PostHog and can speak to how they actually implement it on a site. That's typically a good indicator that they've got the right technical prowess.
 
-It can be tempting to feel bad rejecting someone who is OK, but not great. It's helpful to remember that this isn't a value judgment on them as a person. This doesn't make them bad, it just means they wouldn't be a good fit here. Our opportunity cost here is high, and we want to make each hire as impactful as we can. We should think about how a candidate's skills grow our team's ability to make customers happy and grow revenue. It can also be helpful to think about: How would this person perform in a difficult situation with a difficult customer? Could we trust that they would jump in and tackle the problem head on, or would be the team be left to pick up the slack?
+We want someone who is in it develop customers for the long run, we don't want someone who is here for quick churn and burn to pump up quota attainment. Building a relationship with a product engineer requires actually knowing PostHog, not just knowing *about* PostHog.
+
+Ultimately, we want someone who we'd want to buy from.
 
 ### Sales and CS hiring process 
 
