@@ -20,11 +20,11 @@ Start by gathering context about who they are and how they're using PostHog:
 **Understanding their business:**
 - What industry are they in? What products do they make?
 - If you have other customers in their industry, does their usage of PostHog fit what you've seen before?
-- If there are products they aren't using that you've seen other customers in their industry find value from, take note of that to bring up later after you've done your discovery call.
 - If you want to do an even deeper dive on the business side, the Sales team has a thorough [account planning template](/handbook/growth/sales/account-planning) that they use for cross-sell/expansion that you can take guidance from.
 
 **Reviewing their PostHog setup:**
 - What PostHog products are they using?
+- What PostHog products are they *not* using?
 - Does their setup look complete? Check the items from their [health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking)
 - Review their [product onboarding](https://posthog.com/handbook/growth/sales/account-allocation#product-onboarding) status
 
