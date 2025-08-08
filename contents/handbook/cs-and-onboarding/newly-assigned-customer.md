@@ -14,7 +14,7 @@ When you're assigned a new customer account, your approach will vary depending o
 
 These are customers who have been using PostHog but haven't had much direct contact with our team. They need a more thorough assessment before you do your initial outreach.
 
-#### Do an audit of their account and business
+#### Account and business audit
 
 Start by gathering context about who they are and how they're using PostHog:
 
