@@ -52,7 +52,7 @@ Once you've completed your audit:
 Once you've made contact, schedule a [discovery call](https://posthog.com/handbook/cs-and-onboarding/getting-to-know-your-customers#discovery-call) to better understand their goals and challenges.
 
 The learnings from your discovery call should help you determine what the ongoing relationship will look like with the customer.
-- Determine what your is the goal you want to achieve with this customer? (Keep an eye on them vs. become more deeply embedded as a strategic partner)
+- Determine what is the goal you want to achieve with this customer? (Keep an eye on them vs. become more deeply embedded as a strategic partner)
   - If a customer needs a lot of help with either fixing their current setup or implementing new products they want to expand to, that is a great opportunity for you to be their strategic partner and set up a detailed [success plan](https://posthog.com/handbook/cs-and-onboarding/onboarding-success-plan) with them.
   - Some customers may not want to engage deeply and that is okay, still continue to monitor their usage/spend and check-in with them when appropriate. 
 - You should have a regular check-in for all your customers, but the cadence (quarterly, monthly, weekly, biweekly) and medium (meeting or async) will depend on their needs.
