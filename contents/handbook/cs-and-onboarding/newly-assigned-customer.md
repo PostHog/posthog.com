@@ -36,7 +36,7 @@ In their project(s), check the data management tab:
 - Do custom events have relevant [custom properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event) defined?
 - If they're identifying persons or groups, have they defined a meaningful set of properties on those profiles?
 
-Answering these questions helps you determine what may be the most important things to focus on and call out in your initial introduction.
+Answering these questions helps you identify the most important things to focus on in your initial introduction.
 
 #### Initial outreach
 
