@@ -2287,6 +2287,17 @@ export const docsMenu = {
                         },
                     ],
                 },
+                {
+                    name: 'AI tools & agents',
+                    url: '/docs/ai-tools',
+                    icon: 'IconBolt',
+                    children: [
+                        {
+                            name: 'Model Context Protocol (MCP)',
+                            url: '/docs/ai-tools/model-context-protocol',
+                        },
+                    ],
+                },
 
                 {
                     name: 'Advanced',
