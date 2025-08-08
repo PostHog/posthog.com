@@ -33,7 +33,7 @@ Start by gathering context about who they are and how they're using PostHog:
 In their project(s), check the data management tab:
 - Do they have custom events defined?
   - If no and they're using autocapture, have they defined [actions](/docs/data/actions)?
-- For their custom events, do they have robust properties?
+- Do custom events have relevant [custom properties](/docs/getting-started/send-events#sending-custom-properties-on-an-event) defined?
 - If they're identifying persons or groups, have they defined a meaningful set of properties on those profiles?
 
 Answering these questions helps you determine what may be the most important things to focus on and call out in your initial introduction.
