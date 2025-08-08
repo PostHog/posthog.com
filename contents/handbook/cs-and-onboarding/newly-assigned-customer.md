@@ -11,7 +11,7 @@ When you're assigned a new customer account, your approach will vary depending o
 
 ### No/low interaction with PostHog humans
 
-These are customers who have been using PostHog but haven't had much direct contact with our team. They need a more thorough assessment before you do your initial outreach.
+These are customers who have been using PostHog but haven't had much direct contact with our team. You should do a more thorough assessment before you have your first call with them. If you haven't done your initial outreach yet, you can also use the assessment to customize your message with a specific tip from your learning. 
 
 #### Account and business audit
 
