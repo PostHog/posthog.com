@@ -4,7 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-# Getting started with newly assigned customers
 
 When you're assigned a new customer account, your approach will vary depending on their existing relationship with PostHog. This guide walks you through the key steps to take when welcoming new customers to your book.
 
