@@ -84,7 +84,7 @@ Normally they don't have anything in place, and the pitch is (1) - You need a da
 - If they have a warehouse and data team in place already it's difficult to displace, so we should offer the coexistence story (4).
 - If they have deployed a warehouse but don't have a data team, we should pitch (2) - implement a better data warehouse.
 - Otherwise, we should focus on the role of the person we are speaking with:
-  - For **Engineers** and **Leadership** e.g. CTO, its (1) You need a data warehouse, and (3) can self serve rather than building a data team.
+  - For **Engineers** and **Leadership** e.g. CTO, it's (1) You need a data warehouse, and (3) can self serve rather than building a data team.
   - For **Product** and **Growth**, it's (3) - You can self serve a lot more with us.
 
 ### Larger companies
