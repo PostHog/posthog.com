@@ -308,7 +308,7 @@ export const query = graphql`
                 featuredImage {
                     publicURL
                     childImageSharp {
-                        gatsbyImageData
+                        gatsbyImageData(width: 1200)
                     }
                 }
                 contributors: authorData {
