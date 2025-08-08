@@ -115,9 +115,8 @@ The objective of the meeting is to hold each other to account, provide direct fe
   - It also means that you are less likely to totally neglect existing customers because if they reduce usage, it hurts your overall ARR figure.
 - Commission is _uncapped_ and paid out based on the % of your quota you hit, on a sliding scale. Hit 100% commission, get 100% of commission. 0% for 0%. And 200% for 200%. Ways to hit quota:
   - Increase ARR for your monthly customers
-  - Convert monthly customers to annual - in this case, their monthly usage will count 1.25x towards your quota
+  - Convert monthly customers to annual - in this case, their monthly usage invoices paid with annual credits will count 1.25x towards your quota
   - For customers already on annual plans, additional usage ARR _beyond_ their annual run rate - for example, if you have a customer on a $120k annual contract, but they are being invoiced $20k/mo for their usage, you will get recognized on the additional $10k/mo
-  - Renew annual deals at a higher ARR than they were on previously
   - Your quota will depend on your OTE
 - Commission is paid out quarterly, and in any case after an invoice is paid
   - We don't want TAMs to throw invoice chasing to a finance person - you should make friends with the finance person on the customer's side too
@@ -132,7 +131,9 @@ The objective of the meeting is to hold each other to account, provide direct fe
 >
 > If you have customer you converted from monthly to annual under the old, non-usage-based commission plan, you won't _also_ get recognized for additional usage beyond their annual run rate in the first year - no double dipping!
 
-### Team target
+You can see how we are tracking on the [TAM Quota Tracker](https://us.posthog.com/project/2/dashboard/498582) dashboard.
+
+## Team target
 
 To calculate the team quota we combine the quota of all team members, with proration applied if they are still ramping:
 
