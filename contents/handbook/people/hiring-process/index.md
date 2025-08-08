@@ -130,6 +130,8 @@ If you have other referrals in your network (e.g. 2nd degree connections), who h
 
 The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.  
 
+> You will sometimes get people emailing or messaging you on LinkedIn asking to chat about a role or get referred in. If you don't know them, you can point them back to our [careers page](/careers), or just ignore them. We get dozens of these kinds of messages every day, so don't feel bad about not engaging! If they are asking for advice, you can point them to [this article](/newsletter/how-to-get-job-startup).
+
 #### Referral payouts
 
 You'll get paid the bonus 3 months from the new team member's start date, and it will be processed as part of payroll. Bear in mind that you might be liable for income tax on the bonus. 
