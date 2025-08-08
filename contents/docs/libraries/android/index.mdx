@@ -278,7 +278,7 @@ The PostHog Android SDK will continue to capture events when the device is offli
 
 - The queue has a maximum size defined by `maxQueueSize` in the configuration.
 - When the queue is full, the oldest event is deleted first.
-- The queue is flushed when the device is online.
+- The queue is flushed when the app is restarted and the device is online.
 - When you call [`flush()`](#flush) while the device is offline, it aborts early and the events are not flushed.
 
 ## All configuration options
