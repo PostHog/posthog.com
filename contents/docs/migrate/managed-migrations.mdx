@@ -31,9 +31,9 @@ Direct imports enable you to migrate data directly from Mixpanel or Amplitude wi
 - Transforms events to match PostHog's event schema
 - Imports the data into your PostHog project
 
-Note: Each direct import job supports a maximum date range of one year. To migrate data spanning more than one year, run multiple jobs that cover smaller, consecutive ranges.
+Each direct import job supports a maximum date range of one year. To migrate data spanning more than one year, run multiple jobs that cover smaller, consecutive ranges.
 
-See the [Event transformations](#event-transformations) section for full mapping details and examples, and consider running a small test migration first to preview transformations.
+See the [Event transformations](#event-transformations) section for full mapping details and examples. You should also consider running a small test migration first to preview transformations.
 
 <CalloutBox icon="IconWarning" title="Caveat" type="caution">
 
@@ -43,7 +43,11 @@ Direct imports are currently less reliable than S3 imports for some datasets and
 
 ## S3 imports
 
-S3 imports are the most reliable and flexible way to migrate your data to PostHog. You can upload uncompressed JSONL files using any supported content type — `posthog`, `amplitude`, or `mixpanel`. You may choose to run your own custom transformations and output PostHog‑shaped events (select the `posthog` content type), but you don’t have to — if you upload Amplitude or Mixpanel exports and select the matching content type, we’ll apply the same mappings as direct imports. This method gives you full control while still benefiting from automated ingestion. This method is ideal when you need:
+S3 imports are the most reliable and flexible way to migrate your data to PostHog.
+
+You can upload uncompressed JSONL files using any supported content type — `posthog`, `amplitude`, or `mixpanel`. You may choose to run your own custom transformations and output PostHog‑shaped events (select the `posthog` content type), but you don’t have to — if you upload Amplitude or Mixpanel exports and select the matching content type, we’ll apply the same mappings as direct imports.
+
+This method gives you full control while still benefiting from automated ingestion. This method is ideal when you need:
 
 - Custom event transformations
 - To handle very large datasets
@@ -54,14 +58,14 @@ If you upload Amplitude or Mixpanel events to S3, select the matching content ty
 
 ### Supported content types
 
-- **amplitude**: Upload JSONL events that match Amplitude’s export schema. The [Event transformations](#event-transformations) for Amplitude are applied during import.
-- **mixpanel**: Upload JSONL events that match Mixpanel’s export schema. The [Event transformations](#event-transformations) for Mixpanel are applied during import.
-- **posthog**: Upload JSONL events that match PostHog’s event schema; events are ingested as-is without source-specific remapping. Use this if you’ve already run your own transformation to produce PostHog-shaped events.
+- `amplitude`: Upload JSONL events that match Amplitude’s export schema. The [event transformations](#event-transformations) for Amplitude are applied during import.
+- `mixpanel`: Upload JSONL events that match Mixpanel’s export schema. The [event transformations](#event-transformations) for Mixpanel are applied during import.
+- `posthog`: Upload JSONL events that match PostHog’s event schema. Events are ingested as-is without source-specific remapping. Use this if you’ve already run your own transformation to produce PostHog-shaped events.
 
 ### File format and compression
 
 - **Format**: Files must be JSON Lines (`.jsonl`) with one valid JSON object per line.
-- **Schema**: Each line/object must conform to the selected content type’s schema (amplitude, mixpanel, or posthog).
+- **Schema**: Each line/object must conform to the selected content type’s schema (`amplitude`, `mixpanel`, or `posthog`).
 - **Compression**: Files must not be compressed. Some export endpoints return compressed archives (for example `.gz` or `.zip`)—ensure you fully uncompress files to plain `.jsonl` before importing.
 
 ### Custom event transformations with S3
@@ -114,7 +118,7 @@ Once started, you can monitor your migration progress:
 1. **Migration dashboard**: View real-time progress and status of your migration
 2. **Event validation**: Query for your events as they come in to ensure proper transformation and ingestion
 
-If an unexpected error occurs during a migration, the job will be paused and the error message will be displayed in the migration dashboard. For transient issues (for example, upstream API rate limits or temporary availability problems), you can contact support to help resume or retry your job once the condition has cleared.
+If an unexpected error occurs during a migration, the job will be paused and the error message will be displayed in the migration dashboard. For transient issues (for example, upstream API rate limits or temporary availability problems), you can contact support using the **Data ingestion** topic to help resume or retry your job once the condition has cleared.
 
 If the error indicates your job is attempting to import too much data (for example, exceeding export size limits), consider switching to an [S3 import](#s3-imports), which is better suited for large migrations.
 
@@ -129,9 +133,9 @@ When you use direct imports, PostHog transforms events from your source (Amplitu
 ### Amplitude → PostHog
 
 - **Event name mapping**
-  - **session_start**: dropped (not imported)
-  - **[Amplitude] Page Viewed** → `$pageview`
-  - **[Amplitude] Element Clicked** and **[Amplitude] Element Changed** → `$autocapture`
+  - `session_start`: dropped (not imported)
+  - `[Amplitude] Page Viewed` → `$pageview`
+  - `[Amplitude] Element Clicked` and `[Amplitude] Element Changed` → `$autocapture`
   - All other event names are preserved
 - **Distinct ID selection**
   - Prefer `user_id`, else `device_id`, else a generated UUID
@@ -231,4 +235,8 @@ Example (simplified):
 }
 ```
 
-Tip: Start with a small date range as a test migration to a fresh project to preview the transformed events and validate your mappings before running a full migration.
+<CalloutBox icon="IconInfo" title="Tip" type="fyi>
+
+Start with a small date range as a test migration to a fresh project to preview the transformed events and validate your mappings before running a full migration.
+
+</CalloutBox>
