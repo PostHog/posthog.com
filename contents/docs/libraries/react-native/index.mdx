@@ -233,7 +233,7 @@ posthog.reset()
 
 ## Offline behavior
 
-The PostHog React Native SDK will continue to capture events when the device is offline. When `persistence` is set to `file`, the events are stored in a queue in the device's file storage. Even when the app is closed, the events are persisted and will be flushed when the app is opened again.
+The PostHog React Native SDK will continue to capture events when the device is offline. When `persistence` is set to `file` (by default), the events are stored in a queue in the device's file storage. Even when the app is closed, the events are persisted and will be flushed when the app is opened again.
 
 - The queue has a maximum size defined by `maxQueueSize` in the configuration.
 - When the queue is full, the oldest event is deleted first.
