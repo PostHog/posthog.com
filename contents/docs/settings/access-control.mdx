@@ -51,7 +51,7 @@ Access levels can be viewed and changed in the [Members section](https://app.pos
 
 At the project level, there are two access levels: member and admin.
 
-Each project has a default access level that applies to all organization members:
+Each project has a default access level that applies to all organization members. The default access level can be one of these three options:
 
 - **No access** – Members need explicit permission to access the project
 - **Member** – All organization members have member-level access
@@ -91,7 +91,7 @@ Currently, resource access controls are available for:
 
 Note: We do not yet support limiting access to querying data, viewing replays, or accessing person / group profiles. Support for these features is planned for the near future.
 
-Resource access controls have three possible access levels:
+Resource access controls have four possible access levels:
 - **No access** – Cannot view or edit the resource
 - **Viewer** – Can view but not modify the resource
 - **Editor** – Can view and modify the resource
@@ -105,7 +105,7 @@ These settings allow you to control who can view and edit a specific resource ob
 
 By default, new resources are set to "Editor" access. Users with appropriate permissions can modify this default and set specific permissions for members and roles.
 
-Resource creators and project admins can always view and edit resources, as well as manage their access controls. Only creators and project admins can manage access controls for a resource object.
+Resource creators, project admins, and users with "Manager" access can always view and edit resources, as well as manage their access controls.
 
 You cannot set resource-level access controls for project admins, as they always have full access.
 
@@ -122,9 +122,9 @@ These settings allow you to control who can view and edit all resources of a giv
 
 You can set default access levels for all resources of a given type in a project. This allows you to set it once and apply it to all resources of that type in the project (past and future).
 
-Project-wide access controls for resources take precedence over individual resource object access controls.
+Individual resource object access controls for specific users or roles take precedence over resource-level access controls.
 
-You cannot set project-wide access controls for project admins, as they always have full access.
+You cannot set resource-level access controls for project admins, as they always have full access.
 
 <ProductScreenshot
     imageLight = {resourceAccessControlLight} 
@@ -133,25 +133,85 @@ You cannot set project-wide access controls for project admins, as they always h
     classes="rounded"
 />
 
+## How object-level access control precedence works
+
+When determining what a user can access for a specific resource object, PostHog checks permissions in this order (highest priority first):
+
+1. **Specific object permissions** - Direct access granted to a specific resource object (e.g., Amy can edit Dashboard X)
+2. **Resource type permissions** - Access set for all resources of a type (e.g., Customer Support role can view all Notebooks)
+3. **Default object permissions** - Default access that applies to a resource object (e.g., Insight Y has view access by default)
+
+**Note**: Resource creators and organization admins always have full access, regardless of these precedence rules.
+
+## Common use cases
+
+Here are some practical examples of how to configure access controls for different scenarios:
+
+#### Contractor with access to only one dashboard
+
+**Scenario**: You want to give a contractor access to view only a specific dashboard without access to other project resources.
+
+**Setup**:
+1. Set resource-level access controls to "No access" for all resource types for the contractor
+2. Give the contractor specific "Viewer" access to the desired dashboard
+3. The contractor will only see and access that specific dashboard
+
+#### Country teams with role-based access
+
+**Scenario**: You have teams organized by country and want each team to have edit access to their country's resources.
+
+**Setup**:
+1. Create roles for each country team (e.g., "US Team", "UK Team")
+2. Add team members to their respective country roles
+3. Set resource-level access controls to "Viewer" for all resource types for each role
+4. Create country-specific dashboards and insights
+5. Assign each role "Editor" access to their country's resources
+
+#### Private project for executives only
+
+**Scenario**: You want to create a project that only executives can access.
+
+**Setup**:
+1. Set project default access to "No access"
+2. Create an "Executives" role
+3. Add executives to the "Executives" role
+4. Give the "Executives" role "Admin" access to the project 
+5. Only executives will have access to the project and its resources
+
+#### Data scientist with limited access
+
+**Scenario**: You want to give an analyst access to create and edit insights, but only view dashboards.
+
+**Setup**:
+1. Set resource-level access controls to "No access" for all resource types for the analyst
+2. Give the analyst "Editor" access to all Insights (resource-level)
+3. Give the analyst "Viewer" access to all Dashboards (resource-level)
+4. The analyst can create and edit insights but only view dashboards
+
 ## Feature availability
 
 ### Free / Pay-as-you-go
 
 These plans do not currently offer any access control features. All projects are open to all members and all resources are open to all members with "Editor" access.
 
-### Boost or scale
+### Boost or Scale
 
-The Boost and Scale add-ons give advanced permissions.
+The Boost and Scale add-ons include access controls for teams with stricter security requirements.
 
-The goal of this is to allow teams with stricter access requirements to control who can access their projects and resources.
-
-On these plans, you can set default access levels for projects and resources, and also set specific access levels for individual members (but not roles).
+**What you can do:**
+- Set default access levels for projects and resources
+- Configure specific access levels for individual members (but not roles)
 
 ### Enterprise
 
-> While you can create roles on any plan, they can only be used for access control on Enterprise plans.
+> **Note**: While you can create roles on any plan, they can only be used for access control on Enterprise plans.
 
-Instead of managing permissions individually, you can create roles to group users together. Roles can be assigned permissions at both the project and resource level.
+Enterprise plans include full access control capabilities with role-based access control (RBAC).
+
+**What you can do:**
+- Create roles to group users together
+- Assign permissions to roles at both project and resource levels
+- Manage permissions at scale instead of individually
 
 <ProductScreenshot
     imageLight = {rbacSettingsLight} 
