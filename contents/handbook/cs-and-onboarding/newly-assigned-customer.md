@@ -41,11 +41,8 @@ Answering these questions helps you identify the most important things to focus 
 
 Once you've completed your audit:
 
-- Look for who are the owners/admins on the account and most active users
-- Do an initial outreach to those people
-  - In your introduction, make it clear what you can help them with as a CSM
-  - Based on your audit, add a specific note about something you noticed on their account, relevant training, or something specific you'd like to help them with
-  - Suggest setting up a [Slack/Teams channel](/handbook/growth/sales/slack-channels) so they can easily reach you and other members of our team 
+- Find who are the owners/admins on the account and most active users.
+- Review [saying hi to your customers](/handbook/cs-and-onboarding/saying-hi-to-your-customers) for recommendations on how to do your outreach.
 
 **Setting expectations:**
 Once you've made contact, schedule a [discovery call](/handbook/cs-and-onboarding/getting-to-know-your-customers#discovery-call) to better understand their goals and challenges.
