@@ -12,8 +12,6 @@ LLM observability is currently considered in `beta`. To access it, enable the [f
 
 <Step title="Install the PostHog SDK" badge="required">
 
-LLM observability is currently considered in `beta`. To access it, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account.
-
 Setting up observability starts with installing the PostHog SDK for your language. LLM observability works best with our Python and Node SDKs.
 
 <MultiLanguage>
@@ -153,7 +151,7 @@ phClient.shutdown();
 
 </MultiLanguage>
 
-This automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`. It also automatically creates a trace hierarchy based on how LangChain components are nested 
+This automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`. It also automatically creates a trace hierarchy based on how LangChain components are nested.
 
 </Step>
 
