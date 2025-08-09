@@ -1,17 +1,18 @@
 import React from 'react'
 import { IconMagicWand } from '@posthog/icons'
 
+// not currently in use. check useProducts.ts
 export const cdp = {
     Icon: IconMagicWand,
-    name: 'Max AI',
-    description: 'Max AI is a tool that helps you analyze your data and make decisions.',
+    name: 'Max',
+    description: 'Max is a tool that helps you analyze your data and make decisions.',
     // handle: 'data_pipelines',
     handle: 'max_ai',
     type: 'max_ai',
     slug: 'max',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'product_os',
+    category: 'ai',
     seo: {
         title: 'Max AI - PostHog',
         description: 'Max AI is a tool that helps you analyze your data and make decisions.',

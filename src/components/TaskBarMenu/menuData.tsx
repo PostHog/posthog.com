@@ -264,7 +264,7 @@ export function useMenuData(): MenuType[] {
             ],
         },
         {
-            trigger: 'Products',
+            trigger: 'Product OS',
             items: getProductMenuItems(),
         },
         {

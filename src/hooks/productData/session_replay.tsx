@@ -15,7 +15,7 @@ export const sessionReplay = {
     slug: 'session-replay',
     color: 'yellow',
     colorSecondary: '[#B56C00]',
-    category: 'product',
+    category: 'product_engineering',
     seo: {
         title: 'Session replay - PostHog',
         description: 'Watch people use your product to diagnose issues and understand user behavior',

@@ -8,7 +8,7 @@ export const surveys = {
     slug: 'surveys',
     color: 'salmon',
     colorSecondary: 'red',
-    category: 'product',
+    category: 'communication',
     seo: {
         title: 'Surveys - PostHog',
         description: 'Ask anything with no-code surveys – or use the API for complete control.',

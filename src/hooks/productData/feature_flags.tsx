@@ -11,7 +11,7 @@ export const featureFlags = {
     slug: 'feature-flags',
     color: 'green',
     colorSecondary: 'seagreen',
-    category: 'engineering',
+    category: 'product_engineering',
     seo: {
         title: 'Feature flags - PostHog',
         description: 'Safely roll out features to specific users or groups',

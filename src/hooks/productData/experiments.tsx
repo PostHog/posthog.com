@@ -11,7 +11,7 @@ export const experiments = {
     slug: 'experiments',
     color: 'purple',
     colorSecondary: 'lilac',
-    category: 'product',
+    category: 'product_engineering',
     seo: {
         title: 'Experiments - PostHog',
         description: 'Run statistically-significant multivariate tests and robust targeting & exclusion rules.',

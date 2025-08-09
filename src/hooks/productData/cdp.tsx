@@ -3,7 +3,7 @@ import { IconPlug } from '@posthog/icons'
 
 export const cdp = {
     Icon: IconPlug,
-    name: 'Data Pipelines',
+    name: 'data connectors.md',
     description: 'Get data into PostHog and send it where it needs to go.',
     handle: 'cdp',
     type: 'cdp',
