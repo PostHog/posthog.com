@@ -1,10 +1,11 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useCallback, useEffect, useMemo } from 'react'
 import * as ScrollArea from '@radix-ui/react-scroll-area'
 import * as RadioGroup from '@radix-ui/react-radio-group'
 import * as Icons from '@posthog/icons'
 import { IMenu } from 'components/PostLayout/types'
 import { Link, navigate } from 'gatsby'
 import { useApp } from '../../context/App'
+import { useWindow } from '../../context/Window'
 
 // --- Data Structure ---
 
@@ -93,6 +94,7 @@ const FileColumn: React.FC<FileColumnProps> = ({ items, selectedId, onSelect }) 
 }
 
 export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ initialPath = [], menu }) => {
+    const { appWindow } = useWindow()
     const { compact, isMobile } = useApp()
     const { getItemChildren } = useFileData(menu)
     const [path, setPath] = useState<(IMenu | null)[]>([null, ...initialPath]) // Start with null for root
@@ -114,7 +116,7 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
             return null
         }
 
-        const currentPathname = window.location.pathname
+        const currentPathname = appWindow?.path || ''
         const foundPath = findPath(menu, currentPathname)
 
         if (foundPath) {
@@ -135,22 +137,25 @@ export const FileMenu: React.FC<{ initialPath?: IMenu[]; menu: IMenu[] }> = ({ i
         [path]
     )
 
-    const columns: { items: IMenu[]; selectedItem: IMenu | null }[] = []
-    for (let i = 0; i < path.length; i++) {
-        const parentItem = path[i] // The item selected in the previous column (or null for root)
-        const items = getItemChildren(parentItem)
-        const selectedItemInNextCol = i + 1 < path.length ? path[i + 1] : null // What's selected in the column *we are generating*
+    const columns = useMemo(() => {
+        const columns: { items: IMenu[]; selectedItem: IMenu | null }[] = []
+        for (let i = 0; i < path.length; i++) {
+            const parentItem = path[i] // The item selected in the previous column (or null for root)
+            const items = getItemChildren(parentItem)
+            const selectedItemInNextCol = i + 1 < path.length ? path[i + 1] : null // What's selected in the column *we are generating*
 
-        // Only add a column if the parent was a folder (or root)
-        if (i === 0 || (parentItem && parentItem.children)) {
-            columns.push({ items, selectedItem: selectedItemInNextCol })
-        }
+            // Only add a column if the parent was a folder (or root)
+            if (i === 0 || (parentItem && parentItem.children)) {
+                columns.push({ items, selectedItem: selectedItemInNextCol })
+            }
 
-        // Stop adding columns if the last selected item was a file
-        if (parentItem && !parentItem.children) {
-            break
+            // Stop adding columns if the last selected item was a file
+            if (parentItem && !parentItem.children) {
+                break
+            }
         }
-    }
+        return columns
+    }, [path])
 
     // Determine if the very last selected item in the path is a file to show a preview
     const lastSelectedItem = path[path.length - 1]

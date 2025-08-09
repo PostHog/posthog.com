@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useLayoutEffect, useRef } from 'react'
 import { Popover as RadixPopover } from 'radix-ui'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { IconX } from '@posthog/icons'
@@ -32,6 +32,17 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
         },
         ref
     ) => {
+        const scrollRef = useRef<HTMLDivElement>(null)
+
+        useLayoutEffect(() => {
+            if (scrollRef.current) {
+                const element = scrollRef.current
+                element.style.display = 'none'
+                element.offsetHeight // Trigger reflow
+                element.style.display = ''
+            }
+        }, [children])
+
         return (
             <RadixPopover.Root open={open} onOpenChange={onOpenChange}>
                 <RadixPopover.Trigger asChild className={className}>
@@ -59,7 +70,9 @@ export const Popover = React.forwardRef<HTMLDivElement, PopoverProps>(
                                     </div>
                                 </div>
                             )}
-                            <ScrollArea className="h-full">{children}</ScrollArea>
+                            <div ref={scrollRef}>
+                                <ScrollArea className="h-full">{children}</ScrollArea>
+                            </div>
                         </div>
                         <RadixPopover.Arrow className="fill-white" />
                     </RadixPopover.Content>
