@@ -1,0 +1,55 @@
+---
+title: Error tracking issue assignment
+---
+
+Error tracking allows you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or users. This helps your team find relevant issues to work on through **filtering**. You can also set up team-specific **alerting** to notify specific teams when issues are created or reopened.
+
+This guide covers the following:
+- [Assigning issues to roles or users](#assigning-issues)
+- [Automatically assigning issues to roles or users through a set of rules](#automatic-issue-assignment)
+- [Alerting based on assignment](#alerting-based-on-assignment)
+
+## Assigning issues
+
+You can manually assign issues as you triage them in the UI. This can be done both in the issue list and issue detail pages.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_ui_light_109b2bf454.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_ui_dark_4682b2ac80.png"
+    alt="Error tracking alerting"
+    classes="rounded"
+/>
+
+1. In your error tracking [issue list](https://app.posthog.com/error_tracking), you can click the **unassigned** selector under each issue to assign it to a role or user.
+
+2. In the detail page of each issue, you can click the **Assignee** selector to assign it to a role or user.
+
+## Automatic issue assignment
+
+You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://us.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment).
+
+Issues can be automatically assigned to a **role** or **user** by configuring a set of filters. These filters can be configured to match **any** or **all** of the criteria.
+
+The filters can be configured to filter on any [event property](/docs/data/events) in PostHog. Here are some common properties you can filter on:
+
+| Property | Event property | Description |
+| --- | --- | --- |
+| Exception type | `$exception_type` | The type of exception that occurred. |
+| Exception message | `$exception_message` | The message detected on the error. |
+| Exception source | `$exception_sources` | The source file(s) where the exception occurred. |
+| Exception level | `$exception_level` | The level of the severity of the error. |
+| Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
+| Device type | `$device_type` | The type of device that the error occurred on. |
+| Browser | `$browser` | The browser that the error occurred in. |
+| Current URL | `$current_url` | The URL that the error occurred on. |
+| Feature flag | `$feature_flag` | The feature flag that the error occurred on. |
+
+You can also set custom properties on the error tracking event to filter on. For example, setting a custom `release_version` number, `repo_owner`, or `params_received` property to provide more context or debug information.
+
+### Order of issue assignment filters
+
+Issue assignment filters are evaluated in the order they are configured. The first filter that matches will be used to assign the issue. This means you should configure the most specific filters first, and then the more general filters, finally with a catch-all filter at the end.
+
+### Alerting based on assignment 
+
+A common use case for automatic issue assignment is to alert assignees of new issues. Once the issues are automatically assigned, you can set up alerts to notify the assignee. See the [alerts](/docs/error-tracking/alerts) guide for more information.

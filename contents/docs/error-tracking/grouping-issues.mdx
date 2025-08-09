@@ -1,0 +1,66 @@
+---
+title: Error tracking custom issue grouping
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+Issues are created by grouping together similar exception events. When no custom grouping behavior is configured, issues are grouped together based on their [fingerprint](TODO). While PostHog will make a best effort to offer basic grouping, the grouping logic may not fit every use case.
+
+For example, consider the following ways you may want to group issues:
+
+- Grouping issues by business logic, like all errors that occur at checkout
+- Grouping issues by a specific service, like all error messages containing `postgres`
+- Grouping issues by a specific feature, like all error messages containing `feature_flag_variant_a`
+
+You should consider your unique needs to determine if you need to configure custom grouping behavior. Keep in mind that grouping can be very important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened.
+
+<CalloutBox icon="IconInfo" title="Source maps" type="fyi">
+
+  If you serve minified or compiled code, PostHog needs source maps for your source code to be able to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
+
+</CalloutBox>
+
+## Creating a custom grouping rule
+
+You can create a custom grouping rule in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-custom-grouping#selectedSetting=error-tracking-custom-grouping):
+
+1. Click the **Add rule** button to create a new grouping rule.
+2. Select **Any** to match any of the criteria, or **All** to match all of the criteria.
+3. Click the **+ Add filter** button to add a new filter. These filters can be configured to match any [event property](/docs/data/events) in PostHog. 
+4. Click **Save** to create the rule.
+
+Here are some common exception event properties you can filter on:
+
+| Property | Event property | Description |
+| --- | --- | --- |
+| Exception type | `$exception_type` | The type of exception that occurred. |
+| Exception message | `$exception_message` | The message detected on the error. |
+| Exception source | `$exception_sources` | The source file(s) where the exception occurred. |
+| Exception level | `$exception_level` | The level of the severity of the error. |
+| Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
+
+You can also set custom properties on the error tracking event to filter on. You can find more about custom properties on exception capture in the [capture guide](/docs/error-tracking/capture).
+
+## Grouping rule best practices
+
+When grouping issues, it's important to consider what you might do with the issues once created. For example, you might:
+
+- Group issues by areas of ownership so you can easily identify and assign issues to the appropriate team. 
+- Group high urgency issues by a specific services or routes that have higher business impact.
+- Group issues by specific features, especially when they're new or experimental.
+
+How you group issues is up to you, but it's important to consider how you'll use these issues and communicate with your team.
+
+## Order of grouping rules
+
+Grouping rules are evaluated in the order they are configured. The first rule that matches will be used to group the issues. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch all rule first, it will always match and block other rules from being evaluated.
+
+## Merging separate issues
+
+If there are two or more issues that you think should be merged into one, you can do this in the [issue page](https://us.posthog.com/error_tracking).
+
+1. Search for the issues you want to merge.
+1. On the left hand of the list of issues, select the issues you want to merge.
+1. Click the **Merge** button.
+
+Exceptions that are originally grouped into either of the issues will now be grouped into the new merged issue.

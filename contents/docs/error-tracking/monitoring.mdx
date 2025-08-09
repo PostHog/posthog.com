@@ -2,11 +2,38 @@
 title: Searching and monitoring issues
 ---
 
+This guide covers how to find the most relevant, urgent, and impactful issues in your error tracking using the [issues page](https://us.posthog.com/error_tracking).
+
+## Monitoring issues
+
+When you're monitoring issues in your proejct, there are generally two common workflows:
+
+- You're exploring issues to identify impactful and problematic areas. You should use sorting features.
+- You're looking for issues assigned to you to resolve them. You should filter by the `Assigned to` property.
+
+### Sorting issues 
+
+Issues can be sorted by the following properties:
+
+| Property | Description |
+| --- | --- |
+| Last seen | The issue that has the most recent exception |
+| First seen | The issue that has the oldest exception |
+| Occurrences | The number of exceptions in the issue |
+| Users | The number of unique users affected by the issue |
+| Sessions | The number of unique sessions affected by the issue |
+
+Sorting by **last seen** and **occurences** are great ways to get a general sense of issues in your project. Sorting by **users** and **sessions** is great to find the most impactful issues if you're using other [filters](#finding-specific-issues) to narrow down your results.
+
+### Monitoring issues assigned to you
+
+You can filter issues by the **Assigned to** property to find issues assigned to you. This is especially useful if you configure [automatic issue assignment](/docs/error-tracking/assigning-issues) and configure [alerts](/docs/error-tracking/alerts) to notify you when new issues are created.
+
 ## Finding specific issues
 
 You can use the search bar at the top of the [issue page](https://us.posthog.com/error_tracking) to filter issues based on the properties of the exceptions in that issue.
 
-Search results are matched based on properties of exceptions grouped into the issues. For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError".
+Search results are matched based on [properties of exceptions](TODO) grouped into the issues. For example, if you search for "TypeError", we show you all issues where *any* exception grouped into the issue has a type of "TypeError".
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
@@ -16,19 +43,23 @@ You may see seemingly unrelated issues in your search results because your searc
 
 </CalloutBox>
 
+### Filtering modes
+
 The search bar provides two modes of filtering:
 
-- Exact property filtering, which operates like property filters elsewhere in PostHog, enabling you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
+- **Exact property filtering**, which operates like property filters elsewhere in PostHog, enabling you to add terms like `where 'http_referer' is set` or `where 'library' equals 'web'`.
 
-- [Freeform text search](#freeform-text-search), which does text matching for a subset of the error tracking specific properties of the exception event.
+- [**Freeform text search**](#freeform-text-search), which does text matching for a subset of the error tracking specific properties of the exception event.
+
+#### Exact property filtering
 
 You add a property filter by clicking the property name shown here:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_1d7490b403.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/adding_property_filter_dark_dd03d08aa5.png"
-  alt="Adding a property to the property filter"
-  classes="rounded"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filtering_issues_light_2b2dd25208.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/filtering_issues_dark_17d1e67da6.png"
+    alt="Adding a property to the property filter"
+    classes="rounded"
 />
 
 Added property filters look like this:
@@ -40,9 +71,9 @@ Added property filters look like this:
   classes="rounded"
 />
 
-The results of both of these filter types (property filters and freeform search) are ANDed together, such that only exceptions that match all filters are included in the search results.
+The results of both of these filter types (property filters and freeform search) are combined with `AND` logic, such that only exceptions that match all filters are included in the search results.
 
-## Freeform text search
+#### Freeform text search
 
 The freeform search splits the text you give it into tokens. The search matches an exception if *each* of the tokens in your search term appear in one of the following:
 - The exception type
@@ -92,6 +123,8 @@ Here's an example from our own systems. We select a recent occurrence of this is
   classes="rounded"
 />
 
+[TODO: update screenshots]
+
 Here, we've added a property filter on `http_referer`, which we think will be useful for our debugging and can then easily select an occurrence where that property is set:
 
 <ProductScreenshot
@@ -100,6 +133,14 @@ Here, we've added a property filter on `http_referer`, which we think will be us
   alt="An issue, with a filtered exception list"
   classes="rounded"
 />
+
+[TODO: update screenshots]
+
+<CalloutBox icon="IconInfo" title="Alerts" type="info">
+
+If you have a set of filters that you use often, you can create alerts for them. This way you can be notified when new issues match your filters. Learn more about [alerts](/docs/error-tracking/alerts).
+
+</CalloutBox>
 
 ## Improving search performance
 
@@ -110,3 +151,7 @@ We try to return results to you within a second, but sometimes if you're queryin
 - **Use freeform search rather than property filters:** Our freeform searches are generally faster than property filters, as the total amount of data processed is smaller.
 
 If you find your queries timing out or taking more than 30 seconds, please [let us know in-app](https://us.posthog.com/#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue)! We're always looking for benchmarks to improve against.
+
+## Suppressing issues
+
+If you find issues that are not useful to you, you can suppress them by changing the status to **Suppressed**. We recommend that you also implement [client-side suppression](/docs/error-tracking/capture#suppressing-exceptions) to not capture these exceptions in the first place, for cost and performance reasons. 

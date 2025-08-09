@@ -1536,6 +1536,14 @@
         {
             "source": "/teams/cs-onboarding",
             "destination": "/teams/customer-success"
+        },
+        {
+            "source": "/docs/error-tracking/alerts",
+            "destination": "/docs/error-tracking/issues-and-alerts"
+        },
+        {
+            "source": "/docs/error-tracking/issues",
+            "destination": "/docs/error-tracking/issues-and-exceptions"
         }
     ],
     "headers": [

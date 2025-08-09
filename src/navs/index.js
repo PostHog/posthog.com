@@ -3673,8 +3673,8 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Issues',
-                    url: '/docs/error-tracking/issues',
+                    name: 'Issues and exceptions',
+                    url: '/docs/error-tracking/issues-and-exceptions',
                     icon: 'IconWarning',
                     color: 'yellow',
                 },
@@ -3685,7 +3685,27 @@ export const docsMenu = {
                     color: 'purple',
                 },
                 {
+                    name: 'Fingerprints',
+                    url: '/docs/error-tracking/fingerprints',
+                    icon: 'IconBrackets',
+                    color: 'blue',
+                },
+                {
                     name: 'Guides',
+                },
+                {
+                    name: 'Capture exceptions',
+                    url: '/docs/error-tracking/capture',
+                    icon: 'IconLaptop',
+                    color: 'green',
+                    featured: true,
+                },
+                {
+                    name: 'Grouping issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Monitor issues',
@@ -3701,7 +3721,13 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Set up alerts',
+                    name: 'Assign issues',
+                    url: '/docs/error-tracking/assigning-issues',
+                    icon: 'IconUser',
+                    color: 'blue',
+                },
+                {
+                    name: 'Alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
