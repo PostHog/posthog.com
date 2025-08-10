@@ -14,11 +14,11 @@ export default function AI(): JSX.Element {
         <>
             <SEO title="AI overview.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
             <Editor
-                title="AI overview"
-                type="mdx"
+                title="AI agents"
+                type="md"
                 slug="/ai"
                 bookmark={{
-                    title: 'AI overview.mdx',
+                    title: 'AI agents.md',
                     description: 'AI agents',
                 }}
             >

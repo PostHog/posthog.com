@@ -242,11 +242,19 @@ export default function Products(): JSX.Element {
                                                                 <AppLink
                                                                     label={product.name}
                                                                     url={`/` + product.slug}
-                                                                    Icon={<IconPresentation />}
+                                                                    Icon={
+                                                                        product.parentIcon ? (
+                                                                            product.Icon
+                                                                        ) : (
+                                                                            <IconPresentation />
+                                                                        )
+                                                                    }
+                                                                    parentIcon={product.parentIcon}
                                                                     background="bg-primary"
                                                                     className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
                                                                 >
-                                                                    {product.Icon &&
+                                                                    {!product.parentIcon &&
+                                                                        product.Icon &&
                                                                         React.createElement(product.Icon, {
                                                                             className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
                                                                         })}
