@@ -18,6 +18,7 @@ import {
     IconClock,
     IconPeople,
     IconDatabase,
+    IconTerminal,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -2523,15 +2524,30 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'API',
-            Icon: IconWebhooks,
+            Icon: IconTerminal,
             description: 'Powerful APIs and SDKs to build analytics into your product',
             handle: 'api',
             color: 'teal',
             colorSecondary: 'sky-blue',
-            category: 'data',
+            category: 'product_os',
             slug: 'api',
             seo: {
                 title: 'API - PostHog',
+                description:
+                    'Capture events, query data, manage feature flags, and more. 14+ SDKs, no rate limits on event capture, and comprehensive REST APIs.',
+            },
+        },
+        {
+            name: 'Capture API',
+            Icon: IconTerminal,
+            description: 'Powerful APIs and SDKs to build analytics into your product',
+            handle: 'capture_api',
+            color: 'teal',
+            colorSecondary: 'sky-blue',
+            category: 'data',
+            slug: 'capture-api',
+            seo: {
+                title: 'Capture API - PostHog',
                 description:
                     'Capture events, query data, manage feature flags, and more. 14+ SDKs, no rate limits on event capture, and comprehensive REST APIs.',
             },
@@ -3806,7 +3822,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Hog',
-            Icon: IconPiggyBank,
+            Icon: IconBrackets,
             description: 'Transform and export data in real-time with our programming language',
             handle: 'hog',
             slug: 'hog',

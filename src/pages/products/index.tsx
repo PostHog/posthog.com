@@ -46,14 +46,14 @@ export default function Products(): JSX.Element {
     return (
         <>
             <SEO
-                title="Platform - PostHog"
+                title="Product OS suite - PostHog"
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
             <Explorer
                 template="generic"
                 slug="products"
-                title="Platform"
+                title="Product OS"
                 showTitle={false}
                 selectOptions={selectOptions}
                 // options below only needed to override matching the slug
@@ -150,8 +150,9 @@ export default function Products(): JSX.Element {
                     // Custom product order by category - if not specified, products will be sorted alphabetically
                     const productOrder: Record<string, string[]> = {
                         ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
-                        data: ['cdp-manifesto.md', 'data-warehouse', 'cdp', 'sql', 'api', 'webhooks', 'bi'],
+                        data: ['cdp-manifesto.md', 'cdp', 'data-warehouse', 'sql', 'capture_api', 'webhooks'],
                         analytics: [
+                            'bi',
                             'web-analytics',
                             'product-analytics',
                             'revenue-analytics',
@@ -169,7 +170,7 @@ export default function Products(): JSX.Element {
                             'early_access',
                         ],
                         communication: ['surveys', 'broadcasts', 'user-interviews'],
-                        product_os: ['dashboards', 'notebooks', 'activity', 'toolbar', 'teams', 'profiles'],
+                        product_os: ['api', 'dashboards', 'notebooks', 'activity', 'toolbar', 'teams', 'profiles'],
                     }
                     const productsWithCategory = allProducts.filter((product: any) => product.category)
                     const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {
