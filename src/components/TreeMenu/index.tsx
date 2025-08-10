@@ -17,6 +17,7 @@ interface MenuItem {
 interface TreeMenuProps {
     items: MenuItem[]
     activeItem?: MenuItem
+    watchPath?: boolean
 }
 
 const TreeLink = ({
@@ -68,6 +69,7 @@ const getActiveItem = (items: MenuItem[], currentUrl: string): MenuItem | undefi
 }
 
 export function TreeMenu(props: TreeMenuProps) {
+    const { watchPath = true } = props
     const { appWindow } = useWindow()
     const { pathname } = useLocation()
     const [activeItem, setActiveItem] = useState<MenuItem | undefined>(
@@ -81,7 +83,9 @@ export function TreeMenu(props: TreeMenuProps) {
     const items = useMemo(() => props.items, [])
 
     useEffect(() => {
-        setActiveItem(getActiveItem(items || [], appWindow?.path || pathname))
+        if (watchPath) {
+            setActiveItem(getActiveItem(items || [], appWindow?.path || pathname))
+        }
     }, [appWindow?.path])
 
     return (

@@ -37,6 +37,7 @@ const Menu = () => {
         <ScrollArea className="p-2">
             <TreeMenu
                 key={user?.id}
+                watchPath={false}
                 items={[
                     ...(user
                         ? [
@@ -217,7 +218,7 @@ export default function Inbox(props) {
                 navigate('/questions')
             }
             setReady(true)
-        } else {
+        } else if (props.path === '/questions' || initialTopicID) {
             setShowSubscribedQuestions(false)
             setFilters(defaultFilters)
         }
