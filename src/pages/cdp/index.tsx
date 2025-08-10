@@ -311,6 +311,7 @@ export default function CDP(): JSX.Element {
                 type="mdx"
                 slug="/cdp"
                 onSearchChange={(query) => setSearchQuery(query)}
+                showFilters
                 availableFilters={[
                     {
                         label: 'type',

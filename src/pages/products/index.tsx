@@ -19,7 +19,7 @@ import { PRODUCT_COUNT } from '../../constants'
 // Create selectOptions for the address bar
 const selectOptions = [
     {
-        label: 'Products',
+        label: 'Platform',
         items: [
             { value: 'products', label: 'Products', icon: productMenu.icon, color: productMenu.color },
             ...productMenu.children.flatMap((item) => {
@@ -46,14 +46,14 @@ export default function Products(): JSX.Element {
     return (
         <>
             <SEO
-                title="Products - PostHog"
+                title="Platform - PostHog"
                 description="PostHog is the only product analytics platform built to natively work with Session Replay, Feature Flags, Experiments, and Surveys."
                 image={`/images/og/product-analytics.jpg`}
             />
             <Explorer
                 template="generic"
                 slug="products"
-                title="Products"
+                title="Platform"
                 showTitle={false}
                 selectOptions={selectOptions}
                 // options below only needed to override matching the slug
@@ -62,6 +62,35 @@ export default function Products(): JSX.Element {
                 // changelogCategory="product-analytics"
 
                 leftSidebarContent={[
+                    {
+                        title: 'About Product OS',
+                        content: (
+                            <>
+                                <p className="text-sm mb-2">
+                                    Our toolkit helps product engineers build and scale products. It has everything you
+                                    need to build features, analyze usage, and talk to customers.
+                                </p>
+                                <p className="text-sm mb-2">There are four main components:</p>
+                                <ul className="pl-4 mb-4 [&_li]:text-sm">
+                                    <li>Customer data platform</li>
+                                    <li>Analytics</li>
+                                    <li>Development tools</li>
+                                    <li>AI</li>
+                                </ul>
+                                <OSButton
+                                    variant="underline"
+                                    asLink
+                                    align="left"
+                                    width="full"
+                                    size="md"
+                                    to="/product-os"
+                                    icon={<Icons.IconStack className="text-salmon" />}
+                                >
+                                    Learn about Product OS
+                                </OSButton>
+                            </>
+                        ),
+                    },
                     {
                         title: 'About PostHog',
                         content: (
@@ -91,93 +120,56 @@ export default function Products(): JSX.Element {
                             </>
                         ),
                     },
-                    {
-                        title: 'Product OS',
-                        content: (
-                            <>
-                                <p className="text-sm mb-2">
-                                    Build and scale your product with our complete open source product operating system.
-                                </p>
-                                <p className="text-sm mb-2">
-                                    All our products are built on it, and it offers many features available to all of
-                                    our products, like:
-                                </p>
-                                <ul className="pl-4 mb-4 [&_li]:text-sm">
-                                    <li>Autocapture</li>
-                                    <li>Webhooks</li>
-                                    <li>Reverse proxy</li>
-                                    <li>API</li>
-                                    <li>SQL access</li>
-                                </ul>
-                                <OSButton
-                                    variant="underline"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="md"
-                                    to="/product-os"
-                                    icon={<Icons.IconStack className="text-salmon" />}
-                                >
-                                    Learn about Product OS
-                                </OSButton>
-                            </>
-                        ),
-                    },
-                    {
-                        title: 'Add-ons',
-                        content: (
-                            <>
-                                <p className="text-sm mb-2">
-                                    Our a-la-carte model means you can pick and choose the features you need without
-                                    paying for anything you don't.
-                                </p>
-                                <p className="mb-2">
-                                    <strong>Available add-ons:</strong>
-                                </p>
-                                <ul className="pl-4 mb-4 [&_li]:text-sm">
-                                    <li>Teams features</li>
-                                    <li>Person profiles (identify users)</li>
-                                    <li>Group analytics</li>
-                                    <li>Data pipelines</li>
-                                </ul>
-                                <OSButton
-                                    variant="underline"
-                                    asLink
-                                    align="left"
-                                    width="full"
-                                    size="md"
-                                    to="/addons"
-                                    icon={<Icons.IconPuzzle className="text-purple" />}
-                                >
-                                    Learn about add-ons
-                                </OSButton>
-                            </>
-                        ),
-                    },
                 ]}
             >
                 {(() => {
                     // Filter out products without a category, then group by category
-                    const categoryOrder = ['analytics', 'product', 'data', 'engineering', 'marketing', 'product_os']
+                    const categoryOrder = [
+                        'ai',
+                        'data',
+                        'analytics',
+                        'product',
+                        'engineering',
+                        'product_engineering',
+                        'communication',
+                        'product_os',
+                    ]
 
                     // Category display names
                     const categoryDisplayNames: Record<string, string> = {
+                        ai: 'PostHog AI',
+                        data: 'Customer data platform',
                         analytics: 'Analytics',
                         product: 'Product',
-                        data: 'Data',
                         engineering: 'Engineering',
-                        marketing: 'Marketing',
-                        product_os: 'Product OS tools',
+                        product_engineering: 'Product engineering',
+                        communication: 'Communication',
+                        product_os: 'Utilities & add-ons',
                     }
 
                     // Custom product order by category - if not specified, products will be sorted alphabetically
                     const productOrder: Record<string, string[]> = {
-                        analytics: ['web-analytics', 'product-analytics', 'revenue-analytics', 'llm-analytics'],
-                        product: ['session-replay', 'experiments', 'surveys', 'user-interviews', 'early_access'],
-                        data: ['data-warehouse', 'cdp', 'sql', 'api', 'webhooks'],
-                        engineering: ['feature-flags', 'error-tracking'],
-                        marketing: ['heatmaps', 'broadcasts'],
-                        product_os: ['max', 'dashboards', 'notebooks', 'activity', 'toolbar'],
+                        ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
+                        data: ['cdp-manifesto.md', 'data-warehouse', 'cdp', 'sql', 'api', 'webhooks', 'bi'],
+                        analytics: [
+                            'web-analytics',
+                            'product-analytics',
+                            'revenue-analytics',
+                            'llm-analytics',
+                            'group_analytics',
+                            'heatmaps',
+                        ],
+                        // product: ['session-replay', 'experiments', 'early_access'],
+                        // engineering: ['feature-flags', 'error-tracking'],
+                        product_engineering: [
+                            'session-replay',
+                            'experiments',
+                            'feature-flags',
+                            'error-tracking',
+                            'early_access',
+                        ],
+                        communication: ['surveys', 'broadcasts', 'user-interviews'],
+                        product_os: ['dashboards', 'notebooks', 'activity', 'toolbar', 'teams', 'profiles'],
                     }
                     const productsWithCategory = allProducts.filter((product: any) => product.category)
                     const groupedProducts = productsWithCategory.reduce((acc: Record<string, any[]>, product: any) => {

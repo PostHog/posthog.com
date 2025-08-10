@@ -9,7 +9,7 @@ export const errorTracking = {
     type: 'error_tracking',
     color: 'orange',
     colorSecondary: 'red',
-    category: 'engineering',
+    category: 'product_engineering',
     seo: {
         title: 'Error Tracking - PostHog',
         description: 'Track errors and exceptions in your code, then assign them as issues.',

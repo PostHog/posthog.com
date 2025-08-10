@@ -28,7 +28,7 @@ export const productLinks: AppItem[] = [
         url: '/',
     },
     {
-        label: 'Products',
+        label: 'Product OS',
         Icon: <AppIcon name="folder" />,
         url: '/products',
     },
