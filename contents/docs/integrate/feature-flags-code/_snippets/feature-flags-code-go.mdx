@@ -80,7 +80,7 @@ Capturing `$feature_flag_called` events enable PostHog to know when a flag was a
 
 You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
 
-To disable it, set the `SendFeatureFlagEvents` argument in your function call, like so:
+To disable it (pre v1.6.1), set the `SendFeatureFlagEvents` argument in your function call, like so:
 
 ```go
 sendFeatureFlags := false
@@ -90,6 +90,8 @@ isMyFlagEnabled, err := client.IsFeatureEnabled(posthog.FeatureFlagPayload{
     SendFeatureFlagEvents:  &sendFeatureFlags,
 })
 ```
+
+Versions after v1.6.1 have this feature disabled by default.
 
 import GoOverrideServerProperties from './override-server-properties/go.mdx'
 
