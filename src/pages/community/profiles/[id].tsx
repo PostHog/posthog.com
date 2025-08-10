@@ -1,47 +1,34 @@
 import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react'
 import { PageProps } from 'gatsby'
 import SEO from 'components/seo'
-import Layout from 'components/Layout'
-import PostLayout from 'components/PostLayout'
 import { GitHub, LinkedIn, Twitter } from 'components/Icons'
 import Link from 'components/Link'
 import Markdown from 'markdown-to-jsx'
 import { Questions } from 'components/Squeak'
 import { useUser } from 'hooks/useUser'
-import Modal from 'components/Modal'
-import { EditProfile } from 'components/Squeak'
 import useSWR from 'swr'
-import SidebarSection from 'components/PostLayout/SidebarSection'
 import { ProfileData, StrapiRecord } from 'lib/strapi'
 import getAvatarURL from '../../../components/Squeak/util/getAvatar'
-import { useBreakpoint } from 'gatsby-plugin-breakpoints'
-import { RightArrow } from '../../../components/Icons/Icons'
 import qs from 'qs'
 import usePostHog from 'hooks/usePostHog'
-import Logomark from 'components/Home/images/Logomark'
-import { communityMenu } from '../../../navs'
 import useTopicsNav from '../../../navs/useTopicsNav'
 import { usePosts } from 'components/Edition/hooks/usePosts'
 import PostsTable from 'components/Edition/PostsTable'
 import { SortDropdown } from 'components/Edition/Views/Default'
 import { sortOptions } from 'components/Edition/Posts'
-import { AnimatePresence, motion } from 'framer-motion'
 import NotFoundPage from 'components/NotFoundPage'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import Stickers from 'components/Stickers/Index'
 import RadixTooltip from 'components/RadixUI/Tooltip'
 import Tooltip from 'components/Tooltip'
-import CloudinaryImage from 'components/CloudinaryImage'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import { formatDistanceToNow } from 'date-fns'
 import OSTabs from 'components/OSTabs'
 import { TeamMember } from 'components/People'
 import {
     IconThumbsUpFilled,
     IconThumbsDownFilled,
     IconArrowUpRight,
-    IconLoading,
     IconSpinner,
     IconUpload,
     IconX,
@@ -689,7 +676,7 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts, isEditing, 
                     initialValue={profile.biography}
                 />
             ) : (
-                <Markdown className="prose prose-sm max-w-full">
+                <Markdown className="prose prose-sm max-w-full text-primary">
                     {profile.biography || `${firstName} hasn't written a bio yet`}
                 </Markdown>
             ),
@@ -1017,7 +1004,7 @@ export default function ProfilePage({ params }: PageProps) {
     }
 
     return (
-        <div data-scheme="secondary" className="h-full bg-primary">
+        <div data-scheme="secondary" className="h-full bg-primary text-primary">
             <SEO title={`${name}'s profile - PostHog`} />
             <ScrollArea>
                 <div

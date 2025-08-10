@@ -348,6 +348,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     >
                         <div className="relative">
                             <Link
+                                state={{ newWindow: true }}
                                 className="flex items-center !text-black dark:!text-white"
                                 to={`/community/profiles/${profile.data.id}`}
                             >
@@ -374,6 +375,7 @@ export default function Reply({ reply, badgeText }: ReplyProps) {
                     </Tooltip>
                 ) : (
                     <Link
+                        state={{ newWindow: true }}
                         className="flex items-center !text-black dark:!text-white"
                         to={`/community/profiles/${profile.data.id}`}
                     >
