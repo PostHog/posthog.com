@@ -370,7 +370,7 @@ export function Editor({
             searchParams.forEach((value, key) => {
                 const filter = availableFilters.find((f) => (f.value || f.label).toLowerCase() === key.toLowerCase())
                 if (filter) {
-                    newFilters[filter.value || filter.label] = { value, filter: filter.filter }
+                    newFilters[filter.value || filter.label] = { value, filter: filter.filter, initialValue: value }
                 }
             })
             setFilters(newFilters)
@@ -440,10 +440,14 @@ export function Editor({
                                                 <span className="text-sm font-bold">{filter.label}</span>
                                                 <span className="italic">{filter.operator}</span>
                                                 <Select
+                                                    key={`${Object.keys(filters).length}-${filter.label}`}
                                                     disabled={disableFilterChange}
                                                     placeholder={filter.label}
-                                                    defaultValue={filter.initialValue || filter.options[0].value}
-                                                    key={filter.label}
+                                                    defaultValue={
+                                                        filters[filter.value || filter.label]?.value ||
+                                                        filter.initialValue ||
+                                                        filter.options[0].value
+                                                    }
                                                     groups={[
                                                         {
                                                             label: '',

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useStaticQuery, graphql } from 'gatsby'
 import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
 import { useContentData } from 'hooks/useContentData'
@@ -299,6 +299,44 @@ export default function CDP(): JSX.Element {
         ],
     }))
 
+    const availableFilters = useMemo(() => {
+        return [
+            {
+                label: 'type',
+                options: [
+                    { label: 'Any', value: null },
+                    { label: 'Source', value: 'source' },
+                    { label: 'Destination', value: 'destination' },
+                    { label: 'Transformation', value: 'transformation' },
+                ],
+                filter: (obj, value) => obj['type'] === value,
+                operator: 'equals',
+            },
+            {
+                label: 'status',
+                options: [
+                    { label: 'Any', value: null },
+                    { label: 'Live', value: 'live' },
+                    { label: 'Roadmap', value: 'coming_soon' },
+                ],
+                filter: (obj, value) => obj['status'] === value,
+                operator: 'equals',
+            },
+            {
+                label: 'category',
+                options: [
+                    { label: 'Any', value: null },
+                    ...allCategories.map((cat) => ({
+                        label: cat,
+                        value: cat,
+                    })),
+                ],
+                filter: (obj, value) => obj['category']?.includes(value),
+                operator: 'includes',
+            },
+        ]
+    }, [])
+
     return (
         <>
             <SEO
@@ -312,41 +350,7 @@ export default function CDP(): JSX.Element {
                 slug="/cdp"
                 onSearchChange={(query) => setSearchQuery(query)}
                 showFilters
-                availableFilters={[
-                    {
-                        label: 'type',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'Source', value: 'source' },
-                            { label: 'Destination', value: 'destination' },
-                            { label: 'Transformation', value: 'transformation' },
-                        ],
-                        filter: (obj, value) => obj['type'] === value,
-                        operator: 'equals',
-                    },
-                    {
-                        label: 'status',
-                        options: [
-                            { label: 'Any', value: null },
-                            { label: 'Live', value: 'live' },
-                            { label: 'Roadmap', value: 'coming_soon' },
-                        ],
-                        filter: (obj, value) => obj['status'] === value,
-                        operator: 'equals',
-                    },
-                    {
-                        label: 'category',
-                        options: [
-                            { label: 'Any', value: null },
-                            ...allCategories.map((cat) => ({
-                                label: cat,
-                                value: cat,
-                            })),
-                        ],
-                        filter: (obj, value) => obj['category']?.includes(value),
-                        operator: 'includes',
-                    },
-                ]}
+                availableFilters={availableFilters}
                 dataToFilter={allPipelines}
                 onFilterChange={(data) => setFilteredPipelines(data)}
             >
