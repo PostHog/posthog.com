@@ -7,15 +7,27 @@ import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from "components/OSButton"
 import CDPDiagram from "./CDPDiagram"
 import Link from "components/Link"
-import { IconArrowUpRight, IconInfo } from "@posthog/icons"
+import { IconArrowUpRight } from "@posthog/icons"
 
 export default function CDP(): JSX.Element {
 
-  // Define table columns
-  const columns = [
+  // Define table columns for each tab
+  const dataInColumns = [
     { name: 'source type', width: 'minmax(170px, 1fr)', align: 'left' as const },
     { name: 'type of data', width: 'minmax(200px, 1fr)', align: 'left' as const },
     { name: 'example sources', width: 'minmax(100px, 2fr)', align: 'left' as const },
+  ]
+
+  const transformationColumns = [
+    { name: 'transform type', width: 'minmax(170px, 1fr)', align: 'left' as const },
+    { name: 'purpose', width: 'minmax(200px, 1fr)', align: 'left' as const },
+    { name: 'example sources', width: 'minmax(100px, 2fr)', align: 'left' as const },
+  ]
+
+  const dataOutColumns = [
+    { name: 'destination method', width: 'minmax(170px, 1fr)', align: 'left' as const },
+    { name: 'type of data', width: 'minmax(200px, 1fr)', align: 'left' as const },
+    { name: 'example destinations', width: 'minmax(100px, 2fr)', align: 'left' as const },
   ]
 
 
@@ -60,7 +72,7 @@ export default function CDP(): JSX.Element {
         { content: 'data enrichment' },
         { content: 'add context and metadata to events' },
         {
-          content: 'GeoIP, user agent parsing, property mapping, data validation',
+          content: 'GeoIP plugins, user agent parsing, property mapping, data validation apps',
           className: '',
         },
       ],
@@ -70,7 +82,7 @@ export default function CDP(): JSX.Element {
         { content: 'filtering & routing' },
         { content: 'control data flow and reduce noise' },
         {
-          content: 'Event filtering, PII scrubbing, conditional routing, sampling',
+          content: 'Event filtering apps, PII scrubbing, conditional routing, sampling plugins',
           className: '',
         },
       ],
@@ -80,7 +92,7 @@ export default function CDP(): JSX.Element {
         { content: 'custom transformations' },
         { content: 'apply business logic to your data' },
         {
-          content: 'Custom JavaScript functions, webhooks, API calls, data normalization',
+          content: 'Custom JavaScript apps, webhook transformations, API enrichment, normalization',
           className: '',
         },
       ],
@@ -104,21 +116,21 @@ export default function CDP(): JSX.Element {
         { content: 'batch exports' },
         { content: 'scheduled exports to data warehouses' },
         {
-          content: 'BigQuery, Snowflake, S3, PostgreSQL, daily/hourly exports',
+          content: 'BigQuery, Snowflake, S3, PostgreSQL, ClickHouse',
           className: '',
         },
       ],
     },
-    {
-      cells: [
-        { content: 'marketing & sales tools' },
-        { content: 'sync data to customer-facing platforms' },
-        {
-          content: 'Salesforce, HubSpot, Customer.io, Braze, Amplitude, Mixpanel',
-          className: '',
-        },
-      ],
-    },
+    // {
+    //   cells: [
+    //     { content: 'app integrations' },
+    //     { content: 'sync data to customer-facing platforms' },
+    //     {
+    //       content: 'Salesforce, HubSpot, Customer.io, Braze, Amplitude, Mixpanel',
+    //       className: '',
+    //     },
+    //   ],
+    // },
   ]
 
   return (
@@ -147,21 +159,22 @@ export default function CDP(): JSX.Element {
           <OSTabs
             frame={true}
             className="my-6"
+            triggerDataScheme="primary"
             tabs={[
               {
                 value: 'data-in',
                 label: 'data in',
-                content: <OSTable columns={columns} rows={dataInRows} editable={false} />
+                content: <OSTable columns={dataInColumns} rows={dataInRows} editable={false} />
               },
               {
                 value: 'transformation',
                 label: 'transformation',
-                content: <OSTable columns={columns} rows={transformationRows} editable={false} />
+                content: <OSTable columns={transformationColumns} rows={transformationRows} editable={false} />
               },
               {
                 value: 'data-out',
                 label: 'data out',
-                content: <OSTable columns={columns} rows={dataOutRows} editable={false} />
+                content: <OSTable columns={dataOutColumns} rows={dataOutRows} editable={false} />
               }
             ]}
             defaultValue="data-in"

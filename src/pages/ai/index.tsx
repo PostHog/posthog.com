@@ -12,7 +12,7 @@ import { IconArrowUpRight } from '@posthog/icons'
 export default function AI(): JSX.Element {
     return (
         <>
-            <SEO title="AI overview.mdx – PostHog" description="" image={`/images/og/customers.jpg`} />
+            <SEO title="AI agents.md – PostHog" description="" image={`/images/og/customers.jpg`} />
             <Editor
                 title="AI agents"
                 type="md"
