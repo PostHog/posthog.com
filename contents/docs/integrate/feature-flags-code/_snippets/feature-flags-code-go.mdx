@@ -64,7 +64,7 @@ You can fetch all flag values for a single user by calling `GetAllFlags()`.
 This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
 
 ```go  
-featureVariants, _ := client.GetAllFlags(posthog.FeatureFlagPayloadNoKey{
+featureVariants, err := client.GetAllFlags(posthog.FeatureFlagPayloadNoKey{
         DistinctId: "distinct_id_of_your_user",
 })
 ```
