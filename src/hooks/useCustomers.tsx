@@ -47,12 +47,13 @@ import WittyWorksLogo from '../components/CustomerLogos/WittyWorksLogo'
 import YCombinatorLogo from '../components/CustomerLogos/YCombinatorLogo'
 import ZealotLogo from '../images/customers/zealot-light.png'
 import ZealotLogoDark from '../images/customers/zealot-dark.png'
+import Link from 'components/Link'
 
 export interface Customer {
     slug: string
     name: string
     toolsUsed: string[]
-    notes?: string
+    notes?: React.ReactNode
     logo?:
         | React.ComponentType<any>
         | {
@@ -78,7 +79,7 @@ export interface Customer {
 interface BaseCustomer {
     name: string
     toolsUsed: string[]
-    notes?: string
+    notes?: React.ReactNode
     logo?:
         | React.ComponentType<any>
         | {
@@ -315,7 +316,15 @@ const CUSTOMER_DATA: Record<string, BaseCustomer> = {
             'cdp',
             'max_ai',
         ],
-        notes: 'Would it be clever or lame if we included our own company here? Read [how we use PostHog](/blog/posthog-marketing) at PostHog.',
+        notes: (
+            <>
+                Would it be clever or lame if we included our own company here? Read{' '}
+                <Link state={{ newWindow: true }} to="/blog/posthog-marketing">
+                    how we use PostHog
+                </Link>{' '}
+                at PostHog.
+            </>
+        ),
         logo: PostHogLogo,
         height: 10,
         featured: true,
