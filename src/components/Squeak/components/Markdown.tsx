@@ -9,7 +9,7 @@ import { cn } from '../../../utils'
 import Link from 'components/Link'
 
 const replaceMentions = (body: string) => {
-    return body.replace(/@([a-zA-Z0-9-]+\/[0-9]+|max)/g, (match, username) => {
+    return body.replace(/@([a-zA-Z0-9_-]+\/[0-9]+|max)/g, (match, username) => {
         if (username === 'max') {
             return `[${match}](/community/profiles/${process.env.GATSBY_AI_PROFILE_ID})`
         }

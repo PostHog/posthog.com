@@ -124,7 +124,6 @@ export default function Inbox(props) {
     }
     const [ready, setReady] = useState(props.path !== '/questions/subscriptions')
     const [filters, setFilters] = useState(defaultFilters)
-    const { pathname } = useLocation()
     const { addToast } = useToast()
     const { user, setSubscription, isSubscribed, isValidating } = useUser()
     const { questions, isLoading, fetchMore, hasMore, refresh } = useQuestions({
@@ -304,7 +303,7 @@ export default function Inbox(props) {
                                         const { subject, numReplies, activeAt, replies, profile, permalink } = question
                                         const latestAuthor =
                                             replies?.data?.[replies.data.length - 1]?.profile || profile
-                                        const active = `/questions/${permalink}` === pathname
+                                        const active = `/questions/${permalink}` === appWindow?.path
                                         return (
                                             <div key={question.id} ref={lastQuestionRef}>
                                                 <OSButton

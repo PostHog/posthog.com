@@ -366,7 +366,7 @@ export default function RichText({
         const mention =
             profile.id === Number(process.env.GATSBY_AI_PROFILE_ID)
                 ? `@max `
-                : `@${profile.attributes.firstName.trim().toLowerCase()}/${profile.id} `
+                : `@${profile.attributes.firstName.trim().toLowerCase().replace(' ', '_')}/${profile.id} `
         setValue((prevValue) => replaceSelection(selectionStart, selectionEnd, mention, prevValue))
         setShowMentionProfiles(false)
         textarea.current?.focus()
