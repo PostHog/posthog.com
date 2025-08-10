@@ -86,7 +86,7 @@ To disable it, set the `SendFeatureFlagEvents` argument in your function call, l
 isMyFlagEnabled, err := client.IsFeatureEnabled(posthog.FeatureFlagPayload{
     Key:                    "flag-key",
     DistinctId:             "distinct_id_of_your_user",
-    SendFeatureFlagEvents:  true
+    SendFeatureFlagEvents:  true,
 })
 ```
 
