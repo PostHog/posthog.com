@@ -36,6 +36,7 @@ type AppIconName =
     | 'script'
     | 'pdf_locked'
     | 'ga'
+    | 'ai'
 
 const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     doc: {
@@ -130,6 +131,10 @@ const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
     ga: {
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/ga3_1651ec493f.png',
     },
+    ai: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_classic_e50b339fec.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/as_modern_090d1c5c71.png',
+    },
 }
 
 export interface AppIconProps extends IconProps {
@@ -182,7 +187,8 @@ export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
 export type { AppIconName }
 
 export interface AppItem {
-    Icon: React.ElementType | React.ReactElement | string
+    Icon?: React.ElementType | React.ReactElement | string
+    parentIcon?: React.ElementType | React.ReactElement | string | AppIconName
     type?: string
     color?: string
     background?: string
@@ -196,6 +202,7 @@ export interface AppItem {
 
 export const AppLink = ({
     Icon,
+    parentIcon,
     type,
     color,
     background,
@@ -210,19 +217,70 @@ export const AppLink = ({
     const { getThemeSpecificBackgroundColors } = useTheme()
 
     const renderIcon = () => {
+        const iconToRender = parentIcon || Icon
+
+        // If no icon to render at all, return null
+        if (!iconToRender) return null
+
+        // Check if it's an AppIconName string (for AppIcon component)
+        if (typeof iconToRender === 'string') {
+            // Check if it's a valid AppIconName
+            const isAppIconName = [
+                'doc',
+                'folder',
+                'presentation',
+                'notebook',
+                'spreadsheet',
+                'video',
+                'pdf',
+                'canvas',
+                'report',
+                'script',
+                'ai',
+            ].includes(iconToRender)
+            if (isAppIconName && parentIcon) {
+                return <AppIcon name={iconToRender as AppIconName} className={className} />
+            }
+            // Otherwise treat as URL
+            return <IconImage url={iconToRender} className={`${parentIcon ? '' : `text-${color}`} ${className}`} />
+        }
+
+        if (React.isValidElement(iconToRender)) {
+            return React.cloneElement(iconToRender as React.ReactElement<any>, {
+                className: `${parentIcon ? '' : `text-${color}`} ${className}`,
+            })
+        }
+
+        // Icon is a ComponentType
+        const IconComponent = iconToRender as React.ComponentType<any>
+        return <IconComponent className={`${parentIcon ? '' : `text-${color}`} ${className}`} />
+    }
+
+    const renderChildIcon = () => {
+        if (!parentIcon || !Icon) return null
+
         if (typeof Icon === 'string') {
-            return <IconImage url={Icon} className={`text-${color} ${className}`} />
+            return (
+                <IconImage
+                    url={Icon}
+                    className={`size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`}
+                />
+            )
         }
 
         if (React.isValidElement(Icon)) {
             return React.cloneElement(Icon as React.ReactElement<any>, {
-                className: `text-${color} ${className}`,
+                className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
             })
         }
 
         // Icon is a ComponentType
         const IconComponent = Icon as React.ComponentType<any>
-        return <IconComponent className={`text-${color} ${className}`} />
+        return (
+            <IconComponent
+                className={`size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`}
+            />
+        )
     }
 
     const baseBackgroundColors = `
@@ -239,6 +297,7 @@ export const AppLink = ({
         <>
             <span className="relative">
                 {renderIcon()}
+                {renderChildIcon()}
                 {children}
             </span>
             <figcaption className="text-sm font-medium leading-tight">

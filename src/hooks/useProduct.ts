@@ -18,6 +18,7 @@ import {
     IconClock,
     IconPeople,
     IconDatabase,
+    IconTerminal,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -1518,7 +1519,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'CDP manifesto.md',
-            Icon: IconDatabase,
+            // Icon: IconDatabase,
+            parentIcon: 'doc',
             description: 'CDP manifesto',
             handle: 'cdp_manifesto',
             type: 'cdp_manifesto',
@@ -1539,15 +1541,15 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
-            name: 'AI overview.md',
-            Icon: IconMagicWand,
+            name: 'AI agents.md',
+            // Icon: IconMagicWand,
+            parentIcon: 'doc',
             description: 'AI suite',
             handle: 'ai',
             color: 'blue',
             colorSecondary: 'lilac',
             category: 'ai',
             slug: 'ai',
-            status: 'beta',
             seo: {
                 title: 'AI @ PostHog',
                 description: 'Your AI-powered product agents',
@@ -1584,7 +1586,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Max',
-            Icon: IconMagicWand,
+            parentIcon: 'ai',
+            // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst and product manager',
             handle: 'max_ai',
             color: 'purple',
@@ -1841,7 +1844,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Raquel',
-            Icon: IconMagicWand,
+            parentIcon: 'ai',
+            // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst and product manager',
             handle: 'raquel',
             color: 'red',
@@ -1868,7 +1872,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'ai',
             slug: 'annika',
-            status: 'beta',
+            status: 'WIP',
             seo: {
                 title: 'Annika - PostHog',
                 description: 'Your AI-powered product analyst and product manager',
@@ -1888,7 +1892,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             colorSecondary: 'lilac',
             category: 'ai',
             slug: 'marius',
-            status: 'beta',
+            status: 'WIP',
             seo: {
                 title: 'Marius - PostHog',
                 description: 'Your AI-powered product analyst and product manager',
@@ -2520,15 +2524,30 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'API',
-            Icon: IconWebhooks,
+            Icon: IconTerminal,
             description: 'Powerful APIs and SDKs to build analytics into your product',
             handle: 'api',
             color: 'teal',
             colorSecondary: 'sky-blue',
-            category: 'data',
+            category: 'product_os',
             slug: 'api',
             seo: {
                 title: 'API - PostHog',
+                description:
+                    'Capture events, query data, manage feature flags, and more. 14+ SDKs, no rate limits on event capture, and comprehensive REST APIs.',
+            },
+        },
+        {
+            name: 'Capture API',
+            Icon: IconTerminal,
+            description: 'Powerful APIs and SDKs to build analytics into your product',
+            handle: 'capture_api',
+            color: 'teal',
+            colorSecondary: 'sky-blue',
+            category: 'data',
+            slug: 'capture-api',
+            seo: {
+                title: 'Capture API - PostHog',
                 description:
                     'Capture events, query data, manage feature flags, and more. 14+ SDKs, no rate limits on event capture, and comprehensive REST APIs.',
             },
@@ -3803,7 +3822,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Hog',
-            Icon: IconPiggyBank,
+            Icon: IconBrackets,
             description: 'Transform and export data in real-time with our programming language',
             handle: 'hog',
             slug: 'hog',

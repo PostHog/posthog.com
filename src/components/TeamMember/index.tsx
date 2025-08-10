@@ -1,4 +1,3 @@
-import { child } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -119,7 +118,11 @@ export const TeamMemberLink = ({
                                     <strong className="text-[15px] mt-1">{displayName}</strong>
                                     <div className="opacity-75">{companyRole}</div>
                                     <span className="text-sm mt-0.5 flex gap-1 items-center text-secondary">
-                                        {country === 'world' ? '🌎' : <ReactCountryFlag svg countryCode={country} />}
+                                        {country === 'world' ? (
+                                            '🌎'
+                                        ) : (
+                                            <ReactCountryFlag svg countryCode={country || ''} />
+                                        )}
                                         {country === 'world' ? 'Planet Earth' : location || country}
                                     </span>
                                 </div>
@@ -182,7 +185,8 @@ export default function TeamMember({
     `)
 
     const person = nodes.find(
-        ({ firstName, lastName }) => `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
+        ({ firstName, lastName }: { firstName: string; lastName: string }) =>
+            `${firstName} ${lastName}`.toLowerCase() === name.toLowerCase()
     )
 
     return person ? (
@@ -196,6 +200,6 @@ export default function TeamMember({
             )}
         </>
     ) : (
-        name
+        <span>{name}</span>
     )
 }

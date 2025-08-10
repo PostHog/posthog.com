@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { apps, productLinks } from '.'
 import { AppItem, AppLink } from 'components/OSIcons/AppIcon'
 import { motion } from 'framer-motion'
-import { useApp } from '../../context/App'
 
 const Folder = ({
     items,

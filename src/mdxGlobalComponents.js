@@ -58,6 +58,7 @@ import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 import { MaxCTA } from './components/MaxCTA'
+import SmallTeam from './components/SmallTeam'
 
 export const shortcodes = {
     ArrayCTA,
@@ -118,4 +119,5 @@ export const shortcodes = {
     Tweet,
     ZendeskTicket,
     MaxCTA,
+    SmallTeam,
 }
