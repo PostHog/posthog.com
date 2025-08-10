@@ -83,10 +83,11 @@ You can disable automatically capturing `$feature_flag_called` events. For examp
 To disable it, set the `SendFeatureFlagEvents` argument in your function call, like so:
 
 ```go
+sendFeatureFlags := false
 isMyFlagEnabled, err := client.IsFeatureEnabled(posthog.FeatureFlagPayload{
     Key:                    "flag-key",
     DistinctId:             "distinct_id_of_your_user",
-    SendFeatureFlagEvents:  true,
+    SendFeatureFlagEvents:  &sendFeatureFlags,
 })
 ```
 
