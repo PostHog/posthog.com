@@ -1,7 +1,7 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductImages } from './utils'
@@ -12,10 +12,20 @@ type ProductCarouselProps = {
     product: ShopifyProduct
 }
 
+const Image = ({ index, image, title }: { index: number; image: any; title: string }) => {
+    const memoizedImage = useMemo(() => getShopifyImage({ image: image.preview.image }), [image])
+
+    return (
+        <div className={`keen-slider__slide number-slide${index}} max-w-full bg-white`}>
+            <GatsbyImage className="w-full aspect-square" image={memoizedImage} alt={title} />
+        </div>
+    )
+}
+
 export function ProductCarousel(props: ProductCarouselProps): React.ReactElement | null {
     const { className, product } = props
     const { media, title } = product
-    const images = getProductImages(media)
+    const images = useMemo(() => getProductImages(media), [media])
     const [currentSlide, setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -31,13 +41,15 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
 
     const classes = cn('relative rounded overflow-hidden', className)
 
+    const memoizedImage = useMemo(() => getShopifyImage({ image: product.featuredMedia.preview.image }), [product])
+
     if (!images || images.length === 0) return null
 
     if (images.length === 1)
         return (
             <GatsbyImage
                 className="w-full rounded-md overflow-hidden aspect-square"
-                image={getShopifyImage({ image: product.featuredMedia.preview.image })}
+                image={memoizedImage}
                 alt={product.title}
             />
         )
@@ -46,15 +58,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         <div className={classes}>
             <div ref={sliderRef} className="keen-slider">
                 {images.map((image, i) => {
-                    return (
-                        <div className={`keen-slider__slide number-slide${i}} max-w-full bg-white`} key={i}>
-                            <GatsbyImage
-                                className="w-full aspect-square"
-                                image={getShopifyImage({ image: image.preview.image })}
-                                alt={title}
-                            />
-                        </div>
-                    )
+                    return <Image index={i} image={image} title={title} key={i} />
                 })}
             </div>
             {loaded && instanceRef.current && (

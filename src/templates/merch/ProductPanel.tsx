@@ -1,5 +1,5 @@
 import { CallToAction } from 'components/CallToAction'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import { cn } from '../../utils'
 import { BackInStockForm } from './BackInStockForm'
 import { LoaderIcon } from './LoaderIcon'
@@ -23,6 +23,12 @@ type ProductPanelProps = {
     onClick: () => void
     updateURL: (product: ShopifyProduct) => void
     onCartOpen?: () => void
+}
+
+const Image = ({ alt, image }: { alt: string; image: any }) => {
+    const memoizedImage = useMemo(() => getShopifyImage({ image }), [image])
+
+    return <GatsbyImage alt={alt} image={memoizedImage} />
 }
 
 export function ProductPanel(props: ProductPanelProps): React.ReactElement {
@@ -235,7 +241,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                             return (
                                 <li key={handle}>
                                     <a href={`?product=${handle}`}>
-                                        <GatsbyImage alt={handle} image={getShopifyImage({ image: featuredImage })} />
+                                        <Image alt={handle} image={featuredImage} />
                                     </a>
                                 </li>
                             )

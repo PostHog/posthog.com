@@ -1,5 +1,5 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
 import { getProductMetafield, getDisplayTitle } from './utils'
@@ -24,6 +24,8 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
     // Use shared display title logic
     const displayTitle = getDisplayTitle(product)
 
+    const image = useMemo(() => getShopifyImage({ image: product.featuredMedia.preview.image }), [product])
+
     return (
         <div
             className={`group px-2 pt-2 pb-1 border-[1.5px] rounded ${
@@ -41,7 +43,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                 <div className="relative aspect-square bg-white flex items-center">
                     <GatsbyImage
                         className="aspect-square overflow-hidden"
-                        image={getShopifyImage({ image: product.featuredMedia.preview.image })}
+                        image={image}
                         alt={product.title}
                         loading="lazy"
                     />
