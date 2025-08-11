@@ -25,8 +25,9 @@ Start by gathering context about who they are and how they're using PostHog:
 **Reviewing their PostHog setup:**
 - What PostHog products are they using?
 - What PostHog products are they *not* using?
-- Does their setup look complete? Check the items from their [health check](https://posthog.com/handbook/cs-and-onboarding/health-tracking).
-- Review their [product onboarding](https://posthog.com/handbook/growth/sales/account-allocation#product-onboarding) status.
+- Does their setup look complete? Are they paying for products they don't use?
+  - Going over the [customer deployment health check guide](/handbook/cs-and-onboarding/health-checks) will help you answer these questions.
+- Review their [product onboarding](/handbook/growth/sales/account-allocation#product-onboarding) status.
 
 **Data management assessment:**
 In their project(s), check the data management tab:
