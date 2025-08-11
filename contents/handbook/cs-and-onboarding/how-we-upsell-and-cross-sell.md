@@ -1,5 +1,5 @@
 ---
-title: How we we upsell and cross-sell
+title: How we upsell and cross-sell
 sidebar: Handbook
 showTitle: true
 ---
@@ -63,7 +63,7 @@ These questions will naturally surface use cases for session replay, feature fla
 
 ### **Value-focused positioning**
 
-Connect products to customer outcomes using their terminology and context. For example, any time you put additional burden on your champion or a stakeholder, you are less likely to help them achieve a positive outcome for us or for them. When you approach, provide them with a solution that will make their life better (and make them look better\!) it’s a win-win.f
+Connect products to customer outcomes using their terminology and context. For example, any time you put additional burden on your champion or a stakeholder, you are less likely to help them achieve a positive outcome for us or for them. When you approach, provide them with a solution that will make their life better (and make them look better\!) it’s a win-win.
 
 Also note that a CSM’s awareness and insight into the customer’s business is really instrumental in having these kinds of conversations, which is why it’s important to find a way to become more embedded into your customer’s general flow, so that you feel to them as an extension of their team.
 
