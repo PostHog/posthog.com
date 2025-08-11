@@ -1355,6 +1355,14 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
+                     {
+                        name: 'How we use automation',
+                        url: '/handbook/cs-and-onboarding/how-we-use-automation',
+                    },
+                     {
+                        name: 'How we upsell and cross-sell',
+                        url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
+                    },
                 ],
             },
             {
