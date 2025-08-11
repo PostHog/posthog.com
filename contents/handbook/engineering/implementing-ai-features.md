@@ -34,7 +34,7 @@ We build with the latest models from OpenAI and Anthropic, with Perplexity used 
 
 ## We eat our hog food
 
-This goes for everything at PostHog – but in AI features specifically, we use [our own LLM observability product](/docs/ai-engineering/observability):
+This goes for everything at PostHog – but in AI features specifically, we use [our own LLM observability product](/docs/llm-observability):
 
 - With OpenAI and Anthropic libraries in Python, use LLM observability wrappers in `posthoganalytics.ai.openai` & `posthoganalytics.ai.anthropic`
 - With LangChain, use the LLM observability callback handler in `posthoganalytics.ai.langchain.callbacks`

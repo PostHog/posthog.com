@@ -57,7 +57,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
                 <CallToAction
-                    to="/docs/ai-engineering/tutorials"
+                    to="/docs/llm-observability/tutorials"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
@@ -82,7 +82,7 @@ const LLMObservability: React.FC<LLMObservabilityProps> = ({ data }) => {
                     title="LLM observability"
                     description="Gather data for your AI and LLM products usage and performance."
                     buttonText="Start capturing LLM data"
-                    buttonLink="/docs/ai-engineering/start-here"
+                    buttonLink="/docs/llm-observability/start-here"
                     imageColumnClasses="max-w-96 mt-8 md:mt-0"
                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
                     imageClasses="max-h-48 md:max-h-64"

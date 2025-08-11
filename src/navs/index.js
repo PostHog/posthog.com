@@ -3021,7 +3021,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'LLM insights',
-                    url: '/docs/ai-engineering/llms',
+                    url: 'https://posthog.com/docs/llm-observability',
                     icon: 'IconAIText',
                     color: 'yellow',
                     badge: {
@@ -3882,7 +3882,7 @@ export const docsMenu = {
         },
         {
             name: 'LLM observability',
-            url: '/docs/ai-engineering',
+            url: '/docs/llm-observability',
             color: '[#681291]',
             colorDark: '[#C170E8]',
             icon: 'IconAI',
@@ -3901,7 +3901,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/ai-engineering',
+                    url: '/docs/llm-observability',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
@@ -3910,54 +3910,54 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/ai-engineering/start-here',
+                    url: '/docs/llm-observability/start-here',
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Installation',
-                    url: '/docs/ai-engineering/installation',
+                    url: '/docs/llm-observability/installation',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/ai-engineering/installation',
+                            url: '/docs/llm-observability/installation',
                         },
                         {
                             name: 'OpenAI',
-                            url: '/docs/ai-engineering/installation/openai',
+                            url: '/docs/llm-observability/installation/openai',
                         },
                         {
                             name: 'Anthropic',
-                            url: '/docs/ai-engineering/installation/anthropic',
+                            url: '/docs/llm-observability/installation/anthropic',
                         },
                         {
                             name: 'Google',
-                            url: '/docs/ai-engineering/installation/google',
+                            url: '/docs/llm-observability/installation/google',
                         },
                         {
                             name: 'LangChain',
-                            url: '/docs/ai-engineering/installation/langchain',
+                            url: '/docs/llm-observability/installation/langchain',
                         },
                         {
                             name: 'Vercel AI SDK',
-                            url: '/docs/ai-engineering/installation/vercel-ai',
+                            url: '/docs/llm-observability/installation/vercel-ai',
                         },
                     ],
                 },
                 {
                     name: 'Manual capture',
-                    url: '/docs/ai-engineering/manual-capture',
+                    url: '/docs/llm-observability/manual-capture',
                     icon: 'IconCode',
                     color: 'green',
                     featured: true,
                 },
                 {
                     name: 'Privacy mode',
-                    url: '/docs/ai-engineering/privacy-mode',
+                    url: '/docs/llm-observability/privacy-mode',
                     icon: 'IconLock',
                     color: 'purple',
                     featured: true,
@@ -3967,14 +3967,14 @@ export const docsMenu = {
                 },
                 {
                     name: 'Traces and generations',
-                    url: '/docs/ai-engineering/traces-generations',
+                    url: '/docs/llm-observability/traces-generations',
                     icon: 'IconTarget',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Dashboard',
-                    url: '/docs/ai-engineering/dashboard',
+                    url: '/docs/llm-observability/dashboard',
                     icon: 'IconDashboard',
                     color: 'red',
                 },
@@ -3983,37 +3983,37 @@ export const docsMenu = {
                 },
                 {
                     name: 'Tutorials and guides',
-                    url: '/docs/ai-engineering/tutorials',
+                    url: '/docs/llm-observability/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'salmon',
                     featured: true,
                 },
                 {
                     name: 'Integrations',
-                    url: '/docs/ai-engineering/integrations',
+                    url: '/docs/llm-observability/integrations',
                     icon: 'IconAIText',
                     featured: true,
                     color: 'purple',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/ai-engineering/integrations',
+                            url: '/docs/llm-observability/integrations',
                         },
                         {
                             name: 'Helicone',
-                            url: '/docs/ai-engineering/integrations/helicone-posthog',
+                            url: '/docs/llm-observability/integrations/helicone-posthog',
                         },
                         {
                             name: 'Langfuse',
-                            url: '/docs/ai-engineering/integrations/langfuse-posthog',
+                            url: '/docs/llm-observability/integrations/langfuse-posthog',
                         },
                         {
                             name: 'Traceloop',
-                            url: '/docs/ai-engineering/integrations/traceloop-posthog',
+                            url: '/docs/llm-observability/integrations/traceloop-posthog',
                         },
                         {
                             name: 'Keywords AI',
-                            url: '/docs/ai-engineering/integrations/keywords-ai-posthog',
+                            url: '/docs/llm-observability/integrations/keywords-ai-posthog',
                         },
                     ],
                 },
@@ -4022,13 +4022,13 @@ export const docsMenu = {
                 },
                 {
                     name: 'Billing',
-                    url: '/docs/ai-engineering/billing',
+                    url: '/docs/llm-observability/billing',
                     icon: 'IconPiggyBank',
                     color: 'green',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
-                    url: '/docs/ai-engineering/troubleshooting',
+                    url: '/docs/llm-observability/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
                 },
