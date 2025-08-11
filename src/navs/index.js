@@ -3988,12 +3988,6 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Dashboard',
-                    url: '/docs/llm-observability/dashboard',
-                    icon: 'IconDashboard',
-                    color: 'red',
-                },
-                {
                     name: 'Calculating LLM costs',
                     url: '/docs/llm-observability/calculating-costs',
                     icon: 'IconBalance',
@@ -4002,6 +3996,12 @@ export const docsMenu = {
                 },
                 {
                     name: 'Guides',
+                },
+                {
+                    name: 'Analyze LLM performance',
+                    url: '/docs/llm-observability/dashboard',
+                    icon: 'IconDashboard',
+                    color: 'red',
                 },
                 {
                     name: 'Tutorials and guides',
