@@ -130,14 +130,14 @@ Beyond state management, this requires:
 In PostHog, at the highest level, this looks like this:
 
 ```python
-  # From root/nodes.py
-  def router(self, state: AssistantState) -> Literal["insights", 
-  "search_documentation", "billing"]:
-    if self._should_generate_insight(state):
-      return "insights"
-    elif self._should_search_docs(state):
-      return "search_documentation"
-    # ... etc
+# From root/nodes.py
+def router(self, state: AssistantState) -> Literal["insights", 
+"search_documentation", "billing"]:
+  if self._should_generate_insight(state):
+    return "insights"
+  elif self._should_search_docs(state):
+    return "search_documentation"
+  # ... etc
 ```
 
 It then gets more specific in each of the tools, each of which have their own conditions to route through. 
