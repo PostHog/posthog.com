@@ -34,7 +34,7 @@ Spoiler: Lezgin did not decide to leave PostHog.
 ## More than autocapture: Replacing the whole stack
 It wasn’t just the open-source safety net that made PostHog stand out — he also saw how much more the team could accomplish once the tracking headache was solved with PostHog’s [autocapture](/docs/product-analytics/autocapture).
 
-“Autocapture solved my first problem because I no longer had front-end developers spending type adding tracking,” explains Lezgin. “Instead, we just captured that automatically and we could build all the dashboards we wanted, completely replacing the need for [Google Analytics](/blog/posthog-vs-ga4) in our product.”
+"Autocapture solved my first problem because I no longer had front-end developers spending time adding tracking," explains Lezgin. "Instead, we just captured that automatically and we could build all the dashboards we wanted, completely replacing the need for [Google Analytics](/blog/posthog-vs-ga4) in our product."
 
 "It used to be the case that if we didn't add tracking for something in Google Analytics then we just lost that datapoint. That's not the case with PostHog though!"
 
@@ -65,7 +65,7 @@ Despite these compliance constraints, tools like session recording have been a h
 
 "This is stuff we couldn't do with Google Analytics or any other tool," explains Lezgin. "Other platforms give you aggregated data and you can't sort through it easily, or it's difficult to connect with other tools. With PostHog it's easy to enrich persons with internal data and then we can do feature flagging and A/B testing using it in a way that's well-connected _and_ secure."
 
-Unsurprisingly (and convenient for us to highlight in this article), Legzin doesn’t regret adopting PostHog. He still sees plenty of room to expand usage further and has clear advice for other fintechs facing similar challenges.
+Unsurprisingly (and convenient for us to highlight in this article), Lezgin doesn't regret adopting PostHog. He still sees plenty of room to expand usage further and has clear advice for other fintechs facing similar challenges.
 
 “Hell yes, I’d recommend PostHog. It’s just important to think about your setup — you can just use autocapture to grab everything and move fast, or you can tag exactly what you want to keep the bill lower. Either way works and you can still go from a usage funnel that’s automatically posted to Slack to a specific event to a session recording of a user and see what feature flags they’ve used. It’s incredible.”
 
