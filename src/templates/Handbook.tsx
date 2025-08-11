@@ -351,6 +351,7 @@ export default function Handbook({
                 filePath={post.parent?.relativePath}
                 homeURL={breadcrumbBase.url}
                 description={seo?.metaDescription || excerpt}
+                showSurvey
             />
         </>
     )

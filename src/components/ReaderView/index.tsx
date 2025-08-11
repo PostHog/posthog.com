@@ -37,6 +37,7 @@ import { useWindow } from '../../context/Window'
 import { useApp } from '../../context/App'
 import { Questions } from 'components/Squeak'
 import { navigate } from 'gatsby'
+import { DocsPageSurvey } from 'components/DocsPageSurvey'
 dayjs.extend(relativeTime)
 
 interface ReaderViewProps {
@@ -64,6 +65,7 @@ interface ReaderViewProps {
     rightActionButtons?: React.ReactNode
     isEditing?: boolean
     onSearch?: (query: string) => void
+    showSurvey?: boolean
 }
 
 interface BackgroundImageOption {
@@ -318,6 +320,7 @@ export default function ReaderView({
     rightActionButtons,
     isEditing,
     onSearch,
+    showSurvey = false,
 }: ReaderViewProps) {
     return (
         <ReaderViewProvider>
@@ -338,6 +341,7 @@ export default function ReaderView({
                 rightActionButtons={rightActionButtons}
                 isEditing={isEditing}
                 onSearch={onSearch}
+                showSurvey={showSurvey}
             >
                 {children}
             </ReaderViewContent>
@@ -440,6 +444,7 @@ function ReaderViewContent({
     rightActionButtons,
     isEditing,
     onSearch,
+    showSurvey = false,
 }) {
     const { openNewChat, compact } = useApp()
     const { appWindow } = useWindow()
@@ -616,6 +621,11 @@ function ReaderViewContent({
                                     </h3>
                                     <Questions slug={appWindow?.path} />
                                 </div>
+                                {showSurvey && (
+                                    <div className="mt-8">
+                                        <DocsPageSurvey filePath={filePath} />
+                                    </div>
+                                )}
                             </div>
                         </article>
                     </ScrollArea>
