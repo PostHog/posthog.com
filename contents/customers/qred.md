@@ -34,7 +34,7 @@ Spoiler: Lezgin did not decide to leave PostHog.
 ## More than autocapture: Replacing the whole stack
 It wasn’t just the open-source safety net that made PostHog stand out — he also saw how much more the team could accomplish once the tracking headache was solved with PostHog’s [autocapture](/docs/product-analytics/autocapture).
 
-“Autocapture solved my first problem because I no longer had front-end developers spending type adding tracking,” explains Lezgin. “Instead, we just captured that automatically and we could build all the dashboards we wanted, completely replacing the need for [Google Analytics](/blog/posthog-vs-ga4) in our product.”
+"Autocapture solved my first problem because I no longer had front-end developers spending time adding tracking," explains Lezgin. "Instead, we just captured that automatically and we could build all the dashboards we wanted, completely replacing the need for [Google Analytics](/blog/posthog-vs-ga4) in our product."
 
 "It used to be the case that if we didn't add tracking for something in Google Analytics then we just lost that datapoint. That's not the case with PostHog though!"
 
