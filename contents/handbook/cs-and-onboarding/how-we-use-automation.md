@@ -64,7 +64,7 @@ This approach ensures automation enhances rather than replaces the human element
 
 ### **Requesting new automations**
 
-CSMs are encouraged (as are all PostHog employees) to experiment and surface new ideas frequently in Slack or team stand-up. Examples of areas where automations could be useful include, but not are not limited to: 
+CSMs are encouraged (as are all PostHog employees) to experiment and surface new ideas frequently in Slack or team stand-up. Examples of areas where automations could be useful include, but are not limited to: 
 
 * Time savings versus implementation complexity  
 * Impact on customer experience  
