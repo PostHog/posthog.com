@@ -3968,8 +3968,15 @@ export const docsMenu = {
                 {
                     name: 'Traces and generations',
                     url: '/docs/llm-observability/traces-generations',
-                    icon: 'IconTarget',
+                    icon: 'IconLlmPromptEvaluation',
                     color: 'orange',
+                    featured: true,
+                },
+                {
+                    name: 'Spans and embeddings',
+                    url: '/docs/llm-observability/spans-embeddings',
+                    icon: 'IconBrackets',
+                    color: 'blue',
                     featured: true,
                 },
                 {
@@ -3977,6 +3984,13 @@ export const docsMenu = {
                     url: '/docs/llm-observability/dashboard',
                     icon: 'IconDashboard',
                     color: 'red',
+                },
+                {
+                    name: 'Calculating LLM costs',
+                    url: '/docs/llm-observability/calculating-costs',
+                    icon: 'IconBalance',
+                    color: 'green',
+                    featured: true,
                 },
                 {
                     name: 'Guides',
@@ -3989,11 +4003,26 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
+                    name: 'Resources',
+                },
+                {
+                    name: 'Billing',
+                    url: '/docs/llm-observability/billing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+                    name: 'Troubleshooting and FAQs',
+                    url: '/docs/llm-observability/troubleshooting',
+                    icon: 'IconQuestion',
+                    color: 'purple',
+                },
+                {
                     name: 'Integrations',
                     url: '/docs/llm-observability/integrations',
-                    icon: 'IconAIText',
+                    icon: 'IconApps',
                     featured: true,
-                    color: 'purple',
+                    color: 'yellow',
                     children: [
                         {
                             name: 'Overview',
@@ -4016,21 +4045,6 @@ export const docsMenu = {
                             url: '/docs/llm-observability/integrations/keywords-ai-posthog',
                         },
                     ],
-                },
-                {
-                    name: 'Resources',
-                },
-                {
-                    name: 'Billing',
-                    url: '/docs/llm-observability/billing',
-                    icon: 'IconPiggyBank',
-                    color: 'green',
-                },
-                {
-                    name: 'Troubleshooting and FAQs',
-                    url: '/docs/llm-observability/troubleshooting',
-                    icon: 'IconQuestion',
-                    color: 'purple',
                 },
             ],
         },
