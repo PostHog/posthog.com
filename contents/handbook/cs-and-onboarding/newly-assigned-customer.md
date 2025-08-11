@@ -5,7 +5,7 @@ showTitle: true
 ---
 
 
-When you're assigned a new customer account, your approach will vary depending on their existing relationship with PostHog. This guide walks you through the key steps to take when welcoming new customers to your book.
+When you're assigned a new customer account, your approach will vary depending on their existing relationship with PostHog. This guide walks you through some key steps you can take when welcoming new customers to your book.
 
 ## Determine which category your customer falls into
 
