@@ -71,5 +71,5 @@ Call structure:
   - Monthly plans: look for significant growth within the last quarter
 - Accounts with platform add-ons
   - Customers on legacy "Teams" add-on ($450/month) could save $200 by switching to the "Boost" add-on if they do not require SAML SSO or managed reserve proxy. The teams add-on has now been split into:
-    - [Boost add-on](https://posthog.com/platform-addons#boost-add-on) ($250/month)
-    - [Scale add-on](https://posthog.com/platform-addons#scale-add-on) ($750/month)
+    - [Boost add-on](/platform-addons#boost-add-on) ($250/month)
+    - [Scale add-on](/platform-addons#scale-add-on) ($750/month)
