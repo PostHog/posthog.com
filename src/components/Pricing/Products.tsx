@@ -168,8 +168,8 @@ export const useProducts = () => {
             slider: (
                 <LogSlider
                     stepsInRange={100}
-                    marks={[250, 2000, 15000, 100000]}
-                    min={250}
+                    marks={[1500, 5000, 20000, 100000]}
+                    min={1500}
                     max={100000}
                     onChange={(value) => setSurveyResponseSliderValue(value, sliderCurve)}
                     value={surveyResponseSliderValue}
