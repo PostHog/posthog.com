@@ -64,7 +64,7 @@ If you are a hiring manager for a role, you will usually:
 
 The People & Ops team will then write up the full job description in Ashby.
 
-We frequently iterate on our specs, but we have a [template for a product engineer](https://github.com/PostHog/company-internal/blob/7c9c4552d26612a1241b7e6e6d5b05559b672771/recruiting/product-engineer-job-template.md) role that you can use as a starting point. Generally, the "About PostHog" and "Things we care about" sections should be used in all ads, and you can adapt the other sections to your specific requirements.
+We frequently iterate on our specs, but we have a <PrivateLink url="[https://docs.google.com/spreadsheets/d/1mj-5Uy3IB5I09ml-zFH9VXxssqfGUgif1SURcsTFZRU/edit?usp=sharing](https://github.com/PostHog/company-internal/blob/7c9c4552d26612a1241b7e6e6d5b05559b672771/recruiting/product-engineer-job-template.md)">template for a product engineer</PrivateLink> role that you can use as a starting point. Generally, the "About PostHog" and "Things we care about" sections should be used in all ads, and you can adapt the other sections to your specific requirements.
 
 We find the following approaches work well:
 
