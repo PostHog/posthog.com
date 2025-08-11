@@ -1324,6 +1324,10 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/onboarding-team',
                     },
                     {
+                        name: 'Getting started with newly assigned customers',
+                        url: '/handbook/cs-and-onboarding/newly-assigned-customer',
+                    },
+                    {
                         name: 'Saying hi to your customers',
                         url: '/handbook/cs-and-onboarding/saying-hi-to-your-customers',
                     },
