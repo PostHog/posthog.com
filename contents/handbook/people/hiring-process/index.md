@@ -64,7 +64,7 @@ If you are a hiring manager for a role, you will usually:
 
 The People & Ops team will then write up the full job description in Ashby.
 
-We frequently iterate on our specs, but we have a [template for a product engineer](https://github.com/PostHog/company-internal/blob/7c9c4552d26612a1241b7e6e6d5b05559b672771/recruiting/product-engineer-job-template.md) role that you can use as a starting point. Generally, the "About PostHog" and "Things we care about" sections should be used in all ads, and you can adapt the other sections to your specific requirements.
+We frequently iterate on our specs, but we have a <PrivateLink url="https://github.com/PostHog/company-internal/blob/7c9c4552d26612a1241b7e6e6d5b05559b672771/recruiting/product-engineer-job-template.md">template for a product engineer</PrivateLink> role that you can use as a starting point. Generally, the "About PostHog" and "Things we care about" sections should be used in all ads, and you can adapt the other sections to your specific requirements.
 
 We find the following approaches work well:
 
@@ -129,6 +129,8 @@ Refer someone you know on the <PrivateLink url="https://app.ashbyhq.com/referral
 If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach out to, this also counts as a social referral.
 
 The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.  
+
+> You will sometimes get people emailing or messaging you on LinkedIn asking to chat about a role or get referred in. If you don't know them, you can point them back to our [careers page](/careers), or just ignore them. We get dozens of these kinds of messages every day, so don't feel bad about not engaging! If they are asking for advice, you can point them to [this article](/newsletter/how-to-get-job-startup).
 
 #### Referral payouts
 

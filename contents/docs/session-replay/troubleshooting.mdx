@@ -125,6 +125,12 @@ To fix this, either call a method that creates a person profile (like `identify(
 
 Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to cookies, which can cause an infinite loop. If you are using a tool like this and experience the webpage becoming unresponsive or slow then try [configuring posthog](/docs/libraries/js/persistence) to use `persistence: "localStorage+cookie"`. This will use localStorage for the majority of storage needs, bypassing the infinite loop issue sometimes caused by cookie management tools.
 
+## Enable recordings when URL matches not working as expected
+
+The **Enable recordings when URL matches** setting is only supported in the web SDK version `1.171.0` and above. If your recordings aren’t being recorded as expected, even when the URL matches your regex, it’s likely due to an outdated SDK version.
+
+Make sure you’re using version `1.171.0` or newer to ensure this feature works correctly.
+
 ## Network payload capture is not capturing headers
 
 Browser do not automatically allow JS to read headers from cross-origin requests. So, when making a request from app.mywebsite.example to api.mywebsite.example headers are not available to be copied and reported.

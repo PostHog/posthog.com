@@ -1185,6 +1185,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/small-teams',
                     },
                     {
+                        name: 'Adding a team member',
+                        url: '/handbook/engineering/posthog-com/add-team-member',
+                    },
+                    {
                         name: 'Managing the company roadmap',
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
@@ -1322,6 +1326,10 @@ export const handbookSidebar = [
                     {
                         name: 'Onboarding specialist overview',
                         url: '/handbook/cs-and-onboarding/onboarding-team',
+                    },
+                    {
+                        name: 'Getting started with newly assigned customers',
+                        url: '/handbook/cs-and-onboarding/newly-assigned-customer',
                     },
                     {
                         name: 'Saying hi to your customers',

@@ -140,9 +140,9 @@ const productDetails: Record<
         complexity: ['People who code'],
     },
     surveys: {
-        freeTierLimit: '250',
+        freeTierLimit: '1500',
         denominator: 'response',
-        startingPrice: '$0.20',
+        startingPrice: '$0.10',
         description: 'Get qualitative feedback from the right users at the right time',
         roles: ['Product people', 'Marketing', 'Sales'],
         goals: ['Understand user behavior', 'Improve product'],
