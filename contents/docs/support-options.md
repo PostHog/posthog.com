@@ -144,27 +144,24 @@ PostHog Cloud Editions have [standard terms](/terms).
 
 If you need non-standard terms or Service Level Agreements (SLAs), for example, we offer MSAs to Enterprise customers only. These cover things like:
 
-* Bespoke pricing
 * Custom Service Level Agreements
 * Custom legal changes if you have special requirements
 * Custom information security requirements
 
-While we do not automatically accept all product changes and requests, we are willing to review these for our Enterprise product only. For Open Source, Cloud and Scale, we do not make contractual commitments to make product changes. 
+We do not make contractual commitments to make product changes or alter our roadmap. 
 
 ## Security assessment
 
 We have an extensive range of robust internal [security policies](/handbook/company/security) that apply to all products and cover several requirements around GDPR, SOC 2, HIPAA and CCPA. 
 
-For Paid customers, we are happy to complete your own security assessment. This can take the form of us enabling your team internally (who are responsible for information security since they are hosting the data), or it can mean us just answering questions and adapting our policies if needed.
+For Entrprise customers, we are happy to complete your own security assessment. This can take the form of us enabling your team internally (who are responsible for information security since they are hosting the data), or it can mean us just answering questions and adapting our policies if needed.
 
 ## Bespoke pricing
 
-We can offer bespoke pricing for Enterprise customers only.
-
-For example, we have been asked if we can offer a set fee with a large usage cap rather than usage-based pricing, in order to make budget approval simpler. 
+We provide discounts for customers who make an up-front purchase of PostHog Cloud Credit.  You can see the [discount schedule](/handbook/growth/sales/contract-rules#discounts) in our company handbook.
 
 ## Payment via invoicing
 
 We only take payments via credit or debit card, processed via Stripe. 
 
-For companies with invoices over $2,000/month, we are able to support manual invoicing if needed. Just email sales@posthog.com and we'll set this up.
+For companies wishing to pay via invoice, an up-front credit purchase is needed.  [Contact our Sales team](/talk-to-a-human) for help with this.
