@@ -13,8 +13,9 @@ interface AccordionItemProps extends React.ComponentPropsWithoutRef<typeof Radix
 const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
     ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Item
-            className={`border-t border-primary first:border-t-0 [&_h3]:my-0 focus-within:relative focus-within:z-10 ${skin ? 'focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border' : ''
-                } ${className}`}
+            className={`border-t border-primary first:border-t-0 [&_h3]:my-0 focus-within:relative focus-within:z-10 ${
+                skin ? 'focus-within:shadow-[0_0_2px_2px] focus-within:shadow-border' : ''
+            } ${className}`}
             {...props}
             ref={forwardedRef}
         >
@@ -36,8 +37,9 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
     ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Header className="flex">
             <RadixAccordion.Trigger
-                className={`group flex flex-1 items-center justify-between px-2 py-1 text-sm leading-none ${skin ? 'first:rounded-t last:rounded-b bg-accent hover:bg-accent' : ''
-                    } text-primary outline-none ${className}`}
+                className={`group flex flex-1 items-center justify-between px-2 py-1 text-sm leading-none select-none ${
+                    skin ? 'first:rounded-t last:rounded-b bg-accent hover:bg-accent' : ''
+                } text-primary outline-none ${className}`}
                 {...props}
                 ref={forwardedRef}
             >
@@ -63,8 +65,9 @@ interface AccordionContentProps extends React.ComponentPropsWithoutRef<typeof Ra
 const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
     ({ children, className, skin, ...props }, forwardedRef) => (
         <RadixAccordion.Content
-            className={`overflow-hidden ${skin ? 'bg-primary text-primary border-primary border-t' : ''
-                } data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown p-2 last:rounded-b [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 ${className}`}
+            className={`overflow-hidden select-none ${
+                skin ? 'bg-primary text-primary border-primary border-t' : ''
+            } data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown p-2 last:rounded-b [&>p:first-child]:mt-0 [&>p:last-child]:mb-0 ${className}`}
             {...props}
             ref={forwardedRef}
             asChild

@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import Layout from 'components/Layout'
 import ProductProductAnalytics from 'components/Product/ProductAnalytics'
 import Explorer from 'components/Explorer'
-import { Link } from 'gatsby'
+import { navigate } from 'gatsby'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import SEO from 'components/seo'
@@ -15,6 +15,7 @@ import ZoomHover from 'components/ZoomHover'
 import { IconPresentation } from 'components/OSIcons'
 import { productMenu } from '../../navs'
 import { PRODUCT_COUNT } from '../../constants'
+import ScrollArea from 'components/RadixUI/ScrollArea'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -42,6 +43,44 @@ const selectOptions = [
 
 export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
+    const [selectedProduct, setSelectedProduct] = useState<any>(null)
+    const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false)
+    const [lastClickTime, setLastClickTime] = useState(0)
+    const [lastClickedProduct, setLastClickedProduct] = useState<string | null>(null)
+
+    const handleProductClick = useCallback(
+        (product: any, e: React.MouseEvent) => {
+            e.preventDefault()
+            e.stopPropagation()
+
+            const currentTime = Date.now()
+            const timeSinceLastClick = currentTime - lastClickTime
+            const isSameProduct = lastClickedProduct === product.slug
+
+            // Double-click detection (within 500ms on the same product)
+            if (isSameProduct && timeSinceLastClick < 500) {
+                // Double-click: open the product page in PostHog window
+                navigate(`/${product.slug}`, { state: { newWindow: true } })
+                // Don't close the sidebar on double-click
+            } else {
+                // Single-click: open/switch the sidebar (but never close it)
+                if (!isRightSidebarOpen || selectedProduct?.slug !== product.slug) {
+                    setSelectedProduct(product)
+                    setIsRightSidebarOpen(true)
+                }
+                // If clicking the same product while sidebar is open, do nothing
+                setLastClickedProduct(product.slug)
+            }
+
+            setLastClickTime(currentTime)
+        },
+        [lastClickTime, lastClickedProduct, isRightSidebarOpen, selectedProduct]
+    )
+
+    const handleRightSidebarClose = useCallback(() => {
+        setIsRightSidebarOpen(false)
+        setSelectedProduct(null)
+    }, [])
 
     return (
         <>
@@ -56,11 +95,122 @@ export default function Products(): JSX.Element {
                 title="Product OS"
                 showTitle={false}
                 selectOptions={selectOptions}
-                // options below only needed to override matching the slug
-                // teamName="product-analytics"
-                // roadmapCategory="product-analytics"
-                // changelogCategory="product-analytics"
+                doubleClickToOpen={true}
+                isRightSidebarOpen={isRightSidebarOpen}
+                onRightSidebarClose={handleRightSidebarClose}
+                rightSidebarPanel={
+                    selectedProduct && (
+                        <div className="p-4">
+                            <div className="flex items-center justify-between mb-4">
+                                <h2 className="text-lg font-semibold">{selectedProduct.name}</h2>
+                                <button
+                                    onClick={handleRightSidebarClose}
+                                    className="p-1 hover:bg-accent rounded-sm transition-colors"
+                                    aria-label="Close sidebar"
+                                >
+                                    <Icons.IconX className="size-4" />
+                                </button>
+                            </div>
+                            <ScrollArea className="h-[calc(100vh-12rem)]">
+                                <div className="space-y-4">
+                                    {/* Product icon */}
+                                    <div className="flex justify-center py-4">
+                                        {selectedProduct.parentIcon ? (
+                                            <div className="relative">
+                                                {selectedProduct.Icon &&
+                                                    React.createElement(selectedProduct.Icon, {
+                                                        className: `size-16`,
+                                                    })}
+                                            </div>
+                                        ) : selectedProduct.Icon ? (
+                                            <div className={`relative size-16`}>
+                                                <IconPresentation
+                                                    className={`size-16 [&_.bg-front]:fill-${selectedProduct.color} [&_.bg-rear]:fill-${selectedProduct.colorSecondary}`}
+                                                />
+                                                {React.createElement(selectedProduct.Icon, {
+                                                    className: `size-8 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
+                                                })}
+                                            </div>
+                                        ) : (
+                                            <IconPresentation className="size-16" />
+                                        )}
+                                    </div>
 
+                                    {/* Product info */}
+                                    <div className="space-y-2">
+                                        <p className="text-sm text-secondary">
+                                            <strong>Slug:</strong> {selectedProduct.slug}
+                                        </p>
+                                        {selectedProduct.description && (
+                                            <p className="text-sm text-secondary">
+                                                <strong>Description:</strong> {selectedProduct.description}
+                                            </p>
+                                        )}
+                                        {selectedProduct.category && (
+                                            <p className="text-sm text-secondary">
+                                                <strong>Category:</strong> {selectedProduct.category}
+                                            </p>
+                                        )}
+                                        {selectedProduct.status && (
+                                            <p className="text-sm text-secondary">
+                                                <strong>Status:</strong>{' '}
+                                                <span className="uppercase">{selectedProduct.status}</span>
+                                            </p>
+                                        )}
+                                    </div>
+
+                                    {/* SEO info if available */}
+                                    {selectedProduct.seo && (
+                                        <div className="space-y-2">
+                                            <h3 className="text-sm font-semibold">SEO Information</h3>
+                                            {selectedProduct.seo.title && (
+                                                <p className="text-sm text-secondary">
+                                                    <strong>Title:</strong> {selectedProduct.seo.title}
+                                                </p>
+                                            )}
+                                            {selectedProduct.seo.description && (
+                                                <p className="text-sm text-secondary">
+                                                    <strong>Description:</strong> {selectedProduct.seo.description}
+                                                </p>
+                                            )}
+                                        </div>
+                                    )}
+
+                                    {/* Screenshots if available */}
+                                    {selectedProduct.screenshots && selectedProduct.screenshots.length > 0 && (
+                                        <div className="space-y-2">
+                                            <h3 className="text-sm font-semibold">Screenshot</h3>
+                                            <img
+                                                src={selectedProduct.screenshots[0].src}
+                                                alt={selectedProduct.screenshots[0].alt || 'Product screenshot'}
+                                                className="w-full rounded-md border border-primary"
+                                            />
+                                        </div>
+                                    )}
+
+                                    {/* Open product button */}
+                                    <div className="pt-4">
+                                        <OSButton
+                                            variant="primary"
+                                            width="full"
+                                            size="md"
+                                            asLink
+                                            to={`/${selectedProduct.slug}`}
+                                            state={{ newWindow: true }}
+                                            icon={<Icons.IconArrowRight />}
+                                            iconPosition="right"
+                                        >
+                                            Open {selectedProduct.name}
+                                        </OSButton>
+                                        <p className="text-xs text-muted text-center mt-2">
+                                            Tip: Double-click the icon to open directly
+                                        </p>
+                                    </div>
+                                </div>
+                            </ScrollArea>
+                        </div>
+                    )
+                }
                 leftSidebarContent={[
                     {
                         title: 'About Product OS',
@@ -223,7 +373,7 @@ export default function Products(): JSX.Element {
                                             {
                                                 value: category,
                                                 trigger: (
-                                                    <span className="bg-primary pr-2 relative z-10">
+                                                    <span className="bg-primary pr-2 relative z-10 select-none">
                                                         {categoryDisplayNames[category] ||
                                                             category.charAt(0).toUpperCase() + category.slice(1)}{' '}
                                                         ({count})
@@ -240,36 +390,48 @@ export default function Products(): JSX.Element {
                                                                         : ''
                                                                 }`}
                                                             >
-                                                                <AppLink
-                                                                    label={product.name}
-                                                                    url={`/` + product.slug}
-                                                                    Icon={
-                                                                        product.parentIcon ? (
-                                                                            product.Icon
-                                                                        ) : (
-                                                                            <IconPresentation />
-                                                                        )
-                                                                    }
-                                                                    parentIcon={product.parentIcon}
-                                                                    background="bg-primary"
-                                                                    className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
+                                                                <div
+                                                                    onClick={(e) => handleProductClick(product, e)}
+                                                                    className={`cursor-default p-1 border-[1.5px] rounded-md transition-colors ${
+                                                                        selectedProduct?.slug === product.slug
+                                                                            ? 'border-blue bg-blue/10'
+                                                                            : 'border-transparent hover:border-border'
+                                                                    }`}
+                                                                    style={{ pointerEvents: 'auto' }}
                                                                 >
-                                                                    {!product.parentIcon &&
-                                                                        product.Icon &&
-                                                                        React.createElement(product.Icon, {
-                                                                            className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
-                                                                        })}
-                                                                    {product.status == 'beta' && (
-                                                                        <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
-                                                                            Beta
-                                                                        </span>
-                                                                    )}
-                                                                    {product.status == 'WIP' && (
-                                                                        <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
-                                                                            WIP
-                                                                        </span>
-                                                                    )}
-                                                                </AppLink>
+                                                                    <div style={{ pointerEvents: 'none' }}>
+                                                                        <AppLink
+                                                                            label={product.name}
+                                                                            url={`#`}
+                                                                            Icon={
+                                                                                product.parentIcon ? (
+                                                                                    product.Icon
+                                                                                ) : (
+                                                                                    <IconPresentation />
+                                                                                )
+                                                                            }
+                                                                            parentIcon={product.parentIcon}
+                                                                            background="bg-primary"
+                                                                            className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
+                                                                        >
+                                                                            {!product.parentIcon &&
+                                                                                product.Icon &&
+                                                                                React.createElement(product.Icon, {
+                                                                                    className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
+                                                                                })}
+                                                                            {product.status == 'beta' && (
+                                                                                <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                                                                    Beta
+                                                                                </span>
+                                                                            )}
+                                                                            {product.status == 'WIP' && (
+                                                                                <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
+                                                                                    WIP
+                                                                                </span>
+                                                                            )}
+                                                                        </AppLink>
+                                                                    </div>
+                                                                </div>
                                                             </ZoomHover>
                                                         ))}
                                                     </div>
