@@ -43,7 +43,7 @@ const product = {
     slug: 'surveys',
     lowercase: 'surveys',
     capitalized: 'Surveys',
-    freeTier: '250 survey responses',
+    freeTier: '1500 survey responses',
 }
 
 const team = 'Surveys'

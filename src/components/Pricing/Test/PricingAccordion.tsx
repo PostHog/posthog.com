@@ -48,7 +48,7 @@ export const tiers = [
         title: 'Surveys',
         startsAt: (
             <>
-                <strong className="text-sm">$0.2000</strong>
+                <strong className="text-sm">$0.1000</strong>
                 <span className="opacity-60 text-[13px]">/response</span>
             </>
         ),
