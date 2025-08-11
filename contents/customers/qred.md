@@ -50,7 +50,7 @@ PostHog has since become Qred’s single source of truth for an increasing amoun
         alt="Qred experiment screenshot" 
         className="w-full rounded-md shadow-sm"
       />
-      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4"></h3>
+      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Building a better onboarding flow with PostHog</h3>
       <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
         With PostHog as a single source of truth, Qred could back bold changes with confidence. When adding an online ID verification step to onboarding, some feared a drop in conversion. A quick A/B test proved it actually boosted retention — unblocking the team and improving the customer journey without hurting conversion at all.
       </p>
