@@ -1185,6 +1185,10 @@ export const handbookSidebar = [
                         url: '/handbook/engineering/posthog-com/small-teams',
                     },
                     {
+                        name: 'Adding a team member',
+                        url: '/handbook/engineering/posthog-com/add-team-member',
+                    },
+                    {
                         name: 'Managing the company roadmap',
                         url: '/handbook/engineering/posthog-com/roadmap',
                     },
