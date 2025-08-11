@@ -363,9 +363,11 @@ export default function Tabbed() {
                                         }`}
                                     >
                                         <div className="flex items-center space-x-2">
-                                            <span>
-                                                <Icon className={`w-5 h-6 text-${color}`} />
-                                            </span>
+                                            {Icon && (
+                                                <span>
+                                                    <Icon className={`w-5 h-6 text-${color}`} />
+                                                </span>
+                                            )}
                                             <span>{name}</span>
                                         </div>
                                         {name == 'Experiments' ? (

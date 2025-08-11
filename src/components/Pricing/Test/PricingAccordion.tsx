@@ -82,7 +82,11 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                 <div className="grid grid-cols-12 w-full gap-1 items-center">
                     <div className="col-span-6 md:col-span-5">
                         <div className="flex gap-1 items-center">
-                            <div className={isOpen ? 'size-6' : 'size-5'}>{<Icon className={`text-${color}`} />}</div>
+                            {Icon && (
+                                <div className={isOpen ? 'size-6' : 'size-5'}>
+                                    {<Icon className={`text-${color}`} />}
+                                </div>
+                            )}
                             <span
                                 className={`transition-all leading-tight font-bold ${
                                     isOpen ? 'text-base @5xl:text-base' : 'text-sm @5xl:text-base'

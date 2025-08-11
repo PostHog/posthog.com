@@ -3,8 +3,12 @@ import usePostHog from '../../hooks/usePostHog'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { SearchUI } from 'components/SearchUI'
 import { Link, navigate } from 'gatsby'
+import { useWindow } from '../../context/Window'
+import { useApp } from '../../context/App'
 
 export default function BlueScreenOfDeath(): JSX.Element {
+    const { closeWindow } = useApp()
+    const { appWindow } = useWindow()
     const posthog = usePostHog()
 
     useEffect(() => {
@@ -25,22 +29,18 @@ export default function BlueScreenOfDeath(): JSX.Element {
                 return
             }
 
-            switch (event.key.toLowerCase()) {
-                case 'escape':
-                    navigate('/')
-                    break
-                case '1':
-                    navigate('/docs')
-                    break
-                case '2':
-                    navigate('/questions')
-                    break
-                case '3':
-                    navigate('/blog')
-                    break
-                case '4':
-                    navigate('/tutorials')
-                    break
+            const keyURLs: Record<string, string | null> = {
+                escape: null,
+                '1': '/docs',
+                '2': '/questions',
+                '3': '/blog',
+                '4': '/tutorials',
+            }
+
+            const url = keyURLs[event.key.toLowerCase()]
+            if (url !== undefined) {
+                closeWindow(appWindow)
+                if (url) navigate(url)
             }
         }
 
@@ -71,7 +71,7 @@ export default function BlueScreenOfDeath(): JSX.Element {
                     {/* Error details */}
                     <div className="mb-8 space-y-1">
                         <Link to="/" className="text-white">
-                            * Press Esc <span className="xs:hidden">(or tap here)</span> to return to the homepage
+                            * Press Esc <span className="xs:hidden">(or tap here)</span> to close this application
                         </Link>
                     </div>
 
