@@ -4,6 +4,7 @@ import { PaperPlaneArrow, ThumbsDownOutline, ThumbsUpOutline } from 'components/
 import { motion } from 'framer-motion'
 import usePostHog from '../../hooks/usePostHog'
 import Link from 'components/Link'
+import TextareaAutosize from 'react-textarea-autosize'
 
 const button = cntl`
     w-full
@@ -136,10 +137,9 @@ const ResponseFeedback: React.FC<{
         <motion.div initial={{ translateY: '10%', opacity: 0 }} animate={{ translateY: 0, opacity: 1 }}>
             <form onSubmit={handleSubmit} className="w-full space-y-4 mt-6">
                 <h3 className=" text-lg font-semibold m-0">{title}</h3>
-                <div className="flex space-x-2 items-center pt-2 pr-2.5 pb-3 bg-white dark:bg-[#202228] rounded border border-input-dark/50">
-                    <textarea
+                <div className="flex space-x-2 items-start pt-2 pr-2.5 pb-3 bg-white dark:bg-[#202228] rounded border border-input-dark/50">
+                    <TextareaAutosize
                         className="w-full block resize-none border-0 focus:ring-0 text-base font-medium dark:bg-[#202228]"
-                        rows={1}
                         onChange={(event) => setFeedback(event.target.value)}
                         autoFocus
                         placeholder={placeholder}
