@@ -31,6 +31,11 @@ interface ExplorerProps {
     selectOptions?: any[]
     onCategoryChange?: (category: string) => void
     selectedCategory?: string
+    // New props for dynamic right sidebar
+    rightSidebarPanel?: React.ReactNode
+    isRightSidebarOpen?: boolean
+    onRightSidebarClose?: () => void
+    doubleClickToOpen?: boolean
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -75,6 +80,10 @@ export default function Explorer({
     selectOptions = [],
     onCategoryChange,
     selectedCategory,
+    rightSidebarPanel,
+    isRightSidebarOpen = false,
+    onRightSidebarClose,
+    doubleClickToOpen = false,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -131,6 +140,7 @@ export default function Explorer({
                         fullScreen ? 'border-t border-primary' : ''
                     }`}
                 >
+                    {/* Static right sidebar content (original) */}
                     {rightSidebarContent && (
                         <aside
                             data-scheme="secondary"
@@ -140,6 +150,17 @@ export default function Explorer({
                                 <div className="flex-1 overflow-auto">
                                     <SidebarContent content={rightSidebarContent} />
                                 </div>
+                            </div>
+                        </aside>
+                    )}
+                    {/* Dynamic right sidebar panel (new) */}
+                    {rightSidebarPanel && isRightSidebarOpen && (
+                        <aside
+                            data-scheme="secondary"
+                            className="not-prose w-96 bg-primary border-l border-primary h-full text-primary"
+                        >
+                            <div className="h-full flex flex-col">
+                                <div className="flex-1 overflow-auto">{rightSidebarPanel}</div>
                             </div>
                         </aside>
                     )}

@@ -687,15 +687,13 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                         <ProgressBar title="roadmap" />
                     ) : (
                         <>
-                            <p className="my-0 text-sm -mt-2 mb-4">
-                                <span className="opacity-70">
-                                    Here's what we're thinking about building next. Vote for your favorites, or request
-                                    a new feature{' '}
-                                </span>
-                                <Link externalNoIcon to="https://github.com/PostHog/posthog/issues">
-                                    on GitHub
+                            <p className="mt-0">
+                                Here's what we're thinking about building next. If you want to see what we've shipped
+                                recently,{' '}
+                                <Link to="/changelog/2025" state={{ newWindow: true }}>
+                                    visit the changelog
                                 </Link>
-                                <span className="opacity-70">.</span>
+                                .
                             </p>
                             <div className="flex justify-between items-center space-x-2 mb-4">
                                 {isModerator && !adding && (

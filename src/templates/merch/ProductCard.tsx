@@ -34,7 +34,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
             key={product.shopifyId}
             onClick={onClick}
         >
-            <div className="cursor-pointer image-wrapper relative">
+            <div className="cursor-default image-wrapper relative">
                 {isNew && (
                     <div className="z-10 rotate-12 uppercase text-xs flex text-primary items-center justify-center bg-yellow rounded-full p-2 font-bold aspect-square absolute top-1 right-1 -translate-y-1/2 translate-x-1/2">
                         New
@@ -50,7 +50,7 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
                 </div>
             </div>
 
-            <div className="cursor-pointer mb-2 text-center">
+            <div className="cursor-default mb-2 text-center">
                 <h3 className="text-sm font-medium leading-tight">{displayTitle}</h3>
                 {/* <p className="text-[15px] leading-tight mb-1">{subtitle}</p> */}
                 <p className="text-sm text-secondary mb-0">
