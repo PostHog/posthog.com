@@ -242,7 +242,7 @@ const faqs = [
     },
     {
         q: 'Do you offer a discount for non-profits?',
-        a: 'Yes in most cases - 25% off any plan. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
+        a: 'Yes in most cases - starting at 15% off any plan. Create your account, then email sales@posthog.com from the same email address with some basic details on your organization. We will then apply a discount.',
         author: {
             q: {
                 image: (

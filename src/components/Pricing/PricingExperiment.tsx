@@ -52,7 +52,7 @@ const Discounts = () => (
                 <IconHandMoney className="size-5 absolute left-0 top-4.5 opacity-50" />
                 <strong>Non-profits</strong>
                 <p className="text-[15px] mb-2">
-                    Most non-profits are eligible for up to 25% off. Get in touch through the app after signing up.
+                    Most non-profits are eligible for a discount. Get in touch through the app after signing up.
                 </p>
             </li>
             <li className="relative pl-7 pt-4">
