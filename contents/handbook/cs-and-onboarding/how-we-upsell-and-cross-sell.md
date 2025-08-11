@@ -6,7 +6,7 @@ showTitle: true
 
 ## **How to cross-sell and upsell additional PostHog products**
 
-Successful expansion at PostHog comes from identifying genuine customer needs and demonstrating how additional products solve real problems. The goal is helping customers extract more value from PostHog, which naturally leads to increased product adoption. CSMs are not here to push new products and features; CSMs are here to ensure customers successfully use PostHog and get the most value for their business. Remember, we want to help our champions look like heroes at their companies\!
+Successful expansion at PostHog comes from identifying genuine customer needs and demonstrating how additional products solve real problems. The goal is helping customers extract more value from PostHog, which naturally leads to increased product adoption. CSMs are not here to push new products and features; CSMs are here to ensure customers successfully use PostHog and get the most value for their business. Remember, we want to help our champions look like heroes at their companies!
 
 ### **Identifying expansion opportunities**
 
