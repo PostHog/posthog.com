@@ -1,7 +1,7 @@
 ---
 title: How we upsell and cross-sell
 sidebar: Handbook
-showTitle: true
+showTitle: false
 ---
 
 ## **How to cross-sell and upsell additional PostHog products**
@@ -27,6 +27,7 @@ Successful expansion at PostHog comes from identifying genuine customer needs an
 * **High event volume → Identified events:** When anonymous events limit user journey analysis  
 * **Growing teams → Teams add-on:** When organizations need advanced permissions and SSO  
 * **Customer facing teams → Session Replay:** When organizations need better user troubleshooting and support, not just user research into behavior.
+* * **Feature flags → Experiments:** When customers want to test and evaluate results from feature flags; a very natural synergy here, of course  
 
 ### **Discovery through conversation**
 
@@ -39,9 +40,9 @@ Effective [discovery](https://posthog.com/handbook/cs-and-onboarding/getting-to-
 * "How do you measure feature adoption across different customer segments?"  
 * "What does your deployment process look like for major changes?"  
 * "How do you validate that new features impact key metrics?"  
-* “Are there other team members on different teams you could introduce me to or that you recommend I reach out to?” (Always, always, always be asking for “referrals” in this way\!)
+* “Are there other team members on different teams you could introduce me to or that you recommend I reach out to?” (Always, always, always be asking for “referrals” in this way!)
 
-These questions will naturally surface use cases for session replay, feature flags, experiments, and other products. Of course, we should also identify opportunities programmatically through the other data sources we have to supplement the conversation approach. 
+These questions will naturally surface use cases for session replay, feature flags, experiments, and other products. Of course, we should also identify opportunities programmatically through the other data sources we have to supplement the conversation approach. It's not a recommendation to ask each and every one of these questions on a call. These are simply a guide and an example of the types of questions that will help surface opportunities. 
 
 ### **Optimal timing for expansion discussions**
 
@@ -63,7 +64,7 @@ These questions will naturally surface use cases for session replay, feature fla
 
 ### **Value-focused positioning**
 
-Connect products to customer outcomes using their terminology and context. For example, any time you put additional burden on your champion or a stakeholder, you are less likely to help them achieve a positive outcome for us or for them. When you approach, provide them with a solution that will make their life better (and make them look better\!) it’s a win-win.
+Connect products to customer outcomes using their terminology and context. For example, any time you put additional burden on your champion or a stakeholder, you are less likely to help them achieve a positive outcome for us or for them. When you approach, provide them with a solution that will make their life better (and make them look better!) it’s a win-win.
 
 Also note that a CSM’s awareness and insight into the customer’s business is really instrumental in having these kinds of conversations, which is why it’s important to find a way to become more embedded into your customer’s general flow, so that you feel to them as an extension of their team.
 
