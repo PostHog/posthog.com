@@ -178,6 +178,7 @@ export interface AppItem {
     extension?: string
     children?: React.ReactNode
     hasDragged?: boolean
+    orientation?: 'row' | 'column'
 }
 
 export const AppLink = ({
@@ -191,6 +192,7 @@ export const AppLink = ({
     extension,
     children,
     hasDragged,
+    orientation = 'column',
 }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
     const { getThemeSpecificBackgroundColors } = useTheme()
@@ -282,8 +284,12 @@ export const AppLink = ({
         </>
     )
 
-    const commonClassName =
-        'group inline-flex flex-col justify-center items-center w-auto max-w-28 text-center select-none space-y-1 text-primary'
+    const commonClassName = 'group items-center select-none text-primary'
+
+    const orientationClassName =
+        orientation === 'row'
+            ? 'flex w-full gap-2'
+            : 'inline-flex flex-col justify-center w-auto max-w-28 space-y-1 text-center'
 
     return (
         <figure ref={ref}>
@@ -291,7 +297,7 @@ export const AppLink = ({
                 <Link
                     to={url}
                     state={{ newWindow: true }}
-                    className={commonClassName}
+                    className={`${commonClassName} ${orientationClassName}`}
                     onClick={(e) => {
                         if (hasDragged) {
                             e.preventDefault()
@@ -302,7 +308,9 @@ export const AppLink = ({
                     {content}
                 </Link>
             ) : (
-                <span className={`${commonClassName} cursor-not-allowed opacity-75`}>{content}</span>
+                <span className={`${commonClassName} ${orientationClassName} cursor-not-allowed opacity-75`}>
+                    {content}
+                </span>
             )}
         </figure>
     )

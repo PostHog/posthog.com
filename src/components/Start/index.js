@@ -26,7 +26,7 @@ import ProgressBar from 'components/ProgressBar'
 const AIInstall = ({ setActiveTab }) => (
     <div
         data-scheme="primary"
-        className="bg-primary -m-4 @2xl:-m-6 flex flex-col-reverse @xl:flex-row overflow-hidden rounded"
+        className="bg-primary text-primary -m-4 @2xl:-m-6 flex flex-col-reverse @xl:flex-row overflow-hidden rounded"
     >
         <div className="flex-1 p-4 @2xl:p-6">
             <IntegrationPrompt />
@@ -107,7 +107,7 @@ export default function Start({ subdomain = 'app', initialTab = 'ai' }) {
                 value={activeTab}
                 onValueChange={setActiveTab}
                 extraTabRowContent={
-                    <div className="hidden @xl:inline-block ml-auto text-sm">
+                    <div data-scheme="primary" className="hidden @xl:inline-block text-primary ml-auto text-sm">
                         Need help?{' '}
                         <Link
                             to="/talk-to-a-human"
