@@ -110,11 +110,14 @@ Exception events can have more than one exception in them, due to language featu
 
 For example, if you had a chained exception with the messages `MyCustomError: Failed to load user` and `Cannot read property 'age' of undefined`, searching for `cannot read property` would match the exception, because it matches *one* of the exception messages (`property` appears in the "root" one).
 
-## Filtering exception occurrences within an issue
+## Issue details
 
-Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list for a particular instance of the issue. This is particularly useful in cases where some exceptions in the issue have information others don't and you want to use that information for debugging.
+When you click on an issue, you'll see the details page of the issue. 
 
-Here's an example from our own systems. We select a recent occurrence of this issue to try and get more context on why it's happening, but the details available don't tell me much more than the stack trace:
+This page shows you the following:
+- The stack trace, properties, and sessions related to the **currently selected exception**
+- Name, description, and status, assignee, and external tracking links for the issue.
+- A filterable list of all exceptions in the issue. **Selecting an exception** will show you the stack trace, properties, and sessions related to that exception at the top of the page.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_no_filter_light_405a3332d7.png"
@@ -123,7 +126,11 @@ Here's an example from our own systems. We select a recent occurrence of this is
   classes="rounded"
 />
 
-Here, we've added a property filter on `http_referer`, which we think will be useful for our debugging and can then easily select an occurrence where that property is set:
+### Filtering exception occurrences within an issue
+
+Once you've found and opened the issue you want to investigate, you can use the same search interface to filter the exception list for a particular instance of the issue. This is particularly useful in cases where some exceptions in the issue have information others don't and you want to use that information for debugging.
+
+For example, you can add a property filter on `http_referer` that shows all exceptions where the http_referer is set:
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_with_filter_light_0fc6e1cb2d.png"
@@ -132,12 +139,26 @@ Here, we've added a property filter on `http_referer`, which we think will be us
   classes="rounded"
 />
 
-
 <CalloutBox icon="IconInfo" title="Alerts" type="info">
 
 If you have a set of filters that you use often, you can create alerts for them. This way you can be notified when new issues match your filters. Learn more about [alerts](/docs/error-tracking/alerts).
 
 </CalloutBox>
+
+### Viewing session replays
+
+Error tracking works with [session replays](/docs/session-replay) to help you understand the context of an issue. This is useful for reproducing and debugging issues. 
+
+You can view a session replay for an exception by:
+- Selecting an exception in the exception list and clicking the **Session** tab at the top of the page.
+- Clicking the **View recording** button besides each exception.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_error_light_5f25f72344.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_with_filter_dark_bf74dca1d9.png"
+  alt="An issue's session replay"
+  classes="rounded"
+/>
 
 ## Improving search performance
 
