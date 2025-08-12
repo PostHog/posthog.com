@@ -46,7 +46,7 @@ Once Google Analytics was out of the picture for tracking product usage, Lezgin 
 PostHog has since become Qred’s single source of truth for an increasing amount of frontend data — a place where the whole team can work together to make product decisions without bouncing between tools. Even non-technical staff now frequently use PostHog to make decisions. 
 
 <BorderWrapper>
-  <div className="bg-[#E5E7E0] dark:bg-[#2c2c2c] border border-[#E5E7E0] dark:border-[#2c2c2c] rounded-lg p-6 my-8">
+  <div className="bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-lg p-6 my-8">
     <div className="space-y-4">
       <img 
         src="https://res.cloudinary.com/dmukukwp6/image/upload/qred_screen1_4d8cf22b34.jpg" 
@@ -55,7 +55,7 @@ PostHog has since become Qred’s single source of truth for an increasing amoun
       />
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Building a better onboarding flow with PostHog</h3>
       <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-        With PostHog as a single source of truth, Qred could back bold changes with confidence. When adding an online ID verification step to onboarding, some feared a drop in conversion. A quick A/B test proved it actually boosted retention — unblocking the team and improving the customer journey without hurting conversion at all.
+        Backed by PostHog as a single source of truth, Qred could make bold changes with confidence. When adding an ID verification step to onboarding, for example, some feared a drop in conversion. However, an A/B test proved it actually boosted retention — unblocking the team and improving the user journey without hurting conversion.
       </p>
     </div>
   </div>
