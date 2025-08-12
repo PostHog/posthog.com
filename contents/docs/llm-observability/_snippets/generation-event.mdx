@@ -5,17 +5,34 @@ Event Name: `$ai_generation`
 | Property | Description |
 |----------|-------------|
 | `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id`<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code> |
-| `$ai_model` | The model used <br/>`gpt-3.5-turbo` |
-| `$ai_provider` | The LLM provider |
-| `$ai_input` | List of messages <br/>`[{"role": "user", "content": "Tell me a fun fact about hedgehogs"}]` |
+| `$ai_model` | The model used <br/>Example: `gpt-3.5-turbo` |
+| `$ai_provider` | The LLM provider <br/>Example: `openai`, `anthropic`, `gemini` |
+| `$ai_input` | List of messages sent to the LLM <br/>Example: `[{"role": "user", "content": [{"type": "text", "text": "What's in this image?"}, {"type": "image", "image": "https://example.com/image.jpg"}, {"type": "function", "function": {"name": "get_weather", "arguments": {"location": "San Francisco"}}}]}]` |
 | `$ai_input_tokens` | The number of tokens in the input (often found in response.usage) |
-| `$ai_output_choices` | List of choices <br/>`[{"role": "assistant", "content": "Hedgehogs are small mammals with spines on their back."}]` |
+| `$ai_output_choices` | List of response choices from the LLM <br/>Example: `[{"role": "assistant", "content": [{"type": "text", "text": "I can see a hedgehog in the image."}, {"type": "function", "function": {"name": "get_weather", "arguments": {"location": "San Francisco"}}}]}]` |
 | `$ai_output_tokens` | The number of tokens in the output (often found in response.usage) |
-| `$ai_latency` | The latency of the LLM call (seconds) |
-| `$ai_http_status` | The HTTP status code of the response |
-| `$ai_base_url` | The base URL of the LLM provider |
-| `$ai_is_error` | Boolean to indicate if the request was an error |
-| `$ai_error` | The error message or object | 
+| `$ai_latency` | **Optional**<br/>The latency of the LLM call in seconds |
+| `$ai_http_status` | **Optional**<br/>The HTTP status code of the response |
+| `$ai_base_url` | **Optional**<br/>The base URL of the LLM provider <br/>Example: `https://api.openai.com/v1` |
+| `$ai_request_url` | **Optional**<br/>The full URL of the request made to the LLM API <br/>Example: `https://api.openai.com/v1/chat/completions` |
+| `$ai_is_error` | **Optional**<br/>Boolean to indicate if the request was an error |
+| `$ai_error` | **Optional**<br/>The error message or object |
+| **Cost Properties** | *Optional - If not provided, costs will be calculated automatically from token counts* |
+| `$ai_input_cost_usd` | **Optional**<br/>The cost in USD of the input tokens |
+| `$ai_output_cost_usd` | **Optional**<br/>The cost in USD of the output tokens |
+| `$ai_total_cost_usd` | **Optional**<br/>The total cost in USD (input + output) |
+| **Cache Properties** | |
+| `$ai_cache_read_input_tokens` | **Optional**<br/>Number of tokens read from cache |
+| `$ai_cache_creation_input_tokens` | **Optional**<br/>Number of tokens written to cache (Anthropic-specific) |
+| **Model Parameters** | |
+| `$ai_temperature` | **Optional**<br/>Temperature parameter used in the LLM request |
+| `$ai_stream` | **Optional**<br/>Whether the response was streamed |
+| `$ai_max_tokens` | **Optional**<br/>Maximum tokens setting for the LLM response |
+| `$ai_tools` | **Optional**<br/>Tools/functions available to the LLM <br/>Example: `[{"type": "function", "function": {"name": "get_weather", "parameters": {...}}}]` |
+| **Span/Trace Properties** | |
+| `$ai_span_id` | **Optional**<br/>Unique identifier for this generation |
+| `$ai_span_name` | **Optional**<br/>Name given to this generation <br/>Example: `summarize_text` |
+| `$ai_parent_id` | **Optional**<br/>Parent span ID for tree view grouping | 
 
 ### Example
 ```bash
@@ -25,19 +42,26 @@ curl -X POST "<ph_client_api_host>/i/v0/e/" \
          "api_key": "<ph_project_api_key>",
          "event": "$ai_generation",
          "properties": {
-             "distinct_id": "distinct_id_of_your_user",
-             "$ai_trace_id": "trace_id",
-             "$ai_model": "gpt-3.5-turbo",
+             "distinct_id": "user_123",
+             "$ai_trace_id": "d9222e05-8708-41b8-98ea-d4a21849e761",
+             "$ai_model": "gpt-4o",
              "$ai_provider": "openai",
-             "$ai_input": "[{\"role\": \"user\", \"content\": \"Tell me a fun fact about hedgehogs\"}]",
-             "$ai_input_tokens": 100,
-             "$ai_output_choices": "[{\"role\": \"assistant\", \"content\": \"Hedgehogs are small mammals with spines on their back.\"}]",
-             "$ai_output_tokens": 100,
-             "$ai_latency": 1.23,
+             "$ai_input": [{"role": "user", "content": [{"type": "text", "text": "Analyze this data and suggest improvements"}]}],
+             "$ai_input_tokens": 150,
+             "$ai_output_choices": [{"role": "assistant", "content": [{"type": "text", "text": "Based on the data, here are my suggestions..."}]}],
+             "$ai_output_tokens": 280,
+             "$ai_latency": 2.45,
              "$ai_http_status": 200,
-             "$ai_base_url": "https://api.openai.com/v1"
-         },
-         "timestamp": "2025-01-30T12:00:00Z"
+             "$ai_base_url": "https://api.openai.com/v1",
+             "$ai_request_url": "https://api.openai.com/v1/chat/completions",
+             "$ai_is_error": false,
+             "$ai_temperature": 0.7,
+             "$ai_stream": false,
+             "$ai_max_tokens": 500,
+             "$ai_tools": [{"type": "function", "function": {"name": "analyze_data", "description": "Analyzes data and provides insights", "parameters": {"type": "object", "properties": {"data_type": {"type": "string"}}}}}],
+             "$ai_cache_read_input_tokens": 50,
+             "$ai_span_name": "data_analysis_chat"
+         }
      }'
 
 ```
