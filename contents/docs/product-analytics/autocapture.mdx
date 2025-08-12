@@ -46,13 +46,13 @@ import Tab from "components/Tab"
 
 | Event | Description |
 |-------|-------------|
-| `$autocapture` | On interactions with: `a`, `button`, `form`, `input`, `select`, `textarea`, `label`, and elements with `contenteditable="true"`. Autocaptures are displayed with names like `clicked span with text "Delete"`, but filtering for **Autocapture** will show you all autocaptured events. |
+| `$autocapture` | On interactions with: `a`, `button`, `form`, `input`, `select`, `textarea`, `label`, and elements with `contenteditable="true"`. Autocaptures are [displayed](https://app.posthog.com/activity/explore) with names like `clicked span with text "Delete"`, but filtering for **Autocapture** will show you all autocaptured events. |
 | `$pageview` | When the user navigates to a new page. |
 | `$pageleave` | When the user navigates away from a page. |
 | `$rageclick` | A second click within 1000ms within 30px of the first click. |
 | `$copy_autocapture` | Clipboard events. Disabled by default. See [clipboard autocapture](#clipboard-autocapture). |
 
-Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://us.posthog.com/data-management/properties) or in [the references](https://posthog.com/docs/references/posthog-js/types/Properties).
+Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://app.posthog.com/data-management/properties) or in [the references](https://posthog.com/docs/references/posthog-js/types/Properties).
 
 <details> 
 <summary>List of relevant properties</summary>
@@ -116,7 +116,7 @@ Autocaptured events (and client-side custom events) have many default properties
 | Event Name | Description |
 |------------|-------------|
 | `$screen` | Screen view changes, with screen name as property |
-| `$autocapture` | User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll` and control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`. |
+| `$autocapture` | User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll` and control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`. Displays as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore).|
 | `Application Installed` | First app launch |
 | `Application Updated` | App version updates |
 | `Application Opened` | App becomes active/foreground |
@@ -187,7 +187,7 @@ Where `text` is the text of the element.
 
 | Event Name | Description |
 |------------|-------------|
-| `$autocapture` | Captures touch events. |
+| `$autocapture` | Captures screen touch events. Displays as the autocaptured interaction in the [activity tab](https://app.posthog.com/activity/explore) instead of `$autocapture`. |
 | `$screen` | When the user navigates. If using `@react-navigation/native` (v6 or lower) or `react-native-navigation`. See [React Native docs](/docs/libraries/react-native#capturing-screen-views) for config options. |
 | `Application Installed` | When app is first installed |
 | `Application Updated` | When app is updated to new version |
