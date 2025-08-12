@@ -153,12 +153,13 @@ export const TeamMember = (props: any) => {
                 </div>
 
                 <div className="relative w-full flex justify-end aspect-square -translate-y-12 z-10 group-hover:-translate-y-20 transition-all">
-                    <img
+                    <CloudinaryImage
+                        width={350}
                         src={
                             avatar?.url ||
                             'https://res.cloudinary.com/dmukukwp6/image/upload/v1698231117/max_6942263bd1.png'
                         }
-                        className="w-full h-[calc(50cqh_+_3rem)] object-contain object-right-bottom pl-4 z-10 relative top-[-2px]"
+                        imgClassName="w-full h-[calc(50cqh_+_3rem)] object-contain object-right-bottom pl-4 z-10 relative top-[-2px]"
                         alt={name}
                     />
                 </div>
@@ -229,10 +230,11 @@ export const TeamMember = (props: any) => {
                                                         return (
                                                             <div key={team.id} className="flex items-center gap-2">
                                                                 {crestUrl && (
-                                                                    <img
+                                                                    <CloudinaryImage
+                                                                        width={50}
                                                                         src={crestUrl}
                                                                         alt={`${teamName} Team`}
-                                                                        className="size-4 object-contain"
+                                                                        imgClassName="size-4 object-contain"
                                                                     />
                                                                 )}
                                                                 <span className="text-sm">{teamName} Team</span>
@@ -247,10 +249,11 @@ export const TeamMember = (props: any) => {
 
                                 {/* Show first team's crest */}
                                 {teamData[0] && teamCrestMap?.[teamData[0].attributes.name] && (
-                                    <img
+                                    <CloudinaryImage
+                                        width={160}
                                         src={teamCrestMap[teamData[0].attributes.name]}
                                         alt={`${teamData[0].attributes.name} Team`}
-                                        className="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
+                                        imgClassName="absolute -right-1 bottom-0 size-16 @[15rem]:size-20 object-contain transition-all"
                                     />
                                 )}
                             </div>
@@ -389,7 +392,7 @@ export default function People() {
                     */}
 
                     <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
-                        {(appWindow?.animating ? teamMembers.slice(0, 8) : filteredTeamMembers).map(
+                        {(appWindow?.animating ? teamMembers.slice(0, 12) : filteredTeamMembers).map(
                             (teamMember: any, index: number) => {
                                 // Calculate if this person is a team lead of any team
                                 const isTeamLead = teamMember.leadTeams?.data?.length > 0
