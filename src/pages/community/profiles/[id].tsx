@@ -41,6 +41,7 @@ import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import RichText from 'components/Squeak/components/RichText'
 import transformValues from 'components/Squeak/util/transformValues'
 import { profileBackgrounds } from '../../../data/profileBackgrounds'
+import { Select } from 'components/RadixUI/Select'
 
 dayjs.extend(relativeTime)
 
@@ -661,8 +662,28 @@ const BodyEditor = ({ values, setFieldValue, bodyKey, initialValue }) => {
     )
 }
 
-const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts, isEditing, values, errors, setFieldValue }) => {
+const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFieldValue }) => {
     const { user, isModerator } = useUser()
+    const [sort, setSort] = useState(sortOptions[0].label)
+    const [hasPosts, setHasPosts] = useState(false)
+    const posts = usePosts({
+        params: {
+            sort: sortOptions.find((option) => option.label === sort)?.sort,
+            filters: {
+                authors: {
+                    id: {
+                        $eq: id,
+                    },
+                },
+            },
+        },
+    })
+
+    useEffect(() => {
+        if (!hasPosts && posts.posts.length > 0) {
+            setHasPosts(true)
+        }
+    }, [posts])
 
     const tabs = [
         {
@@ -699,16 +720,28 @@ const ProfileTabs = ({ profile, firstName, id, sort, setSort, posts, isEditing, 
                   },
               ]
             : []),
-        ...(posts.length > 0
+        ...(hasPosts
             ? [
                   {
                       value: 'discussions',
-                      label: 'Blog Posts',
+                      label: 'Posts',
                       content: (
                           <>
                               <div className="flex justify-between items-center mb-4">
-                                  <h4 className="text-lg font-bold m-0">Blog posts</h4>
-                                  <SortDropdown value={sort} onChange={setSort} options={sortOptions} />
+                                  <h4 className="text-lg font-bold m-0">All posts</h4>
+                                  <Select
+                                      groups={[
+                                          {
+                                              items: sortOptions.map((option) => ({
+                                                  label: option.label,
+                                                  value: option.label,
+                                              })),
+                                              label: 'Sort by',
+                                          },
+                                      ]}
+                                      value={sort}
+                                      onValueChange={(value) => setSort(value)}
+                                  />
                               </div>
                               <PostsTable {...posts} />
                           </>
@@ -752,20 +785,8 @@ export default function ProfilePage({ params }: PageProps) {
     const posthog = usePostHog()
     const nav = useTopicsNav()
     const { user, getJwt } = useUser()
-    const [sort, setSort] = useState(sortOptions[0].label)
     const [isEditing, setIsEditing] = useState(false)
-    const posts = usePosts({
-        params: {
-            sort: sortOptions.find((option) => option.label === sort)?.sort,
-            filters: {
-                authors: {
-                    id: {
-                        $eq: id,
-                    },
-                },
-            },
-        },
-    })
+
     const isCurrentUser = user?.profile?.id === id
     const isModerator = user?.role?.type === 'moderator'
 
@@ -1160,9 +1181,6 @@ export default function ProfilePage({ params }: PageProps) {
                                 profile={profile}
                                 firstName={firstName}
                                 id={id}
-                                sort={sort}
-                                setSort={setSort}
-                                posts={posts}
                                 isEditing={isEditing}
                                 values={values}
                                 errors={errors}

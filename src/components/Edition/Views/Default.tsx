@@ -86,7 +86,7 @@ const CommunityBar = () => {
 
 export const Skeleton = () => {
     return Array.from(Array(30)).map((_, i) => (
-        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-3 px-6">
+        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-2 px-6">
             <div className="w-4/5 bg-accent animate-pulse h-[30px] rounded-md" />
             <div className="w-2/5 bg-accent animate-pulse h-[30px] rounded-md" />
         </div>
