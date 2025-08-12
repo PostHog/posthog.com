@@ -11,34 +11,8 @@ type AppIconVariants = {
     default: string
 }
 
-type AppIconName =
-    | 'doc'
-    | 'contact'
-    | 'folder'
-    | 'forums'
-    | 'games'
-    | 'hedgehog_mode'
-    | 'hogpaint'
-    | 'map'
-    | 'notebook'
-    | 'photobooth'
-    | 'posthog'
-    | 'presentation'
-    | 'pricing'
-    | 'spreadsheet'
-    | 'tour'
-    | 'trash'
-    | 'video'
-    | 'pdf'
-    | 'canvas'
-    | 'report'
-    | 'invite'
-    | 'script'
-    | 'pdf_locked'
-    | 'ga'
-    | 'ai'
-
-const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
+// Single source of truth: keys of this map define available app icon names
+const PRODUCT_ICON_MAP = {
     doc: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/doc_classic_7f14381c43.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/doc_2fa451a8e4.png',
@@ -135,7 +109,11 @@ const PRODUCT_ICON_MAP: Record<AppIconName, AppIconVariants> = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_classic_e50b339fec.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/as_modern_090d1c5c71.png',
     },
-}
+} as const satisfies Record<string, AppIconVariants>
+
+type AppIconName = keyof typeof PRODUCT_ICON_MAP
+
+const isAppIconName = (value: string): value is AppIconName => value in PRODUCT_ICON_MAP
 
 export interface AppIconProps extends IconProps {
     name: AppIconName
@@ -147,22 +125,23 @@ export interface IconImageProps extends IconProps {
     className?: string
 }
 
-export const IconImage = ({ url, className, ...props }: IconImageProps) => (
+export const IconImage = ({ url, className }: IconImageProps) => (
     <BaseIcon viewBox="0 0 40 40" width="100%" height="100%" className={`size-10 ${className ? className : ''}`}>
         <image width="40" height="40" href={url} />
     </BaseIcon>
 )
 
 export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
-    const getCurrentSkin = (): string => {
-        if (typeof localStorage !== 'undefined') {
-            return localStorage.getItem('skin') || 'modern'
+    const getCurrentSkin = (): 'modern' | 'classic' => {
+        if (typeof document !== 'undefined') {
+            const skin = document.body.getAttribute('data-skin')
+            return skin === 'classic' ? 'classic' : 'modern'
         }
         return 'modern'
     }
 
     const getIconUrl = (iconName: AppIconName): string => {
-        const iconVariants = PRODUCT_ICON_MAP[iconName]
+        const iconVariants = PRODUCT_ICON_MAP[iconName] as AppIconVariants
         if (!iconVariants) {
             console.warn(`AppIcon: Unknown icon name "${iconName}"`)
             return ''
@@ -170,12 +149,13 @@ export const AppIcon = ({ name, className, ...props }: AppIconProps) => {
 
         const currentSkin = getCurrentSkin()
 
-        // Check if the current skin has a specific variant
-        if (currentSkin in iconVariants) {
-            return iconVariants[currentSkin as keyof AppIconVariants] || iconVariants.default
+        // Prefer skin-specific variant if available, else fall back to default
+        if (currentSkin === 'modern' && iconVariants.modern) {
+            return iconVariants.modern
         }
-
-        // Fall back to default
+        if (currentSkin === 'classic' && iconVariants.classic) {
+            return iconVariants.classic
+        }
         return iconVariants.default
     }
 
@@ -203,7 +183,6 @@ export interface AppItem {
 export const AppLink = ({
     Icon,
     parentIcon,
-    type,
     color,
     background,
     label,
@@ -225,21 +204,9 @@ export const AppLink = ({
         // Check if it's an AppIconName string (for AppIcon component)
         if (typeof iconToRender === 'string') {
             // Check if it's a valid AppIconName
-            const isAppIconName = [
-                'doc',
-                'folder',
-                'presentation',
-                'notebook',
-                'spreadsheet',
-                'video',
-                'pdf',
-                'canvas',
-                'report',
-                'script',
-                'ai',
-            ].includes(iconToRender)
-            if (isAppIconName && parentIcon) {
-                return <AppIcon name={iconToRender as AppIconName} className={className} />
+            const validAppIconName = isAppIconName(iconToRender)
+            if (validAppIconName && parentIcon) {
+                return <AppIcon name={iconToRender} className={className} />
             }
             // Otherwise treat as URL
             return <IconImage url={iconToRender} className={`${parentIcon ? '' : `text-${color}`} ${className}`} />
