@@ -46,7 +46,7 @@ Once Google Analytics was out of the picture for tracking product usage, Lezgin 
 PostHog has since become Qred’s single source of truth for an increasing amount of frontend data — a place where the whole team can work together to make product decisions without bouncing between tools. Even non-technical staff now frequently use PostHog to make decisions. 
 
 <BorderWrapper>
-  <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg p-6 my-8">
+  <div className="bg-[#E5E7E0] dark:bg-[#2c2c2c] border border-[#E5E7E0] dark:border-[#2c2c2c] rounded-lg p-6 my-8">
     <div className="space-y-4">
       <img 
         src="https://res.cloudinary.com/dmukukwp6/image/upload/qred_screen1_4d8cf22b34.jpg" 
