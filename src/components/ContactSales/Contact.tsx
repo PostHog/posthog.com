@@ -1,6 +1,5 @@
-import { FormikErrors } from 'formik'
+import { FormikErrors, useFormik } from 'formik'
 import React, { Dispatch, InputHTMLAttributes, SetStateAction, useRef, useState } from 'react'
-import { useFormik } from 'formik'
 import { button } from 'components/CallToAction'
 import * as Yup from 'yup'
 import { useLocation } from '@reach/router'

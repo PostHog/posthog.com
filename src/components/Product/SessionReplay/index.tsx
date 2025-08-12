@@ -1,16 +1,15 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconRewindPlay,
     IconBolt,
-    IconPlaylist,
-    IconPhone,
     IconDownload,
-    IconPassword,
-    IconGraph,
     IconFlask,
+    IconGraph,
+    IconPassword,
+    IconPhone,
+    IconPlaylist,
+    IconRewindPlay,
     IconToggle,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'

@@ -1,24 +1,22 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 import {
-    IconBolt,
-    IconGraph,
-    IconFlask,
-    IconToggle,
-    IconPieChart,
-    IconPeople,
-    IconNotification,
-    IconRewindPlay,
     IconAI,
+    IconBolt,
+    IconFlask,
+    IconGraph,
+    IconNotification,
+    IconPeople,
+    IconPieChart,
+    IconRewindPlay,
+    IconToggle,
 } from '@posthog/icons'
 import { SQL } from 'components/ProductIcons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { TutorialCard } from 'components/Products/TutorialCard'
 import { Hero } from 'components/Products/Hero'
-import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
 import ContentViewer from 'components/ContentViewer'

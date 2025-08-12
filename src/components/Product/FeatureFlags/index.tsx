@@ -1,14 +1,13 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { StaticImage } from 'gatsby-plugin-image'
 import {
     IconClock,
     IconDecisionTree,
     IconGraph,
     IconLoading,
-    IconRewindPlay,
     IconRevert,
+    IconRewindPlay,
     IconShield,
     IconStack,
     IconTerminal,

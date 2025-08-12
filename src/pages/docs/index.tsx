@@ -4,15 +4,13 @@ import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import Link from 'components/Link'
 import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import { CallToAction } from 'components/CallToAction'
+import * as Icons from '@posthog/icons'
 import { IconLightBulb } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { docsMenu } from '../../navs'
-import * as Icons from '@posthog/icons'
 import SidebarSearchBox from 'components/Search/SidebarSearchBox'
 import AskMax from 'components/AskMax'
-import { defaultQuickQuestions } from 'hooks/useInkeepSettings'
 
 const ProductLink = ({ icon, name, url, color }) => {
     const Icon = Icons[icon]

@@ -12,9 +12,8 @@ import HandbookLayout from './src/templates/Handbook'
 import Job from './src/templates/Job'
 import { UserProvider } from './src/hooks/useUser'
 import Posts from './src/components/Edition/Posts'
-import { Provider as ToastProvider } from './src/context/toast'
 import { ChatProvider } from './src/hooks/useChat'
-import Chat from './src/components/Chat'
+
 export const wrapPageElement = ({ element, props }) => {
     const slug = props.location.pathname.substring(1)
     initKea(true, props.location)
