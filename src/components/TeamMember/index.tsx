@@ -1,4 +1,3 @@
-import { child } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
