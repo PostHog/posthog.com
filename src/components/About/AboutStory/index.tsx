@@ -1,6 +1,5 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 import GitHubButton from 'react-github-btn'
 import { YCBadge } from './yc-badge'
 import { CallToAction } from 'components/CallToAction'

@@ -1,7 +1,4 @@
-import React, { useState, useRef } from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-import { James, Plus, Tim } from 'components/Signatures'
-import { Link } from 'gatsby'
+import React, { useRef } from 'react'
 
 import jamesQuote1 from './Audio/quote-1.mp3'
 import jamesQuote2 from './Audio/quote-2.mp3'
@@ -13,9 +10,7 @@ import jamesQuote7 from './Audio/quote-7.mp3'
 import jamesQuote8 from './Audio/quote-8.mp3'
 import jamesQuote9 from './Audio/quote-9.mp3'
 import jamesQuote10 from './Audio/quote-10.mp3'
-import Logo from 'components/Logo'
 import { Tweet } from 'components/Tweet'
-import CloudinaryImage from 'components/CloudinaryImage'
 
 const P = ({ children }) => {
     return <p className="text-base leading-normal mb-3 max-w-xl">{children}</p>

@@ -1,13 +1,10 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
 
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
 import { CallToAction } from 'components/CallToAction'
 import ResourceItem from 'components/Docs/ResourceItem'
-import List from 'components/List'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'

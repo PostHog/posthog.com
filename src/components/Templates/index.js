@@ -1,10 +1,8 @@
 import Chip from 'components/Chip'
-import FooterCTA from 'components/FooterCTA'
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, navigate, useStaticQuery } from 'gatsby'
 import React, { useEffect, useState } from 'react'
 import Layout from '../Layout'
 import { SEO } from 'components/seo'
-import { navigate } from 'gatsby'
 import List from 'components/List'
 
 const filters = [

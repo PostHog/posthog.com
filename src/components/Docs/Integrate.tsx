@@ -1,8 +1,5 @@
 import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
-import Link from 'components/Link'
-import CheckIcon from '../../images/check.svg'
-import XIcon from '../../images/x.svg'
 import List from 'components/List'
 
 type LibraryNode = {

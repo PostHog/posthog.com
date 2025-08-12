@@ -1,7 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
-import { IconWarning, IconGraph, IconToggle, IconRewindPlay, IconTrends, IconUser } from '@posthog/icons'
+import { IconGraph, IconRewindPlay, IconToggle, IconTrends, IconUser, IconWarning } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
 import { CustomerCard } from 'components/Products/CustomerCard'
 import { Hero } from 'components/Products/Hero'
@@ -25,7 +25,7 @@ import SideModal from '../../Modal/SideModal'
 import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
-import { useStaticQuery, graphql } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 
 interface ProfileData {
     firstName: string

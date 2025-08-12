@@ -1,17 +1,15 @@
-import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
 import Layout from 'components/Layout'
 import { SEO } from 'components/seo'
 import PostLayout from 'components/PostLayout'
-import List from 'components/List'
 import ResourceItem from 'components/Docs/ResourceItem'
-import { CallToAction } from 'components/CallToAction'
 import { docsMenu } from '../../navs'
 import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import AskMax from 'components/AskMax'
 import Intro from 'components/Docs/Intro'
 import Link from 'components/Link'
+
 type WebAnalyticsProps = {
     data: {
         tutorials: {

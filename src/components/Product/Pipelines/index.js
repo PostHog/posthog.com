@@ -1,11 +1,11 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import { graphql, useStaticQuery } from 'gatsby'
-import React, { useMemo, useState, useCallback, useEffect, useLayoutEffect } from 'react'
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useState } from 'react'
 import Link from 'components/Link'
 import Layout from '../../Layout'
 import { SEO } from 'components/seo'
 import { AnimatePresence, motion } from 'framer-motion'
-import { IconSearch, IconPlug, IconArrowRightDown } from '@posthog/icons'
+import { IconArrowRightDown, IconDatabase, IconGraph, IconPlug, IconSearch } from '@posthog/icons'
 import Fuse from 'fuse.js'
 import TeamMembers from '../TeamMembers'
 import SideModal from 'components/Modal/SideModal'
@@ -13,53 +13,16 @@ import Questions from '../Questions'
 import { DocLinks } from 'components/Products/DocsLinks'
 import { docsMenu } from '../../../navs'
 import { MDXProvider } from '@mdx-js/react'
-import { VsCompetitor } from 'components/Products/Competitor'
-import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useLayoutData } from 'components/Layout/hooks'
 import { Hero } from 'components/Products/Hero'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
-import { StaticImage } from 'gatsby-plugin-image'
 import { MenuItem, menuVariants } from 'components/PostLayout/Menu'
 import { CallToAction } from 'components/CallToAction'
-import { Question } from 'components/Products/Question'
-import { Badge } from 'components/Pricing/PricingTable/Plan'
 import CTA from 'components/Home/CTA'
-import { Subfeature } from 'components/Products/Subfeature'
-import {
-    IconAsterisk,
-    IconBolt,
-    IconDatabase,
-    IconBuilding,
-    IconCursorClick,
-    IconEye,
-    IconFlask,
-    IconGraph,
-    IconPeople,
-    IconPerson,
-    IconRevert,
-    IconRewindPlay,
-    IconServer,
-    IconToggle,
-    IconCrown,
-    IconStack,
-    IconHeadset,
-    IconWarning,
-    IconMessage,
-} from '@posthog/icons'
 import { Link as SmoothScrollLink } from 'react-scroll'
-import { SmoothScroll } from 'components/Products/SmoothScroll'
-import ReactFlow, {
-    ReactFlowProvider,
-    Handle,
-    Position,
-    useNodesState,
-    useEdgesState,
-    useReactFlow,
-    MarkerType,
-    Panel,
-} from 'reactflow'
+import ReactFlow, { Handle, Position, ReactFlowProvider, useEdgesState, useNodesState, useReactFlow } from 'reactflow'
 import 'reactflow/dist/style.css'
 import Profile from '../../Team/Profile'
 import APIExamples from './APIExamples'

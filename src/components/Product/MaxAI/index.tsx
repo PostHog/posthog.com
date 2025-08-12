@@ -2,34 +2,24 @@ import CloudinaryImage from 'components/CloudinaryImage'
 import React, { useState } from 'react'
 import Link from 'components/Link'
 import {
+    IconBell,
     IconBook,
-    IconChat,
+    IconCheck,
     IconCode,
     IconGraph,
-    IconRewindPlay,
-    IconThoughtBubble,
-    IconUser,
-    IconBell,
-    IconUndo,
     IconInfo,
+    IconRewindPlay,
     IconThumbsUp,
-    IconCheck,
+    IconUndo,
 } from '@posthog/icons'
 import { CallToAction } from 'components/CallToAction'
-import { CustomerCard } from 'components/Products/CustomerCard'
-import { Hero } from 'components/Products/Hero'
-import { Feature } from 'components/Products/Feature'
-import { Subfeature } from 'components/Products/Subfeature'
 import { docsMenu } from '../../../navs'
-import { Marquee } from 'components/Products/Marquee'
 import TeamMembers from '../TeamMembers'
 import Questions from '../Questions'
 import CTA from 'components/Home/CTA'
 import { PairsWith } from 'components/Products/PairsWith'
 import { PairsWithItem } from 'components/Products/PairsWith/item'
-import { Question } from 'components/Products/Question'
 import { DocLinks } from 'components/Products/DocsLinks'
-import { SmoothScroll } from 'components/Products/SmoothScroll'
 import { SEO } from 'components/seo'
 import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
@@ -38,9 +28,7 @@ import SideModal from '../../Modal/SideModal'
 import { VsCompetitor } from 'components/Products/Competitor'
 import { VsPostHog } from 'components/Products/Competitor/VsPostHog'
 import Comparison from '../Comparison'
-import { useStaticQuery, graphql } from 'gatsby'
 import { MaxQuestionInput } from 'components/MaxQuestionInput'
-import { CalloutBox } from 'components/Docs/CalloutBox'
 import { useRoadmaps } from 'hooks/useRoadmaps'
 import { useUser } from 'hooks/useUser'
 import { VoteBox } from 'components/Roadmap'
