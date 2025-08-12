@@ -3350,7 +3350,7 @@ export const docsMenu = {
                     name: 'Application-wide settings',
                     url: '/docs/feature-flags/app-wide-settings',
                     icon: 'IconGear',
-                    color: 'blue',
+                    color: 'green',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
