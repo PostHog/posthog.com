@@ -46,6 +46,6 @@ People in customer-facing roles where being on calls is a bigger part of your jo
 
 ### Sprint planning
 
-Each small team runs its own sprint planning meetings on whatever schedule you feel is most useful. Some teams do this on a Monday, others on a Wednesday, and sprints are usually 1-2 weeks long. We split into [Small Teams](/handbook/team-structure) for these.
+Each small team runs its own sprint planning meetings on whatever schedule you feel is most useful. Some teams do this on a Monday, others on a Wednesday, and sprints are usually 1-2 weeks long. We split into [Small Teams](/handbook/team-structure) for these. If a product team, your team's exec will also attend.
 
 All sprint planning meetings are open to anyone to attend - if you are not a member of that small team, then we ask that you sit in as a non-speaking observer only. 
