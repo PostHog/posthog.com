@@ -1,9 +1,12 @@
 ---
 title: How Qred ditched four separate tools for one source of truth
 customer: Qred
-logo: >- https://res.cloudinary.com/dmukukwp6/image/upload/qred_logo_light_24ad1306ee.png
-logoDark: >- https://res.cloudinary.com/dmukukwp6/image/upload/qred_logo_dark_de17dafa9c.png
-featuredImage: >- https://res.cloudinary.com/dmukukwp6/image/upload/dimension_56cccccb2c.jpg
+logo: >- 
+  https://res.cloudinary.com/dmukukwp6/image/upload/qred_logo_light_24ad1306ee.png
+logoDark: >- 
+  https://res.cloudinary.com/dmukukwp6/image/upload/qred_logo_dark_de17dafa9c.png
+featuredImage: >- 
+  https://res.cloudinary.com/dmukukwp6/image/upload/dimension_56cccccb2c.jpg
 Industries:
   - Fintech
 users:
