@@ -32,6 +32,12 @@ The schedules consist of contiguous blocks, but that definitely doesn't mean wor
 
 Swap with a teammate in advance! Find a volunteer by asking in Slack, then use PagerDuty schedule overrides. You can trade whole weeks, but also just specific days. Remember not to alter the rotation's core order, as that's an easy way to accidentally shift the schedule for everyone.
 
+## I can't assign tickets or make public replies
+
+Everyone has access to view tickets in Zendesk however if you do not reply to tickets often you may find you currently have [Light agent](https://support.zendesk.com/hc/en-us/articles/4408846501402-Understanding-and-setting-light-agent-permissions) permissions. The HogHero app in the right sidebar should allow you to upgrade your user for your support week by clicking Full⬆️
+![image](https://github.com/user-attachments/assets/94b8b14c-0b82-4c56-9fce-cb056672936c) 
+
+
 ## What do I do as Support Hero?
 
 Each engineering team has its own list of tickets in Zendesk:
@@ -58,6 +64,8 @@ There are three sources of tickets:
 
 Some tickets ask for new features. If the feature is useful for users matching [our ICP](/handbook/who-we-are-building-for), then decide whether to just build it. Otherwise, create a feature request issue in GitHub or +1 on an existing one – you can then send a link to the user, giving them a way of tracking progress. Also make sure to let the [Customer Success team](/teams/customer-success) know, since they will track feature requests for paying customers.
 
+Sometimes a feature already exists, but a user doesn't know about it or how to use it. In this case, you should either send them a link to the relevant docs page or [update the docs](/handbook/engineering/writing-docs) to make it clearer.
+
 ### Fixing bugs
 
 Others tickets report bugs or suspected bugs. Get to the bottom of each one - you never know what you'll find. If the issue decidedly affects only that one user under one-in-a-million circumstances, it might not be worth fixing. But if it's far-reaching, a proper fix is in order. And then there are "bugs" which turn out to be pure cases of confusing UX. Try to improve these too.
@@ -71,10 +79,9 @@ It might be an intense week, but you're also going to solve so many real problem
 Outside of your team's Support Hero rotation, you are also eligible to serve in a one week SDK Support Hero rotation. [The schedule is managed in PagerDuty](https://posthog.pagerduty.com/schedules#P7B7NTR).
 
 Your primary responsibility is simply to make sure SDK questions get some love. During the rotation, please keep an eye on two things:
-- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/30528724215067)
+- [Escalated SDK tickets in Zendesk](https://posthoghelp.zendesk.com/agent/filters/33118780890267)
 - New issues in the SDK repositories
-  - [posthog-js (Web, React, Next)](https://github.com/PostHog/posthog-js/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen)
-  - [posthog-js-lite (React Native, Node)](https://github.com/PostHog/posthog-js-lite/)
+  - [posthog-js (Web, Web Lite, React, Next, React Native, Node, AI)](https://github.com/PostHog/posthog-js/)
   - [posthog-ios](https://github.com/PostHog/posthog-ios)
   - [posthog-android](https://github.com/PostHog/posthog-android)
   - [posthog-flutter](https://github.com/PostHog/posthog-flutter)
@@ -142,7 +149,7 @@ As an engineer, when answering a question, your first instinct is to give them a
 - Housekeeping. Once a customer issue/question has been addressed, close the ticket in [Zendesk](#zendesk) (mark it `Solved`) to make it easy to identify outstanding conversations.
 - If a user has been particularly helpful, such as raising a security or bug report, feel free to offer a small credit for the merch store. 
 
-If you have any questions about how or when to communicate with users, you can always ask [the Comms team](/teams/words-pictures) for help. 
+If you have any questions about how or when to communicate with users, you can always ask the [Brand & Vibes Team](/teams/brand-vibes) for help. 
 
 ## How do I prioritize?
 
@@ -277,7 +284,7 @@ When you see a user assigned to a free email org on a ticket, and it is not a 'c
 3. Click anywhere outside the field to save the change
 Tickets which have been set to **Pending** will auto-solve after 7 days.  Customers can also respond within 20 days to a **Solved** ticket to re-open it. After 20 days, responses will create a follow-up ticket with a link to the original ticket.
 
-Tickets that have been `Solved` will receive a CSAT survey after 3 days.
+Tickets that have been `Solved` will receive a CSAT survey the next day.
 
 #### Content Warnings
 

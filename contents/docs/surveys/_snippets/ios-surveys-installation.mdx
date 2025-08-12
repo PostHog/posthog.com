@@ -35,31 +35,33 @@ PostHogSDK.shared.setup(config)
 
 ## Supported Features
 
-| Feature                           | Support                            |
-| --------------------------------- | ---------------------------------- |
-| **Questions**                     |                                    |
-| All question types                | ✅                                 |
-| Multi-question surveys            | ✅                                 |
-| Confirmation message              | ✅                                 |
-| Feedback button presentation      | ❌                                 |
-| Conditional questions             | ❌                                 |
-| **Customization / Appearance**    |                                    |
-| Set colors in PostHog dashboard   | ✅                                 |
-| Shuffle questions                 | ❌                                 |
-| PostHog branding                  | ❌                                 |
-| Delay popup after screen view     | ❌                                 |
-| Position config                   | ❌ Always bottom sheet             |
-| **Display conditions**            |                                    |
-| Feature flag & property targeting | ✅                                 |
-| Screen targeting                  | ❌                                 |
-| Device type targeting             | ✅                                 |
-| Survey wait period                | ❌                                 |
-| Event triggers                    | ✅                                 |
-| Action triggers                   | ❌                                 |
+| Feature                           | Support                            | SDK Version                        |
+| --------------------------------- | ---------------------------------- |------------------------------------|
+| **Questions**                                                                                               |
+| All question types                | ✅                                 |                                    |
+| Multi-question surveys            | ✅                                 |                                    |
+| Confirmation message              | ✅                                 |                                    |
+| Feedback button presentation      | ❌                                 |                                    |
+| Conditional questions             | ✅                                 | >= v3.25.0                         |
+| **Customization / Appearance**                                                                              |
+| Set colors in PostHog dashboard   | ✅                                 |                                    |
+| Shuffle questions                 | ❌                                 |                                    |
+| PostHog branding                  | ❌                                 |                                    |
+| Delay popup after screen view     | ❌                                 |                                    |
+| Position config                   | ❌ Always bottom sheet             |                                    |
+| HTML content                      | ❌                                 |                                    |
+| **Display conditions**                                                                                      |
+| Feature flag & property targeting | ✅                                 |                                    |
+| Screen targeting                  | ❌                                 |                                    |
+| Device type targeting             | ✅                                 |                                    |
+| Survey wait period                | ❌                                 |                                    |
+| Event triggers                    | ✅                                 |                                    |
+| Action triggers                   | ❌                                 |                                    |
+| Partial responses                 | ❌                                 |                                    |
 
 ## Limitations
 
 - Surveys are only available on iOS
 - Surveys require iOS 15.0 or later
-- While in Beta, surveys require the Experimental SPI group 
+- While in Beta, surveys require the Experimental SPI group
     - Please use `@_spi(Experimental) import PostHog`

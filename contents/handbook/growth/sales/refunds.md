@@ -121,3 +121,13 @@ You need Support specialist level access to Stripe, ask Simon for access.
 
   
 Tag Mine in Zendesk and share what you checked, what you think we should do, and any other relevant context. RevOps will review usage trends and customer lifecycle (e.g. new client, high-value account) to figure out next steps.
+
+### Our Approach
+We'd rather fix unexpected usage issues than have customers pay one massive invoice and then reduce spending or leave us. The goal is to maintain a fair, transparent relationship that works for everyone in the long term.
+
+### Trial periods and usage spikes
+
+- We're generous with trial periods for actively engaged new ICP customers
+- Tag accounts as "trial" in the billing system. If they're already paying when actively testing the product, inform Mine/RevOps for proper tagging and revenue recognition
+- If you spot accidental usage spikes, proactively reach out and work with customers to reduce their spend to fit their budget and needs
+- When you're unsure about handling a specific case, ping Mine/RevOps directly for review

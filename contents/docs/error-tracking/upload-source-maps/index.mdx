@@ -1,0 +1,17 @@
+---
+title: Upload source maps
+---
+
+import DownloadCLI from '../_snippets/cli/download.mdx'
+import AuthenticateCLI from '../_snippets/cli/authenticate.mdx'
+import InjectSourceMap from './_snippets/inject-source-map.mdx'
+import UploadSourceMap from './_snippets/upload-source-map.mdx'
+import UploadSourceMapPlatforms from './_snippets/upload-source-map-platforms.tsx'
+
+
+If you serve compiled or minified code, PostHog requires source maps to generate accurate stack traces. If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. 
+
+Choose your platform to view specific instructions.
+
+<UploadSourceMapPlatforms />
+

@@ -1,6 +1,6 @@
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { ShopifyProduct, ShopifyProductVariant } from './types'
-import { getShopifyImage } from 'gatsby-source-shopify'
+import { getShopifyImage } from './utils'
 
 export function getLineItemImage(variant: ShopifyProductVariant): IGatsbyImageData | null {
     if (variant.media.length) {

@@ -69,13 +69,13 @@ import posthog from 'posthog-js'
 import { browser } from '$app/environment';
 
 export const load = async () => {
-
   if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      { api_host: '<ph_client_api_host>' }
-    )
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
+    })
   }
+
   return
 };
 ```

@@ -1,16 +1,15 @@
-> 🚧 **NOTE:** Flutter is considered `beta` and is free while in beta. We are keen to gather as much feedback as possible so if you try this out please let us know. You can send feedback via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asession_replay%3Alow) or one of our other [support options](/docs/support-options).
-
 ## Step one: Add PostHog to your app
 
 > Session replay requires PostHog Flutter SDK version >= [4.7.0](https://github.com/PostHog/posthog-flutter/releases), and it's recommended to always use the latest version.
 
-import FlutterInstall from "../../integrate/_snippets/install-flutter.mdx"
+import FlutterInstallManual from "../../integrate/_snippets/install-flutter-manual.mdx"
 
 export const EnableSessionReplayDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-dark-mode.png"
 export const EnableSessionReplayLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/session-replay/enable-session-replay-in-project-settings-light-mode.png"
 
+> ⚠️ **Note:** For session replay, you must setup the SDK manually.
 
-<FlutterInstall />
+<FlutterInstallManual />
 
 #### Widget and Observer setup
 
@@ -65,7 +64,7 @@ This is needed as Flutter renders your app using a browser canvas element.
   classes="rounded"
 />
 
-## Step three: Configure replay settings  
+## Step three: Configure replay settings 
 
 Add `sessionReplay = true` to your PostHog configuration alongside any of your other configuration options:
 
@@ -73,7 +72,6 @@ Add `sessionReplay = true` to your PostHog configuration alongside any of your o
 final config = PostHogConfig('<ph_project_api_key>');
 /// Enable Recording of Session replay for Android and iOS.
 /// Requires Record user sessions to be enabled in the PostHog Project Settings.
-/// Experimental support.
 /// Defaults to false.
 config.sessionReplay = true;
 /// Enable masking of all text and text input fields.
@@ -85,7 +83,6 @@ config.sessionReplayConfig.maskAllImages = false;
 /// Throttling delay used to reduce the number of snapshots captured and reduce performance impact.
 /// This is used for capturing the view as a screenshot.
 /// The lower the number, the more snapshots will be captured but higher the performance impact.
-/// Experimental support.
 /// Defaults to 1s.
 /// Ps: it was called [debouncerDelay] until version 4.7.1
 config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
@@ -104,7 +101,12 @@ config.sessionReplayConfig.throttleDelay = const Duration(milliseconds: 1000);
 
 ## Troubleshooting
 
+- Update your SDK and iOS Pods.
+- Make sure to set the minimum platform version to iOS 13.0 in your Podfile.
+- Make sure you have disabled automatic SDK intialization. 
 - Run a clean build if you experience issues.
-- Update your iOS Pods.
 - For blank recordings for mobile session replay, be sure to set up the [Widget and Observer](/docs/session-replay/installation?tab=Flutter#widget-and-observer-setup).
 - For blank recordings for flutter web session replay, be sure to enable [Canvas capture](/docs/session-replay/canvas-recording).
+- If you have enabled session replay using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users. We're tracking this bug [here](https://github.com/PostHog/posthog-ios/issues/263).
+    - Session replay feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything. We're tracking this feature request [here](https://github.com/PostHog/posthog-android/issues/250).

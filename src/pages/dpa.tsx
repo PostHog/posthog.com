@@ -6,10 +6,12 @@ import { heading, section } from 'components/Home/classes'
 import { TrackedCTA } from 'components/CallToAction'
 import Link from 'components/Link'
 import { StaticImage } from 'gatsby-plugin-image'
-import { IconInfo, IconRevert } from '@posthog/icons'
+import { IconInfo, IconRevert, IconSend } from '@posthog/icons'
 import Tooltip from 'components/Tooltip'
 import subprocessors from '../data/subprocessors.json'
 import { sexyLegalMenu } from '../navs'
+import usePostHog from 'hooks/usePostHog'
+import Confetti from 'react-confetti'
 
 const IconPrint = ({ className = '' }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
@@ -23,21 +25,50 @@ const IconPrint = ({ className = '' }) => (
     </svg>
 )
 
+const IconDocument = ({ className = '' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24">
+        <rect x="4" y="2" width="16" height="20" rx="2" stroke="#000" strokeWidth="1.5" />
+        <path d="M8 6h8M8 10h8M8 14h5" stroke="#000" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+)
+
 function DpaGenerator() {
     const [companyName, setCompanyName] = useState('')
     const [companyAddress, setCompanyAddress] = useState('')
     const [yourName, setYourName] = useState('')
     const [yourTitle, setYourTitle] = useState('')
-    const [date, setDate] = useState('')
     const [representativeEmail, setRepresentativeEmail] = useState('')
-    const [jurisdiction, setJurisdiction] = useState('')
-    const [supervisoryAuthority, setSupervisoryAuthority] = useState('')
     const [mode, setMode] = useState('pretty')
     const [isFormComplete, setIsFormComplete] = useState(false)
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const [showConfetti, setShowConfetti] = useState(false)
     const divRef = useRef(null)
+    const posthog = usePostHog()
 
     const FloatRight = `float-right -mr-2 @2xl:-mr-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
     const FloatLeft = `float-left -ml-2 @2xl:-ml-20 -my-8 @2xl:-mt-16 w-48 @2xl:w-80`
+
+    const handleDpaSubmit = () => {
+        if (typeof posthog === 'undefined') return
+        if (posthog === null) return
+        if (typeof posthog.capture !== 'function') return
+        try {
+            fetch('/api/dpa-export-event', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    companyName,
+                    companyAddress,
+                    yourName,
+                    yourTitle,
+                    representativeEmail,
+                    distinctId: posthog?.get_distinct_id?.() || undefined,
+                }),
+            })
+        } catch (e) {
+            // fail silently
+        }
+    }
 
     const SignatureFields = () => (
         <>
@@ -110,26 +141,7 @@ function DpaGenerator() {
                 </p>
 
                 <p>Date</p>
-                <p className="border-b border-black w-full">
-                    <Tooltip
-                        content={() => (
-                            <>
-                                Fill out the form <span className="md:hidden">at the top</span>
-                                <span className="hidden md:inline-block">to the left</span> populate these fields
-                            </>
-                        )}
-                        placement="top"
-                        className="[&_button]:cursor-auto"
-                    >
-                        <span className="relative">
-                            <button type="button">
-                                <label htmlFor="date" className="bg-yellow/40 font-bold px-0.5 py-0.5">
-                                    {date ? date : '[DATE]'}
-                                </label>
-                            </button>
-                        </span>
-                    </Tooltip>
-                </p>
+                <p className="border-b border-black">&nbsp;</p>
 
                 <p className="col-span-2 !mt-8">
                     <strong>PostHog, Inc.</strong>
@@ -139,44 +151,26 @@ function DpaGenerator() {
                 <p className="border-b border-black w-full">&nbsp;</p>
 
                 <p>Name</p>
-                <p className="border-b border-black w-full">Fraser Hopper</p>
+                <p className="border-b border-black w-full">Charles Cook</p>
 
                 <p>Title</p>
-                <p className="border-b border-black w-full">Operations & Finance Lead</p>
+                <p className="border-b border-black w-full">VP Operations</p>
 
                 <p>Date</p>
-                <p className="border-b border-black w-full">&nbsp;</p>
+                <p className="border-b border-black">
+                    <code>[Document.CreatedDate]</code>
+                </p>
             </div>
         </>
     )
 
     useEffect(() => {
-        if (
-            companyName &&
-            companyAddress &&
-            yourName &&
-            yourTitle &&
-            date &&
-            representativeEmail &&
-            jurisdiction &&
-            supervisoryAuthority &&
-            mode
-        ) {
+        if (companyName && companyAddress && yourName && yourTitle && representativeEmail && mode) {
             setIsFormComplete(true)
         } else {
             setIsFormComplete(false)
         }
-    }, [
-        companyName,
-        companyAddress,
-        yourName,
-        yourTitle,
-        date,
-        representativeEmail,
-        jurisdiction,
-        supervisoryAuthority,
-        mode,
-    ])
+    }, [companyName, companyAddress, yourName, yourTitle, representativeEmail, mode])
 
     const handlePrint = () => {
         window.print()
@@ -187,19 +181,38 @@ function DpaGenerator() {
         setCompanyAddress('')
         setYourName('')
         setYourTitle('')
-        setDate('')
         setRepresentativeEmail('')
-        setJurisdiction('')
-        setSupervisoryAuthority('')
+        setIsSubmitted(false)
+        setShowConfetti(false)
     }
 
-    const handleInputChange = (e) => {
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setMode(e.target.value)
+        const pageElement = document.querySelector('#page')
+        const headerElement = document.querySelector('header')
         const top =
             window.scrollY +
-            document.querySelector('#page')?.getBoundingClientRect().top -
-            document.querySelector('header')?.getBoundingClientRect().height
+            (pageElement?.getBoundingClientRect().top || 0) -
+            (headerElement?.getBoundingClientRect().height || 0)
         window.scrollTo({ top, behavior: 'smooth' })
+    }
+
+    // Determine if the current mode is a request mode
+    const isRequestMode = mode === 'pretty' || mode === 'lawyer'
+
+    // Modified handleButtonClick to show confirmation instead of redirecting
+    const handleButtonClick = () => {
+        if (isRequestMode) {
+            handleDpaSubmit()
+            setIsSubmitted(true)
+            setShowConfetti(true)
+            // Hide confetti after 5 seconds
+            setTimeout(() => setShowConfetti(false), 5000)
+            // Smooth scroll to top of page
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        } else {
+            handlePrint()
+        }
     }
 
     return (
@@ -208,6 +221,7 @@ function DpaGenerator() {
             parent={sexyLegalMenu}
             activeInternalMenu={sexyLegalMenu.children.find(({ name }) => name.toLowerCase() === 'dpa generator')}
         >
+            {showConfetti && <Confetti recycle={false} numberOfPieces={1000} />}
             <SEO
                 title="DPA generator"
                 description="PostHog's cutting-edge data processing agreement (DPA) generator"
@@ -229,7 +243,36 @@ function DpaGenerator() {
                 </h2>
             </header>
 
-            <section className="grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4">
+            <section
+                className={`relative flex flex-col items-center mt-20 max-w-xl mx-auto bg-accent dark:bg-accent-dark rounded px-8 pb-8 border border-light dark:border-dark ${
+                    isSubmitted ? 'block' : 'hidden'
+                }`}
+            >
+                <CloudinaryImage
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/bookworm_f7fd07d80b.png"
+                    alt="Legal hog"
+                    className="w-64"
+                />
+
+                <h1 className="text-3xl font-bold text-green">DPA request received</h1>
+                <p className="text-center">
+                    Our legal hogs are working on generating a legal document for you. You should receive an email from
+                    PandaDoc in the next 24 hours.
+                </p>
+                <p className="text-center mb-0">
+                    If you have any questions (or don't hear back), please contact{' '}
+                    <a href="mailto:privacy@posthog.com" className="text-primary underline">
+                        privacy@posthog.com
+                    </a>
+                    .
+                </p>
+            </section>
+
+            <section
+                className={`grid md:grid-cols-5 2xl:grid-cols-4 relative items-start mt-12 md:mt-0 md:top-20 gap-4 ${
+                    isSubmitted ? 'hidden' : 'block'
+                }`}
+            >
                 <div className="@container md:col-span-2 2xl:col-span-1 px-4 lg:px-8 md:py-4 md:max-h-screen md:reasonable:max-h-[calc(100vh-108px)] md:overflow-auto md:sticky top-0 reasonable:top-[108px] print:hidden">
                     <div className="flex justify-between items-center">
                         <h2 className="mb-1 text-xl">Enter your company details</h2>
@@ -245,9 +288,8 @@ function DpaGenerator() {
                             </span>
                         </Tooltip>
                     </div>
-                    <p className="text-sm mb-2">We'll populate your DPA with this information.</p>
                     <p className="text-sm">
-                        Once the form is completed, you can export to PDF. Sign it and send it to privacy@posthog.com
+                        After completing this form, we'll prep it in PandaDoc where we'll sign and send a copy by email
                         for counter-signature.
                     </p>
                     <p className="text-sm">
@@ -256,137 +298,66 @@ function DpaGenerator() {
                     <form>
                         <div className="grid grid-cols-5 gap-1 @sm:gap-2 items-center">
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyName">
-                                Company Name
+                                Company name
                             </label>
                             <input
                                 type="text"
                                 value={companyName}
                                 onChange={(e) => setCompanyName(e.target.value)}
-                                placeholder="Company Name"
+                                placeholder="Company name"
                                 id="companyName"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="companyAddress">
-                                Company Address
+                                Company address
                             </label>
                             <input
                                 type="text"
                                 value={companyAddress}
                                 onChange={(e) => setCompanyAddress(e.target.value)}
-                                placeholder="Company Address"
+                                placeholder="Company address"
                                 id="companyAddress"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourName">
-                                Representative Name
+                                Representative name
                             </label>
                             <input
                                 type="text"
                                 value={yourName}
                                 onChange={(e) => setYourName(e.target.value)}
-                                placeholder="Representative Name"
+                                placeholder="Representative name"
                                 id="yourName"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="representativeEmail">
-                                Representative Email
+                                Representative email
                             </label>
                             <input
                                 type="email"
                                 value={representativeEmail}
                                 onChange={(e) => setRepresentativeEmail(e.target.value)}
-                                placeholder="Representative Email"
+                                placeholder="Representative email"
                                 id="representativeEmail"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
 
                             <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="yourTitle">
-                                Representative Title
+                                Representative title
                             </label>
                             <input
                                 type="text"
                                 value={yourTitle}
                                 onChange={(e) => setYourTitle(e.target.value)}
-                                placeholder="Representative Title"
+                                placeholder="Representative title"
                                 id="yourTitle"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
-                                required
-                            />
-
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="date">
-                                Date
-                            </label>
-                            <input
-                                type="text"
-                                value={date}
-                                onChange={(e) => setDate(e.target.value)}
-                                placeholder="Date"
-                                id="date"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
-                                required
-                            />
-
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="jurisdiction">
-                                <Tooltip
-                                    content={() => <p className="max-w-sm !mb-0">Your country</p>}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
-                                        Jurisdiction
-                                    </span>
-                                </Tooltip>
-                            </label>
-                            <input
-                                type="text"
-                                value={jurisdiction}
-                                onChange={(e) => setJurisdiction(e.target.value)}
-                                placeholder="Jurisdiction"
-                                id="jurisdiction"
-                                className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
-                                required
-                            />
-
-                            <label className="col-span-5 @sm:col-span-2 text-sm" htmlFor="supervisoryAuthority">
-                                <Tooltip
-                                    content={() => (
-                                        <>
-                                            <p className="max-w-sm !mb-2">
-                                                An individual authority established by its member state to supervise the
-                                                compliance with a specific regulation.
-                                            </p>
-                                            <p className="max-w-sm !mb-2">
-                                                In regards to the GDPR, each country will have its own authority, for
-                                                the UK the Information Commissioner's Office (ICO) will be the
-                                                Supervisory Authority.
-                                            </p>
-                                            <p className="max-w-sm !mb-0">
-                                                In the United States, this may be the state where you operate or are
-                                                incorporated, or the FTC.
-                                            </p>
-                                        </>
-                                    )}
-                                    placement="top"
-                                    className="[&_button]:cursor-auto"
-                                >
-                                    <span className="border-b border-dashed border-light dark:border-dark pb-0.5 mb-1 inline-block">
-                                        Supervisory Authority
-                                    </span>
-                                </Tooltip>
-                            </label>
-                            <input
-                                type="text"
-                                value={supervisoryAuthority}
-                                onChange={(e) => setSupervisoryAuthority(e.target.value)}
-                                placeholder="Supervisory Authority"
-                                id="supervisoryAuthority"
                                 className="col-span-5 @sm:col-span-3 mb-2 @sm:mb-0 bg-accent rounded border border-light hover:border-black/50 text-black"
                                 required
                             />
@@ -468,52 +439,35 @@ function DpaGenerator() {
                     id="page"
                     className="@container article-content md:col-span-3 bg-white text-primary px-4 md:px-8 pt-4 border-y md:border-y-0 border-light dark:border-dark md:shadow-xl print:shadow-none rounded relative"
                 >
-                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 flex items-center justify-between print:hidden sticky top-[57px] md:top-[108px] z-10">
+                    <div className="bg-accent rounded-tl rounded-tr py-2 px-8 text-sm text-center border-b border-light -mx-8 -mt-4 md:pr-4 flex items-center justify-between print:hidden sticky reasonable:top-[57px] md:top-0 reasonable:md:top-[108px] z-10">
                         <div className="text-lg font-bold">Preview</div>
                         <Tooltip
                             content={() => (
                                 <div className="max-w-xs md:max-w-sm print:hidden">
                                     {isFormComplete ? (
                                         <>
-                                            <h4 className="mb-1">Important instructions</h4>
-                                            <ol className="mb-3">
-                                                <li>
-                                                    <p className="text-[15px] mb-0">Open your browser's print dialog</p>
-                                                </li>
-                                                <li>
-                                                    <p className="text-[15px] mb-0">
-                                                        Use the Export to PDF option in your browser or system's print
-                                                        menu
+                                            {mode === 'pretty' || mode === 'lawyer' ? (
+                                                <>
+                                                    <h4 className="text-base mb-1">Ready to send?</h4>
+                                                    <p className="mb-0 text-[15px]">
+                                                        Clicking this button will submit your information to PandaDoc
+                                                        where we'll sign it and email it to you for a counter-signature.
                                                     </p>
-                                                </li>
-                                                <li>
-                                                    <p className="text-[15px] mb-0">
-                                                        Sign and send to privacy@posthog.com for counter-signature
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <h4 className="text-base mb-1">Try another version</h4>
+                                                    <p className="text-sm mb-0 text-[15px]">
+                                                        Sorry, our lawyers refuse to recognize this version as a binding
+                                                        legal document.
                                                     </p>
-                                                </li>
-                                            </ol>
-                                            <p className="mb-0 text-[15px] border-t border-light pt-4 mt-2">
-                                                <strong>Tip:</strong> Disable these options in Chrome's print settings
-                                                to ditch the page title, URL, and highlighted fields from your printed
-                                                copy. 👇
-                                            </p>
-
-                                            <div className="my-2 border border-light dark:border-dark rounded overflow-hidden">
-                                                <CloudinaryImage
-                                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/dpa/print-settings.png"
-                                                    alt="Print settings"
-                                                    placeholder="blurred"
-                                                    className="dark:rounded"
-                                                    objectFit="contain"
-                                                    width={362}
-                                                    height={92}
-                                                />
-                                            </div>
+                                                </>
+                                            )}
                                         </>
                                     ) : (
                                         <>
                                             Fill out all the fields <br className="md:hidden" />
-                                            to export to PDF
+                                            to send for signature.
                                         </>
                                     )}
                                 </div>
@@ -522,17 +476,17 @@ function DpaGenerator() {
                         >
                             <span className="relative">
                                 <TrackedCTA
-                                    event={{ name: `clicked Print DPA` }}
+                                    event={{ name: 'clicked Request DPA' }}
                                     type="primary"
                                     size="sm"
-                                    disabled={!isFormComplete}
-                                    onClick={handlePrint}
-                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-1 relative md:left-4"
+                                    disabled={!isFormComplete || !(mode === 'pretty' || mode === 'lawyer')}
+                                    onClick={handleButtonClick}
+                                    className="[&>span]:flex [&>span]:items-center [&>span]:gap-2"
                                 >
-                                    <>
-                                        <IconPrint className="size-5" />
-                                        <span>Export to PDF</span>
-                                    </>
+                                    <span className="flex items-center gap-2">
+                                        <IconSend className="size-5" />
+                                        <span>Send for signature</span>
+                                    </span>
                                 </TrackedCTA>
                             </span>
                         </Tooltip>
@@ -869,7 +823,7 @@ function DpaGenerator() {
                         className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
                             mode === 'pretty' && ''
                         } ${
-                            mode === 'lawyer' && 'font-serif'
+                            mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
                         } print:[&>p]:text-sm print:[&_li]:text-sm max-w-3xl mx-auto`}
                     >
                         <div
@@ -910,14 +864,14 @@ function DpaGenerator() {
                             including the Principal Agreement, the terms of this Agreement shall prevail.
                         </p>
                         <p>WHEREAS</p>
-                        <p>(A) The Company acts as a Data Controller.</p>
+                        <p>(A) The Company acts as a Controller.</p>
                         <p>
                             (B) The Company wishes to subcontract certain Services, which imply the processing of
                             personal data, to the Processor.
                         </p>
                         <p>
                             (C) The Parties seek to implement a data processing agreement that complies with applicable
-                            Data Protection Laws (as defined below)
+                            Data Protection Laws (as defined below).
                         </p>
                         <p>(D) The Parties wish to lay down their rights and obligations.</p>
                         <p>IT IS AGREED AS FOLLOWS:</p>
@@ -931,102 +885,129 @@ function DpaGenerator() {
                                 Agreement shall have the following meaning:
                             </p>
                             <div className="pl-8 pb-2">
-                                <p>1.1.1. "Agreement" means this Data Processing Agreement and all Annexes;</p>
                                 <p>
-                                    1.1.2. "Company Personal Data" means any Personal Data relating to Company's end
-                                    users provided to or Processed by the Processor on behalf of the Company pursuant to
-                                    or in connection with the Principal Agreement;
+                                    1.1.1. "<strong>Agreement</strong>" means this Data Processing Agreement and all
+                                    Annexes;
                                 </p>
                                 <p>
-                                    1.1.3. "Data Protection Laws" means all applicable laws relating to Processing of
-                                    Personal Data and privacy that may exist in any relevant jurisdiction, including
-                                    European Data Protection Laws and US Data Protection Laws;
-                                </p>
-                                <p>1.1.4. "EEA" means the European Economic Area;</p>
-                                <p>
-                                    1.1.5. "EU Personal Data" means the Processing of Personal Data by the Processor to
-                                    which data protection legislation of the European Union, or of a Member State of the
-                                    European Union or EEA, applies;
+                                    1.1.2. "<strong>Company Personal Data</strong>" means any Personal Data relating to
+                                    Company's end users provided to or Processed by the Processor on behalf of the
+                                    Company pursuant to or in connection with the Principal Agreement;
                                 </p>
                                 <p>
-                                    1.1.6. "European Data Protection Laws" means the GDPR, UK Data Protection Act 2018,
-                                    the UK GDPR, ePrivacy Directive 2002/58/EC, FADP, and any associated or additional
-                                    legislation in force in the EU, EEA, Member States and the United Kingdom as
-                                    amended, replaced or superseded from time to time;
+                                    1.1.3. "<strong>Data Protection Laws</strong>" means all applicable laws relating to
+                                    Processing of Personal Data and privacy that may exist in any relevant jurisdiction,
+                                    including European Data Protection Laws and US Data Protection Laws;
                                 </p>
                                 <p>
-                                    1.1.7. "FADP" means the Swiss Federal Act on Data Protection and its Ordinances, as
-                                    amended from time to time;
+                                    1.1.4. "<strong>EEA</strong>" means the European Economic Area;
                                 </p>
                                 <p>
-                                    1.1.8. "FDPIC" means the Swiss Federal Data Protection and Information Commissioner;
-                                </p>
-                                <p>1.1.9. "GDPR" General Data Protection Regulation EU2016/679;</p>
-                                <p>
-                                    1.1.10. "UK GDPR" means General Data Protection Regulation (EU) 2016/679 as
-                                    applicable as part of UK domestic law by virtue of section 3 of the European Union
-                                    (Withdrawal) Act 2018 and as amended by the Data Protection, Privacy and Electronic
-                                    Communications (Amendments etc) (EU Exit) Regulations 2019 (as amended);
+                                    1.1.5. "<strong>EU Personal Data</strong>" means the Processing of Personal Data by
+                                    the Processor to which data protection legislation of the European Union, or of a
+                                    Member State of the European Union or EEA, applies;
                                 </p>
                                 <p>
-                                    1.1.11. "US Data Protection Laws" means all data privacy, data protection, and
-                                    cybersecurity laws, rules, and regulations of the United States applicable to the
-                                    Processing of Personal Data under the Principal Agreement. "US Data Protection Laws"
-                                    may include, but is not limited to, the California Consumer Privacy Act of 2018, as
-                                    amended by the California Privacy Rights Act of 2020 (together, the "
-                                    <strong>CCPA</strong>"), the Colorado Privacy Act ("<strong>CPA</strong>"), the
-                                    Connecticut Data Privacy Act ("<strong>CTDPA</strong>"), the Utah Consumer Privacy
-                                    Act ("<strong>UCPA</strong>"), and the Virginia Consumer Data Protection Act ("
+                                    1.1.6. "<strong>European Data Protection Laws</strong>" means the GDPR, UK Data
+                                    Protection Act 2018, the UK GDPR, ePrivacy Directive 2002/58/EC, FADP, and any
+                                    associated or additional legislation in force in the EU, EEA, Member States of the
+                                    European Union, Switzerland, and the United Kingdom as amended, replaced or
+                                    superseded from time to time;
+                                </p>
+                                <p>
+                                    1.1.7. "<strong>FADP</strong>" means the Swiss Federal Act on Data Protection and
+                                    its Ordinances, as amended from time to time;
+                                </p>
+                                <p>
+                                    1.1.8. "<strong>FDPIC</strong>" means the Swiss Federal Data Protection and
+                                    Information Commissioner;
+                                </p>
+                                <p>
+                                    1.1.9. "<strong>GDPR</strong>" General Data Protection Regulation EU2016/679;
+                                </p>
+                                <p>
+                                    1.1.10. "<strong>UK GDPR</strong>" means General Data Protection Regulation (EU)
+                                    2016/679 as applicable as part of UK domestic law by virtue of section 3 of the
+                                    European Union (Withdrawal) Act 2018 and as amended by the Data Protection, Privacy
+                                    and Electronic Communications (Amendments etc) (EU Exit) Regulations 2019 (as
+                                    amended);
+                                </p>
+                                <p>
+                                    1.1.11. "<strong>US Data Protection Laws</strong>" means all data privacy, data
+                                    protection, and cybersecurity laws, rules, and regulations of the United States
+                                    applicable to the Processing of Personal Data under the Principal Agreement. "US
+                                    Data Protection Laws" may include, but is not limited to, the California Consumer
+                                    Privacy Act of 2018, as amended by the California Privacy Rights Act of 2020
+                                    (together, the "<strong>CCPA</strong>"), the Colorado Privacy Act ("
+                                    <strong>CPA</strong>"), the Connecticut Data Privacy Act ("<strong>CTDPA</strong>"),
+                                    the Utah Consumer Privacy Act ("<strong>UCPA</strong>"), and the Virginia Consumer
+                                    Data Protection Act ("
                                     <strong>VACDPA</strong>"), and any binding regulations promulgated thereunder, as
                                     amended or updated from time to time;
                                 </p>
                                 <p>
-                                    1.1.12. "Protected Area" means (i) in the case of EU Personal Data, the member
-                                    states of the European Union and the EEA and any country, territory, sector or
-                                    international organization in respect of which an adequacy decision under Art 45
-                                    GDPR is in force or (ii) in the case of UK Personal Data, the United Kingdom and any
-                                    country, territory, sector or international organization in respect of which an
-                                    adequacy decision under UK adequacy regulations is in force; or (iii) in the case of
-                                    Swiss Personal Data, any country, territory, sector or international organization
-                                    which is recognized as adequate by the FDPIC or the Swiss Federal Council (as the
-                                    case may be);
+                                    1.1.12. "<strong>Protected Area</strong>" means (i) in the case of EU Personal Data,
+                                    the member states of the European Union and the EEA and any country, territory,
+                                    sector or international organization in respect of which an adequacy decision under
+                                    Article 45 GDPR is in force or (ii) in the case of UK Personal Data, the United
+                                    Kingdom and any country, territory, sector or international organization in respect
+                                    of which an adequacy decision under UK adequacy regulations is in force; or (iii) in
+                                    the case of Swiss Personal Data, any country, territory, sector or international
+                                    organization which is recognized as adequate by the FDPIC or the Swiss Federal
+                                    Council (as the case may be);
                                 </p>
                                 <p>
-                                    1.1.13. "Personal Data" means any information provided by Company to Processor that
-                                    is protected as "personal data," "personal information," "personally identifiable
-                                    information," or similar terms defined in Data Protection Laws;
+                                    1.1.13. "<strong>Personal Data</strong>" means any information provided by Company
+                                    to Processor that is protected as "personal data," "personal information,"
+                                    "personally identifiable information," or similar terms defined in Data Protection
+                                    Laws;
                                 </p>
                                 <p>
-                                    1.1.14. "Services" means the product and data analytics services the Processor
-                                    provides pursuant to the Principal Agreement , including but not limited to the
-                                    provision of testing, support, product development, service improvement,
-                                    benchmarking and troubleshooting activities on behalf of the Data Controller.
+                                    1.1.14. "<strong>Services</strong>" means the product and data analytics services
+                                    the Processor provides pursuant to the Principal Agreement , including but not
+                                    limited to the provision of testing, support, product development, service
+                                    improvement, benchmarking and troubleshooting and security activities on behalf of
+                                    the Data Controller, and which may include AI and machine learning tools ("
+                                    <strong>AI Features</strong>") if enabled for the Company depending on their use of
+                                    the services;
                                 </p>
                                 <p>
-                                    1.1.15. "Subprocessor" means any person appointed by or on behalf of Processor to
-                                    Process Personal Data on behalf of the Company in connection with the Agreement.
+                                    1.1.15. "<strong>Subprocessor</strong>" means any person appointed by or on behalf
+                                    of Processor to Process Personal Data on behalf of the Company in connection with
+                                    the Agreement.
                                 </p>
                                 <p>
-                                    1.1.16. "Standard Contractual Clauses" means (i) in respect of UK Personal Data, the
-                                    International Data Transfer Addendum to the EU Standard Contractual Clauses, issued
-                                    by the Information Commissioner and laid before Parliament in accordance with s.119A
-                                    of the Data Protection Act 2018 on 2 February 2022 ("UK Standard Contractual
-                                    Clauses"); (ii) in respect of EU Personal Data, the standard contractual clauses for
-                                    the transfer of personal data to third countries pursuant to the GDPR, adopted by
-                                    the European Commission under Commission Implementing Decision (EU) 2021/914
-                                    including the text from module 2 and no other modules and not including any clauses
-                                    marked as optional, ("EU Standard Contractual Clauses"); and (iii) in respect of
-                                    Swiss Personal Data, the EU Standard Contractual Clauses with the necessary
-                                    adaptations and amendments for the purposes of the FADP as required by the FDPIC in
-                                    its Statement of 27 August 2021;
+                                    1.1.16. "<strong>Standard Contractual Clauses</strong>" means:
+                                </p>
+                                <div className="pl-8 pb-2">
+                                    <p>
+                                        1.1.16.1 in respect of UK Personal Data, the International Data Transfer
+                                        Addendum to the EU Standard Contractual Clauses, issued by the Information
+                                        Commissioner and laid before Parliament in accordance with s.119A of the Data
+                                        Protection Act 2018 on 2 February 2022 ("
+                                        <strong>UK Standard Contractual Clauses</strong>"):
+                                    </p>
+                                    <p>
+                                        1.1.16.2 in respect of EU Personal Data, the standard contractual clauses for
+                                        the transfer of personal data to third countries pursuant to the GDPR, adopted
+                                        by the European Commission under Commission Implementing Decision (EU) 2021/914
+                                        including the text from module 2 and no other modules and not including any
+                                        clauses marked as optional, ("<strong>EU Standard Contractual Clauses</strong>
+                                        ");
+                                    </p>
+                                    <p>
+                                        1.1.16.3 in respect of Swiss Personal Data, the EU Standard Contractual Clauses
+                                        with the necessary adaptations and amendments for the purposes of the FADP as
+                                        required by the FDPIC in its Statement of 27 August 2021;
+                                    </p>
+                                </div>
+                                <p>
+                                    1.1.17. "<strong>Swiss Personal Data</strong>" means the Processing of Personal Data
+                                    by the Processor to which the FADP applies;
                                 </p>
                                 <p>
-                                    1.1.17. "Swiss Personal Data" means personal data to which the FADP was applicable
-                                    prior to its Processing by Processor;
-                                </p>
-                                <p>
-                                    1.1.18. "UK Personal Data" means the Processing of Personal Data by the Processor to
-                                    which the laws of the United Kingdom apply
+                                    1.1.18. "<strong>UK Personal Data</strong>" means the Processing of Personal Data by
+                                    the Processor to which the laws of the United Kingdom apply;
                                 </p>
                             </div>
                             <p>
@@ -1060,7 +1041,12 @@ function DpaGenerator() {
                                 </p>
                                 <p>
                                     2.1.3. instruct the Processor to process Company Personal Data to provide the
-                                    Services.
+                                    Services. The Company acknowledges that if AI Features are enabled as part of the
+                                    Services, such AI Features may use rely on AI functionality (based on OpenAI's model
+                                    or similar LLMs). Note that the Processor does not use any AI input or output data
+                                    (including Company Personal Data) to fine tune, train or develop its AI
+                                    functionality or models for its own purposes nor does the Company allow any third
+                                    parties (including its Subprocessors) to do this.
                                 </p>
                             </div>
                             <p>2.2. Processor shall:</p>
@@ -1245,11 +1231,12 @@ function DpaGenerator() {
                         </p>
                         <div className="pl-8 pb-2">
                             <p>
-                                9.1. Following a request from the Company, Processor shall promptly and in any event
-                                within 10 business days of the date of cessation of any Services involving the
-                                Processing of Company Personal Data, return or delete and procure the deletion of all
-                                copies of the Company Personal Data unless applicable laws require storage of such
-                                Company Personal Data.
+                                9.1. At the end of the Services, upon the Company's request, Processor shall securely
+                                return the Company Personal Data or provide a self-service functionality allowing
+                                Company to do the same or delete or procure the deletion of all copies of the Company
+                                Personal Data unless applicable laws require storage of such Company or is required to
+                                resolve a dispute between the parties or the retention of the Company Personal Data is
+                                necessary to combat harmful use of the Services.
                             </p>
                         </div>
 
@@ -1264,19 +1251,21 @@ function DpaGenerator() {
                             </p>
                             <p>
                                 10.2. <strong>Transfers.</strong> The Company acknowledges that the Processor will
-                                Process the Company Personal Data outside of the Protected Area including in the US to
-                                provide the Services.
+                                Process the Company Personal Data outside of the Protected Area including in the US and
+                                elsewhere as identified in Annex III to provide the Services. Company agrees to
+                                authorize the transfers to these countries.
                             </p>
                             <p>
                                 10.3. <strong>Data Privacy Framework.</strong> Processor confirms that it participates
-                                in the EU-US Data Privacy Framework and the UK Extension to this Framework (together,
-                                the "DPF"). The Supplier undertakes to maintain its self-certification to the DPF; to
-                                notify Company without undue delay if Processor determines that it will cease to
-                                self-certify to the DPF; and to notify Company immediately if Processor's participation
-                                in the DPF is otherwise terminated. [In respect of UK Personal Data, Company hereby
-                                notifies Processor that Company identifies and treats genetic data, data relating to
-                                sexual orientation, biometric data processed for the purpose of uniquely identifying
-                                data subjects and data relating to criminal convictions and offenses as sensitive].
+                                in the EU-US Data Privacy Framework, the UK Extension to this Framework and the
+                                Swiss-U.S. Data Privacy Framework (together, the "<strong>DPF</strong>"). The Supplier
+                                undertakes to maintain its self-certification to the DPF; to notify Company without
+                                undue delay if Processor determines that it will cease to self-certify to the DPF; and
+                                to notify Company immediately if Processor's participation in the DPF is otherwise
+                                terminated. In respect of UK Personal Data, Company hereby notifies Processor that
+                                Company identifies and treats genetic data, data relating to sexual orientation,
+                                biometric data processed for the purpose of uniquely identifying data subjects and data
+                                relating to criminal convictions and offenses as sensitive.
                             </p>
                             <p>
                                 10.4. <strong>Standard Contractual Clauses.</strong> Notwithstanding 10.3, the parties
@@ -1288,114 +1277,47 @@ function DpaGenerator() {
                                 Appendices to the UK Standard Contractual Clauses being as set out in Annex I and II of
                                 this Agreement
                             </p>
-                            <p className="pl-8 pb-2">
-                                In relation to the EU Standard Contractual Clauses, the Parties agree that:
-                            </p>
+                            <p>10.5. In relation to the EU Standard Contractual Clauses, the Parties agree that:</p>
                             <div className="pl-8 pb-2">
                                 <p>
-                                    10.4.1. for the purposes of clause 9, option 2 (general written authorization for
+                                    10.5.1. for the purposes of clause 9, option 2 (general written authorization for
                                     subprocessors) shall apply and the Parties agree that the time period for notifying
                                     changes to the list shall be in accordance with Clause 5.3 above;
                                 </p>
                                 <p>
-                                    10.4.2. for the purposes of clause 17, the clauses shall be governed by the laws of{' '}
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="jurisdiction"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {jurisdiction ? jurisdiction : '[JURISDICTION]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>
+                                    10.5.2. for the purposes of clause 17, the clauses shall be governed by the laws of
+                                    Ireland;
                                 </p>
                                 <p>
-                                    10.4.3. for the purposes of clause 18, the courts of{' '}
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="jurisdiction"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {jurisdiction ? jurisdiction : '[JURISDICTION]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>{' '}
-                                    shall have jurisdiction; and
+                                    10.5.3. for the purposes of clause 18, the courts of Ireland shall have
+                                    jurisdiction; and
                                 </p>
                                 <p>
-                                    10.4.4. for the purposes of clause 13 and Annex I.C, the{' '}
-                                    <Tooltip
-                                        content={() => (
-                                            <>
-                                                Fill out the form <span className="md:hidden">at the top</span>
-                                                <span className="hidden md:inline-block">to the left</span> populate
-                                                these fields
-                                            </>
-                                        )}
-                                        placement="top"
-                                        className="[&_button]:cursor-auto"
-                                    >
-                                        <span className="relative">
-                                            <button type="button">
-                                                <label
-                                                    htmlFor="supervisoryAuthority"
-                                                    className="bg-yellow/40 font-bold px-0.5 py-0.5"
-                                                >
-                                                    {supervisoryAuthority
-                                                        ? supervisoryAuthority
-                                                        : '[SUPERVISORY AUTHORITY]'}
-                                                </label>
-                                            </button>
-                                        </span>
-                                    </Tooltip>
+                                    10.5.4. for the purposes of clause 13 and Annex I.C, the competent supervisory
+                                    authority shall be determined in accordance with the GDPR, based on the data
+                                    exporter's establishment or representative within the EEA.
                                 </p>
                             </div>
                             <p>
-                                10.5. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
+                                10.6. In relation to the UK Standard Contractual Clauses, as permitted by clause 17 of
                                 such Addendum, the Parties agree to change the format of the information set out in Part
                                 1 of the Addendum so that:
                             </p>
                             <div className="pl-8 pb-2">
                                 <p>
-                                    10.5.1. the details of the parties in table 1 shall be as set out in Annex I (with
+                                    10.6.1. the details of the parties in table 1 shall be as set out in Annex I (with
                                     no requirement for signature);
                                 </p>
                                 <p>
-                                    10.5.2. for the purposes of table 2, the Addendum shall be appended to the EU
+                                    10.6.2. for the purposes of table 2, the Addendum shall be appended to the EU
                                     Standard Contractual Clauses as defined above (including the selection of modules
                                     and options and the disapplication of optional clauses as noted in the definition
                                     above); and
                                 </p>
-                                <p>10.5.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
+                                <p>10.6.3. the appendix information listed in table 3 is set out in Annex I and II.</p>
                             </div>
                             <p>
-                                10.6. In relation to Swiss Personal Data that is transferred outside of the Protected
+                                10.7. In relation to Swiss Personal Data that is transferred outside of the Protected
                                 Area, the Parties agree that such transfers shall be subject to the EU Standard
                                 Contractual Clauses as compiled and completed in Sections 10.2 and 10.3 above, with the
                                 following amendments: (a) any references to the GDPR shall be interpreted as references
@@ -1411,11 +1333,11 @@ function DpaGenerator() {
                                 Clauses as natural persons.
                             </p>
                             <p>
-                                10.7. In the event of any conflict between this Agreement and the Standard Contractual
+                                10.8. In the event of any conflict between this Agreement and the Standard Contractual
                                 Clauses, the Standard Contractual Clauses shall prevail.
                             </p>
                             <p>
-                                10.8. In the event that a relevant European Commission decision or other valid adequacy
+                                10.9. In the event that a relevant European Commission decision or other valid adequacy
                                 method under applicable Data Protection Legislation on which the Company has relied in
                                 authorising the data transfer is held to be invalid, or that any supervisory authority
                                 requires transfers of personal data made pursuant to such decision to be suspended, or
@@ -1430,10 +1352,10 @@ function DpaGenerator() {
                         <div className="pl-8 pb-2">
                             <p>
                                 11.1. <em>Confidentiality.</em> Each Party must keep this Agreement and information it
-                                receives about the other Party and its business in connection with this Agreement
-                                ("Confidential Information") confidential and must not use or disclose that Confidential
-                                Information without the prior written consent of the other Party except to the extent
-                                that:
+                                receives about the other Party and its business in connection with this Agreement ("
+                                <strong>Confidential Information</strong>") confidential and must not use or disclose
+                                that Confidential Information without the prior written consent of the other Party
+                                except to the extent that:
                             </p>
                             <div className="pl-8 pb-2">
                                 <p>11.1.1. disclosure is required by law;</p>
@@ -1447,7 +1369,7 @@ function DpaGenerator() {
                             </p>
                             <p>
                                 11.3. <em>Governing Law and Jurisdiction.</em> This Agreement is governed by the laws
-                                and choice of jurisdiction stipulated in the Agreement.
+                                and choice of jurisdiction stipulated in the Principal Agreement.
                             </p>
                         </div>
                         <p className="[page-break-before:always] print:pt-12">
@@ -1485,8 +1407,9 @@ function DpaGenerator() {
 
                         <p>
                             Product analytics, including insights, heatmaps, session recording and feature flags.
-                            Troubleshooting, benchmarking, product development and service improvement activities to
-                            ensure the continuing provision of the Services.
+                            Troubleshooting, benchmarking, product development, security activities, and service
+                            improvement activities to ensure the continuing provision of the Services. These Services
+                            may, if AI Features are enabled, use machine learning tools to support these purposes.
                         </p>
 
                         <p>
@@ -1575,12 +1498,10 @@ function DpaGenerator() {
                                         <span className="relative">
                                             <button type="button">
                                                 <label
-                                                    htmlFor="representativeEmail"
+                                                    htmlFor="yourName"
                                                     className="bg-yellow/40 font-bold px-0.5 py-0.5"
                                                 >
-                                                    {representativeEmail
-                                                        ? representativeEmail
-                                                        : '[REPRESENTATIVE EMAIL]'}
+                                                    {yourName ? yourName : '[REPRESENTATIVE NAME]'}
                                                 </label>
                                             </button>
                                         </span>
@@ -1591,9 +1512,7 @@ function DpaGenerator() {
                                     the signature of the data exporter and the date of signature shall be as signed
                                     above;
                                 </li>
-                                <li>
-                                    the role of the exporter is controller; and
-                                </li>
+                                <li>the role of the exporter is controller; and</li>
                                 <li>the activities relate to the provision of the Services.</li>
                             </ul>
                         </div>
@@ -1686,9 +1605,13 @@ function DpaGenerator() {
                         </p>
                         <p>
                             See{' '}
-                            <Link href="https://posthog.com/handbook/company/security">
+                            <a
+                                href="https://posthog.com/handbook/company/security"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
                                 https://posthog.com/handbook/company/security
-                            </Link>
+                            </a>
                         </p>
 
                         <p className="text-center mt-12 !mb-0 !pb-0 [page-break-before:always]">
@@ -1701,85 +1624,180 @@ function DpaGenerator() {
 
                     <div
                         className={`${mode === 'pretty' || mode === 'lawyer' ? 'block' : 'hidden'} ${
-                            mode === 'lawyer' && 'font-serif'
+                            mode === 'lawyer' && 'font-["Times_New_Roman",Times,serif]'
                         }`}
                     >
-                        <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm [&>div:nth-child(5n+6)]:border-t [&>div:nth-child(5n+6)]:border-light [&>div:nth-child(5n+6)]:pt-8 mb-8">
-                            {subprocessors.map((subprocessor, index) => (
-                                <React.Fragment key={index}>
-                                    <div className="col-span-3 @xl:!-mb-6">
-                                        <h3 className="!my-0 text-xl">
-                                            <strong>{subprocessor.name}</strong>
-                                        </h3>
-                                    </div>
-                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
-                                        <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
-                                        <div className="pt-2">
-                                            <strong>Details</strong>
-                                            <br />
-                                            <Link
-                                                href={subprocessor.details}
-                                                externalNoIcon
-                                                className="[word-break:break-word]"
-                                            >
-                                                {subprocessor.details}
-                                            </Link>
+                        <div className="grid @xl:grid-cols-[repeat(3,minmax(50px,1fr))] gap-x-8 @xl:gap-y-6 text-sm pb-8">
+                            <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">
+                                PostHog EU Cloud and PostHog US Cloud Subprocessor(s)
+                            </div>
+                            {subprocessors
+                                .filter((subprocessor) => subprocessor.type === 'cloud')
+                                .map((subprocessor, index) => (
+                                    <React.Fragment key={index}>
+                                        <div className="col-span-3 @xl:!-mb-6">
+                                            <h3 className="!my-0 text-xl">
+                                                <strong>{subprocessor.name}</strong>
+                                            </h3>
                                         </div>
-                                    </div>
-                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                        <div>
-                                            <strong className="block">Categories of data subject</strong>
-                                            <div>{subprocessor.categories}</div>
-                                        </div>
-                                        <div>
-                                            <strong className="block">Duration of the processing</strong>
-                                            <div>{subprocessor.duration}</div>
-                                        </div>
-                                        <div>
-                                            <strong className="block">Geographical location of the processing</strong>
-                                            <div>{subprocessor.location}</div>
-                                        </div>
-                                    </div>
-                                    <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
-                                        <div>
-                                            <div>
-                                                <strong>Subject matter of the processing</strong>
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
+                                            <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
+                                            <div className="pt-2">
+                                                <strong>Details</strong>
+                                                <br />
+                                                <a
+                                                    href={subprocessor.details}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="[word-break:break-word]"
+                                                >
+                                                    {subprocessor.details}
+                                                </a>
                                             </div>
-                                            <div>{subprocessor.subject}</div>
                                         </div>
-                                        <div>
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
                                             <div>
-                                                <strong>Nature and purpose of the processing</strong>
+                                                <strong className="block">Categories of data subject</strong>
+                                                <div>{subprocessor.categories}</div>
                                             </div>
-                                            <div>{subprocessor.reason}</div>
+                                            <div>
+                                                <strong className="block">Duration of the processing</strong>
+                                                <div>{subprocessor.duration}</div>
+                                            </div>
+                                            <div>
+                                                <strong className="block">
+                                                    Geographical location of the processing
+                                                </strong>
+                                                <div>{subprocessor.location}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
-                                        <strong className="block mb-2 text-base">
-                                            Type of personal data processed
-                                        </strong>
-                                        <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
-                                            {Object.entries(subprocessor.type).map(([typeName, typeValues]) => (
-                                                <React.Fragment key={typeName}>
-                                                    <div>
-                                                        <strong className="block pb-1">{typeName}</strong>
-                                                        <ul className="pl-4 !mb-1">
-                                                            {typeValues.map((typeValue, index) => (
-                                                                <li
-                                                                    key={index}
-                                                                    className="!mb-0 !leading-normal !text-sm"
-                                                                >
-                                                                    {typeValue}
-                                                                </li>
-                                                            ))}
-                                                        </ul>
-                                                    </div>
-                                                </React.Fragment>
-                                            ))}
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                            <div>
+                                                <div>
+                                                    <strong>Subject matter of the processing</strong>
+                                                </div>
+                                                <div>{subprocessor.subject}</div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <strong>Nature and purpose of the processing</strong>
+                                                </div>
+                                                <div>{subprocessor.reason}</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </React.Fragment>
-                            ))}
+                                        <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
+                                            <strong className="block mb-2 text-base">
+                                                Type of personal data processed
+                                            </strong>
+                                            <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
+                                                {Object.entries(subprocessor.dataTypes).map(
+                                                    ([typeName, typeValues]) => (
+                                                        <React.Fragment key={typeName}>
+                                                            <div>
+                                                                <strong className="block pb-1">{typeName}</strong>
+                                                                <ul className="pl-4 !mb-1">
+                                                                    {typeValues.map((typeValue, index) => (
+                                                                        <li
+                                                                            key={index}
+                                                                            className="!mb-0 !leading-normal !text-sm"
+                                                                        >
+                                                                            {typeValue}
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        </React.Fragment>
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                ))}
+                            <div className="col-span-3 bg-accent font-bold p-1 text-center mb-4">
+                                Only if AI features are enabled
+                            </div>
+                            {subprocessors
+                                .filter((subprocessor) => subprocessor.type === 'ai')
+                                .map((subprocessor, index) => (
+                                    <React.Fragment key={index}>
+                                        <div className="col-span-3 md:@xl:!-mb-6">
+                                            <h3 className="!my-0 text-xl">
+                                                <strong>{subprocessor.name}</strong>
+                                            </h3>
+                                        </div>
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-1">
+                                            <div dangerouslySetInnerHTML={{ __html: subprocessor.contact }} />
+                                            <div className="pt-2">
+                                                <strong>Details</strong>
+                                                <br />
+                                                <a
+                                                    href={subprocessor.details}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                    className="[word-break:break-word]"
+                                                >
+                                                    {subprocessor.details}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                            <div>
+                                                <strong className="block">Categories of data subject</strong>
+                                                <div>{subprocessor.categories}</div>
+                                            </div>
+                                            <div>
+                                                <strong className="block">Duration of the processing</strong>
+                                                <div>{subprocessor.duration}</div>
+                                            </div>
+                                            <div>
+                                                <strong className="block">
+                                                    Geographical location of the processing
+                                                </strong>
+                                                <div>{subprocessor.location}</div>
+                                            </div>
+                                        </div>
+                                        <div className="py-2 flex flex-col col-span-3 @xl:col-span-1 gap-3">
+                                            <div>
+                                                <div>
+                                                    <strong>Subject matter of the processing</strong>
+                                                </div>
+                                                <div>{subprocessor.subject}</div>
+                                            </div>
+                                            <div>
+                                                <div>
+                                                    <strong>Nature and purpose of the processing</strong>
+                                                </div>
+                                                <div>{subprocessor.reason}</div>
+                                            </div>
+                                        </div>
+                                        <div className="col-span-3 mt-2 @xl:-mt-4 mb-6 @xl:mb-2">
+                                            <strong className="block mb-2 text-base">
+                                                Type of personal data processed
+                                            </strong>
+                                            <div className="grid grid-cols-2 @2xl:grid-flow-col @2xl:auto-cols-fr border border-light rounded px-6 py-4 gap-x-4 gap-y-2 @xl:gap-y-4">
+                                                {Object.entries(subprocessor.dataTypes).map(
+                                                    ([typeName, typeValues]) => (
+                                                        <React.Fragment key={typeName}>
+                                                            <div>
+                                                                <strong className="block pb-1">{typeName}</strong>
+                                                                <ul className="pl-4 !mb-1">
+                                                                    {typeValues.map((typeValue, index) => (
+                                                                        <li
+                                                                            key={index}
+                                                                            className="!mb-0 !leading-normal !text-sm"
+                                                                        >
+                                                                            {typeValue}
+                                                                        </li>
+                                                                    ))}
+                                                                </ul>
+                                                            </div>
+                                                        </React.Fragment>
+                                                    )
+                                                )}
+                                            </div>
+                                        </div>
+                                    </React.Fragment>
+                                ))}
                         </div>
                     </div>
                 </div>
@@ -1787,7 +1805,6 @@ function DpaGenerator() {
 
             <section className="text-center mt-20 md:mt-40 mb-20 md:mb-24 print:hidden">
                 <h3>Need a custom MSA?</h3>
-
                 <TrackedCTA
                     event={{ name: `clicked Talk to a human` }}
                     href="/talk-to-a-human"

@@ -1,42 +1,24 @@
 ---
-title: New experimentation engine (beta)
+title: New experimentation engine
 ---
 
-> **Note**: We are keen to gather as much feedback as possible so if you try this out, please let us know. You can email [rodrigo@posthog.com](mailto:rodrigo@posthog.com), send feedback via the [in-app support panel](https://us.posthog.com/#panel=support%3Afeedback%3Aexperiments%3Alow%3Afalse), or use one of our other [support options](/docs/support-options).
-
-We're building a new experimentation engine to support more advanced features and improve the accuracy of experiment results.  Here are some of the key features it includes:
+We've built a new experimentation engine to support more advanced features and improve the accuracy of experiment results. Here are some of the key features it includes:
 
 * A single, consistent exposure criterion for the entire experiment
 * Support for outlier handling (Winsorization)
-* Exclusion of users exposed to multiple variants
+* Configurable handling of users exposed to multiple variants (exclude or use first seen variant)
 * Improved support for conversion windows and time-based metrics (formerly called trend metrics)
 * A better running time calculator that uses your historical data to estimate experiment duration
 
-The user interface has also been updated. You’ll now see a chart showing experiment exposures, as well as the total number of users in each variant. There's also a count of users who were exposed to more than one variant.
+The user interface has also been updated. You'll now see a chart showing experiment exposures, as well as the total number of users in each variant. There's also a count of users who were exposed to more than one variant.
 
+This is now the default engine for all new experiments.
 
 ---
 
-## How to enable the new experiment engine
+## Migrating to the new engine
 
-To enable the new experimentation engine:
-
-1. Click on your name in the lower-left corner of the [PostHog app](https://us.posthog.com/#panel=feature-previews) to open the menu.
-2. Select **"Feature previews"**.
-3. In the side panel that appears on the right, find **"New experimentation engine"** and toggle it on.
-
-<ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_11_at_13_40_00_96f6868c79.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_04_11_at_13_39_36_9cc58e437d.png"
-  classes="rounded"
-  alt="Screenshot of how to find feature previews"
-/>
-
-Once enabled, all new experiments you create will use the new engine. Existing experiments won’t be affected.
-
-If you'd like to migrate an existing experiment to the new engine, simply create a new experiment using the same feature flag, add your metrics, and launch it. After launching, you can adjust the start date to match your original experiment.
-
-To switch back to the old engine, just disable the feature preview. Any new experiments you create will then use the old engine, while those already created with the new engine will continue using it.
+If you'd like to migrate an old experiment to the new engine, simply create a new experiment using the same feature flag, add your metrics, and launch it. After launching, you can adjust the start date to match your original experiment.
 
 ---
 
@@ -61,17 +43,40 @@ The new running time calculator provides a more accurate estimate of how long yo
 
 ## Experiment exposure
 
-This defines which users should be included in the experiment analysis. By default, we use the `$feature_flag_called` event, which typically indicates that a user was exposed to the experiment (i.e., saw the part of your app or site where the experiment is running). Only users who meet this criterion are included in the analysis.
-
-At the top of the experiment view, you'll see the total number of unique users in each variant. Users who saw more than one variant are grouped under `$multiple` and excluded from the analysis.
-
-Metric events are only counted if they occur *after* a user's first exposure.
+By default, a user is considered **exposed** when we record the `$feature_flag_called` event — meaning they reached the part of your product where the experiment runs. Only those users are included in the analysis. If the default `$feature_flag_called` event is not suitable for you, you can specify a different exposure event. We will then use the event property `$feature/<flag-key>: <variant-key>` to determine which variant a user is in.
 
 <ProductScreenshot
-  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_light_ec214e48ed.png"
-  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_dark_32df91d9a6.png"
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_light_b59c7a8a47.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_dark_73e0a1ae87.png"
   classes="rounded"
-  alt="Screenshot of outlier handling"
+  alt="Screenshot of edit exposure criteria"
+/>
+
+The experiment view shows the unique-user count for each variant at the top.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_light_354254b3e7.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_dark_7c1c480e54.png"
+  classes="rounded"
+  alt="Screenshot of experiment exposures"
+/>
+
+**Note:** Metric events are only counted if they occur *after* a user's first exposure.
+
+### Users exposed to multiple variants
+
+Sometimes, users may have been exposed to more than one variant. To ensure robust experiment results, the default behavior is to exclude them from the analysis.
+If you still would like to include them, you can change this behavior under "Edit exposure criteria":
+
+* **Exclude** (default): Exclude users exposed to multiple variants. This ensures clean results by only analyzing users who had a single, consistent experience. Excluded users are grouped under `$multiple` in the exposure table.
+
+* **First seen variant**: Include the users and attribute all metric events to the first variant they encountered. Only choose this option if you know what you are doing.
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/multiple_variant_light_af25168c00.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/multiple_variant_dark_eb2a92c5ba.png"
+  classes="rounded"
+  alt="Screenshot of multiple variant handling"
 />
 
 ---
@@ -80,13 +85,13 @@ Metric events are only counted if they occur *after* a user's first exposure.
 
 ### Funnel
 
-This works similarly to [funnels in product analytics](/docs/product-analytics/funnels). Use it to measure conversion rates. Currently, we only show results for the final step of the funnel, but we’re working on supporting breakdowns by step soon.
+This works similarly to [funnels in product analytics](/docs/product-analytics/funnels). Use it to measure conversion rates. Currently, we only show results for the final step of the funnel, but we're working on supporting breakdowns by step soon.
 
-When you add a funnel metric, we insert a placeholder for the experiment exposure in the preview. That’s because using the actual exposure criteria as the first step would typically result in no data being shown. During evaluation, your chosen exposure event will serve as the actual first step. This means you can add funnels with just one step because exposure is implicitly treated as step one.
+When you add a funnel metric, we insert a placeholder for the experiment exposure in the preview. That's because using the actual exposure criteria as the first step would typically result in no data being shown. During evaluation, your chosen exposure event will serve as the actual first step. This means you can add funnels with just one step because exposure is implicitly treated as step one.
 
 ### Mean
 
-Use this to track metrics like total event count or summed values (e.g., revenue). Here’s how it works:
+Use this to track metrics like total event count or summed values (e.g., revenue). Here's how it works:
 
 1. We aggregate the chosen value for each user using your selected method (count, sum, or average).
 2. We then compute the *mean* of those values for each variant.
@@ -94,11 +99,11 @@ Use this to track metrics like total event count or summed values (e.g., revenue
 
 For example:
 - If you choose **sum of revenue**, we calculate total revenue per user, then take the mean across users.
-- If you select **average revenue** (not supported yet, but coming soon), we first compute each user’s average (total revenue / number of events), then average those values across users.
+- If you select **average revenue** (not supported yet, but coming soon), we first compute each user's average (total revenue / number of events), then average those values across users.
 
 ### Ratio
 
-Ratio metrics—such as average order value—are not yet supported, but they’re on the roadmap. These metrics allow you to divide one metric by a different, meaningful denominator. For example, instead of calculating average order value by dividing total revenue by the total number of users in the experiment (including those who didn’t place an order), you would divide by the number of users who actually made a purchase. This provides a more accurate view of performance per relevant event or user segment.
+Ratio metrics—such as average order value—are not yet supported, but they're on the roadmap. These metrics allow you to divide one metric by a different, meaningful denominator. For example, instead of calculating average order value by dividing total revenue by the total number of users in the experiment (including those who didn't place an order), you would divide by the number of users who actually made a purchase. This provides a more accurate view of performance per relevant event or user segment.
 
 ## Outlier handling
 
@@ -116,7 +121,7 @@ This technique is commonly known as **Winsorization** and is especially useful f
 
 ## Conversion windows
 
-Conversion windows restrict metric events to those that occur within a defined time window following a user’s initial exposure to the experiment. Metric events outside of the conversion window aren't included in experiment calculations.
+Conversion windows restrict metric events to those that occur within a defined time window following a user's initial exposure to the experiment. Metric events outside of the conversion window aren't included in experiment calculations.
 
 This ensures that only relevant, post-exposure behavior is included in the analysis.
 
@@ -126,13 +131,3 @@ This ensures that only relevant, post-exposure behavior is included in the analy
   classes="rounded"
   alt="Screenshot of conversion window configuration"
 />
-
----
-
-## What's not yet supported
-
-The new engine is still in beta, so some features in the old engine aren't supported yet.  We are working on fixing this and hope to ship them soon.
-
-* **Exploring results**: You can not yet easily explore and dive deeper into results in product analytics. You will have to manually create insights to do so.
-* **Funnel step breakdown**: We currently only display the conversion rate from first step (experiment exposure) to the last step of the funnel.
-* **Session recording links for funnels**: There is no direct links to session recordings for funnel metric results.

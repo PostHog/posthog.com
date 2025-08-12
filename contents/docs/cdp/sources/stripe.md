@@ -10,12 +10,24 @@ availability:
 
 The Stripe connector can link charges, customers, invoices, prices, products, subscriptions, and balance transactions to PostHog. 
 
-To link Stripe:
+## Creating a Stripe API key
 
-1. Go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) and the sources tab in PostHog
-2. Click **New source** and select Stripe
-3. Get your Account ID from your [Stripe user settings](https://dashboard.stripe.com/settings/user) under Accounts then ID
-4. Get a [restricted API key](https://dashboard.stripe.com/apikeys/create) that can read the resources you want to query
+You need a Stripe API key to create a connector. Head to your Stripe dashboard > **Developers** > **API keys**, under **Restricted keys**, click [+ Create a restricted key](https://dashboard.stripe.com/apikeys/create).
+
+You need to give your API key the following **Read** permissions:
+
+| Resource Type | Required Read Permissions                                |
+|--------------|--------------------------------------------------------|
+| Core         | Balance transaction sources, Charges, Customer, Product, Disputes, Payouts  |
+| Billing      | Invoice, Price, Subscription, Credit notes                            |
+| Connected    | All resources                                           |
+
+## Adding a data source 
+
+1. In PostHog, go to the [Data pipeline page](https://us.posthog.com/pipeline/sources) select the **Sources** tab.
+2. Click **+ New source** button and select Stripe by clicking the **Link** button.
+3. In Stripe, get your Account ID by going to **Settings** > **Business**, selecting the [Account details](https://dashboard.stripe.com/settings/account) tab, and clicking your **Account ID** or pressing `⌘` + `I` to copy your ID.
+4. Get a your API key from the [previous section](#creating-a-stripe-api-key)
 4. *Optional:* Add a prefix to your table names
 6. Click **Next**
 

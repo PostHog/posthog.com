@@ -52,6 +52,10 @@ export const quickLinks: QuickLinks = [
         to: '/docs/libraries/google-tag-manager',
     },
     {
+        name: 'Hono',
+        to: '/docs/libraries/hono',
+    },
+    {
         name: 'Laravel',
         to: '/docs/libraries/laravel',
     },
@@ -86,10 +90,6 @@ export const quickLinks: QuickLinks = [
     {
         name: 'Segment',
         to: '/docs/libraries/segment',
-    },
-    {
-        name: 'Sentry',
-        to: '/docs/libraries/sentry',
     },
     {
         name: 'Slack',

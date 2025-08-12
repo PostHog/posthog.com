@@ -368,7 +368,7 @@ export default function SalesforceForm({
 
     const handleSubmit = async (values) => {
         const distinctId = posthog?.get_distinct_id?.()
-        posthog?.identify?.(distinctId, {
+        posthog?.setPersonProperties?.({
             email: values.email,
         })
         await fetch(`/api/contact-event`, {
@@ -420,7 +420,7 @@ export default function SalesforceForm({
                     )}
                     onSubmit={handleSubmit}
                 >
-                    <Form className={formOptions?.className}>
+                    <Form className={formOptions?.className} id="contact-sales" data-default-form-id="509041">
                         <div className="grid divide-y divide-border border border-border dark:divide-border-dark dark:border-dark">
                             {form.fields.map(({ name, label, type, required, options, fieldType, cols }, index) => {
                                 if (customFields && customFields[name])
@@ -439,6 +439,7 @@ export default function SalesforceForm({
                                 if (type === 'enumeration')
                                     return (
                                         <RadioGroup
+                                            key={`${name}-${index}`}
                                             type={fieldType}
                                             options={options}
                                             name={name}

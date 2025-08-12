@@ -70,7 +70,8 @@ export default function AskMax({
                                     Questions? <span className="text-red dark:text-yellow">Ask Max AI.</span>
                                 </h3>
                                 <p className="text-[15px] mb-0 opacity-75 text-balance">
-                                    It's easier than reading through <strong>{totalDocsCount} docs articles</strong>.
+                                    It's easier than reading through{' '}
+                                    <strong>{totalDocsCount} pages of documentation</strong>
                                 </p>
                             </div>
                         </div>
@@ -79,9 +80,10 @@ export default function AskMax({
                                 type="secondary"
                                 size="md"
                                 className="group [&>span]:flex [&>span]:items-center [&>span]:gap-1.5 [&>span]:px-3"
+                                childClassName="whitespace-nowrap"
                                 onClick={handleChatOpen}
                             >
-                                Chat with Max AI
+                                Chat with Max
                                 <IconSidebarOpen className="size-6 inline-block opacity-75 group-hover:opacity-100" />
                             </CallToAction>
                         </div>

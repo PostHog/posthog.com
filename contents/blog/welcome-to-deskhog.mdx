@@ -1,0 +1,79 @@
+---
+title: "DeskHog is here"
+date: 2025-07-21
+author:
+  - danilo-campos
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/deskhog_2888c77766.jpg
+featuredImageType: full
+featuredVideo: https://www.youtube-nocookie.com/embed/lqeD2vvAA4w
+tags:
+    - Hardware
+---
+
+I want you to fall in love with hardware.
+
+I love this job because the incentives are awesome: PostHog wins when you build things. The more successful you are as a technical creator, the more we get to grow.
+
+...assuming you still like us when you pick your next project.
+
+Because this is true, I’ve been able to convince whole teams to support me in doing something ridiculous: shipping you some hardware.
+
+That hardware is [DeskHog](/deskhog), and I can’t wait for you to play with our new developer toy.
+
+## Software, ironically, is the hard bit
+
+DeskHog packages an off-the-shelf, open source board: [Adafruit’s ESP32-S3 Reverse TFT Feather](https://www.adafruit.com/product/5691). Like all of Adafruit’s line, this board is great: it’s got a screen built in, it’s got some buttons, and built-in battery management. The issue for most builders though is that it doesn't have anything else: no apps, no firmware. So, we built one!
+
+But man, putting it to use is hard. The internet is packed with code that will demonstrate one feature or another of an ESP32. Actually getting these features working *together* is a whole other problem.
+
+Compounding this issue, the ESP32-S3 is much more resource-constrained than most developers are used to. You have to plan carefully, or risk crashing the board altogether.
+
+So we've been building a custom firmware for DeskHog and it's pretty solid. It provides:
+
+- Built-in wifi setup
+- A web portal for configuration
+- A custom UI built on paginated cards, with button handling
+- Graphics via the *vast* LVGL project
+- Networking examples
+- Stability despite all these tasks running simultaneously
+
+## Your bug is your bug
+
+That last detail is essential. There’s so much going on in microcontroller land. It would be easy to drown as a newbie.
+
+That was me a couple years back.
+
+So we’ve done the homework. An ESP32-S3 has two cores: tasks are divided between them, with networking on one, and the user-facing application running on the other. It’s easy to trip yourself on the classic horrors of concurrency this way and crash the board. DeskHog’s solution: an event queue that can safely pass messages between tasks without mangling memory.
+
+I’ve had a DeskHog sitting on my desk running for days on end without drama.
+
+Which means if you write some new code for DeskHog, you know any crash that shows up is a result of your new code, not some obscure detail lurking in a system you barely understand.
+
+## Built for agent development
+
+You know what sticks in my craw about example microcontroller code?
+
+At its worst, it’s just thousands of lines of code in one file. I cannot work like that. I need tidy encapsulation, separation of concerns – and because it *is C++* – an object-oriented approach to building new features.
+
+If you like that sort of thing, you’ll feel right at home in the DeskHog project. You’ll find folders to organize network code, UI code, network clients and parsers… it’s all laid out the way you’d expect from building a modern application.
+
+Maybe you don’t care about any of that, and you just think hardware is neat. We’ve got you covered there, too.
+
+The whole project is built for agent-based LLM coding. The individual class interfaces are heavily commented, and the project has robust documentation specifically geared for you to stuff into an agent’s context. New to agent development? Joe even [has a great tutorial](/tutorials/deskhog-claude-tutorial) to get you started.
+
+We even tested DeskHog by putting it in the hands of five non-technical team members at our most recent hackathon. Most had never used tools like Claude and Cursor before, but within 48 hours they were building games and tools for it – a handful of these are even included in the project now!
+
+But agent coding is not just for newbies. The first versions of the DeskHog firmware never would have gotten off the ground without agent development. Until our waitlist filled with requests for kits, this was just me goofing around on Friday afternoons.
+
+So I’m convinced experienced developers will have a great time with this too. We’ve done the hard and tedious parts for you, and we’ve teed up your favorite code robot to do a great job.
+
+## So try it out
+
+We’ve given you some stuff out of the box, but the real draw here is that you’ve got a tiny computer whose only rules are a tiny memory ceiling.
+
+Seriously, it’s like 500 KB.
+
+But I think you’ll have a great time. Explore the vast universe of both Arduino libraries and [I2C hardware](https://www.adafruit.com/category/620). Throw out our code and write some CircuitPython. Make a gnarly new case.
+
+I think microcontrollers are some of the most fun you can have writing software. If you’ve got $35, you can find out for yourself.

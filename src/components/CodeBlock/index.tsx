@@ -18,6 +18,7 @@ type LanguageOption = {
     language: string
     file?: string
     code: string
+    focusOnLines?: string
 }
 
 type CodeBlockProps = {
@@ -26,6 +27,8 @@ type CodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
+    focusOnLines?: string
+    tooltips?: { lineNumber: number; content: string }[]
 
     onChange?: (language: LanguageOption) => void
     currentLanguage: LanguageOption
@@ -38,7 +41,6 @@ type SingleCodeBlockProps = {
     showLabel?: boolean
     showLineNumbers?: boolean
     showCopy?: boolean
-
     language: string
     children: string
 }
@@ -57,6 +59,7 @@ type MetaStringProps = {
     showLineNumbers?: boolean
     label?: string
     unavailable?: boolean
+    focusOnLines?: string
 }
 
 type MdxCodeBlockChildren = {
@@ -89,6 +92,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
                 label,
                 file,
                 children,
+                focusOnLines,
             } = child.props.mdxType === 'code' ? child.props : child.props.children.props
 
             const matches = className.match(/language-(?<lang>.*)/)
@@ -99,6 +103,7 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
                 language: language.toLowerCase(),
                 file,
                 code: children as string,
+                focusOnLines,
             }
         })
 
@@ -108,7 +113,6 @@ export const MdxCodeBlock = ({ children, ...props }: MdxCodeBlock) => {
     }
 
     const [currentLanguage, setCurrentLanguage] = React.useState<LanguageOption>(languages[0])
-
     return (
         <CodeBlock currentLanguage={currentLanguage} onChange={setCurrentLanguage} {...props}>
             {languages}
@@ -130,9 +134,22 @@ export const SingleCodeBlock = ({ label, language, children, ...props }: SingleC
 }
 
 const tooltipKey = '// TIP:'
+const highlightKey = '// HIGHLIGHT'
+const diffAddKey = '// +'
+const diffRemoveKey = '// -'
 
 const removeQuotes = (str?: string | null): string | null | undefined => {
     return str?.replace(/['"]/g, '')
+}
+
+const getLinesToShow = (lines: string) => {
+    const lineBounds = lines.split('-').map((line, _) => {
+        return parseInt(line.trim())
+    })
+
+    const [start, end] = lineBounds
+    const lineNumbers = Array.from({ length: end - start + 1 }, (_, i) => start + i)
+    return lineNumbers
 }
 
 export const CodeBlock = ({
@@ -165,6 +182,9 @@ export const CodeBlock = ({
 
     const { websiteTheme } = useValues(layoutLogic)
 
+    const [expanded, setExpanded] = React.useState(false)
+    const linesToShow = currentLanguage.focusOnLines ? getLinesToShow(currentLanguage.focusOnLines) : []
+
     React.useEffect(() => {
         // Browser check - no cookies on the server
         if (document) {
@@ -187,16 +207,47 @@ export const CodeBlock = ({
             .replace(/<ph_app_host>/g, removeQuotes(appHost) || '<ph_app_host>')
             .replace(/<ph_client_api_host>/g, removeQuotes(clientApiHost) || 'https://us.i.posthog.com')
             .replace(/<ph_region>/g, removeQuotes(region) || '<ph_region>')
+            .replace(/<ph_posthog_js_defaults>/g, '2025-05-24')
+            .replace(
+                /<ph_proxy_path>/g,
+                projectToken ? `relay-${removeQuotes(projectToken)?.slice(-4)}` : '<ph_proxy_path>'
+            )
     }
 
     const copyToClipboard = () => {
-        navigator.clipboard.writeText(replaceProjectInfo(currentLanguage.code.replace(tooltipKey, '//').trim()))
+        navigator.clipboard.writeText(
+            replaceProjectInfo(
+                currentLanguage.code
+                    .replace(tooltipKey, '//')
+                    .replace(highlightKey, '')
+                    .replace(diffAddKey, '')
+                    .replace(diffRemoveKey, '')
+                    .trim()
+            )
+        )
 
         setTooltipVisible(true)
         setTimeout(() => {
             setTooltipVisible(false)
         }, 1000)
     }
+
+    const highlightLineNumbers: number[] = []
+    const diffAddLineNumbers: number[] = []
+    const diffRemoveLineNumbers: number[] = []
+
+    const codeLines = currentLanguage.code.split('\n')
+    codeLines.forEach((line, index) => {
+        if (line.includes(highlightKey)) {
+            highlightLineNumbers.push(index)
+        }
+        if (line.includes(diffAddKey)) {
+            diffAddLineNumbers.push(index)
+        }
+        if (line.includes(diffRemoveKey)) {
+            diffRemoveLineNumbers.push(index)
+        }
+    })
 
     return (
         <div className="code-block relative mt-2 mb-4 border border-light dark:border-dark rounded">
@@ -332,28 +383,66 @@ export const CodeBlock = ({
                             showLabel ? 'border-t' : ''
                         }`}
                     >
-                        <div className="flex whitespace-pre-wrap relative" id={codeBlockId}>
+                        <div className="flex whitespace-pre min-w-fit relative" id={codeBlockId}>
                             {showLineNumbers && (
                                 <pre className="m-0 py-4 pr-3 pl-5 inline-block font-code font-medium text-sm bg-accent dark:bg-accent-dark">
                                     <span
                                         className="select-none flex flex-col dark:text-white/60 text-black/60 shrink-0"
                                         aria-hidden="true"
                                     >
+                                        {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
+                                            <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">
+                                                <button
+                                                    onClick={() => setExpanded(!expanded)}
+                                                    className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                >
+                                                    ...
+                                                </button>
+                                            </div>
+                                        )}
                                         {tokens.map((_, i) => {
-                                            return (
-                                                <span className="inline-block text-right align-middle" key={i}>
-                                                    <span>{i + lineNumberStart}</span>
-                                                </span>
-                                            )
+                                            if (!linesToShow.length || linesToShow.includes(i) || expanded) {
+                                                return (
+                                                    <span className={`inline-block text-right align-middle`} key={i}>
+                                                        <span>{i + lineNumberStart}</span>
+                                                    </span>
+                                                )
+                                            }
+                                            return
                                         })}
+                                        {!expanded &&
+                                            linesToShow.length > 0 &&
+                                            linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
+                                                <div className="flex border-t border-dashed border-light dark:border-dark w-full mt-2 -mb-2">
+                                                    <button
+                                                        onClick={() => setExpanded(!expanded)}
+                                                        className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                                    >
+                                                        ...
+                                                    </button>
+                                                </div>
+                                            )}
                                     </span>
                                 </pre>
                             )}
 
                             <code
-                                className={`${className} block rounded-none !m-0 p-4 shrink-0 font-code font-medium text-sm article-content-ignore`}
+                                className={`${className} block rounded-none !m-0 p-4 shrink-0 flex-1 font-code font-medium text-sm article-content-ignore`}
                             >
+                                {!expanded && linesToShow.length > 0 && linesToShow[0] >= 0 && (
+                                    <div className="flex border-b border-dashed border-light dark:border-dark w-full mb-2 -mt-2">
+                                        <button
+                                            onClick={() => setExpanded(!expanded)}
+                                            className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                        >
+                                            Show full example
+                                        </button>
+                                    </div>
+                                )}
                                 {tokens.map((line, i) => {
+                                    if (linesToShow.length > 0 && !linesToShow.includes(i) && !expanded) {
+                                        return
+                                    }
                                     const { className, ...props } = getLineProps({ line, key: i })
                                     const tooltipContent =
                                         tooltips?.find((tooltip) => tooltip.lineNumber === i + lineNumberStart)
@@ -361,9 +450,29 @@ export const CodeBlock = ({
                                         line
                                             .find((token) => token.content.startsWith(tooltipKey))
                                             ?.content.replace(tooltipKey, '')
+                                    line.forEach((token) => {
+                                        if (token.content.includes(highlightKey)) {
+                                            token.content = token.content.replace(highlightKey, '')
+                                        }
+                                        if (token.content.includes(diffAddKey)) {
+                                            token.content = token.content.replace(diffAddKey, '')
+                                        }
+                                        if (token.content.includes(diffRemoveKey)) {
+                                            token.content = token.content.replace(diffRemoveKey, '')
+                                        }
+                                    })
+
                                     const firstContentIndex = line.findIndex((token) => !!token.content.trim())
                                     return (
-                                        <div key={i} className={`${className} relative`} {...props}>
+                                        <div
+                                            key={i}
+                                            className={`${className} relative
+                                        ${highlightLineNumbers.includes(i) ? 'bg-yellow/10' : ''}
+                                        ${diffAddLineNumbers.includes(i) ? 'bg-green/10' : ''}
+                                        ${diffRemoveLineNumbers.includes(i) ? 'bg-red/10' : ''}
+                                        `}
+                                            {...props}
+                                        >
                                             {line
                                                 .filter((token) => !token.content.startsWith(tooltipKey))
                                                 .map((token, key) => {
@@ -388,7 +497,7 @@ export const CodeBlock = ({
                                                                 </Tooltip>
                                                             )}
                                                             <span
-                                                                className={`${className} text-shadow-none`}
+                                                                className={`${className} text-shadow-none `}
                                                                 {...props}
                                                             >
                                                                 {children}
@@ -399,6 +508,18 @@ export const CodeBlock = ({
                                         </div>
                                     )
                                 })}
+                                {!expanded &&
+                                    linesToShow.length > 0 &&
+                                    linesToShow[linesToShow.length - 1] <= tokens.length - 1 && (
+                                        <div className="flex border-t border-dashed border-light dark:border-dark w-full mt-2 -mb-2">
+                                            <button
+                                                onClick={() => setExpanded(!expanded)}
+                                                className="text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 dark:hover:text-primary-dark/75 px-2 py-1 text-sm flex items-center gap-1 hover:scale-[1.01] hover:top-[-.5px] active:top-[.5px] active:scale-[.99] font-semibold"
+                                            >
+                                                Show full example
+                                            </button>
+                                        </div>
+                                    )}
                             </code>
                         </div>
                     </pre>

@@ -5,7 +5,7 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Map from './Map'
 
 const avatarStyles = [
-    { color: '#DCB1E3', className: 'right-[-30.5rem] top-[-2.5rem]', size: 'lg' },
+    { color: '#DCB1E3', className: 'right-[-30rem] top-[-2.5rem]', size: 'lg' },
     { color: '#FDEDC9', className: 'right-[-26rem] top-[-12rem]', size: 'md' },
     { color: '#E19D9D', className: 'right-[-14.5rem] bottom-[-16rem]', size: 'xl' },
     { color: '#A2B0D4', className: 'right-[-14rem] top-[-22.5rem]', size: 'lg' },

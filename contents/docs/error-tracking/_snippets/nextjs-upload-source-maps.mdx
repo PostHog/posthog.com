@@ -1,0 +1,43 @@
+We provide a helper package that will hook into the Next.js build process and upload sourcemaps for your client and server code. This process is enabled by default for production builds but you can disable it by setting `enabled` to `false` in the `sourcemaps` object.
+
+#### 1. Install package
+
+```shell
+npm install @posthog/nextjs-config
+```
+
+#### 2. Update your next config
+
+```js file=next.config.js
+
+import { withPostHogConfig } from "@posthog/nextjs-config";
+
+const nextConfig = {
+  //...your nextjs config,
+};
+
+export default withPostHogConfig(nextConfig, {
+  personalApiKey: process.env.POSTHOG_API_KEY, // Personal API Key
+  envId: process.env.POSTHOG_ENV_ID, // Environment ID
+  host: process.env.NEXT_PUBLIC_POSTHOG_HOST, // (optional), defaults to https://us.posthog.com
+  sourcemaps: { // (optional)
+      enabled: true, // (optional) Enable sourcemaps generation and upload, default to true on production builds
+      project: "my-application", // (optional) Project name, defaults to repository name
+      version: "1.0.0", // (optional) Release version, defaults to current git commit
+      deleteAfterUpload: true, // (optional) Delete sourcemaps after upload, defaults to true
+  },
+});
+
+```
+
+Where you should set the following environment variables:
+
+| Environment Variable | Description |
+| --- | --- |
+| `POSTHOG_API_KEY` | [Personal API key](https://app.posthog.com/settings/user-api-keys#variables) with at least `write` access on `error tracking` |
+| `POSTHOG_ENV_ID` | Project ID you can find in your [project settings](https://app.posthog.com/settings/environment#variables) |
+| `NEXT_PUBLIC_POSTHOG_HOST` | Your PostHog instance URL. Defaults to `https://us.posthog.com` |
+
+### That's it!
+
+Now when you build your application with `next build`, your sourcemaps are uploaded to PostHog and you will be able to see the unminified code your error originated from in your dashboard. This step is disabled by default with `next dev`.

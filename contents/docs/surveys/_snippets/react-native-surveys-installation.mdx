@@ -2,7 +2,7 @@
 
 > 🚧 **Note:** Mobile surveys for React Native for is currently in **beta**. We'd love to hear your feedback on betas via the [in-app support panel](https://us.posthog.com#panel=support%3Afeedback%3Asurveys%3Alow) or one of our other [support options](/docs/support-options).
 
-Using surveys requires PostHog's React Native SDK version >= [3.12.0](https://github.com/PostHog/posthog-js-lite/releases). It's recommended to always use the latest version.
+Using surveys requires PostHog's React Native SDK version >= [3.12.0](https://github.com/PostHog/posthog-js/releases). It's recommended to always use the latest version.
 
 import ReactNativeInstall from "../../integrate/_snippets/install-react-native.mdx"
 
@@ -56,6 +56,7 @@ You can also pass your `client` instance to the `PostHogSurveyProvider`.
 | PostHog branding                  | ❌                                 |
 | Delay popup after screen view     | ❌                                 |
 | Position config                   | ❌ Always bottom center            |
+| HTML content                      | ❌                                 |
 | **Display conditions**            |                                    |
 | Feature flag & property targeting | ✅                                 |
 | Screen targeting                  | ❌                                 |
@@ -64,3 +65,13 @@ You can also pass your `client` instance to the `PostHogSurveyProvider`.
 | Survey wait period                | ❌                                 |
 | Event triggers                    | ✅                                 |
 | Action triggers                   | ❌                                 |
+| Partial responses                 | ❌                                 |
+
+## Troubleshooting
+
+- Update your SDK.
+- Run a clean build if you experience issues.
+- For surveys not shown, be sure to set up the [surveys provider](/docs/surveys/installation#step-three-add-the-surveys-provider).
+- If you have enabled surveys using feature flags, the flags are evaluated on the device once the PostHog SDK starts as early as possible. The SDK might be using the cached flags from the previous SDK start. If you have changed the flag or its condition, kill and reopen the app to force a new SDK start at least once.
+    - This will also happen in production, and you might experience some delay for the new flag/conditions to take effect on your users.
+    - Survey feature flag evaluation does not capture `$feature_flag_called` events, so the `Usage` tab on the feature flag page won't show anything.

@@ -53,6 +53,16 @@ Depending on your compliance needs you can either:
 
 **NOTE**: This list should be enough at the time of writing. As the PostHog application changes rapidly, it is possible that other directives may be needed over time for loading the Toolbar. If you experience issues after implementing one of the above solutions, you can typically debug in the browser tools which part of the CSP is blocking requests.
 
+### Enabling heatmaps
+
+You will need the following CSP to allow heatmaps to render your site in an iframe of ours:
+
+```html
+<meta http-equiv="Content-Security-Policy" content="
+  frame-ancestors 'self' https://*.posthog.com;
+">
+```
+
 ## Supporting nonce directives
 
 You may choose to use a `nonce` in your CSP in order to ensure every script/style loaded has the matching `nonce` for the current page load. This can be done via two config options in `posthog-js` like so:

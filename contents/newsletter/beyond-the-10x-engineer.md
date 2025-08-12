@@ -36,7 +36,7 @@ Doing all this means engineers need all the skills to take a product from zero t
 
 We don’t have product management or design by default, so they need these skills to remain autonomous.
 
-[Robbie Coomber](/community/profiles/1187), for example, is a one-person team working on [web analytics](/docs/web-analytics). The [first version](https://github.com/PostHog/posthog/pull/17626) in production was very simple:
+[Robbie Coomber](/robbie), for example, is a one-person team working on [web analytics](/docs/web-analytics). The [first version](https://github.com/PostHog/posthog/pull/17626) in production was very simple:
 
 ![early version](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/early-web-analytics.png)
 
@@ -61,7 +61,7 @@ Good writing is vital for all the above. It demonstrates clear thinking and enab
 
 [Team Pipeline](/handbook/small-teams/pipeline), for example, has been investigating how to efficiently split events between person IDs and adding overrides to resolve data quality issues. This requires gathering feedback on the design of storage, write path, read path, backfill, and more.
 
-To do this async with multiple teams involved, [Ted](/community/profiles/1421) wrote two 1,500+ word RFCs, which the team followed up with 2,000+ words of comments. Few decisions are as complex as this, but it’s a textbook example of why we look for people who can write.
+To do this async with multiple teams involved, [Ted](/ted) wrote two 1,500+ word RFCs, which the team followed up with 2,000+ words of comments. Few decisions are as complex as this, but it’s a textbook example of why we look for people who can write.
 
 > **What to look for:** People who communicate well throughout the hiring process, have a blog, or come from a writing-heavy culture.
 
@@ -92,7 +92,7 @@ To uncover the real problems users have (and value), [product engineers](/blog/w
 - Recruiting testers for new features and collecting feedback.
 - Doing support and responding to incidents.
 
-For example, [Eric](/community/profiles/115) is building our [data warehouse](/docs/data-warehouse). His goal, instead of features built or usage, is 5 reference customers. To make this happen, he has been finding potential users and shaping the product to their requirements. His choice of early connectors (Stripe, Hubspot, and Postgres) was driven by a [survey](/surveys) he ran.
+For example, [Eric](/eric) is building our [data warehouse](/docs/data-warehouse). His goal, instead of features built or usage, is 5 reference customers. To make this happen, he has been finding potential users and shaping the product to their requirements. His choice of early connectors (Stripe, Hubspot, and Postgres) was driven by a [survey](/surveys) he ran.
 
 ![survey results](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/newsletter/beyond-10x-engineer/survey-results.png)
 
@@ -111,7 +111,7 @@ Our teams have a lot of autonomy. They decide on their roadmap, goals, and imple
 - Choosing the right metrics to [measure the success of new features](https://newsletter.posthog.com/p/how-to-build-new-features-users-love).
 - Understanding the infrastructure requirements and scalability.
 
-To guide the [development of mobile replay](/blog/mobile-session-replay), [Manoel](/community/profiles/1166) researched competitors and feedback about them. He and [Paul](/community/profiles/69) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
+To guide the [development of mobile replay](/blog/mobile-session-replay), [Manoel](/manoel) researched competitors and feedback about them. He and [Paul](/paul) also developed a spec for mobile replay that included details about the client lifecycle, API request, data structure, and compatibility with [rrweb](https://github.com/rrweb-io/rrweb). This research and planning helps them build a feature that makes business sense while also being scalable and maintainable.
 
 The ability to see the bigger picture enables us to make better long-term decisions. If we’re too tunnel-visioned, we can miss opportunities or build things that break in the long run.
 

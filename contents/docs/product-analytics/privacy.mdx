@@ -8,7 +8,7 @@ PostHog offers a range of controls to limit what data is captured by product ana
 
 PostHog offers hosting on EU cloud. To use this, sign up at [eu.posthog.com](https://eu.posthog.com).
 
-If you've already created a US cloud instance and wish to migrate ticket, you must raise a [support ticket in-app](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic for the PostHog team to do this migration for you. This option is **only available to customers on the team or enterprise plan** as it requires significant engineering time.  
+If you've already created a US cloud instance and wish to migrate ticket, you must raise a [support ticket in-app](https://us.posthog.com/home#supportModal) with the **Data pipelines** topic for the PostHog team to do this migration for you. This option is **only available to customers on the boost, scale or enterprise** as it requires significant engineering time.  
 
 ## Disable sensitive information with autocapture
 
@@ -27,9 +27,10 @@ You can sanitize properties on the client side by setting the `before_send` [con
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     before_send: function(event) {
-        if (event.properties['$ip']) {
-            event.properties['$ip'] = null;
+        if (event.properties['$current_url']) {
+            event.properties['$current_url'] = null;
         }
 
         return event;
@@ -53,99 +54,24 @@ You can completely opt-out users from data capture. To do this, there are two op
 
 1. Opt users out by default in your PostHog initialization config.
 
-<MultiLanguage>
+import OptOutDefault from './_snippets/multilanguage/opt-out-default.mdx'
 
-```js-web
-posthog.init('<ph_project_api_key>', {
-    opt_out_capturing_by_default: true,
-});
-```
-
-```ios_swift        
-let config = PostHogConfig(apiKey: <ph_project_api_key>, host: <ph_client_api_host>)
-config.optOut = true
-PostHogSDK.shared.setup(config)
-```
-
-```android
-val config = PostHogAndroidConfig(
-    apiKey = <ph_project_api_key>,
-    host = <ph_client_api_host> 
-)
-config.optOut = true
-PostHogAndroid.setup(this, config)
-```
-
-```react-native
-posthog.init('<ph_project_api_key>', {
-    opt_out_capturing_by_default: true,
-});
-```
-
-</MultiLanguage>
+<OptOutDefault />
 
 2. Opt users out on a per-person basis.
 
-<MultiLanguage>
+import OptOutPerPerson from './_snippets/multilanguage/opt-out-per-person.mdx'
 
-```js-web
-posthog.opt_out_capturing()
-```
-
-```ios_swift        
-PostHogSDK.shared.optOut()
-```
-
-```android
-PostHog.optOut()
-```
-
-```react-native
-posthog.opt_out_capturing()
-```
-
-</MultiLanguage>
+<OptOutPerPerson />
 
 Similarly, you can opt users in:
 
-<MultiLanguage>
+import OptIn from './_snippets/multilanguage/opt-in.mdx'
 
-```js-web
-posthog.opt_in_capturing()
-```
-
-```ios_swift        
-PostHogSDK.shared.optIn()
-```
-
-```android
-PostHog.optIn()
-```
-
-```react-native
-posthog.opt_in_capturing()
-```
-
-</MultiLanguage>
+<OptIn />
 
 To check if a user is opted out:
 
-<MultiLanguage>
+import CheckOptOut from './_snippets/multilanguage/check-opt-out.mdx'
 
-```js-web
-posthog.has_opted_out_capturing()
-```
-
-```ios_swift        
-PostHogSDK.shared.isOptOut()
-```
-
-```android
-PostHog.isOptOut()
-```
-
-```react-native
-posthog.has_opted_out_capturing()
-```
-
-</MultiLanguage>
+<CheckOptOut />

@@ -21,6 +21,6 @@ PostHog.identify(
 )
 ```
 
-You should call `identify` as soon as you're able to. Typically, this is every time your app loads for the first time as well as directly after your user logs in. This ensures that events sent during your user's sessions are correctly associated with them.
+You should call `identify` as soon as you're able to. Typically, this is after your user logs in. This ensures that events sent during your user's sessions are correctly associated with them.
 
 When you call `identify`, all previously tracked anonymous events will be linked to the user.

@@ -197,7 +197,7 @@ As a result, the linked issue has the following gem, as well as an in-depth disc
 
 ## PostHog News
 
-Charles joined our ops team to fix anything and everything that has ever been broken at PostHog. Akin to a mythical creature, he puts out fires on our ops roadmap, handles our Fax division, and even submits pull requests (see: [everyone codes](/handbook/company/values#everyone-codes)).
+Charles joined our ops team to fix anything and everything that has ever been broken at PostHog. Akin to a mythical creature, he puts out fires on our ops roadmap, handles our Fax division, and even submits pull requests.
 
 Even more importantly, pineapples are 404 on Charles' pizzas, making him an illustrious member of the "common sense" group of the PostHog core team. The number of people who appreciate a good pizza has now decidedly surpassed the number of Estonians in the company (3-2).
 

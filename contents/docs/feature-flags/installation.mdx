@@ -15,7 +15,7 @@ Feature flags also help you control access to certain parts of your product, suc
 To start using feature flags, you first need to install PostHog (if you haven't already):
 
 import Tab from "components/Tab"
-import Frameworks from "../integrate/\_snippets/frameworks.mdx"
+import Frameworks from "../integrate/_snippets/frameworks.mdx"
 import APIInstall from '../integrate/_snippets/install-api.mdx'
 import WebInstall from '../integrate/_snippets/install-web.mdx'
 import ReactInstall from '../integrate/_snippets/install-react.mdx'
@@ -32,11 +32,13 @@ import RustInstall from '../integrate/_snippets/install-rust.mdx'
 import FlutterInstall from '../integrate/_snippets/install-flutter.mdx'
 import ElixirInstall from '../integrate/_snippets/install-elixir.mdx'
 import DotNetInstall from '../integrate/_snippets/install-dotnet.mdx'
+import Wizard from '../getting-started/_snippets/wizard.mdx'
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Flutter', 'Elixir', '.NET', 'api']}>
+<Tab.Group tabs={['Web', 'Wizard', 'React', 'Node.js', 'Python', 'PHP', 'Ruby', 'Go', 'React Native', 'Android', 'iOS', 'Java', 'Rust', 'Flutter', 'Elixir', '.NET', 'api']}>
     <Tab.List>
         <Tab>Web</Tab>
+        <Tab>Wizard</Tab>
         <Tab>React</Tab>
         <Tab>Node.js</Tab>
         <Tab>Python</Tab>
@@ -56,6 +58,9 @@ import DotNetInstall from '../integrate/_snippets/install-dotnet.mdx'
     <Tab.Panels>
         <Tab.Panel>
             <WebInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <Wizard />
         </Tab.Panel>
         <Tab.Panel>
             <ReactInstall />

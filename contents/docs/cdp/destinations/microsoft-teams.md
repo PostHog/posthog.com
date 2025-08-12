@@ -30,8 +30,8 @@ Send event data from PostHog into the Microsoft Teams server and channel of your
 ### PostHog: create a destination
 
 1. Back in PostHog, click the **[Data pipelines](https://us.posthog.com/pipeline/overview)** tab in the left sidebar.
-2. Click the **Destinations** tab.
-3. Search for **Microsoft Teams** and select the destination.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=microsoft) tab.
+3. Search for **Microsoft Teams** and click **+ Create**.
 4. Add your Webhook URL.
 5. Use the **Text** field to format your message. You can include any properties that exist on `event` or `person`.
 6. Use the **Filters** panel to set up a query to filter the events you want to send, otherwise you'll get a firehose of all events filling your channel.

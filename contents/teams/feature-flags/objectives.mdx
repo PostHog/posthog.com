@@ -1,53 +1,54 @@
-## Q2 2025 Objectives
+## Q3 2025 Objectives
 
-### Flag Stability, Consistency, and Resiliency
-*Goal: Create a highly stable, consistent, and resilient feature flag system capable of supporting 10x growth*
+### Objective 1: Behavioral Cohort Targeting
 
-- Scale `/flags` service
-  - Complete 100% worldwide rollout of `/flags` endpoint to all customers
-  - Measure and validate improved query performance metrics
-  - Document infrastructure cost savings achieved
-  - Stretch: Investigate feasibility of decoupling flag evaluation from Postgres entirely
+Motivation: Enable dynamic behavioral targeting across PostHog – let customers target users based on what they've done (or haven't done) recently. In other words, enable customers to target feature flags on [behavioral cohorts](/docs/data/cohorts).
 
-- Standardize SDK Error Handling and UX
-  - Move more SDK functionality to the server wherever possible ([reference](https://github.com/PostHog/posthog/issues/30466))
-  - Implement unified error handling framework across all SDKs
-  - Create consistent fallback and default behaviors across platforms
-  - Ensure all SDKs utilize the latest (v2) flags response format
+This is an objective shared across multiple teams ([Messaging](/teams/messaging), [Feature Flags](/teams/feature-flags), [Ingestion](/teams/ingestion), and [Surveys](/teams/surveys)) who all need behavioral targeting to enhance their products. We'll build a platform that integrates with our ingestion pipeline to pre-process event data for targeting, then integrate this service into existing product targeting functionality.
 
-- Enhance System Resilience
-  - Decouple flag service from writer database
-  - Deploy flags on differentiated infrastructure aligned with varying scale needs
-  - Implement circuit breakers for graceful degradation during upstream failures
-  - Establish reliability SLAs and monitoring for flag delivery
-  
-### Behavioral Cohort Targeting
-*Goal: Enable customers to target feature flags based on user behaviors*
+We'll deliver this in 3 stages with Stage 1 well-defined and Stages 2-3 evolving based on how Stage 1 goes. Note that stages can overlap – we may begin customer partnerships and product integrations as soon as the POC works well enough, potentially before Stage 2 is completed.
 
-- Ship Beta Release
-  - Develop core behavioral targeting functionality
-  - Create intuitive UI for defining behavioral cohorts
-  - Implement backend services to process and apply cohort rules
+**Stage 1: Proof-of-concept**
 
-- Customer Adoption
-  - Identify and onboard 5-10 key customers for beta testing
-  - Establish success metrics and collect usage data
-  - Document use cases and implementation patterns
-  - Create support resources for customer implementation
+Build a proof of concept behavioral cohort data ingestion service as the foundation. Owned by <TeamMember name ="Ben White" photo /> (CDP/Messaging) and <TeamMember name="Dylan Martin" photo /> (Feature Flags).
 
-## AI IDE Integration
-*Goal: Streamline developer workflow with AI-powered flag implementation*
+What we will ship:
+* **Support behavioral cohort filter as Hog bytecode** – Make cohort filters representable as Hog code for our CDP pipeline <TeamMember name="Dylan Martin" photo />
+* **Build system for loading/matching/saving targeting results** – Create a system that writes matches to a low-latency datastore (not Clickhouse) that other applications can query <TeamMember name="Ben White" photo />
+* **Validate with ingestion team** – Ensure the POC doesn't negatively impact ingestion latency or scale (TBD owner from [Ingestion](/teams/ingestion))
 
-- Create Intelligent Code Snippets
-  - Develop context-aware SDK snippet generation system for feature flags
-  - Ensure generated code follows best practices for each language/framework
+**Stage 2: Make it scale**
 
-- IDE Integration
-  - Build plugins/extensions for AI IDEs (Cursor, Windsurf, potentially our own)
-  - Create seamless workflow from flag creation to code implementation
-  - Implement AI-assisted troubleshooting for flag implementation issues
+Implement the scaling solution based on POC learnings and ingestion team collaboration. Specific work TBD based on Stage 1 results.
 
-- Developer Experience
-  - Measure time-to-implementation improvements
-  - Collect developer feedback on integration experience
-  - Iterate based on usage patterns and pain points
+**Stage 3: Integrate across PostHog**
+
+Add behavioral cohort targeting to existing products using our new low-latency datastore.
+
+What we will ship:
+* **Behavioral Cohort Targeting for Feature Flags** – Add behavioral cohorts to existing feature flag targeting <TeamMember name ="Dylan Martin" photo />
+* **Behavioral Cohort Targeting for Surveys** – Add behavioral cohorts to existing survey targeting (owner TBD)
+* **Behavioral Cohort Targeting for Messaging** – Enable behavioral targeting in messaging (owner TBD)
+
+**Customer Validation:** Partner with 5-10 key customers to validate use cases, gather feedback, and measure impact on conversion and engagement. This can begin as soon as we have a working POC, potentially in parallel with Stage 2 work. <TeamMember name="Dylan Martin" photo /> and <TeamMember name="Annika Schmid" photo />
+
+### Objective 2: Flag Management & Advanced Features  
+Motivation: Solve flag management pain points for large customers and add advanced flag targeting capabilities.
+
+What we will ship:
+* **Flag categorization system** – Let customers organize flags into categories and only request the ones they need such, e.g. client flags, server flags, both. <TeamMember name="Phil Haack" photo />
+* **Automatic stale flag pruning** – Build tools to identify and help customers clean up unused/stale flags automatically <TeamMember name="Phil Haack" photo />
+* **Flag rollouts based on other flags** – Enable targeting on flags where flag's evaluation result can determine another's rollout <TeamMember name="Phil Haack" photo />
+
+### Objective 3: Platform Reliability & Scale
+Motivation: Create a highly stable, resilient feature flag system capable of supporting our largest (and soon-to-be largest) customers with enterprise-grade reliability.
+
+What we will ship:
+* **Complete /flags rollout** – Roll everyone onto /flags endpoint and deprecate /decide, measure performance improvements <TeamMember name="Andy Zhao" photo />
+* **Enhanced observability** – Add tracking for big customer experience, implement alerting and internal SLOs/external SLAs <TeamMember name="Andy Zhao" photo />
+* **System resilience** – Decouple flag service from writer database, implement circuit breakers, build remote caches into server-side SDKs <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Dylan Martin" photo />
+* **SDK standardization** – Implement unified error handling framework and ensure all SDKs use latest (v2) flags response format <TeamMember name="Andy Zhao" photo /> and <TeamMember name="Phil Haack" photo />
+
+**Service Level SLOs:**
+* **Latency:** p99 latency < 50ms. We already meet this today, but still have some spikes from experience continuity flags
+* **Availability:** alarm and investigate on > 10 `5xx` errors in a 1-min period. At 85k req/min, that is a 99.988% availability

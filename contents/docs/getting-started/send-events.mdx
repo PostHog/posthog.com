@@ -5,7 +5,7 @@ featuredImage: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/docs/getting-started/images/docs-send-events.png
 ---
 
-import SendEventBackend from "./\_snippets/send-event-backend.mdx"
+import SendEventBackend from "./_snippets/send-event-backend.mdx"
 
 Once your PostHog instance is up and running, the next step is to start sending events.
 
@@ -21,12 +21,6 @@ When you call `posthog.init`, the PostHog browser JS library begins automaticall
 
 - **Pageviews and pageleaves**, including the URL, referrer, UTMs, scroll depth, and more
 - **Autocaptured events**, such as any click, change of input, or submission associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags
-
-<details>
-  <summary>Configuring single page apps</summary>
-
-  If you have a [single-page app](/tutorials/single-page-app-pageviews), you'll need to manually capture pageviews and pageleaves as PostHog only sends them once – i.e. when your app loads and when they leave.
-</details>
 
 <details>
   <summary>Hiding sensitive elements</summary>

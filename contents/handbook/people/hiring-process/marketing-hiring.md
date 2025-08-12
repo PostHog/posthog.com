@@ -7,9 +7,9 @@ hideAnchor: true
 
 ## Marketing hiring at PostHog
 
-Our [Marketing](/teams/marketing) team is small and we don't hire into this team very often. Please check our [careers page](/careers) for our open roles. 
+Our [Content](/teams/content) team is small and we don't hire into this team very often. Please check our [careers page](/careers) for our open roles. 
 
-### What we are looking for in Marketing hires
+### What we are looking for in marketing hires
 
 Beyond the specific skills listed in the job description, we always generally look for: 
 

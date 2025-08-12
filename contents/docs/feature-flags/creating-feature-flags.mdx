@@ -31,19 +31,19 @@ This presents you with a form where you can complete the details of your new fla
 
 Here's a breakdown of each field in the form:
 
-### Key
+## Key
 
 This is the name of the key you use in your code to evaluate the feature flag.
 
-### Description and tags 
+## Description and tags 
 
 Metadata to describe and share information about your feature flag in the PostHog app.
 
-### Enable feature flag
+## Enable feature flag
 
 This determines whether your flag is enabled. Disabled flags return `undefined` or `null`.
 
-### Persisting feature flags across authentication steps
+## Persisting feature flags across authentication steps
 
 
 > **Note:** This is only relevant if your feature flag is shown to both logged out AND logged in users.
@@ -60,33 +60,33 @@ In our experience, the tradeoffs to enabling this are **not** worthwhile for the
 2. **Incompatible with [local evaluation](/docs/feature-flags/local-evaluation):** It is necessary to perform the additional checks on the PostHog servers.
 3. **Incompatible with [bootstrapping](/docs/feature-flags/bootstrapping):** Bootstrapping relies on local evaluation, which cannot correctly calculate persistent flag values.
 
-### Served value
+## Served value
 
 There are three types of feature flags:
 
-#### 1. Boolean flags. 
+### 1. Boolean flags. 
 
 These return `false` if the flag is disabled, `true` if the flag is enabled and has a matching release condition, and `null` or `undefined` if no release condition matches.
 
-#### 2. Multiple variant flags (multivariate flags). 
+### 2. Multiple variant flags (multivariate flags). 
 
 Instead of indicating enabled vs. disabled, multivariate flags return a key – for example, `control` or `test`. 
 
 You can choose the rollout percentage for each variant key, where each is given a specific percentage of the total audience. Users will then be randomly assigned to each variant based on these percentages.
 
-#### 3. Remote config flags. 
+### 3. Remote config flags. 
 
 While boolean and multivariate flags can be set up to serve different values to different users, remote config flags are meant to pass static configuration values to your applications at runtime. The config value is **always** passed in the flag's payload. You can use remote config flags to tweak application configs on the fly without deploying code changes.
 
-### Payloads
+## Payloads
 
 A payload is an additional piece of information sent to your app when a flag is matched for a user. The returned value can be any valid JSON type (object, array, number, string, boolean, or null).
 
 They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
 
-### Release conditions
+## Release conditions
 
-This specifies the conditions a user must meet to access the feature flag and receive a value. Condition sets are evaluated from top to bottom, and the first condition set that matches will be used.
+This specifies the conditions a user must meet to access the feature flag and receive a value. Condition sets are evaluated from top to bottom, and the first condition set that matches will be used. A condition matches when all property filters pass and the target falls within the rollout percentage.
 
 Percentage rollouts are available for all flags. More options depend on your PostHog setup:
 

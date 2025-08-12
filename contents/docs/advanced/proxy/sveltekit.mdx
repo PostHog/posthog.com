@@ -1,0 +1,83 @@
+---
+title: Using SvelteKit server hooks as a reverse proxy
+sidebar: Docs
+showTitle: true
+---
+
+import RegionWarning from "../_snippets/region-warning.mdx"
+import ProxyWarning from "../_snippets/proxy-usage-warning.mdx"
+import ProxyPathNamesWarning from "../_snippets/proxy-path-names-warning.mdx"
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+<CalloutBox icon="IconWarning" title="Warning" type="fyi">
+
+  1. <ProxyWarning />
+  2. <RegionWarning />
+  3. <ProxyPathNamesWarning />
+
+</CalloutBox>
+
+For SvelteKit, you can use [server hooks](https://svelte.dev/docs/kit/hooks#Server-hooks) to proxy requests to PostHog. We've tested this (and it works) with Cloudflare Workers. 
+
+To do this, create a file named `hooks.server.ts` in your `src` directory (or the `dir` you configured to contain source files). In this file, set up code to match requests to a custom route, set a new `host` header, change the URL to point to PostHog, and rewrite the response. 
+
+> **Note:** This only works in SSR mode. If your site is statically generated, SvelteKit ignores `hooks.server.ts`. 
+
+```ts
+import type { Handle } from '@sveltejs/kit';
+
+export const handle: Handle = async ({ event, resolve }) => {
+  const { pathname } = event.url;
+
+  if (pathname.startsWith('/<ph_proxy_path>')) {
+    // Determine target hostname based on static or dynamic ingestion
+    const hostname = pathname.startsWith('/<ph_proxy_path>/static/')
+      ? 'us-assets.i.posthog.com' // change us to eu for EU Cloud
+      : 'us.i.posthog.com';  // change us to eu for EU Cloud
+
+    // Build external URL
+    const url = new URL(event.request.url);
+    url.protocol = 'https:';
+    url.hostname = hostname;
+    url.port = '443';
+    url.pathname = pathname.replace('/<ph_proxy_path>/', '');
+
+    // Clone and adjust headers
+    const headers = new Headers(event.request.headers);
+    headers.set('host', hostname);
+
+    // Proxy the request to the external host
+    const response = await fetch(url.toString(), {
+      method: event.request.method,
+      headers,
+      body: event.request.body
+    });
+
+    return response;
+  }
+
+  const response = await resolve(event);
+  return response;
+};
+```
+
+Once done, configure the PostHog client to send requests via your rewrite like we do in this sample: 
+
+```ts
+// src/routes/+layout.ts
+import posthog from 'posthog-js';
+import { browser } from '$app/environment';
+import { PUBLIC_POSTHOG_KEY as POSTHOG_KEY } from '$env/static/public';
+
+export function initTelemetry() {
+  if (!browser) return;
+  posthog.init(POSTHOG_KEY, {
+    api_host: '/<ph_proxy_path>',
+    ui_host: 'https://us.posthog.com', // change us to eu for EU Cloud
+    person_profiles: 'always',
+    persistence: 'localStorage'
+	});
+}
+
+initTelemetry();
+```

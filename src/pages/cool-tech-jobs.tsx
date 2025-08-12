@@ -137,6 +137,9 @@ const JobsByDepartment = ({
                         ? `/careers/${slugify(job.attributes.title.replace(' (Remote)', ''), { lower: true })}`
                         : job.attributes.url
 
+                    const postedDate = job.attributes.postedDate
+                    const showPosted = postedDate && postedDate !== '1970-01-01T00:00:00.000Z'
+
                     return (
                         <li key={job.id} className="flex justify-between gap-1 items-start last:mb-6 mt-2 first:mt-0">
                             <Link
@@ -151,9 +154,11 @@ const JobsByDepartment = ({
                                     )}
                                 </span>
                             </Link>
-                            <p className="m-0 pt-1 opacity-60 text-sm flex-[0_0_6rem] text-right">
-                                {dayjs(job.attributes.postedDate).fromNow()}
-                            </p>
+                            {showPosted && (
+                                <p className="m-0 pt-1 opacity-60 text-sm flex-[0_0_6rem] text-right">
+                                    {dayjs(postedDate).fromNow()}
+                                </p>
+                            )}
                         </li>
                     )
                 })}

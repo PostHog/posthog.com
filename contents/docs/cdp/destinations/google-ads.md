@@ -8,7 +8,7 @@ import Requirements from "../_snippets/requirements.mdx"
 import FeedbackQuestions from "../_snippets/feedback-questions.mdx"
 import PostHogMaintained from "../_snippets/posthog-maintained.mdx"
 
-> **IMPORTANT:** Check [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for details on installing the integration.
+> **IMPORTANT:** This is an experimental destination that we do not provide official support for. Check out [this page](https://github.com/PostHog/posthog/issues/27712#issuecomment-2615849798) for more details on installing the integration.
 
 <Requirements />
 
@@ -18,9 +18,9 @@ You'll also need access to the relevant Google Ads account.
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=googleads) tab.
 
-3. Search for **Google Ads Conversions** and select the destination.
+3. Search for **Google Ads Conversions** and click **+ Create**.
 
 4. Connect your Google account at the configuration step.
 

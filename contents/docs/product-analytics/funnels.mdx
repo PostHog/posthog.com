@@ -83,6 +83,12 @@ Select the steps to include in your funnel, ideally starting with the first even
     alt="Funnel steps"
 />
 
+By default, funnel steps must be completed sequentially, however you are able to change this behavior by selecting one of three different step orders:
+
+1. **Sequential** – Step B must happen after Step A, but any number events can happen between A and B.
+2. **Strict order** – Step B must happen directly after Step A without any events in between.
+3. **Any order** – Steps can be completed in any sequence.
+
 ### Filtering steps
 
 To refine your steps, you can filter out events using event, person, or group properties, autocapture elements, or SQL. To do this, click the **filter icon**  next to the step, choose your property, and fill in the details. You can also set a global filter in the **Filters** section in the bottom.
@@ -172,7 +178,7 @@ In the last touchpoint mode, one person will always only have one value.
 
 ##### 3. All steps
 
-In this case, all events completed sequentially will be included in the funnel.
+In this case, all events completed in your selected step order will be included in the funnel.
 
 Consider the following entirely possible example of events from a single person:
 
@@ -216,6 +222,30 @@ but you don't want pages under the subdirectories of `https://foo.com/bar` to ap
 In this case, set the `Attribution type` to `Specific step` / `Step 1` to see only `https://foo.com/bar` in the pageview column of the chart.
 
 > For an unordered funnel, the specific step is meaningless, as the first step can be the last step, and vice versa. So, it's referred to as "any step" in the UI. It has the same semantics as a specific step in an ordered funnel, but it looks at property values from all steps.
+
+#### Filtering for first occurrence
+
+When analyzing funnels, you can specify which event to count if a user performs it multiple times. This is configured in the dropdown for each step of the funnel.
+
+<ProductScreenshot
+    imageLight={"https://res.cloudinary.com/dmukukwp6/image/upload/funnels_first_ever_light_b64bd76a5e.png"}
+    imageDark={"https://res.cloudinary.com/dmukukwp6/image/upload/funnels_first_ever_dark_fe7d879280.png"}
+    alt="First event occurrence"
+/>
+
+There are two options for this:
+
+##### 1. First-ever occurrence
+
+First-ever occurrence matches only the first time a user performs a specific event type. If this first event doesn't **match the filters** for that funnel step, or is **outside the funnel's date range**, the user is excluded from the funnel entirely. This is true even if they perform the event again later with matching filters.
+
+**Example:** You have a funnel step looking for page views to `/about` and the user's first-ever page view is to `/pricing`. PostHog will only consider the first `$pageview` event, which is on the `/pricing` page. Since the first page view doesn't match the `/about` filter, the user will be dropped from the funnel, even if they visit `/about` later.
+
+##### 2. First occurrence matching filters
+
+First occurrence matching filters matches the first time a user performs an event *that also matches the filters for that funnel step*. Any previous events of the same type that don't match the filters are ignored.
+
+**Example:** You have a funnel step looking for pageviews to `/about`. A user first visits `/pricing` and then later visits `/about`. PostHog ignores the `/pricing` view and matches the `/about` view, as it's the first one that fits the step's criteria.
 
 ### Graph type
 

@@ -1,0 +1,77 @@
+---
+title: Upload source maps for Nuxt
+showStepsToc: true
+---
+
+import CLIDownload from '../_snippets/cli/download.mdx'
+import CLIAuthenticate from '../_snippets/cli/authenticate.mdx'
+import StepVerifySourceMapUpload from './_snippets/step-verify-source-map-upload.mdx'
+
+<Steps>
+<Step title="Install the PostHog CLI" badge="required">
+<CLIDownload />
+</Step>
+<Step title="Authenticate the PostHog CLI" badge="required">
+<CLIAuthenticate />
+</Step>
+<Step title="Generate sourcemaps during build" badge="required">
+
+You can hook into the `close` event to generate and upload source maps for your Nuxt application like this:
+
+```js file=nuxt.config.js
+import { execSync } from 'child_process' // +
+
+export default defineNuxtConfig({
+  ...,
+  sourcemap: {
+    client: true // +
+  },
+  hooks: {
+    'close': async () => {
+      console.log('Running PostHog sourcemap injection and upload...')
+      try {
+        execSync("posthog-cli sourcemap inject --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // +
+        execSync("posthog-cli sourcemap upload --directory '.output'", { // +
+          stdio: 'inherit', // +
+        }) // + 
+        console.log('PostHog sourcemap injection completed successfully') 
+      } catch (error) {
+        console.error('PostHog sourcemap injection failed:', error)
+      }
+    }
+  }
+})
+```
+
+</Step>
+<Step title="Build your project for production" badge="required">
+
+Build your project for production by running the following command:
+```bash
+nuxt build
+```
+
+Post-build scripts should automatically generate and upload sourcemaps to PostHog.
+
+</Step>
+
+<Step checkpoint title="Verify source map upload" subtitle="Confirm sourcemaps are being properly uploaded">
+
+Before proceeding, confirm that sourcemaps are being properly uploaded.
+
+You can verify the injection is successful by checking your `.mjs.map` source map files for `//# chunkId=` comments. Make sure to serve these injected files in production, PostHog will check for the `//# chunkId` comments to display the correct stack traces.
+
+<CallToAction type="secondary" className="my-2" size="sm" to="https://app.posthog.com/settings/project-error-tracking#error-tracking-symbol-sets" external={true}>
+    Check symbol sets in PostHog
+</CallToAction>
+
+</Step>
+
+<Step title="Next steps" >
+
+After configuring PostHog, update your build and deployment process to serve bundles **injected** with the `chunkId` comments. PostHog relies on these comments to display the correct stack traces. Remember to export the [required environment variables](#authenticating-the-posthog-cli) in your deployment process.
+
+</Step>
+</Steps>

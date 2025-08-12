@@ -1,3 +1,4 @@
+import { child } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 import Tooltip from 'components/Tooltip'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -16,6 +17,20 @@ export const TeamMemberLink = ({
     className,
     photo = false,
     showOnlyFirstName = false,
+    children,
+}: {
+    firstName: string
+    lastName?: string
+    squeakId?: string
+    avatar?: { formats: { thumbnail: { url: string } } }
+    companyRole?: string
+    location?: string
+    country?: string
+    color?: string
+    className?: string
+    photo?: boolean
+    showOnlyFirstName?: boolean
+    children?: JSX.Element
 }): JSX.Element => {
     const displayName = showOnlyFirstName ? firstName : [firstName, lastName].filter(Boolean).join(' ')
     const avatarUrl = avatar?.formats?.thumbnail?.url
@@ -44,7 +59,7 @@ export const TeamMemberLink = ({
                             )}
                         </span>
                         <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
-                            {displayName}
+                            {children ? children : displayName}
                         </span>
                     </span>
                 )}
@@ -70,7 +85,7 @@ export const TeamMemberLink = ({
                                 )}
                             </span>
                             <span className="!text-sm text-red dark:text-yellow font-semibold inline-flex">
-                                {displayName}
+                                {children ? children : displayName}
                             </span>
                         </>
                     ) : (
@@ -111,7 +126,9 @@ export const TeamMemberLink = ({
                             )}
                             placement="top"
                         >
-                            <span className=" text-red dark:text-yellow font-semibold inline-flex">{displayName}</span>
+                            <span className=" text-red dark:text-yellow font-semibold inline-flex">
+                                {children ? children : displayName}
+                            </span>
                         </Tooltip>
                     )}
                 </span>
@@ -126,7 +143,19 @@ export const FutureTeamMember = (): JSX.Element => (
     </a>
 )
 
-export default function TeamMember({ name, photo, className, showOnlyFirstName = false }) {
+export default function TeamMember({
+    name,
+    photo,
+    className,
+    showOnlyFirstName = false,
+    children,
+}: {
+    name: string
+    photo?: boolean
+    className?: string
+    showOnlyFirstName?: boolean
+    children?: JSX.Element
+}): JSX.Element | null {
     const {
         profiles: { nodes },
     } = useStaticQuery(graphql`
@@ -157,6 +186,14 @@ export default function TeamMember({ name, photo, className, showOnlyFirstName =
     )
 
     return person ? (
-        <TeamMemberLink {...person} photo={photo} className={className} showOnlyFirstName={showOnlyFirstName} />
+        <>
+            {children ? (
+                <TeamMemberLink {...person} photo={photo} className={className} showOnlyFirstName={showOnlyFirstName}>
+                    {children}
+                </TeamMemberLink>
+            ) : (
+                <TeamMemberLink {...person} photo={photo} className={className} showOnlyFirstName={showOnlyFirstName} />
+            )}
+        </>
     ) : null
 }

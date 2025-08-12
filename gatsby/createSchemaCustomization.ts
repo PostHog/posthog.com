@@ -257,6 +257,38 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
     }
     type PostHogPipeline implements Node {
       mdx: Mdx @link(by: "frontmatter.templateId", from: "pipelineId")
+      introSnippet: String
+      installationSnippet: String
+    }
+    type ProductDataProductsAddons {
+      legacy_product: Boolean
+    }
+    type ProductDataProducts {
+      legacy_product: Boolean
+    }
+    type ProductDataProductsAddonsFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+        unit: String
+    }
+    type ProductDataProductsAddonsPlansFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+        unit: String
+    }
+    type ProductDataProductsPlansFeatures {
+        category: String
+        limit: String
+        note: String
+        entitlement_only: Boolean
+        is_plan_default: Boolean
+        unit: String
     }
   `)
     createTypes([
@@ -301,6 +333,7 @@ export const createSchemaCustomization: GatsbyNode['createSchemaCustomization'] 
               shopifyId: String!
               title: String!
               selectedOptions: [ShopifySelectedOption!]!
+              inventoryPolicy: String
             }
             type ShopifyImage {
               width: Int

@@ -2,6 +2,8 @@
 title: Stack traces
 ---
 
+import Tab from "components/Tab"
+
 Error tracking enables you to view the stack trace and code context associated with an exception. This can help understand, identify and resolve the root cause of an issue.
 
 For languages like Python, the stack trace and code context can be gathered by the PostHog client and requires no additional processing.
@@ -28,6 +30,11 @@ You can see the symbol sets fetched by PostHog and the associated frames within 
     classes="rounded"
 />
 
-import UploadSourceMaps from './_snippets/upload-source-maps.mdx'
 
-<UploadSourceMaps />
+import UploadSourceMapPlatforms from  './upload-source-maps/_snippets/upload-source-map-platforms.tsx'
+
+## Uploading source maps
+
+If your source maps are not publicly hosted, you will need to upload them during your build process to see unminified code in your stack traces. You can either use the `@posthog/nextjs-config` package or the `posthog-cli` to handle this process. Select your platform to view instructions.
+
+<UploadSourceMapPlatforms />

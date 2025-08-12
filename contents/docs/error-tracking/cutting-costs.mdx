@@ -1,0 +1,86 @@
+---
+title: Cutting error tracking costs
+sidebar: Docs
+showTitle: true
+---
+
+We aim to be significantly cheaper than our competitors. In addition to our [pay-as-you-go pricing](/pricing), below are tips to reduce your error tracking costs:
+
+## Configure exception autocapture
+
+By default, we capture all unhandled errors and rejections. This can capture more than you need. To reduce which exceptions that are captured, you can configure which types of exceptions are autocaptured in the JS SDK config like this: 
+
+```json
+{
+  "capture_exceptions": {
+    "capture_unhandled_errors": true,
+    "capture_unhandled_rejections": true,
+    "capture_console_errors": false
+  }
+}
+```
+
+Alternatively, you can disable exception autocapture completely in your [project settings](https://us.posthog.com/error_tracking/configuration).
+
+## Filtering exceptions clientside
+
+### Suppression rules
+
+Autocaptured exceptions can be ignored client-side by [configuring suppression rules](https://us.posthog.com/error_tracking/configuration?tab=error-tracking-exception-autocapture#selectedSetting=error-tracking-exception-autocapture). Because the stack of an exception may still be minified client-side, you can only filter based on the exception type and message attributes.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_light_8db44eb6b1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/suppression_rule_dark_5972d57398.png"
+    alt="Issue suppression rules"
+    classes="rounded"
+/>
+
+### Burst protection
+
+The PostHog JS SDK uses burst protection to limit the number of autocaptured exceptions that can be captured in a period. This prevents an excessive amount of exceptions being captured from any one client, typically because they're being thrown in an infinite loop.
+
+By default, we capture 10 exceptions (bucket size) of the same type within a 10 second period before the rate limiter kicks in, after which, we capture 1 exception (refill rate) every 10 seconds.
+
+Often not needed, but you can change the bucket size and refill rate can be changed as part of your configuration:
+
+```
+error_tracking: {
+    __exceptionRateLimiterRefillRate: 1
+    __exceptionRateLimiterBucketSize: 10
+}
+```
+
+### Using the `before_send` hook
+
+The [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) callback in the JS SDK will drop events if a falsey value is returned. You can provide a `before_send` function when initializing the PostHog client to exclude any exception events you do not wish to capture client-side.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    before_send: (event) => {
+        if (event.event === "$exception") {
+            const exceptionList = event.properties["$exception_list"] || []
+            const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+            if (exception && exception["$exception_type"] == "UnwantedError") {
+                return false
+            }
+        }
+        return event
+    }
+})
+```
+
+## Issue suppression
+
+If the exceptions you do not wish to capture are all being grouped under the same issue, you can suppress them so that subsequent exception events will not be ingested. Issues can be suppressed from the list or issue page by changing their status to **Suppressed**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/suppress_issue_light_ef0e5156a9.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/suppress_issue_dark_dc96ef44b2.png"
+    alt="Issue suppression status"
+    classes="rounded"
+/>
+
+## Quota limiting
+
+Like all PostHog products, you can set a [billing limit](https://us.posthog.com/organization/billing) for error tracking. When a project exceeds this limit, PostHog will no longer capture exception events until your billing period resets.

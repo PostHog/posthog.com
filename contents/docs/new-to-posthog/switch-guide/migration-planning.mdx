@@ -8,18 +8,17 @@ With your team onboarded and a successful pilot completed, you can turn your att
 
 ## Technical planning
 
-PostHog provides tools and guides to support you making this switch. Check out our [migration docs](/docs/migrate) for details on moving from [Amplitude](/docs/migrate/migrate-from-amplitude), [Mixpanel](/docs/migrate/mixpanel), [LaunchDarkly](/docs/migrate/launchdarkly) and others.
+PostHog provides tools and guides to support you making this switch. Check out our [migration docs](/docs/migrate) for details on our [managed migrations](/docs/migrate/managed-migrations) as well as moving from [Google Analytics](/docs/migrate/google-analytics), [Heap](/docs/migrate/migrate-from-amplitude), [Plausible](/docs/migrate/plausible), [LaunchDarkly](/docs/migrate/launchdarkly), or others.
 
-Stumped on any detail of the process? If you’ve already signed up and started sending events with a forecasted bill of $500 or more, our **onboarding** team will reach out to help. 
+Stumped on any detail of the process? If you've already signed up and started sending events with a forecasted bill of $500 or more, our **onboarding** team will reach out to help. 
 
-If you haven’t heard from us yet, [drop us a line](/talk-to-a-human) with your migration questions!
+If you haven't heard from us yet, [drop us a line](/talk-to-a-human) with your migration questions!
 
 Some setup tips:
 
-1. Don’t create separate projects for mobile and web. PostHog works best when you can see user behavior across all versions of your products in one set of data and views.
+1. Don't create separate projects for mobile and web. PostHog works best when you can see user behavior across all versions of your products in one set of data and views.
 
 2. Healthy integrations have a few things in common. It can help to review the [health check](/handbook/growth/sales/health-checks) documentation used by our sales team to tackle the most common ways to keep your bill manageable and predictable.
-
 
 <CalloutBox icon="IconDatabase" title="Get help with large migrations" type="task">
 
@@ -35,7 +34,7 @@ To support this, it can help to make a spreadsheet for people to request their m
 
 You want to know what data your teammates need to keep making good decisions, and ensure those metrics are easy to find in PostHog. Capturing these requirements can also help you check that your technical implementation is capturing all necessary events and properties.
 
-While moving historical events over is straightforward, you’ll need plan for some time rebuilding the views and dashboards your team relies on.
+While moving historical events over is straightforward, you'll need plan for some time rebuilding the views and dashboards your team relies on.
 
 ### Conversion tracking
 
@@ -45,7 +44,7 @@ An urgent need from marketing and product teams is **tracking conversions**. Get
 
 ## Providing demos
 
-A great way to help PostHog land well is to offer a quick demo to everyone who’s interested.
+A great way to help PostHog land well is to offer a quick demo to everyone who's interested.
 
 Here are some topics that might be worth covering. You know your teammates best, so be sure to adjust your demos to their needs and interests.
 
@@ -53,17 +52,17 @@ Here are some topics that might be worth covering. You know your teammates best,
 
 ![The activity explorer](https://res.cloudinary.com/dmukukwp6/image/upload/activity_2923c81b32.png)
 
-Events are the core of PostHog’s reporting. Explain how they work, and the properties you plan to attach to them as part of your integration. Show off the **[activity](https://app.posthog.com/project/activity/explore)** view so everyone can see new events pouring in. 
+Events are the core of PostHog's reporting. Explain how they work, and the properties you plan to attach to them as part of your integration. Show off the **[activity](https://app.posthog.com/activity)** view so everyone can see new events pouring in. 
 
-If you’re identifying users in your integration, showing how **[person profiles](https://app.posthog.com/project/persons)** collect information can also be helpful.
+If you're identifying users in your integration, showing how **[person profiles](https://app.posthog.com/persons)** collect information can also be helpful.
 
 ### Web analytics
 
-Everyone who wants the basics of an analytics dashboard will find it in our **[web analytics](https://app.posthog.com/project/web)** tab right out of the box.
+Everyone who wants the basics of an analytics dashboard will find it in our **[web analytics](https://app.posthog.com/web)** tab right out of the box.
 
 ### Actions
 
-Actions let you group and rename events, making them easier to use in reporting. The more your teammates understand actions, the easier everyone’s life gets to be, so take a moment in **[data management](https://app.posthog.com/project/data-management/actions)** to explain.
+Actions let you group and rename events, making them easier to use in reporting. The more your teammates understand actions, the easier everyone's life gets to be, so take a moment in **[data management](https://app.posthog.com/data-management/actions)** to explain.
 
 ### Creating insights and dashboards
 
@@ -73,22 +72,22 @@ Popular insights include:
 
 - Trends: show change over time  
 - Funnels: track conversions and other sequential activity  
-- User paths: see how real people explore your sight
+- User paths: see how real people explore your site
 
 ### Replays
 
-[Replays](https://app.posthog.com/project/replay/home) are a hit across roles and teams. For engineers, they can be a way of catching layout problems and other bugs early. For product and design, they’re a way to make sure that new features and workflows are actually performing correctly. They’re a huge help to support, and even execs enjoy flipping through them.
+[Replays](https://app.posthog.com/replay) are a hit across roles and teams. For engineers, they can be a way of catching layout problems and other bugs early. For product and design, they're a way to make sure that new features and workflows are actually performing correctly. They're a huge help to support, and even execs enjoy flipping through them.
 
 ### Instant, no-code surveys
 
-If you’re talking to someone who really wants to hear from customers, [surveys](https://app.posthog.com/project/surveys) are going to be exciting. Walk through how to design and deploy one.
+If you're talking to someone who really wants to hear from customers, [surveys](https://app.posthog.com/surveys) are going to be exciting. Walk through how to design and deploy one.
 
 ### Toolbar
 
-This one is a visual crowd pleaser: launch your site’s PostHog [toolbar](https://app.posthog.com/project/toolbar) to show heatmap overlays and other stats directly on your site. You can even use it to launch [hedgehog mode](/blog/aruba-hackathon#hedgehog-mode--toolbar--awesomeness).
+This one is a visual crowd pleaser: launch your site's PostHog [toolbar](https://app.posthog.com/toolbar) to show heatmap overlays and other stats directly on your site. You can even use it to launch [hedgehog mode](/blog/aruba-hackathon#hedgehog-mode--toolbar--awesomeness).
 
 <CalloutBox title="Get more help" type="fyi">
 
-We never want to waste your time with a call, so a self-serve migration is an open invitation. But if any part of this feels more daunting than fun, just [get in touch](/talk-to-a-human). We’re able to help accounts with $500 in projected monthly spending with onboarding, along with ongoing support for companies 25 people and up.
+We never want to waste your time with a call, so a self-serve migration is an open invitation. But if any part of this feels more daunting than fun, just [get in touch](/talk-to-a-human). We're able to help accounts with $500 in projected monthly spending with onboarding, along with ongoing support for companies 25 people and up.
 
 </CalloutBox>

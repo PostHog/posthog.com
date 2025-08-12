@@ -4,9 +4,16 @@ sidebar: Docs
 showTitle: true
 ---
 
-We aim to be significantly cheaper than our competitors. In addition to our [ridiculously cheap pricing](/pricing), below are few ways to reduce costs by recording fewer sessions:
+We aim to be significantly cheaper than our competitors. Session replay is [pay-as-you-go](/pricing) and you are billed for the number of session recordings **at ingestion** time. This means:
+
+- The total number of sessions retained in PostHog doesn't affect your bill.
+- You don't have to worry about deleting old sessions.
+- You don't have to worry about the cost of storing old sessions.
+
+Below are a few ways to reduce costs by recording fewer sessions:
 
 1. [Disable automatic recording and programmatically start and stop recordings](/docs/session-replay/how-to-control-which-sessions-you-record#programmatically-start-and-stop-recordings)
 2. [Set a feature flag](/docs/session-replay/how-to-control-which-sessions-you-record#with-feature-flags) with the conditions that define which users or sessions you want to record.
 3. Set a [minimum recording duration](/docs/session-replay/how-to-control-which-sessions-you-record#minimum-duration).
 4. Set a [sampling rate](/docs/session-replay/how-to-control-which-sessions-you-record#sampling) for recordings.
+5. [Make sure you capture at least one event per session](/docs/session-replay/troubleshooting#unable-to-filter-by-user-or-page-properties) to reduce the costs while maintaining all filtering options.

@@ -17,6 +17,7 @@ PostHog can capture frontend events automatically using autocapture. This captur
 This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
 
 Autocapture is available in the following SDKs:  
+
 - [JavaScript Web](/docs/libraries/js) - enabled by default
 - [React](/docs/libraries/react) - enabled by default
 - [React Native](/docs/libraries/react-native) - disabled by default
@@ -26,6 +27,17 @@ Autocapture is available in the following SDKs:
 
 > This covers configuring autocapture in the JavaScript and React SDKs. For the React Native SDK, see our [React Native docs](/docs/libraries/react-native#autocapture).
 
+### Capturing pageviews in single-page apps
+
+Because PostHog hooks to the `navigator` API, we'll automatically capture pageviews and pageleaves. Make sure you've set `defaults: '<ph_posthog_js_defaults>'` in your `posthog.init` call to opt-in to this behavior.
+
+```js-web
+posthog.init("<ph_project_api_key>", {
+  api_host: "<ph_client_api_host>",
+  defaults: '<ph_posthog_js_defaults>',
+})
+```
+
 ### Reducing events with an allow and ignorelist
 
 Autocapture enables you to start capturing events on your site quickly, but this can lead to large numbers of events. To counteract this, you can configure autocapture using `allowlists` and `ignorelists` (NB some options use allow behavior and some use ignore behavior. 
@@ -34,20 +46,10 @@ These are an array of events, URLs, elements, and CSS selectors that you want au
 
 For example, to only capture clicks on buttons on the docs section of the website that contain the data attribute `ph-autocapture` and don't contain the data attribute `data-attr-pii="email"`, you can do the following:
 
-```js-web
-posthog.init('<ph_project_api_key>', {
-    api_host: '<ph_client_api_host>',
-    autocapture: {
-        dom_event_allowlist: ['click'], // DOM events from this list ['click', 'change', 'submit']
-        url_allowlist: ['posthog.com./docs/.*'], // strings or RegExps
-        // url_ignorelist can be used on its own, or combined with url_allowlist to further filter which URLs are captured
-        url_ignorelist: ['posthog.com./docs/.*/secret-section/.*'], // strings or RegExps
-        element_allowlist: ['button'], // DOM elements from this list ['a', 'button', 'form', 'input', 'select', 'textarea', 'label']
-        css_selector_allowlist: ['[ph-autocapture]'], // List of CSS selectors
-        element_attribute_ignorelist:['data-attr-pii="email"'], // List of element attributes to ignore
-    },
-})
-```
+import AutocaptureConfig from './_snippets/multilanguage/autocapture-config.mdx'
+
+<AutocaptureConfig />
+
 Allow and ignorelists only filter autocapture events. They don't affect the data collected by session recordings or custom events.
 
 > **Note:** When using `element_allowlist` or `css_selector_allowlist`, PostHog considers the entire tree of elements from the root to the target element of the click event, not just the element that was directly clicked. If *any* element or selector is in the tree *and* allow list, the click is captured.
@@ -67,6 +69,8 @@ If there are specific elements you _don't_ want to capture, add the `ph-no-captu
 You can disable autocapture in your [project settings](https://us.posthog.com/project/settings) or by setting `autocapture: false` in the [config](/docs/libraries/js/config). If _one_ of these is disabled, autocapture is disabled.
 
 > **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
+>
+> Disabling autocapture does not disable capture of page views or page leaves.
 
 You can disable pageviews and pageleaves by setting `capture_pageview: false`. To just disable pageleaves, keep `capture_pageview: true` and set `capture_pageleave: false`.
 
@@ -176,7 +180,7 @@ Autocaptured events include:
 
 Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo.
 
-You can see a full list in [PostHog](https://us.posthog.com/data-management/properties) or in [GitHub](https://github.com/PostHog/posthog-js/blob/main/src/utils/event-utils.ts), but the most important ones include:
+You can see a full list in [PostHog](https://us.posthog.com/data-management/properties) or in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts), but the most important ones include:
 
 | Name                        | Key                      | Example value                  |
 |-----------------------------|--------------------------|--------------------------------|
@@ -254,6 +258,7 @@ You can configure `posthog-js` to autocapture information that users copy or cut
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     autocapture: {
         capture_copied_text: true,
         // any other autocapture config
@@ -261,7 +266,7 @@ posthog.init('<ph_project_api_key>', {
 })
 ```
 
-We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis or use the Activity page to view the copied content in context.
+We then report the copied or cut text as a "Clipboard autocapture" event. You can use the `$selected_content` property in analysis or use the [activity page](/docs/activity) to view the copied content in context.
 
 <ProductScreenshot
   imageLight={ImgClipboardAuocaptureLight} 
@@ -287,6 +292,7 @@ Or by setting your config:
 ```js-web
 posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     capture_dead_clicks: true,
     // any other config
 })

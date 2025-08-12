@@ -1,4 +1,4 @@
-import { replacePath } from './utils'
+import { replacePath, stripFrontmatter } from './utils'
 import { createFilePath, createRemoteFileNode } from 'gatsby-source-filesystem'
 import fetch from 'node-fetch'
 import GitUrlParse from 'git-url-parse'
@@ -6,6 +6,7 @@ import slugify from 'slugify'
 import { JSDOM } from 'jsdom'
 import { GatsbyNode } from 'gatsby'
 import { PAGEVIEW_CACHE_KEY } from './onPreBootstrap'
+import { resolveSnippets } from './snippetUtils'
 
 require('dotenv').config({
     path: `.env.${process.env.NODE_ENV}`,
@@ -104,7 +105,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
 
         const imageFields = ['featuredImage', 'thumbnail', 'logo', 'logoDark', 'icon']
         imageFields.forEach((field) => {
-            if (node.frontmatter?.[field] && node.frontmatter?.[field].includes('res.cloudinary.com')) {
+            if (node.frontmatter?.[field] && new URL(node.frontmatter[field]).hostname === 'res.cloudinary.com') {
                 const publicId = getPublicID(node.frontmatter?.[field])
                 const cloudinaryData = cloudinaryCache[publicId]
                 if (!cloudinaryData) {
@@ -222,7 +223,7 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             try {
                 const templateConfigs: { templateId: string; inputs_schema: any; name: string; type: string }[] = []
                 for (const templateId of templateIds) {
-                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates/`)
+                    const res = await fetch(`https://us.posthog.com/api/public_hog_function_templates?limit=350/`)
 
                     if (res.status !== 200) {
                         throw `Got status code ${res.status}`
@@ -248,9 +249,17 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
                 console.error(`Error fetching input_schema for ${templateIds}: ${error}`)
             }
         }
+
+        const contentWithoutFrontmatter = stripFrontmatter(node.rawBody)
+        const contentWithSnippets = resolveSnippets(contentWithoutFrontmatter, node.fileAbsolutePath)
+        createNodeField({
+            node,
+            name: `contentWithSnippets`,
+            value: contentWithSnippets,
+        })
     }
 
-    if (node.internal.type === 'Plugin' && node.url.includes('github.com') && process.env.GITHUB_API_KEY) {
+    if (node.internal.type === 'Plugin' && new URL(node.url).hostname === 'github.com' && process.env.GITHUB_API_KEY) {
         const { name, owner } = GitUrlParse(node.url)
         const { download_url } = await fetch(`https://api.github.com/repos/${owner}/${name}/readme`, {
             headers: {
@@ -311,7 +320,16 @@ export const onCreateNode: GatsbyNode['onCreateNode'] = async ({
             body: JSON.stringify({ locationId: id }),
         })
             .then((res) => res.json())
-            .then((data) => data.results.name)
+            .then((data) => {
+                if (!data?.results?.name) {
+                    console.log('No name found for location', data)
+                }
+                return data?.results?.name
+            })
+            .catch((e) => {
+                console.error('Error fetching Ashby location name', e)
+                return null
+            })
 
     if (node.internal.type === 'AshbyJobPosting') {
         const title = node.title.replace(' (Remote)', '')

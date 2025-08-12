@@ -35,4 +35,4 @@ For customers with existing paid subscriptions we need to complete additional st
 4. Cancel subscription in stripe: Ensure the subscription is canceled in Stripe so they are not billed during the trial.
 5. Create new subscription before trial ends and update Billing Admin so customer experience isn't affected when transitioning back to a paid plan.
    
-
+If they need a shared Slack channel as part of the trial, [follow these instructions.](/handbook/growth/sales/slack-channels)

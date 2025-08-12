@@ -6,6 +6,9 @@ tags:
   - community
 ---
 
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 To easily track your Docusaurus site, you can install the [PostHog plugin](https://github.com/PostHog/posthog-docusaurus). This enables you to autocapture pageviews, clicks, session replays, as well as use the other features of PostHog such as [surveys](/docs/surveys). 
 
 ## Install
@@ -43,3 +46,7 @@ module.exports = {
 Run your site again to see events autocaptured by PostHog.
 
 > **Note:**You can pass additional PostHog [config options](/docs/libraries/js/config) to the plugin, but they are passed through `JSON.stringify()`, so functions (such as `before_send`) are not supported.
+
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />

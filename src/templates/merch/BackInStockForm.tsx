@@ -2,16 +2,41 @@ import React, { useState } from 'react'
 import { CallToAction } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 
-export function BackInStockForm({ variant }) {
+interface VariantProp {
+    title?: string
+    product?: {
+        title?: string
+    }
+    selectedOptions?: Array<{
+        name: string
+        value: string
+    }>
+    shopifyId?: string
+}
+
+interface ProductProp {
+    title?: string
+    shopifyId?: string
+}
+
+export function BackInStockForm({ variant, product }: { variant?: VariantProp; product: ProductProp }) {
     const [email, setEmail] = useState('')
     const [submitted, setSubmitted] = useState(false)
     const posthog = usePostHog()
+
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const title = variant?.product?.title
+
+        // Extract title with fallbacks: variant title -> variant.product title -> product title
+        const title = variant?.product?.title || variant?.title?.replace('Default Title', '') || product?.title
+
+        // Extract shopifyId with fallback: variant shopifyId -> product shopifyId
+        const shopifyId = variant?.shopifyId || product?.shopifyId
+
         const size = variant?.selectedOptions?.find((o: any) => o.name === 'Size')?.value || 'N/A'
-        const product = { title, size, shopifyId: variant?.shopifyId }
-        posthog?.capture('back_in_stock_form_submitted', { email, product })
+        const productData = { title, size, shopifyId }
+
+        posthog?.capture('back_in_stock_form_submitted', { email, product: productData })
         setSubmitted(true)
     }
 

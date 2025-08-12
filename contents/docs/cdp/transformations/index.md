@@ -8,7 +8,7 @@ As PostHog data arrives, you can transform it *immediately* before ingestion. Yo
 - Anonymizing sensitive data
 - Enriching events with geo information
 - Dropping unnecessary properties
-- Writing custom transformations using our Hog programming language
+<!-- - Writing custom transformations using our Hog programming language -->
 - Filtering out bot traffic
 - Much more.. 
 
@@ -17,6 +17,8 @@ PostHog enables you to transform your events in realtime using a variety of pre-
 ![Transformations list in PostHog](https://res.cloudinary.com/dmukukwp6/image/upload/transformation_list_a15ad4e309.png)
 
 Need more flexibility? Our [custom transformations](/docs/cdp/transformations/customizing-transformations) enable you to write your own Hog code to transform events exactly how you want. You can modify, enrich, or filter your events using our powerful Hog programming language.
+
+**Note**: Transformations don't apply to exceptions we capture as part of the error tracking product. If you need to run transformation against your exception data, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
 ## Filtering
 

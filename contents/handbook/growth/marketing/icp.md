@@ -4,7 +4,8 @@ sidebar: Handbook
 showTitle: true
 ---
 
-Aligned with our Strategic [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework), ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly.
+Aligned with our Strategic [Ideal Customer Profile](/newsletter/ideal-customer-profile-framework) and [who we are building for](/handbook/who-we-are-building-for), ICP scoring helps us to focus our efforts on those customers who are likely to help us hit our growth targets quickly. This is similar, but not the same as [our lead scoring](/handbook/growth/sales/lead-scoring).
+
 We use [Clearbit](https://clearbit.com/) to enhance our contact information as it is created and then compute a score out of 24 in [Salesforce](https://posthog.lightning.force.com/lightning/setup/ObjectManager/Lead/FieldsAndRelationships/00NHp000018JdMZ/view) based on the following parameters:
 
 - *Employee count* - we use this as a strong indicator for product market fit.  Smaller companies are less likely to have achieved this so our highest score here goes to companies in the 15-500 employee range.  We score companies over 500 employees lower as they will generally be slower to deal with.
@@ -21,23 +22,23 @@ We use [Clearbit](https://clearbit.com/) to enhance our contact information as i
 
 - *Email provider* - if someone signs up with a non-work email they are less likely to become a high-paying customer so we downweight those.
 
-| Metric         | Value                                                                                                                                                                                                                                                                                    | Score |
-|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|
-| Employee Count | 0-14                                                                                                                                                                                                                                                                                     | 0     |
-|                | 15-500                                                                                                                                                                                                                                                                                   | 6     |
-|                | 500-1000                                                                                                                                                                                                                                                                                 | 3     |
-|                | 1000+                                                                                                                                                                                                                                                                                    | 0     |
-| Ability to pay | Estimated Revenue $1m-$50m                                                                                                                                                                                                                                                               | 6     |
-|                | Estimated Revenue $50m-$100m                                                                                                                                                                                                                                                             | 3     |
-| Role           | engineering                                                                                                                                                                                                                                                                              | 6     |
-|                | leadership                                                                                                                                                                                                                                                                               | 6     |
-|                | product (technical e.g. do they have a Github ID)                                                                                                                                                                                                                                        | 6     |
-|                | product (non-technical)                                                                                                                                                                                                                                                                  | 3     |
-|                | marketing                                                                                                                                                                                                                                                                                | 0     |
-| Company type   | private                                                                                                                                                                                                                                                                                  | 3     |
-| Founded year   | 2015-2022                                                                                                                                                                                                                                                                                | 3     |
-| Country        | Not in Australia, Austria, Belgium, Brazil, Canada, Denmark, Estonia, Finland, France, Germany, Iceland, Ireland, Israel, Italy, Japan, Latvia, Lithuania, Netherlands, New Zealand, Norway, Portugal, Singapore, South Korea, Spain, Sweden, Switzerland, United Kingdom, United States | -5    |
-| Email provider | Non-work email                                                                                                                                                                                                                                                                           | -10   |
+| Metric         | Value | Score |
+|----------------|-------|-------|
+| Employee Count | 0-14 | 0 |
+| | 15-500 | 6 |
+| | 500-1,000 | 3 |
+| | 1,000+ | 0 |
+| Ability to pay | Est. Revenue $1M-$50M | 6 |
+| | Est. Revenue $50M-$100M | 3 |
+| Role | Engineering | 6 |
+| | Leadership | 6 |
+| | Product (technical with GitHub ID) | 6 |
+| | Product (non-technical) | 3 |
+| | Marketing | 0 |
+| Company type | Private | 3 |
+| Founded year | 2015-2022 | 3 |
+| Country | Not in: Australia, Austria, Belgium, Brazil, Canada, Denmark, Estonia, Finland, France, Germany, Iceland, Ireland, Israel, Italy, Japan, Latvia, Lithuania, Netherlands, New Zealand, Norway, Portugal, Singapore, South Korea, Spain, Sweden, Switzerland, UK, US | -5 |
+| Email provider | Non-work email | -10 |
 
 
 We also sync the ICP score back into PostHog as the `icp_score` person property.  Our current dividing line between High and Low ICP score is **12**.

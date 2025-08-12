@@ -54,7 +54,7 @@ For example, HogQL was missing `OFFSET` support until <TeamMember name="Michael 
 
 An important part of dogfooding is noticing areas you aren't doing it, but should be. In our case, a key part of [our strategy](/handbook/why-does-posthog-exist) is being the source of truth for product and customer data, but we often needed to rely on non-PostHog tools to do this, not dogfooding our own.
 
-This was the inspiration behind the [data warehouse](/docs/data-warehouse), which provides the ability to link and query data from external sources like Stripe, Hubspot, Zendesk. This enables to dogfood our own solution instead of relying on an external one. 
+This was the inspiration behind the [data warehouse](/docs/data-warehouse), which provides the ability to link and query data from external sources like Stripe, Hubspot, Zendesk. This enables to [dogfood our own solution](/blog/data-warehouse-at-posthog) instead of relying on an external one. 
 
 Dogfooding has been critical for its development. Functionality has been guided by the queries of our sales and product teams, and a majority of feedback about issues and usability came from internal teams during alpha.
 

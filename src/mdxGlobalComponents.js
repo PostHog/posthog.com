@@ -5,6 +5,7 @@ import { BasicHedgehogImage } from './components/BasicHedgehogImage'
 import { BorderWrapper } from './components/BorderWrapper'
 import { CallToAction } from './components/CallToAction'
 import { Caption } from './components/Caption'
+import CloudinaryImage from './components/CloudinaryImage'
 import { Images } from './components/Careers/Images'
 import { ComparisonTable } from './components/ComparisonTable'
 import { CompensationCalculator } from './components/CompensationCalculator'
@@ -25,6 +26,7 @@ import { OverflowXSection } from './components/OverflowXSection'
 import { Quote } from './components/Pricing/Quote'
 import Link from './components/Link'
 import { PrivateLink } from './components/PrivateLink'
+import ImageSlider from './components/ImageSlider'
 import { AbTesting } from './components/Product/AbTesting'
 import { FeatureFlags } from './components/Product/FeatureFlags'
 import { ProductAnalytics } from './components/Product/ProductAnalytics'
@@ -52,11 +54,11 @@ import { Signatures } from './components/Signatures'
 import { SlackPage } from './components/SlackPage'
 import { Squeak } from './components/Squeak'
 import { StarRepoButton } from './components/StarRepoButton'
-import { Startups } from './components/Startups'
 import { TracksCTA } from './components/TracksCTA'
 import { Tweet } from './components/Tweet'
 import { ZendeskTicket } from './components/ZendeskTicket'
 import { MaxCTA } from './components/MaxCTA'
+import { Steps, Step } from './components/Docs/Steps'
 
 export const shortcodes = {
     ArrayCTA,
@@ -64,7 +66,9 @@ export const shortcodes = {
     BorderWrapper,
     CallToAction,
     Caption,
+    CloudinaryImage,
     Images,
+    ImageSlider,
     ComparisonTable,
     CompensationCalculator,
     ContentViewer,
@@ -111,9 +115,10 @@ export const shortcodes = {
     SlackPage,
     Squeak,
     StarRepoButton,
-    Startups,
     TracksCTA,
     Tweet,
     ZendeskTicket,
     MaxCTA,
+    Steps,
+    Step,
 }

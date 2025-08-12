@@ -1,0 +1,205 @@
+---
+title: Controlling data storage
+sidebarTitle: Data storage
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
+This guide covers the various features available **after data reaches PostHog Cloud servers** to help you achieve your privacy goals. If you have data that cannot reach a third-party server like PostHog, please omit them during [data collection](/docs/privacy/data-collection).
+
+This guide covers the following features:
+
+| Feature | Description |
+|---------|-------------|
+| [Data storage location](#data-storage-location) | Control where your data is physically stored for GDPR compliance |
+| [Processing data before storage](#processing-data-before-storage) | Redact or filter data before it's stored in PostHog |
+| [Data deletion](#data-deletion) | Tools to help comply with data deletion requests |
+| [Data access control](#data-access-control) | Manage who can access what data in PostHog | 
+
+## Data storage location
+
+If you require GDPR compliance, there are [specific guidelines](docs/privacy/gdpr-compliance#you-should-not-transfer-eu-users-personal-data-outside-the-eu) on the location of data storage if you collect personal data. If you require robust GDPR compliance, we recommend using [PostHog Cloud EU](/eu) – a managed version of PostHog that's hosted on servers based in Frankfurt.
+
+## Processing data before storage
+
+PostHog supports [realtime transformations](/docs/cdp/transformations) of data **before it's stored in PostHog**. These transformations are applied to all events captured in realtime, so you can use them to:
+
+- [Redacting PII data](https://posthog.com/tutorials/property-filter) before it's stored in PostHog
+- Disabling default [GeoIP enrichment transformations](https://us.posthog.com/pipeline/transformations)
+- [Dropping events](https://us.posthog.com/pipeline/new/transformation/hog-template-drop-events) based on a filter
+- [Hashing PII data](https://us.posthog.com/pipeline/new/transformation/hog-template-pii-hashing)
+- [IP anonymization](https://us.posthog.com/pipeline/new/transformation/hog-template-ip-anonymization)
+
+When in doubt, you can always create your own [custom transformation](https://us.posthog.com/pipeline/new/transformation/hog-template-blank-transformation). Custom transformations use the [ Hog](/docs/hog) language to transform data. 
+
+<details>
+<summary>See all default event properties collected</summary>
+
+| Name                        | Key                      | Example value                  |
+|-----------------------------|--------------------------|--------------------------------|
+| Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
+| OS                          | `$os`                    | `Mac OS X`                     |
+| OS Version                  | `$os_version`            | `10.15.7`                      |
+| Browser                     | `$browser`               | `Chrome`                       |
+| Browser Version             | `$browser_version`       | `125`                          |
+| Device Type                 | `$device_type`           | `Desktop`                      |
+| Current URL                 | `$current_url`           | `https://example.com/page`     |
+| Host                        | `$host`                  | `example.com`                  |
+| Path Name                   | `$pathname`              | `/page`                        |
+| Screen Height               | `$screen_height`         | `1080`                         |
+| Screen Width                | `$screen_width`          | `1920`                         |
+| Viewport Height             | `$viewport_height`       | `950`                          |
+| Viewport Width              | `$viewport_width`        | `1903`                         |
+| Library                     | `$lib`                   | `web`                          |
+| Library Version             | `$lib_version`           | `1.31.0`                       |
+| Search Engine               | `$search_engine`         | `google`                       |
+| Referrer URL                | `$referrer`              | `https://google.com`           |
+| Referring Domain            | `$referring_domain`      | `www.google.com`               |
+| Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
+| Event Type                  | `$event_type`            | `click`                        |
+| UTM Source                  | `$utm_source`            | `newsletter`                   |
+| UTM Medium                  | `$utm_medium`            | `email`                        |
+| UTM Campaign                | `$utm_campaign`          | `product_launch`               |
+| UTM Term                    | `$utm_term`              | `new+product`                  |
+| UTM Content                 | `$utm_content`           | `logolink`                     |
+| Google Click ID             | `$gclid`                 | `TeSter-123`                   |
+| Google Ads Source           | `$gad_source`            | `google_ads`                   |
+| Google Search Ads 360 Click | `$gclsrc`                | `dsa`                          |
+| Google DoubleClick Click ID | `$dclid`                 | `testDclid123`                 |
+| Google Web-to-app Measure   | `$wbraid`                | `testWbraid123`                |
+| Google App-to-web Measure   | `$gbraid`                | `testGbraid123`                |
+| Facebook Click ID           | `$fbclid`                | `testFbclid123`                |
+| Microsoft Click ID          | `$msclkid`               | `testMsclkid123`               |
+| Twitter Click ID            | `$twclid`                | `testTwclid123`                |
+| LinkedIn Ad Tracking ID     | `$la_fat_id`             | `testLaFatId123`               |
+| Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
+| Instagram Share Id          | `$igshid`                | `testIgshid123`                |
+| TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
+| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
+| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
+| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
+| IP Address                  | `$ip`                    | `192.168.1.1`                  |
+
+</details>
+
+## Data deletion
+
+You can remove unwanted data from PostHog by deleting groups and persons.
+
+| What to delete | Where to delete | Additional details |
+|----------------|-----------------|-------------------|
+| **Projects** | [Project settings](https://us.posthog.com/settings/project#project-delete) | All data under the project (including events) are automatically removed |
+| **Organizations** | [Organization settings](https://us.posthog.com/settings/organization#organization-delete) | All data under the organization's projects (including events) are automatically removed |
+| **Persons** | [In the persons tab](https://us.posthog.com/persons), [by API](#right-to-be-forgotten) | When a person is deleted, all events for that person can be deleted |
+
+### Right to be forgotten
+
+<CalloutBox icon="IconWarning" title="Note" type="caution">
+
+You can reuse `distinct_id` values after deletion using the **Reset deleted person** tool, available from the dropdown at the top-right of the [**persons page**](https://app.posthog.com/persons). This tool allows you to reset a deleted `distinct_id` so that future events associated with it will create a new person profile.  
+
+If you instead want to split a person with multiple IDs (e.g. to isolate bad data tied to a specific `distinct_id`), use the **Split IDs** button on their person profile.
+
+</CalloutBox>
+
+Persons and events can be deleted using our API endpoints. This action requires a [personal API key](https://us.posthog.com/settings/user-api-keys).
+
+To query all persons in your project, use the [GET Persons API endpoint](/docs/api/persons#get-api-projects-project_id-persons). You can filter for specific subsets of persons using the query parameters. For example, you can get a specific person by filtering by email:
+
+<MultiLanguage>
+
+```bash
+export POSTHOG_PERSONAL_API_KEY=[your personal api key]
+curl \
+    -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \
+    https://us.posthog.com/api/projects/:project_id/persons?email={EMAIL}
+```
+
+```javascript
+const response = await fetch('https://us.posthog.com/api/projects/:project_id/persons?email={EMAIL}', {
+  headers: {
+    'Authorization': 'Bearer [your personal api key]'
+  }
+})
+```
+
+```python
+import requests
+
+api_key = "[your personal api key]"
+project_id = "[your project id]"
+response = requests.get(
+    "https://us.posthog.com/api/projects/{project_id}/persons?email={EMAIL}".format(
+        project_id=project_id
+    ),
+    headers={"Authorization": "Bearer {}".format(api_key)},
+).json()
+```
+
+</MultiLanguage>
+
+To delete the persons and their events, you can use the [DELETE Persons API endpoint](/docs/api/persons#delete-api-projects-project_id-persons-id)
+
+To do that, iterate through the persons returned in the previous step and use the person's `id` in the DELETE call. To delete the person's corresponding events in addition to the person, add the `delete_events=true` parameter. For example:
+
+<MultiLanguage>
+
+```bash
+curl -X DELETE "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true" \
+     -H "Authorization: Bearer {YOUR_API_KEY}"
+```
+
+```javascript
+fetch("https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true", {
+  method: 'DELETE',
+  headers: {
+    'Authorization': 'Bearer {YOUR_API_KEY}'
+  }
+})
+.then(response => response.json())
+.then(data => console.log(data))
+.catch(error => console.error('Error:', error));
+```
+
+```python
+import requests
+
+url = "https://posthog.example.com/api/projects/{YOUR_PROJECT_ID}/persons/{ID}?delete_events=true"
+headers = {
+    'Authorization': 'Bearer {YOUR_API_KEY}'
+}
+
+response = requests.delete(url, headers=headers)
+print(response.json())
+```
+
+</MultiLanguage>
+
+### Manual data deletion
+
+You can manually delete persons and their events in the PostHog UI:
+
+- Select **Persons** from the left-hand menu
+- Search for the person via their `distinct_id` or a property like email.
+- Click **view** next to the person within the search results
+- Click **Delete person** to remove them and all their associated data from the PostHog instance. You will be prompted to confirm this action.
+
+### Asynchronous data deletion
+
+While most data in PostHog is deleted instantly, event data is not. Instead data is cleared asynchronously during non-peak usage times (weekends on PostHog Cloud).
+
+This is done because data deletion in [ClickHouse](/docs/how-posthog-works/clickhouse) is expensive and it can impact performance for other users.
+
+## Data access control
+
+An important part of protecting your users' privacy is to control who can access what data in PostHog. PostHog provides access control at 3 levels:
+
+1. [Organization level](/docs/settings/access-control#1-organization-level)
+2. [Project level](/docs/settings/access-control#2-project-level)
+3. [Resource level](/docs/settings/access-control#3-resource-level)
+
+It's up to you to use these access control features to grant access to only the people who need to access the data.
+
+You can follow this comprehensive guide to [access control](/docs/settings/access-control) to learn more.

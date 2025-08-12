@@ -1,26 +1,37 @@
-### Q1 2025 objectives
+### Q3 2025 objectives
 
-1. Main Goal: Make it a no-brainer for customers to use our insights
-   - Research and improve insights 
-     - [Sandy] Funnels
-       - Filters in exclusion steps
-       - Optional Steps
-       - Time to convert trends
-     - [Thomas] User Paths
-     - [Anirudh] Retention
-       - Revenue Retention - connect to data warehouse
-     - Data management / Non-existing tools
-   - [Thomas] Better path cleaning support
-   - Taxonomic Filter Improvements
-     - Better organized, easier to use
-     - Information about properties (schema and statistics)
-   - [Anirudh] Make other non-event sources a first-class citizen of the insight ecosystem
-   - Metric to track - Reduce usage of HogQL as a workaround/crutch for missing UI features
+* **Improve the UX around loading and performance**
+  * Make refreshing more subtle on dashboards with existing data (just light grey spinner)
+  * Create a metric that tracks how often people are triggering manual refreshes (Anirudh)
+    * If this is large, attempt to drive it down with improvements to cache warming or UX (while not overly burdening ClickHouse)
+    * Improve cache warming efficiency
+    * enable refreshing for shared dashboards
 
-2. [Anirudh] Small Goal: Alerts v2
-   - Alerts on funnels
-   - Notifications through Slack
+* **Infrastructure improvements**
+  * Port things that are being affected by Celery unreliability to Temporal
+    * Async `/query` calls triggered when the FE blocking queries are backed up
+    * Cache warming
+  
 
-3. [Sandy] Small Goal: Shared dashboards with passwords
+* **Feature development**
+  * PW-protected shared dashboards (hashed password)
+  * Using Data Warehouse tables in funnel steps
+  * Total count aggregation in funnels
+  * Pinned dashboard filters
+  * Event usage counts -> enable taxonomic filter improvements
+  * Event management (borrowed properties?)
+  * Nightly / timed dashboard calculation 
 
-4. [Sandy & Anna] Research Goal: Understand activation and contraction
+* **Figure out how to triage feature requests for the team** (Anna)
+
+
+* **AI generated insights** (Anirudh)
+  * Suggested insights section (above all insights maybe)
+    * Once we have the users data, we can figure out what insights to generate (from say signup events,...) maybe even create entire dashboards
+  * Related charts
+
+* **Statistical analysis** (Anirudh working with Anna)
+  * Confidence intervals
+  * Forecasting
+  * Trend lines
+  * Root cause analysis

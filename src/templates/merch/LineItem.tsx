@@ -58,11 +58,21 @@ export function LineItem(props: LineItemsProps): React.ReactElement {
                         )}
                     </div>
                     <div className="text-right">
-                        {item.count > 1 && <span>{item.count} x</span>} <Price price={item.price} />
+                        {item.count > 1 && <span>{item.count} x</span>}
+                        {item.kit ? (
+                            <>
+                                <span className="line-through">
+                                    <Price price={item.price} />
+                                </span>{' '}
+                                <span className="text-green font-bold">FREE</span>
+                            </>
+                        ) : (
+                            <Price price={item.price} />
+                        )}
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
-                    <Quantity defaultValue={item.count} onChange={setQuantity} />
+                    <Quantity defaultValue={item.count} onChange={setQuantity} disabled={item.kit} />
 
                     <div className="cursor-pointer text-sm" onClick={() => void handleRemoveFromCart()}>
                         Remove

@@ -55,6 +55,8 @@ Even better, use the UTM campaign, content, medium, or check for a specific clic
 
 Doing a combination of these to fit the performance marketing you are doing helps you track the total traffic from individual campaigns. 
 
+<MaxCTA question="Which UTM campaigns are driving the most traffic this month?" />
+
 ## Tracking signups from performance marketing
 
 Every company has a goal for its performance marketing. For some, it is activation. For others, it is leads. For us at PostHog, it is signups. In this section, feel free to replace the signup event (in our case, action) with the relevant goal (event or action) for you. 
@@ -90,6 +92,8 @@ Second, we can change the graph type to “Historical trends” to give us a bet
 ![Historical trends type funnel](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/performance-marketing/funnel-type.png)
 
 On top of these, there are lots of settings to tweak your funnel such as “Conversion rate calculation,” “Conversion window limit,” and “Date range” to match your desired insights. 
+
+<MaxCTA question="Create a funnel showing my performance marketing conversion from pageview to signup" />
 
 ## What are the benefits of measuring your performance marketing?
 

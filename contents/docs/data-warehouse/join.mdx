@@ -14,7 +14,7 @@ The real power of the data warehouse is the ability to combine data from multipl
 
 You can join external data on existing PostHog schemas and other external data tables. These joins are saved and interpreted anytime they're accessed on the origin table. 
 
-To define a join, go to the [SQL tab](https://us.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Here you define the source table key, joining table, and joining table key as well as how the fields are accessed.
+To define a join, go to the [SQL editor](https://app.posthog.com/sql), click the three dots next to your source table, and click **Add join**. Here you define the source table key, joining table, and joining table key as well as how the fields are accessed.
 
 For example, if you import your Stripe data, you can define a join between the `events` table's `distinct_id` key and the `stripe_customer` table's `email` key. You can then access the `stripe_customer` table through the `events` table like `SELECT stripe_customer.id FROM events`. 
 
@@ -33,6 +33,8 @@ To edit or delete a table join, click the three dots next to your source table, 
 ## Person joins
 
 Person joins are a special type of table joins. They are joins on the `persons` table in PostHog. When you join external data on this table, we enable you to use it like a person filter in insights. 
+
+> **Note:** To see `extended person properties` in filters, be sure to start the join on the `persons` table as the source table. To do that, go to the [SQL editor](https://app.posthog.com/sql), find the persons table in the left column, click the three dots next to the `persons` table, and click **Add join**.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/p_light_b0d3101335.png" 

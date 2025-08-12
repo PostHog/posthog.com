@@ -16,7 +16,7 @@ This is the most common reason events don't appear. To debug this, you can try s
 <MultiLanguage>
 
 ```Web
-posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>' }) // Replace with the URL you copied from webhook.site
+posthog.init('<ph_project_api_key>', { api_host: '<https://webhook.site/843c9506-b845-4ce4-af46-d04022279393>', defaults: '<ph_posthog_js_defaults>' }) // Replace with the URL you copied from webhook.site
 ```
 
 ```node
@@ -224,13 +224,13 @@ Want a bot added to this list? Request it via [the in-app feedback form](http://
 
 ### Is it ok for my API key to be exposed and public?
 
-import ExposedApiKeys from "../\_snippets/exposed-api-keys.mdx"
+import ExposedApiKeys from "../_snippets/exposed-api-keys.mdx"
 
 <ExposedApiKeys />
 
 ### How do I rename my events?
 
-It's not possible to rename events in PostHog. Instead, you should use [actions](/docs/data/actions). This [tutorial](/tutorials/how-to-rename-events) covers this in detail.
+It's not possible to rename events in PostHog. Renaming is very resource intensive because it requires updating every existing event in the database. It's more practical to give events aliases instead using [actions](/docs/data/actions). This [tutorial](/tutorials/how-to-rename-events) covers this in detail.
 
 ## Insights and queries FAQ
 

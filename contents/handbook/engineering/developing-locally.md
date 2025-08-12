@@ -378,6 +378,12 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 ```bash
 ./bin/start
+
+# only services strictly required to run posthog
+./bin/start --minimal
+
+# enable tracing for django services (jaeger and otel collector are part of the stack)
+./bin/start --enable-tracing
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -524,74 +530,84 @@ While developing, there are times you may want to connect to the database to que
 
 ## Extra: Accessing the Django Admin
 
-If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staf` to `true`. This should make the admin page accessible.
+If you cannot access the Django admin http://localhost:8000/admin/, it could be that your local user is not set up as a staff user. You can connect to the database, find your `posthog_user` and set `is_staff` to `true`. This should make the admin page accessible.
+
+## Extra: Sending emails
+
+Emails are configured in `posthog/emails.py`.
+
+To test email functionality during local development, we use Maildev, a lightweight SMTP server with a web interface to inspect sent emails.
+
+Add the following environment variables to your `.env` file:
+
+```.env
+EMAIL_HOST=127.0.0.1
+EMAIL_PORT=1025
+EMAIL_HOST_USER=
+EMAIL_HOST_PASSWORD=
+EMAIL_USE_TLS=false
+EMAIL_USE_SSL=false
+EMAIL_ENABLED=true
+```
+
+With the default `docker-compose.dev.yml` setup, you can view emails in your browser at [http://localhost:1080](http://localhost:1080).
+
+This allows you to easily confirm that emails are being sent and formatted correctly without actually sending anything externally.
+
+Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
+
+## Extra: Enable tracing with Jaeger
+
+To debug with Jaeger, you can use the following command:
+
+```bash
+./bin/start --enable-tracing
+```
+
+Jaeger will be available at [http://localhost:16686](http://localhost:16686).
+
+#### Production usage
+
+We send our PostHog Cloud emails via Customer.io using their HTTP API. If Customer.io is not configured but SMTP is, it will fall back to SMTP. We do this so we can continue to support SMTP emails for self-hosted instances.
+
+#### Setting up Customer.io emails
+
+To start sending via Customer.io, all you need to do is add the `CUSTOMER_IO_API_KEY` variable. Please be careful when using locally, this is only intended for testing emails and should not be used otherwise.
+
+#### Setting up SMTP emails
+
+Most, but not all, emails have been migrated to Customer.io. Some are still sending via SMTP from Django templates. Eventually we will move them all to Customer.io but we will still support SMTP for self-hosted instances.
+
+- Set `EMAIL_HOST`, `EMAIL_PORT`, and `EMAIL_ENABLED` appropriately
+- Enable TLS or SSL if required (`EMAIL_USE_TLS=true` or `EMAIL_USE_SSL=true`)
+- Provide valid credentials for your email provider using `EMAIL_HOST_USER` and `EMAIL_HOST_PASSWORD`
+
+### Creating a new email
+
+When creating a new email, there are a few steps to take. It's important to add the template to both Customer.io and the `posthog/templates/` folder.
+
+1. Create a new template in Customer.io. Ask @joe or @team-platform for help here if needed
+2. Add the new Customer.io template to the `CUSTOMER_IO_TEMPLATE_ID_MAP` in `posthog/email.py`
+3. Create a template in PostHog as an SMTP backup. Make sure the file name matches the key used in the template map.
+4. Trigger the email with something like this:
+    ```python
+    message = EmailMessage(
+        use_http=True,  # This will attempt to send via Customer.io before falling back to SMTP
+        campaign_key=campaign_key,
+        subject="This is a subject",
+        template_name="test_template",
+        template_context={
+            ...
+        },
+    )
+    message.add_recipient(email=target_email)
+    message.send()
+    ```
 
 ## Extra: Developing paid features (PostHog employees only)
 
 If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
 
-## Extra: Working with the data warehouse and a MySQL source
+## Extra: Working with the data warehouse
 
-If you want to set up a local MySQL database as a source for the data warehouse, there are a few extra set up steps you'll need to complete:
-1. Setting up a local MySQL database to connect to.
-2. Installing MS SQL drivers on your machine.
-3. Defining additional environment variables for the Temporal task runner.
-
-First, install MySQL:
-
-```bash
-brew install mysql
-brew services start mysql
-```
-
-Once MySQL is installed, create a database and table, insert a row, and create a user who can connect to it:
-
-```bash
-mysql -u root
-```
-```sql
-CREATE DATABASE posthog_dw_test;
-CREATE TABLE IF NOT EXISTS payments (id INT AUTO_INCREMENT PRIMARY KEY, timestamp DATETIME, distinct_id VARCHAR(255), amount DECIMAL(10,2));
-INSERT INTO payments (timestamp, distinct_id, amount) VALUES (NOW(), 'testuser@example.com', 99.99);
-CREATE USER 'posthog'@'%' IDENTIFIED BY 'posthog';
-GRANT ALL PRIVILEGES ON posthog_dw_test.* TO 'posthog'@'%';
-FLUSH PRIVILEGES;
-```
-
-Next, you'll need to install some MS SQL drivers for PostHog the application to connect to the MySQL database. Learn the entire process in [posthog/warehouse/README.md](https://github.com/PostHog/posthog/blob/master/posthog/warehouse/README.md). Without the drivers, you'll get the following error when connecting a SQL database to data warehouse:
-
-```
-symbol not found in flat namespace '_bcp_batch'
-```
-
-Lastly, you'll need to define these environment variables in order for the Temporal task runner monitor the correct queue and work as expected:
-
-```
-# Ask for the values in #team-data-warehouse
-export PYTHONUNBUFFERED=
-export DJANGO_SETTINGS_MODULE=
-export DEBUG=
-export CLICKHOUSE_SECURE=
-export KAFKA_HOSTS=
-export DATABASE_URL=
-export SKIP_SERVICE_VERSION_REQUIREMENTS=
-export PRINT_SQL=
-export BUCKET_URL=
-export AIRBYTE_BUCKET_KEY=
-export AIRBYTE_BUCKET_SECRET=
-export AIRBYTE_BUCKET_REGION=
-export AIRBYTE_BUCKET_DOMAIN=
-export TEMPORAL_TASK_QUEUE=
-export AWS_S3_ALLOW_UNSAFE_RENAME=
-export HUBSPOT_APP_CLIENT_ID=
-export HUBSPOT_APP_CLIENT_SECRET=
-```
-
-If you put them in a `.temporal-worker-settings` file, you can run `source .temporal-worker-settings` before you call `DEBUG=1 ./bin/start`.
-
-To verify everything is working as expected:
-1. Navigate to "Data pipeline" in the PostHog application.
-2. Create a new MySQL source using the settings above.
-3. Once the source is created, click on the "MySQL" item. In the schemas table, click on the triple dot menu and select the "Reload" option.
-
-After the job runs, clicking on the synced table name should take you to your data.
+[See here for working with data warehouse](/handbook/engineering/data-warehouse)

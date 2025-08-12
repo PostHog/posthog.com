@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-As an AE, you'll spend as much time managing your existing book of business as you will closing [new deals](/handbook/growth/sales/new-sales). Your first priority is retaining them - we have to work twice as hard if we're trying to close new deals and make up for lost customers. You'll typically be assigned a bunch of customers who are paying monthly - this means they could turn off PostHog at any time. 
+As a Technical Account Manager, you'll spend as much time managing your existing book of business as you will closing [product-led leads](/handbook/growth/sales/product-led-sales). Your first priority is retaining them - we have to work twice as hard if we're trying to close new deals and make up for lost customers. You'll typically be assigned a bunch of customers who are paying monthly - this means they could turn off PostHog at any time. 
 
 Once you're confident that a customer isn't going anywhere, then you want to think about how you can expand their usage. Usually (but not always) this is after they've signed an annual contract. 
 
@@ -12,7 +12,7 @@ In order of priority, your objectives should be:
 
 - Retention - establish multiple strong lines of communication
 - Expansion - cross-sell additional products
-- Retention - secure an annual commitment (maybe, but not always!)
+- Retention - secure an annual commitment (maybe, but not always - very hard to do on just a single product!)
 - Expansion - expand usage of the same product into new teams
 - Expansion - expand usage of the same product in the same team
 
@@ -40,7 +40,7 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
-Ideally you want to get multiple people into a [shared Slack channel[(/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
+Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
 
 ### 2. Get a longer term commitment (maybe!)
 
@@ -103,24 +103,6 @@ If you offer to do a meeting in person with a customer, they’ll then feel obli
 Generally speaking you should be trying to regularly see customers in your book of business who are $60k+ annually, or could get there. Occasionally you can pull in James/Tim if they are traveling to SF/NY especially, or if the customer is in London. 
 
 If you regularly visit customers, you can (and should) take some sweet merch. You can self-serve this using [a discount code pinned in our team Slack channel](https://posthog.slack.com/archives/C01MGUHFH6G/p1734015156043549) to get 100% off your order.
-
-## Renewals for annual contracts
-
-### When they don't have enough credit to cover their term
-
-We have CreditBot alerts set up in [#sales-alerts](https://posthog.slack.com/archives/C071PGWKBQS) when a customer is going to run out of credit before their contract term ends, with the estimated runway remaining.  The Vitally account owner (AE or CSM) will be tagged in this message.  It's best to be proactive here so that the customer is right-sized well before the credit runs out:
-
-* If they will run out of credit or wish to buy more within the **first 6 months** of the contract term, they can still take advantage of their initial discount.  You'll need to have them sign a new order form which adds the additional credit, and it should expire on the date of the original order form.
-  * Example: Their original order form was signed on 1st January with a 12-month term.  Their expansion order form could be signed on 1st June with a 7-month term.  Make sure the end date lines up with the end date of the original contract to avoid any issues with the billing server and ARR calculation.
-* If they will run out of credit with **less than 2 months** remaining on their initial term, as long as they sign a renewal order form to start at the end of the original contract term we will cover their usage for free until the renewal date, assuming the renewal order form is signed before they run out of credit.
-* If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date.  This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
-  * Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September.  We need a new 12-month order form in place with a Contract Start Date of September 1st. 
- 
-For any of the above scenarios you should use our [discounting principles](/handbook/growth/sales/contracts#discounts) which apply to the annual spend.  In scenario one above if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract.
-
-### When they will end the contract term with credit remaining
-
-We can roll up to half the amount of credit from the original order form to a new contract term, provided that the customer signs a renewal contract of equal or higher spend than the original contract.
 
 ## Steady state retention
 
