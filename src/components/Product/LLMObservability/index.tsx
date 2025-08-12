@@ -291,26 +291,26 @@ const PairsWithArray = [
         icon: <IconWarning />,
         color: 'orange',
         product: 'Error tracking',
-        description: 'Get alerts when an error occurs, then deep dive into it and assign blame to someone else.',
+        description: 'Get error alerts, then deep dive into it and assign blame to someone else.',
         url: '/error-tracking',
     },
     {
         icon: <IconRewindPlay />,
         color: 'yellow',
         product: 'Session replays',
-        description: 'Jump from a trace straight to the session that caused it to see what the user was doing.',
+        description: 'Jump from a trace to the session that caused it to see what the user was doing.',
         url: '/session-replay',
     },
     {
         icon: <IconToggle />,
         color: 'blue',
         product: 'Feature flags',
-        description: 'Gate changes behind feature flags, including new LLM models, pricing tiers or UI changes. ',
+        description: 'Gate changes behind flags, including new LLM models, pricing or UI changes. ',
         url: '/feature-flags',
     },
 ]
 
-export const ProductFeatureFlags = () => {
+export const ProductLLMObservability = () => {
     const { phantom, contra, elevenlabs, carvertical } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
@@ -471,7 +471,7 @@ export const ProductFeatureFlags = () => {
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/disguise_c3409b2e2b.png"
                             alt="privacy mode hedgehog"
-                            className="w-full max-w-[562px]"
+                            className="w-full max-w-[262px]"
                         />
                     </aside>
                 </div>
@@ -662,4 +662,4 @@ export const ProductFeatureFlags = () => {
     )
 }
 
-export default ProductFeatureFlags
+export default ProductLLMObservability
