@@ -47,7 +47,7 @@ export default function OSTabs({
                             key={tab.value}
                             value={tab.value}
                             data-scheme={triggerDataScheme}
-                            className="data-[state=active]:bg-primary px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-t-sm relative -bottom-px z-10 text-sm select-none"
+                            className="data-[state=active]:bg-primary px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-t-sm relative -bottom-px z-10 text-sm select-none text-primary"
                         >
                             {tab.label}
                         </Tabs.Trigger>

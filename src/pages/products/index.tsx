@@ -278,6 +278,7 @@ export default function Products(): JSX.Element {
                         'ai',
                         'data',
                         'analytics',
+                        'dataviz',
                         'product',
                         'engineering',
                         'product_engineering',
@@ -288,8 +289,9 @@ export default function Products(): JSX.Element {
                     // Category display names
                     const categoryDisplayNames: Record<string, string> = {
                         ai: 'PostHog AI',
-                        data: 'Customer data platform',
-                        analytics: 'Analytics',
+                        data: 'Customer data infrastructure',
+                        analytics: 'Analytics dashboards',
+                        dataviz: 'Data visualization',
                         product: 'Product',
                         engineering: 'Engineering',
                         product_engineering: 'Product engineering',
