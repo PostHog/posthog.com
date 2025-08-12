@@ -9,12 +9,12 @@ availability:
 ---
 
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { CalloutBox } from 'components/Docs/CalloutBox'
+
 export const ImgClipboardAuocaptureLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-light.png"
 export const ImgClipboardAuocaptureDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/autocapture/clipboard-activity-dark.png"
 
-PostHog can capture frontend events automatically using autocapture. This captures events like `pageview`, `screen`, `click`, `change of input`, or submission associated with a `button`, `form`, `input`, `select`, or `textarea`.
-
-This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
+PostHog can automatically capture events as users interact with your app. This means you don't need to manually add tracking for individual components, links, buttons, divs, spans, or other parts of your product. Autocapture also provides data for [heatmaps](/docs/toolbar/heatmaps).
 
 Autocapture is available in the following SDKs:  
 
@@ -22,6 +22,182 @@ Autocapture is available in the following SDKs:
 - [React](/docs/libraries/react) - enabled by default
 - [React Native](/docs/libraries/react-native) - disabled by default
 - [iOS](/docs/libraries/ios) - disabled by default
+
+<CalloutBox icon="IconInfo" title="Looking for session and exception autocapture?" type="fyi">
+
+  You can also autocapture session and exception events. See [session replay](/docs/session-replay/installation) and [error tracking](/docs/error-tracking/start-here) for more information.
+
+</CalloutBox>
+
+## Events captured by autocapture
+
+PostHog automatically captures the following events when autocapture is enabled:
+
+import Tab from "components/Tab"
+
+<Tab.Group tabs={['Web', 'iOS', 'React Native']}>
+<Tab.List>
+<Tab>Web</Tab>
+<Tab>iOS</Tab>
+<Tab>React Native</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+| Event | Description |
+|-------|-------------|
+| `$autocapture` | On interactions with: `a`, `button`, `form`, `input`, `select`, `textarea`, `label`, and elements with `contenteditable="true"`. Autocaptures are displayed with names like `clicked span with text "Delete"`, but filtering for **Autocapture** will show you all autocaptured events. |
+| `$pageview` | When the user navigates to a new page. |
+| `$pageleave` | When the user navigates away from a page. |
+| `$rageclick` | A second click within 1000ms within 30px of the first click. |
+| `$copy_autocapture` | Clipboard events. Disabled by default. See [clipboard autocapture](#clipboard-autocapture). |
+
+Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://us.posthog.com/data-management/properties) or in [the references](https://posthog.com/docs/references/posthog-js/types/Properties).
+
+<details> 
+<summary>List of relevant properties</summary>
+
+| Name                        | Key                      | Example value                  |
+|-----------------------------|--------------------------|--------------------------------|
+| Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
+| OS                          | `$os`                    | `Mac OS X`                     |
+| OS Version                  | `$os_version`            | `10.15.7`                      |
+| Browser                     | `$browser`               | `Chrome`                       |
+| Browser Version             | `$browser_version`       | `125`                          |
+| Device Type                 | `$device_type`           | `Desktop`                      |
+| Current URL                 | `$current_url`           | `https://example.com/page`     |
+| Host                        | `$host`                  | `example.com`                  |
+| Path Name                   | `$pathname`              | `/page`                        |
+| Screen Height               | `$screen_height`         | `1080`                         |
+| Screen Width                | `$screen_width`          | `1920`                         |
+| Viewport Height             | `$viewport_height`       | `950`                          |
+| Viewport Width              | `$viewport_width`        | `1903`                         |
+| Library                     | `$lib`                   | `web`                          |
+| Library Version             | `$lib_version`           | `1.31.0`                       |
+| Search Engine               | `$search_engine`         | `google`                       |
+| Referrer URL                | `$referrer`              | `https://google.com`           |
+| Referring Domain            | `$referring_domain`      | `www.google.com`               |
+| Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
+| Event Type                  | `$event_type`            | `click`                        |
+| UTM Source                  | `$utm_source`            | `newsletter`                   |
+| UTM Medium                  | `$utm_medium`            | `email`                        |
+| UTM Campaign                | `$utm_campaign`          | `product_launch`               |
+| UTM Term                    | `$utm_term`              | `new+product`                  |
+| UTM Content                 | `$utm_content`           | `logolink`                     |
+| Google Click ID             | `$gclid`                 | `TeSter-123`                   |
+| Google Ads Source           | `$gad_source`            | `google_ads`                   |
+| Google Search Ads 360 Click | `$gclsrc`                | `dsa`                          |
+| Google DoubleClick Click ID | `$dclid`                 | `testDclid123`                 |
+| Google Web-to-app Measure   | `$wbraid`                | `testWbraid123`                |
+| Google App-to-web Measure   | `$gbraid`                | `testGbraid123`                |
+| Facebook Click ID           | `$fbclid`                | `testFbclid123`                |
+| Microsoft Click ID          | `$msclkid`               | `testMsclkid123`               |
+| Twitter Click ID            | `$twclid`                | `testTwclid123`                |
+| LinkedIn Ad Tracking ID     | `$la_fat_id`             | `testLaFatId123`               |
+| Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
+| Instagram Share Id          | `$igshid`                | `testIgshid123`                |
+| TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
+| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
+| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
+| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
+| IP Address                  | `$ip`                    | `192.168.1.1`                  |
+
+#### Notes:
+- If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties.
+- Many of these are also captured as [session properties](/docs/data/sessions).
+- Mobile libraries capture additional properties like `$app_build`, `$app_name`, `$app_namespace`, and `$app_version`.
+- These properties can be hidden in activity by checking the "Hide PostHog properties" box.
+
+</details>
+
+</Tab.Panel>
+<Tab.Panel>
+
+| Event Name | Description |
+|------------|-------------|
+| `$screen` | Screen view changes, with screen name as property |
+| `$autocapture` | User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll` and control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`. |
+| `Application Installed` | First app launch |
+| `Application Updated` | App version updates |
+| `Application Opened` | App becomes active/foreground |
+| `Application Backgrounded` | App moves to background |
+
+<details> 
+<summary>List of relevant properties</summary>
+
+On autocaptured iOS events, you can find the following properties in the event besides the default event properties:
+
+| Property | Description |
+|----------|-------------|
+| `description` | Type of user interaction |
+| `text` | Element text/value (sanitized) |
+| `screen_name` | Current view controller name |
+| `elements_chain` | View hierarchy from target to root |
+
+Where `description` is one of the following types of user interaction:
+
+| Description | When Captured |
+|-------------|---------------|
+| `"touch"` | Tap gestures on views |
+| `"swipe"` | Swipe gestures |
+| `"pan"` | Pan/drag gestures |
+| `"pinch"` | Pinch to zoom |
+| `"rotation"` | Rotation gestures |
+| `"long_press"` | Long press gestures |
+| `"scroll"` | Scroll view changes |
+| `"value_changed"` | Control value changes |
+| `"submit"` | Form submission |
+| `"toggle"` | Switch/checkbox changes |
+| `"primary_action"` | Main control actions |
+| `"menu_action"` | Menu actions |
+| `"change"` | General editing changes |
+
+Where `elements_chain` is a list of elements from the target to the root of the view hierarchy.
+
+| Element Type | Format |
+|--------------|--------|
+| **With Text** | `"ClassName:text=\"value\""` |
+| **With Base Class** | `"ClassName:attr__class=\"baseClass\""` |
+| **With Label** | `"ClassName:attr_id=\"label\""` |
+| **Plain** | `"ClassName"` |
+
+Where rules are:
+
+| Rule | Description |
+|------|-------------|
+| **Length Limit** | Maximum 255 characters |
+| **Whitespace** | Multiple spaces/line breaks → single space |
+| **Unicode** | Zero-width characters removed |
+| **Sensitive** | Password fields automatically excluded |
+
+Where `text` is the text of the element.
+
+| Control Type | Debounce Interval |
+|--------------|------------------|
+| **UISlider** | 0.3 seconds |
+| **UISwitch** | 0.4 seconds |
+| **UIPickerView** | 0.0 seconds |
+| **UIScrollView** | 0.0 seconds |
+| **Text Fields** | 0.0 seconds |
+
+</details>
+
+</Tab.Panel>
+<Tab.Panel>
+
+| Event Name | Description |
+|------------|-------------|
+| `$autocapture` | Captures touch events. |
+| `$screen` | When the user navigates. If using `@react-navigation/native` (v6 or lower) or `react-native-navigation`. See [React Native docs](/docs/libraries/react-native#capturing-screen-views) for config options. |
+| `Application Installed` | When app is first installed |
+| `Application Updated` | When app is updated to new version |
+| `Application Opened` | When app is opened from cold start |
+| `Application Became Active` | When app becomes active from background |
+| `Application Backgrounded` | When app goes to background |
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
 
 ## Configuring autocapture
 
@@ -162,76 +338,6 @@ const MyForm = () => {
   )
 }
 ```
-
-## Autocaptured events
-
-Autocaptured events include:
-
-- `$autocapture`: Clicks, taps, inputs, typing, form submissions, and more.
-- `$pageview`: Triggers on page load. You might need to manually capture these in single-page apps like [React](/docs/libraries/react), [Next.js](/docs/libraries/next-js#pages-router) or [Vue](/docs/libraries/vue-js#capturing-page-views).
-- `$pageleave`: Triggers on `onpagehide` when a user navigates away from a page.
-- `$rageclick`: A second click within 1000ms within 30px of the first click.
-- `$screen`: When a user navigates on a mobile app.
-- Application lifecycle events like `Application Opened`, `Application Became Active`, `Application Backgrounded`, `Application Installed`, and `Application Updated` for mobile SDKs like [React Native](/docs/libraries/react-native#autocapture).
-
-> **Note:** Since pageview autocapture relies on the browser page load events, it captures the initial pageview but not subsequent ones. You might need to implement your own pageview capture using custom events. See our guides for doing this in [Next.js](/docs/libraries/next-js#client-side-setup), [React](/tutorials/single-page-app-pageviews), [Vue](/docs/libraries/vue-js#capturing-pageviews), and [Angular](/docs/libraries/angular#tracking-pageviews).
-
-## Autocaptured properties
-
-Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo.
-
-You can see a full list in [PostHog](https://us.posthog.com/data-management/properties) or in [GitHub](https://github.com/PostHog/posthog-js/blob/main/packages/browser/src/utils/event-utils.ts), but the most important ones include:
-
-| Name                        | Key                      | Example value                  |
-|-----------------------------|--------------------------|--------------------------------|
-| Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
-| OS                          | `$os`                    | `Mac OS X`                     |
-| OS Version                  | `$os_version`            | `10.15.7`                      |
-| Browser                     | `$browser`               | `Chrome`                       |
-| Browser Version             | `$browser_version`       | `125`                          |
-| Device Type                 | `$device_type`           | `Desktop`                      |
-| Current URL                 | `$current_url`           | `https://example.com/page`     |
-| Host                        | `$host`                  | `example.com`                  |
-| Path Name                   | `$pathname`              | `/page`                        |
-| Screen Height               | `$screen_height`         | `1080`                         |
-| Screen Width                | `$screen_width`          | `1920`                         |
-| Viewport Height             | `$viewport_height`       | `950`                          |
-| Viewport Width              | `$viewport_width`        | `1903`                         |
-| Library                     | `$lib`                   | `web`                          |
-| Library Version             | `$lib_version`           | `1.31.0`                       |
-| Search Engine               | `$search_engine`         | `google`                       |
-| Referrer URL                | `$referrer`              | `https://google.com`           |
-| Referring Domain            | `$referring_domain`      | `www.google.com`               |
-| Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
-| Event Type                  | `$event_type`            | `click`                        |
-| UTM Source                  | `$utm_source`            | `newsletter`                   |
-| UTM Medium                  | `$utm_medium`            | `email`                        |
-| UTM Campaign                | `$utm_campaign`          | `product_launch`               |
-| UTM Term                    | `$utm_term`              | `new+product`                  |
-| UTM Content                 | `$utm_content`           | `logolink`                     |
-| Google Click ID             | `$gclid`                 | `TeSter-123`                   |
-| Google Ads Source           | `$gad_source`            | `google_ads`                   |
-| Google Search Ads 360 Click | `$gclsrc`                | `dsa`                          |
-| Google DoubleClick Click ID | `$dclid`                 | `testDclid123`                 |
-| Google Web-to-app Measure   | `$wbraid`                | `testWbraid123`                |
-| Google App-to-web Measure   | `$gbraid`                | `testGbraid123`                |
-| Facebook Click ID           | `$fbclid`                | `testFbclid123`                |
-| Microsoft Click ID          | `$msclkid`               | `testMsclkid123`               |
-| Twitter Click ID            | `$twclid`                | `testTwclid123`                |
-| LinkedIn Ad Tracking ID     | `$la_fat_id`             | `testLaFatId123`               |
-| Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
-| Instagram Share Id          | `$igshid`                | `testIgshid123`                |
-| TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
-| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
-| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
-| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
-| IP Address                  | `$ip`                    | `192.168.1.1`                  |
-
-> **Notes:**
-> - If enabled, [GeoIP data](/docs/cdp/geoip-enrichment) is added also as properties.
-> - Many of these are also captured as [session properties](/docs/data/sessions).
-> - Mobile libraries capture additional properties like `$app_build`, `$app_name`, `$app_namespace`, and `$app_version`.
-> - These properties can be hidden in activity by checking the "Hide PostHog properties" box.
 
 ## Analyzing autocaptured events and properties
 
