@@ -1,13 +1,7 @@
 import React from 'react'
-
-import { Structure } from '../../Structure'
 import { mergeClassList } from '../../../lib/utils'
-import { BoardMeetings, Compensation, Feedback, Finances } from 'components/Careers/Images'
-import boardMeetingsImg from './images/board-meetings.svg'
-import financesImg from './images/finances.svg'
-import feedbackImg from './images/feedback.svg'
+import { BoardMeetings, Feedback, Finances } from 'components/Careers/Images'
 import Logo from 'components/Logo'
-import { StaticImage } from 'gatsby-plugin-image'
 import { CallToAction } from 'components/CallToAction'
 import CloudinaryImage from 'components/CloudinaryImage'
 
