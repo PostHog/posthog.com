@@ -83,7 +83,7 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
     )
 }
 
-function Avatar({ values, setFieldValue }) {
+function Avatar({ values, setFieldValue, error }) {
     const inputRef = useRef<HTMLInputElement>(null)
     const [imageURL, setImageURL] = useState(values?.avatar?.url)
     const favoriteColor = values.color
@@ -115,7 +115,7 @@ function Avatar({ values, setFieldValue }) {
                         ? `bg-${favoriteColor} border-gray-accent-light dark:border-gray-accent-dark`
                         : `border-${favoriteColor} dark:border-${favoriteColor}`
                     : `border-gray-accent-light dark:border-gray-accent-dark`
-            }  text-black/50 dark:text-white/50 overflow-hidden group -mb-2`}
+            }  text-black/50 dark:text-white/50 overflow-hidden group ${error ? '' : '-mb-2'}`}
         >
             {imageURL ? (
                 <img className="w-full absolute inset-0 object-cover" src={imageURL} />
@@ -425,6 +425,14 @@ const ValidationSchema = Yup.object().shape({
     linkedin: Yup.string().url('Invalid URL').nullable(),
     twitter: Yup.string().url('Invalid URL').nullable(),
     biography: Yup.string().max(3000, 'Please limit your bio to 3,000 characters, you wordsmith!').nullable(),
+    avatar: Yup.mixed()
+        .nullable()
+        .test('fileType', 'Images only', (value) => {
+            const allowedTypes = ['image/jpeg', 'image/png', 'image/gif']
+            if (!value) return true
+            if (typeof value === 'string') return true
+            return value && (allowedTypes.includes(value.type) || allowedTypes.includes(value.mime))
+        }),
 })
 
 function EditProfile({ profile, mutate }) {

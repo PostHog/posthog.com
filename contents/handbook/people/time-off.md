@@ -29,13 +29,14 @@ If you don't do this, your holiday won't show up in the team time off calendar.
 
 To book a day off:
 - Book it on the PTO by Deel app in Slack. There are various types of time off you can select. It will be automatically approved and added to the team time off calendar (with the exception of longer term leave.) It will also be added to your manager's personal calendar.
+- Do not book directly on deel.com as it does not sync with Slack, and the team will not know you are out. Yes, it is confusing that Deel have two separate systems here. 
 - There are four types of time off you can select
    - PTO - this will be the majority of the time for vacation or any other time off that doesn't fit below
    - Out Sick - this is when you're sick and will take time off unexpectedly
    - [Parental Leave](https://posthog.com/handbook/people/time-off#parental-leave)
    - Medical Leave - this is planned time off for you personally, on medical grounds - if it is a family member who requires support meaning you      will be off, this is PTO. 
 - Block out your own personal GCal to show that you are out. This is because PTO by Deel _only_ books in an all day event in your calendar to show that you are out. If you don't do this, automated meetings such as interviews or demos might still get booked into your cal.  
-- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages. 
+- Set an out of office message on your email and have it point to someone else on the team, or hey@posthog.com. PTO by Deel will automatically set your Slack status to out of office and will autorespond to Slack messages.
 
 > Please manually book in public holidays you plan to take off as well. We have team members working in countries all over the world, so it is not practical for us to book these all in on your behalf. Some people also prefer to work on certain days even if they're considered a public holiday in the country they are living in or visiting. 
 
@@ -81,15 +82,16 @@ If you are summonsed for jury duty, please let Fraser know right away - we can o
 
 Parental leave is exceptional as it needs to be significantly longer than a typical vacation. Anyone at PostHog, regardless of gender, is able to take parental leave, and regardless of whether you've become a parent through childbirth or adoption. 
 
-If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full base salary pay. 
+If you have been at PostHog for over 1 year as of the date of your child's birth, you can take up to 24 weeks maternity leave or 4 weeks paternity leave on full base salary pay. If you have been at PostHog for under 1 year and have passed probation, you should just some time off as PTO, typically 2-3 weeks but talk to Fraser.
 
-We only pay this in one continuous block. If you have been at PostHog for under 1 year, we will pay you according to your local jurisdiction's legal requirements. 
+> Parental leave at PostHog is designed to be more generous than your local jurisdiction's legal requirements.  Wherever there is a discrepancy between these local regulations and PostHog policy, we will merge the local minimum rules with the above.
+
+We only pay the enhanced parental leave in one continuous block.
 
 Parental leave isn't supposed to be combined with our unlimited PTO policy here - we aren't prescriptive and will trust your judgement, but please note that we usually won't allow you do a combination of parental leave plus a long holiday in addition to that to extend your time off. 
 
 Please communicate parental leave to Fraser as soon as you feel comfortable doing so, and in any case at least 4 months before it will begin. They will let the People & Ops team know, who will follow up on any logistical arrangements around salary etc. and any statutory paperwork that needs doing. 
 
-> Wherever there is a discrepancy between local regulations and PostHog policy, we will merge the local minimum rules with the above where relevant.
 
 ## Birthday and anniversaries
 
@@ -113,7 +115,9 @@ The birthday gift usually arrives on the day of or 1-3 days prior to the birthda
 
 On your first anniversary with PostHog, you will receive a giftcard from [Giftogram](https://giftogram.com/) or [Prezzee](https://www.prezzee.uk/business/signin/) (if you are based in the UK) which can be used on a wide selection of brands. On your second anniversary you'll be gifted a [customized Lego minifig](https://minifig.fab-bricks.com/) in a display case, and on your third anniversary, you'll receive a personalized gift from [Wellbox](https://wellbox.app/). 
 
-1st year anniversary - $50 for US gift cards/$55 for all other countries gift cards to cover service fees:
+#### 1st year anniversary
+
+For the first year anniversary, we give $50 for US gift cards/$55 for all other countries gift cards to cover service fees:
 
 1. Login into [Giftogram](https://app.giftogram.com/sign-in) by using your gmail credentials
 2. Two ways to create a new Giftogram, on the tool bar above where it says “Create and Send'' or you can click on the right hand side on the blue button “Send a Giftogram''. 
@@ -125,14 +129,18 @@ On your first anniversary with PostHog, you will receive a giftcard from [Giftog
   - Delivery message; select PostHog team as the sender and select the drop down “1st year anniversary” as the pre-populated message or you can create your own personal message 
   - Last step, schedule the delivery date and you’re done! 
 
-### 2nd year anniversary - Customized Lego figurine:
+#### 2nd year anniversary
+
+The second year anniversary gets you a customized Lego figurine:
 
 1. Log into [Fab-brick](https://fab-bricks.com/login.php) (login credentials are shared in People & Ops 1Password vault)
 2. Select the third tab “MiniFig Creator” and design your mini fig to look like the individual you’re celebrating! 
 3. Make sure to include a display case and the three tier brick option
 4. After you’ve completed your design, check out. There should already be a Brex card on file. Please make sure you add the individual’s correct mailing address.
 
-### 3rd year anniversary- via [Wellbox](https://wellbox.app/)):
+#### 3rd year anniversary
+
+The third year anniversary is a pack of gifts provided via [Wellbox](https://wellbox.app/).
 
 1. Select the 3rd Anniversary gift in our profile
 2. Fill out delivery info
@@ -140,9 +148,9 @@ On your first anniversary with PostHog, you will receive a giftcard from [Giftog
 
 The gift will usually arrive on the day of or 1-3 days prior to the anniversary date. Shipping fees: UK shipping is free while all other countries will have shipping fees. 
 
-### 4th year anniversary
+#### 4th year anniversary
 
-On your 4th anniversary at PostHog as a big thank you for sticking with us, you have a choice of 3 gifts:
+On your 4th anniversary at PostHog as a big thank you for sticking with us, we give you a choice of 3 gifts:
 
 1. Sage Barista Touch coffee machine
 2. Apple 27-inch 5K Retina Studio Display with standard glass and tilt-adjustable stand

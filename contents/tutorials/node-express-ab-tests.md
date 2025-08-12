@@ -61,7 +61,7 @@ Run `node server.js` and navigate to `http://localhost:3000` to see your app in 
 
 With our app set up, it’s time to install and set up PostHog. If you don't have a PostHog instance, you can [sign up for free](https://us.posthog.com/signup).
 
-To start, install [PostHog’s Node library](/libraries/node):
+To start, install [PostHog’s Node library](/docs/libraries/node):
 
 ```bash
 npm install posthog-node

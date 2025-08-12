@@ -1,0 +1,147 @@
+---
+title: Marketing analytics
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+> **Important:** This feature is currently an opt-in beta. You can enable it on the [feature previews settings page](https://app.posthog.com/settings/user-feature-previews#marketing-analytics). Please leave a comment on this page if you have feedback or questions, or leave feedback via the in-app support modal.
+
+**Marketing analytics** enables you to track marketing campaigns, costs, and performance from multiple advertising platforms in your [marketing analytics dashboard](https://app.posthog.com/web/marketing).
+
+## Marketing dashboard
+
+The marketing dashboard contains multiple pre-built insights helping you understand your campaigns and costs. 
+
+### Marketing costs over time
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/chart_white_e4dddd2635.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/chart_dark_b615545f58.png"
+    alt="Marketing analytics dashboard showing marketing costs over time"
+    classes="rounded"
+/>
+
+The marketing costs chart displays your total advertising spend across all configured data sources:
+
+- **Stacked area visualization** shows the contribution of each platform to your total marketing spend
+- **Time-based trends** help identify spending patterns and budget allocation over the selected date range
+- **Date range filtering** allows you to analyze costs for specific periods using the date picker
+- **Real-time updates** reflect new cost data as it syncs from your configured marketing sources (based on your source sync configuration)
+- **Currency conversion** automatically converts all costs to your configured base currency for consistent reporting
+
+### Campaign breakdown
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/table_white_e64873d2b0.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/table_dark_9c7ba9afdb.png"
+    alt="Campaign costs breakdown table showing detailed performance metrics"
+    classes="rounded"
+/>
+
+The campaign breakdown table provides detailed performance metrics by individual campaign:
+
+- **Campaign**: Campaign identifier from your advertising platform (should match to `utm_campaign` value)
+- **Source**: Ad platform name (e.g., `google`, should match to `utm_source` value)
+- **Total cost**: Total spend for the campaign in your base currency
+- **Total clicks**: Number of clicks received during the selected period
+- **Total impressions**: Number of impressions served
+- **Cost per click**: Average cost per click (total cost ÷ total clicks)
+- **CTR**: Clickthrough rate percentage (total clicks ÷ total impressions × 100)
+- **Conversion goals**: Performance against your defined conversion goals
+- **Cost per conversion**: Cost efficiency for conversions (total cost ÷ conversions)
+
+## Settings and configuration
+
+### Base currency
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/bc_white_26b15e2184.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/bc_dark_c6547dfdb9.png"
+    alt="Base currency configuration"
+    classes="rounded"
+/>
+
+PostHog converts currency values for the entire team to the base currency you set in [your project settings](https://app.posthog.com/settings/project#base-currency) before displaying them. If we can't properly detect your currency from the source data, we'll assume it's in this currency as well.
+
+### Conversion goals
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/cg_white_fa41a57c55.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/cg_dark_c6d0c0e1a1.png"
+    alt="Conversion goals configuration"
+    classes="rounded"
+/>
+
+Define conversion goals by selecting events, actions, or data warehouse tables. These goals are used to track and analyze user conversions in your marketing analytics.
+
+To configure conversion goals, select:
+- **Conversion goal name**: Descriptive name (e.g., purchase, sign up, download)
+- **Event, action or data warehouse table**: Select what to track for conversions
+- **Schema mapping**: For data warehouse tables, map campaign and source attribution fields. For events, PostHog uses UTM parameters: `utm_campaign` and `utm_source`
+
+### Native data warehouse sources
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/native_white_0e3fb7591d.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/native_dark_6056080e7a.png"
+    alt="Native data warehouse sources configuration"
+    classes="rounded"
+/>
+
+PostHog can automatically sync marketing data from support platforms like Google Ads by configuring them as native sources. You'll need to sync the required tables for each source to enable the functionality.
+
+The simplest way to add marketing data is to [add a Google Ads source](https://app.posthog.com/pipeline/new/source?kind=googleads) by following [this guide](/docs/cdp/sources/google-ads).
+
+Required tables for native sources:
+- `campaign`: Contains campaign information and metadata
+- `campaign_stats`: Maps campaigns with performance statistics for each time period
+
+### Non-native data warehouse sources
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/non_native_white_344a406529.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/non_native_dark_f5dd988e41.png"
+    alt="Non-native data warehouse sources configuration"
+    classes="rounded"
+/>
+
+Alternatively, you can use an external data warehouse sources to display marketing analytics. You'll need to map the required columns for each table to enable the functionality. Currently, only BigQuery tables are supported.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/configuring_white_0005e8dba1.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/configuring_dark_90df4b94c2.png"
+    alt="Configuring data warehouse source mapping with required and optional fields"
+    classes="rounded"
+/>
+
+**Required field mappings:**
+- **Campaign**: Campaign identifier or name (mapped to `utm_campaign` query param)
+- **Cost**: Cost amount for the period
+- **Date**: Date of the data record
+- **Source**: Platform name (mapped to `utm_source` query param)
+
+**Optional field mappings:**
+- **Clicks**: Number of clicks received
+- **Currency**: Currency code for cost values
+- **Impressions**: Number of impressions served
+
+### Self-managed data warehouse sources
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/sm_white_f266abeb3a.png" 
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/sm_dark_3a47c737b9.png"
+    alt="Self-managed data warehouse sources configuration"
+    classes="rounded"
+/>
+
+Another option to get marketing analytics data is to configure and use self-managed sources from S3, GCS, Cloudflare R2, and Azure. You'll need to map the required columns for each table to enable the functionality.
+
+> **Note:** We strongly recommend using JSON format for better support and troubleshooting. Like data warehouse tables, you simply need to create a connection between PostHog and your marketing source, map the desired fields, and PostHog will automatically sync the marketing data.
+
+Please refer to the [data pipeline docs](/docs/cdp/sources) for more information on configuring external data sources.

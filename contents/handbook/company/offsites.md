@@ -40,7 +40,6 @@ Some guidelines:
 
 - These are more focused on work than the all-company offsite, but it's still worth organizing a fun activity, do some sightseeing and in general spend time together.
 - Quarterly planning is a great focal point for team offsites – it's worth scheduling your meetup for the week of planning.
-- You should default to picking a city that one or more of your team members already live in, and a place that minimizes travel time/expenses for everyone else.
 - Outside of your small team, you should only invite people who actually need to attend to make the offsite a success - if it would be 'nice to have' them attend, they shouldn't be going. 
 - We'd encourage you to get an Airbnb for everyone not living in the city, as you automatically get a space you can work from and there's less organizing involved. If the group is large enough optimize for multiple apartments in the same building so that you have separate spaces to work / chill / take calls.
 - Specify offsite start and end times down to the hour, for clarity and efficient use of everyone's time.
@@ -79,6 +78,7 @@ If you'd like to book it, please message Kendal in the #team-people-and-ops chan
 
 For offsites and onboardings in London, below is a list of hotels recommended in our [#London Slack channel](https://posthog.slack.com/archives/C028MN3UUP5) by folks who have stayed at these hotels.  These are all relatively near our [Work.Life coworking space in Farringdon](https://work.life/office-space/london/city/farringdon/): 
 
+- [Z Hotel City](https://www.thezhotels.com/hotels/city/)
 - [citizenM Tower of London hotel](https://www.citizenm.com/hotels/europe/london/tower-of-london-hotel)
 - [Clayton Hotel - City of London](https://www.claytonhotels.com/city-of-london/)
 - [Hampton by Hilton  - London Old Street](https://www.hilton.com/en/hotels/lhroshx-hampton-london-old-street/)
@@ -86,19 +86,25 @@ For offsites and onboardings in London, below is a list of hotels recommended in
 - [Yotel London City](https://www.yotel.com/en/hotels/yotel-london-city)
 - [Bob W Tower Hill Studios](https://bobw.co/apartments/comfy-studio-tower-hill)
 
+If hotel prices are above £200 per night, it is worth quickly looking for alternatives as ~£170 per night should be achievable midweek in London. If prices are high, you should optimise travel for total cost (flights & accom) so if you can get cheaper flights or hotel by moving dates +/- 1 day, then look into these options. 
+
 ## Travel insurance
 
 Many of our company offsites involve team members traveling abroad, and although we hope that these trips are uneventful and safe for all, in the event of an accident or medical emergency, we carry travel insurance through as well as general & auto liability policies through our partner [Embroker](https://www.embroker.com). 
 
-In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to either Charles as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
+In the event of an emergency, please cover any related expenses (ideally on your company card) and keep receipts, and then reach out to Kendal as soon as possible. We will assist with making a claim based on our [policy binders](https://drive.google.com/drive/folders/1nMoHL_W9sW5IqAsILGzQ8Tuz0RgDRXOj?usp=share_link).
 
 ### Flight delays
 
 If your travel plans are affected due to a flight delay or an airline-induced missed connection and you are forced to stay somewhere unplanned overnight, push the airline to cover the cost of your accommodations (including meals). It's not uncommon for them to initially tell you they no longer offer free hotel rooms for delays that were caused by the airline, but with a little bit of polite coaxing, they will likely give in.
 
+### Partners / family joining offsites
+
+Sometimes at PostHog you will be asked to travel to places you've never been before and it could be a good opportunity to travel with your partner / family. At PostHog, we do infrequent in-person work that we want to maximise this time in person and your focus to be on PostHog, without distraction. This is why we don't allow partners or family to join you for the dates that the offsite / onboarding takes place. If timing allows it, you are able to tack holiday onto either side and for your partner/family to join you for those dates. However, for the dates of the offsite, you should be staying alone and focusing on your time with your teammates. 
+
 ## How to plan an offsite in 8 weeks - a checklist
 
-Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. To use any of the templates, create a copy to your own drive and edit as you see fit.
+Below is a rough timeline for planning your next offsite, as well as links to templates and resources that you can repurpose and customize as needed. Here's a [spreadsheet template](https://docs.google.com/spreadsheets/d/1aeRGN8DWqMQbQ9duSMCqCO2JJbPkQuSDt_Jz2jx10UI/edit?usp=sharing) you can use with your team to democratically vote for the meetup location, and in other tabs, include travel information (in case someone's flight gets delayed/cancelled), schedule, project ideas, team activities, etc. To use any of the templates, create a copy to your own drive and edit as you see fit.
 
 **8 weeks out**
 

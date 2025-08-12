@@ -1,0 +1,16 @@
+```swift file=AppDelegate.swift focusOnLines=7-14
+let POSTHOG_API_KEY = "<ph_project_api_key>"
+// usually 'https://us.i.posthog.com' or 'https://eu.i.posthog.com'
+let POSTHOG_HOST = "<ph_client_api_host>"
+
+let config = PostHogConfig(apiKey: POSTHOG_API_KEY, host: POSTHOG_HOST)
+
+// capture screen views
+config.captureScreenViews = true 
+// capture application lifecycle events (installed, updated, opened, backgrounded)
+config.captureApplicationLifecycleEvents = true
+// capture element interactions (button presses, text input changes, etc.)
+config.captureElementInteractions = true // TIP: Disabled by default
+
+PostHogSDK.shared.setup(config) 
+```

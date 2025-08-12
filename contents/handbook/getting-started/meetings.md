@@ -30,7 +30,7 @@ The Monday all-hands features a few regular sections and is recorded in [this do
     - _Roadmap_: Things we're working on, but aren't available yet. 
     - _Beta_: Things which are available, but aren't ready for release yet.
     - _Prepping for launch_: Things which are ready and we have a pricing RFC and target release date for. 
-It's the responsibility of team leads to update this section for their products, so supporting teams (e.g. Billing, Comms, Support) can assist in a successful launch.
+It's the responsibility of team leads to update this section for their products, so supporting teams (e.g. Billing, Brand, Support) can assist in a successful launch.
 - **Acknowledgements:** Opportunity to give kudos to your colleagues
 - **Topic of the day:** [Exec team talks around a particular topic](/handbook/exec/all-hands-topics)
 - **Q&A with James & Tim:** Ask the founders anything you want

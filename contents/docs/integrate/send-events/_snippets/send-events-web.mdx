@@ -24,19 +24,3 @@ posthog.capture('user_signed_up', {
     is_free_trial: true
 })
 ```
-
-### Manually capturing pageviews and pageleaves in single-page apps
-
-PostHog automatically captures `$pageview` events on page load and `$pageleave` events on page unload. If you have a single-page app, that means it only sends pageview and pageleave once (when your app loads and when users leave).
-
-To make sure any navigating a user does within your app gets captured, you can make pageview and pageleave calls manually like this:
-
-```js-web
-// Capture pageview
-posthog.capture('$pageview')
-
-// Capture pageleave
-posthog.capture('$pageleave')
-```
-
-This automatically sends the current URL along with other [autocaptured properties](/docs/product-analytics/autocapture#autocaptured-properties) like the referrer, OS, scroll depth, and more. See our guide to [tracking pageviews in single-page apps](/tutorials/single-page-app-pageviews) for more details.

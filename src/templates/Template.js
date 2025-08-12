@@ -20,7 +20,7 @@ export default function Template({ data }) {
         fields: { slug },
     } = pageData
     const { title, subtitle, featuredImage, description, filters } = pageData?.frontmatter
-    const { type } = filters
+    const { type, usePrefilterLink } = filters
 
     return (
         <Layout parent={communityMenu} activeInternalMenu={communityMenu.children[2]}>
@@ -46,7 +46,12 @@ export default function Template({ data }) {
                         <article>
                             {type.includes('dashboard') && (
                                 <div className="flex justify-center gap-2 mb-12">
-                                    <CallToAction href="https://us.posthog.com/dashboard#newDashboard" type="primary">
+                                    <CallToAction
+                                        href={`https://us.posthog.com/dashboard?${
+                                            usePrefilterLink ? `templateFilter=${title}` : ''
+                                        }#newDashboard`}
+                                        type="primary"
+                                    >
                                         Get started with this template
                                     </CallToAction>
                                     <CallToAction href="https://us.posthog.com/dashboard" type="secondary">

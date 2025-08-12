@@ -10,11 +10,9 @@ Offboarding team members is a sensitive time. The aim of this policy is to creat
 
 In this case, the team member chooses to leave PostHog. 
 
-We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for you to work during that notice period. This is so we have some time to find someone to hire and to enable a handover. Please assume by default we will expect you to work all of this period. In some rare situations, for roles such as recruitment, we may request you work only part of this period - it'd be weird to be recruiting people whilst you are just about to leave.
+We ask for 30 days of notice by default (unless locally a different maximum or minimum limit applies), and for team members to work during that notice period. This is so we have some time to find someone to hire and to enable a handover. Please assume by default we will expect team members to work all of this period.
 
-If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or the [people team](/teams/people) to discuss your reasons for wanting to leave. While we don't want to persuade anyone who is unhappy to stay, you may find that the best solution involves changing things here at PostHog, rather than going somewhere else.
-
-If resignation is the only solution after you have discussed your concerns, please send an email communicating your intention to resign to your manager or the people team. We will then start a discussion around what is needed for the handover.
+> If you are a current team member and you are thinking about resigning from PostHog, we encourage you to speak with your manager or the [people team](/teams/people) to discuss your reasons for wanting to leave. While we don't want to persuade anyone who is unhappy to stay, you may find that the best solution involves changing things here at PostHog, rather than going somewhere else. If resignation is the only solution after you have discussed your concerns, please send an email communicating your intention to resign to people@posthog.com. We will then start a discussion around what is needed for the handover.
 
 ## Involuntary departure
 
@@ -35,7 +33,9 @@ We use the following general process for managing people whose performance isn't
 
 In cases where a team member's role can no longer be justified, we usually make a decision as an exec team and then let the team member know straight away - unfortunately it is not feasible to let someone know that we are thinking of getting rid of their role.
 
-We will usually ask the team member to stop working immediately. If they have been with us for at least 3 months, they will be paid 4 months of their base salary as [severance](/handbook/people/compensation#severance). Otherwise, they will be paid 1 month of base salary as severance and, if a US team member, we will also cover their healthcare costs through the end of the next calendar month. 
+In either case, we will usually ask the team member to stop working immediately. Final pay and severance are calculated as below. 
+
+> If a team member wants to resign but is deliberately trying to get let go so that they receive 4 months' severance, we may treat this as a material breach of your employment contract, which is [gross misconduct](/handbook/people/grievances#disciplinary-process). In such cases, team members are not eligible for any severance beyond the statutory minimum where they live. 
 
 ## Communicating departures
 
@@ -57,23 +57,21 @@ We will then send over an email covering the following points with the team memb
 4. Business expenses
 5. Personal email to the company (optional)
 
-For voluntary leavers, the people team will schedule an [Exit interview](https://forms.gle/DaNGRhmvQJcLGfpa9) to hear more about the team member's experience working at PostHog, their reasons for leaving and to identify areas for improvement. This will usually happen in their last week. 
-
 ### Final pay
 
 Final pay will be determined based on length of service and the reasons for leaving:
 
 * If the offboarding is voluntary, they will be paid up until their last day. We will look at the amount of holiday taken in the last 12 months and will pay any "unused" vacation pay assuming they would have taken 25 days (since we offer unlimited vacation periods).
-* If the offboarding is involuntary and due to performance reasons or a change in business needs, they will receive 4 months of pay, provided they have been at PostHog for at least 3 months. If they have been with PostHog for less time, they will receive 1 month of pay. 
-* If the offboarding is involuntary and for gross misconduct or breach of contract, they may be paid nothing and receive no notice.
+* If the offboarding is involuntary and due to performance reasons or a change in business needs, they will receive 4 months of pay, provided they have been at PostHog for at least 3 months (6 months for sales roles). If they have been with PostHog for less time, they will receive 1 month of pay and, if a US team member, we will also cover healthcare costs through the end of the next calendar month. 
+* If the offboarding is involuntary and for gross misconduct, including breach of contract, they may be paid the statutory minimum required only, and receive no notice. This is at our discretion depending on the circumstances.
 
-We ask departing team members to sign a post-termination certificate in order to receive payments beyond their final day of work.
+> We ask departing team members to sign a post-termination certificate in order to receive payments beyond their final day of work. If we do not receive this, then we will only pay in line with statutory requirements. 
 
 Please note that if there are local laws which are applicable, we will pay the greater of the above or the legally required minimum.
 
 ### Share options vested
 
-If a team member has been allocated share options, we will confirm how many have vested and the process by which they may wish to exercise them. We have a team-friendly post-departure exercise window of 10 years, and most team members who leave will be deemed a 'good leaver' unless they have been terminated due to misconduct or negligence. 
+If a team member has been allocated share options, we will confirm how many have vested and the process by which they may wish to exercise them. We have a team-friendly post-departure exercise window of 10 years, and most team members who leave will be deemed a 'good leaver' unless they have been terminated due to gross misconduct. 
 
 ## Offboarding checklist
 

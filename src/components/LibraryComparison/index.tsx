@@ -54,6 +54,7 @@ export const LibraryComparison = () => {
                     sessionRecording
                     featureFlags
                     groupAnalytics
+                    errorTracking
                 }
             }
         }
@@ -78,6 +79,7 @@ export const LibraryComparison = () => {
                         <th>Session recording</th>
                         <th>Feature flags</th>
                         <th>Group analytics</th>
+                        <th>Error tracking</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -94,6 +96,7 @@ export const LibraryComparison = () => {
                                 <td>{renderAvailability(lib.frontmatter.features?.sessionRecording)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.featureFlags)}</td>
                                 <td>{renderAvailability(lib.frontmatter.features?.groupAnalytics)}</td>
+                                <td>{renderAvailability(lib.frontmatter.features?.errorTracking)}</td>
                             </tr>
                         ))}
                 </tbody>

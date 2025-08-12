@@ -8,10 +8,6 @@ tags:
   - product analytics
 ---
 
-import { ProductScreenshot } from 'components/ProductScreenshot'
-export const EventsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-light.png"
-export const EventsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/tutorials/nuxt-surveys/events-dark.png"
-
 [Product analytics](/product-analytics) enable you to gather and analyze data about how users interact with your Nuxt.js app. To show you how to set up analytics, in this tutorial we create a basic Nuxt app, add PostHog on both the client and server, and use it to capture pageviews and custom events.
 
 ## Creating a Nuxt app
@@ -88,7 +84,7 @@ First install `posthog-js`:
 npm install posthog-js
 ```
 
-Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project API key in your [PostHog project settings](https://app.posthog.com/settings/project)
+Then, add your PostHog API key and host to your `nuxt.config.ts` file. You can find your project API key in your [PostHog project settings](https://app.posthog.com/settings/project).
 
 ```ts file=nuxt.config.ts
 export default defineNuxtConfig({
@@ -96,7 +92,8 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
@@ -110,7 +107,7 @@ cd plugins
 touch posthog.client.js
 ```
 
-Add the following code to your `posthog.client.js` file:
+Add the code initialize PostHog to your `posthog.client.js` file.
 
 ```js file=plugins/posthog.client.js
 import { defineNuxtPlugin } from '#app'
@@ -120,6 +117,7 @@ export default defineNuxtPlugin(nuxtApp => {
   const runtimeConfig = useRuntimeConfig();
   const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
     api_host: runtimeConfig.public.posthogHost,
+    defaults: runtimeConfig.public.posthogDefaults,
   })
   
   return {
@@ -133,73 +131,11 @@ export default defineNuxtPlugin(nuxtApp => {
 Once you’ve done this, reload your app. You should begin seeing events in the [PostHog events explorer](https://us.posthog.com/events).
 
 <ProductScreenshot
-  imageLight={EventsLight} 
-  imageDark={EventsDark} 
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_14_55_19_2x_483d9192c7.png" 
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_14_55_38_2x_b61b132048.png" 
   alt="Events in PostHog" 
   classes="rounded"
 />
-
-### Capturing pageviews
-
-You might notice that moving between pages only captures a single pageview event. This is because PostHog only captures pageview events when a [page load](https://developer.mozilla.org/en-US/docs/Web/API/Window/load_event) is fired. Since Nuxt creates a single-page app, this only happens once, and the Nuxt router handles subsequent page changes.
-
-If we want to capture every route change, we must write code to capture pageviews that integrates with the router.
-
-In `posthog.client.js`, set up PostHog to capture pageviews in the `router.afterEach` function. Additionally, you can use `nextTick` so that you capture the event after the page is mounted.
-
-```js file=plugins/posthog.client.js
-import { defineNuxtPlugin } from '#app'
-import posthog from 'posthog-js'
-
-export default defineNuxtPlugin(nuxtApp => {
-  const runtimeConfig = useRuntimeConfig();
-  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-    api_host: runtimeConfig.public.posthogHost,
-    capture_pageview: false // set this to false since we manually capture pageviews in router.afterEach
-  })
-
-  const router = useRouter();
-  router.afterEach((to) => {
-    nextTick(() => {
-      posthog.capture('$pageview', {
-        current_url: to.fullPath
-      });
-    });
-  });
-
-  // rest of your code
-})
-
-```
-
-Make sure to set `capture_pageview` in the PostHog initialization config to `false`. This turns off autocaptured pageviews and ensures you won’t double-capture pageviews on the first load.
-
-```js file=src/index.js
-// your existing imports
-
-posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_client_api_host>",
-  capture_pageview: false
-})
-
-// rest of your code
-```
-
-### Capturing pageleaves (optional)
-
-Note that once you disable automatic `$pageview` captures when calling `posthog.init` you'll be disabling automatic `$pageleave` capture as well. If you want to continue capturing `$pageleave`s automatically, you can re-enable it.
-
-```js file=src/index.js
-// your existing imports
-
-posthog.init("<ph_project_api_key>", {
-  api_host: "<ph_client_api_host>",
-  capture_pageview: false,
-  capture_pageleave: true, // Opt back in because disabling $pageview capture disables $pageleave events
-})
-
-// rest of your code
-```
 
 ### Capturing custom events
 

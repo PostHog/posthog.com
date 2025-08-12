@@ -10,21 +10,7 @@ Tracking and ad blockers can prevent your events from being sent to PostHog. By 
 
 See our docs on [how to set up a reverse proxy](/docs/advanced/proxy) for more details on how to do this.
 
-## 2. Capture pageviews and pageleaves in single-page apps
-
-PostHog automatically sends `$pageview` events whenever it gets loaded and `$pageleave` when they leaves. If you have a [single-page app](/tutorials/single-page-app-pageviews), that means it only sends pageview and pageleave once (when your app loads and when they leave).
-
-To make sure any navigating a user does within your app gets captured, you can capture pageviews and pageleaves manually.
-
-```js-web
-// Capture pageview
-posthog.capture('$pageview')
-
-// Capture pageleave
-posthog.capture('$pageleave')
-```
-
-## 3. Implement a naming convention
+## 2. Implement a naming convention
 
 As your product grows, the amount of analytics data grows with it. Without naming conventions, your data quickly becomes difficult to work with.
 
@@ -78,13 +64,13 @@ All these differences make it more likely that you'll misinterpret your data. Im
 
   - If the property's value is a date or timestamp, include **_date** or **_timestamp** at the end – e.g., `user_creation_date`, `last_login_timestamp`.
 
-## 4. Version your events
+## 3. Version your events
 
 As your app evolves, so do the events you track. Implementing a versioning system for events ensures you can easily distinguish between older and newer events, especially when significant changes occur.
 
 For example, if you initially tracked an event as `registration:sign_up_button_click` and later revamped your registration flow, you can introduce a new version of this event `registration_v2:sign_up_button_click`. This way, you preserve historical data on the old event while making it easy to compare the impact of your new changes.
 
-## 5. Prefer backend to frontend tracking
+## 4. Prefer backend to frontend tracking
 
 Backend analytics are more reliable than frontend analytics. There are 3 reasons for this:
 
@@ -103,7 +89,7 @@ Where possible, it's a good idea to log events on your server instead of your cl
   - You need accurate data – e.g., the number of users that signed up in the last week.
   - You want to analyze data alongside other business metrics.
 
-## 6. Filter out internal users
+## 5. Filter out internal users
 
 Apps with few users can inadvertently inflate their own metrics by not filtering out their own usage. This leads to a bias in their data. For this reason, it's important to filter out events sent by your own team. 
 
@@ -116,7 +102,7 @@ There are a few ways to do this:
 
 See our guide on [how to filter out internal users](/tutorials/filter-internal-users) for more details on how to do this in PostHog.
 
-## 7. Use the same project for your website and app
+## 6. Use the same project for your website and app
 
 We recommend to track both your marketing site and app in the same [project](/docs/settings/projects). This enables you to do the following:
 

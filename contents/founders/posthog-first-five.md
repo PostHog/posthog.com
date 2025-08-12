@@ -100,7 +100,7 @@ Lottie is responsible for all the cool artwork and [branding on our website](/),
 
 ![Michael](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/posthog-first-five/michael.png)
 
-[Michael](/community/profiles/124) found PostHog via a "Who's hiring?" thread on Hacker News when he was 18 and still at school.
+[Michael](/michael) found PostHog via a "Who's hiring?" thread on Hacker News when he was 18 and still at school.
 
 His was the first role where James and Tim interviewed multiple candidates. Despite being just two weeks from finishing high school, Michael stood out because:
 

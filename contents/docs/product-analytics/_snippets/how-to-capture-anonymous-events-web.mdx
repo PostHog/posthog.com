@@ -7,11 +7,9 @@ The JavaScript Web SDK captures anonymous events by default. However, this may c
 For example:
 
 ```js-web
-posthog.init(
-    '<ph_project_api_key>',
-    {
-        api_host: '<ph_client_api_host>',
-        person_profiles: 'always'
-    }
-)
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
+    person_profiles: 'always'
+})
 ```

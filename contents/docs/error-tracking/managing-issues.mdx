@@ -1,0 +1,93 @@
+---
+title: Issue management
+---
+
+Our error tracking product gives you multiple ways to help you manage issues and work towards resolution. 
+
+## Assigning issues
+
+Issues can be assigned to a teammate from the list or issue page. To do this, select the **assignee** option and search for the teammate you want to assign it to, and select them. You can click this dropdown again to remove the assignee.
+
+Want to assign issues to a **team** rather than an individual teammate? You can create a role in [your project settings](https://us.posthog.com/settings/organization-roles) under **Error tracking**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/roles_light_6c7ea17be9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/roles_dark_f721b94577.png"
+  alt="Error tracking role assignees"
+  classes="rounded"
+/>
+
+### Auto assignment rules
+
+You can automatically assign new and reopened issues using [auto assignment rules](https://us.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment).
+
+Assignment conditions are evaluated against the properties of the exception event that created the issue. Because assignment rules are evaluated during ingestion, the stack trace (if present) will be unminified which allows for filtering on on exception properties such as function name and source file.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_light_1cf9a2437a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_dark_11e0830b0c.png"
+  alt="Error tracking auto assignment rules"
+  classes="rounded"
+/>
+
+Auto assignment works well when paired with [alerts filtered by assignee](/docs/error-tracking/alerts#alert-filtering).
+
+## Merging issues
+
+You can merge issues representing the same problem from the issue list by:
+
+1. Selecting the primary issue others should be merged into
+2. Selecting the issue(s) to merge into the primary issue
+3. Clicking the **Merge** button
+
+After merging, all events and properties from the merged issues are added to the primary issue. The merged issues are then deleted (but the underlying events are not). 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/merge_light_0489da02c6.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/merge_dark_aab4bfcc93.png"
+  alt="Error tracking issue merging"
+  classes="rounded"
+/>
+
+## Custom issue grouping
+
+PostHog attempts to group the same exceptions as a single issue. If you want more control over issue grouping, you can define a grouping on the client-side or using rules during ingestion.
+
+### Client-side fingerprint
+
+An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
+
+When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the functions second argument.
+
+```js
+posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
+```
+
+If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
+
+```javascript
+posthog.init("<ph_project_api_key>", {
+  before_send: (event) => {
+    if (event.event === "$exception") {
+      const exceptionList = event.properties["$exception_list"] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+      if (exception && exception["$exception_type"] == "SyntaxError") {
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+      }    
+    }
+    return event
+  }
+})
+```
+
+### Custom grouping rules
+
+You can also choose to group exceptions as a single issue based on their properties. As with [auto assignment rules](#auto-assignment-rules), you have access to properties of the unminified stack trace because the rules run during ingestion.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_light_f3e99a56b5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_dark_927e7c5774.png"
+  alt="Error tracking custom issue grouping"
+  classes="rounded"
+/>

@@ -71,7 +71,7 @@ Responding to these BugSnag alerts caused a lot of friction, however. Brandon an
 
 A major reason Brandon was willing to make this switch was due to the way PostHog tools are interoperable and can be seamlessly used in combination. 
 
-You can, for example, get an [alert](/docs/alerts) about an [error](/error-tracking), view a linked [session replay](/replay), and jump from there to a view of [the individual person](/docs/data/persons) or [the organization they belong to].
+You can, for example, get an [alert](/docs/alerts) about an [error](/error-tracking), view a linked [session replay](/session-replay), and jump from there to a view of [the individual person](/docs/data/persons) or [the organization they belong to].
 
 You can even use [Max AI](/docs/max-ai), the in-app AI agent, to search for similar errors and recordings using natural language.
 

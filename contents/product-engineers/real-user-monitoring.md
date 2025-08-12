@@ -67,13 +67,13 @@ Setup happens over three stages: capture, analyze, and action. PostHog, as an al
 
 To capture data for real user monitoring in PostHog, we rely on [session replays](/docs/session-replay) and [custom event capture](/docs/getting-started/send-events#2-capture-custom-events). 
 
-Session replays capture a visual of exactly how users are interacting with your product. To enable session replays, install and initialize the [JavaScript Web SDK](/docs/libraries/js) or add the [snippet](/docs/getting-started/install?tab=snippet) to your site. After, make sure to enable the options related to "Recordings" in your [project settings](https://app.posthog.com/project/settings#recordings).
+Session replays capture a visual of exactly how users are interacting with your product. To enable session replays, install and initialize the [JavaScript Web SDK](/docs/libraries/js) or add the [snippet](/docs/getting-started/install?tab=snippet) to your site. After, make sure to enable the options related to "Recordings" in your [project settings](https://us.posthog.com/replay/settings).
 
 ![Recordings](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/blog/real-user-monitoring/recordings.png)
 
 To capture errors, query speed, and other events relevant to the real usage of your product, you need a way to know when those events happen in your code. This could be an error boundary, web vital report, or a server profiler. Many frameworks, like React and [Next.js](/tutorials/nextjs-monitoring), have functions for these built-in, others you must build them yourself. Once set up, when an event happens, capture it with one of our [SDKs](/docs/libraries/js) or with our [API](/docs/api/capture).
 
-Alternatively, for error capture, you can use our [Sentry integration](/docs/libraries/sentry). 
+Alternatively, for error capture, you can use our [error tracking product](/docs/error-tracking).
 
 ### 2. Analyze
 

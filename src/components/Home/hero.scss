@@ -1,5 +1,5 @@
 $titleWordCount: 5;
-$ctaCount: 2;
+$ctaCount: 3;
 
 @keyframes staggerInLg {
     0% {
@@ -62,8 +62,7 @@ $ctaCount: 2;
 
 .home-hero-cta {
     @for $i from 1 through $ctaCount {
-        a:nth-of-type(#{$i}),
-        button:nth-of-type(#{$i}) {
+        a:nth-of-type(#{$i}) {
             animation: fadeIn;
             animation-duration: 3s;
             @if $i == 1 {
@@ -74,6 +73,21 @@ $ctaCount: 2;
             animation-timing-function: ease;
             animation-fill-mode: both;
         }
+    }
+}
+
+.home-hero-cta p {
+    opacity: 0;
+    animation: fadeIn;
+    animation-duration: 3s;
+    animation-delay: 1700ms;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.ai-integration-button {
+    @media (max-width: 768px) {
+        display: none;
     }
 }
 

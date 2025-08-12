@@ -1723,3 +1723,155 @@ li.squeak-left-border {
         }
     }
 }
+
+/* styles for dark mode since /max only exists in light mode */
+.max-ai-body {
+    .bg-accent {
+        background: #f5e2b2 !important;
+    }
+
+    .dark\:bg-accent-dark:is(.dark *) {
+        background: #f5e2b2 !important;
+    }
+
+    .article-content a:not(.cta):is(.dark *),
+    .dark\:text-primary-dark:is(.dark *) {
+        color: #151515 !important;
+    }
+
+    .dark\:text-primary-dark\/50:is(.dark *) {
+        color: #151515 !important;
+        opacity: 0.5;
+    }
+
+    .dark\:text-primary-dark\/75:is(.dark *) {
+        color: #151515 !important;
+        opacity: 0.75;
+    }
+
+    .dark\:text-primary-dark\/70:is(.dark *) {
+        color: #151515 !important;
+        opacity: 0.7;
+    }
+
+    .dark\:border-white:is(.dark *) {
+        border-color: #151515 !important;
+    }
+
+    button span.dark\:bg-dark:is(.dark *) {
+        background: #fff6de !important;
+    }
+
+    .question-content a:is(.dark *) {
+        color: rgba(245, 78, 0, 1) !important;
+    }
+}
+
+body.dark .max-ai-body {
+    color: #151515;
+}
+
+@keyframes quest-log-sprite-walk {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -528px 0;
+    }
+}
+
+.quest-log-sprite-animate {
+    animation: quest-log-sprite-walk 0.25s steps(11) 7;
+}
+
+@keyframes speechBounce {
+    0% {
+        transform: translateY(-50%) scale(0.8) translateX(-10px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-50%) scale(1.05) translateX(2px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50%) scale(1) translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes speechBounceLeft {
+    0% {
+        transform: translateY(-50%) scale(0.8) translateX(10px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-50%) scale(1.05) translateX(-2px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50%) scale(1) translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Quest Log Container Queries */
+.quest-log-container {
+    container-type: inline-size;
+    container-name: quest-layout;
+}
+
+/* Default styles (mobile-first) */
+.quest-main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+}
+
+.quest-details {
+    width: 100%;
+}
+
+.quest-sidebar {
+    width: 100%;
+    padding-top: 1rem;
+    position: sticky;
+    align-self: flex-start;
+    z-index: 50;
+    padding-bottom: 0.5rem;
+}
+
+.quest-desktop-nav {
+    display: none;
+}
+
+.quest-mobile-nav {
+    display: block;
+}
+
+/* Container query for wider layouts (640px+) */
+@container quest-layout (min-width: 640px) {
+    .quest-main-content {
+        flex-direction: row;
+        gap: 1.5rem 1.5rem;
+    }
+
+    .quest-details {
+        width: 66.66%;
+        flex-shrink: 0;
+    }
+
+    .quest-sidebar {
+        max-width: 30%;
+        flex-shrink: 0;
+        padding-bottom: 1rem;
+    }
+
+    .quest-desktop-nav {
+        display: block;
+    }
+
+    .quest-mobile-nav {
+        display: none;
+    }
+}

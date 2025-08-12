@@ -14,8 +14,14 @@ export const delaySurveyLight = "https://res.cloudinary.com/dmukukwp6/image/uplo
 export const delaySurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_06_25_at_11_09_41_AM_52fd4a8e34.png"
 export const displayConditionsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_48_AM_6287f11b96.png"
 export const displayConditionsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2024_07_10_at_9_52_35_AM_3fefd0b9cc.png"
-export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_11_35_29_2x_cc089a2cd1.jpg"
-export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_20_at_11_37_57_2x_0aa568d0d2.jpg"
+export const surveyTriggeredByEventLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_31_42_2x_98d85d5b3f.jpg"
+export const surveyTriggeredByEventDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_11_30_53_2x_03ab445fae.jpg"
+export const repeatingSurveyLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_57_07_2x_ed762875ba.jpg"
+export const repeatingSurveyDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_27_at_13_58_16_2x_c988952434.jpg"
+export const presentationTypesLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_32_2x_87293a9164.jpg"
+export const presentationTypesDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_19_2x_13141dad74.jpg"
+export const copySurveyLinkLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_38_56_2x_91fd773df9.jpg"
+export const copySurveyLinkDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_08_04_at_11_39_26_2x_11ecb9914d.jpg"
 
 <iframe
     src="https://www.youtube-nocookie.com/embed/2jQco8hEvTI?start=900"
@@ -40,6 +46,27 @@ After choosing one, you are brought to a form where you can complete the details
     classes="rounded"
 />
 
+## MaxAI and Surveys
+
+[Max](/docs/max-ai), PostHog's AI-powered product analyst, can help you create surveys quickly using natural language. Max understands different question types and can:
+
+- Generate complete surveys based on your research goals
+- Suggest appropriate question types (freeform text, rating scales, multiple choice, etc.)
+- Help you set up display conditions and targeting
+- Recommend survey templates for common use cases
+
+You can ask Max things like:
+- "Create an NPS survey for my mobile app users"
+- "Build a product satisfaction survey with rating questions"
+- "Help me create a survey to understand why users churn"
+- "Generate a post-purchase feedback survey"
+
+To get started, click "Max" in the top right corner of the PostHog app and describe what kind of survey you want to create.
+
+> **Note:** Max is currently in beta, so you may encounter occasional issues. We appreciate any feedback you can share to help us improve!
+
+## Creating a new survey
+
 Here's a breakdown of each field in the form:
 
 ### Presentation
@@ -51,6 +78,32 @@ There are three options for displaying a survey:
 2. **API:** Implement your own survey UI and use PostHog to handle display logic, capturing results, and analytics.
 
 3. **Feedback button:** Set up a survey based on your own custom button or our prebuilt feedback tab.
+
+4. **Hosted surveys**: Create a survey accessible via an external link, hosted by PostHog. Responses are anonymous, unless you use the `distinct_id` query parameter, which enables you to link responses to respondents.
+
+<ProductScreenshot
+    imageLight={presentationTypesLight}
+    imageDark={presentationTypesDark}
+    alt="Survey presentation types"
+    classes="rounded"
+/>
+
+Popover, API, and feedback button surveys are considered *in-app* surveys, meaning they are displayed directly in your application using our SDKs. Hosted surveys are displayed via an external URLs, hosted by PostHog.
+
+#### Identifying respondents on hosted surveys
+
+**In-app surveys** automatically link responses to users when you [identify users](/docs/product-analytics/identify) in your app.
+
+**Hosted surveys** require manual user linking since they're accessed via external URLs. To connect survey responses to specific users, add the `distinct_id` query parameter to your survey URL:
+
+```
+https://us.posthog.com/external_surveys/your-survey-id?distinct_id=user123
+```
+
+**Important:** Use the exact same `distinct_id` value that you pass to `posthog.identify()` in your application. This ensures survey responses appear in the correct user's profile.
+
+Without the parameter, responses are collected anonymously and cannot be linked to users.
+With the parameter, responses are attributed to the specified user, enabling you to see survey data alongside other user events and properties.
 
 ### Steps
 
@@ -90,9 +143,13 @@ Customization enables you to change the look, feel, and timing of your popover s
     classes="rounded"
 />
 
+For hosted surveys, you can only customize colors and placeholders.
+
 ### Display conditions
 
-This specifies the conditions a user must meet to be shown the survey. A user must meet **ALL** the conditions to be eligible.
+> Display conditions are **not available for hosted surveys**. Any user who visits the link is shown the survey, as long as it is launched and still collecting responses.
+
+This specifies the conditions a user must meet to be shown an in-app survey. A user must meet **ALL** the conditions to be eligible.
 
 You can display your survey to specific users based on:
 
@@ -104,7 +161,7 @@ You can display your survey to specific users based on:
 
 - **Selector matches:** Whether a specific element exists or appears on the page with the specified class name or ID. For example, you can display a survey with `#my-button` or `.my-button` selector. This is useful for showing a survey after a user action.
 
-- **Wait period**: Hide surveys from users who have seen a survey in the last X days. Note that a user who completes a survey are never shown the same survey again, even if no wait period is set.
+- **Wait period**: Hide surveys from users who have seen any survey in the last X days. A user who completes a survey are never shown the same survey again, even if no wait period is set ([but there are exceptions to this rule](#repeating-surveys)).
 
 - **Person and group properties:** If you are capturing identified events, you can display a survey to users who have specific [person](/docs/product-analytics/person-properties) or [group properties](/docs/product-analytics/group-analytics#how-to-set-group-properties). For example, you can target a survey to users who have a property `is_paying=true`. This also includes a percentage rollout option. The person and group properties are evaluated with internal feature flags.
 
@@ -117,15 +174,39 @@ You can display your survey to specific users based on:
     classes="rounded"
 />
 
+
 ### Completion conditions
 
 This enables you to stop your survey once you receive a specific number of responses. Note that because it takes time for PostHog to process responses, this is a rough guideline. Your survey might receive slightly more responses than you set. The completion conditions properties are evaluated with internal feature flags.
 
 ## Repeating surveys
 
-By default, surveys are shown once to each user until they either dismiss it or complete it. After that, they won't see the survey again.
+By default, surveys are shown once to each user until they either dismiss it or complete it. After that, they won't see the survey again. However, there are a few exceptions.
 
-You can also configure surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
+### Event-triggered surveys
+
+For surveys triggered by a specific event, you can configure the survey to repeat if the event is sent again. If you select the option `Every time the event is sent`, the survey is shown again for each event.
+
+If you want to trigger a survey on a specific event, but only show it once per user, select the `Just once` option.
+
+<ProductScreenshot
+    imageLight={surveyTriggeredByEventLight}
+    imageDark={surveyTriggeredByEventDark}
+    alt="Survey triggered by events under display conditions"
+    classes="rounded"
+/>
+
+
+### Complete conditions
+
+Under complete conditions, there's two options that can be configured so the survey is shown again:
+
+- `Repeat on a schedule`
+- `Every time the display conditions are met`
+
+#### Repeat on a schedule
+
+You can also configure in-app surveys to repeat at specific intervals, which is useful for gathering feedback from users on a regular basis.
 
 <ProductScreenshot
     imageLight={repeatingSurveyLight}
@@ -152,6 +233,14 @@ A survey is considered "shown" when a user either completes or dismisses it. The
 
 > **Note:** Users must still match any display conditions you've set each time the survey becomes eligible to show again.
 
+#### Every time the display conditions are met
+
+For this option, the survey is shown again every time the display conditions are met.
+
+The main use case for this is for `Feedback button` surveys. This enables the survey to show up every time the user clicks the feedback button.
+
+This can also be combined with the `Wait time` option. If you select this option and set a `Wait time` of 30 days, the survey is only shown again if they haven't seen any surveys in the last 30 days. This is useful for getting regular feature feedback or asking about an error.
+
 ## Launching your survey
 
 Once you've set up your survey, click "Save as draft" to save your survey. This enables you to review any changes before launching. Then, when you're ready to launch, click the "Launch" button.
@@ -159,3 +248,31 @@ Once you've set up your survey, click "Save as draft" to save your survey. This 
 If you've created a [popover survey](#presentation), your survey will begin showing immediately to users matching your display conditions.
 
 If you've created an [API survey](#presentation), you'll need to add your [custom survey code](/docs/surveys/implementing-custom-surveys) before launching.
+
+When you launch a [hosted survey](#presentation), you'll get a link you can share with your users. You can also copy it by clicking **Copy URL**.
+
+<ProductScreenshot
+    imageLight={copySurveyLinkLight}
+    imageDark={copySurveyLinkDark}
+    alt="Copy survey link"
+    classes="rounded"
+/>
+
+## How PostHog handles partial survey responses
+
+You can enable partial responses in the "Completion conditions" section of the survey. This option is enabled by default for all new surveys. Please note that partial responses require `posthog-js` version `1.240.0` or higher and are currently only supported in `posthog-js` library.
+
+**If partial responses are disabled, PostHog sends a single `survey sent` event**. This event is triggered once the user answers the last question of the survey. It contains all the user's responses. The `$survey_completed` property in this event will be `true`.
+
+**When partial responses are enabled (default behavior for new surveys):**
+If partial responses are enabled, PostHog tracks user progress as follows:
+
+1.  **Initial Response:** The first `survey sent` event is triggered as soon as the user answers at least one question. This initial event includes the answer(s) provided up to that point. The `$survey_completed` property in this event will be `false`.
+2.  **Subsequent Responses:** For each *additional* question the user answers, another `survey sent` event is captured. Each of these events will contain *all* responses submitted by the user for that survey instance up to that point, and `$survey_completed` will remain `false`.
+3.  **Full Completion:** When the user fully completes and submits the survey, a final `survey sent` event is sent. This event will again include all their answers, and the `$survey_completed` property will now be `true`.
+
+**The `$survey_submission_id`:**
+All `survey sent` events triggered during a single user's attempt to complete a survey (whether partial or complete) share the same unique `$survey_submission_id`.
+
+**Billing for partial responses:**
+We charge based on unique survey submissions, not individual `survey sent` events. Therefore, you are charged only once per unique `$survey_submission_id`. For example, if your survey has 5 questions and a user answers 3 of them (triggering multiple `survey sent` events with `$survey_completed: false`), you will still be charged for only one survey response, as all those events will share the same `$survey_submission_id`.

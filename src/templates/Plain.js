@@ -4,6 +4,7 @@ import { ProductScreenshot } from 'components/ProductScreenshot'
 import { ProductVideo } from 'components/ProductVideo'
 import Link from 'components/Link'
 import { PrivateLink } from 'components/PrivateLink'
+import ImageSlider from 'components/ImageSlider'
 import { Hero } from 'components/Hero'
 import { Check, Close } from 'components/Icons/Icons'
 import Layout from 'components/Layout'
@@ -44,6 +45,7 @@ export default function Plain({ data }) {
         Close,
         a: A,
         TutorialsSlider,
+        ImageSlider,
         ...shortcodes,
     }
 

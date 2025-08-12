@@ -145,7 +145,7 @@ module.exports = {
             fontFamily: {
                 'fairytale-title': ['Fairytale', 'sans-serif'],
                 fairytale: ['Computer Modern', 'sans-serif'],
-                serif: ['Times New Roman', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
+                serif: ['Charter', 'MatterVF', 'Arial', 'Helvetica', 'sans-serif'],
                 sans: [
                     'MatterVF',
                     '-apple-system',
@@ -271,6 +271,14 @@ module.exports = {
                         filter: 'grayscale(0%) brightness(100%)',
                     },
                 },
+                'svg-stroke-dashoffset-around': {
+                    from: { 'stroke-dashoffset': '0' },
+                    to: { 'stroke-dashoffset': '1000' },
+                },
+                wobble: {
+                    '0%, 100%': { transform: 'rotate(-2deg) translateX(-5px)' },
+                    '50%': { transform: 'rotate(2deg) translateX(5px)' },
+                },
             },
             animation: {
                 wiggle: 'wiggle .2s ease-in-out 3',
@@ -280,6 +288,8 @@ module.exports = {
                 reveal: 'reveal 1s ease-in-out',
                 'text-gradient': 'text-gradient 2500ms linear infinite',
                 develop: 'develop 1.5s ease-out forwards',
+                'svg-stroke-dashoffset-around': 'svg-stroke-dashoffset-around 2.5s linear infinite',
+                wobble: 'wobble 3s ease-in-out infinite',
             },
             containers: {
                 '2xs': '16rem',

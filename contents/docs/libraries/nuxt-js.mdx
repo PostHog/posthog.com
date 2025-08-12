@@ -4,6 +4,9 @@ icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/frameworks/nuxt.svg
 ---
 
+import DetailSetUpReverseProxy from "../integrate/_snippets/details/set-up-reverse-proxy.mdx"
+import DetailGroupProductsInOneProject from "../integrate/_snippets/details/group-products-in-one-project.mdx"
+
 PostHog makes it easy to get data about usage of your [Nuxt.js](https://nuxt.com/) app. Integrating PostHog into your app enables analytics about user behavior, custom events capture, session replays, feature flags, and more.
 
 These docs are aimed at Nuxt.js users who run Nuxt in `spa` or `universal` mode. You can see a working example of the Nuxt v3.0 integration in our [Nuxt.js demo app](https://github.com/PostHog/posthog-js/tree/master/playground/nuxtjs)
@@ -32,15 +35,17 @@ See the [JavaScript SDK docs](/docs/libraries/js/features) for all usable functi
 - [Capture custom event capture, identify users, and more.](/docs/libraries/js/features#capturing-events)
 - [Feature flags including variants and payloads.](/docs/libraries/js/features#feature-flags)
 
+<DetailSetUpReverseProxy />
+
+<DetailGroupProductsInOneProject />
+
 ### Setting up PostHog on the server side
 
 1. Install `posthog-node` using your package manager:
 
-```shell
-yarn add posthog-node
-# or
-npm install --save posthog-node
-```
+import InstallNodePackageManagers from "../integrate/_snippets/install-node-package-managers.mdx"
+
+<InstallNodePackageManagers />
 
 2. Add your PostHog API key and host to your `nuxt.config.js` file. If you've already done this when adding PostHog to the client side, you can skip this step.
 
@@ -49,45 +54,46 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       posthogPublicKey: '<ph_project_api_key>',
-      posthogHost: '<ph_client_api_host>'
+      posthogHost: '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
     }
   }
 })
 ```
 
-3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in [`useAsyncData(https://nuxt.com/docs/api/composables/use-async-data)]`:
+3. Initialize the PostHog Node client where you'd like to use it on the server side. For example, in a [server route](https://nuxt.com/docs/guide/directory-structure/server#server-routes):
 
-```vue file=app.vue
-<!-- ...rest of code -->
+```js file=server/api/example.js focusOnLines=7-27
+export default defineEventHandler(async (event) => {
+  const rawCookie = getCookie(event, `ph_${runtimeConfig.public.posthogPublicKey}_posthog`)
+  const distinctID = rawCookie ? JSON.parse(rawCookie)?.distinct_id : undefined
+  const url = getRequestURL(event)
+  const query = getQuery(event)
 
-<script setup>
-import { useAsyncData, useCookie, useRuntimeConfig } from 'nuxt/app';
-import { PostHog } from 'posthog-node';
+  const { PostHog } = await import('posthog-node');
+  const runtimeConfig = useRuntimeConfig()
 
-const { data: someData, error } = await useAsyncData('ctaText', async () => {
-  const runtimeConfig = useRuntimeConfig();
   const posthog = new PostHog(
     runtimeConfig.public.posthogPublicKey,
-    { host: runtimeConfig.public.posthogHost }
+    { 
+      host: runtimeConfig.public.posthogHost, 
+    }
   );
 
-  const cookies = useCookie(`ph_${runtimeConfig.public.posthogPublicKey}_posthog`);
-  if (cookies && cookies.value) {
-    try {
-      const distinctId = cookies.value.distinct_id; // or you can use your user's email, for example.
-      posthog.capture({
-        distinctId: distinctId,
-        event: 'user_did_something"',
-      })
-      await posthog.shutdown()
-    } catch (error) {
-      console.log(error);
+  posthog.capture({
+    event: 'api_call',
+    distinctId: distinctId,
+    properties: {
+      $current_url: url,
+      query: query
     }
-  }
-  return "Some data";
-});
+  })
+  posthog.shutdown()
 
-</script>
+  return {
+    message: "example response"
+  }
+})
 ```
 
 > **Note**: Make sure to _always_ call `posthog.shutdown()` after capturing events from the server-side.
@@ -100,19 +106,13 @@ See the [Node SDK docs](/docs/libraries/node) for all usable functions, such as:
 ## Nuxt v2.16 and below
 
 We are going to implement PostHog as a [Nuxt.js integration](https://nuxtjs.org/docs/2.x/directory-structure/plugins) which gives us the possibility to inject
-the posthog object and make it available across our application.
+the `posthog` object and make it available across our application.
 
 The first thing you want to do is to install the [posthog-js library](/docs/integrate/client/js) in your project - so add it using your package manager:
 
-```shell
-yarn add posthog-js
-```
+import InstallWebPackageManagers from "../integrate/_snippets/install-web-package-managers.mdx"
 
-or
-
-```shell
-npm install --save posthog-js
-```
+<InstallWebPackageManagers />
 
 After that we want to create a app in `plugins/posthog/index.js`
 
@@ -124,6 +124,7 @@ export default function({ app: { router } }, inject) {
   // Init PostHog
   posthog.init('<ph_project_api_key>', {
     api_host: '<ph_client_api_host>',
+    defaults: '<ph_posthog_js_defaults>',
     capture_pageview: false,
     loaded: () => posthog.identify('unique_id') // If you can already identify your user
   })

@@ -289,8 +289,7 @@ export default function Contact({
     const { handleSubmit, values, handleChange, setFieldValue, errors, validateField } = useFormik({
         initialValues: Object.fromEntries(fields.map((field) => [field.name, initialValues[field.name]])),
         onSubmit: async (values) => {
-            const distinctId = posthog?.get_distinct_id?.()
-            posthog?.identify?.(distinctId, {
+            posthog?.setPersonProperties?.({
                 email: values.workEmail,
             })
             posthog?.capture?.('form submission', {
@@ -353,7 +352,7 @@ export default function Contact({
             </div>
         </>
     ) : (
-        <form onSubmit={handleSubmit}>
+        <form id="contact-sales" data-default-form-id="509041" onSubmit={handleSubmit}>
             <p className="text-sm">
                 <strong>Tip:</strong> Press <KeyboardShortcut text="Tab" size="sm" /> to advance through the form at a
                 breakneck pace!

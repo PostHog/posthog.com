@@ -797,6 +797,11 @@ export const Main = () => {
 }
 
 export const Mobile = () => {
+    const { pathname, state } = useLocation()
+    if (pathname === '/newsletter-fbc' || (state as { isComingFromAd?: boolean })?.isComingFromAd) {
+        return <></>
+    }
+
     const enterpiseModeNames = {
         Products: 'Solutions',
         Pricing: 'Plans',

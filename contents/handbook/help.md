@@ -87,13 +87,13 @@ Do not "yolo merge" – i.e.: force a change to our website or platform without 
 
 Bias for action. If you can just pick up the work, do so. We want a culture of individual contribution _not_ of delegation.
 
-It is fine (and encouraged) to pick-up side quests, or to deviate from your goals if you think you should. Especially if something is a quick fix, do it yourself as part of our value that _Everyone Codes_.
+It is fine (and encouraged) to pick-up side quests, or to deviate from your goals if you think you should. Especially if something is a quick fix, do it yourself as part of our value that _You're the driver_.
 
 If you aren't able to make a change yourself, create an issue in GitHub. Avoid simply relaying to-dos in Slack as a means of getting someone to pick up a task. It's hard to track and easy to forget.
 
 ## Do things as publicly as possible by default
 
-For discussions, public repos are the best place. Then private ones, then Slack public channels, then Slack private channels or DMs. This is part of our _"We are open source"_ value, and helps with general context setting for the wider team, which means everyone can work more autonomously.
+For discussions, public repos are the best place. Then private ones, then Slack public channels, then Slack private channels or DMs. This is part of our _"Make it public"_ value, and helps with general context setting for the wider team, which means everyone can work more autonomously.
 
 There are only a few exceptions to what we can't share publicly, for example if you are discussing security concerns, specific customers (for privacy reasons), revenue, or growth numbers (since these cause signalling issues with investors or competitors).
 

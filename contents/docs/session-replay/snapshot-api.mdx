@@ -1,0 +1,208 @@
+---
+title: Session recording snapshot API
+---
+
+> **Important:** This API was never built for public use. It's built around the needs of our UI and will change with relatively little notice. 
+>
+> Many people are still building on top of it however, as non-straightforward as it is to use. This page is to help you if you're one of those people. 
+>
+> We are also building a session replay batch export mechanism to remove the need to use this API for bulk copying of replay data.
+
+The snapshot API is structured a little like hitting the homepage of a website to see what documents are available and then right-clicking to open each one in a new tab
+
+## Overview
+
+The standard pattern for using this API is:
+
+1. Call the snapshots API with no parameters and receive a list of the sources in the recording. This is not idempotent and can change from second to second.
+2. Call the snapshots API with each source one after the other. This call is idempotent, we never change this data once stored.
+3. Post-process the data. Since session replay is write-heavy, we do not attempt to store or return vanilla rrweb-compatible JSON.
+
+### What is a source?
+
+We store session replay data in more than one place as it is ingested. A "source" is a place you can load replay data from. The API returns a list of sources so that we can direct clients to load snapshots from those sources.
+
+> **Important:** For batch exports of recordings, it is safest to only export recordings that started more than 24 hours ago. We cut off sessions after 24 hours and so you know the recording is immutable at that point.
+
+## Using the snapshot API (Version 1)
+
+> Note! Version 1 is deprecated as of June 2025 and will stop working by the end of August 2025. You need to upgrade to version 2 (see below)
+
+### First call:
+
+`https://us.posthog.com/api/environments/{the project id}/session_recordings/{the session id}/snapshots`
+
+This will return one of the following:
+
+If the recording is less than around 10 minutes old, it will not yet be in permanent storage
+
+We return only the realtime source. For playback you should poll this endpoint for new data. For exporting for further processing or storage, you should wait as long as feasible (and ideally 24 hours) before retrying.
+
+```json
+{
+    "sources": [
+        {
+            "source": "realtime",
+            "start_timestamp": null,
+            "end_timestamp": null,
+            "blob_key": null
+        }
+    ]
+}
+```
+
+Once the recording is older then around 10 minutes, some data will be in permanent storage and some data will be available on the realtime source.
+
+For exporting for further processing or storage, you should wait as long as feasible (and ideally 24 hours) before retrying.
+
+```json
+{
+    "sources": [
+        {
+            "source": "blob",
+            "start_timestamp": "2025-05-23T10:17:04.911000Z",
+            "end_timestamp": "2025-05-23T10:22:13.168000Z",
+            "blob_key": "1747995424911-1747995733168"
+        },
+        {
+            "source": "realtime",
+            "start_timestamp": "2025-05-23T10:22:13.168000Z",
+            "end_timestamp": null,
+            "blob_key": null
+        }
+    ]
+}
+```
+
+Once the recording is older than around 24 hours (and cannot send any new information). We will no longer return the realtime source.
+
+You can iterate each blob source:
+
+```json
+{
+    "sources": [
+        {
+            "source": "blob",
+            "start_timestamp": "2025-05-18T03:59:43.283000Z",
+            "end_timestamp": "2025-05-18T03:59:47.122000Z",
+            "blob_key": "1747540783283-1747540787122"
+        }
+    ]
+}
+```
+
+### Second and subsequent calls
+
+These are made to the same endpoint, but with query parameters added:
+
+* source=blob
+* blob_key
+
+Both are read from the source returned from the first call.
+
+`https://us.posthog.com/api/environments/{the project id}/session_recordings/{the session id}/snapshots?source={the source}&blob_key={the blob_key}`
+
+## Using the snapshot API (Version 2)
+
+We (Pawel 🦸) have been working on a new version of ingestion pipeline that is way more efficient and uses way less resources. Last time we improved the ingestion pipeline and let our new costs settle, we were able to [reduce prices](/blog/session-replay-pricing)... (investors hate this one weird trick 😅).
+
+Version 2 writes more files than version 1 (so we don't have to batch for as long, so our ingestion can be faster and cheaper. Cool!)
+
+You can opt in to this new version for reading data by adding `?blob_v2=true` to the initial snapshots call
+
+The new version will become the default on the 23rd June 2025.
+
+So a call to:
+
+`https://us.posthog.com/api/environments/{the project id}/session_recordings/{the session id}/snapshots?blob_v2=true`
+
+will return a sources list:
+
+```json
+{
+    "sources": [
+        {
+            "source": "blob_v2",
+            "start_timestamp": "2025-05-18T03:59:43.283000Z",
+            "end_timestamp": "2025-05-18T03:59:47.122000Z",
+            "blob_key": "0"
+        },
+        {
+            "source": "blob",
+            "start_timestamp": "2025-05-18T03:59:43.283000Z",
+            "end_timestamp": "2025-05-18T03:59:47.122000Z",
+            "blob_key": "1747540783283-1747540787122"
+        }
+    ]
+}
+```
+
+If you have any `blob_v2` sources, you can ignore all other sources and only make calls to snapshot(s) with `?source=blob_v2&blob_key={the blob_key}` for each `blob_v2` source. This is because `blob_v2` files are flushed more frequently. There is no need to poll the realtime source. Instead, you can poll the original snapshot API to check for new sources to load.
+
+You can also request multiple blobs at once using `?source=blob_v2&start_blob_key={the_first_key}&end_blob_key={the_second_blob_key}`. 
+
+> **Note:** You can request a maximum of 20 blob keys at a time. You will need to tune this for your application as 20 blobs could be a lot of data and timeout. For example, `?source=blob_v2&start_blob_key=0&end_blob_key=20` is invalid as it requests 21 keys.
+
+### Post-processing
+
+All post-processing entrypoints in [our code can be found on GitHub](https://github.com/PostHog/posthog/blob/37babfa29f05f2d4e169e2f33f1643fffe540e95/frontend/src/scenes/session-recordings/player/snapshot-processing/process-all-snapshots.ts)
+
+For each source we load, we call `parseEncodedSnapshots`, and before using the loaded snapshots, we call `processAllSnapshots`
+
+You're welcome to use these directly or rewrite them in your language of choice.
+
+The processing steps are:
+
+ * normalise the data structure
+ * decompress and partially compressed data
+ * transform mobile recording data (this bit isn't open source (yet) sorry)
+ * deduplicate the rrweb data
+ * strip chrome extension snapshots
+ * sort the snapshots
+ * patch in any meta events (a very rare capture bug)
+
+
+## `blob_v2` migration guide
+
+### 1. Source type handling
+
+Clients need to handle multiple source types:
+
+- The API might return all three source types (`blob`, `realtime`, and `blob_v2`)
+- If `blob_v2` sources are present, we strongly recommend using only those sources and ignoring `blob` and `realtime` sources
+- **Warning**: Using `blob_v2` sources together with other source types will result in data duplication, as the same events may be present in multiple sources
+- For `blob_v2` sources, you can remove realtime polling logic
+
+Example source type handling:
+
+```typescript
+function getPreferredSources(sources: SnapshotSource[]) {
+    // If blob_v2 sources exist, use only those to avoid data duplication
+    const blobV2Sources = sources.filter(s => s.source === 'blob_v2')
+    if (blobV2Sources.length > 0) {
+        return blobV2Sources
+    }
+
+    // Otherwise fall back to blob + realtime sources
+    return sources
+}
+```
+
+### 2. Data format
+
+#### Previous data format
+
+```json
+{
+    "windowId": "...",
+    "data": [event]
+}
+```
+
+#### New data format
+
+```json
+[windowId, event]
+```
+
+

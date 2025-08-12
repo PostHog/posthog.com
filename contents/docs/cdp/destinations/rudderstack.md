@@ -14,11 +14,11 @@ You'll also need access to the relevant RudderStack account.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
-2. Click the 'Destinations' tab.
-3. Search for 'RudderStack' and select the destination.
+1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=rudderstack) tab.
+3. Search for 'RudderStack' and click **+ Create**.
 4. Add your RudderStack Write API Key at the configuration step.
-5. Press 'Create & Enable' and watch your 'Events' get sent to RudderStack!
+5. Press **Create & Enable** and watch your 'Events' get sent to RudderStack!
 
 <HideOnCDPIndex>
 

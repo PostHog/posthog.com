@@ -38,14 +38,16 @@ The rest of the setup depends on the LLM platform you're using. These SDKs _do n
 import Tab from "components/Tab"
 import OpenAIInstall from "./_snippets/openai.mdx"
 import AnthropicInstall from "./_snippets/anthropic.mdx"
+import GoogleInstall from "./_snippets/google.mdx"
 import LangChainInstall from "./_snippets/langchain.mdx"
 import VercelAISDKInstall from "./_snippets/vercelai.mdx"
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['OpenAI', 'Anthropic', 'Langchain', 'Vercel AI SDK']}>
+<Tab.Group tabs={['OpenAI', 'Anthropic', 'Google', 'Langchain', 'Vercel AI SDK']}>
     <Tab.List>
         <Tab>OpenAI</Tab>
         <Tab>Anthropic</Tab>
+        <Tab>Google</Tab>
         <Tab>LangChain</Tab>
         <Tab>Vercel AI SDK</Tab>
     </Tab.List>
@@ -55,6 +57,9 @@ import VercelAISDKInstall from "./_snippets/vercelai.mdx"
         </Tab.Panel>
         <Tab.Panel>
             <AnthropicInstall />
+        </Tab.Panel>
+        <Tab.Panel>
+            <GoogleInstall />
         </Tab.Panel>
         <Tab.Panel>
             <LangChainInstall />
@@ -74,11 +79,13 @@ This can be done either by setting the `privacy_mode` config option in the SDK l
 <MultiLanguage>
 
 ```python
-import posthog
+from posthog import Posthog
 
-posthog.project_api_key = "<ph_project_api_key>"
-posthog.host = "<ph_client_api_host>"
-posthog.privacy_mode = True
+posthog = Posthog(
+    "<ph_project_api_key>",
+    host="<ph_client_api_host>",
+    privacy_mode=True
+)
 ```
 
 ```ts
@@ -98,17 +105,17 @@ It can also be on at the request level by including setting the `privacy_mode` p
 <MultiLanguage>
 
 ```python file=OpenAI.py
-client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[...],
+client.responses.create(
+    model="gpt-4o-mini",
+    input=[...],
     posthog_privacy_mode=True
 )
 ```
 
 ```typescript file=OpenAI.ts
-const completion = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [...],
+const completion = await openai.responses.create({
+    model: "gpt-4o-mini",
+    input: [...],
     posthogPrivacyMode: true
 });
 ```
@@ -117,6 +124,14 @@ const completion = await openai.chat.completions.create({
 response = client.messages.create(
     model="claude-3-opus-20240229",
     messages=[...],
+    posthog_privacy_mode=True
+)
+```
+
+```python file=Google
+response = client.models.generate_content(
+    model="gemini-2.5-flash",
+    contents=[...],
     posthog_privacy_mode=True
 )
 ```

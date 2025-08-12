@@ -34,7 +34,7 @@ With our new [Sentry](https://sentry.io/) integration, you can leverage PostHog 
 
 If you're unfamiliar with Sentry, we highly recommend you to check it out - it is an awesome application monitoring platform of which we're avid users at PostHog.
 
-To set up the integration you can read the step-by-step instructions on the dedicated [Sentry Integration page](/docs/libraries/sentry).
+*Update Aug 4, 2025: This integration has been deprecated.*
 
 ### [RudderStack Integration](https://docs.rudderstack.com/destinations/posthog)
 

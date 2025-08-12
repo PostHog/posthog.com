@@ -6,7 +6,7 @@ Having trouble with recordings? Below are some tips for getting past some common
 
 The most common solution is...
 
-#### Update posthog-js
+## Update posthog-js
 
 We're always making improvements to the recordings feature, so you'll want to make sure that you're running the latest version of `posthog-js` on your website.
 
@@ -22,7 +22,9 @@ There are a few common reasons that you may not see recordings appear in your pr
 
 ### 1. Authorized domains for recordings
 
-In your project settings page, there's a section for 'Authorized URLs'. This is the list of domains where posthog will capture recordings. You should make sure it's not too restrictive.
+Authorized domains for recordings is deprecated, you should use URL triggers instead. [Read more in our replay controls doc](/docs/session-replay/how-to-control-which-sessions-you-record#with-url-trigger-conditions).
+
+In your [project replay settings](https://us.posthog.com/settings/environment-replay#replay-authorized-domains), for older projects, there is a section for 'Authorized domains for replay'. This is the list of domains where posthog will capture recordings. You should make sure it's not too restrictive.
 
 For example, you may have `https://www.example.com` in the list. This will stop PostHog from capturing recordings on `https://example.com`.
 
@@ -75,6 +77,26 @@ By default, `base` and `assets` imported from `$app/paths` in Svelte use relativ
 
 For apps with SSR enabled you should set `relative` to `false` in the [`paths` object of your config](https://kit.svelte.dev/docs/configuration#paths). This ensures all asset URLs will correctly be resolved against the base URL rather than the current page.
 
+## Images and videos do not appear in the replay
+
+PostHog captures session replays by capturing the DOM, not videos or screenshots. When you watch a replay, PostHog tries to reconstruct the DOM.
+
+If the DOM contains images or other media assets referenced by a URL that is signed, expired, or otherwise not available, the replay will not be able to reconstruct the DOM correctly. A workaround to make replays more accurately represent the original session is to fallback to a placeholder if the asset is no longer available.
+
+## Unable to filter by user or page properties
+
+Some of the filtering options in session replays depend on [product analytics](/docs/product-analytics) events. 
+
+To enable all filtering options, we recommend capturing at least one event per session. Most commonly identifying users via `identify()`. This makes sure you can use all of the power of filtering by person and event properties.
+
+Since these events contribute to the product analytics usage and [billing limits](/docs/billing/limits-alerts), if you exceed your product analytics monthly limit, the recordings captured after that (until new billing period starts or limit is increased) won't be possible to filter by these properties.
+
+## Internal users filtering or cohorts-based filters don't work
+
+If you use cohorts to filter sessions, or add a cohort condition into the "Filter out internal and test users" setting - it can work incorrectly (or not work at all) while cohorts are calculating.
+
+To check, you can go to "People > Cohorts" and see if any of them are in "calculating" status. 99% of the time they will be available in a couple of minutes, and if not (got stuck) - you can ask PostHog support to recalculate them for you manually.
+
 ## Filtering can't find my custom events
 
 The most common reason for this is that you're trying to filter by events that weren't sent by the web SDK. For example, from another tool like Segment or one of our backend SDKs.
@@ -82,6 +104,16 @@ The most common reason for this is that you're trying to filter by events that w
 Session replay relies on the `$session_id` property added to events by the web SDK to link events to sessions.
 
 To workaround this, you can use the `posthog.onSessionId` method in the web SDK to register a callback that will be called each time the session ID changes. You can send this to your backend and add the `$session_id` property to your backend events. 
+
+## Recording not found
+
+There are several valid reasons why recordings aren't captured. To keep the site fast we don't actively confirm a recording has been captured before showing the "view recording" button. 
+
+For example:
+
+ * If an event is captured before [your minimum recording duration setting](https://us.posthog.com/settings/project-replay#replay-triggers) there is no guarantee that the session lasted long enough to start recording.
+ * If a user closes the browser tab or window there may not be enough time to send the data to the backend
+ * If you have [conditional triggers set](https://us.posthog.com/settings/project-replay#replay-triggers) we don't send data to the backend until the trigger conditions are met
 
 ## Person not found
 
@@ -92,6 +124,12 @@ To fix this, either call a method that creates a person profile (like `identify(
 ## Browser freezes or crashes when recordings are enabled
 
 Some Cookie banners or "CMP"s modify the webpage in reaction to any changes to cookies, which can cause an infinite loop. If you are using a tool like this and experience the webpage becoming unresponsive or slow then try [configuring posthog](/docs/libraries/js/persistence) to use `persistence: "localStorage+cookie"`. This will use localStorage for the majority of storage needs, bypassing the infinite loop issue sometimes caused by cookie management tools.
+
+## Enable recordings when URL matches not working as expected
+
+The **Enable recordings when URL matches** setting is only supported in the web SDK version `1.171.0` and above. If your recordings aren’t being recorded as expected, even when the URL matches your regex, it’s likely due to an outdated SDK version.
+
+Make sure you’re using version `1.171.0` or newer to ensure this feature works correctly.
 
 ## Network payload capture is not capturing headers
 

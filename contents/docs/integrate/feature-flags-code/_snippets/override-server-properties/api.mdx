@@ -13,14 +13,14 @@ curl -v -L --header "Content-Type: application/json" -d '  {
     },
     "person_properties": {"<personProp1>": "<personVal1>"}, # Optional. Include any properties used to calculate the value of the feature flag.
     "group_properties": {"group type": {"<groupProp1>":"<groupVal1>"}} # Optional. Include any properties used to calculate the value of the feature flag.
-}' <ph_client_api_host>/decide?v=4
+}' <ph_client_api_host>/flags?v=2
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/decide?v=4"
+url = "<ph_client_api_host>/flags?v=2"
 headers = {
     "Content-Type": "application/json"
 }
@@ -43,7 +43,7 @@ import OverrideGeoIPPropertiesIntro from './override-geoip-properties-intro.mdx'
 
 <OverrideGeoIPPropertiesIntro />
 
-To override the GeoIP properties used to evaluate a feature flag, provide an IP address in the `HTTP_X_FORWARDED_FOR` when making your `/decide` request:
+To override the GeoIP properties used to evaluate a feature flag, provide an IP address in the `HTTP_X_FORWARDED_FOR` when making your `/flags` request:
 
 <MultiLanguage>
 
@@ -54,14 +54,14 @@ curl -v -L \
 -d '  {
     "api_key": "<ph_project_api_key>",
     "distinct_id": "distinct_id_of_your_user"
-}' <ph_client_api_host>/decide?v=4
+}' <ph_client_api_host>/flags?v=2
 ```
 
 ```python
 import requests
 import json
 
-url = "<ph_client_api_host>/decide?v=4"
+url = "<ph_client_api_host>/flags?v=2"
 headers = {
     "Content-Type": "application/json",
     "HTTP_X_FORWARDED_FOR": "the_client_ip_address_to_use"

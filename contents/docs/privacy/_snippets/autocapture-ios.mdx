@@ -1,0 +1,14 @@
+In web apps using the PostHog [iOS SDK](/docs/libraries/ios), the following data can be autocaptured.
+
+- **Application Opened**: when the app is opened from a closed state or when the app comes to the foreground (e.g. from the app switcher)
+- **Application Backgrounded**: when the app is sent to the background by the user
+- **Application Installed**: when the app is installed
+- **Application Updated**: when the app is updated
+- **$screen**: when the user navigates if using `UIViewController`
+- **$autocapture**: when the user interacts with elements in a screen if using `UIKit` 
+
+This autocapture behavior can be further controlled using the `PostHogConfig` object.
+
+import AutocaptureConfig from '../../libraries/ios/_snippets/autocapture-config-ios.mdx'
+
+<AutocaptureConfig />

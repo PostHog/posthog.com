@@ -75,14 +75,14 @@ const companies = {
     },
 }
 
-export default function Comparison({ comparison, columnCount, truncate }) {
+export default function Comparison({ comparison, columnCount, truncate, className }) {
     const [collapsed, setCollapsed] = useState(truncate)
     const activeCompanies = Object.keys(companies).filter((company) =>
         comparison.some(({ companies }) => Object.keys(companies).includes(company))
     )
     return (
         <>
-            <div className={`max-w-vw pb-2 mb-10 md:mb-20 [justify-content:_safe_center] overflow-auto`}>
+            <div className={`max-w-vw pb-2 mb-10 md:mb-20 [justify-content:_safe_center] overflow-auto ${className}`}>
                 <div
                     className={`flex-1 grid md:grid-cols-${columnCount} grid-cols-${
                         columnCount + 1

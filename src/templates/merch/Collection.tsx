@@ -5,6 +5,7 @@ import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
 import { CollectionPageContext } from './types'
 import SEO from 'components/seo'
+import ShippingBanner from './ShippingBanner'
 
 type CollectionProps = {
     pageContext: CollectionPageContext
@@ -22,6 +23,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                 <SEO title="Merch - PostHog" image="/images/merch.png" />
                 <Nav currentCollectionHandle={pageContext.handle} />
                 <div className="w-full px-4 mx-auto max-w-7xl">
+                    <ShippingBanner />
                     <ProductGrid products={transformedProducts} />
                 </div>
             </Layout>

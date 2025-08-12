@@ -1,0 +1,159 @@
+---
+title: 'Breaking: Local engineers outraged as PostHog removes its beloved clutter'
+date: 2025-06-02
+author:
+  - cory-watilo
+featuredImage: >-
+  https://res.cloudinary.com/dmukukwp6/image/upload/sidebar_redesign_6d8afe50e7.png
+featuredImageType: full
+tags:
+    - PostHog news
+---
+
+export const FoldersLight = "https://res.cloudinary.com/dmukukwp6/image/upload/search_d462bec85a.png"
+export const FoldersDark = "https://res.cloudinary.com/dmukukwp6/image/upload/folders_dark_a26f46cfb3.png"
+export const Filtering = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_05_31_13_07_15_ccaccc7099.gif"
+export const Accessibility = "https://res.cloudinary.com/dmukukwp6/image/upload/2025_05_31_13_04_48_ef27cc31d5.gif"
+export const ExpandedLight = "https://res.cloudinary.com/dmukukwp6/image/upload/expanded_light_3df79878f0.png"
+export const ExpandedDark = "https://res.cloudinary.com/dmukukwp6/image/upload/expanded_dark_93857db28a.png"
+export const ProductsLight = "https://res.cloudinary.com/dmukukwp6/image/upload/products_light_afdc0f2760.png"
+export const ProductsDark = "https://res.cloudinary.com/dmukukwp6/image/upload/products_dark_92529f7a3b.png"
+
+PostHog is best known for our speed of shipping new products and features. This requires a different approach to product development – one where design isn't a dependency.
+
+When I joined PostHog in 2021 as the sole product designer, I had fully expected to work on the product – but <TeamMember name="James Hawkins" photo showOnlyFirstName /> and <TeamMember name="Tim Glaser" photo showOnlyFirstName /> had other ideas. They envisioned the PostHog website being our primary sales channel, so it led to me spending the majority of my 4+ years here on PostHog.com and brand-related projects... and it was one of the best decisions they've ever made.
+
+Looking back, it's incredible to see our brand (website, writing, transparency, development speed, support experience) resonate with so many people. And it's _because_ we have such a strong brand that we have some affordances for areas we haven't been so strong – one of which being the design of our product.
+
+PostHog has experienced a growth spurt. We're now at over 100 team members, the majority being product engineers. This means one thing: we're shipping new products increasingly fast.
+
+This causes growing pains. Specifically, more products means we're hitting the point where they don't all fit in the nav menu. We're basically outgrowing the clothes that once fit.
+
+As we move beyond 10 products and look toward a future where we have 50+ products, we decided it was time to rethink how we navigate PostHog.
+
+This led us to forming the [Developer Experience Team](/teams/developer-experience) late last year, consisting of <TeamMember name="Marius Andra" photo /> one of our early engineers (who has written his own programming language), our new design-oriented front end developer <TeamMember name="Adam Leith" photo />, and <TeamMember name="Cory Watilo">myself</TeamMember>.
+
+This new team set out to solve two things:
+
+1. Make it easier for engineers to build new products on top of PostHog
+2. Make the product more personalized, organized, polished, and easier to navigate
+
+## New navigation menu
+
+Our first step was to rethink how the navigation menu works. We've been focusing on four key areas:
+
+1. A nested folder structure to organize everything you create in PostHog
+1. Advanced filtering and search
+1. Better accessibility and keyboard navigation
+1. An expanded sidebar view
+
+### Folders
+
+Folders let you organize anything you create in PostHog in any way that makes sense to you – like by project or team.
+
+<ProductScreenshot
+    imageLight={FoldersLight}
+    imageDark={FoldersDark}
+    caption="Folders let you organize your content in PostHog"
+    padding={false}
+    classes="rounded"
+    alt="Folders"
+/>
+
+Let's say you were working on a project called "Search UX". It might require a few different things like:
+
+- Custom events to track
+- An experiment
+- A feature flag
+- A dashboard
+- Some insights
+
+Until now, every type of content within PostHog lived in its own section. You view dashboards in the _Dashboard_ section, feature flags in the _Feature flags_ section, and so on.
+
+Now you can create a folder and place any type of content inside of it.
+
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/folders_d5371b4acf.mp4" 
+    alt="Organizing content in folders" 
+    classes="rounded shadow-xl"
+    autoPlay={false}
+/>
+
+If you have existing data in PostHog, you'll find everything in an _Unfiled_ folder, with each type of content in its own subfolder. We encourage you to start creating folders and organizing your content in a way that makes sense to you.
+
+### Filtering, search, multiselect
+
+You may have spotted some handy filtering and search capabilities. It's not rocket science, but it's everything you'd expect to find. We currently support:
+
+- `user:` like `user:marius`
+- `type:` like `type:insight`
+- `name:` like `name:marketing`
+
+It even supports negative keywords so you can exclude items that contain a string, like <code class="text-inherit p-1 rounded bg-accent dark:bg-accent-dark border border-light dark:border-dark !text-[13px] whitespace-nowrap">-this</code>. You can also multi-select items for bulk actions.
+
+<ProductScreenshot
+    imageLight={Filtering}
+    caption="Searching and filtering"
+    padding={false}
+    classes="rounded"
+    alt="Search and filter"
+/>
+
+### Accessibility and keyboard navigation
+
+We're also working toward better accessibility and keyboard navigation across the app. You'll now find it much easier to navigate the menus with tabs, arrows, and enter keys.
+
+<ProductScreenshot
+    imageLight={Accessibility}
+    caption="Accessibility and keyboard navigation"
+    padding={false}
+    classes="rounded"
+    alt="Accessibility and keyboard navigation"
+/>
+
+### Expanded view
+
+Since files are now in a sidebar column, some metadata is hidden by default (like who created an item and when it was created). So we added an expanded view that overlays the sidebar on the page to see more details.
+
+<ProductScreenshot
+    imageLight={ExpandedLight}
+    imageDark={ExpandedDark}
+    caption="Expanded view"
+    padding={false}
+    classes="rounded"
+    alt="Expanded view"
+/>
+
+## One more thing... shortcuts!
+
+Until now, the navigation menu has been static. If you only used a handful of PostHog products, too bad! You still had to look at the entire list of products.
+
+We're also rolling out customizable shortcuts which will let you pin just about anything to the main navigation sidebar. This includes products, specific product features, folders, or individual items like insights, dashboards, or experiments. It's a great way to keep tabs on what's important to you right now.
+
+Below you'll see the products menu replaced with shortcuts.
+
+<ProductVideo
+    videoLight= "https://res.cloudinary.com/dmukukwp6/video/upload/Shortcuts_acfb3a0ae8.mp4" 
+    alt="Organizing content in folders" 
+    classes="rounded shadow-xl"
+    autoPlay={false}
+/>
+
+We'll soon replace the products menu with shortcuts, but you can try it now by clicking the gear icon and selecting _Shortcuts_ in the modal.
+
+### Products menu
+
+The full list of products is now available in the new searchable _Products_ menu, always available directly from the main navigation.
+
+<ProductScreenshot
+    imageLight={ProductsLight}
+    imageDark={ProductsDark}
+    caption="Folders let you organize your content in PostHog"
+    padding={false}
+    classes="rounded"
+    alt="Folders"
+/>
+
+We're currently rolling out this new navigation design and, very soon, will be defaulting to showing shortcuts instead of the ever-growing list of products. Until then, we hope you enjoy the newly polished sidebar and find it easier to navigate PostHog.
+
+We're aiming to solve one of the biggest complaints about PostHog – that it's "cluttered" or "messy". So we'll know we've done a good job if none of you are tweeting about this anymore. We'll be watching...

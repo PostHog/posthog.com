@@ -1,65 +1,47 @@
-> This library was built by the community and is not maintained by the PostHog core team.
+> This library was built by the community but it's being maintained by the PostHog core team since v1.0.0. Thank you to [Nick Kezhaya](https://github.com/nkezhaya) for building it originally.
 
 The package can be installed by adding `posthog` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
   [
-    {:posthog, "~> 1.0.0"}
+    {:posthog, "~> 1.1.0"}
   ]
 end
 ```
 
 ### Configuration
 
-```elixir
+```elixir file=config/config.exs
 config :posthog,
   api_url: "<ph_client_api_host>",
   api_key: "<ph_project_api_key>"
-```
 
-Optionally, you can pass in a `:json_library` key. The default JSON parser is Jason.
-
-You'll also need to include the `posthog` application in your supervision tree. You can do this in two ways:
-
-1. Add it to your `application` function:
-
-```elixir
-# mix.exs
-def application do
-  [
-    extra_applications: [
-      # ... your existing extra applications
-      :posthog
-    ]
-  ]
-end
-```
-
-2. Add it to your existing `MyApp.Application` module:
-
-```elixir
-# lib/my_app/application.ex
-defmodule MyApp.Application do
-  use Application
-
-  def start(_type, _args) do
-    children = [
-      # ... your existing children
-      {Posthog.Application, []}
-    ]
-
-    opts = [strategy: :one_for_one, name: MyApp.Supervisor]
-    Supervisor.start_link(children, opts)
-  end
-end
-```
-
-### Development mode
-
-If you are running in development or test mode, you can pass in a `capture_disabled: false` value to the config. This causes events to be dropped instead of sent to PostHog.
-
-```elixir
+# Optional configurations
 config :posthog,
-  capture_disabled: false
+  json_library: Jason,   # Default JSON parser (optional)
+  enabled_capture: true, # Enable/disable PostHog tracking (optional, defaults to true)
+  http_client: Posthog.HTTPClient.Hackney,  # Default HTTP client (optional)
+  http_client_opts: [    # HTTP client options (optional)
+    timeout: 5_000,      # Request timeout in milliseconds (default: 5_000)
+    retries: 3,          # Number of retries on failure (default: 3)
+    retry_delay: 1_000   # Delay between retries in milliseconds (default: 1_000)
+  ]
+```
+
+#### Advanced configuration
+
+The default JSON parser is `Jason` but you can pass in a custom JSON library via the `json_library` config.
+
+The default HTTP client is `Hackney` but you can pass in a custom HTTP client via the `http_client` config. This client should implement the `Posthog.HTTPClient` behaviour. For testing purposes, you'll likely want a mock HTTP client implementation.
+
+You can refer to the library's [README.md](https://github.com/posthog/posthog-elixir) for more information on the advanced configuration options.
+
+#### Development/Test mode
+
+If you are running in development or test mode, you can pass in a `enabled_capture: false` value to the config. This causes events to be dropped instead of sent to PostHog.
+
+```elixir file=config/test.exs
+config :posthog,
+  enabled_capture: false # Disable tracking in test mode
 ```

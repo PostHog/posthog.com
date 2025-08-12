@@ -26,7 +26,6 @@ const Edit = ({ image, color, name, date, profileID, text }) => {
 
 export const Days = ({ created, edits, profile }: { created: string | undefined; edits?: any; profile?: any }) => {
     const hasEdits = edits?.length > 0
-    console.log(edits)
     if (!created) {
         return null
     }

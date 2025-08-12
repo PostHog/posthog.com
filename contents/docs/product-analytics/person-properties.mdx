@@ -8,8 +8,8 @@ sidebar: Docs
 showTitle: true
 ---
 
-import UserPropertiesHowToSet from "../getting-started/\_snippets/user-properties-how-to-set.mdx"
-import UserPropertiesSetVsSetOnce from "../getting-started/\_snippets/user-properties-set-vs-set-once.mdx"
+import UserPropertiesHowToSet from "../getting-started/_snippets/user-properties-how-to-set.mdx"
+import UserPropertiesSetVsSetOnce from "../getting-started/_snippets/user-properties-set-vs-set-once.mdx"
 export const viewUserPropertiesLight = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/user-properties/view-user-properties-light-mode.mp4"
 export const viewUserPropertiesDark = "https://res.cloudinary.com/dmukukwp6/video/upload/v1710055416/posthog.com/contents/images/docs/data/user-properties/view-user-properties-dark-mode.mp4"
 export const changeDisplayNameLight = "https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/data/user-properties/change-display-name-light-mode.png"
@@ -104,6 +104,14 @@ posthog.capture("distinct_id", "event_name", new HashMap<String, Object>() {
 ```
 
 </MultiLanguage>
+
+## Limitations
+
+<CalloutBox icon="IconWarning" title="Size Limitation" type="caution">
+
+Person properties have a size limit of **512KB** per person record. If you attempt to create or update a person with properties that exceed this limit, the update will be rejected and an ingestion warning will be logged. This is a limit on the combined size of all properties on the person record, not individual property values.
+
+</CalloutBox>
 
 ## How to view and edit a person profile and properties
 

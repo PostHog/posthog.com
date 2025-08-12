@@ -381,5 +381,37 @@
         "link_type": "linkedin",
         "link_url": "https://www.linkedin.com/in/kevangilbert/",
         "profile_id": 32499
+    },
+    {
+        "handle": "vincent-ge",
+        "name": "Vincent Ge",
+        "role": "Technical Content Marketer",
+        "link_type": "github",
+        "link_url": "https://github.com/gewenyu99",
+        "profile_id": 34100
+    },
+    {
+        "handle": "edwin-lim",
+        "name": "Edwin Lim",
+        "role": "Technical Content Marketer",
+        "link_type": "github",
+        "link_url": "https://github.com/edwinyjlim",
+        "profile_id": 33938
+    },
+    {
+        "handle": "dylan-martin",
+        "name": "Dylan Martin",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/dmarticus",
+        "profile_id": 30455
+    },
+    {
+        "handle": "robbie-coomber",
+        "name": "Robbie Coomber",
+        "role": "Product Engineer",
+        "link_type": "github",
+        "link_url": "https://github.com/robbie-c",
+        "profile_id": 29292
     }
 ]

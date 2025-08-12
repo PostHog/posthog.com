@@ -26,7 +26,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 ## Saving receipts
 
-Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay.
+Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with Janani.
 
 You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts and request a reimbursement through Brex.
 
@@ -38,9 +38,15 @@ We now use Brex Empower. This allows the People and Ops team to effectively trac
 - For subscriptions, you can [create a virtual card](https://dashboard.brex.com/p/wallet?expenses.wallet.view=all&walletCreateCard=true) and assign your subscriptions to that virtual card so all those charges will come from that spend limit and not your default card limit.
 - If you forget to assign a budget before completing the purchase, you can retroactively go into your Brex account and assign the transaction to the related budget. 
 - For the vast majority of transactions, you now will not need to upload a receipt as Brex Empower does this automatically. The exception to this is if they have requirements to provide the IRS with itemized receipts. If this is the case and it’s a digital invoice, just forward it to receipts@brex.com with a note explaining what it is for. If it’s a physical receipt, take a picture and upload it with a note: you can use the Brex app, email or reply to the SMS notification.
-- You only need to submit receipts for purchases of $75 or more. You don’t need to keep receipts below this amount.
+- You only need to submit receipts for purchases of $75 or more, within 14 days. You don’t need to keep receipts below this amount.
 
 By default, the email forwarding feature only accepts emails from your PostHog address. You can contact Brex support to enable forwarding from your personal email address if needed.
+
+To ensure complete financials, we ask that you provide a reasoning/justification for the expense being incurred in detail eg, if requesting a budget to onboard a team mate, when raising the request on Brex, provide an explanation on the approx. breakdown for flights/hotel/other costs. For example, if you're incurring software spend beyond the limit assigned, explain why that is the case - like, the number of team members for whom you're paying, the upgraded plan you're paying for, etc.
+
+If you have expenses that require payment from Brex via ACH or wire (i.e, you can't use your card to pay), you can upload the invoice directly into Brex via the 'draft bill' functionality. That allows someone from the People Ops/Finance team to go in and approve! Please include the context of what the invoice is for, which budget it will be coming out of, and how it was approved.
+
+If you have some invoice/receipt to share with the Finance team, send it to finance@posthog.com, and setup this email as the default billing email with vendors, software subscriptions, etc.
 
 ### Revolut
 
@@ -63,6 +69,8 @@ If your purchase fits within the policy below, there is no need to ask. We _cann
 
 If you don't have enough space on your company card, just ask Fraser to increase your limit.
 
+If you wish to pay for invoices but don't have the budget to do so, you can draft a bill on Brex, upload the invoice, provide an explanation on what the bill is for, and submit it for payment.
+
 ## Equipment
 
 PostHog is an all-remote company. This means it's important you have an ergonomic setup at home to be as productive as possible.
@@ -77,7 +85,7 @@ We enforce the use of hardware security keys wherever we can. Every team member 
 
 We'd prefer you to use a laptop. This is so when we host meetups in real life, you can easily bring your work with you. You should use an Apple laptop unless there is an exceptional reason why you can't, just to keep life simpler - for example, that means everyone can use the same software, and as we get bigger, it'll mean we're dealing with one supplier, not many. Please make sure you order a laptop with a keyboard that is US/UK/International English - this makes it much easier for us to reuse your laptop if you upgrade to another model or leave PostHog. 
 
-* For engineering roles, we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
+* For engineering roles (product & support), we recommend a Macbook Pro 14-inch M4 Pro, with the 12-core CPU, 16-core GPU upgrade and 48GB of RAM. By default grab the smallest SSD (512gb), but you can upgrade if you need to.
 * For all other roles, we currently recommend a Macbook Air with the latest Apple Silicon processor and 16GB of RAM.
 
 These are just general guidelines - the most important thing is that you select the model that is appropriate for _your_ needs. If your requirements are different to the guidelines above please just ask Fraser.
@@ -142,6 +150,8 @@ Our entire stack for collaborative software is pleasingly simple. All we use is:
 
 Individual software is down to your personal preference, and we encourage you to share cool software.
 
+Every person has $100 per month for personal software - this is software that is purely for your individual use. Anything that has one or more other people using should have its own shared budget - just request this in Brex. 
+
 ### Optional software
 
 There are other tools some team members choose to use individually. In those cases, as they become more widely adopted in the company, it makes sense to have a company account.
@@ -150,7 +160,7 @@ Ask for access in <PrivateLink url="https://posthog.slack.com/archives/C017WDX3B
 
 - <Link to="https://www.loom.com" external>Loom</Link>
 
-  You'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Simon Fisher" photo />.
+  You'll be added as a _Creator Lite_ which allows you to record 25 videos/mo at up to 5 minutes in length. Should you need a full Creator account (unlimited videos, advanced features), ask <TeamMember name="Mine Kansu" photo /> or <TeamMember name="Simon Fisher" photo />.
 
 - <Link to="https://www.zoom.us" external>Zoom</Link>
   
@@ -217,6 +227,12 @@ We offset all carbon emissions generated by team flights using [Wren](https://ww
 ## Customer meetings
 
 If you are meeting a user for an interview or a potential customer, we would encourage you to pick up the bill. At PostHog's current stage, a fancy coffee shop is encouraged. A fancy lunch or dinner is not.
+
+## Customer meet-ups
+
+We encourage team members to meet with users and key customers in person. This type of travel is separate from your quarterly "working together" budget. This enables us to track the budgets and costs separately. To cover costs for travel, accommodation, and meals when meeting customers, please submit a separate budget request in Brex.
+
+When submitting your request, please provide details of your arrangements and the purpose of the trip - this is required to justify the budget and costs to the auditor, and to ensure that our records are complete. A screenshot/link to a Slack conversation or an email is a great way to provide this context.
 
 ## Training
 

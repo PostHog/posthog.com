@@ -4,7 +4,7 @@ sidebar: Docs
 showTitle: true
 ---
 
-Max is an AI-powered product analyst and assistant that lives in PostHog. Max can:
+[Max](https://app.posthog.com/#panel=max) is an AI-powered product analyst and assistant that lives in PostHog. Max can:
 
 - Research answers to product questions by querying the data.
 - Get things done quickly in the PostHog UI for you (such as updating filters).
@@ -12,7 +12,7 @@ Max is an AI-powered product analyst and assistant that lives in PostHog. Max ca
 - Chit-chat about anything really.
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/max_preview_side_9365f7d4b2.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_05_30_at_09_57_49_2e30546e93.png"
     alt="Max in the sidebar"
     classes="rounded max-h-[569px]"
     zoom={false}
@@ -20,11 +20,29 @@ Max is an AI-powered product analyst and assistant that lives in PostHog. Max ca
 
 ## How do I access Max?
 
-To use Max, you first have to personally opt into the PostHog AI beta [via the Feature previews menu](https://us.posthog.com/#panel=feature-previews%3Aartificial-hog).
-
-Once opted in, you can pop Max open wherever you are in PostHog! Just click on "Max" in the top right corner of the app. Then get to chatting.
+You can pop Max open wherever you are in PostHog! Just click on [Max AI](https://app.posthog.com/#panel=max) in the top right corner of the app. Then get to chatting.
 
 > **Important:** Because PostHog AI features use third-party LLM providers (see details below), the first use of Max in your organization requires org admin approval. In most cases this is just a formality, but we've made it explicit as we know many PostHog customers strictly limit data sub-processors.
+
+## Does Max have any superpowers compared to ChatGPT and similar agents?
+
+Glad you asked! Max is deeply connected with your data, and lives inside of the PostHog app.
+
+Unlike other agents, Max can:
+- Put on a data analyst hat and explore your PostHog data in depth.
+- Generate PostHog data visualizations, such as insights.
+- Interact natively with the PostHog UI, for example by editing filters.
+- Generate complex [HogQL](/docs/sql) (our version of SQL) queries.
+- Answer questions from PostHog's documentation.
+- Create [surveys](/docs/surveys/creating-surveys) using natural language.
+
+And soon, Max will be able to:
+- Watch your session replays
+- Create [feature flags](/docs/feature-flags) and [experiments](/docs/experiments)
+- Write [Hog](/docs/hog) functions to power your realtime destinations.
+- and more...
+
+Check our [roadmap](/max) to see what's coming, and vote on our upcoming features.
 
 ## What access does Max have to my data?
 
@@ -39,13 +57,16 @@ Based on that context, Max comes up with queries, runs them, and summarizes the 
 
 ## Is my data shared with third parties?
 
-We use third-party LLM providers to power Max, so messages and all data accessed by Max (see list above) is passed through them.
+We use third-party providers to power Max, so messages and all data accessed by Max (see list above) is passed through them.
 
-Our LLM providers are:
-- OpenAI and Anthropic – responsible for the core of Max's functionality, access to all data types
-- Cohere – responsible for semantic search across PostHog, access to actions and cohorts (including their filters)
-- Perplexity – responsible for providing context about your product and/or company, access to domain name (for websites) or application bundle ID (for mobile applications)
+Our list of data subprocessors includes:
+- OpenAI and Anthropic – responsible for the core of Max's functionality, have access to user messages and all data types.
+- Azure – responsible for semantic search across PostHog, has access to actions and cohorts (including their filters)
+
+Other providers that are not data subprocessors:
+- Perplexity – responsible for providing context about your product and/or company, has access to domain name (for websites) or application bundle ID (for mobile applications). We do not send any of your data.
 
 ## How can I get Max to remember information?
 
 Max has a memory tied to your project and naturally tries to remember relevant information from your chats. You can also explicitly ask him to remember specific details using verbs like "remember" or "save."
+You can always edit Max's memory in PostHog's settings.

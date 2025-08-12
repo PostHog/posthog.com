@@ -63,7 +63,7 @@ Work in the iteration should:
 * have a clear owner in the team
 * have a clear link to the team or company goals
 
-As one of our values is [stepping on toes](/handbook/company/values#step-on-toes), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
+As one of our values is [Why not now?](/handbook/company/values#why-not-now), during the iteration you might come across something that should be much higher priority than what was already planned. It's up to you to then decide to work on that as opposed to what was agreed in the planning session.
 
 ### Evaluate success 
 
@@ -98,12 +98,12 @@ PRs should ideally be sized to be doable in one day, including code review and Q
 Sometimes, tasks need a few review cycles to get resolved, and PRs remain open for days. This is not ideal, but it happens. What else can you do to make sure your code gets merged quickly? 
 
 - First, start your own day by responding to review requests from colleagues, and unblocking their work. This builds goodwill and encourages them to also review your code in priority. Otherwise, if everybody jumps to implement new features before reviewing WIP, we will end up with [three](https://github.com/PostHog/posthog/pull/6717), [different](https://github.com/PostHog/posthog/pull/6722), [PRs](https://github.com/PostHog/posthog/pull/6766), all for the same thing.
-- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30 min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
+- Test your code. Always read through your PR's changed lines, and test everything yourself, before handing it over for review. Remember that your colleagues are busy people, and you must do what you can to save their time. There's nothing more annoying than an extra 30 min review cycle that starts with *"Almost there, just it's all black now, and remove that console.log please"*.
 - Help your reviewer by leaving comments that help them review trickier bits. Better yet, write these directly into the code, either as comments or by clearly labelling your variables.
 - It's always good to put new features behind [feature flags](/docs/user-guides/feature-flags). It's even better to develop partial features behind feature flags. As long as it's clear what needs to be done before a flag can be lifted, you can usually get the smallest bit of any new feature out in a day this way.
 - Don't be afraid to restart from scratch if the PR gets out of hand. It's a bit of time lost for you, but a lot of time saved for the reviewer if they get a clean PR to review.
 - Push your code out as a draft PR early on, so everyone can see the work in progress, and comment on the validity of the general approach when needed.
-- Remember that PRs can be reverted as easily as they can be merged. Don't be afraid to get stuff in early if it makes things better. [Bias for action](/handbook/company/values#bias-for-action).
+- Remember that PRs can be reverted as easily as they can be merged. Don't be afraid to get stuff in early if it makes things better. [Why not now?](/handbook/company/values#why-not-now).
 - Most importantly, [really understand why it's paramount to reduce WIP](https://loom.com/share/5efceb288b634a449041918bdba08202), until you feel it in your bones.
 
 ## Writing code
@@ -136,18 +136,86 @@ Check the `test-runner.ts` file to see how this is configured. We use the `@stor
 
    ```bash
    pnpm storybook
+   # or
+   pnpm --filter=@posthog/storybook
    ```
 
 2. **Install Playwright and run the visual tests in debug mode** in another terminal:
 
    ```bash
    pnpm exec playwright install
-   pnpm test:visual:debug
+   pnpm --filter=@posthog/storybook test:visual:debug
    ```
 
 This setup will help catch unintended UI regressions and ensure consistent visual quality.
 
-[Learn more](https://github.com/PostHog/posthog/blob/master/.storybook/README.md)
+If you wish to locally run `test-runner.ts` and output all snapshots:
+
+   ```bash
+   pnpm --filter=@posthog/storybook test:visual:ci:update
+   ```
+
+Or if you wish to run one particular story:
+
+   ```bash
+   pnpm --filter=@posthog/storybook test:visual:ci:update <path_to_story>
+   
+   # example: pnpm --filter=@posthog/storybook test:visual:ci:update frontend/src/scenes/settings/stories/SettingsProject.stories.tsx
+   ```
+
+#### Merge conflicts with visual regression snapshots
+
+It happens often that your PR will show conflics with our snapshots, as our CI pipeline will run `test-runner.ts` on every push, generating and pushing to your PR any significant visual changes.
+
+Github does not allow for conflict resolution inside their website, so you must do it manually. 
+
+> The following is done on your branch in question.
+
+1. Bring your branch up to date with `master`.
+
+   ```bash
+   git fetch origin
+   ```
+
+2. Rebase master into your branch
+
+   ```bash
+   git rebase master
+   ```
+
+3. Rebase your upstream into your local branch
+
+   ```bash
+   git pull --rebase <your branch>
+   ```
+
+In your terminal, it should show you the conflicts mimicking what you see in your Github PR.
+
+
+   ```bash
+   warning: Cannot merge binary files: frontend/__snapshots__/<conflicted_file_1>.png (HEAD vs. xxx (Update UI snapshots for `chromium` (1)))
+   Auto-merging frontend/__snapshots__/<conflicted_file_1>.png
+   CONFLICT (content): Merge conflict in frontend/__snapshots__/<conflicted_file_1>.png
+   error: could not apply xxx... Update UI snapshots for `chromium` (1)
+   hint: Resolve all conflicts manually, mark them as resolved with
+   hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
+   hint: You can instead skip this commit: run "git rebase --skip".
+   hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
+   ```
+
+If all your conflicts are only snapshots, you can simply skip it.
+
+   ```bash
+   git rebase --skip
+   ```
+
+If all conflicts go away, then
+
+   ```bash
+   git push origin --force <your branch>
+   ```
+
+> Why does this work? As we mentioned earlier, our CI runs `test-runner.ts` on every push, so we don't really care if these images are conflicted as they are regenerated after you push to your branch.
 
 ## Reviewing code
 
@@ -178,7 +246,7 @@ Once you merge a pull request, it will automatically deploy to all environments.
 
 If you build it, [document it](/docs). You're in the best position to do this, and it forces you to think things through from a user perspective.
 
-It's not the responsibility of either [Website & Vibes](/teams/website-vibes) or [Marketing](/teams/marketing) teams to document features.
+It's not the responsibility of either [Brand & Vibes](/teams/brand-vibes) or [Content](/teams/content) teams to document features.
 
 See our [docs style guide](/handbook/content-and-docs/posthog-style-guide) for tips on how to write great docs.
 

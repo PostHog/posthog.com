@@ -15,11 +15,11 @@ You'll also need access to the relevant Hubspot account.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
-2. Click the 'Destinations' tab.
-3. Search for 'Hubspot' and select the destination.
+1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=hubspot) tab.
+3. Search for **Hubspot** and click **+ Create**.
 4. Connect your Hubspot account at the configuration step.
-5. Press 'Create & Enable' and watch your 'Contacts' list get populated in Hubspot!
+5. Press **Create & Enable** and watch your 'Contacts' list get populated in Hubspot!
 
 <HideOnCDPIndex>
 

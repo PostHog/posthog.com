@@ -19,7 +19,7 @@ tags:
 ---
 
 <blockquote class='warning-note'>
-<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires Clickhouse. To use this version, you must <a href="/docs/migrate/migrate-between-posthog-instances" target="_blank">upgrade to ClickHouse</a> first.
+<b>IMPORTANT!</b> Do not upgrade to this version if you have deployed PostHog using Postgres. PostHog no longer supports a Postgres-based installation (last version supported is <code>1.30.0</code>) and now requires Clickhouse.
 </blockquote>
 
 ## PostHog 1.32.0 release notes
@@ -86,7 +86,7 @@ Funnels with breakdowns just got a lot better. This new view enables you to quic
 
 ### Deprecation & removal notices
 
-1. Since the previous version (1.31.0), we no longer support a Postgres-only deployment of PostHog. Read [our migration guide](/docs/migrate/migrate-between-posthog-instances) for instructions on moving over to a ClickHouse version. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
+1. Since the previous version (1.31.0), we no longer support a Postgres-only deployment of PostHog. ClickHouse provides faster queries and is optimized for very large volumes of data, and you will also get a new lot of features.
 2. We're removing support for insights with "Minute" intervals. From user feedback, these insights were hard to parse and could lead to significant performance issues in self-hosted instances. Please [reach out](/support) if you have any feedback on this. More details on the [PR](https://github.com/PostHog/posthog/pull/7847).
 
 ## Share your feedback
@@ -105,11 +105,11 @@ We've been working hard on a brand new Experimentation feature which will let yo
 
 We want to welcome our new team members!
 
-[Andy](/community/profiles/62) joined PostHog as our first Content Marketer. Andy is a definite 👎 on pineapple on pizza (🍍 on 🍕).
+[Andy](/andy) joined PostHog as our first Content Marketer. Andy is a definite 👎 on pineapple on pizza (🍍 on 🍕).
 
 > I am the only person called Andrew Vandervell in the universe.
 
-[Simon](/community/profiles/49) joined us in Customer Success to help our Enterprise customers get the most value out of PostHog. Simon's stance on pineapple on pizza (🍍 on 🍕) is: On the fence. I'd never actively order a pizza with pineapple on it, but as a pizza lover and pineapple was the only option - I’d still eat it. Same response for Marmite.
+[Simon](/simon) joined us in Customer Success to help our Enterprise customers get the most value out of PostHog. Simon's stance on pineapple on pizza (🍍 on 🍕) is: On the fence. I'd never actively order a pizza with pineapple on it, but as a pizza lover and pineapple was the only option - I’d still eat it. Same response for Marmite.
 
 > I’m (loosely) related to an actor who’s starred in 6 Star Wars movies.
 

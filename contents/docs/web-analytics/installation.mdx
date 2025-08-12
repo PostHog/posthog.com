@@ -20,6 +20,8 @@ import AstroInstall from '../integrate/_snippets/install-astro.mdx'
 import FramerInstall from '../integrate/_snippets/install-framer.mdx'
 import WebflowInstall from '../integrate/_snippets/install-webflow.mdx'
 import PhoenixInstall from '../integrate/_snippets/install-phoenix.mdx'
+import Wizard from '../getting-started/_snippets/wizard.mdx'
+
 
 Web analytics enables you to easily track and monitor many of the most important metrics for your website. 
 
@@ -35,8 +37,9 @@ Unlike [product analytics](/docs/product-analytics), web analytics offers a more
 To get started with web analytics, install PostHog on the site or app you want to track.
 
 <!-- prettier-ignore -->
-<Tab.Group tabs={['Web', 'React', 'Next.js', 'GTM', 'Vue', 'Nuxt', 'Svelte', 'WordPress', 'Astro', 'Framer', 'Webflow', 'Phoenix']}>
+<Tab.Group tabs={['AI wizard', 'Web', 'React', 'Next.js', 'GTM', 'Vue', 'Nuxt', 'Svelte', 'WordPress', 'Astro', 'Framer', 'Webflow', 'Phoenix']}>
     <Tab.List>
+        <Tab>AI wizard</Tab>
         <Tab>Web</Tab>
         <Tab>React</Tab>
         <Tab>Next.js</Tab>
@@ -51,6 +54,9 @@ To get started with web analytics, install PostHog on the site or app you want t
         <Tab>Phoenix</Tab>
     </Tab.List>
     <Tab.Panels>
+        <Tab.Panel>
+            <Wizard />
+        </Tab.Panel> 
         <Tab.Panel>
             <WebInstall />
         </Tab.Panel>

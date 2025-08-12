@@ -16,9 +16,9 @@ You'll also need access to the relevant Meta Ads account.
 
 1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
 
-2. Click the **Destinations** tab.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=meta) tab.
 
-3. Search for **Meta Ads Conversions** and select the destination.
+3. Search for **Meta Ads Conversions** and click **+ Create**.
 
 4. Visit the [Meta Events Manager](https://business.facebook.com/events_manager2/overview).
    1. If you’ve already set up a Pixel for your website, we recommend that you use the same Pixel ID for your browser and server events.

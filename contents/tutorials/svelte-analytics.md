@@ -20,10 +20,10 @@ In this tutorial, we'll build a basic Svelte blog app with user authentication, 
 
 ## Creating our Svelte app
 
-First, we need to create a Svelte app using the `npm create` command. When prompted in the command line, choose `Skeleton project`, no type checking, and none of the additional options.
+First, we need to create a Svelte app using the `npx sv create` command. When prompted in the command line, choose `SvelteKit minimal`, no type checking, none of the additional options, and `npm` as the package manager (but feel free to modify this).
 
 ```bash
-npm create svelte@latest my-app
+npx sv create my-app
 ```
 
 Once created, go into your newly created `my-app` folder, install the packages, and run the server.
@@ -36,7 +36,7 @@ npm run dev
 
 This runs a basic Svelte app that we can start to turn into our blog. 
 
-![App](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/app.png)
+![App](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_15_04_02_2x_e015019d65.png)
 
 ## Adding the blog functionality
 
@@ -127,7 +127,7 @@ Finally, back in the `+page.svelte` in our base `routes` folder, we add a link t
 
 Our blog now has everything it needs.
 
-![Blog](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/app.gif)
+![Blog](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_15_07_04_2x_95c09109e0.png)
 
 ## Setting up user authentication
 
@@ -210,7 +210,7 @@ Next, install `posthog-js`.
 npm i posthog-js
 ```
 
-In the `src/routes` folder, create a `+layout.js` (different from the `+layout.server.js` file you created earlier). In this file, check the environment is the browser, and initialize PostHog if so. 
+In the `src/routes` folder, create a `+layout.js` (different from the `+layout.server.js` file you created earlier). In this file, check the environment is the browser, and initialize PostHog with your project API key and host. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
 ```js
 // src/routes/+layout.js
@@ -218,70 +218,25 @@ import posthog from 'posthog-js'
 import { browser } from '$app/environment';
 
 export const load = async () => {
-
   if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host: '<ph_client_api_host>',
-      }
-    )
+    posthog.init('<ph_project_api_key>', {
+      api_host: '<ph_client_api_host>',
+      defaults: '<ph_posthog_js_defaults>',
+    })
   }
+
   return
 };
 ```
 
-After restarting your app and going back to your site, you should start to see events autocaptured into your PostHog instance as well as sessions recorded if you turned them on.
+After restarting your app and going back to your site, you should start to see events and pageviews autocaptured into your PostHog instance as well as sessions recorded if you turned them on.
 
-![Autocaptured events](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/events.png)
-
-## Capturing pageviews and pageleaves
-
-For your app, PostHog only captures the initial page load as a pageview and the final pageleave. This is because Svelte acts as a [single-page app](/tutorials/single-page-app-pageviews). To capture every pageviews and pageleaves, we check for navigation and then capture custom events.
-
-We can set this up by creating one more file, a `+layout.svelte` file in `src/routes`. In this file, we set up a browser check then use the `beforeNavigate` and `afterNavigate` interceptors to capture a `$pageleave` or `$pageview` event.
-
-```svelte file=+layout.svelte
-<script>
-  import posthog from 'posthog-js'
-  import { browser } from '$app/environment';
-  import { beforeNavigate, afterNavigate } from '$app/navigation';
-
-  if (browser) {
-		beforeNavigate(() => posthog.capture('$pageleave'));
-		afterNavigate(() => posthog.capture('$pageview'));
-	}
-</script>
-
-<slot></slot>
-```
-
-To make sure we don't double count pageviews and pageleaves, we also need to adjust our PostHog initialization in `routes/+layout.js` to set `capture_pageview` and `capture_pageleave` to false.
-
-```js
-// src/routes/+layout.js
-import posthog from 'posthog-js'
-import { browser } from '$app/environment';
-
-export const load = async () => {
-
-  if (browser) {
-    posthog.init(
-      '<ph_project_api_key>',
-      {
-        api_host:'<ph_client_api_host>',
-        capture_pageview: false,
-        capture_pageleave: false
-      }
-    )
-  }
-  return
-};
-```
-
-Once you save and relaunch, you get pageviews and pageleaves for all the navigation between pages in your app.
-
-![Pageviews](https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/tutorials/svelte-analytics/pageviews.png)
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_15_11_57_2x_b7ec0f1565.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_05_22_at_15_11_42_2x_734206be9a.png"
+  alt="Events in PostHog"
+  classes="rounded"
+/>
 
 ## Identifying users
 

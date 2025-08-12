@@ -17,9 +17,9 @@ Create a new experiment in the [experiments tab](https://app.posthog.com/experim
 >
 > Additionally, it's not possible to rename the 'control' variant. You can name the other variants whatever you'd like, though.
 
-## Step 2 (optional): Call the `decide` endpoint
+## Step 2 (optional): Call the `flags` endpoint
 
-If feature flag support is not yet available in your PostHog SDK, but you still want to leverage PostHog's feature flag infrastructure, use the PostHog [API](/docs/api) to call the [`decide`](/docs/api/decide) endpoint. This enables you to calculate the feature flag value for a given user.
+If feature flag support is not yet available in your PostHog SDK, but you still want to leverage PostHog's feature flag infrastructure, use the PostHog [API](/docs/api) to call the [`flags`](/docs/api/flags) endpoint. This enables you to calculate the feature flag value for a given user.
 
 This step is not necessary if you are using your own feature flag library.
 

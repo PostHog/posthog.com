@@ -148,6 +148,27 @@ Retention creates a cohort of unique users who performed any event for the first
 
 > **Read more:** [Creating and understanding retention](/docs/product-analytics/retention)
 
+## Active hours
+
+The **Active hours** feature displays a heatmap showing either the number of **unique users** or **total pageviews** for **any pageview event**, broken down by hour of the day and day of the week You can switch between these two metrics using the tabs at the top right of the heatmap (**Unique users** or **Total pageviews**).
+
+### What the heatmap shows:
+- Each **cell** represents the number of unique users or total pageviews during a specific hour of a specific day. Numbers are formatted for readability (e.g., 1.73K for 1,730).
+- The **"All" column** on the right aggregates the total for each day across all hours, and is highlighted in a different color.
+- The **bottom row ("All")** aggregates the total for each hour across all days, also highlighted in a different color.
+- The **bottom-right cell** shows the grand total for the selected metric (unique users or total pageviews) across all days and hours in the selected time range, with a distinct color.
+- Use the **"Show more"** button to expand the heatmap and view additional details if available.
+- The displayed time for each cell and the starting day of the week are based on your project's date and time settings. By default, the time is UTC, but you can change the timezone in [your project settings](https://us.posthog.com/settings/project-product-analytics#date-and-time).
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_17_at_11_29_05_AM_b6492fe65e.png" 
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/Screenshot_2025_06_17_at_11_33_14_AM_653e33a4e7.png"
+  alt="Web analytics active hours" 
+  classes="rounded"
+/>
+
+> **Note:** Selecting a time range longer than 7 days will include additional occurrences of weekdays and hours, potentially increasing the counts in those buckets. For best results, select 7 closed days or a multiple of 7 closed day ranges.
+
 ## Goals
 
 Goals shows your pinned or most recently created actions and the number of conversions they've had. You can set a custom event or action as a [conversion goal](/docs/web-analytics/conversion-goals) at the top of the dashboard for more specific metrics.

@@ -1,10 +1,10 @@
 ---
-title: New sales
+title: Inbound sales
 sidebar: Handbook
 showTitle: true
 ---
 
-This is our playbook for managing new sales. These are customers who have contacted sales proactively - we don't do outbound sales.
+This is our playbook for managing inbound sales, ie. customers who have contacted the sales team directly. 
 
 Three principles to bear in mind:
 
@@ -14,7 +14,7 @@ Three principles to bear in mind:
 
 ## Maximizing your chance of success
 
-Selling software, especially to larger companies, can be a complex process with lots of stakeholders involved.  When moving your deal along you should aim to know as much about the following as possible given where you are in the process (inspired by [MEDDPICC](https://www.scratchpad.com/blog/meddpicc):
+Selling software, especially to larger companies, can be a complex process with lots of stakeholders involved.  When moving your deal along you should aim to know as much about the following as possible given where you are in the process (inspired by [MEDDPICC](https://www.scratchpad.com/blog/meddpicc)):
 
 * Pain - Do they have a problem?  
   * Is it painful enough right now that they are willing to adopt a new solution to solve it?  
@@ -74,16 +74,19 @@ Most companies add friction here by making customers jump on a call first to qua
 > - What does the rest of your stack look like? What other tools or data would you want PostHog data to connect to?
 > - Who owns that data stack? Do you have a data team or data engineers?
 > - Who will be the consumers of PostHog data? How are they currently answering their questions, and how easy is it for them to do so with existing tooling?
->
-> (We will flesh this out into something more structured by product eventually.)
 
 If you're pretty sure that they should be qualified out, you should still be helpful over email - some customers just use the form to get in touch and don't want to actually have a demo (e.g. they have a billing question or are asking about compliance things like HIPAA.) 
 
 #### Requests for Proposals (RFPs)
 
-There are two types of RFPs -- 1) those where we have context on what they're trying to accomplish and where we have qualified their specific needs ahead of time. These are *solicited* RFPs. 2) those where we just get an RFP randomly without any context. These are *unsolicited* RFPs. We generally don't respond to unsolicited RFPs and generally do respond to solicited RFPs.
+There are two types of RFPs:
 
-If it's an unsolicited RFP where we haven't had any prior contact or usage from the company then it is **highly likely** that you will burn a lot of time for nothing and you are free to decline.  If you find the unsolicited RFP otherwise compelling and want to proceed, the suggested approach here is to see if anyone from the company has recently signed up to PostHog. If so, then make contact with them to see if they are aware of the RFP and can provide more information on PostHog's inclusion. If you can't identify anyone who has recently signed up to PostHog, then ask the person who sent you the RFP for a call to gather more context before making a decision on whether to fill it in.  If they aren't willing to get on a call then it's likely that we are not their vendor of choice, and they are using us to make up the numbers in a tender process.  As such, we shouldn't spend time on this kind of activity. If you choose to spend time with these, timebox your effort to ensure you are not devoting a week to a 500 question RFP where we have very slim chances of success. Your time is your most valuable asset. 
+- We have context on what they're trying to accomplish and where we have qualified their specific needs ahead of time. These are *solicited* RFPs, and we generally reply to these.
+- We just get an RFP randomly without any context. These are *unsolicited* RFPs, and we generally don't reply to these.
+
+If it's an unsolicited RFP where we haven't had any prior contact or usage from the company then it is **highly likely** that you will burn a lot of time for nothing and you are free to decline.  If you find the unsolicited RFP otherwise compelling and want to proceed, the suggested approach here is to see if anyone from the company has recently signed up to PostHog. If so, then make contact with them to see if they are aware of the RFP and can provide more information on PostHog's inclusion. 
+
+If you can't identify anyone who has recently signed up to PostHog, then ask the person who sent you the RFP for a call to gather more context before making a decision on whether to fill it in.  If they aren't willing to get on a call then it's likely that we are not their vendor of choice, and they are using us to make up the numbers in a tender process.  As such, we shouldn't spend time on this kind of activity. If you choose to spend time with these, timebox your effort to ensure you are not devoting a week to a 500 question RFP where we have very slim chances of success. Your time is your most valuable asset. 
 
 If it's a solicited RFP, you're free to proceed so long as the opportunity is qualified as a whole and you carefully balance the level of effort required in the RFP against the opportunity for you & PostHog. Again, a 500 question RFP may not be worth it if they plan on spending <$20k for PostHog (a 50 question RFP may not even be worth it in this instance)! Use your best judgement, and it is generally still wise to timebox your effort. 
 
@@ -93,6 +96,17 @@ If they're eligible for the [Startup Plan](/startups), route them to the applica
 
 You can also redirect them to use the In-app support modal if they have a product-related question - this will then be routed to the right team, as well as showing them CTAs to upgrade for high priority support.
 
+#### Leads below the sales assist threshold (less than $20K ARR)
+We often get requests for demos from leads or existing customers who are below our sales assist threshold, and who don't have a defined use case for PostHog. It usually comes in the form of "show me all the features" or "I need someone to demo to me." These can be large time sinks because they are non-technical, don't have a clear idea of what they want, and are unlikely to ever grow into a sales-assist level customer.
+
+*We also want to be helpful to our current or potential customers, regardless of spend.* Time permitting, we can offer a demo if they are willing to give us the information we need to put something together:
+
+- What tech stack are you on?
+- What features / products are you interested in?
+- What questions do you have?
+
+This makes the the demo actually valuable and can be an opportunity for you to learn more and get some demo practice. You'll also find that 90% of these requesters never respond because they are either unable or unwilling to engage with the questions, which allows you to avoid the biggest time sinks.
+
 ### 3. Initial demo
 
 This is basically a combo of discovery and demo call - your objectives here are to:
@@ -101,9 +115,9 @@ This is basically a combo of discovery and demo call - your objectives here are 
 - Find out as much as you reasonably can about them
 - Have a solid plan for next steps in place
 
-We have a simple deck (seriously, it's like 5 slides) - ask someone on the Sales team for an invite to our Pitch account so you can create customized versions with your name etc.
+We have various slide templates - ask someone on the Sales team for an invite to our Pitch account so you can create customized versions with your name etc. You should general use the deck as scaffolding, pulling out the relevant slides (e.g. pricing). Do not spend the demo presenting a deck - most people at PostHog spend 90% of the demo call actually in product or talking to the customer about their needs. 
 
-You should give a relevant and pointed demo - don't just throw everything in, as the customer will get overwhelmed. If you don't show what's important first, typically more senior people on the call will become distracted.
+You should give a relevant and pointed demo - don't just throw everything in, as the customer will get overwhelmed. If you don't show what's important first, people on the call will become distracted.
 
 For example, a customer may say "we need to see how our customers our using our platform". In this case, a good approach is to go straight to Session Replay, then tie Replay into Analytics, then go from there.
 
@@ -133,9 +147,9 @@ If you realize that they will be too small (<$20k) to go through our sales-led p
 
 ### 4. Product evaluation
 
-If you think they are a good prospect for our sales-led process, your first priority is to try and get them into a shared Slack channel as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread.
+If you think they are a good prospect for our sales-led process, your first priority is to try and get them into [a shared Slack channel](/handbook/growth/sales/slack-channels) as quickly as possible. If you close them, this will also be their primary channel for support. Add the Pylon app to the channel and it will automate the support bot and channel description. React with a 🎫 to customer messages or tag `@support` to create a ticket in a thread. 
 
-Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams)) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
+Some customers may wish to use MS Teams rather than Slack - we can sync our Slack with Teams via Pylon to do this. First you will need an MS Teams licence - ask Simon for one. Then, set up [a Slack channel](/handbook/growth/sales/slack-channels). Then, [follow the instructions here](https://docs.usepylon.com/pylon-docs/integrations/chat/microsoft-teams) to get set up. Before adding the customer into the channel, remember to test it on both sides to ensure the integration is working correctly.
 
 You should then follow up with a standard email/Slack message that:
 
@@ -194,15 +208,17 @@ By this point, you may have started running into some objections. These are the 
 
 - Gap in the product - introduce the customer to the relevant product engineer to build together (but first agree with product team if it’s a reasonable ask). We have found this approach works exceptionally well for our newer products.
 - Pricing issue - understand their budget; our [discounts](/handbook/growth/sales/contracts#discounts) section had the different levers you can pull to get a customer to the right price point. You can also help them tune their usage to lower costs. We don't buy customers out of existing contracts, and we don't do deals where year 1 is super cheap then we ratchet up the price in year 2.
-- Performance (e.g. slow dashboards) - for Extra Large, usually get Tim involved, or he can loop in the right engineer to help.
+- Performance (e.g. slow dashboards) - for very large customers, usually get Tim involved, or he can loop in the right engineer to help.
 - Confidence in PostHog - often [this Handbook page](/handbook/finance) is enough. For Very Large companies who need to be sold a bit more on the company vision, you can get James H involved.
 - Unsure how much credit they need - suggesting the customer pay monthly for one or two months can help here, especially when there is not a technical driver that can do the mental math to figure out volumes. It's also a good expectation to set at the end of the trial that they will roll onto monthly, which can be pitched as a way to de-risk for the customer if there are still loose ends or a deal is dragging. 
 
-> Ahead of the contract being signed, you'll also need to understand the customer's invoicing process.  Companies will typically have a Finance or AP team who should be the billing contact in Stripe.  Make sure you are also aware of any special invoicing requirements (e.g. a Purchase Order number) well ahead of the invoice being generated.  In addition, we only accept annual plan payments via Bank Transfer (no checks).
+> Ahead of the contract being signed, you'll also need to understand the customer's invoicing process.  Companies will typically have a Finance or AP team who should be the billing contact in Stripe.  Make sure you are also aware of any special invoicing requirements (e.g. a Purchase Order number) well ahead of the invoice being generated. Follow our [contract rules](/handbook/growth/sales/contract-rules#payment-method) here - e.g. no payment by check, ever.
 
 ### 7. Closed - won
 
 Hooray! This is defined as when the contract is signed by _everyone_. 'They're about to sign' - NOT CLOSED. 'I've sent a DocuSign' - NOT CLOSED EITHER.
+
+If an op moves forward with PostHog, but is below an annual contract, change the type to "Monthly Contract" and mark it as closed - won in Salesforce.
 
 Once the contract is signed, it lives in PandaDoc. Next step - get them set up with [billing](/handbook/growth/sales/billing).
 
@@ -222,21 +238,15 @@ Here is minimum checklist of things that we find customers should know how to do
 - Activity log
 - Internal and test user filtering
 
-Post-onboarding, you'll want to move the customer into our Expansion or Retention flow - this may take you a few months to determine, so by default everyone should go into Expansion unless you have obvious reasons not to:
-- Expansion: multi-product potential, multi-team potential, _or_ same team and product but massively ramping usage next year
-- Retention: everyone else, steady state only
+Post-onboarding, you'll want to change gears to start thinking about [retention, expansion and/or cross-sell](/handbook/growth/sales/expansion-and-retention). 
+
+Simon and Charles review accounts every month to see if/when it makes sense to reassign accounts once they've closed. 
 
 ### 7. Closed - lost
 
 Oh no! It's ok - the most important thing here is that we learn. You should capture the reason in the Salesforce opportunity - this could be:
 
-- Product/feature gap:
-  - Threshold-based alerting
-  - Role-based access
-  - [Mobile session replay](/blog/mobile-session-replay)
-  - Experimentation
-  - Error monitoring
-  - (Create a new category if something else comes up, don’t just have an ‘other’ bucket)
+- Product/feature gap
 - Performance concerns
 - Security/privacy concerns
 - Pricing

@@ -1,58 +1,46 @@
 <!-- Keep in sync with https://github.com/PostHog/posthog-js/tree/main/playground/nuxtjs -->
 
+import InstallWebPackageManagers from "./install-web-package-managers.mdx"
+
 1. Install `posthog-js` using your package manager:
 
-```shell
-yarn add posthog-js
-# or
-npm install --save posthog-js
-```
+<InstallWebPackageManagers />
 
-2. Add your PostHog API key and host to your `nuxt.config.js` file. You can find your project API key in the PostHog app under Project Settings > Project Variables.
+2. Add your PostHog API key and host to your `nuxt.config.js` file. You can find these in [your project settings](https://us.posthog.com/settings/project).
 
 ```js file=nuxt.config.js
 export default defineNuxtConfig({
-    runtimeConfig: {
-        public: {
-            posthogPublicKey: process.env.NUXT_PUBLIC_POSTHOG_KEY || '<ph_project_api_key>',
-            posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
-        },
-    }
+  runtimeConfig: {
+    public: {
+      posthogPublicKey: process.env.NUXT_PUBLIC_POSTHOG_KEY || '<ph_project_api_key>',
+      posthogHost: process.env.NUXT_PUBLIC_POSTHOG_HOST || '<ph_client_api_host>',
+      posthogDefaults: '<ph_posthog_js_defaults>',
+    },
+  }
 })
 ```
 
 3. Create a new plugin by creating a new file `posthog.client.js` in your [plugins directory](https://nuxt.com/docs/guide/directory-structure/plugins).
 
 ```js file=plugins/posthog.client.js
-import { defineNuxtPlugin, useRuntimeConfig, useRouter, nextTick } from '#imports'
+import { defineNuxtPlugin, useRuntimeConfig } from '#imports'
 
 import posthog from 'posthog-js'
+
 export default defineNuxtPlugin(() => {
-    const runtimeConfig = useRuntimeConfig()
-    const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
-        api_host: runtimeConfig.public.posthogHost,
-        capture_pageview: false, // we add manual pageview capturing below
-        capture_pageleave: true, // automatically capture a pageleave event when the user leaves the site or closes the tab
-        loaded: (posthog) => {
-            if (import.meta.env.MODE === 'development') posthog.debug()
-        },
-    })
+  const runtimeConfig = useRuntimeConfig()
+  const posthogClient = posthog.init(runtimeConfig.public.posthogPublicKey, {
+    api_host: runtimeConfig.public.posthogHost,
+    defaults: runtimeConfig.public.posthogDefaults,
+    loaded: (posthog) => {
+      if (import.meta.env.MODE === 'development') posthog.debug()
+    },
+  })
 
-    // Make sure that pageviews are captured with each route change
-    const router = useRouter()
-    router.afterEach((to) => {
-        nextTick(() => {
-            posthog.capture('$pageview', {
-                current_url: to.fullPath,
-            })
-        })
-    })
-
-    return {
-        provide: {
-            posthog: () => posthogClient,
-        },
-    }
+  return {
+    provide: {
+      posthog: () => posthogClient,
+    },
+  }
 })
-
 ```

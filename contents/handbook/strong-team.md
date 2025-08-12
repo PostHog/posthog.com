@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-_Talent Compounds_ is one of our values. 90% of a startup's problems are solved by just having the right group of people in ~~the building~~ Slack.
+_You're the driver_ is one of our values. 90% of a startup's problems are solved by just having the right group of people in ~~the building~~ Slack.
 
 ## Personality traits that cause people to be successful here
 

@@ -17,9 +17,9 @@ Nevertheless, privacy-focused users of the web may wish to prevent any such data
 
 PostHog provides other tools unrelated to event reporting and analytics. These can be vital to the sites which rely on them. You **should not block** these endpoints, at risk of breaking site functionality:
 
-`https://us.i.posthog.com/decide`
+`https://us.i.posthog.com/flags`
 
-`https://eu.i.posthog.com/decide`
+`https://eu.i.posthog.com/flags`
 
 `https://us-assets.i.posthog.com/static/`
 

@@ -12,22 +12,47 @@ Data Team's mission is to provide a storage and query engine that meets these re
 
 In service of this mission, our goals are:
 
-**Goals for Q2 2025:**
+**Goals for Q3 2025:**
 
-- Query Observability and Performance Improvements
-    - We want to know where the query is coming from and why. Is it per team or posthog wide, is it by our system or by customer?
-    - Add additional metadata tags to better identify and categorize API query sources
+## Clickhouse Tooling
 
-- Make ClickHouse ops easy
-    - Complete cluster management through Infrastructure as Code (IaC)
-    - Optimize speed of critical operational procedures incl. automation for common operations (e.g. ZK)
-    - Implement ClickHouseKeeping automation via Dagster (cleanup jobs, backups, improve replication performance)
-    - Better runbooks for everyone
-    - Build automation for handling ad-hoc deletion requests and disk provisioning  
-    - Storage infrastructure improvements (s3-backed events, get rid of io2)
-    - Switch from ZooKeeper to ClickHouse Keeper
+- **Migration (P1)**
 
-- Use Altinity Antalya in production for events
-    - upgrade clusters to Antalya 
-    - get DW queries running through Antalya Swarm
-    - Backfill all events onto Iceberg in S3
+- **Chargeback (P0)** - _Paweł Szczur_
+    - Enable our customers to self service performance issues
+    - Surface resource consumption
+    - Usecase: Query analysis to avoid querying big ranges
+
+- **SlopCop (query scheduling) (P0)** - _Ted Kaemming, Paweł Szczur_
+    - Rate limiting
+    - Queuing
+    - Debouncing
+
+- **Inserter & ShuffleHog (P0)** - _James Greenhill_
+
+- **Mutator (P0)** - _Daniel Escribano, Ted Kaemming_
+    - Dagster + table + interface
+    - Mutation monitoring
+    - Ensure Deletes Run
+
+## Clickhouse Ops
+
+- **Make ClickHouse ops easy** - _Daniel Escribano, James Greenhill_
+    - Complete cluster management through IaC
+    - EU coordinators
+    - Bringing up and down nodes should require no thought
+    - Runbook - more ideally automation
+    - Tooling? 
+    - Much faster critical procedures (rely on ZK configuration more)
+    - ClickHouseKeeping through Dagster
+        - Part moving
+        - Detached/unneeded parts cleaning
+        - Resizing parts?
+    - Disk management
+        - Automatic disk provisioning based on thresholds (and limits)
+    - Events TTL and actual data tiering
+        - Some tables in Iceberg (Antalya)
+        - Query_log
+        - Query_metrics_log
+        - Plan for events migration to Iceberg
+    - ClickHouse more on K8s

@@ -14,6 +14,7 @@ import qs from 'qs'
 import dayjs from 'dayjs'
 import slugify from 'slugify'
 import { docsMenu, handbookSidebar } from '../src/navs/index.js'
+import { generateRawMarkdownPages, generateApiSpecMarkdown, generateLlmsTxt } from './rawMarkdownUtils'
 
 const limit = pLimit(10)
 
@@ -244,6 +245,42 @@ const createOrUpdateStrapiPosts = async (posts, roadmaps) => {
 }
 
 export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
+    // Generate API spec markdown files first
+    try {
+        const openApiSpecUrl = process.env.POSTHOG_OPEN_API_SPEC_URL || 'https://app.posthog.com/api/schema/'
+        const spec = await fetch(openApiSpecUrl, {
+            headers: {
+                Accept: 'application/json',
+            },
+        }).then((res) => res.json())
+
+        generateApiSpecMarkdown(spec)
+    } catch (error) {
+        console.error('Failed to generate API spec markdown:', error)
+    }
+
+    // Generate markdown files for llms.txt file and LLM ingestion (after API spec files exist)
+    const markdownQuery = await graphql(`
+        query pagesForMarkdown {
+            allMdx {
+                nodes {
+                    frontmatter {
+                        title
+                        date
+                    }
+                    rawBody
+                    fields {
+                        slug
+                        contentWithSnippets
+                    }
+                }
+            }
+        }
+    `)
+
+    const filteredPages = await generateRawMarkdownPages(markdownQuery.data.allMdx.nodes)
+    generateLlmsTxt(filteredPages)
+
     if (process.env.AWS_CODEPIPELINE !== 'true') {
         console.log('Skipping onPostBuild tasks')
         return
@@ -339,6 +376,8 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
             }
             docsHandbook: allMdx(filter: { fields: { slug: { regex: "/^/handbook|^/docs/" } } }) {
                 nodes {
+                    rawBody
+                    body
                     fields {
                         slug
                         contributors {
@@ -348,6 +387,15 @@ export const onPostBuild: GatsbyNode['onPostBuild'] = async ({ graphql }) => {
                     }
                     frontmatter {
                         title
+                        description
+                        showTitle
+                        hideAnchor
+                        hideLastUpdated
+                        availability {
+                            free
+                            selfServe
+                            enterprise
+                        }
                     }
                     parent {
                         ... on File {

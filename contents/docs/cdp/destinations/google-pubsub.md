@@ -14,11 +14,11 @@ You'll also need access to the relevant Google Cloud account.
 
 ## Installation
 
-1. In PostHog, click the "[Data pipeline](https://us.posthog.com/pipeline/overview)" tab in the left sidebar.
-2. Click the 'Destinations' tab.
-3. Search for 'Google Pub/Sub' and select the destination.
+1. In PostHog, click the [Data pipeline](https://us.posthog.com/pipeline/overview) tab in the left sidebar.
+2. Click the [Destinations](https://us.posthog.com/pipeline/destinations?search=googlepubsub) tab.
+3. Search for **Google Pub/Sub** and click **+ Create**.
 4. Connect your Google Cloud account at the configuration step.
-5. Press 'Create & Enable' and watch your 'topic' list get populated in Google Pub/Sub!
+5. Press **Create & Enable** and watch your 'topic' list get populated in Google Pub/Sub!
 
 <HideOnCDPIndex>
 
