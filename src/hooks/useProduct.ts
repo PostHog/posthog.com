@@ -19,6 +19,8 @@ import {
     IconPeople,
     IconDatabase,
     IconTerminal,
+    IconGraph,
+    IconFunnels,
 } from '@posthog/icons'
 import useProducts from './useProducts'
 
@@ -1563,13 +1565,33 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             },
         },
         {
+            name: 'Trends',
+            Icon: IconGraph,
+            description: 'Graphs & trends',
+            handle: 'trends',
+            color: 'blue',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'trends',
+        },
+        {
+            name: 'Funnels',
+            Icon: IconFunnels,
+            description: 'Funnels',
+            handle: 'funnels',
+            color: 'blue',
+            colorSecondary: 'lilac',
+            category: 'dataviz',
+            slug: 'funnels',
+        },
+        {
             name: 'BI',
             Icon: IconMagicWand,
             description: 'Business intelligence',
             handle: 'bi',
             color: 'blue',
             colorSecondary: 'lilac',
-            category: 'analytics',
+            category: 'dataviz',
             slug: 'bi',
             status: 'beta',
             seo: {
@@ -3313,7 +3335,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             handle: 'heatmaps',
             color: 'red',
             colorSecondary: 'orange',
-            category: 'analytics',
+            category: 'dataviz',
             slug: 'heatmaps',
             seo: {
                 title: 'Heatmaps - PostHog',

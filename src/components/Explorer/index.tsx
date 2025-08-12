@@ -36,6 +36,8 @@ interface ExplorerProps {
     isRightSidebarOpen?: boolean
     onRightSidebarClose?: () => void
     doubleClickToOpen?: boolean
+    // New: custom actions to render on the right side of HeaderBar
+    rightActionButtons?: React.ReactNode
 }
 
 const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[] }): JSX.Element | null => {
@@ -84,6 +86,7 @@ export default function Explorer({
     isRightSidebarOpen = false,
     onRightSidebarClose,
     doubleClickToOpen = false,
+    rightActionButtons,
 }: ExplorerProps) {
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
@@ -124,7 +127,11 @@ export default function Explorer({
         <div className="@container w-full h-full flex flex-col min-h-1">
             {!fullScreen && (
                 <>
-                    <HeaderBar {...getHeaderBarProps()} searchContentRef={searchContainerRef} />
+                    <HeaderBar
+                        {...getHeaderBarProps()}
+                        searchContentRef={searchContainerRef}
+                        rightActionButtons={rightActionButtons}
+                    />
                     <AddressBar
                         selectOptions={selectOptions}
                         currentPath={currentPath}

@@ -16,6 +16,7 @@ import { IconPresentation } from 'components/OSIcons'
 import { productMenu } from '../../navs'
 import { PRODUCT_COUNT } from '../../constants'
 import ScrollArea from 'components/RadixUI/ScrollArea'
+import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -41,12 +42,17 @@ const selectOptions = [
     },
 ]
 
+const layoutOptions = [
+    { label: 'List', value: 'list', default: true },
+    { label: 'Grid', value: 'grid' },
+]
+
 export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
-    const [isRightSidebarOpen, setIsRightSidebarOpen] = useState(false)
     const [lastClickTime, setLastClickTime] = useState(0)
     const [lastClickedProduct, setLastClickedProduct] = useState<string | null>(null)
+    const [isListLayout, setIsListLayout] = useState(true)
 
     const handleProductClick = useCallback(
         (product: any, e: React.MouseEvent) => {
@@ -61,24 +67,18 @@ export default function Products(): JSX.Element {
             if (isSameProduct && timeSinceLastClick < 500) {
                 // Double-click: open the product page in PostHog window
                 navigate(`/${product.slug}`, { state: { newWindow: true } })
-                // Don't close the sidebar on double-click
             } else {
-                // Single-click: open/switch the sidebar (but never close it)
-                if (!isRightSidebarOpen || selectedProduct?.slug !== product.slug) {
-                    setSelectedProduct(product)
-                    setIsRightSidebarOpen(true)
-                }
-                // If clicking the same product while sidebar is open, do nothing
+                // Single-click: select the product
+                setSelectedProduct(product)
                 setLastClickedProduct(product.slug)
             }
 
             setLastClickTime(currentTime)
         },
-        [lastClickTime, lastClickedProduct, isRightSidebarOpen, selectedProduct]
+        [lastClickTime, lastClickedProduct]
     )
 
     const handleRightSidebarClose = useCallback(() => {
-        setIsRightSidebarOpen(false)
         setSelectedProduct(null)
     }, [])
 
@@ -94,12 +94,23 @@ export default function Products(): JSX.Element {
                 slug="products"
                 title="Product OS"
                 showTitle={false}
+                headerBarOptions={['showBack', 'showForward', 'showSearch']}
                 selectOptions={selectOptions}
                 doubleClickToOpen={true}
-                isRightSidebarOpen={isRightSidebarOpen}
+                isRightSidebarOpen={true}
                 onRightSidebarClose={handleRightSidebarClose}
+                rightActionButtons={
+                    <ToggleGroup
+                        title="Layout"
+                        hideTitle={true}
+                        options={layoutOptions}
+                        onValueChange={(value) => setIsListLayout(value === 'list')}
+                        value={isListLayout ? 'list' : 'grid'}
+                        className="-my-1 ml-2"
+                    />
+                }
                 rightSidebarPanel={
-                    selectedProduct && (
+                    selectedProduct ? (
                         <div className="p-4">
                             <div className="flex items-center justify-between mb-4">
                                 <h2 className="text-lg font-semibold">{selectedProduct.name}</h2>
@@ -208,6 +219,13 @@ export default function Products(): JSX.Element {
                                     </div>
                                 </div>
                             </ScrollArea>
+                        </div>
+                    ) : (
+                        <div className="p-4 h-full flex items-center justify-center">
+                            <div className="text-center text-muted">
+                                <Icons.IconInfo className="size-8 mx-auto mb-2 opacity-50" />
+                                <p className="text-sm">Click an icon to see details</p>
+                            </div>
                         </div>
                     )
                 }
@@ -382,11 +400,18 @@ export default function Products(): JSX.Element {
                                                     </span>
                                                 ),
                                                 content: (
-                                                    <div className="@md:pl-4 grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-x-1 gap-y-4 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center">
+                                                    <div
+                                                        className={`@md:pl-4 grid ${
+                                                            isListLayout
+                                                                ? '@lg:grid-cols-2'
+                                                                : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4'
+                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                    >
                                                         {products.map((product) => (
                                                             <ZoomHover
                                                                 key={product.slug}
-                                                                className={`w-28 justify-center ${
+                                                                width="full"
+                                                                className={`justify-center ${
                                                                     product.status == 'WIP'
                                                                         ? 'opacity-50 hover:opacity-100'
                                                                         : ''
@@ -411,6 +436,9 @@ export default function Products(): JSX.Element {
                                                                                 ) : (
                                                                                     <IconPresentation />
                                                                                 )
+                                                                            }
+                                                                            orientation={
+                                                                                isListLayout ? 'row' : 'column'
                                                                             }
                                                                             parentIcon={product.parentIcon}
                                                                             background="bg-primary"
