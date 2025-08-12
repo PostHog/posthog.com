@@ -17,7 +17,6 @@ import React from 'react'
 import { MdxCodeBlock } from '../components/CodeBlock'
 import { shortcodes } from '../mdxGlobalComponents'
 import { OverflowXSection } from '../components/OverflowXSection'
-import { Tweet } from 'components/Tweet'
 
 const articleWidth = {
     lg: 'max-w-screen-2xl',
