@@ -8,7 +8,7 @@ If you're using the API or an SDK without exception autocapture or `capture_exce
 
 | Property | Description |
 |----------|-------------|
-| `$exception_list` | A list of exception objects with detailed information about each error. Each exception should (optionally) include a `type`, `value`, `mechanism`, `module`, `thread_id`, and a `stacktrace` with `frames` and `type`. You can find the expected schema as types for both [exception](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L31) and [stack frames](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L55) in our JS repo |
+| `$exception_list` | A list of exception objects with detailed information about each error. Each exception can include a `type`, `value`, `mechanism`, `module`, `thread_id`, and a `stacktrace` with `frames` and `type`. You can find the expected schema as types for both [exception](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L31) and [stack frames](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L55) in our JS repo |
 | `$exception_fingerprint` | (Optional) The identifier used to group issues. If not set, a unique hash based on the exception pattern will be generated during ingestion |
 
 The expected schema is described as [a type in our JS repo](https://github.com/PostHog/posthog-js/blob/6e35a639a4d06804f6844cbde15adf11a069b92b/packages/node/src/extensions/error-tracking/types.ts#L24-L29). 
