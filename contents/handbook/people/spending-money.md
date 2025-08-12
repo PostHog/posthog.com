@@ -26,7 +26,7 @@ This means expenses that are under $75 one off or under $20/month recurring that
 
 ## Saving receipts
 
-Make sure you *keep copies for all receipts*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with Janani.
+Make sure you *keep copies for all receipts $75 or more*. If you expense something on a company card and cannot provide a receipt, this may be deducted from your pay. You are required to upload your receipt(s)/invoice(s) to Brex within 14 days; if you're unable to meet this deadline, speak with <TeamMember name="Janani K" photo />.
 
 You should default to using your company card in all cases - it has no transaction fees. If using your personal card is unavoidable, please save receipts and request a reimbursement through Brex.
 
@@ -198,13 +198,15 @@ We have a company WeWork All Access account that allows you to book desks in any
 If you need to travel on PostHog’s behalf for in-person onboarding, meeting customers, and offsites, again please spend money in the best interests of the company. 
 
 We do not pre-approve your travel expenses, and trust team members to make the right decisions here. Some guidance:
-- We all travel economy by default- we cannot afford for folks to fly premium or business class. Feel free to upgrade using your personal money/airmiles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat. 
+- We all travel economy by default – we don't pay for folks to fly premium or business class. Feel free to upgrade using your personal money/miles if you’d like to. If you are particularly tall and struggle to fit into an economy seat, PostHog will cover the cost of an emergency exit seat.
+- If you'd like to travel in a premium cabin using personal miles or points and can only book the flight using points, you can request a reimbursement for the cost of the economy fare in Brex. Submit your request with a screenshot of the cost of the economy fare at the time of booking.
 - Be sensible when considering the value of your time, and avoid over-optimizing for cost. It is probably not worth saving $100 to take a non-direct flight that takes you 5hrs extra. Similarly, it doesn’t make sense to save $50 by taking a flight that leaves at 6am, only to have to expense a taxi to get to the airport.
-- Related to the above, consider signing up for programs like Global Entry if you are regularly travelling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when travelling to the US. PostHog will cover costs here.
-- When travelling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
-- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when travelling on behalf of PostHog.
+- Related to the above, consider signing up for programs like Global Entry if you are regularly traveling to countries that offer it- these can pay for themselves in one trip with the amount of time saved, particularly when traveling to the US. PostHog will cover costs here.
+- When traveling internationally, PostHog does not cover roaming charges for your phone. You can expense a reasonable eSIM, which usually is no more than $20.
+- When making charges on your card internationally, run the transaction using the local currency when given the option as Brex will generally have a better exchange rate.
+- PostHog has international insurance for our work trips, so you will not need to buy travel insurance when traveling on behalf of PostHog.
 
-> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are travelling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
+> If you find yourself needing to do extra travel outside of the regular things listed above, e.g. you've been asked to take a last minute trip to work on an emergency project, we may pay for a nicer seat here, especially if you are traveling at very short notice or long haul. Talk to Fraser in the first instance if you think this may apply to you. This is intended for genuine one-offs, not where you've decided you'd like to come along to an extra offsite!
 
 ### Budget for working together/socializing
 
