@@ -4,37 +4,35 @@ Event Name: `$ai_span`
 
 | Property | Description |
 |----------|-------------|
-| `$ai_trace_id` | The trace ID (a UUID to group AI events) like `conversation_id`<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code> |
-| `$ai_input_state` | The input of the span |
-| `$ai_output_state` | The output of the span |
-| `$ai_latency` | The latency of the span (seconds) |
-| `$ai_span_name` | The name of the span |
-| `$ai_span_id` | The ID of the span |
-| `$ai_parent_id` | The parent ID e.g. trace_id or another span_id |
-| `$ai_error` | The error of the span |
-| `$ai_is_error` | Whether the span was an error |
+| `$ai_trace_id` | The trace ID (a UUID to group related AI events together)<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code><br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
+| `$ai_input_state` | The input state of the span<br/>Example: `{"query": "search for documents about hedgehogs"}` or any JSON-serializable state |
+| `$ai_output_state` | The output state of the span<br/>Example: `{"results": ["doc1", "doc2"], "count": 2}` or any JSON-serializable state |
+| `$ai_latency` | **Optional**<br/>The latency of the span in seconds<br/>Example: `0.361` |
+| `$ai_span_name` | **Optional**<br/>The name of the span<br/>Example: `vector_search`, `data_retrieval`, `tool_call` |
+| `$ai_span_id` | **Optional**<br/>Unique identifier for this span<br/>Example: `bdf42359-9364-4db7-8958-c001f28c9255` |
+| `$ai_parent_id` | **Optional**<br/>Parent ID for tree view grouping (trace_id or another span_id)<br/>Example: `537b7988-0186-494f-a313-77a5a8f7db26` |
+| `$ai_is_error` | **Optional**<br/>Boolean to indicate if the span encountered an error |
+| `$ai_error` | **Optional**<br/>The error message or object if the span failed<br/>Example: `{"message": "Connection timeout", "code": "TIMEOUT"}` |
 
 ### Example
+
 ```bash
-POST https://[your-instance].com/i/v0/e/
-Content-Type: application/json
-Body:
-{
-    "api_key": "sTMFPsFhdP1Ssg",
-    "event": "$ai_span",
-    "properties": {
-        "distinct_id": "distinct_id_of_your_user",
-        "$ai_trace_id": "trace_id",
-        "$ai_input_state": "[{\"role\": \"user\", \"content\": \"Tell me a fun fact about hedgehogs\"}]",
-        "$ai_latency": 1.23,
-        "$ai_span_name": "span_name",
-        "$ai_span_id": "span_id",
-        "$ai_parent_id": "parent_id",
-        "$ai_error": "error",
-        # if the span was an error
-        "$ai_is_error": true,
-        "$ai_output_state": "[{\"role\": \"assistant\", \"content\": \"Hedgehogs are small mammals with spines on their back.\"}]",
-    },
-    "timestamp": "[optional timestamp in ISO 8601 format]"
-}
+curl -X POST "<ph_client_api_host>/i/v0/e/" \
+     -H "Content-Type: application/json" \
+     -d '{
+         "api_key": "<ph_project_api_key>",
+         "event": "$ai_span",
+         "properties": {
+             "distinct_id": "user_123",
+             "$ai_trace_id": "d9222e05-8708-41b8-98ea-d4a21849e761",
+             "$ai_input_state": {"query": "search for documents about hedgehogs", "filters": {"category": "animals"}},
+             "$ai_output_state": {"results": [{"id": "doc_1", "content": "Hedgehogs are small mammals..."}, {"id": "doc_2", "content": "These nocturnal creatures..."}], "count": 2},
+             "$ai_latency": 0.145,
+             "$ai_span_name": "vector_search",
+             "$ai_span_id": "bdf42359-9364-4db7-8958-c001f28c9255",
+             "$ai_parent_id": "537b7988-0186-494f-a313-77a5a8f7db26",
+             "$ai_is_error": false
+         },
+         "timestamp": "2025-01-30T12:00:00Z"
+     }'
 ```
