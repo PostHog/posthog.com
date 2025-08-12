@@ -1355,11 +1355,11 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
-                     {
+                    {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
-                     {
+                    {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
                     },
@@ -3345,6 +3345,12 @@ export const docsMenu = {
                     url: '/docs/feature-flags/best-practices',
                     icon: 'IconStar',
                     color: 'red',
+                },
+                {
+                    name: 'Application-wide settings',
+                    url: '/docs/feature-flags/app-wide-settings',
+                    icon: 'IconGear',
+                    color: 'blue',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
