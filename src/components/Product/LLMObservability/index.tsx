@@ -30,7 +30,7 @@ import { Feature } from 'components/Products/Feature'
 import { Subfeature } from 'components/Products/Subfeature'
 import { graphql, useStaticQuery } from 'gatsby'
 import ContentViewer from 'components/ContentViewer'
-import LLMObservability from 'components/Home/CodeBlocks/LLMObservability'
+
 import { docsMenu } from '../../../navs'
 import { Marquee } from 'components/Products/Marquee'
 import TeamRoadmap from 'components/TeamRoadmap'
@@ -53,7 +53,6 @@ import { useLayoutData } from 'components/Layout/hooks'
 import Plans from 'components/Pricing/Plans'
 import SideModal from '../../Modal/SideModal'
 import Profile from '../../Team/Profile'
-import { Testimonial } from 'components/Products/Testimonial'
 
 const product = {
     slug: 'llm-observability',
@@ -499,6 +498,57 @@ export const ProductLLMObservability = () => {
                 </section>
             </div>
 
+            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-4 pb-0`}>
+                <section className="mb-20 px-5">
+                    <div className="max-w-4xl mx-auto mb-12">
+                        <h2 className="text-3xl md:text-4xl text-center mb-6">What our customers are saying</h2>
+                        <p className="text-lg text-center mb-4">
+                            PostHog's LLM observability has transformed how teams understand and optimize their AI
+                            products. From debugging complex interactions to tracking costs and performance, our
+                            customers are seeing real results that impact their bottom line.
+                        </p>
+                        <p className="text-lg text-center">
+                            Whether you're building the next breakthrough AI application or simply want to understand
+                            how your users interact with existing AI features, our comprehensive observability tools
+                            provide the insights you need to make data-driven decisions.
+                        </p>
+                    </div>
+
+                    <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
+                        <div className="flex flex-col md:flex-row items-center gap-8">
+                            <div className="flex-shrink-0">
+                                <img
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/chris_raroque_fb1af07ae1.jpg"
+                                    alt="Chris Raroque"
+                                    className="w-24 h-24 rounded-full object-cover"
+                                />
+                            </div>
+                            <div className="text-center md:text-left">
+                                <blockquote className="text-lg md:text-xl font-medium mb-4">
+                                    "PostHog's LLM observability saved us so much time. We used to use a whole system of
+                                    tools to track the prompts and responses for debugging and this is an infinitely
+                                    better UI. We use it for every single AI experiment we run now —{' '}
+                                    <span className="bg-highlight p-0.5">
+                                        also, if you need another quote then let me know, because the whole team loves
+                                        it!
+                                    </span>
+                                    "
+                                </blockquote>
+                                <div className="font-semibold">
+                                    <a
+                                        href="https://chrisraroque.com/"
+                                        className="hover:text-red dark:hover:text-yellow"
+                                    >
+                                        Chris Raroque
+                                    </a>
+                                </div>
+                                <div className="text-sm opacity-75">Founder and YouTuber</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
             <section
                 id="pricing"
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
@@ -516,7 +566,6 @@ export const ProductLLMObservability = () => {
                     <div className="md:w-96">
                         <CloudinaryImage
                             placeholder="none"
-                            quality={100}
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/feature-flags-hog.png"
                             alt=""
                         />
