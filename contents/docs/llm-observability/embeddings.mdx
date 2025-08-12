@@ -6,4 +6,13 @@ availability:
   enterprise: full
 ---
 
-content tk...
+Embeddings are calls to embedding models that convert text into vector representations for semantic search, RAG pipelines, and similarity matching.
+
+While [generations](/docs/llm-observability/generations) track LLM conversations and [spans](/docs/llm-observability/spans) track operations, embeddings specifically monitor vector generation:
+
+- **Search queries** - Converting user input for semantic search
+- **Document indexing** - Embedding content for retrieval
+- **RAG pipelines** - Query and document vectorization
+- **Batch processing** - Multiple embeddings in one call
+
+For technical implementation details, see [manual capture](/docs/llm-observability/manual-capture).
