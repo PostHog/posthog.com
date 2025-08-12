@@ -720,10 +720,28 @@ const ProfileTabs = ({ profile, firstName, id, isEditing, values, errors, setFie
                   },
               ]
             : []),
+        {
+            value: 'discussions',
+            label: 'Discussions',
+            content: (
+                <>
+                    <Questions
+                        profileId={id}
+                        disclaimer={false}
+                        showForm={false}
+                        noQuestionsMessage={
+                            <p className="prose prose-sm max-w-full text-primary m-0">
+                                {firstName} hasn't participated in any discussions yet
+                            </p>
+                        }
+                    />
+                </>
+            ),
+        },
         ...(hasPosts
             ? [
                   {
-                      value: 'discussions',
+                      value: 'posts',
                       label: 'Posts',
                       content: (
                           <>

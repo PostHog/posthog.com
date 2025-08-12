@@ -16,6 +16,7 @@ type QuestionsProps = {
     initialView?: string
     disclaimer?: boolean
     autoFocus?: boolean
+    noQuestionsMessage?: React.ReactNode
 }
 
 export const Questions = ({
@@ -31,10 +32,11 @@ export const Questions = ({
     initialView,
     disclaimer,
     autoFocus,
+    noQuestionsMessage,
 }: QuestionsProps) => {
     const containerRef = useRef<HTMLDivElement>(null)
 
-    const { questions, fetchMore, refresh } = useQuestions({ slug, limit, topicId, profileId })
+    const { questions, fetchMore, refresh, isLoading } = useQuestions({ slug, limit, topicId, profileId })
     const hasQuestions = questions.data && questions.data.length > 0
     return (
         <div>
@@ -50,6 +52,7 @@ export const Questions = ({
                     })}
                 </ul>
             )}
+            {!isLoading && !hasQuestions && noQuestionsMessage}
 
             {/*start + limit < count && (
                     <button disabled={loading} className="squeak-show-more-questions-button" onClick={fetchMore}>
