@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react'
 import usePostHog from '../../hooks/usePostHog'
 import { CallToAction } from '../CallToAction'
 import Layout from '../Layout'
-import Lottie from 'react-lottie'
-import { StaticImage } from 'gatsby-plugin-image'
 import SearchBox from 'components/Search/SearchBox'
+import { SSRLottie } from '../Lottie'
 
 export default function NotFoundPage(): JSX.Element {
     const posthog = usePostHog()
@@ -43,7 +42,7 @@ export default function NotFoundPage(): JSX.Element {
 
                     <div className="sm:!absolute right-0 -mt-12 sm:mt-0 sm:-right-12 lg:-right-24 bottom-0 md:-bottom-28 h-[400px] w-[400px] sm:h-[500px] sm:w-[500px] lg:h-[600px] lg:w-[600px]">
                         {hogData ? (
-                            <Lottie
+                            <SSRLottie
                                 options={{
                                     loop: true,
                                     autoplay: true,

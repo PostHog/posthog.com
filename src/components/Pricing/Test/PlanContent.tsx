@@ -4,7 +4,7 @@ import { Link as ScrollLink } from 'react-scroll'
 import { TrackedCTA } from 'components/CallToAction'
 import usePostHog from 'hooks/usePostHog'
 import Modal from 'components/Modal'
-import Lottie from 'react-lottie'
+import { SSRLottie } from '../../Lottie'
 
 export const FreePlanContent = ({ onFreeTierClick }) => {
     return (
@@ -152,7 +152,7 @@ export default function PlanContent({ activePlan, onFreeTierClick }) {
                     <>
                         {hogData ? (
                             <div className="size-20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                <Lottie
+                                <SSRLottie
                                     options={{
                                         loop: true,
                                         autoplay: true,

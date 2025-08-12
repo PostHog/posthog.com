@@ -1,9 +1,7 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import { LazyHog } from 'components/About/AboutHero'
 import { CallToAction } from 'components/CallToAction'
-import { StaticImage } from 'gatsby-plugin-image'
 import React, { useEffect, useState } from 'react'
-import Lottie from 'react-lottie'
+import { SSRLottie } from '../Lottie'
 
 export default function CommunityCTA() {
     const [hog1Data, setHog1Data] = useState<any | null>(null)
@@ -31,7 +29,7 @@ export default function CommunityCTA() {
         <div className="flex md:flex-row flex-col items-center md:space-x-4 md:space-y-0 space-y-4 px-2 justify-center rounded-md mb-6 pb-12 md:pt-12 md:max-h-[250px] overflow-hidden">
             <div className="flex-shrink-0">
                 {hog1Data ? (
-                    <Lottie
+                    <SSRLottie
                         width={300}
                         options={{
                             loop: true,
@@ -40,7 +38,12 @@ export default function CommunityCTA() {
                         }}
                     />
                 ) : (
-                    <CloudinaryImage width={300} src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                    <CloudinaryImage
+                        width={300}
+                        src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg"
+                        alt="Hog"
+                        placeholder="blurred"
+                    />
                 )}
             </div>
             <div className="max-w-[400px]">

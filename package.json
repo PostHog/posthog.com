@@ -39,6 +39,7 @@
         "@hubspot/api-client": "^7.1.2",
         "@inkeep/uikit": "^0.3.19",
         "@inkeep/uikit-js": "^0.3.19",
+        "@loadable/component": "^5.16.7",
         "@popperjs/core": "^2.11.2",
         "@posthog/hedgehog-mode": "^0.0.28",
         "@posthog/icons": "0.22.0",

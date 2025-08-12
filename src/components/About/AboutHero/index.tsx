@@ -1,11 +1,10 @@
 import CloudinaryImage from 'components/CloudinaryImage'
 import React from 'react'
-import { StaticImage } from 'gatsby-plugin-image'
-import Lottie from 'react-lottie'
+import { SSRLottie } from '../../Lottie'
 
 const LazyHog = ({ data, placeholder }: { data: any; placeholder: React.ReactElement }) => {
     return data ? (
-        <Lottie
+        <SSRLottie
             options={{
                 loop: true,
                 autoplay: true,
@@ -25,28 +24,28 @@ export const AboutHero = () => {
             'about_hog_1_1731825e07.json',
             'about_hog_2_099aab2326.json',
             'about_hog_3_60946cdf0a.json',
-            'about_hog_4_d76ef8db00.json'
-        ];
+            'about_hog_4_d76ef8db00.json',
+        ]
 
         const loadHogData = async () => {
             const newHogData = await Promise.all(
                 hogFiles.map(async (file) => {
                     try {
-                        const response = await fetch(`https://res.cloudinary.com/dmukukwp6/raw/upload/${file}`);
+                        const response = await fetch(`https://res.cloudinary.com/dmukukwp6/raw/upload/${file}`)
                         if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
+                            throw new Error(`HTTP error! status: ${response.status}`)
                         }
-                        return await response.json();
+                        return await response.json()
                     } catch (error) {
-                        console.error(`Failed to load ${file}:`, error);
-                        return null;
+                        console.error(`Failed to load ${file}:`, error)
+                        return null
                     }
                 })
-            );
-            setHogData(newHogData);
-        };
+            )
+            setHogData(newHogData)
+        }
 
-        loadHogData();
+        loadHogData()
     }, [])
 
     return (
@@ -69,7 +68,11 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[0]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-1.svg"
+                                    alt="Hog"
+                                    placeholder="blurred"
+                                />
                             }
                         />
                     </div>
@@ -77,7 +80,11 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[1]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-2.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-2.svg"
+                                    alt="Hog"
+                                    placeholder="blurred"
+                                />
                             }
                         />
                     </div>
@@ -87,7 +94,11 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[2]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-3.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-3.svg"
+                                    alt="Hog"
+                                    placeholder="blurred"
+                                />
                             }
                         />
                     </div>
@@ -95,7 +106,11 @@ export const AboutHero = () => {
                         <LazyHog
                             data={hogData[3]}
                             placeholder={
-                                <CloudinaryImage src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-4.svg" alt="Hog" placeholder="blurred" />
+                                <CloudinaryImage
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/about-hog-4.svg"
+                                    alt="Hog"
+                                    placeholder="blurred"
+                                />
                             }
                         />
                     </div>
