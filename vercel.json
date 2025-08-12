@@ -1220,7 +1220,6 @@
         { "source": "/docs/product-analytics/trends", "destination": "/docs/product-analytics/trends/overview" },
         { "source": "/book-a-demo", "destination": "/demo" },
         { "source": "/contact-sales", "destination": "/talk-to-a-human" },
-        { "source": "/teams/customer-success", "destination": "/teams/sales-cs" },
         { "source": "/blog/posthog-vs-kubit", "destination": "/blog/tags/comparisons" },
         {
             "source": "/pricing",
