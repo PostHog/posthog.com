@@ -321,14 +321,41 @@ export default function Desktop() {
                     </div>
 
                     {/* Keyboard garden */}
-                    <div className="hidden select-none wallpaper-keyboard-garden:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_7b4f9e93b6.png"
-                            alt="Keyboard garden"
-                            width={1242}
-                            height={1128}
-                            className="w-[621px] h-[564px]"
+                    <div className="hidden select-none wallpaper-keyboard-garden:block">
+                        <div
+                            className="absolute inset-0 opacity-100"
+                            style={{
+                                backgroundImage:
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_3809d56744.png')",
+                                backgroundSize: '250px 250px',
+                                backgroundRepeat: 'repeat',
+                            }}
                         />
+                        <div
+                            className="absolute inset-0 opacity-0 dark:opacity-100"
+                            style={{
+                                backgroundImage:
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_5f26ab6fd0.png')",
+                                backgroundSize: '250px 250px',
+                                backgroundRepeat: 'repeat',
+                            }}
+                        />
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-12 md:mt-0">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_light_opt_compressed_5094746caf.png"
+                                alt="Keyboard garden"
+                                width={1401}
+                                height={1400}
+                                className="size-[400px] md:size-[700px] dark:hidden"
+                            />
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_dark_opt_15e213413c.png"
+                                alt="Keyboard garden"
+                                width={1401}
+                                height={1400}
+                                className="size-[400px] md:size-[700px] hidden dark:block"
+                            />
+                        </div>
                     </div>
 
                     {/* 2001 bliss */}

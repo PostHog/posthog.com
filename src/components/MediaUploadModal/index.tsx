@@ -114,7 +114,10 @@ const Image = ({ name, previewUrl, provider_metadata: { public_id, resource_type
                     </div>
                 ) : (
                     <div className="flex space-x-2 items-center">
-                        <p className="text-sm line-clamp-1 m-0 text-ellipsis max-w-sm" title={generateCloudinaryUrl('orig')}>
+                        <p
+                            className="text-sm line-clamp-1 m-0 text-ellipsis max-w-sm"
+                            title={generateCloudinaryUrl('orig')}
+                        >
                             {generateCloudinaryUrl('orig')}
                         </p>
                         <button
@@ -291,8 +294,9 @@ const FileExplorer = ({ onFileDrop }: { onFileDrop: (files: File[]) => void }) =
         return (
             <div key={node.name} style={{ paddingLeft: `${level * 16}px` }}>
                 <div
-                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${node.type === 'file' ? 'draggable' : ''
-                        }`}
+                    className={`flex items-center gap-1 py-1 px-2 rounded hover:bg-accent cursor-pointer ${
+                        node.type === 'file' ? 'draggable' : ''
+                    }`}
                     onClick={() => (node.type === 'directory' ? toggleDirectory(node) : handleFileClick(node))}
                     draggable={node.type === 'file'}
                     onDragStart={(e) => handleFileDrag(e, node)}
@@ -392,7 +396,7 @@ export default function MediaUploadModal() {
 
     return isModerator ? (
         <ScrollArea className="w-full">
-            <div data-scheme="primary" className="bg-primary size-full">
+            <div data-scheme="primary" className="bg-primary text-primary size-full">
                 <div className="p-4 relative space-y-4 w-full">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex flex-col">
@@ -407,12 +411,14 @@ export default function MediaUploadModal() {
                             <div
                                 {...getRootProps()}
                                 data-scheme="secondary"
-                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${isDragActive ? 'bg-input border-primary' : ''
-                                    }`}
+                                className={`flex-grow rounded-md bg-primary border-2 border-dashed border-input transition-colors ${
+                                    isDragActive ? 'bg-input border-primary' : ''
+                                }`}
                             >
                                 <div
-                                    className={`flex flex-col justify-center items-center h-full p-8 ${isDragActive ? '' : 'opacity-50'
-                                        }`}
+                                    className={`flex flex-col justify-center items-center h-full p-8 ${
+                                        isDragActive ? '' : 'opacity-50'
+                                    }`}
                                 >
                                     <IconUpload className="size-12 mb-4" />
                                     <p className="text-center font-medium m-0">
