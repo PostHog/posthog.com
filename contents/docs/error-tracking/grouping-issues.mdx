@@ -4,21 +4,18 @@ title: Error tracking custom issue grouping
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Issues are created by grouping together similar exception events. When no custom grouping behavior is configured, issues are grouped together based on their [fingerprint](TODO). While PostHog will make a best effort to offer basic grouping, the grouping logic may not fit every use case.
+Issues are created by grouping together similar exception events. When **no custom grouping behavior is configured**, issues are grouped together automatically based on their [fingerprint](/docs/error-tracking/fingerprints). 
 
-For example, consider the following ways you may want to group issues:
+> We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+
+
+While PostHog will make a best effort to offer basic grouping, the grouping logic may not fit every use case. For example, consider the following ways you may want to group issues:
 
 - Grouping issues by business logic, like all errors that occur at checkout
 - Grouping issues by a specific service, like all error messages containing `postgres`
 - Grouping issues by a specific feature, like all error messages containing `feature_flag_variant_a`
 
 You should consider your unique needs to determine if you need to configure custom grouping behavior. Keep in mind that grouping can be very important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened.
-
-<CalloutBox icon="IconInfo" title="Source maps" type="fyi">
-
-  If you serve minified or compiled code, PostHog needs source maps for your source code to be able to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
-
-</CalloutBox>
 
 ## Creating a custom grouping rule
 
@@ -57,10 +54,6 @@ Grouping rules are evaluated in the order they are configured. The first rule th
 
 ## Merging separate issues
 
-If there are two or more issues that you think should be merged into one, you can do this in the [issue page](https://us.posthog.com/error_tracking).
+import MergingIssues from './_snippets/merging-issues.mdx'
 
-1. Search for the issues you want to merge.
-1. On the left hand of the list of issues, select the issues you want to merge.
-1. Click the **Merge** button.
-
-Exceptions that are originally grouped into either of the issues will now be grouped into the new merged issue.
+<MergingIssues />

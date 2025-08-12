@@ -1,0 +1,51 @@
+---
+title: External issue tracking
+---
+
+import Tab from "components/Tab"
+
+Other than assigning issues to team members in PostHog, you can also create issues in other tracking systems you use like GitHub issues or Linear. 
+
+> If you use another issue tracking system and would like to request it, [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+
+## Setting up external tracking
+
+You can set up external tracking in the [error tracking settings](https://app.posthog.com/project/configuration?tab=error-tracking-integrations). Click **Connect workspace** and follow the prompts to connect your issue tracking system.
+
+<Tab.Group tabs={['GitHub', 'Linear']}>
+<Tab.List>
+  <Tab>GitHub</Tab>
+  <Tab>Linear</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+PostHog connects to GitHub by installing a GitHub application. PostHog needs the following permissions:
+
+- Read access to metadata
+- Read and write access to code, issues, and pull requests
+
+</Tab.Panel>
+<Tab.Panel>
+
+PostHog connects to Linear using a [third-party app](https://linear.app/docs/third-party-application-approvals). PostHog needs the following permissions:
+
+- Create issues for your workspace
+- Read access to your workspace
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+## Creating external issues 
+
+Issues can be created from the issue page. In an issue's details page, under **External references**, click **+ Create issue**.
+
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/create_issue_error_light_b89cd91da1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/create_issue_error_dark_7d158087f8.png"
+    alt="Error tracking create issue in external tracking system"
+    classes="rounded"
+/>
+
+The new issue will have a partial stack trace and a link to the issue in PostHog.

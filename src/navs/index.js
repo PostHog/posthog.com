@@ -3725,6 +3725,14 @@ export const docsMenu = {
                     url: '/docs/error-tracking/assigning-issues',
                     icon: 'IconUser',
                     color: 'blue',
+                    children: [
+                        {
+                            name: 'External tracking',
+                            url: '/docs/error-tracking/external-tracking',
+                            icon: 'IconShare',
+                            color: 'blue',
+                        },
+                    ],
                 },
                 {
                     name: 'Alerts',

@@ -1,14 +1,16 @@
 ---
-title: Capturing exceptions
+title: Capturing exceptions for error tracking
 ---
 
 import Tab from "components/Tab"
 
-PostHog error tracking allows you to track and monitor errors and exceptions in your code by capturing **exception events**. This can be done automatically when exceptions are thrown in your code, or manually by calling the exception capture method.
+PostHog error tracking allows you to track and monitor errors and exceptions in your code by capturing [exception events](/docs/error-tracking/issues-and-exceptions). This can be done automatically when exceptions are thrown in your code, or manually by calling the exception capture method.
 
 ## Capturing exceptions
 
-Exceptions are captured as [events](/docs/data/events) in PostHog, similar to any other event. This means they can be customized, filtered, and used in insights for analysis. To help group exceptions into issues and help you debug them, PostHog will also automatically capture the following properties:
+Exceptions are captured as special [events](/docs/data/events) in PostHog. Similar to any other event, they can be customized, filtered, and used in insights for analysis.
+
+To help group exceptions into issues and help you debug them, PostHog will also automatically capture the following properties:
 
 import ExceptionPropertiesTable from './_snippets/exception-properties-table.mdx'
 
@@ -83,13 +85,17 @@ Exceptions are captured as [events](/docs/data/events) in PostHog. The better **
 
 Customizing exception capture allows you to override exception properties to influence how they're grouped into issues. 
 
-Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](TODO), [alerts](TODO), [issue grouping](TODO). They can also be used in analysis in [insights](TODO), [dashboards](TODO), and [data warehouse queries](TODO).
+Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](/docs/error-tracking/assigning-issues#automatic-issue-assignment), [alerts](/docs/error-tracking/alerts), [issue grouping](/docs/error-tracking/grouping-issues). They can also be used in analysis in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [data warehouse queries](/docs/product-analytics/data-warehouse).
 
 ## Overriding exception properties 
 
 ### During manual capture
 
-When capturing exceptions manually, passing the `properties` parameter to the capture exception method will override the default properties. This is just like any other event in PostHog:
+When capturing exceptions manually, passing `properties` to the capture exception method will override the default properties. This is just like any other event in PostHog.
+
+You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
+
+Here are some examples of how to override exception properties:
 
 <MultiLanguage>
 
@@ -126,6 +132,8 @@ posthog.host = '<ph_client_api_host>'
 # With context
 with posthog.new_context():
     posthog.identify_context(distinct_id="user_123")
+
+    # When using context, you define properties with tags
     posthog.tag("$exception_type", "Custom exception")
     posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
     posthog.tag("custom_property", "custom_value")
@@ -148,7 +156,11 @@ posthog.capture_exception(
 
 ### During automatic capture
 
-When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event. The process is slightly different depending on the SDK you're using.
+When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event. 
+
+You can still override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
+
+The process is slightly different depending on the SDK you're using.
 
 <Tab.Group tabs={['Web and Node.js', 'Python']}>
 <Tab.List>
@@ -210,11 +222,7 @@ When automatic exception capture is enabled, you can still override the default 
 
 ### Customize issue grouping
 
-While you can [configure issue grouping rules in PostHog](/docs/error-tracking/grouping-issues), it's often easier to directly override the exception [fingerprint](/docs/error-tracking/fingerprint) to group exceptions together at capture time.
-
-You can do this by overriding the `$exception_fingerprint` property with a custom value, which you can find examples above in the [overriding exception properties](#overriding-exception-properties) section.
-
-You can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues). 
+Other than grouping with [custom fingerprints](#overriding-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues). 
 
 For example:
 
@@ -222,6 +230,8 @@ For example:
 - Setting `service_name` to group exceptions together for a specific service, so you can automatically [assign](/docs/error-tracking/assigning-issues#automatic-issue-assignment) the correct team on issues.
 - Identifying the users as paying or non-paying customers to group exceptions together for a specific customer segment.
 - Implementing [revenue analytics](/docs/product-analytics/revenue-analytics) to understand the impact of errors on revenue.
+
+It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them.
 
 ## Suppressing exceptions
 

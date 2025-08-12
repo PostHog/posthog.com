@@ -32,22 +32,28 @@ Assignment conditions are evaluated against the properties of the exception even
 
 Auto assignment works well when paired with [alerts filtered by assignee](/docs/error-tracking/alerts#alert-filtering).
 
-## Merging issues
+## Resolving and suppressing issues
 
-You can merge issues representing the same problem from the issue list by:
+You can update the status of an issue from the issue page under **Status** or issue list. 
 
-1. Selecting the primary issue others should be merged into
-2. Selecting the issue(s) to merge into the primary issue
-3. Clicking the **Merge** button
+All issues are marked **Active** by default, you can mark them as **resolved** or **suppressed** to reflect the current state of the issue. These labels are mainly used to communicate amoungst your team. Typically, you resolve issues that are fixed, and suppress issues that you choose to not action on.
 
-After merging, all events and properties from the merged issues are added to the primary issue. The merged issues are then deleted (but the underlying events are not). 
+You can also filter issues by status in the issue list:
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/merge_light_0489da02c6.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/merge_dark_aab4bfcc93.png"
-  alt="Error tracking issue merging"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/filter_by_status_light_1f57d7d0b1.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/filter_by_status_dark_f48d183989.png"
+  alt="Error tracking filter by issue status"
   classes="rounded"
 />
+
+A common workflow is to look for all issues that are **Active** assigned to you or your team, and triage them to be fixed or suppressed. 
+
+## Merging issues
+
+import MergingIssues from './_snippets/merging-issues.mdx'
+
+<MergingIssues />
 
 ## Custom issue grouping
 
