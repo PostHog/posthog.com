@@ -244,7 +244,7 @@ const comparison = [
             Langfuse: true,
             Langsmith: true,
             Helicone: true,
-            PostHog: false,
+            PostHog: true,
         },
     },
     {
@@ -311,7 +311,7 @@ const PairsWithArray = [
 ]
 
 export const ProductLLMObservability = () => {
-    const { phantom, contra, elevenlabs, carvertical } = useStaticQuery(graphql`
+    const { elevenlabs, lovable } = useStaticQuery(graphql`
         fragment ProductCustomerFragment on Mdx {
             fields {
                 slug
@@ -369,45 +369,25 @@ export const ProductLLMObservability = () => {
                         placeholder="none"
                     />
                 </div>
+
+                <section id="customers" className="-mt-36 pt-36">
+                    <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
+                        <CustomerCard
+                            outcome="uses LLM observability with session replays"
+                            quote="PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not"
+                            customer={elevenlabs}
+                        />
+                        <CustomerCard
+                            outcome="compared us to every other LLM tool"
+                            quote="COOL QUOTE FROM LOVABLE COMING SOON"
+                            customer={elevenlabs}
+                        />
+                    </ul>
+                </section>
             </div>
 
             <SmoothScroll />
             <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 py-4 pb-0`}>
-                <section className="mb-20 px-5">
-                    <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
-                        <div className="flex flex-col md:flex-row items-center gap-8">
-                            <div className="flex-shrink-0">
-                                <img
-                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/chris_raroque_fb1af07ae1.jpg"
-                                    alt="Chris Raroque"
-                                    className="w-24 h-24 rounded-full object-cover"
-                                />
-                            </div>
-                            <div className="text-center md:text-left">
-                                <blockquote className="text-lg md:text-xl font-medium mb-4">
-                                    "PostHog's LLM observability saved us so much time. We used to use a whole system of
-                                    tools to track the prompts and responses for debugging and this is an infinitely
-                                    better UI. We use it for every single AI experiment we run now —{' '}
-                                    <span className="bg-highlight p-0.5">
-                                        also, if you need another quote then let me know, because the whole team loves
-                                        it!
-                                    </span>
-                                    "
-                                </blockquote>
-                                <div className="font-semibold">
-                                    <a
-                                        href="https://chrisraroque.com/"
-                                        className="hover:text-red dark:hover:text-yellow"
-                                    >
-                                        Chris Raroque
-                                    </a>
-                                </div>
-                                <div className="text-sm opacity-75">Founder and YouTuber</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
                 <section id="features" className="-mt-36 pt-36">
                     <h2 className="text-4xl md:text-5xl text-center">
                         Features that work great with Product OS,
@@ -445,36 +425,78 @@ export const ProductLLMObservability = () => {
                         </div>
                     </div>
                 </section>
-            </div>
-
-            <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-24 pb-0`}>
-                <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
-                    <div className="flex-1">
-                        <h2 className="text-4xl">
-                            We've also got <span className="text-red dark:text-yellow">privacy mode</span>, just in case
-                        </h2>
-                        <p>
-                            We care a lot about user privacy. If you do too then privacy mode gives you a way to filter
-                            inputs and outputs to your LLM while still tracking most of thehigh-level, anonymous data.
-                        </p>
-                        <p>
-                            That means you won't see what questions users ask (or the answers they get), but you will
-                            still be able to track costs, performance, and more - both overall, or at a per-user level.
-                            You just won't see the details of the conversation.
-                        </p>
-                        <p>
-                            You can <a href="/dpa">sign our DP-yay</a> for further protection, or find out more about{' '}
-                            <a href="/docs/privacy">how we think about privacy in the docs</a>.
-                        </p>
+                <div className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl mx-auto'} px-5 pt-24 pb-0`}>
+                    <div className="flex flex-col-reverse items-center md:flex-row gap-8 mb-20">
+                        <div className="flex-1">
+                            <h2 className="text-4xl">
+                                Ready to mix business and pleasure?
+                                <br />
+                                <span className="text-red dark:text-yellow">
+                                    We've got a playground and a privacy mode
+                                </span>
+                            </h2>
+                            <p>
+                                Need somewhere to muck around and try new prompts? We've got a playground for that,
+                                where you test new models against each other, simulate different chat histories, and
+                                test different reasoning levels.
+                            </p>
+                            <p>
+                                We also care a lot about user privacy, even though it's boring. So, if you want to be
+                                able to track high-level metrics such as costs and performance then you do that without
+                                seeing the details of a user conversation.
+                            </p>
+                            <p className="text-sm mb-4 border-l-4 border-light dark:border-dark pl-2 py-1">
+                                <strong>
+                                    We also try to make privacy stuff <i>not</i> boring.
+                                </strong>
+                                <br /> Check out our <a href="/dpa">DPA</a> and <a href="/privacy">privacy polciies</a>{' '}
+                                to find out how we protect your users and you.
+                            </p>
+                        </div>
+                        <aside className="shrink-0 md:basis-[500px]">
+                            <CloudinaryImage
+                                src="https://res.cloudinary.com/dmukukwp6/image/upload/model_playground_c8cf84629c.png"
+                                alt="privacy mode hedgehog"
+                                className="w-full max-w-[662px]"
+                            />
+                        </aside>
                     </div>
-                    <aside className="shrink-0 md:basis-[400px]">
-                        <CloudinaryImage
-                            src="https://res.cloudinary.com/dmukukwp6/image/upload/disguise_c3409b2e2b.png"
-                            alt="privacy mode hedgehog"
-                            className="w-full max-w-[262px]"
-                        />
-                    </aside>
                 </div>
+
+                <section className="mb-20 px-5">
+                    <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
+                        <div className="flex flex-col md:flex-row items-center gap-8">
+                            <div className="flex-shrink-0">
+                                <img
+                                    src="https://res.cloudinary.com/dmukukwp6/image/upload/chris_raroque_fb1af07ae1.jpg"
+                                    alt="Chris Raroque"
+                                    className="w-24 h-24 rounded-full object-cover"
+                                />
+                            </div>
+                            <div className="text-center md:text-left">
+                                <blockquote className="text-lg md:text-xl font-medium mb-4">
+                                    "PostHog's LLM observability saved us so much time. We used to use a whole system of
+                                    tools to track the prompts and responses for debugging and this is an infinitely
+                                    better UI. We use it for every single AI experiment we run now —{' '}
+                                    <span className="bg-highlight p-0.5">
+                                        also, if you need another quote then let me know, because the whole team loves
+                                        it!
+                                    </span>
+                                    "
+                                </blockquote>
+                                <div className="font-semibold">
+                                    <a
+                                        href="https://chrisraroque.com/"
+                                        className="hover:text-red dark:hover:text-yellow"
+                                    >
+                                        Chris Raroque
+                                    </a>
+                                </div>
+                                <div className="text-sm opacity-75">Founder and YouTuber</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
 
             <section
