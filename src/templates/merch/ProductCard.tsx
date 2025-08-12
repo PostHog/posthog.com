@@ -24,7 +24,10 @@ export function ProductCard(props: ProductCardProps): React.ReactElement {
     // Use shared display title logic
     const displayTitle = getDisplayTitle(product)
 
-    const image = useMemo(() => getShopifyImage({ image: product.featuredMedia.preview.image }), [product])
+    const image = useMemo(
+        () => getShopifyImage({ image: { ...product.featuredMedia.preview.image, width: 500, height: 500 } }),
+        [product]
+    )
 
     return (
         <div

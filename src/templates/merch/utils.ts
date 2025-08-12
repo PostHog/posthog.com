@@ -119,6 +119,19 @@ export function urlBuilder({ width, height, baseUrl, format }: IUrlBuilderArgs<u
     return `${basename}_${width}x${height}_crop_center${suffix}?${version}`
 }
 
+export function calculateAspectRatioDimensions(image: any, targetWidth = 500): { width: number; height: number } {
+    const { width: originalWidth, height: originalHeight } = image
+
+    if (!originalWidth || !originalHeight) {
+        return { width: targetWidth, height: targetWidth }
+    }
+
+    const aspectRatio = originalHeight / originalWidth
+    const proportionalHeight = Math.round(targetWidth * aspectRatio)
+
+    return { width: targetWidth, height: proportionalHeight }
+}
+
 export function getShopifyImage({ image, ...args }: any): IGatsbyImageData {
     const { originalSrc: baseUrl, width: sourceWidth, height: sourceHeight } = image
 

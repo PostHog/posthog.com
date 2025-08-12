@@ -10,11 +10,12 @@ import { Quantity } from './Quantity'
 import { useProduct } from './hooks'
 import { useCartStore } from './store'
 import { ShopifyProduct } from './types'
-import { getProductMetafield, getProductMetafieldByNamespace, getDisplayTitle } from './utils'
+import { getProductMetafield, getDisplayTitle, calculateAspectRatioDimensions } from './utils'
 import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { getShopifyImage } from './utils'
 import { IconSpinner } from '@posthog/icons'
 import SizeGuide from './SizeGuide'
+import Link from 'components/Link'
 
 type ProductPanelProps = {
     className?: string
@@ -23,16 +24,26 @@ type ProductPanelProps = {
     onClick: () => void
     updateURL: (product: ShopifyProduct) => void
     onCartOpen?: () => void
+    containerWidth?: number
 }
 
 const Image = ({ alt, image }: { alt: string; image: any }) => {
-    const memoizedImage = useMemo(() => getShopifyImage({ image }), [image])
+    const memoizedImage = useMemo(() => {
+        const { width, height } = calculateAspectRatioDimensions(image, 500)
+        return getShopifyImage({
+            image: {
+                ...image,
+                width,
+                height,
+            },
+        })
+    }, [image])
 
     return <GatsbyImage alt={alt} image={memoizedImage} />
 }
 
 export function ProductPanel(props: ProductPanelProps): React.ReactElement {
-    const { className, product, setIsCart, updateURL, onCartOpen } = props
+    const { className, product, setIsCart, updateURL, onCartOpen, containerWidth } = props
 
     const [isAdding, setIsAdding] = useState<boolean>(false)
     const [justAdded, setJustAdded] = useState<boolean>(false)
@@ -108,7 +119,7 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                         New
                     </div>
                 )}
-                <ProductCarousel product={product} />
+                <ProductCarousel product={product} containerWidth={containerWidth} />
             </div>
             <div className="space-y-0.5 text-center">
                 <h3 className="text-base leading-snug">{getDisplayTitle(product)}</h3>
@@ -240,9 +251,9 @@ export function ProductPanel(props: ProductPanelProps): React.ReactElement {
                             const featuredImage = (product as any).featuredImage
                             return (
                                 <li key={handle}>
-                                    <a href={`?product=${handle}`}>
+                                    <Link to={`?product=${handle}`}>
                                         <Image alt={handle} image={featuredImage} />
-                                    </a>
+                                    </Link>
                                 </li>
                             )
                         })}

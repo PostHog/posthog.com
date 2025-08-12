@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import ProductGrid from './ProductGrid'
 import { getProduct } from './transforms'
 import { CollectionPageContext } from './types'
@@ -177,6 +178,8 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
     return <>{content}</>
 }
 
+const defaultAsideWidth = 396
+
 export default function Collection(props: CollectionProps): React.ReactElement {
     const { pageContext } = props
     const [selectedProduct, setSelectedProduct] = useState<any>(null)
@@ -184,6 +187,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     const [selectedCategory, setSelectedCategory] = useState<string>('all')
     const [hasInitialized, setHasInitialized] = useState(false)
     const [searchQuery, setSearchQuery] = useState('')
+    const [asideWidth, setAsideWidth] = useState(defaultAsideWidth)
     const { appWindow } = useWindow()
     const { isMobile } = useApp()
 
@@ -363,10 +367,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
     )
 
     return (
-        <div
-            style={{ visibility: isMobile || !appWindow?.animating ? 'visible' : 'hidden' }}
-            className="@container w-full h-full flex flex-col min-h-1"
-        >
+        <div className="@container w-full h-full flex flex-col min-h-1">
             <HeaderBar
                 showBack
                 showForward
@@ -387,9 +388,11 @@ export default function Collection(props: CollectionProps): React.ReactElement {
             <ContentWrapper>
                 <div data-scheme="secondary" className="flex flex-col @3xl:flex-row-reverse flex-grow min-h-0">
                     {(cartIsOpen || selectedProduct) && (
-                        <aside
+                        <motion.aside
                             data-scheme="secondary"
-                            className="not-prose w-96 bg-primary border-l border-primary h-full text-primary"
+                            className="not-prose bg-primary border-l border-primary h-full text-primary relative"
+                            style={{ width: asideWidth }}
+                            initial={false}
                         >
                             <div className="h-full flex flex-col">
                                 <div className="flex-1 overflow-auto">
@@ -403,11 +406,30 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                             updateURL={handleProductSelect} // Allow navigation between products (URL will be updated automatically)
                                             onCartOpen={handleCartOpen} // Allow opening cart from product panel
                                             className="!p-4 !pt-4" // Override default padding
+                                            containerWidth={asideWidth}
                                         />
                                     ) : null}
                                 </div>
                             </div>
-                        </aside>
+                            <motion.div
+                                data-scheme="tertiary"
+                                className="group absolute left-0 top-0 w-1.5 bottom-0 cursor-ew-resize !transform-none"
+                                drag="x"
+                                dragMomentum={false}
+                                dragConstraints={{ left: 0, right: 0 }}
+                                onDrag={(_event, info) => {
+                                    const newWidth = Math.max(
+                                        Math.min(asideWidth - info.delta.x, (appWindow?.size?.width || 0) / 2),
+                                        defaultAsideWidth
+                                    )
+                                    setAsideWidth(newWidth)
+                                }}
+                            >
+                                <div className="relative w-full h-full">
+                                    <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-light-8" />
+                                </div>
+                            </motion.div>
+                        </motion.aside>
                     )}
 
                     <main
