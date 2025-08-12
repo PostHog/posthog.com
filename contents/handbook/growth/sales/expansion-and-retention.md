@@ -40,7 +40,26 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
-Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
+Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support.
+
+#### How to bust ghosts
+If you've had a a conversation with someone, there was interest on their side and then they suddenly go dark, using the The [John Barrows Ghosting Sequence](https://jbarrows.com/) can revivify them. 
+
+1. After 2 weeks of valuable follow-up and you've not heard back, reply-all to the latest email thread.
+Change the subject to: "Still interested?"
+
+And put in the body:
+>`[Name]`
+>
+>Still looking at options like PostHog to solve `[business problem they previously acknowledged]?`
+>
+>Let me know either way.
+
+That last line is very important because it gives them a safe option to say "no". About half will respond.
+
+2. If there's no response again after another week, change the subject again to "Did I lose you?"
+
+Leave the body empty. This will pick up about 80% of people who go dark. If not, close out the opportunity 3 days after this final message.
 
 ### 2. Get a longer term commitment (maybe!)
 
