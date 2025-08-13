@@ -1,5 +1,5 @@
 ---
-title: How to do discovery at PostHog
+title: How to do discovery
 sidebar: Handbook
 showTitle: true
 ---
