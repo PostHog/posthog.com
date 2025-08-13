@@ -403,7 +403,7 @@ export default function Products(): JSX.Element {
                                                     <div
                                                         className={`@md:pl-4 grid ${
                                                             isListLayout
-                                                                ? '@lg:grid-cols-2'
+                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
                                                                 : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4'
                                                         } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
