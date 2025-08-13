@@ -1,25 +1,69 @@
 ---
-title: Error tracking custom issue grouping
+title: Grouping exceptions into issues
 ---
 
 import { CalloutBox } from 'components/Docs/CalloutBox'
 
-Issues are created by grouping together similar exception events. When **no custom grouping behavior is configured**, issues are grouped together automatically based on their [fingerprint](/docs/error-tracking/fingerprints). 
+Issues are created by grouping together similar exception events. When **no custom grouping behavior is configured**, exceptions are grouped together automatically based on their [fingerprint](/docs/error-tracking/fingerprints). 
 
 > We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
 
-While PostHog will make a best effort to offer basic grouping, the grouping logic may not fit every use case. For example, consider the following ways you may want to group issues:
+While PostHog will make a best effort to offer basic grouping, the grouping logic may not fit every use case. For example, consider the following ways you may want to group exceptions into an issue:
 
-- Grouping issues by business logic, like all errors that occur at checkout
-- Grouping issues by a specific service, like all error messages containing `postgres`
-- Grouping issues by a specific feature, like all error messages containing `feature_flag_variant_a`
+- Grouping exceptions by business logic, like all errors that occur at checkout
+- Grouping exceptions by specific service, like all error messages containing `postgres`
+- Grouping exceptions by specific feature, like all error messages containing `feature_flag_variant_a`
 
-You should consider your unique needs to determine if you need to configure custom grouping behavior. Keep in mind that grouping can be very important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened.
+You should consider your unique needs to determine if you need to configure custom issue grouping behavior. Keep in mind that grouping can be very important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened. 
 
-## Creating a custom grouping rule
 
-You can create a custom grouping rule in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-custom-grouping#selectedSetting=error-tracking-custom-grouping):
+## Custom issue grouping
+
+PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can define a client-side fingerprint or use custom grouping rules during ingestion.
+
+### Option 1: Client-side fingerprint
+
+Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog, which is used to group similar exception events into issues. You can also set fingerprints manually during client-side capture.
+
+An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
+
+When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the functions second argument.
+
+```js
+posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
+```
+
+If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
+
+```javascript
+posthog.init("<ph_project_api_key>", {
+  before_send: (event) => {
+    if (event.event === "$exception") {
+      const exceptionList = event.properties["$exception_list"] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+      if (exception && exception["$exception_type"] == "SyntaxError") {
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+      }    
+    }
+    return event
+  }
+})
+```
+
+### Option 2: Custom grouping rule
+
+You can also group exceptions as a single issue based on their properties using custom grouping rules. As with [auto assignment rules](#auto-assignment-rules), you have access to properties of the unminified stack trace because the rules run during ingestion. 
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_light_f3e99a56b5.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_dark_927e7c5774.png"
+  alt="Error tracking custom issue grouping"
+  classes="rounded"
+/>
+
+To create a **custom grouping rule** in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-custom-grouping#selectedSetting=error-tracking-custom-grouping):
 
 1. Click the **Add rule** button to create a new grouping rule.
 2. Select **Any** to match any of the criteria, or **All** to match all of the criteria.
@@ -40,17 +84,17 @@ You can also set custom properties on the error tracking event to filter on. You
 
 ## Grouping rule best practices
 
-When grouping issues, it's important to consider what you might do with the issues once created. For example, you might:
+When grouping exceptions into issues, it's important to consider what you might do with the issues once created. For example, you might:
 
-- Group issues by areas of ownership so you can easily identify and assign issues to the appropriate team. 
-- Group high urgency issues by a specific services or routes that have higher business impact.
-- Group issues by specific features, especially when they're new or experimental.
+- Group exceptions by areas of ownership so you can easily identify and assign an issue to the appropriate team. 
+- Group high urgency exceptions by a specific services or routes that have higher business impact.
+- Group exceptions by specific features, especially when they're new or experimental.
 
-How you group issues is up to you, but it's important to consider how you'll use these issues and communicate with your team.
+How you group exceptions into issues is up to you, but it's important to consider how you'll use these issues and communicate with your team.
 
 ## Order of grouping rules
 
-Grouping rules are evaluated in the order they are configured. The first rule that matches will be used to group the issues. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch all rule first, it will always match and block other rules from being evaluated.
+Grouping rules are evaluated in the order they are configured. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
 
 ## Merging separate issues
 

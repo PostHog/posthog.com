@@ -1,5 +1,5 @@
 ---
-title: Error tracking issue assignment
+title: Assign issues to teammates
 ---
 
 Error tracking allows you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or users. This helps your team find relevant issues to work on through **filtering**. You can also set up team-specific **alerting** to notify specific teams when issues are created or reopened.
@@ -24,9 +24,27 @@ You can manually assign issues as you triage them in the UI. This can be done bo
 
 2. In the detail page of each issue, you can click the **Assignee** selector to assign it to a role or user.
 
+Want to assign issues to a **team** rather than an individual teammate? You can create a role in [your project settings](https://app.posthog.com/settings/organization-roles).
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/roles_light_6c7ea17be9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/roles_dark_f721b94577.png"
+  alt="Error tracking role assignees"
+  classes="rounded"
+/>
+
 ## Automatic issue assignment
 
-You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment).
+You can set up automatic issue assignment through a set of rules. This can be configured in the [error tracking settings](https://app.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment) using **auto assignment rules**.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_light_1cf9a2437a.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_dark_11e0830b0c.png"
+  alt="Error tracking auto assignment rules"
+  classes="rounded"
+/>
+
+Assignment conditions are evaluated against the properties of the exception event that created the issue. Because assignment rules are evaluated during ingestion, the stack trace (if present) will be unminified which allows for filtering on on exception properties such as function name and source file.
 
 Issues can be automatically assigned to a **role** or **user** by configuring a set of filters. These filters can be configured to match **any** or **all** of the criteria.
 

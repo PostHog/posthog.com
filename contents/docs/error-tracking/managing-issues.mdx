@@ -1,42 +1,14 @@
 ---
-title: Issue management
+title: Manage and resolve issues
 ---
 
 Our error tracking product gives you multiple ways to help you manage issues and work towards resolution. 
 
-## Assigning issues
-
-Issues can be assigned to a teammate from the list or issue page. To do this, select the **assignee** option and search for the teammate you want to assign it to, and select them. You can click this dropdown again to remove the assignee.
-
-Want to assign issues to a **team** rather than an individual teammate? You can create a role in [your project settings](https://us.posthog.com/settings/organization-roles) under **Error tracking**.
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/roles_light_6c7ea17be9.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/roles_dark_f721b94577.png"
-  alt="Error tracking role assignees"
-  classes="rounded"
-/>
-
-### Auto assignment rules
-
-You can automatically assign new and reopened issues using [auto assignment rules](https://us.posthog.com/error_tracking/configuration?tab=error-tracking-auto-assignment#selectedSetting=error-tracking-auto-assignment).
-
-Assignment conditions are evaluated against the properties of the exception event that created the issue. Because assignment rules are evaluated during ingestion, the stack trace (if present) will be unminified which allows for filtering on on exception properties such as function name and source file.
-
-<ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_light_1cf9a2437a.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/assignment_rules_dark_11e0830b0c.png"
-  alt="Error tracking auto assignment rules"
-  classes="rounded"
-/>
-
-Auto assignment works well when paired with [alerts filtered by assignee](/docs/error-tracking/alerts#alert-filtering).
-
-## Resolving and suppressing issues
+## Update issue status
 
 You can update the status of an issue from the issue page under **Status** or issue list. 
 
-All issues are marked **Active** by default, you can mark them as **resolved** or **suppressed** to reflect the current state of the issue. These labels are mainly used to communicate amongst your team. Typically, you resolve issues that are fixed, and suppress issues that you choose to not action on.
+All issues are marked **Active** by default, you can mark them as **Resolved** or **Suppressed** to reflect the current state of the issue. These labels are mainly used to communicate amongst your team. Typically, you resolve issues that are fixed, and suppress issues that you choose to not action on.
 
 You can also filter issues by status in the issue list:
 
@@ -47,53 +19,45 @@ You can also filter issues by status in the issue list:
   classes="rounded"
 />
 
-A common workflow is to look for all issues that are **Active** assigned to you or your team, and triage them to be fixed or suppressed. 
+A common workflow is to look for all issues that are **Active** assigned to you or your team, and triage them to be fixed or suppressed.
 
-## Merging issues
+## View stack traces and event properties
 
-import MergingIssues from './_snippets/merging-issues.mdx'
+Each issue contains detailed information about the exceptions that triggered it. 
 
-<MergingIssues />
-
-## Custom issue grouping
-
-PostHog attempts to group the same exceptions as a single issue. If you want more control over issue grouping, you can define a grouping on the client-side or using rules during ingestion.
-
-### Client-side fingerprint
-
-An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
-
-When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the functions second argument.
-
-```js
-posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
-```
-
-If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
-
-```javascript
-posthog.init("<ph_project_api_key>", {
-  before_send: (event) => {
-    if (event.event === "$exception") {
-      const exceptionList = event.properties["$exception_list"] || []
-      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
-
-      if (exception && exception["$exception_type"] == "SyntaxError") {
-        event.properties["$exception_fingerprint"] = "MyCustomGroup"
-      }    
-    }
-    return event
-  }
-})
-```
-
-### Custom grouping rules
-
-You can also choose to group exceptions as a single issue based on their properties. As with [auto assignment rules](#auto-assignment-rules), you have access to properties of the unminified stack trace because the rules run during ingestion.
+Click the **Stacktrace** tab to see exactly where the error occurred. [Stack traces](/docs/error-tracking/stack-straces) help you pinpoint the line of code and the sequence of function calls leading up to the exception.
 
 <ProductScreenshot
-  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_light_f3e99a56b5.png"
-  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_dark_927e7c5774.png"
-  alt="Error tracking custom issue grouping"
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250813_oyhz_c6498b5cf9.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250813_ozlr_89186d8fc7.png"
+  alt="Error tracking stack traces"
   classes="rounded"
 />
+
+Under the **Properties** tab, you can view additional metadata about the exception event.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250813_oyvq_06cf7e156b.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250813_oyzm_4c433e6559.png"
+  alt="Error tracking event properties"
+  classes="rounded"
+/>
+
+## Watch session replays 
+
+Error tracking works with [session replays](/docs/session-replay) to help you understand the context of an issue. This is useful for reproducing and debugging issues. 
+
+You can view a session replay for an exception by:
+- Selecting an exception in the exception list and clicking the **Session** tab at the top of the page.
+- Clicking the **View recording** button besides each exception.
+
+<ProductScreenshot
+  imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/session_replay_error_light_5f25f72344.png"
+  imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issue_exception_with_filter_dark_bf74dca1d9.png"
+  alt="An issue's session replay"
+  classes="rounded"
+/>
+
+## Assign issues to temammates
+
+Issues can be [assigned to a teammate](/docs/error-tracking/assigning-issues) from the list or issue page. To do this, select the **assignee** option and search for the teammate you want to assign it to, and select them. You can click this dropdown again to remove the assignee.

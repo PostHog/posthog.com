@@ -3701,41 +3701,43 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Grouping issues',
+                    name: 'Manage and resolve issues',
+                    url: '/docs/error-tracking/managing-issues',
+                    icon: 'IconDashboard',
+                    color: 'purple',
+                },
+                {
+                    name: 'Assign issues to teammates',
+                    url: '/docs/error-tracking/assigning-issues',
+                    icon: 'IconUser',
+                    color: 'blue',
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/assigning-issues',
+                        },
+                        {
+                            name: 'Track in GitHub and Linear',
+                            url: '/docs/error-tracking/external-tracking',
+                        },
+                    ],
+                },
+                {
+                    name: 'Group exceptions into issues',
                     url: '/docs/error-tracking/grouping-issues',
                     icon: 'IconList',
                     color: 'yellow',
                     featured: true,
                 },
                 {
-                    name: 'Monitor issues',
+                    name: 'Monitor and search issues',
                     url: '/docs/error-tracking/monitoring',
-                    icon: 'IconGraph',
-                    color: 'orange',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
                     featured: true,
                 },
                 {
-                    name: 'Manage issues',
-                    url: '/docs/error-tracking/managing-issues',
-                    icon: 'IconWrench',
-                    color: 'green',
-                },
-                {
-                    name: 'Assign issues',
-                    url: '/docs/error-tracking/assigning-issues',
-                    icon: 'IconUser',
-                    color: 'blue',
-                    children: [
-                        {
-                            name: 'External tracking',
-                            url: '/docs/error-tracking/external-tracking',
-                            icon: 'IconShare',
-                            color: 'blue',
-                        },
-                    ],
-                },
-                {
-                    name: 'Alerts',
+                    name: 'Send alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
