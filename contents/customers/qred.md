@@ -49,7 +49,7 @@ PostHog has since become Qred’s single source of truth for an increasing amoun
   <div className="bg-[#E5E7E0] dark:bg-[#2C2C2C] rounded-lg p-6 my-8">
     <div className="space-y-4">
       <img 
-        src="https://res.cloudinary.com/dmukukwp6/image/upload/qred_screen1_4d8cf22b34.jpg" 
+        src="https://res.cloudinary.com/dmukukwp6/image/upload/group_9575_6f6f3c544d.jpg" 
         alt="Qred experiment screenshot" 
         className="w-full rounded-md shadow-sm"
       />
