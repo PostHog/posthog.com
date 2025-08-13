@@ -55,7 +55,7 @@ PostHog has since become Qred’s single source of truth for an increasing amoun
       />
       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">Building a better onboarding flow with PostHog</h3>
       <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-        Backed by PostHog as a single source of truth, Qred could make bold changes with confidence. When adding an ID verification step to onboarding, for example, some feared a drop in conversion. However, an A/B test proved it actually boosted retention — unblocking the team and improving the user journey without hurting conversion.
+        Backed by PostHog as a single source of truth, Qred can make bold changes with confidence. When trying to find the optimal onboarding flow length and structure, for example, some feared a drop in conversion. However, an A/B test proved it actually boosted retention — unblocking the team and improving the user journey without hurting conversion.
       </p>
     </div>
   </div>
