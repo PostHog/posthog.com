@@ -243,10 +243,10 @@ We set up a check to see if there is a session and show details about the user a
 // pages/index.js
 import Head from 'next/head'
 import Link from 'next/link'
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react"; // +
 
 export default function Home({ posts }) {
-  const { data: session } = useSession();
+  const { data: session } = useSession(); // +
 
   return (
     <>
@@ -255,14 +255,14 @@ export default function Home({ posts }) {
       </Head>
       <main>
         <h1>Welcome to my blog</h1>
-        {!session ? (
-          <button onClick={() => signIn()}>Sign in</button>
-        ) : (
-          <div>
-            <p>Welcome {session.user.name}!</p>
-            <button onClick={() => signOut()}>Sign out</button>
-          </div>
-        )}
+        {!session ? ( // +
+          <button onClick={() => signIn()}>Sign in</button> // +
+        ) : ( // +
+          <div> // +
+            <p>Welcome {session.user.name}!</p> // +
+            <button onClick={() => signOut()}>Sign out</button> // +
+          </div> // +
+        )} // +
 //... posts map and getStaticProps
 ```
 
