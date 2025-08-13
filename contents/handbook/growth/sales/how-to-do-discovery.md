@@ -112,7 +112,7 @@ A key component of discovery is qualifying customers to ensure they are a good f
 - Budget and timeline in place (or keen on moving quickly)
 
 **Disqualifiers:**
-- **No path to <$20K minumum annual spend** - Our team looks after customers who are paying or could pay [<$20k+/yr](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr). 
+- **No path to <$20K minimum annual spend** - Our team looks after customers who are paying or could pay [<$20k+/yr](/handbook/growth/sales/new-sales#leads-below-the-sales-assist-threshold-less-than-20k-arr). 
 - **Not in ICP** - You can gather great product insights when chatting with folks in other roles, but we tend to work best with our [ICP](/handbook/who-we-are-building-for).
 - **Can't meet technical requirements** - To be successful, the customer needs to (at minimum), be able to implement PostHog via the SDKs/JS.
 - **Support request** - Be helpful, but if it's better suited for support, you can send them thru the available [Support](/docs/support-options) channels.
