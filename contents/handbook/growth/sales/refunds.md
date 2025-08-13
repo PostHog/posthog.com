@@ -20,7 +20,7 @@ We issue refunds or credits in this category if this is the first bill >$1 and/o
 Bot spike/abusive user drove traffic which in turn increased posthog usage
 
 ### Unnecessarily subscribed to an add-on
-The customer was unknowlingly and/or unnecessarily subscribed to an add-on e.g. paying for data pipelines and only using the free-tier Slack destination
+The customer was unknowingly and/or unnecessarily subscribed to an add-on e.g. paying for data pipelines and only using the free-tier Slack destination
 
 We flag accounts with unusual activity spikes for review, and refund or issue credits to cover the overage amount once the issue has been resolved. The issued amount covers any amount exceeding the average usage of the three months preceding the spike.
 
