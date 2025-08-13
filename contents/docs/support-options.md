@@ -154,7 +154,7 @@ We do not make contractual commitments to make product changes or alter our road
 
 We have an extensive range of robust internal [security policies](/handbook/company/security) that apply to all products and cover several requirements around GDPR, SOC 2, HIPAA and CCPA. 
 
-For Entrprise customers, we are happy to complete your own security assessment. This can take the form of us enabling your team internally (who are responsible for information security since they are hosting the data), or it can mean us just answering questions and adapting our policies if needed.
+For Enterprise customers, we are happy to complete your own security assessment. This can take the form of us enabling your team internally (who are responsible for information security since they are hosting the data), or it can mean us just answering questions and adapting our policies if needed.
 
 ## Bespoke pricing
 
