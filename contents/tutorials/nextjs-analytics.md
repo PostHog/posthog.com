@@ -351,7 +351,7 @@ export default function Post({ post }) {
 //...
 ```
 
-Go to a post, click **Like**, and then check your PostHog instance to see the custom event show up.
+Go to a post, click **Like**, and then check your PostHog project's [activity tab](https://app.posthog.com/activity/explore) to see the custom event show up.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_13_at_10_50_18_2x_133f683a95.png"
