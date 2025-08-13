@@ -19,6 +19,11 @@ We issue refunds or credits in this category if this is the first bill >$1 and/o
 ### Under Attack
 Bot spike/abusive user drove traffic which in turn increased posthog usage
 
+### Wrong Setup
+New feature trial with incorrect configuration
+
+We issue refunds or credits in this category if the customer was charged for features they didn't intend to use due to default settings or configuration errors, and this is the first occurrence of unintended usage charges.
+
 ### Unnecessarily subscribed to an add-on
 The customer was unknowingly and/or unnecessarily subscribed to an add-on e.g. paying for data pipelines and only using the free-tier Slack destination
 
