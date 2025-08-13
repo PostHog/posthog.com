@@ -3347,10 +3347,10 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
-                    name: 'Application-wide settings',
-                    url: '/docs/feature-flags/app-wide-settings',
-                    icon: 'IconGear',
-                    color: 'purple',
+                    name: 'Cutting costs',
+                    url: '/docs/feature-flags/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'yellow',
                 },
                 {
                     name: 'Troubleshooting and FAQs',
@@ -3366,10 +3366,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Cutting costs',
-                    url: '/docs/feature-flags/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
+                    name: 'Settings',
+                },
+                {
+                    name: 'Project-wide settings',
+                    url: '/docs/feature-flags/project-wide-settings',
+                    icon: 'IconWrench',
+                    color: 'green',
                 },
                 {
                     name: 'Features',

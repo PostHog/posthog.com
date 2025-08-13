@@ -1,5 +1,5 @@
 ---
-title: App-wide settings
+title: Project-wide settings
 sidebar: Docs
 showTitle: true
 availability:
@@ -8,7 +8,7 @@ availability:
   enterprise: full
 ---
 
-You can configure app-wide feature flag settings to establish defaults and safety measures for your team. These settings apply to all feature flags in your project and help maintain consistency across your flag management practices.
+You can configure project-wide feature flag settings to establish defaults and maintain safety measures for your team. These settings apply to all feature flags in your project and help maintain consistency across your flag management practices.
 
 To access these settings, navigate to [Settings > Feature Flags](https://app.posthog.com/settings/project-feature-flags)
 
@@ -16,7 +16,7 @@ To access these settings, navigate to [Settings > Feature Flags](https://app.pos
 
 When enabled, all new feature flags will have persistence enabled by default. This ensures consistent user experiences across authentication steps where users might have different properties before and after login.
 
-> **Note:** This only affects **new** feature flags. Existing flags retain their current persistence settings.
+> **Note:** Modifying this setting will only affect **new** feature flags. Existing flags retain their current persistence settings.
 
 Learn more about flag persistence in our [creating feature flags documentation](/docs/feature-flags/creating-feature-flags#persisting-feature-flags-across-authentication-steps).
 
@@ -40,7 +40,7 @@ You can set a custom message to display in the confirmation modal. If no custom 
 
 Custom messages are limited to 500 characters and can help provide context specific to your team or project needs.
 
-## Feature Flags Secure API key
+## Feature flags secure API key
 
 Use secure API keys to retrieve feature flag definitions for [local evaluation](/docs/feature-flags/local-evaluation) or [remote config settings](/docs/feature-flags/remote-config). These keys replace personal API keys for flag-related operations.
 
@@ -57,4 +57,4 @@ Use secure API keys to retrieve feature flag definitions for [local evaluation](
 3. **Clean up backups**: Delete backup keys once you've migrated all systems
 4. **Use project-specific keys**: Each PostHog project should use its own secure API key
 
-The secure API key system allows you to safely rotate keys without downtime by maintaining both primary and backup keys during the transition period.
+The secure API key system enables you to safely rotate keys without downtime by maintaining both primary and backup keys during the transition period.
