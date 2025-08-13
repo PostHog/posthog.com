@@ -33,7 +33,7 @@ The [pilot program](/community-incubator) is starting in tech hubs in North Amer
 
  The focus is on recurring weekly gatherings with small groups of ~10 people. 
  
- Gatherings can take place during weekday evenings or weekends and go for about 3 hours. A suggested format is to have time for intros, at least 2-2.5 hours for working, and demos to close. Outside co-working, the group is encouraged to get together for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
+Gatherings can take place during weekday evenings or weekends and go for about 3 hours. A suggested format is to have time for intros, at least 2-2.5 hours for working, and demos to close. Outside co-working, the group is encouraged to get together for an AFK activity such as a walk, bike ride, hike, or local sightseeing.
 
  ### Venues
 
