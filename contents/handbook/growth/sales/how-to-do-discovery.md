@@ -20,7 +20,7 @@ This is meant to be a guide, not a rule-set. Each person has their own unique st
 
 Discovery isn't one-sided questioning - it's give and take. You learn something, you show something, you ask questions, repeat. The goal is understanding what customers are trying to accomplish so we can focus on relevant features rather than discussing everything PostHog can do.
 
-## Why discovery matters
+### Why discovery matters
 PostHog is a broad product suite with [common combinations](handbook/growth/sales/expansion-and-retention#how-to-run-a-cross-sell-process) depending on the use case. Discovery helps us provide customers with a better experience by understanding their specific needs so we can:
 
 - **Conduct a demo that actually matters** - No one wants to sit through features they'll never use
