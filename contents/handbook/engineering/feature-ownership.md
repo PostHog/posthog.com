@@ -50,7 +50,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Internal messaging (email, notifications) | [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/notifications</span>  |
 | Live events | [Team ClickHouse][Team ClickHouse]  | <span class="lemon-tag gh-tag">feature/live-events</span>  |
 | Marketing analytics | [Team Web Analytics][Team Web Analytics]  |  <span class="lemon-tag gh-tag">feature/marketing-analytics</span> |
-| Max AI | [Team Max AI][Team Max AI]  | <span class="lemon-tag gh-tag">feature/max-ai</span>  |
+| Max AI platform | [Team Max AI][Team Max AI]  | <span class="lemon-tag gh-tag">feature/max-ai</span>  |
 | MCP server | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/mcp</span>  |
 | Messaging | [Team Messaging][Team Messaging]  | <span class="lemon-tag gh-tag">feature/messaging</span>  |
 | Notebooks | [@daibhin][@daibhin]  |  <span class="lemon-tag gh-tag">feature/notebooks</span> |
@@ -96,14 +96,7 @@ Some of the features we are building may exist in other products already. It is 
 - We're highly unlikely to overtake everyone else if we just build the open source version of everything that is already out there.
 - We may expose ourselves to legal risk/challenges from those companies, especially if they can point to a public issue where we have said 'let's copy X'.
 
-[@benjackwhite]: https://github.com/benjackwhite
-[@EDsCODE]: https://github.com/EDsCODE
-[@mariusandra]: https://github.com/mariusandra
-[@neilkakkar]: https://github.com/neilkakkar
-[@pauldambra]: https://github.com/pauldambra
-[@Twixes]: https://github.com/Twixes
 [@daibhin]: https://github.com/daibhin
-[@timgl]: https://github.com/timgl
 [Team CDP]: /teams/cdp
 [Team ClickHouse]: /teams/clickhouse
 [Team CRM]: /teams/crm
@@ -120,3 +113,4 @@ Some of the features we are building may exist in other products already. It is 
 [Team Web Analytics]: /teams/web-analytics
 [Team Surveys]: /teams/surveys
 [Team Messaging]: /teams/messaging
+[Team Max AI]: /teams/max-ai
