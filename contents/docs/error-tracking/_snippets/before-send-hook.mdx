@@ -7,7 +7,7 @@ posthog.init('<ph_project_api_key>', {
             const exceptionList = event.properties["$exception_list"] || []
             const exception = exceptionList.length > 0 ? exceptionList[0] : null;
 
-            if (exception && exception["$exception_type"] == "UnwantedError") {
+            if (exception && exception["$exception_type"] === "UnwantedError") {
                 return false
             }
         }

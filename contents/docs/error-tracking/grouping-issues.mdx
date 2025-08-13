@@ -28,7 +28,7 @@ Every captured exception is assigned a [fingerprint](/docs/error-tracking/finger
 
 PostHog generates a fingerprint based on the exception during ingestion. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
 
-When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the functions second argument.
+When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the function's second argument.
 
 ```js
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
@@ -96,7 +96,7 @@ Grouping rules are evaluated in the order they are configured. The first rule th
 
 ## How PostHog prioritizes issue grouping logic
 
-More broadly, PostHog will priotize issue grouping logic in the following order:
+More broadly, PostHog will prioritize issue grouping logic in the following order:
 
 1. Client-side defined custom fingerprint using `$exception_fingerprint`
 2. Match custom grouping rules defined in PostHog

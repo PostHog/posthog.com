@@ -2,11 +2,10 @@ The PostHog JS SDK uses burst protection to limit the number of autocaptured exc
 
 By default, we capture 10 exceptions (bucket size) of the same type within a 10 second period before the rate limiter kicks in, after which, we capture 1 exception (refill rate) every 10 seconds.
 
-Often not needed, but you can change the bucket size and refill rate can be changed as part of your configuration:
+Often not needed, but you can change the bucket size and refill rate as part of your configuration:
 
-```
+```js
 error_tracking: {
     __exceptionRateLimiterRefillRate: 1
     __exceptionRateLimiterBucketSize: 10
 }
-```
