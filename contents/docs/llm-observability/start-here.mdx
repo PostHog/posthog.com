@@ -43,28 +43,23 @@ import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.t
 </QuestLogItem>
 
 <QuestLogItem 
-  title="Record traces and generations"
+  title="Record generations"
   subtitle="Required"
   icon="IconRecord"
 >
 
-  Content tk...
+  Once you've installed the SDK, every LLM call automatically becomes a **generation** – a detailed record of what went in and what came out. Each generation captures:
 
-  <CallToAction type="primary" to="/docs/llm-observability/traces-generations">
-    Learn more
-  </CallToAction>
+  - 📝 Complete conversation context (inputs and outputs)
+  - 🔢 Token counts and usage metrics  
+  - ⏱️ Response latency and performance data
+  - 💸 Automatic cost calculation based on model pricing
+  - 🔗 Trace IDs to group related LLM calls together
 
-</QuestLogItem>
 
-<QuestLogItem 
-  title="Analyze model performance"
-  subtitle="Required"
-  icon="IconMagic"
->
+  PostHog's SDK wrappers handle all the heavy lifting – just use your LLM provider as normal and we'll capture everything automatically. You can also add custom properties like user IDs, conversation IDs, or feature flags to understand usage patterns.
 
-  Content tk...
-
-  <CallToAction type="primary" to="/docs/llm-observability/tutorials">
+  <CallToAction type="primary" to="/docs/llm-observability/generations">
     Learn more
   </CallToAction>
 
