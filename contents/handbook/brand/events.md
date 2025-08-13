@@ -5,20 +5,25 @@ showTitle: true
 ---
 > If you want to build a local group of builders, go to [Community incubator](#community-incubator). If you’re planning an event and want PostHog to be involved, go to [Community events](#community-events)
 
-We’re [100% remote](handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life. Still, we’re figuring out how to do events "the PostHog way." 
+We’re [100% remote](/handbook/company/culture) and set up to work asynchronously–but there's a real benefit in getting together in real life. Still, we’re figuring out how to do events "the PostHog way." 
 
-For us to be involved the event has to center on or adjacent to our [ICP](handbook/who-we-are-building-for). We prefer not to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](handbook/growth/marketing#2-pull-dont-push) over push, so we avoid booths, badge-scanning, buying attendee lists, paying to speak, webinars, and dinners.
+For us to be involved the event has to be relevant to our [ICP](/handbook/who-we-are-building-for). We prefer not to be a small fish in a big pond, so we pass on big conferences. We [prefer pull](/handbook/growth/marketing#2-pull-dont-push) over push, so we avoid booths, badge-scanning, buying attendee lists, paying to speak, webinars, and dinners.
 
 The event formats we get involved in (and organize ourselves) fall into one of these:
 
   - Hands-on gatherings that help our customers build faster and better for their customers
   - Experiences that allow engineers and founders to flex and grow their skillset
-  - Getting [product engineers](blog/what-is-a-product-engineer) together to identify problems and build solutions for users
+  - Getting [product engineers](/blog/what-is-a-product-engineer) together to identify problems and build solutions for users
   - AFK time such as a fun activity, some sightseeing, or just spending time together
 
 ## Community incubator
 
-Where we connect builders around the world by helping them incubate micro-communities that gather for weekly co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person. We have already seen how this format makes a higher impact on communities of builders because of the velocity built over weeks of communal work, collaboration, and creativity.
+Where we connect builders around the world by helping them incubate micro-communities that gather for weekly co-working sessions. As we know from our own sprints, offsites, and hackathons, we can build a whole lot when we gather in person. 
+
+We have already seen how this format makes a higher impact on communities of builders because of the velocity built over weeks of communal work, collaboration, and creativity.
+
+![Austin incubator](https://res.cloudinary.com/dmukukwp6/image/upload/Austin_community_incubator_photo_1049a2853e.png)
+<Caption>Kliment leading community incubator, Austin</Caption>
 
 ### Geographies
 
@@ -36,13 +41,13 @@ The [pilot program](/community-incubator) is starting in tech hubs in North Amer
 
  ## Community events
 
-Community events are in real life (IRL) manifestations of [our mission](handbook/why-does-posthog-exist#our-mission) organized by enthusiastic partners and customers. They usually originate when someone has identified an interesting topic for an event to help people move [faster](newsletter/this-is-why-youre-not-shipping), smarter, and more together.
+Community events are in real life (IRL) manifestations of [our mission](/handbook/why-does-posthog-exist#our-mission) organized by enthusiastic partners and customers. They usually originate when someone has identified an interesting topic for an event to help people move [faster](/newsletter/this-is-why-youre-not-shipping), smarter, and more together.
 
 If you have a topic or gap you've identified but are unsure of format, here are some ideas:
 
   - **Structure:** participatory > nonparticipatory, bottoms-up > top down, unconference > conference, demos > pitches.
   - **Curation:** Get fewer people but the right people to the event. Prioritise this alongside the content. This extends to speakers, co-hosts, and attendees.
-  - **Atmosphere** foster a [welcoming environment](handbook/company/grown-ups#things-we-do-to-create-a-welcoming-environment) where everyone can succeed.
+  - **Atmosphere** foster a [welcoming environment](/handbook/company/grown-ups#things-we-do-to-create-a-welcoming-environment) where everyone can succeed.
 
 In our high trust environment, we expect organizers who initiate events to fully own them.
 
@@ -58,7 +63,7 @@ An impactful event follows the principles of user-driven development which stems
 
 > We use GitHub for everything at PostHog. When you’re ready to organize an event, create a GitHub issue [using this template](https://github.com/PostHog/meta/issues/new?template=event-plan.md) and assign it to Daniel Zaltsman. Prioritize progress (on which you can build) over perfection.
 
-Put real effort into this first step. Defining the "what, why and how" of an event beforehand will pay off on event day. Let our [shared values](handbook/values) guide you. Don’t submit until your answer to “Would I attend this?” is a clear “yes.”
+Put real effort into this first step. Defining the "what, why and how" of an event beforehand will pay off on event day. Let our [shared values](/handbook/values) guide you. Don’t submit until your answer to “Would I attend this?” is a clear “yes.”
 
 ### Getting support
 
@@ -72,7 +77,7 @@ We support community events in a handful of ways.
 
 **Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](founders) [have](founders/product-market-fit-game) [plenty](handbook) [of](about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](questions) [inspiration](docs).
 
-**Merch:** We use the [store](merch) [processes](handbook/company/merch-store) to handle distribution of PostHog-branded merch. We tend to be generous with merch for community events. Outline what you had in mind in the issue.
+**Merch:** We use the [store merch processes](/handbook/company/merch-store) to handle distribution of PostHog-branded merch. We tend to be generous with merch for community events. Outline what you had in mind in the issue.
 
 **Co-promotion:** Most of the time the help requested is in the form of promotion. As a general rule, we don't promote events we aren't supporting or co-hosting ourselves. We decide when to repost community events on our social media channels and email on a case by case basis. 
 
@@ -82,15 +87,15 @@ We support community events in a handful of ways.
 
 ### Branding it
 
-Our brand is a reflection of us and [how we’re experienced by others](blog/brand), including events.
+Our brand is a reflection of us and [how we’re experienced by others](/blog/brand), including events.
 
-**Words:** Naming products is hard. Same goes for naming events. As a prerequisite, read our primer on [writing for developers](https://posthog.com/founders/writing-for-developers). Try your best to come up with event names that communicate the 'what?' and will attract the 'who?' And again, ask yourself if you would be interested in this event based on the title.   
+**Words:** Naming products is hard. Same goes for naming events. As a prerequisite, read our primer on [writing for developers](/founders/writing-for-developers). Try your best to come up with event names that communicate the 'what?' and will attract the 'who?' And again, ask yourself if you would be interested in this event based on the title.   
 
-**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines on the [brand assets page](handbook/company/brand-assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
+**Pictures:** Every event is improved with a flyer or poster that showcases the essence of the experience. We keep a comprehensive list of brand assets and guidelines on the [brand assets page](/handbook/company/brand-assets). Share your assets and we’ll give feedback. Depending on the scale and timing of the event, our team may be able to help with branding as well.
 
 ### Follow-ups
 
-Community events are better when organizers share what happened, what you learned, and any follow-up actions. [We value feedback](handbook/people/feedback) and expect the same from event organizers. In addition to what you learned and feedback from attendees, we will share any photos, videos, quotes, data points with our team.
+Community events are better when organizers share what happened, what you learned, and any follow-up actions. [We value feedback](/handbook/people/feedback) and expect the same from event organizers. In addition to what you learned and feedback from attendees, we will share any photos, videos, quotes, data points with our team.
 
 ## Sponsoring external events
 
