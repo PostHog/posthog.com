@@ -1,0 +1,17 @@
+```python
+from flask import Flask, jsonify
+from posthog import Posthog
+
+posthog = Posthog('<ph_project_api_key>', host='<ph_client_api_host>')
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # Capture methods, including capture_exception, return the UUID of the captured event,
+    # which you can use to find specific errors users encountered
+    event_id = posthog.capture_exception(e)
+
+    # You can show the event ID to your user, and ask them to include it in bug reports
+    response = jsonify({'message': str(e), 'error_id': event_id})
+    response.status_code = 500
+    return response
+```

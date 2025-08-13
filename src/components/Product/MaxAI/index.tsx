@@ -298,13 +298,7 @@ const Roadmap = () => {
                             )
                             .map((roadmap: RoadmapItem) => (
                                 <div key={roadmap.id} className="p-4">
-                                    <div className="flex space-x-4 [&>div.vote-box]:bg-[#F5E2B2]">
-                                        <VoteBox
-                                            likeCount={roadmap.attributes.likes.data.length}
-                                            liked={roadmap.attributes.likes.data.some(
-                                                ({ id }) => id === user?.profile?.id
-                                            )}
-                                        />
+                                    <div className="flex space-x-4">
                                         <div className="flex-1">
                                             <h4 className="text-lg font-bold mb-1 leading-tight">
                                                 {roadmap.attributes.title}

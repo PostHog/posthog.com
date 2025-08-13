@@ -56,7 +56,6 @@ interface Class {
 interface SdkReferenceData {
     id: string
     hogRef: string
-    noDocsTypes: string[]
     info: {
         description: string
         id: string
@@ -125,6 +124,12 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     // Get the language for this SDK reference
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
     const validTypes = pageContext.types
+
+    // Pre-transform classes with sorted functions
+    const sortedClasses = fullReference.classes.map((classData) => ({
+        ...classData,
+        sortedFunctions: groupFunctionsByCategory(classData.functions),
+    }))
     // Badge styling based on release tag
     const getBadgeClasses = (releaseTag: string): string => {
         switch (releaseTag.toLowerCase()) {
@@ -136,6 +141,22 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                 return `bg-red/10 text-red dark:text-red font-medium text-xs m-[-2px] rounded-sm px-1 py-0.5 inline-block`
         }
     }
+
+    // Generate ToC from classes and functions
+    const tableOfContents = sortedClasses.flatMap((classData) => [
+        {
+            url: classData.id,
+            value: `${classData.title}`,
+            depth: 0,
+        },
+        ...classData.sortedFunctions.flatMap(({ functions }) =>
+            functions.map((func) => ({
+                url: `${classData.id}-${func.id}`,
+                value: `${func.title}()`,
+                depth: 1,
+            }))
+        ),
+    ])
 
     return (
         <ReaderView>

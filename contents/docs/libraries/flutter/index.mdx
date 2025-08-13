@@ -15,7 +15,6 @@ features:
   groupAnalytics: true
   surveys: true
   llmObservability: false
-  errorTracking: false
 ---
 
 import FlutterIdentify from './_snippets/identify.mdx'
@@ -62,7 +61,7 @@ await Posthog().alias(
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Anonymous vs identfied events
+## Anonymous vs identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
 
@@ -161,6 +160,14 @@ This is needed as Flutter renders your app using a browser canvas element.
 > **Note:** Surveys is currently supported in Flutter for **Web** and **iOS** platforms only. 
 
 [Surveys](/docs/surveys) launched with [popover presentation](/docs/surveys/creating-surveys#presentation) are automatically shown to users matching the [display conditions](/docs/surveys/creating-surveys#display-conditions) you set up.
+
+## Offline behavior
+
+The PostHog Flutter SDK will continue to capture events when the device is offline for Android and Apple platforms. The events are stored in a queue in the device's file storage and are flushed when the device is online.
+
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed when the app is restarted and the device is online.
 
 ## Issues
 

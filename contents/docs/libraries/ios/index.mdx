@@ -15,7 +15,6 @@ features:
   groupAnalytics: true
   surveys: true
   llmObservability: false
-  errorTracking: false
 ---
 
 import IOSInstall from '../../integrate/_snippets/install-ios.mdx'
@@ -78,7 +77,7 @@ PostHogSDK.shared.alias("alias_id")
 
 We strongly recommend reading our docs on [alias](/docs/data/identify#alias-assigning-multiple-distinct-ids-to-the-same-user) to best understand how to correctly use this method.
 
-## Anonymous vs identfied events
+## Anonymous vs identified events
 
 import IdentifiedVsAnonymousIntro from '../../product-analytics/_snippets/identified-vs-anonymous-intro.mdx'
 
@@ -272,6 +271,14 @@ You can also manually flush the queue:
 PostHogSDK.shared.capture("logged_out")
 PostHogSDK.shared.flush()
 ```
+
+## Offline behavior
+
+The PostHog iOS SDK will continue to capture events when the device is offline. The events are stored in a queue in the device's file storage and are flushed when the device is online.
+
+- The queue has a maximum size defined by `maxQueueSize` in the configuration.
+- When the queue is full, the oldest event is deleted first.
+- The queue is flushed only when the device is online.
 
 ## Reset after logout
 

@@ -3,7 +3,7 @@ title: Node.js
 sidebarTitle: Node.js
 sidebar: Docs
 showTitle: true
-github: 'https://github.com/PostHog/posthog-js-lite/tree/master/posthog-node'
+github: 'https://github.com/PostHog/posthog-js/tree/main/packages/node'
 icon: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/docs/integrate/nodejs.svg
 features:
@@ -272,40 +272,6 @@ You can capture LLM usage and performance data by combining the `posthog-node` a
 
 You can capture errors using the `posthog-node` library. This enables you to see stack traces, source code, and watch associated session recordings to improve your application stability. Learn more in our [error tracking docs](/docs/error-tracking/installation?tab=Node).
 
-## Sentry integration
-
-When using [Sentry in Node.js](https://docs.sentry.io/platforms/node/), you can connect to PostHog in order to link Sentry errors to PostHog user profiles.
-
-### Example implementation
-
-See the [`posthog-node`](https://github.com/PostHog/posthog-js-lite/blob/main/examples/example-node/server.ts) project for a complete example.
-
-```node
-import { PostHog, PostHogSentryIntegration } from 'posthog-node'
-import * as Sentry from '@sentry/node'
-
-const posthog = new PostHog(PH_API_KEY, { host: PH_HOST })
-
-Sentry.init({
-  dsn: 'https://examplePublicKey@o0.ingest.sentry.io/0',
-  integrations: [new PostHogSentryIntegration(posthog)],
-})
-
-// Set the PostHog distinctId for the relevant session either globally for all events
-Sentry.setTag(PostHogSentryIntegration.POSTHOG_ID_TAG, 'my-nodejs-service');
-
-// or contextually for example within an api request
-try {
-    myFunction()
-} catch(err) {
-  Sentry.captureException(err, {
-    tags: {
-      [PostHogSentryIntegration.POSTHOG_ID_TAG]: request.user.id,
-    },
-  })
-}
-```
-
 ## Upgrading from V1 to V2
 
 V2.x.x of the Node.js library is completely rewritten in Typescript and is based on a new JS core shared with other JavaScript based libraries with the goal of ensuring new features and fixes reach the different libraries at the same pace.
@@ -315,4 +281,4 @@ With the release of V2, the API was kept mostly the same but with some small cha
 1. The minimum PostHog version requirement is 1.38
 2. The `callback` parameter passed as an optional last argument to most of the methods is no longer supported
 3. The method signature for `isFeatureEnabled` and `getFeatureFlag` is slightly modified. See the above documentation for each method for more details.
-4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js-lite/blob/master/posthog-node/CHANGELOG.md)
+4. For specific changes, [see the CHANGELOG](https://github.com/PostHog/posthog-js/blob/main/packages/node/CHANGELOG.md)

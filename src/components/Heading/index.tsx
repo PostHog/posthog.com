@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from '@reach/router'
 import { IconLink } from '../OSIcons'
 
-const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }) => {
+export const CopyAnchor = ({ id = '', hovered }: { id: string; hovered: boolean }): JSX.Element => {
     const [visible, setVisible] = useState(false)
     const { href } = useLocation()
     const handleClick = () => {

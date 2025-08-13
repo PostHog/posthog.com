@@ -5,12 +5,13 @@ There are 2 steps to implement feature flags in Go:
 #### Boolean feature flags
 
 ```go
-isMyFlagEnabled, err := client.IsFeatureEnabled(
-            FeatureFlagPayload{
-                Key:        "flag-key",
-                DistinctId: "distinct_id_of_your_user",
-            })
-
+isMyFlagEnabled, err := client.IsFeatureEnabled(posthog.FeatureFlagPayload{
+    Key:        "flag-key",
+    DistinctId: "distinct_id_of_your_user",
+})
+if err != nil {
+    // Handle error (e.g. capture error and fallback to default behaviour)
+}
 if isMyFlagEnabled == true {
     // Do something differently for this user
 }
@@ -19,12 +20,13 @@ if isMyFlagEnabled == true {
 #### Multivariate feature flags
 
 ```go
-enabledVariant, err := client.GetFeatureFlag(
-            FeatureFlagPayload{
-                Key:        "flag-key",
-                DistinctId: "distinct_id_of_your_user",
-            })
-
+enabledVariant, err := client.GetFeatureFlag(posthog.FeatureFlagPayload{
+    Key:        "flag-key",
+    DistinctId: "distinct_id_of_your_user",
+})
+if err != nil {
+    // Handle error (e.g. capture error and fallback to default behaviour)
+}
 if enabledVariant == "variant-key" { // replace 'variant-key' with the key of your variant
     // Do something differently for this user
 }
@@ -62,7 +64,7 @@ You can fetch all flag values for a single user by calling `GetAllFlags()`.
 This is useful when you need to fetch multiple flag values and don't want to make multiple requests.
 
 ```go  
-featureVariants, _ := client.GetAllFlags(FeatureFlagPayloadNoKey{
+featureVariants, err := client.GetAllFlags(posthog.FeatureFlagPayloadNoKey{
         DistinctId: "distinct_id_of_your_user",
 })
 ```
@@ -78,16 +80,18 @@ Capturing `$feature_flag_called` events enable PostHog to know when a flag was a
 
 You can disable automatically capturing `$feature_flag_called` events. For example, when you don't need the analytics, or it's being called at such a high volume that sending events slows things down.
 
-To disable it, set the `SendFeatureFlagEvents` argument in your function call, like so:
+To disable it (pre v1.6.1), set the `SendFeatureFlagEvents` argument in your function call, like so:
 
 ```go
-isMyFlagEnabled, err := client.IsFeatureEnabled(
-            FeatureFlagPayload{
-                Key:                    "flag-key",
-                DistinctId:             "distinct_id_of_your_user",
-                SendFeatureFlagEvents:  true
-            })
+sendFeatureFlags := false
+isMyFlagEnabled, err := client.IsFeatureEnabled(posthog.FeatureFlagPayload{
+    Key:                    "flag-key",
+    DistinctId:             "distinct_id_of_your_user",
+    SendFeatureFlagEvents:  &sendFeatureFlags,
+})
 ```
+
+Versions after v1.6.1 have this feature disabled by default.
 
 import GoOverrideServerProperties from './override-server-properties/go.mdx'
 

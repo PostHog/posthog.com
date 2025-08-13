@@ -37,21 +37,14 @@ const addons = [
                         icon: IconAdvanced,
                     },
                     {
-                        name: 'Enforce event schemas',
+                        name: 'Library of pre-built templates',
                         description:
-                            'By default, PostHog does not enforce schemas on events it receives. However, a transformation could do so, preventing ingestion of events that do not match the specified schema in order to keep your data clean and following specific guidelines you need it to follow.',
+                            'Choose from hundreds of pre-built templates, including Slack, Discord, Customer.io, and more.',
                         icon: IconAdvanced,
                     },
                     {
-                        name: 'Label events',
-                        description:
-                            'To facilitate sorting through your events, you can use transformations to determine arbitrary logic to label an event (e.g. by setting a label property). This can help you tailor your metrics in PostHog, as well as facilitate data ordering if you ever use PostHog data elsewhere.',
-                        icon: IconAdvanced,
-                    },
-                    {
-                        name: 'Only pay for saved events',
-                        description:
-                            'PostHog only charges for events that are successfully saved to our platform - events filtered out or dropped by transformations are not counted towards billing quotas.',
+                        name: 'Customizability with Hog',
+                        description: 'Use our powerful Hog language to write completely custom destinations.',
                         icon: IconAdvanced,
                     },
                 ],

@@ -2437,4 +2437,107 @@ body.dark .max-ai-body {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+@keyframes quest-log-sprite-walk {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: -528px 0;
+    }
+}
+
+.quest-log-sprite-animate {
+    animation: quest-log-sprite-walk 0.25s steps(11) 7;
+}
+
+@keyframes speechBounce {
+    0% {
+        transform: translateY(-50%) scale(0.8) translateX(-10px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-50%) scale(1.05) translateX(2px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50%) scale(1) translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes speechBounceLeft {
+    0% {
+        transform: translateY(-50%) scale(0.8) translateX(10px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-50%) scale(1.05) translateX(-2px);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(-50%) scale(1) translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Quest Log Container Queries */
+.quest-log-container {
+    container-type: inline-size;
+    container-name: quest-layout;
+}
+
+/* Default styles (mobile-first) */
+.quest-main-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1.5rem;
+}
+
+.quest-details {
+    width: 100%;
+}
+
+.quest-sidebar {
+    width: 100%;
+    padding-top: 1rem;
+    position: sticky;
+    align-self: flex-start;
+    z-index: 50;
+    padding-bottom: 0.5rem;
+}
+
+.quest-desktop-nav {
+    display: none;
+}
+
+.quest-mobile-nav {
+    display: block;
+}
+
+/* Container query for wider layouts (640px+) */
+@container quest-layout (min-width: 640px) {
+    .quest-main-content {
+        flex-direction: row;
+        gap: 1.5rem 1.5rem;
+    }
+
+    .quest-details {
+        width: 66.66%;
+        flex-shrink: 0;
+    }
+
+    .quest-sidebar {
+        max-width: 30%;
+        flex-shrink: 0;
+        padding-bottom: 1rem;
+    }
+
+    .quest-desktop-nav {
+        display: block;
+    }
+
+    .quest-mobile-nav {
+        display: none;
+    }
 }

@@ -73,7 +73,7 @@ const ErrorTracking: React.FC<ErrorTrackingProps> = ({ data }) => {
                 title="Error tracking"
                 description="Track and monitor errors and exceptions in your code."
                 buttonText="Installation guide"
-                buttonLink="/docs/error-tracking/installation"
+                buttonLink="/docs/error-tracking/start-here"
                 imageColumnClasses="mt-4 md:-mt-8"
                 imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/error_f2df714c47.png"
                 imageClasses="max-h-48 md:max-h-64"
@@ -90,7 +90,7 @@ const ErrorTracking: React.FC<ErrorTrackingProps> = ({ data }) => {
             <Content />
 
             <div className="">
-                <CallToAction to="/docs/error-tracking/installation" width="full">
+                <CallToAction to="/docs/error-tracking/start-here" width="full">
                     Visit the manual
                 </CallToAction>
             </div>

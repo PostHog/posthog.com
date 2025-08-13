@@ -62,9 +62,9 @@ You can also capture or modify additional properties with the distinct ID, trace
 <MultiLanguage>
 
 ```python
-response = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
+response = client.responses.create(
+    model="gpt-4o-mini",
+    input=[
         {"role": "user", "content": "Tell me a fun fact about hedgehogs"}
     ],
     posthog_distinct_id="user_123", # optional
@@ -78,9 +78,9 @@ print(response.choices[0].message.content)
 ```
 
 ```ts
-const completion = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: "Tell me a fun fact about hedgehogs" }],
+const completion = await openai.responses.create({
+    model: "gpt-4o-mini",
+    input: [{ role: "user", content: "Tell me a fun fact about hedgehogs" }],
     posthogDistinctId: "user_123", // optional
     posthogTraceId: "trace_123", // optional
     posthogProperties: { conversation_id: "abc123", paid: true }, // optional
@@ -94,7 +94,7 @@ console.log(completion.choices[0].message.content)
 </MultiLanguage>
 
 > **Notes:** 
-> - We support the `responses` API in the same way as the `chat.completions` API.
+> - We also support the old `chat.completions` API.
 > - This works with responses where `stream=True`.
 > - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
 

@@ -48,7 +48,7 @@ export const tiers = [
         title: 'Surveys',
         startsAt: (
             <>
-                <strong className="text-sm">$0.2000</strong>
+                <strong className="text-sm">$0.1000</strong>
                 <span className="text-secondary text-[13px]">/response</span>
             </>
         ),
@@ -65,19 +65,17 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
     const unit = billingData?.unit?.replace('survey ', '')
     return (
         <li
-            className={`border-t relative ${
-                isOpen
+            className={`border-t relative ${isOpen
                     ? 'active border-transparent bg-white dark:bg-accent-dark rounded shadow-lg z-10 overflow-hidden -mx-1'
                     : 'inactive border-primary first:border-transparent'
-            }`}
+                }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
-                    isOpen
+                className={`text-left cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
                         ? 'pt-2 pl-2 pr-3 pb-2 z-20'
                         : 'px-2 text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                }`}
+                    }`}
             >
                 <div className="grid grid-cols-12 w-full gap-1 items-center">
                     <div className="col-span-6 md:col-span-5">
@@ -88,9 +86,8 @@ const AccordionItem = ({ isOpen, onClick, onAnimationComplete, Icon, name, color
                                 </div>
                             )}
                             <span
-                                className={`transition-all leading-tight font-bold ${
-                                    isOpen ? 'text-base @5xl:text-base' : 'text-sm @5xl:text-base'
-                                }`}
+                                className={`transition-all leading-tight font-bold ${isOpen ? 'text-base @5xl:text-base' : 'text-sm @5xl:text-base'
+                                    }`}
                             >
                                 {name}
                             </span>

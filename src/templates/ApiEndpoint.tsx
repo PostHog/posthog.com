@@ -29,6 +29,16 @@ const mapVerbsColor = {
     delete: 'red',
 }
 
+// Divider component for visual separation
+const Divider = ({ className = '' }) => (
+    <hr className={`border-0 border-t border-gray-accent-light dark:border-gray-accent-dark my-6 ${className}`} />
+)
+
+// Section divider with more spacing for major sections
+const SectionDivider = ({ className = '' }) => (
+    <hr className={`border-0 border-t-2 border-gray-accent-light dark:border-gray-accent-dark my-8 ${className}`} />
+)
+
 function Endpoints({ paths }) {
     const urlItems = []
     Object.entries(paths).map(([path, value]) => Object.keys(value).map((verb) => urlItems.push(pathID(verb, path))))
@@ -157,7 +167,10 @@ function Params({ params, objects, object, depth = 0 }) {
         <>
             <ul className="list-none pl-0">
                 {params.map((param, index) => (
-                    <li key={index} className="py-1  first:border-0">
+                    <li
+                        key={index}
+                        className="py-3 border-b border-gray-accent-light dark:border-gray-accent-dark first:border-0 last:border-0"
+                    >
                         <div className="grid" style={{ gridTemplateColumns: '40% 60%' }}>
                             <div className="flex flex-col">
                                 <span className="font-code font-semibold text-[13px] leading-7">{param.name}</span>
@@ -201,7 +214,7 @@ function Params({ params, objects, object, depth = 0 }) {
                                                         xmlns="http://www.w3.org/2000/svg"
                                                     >
                                                         <title>Click to open</title>
-                                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.08 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
+                                                        <path d="M2.336 4.192c1.08 0 1.872-.792 1.872-1.848S3.416.496 2.336.496C1.28.496.464 1.288.464 2.344s.816 1.848 1.872 1.848ZM7.84 4.192c1.08 0 1.871-.792 1.871-1.848S8.92.496 7.84.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848ZM13.342 4.192c1.80 0 1.872-.792 1.872-1.848S14.422.496 13.342.496c-1.056 0-1.872.792-1.872 1.848s.816 1.848 1.872 1.848Z" />
                                                     </svg>
                                                 </div>
                                             </>
@@ -277,6 +290,7 @@ function Parameters({ item, objects }) {
                 <div>
                     <h4>Path parameters</h4>
                     <Params params={pathParams} objects={objects} />
+                    {queryParams?.length > 0 && <Divider />}
                 </div>
             )}
             {queryParams?.length > 0 && (
@@ -350,17 +364,20 @@ function ResponseBody({ item, objects }) {
                 </button>
                 <br />
                 {showResponse && (
-                    <Params
-                        params={Object.entries(object.properties)
-                            .map(([name, schema]) => {
-                                return {
-                                    name,
-                                    schema,
-                                }
-                            })
-                            .filter((item) => !item.schema.readOnly)}
-                        objects={objects}
-                    />
+                    <>
+                        <Divider className="my-4" />
+                        <Params
+                            params={Object.entries(object.properties)
+                                .map(([name, schema]) => {
+                                    return {
+                                        name,
+                                        schema,
+                                    }
+                                })
+                                .filter((item) => !item.schema.readOnly)}
+                            objects={objects}
+                        />
+                    </>
                 )}
             </div>
         </>
@@ -408,9 +425,8 @@ function RequestExample({ name, item, objects, exampleLanguage, setExampleLangua
             language: 'bash',
             code: `
             export POSTHOG_PERSONAL_API_KEY=[your personal api key]
-curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${
-                item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
-            }\\
+curl ${item.httpVerb === 'delete' ? ' -X DELETE ' : item.httpVerb == 'patch' ? '-X PATCH ' : ''}${item.httpVerb === 'post' ? "\n    -H 'Content-Type: application/json'" : ''
+                }\\
     -H "Authorization: Bearer $POSTHOG_PERSONAL_API_KEY" \\
     <ph_app_host>${path}${params.map((item) => `\\\n\t-d ${item[0]}=${JSON.stringify(item[1])}`)}
             `,
@@ -423,21 +439,19 @@ api_key = "[your personal api key]"
 project_id = "[your project id]"
 response = requests.${item.httpVerb}(
     "<ph_app_host>${item.pathName.replace('{id}', `{${object}_id}`)}".format(
-        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${
-                additionalPathParams.length > 0
+        project_id=project_id${item.pathName.includes('{id}') ? `,\n\t\t${object}_id="<the ${object_noun} id>"` : ''}${additionalPathParams.length > 0
                     ? additionalPathParams.map(
-                          (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
-                      )
+                        (param) => `,\n\t\t${param.name}="<the ${param.name.replaceAll('_', ' ')}>"`
+                    )
                     : ''
-            }
+                }
     ),
-    headers={"Authorization": "Bearer {}".format(api_key)},${
-        params.length > 0
-            ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
-                  .replaceAll('\n', '\n\t')
-                  .replace('\n}', '\n\t}')}`
-            : ''
-    }
+    headers={"Authorization": "Bearer {}".format(api_key)},${params.length > 0
+                    ? `\n\tdata=${JSON.stringify(Object.fromEntries(params), null, '\t')
+                        .replaceAll('\n', '\n\t')
+                        .replace('\n}', '\n\t}')}`
+                    : ''
+                }
 )${item.httpVerb !== 'delete' ? '.json()' : ''}
             `,
         },

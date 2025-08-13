@@ -251,7 +251,7 @@ const PricingHero = ({ activePlan, setActivePlan }: PricingHeroProps): JSX.Eleme
                     />
                     <FreeTierItem
                         name="Surveys"
-                        allocation="250 responses"
+                        allocation="1500 responses"
                         icon={<Icons.IconMessage className="text-red size-5" />}
                     />
                     <FreeTierItem

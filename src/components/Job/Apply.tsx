@@ -119,6 +119,32 @@ const components = {
             </div>
         )
     },
+    boolean: ({ title, required, path }: IResumeComponentProps) => (
+        <div className="flex space-x-4">
+            <label className="flex items-center space-x-2">
+                <input
+                    data-path={path}
+                    type="radio"
+                    name={title}
+                    value={true}
+                    className="w-4 h-4"
+                    required={required}
+                />
+                <span>Yes</span>
+            </label>
+            <label className="flex items-center space-x-2">
+                <input
+                    data-path={path}
+                    type="radio"
+                    name={title}
+                    value={false}
+                    className="w-4 h-4"
+                    required={required}
+                />
+                <span>No</span>
+            </label>
+        </div>
+    ),
 }
 
 const Form = ({ setSubmitted, info, id }) => {
@@ -170,7 +196,10 @@ const Form = ({ setSubmitted, info, id }) => {
                             return (
                                 <div
                                     className={
-                                        type === 'string' || type === 'email' || type === 'valueselect'
+                                        type === 'string' ||
+                                        type === 'email' ||
+                                        type === 'valueselect' ||
+                                        type === 'boolean'
                                             ? 'sm:col-span-1 col-span-2 flex flex-col'
                                             : 'col-span-2'
                                     }

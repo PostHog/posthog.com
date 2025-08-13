@@ -28,7 +28,8 @@ We are all-remote, but we have a few limitations on the countries we are able to
 
 - We hire within -8 to +2 GMT timezones. Beyond these, it proves too difficult for us to collaborate effectively. We do hire in GMT +2 countries that shift to GMT +3 for daylight saving time only (e.g. Bulgaria, Greece). 
 - Due to US sanctions, we can't hire folks in Cuba, Iran, North Korea, or Syria. 
-- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs. In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk.
+- We don't currently employ people via EOR in France, Italy, Sweden, Switzerland, Iceland, Belgium, Luxembourg, Uruguay, Bolivia, or Brazil, mainly due to the very high employer costs.
+  - In some of these countries we _may_ consider hiring as a contractor, provided there is no misclassification risk. We have done this before successfully in Brazil and Uruguay.
 - We have an entity in Germany, which allows us to hire people directly. However, due to employment restrictions with companies with over 10 people, we have reached the total number of employees that we will hire here, so we will no longer be hiring in Germany and no current team member will be able to relocate to Germany.
 
 ## Hiring Process         
@@ -63,7 +64,7 @@ If you are a hiring manager for a role, you will usually:
 
 The People & Ops team will then write up the full job description in Ashby.
 
-We frequently iterate on our specs, but we have a [template for a product engineer](https://github.com/PostHog/company-internal/blob/7c9c4552d26612a1241b7e6e6d5b05559b672771/recruiting/product-engineer-job-template.md) role that you can use as a starting point. Generally, the "About PostHog" and "Things we care about" sections should be used in all ads, and you can adapt the other sections to your specific requirements.
+We frequently iterate on our specs, but we have a <PrivateLink url="https://github.com/PostHog/company-internal/blob/7c9c4552d26612a1241b7e6e6d5b05559b672771/recruiting/product-engineer-job-template.md">template for a product engineer</PrivateLink> role that you can use as a starting point. Generally, the "About PostHog" and "Things we care about" sections should be used in all ads, and you can adapt the other sections to your specific requirements.
 
 We find the following approaches work well:
 
@@ -128,6 +129,8 @@ Refer someone you know on the <PrivateLink url="https://app.ashbyhq.com/referral
 If you have other referrals in your network (e.g. 2nd degree connections), who have either applied or might be relevant for us to reach out to, this also counts as a social referral.
 
 The referral bonus for social referrals is $500, and we again match any amount you choose to give this to charity.  
+
+> You will sometimes get people emailing or messaging you on LinkedIn asking to chat about a role or get referred in. If you don't know them, you can point them back to our [careers page](/careers), or just ignore them. We get dozens of these kinds of messages every day, so don't feel bad about not engaging! If they are asking for advice, you can point them to [this article](/newsletter/how-to-get-job-startup).
 
 #### Referral payouts
 

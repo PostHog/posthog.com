@@ -35,6 +35,46 @@ import { useState } from 'react'
 import SidebarSection from 'components/PostLayout/SidebarSection'
 import Contributor from 'components/Docs/Contributors'
 
+function parseStepsFromMDX(mdxString: string) {
+    const steps = []
+    let stepNumber = 1
+
+    // Find all Step components with their props
+    const stepRegex = /mdx\(Step,\s*\{([^}]*)\}/g
+    let match
+
+    while ((match = stepRegex.exec(mdxString)) !== null) {
+        const propsString = match[1]
+
+        // Extract title
+        const titleMatch = propsString.match(/\btitle:\s*["'](.*?)["']/)
+        if (!titleMatch) continue
+
+        const title = titleMatch[1]
+
+        // Check if checkpoint prop is present
+        const hasCheckpoint = /\bcheckpoint\b/.test(propsString)
+
+        const url = title
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/^-+|-+$/g, '')
+
+        steps.push({
+            depth: 0,
+            value: hasCheckpoint ? `Checkpoint: ${title}` : `Step ${stepNumber}: ${title}`,
+            url: url,
+        })
+
+        // Only increment step number for non-checkpoint steps
+        if (!hasCheckpoint) {
+            stepNumber++
+        }
+    }
+
+    return steps
+}
+
 const DestinationsLibraryCallout = () => {
     return (
         <div className="p-4 mb-4 rounded-md border bg-accent dark:bg-accent-dark border-border dark:border-dark">
@@ -170,34 +210,34 @@ export const HandbookSidebar = ({ contributors, title, location, availability, r
 
 type AppParametersProps = {
     config:
-        | {
-              key: string
-              name: string | null
-              required: boolean | null
-              type: string | null
-              hint: string | null
-              description: string | null
-          }[]
-        | null
+    | {
+        key: string
+        name: string | null
+        required: boolean | null
+        type: string | null
+        hint: string | null
+        description: string | null
+    }[]
+    | null
 }
 
 type TemplateParametersProps =
     | {
-          templateId: string
-          name: string
-          type: string
-          inputs_schema:
-              | {
-                    key: string
-                    type: string | null
-                    label: string | null
-                    description: string | null
-                    default?: string | null
-                    secret?: boolean | null
-                    required?: boolean | null
-                }[]
-              | null
-      }[]
+        templateId: string
+        name: string
+        type: string
+        inputs_schema:
+        | {
+            key: string
+            type: string | null
+            label: string | null
+            description: string | null
+            default?: string | null
+            secret?: boolean | null
+            required?: boolean | null
+        }[]
+        | null
+    }[]
     | null
 
 export const AppParametersFactory: (params: AppParametersProps) => React.FC = ({ config }) => {
@@ -430,6 +470,7 @@ export const query = graphql`
                 hideLastUpdated
                 github
                 isArticle
+                showStepsToc
                 features {
                     eventCapture
                     userIdentification

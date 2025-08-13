@@ -740,16 +740,32 @@ export const handbookSidebar = [
                 ],
             },
             {
+                name: 'Video',
+                url: '/handbook/growth/marketing/video',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/growth/marketing/video',
+                    },
+                    {
+                        name: 'YouTube',
+                        url: '/handbook/content/youtube',
+                    },
+                ],
+            },
+            {
                 name: 'Newsletter',
                 url: '/handbook/content/newsletter',
-            },
-            {
-                name: 'Newsletter ads',
-                url: '/handbook/content/newsletter-ads',
-            },
-            {
-                name: 'YouTube',
-                url: '/handbook/content/youtube',
+                children: [
+                    {
+                        name: 'Overview',
+                        url: '/handbook/content/newsletter',
+                    },
+                    {
+                        name: 'Newsletter ads',
+                        url: '/handbook/content/newsletter-ads',
+                    },
+                ],
             },
             {
                 name: 'Writing for PostHog',
@@ -823,6 +839,10 @@ export const handbookSidebar = [
                     {
                         name: 'Writing docs (as an engineer)',
                         url: '/handbook/engineering/writing-docs',
+                    },
+                    {
+                        name: 'Working with data warehouse',
+                        url: '/handbook/engineering/data-warehouse',
                     },
                 ],
             },
@@ -1053,24 +1073,26 @@ export const handbookSidebar = [
                 url: '/handbook/growth/marketing',
             },
             {
-                name: 'Marketing ownership',
+                name: 'Who can help me?',
                 url: '/handbook/growth/marketing/ownership',
             },
             {
-                name: 'How we do video at PostHog',
-                url: '/handbook/growth/marketing/video',
-            },
-            {
-                name: 'Sponsorships',
+                name: 'Other',
                 url: '/handbook/growth/marketing/open-source-sponsorship',
-            },
-            {
-                name: 'ICP scoring',
-                url: '/handbook/growth/marketing/icp',
-            },
-            {
-                name: 'Dashboard templates',
-                url: '/handbook/growth/marketing/templates',
+                children: [
+                    {
+                        name: 'Sponsorships',
+                        url: '/handbook/growth/marketing/open-source-sponsorship',
+                    },
+                    {
+                        name: 'ICP scoring',
+                        url: '/handbook/growth/marketing/icp',
+                    },
+                    {
+                        name: 'Dashboard templates',
+                        url: '/handbook/growth/marketing/templates',
+                    },
+                ],
             },
         ],
     },
@@ -1161,6 +1183,10 @@ export const handbookSidebar = [
                     {
                         name: 'Managing small teams',
                         url: '/handbook/engineering/posthog-com/small-teams',
+                    },
+                    {
+                        name: 'Adding a team member',
+                        url: '/handbook/engineering/posthog-com/add-team-member',
                     },
                     {
                         name: 'Managing the company roadmap',
@@ -1302,8 +1328,8 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/onboarding-team',
                     },
                     {
-                        name: 'New starter onboarding',
-                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                        name: 'Getting started with newly assigned customers',
+                        url: '/handbook/cs-and-onboarding/newly-assigned-customer',
                     },
                     {
                         name: 'Saying hi to your customers',
@@ -1314,12 +1340,28 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/getting-to-know-your-customers',
                     },
                     {
+                        name: 'Template for onboarding success plan',
+                        url: '/handbook/cs-and-onboarding/onboarding-success-plan',
+                    },
+                    {
+                        name: 'Renewals',
+                        url: '/handbook/cs-and-onboarding/renewals',
+                    },
+                    {
+                        name: 'New starter onboarding',
+                        url: '/handbook/cs-and-onboarding/new-hire-onboarding',
+                    },
+                    {
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
                     {
-                        name: 'Template for onboarding success plan',
-                        url: '/handbook/cs-and-onboarding/onboarding-success-plan',
+                        name: 'How we use automation',
+                        url: '/handbook/cs-and-onboarding/how-we-use-automation',
+                    },
+                    {
+                        name: 'How we upsell and cross-sell',
+                        url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
                     },
                 ],
             },
@@ -1533,7 +1575,6 @@ export const communityMenu = {
                     url: '/tutorials/categories/filters',
                     children: [
                         { name: 'Filters', url: '/tutorials/categories/filters' },
-                        { name: 'Sentry', url: '/tutorials/categories/sentry' },
                         { name: 'Zapier', url: '/tutorials/categories/zapier' },
                     ],
                 },
@@ -1718,8 +1759,16 @@ export const companyMenu = {
                     url: '/teams/cs-onboarding',
                 },
                 {
+                    name: 'Demand Gen',
+                    url: '/teams/demand-gen',
+                },
+                {
                     name: 'Exec',
                     url: '/teams/exec',
+                },
+                {
+                    name: 'Onboarding',
+                    url: '/teams/onboarding',
                 },
                 {
                     name: 'People & Ops',
@@ -2058,10 +2107,6 @@ export const docsMenu = {
                             url: '/docs/libraries/segment',
                         },
                         {
-                            name: 'Sentry',
-                            url: '/docs/libraries/sentry',
-                        },
-                        {
                             name: 'Shopify',
                             url: '/docs/libraries/shopify',
                         },
@@ -2372,10 +2417,6 @@ export const docsMenu = {
                             url: '/docs/data/sessions',
                         },
                         {
-                            name: 'Annotations',
-                            url: '/docs/data/annotations',
-                        },
-                        {
                             name: 'Data management',
                             url: '/docs/data',
                         },
@@ -2400,6 +2441,14 @@ export const docsMenu = {
                                     url: '/docs/data/utm-segmentation',
                                 },
                             ],
+                        },
+                        {
+                            name: 'Annotations',
+                            url: '/docs/data/annotations',
+                        },
+                        {
+                            name: 'Replay comments',
+                            url: '/docs/data/comments',
                         },
                     ],
                 },
@@ -2695,6 +2744,10 @@ export const docsMenu = {
                             url: '/docs/billing/annual-plans',
                         },
                         {
+                            name: 'Spike detection',
+                            url: '/docs/billing/spike-detection',
+                        },
+                        {
                             name: 'Common questions about billing',
                             url: '/docs/billing/common-questions',
                         },
@@ -2915,6 +2968,10 @@ export const docsMenu = {
                         {
                             name: 'Formulas',
                             url: '/docs/product-analytics/trends/formulas',
+                        },
+                        {
+                            name: 'Statistical analysis',
+                            url: '/docs/product-analytics/trends/statistical-analysis',
                         },
                         {
                             name: 'Tips',
@@ -3532,17 +3589,126 @@ export const docsMenu = {
                     color: 'seagreen',
                 },
                 {
+                    name: 'Getting started',
+                },
+                {
+                    name: 'Start here',
+                    url: '/docs/error-tracking/start-here',
+                    icon: 'IconListCheck',
+                    featured: true,
+                    color: 'orange',
+                },
+                {
                     name: 'Installation',
                     url: '/docs/error-tracking/installation',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/installation',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/error-tracking/installation/web',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/error-tracking/installation/nextjs',
+                        },
+                        {
+                            name: 'Python',
+                            url: '/docs/error-tracking/installation/python',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/error-tracking/installation/node',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/error-tracking/installation/react',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/error-tracking/installation/angular',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/error-tracking/installation/nuxt',
+                        },
+                        {
+                            name: 'SvelteKit',
+                            url: '/docs/error-tracking/installation/svelte',
+                        },
+                        {
+                            name: 'Hono',
+                            url: '/docs/error-tracking/installation/hono',
+                        },
+                        {
+                            name: 'Manual/API',
+                            url: '/docs/error-tracking/installation/manual',
+                        },
+                    ],
+                },
+                {
+                    name: 'Upload source maps',
+                    url: '/docs/error-tracking/upload-source-maps',
+                    icon: 'IconCode',
+                    color: 'green',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/upload-source-maps',
+                        },
+                        {
+                            name: 'Next.js',
+                            url: '/docs/error-tracking/upload-source-maps/nextjs',
+                        },
+                        {
+                            name: 'Nuxt',
+                            url: '/docs/error-tracking/upload-source-maps/nuxt',
+                        },
+                        {
+                            name: 'React',
+                            url: '/docs/error-tracking/upload-source-maps/react',
+                        },
+                        {
+                            name: 'Angular',
+                            url: '/docs/error-tracking/upload-source-maps/angular',
+                        },
+                        {
+                            name: 'Web',
+                            url: '/docs/error-tracking/upload-source-maps/web',
+                        },
+                        {
+                            name: 'Node.js',
+                            url: '/docs/error-tracking/upload-source-maps/node',
+                        },
+                        {
+                            name: 'CLI',
+                            url: '/docs/error-tracking/upload-source-maps/cli',
+                        },
+                    ],
+                },
+                {
+                    name: 'Concepts',
+                },
+                {
+                    name: 'Issues',
+                    url: '/docs/error-tracking/issues',
+                    icon: 'IconWarning',
+                    color: 'yellow',
                 },
                 {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
                     color: 'purple',
+                },
+                {
+                    name: 'Guides',
                 },
                 {
                     name: 'Monitor issues',
@@ -3558,10 +3724,13 @@ export const docsMenu = {
                     color: 'green',
                 },
                 {
-                    name: 'Alerts',
+                    name: 'Set up alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                },
+                {
+                    name: 'Resources',
                 },
                 {
                     name: 'Cutting costs',

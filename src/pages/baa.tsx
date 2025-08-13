@@ -366,6 +366,9 @@ function BAAGenerator() {
                             and that you have the authority to bind Customer to this BAA.
                         </p>
                         <p>
+                           This BAA is only available to customers on the Teams Plan, as defined below, and is effective only if the Customer has the required add-on in place at the time of signing. By signing this BAA, the Customer represents and warrants that they meet the requirements of the Teams Plan. This BAA shall be null, void, and of no effect if the Customer does not meet those requirements at the time of signing, regardless of whether this BAA has been electronically executed.
+                        </p>
+                        <p>
                             This BAA applies only to PostHog's processing of PHI for Customer in Customer's capacity as
                             a Covered Entity or Business Associate.
                         </p>

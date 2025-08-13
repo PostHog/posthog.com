@@ -24,7 +24,7 @@ flowchart TD
     diehard --> B["Do you expect to ingest more than 300k events, 1k recordings, 300k /flags API calls into the instance?"]
     worried --> events["Will you have more than 1M events, 5k recordings etc per month?"]
     events -- No --> cloud_free["`PostHog Cloud is free for 1M events, 
-5k recordings, 250 surveys, 
+5k recordings, 1500 survey responses, 
 and more every single month. 
 See posthog.com/pricing for more.`"]
     cloud_free --> better_cloud["You'll probably be better off with PostHog Cloud"]
