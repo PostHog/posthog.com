@@ -29,7 +29,7 @@ We want someone who can own technical problems and even if they don't have the a
 
 A great litmus test for a candidate is if they are comfortable instrumenting PostHog and can speak to how they actually implement it on a site. That's typically a good indicator that they've got the right technical prowess.
 
-We want someone who is in it develop customers for the long run, we don't want someone who is here for quick churn and burn to pump up quota attainment. Building a relationship with a product engineer requires actually knowing PostHog, not just knowing *about* PostHog.
+We want someone who is in it to develop customers for the long run, we don't want someone who is here for quick churn and burn to pump up quota attainment. Building a relationship with a product engineer requires actually knowing PostHog, not just knowing *about* PostHog.
 
 Ultimately, we want someone who we'd want to buy from.
 
