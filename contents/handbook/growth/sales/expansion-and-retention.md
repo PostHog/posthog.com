@@ -88,7 +88,7 @@ You can use these signals alongside regular customer interactions to prioritize 
 ### How to run a cross-sell process
 
 - First you need to find out who cares about the problem that our other products solve - is it the existing team or the new team?
-  - Use a tool like [The Org](https://theorg.com/) or [Chartloop](https://www.chartloop.com/#) to help you identify new people. 
+  - Use a tool like [The Org](https://theorg.com/) to help you identify new people. 
 - Then you need to find out what are they using now to solve the problem (if anything) - surface this during the check in calls that you already have scheduled as part of onboarding if it's the existing team. If you're talking a new team, you'll effectively run this as a [new sales process](/handbook/growth/sales/new-sales). 
 - Your approach will depend on the product that makes sense here:
   - If it's already a mature product we have shipped, you should aim to show how the product complements what they _already_ are using in PostHog - don't just arbitrarily sell in a product for the sake of it. For example, you can say ‘other customers that look like you are doing X, this is what we’re seeing’.
