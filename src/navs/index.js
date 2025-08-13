@@ -1289,6 +1289,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/outbound-sales',
                     },
                     {
+                        name: 'How to do discovery',
+                        url: '/handbook/growth/sales/how-to-do-discovery',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                         children: [
