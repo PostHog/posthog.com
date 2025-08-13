@@ -4,7 +4,7 @@ date: 2025-08-05
 author:
  - ian-vanagas
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/cdp_vs_dw_06a0b878d6.png
+  https://res.cloudinary.com/dmukukwp6/image/upload/cdp_vs_dw_06a0b878d6.png
 featuredImageType: full
 tags:
  - data warehouse
