@@ -465,25 +465,30 @@ export const ProductLLMObservability = () => {
                 <section className="mb-20 px-5">
                     <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
                         <div className="mb-8">
-                            <h2 className="text-4xl">A tool so good we use it ourselves</h2>
+                            <h2 className="text-4xl">
+                                We didn't just build LLM observability. <br />
+                                We also use it to build our own AI tools.
+                            </h2>
                             <p className="text-lg mb-4">
-                                Understanding your AI's performance is crucial for building better products. With
-                                comprehensive observability, you can identify bottlenecks, optimize costs, and ensure
-                                your users get the best possible experience.
+                                When we started building Max AI, our in-app AI product manager, we knew we needed a way
+                                to understand how people interacted with it and how much it cost. Over time, we also
+                                needed a way to track the performance of the AI models we used, especially when we
+                                started adding features like deep research mode.
                             </p>
                             <p className="text-lg">
-                                Our platform provides real-time insights into every aspect of your LLM operations, from
-                                individual user interactions to system-wide performance metrics. This visibility helps
-                                you make data-driven decisions about your AI infrastructure and user experience.
+                                Some of this, we could do with product analytics - but we quickly realised that a
+                                bespoke tool would give us more flexibility and detail. So, we built LLM observability
+                                to solve these challenges. We've been using it ever since, adding all the features we
+                                need to ship a world-class AI assistant.
                             </p>
                         </div>
 
                         <div className="flex flex-col md:flex-row items-start gap-8">
                             <div className="flex-1 text-center md:text-left">
-                                <blockquote className="text-lg md:text-xl font-medium mb-4">
-                                    "The insights we've gained from PostHog's LLM observability have been game-changing.
-                                    We can now track exactly how our AI features perform for each user and optimize
-                                    accordingly. It's like having a microscope for our AI operations."
+                                <blockquote className="text-lg md:text-xl font-medium mb-4 bg-highlight p-0.5">
+                                    "We use LLM observability daily to understand how people are using Max AI. It was
+                                    especially helpful for tracking costs during our beta period, so we could establish
+                                    what sustainable pricing would be."
                                 </blockquote>
                                 <div className="flex items-center gap-4 justify-center md:justify-start">
                                     <div className="flex-shrink-0">
