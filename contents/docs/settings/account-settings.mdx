@@ -20,7 +20,15 @@ You can update your email and name in [your account settings](https://us.posthog
 
 ## Updaing password
 
-You can update your password in [your account settings](https://us.posthog.com/settings/user#change-password) under the **Change password** section. 
+You can update your password in [your account settings](https://us.posthog.com/settings/user#change-password) under the **Change password** section.
+
+## Password requirements
+
+PostHog enforces the following password requirements for users:
+- 8 character minimum length
+- We enforce complexity through [zxcvbn](https://github.com/dropbox/zxcvbn) with a minimum score of 3 ("safely unguessable")
+- We do not expire passwords, following NIST's guidance on password expiration
+- We lock out for 10 min after 30 failed attempts
 
 ## Enabling 2FA
 
