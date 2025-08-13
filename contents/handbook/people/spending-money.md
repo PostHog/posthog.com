@@ -98,7 +98,7 @@ If you are in the US only, when buying something at Apple we can get 3% cashback
 
 Also, Amazon regularly offer discounts on Apple products of around 10%, so always worth a check before buying direct from Apple. If you buy from Apple, you may be asked if you wanted to purchase Apple Care - please don't buy this as it's not great value for money.
 
-> You can request a budget to buy a new laptop if your laptop is over 4 years old or significantly impacting your productivity - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc. We recommend wiping + reinstalling a minimum set of apps to verify this. 
+> You can request a budget to buy a new laptop if your laptop is over 4 years old or significantly impacting your productivity - you can do this in Brex. We do ask that you do some diligence to make sure it's not a setup issue though - ie other applications aren't hogging the memory, etc.
 >
 > If you are having issues with your laptop before your laptop is old enough and a genuine exception needs to be made, drop a note in the #team-people-and-ops channel. 
 
