@@ -26,7 +26,7 @@ PostHog attempts to group similar exceptions into issues automatically. If you w
 
 Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog, which is used to group similar exception events into issues. You can also set fingerprints manually during client-side capture.
 
-An `$exception_fingerprint` property is generated during ingestion by PostHog and used to perform this grouping. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
+PostHog generates a fingerprint based on the exception during ingestion. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
 
 When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the functions second argument.
 
