@@ -8,7 +8,7 @@ showTitle: true
 
 ###  The discovery mindset
 
-Discovery isn’t walking through every PostHog feature. It’s having real conversations to figure out if PostHog makes sense for them. Learn their problems, see how they solve things today, and find the people who’ll get excited enough to bring us in.
+Discovery isn’t walking through every PostHog feature. It’s having real conversations with customers to figure out if PostHog will be a good fit for them. Learn their problems, see how they solve things today, and find the people who’ll get excited enough to bring us in.
 
 This is meant to be a guide, not a rule-set. Each person has their own unique style. The goal here is to surface the right insights, by providing a framework for how to go about _asking the right questions_ vs. a talk-track for how to run discussions with customers. 
   
@@ -125,7 +125,7 @@ A key component of discovery is qualifying customers to ensure they are a good f
 - **Startup program** - We have a special program designed for [startups](handbook/brand/startups) interested in PostHog.
 - **Requesting a BAA/DPA** - We built both a BAA and DPA generator where customers can self-serve. If a customer wants to [vary any terms](handbook/growth/sales/contract-rules#varying-terms), we can review changes to our terms if the contract is above <$20k/year.
 - **No engineering resources** - There is some coding required for a tool like PostHog and customers will need some engineering support to be successful.
-- **Strict compliance constraints** - A customer may ask for a niche [security or privacy](/handbook/company/security) certification that we currently don't support.
+- **Strict compliance constraints** - A customer may ask for a niche [security or privacy](/handbook/company/security) certification that we currently don't have.
 - **Need self-hosted** - PostHog does have an open source [self-hosted](/self-host/open-source/disclaimer) product, but we currently don't offer any support for it. 
 
 ## Identifying your champion
@@ -158,7 +158,7 @@ Champions aren't just customers you're friendly with - they're people who will a
 - "What questions should I be asking that I haven't asked yet?"
 - "If you were me, how would you go about positioning PostHog?"
 - "What's the best way to position this to [insert stakeholder here]"
-- "How can I help you build your case for PostHog?"
+- "How can I help you build your internal case for PostHog?"
 
 While you should start identifying potential champions early in the process, building these relationships is an ongoing effort during the sales process. 
 
