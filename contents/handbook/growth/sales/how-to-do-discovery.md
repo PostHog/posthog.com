@@ -1,6 +1,12 @@
+---
+title: How to do discovery at PostHog
+sidebar: Handbook
+showTitle: true
+---
+
 # How to do discovery at PostHog 
 
-## The discovery mindset
+###  The discovery mindset
 
 Discovery isn’t walking through every PostHog feature. It’s having real conversations to figure out if PostHog makes sense for them. Learn their problems, see how they solve things today, and find the people who’ll get excited enough to bring us in.
 
