@@ -19,15 +19,12 @@ We issue refunds or credits in this category if this is the first bill >$1 and/o
 ### Under Attack
 Bot spike/abusive user drove traffic which in turn increased posthog usage
 
+We flag accounts with unusual activity spikes for review, and refund or issue credits to cover the overage amount once the issue has been resolved. The issued amount covers any amount exceeding the average usage of the three months preceding the spike.
+
 ### Wrong Setup
 New feature trial with incorrect configuration
 
 We issue refunds or credits in this category if the customer was charged for features they didn't intend to use due to default settings or configuration errors, and this is the first occurrence of unintended usage charges.
-
-### Unnecessarily subscribed to an add-on
-The customer was unknowingly and/or unnecessarily subscribed to an add-on e.g. paying for data pipelines and only using the free-tier Slack destination
-
-We flag accounts with unusual activity spikes for review, and refund or issue credits to cover the overage amount once the issue has been resolved. The issued amount covers any amount exceeding the average usage of the three months preceding the spike.
 
 ## Eligibility Criteria
 Customer must meet the following criteria to get a refund:
