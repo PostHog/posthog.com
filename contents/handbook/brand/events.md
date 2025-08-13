@@ -68,9 +68,9 @@ We support community events in a handful of ways.
 
   - Corporate speak aficionados spewing tedious enterprise marketing nonsense
   - People LARPing (live action role-playing) as executives
-  - Loudest person pretending to who know more than they do
+  - Loudest person pretending to know more than they do
 
-**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the  purpose of the event. Otherwise, [we](founders) [have](founders/product-market-fit-game) [plenty](handbook) [of](about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](questions) [inspiration](docs).
+**Content:** If your speaker(s) are unsure of what to talk about, consider going back to the purpose of the event. Otherwise, [we](founders) [have](founders/product-market-fit-game) [plenty](handbook) [of](about) [material](https://newsletter.posthog.com/) [for](https://www.youtube.com/channel/UCn4mJ4kK5KVSvozJre645LA) [your](questions) [inspiration](docs).
 
 **Merch:** We use the [store](merch) [processes](handbook/company/merch-store) to handle distribution of PostHog-branded merch. We tend to be generous with merch for community events. Outline what you had in mind in the issue.
 
