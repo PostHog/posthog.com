@@ -345,7 +345,7 @@ export default function CDP(): JSX.Element {
                 image={`images/og/cdp.jpg`}
             />
             <Editor
-                title="pipelines"
+                // title="pipelines"
                 type="mdx"
                 slug="/cdp"
                 onSearchChange={(query) => setSearchQuery(query)}
@@ -359,9 +359,10 @@ export default function CDP(): JSX.Element {
                         Ingest, transform, and send data between hundreds of tools
                     </h2>
                     <p>
-                        PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with
-                        event data, and export to other products. Any event or action in PostHog can update user records
-                        or trigger workflows in other products in your stack.
+                        PostHog's customer data infrastructure (or you can call it our CDP or customer data platform)
+                        makes it easy to import data from a warehouse, sync with event data, and export to other
+                        products. Any event or action in PostHog can update user records or trigger workflows in other
+                        products in your stack.
                     </p>
                     <OSTable columns={columns} rows={rows} editable={false} />
                 </ScrollArea>

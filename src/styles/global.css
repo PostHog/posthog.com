@@ -2437,6 +2437,8 @@ body.dark .max-ai-body {
     overflow: hidden;
     clip: rect(0, 0, 0, 0);
     border: 0;
+}
+
 @keyframes quest-log-sprite-walk {
     0% {
         background-position: 0 0;

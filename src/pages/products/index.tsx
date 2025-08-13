@@ -320,7 +320,14 @@ export default function Products(): JSX.Element {
                     // Custom product order by category - if not specified, products will be sorted alphabetically
                     const productOrder: Record<string, string[]> = {
                         ai: ['ai', 'max', 'raquel', 'annika', 'marius'],
-                        data: ['cdp-manifesto.md', 'cdp', 'data-warehouse', 'sql', 'capture_api', 'webhooks'],
+                        data: [
+                            'customer-data-infrastructure',
+                            'cdp',
+                            'data-warehouse',
+                            'sql',
+                            'capture_api',
+                            'webhooks',
+                        ],
                         analytics: [
                             'bi',
                             'web-analytics',

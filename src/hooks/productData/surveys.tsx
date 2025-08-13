@@ -32,11 +32,11 @@ export const surveys = {
         classes: 'absolute bottom-0 right-0 max-w-md',
     },
     slider: {
-        marks: [250, 2000, 15000, 100000],
-        min: 250,
+        marks: [1500, 5000, 20000, 100000],
+        min: 1500,
         max: 100000,
     },
-    volume: 250,
+    volume: 1500,
     customers: {
         purplewave: {
             headline: 'reached a 25% response rate with surveys',
