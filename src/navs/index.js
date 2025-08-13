@@ -1730,6 +1730,10 @@ export const companyMenu = {
                     url: '/teams/platform',
                 },
                 {
+                    name: 'Platform UX',
+                    url: '/teams/platform-ux',
+                },
+                {
                     name: 'Product Analytics',
                     url: '/teams/product-analytics',
                 },
