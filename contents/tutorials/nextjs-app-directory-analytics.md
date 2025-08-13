@@ -19,7 +19,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox type="info" title="Looking for the pages router?">
 
-    If you use Next.js with the **pages** router, check out our other [Next.js pages router analytics tutorial](/tutorials/nextjs-analytics).
+  If you use Next.js with the **pages** router, check out our other [Next.js pages router analytics tutorial](/tutorials/nextjs-analytics).
     
 </CalloutBox>
 
