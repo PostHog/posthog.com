@@ -217,7 +217,7 @@ NEXTAUTH_SECRET=<random_32_character_string>
 
 ### Setting up sessions
 
-With NextAuth and GitHub set up, we now have the infrastructure to authenticate users. Now, we can implement user sessions to let them log in and out as well as get their details. 
+With NextAuth and GitHub set up, we have the infrastructure to authenticate users. Now, we can implement user sessions to let them log in and out as well as get their details. 
 
 The first step to doing this is adding a `SessionProvider` from `next-auth/react` to `_app.js` like this:
 
