@@ -8,6 +8,13 @@ This page introduces the concept of issues and exceptions, how they fit into the
 
 Errors are initially captured as individual `$exception` events. Like other [events](/docs/data/events) in PostHog, they contain properties that you can use to filter and group them. You can also use them to create insights, filter recordings, trigger surveys, and more. 
 
+<ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250813_qnwq_6fafacc8d6.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250813_qobb_f5df0a8629.png"
+    alt="Exception events"
+    classes="rounded"
+/>
+
 You can expect the following properties to be present in the exception events (in addition to the [standard event properties](/docs/data/events#default-properties)):
 
 import ExceptionPropertiesTable from './_snippets/exception-properties-table.mdx'
@@ -34,11 +41,11 @@ When working in the context of error tracking, PostHog [groups similar exception
 - [Connect the issue to an external tracking system like GitHub issues or Linear](/docs/error-tracking/external-tracking)
 - [View session replays to help root cause the issue](/docs/error-tracking/monitoring#viewing-session-replays)
 
-## How are issues grouped?
+## How exceptions are grouped into issues
 
-PostHog attempts to group similar issues automatically by their exception type, exception message, and [stack traces](/docs/error-tracking/stack-traces). The quality of automatic grouping can vary depending on the data available. 
+PostHog attempts to group similar exceptions into an issue automatically by their exception type, exception message, and [stack traces](/docs/error-tracking/stack-traces). The quality of automatic grouping can vary depending on the data available. 
 
-You can also influence grouping by labeling issues with a [custom fingerprint](/docs/error-tracking/capture#customizing-exception-capture) or manually combine issues by [merging them](/docs/error-tracking/managing-issues#merging-issues).
+You can customize issue grouping by labeling exceptions with a [custom fingerprint](/docs/error-tracking/grouping-issues#option-1-client-side-fingerprint), [custom grouping rules](/docs/error-tracking/grouping-issues#option-2-custom-grouping-rule), or by [merging issues](/docs/error-tracking/grouping-issues).
 
 The priority order from highest to lowest of these grouping methods is:
 
@@ -46,8 +53,8 @@ The priority order from highest to lowest of these grouping methods is:
 flowchart TD
     A[Exception Event] --> B{Custom Fingerprint<br/>Set?}
     B -->|Yes| C[Use Custom Fingerprint]
-    B -->|No| D{Grouping Rules<br/>Match?}
-    D -->|Yes| E[Use Grouping Rules]
+    B -->|No| D{Custom Grouping Rules<br/>Match?}
+    D -->|Yes| E[Use Custom Grouping Rules]
     D -->|No| F[Use Automatic Fingerprinting]
     
     C --> G[Create/Update Issue]
@@ -62,16 +69,17 @@ flowchart TD
 ```
 
 1. Client-side defined [custom fingerprint](/docs/error-tracking/capture#customizing-exception-capture) using `$exception_fingerprint`
-2. Match [grouping rules](/docs/error-tracking/grouping-issues) defined in PostHog
+2. Match [custom grouping rules](/docs/error-tracking/grouping-issues#option-2-custom-grouping-rule) defined in PostHog
 3. If no user defined logic, fall back to [automatic fingerprinting](/docs/error-tracking/fingerprints)
  
-> We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+> We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
 ## Working with issues
 
 Issues are the primary way you interact with captured exceptions in PostHog. Here are some common workflows you can perform with issues:
 
-- [Searching and monitoring issues](/docs/error-tracking/monitoring)
+- [Managing and resolving issues](/docs/error-tracking/managing-issues)
 - [Assigning issues](/docs/error-tracking/assigning-issues)
 - [Grouping issues](/docs/error-tracking/grouping-issues)
+- [Monitoring and searching issues](/docs/error-tracking/monitoring)
 - [Alerting on issues](/docs/error-tracking/alerts)

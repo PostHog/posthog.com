@@ -6,10 +6,10 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 Issues are created by grouping together similar exception events. When **no custom grouping behavior is configured**, exceptions are grouped together automatically based on their [fingerprint](/docs/error-tracking/fingerprints). 
 
-> We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://us.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
+> We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
 
-While PostHog will make a best effort to offer basic grouping, the grouping logic may not fit every use case. For example, consider the following ways you may want to group exceptions into an issue:
+While PostHog will make a best effort, the grouping logic may not fit every use case. For example, consider the following ways you may want to group exceptions into an issue:
 
 - Grouping exceptions by business logic, like all errors that occur at checkout
 - Grouping exceptions by specific service, like all error messages containing `postgres`
@@ -92,9 +92,17 @@ When grouping exceptions into issues, it's important to consider what you might 
 
 How you group exceptions into issues is up to you, but it's important to consider how you'll use these issues and communicate with your team.
 
-## Order of grouping rules
-
 Grouping rules are evaluated in the order they are configured. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
+
+## How PostHog prioritizes issue grouping logic
+
+More broadly, PostHog will priotize issue grouping logic in the following order:
+
+1. Client-side defined custom fingerprint using `$exception_fingerprint`
+2. Match custom grouping rules defined in PostHog
+3. If no user defined logic, fall back to automatic fingerprinting
+
+Read more about how PostHog prioritizes grouping logic in the [issues and exceptions guide](/docs/error-tracking/issues-and-exceptions#how-exceptions-are-grouped-into-issues).
 
 ## Merging separate issues
 

@@ -3677,12 +3677,14 @@ export const docsMenu = {
                     url: '/docs/error-tracking/issues-and-exceptions',
                     icon: 'IconWarning',
                     color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
                     color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Fingerprints',
@@ -3705,12 +3707,14 @@ export const docsMenu = {
                     url: '/docs/error-tracking/managing-issues',
                     icon: 'IconDashboard',
                     color: 'purple',
+                    featured: true,
                 },
                 {
                     name: 'Assign issues to teammates',
                     url: '/docs/error-tracking/assigning-issues',
                     icon: 'IconUser',
                     color: 'blue',
+                    featured: true,
                     children: [
                         {
                             name: 'Overview',
@@ -3741,6 +3745,7 @@ export const docsMenu = {
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Resources',
@@ -3750,6 +3755,14 @@ export const docsMenu = {
                     url: '/docs/error-tracking/cutting-costs',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
+                    featured: true,
+                },
+                {
+                    name: 'More tutorials',
+                    url: '/docs/error-tracking/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Troubleshooting and FAQs',

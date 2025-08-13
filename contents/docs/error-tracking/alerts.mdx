@@ -6,7 +6,7 @@ To stay on top of issues, you can set up alerts. These enable you to post to Sla
 
 ## Issue created or reopened
 
-To alert when an issue is created or reopened, go to [error tracking's configuration page](https://us.posthog.com/error_tracking/configuration) and click **Alerting**. This shows you a list of existing alerts. Clicking **New notification** brings you to a page to create a new one.
+To alert when an issue is created or reopened, go to [error tracking's configuration page](https://app.posthog.com/error_tracking/configuration) and click **Alerting**. This shows you a list of existing alerts. Clicking **New notification** brings you to a page to create a new one.
 
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_08_at_11_53_54_2x_81605f7812.png"
@@ -40,7 +40,7 @@ Since error tracking works by capturing `$exception` events, PostHog features th
 
 The first way is using [real time destinations](/docs/cdp/destinations). This enables you to send events (like `$exception`) to other tools as soon as they are ingested.
 
-To create a real time destination, go to the [data pipelines tab](https://us.posthog.com/pipeline/overview) in PostHog, click **+ New**, and then select **Destination**. Choose your destination and press **+ Create**.
+To create a real time destination, go to the [data pipelines tab](https://app.posthog.com/pipeline/overview) in PostHog, click **+ New**, and then select **Destination**. Choose your destination and press **+ Create**.
 
 On the destination creation screen, make sure to add an event matcher for the `$exception` event, filter for the properties you want, and set the trigger options.
 
@@ -72,6 +72,6 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Can't find your alert?" type="fyi">
 
-  If you'd like a destination to be added that we don't yet support, [let us know in-app](https://us.posthog.com/project/2#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).
+  If you'd like a destination to be added that we don't yet support, [let us know in-app](https://app.posthog.com/project/2#panel=support%3Afeedback%3Aerror_tracking%3A%3Afalse).
 
 </CalloutBox>
