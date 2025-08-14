@@ -22,7 +22,7 @@ toolsUsed:
   - Data pipelines
 date: 2025-07-09
 ---
-When Lezgin Bakircioglu, CTO at Swedish fintech [Qred](https://www.qred.se/en), looked at their onboarding flow, he saw a problem — not in the onboarding itself, but rather in the path to improving it and building a better product. 
+When Lezgin Zilan, CTO at Swedish fintech [Qred](https://www.qred.se/en), looked at their onboarding flow, he saw a problem — not in the onboarding itself, but rather in the path to improving it and building a better product. 
 
 “We had big ambitions with Google Analytics which were being driven outside of the engineering team,” explains Lezgin. “There were plans to improve the onboarding flow and to add information that would help customers. But it was a lot of back and forth, and tracking would get missed. Our front-end developers had to spend a lot of time implementing the tracking they needed to analyze users in Google Analytics.”
 
@@ -32,7 +32,7 @@ Eventually, Lezgin began the search for a new tool that could better track user 
 
 Spoiler: Lezgin did not decide to leave PostHog.
 
-<BorderWrapper> <Quote imageSource="/images/customers/lezgin.jpg" size="md" name="Lezgin Bakircioglu" title="CTO, Qred" quote={`“One thing I have to say is that PostHog’s support is awesome. There’s no outsourced first line or call centers — you get real answers fast, straight from the actual engineers. If you find a bug, they show you the GitHub issue and you can literally watch it get fixed. I love that.”`} /> </BorderWrapper>
+<BorderWrapper> <Quote imageSource="/images/customers/lezgin.jpg" size="md" name="Lezgin Zilan" title="CTO, Qred" quote={`“One thing I have to say is that PostHog’s support is awesome. There’s no outsourced first line or call centers — you get real answers fast, straight from the actual engineers. If you find a bug, they show you the GitHub issue and you can literally watch it get fixed. I love that.”`} /> </BorderWrapper>
 
 ## More than autocapture: Replacing the whole stack
 It wasn’t just the open-source safety net that made PostHog stand out — he also saw how much more the team could accomplish once the tracking headache was solved with PostHog’s [autocapture](/docs/product-analytics/autocapture).
