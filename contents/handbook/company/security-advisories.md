@@ -58,7 +58,7 @@ Brief description of the vulnerability and its potential impact.
 - Self-hosted: All versions before 1.42.0
 
 **Resolution:**  
-Fixed in PostHog version 1.42.0. Users are advised to upgrade to the latest version.
+Where possible, add a link to a PR. 
 
 **Timeline:**  
 - **Discovered:** January 10, 2024
