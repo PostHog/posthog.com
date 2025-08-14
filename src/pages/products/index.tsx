@@ -18,6 +18,7 @@ import { PRODUCT_COUNT } from '../../constants'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
 import { IconGrid, IconListSquare } from 'components/OSIcons/Icons'
+import usePostHog from 'hooks/usePostHog'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -47,6 +48,49 @@ const layoutOptions = [
     { label: <IconListSquare className="size-4" />, value: 'list', default: true },
     { label: <IconGrid className="size-4" />, value: 'grid' },
 ]
+
+const Subscribe = ({ selectedProduct }: { selectedProduct: any }) => {
+    const posthog = usePostHog()
+    const [email, setEmail] = useState('')
+    const [submitted, setSubmitted] = useState(false)
+
+    const handleSubmit = () => {
+        if (!email) return
+        posthog?.capture('subscribe_to_product_updates', { email, selectedProduct })
+        setSubmitted(true)
+    }
+
+    return submitted ? (
+        <p className="text-sm m-0 mb-2 border border-input rounded-md p-2 bg-accent">
+            Thanks! We'll email you when <strong>{selectedProduct.name}</strong> is ready
+        </p>
+    ) : (
+        <div className="pb-2">
+            <p className="text-sm m-0 mb-2">
+                Enter your email to get notified when <strong>{selectedProduct.name}</strong> is ready
+            </p>
+            <form
+                className="m-0 space-y-2"
+                onSubmit={(e) => {
+                    e.preventDefault()
+                    handleSubmit()
+                }}
+            >
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="bg-light dark:bg-dark rounded-md border border-input py-1.5 px-2 text-base w-full"
+                />
+                <CallToAction size="sm" width="full" onClick={handleSubmit}>
+                    Subscribe
+                </CallToAction>
+            </form>
+        </div>
+    )
+}
 
 export default function Products(): JSX.Element {
     const allProducts = useProduct() as any[]
@@ -201,23 +245,27 @@ export default function Products(): JSX.Element {
                                     )}
 
                                     {/* Open product button */}
-                                    <div className="pt-4">
-                                        <OSButton
-                                            variant="primary"
-                                            width="full"
-                                            size="md"
-                                            asLink
-                                            to={`/${selectedProduct.slug}`}
-                                            state={{ newWindow: true }}
-                                            icon={<Icons.IconArrowRight />}
-                                            iconPosition="right"
-                                        >
-                                            Open {selectedProduct.name}
-                                        </OSButton>
-                                        <p className="text-xs text-muted text-center mt-2">
-                                            Tip: Double-click the icon to open directly
-                                        </p>
-                                    </div>
+                                    {selectedProduct.status == 'WIP' ? (
+                                        <Subscribe key={selectedProduct.slug} selectedProduct={selectedProduct} />
+                                    ) : (
+                                        <div className="pt-4">
+                                            <OSButton
+                                                variant="primary"
+                                                width="full"
+                                                size="md"
+                                                asLink
+                                                to={`/${selectedProduct.slug}`}
+                                                state={{ newWindow: true }}
+                                                icon={<Icons.IconArrowRight />}
+                                                iconPosition="right"
+                                            >
+                                                Open {selectedProduct.name}
+                                            </OSButton>
+                                            <p className="text-xs text-muted text-center mt-2">
+                                                Tip: Double-click the icon to open directly
+                                            </p>
+                                        </div>
+                                    )}
                                 </div>
                             </ScrollArea>
                         </div>
@@ -419,11 +467,7 @@ export default function Products(): JSX.Element {
                                                             <ZoomHover
                                                                 key={product.slug}
                                                                 width="full"
-                                                                className={`justify-center ${
-                                                                    product.status == 'WIP'
-                                                                        ? 'opacity-50 hover:opacity-100'
-                                                                        : ''
-                                                                }`}
+                                                                className={`justify-center`}
                                                             >
                                                                 <div
                                                                     onClick={(e) => handleProductClick(product, e)}
