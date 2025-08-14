@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-This page contains security advisories and Common Vulnerabilities and Exposures (CVEs) related to PostHog products and services. We maintain this page to ensure transparency and help our users stay informed about any security issues that may affect them. This page is for ensuring transparency in the way we work and covers advisories that do not require direct action from users. In the event that a security incident leads to a confirmed exposure or requires action from users we will always contact users proactively. 
+This page contains security advisories and Common Vulnerabilities and Exposures (CVEs) related to PostHog. We maintain this page to ensure transparency and help our users stay informed about any security issues that may impact them. In the event that a security incident leads to a confirmed exposure or requires action from users we will always contact users proactively. 
 
 For coverage of other, [non-security incidents](/handbook/engineering/incidents), please check [our status page](https://status.posthog.com/). 
 
