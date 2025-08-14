@@ -269,7 +269,9 @@ export const AppLink = ({
                 {renderChildIcon()}
                 {children}
             </span>
-            <figcaption className="text-sm font-medium leading-tight">
+            <figcaption
+                className={`text-sm font-medium leading-tight ${orientation === 'row' ? 'text-left' : 'text-center'}`}
+            >
                 <span className={`inline-block leading-tight`}>
                     <span
                         className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${

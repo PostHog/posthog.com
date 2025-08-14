@@ -17,6 +17,7 @@ import { productMenu } from '../../navs'
 import { PRODUCT_COUNT } from '../../constants'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { ToggleGroup } from 'components/RadixUI/ToggleGroup'
+import { IconGrid, IconListSquare } from 'components/OSIcons/Icons'
 
 // Create selectOptions for the address bar
 const selectOptions = [
@@ -43,8 +44,8 @@ const selectOptions = [
 ]
 
 const layoutOptions = [
-    { label: 'List', value: 'list', default: true },
-    { label: 'Grid', value: 'grid' },
+    { label: <IconListSquare className="size-4" />, value: 'list', default: true },
+    { label: <IconGrid className="size-4" />, value: 'grid' },
 ]
 
 export default function Products(): JSX.Element {
