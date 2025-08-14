@@ -92,6 +92,14 @@ export default function SparkJoy(): JSX.Element {
                             <AppIcon name="photobooth" className="!size-10 -mt-2" />
                             <p className="text-sm font-medium">Photobooth</p>
                         </Link>
+                        <Link
+                            to="/merch"
+                            state={{ newWindow: true }}
+                            className="flex flex-col justify-center items-center space-y-1 w-28 text-center text-primary hover:text-primary"
+                        >
+                            <AppIcon name="shoppingBag" className="!size-10 -mt-2" />
+                            <p className="text-sm font-medium">Store</p>
+                        </Link>
                     </div>
                 </div>
             </Explorer>

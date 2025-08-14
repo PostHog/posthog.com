@@ -51,6 +51,8 @@ module.exports = {
                 accent: 'rgb(var(--accent) / <alpha-value>)',
                 input: 'rgb(var(--input-bg) / <alpha-value>)',
                 'input-hover': 'rgb(var(--input-bg-hover) / <alpha-value>)',
+
+                'ai-blue': '#3E6B9E',
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

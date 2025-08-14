@@ -10,6 +10,7 @@ import OverviewSlide from './OverviewSlide'
 import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
 import OverviewSlideStacked from './OverviewSlide/OverviewSlideStacked'
 import OverviewSlideOverlay from './OverviewSlide/OverviewSlideOverlay'
+import OverviewSlideAI from './OverviewSlide/OverviewSlideAI'
 import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
 import QuestionsSlide from './QuestionsSlide'
@@ -128,6 +129,8 @@ export default function SlidesTemplate({
                             return OverviewSlideStacked
                         case 'overlay':
                             return OverviewSlideOverlay
+                        case 'ai':
+                            return OverviewSlideAI
                         case 'columns':
                         default:
                             return OverviewSlideColumns

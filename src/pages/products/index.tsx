@@ -148,6 +148,18 @@ export default function Products(): JSX.Element {
                                         )}
                                     </div>
 
+                                    {/* Screenshots if available */}
+                                    {selectedProduct.screenshots && selectedProduct.screenshots.length > 0 && (
+                                        <div className="space-y-2">
+                                            <h3 className="text-sm font-semibold">Screenshot</h3>
+                                            <img
+                                                src={selectedProduct.screenshots[0].src}
+                                                alt={selectedProduct.screenshots[0].alt || 'Product screenshot'}
+                                                className="w-full rounded-md border border-primary"
+                                            />
+                                        </div>
+                                    )}
+
                                     {/* Product info */}
                                     <div className="space-y-2">
                                         <p className="text-sm text-secondary">
@@ -185,18 +197,6 @@ export default function Products(): JSX.Element {
                                                     <strong>Description:</strong> {selectedProduct.seo.description}
                                                 </p>
                                             )}
-                                        </div>
-                                    )}
-
-                                    {/* Screenshots if available */}
-                                    {selectedProduct.screenshots && selectedProduct.screenshots.length > 0 && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-sm font-semibold">Screenshot</h3>
-                                            <img
-                                                src={selectedProduct.screenshots[0].src}
-                                                alt={selectedProduct.screenshots[0].alt || 'Product screenshot'}
-                                                className="w-full rounded-md border border-primary"
-                                            />
                                         </div>
                                     )}
 

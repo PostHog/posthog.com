@@ -1597,11 +1597,11 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Max',
-            parentIcon: 'ai',
+            parentIcon: 'aiMax',
             // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst and product manager',
             handle: 'max_ai',
-            color: 'purple',
+            color: 'ai-blue',
             colorSecondary: 'lilac',
             category: 'ai',
             slug: 'max',
@@ -1611,11 +1611,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 description: 'Your AI-powered product analyst and product manager',
             },
             overview: {
-                title: 'Your AI product analyst and assistant',
+                title: 'Our resident AI agent who understands your product and data',
                 description:
-                    'Max is an AI-powered product analyst that lives in PostHog. Research answers to product questions by querying data, get things done quickly in the PostHog UI, and learn all about PostHog features.',
-                textColor: 'text-white',
-                layout: 'columns',
+                    'Max builds insights, automates many manual tasks, and routes more complex tasks to other AI agents for specialized work.',
+                layout: 'ai',
             },
             screenshots: [
                 {
