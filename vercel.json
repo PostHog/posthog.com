@@ -863,6 +863,7 @@
         { "source": "/tutorials/compare-aws-bedrock-prompts", "destination": "/docs/ai-engineering" },
         { "source": "/tutorials/compare-aws-bedrock-foundational-models", "destination": "/docs/ai-engineering" },
         { "source": "/tutorials/chatgpt-analytics", "destination": "/tutorials/openai-observability" },
+        { "source": "/tutorials/nextjs-app-directory-analytics", "destination": "/tutorials/nextjs-analytics" },
         { "source": "/docs/cdp/shopify", "destination": "/docs/cdp" },
         { "source": "/james", "destination": "/community/profiles/27732" },
         { "source": "/tim", "destination": "/community/profiles/27730" },
