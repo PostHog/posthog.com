@@ -66,7 +66,6 @@ Fixed in PostHog version 1.42.0. Users are advised to upgrade to the latest vers
 - **Fixed:** January 15, 2024
 - **Disclosed:** January 16, 2024
 
----
 
 
 
