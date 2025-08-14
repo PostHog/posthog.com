@@ -523,6 +523,10 @@ export const handbookSidebar = [
                         url: '/handbook/company/security',
                     },
                     {
+                        name: 'Advisories & CVEs',
+                        url: '/handbook/company/security-advisories',
+                    },
+                    {
                         name: 'Adding tools',
                         url: '/handbook/company/adding-tools',
                     },

@@ -12,6 +12,8 @@ We maintain a robust security program that follows best practice in order to mee
 
 This page covers SOC 2, GDPR, and CCPA compliance.
 
+For information about security advisories and CVEs, see our [advisories & CVEs page](/handbook/company/security-advisories).
+
 ## Multi-factor authentication 
 
 We enforce the use of hardware security keys wherever we can. Every team members gets two of these, most commonly:
@@ -75,6 +77,8 @@ We conduct these annually, most recently in May 2025 - you can find the report [
 ## Responsible disclosure
 
 Security vulnerabilities and other security related findings can be reported by emailing security@posthog.com. Valid findings will be rewarded with PostHog swag.
+
+For information about current and past security advisories and CVEs, see our [Security Advisories page](/handbook/company/security-advisories).
 
 ## Secure communication (aka preventing or detecting social engineering)
 
