@@ -21,7 +21,7 @@ This is meant to be a guide, not a rule-set. Each person has their own unique st
 Discovery isn't one-sided questioning - it's give and take. You learn something, you show something, you ask questions, repeat. The goal is understanding what customers are trying to accomplish so we can focus on relevant features rather than discussing everything PostHog can do.
 
 ### Why discovery matters
-PostHog is a broad product suite with [common combinations](handbook/growth/sales/expansion-and-retention#how-to-run-a-cross-sell-process) depending on the use case. Discovery helps us provide customers with a better experience by understanding their specific needs so we can:
+PostHog is a broad product suite with [common combinations](/handbook/growth/sales/expansion-and-retention#how-to-run-a-cross-sell-process) depending on the use case. Discovery helps us provide customers with a better experience by understanding their specific needs so we can:
 
 - **Conduct a demo that actually matters** - No one wants to sit through features they'll never use
 - **Draw connections between their problems and our products** - There are 10+ products (and counting), we want to help them find the right combination
@@ -60,7 +60,7 @@ Some preparation is recommended before speaking with any new customer interested
 
 ### The demo
 
-[Demoing PostHog](handbook/growth/sales/new-sales#3-initial-demo) is an important part of our sales process and how we first introduce PostHog to customers. It brings immediate value to a call, is consistent with other messaging and builds credibility with technical customers. A demo is also a great opportunity to learn more about your customer's business. 
+[Demoing PostHog](/handbook/growth/sales/new-sales#3-initial-demo) is an important part of our sales process and how we first introduce PostHog to customers. It brings immediate value to a call, is consistent with other messaging and builds credibility with technical customers. A demo is also a great opportunity to learn more about your customer's business. 
 
 **Principles**
 - Leverage PostHog's technical credibility by showing vs. telling
@@ -122,8 +122,8 @@ A key component of discovery is qualifying customers to ensure they are a good f
 - **Not in ICP** - You can gather great product insights when chatting with folks in other roles, but we tend to work best with our [ICP](/handbook/who-we-are-building-for).
 - **Can't meet technical requirements** - To be successful, the customer needs to (at minimum), be able to implement PostHog via the SDKs/JS.
 - **Support request** - Be helpful, but if it's better suited for support, you can send them thru the available [Support](/docs/support-options) channels.
-- **Startup program** - We have a special program designed for [startups](handbook/brand/startups) interested in PostHog.
-- **Requesting a BAA/DPA** - We built both a BAA and DPA generator where customers can self-serve. If a customer wants to [vary any terms](handbook/growth/sales/contract-rules#varying-terms), we can review changes to our terms if the contract is above <$20k/year.
+- **Startup program** - We have a special program designed for [startups](/handbook/brand/startups) interested in PostHog.
+- **Requesting a BAA/DPA** - We built both a BAA and DPA generator where customers can self-serve. If a customer wants to [vary any terms](/handbook/growth/sales/contract-rules#varying-terms), we can review changes to our terms if the contract is above <$20k/year.
 - **No engineering resources** - There is some coding required for a tool like PostHog and customers will need some engineering support to be successful.
 - **Strict compliance constraints** - A customer may ask for a niche [security or privacy](/handbook/company/security) certification that we currently don't have.
 - **Need self-hosted** - PostHog does have an open source [self-hosted](/self-host/open-source/disclaimer) product, but we currently don't offer any support for it. 
@@ -184,7 +184,7 @@ While you should start identifying potential champions early in the process, bui
 
 **Goal:** Show PostHog, focus on relevant features, establish technical credibility, get feedback and ask questions
 
-Reference the demo section above for how you can incorporate discovery into your demo and learn more about the process [here](handbook/growth/sales/new-sales#3-initial-demo).
+Reference the demo section above for how you can incorporate discovery into your demo and learn more about the process [here](/handbook/growth/sales/new-sales#3-initial-demo).
 
 ### 3. Closing and next steps (~3-10min)
 
@@ -194,7 +194,7 @@ Reference the demo section above for how you can incorporate discovery into your
 - If there is a clear opportunity, offer up some actionable next steps (free trial, invite to Slack, generating a quote, help reduce spend, scheduling a call etc.).
 - Set expectation that you'll follow up via email or Slack.
 - Gain an understanding of their timeline
-- [Route the customer](handbook/growth/sales/new-sales#2-we-assign-and-qualify) to the next best channel if they are better handled by a separate team (Support, Startup program etc.).
+- [Route the customer](/handbook/growth/sales/new-sales#2-we-assign-and-qualify) to the next best channel if they are better handled by a separate team (Support, Startup program etc.).
 
 We like to keep things conversational - if you're genuinely curious about their situation, this should all come naturally!
 
