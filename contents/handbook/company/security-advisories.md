@@ -1,5 +1,5 @@
 ---
-title: Security advisories & CVEs
+title: Advisories & CVEs
 sidebar: Handbook
 showTitle: true
 ---
