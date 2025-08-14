@@ -41,7 +41,7 @@ export const max_ai = {
                     title: 'Context-aware',
                     items: [
                         'Understands your event schema and property definitions',
-                        'Ability to factor in business context<br /><em class="text-secondary text-xl">ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth stage, etc.), market conditions, seasonality, current challenges, quarterly goals</em>',
+                        'Ability to factor in business context<br /><em class="text-secondary text-[15px]">ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth stage, etc.), market conditions, seasonality, current challenges, quarterly goals</em>',
                     ],
                 },
                 {
