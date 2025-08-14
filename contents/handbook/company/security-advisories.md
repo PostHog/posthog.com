@@ -12,7 +12,8 @@ For coverage of other, [non-security incidents](/handbook/engineering/incidents)
 
 At PostHog, we take security seriously. We have a robust security program that includes:
 
-- Regular security audits and penetration testing
+- Regular security audits, architecture reviews, and penetration testing
+- Automated code and infrastructure as code (IaC) linting
 - Responsible disclosure program
 - Proactive vulnerability monitoring
 - Transparent communication with our community
