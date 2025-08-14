@@ -43,29 +43,30 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 This section contains resolved security advisories for reference.
 
-### Example Advisory (Resolved)
+### Advisory template
 
+```
 **Date:** January 15, 2024  
 **CVE:** CVE-2024-XXXXX  
-**Severity:** Medium  
-**Status:** Resolved  
+**Severity:** Low / Medium / Critical  
+**Status:** Reported / Fixed / Resolved  
 
 **Description:**  
 Brief description of the vulnerability and its potential impact.
 
-**Affected versions:**  
-- PostHog Cloud: All versions before 1.42.0
-- Self-hosted: All versions before 1.42.0
+**Affected users:**
+Confirm if the advisory is limited to specific products.
+Confirm if the advisory is limited to either US or EU customers, or both.   
 
 **Resolution:**  
-Where possible, add a link to a PR. 
+Where possible, add a link to a PR. Be clear on any next steps. 
 
 **Timeline:**  
 - **Discovered:** January 10, 2024
-- **Reported:** January 12, 2024
-- **Fixed:** January 15, 2024
-- **Disclosed:** January 16, 2024
-
+- **Reported:** January 10, 2024
+- **Fixed:** January 10, 2024
+- **Disclosed:** January 10, 2024
+```
 
 
 
