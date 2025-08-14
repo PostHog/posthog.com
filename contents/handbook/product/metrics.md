@@ -94,5 +94,5 @@ If you are a PM at PostHog, you will be more successful if your whole team is aw
 - Speak to your team what they care about and are interested in tracking, and add those metrics to your dashboard
 - Link the revenue & usage dashboards in your team’s Slack channel, so they are easy to find for your team
 - If your team has shipped a new feature, encourage them to set up an event, and track the new feature’s usage on the usage dashboard. For example you could have a “feature usage” section on the dashboard that tracks multiple features
-- Some teams do a “metrics Monday” where they review the usage dashboard together in the Monday standup, looking for trends and anomalies. These sessions are usually led by an engineer, not the PM
+- Some teams do a “metrics Monday” where they review the usage dashboard together in the Monday standup, looking for trends and anomalies that may help you make "mid month adjustments". These sessions are usually led by an engineer, not the PM
 - You will likely have to try a bunch of things to find what sticks with your team. Ultimately, you want to make sure you and your team are looking at the same metrics, and everyone in your team knows how to find the relevant dashboards. It’s a team effort!
