@@ -1,4 +1,5 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 import { Select } from '../RadixUI/Select'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { navigate } from 'gatsby'
@@ -67,6 +68,8 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
     return <>{content}</>
 }
 
+const defaultRightSidebarWidth = 384
+
 export default function Explorer({
     template,
     slug,
@@ -91,6 +94,7 @@ export default function Explorer({
     const { appWindow } = useWindow()
     const currentPath = appWindow?.path?.replace(/^\//, '') || '' // Remove leading slash, default to empty string
     const searchContainerRef = useRef<HTMLDivElement>(null)
+    const [rightSidebarWidth, setRightSidebarWidth] = useState(defaultRightSidebarWidth)
     const handleValueChange = (value: string) => {
         if (onCategoryChange) {
             // Use custom category change handler for filtering
@@ -164,11 +168,26 @@ export default function Explorer({
                     {rightSidebarPanel && isRightSidebarOpen && (
                         <aside
                             data-scheme="secondary"
-                            className="not-prose w-96 bg-primary border-l border-primary h-full text-primary"
+                            className="not-prose bg-primary border-l border-primary h-full text-primary relative"
+                            style={{ width: rightSidebarWidth }}
                         >
                             <div className="h-full flex flex-col">
                                 <div className="flex-1 overflow-auto">{rightSidebarPanel}</div>
                             </div>
+                            <motion.div
+                                data-scheme="tertiary"
+                                className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent"
+                                drag="x"
+                                dragMomentum={false}
+                                dragConstraints={{ left: 0, right: 0 }}
+                                onDrag={(_event, info) => {
+                                    const newWidth = Math.max(
+                                        Math.min(rightSidebarWidth - info.delta.x, (appWindow?.size?.width || 0) / 2),
+                                        defaultRightSidebarWidth
+                                    )
+                                    setRightSidebarWidth(newWidth)
+                                }}
+                            />
                         </aside>
                     )}
                     <main
