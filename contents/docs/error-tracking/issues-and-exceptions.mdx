@@ -92,7 +92,7 @@ You can customize issue grouping logic by labeling exceptions with a [custom fin
 When multiple issue grouping methods apply, PostHog applies them in the following priority order, from highest to lowest:
 
 ```mermaid
-flowchart TD
+flowchart LR
     A[Exception Event] --> B{Custom fingerprint<br/>set?}
     B -->|Yes| C[Use custom fingerprint]
     B -->|No| D{Custom grouping rules<br/>match?}
@@ -102,12 +102,6 @@ flowchart TD
     C --> G[Create/update issue]
     E --> G
     F --> G
-    
-    style A fill:#e1f5fe
-    style C fill:#e8f5e8
-    style E fill:#fff3e0
-    style F fill:#fce4ec
-    style G fill:#f3e5f5
 ```
 
 1. Client-side defined [custom fingerprint](/docs/error-tracking/capture#customizing-exception-capture) using `$exception_fingerprint`
