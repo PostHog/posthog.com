@@ -24,6 +24,7 @@ import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, SlideConfigResult, defaultSlides } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import DemoSlide from './DemoSlide'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -185,7 +186,12 @@ export default function SlidesTemplate({
                 )
             }
 
-            case 'answers':
+            case 'answers': {
+                // Support using template to render the demo slide
+                if (template === 'demo') {
+                    return <DemoSlide productHandle={productHandle} answers={productData?.answers || []} {...props} />
+                }
+                // Default: questions slide
                 return (
                     <QuestionsSlide
                         productName={productData?.name}
@@ -196,6 +202,7 @@ export default function SlidesTemplate({
                         {...props}
                     />
                 )
+            }
 
             case 'pricing':
                 return (

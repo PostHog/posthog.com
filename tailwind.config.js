@@ -90,6 +90,7 @@ module.exports = {
                 'button-secondary-dark': '#C78617',
 
                 primary: 'rgb(var(--border) / <alpha-value>)',
+                secondary: 'rgb(var(--input-border) / <alpha-value>)',
                 'bg-primary': 'rgb(var(--bg) / <alpha-value>)',
                 input: 'rgb(var(--input-border) / <alpha-value>)',
                 'input-hover': 'rgb(var(--input-border-hover) / <alpha-value>)',

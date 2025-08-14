@@ -1,26 +1,26 @@
-import React from 'react'
-import { IconMagicWand, IconEmoji } from '@posthog/icons'
+import { IconBolt, IconCursor, IconGraph, IconMagicWand } from '@posthog/icons'
+import { IconBrain } from 'components/OSIcons/Icons'
 
-// not currently in use. check useProducts.ts
-export const cdp = {
-    Icon: IconMagicWand,
+export const max_ai = {
     name: 'Max',
-    description: 'Max is a tool that helps you analyze your data and make decisions.',
-    // handle: 'data_pipelines',
+    parentIcon: 'aiMax',
+    // Icon: IconMagicWand,
+    description: 'Your AI-powered product analyst and product manager',
     handle: 'max_ai',
-    type: 'max_ai',
-    slug: 'max',
-    color: 'purple',
+    color: 'ai-blue',
     colorSecondary: 'lilac',
     category: 'ai',
+    slug: 'max',
+    status: 'beta',
     seo: {
         title: 'Max AI - PostHog',
-        description: 'Max AI is a tool that helps you analyze your data and make decisions.',
+        description: 'Your AI-powered product analyst and product manager',
     },
     overview: {
-        title: 'Max AI is a tool that helps you analyze your data and make decisions.',
-        description: 'Max AI is a tool that helps you analyze your data and make decisions.',
-        textColor: 'text-white', // tw
+        title: 'Our resident AI agent who understands your product and data',
+        description:
+            'Max builds insights, automates many manual tasks, and routes more complex tasks to other AI agents for specialized work.',
+        layout: 'ai',
     },
     screenshots: [
         {
@@ -31,40 +31,75 @@ export const cdp = {
     ],
     features: [
         {
-            icon: IconEmoji,
-            title: 'Context-aware',
-            headline: 'Context-aware',
-            children: (
-                <ul className="divide-y divide-y-primary">
-                    <li>Understands your event schema and property definitions</li>
-                    <li>
-                        Ability to factor in business context
-                        <br />
-                        <em>
-                            ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth
-                            stage, etc.), market conditions, seasonality, current challenges, quarterly goals
-                        </em>
-                    </li>
-                </ul>
-            ),
+            title: 'Max answers product questions',
+            headline: 'answers product questions',
+            description:
+                'Getting insights from an analytics suite can sometimes feel like navigating an airplane cockpit. Max eliminates the need to fiddle with a bunch of controls. Just ask a question and Max will give you a direct answer.',
+            features: [
+                {
+                    icon: IconBrain,
+                    title: 'Context-aware',
+                    items: [
+                        'Understands your event schema and property definitions',
+                        'Ability to factor in business context<br /><em class="text-secondary text-xl">ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth stage, etc.), market conditions, seasonality, current challenges, quarterly goals</em>',
+                    ],
+                },
+                {
+                    icon: IconBolt,
+                    title: 'Queries your data stack',
+                    items: [
+                        'Has access to your events and actions, people, user sessions, groups, and cohorts',
+                        'Sources data from your connected data warehouse sources',
+                    ],
+                },
+                {
+                    icon: IconGraph,
+                    title: 'Generates insights',
+                    items: [
+                        'Builds data visualizations',
+                        'Capable of answers specific data questions without needing to generate visualizations',
+                    ],
+                },
+                {
+                    icon: IconCursor,
+                    title: 'Navigates the query building interface',
+                    items: [
+                        "Assists in sets date ranges and applying filters, data breakdowns, and formulas when you want to take manual control but don't want to do <em>all</em> the work yourself",
+                    ],
+                },
+            ],
         },
     ],
     answers: [
         {
-            q: "What's the difference between sources and destinations?",
-            a: 'Sources bring data INTO PostHog from external systems like your CRM or payment processor. Destinations send data FROM PostHog to other tools in your stack. Both work together to create a complete data pipeline.',
+            q: "What's my churn rate?",
         },
         {
-            q: 'How reliable are batch exports?',
-            a: 'Very reliable. Batch exports run on a schedule with automatic retries, monitoring, and a dead letter queue for failed events. We guarantee at-least-once delivery to your destination.',
+            q: 'Show me user retention by country',
         },
         {
-            q: 'Can I transform data before sending it?',
-            a: 'Yes! Transformations let you filter, modify, and enrich events before they reach destinations. You can enforce schemas, add labels, map properties, or write custom JavaScript logic.',
+            q: "What's our most popular feature?",
         },
         {
-            q: "What's included in the free tier?",
-            a: 'The CDP add-on is required for destinations, but sources are free. You can import data from external systems at no cost - you only pay for the events you capture in PostHog.',
+            q: "What's my ARR?",
+        },
+        {
+            q: 'Where do my users drop off?',
+        },
+        {
+            q: 'What are my most popular pages?',
+        },
+        {
+            q: 'What is distribution of paid vs. organic traffic?',
+        },
+        {
+            q: 'Write an SQL query for me?',
+        },
+        {
+            q: 'How many pageviews did we get today?',
+        },
+        {
+            q: 'Show me a signup funnel',
         },
     ],
     comparison: {
