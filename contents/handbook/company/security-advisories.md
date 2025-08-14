@@ -68,6 +68,9 @@ Confirm if the advisory is limited to either US or EU customers, or both.
 **Resolution:**  
 Where possible, add a link to a PR. Be clear on any next steps. 
 
+**What we learned:**
+If there's a lesson we took to prevent this happening again, document it briefly.
+
 **Timeline:**  
 - **Discovered:** January 10, 2024, 00:00 UTC
 - **Reported:** January 10, 2024, 00:00 UTC
