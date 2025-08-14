@@ -69,10 +69,10 @@ Confirm if the advisory is limited to either US or EU customers, or both.
 Where possible, add a link to a PR. Be clear on any next steps. 
 
 **Timeline:**  
-- **Discovered:** January 10, 2024
-- **Reported:** January 10, 2024
-- **Fixed:** January 10, 2024
-- **Disclosed:** January 10, 2024
+- **Discovered:** January 10, 2024, 00:00 UTC
+- **Reported:** January 10, 2024, 00:00 UTC
+- **Fixed:** January 10, 2024, 00:00 UTC
+- **Disclosed:** January 10, 2024, 00:00 UTC
 ```
 
 
