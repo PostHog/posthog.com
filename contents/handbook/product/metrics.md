@@ -4,7 +4,7 @@ sidebar: Handbook
 showTitle: true
 ---
 
-We track a short list of metrics in each [per-product growth review](/handbook/product/per-product-growth-reviews). The idea of a standardised list of metrics is that each product team has roughly the same metrics they care about, and we can compare metrics across products, such as revenue growth, to see how we compare.
+We track a short list of metrics in each [per-product growth review](/handbook/product/per-product-growth-reviews). The idea of a standardised list of metrics is that each product team has roughly the same metrics they care about, and we can compare metrics across products and across time, such as revenue growth, to see how we compare.
 
 Our growth review metrics strike a balance between depth, efficiency and "measuring what matters". We want to make sure our metrics alert us of potential negative (or positive!) developments, giving us enough signal to dive deeper into lower-level metrics.
 
