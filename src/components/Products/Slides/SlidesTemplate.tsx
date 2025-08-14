@@ -13,6 +13,7 @@ import OverviewSlideOverlay from './OverviewSlide/OverviewSlideOverlay'
 import OverviewSlideAI from './OverviewSlide/OverviewSlideAI'
 import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
+import FeaturesSlideAI from './FeaturesSlideAI'
 import QuestionsSlide from './QuestionsSlide'
 import PlanComparison from './PlanComparison'
 import ComparisonSummarySlide from './ComparisonSummarySlide'
@@ -163,7 +164,18 @@ export default function SlidesTemplate({
                     />
                 )
 
-            case 'features':
+            case 'features': {
+                // Default to tabs template, use columns for AI features
+                if (template === 'columns') {
+                    return (
+                        <FeaturesSlideAI
+                            productName={productData?.name}
+                            features={productData?.features || []}
+                            {...props}
+                        />
+                    )
+                }
+                // Default: tabs template (existing FeaturesSlide with OSTabs)
                 return (
                     <FeaturesSlide
                         features={productData?.features || []}
@@ -171,6 +183,7 @@ export default function SlidesTemplate({
                         {...props}
                     />
                 )
+            }
 
             case 'answers':
                 return (
@@ -246,7 +259,7 @@ export default function SlidesTemplate({
                 )
 
             case 'getting-started':
-                return <GettingStartedSlide productName={productData?.name} {...props} />
+                return <GettingStartedSlide initialState={{}} productName={productData?.name} {...props} />
 
             default:
                 return <div>Slide not found: {slug}</div>

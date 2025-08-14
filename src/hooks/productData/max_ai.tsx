@@ -1,5 +1,5 @@
 import React from 'react'
-import { IconMagicWand } from '@posthog/icons'
+import { IconMagicWand, IconEmoji } from '@posthog/icons'
 
 // not currently in use. check useProducts.ts
 export const cdp = {
@@ -31,92 +31,22 @@ export const cdp = {
     ],
     features: [
         {
-            title: 'Sources & destinations',
-            headline: 'Connect 60+ tools to your data pipeline',
-            description: 'Import data from your existing systems and export PostHog data anywhere you need it.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
-                    alt: 'CDP sources and destinations',
-                },
-            ],
-            features: [
-                {
-                    title: 'Data warehouse sources',
-                    description: 'Import from Stripe, Hubspot, Salesforce, and more to join with product data',
-                },
-                {
-                    title: 'Real-time destinations',
-                    description: 'Send events to Slack, webhooks, and 40+ tools as they happen',
-                },
-                {
-                    title: 'Batch exports',
-                    description: 'Reliable scheduled exports to S3, Snowflake, BigQuery, and more',
-                },
-                {
-                    title: 'Custom transformations',
-                    description: 'Filter, modify, and enrich data before sending to destinations',
-                },
-                {
-                    title: 'No-code setup',
-                    description: 'Configure sources and destinations through the UI, no engineering required',
-                },
-            ],
-        },
-        {
-            title: 'Data transformation',
-            headline: 'Clean, filter, and enrich your data',
-            description: 'Apply custom logic to your data pipeline with transformations that run on every event.',
-            features: [
-                {
-                    title: 'Schema enforcement',
-                    description: 'Ensure data quality by validating events against defined schemas',
-                },
-                {
-                    title: 'Event labeling',
-                    description: 'Add custom properties to categorize and organize your events',
-                },
-                {
-                    title: 'Data filtering',
-                    description: 'Remove unwanted events or properties before they reach destinations',
-                },
-                {
-                    title: 'Property mapping',
-                    description: 'Transform property names and values to match destination requirements',
-                },
-                {
-                    title: 'Custom code',
-                    description: 'Write JavaScript transformations for complex logic',
-                },
-            ],
-        },
-        {
-            title: 'Reliability & monitoring',
-            headline: 'Enterprise-grade data pipeline',
-            description:
-                'Built for scale with monitoring, retries, and error handling to ensure your data flows reliably.',
-            features: [
-                {
-                    title: 'Automatic retries',
-                    description: 'Failed deliveries retry automatically with exponential backoff',
-                },
-                {
-                    title: 'Error monitoring',
-                    description: 'Track delivery success rates and debug failures',
-                },
-                {
-                    title: 'Dead letter queue',
-                    description: 'Capture and recover events that fail processing',
-                },
-                {
-                    title: 'Performance metrics',
-                    description: 'Monitor throughput, latency, and resource usage',
-                },
-                {
-                    title: 'Scalable infrastructure',
-                    description: 'Handles millions of events per day without breaking a sweat',
-                },
-            ],
+            icon: IconEmoji,
+            title: 'Context-aware',
+            headline: 'Context-aware',
+            children: (
+                <ul className="divide-y divide-y-primary">
+                    <li>Understands your event schema and property definitions</li>
+                    <li>
+                        Ability to factor in business context
+                        <br />
+                        <em>
+                            ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth
+                            stage, etc.), market conditions, seasonality, current challenges, quarterly goals
+                        </em>
+                    </li>
+                </ul>
+            ),
         },
     ],
     answers: [

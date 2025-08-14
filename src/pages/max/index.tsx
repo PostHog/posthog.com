@@ -91,6 +91,7 @@ export default function MaxAI(): JSX.Element {
         // ],
         templates: {
             overview: 'ai',
+            features: 'columns',
         },
         content: {
             answersDescription: 'What can Max do?',

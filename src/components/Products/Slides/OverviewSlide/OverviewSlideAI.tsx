@@ -55,7 +55,7 @@ export default function OverviewSlideOverlay({
             </aside>
             <div className="col-span-3 p-12">
                 <p className="text-2xl font-medium text-secondary">{productName}</p>
-                <h1 className="text-5xl font-bold mb-8">{overview?.title}</h1>
+                <h1 className="text-5xl font-bold mb-8 ">{overview?.title}</h1>
                 <h2 className="text-2xl font-normal mb-8">{overview?.description}</h2>
 
                 <h3 className="text-2xl font-bold mb-4">Skills</h3>
