@@ -19,6 +19,8 @@ These queries are written and owned by the billing team. They are standardised a
 - <PrivateLink url="https://us.posthog.com/project/2/dashboard/198672">Link to combined revenue dashboard</PrivateLink>
 - <PrivateLink url="https://us.posthog.com/project/2/dashboard/215472">Link to per-product revenue dashboard</PrivateLink>
 
+Note that currently, refunds are not removed from per-product revenue, which is something to note in a growth review if there is a sizable refund that month.
+
 | Metric | Notes |
 | --- | --- |
 | Monthly recurring revenue (MRR) |  |
