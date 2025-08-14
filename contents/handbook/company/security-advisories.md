@@ -23,6 +23,12 @@ For more information about our security practices, see our [main security page](
 
 If you discover a security vulnerability in PostHog products or services, please report it to us at **[security@posthog.com](mailto:security@posthog.com)**. Valid findings will be rewarded with PostHog swag.
 
+## Updating this page
+
+PRs to this page which update advisories or CVEs should only occur as part of an incident and should follow all [our usual processes for an incident](/handbook/engineering/incidents). If you need to issue an advisory or CVE and an incident is _not_ declared, you should declare one. 
+
+Declaring an incident will ensure that there is good internal visibility and that members of relevant teams, including our Support team, are aware. Once an advisory is posted to this page, you should also update other teams by posting in the [#tell-posthog-anythin](https://posthog.slack.com/archives/C0351B1DMUY) Slack channel. 
+
 ## Security best practices
 
 Security is everyone's responsibility, so we encourage all our users and staff to follow some basic best practices within their own organizations.
