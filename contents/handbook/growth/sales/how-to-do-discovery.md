@@ -100,7 +100,7 @@ A demo can also be a great format where questions bubble naturally.
 - Demo of Data warehouse: _Showing available sources_
   - Questions: "Are there other data sources that would be valuable to query alongside PostHog data?"  
 - Demo of Experiments: _Showing Experiment dashboard_
-  - Questions: "How are you currently cross-reference test results with other user-behavior data?"
+  - Questions: "How are you currently cross-referencing test results with other user-behavior data?"
 - Demo of LLM Observability: _Showing LLM Dashboard_
   - Questions: "How are you gathering data for your AI/LLM products?"
   
