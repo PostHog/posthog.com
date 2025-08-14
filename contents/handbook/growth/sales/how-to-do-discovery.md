@@ -94,7 +94,7 @@ A demo can also be a great format where questions bubble naturally.
 - Demo of Autocapture: _Showing retroactive insight creation_
   - Questions: "How much dev time do you currently spend on instrumentation?"   
 - Demo of Data pipelines: _Showing how to create a destination_
-  - Questions: "Is there anywhere you'd ideally like to send data back out to?  
+  - Questions: "Is there anywhere you'd ideally like to send data back out to?"
 - Demo of Error Tracking: _Showing error dashboard_
   - Questions: "How are you prioritizing bugs to fix first?"   
 - Demo of Data warehouse: _Showing available sources_
