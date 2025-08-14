@@ -104,9 +104,9 @@ try {
   // ...
 } catch (error) {
  posthog.captureException(error, { 
-      "$exception_fingerprint": "CustomExceptionGroup",
-      "$exception_type": "CustomException",
       "custom_property": "custom_value",
+      // You can also *optionally* override generated properties like fingerprint
+      "$exception_fingerprint": "CustomExceptionGroup",
     });
 }
 ```
@@ -116,9 +116,9 @@ try {
   // ...
 } catch (error) {
  posthog.captureException(error, 'user_123', { 
-      "$exception_fingerprint": "CustomExceptionGroup",
-      "$exception_type": "CustomException",
       "custom_property": "custom_value",
+      // You can also *optionally* override generated properties like fingerprint
+      "$exception_fingerprint": "CustomExceptionGroup",
     });
 }
 ```
@@ -134,9 +134,10 @@ with posthog.new_context():
     posthog.identify_context(distinct_id="user_123")
 
     # When using context, you define properties with tags
-    posthog.tag("$exception_type", "Custom exception")
-    posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
     posthog.tag("custom_property", "custom_value")
+
+    # You can also *optionally* override generated properties like fingerprint
+    posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
 
     posthog.capture_exception(Exception("Test custom exception"))
 
@@ -182,9 +183,9 @@ The process is slightly different depending on the SDK you're using.
       const exception = exceptionList.length > 0 ? exceptionList[0] : null;
 
       if (exception) {
-        event.properties["$exception_fingerprint"] = "MyCustomGroup"
-        event.properties["$exception_type"] = "MyCustomException"
         event.properties["custom_property"] = "custom_value"
+        // You can also *optionally* override generated properties like fingerprint
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
         // ... and any other properties you want to override
       }    
     }
@@ -208,9 +209,10 @@ The process is slightly different depending on the SDK you're using.
   with posthog.new_context():
       posthog.identify_context(distinct_id="<user_distinct_id>")
       posthog.set_context_session(session_id="<session_id>")
-      posthog.tag("$exception_type", "Custom exception")
-      posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
+
       posthog.tag("custom_property", "custom_value")
+      # You can also *optionally* override generated properties like fingerprint
+      posthog.tag("$exception_fingerprint", ["custom_fingerprint"])
 
       # When this exception is automatically captured, it will be tagged with the custom properties
       raise Exception("Test custom exception")
@@ -226,12 +228,13 @@ Other than grouping with [custom fingerprints](#overriding-exception-properties)
 
 For example:
 
-- Setting `intent` fields like `checkout` or `signup` to group exceptions together for a specific part of your user journey. This way you can understand the impact of errors on specific parts of your user journey and overall conversion.
-- Setting `service_name` to group exceptions together for a specific service, so you can automatically [assign](/docs/error-tracking/assigning-issues#automatic-issue-assignment) the correct team on issues.
-- Identifying the users as paying or non-paying customers to group exceptions together for a specific customer segment.
-- Implementing [revenue analytics](/docs/product-analytics/revenue-analytics) to understand the impact of errors on revenue.
+- Setting fields like `db_transaction` to group exceptions together for a specific database transactions.
+- Setting `feature_name` to group exceptions together for a specific feature. 
+- Setting `intent` to group exceptions due to common interactions like accessing storage or network.
 
-It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them.
+It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them. 
+
+Note that grouping issues means that all exceptions will be grouped together under a **single issue**, and you **cannot** group exceptions into multiple issues. You can also still [filter on custom properties](/docs/error-tracking/monitoring#finding-specific-issues) across multiple issues without grouping them.
 
 ## Suppressing exceptions
 

@@ -48,7 +48,9 @@ Assignment conditions are evaluated against the properties of the exception even
 
 Issues can be automatically assigned to a **role** or **user** by configuring a set of filters. These filters can be configured to match **any** or **all** of the criteria.
 
-The filters can be configured to filter on any [event property](/docs/data/events) in PostHog. Here are some common properties you can filter on:
+The filters can be configured to filter on any [event property](/docs/data/events) in PostHog. When there are multiple values for a property, the filters will return true if it matches **any** of the values. For example, if you have multiple `exception_functions` values, the filters will return true if it matches **any** of the functions.
+
+Here are some common properties you can filter on:
 
 | Property | Event property | Description |
 | --- | --- | --- |
@@ -62,11 +64,11 @@ The filters can be configured to filter on any [event property](/docs/data/event
 | Current URL | `$current_url` | The URL that the error occurred on. |
 | Feature flag | `$feature_flag` | The feature flag that the error occurred on. |
 
-You can also set custom properties on the error tracking event to filter on. For example, setting a custom `release_version` number, `repo_owner`, or `params_received` property to provide more context or debug information.
+You can also set custom properties on the error tracking event to filter on. For example, setting a custom `params_received` property to provide more context or debug information.
 
 ### Order of issue assignment filters
 
-Issue assignment filters are evaluated in the order they are configured. The first filter that matches will be used to assign the issue. This means you should configure the most specific filters first, and then the more general filters, finally with a catch-all filter at the end.
+Issue assignment filters are evaluated in the order they are configured. They can also be reordered once created. The first filter that matches will be used to assign the issue. This means you should configure the most specific filters first, and then the more general filters later.
 
 ### Alerting based on assignment 
 

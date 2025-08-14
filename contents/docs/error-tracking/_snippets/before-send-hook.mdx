@@ -1,4 +1,4 @@
-The [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) callback in the JS SDK will drop events if a falsey value is returned. You can provide a `before_send` function when initializing the PostHog client to exclude any exception events you do not wish to capture client-side.
+The [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) callback in the [web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs will drop events if a falsey value is returned. You can provide a `before_send` function when initializing the PostHog client to exclude any exception events you do not wish to capture client-side.
 
 ```js
 posthog.init('<ph_project_api_key>', {
