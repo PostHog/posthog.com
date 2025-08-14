@@ -171,7 +171,7 @@ Champions aren't just customers you're friendly with - they're people who will a
 
 ## Discovery call structure 
 
-> Give yourself enough time to demo - it can make all the difference!"
+> Give yourself enough time to demo - it can make all the difference!
 
 ### 1. Opening & understanding the situation (~5-7mins)
 
