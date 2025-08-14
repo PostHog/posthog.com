@@ -413,7 +413,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                             </div>
                             <motion.div
                                 data-scheme="tertiary"
-                                className="group absolute left-0 top-0 w-1.5 bottom-0 cursor-ew-resize !transform-none"
+                                className="w-1.5 cursor-ew-resize top-0 left-0 !transform-none absolute z-20 h-full hover:bg-accent active:bg-accent"
                                 drag="x"
                                 dragMomentum={false}
                                 dragConstraints={{ left: 0, right: 0 }}
@@ -424,11 +424,7 @@ export default function Collection(props: CollectionProps): React.ReactElement {
                                     )
                                     setAsideWidth(newWidth)
                                 }}
-                            >
-                                <div className="relative w-full h-full">
-                                    <div className="hidden group-hover:block absolute inset-y-0 left-0 w-[2px] bg-light-8" />
-                                </div>
-                            </motion.div>
+                            />
                         </motion.aside>
                     )}
 
