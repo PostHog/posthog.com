@@ -15,6 +15,8 @@ Errors are initially captured as individual `$exception` events. Like other [eve
     classes="rounded"
 />
 
+<Caption>View recent exception events in the <strong>Activity</strong> tab</Caption>
+
 You can expect the following properties to be present in the exception events (in addition to the [standard event properties](/docs/data/events#default-properties)):
 
 import ExceptionPropertiesTable from './_snippets/exception-properties-table.mdx'
@@ -28,11 +30,21 @@ These captured properties are used to build a [fingerprint](/docs/error-tracking
 Issues are groups of similar `$exception` events that share common event information, such as the exception type, message, and stack trace. They're the primary way you interact with captured exceptions in error tracking.
 
 <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250814_dfbq_97e39c5c39.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/SCR_20250814_devl_d70f672e94.png"
+    alt="Issues list view"
+    classes="rounded"
+/>
+<Caption>The error tracking dashboard displays a list of issues</Caption>
+
+
+<ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/issue_light_f17781d806.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/issue_dark_5e825b1fe6.png"
     alt="Issue view"
     classes="rounded"
 />
+<Caption>Opening an issue shows detailed information about its exceptions</Caption>
 
 When working in the context of error tracking, PostHog [groups similar exception events](/docs/error-tracking/grouping-issues) into issues to help you triage them and take action. You can do the following with issues:
 
@@ -45,19 +57,49 @@ When working in the context of error tracking, PostHog [groups similar exception
 
 PostHog attempts to group similar exceptions into an issue automatically by their exception type, exception message, and [stack traces](/docs/error-tracking/stack-traces). The quality of automatic grouping can vary depending on the data available. 
 
-You can customize issue grouping by labeling exceptions with a [custom fingerprint](/docs/error-tracking/grouping-issues#option-1-client-side-fingerprint), [custom grouping rules](/docs/error-tracking/grouping-issues#option-2-custom-grouping-rule), or by [merging issues](/docs/error-tracking/grouping-issues).
+```mermaid
+flowchart TD
 
-The priority order from highest to lowest of these grouping methods is:
+    I1["<strong>Issue #1 – TypeError </strong><br/> Status: Active<br/> Assigned: David<br/> Volume: 5.2K<br/> Message: #quot;Cannot read properties of undefined#quot;"]
+
+    I2["<strong>Issue #2 – ReferenceError </strong><br/> Status: Resolved<br/> Assigned: Olly<br/> Volume: 1.5K<br/> Message: #quot;userId is not defined at dashboard.js#quot;"]
+
+    I3["<strong>Issue #3 – NetworkError</strong><br/> Status: Surpressed<br/> Assigned: Hugues<br/> Volume: 3.9K<br/> Message: #quot;Failed to fetch from API endpoint#quot;"]
+    
+    E1["<strong>Latest exception</strong><br/>service.py:1316<br/>21 hours ago"]
+
+    E2@{ shape: processes, label: "<strong>Grouped exceptions</strong><br/>service.py:1316<br/>~5.2K events" }
+    
+    E3@{ shape: processes, label: "<strong>Grouped exceptions</strong><br/>dashboard.js:15<br/>1.5K events" }
+
+    E4@{ shape: processes, label: "<strong>Grouped exceptions</strong><br/>main.go:248<br/>3.9K events" }
+    
+    I1 --> E1
+    I1 --> E2
+    I2 --> E3
+    I3 --> E4
+    
+    classDef exceptionStyle fill:#ffebee,stroke:#d32f2f,stroke-width:2px,color:#000
+    classDef issueStyle fill:#e8f5e8,stroke:#388e3c,stroke-width:2px,color:#000
+    
+    class E1,E2,E3,E4 exceptionStyle
+    class I1,I2,I3 issueStyle
+
+```
+
+You can customize issue grouping logic by labeling exceptions with a [custom fingerprint](/docs/error-tracking/grouping-issues#option-1-client-side-fingerprint), [custom grouping rules](/docs/error-tracking/grouping-issues#option-2-custom-grouping-rule), or by [merging issues](/docs/error-tracking/grouping-issues).
+
+When multiple issue grouping methods apply, PostHog applies them in the following priority order, from highest to lowest:
 
 ```mermaid
 flowchart TD
-    A[Exception Event] --> B{Custom Fingerprint<br/>Set?}
-    B -->|Yes| C[Use Custom Fingerprint]
-    B -->|No| D{Custom Grouping Rules<br/>Match?}
-    D -->|Yes| E[Use Custom Grouping Rules]
-    D -->|No| F[Use Automatic Fingerprinting]
+    A[Exception Event] --> B{Custom fingerprint<br/>set?}
+    B -->|Yes| C[Use custom fingerprint]
+    B -->|No| D{Custom grouping rules<br/>match?}
+    D -->|Yes| E[Use custom grouping rules]
+    D -->|No| F[Use automatic fingerprinting]
     
-    C --> G[Create/Update Issue]
+    C --> G[Create/update issue]
     E --> G
     F --> G
     

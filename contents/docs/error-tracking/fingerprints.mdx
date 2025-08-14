@@ -16,17 +16,17 @@ Fingerprints are built iteratively using components of the exception event. The 
 
 ```mermaid
 flowchart TD
-    A[Add exception type to fingerprint] --> B{Stack Trace<br/>Available?}
+    A[Add exception type to fingerprint] --> B{Stack trace<br/>available?}
     
     B -->|No| C[Add error message to fingerprint]
     
     C --> D[Hash fingerprint]
     
-    B -->|Yes| E{In-App Frames<br/>Exist?}
+    B -->|Yes| E{In-app frames<br/>exist?}
     
     E -->|No| F[Add first frame to fingerprint]
     
-    E -->|Yes| G[Add in-app frame to fingerprint<br/>Priority: Resolved > Unresolved]
+    E -->|Yes| G[Add in-app frame to fingerprint<br/>Priority: resolved > unresolved]
     
     F --> D
     G --> D
