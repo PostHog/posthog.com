@@ -35,9 +35,9 @@ posthog.init('phc_up2BnbdQluOFOQi3VOcZeQYLeyPgQBVHhDy5lCPgVF0', {
     api_host: 'https://us.i.posthog.com',
     defaults: '2025-05-24',
     capture_exceptions: {
-    "capture_unhandled_errors": true,
-    "capture_unhandled_rejections": true,
-    "capture_console_errors": false
+      capture_unhandled_errors: true,
+      capture_unhandled_rejections: true,
+      capture_console_errors: false
   }
 })
 ```
@@ -50,10 +50,8 @@ You can also manually call the exception capture method.
 
 ```javascript file=Web
 posthog.captureException(error, {
-  properties: {
-    custom_property: "custom_value",
-    custom_list: ["custom_value_1", "custom_value_2"],
-  }
+  custom_property: "custom_value",
+  custom_list: ["custom_value_1", "custom_value_2"],
 })
 ```
 
@@ -91,7 +89,7 @@ Equally important, you can customize properties on the exceptions to help you co
 
 ### During manual capture
 
-When capturing exceptions manually, passing `properties` to the capture exception method will override the default properties. This is just like any other event in PostHog.
+When capturing exceptions manually, passing `properties` to the capture exception method will add additional properties to the captured event. This is just like any other event in PostHog.
 
 You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
 
