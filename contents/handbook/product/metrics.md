@@ -85,7 +85,7 @@ Similar to our revenue metrics, we are reusing queries the support team has set 
 
 ## Metrics outside of growth reviews
 
-If there are any other metrics you want to track to understand how well your product is doing, or which areas need improvement, go for it! Just make sure you are not tracking too many metrics and lose sight of what matters.
+If there are any other metrics you want to track to understand how well your product is doing, or which areas need improvement, go for it! Just make sure you are not tracking too many metrics, causing you to lose sight of what matters.
 
 ## Tips for increasing metrics awareness in a small product team
 
