@@ -10,7 +10,7 @@ For coverage of other, [non-security incidents](/handbook/engineering/incidents)
 
 ## Our approach to security advisories
 
-At PostHog, we take security seriously. We have a robust security program that includes:
+At PostHog, we take security seriously. Not as a checkbox, but with hardware security keys and healthy paranoia. We have a robust security program that includes:
 
 - Regular security audits, architecture reviews, and penetration testing
 - Automated code and infrastructure as code (IaC) linting
