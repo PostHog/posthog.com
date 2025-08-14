@@ -27,7 +27,7 @@ If you discover a security vulnerability in PostHog products or services, please
 
 Security is everyone's responsibility, so we encourage all our users and staff to follow some basic best practices within their own organizations.
 
-- **Use PostHog Cloud** - [We sunset K8s deployments long ago](blog/sunsetting-helm-support-posthog) and our OSS version isn't suitable for use at scale. Use PostHog Cloud to ensure you benefit from the latest security updates. 
+- **Use PostHog Cloud** - [We sunset K8s deployments long ago](/blog/sunsetting-helm-support-posthog) and our OSS version isn't suitable for use at scale. Use PostHog Cloud to ensure you benefit from the latest security updates.
 - **Use strong authentication** - Always enable multi-factor authentication, strong passwords, and SSO where available. PostHog supports all of these. 
 - **Monitor access** - Regularly review who has access to your PostHog data and follow the principle of least privilege by only giving access to things people _actually_ need. 
 
