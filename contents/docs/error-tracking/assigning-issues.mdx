@@ -2,7 +2,7 @@
 title: Assign issues to teammates
 ---
 
-Error tracking allows you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or users. This helps your team find relevant issues to work on through **filtering**. You can also set up team-specific **alerting** to notify specific teams when issues are created or reopened.
+Error tracking allows you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or teammates. This helps your team find relevant issues to work on through **filtering**. You can also set up team-specific **alerting** to notify specific teams when issues are created or reopened.
 
 This guide covers the following:
 - [Assigning issues to roles or users](#assigning-issues)
@@ -52,10 +52,10 @@ The filters can be configured to filter on any [event property](/docs/data/event
 
 | Property | Event property | Description |
 | --- | --- | --- |
-| Exception type | `$exception_type` | The type of exception that occurred. |
-| Exception message | `$exception_message` | The message detected on the error. |
+| Exception type | `$exception_types` | The type of exception(s) that occurred. |
+| Exception message | `$exception_values` | The message(s) detected on the error. |
+| Exception function | `$exception_functions` | The function(s) where the exception occurred. |
 | Exception source | `$exception_sources` | The source file(s) where the exception occurred. |
-| Exception level | `$exception_level` | The level of the severity of the error. |
 | Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
 | Device type | `$device_type` | The type of device that the error occurred on. |
 | Browser | `$browser` | The browser that the error occurred in. |
@@ -64,7 +64,7 @@ The filters can be configured to filter on any [event property](/docs/data/event
 
 You can also set custom properties on the error tracking event to filter on. For example, setting a custom `release_version` number, `repo_owner`, or `params_received` property to provide more context or debug information.
 
-### Order of issue assignment filters
+### Order of issue assignment rules
 
 Issue assignment filters are evaluated in the order they are configured. The first filter that matches will be used to assign the issue. This means you should configure the most specific filters first, and then the more general filters, finally with a catch-all filter at the end.
 
