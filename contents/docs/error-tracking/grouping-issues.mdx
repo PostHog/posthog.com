@@ -86,7 +86,7 @@ You can also set custom properties on the error tracking event to filter on. You
 
 When grouping exceptions into issues, it's important to consider what you might do with the issues once created. For example, you might:
 
-- Group exceptions by areas of ownership so you can easily identify and assign an issue to the appropriate team. 
+- Group exceptions by areas of ownership, so you can easily identify and assign an issue to the appropriate team. 
 - Group high urgency exceptions by a specific services or routes that have higher business impact.
 - Group exceptions by specific features, especially when they're new or experimental.
 
@@ -96,7 +96,7 @@ Grouping rules are evaluated in the order they are configured. The first rule th
 
 ## How PostHog prioritizes issue grouping logic
 
-More broadly, PostHog will prioritize issue grouping logic in the following order:
+PostHog prioritizes issue grouping logic in the following order:
 
 1. Client-side defined custom fingerprint using `$exception_fingerprint`
 2. Match custom grouping rules defined in PostHog

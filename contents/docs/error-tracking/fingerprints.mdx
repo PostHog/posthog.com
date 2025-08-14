@@ -48,7 +48,7 @@ If there are multiple exceptions leading to one another, a single fingerprint wi
 
 ### Ensuring accurate fingerprints
 
-[Resolved stack traces](/docs/error-tracking/stack-traces) are critical for accurate fingerprinting. Without accurate stack traces, PostHog cannot group exceptions consistently. If you have not uploaded source maps, you should do so following this [guide](/docs/error-tracking/upload-source-maps).
+[Resolved stack traces](/docs/error-tracking/stack-traces) are critical for accurate fingerprinting. Without accurate stack traces, PostHog cannot group exceptions consistently. If you have not uploaded source maps, follow the [source map guide](/docs/error-tracking/upload-source-maps) to do so.
 
 This also means that if the exception **type** or **message** changes from one version to the next, the fingerprint will change. 
 
