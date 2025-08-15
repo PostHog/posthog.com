@@ -43,7 +43,7 @@ const UserBar = () => {
                     <span>
                         {isModerator && (
                             <Link
-                                className="text-sm pr-2 mr-2 border-r border-border dark:border-dark dark:text-yellow text-red font-semibold"
+                                className="text-sm pr-2 mr-2 border-r border-input dark:text-yellow text-red font-semibold"
                                 to="/posts/new"
                             >
                                 New post
@@ -75,7 +75,7 @@ const CommunityBar = () => {
     const { fullWidthContent } = useLayoutData()
     return (
         <div
-            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center sticky top-[-1px] border-b border-border dark:border-dark lg:space-y-0 space-y-2 ${
+            className={`@container py-4 md:py-2 mb-2 bg-accent rounded text-center sticky top-[-1px] border-b border-input lg:space-y-0 space-y-2 ${
                 fullWidthContent ? 'px-6' : 'pl-4 pr-2'
             }`}
         >
@@ -86,9 +86,9 @@ const CommunityBar = () => {
 
 export const Skeleton = () => {
     return Array.from(Array(30)).map((_, i) => (
-        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-3 px-6">
-            <div className="w-4/5 bg-accent dark:bg-accent-dark animate-pulse h-[30px] rounded-md" />
-            <div className="w-2/5 bg-accent dark:bg-accent-dark animate-pulse h-[30px] rounded-md" />
+        <div key={`skeleton-${i}`} className="flex items-center space-x-2 w-full my-2 px-6">
+            <div className="w-4/5 bg-accent animate-pulse h-[30px] rounded-md" />
+            <div className="w-2/5 bg-accent animate-pulse h-[30px] rounded-md" />
         </div>
     ))
 }
@@ -99,7 +99,7 @@ export const SortDropdown = ({ sort, setSort, className = '' }) => {
             <div className="relative">
                 <Menu>
                     <Menu.Button
-                        className={`flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all ${className}`}
+                        className={`flex items-center text-sm justify-between relative pl-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all ${className}`}
                     >
                         <Tooltip content={() => <>Sorting by: {sort}</>} tooltipClassName="md:block hidden">
                             <span className="relative">
@@ -108,7 +108,7 @@ export const SortDropdown = ({ sort, setSort, className = '' }) => {
                         </Tooltip>
                         <IconChevronDown className="w-6" />
                     </Menu.Button>
-                    <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-0 left-0 translate-y-full overflow-hidden">
+                    <Menu.Items className="absolute rounded-md border border-input bg-accent text-sm flex flex-col z-[50] bottom-0 left-0 translate-y-full overflow-hidden">
                         {sortOptions.map((option, index) => {
                             return (
                                 <Menu.Item key={`${option.label}-${index}`}>
@@ -138,13 +138,13 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
     return (
         <>
             <div
-                className={`relative flex space-x-2 pb-2 border-b border-border dark:border-dark ${
+                className={`relative flex space-x-2 pb-2 border-b border-input ${
                     fullWidthContent ? 'pl-2 pr-4' : 'pr-2'
                 }`}
             >
                 <div className="w-full flex-grow">
                     <Menu>
-                        <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
+                        <Menu.Button className="flex items-center relative mx-2 pl-2 pr-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all h-full">
                             <div className="flex items-center space-x-2">
                                 <Icon icon={activeMenu?.icon} color={activeMenu?.color} />
                                 <div className="text-sm flex space-x-1 items-center">
@@ -154,7 +154,7 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                                 <IconChevronDown className="w-6 h-6 -mb-[2px]" />
                             </div>
                         </Menu.Button>
-                        <Menu.Items className="absolute rounded-md shadow-lg border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                        <Menu.Items className="absolute rounded-md shadow-lg border border-input bg-accent text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                             {menu.map((menu, index) => {
                                 const { name, url, icon, color } = menu
                                 const active = menu === activeMenu
@@ -186,10 +186,10 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
                 {showTags && activeMenu?.children?.length > 0 && (
                     <div className="flex-grow-0 flex items-center justify-center">
                         <Menu>
-                            <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-light dark:md:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
+                            <Menu.Button className="flex space-x-1 items-center text-sm justify-between relative px-1.5 pt-1.5 pb-1 rounded hover:bg-light/50 hover:dark:bg-dark/50 border border-b-3 border-transparent md:hover:border-primary hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all">
                                 <IconFilter className="w-5 h-5" />
                             </Menu.Button>
-                            <Menu.Items className="absolute rounded-md border border-border dark:border-dark bg-accent dark:bg-accent-dark text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
+                            <Menu.Items className="absolute rounded-md border border-input bg-accent text-sm flex flex-col z-[50] bottom-2 left-2 right-2 translate-y-full overflow-hidden">
                                 <Menu.Item>
                                     <button
                                         onClick={() => {
@@ -236,14 +236,14 @@ export const PostFilters = ({ showTags = true, showSort = true }) => {
             </div>
 
             {showTags && tag && (
-                <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-border dark:border-dark -mb-1">
+                <div className="bg-light dark:bg-dark px-5 relative top-[-6px] pb-2 border-b border-input -mb-1">
                     <span
                         className="
-                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-border dark:after:border-dark after:rounded-bl after:content-['']
+                        after:h-6 after:w-6 after:absolute after:left-[39px] after:top-[-6px] after:border after:border-t-0 after:border-r-0 after:border-primary after:rounded-bl after:content-['']
                     "
                     ></span>
                     <div className="pl-[43px] -mt-0.5">
-                        <span className="inline-flex gap-1 items-center text-[13px] rounded-full border border-light dark:border-dark pl-1.5 pr-2 pt-1 pb-1">
+                        <span className="inline-flex gap-1 items-center text-[13px] rounded-full border border-primary pl-1.5 pr-2 pt-1 pb-1">
                             <button onClick={() => setTag(undefined)}>
                                 <IconX className="w-3 h-3 inline-block bg-border dark:bg-border-dark p-1 box-content rounded-full" />
                             </button>
@@ -289,7 +289,7 @@ function PostsListing() {
                 transition-all 
                 ${
                     articleView
-                        ? 'hidden md:flex flex-col h-auto sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-border dark:border-dark 2xl:border-l'
+                        ? 'hidden md:flex flex-col h-auto sticky top-0 z-10 reasonable:top-[108px] w-full md:w-[20rem] lg:w-[24rem] flex-shrink-0 border-r border-input 2xl:border-l'
                         : 'flex-grow md:px-8 2xl:px-12'
                 }
             `}
@@ -344,10 +344,10 @@ export default function Default({ children }) {
             <section className="md:flex my-4 md:my-0 items-start">
                 {!articleView && (
                     <div
-                        className={`lg:block hidden lg:sticky top-0 z-10 reasonable:top-[108px] w-full h-screen md:w-[14rem] lg:w-[20rem] xl:w-[24rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative lg:border-x border-border dark:border-dark`}
+                        className={`lg:block hidden lg:sticky top-0 z-10 reasonable:top-[108px] w-full h-screen md:w-[14rem] lg:w-[20rem] xl:w-[24rem] flex-shrink-0 after:absolute after:w-full after:h-24 after:bottom-0 after:bg-gradient-to-b after:from-transparent dark:after:via-dark/80 dark:after:to-dark after:via-light/80 after:to-light after:z-10 relative lg:border-x border-input`}
                     >
                         <div
-                            className={`@container py-4 md:py-2 mb-2 bg-accent dark:bg-accent-dark rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] border-b border-border dark:border-dark lg:space-y-0 space-y-2 ${
+                            className={`@container py-4 md:py-2 mb-2 bg-accent rounded text-center flex flex-col lg:flex-row justify-between items-center sticky top-[-1px] border-b border-input lg:space-y-0 space-y-2 ${
                                 fullWidthContent ? 'px-6' : 'pl-4 pr-2'
                             }`}
                         >
@@ -366,7 +366,7 @@ export default function Default({ children }) {
                     className={`${
                         articleView
                             ? 'flex-grow'
-                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 pl-4 border-l border-light dark:border-dark md:block hidden'
+                            : 'sticky top-[108px] h-screen basis-[20rem] flex-shrink-0 pl-4 border-l border-primary md:block hidden'
                     }`}
                 >
                     {children}

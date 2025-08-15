@@ -1,31 +1,63 @@
-import Layout from 'components/Layout'
-import SEO from 'components/seo'
 import Team from 'components/Team'
 import { companyMenu } from '../../../navs'
-import React, { useEffect, useState } from 'react'
+import React, { useState, useRef } from 'react'
+import ReaderView from 'components/ReaderView'
+import { TreeMenu } from 'components/TreeMenu'
 import { useUser } from 'hooks/useUser'
-import { navigate } from 'gatsby'
+import { IconPencil } from '@posthog/icons'
+import OSButton from 'components/OSButton'
 
-export default function NewTeam() {
-    const { isModerator, isValidating } = useUser()
-    useEffect(() => {
-        if (!isValidating && !isModerator) {
-            navigate('/teams')
+type TeamPageProps = {
+    params: {
+        slug: string
+    }
+}
+
+export default function NewTeam(props: TeamPageProps) {
+    const [editing, setEditing] = useState(true)
+    const [saving, setSaving] = useState(false)
+    const { user } = useUser()
+    const isModerator = user?.role?.type === 'moderator'
+    const onSaveRef = useRef<(() => void) | null>(null)
+
+    // These variables are defined but not used in this component
+    // const navigate = useNavigate()
+    // const location = useLocation()
+    // const currentPath = location.pathname.replace('/', '')
+
+    const handleSave = async () => {
+        // Call the save function from Team component
+        if (onSaveRef.current) {
+            onSaveRef.current()
         }
-    }, [isModerator, isValidating])
+    }
+
+    const editButton = isModerator ? (
+        <>{!editing && <OSButton size="md" icon={<IconPencil />} onClick={() => setEditing(true)} />}</>
+    ) : null
+
+    const editActions =
+        editing && isModerator ? (
+            <>
+                <OSButton size="md" variant="primary" onClick={handleSave} disabled={saving}>
+                    Save & publish
+                </OSButton>
+            </>
+        ) : null
+
     return (
-        isModerator && (
-            <Layout
-                parent={companyMenu}
-                activeInternalMenu={companyMenu.children.find((menu) => menu.name.toLowerCase() === 'teams')}
-            >
-                <SEO
-                    title={`${name} - PostHog`}
-                    description="We're organized into multi-disciplinary small teams."
-                    image={`/images/small-teams.png`}
-                />
-                <Team newTeam />
-            </Layout>
-        )
+        <ReaderView
+            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
+            rightActionButtons={editing ? editActions : editButton}
+            isEditing={editing}
+        >
+            <Team
+                editing={editing}
+                setEditing={setEditing}
+                saving={saving}
+                setSaving={setSaving}
+                onSaveRef={onSaveRef}
+            />
+        </ReaderView>
     )
 }

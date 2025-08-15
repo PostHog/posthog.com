@@ -34,8 +34,8 @@ const ActionButton = ({ onClick, children, roundButton = false }) => {
         <button
             className={`group z-10 font-bold p-2 rounded-full border ${
                 roundButton
-                    ? ' bg-white dark:bg-dark border-light dark:border-dark'
-                    : '-mt-2 opacity-50 hover:bg-white hover:dark:bg-dark border-transparent hover:border-light hover:dark:border-dark'
+                    ? ' bg-primary border-primary'
+                    : '-mt-2 opacity-50 hover:bg-white hover:dark:bg-dark border-transparent hover:border-primary'
             } leading-none hover:scale-[1.02] hover:-translate-y-px active:translate-y-px active:scale-[.98]`}
             onClick={onClick}
         >
@@ -47,28 +47,19 @@ const ActionButton = ({ onClick, children, roundButton = false }) => {
 const Menu = ({ subscriberCount, setEditing, handleUnpublish, handleExport }) => {
     return (
         <ul className="list-none m-0 p-0 -my-3 -mx-4">
-            <li className="border-b-half border-border dark:border-dark">
-                <button
-                    onClick={handleExport}
-                    className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
-                >
+            <li className="border-b-half border-input">
+                <button onClick={handleExport} className="text-left p-3 hover:bg-accent w-full">
                     <p className="m-0 text-sm font-semibold">Export subscriber list ({subscriberCount})</p>
                     <p className="m-0 text-xs opacity-60">People who subscribed for updates</p>
                 </button>
             </li>
-            <li className="border-b-half border-border dark:border-dark">
-                <button
-                    onClick={() => setEditing(true)}
-                    className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
-                >
+            <li className="border-b-half border-input">
+                <button onClick={() => setEditing(true)} className="text-left p-3 hover:bg-accent w-full">
                     <p className="m-0 text-sm font-semibold">Edit</p>
                 </button>
             </li>
             <li>
-                <button
-                    onClick={handleUnpublish}
-                    className="text-left p-3 hover:bg-accent dark:hover:bg-accent-dark w-full"
-                >
+                <button onClick={handleUnpublish} className="text-left p-3 hover:bg-accent w-full">
                     <p className="m-0 text-sm font-semibold">Unpublish</p>
                 </button>
             </li>

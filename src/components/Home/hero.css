@@ -1,0 +1,172 @@
+@keyframes staggerInLg {
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes staggerInSm {
+    0% {
+        opacity: 0;
+        transform: translateY(80%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.home-hero-title span:nth-of-type(1) {
+    animation: staggerInLg;
+    animation-duration: 0.6s;
+    animation-delay: calc(1 * 100ms);
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.home-hero-title span:nth-of-type(2) {
+    animation: staggerInLg;
+    animation-duration: 0.6s;
+    animation-delay: calc(2 * 100ms);
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.home-hero-title span:nth-of-type(3) {
+    animation: staggerInLg;
+    animation-duration: 0.6s;
+    animation-delay: calc(3 * 100ms);
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.home-hero-title span:nth-of-type(4) {
+    animation: staggerInLg;
+    animation-duration: 0.6s;
+    animation-delay: calc(4 * 100ms);
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+.home-hero-title span:nth-of-type(5) {
+    animation: staggerInLg;
+    animation-duration: 0.6s;
+    animation-delay: calc(5 * 100ms);
+    animation-timing-function: ease-out;
+    animation-fill-mode: both;
+}
+
+@media (max-width: 1200px) {
+    .home-hero-title span:nth-of-type(1) {
+        animation: staggerInSm;
+        animation-duration: 0.6s;
+        animation-delay: calc(1 * 100ms);
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    }
+
+    .home-hero-title span:nth-of-type(2) {
+        animation: staggerInSm;
+        animation-duration: 0.6s;
+        animation-delay: calc(2 * 100ms);
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    }
+
+    .home-hero-title span:nth-of-type(3) {
+        animation: staggerInSm;
+        animation-duration: 0.6s;
+        animation-delay: calc(3 * 100ms);
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    }
+
+    .home-hero-title span:nth-of-type(4) {
+        animation: staggerInSm;
+        animation-duration: 0.6s;
+        animation-delay: calc(4 * 100ms);
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    }
+
+    .home-hero-title span:nth-of-type(5) {
+        animation: staggerInSm;
+        animation-duration: 0.6s;
+        animation-delay: calc(5 * 100ms);
+        animation-timing-function: ease-out;
+        animation-fill-mode: both;
+    }
+}
+
+.home-hero-subtitle {
+    opacity: 0;
+    animation: fadeIn;
+    animation-duration: 2s;
+    animation-fill-mode: both;
+    animation-delay: 0.7s;
+}
+
+.home-hero-cta a:nth-of-type(1),
+.home-hero-cta button:nth-of-type(1) {
+    animation: fadeIn;
+    animation-duration: 3s;
+    animation-delay: calc(1 * 1200ms);
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.home-hero-cta a:nth-of-type(2),
+.home-hero-cta button:nth-of-type(2) {
+    animation: fadeIn;
+    animation-duration: 3s;
+    animation-delay: calc(2 * 800ms);
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.home-hero-cta a:nth-of-type(3),
+.home-hero-cta button:nth-of-type(3) {
+    animation: fadeIn;
+    animation-duration: 3s;
+    animation-delay: calc(3 * 800ms);
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+.home-hero-cta p {
+    opacity: 0;
+    animation: fadeIn;
+    animation-duration: 3s;
+    animation-delay: 2000ms;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}
+
+@media (max-width: 768px) {
+    .ai-integration-button {
+        display: none;
+    }
+}
+
+.enterprise-mode-home-hero-cta {
+    opacity: 0;
+    animation: fadeIn;
+    animation-duration: 3s;
+    animation-delay: 2300ms;
+    animation-timing-function: ease;
+    animation-fill-mode: both;
+}

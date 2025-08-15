@@ -34,7 +34,7 @@ export default function JobCard({ job }: JobCardProps): JSX.Element {
             rel="noopener noreferrer"
         >
             {/* Company banner with logo */}
-            <div className="px-6 py-3 border-b border-light bg-gray-50 rounded-t-lg flex items-center justify-between">
+            <div className="px-6 py-3 border-b border-light bg-accent rounded-t-lg flex items-center justify-between">
                 <div className="flex items-center">
                     {job.logo && (
                         <img

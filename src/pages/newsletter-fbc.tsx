@@ -119,7 +119,7 @@ function NewsletterSubscribeForm({
     }, [user])
 
     return (
-        <div className="max-w-lg flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 !mb-4 xs:!my-4 !py-4 w-full border border-light dark:border-dark rounded bg-accent dark:bg-accent-dark mx-auto">
+        <div className="max-w-lg flex flex-col md:flex-row md:justify-center items-center gap-4 md:gap-8 !mb-4 xs:!my-4 !py-4 w-full border border-primary rounded bg-accent mx-auto">
             <div className="w-full">
                 {!submitted ? (
                     <>
@@ -134,7 +134,7 @@ function NewsletterSubscribeForm({
                                     onChange={(e) => setEmail(e.target.value)}
                                     type="email"
                                     placeholder="Email address"
-                                    className="dark:bg-accent-dark border border-light dark:border-dark rounded text-[15px] w-full flex-1 max-w-xs"
+                                    className="dark:bg-accent-dark border border-primary rounded text-[15px] w-full flex-1 max-w-xs"
                                     value={email}
                                 />
                                 <button className={`${container(undefined, 'md')} -mt-px w-full max-w-xs`}>
@@ -215,7 +215,7 @@ function NewsletterFBC(): JSX.Element {
                                     to={issue.url}
                                     state={{ isComingFromAd: true }}
                                     onClick={() => handleNewsletterClick(issue.title)}
-                                    className="group flex flex-col items-center text-center transition-opacity border border-light dark:border-dark rounded bg-white dark:bg-dark relative hover:top-[-1px] hover:scale-[1.005] active:top-[1px] active:scale-[.995]"
+                                    className="group flex flex-col items-center text-center transition-opacity border border-primary rounded bg-light dark:bg-dark relative hover:top-[-1px] hover:scale-[1.005] active:top-[1px] active:scale-[.995]"
                                 >
                                     <div className="w-full mb-1 overflow-hidden rounded-t">
                                         <CloudinaryImage src={issue.image} className="rounded-none" />

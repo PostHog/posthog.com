@@ -27,10 +27,7 @@ export default function CodeBlocks() {
                 Here's what you can do with the PostHog JS code snippet and your product.
             </p>
             <p className="text-center text-sm pb-4">
-                <Link
-                    to="https://posthog.com/docs/getting-started/install?tab=sdks"
-                    className="text-primary/50 dark:text-primary-dark/50 font-normal"
-                >
+                <Link to="https://posthog.com/docs/getting-started/install?tab=sdks" className="text-muted font-normal">
                     (Not using JavaScript?)
                 </Link>
             </p>

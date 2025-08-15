@@ -73,7 +73,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
     return (
         <>
-            <li className="pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0">
+            <li className="pr-[5px] pl-[30px] !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0">
                 <div className="pb-8 flex items-center space-x-4">
                     <div className="flex items-center">
                         {avatars.map((avatar, index) => {
@@ -96,7 +96,7 @@ const Collapsed = ({ setExpanded, replies, resolvedBy }: CollapsedProps) => {
 
             <li
                 key={reply?.id}
-                className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0`}
+                className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0`}
             >
                 <Reply reply={reply} badgeText={badgeText} />
             </li>
@@ -112,8 +112,9 @@ const getComunityClasses = (reply, isResolution) => {
     const profile = reply?.attributes?.profile?.data
     const isTeamMember = !!profile?.attributes?.startDate
     const isAI = profile?.id === Number(process.env.GATSBY_AI_PROFILE_ID)
-    return `${isAI ? 'community-profile-ai' : isTeamMember ? 'community-profile-mod' : 'community-profile-member'}${isResolution ? ' community-reply-resolution' : ''
-        }`
+    return `${isAI ? 'community-profile-ai' : isTeamMember ? 'community-profile-mod' : 'community-profile-member'}${
+        isResolution ? ' community-reply-resolution' : ''
+    }`
 }
 
 const Expanded = ({ replies }: ExpandedProps) => {
@@ -132,7 +133,7 @@ const Expanded = ({ replies }: ExpandedProps) => {
                 return (
                     <li
                         key={reply.id}
-                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-light dark:border-dark squeak-left-border relative before:border-l-0 pb-4 ${getComunityClasses(
+                        className={`pr-[5px] pl-[30px] !mb-0 border-l border-solid border-primary squeak-left-border relative before:border-l-0 pb-4 ${getComunityClasses(
                             reply,
                             resolvedBy?.data?.id === reply.id
                         )}`}

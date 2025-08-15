@@ -9,7 +9,7 @@ export const onPreBootstrap: GatsbyNode['onPreBootstrap'] = async ({ cache }) =>
     const source = path.resolve('node_modules/@posthog/hedgehog-mode/assets')
     const hedgehogModeDir = path.resolve(__dirname, '../public/hedgehog-mode')
     fs.cpSync(source, hedgehogModeDir, { recursive: true })
-    
+
     if (process.env.POSTHOG_APP_API_KEY && !(await cache.get(PAGEVIEW_CACHE_KEY))) {
         const pageViews: Record<string, number> = {}
 

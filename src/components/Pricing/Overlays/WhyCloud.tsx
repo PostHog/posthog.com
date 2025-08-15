@@ -99,7 +99,7 @@ export default function WhyCloud({ setOpen, open }: { setOpen: (open: boolean) =
                         return (
                             <li
                                 key={section.title}
-                                className="border-t first:border-t-0 border-dashed border-gray-accent mt-4 pt-2 first:mt-0"
+                                className="border-t first:border-t-0 border-dashed border-primary-accent mt-4 pt-2 first:mt-0"
                             >
                                 <h4 className="text-lg m-0 mt-4">{section.title}</h4>
                                 <ul className="list-none p-0 my-2 space-y-1">

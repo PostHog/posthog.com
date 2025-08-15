@@ -1470,6 +1470,10 @@
             "destination": "/teams/content"
         },
         {
+            "source": "/customers/headshot-pro",
+            "destination": "/customers/headshotpro"
+        },
+        {
             "source": "/docs/api/user",
             "destination": "/docs/api/users"
         },

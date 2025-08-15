@@ -20,7 +20,7 @@ export const LinkListItem = ({ title, url, items }: IProps) => {
                         <h4 className="text-[17px] mb-0">
                             <Link
                                 to={url}
-                                className="flex hover:text-red rounded hover:bg-gray-accent-light hover:dark:bg-gray-accent-dark dark:opacity-80 hover:opacity-100 px-2 py-1.5 box-border relative active:top-[.5px] active:scale-[.99] transition-all"
+                                className="flex hover:text-red rounded hover:bg-primary hover: dark:opacity-80 hover:opacity-100 px-2 py-1.5 box-border relative active:top-[.5px] active:scale-[.99] transition-all"
                             >
                                 {title}
                             </Link>
@@ -31,7 +31,7 @@ export const LinkListItem = ({ title, url, items }: IProps) => {
                             <li key={title} className="list-none text-[15px]">
                                 <Link
                                     to={url}
-                                    className="flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border-light dark:hover:border-dark hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
+                                    className="flex items-center relative px-2 pt-1.5 pb-1 mb-1 rounded border border-b-3 border-transparent hover:border hover:translate-y-[-1px] active:translate-y-[1px] active:transition-all"
                                 >
                                     {title}
                                 </Link>

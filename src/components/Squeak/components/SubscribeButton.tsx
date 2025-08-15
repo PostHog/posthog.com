@@ -18,7 +18,7 @@ export const Button = ({
     <button
         className={`flex rounded-sm p-1 ${
             !subscribed
-                ? 'relative bg-accent dark:bg-accent-dark border border-light dark:border-dark text-primary/50 hover:text-primary/75 dark:text-primary-dark/50 hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]'
+                ? 'relative bg-accent border border-primary text-muted hover:text-secondary hover:scale-[1.05] hover:top-[-.5px] active:scale-[1] active:top-[0px]'
                 : 'bg-red text-white dark:text-white'
         } ${className}`}
         onClick={handleSubscribe}

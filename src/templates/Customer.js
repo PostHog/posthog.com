@@ -19,7 +19,7 @@ import { layoutLogic } from 'logic/layoutLogic'
 import Title from 'components/Edition/Title'
 import { useLayoutData } from 'components/Layout/hooks'
 
-const A = (props) => <Link {...props} className="text-red hover:text-red font-semibold" />
+const A = (props) => <Link {...props} />
 
 const components = {
     ...shortcodes,
@@ -62,7 +62,7 @@ export default function Customer({ data, mobile, pageContext: { tableOfContents 
                     </div>
                 </section>
                 <aside
-                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-border dark:border-dark pt-4 ${
+                    className={`shrink-0 basis-72 @3xl:reasonable:sticky @3xl:reasonable:overflow-auto max-h-64 overflow-auto @3xl:max-h-[calc(100vh_-_108px)] @3xl:top-[108px] w-full block border-x border-input pt-4 ${
                         mobile ? 'lg:hidden' : ''
                     } `}
                 >

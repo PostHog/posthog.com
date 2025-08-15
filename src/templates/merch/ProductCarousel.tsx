@@ -1,21 +1,34 @@
 import { GatsbyImage } from 'gatsby-plugin-image'
 import 'keen-slider/keen-slider.min.css'
 import { useKeenSlider } from 'keen-slider/react'
-import React, { useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import { cn } from '../../utils'
 import { ShopifyProduct } from './types'
-import { getProductImages } from './utils'
-import { getShopifyImage } from './utils'
+import { getProductImages, getShopifyImage, calculateAspectRatioDimensions } from './utils'
 
 type ProductCarouselProps = {
     className?: string
     product: ShopifyProduct
+    containerWidth?: number
+}
+
+const Image = ({ index, image, title }: { index: number; image: { preview: { image: any } }; title: string }) => {
+    const memoizedImage = useMemo(() => {
+        const { width, height } = calculateAspectRatioDimensions(image.preview.image, 1500)
+        return getShopifyImage({ image: { ...image.preview.image, width, height } })
+    }, [image])
+
+    return (
+        <div className={`keen-slider__slide number-slide${index}} max-w-full bg-white`}>
+            <GatsbyImage className="w-full aspect-square" image={memoizedImage} alt={title} />
+        </div>
+    )
 }
 
 export function ProductCarousel(props: ProductCarouselProps): React.ReactElement | null {
-    const { className, product } = props
+    const { className, product, containerWidth } = props
     const { media, title } = product
-    const images = getProductImages(media)
+    const images = useMemo(() => getProductImages(media), [media])
     const [currentSlide, setCurrentSlide] = useState(0)
     const [loaded, setLoaded] = useState(false)
     const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>({
@@ -29,7 +42,24 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         },
     })
 
+    useEffect(() => {
+        setCurrentSlide(0)
+        instanceRef.current?.update()
+        instanceRef.current?.moveToIdx(0)
+    }, [product])
+
+    useEffect(() => {
+        if (instanceRef.current && containerWidth) {
+            instanceRef.current?.update()
+        }
+    }, [containerWidth, instanceRef])
+
     const classes = cn('relative rounded overflow-hidden', className)
+
+    const memoizedImage = useMemo(() => {
+        const { width, height } = calculateAspectRatioDimensions(product.featuredMedia.preview.image, 1500)
+        return getShopifyImage({ image: { ...product.featuredMedia.preview.image, width, height } })
+    }, [product])
 
     if (!images || images.length === 0) return null
 
@@ -37,7 +67,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         return (
             <GatsbyImage
                 className="w-full rounded-md overflow-hidden aspect-square"
-                image={getShopifyImage({ image: product.featuredMedia.preview.image })}
+                image={memoizedImage}
                 alt={product.title}
             />
         )
@@ -46,15 +76,7 @@ export function ProductCarousel(props: ProductCarouselProps): React.ReactElement
         <div className={classes}>
             <div ref={sliderRef} className="keen-slider">
                 {images.map((image, i) => {
-                    return (
-                        <div className={`keen-slider__slide number-slide${i}} max-w-full bg-white`} key={i}>
-                            <GatsbyImage
-                                className="w-full aspect-square"
-                                image={getShopifyImage({ image: image.preview.image })}
-                                alt={title}
-                            />
-                        </div>
-                    )
+                    return <Image index={i} image={image} title={title} key={i} />
                 })}
             </div>
             {loaded && instanceRef.current && (

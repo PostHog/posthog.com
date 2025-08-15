@@ -10,10 +10,13 @@ import { communityMenu } from '../../../navs'
 import Link from 'components/Link'
 import Switch from 'components/Toggle'
 import { CallToAction } from 'components/CallToAction'
-import { useToast } from 'hooks/toast'
+import { useToast } from '../../../context/Toast'
 import { navigate } from 'gatsby'
 import SEO from 'components/seo'
 import { flattenStrapiResponse } from '../../../utils'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import { profileBackgrounds } from '../../../data/profileBackgrounds'
+import CloudinaryImage from 'components/CloudinaryImage'
 
 function convertCentimetersToInches(centimeters: number): number {
     return centimeters / 2.54
@@ -70,7 +73,7 @@ const Toggle = ({ name, label, checked, onChange, options }) => {
                     <span>{label}</span>
                 </label>
             )}
-            <div className="grid grid-cols-2 rounded-md bg-accent dark:bg-accent-dark relative text-center overflow-hidden mt-1 text-base border border-border dark:border-dark">
+            <div className="grid grid-cols-2 rounded-md bg-accent relative text-center overflow-hidden mt-1 text-base border border-input">
                 <span
                     className={`bg-red dark:bg-yellow w-1/2 h-full absolute transition-all left-0 ${
                         checked === null ? 'hidden' : checked ? '' : 'translate-x-full'
@@ -112,9 +115,9 @@ function Avatar({ values, setFieldValue, error }) {
             className={`relative w-full aspect-square rounded-full flex justify-center items-center border-[1.5px] ${
                 favoriteColor
                     ? imageURL
-                        ? `bg-${favoriteColor} border-gray-accent-light dark:border-gray-accent-dark`
+                        ? `bg-${favoriteColor} border-primary dark:`
                         : `border-${favoriteColor} dark:border-${favoriteColor}`
-                    : `border-gray-accent-light dark:border-gray-accent-dark`
+                    : `border-primary dark:`
             }  text-black/50 dark:text-white/50 overflow-hidden group ${error ? '' : '-mb-2'}`}
         >
             {imageURL ? (
@@ -159,8 +162,8 @@ const Input = ({ type, name, placeholder, label, value, onChange, error, classNa
         <div>
             <label className="font-bold block">{label}</label>
             <input
-                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent dark:bg-accent-dark border ${
-                    error ? 'border-red' : 'border-border dark:border-dark'
+                className={`py-2 px-4 text-base rounded-md w-full m-0 mt-1 bg-accent border ${
+                    error ? 'border-red' : 'border-input'
                 } ${className}`}
                 type={type || 'text'}
                 name={name}
@@ -275,6 +278,68 @@ const formSections = [
         },
     },
     {
+        title: 'Profile background',
+        fields: {
+            backgroundImage: {
+                label: 'Choose a background for your profile',
+                className: 'w-full',
+                component: ({ values, setFieldValue }) => {
+                    const currentBg = values.backgroundImage
+                    return (
+                        <>
+                            <label className="font-bold">Choose a background for your profile</label>
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-2">
+                                {profileBackgrounds.map((bg) => {
+                                    const isSelected = currentBg?.id === bg.id
+                                    return (
+                                        <button
+                                            key={bg.id}
+                                            type="button"
+                                            onClick={() =>
+                                                setFieldValue('backgroundImage', {
+                                                    id: bg.id,
+                                                    url: bg.url,
+                                                    backgroundSize: bg.backgroundSize,
+                                                    backgroundRepeat: bg.backgroundRepeat,
+                                                    backgroundPosition: bg.backgroundPosition,
+                                                })
+                                            }
+                                            className={`relative overflow-hidden rounded-md border-2 ${
+                                                isSelected ? 'border-red dark:border-yellow' : 'border-input'
+                                            } transition-all hover:scale-105`}
+                                        >
+                                            <div
+                                                className="aspect-video w-full"
+                                                style={{
+                                                    backgroundImage: `url(${bg.url})`,
+                                                    backgroundSize: bg.backgroundSize || 'auto',
+                                                    backgroundRepeat: bg.backgroundRepeat || 'no-repeat',
+                                                    backgroundPosition: bg.backgroundPosition || 'center',
+                                                }}
+                                            />
+                                            <span className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs p-1">
+                                                {bg.name}
+                                            </span>
+                                        </button>
+                                    )
+                                })}
+                                {currentBg && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setFieldValue('backgroundImage', null)}
+                                        className="relative overflow-hidden rounded-md border-2 border-input transition-all hover:scale-105 flex items-center justify-center aspect-video bg-accent"
+                                    >
+                                        <span className="text-sm font-bold">Remove background</span>
+                                    </button>
+                                )}
+                            </div>
+                        </>
+                    )
+                },
+            },
+        },
+    },
+    {
         title: 'About you',
         fields: {
             biography: {
@@ -291,8 +356,8 @@ const formSections = [
                             rows={6}
                             name="biography"
                             placeholder="Write something interesting but don't try to use us for our SEO, we're on to you..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
-                                error ? 'border-red' : 'border-border dark:border-dark'
+                            className={`py-2 px-4 text-base rounded-md w-full bg-accent mt-1 border ${
+                                error ? 'border-red' : 'border-input'
                             }`}
                         />
                     </>
@@ -372,9 +437,9 @@ const formSections = [
                     return (
                         <div className="flex space-x-2 space-between w-full">
                             <div className="flex-grow">
-                                <p className="font-bold m-0">Show an AMA</p>
+                                <p className="font-bold m-0">Show comments</p>
                                 <p className="m-0">
-                                    Let visitors ask you questions. You'll get question notifications via email.
+                                    Let visitors comment on your profile. You'll get comment notifications via email.
                                 </p>
                             </div>
                             <Switch
@@ -405,8 +470,8 @@ const formSections = [
                             rows={6}
                             name="readme"
                             placeholder="I typically work best when..."
-                            className={`py-2 px-4 text-base rounded-md w-full bg-accent dark:bg-accent-dark mt-1 border ${
-                                error ? 'border-red' : 'border-border dark:border-dark'
+                            className={`py-2 px-4 text-base rounded-md w-full bg-accent mt-1 border ${
+                                error ? 'border-red' : 'border-input'
                             }`}
                         />
                     </>
@@ -505,7 +570,7 @@ function EditProfile({ profile, mutate }) {
             throw error
         } finally {
             setSubmitting(false)
-            addToast({ message: 'Profile updated!' })
+            addToast({ description: 'Profile updated!' })
         }
     }
 
@@ -521,52 +586,67 @@ function EditProfile({ profile, mutate }) {
     })
 
     return (
-        <Layout parent={communityMenu}>
-            <SEO noindex title="Edit Profile - PostHog" />
-            <section className="max-w-2xl mx-auto py-12 px-4">
-                <form className="m-0 space-y-6" onSubmit={handleSubmit}>
-                    {formSections.map((section, index) => {
-                        if (section.modOnly && user?.role?.type !== 'moderator') return null
-                        return (
-                            <div key={index}>
-                                <h2>{section.title}</h2>
-                                {section.subtitle && <p className="opacity-70 -mt-4 mb-4">{section.subtitle}</p>}
-                                <div className="flex flex-wrap items-center">
-                                    {Object.keys(section.fields).map((key) => {
-                                        const field = section.fields[key]
-                                        const error = errors[key]
-                                        return (
-                                            <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
-                                                {(field.component &&
-                                                    field.component({ values, setFieldValue, error })) || (
-                                                    <Input
-                                                        type={field.type}
-                                                        name={key}
-                                                        placeholder={field.placeholder}
-                                                        label={field.label}
-                                                        value={values[key]}
-                                                        onChange={handleChange}
-                                                        error={!!error}
-                                                    />
-                                                )}
-                                                {error && (
-                                                    <p className="absolute text-red bottom-1.5 text-xs m-0 translate-y-full left-2 font-bold">
-                                                        {error}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        )
-                                    })}
+        <ScrollArea>
+            <div
+                data-scheme="primary"
+                className="bg-primary min-h-full"
+                style={
+                    values.backgroundImage
+                        ? {
+                              backgroundImage: `url(${values.backgroundImage.url})`,
+                              backgroundSize: values.backgroundImage.backgroundSize || 'auto',
+                              backgroundRepeat: values.backgroundImage.backgroundRepeat || 'no-repeat',
+                              backgroundPosition: values.backgroundImage.backgroundPosition || 'center',
+                          }
+                        : undefined
+                }
+            >
+                <SEO noindex title="Edit Profile - PostHog" />
+                <section className="max-w-2xl mx-auto py-12 px-4 bg-primary/90 backdrop-blur-sm rounded-lg">
+                    <form className="m-0 space-y-6" onSubmit={handleSubmit}>
+                        {formSections.map((section, index) => {
+                            if (section.modOnly && user?.role?.type !== 'moderator') return null
+                            return (
+                                <div key={index}>
+                                    <h2>{section.title}</h2>
+                                    {section.subtitle && <p className="opacity-70 mb-4">{section.subtitle}</p>}
+                                    <div className="flex flex-wrap items-center">
+                                        {Object.keys(section.fields).map((key) => {
+                                            const field = section.fields[key]
+                                            const error = errors[key]
+                                            return (
+                                                <div key={key} className={`${field.className ?? 'w-1/2'} p-2 relative`}>
+                                                    {(field.component &&
+                                                        field.component({ values, setFieldValue, error })) || (
+                                                        <Input
+                                                            type={field.type}
+                                                            name={key}
+                                                            placeholder={field.placeholder}
+                                                            label={field.label}
+                                                            value={values[key]}
+                                                            onChange={handleChange}
+                                                            error={!!error}
+                                                        />
+                                                    )}
+                                                    {error && (
+                                                        <p className="absolute text-red bottom-1.5 text-xs m-0 translate-y-full left-2 font-bold">
+                                                            {error}
+                                                        </p>
+                                                    )}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
-                            </div>
-                        )
-                    })}
-                    <CallToAction onClick={submitForm} className="mt-6" disabled={isSubmitting}>
-                        Update
-                    </CallToAction>
-                </form>
-            </section>
-        </Layout>
+                            )
+                        })}
+                        <CallToAction onClick={submitForm} className="mt-6" disabled={isSubmitting}>
+                            Update
+                        </CallToAction>
+                    </form>
+                </section>
+            </div>
+        </ScrollArea>
     )
 }
 
@@ -598,5 +678,9 @@ export default function EditProfilePage({ location }) {
         getProfile()
     }, [])
 
-    return ready ? <EditProfile profile={profile} mutate={getProfile} /> : null
+    return ready ? (
+        <EditProfile profile={profile} mutate={getProfile} />
+    ) : (
+        <div data-scheme="secondary" className="h-full bg-primary" />
+    )
 }

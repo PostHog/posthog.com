@@ -1,8 +1,8 @@
 import { topicIcons } from 'components/Questions/TopicsTable'
 import { graphql, useStaticQuery } from 'gatsby'
 import React from 'react'
-import { useUser, User } from 'hooks/useUser'
-import { IconSparkles } from '@posthog/icons'
+import { useUser } from 'hooks/useUser'
+import { IconSparkles, IconClock } from '@posthog/icons'
 
 const navSorted = ['Products', 'Data', 'Product OS', 'Self-hosting', 'Off-topic', 'Other']
 
@@ -22,14 +22,9 @@ export default function useTopicsNav() {
         }
     `)
 
-    const { user, getJwt, logout, isModerator } = useUser()
-    const isLoggedIn = !!user
+    const { isModerator } = useUser()
 
-    const nav = [
-        { name: 'Topics' },
-        { name: 'Latest', url: '/questions', icon: 'IconClock' },
-        ...(isLoggedIn ? [{ name: 'My discussions', url: '/community/dashboard', icon: 'IconNotification' }] : []),
-    ]
+    const nav = [{ name: 'Latest', url: '/questions', icon: <IconClock /> }]
     topicGroups.nodes
         .sort((a, b) => navSorted.indexOf(a.label) - navSorted.indexOf(b.label))
         .forEach(({ label, topics }) => {

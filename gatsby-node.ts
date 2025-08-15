@@ -45,7 +45,6 @@ export const onCreateWebpackConfig: GatsbyNode['onCreateWebpackConfig'] = ({ sta
     })
 }
 
-
 exports.createPages = async ({ actions }) => {
     const { createPage } = actions
 

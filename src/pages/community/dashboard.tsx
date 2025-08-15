@@ -53,7 +53,7 @@ export default function CommunityPage() {
             <SectionTitle>My discussions</SectionTitle>
 
             {topicSubscriptions && topicSubscriptions?.length > 0 && (
-                <div className="bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 mb-4 rounded">
+                <div className="bg-accent border border-primary p-4 mb-4 rounded">
                     <h4 className="text-sm font-semibold opacity-60 mb-0">Jump to subscribed topics:</h4>
                     <ul className="list-none m-0 p-0 flex flex-wrap">
                         {topicSubscriptions.map(({ label, slug }) => {
@@ -82,7 +82,7 @@ export default function CommunityPage() {
                 />
             ) : (
                 <>
-                    <div className="font-medium text-sm m-0 mb-6 bg-accent dark:bg-accent-dark border border-light dark:border-dark p-4 rounded text-center">
+                    <div className="font-medium text-sm m-0 mb-6 bg-accent border border-primary p-4 rounded text-center">
                         <p className="font-bold !m-0 !p-0">You're not subscribed to any threads yet!</p>
                         {recentPermalink && (
                             <p className="!text-sm !m-0">
