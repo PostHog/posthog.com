@@ -14,8 +14,6 @@ PostHog's default grouping logic may not work for every use case, making custom 
 - Specific service, like all error messages containing `postgres`
 - Specific feature, like all error messages containing `feature_flag_variant_a`
 
-Custom grouping is especially important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened. 
-
 ## Custom issue grouping
 
 PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can use custom grouping rules during ingestion or define a client-side fingerprint.
