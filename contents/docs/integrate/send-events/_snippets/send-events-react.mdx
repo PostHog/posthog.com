@@ -1,3 +1,32 @@
 import SendWebEvent from "./send-events-web.mdx" 
 
-<SendWebEvent />
+By default, PostHog automatically captures pageviews and pageleaves as well as clicks, change of inputs, and form submissions associated with `a`, `button`, `form`, `input`, `select`, `textarea`, and `label` tags. See our [autocapture docs](/docs/product-analytics/autocapture) for more details on this.
+
+If you prefer to disable or filter these, set the appropriate values in your [configuration options](/docs/libraries/js/config).
+
+## Capturing custom events
+
+After setting up the PostHog provider, you can use the `usePostHog` hook to access all the methods of the `posthog-js` library including `capture` which lets you capture custom events with optional properties.
+
+```js
+import { usePostHog } from 'posthog-js/react'
+
+function App() {
+  const posthog = usePostHog()
+
+  const signUpClicked = () => {
+    posthog?.capture('clicked_sign_up', {
+      signup_method: 'email'
+    })
+  }
+
+  return (
+    <div className="App">
+      <button onClick={() => posthog?.capture('button_clicked')}>Click me</button>
+      <button onClick={signUpClicked}>Sign up</button>
+    </div>
+  )
+}
+
+export default App
+```
