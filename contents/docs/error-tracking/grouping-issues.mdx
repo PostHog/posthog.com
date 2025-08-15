@@ -8,21 +8,21 @@ Issues are created by grouping together similar exception events. When **no cust
 
 > We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
-While PostHog will make a best effort, the grouping logic may not fit every use case. For example, consider the following ways you may want to group exceptions into an issue:
+PostHog's default grouping logic may not work for every use case, making custom grouping a useful option. For example, you may want to group exceptions into issues by:
 
-- Grouping exceptions by business logic, like all errors that occur at checkout
-- Grouping exceptions by specific service, like all error messages containing `postgres`
-- Grouping exceptions by specific feature, like all error messages containing `feature_flag_variant_a`
+- Business logic, like all errors that occur at checkout
+- Specific service, like all error messages containing `postgres`
+- Specific feature, like all error messages containing `feature_flag_variant_a`
 
-You should consider your unique needs to determine if you need to configure custom issue grouping behavior. Keep in mind that grouping can be very important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened. 
+Custom grouping is especially important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened. 
 
 ## Custom issue grouping
 
-PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can define a client-side fingerprint or use custom grouping rules during ingestion.
+PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can use custom grouping rules during ingestion or define a client-side fingerprint.
 
 ### Option 1: Custom grouping rule
 
-You can also group exceptions as a single issue based on their properties using custom grouping rules. As with [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment), you have access to properties of the unminified stack trace because the rules run during ingestion. 
+You can group exceptions as a single issue based on their properties using custom grouping rules. As with [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment), you have access to properties of the unminified stack trace because the rules run during ingestion. 
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/custom_grouping_light_f3e99a56b5.png"
@@ -52,11 +52,7 @@ You can also set custom properties on the error tracking event to filter on. You
 
 ### Option 2: Client-side fingerprint
 
-Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog, which is used to group similar exception events into issues. You can also set fingerprints manually during client-side capture.
-
-PostHog generates a fingerprint based on the exception during ingestion. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
-
-When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the function's second argument.
+Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog during ingestion, which is used for grouping. You can override this by setting the `$exception_fingerprint` property when capturing exceptions.
 
 ```js
 posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
