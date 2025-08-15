@@ -21,7 +21,7 @@ export const themeOptions: ThemeOption[] = [
                 light: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_keyboard_garden_light_272a92dc4c.png',
                 dark: 'https://res.cloudinary.com/dmukukwp6/image/upload/thumb_keyboard_garden_dark_d8b80b34db.png',
             },
-            classes: 'wallpaper-keyboard-garden:bg-[#E1D7C2] dark:wallpaper-keyboard-garden:bg-[#37422D]',
+            classes: 'wallpaper-keyboard-garden:bg-[#E1D7C2] dark:wallpaper-keyboard-garden:bg-[#333733]',
         },
     },
     {

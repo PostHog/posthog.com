@@ -208,7 +208,7 @@ export default function TaskBarMenu() {
             <div
                 id="taskbar"
                 data-scheme="primary"
-                className="w-full bg-accent/75 skin-classic:bg-accent backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
+                className="w-full bg-accent/75 skin-classic:bg-accent wallpaper-keyboard-garden:dark:bg-black/15 backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
             >
                 <MenuBar
                     menus={menuData}
