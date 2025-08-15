@@ -90,7 +90,9 @@ export default function MaxAI(): JSX.Element {
         //     'getting-started',
         // ],
         templates: {
-            overview: 'columns', // Use the horizontal split layout
+            overview: 'ai',
+            features: 'columns',
+            answers: 'demo',
         },
         content: {
             answersDescription: 'What can Max do?',

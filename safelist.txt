@@ -61,6 +61,7 @@ bg-[#9C19BD]
 bg-[#D42F18]
 bg-[#F2AD46]
 bg-[#FCC779]
+bg-ai-blue
 bg-aqua
 bg-aqua/10
 bg-black

@@ -10,8 +10,10 @@ import OverviewSlide from './OverviewSlide'
 import OverviewSlideColumns from './OverviewSlide/OverviewSlideColumns'
 import OverviewSlideStacked from './OverviewSlide/OverviewSlideStacked'
 import OverviewSlideOverlay from './OverviewSlide/OverviewSlideOverlay'
+import OverviewSlideAI from './OverviewSlide/OverviewSlideAI'
 import CustomersSlide from './CustomersSlide'
 import FeaturesSlide from './FeaturesSlide'
+import FeaturesSlideAI from './FeaturesSlideAI'
 import QuestionsSlide from './QuestionsSlide'
 import PlanComparison from './PlanComparison'
 import ComparisonSummarySlide from './ComparisonSummarySlide'
@@ -22,6 +24,7 @@ import GettingStartedSlide from './GettingStartedSlide'
 import { SlideConfig, SlideConfigResult, defaultSlides } from './createSlideConfig'
 import ProgressBar from 'components/ProgressBar'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import DemoSlide from './DemoSlide'
 
 interface SlidesTemplateProps {
     productHandle: string
@@ -128,6 +131,8 @@ export default function SlidesTemplate({
                             return OverviewSlideStacked
                         case 'overlay':
                             return OverviewSlideOverlay
+                        case 'ai':
+                            return OverviewSlideAI
                         case 'columns':
                         default:
                             return OverviewSlideColumns
@@ -160,7 +165,18 @@ export default function SlidesTemplate({
                     />
                 )
 
-            case 'features':
+            case 'features': {
+                // Default to tabs template, use columns for AI features
+                if (template === 'columns') {
+                    return (
+                        <FeaturesSlideAI
+                            productName={productData?.name}
+                            features={productData?.features || []}
+                            {...props}
+                        />
+                    )
+                }
+                // Default: tabs template (existing FeaturesSlide with OSTabs)
                 return (
                     <FeaturesSlide
                         features={productData?.features || []}
@@ -168,8 +184,14 @@ export default function SlidesTemplate({
                         {...props}
                     />
                 )
+            }
 
-            case 'answers':
+            case 'answers': {
+                // Support using template to render the demo slide
+                if (template === 'demo') {
+                    return <DemoSlide productHandle={productHandle} answers={productData?.answers || []} {...props} />
+                }
+                // Default: questions slide
                 return (
                     <QuestionsSlide
                         productName={productData?.name}
@@ -180,6 +202,7 @@ export default function SlidesTemplate({
                         {...props}
                     />
                 )
+            }
 
             case 'pricing':
                 return (
@@ -243,7 +266,7 @@ export default function SlidesTemplate({
                 )
 
             case 'getting-started':
-                return <GettingStartedSlide productName={productData?.name} {...props} />
+                return <GettingStartedSlide initialState={{}} productName={productData?.name} {...props} />
 
             default:
                 return <div>Slide not found: {slug}</div>

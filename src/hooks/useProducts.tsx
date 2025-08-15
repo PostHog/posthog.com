@@ -13,7 +13,7 @@ import { errorTracking } from './productData/error_tracking'
 import { cdp } from './productData/cdp'
 import { webAnalytics } from './productData/web_analytics'
 import { experiments } from './productData/experiments'
-// import { max_ai } from './productData/max_ai'
+import { max_ai } from './productData/max_ai'
 
 const initialProducts = [
     productAnalytics,
@@ -25,7 +25,7 @@ const initialProducts = [
     cdp,
     webAnalytics,
     experiments,
-    // max_ai,
+    max_ai,
 ]
 
 export default function useProducts() {

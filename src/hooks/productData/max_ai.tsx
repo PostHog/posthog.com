@@ -1,26 +1,26 @@
-import React from 'react'
-import { IconMagicWand } from '@posthog/icons'
+import { IconBolt, IconCursor, IconGraph, IconMagicWand } from '@posthog/icons'
+import { IconBrain } from 'components/OSIcons/Icons'
 
-// not currently in use. check useProducts.ts
-export const cdp = {
-    Icon: IconMagicWand,
+export const max_ai = {
     name: 'Max',
-    description: 'Max is a tool that helps you analyze your data and make decisions.',
-    // handle: 'data_pipelines',
+    parentIcon: 'aiMax',
+    // Icon: IconMagicWand,
+    description: 'Your AI-powered product analyst and product manager',
     handle: 'max_ai',
-    type: 'max_ai',
-    slug: 'max',
-    color: 'purple',
+    color: 'ai-blue',
     colorSecondary: 'lilac',
     category: 'ai',
+    slug: 'max',
+    status: 'beta',
     seo: {
         title: 'Max AI - PostHog',
-        description: 'Max AI is a tool that helps you analyze your data and make decisions.',
+        description: 'Your AI-powered product analyst and product manager',
     },
     overview: {
-        title: 'Max AI is a tool that helps you analyze your data and make decisions.',
-        description: 'Max AI is a tool that helps you analyze your data and make decisions.',
-        textColor: 'text-white', // tw
+        title: 'Our resident AI agent who understands your product and data',
+        description:
+            'Max builds insights, automates many manual tasks, and routes more complex tasks to other AI agents for specialized work.',
+        layout: 'ai',
     },
     screenshots: [
         {
@@ -31,110 +31,75 @@ export const cdp = {
     ],
     features: [
         {
-            title: 'Sources & destinations',
-            headline: 'Connect 60+ tools to your data pipeline',
-            description: 'Import data from your existing systems and export PostHog data anywhere you need it.',
-            images: [
-                {
-                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
-                    alt: 'CDP sources and destinations',
-                },
-            ],
-            features: [
-                {
-                    title: 'Data warehouse sources',
-                    description: 'Import from Stripe, Hubspot, Salesforce, and more to join with product data',
-                },
-                {
-                    title: 'Real-time destinations',
-                    description: 'Send events to Slack, webhooks, and 40+ tools as they happen',
-                },
-                {
-                    title: 'Batch exports',
-                    description: 'Reliable scheduled exports to S3, Snowflake, BigQuery, and more',
-                },
-                {
-                    title: 'Custom transformations',
-                    description: 'Filter, modify, and enrich data before sending to destinations',
-                },
-                {
-                    title: 'No-code setup',
-                    description: 'Configure sources and destinations through the UI, no engineering required',
-                },
-            ],
-        },
-        {
-            title: 'Data transformation',
-            headline: 'Clean, filter, and enrich your data',
-            description: 'Apply custom logic to your data pipeline with transformations that run on every event.',
-            features: [
-                {
-                    title: 'Schema enforcement',
-                    description: 'Ensure data quality by validating events against defined schemas',
-                },
-                {
-                    title: 'Event labeling',
-                    description: 'Add custom properties to categorize and organize your events',
-                },
-                {
-                    title: 'Data filtering',
-                    description: 'Remove unwanted events or properties before they reach destinations',
-                },
-                {
-                    title: 'Property mapping',
-                    description: 'Transform property names and values to match destination requirements',
-                },
-                {
-                    title: 'Custom code',
-                    description: 'Write JavaScript transformations for complex logic',
-                },
-            ],
-        },
-        {
-            title: 'Reliability & monitoring',
-            headline: 'Enterprise-grade data pipeline',
+            title: 'Max answers product questions',
+            headline: 'answers product questions',
             description:
-                'Built for scale with monitoring, retries, and error handling to ensure your data flows reliably.',
+                'Getting insights from an analytics suite can sometimes feel like navigating an airplane cockpit. Max eliminates the need to fiddle with a bunch of controls. Just ask a question and Max will give you a direct answer.',
             features: [
                 {
-                    title: 'Automatic retries',
-                    description: 'Failed deliveries retry automatically with exponential backoff',
+                    icon: IconBrain,
+                    title: 'Context-aware',
+                    items: [
+                        'Understands your event schema and property definitions',
+                        'Ability to factor in business context<br /><em class="text-secondary text-[15px]">ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth stage, etc.), market conditions, seasonality, current challenges, quarterly goals</em>',
+                    ],
                 },
                 {
-                    title: 'Error monitoring',
-                    description: 'Track delivery success rates and debug failures',
+                    icon: IconBolt,
+                    title: 'Queries your data stack',
+                    items: [
+                        'Has access to your events and actions, people, user sessions, groups, and cohorts',
+                        'Sources data from your connected data warehouse sources',
+                    ],
                 },
                 {
-                    title: 'Dead letter queue',
-                    description: 'Capture and recover events that fail processing',
+                    icon: IconGraph,
+                    title: 'Generates insights',
+                    items: [
+                        'Builds data visualizations',
+                        'Capable of answers specific data questions without needing to generate visualizations',
+                    ],
                 },
                 {
-                    title: 'Performance metrics',
-                    description: 'Monitor throughput, latency, and resource usage',
-                },
-                {
-                    title: 'Scalable infrastructure',
-                    description: 'Handles millions of events per day without breaking a sweat',
+                    icon: IconCursor,
+                    title: 'Navigates the query building interface',
+                    items: [
+                        "Assists in sets date ranges and applying filters, data breakdowns, and formulas when you want to take manual control but don't want to do <em>all</em> the work yourself",
+                    ],
                 },
             ],
         },
     ],
     answers: [
         {
-            q: "What's the difference between sources and destinations?",
-            a: 'Sources bring data INTO PostHog from external systems like your CRM or payment processor. Destinations send data FROM PostHog to other tools in your stack. Both work together to create a complete data pipeline.',
+            q: "What's my churn rate?",
         },
         {
-            q: 'How reliable are batch exports?',
-            a: 'Very reliable. Batch exports run on a schedule with automatic retries, monitoring, and a dead letter queue for failed events. We guarantee at-least-once delivery to your destination.',
+            q: 'Show me user retention by country',
         },
         {
-            q: 'Can I transform data before sending it?',
-            a: 'Yes! Transformations let you filter, modify, and enrich events before they reach destinations. You can enforce schemas, add labels, map properties, or write custom JavaScript logic.',
+            q: "What's our most popular feature?",
         },
         {
-            q: "What's included in the free tier?",
-            a: 'The CDP add-on is required for destinations, but sources are free. You can import data from external systems at no cost - you only pay for the events you capture in PostHog.',
+            q: "What's my ARR?",
+        },
+        {
+            q: 'Where do my users drop off?',
+        },
+        {
+            q: 'What are my most popular pages?',
+        },
+        {
+            q: 'What is distribution of paid vs. organic traffic?',
+        },
+        {
+            q: 'Write an SQL query for me?',
+        },
+        {
+            q: 'How many pageviews did we get today?',
+        },
+        {
+            q: 'Show me a signup funnel',
         },
     ],
     comparison: {

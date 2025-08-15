@@ -271,6 +271,16 @@ export default function Desktop() {
                     <div className={`fixed inset-0 -z-10 ${getWallpaperClasses()}`} />
                     {/* Hogzilla */}
                     <div className="hidden select-none wallpaper-hogzilla:block absolute inset-0">
+                        <div className="absolute inset-0 bg-gradient-to-b from-[#FFF1D5] to-[#DAE0EB] dark:opacity-0"></div>
+                        <div
+                            className="absolute inset-0 opacity-0 dark:opacity-100"
+                            style={{
+                                backgroundImage:
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bg_dark_4b00252f27.png')",
+                                backgroundSize: '414px 532px',
+                                backgroundRepeat: 'repeat',
+                            }}
+                        />
                         <CloudinaryImage
                             src="https://res.cloudinary.com/dmukukwp6/image/upload/hogzilla_bf40c5e271.png"
                             alt="Hogzilla"
@@ -326,8 +336,8 @@ export default function Desktop() {
                             className="absolute inset-0 opacity-100"
                             style={{
                                 backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_3809d56744.png')",
-                                backgroundSize: '250px 250px',
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_light_03a349af5c.png')",
+                                backgroundSize: '100px 100px',
                                 backgroundRepeat: 'repeat',
                             }}
                         />
@@ -335,8 +345,8 @@ export default function Desktop() {
                             className="absolute inset-0 opacity-0 dark:opacity-100"
                             style={{
                                 backgroundImage:
-                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_5f26ab6fd0.png')",
-                                backgroundSize: '250px 250px',
+                                    "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_9ab088797a.png')",
+                                backgroundSize: '200px 200px',
                                 backgroundRepeat: 'repeat',
                             }}
                         />

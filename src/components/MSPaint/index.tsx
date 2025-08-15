@@ -146,7 +146,7 @@ export default function MSPaint({
         if (!ctx) return
 
         // Only initialize if canvas is truly empty (not resizing)
-        if (state.canvasHistory.length === 0) {
+        if (!state.canvasHistory || state.canvasHistory.length === 0) {
             // Set white background
             ctx.fillStyle = '#FFFFFF'
             ctx.fillRect(0, 0, canvas.width, canvas.height)
@@ -228,7 +228,7 @@ export default function MSPaint({
     }, [state.historyIndex, state.canvasHistory])
 
     useEffect(() => {
-        if (appWindow) {
+        if (appWindow && appWindow.element && typeof appWindow.element === 'object' && 'props' in appWindow.element) {
             updateWindow(appWindow, {
                 element: { ...appWindow.element, props: { ...appWindow.element.props, initialState: state } },
             })
@@ -255,7 +255,7 @@ export default function MSPaint({
         if (!ctx) return
 
         const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height)
-        const newHistory = state.canvasHistory.slice(0, state.historyIndex + 1)
+        const newHistory = (state.canvasHistory || []).slice(0, (state.historyIndex || 0) + 1)
         newHistory.push(imageData)
 
         // Limit history to 50 items
@@ -273,7 +273,7 @@ export default function MSPaint({
 
     // Undo/Redo
     const undo = useCallback(() => {
-        if (state.historyIndex > 0) {
+        if (state.historyIndex && state.historyIndex > 0) {
             const canvas = canvasRef.current
             if (!canvas) return
 
@@ -287,7 +287,11 @@ export default function MSPaint({
     }, [state.historyIndex, state.canvasHistory])
 
     const redo = useCallback(() => {
-        if (state.historyIndex < state.canvasHistory.length - 1) {
+        if (
+            state.canvasHistory &&
+            state.historyIndex !== undefined &&
+            state.historyIndex < state.canvasHistory.length - 1
+        ) {
             const canvas = canvasRef.current
             if (!canvas) return
 
@@ -416,7 +420,9 @@ export default function MSPaint({
                 break
             case 'zoom': {
                 const newZoom =
-                    isRightClick || e.shiftKey ? Math.max(state.zoomLevel / 2, 0.25) : Math.min(state.zoomLevel * 2, 8)
+                    isRightClick || e.shiftKey
+                        ? Math.max((state.zoomLevel || 1) / 2, 0.25)
+                        : Math.min((state.zoomLevel || 1) * 2, 8)
                 setState((prev) => ({ ...prev, zoomLevel: newZoom, isDrawing: false }))
                 break
             }
@@ -773,8 +779,8 @@ export default function MSPaint({
 
     // Resize canvas
     const resizeCanvas = () => {
-        const newWidth = prompt('Enter new width:', state.canvasSize.width.toString())
-        const newHeight = prompt('Enter new height:', state.canvasSize.height.toString())
+        const newWidth = prompt('Enter new width:', (state.canvasSize?.width || 640).toString())
+        const newHeight = prompt('Enter new height:', (state.canvasSize?.height || 480).toString())
 
         if (newWidth && newHeight) {
             const width = parseInt(newWidth)
@@ -944,14 +950,14 @@ export default function MSPaint({
                     label: 'Undo',
                     shortcut: 'Shift+Z',
                     onClick: undo,
-                    disabled: state.historyIndex <= 0,
+                    disabled: !state.canvasHistory || state.historyIndex <= 0,
                 },
                 {
                     type: 'item' as const,
                     label: 'Redo',
                     shortcut: 'Shift+Y',
                     onClick: redo,
-                    disabled: state.historyIndex >= state.canvasHistory.length - 1,
+                    disabled: !state.canvasHistory || state.historyIndex >= state.canvasHistory.length - 1,
                 },
                 { type: 'separator' as const },
                 ...(state.originalImageData
@@ -1085,13 +1091,13 @@ export default function MSPaint({
                     <div
                         ref={containerRef}
                         className="inline-block bg-white shadow-[inset_-1px_-1px_#ffffff,inset_1px_1px_#808080,inset_-2px_-2px_#c0c0c0,inset_2px_2px_#000000]"
-                        style={{ transform: `scale(${state.zoomLevel})`, transformOrigin: 'top left' }}
+                        style={{ transform: `scale(${state.zoomLevel || 1})`, transformOrigin: 'top left' }}
                     >
                         <div className="relative">
                             <canvas
                                 ref={canvasRef}
-                                width={state.canvasSize.width}
-                                height={state.canvasSize.height}
+                                width={state.canvasSize?.width || 640}
+                                height={state.canvasSize?.height || 480}
                                 className=""
                                 onMouseDown={handleMouseDown}
                                 onMouseMove={handleMouseMove}
@@ -1109,8 +1115,8 @@ export default function MSPaint({
                             />
                             <canvas
                                 ref={overlayCanvasRef}
-                                width={state.canvasSize.width}
-                                height={state.canvasSize.height}
+                                width={state.canvasSize?.width || 640}
+                                height={state.canvasSize?.height || 480}
                                 className="absolute top-0 left-0 pointer-events-none"
                             />
                             {children}
@@ -1157,9 +1163,9 @@ export default function MSPaint({
 
                     <div className="mt-4 text-xs">
                         <div className="mb-1">
-                            Canvas: {state.canvasSize.width} × {state.canvasSize.height}
+                            Canvas: {state.canvasSize?.width || 640} × {state.canvasSize?.height || 480}
                         </div>
-                        <div className="mb-1">Zoom: {Math.round(state.zoomLevel * 100)}%</div>
+                        <div className="mb-1">Zoom: {Math.round((state.zoomLevel || 1) * 100)}%</div>
                         <div className="mb-1">Tool: {state.tool}</div>
                     </div>
                 </div>

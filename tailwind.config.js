@@ -51,6 +51,8 @@ module.exports = {
                 accent: 'rgb(var(--accent) / <alpha-value>)',
                 input: 'rgb(var(--input-bg) / <alpha-value>)',
                 'input-hover': 'rgb(var(--input-bg-hover) / <alpha-value>)',
+
+                'ai-blue': '#3E6B9E',
             },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -88,6 +90,7 @@ module.exports = {
                 'button-secondary-dark': '#C78617',
 
                 primary: 'rgb(var(--border) / <alpha-value>)',
+                secondary: 'rgb(var(--input-border) / <alpha-value>)',
                 'bg-primary': 'rgb(var(--bg) / <alpha-value>)',
                 input: 'rgb(var(--input-border) / <alpha-value>)',
                 'input-hover': 'rgb(var(--input-border-hover) / <alpha-value>)',

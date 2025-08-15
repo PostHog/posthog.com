@@ -109,6 +109,26 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_classic_e50b339fec.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/as_modern_090d1c5c71.png',
     },
+    aiMax: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Max_Style_Classic_a0cd524bfa.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Max_Style_Modern_9f8861dbe7.png',
+    },
+    aiRaquel: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Raquel_Style_Classic_7221f83f53.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Raquel_Style_Modern_855fde6b8c.png',
+    },
+    aiAnnika: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Annika_Style_Classic_329d288881.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Annika_Style_Modern_bc9041eaa2.png',
+    },
+    aiMarius: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Marius_Style_Classic_fbbbab893a.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_AI_Marius_Style_Modern_44be9d2af2.png',
+    },
+    shoppingBag: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_Shopping_Bag_Style_Classic_89fbc3ebcf.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_Shopping_Bag_Style_Modern_cd937c7872.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
