@@ -8,7 +8,6 @@ Issues are created by grouping together similar exception events. When **no cust
 
 > We're working on improving our grouping algorithm. If you spot two issues that you think should have been one, or one issue that you think should have been split into two, please [let us know in-app](https://app.posthog.com#panel=support%3Afeedback%3Aerror_tracking%3Alow%3Atrue).
 
-
 While PostHog will make a best effort, the grouping logic may not fit every use case. For example, consider the following ways you may want to group exceptions into an issue:
 
 - Grouping exceptions by business logic, like all errors that occur at checkout
@@ -16,7 +15,6 @@ While PostHog will make a best effort, the grouping logic may not fit every use 
 - Grouping exceptions by specific feature, like all error messages containing `feature_flag_variant_a`
 
 You should consider your unique needs to determine if you need to configure custom issue grouping behavior. Keep in mind that grouping can be very important if you rely on [assigning issues](/docs/error-tracking/assigning-issues) to specific teams or users to resolve them, or if you configure [alerts](/docs/error-tracking/alerts) to notify specific teams when issues are created or reopened. 
-
 
 ## Custom issue grouping
 

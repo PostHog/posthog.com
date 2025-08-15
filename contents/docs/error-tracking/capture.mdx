@@ -4,13 +4,13 @@ title: Capture exceptions for error tracking
 
 import Tab from "components/Tab"
 
-PostHog error tracking allows you to track and monitor errors and exceptions in your code by capturing [exception events](/docs/error-tracking/issues-and-exceptions). This can be done automatically when exceptions are thrown in your code, or manually by calling the exception capture method.
+You can track and monitor errors and exceptions in your code by capturing [exception events](/docs/error-tracking/issues-and-exceptions). This can be done automatically when exceptions are thrown in your code, or manually by calling the exception capture method.
 
 ## Capturing exceptions
 
-Exceptions are captured as special [events](/docs/data/events) in PostHog. Similar to any other event, they can be customized, filtered, and used in insights for analysis.
+Exceptions are a special type of [event](/docs/data/events) in PostHog. Similar to any other event, they can be captured, customized, filtered, and used in insights for analysis.
 
-To help group exceptions into issues and help you debug them, PostHog will also automatically capture the following properties:
+To help group exceptions into issues and help you debug them, PostHog automatically captures the following properties:
 
 import ExceptionPropertiesTable from './_snippets/exception-properties-table.mdx'
 
@@ -22,7 +22,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 <CalloutBox icon="IconInfo" title="Source maps" type="fyi">
 
-  If you serve minified or compiled code, PostHog needs source maps for your source code to be able to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
+  If you serve minified or compiled code, PostHog needs source maps to display the correct stack traces. [Configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
 
 </CalloutBox>
 
@@ -31,13 +31,13 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 If you followed one of our guides to [set up error tracking](/docs/error-tracking/installation) and you [enabled exception auto capture](https://app.posthog.com/error_tracking/configuration), you'll have automatic exception capture enabled.
 
 ```js
-posthog.init('phc_up2BnbdQluOFOQi3VOcZeQYLeyPgQBVHhDy5lCPgVF0', {
-    api_host: 'https://us.i.posthog.com',
-    defaults: '2025-05-24',
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_api_client_host>',
+    defaults: '<ph_posthog_js_defaults>',
     capture_exceptions: {
-      capture_unhandled_errors: true,
-      capture_unhandled_rejections: true,
-      capture_console_errors: false
+      capture_unhandled_errors: true, // default
+      capture_unhandled_rejections: true, // default
+      capture_console_errors: false // default
   }
 })
 ```
@@ -79,9 +79,9 @@ posthog.capture_exception(
 
 ## Customizing exception capture
 
-Exceptions are captured as [events](/docs/data/events) in PostHog. The better **quality of data** in your exception events, the more **context** you'll have for debugging and analysis.
+Like all data, the better **quality** of your exception events, the more **context** you'll have for debugging and analysis. Customizing exception capture helps you do this. 
 
-Customizing exception capture allows you to override exception properties to influence how they're grouped into issues. 
+Customizing exception capture lets you override exception properties to influence how they're grouped into issues. 
 
 Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](/docs/error-tracking/assigning-issues#automatic-issue-assignment), [alerts](/docs/error-tracking/alerts), [issue grouping](/docs/error-tracking/grouping-issues). They can also be used in analysis in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [data warehouse queries](/docs/product-analytics/data-warehouse).
 
@@ -89,7 +89,7 @@ Equally important, you can customize properties on the exceptions to help you co
 
 ### During manual capture
 
-When capturing exceptions manually, passing `properties` to the capture exception method will add additional properties to the captured event. This is just like any other event in PostHog.
+When capturing exceptions manually, passing properties to the capture exception method adds them to the event just like any other PostHog event.
 
 You can also override the [fingerprint](/docs/error-tracking/fingerprints) to [group](/docs/error-tracking/issues-and-exceptions#how-are-issues-grouped) exceptions together at capture time.
 
@@ -169,7 +169,7 @@ The process is slightly different depending on the SDK you're using.
 <Tab.Panels>
   <Tab.Panel>
 
-  In JavaScript SDKs like the [JS Web SDK](/docs/libraries/javascript) and [Node.js SDK](/docs/libraries/node), you can override the default properties by passing a `before_send` callback. This callback will be called before any exception is captured.
+  In [JavaScript Web](/docs/libraries/javascript) and [Node.js](/docs/libraries/node) SDKs, you can override the default properties by passing a `before_send` callback. This callback is called before any exception is captured.
 
   ```javascript 
   posthog.init('<ph_project_api_key>', {
@@ -220,19 +220,19 @@ The process is slightly different depending on the SDK you're using.
 </Tab.Panels>
 </Tab.Group>
 
-### Customize issue grouping rules
+### Capturing properties for custom issue grouping rules
 
 Other than grouping with [custom fingerprints](#overriding-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues). 
 
 For example:
 
 - Setting fields like `db_transaction` to group exceptions together for a specific database transactions.
-- Setting `feature_name` to group exceptions together for a specific feature. 
+- Setting `feature_name`, `service_name`, or `service_version` to group exceptions together for a specific features and services.
 - Setting `intent` to group exceptions due to common interactions like accessing storage or network.
 
 It's important to think about your grouping rules when you configure exception capture. You cannot group exceptions together if you don't set some common properties between them. 
 
-Note that grouping issues means that all exceptions will be grouped together under a **single issue**, and you **cannot** group exceptions into multiple issues. You can also still [filter on custom properties](/docs/error-tracking/monitoring#finding-specific-issues) across multiple issues without grouping them.
+Note that grouping issues means that all exceptions will be grouped together under a **single issue**. You **cannot** group exceptions into multiple issues, but you can still [filter on custom properties](/docs/error-tracking/monitoring#finding-specific-issues) across multiple issues without grouping them.
 
 ## Suppressing exceptions
 
@@ -242,7 +242,7 @@ import BeforeSendHook from './_snippets/before-send-hook.mdx'
 
 <BeforeSendHook />
 
-You can also suppress exceptions on PostHog, these rules will be applied client-side.
+You can also suppress exceptions in PostHog, these rules will be applied client-side.
 
 import SuppressionRules from './_snippets/suppression-rules.mdx'
 
@@ -253,14 +253,3 @@ import SuppressionRules from './_snippets/suppression-rules.mdx'
 import BurstProtection from './_snippets/burst-protection.mdx'
 
 <BurstProtection />
-
-## Best practices
-
-To get the most out of your exception events, here are some considerations:
-
-- Make sure to [configure source maps](/docs/error-tracking/upload-source-maps) to get the most out of your exception events.
-- Identifying the user as soon as possible, so exceptions are associated with the correct user and session.
-- Setting custom properties like `service_name`, `service_version`, `repo_id`, `repo_owner`, and other identifiers to help you automatically [assign](/docs/error-tracking/assigning-issues#automatic-issue-assignment) and [alert](/docs/error-tracking/alerts) the correct team on issues.
-- Setting custom properties to help you group exceptions together for a specific part of your user journey.
-- A great way to understand the effectiveness of fixes is to expose release version numbers as custom properties.
-- Suppress issues that are not actionable, known, or are meant to be ignored. We prefer that you suppress issues on the client side for performance and cost reasons.

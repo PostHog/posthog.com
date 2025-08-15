@@ -2,12 +2,8 @@
 title: Assign issues to teammates
 ---
 
-Error tracking allows you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or teammates. This helps your team find relevant issues to work on through **filtering**. You can also set up team-specific **alerting** to notify specific teams when issues are created or reopened.
+Error tracking enables you to assign issues to specific PostHog [roles](https://app.posthog.com/settings/organization-roles) or teammates. This helps your team find relevant issues through **filtering**. You can also set up team-specific **alerting** to notify them when assigned issues are created or reopened.
 
-This guide covers the following:
-- [Assigning issues to roles or users](#assigning-issues)
-- [Automatically assigning issues to roles or users through a set of rules](#automatic-issue-assignment)
-- [Alerting based on assignment](#alerting-based-on-assignment)
 
 ## Assigning issues
 
@@ -20,9 +16,9 @@ You can manually assign issues as you triage them in the UI. This can be done bo
     classes="rounded"
 />
 
-1. In your error tracking [issue list](https://app.posthog.com/error_tracking), you can click the **unassigned** selector under each issue to assign it to a role or user.
+1. In your error tracking [issue list](https://app.posthog.com/error_tracking), click the **unassigned** selector under each issue to assign it to a role or user.
 
-2. In the detail page of each issue, you can click the **Assignee** selector to assign it to a role or user.
+2. On the detail page of each issue, click the **Assignee** selector to assign it to a role or user.
 
 Want to assign issues to a **team** rather than an individual teammate? You can create a role in [your project settings](https://app.posthog.com/settings/organization-roles).
 
@@ -44,11 +40,11 @@ You can set up automatic issue assignment through a set of rules. This can be co
   classes="rounded"
 />
 
-Assignment conditions are evaluated against the properties of the exception event that created the issue. Because assignment rules are evaluated during ingestion, the stack trace (if present) will be unminified, which allows for filtering on exception properties such as function name and source file.
+Assignment conditions are evaluated against the properties of the exception event that created the issue. Because assignment rules are evaluated during ingestion, the stack trace (if present) will be unminified, which enables filtering on exception properties such as function name and source file.
 
 Issues can be automatically assigned to a **role** or **user** by configuring a set of filters. These filters can be configured to match **any** or **all** of the criteria.
 
-The filters can be configured to filter on any [event property](/docs/data/events) in PostHog. When there are multiple values for a property, the filters will return true if it matches **any** of the values. For example, if you have multiple `exception_functions` values, the filters will return true if it matches **any** of the functions.
+You can configure automatic assignment to filter on any [event property](/docs/data/events) in PostHog. When there are multiple values for a property, the filters return true if it matches **any** of the values. For example, if you have multiple `exception_functions` values, the filters returns true if it matches **any** of the functions.
 
 Here are some common properties you can filter on:
 
@@ -68,7 +64,7 @@ You can also set custom properties on the error tracking event to filter on. For
 
 ### Order of issue assignment rules
 
-Issue assignment filters are evaluated in the order they are configured. They can also be reordered once created. The first filter that matches will be used to assign the issue. This means you should configure the most specific filters first, and then the more general filters later.
+Issue assignment filters are evaluated in the order they are configured. They can also be reordered once created. The first filter that matches is used to assign the issue. This means you should configure the most specific filters first, and then the more general filters later.
 
 ### Alerting based on assignment 
 
