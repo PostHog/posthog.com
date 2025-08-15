@@ -85,9 +85,9 @@ Customizing exception capture lets you override exception properties to influenc
 
 Equally important, you can customize properties on the exceptions to help you configure rules for [automatic issue assignment](/docs/error-tracking/assigning-issues#automatic-issue-assignment), [alerts](/docs/error-tracking/alerts), [issue grouping](/docs/error-tracking/grouping-issues). They can also be used in analysis in [insights](/docs/product-analytics/insights), [dashboards](/docs/product-analytics/dashboards), and [data warehouse queries](/docs/product-analytics/data-warehouse).
 
-## Overriding exception properties 
+### Customizing exception properties 
 
-### During manual capture
+#### During manual capture
 
 When capturing exceptions manually, passing properties to the capture exception method adds them to the event just like any other PostHog event.
 
@@ -153,7 +153,7 @@ posthog.capture_exception(
 
 </MultiLanguage>
 
-### During automatic capture
+#### During automatic capture
 
 When automatic exception capture is enabled, you can still override the default properties and add custom properties to the exception event. 
 
@@ -222,7 +222,7 @@ The process is slightly different depending on the SDK you're using.
 
 ### Capturing properties for custom issue grouping rules
 
-Other than grouping with [custom fingerprints](#overriding-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues). 
+Other than grouping with [custom fingerprints](#customizing-exception-properties), you can also set custom properties on the exception to help you group exceptions together using [issue grouping rules](/docs/error-tracking/grouping-issues). 
 
 For example:
 

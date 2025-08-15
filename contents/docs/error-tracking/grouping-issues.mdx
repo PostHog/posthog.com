@@ -48,6 +48,8 @@ Here are some common exception event properties you can filter on:
 
 You can also set custom properties on the error tracking event to filter on. You can find more about custom properties on exception capture in the [capture guide](/docs/error-tracking/capture).
 
+Grouping rules are evaluated in the order they are configured and can be reordered. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
+
 ### Option 2: Client-side fingerprint
 
 Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog during ingestion, which is used for grouping. You can override this by setting the `$exception_fingerprint` property when capturing exceptions.
@@ -74,16 +76,16 @@ posthog.init("<ph_project_api_key>", {
 })
 ```
 
-## Grouping rule best practices
+## Issue grouping best practices
 
-When grouping exceptions into issues, it's important to consider what you might do with the issues once created. For example, you might:
+Exceptions can only be grouped under a single issue. Every issue is meant to represent a single problem that can be fixed by a single change. You should only group issues when the default grouping algorithm is creating a lot of noise.
 
-- Group high urgency exceptions by a specific service or routes that have higher business impact.
-- Group exceptions by specific features, especially when they're new or experimental.
+Some examples of this could be:
 
-How you group exceptions into issues is up to you, but it's important to consider how you'll use these issues and communicate with your team.
+- A common issue like `ClickHouseTimeout` that occurs in many different places, but are mistakenly labeled as different issues.
+- A specific error message that shouldn't account for any differences in stack traces, such as "Failed to send billing status to SQS for customer".
 
-Grouping rules are evaluated in the order they are configured. The first rule that matches will be used to group exceptions into an issue. This means you should configure the most specific rules first, and then the more general rules. If you configure a catch-all rule first, it will always match and block other rules from being evaluated.
+You should avoid using grouping to address problems that can be otherwise solved by [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment) or filtering by [custom properties](/docs/error-tracking/capture#customizing-exception-properties). When you over-group issues, they lack specificity and become meaningless.
 
 ## How PostHog prioritizes issue grouping logic
 
