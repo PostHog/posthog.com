@@ -35,7 +35,7 @@ Spoiler: Lezgin did not decide to leave PostHog.
 <BorderWrapper> <Quote imageSource="/images/customers/lezgin.jpg" size="md" name="Lezgin Zilan" title="CTO, Qred" quote={`“One thing I have to say is that PostHog’s support is awesome. There’s no outsourced first line or call centers — you get real answers fast, straight from the actual engineers. If you find a bug, they show you the GitHub issue and you can literally watch it get fixed. I love that.”`} /> </BorderWrapper>
 
 ## More than autocapture: Replacing the whole stack
-It wasn’t just the open-source safety net that made PostHog stand out — he also saw how much more the team could accomplish once the tracking headache was solved with PostHog’s [autocapture](/docs/product-analytics/autocapture).
+It wasn’t just the open-source safety net that made PostHog stand out, he also saw how much more the team could accomplish once the tracking headache was solved with PostHog’s [autocapture](/docs/product-analytics/autocapture).
 
 "Autocapture solved my first problem because I no longer had front-end developers spending time adding tracking," explains Lezgin. "Instead, we just captured that automatically and we could build all the dashboards we wanted, completely replacing the need for [Google Analytics](/blog/posthog-vs-ga4) in our product."
 
