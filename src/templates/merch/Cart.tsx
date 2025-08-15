@@ -6,7 +6,6 @@ import { LineItem } from './LineItem'
 import { Price } from './Price'
 import { useCartStore } from './store'
 import { StaticImage } from 'gatsby-plugin-image'
-import ShippingBanner from './ShippingBanner'
 
 type CartProps = {
     className?: string
@@ -36,8 +35,6 @@ export function Cart(props: CartProps): React.ReactElement {
                     </div>
                 </div>
             )}
-
-            {!isEmpty && <ShippingBanner />}
 
             <>
                 <div>
