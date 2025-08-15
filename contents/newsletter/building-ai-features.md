@@ -1,5 +1,5 @@
 ---
-title: The ultimate guide to building AI-powered features
+title: What we've learned about building AI-powered features
 date: 2025-08-11
 author:
  - ian-vanagas
@@ -13,7 +13,7 @@ We took our time entering this gold rush. Two years ago, when many started addin
 
 Since then, we've learned a lot about what works and what doesn't when building AI-powered features. This post shares that with you in an effort to help you build something users will use and love.
 
-## Choosing how and where to add AI in your product
+## Choosing the right AI features (in the right spot)
 
 One of the biggest risks of adding AI to your product is making it worse. AI can often provide a worse experience than what already exists.
 
@@ -168,7 +168,7 @@ Beyond issues with humanity and hallucination, sometimes your workflows just bre
 
 For real pros, you can also set up observability, error tracking, and feature flags (conveniently we provide all three).
 
-## Improving your AI features after you’ve built them
+## Improving your AI-powered features once you've built them
 
 The AI industry is undergoing continual, rapid, and unpredictable change. This means that the AI-powered features you build require a lot more maintenance and continual improvement than you might expect.
 
