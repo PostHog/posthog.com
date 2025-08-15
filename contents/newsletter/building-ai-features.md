@@ -9,13 +9,13 @@ tags:
 
 AI feels like a gold rush. Everyone’s staking claims and panning for quick wins. Few are building mines that create long-term value. Shiny demos are everywhere, but many are fool’s gold: bolted-on, rarely used, and quick to tarnish.
 
-We’ve all experienced poorly built AI-powered features. These can have a huge negative impact on user experience, hurting a company’s reputation and slowing adoption of future features.
+We took our time entering this gold rush. Two years ago, when many started adding AI-powered features, we felt the model capabilities weren't good enough to create the experience we wanted to provide. A year later, they got there and we started building.
 
-How do you avoid this fate? Choose the right AI-powered features to build, build them in the right way, and then continually work to improve them. This guide aims to help you do all three of these.
+Since then, we've learned a lot about what works and what doesn't when building AI-powered features. This post shares that with you in an effort to help you build something users will use and love.
 
 ## Choosing how and where to add AI in your product
 
-One of the biggest risks of adding AI to your product is making it worse. AI-powered experiences can often be worse than their alternatives. 
+One of the biggest risks of adding AI to your product is making it worse. AI can often provide a worse experience than what already exists.
 
 This happens because teams build the wrong features in the wrong places. Avoiding this requires the following three steps:
 
@@ -23,17 +23,17 @@ This happens because teams build the wrong features in the wrong places. Avoidin
 
 Just because AI companies seem to be reinventing the wheel doesn’t mean you need to too. 
 
-There are plenty of AI patterns a bunch of smart, rich people have already figured out which you can copy to your product. These have the advantage of being UX patterns that people are familiar with and also being functionality AI is actually good at.
+There are plenty of AI patterns a bunch of smart people have already figured out which you can copy to your product. These have the advantage of being UX patterns that users are familiar with while also being functionality AI is actually good at.
 
 First is the classic “chat with your docs/data/PDF.” AI is great at search and summarization and can use this to build reports and recommendations. Intercom’s Fin or Mintlify’s docs chat are examples of this.
 
 ![Chat with your docs](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_11_at_12_20_38_2x_60d5ceaccf.png)
 
-Second are generators of various kinds. Titles, code, documents, SQL, images, and filters. Of course, AI app builders like Lovable or [Bolt.new](http://Bolt.new) have been the biggest beneficiaries of this, but all sorts of companies from Rippling to Figma to Notion have added generation capacities too.
+Second are generators of various kinds. Titles, code, documents, SQL, images, and filters. Of course, AI app builders like Lovable or Bolt.new have been the biggest beneficiaries of this, but all sorts of companies from Rippling to Figma to Notion have added generation capacities too.
 
 ![Generators](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_11_at_12_21_06_2x_994a085f7e.png)
 
-Third, and finally, is tool use. AI can use well-defined tools. This is what MCP servers are all about. Companies like Zapier, Atlassian, Asana, and many more have used this to automate and improve workflows.
+Third, and finally, is tool use. AI can use well-defined tools. This is what [MCP servers](/blog/machine-copy-paste-mcp-intro) are all about. Companies like [Zapier, Atlassian](/newsletter/the-companies-that-shaped-posthog), Asana, and many more have used this to automate and improve workflows.
 
 ![Tool users](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_11_at_12_21_35_2x_82b8a095db.png)
 
@@ -43,13 +43,13 @@ Knowing the common AI patterns helps you identify where you can use them in your
 
 > Ask not what you can do with AI, but what AI can do for you. - JFK (I think) 
 
-With the patterns in mind, it’s time to go through your product and figure out the jobs to be done that AI could potentially do. Some examples of how to find these:
+With the patterns in mind, it’s time to go through your product and figure out the jobs to be done that AI could potentially do. Some examples of these:
 
-- It’s a single task that takes more than 30 seconds to do like filling a long form, manually entering data, or installation.
+- It’s a single task that takes more than 30 seconds to do like filling a long form, manually entering data, setting up an integration,or installing an SDK.
 
 - Users need a language or interface they don’t understand, such as a complex UI, SQL queries, or building an app.
 
-- Users do it more than 20 times like writing descriptions, summaries, or creating an entry. As Stephen Whitworth of incident.io said in [Lenny’s Newsletter](lennysnewsletter.com/p/counterintuitive-advice-for-building):
+- Users do it more than 20 times like writing descriptions, summaries, or creating an entry. As Stephen Whitworth of incident.io said in [Lenny's Newsletter](https://www.lennysnewsletter.com/p/counterintuitive-advice-for-building):
 
 > Look less at ‘what cool new things could AI do’ but more at ‘what’s the thing our users do 100 times a day that AI could make better.’ An example for us is writing a summary for an incident. It turns out that users vastly, vastly prefer automatically generated summaries to writing these themselves; 75% of incident summaries are now AI-generated.
 
@@ -71,7 +71,7 @@ Now that you have an idea of what you want to build, you need to make sure it ac
 
 ### 1. Context and state
 
-Everyone can make a call to the OpenAI API. What your app has that’s unique is its context. This can include data like what a user is trying to do, who is doing it, what their account status is, where they are in the app, and what the app’s data schema looks like. 
+Everyone can call the OpenAI API. What your app has that’s unique is its context. This can include data like what a user is trying to do, who is doing it, what their account status is, where they are in the app, and what the app’s data schema looks like. 
 
 For example, when a user asks Max, our AI product analyst, why signups dropped last week, Max receives information on the:
 
@@ -115,7 +115,7 @@ class AssistantState(TypedDict):
   # ... plus error handling, retry counts, etc.
 ```
 
-We find doing this, combined with optimizing our model choice, is  more effective and useful than fine tuning a model would be. 
+We find doing this, combined with optimizing our model choice, is more effective and useful than fine tuning a model would be. 
 
 ### 2. Query planning and conditional routing
 
@@ -127,7 +127,7 @@ Beyond state management, this requires:
 - Being able to select the correct tools and data based on the intended task users want to complete.
 - Making sure those tools, like query execution and formatting actually work.
 
-In PostHog, at the highest level, this looks like this:
+In PostHog, at the highest level, this is a router that looks like this:
 
 ```python
 # From root/nodes.py
@@ -140,27 +140,39 @@ def router(self, state: AssistantState) -> Literal["insights",
   # ... etc
 ```
 
-It then gets more specific in each of the tools, each of which have their own conditions to route through. 
+Each node of the router then has its own conditions to route through to get to the right data and tools for the job. This ensures the AI has the pieces it needs to complete the task and makes successfully completing that task more likely.
 
 ### 3. Plan for failure by adding guardrails and error handling
 
-Ideally all the structure you’ve built up to this point prevents failure. You basically want to give the AI guardrails because they *will* inevitably smash into them. 
+Ideally all the structure you’ve built up to this point prevents failure, but you still want to give the AI guardrails because they *will* inevitably smash into them. 
 
-Anything an AI can hallucinate, it will hallucinate. To prevent this, there is some data we set directly like API keys in our installation envoy. 
+Anything an AI can hallucinate, it will hallucinate. To prevent this, we are explicit about the data that needs to be set directly and the rules it needs to follow. For example, in our AI installation wizard, we include rules like:
+
+- Never hallucinate an API key. Instead, always use the API key populated in the .env file.
+- DO NOT add placeholder comments like "// In a real app..."
+- DO NOT modify the existing business logic or add simulation code
+- NEVER import new packages or libraries that aren't already used
+- DO NOT assume any authentication library (Clerk, Auth.js, etc.) is available
 
 ![Can't hallucinate API keys](https://res.cloudinary.com/dmukukwp6/image/upload/w_1600,c_limit,q_auto,f_auto/Clean_Shot_2025_08_11_at_12_22_26_2x_b75027dce9.png)
 
-You can’t hallucinate API keys if you set them yourself
+<Caption>You can’t hallucinate API keys if you set them yourself</Caption>
 
-Another guardrail you might want to put in place is one for people. For example, when people see an empty text box, they get scared and forget everything. You can provide suggestions of ways people can use your AI-powered features to get the most out of them. 
+Another guardrail to put in place is one *for people*. This is because when people see an empty text box, they get scared and forget everything. 
+
+To nudge users' memory and help them get the most out of your AI-powered features, you can provide suggestions of ways they can use it:
 
 ![Suggestions](https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/Clean_Shot_2025_08_08_at_17_52_21_2x_514e35df81.png)
 
-Beyond hallucination issues, sometimes your workflows just break. You need to be able to handle these gracefully with retries and rate limiting. For real pros, you can also set up observability, error tracking, and feature flags (conveniently we provide all three).
+Beyond issues with humanity and hallucination, sometimes your workflows just break. You need to be able to handle these gracefully with retries and rate limiting. 
+
+For real pros, you can also set up observability, error tracking, and feature flags (conveniently we provide all three).
 
 ## Improving your AI features after you’ve built them
 
-We found from experience that building AI-powered features requires a lot more maintenance and continual improvement, likely because of the continual and rapid improvements in the field of AI as well as the unpredictability of AI. 
+The AI industry is undergoing continual, rapid, and unpredictable change. This means that the AI-powered features you build require a lot more maintenance and continual improvement than you might expect.
+
+From experience, here's what we've found is most important when trying to improve your AI-powered features:
 
 ### 1. Help your team build AI-powered features
 
@@ -178,7 +190,7 @@ There are a few ways you can encourage your team to do this:
 
 One of the big challenges with AI-powered features, especially complex ones, is that they are slow. A workflow can often mean multiple calls to LLM providers which can add up to a lot of time waiting for responses. This can be especially frustrating when alternative ways to complete a task exist in an app or website.
 
-As Rahul Vohra said in [Lenny’s Newsletter](https://www.lennysnewsletter.com/p/counterintuitive-advice-for-building):
+As the founder of Superhuman, Rahul Vohra, said in [Lenny’s Newsletter](https://www.lennysnewsletter.com/p/counterintuitive-advice-for-building):
 
 > The thing we’ve learned: speed wins. Take, for example, Instant Reply or Auto Summarize. Gmail and Outlook have similar features, but you have to generate the replies and summaries on demand—and then wait for them to finish generating. In Superhuman, we pre-compute them so they are always instantaneous. That simple difference is a massive lever on the user experience.
 
@@ -192,15 +204,15 @@ Some ways to improve this
 
 ### 3. Monitor that they are actually useful
 
-Remember I said one of the biggest risks of adding AI is that it has a negative impact? Once you’ve added AI, it’s time to look at its impact on the metrics you care about. 
+Remember I said one of the biggest risks of adding AI is having a negative impact? Once you’ve added AI, it’s time to look at its impact on the metrics you care about. 
 
 Just because it is ✨ AI ✨ doesn’t mean it should be judged less strictly than any other addition. Like any other addition, there are plenty of ways to do this:
 
 - A/B test AI-powered features vs the normal experience as well as different prompts, contexts, workflows, and more.
 
-- Check AI usage rates for different types of customers (free users vs enterprise) and roles (product vs sales). For example, our ICP is product engineers, but we found product managers and marketers were using Max more often, which led us to reconsider our AI roadmap.
+- Check AI usage rates for different types of customers (free users vs enterprise) and roles (product vs sales). For example, we found product managers and marketers were using Max more often than our ICP (product engineers), which led us to reconsider our AI roadmap.
 
-- Let users rate AI responses as good or bad. When users rate responses poorly, ask them for more details.
+- Let users rate AI responses as good or bad. When users rate responses poorly, ask them for more details. Use this to tweak context, prompts, and workflows.
 
 - Compare AI vs non-AI usage, activation, and retention metrics. This helps you understand where AI ideally fits into your product and user lifecycle.
 
