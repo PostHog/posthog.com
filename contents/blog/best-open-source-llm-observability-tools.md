@@ -36,7 +36,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 
 [PostHog](/) is an open source all-in-one platform that combines LLM observability with several other developer-focused tools, such as product and web analytics, session replay, feature flags, experiments, error tracking, and surveys.
 
-Its [LLM observability product](/docs/ai-engineering) integrates with popular LLM provides, captures details of generations, provides an aggregated metrics dashboard, and more.
+Its [LLM observability product](/docs/llm-observability) integrates with popular LLM provides, captures details of generations, provides an aggregated metrics dashboard, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_07_at_11_06_21_678982e3a9.png"
@@ -59,7 +59,7 @@ You can [get started right away](http://us.posthog.com/signup), no sales call or
 - GitHub stars: 10.2k
 - [Langfuse on GitHub](https://github.com/langfuse/langfuse)
 
-[Langfuse](/docs/ai-engineering/langfuse-posthog) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
+[Langfuse](/docs/llm-observability/integrations/langfuse-posthog) is an open source LLM engineering platform. It provides LLM call tracking and tracing, prompt management, evaluation, datasets, and more. These give LLM app developers tools they need for their entire workflow.
 
 Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse Cloud is free to use up to 50k events per month and 2 users, but this only includes 30 day data access. Pricing beyond this starts at $59/m for 100k events with additional events at $8/m more.
 
@@ -133,7 +133,7 @@ Like Opik, Phoenix is connected to a broader AI development platform. Unique to 
 - GitHub stars: 3.6k
 - [Helicone on GitHub](https://github.com/Helicone/helicone)
 
-[Helicone](/docs/ai-engineering/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
+[Helicone](/docs/llm-observability/integrations/helicone-posthog) is an open source platform for monitoring, debugging, and improving LLM applications. Beyond integrations with popular LLM providers, tracing, and an aggregate analytics dashboard, Helicone provides more tools like prompt management and evals. 
 
 Its hosted version is free up to 10,000 requests with some features limited to the $20/m pro and $200/m team plans. The costs for requests beyond the first 10,000 is unknown, though.
 

@@ -152,7 +152,7 @@ All steps of the LLM chain are now tracked in Langfuse and you can view them in 
 
 ## 4. Integrate Langfuse with PostHog
 
-Next we [connect Langfuse to PostHog](/docs/ai-engineering/langfuse-posthog) so that you can combine your LLM trace data with your PostHog analytics. This enables you to answer product questions such as:
+Next we [connect Langfuse to PostHog](/docs/llm-observability/langfuse-posthog) so that you can combine your LLM trace data with your PostHog analytics. This enables you to answer product questions such as:
 
 - What are my LLM costs by customer, model, and in total?
 - How many of my users are interacting with my LLM features?
