@@ -20,37 +20,7 @@ You should consider your unique needs to determine if you need to configure cust
 
 PostHog attempts to group similar exceptions into issues automatically. If you want more control over issue grouping, you can define a client-side fingerprint or use custom grouping rules during ingestion.
 
-### Option 1: Client-side fingerprint
-
-Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog, which is used to group similar exception events into issues. You can also set fingerprints manually during client-side capture.
-
-PostHog generates a fingerprint based on the exception during ingestion. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
-
-When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the function's second argument.
-
-```js
-posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
-```
-
-If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
-
-```javascript
-posthog.init("<ph_project_api_key>", {
-  before_send: (event) => {
-    if (event.event === "$exception") {
-      const exceptionList = event.properties["$exception_list"] || []
-      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
-
-      if (exception && exception["$exception_type"] == "SyntaxError") {
-        event.properties["$exception_fingerprint"] = "MyCustomGroup"
-      }    
-    }
-    return event
-  }
-})
-```
-
-### Option 2: Custom grouping rule
+### Option 1: Custom grouping rule
 
 You can also group exceptions as a single issue based on their properties using custom grouping rules. As with [auto assignment rules](/docs/error-tracking/assigning-issues#automatic-issue-assignment), you have access to properties of the unminified stack trace because the rules run during ingestion. 
 
@@ -79,6 +49,36 @@ Here are some common exception event properties you can filter on:
 | Exception was handled | `$exception_handled` | Whether the exception was handled by the application. |
 
 You can also set custom properties on the error tracking event to filter on. You can find more about custom properties on exception capture in the [capture guide](/docs/error-tracking/capture).
+
+### Option 2: Client-side fingerprint
+
+Every captured exception is assigned a [fingerprint](/docs/error-tracking/fingerprints) by PostHog, which is used to group similar exception events into issues. You can also set fingerprints manually during client-side capture.
+
+PostHog generates a fingerprint based on the exception during ingestion. Setting the `$exception_fingerprint` property on the frontend will override the default flow to allow for custom grouping of certain exceptions.
+
+When using the `captureException` method, you can provide `$exception_fingerprint` as an additional property in the function's second argument.
+
+```js
+posthog.captureException(error, { $exception_fingerprint: "MyCustomGroup" })
+```
+
+If the exception is autocaptured, you need to modify the properties before the event is sent. The PostHog config offers a [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) hook that fires for each event which you can use to alter event and add the property:
+
+```javascript
+posthog.init("<ph_project_api_key>", {
+  before_send: (event) => {
+    if (event.event === "$exception") {
+      const exceptionList = event.properties["$exception_list"] || []
+      const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+      if (exception && exception["$exception_type"] == "SyntaxError") {
+        event.properties["$exception_fingerprint"] = "MyCustomGroup"
+      }    
+    }
+    return event
+  }
+})
+```
 
 ## Grouping rule best practices
 

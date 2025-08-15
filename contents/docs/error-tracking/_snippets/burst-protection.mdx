@@ -5,7 +5,13 @@ By default, we capture 10 exceptions (bucket size) of the same type within a 10 
 Often not needed, but you can change the bucket size and refill rate as part of your configuration:
 
 ```js
-error_tracking: {
-    __exceptionRateLimiterRefillRate: 1
-    __exceptionRateLimiterBucketSize: 10
-}
+import posthog from 'posthog-js'
+
+posthog.init('<ph_project_api_key>', {
+    api_host: '<ph_client_api_host>', 
+    error_tracking: {
+        __exceptionRateLimiterRefillRate: 1
+        __exceptionRateLimiterBucketSize: 10
+    }
+})
+```
