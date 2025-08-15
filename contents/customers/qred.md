@@ -62,7 +62,7 @@ PostHog has since become Qred’s single source of truth for an increasing amoun
 </BorderWrapper>
 
 ## From quick fixes to a single source of truth
-As a bank, Qred is also beholden to additional regulations beyond the usual obligations of [GDPR](/docs/privacy/gdpr-compliance). The Bank Secrecy Act (BSA), for example, imposes certain obligations for tracking users — and Qred therefore doesn’t pass all customer data through to PostHog. Instead, they use reference IDs that correspond to customer details elsewhere and the team join data warehouse tables when needed for deep analysis. 
+As a bank, Qred is also beholden to additional regulations beyond the usual obligations of [GDPR](/docs/privacy/gdpr-compliance). The Bank Secrecy Act (BSA), for example, imposes certain obligations for tracking users, and Qred therefore doesn’t pass all customer data through to PostHog. Instead, they use reference IDs that correspond to customer details elsewhere and the team join data warehouse tables when needed for deep analysis. 
 
 Despite these compliance constraints, tools like session recording have been a huge win for Qred — not just in terms of analytics, but also for troubleshooting. In fact, the team already has plans to further enrich [person data](/docs/data/persons) with additional properties.
 
