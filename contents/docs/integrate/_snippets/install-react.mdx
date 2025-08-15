@@ -37,6 +37,12 @@ createRoot(document.getElementById('root')).render(
 )
 ```
 
+<CalloutBox icon="IconWarning" title="Don't directly import PostHog" type="fyi">
+
+Do not directly import `posthog` apart from installation as shown above. This will likely cause errors as the library might not be initialized yet. Initialization is handled automatically when you use the `PostHogProvider` and `usePostHog` hook.
+
+</CalloutBox>
+
 <details>
   <summary>Using React Router v7?</summary>
 
