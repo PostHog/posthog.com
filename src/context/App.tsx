@@ -72,6 +72,7 @@ interface AppContextType {
     openSearch: (initialFilter?: string) => void
     handleSnapToSide: (side: 'left' | 'right') => void
     constraintsRef: React.RefObject<HTMLDivElement>
+    taskbarRef: React.RefObject<HTMLDivElement>
     expandWindow: () => void
     openSignIn: (onSuccess?: (user: User) => void) => void
     openRegister: () => void
@@ -219,6 +220,7 @@ export const Context = createContext<AppContextType>({
     openSearch: () => {},
     handleSnapToSide: () => {},
     constraintsRef: { current: null },
+    taskbarRef: { current: null },
     expandWindow: () => {},
     openSignIn: () => null,
     openRegister: () => {},
@@ -705,6 +707,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
     const compact = typeof window !== 'undefined' && window !== window.parent
     const constraintsRef = useRef<HTMLDivElement>(null)
+    const taskbarRef = useRef<HTMLDivElement>(null)
     const [isMobile, setIsMobile] = useState(!isSSR && window.innerWidth < 768)
     const [taskbarHeight, setTaskbarHeight] = useState(38)
     const [lastClickedElement, setLastClickedElement] = useState<HTMLElement | null>(null)
@@ -1326,6 +1329,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 openSearch,
                 handleSnapToSide,
                 constraintsRef,
+                taskbarRef,
                 expandWindow,
                 openSignIn,
                 openRegister,

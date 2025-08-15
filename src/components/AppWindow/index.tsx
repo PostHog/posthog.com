@@ -118,6 +118,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
         openNewChat,
         compact,
         menu: appMenu,
+        taskbarRef,
     } = useApp()
     const isSSR = typeof window === 'undefined'
     const controls = useDragControls()
@@ -201,7 +202,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     }
 
     const getActiveWindowsButtonPosition = () => {
-        const activeWindowsButton = isSSR ? null : document.querySelector('[data-active-windows]')
+        const activeWindowsButton = isSSR ? null : taskbarRef.current?.querySelector('[data-active-windows]')
         if (!activeWindowsButton) return { x: 0, y: 0 }
         const rect = activeWindowsButton.getBoundingClientRect()
         return {
@@ -270,11 +271,14 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     const windowPosition = useMemo(() => {
         if (isSSR) return { x: 0, y: 0 }
         const activeWindowsPosition = getActiveWindowsButtonPosition()
+        if (activeWindowsPosition.x === 0 && activeWindowsPosition.y === 0) {
+            return undefined
+        }
         return {
             x: activeWindowsPosition.x - size.width / 2,
             y: activeWindowsPosition.y - size.height / 2,
         }
-    }, [size.width, size.height])
+    }, [size.width, size.height, taskbarRef.current])
 
     const canGoBack = history.length > 0 && activeHistoryIndex > 0
     const canGoForward = activeHistoryIndex < history.length - 1
@@ -468,15 +472,15 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             initial={{
                                 scale: 0.08,
                                 x: rendered
-                                    ? siteSettings.experience === 'boring'
+                                    ? siteSettings.experience === 'boring' || !windowPosition
                                         ? 0
                                         : windowPosition.x
-                                    : item.fromOrigin?.x || windowPosition.x,
+                                    : item.fromOrigin?.x || windowPosition?.x || Math.round(position.x),
                                 y: rendered
-                                    ? siteSettings.experience === 'boring'
+                                    ? siteSettings.experience === 'boring' || !windowPosition
                                         ? 0
                                         : windowPosition.y
-                                    : item.fromOrigin?.y || windowPosition.y,
+                                    : item.fromOrigin?.y || windowPosition?.y || Math.round(position.y),
                                 width: siteSettings.experience === 'boring' ? '100%' : size.width,
                                 height:
                                     siteSettings.experience === 'boring'
@@ -499,8 +503,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 transition: {
                                     duration: siteSettings.experience === 'boring' ? 0 : 0.2,
                                     scale: {
-                                        duration: siteSettings.experience === 'boring' ? 0 : 0.2,
-                                        delay: siteSettings.experience === 'boring' ? 0 : 0.2,
+                                        duration: siteSettings.experience === 'boring' || !windowPosition ? 0 : 0.2,
+                                        delay: siteSettings.experience === 'boring' || !windowPosition ? 0 : 0.2,
                                         ease: [0.2, 0.2, 0.8, 1],
                                     },
                                     width: {
@@ -513,7 +517,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             }}
                             exit={{
                                 scale: 0.005,
-                                ...(closing ? {} : { x: windowPosition.x, y: windowPosition.y }),
+                                ...(closing || !windowPosition ? {} : { x: windowPosition.x, y: windowPosition.y }),
                                 transition: {
                                     scale: {
                                         duration: siteSettings.experience === 'boring' ? 0 : 0.23,

@@ -36,6 +36,7 @@ export default function TaskBarMenu() {
         setIsNotificationsPanelOpen,
         setIsActiveWindowsPanelOpen,
         addWindow,
+        taskbarRef,
     } = useApp()
     const [isAnimating, setIsAnimating] = useState(false)
     const totalWindows = windows.length
@@ -206,6 +207,7 @@ export default function TaskBarMenu() {
     return (
         <>
             <div
+                ref={taskbarRef}
                 id="taskbar"
                 data-scheme="primary"
                 className="w-full bg-accent/75 skin-classic:bg-accent backdrop-blur border-b border-primary top-0 z-50 flex justify-between pl-0.5 pr-2"
