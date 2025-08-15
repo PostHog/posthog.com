@@ -15,7 +15,7 @@ How do you avoid this fate? Choose the right AI-powered features to build, build
 
 ## Choosing how and where to add AI in your product
 
-Assuming you already have a product, one of the biggest risks of adding AI to your product is making it worse. AI-powered experiences can often be worse than their alternatives. 
+One of the biggest risks of adding AI to your product is making it worse. AI-powered experiences can often be worse than their alternatives. 
 
 This happens because teams build the wrong features in the wrong places. Avoiding this requires the following three steps:
 
