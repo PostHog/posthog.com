@@ -37,7 +37,7 @@ if (!posthog._isIdentified()) {
 
 In client-side SDKs, it's only necessary to call [`group()`](/docs/product-analytics/group-analytics) once per session. Prevent calling it multiple times to send fewer events and reduce costs.
 
-To see where duplicate groupidentify calls are being generated, you can use the following SQL:
+To see where duplicate `$groupidentify` events are being generated, you can use the following SQL:
 
 ```
 SELECT properties.$lib AS lib, count() AS groupidentify_event_count
@@ -47,8 +47,21 @@ WHERE event = '$groupidentify'
     SELECT $session_id
     FROM events
     WHERE event = '$groupidentify'
-      AND timestamp >= now() - INTERVAL 30 DAY
-      AND timestamp < now()
+      ```
+SELECT properties.$lib AS lib, count() AS groupidentify_event_count
+FROM events
+WHERE event = '$groupidentify'
+  AND $session_id IN (
+    SELECT $session_id
+    FROM events
+    WHERE event = '$groupidentify'
+      AND timestamp &gt;= now() - INTERVAL 30 DAY
+      AND timestamp &lt; now()
+    GROUP BY $session_id
+    HAVING count() &gt; 1
+  )
+GROUP BY lib
+ORDER BY groupidentify_event_count DESC
     GROUP BY $session_id
     HAVING count() > 1
   )
