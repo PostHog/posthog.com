@@ -61,7 +61,6 @@ interface AppContextType {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
-            animating?: boolean
         }
     ) => void
     getPositionDefaults: (
@@ -315,7 +314,7 @@ const appSettings: AppSettings = {
             },
             max: {
                 width: 700,
-                height: 1000,
+                height: 552,
             },
             fixed: false,
             autoHeight: true,
@@ -684,6 +683,24 @@ export interface SiteSettings {
 
 const isLabel = (item: any) => !item?.url && item?.name
 
+const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
+    const siteSettings = {
+        experience: 'posthog',
+        colorMode: 'light',
+        theme: 'light',
+        skinMode: 'modern',
+        cursor: 'default',
+        wallpaper: 'keyboard-garden',
+        ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
+    }
+
+    if (isMobile || compact) {
+        siteSettings.experience = 'boring'
+    }
+
+    return siteSettings
+}
+
 export const Provider = ({ children, element, location }: AppProviderProps) => {
     const isSSR = typeof window === 'undefined'
     const compact = typeof window !== 'undefined' && window !== window.parent
@@ -702,17 +719,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             undefined
         )
     }, [windows])
-    const [siteSettings, setSiteSettings] = useState<SiteSettings>({
-        experience: isMobile || compact ? 'boring' : 'posthog',
-        colorMode: 'light',
-        theme: 'light',
-        skinMode: 'modern',
-        cursor: 'default',
-        wallpaper:
-            typeof window !== 'undefined'
-                ? JSON.parse(localStorage.getItem('siteSettings') || '{}').wallpaper || 'keyboard-garden'
-                : 'keyboard-garden',
-    })
+    const [siteSettings, setSiteSettings] = useState<SiteSettings>(getInitialSiteSettings(isMobile, compact))
     const [isNotificationsPanelOpen, setIsNotificationsPanelOpen] = useState(false)
     const [isActiveWindowsPanelOpen, setIsActiveWindowsPanelOpen] = useState(false)
 
@@ -771,7 +778,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
 
     const closeWindow = useCallback(
         (item: AppWindow) => {
-            updateWindow(item, { animating: true })
             setTimeout(() => {
                 const windowsFiltered = windows.filter((el) => el.path !== item.path)
                 const nextFocusedWindow = windowsFiltered.reduce<AppWindow | undefined>(
@@ -833,9 +839,7 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
     }, [])
 
     const minimizeWindow = useCallback((appWindow: AppWindow) => {
-        setWindows((windows) =>
-            windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true, animating: true } : w))
-        )
+        setWindows((windows) => windows.map((w) => (w === appWindow ? { ...appWindow, minimized: true } : w)))
     }, [])
 
     function getWindowBasedSizeConstraints() {
@@ -961,7 +965,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             minimal: element.props.minimal ?? false,
             appSettings: appSettings[element.key],
             location,
-            animating: true,
         }
 
         // Adjust width if window extends beyond right edge
@@ -1014,7 +1017,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
             previousPosition?: { x?: number; y?: number }
             previousSize?: { width?: number; height?: number }
             element?: any
-            animating?: boolean
         }
     ) => {
         const newAppWindow = {
@@ -1036,7 +1038,6 @@ export const Provider = ({ children, element, location }: AppProviderProps) => {
                 ...(updates.previousSize || {}),
             },
             ...(updates.element ? { element: updates.element } : {}),
-            ...('animating' in updates ? { animating: updates.animating } : {}),
         }
         setWindows((windows) => windows.map((w) => (w === appWindow ? newAppWindow : w)))
         return newAppWindow

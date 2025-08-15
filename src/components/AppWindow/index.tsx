@@ -50,7 +50,26 @@ const recursiveSearch = (array: MenuItem[] | undefined, value: string): boolean 
 const snapThreshold = -50
 
 const Router = (props) => {
-    const { children, path } = props
+    const { minimizeWindow } = useApp()
+    const { appWindow } = useWindow()
+    const { children, path, minimizing, onExit } = props
+
+    useEffect(() => {
+        if (minimizing) {
+            minimizeWindow(appWindow)
+            // Trigger the animation in the TaskBarMenu
+            const taskbarMenu = document.querySelector('#taskbar')
+            if (taskbarMenu) {
+                const event = new CustomEvent('windowMinimized')
+                taskbarMenu.dispatchEvent(event)
+            }
+        }
+
+        return () => {
+            onExit()
+        }
+    }, [minimizing])
+
     if (/^\/questions/.test(path)) {
         return <Inbox {...props} />
     }
@@ -63,11 +82,11 @@ const Router = (props) => {
     if (['/terms', '/privacy', '/dpa', '/baa'].includes(path)) {
         return <Legal defaultTab={path}>{children}</Legal>
     }
-    return children
+    return !props.minimizing && children
 }
 
 const WindowContainer = ({ children, closing }: { children: React.ReactNode; closing: boolean }) => {
-    const { siteSettings, closeWindow } = useApp()
+    const { closeWindow } = useApp()
     const { appWindow } = useWindow()
     return (
         <AnimatePresence
@@ -119,6 +138,8 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     const [pageOptions, setPageOptions] = useState<MenuItemType[]>()
     const [closing, setClosing] = useState(false)
     const [closed, setClosed] = useState(false)
+    const [minimizing, setMinimizing] = useState(false)
+    const [animating, setAnimating] = useState(true)
 
     const parent = (appMenu as Menu).find(({ children, url }) => {
         const currentURL = item?.path
@@ -190,13 +211,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     }
 
     const handleMinimize = () => {
-        minimizeWindow(item)
-        // Trigger the animation in the TaskBarMenu
-        const taskbarMenu = document.querySelector('#taskbar')
-        if (taskbarMenu) {
-            const event = new CustomEvent('windowMinimized')
-            taskbarMenu.dispatchEvent(event)
-        }
+        setMinimizing(true)
     }
 
     const handleDrag = (_event: any, info: any) => {
@@ -389,7 +404,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
     )
 
     const handleClose = () => {
-        updateWindow(item, { animating: true })
+        setAnimating(true)
         setClosing(true)
         setTimeout(() => {
             setClosed(true)
@@ -501,7 +516,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 ...(closing ? {} : { x: windowPosition.x, y: windowPosition.y }),
                                 transition: {
                                     scale: {
-                                        duration: 0.23,
+                                        duration: siteSettings.experience === 'boring' ? 0 : 0.23,
                                         ease: [0.2, 0.2, 0.8, 1],
                                     },
                                     x: {
@@ -523,7 +538,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                             onDragEnd={handleDragEnd}
                             onDragTransitionEnd={handleDragTransitionEnd}
                             onMouseDown={handleMouseDown}
-                            onAnimationComplete={() => updateWindow(item, { animating: false })}
+                            onAnimationComplete={() => setAnimating(false)}
                         >
                             {!item.minimal && !compact && (
                                 <div
@@ -682,8 +697,26 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                     </div>
                                 </div>
                             )}
-                            <div ref={contentRef} className={`size-full flex-grow overflow-hidden`}>
-                                <Router {...item.props}>{item.element}</Router>
+                            <div
+                                ref={contentRef}
+                                className={`size-full flex-grow overflow-hidden bg-light dark:bg-dark`}
+                            >
+                                {(!animating || item.appSettings?.size?.autoHeight) && (
+                                    <Router
+                                        minimizing={minimizing}
+                                        onExit={() => {
+                                            if (minimizing) {
+                                                setMinimizing(false)
+                                                if (siteSettings.experience === 'posthog') {
+                                                    setAnimating(true)
+                                                }
+                                            }
+                                        }}
+                                        {...item.props}
+                                    >
+                                        {item.element}
+                                    </Router>
+                                )}
                             </div>
                             {!item.fixedSize && !item.minimal && (
                                 <motion.div
