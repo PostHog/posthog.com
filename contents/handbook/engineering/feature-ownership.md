@@ -12,7 +12,7 @@ When a bug or feature request comes in, we tag it with the relevant label (see l
 
 Feature ownership does NOT mean that the owner is the only person/team who can contribute to the feature. If another team requires something out of an existing feature that isn't already supported, that non-owning team should do the work to build it. However, the owner team is responsible for reviewing the feature PRs to make sure the code patterns and UX makes sense for the feature overall. After the change is merged in, it then becomes owned by the owner team (assuming no major bugs from the initial implementation).
 
-For example: Web analytics wanted a heatmap insight type to see what times of day people were active. Javier from Web analytics opened up the necessary PRs to build this feature. It was reviewed by the product analytics team, owner of all insight types, who then took responsiblity for it after it was merged.
+For example: Web analytics wanted a heatmap insight type to see what times of day people were active. Javier from Web analytics opened up the necessary PRs to build this feature. It was reviewed by the product analytics team, owner of all insight types, who then took responsibility for it after it was merged.
 
 This process does two things: 1) it prevents people feeling like they need to wait on another team to build out necessary functionality for them. 2) It ensures that features built by another team get proper review, because reviewers know they will have to own it eventually. And 3) it makes sure no feature is left "orphaned" with no real owner.
 
