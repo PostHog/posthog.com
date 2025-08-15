@@ -46,6 +46,8 @@ Some examples of security-related issues that warrant raising an incident includ
 
 **When in doubt, err on the side of caution and raise the incident and escalate early!** Better to be safe than sorry.
 
+> **Need to make a security advisory?** We have a page for that with [more detail on the process for security vulnerabilities](/handbook/company/security-advisories). 
+
 ### Incident severity
 
 Please refer to the following guidance when choosing the severity for your incident. If you are unsure, it's usually better to over-estimate than under-estimate!
