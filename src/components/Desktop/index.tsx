@@ -346,7 +346,7 @@ export default function Desktop() {
                             style={{
                                 backgroundImage:
                                     "url('https://res.cloudinary.com/dmukukwp6/image/upload/keyboard_garden_bg_dark_9ab088797a.png')",
-                                backgroundSize: '100px 100px',
+                                backgroundSize: '200px 200px',
                                 backgroundRepeat: 'repeat',
                             }}
                         />
