@@ -289,7 +289,7 @@ With this, you have the basics of PostHog set up on both the client and server s
 
 ## Further reading
 
-- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
+- [How to set up Next.js pages router analytics, feature flags, and more](/tutorials/nextjs-pages-analytics)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
 - [An introductory guide to identifying users in PostHog](/tutorials/identifying-users-guide)
 
