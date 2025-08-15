@@ -70,8 +70,6 @@ WHERE event = '$groupidentify'
     SELECT $session_id
     FROM events
     WHERE event = '$groupidentify'
-      AND timestamp >= now() - INTERVAL 30 DAY
-      AND timestamp < now()
     GROUP BY $session_id
     HAVING count() > 1
   )
