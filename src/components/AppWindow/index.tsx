@@ -82,7 +82,7 @@ const Router = (props) => {
     if (['/terms', '/privacy', '/dpa', '/baa'].includes(path)) {
         return <Legal defaultTab={path}>{children}</Legal>
     }
-    return !props.minimizing && children
+    return (!props.minimizing || appWindow?.appSettings?.size?.autoHeight) && children
 }
 
 const WindowContainer = ({ children, closing }: { children: React.ReactNode; closing: boolean }) => {
