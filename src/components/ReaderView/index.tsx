@@ -634,9 +634,9 @@ function ReaderViewContent({
                             <motion.div
                                 id="toc"
                                 className="hidden @4xl/app-reader:block flex-shrink-0 overflow-hidden"
-                                initial={{ width: '250px' }}
+                                initial={{ width: 250 }}
                                 animate={{
-                                    width: '250px',
+                                    width: 250,
                                     transition: { duration: 0.2 },
                                 }}
                                 exit={{

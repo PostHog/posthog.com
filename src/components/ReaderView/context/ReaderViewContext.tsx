@@ -41,7 +41,9 @@ const isLabel = (item: any) => !item?.url && item?.name
 export function ReaderViewProvider({ children }: { children: React.ReactNode }) {
     const { appWindow } = useWindow()
     const [isNavVisible, setIsNavVisible] = useState(true)
-    const [isTocVisible, setIsTocVisible] = useState(false)
+    // @6xl breakpoint is 72rem = 1152px
+    const isLarge = appWindow?.size?.width && appWindow?.size?.width >= 1152
+    const [isTocVisible, setIsTocVisible] = useState(isLarge)
     const [tocUserToggled, setTocUserToggled] = useState(false)
     const [fullWidthContent, setFullWidthContent] = useState(false)
     const [lineHeightMultiplier, setLineHeightMultiplier] = useState<number>(1)
@@ -132,13 +134,11 @@ export function ReaderViewProvider({ children }: { children: React.ReactNode }) 
     useEffect(() => {
         if (!appWindow?.size?.width) return
 
-        // @6xl breakpoint is 72rem = 1152px
-        const isLarge = appWindow?.size?.width >= 1152
         // Only update ToC visibility if user hasn't manually toggled it
         if (!tocUserToggled) {
             setIsTocVisible(isLarge)
         }
-    }, [appWindow?.size?.width])
+    }, [isLarge])
 
     const value = {
         isNavVisible,
