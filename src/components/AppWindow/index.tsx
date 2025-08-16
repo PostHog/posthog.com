@@ -705,7 +705,7 @@ export default function AppWindow({ item }: { item: AppWindowType }) {
                                 ref={contentRef}
                                 className={`size-full flex-grow overflow-hidden bg-light dark:bg-dark`}
                             >
-                                {(!animating || item.appSettings?.size?.autoHeight) && (
+                                {(!animating || isSSR || item.appSettings?.size?.autoHeight) && (
                                     <Router
                                         minimizing={minimizing}
                                         onExit={() => {
