@@ -3986,10 +3986,6 @@ export const docsMenu = {
             children: [
                 {
                     name: 'LLM observability',
-                    badge: {
-                        title: 'Beta',
-                        className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
-                    },
                 },
                 {
                     name: 'Overview',
@@ -4204,6 +4200,13 @@ export const productMenu = {
             icon: 'IconDatabase',
             color: 'lilac',
             url: '/data-warehouse',
+        },
+        {
+            name: 'LLM Observability',
+            icon: 'IconAI',
+            color: '[#681291]',
+            colorDark: '[#C170E8]',
+            url: '/llm-observability',
         },
         {
             name: 'Max AI',
