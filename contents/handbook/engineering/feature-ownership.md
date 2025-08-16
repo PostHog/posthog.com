@@ -65,7 +65,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Project home page | [Team Growth][Team Growth]  | <span class="lemon-tag gh-tag">feature/home</span> |
 | Property filters | [Team Product UX][Team Product UX]  | <span class="lemon-tag gh-tag">feature/filters</span>  |
 | Queries as a Service | [Team Data Warehouse][Team Data Warehouse]  | <span class="lemon-tag gh-tag">feature/qaas</span>  |
-| Query performance | [Team Product Analytics][Team Product Analytics]  |  <span class="lemon-tag gh-tag">feature/insights</span>  |
+| Query performance | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/insights</span>  |
 | Quota limiting | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features]  | <span class="lemon-tag gh-tag">feature/quota-limiting</span>  |
 | Replay | [Team Replay][Team Replay]  |  <span class="lemon-tag gh-tag">feature/replay</span> |
 | Revenue analytics | [Team Revenue Analytics][Team Revenue Analytics] | <span class="lemon-tag gh-tag">feature/revenue-analytics</span>  |
