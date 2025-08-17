@@ -4,6 +4,19 @@ import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
 import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
+import {
+    Digit0,
+    Digit1,
+    Digit2,
+    Digit3,
+    Digit4,
+    Digit5,
+    Digit6,
+    Digit7,
+    Digit8,
+    Digit9,
+    DigitDash,
+} from 'components/OSIcons'
 import Roadmap from 'components/Home/New/Roadmap'
 import Pricing from 'components/Home/New/Pricing'
 import OSButton from 'components/OSButton'
@@ -90,6 +103,78 @@ const HomeHappyHog = () => {
             alt="happy hog"
             className="@xl:float-right @xl:ml-2 max-w-[400px] max-h-48 -mt-2 -mr-2"
         />
+    )
+}
+
+const HomeHitCounter = () => {
+    const [hitCount, setHitCount] = useState<number | null>(null)
+
+    useEffect(() => {
+        fetch(`/api/homepage-hits`)
+            .then((res) => res.json())
+            .then((count) => setHitCount(count))
+            .catch((err) => console.error(err))
+    }, [])
+
+    const formatCount = (count: number) => {
+        return count.toString().padStart(7, '0')
+    }
+
+    const getDigitComponent = (digit: string) => {
+        const digitComponents: { [key: string]: React.ComponentType<any> } = {
+            '0': Digit0,
+            '1': Digit1,
+            '2': Digit2,
+            '3': Digit3,
+            '4': Digit4,
+            '5': Digit5,
+            '6': Digit6,
+            '7': Digit7,
+            '8': Digit8,
+            '9': Digit9,
+        }
+        return digitComponents[digit] || Digit0
+    }
+
+    return (
+        <div className="flex flex-col justify-center text-center mt-20">
+            <p className="mb-2">Thanks for being visitor number</p>
+            <Tooltip
+                trigger={
+                    <div className="inline-flex bg-black divide-x divide-primary">
+                        {hitCount !== null ? (
+                            formatCount(hitCount)
+                                .split('')
+                                .map((digit, index) => {
+                                    const DigitComponent = getDigitComponent(digit)
+                                    return (
+                                        <div
+                                            key={index}
+                                            className="max-w-7 max-h-8 flex items-center justify-center p-1.5"
+                                        >
+                                            <DigitComponent className="text-[#00FF00] w-full h-full" />
+                                        </div>
+                                    )
+                                })
+                        ) : (
+                            <div className="flex gap-0">
+                                {[...Array(7)].map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className="w-7 max-h-8 flex items-center justify-center text-red p-1.5 border-l border-primary"
+                                    >
+                                        <DigitDash className="text-red w-full h-full" />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                }
+                delay={0}
+            >
+                Total hit count to posthog.com
+            </Tooltip>
+        </div>
     )
 }
 
@@ -496,6 +581,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <HomeHappyHog />,
+    },
+    {
+        name: 'HomeHitCounter',
+        kind: 'flow',
+        props: [],
+        Editor: () => <HomeHitCounter />,
     },
     {
         name: 'Headline',
