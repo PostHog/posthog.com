@@ -18,9 +18,9 @@ Feature flags are charged based on requests made to our `/flags` endpoint, which
 
 <CalloutBox icon="IconInfo" title="Client-side vs server-side billing" type="info">
 
-**Client-side SDKs** (JavaScript, React Native): Methods like `getFeatureFlag()` don't necessarily create billable events due to caching. Requests are made when the SDK initializes, when users are identified, or when `reloadFeatureFlags()` is called.
+For **client-side SDKs** (JavaScript, React Native), methods like `getFeatureFlag()` don't necessarily create billable events due to caching. Requests are made when the SDK initializes, when users are identified, or when `reloadFeatureFlags()` is called.
 
-**Server-side SDKs** (Node, Python, PHP, etc.): Each call to `getFeatureFlag()`, `getAllFlags()`, or `isFeatureEnabled()` makes a request to the `/flags` endpoint and incurs a billable event.
+For **server-side SDKs** (Node, Python, PHP, etc.), each call to `getFeatureFlag()`, `getAllFlags()`, or `isFeatureEnabled()` makes a request to the `/flags` endpoint and incurs a billable event.
 
 </CalloutBox>
 
