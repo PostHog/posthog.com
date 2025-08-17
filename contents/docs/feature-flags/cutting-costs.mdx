@@ -11,9 +11,18 @@ We aim to be significantly cheaper than our competitors. In addition to our [pay
 
 Feature flags are charged based on requests made to our `/flags` endpoint, which is used to evaluate feature flags for a given user. This endpoint is called in several scenarios:
 
-- When explicitly requesting feature flags via SDK methods like `getFeatureFlags()` or `onFeatureFlags()`
+- When explicitly requesting feature flags via server-side SDK methods like `getFeatureFlag()`, `getAllFlags()`, or `isFeatureEnabled()`
+- When using client-side SDK methods like `onFeatureFlags()` or when flags are automatically fetched
 - Automatically on SDK initialization (unless disabled, see below)
 - When evaluating survey targeting, which checks **all active feature flags** in your project
+
+<CalloutBox icon="IconInfo" title="Client-side vs server-side billing" type="info">
+
+For **client-side SDKs** (JavaScript, React Native), methods like `getFeatureFlag()` don't necessarily create billable events due to caching. Requests are made when the SDK initializes, when users are identified, or when `reloadFeatureFlags()` is called.
+
+For **server-side SDKs** (Node, Python, PHP, etc.), each call to `getFeatureFlag()`, `getAllFlags()`, or `isFeatureEnabled()` makes a request to the `/flags` endpoint and incurs a billable event.
+
+</CalloutBox>
 
 
 Feature flags are **not** billed based on `$feature_flag_called` events, which are optional events sent for metrics tracking, not for actual feature flag evaluation. 
