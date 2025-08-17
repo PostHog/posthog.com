@@ -25,7 +25,7 @@ export default function DemoSlide({ productHandle, answers = [] }: DemoSlideProp
                 <h2 className="sr-only">Demo</h2>
             </div>
 
-            <div className="flex-1 grid grid-cols-2 gap-6 my-12">
+            <div className="flex-1 grid @2xl:grid-cols-2 gap-6 my-12">
                 {answers.map((answer, index) => {
                     const encodedText = encodeURIComponent(answer.q.toLowerCase())
                     const maxUrl = `https://app.posthog.com/#panel=max:${encodedText}`

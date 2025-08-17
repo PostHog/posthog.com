@@ -38,7 +38,7 @@ export default function FeaturesSlideAI({
             </h2>
             <p className="text-2xl text-center text-balance font-normal">{features[0]?.description || ''}</p>
 
-            <div className="grid grid-cols-2 gap-x-8 gap-y-4">
+            <div className="grid @2xl:grid-cols-2 gap-x-8 gap-y-4">
                 {features.map((featureGroup, groupIndex: number) =>
                     featureGroup.features?.map((feature: any, featureIndex: number) => {
                         const FeatureIcon = feature.icon || IconSparkles

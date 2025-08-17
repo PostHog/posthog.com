@@ -5,6 +5,24 @@ import { useContentData } from 'hooks/useContentData'
 
 const PRODUCT_HANDLE = 'max_ai'
 
+const CustomPricingSlide = () => {
+    return (
+        <div
+            data-scheme="primary"
+            className="flex flex-col p-12 justify-start @2xl:justify-center items-center h-full bg-primary text-primary"
+        >
+            <h2 className="text-4xl font-bold mb-8">Pricing</h2>
+
+            <div className="bg-accent border border-primary max-w-xl mx-auto rounded p-8 text-center">
+                <div className="text-2xl font-bold mb-4">Max is free during beta.</div>
+                <p className="text-xl">
+                    Eventually we may charge a nominal, flat monthly fee – we're thinking something like ~$15/mo.
+                </p>
+            </div>
+        </div>
+    )
+}
+
 export default function MaxAI(): JSX.Element {
     const contentData = useContentData()
     const data = useStaticQuery(graphql`
@@ -69,7 +87,7 @@ export default function MaxAI(): JSX.Element {
 
     // Configure slides with custom ProductOS Benefits slide
     const slides = createSlideConfig({
-        exclude: ['customers'],
+        exclude: ['customers', 'comparison-summary', 'feature-comparison', 'docs', 'pairs-with'],
         // custom: [
         //     {
         //         slug: 'product-os-benefits',
@@ -98,6 +116,15 @@ export default function MaxAI(): JSX.Element {
             answersDescription: 'What can Max do?',
         },
     })
+
+    // Override the pricing slide with our custom component
+    const pricingSlideIndex = slides.slides.findIndex((slide) => slide.slug === 'pricing')
+    if (pricingSlideIndex !== -1) {
+        slides.slides[pricingSlideIndex] = {
+            ...slides.slides[pricingSlideIndex],
+            component: CustomPricingSlide,
+        }
+    }
 
     const mergedData = {
         ...data,
