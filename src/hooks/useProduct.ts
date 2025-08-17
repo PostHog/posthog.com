@@ -21,8 +21,10 @@ import {
     IconTerminal,
     IconGraph,
     IconFunnels,
+    IconBolt,
 } from '@posthog/icons'
 import useProducts from './useProducts'
+import { IconBrain } from 'components/OSIcons'
 
 const dedupe = (products) => {
     const deduped = {}
@@ -1597,10 +1599,10 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Raquel',
-            parentIcon: 'ai',
+            parentIcon: 'aiRaquel',
             // Icon: IconMagicWand,
-            description: 'Your AI-powered product analyst and product manager',
-            handle: 'raquel',
+            description: 'Your AI-powered product analyst',
+            handle: 'raquel_ai',
             color: 'red',
             colorSecondary: 'lilac',
             category: 'ai',
@@ -1608,17 +1610,47 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             status: 'beta',
             seo: {
                 title: 'Raquel - PostHog',
-                description: 'Your AI-powered product analyst and product manager',
+                description: 'Your AI-powered data analyst',
             },
             overview: {
-                title: 'Raquel',
-                description: 'Raquel.',
-                textColor: 'text-white',
+                title: 'Your AI data analyst',
+                description:
+                    'Raquel researches complex data problems, summarizes session recordings, and finds insights that would have been impossible to find manually.',
             },
+            hog: {
+                src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_raquel_c56887c5b7.png',
+                alt: "Hi, I'm Raquel!",
+                classes: 'max-w-[407px]',
+            },
+            features: [
+                {
+                    title: 'Raquel researches complex data problems',
+                    headline: 'researches complex data problems',
+                    description:
+                        'Gathering context from dozens of insights is time consuming. Raquel can do it for you.',
+                    features: [
+                        {
+                            icon: IconBolt,
+                            title: 'Deep research',
+                            items: [
+                                'Raquel creates detailed analysis for your product questions by creating as many insights as needed to uncover answers.',
+                            ],
+                        },
+                        {
+                            icon: IconBrain,
+                            title: 'Summarizes session recordings',
+                            items: [
+                                'Each user session is a trove of knowledge – but the more recordings and events there are, the harder it is to go through them manually. Raquel analyzes batches of sessions for you, delivering signal on a silver platter for you.',
+                            ],
+                        },
+                    ],
+                },
+            ],
         },
         {
             name: 'Annika',
-            Icon: IconMagicWand,
+            parentIcon: 'aiAnnika',
+            // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst and product manager',
             handle: 'annika',
             color: 'green',
@@ -1638,7 +1670,8 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'Marius',
-            Icon: IconMagicWand,
+            parentIcon: 'aiMarius',
+            // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst and product manager',
             handle: 'marius',
             color: 'blue',

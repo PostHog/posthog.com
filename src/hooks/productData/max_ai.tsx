@@ -22,13 +22,13 @@ export const max_ai = {
             'Max builds insights, automates manual tasks, and routes more complex tasks to other AI agents for specialized work.',
         layout: 'ai',
     },
-    screenshots: [
-        {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
-            alt: "Screenshot of PostHog's CDP",
-            classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
-        },
-    ],
+    // screenshots: [
+    //     {
+    //         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
+    //         alt: "Screenshot of PostHog's CDP",
+    //         classes: 'absolute bottom-0 left-0 max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
+    //     },
+    // ],
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/ai_max_e80de99727.png',
         alt: "Hi, I'm Max!",
@@ -46,7 +46,7 @@ export const max_ai = {
                     title: 'Context-aware',
                     items: [
                         'Understands your event schema and property definitions',
-                        'Ability to factor in business context<br /><p class="italic leading-none text-secondary text-[15px]">ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth stage, etc.), market conditions, seasonality, current challenges, quarterly goals</p>',
+                        'Ability to factor in business context<br /><p class="italic leading-normal text-secondary text-[15px]">ie: customer profile (B2B, B2C, B2B2C), stage of company (pre-product-market fit, growth stage, etc.), market conditions, seasonality, current challenges, quarterly goals</p>',
                     ],
                 },
                 {

@@ -12,13 +12,48 @@ export default function OverviewSlideAI({ productName, overview, screenshots, co
         { name: 'Marius', role: '10x Engineer', icon: 'aiMarius' },
     ] as const
 
-    const skills = [
-        { name: 'Answers product questions', percent: 95 },
-        { name: 'Writes SQL queries', percent: 95 },
-        { name: 'PostHog product expert', percent: 90 },
-        { name: 'Builds data transformations', percent: 95 },
-        { name: 'Analytics industry knowledge', percent: 80 },
-    ] as const
+    const skills = (() => {
+        switch (productName) {
+            case 'Max':
+                return [
+                    { name: 'Answers product questions', percent: 95 },
+                    { name: 'Writes SQL queries', percent: 95 },
+                    { name: 'PostHog product expert', percent: 90 },
+                    { name: 'Builds data transformations', percent: 95 },
+                    { name: 'Analytics industry knowledge', percent: 80 },
+                ] as const
+            case 'Raquel':
+                return [
+                    { name: 'Deep data analysis & insights', percent: 74 },
+                    { name: 'Data visualization expertise', percent: 75 },
+                    { name: 'Statistical modeling & trends', percent: 60 },
+                    { name: 'Research methodology & validation', percent: 60 },
+                    { name: 'Complex SQL query optimization', percent: 48 },
+                ] as const
+            case 'Annika':
+                return [
+                    { name: 'Metrics & success measurement', percent: 80 },
+                    { name: 'Error analysis & prioritization', percent: 75 },
+                    { name: 'Feature roadmap planning', percent: 70 },
+                    { name: 'Risk assessment & mitigation', percent: 70 },
+                    { name: 'Rollout strategy & testing', percent: 65 },
+                ] as const
+            case 'Marius':
+                return [
+                    { name: 'Bug identification & fixes', percent: 75 },
+                    { name: 'Code generation & optimization', percent: 70 },
+                    { name: 'Technical architecture planning', percent: 70 },
+                    { name: 'Code review & quality assurance', percent: 65 },
+                    { name: 'PR creation & documentation', percent: 60 },
+                ] as const
+            default:
+                return [
+                    { name: 'General AI assistance', percent: 50 },
+                    { name: 'Product knowledge', percent: 50 },
+                    { name: 'Task completion', percent: 50 },
+                ] as const
+        }
+    })()
     return (
         <div className={`h-full @2xl:grid grid-cols-4 relative text-primary`}>
             <aside className="@2xl:p-4 bg-accent col-span-1">
@@ -52,7 +87,13 @@ export default function OverviewSlideAI({ productName, overview, screenshots, co
                     {hog && (
                         <div className="float-right @2xl:float-none max-w-xs @2xl:max-w-none @2xl:order-2 relative col-span-2 -mt-4">
                             <CloudinaryImage src={hog.src} alt={hog.alt} className={`${hog.classes}`} />
-                            <span className="absolute top-[calc(100%-5rem)] @2xl:top-[calc(100%-5.5rem)] left-0 right-4 text-center text-3xl font-bold font-squeak uppercase rotate-[3.5deg] text-orange">
+                            <span
+                                className={`absolute top-[calc(100%-5rem)] @2xl:top-[calc(100%-5.5rem)] text-center text-3xl font-bold font-squeak uppercase text-orange ${
+                                    productName === 'Raquel' || productName === 'Marius'
+                                        ? 'rotate-[-3deg] left-4 right-0'
+                                        : 'rotate-[3.5deg] left-0 right-4'
+                                }`}
+                            >
                                 Hi, I'm {productName}!
                             </span>
                         </div>

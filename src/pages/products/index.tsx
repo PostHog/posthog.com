@@ -289,8 +289,8 @@ export default function Products(): JSX.Element {
                                 </p>
                                 <p className="text-sm mb-2">There are four main components:</p>
                                 <ul className="pl-4 mb-4 [&_li]:text-sm">
-                                    <li>Customer data platform</li>
-                                    <li>Analytics</li>
+                                    <li>Customer data infrastructure</li>
+                                    <li>Analytics/Data viz</li>
                                     <li>Development tools</li>
                                     <li>AI</li>
                                 </ul>

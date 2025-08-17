@@ -68,7 +68,7 @@ const SidebarContent = ({ content }: { content: React.ReactNode | AccordionItem[
     return <>{content}</>
 }
 
-const defaultRightSidebarWidth = 384
+const defaultRightSidebarWidth = 300
 
 export default function Explorer({
     template,
