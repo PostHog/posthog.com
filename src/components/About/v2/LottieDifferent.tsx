@@ -5,7 +5,7 @@ import { IconMusicEighthNote } from 'components/OSIcons'
 
 export const LottieDifferent = () => {
     return (
-        <div className="float-right w-72 mt-8">
+        <div className="mx-auto w-72 -mt-4">
             <div className="relative">
                 <div className="absolute inset-4 bg-accent rounded-full size-56 mx-auto" />
                 <DotLottiePlayer
