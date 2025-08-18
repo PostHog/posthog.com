@@ -86,16 +86,11 @@ posthog.capture('user_signed_up', {
 ### Screenshots
 
 To keep screenshots consistent and clear, here are tips to follow:
-
-- Focus on the main element, elements like the left and right sidebar should be out of frame unless they are relevant to the screenshot.
-- Double check that your screenshot doesn't contain any user data, like user emails or names.
-- Use the following settings for clean screenshots in Chrome:
-  - Enter devtools and use a device width of 1000px - 1400px. This avoids unnecessary empty space and keeps text readable.
-  - Use DPR (device pixel ratio) of 3, this will upscale rendering to 3x the size of the screen.
-  - Prefer taking **node screenshots** of the DOM node element you're trying to capture. This gives you a cleanly cropped screenshot and upscales by the DPR setting. Even zoomed in screenshots will be sharp.
-  - You can also use Chrome's **Capture screenshot** button to take a full screen screenshot. This will upscale by the DPR setting, so even when zoomed in, the screenshot will be clear.
-
-Here's an example of Chrome devtools for node screenshots:
+- Make sure you're not showing any user data, like user emails or names.
+- Focus on the main element, leave out sidebars and irrelevant UI.
+- Use a device width of 1000px - 1400px in devtools. This avoids unnecessary empty space and keeps text readable.
+- Use DPR (device pixel ratio) of 3, this will **upscale** rendering to 3x the size of the screen.
+- Prefer taking **node screenshots** of the DOM node element you're trying to capture. This takes an **upscaled** screenshot by DPR of the DOM node element. 
 
 ![Screenshot settings](https://res.cloudinary.com/dmukukwp6/video/upload/Google_Chrome_screenshot_settings_fcef064998.mp4)
 
@@ -279,7 +274,7 @@ import Tab from "components/Tab"
 
 #### File names
 
-In tutorials, you can identify the file name of the code block by adding `filename=` to the code block. This will be displayed in the code block's title.
+In tutorials, you can identify the file you're editing by adding `filename=` to the code block. This will be displayed in the code block's title.
 
 <Tab.Group tabs={[
 'Preview',
@@ -353,11 +348,13 @@ print('Hello, world!')
 
 #### Code highlighting
 
-Especially in long tutorials, you can highlight the important differences between code blocks using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
+Especially in long tutorials, you can highlight the important differences between steps using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
 
-- `// +` adds a green highlight, usually representing additions in diffs
-- `// -` adds a red highlight, usually representing removals in diffs
-- `// HIGHLIGHT` adds a yellow highlight without special meaning
+| Comment | Effect | Usage |
+| --- | --- | --- |
+| `// +` | Green highlight | Represents additions in diffs |
+| `// -` | Red highlight | Represents removals in diffs |
+| `// HIGHLIGHT` | Yellow highlight | General emphasis without special meaning |
 
 <Tab.Group tabs={[
 'Preview',
