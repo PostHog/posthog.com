@@ -18,7 +18,7 @@ If they already have a data engineering team and warehouse already:
 
 ## Everybody needs a data warehouse, not everybody needs a data team
 
-For teams of all sizes, it's important to have your product, revenue and operational data available in a single place.
+For teams of all sizes, it's important to have your product, revenue and operational data available in a single place. Our data warehouse is optimized for product engineers - no data team needed. 
 
 - We allow you to connect a plethora of data sources for revenue, customer and other operational data.
 - It's easy to join data from multiple sources to add context.
