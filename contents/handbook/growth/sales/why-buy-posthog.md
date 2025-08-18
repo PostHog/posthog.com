@@ -106,4 +106,12 @@ Normally they don't have anything in place, and the pitch is (1) - You need a da
 
 - They will typically be interested in one or two products and have a data team in place already so stick with (4) - we coexist with your existing tools.
 
+# Common objections and how to handle them
+
+1. I'm here for product analytics, why are you talking to me about data warehouse?
+   - Yes, and very soon you'll want to answer questions like "Which features are driving the most revenue" or "Which sales leads have the highest potential to convert" and for those you'll need additional context inside PostHog.
+2. Is PostHog _really_ a data warehouse though?
+   - Yes, although we automate a lot of the hard work for you such as ETL and optimizing sync schedules to reduce costs.  
+   - We also use ClickHouse which is designed to run analytical queries on large datasets _fast_.
+   
 
