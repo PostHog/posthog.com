@@ -71,18 +71,18 @@ In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER<
 
 We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
 
-**Use the right API key permissions:** Use the provided **MCP Server** preset in the personal API key creator. If you use the MCP in an agentic workflow on production data, scope down the API key's permissions to only the permissions you want it to use. This prevents the AI from making unintended changes to your PostHog configuration or data.
+- **Use the right API key permissions:** Use the provided **MCP Server** preset in the personal API key creator. If you use the MCP in an agentic workflow on production data, scope down the API key's permissions to only the permissions you want it to use. This prevents the AI from making unintended changes to your PostHog configuration or data.
 
-**Project scoping:** Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
+- **Project scoping:** Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
 
-**Be mindful of prompt injection:** Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
+- **Be mindful of prompt injection:** Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
 
 </details>
 
 
 ## Available Tools
 
-Tools trigger actions on behalf of the user, based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
+Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
 
 ### Organization & project management
 
