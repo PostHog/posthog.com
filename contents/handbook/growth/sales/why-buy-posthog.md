@@ -81,6 +81,10 @@ You should apply different messaging to companies at different stages, and the r
 
 1. **You need a data warehouse** and PostHog can be it, helping you follow best practice from the start.
 2. **You need a better data warehouse** because yours has no ownership, and is likely not well-structured.
+     - Teams start with the right intentions but fail to maintain data pipelines when upstream schemas change.
+     - Non-data teams often optimize for data storage and centralization, but not answering real business questions, so the warehouse becomes a dumping ground.
+     - As teams grow they migrate tools (e.g. CRM from HubSpot to Salesforce) but fail to deduplicate data in the warehouse causing inconsistent revenue data.
+     - We handle the ETL jobs for you, meaning your schemas are up to date and it's super easy to keep on top of joins and views in PostHog itself.
 3. **You can self-serve data** as opposed to rely on a data engineering team.
 4. **You can capture everything you need to understand about your users** and send it to your existing warehouse.
 
