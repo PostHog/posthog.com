@@ -115,7 +115,7 @@ Additional notes on self-serve discounts:
 
 ### Nonprofit discounts
 
-We do offer additional discounts to nonprofits - these are entirely at your discretion, depending on the margin of the particular product(s) you are selling. We start non-profit discounts at 15% regardless of spend. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
+We do offer additional discounts to nonprofits and start non-profit discounts at 15% regardless of spend. We follow the same sorts of discounting as above, so if a non-profit signs up for an annual deal, we offer 20%. If they sign up for an annual deal over $20k, we offer 25%, etc... Past 25%, they would hit our normal discounting described above.
 
 When evaluating a discount, it’s important to review our margin calculations (available in [this sheet](https://docs.google.com/spreadsheets/d/1ynNM9tbWsWki2Q0vhwCV0iYNtJ1NHz4eXtUvZDw_sjA/edit?usp=sharing)) to ensure we remain margin positive, especially for larger accounts. We use tax law in the country of origin to determine what is a not for profit entity. If a customer can provide proof they fit their country's definition, the discount is applicable subject to the guidance above.
 
@@ -198,7 +198,9 @@ We have CreditBot alerts set up in [#sales-alerts](https://posthog.slack.com/arc
 * If they fall **in between** the two cases above (running out of credit with <6 months and >2 months to go) then we need them to sign a new 12 month (or longer) order form lined up with their monthly billing date.  This makes ARR calculation slightly trickier as there are two overlapping contracts in play at the same time.
     * Example: Their original order form was signed on 1st January with a 12-month term and they run out of credits in September.  We need a new 12-month order form in place with a Contract Start Date of September 1st.
 
-For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the annual spend.  In scenario one above if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract.
+For any of the above scenarios you should use our [discounting principles](contract-rules#discounts) which apply to the annual spend.  
+
+> In scenario one above, if their expansion contract spend takes them over the threshold for additional discounts we should include this discount tier for them in the expansion contract. We won't issue a refund for the difference in spend when the expansion order form discount tier is greater than the discount tier of the original order form.
 
 ### When they will end the contract term with credit remaining
 
@@ -208,7 +210,11 @@ We can roll up to half the amount of credit from the original order form to a ne
 
 > If a customer wants to vary either our DPA, BAA, or MSA terms, it is a substantial effort for our legal team to review these changes.  At a minimum, we should only do this for contracts above $20k a year, and even higher if they are asking for big changes (e.g. adding a Service Level Agreements). The minimum is $100k to bring your own contract instead of our template - see 'Non PostHog Contracts' below. A customer needs to either be spending this amount at present, or agree to commit to this spend via an annual contract, in order to initiate legal review of potential changes.
 
-The typical approach here is for them to redline a .docx format of the contract.  Once you have that ask for a review in the [#legal](https://posthog.slack.com/archives/C08MYQX74KH) channel with any context you have about the customer and opportunity.
+The customer should redline the .docx version of the document in question.  You can find the latest versions of the templates in the Team Internal Info tab in the #team-sales Slack channel.  Once they have returned the redlines to you first check to ensure that they have used the template which you provided, and then share the document for review in the #legal channel.  There will usually be a few rounds of back and forth as we converge on an agreement.  
+
+> We don't accept redlines on our standard terms of service and if a customer has proposed this you should share the correct templates with them before involving legal.
+
+We also sometimes receive unsolicited requests to vary our terms.  In these instances the legal team will redirect the customer to work with their PostHog contact person for this, as we will only review redlines for a managed customer or opportunity.
 
 ## Non-PostHog contracts
 

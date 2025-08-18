@@ -75,6 +75,7 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 | PostHog branding                  | ❌                     | 
 | Delay popup after screen view     | ❌                     | 
 | Position config                   | ❌ Always bottom sheet | 
+| HTML content                      | ❌                     |
 | **Display conditions**                                     |
 | Feature flag & property targeting | ✅                     | 
 | Screen/URL targeting              | ❌                     | 
@@ -98,3 +99,4 @@ If you're using `go_router`, check [this page](/docs/libraries/flutter#capturing
 - If surveys are not being displayed when triggered, make sure you have installed the [PosthogObserver](/docs/surveys/installation?tab=Flutter#step-three-install-posthogobserver).
   - Using [navigationObservers](/docs/libraries/flutter#capturing-screen-views#using-navigatorobservers)
   - Using [go_router](/docs/libraries/flutter#capturing-screen-views#using-go-router)
+- If you are using multiple navigation observers and encounter a log message `[PostHog] Cannot show survey: No valid context found...`, try placing `PosthogObserver` first in the list of observers. We've noticed that order sometimes matters due to potential interference.

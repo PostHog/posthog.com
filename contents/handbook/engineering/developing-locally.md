@@ -381,6 +381,9 @@ Now start all of PostHog (backend, worker, plugin server, and frontend – simul
 
 # only services strictly required to run posthog
 ./bin/start --minimal
+
+# enable tracing for django services (jaeger and otel collector are part of the stack)
+./bin/start --enable-tracing
 ```
 
 > **Note:** This command uses [mprocs](https://github.com/pvolok/mprocs) to run all development processes in a single terminal window. It will be installed automatically for macOS, while for Linux you can install it manually (`cargo` or `npm`) using the official repo guide.
@@ -553,6 +556,16 @@ This allows you to easily confirm that emails are being sent and formatted corre
 
 Emails sent via SMTP are stored in HTML files in `posthog/templates/*/*.html`. They use Django Template Language (DTL).
 
+## Extra: Enable tracing with Jaeger
+
+To debug with Jaeger, you can use the following command:
+
+```bash
+./bin/start --enable-tracing
+```
+
+Jaeger will be available at [http://localhost:16686](http://localhost:16686).
+
 #### Production usage
 
 We send our PostHog Cloud emails via Customer.io using their HTTP API. If Customer.io is not configured but SMTP is, it will fall back to SMTP. We do this so we can continue to support SMTP emails for self-hosted instances.
@@ -593,7 +606,7 @@ When creating a new email, there are a few steps to take. It's important to add 
 
 ## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
 
 ## Extra: Working with the data warehouse
 

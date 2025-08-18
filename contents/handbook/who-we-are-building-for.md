@@ -94,7 +94,7 @@ Each team will focus more or less on different members of the product team. This
   - Significant bonus points:
     - Their day job is at an ICP
     - They have a large active social media reach
-    - They are in major tech cites e.g. San Francisco, Austin, New York, London, Berlin, etc.
+    - They are in major tech cities e.g. San Francisco, Austin, New York, London, Berlin, etc.
 
 ### Why the data team?
 

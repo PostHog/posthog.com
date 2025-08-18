@@ -19,7 +19,7 @@ Product intents are:
 
 ## When should I start capturing product intents?
 
-As soon as your product is in any sort of public beta you should start tracking product intents. This is _not_ because you should be hyper focusing on your product's activation numbers at this stage - instead it is so that we can start collecting data for later on when we want to determine a good [activation metric](/handbook/growth/growth-engineering/per-product-activation.md).
+As soon as your product is in any sort of public beta you should start tracking product intents. This is _not_ because you should be hyper focusing on your product's activation numbers at this stage - instead it is so that we can start collecting data for later on when we want to determine a good [activation metric](/handbook/growth/growth-engineering/per-product-activation).
 
 So, collecting product intents should be a precursor to any sort of public release. 
 

@@ -62,11 +62,11 @@ const initialProducts = [
         type: 'surveys',
         color: 'red',
         slider: {
-            marks: [250, 2000, 15000, 100000],
-            min: 250,
+            marks: [1500, 5000, 20000, 100000],
+            min: 1500,
             max: 100000,
         },
-        volume: 250,
+        volume: 1500,
     },
     {
         Icon: IconDatabase,

@@ -19,7 +19,7 @@ import { CalloutBox } from 'components/Docs/CalloutBox'
 
 For SvelteKit, you can use [server hooks](https://svelte.dev/docs/kit/hooks#Server-hooks) to proxy requests to PostHog. We've tested this (and it works) with Cloudflare Workers. 
 
-To do this, create a file named `hooks.server.ts` in your `src` directory (or the `dir` you configured to contain source files). In this file, set up code to match requests to a custom route, set a new `host` header, change the URL to point to PostHog, and rewrite the response. 
+To do this, create a file named `hooks.server.ts` in your `src` directory (or the `dir` you configured to contain source files). In this file, set up code to match requests to a custom route, adjust the relevant headers, change the URL to point to PostHog, and rewrite the response. 
 
 > **Note:** This only works in SSR mode. If your site is statically generated, SvelteKit ignores `hooks.server.ts`. 
 
@@ -44,13 +44,15 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     // Clone and adjust headers
     const headers = new Headers(event.request.headers);
+    headers.set("Accept-Encoding", "");
     headers.set('host', hostname);
 
     // Proxy the request to the external host
     const response = await fetch(url.toString(), {
       method: event.request.method,
       headers,
-      body: event.request.body
+      body: event.request.body,
+      duplex: "half"
     });
 
     return response;

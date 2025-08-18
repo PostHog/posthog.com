@@ -286,6 +286,6 @@ When users visit your site now, PostHog is initialized either with or without co
 
 - [How to use PostHog without cookie banners](/tutorials/cookieless-tracking)
 - [How to set up Next.js A/B tests](/tutorials/nextjs-ab-tests)
-- [How to set up Next.js app router analytics, feature flags, and more](/tutorials/nextjs-app-directory-analytics)
+- [How to set up Next.js analytics, feature flags, and more](/tutorials/nextjs-analytics)
 
 <NewsletterForm />
