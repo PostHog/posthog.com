@@ -25,64 +25,88 @@ import http from "node:http";
 const API_HOST = "eu.i.posthog.com"; // Change to "us.i.posthog.com" for the US region
 const ASSET_HOST = "eu-assets.i.posthog.com"; // Change to "us-assets.i.posthog.com" for the US region
 
-// Convert Node.js headers to Fetch API Headers
+
+// Convert Node.js headers to Fetch API headers
 const toHeaders = (headers: Record<string, string[] | undefined>): Headers =>
   Object.entries(headers).reduce((acc, [name, values]) => {
     values?.forEach((value) => acc.append(name, value));
     return acc;
   }, new Headers());
 
+// Convert Fetch API headers to Node.js headers
+const fromHeaders = (headers: Headers): Record<string, string[] | undefined> =>
+  [...headers].reduce<Record<string, string[] | undefined>>(
+    (acc, [name, value]) => {
+      if (acc[name]) {
+        acc[name] = [...acc[name], value];
+      } else {
+        acc[name] = [value];
+      }
+      return acc;
+    },
+    {},
+  );
+
 /**
  * Proxies an incoming HTTP request to the appropriate PostHog endpoint.
  */
-export default function proxy(
-  request: http.IncomingMessage,
-  response: http.ServerResponse,
-  prefix: string,
-): undefined {
-  const pathname = (request.url ?? "").slice(prefix.length);
-  const posthogHost = pathname.startsWith("/static/") ? ASSET_HOST : API_HOST;
+export default function proxy({ prefix }: { prefix: string }) {
+  return (
+    request: http.IncomingMessage,
+    response: http.ServerResponse,
+    next: (err?: Error) => void,
+  ): void => {
+    if (!request.url?.startsWith(prefix)) {
+      next();
+      return;
+    }
 
-  // Rewrite headers
-  const headers = toHeaders(request.headersDistinct);
-  headers.set("host", posthogHost);
-  if (request.headers.host) {
-    headers.set("X-Forwarded-Host", request.headers.host);
-  }
-  if (request.socket.remoteAddress) {
-    headers.set("X-Real-IP", request.socket.remoteAddress);
-    headers.set("X-Forwarded-For", request.socket.remoteAddress);
-  }
+    const pathname = (request.url ?? "").slice(prefix.length);
+    const posthogHost = pathname.startsWith("/static/") ? ASSET_HOST : API_HOST;
 
-  // Remove sensitive or hop-by-hop headers
-  headers.delete("cookie");
-  headers.delete("connection"); // https://datatracker.ietf.org/doc/html/rfc7230#section-6.1
+    // Rewrite headers
+    const headers = toHeaders(request.headersDistinct);
+    headers.set("host", posthogHost);
+    if (request.headers.host) {
+      headers.set("X-Forwarded-Host", request.headers.host);
+    }
+    if (request.socket.remoteAddress) {
+      headers.set("X-Real-IP", request.socket.remoteAddress);
+      headers.set("X-Forwarded-For", request.socket.remoteAddress);
+    }
 
-  fetch(new URL(pathname, `https://${posthogHost}`), {
-    method: request.method ?? "",
-    headers,
-    body: !["HEAD", "GET"].includes(request.method ?? "") ? request : null,
-  })
-    .then(async (res: Response) => {
-      const headers = new Headers(res.headers);
-      const body = await res.text();
+    // Remove sensitive or hop-by-hop headers
+    headers.delete("cookie");
+    headers.delete("connection"); // https://datatracker.ietf.org/doc/html/rfc7230#section-6.1
 
-      // See https://github.com/nodejs/undici/issues/2514
-      if (headers.has("content-encoding")) {
-        headers.delete("content-encoding");
-        headers.delete("content-length");
-      }
+    fetch(new URL(pathname, `https://${posthogHost}`), {
+      method: request.method ?? "",
+      headers,
 
-      response.writeHead(res.status, [...headers.entries()]);
-
-      response.end(body);
+      ...(!["HEAD", "GET"].includes(request.method ?? "")
+        ? {
+            body: request,
+            duplex: "half",
+          }
+        : {}),
     })
-    .catch(() => {
-      if (!response.writableEnded) {
-        response.writeHead(502);
-        response.end("Bad gateway");
-      }
-    });
+      .then(async (res: Response) => {
+        const headers = new Headers(res.headers);
+        const body = await res.text();
+
+        // See https://github.com/nodejs/undici/issues/2514
+        if (headers.has("content-encoding")) {
+          headers.delete("content-encoding");
+          headers.delete("content-length");
+        }
+
+        response.writeHead(res.status, fromHeaders(headers));
+        response.end(body);
+      })
+      .catch((e: unknown) => {
+        next(new Error("Bad gateway", { cause: e }));
+      });
+  };
 }
 ```
 
@@ -90,18 +114,27 @@ To use this proxy, you can create a server like this:
 
 ```js
 import http from "node:http";
-import proxy from "./proxy-posthog.js";
+import cors from "cors";
+import proxy from "./proxy.js";
+
+const corsMiddleware = cors({ origin: 'https://<your_app_domain>' });
+const posthogMiddleware = proxy({ prefix: "/<ph_proxy_path>" });
 
 const server = http.createServer((req, res) => {
-  // Check if this is the proxy route
-  const posthogPrefix = "/<ph_proxy_path>";
-  if (req.url?.startsWith(posthogPrefix)) {
-    proxy(req, res, posthogPrefix);
-    return;
-  }
-
-  // Your next handler ...
-  handler(req, res);
+  corsMiddleware(req, res, (err) => {
+    if (err) {
+      // Some error handling for errors returned by the CORS middleware.
+    } else {
+      posthogMiddleware(req, res, (err) => {
+        if (err) {
+          // Some error handling for errors returned by the posthog middleware.
+        } else {
+          // Your next handler ...
+          // handler(req, res);
+        }
+      });
+    }
+  });
 });
 ```
 
