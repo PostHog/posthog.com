@@ -225,7 +225,8 @@ The event will be captured as a `$rageclick` event. You can use this event to id
 
 The PostHog [iOS SDK](/docs/libraries/ios) captures the following events by default:
 
-- User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll` and - Control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`. 
+- User interactions like `touch`, `swipe`, `pan`, `pinch`, `rotation`, `long_press`, `scroll`
+- Control types `value_changed`, `submit`, `toggle`, `primary_action`, `menu_action`, `change`
 
 Autocaptured events display as the autocaptured interaction type in the [activity tab](https://app.posthog.com/activity/explore), such as `touched ...` or `value_changed ...`.
 
@@ -334,6 +335,8 @@ To exclude specific UI elements from autocapture or session replay, add `ph-no-c
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
+
+---
 
 ## Navigation and lifecycle event autocapture
 
@@ -481,6 +484,8 @@ options={{
 </Tab.Panels>
 </Tab.Group>
 
+---
+
 ## Clipboard autocapture
 
 > Note: This is only available for the JavaScript web SDK, and framework libraries for web like React and Next.js.
@@ -507,8 +512,7 @@ If you use our JavaScript libraries, we can capture general clicks, mouse moveme
 
 Whereas Autocapture creates events whenever it can uniquely identify an interacted element, heatmaps are generated based on overall mouse or touch positions and are useful for understanding more general user behavior across your site.
 
-Enable heatmap autocapture in your [project settings](https://app.posthog.com/settings/project-autocapture#heatmaps
-).
+Enable heatmap autocapture in your [project settings](https://app.posthog.com/settings/project-autocapture#heatmaps).
 
 ## Dead clicks autocapture
 
@@ -562,9 +566,6 @@ Autocapture events and properties can be used like any other [event type](/docs/
 
 Autocaptured events (and client-side custom events) have many default properties. These are distinguished by `$` prefix in their name, the PostHog logo next to them in the activity tab, and the verified event logo. You can find them in [PostHog](https://app.posthog.com/data-management/properties) or in [the references](https://posthog.com/docs/references/posthog-js/types/Properties).
 
-<details> 
-<summary>List of relevant default autocaptured properties</summary>
-
 | Name                        | Key                      | Example value                  |
 |-----------------------------|--------------------------|--------------------------------|
 | Timestamp                   | `$timestamp`             | `2024-05-29T17:32:07.202Z`     |
@@ -582,7 +583,6 @@ Autocaptured events (and client-side custom events) have many default properties
 | Viewport Width              | `$viewport_width`        | `1903`                         |
 | Library                     | `$lib`                   | `web`                          |
 | Library Version             | `$lib_version`           | `1.31.0`                       |
-| Search Engine               | `$search_engine`         | `google`                       |
 | Referrer URL                | `$referrer`              | `https://google.com`           |
 | Referring Domain            | `$referring_domain`      | `www.google.com`               |
 | Active Feature Flags        | `$active_feature_flags`  | `['beta_feature']`             |
@@ -605,9 +605,6 @@ Autocaptured events (and client-side custom events) have many default properties
 | Mailchimp Campaign ID       | `$mc_cid`                | `testMcCid123`                 |
 | Instagram Share Id          | `$igshid`                | `testIgshid123`                |
 | TikTok Click ID             | `$ttclid`                | `testTtclid123`                |
-| Plugins Succeeded           | `$plugins_succeeded`     | `['GeoIP (56578)']`            |
-| Plugins Failed              | `$plugins_failed`        | `['plugin3']`                  |
-| Plugins Deferred            | `$plugins_deferred`      | `['plugin4']`                  |
 | IP Address                  | `$ip`                    | `192.168.1.1`                  |
 
 #### Notes:
@@ -616,13 +613,8 @@ Autocaptured events (and client-side custom events) have many default properties
 - Mobile libraries capture additional properties like `$app_build`, `$app_name`, `$app_namespace`, and `$app_version`.
 - These properties can be hidden in activity by checking the "Hide PostHog properties" box.
 
-</details>
-
 </Tab.Panel>
 <Tab.Panel>
-
-<details> 
-<summary>List of default autocaptured properties</summary>
 
 On autocaptured iOS events, you can find the following properties in the event besides the default event properties:
 
@@ -678,8 +670,6 @@ Where `text` is the text of the element.
 | **UIPickerView** | 0.0 seconds |
 | **UIScrollView** | 0.0 seconds |
 | **Text Fields** | 0.0 seconds |
-
-</details>
 
 </Tab.Panel>
 <Tab.Panel>
