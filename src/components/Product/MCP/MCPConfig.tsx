@@ -12,7 +12,7 @@ const MCP_SERVER_CONFIG = {
     args: [
         '-y',
         'mcp-remote@latest',
-        'https://mcp.posthog.com/sse',
+        'https://mcp.posthog.com/http',
         '--header',
         'Authorization:${POSTHOG_AUTH_HEADER}',
     ],
