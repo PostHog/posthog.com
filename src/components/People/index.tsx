@@ -289,9 +289,10 @@ export const TeamMember = (props: any) => {
 
 interface PeopleProps {
     searchTerm?: string
+    filteredMembers?: any[] | null
 }
 
-export default function People({ searchTerm }: PeopleProps = {}) {
+export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
     const { isMobile } = useApp()
     const { appWindow } = useWindow()
     const {
@@ -299,6 +300,9 @@ export default function People({ searchTerm }: PeopleProps = {}) {
         allTeams,
     } = useStaticQuery(teamQuery)
     const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
+
+    // Use filteredMembers from props if provided
+    const baseMembers = filteredMembers !== null && filteredMembers !== undefined ? filteredMembers : teamMembers
 
     const teamSize = teamMembers.length - 1
 
@@ -309,7 +313,7 @@ export default function People({ searchTerm }: PeopleProps = {}) {
     }, {})
 
     const fuse = useMemo(() => {
-        return new Fuse(teamMembers, {
+        return new Fuse(baseMembers, {
             keys: [
                 {
                     name: 'fullName',
@@ -320,12 +324,12 @@ export default function People({ searchTerm }: PeopleProps = {}) {
             ],
             threshold: 0.3,
         })
-    }, [teamMembers])
+    }, [baseMembers])
 
     const debouncedSearch = useCallback(
         debounce((query: string) => {
             if (!query.trim()) {
-                setFilteredTeamMembers(teamMembers)
+                setFilteredTeamMembers(baseMembers)
                 return
             }
 
@@ -333,7 +337,7 @@ export default function People({ searchTerm }: PeopleProps = {}) {
             const filtered = results.map((result) => result.item)
             setFilteredTeamMembers(filtered)
         }, 300),
-        [fuse, teamMembers]
+        [fuse, baseMembers]
     )
 
     // Effect to handle search term changes from prop
@@ -342,6 +346,31 @@ export default function People({ searchTerm }: PeopleProps = {}) {
             debouncedSearch(searchTerm)
         }
     }, [searchTerm, debouncedSearch])
+
+    // Effect to handle filtered members changes
+    useEffect(() => {
+        if (filteredMembers !== null && filteredMembers !== undefined) {
+            // If we have filtered members from props, apply search on those
+            if (searchTerm && searchTerm.trim()) {
+                const fuse = new Fuse(filteredMembers, {
+                    keys: [
+                        {
+                            name: 'fullName',
+                            getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
+                        },
+                        'teams.data.attributes.name',
+                        'companyRole',
+                    ],
+                    threshold: 0.3,
+                })
+                const results = fuse.search(searchTerm)
+                const filtered = results.map((result) => result.item)
+                setFilteredTeamMembers(filtered)
+            } else {
+                setFilteredTeamMembers(filteredMembers)
+            }
+        }
+    }, [filteredMembers, searchTerm])
 
     // handleSearch removed since we use prop-based search
 
