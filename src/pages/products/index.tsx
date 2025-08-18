@@ -169,63 +169,59 @@ export default function Products(): JSX.Element {
                             </div>
                             <ScrollArea className="h-[calc(100vh-12rem)]">
                                 <div className="space-y-4">
-                                    {/* Product icon */}
-                                    <div className="flex justify-center py-4">
-                                        {selectedProduct.parentIcon ? (
-                                            <div className="relative">
-                                                {selectedProduct.Icon &&
-                                                    React.createElement(selectedProduct.Icon, {
-                                                        className: `size-16`,
-                                                    })}
+                                    {/* Product icon component */}
+                                    {(() => {
+                                        const ProductIcon = () => (
+                                            <div className="flex justify-center">
+                                                {selectedProduct.parentIcon ? (
+                                                    <div className="relative">
+                                                        {selectedProduct.Icon &&
+                                                            React.createElement(selectedProduct.Icon, {
+                                                                className: `size-16`,
+                                                            })}
+                                                    </div>
+                                                ) : selectedProduct.Icon ? (
+                                                    <div className={`relative size-16`}>
+                                                        <IconPresentation
+                                                            className={`size-16 [&_.bg-front]:fill-${selectedProduct.color} [&_.bg-rear]:fill-${selectedProduct.colorSecondary}`}
+                                                        />
+                                                        {React.createElement(selectedProduct.Icon, {
+                                                            className: `size-8 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
+                                                        })}
+                                                    </div>
+                                                ) : (
+                                                    <IconPresentation className="size-16" />
+                                                )}
                                             </div>
-                                        ) : selectedProduct.Icon ? (
-                                            <div className={`relative size-16`}>
-                                                <IconPresentation
-                                                    className={`size-16 [&_.bg-front]:fill-${selectedProduct.color} [&_.bg-rear]:fill-${selectedProduct.colorSecondary}`}
-                                                />
-                                                {React.createElement(selectedProduct.Icon, {
-                                                    className: `size-8 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
-                                                })}
-                                            </div>
-                                        ) : (
-                                            <IconPresentation className="size-16" />
-                                        )}
-                                    </div>
+                                        )
 
-                                    {/* Screenshots if available */}
-                                    {selectedProduct.screenshots && selectedProduct.screenshots.length > 0 && (
-                                        <div className="space-y-2">
-                                            <h3 className="text-sm font-semibold">Screenshot</h3>
-                                            <img
-                                                src={selectedProduct.screenshots[0].src}
-                                                alt={selectedProduct.screenshots[0].alt || 'Product screenshot'}
-                                                className="w-full rounded-md border border-primary"
-                                            />
-                                        </div>
-                                    )}
+                                        // If screenshots exist, show screenshot with icon overlay
+                                        if (selectedProduct.screenshots && selectedProduct.screenshots.length > 0) {
+                                            return (
+                                                <div className="space-y-2">
+                                                    <h3 className="text-sm font-semibold">Screenshot</h3>
+                                                    <div
+                                                        className={`bg-${selectedProduct.color} rounded-md p-2 relative`}
+                                                    >
+                                                        <img
+                                                            src={selectedProduct.screenshots[0].src}
+                                                            alt={
+                                                                selectedProduct.screenshots[0].alt ||
+                                                                'Product screenshot'
+                                                            }
+                                                            className="w-full rounded-md border border-primary"
+                                                        />
+                                                        <div className="absolute bottom-0 left-0">
+                                                            <ProductIcon />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            )
+                                        }
 
-                                    {/* Product info */}
-                                    <div className="space-y-2">
-                                        <p className="text-sm text-secondary">
-                                            <strong>Slug:</strong> {selectedProduct.slug}
-                                        </p>
-                                        {selectedProduct.description && (
-                                            <p className="text-sm text-secondary">
-                                                <strong>Description:</strong> {selectedProduct.description}
-                                            </p>
-                                        )}
-                                        {selectedProduct.category && (
-                                            <p className="text-sm text-secondary">
-                                                <strong>Category:</strong> {selectedProduct.category}
-                                            </p>
-                                        )}
-                                        {selectedProduct.status && (
-                                            <p className="text-sm text-secondary">
-                                                <strong>Status:</strong>{' '}
-                                                <span className="uppercase">{selectedProduct.status}</span>
-                                            </p>
-                                        )}
-                                    </div>
+                                        // If no screenshots, show icon by itself
+                                        return <ProductIcon />
+                                    })()}
 
                                     {/* SEO info if available */}
                                     {selectedProduct.seo && (
@@ -266,6 +262,29 @@ export default function Products(): JSX.Element {
                                             </p>
                                         </div>
                                     )}
+
+                                    {/* Product info */}
+                                    <div className="space-y-2">
+                                        <p className="text-sm text-secondary">
+                                            <strong>Slug:</strong> <pre className="inline">/{selectedProduct.slug}</pre>
+                                        </p>
+                                        {selectedProduct.description && (
+                                            <p className="text-sm text-secondary">
+                                                <strong>Description:</strong> {selectedProduct.description}
+                                            </p>
+                                        )}
+                                        {selectedProduct.category && (
+                                            <p className="text-sm text-secondary">
+                                                <strong>Category:</strong> {selectedProduct.category}
+                                            </p>
+                                        )}
+                                        {selectedProduct.status && (
+                                            <p className="text-sm text-secondary">
+                                                <strong>Status:</strong>{' '}
+                                                <span className="uppercase">{selectedProduct.status}</span>
+                                            </p>
+                                        )}
+                                    </div>
                                 </div>
                             </ScrollArea>
                         </div>
@@ -313,7 +332,7 @@ export default function Products(): JSX.Element {
                         content: (
                             <>
                                 <p className="text-sm mb-2">
-                                    <strong>We have {PRODUCT_COUNT}+ products today</strong> (and loads more in
+                                    <strong>We have {PRODUCT_COUNT}+ paid products today</strong> (and loads more in
                                     development) – but even if we don't have it yet, we will eventually. We are going to
                                     build every piece of SaaS you need to make your product successful.
                                 </p>
