@@ -4,6 +4,8 @@ import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
+import { LottieKendrick } from 'components/About/v2/LottieKendrick'
+import { Letterhead } from 'components/About/v2/Letterhead'
 import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { PRODUCT_COUNT } from '../constants/index'
@@ -13,6 +15,8 @@ import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { MDXProvider } from '@mdx-js/react'
 import { shortcodes } from '../mdxGlobalComponents'
+import Link from 'components/Link'
+import { IconXNotTwitter } from 'components/OSIcons'
 
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 
@@ -30,7 +34,9 @@ const mdxComponents = {
     // Custom components for this page (override any from shortcodes if needed)
     YC,
     TLDR,
+    LottieKendrick,
     HappyHog,
+    Letterhead,
     Logo: () => <Logo noText className="inline-block" />,
     CloudinaryImage,
     ProductCount,

@@ -104,6 +104,13 @@ export const IconDictator = (props: IconProps) => (
     </BaseIcon>
 )
 
+export const IconMusicEighthNote = (props: IconProps) => (
+    <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
+        <path d="M9 18.75C9 17.906 8.126 17 6.75 17s-2.25.906-2.25 1.75.874 1.75 2.25 1.75S9 19.594 9 18.75Zm10.502-3c0-.844-.874-1.75-2.25-1.75s-2.25.906-2.25 1.75.874 1.75 2.25 1.75 2.25-.906 2.25-1.75Zm-9.002 3c0 1.917-1.813 3.25-3.75 3.25S3 20.667 3 18.75s1.813-3.25 3.75-3.25 3.75 1.333 3.75 3.25Zm10.502-3c0 1.917-1.813 3.25-3.75 3.25s-3.75-1.333-3.75-3.25 1.813-3.25 3.75-3.25 3.75 1.333 3.75 3.25Z" />
+        <path d="M19.502 4.076a.25.25 0 0 0-.318-.241l-8.502 2.429a.251.251 0 0 0-.182.24V18.75H9V6.505a1.75 1.75 0 0 1 1.27-1.683l8.502-2.429a1.75 1.75 0 0 1 2.23 1.683V15.75h-1.5V4.076Z" />
+    </BaseIcon>
+)
+
 export const IconFlutter = (props: IconProps) => (
     <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
         <path
@@ -292,6 +299,12 @@ export const IconVolumeHalf = (props: IconProps) => (
 export const IconVolumeMuted = (props: IconProps) => (
     <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
         <path d="M14 5.94V3.75a.75.75 0 0 0-1.154-.632L6.842 6.961A.25.25 0 0 1 6.707 7H3.75A1.75 1.75 0 0 0 2 8.75v6.5c0 .727.443 1.35 1.074 1.615L.22 19.72a.75.75 0 1 0 1.06 1.06l16.5-16.5a.75.75 0 0 0-1.06-1.06L14 5.94ZM12.846 20.882l-5.822-3.726L14 10.18v10.07a.75.75 0 0 1-1.154.632Z" />
+    </BaseIcon>
+)
+
+export const IconXNotTwitter = (props: IconProps) => (
+    <BaseIcon viewBox="0 0 24 24" width="100%" height="100%" {...props}>
+        <path d="M17.169 4h2.747l-6 6.791L21 20h-5.566l-4.338-5.582L6.108 20H3.361l6.434-7.253L3 4h5.71l3.94 5.12L17.17 4Zm-.976 14.364h1.518L7.88 5.53H6.217l9.976 12.835Z" />
     </BaseIcon>
 )
 
