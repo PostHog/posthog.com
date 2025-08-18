@@ -524,10 +524,6 @@ With PyCharm's built in support for Django, it's fairly easy to setup debugging 
    - "Frontend" and click on run
    - "Plugin server" and click on run
 
-## Extra: Licensing your local instance
-
-If you're developing PostHog and need access to paid features, you can license your local development instance. Guidance on this is given in the [PostHog billing README](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
-
 ## Extra: Accessing Postgres
 
 While developing, there are times you may want to connect to the database to query the local database, make changes, etc. To connect to the database, use a tool like pgAdmin and enter these connection details: _host_:`localhost` _port_:`5432` _database_:`posthog`, _username_:`posthog`, _pwd_:`posthog`.
@@ -610,7 +606,7 @@ When creating a new email, there are a few steps to take. It's important to add 
 
 ## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
 
 ## Extra: Working with the data warehouse
 
