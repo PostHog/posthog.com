@@ -2321,7 +2321,6 @@ export const docsMenu = {
                         },
                     ],
                 },
-
                 {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
@@ -2505,6 +2504,10 @@ export const docsMenu = {
                         {
                             name: 'Projects',
                             url: '/docs/settings/projects',
+                        },
+                        {
+                            name: 'Model context protocol (MCP)',
+                            url: '/docs/model-context-protocol',
                         },
                         {
                             name: 'Hog',
