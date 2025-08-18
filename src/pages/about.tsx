@@ -49,7 +49,7 @@ export default function About({ data }: AboutProps) {
 
     // Create tabs using the shared hook
     const tabs = createTabs((tabValue, item) => (
-        <div className="prose prose-lg max-w-none">
+        <div className="prose max-w-none">
             {tabValue === 'about' ? (
                 <>
                     {/* @ts-expect-error - MDXProvider type issue with React 18 */}
@@ -83,7 +83,7 @@ export default function About({ data }: AboutProps) {
                     value={activeTab}
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    className="-mx-4 -mt-4 [&_div[data-state=active]]:border-t [&_div[data-state=active]]:border-t-primary [&_div[role=tablist]]:bg-accent [&_div[role=tablist]]:pt-0.5 [&_div[role=tablist]]:ml-0 [&_div[role=tablist]]:pl-1.5"
                     triggerDataScheme="primary"
                 />
             </Editor>
