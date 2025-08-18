@@ -85,7 +85,8 @@ posthog.capture('user_signed_up', {
 
 ### Screenshots
 
-To keep screenshots consistent and clear, here are some general guidelines to follow:
+To keep screenshots consistent and clear, here are tips to follow:
+
 - Focus on the main element, elements like the left and right sidebar should be out of frame unless they are relevant to the screenshot.
 - Double check that your screenshot doesn't contain any user data, like user emails or names.
 - Use the following settings for clean screenshots in Chrome:
@@ -466,3 +467,41 @@ In some cases, such as large nested config files, you need readers to focus on a
 </Tab.Panel>
 </Tab.Panels>
 </Tab.Group>
+
+#### Mermaid diagrams
+
+Code blocks can also be used to show mermaid UML diagrams. When using these diagrams, make sure to also include a text description of the diagram for accessibility and LLMs.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```mermaid
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    John-->Alice: Great!
+    Alice->John: See you later!
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+``````mdx
+```mermaid
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    John-->Alice: Great!
+    Alice->John: See you later!
+```
+``````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
