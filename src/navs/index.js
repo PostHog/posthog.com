@@ -1355,11 +1355,11 @@ export const handbookSidebar = [
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
                     },
-                     {
+                    {
                         name: 'How we use automation',
                         url: '/handbook/cs-and-onboarding/how-we-use-automation',
                     },
-                     {
+                    {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
                     },
@@ -1579,7 +1579,7 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'LLM observability',
+                    name: 'LLM analytics',
                     color: 'purple',
                     icon: 'IconAI',
                     url: '/tutorials/ai-engineering',
@@ -1714,8 +1714,8 @@ export const companyMenu = {
                     url: '/teams/ingestion',
                 },
                 {
-                    name: 'LLM Observability',
-                    url: '/teams/llm-observability',
+                    name: 'LLM Analytics',
+                    url: '/teams/llm-analytics',
                 },
                 {
                     name: 'Max AI',
@@ -3901,7 +3901,7 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'LLM observability',
+            name: 'LLM analytics',
             url: '/docs/ai-engineering',
             color: '[#681291]',
             colorDark: '[#C170E8]',
@@ -3913,7 +3913,7 @@ export const docsMenu = {
             },
             children: [
                 {
-                    name: 'LLM observability',
+                    name: 'LLM analytics',
                 },
                 {
                     name: 'Overview',
@@ -4130,11 +4130,11 @@ export const productMenu = {
             url: '/data-warehouse',
         },
         {
-            name: 'LLM Observability',
+            name: 'LLM Analytics',
             icon: 'IconAI',
             color: '[#681291]',
             colorDark: '[#C170E8]',
-            url: '/llm-observability',
+            url: '/llm-analytics',
         },
         {
             name: 'Max AI',

@@ -55,14 +55,14 @@ import SideModal from '../../Modal/SideModal'
 import Profile from '../../Team/Profile'
 
 const product = {
-    slug: 'llm-observability',
-    lowercase: 'LLM observability',
-    capitalized: 'LLM observability',
+    slug: 'llm-analytics',
+    lowercase: 'LLM analytics',
+    capitalized: 'LLM analytics',
     freeTier: 'JOETBD',
 }
 
-const team = 'LLM observability'
-const teamSlug = '/teams/llm-observability'
+const team = 'LLM analytics'
+const teamSlug = '/teams/llm-analytics'
 
 const featuresPerRow = 3
 const features = [
@@ -325,16 +325,10 @@ export const ProductLLMObservability = () => {
             }
         }
         {
-            phantom: mdx(slug: { eq: "customers/phantom" }) {
-                ...ProductCustomerFragment
-            }
-            contra: mdx(slug: { eq: "customers/contra" }) {
-                ...ProductCustomerFragment
-            }
             elevenlabs: mdx(slug: { eq: "customers/elevenlabs" }) {
                 ...ProductCustomerFragment
             }
-            carvertical: mdx(slug: { eq: "customers/carvertical" }) {
+            lovable: mdx(slug: { eq: "customers/lovable" }) {
                 ...ProductCustomerFragment
             }
         }
@@ -344,7 +338,7 @@ export const ProductLLMObservability = () => {
     return (
         <>
             <SEO
-                title="LLM Observability - PostHog"
+                title="LLM Analytics - PostHog"
                 description="Who keeps an eye on your AI? You do."
                 image={`/images/og/feature-flags.jpg`}
             />
@@ -363,7 +357,7 @@ export const ProductLLMObservability = () => {
                 <div className="text-center">
                     <CloudinaryImage
                         src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png"
-                        alt="Screenshot of llm observability in PostHog"
+                        alt="Screenshot of llm analytics in PostHog"
                         className="w-full max-w-[1361px]"
                         placeholder="none"
                     />
@@ -372,13 +366,13 @@ export const ProductLLMObservability = () => {
                 <section id="customers" className="-mt-36 pt-36">
                     <ul className="list-none p-0 grid md:grid-cols-2 gap-4 mb-10 md:mb-20">
                         <CustomerCard
-                            outcome="uses LLM observability with session replays"
+                            outcome="uses LLM analytics with session replays (and everything else)"
                             quote="PostHog is amazing. It reins in the chaos to have everything in one place. Otherwise it’s quite overwhelming to try and understand what’s working and what’s not"
                             customer={elevenlabs}
                         />
                         <CustomerCard
-                            outcome="compared us to every other LLM tool"
-                            quote="COOL QUOTE FROM LOVABLE COMING SOON"
+                            outcome="compared us to every other LLM tool, just to be sure"
+                            quote="We run a lot of observability tools, including Langsmith and Langfuse. PostHog is our favorite though. It's an essential part of how we debug issues and build new features."
                             customer={elevenlabs}
                         />
                     </ul>
@@ -466,8 +460,8 @@ export const ProductLLMObservability = () => {
                     <div className="bg-accent dark:bg-accent-dark rounded-lg p-8 md:p-12">
                         <div className="mb-8">
                             <h2 className="text-4xl">
-                                We didn't just build LLM observability. <br />
-                                We also use it to build our own AI tools.
+                                We didn't just build LLM analytics. <br />
+                                <span className="text-red dark:text-yellow">We also build with it.</span>
                             </h2>
                             <p className="text-lg mb-4">
                                 When we started building Max AI, our in-app AI product manager, we knew we needed a way
@@ -477,16 +471,16 @@ export const ProductLLMObservability = () => {
                             </p>
                             <p className="text-lg">
                                 Some of this, we could do with product analytics - but we quickly realised that a
-                                bespoke tool would give us more flexibility and detail. So, we built LLM observability
-                                to solve these challenges. We've been using it ever since, adding all the features we
-                                need to ship a world-class AI assistant.
+                                bespoke tool would give us more flexibility and detail. So, we built LLM analytics to
+                                solve these challenges. We've been using it ever since, adding all the features we need
+                                to ship a world-class AI assistant.
                             </p>
                         </div>
 
                         <div className="flex flex-col md:flex-row items-start gap-8">
                             <div className="flex-1 text-center md:text-left">
                                 <blockquote className="text-lg md:text-xl font-medium mb-4 bg-highlight p-0.5">
-                                    "We use LLM observability daily to understand how people are using Max AI. It was
+                                    "We use LLM analytics daily to understand how people are using Max AI. It was
                                     especially helpful for tracking costs during our beta period, so we could establish
                                     what sustainable pricing would be."
                                 </blockquote>
@@ -582,8 +576,8 @@ export const ProductLLMObservability = () => {
                                         You want to understand LLM costs on a per user basis, in addition to other axes
                                     </li>
                                     <li>
-                                        You want to combine LLM observability with other tools, including error tracking
-                                        and session replays
+                                        You want to combine LLM analytics with other tools, including error tracking and
+                                        session replays
                                     </li>
                                     <li>You need easy regulatory compliance for HIPAA and GDPR</li>
                                 </ul>
@@ -612,7 +606,7 @@ export const ProductLLMObservability = () => {
                         />
                         <TutorialCard
                             title="How to set up LLM analytics for Anthropic's Claude"
-                            description="In this tutorial, we'll build a basic Next.js app, implement the Claude API, and capture these events automatically using PostHog's LLM observability product."
+                            description="In this tutorial, we'll build a basic Next.js app, implement the Claude API, and capture these events automatically using PostHog's LLM analytics product."
                             url="/tutorials/anthropic-analytics"
                         />
                         <TutorialCard
@@ -635,8 +629,8 @@ export const ProductLLMObservability = () => {
                     </p>
                     <DocLinks
                         menu={
-                            docsMenu.children?.find(({ name }) => name.toLowerCase() === 'llm observability')
-                                ?.children || []
+                            docsMenu.children?.find(({ name }) => name.toLowerCase() === 'llm analytics')?.children ||
+                            []
                         }
                     />
                 </section>
@@ -702,7 +696,7 @@ export const ProductLLMObservability = () => {
                             </div>
                             <div className="text-center md:text-left">
                                 <blockquote className="text-lg md:text-xl font-medium mb-4">
-                                    "PostHog's LLM observability saved us so much time. We used to use a whole system of
+                                    "PostHog's LLM analytics saved us so much time. We used to use a whole system of
                                     tools to track the prompts and responses for debugging and this is an infinitely
                                     better UI. We use it for every single AI experiment we run now —{' '}
                                     <span className="bg-highlight p-0.5">

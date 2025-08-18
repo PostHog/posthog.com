@@ -379,7 +379,7 @@ const products: Product[] = [
         },
     },
     {
-        name: 'LLM observability',
+        name: 'LLM analytics',
         color: '[#8B0DC8]',
         colorDark: '[#C170E8]',
         Icon: IconLlmObservability,
@@ -407,7 +407,7 @@ const products: Product[] = [
         badge: 'BETA',
         pricing: {
             cta: {
-                url: 'https://app.posthog.com/settings/user-feature-previews#llm-observability',
+                url: 'https://app.posthog.com/settings/user-feature-previews#llm-analytics',
                 text: 'Try it out',
             },
         },
