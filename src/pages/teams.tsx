@@ -11,19 +11,22 @@ import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { Select } from 'components/RadixUI/Select'
-import { productMenu, companyMenu } from '../navs'
+import { productMenu } from '../navs'
 import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
-import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconPlus, IconX } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
 import { useWindow } from '../context/Window'
 import OSButton from 'components/OSButton'
 
-const Teams: React.FC = () => {
+interface TeamsProps {
+    searchTerm?: string
+}
+
+const Teams: React.FC<TeamsProps> = ({ searchTerm: propSearchTerm }) => {
     const { appWindow } = useWindow()
-    const [searchTerm, setSearchTerm] = useState('')
+    const [localSearchTerm, setLocalSearchTerm] = useState('')
+    const searchTerm = propSearchTerm !== undefined ? propSearchTerm : localSearchTerm
     const [selectedIndex, setSelectedIndex] = useState(0)
 
     const { isModerator } = useUser()
@@ -156,7 +159,7 @@ const Teams: React.FC = () => {
         if (appWindow?.ref?.current) {
             const handleKeyDown = (e: KeyboardEvent) => {
                 if (e.key === 'Escape') {
-                    setSearchTerm('')
+                    setLocalSearchTerm('')
                 } else if (e.key === 'ArrowDown') {
                     e.preventDefault()
                     setSelectedIndex((prev) => (prev < filteredTeams.length - 1 ? prev + 1 : prev))
@@ -178,11 +181,7 @@ const Teams: React.FC = () => {
     }, [appWindow?.ref, filteredTeams, selectedIndex])
 
     return (
-        <ReaderView
-            onSearch={(searchTerm) => setSearchTerm(searchTerm)}
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-            rightActionButtons={isModerator && <OSButton size="md" icon={<IconPlus />} asLink to="/teams/new" />}
-        >
+        <>
             <SEO
                 title="Teams - PostHog"
                 description="We're organized into multi-disciplinary small teams."
@@ -206,9 +205,9 @@ const Teams: React.FC = () => {
                         </p>
 
                         <div className="relative mb-6">
-                            {searchTerm && (
+                            {searchTerm && propSearchTerm === undefined && (
                                 <button
-                                    onClick={() => setSearchTerm('')}
+                                    onClick={() => setLocalSearchTerm('')}
                                     className="absolute right-3 top-1/2 transform -translate-y-1/2 text-secondary hover:text-primary transition-colors"
                                     aria-label="Clear search"
                                 >
@@ -375,7 +374,7 @@ const Teams: React.FC = () => {
                     </div>
                 </div>
             </section>
-        </ReaderView>
+        </>
     )
 }
 

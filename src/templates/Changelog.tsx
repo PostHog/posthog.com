@@ -32,6 +32,8 @@ import { motion } from 'framer-motion'
 import qs from 'qs'
 import useProduct from 'hooks/useProduct'
 import ProgressBar from 'components/ProgressBar'
+import OSTabs from 'components/OSTabs'
+import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
 const Select = ({ onChange, values, ...other }) => {
     const defaultValue = values[0]
@@ -440,6 +442,7 @@ const getStrapiFilters = (filters) => {
     return strapiFilters
 }
 export default function Changelog({ pageContext }) {
+    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
     const [strapiFilters, setStrapiFilters] = useState(getStrapiFilters({ year: { value: pageContext.year } }))
     const [teams, setTeams] = useState([])
     const [topics, setTopics] = useState([])
@@ -492,12 +495,67 @@ export default function Changelog({ pageContext }) {
 
     const groupedRoadmaps = lodashGroupBy(roadmaps, groupBy)
 
+    // Create tabs for company navigation
+    const tabs = createTabs((tabValue, item) => (
+        <div className="w-full">
+            {tabValue === 'changelog' ? (
+                <div className="absolute right-0 -top-10">
+                    <button
+                        onClick={() => setExpandAll(!expandAll)}
+                        className="text-sm font-semibold text-red dark:text-yellow hover:text-red/80 dark:hover:text-yellow/80 mb-4"
+                    >
+                        {expandAll ? 'Collapse all' : 'Expand all'}
+                    </button>
+                </div>
+            ) : null}
+            {tabValue === 'changelog' ? (
+                <ScrollArea>
+                    {isValidating && roadmaps.length === 0 ? (
+                        <ProgressBar title="changelog" />
+                    ) : roadmaps.length > 0 ? (
+                        groupBy ? (
+                            <ul className="list-none m-0 p-0 space-y-4">
+                                {Object.keys(groupedRoadmaps).map((key) => {
+                                    return (
+                                        <li key={key}>
+                                            <h3 className="text-lg font-semibold mb-2">{key}</h3>
+                                            <RoadmapTable
+                                                key={key}
+                                                roadmaps={groupedRoadmaps[key]}
+                                                expandAll={expandAll}
+                                            />
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        ) : (
+                            <RoadmapTable
+                                roadmaps={roadmaps}
+                                loading={isValidating}
+                                onLastRowInView={() => {
+                                    if (hasMore && !isValidating) {
+                                        fetchMore()
+                                    }
+                                }}
+                                expandAll={expandAll}
+                            />
+                        )
+                    ) : null}
+                </ScrollArea>
+            ) : (
+                <div className="p-8 text-center text-muted">
+                    <p>Loading {item.name} content...</p>
+                </div>
+            )}
+        </div>
+    ))
+
     return (
         <>
             <SEO title="Changelog - PostHog" />
             <Editor
-                title="changelog"
-                type="psheet"
+                title="Company"
+                type="changelog"
                 maxWidth="screen-2xl"
                 dataToFilter={roadmaps}
                 handleFilterChange={handleFilterChange}
@@ -562,48 +620,19 @@ export default function Changelog({ pageContext }) {
                           ]
                         : []),
                 ]}
+                bookmark={{
+                    title: 'Changelog',
+                    description: 'Latest updates and releases',
+                }}
             >
-                <div className="absolute right-0 -top-10">
-                    <button
-                        onClick={() => setExpandAll(!expandAll)}
-                        className="text-sm font-semibold text-red dark:text-yellow hover:text-red/80 dark:hover:text-yellow/80 mb-4"
-                    >
-                        {expandAll ? 'Collapse all' : 'Expand all'}
-                    </button>
-                </div>
-                <ScrollArea>
-                    {isValidating && roadmaps.length === 0 ? (
-                        <ProgressBar title="changelog" />
-                    ) : roadmaps.length > 0 ? (
-                        groupBy ? (
-                            <ul className="list-none m-0 p-0 space-y-4">
-                                {Object.keys(groupedRoadmaps).map((key) => {
-                                    return (
-                                        <li key={key}>
-                                            <h3 className="text-lg font-semibold mb-2">{key}</h3>
-                                            <RoadmapTable
-                                                key={key}
-                                                roadmaps={groupedRoadmaps[key]}
-                                                expandAll={expandAll}
-                                            />
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        ) : (
-                            <RoadmapTable
-                                roadmaps={roadmaps}
-                                loading={isValidating}
-                                onLastRowInView={() => {
-                                    if (hasMore && !isValidating) {
-                                        fetchMore()
-                                    }
-                                }}
-                                expandAll={expandAll}
-                            />
-                        )
-                    ) : null}
-                </ScrollArea>
+                <OSTabs
+                    tabs={tabs}
+                    value={activeTab}
+                    onValueChange={handleTabChange}
+                    frame={false}
+                    className="-mx-4 -mt-4"
+                    triggerDataScheme="primary"
+                />
             </Editor>
         </>
     )

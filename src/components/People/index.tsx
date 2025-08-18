@@ -3,7 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
@@ -16,9 +16,6 @@ import ReactMarkdown from 'react-markdown'
 import SideModal from 'components/Modal/SideModal'
 import Profile from 'components/Team/Profile'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
-import { companyMenu } from '../../navs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Stickers from 'components/Stickers/Index'
 import { Toolbar } from 'radix-ui'
@@ -290,7 +287,12 @@ export const TeamMember = (props: any) => {
     )
 }
 
-export default function People() {
+interface PeopleProps {
+    searchTerm?: string
+    filteredMembers?: any[] | null
+}
+
+export default function People({ searchTerm, filteredMembers }: PeopleProps = {}) {
     const { isMobile } = useApp()
     const { appWindow } = useWindow()
     const {
@@ -298,6 +300,9 @@ export default function People() {
         allTeams,
     } = useStaticQuery(teamQuery)
     const [filteredTeamMembers, setFilteredTeamMembers] = useState(teamMembers)
+
+    // Use filteredMembers from props if provided
+    const baseMembers = filteredMembers !== null && filteredMembers !== undefined ? filteredMembers : teamMembers
 
     const teamSize = teamMembers.length - 1
 
@@ -308,7 +313,7 @@ export default function People() {
     }, {})
 
     const fuse = useMemo(() => {
-        return new Fuse(teamMembers, {
+        return new Fuse(baseMembers, {
             keys: [
                 {
                     name: 'fullName',
@@ -319,12 +324,12 @@ export default function People() {
             ],
             threshold: 0.3,
         })
-    }, [teamMembers])
+    }, [baseMembers])
 
     const debouncedSearch = useCallback(
         debounce((query: string) => {
             if (!query.trim()) {
-                setFilteredTeamMembers(teamMembers)
+                setFilteredTeamMembers(baseMembers)
                 return
             }
 
@@ -332,52 +337,77 @@ export default function People() {
             const filtered = results.map((result) => result.item)
             setFilteredTeamMembers(filtered)
         }, 300),
-        [fuse, teamMembers]
+        [fuse, baseMembers]
     )
 
-    const handleSearch = (query: string) => {
-        debouncedSearch(query)
-    }
+    // Effect to handle search term changes from prop
+    useEffect(() => {
+        if (searchTerm !== undefined) {
+            debouncedSearch(searchTerm)
+        }
+    }, [searchTerm, debouncedSearch])
+
+    // Effect to handle filtered members changes
+    useEffect(() => {
+        if (filteredMembers !== null && filteredMembers !== undefined) {
+            // If we have filtered members from props, apply search on those
+            if (searchTerm && searchTerm.trim()) {
+                const fuse = new Fuse(filteredMembers, {
+                    keys: [
+                        {
+                            name: 'fullName',
+                            getFn: (member: any) => `${member.firstName} ${member.lastName}`.trim(),
+                        },
+                        'teams.data.attributes.name',
+                        'companyRole',
+                    ],
+                    threshold: 0.3,
+                })
+                const results = fuse.search(searchTerm)
+                const filtered = results.map((result) => result.item)
+                setFilteredTeamMembers(filtered)
+            } else {
+                setFilteredTeamMembers(filteredMembers)
+            }
+        }
+    }, [filteredMembers, searchTerm])
+
+    // handleSearch removed since we use prop-based search
 
     return (
-        <ReaderView
-            title="People"
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-            onSearch={handleSearch}
-        >
-            <div data-scheme="primary" className="bg-primary h-full">
-                <SEO title="Team - PostHog" />
-                <ScrollArea className="h-full">
-                    <div className="columns-2 gap-4 mb-4">
-                        <p>
-                            We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
-                        </p>
+        <div data-scheme="primary" className="bg-primary h-full">
+            <SEO title="Team - PostHog" />
+            <ScrollArea className="h-full">
+                <div className="columns-2 gap-4 mb-4">
+                    <p>
+                        We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
+                    </p>
 
-                        <p>Building an unusually great company starts with an unusual team.</p>
+                    <p>Building an unusually great company starts with an unusual team.</p>
 
-                        <p>
-                            We don't care if you haven't finished (or attended) school, if you were super important at a
-                            "Big Tech" company, or if you ran a startup that crashed and burned.
-                        </p>
+                    <p>
+                        We don't care if you haven't finished (or attended) school, if you were super important at a
+                        "Big Tech" company, or if you ran a startup that crashed and burned.
+                    </p>
 
-                        <p>
-                            What we <em>do</em> care about is your ability to learn, iterate, and ship.
-                        </p>
+                    <p>
+                        What we <em>do</em> care about is your ability to learn, iterate, and ship.
+                    </p>
 
-                        <p>
-                            That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the
-                            United Kingdom, Finland, Poland, and Colombia (among other places).
-                        </p>
+                    <p>
+                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the
+                        United Kingdom, Finland, Poland, and Colombia (among other places).
+                    </p>
 
-                        <p>
-                            Interested in a hand-drawn sketch of your face?{' '}
-                            <Link to={`/careers`} state={{ newWindow: true }}>
-                                We're hiring.
-                            </Link>
-                        </p>
-                    </div>
+                    <p>
+                        Interested in a hand-drawn sketch of your face?{' '}
+                        <Link to={`/careers`} state={{ newWindow: true }}>
+                            We're hiring.
+                        </Link>
+                    </p>
+                </div>
 
-                    {/* 
+                {/* 
                     <aside className="">
                         <h3 className="text-lg mb-2">Team members who... </h3>
                         <div className="grid grid-cols-2 @md:grid-cols-4 justify-start @md:justify-center overflow-x-auto">
@@ -400,24 +430,23 @@ export default function People() {
                     </aside> 
                     */}
 
-                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
-                        {filteredTeamMembers.map((teamMember: any, index: number) => {
-                            // Calculate if this person is a team lead of any team
-                            const isTeamLead = teamMember.leadTeams?.data?.length > 0
+                <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
+                    {filteredTeamMembers.map((teamMember: any, index: number) => {
+                        // Calculate if this person is a team lead of any team
+                        const isTeamLead = teamMember.leadTeams?.data?.length > 0
 
-                            return (
-                                <TeamMember
-                                    key={index}
-                                    {...teamMember}
-                                    isTeamLead={isTeamLead}
-                                    teamCrestMap={teamCrestMap}
-                                />
-                            )
-                        })}
-                    </ul>
-                </ScrollArea>
-            </div>
-        </ReaderView>
+                        return (
+                            <TeamMember
+                                key={index}
+                                {...teamMember}
+                                isTeamLead={isTeamLead}
+                                teamCrestMap={teamCrestMap}
+                            />
+                        )
+                    })}
+                </ul>
+            </ScrollArea>
+        </div>
     )
 }
 

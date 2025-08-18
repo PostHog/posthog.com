@@ -32,7 +32,6 @@ import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
 import { slugifyTeamName } from 'lib/utils'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import SEO from 'components/seo'
 import OSTable from 'components/OSTable'
 import { Select } from 'components/RadixUI/Select'
 import {
@@ -43,7 +42,6 @@ import {
 } from 'components/Editor/SearchUtils'
 import { useSearch } from 'components/Editor/SearchProvider'
 import ProgressBar from 'components/ProgressBar'
-import Editor from 'components/Editor'
 
 interface IGitHubPage {
     title: string
@@ -242,9 +240,11 @@ interface Row {
 
 interface RoadmapProps {
     searchQuery?: string
+    filteredRoadmaps?: any[]
+    groupByValue?: string | null
 }
 
-export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
+export default function Roadmap({ searchQuery = '', filteredRoadmaps, groupByValue }: RoadmapProps) {
     const { search } = useLocation()
     const { user } = useUser()
     const [sortBy, setSortBy] = useState('popular')
@@ -259,7 +259,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         id: number
         title: string
     } | null>(null)
-    const [filteredRoadmaps, setFilteredRoadmaps] = useState()
+    const [localFilteredRoadmaps, setLocalFilteredRoadmaps] = useState()
 
     // Get search context if available (from Editor)
     const searchContext = useSearch()
@@ -301,10 +301,23 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         [initialRoadmaps]
     )
 
+    // Use filtered roadmaps if provided, otherwise use initial roadmaps
+    const roadmapsToUse = filteredRoadmaps || initialRoadmaps
+
+    // Create a Fuse instance for the roadmaps we're using
+    const fuseForFiltered = useMemo(
+        () =>
+            createFuseInstance(roadmapsToUse, [
+                { name: 'attributes.title', weight: 2 },
+                { name: 'attributes.description', weight: 1 },
+            ]),
+        [roadmapsToUse]
+    )
+
     // Process roadmaps with search highlighting
     const roadmapsWithHighlights = useMemo(() => {
         // Process the items with highlighting
-        const processed = processItemsWithHighlighting(fuse, initialRoadmaps, effectiveSearchTerm)
+        const processed = processItemsWithHighlighting(fuseForFiltered, roadmapsToUse, effectiveSearchTerm)
 
         // If no search results and we have a search term, return empty array
         if (processed.length === 0 && effectiveSearchTerm) {
@@ -312,8 +325,8 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
         }
 
         // Otherwise, use the processed items or fall back to all items
-        return processed.length > 0 ? processed : initialRoadmaps.map((item) => ({ item, highlightedFields: {} }))
-    }, [initialRoadmaps, fuse, effectiveSearchTerm])
+        return processed.length > 0 ? processed : roadmapsToUse.map((item) => ({ item, highlightedFields: {} }))
+    }, [roadmapsToUse, fuseForFiltered, effectiveSearchTerm])
 
     useEffect(() => {
         const params = new URLSearchParams(search)
@@ -425,7 +438,7 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
     // Sort the rows based on tableSort value
     const sortedRows = useMemo(() => {
         // Then sort the roadmaps based on the selected sort criteria
-        const sortedRoadmaps = (filteredRoadmaps || roadmaps).sort((a: any, b: any) => {
+        const sortedRoadmaps = (localFilteredRoadmaps || roadmaps).sort((a: any, b: any) => {
             switch (tableSort) {
                 case 'newest': {
                     const dateA = a.attributes.createdAt ? new Date(a.attributes.createdAt).getTime() : 0
@@ -600,128 +613,118 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
                 cells,
             }
         })
-    }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, effectiveSearchTerm, filteredRoadmaps])
+    }, [
+        roadmaps,
+        tableSort,
+        expandedDescriptions,
+        loading,
+        user,
+        selectedTeam,
+        effectiveSearchTerm,
+        localFilteredRoadmaps,
+    ])
+
+    // Group roadmaps if groupByValue is provided
+    const groupedRoadmaps = useMemo(() => {
+        if (!groupByValue || !sortedRows.length) return null
+
+        const grouped: Record<string, any[]> = {}
+        sortedRows.forEach((row) => {
+            const roadmap = roadmapsToUse.find((r) => r.id === row.roadmapId)
+            const teamName = roadmap?.attributes?.teams?.data?.[0]?.attributes?.name || 'Not assigned'
+
+            if (!grouped[teamName]) {
+                grouped[teamName] = []
+            }
+            grouped[teamName].push(row)
+        })
+
+        return grouped
+    }, [groupByValue, sortedRows, roadmapsToUse])
 
     return (
-        <Editor
-            title="roadmap"
-            type="psheet"
-            slug="/roadmap"
-            maxWidth="full"
-            dataToFilter={roadmaps}
-            onFilterChange={(data) => setFilteredRoadmaps(data)}
-            onSortChange={(sort) => setTableSort(sort)}
-            defaultSortValue="popular"
-            sortOptions={[
-                {
-                    value: 'popular',
-                    label: 'Most popular',
-                    icon: 'IconThumbsUpFilled',
-                    color: 'red dark:text-yellow',
-                },
-                {
-                    value: 'newest',
-                    label: 'Newest date first',
-                    icon: 'IconClock',
-                },
-                {
-                    value: 'oldest',
-                    label: 'Oldest date first',
-                    icon: 'IconCalendar',
-                },
-            ]}
-            availableFilters={
-                roadmaps.length > 0
-                    ? [
-                          {
-                              label: 'Team',
-                              operator: 'equals',
-                              options: Object.keys(
-                                  groupBy(
-                                      roadmaps,
-                                      (roadmap) => roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'
-                                  )
-                              )
-                                  .sort()
-                                  .map((team) => ({
-                                      label: team,
-                                      value: team === 'Any' ? null : team,
-                                  })),
-                              filter: (roadmap, value) => {
-                                  return roadmap.attributes.teams?.data?.[0]?.attributes?.name === value
-                              },
-                          },
-                      ]
-                    : undefined
-            }
-        >
-            <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <section>
-                <>
-                    <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                        <h4 className="mb-4">Sign into PostHog.com</h4>
-                        <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                            <p className="text-sm mb-2">
-                                <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                            </p>
+        <section>
+            <>
+                <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
+                    <h4 className="mb-4">Sign into PostHog.com</h4>
+                    <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                        <p className="text-sm mb-2">
+                            <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                        </p>
 
-                            <p className="text-sm mb-0">
-                                We suggest signing up with your personal email. Soon you'll be able to link your PostHog
-                                app account.
-                            </p>
-                        </div>
+                        <p className="text-sm mb-0">
+                            We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                            account.
+                        </p>
+                    </div>
 
-                        <Authentication
-                            initialView="sign-in"
-                            onAuth={(user) => {
-                                setAuthModalOpen(false)
-                                if (selectedRoadmapId) {
-                                    like(selectedRoadmapId.id, selectedRoadmapId.title)
-                                }
-                            }}
-                            showBanner={false}
-                            showProfile={false}
-                        />
-                    </SideModal>
-                    {isLoading ? (
-                        <ProgressBar title="roadmap" />
-                    ) : (
-                        <>
-                            <p className="mt-0">
-                                Here's what we're thinking about building next. If you want to see what we've shipped
-                                recently,{' '}
-                                <Link to="/changelog/2025" state={{ newWindow: true }}>
-                                    visit the changelog
-                                </Link>
-                                .
-                            </p>
-                            <div className="flex justify-between items-center space-x-2 mb-4">
-                                {isModerator && !adding && (
-                                    <div className="relative">
-                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                            <Tooltip content="Only moderators can see this" placement="top">
-                                                <IconShieldLock className="w-6 h-6 inline-block" />
-                                            </Tooltip>
-                                            Add a feature
-                                        </CallToAction>
-                                    </div>
-                                )}
-                            </div>
-                            {isModerator && adding && (
-                                <RoadmapForm
-                                    status="under-consideration"
-                                    onSubmit={() => {
-                                        mutate()
-                                        setAdding(false)
-                                    }}
-                                />
+                    <Authentication
+                        initialView="sign-in"
+                        onAuth={(user) => {
+                            setAuthModalOpen(false)
+                            if (selectedRoadmapId) {
+                                like(selectedRoadmapId.id, selectedRoadmapId.title)
+                            }
+                        }}
+                        showBanner={false}
+                        showProfile={false}
+                    />
+                </SideModal>
+                {isLoading ? (
+                    <ProgressBar title="roadmap" />
+                ) : (
+                    <>
+                        <p className="mt-0">
+                            Here's what we're thinking about building next. If you want to see what we've shipped
+                            recently,{' '}
+                            <Link to="/changelog/2025" state={{ newWindow: true }}>
+                                visit the changelog
+                            </Link>
+                            .
+                        </p>
+                        <div className="flex justify-between items-center space-x-2 mb-4">
+                            {isModerator && !adding && (
+                                <div className="relative">
+                                    <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                        <Tooltip content="Only moderators can see this" placement="top">
+                                            <IconShieldLock className="w-6 h-6 inline-block" />
+                                        </Tooltip>
+                                        Add a feature
+                                    </CallToAction>
+                                </div>
                             )}
+                        </div>
+                        {isModerator && adding && (
+                            <RoadmapForm
+                                status="under-consideration"
+                                onSubmit={() => {
+                                    mutate()
+                                    setAdding(false)
+                                }}
+                            />
+                        )}
 
+                        {groupedRoadmaps ? (
+                            <div className="space-y-8 mb-12">
+                                {Object.keys(groupedRoadmaps)
+                                    .sort()
+                                    .map((teamName) => (
+                                        <div key={teamName}>
+                                            <h3 className="text-lg font-semibold mb-4">{teamName}</h3>
+                                            <OSTable
+                                                columns={columns}
+                                                rows={groupedRoadmaps[teamName]}
+                                                rowAlignment="top"
+                                            />
+                                        </div>
+                                    ))}
+                            </div>
+                        ) : (
                             <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
-                        </>
-                    )}
-                </>
-            </section>
-        </Editor>
+                        )}
+                    </>
+                )}
+            </>
+        </section>
     )
 }
