@@ -15,6 +15,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { companyMenu } from '../navs'
 import groupBy from 'lodash.groupby'
+import TeamMember, { FutureTeamMember } from 'components/TeamMember'
 
 const Detail = ({ icon, title, value }: { icon: React.ReactNode; title: string; value: string }) => {
     return (
@@ -246,7 +247,7 @@ export default function Job({
                                                     <MDXRenderer>{mission.body}</MDXRenderer>
                                                 </MDXProvider>
                                             )}
-                                            <MDXProvider components={{ HideFromJobPosting: () => null }}>
+                                            <MDXProvider components={{ TeamMember, HideFromJobPosting: () => null }}>
                                                 <MDXRenderer>{objectives.body}</MDXRenderer>
                                             </MDXProvider>
                                         </div>
