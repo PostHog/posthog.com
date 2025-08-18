@@ -27,7 +27,7 @@ This creates a `react-charts-example` folder with everything we need to get star
 
 Assuming you have data in PostHog to query, the next step is to set up our query request to PostHog.
 
-> **Don't have data to query?** Check out [our guide to setting up analytics in Next.js](/tutorials/nextjs-app-directory-analytics) to start capturing some.
+> **Don't have data to query?** Check out [our guide to setting up analytics in Next.js](/tutorials/nextjs-analytics) to start capturing some.
 
 Start by creating a personal API key. You can do this by going to [personal API keys](https://us.posthog.com/settings/user-api-keys) in your project settings, clicking **Create personal API key**, giving it a label, choosing the **Performing analytics queries** scope (AKA query read), and clicking **Create key**.
 

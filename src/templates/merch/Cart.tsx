@@ -36,6 +36,8 @@ export function Cart(props: CartProps): React.ReactElement {
                 </div>
             )}
 
+            {/* {!isEmpty && <ShippingBanner />} */}
+
             <>
                 <div>
                     {cartItems.map((item) => {

@@ -1,0 +1,155 @@
+---
+title: Model context protocol (MCP)
+---
+import CalloutBox from '../../../src/components/Docs/CalloutBox'
+import Tab from "components/Tab"
+import CursorSnippet from "./_snippets/cursor.mdx"
+import ClaudeDesktopSnippet from "./_snippets/claude-desktop.mdx"
+import WindsurfSnippet from "./_snippets/windsurf.mdx"
+import VSCodeSnippet from "./_snippets/vscode.mdx"
+import ClaudeCodeSnippet from "./_snippets/claude-code.mdx"
+import ZedSnippet from "./_snippets/zed.mdx"
+
+The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/introduction) server enables your AI agents and tools to directly interact with PostHog's products.
+
+
+## Quick install using the PostHog wizard
+
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor** and **Claude Desktop**. 
+
+```bash
+npx @posthog/wizard mcp add
+```
+
+We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions below. 
+## Manual install
+
+Start by getting a personal API key using the MCP Server preset [here](https://app.posthog.com/settings/user-api-keys?preset=mcp_server).
+
+This lets you add the MCP configuration to any desktop client you use, such as Cursor, Windsurf, or Claude Desktop.
+
+<CalloutBox icon="IconInfo" title="Don't forget to use your personal API key" type="action">
+
+In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER</code> environment variable placeholder with the personal API key you obtained in the first step.
+
+</CalloutBox>
+
+<Tab.Group tabs={['cursor', 'claude-desktop', 'windsurf', 'vscode', 'claude-code', 'zed']}>
+    <Tab.List>
+        <Tab>Claude Code</Tab>
+        <Tab>Claude Desktop</Tab>
+        <Tab>Cursor</Tab>
+        <Tab>Windsurf</Tab>
+        <Tab>VS Code</Tab>
+        <Tab>Zed</Tab>
+    </Tab.List>
+    <Tab.Panels>
+        <Tab.Panel>
+            <ClaudeCodeSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ClaudeDesktopSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <CursorSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <WindsurfSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <VSCodeSnippet />
+        </Tab.Panel>
+        <Tab.Panel>
+            <ZedSnippet />
+        </Tab.Panel>
+    </Tab.Panels>
+</Tab.Group>
+
+<details>
+
+<summary>Security considerations</summary>
+
+We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
+
+- **Use the right API key permissions:** Use the provided **MCP Server** preset in the personal API key creator. If you use the MCP in an agentic workflow on production data, scope down the API key's permissions to only the permissions you want it to use. This prevents the AI from making unintended changes to your PostHog configuration or data.
+
+- **Project scoping:** Scope your MCP server to a specific PostHog project, limiting access to only that project's resources. This prevents AI agents from accessing data from other projects in your PostHog account and helps maintain data isolation.
+
+- **Be mindful of prompt injection:** Keep in mind that LLMs can be tricked into following untrusted commands within user content. Always review and sanitize tool calls before executing them.
+
+</details>
+
+
+## Available Tools
+
+Tools trigger actions on behalf of the user based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
+
+### Organization & project management
+
+| Tool | Purpose |
+| -- | -- |
+| `organizations-get` | Get the organizations the user has access to. |
+| `switch-organization` | Change the active organization from the default organization. |
+| `organization-details-get` | Get the details of the active organization. |
+| `projects-get` | Fetches projects that the user has access to in the current organization. |
+| `switch-project` | Change the active project from the default project. |
+| `property-definitions` | Get event and property definitions for the project. |
+
+### Feature flags
+
+| Tool | Purpose |
+| -- | -- |
+| `feature-flag-get-all` | Get all feature flags in the project. |
+| `feature-flag-get-definition` | Get the definition of a feature flag. |
+| `create-feature-flag` | Creates a new feature flag in the project. |
+| `update-feature-flag` | Update a feature flag in the project. |
+| `delete-feature-flag` | Delete a feature flag in the project. |
+
+### Insights & analytics
+
+| Tool | Purpose |
+| -- | -- |
+| `insights-get-all` | Get all insights in the project with optional filtering. |
+| `insight-get` | Get a specific insight by ID. |
+| `insight-create-from-query` | Save a query as an insight. |
+| `insight-update` | Update an existing insight by ID. |
+| `insight-delete` | Delete an insight by ID. |
+| `insight-query` | Execute a query on an existing insight to get its results/data. |
+| `get-sql-insight` | Queries project's PostHog data based on a provided natural language question. |
+
+### Dashboards
+
+| Tool | Purpose |
+| -- | -- |
+| `dashboards-get-all` | Get all dashboards in the project with optional filtering. |
+| `dashboard-get` | Get a specific dashboard by ID. |
+| `dashboard-create` | Create a new dashboard in the project. |
+| `dashboard-update` | Update an existing dashboard by ID. |
+| `dashboard-delete` | Delete a dashboard by ID. |
+| `add-insight-to-dashboard` | Add an existing insight to a dashboard. |
+
+### Error tracking
+
+| Tool | Purpose |
+| -- | -- |
+| `list-errors` | List errors in the project. |
+| `error-details` | Get the details of an error in the project. |
+
+### Documentation
+
+| Tool | Purpose |
+| -- | -- |
+| `docs-search` | Search the PostHog documentation for information. |
+
+### LLM observability
+
+| Tool | Purpose |
+| -- | -- |
+| `get-llm-total-costs-for-project` | Fetches the total LLM daily costs for each model for a project over a given number of days. |
+
+
+## Next Steps
+
+- [PostHog MCP server](https://github.com/posthog/mcp): Check out GitHub repository for the MCP server
+- [Model Context Protocol](https://modelcontextprotocol.io/introduction): Learn more about the Model Context Protocol specification
+- [MCP: machine/copy paste](/blog/machine-copy-paste-mcp-intro): What exactly is MCP again?

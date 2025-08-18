@@ -606,7 +606,7 @@ When creating a new email, there are a few steps to take. It's important to add 
 
 ## Extra: Developing paid features (PostHog employees only)
 
-If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
+If you're a PostHog employee, you can get access to paid features on your local instance to make development easier. [Learn how to do so in our internal billing guide](https://github.com/PostHog/billing?tab=readme-ov-file#licensing-your-local-instance).
 
 ## Extra: Working with the data warehouse
 

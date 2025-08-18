@@ -7,7 +7,7 @@ hideAnchor: true
 
 ## Sales and Customer Success hiring at PostHog
 
-The [Sales and CS team](/teams/sales-cs) look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the team is to land and expand usage of PostHog in these customers.
+The [Sales](/teams/sales-cs) look after customers paying $20k a year or more for PostHog, as well as new customers who _may_ end up in that bucket.  The job of the team is to land and expand usage of PostHog in these customers. We have two roles on the sales team: Technical Account Executives focused on closing new business from inbound and outbound leads; and Technical Account Managers focused on expansion from existing customers and closing new business from product-led leads.
 
 We've proven that [the way we do sales](/sales) works at a small scale, we are now growing the team in line with increased top-of-funnel growth for PostHog. Please check our [careers page](/careers) for our open roles. 
 
@@ -20,6 +20,18 @@ Outside of the skills listed in the job description, we are generally looking fo
 *   A genuine passion for helping customers be successful.
 *   Prioritization skills - you'll be working with a book of business at different states and will have to prioritize your work accordingly.
 *   People who are motivated by revenue growth.
+
+### How we evaluate candidates
+
+We need to be particularly sensitive to culture at this stage. We can handle someone underperforming much better than someone who is a poor culture fit due to the impact on the broader team. We don't want to end up taking cold leads from BDRs so we can run MEDPICC from our car phone while promising 50% discounts if they sign before the next full moon. We want someone who is comfortable carrying a sales conversation while also possessing the technical chops to talk to engineers and get their hands dirty.
+
+We want someone who can own technical problems and even if they don't have the answer, understand enough of the context to provide that to engineers. We want someone who sees themselves as the first line of defense for our engineers, because engineering time is valuable; it's a win when they can solve a problem without additional engineering lean in.
+
+A great litmus test for a candidate is if they are comfortable instrumenting PostHog and can speak to how they actually implement it on a site. That's typically a good indicator that they've got the right technical prowess.
+
+We want someone who is in it to develop customers for the long run, we don't want someone who is here for quick churn and burn to pump up quota attainment. Building a relationship with a product engineer requires actually knowing PostHog, not just knowing *about* PostHog.
+
+Ultimately, we want someone who we'd want to buy from.
 
 ### Sales and CS hiring process 
 

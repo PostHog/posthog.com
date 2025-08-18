@@ -128,7 +128,26 @@ You have two options when creating a cohort:
 
 Static cohorts are created from insights, by uploading a CSV of users, or by duplicating a dynamic cohort.
 
-The CSV file only requires a single column with the user's distinct ID. The very first row (the header) will be skipped during import.
+You can upload CSV files in two formats:
+
+**Single-column CSV**: Include one distinct ID per row (all rows are processed as data, no header required)
+
+```csv
+user123
+user456
+test@example.com
+```
+
+**Multi-column CSV**: Include a header row with a `distinct_id` or `distinct-id` column containing the user identifiers
+
+```csv
+email,distinct_id,name,segment
+user1@team.com,user123,Alice Johnson,premium
+user2@team.com,user456,Bob Smith,standard
+user3@team.com,test@example.com,Carol Davis,premium
+```
+
+For multi-column files, PostHog will extract the distinct IDs from the specified column and ignore all other columns, making it easy to upload exported cohort data without modification.
 
 To update the list, you can upload another CSV to add more users. You can also remove users by deleting their person profile from the list, noting that this will completely remove the person from PostHog.
 

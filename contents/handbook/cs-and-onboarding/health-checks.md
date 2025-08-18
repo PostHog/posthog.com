@@ -60,6 +60,25 @@ As with `identify()` above users may also end up calling `posthog.group()` more 
 
 You should get in touch and let them know that they only need to call `posthog.group()` [once per group per session](/docs/product-analytics/group-analytics#how-to-create-groups), or when the group changes.
 
+To see where duplicate groupidentify calls are being generated, you can use the following SQL:
+
+```
+SELECT properties.$lib AS lib, count() AS groupidentify_event_count
+FROM events
+WHERE event = '$groupidentify'
+  AND $session_id IN (
+    SELECT $session_id
+    FROM events
+    WHERE event = '$groupidentify'
+    GROUP BY $session_id
+    HAVING count() > 1
+  )
+  AND timestamp >= now() - INTERVAL 30 DAY
+  AND timestamp < now()
+GROUP BY lib
+ORDER BY groupidentify_event_count DESC
+```
+
 ### Calling posthog.reset() before identifying the user
 
 `Posthog.reset()` will generate a new anonymous distinct ID.  If this is called before a user is identified then two anonymous unlinked user may be created.  There is no easy way to proactively diagnose this however if a customer says that their tracking between web and app is off, this is a common culprit.
