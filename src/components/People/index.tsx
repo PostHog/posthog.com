@@ -3,7 +3,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { kebabCase } from 'lib/utils'
-import React, { useState, useMemo, useCallback } from 'react'
+import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import ReactCountryFlag from 'react-country-flag'
 import { shortcodes } from '../../mdxGlobalComponents'
 import Link from 'components/Link'
@@ -287,7 +287,11 @@ export const TeamMember = (props: any) => {
     )
 }
 
-export default function People() {
+interface PeopleProps {
+    searchTerm?: string
+}
+
+export default function People({ searchTerm }: PeopleProps = {}) {
     const { isMobile } = useApp()
     const { appWindow } = useWindow()
     const {
@@ -332,9 +336,14 @@ export default function People() {
         [fuse, teamMembers]
     )
 
-    const handleSearch = (query: string) => {
-        debouncedSearch(query)
-    }
+    // Effect to handle search term changes from prop
+    useEffect(() => {
+        if (searchTerm !== undefined) {
+            debouncedSearch(searchTerm)
+        }
+    }, [searchTerm, debouncedSearch])
+
+    // handleSearch removed since we use prop-based search
 
     return (
         <div data-scheme="primary" className="bg-primary h-full">

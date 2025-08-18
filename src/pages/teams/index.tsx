@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
@@ -7,12 +7,13 @@ import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
 const TeamsPage = () => {
     const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
+    const [searchTerm, setSearchTerm] = useState('')
 
     // Create tabs using the shared hook
     const tabs = createTabs((tabValue, item) => (
         <div className="w-full">
             {tabValue === 'teams' ? (
-                <Teams />
+                <Teams searchTerm={searchTerm} />
             ) : (
                 <div className="p-8 text-center text-muted">
                     <p>Loading {item.name} content...</p>
@@ -32,6 +33,7 @@ const TeamsPage = () => {
                 title="Company"
                 type="teams"
                 proseSize="base"
+                onSearchChange={(query) => setSearchTerm(query)}
                 bookmark={{
                     title: 'Teams',
                     description: 'PostHog teams and their missions',
