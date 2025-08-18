@@ -48,7 +48,27 @@ Currently, there are no active security advisories or CVEs. All is well.
 
 ## Past advisories
 
-This section contains resolved security advisories for reference.
+<details>
+<summary>August 15, 2025 / PSA-2025-00001</summary>
+**Date:** August 15, 2025
+**Advisory:** PSA-2025-00001
+**Severity:** Medium
+**Status:** Resolved
+**Description:** An overly permissive table was available in SQL editor that allowed users to see the queries performed by other users in unrelated teams. The results of the queries were not available, but the queries themselves were visible. Queries can contain PII if specified directly in a SQL directive (e.g. SELECT * FROM Table WHERE email=user@example.com). 
+**Affected users:**
+Our logs confirm that this feature was never used on our EU cloud. Our historical query log for our US cloud only contains data going back to July 3, 2025, and we are able to confirm that this feature was never used over that time period. We don't have query logs between December 12, 2024 and July 2nd, 2025, though we think it's very unlikely that this feature was every used in our US cloud given that it was never advertised.
+**Resolution:**
+Once discovered, we quickly removed the ability to query this table. We then re-introduced this feature with queries properly scoped to the user's team.
+**What we learned:**
+We have a logic guard to ensure that all queries contain a properly authorized `team_id` when the queried table contains a `team_id` field. This logic did not help us here because the query log table did not contain a `team_id` field. We have since added a `team_id` field to this table and audited all other tables to verify they contain a `team_id` field, where appropriate. Going forward, we'll be introducing automated tests to ensure that all future tables additionally contain a `team_id` field.
+Our historical query log contains data over a longer period in our EU cloud simply because we deployed it there first. Going forward, our historical query log in our US cloud will continue to accumulate data that we can use when responding to future incidents.
+**Timeline:**
+- **Vulnerable code shipped:** December 12, 2024, 14:45 UTC
+- **Discovered:** August 13, 2025, 11:32 UTC
+- **Reported:** August 13, 2025, 11:39 UTC
+- **Fixed:** August 13, 2025, 12:33 UTC
+- **Disclosed:** August 15, 2025, 09:00 UTC
+</details>
 
 ### Advisory template
 
