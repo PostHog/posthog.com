@@ -4,7 +4,7 @@ title: We're here to help you build successful products
 
 <Letterhead />
 
-<LottieKendrick />
+<LottieAnimation variant="kendrick" />
 
 ## We're here to help product engineers build successful products
 
@@ -13,6 +13,10 @@ Literally every piece of SaaS that a product engineer needs.
 This includes tools for building products, talking to customers customers, and making sense of all your customer data.
 
 PostHog is a single platform for people who build things.
+
+<OSButton asLink to="/products" variant="secondary" size="md" state={{ newWindow: true }}>
+    Explore product suite
+</OSButton>
 
 <div class="clear-both" />
 
@@ -24,9 +28,13 @@ PostHog is a single platform for people who build things.
 
 We launched on Hacker News with our MVP in 2020 – just 4 weeks after we started writing code. The response was overwhelmingly positive.
 
-Since then, we've grown far beyond analytics – into an entire product & data toolkit – used by **100,000+ teams**.
+Since then, we've grown far beyond analytics – into an entire product & data toolkit – used by <CustomerCount /> teams.
 
 But our approach to building PostHog is very different.
+
+<OSButton asLink to="/handbook/why-does-posthog-exist" variant="secondary" size="md" state={{ newWindow: true }}>
+    Read our story
+</OSButton>
 
 <div class="clear-both" />
 
@@ -34,22 +42,26 @@ But our approach to building PostHog is very different.
 
 ## Why we're different
 
-<div class="grid grid-cols-3 gap-4">
-<div class="col-span-2">
-
 <DifferentHighlights />
+
+<div class="grid @lg:grid-cols-2 gap-4">
+<div>
 
 ### We just do the right thing
 
 We're building the company we've always wanted to work for. This means rejecting all the annoying parts of the SaaS industry that have somehow become industry-standard.
 
+If it gives you the ick, you know it gives us the ick too.
+
+You can sum it up our ideology with this: we try to treat you how _we'd_ want to be treated.
+
 </div>
 
-<LottieDifferent />
+<LottieAnimation variant="different" />
 
 </div>
 
-### Here's what TLDR Founders Newsletter said
+<div class="@xl:float-right @xl:ml-6 mx-auto @xl:mx-0">
 
 <TLDR>
 
@@ -75,7 +87,9 @@ While Salesforce hikes prices 6% annually, PostHog proves there's room for start
 
 </TLDR>
 
-In addition to the nice summary from the _TLDR newsletter_ (above):
+</div>
+
+The _TLDR newsletter_ highlighted an article that covered some of the key things that make us different. Here are a few more they missed:
 
 -   **No loss leaders.** We don't sell products at a loss - we run the company default alive. This means we've never had layoffs, and we don't take huge risks that could result in the company disappearing overnight.
 -   **No sleazy renewal tactics.** We don't screw you on contract terms like auto-renewal. And while most companies will try to _increase_ your prices every year, you won't find that here.
@@ -102,8 +116,8 @@ You can see how our entire company operates.
 -   You can even <Link to="/handbook/people/compensation" state={{ newWindow: true}}>see what everyone is paid</Link>
 -   Our <Link to="/roadmap" state={{ newWindow: true}}>product roadmap</Link> is public – you can vote on what we should build next
 -   <Link to="/teams" state={{ newWindow: true }}>
-        See who's working on which product
-    </Link> and what their goals are
+        See who's working on which product and what their goals are
+    </Link>
 -   Our codebase is <Link to="https://github.com/posthog/posthog" state={{ newWindow: true}} external>open source</Link> – if you're interested in seeing how we handle customer data, you can audit our entire codebase
 
 You won't get this level of transparency from most companies!
@@ -119,7 +133,7 @@ One of the advantages of PostHog is that we're building all the _tools_ you need
 <p>
     We have{' '}
     <strong>
-        <ProductCount /> products
+        <ProductCount /> paid products
     </strong>{' '}
     today, and even if we don't offer it yet, we will eventually.
 </p>
@@ -130,13 +144,8 @@ We're going to build every piece of SaaS you need to make your product successfu
 
 ## ~~Value-based pricing~~ _Usage-based pricing_
 
-<CloudinaryImage
-    src="https://res.cloudinary.com/dmukukwp6/image/upload/shopahogic_ab9f7a3f8c.png"
-    alt="Shopahogic"
-    width={420}
-    height={433}
-    className="float-right ml-2 max-w-40 @xl:max-w-2xs"
-/>
+<div class="grid @lg:grid-cols-2 gap-4">
+<div>
 
 Companies with large sales teams use _value-based pricing_ where they try to suss out how much you're willing to spend. PostHog operates more like a utility – we cover our costs with razor thin margins, and we make up for it with scale.
 
@@ -144,9 +153,17 @@ PostHog is always cheaper than the cheapest major competitor, so you know you do
 
 And because every product has a generous free tier, you can always try it out before paying anything at all. Without talking to sales. Because our pricing is completely transparent.
 
+</div>
+<div>
+<LottieAnimation variant="toy" />
+</div>
+</div>
+
+---
+
 ## The strategy appears to be working
 
-<div className="flex justify-center @lg:float-right @2xl/reader-content-container:-mr-4 @3xl/reader-content-container:-mr-8">
+<div className="flex justify-center @lg:float-right lg:-mr-4">
     <div className="@lg:ml-4 rotate-1 inline-block mx-auto mb-2 @lg:mt-2">
         <CloudinaryImage
             src="https://res.cloudinary.com/dmukukwp6/image/upload/team_tulum_a4899e0a9e.jpg"
@@ -162,11 +179,17 @@ And because every product has a generous free tier, you can always try it out be
 
 Nobody wants to be a sheep, but it's probably a good sign when something is very popular.
 
-We have over **100,000 customers** using our products. Just under a quarter of a million engineers use us. That's far, far more than any of our competitors – most have around 1-3k customers. It's what happens when the internet loves you.
+We have over _<CustomerCount /> customers_ using our products. Just under a quarter of a million engineers use us. That's far, far more than any of our competitors – most have around 1-3k customers. It's what happens when the internet loves you.
 
 **65% of every Y Combinator batch** (the world's best accelerator for startups) use our products.
 
+<div class="clear-both" />
+
+---
+
 ## So tl;dr:
+
+<LottieAnimation variant="office" />
 
 Whether you're looking to bring PostHog into your business – or if you're looking to build products with us – we hope you leave our portal on the internet with the understanding that we're here to build a generational company.
 

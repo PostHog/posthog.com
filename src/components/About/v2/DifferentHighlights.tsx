@@ -7,10 +7,10 @@ import { HomepageCards } from 'components/NoHatingAllowed/data'
 
 export const DifferentHighlights = () => {
     return (
-        <div className="bg-accent rounded text-base p-4">
+        <div className="bg-red/10 rounded text-base p-4">
             <strong>Warning:</strong> If you like the way most companies treat you, you might not like us.{' '}
             <Link to="/cards" state={{ newWindow: true }}>
-                See if PostHog is <em>wrong</em> for you.
+                See 15 reasons why PostHog might be <em>wrong</em> for you.
             </Link>
         </div>
     )

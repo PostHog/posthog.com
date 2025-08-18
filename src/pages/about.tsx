@@ -4,12 +4,11 @@ import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
-import { LottieKendrick } from 'components/About/v2/LottieKendrick'
-import { LottieDifferent } from 'components/About/v2/LottieDifferent'
+import { LottieAnimation } from 'components/About/v2/LottieAnimations'
 import { Letterhead } from 'components/About/v2/Letterhead'
 import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
-import { PRODUCT_COUNT } from '../constants/index'
+import { PRODUCT_COUNT, CUSTOMER_COUNT } from '../constants/index'
 import { James, Plus, Tim } from 'components/Signatures'
 import SEO from 'components/seo'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
@@ -19,8 +18,11 @@ import { shortcodes } from '../mdxGlobalComponents'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
 import { DifferentHighlights } from 'components/About/v2/DifferentHighlights'
+import OSButton from 'components/OSButton'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
+const CustomerCount = () => <span>{CUSTOMER_COUNT}+</span>
 
 const HappyHog = () => (
     <img
@@ -34,16 +36,17 @@ const HappyHog = () => (
 const mdxComponents = {
     ...shortcodes, // Include global MDX components first
     // Custom components for this page (override any from shortcodes if needed)
+    OSButton,
     YC,
     TLDR,
-    LottieKendrick,
-    LottieDifferent,
+    LottieAnimation,
     DifferentHighlights,
     HappyHog,
     Letterhead,
     Logo: () => <Logo noText className="inline-block" />,
     CloudinaryImage,
     ProductCount,
+    CustomerCount,
     // The signature components receive 'class' prop from MDX but need to convert to 'className'
     James: (props: any) => <James className={props.class || props.className} />,
     Tim: (props: any) => <Tim className={props.class || props.className} />,
@@ -59,7 +62,7 @@ export default function About({ data }: AboutProps) {
 
     // Create tabs using the shared hook
     const tabs = createTabs((tabValue, item) => (
-        <div className="prose max-w-none">
+        <div className="prose prose-sm @lg:prose-base max-w-none">
             {tabValue === 'about' ? (
                 <>
                     {/* @ts-expect-error - MDXProvider type issue with React 18 */}
