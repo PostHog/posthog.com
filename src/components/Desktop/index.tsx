@@ -63,11 +63,6 @@ export const productLinks: AppItem[] = [
 export const apps: AppItem[] = [
     {
         label: 'Why PostHog?',
-        Icon: <AppIcon name="tour" />,
-        url: '/why',
-    },
-    {
-        label: 'Company',
         Icon: <AppIcon name="posthog" />,
         url: '/about',
     },

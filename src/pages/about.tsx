@@ -76,8 +76,8 @@ export default function About({ data }: AboutProps) {
         <>
             <SEO title="About PostHog" description="All about PostHog" image={`/images/og/product-analytics.jpg`} />
             <Editor
-                title="Company"
-                type="about"
+                // title="Company"
+                // type="about"
                 proseSize="base"
                 bookmark={{
                     title: 'Company',
