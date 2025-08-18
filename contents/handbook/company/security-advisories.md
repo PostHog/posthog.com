@@ -49,53 +49,77 @@ Currently, there are no active security advisories or CVEs. All is well.
 ## Past advisories
 
 <details>
-<summary>August 15, 2025 / PSA-2025-00001</summary>
-**Date:** August 15, 2025
-**Advisory:** PSA-2025-00001
-**Severity:** Medium
-**Status:** Resolved
-**Description:** An overly permissive table was available in SQL editor that allowed users to see the queries performed by other users in unrelated teams. The results of the queries were not available, but the queries themselves were visible. Queries can contain PII if specified directly in a SQL directive (e.g. SELECT * FROM Table WHERE email=user@example.com). 
-**Affected users:**
-Our logs confirm that this feature was never used on our EU cloud. Our historical query log for our US cloud only contains data going back to July 3, 2025, and we are able to confirm that this feature was never used over that time period. We don't have query logs between December 12, 2024 and July 2nd, 2025, though we think it's very unlikely that this feature was every used in our US cloud given that it was never advertised.
-**Resolution:**
-Once discovered, we quickly removed the ability to query this table. We then re-introduced this feature with queries properly scoped to the user's team.
-**What we learned:**
-We have a logic guard to ensure that all queries contain a properly authorized `team_id` when the queried table contains a `team_id` field. This logic did not help us here because the query log table did not contain a `team_id` field. We have since added a `team_id` field to this table and audited all other tables to verify they contain a `team_id` field, where appropriate. Going forward, we'll be introducing automated tests to ensure that all future tables additionally contain a `team_id` field.
-Our historical query log contains data over a longer period in our EU cloud simply because we deployed it there first. Going forward, our historical query log in our US cloud will continue to accumulate data that we can use when responding to future incidents.
-**Timeline:**
-- **Vulnerable code shipped:** December 12, 2024, 14:45 UTC
-- **Discovered:** August 13, 2025, 11:32 UTC
-- **Reported:** August 13, 2025, 11:39 UTC
-- **Fixed:** August 13, 2025, 12:33 UTC
-- **Disclosed:** August 15, 2025, 09:00 UTC
+  <summary>August 15, 2025 / PSA-2025-00001</summary>
+
+  <p><strong>Date:</strong> August 15, 2025<br />
+  <strong>Advisory:</strong> PSA-2025-00001<br />
+  <strong>Severity:</strong> Medium<br />
+  <strong>Status:</strong> Resolved</p>
+
+  <h4>Description</h4>
+  <p>An overly permissive table was available in the SQL editor that allowed users to see queries performed by other users in unrelated teams. The results of those queries were <em>not</em> accessible, but the queries themselves were visible.</p>
+
+  <h4>Affected users</h4>
+  <ul>
+    <li>Our logs confirm that this feature was never used in our EU cloud.</li>
+    <li>Our historical query log for the US cloud only contains data going back to July 3, 2025, and we can confirm the feature was not used during that period.</li>
+    <li>We do not have query logs between December 12, 2024, and July 2, 2025. While we cannot fully confirm usage during this window, we believe it is very unlikely the feature was used in our US cloud, as it was never advertised.</li>
+  </ul>
+
+  <h4>Resolution</h4>
+  <p>Once discovered, we immediately removed the ability to query this table. We then reintroduced the feature with queries properly scoped to each user’s team.</p>
+
+  <h4>What we learned</h4>
+  <ul>
+    <li>We have a logic guard to ensure that all queries contain a properly authorized <code>team_id</code> when the queried table includes a <code>team_id</code> field.</li>
+    <li>This logic did not help in this case because the query log table did not contain a <code>team_id</code> field.</li>
+    <li>We have since added a <code>team_id</code> field to this table and audited all other tables to verify that they contain a <code>team_id</code> field where appropriate.</li>
+    <li>Going forward, we will introduce automated tests to ensure that all new tables also include a <code>team_id</code> field.</li>
+    <li>Our historical query log contains a longer dataset in the EU cloud simply because it was deployed there first. Going forward, our US cloud logs will continue to accumulate historical data for future incident response.</li>
+  </ul>
+
+  <h4>Timeline</h4>
+  <ul>
+    <li><strong>Vulnerable code shipped:</strong> December 12, 2024, 14:45 UTC</li>
+    <li><strong>Discovered:</strong> August 13, 2025, 11:32 UTC</li>
+    <li><strong>Reported:</strong> August 13, 2025, 11:39 UTC</li>
+    <li><strong>Fixed:</strong> August 13, 2025, 12:33 UTC</li>
+    <li><strong>Disclosed:</strong> August 15, 2025, 09:00 UTC</li>
+  </ul>
+
 </details>
 
 ### Advisory template
 
 ```
-**Date:** January 15, 2024  
-**CVE:** CVE-2024-XXXXX  
-**Severity:** Low / Medium / Critical  
-**Status:** Reported / Fixed / Resolved  
+  <p><strong>Date:</strong> August 15, 2025<br />
+  <strong>Advisory:</strong> PSA-2025-XXXXX<br />
+  <strong>Severity:</strong> Low / Medium / Critical<br />
+  <strong>Status:</strong>Reported / Fixed / Resolved</p>
 
-**Description:**  
-Brief description of the vulnerability and its potential impact.
+  <h4>Description</h4>
+  <p>Brief description of the vulnerability and its potential impact.</p>
 
-**Affected users:**
-Confirm if the advisory is limited to specific products.
-Confirm if the advisory is limited to either US or EU customers, or both.   
+  <h4>Affected users</h4>
+  <ul>
+    <li>Confirm if the advisory is limited to specific products.</li>
+    <li>Confirm if the advisory is limited to either US or EU customers, or both</li>
+  </ul>
 
-**Resolution:**  
-Where possible, add a link to a PR. Be clear on any next steps. 
+  <h4>Resolution</h4>
+  <p>Where possible, add a link to a PR. Be clear on any next steps.</p>
 
-**What we learned:**
-If there's a lesson we took to prevent this happening again, document it briefly.
+  <h4>What we learned</h4>
+    <p>If there's a lesson we took to prevent this happening again, document it briefly.</p>
 
-**Timeline:**  
-- **Discovered:** January 10, 2024, 00:00 UTC
-- **Reported:** January 10, 2024, 00:00 UTC
-- **Fixed:** January 10, 2024, 00:00 UTC
-- **Disclosed:** January 10, 2024, 00:00 UTC
+  <h4>Timeline</h4>
+  <ul>
+    <li><strong>Vulnerable code shipped:</strong> January 10, 2024, 00:00 UTC</li>
+    <li><strong>Discovered:</strong> January 10, 2024, 00:00 UTC</li>
+    <li><strong>Reported:</strong> January 10, 2024, 00:00 UTC</li>
+    <li><strong>Fixed:</strong> January 10, 2024, 00:00 UTC</li>
+    <li><strong>Disclosed:</strong> January 10, 2024, 00:00 UTC</li>
+  </ul>
 ```
 
 
