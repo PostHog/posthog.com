@@ -25,6 +25,17 @@ For teams of all sizes, it's important to have your product, revenue and operati
 - Visualizing the data is self-serve and doesn't require a data team.
 - This level of data accessibility means that your warehouse won't become a dumping ground.
 
+### Example use case: integrating revenue data from Stripe
+
+It's super easy to connect Stripe revenue data using just an API key.  You'll be able to then join your Stripe data to person data in PostHog via a common identifier (e.g. email) and answer questions such as:
+
+1. Which features drive the most paying customers, or;
+2. Which user behaviors are correlated with customer churn.
+
+Product analytics data in isolation won't help you with these and other questions which are critical to your business.
+
+All this can be self served by product engineers.
+
 ## An integrated place to view all of your user data
 
 With disparate tools, it's hard to get an understanding of your users both individually and at an aggregate level.  By integrating a range of products into one platform we provide a greater picture of our customer's users.  Common cross-product use cases are:
