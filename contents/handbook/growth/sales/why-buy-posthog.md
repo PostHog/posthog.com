@@ -77,7 +77,7 @@ That being said, there are still individual product and feature nuggets that ent
 
 # Vibes and personas
 
-You should apply different messaging to companies at different stages, and the role you're speaking with.  The broad messages we can take to customers are:
+You should apply different messaging to companies at different stages (inspired by the [vibe-based sales matrix](https://docs.google.com/spreadsheets/d/12scJrtw2vVok_-BNI6xOYsiNTUDrfkJJO_K0JKkz69w/edit?gid=0#gid=0)), and the role you're speaking with.  The broad messages we can take to customers are:
 
 1. **You need a data warehouse** and PostHog can be it, helping you follow best practice from the start.
 2. **You need a better data warehouse** because yours has no ownership, and is likely not well-structured.
