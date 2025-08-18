@@ -2,17 +2,20 @@ import React from 'react'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
-import People from 'components/People'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
-const PeoplePage = () => {
+const ChangelogPage = () => {
     const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
 
     // Create tabs using the shared hook
     const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'people' ? (
-                <People />
+        <div className="prose prose-lg max-w-none">
+            {tabValue === 'changelog' ? (
+                <div className="p-8">
+                    <h1>Changelog</h1>
+                    <p>View our latest updates and releases</p>
+                    <p className="text-sm text-muted">Navigate to specific changelog entries to see details.</p>
+                </div>
             ) : (
                 <div className="p-8 text-center text-muted">
                     <p>Loading {item.name} content...</p>
@@ -23,14 +26,18 @@ const PeoplePage = () => {
 
     return (
         <>
-            <SEO title="People – PostHog" description="Meet the PostHog team" image={`/images/og/people.jpg`} />
+            <SEO
+                title="Changelog – PostHog"
+                description="See what's new in PostHog"
+                image={`/images/og/changelog.jpg`}
+            />
             <Editor
                 title="Company"
-                type="people"
+                type="changelog"
                 proseSize="base"
                 bookmark={{
-                    title: 'People',
-                    description: 'Meet the PostHog team',
+                    title: 'Changelog',
+                    description: 'Latest updates and releases',
                 }}
             >
                 <OSTabs
@@ -46,4 +53,4 @@ const PeoplePage = () => {
     )
 }
 
-export default PeoplePage
+export default ChangelogPage

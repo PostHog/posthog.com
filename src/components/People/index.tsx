@@ -16,9 +16,6 @@ import ReactMarkdown from 'react-markdown'
 import SideModal from 'components/Modal/SideModal'
 import Profile from 'components/Team/Profile'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
-import { companyMenu } from '../../navs'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import Stickers from 'components/Stickers/Index'
 import { Toolbar } from 'radix-ui'
@@ -340,44 +337,39 @@ export default function People() {
     }
 
     return (
-        <ReaderView
-            title="People"
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-            onSearch={handleSearch}
-        >
-            <div data-scheme="primary" className="bg-primary h-full">
-                <SEO title="Team - PostHog" />
-                <ScrollArea className="h-full">
-                    <div className="columns-2 gap-4 mb-4">
-                        <p>
-                            We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
-                        </p>
+        <div data-scheme="primary" className="bg-primary h-full">
+            <SEO title="Team - PostHog" />
+            <ScrollArea className="h-full">
+                <div className="columns-2 gap-4 mb-4">
+                    <p>
+                        We're proud to be a team of <strong>{teamSize}</strong> misfits. Why?
+                    </p>
 
-                        <p>Building an unusually great company starts with an unusual team.</p>
+                    <p>Building an unusually great company starts with an unusual team.</p>
 
-                        <p>
-                            We don't care if you haven't finished (or attended) school, if you were super important at a
-                            "Big Tech" company, or if you ran a startup that crashed and burned.
-                        </p>
+                    <p>
+                        We don't care if you haven't finished (or attended) school, if you were super important at a
+                        "Big Tech" company, or if you ran a startup that crashed and burned.
+                    </p>
 
-                        <p>
-                            What we <em>do</em> care about is your ability to learn, iterate, and ship.
-                        </p>
+                    <p>
+                        What we <em>do</em> care about is your ability to learn, iterate, and ship.
+                    </p>
 
-                        <p>
-                            That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the
-                            United Kingdom, Finland, Poland, and Colombia (among other places).
-                        </p>
+                    <p>
+                        That's why we've hired in Belgium, the East and West coasts of the US, Canada, Germany, the
+                        United Kingdom, Finland, Poland, and Colombia (among other places).
+                    </p>
 
-                        <p>
-                            Interested in a hand-drawn sketch of your face?{' '}
-                            <Link to={`/careers`} state={{ newWindow: true }}>
-                                We're hiring.
-                            </Link>
-                        </p>
-                    </div>
+                    <p>
+                        Interested in a hand-drawn sketch of your face?{' '}
+                        <Link to={`/careers`} state={{ newWindow: true }}>
+                            We're hiring.
+                        </Link>
+                    </p>
+                </div>
 
-                    {/* 
+                {/* 
                     <aside className="">
                         <h3 className="text-lg mb-2">Team members who... </h3>
                         <div className="grid grid-cols-2 @md:grid-cols-4 justify-start @md:justify-center overflow-x-auto">
@@ -400,24 +392,23 @@ export default function People() {
                     </aside> 
                     */}
 
-                    <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
-                        {filteredTeamMembers.map((teamMember: any, index: number) => {
-                            // Calculate if this person is a team lead of any team
-                            const isTeamLead = teamMember.leadTeams?.data?.length > 0
+                <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
+                    {filteredTeamMembers.map((teamMember: any, index: number) => {
+                        // Calculate if this person is a team lead of any team
+                        const isTeamLead = teamMember.leadTeams?.data?.length > 0
 
-                            return (
-                                <TeamMember
-                                    key={index}
-                                    {...teamMember}
-                                    isTeamLead={isTeamLead}
-                                    teamCrestMap={teamCrestMap}
-                                />
-                            )
-                        })}
-                    </ul>
-                </ScrollArea>
-            </div>
-        </ReaderView>
+                        return (
+                            <TeamMember
+                                key={index}
+                                {...teamMember}
+                                isTeamLead={isTeamLead}
+                                teamCrestMap={teamCrestMap}
+                            />
+                        )
+                    })}
+                </ul>
+            </ScrollArea>
+        </div>
     )
 }
 

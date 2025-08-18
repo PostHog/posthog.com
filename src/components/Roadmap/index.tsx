@@ -32,7 +32,6 @@ import Tooltip from 'components/Tooltip'
 import Spinner from 'components/Spinner'
 import { slugifyTeamName } from 'lib/utils'
 import ScrollArea from 'components/RadixUI/ScrollArea'
-import SEO from 'components/seo'
 import OSTable from 'components/OSTable'
 import { Select } from 'components/RadixUI/Select'
 import {
@@ -43,7 +42,6 @@ import {
 } from 'components/Editor/SearchUtils'
 import { useSearch } from 'components/Editor/SearchProvider'
 import ProgressBar from 'components/ProgressBar'
-import Editor from 'components/Editor'
 
 interface IGitHubPage {
     title: string
@@ -603,125 +601,71 @@ export default function Roadmap({ searchQuery = '' }: RoadmapProps) {
     }, [roadmaps, tableSort, expandedDescriptions, loading, user, selectedTeam, effectiveSearchTerm, filteredRoadmaps])
 
     return (
-        <Editor
-            title="roadmap"
-            type="psheet"
-            slug="/roadmap"
-            maxWidth="full"
-            dataToFilter={roadmaps}
-            onFilterChange={(data) => setFilteredRoadmaps(data)}
-            onSortChange={(sort) => setTableSort(sort)}
-            defaultSortValue="popular"
-            sortOptions={[
-                {
-                    value: 'popular',
-                    label: 'Most popular',
-                    icon: 'IconThumbsUpFilled',
-                    color: 'red dark:text-yellow',
-                },
-                {
-                    value: 'newest',
-                    label: 'Newest date first',
-                    icon: 'IconClock',
-                },
-                {
-                    value: 'oldest',
-                    label: 'Oldest date first',
-                    icon: 'IconCalendar',
-                },
-            ]}
-            availableFilters={
-                roadmaps.length > 0
-                    ? [
-                          {
-                              label: 'Team',
-                              operator: 'equals',
-                              options: Object.keys(
-                                  groupBy(
-                                      roadmaps,
-                                      (roadmap) => roadmap.attributes.teams?.data?.[0]?.attributes?.name ?? 'Any'
-                                  )
-                              )
-                                  .sort()
-                                  .map((team) => ({
-                                      label: team,
-                                      value: team === 'Any' ? null : team,
-                                  })),
-                              filter: (roadmap, value) => {
-                                  return roadmap.attributes.teams?.data?.[0]?.attributes?.name === value
-                              },
-                          },
-                      ]
-                    : undefined
-            }
-        >
-            <SEO title="Roadmap – PostHog" description="" image={`/images/og/customers.jpg`} />
-            <section>
-                <>
-                    <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
-                        <h4 className="mb-4">Sign into PostHog.com</h4>
-                        <div className="bg-border dark:bg-border-dark p-4 mb-2">
-                            <p className="text-sm mb-2">
-                                <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
-                            </p>
+        <section>
+            <>
+                <SideModal title="Sign in to vote" open={authModalOpen} setOpen={setAuthModalOpen}>
+                    <h4 className="mb-4">Sign into PostHog.com</h4>
+                    <div className="bg-border dark:bg-border-dark p-4 mb-2">
+                        <p className="text-sm mb-2">
+                            <strong>Note: PostHog.com authentication is separate from your PostHog app.</strong>
+                        </p>
 
-                            <p className="text-sm mb-0">
-                                We suggest signing up with your personal email. Soon you'll be able to link your PostHog
-                                app account.
-                            </p>
-                        </div>
+                        <p className="text-sm mb-0">
+                            We suggest signing up with your personal email. Soon you'll be able to link your PostHog app
+                            account.
+                        </p>
+                    </div>
 
-                        <Authentication
-                            initialView="sign-in"
-                            onAuth={(user) => {
-                                setAuthModalOpen(false)
-                                if (selectedRoadmapId) {
-                                    like(selectedRoadmapId.id, selectedRoadmapId.title)
-                                }
-                            }}
-                            showBanner={false}
-                            showProfile={false}
-                        />
-                    </SideModal>
-                    {isLoading ? (
-                        <ProgressBar title="roadmap" />
-                    ) : (
-                        <>
-                            <p className="mt-0">
-                                Here's what we're thinking about building next. If you want to see what we've shipped
-                                recently,{' '}
-                                <Link to="/changelog/2025" state={{ newWindow: true }}>
-                                    visit the changelog
-                                </Link>
-                                .
-                            </p>
-                            <div className="flex justify-between items-center space-x-2 mb-4">
-                                {isModerator && !adding && (
-                                    <div className="relative">
-                                        <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
-                                            <Tooltip content="Only moderators can see this" placement="top">
-                                                <IconShieldLock className="w-6 h-6 inline-block" />
-                                            </Tooltip>
-                                            Add a feature
-                                        </CallToAction>
-                                    </div>
-                                )}
-                            </div>
-                            {isModerator && adding && (
-                                <RoadmapForm
-                                    status="under-consideration"
-                                    onSubmit={() => {
-                                        mutate()
-                                        setAdding(false)
-                                    }}
-                                />
+                    <Authentication
+                        initialView="sign-in"
+                        onAuth={(user) => {
+                            setAuthModalOpen(false)
+                            if (selectedRoadmapId) {
+                                like(selectedRoadmapId.id, selectedRoadmapId.title)
+                            }
+                        }}
+                        showBanner={false}
+                        showProfile={false}
+                    />
+                </SideModal>
+                {isLoading ? (
+                    <ProgressBar title="roadmap" />
+                ) : (
+                    <>
+                        <p className="mt-0">
+                            Here's what we're thinking about building next. If you want to see what we've shipped
+                            recently,{' '}
+                            <Link to="/changelog/2025" state={{ newWindow: true }}>
+                                visit the changelog
+                            </Link>
+                            .
+                        </p>
+                        <div className="flex justify-between items-center space-x-2 mb-4">
+                            {isModerator && !adding && (
+                                <div className="relative">
+                                    <CallToAction onClick={() => setAdding(true)} size="xs" type="secondary">
+                                        <Tooltip content="Only moderators can see this" placement="top">
+                                            <IconShieldLock className="w-6 h-6 inline-block" />
+                                        </Tooltip>
+                                        Add a feature
+                                    </CallToAction>
+                                </div>
                             )}
+                        </div>
+                        {isModerator && adding && (
+                            <RoadmapForm
+                                status="under-consideration"
+                                onSubmit={() => {
+                                    mutate()
+                                    setAdding(false)
+                                }}
+                            />
+                        )}
 
-                            <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
-                        </>
-                    )}
-                </>
-            </section>
-        </Editor>
+                        <OSTable columns={columns} rows={sortedRows} rowAlignment="top" className="mb-12" />
+                    </>
+                )}
+            </>
+        </section>
     )
 }

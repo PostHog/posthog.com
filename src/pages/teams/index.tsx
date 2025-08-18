@@ -2,17 +2,17 @@ import React from 'react'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
-import People from 'components/People'
+import Teams from '../teams'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
-const PeoplePage = () => {
+const TeamsPage = () => {
     const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
 
     // Create tabs using the shared hook
     const tabs = createTabs((tabValue, item) => (
         <div className="w-full">
-            {tabValue === 'people' ? (
-                <People />
+            {tabValue === 'teams' ? (
+                <Teams />
             ) : (
                 <div className="p-8 text-center text-muted">
                     <p>Loading {item.name} content...</p>
@@ -23,14 +23,18 @@ const PeoplePage = () => {
 
     return (
         <>
-            <SEO title="People – PostHog" description="Meet the PostHog team" image={`/images/og/people.jpg`} />
+            <SEO
+                title="Teams – PostHog"
+                description="PostHog teams and their missions"
+                image={`/images/og/teams.jpg`}
+            />
             <Editor
                 title="Company"
-                type="people"
+                type="teams"
                 proseSize="base"
                 bookmark={{
-                    title: 'People',
-                    description: 'Meet the PostHog team',
+                    title: 'Teams',
+                    description: 'PostHog teams and their missions',
                 }}
             >
                 <OSTabs
@@ -46,4 +50,4 @@ const PeoplePage = () => {
     )
 }
 
-export default PeoplePage
+export default TeamsPage

@@ -11,10 +11,8 @@ import { CallToAction } from 'components/CallToAction'
 import { useUser } from 'hooks/useUser'
 import HeaderBar from 'components/OSChrome/HeaderBar'
 import { Select } from 'components/RadixUI/Select'
-import { productMenu, companyMenu } from '../navs'
+import { productMenu } from '../navs'
 import { useNavigate, useLocation } from '@gatsbyjs/reach-router'
-import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 import { IconPlus, IconX } from '@posthog/icons'
 import KeyboardShortcut from 'components/KeyboardShortcut'
@@ -178,11 +176,7 @@ const Teams: React.FC = () => {
     }, [appWindow?.ref, filteredTeams, selectedIndex])
 
     return (
-        <ReaderView
-            onSearch={(searchTerm) => setSearchTerm(searchTerm)}
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-            rightActionButtons={isModerator && <OSButton size="md" icon={<IconPlus />} asLink to="/teams/new" />}
-        >
+        <>
             <SEO
                 title="Teams - PostHog"
                 description="We're organized into multi-disciplinary small teams."
@@ -375,7 +369,7 @@ const Teams: React.FC = () => {
                     </div>
                 </div>
             </section>
-        </ReaderView>
+        </>
     )
 }
 

@@ -1,11 +1,12 @@
 import Team from 'components/Team'
-import { companyMenu } from '../../../navs'
 import React, { useState, useRef } from 'react'
-import ReaderView from 'components/ReaderView'
-import { TreeMenu } from 'components/TreeMenu'
 import { useUser } from 'hooks/useUser'
 import { IconPencil } from '@posthog/icons'
 import OSButton from 'components/OSButton'
+import Editor from 'components/Editor'
+import OSTabs from 'components/OSTabs'
+import SEO from 'components/seo'
+import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
 type TeamPageProps = {
     params: {
@@ -45,19 +46,49 @@ export default function NewTeam(props: TeamPageProps) {
             </>
         ) : null
 
+    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
+
+    // Create tabs using the shared hook
+    const tabs = createTabs((tabValue, item) => (
+        <div className="w-full">
+            {tabValue === 'teams' ? (
+                <Team
+                    editing={editing}
+                    setEditing={setEditing}
+                    saving={saving}
+                    setSaving={setSaving}
+                    onSaveRef={onSaveRef}
+                />
+            ) : (
+                <div className="p-8 text-center text-muted">
+                    <p>Loading {item.name} content...</p>
+                </div>
+            )}
+        </div>
+    ))
+
     return (
-        <ReaderView
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-            rightActionButtons={editing ? editActions : editButton}
-            isEditing={editing}
-        >
-            <Team
-                editing={editing}
-                setEditing={setEditing}
-                saving={saving}
-                setSaving={setSaving}
-                onSaveRef={onSaveRef}
-            />
-        </ReaderView>
+        <>
+            <SEO title="New Team – PostHog" description="Create a new team at PostHog" image={`/images/og/teams.jpg`} />
+            <Editor
+                title="Company"
+                type="teams"
+                proseSize="base"
+                bookmark={{
+                    title: 'New Team',
+                    description: 'Create a new team',
+                }}
+            >
+                <div className="absolute right-4 top-2 flex gap-2">{editing ? editActions : editButton}</div>
+                <OSTabs
+                    tabs={tabs}
+                    value={activeTab}
+                    onValueChange={handleTabChange}
+                    frame={false}
+                    className="-mx-4 -mt-4"
+                    triggerDataScheme="primary"
+                />
+            </Editor>
+        </>
     )
 }
