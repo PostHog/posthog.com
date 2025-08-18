@@ -31,7 +31,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Cohorts | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Comments/Discussions | [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/comments</span> |
 | CRM | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/crm</span>  |
-| Dashboards | [Team Platform Analytics][Team Platform Analytics]  |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
+| Dashboards | Shared responsibility with [Team Product Analytics][Team Product Analytics] & [Team Platform Analytics][Team Platform Analytics] |  <span class="lemon-tag gh-tag">feature/dashboards</span> |
 | Data colors & themes | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/colors-and-themes</span> |
 | Data management | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/data-management</span>  |
 | Data table | [Team Product Analytics][Team Product Analytics] | <span class="lemon-tag gh-tag">feature/data-table</span> |
@@ -85,7 +85,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Taxonomic filters | [Team Product UX][Team Product UX] | <span class="lemon-tag gh-tag">feature/taxonomic-filters</span> |
 | Toolbar | [Team Replay][Team Replay]  | <span class="lemon-tag gh-tag">feature/toolbar</span>  |
 | Usage reports | [Team Billing][Team Billing] / [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/usage-reports</span>  |
-| Variables | [Team Platform Analytics][Team Platform Analytics] | <span class="lemon-tag gh-tag">feature/variables</span>  |
+| Variables | [Team Product Analytics][Team Product Analytics] | <span class="lemon-tag gh-tag">feature/variables</span>  |
 | Web analytics  | [Team Web Analytics][Team Web Analytics]  | <span class="lemon-tag gh-tag">feature/web-analytics</span>  |
 | Webhook delivery service | [Team CDP][Team CDP] | <span class="lemon-tag gh-tag">feature/pipelines</span> |
 
