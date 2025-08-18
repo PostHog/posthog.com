@@ -40,7 +40,26 @@ This is usually the most difficult bit! Sometimes customers will proactively rea
 
 Don't do clickbaity things or trick people into talking to you - it'll just annoy them. And definitely don't just offer a generic checkin 'to see how things are going'!  
 
-Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support. 
+Ideally you want to get multiple people into a [shared Slack channel](/handbook/growth/sales/new-sales#4-product-evaluation), as we've found this enables the best communication and allows us to provide them with great support.
+
+#### How to bust ghosts
+If you've had a a conversation with someone, there was interest on their side and then they suddenly go dark, using the The [John Barrows Ghosting Sequence](https://jbarrows.com/) can revivify them. 
+
+1. After 2 weeks of valuable follow-up and you've not heard back, reply-all to the latest email thread.
+Change the subject to: "Still interested?"
+
+And put in the body:
+>`[Name]`
+>
+>Still looking at options like PostHog to solve `[business problem they previously acknowledged]?`
+>
+>Let me know either way.
+
+That last line is very important because it gives them a safe option to say "no". About half will respond.
+
+2. If there's no response again after another week, change the subject again to "Did I lose you?"
+
+Leave the body empty. This will pick up about 80% of people who go dark. If not, close out the opportunity 3 days after this final message.
 
 ### 2. Get a longer term commitment (maybe!)
 
@@ -69,7 +88,7 @@ You can use these signals alongside regular customer interactions to prioritize 
 ### How to run a cross-sell process
 
 - First you need to find out who cares about the problem that our other products solve - is it the existing team or the new team?
-  - Use a tool like [The Org](https://theorg.com/) or [Chartloop](https://www.chartloop.com/#) to help you identify new people. 
+  - Use a tool like [The Org](https://theorg.com/) to help you identify new people. 
 - Then you need to find out what are they using now to solve the problem (if anything) - surface this during the check in calls that you already have scheduled as part of onboarding if it's the existing team. If you're talking a new team, you'll effectively run this as a [new sales process](/handbook/growth/sales/new-sales). 
 - Your approach will depend on the product that makes sense here:
   - If it's already a mature product we have shipped, you should aim to show how the product complements what they _already_ are using in PostHog - don't just arbitrarily sell in a product for the sake of it. For example, you can say ‘other customers that look like you are doing X, this is what we’re seeing’.

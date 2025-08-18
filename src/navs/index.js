@@ -1289,6 +1289,10 @@ export const handbookSidebar = [
                         url: '/handbook/growth/sales/outbound-sales',
                     },
                     {
+                        name: 'How to do discovery',
+                        url: '/handbook/growth/sales/how-to-do-discovery',
+                    },
+                    {
                         name: 'Expansion, cross-sell & retention',
                         url: '/handbook/growth/sales/expansion-and-retention',
                         children: [
@@ -1354,6 +1358,14 @@ export const handbookSidebar = [
                     {
                         name: 'How we work',
                         url: '/handbook/cs-and-onboarding/how-we-work',
+                    },
+                    {
+                        name: 'How we use automation',
+                        url: '/handbook/cs-and-onboarding/how-we-use-automation',
+                    },
+                    {
+                        name: 'How we upsell and cross-sell',
+                        url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
                     },
                 ],
             },
@@ -1642,6 +1654,12 @@ export const companyMenu = {
             url: '/wip',
         },
         {
+            name: 'Training',
+            icon: 'IconBook',
+            color: 'red',
+            url: '/academy',
+        },
+        {
             name: 'Changelog',
             icon: 'IconCalendar',
             color: 'red',
@@ -1722,6 +1740,10 @@ export const companyMenu = {
                     url: '/teams/platform',
                 },
                 {
+                    name: 'Platform UX',
+                    url: '/teams/platform-ux',
+                },
+                {
                     name: 'Product Analytics',
                     url: '/teams/product-analytics',
                 },
@@ -1755,6 +1777,10 @@ export const companyMenu = {
                 {
                     name: 'CS & Onboarding',
                     url: '/teams/cs-onboarding',
+                },
+                {
+                    name: 'Demand Gen',
+                    url: '/teams/demand-gen',
                 },
                 {
                     name: 'Exec',
@@ -2295,7 +2321,6 @@ export const docsMenu = {
                         },
                     ],
                 },
-
                 {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
@@ -2479,6 +2504,10 @@ export const docsMenu = {
                         {
                             name: 'Projects',
                             url: '/docs/settings/projects',
+                        },
+                        {
+                            name: 'Model context protocol (MCP)',
+                            url: '/docs/model-context-protocol',
                         },
                         {
                             name: 'Hog',
@@ -3335,6 +3364,12 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Cutting costs',
+                    url: '/docs/feature-flags/cutting-costs',
+                    icon: 'IconPiggyBank',
+                    color: 'yellow',
+                },
+                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/feature-flags/common-questions',
                     icon: 'IconQuestion',
@@ -3348,10 +3383,13 @@ export const docsMenu = {
                     featured: true,
                 },
                 {
-                    name: 'Cutting costs',
-                    url: '/docs/feature-flags/cutting-costs',
-                    icon: 'IconPiggyBank',
-                    color: 'yellow',
+                    name: 'Settings',
+                },
+                {
+                    name: 'Project-wide settings',
+                    url: '/docs/feature-flags/project-wide-settings',
+                    icon: 'IconWrench',
+                    color: 'green',
                 },
                 {
                     name: 'Features',
@@ -3681,38 +3719,79 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
-                    name: 'Issues',
-                    url: '/docs/error-tracking/issues',
+                    name: 'Issues and exceptions',
+                    url: '/docs/error-tracking/issues-and-exceptions',
                     icon: 'IconWarning',
                     color: 'yellow',
+                    featured: true,
                 },
                 {
                     name: 'Stack traces',
                     url: '/docs/error-tracking/stack-traces',
                     icon: 'IconCode',
                     color: 'purple',
+                    featured: true,
+                },
+                {
+                    name: 'Fingerprints',
+                    url: '/docs/error-tracking/fingerprints',
+                    icon: 'IconBrackets',
+                    color: 'blue',
                 },
                 {
                     name: 'Guides',
                 },
                 {
-                    name: 'Monitor issues',
-                    url: '/docs/error-tracking/monitoring',
-                    icon: 'IconGraph',
-                    color: 'orange',
+                    name: 'Capture exceptions',
+                    url: '/docs/error-tracking/capture',
+                    icon: 'IconLaptop',
+                    color: 'green',
                     featured: true,
                 },
                 {
-                    name: 'Manage issues',
+                    name: 'Manage and resolve issues',
                     url: '/docs/error-tracking/managing-issues',
-                    icon: 'IconWrench',
-                    color: 'green',
+                    icon: 'IconDashboard',
+                    color: 'purple',
+                    featured: true,
                 },
                 {
-                    name: 'Set up alerts',
+                    name: 'Assign issues to teammates',
+                    url: '/docs/error-tracking/assigning-issues',
+                    icon: 'IconUser',
+                    color: 'blue',
+                    featured: true,
+                    children: [
+                        {
+                            name: 'Overview',
+                            url: '/docs/error-tracking/assigning-issues',
+                        },
+                        {
+                            name: 'Track in GitHub and Linear',
+                            url: '/docs/error-tracking/external-tracking',
+                        },
+                    ],
+                },
+                {
+                    name: 'Group exceptions into issues',
+                    url: '/docs/error-tracking/grouping-issues',
+                    icon: 'IconList',
+                    color: 'yellow',
+                    featured: true,
+                },
+                {
+                    name: 'Monitor and search issues',
+                    url: '/docs/error-tracking/monitoring',
+                    icon: 'IconSearch',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
+                    name: 'Send alerts',
                     url: '/docs/error-tracking/alerts',
                     icon: 'IconBell',
                     color: 'red',
+                    featured: true,
                 },
                 {
                     name: 'Resources',
@@ -3722,6 +3801,14 @@ export const docsMenu = {
                     url: '/docs/error-tracking/cutting-costs',
                     icon: 'IconPiggyBank',
                     color: 'salmon',
+                    featured: true,
+                },
+                {
+                    name: 'More tutorials',
+                    url: '/docs/error-tracking/tutorials',
+                    icon: 'IconGraduationCap',
+                    color: 'blue',
+                    featured: true,
                 },
                 {
                     name: 'Troubleshooting and FAQs',
