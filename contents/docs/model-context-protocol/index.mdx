@@ -15,21 +15,23 @@ The PostHog [Model Context Protocol (MCP)](https://modelcontextprotocol.io/intro
 
 ## Quick install using the PostHog wizard
 
-Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor** and **Claude Desktop**. More supported tools are on the way!
+Besides being able to [quickly set up your project using AI](/docs/getting-started/install?tab=wizard), the [PostHog Wizard](https://github.com/PostHog/wizard) can also install the MCP server directly into **Cursor** and **Claude Desktop**. 
 
 ```bash
 npx @posthog/wizard mcp add
 ```
 
+We're working on adding more supported tools to the wizard. If you're using another option, you can manually install our MCP server with the instructions below. 
 ## Manual install
-
 
 Start by getting a personal API key using the MCP Server preset [here](https://app.posthog.com/settings/user-api-keys?preset=mcp_server).
 
 This lets you add the MCP configuration to any desktop client you use, such as Cursor, Windsurf, or Claude Desktop.
 
-<CalloutBox icon="IconInfo" title="Don't forget to use your personal API Key!" type="action">
+<CalloutBox icon="IconInfo" title="Don't forget to use your personal API key" type="action">
+
 In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER</code> environment variable placeholder with the personal API key you obtained in the first step.
+
 </CalloutBox>
 
 <Tab.Group tabs={['cursor', 'claude-desktop', 'windsurf', 'vscode', 'claude-code', 'zed']}>
@@ -65,7 +67,7 @@ In all examples, make sure to replace the highlighted <code>POSTHOG_AUTH_HEADER<
 
 <details>
 
-<summary>Security Considerations</summary>
+<summary>Security considerations</summary>
 
 We recommend the following best practices to mitigate security risks when using the PostHog MCP server:
 
@@ -82,7 +84,7 @@ We recommend the following best practices to mitigate security risks when using 
 
 Tools trigger actions on behalf of the user, based on the goals and information already in the context of the LLM. Here's a list of tools we provide:
 
-### Organization & Project Management
+### Organization & project management
 
 | Tool | Purpose |
 | -- | -- |
@@ -93,7 +95,7 @@ Tools trigger actions on behalf of the user, based on the goals and information 
 | `switch-project` | Change the active project from the default project. |
 | `property-definitions` | Get event and property definitions for the project. |
 
-### Feature Flags
+### Feature flags
 
 | Tool | Purpose |
 | -- | -- |
@@ -103,7 +105,7 @@ Tools trigger actions on behalf of the user, based on the goals and information 
 | `update-feature-flag` | Update a feature flag in the project. |
 | `delete-feature-flag` | Delete a feature flag in the project. |
 
-### Insights & Analytics
+### Insights & analytics
 
 | Tool | Purpose |
 | -- | -- |
@@ -126,7 +128,7 @@ Tools trigger actions on behalf of the user, based on the goals and information 
 | `dashboard-delete` | Delete a dashboard by ID. |
 | `add-insight-to-dashboard` | Add an existing insight to a dashboard. |
 
-### Error Tracking
+### Error tracking
 
 | Tool | Purpose |
 | -- | -- |
@@ -139,7 +141,7 @@ Tools trigger actions on behalf of the user, based on the goals and information 
 | -- | -- |
 | `docs-search` | Search the PostHog documentation for information. |
 
-### LLM Observability
+### LLM observability
 
 | Tool | Purpose |
 | -- | -- |
