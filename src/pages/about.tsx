@@ -5,19 +5,14 @@ import OSTabs from 'components/OSTabs'
 import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
 import Logo from 'components/Logo'
-import { shortcodes } from '../mdxGlobalComponents'
-import { Blockquote } from 'components/BlockQuote'
-import { MdxCodeBlock } from 'components/CodeBlock'
-import { Heading } from 'components/Heading'
-import { InlineCode } from 'components/InlineCode'
-import { ZoomImage } from 'components/ZoomImage'
-import Link from 'components/Link'
 import CloudinaryImage from 'components/CloudinaryImage'
 import { PRODUCT_COUNT } from '../constants/index'
 import { James, Plus, Tim } from 'components/Signatures'
 import SEO from 'components/seo'
-import { MDXRenderer } from 'gatsby-plugin-mdx'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
+import { MDXRenderer } from 'gatsby-plugin-mdx'
+import { MDXProvider } from '@mdx-js/react'
+import { shortcodes } from '../mdxGlobalComponents'
 
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 
@@ -29,40 +24,39 @@ const HappyHog = () => (
     />
 )
 
-const A = (props: any) => <Link {...props} />
+// MDX components for MDXProvider
+const mdxComponents = {
+    ...shortcodes, // Include global MDX components first
+    // Custom components for this page (override any from shortcodes if needed)
+    YC,
+    TLDR,
+    HappyHog,
+    Logo: () => <Logo noText className="inline-block" />,
+    CloudinaryImage,
+    ProductCount,
+    // The signature components receive 'class' prop from MDX but need to convert to 'className'
+    James: (props: any) => <James className={props.class || props.className} />,
+    Tim: (props: any) => <Tim className={props.class || props.className} />,
+    Plus: (props: any) => <Plus className={props.class || props.className} />,
+}
 
-export default function About({ data }: { data: { mdx: { body: string; frontmatter: { title: string } } } }) {
+interface AboutProps {
+    data: { mdx: { body: string; frontmatter: { title: string } } }
+}
+
+export default function About({ data }: AboutProps) {
     const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
-
-    const components = {
-        HappyHog,
-        Logo: () => <Logo noText className="inline-block" />,
-        YC,
-        TLDR,
-        James,
-        Tim,
-        Plus,
-        CloudinaryImage,
-        ProductCount,
-        inlineCode: InlineCode,
-        blockquote: Blockquote,
-        pre: MdxCodeBlock,
-        h1: (props: any) => Heading({ as: 'h1', ...props }),
-        h2: (props: any) => Heading({ as: 'h2', ...props }),
-        h3: (props: any) => Heading({ as: 'h3', ...props }),
-        h4: (props: any) => Heading({ as: 'h4', ...props }),
-        h5: (props: any) => Heading({ as: 'h5', ...props }),
-        h6: (props: any) => Heading({ as: 'h6', ...props }),
-        img: ZoomImage,
-        a: A,
-        ...shortcodes,
-    }
 
     // Create tabs using the shared hook
     const tabs = createTabs((tabValue, item) => (
         <div className="prose prose-lg max-w-none">
             {tabValue === 'about' ? (
-                <MDXRenderer components={components}>{data.mdx.body}</MDXRenderer>
+                <>
+                    {/* @ts-expect-error - MDXProvider type issue with React 18 */}
+                    <MDXProvider components={mdxComponents}>
+                        <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                    </MDXProvider>
+                </>
             ) : (
                 <div className="p-8 text-center text-muted">
                     <p>Loading {item.name} content...</p>
