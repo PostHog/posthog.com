@@ -2424,7 +2424,7 @@ export const docsMenu = {
                             url: '/docs/settings/projects',
                         },
                         {
-                            name: 'Model Context Protocol (MCP)',
+                            name: 'Model context protocol (MCP)',
                             url: '/docs/model-context-protocol',
                         },
                         {
