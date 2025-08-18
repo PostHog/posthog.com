@@ -185,11 +185,17 @@ export const ProductPostItTraining = () => {
                             <h2 className="text-4xl lg:text-5xl text-center mb-8">
                                 Ready to get <span className="text-red dark:text-yellow">Post-it certified?</span>
                             </h2>
-                            <div className="inline-flex mx-auto relative overflow-hidden w-full aspect-video">
+
+                            <div className="relative mx-auto w-full overflow-hidden rounded shadow-xl aspect-video">
                                 <iframe
-                                    src="https://www.youtube.com/watch?v=_eLZqBVkxCc"
-                                    className="rounded aspect-video m-0 shadow-xl"
-                                    allow="autoplay"
+                                    title="PostHog Demo"
+                                    src="https://www.youtube-nocookie.com/embed/_eLZqBVkxCc?rel=0"
+                                    className="absolute inset-0 h-full w-full"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowFullScreen
+                                    loading="lazy"
+                                    referrerPolicy="strict-origin-when-cross-origin"
                                 />
                             </div>
                         </section>
