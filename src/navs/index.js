@@ -2244,18 +2244,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'AI tools & agents',
-                    url: '/docs/ai-tools',
-                    icon: 'IconBolt',
-                    children: [
-                        {
-                            name: 'Model Context Protocol (MCP)',
-                            url: '/docs/ai-tools/model-context-protocol',
-                        },
-                    ],
-                },
-
-                {
                     name: 'Advanced',
                     url: '/docs/advanced/cdp',
                     icon: 'IconAdvanced',
@@ -2434,6 +2422,10 @@ export const docsMenu = {
                         {
                             name: 'Projects',
                             url: '/docs/settings/projects',
+                        },
+                        {
+                            name: 'Model Context Protocol (MCP)',
+                            url: '/docs/model-context-protocol',
                         },
                         {
                             name: 'Hog',
