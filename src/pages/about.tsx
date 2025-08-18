@@ -5,6 +5,7 @@ import OSTabs from 'components/OSTabs'
 import { YC } from 'components/About/v2/YC'
 import { TLDR } from 'components/About/v2/TLDR'
 import { LottieKendrick } from 'components/About/v2/LottieKendrick'
+import { LottieDifferent } from 'components/About/v2/LottieDifferent'
 import { Letterhead } from 'components/About/v2/Letterhead'
 import Logo from 'components/Logo'
 import CloudinaryImage from 'components/CloudinaryImage'
@@ -17,6 +18,7 @@ import { MDXProvider } from '@mdx-js/react'
 import { shortcodes } from '../mdxGlobalComponents'
 import Link from 'components/Link'
 import { IconXNotTwitter } from 'components/OSIcons'
+import { DifferentHighlights } from 'components/About/v2/DifferentHighlights'
 
 const ProductCount = () => <span>{PRODUCT_COUNT}+</span>
 
@@ -35,6 +37,8 @@ const mdxComponents = {
     YC,
     TLDR,
     LottieKendrick,
+    LottieDifferent,
+    DifferentHighlights,
     HappyHog,
     Letterhead,
     Logo: () => <Logo noText className="inline-block" />,
