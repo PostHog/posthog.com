@@ -4115,12 +4115,6 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-                    name: 'Billing',
-                    url: '/docs/llm-observability/billing',
-                    icon: 'IconPiggyBank',
-                    color: 'green',
-                },
-                {
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/llm-observability/troubleshooting',
                     icon: 'IconQuestion',
