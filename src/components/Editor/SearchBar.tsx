@@ -129,7 +129,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         <div
             ref={containerRef}
             data-scheme={dataScheme}
-            className={`absolute w-64 p-1.5 border border-t-0 border-primary rounded-b z-20 flex items-center gap-1 ${className}`}
+            className={`absolute w-64 p-1.5 border border-t-0 border-primary rounded-b z-50 flex items-center gap-1 ${className}`}
         >
             <input
                 placeholder="Search this page..."
