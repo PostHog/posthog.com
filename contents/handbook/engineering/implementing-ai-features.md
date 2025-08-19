@@ -36,7 +36,7 @@ We build with the latest models from OpenAI and Anthropic, with Perplexity used 
 
 This goes for everything at PostHog – but in AI features specifically, we use [our own LLM analytics product](/docs/llm-analytics):
 
-- With OpenAI and Anthropic libraries in Python, use LLM observability wrappers in `posthoganalytics.ai.openai` & `posthoganalytics.ai.anthropic`
-- With LangChain, use the LLM observability callback handler in `posthoganalytics.ai.langchain.callbacks`
+- With OpenAI and Anthropic libraries in Python, use LLM analytics wrappers in `posthoganalytics.ai.openai` & `posthoganalytics.ai.anthropic`
+- With LangChain, use the LLM analytics callback handler in `posthoganalytics.ai.langchain.callbacks`
 
 This will give you and the organization full visibility into your feature – see the [LLM analytics dashboard](https://us.posthog.com/project/2/llm-observability). Feel free to leave feedback with [#team-llm-observability](https://posthog.slack.com/archives/C087XQ7K9K7).

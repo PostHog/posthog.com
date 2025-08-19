@@ -14,7 +14,7 @@ users:
   - Leadership
   - Founder
 toolsUsed:
-  - LLM observability
+  - LLM analytics
   - Session recording
   - Error tracking
   - Product analytics

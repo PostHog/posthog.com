@@ -17,7 +17,7 @@ toolsUsed:
   - Feature flags
   - Product analytics
   - Session replay
-  - LLM observability
+  - LLM analytics
 date: 2024-05-24
 ---
 

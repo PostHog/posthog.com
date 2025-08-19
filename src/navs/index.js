@@ -1583,7 +1583,7 @@ export const communityMenu = {
                     ],
                 },
                 {
-                    name: 'LLM observability',
+                    name: 'LLM analytics',
                     color: 'purple',
                     icon: 'IconAI',
                     url: '/tutorials/ai-engineering',
@@ -3058,7 +3058,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'LLM insights',
-                    url: 'https://posthog.com/docs/llm-observability',
+                    url: 'https://posthog.com/docs/llm-analytics',
                     icon: 'IconAIText',
                     color: 'yellow',
                     badge: {

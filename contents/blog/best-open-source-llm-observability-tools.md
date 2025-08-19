@@ -1,5 +1,5 @@
 ---
-title: 7 best free open source LLM analytics tools right now
+title: 7 best free open source LLM observability tools right now
 date: 2025-04-10
 rootPage: /blog
 sidebar: Blog
@@ -36,7 +36,7 @@ To help you pick the best of these tools, we put together this list. All of the 
 
 [PostHog](/) is an open source all-in-one platform that combines LLM observability with several other developer-focused tools, such as product and web analytics, session replay, feature flags, experiments, error tracking, and surveys.
 
-Its [LLM analytics product](/docs/llm-analytics) integrates with popular LLM provides, captures details of generations, provides an aggregated metrics dashboard, and more.
+Its [LLM analytics product](/docs/llm-analytics) integrates with popular LLM providers, captures details of generations, provides an aggregated metrics dashboard, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_07_at_11_06_21_678982e3a9.png"
@@ -47,9 +47,9 @@ Its [LLM analytics product](/docs/llm-analytics) integrates with popular LLM pro
 
 #### What makes PostHog special?
 
-PostHog’s LLM observability product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
+PostHog’s LLM analytics product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
-PostHog’s hosted Cloud version and all of its LLM observability features are free to use. It comes with 1 million events for free every month with indefinite retention, no matter if they are plain events or LLM observability ones. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
+PostHog’s hosted Cloud version and all of its LLM analytics features are free to use. It comes with 1 million events for free every month with indefinite retention, no matter if they are plain events or LLM analytics ones. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
 
 You can [get started right away](http://us.posthog.com/signup), no sales call or elaborate setup needed.
 
