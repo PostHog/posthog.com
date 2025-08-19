@@ -1,89 +1,179 @@
 import React from 'react'
-import { useStaticQuery, graphql } from 'gatsby'
-import { createSlideConfig, SlidesTemplate } from 'components/Products/Slides'
-import { useContentData } from 'hooks/useContentData'
+import ReaderView from 'components/ReaderView'
+import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
+import { TreeMenu } from 'components/TreeMenu'
+import { dataWarehouse } from '../../hooks/productData/data_warehouse'
+import SEO from 'components/seo'
+import Link from 'components/Link'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { ZoomImage } from 'components/ZoomImage'
+import OSTable from 'components/OSTable'
+import { useCustomers } from '../../hooks/useCustomers'
 
-const PRODUCT_HANDLE = 'data_warehouse'
+const LeftSidebarContent = () => {
+    return <TreeMenu items={customerDataInfrastructureNav.children} />
+}
 
 export default function DataWarehouse(): JSX.Element {
-    const contentData = useContentData()
-    const data = useStaticQuery(graphql`
-        query {
-            allMdx(filter: { fields: { slug: { regex: "/^/tutorials/" } } }) {
-                nodes {
-                    fields {
-                        slug
-                    }
-                    rawBody
-                    frontmatter {
-                        title
-                        description
-                    }
-                }
-            }
-            allProductData {
-                nodes {
-                    products {
-                        name
-                        type
-                        unit
-                        addons {
-                            name
-                            type
-                            unit
-                            plans {
-                                name
-                                plan_key
-                                included_if
-                                features {
-                                    key
-                                    name
-                                    description
-                                    limit
-                                    note
-                                }
-                            }
-                        }
-                        plans {
-                            name
-                            plan_key
-                            free_allocation
-                            included_if
-                            features {
-                                key
-                                name
-                                description
-                                limit
-                                note
-                            }
-                            tiers {
-                                unit_amount_usd
-                                up_to
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    `)
+    const { getCustomer, hasCaseStudy } = useCustomers()
 
-    // Optional: Customize slides
-    // See /components/Products/Slides/README.md for more details
-    const slides = createSlideConfig({
-        exclude: ['comparison-summary', 'feature-comparison'],
-        // order: ['overview', 'pricing', 'features'],
-        templates: {
-            overview: 'stacked', // Use the horizontal split layout
-        },
-        content: {
-            answersDescription: 'Unify and query data from any source',
-        },
+    // Create table structure for customers
+    const customerTableColumns = [
+        { name: '', width: 'minmax(auto,80px)', align: 'center' as const },
+        { name: 'Company', width: 'minmax(150px,200px)', align: 'center' as const },
+        { name: '', width: 'minmax(auto,1fr)', align: 'left' as const },
+        { name: 'Case study', width: 'minmax(auto,100px)', align: 'center' as const },
+    ]
+
+    const customerTableRows = Object.entries(dataWarehouse.customers).map(([slug, customer], index) => {
+        const customerData = getCustomer(slug)
+
+        // Determine logo rendering logic
+        const renderLogo = () => {
+            if (!customerData?.logo) {
+                return (
+                    <span className="text-xl font-semibold">
+                        {customerData?.name || slug.charAt(0).toUpperCase() + slug.slice(1)}
+                    </span>
+                )
+            }
+
+            // Check if logo is a React component (single SVG format)
+            if (typeof customerData.logo === 'function') {
+                const LogoComponent = customerData.logo
+                const heightClass = customerData.height ? `h-${customerData.height / 2}` : ''
+                const className = `fill-current object-contain ${heightClass}`.trim()
+
+                return (
+                    <div className="" style={{ maxHeight: customerData.height ? customerData.height * 2 + 'px' : '' }}>
+                        <LogoComponent className={`${className}`} />
+                    </div>
+                )
+            }
+
+            // Otherwise, it's the existing light/dark object format
+            const heightClass = customerData.height ? `max-h-${customerData.height / 2}` : 'max-h-6'
+
+            return (
+                <>
+                    <img
+                        src={customerData.logo.light}
+                        alt={customerData.name}
+                        className={`w-auto object-contain dark:hidden ${heightClass}`}
+                    />
+                    <img
+                        src={customerData.logo.dark}
+                        alt={customerData.name}
+                        className={`w-auto object-contain hidden dark:block ${heightClass}`}
+                    />
+                </>
+            )
+        }
+
+        return {
+            cells: [
+                { content: index + 1 },
+                {
+                    content: renderLogo(),
+                    className: '!p-2',
+                },
+                {
+                    content: (
+                        <>
+                            <strong>...{customer.headline}</strong>
+                            <span className="text-sm italic">"{customer.description}"</span>
+                        </>
+                    ),
+                    className: '!px-4 !py-2',
+                },
+                {
+                    content: hasCaseStudy(slug) ? (
+                        <Link to={`/customers/${slug}`} state={{ newWindow: true }} className="underline font-semibold">
+                            Link
+                        </Link>
+                    ) : null,
+                    className: 'text-sm',
+                },
+            ],
+        }
     })
 
-    const mergedData = {
-        ...data,
-        ...contentData,
-    }
+    return (
+        <>
+            <SEO
+                title={dataWarehouse.seo.title}
+                description={dataWarehouse.seo.description}
+                image="images/og/data-warehouse.jpg"
+            />
+            <ReaderView leftSidebar={<LeftSidebarContent />} title={dataWarehouse.overview.title}>
+                <p className="text-base font-semibold">{dataWarehouse.overview.description}</p>
 
-    return <SlidesTemplate productHandle={PRODUCT_HANDLE} data={mergedData} slideConfig={slides} />
+                <ZoomImage>
+                    <CloudinaryImage src={dataWarehouse.screenshots[0].src} alt={dataWarehouse.screenshots[0].alt} />
+                </ZoomImage>
+
+                <h3>Customers who love Data Warehouse</h3>
+                <OSTable
+                    columns={customerTableColumns}
+                    rows={customerTableRows}
+                    className="bg-primary"
+                    size="sm"
+                    rowAlignment="top"
+                />
+
+                <h3>Features</h3>
+                <ul>
+                    {dataWarehouse.features.map((feature, index) => (
+                        <li key={index}>
+                            <strong>{feature.title}:</strong> {feature.description}
+                            {feature.features && (
+                                <ul>
+                                    {feature.features.map((subFeature, subIndex) => (
+                                        <li key={subIndex}>
+                                            <strong>{subFeature.title}:</strong> {subFeature.description}
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </li>
+                    ))}
+                </ul>
+
+                <h3>Common Questions</h3>
+                <ul>
+                    {dataWarehouse.questions.map((question, index) => (
+                        <li key={index}>
+                            <Link to={question.url} state={{ newWindow: true }}>
+                                {question.question}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+
+                <h3>Works great with</h3>
+                <ul>
+                    {dataWarehouse.pairsWith.map((pair, index) => (
+                        <li key={index}>
+                            <Link to={`/${pair.slug}`} state={{ newWindow: true }}>
+                                {pair.slug.replace(/-/g, ' ').replace(/^\w/, (c) => c.toUpperCase())}
+                            </Link>
+                            : {pair.description}
+                        </li>
+                    ))}
+                </ul>
+
+                <h3>Customer Success Stories</h3>
+                <ul>
+                    <li>
+                        <strong>HeadshotPro</strong> {dataWarehouse.customers.headshotpro.headline} - "
+                        {dataWarehouse.customers.headshotpro.description}"
+                    </li>
+                    <li>
+                        <strong>Webshare</strong> {dataWarehouse.customers.webshare.headline} - "
+                        {dataWarehouse.customers.webshare.description}"
+                    </li>
+                </ul>
+            </ReaderView>
+        </>
+    )
 }
