@@ -1,5 +1,5 @@
 ---
-title: How to set up OpenAI analytics
+title: How to set up OpenAI observability
 date: 2025-01-24
 author:
   - lior-neu-ner

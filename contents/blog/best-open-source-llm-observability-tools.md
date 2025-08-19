@@ -1,5 +1,5 @@
 ---
-title: 7 best free open source LLM observability tools right now
+title: 7 best free open source LLM analytics tools right now
 date: 2025-04-10
 rootPage: /blog
 sidebar: Blog

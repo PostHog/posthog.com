@@ -195,6 +195,6 @@ Head to the [generations tab](https://app.posthog.com/llm-observability/generati
 
 ## Further reading
 
-- [How to set up OpenAI analytics](/tutorials/openai-observability)
+- [How to set up OpenAI observability](/tutorials/openai-observability)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
 - [Product metrics to track for LLM apps](/product-engineers/llm-product-metrics)

@@ -199,6 +199,6 @@ From here, you can go further by filtering your LLM analytics dashboard, use the
 
 ## Further reading
 
-- [How to set up OpenAI analytics](/tutorials/openai-observability)
+- [How to set up OpenAI observability](/tutorials/openai-observability)
 - [How to set up LLM analytics for Cohere](/tutorials/cohere-analytics)
 - [How to monitor LlamaIndex apps with Langfuse and PostHog](/tutorials/monitor-llama-index-with-langfuse)
