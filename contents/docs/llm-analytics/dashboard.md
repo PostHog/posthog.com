@@ -31,4 +31,4 @@ This dashboard is a great starting point for understanding your LLM usage and pe
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
 
-To dive into specific generation events, click on the [generations](https://us.posthog.com/llm-analytics/generations) or [traces](https://us.posthog.com/llm-analytics/traces) tabs to get a list of each captured by PostHog.
+To dive into specific generation events, click on the [generations](https://app.posthog.com/llm-analytics/generations) or [traces](https://app.posthog.com/llm-analytics/traces) tabs to get a list of each captured by PostHog.
