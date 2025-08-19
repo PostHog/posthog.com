@@ -97,7 +97,6 @@ export const ProductPostItTraining = () => {
             startTask: 'CERTIFICATION_NAME',
             name: 'Post-It Note Certified Applicator',
             organizationId: '37415928',
-            organizationName: 'PostHog',
             issueYear: String(issueYear),
             issueMonth: String(issueMonth),
             expirationYear: String(expirationYear),
