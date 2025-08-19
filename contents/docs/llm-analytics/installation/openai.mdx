@@ -16,11 +16,11 @@ Setting up analytics starts with installing the PostHog SDK for your language. L
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install posthog
 ```
 
-```bash file=TypeScript
+```bash
 npm install @posthog/ai posthog-node
 ```
 
@@ -34,11 +34,11 @@ Install the OpenAI SDK:
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install openai
 ```
 
-```bash file=TypeScript
+```bash
 npm install openai
 ```
 
@@ -50,7 +50,7 @@ npm install openai
 
 <Step title="Initialize PostHog and OpenAI client" badge="required">
 
-In the spot where you initialize the OpenAI SDK, import PostHog and our OpenAI wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to our OpenAI wrapper.
+In the spot where you initialize the OpenAI SDK, import PostHog and our OpenAI wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our OpenAI wrapper.
 
 <MultiLanguage>
 
@@ -95,7 +95,7 @@ phClient.shutdown()
 
 </Step>
 
-<Step title="Make OpenAI calls" badge="required">
+<Step title="Call OpenAI LLMs" badge="required">
 
 Now, when you use the OpenAI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_reasoning_tokens`, `$ai_tools`, `$ai_output_choices`, and `$ai_output_tokens`.
 

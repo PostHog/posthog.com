@@ -16,11 +16,11 @@ Setting up analytics starts with installing the PostHog SDK for your language. L
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install posthog
 ```
 
-```bash file=TypeScript
+```bash
 npm install @posthog/ai posthog-node
 ```
 
@@ -35,11 +35,11 @@ Install the Google Gen AI SDK:
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install google-genai
 ```
 
-```bash file=TypeScript
+```bash
 npm install @google/genai
 ```
 
@@ -51,7 +51,7 @@ npm install @google/genai
 
 <Step title="Initialize PostHog and Google Gen AI client" badge="required">
 
-In the spot where you initialize the Google Gen AI SDK, import PostHog and our Google Gen AI wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to our wrapper.
+In the spot where you initialize the Google Gen AI SDK, import PostHog and our Google Gen AI wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our wrapper.
 
 <MultiLanguage>
 
@@ -89,7 +89,7 @@ const client = new GoogleGenAI({
 
 </Step>
 
-<Step title="Make Google Gen AI calls" badge="required">
+<Step title="Call Google Gen AI LLMs" badge="required">
 
 Now, when you use the Google Gen AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_cache_creation_input_tokens`, `$ai_latency`, `$ai_tools`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
 
@@ -128,8 +128,8 @@ phClient.shutdown()
 
 </MultiLanguage>
 
-> **Notes:** 
-> - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+**Notes:** 
+- If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
 
 </Step>
 

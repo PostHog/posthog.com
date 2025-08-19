@@ -12,6 +12,19 @@ Event Name: `$ai_trace`
 | `$ai_is_error` | **Optional**<br/>Boolean to indicate if the trace encountered an error |
 | `$ai_error` | **Optional**<br/>The error message or object if the trace failed |
 
+### Pseudo-trace Events
+
+When you send generation (`$ai_generation`), span (`$ai_span`), or embedding (`$ai_embedding`) events with a `$ai_trace_id`, PostHog automatically creates a pseudo-trace event that appears in the dashboard as a parent grouping. These pseudo-traces:
+
+- Are not actual events in your data
+- Automatically aggregate metrics from child events (latency, tokens, costs)
+- Provide a hierarchical view of your AI operations
+- Do not require sending an explicit `$ai_trace` event
+
+This means you can either:
+1. Send explicit `$ai_trace` events to control the trace metadata
+2. Let PostHog automatically create pseudo-traces from your generation/span events
+
 ### Example
 
 ```bash
@@ -32,16 +45,3 @@ curl -X POST "<ph_client_api_host>/i/v0/e/" \
          "timestamp": "2025-01-30T12:00:00Z"
      }'
 ```
-
-### Pseudo-trace Events
-
-When you send generation (`$ai_generation`), span (`$ai_span`), or embedding (`$ai_embedding`) events with a `$ai_trace_id`, PostHog automatically creates a pseudo-trace event that appears in the dashboard as a parent grouping. These pseudo-traces:
-
-- Are not actual events in your data
-- Automatically aggregate metrics from child events (latency, tokens, costs)
-- Provide a hierarchical view of your AI operations
-- Do not require sending an explicit `$ai_trace` event
-
-This means you can either:
-1. Send explicit `$ai_trace` events to control the trace metadata
-2. Let PostHog automatically create pseudo-traces from your generation/span events

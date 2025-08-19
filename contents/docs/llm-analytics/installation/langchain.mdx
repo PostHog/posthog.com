@@ -16,11 +16,11 @@ Setting up analytics starts with installing the PostHog SDK for your language. L
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install posthog
 ```
 
-```bash file=TypeScript
+```bash
 npm install @posthog/ai posthog-node
 ```
 
@@ -34,11 +34,11 @@ Install the LangChain and OpenAI Python SDKs:
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install langchain openai langchain-openai
 ```
 
-```bash file=TypeScript
+```bash
 npm install langchain @langchain/core @posthog/ai
 ```
 
@@ -50,7 +50,9 @@ npm install langchain @langchain/core @posthog/ai
 
 <Step title="Initialize PostHog and LangChain" badge="required">
 
-In the spot where you make your OpenAI calls, import PostHog, LangChain, and our LangChain `CallbackHandler`. Initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to the `CallbackHandler` along with (optionally) a user distinct ID, trace ID, PostHog properties, [groups](/docs/product-analytics/group-analytics), and privacy mode.
+In the spot where you make your OpenAI calls, import PostHog, LangChain, and our LangChain `CallbackHandler`. Initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to the `CallbackHandler`.
+
+Optionally, you can provide a user distinct ID, trace ID, PostHog properties, [groups](/docs/product-analytics/group-analytics), and privacy mode.
 
 <MultiLanguage>
 
@@ -103,7 +105,7 @@ const callbackHandler = new LangChainCallbackHandler({
 
 </Step>
 
-<Step title="Make LangChain calls" badge="required">
+<Step title="Call LangChain" badge="required">
 
 When you invoke your chain, pass the `callback_handler` in the `config` as part of your `callbacks`:
 

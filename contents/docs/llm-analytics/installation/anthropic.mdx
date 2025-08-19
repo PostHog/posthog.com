@@ -16,11 +16,11 @@ Setting up analytics starts with installing the PostHog SDK for your language. L
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install posthog
 ```
 
-```bash file=TypeScript
+```bash
 npm install @posthog/ai posthog-node
 ```
 
@@ -34,11 +34,11 @@ Install the Anthropic SDK:
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install anthropic
 ```
 
-```bash file=TypeScript
+```bash
 npm install @anthropic-ai/sdk
 ```
 
@@ -50,7 +50,7 @@ npm install @anthropic-ai/sdk
 
 <Step title="Initialize PostHog and the Anthropic wrapper" badge="required">
 
-In the spot where you initialize the Anthropic SDK, import PostHog and our Anthropic wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to our Anthropic wrapper.
+In the spot where you initialize the Anthropic SDK, import PostHog and our Anthropic wrapper, initialize PostHog with your project API key and host from [your project settings](https://app.posthog.com/settings/project), and pass it to our Anthropic wrapper.
 
 <MultiLanguage>
 
@@ -90,7 +90,7 @@ const client = new Anthropic({
 
 </Step>
 
-<Step title="Make Anthropic calls" badge="required">
+<Step title="Call Anthropic LLMs" badge="required">
 
 Now, when you use the Anthropic SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_cache_read_input_tokens`, `$ai_cache_creation_input_tokens`, `$ai_latency`, `$ai_tools`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`.
 
@@ -139,9 +139,9 @@ phClient.shutdown()
 
 </MultiLanguage>
 
-> **Notes:** 
-> - This also works when message streams are used (e.g. `stream=True` or `client.messages.stream(...)`).
-> - If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+**Notes:** 
+- This also works when message streams are used (e.g. `stream=True` or `client.messages.stream(...)`).
+- If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
 
 </Step>
 

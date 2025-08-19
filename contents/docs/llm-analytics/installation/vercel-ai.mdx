@@ -16,11 +16,11 @@ Setting up analytics starts with installing the PostHog SDK for your language. L
 
 <MultiLanguage>
 
-```bash file=Python
+```bash
 pip install posthog
 ```
 
-```bash file=TypeScript
+```bas
 npm install @posthog/ai posthog-node
 ```
 
@@ -42,7 +42,7 @@ npm install ai @ai-sdk/openai
 
 <Step title="Initialize PostHog and Vercel AI" badge="required">
 
-In the spot where you initialize the Vercel AI SDK, import PostHog and our `withTracing` wrapper, initialize PostHog with your project API key and host (from [your project settings](https://us.posthog.com/settings/project)), and pass it to the `withTracing` wrapper.
+In the spot where you initialize the Vercel AI SDK, import PostHog and our `withTracing` wrapper, initialize PostHog with your project API key and host from [your project settings](https://us.posthog.com/settings/project), and pass it to the `withTracing` wrapper.
 
 ```ts
 import { PostHog } from "posthog-node";
@@ -73,7 +73,7 @@ phClient.shutdown()
 
 </Step>
 
-<Step title="Make Vercel AI calls" badge="required">
+<Step title="Call Vercel AI" badge="required">
 
 Now, when you use the Vercel AI SDK, it automatically captures many properties into PostHog including `$ai_input`, `$ai_input_tokens`, `$ai_latency`, `$ai_model`, `$ai_model_parameters`, `$ai_output_choices`, and `$ai_output_tokens`. This works for both `text` and `image` message types.
 
@@ -88,7 +88,7 @@ const { text } = await generateText({
 console.log(text)
 ```
 
-> **Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
+**Note:** If you want to capture LLM events anonymously, **don't** pass a distinct ID to the request. See our docs on [anonymous vs identified events](/docs/data/anonymous-vs-identified-events) to learn more. 
 
 </Step>
 

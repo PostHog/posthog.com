@@ -4044,13 +4044,6 @@ export const docsMenu = {
                     ],
                 },
                 {
-                    name: 'Manual capture',
-                    url: '/docs/llm-analytics/manual-capture',
-                    icon: 'IconCode',
-                    color: 'green',
-                    featured: true,
-                },
-                {
                     name: 'Privacy mode',
                     url: '/docs/llm-analytics/privacy-mode',
                     icon: 'IconLock',
@@ -4105,10 +4098,17 @@ export const docsMenu = {
                     color: 'red',
                 },
                 {
+                    name: 'Manual capture',
+                    url: '/docs/llm-analytics/manual-capture',
+                    icon: 'IconCode',
+                    color: 'green',
+                    featured: true,
+                },
+                {
                     name: 'Tutorials and guides',
                     url: '/docs/llm-analytics/tutorials',
                     icon: 'IconGraduationCap',
-                    color: 'salmon',
+                    color: 'blue',
                     featured: true,
                 },
                 {

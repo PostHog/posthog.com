@@ -1,10 +1,10 @@
-A span is a single action within your application i.e. a function call or vector database search.
+A span is a single action within your application, such as a function call or vector database search.
 
 Event Name: `$ai_span`
 
 | Property | Description |
 |----------|-------------|
-| `$ai_trace_id` | The trace ID (a UUID to group related AI events together)<br/>Must contain only letters, numbers, and special characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code><br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
+| `$ai_trace_id` | The trace ID (a UUID to group related AI events together)<br/>Must contain only letters, numbers, and the following characters: `-`, `_`, `~`, `.`, `@`, `(`, `)`, `!`, `'`, `:`, <code>\|</code><br/>Example: `d9222e05-8708-41b8-98ea-d4a21849e761` |
 | `$ai_input_state` | The input state of the span<br/>Example: `{"query": "search for documents about hedgehogs"}` or any JSON-serializable state |
 | `$ai_output_state` | The output state of the span<br/>Example: `{"results": ["doc1", "doc2"], "count": 2}` or any JSON-serializable state |
 | `$ai_latency` | **Optional**<br/>The latency of the span in seconds<br/>Example: `0.361` |
