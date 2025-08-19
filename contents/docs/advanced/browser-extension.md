@@ -249,7 +249,7 @@ See our [JavaScript web SDK docs](/docs/integrate/client/js) for more details.
 
 ## Using error tracking
 
-The JS SDK disables exception capture from extensions by default because many customers do not want exceptions thrown by an extension running on a customers browser to be tracked.
+The JS SDK disables exception capture from extensions by default because many customers do not want exceptions thrown by an extension running on a customer's browser to be tracked.
 
 As an extension you need to enable extension exception capture as part of the PostHog config options:
 
