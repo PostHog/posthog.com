@@ -1,18 +1,16 @@
 import CloudinaryImage from 'components/CloudinaryImage'
-import Layout from 'components/Layout'
 import React, { useEffect, useRef, useState } from 'react'
 import SEO from 'components/seo'
 import Link from 'components/Link'
-import Tooltip from 'components/Tooltip'
-import { StaticImage } from 'gatsby-plugin-image'
+import Tooltip from 'components/RadixUI/Tooltip'
 import { IconArrowRight, IconMinus, IconPlus, IconRedo } from '@posthog/icons'
 import { CSSTransition } from 'react-transition-group'
 import { CallToAction } from 'components/CallToAction'
-import { useInView } from 'react-intersection-observer'
 import Logo from 'components/Logo'
 import { motion } from 'framer-motion'
-import { SectionHeader, SectionLayout } from 'components/Pricing/Test/Sections'
-import { DebugContainerQuery } from 'components/DebugContainerQuery'
+import Wizard from 'components/Wizard'
+import ScrollArea from 'components/RadixUI/ScrollArea'
+import OSButton from 'components/OSButton'
 
 const them = [
     {
@@ -21,11 +19,11 @@ const them = [
             <>
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-10">
                     <p>
-                        You click ‘contact us’ and type in a bunch of personal information that has nothing to do with
+                        You click 'contact us' and type in a bunch of personal information that has nothing to do with
                         your use of the product.
                     </p>
                     <p>Often times, there's no place to even ask your question.</p>
-                    <p>Your phone number is required, even though they’ll respond by email.</p>
+                    <p>Your phone number is required, even though they'll respond by email.</p>
                 </div>
 
                 <div className="col-span-3 rotate-2 -mt-6 mb-6 relative left-3 @3xl:left-0">
@@ -126,7 +124,7 @@ const them = [
                         There will be a long period of commercial wrangling because they massively inflated the price so
                         they can then discount it heavily.
                     </p>
-                    <p>They will bundle a bunch of value add-stuff you don’t need. 3 year contract is standard.</p>
+                    <p>They will bundle a bunch of value add-stuff you don't need. 3 year contract is standard.</p>
                 </div>
 
                 <div className="col-span-5 text-center -mt-12">
@@ -146,8 +144,8 @@ const them = [
             <>
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
                     <p>
-                        Any legal questions require a ton of time seeking ‘approval’ and coming back with amazing
-                        special exceptions they made that were ‘really painful’ when you know it’s all BS.
+                        Any legal questions require a ton of time seeking 'approval' and coming back with amazing
+                        special exceptions they made that were 'really painful' when you know it's all BS.
                     </p>
                 </div>
 
@@ -192,7 +190,7 @@ const them = [
                 <div className="col-span-4 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-12 @3xl:pb-20">
                     <p>
                         Spend <strong>a few months (!!)</strong> on implementation with yet another person on their
-                        team, because the person who demoed isn’t technical but has to be the person through whom all
+                        team, because the person who demoed isn't technical but has to be the person through whom all
                         comms must flow.
                     </p>
                 </div>
@@ -241,8 +239,10 @@ const them = [
         ),
         cta: (
             <div className="flex flex-col @3xl:flex-row gap-3 my-4">
-                <CallToAction href="https://app.posthog.com/signup">Ew, take me to PostHog, please!</CallToAction>
-                <CallToAction href="/talk-to-a-human" type="outline">
+                <CallToAction href="/start" size="md" state={{ newWindow: true }}>
+                    Ew, take me to PostHog, please!
+                </CallToAction>
+                <CallToAction href="/talk-to-a-human" type="secondary" size="md" state={{ newWindow: true }}>
                     Get a demo (but not like this one!)
                 </CallToAction>
             </div>
@@ -258,17 +258,17 @@ const us = [
             <>
                 <div className="col-span-6 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl pb-8 @3xl:pb-20">
                     <p className="leading-relaxed">
-                        <em>“How much does it cost?”</em> <Link href="/pricing">It’s on our website.</Link>
+                        <em>"How much does it cost?"</em> <Link href="/pricing">It's on our website.</Link>
                         <br />
-                        <em>”How does it work?”</em>{' '}
+                        <em>"How does it work?"</em>{' '}
                         <Link href="https://app.posthog.com/signup">
                             Just sign up and try it - no credit card required.
                         </Link>
                         <br />
-                        <em>”Do you do discounts?”</em>{' '}
-                        <Link href="/handbook/growth/sales/contracts">It’s in our handbook.</Link>
+                        <em>"Do you do discounts?"</em>{' '}
+                        <Link href="/handbook/growth/sales/contracts">It's in our handbook.</Link>
                         <br />
-                        <em>”Can I get a quick demo?”</em>{' '}
+                        <em>"Can I get a quick demo?"</em>{' '}
                         <Link href="/demo">Watch a pre-recorded demo on our website.</Link>
                     </p>
                     <p>
@@ -299,11 +299,11 @@ const us = [
                 <div className="col-span-5 pl-1 @3xl:pl-9 [&_p]:mb-2 max-w-2xl @3xl:pb-24">
                     <p>
                         Get booked on a demo call with a technical person who will spend 90% of the call in the PostHog
-                        app, not chatting about our vision. They will use the info you’ve shared to customize the demo.
+                        app, not chatting about our vision. They will use the info you've shared to customize the demo.
                     </p>
                     <p>
-                        Yes, we’ll even talk to you about how to manage your costs! If it turns out we can help you over
-                        a couple of emails, we’ll do that instead - less time in meetings for you, means more time
+                        Yes, we'll even talk to you about how to manage your costs! If it turns out we can help you over
+                        a couple of emails, we'll do that instead - less time in meetings for you, means more time
                         building.
                     </p>
                 </div>
@@ -329,15 +329,15 @@ const us = [
                         your specific use case.
                     </p>
                     <p>
-                        If you’re looking at spending $20k+ annually with us, we’ll get you into a shared Slack channel
-                        with our team. <strong>The goal is to get you into a short trial period</strong> where you’re
+                        If you're looking at spending $20k+ annually with us, we'll get you into a shared Slack channel
+                        with our team. <strong>The goal is to get you into a short trial period</strong> where you're
                         implementing and seeing value from PostHog{' '}
                         <em>
                             <strong>within a week</strong>
                         </em>{' '}
                         - still free!
                     </p>
-                    <p>If PostHog isn’t the right fit for you, we’ll let you know our honest opinion!</p>
+                    <p>If PostHog isn't the right fit for you, we'll let you know our honest opinion!</p>
                 </div>
 
                 <div className="col-span-4">
@@ -392,9 +392,11 @@ const us = [
                     <p>This is going to work out well.</p>
 
                     <div className="flex flex-col @3xl:flex-row gap-3 my-4">
-                        <CallToAction href="https://app.posthog.com/signup">Get started - free</CallToAction>
-                        <CallToAction href="/demo" type="outline">
-                            Get a demo (just like this one!)
+                        <CallToAction href="/start" size="md" state={{ newWindow: true }}>
+                            Get started - free
+                        </CallToAction>
+                        <CallToAction href="/demo" type="secondary" size="md" state={{ newWindow: true }}>
+                            Watch a demo
                         </CallToAction>
                     </div>
 
@@ -479,9 +481,6 @@ const AccordionItem = ({
                                     type="secondary"
                                     className="w-full @3xl:w-auto"
                                 >
-                                    <span className="mr-2 bg-accent border border-primary px-1.5 rounded border-b-2 inline-flex text-sm font-medium font-code">
-                                        N
-                                    </span>
                                     Next step
                                     <IconArrowRight className="size-4 inline-block ml-1" />
                                 </CallToAction>
@@ -561,7 +560,10 @@ const Accordion = ({ items, type, keyboardContainerRef }) => {
     )
 }
 
-function Sales() {
+export default function Sales() {
+    const [slideIndex, setSlideIndex] = useState(0)
+    const keyboardContainerRef = useRef(null)
+
     const companies = [
         'BureaucraticSoft Inc.',
         'Monolith Enterprises',
@@ -577,6 +579,7 @@ function Sales() {
 
     const [companyName, setCompanyName] = useState('')
     const [show, setShow] = useState(false)
+    const companyNameRef = useRef(null)
 
     const updateCompanyName = () => {
         setShow(false)
@@ -595,62 +598,66 @@ function Sales() {
         updateCompanyName()
     }, [])
 
-    const [themRef, themInView, themEntry] = useInView({ threshold: 0.5 })
-    const [usRef, usInView, usEntry] = useInView({ threshold: 0.5 })
-    const keyboardContainerRef = useRef(null)
-    const companyNameRef = useRef(null)
+    const totalSlides = 4
+    const isFirst = slideIndex === 0
+    const isLast = slideIndex === totalSlides - 1
 
-    useEffect(() => {
-        const keyboardContainer =
-            themInView || usInView
-                ? themEntry?.intersectionRatio > usEntry?.intersectionRatio
-                    ? themEntry?.target
-                    : usEntry?.target
-                : null
-        if (keyboardContainer) {
-            keyboardContainerRef.current = keyboardContainer
-        }
-    }, [themInView, usInView])
+    const slides = [
+        // Slide 1: Intro
+        {
+            content: (
+                <div className="prose text-primary flex-1 p-8">
+                    <h1 className="m-0 p-0 text-2xl text-secondary">Compare the sales process:</h1>
+                    <h2 className="text-4xl !m-0 p-0">
+                        <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
+                        <span className="inline-flex items-center gap-2 whitespace-nowrap relative top-3">
+                            <Logo noText className="h-12 inline-block" /> PostHog
+                        </span>
+                    </h2>
+                    <div className="grid @3xl:grid-cols-2 @3xl:gap-8 items-center @3xl:items-start">
+                        <div className="order-2 @3xl:order-1">
+                            <h3>
+                                Call us unhinged, but we believe pricing pages should have actual, um, <em>pricing?</em>
+                            </h3>
+                            <p>
+                                Most SaaS companies want to feel out how much money they can squeeze out of you.{' '}
+                                <strong>PostHog operates differently.</strong> We're more like a utility where you pay
+                                for what you use. No extra markup - everyone pays the same rates (unless you{' '}
+                                <Tooltip
+                                    trigger={
+                                        <span className="relative cursor-help border-b border-dashed border-primary">
+                                            qualify for a discount
+                                        </span>
+                                    }
+                                    delay={0}
+                                >
+                                    <p className="max-w-xs leading-normal pb-0 mb-0">
+                                        Discounts available to early-stage startups, non-profits, and customers who pay
+                                        annually.
+                                    </p>
+                                </Tooltip>
+                                )!
+                            </p>
 
-    return (
-        <SectionLayout id="sales">
-            <SectionHeader>
-                <h2 className="@md:flex items-center gap-2">
-                    Sales: <span className="text-red dark:text-yellow">[Everyone else]</span> vs.{' '}
-                    <span className="inline-flex items-center gap-2 whitespace-nowrap">
-                        <Logo noText className="h-12 inline-block" /> PostHog
-                    </span>
-                </h2>
-            </SectionHeader>
-            <div className="overflow-x-hidden">
-                <div className="grid @3xl:grid-cols-2 gap-4 items-center">
-                    <div className="order-2 @3xl:order-1">
-                        <h3 className="mt-0">
-                            Call us unhinged, but we believe pricing pages should have actual, um, <em>pricing?</em>
-                        </h3>
-                        <p className="mb-2">
-                            Most SaaS companies want to feel out how much money they can squeeze out of you.{' '}
-                            <strong>PostHog operates differently.</strong> We’re more like a utility where you pay for
-                            what you use. No extra markup - everyone pays the same rates*.
-                        </p>
-                        <p className="opacity-60 text-sm mb-0">
-                            *Unless you qualify for a{' '}
-                            <Tooltip
-                                content="Discounts available to early-stage startups, non-profits, and customers who pay annually."
-                                className="border-b-2 pb-0.5 border-dashed border-input"
-                            >
-                                <span className="relative cursor-help">discount</span>
-                            </Tooltip>
-                        </p>
-                    </div>
-                    <div className="bg-tan rounded-md relative order-1 @3xl:order-2 pt-4 pl-8">
-                        <div className="">
+                            <p>
+                                Go with us on a short journey to compare the sales process that most companies follow
+                                with how we do things 'round here.
+                            </p>
+
+                            <p className="text-sm text-secondary">
+                                <strong>Next up:</strong> <em>How [everyone else] does sales</em>
+                            </p>
+
+                            <OSButton variant="primary" onClick={() => setSlideIndex(1)}>
+                                Let's go!
+                            </OSButton>
+                        </div>
+                        <div className="bg-tan rounded-md relative order-1 @3xl:order-2 mt-8 pt-4 pl-8">
                             <div className="dark:hidden">
                                 <CloudinaryImage
                                     quality={100}
                                     placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-light.png"
-                                    className=""
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
@@ -661,20 +668,22 @@ function Sales() {
                                     quality={100}
                                     placeholder="none"
                                     src="https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/sales/phone-hog-dark.png"
-                                    className=""
                                     loading="eager"
                                     objectPosition="left top"
                                     objectFit="cover"
                                 />
                             </div>
                         </div>
-                        <div className="hidden xl:block absolute left-full -bottom-10 w-screen bg-[url('../images/sales/phone-cord.png')] h-[15px] -ml-1 bg-contain bg-repeat-x"></div>
                     </div>
                 </div>
-
-                <div className="@3xl:pt-8">
-                    <div className="flex flex-col items-center mb-10 mx-auto">
-                        <h2 className="mb-1 text-center relative">
+            ),
+        },
+        // Slide 2: How sales works at typical companies
+        {
+            content: (
+                <div className="flex-1 px-8 py-8">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="mb-6 text-center text-2xl font-bold">
                             How the sales process works at{' '}
                             <div className="inline-block relative after:absolute after:-bottom-5 after:left-0 after:right-8 after:content-['[Typical_bland_enterprise_SaaS_company]'] after:text-xs after:text-secondary after:font-normal after:tracking-normal">
                                 <button
@@ -698,33 +707,94 @@ function Sales() {
                                 </span>
                             </div>
                         </h2>
-                    </div>
-                    <div className="not-prose" ref={themRef}>
-                        <Accordion items={them} keyboardContainerRef={keyboardContainerRef} />
-                    </div>
-
-                    <div className="py-12">
-                        <h2 className="flex justify-center items-center mb-6">
-                            How <Logo noText className="inline-block mt-[-2px] ml-2 mr-1.5" /> PostHog does sales
-                        </h2>
-                        <div ref={usRef}>
-                            <Accordion items={us} keyboardContainerRef={keyboardContainerRef} />
+                        <div className="not-prose">
+                            <Accordion items={them} keyboardContainerRef={keyboardContainerRef} />
                         </div>
-
-                        <p className="mb-0 text-sm text-secondary text-balance text-center">
-                            <em>
-                                The above is brought to you by the same people who thought{' '}
-                                <Link href="/terms" state={{ newWindow: true }}>
-                                    making the terms and conditions fun
-                                </Link>{' '}
-                                was a good idea...
-                            </em>
-                        </p>
                     </div>
                 </div>
-            </div>
-        </SectionLayout>
+            ),
+        },
+        // Slide 3: How PostHog does sales
+        {
+            content: (
+                <div className="flex-1 px-8 py-8">
+                    <div className="max-w-5xl mx-auto">
+                        <h2 className="flex justify-center items-center mb-6 text-2xl font-bold">
+                            How <Logo noText className="inline-block mt-[-2px] ml-2 mr-1.5" /> PostHog does sales
+                        </h2>
+                        <div className="not-prose">
+                            <Accordion items={us} keyboardContainerRef={keyboardContainerRef} />
+                        </div>
+                    </div>
+                </div>
+            ),
+        },
+        // Slide 4: Final message
+        {
+            content: (
+                <div className="prose prose-sm flex-1 px-8 py-12">
+                    <div className="max-w-2xl mx-auto text-center">
+                        <h2>And that's how we do sales</h2>
+                        <p className="mb-8 text-balance">
+                            This presentation has been brought to you by the same people who thought{' '}
+                            <Link to="/terms" state={{ newWindow: true }}>
+                                making the terms and conditions fun
+                            </Link>{' '}
+                            was a good idea...
+                        </p>
+                        <div className="flex flex-col @3xl:flex-row gap-4 justify-center">
+                            <CallToAction href="/start" size="md" state={{ newWindow: true }}>
+                                Get started - free
+                            </CallToAction>
+                            <CallToAction href="/demo" type="secondary" size="md" state={{ newWindow: true }}>
+                                Watch a demo
+                            </CallToAction>
+                        </div>
+                    </div>
+                </div>
+            ),
+        },
+    ]
+
+    return (
+        <>
+            <SEO
+                title="How we do sales"
+                description="Most SaaS companies want to feel out how much money they can squeeze out of you. PostHog operates differently."
+                image={`/images/og/sales.jpg`}
+            />
+            <Wizard
+                leftNavigation={
+                    <>
+                        {!isFirst ? (
+                            <CallToAction type="secondary" size="sm" onClick={() => setSlideIndex(slideIndex - 1)}>
+                                Previous
+                            </CallToAction>
+                        ) : (
+                            <span />
+                        )}
+                    </>
+                }
+                rightNavigation={
+                    <>
+                        {!isLast ? (
+                            <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
+                                Next
+                            </CallToAction>
+                        ) : (
+                            <Link to="/" state={{ newWindow: true }}>
+                                <CallToAction type="primary" size="sm">
+                                    Done
+                                </CallToAction>
+                            </Link>
+                        )}
+                    </>
+                }
+            >
+                <ScrollArea className="flex-1 w-full [&>div>div]:h-full [&>div>div]:!flex [&>div>div]:flex-col">
+                    {slides[slideIndex].content}
+                </ScrollArea>
+            </Wizard>
+        </>
     )
 }
-
-export default Sales

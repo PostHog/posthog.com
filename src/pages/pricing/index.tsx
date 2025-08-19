@@ -10,7 +10,6 @@ import { FAQ } from 'components/Products/FAQ'
 import { FAQs } from 'components/Pricing/FAQs'
 import CTA from 'components/Home/CTA.js'
 import Philosophy from './philosophy'
-import Sales from '../sales'
 import { useLocation } from '@reach/router'
 import SEO from 'components/seo'
 import ReaderView from 'components/ReaderView'
@@ -32,7 +31,6 @@ export default function Pricing() {
         { url: 'calculator', value: 'Pricing calculator', depth: 0 },
         { url: 'addons', value: 'Add-ons', depth: 0 },
         { url: 'g2-reviews', value: 'Reviews', depth: 0 },
-        { url: 'sales', value: 'How we do "sales"', depth: 0 },
         { url: 'faq', value: 'FAQ', depth: 0 },
         { url: 'cta', value: 'Shameless CTA', depth: 0 },
     ]
@@ -174,8 +172,6 @@ export default function Pricing() {
             <Reviews />
 
             <Philosophy />
-
-            <Sales />
 
             <SectionLayout id="faq" className="mb-12">
                 <h2 className="text-2xl m-0 mb-6 pb-6 border-b border-primary">Pricing FAQ</h2>
