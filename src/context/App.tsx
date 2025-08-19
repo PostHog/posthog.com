@@ -420,7 +420,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/ick': {
+    '/vibe-check': {
         size: {
             min: {
                 width: 750,

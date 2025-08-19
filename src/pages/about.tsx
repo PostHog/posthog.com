@@ -88,6 +88,7 @@ export default function About({ data }: AboutProps) {
                     onValueChange={handleTabChange}
                     frame={false}
                     tabContainerClassName={tabContainerClassName}
+                    tabContentClassName="px-4 @xl:px-8"
                     className={className}
                     triggerDataScheme="primary"
                 />

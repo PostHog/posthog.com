@@ -47,8 +47,6 @@ But our approach to building PostHog is very different.
 <div class="grid @lg:grid-cols-2 gap-4">
 <div>
 
-### We just do the right thing
-
 We're building the company we've always wanted to work for. This means rejecting all the annoying parts of the SaaS industry that have somehow become industry-standard.
 
 If it gives you the ick, you know it gives us the ick too.
@@ -60,6 +58,8 @@ You can sum it up our ideology with this: we try to treat you how _we'd_ want to
 <LottieAnimation variant="different" />
 
 </div>
+
+### We just do the right thing
 
 <div class="@xl:float-right @xl:ml-6 mx-auto @xl:mx-0">
 
@@ -193,14 +193,28 @@ We have over _<CustomerCount /> customers_ using our products. Just under a quar
 
 Whether you're looking to bring PostHog into your business – or if you're looking to build products with us – we hope you leave our portal on the internet with the understanding that we're here to build a generational company.
 
-This isn't a bait-and-switch scheme or an attempt to exit in a few years. We're building the company we've always wanted to work for – and the type of organization that we'd want to buy software from.
+This isn't a bait-and-switch scheme or an attempt to exit in a few years. **We're building the company we've always wanted to work for** – and the type of organization that we'd want to buy software from.
 
 If we haven't convinced you yet, come back to our site in a few months. It's almost guaranteed we'll have a few new products by then.
 
 <div class="flex gap-1 items-center mt-6 mb-4">
     <James class="h-12" />
-    <Plus class="h-6" />
-    <Tim class="h-10" />
+    {/* <Plus class="h-6" />
+    <Tim class="h-10" /> */}
 </div>
 
-P.S. We've also got some <Link to="/merch" state={{ newWindow: true}}>cool company merch</Link>. It's made of high quality materials so you'll actually want to wear it.
+<div class="bg-accent rounded border border-primary p-4 pr-44 flex gap-4 relative mt-4">
+
+<p class="flex-1 !m-0">
+    P.S. We've also got some{' '}
+    <Link to="/merch" state={{ newWindow: true }}>
+        cool company merch
+    </Link>
+    . It's made of high quality materials so you'll actually want to wear it.
+</p>
+
+<div class="absolute right-2 -top-8 size-36 rotate-3 rounded overflow-hidden">
+<OSButton asLink to="/merch?product=data-warehouse-t-shirt" state={{ newWindow: true }} className="bg-primary border border-primary active:bg-primary">
+<img src="https://res.cloudinary.com/dmukukwp6/image/upload/h_500,c_limit,q_auto,f_auto/warehouse_5d02e5d7b0.webp" alt="PostHog warehouse t-shirt" class="" /></OSButton>
+</div>
+</div>

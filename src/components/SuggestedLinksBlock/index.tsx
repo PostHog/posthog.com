@@ -52,7 +52,7 @@ const SUGGESTED_LINKS: Record<string, SuggestedLink> = {
     image: "https://res.cloudinary.com/dmukukwp6/image/upload/commitment_issues_d433b343b5.png",
     imageAlt: "Hogzilla",
     buttonText: "Find out",
-    buttonLink: "/ick",
+    buttonLink: "/vibe-check",
     imageSize: "w-28",
     imagePosition: ""
   },
