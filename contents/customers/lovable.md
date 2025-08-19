@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/lovable_light_png_cb215659ae.png
 featuredImage: >-
-  https://res.cloudinary.com/dmukukwp6/image/upload/lovable_ca8b63c28c.svg
+  https://res.cloudinary.com/dmukukwp6/image/upload/lovable_ca8b63c28c_ef5bcb4589.png
 industries:
   - Devtool
 users:
