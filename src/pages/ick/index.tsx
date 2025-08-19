@@ -9,37 +9,20 @@ import SEO from 'components/seo'
 import OSButton from 'components/OSButton'
 import { DebugContainerQuery } from 'components/DebugContainerQuery'
 
+import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
+
 const FinalSlide = () => (
     <div className="flex-1 px-4">
         <div className="text-primary flex-1 w-full h-full flex flex-col items-center justify-center">
             <div className="max-w-2xl text-center">
-                <h2 className="text-4xl font-bold mb-6">Congrats, you made it.</h2>
-                <p className="mb-8 text-secondary">
+                <h2 className="text-4xl font-bold mb-6">Congrats, you survived!</h2>
+                <p className="text-secondary">
                     <strong>Thanks for joining us on this journey of SaaS monotony.</strong> If you were triggered by
                     any of these classic sales tactics, then maybe PostHog is right for you after all.
                 </p>
-                <p>Further reading:</p>
+                <p className="text-secondary text-sm mt-4">If you enjoyed this, you might also like:</p>
 
-                <div className="grid grid-cols-3 divide-x divide-primary">
-                    <div>
-                        <p>How we (don't) do sales</p>
-                        <OSButton asLink to="/sales" variant="secondary" state={{ newWindow: true }} size="md">
-                            Take the tour
-                        </OSButton>
-                    </div>
-                    <div>
-                        <p>Usage-based pricing</p>
-                        <OSButton asLink to="/pricing" variant="secondary" state={{ newWindow: true }} size="md">
-                            Explore pricing
-                        </OSButton>
-                    </div>
-                    <div>
-                        <p>Want to work here?</p>
-                        <OSButton asLink to="/careers" variant="secondary" state={{ newWindow: true }} size="md">
-                            View careers
-                        </OSButton>
-                    </div>
-                </div>
+                <SuggestedLinksBlock links={["sales", "pricing", "careers"]} />
             </div>
         </div>
     </div>
@@ -73,7 +56,7 @@ function Slide({ card, slideIndex }: { card: any; slideIndex: number }) {
     )
 }
 
-export default function Cards() {
+export default function Ick() {
     const [slideIndex, setSlideIndex] = useState(0)
 
     const cards = HomepageCards

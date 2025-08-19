@@ -11,6 +11,7 @@ import { motion } from 'framer-motion'
 import Wizard from 'components/Wizard'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import OSButton from 'components/OSButton'
+import SuggestedLinksBlock from 'components/SuggestedLinksBlock'
 
 const them = [
     {
@@ -431,26 +432,23 @@ const AccordionItem = ({
 
     return (
         <li
-            className={`border-t border-primary first:border-transparent first:rounded-t last:rounded-b relative ${
-                isOpen ? 'active bg-light dark:bg-dark shadow-lg z-10 overflow-hidden' : 'inactive '
-            }`}
+            className={`border-t border-primary first:border-transparent first:rounded-t last:rounded-b relative ${isOpen ? 'active bg-light dark:bg-dark shadow-lg z-10 overflow-hidden' : 'inactive '
+                }`}
         >
             <button
                 onClick={onClick}
-                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${
-                    isOpen
-                        ? 'pt-4 pb-2 z-20'
-                        : 'text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
-                }`}
+                className={`text-left pl-3 pr-4 cursor-pointer w-full flex justify-between items-center transition-all rounded relative ${isOpen
+                    ? 'pt-4 pb-2 z-20'
+                    : 'text-secondary hover:text-primary py-2 hover:bg-accent hover:scale-[1.0025] hover:top-[-.5px] active:scale-[.9999] active:top-[3px]'
+                    }`}
             >
                 <span className="flex gap-2 items-center">
                     <span className="inline-flex w-8 h-8 [flex:0_0_2rem] justify-center items-center p-1 font-semibold rounded-full bg-accent">
                         {number}
                     </span>
                     <span
-                        className={`transition-all leading-tight ${
-                            isOpen ? 'font-bold text-lg @3xl:text-xl' : 'font-semibold text-[17px]'
-                        }`}
+                        className={`transition-all leading-tight ${isOpen ? 'font-bold text-lg @3xl:text-xl' : 'font-semibold text-[17px]'
+                            }`}
                     >
                         {title}
                     </span>
@@ -563,6 +561,7 @@ const Accordion = ({ items, type, keyboardContainerRef }) => {
 export default function Sales() {
     const [slideIndex, setSlideIndex] = useState(0)
     const keyboardContainerRef = useRef(null)
+    const [closing, setClosing] = useState(false)
 
     const companies = [
         'BureaucraticSoft Inc.',
@@ -708,7 +707,7 @@ export default function Sales() {
                             </div>
                         </h2>
                         <div className="not-prose">
-                            <Accordion items={them} keyboardContainerRef={keyboardContainerRef} />
+                            <Accordion key="them-accordion" items={them} keyboardContainerRef={keyboardContainerRef} />
                         </div>
                     </div>
                 </div>
@@ -723,7 +722,7 @@ export default function Sales() {
                             How <Logo noText className="inline-block mt-[-2px] ml-2 mr-1.5" /> PostHog does sales
                         </h2>
                         <div className="not-prose">
-                            <Accordion items={us} keyboardContainerRef={keyboardContainerRef} />
+                            <Accordion key="us-accordion" items={us} keyboardContainerRef={keyboardContainerRef} />
                         </div>
                     </div>
                 </div>
@@ -732,26 +731,24 @@ export default function Sales() {
         // Slide 4: Final message
         {
             content: (
-                <div className="prose prose-sm flex-1 px-8 py-12">
-                    <div className="max-w-2xl mx-auto text-center">
-                        <h2>And that's how we do sales</h2>
-                        <p className="mb-8 text-balance">
-                            This presentation has been brought to you by the same people who thought{' '}
-                            <Link to="/terms" state={{ newWindow: true }}>
-                                making the terms and conditions fun
-                            </Link>{' '}
-                            was a good idea...
-                        </p>
-                        <div className="flex flex-col @3xl:flex-row gap-4 justify-center">
-                            <CallToAction href="/start" size="md" state={{ newWindow: true }}>
-                                Get started - free
-                            </CallToAction>
-                            <CallToAction href="/demo" type="secondary" size="md" state={{ newWindow: true }}>
-                                Watch a demo
-                            </CallToAction>
+                <>
+                    <div className="prose prose-sm px-8">
+                        <div className="max-w-2xl mx-auto text-center">
+                            <h2 className="text-4xl font-bold mb-6">And that's how we do sales</h2>
+                            <p className="mb-8 text-balance">
+                                This presentation has been brought to you by the same people who thought{' '}
+                                <Link to="/terms" state={{ newWindow: true }}>
+                                    making the terms and conditions fun
+                                </Link>{' '}
+                                was a good idea...
+                            </p>
+
                         </div>
                     </div>
-                </div>
+                    <div className="w-full max-w-2xl mx-auto">
+                        <SuggestedLinksBlock links={["hate", "pricing", "careers"]} />
+                    </div>
+                </>
             ),
         },
     ]
@@ -779,14 +776,16 @@ export default function Sales() {
                     <>
                         {!isLast ? (
                             <CallToAction type="primary" size="sm" onClick={() => setSlideIndex(slideIndex + 1)}>
-                                Next
+                                {slideIndex === 0
+                                    ? "See how [everyone else] does sales"
+                                    : slideIndex === 1
+                                        ? "See how PostHog does sales"
+                                        : "Next"}
                             </CallToAction>
                         ) : (
-                            <Link to="/" state={{ newWindow: true }}>
-                                <CallToAction type="primary" size="sm">
-                                    Done
-                                </CallToAction>
-                            </Link>
+                            <OSButton onClick={() => setClosing(true)} size="md" variant="primary">
+                                Done
+                            </OSButton>
                         )}
                     </>
                 }

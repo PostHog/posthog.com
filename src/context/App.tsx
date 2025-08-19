@@ -420,7 +420,7 @@ const appSettings: AppSettings = {
             center: true,
         },
     },
-    '/cards': {
+    '/ick': {
         size: {
             min: {
                 width: 750,
