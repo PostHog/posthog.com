@@ -1,5 +1,5 @@
 ---
-title: How Lovable builds better agents with LLM analytics and feature flags
+title: How Lovable builds better agents with LLM analytics and experimentation
 customer: Lovable
 logo: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/lovable_dark_png_bf5d7c603c.png
