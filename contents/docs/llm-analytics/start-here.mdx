@@ -4,7 +4,7 @@ hideAnchor: true
 ---
 
 import { QuestLog, QuestLogItem } from 'components/Docs/QuestLog'
-import { IconGraph, IconWarning, IconToggle  } from '@posthog/icons'
+import { IconGraph, IconWarning, IconRewindPlay  } from '@posthog/icons'
 import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.tsx'
 
 
@@ -22,7 +22,6 @@ import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.t
   - 🤖 Model performance (cost, latency and error rates)
   - 🔍 Full traces for when you need to go detective mode
   - 💰 How much each chat/user/organization is costing you
-
 
   The first step is to install a PostHog SDK to capture conversations, requests, and responses from an LLM provider.
 
@@ -48,7 +47,7 @@ import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.t
   icon="IconRecord"
 >
 
-  Once you've installed the SDK, every LLM call automatically becomes a **generation** – a detailed record of what went in and what came out. Each generation captures:
+  Once you've installed the SDK, every LLM call automatically becomes a [generation](/docs/llm-analytics/generations) – a detailed record of what went in and what came out. Each generation captures:
 
   - 📝 Complete conversation context (inputs and outputs)
   - 🔢 Token counts and usage metrics  
@@ -56,11 +55,33 @@ import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.t
   - 💸 Automatic cost calculation based on model pricing
   - 🔗 Trace IDs to group related LLM calls together
 
-
-  PostHog's SDK wrappers handle all the heavy lifting – just use your LLM provider as normal and we'll capture everything automatically. You can also add custom properties like user IDs, conversation IDs, or feature flags to understand usage patterns.
+PostHog's SDK wrappers handle all the heavy lifting. Use your LLM provider as normal and we'll capture everything automatically. 
+  
+You can also add custom properties like user IDs, conversation IDs, or feature flags to understand usage patterns.
 
   <CallToAction type="primary" to="/docs/llm-analytics/generations">
-    Learn more
+    Learn about generations
+  </CallToAction>
+
+</QuestLogItem>
+
+<QuestLogItem 
+  title="Analyze model usage"
+  subtitle="Required"
+  icon="IconLineGraph"
+>
+
+  PostHog's LLM analytics dashboard provides a comprehensive overview of your LLM performance. Break usage metrics down by model, latency, cost, and more.
+  
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_15_at_08_31_29_4e1702243d.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_15_at_08_31_11_66aa4e13b7.png"
+    alt="LLM dashboard"
+    classes="rounded"
+/>
+
+  <CallToAction type="primary" to="/docs/llm-analytics/dashboard">
+    Anyalze LLM performance
   </CallToAction>
 
 </QuestLogItem>
@@ -75,38 +96,48 @@ import LLMsInstallationPlatforms from './_snippets/llms-installation-platforms.t
 
   ### <IconGraph className="text-blue w-7 -mt-1 inline-block"/>  Product analytics
 
-  The best part? All this data gets sent as regular PostHog events, where you can slice, dice, and analyze it in dashboards, insights, and alerts.
+  All LLM analytics are captured as standard PostHog events, which means you can create dashboards, trends, funnels, custom SQL queries, alerts, and more. 
 
-  content tk...
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_da40edc407.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_insights_dark_558f8f2cd8.png"
+    alt="LLM observability dashboard"
+    classes="rounded"
+/>
 
   ### <IconWarning className="text-orange w-7 -mt-1 inline-block"/>  Error tracking
-  
-  content tk...
 
-  ### <IconToggle className="text-seagreen w-7 -mt-1 inline-block"/>  Feature flags
+  LLM generated errors are automatically captured in PostHog's [error tracking](/docs/error-tracking) for you to monitor, debug, and resolve.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_4edcb7d7a1.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_error_dark_a298d3f2b7.png"
+    alt="LLM analytics error tracking"
+    classes="rounded"
+/>
+
+  ### <IconRewindPlay className="text-yellow w-7 -mt-1 inline-block"/> Session replay
   
-  content tk...
+  Watch [session replays](/docs/feature-flags) to see exactly how users interact with your LLM features.
+
+  <ProductScreenshot
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_95b9268668.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_session_replay_dark_767332d926.png"
+    alt="LLM analytics session replay"
+    classes="rounded"
+/>
 
 </QuestLogItem>
 
 <QuestLogItem 
   title="Use for free"
-  subtitle="Free 1M events/mo"
+  subtitle="Open beta"
   icon="IconPiggyBank"
 >
 
-  PostHog's LLM analytics is built to be cost-effective. With a generous free tier and transparent usage-based pricing, more than 90% of companies use PostHog completely for free. 
-  
-  LLM analytics events priced the same as regular PostHog data events, making it roughly **10x cheaper** than other LLM analytics tools.
+  LLM analytics is currently in beta, with events priced the same as regular PostHog data events, which comes with a generous free tier and transparent usage-based pricing. 
 
-  ### TL;DR 💸 
-
-  - No credit card required to start
-  - Free 1M events per month are free
-  - Above 100k we have usage-based pricing starting at $0.00005/event with discounts as volume increases
-  - Set billing limits to avoid surprise charges
-  - See our [pricing page](/pricing) for more up-to-date details
-
+  No credit card required to start. To access LLM analytics, enable the [feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability) in your PostHog account. 
 
   --- 
 

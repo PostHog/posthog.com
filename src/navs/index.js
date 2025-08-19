@@ -4061,17 +4061,17 @@ export const docsMenu = {
                     name: 'Concepts',
                 },
                 {
+                    name: 'Generations',
+                    url: '/docs/llm-analytics/generations',
+                    icon: 'IconAIText',
+                    color: 'seagreen',
+                    featured: true,
+                },
+                {
                     name: 'Traces',
                     url: '/docs/llm-analytics/traces',
                     icon: 'IconUserPaths',
                     color: 'orange',
-                    featured: true,
-                },
-                {
-                    name: 'Generations',
-                    url: '/docs/llm-analytics/generations',
-                    icon: 'IconAIText',
-                    color: 'yellow',
                     featured: true,
                 },
                 {
