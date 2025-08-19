@@ -247,6 +247,24 @@ posthog.capture('custom_event_name', {})
 
 See our [JavaScript web SDK docs](/docs/integrate/client/js) for more details.
 
+## Using error tracking
+
+The JS SDK disables exception capture from extensions by default because many customers do not want exceptions thrown by an extension running on a customers browser to be tracked.
+
+As an extension you need to enable extension exception capture as part of the PostHog config options:
+
+```js
+const posthog = new PostHog()
+
+posthog.init('<ph_project_api_key>', {
+    error_tracking: {
+        captureExtensionExceptions: true,
+    }
+});
+```
+
+See our [Error tracking docs](/docs/error-tracking) for more details on the product.
+
 ## Debugging
 
 To debug PostHog in your extension:
