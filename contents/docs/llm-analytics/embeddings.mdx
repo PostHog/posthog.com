@@ -6,6 +6,8 @@ availability:
   enterprise: full
 ---
 
+import EmbeddingEvent from "./_snippets/embedding-event.mdx"
+
 Embeddings are calls to embedding models that convert text into vector representations for semantic search, RAG pipelines, and similarity matching.
 
 While [generations](/docs/llm-analytics/generations) track LLM conversations and [spans](/docs/llm-analytics/spans) track operations, embeddings specifically monitor vector generation:
@@ -16,3 +18,7 @@ While [generations](/docs/llm-analytics/generations) track LLM conversations and
 - **Batch processing** - Multiple embeddings in one call
 
 For technical implementation details, see [manual capture](/docs/llm-analytics/manual-capture).
+
+## Event properties
+
+<EmbeddingEvent/>
