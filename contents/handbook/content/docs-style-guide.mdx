@@ -83,14 +83,14 @@ posthog.capture('user_signed_up', {
 })
 ```
 
-### Screenshots
+## Screenshots
 
 To keep screenshots consistent and clear, here are tips to follow:
 - Make sure you're not showing any user data, like user emails or names.
 - Focus on the main element, leave out sidebars and irrelevant UI.
 - Use a device width of 1000px - 1400px in devtools. This avoids unnecessary empty space and keeps text readable.
-- Use DPR (device pixel ratio) of 3, this will **upscale** rendering to 3x the size of the screen.
 - Prefer taking **node screenshots** of the DOM node element you're trying to capture. This takes an **upscaled** screenshot by DPR of the DOM node element. 
+- Use DPR (device pixel ratio) of 3, this will **upscale** rendering to 3x the size of the screen.
 
 ![Screenshot settings](https://res.cloudinary.com/dmukukwp6/video/upload/Google_Chrome_screenshot_settings_fcef064998.mp4)
 
@@ -266,15 +266,15 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 </QuestLog>
 ```
 
-### Code blocks 
+## Code blocks 
 
 PostHog uses extended markdown syntax for more expressive code blocks. Here are the code block features we support:
 
 import Tab from "components/Tab"
 
-#### File names
+### File names
 
-In tutorials, you can identify the file you're editing by adding `filename=` to the code block. This will be displayed in the code block's title.
+You can identify the file you're editing by adding `filename=` to the code block. This is displayed in the code block's title.
 
 <Tab.Group tabs={[
 'Preview',
@@ -303,7 +303,7 @@ console.log('Hello, world!')
 </Tab.Panels>
 </Tab.Group>
 
-#### Multilanguage code blocks
+### Multi-language code blocks
 
 You can use the `<MultiLanguage>` component to show code blocks in multiple languages.
 
@@ -346,7 +346,7 @@ print('Hello, world!')
 </Tab.Panels>
 </Tab.Group>
 
-#### Code highlighting
+### Code highlighting
 
 Especially in long tutorials, you can highlight the important differences between steps using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
 
@@ -398,9 +398,9 @@ console.log('end') // HIGHLIGHT
 </Tab.Group>
 
 
-#### Collapsed code blocks
+### Collapsed code blocks
 
-In some cases, such as large nested config files, you need readers to focus on a specific part of the code block without losing context. You can do this by adding `focusOnLines=` to the code block. This will collapse the code block and only show the lines of code you specify.
+In some cases, such as large nested config files, you need readers to focus on a specific part of the code block while maintaining the context. You can do this by adding `focusOnLines=` to the code block. This collapses the code block and only shows the lines of code you specify.
 
 <Tab.Group tabs={[
 'Preview',
@@ -465,9 +465,9 @@ In some cases, such as large nested config files, you need readers to focus on a
 </Tab.Panels>
 </Tab.Group>
 
-#### Mermaid diagrams
+### Mermaid diagrams
 
-Code blocks can also be used to show mermaid UML diagrams. When using these diagrams, make sure to also include a text description of the diagram for accessibility and LLMs.
+Code blocks can also be used to show mermaid UML diagrams. When using these diagrams, make sure to include a text description of the diagram afterwards for accessibility and LLMs.
 
 <Tab.Group tabs={[
 'Preview',
