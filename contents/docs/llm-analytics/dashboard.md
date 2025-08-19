@@ -15,8 +15,8 @@ The [LLM analytics dashboard](https://app.posthog.com/llm-analytics) provides an
 - Latency
 
 <ProductScreenshot
-    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_15_at_08_31_29_4e1702243d.png"
-    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_15_at_08_31_11_66aa4e13b7.png"
+    imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/llma_dashboard_c710e66b5e.png"
+    imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/llma_dashboard_dark_aef0f67baf.png"
     alt="LLM observability dashboard"
     classes="rounded"
 />
