@@ -15,7 +15,7 @@ toolsUsed:
   - LLM analytics
   - Experimentation
   - Feature flags
-date: 2025-06-15
+date: 2025-08-19
 ---
 As a software engineer focused on [Lovable](https://lovable.dev/)’s core agent loop, Viktor Eriksson asks himself the same questions every day:
 
