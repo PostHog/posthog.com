@@ -32,7 +32,7 @@ He isn’t alone. Lovable’s engineer-led culture empowers everyone to ship fas
 
 That last capability has been especially valuable with the release of OpenAI’s new GPT-5 models. When OpenAI’s updates led to Lovable seeing unusual results, Viktor turned to PostHog to find the cause by inspecting traces and debugging. Eventually, the team realized the LLM was giving parts of the context window different amounts of attention.
 
-This kind of debugging isn’t limited to new releases however. For Viktor, it’s a daily practice — honing efficiency, investigating odd behaviors, and pushing Lovable’s agents forward. It’s this drive which has led him to become one of the heaviest users of LLM analytics across the team, often comparing PostHog directly with other LLM analytics tools in their stack.
+This kind of debugging isn’t limited to new releases however. For Viktor, it’s a daily practice — honing efficiency, investigating odd behaviors, and pushing Lovable’s agents forward. It’s this drive which has led him to become one of the heaviest users of LLM analytics across the team, often comparing PostHog directly with other LLM analytics tools in their stack...
 
 <BorderWrapper>
     <Quote
