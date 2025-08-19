@@ -120,10 +120,6 @@ You can disable autocapture in two ways:
 - In your [project settings](https://us.posthog.com/project/settings)
 - By setting `autocapture: false` in the [config](/docs/libraries/js/config)
 
-> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
->
-> Disabling autocapture does not disable capture of page views or page leaves. See [navigation autocapture](#navigation-autocapture) for more information.
-
 ```js-web
 // Before initialization
 posthog.init('<ph_project_api_key>', {
@@ -135,6 +131,10 @@ posthog.init('<ph_project_api_key>', {
 // Or after initialization
 posthog.set_config({ autocapture: false })
 ```
+
+> **Note:** Disabling autocapture in your project settings isn't instant. PostHog will continue to capture events where it is initialized. Instead, autocaptured events will taper off as users trigger reinitialization of PostHog (like when they reload your site). 
+>
+> Disabling autocapture does not disable capture of page views or page leaves. See [navigation autocapture](#navigation-autocapture) for more information.
 
 #### Capturing additional properties in autocapture events
 
@@ -248,6 +248,7 @@ PostHogSDK.shared.setup(config)
 ```
 
 You can find more details about how to configure autocapture in the [iOS SDK docs](/docs/libraries/ios#autocapture-configuration).
+
 #### Preventing sensitive data capture
 
 To exclude specific UI elements from autocapture or session replay, add `ph-no-capture` as either an `accessibilityLabel` or `accessibilityIdentifier`. When PostHog detects this label or identifier anywhere in the view hierarchy, the element is either ignored or masked:
@@ -313,7 +314,7 @@ To exclude specific UI elements from autocapture or session replay, add `ph-no-c
 ```jsx
 <PostHogProvider apiKey="<ph_project_api_key>" autocapture={{
     captureTouches: true,
-    noCaptureProp: "ph-no-capture",
+    noCaptureProp: "ph-no-capture", // Optionally, you can use a custom prop like "data-no-capture"
     // ...
 }}>
     ...
