@@ -1324,7 +1324,7 @@ export const handbookSidebar = [
                 ],
             },
             {
-                name: 'CS & Onboarding',
+                name: 'Customer Success',
                 url: '',
                 children: [
                     {
@@ -1370,6 +1370,16 @@ export const handbookSidebar = [
                     {
                         name: 'How we upsell and cross-sell',
                         url: '/handbook/cs-and-onboarding/how-we-upsell-and-cross-sell',
+                    },
+                ],
+            },
+            {
+                name: 'Onboarding',
+                url: '',
+                children: [
+                    {
+                        name: 'Onboarding specialist overview',
+                        url: '/handbook/cs-and-onboarding/onboarding-team',
                     },
                 ],
             },
