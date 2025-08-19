@@ -50,7 +50,7 @@ At first, paying for overlapping tools may seem like an expensive mistake. At Lo
 
 “We tend to have several vendors running at the same time,” Viktor explains. “It lets us get much more insight. We use two other LLM observability and analytics tools right now, alongside PostHog. We just have one thing that emits the events, but we can check the outputs in different ways. It’s actually a pretty efficient way for us to find what works best before we double down on a single vendor — and means we have access to the best tools available while we test.”
 
-Among those tools is a prompt playground feature that enables teams to test prompts and see how different models respond and compare. It’s a feature that Lovable first saw in Langfuse, but as the team gravitated towards PostHog’s LLM analytics beta they raised a feature request for it. Less than a month later, PostHog’s own LLM playground shipped and was specced to Lovable’s needs. 
+Among those tools is [a prompt playground feature](https://app.posthog.com/llm-observability/playground) that enables teams to test prompts and see how different models respond and compare. It’s a feature that Lovable first saw in Langfuse, but as the team gravitated towards PostHog’s LLM analytics beta they raised a feature request for it. Less than a month later, PostHog’s own LLM playground shipped and was specced to Lovable’s needs. 
 
 “PostHog is definitely the best tool for LLM analytics,” Viktor says. “It’s not just about where the tool is today, but also the fact that you’re improving faster. That’s huge for us because it means PostHog covers so many use-cases and we have so many tools in one place.”
 
