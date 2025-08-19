@@ -130,18 +130,20 @@ export default function TeamPage(props: TeamPageProps) {
     const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
         value: '/teams',
         content: (
-            <Team
-                emojis={team?.emojis}
-                roadmaps={team?.roadmaps}
-                objectives={objectives}
-                body={body}
-                slug={slug?.split('/').pop() || ''}
-                editing={editing}
-                setEditing={setEditing}
-                saving={saving}
-                setSaving={setSaving}
-                onSaveRef={onSaveRef}
-            />
+            <div className="max-w-screen-lg mx-auto mt-6">
+                <Team
+                    emojis={team?.emojis}
+                    roadmaps={team?.roadmaps}
+                    objectives={objectives}
+                    body={body}
+                    slug={slug?.split('/').pop() || ''}
+                    editing={editing}
+                    setEditing={setEditing}
+                    saving={saving}
+                    setSaving={setSaving}
+                    onSaveRef={onSaveRef}
+                />
+            </div>
         ),
     })
 
@@ -153,7 +155,7 @@ export default function TeamPage(props: TeamPageProps) {
                 image={`/images/og/teams.jpg`}
             />
             <Editor
-                title="Company"
+                maxWidth="full"
                 type="teams"
                 proseSize="base"
                 bookmark={{

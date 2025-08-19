@@ -46,12 +46,10 @@ export default function NewTeam(props: TeamPageProps) {
             </>
         ) : null
 
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
-
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'teams' ? (
+    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/teams/new',
+        content: (
+            <div className="max-w-screen-lg mx-auto mt-6">
                 <Team
                     editing={editing}
                     setEditing={setEditing}
@@ -59,19 +57,15 @@ export default function NewTeam(props: TeamPageProps) {
                     setSaving={setSaving}
                     onSaveRef={onSaveRef}
                 />
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                </div>
-            )}
-        </div>
-    ))
+            </div>
+        ),
+    })
 
     return (
         <>
             <SEO title="New Team – PostHog" description="Create a new team at PostHog" image={`/images/og/teams.jpg`} />
             <Editor
-                title="Company"
+                maxWidth="full"
                 type="teams"
                 proseSize="base"
                 bookmark={{
@@ -82,11 +76,12 @@ export default function NewTeam(props: TeamPageProps) {
                 <div className="absolute right-4 top-2 flex gap-2">{editing ? editActions : editButton}</div>
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/teams"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
                     triggerDataScheme="primary"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                 />
             </Editor>
         </>

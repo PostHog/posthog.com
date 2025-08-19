@@ -5,24 +5,16 @@ import SEO from 'components/seo'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
 const ChangelogPage = () => {
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
-
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="prose prose-lg max-w-none">
-            {tabValue === 'changelog' ? (
-                <div className="p-8">
-                    <h1>Changelog</h1>
-                    <p>View our latest updates and releases</p>
-                    <p className="text-sm text-muted">Navigate to specific changelog entries to see details.</p>
-                </div>
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                </div>
-            )}
-        </div>
-    ))
+    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/changelog/2025',
+        content: (
+            <div className="p-8 max-w-3xl mx-auto">
+                <h1>Changelog</h1>
+                <p>View our latest updates and releases</p>
+                <p className="text-sm text-muted">Navigate to specific changelog entries to see details.</p>
+            </div>
+        ),
+    })
 
     return (
         <>
@@ -32,8 +24,8 @@ const ChangelogPage = () => {
                 image={`/images/og/changelog.jpg`}
             />
             <Editor
-                title="Company"
                 type="changelog"
+                maxWidth="full"
                 proseSize="base"
                 bookmark={{
                     title: 'Changelog',
@@ -42,10 +34,11 @@ const ChangelogPage = () => {
             >
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/changelog/2025"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>
