@@ -19,10 +19,12 @@ date: 2025-08-19
 ---
 As a software engineer focused on [Lovable](https://lovable.dev/)’s core agent loop, Viktor Eriksson asks himself the same questions every day:
 
-How can I improve the agentic workflow?
-How can I make this loop more efficient?
-How can I better integrate with external systems?
-_How can I make our agents smarter?_
+
+- How can I improve the agentic workflow?
+- How can I make this loop more efficient?
+- How can I better integrate with external systems?
+- _How can I make our agents smarter?_
+
 
 He isn’t alone. Lovable’s engineer-led culture empowers everyone to ship faster and bolder, gathering the insights they need along the way. And that’s where PostHog comes in. 
 
