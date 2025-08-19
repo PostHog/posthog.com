@@ -46,7 +46,7 @@ This kind of debugging isn’t limited to new releases however. For Viktor, it�
 
 ## How _does_ PostHog stack up against other LLM analytics tools?
 
-At first, paying for overlapping tools may seem like an expensive mistake. At Lovable, however it’s intentional—a way to keep shipping quickly.
+At first, paying for overlapping tools may seem like an expensive mistake. At Lovable, it’s intentional—a way to keep shipping quickly.
 
 “We tend to have several vendors running at the same time,” Viktor explains. “It lets us get much more insight. We use two other LLM observability and analytics tools right now, alongside PostHog. We just have one thing that emits the events, but we can check the outputs in different ways. It’s actually a pretty efficient way for us to find what works best before we double down on a single vendor — and means we have access to the best tools available while we test.”
 
