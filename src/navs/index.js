@@ -4115,15 +4115,6 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
-<<<<<<< HEAD
-=======
-                    name: 'Billing',
-                    url: '/docs/llm-analytics/billing',
-                    icon: 'IconPiggyBank',
-                    color: 'green',
-                },
-                {
->>>>>>> 22ab16faa (llm-analytics)
                     name: 'Troubleshooting and FAQs',
                     url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
