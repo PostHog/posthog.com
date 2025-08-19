@@ -13,7 +13,7 @@ import { useLayoutData } from 'components/Layout/hooks'
 import QuickLinks from 'components/QuickLinks'
 import Intro from 'components/Docs/Intro'
 
-type LLMObservabilityProps = {
+type LLMAnalyticsProps = {
     data: {
         tutorials: {
             edges: {
@@ -29,7 +29,7 @@ export const Content = ({ quickLinks = false }) => {
         <>
             {(quickLinks || compact) && (
                 <QuickLinks
-                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM observability')?.children}
+                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM analytics')?.children}
                 />
             )}
             <section className="mb-12">
@@ -39,7 +39,7 @@ export const Content = ({ quickLinks = false }) => {
                 <ul className="m-0 mb-3 p-0 flex flex-col gap-4 md:grid md:grid-cols-2 xl:grid-cols-3">
                     <ResourceItem
                         type="Guide"
-                        title="How to set up OpenAI observability"
+                        title="How to set up OpenAI analytics"
                         description="Track API usage, cost, and latency."
                         url="/tutorials/openai-observability"
                     />
@@ -57,7 +57,7 @@ export const Content = ({ quickLinks = false }) => {
                     />
                 </ul>
                 <CallToAction
-                    to="/docs/llm-observability/tutorials"
+                    to="/docs/llm-analytics/tutorials"
                     type="custom"
                     size="md"
                     className="group !bg-accent dark:!bg-accent-dark !border-light dark:!border-dark"
@@ -71,18 +71,18 @@ export const Content = ({ quickLinks = false }) => {
     )
 }
 
-const LLMObservability: React.FC<LLMObservabilityProps> = ({ data }) => {
+const LLMAnalytics: React.FC<LLMAnalyticsProps> = ({ data }) => {
     return (
         <Layout>
-            <SEO title="LLM observability - Documentation - PostHog" />
+            <SEO title="LLM analytics - Documentation - PostHog" />
 
-            <PostLayout title={'LLM observability'} hideSurvey hideSidebar>
+            <PostLayout title={'LLM analytics'} hideSurvey hideSidebar>
                 <Intro
                     subheader="Getting started"
-                    title="LLM observability"
+                    title="LLM analytics"
                     description="Gather data for your AI and LLM products usage and performance."
                     buttonText="Start capturing LLM data"
-                    buttonLink="/docs/llm-observability/start-here"
+                    buttonLink="/docs/llm-analytics/start-here"
                     imageColumnClasses="max-w-96 mt-8 md:mt-0"
                     imageUrl="https://res.cloudinary.com/dmukukwp6/image/upload/robot_960530c306.png"
                     imageClasses="max-h-48 md:max-h-64"
@@ -94,4 +94,4 @@ const LLMObservability: React.FC<LLMObservabilityProps> = ({ data }) => {
     )
 }
 
-export default LLMObservability
+export default LLMAnalytics

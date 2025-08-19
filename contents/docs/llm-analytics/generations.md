@@ -6,7 +6,7 @@ availability:
   enterprise: full
 ---
 
-Generations are an event that capture an LLM request. The [generations tab](https://us.posthog.com/llm-observability/generations) lists them along with the properties autocaptured by the PostHog like the person, model, total cost, token usage, and more.
+Generations are an event that capture an LLM request. The [generations tab](https://app.posthog.com/llm-observability/generations) lists them along with the properties autocaptured by the PostHog like the person, model, total cost, token usage, and more.
 
 When you expand a generation, it includes the properties and metadata that every event has along with a conversation history with the role (system, user, assistant) as well as input and output content.
 

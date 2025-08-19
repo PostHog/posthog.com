@@ -3976,8 +3976,8 @@ export const docsMenu = {
             ],
         },
         {
-            name: 'LLM observability',
-            url: '/docs/llm-observability',
+            name: 'LLM analytics',
+            url: '/docs/llm-analytics',
             color: '[#681291]',
             colorDark: '[#C170E8]',
             icon: 'IconAI',
@@ -3988,7 +3988,7 @@ export const docsMenu = {
             },
             children: [
                 {
-                    name: 'LLM observability',
+                    name: 'LLM analytics',
                     badge: {
                         title: 'Beta',
                         className: 'uppercase !bg-blue/10 !text-blue !dark:text-white !dark:bg-blue/50',
@@ -3996,7 +3996,7 @@ export const docsMenu = {
                 },
                 {
                     name: 'Overview',
-                    url: '/docs/llm-observability',
+                    url: '/docs/llm-analytics',
                     icon: 'IconHome',
                     color: 'seagreen',
                 },
@@ -4005,54 +4005,54 @@ export const docsMenu = {
                 },
                 {
                     name: 'Start here',
-                    url: '/docs/llm-observability/start-here',
+                    url: '/docs/llm-analytics/start-here',
                     icon: 'IconListCheck',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Installation',
-                    url: '/docs/llm-observability/installation',
+                    url: '/docs/llm-analytics/installation',
                     icon: 'IconBook',
                     color: 'blue',
                     featured: true,
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/llm-observability/installation',
+                            url: '/docs/llm-analytics/installation',
                         },
                         {
                             name: 'OpenAI',
-                            url: '/docs/llm-observability/installation/openai',
+                            url: '/docs/llm-analytics/installation/openai',
                         },
                         {
                             name: 'Anthropic',
-                            url: '/docs/llm-observability/installation/anthropic',
+                            url: '/docs/llm-analytics/installation/anthropic',
                         },
                         {
                             name: 'Google',
-                            url: '/docs/llm-observability/installation/google',
+                            url: '/docs/llm-analytics/installation/google',
                         },
                         {
                             name: 'LangChain',
-                            url: '/docs/llm-observability/installation/langchain',
+                            url: '/docs/llm-analytics/installation/langchain',
                         },
                         {
                             name: 'Vercel AI SDK',
-                            url: '/docs/llm-observability/installation/vercel-ai',
+                            url: '/docs/llm-analytics/installation/vercel-ai',
                         },
                     ],
                 },
                 {
                     name: 'Manual capture',
-                    url: '/docs/llm-observability/manual-capture',
+                    url: '/docs/llm-analytics/manual-capture',
                     icon: 'IconCode',
                     color: 'green',
                     featured: true,
                 },
                 {
                     name: 'Privacy mode',
-                    url: '/docs/llm-observability/privacy-mode',
+                    url: '/docs/llm-analytics/privacy-mode',
                     icon: 'IconLock',
                     color: 'purple',
                     featured: true,
@@ -4062,35 +4062,35 @@ export const docsMenu = {
                 },
                 {
                     name: 'Traces',
-                    url: '/docs/llm-observability/traces',
+                    url: '/docs/llm-analytics/traces',
                     icon: 'IconUserPaths',
                     color: 'orange',
                     featured: true,
                 },
                 {
                     name: 'Generations',
-                    url: '/docs/llm-observability/generations',
+                    url: '/docs/llm-analytics/generations',
                     icon: 'IconAIText',
                     color: 'yellow',
                     featured: true,
                 },
                 {
                     name: 'Spans',
-                    url: '/docs/llm-observability/spans',
+                    url: '/docs/llm-analytics/spans',
                     icon: 'IconBrackets',
                     color: 'blue',
                     featured: true,
                 },
                 {
                     name: 'Embeddings',
-                    url: '/docs/llm-observability/embeddings',
+                    url: '/docs/llm-analytics/embeddings',
                     icon: 'IconDatabase',
                     color: 'purple',
                     featured: true,
                 },
                 {
                     name: 'Calculating LLM costs',
-                    url: '/docs/llm-observability/calculating-costs',
+                    url: '/docs/llm-analytics/calculating-costs',
                     icon: 'IconBalance',
                     color: 'green',
                     featured: true,
@@ -4100,13 +4100,13 @@ export const docsMenu = {
                 },
                 {
                     name: 'Analyze LLM performance',
-                    url: '/docs/llm-observability/dashboard',
+                    url: '/docs/llm-analytics/dashboard',
                     icon: 'IconDashboard',
                     color: 'red',
                 },
                 {
                     name: 'Tutorials and guides',
-                    url: '/docs/llm-observability/tutorials',
+                    url: '/docs/llm-analytics/tutorials',
                     icon: 'IconGraduationCap',
                     color: 'salmon',
                     featured: true,
@@ -4115,37 +4115,46 @@ export const docsMenu = {
                     name: 'Resources',
                 },
                 {
+<<<<<<< HEAD
+=======
+                    name: 'Billing',
+                    url: '/docs/llm-analytics/billing',
+                    icon: 'IconPiggyBank',
+                    color: 'green',
+                },
+                {
+>>>>>>> 22ab16faa (llm-analytics)
                     name: 'Troubleshooting and FAQs',
-                    url: '/docs/llm-observability/troubleshooting',
+                    url: '/docs/llm-analytics/troubleshooting',
                     icon: 'IconQuestion',
                     color: 'purple',
                 },
                 {
                     name: 'Integrations',
-                    url: '/docs/llm-observability/integrations',
+                    url: '/docs/llm-analytics/integrations',
                     icon: 'IconApps',
                     featured: true,
                     color: 'yellow',
                     children: [
                         {
                             name: 'Overview',
-                            url: '/docs/llm-observability/integrations',
+                            url: '/docs/llm-analytics/integrations',
                         },
                         {
                             name: 'Helicone',
-                            url: '/docs/llm-observability/integrations/helicone-posthog',
+                            url: '/docs/llm-analytics/integrations/helicone-posthog',
                         },
                         {
                             name: 'Langfuse',
-                            url: '/docs/llm-observability/integrations/langfuse-posthog',
+                            url: '/docs/llm-analytics/integrations/langfuse-posthog',
                         },
                         {
                             name: 'Traceloop',
-                            url: '/docs/llm-observability/integrations/traceloop-posthog',
+                            url: '/docs/llm-analytics/integrations/traceloop-posthog',
                         },
                         {
                             name: 'Keywords AI',
-                            url: '/docs/llm-observability/integrations/keywords-ai-posthog',
+                            url: '/docs/llm-analytics/integrations/keywords-ai-posthog',
                         },
                     ],
                 },

@@ -1543,39 +1543,39 @@
         },
         {
             "source": "/docs/ai-engineering/observability",
-            "destination": "/docs/llm-observability/start-here"
+            "destination": "/docs/llm-analytics/start-here"
         },
         {
             "source": "/docs/ai-engineering/llm-insights",
-            "destination": "/docs/llm-observability/start-here"
+            "destination": "/docs/llm-analytics/start-here"
         },
         {
             "source": "/docs/ai-engineering/tutorials",
-            "destination": "/docs/llm-observability/tutorials"
+            "destination": "/docs/llm-analytics/tutorials"
         },
         {
             "source": "/docs/ai-engineering/traces-generations",
-            "destination": "/docs/llm-observability/traces-generations"
+            "destination": "/docs/llm-analytics/traces-generations"
         },
         {
             "source": "/docs/ai-engineering/dashboard",
-            "destination": "/docs/llm-observability/dashboard"
+            "destination": "/docs/llm-analytics/dashboard"
         },
         {
             "source": "/docs/ai-engineering/langfuse-posthog",
-            "destination": "/docs/llm-observability/integrations/langfuse-posthog"
+            "destination": "/docs/llm-analytics/integrations/langfuse-posthog"
         },
         {
             "source": "/docs/ai-engineering/helicone-posthog",
-            "destination": "/docs/llm-observability/integrations/helicone-posthog"
+            "destination": "/docs/llm-analytics/integrations/helicone-posthog"
         },
         {
             "source": "/docs/ai-engineering/keywords-ai-posthog",
-            "destination": "/docs/llm-observability/integrations/keywords-ai-posthog"
+            "destination": "/docs/llm-analytics/integrations/keywords-ai-posthog"
         },
         {
             "source": "/docs/ai-engineering/traceloop-posthog",
-            "destination": "/docs/llm-observability/integrations/traceloop-posthog"
+            "destination": "/docs/llm-analytics/integrations/traceloop-posthog"
         }
     ],
     "headers": [

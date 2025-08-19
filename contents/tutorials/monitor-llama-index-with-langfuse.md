@@ -5,10 +5,10 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - LLM observability
+  - LLM analytics
 ---
 
-[LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an [open source LLM observability platform](/blog/best-open-source-llm-observability-tools), you can easily monitor your LLM app.
+[LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an [open source LLM analytics platform](/blog/best-open-source-llm-observability-tools), you can easily monitor your LLM app.
 
 In this tutorial, we show you how to set this up by walking you through a simple [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) chat app.
 
@@ -152,7 +152,7 @@ All steps of the LLM chain are now tracked in Langfuse and you can view them in 
 
 ## 4. Integrate Langfuse with PostHog
 
-Next we [connect Langfuse to PostHog](/docs/llm-observability/langfuse-posthog) so that you can combine your LLM trace data with your PostHog analytics. This enables you to answer product questions such as:
+Next we [connect Langfuse to PostHog](/docs/llm-analytics/integrations/langfuse-posthog) so that you can combine your LLM trace data with your PostHog analytics. This enables you to answer product questions such as:
 
 - What are my LLM costs by customer, model, and in total?
 - How many of my users are interacting with my LLM features?
@@ -190,7 +190,7 @@ The last step is to set up a PostHog dashboard so that you can view your LLM ins
 
 ## Further reading
 
-- [How to set up OpenAI observability](/tutorials/openai-observability)
+- [How to set up OpenAI analytics](/tutorials/openai-observability)
 - [How to set up LLM analytics for Anthropic's Claude](/tutorials/anthropic-analytics)
 
 <NewsletterForm />

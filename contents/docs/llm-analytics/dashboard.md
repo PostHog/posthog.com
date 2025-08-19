@@ -1,12 +1,12 @@
 ---
-title: LLM observability dashboard (beta)
+title: LLM analytics dashboard (beta)
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-The [LLM observability dashboard](https://us.posthog.com/llm-observability) provides an overview of your LLM usage and performance. It includes insights on:
+The [LLM analytics dashboard](https://app.posthog.com/llm-analytics) provides an overview of your LLM usage and performance. It includes insights on:
 
 - Users
 - Traces
@@ -31,4 +31,4 @@ This dashboard is a great starting point for understanding your LLM usage and pe
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
 
-To dive into specific generation events, click on the [generations](https://us.posthog.com/llm-observability/generations) or [traces](https://us.posthog.com/llm-observability/traces) tabs to get a list of each captured by PostHog.
+To dive into specific generation events, click on the [generations](https://us.posthog.com/llm-analytics/generations) or [traces](https://us.posthog.com/llm-analytics/traces) tabs to get a list of each captured by PostHog.
