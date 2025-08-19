@@ -1332,10 +1332,6 @@ export const handbookSidebar = [
                         url: '/handbook/cs-and-onboarding/customer-success',
                     },
                     {
-                        name: 'Onboarding specialist overview',
-                        url: '/handbook/cs-and-onboarding/onboarding-team',
-                    },
-                    {
                         name: 'Getting started with newly assigned customers',
                         url: '/handbook/cs-and-onboarding/newly-assigned-customer',
                     },
@@ -1379,7 +1375,7 @@ export const handbookSidebar = [
                 children: [
                     {
                         name: 'Onboarding specialist overview',
-                        url: '/handbook/cs-and-onboarding/onboarding-team',
+                        url: '/handbook/onboarding/onboarding-team',
                     },
                 ],
             },
