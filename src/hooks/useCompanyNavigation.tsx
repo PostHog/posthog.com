@@ -1,70 +1,62 @@
-import { useEffect, useState } from 'react'
 import { navigate } from 'gatsby'
-import { useLocation } from '@reach/router'
-import { companyMenu } from '../navs'
 
-// Map URL segments to tab values
-export const TAB_MAP: Record<string, string> = {
-    about: 'about',
-    roadmap: 'roadmap',
-    changelog: 'changelog',
-    people: 'people',
-    teams: 'teams',
-    careers: 'careers',
-    handbook: 'handbook',
-    brand: 'brand',
-}
+const tabs = [
+    {
+        value: '/about',
+        label: 'About',
+        content: null,
+    },
+    {
+        value: '/roadmap',
+        label: 'Roadmap',
+        content: null,
+    },
+    {
+        value: '/changelog/2025',
+        label: 'Changelog',
+        content: null,
+    },
+    {
+        value: '/people',
+        label: 'People',
+        content: null,
+    },
+    {
+        value: '/teams',
+        label: 'Teams',
+        content: null,
+    },
+    {
+        value: '/careers',
+        label: 'Careers',
+        content: null,
+    },
+    {
+        value: '/handbook',
+        label: 'Handbook',
+        content: null,
+    },
+    {
+        value: '/brand',
+        label: 'Brand',
+        content: null,
+    },
+]
 
-// Map tab values to navigation paths
-export const PATH_MAP: Record<string, string> = {
-    about: '/about',
-    roadmap: '/roadmap',
-    changelog: '/changelog/2025',
-    people: '/people',
-    teams: '/teams',
-    careers: '/careers',
-    handbook: '/handbook',
-    brand: '/brand',
-}
+const tabContainerClassName = 'flex justify-center bg-accent sticky top-0 z-10 border-b border-primary'
+const className =
+    '-mx-4 -mt-4 [&_div[role=tablist]]:pt-0.5 [&_div[role=tablist]]:w-full [&_div[role=tablist]]:pl-1.5 [&_div[role=tablist]]:flex [&_div[role=tablist]]:justify-center'
 
-export function useCompanyNavigation() {
-    const location = useLocation()
-    const [activeTab, setActiveTab] = useState('about')
-
-    // Extract tab name from URL path
-    useEffect(() => {
-        const pathSegments = location.pathname.split('/').filter(Boolean)
-        const currentSection = pathSegments[0] || 'about'
-
-        if (TAB_MAP[currentSection]) {
-            setActiveTab(TAB_MAP[currentSection])
-        }
-    }, [location.pathname])
-
-    const handleTabChange = (value: string) => {
-        if (PATH_MAP[value]) {
-            navigate(PATH_MAP[value])
-        }
-    }
-
-    // Create tabs from companyMenu
-    const createTabs = (renderContent: (tabValue: string, item: any) => React.ReactNode) => {
-        return companyMenu.children.map((item: any) => {
-            const tabValue = item.url.split('/').filter(Boolean)[0] || 'about'
-
-            return {
-                value: tabValue,
-                label: item.name,
-                content: renderContent(tabValue, item),
-            }
-        })
-    }
-
+export function useCompanyNavigation({ value, content }: { value: string; content: React.ReactNode }) {
     return {
-        activeTab,
-        setActiveTab,
-        handleTabChange,
-        createTabs,
-        companyMenu,
+        tabs: tabs.map((tab) => ({
+            ...tab,
+            content: tab.value === value ? content : null,
+        })),
+        handleTabChange: (value: string) => {
+            navigate(value)
+        },
+        tabContainerClassName,
+        className,
     }
 }

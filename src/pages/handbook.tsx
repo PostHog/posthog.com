@@ -9,14 +9,14 @@ import chapters from '../navs/handbook.json'
 import ReaderView from 'components/ReaderView'
 import { TreeMenu } from 'components/TreeMenu'
 import { companyMenu } from '../navs'
+import Editor from 'components/Editor'
+import OSTabs from 'components/OSTabs'
+import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
 export const Handbook: React.FC = () => {
-    return (
-        <ReaderView
-            leftSidebar={<TreeMenu items={companyMenu.children.map((child) => ({ ...child, children: [] }))} />}
-        >
-            <SEO image="/images/handbook.png" title="Handbook - PostHog" />
-
+    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/handbook',
+        content: (
             <section className="max-w-4xl mx-auto">
                 <div className="flex flex-col md:items-center md:justify-end md:flex-row-reverse gap-8 md:gap-2">
                     <div className="-mt-16 md:-mt-12">
@@ -65,33 +65,56 @@ export const Handbook: React.FC = () => {
                 })}
 
                 {/*
-                    <h4>Top links</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {otherLinks.map((category) => {
-                            return (
-                                <div
-                                    key={category.name}
-                                    className="space-y-2 py-4 md:py-6 px-4 md:px-8 bg-accent border border-primary rounded"
-                                >
-                                    <h4 className="mb-0">{category.name}</h4>
-                                    <ul className="p-0 space-y-1">
-                                        {category.links.map((link) => {
-                                            return (
-                                                <li key={link.to} className="list-none">
-                                                    <Link to={link.to}>{link.name}</Link>
-                                                </li>
-                                            )
-                                        })}
-                                    </ul>
-                                </div>
-                            )
-                        })}
-                    </div>
-                    */}
+            <h4>Top links</h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {otherLinks.map((category) => {
+                    return (
+                        <div
+                            key={category.name}
+                            className="space-y-2 py-4 md:py-6 px-4 md:px-8 bg-accent border border-primary rounded"
+                        >
+                            <h4 className="mb-0">{category.name}</h4>
+                            <ul className="p-0 space-y-1">
+                                {category.links.map((link) => {
+                                    return (
+                                        <li key={link.to} className="list-none">
+                                            <Link to={link.to}>{link.name}</Link>
+                                        </li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
+                    )
+                })}
+            </div>
+            */}
             </section>
-
-            <section className="space-y-8"></section>
-        </ReaderView>
+        ),
+    })
+    return (
+        <>
+            <SEO image="/images/handbook.png" title="Handbook - PostHog" />
+            <Editor
+                maxWidth="full"
+                // title="Company"
+                // type="about"
+                proseSize="base"
+                bookmark={{
+                    title: 'Company',
+                    description: 'Learn about PostHog',
+                }}
+            >
+                <OSTabs
+                    tabs={tabs}
+                    defaultValue="/handbook"
+                    onValueChange={handleTabChange}
+                    frame={false}
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
+                    triggerDataScheme="primary"
+                />
+            </Editor>
+        </>
     )
 }
 

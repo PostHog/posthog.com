@@ -442,7 +442,6 @@ const getStrapiFilters = (filters) => {
     return strapiFilters
 }
 export default function Changelog({ pageContext }) {
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
     const [strapiFilters, setStrapiFilters] = useState(getStrapiFilters({ year: { value: pageContext.year } }))
     const [teams, setTeams] = useState([])
     const [topics, setTopics] = useState([])
@@ -495,10 +494,10 @@ export default function Changelog({ pageContext }) {
 
     const groupedRoadmaps = lodashGroupBy(roadmaps, groupBy)
 
-    // Create tabs for company navigation
-    const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'changelog' ? (
+    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/changelog/2025',
+        content: (
+            <div className="w-full max-w-screen-2xl mx-auto mt-6">
                 <div className="absolute right-0 -top-10">
                     <button
                         onClick={() => setExpandAll(!expandAll)}
@@ -507,8 +506,6 @@ export default function Changelog({ pageContext }) {
                         {expandAll ? 'Collapse all' : 'Expand all'}
                     </button>
                 </div>
-            ) : null}
-            {tabValue === 'changelog' ? (
                 <ScrollArea>
                     {isValidating && roadmaps.length === 0 ? (
                         <ProgressBar title="changelog" />
@@ -542,21 +539,16 @@ export default function Changelog({ pageContext }) {
                         )
                     ) : null}
                 </ScrollArea>
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                </div>
-            )}
-        </div>
-    ))
+            </div>
+        ),
+    })
 
     return (
         <>
             <SEO title="Changelog - PostHog" />
             <Editor
-                title="Company"
                 type="changelog"
-                maxWidth="screen-2xl"
+                maxWidth="full"
                 dataToFilter={roadmaps}
                 handleFilterChange={handleFilterChange}
                 showFilters={false}
@@ -627,10 +619,11 @@ export default function Changelog({ pageContext }) {
             >
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/changelog/2025"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>

@@ -44,8 +44,8 @@ const careersTableOfContents = [
 // Table of Contents Component
 const TableOfContents = () => (
     <div className="bg-accent border border-primary rounded p-4 mb-8">
-        <h3 className="text-lg font-semibold mb-3">Table of Contents</h3>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 list-none m-0 p-0">
+        <h3 className="text-lg font-semibold m-0 mb-3">Table of Contents</h3>
+        <ul className="grid grid-cols-1 sm:grid-cols-2 list-none m-0 p-0">
             {careersTableOfContents.map((item) => (
                 <li key={item.url}>
                     <Link to={item.url} className="text-sm hover:underline">
@@ -61,70 +61,62 @@ const IndexPage = () => {
     const data = useStaticQuery(query)
     const latestJob = data?.allAshbyJobPosting?.nodes && data.allAshbyJobPosting.nodes[0]
     const latestJobCreatedAt = latestJob && new Date(latestJob['publishedDate'])
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
-
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'careers' ? (
-                <ScrollArea className="h-full">
-                    <div className="max-w-5xl mx-auto px-4 py-8">
-                        <TableOfContents />
-                        <div id="hero">
-                            <CareersHero />
-                            <JobListings />
-                        </div>
-                        <div id="small-teams">
-                            <SmallTeams />
-                        </div>
-                        <div id="pizza">
-                            <Pizza />
-                        </div>
-                        <div id="compensation">
-                            <Compensation />
-                        </div>
-                        <div id="interview-process">
-                            <InterviewProcessOverview />
-                        </div>
-                        <div id="note">
-                            <FounderNote />
-                        </div>
-                        <div id="quote">
-                            <MegaQuote />
-                        </div>
-                        <div id="handbook">
-                            <CompanyHandbook />
-                        </div>
-                        <div id="iep">
-                            <IdealEmployeeProfile />
-                        </div>
-                        <div id="unexpected-benefits">
-                            <BenefitsUnexpected />
-                        </div>
-                        <div id="benefits">
-                            <BenefitsUsual />
-                        </div>
-                        <div id="transparency">
-                            <Transparency />
-                        </div>
-                        <div id="fun-stuff">
-                            <FunStuff />
-                        </div>
-                        <div id="team-quotes">
-                            <TeamQuotes />
-                        </div>
-                        <div id="open-roles">
-                            <OpenRoles />
-                        </div>
+    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/careers',
+        content: (
+            <ScrollArea className="h-full max-w-screen-xl mx-auto mt-6">
+                <div className="max-w-5xl mx-auto px-4 py-8">
+                    <TableOfContents />
+                    <div id="hero">
+                        <CareersHero />
+                        <JobListings />
                     </div>
-                </ScrollArea>
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
+                    <div id="small-teams">
+                        <SmallTeams />
+                    </div>
+                    <div id="pizza">
+                        <Pizza />
+                    </div>
+                    <div id="compensation">
+                        <Compensation />
+                    </div>
+                    <div id="interview-process">
+                        <InterviewProcessOverview />
+                    </div>
+                    <div id="note">
+                        <FounderNote />
+                    </div>
+                    <div id="quote">
+                        <MegaQuote />
+                    </div>
+                    <div id="handbook">
+                        <CompanyHandbook />
+                    </div>
+                    <div id="iep">
+                        <IdealEmployeeProfile />
+                    </div>
+                    <div id="unexpected-benefits">
+                        <BenefitsUnexpected />
+                    </div>
+                    <div id="benefits">
+                        <BenefitsUsual />
+                    </div>
+                    <div id="transparency">
+                        <Transparency />
+                    </div>
+                    <div id="fun-stuff">
+                        <FunStuff />
+                    </div>
+                    <div id="team-quotes">
+                        <TeamQuotes />
+                    </div>
+                    <div id="open-roles">
+                        <OpenRoles />
+                    </div>
                 </div>
-            )}
-        </div>
-    ))
+            </ScrollArea>
+        ),
+    })
 
     return (
         <>
@@ -137,8 +129,8 @@ const IndexPage = () => {
                 imageType="absolute"
             />
             <Editor
-                title="Company"
                 type="careers"
+                maxWidth="full"
                 proseSize="base"
                 bookmark={{
                     title: 'Careers',
@@ -147,10 +139,11 @@ const IndexPage = () => {
             >
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/careers"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>

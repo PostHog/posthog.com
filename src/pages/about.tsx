@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import React from 'react'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
@@ -58,31 +58,22 @@ interface AboutProps {
 }
 
 export default function About({ data }: AboutProps) {
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
-
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="prose prose-sm @lg:prose-base max-w-none">
-            {tabValue === 'about' ? (
-                <>
-                    {/* @ts-expect-error - MDXProvider type issue with React 18 */}
-                    <MDXProvider components={mdxComponents}>
-                        <MDXRenderer>{data.mdx.body}</MDXRenderer>
-                    </MDXProvider>
-                </>
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                    <p className="text-sm mt-2">This section will load dynamically based on the URL.</p>
-                </div>
-            )}
-        </div>
-    ))
+    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/about',
+        content: (
+            <div className="max-w-3xl mx-auto">
+                <MDXProvider components={mdxComponents}>
+                    <MDXRenderer>{data.mdx.body}</MDXRenderer>
+                </MDXProvider>
+            </div>
+        ),
+    })
 
     return (
         <>
             <SEO title="About PostHog" description="All about PostHog" image={`/images/og/product-analytics.jpg`} />
             <Editor
+                maxWidth="full"
                 // title="Company"
                 // type="about"
                 proseSize="base"
@@ -93,10 +84,11 @@ export default function About({ data }: AboutProps) {
             >
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/about"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4 [&_div[data-state=active]]:border-t [&_div[data-state=active]]:border-t-primary [&_div[role=tablist]]:bg-accent [&_div[role=tablist]]:pt-0.5 [&_div[role=tablist]]:ml-0 [&_div[role=tablist]]:pl-1.5"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>

@@ -6,21 +6,15 @@ import Teams from '../teams'
 import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 
 const TeamsPage = () => {
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
     const [searchTerm, setSearchTerm] = useState('')
-
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'teams' ? (
+    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/teams',
+        content: (
+            <div className="max-w-screen-lg mx-auto mt-6">
                 <Teams searchTerm={searchTerm} />
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                </div>
-            )}
-        </div>
-    ))
+            </div>
+        ),
+    })
 
     return (
         <>
@@ -30,8 +24,8 @@ const TeamsPage = () => {
                 image={`/images/og/teams.jpg`}
             />
             <Editor
-                title="Company"
                 type="teams"
+                maxWidth="full"
                 proseSize="base"
                 onSearchChange={(query) => setSearchTerm(query)}
                 bookmark={{
@@ -41,10 +35,11 @@ const TeamsPage = () => {
             >
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/teams"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Editor from 'components/Editor'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
@@ -8,9 +8,16 @@ import { useRoadmaps } from 'hooks/useRoadmaps'
 import groupBy from 'lodash.groupby'
 
 const RoadmapPage = () => {
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
     const [filteredRoadmaps, setFilteredRoadmaps] = useState(null)
     const [groupByValue, setGroupByValue] = useState(null)
+    const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/roadmap',
+        content: (
+            <div className="max-w-3xl mx-auto mt-6">
+                <Roadmap filteredRoadmaps={filteredRoadmaps} groupByValue={groupByValue} />
+            </div>
+        ),
+    })
 
     // Fetch roadmaps for filter options
     const { roadmaps } = useRoadmaps({
@@ -27,19 +34,6 @@ const RoadmapPage = () => {
         limit: 100,
     })
 
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'roadmap' ? (
-                <Roadmap filteredRoadmaps={filteredRoadmaps} groupByValue={groupByValue} />
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                </div>
-            )}
-        </div>
-    ))
-
     return (
         <>
             <SEO
@@ -48,10 +42,9 @@ const RoadmapPage = () => {
                 image={`/images/og/roadmap.jpg`}
             />
             <Editor
-                title="Company"
                 type="roadmap"
                 proseSize="base"
-                showFilters
+                maxWidth="full"
                 dataToFilter={roadmaps}
                 onFilterChange={(data) => setFilteredRoadmaps(data)}
                 availableFilters={
@@ -105,10 +98,11 @@ const RoadmapPage = () => {
             >
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/roadmap"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>

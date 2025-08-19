@@ -127,31 +127,23 @@ export default function TeamPage(props: TeamPageProps) {
             </>
         ) : null
 
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
-
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'teams' ? (
-                <Team
-                    emojis={team?.emojis}
-                    roadmaps={team?.roadmaps}
-                    objectives={objectives}
-                    body={body}
-                    slug={slug?.split('/').pop() || ''}
-                    editing={editing}
-                    setEditing={setEditing}
-                    saving={saving}
-                    setSaving={setSaving}
-                    onSaveRef={onSaveRef}
-                />
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                </div>
-            )}
-        </div>
-    ))
+    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/teams',
+        content: (
+            <Team
+                emojis={team?.emojis}
+                roadmaps={team?.roadmaps}
+                objectives={objectives}
+                body={body}
+                slug={slug?.split('/').pop() || ''}
+                editing={editing}
+                setEditing={setEditing}
+                saving={saving}
+                setSaving={setSaving}
+                onSaveRef={onSaveRef}
+            />
+        ),
+    })
 
     return (
         <>
@@ -172,10 +164,11 @@ export default function TeamPage(props: TeamPageProps) {
                 <div className="absolute right-4 top-2 flex gap-2">{editing ? editActions : editButton}</div>
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/teams"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>

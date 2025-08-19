@@ -7,7 +7,14 @@ import { useCompanyNavigation } from 'hooks/useCompanyNavigation'
 import { graphql, useStaticQuery } from 'gatsby'
 
 const PeoplePage = () => {
-    const { activeTab, handleTabChange, createTabs } = useCompanyNavigation()
+    const { handleTabChange, tabs, tabContainerClassName, className } = useCompanyNavigation({
+        value: '/people',
+        content: (
+            <div className="max-w-screen-lg mx-auto mt-6">
+                <People />
+            </div>
+        ),
+    })
     const [searchTerm, setSearchTerm] = useState('')
     const [filteredPeople, setFilteredPeople] = useState(null)
     const [nameFilter, setNameFilter] = useState(null)
@@ -100,31 +107,17 @@ const PeoplePage = () => {
         setFilteredPeople(filteredData)
     }
 
-    // Create tabs using the shared hook
-    const tabs = createTabs((tabValue, item) => (
-        <div className="w-full">
-            {tabValue === 'people' ? (
-                <People searchTerm={searchTerm} filteredMembers={filteredPeople} />
-            ) : (
-                <div className="p-8 text-center text-muted">
-                    <p>Loading {item.name} content...</p>
-                </div>
-            )}
-        </div>
-    ))
-
     return (
         <>
             <SEO title="People – PostHog" description="Meet the PostHog team" image={`/images/og/people.jpg`} />
             <Editor
-                title="Company"
                 type="people"
+                maxWidth="full"
                 proseSize="base"
                 onSearchChange={(query) => setSearchTerm(query)}
                 availableFilters={availableFilters}
                 dataToFilter={teamMembers}
                 onFilterChange={handleFilterChange}
-                showFilters={true}
                 bookmark={{
                     title: 'People',
                     description: 'Meet the PostHog team',
@@ -132,10 +125,11 @@ const PeoplePage = () => {
             >
                 <OSTabs
                     tabs={tabs}
-                    value={activeTab}
+                    defaultValue="/people"
                     onValueChange={handleTabChange}
                     frame={false}
-                    className="-mx-4 -mt-4"
+                    tabContainerClassName={tabContainerClassName}
+                    className={className}
                     triggerDataScheme="primary"
                 />
             </Editor>
