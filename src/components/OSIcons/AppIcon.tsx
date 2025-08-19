@@ -78,6 +78,10 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/video_classic_beadf43e4b.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/video_4159554b6d.png',
     },
+    page: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/page_classic_0100e05522.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/page_modern_e1fe37aea9.png',
+    },
     pdf: {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/pdf_classic_069acad91b.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/pdf_64c653db35.png',
@@ -217,6 +221,18 @@ export const AppLink = ({
     const ref = useRef<HTMLSpanElement>(null)
     const { getThemeSpecificBackgroundColors } = useTheme()
 
+    // Helper function to get conditional child icon classes based on parentIcon type
+    const getChildIconClasses = () => {
+        if (typeof parentIcon === 'string' && parentIcon === 'page') {
+            // Custom classes for page parentIcon
+            return `size-5 text-white absolute bottom-1 right-1 border-[1.5px] border-black rotate-1 mt-[-.125rem] ${
+                color ? `bg-${color}` : ''
+            }`
+        }
+        // Default fallback classes
+        return `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`
+    }
+
     const renderIcon = () => {
         const iconToRender = parentIcon || Icon
 
@@ -249,27 +265,19 @@ export const AppLink = ({
         if (!parentIcon || !Icon) return null
 
         if (typeof Icon === 'string') {
-            return (
-                <IconImage
-                    url={Icon}
-                    className={`size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`}
-                />
-            )
+            return <IconImage url={Icon} className={getChildIconClasses()} />
         }
 
         if (React.isValidElement(Icon)) {
             return React.cloneElement(Icon as React.ReactElement<any>, {
-                className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
+                className: getChildIconClasses(),
             })
         }
 
         // Icon is a ComponentType
         const IconComponent = Icon as React.ComponentType<any>
-        return (
-            <IconComponent
-                className={`size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`}
-            />
-        )
+
+        return <IconComponent className={getChildIconClasses()} />
     }
 
     const baseBackgroundColors = `

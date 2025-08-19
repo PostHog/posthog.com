@@ -512,6 +512,7 @@ export default function Products(): JSX.Element {
                                                                                 isListLayout ? 'row' : 'column'
                                                                             }
                                                                             parentIcon={product.parentIcon}
+                                                                            color={product.color}
                                                                             background="bg-primary"
                                                                             className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
                                                                         >

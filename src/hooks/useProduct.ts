@@ -110,6 +110,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
         },
         {
             name: 'SQL editor',
+            parentIcon: 'page',
             Icon: IconAsterisk,
             description: 'Query your entire data warehouse with HogQL',
             handle: 'sql',
