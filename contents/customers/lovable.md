@@ -36,7 +36,7 @@ This kind of debugging isnâ€™t limited to new releases however. For Viktor, itâ€
 
 <BorderWrapper>
     <Quote
-        imageSource="/images/customers/viktor.jpg"
+        imageSource="https://res.cloudinary.com/dmukukwp6/image/upload/q_auto,f_auto/viktor_00c779a706.jpg"
         size="md"
         name="Viktor Eriksson"
         title="Software Engineer at Lovable"
