@@ -4,8 +4,6 @@ sidebar: Handbook
 showTitle: true
 ---
 
-
-
 First, you should start with two assumptions about our users:
 
 1. They're busy and don't have time to read long docs.
@@ -35,19 +33,19 @@ When explaining complex features or concepts, provide real-world use cases and e
 - Break up long sections with subheadings
 - Put the most important information first
 
-### Link to PostHog app
+## Link to PostHog app
 
 You can also link to the PostHog app directly by using `https://us.posthog.com/${path}`. This saves time for our users and makes it easier for them to find what they need. Make sure to remove `project/2/` from the URL so it redirects them to their project. EU Cloud users are redirected automatically.
 
 > **Example:** "To create an insight, first [capture events](/docs/product-analytics/capture-events). Then, go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
-### Bold button and tab names
+## Bold button and tab names
 
 Put button, tab, and other navigation names in bold. This makes it easier for our users to skim through the docs, and it's cleaner than using quotes all the time.
 
 > **Example:** "Go to the [insights tab](https://us.posthog.com/insights) and click **+ New insight**."
 
-### Navigating UI
+## Navigating UI
 When documenting UI steps, references to UI elements should be in chronological order. When possible, hyperlink to the correct location.
 
 > **Do:** Under **Settings** > **User**, under the [Two-factor section](https://us.posthog.com/settings/user#2fa), click the **Set up 2FA** button.
@@ -64,17 +62,17 @@ For long UI flows, like big menus or settings, use `>` to show the menu or headi
 
 Using `>` in long flows and explicitly stating actions makes it easier to scan. If the flow is complex, consider [adding a video](#record-video).
 
-### The backtick is your friend
+## The backtick is your friend
 
 Remember to use backticks around inline code snippets, and triple backticks around multiline code samples.
 
-### Follow the style standards of each programming language
+## Follow the style standards of each programming language
 
 In code samples, use the conventions of the language the code is written in.
 
 For example, JavaScript uses `PascalCase` for class/constructor names, and `camelCase` for most other names. Python uses `PascalCase` for classes, and `snake_case` for most other names. And so on.
 
-### Use snake case for PostHog events and properties.
+## Use snake case for PostHog events and properties.
 
 Use `snake_case`, not `camelCase` or `PascalCase` for PostHog event and property names. For example:
 
@@ -84,6 +82,17 @@ posthog.capture('user_signed_up', {
   username: 'Jane Doe',
 })
 ```
+
+## Screenshots
+
+To keep screenshots consistent and clear, here are tips to follow:
+- Make sure you're not showing any user data, like user emails or names.
+- Focus on the main element, leave out sidebars and irrelevant UI.
+- Use a device width of 1000px - 1400px in devtools. This avoids unnecessary empty space and keeps text readable.
+- Prefer taking **node screenshots** of the DOM node element you're trying to capture. This takes an **upscaled** screenshot by DPR of the DOM node element. 
+- Use DPR (device pixel ratio) of 3, this will **upscale** rendering to 3x the size of the screen.
+
+![Screenshot settings](https://res.cloudinary.com/dmukukwp6/video/upload/Google_Chrome_screenshot_settings_fcef064998.mp4)
 
 ### Record videos
 
@@ -256,3 +265,242 @@ You can also use components <TeamMember name="Edwin Lim" photo /> <TeamMember na
 
 </QuestLog>
 ```
+
+## Code blocks 
+
+PostHog uses extended markdown syntax for more expressive code blocks. Here are the code block features we support:
+
+import Tab from "components/Tab"
+
+### File names
+
+You can identify the file you're editing by adding `filename=` to the code block. This is displayed in the code block's title.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```js filename=index.js
+console.log('Hello, world!')
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+``````mdx
+```js filename=index.js
+console.log('Hello, world!')
+```
+``````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+### Multi-language code blocks
+
+You can use the `<MultiLanguage>` component to show code blocks in multiple languages.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+<MultiLanguage>
+
+```js filename=index.js
+console.log('Hello, world!')
+```
+
+```python filename=index.py
+print('Hello, world!')
+```
+
+</MultiLanguage>
+
+</Tab.Panel>
+<Tab.Panel>
+
+``````mdx
+<MultiLanguage>
+```js filename=index.js
+console.log('Hello, world!')
+```
+
+```python filename=index.py
+print('Hello, world!')
+```
+</MultiLanguage>
+``````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+### Code highlighting
+
+Especially in long tutorials, you can highlight the important differences between steps using highlighting comments. It's much easier to read visual diffs than reading through the code block line by line.
+
+| Comment | Effect | Usage |
+| --- | --- | --- |
+| `// +` | Green highlight | Represents additions in diffs |
+| `// -` | Red highlight | Represents removals in diffs |
+| `// HIGHLIGHT` | Yellow highlight | General emphasis without special meaning |
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```js filename=index.js
+const a = 1
+const b = 2
+const c = a + b // +
+
+console.log(a+b) // -
+console.log(c) // +
+
+console.log('end') // HIGHLIGHT
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+``````mdx
+```js filename=index.js
+const a = 1
+const b = 2
+const c = a + b // +
+
+console.log(a+b) // -
+console.log(c) // +
+
+console.log('end') // HIGHLIGHT
+```
+``````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+
+### Collapsed code blocks
+
+In some cases, such as large nested config files, you need readers to focus on a specific part of the code block while maintaining the context. You can do this by adding `focusOnLines=` to the code block. This collapses the code block and only shows the lines of code you specify.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```json file=angular.json focusOnLines=4-14
+{
+  "projects": {
+    "my-app": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "sourceMap": {
+              "scripts": true, // +
+              "styles": true, // +
+              "hidden": true, // +
+              "vendor": true // +
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+``````mdx
+```json file=angular.json focusOnLines=4-14
+{
+  "projects": {
+    "my-app": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "sourceMap": {
+              "scripts": true, // +
+              "styles": true, // +
+              "hidden": true, // +
+              "vendor": true // +
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+``````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
+### Mermaid diagrams
+
+Code blocks can also be used to show mermaid UML diagrams. When using these diagrams, make sure to include a text description of the diagram afterwards for accessibility and LLMs.
+
+<Tab.Group tabs={[
+'Preview',
+'Markdown']}>
+<Tab.List>
+  <Tab>Preview</Tab>
+  <Tab>Markdown</Tab>
+</Tab.List>
+<Tab.Panels>
+<Tab.Panel>
+
+```mermaid
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    John-->Alice: Great!
+    Alice->John: See you later!
+```
+
+</Tab.Panel>
+<Tab.Panel>
+
+``````mdx
+```mermaid
+sequenceDiagram
+    Alice->John: Hello John, how are you?
+    John-->Alice: Great!
+    Alice->John: See you later!
+```
+``````
+
+</Tab.Panel>
+</Tab.Panels>
+</Tab.Group>
+
