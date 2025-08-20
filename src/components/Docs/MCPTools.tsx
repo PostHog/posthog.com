@@ -1,5 +1,5 @@
 import React from 'react'
-import mcpToolsData from 'data/mcp-tools.json'
+import mcpToolsData from '../../data/mcp-tools.json'
 
 interface Tool {
     name: string
