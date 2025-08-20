@@ -27,7 +27,7 @@ Here's a decision tree that you might find handy:
 ```mermaid
 graph TD
 A[Are you using a 3rd party CDP currently?] --> |Yes| B[Option 2<br/>Integrate PostHog]
-A --> |No| C[Are there destinations you need that PostHog doesn't have yet?<br/> e.g. Marketing platforms] --> |Yes| D[Option 2<br/>Integrate PostHog]
+A --> |No| C[Are there destinations you need that PostHog doesn't have yet?] --> |Yes| D[Option 2<br/>Integrate PostHog]
 C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 ```
 
@@ -35,7 +35,7 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 In general, we recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
 
-If you need destinations that we don't currently support, you have three options:
+We should have most the destinations you need, but if we don't currently support, you have three options:
 
 1. Use our [custom webhook destination](/docs/cdp/destinations/webhook) or build your own [realtime destinations](/docs/cdp/destinations) to call the 3rd-party API.
 2. Request a new destination by clicking **Can't find what your looking for?** when [creating a new destination](https://us.posthog.com/pipeline/new/destination) in-app and our team will be notified.
@@ -59,7 +59,7 @@ B[PostHog] --> F[Data warehouse e.g. BigQuery / Snowflake]
 - Works with all the features of PostHog (analytics, autocapture, feature flags, session recording, etc.)
 
 **Cons:**
-- We don't yet have as many integrations as 3rd party CDPs, particularly for marketing ad platforms (like Facebook, Google, TikTok, etc.). If you need these destinations immediately and you have the time and money for a 3rd party CDP, you might want to go with option 2.
+- We may not have all the destinations as "pure CDP" products. If you need these destinations immediately and you have the time and money for a 3rd party CDP, you might want to go with option 2.
 
 ### Sending PostHog data to a 3rd party CDP for extra destinations
 
