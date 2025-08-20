@@ -190,7 +190,7 @@ We usually set up the following trials depending on likely contract size:
 
 Most customers don't need this beyond sharing our existing documentation. This step often occurs in parallel with product evaluation. Usually only bigger companies ask for this.
 
-> You do not need an NDA to share PostHog internal policies - by default most of these should be publicly available in the [Handbook](/handbook/company/security) anyway, though some are only stored in Drata. If a customer asks you to sign their NDA, you can sign, but have our counsel review it first.
+> You do not need an NDA to share PostHog internal policies - by default most of these should be publicly available in the [Handbook](/handbook/company/security) anyway, though some are only stored in Drata. If a customer asks you to sign their NDA, you can sign, but have our counsel review it first. As a starting point it must be governed by US law, and mutual.
 
 If the customer requires a vendor questionnaire or security questionnaire then it's best for the AE involved to try and fill it out. If a company reaches out initially with this request, it's often best to try and understand if the customer has an intention to pay or at least grow into a paying customer before investing a lot of time filling it out. If there are any questions that are unclear post the specific question in #team-people-and-ops channel.
 
