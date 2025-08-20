@@ -77,6 +77,12 @@ For custom insights or SQL usage, **you can use built-in SQL function `getSurvey
 
 Only the `question_index` parameter is mandatory. However, if you use the `question_id`, the value for `question_index` is ignored.
 
+## Survey shows up repeatedly after dismissing
+
+A bug in `posthog-js` version `1.249.2` caused surveys to show up repeatedly even after being dismissed or completed. This was fixed in `posthog-js` version `1.249.3`.
+
+**Solution:** Upgrade to the latest version of `posthog-js`. If the issue persists, please contact us using [one of the support options](/docs/support-options).
+
 ## Debugging surveys in console
 
 [Enable debugging](/docs/libraries/js#debugging) to check the dev logs in your dev console.

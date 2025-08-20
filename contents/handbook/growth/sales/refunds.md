@@ -21,6 +21,11 @@ Bot spike/abusive user drove traffic which in turn increased posthog usage
 
 We flag accounts with unusual activity spikes for review, and refund or issue credits to cover the overage amount once the issue has been resolved. The issued amount covers any amount exceeding the average usage of the three months preceding the spike.
 
+### Wrong Setup
+New feature trial with incorrect configuration
+
+We issue refunds or credits in this category if the customer was charged for features they didn't intend to use due to default settings or configuration errors, and this is the first occurrence of unintended usage charges.
+
 ## Eligibility Criteria
 Customer must meet the following criteria to get a refund:
 - The request is made within 30 days of the billing date.
@@ -90,14 +95,15 @@ What's "normal" vs "weird" usage:
 You need Support specialist level access to Stripe, ask Simon for access.
 
 ### Issuing credits
-1. Find customer profile in Stripe (you can search by organization id)
-2. Go to section "Customer invoice balance"
-3. Click "adjust balance"
-4. Select "credit" adjustment type
-5. Type in Amount (Stripe shows this as a negative number. When you hover over the information point it will tell you that this amount will decrease the customer's next invoice)
-6. Add internal note: a brief comment to explain the reason and link to Zendesk ticket
-7. Click "apply to credit balance"
-8. When finished issuing credits, double check customer balance and customer's next invoice to see that it is projected to be as you'd expect.
+1. Go to [billing admin](https://billing.posthog.com/admin/)
+2. Next to 'Credits', click on 'Add'
+3. In the 'Customer' field, use the drop-down menu to find your customer
+4. In the 'Amount' field, set an amount of credits you wish to issue for this customer
+5. In the 'Reason' field, select a reason which best describes why you're issuing the credits
+6. Add an optional note in the 'Notes' field
+7. Include an optional link in the 'Reference link' field, e.g. Zendesk ticket, Slack message link, etc.
+8. Click 'Save and view'
+9. Confirm that the credits were successfully added to the customer's balance in Stripe under 'Customer invoice balance'
 
 ### Issuing refunds
 1. Find customer profile in Stripe (you can search by organization id)

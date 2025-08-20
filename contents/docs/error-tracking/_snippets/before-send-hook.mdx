@@ -1,0 +1,17 @@
+You can use the [`before_send`](/docs/libraries/js/features#amending-or-sampling-events) callback in the [web](/docs/libraries/js) and [Node.js](/docs/libraries/node) SDKs to exclude any exception events you do not wish to capture. Do this by providing a `before_send` function when initializing PostHog and have it return a falsey value for any events you want to drop.
+
+```js
+posthog.init('<ph_project_api_key>', {
+    before_send: (event) => {
+        if (event.event === "$exception") {
+            const exceptionList = event.properties["$exception_list"] || []
+            const exception = exceptionList.length > 0 ? exceptionList[0] : null;
+
+            if (exception && exception["$exception_type"] === "UnwantedError") {
+                return false
+            }
+        }
+        return event
+    }
+})
+```
