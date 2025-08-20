@@ -84,6 +84,26 @@ const HeroPostIt = ({ color, icon, beta, product, title, description }: HeroPost
 
 export const ProductPostItTraining = () => {
     const { fullWidthContent } = useLayoutData()
+
+    // LinkedIn certification URL generation
+    const now = new Date()
+    const issueYear = now.getFullYear()
+    const issueMonth = now.getMonth() + 1
+    const expirationYear = issueYear + 100
+    const expirationMonth = issueMonth
+    const liUrl =
+        `https://www.linkedin.com/profile/add?` +
+        new URLSearchParams({
+            startTask: 'CERTIFICATION_NAME',
+            name: 'Post-It Note Certified Applicator',
+            organizationId: '37415928',
+            issueYear: String(issueYear),
+            issueMonth: String(issueMonth),
+            expirationYear: String(expirationYear),
+            expirationMonth: String(expirationMonth),
+            certUrl: 'https://www.posthog.com',
+            certId: String(Date.now() + Math.random() * 1000), // Always unique
+        }).toString()
     return (
         <>
             <SEO
@@ -222,13 +242,8 @@ export const ProductPostItTraining = () => {
                     </h3>
 
                     <div className="flex justify-center gap-2">
-                        <CallToAction
-                            href="https://www.linkedin.com/in/me/edit/forms/certification/new/"
-                            type="primary"
-                            size="lg"
-                            externalNoIcon
-                        >
-                            <>Share on LinkedIn</>
+                        <CallToAction href={liUrl} type="primary" size="lg" externalNoIcon>
+                            <>Add to LinkedIn Profile</>
                         </CallToAction>
                         <CallToAction
                             href="https://twitter.com/intent/tweet?text=I just got Post-it certified by @PostHog 📝 — now my ideas actually stick! https://posthog.com/post-it-training"
