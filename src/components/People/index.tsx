@@ -75,7 +75,7 @@ export const TeamMember = (props: any) => {
 
     // Get bio placeholder text based on role
     const getBioPlaceholder = () => {
-        if (roleType) return "I've been too busy helping customers to fill out my bio"
+        if (roleType) return "I've been too busy helping customers to fill out my bio."
         if (isEngineer) return "I've been too busy shipping features to fill out my bio."
         return "I haven't had a chance to fill out my bio yet."
     }
@@ -430,7 +430,7 @@ export default function People({ searchTerm, filteredMembers }: PeopleProps = {}
                     </aside> 
                     */}
 
-                <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @5xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
+                <ul className="not-prose list-none mt-12 mx-0 p-0 flex flex-col @xs:grid grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4 gap-4 @md:gap-x-6 gap-y-12 max-w-screen-2xl">
                     {filteredTeamMembers.map((teamMember: any, index: number) => {
                         // Calculate if this person is a team lead of any team
                         const isTeamLead = teamMember.leadTeams?.data?.length > 0

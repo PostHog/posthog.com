@@ -102,7 +102,7 @@ export const dataWarehouse = {
             title: 'Connectors',
             headline: 'Connectors',
             description:
-                "Use Temportal to sync data from your sources into PostHog's S3 storage smoothly. We'll handle the data flow for you.",
+                "Use Temporal to sync data from your sources into PostHog's S3 storage smoothly. We'll handle the data flow for you.",
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/custom.png',

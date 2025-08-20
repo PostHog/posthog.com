@@ -43,7 +43,7 @@ const tabs = [
     },
 ]
 
-const tabContainerClassName = 'flex justify-center bg-accent sticky top-0 z-10 border-b border-primary'
+const tabContainerClassName = 'flex justify-center bg-accent sticky top-0 z-30 border-b border-primary'
 const className =
     '-mx-4 -mt-4 [&_div[role=tablist]]:pt-0.5 [&_div[role=tablist]]:w-full [&_div[role=tablist]]:pl-1.5 [&_div[role=tablist]]:flex [&_div[role=tablist]]:justify-center'
 

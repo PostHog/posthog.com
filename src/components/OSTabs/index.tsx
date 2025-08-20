@@ -21,6 +21,7 @@ interface OSTabsProps {
     extraTabRowContent?: React.ReactNode
     onValueChange?: (value: string) => void
     tabContainerClassName?: string
+    tabContentClassName?: string
 }
 
 export default function OSTabs({
@@ -34,6 +35,7 @@ export default function OSTabs({
     extraTabRowContent,
     onValueChange,
     tabContainerClassName,
+    tabContentClassName,
 }: OSTabsProps) {
     return (
         <>
@@ -61,11 +63,10 @@ export default function OSTabs({
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
                         <ScrollArea
-                            className={`@container bg-primary h-full min-h-0 ${
-                                frame ? 'border border-primary rounded-md' : ''
-                            }`}
+                            className={`@container bg-primary h-full min-h-0 ${frame ? 'border border-primary rounded-md' : ''
+                                }`}
                         >
-                            <div className={frame ? '@container p-4 @2xl:p-6' : '@container'}>{tab.content}</div>
+                            <div className={`${frame ? '@container p-4 @2xl:p-6' : '@container'} ${tabContentClassName}`}>{tab.content}</div>
                         </ScrollArea>
                     </Tabs.Content>
                 ))}

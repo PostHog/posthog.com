@@ -100,12 +100,12 @@ export const LottieAnimation = ({ variant, className = '' }: LottieAnimationProp
         },
         office: {
             src: '/lotties/office.lottie',
-            caption: "We're intentional about building the kind of company we actually enjoy working at.",
+            // caption: "We're intentional about building the kind of company we actually enjoy working at.",
             className: '@xl:float-right mx-auto w-80 @xl:mr-4',
             containerClasses: 'relative',
             backgroundClasses: 'absolute inset-4 bg-accent rounded-full size-60 mx-auto',
             lottieClasses: 'size-72 mx-auto relative',
-            captionClasses: 'text-primary text-center text-[15px] -mt-2 text-balance',
+            // captionClasses: 'text-primary text-center text-[15px] -mt-2 text-balance',
         },
     }
 
