@@ -1,0 +1,98 @@
+---
+title: Incoming webhooks
+sidebar: Docs
+showTitle: true
+availability:
+  free: full
+  selfServe: full
+  enterprise: full
+---
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+Incoming webhooks allow you to send data from external systems directly into PostHog. This is useful for integrating with custom applications, third-party services, or any system that can make HTTP requests. In general we recommend using our official ingestion API / SDKs but this is useful where you don't have control over the sender format and need to perform some transformation to match PostHog's event format.
+
+## How it works
+
+When you create an incoming webhook source, PostHog generates a unique URL that you can use to send data from your external systems. The webhook accepts POST requests with any JSON payload, and you can configure how to parse and map the incoming data to PostHog events.
+
+### Webhook URL format
+
+Your webhook URL will look like this:
+```
+https://webhooks.us.posthog.com/public/webhooks/<UUID>
+```
+
+Use this URL in your external system to send events to PostHog. The webhook can be called with a POST request and any JSON payload.
+
+
+## Transforming the webhook payload
+
+We recommend starting from the default [HTTP incoming webhook template](/docs/cdp/source_webhooks/source-webhook). For most use cases, you can transform the incoming webhook to the required properties simply using our [Hog templating language](/docs/hog).
+
+
+### The request object
+
+The request object is available for templating the inputs as well as the underlying Hog code. It contains the following properties:
+
+- `request.body`: The body of the request parsed as JSON
+- `request.headers`: The headers of the request as a dictionary
+- `request.method`: The HTTP method of the request
+- `request.ip`: The IP address of the requester
+
+For example if you send a request with curl like so:
+
+```bash
+curl -X POST https://webhooks.<region>.posthog.com/public/webhooks/<UUID> \
+  -H "Content-Type: application/json" -H "Authorization: Bearer <API_KEY>" \
+  -d '{
+    "email": "example@example.com",
+    "type": "signup"
+  }'
+```
+
+Then the variables available to use will look like:
+
+```hog
+print(request.method)
+// Outputs: 'POST'
+print(request.headers)
+// Outputs: { 'Content-Type': 'application/json', 'Authorization': 'Bearer <API_KEY>' }
+print(request.body)
+// Outputs: { 'email': 'example@example.com', 'type': 'signup' }
+print(request.ip)
+// Outputs: '127.0.0.1'
+```
+
+
+### Capturing a PostHog event
+
+If using the default template, you simply need to customize the inputs so that the required values `event` and `distinct_id` are set as well as the optional `properties` object.
+
+Under the hood, the code to capture an event is:
+
+```hog
+postHogCapture({
+    'event': input.event,
+    'distinct_id': input.distinct_id,
+    'properties': input.properties
+})
+```
+
+## HTTP requests and background processing
+
+Webhook sources can call `postHogCapture` to ingest events to PostHog. You can also do HTTP calls with `fetch`. In this case, however, the request will be queued to a background task, a 201 Created response will be returned, and the event will be ingested asynchronously.
+
+## Best practices
+
+1. **Use HTTPS**: Always use HTTPS URLs for security
+2. **Implement authentication**: Use authorization headers to secure your webhooks
+3. **Validate data**: Ensure your webhook validates incoming data before processing
+
+## Troubleshooting
+
+### Common issues
+
+- **401 Unauthorized**: Check that your authorization header matches the configured value
+- **400 Bad Request**: Verify that required fields (event and distinct_id) are provided
+- **Timeout errors**: Ensure your webhook processing completes within the time limit
+

@@ -554,6 +554,7 @@ function PipelinesPage({ location }) {
     const {
         destinations: { nodes },
         transformations: { nodes: transformations },
+        source_webhooks: { nodes: source_webhooks },
     } = useStaticQuery(query)
 
     const [searchValue, setSearchValue] = React.useState('')
@@ -562,7 +563,7 @@ function PipelinesPage({ location }) {
     const [selectedType, setSelectedType] = React.useState('All')
 
     const pipelines = {
-        Sources: sources,
+        Sources: [...sources, ...source_webhooks],
         Destinations: nodes,
         Transformations: transformations,
     }
@@ -917,6 +918,31 @@ const query = graphql`
             }
         }
         transformations: allPostHogPipeline(filter: { type: { eq: "transformation" } }) {
+            nodes {
+                id
+                slug
+                name
+                category
+                description
+                icon_url
+                type
+                mdx {
+                    body
+                    fields {
+                        slug
+                    }
+                }
+                inputs_schema {
+                    key
+                    type
+                    label
+                    required
+                    description
+                }
+                status
+            }
+        }
+        source_webhooks: allPostHogPipeline(filter: { type: { eq: "source_webhook" } }) {
             nodes {
                 id
                 slug
