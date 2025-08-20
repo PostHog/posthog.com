@@ -112,7 +112,7 @@ export default function DataWarehouse(): JSX.Element {
                     <CloudinaryImage src={dataWarehouse.screenshots[0].src} alt={dataWarehouse.screenshots[0].alt} />
                 </ZoomImage>
 
-                <h3>Customers who love Data Warehouse</h3>
+                <h3>Customers who love PostHog's Data Warehouse</h3>
                 <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" size="sm" />
 
                 <h3>Features</h3>
@@ -133,7 +133,7 @@ export default function DataWarehouse(): JSX.Element {
                     ))}
                 </ul>
 
-                <h3>Common Questions</h3>
+                <h3>Common questions</h3>
                 <ul>
                     {dataWarehouse.questions.map((question, index) => (
                         <li key={index}>
@@ -154,18 +154,6 @@ export default function DataWarehouse(): JSX.Element {
                             : {pair.description}
                         </li>
                     ))}
-                </ul>
-
-                <h3>Customer Success Stories</h3>
-                <ul>
-                    <li>
-                        <strong>HeadshotPro</strong> {dataWarehouse.customers.headshotpro.headline} - "
-                        {dataWarehouse.customers.headshotpro.description}"
-                    </li>
-                    <li>
-                        <strong>Webshare</strong> {dataWarehouse.customers.webshare.headline} - "
-                        {dataWarehouse.customers.webshare.description}"
-                    </li>
                 </ul>
             </ReaderView>
         </>

@@ -4,7 +4,7 @@ import { IconPlug } from '@posthog/icons'
 export const cdp = {
     parentIcon: 'spreadsheet',
     // Icon: IconPlug,
-    name: 'data connectors.db',
+    name: 'Integrations library',
     description: 'Get data into PostHog and send it where it needs to go.',
     handle: 'cdp',
     type: 'cdp',

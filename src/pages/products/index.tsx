@@ -391,10 +391,14 @@ export default function Products(): JSX.Element {
                         data: [
                             'customer-data-infrastructure',
                             'cdp',
-                            'data-warehouse',
-                            'sql',
-                            'capture_api',
-                            'webhooks',
+                            'data_in',
+                            'transformations',
+                            'analyze',
+                            'data_out',
+                            // 'data-warehouse',
+                            // 'sql',
+                            // 'capture_api',
+                            // 'webhooks',
                         ],
                         analytics: [
                             'bi',

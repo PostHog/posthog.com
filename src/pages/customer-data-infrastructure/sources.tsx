@@ -124,6 +124,28 @@ export default function Sources(): JSX.Element {
                         <strong>Server-to-server:</strong> Direct integration without client libraries
                     </li>
                 </ul>
+                <h3>Features</h3>
+                <p>
+                    Capture events from your backend, frontend, mobile apps, or IoT devices. No rate limits, automatic
+                    retries, and batch support.
+                </p>
+                <ul>
+                    <li>
+                        <strong>No rate limits</strong>: Send as many events as you need without throttling or quotas
+                    </li>
+                    <li>
+                        <strong>Batch endpoint</strong>: Send up to 1000 events in a single request for efficiency
+                    </li>
+                    <li>
+                        <strong>Backend attribution</strong>: Associate server-side events with frontend sessions
+                    </li>
+                    <li>
+                        <strong>Automatic retries</strong>: Built-in retry logic for failed requests
+                    </li>
+                    <li>
+                        <strong>20MB payloads</strong>: Send large payloads with complex properties
+                    </li>
+                </ul>
                 <p>
                     <Link to="/docs/api/capture" state={{ newWindow: true }}>
                         Read the Capture API documentation →

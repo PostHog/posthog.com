@@ -1,9 +1,10 @@
 import React from 'react'
-import { IconDatabase } from '@posthog/icons'
+import { IconAsterisk } from '@posthog/icons'
 
 export const dataWarehouse = {
-    Icon: IconDatabase,
-    name: 'Data Warehouse',
+    parentIcon: 'page',
+    Icon: IconAsterisk,
+    name: 'Query & visualize data',
     handle: 'data_warehouse',
     type: 'data_warehouse',
     slug: 'data-warehouse',
@@ -49,6 +50,105 @@ export const dataWarehouse = {
     },
     features: [
         {
+            title: 'Hog',
+            features: [
+                {
+                    title: 'SQL-compatible syntax',
+                    headline: 'Familiar language for data teams',
+                    description:
+                        'If you know SQL, you already know most of Hog. Built to feel natural for data analysis.',
+                    images: [
+                        {
+                            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1710055416/posthog.com/contents/images/docs/hog/hog-code-example.png',
+                            alt: 'Hog code example',
+                        },
+                    ],
+                    features: [
+                        {
+                            title: 'SQL expressions',
+                            description: 'All SQL expressions work as Hog code',
+                        },
+                        {
+                            title: 'Variables and functions',
+                            description: 'Full programming language with functions, loops, and conditionals',
+                        },
+                        {
+                            title: 'String templates',
+                            description: 'F-string support for easy string formatting',
+                        },
+                        {
+                            title: 'Pattern matching',
+                            description: 'Regex and LIKE operators for string matching',
+                        },
+                        {
+                            title: 'Type conversion',
+                            description: 'Built-in functions for converting between types',
+                        },
+                    ],
+                },
+                {
+                    title: 'Real-time destinations',
+                    headline: 'Send data anywhere, instantly',
+                    description: 'Build custom destinations that process and route your data in real-time.',
+                    images: [
+                        {
+                            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/custom_destination_input_f74eb7947d.png',
+                            alt: 'Destination configuration',
+                        },
+                    ],
+                    features: [
+                        {
+                            title: 'HTTP requests',
+                            description: 'Send data to any webhook or API endpoint',
+                        },
+                        {
+                            title: 'Async execution',
+                            description: 'Pause and resume execution across fetch calls',
+                        },
+                        {
+                            title: 'Error handling',
+                            description: 'Gracefully handle failures with retries',
+                        },
+                        {
+                            title: 'Input validation',
+                            description: 'Define input schemas for reusable destinations',
+                        },
+                        {
+                            title: 'Debug mode',
+                            description: 'Print variables and trace execution flow',
+                        },
+                    ],
+                },
+                {
+                    title: 'Secure execution',
+                    headline: 'Run untrusted code safely',
+                    description: 'The HogVM provides a secure sandbox for running user-provided code at scale.',
+                    features: [
+                        {
+                            title: 'Bytecode VM',
+                            description: 'Stack-based virtual machine with predictable behavior',
+                        },
+                        {
+                            title: 'Resource limits',
+                            description: 'Automatic timeouts and memory constraints',
+                        },
+                        {
+                            title: 'No side effects',
+                            description: 'Sandboxed execution prevents system access',
+                        },
+                        {
+                            title: 'Serializable state',
+                            description: 'Pause, serialize, and resume execution anywhere',
+                        },
+                        {
+                            title: 'Multi-language support',
+                            description: 'VMs in Python, TypeScript, and soon Rust',
+                        },
+                    ],
+                },
+            ],
+        },
+        {
             title: 'Query with PostHog SQL',
             headline: 'Query with PostHog SQL',
             description: 'Directly access your data, join sources, and interrogate data however you want',
@@ -67,11 +167,153 @@ export const dataWarehouse = {
                     title: 'Write SQL without knowing SQL',
                     description: 'Nobody likes writing SQL, except for our AI helper, Max',
                 },
+                {
+                    title: 'Simplified syntax',
+                    description: 'Access properties with dot notation like properties.$browser',
+                },
+                {
+                    title: 'Smart joins',
+                    description: 'Automatic joins between events, persons, and groups',
+                },
+                {
+                    title: 'Product functions',
+                    description: 'Built-in functions for cohorts, feature flags, and more',
+                },
+                {
+                    title: 'ClickHouse power',
+                    description: 'Full access to ClickHouse functions and performance',
+                },
+                {
+                    title: 'Time zone handling',
+                    description: 'Automatic time zone conversion for your project',
+                },
             ],
             images: [
                 {
                     src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/DataWarehouse/images/stripe.png',
                     alt: '',
+                },
+            ],
+        },
+        {
+            title: 'SQL insights',
+            headline: 'Custom analytics beyond standard charts',
+            description:
+                'Build any analysis with SELECT, JOIN, WHERE, GROUP BY and visualize results in multiple formats.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/sql-light.png',
+                    alt: 'SQL insights',
+                },
+            ],
+            features: [
+                {
+                    title: 'Complex queries',
+                    description: 'Multi-step CTEs, window functions, and subqueries',
+                },
+                {
+                    title: 'Multiple visualizations',
+                    description: 'Tables, line charts, bar charts, and more',
+                },
+                {
+                    title: 'Save & share',
+                    description: 'Save queries as insights to add to dashboards',
+                },
+                {
+                    title: 'Export results',
+                    description: 'Download query results as CSV or JSON',
+                },
+                {
+                    title: 'Query templates',
+                    description: 'Start from examples or save your own templates',
+                },
+            ],
+        },
+        {
+            title: 'Data exploration',
+            headline: 'Browse and query all available tables',
+            description:
+                'Explore events, persons, sessions, and external data sources with schema browser and auto-complete.',
+            images: [
+                {
+                    src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/hogql/warehouse-light.png',
+                    alt: 'Data exploration',
+                },
+            ],
+            features: [
+                {
+                    title: 'Schema browser',
+                    description: 'See all tables, columns, and data types',
+                },
+                {
+                    title: 'Auto-complete',
+                    description: 'IntelliSense for tables, columns, and functions',
+                },
+                {
+                    title: 'Sample data',
+                    description: 'Preview table contents before querying',
+                },
+                {
+                    title: 'Query history',
+                    description: 'Access and rerun previous queries',
+                },
+                {
+                    title: 'Performance hints',
+                    description: 'Optimization suggestions for slow queries',
+                },
+            ],
+        },
+        {
+            title: 'External data sources',
+            headline: 'Query PostHog alongside business data',
+            description: 'Join events with data from Stripe, HubSpot, databases, and more in a single query.',
+            features: [
+                {
+                    title: 'Data warehouse',
+                    description: 'Connect external sources like Stripe, HubSpot, and databases',
+                },
+                {
+                    title: 'Unified queries',
+                    description: 'JOIN PostHog events with external tables',
+                },
+                {
+                    title: 'Custom views',
+                    description: 'Create reusable views combining multiple sources',
+                },
+                {
+                    title: 'Scheduled syncs',
+                    description: 'Keep external data fresh with automatic updates',
+                },
+                {
+                    title: 'S3 & BigQuery',
+                    description: 'Query data directly from cloud storage',
+                },
+            ],
+        },
+        {
+            title: 'SQL API',
+            headline: 'Programmatic access for automation',
+            description: 'Query PostHog data from your applications, notebooks, or BI tools via API.',
+            features: [
+                {
+                    title: 'REST API',
+                    description: 'Simple HTTP endpoints for SQL queries',
+                },
+                {
+                    title: 'Authentication',
+                    description: 'Secure access with personal API keys',
+                },
+                {
+                    title: 'Structured responses',
+                    description: 'JSON results with types and metadata',
+                },
+                {
+                    title: 'Python & JS SDKs',
+                    description: 'Native libraries for common languages',
+                },
+                {
+                    title: 'BI tool integration',
+                    description: 'Connect Tableau, Looker, and other tools',
                 },
             ],
         },

@@ -23,39 +23,7 @@ export default function Destinations(): JSX.Element {
                     to activate your product data across your entire tech stack.
                 </p>
 
-                <h2>1. Realtime event streaming (event pipelines)</h2>
-                <p>Stream events to external systems in real-time as they happen in PostHog.</p>
-                <ul>
-                    <li>
-                        <strong>Webhooks:</strong> Send events to any HTTP endpoint in real-time
-                    </li>
-                    <li>
-                        <strong>Kafka:</strong> Stream events to Apache Kafka topics for high-throughput processing
-                    </li>
-                    <li>
-                        <strong>Amazon Kinesis:</strong> Direct integration with AWS Kinesis streams
-                    </li>
-                    <li>
-                        <strong>Google Pub/Sub:</strong> Stream to Google Cloud Pub/Sub topics
-                    </li>
-                    <li>
-                        <strong>Custom destinations:</strong> Build your own destination using our plugin framework
-                    </li>
-                </ul>
-                <p>Real-time streaming is ideal for:</p>
-                <ul>
-                    <li>Triggering immediate actions based on user behavior</li>
-                    <li>Keeping external systems synchronized with PostHog</li>
-                    <li>Building real-time dashboards and monitoring</li>
-                    <li>Feeding machine learning models with fresh data</li>
-                </ul>
-                <p>
-                    <Link to="/docs/cdp/destinations" state={{ newWindow: true }}>
-                        Explore event pipeline destinations →
-                    </Link>
-                </p>
-
-                <h2>2. Batch exports</h2>
+                <h2>1. Batch exports</h2>
                 <p>Schedule regular exports of your data to data warehouses and cloud storage.</p>
                 <ul>
                     <li>
@@ -92,9 +60,64 @@ export default function Destinations(): JSX.Element {
                         <strong>Compression:</strong> Reduce storage costs with compressed exports
                     </li>
                 </ul>
+                <h3>Features</h3>
+                <p>
+                    Query events, persons, and insights using HogQL. Build custom integrations and embed analytics in
+                    your product
+                </p>
+                <ul>
+                    <li>
+                        <strong>HogQL queries</strong>: Full SQL access to your data with our ClickHouse wrapper
+                    </li>
+                    <li>
+                        <strong>Insight data</strong>: Fetch results from saved insights and dashboards
+                    </li>
+                    <li>
+                        <strong>Person profiles</strong>: Query and update user properties and cohorts
+                    </li>
+                    <li>
+                        <strong>Export automation</strong>: Schedule exports and integrate with your data stack
+                    </li>
+                    <li>
+                        <strong>Aggregations</strong>: Get pre-computed metrics without raw event access
+                    </li>
+                </ul>
+
                 <p>
                     <Link to="/docs/batch-exports" state={{ newWindow: true }}>
                         Configure batch exports →
+                    </Link>
+                </p>
+
+                <h2>2. Realtime event streaming (event pipelines)</h2>
+                <p>Stream events to external systems in real-time as they happen in PostHog.</p>
+                <ul>
+                    <li>
+                        <strong>Webhooks:</strong> Send events to any HTTP endpoint in real-time
+                    </li>
+                    <li>
+                        <strong>Kafka:</strong> Stream events to Apache Kafka topics for high-throughput processing
+                    </li>
+                    <li>
+                        <strong>Amazon Kinesis:</strong> Direct integration with AWS Kinesis streams
+                    </li>
+                    <li>
+                        <strong>Google Pub/Sub:</strong> Stream to Google Cloud Pub/Sub topics
+                    </li>
+                    <li>
+                        <strong>Custom destinations:</strong> Build your own destination using our plugin framework
+                    </li>
+                </ul>
+                <p>Real-time streaming is ideal for:</p>
+                <ul>
+                    <li>Triggering immediate actions based on user behavior</li>
+                    <li>Keeping external systems synchronized with PostHog</li>
+                    <li>Building real-time dashboards and monitoring</li>
+                    <li>Feeding machine learning models with fresh data</li>
+                </ul>
+                <p>
+                    <Link to="/docs/cdp/destinations" state={{ newWindow: true }}>
+                        Explore event pipeline destinations →
                     </Link>
                 </p>
 

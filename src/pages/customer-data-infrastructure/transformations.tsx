@@ -70,7 +70,16 @@ export default function Transformations(): JSX.Element {
                 <p>Transform data before sending it to external destinations:</p>
                 <ul>
                     <li>
-                        <strong>Format conversion:</strong> Convert PostHog events to match destination schemas
+                        <strong>JSON formatting:</strong> Convert PostHog events to match the JSON structure your
+                        destination expects
+                    </li>
+                    <li>
+                        <strong>Data enrichment:</strong> Add context like GeoIP location, user agent parsing, or
+                        company data
+                    </li>
+                    <li>
+                        <strong>Template syntax:</strong> Use <code>&#123;event.properties.value&#125;</code> to build
+                        custom payloads
                     </li>
                     <li>
                         <strong>Data aggregation:</strong> Combine multiple events into summary metrics
@@ -166,6 +175,60 @@ export default function Transformations(): JSX.Element {
                     </li>
                     <li>
                         <strong>Error handling:</strong> Build in fallbacks for when transformations fail
+                    </li>
+                </ul>
+
+                <hr />
+                <h2>FAQ</h2>
+
+                <ul>
+                    <li>
+                        <strong>What's the difference between webhooks and batch exports?</strong>
+                        <br />
+                        Webhooks send data in real-time as events happen, perfect for alerts and automation. Batch
+                        exports send data in scheduled chunks, ideal for data warehouses and large-scale processing.
+                    </li>
+                    <li>
+                        <strong>Can I send data to multiple destinations?</strong>
+                        <br />
+                        Yes! Create as many webhook destinations as you need. Each can have different filters and
+                        transformations. Many teams use separate webhooks for alerts, CRM sync, and marketing
+                        automation.
+                    </li>
+                    <li>
+                        <strong>How reliable are webhooks?</strong>
+                        <br />
+                        PostHog automatically retries failed requests up to 3 times. We monitor destination performance
+                        and alert you to issues. For critical data, combine webhooks with batch exports as a backup.
+                    </li>
+                    <li>
+                        <strong>Can I customize the webhook payload?</strong>
+                        <br />
+                        Absolutely. Use our template syntax to shape data exactly how your destination expects it. For
+                        advanced cases, write custom Hog code to transform data however you need.
+                    </li>
+                </ul>
+
+                <h2>Hog FAQ</h2>
+                <ul>
+                    <li>
+                        <strong>How is Hog different from HogQL?</strong>
+                        <br />
+                        HogQL is our SQL dialect for querying data. Hog is a full programming language for transforming
+                        and routing data in real-time. While HogQL queries your data, Hog processes it as it flows
+                        through your pipeline.
+                    </li>
+                    <li>
+                        <strong>Can I test Hog code locally?</strong>
+                        <br />
+                        Yes! Clone the PostHog repo and use `bin/hog` to run .hog files locally. You can also compile to
+                        bytecode with `bin/hoge` for debugging.
+                    </li>
+                    <li>
+                        <strong>Why 1-indexed arrays?</strong>
+                        <br />
+                        Hog is SQL-compatible, and SQL has always used 1-indexed arrays. While it might feel odd coming
+                        from other languages, it ensures consistency with our SQL expressions.
                     </li>
                 </ul>
             </ReaderView>

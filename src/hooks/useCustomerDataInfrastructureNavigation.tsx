@@ -12,7 +12,7 @@ export const customerDataInfrastructureNav = {
             url: '/customer-data-infrastructure',
         },
         {
-            name: 'Integration library',
+            name: 'Integrations library',
             url: '/cdp',
             icon: 'IconPlug',
         },
