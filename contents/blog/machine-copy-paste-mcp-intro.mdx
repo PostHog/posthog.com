@@ -11,11 +11,11 @@ tags:
     - LLM
 ---
 
-It’s been hard to talk about MCP – [model context protocol](https://modelcontextprotocol.io/introduction).
+It's been hard to talk about MCP – [model context protocol](https://modelcontextprotocol.io/introduction).
 
-It’s just so abstract. Why would you want this? What does it do?
+It's just so abstract. Why would you want this? What does it do?
 
-So let’s break it down into actionable terms.
+So let's break it down into actionable terms.
 
 Our meat is slow, and machines are fast. But even machines need a common interface to get things done – that's why MCP exists.
 
@@ -25,43 +25,43 @@ In the bad old days of two years ago, using the latest models for writing code m
 
 It was tedious, sure, but even worse, it was error-prone. The manual interventions were driven by our imprecise brains and fingers. It was easy to mis-select the text you were trying to move around.
 
-Today, we have apps like Cursor. Instead of a human manually moving code, a tool reads code into the LLM’s context, plans interventions, and executes edits for you. It does this in a tight loop, even detecting and correcting errors as they’re written.
+Today, we have apps like Cursor. Instead of a human manually moving code, a tool reads code into the LLM's context, plans interventions, and executes edits for you. It does this in a tight loop, even detecting and correcting errors as they're written.
 
 What used to take minutes can happen in seconds. Automation at its finest.
 
-This represents the defeat of LLM-powered experiences' great enemy: copy-paste. The job for developer tools is to make it unnecessary, and MCP exists to support this goal. Get exactly the right data in and out of an agent session, do it fast, don’t make the developer work.
+This represents the defeat of LLM-powered experiences' great enemy: copy-paste. The job for developer tools is to make it unnecessary, and MCP exists to support this goal. Get exactly the right data in and out of an agent session, do it fast, don't make the developer work.
 
 ## Saving labor with MCP
 
-First, make it easy to install an MCP server. You can use an [automated tool](/blog/envoy-wizard-llm-agent) to inject the configuration on the developer’s behalf. Check out [this pull request](https://github.com/PostHog/wizard/pull/48) from our wizard for a look at how that works. Alternatively, each tool will have its own manual setup process. Here's [Cursor's](https://docs.cursor.com/context/model-context-protocol#configuring-mcp-servers).
+First, make it easy to install an [MCP server](/docs/model-context-protocol). You can use an [automated tool](/blog/envoy-wizard-llm-agent) to inject the configuration on the developer's behalf. Check out [this pull request](https://github.com/PostHog/wizard/pull/48) from our wizard for a look at how that works. Alternatively, each tool will have its own manual setup process. Here's [Cursor's](https://docs.cursor.com/context/model-context-protocol#configuring-mcp-servers).
 
-Next, let’s understand the protocol’s features.
+Next, let's understand the protocol's features.
 
 ### Resources
 
 **What they do**: resources dump information into the context. This could be an API key, a JSON body to help write parsing logic, or a list of established values that code must incorporate. An MCP server could get this stuff from your existing APIs and services.
 
-**How they save labor**: imagine implementing [feature flags](/docs/feature-flags/adding-feature-flag-code) in some new code. We *really* don’t want the model to invent new names for this stuff. But we also don’t want the developer to log into their account and start copying and pasting flag names. So instead, we could use MCP to pipe a list of flags and descriptions directly into the agent session.
+**How they save labor**: imagine implementing [feature flags](/docs/feature-flags/adding-feature-flag-code) in some new code. We *really* don't want the model to invent new names for this stuff. But we also don't want the developer to log into their account and start copying and pasting flag names. So instead, we could use MCP to pipe a list of flags and descriptions directly into the agent session.
 
 ### Tools
 
 **What they do**: tools trigger actions on behalf of the user, based on the goals and information already in the context. This means you can automate complex workflows to make sure no steps are skipped, and no transcription errors happen. Like resources, your MCP server could wrap your APIs to deliver this power.
 
-**How they save labor**: back to the feature flags example. If you’re in a *brand new app* and there are no feature flag names already established, a tool could save the user lots of clicking and typing. Within seconds, the new configuration can be written to a project, creating, naming and describing all the new flags.
+**How they save labor**: back to the feature flags example. If you're in a *brand new app* and there are no feature flag names already established, a tool could save the user lots of clicking and typing. Within seconds, the new configuration can be written to a project, creating, naming and describing all the new flags.
 
 ### Prompts
 
-**What they do**: exactly what you expect. They prompt the model. The spookiest thing for me – still! – is that instead of “programming” LLMs, you just kinda tell them what to do. Some instructions produce better results than others, and so consistently using a tested prompt can improve every developer’s session.
+**What they do**: exactly what you expect. They prompt the model. The spookiest thing for me – still! – is that instead of “programming” LLMs, you just kinda tell them what to do. Some instructions produce better results than others, and so consistently using a tested prompt can improve every developer's session.
 
 **How they save labor**: you can use both the agent session *and* conventional programming to decide *which* prompt to apply. Maybe Next.js 14 wants one prompt, while 15 wants another. Instead of a developer having to figure out the right phrasing, or read documentation to help structure a prompt, your MCP server can pick up the load. Prompts can also work in tandem with tools and resources, guiding the agent session in how to accomplish work.
 
 ## The power is yours
 
-That’s the intro to model context prototol I wish we’d all had. It’s a straightforward contract for saving labor, eliminating tedium, and tightly integrating existing products with the emerging universe of LLM agent tools.
+That's the intro to model context protocol I wish we'd all had. It's a straightforward contract for saving labor, eliminating tedium, and tightly integrating existing products with the emerging universe of LLM agent tools.
 
-We’re [working on one](https://github.com/posthog/mcp), and it runs on Cloudflare, so if you wanted to steal it to get started on your own MCP project, you could! One prompt I like to use to figure out new projects:
+We're [working on one](https://github.com/posthog/mcp), and it runs on Cloudflare, so if you wanted to steal it to get started on your own MCP project, you could! One prompt I like to use to figure out new projects:
 
 > Tell me about the architecture of this project. Describe its entrypoints, its key assumptions, and the components I should understand as I start working on it.
 
-There’s still plenty to figure out in this domain. You probably don’t want to give an MCP server unfettered access to every API route in your product, for example. You could. But [you should stop to think if you *should*](https://www.youtube.com/watch?v=g3j9muCo4o0).
+There's still plenty to figure out in this domain. You probably don't want to give an MCP server unfettered access to every API route in your product, for example. You could. But [you should stop to think if you *should*](https://www.youtube.com/watch?v=g3j9muCo4o0).
 
