@@ -1,5 +1,5 @@
 ---
-title: How to set up customer-facing analytics
+title: How to set up embedded analytics
 date: 2025-03-28
 author:
  - ian-vanagas
@@ -9,16 +9,16 @@ tags:
   - sql
 ---
 
-If you're building a B2B2C product, *your users* might want analytics about *their users*. You can provide this with user- or customer-facing analytics, events you capture and then display for them. 
+If you're building a B2B2C product, *your users* might want analytics about *their users*. You can provide this with embedded analytics (AKA customer-facing analytics), events you capture and then display for them.
 
-This tutorial shows you how to set up customer-facing analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog’s API, and then displaying it with Recharts.
+This tutorial shows you how to set up embedded analytics by creating a basic Next.js app with PostHog, querying analytics data via PostHog’s [queries API](/docs/api/queries), and then displaying it with Recharts.
 
 ## Creating a Next.js app
 
 First, ensure [Node.js is installed](https://nodejs.dev/en/learn/how-to-install-nodejs/) (version 18.0 or newer) then run the following to create a new Next.js app. Say **yes** to TypeScript, **yes** to Tailwind, **yes** to app router, and the defaults for all the other options.
 
 ```bash
-npx create-next-app@latest customer-facing-analytics
+npx create-next-app@latest embedded-analytics
 ```
 
 We’ll then update `page.tsx` to an input to select between two “teams” and a button. We’ll use this to capture data later. 
@@ -164,7 +164,7 @@ You can then run `npm run dev` to see the app in action. PostHog will autocaptur
   classes="rounded"
 />
 
-## Querying data from PostHog for our user-facing analytics
+## Querying data from PostHog for our embedded analytics
 
 Now that we have data being captured, we can set up our queries to get this data from PostHog. We’ll create two:
 
@@ -409,7 +409,7 @@ When we run `npm run dev` again and go to `http://localhost:3000/analytics`, we�
 
 ![Frontend analytics](https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_03_28_at_09_40_51_0956b2295f.png)
 
-Toggling between the two team’s button clicks gives you an idea of how you can segment customer-facing analytics for multiple teams or users. 
+Toggling between the two team’s button clicks gives you an idea of how you can segment embedded analytics for multiple teams or users. 
 
 The final problem we need to solve: making the pageview data look good. We’ll set up better visuals in the next step with Recharts.
 
