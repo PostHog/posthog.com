@@ -13,11 +13,11 @@ export default function Destinations(): JSX.Element {
     return (
         <>
             <SEO
-                title="Data OUT - Customer Data Infrastructure - PostHog"
+                title="Send data out of PostHog - Customer Data Infrastructure - PostHog"
                 description="Learn about all the ways to export data from PostHog"
                 image="images/og/cdp.jpg"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Data OUT">
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="Send data out of PostHog">
                 <p>
                     PostHog provides multiple methods to export and stream your data to external systems, enabling you
                     to activate your product data across your entire tech stack.
@@ -55,36 +55,7 @@ export default function Destinations(): JSX.Element {
                     </Link>
                 </p>
 
-                <h2>2. Webhooks</h2>
-                <p>Configure webhooks to notify external systems when specific events or conditions occur.</p>
-                <ul>
-                    <li>
-                        <strong>Event webhooks:</strong> Trigger on specific user actions or system events
-                    </li>
-                    <li>
-                        <strong>Threshold alerts:</strong> Send notifications when metrics exceed limits
-                    </li>
-                    <li>
-                        <strong>Scheduled webhooks:</strong> Regular updates on key metrics
-                    </li>
-                    <li>
-                        <strong>Custom payloads:</strong> Format data to match your destination's requirements
-                    </li>
-                </ul>
-                <p>Common webhook use cases:</p>
-                <ul>
-                    <li>Sync user properties to CRM systems like Salesforce or HubSpot</li>
-                    <li>Trigger marketing automation workflows in tools like Braze or Customer.io</li>
-                    <li>Update customer success platforms like Vitally or Gainsight</li>
-                    <li>Send alerts to Slack, PagerDuty, or monitoring tools</li>
-                </ul>
-                <p>
-                    <Link to="/docs/webhooks" state={{ newWindow: true }}>
-                        Learn about webhooks →
-                    </Link>
-                </p>
-
-                <h2>3. Batch exports</h2>
+                <h2>2. Batch exports</h2>
                 <p>Schedule regular exports of your data to data warehouses and cloud storage.</p>
                 <ul>
                     <li>
@@ -124,6 +95,35 @@ export default function Destinations(): JSX.Element {
                 <p>
                     <Link to="/docs/batch-exports" state={{ newWindow: true }}>
                         Configure batch exports →
+                    </Link>
+                </p>
+
+                <h2>3. Webhooks</h2>
+                <p>Configure webhooks to notify external systems when specific events or conditions occur.</p>
+                <ul>
+                    <li>
+                        <strong>Event webhooks:</strong> Trigger on specific user actions or system events
+                    </li>
+                    <li>
+                        <strong>Threshold alerts:</strong> Send notifications when metrics exceed limits
+                    </li>
+                    <li>
+                        <strong>Scheduled webhooks:</strong> Regular updates on key metrics
+                    </li>
+                    <li>
+                        <strong>Custom payloads:</strong> Format data to match your destination's requirements
+                    </li>
+                </ul>
+                <p>Common webhook use cases:</p>
+                <ul>
+                    <li>Sync user properties to CRM systems like Salesforce or HubSpot</li>
+                    <li>Trigger marketing automation workflows in tools like Braze or Customer.io</li>
+                    <li>Update customer success platforms like Vitally or Gainsight</li>
+                    <li>Send alerts to Slack, PagerDuty, or monitoring tools</li>
+                </ul>
+                <p>
+                    <Link to="/docs/webhooks" state={{ newWindow: true }}>
+                        Learn about webhooks →
                     </Link>
                 </p>
 
@@ -209,14 +209,6 @@ export default function Destinations(): JSX.Element {
                         <strong>Secure your data:</strong> Use encryption and proper authentication
                     </li>
                 </ul>
-
-                <p>
-                    Need help setting up data exports?
-                    <Link to="/docs/batch-exports" state={{ newWindow: true }}>
-                        Browse the documentation
-                    </Link>
-                    .
-                </p>
             </ReaderView>
         </>
     )

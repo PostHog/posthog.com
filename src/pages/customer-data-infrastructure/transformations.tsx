@@ -4,6 +4,7 @@ import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfras
 import { TreeMenu } from 'components/TreeMenu'
 import SEO from 'components/seo'
 import Link from 'components/Link'
+import { IconArrowUpRight } from '@posthog/icons'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -13,20 +14,29 @@ export default function Transformations(): JSX.Element {
     return (
         <>
             <SEO
-                title="Transform Data - Customer Data Infrastructure - PostHog"
+                title="Transform data - Customer data infrastructure - PostHog"
                 description="Learn how to transform and enrich your data in PostHog"
                 image="images/og/cdp.jpg"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Transform Data">
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="Transform data">
                 <p>
-                    PostHog provides powerful tools to transform, enrich, and model your data to extract maximum value
-                    from your analytics.
+                    PostHog provides powerful tools to transform, enrich, and model your data to get in the exact shape
+                    you need it.
                 </p>
 
-                <h2>Events transformations</h2>
-                <p>Transform event data as it flows through PostHog using our transformation apps and Hog functions.</p>
+                <h2>1. Events transformations</h2>
+                <p>
+                    Transform event data as it flows through PostHog using our transformation apps and{' '}
+                    <Link to="/docs/hog" state={{ newWindow: true }}>
+                        Hog functions
+                    </Link>
+                    .
+                </p>
 
-                <h3>Data in: Using transformations (with Hog)</h3>
+                <h3>
+                    <IconArrowUpRight className="size-6 inline-block text-muted -scale-y-1 mr-1" /> Data in: Pipeline
+                    transformations (built with Hog)
+                </h3>
                 <p>Apply transformations to incoming event data before it's stored:</p>
                 <ul>
                     <li>
@@ -48,12 +58,15 @@ export default function Transformations(): JSX.Element {
                     </li>
                 </ul>
                 <p>
-                    <Link to="/docs/cdp/transformation-apps" state={{ newWindow: true }}>
-                        Learn about transformation apps →
+                    <Link to="/docs/cdp/transformations" state={{ newWindow: true }}>
+                        Learn about transformations &rarr;
                     </Link>
                 </p>
 
-                <h3>Data out: Using transformations (with Hog)</h3>
+                <h3>
+                    <IconArrowUpRight className="size-6 inline-block text-muted mr-1" />
+                    Data out: Using transformations (with Hog)
+                </h3>
                 <p>Transform data before sending it to external destinations:</p>
                 <ul>
                     <li>
@@ -78,7 +91,7 @@ export default function Transformations(): JSX.Element {
                     </Link>
                 </p>
 
-                <h2>Warehouse source transformations</h2>
+                <h2>2. Warehouse source transformations</h2>
                 <p>Transform and model data from your connected warehouse sources using SQL.</p>
 
                 <h3>In SQL editor: Data modeling in saved views</h3>
@@ -155,18 +168,6 @@ export default function Transformations(): JSX.Element {
                         <strong>Error handling:</strong> Build in fallbacks for when transformations fail
                     </li>
                 </ul>
-
-                <p>
-                    Need help with data transformations?{' '}
-                    <Link to="/slack" state={{ newWindow: true }}>
-                        Join our Slack community
-                    </Link>{' '}
-                    or{' '}
-                    <Link to="/docs/data-warehouse" state={{ newWindow: true }}>
-                        check the documentation
-                    </Link>
-                    .
-                </p>
             </ReaderView>
         </>
     )

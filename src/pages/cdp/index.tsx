@@ -324,6 +324,11 @@ export default function CDP(): JSX.Element {
             />
             <ReaderView leftSidebar={<LeftSidebarContent />}>
                 <h2 className="text-2xl font-bold my-4">Ingest, transform, and send data between hundreds of tools</h2>
+
+                <img
+                    src="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pipelines_e52c3f0e53.png"
+                    className="not-prose @lg:float-right @lg:max-w-[250px] @xl:max-w-[300px] @lg:ml-4"
+                />
                 <p>
                     PostHog's customer data infrastructure (or you can call it our CDP or customer data platform) makes
                     it easy to import data from a warehouse, sync with event data, and export to other products.

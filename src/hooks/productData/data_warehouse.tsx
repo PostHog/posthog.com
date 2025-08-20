@@ -15,13 +15,13 @@ export const dataWarehouse = {
         description: 'Unify and query data from any source and analyze it alongside your product data.',
     },
     overview: {
-        title: 'All your data in one place',
+        title: 'Query & visualize data',
         description: 'Unify and query data from any source and analyze it alongside your product data.',
         textColor: 'text-white', // tw
     },
     screenshots: [
         {
-            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-data-warehouse.png',
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dw_temp_528efa76a2.png',
             alt: 'Screenshot of the PostHog data warehouse',
             classes: '',
         },

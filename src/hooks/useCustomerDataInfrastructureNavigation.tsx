@@ -12,7 +12,7 @@ export const customerDataInfrastructureNav = {
             url: '/customer-data-infrastructure',
         },
         {
-            name: 'Data integrations',
+            name: 'Integration library',
             url: '/cdp',
             icon: 'IconPlug',
         },
@@ -20,7 +20,7 @@ export const customerDataInfrastructureNav = {
             name: 'Data flow',
         },
         {
-            name: 'Get data IN',
+            name: 'Get data into PostHog',
             url: '/customer-data-infrastructure/sources',
         },
         {
@@ -28,11 +28,11 @@ export const customerDataInfrastructureNav = {
             url: '/customer-data-infrastructure/transformations',
         },
         {
-            name: 'SQL editor: Query & visualize data',
+            name: 'Query & visualize data',
             url: '/data-warehouse',
         },
         {
-            name: 'Send data OUT',
+            name: 'Send data out of PostHog',
             url: '/customer-data-infrastructure/destinations',
         },
     ],

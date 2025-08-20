@@ -13,11 +13,11 @@ export default function Sources(): JSX.Element {
     return (
         <>
             <SEO
-                title="Data IN - Customer Data Infrastructure - PostHog"
+                title="Get data in - Customer data infrastructure - PostHog"
                 description="Learn about all the ways to get data into PostHog"
                 image="images/og/cdp.jpg"
             />
-            <ReaderView leftSidebar={<LeftSidebarContent />} title="Data IN">
+            <ReaderView leftSidebar={<LeftSidebarContent />} title="Get data into PostHog">
                 <p>
                     PostHog provides multiple ways to ingest data from various sources, making it easy to centralize all
                     your customer and product data in one place.
@@ -30,25 +30,29 @@ export default function Sources(): JSX.Element {
                 </p>
                 <ul>
                     <li>
-                        <strong>JavaScript SDK:</strong> Track events from web applications with autocapture and custom
-                        events
+                        <Link to="/docs/getting-started/install?tab=snippet" state={{ newWindow: true }}>
+                            JavaScript SDK
+                        </Link>
+                        <strong>*</strong>: Track events from web applications with autocapture and custom events
                     </li>
                     <li>
                         <strong>Server-side SDKs:</strong> Python, Node.js, Ruby, PHP, Go, and more for backend tracking
                     </li>
                     <li>
-                        <strong>Mobile SDKs:</strong> iOS, Android, React Native, Flutter for mobile app analytics
-                    </li>
-                    <li>
-                        <strong>Autocapture:</strong> Automatically track clicks, form submissions, and pageviews
-                        without code changes
+                        <strong>Mobile SDKs*:</strong> iOS, Android, React Native, Flutter for mobile app analytics
                     </li>
                 </ul>
+                <p className="text-sm text-secondary">
+                    <em>
+                        <strong>*Supports autocapture:</strong> Automatically track clicks, form submissions, and
+                        pageviews without code changes
+                    </em>
+                </p>
                 <p>
                     <Link to="/docs/libraries" state={{ newWindow: true }}>
                         View all PostHog libraries →
-                    </Link>{' '}
-                    |{' '}
+                    </Link>
+                    <span className="mx-2">|</span>
                     <Link to="/docs/frameworks" state={{ newWindow: true }}>
                         View frameworks guides →
                     </Link>
@@ -128,7 +132,7 @@ export default function Sources(): JSX.Element {
 
                 <hr />
 
-                <h2>Getting Started</h2>
+                <h2>Getting started</h2>
                 <p>The best way to get started depends on your use case:</p>
                 <ul>
                     <li>
@@ -144,17 +148,6 @@ export default function Sources(): JSX.Element {
                         flexibility
                     </li>
                 </ul>
-                <p>
-                    Need help choosing the right data source?{' '}
-                    <Link to="/slack" state={{ newWindow: true }}>
-                        Ask in our community Slack
-                    </Link>{' '}
-                    or{' '}
-                    <Link to="/docs" state={{ newWindow: true }}>
-                        check our documentation
-                    </Link>
-                    .
-                </p>
             </ReaderView>
         </>
     )

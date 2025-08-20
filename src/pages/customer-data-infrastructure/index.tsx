@@ -1,4 +1,5 @@
 import React from 'react'
+import { Fieldset } from 'components/OSFieldset'
 import OSTable from 'components/OSTable'
 import OSTabs from 'components/OSTabs'
 import SEO from 'components/seo'
@@ -6,9 +7,14 @@ import ReaderView from 'components/ReaderView'
 import OSButton from 'components/OSButton'
 import CDPDiagram from './CDPDiagram'
 import Link from 'components/Link'
-import { IconArrowUpRight } from '@posthog/icons'
+import { IconArrowUpRight, IconAsterisk, IconDatabaseBolt } from '@posthog/icons'
 import { customerDataInfrastructureNav } from '../../hooks/useCustomerDataInfrastructureNavigation'
 import { TreeMenu } from 'components/TreeMenu'
+import ZoomHover from 'components/ZoomHover'
+import { AppIcon, AppIconName, AppLink } from 'components/OSIcons/AppIcon'
+import { IconPresentation } from 'components/OSIcons'
+import { useApp } from 'context/App'
+import useProduct from '../../hooks/useProduct'
 
 const LeftSidebarContent = () => {
     return <TreeMenu items={customerDataInfrastructureNav.children} />
@@ -150,6 +156,17 @@ export default function CDP(): JSX.Element {
         // },
     ]
 
+    // Define the specific data products we want to display in order
+    const dataProducts = ['sql', 'data_warehouse', 'hog', 'capture_api', 'webhooks']
+
+    // cdp, hog
+
+    // Get all products and filter to only the data category ones we want
+    const allProducts = useProduct()
+    const products = Array.isArray(allProducts)
+        ? dataProducts.map((handle) => allProducts.find((product: any) => product.handle === handle)).filter(Boolean)
+        : []
+
     return (
         <>
             <SEO
@@ -159,18 +176,56 @@ export default function CDP(): JSX.Element {
             />
             <ReaderView leftSidebar={<LeftSidebarContent />} title="Customer data infrastructure" hideTitle={true}>
                 <h2 className="text-2xl font-bold my-4">Unify external customer data with product usage data</h2>
-
-                <img
-                    src="https://res.cloudinary.com/dmukukwp6/image/upload/w_800,c_limit,q_auto,f_auto/pipelines_e52c3f0e53.png"
-                    className="not-prose @lg:float-right @lg:max-w-[250px] @xl:max-w-[300px] @lg:ml-4"
-                />
+                <div className="@2xl:float-right @2xl:w-96 @2xl:ml-4 @3xl:ml-12">
+                    <Fieldset legend="Customer data stack docs">
+                        <div
+                            className={`not-prose grid grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4 gap-x-1 relative [&>div]:mx-auto [&_figure]:text-center`}
+                        >
+                            {products.map((product: any) => (
+                                <ZoomHover key={product.slug} width="full" className={`justify-center`}>
+                                    <div className="cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border">
+                                        <div>
+                                            <AppLink
+                                                label={product.name}
+                                                url={`/${product.slug}`}
+                                                Icon={product.parentIcon ? product.Icon : <IconPresentation />}
+                                                orientation="column"
+                                                parentIcon={product.parentIcon}
+                                                color={product.color}
+                                                background="bg-primary"
+                                                className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
+                                            >
+                                                {!product.parentIcon &&
+                                                    product.Icon &&
+                                                    React.createElement(product.Icon, {
+                                                        className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
+                                                    })}
+                                                {product.status === 'beta' && (
+                                                    <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                                        Beta
+                                                    </span>
+                                                )}
+                                                {product.status === 'WIP' && (
+                                                    <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
+                                                        WIP
+                                                    </span>
+                                                )}
+                                            </AppLink>
+                                        </div>
+                                    </div>
+                                </ZoomHover>
+                            ))}
+                        </div>
+                    </Fieldset>
+                </div>
                 <p className="text-base font-semibold">
                     Analyze product and customer data in PostHog – <em>no matter where it was generated.</em>
                 </p>
                 <p>
                     Whether you're looking for an ETL, reverse ETL, a data warehouse, event pipelines, a CDP built for
-                    product engineers, or another ambiguous industry term, it's all here.
+                    product engineers, or another ambiguous industry term – it's all here.
                 </p>
+
                 {/* <h3>data integrations</h3> */}
                 {/* 
                 <OSTabs
@@ -208,23 +263,28 @@ export default function CDP(): JSX.Element {
                     <em>understand how product usage</em> (tracked with PostHog) <em>correlates with business data</em>{' '}
                     (generated elsewhere).
                 </p>
-                <ul>
-                    <li>
+
+                <ul className="list-none pl-0">
+                    <li className="relative pl-8">
+                        <IconArrowUpRight className="-scale-y-1 size-6 inline-block text-muted absolute top-0 left-0" />
                         <Link to="/customer-data-infrastructure/sources">Get data IN</Link>
                         <br />
                         <span className="text-sm text-secondary">SDKs, warehouse sources, webhooks</span>
                     </li>
-                    <li>
+                    <li className="relative pl-8">
+                        <IconDatabaseBolt className="size-6 inline-block text-muted absolute top-0 left-0" />
                         <Link to="/customer-data-infrastructure/transformations">Transform data</Link>
                         <br />
                         <span className="text-sm text-secondary">HogQL, API, webhooks</span>
                     </li>
-                    <li>
+                    <li className="relative pl-8">
+                        <IconAsterisk className="size-6 inline-block text-muted absolute top-0 left-0" />
                         <Link to="/customer-data-infrastructure/query-data">Query & visualize data</Link>
                         <br />
                         <span className="text-sm text-secondary">SQL editor, BI, data viz</span>
                     </li>
-                    <li>
+                    <li className="relative pl-8">
+                        <IconArrowUpRight className="size-6 inline-block text-muted absolute top-0 left-0" />
                         <Link to="/customer-data-infrastructure/destinations">Send data OUT</Link>
                         <br />
                         <span className="text-sm text-secondary">

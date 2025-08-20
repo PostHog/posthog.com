@@ -113,13 +113,7 @@ export default function DataWarehouse(): JSX.Element {
                 </ZoomImage>
 
                 <h3>Customers who love Data Warehouse</h3>
-                <OSTable
-                    columns={customerTableColumns}
-                    rows={customerTableRows}
-                    className="bg-primary"
-                    size="sm"
-                    rowAlignment="top"
-                />
+                <OSTable columns={customerTableColumns} rows={customerTableRows} className="bg-primary" size="sm" />
 
                 <h3>Features</h3>
                 <ul>
