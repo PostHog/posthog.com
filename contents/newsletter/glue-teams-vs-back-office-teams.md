@@ -57,7 +57,7 @@ These folks do [glue work](https://www.noidea.dog/glue?utm_source=newsletter.pos
 
 Think, auth. Not flashy, not a standalone product line, yet it keeps the product together in one piece. It makes or breaks enterprise deals, or a user’s day.
 
-[Billing](/teams/billing?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=glue-teams)? The ultimate glue. That’s systems, UI, and accounting, all in one. The spice must flow.
+[Billing](/teams/billing)? The ultimate glue. That’s systems, UI, and accounting, all in one. The spice must flow.
 
 The folks owning these areas should be talking to users, they should be owning product metrics.
 
@@ -84,7 +84,7 @@ Distributed ownership is the name of the game for those internal aspects. It tak
 
 It’s not their full-time job, and it shouldn’t be yet. And, for the hairiest problems, you agree to spin up a **short-lived** project team to address that specifically.
 
-Obviously, some back-office work is an early must-have. You won’t get far without a clear [owner of data infra](/teams/infrastructure?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=glue-teams), especially if you run a data-intensive SaaS like we do at [PostHog](?utm_source=posthog-newsletter&utm_medium=post&utm_campaign=glue-teams).[^2]
+Obviously, some back-office work is an early must-have. You won’t get far without a clear [owner of data infra](/teams/infrastructure), especially if you run a data-intensive SaaS like we do at [PostHog](/).[^2]
 
 But, beyond the absolute essentials, only start a back-office team when you can honestly call its resources a rounding error compared to product development. Backend infra at 20 engineers, anything else at 50+.
 
@@ -119,7 +119,7 @@ That’s a death sentence, so choose wisely.
 
 ## **🧠 Good reads for people who build cool stuff**
 
-* [**How we use PostHog's built-in data warehouse**](/blog/data-warehouse-at-posthog?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Ian Vanagas**  
+* [**How we use PostHog's built-in data warehouse**](/blog/data-warehouse-at-posthog) **– Ian Vanagas**  
 * [**Why LLMs Can't Really Build Software**](https://zed.dev/blog/why-llms-cant-build-software?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Conrad Irwin**  
 * [**Everything I know about good system design**](https://www.seangoedecke.com/good-system-design?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Sean Goedecke**  
 * [**If you're remote, ramble**](https://stephango.com/ramblings?utm_source=newsletter.posthog.com&utm_medium=post&utm_campaign=glue-teams) **– Steph Ango**
