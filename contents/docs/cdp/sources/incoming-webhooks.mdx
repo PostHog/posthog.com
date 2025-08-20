@@ -82,13 +82,14 @@ postHogCapture({
 
 Webhook sources can call `postHogCapture` to ingest events to PostHog. You can also do HTTP calls with `fetch`. In this case, however, the request will be queued to a background task, a 201 Created response will be returned, and the event will be ingested asynchronously.
 
-## Best practices
-
-1. **Use HTTPS**: Always use HTTPS URLs for security
-2. **Implement authentication**: Use authorization headers to secure your webhooks
-3. **Validate data**: Ensure your webhook validates incoming data before processing
 
 ## Troubleshooting
+
+### Testing your webhook
+
+You can test your webhook by sending a request to the webhook URL. You can use a tool like [curl](https://curl.se/) to send a request or use our built in testing tools when setting up the webhook.
+
+Currently you have to save the webhook to test it as it directly hits the endpoint ensuring that the complete flow works.
 
 ### Common issues
 
