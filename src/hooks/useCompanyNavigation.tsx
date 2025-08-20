@@ -53,8 +53,8 @@ export function useCompanyNavigation({ value, content }: { value: string; conten
             ...tab,
             content: tab.value === value ? content : null,
         })),
-        handleTabChange: (value: string) => {
-            navigate(value)
+        handleTabChange: (value: string, orderedTabs: any) => {
+            navigate(value, { state: { orderedTabs } })
         },
         tabContainerClassName,
         className,
