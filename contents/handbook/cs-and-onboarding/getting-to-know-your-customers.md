@@ -36,9 +36,9 @@ A very valuable part of account research is also reviewing past conversations. T
 
 The key places to look for this information: 
 
-- **BuildBetter**: will contain recordings of customer success, sales, or onboarding calls. Once in BuildBetter you can use the "[People](https://app.buildbetter.app/people)" data section to search for companies or individual contacts and then see the history of calls, or you can do a direct search or AI chat. 
-- **Pylon**: will contain the Slack channel history. You can view the "[account](https://app.usepylon.com/accounts)" page, which is linked to Salesforce accounts for any of your accounts that have a Slack channel. You can filter on "Owner" which should also be mapped to the account owner from Salesforce, which lets you view all Slack or Teams interactions from accounts you own. 
-- **Vitally**: will contain Zendesk and email conversations under the “[Active Conversations](https://posthog.vitally-eu.io/conversations/active/)” section. This will let you see who the key contacts were, which support, sales, or CS individuals have worked with them in the past, and so on. It's also really helpful to see how frequently they raise tickets and what issues they have faced.
+- **BuildBetter**: will contain recordings of customer success, sales, or onboarding calls. Once in BuildBetter you can use the <PrivateLink href="https://app.buildbetter.app/people">"People"</PrivateLink> data section to search for companies or individual contacts and then see the history of calls, or you can do a direct search or AI chat. 
+- **Pylon**: will contain the Slack channel history. You can view the <PrivateLink href="https://app.usepylon.com/accounts">"account"</PrivateLink> page, which is linked to Salesforce accounts for any of your accounts that have a Slack channel. You can filter on "Owner" which should also be mapped to the account owner from Salesforce, which lets you view all Slack or Teams interactions from accounts you own. 
+- **Vitally**: will contain Zendesk and email conversations under the <PrivateLink href="https://posthog.vitally-eu.io/conversations/active/">"Active Conversations"</PrivateLink> section. This will let you see who the key contacts were, which support, sales, or CS individuals have worked with them in the past, and so on. It's also really helpful to see how frequently they raise tickets and what issues they have faced.
 
 ## Analyzing product usage
 

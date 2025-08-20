@@ -10,7 +10,7 @@ We use Vitally as a customer success platform.  You can log in via Google SSO to
 
 ### Overview
 
-Health scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall [health score](https://posthog.vitally-eu.io/settings/health/accounts) out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs [here](https://docs.vitally.io/account-health-scores-and-metrics/health-scores). 
+Health scores are a great way to assess whether your customer is at risk of churn or in a good state and are a common pattern in Customer Success tracking.  We compute an overall <PrivateLink href="https://posthog.vitally-eu.io/settings/health/accounts">health score</PrivateLink> out of 10 based on the following factors and weighting.  You can read more about how Vitally health scores work in their docs <PrivateLink href="https://docs.vitally.io/account-health-scores-and-metrics/health-scores">here</PrivateLink>.
 
 Health score metrics are divided into two categories: Customer Engagement (20%) and Product Engagement (80%).
 
@@ -77,7 +77,7 @@ Across PostHog's products, we look at 2 factors – data volume & user engagemen
 
 **Data volume**
 
-This tracks _percentage decrease_ in data volume over the last 30 days. We use [success metrics](https://posthog.vitally-eu.io/settings/successMetrics/accounts) to track billable usage over the last 30 days and compare it with the previous 30 days on a rolling basis. The percentages you see in the tables below are the _decrease_ between the previous and current period.
+This tracks _percentage decrease_ in data volume over the last 30 days. We use <PrivateLink href="https://posthog.vitally-eu.io/settings/successMetrics/accounts">success metrics</PrivateLink> to track billable usage over the last 30 days and compare it with the previous 30 days on a rolling basis. The percentages you see in the tables below are the _decrease_ between the previous and current period.
 
 **User engagement**
 
@@ -129,7 +129,7 @@ Health scores are useful for tracking the long-term trends in an account, but oc
 
 ### Risk indicators
 
-These are automatically applied via Vitally playbooks (see the Risk category [here](https://posthog.vitally-eu.io/settings/playbooks)):
+These are automatically applied via Vitally playbooks (see the Risk category <PrivateLink href="https://posthog.vitally-eu.io/settings/playbooks">here</PrivateLink>):
 
 #### Forecasted MRR decrease
 
@@ -165,7 +165,7 @@ Applied if the Owner role has been removed from a user in the last 14 days.  May
 
 ### Opportunity indicators
 
-These are automatically applied via Vitally playbooks (see the Opportunity category [here](https://posthog.vitally-eu.io/settings/playbooks)):
+These are automatically applied via Vitally playbooks (see the Opportunity category <PrivateLink href="https://posthog.vitally-eu.io/settings/playbooks">here</PrivateLink>):
 
 #### Forecasted MRR growth
 
