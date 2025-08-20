@@ -372,8 +372,8 @@ export const ProductLLMObservability = () => {
                         />
                         <CustomerCard
                             outcome="compared us to every other LLM tool, just to be sure"
-                            quote="We run a lot of observability tools, including Langsmith and Langfuse. PostHog is our favorite though. It's an essential part of how we debug issues and build new features."
-                            customer={elevenlabs}
+                            quote="If you're building a new product, just use PostHog. It's a no-brainer. It's the only all-in-one platform like it for developers."
+                            customer={lovable}
                         />
                     </ul>
                 </section>
@@ -461,28 +461,28 @@ export const ProductLLMObservability = () => {
                         <div className="mb-8">
                             <h2 className="text-4xl">
                                 We didn't just build LLM analytics. <br />
-                                <span className="text-red dark:text-yellow">We also build with it.</span>
+                                We also build <span className="text-red dark:text-yellow">with</span> LLM analytics.
                             </h2>
                             <p className="text-lg mb-4">
-                                When we started building Max AI, our in-app AI product manager, we knew we needed a way
-                                to understand how people interacted with it and how much it cost. Over time, we also
-                                needed a way to track the performance of the AI models we used, especially when we
-                                started adding features like deep research mode.
+                                We've used LLM analytics heavily while building <a href="/max">Max AI</a>, our in-app AI
+                                product manager. At the start it helped us keep an eye on operational costs so we could
+                                find out what <a href="/why">sustainable pricing</a> may look like. When we launched
+                                into beta we also monitored traces to see how Max was being used and gather feedback.
                             </p>
                             <p className="text-lg">
-                                Some of this, we could do with product analytics - but we quickly realised that a
-                                bespoke tool would give us more flexibility and detail. So, we built LLM analytics to
-                                solve these challenges. We've been using it ever since, adding all the features we need
-                                to ship a world-class AI assistant.
+                                Having a bespoke tool to track traces has been invaluable for the Max AI team because of
+                                how we can connect traces to other data. The ability to easily jump from a trace to a
+                                session replay or person profile, for example, lets us see how users interact with Max
+                                in real time <i>and</i> understand their wider context too.
                             </p>
                         </div>
 
                         <div className="flex flex-col md:flex-row items-start gap-8">
                             <div className="flex-1 text-center md:text-left">
                                 <blockquote className="text-lg md:text-xl font-medium mb-4 bg-highlight p-0.5">
-                                    "We use LLM analytics daily to understand how people are using Max AI. It was
-                                    especially helpful for tracking costs during our beta period, so we could establish
-                                    what sustainable pricing would be."
+                                    "The best thing about LLM analytics for us is how it connects with our other tools,
+                                    like session replays and feature flags. That's something no other tool can do,
+                                    because they focus on a narrower scope."
                                 </blockquote>
                                 <div className="flex items-center gap-4 justify-center md:justify-start">
                                     <div className="flex-shrink-0">
