@@ -134,7 +134,7 @@ export default function OSTabs({
                 className={className ?? 'relative flex flex-col pt-2 px-4 pb-4 h-full min-h-0 bg-primary'}
             >
                 <div className={tabContainerClassName}>
-                    <Tabs.List className={'ml-1.5 flex-shrink-0 flex flex-col items-center'}>
+                    <Tabs.List className={'ml-1.5 flex-shrink-0 flex flex-col'}>
                         {orderedTabs.map((row, rowIndex) => (
                             <div key={rowIndex} className="flex items-center">
                                 {row.map((tab) => (
