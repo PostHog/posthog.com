@@ -35,7 +35,7 @@ C --> |No| E[Option 1<br/>Use PostHog as a CDP]
 
 In general, we recommend starting with PostHog as your CDP using our SDKs, data warehouse, destinations, and transformations as needed. This is the easiest and least expensive way to get started.
 
-We should have most the destinations you need, but if we don't currently support, you have three options:
+We have most of the [destinations](/docs/cdp/destinations) you need, but if we don't currently support, you have three options:
 
 1. Use our [custom webhook destination](/docs/cdp/destinations/webhook) or build your own [realtime destinations](/docs/cdp/destinations) to call the 3rd-party API.
 2. Request a new destination by clicking **Can't find what your looking for?** when [creating a new destination](https://us.posthog.com/pipeline/new/destination) in-app and our team will be notified.
