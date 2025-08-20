@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Layout from '../../components/Layout'
 import SEO from '../../components/seo'
 import PostLayout from '../../components/PostLayout'
@@ -11,10 +11,11 @@ import FunctionReturn from '../../components/SdkReferences/Return'
 import FunctionExamples from '../../components/SdkReferences/Examples'
 import CopyMarkdownActionsDropdown from '../../components/MarkdownActionsDropdown'
 import { useLocation } from '@reach/router'
+import { navigate } from 'gatsby'
 import Link from '../../components/Link'
 import { getLanguageFromSdkId } from '../../components/SdkReferences/utils'
 import { Heading } from '../../components/Heading'
-import { defaultMenuWidth } from '../../components/PostLayout/context'
+import Chip from '../../components/Chip'
 
 interface Parameter {
     name: string
@@ -65,6 +66,7 @@ interface SdkReferenceData {
         version: string
     }
     classes: Class[]
+    categories: string[]
 }
 
 interface PageContext {
@@ -128,11 +130,50 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
     const sdkLanguage = getLanguageFromSdkId(fullReference.info.id)
     const validTypes = pageContext.types
 
+    // State for filtering
+    const [currentFilter, setCurrentFilter] = useState('all')
+
     // Pre-transform classes with sorted functions
     const sortedClasses = fullReference.classes.map((classData) => ({
         ...classData,
         sortedFunctions: groupFunctionsByCategory(classData.functions),
     }))
+
+    // Convert category name to kebab-case for query params
+    const categoryToQueryParam = (category: string): string => {
+        return category.toLowerCase().replace(/\s+/g, '-')
+    }
+
+    // Convert query param back to category name
+    const queryParamToCategory = (queryParam: string): string | null => {
+        return fullReference.categories.find((cat) => categoryToQueryParam(cat) === queryParam) || null
+    }
+
+    // Reset filters
+    const resetFilters = () => {
+        setCurrentFilter('all')
+        navigate(location.pathname)
+    }
+
+    // Handle filter changes
+    const handleFilterChange = (category: string) => {
+        setCurrentFilter(category)
+        const queryParam = categoryToQueryParam(category)
+        navigate(`${location.pathname}?filter=${queryParam}`)
+    }
+
+    // Initialize filter from query params
+    useEffect(() => {
+        const params = new URLSearchParams(location?.search)
+        const filter = params.get('filter')
+        if (filter) {
+            const category = queryParamToCategory(filter)
+            if (category) {
+                setCurrentFilter(category)
+            }
+        }
+    }, [location])
+
     // Badge styling based on release tag
     const getBadgeClasses = (releaseTag: string): string => {
         switch (releaseTag.toLowerCase()) {
@@ -145,8 +186,29 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         }
     }
 
-    // Generate ToC from classes and functions
-    const tableOfContents = sortedClasses.flatMap((classData) => [
+    // Generate ToC from filtered classes and functions
+    const getFilteredClasses = () => {
+        if (currentFilter === 'all') {
+            return sortedClasses
+        }
+
+        return sortedClasses
+            .map((classData) => ({
+                ...classData,
+                sortedFunctions: classData.sortedFunctions
+                    .map(({ label, functions }) => ({
+                        label,
+                        functions: functions.filter((func) => func.category === currentFilter),
+                    }))
+                    .filter(({ functions }) => functions.length > 0),
+            }))
+            .filter((classData) => classData.sortedFunctions.some(({ functions }) => functions.length > 0))
+    }
+
+    const filteredClasses = getFilteredClasses()
+
+    // Generate ToC from filtered classes and functions
+    const tableOfContents = filteredClasses.flatMap((classData) => [
         {
             url: classData.id,
             value: `${classData.title}`,
@@ -205,7 +267,20 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
                     </div>
 
                     <div className="w-full">
-                        {sortedClasses.map((classData) => (
+                        <div className="flex justify-start items-center mb-6 gap-2 flex-wrap">
+                            <Chip text="All" onClick={resetFilters} active={currentFilter === 'all'} href="" state="" />
+                            {fullReference.categories.map((category) => (
+                                <Chip
+                                    key={category}
+                                    text={category}
+                                    onClick={() => handleFilterChange(category)}
+                                    active={currentFilter === category}
+                                    href=""
+                                    state=""
+                                />
+                            ))}
+                        </div>
+                        {filteredClasses.map((classData) => (
                             <div key={classData.id} className="mb-12" id={classData.id}>
                                 <h2 className="text-3xl font-bold mb-4">{classData.title}</h2>
                                 <ReactMarkdown>{padDescription(classData.description)}</ReactMarkdown>
