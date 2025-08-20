@@ -186,23 +186,30 @@ export default function SdkReference({ pageContext }: { pageContext: PageContext
         }
     }
 
-    // Generate ToC from filtered classes and functions
     const getFilteredClasses = () => {
         if (currentFilter === 'all') {
             return sortedClasses
         }
 
         return sortedClasses
-            .map((classData) => ({
-                ...classData,
-                sortedFunctions: classData.sortedFunctions
+            .map((classData) => {
+                const filteredSortedFunctions = classData.sortedFunctions
                     .map(({ label, functions }) => ({
                         label,
                         functions: functions.filter((func) => func.category === currentFilter),
                     }))
-                    .filter(({ functions }) => functions.length > 0),
-            }))
-            .filter((classData) => classData.sortedFunctions.some(({ functions }) => functions.length > 0))
+                    .filter(({ functions }) => functions.length > 0)
+
+                if (filteredSortedFunctions.length === 0) {
+                    return null
+                }
+
+                return {
+                    ...classData,
+                    sortedFunctions: filteredSortedFunctions,
+                }
+            })
+            .filter((item): item is NonNullable<typeof item> => item !== null)
     }
 
     const filteredClasses = getFilteredClasses()

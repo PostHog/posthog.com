@@ -4079,9 +4079,8 @@
     "categories": [
         "Initialization",
         "Identification",
-        "Capturing",
-        "Surveys",
         "Capture",
+        "Surveys",
         "Error tracking",
         "LLM analytics",
         "Privacy",
