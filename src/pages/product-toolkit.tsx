@@ -314,12 +314,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         props: [],
         Editor: () => <Roadmap frame={false} />,
     },
-    {
-        name: 'Pricing',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Pricing />,
-    },
+    // {
+    //     name: 'Pricing',
+    //     kind: 'flow',
+    //     props: [],
+    //     Editor: () => <Pricing />,
+    // },
     {
         name: 'Customers',
         kind: 'flow',
