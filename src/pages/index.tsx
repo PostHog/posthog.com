@@ -37,6 +37,7 @@ import Start from 'components/Start'
 import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
 import ProductTabs from 'components/ProductTabs'
+import { DebugContainerQuery } from 'components/DebugContainerQuery'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -110,7 +111,7 @@ const HomeHappyHog = () => {
 
 const CTAs = () => {
     return (
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 mt-8">
+        <div className="flex flex-col @xs:flex-row @xs:justify-center @xl:justify-start gap-3 @sm:gap-2">
             <CallToAction to="https://app.posthog.com/signup" size="md">
                 Get started - free
             </CallToAction>
@@ -325,7 +326,11 @@ const CompanyStageTabs = () => {
 
     const companyStageOptions: ToggleOption[] = [
         {
-            label: 'Startup / Pre-PMF',
+            label: (
+                <span>
+                    Startup<span className="hidden @lg:inline"> / Pre-PMF</span>
+                </span>
+            ),
             value: 'startup',
             // icon: <IconLaptop className="size-5" />,
         },
@@ -349,6 +354,7 @@ const CompanyStageTabs = () => {
                 options={companyStageOptions}
                 onValueChange={setSelectedStage}
                 value={selectedStage}
+                className="mb-2"
             />
 
             {selectedStage === 'startup' && (
@@ -638,6 +644,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <Customers />,
     },
     {
+        name: 'DebugContainerQuery',
+        kind: 'flow',
+        props: [],
+        Editor: () => <DebugContainerQuery />,
+    },
+    {
         name: 'CTA',
         kind: 'flow',
         props: [],
@@ -704,8 +716,9 @@ export default function Home() {
 
     return (
         <>
-            <SEO title="Welcome to PostHog!" description="Home" image="https://posthog.com/og-image.png" />
+            <SEO title="home.mdx" description="Home" image="https://posthog.com/og-image.png" />
             <MDXEditor
+                hideTitle={true}
                 jsxComponentDescriptors={jsxComponentDescriptors}
                 body={rawBody}
                 mdxBody={mdxBody}

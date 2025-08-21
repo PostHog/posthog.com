@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import OSTabs from 'components/OSTabs'
 import useProduct from 'hooks/useProduct'
 import Link from 'components/Link'
@@ -15,13 +15,38 @@ interface Product {
     name: string
     Icon?: React.ComponentType<any>
     color: string
-    shortDescription?: string
+    overview: {
+        title: string
+        textColor?: string
+    }
     slug: string
     screenshots?: Array<{ src: string; alt: string }>
 }
 
 export default function ProductTabs({ productHandles, className }: ProductTabsProps) {
     const allProducts = useProduct()
+    const [orientation, setOrientation] = useState<'horizontal' | 'vertical'>('horizontal')
+
+    useEffect(() => {
+        // Find the container with aria-label="Company stage"
+        const container = document.querySelector('[aria-label="Company stage"]')
+        if (!container) return
+
+        // Create a ResizeObserver to watch the container
+        const resizeObserver = new ResizeObserver((entries) => {
+            for (const entry of entries) {
+                const { width } = entry.contentRect
+                // Set orientation to vertical only when container is @lg+ wide
+                setOrientation(width >= 576 ? 'vertical' : 'horizontal')
+            }
+        })
+
+        // Start observing the container
+        resizeObserver.observe(container)
+
+        // Cleanup
+        return () => resizeObserver.disconnect()
+    }, [])
 
     // Filter products based on the provided handles
     const products = productHandles
@@ -49,28 +74,28 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
                 </>
             ),
             content: (
-                <div className={`flex flex-col gap-4 p-6 bg-${product.color} rounded`}>
-                    <div className="flex items-start justify-between">
-                        <div className="flex gap-3">
-                            {product.Icon && <product.Icon className={`size-8 text-white`} />}
-                            <div>
-                                <h3 className="text-xl font-semibold text-white">{product.name}</h3>
-                                {product.shortDescription && (
-                                    <p className="text-white/80">{product.shortDescription}</p>
-                                )}
+                <div className={`flex flex-col bg-${product.color} rounded`}>
+                    <div className="flex items-start justify-between p-6">
+                        <div className="flex-1 flex gap-3">
+                            {product.Icon && <product.Icon className={`size-8 ${product.overview.textColor}`} />}
+                            <div className={product.overview.textColor}>
+                                <h3 className="text-xl font-semibold">{product.name}</h3>
+                                {product.overview?.title && <p>{product.overview.title}</p>}
                             </div>
                         </div>
-                        <OSButton asLink to={`/${product.slug}`} variant="secondary" size="md">
-                            Explore
-                        </OSButton>
+                        <div className="flex-shrink-0">
+                            <OSButton asLink to={`/${product.slug}`} variant="secondary" size="md">
+                                Explore
+                            </OSButton>
+                        </div>
                     </div>
 
                     {product.screenshots && product.screenshots.length > 0 && (
-                        <div className="mt-4">
+                        <div>
                             <img
                                 src={product.screenshots[0].src}
                                 alt={product.screenshots[0].alt}
-                                className="w-full rounded shadow-lg"
+                                className="w-full shadow-lg"
                             />
                         </div>
                     )}
@@ -85,12 +110,15 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
             defaultValue={products[0]?.handle}
             frame={false}
             className={className}
-            orientation="vertical"
-            tabContainerClassName="pt-2 pr-4"
+            orientation={orientation}
+            tabContainerClassName="pt-2 pr-4 [&>div>div]:flex-wrap [&>div>div]:justify-center"
             tabTriggerClassName="flex justify-start items-center gap-1 rounded-b-sm hover:bg-primary !border-b data-[state=active]:font-semibold"
             tabContentClassName="not-prose pt-2"
             extraTabRowContent={
-                <div data-scheme="primary" className="text-primary mt-auto pt-1 text-sm">
+                <div
+                    data-scheme="primary"
+                    className="text-primary mt-auto pt-1 text-sm basis-full @xl:basis-auto flex justify-center @xl:justify-stretch"
+                >
                     <OSButton asLink to="/products" state={{ newWindow: true }} variant="secondary" size="md">
                         Go to app library ({APP_COUNT})
                     </OSButton>

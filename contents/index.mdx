@@ -3,27 +3,29 @@ title: Home
 template: custom
 ---
 
-<HomeHappyHog />
+<div class="text-center @xl:text-left">
 
-<h1 class="[&_p]:m-0 flex gap-2 flex-wrap">
+<h1 class="[&_p]:m-0 flex gap-2 flex-wrap justify-center @xl:justify-start">
     <Logo />
 </h1>
 
-<p class="text-base font-medium mb-0">
-    We’re building every tool a product engineer needs to build successful products.
-</p>
+<span class="text-base font-medium mb-0">
+    We’re building every tool that product engineers need to build successful products.
+</span>
 
 <CTAs />
 
 Questions? [Watch a demo](/demo) or [talk to a human](/talk-to-a-human).
 
-<header class="flex justify-between items-center">
+</div>
 
-### Explore apps by company stage
+<header class="flex flex-col items-center @xl:flex-row @xl:justify-between @xl:items-baseline [&_h2]:m-0 mt-10 mb-4">
 
-<aside>
+## Explore apps <span class="text-secondary text-sm font-normal tracking-normal">by company stage</span>
 
-<span>
+<aside class="hidden @xl:inline-flex">
+
+<span class="[&_p]:m-0">
     [Browse app library](/products) (<AppCount />)
 </span>
 
@@ -34,9 +36,9 @@ Questions? [Watch a demo](/demo) or [talk to a human](/talk-to-a-human).
 
 <div id="customers">
 
-## who's using PostHog?
+## Who's using PostHog?
 
-here are some of our paying customers. (yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)
+Here are some of our paying customers. (Yes they actually use us, no it's not just some random engineer that tried us out 2+ years ago.)
 
 <Customers />
 
