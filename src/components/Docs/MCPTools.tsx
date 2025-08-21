@@ -3,7 +3,7 @@ import mcpToolsData from '../../data/mcp-tools.json'
 
 interface Tool {
     name: string
-    description: string
+    summary: string
 }
 
 interface ToolCategory {
@@ -62,7 +62,7 @@ const MCPTools: React.FC = () => {
                                     <td>
                                         <code>{tool.name}</code>
                                     </td>
-                                    <td>{tool.description}</td>
+                                    <td>{tool.summary}</td>
                                 </tr>
                             ))}
                         </tbody>
