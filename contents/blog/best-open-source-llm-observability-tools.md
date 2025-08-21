@@ -1,5 +1,5 @@
 ---
-title: 7 best free open source LLM observability tools right now
+title: 7 best free open source LLM analytics tools right now
 date: 2025-04-10
 rootPage: /blog
 sidebar: Blog
@@ -18,7 +18,7 @@ tags:
 
 To build LLM-powered apps, developers need to know how users are using their app. 
 
-LLM observability tools help them do this by capturing LLM provider requests and generations, then visualizing and aggregating them. This helps developers monitor, debug, and improve their apps. 
+LLM analytics tools help them do this by capturing LLM provider requests and generations, then visualizing and aggregating them. This helps developers monitor, debug, and improve their apps. 
 
 To help you pick the best of these tools, we put together this list. All of the following products:
 
@@ -34,9 +34,9 @@ To help you pick the best of these tools, we put together this list. All of the 
 - GitHub stars: 25.6k
 - [PostHog on GitHub](https://github.com/PostHog/posthog)
 
-[PostHog](/) is an open source all-in-one platform that combines LLM observability with several other developer-focused tools, such as product and web analytics, session replay, feature flags, experiments, error tracking, and surveys.
+[PostHog](/) is an open source all-in-one platform that combines LLM analytics with several other developer-focused tools, such as product and web analytics, session replay, feature flags, experiments, error tracking, and surveys.
 
-Its [LLM observability product](/docs/ai-engineering) integrates with popular LLM provides, captures details of generations, provides an aggregated metrics dashboard, and more.
+Its [LLM analytics product](/docs/ai-engineering) integrates with popular LLM provides, captures details of generations, provides an aggregated metrics dashboard, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_04_07_at_11_06_21_678982e3a9.png"
@@ -47,9 +47,9 @@ Its [LLM observability product](/docs/ai-engineering) integrates with popular LL
 
 #### What makes PostHog special?
 
-PostHog’s LLM observability product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
+PostHog’s LLM analytics product works with the rest of our product suite. This means you can visualize LLM-related data along product and business data, create custom queries using [SQL](/docs/product-analytics/sql), view [session replays](/docs/session-replay) of AI interactions, [A/B test prompts](/tutorials/llm-ab-tests), and more.
 
-PostHog’s hosted Cloud version and all of its LLM observability features are free to use. It comes with 1 million events for free every month with indefinite retention, no matter if they are plain events or LLM observability ones. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
+PostHog’s hosted Cloud version and all of its LLM analytics features are free to use. It comes with 1 million events for free every month with indefinite retention, no matter if they are plain events or LLM analytics ones. Beyond this, pricing is usage-based and [totally transparent](/pricing). 
 
 You can [get started right away](http://us.posthog.com/signup), no sales call or elaborate setup needed.
 
@@ -67,11 +67,11 @@ Langfuse can be self-hosted for free. If you prefer a managed service, Langfuse 
 
 #### What makes Langfuse special?
 
-Langfuse is one of the original tools in the LLM observability space. This means it has a wide range of tools for LLM app developers to use and have been instrumental in defining what they look like. 
+Langfuse is one of the original tools in the LLM analytics space. This means it has a wide range of tools for LLM app developers to use and have been instrumental in defining what they look like.
 
 It also claims to be the most used open LLMOps platform. Beyond its early entry, this is thanks to its integrations with most LLM providers and agent frameworks, native SDKs for Python and JavaScript, and its ability to act as an OpenTelemetry backend
 
-Langfuse is also the most fully-featured LLM observability tool. Its pricing page lists a huge 78 features from session tracking to batch exports to SOC2 compliance. 
+Langfuse is also the most fully-featured LLM analytics tool. Its pricing page lists a huge 78 features from session tracking to batch exports to SOC2 compliance. 
 
 ## 3. Opik
 

@@ -21,7 +21,7 @@ We also made a hedgehog puppet, who is my cohost in the video above.
 
 We already offer [everything developers need to build successful products](/why) in one platform.
 
-Five years ago we were just product analytics, but we expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM observability. We're building a [customer data platform (CDP)](/blog/cdp-vs-data-warehouse), too.
+Five years ago we were just product analytics, but we expanded to include web analytics, session replay, experiments, feature flags, and surveys. More recently we've shipped a data warehouse, error tracking, and LLM analytics. We're building a [customer data platform (CDP)](/blog/cdp-vs-data-warehouse), too.
 
 We've had a clear vision for what we're building for a long time, but until recently we've struggled to describe this vision in a simple way. The answer came when Tim (my co-founder) and I went for a long walk around London. We decided to call it "customer infrastructure". 
 

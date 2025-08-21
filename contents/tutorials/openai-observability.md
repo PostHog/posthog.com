@@ -5,7 +5,7 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - LLM observability
+  - LLM analytics
 ---
 
 
@@ -17,7 +17,7 @@ In this tutorial, we show you how to monitor important metrics such as:
 - Average cost per user
 - Average API response time
 
-We'll build a basic Next.js app, implement the OpenAI API, and capture these events automatically using PostHog's LLM observability feature.
+We'll build a basic Next.js app, implement the OpenAI API, and capture these events automatically using PostHog's LLM analytics feature.
 
 ## 1. Creating a Next.js app
 
@@ -171,25 +171,25 @@ Now, when we run `npm run dev` again and submit an input, we should see a respon
 
 ## 3. Viewing generations in PostHog
 
-Once you generate a few responses, go to PostHog and enable the [LLM observability feature preview](https://app.posthog.com/settings/user-feature-previews#llm-observability). Once enabled, go to the LLM observability tab to get an overview of traces, users, costs, and more.
+Once you generate a few responses, go to PostHog and enable the [LLM analytics feature preview](https://app.posthog.com/settings/user-feature-previews#llm-analytics). Once enabled, go to the LLM analytics tab to get an overview of traces, users, costs, and more.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_58_04_2x_a87f97d692.png" 
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_10_57_32_2x_f8d6385951.png"
-  alt="LLM observability dashboard" 
+  alt="LLM analytics dashboard" 
   classes="rounded"
 />
 
-You can also go into more detail by clicking on the [generations tab](https://us.posthog.com/llm-observability/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
+You can also go into more detail by clicking on the [generations tab](https://us.posthog.com/llm-analytics/generations). This shows each generation as well as model, cost, token usage, latency, and more. You can even see the conversation input and output.
 
 <ProductScreenshot
   imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_05_47_2x_31ac89084d.png" 
   imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_23_at_11_04_38_2x_4029e378cb.png"
-  alt="LLM observability dashboard" 
+  alt="LLM analytics dashboard" 
   classes="rounded"
 />
 
-From here, you can go further by filtering your LLM observability dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights), [A/B test models](/tutorials/llm-ab-tests), and more.
+From here, you can go further by filtering your LLM analytics dashboard, use the `$ai_generation` event to [create insights](/docs/product-analytics/insights), [A/B test models](/tutorials/llm-ab-tests), and more.
 
 ## Further reading
 

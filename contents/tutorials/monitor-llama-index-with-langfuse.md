@@ -5,10 +5,10 @@ author:
   - lior-neu-ner
 tags:
   - product analytics
-  - LLM observability
+  - LLM analytics
 ---
 
-[LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an [open source LLM observability platform](/blog/best-open-source-llm-observability-tools), you can easily monitor your LLM app.
+[LlamaIndex](https://www.llamaindex.ai/) is a powerful framework for connecting LLMs with external data sources. By combining PostHog with [Langfuse](https://langfuse.com/), an [open source LLM analytics platform](/blog/best-open-source-llm-observability-tools), you can easily monitor your LLM app.
 
 In this tutorial, we show you how to set this up by walking you through a simple [RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation) chat app.
 

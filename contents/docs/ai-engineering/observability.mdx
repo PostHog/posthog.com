@@ -1,23 +1,23 @@
 ---
-title: LLM observability installation
+title: LLM analytics installation
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-LLM observability gives you x-ray vision into your LLM applications. Here's what you can track:
+LLM analytics gives you x-ray vision into your LLM applications. Here's what you can track:
 
 - Every conversation (inputs, outputs, and tokens) 🗣️
 - Model performance (cost, latency and error rates) 🤖
 - Full traces for when you need to go detective mode 🔍
 - How much each chat/user/organization is costing you 💰
 
-The best part? All this data gets sent as regular PostHog events, where you can slice, dice, and analyze it in dashboards, insights, and alerts. And because we charge the same as regular PostHog events, it's roughly **10x cheaper** than other [LLM observability tools](/blog/best-open-source-llm-observability-tools).
+The best part? All this data gets sent as regular PostHog events, where you can slice, dice, and analyze it in dashboards, insights, and alerts. And because we charge the same as regular PostHog events, it's roughly **10x cheaper** than other [LLM analytics tools](/blog/best-open-source-llm-observability-tools).
 
 ## Observability installation
 
-Setting up observability starts with installing the PostHog SDK for your language. LLM observability works best with our Python and Node SDKs.
+Setting up analytics starts with installing the PostHog SDK for your language. LLM analytics works best with our Python and Node SDKs.
 
 <MultiLanguage>
 
@@ -31,7 +31,7 @@ npm install @posthog/ai posthog-node
 
 </MultiLanguage>
 
-> **Note:** You can use LLM observability with other SDKs or our API, but you will need to capture the data manually via the capture method. See schema in the [manual capture section](#manual-capture) for more details.
+> **Note:** You can use LLM analytics with other SDKs or our API, but you will need to capture the data manually via the capture method. See schema in the [manual capture section](#manual-capture) for more details.
 
 The rest of the setup depends on the LLM platform you're using. These SDKs _do not_ proxy your calls, they only fire off an async call to PostHog in the background to send the data.
 

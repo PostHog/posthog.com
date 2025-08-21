@@ -1,12 +1,12 @@
 ---
-title: LLM observability dashboard (beta)
+title: LLM analytics dashboard (beta)
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-The [LLM observability dashboard](https://us.posthog.com/llm-observability) provides an overview of your LLM usage and performance. It includes insights on:
+The [LLM analytics dashboard](https://us.posthog.com/llm-analytics) provides an overview of your LLM usage and performance. It includes insights on:
 
 - Users
 - Traces
@@ -17,7 +17,7 @@ The [LLM observability dashboard](https://us.posthog.com/llm-observability) prov
 <ProductScreenshot
     imageLight="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_15_at_08_31_29_4e1702243d.png"
     imageDark="https://res.cloudinary.com/dmukukwp6/image/upload/Clean_Shot_2025_01_15_at_08_31_11_66aa4e13b7.png"
-    alt="LLM observability dashboard"
+    alt="LLM analytics dashboard"
     classes="rounded"
 />
 
@@ -31,7 +31,7 @@ This dashboard is a great starting point for understanding your LLM usage and pe
 - How many of my users are interacting with my LLM features?
 - Are there generation latency spikes?
 
-To dive into specific generation events, click on the [generations](https://us.posthog.com/llm-observability/generations) or [traces](https://us.posthog.com/llm-observability/traces) tabs to get a list of each captured by PostHog.
+To dive into specific generation events, click on the [generations](https://us.posthog.com/llm-analytics/generations) or [traces](https://us.posthog.com/llm-analytics/traces) tabs to get a list of each captured by PostHog.
 
 ## How are costs calculated?
 
