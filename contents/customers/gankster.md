@@ -22,7 +22,7 @@ date: 2025-08-21
 
 If you’ve ever played League of Legends with randoms then you’ll know that competitive gaming communities can be unpleasant places to be. Thankfully, Gankster is on a mission to change that by helping like-minded players connect in games like DOTA2, Valorant, and Rocket League. 
 
-“You can look at us as a social network for gamers,” says Gankster CTO and co-founder, Idan Amir. “Gankster is the place you go to find someone you actually want to play with in games like Fortnite or League of Legends. You can, for example, rate the people you play with after a match and screen teammates, so you don’t end up playing up with someone who always bails after 5 minutes.”
+"You can look at us as a social network for gamers," says Gankster CTO and co-founder, Idan Amir. "Gankster is the place you go to find someone you actually want to play with in games like Fortnite or League of Legends. You can, for example, rate the people you play with after a match and screen teammates, so you don't end up playing with someone who always bails after 5 minutes."
 
 This matters, says Idan, because as a data-driven team they’ve discovered players have a +24% chance of winning a game if they play with people they actually know.
 
