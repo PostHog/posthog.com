@@ -193,94 +193,6 @@ const HomeHitCounter = () => {
     )
 }
 
-const Toolkits = () => {
-    const columns = [
-        { name: '', width: 'auto', align: 'center' as const },
-        { name: 'goal', width: 'minmax(150px,250px)', align: 'left' as const },
-        { name: 'products', width: 'minmax(auto,1fr)', align: 'left' as const },
-    ]
-
-    const rows = [
-        {
-            cells: [
-                { content: 1 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>product development</span> <ProgressBar progress={69} />
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <ProductButtons
-                            productTypes={[
-                                'web_analytics',
-                                'product_analytics',
-                                'session_replay',
-                                'feature_flags',
-                                'experiments',
-                                'error_tracking',
-                            ]}
-                        />
-                    ),
-                    className: 'text-sm flex-wrap gap-px',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 2 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>customer engagement</span> <ProgressBar progress={15} />
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <>
-                            <ProductButtons productTypes={['surveys', 'user_interviews', 'broadcasts', 'support']} />{' '}
-                            Support
-                        </>
-                    ),
-                    className: 'text-sm',
-                },
-            ],
-        },
-        {
-            cells: [
-                { content: 3 },
-                {
-                    content: (
-                        <div className="flex flex-col gap-1">
-                            <span>sales</span> <ProgressBar progress={5} />
-                        </div>
-                    ),
-                    className: 'font-bold',
-                },
-                {
-                    content: (
-                        <>
-                            CRM, Cross-sell/expansion <ProductButtons productTypes={['CRM', 'cross-sell/expansion']} />
-                        </>
-                    ),
-                    className: 'text-sm',
-                },
-            ],
-        },
-    ]
-
-    return (
-        <div className="mt-4">
-            <OSTable columns={columns} rows={rows} size="sm" rowAlignment="top" overflowX />
-        </div>
-    )
-}
-
 const AIAgents = () => {
     const columns = [
         { name: '', width: 'auto', align: 'center' as const },
@@ -700,12 +612,6 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
                 welcome to <Logo />
             </h1>
         ),
-    },
-    {
-        name: 'Toolkits',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Toolkits />,
     },
     {
         name: 'AIAgents',
