@@ -1734,7 +1734,7 @@ export const companyMenu = {
                     url: '/teams/ingestion',
                 },
                 {
-                    name: 'LLM Analytics',
+                    name: 'LLM analytics',
                     url: '/teams/llm-analytics',
                 },
                 {
@@ -4219,7 +4219,7 @@ export const productMenu = {
             url: '/data-warehouse',
         },
         {
-            name: 'LLM Analytics',
+            name: 'LLM analytics',
             icon: 'IconAI',
             color: '[#681291]',
             colorDark: '[#C170E8]',
