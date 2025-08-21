@@ -227,6 +227,7 @@ export interface AppItem {
     children?: React.ReactNode
     hasDragged?: boolean
     orientation?: 'row' | 'column'
+    source?: string
 }
 
 export const AppLink = ({
@@ -241,6 +242,7 @@ export const AppLink = ({
     children,
     hasDragged,
     orientation = 'column',
+    source,
 }: AppItem) => {
     const ref = useRef<HTMLSpanElement>(null)
     const { getThemeSpecificBackgroundColors } = useTheme()
@@ -314,6 +316,9 @@ export const AppLink = ({
     const themeSpecificColors = getThemeSpecificBackgroundColors()
     const backgroundMatchedColors = `${baseBackgroundColors} ${themeSpecificColors}`
 
+    // Only apply theme-specific background colors if source is "desktop"
+    const finalBackground = background || (source === 'desktop' ? backgroundMatchedColors : '')
+
     const content = (
         <>
             <span className="relative">
@@ -326,9 +331,7 @@ export const AppLink = ({
             >
                 <span className={`inline-block leading-tight`}>
                     <span
-                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${
-                            background ? background : backgroundMatchedColors
-                        }  rounded-[2px] px-0.5 py-0`}
+                        className={`skin-classic:underline decoration-dotted decoration-primary underline-offset-[3px] ${finalBackground}  rounded-[2px] px-0.5 py-0`}
                     >
                         {label}
                         {extension && <span className="opacity-75">.{extension}</span>}

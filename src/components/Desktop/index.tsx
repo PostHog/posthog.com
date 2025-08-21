@@ -26,37 +26,44 @@ export const productLinks: AppItem[] = [
         label: 'home.mdx',
         Icon: <AppIcon name="doc" />,
         url: '/',
+        source: 'desktop',
     },
     {
         label: 'Product OS',
         Icon: <AppIcon name="folder" />,
         url: '/products',
+        source: 'desktop',
     },
     {
         label: 'Pricing',
         Icon: <AppIcon name="pricing" />,
         url: '/pricing',
+        source: 'desktop',
     },
     {
         label: 'customers.mdx',
         Icon: <AppIcon name="spreadsheet" />,
         url: '/customers',
+        source: 'desktop',
     },
     {
         label: 'demo.mov',
         Icon: IconDemoThumb,
         url: '/demo',
         className: 'size-14 -my-1',
+        source: 'desktop',
     },
     {
         label: 'Docs',
         Icon: <AppIcon name="notebook" />,
         url: '/docs',
+        source: 'desktop',
     },
     {
         label: 'Talk to a human',
         Icon: <AppIcon name="contact" />,
         url: '/talk-to-a-human',
+        source: 'desktop',
     },
 ]
 
@@ -65,26 +72,31 @@ export const apps: AppItem[] = [
         label: 'Why PostHog?',
         Icon: <AppIcon name="posthog" />,
         url: '/about',
+        source: 'desktop',
     },
     {
         label: 'Roadmap',
         Icon: <AppIcon name="map" />,
         url: '/roadmap',
+        source: 'desktop',
     },
     {
         label: 'Forums',
         Icon: <AppIcon name="forums" />,
         url: '/questions',
+        source: 'desktop',
     },
     {
         label: 'Fun stuff',
         Icon: <AppIcon name="games" />,
         url: '/sparks-joy',
+        source: 'desktop',
     },
     {
         label: 'Trash',
         Icon: <AppIcon name="trash" />,
         url: '/trash',
+        source: 'desktop',
     },
 ]
 

@@ -455,7 +455,7 @@ export default function Products(): JSX.Element {
                     })
 
                     return (
-                        <div className="@container not-prose space-y-2">
+                        <div className="@container not-prose space-y-2 -ml-3">
                             {categoryOrder.map((category) => {
                                 const products = groupedProducts[category]
                                 if (!products || products.length === 0) return null
@@ -486,58 +486,50 @@ export default function Products(): JSX.Element {
                                                         } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (
-                                                            <ZoomHover
+                                                            <div
                                                                 key={product.slug}
-                                                                width="full"
-                                                                className={`justify-center`}
+                                                                onClick={(e) => handleProductClick(product, e)}
+                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md ${
+                                                                    selectedProduct?.slug === product.slug
+                                                                        ? 'border-blue bg-blue/10'
+                                                                        : 'border-transparent hover:border-border'
+                                                                }`}
+                                                                style={{ pointerEvents: 'auto' }}
                                                             >
-                                                                <div
-                                                                    onClick={(e) => handleProductClick(product, e)}
-                                                                    className={`cursor-default p-1 border-[1.5px] rounded-md transition-colors ${
-                                                                        selectedProduct?.slug === product.slug
-                                                                            ? 'border-blue bg-blue/10'
-                                                                            : 'border-transparent hover:border-border'
-                                                                    }`}
-                                                                    style={{ pointerEvents: 'auto' }}
-                                                                >
-                                                                    <div style={{ pointerEvents: 'none' }}>
-                                                                        <AppLink
-                                                                            label={product.name}
-                                                                            url={`#`}
-                                                                            Icon={
-                                                                                product.parentIcon ? (
-                                                                                    product.Icon
-                                                                                ) : (
-                                                                                    <IconPresentation />
-                                                                                )
-                                                                            }
-                                                                            orientation={
-                                                                                isListLayout ? 'row' : 'column'
-                                                                            }
-                                                                            parentIcon={product.parentIcon}
-                                                                            color={product.color}
-                                                                            background="bg-primary"
-                                                                            className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
-                                                                        >
-                                                                            {!product.parentIcon &&
-                                                                                product.Icon &&
-                                                                                React.createElement(product.Icon, {
-                                                                                    className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
-                                                                                })}
-                                                                            {product.status == 'beta' && (
-                                                                                <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
-                                                                                    Beta
-                                                                                </span>
-                                                                            )}
-                                                                            {product.status == 'WIP' && (
-                                                                                <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
-                                                                                    WIP
-                                                                                </span>
-                                                                            )}
-                                                                        </AppLink>
-                                                                    </div>
+                                                                <div style={{ pointerEvents: 'none' }}>
+                                                                    <AppLink
+                                                                        label={product.name}
+                                                                        url={`#`}
+                                                                        Icon={
+                                                                            product.parentIcon ? (
+                                                                                product.Icon
+                                                                            ) : (
+                                                                                <IconPresentation />
+                                                                            )
+                                                                        }
+                                                                        orientation={isListLayout ? 'row' : 'column'}
+                                                                        parentIcon={product.parentIcon}
+                                                                        color={product.color}
+                                                                        className={`size-12 [&_.bg-front]:fill-${product.color} [&_.bg-rear]:fill-${product.colorSecondary}`}
+                                                                    >
+                                                                        {!product.parentIcon &&
+                                                                            product.Icon &&
+                                                                            React.createElement(product.Icon, {
+                                                                                className: `size-5 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-[-.125rem]`,
+                                                                            })}
+                                                                        {product.status == 'beta' && (
+                                                                            <span className="absolute bg-yellow top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold text-black leading-none">
+                                                                                Beta
+                                                                            </span>
+                                                                        )}
+                                                                        {product.status == 'WIP' && (
+                                                                            <span className="absolute bg-salmon text-white top-0 left-1/2 -translate-1/2 uppercase text-2xs rounded-xs px-0.5 py-0.5 font-semibold leading-none">
+                                                                                WIP
+                                                                            </span>
+                                                                        )}
+                                                                    </AppLink>
                                                                 </div>
-                                                            </ZoomHover>
+                                                            </div>
                                                         ))}
                                                     </div>
                                                 ),
