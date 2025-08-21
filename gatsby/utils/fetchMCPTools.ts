@@ -6,14 +6,14 @@ const MCP_TOOLS_URL = 'https://raw.githubusercontent.com/PostHog/mcp/refs/heads/
 
 interface MCPTool {
     category?: string
-    description: string
+    summary: string
 }
 
 interface ToolCategory {
     name: string
     tools: Array<{
         name: string
-        description: string
+        summary: string
     }>
 }
 
@@ -31,7 +31,7 @@ export async function fetchAndProcessMCPTools(): Promise<{
         const mcpTools = (await response.json()) as Record<string, MCPTool>
 
         // Process the tools into categories
-        const toolCategories: Record<string, Array<{ name: string; description: string }>> = {}
+        const toolCategories: Record<string, Array<{ name: string; summary: string }>> = {}
 
         Object.entries(mcpTools).forEach(([toolName, toolDef]) => {
             const category = toolDef.category || 'Uncategorized'
@@ -40,7 +40,7 @@ export async function fetchAndProcessMCPTools(): Promise<{
             }
             toolCategories[category].push({
                 name: toolName,
-                description: toolDef.description,
+                summary: toolDef.summary,
             })
         })
 
