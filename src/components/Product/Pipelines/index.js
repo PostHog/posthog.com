@@ -626,6 +626,13 @@ function PipelinesPage({ location }) {
                                     Roadmap
                                 </p>
                             )}
+                            {source_webhooks.includes(selectedDestination) && (
+                                <p
+                                    className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-sm font-normal rounded px-1 m-0 !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50 border border-purple flex-shrink-0 ml-1`}
+                                >
+                                    Early access
+                                </p>
+                            )}
                         </div>
                     ) : (
                         ''
@@ -810,6 +817,15 @@ function PipelinesPage({ location }) {
                                                                 }`}
                                                             >
                                                                 Roadmap
+                                                            </p>
+                                                        )}
+                                                        {source_webhooks.includes(destination) && (
+                                                            <p
+                                                                className={`text-primary/75 dark:text-primary-dark/60 dark:bg-gray-accent-dark text-xs font-medium rounded px-1 m-0 !bg-purple/10 !text-purple !dark:text-white !dark:bg-purple/50 border border-purple flex-shrink-0 ${
+                                                                    selectedType === 'All' ? '!ml-1' : ''
+                                                                }`}
+                                                            >
+                                                                Early access
                                                             </p>
                                                         )}
                                                     </div>
