@@ -8,6 +8,7 @@ availability:
   enterprise: full
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
+import { FeatureFlag } from 'components/FeatureFlag'
 export const CreateNewFeatureFlagLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/create-new-feature-flag-light-mode.png"
 export const CreateNewFeatureFlagDark = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/create-new-feature-flag-dark-mode.png"
 export const ReleaseConditionLight = "https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/features/feature-flags/release-conditions-light-mode.png"
@@ -84,6 +85,8 @@ A payload is an additional piece of information sent to your app when a flag is 
 
 They enable you to configure functionality related to your flag inside PostHog, instead of having to make code changes or redeploy your app.
 
+<FeatureFlag flag="flag-evaluation-runtimes">
+
 ## Evaluation runtime
 
 You can control where your feature flags are evaluated by specifying an evaluation runtime. This helps optimize performance and reduce unnecessary network traffic by ensuring flags are only sent to the appropriate environments.
@@ -133,6 +136,8 @@ The system then filters which flags are returned based on their configured runti
 > **Note:** Feature flags without an explicit evaluation runtime setting will continue to work as before, being evaluated in all environments for backward compatibility.
 
 > **Important:** Currently, feature flag dependencies are limited when flags have different runtime environments. Ensure dependent flags share compatible runtime settings.
+
+</FeatureFlag>
 
 ## Release conditions
 
