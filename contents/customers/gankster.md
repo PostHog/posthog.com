@@ -6,7 +6,7 @@ logo: >-
 logoDark: >-
   https://res.cloudinary.com/dmukukwp6/image/upload/gankster_0cb7aed231.png
 featuredImage: >-
-  TBD
+  https://res.cloudinary.com/dmukukwp6/image/upload/gankster_f4fd8da892.jpg
 industries:
   - Gaming
 users:
