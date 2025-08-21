@@ -616,12 +616,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         props: [],
         Editor: () => <CustomerInfrastructureAccordion />,
     },
-    {
-        name: 'Pricing',
-        kind: 'flow',
-        props: [],
-        Editor: () => <Pricing />,
-    },
+    // {
+    //     name: 'Pricing',
+    //     kind: 'flow',
+    //     props: [],
+    //     Editor: () => <Pricing />,
+    // },
     {
         name: 'Customers',
         kind: 'flow',
