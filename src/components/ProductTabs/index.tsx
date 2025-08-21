@@ -3,6 +3,7 @@ import OSTabs from 'components/OSTabs'
 import useProduct from 'hooks/useProduct'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
+import { APP_COUNT } from '../../constants'
 
 interface ProductTabsProps {
     productHandles: string[]
@@ -88,6 +89,13 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
             tabContainerClassName="pt-2 pr-4"
             tabTriggerClassName="flex justify-start items-center gap-1 rounded-b-sm hover:bg-primary !border-b data-[state=active]:font-semibold"
             tabContentClassName="not-prose pt-2"
+            extraTabRowContent={
+                <div data-scheme="primary" className="text-primary mt-auto pt-1 text-sm">
+                    <OSButton asLink to="/products" state={{ newWindow: true }} variant="secondary" size="md">
+                        Go to app library ({APP_COUNT})
+                    </OSButton>
+                </div>
+            }
         />
     )
 }

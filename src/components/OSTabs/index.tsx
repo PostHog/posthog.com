@@ -179,12 +179,14 @@ export default function OSTabs({
             >
                 <div className={tabContainerClassName}>
                     <Tabs.List
-                        className={`flex-shrink-0 flex flex-col ${orientation === 'horizontal' ? 'ml-1.5' : ''}`}
+                        className={`flex-shrink-0 flex flex-col ${orientation === 'horizontal' ? 'ml-1.5' : 'h-full'}`}
                     >
                         {orderedTabs.map((row, rowIndex) => (
                             <div
                                 key={rowIndex}
-                                className={`flex ${orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px'}`}
+                                className={`flex ${
+                                    orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
+                                }`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
