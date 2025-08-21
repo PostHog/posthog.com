@@ -15,7 +15,7 @@ For non-urgent requests we should capture them in Vitally using the process on t
 # Tracking feature requests in Vitally
 
 ## Current Feature Request List
-We track feature requests a custom object in Vitally. You can see the current list of feature requests <PrivateLink href="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/413939d5-0d20-40d5-963e-5987dcbae345">here</PrivateLink>. It's filterable by team, and shows the accounts and combined ARR of those accounts who have asked for the feature. There's also a <PrivateLink href="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/a5747096-f417-4536-9ca3-4a1d0ef09534">Kanban board view</PrivateLink> which helps you track the progress of requests.
+We track feature requests a custom object in Vitally. You can see the current list of feature requests <PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/413939d5-0d20-40d5-963e-5987dcbae345">here</PrivateLink>. It's filterable by team, and shows the accounts and combined ARR of those accounts who have asked for the feature. There's also a <PrivateLink url="https://posthog.vitally-eu.io/hubs/152ccd4c-c7b2-4508-865b-b08fea5c3dc6/a5747096-f417-4536-9ca3-4a1d0ef09534">Kanban board view</PrivateLink> which helps you track the progress of requests.
 
 ## Adding a customer to an existing request
 
