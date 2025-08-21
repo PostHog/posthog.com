@@ -1,0 +1,134 @@
+---
+title: Exposures
+sidebar: Docs
+showTitle: true
+---
+
+import { CalloutBox } from 'components/Docs/CalloutBox'
+import { ProductScreenshot } from 'components/ProductScreenshot'
+
+Exposures are the foundation of experiment analysis in PostHog. A user must be **exposed** to your experiment before they can be included in any metric calculations. Understanding how exposures work is crucial for running successful experiments.
+
+## What is an exposure?
+
+An exposure occurs when a user encounters the part of your product where the experiment is running. This is the moment they become a participant in your experiment and start contributing to your metrics.
+
+**For most users**: If you're using PostHog feature flags with our SDKs, exposures are tracked automatically. When you call `getFeatureFlag()`, PostHog sends a `$feature_flag_called` event with all the necessary properties. You don't need to do anything extra.
+
+**Technical details**: PostHog considers a user exposed when it receives a `$feature_flag_called` event containing:
+- The property `$feature_flag` matching your experiment's flag key
+- The property `$feature_flag_response` with a variant value (e.g., "control" or "test")
+
+Only exposed users are included in your experiment analysis. Any events that occur before exposure are ignored, ensuring clean and accurate results.
+
+<CalloutBox icon="IconInfo" title="Important: Exposure comes first" type="info">
+
+Metric events are **only** counted if they occur **after** a user's first exposure. This ensures that:
+- You're measuring the actual impact of your experiment changes
+- Pre-exposure behavior doesn't contaminate your results
+- Each user's journey is measured from the same starting point
+
+For example, if a user makes a purchase before being exposed to your pricing experiment, that purchase won't count toward the experiment metrics.
+
+</CalloutBox>
+
+## Exposure visualization
+
+The experiment view displays real-time exposure data to help you monitor participation:
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_light_354254b3e7.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_2_dark_7c1c480e54.png"
+  classes="rounded"
+  alt="Screenshot of experiment exposures"
+/>
+
+The exposures chart shows:
+- **Daily cumulative count**: Unique users exposed to each variant over time
+- **Total exposures**: The absolute number of users in each variant
+- **Distribution percentage**: How users are split across variants
+- **Exposure criteria**: The event being used to determine exposure
+
+## Custom exposure events
+
+While the default `$feature_flag_called` event works for most experiments, you might need a custom exposure event when:
+
+- You are using a different feature flag SDK that doesn't send `$feature_flag_called` events
+- You want more precise control over when users are considered exposed
+- You're running server-side experiments with custom instrumentation
+
+### Setting up custom exposure
+
+To configure a custom exposure event:
+
+1. Click **Edit exposure criteria** in your experiment
+2. Select **Custom** exposure type
+3. Choose your exposure event (e.g., "viewed_checkout_page", "api_endpoint_called")
+4. Add any property filters to refine the exposure criteria
+
+<ProductScreenshot
+  imageLight = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_light_b59c7a8a47.png"
+  imageDark = "https://res.cloudinary.com/dmukukwp6/image/upload/exposure_criteria_dark_73e0a1ae87.png"
+  classes="rounded"
+  alt="Screenshot of edit exposure criteria"
+/>
+
+<CalloutBox icon="IconWarning" title="Important for custom implementations" type="caution">
+
+If you're using PostHog's SDKs and feature flags, variant tracking is handled automatically. However, if you're using custom exposure events or your own feature flag system, you need to ensure the correct properties are set:
+
+- **Standard PostHog flags**: The SDK automatically populates `$feature_flag_response` in `$feature_flag_called` events
+- **Custom exposure events**: You must manually include `$feature/<flag-key>` property with the variant value
+
+For example, if your flag key is "new-checkout" and you're using a custom "viewed_checkout" event, that event must include the property `$feature/new-checkout` with values like "control" or "test".
+
+</CalloutBox>
+
+## Handling multiple exposures
+
+Users might be exposed to different variants if:
+- They use multiple devices
+- They clear cookies/storage
+- There's an implementation error
+- They're part of a gradual rollout
+
+PostHog provides two strategies for handling these cases:
+
+### Exclude from analysis (recommended)
+Users exposed to multiple variants are completely removed from the experiment analysis. This ensures the cleanest results by eliminating any cross-contamination between variants.
+
+### Use first seen variant
+Users are analyzed based on the first variant they were exposed to, regardless of subsequent exposures. This maximizes sample size but may introduce some noise into your results.
+
+## Test account filtering
+
+You can exclude internal team members and test accounts from your experiment by enabling test account filtering in the exposure criteria. This uses your project's test account filters to ensure only real users contribute to your metrics.
+
+## Best practices
+
+1. **Verify exposure tracking early**: Before launching your experiment, confirm that exposure events are being sent correctly for all variants.
+
+2. **Choose the right exposure point**: Place your exposure event at the moment users actually encounter the experimental change, not just when they load a page or app.
+
+3. **Monitor exposure balance**: Check that users are being distributed across variants according to your configured percentages. Significant imbalances may indicate implementation issues.
+
+4. **Consider exposure timing**: For experiments with delayed effects, ensure your exposure event gives enough time for meaningful metric changes to occur.
+
+5. **Document custom exposures**: If using custom exposure events, document what triggers them and any required properties for future reference.
+
+## Common issues
+
+### No exposures appearing
+- Verify your feature flag is active and returning variants
+- Check that `$feature_flag_called` events are being sent (or your custom exposure event)
+- Ensure the event includes the correct `$feature/<flag-key>` property
+
+### Uneven variant distribution
+- Review your traffic allocation settings
+- Check for conditional targeting rules that might affect distribution
+- Verify there are no client-side issues preventing certain variants from loading
+
+### Metrics not updating
+- Remember that only post-exposure events count toward metrics
+- Confirm your metric events include the required variant property
+- Check that events are ordered correctly (exposure must come first)
