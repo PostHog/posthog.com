@@ -29,7 +29,7 @@ export const Content = ({ quickLinks = false }) => {
         <>
             {(quickLinks || compact) && (
                 <QuickLinks
-                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM analytics')?.children}
+                    items={docsMenu.children.find(({ name }) => name.toLowerCase() === 'LLM observability')?.children}
                 />
             )}
             <section className="mb-12">
@@ -74,12 +74,12 @@ export const Content = ({ quickLinks = false }) => {
 const LLMObservability: React.FC<LLMObservabilityProps> = ({ data }) => {
     return (
         <Layout>
-            <SEO title="LLM analytics - Documentation - PostHog" />
+            <SEO title="LLM observability - Documentation - PostHog" />
 
-            <PostLayout title={'LLM analytics'} hideSurvey hideSidebar>
+            <PostLayout title={'LLM observability'} hideSurvey hideSidebar>
                 <Intro
                     subheader="Getting started"
-                    title="LLM analytics"
+                    title="LLM observability"
                     description="Gather data for your AI and LLM products usage and performance."
                     buttonText="Start capturing LLM data"
                     buttonLink="/docs/ai-engineering/observability"

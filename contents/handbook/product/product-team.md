@@ -45,7 +45,7 @@ Here is a overview that shows which of our PMs currently works with which team:
 **Teams with no PM currently**
 
 - [CRM](/teams/crm)
-- [LLM Analytics](/teams/llm-analytics)
+- [LLM Observability](/teams/llm-observability)
 - [Max AI](/teams/max-ai)
 - [Revenue Analytics](/teams/revenue-analytics)
 

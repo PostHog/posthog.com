@@ -267,7 +267,7 @@ export const generateLlmsTxt = (pages) => {
     // Build llms.txt content according to spec
     let llmsTxtContent = `# PostHog
 
-> PostHog is an open-source platform for customer infrastructure. We equip developers with everything they need to build successful products – product analytics, web analytics, feature flags, session replay, A/B testing, error tracking, surveys, LLM analytics, data warehousing, and more.
+> PostHog is an open-source platform for customer infrastructure. We equip developers with everything they need to build successful products – product analytics, web analytics, feature flags, session replay, A/B testing, error tracking, surveys, LLM observability, data warehousing, and more.
 
 `
 

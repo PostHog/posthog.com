@@ -77,7 +77,7 @@ For example, [I owned sales](/founders/startup-sales-strategy) when we were an e
 
 Right now, we split our responsibilities around the products we care most about, and are uniquely qualified to help progress:
 
-  * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [LLM analytics](/docs/ai-engineering). He’s great at execution and understands the ins and outs of these products better than I.
+  * Tim is focused on platform teams, our [data warehouse](/docs/data-warehouse) and [customer data platform](/docs/cdp), and new products like [LLM observability](/docs/ai-engineering). He’s great at execution and understands the ins and outs of these products better than I.
 
   * I’m focused on marketing, and AI-first products and features like [Max AI](/docs/max-ai), our “AI product manager”, which we believe will become the default interface for much of PostHog. I love pushing ambition and taking bets, so this suits me perfectly.
 

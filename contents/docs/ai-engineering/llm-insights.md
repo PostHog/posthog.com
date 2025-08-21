@@ -1,12 +1,12 @@
 ---
-title: LLM analytics integrations
+title: LLM observability integrations
 availability:
     free: full
     selfServe: full
     enterprise: full
 ---
 
-Beyond our native [LLM analytics product](/docs/ai-engineering/observability), we've teamed up with various LLM platforms to track metrics for LLM apps. This makes it easy to answer questions like:
+Beyond our native [LLM observability product](/docs/ai-engineering/observability), we've teamed up with various LLM platforms to track metrics for LLM apps. This makes it easy to answer questions like:
 
 - What are my LLM costs by customer, model, and in total?
 - How many of my users are interacting with my LLM features?

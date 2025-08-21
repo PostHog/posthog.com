@@ -6,11 +6,11 @@ availability:
   enterprise: full
 ---
 
-Once you install PostHog's LLM analytics SDK, it autocaptures LLM generations and traces. You can then view these in PostHog.
+Once you install PostHog's LLM observability SDK, it autocaptures LLM generations and traces. You can then view these in PostHog.
 
 ## Generations
 
-Generations are an event that capture an LLM request. The [generations tab](https://us.posthog.com/llm-analytics/generations) lists them along with the properties autocaptured by the PostHog like the person, model, total cost, token usage, and more.
+Generations are an event that capture an LLM request. The [generations tab](https://us.posthog.com/llm-observability/generations) lists them along with the properties autocaptured by the PostHog like the person, model, total cost, token usage, and more.
 
 When you expand a generation, it includes the properties and metadata that every event has along with a conversation history with the role (system, user, assistant) as well as input and output content.
 
@@ -23,7 +23,7 @@ When you expand a generation, it includes the properties and metadata that every
 
 ## Traces
 
-Traces are a collection of generations that capture a full interaction between a user and an LLM. The [traces tab](https://us.posthog.com/llm-analytics/traces) lists them along with the properties autocaptured by the PostHog like the person, total cost, total latency, and more.
+Traces are a collection of generations that capture a full interaction between a user and an LLM. The [traces tab](https://us.posthog.com/llm-observability/traces) lists them along with the properties autocaptured by the PostHog like the person, total cost, total latency, and more.
 
 Clicking on a trace opens a timeline of the interaction with all the generation events enabling you to see the entire conversation, details about the trace, and the individual generation events.
 

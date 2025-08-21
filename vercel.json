@@ -1540,14 +1540,6 @@
         {
             "source": "/docs/error-tracking/issues",
             "destination": "/docs/error-tracking/issues-and-exceptions"
-        },
-        {
-            "source": "/teams/llm-observability",
-            "destination": "/teams/llm-analytics"
-        },
-        {
-            "source": "/teams/llm-observability/:path*",
-            "destination": "/teams/llm-analytics/:path*"
         }
     ],
     "headers": [
