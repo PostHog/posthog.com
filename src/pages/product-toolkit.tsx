@@ -370,7 +370,7 @@ export default function ProductToolkit() {
                 mdxBody={mdxBody}
                 cta={{
                     url: `https://${
-                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                        posthog?.isFeatureEnabled && posthog.isFeatureEnabled('direct-to-eu-cloud') ? 'eu' : 'app'
                     }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
