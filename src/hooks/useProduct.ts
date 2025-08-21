@@ -1172,7 +1172,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             worksWith: ['product_analytics', 'web_analytics', 'data_warehouse', 'session_replay'],
         },
         {
-            name: 'README: Data warehouse vs CDP vs ETL??.md',
+            name: 'README: Data warehouse / CDP / ETL.md',
             // Icon: IconDatabase,
             parentIcon: 'documentCanvas',
             description: 'CDP manifesto',

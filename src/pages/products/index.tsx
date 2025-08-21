@@ -486,13 +486,11 @@ export default function Products(): JSX.Element {
                                                         } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (
-                                                            <div
+                                                            <button
                                                                 key={product.slug}
                                                                 onClick={(e) => handleProductClick(product, e)}
-                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md ${
-                                                                    selectedProduct?.slug === product.slug
-                                                                        ? 'border-blue bg-blue/10'
-                                                                        : 'border-transparent hover:border-border'
+                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
+                                                                    selectedProduct?.slug === product.slug ? '' : ''
                                                                 }`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
@@ -529,7 +527,7 @@ export default function Products(): JSX.Element {
                                                                         )}
                                                                     </AppLink>
                                                                 </div>
-                                                            </div>
+                                                            </button>
                                                         ))}
                                                     </div>
                                                 ),

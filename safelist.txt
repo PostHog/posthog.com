@@ -209,10 +209,12 @@ fill-white
 fill-yellow
 fill-yellow-2
 fill-yellow-2-dark
-
 flex
 flex
 flex-row-reverse
+focus:bg-blue/10
+focus:border-blue
+focus-visible:bg-blue/10
 from-tan/100
 gap-y-4
 gap-y-4
