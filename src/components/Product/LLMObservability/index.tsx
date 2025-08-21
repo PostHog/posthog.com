@@ -338,7 +338,7 @@ export const ProductLLMObservability = () => {
     return (
         <>
             <SEO
-                title="LLM analytics - PostHog"
+                title="LLM analytics and observability - PostHog"
                 description="Who keeps an eye on your AI? You do."
                 image={`/images/og/feature-flags.jpg`}
             />
