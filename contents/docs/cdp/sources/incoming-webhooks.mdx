@@ -82,7 +82,7 @@ postHogCapture({
 
 ## (Advanced) HTTP requests and background processing
 
-Webhook sources can call `postHogCapture` to ingest events to PostHog. You can also do HTTP calls with `fetch`. In this case, however, the request will be queued to a background task, a 201 Created response will be returned, and the event will be ingested asynchronously.
+Webhook sources can call `postHogCapture` to ingest events to PostHog. You can also do HTTP calls with `fetch`, but, in this case, the request is queued to a background task, a 201 Created response is returned, and the event is ingested asynchronously.
 
 
 ## Troubleshooting
