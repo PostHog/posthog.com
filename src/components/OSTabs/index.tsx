@@ -10,18 +10,26 @@ interface TabItem {
     triggerDataScheme?: string
 }
 
+interface TabTriggerData {
+    value: string
+    label: React.ReactNode
+    triggerDataScheme?: string
+}
+
 interface OSTabsProps {
     tabs: TabItem[]
     defaultValue?: string
     value?: string
+    orientation?: 'horizontal' | 'vertical'
     frame: boolean
     children?: React.ReactNode
     fullScreen?: boolean
     className?: string
     triggerDataScheme?: string
     extraTabRowContent?: React.ReactNode
-    onValueChange?: (value: string, tabs: TabItem[][]) => void
+    onValueChange?: (value: string, tabs: TabTriggerData[][]) => void
     tabContainerClassName?: string
+    tabTriggerClassName?: string
     tabContentClassName?: string
 }
 
@@ -30,22 +38,29 @@ export default function OSTabs({
     defaultValue,
     value,
     children,
+    orientation = 'horizontal',
     frame = true,
     className,
     triggerDataScheme = 'secondary',
     extraTabRowContent,
     onValueChange,
     tabContainerClassName,
+    tabTriggerClassName,
     tabContentClassName,
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
     const [controlledValue, setControlledValue] = useState(defaultValue || tabs[0]?.value)
-    const [orderedTabs, setOrderedTabs] = useState<TabItem[][]>(state?.orderedTabs || [tabs])
+
+    // Only use orderedTabs logic for horizontal orientation
+    const [orderedTabs, setOrderedTabs] = useState<TabItem[][]>(
+        orientation === 'horizontal' ? (state as any)?.orderedTabs || [tabs] : [tabs]
+    )
     const ref = useRef<HTMLDivElement>(null)
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
-            if (!ref.current) return
+            // Only calculate tab rows for horizontal orientation
+            if (orientation !== 'horizontal' || !ref.current) return
 
             const containerWidth = ref.current.getBoundingClientRect().width - 48
             const currentActiveValue = activeTabValue || value || controlledValue
@@ -63,7 +78,12 @@ export default function OSTabs({
             const tabWidths: number[] = []
             tabs.forEach((tab) => {
                 const clonedTab = existingTab.cloneNode(true) as HTMLElement
-                clonedTab.textContent = tab.label
+                // Handle ReactNode labels by converting to string
+                if (typeof tab.label === 'string') {
+                    clonedTab.textContent = tab.label
+                } else {
+                    clonedTab.textContent = 'Tab'
+                }
                 tempContainer.appendChild(clonedTab)
                 tabWidths.push(clonedTab.getBoundingClientRect().width + 4)
                 tempContainer.removeChild(clonedTab)
@@ -104,45 +124,74 @@ export default function OSTabs({
             setOrderedTabs(rows)
             return rows
         },
-        [tabs, value, controlledValue]
+        [tabs, value, controlledValue, orientation]
     )
 
     useEffect(() => {
-        if (!ref.current) return
+        // Only run tab row calculation for horizontal orientation
+        if (orientation !== 'horizontal' || !ref.current) return
+
         calculateTabRows()
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
         return () => resizeObserver.disconnect()
-    }, [calculateTabRows])
+    }, [calculateTabRows, orientation])
 
     return (
         <div ref={ref}>
             <Tabs.Root
                 onValueChange={(value) => {
                     setControlledValue(value)
-                    const orderedTabsWithoutContent = calculateTabRows(value)?.map((row) =>
-                        row.map((tab) => ({
-                            value: tab.value,
-                            label: tab.label,
-                            triggerDataScheme: tab.triggerDataScheme,
-                        }))
-                    )
-                    onValueChange?.(value, orderedTabsWithoutContent)
+
+                    // Only calculate ordered tabs for horizontal orientation
+                    if (orientation === 'horizontal') {
+                        const orderedTabsWithoutContent = calculateTabRows(value)?.map((row) =>
+                            row.map(
+                                (tab): TabTriggerData => ({
+                                    value: tab.value,
+                                    label: tab.label,
+                                    triggerDataScheme: tab.triggerDataScheme,
+                                })
+                            )
+                        )
+                        onValueChange?.(value, orderedTabsWithoutContent || [])
+                    } else {
+                        const verticalTabsData: TabTriggerData[][] = [
+                            tabs.map(
+                                (tab): TabTriggerData => ({
+                                    value: tab.value,
+                                    label: tab.label,
+                                    triggerDataScheme: tab.triggerDataScheme,
+                                })
+                            ),
+                        ]
+                        onValueChange?.(value, verticalTabsData)
+                    }
                 }}
                 defaultValue={defaultValue || tabs[0]?.value}
                 value={value || controlledValue}
-                className={className ?? 'relative flex flex-col pt-2 px-4 pb-4 h-full min-h-0 bg-primary'}
+                className={
+                    className ??
+                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
+                        frame ? 'pt-2 px-4 pb-4' : ''
+                    } h-full min-h-0 bg-primary`
+                }
             >
                 <div className={tabContainerClassName}>
-                    <Tabs.List className={'ml-1.5 flex-shrink-0 flex flex-col'}>
+                    <Tabs.List
+                        className={`flex-shrink-0 flex flex-col ${orientation === 'horizontal' ? 'ml-1.5' : ''}`}
+                    >
                         {orderedTabs.map((row, rowIndex) => (
-                            <div key={rowIndex} className="flex items-center">
+                            <div
+                                key={rowIndex}
+                                className={`flex ${orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px'}`}
+                            >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
                                         key={tab.value}
                                         value={tab.value}
                                         data-scheme={triggerDataScheme}
-                                        className="data-[state=active]:bg-primary px-2 py-1 border border-transparent data-[state=active]:border-primary border-b-0 rounded-t-sm relative -bottom-px z-10 text-sm select-none text-primary"
+                                        className={`${tabTriggerClassName} data-[state=active]:bg-primary px-2 py-1 border border-transparent relative -bottom-px z-10 text-sm select-none text-primary data-[state=active]:border-primary border-b-0 rounded-t-sm`}
                                     >
                                         {tab.label}
                                     </Tabs.Trigger>

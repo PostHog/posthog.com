@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconGraph, IconArrowUpRight } from '@posthog/icons'
+import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -36,7 +36,7 @@ import { PRODUCT_COUNT, APP_COUNT } from '../constants'
 import Start from 'components/Start'
 import { CallToAction } from 'components/CallToAction'
 import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
-import OSTabs from 'components/OSTabs'
+import ProductTabs from 'components/ProductTabs'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -449,65 +449,16 @@ const CompanyStageTabs = () => {
             )}
             {selectedStage === 'growth' && (
                 <div className="flex flex-col gap-2">
-                    <OSTabs
-                        tabs={[
-                            {
-                                value: 'analytics',
-                                label: (
-                                    <>
-                                        <IconGraph className="inline-block size-6 text-blue" /> Product Analytics
-                                    </>
-                                ),
-                                content: (
-                                    <div className="flex flex-col gap-2">
-                                        <h4 className="font-semibold">Product Analytics</h4>
-                                        <p>
-                                            Track user behavior, funnels, and insights to understand how your product is
-                                            being used.
-                                        </p>
-                                        <ul className="list-disc list-inside space-y-1">
-                                            <li>Event tracking and funnels</li>
-                                            <li>User behavior analysis</li>
-                                            <li>Conversion optimization</li>
-                                        </ul>
-                                    </div>
-                                ),
-                            },
-                            {
-                                value: 'experiments',
-                                label: 'A/B Testing',
-                                content: (
-                                    <div className="flex flex-col gap-2">
-                                        <h4 className="font-semibold">A/B Testing</h4>
-                                        <p>Run experiments to optimize your product and increase conversion rates.</p>
-                                        <ul className="list-disc list-inside space-y-1">
-                                            <li>Statistical significance testing</li>
-                                            <li>Feature flag management</li>
-                                            <li>Rollout controls</li>
-                                        </ul>
-                                    </div>
-                                ),
-                            },
-                            {
-                                value: 'replay',
-                                label: 'Session Replay',
-                                content: (
-                                    <div className="flex flex-col gap-2">
-                                        <h4 className="font-semibold">Session Replay</h4>
-                                        <p>
-                                            Watch real user sessions to understand how people interact with your
-                                            product.
-                                        </p>
-                                        <ul className="list-disc list-inside space-y-1">
-                                            <li>User journey visualization</li>
-                                            <li>Bug reproduction</li>
-                                            <li>UX optimization insights</li>
-                                        </ul>
-                                    </div>
-                                ),
-                            },
+                    <ProductTabs
+                        productHandles={[
+                            'session_replay',
+                            'web_analytics',
+                            'product_analytics',
+                            'experiments',
+                            'feature_flags',
+                            'surveys',
+                            'error_tracking',
                         ]}
-                        defaultValue="analytics"
                     />
                 </div>
             )}
