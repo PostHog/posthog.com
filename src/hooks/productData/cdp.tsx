@@ -2,9 +2,9 @@ import React from 'react'
 import { IconPlug } from '@posthog/icons'
 
 export const cdp = {
-    parentIcon: 'spreadsheet',
+    parentIcon: 'spreadsheetSearch',
     // Icon: IconPlug,
-    name: 'Integrations library',
+    name: 'Integrations library (145+)',
     description: 'Get data into PostHog and send it where it needs to go.',
     handle: 'cdp',
     type: 'cdp',

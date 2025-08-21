@@ -2,8 +2,8 @@ import React from 'react'
 import { IconAsterisk } from '@posthog/icons'
 
 export const dataWarehouse = {
-    parentIcon: 'page',
-    Icon: IconAsterisk,
+    parentIcon: 'SQL',
+    /* Icon: IconAsterisk, */
     name: 'Query & visualize data',
     handle: 'data_warehouse',
     type: 'data_warehouse',

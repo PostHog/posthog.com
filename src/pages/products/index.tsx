@@ -393,7 +393,7 @@ export default function Products(): JSX.Element {
                             'cdp',
                             'data_in',
                             'transformations',
-                            'analyze',
+                            'data_warehouse',
                             'data_out',
                             // 'data-warehouse',
                             // 'sql',
@@ -401,13 +401,12 @@ export default function Products(): JSX.Element {
                             // 'webhooks',
                         ],
                         analytics: [
-                            'bi',
-                            'web-analytics',
-                            'product-analytics',
-                            'revenue-analytics',
-                            'llm-analytics',
+                            'web_analytics',
+                            'product_analytics',
+                            'revenue_analytics',
+                            'llm_analytics',
+                            'custom_dashboards',
                             'group_analytics',
-                            'heatmaps',
                         ],
                         // product: ['session-replay', 'experiments', 'early_access'],
                         // engineering: ['feature-flags', 'error-tracking'],
@@ -436,8 +435,8 @@ export default function Products(): JSX.Element {
                         const customOrder = productOrder[category]
                         if (customOrder && customOrder.length > 0) {
                             groupedProducts[category].sort((a: any, b: any) => {
-                                const aIndex = customOrder.indexOf(a.slug)
-                                const bIndex = customOrder.indexOf(b.slug)
+                                const aIndex = customOrder.indexOf(a.handle)
+                                const bIndex = customOrder.indexOf(b.handle)
 
                                 // If both products are in custom order, sort by that order
                                 if (aIndex !== -1 && bIndex !== -1) {

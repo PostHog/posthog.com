@@ -133,6 +133,30 @@ const PRODUCT_ICON_MAP = {
         classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_Shopping_Bag_Style_Classic_89fbc3ebcf.png',
         default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Icon_Shopping_Bag_Style_Modern_cd937c7872.png',
     },
+    spreadsheetSearch: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Spreadsheet_Search_Classic_e8d1d6eb40.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Spreadsheet_Search_Modern_617622de0d.png',
+    },
+    documentCanvas: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Document_Canvas_Classic_c3eddc70af.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Document_Canvas_Default_8f086dde22.png',
+    },
+    dataBlender: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Blender_Classic_ea3737691d.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Blender_Modern_bfec81580c.png',
+    },
+    SQL: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/SQL_Classic_638e548261.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/SQL_Modern_c78fa1805c.png',
+    },
+    dataIn: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_In_Classic_b58bd17dbf.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_In_Modern_cf968580e4.png',
+    },
+    dataOut: {
+        classic: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Out_Classic_9ed0e7c3dc.png',
+        default: 'https://res.cloudinary.com/dmukukwp6/image/upload/Data_Out_Modern_b3a6093647.png',
+    },
 } as const satisfies Record<string, AppIconVariants>
 
 type AppIconName = keyof typeof PRODUCT_ICON_MAP
