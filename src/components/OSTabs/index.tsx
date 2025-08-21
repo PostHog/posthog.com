@@ -5,7 +5,7 @@ import { useLocation } from '@reach/router'
 
 interface TabItem {
     value: string
-    label: string
+    label: React.ReactNode
     content: React.ReactNode
     triggerDataScheme?: string
 }

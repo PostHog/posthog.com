@@ -3,7 +3,7 @@ import Link from 'components/Link'
 import OSTable from 'components/OSTable'
 import { useCustomers } from 'hooks/useCustomers'
 import CTA from 'components/Home/CTA'
-import { IconArrowRight, IconArrowUpRight } from '@posthog/icons'
+import { IconArrowRight, IconGraph, IconArrowUpRight } from '@posthog/icons'
 import {
     Digit0,
     Digit1,
@@ -32,9 +32,11 @@ import { graphql, useStaticQuery } from 'gatsby'
 import SEO from 'components/seo'
 import usePostHog from 'hooks/usePostHog'
 import Tooltip from 'components/RadixUI/Tooltip'
-import { PRODUCT_COUNT } from '../constants'
+import { PRODUCT_COUNT, APP_COUNT } from '../constants'
 import Start from 'components/Start'
-
+import { CallToAction } from 'components/CallToAction'
+import { ToggleGroup, ToggleOption } from 'components/RadixUI/ToggleGroup'
+import OSTabs from 'components/OSTabs'
 interface ProductButtonsProps {
     productTypes: string[]
     className?: string
@@ -103,6 +105,19 @@ const HomeHappyHog = () => {
             alt="happy hog"
             className="@xl:float-right @xl:ml-2 max-w-[400px] max-h-48 -mt-2 -mr-2"
         />
+    )
+}
+
+const CTAs = () => {
+    return (
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-2 mt-8">
+            <CallToAction to="https://app.posthog.com/signup" size="md">
+                Get started - free
+            </CallToAction>
+            <CallToAction to="#" type="secondary" size="md">
+                Install with AI
+            </CallToAction>
+        </div>
     )
 }
 
@@ -389,6 +404,125 @@ const ProductCount = () => {
     return <strong>{PRODUCT_COUNT}+ products</strong>
 }
 
+const AppCount = () => {
+    return APP_COUNT
+}
+
+const CompanyStageTabs = () => {
+    const [selectedStage, setSelectedStage] = React.useState('growth')
+
+    const companyStageOptions: ToggleOption[] = [
+        {
+            label: 'Startup / Pre-PMF',
+            value: 'startup',
+            // icon: <IconLaptop className="size-5" />,
+        },
+        {
+            label: 'Growth',
+            value: 'growth',
+            // icon: <IconLaptop className="size-5" />,
+        },
+        {
+            label: 'Scale',
+            value: 'scale',
+            // icon: <IconLaptop className="size-5" />,
+        },
+    ]
+
+    return (
+        <>
+            <ToggleGroup
+                hideTitle
+                title="Company stage"
+                options={companyStageOptions}
+                onValueChange={setSelectedStage}
+                value={selectedStage}
+            />
+
+            {selectedStage === 'startup' && (
+                <div className="flex flex-col gap-2">
+                    <p>
+                        <strong>Startup / Pre-PMF</strong>
+                        <p>blah</p>
+                    </p>
+                </div>
+            )}
+            {selectedStage === 'growth' && (
+                <div className="flex flex-col gap-2">
+                    <OSTabs
+                        tabs={[
+                            {
+                                value: 'analytics',
+                                label: (
+                                    <>
+                                        <IconGraph className="inline-block size-6 text-blue" /> Product Analytics
+                                    </>
+                                ),
+                                content: (
+                                    <div className="flex flex-col gap-2">
+                                        <h4 className="font-semibold">Product Analytics</h4>
+                                        <p>
+                                            Track user behavior, funnels, and insights to understand how your product is
+                                            being used.
+                                        </p>
+                                        <ul className="list-disc list-inside space-y-1">
+                                            <li>Event tracking and funnels</li>
+                                            <li>User behavior analysis</li>
+                                            <li>Conversion optimization</li>
+                                        </ul>
+                                    </div>
+                                ),
+                            },
+                            {
+                                value: 'experiments',
+                                label: 'A/B Testing',
+                                content: (
+                                    <div className="flex flex-col gap-2">
+                                        <h4 className="font-semibold">A/B Testing</h4>
+                                        <p>Run experiments to optimize your product and increase conversion rates.</p>
+                                        <ul className="list-disc list-inside space-y-1">
+                                            <li>Statistical significance testing</li>
+                                            <li>Feature flag management</li>
+                                            <li>Rollout controls</li>
+                                        </ul>
+                                    </div>
+                                ),
+                            },
+                            {
+                                value: 'replay',
+                                label: 'Session Replay',
+                                content: (
+                                    <div className="flex flex-col gap-2">
+                                        <h4 className="font-semibold">Session Replay</h4>
+                                        <p>
+                                            Watch real user sessions to understand how people interact with your
+                                            product.
+                                        </p>
+                                        <ul className="list-disc list-inside space-y-1">
+                                            <li>User journey visualization</li>
+                                            <li>Bug reproduction</li>
+                                            <li>UX optimization insights</li>
+                                        </ul>
+                                    </div>
+                                ),
+                            },
+                        ]}
+                        defaultValue="analytics"
+                    />
+                </div>
+            )}
+            {selectedStage === 'scale' && (
+                <div className="flex flex-col gap-2">
+                    <p>
+                        <strong>Scale</strong>
+                        <p>Blitzscale.</p>
+                    </p>
+                </div>
+            )}
+        </>
+    )
+}
+
 const CustomerInfrastructureAccordion = () => {
     return (
         <div>
@@ -571,6 +705,18 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         Editor: () => <ProductCount />,
     },
     {
+        name: 'AppCount',
+        kind: 'flow',
+        props: [],
+        Editor: () => <AppCount />,
+    },
+    {
+        name: 'CompanyStageTabs',
+        kind: 'flow',
+        props: [],
+        Editor: () => <CompanyStageTabs />,
+    },
+    {
         name: 'PageNavigation',
         kind: 'flow',
         props: [],
@@ -581,6 +727,12 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         kind: 'flow',
         props: [],
         Editor: () => <HomeHappyHog />,
+    },
+    {
+        name: 'CTAs',
+        kind: 'flow',
+        props: [],
+        Editor: () => <CTAs />,
     },
     {
         name: 'HomeHitCounter',
@@ -645,7 +797,7 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'Logo',
         kind: 'flow',
         props: [],
-        Editor: () => <Logo noText className="inline-block" />,
+        Editor: () => <Logo className="inline-block" />,
     },
 ]
 
