@@ -17,7 +17,7 @@ toolsUsed:
   - Max AI
   - Session replays
   - Product analytics
-date: 2025-06-15
+date: 2025-08-21
 ---
 
 If you’ve ever played League of Legends with randoms then you’ll know that competitive gaming communities can be unpleasant places to be. Thankfully, Gankster is on a mission to change that by helping like-minded players connect in games like DOTA2, Valorant, and Rocket League. 
