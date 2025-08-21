@@ -69,6 +69,15 @@ You can do this by:
 
 > **Tip:** to ensure your request is as quick as possible, use [local evaluation](/docs/feature-flags/local-evaluation) on your server.
 
+### Bootstrapping in single-page apps
+
+In environments where `posthog.init` only runs once during a session (for example, SPAs like Next.js using `instrumentation-client`), you have two options:
+
+- **Server-side pre-evaluation**: Evaluate flags before the app renders, then pass the values into your app and add them to `bootstrap` or use them directly.
+- **Client-side pre-evaluation**: Evaluate the flag in an earlier page/state than the one where you need the value, then store and reuse it immediately when required.
+
+Both approaches avoid flicker and achieve the same outcome as bootstrapping, as long as you use the same `distinct_id` across client and server.
+
 ## Bootstrapping with a distinct ID
 
 The `bootstrap` object has four optional arguments: `distinctID`, `isIdentifiedID`, `sessionID`, and `featureFlags`.
