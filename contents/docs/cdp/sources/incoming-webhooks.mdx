@@ -9,7 +9,9 @@ availability:
 ---
 import { ProductScreenshot } from 'components/ProductScreenshot'
 
-Incoming webhooks allow you to send data from external systems directly into PostHog. This is useful for integrating with custom applications, third-party services, or any system that can make HTTP requests. In general we recommend using our official ingestion API / SDKs but this is useful where you don't have control over the sender format and need to perform some transformation to match PostHog's event format.
+Incoming webhooks enable you to send data from external systems directly into PostHog. This is useful for integrating with custom applications, third-party services, or any system that can make HTTP requests. 
+
+In general, we recommend using our [SDKs](/docs/libraries) or [capture API](/docs/api/capture) but this is useful when you don't have control over the sender format and need to perform some transformation to match PostHog's event format.
 
 ## How it works
 
