@@ -1252,6 +1252,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             parentIcon: 'aiRaquel',
             // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst',
+            role: 'Data Analyst',
             handle: 'raquel_ai',
             color: 'red',
             colorSecondary: 'lilac',
@@ -1272,6 +1273,30 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 alt: "Hi, I'm Raquel!",
                 classes: 'max-w-[407px]',
             },
+            skills: [
+                {
+                    name: 'Deep data analysis & insights',
+                    percent: 74,
+                },
+
+                {
+                    name: 'Data visualization expertise',
+                    percent: 75,
+                },
+
+                {
+                    name: 'Statistical modeling & trends',
+                    percent: 60,
+                },
+                {
+                    name: 'Complex SQL query optimization',
+                    percent: 48,
+                },
+                {
+                    name: 'Research methodology & validation',
+                    percent: 60,
+                },
+            ],
             features: [
                 {
                     title: 'Raquel researches complex data problems',
@@ -1302,6 +1327,7 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
             parentIcon: 'aiAnnika',
             // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst and product manager',
+            role: 'Product Manager',
             handle: 'annika',
             color: 'green',
             colorSecondary: 'lilac',
@@ -1317,12 +1343,20 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 description: 'Annika.',
                 textColor: 'text-white',
             },
+            skills: [
+                { name: 'Metrics & success measurement', percent: 80 },
+                { name: 'Error analysis & prioritization', percent: 75 },
+                { name: 'Feature roadmap planning', percent: 70 },
+                { name: 'Risk assessment & mitigation', percent: 70 },
+                { name: 'Rollout strategy & testing', percent: 65 },
+            ],
         },
         {
             name: 'Marius',
             parentIcon: 'aiMarius',
             // Icon: IconMagicWand,
             description: 'Your AI-powered product analyst and product manager',
+            role: '10x Engineer',
             handle: 'marius',
             color: 'blue',
             colorSecondary: 'lilac',
@@ -1338,6 +1372,13 @@ export default function useProduct({ handle }: { handle?: string } = {}) {
                 description: 'Marius.',
                 textColor: 'text-white',
             },
+            skills: [
+                { name: 'Bug identification & fixes', percent: 75 },
+                { name: 'Code generation & optimization', percent: 70 },
+                { name: 'Technical architecture planning', percent: 70 },
+                { name: 'Code review & quality assurance', percent: 65 },
+                { name: 'PR creation & documentation', percent: 60 },
+            ],
         },
         {
             name: 'User activity',
