@@ -21,6 +21,7 @@ const MCP_SERVER_CONFIG = {
     },
 }
 
+// https://zed.dev/docs/ai/mcp#as-custom-servers
 const MCP_SERVER_CONFIG_ZED = {
     ...MCP_SERVER_CONFIG,
     enabled: true,
