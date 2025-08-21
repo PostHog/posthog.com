@@ -43,10 +43,10 @@ For example if you send a request with curl like so:
 
 ```bash
 curl -X POST https://webhooks.<region>.posthog.com/public/webhooks/<UUID> \
-  -H "Content-Type: application/json" -H "Authorization: Bearer <API_KEY>" \
+  -H "Content-Type: application/json" \
   -d '{
-    "email": "example@example.com",
-    "type": "signup"
+    "event": "my example event",
+    "distinct_id": "webhook-test-123"
   }'
 ```
 
@@ -56,9 +56,9 @@ Then the variables available to use will look like:
 print(request.method)
 // Outputs: 'POST'
 print(request.headers)
-// Outputs: { 'Content-Type': 'application/json', 'Authorization': 'Bearer <API_KEY>' }
+// Outputs: { 'Content-Type': 'application/json' }
 print(request.body)
-// Outputs: { 'email': 'example@example.com', 'type': 'signup' }
+// Outputs: { 'event': 'my example event', 'distinct_id': 'webhook-test-123' }
 print(request.ip)
 // Outputs: '127.0.0.1'
 ```
@@ -78,7 +78,7 @@ postHogCapture({
 })
 ```
 
-## HTTP requests and background processing
+## (Advanced) HTTP requests and background processing
 
 Webhook sources can call `postHogCapture` to ingest events to PostHog. You can also do HTTP calls with `fetch`. In this case, however, the request will be queued to a background task, a 201 Created response will be returned, and the event will be ingested asynchronously.
 
@@ -87,7 +87,7 @@ Webhook sources can call `postHogCapture` to ingest events to PostHog. You can a
 
 ### Testing your webhook
 
-You can test your webhook by sending a request to the webhook URL. You can use a tool like [curl](https://curl.se/) to send a request or use our built in testing tools when setting up the webhook.
+You can test your webhook by sending a request to the webhook URL. You can use a tool like [curl](https://curl.se/) to send a request or use our built in testing tools when setting up the webhook. If you use `curl` or another tool, you can turn on the `Log payloads` switch in the `configuration` tab, and then check the `logs` tab to see the webhooks come in.
 
 Currently you have to save the webhook to test it as it directly hits the endpoint ensuring that the complete flow works.
 
