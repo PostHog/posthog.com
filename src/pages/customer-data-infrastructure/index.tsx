@@ -279,7 +279,7 @@ export default function CDP(): JSX.Element {
                     </li>
                     <li className="relative pl-8">
                         <IconAsterisk className="size-6 inline-block text-muted absolute top-0 left-0" />
-                        <Link to="/customer-data-infrastructure/query-data">Query & visualize data</Link>
+                        <Link to="/data-warehouse">Query & visualize data</Link>
                         <br />
                         <span className="text-sm text-secondary">SQL editor, BI, data viz</span>
                     </li>
