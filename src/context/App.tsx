@@ -233,6 +233,7 @@ export const Context = createContext<AppContextType>({
         cursor: 'default',
         wallpaper: 'keyboard-garden',
         screensaverDisabled: false,
+        clickBehavior: 'double',
     },
     updateSiteSettings: () => { },
     openNewChat: () => { },
@@ -408,11 +409,11 @@ const appSettings: AppSettings = {
         size: {
             min: {
                 width: 600,
-                height: 500,
+                height: 550,
             },
             max: {
                 width: 600,
-                height: 500,
+                height: 550,
             },
             fixed: true,
         },
@@ -729,6 +730,7 @@ export interface SiteSettings {
     | 'parade'
     | 'coding-at-night'
     screensaverDisabled?: boolean
+    clickBehavior?: 'single' | 'double'
 }
 
 const isLabel = (item: any) => !item?.url && item?.name
@@ -741,6 +743,7 @@ const getInitialSiteSettings = (isMobile: boolean, compact: boolean) => {
         skinMode: 'modern',
         cursor: 'default',
         wallpaper: 'keyboard-garden',
+        clickBehavior: 'double',
         ...(typeof window !== 'undefined' ? JSON.parse(localStorage.getItem('siteSettings') || '{}') : {}),
     }
 

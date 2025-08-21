@@ -71,6 +71,28 @@ const cursorOptions: ToggleOption[] = [
     },
 ]
 
+const clickBehaviorOptions: ToggleOption[] = [
+    {
+        label: <span>
+            Single-click{' '}
+            <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
+                <p className="max-w-sm my-0">Click once to open items</p>
+            </Tooltip>
+        </span>,
+        value: 'single',
+    },
+    {
+        label: <span>
+            Double-click{' '}
+            <Tooltip trigger={<IconInfo className="size-4 inline-block" />} delay={0}>
+                <p className="max-w-sm my-0">Click once to select, double-click to open</p>
+            </Tooltip>
+        </span>,
+        value: 'double',
+        default: true,
+    },
+]
+
 const experienceOptions = [
     {
         label: (
@@ -178,9 +200,8 @@ const WallpaperSelect = ({ value, onValueChange, title }: WallpaperSelectProps) 
                                 type="button"
                                 data-scheme="primary"
                                 onClick={() => handleSelect(option.value)}
-                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${
-                                    isSelected ? 'bg-accent' : ''
-                                }`}
+                                className={`w-full p-2 text-left bg-primary hover:bg-accent border border-input hover:border-primary flex flex-col items-center gap-3 rounded ${isSelected ? 'bg-accent' : ''
+                                    }`}
                             >
                                 <img
                                     src={optionThumb}
@@ -232,6 +253,10 @@ export default function DisplayOptions() {
             wallpaper: value as SiteSettings['wallpaper'],
             colorMode: value === 'coding-at-night' ? 'dark' : siteSettings.colorMode,
         })
+    }
+
+    const handleClickBehaviorChange = (value: string) => {
+        updateSiteSettings({ ...siteSettings, clickBehavior: value as SiteSettings['clickBehavior'] })
     }
 
     return (
@@ -306,6 +331,14 @@ export default function DisplayOptions() {
                             options={experienceOptions}
                             onValueChange={handleExperienceChange}
                             value={siteSettings.experience}
+                        />
+                    </div>
+                    <div className="bg-primary grid grid-cols-2 gap-2 mt-2">
+                        <ToggleGroup
+                            title="Click behavior"
+                            options={clickBehaviorOptions}
+                            onValueChange={handleClickBehaviorChange}
+                            value={siteSettings.clickBehavior || 'double'}
                         />
                     </div>
                 </Fieldset>
