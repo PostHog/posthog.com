@@ -88,6 +88,8 @@ They enable you to configure functionality related to your flag inside PostHog, 
 
 You can control where your feature flags are evaluated by specifying an evaluation runtime. This helps optimize performance and reduce unnecessary network traffic by ensuring flags are only sent to the appropriate environments.
 
+Runtime filtering also reduces evaluation latency and prevents feature flag bloat by only sending relevant flags to each environment, making it easier to manage flags in your app and organize the flags you actually evaluate.
+
 ### Runtime options
 
 Feature flags can be configured to evaluate in one of three runtime environments:
@@ -100,14 +102,16 @@ Feature flags can be configured to evaluate in one of three runtime environments
 
 When you specify an evaluation runtime, PostHog automatically detects the requesting environment based on:
 - User-Agent headers
-- Library version information
 - Browser-specific headers
 - SDK type indicators
 
 The system then filters which flags are returned based on their configured runtime, ensuring:
 - Smaller payload sizes for client applications
+- Reduced evaluation latency by eliminating irrelevant flags
+- Prevention of feature flag bloat in each environment
 - Improved performance by reducing unnecessary flag evaluations
 - Better security by keeping server-only flags away from client environments
+- Cleaner flag management with environment-specific organization
 
 ### Best practices
 
