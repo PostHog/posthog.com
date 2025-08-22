@@ -4,64 +4,107 @@ sidebar: Docs
 showTitle: true
 ---
 
-# Using Content Security Policies (CSP)
+import { CalloutBox } from 'components/Docs/CalloutBox'
 
-> NOTE: This only applies to PostHog Cloud.
+Modern browsers enforce [Content Security Policy (CSP)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) to protect against cross-site scripting (XSS) and data injection attacks. 
 
-As [described on MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP): _Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross-Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft, to site defacement, to malware distribution._
-
-If you choose to use a CSP it is important to ensure that PostHog domains are permitted. PostHog is a distributed Cloud service and as such can have different domains that change over time but will always be served from the root domain `posthog.com`. As such you should add `*.posthog.com` to your CSP directive.
+Some PostHog features such as the [Toolbar](/docs/toolbar) and [heatmaps](/docs/toolbar/heatmaps) require the browser to load content from PostHog domains. These require specific CSP configuration on your apps to work.
 
 ## Content Security Policy directives needed
 
 Depending on how you have installed `posthog-js`, the SDK will dynamically load extra JavaScript assets as necessary. For example, [the snippet](/docs/getting-started/install?tab=snippet) is very small and just loads `array.js`. This requires the `script-src` directive.
 
-Once loaded, the SDK will make API calls to the various endpoints for feature flags, analytics ingestion etc. This requires the `connect-src` directive. Additionally, if additional JavaScript assets are required such as the larger bundle for the Session Replay recorder, then they will be loaded via additional `<script/>` tags which in turn require the `script-src` directive.
+Once loaded, the SDK will make API calls to the various endpoints for feature flags, analytics ingestion etc. This requires the `connect-src` directive. If additional JavaScript assets are required such as the larger bundle for the session replay recorder, then they will be loaded via additional `<script/>` tags which in turn require the `script-src` directive.
 
-Below is an example of a relatively restrictive CSP that limits only scripts and API calls to all posthog domains. We generally do not recommend being stricter than this as the exact subdomains may change over time as we optimize our traffic routing.
+### Basic CSP for scripts and API calls
 
-```html
+Below is an example of a relatively restrictive CSP that limits only scripts and API calls to PostHog in your specific region. We generally do not recommend being stricter than this as the exact subdomains may change over time as we optimize our traffic routing.
+
+<MultiLanguage>
+
+```html file=us.posthog.com
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self'; 
-  script-src 'self' https://*.posthog.com; 
-  connect-src 'self' https://*.posthog.com;
+  script-src 'self' https://us.posthog.com; 
+  connect-src 'self' https://us.posthog.com;
   worker-src 'self' blob: data:;
 ">
 ```
 
-### Enabling the Toolbar
+```html file=eu.posthog.com
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self'; 
+  script-src 'self' https://eu.posthog.com; 
+  connect-src 'self' https://eu.posthog.com;
+  worker-src 'self' blob: data:;
+">
+```
+</MultiLanguage>
 
-The [Toolbar](/docs/toolbar) is a powerful tool for configuring and loading information from PostHog directly on your website. When enabled, `posthog-js` will load additional scripts which in turn can load everything from fonts to css to images in order to render it fully. This means adding quite a few more CSP directives _or_ being less restrictive by adding `https://*.posthog.com` to the `default-src` directive.
+### Enabling the toolbar
+
+The [toolbar](/docs/toolbar) is a powerful tool for configuring and loading information from PostHog directly on your website. When enabled, `posthog-js` will load additional scripts which in turn can load everything from fonts to css to images in order to render it fully. This means adding quite a few more CSP directives _or_ being less restrictive by adding `https://us.posthog.com` or `https://eu.posthog.com` to the `default-src` directive.
 
 Depending on your compliance needs you can either:
-1. Add `https://*.posthog.com` to your `default-src` essentially trusting all calls to our domains.
-2. Modify your CSP so that when your web app is accessed by employees (the only people that would need the Toolbar) it has the above, more open policy.
+1. Add `https://us.posthog.com` or `https://eu.posthog.com` to your `default-src` essentially trusting all calls to our domains.
+2. Modify your CSP so that when your web app is accessed by employees (the only people that would need the toolbar) it has the above, more open policy.
 3. Add the additional directives as mentioned below to ensure that all the necessary assets can be loaded
 
-```html
+<MultiLanguage>
+
+```html file=us.posthog.com
 <meta http-equiv="Content-Security-Policy" content="
   default-src 'self'; 
-  script-src 'self' https://*.posthog.com; 
-  connect-src 'self' https://*.posthog.com;
+  script-src 'self' https://us.posthog.com; 
+  connect-src 'self' https://us.posthog.com;
   worker-src 'self' blob: data:;
-  img-src 'self' https://*.posthog.com; 
-  style-src 'self' https://*.posthog.com; 
-  font-src https://*.posthog.com;
-  media-src https://*.posthog.com;
+  img-src 'self' https://us.posthog.com; 
+  style-src 'self' https://us.posthog.com; 
+  font-src https://us.posthog.com;
+  media-src https://us.posthog.com;
 ">
 ```
 
-**NOTE**: This list should be enough at the time of writing. As the PostHog application changes rapidly, it is possible that other directives may be needed over time for loading the Toolbar. If you experience issues after implementing one of the above solutions, you can typically debug in the browser tools which part of the CSP is blocking requests.
+```html file=eu.posthog.com
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self'; 
+  script-src 'self' https://eu.posthog.com; 
+  connect-src 'self' https://eu.posthog.com;
+  worker-src 'self' blob: data:;
+  img-src 'self' https://eu.posthog.com; 
+  style-src 'self' https://eu.posthog.com; 
+  font-src https://eu.posthog.com;
+  media-src https://eu.posthog.com;
+">
+```
+
+</MultiLanguage>
+
+<CalloutBox icon="IconInfo" title="Note" type="fyi">
+
+This list should be enough at the time of writing. As PostHog and browser CSP rules change rapidly, it is possible that other directives may be needed over time for loading the toolbar. If you experience issues after implementing one of the above solutions, you can typically debug in the browser tools which part of the CSP is blocking requests.
+
+</CalloutBox>
 
 ### Enabling heatmaps
 
-You will need the following CSP to allow heatmaps to render your site in an iframe of ours:
+Heatmaps use an `<iframe>` to render your site when viewing in PostHog. This requires the `frame-ancestors` directive.
 
-```html
+<MultiLanguage>
+
+```html file=us.posthog.com
 <meta http-equiv="Content-Security-Policy" content="
-  frame-ancestors 'self' https://*.posthog.com;
+  frame-ancestors 'self' https://us.posthog.com;
 ">
 ```
+
+```html file=eu.posthog.com
+<meta http-equiv="Content-Security-Policy" content="
+  frame-ancestors 'self' https://eu.posthog.com;
+">
+```
+
+</MultiLanguage>
 
 ## Supporting nonce directives
 
@@ -84,9 +127,13 @@ This will modify the script/stylesheet to be loaded before they are inserted to 
 
 Make sure you return the script/stylesheet or else we won't append it to the DOM.
 
-## Domains used by PostHog clients
+## Domains used by PostHog SDKs
 
-> WARNING: Adding more specific domains is _not_ recommended as we may change target subdomains over time. If you do specify a non-wildcard domain, we cannot guarantee that it will continue to work in the future.
+<CalloutBox icon="IconWarning" title="Specific domains" type="warning">
+
+Adding more specific domains is _not_ recommended as we may change target subdomains over time. If you do specify a non-wildcard domain, we cannot guarantee that it will continue to work in the future.
+
+</CalloutBox>
 
 Our client SDKs (where appropriate) will take care of selecting the correct domain. **Typically you do not need to be aware of these domains**. For example when you specify `api_host: "https://app.posthog.com"` the SDK will recognize this as a US configuration and make the correct calls to `us.i.posthog.com` or `us-assets.i.posthog.com` accordingly.
 
