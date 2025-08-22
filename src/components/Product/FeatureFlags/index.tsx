@@ -486,6 +486,41 @@ export const ProductFeatureFlags = () => {
                     </Marquee>
                 </section>
             </div>
+
+            <section className="max-w-7xl mx-auto px-5 py-20">
+                <div className="flex flex-col-reverse items-center md:flex-row gap-6 md:gap-8">
+                    <div className="flex-1 text-center md:text-left">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-center md:text-left mb-4">
+                            OK, but what are flags <br />{' '}
+                            <span className="text-red dark:text-yellow">actually useful for?</span>
+                        </h2>
+                        <p>
+                            You can use feature flags for all sorts of things, from giving beta access to your power
+                            users, to creating kill-switches in case you need immediate rollback options.
+                        </p>
+                        <p>
+                            Here at PostHog,{' '}
+                            <a href="https://posthog.com/community/profiles/32193">our UX Platform Engineer, Adam</a>,
+                            is one of our heaviest flag users. He uses them to test new UI changes with internal teams
+                            before they're rolled out to everyone.
+                        </p>
+                    </div>
+                    <aside className="shrink-0 w-full md:w-auto md:basis-[500px] flex justify-center mb-6 md:mb-0">
+                        <div className="w-full max-w-[400px] sm:max-w-[450px] md:max-w-[470px]">
+                            <div className="relative aspect-video rounded overflow-hidden shadow-xl">
+                                <iframe
+                                    src="https://www.youtube-nocookie.com/embed/lqeD2vvAA4w"
+                                    title="DeskHog Demo Video"
+                                    className="w-full h-full"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+            </section>
             <section
                 id="pricing"
                 className={`${fullWidthContent ? 'max-w-full px-8' : 'max-w-7xl'} mx-auto px-5 py-20`}
