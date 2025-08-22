@@ -61,7 +61,7 @@ export default function About({ data }: AboutProps) {
     const { tabs, handleTabChange, tabContainerClassName, className } = useCompanyNavigation({
         value: '/about',
         content: (
-            <div className="max-w-3xl mx-auto">
+            <div className="max-w-3xl mx-auto pb-12">
                 <MDXProvider components={mdxComponents}>
                     <MDXRenderer>{data.mdx.body}</MDXRenderer>
                 </MDXProvider>
@@ -91,6 +91,7 @@ export default function About({ data }: AboutProps) {
                     tabContentClassName="px-4 @xl:px-8"
                     className={className}
                     triggerDataScheme="primary"
+                    scrollable={false}
                 />
             </Editor>
         </>

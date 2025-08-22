@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Tabs } from 'radix-ui'
 import ScrollArea from 'components/RadixUI/ScrollArea'
 import { useLocation } from '@reach/router'
@@ -31,6 +31,7 @@ interface OSTabsProps {
     tabContainerClassName?: string
     tabTriggerClassName?: string
     tabContentClassName?: string
+    scrollable?: boolean
 }
 
 export default function OSTabs({
@@ -47,6 +48,7 @@ export default function OSTabs({
     tabContainerClassName,
     tabTriggerClassName,
     tabContentClassName,
+    scrollable = true,
 }: OSTabsProps): JSX.Element {
     const { state } = useLocation()
     const [controlledValue, setControlledValue] = useState(defaultValue || tabs[0]?.value)
@@ -59,8 +61,12 @@ export default function OSTabs({
 
     const calculateTabRows = useCallback(
         (activeTabValue?: string) => {
-            // Only calculate tab rows for horizontal orientation
-            if (orientation !== 'horizontal' || !ref.current) return
+            if (orientation === 'horizontal') {
+                setOrderedTabs([tabs])
+                return
+            }
+
+            if (!ref.current) return
 
             const containerWidth = ref.current.getBoundingClientRect().width - 48
             const currentActiveValue = activeTabValue || value || controlledValue
@@ -129,13 +135,15 @@ export default function OSTabs({
 
     useEffect(() => {
         // Only run tab row calculation for horizontal orientation
-        if (orientation !== 'horizontal' || !ref.current) return
+        if (orientation === 'horizontal' || !ref.current) return
 
         calculateTabRows()
         const resizeObserver = new ResizeObserver(() => calculateTabRows())
         resizeObserver.observe(ref.current)
         return () => resizeObserver.disconnect()
     }, [calculateTabRows, orientation])
+
+    const TabContentContainer = useMemo(() => (scrollable ? ScrollArea : 'div'), [scrollable])
 
     return (
         <div ref={ref}>
@@ -175,19 +183,21 @@ export default function OSTabs({
                 value={value || controlledValue}
                 className={
                     className ??
-                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${frame ? 'pt-2 px-4 pb-4' : ''
+                    `relative flex ${orientation === 'horizontal' ? 'flex-col' : 'flex-row'} ${
+                        frame ? 'pt-2 px-4 pb-4' : ''
                     } h-full min-h-0 bg-primary`
                 }
             >
                 <div className={tabContainerClassName}>
                     <Tabs.List
-                        className={`flex-shrink-0 flex flex-col ${orientation === 'horizontal' ? 'ml-1.5' : 'h-full'}`}
+                        className={`flex-shrink-0 flex flex-col ${orientation === 'horizontal' ? '' : 'h-full'}`}
                     >
                         {orderedTabs.map((row, rowIndex) => (
                             <div
                                 key={rowIndex}
-                                className={`flex ${orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
-                                    }`}
+                                className={`flex ${
+                                    orientation === 'horizontal' ? ' items-center' : 'flex-col gap-px h-full'
+                                }`}
                             >
                                 {row.map((tab) => (
                                     <Tabs.Trigger
@@ -206,16 +216,17 @@ export default function OSTabs({
                 </div>
                 {tabs.map((tab) => (
                     <Tabs.Content data-scheme="primary" key={tab.value} value={tab.value} className="flex-1 h-full">
-                        <ScrollArea
-                            className={`@container bg-primary h-full min-h-0 ${frame ? 'border border-primary rounded-md' : ''
-                                }`}
+                        <TabContentContainer
+                            className={`@container bg-primary h-full min-h-0 ${
+                                frame ? 'border border-primary rounded-md' : ''
+                            } ${!scrollable ? 'overflow-hidden' : ''}`}
                         >
                             <div
                                 className={`${frame ? '@container p-4 @2xl:p-6' : '@container'} ${tabContentClassName}`}
                             >
                                 {tab.content}
                             </div>
-                        </ScrollArea>
+                        </TabContentContainer>
                     </Tabs.Content>
                 ))}
             </Tabs.Root>
