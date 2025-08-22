@@ -89,7 +89,7 @@ export default function ProductTabs({ productHandles, className, selectedStage }
                 </>
             ),
             content: (
-                <div className={`@container flex flex-col bg-${product.color} dark:bg-accent rounded`}>
+                <div className={`@container flex flex-col bg-${product.color} dark:bg-accent border border-transparent dark:border-primary rounded-md overflow-hidden`}>
                     <div className="flex items-start justify-between p-4 @lg:p-6">
                         <div className="flex-1 flex gap-3">
                             {product.Icon && <product.Icon className={`size-8 ${product.overview.textColor} dark:text-${product.color}`} />}

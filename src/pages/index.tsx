@@ -383,6 +383,7 @@ const CompanyStageTabs = () => {
                             'surveys',
                             'dashboards',
                             'error_tracking',
+                            'cdp',
                         ]}
                     />
                 </div>

@@ -16,9 +16,9 @@ export const cdp = {
         title: 'CDP sources & destinations - PostHog',
         description: 'Get all your data into PostHog with 60+ sources & destinations',
     },
-    answersDescription: 'Ingest, transform, and send data between 25+ tools',
+    answersDescription: 'Ingest, transform, and send data between 145+ tools',
     overview: {
-        title: 'Ingest, transform, and send data between 25+ tools',
+        title: 'Ingest, transform, and send data between 145+ tools',
         description:
             "PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack.",
         textColor: 'text-white', // tw
