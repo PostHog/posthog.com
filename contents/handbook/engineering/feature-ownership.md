@@ -41,7 +41,7 @@ You can also view the list [directly in GitHub](https://github.com/PostHog/posth
 | Billing | [Team Billing][Team Billing]  |  <span class="lemon-tag gh-tag">feature/billing</span> |
 | Cache warming | [Team Platform Analytics][Team Platform Analytics]  | <span class="lemon-tag gh-tag">feature/cache-warming</span> |
 | Client libraries and SDKs | Shared responsibility with features owned by the relevant Small Team, or try #support-client-libraries. There is an engineer assigned to SDK support on a rotating schedule. Check [the (private) pager duty schedule](https://posthog.pagerduty.com/schedules#P7B7NTR). **For Mobile SDK issues, defer to the Mobile group first** | <span class="lemon-tag gh-tag">feature/libraries</span> |
-| Mobile SDKs | **Primary: Mobile group**. Shared responsibility with Client libraries and SDKs and the relevant Small Team for feature-owned areas. Start with the [Mobile group](https://github.com/orgs/PostHog/teams/team-mobile) for triage, loop in #support-client-libraries as needed. | <span class="lemon-tag gh-tag">feature/mobile</span> |
+| Mobile SDKs | **Primary: Mobile group**. Shared responsibility with the relevant Small Team for feature-owned areas. Start with the [Mobile group](https://github.com/orgs/PostHog/teams/team-mobile) for triage, loop in #support-client-libraries as needed. | <span class="lemon-tag gh-tag">feature/mobile</span> |
 | Cohorts | [Team Feature Flags][Team Feature Flags]  |  <span class="lemon-tag gh-tag">feature/cohorts</span>  |
 | Comments/Discussions | [Team Platform Features][Team Platform Features] | <span class="lemon-tag gh-tag">feature/comments</span> |
 | CRM | [Team CRM][Team CRM]  |  <span class="lemon-tag gh-tag">feature/crm</span>  |
