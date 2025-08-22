@@ -419,7 +419,7 @@ const products: Product[] = [
         name: 'MCP Server',
         color: 'seagreen',
         Icon: IconCode,
-        description: 'Give your agents access to PostHog data.',
+        description: 'Give your agents full control over PostHog.',
         types: ['AI'],
         features: [
             { title: 'Use PostHog in your editor', Icon: IconCode },
