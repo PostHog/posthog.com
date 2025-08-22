@@ -39,13 +39,13 @@ export const webAnalytics = {
             'Track visitors, pageviews, and conversions with a pre-built dashboard. No cookies required, no complex setup, real-time data, and privacy-focused. Built for people who really liked GA3...',
         textColor: 'text-[#063619]', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_web_analytics_2a101a8558.png',
             alt: 'Screenshot of web analytics in PostHog',
             classes: '',
         },
-    ],
+    },
     customers: {
         ycombinator: {
             headline: 'gets 30% more data than with GA4',

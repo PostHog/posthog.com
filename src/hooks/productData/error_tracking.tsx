@@ -19,14 +19,14 @@ export const errorTracking = {
         description: 'Take your product from exception to exceptional 🥁',
         textColor: 'text-black', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             // TODO: we should update this as the UI has changed a lot since
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_error_tracking_0f93eb652d.png',
             alt: 'Screenshot of the PostHog error tracking',
             classes: '',
         },
-    ],
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/error_hog_c2eff84e29.png',
         alt: 'Just another hedgehog',

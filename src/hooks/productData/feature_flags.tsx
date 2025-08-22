@@ -22,13 +22,13 @@ export const featureFlags = {
             'Test changes with small groups of users before rolling out wider. Then analyze usage with product analytics and session replay.',
         textColor: 'text-white', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/FeatureFlags/images/screenshot-feature-flags.png',
             alt: 'Feature flags screenshot',
             classes: '',
         },
-    ],
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/feature-flags-hog.png',
         alt: 'A hedgehog toggling a feature flag',

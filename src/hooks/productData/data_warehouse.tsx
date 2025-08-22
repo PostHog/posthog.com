@@ -20,13 +20,13 @@ export const dataWarehouse = {
         description: 'Unify and query data from any source and analyze it alongside your product data.',
         textColor: 'text-white', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/dw_temp_528efa76a2.png',
             alt: 'Screenshot of the PostHog data warehouse',
             classes: '',
         },
-    ],
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/contents/images/products/data-warehouse/warehouse-hog.png',
         alt: 'Just another hedgehog',

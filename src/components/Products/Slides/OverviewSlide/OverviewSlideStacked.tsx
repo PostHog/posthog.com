@@ -36,11 +36,11 @@ export default function OverviewSlideStacked({
             </div>
 
             <div className="relative flex-1">
-                {screenshots?.[0] && (
+                {screenshots?.overview && (
                     <CloudinaryImage
-                        src={screenshots[0].src as any}
-                        alt={screenshots[0].alt}
-                        imgClassName={screenshots[0].classes}
+                        src={screenshots.overview.src as any}
+                        alt={screenshots.overview.alt}
+                        imgClassName={screenshots.overview.classes}
                     />
                 )}
             </div>

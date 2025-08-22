@@ -23,13 +23,13 @@ export const cdp = {
             "PostHog's customer data platform (CDP) makes it easy to import data from a warehouse, sync with event data, and export to other products in your stack.",
         textColor: 'text-white', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-cdp.png',
             alt: "Screenshot of PostHog's CDP",
             classes: '',
         },
-    ],
+    },
     features: [
         {
             title: 'Sources & destinations',

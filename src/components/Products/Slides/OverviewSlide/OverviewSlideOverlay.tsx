@@ -15,11 +15,11 @@ export default function OverviewSlideOverlay({
             className={`h-full p-12 flex flex-col items-center justify-center text-center relative bg-${color} text-white`}
         >
             {/* Background images */}
-            {screenshots?.[0] && (
+            {screenshots?.overview && (
                 <div className="absolute inset-0 opacity-10">
                     <CloudinaryImage
-                        src={screenshots[0].src as any}
-                        alt={screenshots[0].alt}
+                        src={screenshots.overview.src as any}
+                        alt={screenshots.overview.alt}
                         imgClassName="w-full h-full object-cover"
                     />
                 </div>

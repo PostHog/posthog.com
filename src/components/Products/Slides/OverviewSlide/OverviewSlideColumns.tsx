@@ -12,11 +12,11 @@ export default function OverviewSlideColumns({
 }: OverviewSlideProps) {
     return (
         <div className={`h-full p-12 flex flex-col relative bg-${color} text-white`}>
-            {screenshots?.[0] && (
+            {screenshots?.overview && (
                 <CloudinaryImage
-                    src={screenshots[0].src as any}
-                    alt={screenshots[0].alt}
-                    imgClassName={screenshots[0].classes}
+                    src={screenshots.overview.src as any}
+                    alt={screenshots.overview.alt}
+                    imgClassName={screenshots.overview.classes}
                 />
             )}
             {hog?.src && (

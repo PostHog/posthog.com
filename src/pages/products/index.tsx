@@ -196,7 +196,7 @@ export default function Products(): JSX.Element {
                                         )
 
                                         // If screenshots exist, show screenshot with icon overlay
-                                        if (selectedProduct.screenshots && selectedProduct.screenshots.length > 0) {
+                                        if (selectedProduct.screenshots && selectedProduct.screenshots.overview) {
                                             return (
                                                 <div className="space-y-2">
                                                     <h3 className="text-sm font-semibold">Screenshot</h3>
@@ -204,11 +204,8 @@ export default function Products(): JSX.Element {
                                                         className={`bg-${selectedProduct.color} rounded-md p-2 relative`}
                                                     >
                                                         <img
-                                                            src={selectedProduct.screenshots[0].src}
-                                                            alt={
-                                                                selectedProduct.screenshots[0].alt ||
-                                                                'Product screenshot'
-                                                            }
+                                                            src={selectedProduct.screenshots.overview.src}
+                                                            alt={selectedProduct.screenshots.overview.alt}
                                                             className="w-full rounded-md border border-primary"
                                                         />
                                                         <div className="absolute bottom-0 left-0">
@@ -513,19 +510,17 @@ export default function Products(): JSX.Element {
                                                 ),
                                                 content: (
                                                     <div
-                                                        className={`@md:pl-4 grid ${
-                                                            isListLayout
-                                                                ? '@lg:grid-cols-2 @3xl:grid-cols-3'
-                                                                : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4'
-                                                        } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
+                                                        className={`@md:pl-4 grid ${isListLayout
+                                                            ? '@lg:grid-cols-2 @3xl:grid-cols-3'
+                                                            : 'grid-cols-[repeat(auto-fit,minmax(7rem,7rem))] gap-y-4'
+                                                            } gap-x-1 @md:gap-x-4 relative [&>div]:mx-auto [&_figure]:text-center`}
                                                     >
                                                         {products.map((product) => (
                                                             <button
                                                                 key={product.slug}
                                                                 onClick={(e) => handleProductClick(product, e)}
-                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${
-                                                                    selectedProduct?.slug === product.slug ? '' : ''
-                                                                }`}
+                                                                className={`w-full cursor-default p-1 border-[1.5px] rounded-md border-transparent hover:border-border focus:border-blue focus:bg-blue/10 focus-visible:bg-blue/10 focus:outline-none ${selectedProduct?.slug === product.slug ? '' : ''
+                                                                    }`}
                                                                 style={{ pointerEvents: 'auto' }}
                                                             >
                                                                 <div style={{ pointerEvents: 'none' }}>

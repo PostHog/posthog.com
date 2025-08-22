@@ -27,13 +27,19 @@ export const sessionReplay = {
             'Play back sessions to diagnose UI issues, improve support, and get context on nuanced user behavior in your product, website, or mobile app.',
         textColor: 'text-black', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_screenshot_de8cb3a4ed.jpg',
             alt: 'Session replay screenshot',
             classes: 'absolute bottom-0 left-0 max-w-[95%] @2xl:max-w-[525px] rounded-tr-md overflow-hidden shadow-2xl',
         },
-    ],
+        home: {
+            src: 'https://res.cloudinary.com/dmukukwp6/image/upload/screenshot_replay_timeline_429ce8655c.jpg',
+            alt: 'Session replay screenshot',
+            classes: 'justify-start items-end pr-4 @lg:pr-6',
+            imgClasses: 'rounded-tr-md shadow-2xl',
+        },
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/replay_hog_20fc000c14.png',
         alt: 'A hedgehog watching some session recordings',

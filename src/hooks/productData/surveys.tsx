@@ -19,13 +19,13 @@ export const surveys = {
             'Build in-app or on-page popups with freeform text responses, multiple choice, NPS, ratings, and emoji reactions. Or use the API for a headless implementation.',
         textColor: 'text-white', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/images/products/screenshot-surveys.png',
             alt: 'Screenshot of survey results in PostHog',
             classes: '',
         },
-    ],
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Home/Slider/images/surveys-hog.png',
         alt: 'A hedgehog looking at survey results',

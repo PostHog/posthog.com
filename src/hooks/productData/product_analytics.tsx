@@ -31,13 +31,13 @@ export const productAnalytics = {
             'PostHog is the only product analytics platform built to natively work with session replay, feature flags, experiments, and surveys.',
         textColor: 'text-white', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/ProductAnalytics/images/screenshot-product-analytics.png',
             alt: 'Product analytics screenshot',
             classes: '',
         },
-    ],
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/v1/posthog.com/src/components/Product/hogs/product-analytics-hog.png',
         alt: 'A hedgehog presenting some shocking findings',

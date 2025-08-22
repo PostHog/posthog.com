@@ -4,6 +4,8 @@ import useProduct from 'hooks/useProduct'
 import Link from 'components/Link'
 import OSButton from 'components/OSButton'
 import { APP_COUNT } from '../../constants'
+import CloudinaryImage from 'components/CloudinaryImage'
+import { DebugContainerQuery } from "components/DebugContainerQuery"
 
 interface ProductTabsProps {
     productHandles: string[]
@@ -20,7 +22,14 @@ interface Product {
         textColor?: string
     }
     slug: string
-    screenshots?: Array<{ src: string; alt: string }>
+    screenshots?: {
+        [key: string]: {
+            src: string
+            alt: string
+            classes?: string
+            imgClasses?: string
+        }
+    }
 }
 
 export default function ProductTabs({ productHandles, className }: ProductTabsProps) {
@@ -54,8 +63,8 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
             const product = Array.isArray(allProducts)
                 ? allProducts.find((p: any) => p.handle === handle)
                 : allProducts?.handle === handle
-                ? allProducts
-                : null
+                    ? allProducts
+                    : null
             return product as Product | null
         })
         .filter((product): product is Product => product !== null)
@@ -74,28 +83,30 @@ export default function ProductTabs({ productHandles, className }: ProductTabsPr
                 </>
             ),
             content: (
-                <div className={`flex flex-col bg-${product.color} rounded`}>
-                    <div className="flex items-start justify-between p-6">
+                <div className={`@container flex flex-col bg-${product.color} rounded`}>
+                    <div className="flex items-start justify-between p-4 @lg:p-6">
                         <div className="flex-1 flex gap-3">
                             {product.Icon && <product.Icon className={`size-8 ${product.overview.textColor}`} />}
                             <div className={product.overview.textColor}>
-                                <h3 className="text-xl font-semibold">{product.name}</h3>
-                                {product.overview?.title && <p>{product.overview.title}</p>}
+                                <h3 className="text-xl font-semibold tracking-tight">{product.name}</h3>
+                                {product.overview?.title && <p className="mb-0">{product.overview.title}</p>}
                             </div>
                         </div>
                         <div className="flex-shrink-0">
-                            <OSButton asLink to={`/${product.slug}`} variant="secondary" size="md">
+                            <OSButton asLink to={`/${product.slug}`} state={{ newWindow: true }} variant="secondary" size="md">
                                 Explore
                             </OSButton>
                         </div>
                     </div>
 
-                    {product.screenshots && product.screenshots.length > 0 && (
-                        <div>
-                            <img
-                                src={product.screenshots[0].src}
-                                alt={product.screenshots[0].alt}
-                                className="w-full shadow-lg"
+                    {product.screenshots?.home && (
+                        <div className={`flex-1 flex ${product.screenshots.home.classes}`}>
+                            <CloudinaryImage
+                                src={product.screenshots.home.src as any}
+                                alt={product.screenshots.home.alt}
+                                width={555}
+                                height={320}
+                                imgClassName={product.screenshots.home.imgClasses}
                             />
                         </div>
                     )}

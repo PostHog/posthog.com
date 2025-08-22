@@ -5,11 +5,13 @@ export interface OverviewSlideProps {
         description?: string
         textColor?: string
     }
-    screenshots?: Array<{
-        src: string
-        alt: string
-        classes?: string
-    }>
+    screenshots?: {
+        [key: string]: {
+            src: string
+            alt: string
+            classes?: string
+        }
+    }
     color: string
     Icon?: React.ComponentType<any>
     hog?: {

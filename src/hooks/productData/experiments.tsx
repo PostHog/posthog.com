@@ -22,13 +22,13 @@ export const experiments = {
             'Run A/B tests and multivariate with robust targeting & exclusion rules, then analyze results with Session Replay and a auto-generated dashboard of insights from Product Analytics.',
         textColor: 'text-white', // tw
     },
-    screenshots: [
-        {
+    screenshots: {
+        overview: {
             src: 'https://res.cloudinary.com/dmukukwp6/image/upload/Xnapper_2025_01_20_15_25_58_0867c02f69.png',
             alt: 'Screenshot of managing an A/B test in PostHog',
             classes: '',
         },
-    ],
+    },
     hog: {
         src: 'https://res.cloudinary.com/dmukukwp6/image/upload/posthog.com/src/components/Product/hogs/ab-testing-hog.png',
         alt: 'Hedgehog experimenting',
