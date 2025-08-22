@@ -682,7 +682,10 @@ const jsxComponentDescriptors: JsxComponentDescriptor[] = [
         name: 'Logo',
         kind: 'flow',
         props: [],
-        Editor: () => <Logo className="inline-block" />,
+        Editor: () => {
+            const { siteSettings } = useApp()
+            return <Logo className="inline-block" fill={siteSettings.theme === 'dark' ? 'white' : undefined} />
+        },
     },
 ]
 
@@ -716,8 +719,9 @@ export default function Home() {
                 body={rawBody}
                 mdxBody={mdxBody}
                 cta={{
-                    url: `https://${posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
-                        }.posthog.com/signup`,
+                    url: `https://${
+                        posthog?.isFeatureEnabled?.('direct-to-eu-cloud') ? 'eu' : 'app'
+                    }.posthog.com/signup`,
                     label: 'Get started - free',
                 }}
             />
